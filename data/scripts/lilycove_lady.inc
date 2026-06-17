@@ -521,18 +521,18 @@ LilycoveCity_PokemonCenter_1F_EventScript_Pikachu::
 	end
 
 LilycoveCity_PokemonCenter_1F_Text_ImTheFavorLady:
-	.string "I'm the FAVOR LADY…$"
+	.string "I'm the FAVOR LADY...$"
 
 LilycoveCity_PokemonCenter_1F_Text_ObsessedWithThing:
 	.string "I've recently developed an obsession\n"
-	.string "for {STR_VAR_1} things…$"
+	.string "for {STR_VAR_1} things...$"
 
 LilycoveCity_PokemonCenter_1F_Text_ThankYouForLastTime:
-	.string "Oh…\n"
-	.string "Thank you for last time…$"
+	.string "Oh...\n"
+	.string "Thank you for last time...$"
 
 LilycoveCity_PokemonCenter_1F_Text_PlayerGaveMeBadThing:
-	.string "Before, I think it was {STR_VAR_3}…\p"
+	.string "Before, I think it was {STR_VAR_3}...\p"
 	.string "{STR_VAR_3} gave me one {STR_VAR_2},\n"
 	.string "saying it was {STR_VAR_1}.\p"
 	.string "But it wasn't {STR_VAR_1}.\n"
@@ -549,35 +549,35 @@ LilycoveCity_PokemonCenter_1F_Text_WillYouShareThing:
 	.string "with me?$"
 
 LilycoveCity_PokemonCenter_1F_Text_WhatWillYouGiveMe:
-	.string "…Really?\n"
+	.string "...Really?\n"
 	.string "What will you give me?$"
 
 LilycoveCity_PokemonCenter_1F_Text_IsThatSoGoodbye:
 	.string "Is that so?\n"
-	.string "Then, it's good-bye…$"
+	.string "Then, it's good-bye...$"
 
 LilycoveCity_PokemonCenter_1F_Text_NotWillingToShare:
-	.string "Oh…\n"
+	.string "Oh...\n"
 	.string "You're not willing to share?$"
 
 LilycoveCity_PokemonCenter_1F_Text_IllTryToCherishIt:
 	.string "Oh?\n"
 	.string "That {STR_VAR_2} is {STR_VAR_1}?\p"
-	.string "…Oh, is that right?\p"
+	.string "...Oh, is that right?\p"
 	.string "Well, I owe you a thanks anyway.\n"
-	.string "I'll try to cherish it…$"
+	.string "I'll try to cherish it...$"
 
 LilycoveCity_PokemonCenter_1F_Text_IWillCherishThis:
-	.string "Oh…\p"
+	.string "Oh...\p"
 	.string "That's a quite {STR_VAR_1}\n"
-	.string "{STR_VAR_2}…\p"
+	.string "{STR_VAR_2}...\p"
 	.string "Isn't it nice?\n"
-	.string "It's so dreamy…\p"
-	.string "Thank you…\n"
-	.string "I will cherish this…$"
+	.string "It's so dreamy...\p"
+	.string "Thank you...\n"
+	.string "I will cherish this...$"
 
 LilycoveCity_PokemonCenter_1F_Text_IWillTreasureThis:
-	.string "…Oh, oh, oh…\p"
+	.string "...Oh, oh, oh...\p"
 	.string "This is amazing!\n"
 	.string "This really is {STR_VAR_1}!\p"
 	.string "I never knew that one {STR_VAR_2}\n"
@@ -589,13 +589,13 @@ LilycoveCity_PokemonCenter_1F_Text_IWillTreasureThis:
 LilycoveCity_PokemonCenter_1F_Text_IllGiveYouThisInReturn:
 	.string "I'll give you this wonderful item in\n"
 	.string "return for your fabulous gift.\p"
-	.string "I hope you will cherish it…$"
+	.string "I hope you will cherish it...$"
 
 LilycoveCity_PokemonCenter_1F_Text_YouDontHaveSpaceForIt:
 	.string "Oh, you can't have it if you don't have\n"
 	.string "the space for it.\p"
 	.string "Please come see me when you get\n"
-	.string "your BAG organized…$"
+	.string "your BAG organized...$"
 
 LilycoveCity_PokemonCenter_1F_Text_ImTheQuizLady:
 	.string "I'm the QUIZ LADY!\n"
@@ -618,8 +618,8 @@ LilycoveCity_PokemonCenter_1F_Text_TakeQuizChallenge:
 	.string "challenge?$"
 
 LilycoveCity_PokemonCenter_1F_Text_WaitForAnswer:
-	.string "… … … … … …\n"
-	.string "… … … … … …$"
+	.string "... ... ... ... ... ...\n"
+	.string "... ... ... ... ... ...$"
 
 LilycoveCity_PokemonCenter_1F_Text_HowBoringBye:
 	.string "Oh, how boring!\n"
@@ -653,8 +653,8 @@ LilycoveCity_PokemonCenter_1F_Text_YourBagIsFilledUp:
 	.string "Come see me when you have room.$"
 
 LilycoveCity_PokemonCenter_1F_Text_WrongTheCorrectAnswerIs:
-	.string "Hmm… Wrong!\n"
-	.string "The correct answer is “{STR_VAR_3}”!$"
+	.string "Hmm... Wrong!\n"
+	.string "The correct answer is "{STR_VAR_3}"!$"
 
 LilycoveCity_PokemonCenter_1F_Text_IGetToKeepPrize:
 	.string "Too bad!\p"
@@ -666,7 +666,7 @@ LilycoveCity_PokemonCenter_1F_Text_MakeYourOwnQuiz:
 	.string "Would you like to make your own quiz?$"
 
 LilycoveCity_PokemonCenter_1F_Text_MaybeNextTime:
-	.string "Oh, I see…\n"
+	.string "Oh, I see...\n"
 	.string "Well, maybe next time!$"
 
 LilycoveCity_PokemonCenter_1F_Text_PickYourPrize:
@@ -721,7 +721,7 @@ LilycoveCity_PokemonCenter_1F_Text_DontHaveAPokeblockCase:
 	.string "So, I need your help!\p"
 	.string "Please, may I have one ポロック?\n"
 	.string "All I'm asking for is one!\p"
-	.string "…Oh, but…\n"
+	.string "...Oh, but...\n"
 	.string "Don't you have a ポロック CASE?\l"
 	.string "That's no good. Next time, then!$"
 
@@ -741,13 +741,13 @@ LilycoveCity_PokemonCenter_1F_Text_WhatACheapskate:
 LilycoveCity_PokemonCenter_1F_Text_IllUseYourPokeblock:
 	.string "Yay!\n"
 	.string "Thank you!\p"
-	.string "I'll feed my POKeMON your ポロック\n"
+	.string "I'll feed my POKEMON your ポロック\n"
 	.string "right away.$"
 
 LilycoveCity_PokemonCenter_1F_Text_NoChangeThanks:
-	.string "…It doesn't seem to have changed\n"
-	.string "in any way at all…\p"
-	.string "Hmm…\p"
+	.string "...It doesn't seem to have changed\n"
+	.string "in any way at all...\p"
+	.string "Hmm...\p"
 	.string "Oh, well!\n"
 	.string "Thank you very much!$"
 
@@ -759,7 +759,7 @@ LilycoveCity_PokemonCenter_1F_Text_ReallyImprovedThanks:
 	.string "Thank you so much!$"
 
 LilycoveCity_PokemonCenter_1F_Text_ReadyToEnterContests:
-	.string "Hmm…\p"
+	.string "Hmm...\p"
 	.string "I think we may be ready to enter\n"
 	.string "some CONTESTS.\p"
 	.string "If you see us in one somewhere,\n"
@@ -772,7 +772,7 @@ LilycoveCity_PokemonCenter_1F_Text_Kecleon:
 	.string "{STR_VAR_1}: Igigigiiih!$"
 
 LilycoveCity_PokemonCenter_1F_Text_Poochyena:
-	.string "{STR_VAR_1}: Baaarun…$"
+	.string "{STR_VAR_1}: Baaarun...$"
 
 LilycoveCity_PokemonCenter_1F_Text_Pikachu:
 	.string "{STR_VAR_1}: Pikka!$"

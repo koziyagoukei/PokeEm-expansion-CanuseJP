@@ -85,7 +85,7 @@ const struct EasyChatWordInfo gEasyChatGroup_Trainer[] = {
     },
     [EC_INDEX(EC_WORD_POKEMON)] =
     {
-        .text = COMPOUND_STRING("POKeMON"),
+        .text = COMPOUND_STRING("POKEMON"),
         .alphabeticalOrder = EC_INDEX(EC_WORD_LINK),
         .enabled = TRUE,
     },

@@ -130,7 +130,7 @@ VermilionCity_PokemonFanClub_Text_PikachuTwiceAsCute::
 VermilionCity_PokemonFanClub_Text_AdoreMySeel::
 	.string "I just adore my SEEL!\n"
 	.string "It's so lovable!\p"
-	.string "It squeals, “Kyuuuh,” when I\n"
+	.string "It squeals, "Kyuuuh," when I\n"
 	.string "hug it!$"
 
 VermilionCity_PokemonFanClub_Text_SeelFarMoreAttractive::
@@ -145,27 +145,27 @@ VermilionCity_PokemonFanClub_Text_Seel::
 	.string "SEEL: Kyuoo!$"
 
 VermilionCity_PokemonFanClub_Text_DidYouComeToHearAboutMyMons::
-	.string "I chair the POKeMON Fan Club!\p"
+	.string "I chair the POKEMON Fan Club!\p"
 	.string "I raise more than a hundred\n"
-	.string "POKeMON!\p"
+	.string "POKEMON!\p"
 	.string "I'm very fussy when it comes to\n"
-	.string "POKeMON! I surely am!\p"
-	.string "So…\p"
+	.string "POKEMON! I surely am!\p"
+	.string "So...\p"
 	.string "Did you come visit to hear about\n"
-	.string "my POKeMON?$"
+	.string "my POKEMON?$"
 
 VermilionCity_PokemonFanClub_Text_ChairmansStory::
 	.string "Good!\n"
 	.string "Then listen up!\p"
-	.string "My favorite RAPIDASH…\p"
-	.string "It's…cute…lovely…smart… \n"
-	.string "plus…amazing…you think so?…\l"
-	.string "oh yes…it's…stunning…\l"
-	.string "kindly…love it!\p"
-	.string "Hug it…when…sleeping…warm\n"
-	.string "and cuddly…spectacular…\l"
-	.string "ravishing…\l"
-	.string "…Oops! Look at the time!\l"
+	.string "My favorite RAPIDASH...\p"
+	.string "It's...cute...lovely...smart... \n"
+	.string "plus...amazing...you think so?...\l"
+	.string "oh yes...it's...stunning...\l"
+	.string "kindly...love it!\p"
+	.string "Hug it...when...sleeping...warm\n"
+	.string "and cuddly...spectacular...\l"
+	.string "ravishing...\l"
+	.string "...Oops! Look at the time!\l"
 	.string "I kept you too long!\p"
 	.string "Thanks for hearing me out!\n"
 	.string "I want you to have this!$"
@@ -191,7 +191,7 @@ VermilionCity_PokemonFanClub_Text_ComeBackToHearStory::
 VermilionCity_PokemonFanClub_Text_DidntComeToSeeAboutMonsAgain::
 	.string "Hello, {PLAYER}!\p"
 	.string "Did you come see me about my\n"
-	.string "POKeMON again?\p"
+	.string "POKEMON again?\p"
 	.string "No?\n"
 	.string "Too bad!$"
 
@@ -200,7 +200,7 @@ VermilionCity_PokemonFanClub_Text_MakeRoomForThis::
 
 VermilionCity_PokemonFanClub_Text_ChairmanVeryVocalAboutPokemon::
 	.string "Our CHAIRMAN is very vocal about\n"
-	.string "POKeMON.$"
+	.string "POKEMON.$"
 
 VermilionCity_PokemonFanClub_Text_ListenPolitelyToOtherTrainers::
 	.string "Let's all listen politely to other\n"
@@ -211,6 +211,6 @@ VermilionCity_PokemonFanClub_Text_SomeoneBragsBragBack::
 
 VermilionCity_PokemonFanClub_Text_ChairmanReallyAdoresHisMons::
 	.string "Our CHAIRMAN really does adore his\n"
-	.string "POKeMON.\p"
+	.string "POKEMON.\p"
 	.string "But the person who is most liked by\n"
-	.string "POKeMON is DAISY, I think.$"
+	.string "POKEMON is DAISY, I think.$"

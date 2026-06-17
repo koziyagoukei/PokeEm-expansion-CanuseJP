@@ -19,7 +19,7 @@ SootopolisCity_House7_Text_CityFromEruptedVolcano:
 
 SootopolisCity_House7_Text_CaveMadeToKeepSomething:
 	.string "The cave that links SOOTOPOLIS and\n"
-	.string "the outside world…\p"
+	.string "the outside world...\p"
 	.string "It seems as if the cave was made to\n"
 	.string "keep something from getting out.\p"
 	.string "Or am I just imagining things?$"

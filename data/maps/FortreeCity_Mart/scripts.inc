@@ -50,6 +50,6 @@ FortreeCity_Mart_Text_StockUpOnItems:
 	.string "Better to be safe than sorry!$"
 
 FortreeCity_Mart_Text_RareCandyMakesMonGrow:
-	.string "A RARE CANDY makes a POKeMON grow\n"
+	.string "A RARE CANDY makes a POKEMON grow\n"
 	.string "immediately by one level.$"
 

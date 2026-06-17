@@ -1,13 +1,13 @@
 	.align 2
 gText_ConfirmSave::
-	.string "レポート を　かきますか?$"
+	.string "レポート を かきますか?$"
 
 gText_AlreadySavedFile::
 	.string "There is already a saved file.\n"
 	.string "Is it okay to overwrite it?$"
 
 gText_SavingDontTurnOff::
-	.string "SAVING…\n"
+	.string "SAVING...\n"
 	.string "DON'T TURN OFF THE POWER.$"
 
 gText_PlayerSavedGame::
@@ -19,7 +19,7 @@ gText_DifferentSaveFile::
 	.string "is already saved.\p"
 	.string "If you save now, the other file's\n"
 	.string "adventure, including items and\l"
-	.string "POKeMON, will be entirely lost.\p"
+	.string "POKEMON, will be entirely lost.\p"
 	.string "Are you sure you want to save now\n"
 	.string "and overwrite the other save file?$"
 
@@ -29,5 +29,5 @@ gText_SaveError::
 	.string "backup memory.$"
 
 gText_SavingDontTurnOffPower::
-	.string "SAVING…\n"
+	.string "SAVING...\n"
 	.string "DON'T TURN OFF THE POWER.$"

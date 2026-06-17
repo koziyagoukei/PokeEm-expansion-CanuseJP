@@ -53,20 +53,20 @@ PetalburgCity_PokemonCenter_1F_EventScript_SayMudkipType::
 	return
 
 PetalburgCity_PokemonCenter_1F_Text_PCStorageSystem:
-	.string "That PC-based POKeMON Storage\n"
-	.string "System…\p"
+	.string "That PC-based POKEMON Storage\n"
+	.string "System...\p"
 	.string "Whoever made it must be some kind\n"
 	.string "of a scientific wizard!$"
 
 PetalburgCity_PokemonCenter_1F_Text_OranBerryRegainedHP:
-	.string "When my POKeMON ate an\n"
+	.string "When my POKEMON ate an\n"
 	.string "ORAN BERRY, it regained HP!$"
 
 PetalburgCity_PokemonCenter_1F_Text_ManyTypesOfPokemon:
-	.string "There are many types of POKeMON.\p"
+	.string "There are many types of POKEMON.\p"
 	.string "All types have their strengths and\n"
 	.string "weaknesses against other types.\p"
-	.string "Depending on the types of POKeMON,\n"
+	.string "Depending on the types of POKEMON,\n"
 	.string "a battle could be easy or hard.$"
 
 PetalburgCity_PokemonCenter_1F_Text_TreeckoIsGrassType:
@@ -75,7 +75,7 @@ PetalburgCity_PokemonCenter_1F_Text_TreeckoIsGrassType:
 	.string "It's strong against the WATER and\n"
 	.string "GROUND types.\p"
 	.string "But, it's weak against FIRE-type\n"
-	.string "POKeMON.$"
+	.string "POKEMON.$"
 
 PetalburgCity_PokemonCenter_1F_Text_TorchicIsFireType:
 	.string "For example, your TORCHIC\n"
@@ -83,12 +83,12 @@ PetalburgCity_PokemonCenter_1F_Text_TorchicIsFireType:
 	.string "It's strong against the GRASS and\n"
 	.string "BUG types.\p"
 	.string "But, it's weak against WATER-type\n"
-	.string "POKeMON.$"
+	.string "POKEMON.$"
 
 PetalburgCity_PokemonCenter_1F_Text_MudkipIsWaterType:
 	.string "For example, your MUDKIP\n"
 	.string "is a WATER type.\p"
 	.string "It's strong against the FIRE type.\p"
 	.string "But, it's weak against GRASS-type\n"
-	.string "and ELECTRIC-type POKeMON.$"
+	.string "and ELECTRIC-type POKEMON.$"
 

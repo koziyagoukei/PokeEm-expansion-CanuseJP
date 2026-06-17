@@ -23,21 +23,21 @@ SevenIsland_SevaultCanyon_Entrance_Text_MasonIntro::
 	.string "Are you a member of my fan club?$"
 
 SevenIsland_SevaultCanyon_Entrance_Text_MasonDefeat::
-	.string "Oh, so you're not a fan…\p"
+	.string "Oh, so you're not a fan...\p"
 	.string "Well, I can change that.\n"
 	.string "Let me sing for you!$"
 
 SevenIsland_SevaultCanyon_Entrance_Text_MasonPostBattle::
-	.string "Lalalah…\n"
-	.string "My POKeMON, I send them out,\l"
+	.string "Lalalah...\n"
+	.string "My POKEMON, I send them out,\l"
 	.string "all the girls scream and shout!$"
 
 SevenIsland_SevaultCanyon_Entrance_Text_NicolasIntro::
-	.string "This island is too spread out…\n"
+	.string "This island is too spread out...\n"
 	.string "It's not easy patrolling the place.$"
 
 SevenIsland_SevaultCanyon_Entrance_Text_NicolasDefeat::
-	.string "Uh-huh…$"
+	.string "Uh-huh...$"
 
 SevenIsland_SevaultCanyon_Entrance_Text_NicolasPostBattle::
 	.string "TRAINERS like you from cities,\n"
@@ -47,14 +47,14 @@ SevenIsland_SevaultCanyon_Entrance_Text_NicolasPostBattle::
 
 SevenIsland_SevaultCanyon_Entrance_Text_MadelineIntro::
 	.string "I punish people who abuse\n"
-	.string "POKeMON!$"
+	.string "POKEMON!$"
 
 SevenIsland_SevaultCanyon_Entrance_Text_MadelineDefeat::
 	.string "You don't seem to be a problem\n"
 	.string "TRAINER.$"
 
 SevenIsland_SevaultCanyon_Entrance_Text_MadelinePostBattle::
-	.string "If you treat your POKeMON with\n"
+	.string "If you treat your POKEMON with\n"
 	.string "kindness, they'll understand.$"
 
 SevenIsland_SevaultCanyon_Entrance_Text_EveIntro::
@@ -72,7 +72,7 @@ SevenIsland_SevaultCanyon_Entrance_Text_EvePostBattle::
 SevenIsland_SevaultCanyon_Entrance_Text_EveNotEnoughMons::
 	.string "EVE: I want to team up with JON\n"
 	.string "when I battle you.\p"
-	.string "Come back with two POKeMON, okay?$"
+	.string "Come back with two POKEMON, okay?$"
 
 SevenIsland_SevaultCanyon_Entrance_Text_JonIntro::
 	.string "JON: When I'm with EVE, it feels\n"

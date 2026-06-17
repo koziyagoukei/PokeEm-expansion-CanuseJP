@@ -95,7 +95,7 @@ ProfileMan_Text_CollectTrainerProfiles:
 	.string "Hello there, TRAINER!\n"
 	.string "You've got a wonderful smile, there.\p"
 	.string "I have a hobby--collecting the profiles\n"
-	.string "of POKeMON TRAINERS.$"
+	.string "of POKEMON TRAINERS.$"
 
 ProfileMan_Text_MayISeeYourProfile:
 	.string "So, how about it?\n"
@@ -112,7 +112,7 @@ ProfileMan_Text_EasyChatExplanation:
 	.string "There are a lot of text pieces that\n"
 	.string "you can use.\p"
 	.string "They are arranged in groups like\n"
-	.string "POKeMON, lifestyles, and hobbies so\l"
+	.string "POKEMON, lifestyles, and hobbies so\l"
 	.string "it is easier to look them up.\p"
 	.string "So, first, choose the group of text\n"
 	.string "pieces to display a list of choices.\p"
@@ -127,7 +127,7 @@ ProfileMan_Text_LetsSeeItThen:
 ProfileMan_Text_ImagineYouWouldHaveWonderfulProfile:
 	.string "Oh, no, really?\p"
 	.string "I imagine someone like you would have\n"
-	.string "a wonderful profile…$"
+	.string "a wonderful profile...$"
 
 ProfileMan_Text_NotIntoItRightNow:
 	.string "Oh? You're not into it right now?\p"

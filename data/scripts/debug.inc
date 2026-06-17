@@ -762,12 +762,12 @@ Debug_EventScript_FontTest_Text_9::                 @ Special thanks to Nintendo
 	.string "{FONT_SMALL_NARROWER}"                 @ Edit this to test your font
 	.string "42 × 138 = 5796.\n"
 	.string "Mr Jock, TV quiz PhD: bags 20% fewer\l"
-	.string "lynx at a cafe; voila, they're “worth”\l"
+	.string "lynx at a cafe; voila, they're "worth"\l"
 	.string "♂1/♀1 = ¥1. That's 10 + 9 - 8 = 11\l"
 	.string "Nintendo GBA can connect to a Nintendo\l"
 	.string "GameCube console! He claimed-though I don't\l"
 	.string "believe him-to have done so in an eyes-shut\l"
-	.string "state…?$"
+	.string "state...?$"
 
 Debug_PrintFontTest::
 	msgbox Debug_EventScript_FontTest_Text_1, MSGBOX_DEFAULT

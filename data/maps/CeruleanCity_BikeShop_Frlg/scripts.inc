@@ -83,7 +83,7 @@ CeruleanCity_BikeShop_Text_SorryYouCantAffordIt::
 	.string "You can't afford it!$"
 
 CeruleanCity_BikeShop_Text_OhBikeVoucherHereYouGo::
-	.string "Oh, that's…\p"
+	.string "Oh, that's...\p"
 	.string "A BIKE VOUCHER!\p"
 	.string "Okay!\n"
 	.string "Here you go!$"
@@ -122,9 +122,9 @@ CeruleanCity_BikeShop_Text_WowYourBikeIsCool::
 
 @ Unused
 CeruleanCity_BikeShop_Text_GermanFoldableBicyleFinallyOnMarket::
-	.string "ついに　はつばい!\p"
-	.string "ドイツ　せい　さいこうきゅう\n"
-	.string "おりたたみ　じてんしゃ!$"
+	.string "ついに はつばい!\p"
+	.string "ドイツ せい さいこうきゅう\n"
+	.string "おりたたみ じてんしゃ!$"
 
 CeruleanCity_BikeShop_Text_ShinyNewBicycle::
 	.string "A shiny new BICYCLE!$"

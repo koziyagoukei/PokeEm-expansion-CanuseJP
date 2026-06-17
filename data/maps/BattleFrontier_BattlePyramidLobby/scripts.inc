@@ -546,15 +546,15 @@ BattleFrontier_BattlePyramidLobby_Text_ExplainBattlePyramid:
 	.string "the PYRAMID and try to reach the top.\p"
 	.string "In the PYRAMID are seven floors of\n"
 	.string "mazes, all of them filled with not only\l"
-	.string "skilled TRAINERS but also wild POKeMON.\p"
-	.string "You must enter with three POKeMON,\n"
+	.string "skilled TRAINERS but also wild POKEMON.\p"
+	.string "You must enter with three POKEMON,\n"
 	.string "none of them holding an item.\p"
 	.string "On your ascent, you will be provided\n"
 	.string "with a BATTLE BAG for items.\p"
 	.string "If you fail in your challenge, any item\n"
 	.string "placed in the BATTLE BAG disappears.\p"
 	.string "If you want to interrupt your\n"
-	.string "challenge, you must select “REST”\l"
+	.string "challenge, you must select "REST"\l"
 	.string "and save the game.\p"
 	.string "If you don't save before interrupting,\n"
 	.string "you will be disqualified.$"
@@ -566,24 +566,24 @@ BattleFrontier_BattlePyramidLobby_Text_WhichLevelMode:
 
 BattleFrontier_BattlePyramidLobby_Text_SelectThreeMons:
 	.string "Very good. Now, please select the three\n"
-	.string "POKeMON you wish to accompany you.$"
+	.string "POKEMON you wish to accompany you.$"
 
 BattleFrontier_BattlePyramidLobby_Text_NotEnoughValidMonsLvOpen:
 	.string "A slight problem, adventurer!\p"
 	.string "You seem to not have the three\n"
-	.string "POKeMON qualified for the challenge.\p"
+	.string "POKEMON qualified for the challenge.\p"
 	.string "Please also remember to take all\n"
-	.string "items from your POKeMON.\p"
+	.string "items from your POKEMON.\p"
 	.string "EGGS{STR_VAR_1}.$"
 
 BattleFrontier_BattlePyramidLobby_Text_NotEnoughValidMonsLv50:
 	.string "A slight problem, adventurer!\p"
 	.string "You seem to not have the three\n"
-	.string "POKeMON qualified for the challenge.\p"
-	.string "The three POKeMON must be different\n"
+	.string "POKEMON qualified for the challenge.\p"
+	.string "The three POKEMON must be different\n"
 	.string "and each no higher than Level 50.\p"
 	.string "Please also remember to take all\n"
-	.string "items from your POKeMON.\p"
+	.string "items from your POKEMON.\p"
 	.string "EGGS{STR_VAR_1}.$"
 
 BattleFrontier_BattlePyramidLobby_Text_NotEnoughValidMonsEnd:
@@ -638,33 +638,33 @@ BattleFrontier_BattlePyramidLobby_Text_YouveConqueredPyramid:
 
 BattleFrontier_BattlePyramidLobby_Text_MonHoldingItemCannotTake:
 	.string "Ah, a slight problem.\p"
-	.string "At least one POKeMON is holding\n"
+	.string "At least one POKEMON is holding\n"
 	.string "an item.\p"
 	.string "I'm sorry to say, items obtained in\n"
 	.string "the PYRAMID cannot be taken away.$"
 
 BattleFrontier_BattlePyramidLobby_Text_HeldItemsMovedToBag:
-	.string "All items held by your POKeMON will be\n"
+	.string "All items held by your POKEMON will be\n"
 	.string "moved to your BATTLE BAG, {PLAYER}.$"
 
 BattleFrontier_BattlePyramidLobby_Text_BagCannotHoldPickItemsToKeep:
 	.string "The BATTLE BAG cannot hold all your\n"
 	.string "items, I'm sorry to say.\p"
 	.string "Please pick the items you'll keep in the\n"
-	.string "BATTLE BAG, and with your POKeMON.$"
+	.string "BATTLE BAG, and with your POKEMON.$"
 
 BattleFrontier_BattlePyramidLobby_Text_LeastOneMonHoldingItem:
-	.string "At least one POKeMON is still\n"
+	.string "At least one POKEMON is still\n"
 	.string "holding an item.$"
 
 BattleFrontier_BattlePyramidLobby_Text_PickItemsToKeep:
 	.string "Please pick the items you'll keep in the\n"
-	.string "BATTLE BAG, and with your POKeMON.$"
+	.string "BATTLE BAG, and with your POKEMON.$"
 
 @ Unused
 BattleFrontier_BattlePyramidLobby_Text_ReturnedEverythingMonsHeld:
 	.string "{PLAYER} returned everything that\n"
-	.string "the POKeMON held.$"
+	.string "the POKEMON held.$"
 
 BattleFrontier_BattlePyramidLobby_Text_UsedBattleBagWillBeKept:
 	.string "The BATTLE BAG you used will be kept\n"
@@ -688,13 +688,13 @@ BattleFrontier_BattlePyramidLobby_Text_ReceivedPrizeItem:
 
 @ Unused
 BattleFrontier_BattlePyramidLobby_Text_BagIsFull:
-	.string "…Ah…\n"
+	.string "...Ah...\n"
 	.string "Your BAG appears to be filled.\p"
 	.string "Please return after you've organized\n"
 	.string "your BAG's contents.$"
 
 BattleFrontier_BattlePyramidLobby_Text_DisappointingHereIsBag:
-	.string "How disappointing for you…\p"
+	.string "How disappointing for you...\p"
 	.string "Here is the BAG we've been holding\n"
 	.string "for you.\p"
 	.string "{PLAYER} got the BAG back.$"
@@ -711,132 +711,132 @@ BattleFrontier_BattlePyramidLobby_Text_HereIsPrize:
 	.string "the PYRAMID.$"
 
 BattleFrontier_BattlePyramidLobby_Text_TellYouWhatMisfortunesAwait:
-	.string "Welcome…\p"
+	.string "Welcome...\p"
 	.string "I shall be pleased to tell you what\n"
-	.string "misfortunes await in the PYRAMID…$"
+	.string "misfortunes await in the PYRAMID...$"
 
 BattleFrontier_BattlePyramidLobby_Text_Aah:
-	.string "… … … … … …\n"
-	.string "… … … … … …\p"
-	.string "… … … … … …\n"
+	.string "... ... ... ... ... ...\n"
+	.string "... ... ... ... ... ...\p"
+	.string "... ... ... ... ... ...\n"
 	.string "Aah!$"
 
 BattleFrontier_BattlePyramidLobby_Text_HintParalysis:
-	.string "I see a shower of sparks…\p"
-	.string "…And in it, I see your POKeMON\n"
-	.string "struggling with paralysis…$"
+	.string "I see a shower of sparks...\p"
+	.string "...And in it, I see your POKEMON\n"
+	.string "struggling with paralysis...$"
 
 BattleFrontier_BattlePyramidLobby_Text_HintPoison:
-	.string "I see poison…\p"
-	.string "…And, I see your POKeMON suffering\n"
-	.string "from the effects of poison…$"
+	.string "I see poison...\p"
+	.string "...And, I see your POKEMON suffering\n"
+	.string "from the effects of poison...$"
 
 BattleFrontier_BattlePyramidLobby_Text_HintBurn:
-	.string "I see bright red flames…\p"
-	.string "…And, I see your POKeMON suffering\n"
-	.string "from burns…$"
+	.string "I see bright red flames...\p"
+	.string "...And, I see your POKEMON suffering\n"
+	.string "from burns...$"
 
 BattleFrontier_BattlePyramidLobby_Text_HintPPWaste:
 	.string "I sense the tremendous pressure of\n"
-	.string "unrequited anger…\p"
-	.string "It is a curse…\p"
-	.string "…And, I see your POKeMON drained of\n"
+	.string "unrequited anger...\p"
+	.string "It is a curse...\p"
+	.string "...And, I see your POKEMON drained of\n"
 	.string "Power Points and having no recourse\l"
-	.string "but to use STRUGGLE…$"
+	.string "but to use STRUGGLE...$"
 
 BattleFrontier_BattlePyramidLobby_Text_HintLevitate:
-	.string "I see POKeMON loftily airborne…\p"
-	.string "…And, I see your POKeMON frustrated\n"
-	.string "by powerless GROUND-type moves…$"
+	.string "I see POKEMON loftily airborne...\p"
+	.string "...And, I see your POKEMON frustrated\n"
+	.string "by powerless GROUND-type moves...$"
 
 BattleFrontier_BattlePyramidLobby_Text_HintTrapAbility:
 	.string "I sense terrific energy rising from\n"
-	.string "the ground below…\p"
-	.string "…And, I see your POKeMON unable to\n"
-	.string "escape the power's clutches…$"
+	.string "the ground below...\p"
+	.string "...And, I see your POKEMON unable to\n"
+	.string "escape the power's clutches...$"
 
 BattleFrontier_BattlePyramidLobby_Text_HintIce:
-	.string "I see ICE-type POKeMON…\p"
-	.string "…And, I see your POKeMON fighting\n"
-	.string "the freezing effects of ice…$"
+	.string "I see ICE-type POKEMON...\p"
+	.string "...And, I see your POKEMON fighting\n"
+	.string "the freezing effects of ice...$"
 
 BattleFrontier_BattlePyramidLobby_Text_HintExplosion:
 	.string "I see a flurry of moves that imperil\n"
-	.string "the user…\p"
-	.string "…And, I see your POKeMON falling\n"
-	.string "to them…$"
+	.string "the user...\p"
+	.string "...And, I see your POKEMON falling\n"
+	.string "to them...$"
 
 BattleFrontier_BattlePyramidLobby_Text_HintPsychic:
-	.string "I see PSYCHIC-type POKeMON…\p"
-	.string "…And, I see your POKeMON in torment\n"
-	.string "from PSYCHIC moves…$"
+	.string "I see PSYCHIC-type POKEMON...\p"
+	.string "...And, I see your POKEMON in torment\n"
+	.string "from PSYCHIC moves...$"
 
 BattleFrontier_BattlePyramidLobby_Text_HintRock:
-	.string "I see ROCK-type POKeMON…\p"
-	.string "…And, I see your POKeMON suffering\n"
-	.string "from ROCK moves…$"
+	.string "I see ROCK-type POKEMON...\p"
+	.string "...And, I see your POKEMON suffering\n"
+	.string "from ROCK moves...$"
 
 BattleFrontier_BattlePyramidLobby_Text_HintFighting:
-	.string "I see FIGHTING-type POKeMON…\p"
-	.string "…And, I see your POKeMON pummeled\n"
-	.string "by FIGHTING moves…$"
+	.string "I see FIGHTING-type POKEMON...\p"
+	.string "...And, I see your POKEMON pummeled\n"
+	.string "by FIGHTING moves...$"
 
 BattleFrontier_BattlePyramidLobby_Text_HintWeather:
-	.string "RAIN DANCE… SUNNY DAY…\n"
-	.string "SANDSTORM… HAIL…\p"
-	.string "I see POKeMON that become stronger\n"
-	.string "with the weather…\p"
-	.string "…And, I see your POKeMON confounded\n"
-	.string "by different types of moves…$"
+	.string "RAIN DANCE... SUNNY DAY...\n"
+	.string "SANDSTORM... HAIL...\p"
+	.string "I see POKEMON that become stronger\n"
+	.string "with the weather...\p"
+	.string "...And, I see your POKEMON confounded\n"
+	.string "by different types of moves...$"
 
 BattleFrontier_BattlePyramidLobby_Text_HintBug:
-	.string "I see BUG-type POKeMON…\p"
-	.string "…And, I see your POKeMON suffering\n"
-	.string "from different kinds of attacks…$"
+	.string "I see BUG-type POKEMON...\p"
+	.string "...And, I see your POKEMON suffering\n"
+	.string "from different kinds of attacks...$"
 
 BattleFrontier_BattlePyramidLobby_Text_HintDark:
-	.string "I see DARK-type POKeMON…\p"
-	.string "…And, I see your POKeMON suffering\n"
-	.string "from DARK-type moves…$"
+	.string "I see DARK-type POKEMON...\p"
+	.string "...And, I see your POKEMON suffering\n"
+	.string "from DARK-type moves...$"
 
 BattleFrontier_BattlePyramidLobby_Text_HintWater:
-	.string "I see WATER-type POKeMON…\p"
-	.string "…And, I see your POKeMON suffering\n"
-	.string "from WATER-type moves…$"
+	.string "I see WATER-type POKEMON...\p"
+	.string "...And, I see your POKEMON suffering\n"
+	.string "from WATER-type moves...$"
 
 BattleFrontier_BattlePyramidLobby_Text_HintGhost:
-	.string "I see GHOST-type POKeMON…\p"
-	.string "…And, I see your POKeMON suffering\n"
-	.string "from GHOST-type moves…$"
+	.string "I see GHOST-type POKEMON...\p"
+	.string "...And, I see your POKEMON suffering\n"
+	.string "from GHOST-type moves...$"
 
 BattleFrontier_BattlePyramidLobby_Text_HintSteel:
-	.string "I see STEEL-type POKeMON…\p"
-	.string "…And, I see your POKeMON suffering\n"
-	.string "from enormously powerful moves…$"
+	.string "I see STEEL-type POKEMON...\p"
+	.string "...And, I see your POKEMON suffering\n"
+	.string "from enormously powerful moves...$"
 
 BattleFrontier_BattlePyramidLobby_Text_HintFlyingDragon:
-	.string "I see flying POKeMON…\p"
-	.string "…And, I see your POKeMON suffering\n"
-	.string "from enormously powerful moves…$"
+	.string "I see flying POKEMON...\p"
+	.string "...And, I see your POKEMON suffering\n"
+	.string "from enormously powerful moves...$"
 
 BattleFrontier_BattlePyramidLobby_Text_HintStoneEvolve:
 	.string "I see those that have evolved from\n"
-	.string "the power of stones…\p"
+	.string "the power of stones...\p"
 	.string "I also sense fire, water,\n"
-	.string "and electricity…\p"
-	.string "…And, I see your POKeMON suffering\n"
-	.string "from those three powers…$"
+	.string "and electricity...\p"
+	.string "...And, I see your POKEMON suffering\n"
+	.string "from those three powers...$"
 
 BattleFrontier_BattlePyramidLobby_Text_HintNormal:
-	.string "I see NORMAL-type POKeMON…\p"
-	.string "…And, I see your POKeMON suffering\n"
-	.string "from enormously powerful moves…$"
+	.string "I see NORMAL-type POKEMON...\p"
+	.string "...And, I see your POKEMON suffering\n"
+	.string "from enormously powerful moves...$"
 
 BattleFrontier_BattlePyramidLobby_Text_BelieveMyFortunesOrNot:
 	.string "Whether you believe my fortunes\n"
-	.string "or not, the choice is yours…\p"
-	.string "The future can be changed anytime…\n"
-	.string "I wish you safe passage…$"
+	.string "or not, the choice is yours...\p"
+	.string "The future can be changed anytime...\n"
+	.string "I wish you safe passage...$"
 
 BattleFrontier_BattlePyramidLobby_Text_TrainersNoticeRunning:
 	.string "Did you know?\p"
@@ -871,10 +871,10 @@ BattleFrontier_BattlePyramidLobby_Text_ReadWhichHeading:
 
 BattleFrontier_BattlePyramidLobby_Text_ExplainMonRules:
 	.string "When the PYRAMID is conquered,\n"
-	.string "the wild POKeMON that appear in it\l"
+	.string "the wild POKEMON that appear in it\l"
 	.string "are replaced by different kinds.\p"
 	.string "Explore, observe, and learn what kinds\n"
-	.string "of wild POKeMON you may encounter.$"
+	.string "of wild POKEMON you may encounter.$"
 
 BattleFrontier_BattlePyramidLobby_Text_ExplainTrainerRules:
 	.string "TRAINERS are lying in wait for you\n"
@@ -890,7 +890,7 @@ BattleFrontier_BattlePyramidLobby_Text_ExplainMazeRules:
 	.string "The mazes are poorly lit.\n"
 	.string "You must advance with caution.\p"
 	.string "The light grows brighter whenever you\n"
-	.string "defeat a wild POKeMON or a TRAINER.$"
+	.string "defeat a wild POKEMON or a TRAINER.$"
 
 BattleFrontier_BattlePyramidLobby_Text_ExplainBagRules:
 	.string "The BATTLE BAG serves as your BAG\n"

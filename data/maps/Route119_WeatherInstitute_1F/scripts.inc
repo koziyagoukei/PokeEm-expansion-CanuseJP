@@ -75,8 +75,8 @@ Route119_WeatherInstitute_1F_Text_Grunt1Intro:
 	.string "You quit meddling!$"
 
 Route119_WeatherInstitute_1F_Text_Grunt1Defeat:
-	.string "Blast it…\n"
-	.string "Blasted by a kid…$"
+	.string "Blast it...\n"
+	.string "Blasted by a kid...$"
 
 Route119_WeatherInstitute_1F_Text_Grunt1PostBattle:
 	.string "Our BOSS knows everything.\p"
@@ -92,9 +92,9 @@ Route119_WeatherInstitute_1F_Text_Grunt4Defeat:
 	.string "I lost?!$"
 
 Route119_WeatherInstitute_1F_Text_Grunt4PostBattle:
-	.string "Oh, no…\n"
-	.string "I'll catch an earful for losing to a kid…\p"
-	.string "I should just take a nap in the bed…$"
+	.string "Oh, no...\n"
+	.string "I'll catch an earful for losing to a kid...\p"
+	.string "I should just take a nap in the bed...$"
 
 Route119_WeatherInstitute_1F_Text_EveryoneWentUpstairs:
 	.string "While I was sleeping, everyone went\n"
@@ -102,7 +102,7 @@ Route119_WeatherInstitute_1F_Text_EveryoneWentUpstairs:
 
 Route119_WeatherInstitute_1F_Text_WowYoureStrong:
 	.string "Wow, you're really strong!\p"
-	.string "I wish I could be a POKeMON TRAINER\n"
+	.string "I wish I could be a POKEMON TRAINER\n"
 	.string "like you!$"
 
 Route119_WeatherInstitute_1F_Text_ProfStudyingRain:
@@ -119,7 +119,7 @@ Route119_WeatherInstitute_1F_Text_NoticingAbnormalWeather:
 	.string "the HOENN region.\p"
 	.string "We've been noticing temporary and\n"
 	.string "isolated cases of droughts and\l"
-	.string "heavy rain lately…$"
+	.string "heavy rain lately...$"
 
 Route119_WeatherInstitute_1F_Text_WhatWereAquasUpTo:
 	.string "Hello!\n"
@@ -128,6 +128,6 @@ Route119_WeatherInstitute_1F_Text_WhatWereAquasUpTo:
 	.string "earth the AQUAS were up to.$"
 
 Route119_WeatherInstitute_1F_Text_TakeRestInBed:
-	.string "There's a bed…\n"
+	.string "There's a bed...\n"
 	.string "Let's take a rest.$"
 

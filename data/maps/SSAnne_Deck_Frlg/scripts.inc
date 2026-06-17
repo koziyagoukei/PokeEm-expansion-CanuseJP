@@ -32,9 +32,9 @@ SSAnne_Deck_Text_ScrubbingDecksHardWork::
 	.string "Scrubbing decks is hard work!$"
 
 SSAnne_Deck_Text_FeelSeasick::
-	.string "Urf… I feel ill…\p"
+	.string "Urf... I feel ill...\p"
 	.string "I got seasick, so I stepped out to\n"
-	.string "get some air…$"
+	.string "get some air...$"
 
 SSAnne_Deck_Text_EdmondIntro::
 	.string "Hey, matey!\p"
@@ -44,7 +44,7 @@ SSAnne_Deck_Text_EdmondDefeat::
 	.string "You're impressive!$"
 
 SSAnne_Deck_Text_EdmondPostBattle::
-	.string "How many kinds of POKeMON do you\n"
+	.string "How many kinds of POKEMON do you\n"
 	.string "think there are in this big world?$"
 
 SSAnne_Deck_Text_TrevorIntro::
@@ -56,5 +56,5 @@ SSAnne_Deck_Text_TrevorDefeat::
 
 SSAnne_Deck_Text_TrevorPostBattle::
 	.string "My pa said there are 100 kinds of\n"
-	.string "POKeMON. I think there are more.$"
+	.string "POKEMON. I think there are more.$"
 

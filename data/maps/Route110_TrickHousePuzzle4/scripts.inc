@@ -30,8 +30,8 @@ Route110_TrickHousePuzzle4_EventScript_Paula::
 Route110_TrickHousePuzzle4_Text_WroteSecretCodeLockOpened:
 	.string "{PLAYER} wrote down the secret code\n"
 	.string "on the door.\p"
-	.string "“TRICK MASTER is cool.”\n"
-	.string "… … … … … … … …\p"
+	.string ""TRICK MASTER is cool."\n"
+	.string "... ... ... ... ... ... ... ...\p"
 	.string "The lock clicked open!$"
 
 Route110_TrickHousePuzzle4_Text_CoraIntro:
@@ -52,10 +52,10 @@ Route110_TrickHousePuzzle4_Text_YujiIntro:
 
 Route110_TrickHousePuzzle4_Text_YujiDefeat:
 	.string "I can push boulders, but I can't solve\n"
-	.string "the puzzle…$"
+	.string "the puzzle...$"
 
 Route110_TrickHousePuzzle4_Text_YujiPostBattle:
-	.string "It's not good enough to be brawny…\n"
+	.string "It's not good enough to be brawny...\n"
 	.string "You have to use your head. Be brainy!$"
 
 Route110_TrickHousePuzzle4_Text_PaulaIntro:

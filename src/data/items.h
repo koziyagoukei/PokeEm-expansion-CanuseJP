@@ -14566,7 +14566,7 @@ const struct ItemInfo gItemsInfo[] =
         .description = COMPOUND_STRING(
             "Silph Co's scope\n"
             "makes unseeable\n"
-            "POKeMON visible."),
+            "POKEMON visible."),
         .importance = 1,
         .pocket = POCKET_KEY_ITEMS,
         .type = ITEM_USE_BAG_MENU,

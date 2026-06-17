@@ -304,8 +304,8 @@ Route110_TrickHousePuzzle3_EventScript_Alan::
 Route110_TrickHousePuzzle3_Text_WroteSecretCodeLockOpened:
 	.string "{PLAYER} wrote down the secret code\n"
 	.string "on the door.\p"
-	.string "“TRICK MASTER is coveted.”\n"
-	.string "… … … … … … … …\p"
+	.string ""TRICK MASTER is coveted."\n"
+	.string "... ... ... ... ... ... ... ...\p"
 	.string "The lock clicked open!$"
 
 Route110_TrickHousePuzzle3_Text_JustinIntro:
@@ -321,10 +321,10 @@ Route110_TrickHousePuzzle3_Text_JustinPostBattle:
 
 Route110_TrickHousePuzzle3_Text_MarthaIntro:
 	.string "I don't know what's going on here.\n"
-	.string "I'm starting to feel sad…$"
+	.string "I'm starting to feel sad...$"
 
 Route110_TrickHousePuzzle3_Text_MarthaDefeat:
-	.string "You… You're awful!$"
+	.string "You... You're awful!$"
 
 Route110_TrickHousePuzzle3_Text_MarthaPostBattle:
 	.string "I know I'm weak!\n"

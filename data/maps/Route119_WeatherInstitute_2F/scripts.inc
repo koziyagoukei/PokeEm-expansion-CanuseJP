@@ -205,14 +205,14 @@ Route119_WeatherInstitute_2F_EventScript_WeatherScientist::
 
 Route119_WeatherInstitute_2F_Text_Grunt2Intro:
 	.string "The INSTITUTE created a type of\n"
-	.string "POKeMON that has something to do with\l"
+	.string "POKEMON that has something to do with\l"
 	.string "the weather. We're here to take them!$"
 
 Route119_WeatherInstitute_2F_Text_Grunt2Defeat:
 	.string "Our plan's being spoiled by a kid?$"
 
 Route119_WeatherInstitute_2F_Text_Grunt2PostBattle:
-	.string "If the POKeMON they made here can\n"
+	.string "If the POKEMON they made here can\n"
 	.string "control the weather freely, then we of\l"
 	.string "TEAM AQUA definitely need it!$"
 
@@ -231,18 +231,18 @@ Route119_WeatherInstitute_2F_Text_Grunt3PostBattle:
 
 Route119_WeatherInstitute_2F_Text_Grunt5Intro:
 	.string "Don't tell me you're looking for that\n"
-	.string "weather POKeMON, too?\p"
+	.string "weather POKEMON, too?\p"
 	.string "That's a no-no!\n"
 	.string "We were here to get it first!$"
 
 Route119_WeatherInstitute_2F_Text_Grunt5Defeat:
-	.string "Oh, will you look at my POKeMON?$"
+	.string "Oh, will you look at my POKEMON?$"
 
 Route119_WeatherInstitute_2F_Text_Grunt5PostBattle:
 	.string "Humph, so what?\n"
-	.string "What we want…\p"
-	.string "What we really want isn't here…\n"
-	.string "Ihihihihi…$"
+	.string "What we want...\p"
+	.string "What we really want isn't here...\n"
+	.string "Ihihihihi...$"
 
 Route119_WeatherInstitute_2F_Text_ShellyIntro:
 	.string "Ahahahaha!\p"
@@ -281,18 +281,18 @@ Route119_WeatherInstitute_2F_Text_ThanksPleaseTakePokemon:
 	.string "Thanks!\n"
 	.string "Thanks to you, we're safe!\p"
 	.string "It might be an odd way of thanking you,\n"
-	.string "but take this POKeMON.$"
+	.string "but take this POKEMON.$"
 
 @ Unused
 Route119_WeatherInstitute_2F_Text_NoRoomForPokemon:
 	.string "Hm? You don't seem to have any room\n"
-	.string "for this POKeMON.$"
+	.string "for this POKEMON.$"
 
 Route119_WeatherInstitute_2F_Text_PlayerReceivedCastform:
 	.string "{PLAYER} received CASTFORM!$"
 
 Route119_WeatherInstitute_2F_Text_PokemonChangesWithWeather:
-	.string "That POKeMON changes shape according\n"
+	.string "That POKEMON changes shape according\n"
 	.string "to the weather conditions.\p"
 	.string "There're plenty of them in the\n"
 	.string "INSTITUTE--go ahead and take it.$"
@@ -308,7 +308,7 @@ Route119_WeatherInstitute_2F_Text_GroudonWeather:
 	.string "Presently, a drought has been recorded\n"
 	.string "in {STR_VAR_1}.\p"
 	.string "Could that mean, somewhere near\n"
-	.string "{STR_VAR_1}…$"
+	.string "{STR_VAR_1}...$"
 
 Route119_WeatherInstitute_2F_Text_KyogreWeather:
 	.string "I track weather patterns over\n"
@@ -316,7 +316,7 @@ Route119_WeatherInstitute_2F_Text_KyogreWeather:
 	.string "Presently, heavy rainfall has been\n"
 	.string "recorded over {STR_VAR_1}.\p"
 	.string "Could that mean, somewhere near\n"
-	.string "{STR_VAR_1}…$"
+	.string "{STR_VAR_1}...$"
 
 Route119_WeatherInstitute_2F_Text_NoAbnormalWeather:
 	.string "Abnormal weather conditions are\n"

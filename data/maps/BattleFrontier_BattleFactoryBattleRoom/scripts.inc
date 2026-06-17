@@ -252,13 +252,13 @@ BattleFrontier_BattleFactoryBattleRoom_Text_NolandImFactoryHead:
 	.string "but you're still square in your head!\p"
 	.string "Listen up, okay? Knowledge isn't only\n"
 	.string "about reading books or doing desk work.\p"
-	.string "Just doing that sort of thing…\n"
+	.string "Just doing that sort of thing...\n"
 	.string "It may as well be useless!\p"
 	.string "You have to experience things with\n"
 	.string "your heart and your body, understand?\p"
 	.string "I'll take you on under the same\n"
 	.string "conditions as you.\p"
-	.string "I'll be using rental POKeMON, too!$"
+	.string "I'll be using rental POKEMON, too!$"
 
 BattleFrontier_BattleFactoryBattleRoom_Text_ShakeOutKnowledgeBringItOn:
 	.string "Shake out every last bit of your\n"
@@ -273,8 +273,8 @@ BattleFrontier_BattleFactoryBattleRoom_Text_ReceivedKnowledgeSymbol:
 	.string "on the FRONTIER PASS!$"
 
 BattleFrontier_BattleFactoryBattleRoom_Text_NextTimeNoHoldsBarred:
-	.string "Heh…\n"
-	.string "You're a pretty bright spark…\p"
+	.string "Heh...\n"
+	.string "You're a pretty bright spark...\p"
 	.string "Next time, I'll come after you hard.\n"
 	.string "No holds barred, understand?\p"
 	.string "You keep up your studies!$"
@@ -282,7 +282,7 @@ BattleFrontier_BattleFactoryBattleRoom_Text_NextTimeNoHoldsBarred:
 BattleFrontier_BattleFactoryBattleRoom_Text_HarderLookThanLastTime:
 	.string "NOLAND: Hey, hey! How's it going?\n"
 	.string "You keeping up with your studies?\p"
-	.string "…Oh?\p"
+	.string "...Oh?\p"
 	.string "You've taken on a harder look than\n"
 	.string "the last time I saw you.\p"
 	.string "Now, this should be fun!\n"
@@ -293,7 +293,7 @@ BattleFrontier_BattleFactoryBattleRoom_Text_AllRightBringItOn:
 	.string "Bring it on!$"
 
 BattleFrontier_BattleFactoryBattleRoom_Text_OutOfMyLeagueLetsSeePass:
-	.string "NOLAND: What the…\n"
+	.string "NOLAND: What the...\n"
 	.string "You're getting out of my league!\p"
 	.string "Sheesh!\n"
 	.string "Let's see that FRONTIER PASS!$"

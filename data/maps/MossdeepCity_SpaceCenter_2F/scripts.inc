@@ -351,8 +351,8 @@ MossdeepCity_SpaceCenter_2F_Text_WhyWouldMagmaStealRocketFuel:
 
 MossdeepCity_SpaceCenter_2F_Text_WouldveLikedToBeAstronaut:
 	.string "If only I was a little younger, I would\n"
-	.string "have liked being an astronaut…\p"
-	.string "No… It's not too late!\n"
+	.string "have liked being an astronaut...\p"
+	.string "No... It's not too late!\n"
 	.string "I can and will try!$"
 
 MossdeepCity_SpaceCenter_2F_Text_MagmaCantGetAwayWithThis:
@@ -363,10 +363,10 @@ MossdeepCity_SpaceCenter_2F_Text_MagmaCantGetAwayWithThis:
 
 MossdeepCity_SpaceCenter_2F_Text_WishOrdinaryPeopleCouldGoIntoSpace:
 	.string "I wish ordinary people could go into\n"
-	.string "space one day…$"
+	.string "space one day...$"
 
 MossdeepCity_SpaceCenter_2F_Text_DoesMagmaWantToGoToSpace:
-	.string "TEAM MAGMA…\n"
+	.string "TEAM MAGMA...\n"
 	.string "Do they want to go to space, too?$"
 
 MossdeepCity_SpaceCenter_2F_Text_YoureOutnumberedTakeUsOn:
@@ -399,15 +399,15 @@ MossdeepCity_SpaceCenter_2F_Text_Grunt7Intro:
 	.string "But I'm not about to let you do that!$"
 
 MossdeepCity_SpaceCenter_2F_Text_Grunt7Defeat:
-	.string "We should've taken a break…\n"
-	.string "That's what we should've done…$"
+	.string "We should've taken a break...\n"
+	.string "That's what we should've done...$"
 
 MossdeepCity_SpaceCenter_2F_Text_Grunt6PostBattle:
 	.string "Three of us here, and look at the sorry\n"
 	.string "mess we got ourselves into.$"
 
 MossdeepCity_SpaceCenter_2F_Text_Grunt7PostBattle:
-	.string "We three losing like this…\n"
+	.string "We three losing like this...\n"
 	.string "We look worse than usual by triple!$"
 
 MossdeepCity_SpaceCenter_2F_Text_Grunt5PostBattle:
@@ -426,12 +426,12 @@ MossdeepCity_SpaceCenter_2F_Text_MaxieDontInterfere:
 	.string "Don't you dare interfere!$"
 
 MossdeepCity_SpaceCenter_2F_Text_StevenWhyStealRocketFuel:
-	.string "STEVEN: TEAM MAGMA…\p"
+	.string "STEVEN: TEAM MAGMA...\p"
 	.string "What's the point of stealing rocket\n"
 	.string "fuel?$"
 
 MossdeepCity_SpaceCenter_2F_Text_MaxieUseFuelToEruptVolcano:
-	.string "MAXIE: Fufufu… Since you're so\n"
+	.string "MAXIE: Fufufu... Since you're so\n"
 	.string "curious, you deserve an explanation.\p"
 	.string "We're going to jettison the entire\n"
 	.string "load into MT. CHIMNEY!\p"
@@ -452,32 +452,32 @@ MossdeepCity_SpaceCenter_2F_Text_StevenHurryGetReadyQuickly:
 	.string "Get ready quickly!$"
 
 MossdeepCity_SpaceCenter_2F_Text_JustWantToExpandLand:
-	.string "All I want…\n"
-	.string "I just want to expand the land mass…$"
+	.string "All I want...\n"
+	.string "I just want to expand the land mass...$"
 
 MossdeepCity_SpaceCenter_Text_TabithaDefeat:
-	.string "I'm with our leader…$"
+	.string "I'm with our leader...$"
 
 MossdeepCity_SpaceCenter_2F_Text_MaxieWeFailedIsAquaAlsoMisguided:
 	.string "MAXIE: We failed to make the volcano\n"
-	.string "erupt…\p"
+	.string "erupt...\p"
 	.string "We failed to control GROUDON after\n"
-	.string "we had awoken it…\p"
+	.string "we had awoken it...\p"
 	.string "Is our goal to expand the land\n"
 	.string "misguided?\p"
-	.string "… … … … … …\n"
-	.string "… … … … … …\p"
-	.string "If…\n"
-	.string "If we, TEAM MAGMA, are wrong…\l"
-	.string "… … … … … …\p"
+	.string "... ... ... ... ... ...\n"
+	.string "... ... ... ... ... ...\p"
+	.string "If...\n"
+	.string "If we, TEAM MAGMA, are wrong...\l"
+	.string "... ... ... ... ... ...\p"
 	.string "Then might TEAM AQUA's goal to expand\n"
 	.string "the sea also be equally misguided?$"
 
 MossdeepCity_SpaceCenter_2F_Text_MaxieWeWillGiveUp:
-	.string "MAXIE: All right…\n"
-	.string "We will give up on the fuel…\p"
+	.string "MAXIE: All right...\n"
+	.string "We will give up on the fuel...\p"
 	.string "There appear to be more important\n"
-	.string "matters that I must examine…$"
+	.string "matters that I must examine...$"
 
 MossdeepCity_SpaceCenter_2F_Text_StevenThankYouComeSeeMeAtHome:
 	.string "STEVEN: Whew, that was too tense.\n"

@@ -194,7 +194,7 @@ const struct AbilityInfo gAbilitiesInfo[ABILITIES_COUNT] =
     [ABILITY_WONDER_GUARD] =
     {
         .name = _("Wonder Guard"),
-        .description = COMPOUND_STRING("Only “Supereffective” hits."),
+        .description = COMPOUND_STRING("Only "Supereffective" hits."),
         .aiRating = 10,
         .cantBeCopied = TRUE,
         .cantBeSwapped = TRUE,
@@ -822,14 +822,14 @@ const struct AbilityInfo gAbilitiesInfo[ABILITIES_COUNT] =
     [ABILITY_TINTED_LENS] =
     {
         .name = _("Tinted Lens"),
-        .description = COMPOUND_STRING("Ups “not very effective”."),
+        .description = COMPOUND_STRING("Ups "not very effective"."),
         .aiRating = 7,
     },
 
     [ABILITY_FILTER] =
     {
         .name = _("Filter"),
-        .description = COMPOUND_STRING("Weakens “supereffective”."),
+        .description = COMPOUND_STRING("Weakens "supereffective"."),
         .aiRating = 6,
         .breakable = TRUE,
     },
@@ -866,7 +866,7 @@ const struct AbilityInfo gAbilitiesInfo[ABILITIES_COUNT] =
     [ABILITY_SOLID_ROCK] =
     {
         .name = _("Solid Rock"),
-        .description = COMPOUND_STRING("Weakens “supereffective”."),
+        .description = COMPOUND_STRING("Weakens "supereffective"."),
         .aiRating = 6,
         .breakable = TRUE,
     },
@@ -1779,14 +1779,14 @@ const struct AbilityInfo gAbilitiesInfo[ABILITIES_COUNT] =
     [ABILITY_PRISM_ARMOR] =
     {
         .name = _("Prism Armor"),
-        .description = COMPOUND_STRING("Weakens “supereffective”."),
+        .description = COMPOUND_STRING("Weakens "supereffective"."),
         .aiRating = 6,
     },
 
     [ABILITY_NEUROFORCE] =
     {
         .name = _("Neuroforce"),
-        .description = COMPOUND_STRING("Ups “supereffective”."),
+        .description = COMPOUND_STRING("Ups "supereffective"."),
         .aiRating = 6,
     },
 

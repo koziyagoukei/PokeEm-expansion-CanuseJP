@@ -983,9 +983,9 @@ LilycoveCity_ContestLobby_Text_MakePokeblocksDifferentBerries:
 
 LilycoveCity_ContestLobby_Text_YourPokemonSpurredMeToPaint:
 	.string "Congratulations!\p"
-	.string "I did a painting of your POKeMON to\n"
-	.string "commemorate its victory…\p"
-	.string "Well, your POKeMON's appeals were\n"
+	.string "I did a painting of your POKEMON to\n"
+	.string "commemorate its victory...\p"
+	.string "Well, your POKEMON's appeals were\n"
 	.string "so fantastic, it spurred me into\l"
 	.string "painting better than I usually do.\l"
 	.string "Look, see?$"
@@ -1011,7 +1011,7 @@ LilycoveCity_ContestLobby_Text_IllTakePaintingToMuseum:
 LilycoveCity_ContestLobby_Text_TakeMementoOfPainting:
 	.string "Oh, that's right!\p"
 	.string "As a memento of me painting your\n"
-	.string "POKeMON, please take this.$"
+	.string "POKEMON, please take this.$"
 
 LilycoveCity_ContestLobby_Text_ReceivedARibbon:
 	.string "{PLAYER} received a RIBBON.$"
@@ -1024,10 +1024,10 @@ LilycoveCity_ContestLobby_Text_OkaySeeYou:
 	.string "Okay, see you!$"
 
 LilycoveCity_ContestLobby_Text_TakeHomeButIdLikeToTakeToMuseum:
-	.string "Oh… Then, I guess I'll just take\n"
-	.string "this home with me…\p"
+	.string "Oh... Then, I guess I'll just take\n"
+	.string "this home with me...\p"
 	.string "But, you know, I would like to take\n"
-	.string "this to the art museum… Okay?$"
+	.string "this to the art museum... Okay?$"
 
 LilycoveCity_ContestLobby_Text_FineThatsTheWayItIs:
 	.string "Oh, fine, that's the way it is.\n"
@@ -1036,34 +1036,34 @@ LilycoveCity_ContestLobby_Text_FineThatsTheWayItIs:
 	.string "Well, be seeing you.$"
 
 LilycoveCity_ContestLobby_Text_MasterRankHereICome:
-	.string "Hoo, boy… Master Rank CONTESTS,\n"
+	.string "Hoo, boy... Master Rank CONTESTS,\n"
 	.string "here I come.\p"
 	.string "The world will know that my dearest\n"
-	.string "POKeMON is the cutest being in all\l"
+	.string "POKEMON is the cutest being in all\l"
 	.string "existence. The time has come!\l"
 	.string "Uheheheh.$"
 
 LilycoveCity_ContestLobby_Text_WholeVarietyOfPokemonHere:
 	.string "You can see a whole variety of\n"
-	.string "POKeMON here.\p"
+	.string "POKEMON here.\p"
 	.string "That's why I make this place a regular\n"
 	.string "part of my daily stroll.$"
 
 LilycoveCity_ContestLobby_Text_ContestFeastForEyes:
 	.string "Wow, coming out to a CONTEST is\n"
 	.string "a feast for these eyes!\p"
-	.string "Would you look at all the POKeMON\n"
+	.string "Would you look at all the POKEMON\n"
 	.string "that just scream to be painted?$"
 
 LilycoveCity_ContestLobby_Text_ToughContestIsExtreme:
 	.string "The TOUGHNESS CONTEST is like\n"
 	.string "extreme, man!\p"
-	.string "Those muscular appeals…\n"
-	.string "Cascading sweat… I swoon!$"
+	.string "Those muscular appeals...\n"
+	.string "Cascading sweat... I swoon!$"
 
 LilycoveCity_ContestLobby_Text_LavishedCareOnMon:
 	.string "Day in and day out, I lavished my care\n"
-	.string "on this POKeMON.\p"
+	.string "on this POKEMON.\p"
 	.string "Its condition is peaking.\n"
 	.string "Today, victory is mine!$"
 

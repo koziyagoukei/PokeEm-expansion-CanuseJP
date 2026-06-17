@@ -126,9 +126,9 @@ VictoryRoad_1F_Text_WallyNotGoingToLoseAnymore:
 	.string "{PLAYER}, losing to you that time\n"
 	.string "made me stronger!\p"
 	.string "But I'm not going to lose anymore!\p"
-	.string "I'm going to win! For the POKeMON who\n"
+	.string "I'm going to win! For the POKEMON who\n"
 	.string "gave me courage and strength!\p"
-	.string "Okay… Here I come!$"
+	.string "Okay... Here I come!$"
 
 VictoryRoad_1F_Text_WallyEntranceDefeat:
 	.string "Wow!\n"
@@ -143,7 +143,7 @@ VictoryRoad_1F_Text_WallyIntro:
 	.string "WALLY: Hi! {PLAYER}!\p"
 	.string "I've gotten stronger since that last\n"
 	.string "time! I wanted to show you, {PLAYER}!\p"
-	.string "Okay… Here I come!$"
+	.string "Okay... Here I come!$"
 
 VictoryRoad_1F_Text_WallyDefeat:
 	.string "Wow!\n"
@@ -151,16 +151,16 @@ VictoryRoad_1F_Text_WallyDefeat:
 
 VictoryRoad_1F_Text_WallyPostBattle:
 	.string "WALLY: I couldn't beat you this time,\n"
-	.string "too… But one of these days, {PLAYER},\l"
-	.string "I'm going to catch up to you…\p"
-	.string "And challenge the POKeMON LEAGUE!$"
+	.string "too... But one of these days, {PLAYER},\l"
+	.string "I'm going to catch up to you...\p"
+	.string "And challenge the POKEMON LEAGUE!$"
 
 VictoryRoad_1F_Text_EdgarIntro:
 	.string "I've made it this far a couple times,\n"
-	.string "but the last stretch is so long…$"
+	.string "but the last stretch is so long...$"
 
 VictoryRoad_1F_Text_EdgarDefeat:
-	.string "My dream ends here again…$"
+	.string "My dream ends here again...$"
 
 VictoryRoad_1F_Text_EdgarPostBattle:
 	.string "You've made it this far. Keep the\n"
@@ -172,20 +172,20 @@ VictoryRoad_1F_Text_AlbertIntro:
 	.string "That possibility doesn't exist!$"
 
 VictoryRoad_1F_Text_AlbertDefeat:
-	.string "Impossible…\n"
+	.string "Impossible...\n"
 	.string "I lost?$"
 
 VictoryRoad_1F_Text_AlbertPostBattle:
-	.string "I lost here…\p"
+	.string "I lost here...\p"
 	.string "That means I lack the qualifications\n"
-	.string "to become the CHAMPION…$"
+	.string "to become the CHAMPION...$"
 
 VictoryRoad_1F_Text_HopeIntro:
 	.string "This seemingly infinite and harsh road\n"
 	.string "lives up to its name of VICTORY.$"
 
 VictoryRoad_1F_Text_HopeDefeat:
-	.string "Your battle style is fantastic…$"
+	.string "Your battle style is fantastic...$"
 
 VictoryRoad_1F_Text_HopePostBattle:
 	.string "You seem to have the potential for\n"
@@ -202,7 +202,7 @@ VictoryRoad_1F_Text_QuincyDefeat:
 VictoryRoad_1F_Text_QuincyPostBattle:
 	.string "Getting through here safely--that's\n"
 	.string "the final test for any TRAINER aiming\l"
-	.string "to become the POKeMON CHAMPION.\p"
+	.string "to become the POKEMON CHAMPION.\p"
 	.string "That's why it's called the VICTORY\n"
 	.string "ROAD.$"
 
@@ -211,7 +211,7 @@ VictoryRoad_1F_Text_KatelynnIntro:
 	.string "that's come this far. Come on!$"
 
 VictoryRoad_1F_Text_KatelynnDefeat:
-	.string "This is a disgrace…$"
+	.string "This is a disgrace...$"
 
 VictoryRoad_1F_Text_KatelynnPostBattle:
 	.string "Humph, go right on ahead.\n"

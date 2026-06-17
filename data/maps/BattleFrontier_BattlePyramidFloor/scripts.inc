@@ -434,39 +434,39 @@ BattlePyramid_Text_ZeroItemsRemaining4::
 
 BattlePyramid_Text_EightItemsRemaining5::
 	.string "On this floor of the PYRAMID,\n"
-	.string "I hear there are eight items…$"
+	.string "I hear there are eight items...$"
 
 BattlePyramid_Text_SevenItemsRemaining5::
 	.string "On this floor of the PYRAMID,\n"
-	.string "I hear there are seven items…$"
+	.string "I hear there are seven items...$"
 
 BattlePyramid_Text_SixItemsRemaining5::
 	.string "On this floor of the PYRAMID,\n"
-	.string "I hear there are six items…$"
+	.string "I hear there are six items...$"
 
 BattlePyramid_Text_FiveItemsRemaining5::
 	.string "On this floor of the PYRAMID,\n"
-	.string "I hear there are five items…$"
+	.string "I hear there are five items...$"
 
 BattlePyramid_Text_FourItemsRemaining5::
 	.string "On this floor of the PYRAMID,\n"
-	.string "I hear there are four items…$"
+	.string "I hear there are four items...$"
 
 BattlePyramid_Text_ThreeItemsRemaining5::
 	.string "On this floor of the PYRAMID,\n"
-	.string "I hear there are three items…$"
+	.string "I hear there are three items...$"
 
 BattlePyramid_Text_TwoItemsRemaining5::
 	.string "On this floor of the PYRAMID,\n"
-	.string "I hear there are two items…$"
+	.string "I hear there are two items...$"
 
 BattlePyramid_Text_OneItemRemaining5::
 	.string "On this floor of the PYRAMID,\n"
-	.string "I hear there is one item…$"
+	.string "I hear there is one item...$"
 
 BattlePyramid_Text_ZeroItemsRemaining5::
 	.string "On this floor of the PYRAMID,\n"
-	.string "I hear there are no items…$"
+	.string "I hear there are no items...$"
 
 BattlePyramid_Text_EightItemsRemaining6::
 	.string "Have you collected any items?\p"
@@ -663,7 +663,7 @@ BattlePyramid_Text_OneTrainersRemaining4::
 
 BattlePyramid_Text_ZeroTrainersRemaining4::
 	.string "There isn't a single person left who\n"
-	.string "can defeat you now…$"
+	.string "can defeat you now...$"
 
 BattlePyramid_Text_SevenTrainersRemaining5::
 	.string "You may have what it takes to beat\n"
@@ -728,4 +728,4 @@ BattlePyramid_Text_OneTrainersRemaining6::
 
 BattlePyramid_Text_ZeroTrainersRemaining6::
 	.string "There aren't any TRAINERS left that\n"
-	.string "can take you on now…$"
+	.string "can take you on now...$"

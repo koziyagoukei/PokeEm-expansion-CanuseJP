@@ -59,7 +59,7 @@ SixIsland_RuinValley_Text_LeftDoorAlone::
 
 SixIsland_RuinValley_Text_SeveralDotsOnTheDoor::
 	.string "On closer inspection, there are\n"
-	.string "several dots on the door…$"
+	.string "several dots on the door...$"
 
 SixIsland_RuinValley_Text_DoorIsOpen::
 	.string "The door is open.$"
@@ -69,7 +69,7 @@ SixIsland_RuinValley_Text_StanlyIntro::
 	.string "still unsolved in this world.$"
 
 SixIsland_RuinValley_Text_StanlyDefeat::
-	.string "Hmm…$"
+	.string "Hmm...$"
 
 SixIsland_RuinValley_Text_StanlyPostBattle::
 	.string "I suggest to you that you, too,\n"
@@ -100,7 +100,7 @@ SixIsland_RuinValley_Text_LarryDefeat::
 	.string "Oh, interesting.$"
 
 SixIsland_RuinValley_Text_LarryPostBattle::
-	.string "Those ruins over there…\p"
+	.string "Those ruins over there...\p"
 	.string "I haven't had any luck in finding\n"
 	.string "how I can get inside.$"
 
@@ -123,7 +123,7 @@ SixIsland_RuinValley_Text_HectorDefeat::
 	.string "I'll be happy to tell you.$"
 
 SixIsland_RuinValley_Text_HectorPostBattle::
-	.string "The door to the ruins…\n"
+	.string "The door to the ruins...\n"
 	.string "It has these strange patterns\l"
 	.string "engraved on the outside.\p"
 	.string "I don't know what they mean,\n"

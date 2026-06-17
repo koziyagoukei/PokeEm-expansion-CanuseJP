@@ -77,12 +77,12 @@ Movement_Bow::
 	step_end
 
 Text_WelcomeWantToHealPkmn_Frlg::
-	.string "Welcome to our POKeMON CENTER!\p"
+	.string "Welcome to our POKEMON CENTER!\p"
 	.string "Would you like me to heal your\n"
-	.string "POKeMON back to perfect health?$"
+	.string "POKEMON back to perfect health?$"
 
 Text_TakeYourPkmnForFewSeconds_Frlg::
-	.string "Okay, I'll take your POKeMON for a\n"
+	.string "Okay, I'll take your POKEMON for a\n"
 	.string "few seconds.$"
 
 Text_WeHopeToSeeYouAgain_Frlg::
@@ -90,5 +90,5 @@ Text_WeHopeToSeeYouAgain_Frlg::
 
 Text_RestoredPkmnToFullHealth_Frlg::
 	.string "Thank you for waiting.\n"
-	.string "We've restored your POKeMON to\l"
+	.string "We've restored your POKEMON to\l"
 	.string "full health.$"

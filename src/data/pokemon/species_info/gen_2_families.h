@@ -5298,7 +5298,7 @@ const struct SpeciesInfo gSpeciesInfoGen2[] =
         .description = COMPOUND_STRING(
             "Its lancelike spikes and savage\n"
             "temperament have earned it the\n"
-            "nickname “Sea Fiend”.\n"
+            "nickname "Sea Fiend".\n"
             "It slurps up poison to nourish itself."),
         .pokemonScale = 257,
         .pokemonOffset = 10,

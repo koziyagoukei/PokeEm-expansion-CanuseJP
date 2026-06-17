@@ -441,8 +441,8 @@ BattleFrontier_BattlePalaceBattleRoom_Movement_SpenserEnter:
 	step_end
 
 BattleFrontier_BattlePalaceBattleRoom_Text_LetMeRestoreYourMons:
-	.string "Excellent…\n"
-	.string "Let me restore your POKeMON.$"
+	.string "Excellent...\n"
+	.string "Let me restore your POKEMON.$"
 
 BattleFrontier_BattlePalaceBattleRoom_Text_PreparedFor2ndOpponent:
 	.string "The 2nd opponent is next.\n"
@@ -477,17 +477,17 @@ BattleFrontier_BattlePalaceBattleRoom_Text_WishToQuitChallenge:
 
 BattleFrontier_BattlePalaceBattleRoom_Text_SavingData:
 	.string "Saving the data.\n"
-	.string "Have patience…$"
+	.string "Have patience...$"
 
 BattleFrontier_BattlePalaceBattleRoom_Text_RecordLastMatch:
 	.string "Do you wish to record your latest\n"
 	.string "match on your FRONTIER PASS?$"
 
 BattleFrontier_BattlePalaceBattleRoom_Text_ChallengingPalaceMaven:
-	.string "And now…\p"
+	.string "And now...\p"
 	.string "By winning consistently, you have\n"
 	.string "earned the privilege of challenging\l"
-	.string "our master, the PALACE MAVEN…$"
+	.string "our master, the PALACE MAVEN...$"
 
 BattleFrontier_BattlePalaceBattleRoom_Text_ReadyForPalaceMaven:
 	.string "I shall send for the PALACE MAVEN.\n"
@@ -499,18 +499,18 @@ BattleFrontier_BattlePalaceBattleRoom_Text_AnnounceArrivalOfSpenser:
 
 BattleFrontier_BattlePalaceBattleRoom_Text_SpenserFirstIntro:
 	.string "SPENSER: My physical being is with\n"
-	.string "POKeMON always!\p"
+	.string "POKEMON always!\p"
 	.string "My heart beats as one with\n"
-	.string "POKeMON always!\p"
+	.string "POKEMON always!\p"
 	.string "Young one of a TRAINER!\n"
-	.string "Do you believe in your POKeMON?\p"
+	.string "Do you believe in your POKEMON?\p"
 	.string "Can you believe them through\n"
 	.string "and through?\p"
 	.string "If your bonds of trust are frail,\n"
 	.string "you will never beat my brethren!$"
 
 BattleFrontier_BattlePalaceBattleRoom_Text_ProveYourBondWithMons:
-	.string "The bond you share with your POKeMON!\n"
+	.string "The bond you share with your POKEMON!\n"
 	.string "Prove it to me here!$"
 
 BattleFrontier_BattlePalaceBattleRoom_Text_SpenserPostSilverBattle:
@@ -522,7 +522,7 @@ BattleFrontier_BattlePalaceBattleRoom_Text_SpenserPostSilverBattle:
 
 BattleFrontier_BattlePalaceBattleRoom_Text_LetsSeeFrontierPass:
 	.string "My, my, if only you could maintain that\n"
-	.string "facade of distinguished authority…\p"
+	.string "facade of distinguished authority...\p"
 	.string "Here!\n"
 	.string "Let's see your FRONTIER PASS!$"
 
@@ -531,7 +531,7 @@ BattleFrontier_BattlePalaceBattleRoom_Text_ReceivedSpiritsSymbol:
 	.string "the FRONTIER PASS!$"
 
 BattleFrontier_BattlePalaceBattleRoom_Text_SpenserAwaitNextTime:
-	.string "SPENSER: Your POKeMON's eyes are \n"
+	.string "SPENSER: Your POKEMON's eyes are \n"
 	.string "truly clear and unclouded.\p"
 	.string "I will eagerly await the next\n"
 	.string "opportunity to see you.$"
@@ -540,7 +540,7 @@ BattleFrontier_BattlePalaceBattleRoom_Text_SpenserThisTimeWontHoldBack:
 	.string "SPENSER: Gwahahah!\n"
 	.string "You've battled your way up again?\p"
 	.string "You must have developed a truly\n"
-	.string "formidable bond with your POKeMON.\p"
+	.string "formidable bond with your POKEMON.\p"
 	.string "So be it!\p"
 	.string "This time, I won't bluster or hold back.\n"
 	.string "This time, there's no fooling around.\p"
@@ -548,7 +548,7 @@ BattleFrontier_BattlePalaceBattleRoom_Text_SpenserThisTimeWontHoldBack:
 	.string "Prepare to lose!$"
 
 BattleFrontier_BattlePalaceBattleRoom_Text_Kaaah:
-	.string "… … …Kaaah!$"
+	.string "... ... ...Kaaah!$"
 
 BattleFrontier_BattlePalaceBattleRoom_Text_SpenserYourTeamIsAdmirable:
 	.string "SPENSER: Well, that was some display!\n"
@@ -560,7 +560,7 @@ BattleFrontier_BattlePalaceBattleRoom_Text_SpenserYourTeamIsAdmirable:
 
 BattleFrontier_BattlePalaceBattleRoom_Text_HurryWithFrontierPass:
 	.string "My, my, if only you could maintain\n"
-	.string "a certain level of decorum…\p"
+	.string "a certain level of decorum...\p"
 	.string "Gaaah, here!\n"
 	.string "Hurry with that FRONTIER PASS, you!$"
 

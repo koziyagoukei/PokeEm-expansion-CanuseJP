@@ -214,9 +214,9 @@ PewterCity_Museum_1F_Text_DoYouKnowWhatAmberIs::
 
 PewterCity_Museum_1F_Text_AmberContainsGeneticMatter::
 	.string "AMBER contains the genetic matter\n"
-	.string "of ancient POKeMON.\p"
+	.string "of ancient POKEMON.\p"
 	.string "There's a LAB somewhere trying to\n"
-	.string "resurrect POKeMON from AMBER.$"
+	.string "resurrect POKEMON from AMBER.$"
 
 PewterCity_Museum_1F_Text_AmberIsFossilizedSap::
 	.string "AMBER is actually sap, that gooey\n"
@@ -226,7 +226,7 @@ PewterCity_Museum_1F_Text_AmberIsFossilizedSap::
 
 @ Unused
 PewterCity_Museum_1F_Text_PleaseGoAround::
-	.string "あちらへ　おまわりください$"
+	.string "あちらへ おまわりください$"
 
 PewterCity_Museum_1F_Text_ShouldBeGratefulForLongLife::
 	.string "I should be grateful for my long\n"
@@ -238,15 +238,15 @@ PewterCity_Museum_1F_Text_WantYouToGetAmberExamined::
 	.string "Ssh! Listen, I need to share a\n"
 	.string "secret with someone.\p"
 	.string "I think that this chunk of AMBER\n"
-	.string "contains POKeMON DNA!\p"
+	.string "contains POKEMON DNA!\p"
 	.string "It would be a shattering scientific\n"
-	.string "breakthrough if POKeMON could be\l"
+	.string "breakthrough if POKEMON could be\l"
 	.string "resurrected from it.\p"
 	.string "But, my colleagues just ignore\n"
 	.string "what I have to say.\p"
 	.string "So, I have a favor to ask!\p"
 	.string "I want you to get this examined at\n"
-	.string "a POKeMON LAB somewhere.$"
+	.string "a POKEMON LAB somewhere.$"
 
 PewterCity_Museum_1F_Text_ReceivedOldAmberFromMan::
 	.string "{PLAYER} received the OLD AMBER\n"
@@ -261,7 +261,7 @@ PewterCity_Museum_1F_Text_DontHaveSpaceForThis::
 
 PewterCity_Museum_1F_Text_WeHaveTwoFossilsOnExhibit::
 	.string "We have two fossils of rare,\n"
-	.string "prehistoric POKeMON on exhibit.$"
+	.string "prehistoric POKEMON on exhibit.$"
 
 PewterCity_Museum_1F_Text_BeautifulPieceOfAmber::
 	.string "There is a beautiful piece of\n"
@@ -269,9 +269,9 @@ PewterCity_Museum_1F_Text_BeautifulPieceOfAmber::
 
 PewterCity_Museum_1F_Text_AerodactylFossil::
 	.string "AERODACTYL Fossil\n"
-	.string "A primitive and rare POKeMON.$"
+	.string "A primitive and rare POKEMON.$"
 
 PewterCity_Museum_1F_Text_KabutopsFossil::
 	.string "KABUTOPS Fossil\n"
-	.string "A primitive and rare POKeMON.$"
+	.string "A primitive and rare POKEMON.$"
 

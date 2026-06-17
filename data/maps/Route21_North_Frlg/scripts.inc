@@ -10,7 +10,7 @@ Route21_North_Text_RonaldDefeat::
 
 Route21_North_Text_RonaldPostBattle::
 	.string "I can't catch anything good.\n"
-	.string "Not one good POKeMON to be had!$"
+	.string "Not one good POKEMON to be had!$"
 
 Route21_North_Text_WadeIntro::
 	.string "I got a big haul!\n"
@@ -40,8 +40,8 @@ Route21_North_Text_SpencerPostBattle::
 
 @ "What's wrong with me swimming?"
 Route21_North_Text_CueBallIntro::
-	.string "おれだって　たまには\n"
-	.string "およぎに　くるぜ!$"
+	.string "おれだって たまには\n"
+	.string "およぎに くるぜ!$"
 
 @ "Cheap shot!"
 Route21_North_Text_CueBallDefeat::
@@ -49,5 +49,5 @@ Route21_North_Text_CueBallDefeat::
 
 @ "I look like what? A studded inner tube? Get lost!"
 Route21_North_Text_CueBallPostBattle::
-	.string "うきやすそう　だと?\n"
-	.string "うるせー　おおきな　おせわだッ!$"
+	.string "うきやすそう だと?\n"
+	.string "うるせー おおきな おせわだッ!$"

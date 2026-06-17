@@ -247,15 +247,15 @@ Route118_Text_StevenQuestions:
 	.string "STEVEN: Hi, {PLAYER}{KUN}!\p"
 	.string "It's me, STEVEN!\n"
 	.string "We met in the cave near DEWFORD.\p"
-	.string "Have you met many kinds of POKeMON\n"
+	.string "Have you met many kinds of POKEMON\n"
 	.string "since I last saw you?\p"
-	.string "There are many, many kinds of POKeMON\n"
+	.string "There are many, many kinds of POKEMON\n"
 	.string "in this wide world of ours.\p"
 	.string "If you wanted to raise only your\n"
 	.string "favorites, that's fine.\p"
 	.string "Perhaps you find it more fun to raise\n"
-	.string "all sorts of POKeMON.\p"
-	.string "As a TRAINER of POKeMON,\n"
+	.string "all sorts of POKEMON.\p"
+	.string "As a TRAINER of POKEMON,\n"
 	.string "what do you think?\p"
 	.string "Of course, it's not any of my business.\p"
 	.string "It would be nice if we were to meet\n"
@@ -280,14 +280,14 @@ Route118_Text_DontYouLikeToFish:
 	.string "Don't you like to fish?$"
 
 Route118_Text_TryCatchingMonWithGoodRod:
-	.string "Try catching all sorts of POKeMON\n"
+	.string "Try catching all sorts of POKEMON\n"
 	.string "with your GOOD ROD.$"
 
 Route118_Text_CanCrossRiversWithSurf:
 	.string "Even if there isn't a boat, you can\n"
 	.string "cross rivers and the sea if you have\l"
-	.string "a POKeMON that knows SURF.\p"
-	.string "POKeMON can be counted on to do so\n"
+	.string "a POKEMON that knows SURF.\p"
+	.string "POKEMON can be counted on to do so\n"
 	.string "much!$"
 
 Route118_Text_RouteSignMauville:

@@ -26,7 +26,7 @@ Route10_Text_MarkDefeat::
 	.string "I'm not angry!$"
 
 Route10_Text_MarkPostBattle::
-	.string "I have more rare POKeMON at home!$"
+	.string "I have more rare POKEMON at home!$"
 
 Route10_Text_ClarkIntro::
 	.string "Ha-hahah-ah-ha!$"
@@ -43,20 +43,20 @@ Route10_Text_ClarkPostBattle::
 
 Route10_Text_HermanIntro::
 	.string "Hi, kid!\n"
-	.string "Want to see my POKeMON?$"
+	.string "Want to see my POKEMON?$"
 
 Route10_Text_HermanDefeat::
 	.string "Oh, no!\n"
-	.string "My POKeMON!$"
+	.string "My POKEMON!$"
 
 Route10_Text_HermanPostBattle::
 	.string "I don't like you.\n"
 	.string "I don't like anyone better than me!$"
 
 Route10_Text_HeidiIntro::
-	.string "I've been out at a POKeMON GYM\n"
+	.string "I've been out at a POKEMON GYM\n"
 	.string "a few times.\p"
-	.string "…But I always lose.$"
+	.string "...But I always lose.$"
 
 Route10_Text_HeidiDefeat::
 	.string "Ohh!\n"
@@ -87,9 +87,9 @@ Route10_Text_CarolDefeat::
 	.string "I wasn't up for it.$"
 
 Route10_Text_CarolPostBattle::
-	.string "The POKeMON here in the mountains\n"
-	.string "are so chunky…\p"
-	.string "I wish there were pink POKeMON\n"
+	.string "The POKEMON here in the mountains\n"
+	.string "are so chunky...\p"
+	.string "I wish there were pink POKEMON\n"
 	.string "with a floral pattern!$"
 
 Route10_Text_RockTunnelDetourToLavender::

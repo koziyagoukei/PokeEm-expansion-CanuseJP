@@ -48,8 +48,8 @@ FiveIsland_ResortGorgeous_Text_DaisyIntro::
 	.string "my victory!$"
 
 FiveIsland_ResortGorgeous_Text_DaisyDefeat::
-	.string "The shame of this…\n"
-	.string "I'm red-faced…$"
+	.string "The shame of this...\n"
+	.string "I'm red-faced...$"
 
 FiveIsland_ResortGorgeous_Text_DaisyPostBattle::
 	.string "Uh-oh, my paint tubes have\n"
@@ -61,24 +61,24 @@ FiveIsland_ResortGorgeous_Text_CelinaIntro::
 	.string "Please keep out of my sight!$"
 
 FiveIsland_ResortGorgeous_Text_CelinaDefeat::
-	.string "This loss…\n"
-	.string "I feel like I'm whiting out…$"
+	.string "This loss...\n"
+	.string "I feel like I'm whiting out...$"
 
 FiveIsland_ResortGorgeous_Text_CelinaPostBattle::
 	.string "GILLIAN?\n"
-	.string "Please tilt your head slightly…\l"
+	.string "Please tilt your head slightly...\l"
 	.string "There! That's the look I want!$"
 
 FiveIsland_ResortGorgeous_Text_RaynaIntro::
-	.string "Hmm…\n"
-	.string "The angle, it is not quite there…$"
+	.string "Hmm...\n"
+	.string "The angle, it is not quite there...$"
 
 FiveIsland_ResortGorgeous_Text_RaynaDefeat::
-	.string "Oh…\n"
-	.string "My feelings, they are blue…$"
+	.string "Oh...\n"
+	.string "My feelings, they are blue...$"
 
 FiveIsland_ResortGorgeous_Text_RaynaPostBattle::
-	.string "The sky and the sea…\n"
+	.string "The sky and the sea...\n"
 	.string "They are so fickle.\p"
 	.string "Their changing expressions make\n"
 	.string "them difficult to capture.$"
@@ -96,7 +96,7 @@ FiveIsland_ResortGorgeous_Text_JackiPostBattle::
 
 FiveIsland_ResortGorgeous_Text_GillianIntro::
 	.string "I'm thinking of having a pool\n"
-	.string "made specially for POKeMON.$"
+	.string "made specially for POKEMON.$"
 
 FiveIsland_ResortGorgeous_Text_GillianDefeat::
 	.string "Oh, my goodness gracious!$"
@@ -126,7 +126,7 @@ FiveIsland_ResortGorgeous_Text_TobyDefeat::
 	.string "You must be joking.$"
 
 FiveIsland_ResortGorgeous_Text_TobyPostBattle::
-	.string "Getting so serious over this…\n"
+	.string "Getting so serious over this...\n"
 	.string "How nonsensical.$"
 
 FiveIsland_ResortGorgeous_Text_SelphyThanksYouMayGoNow::

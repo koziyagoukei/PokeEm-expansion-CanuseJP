@@ -41,7 +41,7 @@ ThreeIsland_PokemonCenter_1F_Text_ImpossibleToSurfBetweenIslands::
 
 ThreeIsland_PokemonCenter_1F_Text_AlwaysBerriesInBerryForest::
 	.string "Let's crush BERRIES!\n"
-	.string "…That'd be wasting BERRIES?\p"
+	.string "...That'd be wasting BERRIES?\p"
 	.string "You can always find some BERRIES\n"
 	.string "on the ground in BERRY FOREST.$"
 

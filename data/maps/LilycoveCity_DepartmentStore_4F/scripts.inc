@@ -50,11 +50,11 @@ LilycoveCity_DepartmentStore_4F_Pokemart_DefenseTMs:
 	pokemartlistend
 
 LilycoveCity_DepartmentStore_4F_Text_AttackOrDefenseTM:
-	.string "Hmm…\p"
-	.string "An attacking move…\n"
-	.string "Or a defensive move…\p"
+	.string "Hmm...\p"
+	.string "An attacking move...\n"
+	.string "Or a defensive move...\p"
 	.string "It's no easy matter to decide which TM\n"
-	.string "moves should be taught to POKeMON…$"
+	.string "moves should be taught to POKEMON...$"
 
 LilycoveCity_DepartmentStore_4F_Text_FiftyDifferentTMs:
 	.string "There are so many different kinds of\n"
@@ -64,5 +64,5 @@ LilycoveCity_DepartmentStore_4F_Text_FiftyDifferentTMs:
 
 LilycoveCity_DepartmentStore_4F_Text_PokemonOnlyHaveFourMoves:
 	.string "I'd like to get all the different TMs,\n"
-	.string "but a POKeMON learns only four moves.$"
+	.string "but a POKEMON learns only four moves.$"
 

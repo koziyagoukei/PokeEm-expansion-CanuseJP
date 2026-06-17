@@ -66,18 +66,18 @@ FiveIsland_WaterLabyrinth_EventScript_ReturnForEgg::
 FiveIsland_WaterLabyrinth_Text_LetMeTakeLookAtMons::
 	.string "You travel all over the place,\n"
 	.string "don't you?\p"
-	.string "You're not driving your POKeMON\n"
+	.string "You're not driving your POKEMON\n"
 	.string "too harshly, are you?\p"
 	.string "Let me take a look.\n"
-	.string "… … …   … … …$"
+	.string "... ... ...   ... ... ...$"
 
 FiveIsland_WaterLabyrinth_Text_HmmISeeIsee::
-	.string "Ah, hmm…\n"
-	.string "I see, I see…$"
+	.string "Ah, hmm...\n"
+	.string "I see, I see...$"
 
 FiveIsland_WaterLabyrinth_Text_TreatMonRightHaveThis::
 	.string "Oh, impressive.\n"
-	.string "You treat your POKeMON right.\p"
+	.string "You treat your POKEMON right.\p"
 	.string "I think you can be entrusted with\n"
 	.string "this.\p"
 	.string "Please, I'd like you to have this.$"
@@ -87,7 +87,7 @@ FiveIsland_WaterLabyrinth_Text_ReceivedEggFromMan::
 	.string "from the man!$"
 
 FiveIsland_WaterLabyrinth_Text_DontHaveSpaceInYourParty::
-	.string "…Unfortunately, you don't have\n"
+	.string "...Unfortunately, you don't have\n"
 	.string "space for this in your party.\p"
 	.string "You'd better come back for it\n"
 	.string "another time.$"
@@ -95,8 +95,8 @@ FiveIsland_WaterLabyrinth_Text_DontHaveSpaceInYourParty::
 @ Unused
 FiveIsland_WaterLabyrinth_Text_YouveComeBackForTheEgg::
 	.string "やあ\n"
-	.string "タマゴを　もらいに\l"
-	.string "きて　くれたんだね$"
+	.string "タマゴを もらいに\l"
+	.string "きて くれたんだね$"
 
 FiveIsland_WaterLabyrinth_Text_GladIMetSomeoneLikeYou::
 	.string "I received that EGG while I was\n"
@@ -108,17 +108,17 @@ FiveIsland_WaterLabyrinth_Text_CuteMonRemindsMeOfDaisy::
 	.string "That's a cute {STR_VAR_2}.\p"
 	.string "Seeing it reminds me of a sweet \n"
 	.string "little girl I met while traveling.\p"
-	.string "She was gently grooming POKeMON…\n"
+	.string "She was gently grooming POKEMON...\n"
 	.string "She was a little angel.\p"
-	.string "That little girl's name…\n"
+	.string "That little girl's name...\n"
 	.string "I think it was DAISY.$"
 
 FiveIsland_WaterLabyrinth_Text_AlizeIntro::
 	.string "This is an excellent environment\n"
-	.string "for raising POKeMON.$"
+	.string "for raising POKEMON.$"
 
 FiveIsland_WaterLabyrinth_Text_AlizeDefeat::
-	.string "Your POKeMON are growing up\n"
+	.string "Your POKEMON are growing up\n"
 	.string "admirably well!$"
 
 FiveIsland_WaterLabyrinth_Text_AlizePostBattle::

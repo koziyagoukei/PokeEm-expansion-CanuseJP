@@ -125,15 +125,15 @@ Route12_FishingHouse_Text_IfYouCatchBigMagikarpShowMe::
 	.string "love seeing gigantic MAGIKARP.$"
 
 Route12_FishingHouse_Text_OhThatsDisappointing::
-	.string "Oh…\n"
-	.string "That's so disappointing…$"
+	.string "Oh...\n"
+	.string "That's so disappointing...$"
 
 Route12_FishingHouse_Text_TryFishingBringMeMagikarp::
 	.string "Hello there, {PLAYER}!\n"
 	.string "Have you been fishing?\p"
 	.string "Try fishing with the SUPER ROD in\n"
 	.string "any body of water.\p"
-	.string "You'll find different POKeMON in\n"
+	.string "You'll find different POKEMON in\n"
 	.string "different places.\p"
 	.string "Oh, and don't forget to bring me\n"
 	.string "gigantic MAGIKARP.$"
@@ -144,7 +144,7 @@ Route12_FishingHouse_Text_OhMagikarpAllowMeToSee::
 	.string "Allow me to see it, quick!$"
 
 Route12_FishingHouse_Text_WhoaXInchesTakeThis::
-	.string "… … …Whoa!\n"
+	.string "... ... ...Whoa!\n"
 	.string "{STR_VAR_2} inches!\p"
 	.string "You have a rare appreciation for\n"
 	.string "the fine, poetic aspects of fishing!\p"
@@ -162,13 +162,13 @@ Route12_FishingHouse_Text_HuhXInchesSameSizeAsLast::
 	.string "I saw before.$"
 
 Route12_FishingHouse_Text_HmmXInchesDoesntMeasureUp::
-	.string "Hmm…\n"
+	.string "Hmm...\n"
 	.string "This one is {STR_VAR_2} inches long.\p"
 	.string "It doesn't measure up to the\n"
 	.string "{STR_VAR_3}-inch one you brought before.$"
 
 Route12_FishingHouse_Text_DoesntLookLikeMagikarp::
-	.string "Uh… That doesn't look much like\n"
+	.string "Uh... That doesn't look much like\n"
 	.string "a MAGIKARP.$"
 
 Route12_FishingHouse_Text_NoRoomForGift::
@@ -178,7 +178,7 @@ Route12_FishingHouse_Text_NoRoomForGift::
 
 Route12_FishingHouse_Text_MostGiganticMagikarpXInches::
 	.string "The most gigantic MAGIKARP\n"
-	.string "I have ever witnessed…\p"
+	.string "I have ever witnessed...\p"
 	.string "{STR_VAR_3} inches!$"
 
 Route12_FishingHouse_Text_BlankChartOfSomeSort::

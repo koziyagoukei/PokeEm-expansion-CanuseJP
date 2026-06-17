@@ -73,12 +73,12 @@ Text_DoubleEdgeDeclined::
 	.string "anytime.$"
 
 Text_DoubleEdgeWhichMon::
-	.string "Which POKeMON should I teach\n"
+	.string "Which POKEMON should I teach\n"
 	.string "DOUBLE-EDGE?$"
 
 Text_DoubleEdgeTaught::
 	.string "Keep that drive going for the\n"
-	.string "POKeMON LEAGUE!\p"
+	.string "POKEMON LEAGUE!\p"
 	.string "Take a run at them and knock 'em\n"
 	.string "out!$"
 
@@ -113,7 +113,7 @@ VictoryRoad_3F_Text_CarolineDefeat::
 
 VictoryRoad_3F_Text_CarolinePostBattle::
 	.string "You showed me just how good\n"
-	.string "I was…$"
+	.string "I was...$"
 
 VictoryRoad_3F_Text_ColbyIntro::
 	.string "Only the chosen can pass here!$"
@@ -123,7 +123,7 @@ VictoryRoad_3F_Text_ColbyDefeat::
 
 VictoryRoad_3F_Text_ColbyPostBattle::
 	.string "All TRAINERS here are headed to\n"
-	.string "the POKeMON LEAGUE.\p"
+	.string "the POKEMON LEAGUE.\p"
 	.string "Don't let down your guard.$"
 
 VictoryRoad_3F_Text_RayIntro::
@@ -136,12 +136,12 @@ VictoryRoad_3F_Text_RayDefeat::
 
 VictoryRoad_3F_Text_RayPostBattle::
 	.string "RAY: You've beaten us.\n"
-	.string "Greatness remains elusive…$"
+	.string "Greatness remains elusive...$"
 
 VictoryRoad_3F_Text_RayNotEnoughMons::
 	.string "RAY: Together, the two of us are\n"
 	.string "striving for the pinnacle.\p"
-	.string "We need you to bring two POKeMON\n"
+	.string "We need you to bring two POKEMON\n"
 	.string "into battle with us.$"
 
 VictoryRoad_3F_Text_TyraIntro::
@@ -149,7 +149,7 @@ VictoryRoad_3F_Text_TyraIntro::
 	.string "champions together.$"
 
 VictoryRoad_3F_Text_TyraDefeat::
-	.string "TYRA: Oh, but…$"
+	.string "TYRA: Oh, but...$"
 
 VictoryRoad_3F_Text_TyraPostBattle::
 	.string "TYRA: You've taught me that power\n"
@@ -157,5 +157,5 @@ VictoryRoad_3F_Text_TyraPostBattle::
 
 VictoryRoad_3F_Text_TyraNotEnoughMons::
 	.string "TYRA: You can't battle with us if\n"
-	.string "you have only one POKeMON.$"
+	.string "you have only one POKEMON.$"
 

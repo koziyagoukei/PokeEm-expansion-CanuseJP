@@ -25,7 +25,7 @@ SaffronCity_MrPsychicsHouse_EventScript_AlreadyGotTM29::
 	end
 
 SaffronCity_MrPsychicsHouse_Text_YouWantedThis::
-	.string "…Wait! Don't say a word!\p"
+	.string "...Wait! Don't say a word!\p"
 	.string "You wanted this!$"
 
 SaffronCity_MrPsychicsHouse_Text_ReceivedTM29FromMrPsychic::

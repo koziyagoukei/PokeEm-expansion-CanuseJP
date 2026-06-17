@@ -71,7 +71,7 @@ RocketHideout_B1F_Text_Grunt1Defeat::
 	.string "Beaten!$"
 
 RocketHideout_B1F_Text_Grunt1PostBattle::
-	.string "Blast it… You're dissing TEAM\n"
+	.string "Blast it... You're dissing TEAM\n"
 	.string "ROCKET, aren't you?$"
 
 RocketHideout_B1F_Text_Grunt2Intro::
@@ -102,14 +102,14 @@ RocketHideout_B1F_Text_Grunt4Defeat::
 	.string "This won't do!$"
 
 RocketHideout_B1F_Text_Grunt4PostBattle::
-	.string "Okay, I'll talk…\n"
+	.string "Okay, I'll talk...\n"
 	.string "Take the elevator to see my BOSS.$"
 
 RocketHideout_B1F_Text_Grunt5Intro::
 	.string "Are you lost, you little mouse?$"
 
 RocketHideout_B1F_Text_Grunt5Defeat::
-	.string "Why…?$"
+	.string "Why...?$"
 
 RocketHideout_B1F_Text_Grunt5PostBattle::
 	.string "Uh-oh, that ruckus somehow opened\n"

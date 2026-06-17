@@ -27,9 +27,9 @@ CeruleanCity_House2_Text_RocketsStoleTMForDig::
 	.string "Look what they've done to my\n"
 	.string "house!\p"
 	.string "They stole a TM for teaching\n"
-	.string "POKeMON how to DIG holes!\p"
+	.string "POKEMON how to DIG holes!\p"
 	.string "I was going to use it on a\n"
-	.string "MANKEY or a SANDSHREW…\p"
+	.string "MANKEY or a SANDSHREW...\p"
 	.string "That cost me a bundle, it did!$"
 
 CeruleanCity_House2_Text_TeachDiglettDigWithoutTM::

@@ -52,21 +52,21 @@ FiveIsland_Meadow_EventScript_Rocket3::
 
 @ Unused
 FiveIsland_Meadow_Text_DoorNeedsTwoPasswords::
-	.string "とびらを　あけるには\n"
-	.string "パスワードが　2つ　いるようだ$"
+	.string "とびらを あけるには\n"
+	.string "パスワードが 2つ いるようだ$"
 
 FiveIsland_Meadow_Text_EnteredPasswordAnotherNeeded::
 	.string "{PLAYER} entered a password.\p"
-	.string "“GOLDEEN need log.”\p"
-	.string "… …  … …  … …\p"
+	.string ""GOLDEEN need log."\p"
+	.string "... ...  ... ...  ... ...\p"
 	.string "Another password is needed to\n"
-	.string "open the door…$"
+	.string "open the door...$"
 
 FiveIsland_Meadow_Text_EnteredPasswordDoorOpened::
 	.string "{PLAYER} entered two passwords.\p"
-	.string "“GOLDEEN need log.”\n"
-	.string "“Yes, nah, CHANSEY.”\p"
-	.string "… …  … …  … …\p"
+	.string ""GOLDEEN need log."\n"
+	.string ""Yes, nah, CHANSEY."\p"
+	.string "... ...  ... ...  ... ...\p"
 	.string "The WAREHOUSE's door opened!$"
 
 FiveIsland_Meadow_Text_WarehouseDoorAlreadyOpen::
@@ -90,7 +90,7 @@ FiveIsland_Meadow_Text_Rocket2Intro::
 	.string "So what brings you here?$"
 
 FiveIsland_Meadow_Text_Rocket2Defeat::
-	.string "That wasn't supposed to happen…$"
+	.string "That wasn't supposed to happen...$"
 
 FiveIsland_Meadow_Text_Rocket2PostBattle::
 	.string "You're wanting to know what's inside\n"

@@ -35,7 +35,7 @@ FourIsland_Mart_Text_LoreleiGrewUpOnThisIsland::
 	.string "I bet even you'd know her.\n"
 	.string "It's LORELEI of the ELITE FOUR!\p"
 	.string "When LORELEI was just a tyke,\n"
-	.string "I taught her about POKeMON.$"
+	.string "I taught her about POKEMON.$"
 
 FourIsland_Mart_Text_IcefallCaveIsFrigid::
 	.string "The SEVII ISLANDS are in a warm\n"
@@ -43,5 +43,5 @@ FourIsland_Mart_Text_IcefallCaveIsFrigid::
 	.string "But there is one exception you\n"
 	.string "need to know about.\p"
 	.string "The ICEFALL CAVE is frigid because\n"
-	.string "of the POKeMON that live in it.$"
+	.string "of the POKEMON that live in it.$"
 

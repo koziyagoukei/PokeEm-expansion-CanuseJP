@@ -60,7 +60,7 @@ RockTunnel_1F_Text_LennyPostBattle::
 
 RockTunnel_1F_Text_OliverIntro::
 	.string "Hmm.\n"
-	.string "Maybe I'm lost in here…$"
+	.string "Maybe I'm lost in here...$"
 
 RockTunnel_1F_Text_OliverDefeat::
 	.string "Ease up!\n"
@@ -68,7 +68,7 @@ RockTunnel_1F_Text_OliverDefeat::
 	.string "Which way is out?$"
 
 RockTunnel_1F_Text_OliverPostBattle::
-	.string "That sleeping POKeMON on ROUTE 12\n"
+	.string "That sleeping POKEMON on ROUTE 12\n"
 	.string "forced me to take this detour.$"
 
 RockTunnel_1F_Text_LucasIntro::
@@ -82,7 +82,7 @@ RockTunnel_1F_Text_LucasPostBattle::
 	.string "You're talented enough to hike!$"
 
 RockTunnel_1F_Text_AshtonIntro::
-	.string "POKeMON fight!\n"
+	.string "POKEMON fight!\n"
 	.string "Ready, go!$"
 
 RockTunnel_1F_Text_AshtonDefeat::
@@ -97,24 +97,24 @@ RockTunnel_1F_Text_LeahIntro::
 	.string "dark!$"
 
 RockTunnel_1F_Text_LeahDefeat::
-	.string "It was too dark…$"
+	.string "It was too dark...$"
 
 RockTunnel_1F_Text_LeahPostBattle::
 	.string "I saw a MACHOP in this tunnel.$"
 
 RockTunnel_1F_Text_DanaIntro::
 	.string "I came this far looking for wild\n"
-	.string "POKeMON.$"
+	.string "POKEMON.$"
 
 RockTunnel_1F_Text_DanaDefeat::
-	.string "I'm out of POKeMON!$"
+	.string "I'm out of POKEMON!$"
 
 RockTunnel_1F_Text_DanaPostBattle::
 	.string "You looked cute and harmless.\n"
 	.string "Was I ever wrong!$"
 
 RockTunnel_1F_Text_ArianaIntro::
-	.string "You have POKeMON!\n"
+	.string "You have POKEMON!\n"
 	.string "Let's start!$"
 
 RockTunnel_1F_Text_ArianaDefeat::

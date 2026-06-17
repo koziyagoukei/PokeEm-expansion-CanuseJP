@@ -270,7 +270,7 @@ PlayersHouse_2F_EventScript_GameCube::
 	end
 
 PlayersHouse_2F_Text_ClockIsStopped:
-	.string "The clock is stopped…\p"
+	.string "The clock is stopped...\p"
 	.string "Better set it and start it!$"
 
 PlayersHouse_2F_Text_HowDoYouLikeYourRoom:
@@ -279,7 +279,7 @@ PlayersHouse_2F_Text_HowDoYouLikeYourRoom:
 	.string "Good! Everything's put away neatly!\p"
 	.string "They finished moving everything in\n"
 	.string "downstairs, too.\p"
-	.string "POKeMON movers are so convenient!\p"
+	.string "POKEMON movers are so convenient!\p"
 	.string "Oh, you should make sure that\n"
 	.string "everything's all there on your desk.$"
 
@@ -289,7 +289,7 @@ PlayersHouse_2F_Text_Notebook:
 	.string "Open the MENU with START.\p"
 	.string "ADVENTURE RULE NO. 2\n"
 	.string "Record your progress with SAVE.\p"
-	.string "The remaining pages are blank…$"
+	.string "The remaining pages are blank...$"
 
 Common_Text_LookCloserAtMap:
 	.string "{PLAYER} took a closer look at the\n"

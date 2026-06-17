@@ -30,8 +30,8 @@ Route110_TrickHousePuzzle8_EventScript_Leroy::
 Route110_TrickHousePuzzle8_Text_WroteSecretCodeLockOpened::
 	.string "{PLAYER} wrote down the secret code\n"
 	.string "on the door.\p"
-	.string "“TRICK MASTER I love.”\n"
-	.string "… … … … … … … …\p"
+	.string ""TRICK MASTER I love."\n"
+	.string "... ... ... ... ... ... ... ...\p"
 	.string "The lock clicked open!$"
 
 Route110_TrickHousePuzzle8_Text_VincentIntro:
@@ -39,10 +39,10 @@ Route110_TrickHousePuzzle8_Text_VincentIntro:
 	.string "this far.$"
 
 Route110_TrickHousePuzzle8_Text_VincentDefeat:
-	.string "That must mean you're tough, too…$"
+	.string "That must mean you're tough, too...$"
 
 Route110_TrickHousePuzzle8_Text_VincentPostBattle:
-	.string "You've beaten the POKeMON LEAGUE\n"
+	.string "You've beaten the POKEMON LEAGUE\n"
 	.string "CHAMPION? That's too much!$"
 
 Route110_TrickHousePuzzle8_Text_KeiraIntro:
@@ -62,7 +62,7 @@ Route110_TrickHousePuzzle8_Text_LeroyIntro:
 	.string "HOUSE challenge, too.$"
 
 Route110_TrickHousePuzzle8_Text_LeroyDefeat:
-	.string "I see…\n"
+	.string "I see...\n"
 	.string "You possess an extraordinary style.$"
 
 Route110_TrickHousePuzzle8_Text_LeroyPostBattle:

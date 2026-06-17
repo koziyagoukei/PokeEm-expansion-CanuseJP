@@ -16,7 +16,7 @@ Route3_Text_GregRematchIntro::
 	.string "Let's get with it right away!$"
 
 Route3_Text_SallyRematchIntro::
-	.string "That look you give me…\n"
+	.string "That look you give me...\n"
 	.string "It intrigues me so!$"
 
 Route3_Text_CalvinRematchIntro::
@@ -24,7 +24,7 @@ Route3_Text_CalvinRematchIntro::
 	.string "You're still not wearing shorts!$"
 
 Route3_Text_JamesRematchIntro::
-	.string "I'll battle you with the POKeMON\n"
+	.string "I'll battle you with the POKEMON\n"
 	.string "I started raising.$"
 
 Route3_Text_RobinRematchIntro::
@@ -32,7 +32,7 @@ Route3_Text_RobinRematchIntro::
 	.string "Did you push me?$"
 
 Route4_Text_CrissyRematchIntro::
-	.string "I always catch mushroom POKeMON\n"
+	.string "I always catch mushroom POKEMON\n"
 	.string "on MT. MOON.$"
 
 Route6_Text_RickyRematchIntro::
@@ -47,7 +47,7 @@ Route6_Text_NancyRematchIntro::
 
 Route6_Text_KeigoRematchIntro::
 	.string "I'm trying to find something good\n"
-	.string "that's not a BUG POKeMON, but…$"
+	.string "that's not a BUG POKEMON, but...$"
 
 Route6_Text_JeffRematchIntro::
 	.string "Huh?\n"
@@ -62,7 +62,7 @@ Route6_Text_ElijahRematchIntro::
 	.string "Have you gotten better?$"
 
 Route8_Text_AidanRematchIntro::
-	.string "You are good at POKeMON, but how\n"
+	.string "You are good at POKEMON, but how\n"
 	.string "is your chemistry grade?$"
 
 Route8_Text_StanRematchIntro::
@@ -76,11 +76,11 @@ Route8_Text_GlennRematchIntro::
 
 Route8_Text_PaigeRematchIntro::
 	.string "I've collected many NIDORAN.\n"
-	.string "I don't want them to evolve, but…$"
+	.string "I don't want them to evolve, but...$"
 
 Route8_Text_LeslieRematchIntro::
 	.string "School is fun, but I still think\n"
-	.string "POKeMON are fun, too.$"
+	.string "POKEMON are fun, too.$"
 
 Route8_Text_AndreaRematchIntro::
 	.string "MEOWTH and PERSIAN are so cute,\n"
@@ -96,7 +96,7 @@ Route8_Text_RichRematchIntro::
 
 Route8_Text_JuliaRematchIntro::
 	.string "What's a cute, round, and fluffy\n"
-	.string "POKeMON?\p"
+	.string "POKEMON?\p"
 	.string "You already know, don't you?$"
 
 Route8_Text_RicardoRematchIntro::
@@ -119,13 +119,13 @@ Route9_Text_AliciaRematchIntro::
 
 Route9_Text_ChrisRematchIntro::
 	.string "I haven't forgotten you were with\n"
-	.string "those good-looking POKeMON.$"
+	.string "those good-looking POKEMON.$"
 
 Route9_Text_DrewRematchIntro::
 	.string "I'm taking ROCK TUNNEL to go to\n"
-	.string "LAVENDER…\p"
+	.string "LAVENDER...\p"
 	.string "But I keep getting stopped by\n"
-	.string "everyone along the way…$"
+	.string "everyone along the way...$"
 
 Route9_Text_CaitlinRematchIntro::
 	.string "Don't you dare patronize me today!\n"
@@ -141,14 +141,14 @@ Route9_Text_BriceRematchIntro::
 
 Route9_Text_BrentRematchIntro::
 	.string "I got up early every day to train\n"
-	.string "my POKeMON from cocoons!$"
+	.string "my POKEMON from cocoons!$"
 
 Route9_Text_AlanRematchIntro::
 	.string "Hahahaha!\n"
 	.string "I'll win this time!$"
 
 Route9_Text_ConnerRematchIntro::
-	.string "Go win, my super BUG POKeMON!$"
+	.string "Go win, my super BUG POKEMON!$"
 
 Route10_Text_MarkRematchIntro::
 	.string "Wow, you came here again?\n"
@@ -161,11 +161,11 @@ Route10_Text_ClarkRematchIntro::
 
 Route10_Text_HermanRematchIntro::
 	.string "Hi, kid!\n"
-	.string "Did I show you my POKeMON?$"
+	.string "Did I show you my POKEMON?$"
 
 Route10_Text_HeidiRematchIntro::
-	.string "I went out to a POKeMON GYM again.\p"
-	.string "…But I lost as usual.$"
+	.string "I went out to a POKEMON GYM again.\p"
+	.string "...But I lost as usual.$"
 
 Route10_Text_TrentRematchIntro::
 	.string "Ah!\n"
@@ -174,7 +174,7 @@ Route10_Text_TrentRematchIntro::
 
 Route10_Text_CarolRematchIntro::
 	.string "My head is starting to spin.\n"
-	.string "I've been hiking for too long…$"
+	.string "I've been hiking for too long...$"
 
 Route11_Text_HugoRematchIntro::
 	.string "Win, lose, or draw!\n"
@@ -200,13 +200,13 @@ Route11_Text_DillonRematchIntro::
 Route11_Text_DirkRematchIntro::
 	.string "Fwahaha!\n"
 	.string "I have never lost!\p"
-	.string "…And if I did, I've forgotten all\n"
+	.string "...And if I did, I've forgotten all\n"
 	.string "about it!$"
 
 Route11_Text_DarianRematchIntro::
-	.string "I have never won before…\p"
+	.string "I have never won before...\p"
 	.string "Perhaps I am destined to remain\n"
-	.string "that way…$"
+	.string "that way...$"
 
 Route11_Text_YasuRematchIntro::
 	.string "I'm the best in my class.\n"
@@ -216,7 +216,7 @@ Route11_Text_BernieRematchIntro::
 	.string "Keep your eyes out for live wires!$"
 
 Route11_Text_DaveRematchIntro::
-	.string "I raised my POKeMON carefully.\n"
+	.string "I raised my POKEMON carefully.\n"
 	.string "They should be ready by now.\l"
 	.string "This time, they should win, too.$"
 
@@ -230,23 +230,23 @@ Route12_Text_ChipRematchIntro::
 	.string "Fishing is a waiting game.$"
 
 Route12_Text_JustinRematchIntro::
-	.string "Still can't find a MOON STONE…\n"
+	.string "Still can't find a MOON STONE...\n"
 	.string "Have you found one?$"
 
 Route12_Text_LucaRematchIntro::
 	.string "Electricity has always been my\n"
 	.string "specialty.\p"
-	.string "I don't know a thing about POKeMON\n"
+	.string "I don't know a thing about POKEMON\n"
 	.string "of the sea, though.$"
 
 Route12_Text_HankRematchIntro::
-	.string "The FISHING FOOL vs. POKeMON KID!\n"
+	.string "The FISHING FOOL vs. POKEMON KID!\n"
 	.string "Another round, fight!$"
 
 Route12_Text_ElliotRematchIntro::
 	.string "I love fishing, don't get me wrong.\n"
-	.string "But, I wish I had more work…\l"
-	.string "…It's hard to give up fishing!$"
+	.string "But, I wish I had more work...\l"
+	.string "...It's hard to give up fishing!$"
 
 Route12_Text_AndrewRematchIntro::
 	.string "What's catching?\p"
@@ -258,12 +258,12 @@ Route12_Text_JesRematchIntro::
 	.string "propose to my GIA.$"
 
 Route12_Text_GiaRematchIntro::
-	.string "GIA: Hey, JES…\n"
+	.string "GIA: Hey, JES...\n"
 	.string "I've been waiting a long time now.\p"
 	.string "If we win today, I'll marry you!$"
 
 Route13_Text_SebastianRematchIntro::
-	.string "My bird POKeMON remember you!$"
+	.string "My bird POKEMON remember you!$"
 
 Route13_Text_SusieRematchIntro::
 	.string "I want to be the best TRAINER \n"
@@ -274,7 +274,7 @@ Route13_Text_ValerieRematchIntro::
 	.string "You got more cool BADGES!$"
 
 Route13_Text_GwenRematchIntro::
-	.string "My cutely grown POKeMON wish to\n"
+	.string "My cutely grown POKEMON wish to\n"
 	.string "become reacquainted with you.$"
 
 Route13_Text_AlmaRematchIntro::
@@ -298,29 +298,29 @@ Route13_Text_JaredRematchIntro::
 	.string "What're you starin' at?$"
 
 Route13_Text_RobertRematchIntro::
-	.string "I always go with bird POKeMON.\n"
+	.string "I always go with bird POKEMON.\n"
 	.string "I've dedicated myself to them.$"
 
 Route14_Text_CarterRematchIntro::
 	.string "I used TMs to teach good moves\n"
-	.string "to my POKeMON.$"
+	.string "to my POKEMON.$"
 
 Route14_Text_MitchRematchIntro::
-	.string "My bird POKeMON should be ready\n"
+	.string "My bird POKEMON should be ready\n"
 	.string "for battle this time.$"
 
 Route14_Text_BeckRematchIntro::
-	.string "Are you using TMs on POKeMON?\n"
+	.string "Are you using TMs on POKEMON?\n"
 	.string "Just holding them is useless.$"
 
 Route14_Text_MarlonRematchIntro::
-	.string "Have you taught your bird POKeMON\n"
+	.string "Have you taught your bird POKEMON\n"
 	.string "how to FLY?\p"
 	.string "You'll be able to soar with it into\n"
 	.string "the sky! Give it a try.$"
 
 Route14_Text_DonaldRematchIntro::
-	.string "The legend of the winged mirages…\n"
+	.string "The legend of the winged mirages...\n"
 	.string "You've heard it, right?$"
 
 Route14_Text_BennyRematchIntro::
@@ -342,7 +342,7 @@ Route14_Text_GeraldRematchIntro::
 	.string "the wide-open spaces.$"
 
 Route14_Text_MalikRematchIntro::
-	.string "POKeMON battle, right?\n"
+	.string "POKEMON battle, right?\n"
 	.string "Cool! Rumble!$"
 
 Route14_Text_KiriRematchIntro::
@@ -354,7 +354,7 @@ Route14_Text_JanRematchIntro::
 
 Route15_Text_KindraRematchIntro::
 	.string "I'm going to keep battling with the\n"
-	.string "POKeMON I got in trades.$"
+	.string "POKEMON I got in trades.$"
 
 Route15_Text_BeckyRematchIntro::
 	.string "You look gentle, so I think I can\n"
@@ -362,21 +362,21 @@ Route15_Text_BeckyRematchIntro::
 	.string "I'll give it one more go!$"
 
 Route15_Text_EdwinRematchIntro::
-	.string "When I whistle, bird POKeMON\n"
+	.string "When I whistle, bird POKEMON\n"
 	.string "gather around.\p"
 	.string "They're amazingly cute!$"
 
 Route15_Text_ChesterRematchIntro::
 	.string "Hmm? My birds are shivering!\n"
-	.string "Wait, aren't you that TRAINER…$"
+	.string "Wait, aren't you that TRAINER...$"
 
 Route15_Text_GraceRematchIntro::
 	.string "Oh, you're a little cutie!\n"
-	.string "So like a darling POKeMON!\l"
+	.string "So like a darling POKEMON!\l"
 	.string "I remember you now!$"
 
 Route15_Text_OliviaRematchIntro::
-	.string "I raise POKeMON for protection\n"
+	.string "I raise POKEMON for protection\n"
 	.string "because I live alone.\p"
 	.string "That hasn't changed.$"
 
@@ -390,10 +390,10 @@ Route15_Text_AlexRematchIntro::
 
 Route15_Text_CeliaRematchIntro::
 	.string "What's cool and happening?\n"
-	.string "Trading POKeMON, of course.$"
+	.string "Trading POKEMON, of course.$"
 
 Route15_Text_YazminRematchIntro::
-	.string "Want to play with my POKeMON\n"
+	.string "Want to play with my POKEMON\n"
 	.string "again?$"
 
 Route15_Text_MyaRematchIntro::
@@ -404,7 +404,7 @@ Route15_Text_MyaRematchIntro::
 
 Route15_Text_RonRematchIntro::
 	.string "RON: My sister's gotten more\n"
-	.string "powerful…$"
+	.string "powerful...$"
 
 Route16_Text_LaoRematchIntro::
 	.string "What do you want?$"
@@ -457,7 +457,7 @@ Route17_Text_NikolasRematchIntro::
 	.string "electrify you today!$"
 
 Route17_Text_ZeekRematchIntro::
-	.string "I leveled up my POKeMON, but it\n"
+	.string "I leveled up my POKEMON, but it\n"
 	.string "absolutely won't evolve. Why?$"
 
 Route17_Text_JamalRematchIntro::
@@ -477,8 +477,8 @@ Route17_Text_WilliamRematchIntro::
 
 Route18_Text_WiltonRematchIntro::
 	.string "I've been checking every grassy\n"
-	.string "area for new POKeMON.\p"
-	.string "But it's not always easy…$"
+	.string "area for new POKEMON.\p"
+	.string "But it's not always easy...$"
 
 Route18_Text_RamiroRematchIntro::
 	.string "Koorukukukoo!\n"
@@ -506,17 +506,17 @@ Route19_Text_DouglasRematchIntro::
 	.string "Have you seen?$"
 
 Route19_Text_DavidRematchIntro::
-	.string "I tried diving for POKeMON again,\n"
+	.string "I tried diving for POKEMON again,\n"
 	.string "but it was a no-go like before.$"
 
 Route19_Text_TonyRematchIntro::
 	.string "I look at the sea to forget all\n"
 	.string "the bad things that happened.\p"
-	.string "…Like losing to you the last time!$"
+	.string "...Like losing to you the last time!$"
 
 Route19_Text_AnyaRematchIntro::
 	.string "You always get to ride your\n"
-	.string "POKeMON…\p"
+	.string "POKEMON...\p"
 	.string "It looks so relaxing.\n"
 	.string "Can I have it if I win?$"
 
@@ -529,8 +529,8 @@ Route19_Text_AxleRematchIntro::
 	.string "You shouldn't come back here!$"
 
 Route19_Text_ConnieRematchIntro::
-	.string "I swam here with my friends…\n"
-	.string "I'm tired…\l"
+	.string "I swam here with my friends...\n"
+	.string "I'm tired...\l"
 	.string "Must we really battle again?$"
 
 Route19_Text_LiaRematchIntro::
@@ -541,7 +541,7 @@ Route19_Text_LiaRematchIntro::
 
 Route19_Text_LucRematchIntro::
 	.string "LUC: My big sis taught me all\n"
-	.string "about POKeMON.\p"
+	.string "about POKEMON.\p"
 	.string "I wonder if I'm better?$"
 
 Route20_Text_BarryRematchIntro::
@@ -565,11 +565,11 @@ Route20_Text_DeanRematchIntro::
 	.string "before!$"
 
 Route20_Text_DarrinRematchIntro::
-	.string "Why are you riding a POKeMON?\n"
+	.string "Why are you riding a POKEMON?\n"
 	.string "Haven't you learned to swim yet?$"
 
 Route20_Text_RogerRematchIntro::
-	.string "I rode my bird POKeMON here.$"
+	.string "I rode my bird POKEMON here.$"
 
 Route20_Text_NoraRematchIntro::
 	.string "My boyfriend gave me big pearls.\n"
@@ -581,7 +581,7 @@ Route20_Text_MissyRematchIntro::
 
 Route20_Text_MelissaRematchIntro::
 	.string "CINNABAR, in the west, has a LAB\n"
-	.string "for POKeMON.\p"
+	.string "for POKEMON.\p"
 	.string "My daddy works there.$"
 
 Route21_North_Text_RonaldRematchIntro::
@@ -597,11 +597,11 @@ Route21_North_Text_SpencerRematchIntro::
 
 @ Unused trainer from RB that had a rematch intro added
 Route21_North_Text_CueBallRematchIntro::
-	.string "きょうも　およぎに\n"
+	.string "きょうも およぎに\n"
 	.string "きちまったぜ$"
 
 Route21_South_Text_JackRematchIntro::
-	.string "I caught my POKeMON at sea.\n"
+	.string "I caught my POKEMON at sea.\n"
 	.string "And that's where I train them.$"
 
 Route21_South_Text_JeromeRematchIntro::
@@ -646,11 +646,11 @@ Route25_Text_KelseyRematchIntro::
 	.string "My conditioning's good today!$"
 
 Route25_Text_ChadRematchIntro::
-	.string "I had this feeling…\n"
+	.string "I had this feeling...\n"
 	.string "I knew I had to battle you again!$"
 
 Route25_Text_HaleyRematchIntro::
-	.string "My friend has many cute POKeMON.\n"
+	.string "My friend has many cute POKEMON.\n"
 	.string "I'm so jealous!$"
 
 Route25_Text_FranklinRematchIntro::
@@ -673,7 +673,7 @@ Route24_Text_EthanRematchIntro::
 	.string "I'll stomp you!$"
 
 Route24_Text_ReliRematchIntro::
-	.string "You always look so busy…\n"
+	.string "You always look so busy...\n"
 	.string "Aren't you getting tired?$"
 
 Route24_Text_TimmyRematchIntro::
@@ -681,7 +681,7 @@ Route24_Text_TimmyRematchIntro::
 	.string "NUGGET BRIDGE.$"
 
 Route24_Text_AliRematchIntro::
-	.string "The time we battled…\p"
+	.string "The time we battled...\p"
 	.string "Even though I was the second in\n"
 	.string "line, I was the best, wasn't I?$"
 
@@ -689,24 +689,24 @@ Route24_Text_CaleRematchIntro::
 	.string "People call this the NUGGET\n"
 	.string "BRIDGE!\p"
 	.string "You've already beaten us, so you're\n"
-	.string "not allowed to take the challenge…\p"
-	.string "…But, you're welcome to battle with\n"
+	.string "not allowed to take the challenge...\p"
+	.string "...But, you're welcome to battle with\n"
 	.string "us again.$"
 
 OneIsland_TreasureBeach_Text_AmaraRematchIntro::
-	.string "Lying back, rocked by the waves…\n"
-	.string "I don't notice time slipping by…$"
+	.string "Lying back, rocked by the waves...\n"
+	.string "I don't notice time slipping by...$"
 
 OneIsland_KindleRoad_Text_MariaRematchIntro::
 	.string "The weather's gorgeous!\n"
 	.string "I'll try not to spoil it.$"
 
 OneIsland_KindleRoad_Text_AbigailRematchIntro::
-	.string "My sunburn is starting to hurt…$"
+	.string "My sunburn is starting to hurt...$"
 
 OneIsland_KindleRoad_Text_FinnRematchIntro::
 	.string "The fire bird's mountain casts\n"
-	.string "a huge shadow…$"
+	.string "a huge shadow...$"
 
 OneIsland_KindleRoad_Text_GarrettRematchIntro::
 	.string "I have this strong feeling that\n"
@@ -726,7 +726,7 @@ OneIsland_KindleRoad_Text_TanyaRematchIntro::
 
 OneIsland_KindleRoad_Text_SheaRematchIntro::
 	.string "Every morning, before breakfast,\n"
-	.string "I swim around this island…\l"
+	.string "I swim around this island...\l"
 	.string "Three times!$"
 
 OneIsland_KindleRoad_Text_HughRematchIntro::
@@ -764,7 +764,7 @@ ThreeIsland_BondBridge_Text_AmiraRematchIntro::
 
 ThreeIsland_BondBridge_Text_AlexisRematchIntro::
 	.string "Yay, yay!\n"
-	.string "POKeMON!$"
+	.string "POKEMON!$"
 
 ThreeIsland_BondBridge_Text_TishaRematchIntro::
 	.string "Oh, no, didn't I tell you already?\n"
@@ -779,7 +779,7 @@ ThreeIsland_BondBridge_Text_MegRematchIntro::
 
 FiveIsland_WaterLabyrinth_Text_AlizeRematchIntro::
 	.string "Oh, hello!\p"
-	.string "Are you raising your POKeMON in a\n"
+	.string "Are you raising your POKEMON in a\n"
 	.string "good environment?$"
 
 FiveIsland_ResortGorgeous_Text_DaisyRematchIntro::
@@ -792,8 +792,8 @@ FiveIsland_ResortGorgeous_Text_CelinaRematchIntro::
 	.string "Please keep out of my sight!$"
 
 FiveIsland_ResortGorgeous_Text_RaynaRematchIntro::
-	.string "I haven't made any progress…\n"
-	.string "I still can't get the right angle…$"
+	.string "I haven't made any progress...\n"
+	.string "I still can't get the right angle...$"
 
 FiveIsland_ResortGorgeous_Text_JackiRematchIntro::
 	.string "Oh, you will give me another\n"
@@ -801,7 +801,7 @@ FiveIsland_ResortGorgeous_Text_JackiRematchIntro::
 
 FiveIsland_ResortGorgeous_Text_GillianRematchIntro::
 	.string "They're almost finished making the\n"
-	.string "pool for my POKeMON.\p"
+	.string "pool for my POKEMON.\p"
 	.string "You must drop in for a visit.$"
 
 FiveIsland_ResortGorgeous_Text_DestinRematchIntro::
@@ -835,7 +835,7 @@ SixIsland_OutcastIsland_Text_TylorRematchIntro::
 	.string "A battle'd be a change of pace!$"
 
 SixIsland_OutcastIsland_Text_MymoRematchIntro::
-	.string "Gasp… Gasp…\p"
+	.string "Gasp... Gasp...\p"
 	.string "I swam here from SIX ISLAND's port\n"
 	.string "in one go again.$"
 
@@ -852,7 +852,7 @@ SixIsland_OutcastIsland_Text_GebRematchIntro::
 	.string "tougher than before!$"
 
 SixIsland_GreenPath_Text_JaclynRematchIntro::
-	.string "…Huh?\p"
+	.string "...Huh?\p"
 	.string "I envision my house, but TELEPORT\n"
 	.string "always brings me here!$"
 
@@ -871,19 +871,19 @@ SixIsland_WaterPath_Text_SamirRematchIntro::
 	.string "Battle with me again.$"
 
 SixIsland_WaterPath_Text_DeniseRematchIntro::
-	.string "Sigh…\n"
-	.string "My boyfriend's busy again…$"
+	.string "Sigh...\n"
+	.string "My boyfriend's busy again...$"
 
 SixIsland_WaterPath_Text_EarlRematchIntro::
 	.string "Come on, tell me, where are the\n"
 	.string "mountains around these parts?$"
 
 SixIsland_WaterPath_Text_MiuRematchIntro::
-	.string "MIU: Hello, POKeMON!\n"
+	.string "MIU: Hello, POKEMON!\n"
 	.string "It's time to play again!$"
 
 SixIsland_WaterPath_Text_MiaRematchIntro::
-	.string "MIA: Hello, POKeMON!\n"
+	.string "MIA: Hello, POKEMON!\n"
 	.string "It's time to battle again!$"
 
 SixIsland_RuinValley_Text_StanlyRematchIntro::
@@ -912,7 +912,7 @@ SevenIsland_TrainerTower_Text_DarioRematchIntro::
 
 SevenIsland_TrainerTower_Text_RodetteRematchIntro::
 	.string "Somewhere on this island, peculiar\n"
-	.string "POKeMON are sleeping.$"
+	.string "POKEMON are sleeping.$"
 
 SevenIsland_SevaultCanyon_Entrance_Text_MiahRematchIntro::
 	.string "Kyahaha!\p"
@@ -924,12 +924,12 @@ SevenIsland_SevaultCanyon_Entrance_Text_MasonRematchIntro::
 	.string "fan club, isn't that right?$"
 
 SevenIsland_SevaultCanyon_Entrance_Text_NicolasRematchIntro::
-	.string "This island is too spread out…\n"
-	.string "Patrolling the place is a drag…$"
+	.string "This island is too spread out...\n"
+	.string "Patrolling the place is a drag...$"
 
 SevenIsland_SevaultCanyon_Entrance_Text_MadelineRematchIntro::
 	.string "I don't forgive people who abuse\n"
-	.string "POKeMON!$"
+	.string "POKEMON!$"
 
 SevenIsland_SevaultCanyon_Entrance_Text_EveRematchIntro::
 	.string "EVE: I'll team up with JON and\n"
@@ -945,7 +945,7 @@ SevenIsland_SevaultCanyon_Text_CyndyRematchIntro::
 
 SevenIsland_SevaultCanyon_Text_EvanRematchIntro::
 	.string "It doesn't matter if you happen to\n"
-	.string "have the strongest POKeMON…\p"
+	.string "have the strongest POKEMON...\p"
 	.string "It doesn't mean a thing if you don't\n"
 	.string "know how to use them properly!$"
 
@@ -980,7 +980,7 @@ SevenIsland_TanobyRuins_Text_BrandonRematchIntro::
 	.string "this stone chamber?$"
 
 SevenIsland_TanobyRuins_Text_BenjaminRematchIntro::
-	.string "A mystic POKeMON is said to sleep\n"
+	.string "A mystic POKEMON is said to sleep\n"
 	.string "inside here.$"
 
 SevenIsland_TanobyRuins_Text_EdnaRematchIntro::

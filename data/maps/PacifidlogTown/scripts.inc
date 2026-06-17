@@ -40,7 +40,7 @@ PacifidlogTown_Text_NeatHousesOnWater:
 
 PacifidlogTown_Text_SkyPillarTooScary:
 	.string "The SKY PILLAR?\p"
-	.string "…Oh, you must mean that tall, tall\n"
+	.string "...Oh, you must mean that tall, tall\n"
 	.string "tower a little further out.\p"
 	.string "If you asked me, I wouldn't climb it.\n"
 	.string "It's too scary to get up that high.\p"
@@ -49,6 +49,6 @@ PacifidlogTown_Text_SkyPillarTooScary:
 
 PacifidlogTown_Text_TownSign:
 	.string "PACIFIDLOG TOWN\p"
-	.string "“Where the morning sun smiles upon\n"
-	.string "the waters.”$"
+	.string ""Where the morning sun smiles upon\n"
+	.string "the waters."$"
 

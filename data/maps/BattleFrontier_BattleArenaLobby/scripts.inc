@@ -374,12 +374,12 @@ BattleFrontier_BattleArenaLobby_Text_ExplainChallenge:
 	.string "In the BATTLE ARENA, we undertake\n"
 	.string "the Set KO Tourney.\p"
 	.string "All participants enter with a team of\n"
-	.string "three POKeMON.\p"
-	.string "The three POKeMON must be lined up in\n"
+	.string "three POKEMON.\p"
+	.string "The three POKEMON must be lined up in\n"
 	.string "the order in which they are to appear.\p"
-	.string "During battle, the POKeMON will appear\n"
+	.string "During battle, the POKEMON will appear\n"
 	.string "one at a time in the preset order.\p"
-	.string "Once a POKeMON enters battle, it must\n"
+	.string "Once a POKEMON enters battle, it must\n"
 	.string "remain out until the match is decided.\p"
 	.string "If a match remains undecided in\n"
 	.string "three turns, it goes to judging.\p"
@@ -402,14 +402,14 @@ BattleFrontier_BattleArenaLobby_Text_WhichLevelMode:
 
 BattleFrontier_BattleArenaLobby_Text_SelectThreeMons:
 	.string "Very well, now select your\n"
-	.string "three POKeMON, please.$"
+	.string "three POKEMON, please.$"
 
 BattleFrontier_BattleArenaLobby_Text_NotEnoughValidMonsLvOpen:
 	.string "My dear challenger!\p"
-	.string "You do not have the three POKeMON\n"
+	.string "You do not have the three POKEMON\n"
 	.string "required for entry.\p"
 	.string "To qualify, you must bring three\n"
-	.string "different kinds of POKeMON.\p"
+	.string "different kinds of POKEMON.\p"
 	.string "They also must not hold the same\n"
 	.string "kinds of items.\p"
 	.string "EGGS{STR_VAR_1}.$"
@@ -420,11 +420,11 @@ BattleFrontier_BattleArenaLobby_Text_NotEnoughValidMonsEnd:
 
 BattleFrontier_BattleArenaLobby_Text_NotEnoughValidMonsLv50:
 	.string "My dear challenger!\p"
-	.string "You do not have the three POKeMON\n"
+	.string "You do not have the three POKEMON\n"
 	.string "required for entry.\p"
 	.string "To qualify, you must bring three\n"
-	.string "different kinds of POKeMON.\p"
-	.string "The three different POKeMON\n"
+	.string "different kinds of POKEMON.\p"
+	.string "The three different POKEMON\n"
 	.string "must all be Level 50 or lower.\p"
 	.string "They also must not hold the same\n"
 	.string "kinds of items.\p"
@@ -489,27 +489,27 @@ BattleFrontier_BattleArenaLobby_Text_RecordLastMatch:
 	.string "match on your FRONTIER PASS?$"
 
 BattleFrontier_BattleArenaLobby_Text_BadIdeaToNotAttack:
-	.string "I lost on the REFEREE's decision…\p"
+	.string "I lost on the REFEREE's decision...\p"
 	.string "I don't think it was a good idea to only\n"
-	.string "use defensive moves and not attack…$"
+	.string "use defensive moves and not attack...$"
 
 BattleFrontier_BattleArenaLobby_Text_LandingHitsWorked:
 	.string "I won in judging!\p"
 	.string "Landing hits consistently on\n"
-	.string "the opponent's POKeMON worked!$"
+	.string "the opponent's POKEMON worked!$"
 
 BattleFrontier_BattleArenaLobby_Text_MatchWasDeclaredDraw:
 	.string "Our match was declared a draw.\p"
 	.string "When we ran out of time, both my\n"
-	.string "POKeMON and the opponent's had about\l"
+	.string "POKEMON and the opponent's had about\l"
 	.string "the same amount of HP left.$"
 
 BattleFrontier_BattleArenaLobby_Text_OrderOfMonsImportant:
 	.string "In the BATTLE ARENA, the order of\n"
-	.string "POKeMON is totally important.\p"
-	.string "For example, if your first POKeMON\n"
+	.string "POKEMON is totally important.\p"
+	.string "For example, if your first POKEMON\n"
 	.string "has certain type disadvantages,\l"
-	.string "try making your second POKeMON one\l"
+	.string "try making your second POKEMON one\l"
 	.string "with moves that are super effective\l"
 	.string "against the first one.\p"
 	.string "I think that will be a good way of\n"
@@ -529,12 +529,12 @@ BattleFrontier_BattleArenaLobby_Text_ExplainBattleRules:
 	.string "If the outcome is not decided after\n"
 	.string "three turns, it goes to judging.\p"
 	.string "The REFEREE will choose the winner\n"
-	.string "based on how the POKeMON battled.\p"
-	.string "Also, a POKeMON cannot be switched out\n"
+	.string "based on how the POKEMON battled.\p"
+	.string "Also, a POKEMON cannot be switched out\n"
 	.string "until its battle's outcome is decided.$"
 
 BattleFrontier_BattleArenaLobby_Text_ExplainMindRules:
-	.string "The first judging factor is “Mind.”\n"
+	.string "The first judging factor is "Mind."\n"
 	.string "This factor evaluates how aggressive\l"
 	.string "the battlers were.\p"
 	.string "The judging is based on how often\n"
@@ -542,30 +542,30 @@ BattleFrontier_BattleArenaLobby_Text_ExplainMindRules:
 	.string "offensive moves.$"
 
 BattleFrontier_BattleArenaLobby_Text_ExplainSkillRules:
-	.string "The second judging factor is “Skill.”\n"
+	.string "The second judging factor is "Skill."\n"
 	.string "This factor evaluates how effectively\l"
-	.string "POKeMON moves were used.\p"
+	.string "POKEMON moves were used.\p"
 	.string "If a move worked successfully,\n"
 	.string "the Skill rating goes up.\p"
 	.string "If a move failed, the Skill rating\n"
 	.string "is lowered.\p"
 	.string "If it was an offensive move, the Skill\n"
-	.string "rating goes up if the move was “super\l"
-	.string "effective” and goes down if it was\l"
-	.string "“not very effective.”\p"
+	.string "rating goes up if the move was "super\l"
+	.string "effective" and goes down if it was\l"
+	.string ""not very effective."\p"
 	.string "The Skill rating will not go up for\n"
 	.string "moves such as PROTECT and DETECT.\p"
 	.string "If the opponent used PROTECT or\n"
-	.string "DETECT, and your POKeMON failed to\l"
+	.string "DETECT, and your POKEMON failed to\l"
 	.string "hit with a move, its Skill rating will not\l"
 	.string "go down.$"
 
 BattleFrontier_BattleArenaLobby_Text_ExplainBodyRules:
-	.string "The third judging factor is “Body.”\n"
+	.string "The third judging factor is "Body."\n"
 	.string "This factor is based on how much HP\l"
 	.string "remained at the end of a battle.\p"
 	.string "The rating takes into account how much\n"
-	.string "HP a POKeMON had at the start of\l"
+	.string "HP a POKEMON had at the start of\l"
 	.string "battle, and what remained at the end.$"
 
 BattleFrontier_BattleArenaLobby_Text_CongratsOnDefeatingTycoon:

@@ -79,20 +79,20 @@ SixIsland_PatternBush_EventScript_Layton::
 
 SixIsland_PatternBush_Text_BethanyIntro::
 	.string "I'm curious, how do you raise your\n"
-	.string "POKeMON?$"
+	.string "POKEMON?$"
 
 SixIsland_PatternBush_Text_BethanyDefeat::
-	.string "You raise your POKeMON with a\n"
+	.string "You raise your POKEMON with a\n"
 	.string "whole lot of love!$"
 
 SixIsland_PatternBush_Text_BethanyPostBattle::
 	.string "In the same way your mother raised\n"
 	.string "you full of love, you should raise\l"
-	.string "your POKeMON.$"
+	.string "your POKEMON.$"
 
 SixIsland_PatternBush_Text_AllisonIntro::
 	.string "I'm working to preserve the natural\n"
-	.string "ecology of POKeMON here.$"
+	.string "ecology of POKEMON here.$"
 
 SixIsland_PatternBush_Text_AllisonDefeat::
 	.string "Oh, for someone so young, you are\n"
@@ -100,17 +100,17 @@ SixIsland_PatternBush_Text_AllisonDefeat::
 
 SixIsland_PatternBush_Text_AllisonPostBattle::
 	.string "I'm not saying that you shouldn't\n"
-	.string "catch POKeMON.\p"
+	.string "catch POKEMON.\p"
 	.string "I just want people to raise their\n"
-	.string "POKeMON responsibly.$"
+	.string "POKEMON responsibly.$"
 
 SixIsland_PatternBush_Text_GarretIntro::
-	.string "I caught a BUG POKeMON that lives\n"
+	.string "I caught a BUG POKEMON that lives\n"
 	.string "only around here!$"
 
 SixIsland_PatternBush_Text_GarretDefeat::
-	.string "Heheh…\n"
-	.string "Isn't my POKeMON awesome?$"
+	.string "Heheh...\n"
+	.string "Isn't my POKEMON awesome?$"
 
 SixIsland_PatternBush_Text_GarretPostBattle::
 	.string "There's a girl near the BUSH who\n"
@@ -118,21 +118,21 @@ SixIsland_PatternBush_Text_GarretPostBattle::
 
 SixIsland_PatternBush_Text_JonahIntro::
 	.string "You know, it just doesn't feel right\n"
-	.string "if I don't use BUG POKeMON.$"
+	.string "if I don't use BUG POKEMON.$"
 
 SixIsland_PatternBush_Text_JonahDefeat::
 	.string "It's okay, losing is a fun part of\n"
-	.string "POKeMON's appeal, too.$"
+	.string "POKEMON's appeal, too.$"
 
 SixIsland_PatternBush_Text_JonahPostBattle::
-	.string "By the way, “appeal” is a weird\n"
+	.string "By the way, "appeal" is a weird\n"
 	.string "word, if you think about it.\p"
 	.string "Like, is it like an orange peel?\n"
 	.string "Or like a ringing bell?$"
 
 SixIsland_PatternBush_Text_VanceIntro::
 	.string "Yeah, yeah, yeah!\n"
-	.string "Look at all the BUG POKeMON!$"
+	.string "Look at all the BUG POKEMON!$"
 
 SixIsland_PatternBush_Text_VanceDefeat::
 	.string "I got beat while I was still busy\n"
@@ -150,7 +150,7 @@ SixIsland_PatternBush_Text_NashDefeat::
 	.string "Super awesome!$"
 
 SixIsland_PatternBush_Text_NashPostBattle::
-	.string "The funny patterns on the ground…\p"
+	.string "The funny patterns on the ground...\p"
 	.string "They look like the patterns on my\n"
 	.string "grandpa's clothes.$"
 
@@ -164,7 +164,7 @@ SixIsland_PatternBush_Text_CordellDefeat::
 
 SixIsland_PatternBush_Text_CordellPostBattle::
 	.string "Ayup, you townies come around all\n"
-	.string "so dandy with a hat that flashy…\p"
+	.string "so dandy with a hat that flashy...\p"
 	.string "How about giving me that?$"
 
 SixIsland_PatternBush_Text_DaliaIntro::
@@ -183,7 +183,7 @@ SixIsland_PatternBush_Text_DaliaPostBattle::
 	.string "Isn't it refreshing?$"
 
 SixIsland_PatternBush_Text_JoanaIntro::
-	.string "I love BUG POKeMON.\n"
+	.string "I love BUG POKEMON.\n"
 	.string "That's why I'm here all the time.\p"
 	.string "Am I the only girl like that?$"
 
@@ -193,7 +193,7 @@ SixIsland_PatternBush_Text_JoanaDefeat::
 
 SixIsland_PatternBush_Text_JoanaPostBattle::
 	.string "I'm going to keep on collecting\n"
-	.string "BUG POKeMON.\p"
+	.string "BUG POKEMON.\p"
 	.string "Am I the only girl like that?$"
 
 SixIsland_PatternBush_Text_RileyIntro::
@@ -201,7 +201,7 @@ SixIsland_PatternBush_Text_RileyIntro::
 	.string "I'll pitch my tent here.$"
 
 SixIsland_PatternBush_Text_RileyDefeat::
-	.string "Wimped out…$"
+	.string "Wimped out...$"
 
 SixIsland_PatternBush_Text_RileyPostBattle::
 	.string "I'm going to observe the night sky\n"
@@ -216,7 +216,7 @@ SixIsland_PatternBush_Text_MarcyDefeat::
 	.string "I cut my shin on some grass.$"
 
 SixIsland_PatternBush_Text_MarcyPostBattle::
-	.string "A little cut like that…\n"
+	.string "A little cut like that...\n"
 	.string "A little spit's enough to cure it!$"
 
 SixIsland_PatternBush_Text_LaytonIntro::

@@ -104,7 +104,7 @@ SootopolisCity_LotadAndSeedotHouse_EventScript_LotadSizeRecord::
 	end
 
 SootopolisCity_LotadAndSeedotHouse_Text_PleaseShowMeBigSeedot:
-	.string "Do you know the POKeMON SEEDOT?\n"
+	.string "Do you know the POKEMON SEEDOT?\n"
 	.string "It's hardly ever seen in SOOTOPOLIS.\p"
 	.string "Anyway, I love big SEEDOT.\n"
 	.string "The bigger the better.\p"
@@ -133,16 +133,16 @@ SootopolisCity_LotadAndSeedotHouse_Text_BagCrammedFull1:
 
 SootopolisCity_LotadAndSeedotHouse_Text_SeenBiggerSeedot:
 	.string "{STR_VAR_2}, is it?\p"
-	.string "Hmm… I've seen a bigger SEEDOT\n"
+	.string "Hmm... I've seen a bigger SEEDOT\n"
 	.string "than this one.$"
 
 SootopolisCity_LotadAndSeedotHouse_Text_ThatsNotSeedot:
-	.string "Oh, now this is quite something…\n"
+	.string "Oh, now this is quite something...\n"
 	.string "But it's not a SEEDOT!$"
 
 SootopolisCity_LotadAndSeedotHouse_Text_DontHaveBigSeedot:
 	.string "You don't have a big SEEDOT?\n"
-	.string "That's too bad…\p"
+	.string "That's too bad...\p"
 	.string "If you get a big SEEDOT, please\n"
 	.string "come show me.$"
 
@@ -153,7 +153,7 @@ SootopolisCity_LotadAndSeedotHouse_Text_BiggestSeedotInHistory:
 	.string "always wanted!$"
 
 SootopolisCity_LotadAndSeedotHouse_Text_PleaseShowMeBigLotad:
-	.string "Do you know the POKeMON LOTAD?\n"
+	.string "Do you know the POKEMON LOTAD?\n"
 	.string "It's rarely seen in SOOTOPOLIS.\p"
 	.string "I love, I mean love, big LOTAD!\p"
 	.string "My big brother says that SEEDOT is\n"
@@ -181,7 +181,7 @@ SootopolisCity_LotadAndSeedotHouse_Text_BagCrammedFull2:
 
 SootopolisCity_LotadAndSeedotHouse_Text_SeenBiggerLotad:
 	.string "{STR_VAR_2}?\p"
-	.string "Hmm… I've seen a bigger LOTAD\n"
+	.string "Hmm... I've seen a bigger LOTAD\n"
 	.string "than this one here.$"
 
 SootopolisCity_LotadAndSeedotHouse_Text_ThatsNotLotad:
@@ -190,7 +190,7 @@ SootopolisCity_LotadAndSeedotHouse_Text_ThatsNotLotad:
 
 SootopolisCity_LotadAndSeedotHouse_Text_DontHaveBigLotad:
 	.string "Don't you have a big LOTAD?\n"
-	.string "How disappointing…\p"
+	.string "How disappointing...\p"
 	.string "If you get a big LOTAD, please\n"
 	.string "come show me!$"
 

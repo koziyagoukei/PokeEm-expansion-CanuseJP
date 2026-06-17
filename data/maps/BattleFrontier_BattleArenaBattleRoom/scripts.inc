@@ -502,7 +502,7 @@ BattleFrontier_BattleArenaBattleRoom_Text_WinnerIsOpponent:
 	.string "REFEREE: The winner is {STR_VAR_1}!$"
 
 BattleFrontier_BattleArenaBattleRoom_Text_MonsWillBeRestored:
-	.string "Your POKeMON will be restored to\n"
+	.string "Your POKEMON will be restored to\n"
 	.string "full health.$"
 
 BattleFrontier_BattleArenaBattleRoom_Text_ReadyFor2ndOpponent:
@@ -562,17 +562,17 @@ BattleFrontier_BattleArenaBattleRoom_Text_MakeWayForGreta:
 BattleFrontier_BattleArenaBattleRoom_Text_GretaYoureChallenger:
 	.string "GRETA: Hey!\n"
 	.string "Howdy!\p"
-	.string "…Wait, are you the challenger?$"
+	.string "...Wait, are you the challenger?$"
 
 BattleFrontier_BattleArenaBattleRoom_Text_IsThatRight:
-	.string "Is that right? Hmm…\n"
-	.string "Hmhm…$"
+	.string "Is that right? Hmm...\n"
+	.string "Hmhm...$"
 
 BattleFrontier_BattleArenaBattleRoom_Text_YouLookWeakTakeThingsEasy:
-	.string "I don't know how to say it, but…\n"
+	.string "I don't know how to say it, but...\n"
 	.string "To put it bluntly, you look pretty weak.\l"
 	.string "Are you sure you're up for me?\p"
-	.string "Hmm…\p"
+	.string "Hmm...\p"
 	.string "Well, all right!\n"
 	.string "We'll take things easy to start with!$"
 
@@ -591,7 +591,7 @@ BattleFrontier_BattleArenaBattleRoom_Text_ReceivedGutsSymbol:
 	.string "the FRONTIER PASS!$"
 
 BattleFrontier_BattleArenaBattleRoom_Text_GoingToBeFunNextTime:
-	.string "Hmm…\p"
+	.string "Hmm...\p"
 	.string "It's going to be fun the next time!\n"
 	.string "I'm looking forward to it!$"
 
@@ -603,7 +603,7 @@ BattleFrontier_BattleArenaBattleRoom_Text_GretaLookingForwardToSeeingAgain:
 	.string "you again!$"
 
 BattleFrontier_BattleArenaBattleRoom_Text_SoAreYouReady:
-	.string "… … …\n"
+	.string "... ... ...\n"
 	.string "So, are you ready?$"
 
 BattleFrontier_BattleArenaBattleRoom_Text_WontAllowHalfheartedEffort:

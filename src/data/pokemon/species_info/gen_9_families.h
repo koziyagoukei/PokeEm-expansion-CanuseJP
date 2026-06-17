@@ -3419,7 +3419,7 @@ const struct SpeciesInfo gSpeciesInfoGen9[] =
         .description = COMPOUND_STRING(
             "Mega Evolution has dialed up this\n"
             "Pokemon's spiciness. It swings its\n"
-            "“necktie” around to wallop its foes."),
+            ""necktie" around to wallop its foes."),
         .frontPic = gMonFrontPic_ScovillainMega,
         .frontPicSize = MON_COORDS_SIZE(64, 64),
         .frontPicYOffset = 0,
@@ -4903,7 +4903,7 @@ const struct SpeciesInfo gSpeciesInfoGen9[] =
         .weight = 370,
         .description = COMPOUND_STRING(
             "Thanks to a behavior of theirs\n"
-            "known as “synchronizing,” an entire\n"
+            "known as "synchronizing," an entire\n"
             "flock of these Pokemon can attack\n"
             "simultaneously in perfect harmony."),
         .pokemonScale = 356,

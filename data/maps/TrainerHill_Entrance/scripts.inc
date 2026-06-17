@@ -305,13 +305,13 @@ TrainerHill_Entrance_Text_SaveGameBeforeEnter:
 	.string "your game.$"
 
 TrainerHill_Entrance_Text_TrainersUpToFloorX:
-	.string "Let's see…\n"
-	.string "The TRAINERS here now are…\p"
+	.string "Let's see...\n"
+	.string "The TRAINERS here now are...\p"
 	.string "Up to floor no. {STR_VAR_1}.$"
 
 TrainerHill_Entrance_Text_TrainersInEveryRoom:
-	.string "Let's see…\n"
-	.string "The TRAINERS here now are…\p"
+	.string "Let's see...\n"
+	.string "The TRAINERS here now are...\p"
 	.string "There appear to be TRAINERS gathered\n"
 	.string "in every room.$"
 
@@ -322,8 +322,8 @@ TrainerHill_Entrance_Text_LikeToChallengeTrainers:
 TrainerHill_Entrance_Text_TimeProgessGetSetGo:
 	.string "I will time your progress.\n"
 	.string "Best of luck!\p"
-	.string "On your marks…\p"
-	.string "Get set…\p"
+	.string "On your marks...\p"
+	.string "Get set...\p"
 	.string "Go!$"
 
 TrainerHill_Entrance_Text_PleaseVisitUsAgain:
@@ -364,8 +364,8 @@ TrainerHill_Entrance_Text_ExplainTrainerHill:
 @ Unused
 TrainerHill_Entrance_Text_NeedAtLeastTwoPokemon:
 	.string "Oh, I'm sorry, but you appear to have\n"
-	.string "only one POKeMON with you.\p"
-	.string "You will need at least two POKeMON\n"
+	.string "only one POKEMON with you.\p"
+	.string "You will need at least two POKEMON\n"
 	.string "to enter this event.$"
 
 TrainerHill_Roof_Text_YouFinallyCameBravo:
@@ -376,10 +376,10 @@ TrainerHill_Roof_Text_YouFinallyCameBravo:
 	.string "I know why you came all the way\l"
 	.string "here by yourself!\p"
 	.string "You wanted to see me, the owner\n"
-	.string "of the TRAINER HILL, because…\p"
+	.string "of the TRAINER HILL, because...\p"
 	.string "You want to form a tag team with me!\n"
 	.string "Wa-hoo!\p"
-	.string "…Uh?\n"
+	.string "...Uh?\n"
 	.string "That's not it?\p"
 	.string "Anyway, I watched you on your way up.\n"
 	.string "Marvelous battling! Bravo, indeed!$"
@@ -401,7 +401,7 @@ TrainerHill_Roof_Text_GotHereMarvelouslyQuickly:
 	.string "Board at the reception updated!$"
 
 TrainerHill_Roof_Text_YouWerentVeryQuick:
-	.string "But, oh…\n"
+	.string "But, oh...\n"
 	.string "You weren't very quick getting here.$"
 
 TrainerHill_Roof_Text_ArriveZippierNextTime:
@@ -423,7 +423,7 @@ TrainerHill_Entrance_Text_ChallengeTime:
 
 TrainerHill_Entrance_Text_WhatSortOfTrainersAreAhead:
 	.string "Who knows what sort of TRAINERS\n"
-	.string "and POKeMON combos are ahead?\p"
+	.string "and POKEMON combos are ahead?\p"
 	.string "All I know is that I'll knock aside\n"
 	.string "anyone that stands in my way!$"
 

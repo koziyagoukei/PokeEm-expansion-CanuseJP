@@ -194,7 +194,7 @@ PalletTown_RivalsHouse_Text_ExplainTownMap::
 	.string "names of places.$"
 
 PalletTown_RivalsHouse_Text_PleaseGiveMonsRest::
-	.string "DAISY: Just like people, POKeMON\n"
+	.string "DAISY: Just like people, POKEMON\n"
 	.string "are living things.\p"
 	.string "When they get tired, please give\n"
 	.string "them a rest.$"
@@ -205,7 +205,7 @@ PalletTown_RivalsHouse_Text_ItsBigMapOfKanto::
 
 PalletTown_RivalsHouse_Text_ShelvesCrammedFullOfBooks::
 	.string "The shelves are crammed full of\n"
-	.string "books on POKeMON.$"
+	.string "books on POKEMON.$"
 
 PalletTown_RivalsHouse_Text_LikeMeToGroomMon::
 	.string "DAISY: Hi, {PLAYER}!\n"
@@ -213,7 +213,7 @@ PalletTown_RivalsHouse_Text_LikeMeToGroomMon::
 	.string "I'm about to have some tea.\n"
 	.string "Would you like to join me?\p"
 	.string "Oh, but look.\n"
-	.string "Your POKeMON are a little dirty.\p"
+	.string "Your POKEMON are a little dirty.\p"
 	.string "Would you like me to groom one?$"
 
 PalletTown_RivalsHouse_Text_DontNeedAnyGrooming::
@@ -229,30 +229,30 @@ PalletTown_RivalsHouse_Text_LookingNiceInNoTime::
 
 PalletTown_RivalsHouse_Text_ThereYouGoAllDone::
 #ifdef BUGFIX @ The localizers missed what should be a textcolor change in the localizations.
-	.string "{COLOR DARK_GRAY}{STR_VAR_1} looks dreamily content…\p"
+	.string "{COLOR DARK_GRAY}{STR_VAR_1} looks dreamily content...\p"
 	.string "{COLOR RED}DAISY: There you go! All done.\n"
 #else @ In the JP games, gender-based text used a different font instead of different colors.
-	.string "{FONT_NORMAL}{STR_VAR_1} looks dreamily content…\p"
+	.string "{FONT_NORMAL}{STR_VAR_1} looks dreamily content...\p"
 	.string "{FONT_FEMALE}DAISY: There you go! All done.\n"
 #endif
 	.string "See? Doesn't it look nice?\p"
-	.string "Giggle…\n"
-	.string "It's such a cute POKeMON.$"
+	.string "Giggle...\n"
+	.string "It's such a cute POKEMON.$"
 
 PalletTown_RivalsHouse_Text_CantGroomAnEgg::
 	.string "Oh, sorry. I honestly can't\n"
 	.string "groom an EGG.$"
 
 PalletTown_RivalsHouse_Text_MayISeeFirstMon::
-	.string "DAISY: Your POKeMON grow to love\n"
+	.string "DAISY: Your POKEMON grow to love\n"
 	.string "you if you raise them with love.\p"
 	.string "For example, {PLAYER}, may I see\n"
-	.string "your first POKeMON?$"
+	.string "your first POKEMON?$"
 
 PalletTown_RivalsHouse_Text_CouldntLoveYouMore::
 	.string "It couldn't possibly love you\n"
 	.string "any more than it does now.\p"
-	.string "Your POKeMON is happy beyond\n"
+	.string "Your POKEMON is happy beyond\n"
 	.string "words.$"
 
 PalletTown_RivalsHouse_Text_ItLooksVeryHappy::
@@ -271,7 +271,7 @@ PalletTown_RivalsHouse_Text_ItsWarmingUpToYou::
 PalletTown_RivalsHouse_Text_NotFamiliarWithYouYet::
 	.string "It's not quite familiar with you\n"
 	.string "yet.\p"
-	.string "POKeMON are all quite wary when\n"
+	.string "POKEMON are all quite wary when\n"
 	.string "you first get them.$"
 
 PalletTown_RivalsHouse_Text_DontLikeWayItGlaresAtYou::
@@ -281,12 +281,12 @@ PalletTown_RivalsHouse_Text_DontLikeWayItGlaresAtYou::
 	.string "to it?$"
 
 PalletTown_RivalsHouse_Text_WhyWouldMonHateYouSoMuch::
-	.string "…Um, it's not easy for me to say\n"
-	.string "this, but…\p"
+	.string "...Um, it's not easy for me to say\n"
+	.string "this, but...\p"
 	.string "Is there some reason why your\n"
-	.string "POKeMON would hate you so much?$"
+	.string "POKEMON would hate you so much?$"
 
 PalletTown_RivalsHouse_Text_LovelyAndSweetClefairy::
-	.string "“The lovely and sweet\n"
-	.string "CLEFAIRY”$"
+	.string ""The lovely and sweet\n"
+	.string "CLEFAIRY"$"
 

@@ -9898,7 +9898,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
             "When two Graveler smash each other over\n"
             "dravite, their favorite food, they cause\n"
             "flashes of light and booming noises.\n"
-            "People call them “fireworks of the earth.”"),
+            "People call them "fireworks of the earth.""),
         .pokemonScale = 256,
         .pokemonOffset = 2,
         .trainerScale = 256,
@@ -17354,7 +17354,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
             "This Pokemon has a muscular body\n"
             "and excels at close-quarters combat.\n"
             "It uses its short horns to strike\n"
-            "the opponent’s weak spots."),
+            "the opponent's weak spots."),
         .pokemonScale = 256,
         .pokemonOffset = 0,
         .trainerScale = 256,
@@ -17486,7 +17486,7 @@ const struct SpeciesInfo gSpeciesInfoGen1[] =
             "This Pokemon blasts water from holes on\n"
             "the tips of its horns--the high-pressure\n"
             "jets pierce right through\n"
-            "Tauros’s enemies."),
+            "Tauros's enemies."),
         .pokemonScale = 256,
         .pokemonOffset = 0,
         .trainerScale = 256,

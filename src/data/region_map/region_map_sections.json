@@ -1072,7 +1072,7 @@
     },
     {
       "id": "MAPSEC_POKEMON_MANSION",
-      "name": "POKeMON MANSION",
+      "name": "POKEMON MANSION",
       "x": 4,
       "y": 14,
       "width": 1,
@@ -1088,7 +1088,7 @@
     },
     {
       "id": "MAPSEC_POKEMON_LEAGUE",
-      "name": "POKeMON LEAGUE",
+      "name": "POKEMON LEAGUE",
       "x": 2,
       "y": 3,
       "width": 1,
@@ -1112,7 +1112,7 @@
     },
     {
       "id": "MAPSEC_POKEMON_TOWER",
-      "name": "POKeMON TOWER",
+      "name": "POKEMON TOWER",
       "x": 18,
       "y": 6,
       "width": 1,

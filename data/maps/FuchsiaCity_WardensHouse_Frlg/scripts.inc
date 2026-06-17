@@ -105,21 +105,21 @@ FuchsiaCity_WardensHouse_Text_ReceivedHM04FromWarden::
 FuchsiaCity_WardensHouse_Text_ExplainStrength::
 	.string "WARDEN: Inside HM04 you'll find\n"
 	.string "STRENGTH.\p"
-	.string "It lets POKeMON move boulders when\n"
+	.string "It lets POKEMON move boulders when\n"
 	.string "you're outside of battle.\p"
 	.string "Oh yes, did you find the SECRET\n"
 	.string "HOUSE in the SAFARI ZONE?$"
 
 @ Unused
 FuchsiaCity_WardensHouse_Text_YouHaveTooMuchStuff::
-	.string "なんや　にもつ\n"
+	.string "なんや にもつ\n"
 	.string "いっぱいやんけ!$"
 
 FuchsiaCity_WardensHouse_Text_MonPhotosFossilsOnDisplay::
-	.string "POKeMON photos and fossils are on\n"
+	.string "POKEMON photos and fossils are on\n"
 	.string "display.$"
 
 FuchsiaCity_WardensHouse_Text_OldMonMerchandiseOnDisplay::
-	.string "Old POKeMON merchandise is on\n"
+	.string "Old POKEMON merchandise is on\n"
 	.string "display.$"
 

@@ -198,14 +198,14 @@ BattleFrontier_Lounge3_EventScript_FaceOriginalDirection::
 	end
 
 BattleFrontier_Lounge3_Text_CantYouSeeWereBusyHere::
-	.string "…What's that you want?\p"
+	.string "...What's that you want?\p"
 	.string "Can't you see we're kind of busy here?\n"
 	.string "Can't your business wait till later?$"
 
 BattleFrontier_Lounge3_Text_YouLookToughExplainGambling::
-	.string "…Huh?\n"
+	.string "...Huh?\n"
 	.string "You look to me like a tough TRAINER.\p"
-	.string "Heheh…\n"
+	.string "Heheh...\n"
 	.string "Listen, I have this proposition.\p"
 	.string "We have a little group going here,\n"
 	.string "and we play a little game with what\l"
@@ -220,7 +220,7 @@ BattleFrontier_Lounge3_Text_YouLookToughExplainGambling::
 	.string "the best record takes all the Battle\l"
 	.string "Points in the pool.\p"
 	.string "Sounds simple, huh?\n"
-	.string "So, anyway…$"
+	.string "So, anyway...$"
 
 BattleFrontier_Lounge3_Text_ChallengeBattleTowerSingle::
 	.string "What I'm looking for is a TRAINER who's\n"
@@ -313,7 +313,7 @@ BattleFrontier_Lounge3_Text_HowAboutEnteringEventForMe::
 
 BattleFrontier_Lounge3_Text_SpotMeSomeBattlePoints::
 	.string "All right, that's perfect.\n"
-	.string "So, uh… How about spotting me some\l"
+	.string "So, uh... How about spotting me some\l"
 	.string "of your Battle Points?\p"
 	.string "Trust me, I'll show you my gratitude\n"
 	.string "afterward.$"
@@ -417,10 +417,10 @@ BattleFrontier_Lounge3_Text_GetToBattlePyramid::
 	.string "Both of our futures depend on you!$"
 
 BattleFrontier_Lounge3_Text_NiceTryCantReturnPoints::
-	.string "Oh, it's you…\n"
-	.string "Nice try…\p"
+	.string "Oh, it's you...\n"
+	.string "Nice try...\p"
 	.string "I hate to break it to you, but I can't\n"
-	.string "return your Battle Points…\p"
+	.string "return your Battle Points...\p"
 	.string "I guess we'll have to let it motivate\n"
 	.string "us to try harder next time!$"
 
@@ -446,23 +446,23 @@ BattleFrontier_Lounge3_Text_NotInterested::
 	.string "so afraid to take a chance!$"
 
 BattleFrontier_Lounge3_Text_Oh::
-	.string "Oh…$"
+	.string "Oh...$"
 
 BattleFrontier_Lounge3_Text_BackedWrongTrainer::
 	.string "I backed the wrong TRAINER again!\p"
 	.string "Maybe I should be battling normally\n"
-	.string "like everyone else…$"
+	.string "like everyone else...$"
 
 BattleFrontier_Lounge3_Text_TrainerGoodButRattled::
-	.string "That TRAINER…\p"
+	.string "That TRAINER...\p"
 	.string "He's good, but he gets rattled too\n"
-	.string "easily to survive the BATTLE DOME…$"
+	.string "easily to survive the BATTLE DOME...$"
 
 BattleFrontier_Lounge3_Text_KnowWinnerWhenISeeOne::
 	.string "Giggle!\n"
 	.string "I know a winner when I see one!$"
 
 BattleFrontier_Lounge3_Text_ShouldBeTakingChallenges::
-	.string "Those TRAINERS…\n"
+	.string "Those TRAINERS...\n"
 	.string "What are they doing?\l"
 	.string "They should be taking challenges.$"

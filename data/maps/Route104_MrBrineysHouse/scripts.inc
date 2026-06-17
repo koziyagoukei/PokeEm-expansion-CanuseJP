@@ -104,7 +104,7 @@ Route104_MrBrineysHouse_Text_ItsYouLetsSailToDewford:
 	.string "We owe so much to you!\p"
 	.string "What's that?\n"
 	.string "You want to sail with me?\p"
-	.string "Hmhm…\p"
+	.string "Hmhm...\p"
 	.string "You have a LETTER bound for DEWFORD\n"
 	.string "and a package for SLATEPORT, then?\p"
 	.string "Quite the busy life you must lead!\p"

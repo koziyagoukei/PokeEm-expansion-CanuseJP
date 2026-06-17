@@ -40,7 +40,7 @@ LavenderTown_Mart_Items::
 
 LavenderTown_Mart_Text_SearchingForStatRaiseItems::
 	.string "I'm searching for items that raise\n"
-	.string "the stats of POKeMON.\p"
+	.string "the stats of POKEMON.\p"
 	.string "They're effective over the course\n"
 	.string "of a single battle.\p"
 	.string "X ATTACK, X DEFEND, X SPEED, \n"
@@ -49,17 +49,17 @@ LavenderTown_Mart_Text_SearchingForStatRaiseItems::
 
 LavenderTown_Mart_Text_DidYouBuyRevives::
 	.string "Did you buy some REVIVES?\n"
-	.string "They revive any fainted POKeMON!$"
+	.string "They revive any fainted POKEMON!$"
 
 LavenderTown_Mart_Text_TrainerDuosCanChallengeYou::
 	.string "Sometimes, a TRAINER duo will\n"
-	.string "challenge you with two POKeMON\l"
+	.string "challenge you with two POKEMON\l"
 	.string "at the same time.\p"
 	.string "If that happens, you have to send\n"
-	.string "out two POKeMON to battle, too.$"
+	.string "out two POKEMON to battle, too.$"
 
 LavenderTown_Mart_Text_SoldNuggetFromMountainsFor5000::
-	.string "この　あいだ　やまおくで\n"
-	.string "きんのたまを　ひろい　ましてね!\p"
-	.string "つかえない　しなもの　ですが\n"
-	.string "うったら　なんと　5000¥でした$"
+	.string "この あいだ やまおくで\n"
+	.string "きんのたまを ひろい ましてね!\p"
+	.string "つかえない しなもの ですが\n"
+	.string "うったら なんと 5000¥でした$"

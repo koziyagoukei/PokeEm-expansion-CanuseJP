@@ -236,7 +236,7 @@ SilphCo_7F_Text_HaveMonForSavingUs::
 	.string "Oh! Hi! You're not a ROCKET!\n"
 	.string "You came to save us?\l"
 	.string "Why, thank you!\p"
-	.string "I want you to have this POKeMON\n"
+	.string "I want you to have this POKEMON\n"
 	.string "for saving us.$"
 
 SilphCo_7F_Text_ObtainedLaprasFromEmployee::
@@ -245,7 +245,7 @@ SilphCo_7F_Text_ObtainedLaprasFromEmployee::
 
 SilphCo_7F_Text_ExplainLapras::
 	.string "It's a LAPRAS.\n"
-	.string "It's a very intelligent POKeMON.\p"
+	.string "It's a very intelligent POKEMON.\p"
 	.string "We kept it in our lab, but it will\n"
 	.string "be much better off with you.\p"
 	.string "I think you will be a good TRAINER\n"
@@ -261,7 +261,7 @@ SilphCo_7F_Text_RocketBossWentToBoardroom::
 
 SilphCo_7F_Text_RocketsAfterMasterBall::
 	.string "TEAM ROCKET was after the MASTER\n"
-	.string "BALL, which catches any POKeMON.$"
+	.string "BALL, which catches any POKEMON.$"
 
 SilphCo_7F_Text_CanceledMasterBallProject::
 	.string "We canceled the MASTER BALL\n"
@@ -269,7 +269,7 @@ SilphCo_7F_Text_CanceledMasterBallProject::
 
 SilphCo_7F_Text_BadIfTeamRocketTookOver::
 	.string "It would be bad if TEAM ROCKET\n"
-	.string "took over SILPH or our POKeMON.$"
+	.string "took over SILPH or our POKEMON.$"
 
 SilphCo_7F_Text_WowYouChasedOffTeamRocket::
 	.string "Wow!\p"
@@ -354,7 +354,7 @@ SilphCo_7F_Text_RivalPostBattle::
 	.string "starting to see what's strong and\l"
 	.string "how they evolve!\p"
 	.string "Am I a genius or what?\p"
-	.string "I'm going to the POKeMON LEAGUE to\n"
+	.string "I'm going to the POKEMON LEAGUE to\n"
 	.string "boot out the ELITE FOUR.\p"
 	.string "I'll become the world's most\n"
 	.string "powerful TRAINER!\p"

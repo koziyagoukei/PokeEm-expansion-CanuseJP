@@ -18,11 +18,11 @@ Route4_EventScript_RouteSign::
 
 Route4_Text_TrippedOverGeodude::
 	.string "Ouch! I tripped over a rocky\n"
-	.string "POKeMON, GEODUDE!$"
+	.string "POKEMON, GEODUDE!$"
 
 Route4_Text_CrissyIntro::
 	.string "I came to MT. MOON in search of\n"
-	.string "mushroom POKeMON.$"
+	.string "mushroom POKEMON.$"
 
 Route4_Text_CrissyDefeat::
 	.string "After all I did to catch them!$"
@@ -47,7 +47,7 @@ Text_MegaPunchTeach::
 	.string "MEGA PUNCH is the ultimate attack!\l"
 	.string "You agree, yes?\p"
 	.string "Now!\n"
-	.string "Let me teach it to your POKeMON!$"
+	.string "Let me teach it to your POKEMON!$"
 
 Text_MegaPunchDeclined::
 	.string "You'll be back when you understand\n"
@@ -55,7 +55,7 @@ Text_MegaPunchDeclined::
 
 Text_MegaPunchWhichMon::
 	.string "Fine!\n"
-	.string "Which POKeMON will learn it?$"
+	.string "Which POKEMON will learn it?$"
 
 Text_MegaPunchTaught::
 	.string "Now, we are comrades in the way of\n"
@@ -71,7 +71,7 @@ Text_MegaKickTeach::
 	.string "MEGA KICK is the ultimate attack!\l"
 	.string "Don't you agree?\p"
 	.string "Okay!\n"
-	.string "I'll teach it to your POKeMON!$"
+	.string "I'll teach it to your POKEMON!$"
 
 Text_MegaKickDeclined::
 	.string "You'll come crawling back when you\n"
@@ -79,7 +79,7 @@ Text_MegaKickDeclined::
 
 Text_MegaKickWhichMon::
 	.string "All right!\n"
-	.string "Which POKeMON wants to learn it?$"
+	.string "Which POKEMON wants to learn it?$"
 
 Text_MegaKickTaught::
 	.string "Now, we are soul mates in the way\n"

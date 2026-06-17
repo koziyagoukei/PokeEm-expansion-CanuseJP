@@ -65,12 +65,12 @@ ViridianForest_EventScript_Charlie::
 
 ViridianForest_Text_FriendsItchingToBattle::
 	.string "I came here with some friends to\n"
-	.string "catch us some BUG POKeMON!\p"
+	.string "catch us some BUG POKEMON!\p"
 	.string "They're all itching to get into\n"
-	.string "some POKeMON battles!$"
+	.string "some POKEMON battles!$"
 
 ViridianForest_Text_RickIntro::
-	.string "Hey! You have POKeMON!\n"
+	.string "Hey! You have POKEMON!\n"
 	.string "Come on!\l"
 	.string "Let's battle 'em!$"
 
@@ -84,11 +84,11 @@ ViridianForest_Text_RickPostBattle::
 ViridianForest_Text_DougIntro::
 	.string "Yo!\n"
 	.string "You can't jam out if you're a\l"
-	.string "POKeMON TRAINER!$"
+	.string "POKEMON TRAINER!$"
 
 ViridianForest_Text_DougDefeat::
 	.string "Huh?\n"
-	.string "I ran out of POKeMON!$"
+	.string "I ran out of POKEMON!$"
 
 ViridianForest_Text_DougPostBattle::
 	.string "That totally stinks! I'm going to\n"
@@ -117,34 +117,34 @@ ViridianForest_Text_AnthonyDefeat::
 	.string "Nothing went right.$"
 
 ViridianForest_Text_AnthonyPostBattle::
-	.string "I lost some of my allowance…$"
+	.string "I lost some of my allowance...$"
 
 ViridianForest_Text_CharlieIntro::
-	.string "Did you know that POKeMON evolve?$"
+	.string "Did you know that POKEMON evolve?$"
 
 ViridianForest_Text_CharlieDefeat::
 	.string "Oh!\n"
 	.string "I lost!$"
 
 ViridianForest_Text_CharliePostBattle::
-	.string "BUG POKeMON evolve quickly.\n"
+	.string "BUG POKEMON evolve quickly.\n"
 	.string "They're a lot of fun!$"
 
 ViridianForest_Text_RanOutOfPokeBalls::
 	.string "I was throwing POKe BALLS to\n"
-	.string "catch POKeMON, and I ran out.\p"
+	.string "catch POKEMON, and I ran out.\p"
 	.string "That's why you can never have too\n"
 	.string "many POKe BALLS.$"
 
 ViridianForest_Text_AvoidGrassyAreasWhenWeak::
 	.string "TRAINER TIPS\p"
-	.string "If your POKeMON are weak and you\n"
+	.string "If your POKEMON are weak and you\n"
 	.string "want to avoid battles, stay away\l"
 	.string "from grassy areas!$"
 
 ViridianForest_Text_UseAntidoteForPoison::
 	.string "For poison, use ANTIDOTE!\n"
-	.string "Get it at POKeMON MARTS!$"
+	.string "Get it at POKEMON MARTS!$"
 
 ViridianForest_Text_ContactOakViaPCToRatePokedex::
 	.string "TRAINER TIPS\p"
@@ -153,14 +153,14 @@ ViridianForest_Text_ContactOakViaPCToRatePokedex::
 
 ViridianForest_Text_CantCatchOwnedMons::
 	.string "TRAINER TIPS\p"
-	.string "You can't catch a POKeMON that\n"
+	.string "You can't catch a POKEMON that\n"
 	.string "belongs to someone else.\p"
 	.string "Throw POKe BALLS only at wild\n"
-	.string "POKeMON to catch them!$"
+	.string "POKEMON to catch them!$"
 
 ViridianForest_Text_WeakenMonsBeforeCapture::
 	.string "TRAINER TIPS\p"
-	.string "Weaken POKeMON before attempting\n"
+	.string "Weaken POKEMON before attempting\n"
 	.string "capture!\p"
 	.string "When healthy, they may escape!$"
 

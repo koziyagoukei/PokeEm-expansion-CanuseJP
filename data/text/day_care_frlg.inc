@@ -3,17 +3,17 @@
 DayCare_Text_ImDaycareManSpeakToMyWife::
 	.string "I'm the DAY-CARE MAN.\p"
 	.string "I help take care of the precious\n"
-	.string "POKeMON of TRAINERS.\p"
+	.string "POKEMON of TRAINERS.\p"
 	.string "If you'd like me to raise your\n"
-	.string "POKeMON, have a word with my wife.$"
+	.string "POKEMON, have a word with my wife.$"
 
 DayCare_Text_DoYouWantEgg::
 	.string "Ah, it's you!\p"
-	.string "We were raising your POKeMON, and\n"
+	.string "We were raising your POKEMON, and\n"
 	.string "my goodness, were we surprised!\p"
-	.string "Your POKeMON had an EGG!\p"
+	.string "Your POKEMON had an EGG!\p"
 	.string "We don't know how it got there,\n"
-	.string "but your POKeMON had it.\p"
+	.string "but your POKEMON had it.\p"
 	.string "You do want it, yes?$"
 
 DayCare_Text_YourMonIsDoingFine::
@@ -25,7 +25,7 @@ DayCare_Text_IllKeepIt::
 	.string "Thanks!$"
 
 DayCare_Text_YouHaveNoRoomForIt::
-	.string "You have no room for it…\n"
+	.string "You have no room for it...\n"
 	.string "Come back when you've made room.$"
 
 DayCare_Text_ReceivedEgg::
@@ -36,8 +36,8 @@ DayCare_Text_TakeGoodCareOfIt::
 	.string "Take good care of it.$"
 
 DayCare_Text_SeeWifeIfYouWantToPickUpMon::
-	.string "ポケモンを　ひきとりたい　ときは\n"
-	.string "ばさんに　いって　おくれ$"
+	.string "ポケモンを ひきとりたい ときは\n"
+	.string "ばさんに いって おくれ$"
 
 DayCare_Text_YourMonsAreDoingFine::
 	.string "Ah, it's you! Your {STR_VAR_1} and\n"
@@ -49,11 +49,11 @@ DayCare_Text_IWillKeepDoYouWantIt::
 
 DayCare_Text_WouldYouLikeUsToRaiseMon::
 	.string "I'm the DAY-CARE LADY.\p"
-	.string "We can raise POKeMON for you.\p"
+	.string "We can raise POKEMON for you.\p"
 	.string "Would you like us to raise one?$"
 
 DayCare_Text_WhichMonShouldWeRaise::
-	.string "Which POKeMON should we raise for\n"
+	.string "Which POKEMON should we raise for\n"
 	.string "you?$"
 
 DayCare_Text_WellRaiseYourMon::
@@ -62,9 +62,9 @@ DayCare_Text_WellRaiseYourMon::
 	.string "Come back for it later.$"
 
 DayCare_Text_WeCanRaiseOneMore::
-	.string "We can raise two of your POKeMON.\p"
+	.string "We can raise two of your POKEMON.\p"
 	.string "Would you like us to raise one\n"
-	.string "more POKeMON for you?$"
+	.string "more POKEMON for you?$"
 
 DayCare_Text_HusbandWasLookingForYou::
 	.string "My husband was looking for you.$"
@@ -74,7 +74,7 @@ DayCare_Text_FineThenComeAgain::
 	.string "Come again.$"
 
 DayCare_Text_NotEnoughMoney::
-	.string "You don't have enough money…$"
+	.string "You don't have enough money...$"
 
 DayCare_Text_TakeOtherOneBackToo::
 	.string "Will you take back the other one,\n"
@@ -87,7 +87,7 @@ DayCare_Text_ComeAgain::
 DayCare_Text_GoodToSeeYou::
 	.string "Ah, it's you!\n"
 	.string "Good to see you.\p"
-	.string "Your POKeMON can only be doing\n"
+	.string "Your POKEMON can only be doing\n"
 	.string "good!$"
 
 DayCare_Text_YourMonHasGrownXLevels::
@@ -95,11 +95,11 @@ DayCare_Text_YourMonHasGrownXLevels::
 	.string "grown by {STR_VAR_2}.$"
 
 DayCare_Text_YourPartyIsFull::
-	.string "Your POKeMON party is full.\n"
+	.string "Your POKEMON party is full.\n"
 	.string "Make room, then come see me.$"
 
 DayCare_Text_TakeBackWhichMon::
-	.string "どっちの　ポケモンを　ひきとるかい?$"
+	.string "どっちの ポケモンを ひきとるかい?$"
 
 DayCare_Text_ItWillCostX::
 	.string "If you want your {STR_VAR_1} back,\n"
@@ -107,7 +107,7 @@ DayCare_Text_ItWillCostX::
 
 DayCare_Text_HeresYourMon::
 	.string "Perfect!\n"
-	.string "Here's your POKeMON.$"
+	.string "Here's your POKEMON.$"
 
 DayCare_Text_TookBackMon::
 	.string "{PLAYER} took back {STR_VAR_1} from\n"
@@ -115,14 +115,14 @@ DayCare_Text_TookBackMon::
 
 DayCare_Text_YouHaveJustOneMon::
 	.string "Oh? But you have just one\n"
-	.string "POKeMON.\p"
+	.string "POKEMON.\p"
 	.string "Come back another time.$"
 
 DayCare_Text_TakeYourMonBack::
-	.string "Will you take your POKeMON back?$"
+	.string "Will you take your POKEMON back?$"
 
 DayCare_Text_WhatWillYouBattleWith::
-	.string "If you leave me that POKeMON,\n"
+	.string "If you leave me that POKEMON,\n"
 	.string "what will you battle with?\p"
 	.string "Come back another time.$"
 

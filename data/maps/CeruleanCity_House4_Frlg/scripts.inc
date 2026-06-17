@@ -91,15 +91,15 @@ CeruleanCity_House4_EventScript_NoRoomForBerries::
 	end
 
 CeruleanCity_House4_Text_NothingEntertaining::
-	.string "Sigh…\n"
-	.string "Too much time, too little to do…\p"
+	.string "Sigh...\n"
+	.string "Too much time, too little to do...\p"
 	.string "Is nothing entertaining happening\n"
 	.string "anywhere?$"
 
 CeruleanCity_House4_Text_NewNewsInformativeHaveThis::
 	.string "Ah!\n"
 	.string "A new news report!\p"
-	.string "Hmm…\p"
+	.string "Hmm...\p"
 	.string "I see!\n"
 	.string "That was quite informative!\p"
 	.string "I applaud you for taking interest\n"
@@ -110,7 +110,7 @@ CeruleanCity_House4_Text_NewNewsInformativeHaveThis::
 CeruleanCity_House4_Text_IncredibleNewsHaveBerries::
 	.string "Oh, oh!\n"
 	.string "Th-this news report!\p"
-	.string "Hmm…\p"
+	.string "Hmm...\p"
 	.string "Amazing!\n"
 	.string "What an incredible piece of news!\p"
 	.string "I haven't seen a news story this\n"
@@ -120,9 +120,9 @@ CeruleanCity_House4_Text_IncredibleNewsHaveBerries::
 
 CeruleanCity_House4_Text_WishCouldShareNewsWithOthers::
 	.string "It seems such a shame to not share\n"
-	.string "this news with other folks…\p"
-	.string "I wish I could tell someone…\n"
-	.string "Let others know the news…$"
+	.string "this news with other folks...\p"
+	.string "I wish I could tell someone...\n"
+	.string "Let others know the news...$"
 
 CeruleanCity_House4_Text_ThanksForSpreadingNewsTakeThis::
 	.string "Ah, you've spread the news for me?\p"

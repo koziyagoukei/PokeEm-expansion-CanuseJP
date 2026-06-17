@@ -695,45 +695,45 @@ Route110_TrickHouseEntrance_EventScript_DoHidingSpotSparkle::
 	return
 
 Route110_TrickHouseEntrance_Text_YoureBeingWatched:
-	.string "You're being watched…$"
+	.string "You're being watched...$"
 
 Route110_TrickHouseEntrance_Text_ConcealedBeneathDesk:
-	.string "Hah? Grrr…\p"
+	.string "Hah? Grrr...\p"
 	.string "How did you know I concealed myself\n"
 	.string "beneath this desk? You're sharp!$"
 
 Route110_TrickHouseEntrance_Text_ConcealedBehindTree:
-	.string "Hah? Grrr…\p"
+	.string "Hah? Grrr...\p"
 	.string "How did you know I concealed myself\n"
 	.string "behind this tree? You're sharp!$"
 
 Route110_TrickHouseEntrance_Text_ConcealedInDresser:
-	.string "Hah? Grrr…\p"
+	.string "Hah? Grrr...\p"
 	.string "How did you know I concealed myself\n"
 	.string "in this dresser? You're sharp!$"
 
 Route110_TrickHouseEntrance_Text_ConealedBeyondWindow:
-	.string "Hah? Grrr…\p"
+	.string "Hah? Grrr...\p"
 	.string "How did you know I concealed myself\n"
 	.string "beyond this window? You're sharp!$"
 
 Route110_TrickHouseEntrance_Text_ConcealedInPlanter:
-	.string "Hah? Grrr…\p"
+	.string "Hah? Grrr...\p"
 	.string "How did you know I concealed myself\n"
 	.string "in this planter? You're sharp!$"
 
 Route110_TrickHouseEntrance_Text_ConcealedInCupboard:
-	.string "Hah? Grrr…\p"
+	.string "Hah? Grrr...\p"
 	.string "How did you know I concealed myself\n"
 	.string "in this cupboard? You're sharp!$"
 
 Route110_TrickHouseEntrance_Text_ConcealedBehindWindow:
-	.string "Hah? Grrr…\p"
+	.string "Hah? Grrr...\p"
 	.string "How did you know I concealed myself\n"
 	.string "behind this window? You're sharp!$"
 
 Route110_TrickHouseEntrance_Text_ConcealedBeneathCushion:
-	.string "Hah? Grrr…\p"
+	.string "Hah? Grrr...\p"
 	.string "How did you know I concealed myself\n"
 	.string "beneath this cushion? You're sharp!$"
 
@@ -741,7 +741,7 @@ Route110_TrickHouseEntrance_Text_TheyCallMeTrickMaster:
 	.string "Behold!\p"
 	.string "For I am the greatest living mystery\n"
 	.string "of a man in all of HOENN!\l"
-	.string "They call me…\p"
+	.string "They call me...\p"
 	.string "The TRICK MASTER!\n"
 	.string "Wahahaha! Glad to meet you!$"
 
@@ -763,14 +763,14 @@ Route110_TrickHouseEntrance_Text_GoInHoleBehindScroll:
 	.string "Want to go in?$"
 
 Route110_TrickHouseEntrance_Text_LeavingOnJourneyNote:
-	.string "There is a note affixed to the scroll…\p"
-	.string "“I am leaving on a journey.\n"
-	.string "Don't look for me. TRICK MASTER”$"
+	.string "There is a note affixed to the scroll...\p"
+	.string ""I am leaving on a journey.\n"
+	.string "Don't look for me. TRICK MASTER"$"
 
 Route110_TrickHouseEntrance_Text_NextTimeUseThisTrick:
 	.string "For the next time, I'll use this trick,\n"
-	.string "and that scheme, and those ruses…\p"
-	.string "Mufufufu… If I may say so, it's\n"
+	.string "and that scheme, and those ruses...\p"
+	.string "Mufufufu... If I may say so, it's\n"
 	.string "brilliantly difficult, even for me!$"
 
 Route110_TrickHouseEntrance_Text_InMidstOfDevisingNewChallenges:
@@ -820,5 +820,5 @@ Route110_TrickHousePuzzle_Text_SecretCodeWrittenOnIt:
 
 Route110_TrickHouseEntrance_Text_DoorLockedWriteSecretCodeHere:
 	.string "The door is locked.\p"
-	.string "…On closer inspection, this is written\n"
-	.string "on it: “Write the secret code here.”$"
+	.string "...On closer inspection, this is written\n"
+	.string "on it: "Write the secret code here."$"

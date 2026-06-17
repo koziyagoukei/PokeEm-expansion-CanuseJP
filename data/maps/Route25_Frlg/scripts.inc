@@ -17,10 +17,10 @@ Route25_Text_JoeyDefeat::
 	.string "You're decent.$"
 
 Route25_Text_JoeyPostBattle::
-	.string "All POKeMON have weaknesses.\n"
+	.string "All POKEMON have weaknesses.\n"
 	.string "Even the strongest ones.\p"
 	.string "That's why it's best to raise\n"
-	.string "POKeMON of different types.$"
+	.string "POKEMON of different types.$"
 
 Route25_Text_DanIntro::
 	.string "Dad took me to a great party on\n"
@@ -38,7 +38,7 @@ Route25_Text_FlintIntro::
 	.string "I've got a girlfriend!$"
 
 Route25_Text_FlintDefeat::
-	.string "Aww, darn…$"
+	.string "Aww, darn...$"
 
 Route25_Text_FlintPostBattle::
 	.string "Oh, well.\n"
@@ -49,26 +49,26 @@ Route25_Text_KelseyIntro::
 	.string "My boyfriend is cool!$"
 
 Route25_Text_KelseyDefeat::
-	.string "My conditioning isn't the best…$"
+	.string "My conditioning isn't the best...$"
 
 Route25_Text_KelseyPostBattle::
 	.string "I wish my boyfriend was as good\n"
 	.string "as you.$"
 
 Route25_Text_ChadIntro::
-	.string "I had this feeling…\n"
+	.string "I had this feeling...\n"
 	.string "I knew I had to battle you!$"
 
 Route25_Text_ChadDefeat::
 	.string "I knew I'd lose, too!$"
 
 Route25_Text_ChadPostBattle::
-	.string "If your POKeMON gets confused,\n"
+	.string "If your POKEMON gets confused,\n"
 	.string "switch it out.\p"
 	.string "That's a good tactic.$"
 
 Route25_Text_HaleyIntro::
-	.string "My friend has many cute POKeMON.\n"
+	.string "My friend has many cute POKEMON.\n"
 	.string "I'm so jealous!$"
 
 Route25_Text_HaleyDefeat::
@@ -101,7 +101,7 @@ Route25_Text_NobPostBattle::
 	.string "The POKeMANIAC sure lives up to\n"
 	.string "his name.\p"
 	.string "His collection includes many rare\n"
-	.string "species of POKeMON.$"
+	.string "species of POKEMON.$"
 
 Route25_Text_WayneIntro::
 	.string "You're going to see BILL?\n"
@@ -125,6 +125,6 @@ Route25_Text_MistyHighHopesAboutThisPlace::
 
 Route25_Text_AreYouHereAlone::
 	.string "Hello, are you here alone?\p"
-	.string "If you're out at CERULEAN's cape…\n"
+	.string "If you're out at CERULEAN's cape...\n"
 	.string "Well, it should be as a couple.$"
 

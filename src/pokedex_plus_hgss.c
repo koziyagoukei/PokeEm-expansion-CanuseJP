@@ -6547,15 +6547,15 @@ static void PrintEvolutionTargetSpeciesAndMethod(u8 taskId, enum Species species
             case EVO_SPIN:
                 StringCopy(gStringVar4, COMPOUND_STRING("Spin "));
                 if (evolutions[i].param == SPIN_CW_SHORT)
-                    StringAppend(gStringVar4, COMPOUND_STRING("CW <5s"));
+                    StringAppend(gStringVar4, COMPOUND_STRING("CW under 5s"));
                 else if (evolutions[i].param == SPIN_CW_LONG)
-                    StringAppend(gStringVar4, COMPOUND_STRING("CW >5s"));
+                    StringAppend(gStringVar4, COMPOUND_STRING("CW over 5s"));
                 else if (evolutions[i].param == SPIN_CCW_SHORT)
-                    StringAppend(gStringVar4, COMPOUND_STRING("CCW <5s"));
+                    StringAppend(gStringVar4, COMPOUND_STRING("CCW under 5s"));
                 else if (evolutions[i].param == SPIN_CCW_LONG)
-                    StringAppend(gStringVar4, COMPOUND_STRING("CCW >5s"));
+                    StringAppend(gStringVar4, COMPOUND_STRING("CCW over 5s"));
                 else
-                    StringAppend(gStringVar4, COMPOUND_STRING("CW/CCW >10s"));
+                    StringAppend(gStringVar4, COMPOUND_STRING("CW/CCW over 10s"));
                 break;
             }//Switch end
 
@@ -6582,13 +6582,13 @@ static void PrintEvolutionTargetSpeciesAndMethod(u8 taskId, enum Species species
                     StringAppend(gStringVar4, COMPOUND_STRING("{UP_ARROW_2}friendship"));
                     break;
                 case IF_ATK_GT_DEF:
-                    StringAppend(gStringVar4, COMPOUND_STRING("Atk > Def"));
+                    StringAppend(gStringVar4, COMPOUND_STRING("Atk over Def"));
                     break;
                 case IF_ATK_EQ_DEF:
                     StringAppend(gStringVar4, COMPOUND_STRING("Atk = Def"));
                     break;
                 case IF_ATK_LT_DEF:
-                    StringAppend(gStringVar4, COMPOUND_STRING("Atk < Def"));
+                    StringAppend(gStringVar4, COMPOUND_STRING("Atk under Def"));
                     break;
                 case IF_TIME:
                     switch (evolutions[i].params[j].arg1)
@@ -6727,7 +6727,7 @@ static void PrintEvolutionTargetSpeciesAndMethod(u8 taskId, enum Species species
                     StringAppend(gStringVar4, COMPOUND_STRING("low-Key natures"));
                     break;
                 case IF_RECOIL_DAMAGE_GE:
-                    StringAppend(gStringVar4, COMPOUND_STRING("takes >= "));
+                    StringAppend(gStringVar4, COMPOUND_STRING("takes at least= "));
                     ConvertIntToDecimalStringN(gStringVar2, evolutions[i].params[j].arg1, STR_CONV_MODE_LEFT_ALIGN, 3);
                     StringAppend(gStringVar4, gStringVar2);
                     StringAppend(gStringVar4, COMPOUND_STRING(" recoil dmg"));

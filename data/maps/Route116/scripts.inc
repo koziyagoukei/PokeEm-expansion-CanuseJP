@@ -351,31 +351,31 @@ Route116_EventScript_Johnson::
 Route116_Text_ScoundrelMadeOffWithPeeko:
 	.string "Ohhh, what am I to do?\p"
 	.string "We were on our walk, PEEKO and I, when\n"
-	.string "we were jumped by an odd thug…\p"
+	.string "we were jumped by an odd thug...\p"
 	.string "The scoundrel made off with my\n"
 	.string "darling PEEKO!\p"
 	.string "Wrrrooooooaaaar! PEEKO!$"
 
 Route116_Text_WantToDigTunnel:
-	.string "Nnn… Roar!\p"
+	.string "Nnn... Roar!\p"
 	.string "I want to dig that tunnel!$"
 
 Route116_Text_DiggingTunnelWhenGoonOrderedMeOut:
-	.string "Nnn… Roar!\n"
+	.string "Nnn... Roar!\n"
 	.string "What's going on?\p"
 	.string "I was digging the tunnel without any\n"
 	.string "tools when some goon ordered me out!\p"
-	.string "That tunnel's filled with POKeMON\n"
+	.string "That tunnel's filled with POKEMON\n"
 	.string "that react badly to loud noises.\l"
 	.string "They could cause an uproar.\p"
 	.string "That's why we stopped using heavy\n"
-	.string "equipment for tunneling…\p"
+	.string "equipment for tunneling...\p"
 	.string "I'm worried that the goon will do\n"
 	.string "something stupid and startle the\l"
-	.string "POKeMON into an uproar.$"
+	.string "POKEMON into an uproar.$"
 
 Route116_Text_GoonHightailedItOutOfTunnel:
-	.string "Nnn… Roar!\p"
+	.string "Nnn... Roar!\p"
 	.string "That goofy goon hightailed it out of\n"
 	.string "the tunnel! I can go back to digging!$"
 
@@ -400,7 +400,7 @@ Route116_Text_ThankYouTokenOfAppreciation:
 
 Route116_Text_NewBallAvailableAtMart:
 	.string "Our new POKe BALL will be available\n"
-	.string "at the POKeMON MART in RUSTBORO.\p"
+	.string "at the POKEMON MART in RUSTBORO.\p"
 	.string "Please do try it out!\n"
 	.string "Thank you and bye-bye!$"
 
@@ -415,7 +415,7 @@ Route116_Text_TokenOfAppreciation:
 	.string "for our most wonderful TRAINER!$"
 
 Route116_Text_CanYouHelpMeFindGlasses:
-	.string "I dropped my glasses…\n"
+	.string "I dropped my glasses...\n"
 	.string "Can you help me find them?$"
 
 Route116_Text_MayISeeThoseGlasses:
@@ -423,21 +423,21 @@ Route116_Text_MayISeeThoseGlasses:
 	.string "May I see them for a second?$"
 
 Route116_Text_NotWhatImLookingForMaybeTheyArentHere:
-	.string "Hmm…\n"
+	.string "Hmm...\n"
 	.string "These are BLACKGLASSES.\l"
-	.string "They're not what I'm looking for…\p"
+	.string "They're not what I'm looking for...\p"
 	.string "Maybe my glasses aren't around\n"
-	.string "here…$"
+	.string "here...$"
 
 Route116_Text_CantFindGlassesNotHere:
-	.string "Hmm…\n"
-	.string "I can't find my glasses anywhere…\l"
-	.string "Maybe they're not around here…$"
+	.string "Hmm...\n"
+	.string "I can't find my glasses anywhere...\l"
+	.string "Maybe they're not around here...$"
 
 Route116_Text_NotWhatImLookingFor:
-	.string "Hmm…\n"
+	.string "Hmm...\n"
 	.string "These are BLACKGLASSES.\l"
-	.string "They're not what I'm looking for…$"
+	.string "They're not what I'm looking for...$"
 
 Route116_Text_RouteSignRustboro:
 	.string "ROUTE 116\n"
@@ -445,19 +445,19 @@ Route116_Text_RouteSignRustboro:
 
 Route116_Text_RusturfTunnelSign:
 	.string "RUSTURF TUNNEL\n"
-	.string "“Linking RUSTBORO and VERDANTURF\p"
-	.string "“The tunnel project has been\n"
-	.string "canceled.”$"
+	.string ""Linking RUSTBORO and VERDANTURF\p"
+	.string ""The tunnel project has been\n"
+	.string "canceled."$"
 
 Route116_Text_TunnelersRestHouse:
 	.string "TUNNELER'S REST HOUSE$"
 
 Route116_Text_TrainerTipsBToStopEvolution:
 	.string "TRAINER TIPS\p"
-	.string "If you want to stop a POKeMON from\n"
+	.string "If you want to stop a POKEMON from\n"
 	.string "evolving, press the B Button while it\l"
 	.string "is trying to evolve.\l"
-	.string "The startled POKeMON will stop.\p"
+	.string "The startled POKEMON will stop.\p"
 	.string "This is called an evolution cancel.$"
 
 Route116_Text_TrainerTipsBagHasPockets:

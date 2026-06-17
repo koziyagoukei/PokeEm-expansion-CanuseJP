@@ -48,7 +48,7 @@ MtMoon_1F_EventScript_Robby::
 MtMoon_1F_Text_MarcosIntro::
 	.string "WHOA!\n"
 	.string "You shocked me!\l"
-	.string "…Oh, you're just a kid!$"
+	.string "...Oh, you're just a kid!$"
 
 MtMoon_1F_Text_MarcosDefeat::
 	.string "Wow!\n"
@@ -87,10 +87,10 @@ MtMoon_1F_Text_JovanIntro::
 	.string "Don't sneak up on me!$"
 
 MtMoon_1F_Text_JovanDefeat::
-	.string "My POKeMON won't do!$"
+	.string "My POKEMON won't do!$"
 
 MtMoon_1F_Text_JovanPostBattle::
-	.string "I have to find stronger POKeMON.\n"
+	.string "I have to find stronger POKEMON.\n"
 	.string "Where might they be?$"
 
 MtMoon_1F_Text_IrisIntro::

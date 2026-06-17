@@ -103,7 +103,7 @@ PokemonTower_2F_Movement_RivalExitDown::
 PokemonTower_2F_Text_RivalIntro::
 	.string "{RIVAL}: Hey, {PLAYER}!\n"
 	.string "What brings you here?\l"
-	.string "Is your POKeMON dead?\p"
+	.string "Is your POKEMON dead?\p"
 	.string "Hey! It's alive!\p"
 	.string "I can at least make them faint!\n"
 	.string "Let's go!$"

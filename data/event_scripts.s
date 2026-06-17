@@ -1358,16 +1358,16 @@ Common_EventScript_PlayerHandedOverTheItem::
 
 @ The below and surf.inc could be split into some text/notices.inc
 gText_PokemartSign::
-	.string "“Selected items for your convenience!”\n"
-	.string "POKeMON MART$"
+	.string ""Selected items for your convenience!"\n"
+	.string "POKEMON MART$"
 
 gText_PokemonCenterSign::
-	.string "“Rejuvenate your tired partners!”\n"
-	.string "POKeMON CENTER$"
+	.string ""Rejuvenate your tired partners!"\n"
+	.string "POKEMON CENTER$"
 
 gText_MomOrDadMightLikeThisProgram::
 	.string "{STR_VAR_1} might like this program.\n"
-	.string "… … … … … … … … … … … … … … … …\p"
+	.string "... ... ... ... ... ... ... ... ... ... ... ... ... ... ... ...\p"
 	.string "Better get going!$"
 
 gText_WhichFloorWouldYouLike::
@@ -1383,13 +1383,13 @@ gText_SelectWithoutRegisteredItem::
 	.string "registered to SELECT for easy use.$"
 
 gText_PokemonTrainerSchoolEmail::
-	.string "There's an e-mail from POKeMON TRAINER\n"
+	.string "There's an e-mail from POKEMON TRAINER\n"
 	.string "SCHOOL.\p"
-	.string "… … … … … …\p"
-	.string "A POKeMON may learn up to four moves.\p"
+	.string "... ... ... ... ... ...\p"
+	.string "A POKEMON may learn up to four moves.\p"
 	.string "A TRAINER's expertise is tested on the\n"
-	.string "move sets chosen for POKeMON.\p"
-	.string "… … … … … …$"
+	.string "move sets chosen for POKEMON.\p"
+	.string "... ... ... ... ... ...$"
 
 gText_PlayerHouseBootPC::
 	.string "{PLAYER} booted up the PC.$"
@@ -1403,24 +1403,24 @@ gText_UnusedNicknameReceivedPokemon::
 
 gText_PlayerWhitedOut::
 	.string "{PLAYER} is out of usable\n"
-	.string "POKeMON!\p{PLAYER} whited out!$"
+	.string "POKEMON!\p{PLAYER} whited out!$"
 
 gText_FirstShouldRestoreMonsHealth::
 	.string "First, you should restore your\n"
-	.string "POKeMON to full health.$"
+	.string "POKEMON to full health.$"
 
 gText_MonsHealedShouldBuyPotions::
-	.string "Your POKeMON have been healed\n"
+	.string "Your POKEMON have been healed\n"
 	.string "to perfect health.\p"
-	.string "If your POKeMON's energy, HP,\n"
+	.string "If your POKEMON's energy, HP,\n"
 	.string "is down, please come see us.\p"
 	.string "If you're planning to go far in the\n"
 	.string "field, you should buy some POTIONS\l"
-	.string "at the POKeMON MART.\p"
+	.string "at the POKEMON MART.\p"
 	.string "We hope you excel!$"
 
 gText_MonsHealed::
-	.string "Your POKeMON have been healed\n"
+	.string "Your POKEMON have been healed\n"
 	.string "to perfect health.\p"
 	.string "We hope you excel!$"
 
@@ -1434,16 +1434,16 @@ gText_HadQuiteAnExperienceTakeRest::
 
 gText_MomExplainHPGetPotions::
 	.string "MOM: Oh, good! You and your\n"
-	.string "POKeMON are looking great.\p"
+	.string "POKEMON are looking great.\p"
 	.string "I just heard from {STR_VAR_1}.\p"
-	.string "He said that POKeMON's energy is\n"
+	.string "He said that POKEMON's energy is\n"
 	.string "measured in HP.\p"
-	.string "If your POKeMON lose their HP,\n"
+	.string "If your POKEMON lose their HP,\n"
 	.string "you can restore them at any\l"
-	.string "POKeMON CENTER.\p"
+	.string "POKEMON CENTER.\p"
 	.string "If you're going to travel far away,\n"
 	.string "the smart TRAINER stocks up on\l"
-	.string "POTIONS at the POKeMON MART.\p"
+	.string "POTIONS at the POKEMON MART.\p"
 	.string "Make me proud, honey!\p"
 	.string "Take care!$"
 
@@ -1461,12 +1461,12 @@ gText_ComeBackWithSecretPower::
 	.string "you good stuff in secrecy.$"
 
 gText_PokerusExplanation::
-	.string "Your POKeMON may be infected with\n"
+	.string "Your POKEMON may be infected with\n"
 	.string "POKeRUS.\p"
 	.string "Little is known about the POKeRUS\n"
 	.string "except that they are microscopic life-\l"
-	.string "forms that attach to POKeMON.\p"
-	.string "While infected, POKeMON are said to\n"
+	.string "forms that attach to POKEMON.\p"
+	.string "While infected, POKEMON are said to\n"
 	.string "grow exceptionally well.$"
 
 	.include "data/text/surf.inc"
@@ -1480,12 +1480,12 @@ gText_BigHoleInTheWall::
 
 gText_SorryWirelessClubAdjustments::
 	.string "I'm terribly sorry.\n"
-	.string "The POKeMON WIRELESS CLUB is\l"
+	.string "The POKEMON WIRELESS CLUB is\l"
 	.string "undergoing adjustments now.$"
 
 gText_UndergoingAdjustments::
 	.string "It appears to be undergoing\n"
-	.string "adjustments…$"
+	.string "adjustments...$"
 
 @ Unused
 gText_SorryTradeCenterInspections::

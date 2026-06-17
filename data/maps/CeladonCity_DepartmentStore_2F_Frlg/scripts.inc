@@ -61,8 +61,8 @@ CeladonCity_DepartmentStore_2F_TMs::
 	end
 
 CeladonCity_DepartmentStore_2F_Text_SuperRepelMorePowerfulRepel::
-	.string "SUPER REPEL keeps weak POKeMON at\n"
-	.string "bay…\p"
+	.string "SUPER REPEL keeps weak POKEMON at\n"
+	.string "bay...\p"
 	.string "Hmm, it's a more powerful REPEL.$"
 
 CeladonCity_DepartmentStore_2F_Text_BuyReviveForLongOutings::
@@ -77,5 +77,5 @@ CeladonCity_DepartmentStore_2F_Text_LanceComesToBuyCapes::
 	.string "We have a customer, LANCE, who\n"
 	.string "occasionally comes.\p"
 	.string "He always buys capes.\p"
-	.string "I wonder… Does he have many\n"
+	.string "I wonder... Does he have many\n"
 	.string "identical capes at home?$"

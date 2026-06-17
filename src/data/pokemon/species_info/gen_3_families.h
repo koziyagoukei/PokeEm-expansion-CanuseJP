@@ -12850,7 +12850,7 @@ const struct SpeciesInfo gSpeciesInfoGen3[] =
             "When Kyogre roared, water poured forth\n"
             "and the seas spread outward.\n"
             "Dark clouds enshrouded the world,\n"
-            "and the deluge fell upon all…"),
+            "and the deluge fell upon all..."),
         .pokemonScale = 256,
         .pokemonOffset = 0,
         .trainerScale = 515,

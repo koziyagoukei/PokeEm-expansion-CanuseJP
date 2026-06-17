@@ -33,14 +33,14 @@ ViridianCity_PokemonCenter_1F_Text_FeelFreeToUsePC::
 	.string "It's so kind of her!$"
 
 ViridianCity_PokemonCenter_1F_Text_PokeCenterInEveryTown::
-	.string "There's a POKeMON CENTER in every\n"
+	.string "There's a POKEMON CENTER in every\n"
 	.string "town ahead.\p"
 	.string "They charge no money, so don't\n"
-	.string "be shy about healing POKeMON.$"
+	.string "be shy about healing POKEMON.$"
 
 ViridianCity_PokemonCenter_1F_Text_PokeCentersHealMons::
-	.string "POKeMON CENTERS heal your tired,\n"
-	.string "hurt, or fainted POKeMON.\p"
-	.string "They make all POKeMON completely\n"
+	.string "POKEMON CENTERS heal your tired,\n"
+	.string "hurt, or fainted POKEMON.\p"
+	.string "They make all POKEMON completely\n"
 	.string "healthy.$"
 

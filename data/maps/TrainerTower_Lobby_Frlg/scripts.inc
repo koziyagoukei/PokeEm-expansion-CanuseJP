@@ -229,7 +229,7 @@ TrainerTower_Lobby_Text_WelcomeToTrainerTower::
 TrainerTower_Lobby_Text_TrainersUpToFloorNum::
 	.string "TRAINERS from all over the world\n"
 	.string "gather here to battle.\p"
-	.string "Let me see…\p"
+	.string "Let me see...\p"
 	.string "Right now, there are TRAINERS only\n"
 	.string "up to Floor {STR_VAR_1}.$"
 
@@ -244,8 +244,8 @@ TrainerTower_Lobby_Text_LikeToChallengeTrainers::
 TrainerTower_Lobby_Text_StartClockGetSetGo::
 	.string "Okay, I'll get the clock started,\n"
 	.string "so give it everything you have.\p"
-	.string "On your marks…\p"
-	.string "Get set…\p"
+	.string "On your marks...\p"
+	.string "Get set...\p"
 	.string "Go!$"
 
 TrainerTower_Lobby_Text_PleaseVisitUsAgain::
@@ -268,17 +268,17 @@ TrainerTower_Lobby_Text_MoveCounterHereWhenTrainersSwitch::
 	.string "I'm sorry for the inconvenience.$"
 
 TrainerTower_Roof_Text_ImOwnerBattledPerfectly::
-	.string "Hello…\p"
-	.string "I am the owner of this TOWER…\p"
+	.string "Hello...\p"
+	.string "I am the owner of this TOWER...\p"
 	.string "How the sky soars above this\n"
-	.string "rooftop…\p"
-	.string "The caress of the winds up here…\p"
-	.string "It's all so perfect…\p"
-	.string "The way you battled…\n"
-	.string "It, too, was perfection…$"
+	.string "rooftop...\p"
+	.string "The caress of the winds up here...\p"
+	.string "It's all so perfect...\p"
+	.string "The way you battled...\n"
+	.string "It, too, was perfection...$"
 
 TrainerTower_Roof_Text_ThisIsForYou::
-	.string "This is for you…$"
+	.string "This is for you...$"
 
 TrainerTower_Roof_Text_DoneItInRecordTime::
 	.string "Oh!\n"
@@ -286,19 +286,19 @@ TrainerTower_Roof_Text_DoneItInRecordTime::
 	.string "It's marvelous how you've come up\n"
 	.string "here so quickly.\p"
 	.string "The fact is, you've done it in\n"
-	.string "record time…\p"
+	.string "record time...\p"
 	.string "I'll have your record posted at\n"
 	.string "the reception counter.$"
 
 TrainerTower_Roof_Text_TookSweetTimeGettingHere::
 	.string "You seem to have taken your sweet\n"
-	.string "time getting here…$"
+	.string "time getting here...$"
 
 TrainerTower_Roof_Text_IdLikeToSeeBetterTime::
 	.string "What I would like to see is a\n"
-	.string "better time out of you…\p"
+	.string "better time out of you...\p"
 	.string "I'm counting on you.\p"
-	.string "Until then, farewell…$"
+	.string "Until then, farewell...$"
 
 TrainerTower_Text_XMinYZSec::
 	.string "{STR_VAR_1} min. {STR_VAR_2}.{STR_VAR_3} sec.$"
@@ -309,7 +309,7 @@ TrainerTower_Lobby_Text_HereAreTheResults::
 TrainerTower_Lobby_Text_NeedTwoMonsForDouble::
 	.string "This is a two-on-two battle.\p"
 	.string "You may not battle unless you have\n"
-	.string "at least two POKeMON.$"
+	.string "at least two POKEMON.$"
 
 TrainerTower_Lobby_Text_ExplainTrainerTower::
 	.string "Here at TRAINER TOWER, there is an\n"
@@ -334,8 +334,8 @@ TrainerTower_Lobby_Text_WonderWhatKindsOfTrainers::
 	.string "It's nerve-racking!$"
 
 TrainerTower_Lobby_Text_StairsTougherThanAnyBattle::
-	.string "Gasp, gasp…\n"
-	.string "Gasp…\p"
-	.string "Never mind battling! These stairs…\n"
-	.string "They're tougher than any battle…$"
+	.string "Gasp, gasp...\n"
+	.string "Gasp...\p"
+	.string "Never mind battling! These stairs...\n"
+	.string "They're tougher than any battle...$"
 

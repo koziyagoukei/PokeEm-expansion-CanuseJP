@@ -153,13 +153,13 @@ SkyPillar_Outside_Text_EarthquakeNotMomentToWaste:
 	.string "We've got to hurry!$"
 
 SkyPillar_Outside_Text_SituationGettingWorse:
-	.string "WALLACE: Hmm…\n"
-	.string "The situation is getting worse…$"
+	.string "WALLACE: Hmm...\n"
+	.string "The situation is getting worse...$"
 
 SkyPillar_Outside_Text_GotToGoBackForSootopolis:
-	.string "WALLACE: This isn't good…\p"
+	.string "WALLACE: This isn't good...\p"
 	.string "The weather distortion is spreading\n"
-	.string "even here…\p"
+	.string "even here...\p"
 	.string "{PLAYER}{KUN}.\p"
 	.string "RAYQUAZA should be farther up\n"
 	.string "from here.\p"

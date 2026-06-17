@@ -6,11 +6,11 @@ Route9_EventScript_RouteSign::
 	end
 
 Route9_Text_AliciaIntro::
-	.string "You have POKeMON with you!\n"
+	.string "You have POKEMON with you!\n"
 	.string "You're mine!$"
 
 Route9_Text_AliciaDefeat::
-	.string "You deceived me…$"
+	.string "You deceived me...$"
 
 Route9_Text_AliciaPostBattle::
 	.string "The tunnel coming up is pitch-black\n"
@@ -20,7 +20,7 @@ Route9_Text_AliciaPostBattle::
 
 Route9_Text_ChrisIntro::
 	.string "Who's that walking there with those\n"
-	.string "good-looking POKeMON?$"
+	.string "good-looking POKEMON?$"
 
 Route9_Text_ChrisDefeat::
 	.string "Out like a light!$"
@@ -30,10 +30,10 @@ Route9_Text_ChrisPostBattle::
 
 Route9_Text_DrewIntro::
 	.string "I'm taking the ROCK TUNNEL to\n"
-	.string "go to LAVENDER…$"
+	.string "go to LAVENDER...$"
 
 Route9_Text_DrewDefeat::
-	.string "Can't measure up…$"
+	.string "Can't measure up...$"
 
 Route9_Text_DrewPostBattle::
 	.string "Are you off to ROCK TUNNEL, too?$"
@@ -56,7 +56,7 @@ Route9_Text_JeremyIntro::
 Route9_Text_JeremyDefeat::
 	.string "Keep it coming, eh!\p"
 	.string "Oh wait.\n"
-	.string "I'm out of POKeMON!$"
+	.string "I'm out of POKEMON!$"
 
 Route9_Text_JeremyPostBattle::
 	.string "You sure had guts standing up to\n"
@@ -75,7 +75,7 @@ Route9_Text_BricePostBattle::
 
 Route9_Text_BrentIntro::
 	.string "I got up early every day to raise\n"
-	.string "my POKeMON from cocoons!$"
+	.string "my POKEMON from cocoons!$"
 
 Route9_Text_BrentDefeat::
 	.string "WHAT?\p"
@@ -83,7 +83,7 @@ Route9_Text_BrentDefeat::
 
 Route9_Text_BrentPostBattle::
 	.string "I have to collect more than bugs\n"
-	.string "to get stronger…$"
+	.string "to get stronger...$"
 
 Route9_Text_AlanIntro::
 	.string "Hahahaha!\n"
@@ -98,13 +98,13 @@ Route9_Text_AlanPostBattle::
 	.string "Us hearty guys always laugh!$"
 
 Route9_Text_ConnerIntro::
-	.string "Go, my super BUG POKeMON!$"
+	.string "Go, my super BUG POKEMON!$"
 
 Route9_Text_ConnerDefeat::
-	.string "My bugs…$"
+	.string "My bugs...$"
 
 Route9_Text_ConnerPostBattle::
-	.string "If you don't like BUG POKeMON,\n"
+	.string "If you don't like BUG POKEMON,\n"
 	.string "you bug me!$"
 
 Route9_Text_RouteSign::

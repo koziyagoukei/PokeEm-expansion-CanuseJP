@@ -12899,7 +12899,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .weight = 630,
         .description = COMPOUND_STRING(
             "An example of what is known as a\n"
-            "“form change”. Tornadus has been\n"
+            ""form change". Tornadus has been\n"
             "sighted crossing the ocean while in this\n"
             "form."),
         .pokemonScale = 268,
@@ -13296,7 +13296,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
             "The energy that comes pouring from its\n"
             "tail increases the nutrition in the soil,\n"
             "granting bountiful crops. It has been\n"
-            "hailed as “The Guardian of the Fields.”"),
+            "hailed as "The Guardian of the Fields.""),
         .pokemonScale = 268,
         .pokemonOffset = 2,
         .trainerScale = 271,

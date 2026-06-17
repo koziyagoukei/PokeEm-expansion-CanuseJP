@@ -7255,7 +7255,7 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
             "The impurities upon its body's surface\n"
             "have fallen away, sparkling so brilliantly\n"
             "that cannot be observed directly.\n"
-            "It is known as “the Royal Pink Princess”."),
+            "It is known as "the Royal Pink Princess"."),
         .pokemonScale = 365,
         .pokemonOffset = 12,
         .trainerScale = 256,

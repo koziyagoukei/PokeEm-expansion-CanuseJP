@@ -260,9 +260,9 @@ MauvilleCity_Gym_Text_GymGuideAdvice:
 	.string "Hey, how's it going, CHAMPION-\n"
 	.string "bound {PLAYER}?\p"
 	.string "WATTSON, the LEADER of MAUVILLE\n"
-	.string "GYM, uses ELECTRIC-type POKeMON.\p"
+	.string "GYM, uses ELECTRIC-type POKEMON.\p"
 	.string "If you challenge him with WATER-type\n"
-	.string "POKeMON, he'll zap them! Bzzt!\p"
+	.string "POKEMON, he'll zap them! Bzzt!\p"
 	.string "And, he's put in switch-controlled\n"
 	.string "doors all over his GYM! Eccentric!\p"
 	.string "Hey, go for it!$"
@@ -280,7 +280,7 @@ MauvilleCity_Gym_Text_KirkDefeat:
 	.string "over-driven electric, man!$"
 
 MauvilleCity_Gym_Text_KirkPostBattle:
-	.string "POKeMON and rock, it's all about heart,\n"
+	.string "POKEMON and rock, it's all about heart,\n"
 	.string "whoa-yeah!$"
 
 MauvilleCity_Gym_Text_ShawnIntro:
@@ -288,7 +288,7 @@ MauvilleCity_Gym_Text_ShawnIntro:
 	.string "There ain't no way I'll lose easily!$"
 
 MauvilleCity_Gym_Text_ShawnDefeat:
-	.string "Unplugged and turned off…$"
+	.string "Unplugged and turned off...$"
 
 MauvilleCity_Gym_Text_ShawnPostBattle:
 	.string "WATTSON, our GYM LEADER, has been\n"
@@ -301,14 +301,14 @@ MauvilleCity_Gym_Text_BenIntro:
 	.string "Isn't it fun?$"
 
 MauvilleCity_Gym_Text_BenDefeat:
-	.string "It's no fun to lose…$"
+	.string "It's no fun to lose...$"
 
 MauvilleCity_Gym_Text_BenPostBattle:
 	.string "WATTSON says he likes setting up\n"
 	.string "little traps with switches.$"
 
 MauvilleCity_Gym_Text_VivianIntro:
-	.string "With my charm and my POKeMON's moves,\n"
+	.string "With my charm and my POKEMON's moves,\n"
 	.string "you'll be shocked!$"
 
 MauvilleCity_Gym_Text_VivianDefeat:
@@ -325,8 +325,8 @@ MauvilleCity_Gym_Text_AngeloIntro:
 	.string "I love shiny things!$"
 
 MauvilleCity_Gym_Text_AngeloDefeat:
-	.string "Oh…\n"
-	.string "My eyes are frazzled…$"
+	.string "Oh...\n"
+	.string "My eyes are frazzled...$"
 
 MauvilleCity_Gym_Text_AngeloPostBattle:
 	.string "MAUVILLE GYM's WATTSON has a shiny\n"
@@ -356,18 +356,18 @@ MauvilleCity_Gym_Text_ReceivedDynamoBadge:
 	.string "from WATTSON.$"
 
 MauvilleCity_Gym_Text_ExplainDynamoBadgeTakeThis:
-	.string "With the DYNAMO BADGE, POKeMON can\n"
+	.string "With the DYNAMO BADGE, POKEMON can\n"
 	.string "use ROCK SMASH out of battle.\p"
-	.string "And, it will make your POKeMON a little\n"
+	.string "And, it will make your POKEMON a little\n"
 	.string "bit faster, too.\p"
-	.string "Hmm…\n"
+	.string "Hmm...\n"
 	.string "You should take this, too!$"
 
 MauvilleCity_Gym_Text_ExplainShockWave:
 	.string "That TM34 there contains SHOCK WAVE.\p"
 	.string "It's a trustworthy move that never\n"
 	.string "misses! You can count on it!\p"
-	.string "… … … … … …$"
+	.string "... ... ... ... ... ...$"
 
 MauvilleCity_Gym_Text_RegisteredWattson:
 	.string "Registered GYM LEADER WATTSON\n"
@@ -382,24 +382,24 @@ MauvilleCity_Gym_Text_WattsonGoForthAndEndeavor:
 	.string "Go forth and endeavor, youngster!$"
 
 MauvilleCity_Gym_Text_GymStatue:
-	.string "MAUVILLE CITY POKeMON GYM$"
+	.string "MAUVILLE CITY POKEMON GYM$"
 
 MauvilleCity_Gym_Text_GymStatueCertified:
-	.string "MAUVILLE CITY POKeMON GYM\p"
+	.string "MAUVILLE CITY POKEMON GYM\p"
 	.string "WATTSON'S CERTIFIED TRAINERS:\n"
 	.string "{PLAYER}$"
 
 MauvilleCity_Gym_Text_WattsonPreRematch:
 	.string "WATTSON: Ah-ha! Here at last!\n"
 	.string "I know what you want.\l"
-	.string "You want to battle my POKeMON!\p"
+	.string "You want to battle my POKEMON!\p"
 	.string "Wahahahaha!\p"
 	.string "I'll make sparks fly from you!\n"
 	.string "Don't say I didn't warn you!$"
 
 MauvilleCity_Gym_Text_WattsonRematchDefeat:
-	.string "Oof…\n"
-	.string "Our batteries ran dry…$"
+	.string "Oof...\n"
+	.string "Our batteries ran dry...$"
 
 MauvilleCity_Gym_Text_WattsonPostRematch:
 	.string "WATTSON: We'll have to recharge our\n"
@@ -412,10 +412,10 @@ MauvilleCity_Gym_Text_WattsonPostRematch:
 MauvilleCity_Gym_Text_WattsonRematchNeedTwoMons:
 	.string "WATTSON: Ah-ha! Here at last!\n"
 	.string "I know what you want.\l"
-	.string "You want to battle my POKeMON!\p"
+	.string "You want to battle my POKEMON!\p"
 	.string "Wahahahaha!\p"
 	.string "Oops! Wait!\n"
-	.string "You've only one POKeMON with you!\p"
+	.string "You've only one POKEMON with you!\p"
 	.string "Come see me with two or more\n"
-	.string "POKeMON, all right?$"
+	.string "POKEMON, all right?$"
 

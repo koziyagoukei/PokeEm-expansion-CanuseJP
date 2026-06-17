@@ -118,7 +118,7 @@ CeladonCity_Text_GameCornerIsBadForCitysImage::
 	.string "bad for our city's image.$"
 
 CeladonCity_Text_BlewItAllAtSlots::
-	.string "Moan…\n"
+	.string "Moan...\n"
 	.string "I blew it all at the slots!\p"
 	.string "I knew I should have cashed in my\n"
 	.string "COINS for prizes!$"
@@ -152,7 +152,7 @@ CeladonCity_Text_CitySign::
 	.string "The City of Rainbow Dreams$"
 
 CeladonCity_Text_GymSign::
-	.string "CELADON CITY POKeMON GYM\n"
+	.string "CELADON CITY POKEMON GYM\n"
 	.string "LEADER: ERIKA\l"
 	.string "The Nature-Loving Princess!$"
 
@@ -165,7 +165,7 @@ CeladonCity_Text_DeptStoreSign::
 
 CeladonCity_Text_GuardSpecProtectsFromStatus::
 	.string "TRAINER TIPS\p"
-	.string "GUARD SPEC. protects POKeMON\n"
+	.string "GUARD SPEC. protects POKEMON\n"
 	.string "from status-reduction moves during\l"
 	.string "battle.\p"
 	.string "Get your items at the\n"
@@ -180,7 +180,7 @@ CeladonCity_Text_GameCornerSign::
 	.string "The playground for grown-ups!$"
 
 CeladonCity_Text_ScaldedTongueOnTea::
-	.string "Aaaagh, ow…\n"
+	.string "Aaaagh, ow...\n"
 	.string "I scalded my tongue!\p"
 	.string "This nice old lady in the MANSION\n"
 	.string "gave me some TEA.\p"
@@ -202,14 +202,14 @@ Text_SoftboiledDeclined::
 	.string "I hope we can chat again.$"
 
 Text_SoftboiledWhichMon::
-	.string "So, who's the POKeMON that gets\n"
+	.string "So, who's the POKEMON that gets\n"
 	.string "the chance to learn SOFTBOILED?$"
 
 Text_SoftboiledTaught::
 	.string "I wish you the best of luck!$"
 
 CeladonCity_Text_SomeoneStoleSilphScope::
-	.string "Oh, what am I to do…\p"
+	.string "Oh, what am I to do...\p"
 	.string "Someone stole our SILPH SCOPE.\p"
 	.string "The thief came running this way,\n"
 	.string "I'm sure of it.\p"

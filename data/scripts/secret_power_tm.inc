@@ -2,7 +2,7 @@ Route111_Text_MakingRoomUseTMToMakeYourOwn:
 	.string "What's that?\n"
 	.string "What am I doing?\p"
 	.string "I'm thinking about making my own room\n"
-	.string "here using a POKeMON move.\p"
+	.string "here using a POKEMON move.\p"
 	.string "I know! I'll give you this TM.\n"
 	.string "Will you use it to make your own room?$"
 
@@ -14,7 +14,7 @@ Route111_Text_ExplainSecretPower:
 	.string "down, so you can climb the tree.\p"
 	.string "You'll find a lot of space for putting\n"
 	.string "your favorite things.\p"
-	.string "It'll be your own secret room…\n"
+	.string "It'll be your own secret room...\n"
 	.string "A SECRET BASE!\p"
 	.string "You should make one, too.\p"
 	.string "Another thing, you don't always have\n"

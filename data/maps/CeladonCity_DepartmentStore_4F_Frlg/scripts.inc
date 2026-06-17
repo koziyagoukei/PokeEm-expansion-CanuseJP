@@ -43,10 +43,10 @@ CeladonCity_DepartmentStore_4F_Text_GettingPokeDollAsPresent::
 
 CeladonCity_DepartmentStore_4F_Text_CanRunAwayWithPokeDoll::
 	.string "I heard something useful.\p"
-	.string "If a wild POKeMON appears, you can\n"
+	.string "If a wild POKEMON appears, you can\n"
 	.string "distract it with a POKe DOLL.\p"
 	.string "You can run away while the wild\n"
-	.string "POKeMON is distracted.$"
+	.string "POKEMON is distracted.$"
 
 CeladonCity_DepartmentStore_4F_Text_FloorSign::
 	.string "Express yourself with gifts!\n"

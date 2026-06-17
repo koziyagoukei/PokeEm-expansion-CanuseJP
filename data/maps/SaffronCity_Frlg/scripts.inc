@@ -148,7 +148,7 @@ SaffronCity_Text_WatchWhereYoureWalking::
 
 SaffronCity_Text_WeCanExploitMonsAroundWorld::
 	.string "With SILPH under control, we can\n"
-	.string "exploit POKeMON around the world!\p"
+	.string "exploit POKEMON around the world!\p"
 	.string "We'll get stinking rich, yeahah!$"
 
 SaffronCity_Text_YouBeatTeamRocket::
@@ -169,7 +169,7 @@ SaffronCity_Text_FlewHereOnPidgeot::
 	.string "I flew here on my PIDGEOT when\n"
 	.string "I read about SILPH.\p"
 	.string "It's already over?\n"
-	.string "I missed the media action…$"
+	.string "I missed the media action...$"
 
 SaffronCity_Text_Pidgeot::
 	.string "PIDGEOT: Bi bibii!$"
@@ -183,8 +183,8 @@ SaffronCity_Text_ImASecurityGuard::
 	.string "Suspicious kids I don't allow in!$"
 
 SaffronCity_Text_HesTakingASnooze::
-	.string "…\n"
-	.string "Snore…\p"
+	.string "...\n"
+	.string "Snore...\p"
 	.string "Hah! He's taking a snooze!$"
 
 SaffronCity_Text_CitySign::
@@ -195,9 +195,9 @@ SaffronCity_Text_FightingDojo::
 	.string "FIGHTING DOJO$"
 
 SaffronCity_Text_GymSign::
-	.string "SAFFRON CITY POKeMON GYM\n"
+	.string "SAFFRON CITY POKEMON GYM\n"
 	.string "LEADER: SABRINA\l"
-	.string "The Master of PSYCHIC POKeMON!$"
+	.string "The Master of PSYCHIC POKEMON!$"
 
 SaffronCity_Text_FullHealCuresStatus::
 	.string "TRAINER TIPS\p"
@@ -212,7 +212,7 @@ SaffronCity_Text_GreatBallImprovedCatchRate::
 	.string "The new GREAT BALL offers improved\n"
 	.string "catching rates.\p"
 	.string "Try it on those hard-to-catch\n"
-	.string "POKeMON.$"
+	.string "POKEMON.$"
 
 SaffronCity_Text_SilphCoSign::
 	.string "SILPH CO. OFFICE BUILDING$"
@@ -222,15 +222,15 @@ SaffronCity_Text_MrPsychicsHouse::
 
 SaffronCity_Text_SilphsLatestProduct::
 	.string "SILPH's latest product!\n"
-	.string "Release to be determined…$"
+	.string "Release to be determined...$"
 
 SaffronCity_Text_TrainerFanClubSign::
-	.string "POKeMON TRAINER FAN CLUB\p"
+	.string "POKEMON TRAINER FAN CLUB\p"
 	.string "Many TRAINERS have scribbled their\n"
 	.string "names on this sign.$"
 
 SaffronCity_Text_HowCanClubNotRecognizeLance::
-	.string "This FAN CLUB…\n"
+	.string "This FAN CLUB...\n"
 	.string "No one here has a clue!\p"
 	.string "How could they not recognize\n"
 	.string "the brilliance that is LANCE?\p"

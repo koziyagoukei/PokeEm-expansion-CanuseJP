@@ -1,14 +1,14 @@
 EventTicket_Text_ShowOldSeaMap:
-	.string "The ferry to SLATEPORT is…\p"
+	.string "The ferry to SLATEPORT is...\p"
 	.string "I beg your pardon?\n"
 	.string "Can we sail to this place on the map?\p"
 	.string "I know someone who will help you better.\n"
 	.string "Please wait.$"
 
 EventTicket_Text_ThatPass:
-	.string "The ferry to SLATEPORT is…\p"
+	.string "The ferry to SLATEPORT is...\p"
 	.string "Oh?\n"
-	.string "That PASS…$"
+	.string "That PASS...$"
 
 EventTicket_Text_ShowEonTicket:
 	.string "Aye, mate, are you the one who brought\n"
@@ -33,9 +33,9 @@ EventTicket_Text_AsYouLike:
 	.string "Aye, right, as you like, then.$"
 
 SouthernIsland_Interior_Text_Sign:
-	.string "“All dreams are but another reality.\n"
-	.string "Never forget…”$"
+	.string ""All dreams are but another reality.\n"
+	.string "Never forget..."$"
 
 SouthernIsland_Exterior_Text_Sign:
-	.string "“Those whose memories fade seek to\n"
-	.string "carve them in their hearts…”$"
+	.string ""Those whose memories fade seek to\n"
+	.string "carve them in their hearts..."$"

@@ -898,12 +898,12 @@ Route110_TrickHousePuzzle5_Movement_MechadollShake:
 Route110_TrickHousePuzzle5_Text_WroteSecretCodeLockOpened:
 	.string "{PLAYER} wrote down the secret code\n"
 	.string "on the door.\p"
-	.string "“TRICK MASTER is a genius.”\n"
-	.string "… … … … … … … …\p"
+	.string ""TRICK MASTER is a genius."\n"
+	.string "... ... ... ... ... ... ... ...\p"
 	.string "The lock clicked open!$"
 
 Route110_TrickHousePuzzle5_Text_Mechadoll1Intro:
-	.string "CLICKETY-CLACK…\n"
+	.string "CLICKETY-CLACK...\n"
 	.string "MECHADOLL 1 AM I!\p"
 	.string "IF YOU ANSWER QUIZZES CORRECTLY,\n"
 	.string "THEN YOU WILL GO TO MECHADOLL 5.\l"
@@ -911,17 +911,17 @@ Route110_TrickHousePuzzle5_Text_Mechadoll1Intro:
 
 Route110_TrickHousePuzzle5_Text_Mechadoll1Quiz1:
 	.string "MECHADOLL 1 QUIZ.\p"
-	.string "One of these POKeMON is not found\n"
+	.string "One of these POKEMON is not found\n"
 	.string "on ROUTE 110. Which one is it?$"
 
 Route110_TrickHousePuzzle5_Text_Mechadoll1Quiz2:
 	.string "MECHADOLL 1 QUIZ.\p"
-	.string "One of these POKeMON is not of the\n"
+	.string "One of these POKEMON is not of the\n"
 	.string "WATER type. Which one is it?$"
 
 Route110_TrickHousePuzzle5_Text_Mechadoll1Quiz3:
 	.string "MECHADOLL 1 QUIZ.\p"
-	.string "One of these POKeMON does not use\n"
+	.string "One of these POKEMON does not use\n"
 	.string "LEECH LIFE. Which one is it?$"
 
 Route110_TrickHousePuzzle5_Text_CorrectGoThrough:
@@ -940,28 +940,28 @@ Route110_TrickHousePuzzle5_Text_WaitForNextChallenge:
 	.string "YOUR NEXT CHALLENGE WE WAIT FOR.$"
 
 Route110_TrickHousePuzzle5_Text_Mechadoll2Intro:
-	.string "CLICKETY-CLACK…\n"
+	.string "CLICKETY-CLACK...\n"
 	.string "MECHADOLL 2 AM I!\p"
 	.string "MECHADOLL 1'S QUIZ DIFFICULTY LEVEL\n"
 	.string "IS SET TOO LOW.$"
 
 Route110_TrickHousePuzzle5_Text_Mechadoll2Quiz1:
 	.string "MECHADOLL 2 QUIZ.\p"
-	.string "Which of these POKeMON did WALLY\n"
+	.string "Which of these POKEMON did WALLY\n"
 	.string "borrow from your father?$"
 
 Route110_TrickHousePuzzle5_Text_Mechadoll2Quiz2:
 	.string "MECHADOLL 2 QUIZ.\p"
-	.string "Which of these POKeMON was chasing\n"
+	.string "Which of these POKEMON was chasing\n"
 	.string "PROF. BIRCH?$"
 
 Route110_TrickHousePuzzle5_Text_Mechadoll2Quiz3:
 	.string "MECHADOLL 2 QUIZ.\p"
-	.string "Which of these POKeMON did TEAM AQUA\n"
+	.string "Which of these POKEMON did TEAM AQUA\n"
 	.string "use in PETALBURG FOREST?$"
 
 Route110_TrickHousePuzzle5_Text_Mechadoll3Intro:
-	.string "CLICKETY-CLACK…\n"
+	.string "CLICKETY-CLACK...\n"
 	.string "MECHADOLL 3 AM I!\p"
 	.string "MATTERS OF MONEY ARE MY SOLE FOCUS.$"
 
@@ -981,7 +981,7 @@ Route110_TrickHousePuzzle5_Text_Mechadoll3Quiz3:
 	.string "more than one SUPER POTION?$"
 
 Route110_TrickHousePuzzle5_Text_Mechadoll4Intro:
-	.string "CLICKETY-CLACK…\n"
+	.string "CLICKETY-CLACK...\n"
 	.string "MECHADOLL 4 THAT IS ME!\p"
 	.string "MY QUIZ IS AN OBJECT OF BEAUTY.$"
 
@@ -1001,15 +1001,15 @@ Route110_TrickHousePuzzle5_Text_Mechadoll4Quiz3:
 	.string "girl students were there?$"
 
 Route110_TrickHousePuzzle5_Text_Mechadoll5Intro:
-	.string "CLICKETY-CLACK…\n"
+	.string "CLICKETY-CLACK...\n"
 	.string "MECHADOLL 5 AM I!\p"
 	.string "THE MASTER'S BEST AND PROUDEST\n"
 	.string "ACHIEVEMENT AM I.$"
 
 Route110_TrickHousePuzzle5_Text_Mechadoll5Quiz1:
 	.string "MECHADOLL 5 QUIZ.\p"
-	.string "In SLATEPORT's POKeMON FAN CLUB,\n"
-	.string "how many POKeMON were there?$"
+	.string "In SLATEPORT's POKEMON FAN CLUB,\n"
+	.string "how many POKEMON were there?$"
 
 Route110_TrickHousePuzzle5_Text_Mechadoll5Quiz2:
 	.string "MECHADOLL 5 QUIZ.\p"

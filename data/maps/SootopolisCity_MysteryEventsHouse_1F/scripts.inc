@@ -164,7 +164,7 @@ SootopolisCity_MysteryEventsHouse_1F_Movement_OldManMoveAsideRight:
 
 SootopolisCity_MysteryEventsHouse_1F_Text_OnlyAmusementWatchingBattles:
 	.string "When I was young, I traveled the world\n"
-	.string "as a POKeMON TRAINER.\p"
+	.string "as a POKEMON TRAINER.\p"
 	.string "Now that I've become an old buzzard,\n"
 	.string "my only amusement is watching young\l"
 	.string "TRAINERS battle.$"
@@ -180,7 +180,7 @@ SootopolisCity_MysteryEventsHouse_1F_Text_ChallengeVisitingTrainer:
 
 SootopolisCity_MysteryEventsHouse_1F_Text_YouWontBattle:
 	.string "You won't battle? I'm disappointed\n"
-	.string "that I can't see you battle…$"
+	.string "that I can't see you battle...$"
 
 SootopolisCity_MysteryEventsHouse_1F_Text_KeepItTo3On3:
 	.string "Oh, good, good!\p"

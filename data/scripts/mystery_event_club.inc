@@ -110,7 +110,7 @@ EventScript_GiveProfile:
 
 Text_IdLoveToHearYourProfile:
 	.string "Hi, glad to meet you!\p"
-	.string "…That's unfriendly of you.\n"
+	.string "...That's unfriendly of you.\n"
 	.string "How about saying hi back?\p"
 	.string "So, come on, tell me about\n"
 	.string "yourself.\p"
@@ -129,14 +129,14 @@ Text_ExplainProfile:
 	.string "in several convenient groups.\p"
 	.string "First, choose a group, then choose\n"
 	.string "a word or phrase.\p"
-	.string "…It's easier than it sounds.\n"
+	.string "...It's easier than it sounds.\n"
 	.string "Why don't you try it?$"
 
 Text_WhatsYourProfile:
 	.string "What's your profile?$"
 
 Text_DontBeLikeThat:
-	.string "Aww… Don't be like that.\n"
+	.string "Aww... Don't be like that.\n"
 	.string "You can tell me your profile.$"
 
 Text_DecidedNotTo:
@@ -161,14 +161,14 @@ Text_LikeProfileWayItIs:
 	.string "I think so, too.$"
 
 Text_ProfileSaysSomethingAboutYou:
-	.string "Hmhm…\p"
+	.string "Hmhm...\p"
 	.string "Your profile really says something\n"
 	.string "about who you are.\p"
 	.string "Now that I know you better, it \n"
 	.string "makes us better friends than ever!$"
 
 Text_HeardThatBefore:
-	.string "Oh, I've heard that before…\p"
+	.string "Oh, I've heard that before...\p"
 	.string "My cousin, who lives far away,\n"
 	.string "always used to say that, I think.$"
 

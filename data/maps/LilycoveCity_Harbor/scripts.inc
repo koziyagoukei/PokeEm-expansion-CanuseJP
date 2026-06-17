@@ -538,14 +538,14 @@ LilycoveCity_Harbor_Text_FerryUnavailable:
 	.string "I beg your pardon?\n"
 	.string "You're looking for a ship?\p"
 	.string "I'm sorry, the ferry service isn't\n"
-	.string "available at present…$"
+	.string "available at present...$"
 
 LilycoveCity_Harbor_Text_MayISeeYourTicket:
 	.string "Hello, are you here for the ferry?\n"
 	.string "May I see your TICKET?$"
 
 LilycoveCity_Harbor_Text_NoTicket:
-	.string "{PLAYER} doesn't have the TICKET…\p"
+	.string "{PLAYER} doesn't have the TICKET...\p"
 	.string "I'm terribly sorry.\p"
 	.string "You must have a TICKET to board\n"
 	.string "the ferry.$"
@@ -573,7 +573,7 @@ LilycoveCity_Harbor_Text_WhereWouldYouLikeToGo:
 
 LilycoveCity_Harbor_Text_SailorFerryUnavailable:
 	.string "Until they finish making the ferry,\n"
-	.string "we sailors have nothing to do…\p"
+	.string "we sailors have nothing to do...\p"
 	.string "I wish they'd get a move on, the folks\n"
 	.string "at the SHIPYARD in SLATEPORT.$"
 

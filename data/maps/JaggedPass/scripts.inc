@@ -148,17 +148,17 @@ JaggedPass_EventScript_Autumn::
 	end
 
 JaggedPass_Text_EricIntro:
-	.string "MT. CHIMNEY's JAGGED PASS…\p"
+	.string "MT. CHIMNEY's JAGGED PASS...\p"
 	.string "Now this is what I've always wanted\n"
 	.string "in a mountain.\p"
-	.string "This jagged bumpiness…\n"
+	.string "This jagged bumpiness...\n"
 	.string "It rocks my soul!$"
 
 JaggedPass_Text_EricDefeat:
 	.string "Losing left me bitter!$"
 
 JaggedPass_Text_EricPostBattle:
-	.string "Yes, I did lose at POKeMON…\p"
+	.string "Yes, I did lose at POKEMON...\p"
 	.string "But, when it comes to the love of\n"
 	.string "the mountains, I have you beat!$"
 
@@ -168,7 +168,7 @@ JaggedPass_Text_DianaIntro:
 
 JaggedPass_Text_DianaDefeat:
 	.string "Ohhh, no!\n"
-	.string "The ground is too bumpy…$"
+	.string "The ground is too bumpy...$"
 
 JaggedPass_Text_DianaPostBattle:
 	.string "Did you know?\p"
@@ -181,7 +181,7 @@ JaggedPass_Text_DianaRegister:
 
 JaggedPass_Text_DianaRematchIntro:
 	.string "Picnics are fun wherever you go.\n"
-	.string "Just like POKeMON!$"
+	.string "Just like POKEMON!$"
 
 JaggedPass_Text_DianaRematchDefeat:
 	.string "I only lost because the ground is\n"
@@ -197,7 +197,7 @@ JaggedPass_Text_EthanIntro:
 
 JaggedPass_Text_EthanDefeat:
 	.string "It was all over while we were still\n"
-	.string "trying to find a good footing…$"
+	.string "trying to find a good footing...$"
 
 JaggedPass_Text_EthanPostBattle:
 	.string "If I had an ACRO BIKE, I'd be able to\n"
@@ -214,11 +214,11 @@ JaggedPass_Text_EthanRematchIntro:
 
 JaggedPass_Text_EthanRematchDefeat:
 	.string "It's still not easy to battle on this\n"
-	.string "bumpy ground…$"
+	.string "bumpy ground...$"
 
 JaggedPass_Text_EthanPostRematch:
 	.string "I should get an ACRO BIKE from RYDEL\n"
-	.string "in MAUVILLE CITY…$"
+	.string "in MAUVILLE CITY...$"
 
 JaggedPass_Text_GruntIntro:
 	.string "Wah!\n"
@@ -227,9 +227,9 @@ JaggedPass_Text_GruntIntro:
 	.string "What business is it of yours?$"
 
 JaggedPass_Text_GruntDefeat:
-	.string "Urrrgh…\p"
+	.string "Urrrgh...\p"
 	.string "I should've ducked into our HIDEOUT\n"
-	.string "right away…$"
+	.string "right away...$"
 
 JaggedPass_Text_GoWhereverYouWant:
 	.string "Okay, oh-kay!\n"
@@ -246,18 +246,18 @@ JaggedPass_Text_JulioIntro:
 	.string "down the mountain in one go!$"
 
 JaggedPass_Text_JulioDefeat:
-	.string "I feel like I'm falling apart…$"
+	.string "I feel like I'm falling apart...$"
 
 JaggedPass_Text_JulioPostBattle:
 	.string "My bicycle bounced around so much,\n"
-	.string "my rear end's sore…$"
+	.string "my rear end's sore...$"
 
 JaggedPass_Text_AutumnIntro:
 	.string "I climb this hill every day.\n"
 	.string "I have confidence in my strength!$"
 
 JaggedPass_Text_AutumnDefeat:
-	.string "Hmm…\n"
+	.string "Hmm...\n"
 	.string "What went wrong?$"
 
 JaggedPass_Text_AutumnPostBattle:

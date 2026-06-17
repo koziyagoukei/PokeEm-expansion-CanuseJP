@@ -65,17 +65,17 @@ FallarborTown_CozmosHouse_EventScript_CozmoIsHappy::
 	end
 
 FallarborTown_CozmosHouse_Text_MeteoriteWillNeverBeMineNow:
-	.string "PROF. COZMO: Oh…\n"
+	.string "PROF. COZMO: Oh...\n"
 	.string "I never should have let myself be\l"
 	.string "conned into telling TEAM MAGMA where\l"
-	.string "you can find METEORITES…\p"
-	.string "That METEORITE from METEOR FALLS…\n"
-	.string "It's never going to be mine now…$"
+	.string "you can find METEORITES...\p"
+	.string "That METEORITE from METEOR FALLS...\n"
+	.string "It's never going to be mine now...$"
 
 FallarborTown_CozmosHouse_Text_IsThatMeteoriteMayIHaveIt:
 	.string "Oh!\n"
 	.string "Hah?\p"
-	.string "That item…\p"
+	.string "That item...\p"
 	.string "Could it be?\p"
 	.string "Is it the METEORITE that TEAM MAGMA\n"
 	.string "took from METEOR FALLS?\p"
@@ -94,8 +94,8 @@ FallarborTown_CozmosHouse_Text_ReallyGoingToHelpMyResearch:
 	.string "This is really going to help my research!$"
 
 FallarborTown_CozmosHouse_Text_CrushedWithDisappointment:
-	.string "PROF. COZMO: Oh, but…\n"
-	.string "I'm crushed with disappointment…$"
+	.string "PROF. COZMO: Oh, but...\n"
+	.string "I'm crushed with disappointment...$"
 
 FallarborTown_CozmosHouse_Text_MayIHaveMeteorite:
 	.string "PROF. COZMO: Please, may I have that\n"
@@ -109,10 +109,10 @@ FallarborTown_CozmosHouse_Text_CozmoWentToMeteorFalls:
 	.string "TEAM MAGMA.$"
 
 FallarborTown_CozmosHouse_Text_FeelSorryForCozmo:
-	.string "Poor PROF. COZMO…\n"
-	.string "He's so depressed… I feel sorry for him.$"
+	.string "Poor PROF. COZMO...\n"
+	.string "He's so depressed... I feel sorry for him.$"
 
 FallarborTown_CozmosHouse_Text_CozmoIsSoHappy:
-	.string "Look at PROF. COZMO…\n"
+	.string "Look at PROF. COZMO...\n"
 	.string "He's so happy! I think it's cute.$"
 

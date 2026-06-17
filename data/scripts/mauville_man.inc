@@ -91,8 +91,8 @@ MauvilleCity_PokemonCenter_1F_Text_WantToTradeDecor:
 	.string "Want to trade decorations with me?$"
 
 MauvilleCity_PokemonCenter_1F_Text_TraderFeelingTheBlues:
-	.string "Oh…\n"
-	.string "You've left me feeling the blues…$"
+	.string "Oh...\n"
+	.string "You've left me feeling the blues...$"
 
 MauvilleCity_PokemonCenter_1F_Text_WeveAlreadyTraded:
 	.string "But we've traded decorations already,\n"
@@ -104,7 +104,7 @@ MauvilleCity_PokemonCenter_1F_Text_PickADecorItem:
 
 MauvilleCity_PokemonCenter_1F_Text_YouDontWantAnything:
 	.string "You don't want anything?\n"
-	.string "I feel unwanted…$"
+	.string "I feel unwanted...$"
 
 MauvilleCity_PokemonCenter_1F_Text_OnceBelongedToPlayerDoYouWantIt:
 	.string "That decorative item once belonged\n"
@@ -112,7 +112,7 @@ MauvilleCity_PokemonCenter_1F_Text_OnceBelongedToPlayerDoYouWantIt:
 	.string "Do you want it?$"
 
 MauvilleCity_PokemonCenter_1F_Text_YouDontHaveAnyDecor:
-	.string "Uh… Wait a second. You don't have a\n"
+	.string "Uh... Wait a second. You don't have a\n"
 	.string "single piece of decoration!$"
 
 MauvilleCity_PokemonCenter_1F_Text_PickTheDecorToTrade:
@@ -121,7 +121,7 @@ MauvilleCity_PokemonCenter_1F_Text_PickTheDecorToTrade:
 
 MauvilleCity_PokemonCenter_1F_Text_YouDontWantToTrade:
 	.string "You won't trade with me?\n"
-	.string "I feel unwanted…$"
+	.string "I feel unwanted...$"
 
 MauvilleCity_PokemonCenter_1F_Text_YouveNoRoomForThis:
 	.string "You've got all the {STR_VAR_2}S that can\n"
@@ -237,8 +237,8 @@ MauvilleCity_PokemonCenter_1F_Text_WillYouHearMyTale:
 	.string "Will you hear my tale?$"
 
 MauvilleCity_PokemonCenter_1F_Text_StorytellerFeelingTheBlues:
-	.string "Oh…\n"
-	.string "You've left me feeling the blues…$"
+	.string "Oh...\n"
+	.string "You've left me feeling the blues...$"
 
 MauvilleCity_PokemonCenter_1F_Text_WhichTaleToTell:
 	.string "I know of these legends.\n"
@@ -252,7 +252,7 @@ MauvilleCity_PokemonCenter_1F_Text_IKnowNoTales:
 
 MauvilleCity_PokemonCenter_1F_Text_YouDidStatXTimes:
 	.string "What's that?!\n"
-	.string "You… You…\p"
+	.string "You... You...\p"
 	.string "{STR_VAR_2}\n"
 	.string "{STR_VAR_1} time(s)?!\p"
 	.string "That is indeed magnificent!\n"
@@ -270,12 +270,12 @@ MauvilleCity_PokemonCenter_1F_Text_HaveYouAnyLegendaryTales:
 
 @ Unused
 MauvilleCity_PokemonCenter_1F_Text_HearAnotherLegendaryTale:
-	.string "Incidentally… Would you care to hear\n"
+	.string "Incidentally... Would you care to hear\n"
 	.string "another legendary tale?$"
 
 MauvilleCity_PokemonCenter_1F_Text_NotWorthyOfLegend:
-	.string "Hmm…\n"
-	.string "I'm not satisfied…\p"
+	.string "Hmm...\n"
+	.string "I'm not satisfied...\p"
 	.string "I wish you would bring me news worthy\n"
 	.string "of being called a legend.$"
 
@@ -368,30 +368,30 @@ MauvilleCity_PokemonCenter_1F_Text_TrainerBattlesStory::
 	.string "never refuse a chance to battle!$"
 
 MauvilleCity_PokemonCenter_1F_Text_PokemonCaughtTitle::
-	.string "The POKeMON-Catching TRAINER$"
+	.string "The POKEMON-Catching TRAINER$"
 
 MauvilleCity_PokemonCenter_1F_Text_PokemonCaughtAction::
-	.string "Caught POKeMON$"
+	.string "Caught POKEMON$"
 
 MauvilleCity_PokemonCenter_1F_Text_PokemonCaughtStory::
 	.string "This is a tale of a TRAINER\n"
 	.string "named {STR_VAR_3}.\p"
 	.string "This TRAINER caught\n"
-	.string "{STR_VAR_1} POKeMON!\p"
+	.string "{STR_VAR_1} POKEMON!\p"
 	.string "{STR_VAR_3} is a legendary catcher of\n"
-	.string "wild POKeMON!$"
+	.string "wild POKEMON!$"
 
 MauvilleCity_PokemonCenter_1F_Text_FishingPokemonCaughtTitle::
 	.string "The Fishing TRAINER$"
 
 MauvilleCity_PokemonCenter_1F_Text_FishingPokemonCaughtAction::
-	.string "Caught POKeMON with a ROD$"
+	.string "Caught POKEMON with a ROD$"
 
 MauvilleCity_PokemonCenter_1F_Text_FishingPokemonCaughtStory::
 	.string "This is a tale of a TRAINER\n"
 	.string "named {STR_VAR_3}.\p"
 	.string "This TRAINER caught\n"
-	.string "{STR_VAR_1} POKeMON while fishing!\p"
+	.string "{STR_VAR_1} POKEMON while fishing!\p"
 	.string "{STR_VAR_3} is a legendary fishing\n"
 	.string "expert!$"
 
@@ -404,7 +404,7 @@ MauvilleCity_PokemonCenter_1F_Text_EggsHatchedAction::
 MauvilleCity_PokemonCenter_1F_Text_EggsHatchedStory::
 	.string "This is a tale of a TRAINER\n"
 	.string "named {STR_VAR_3}.\p"
-	.string "This TRAINER hatched {STR_VAR_1} POKeMON\n"
+	.string "This TRAINER hatched {STR_VAR_1} POKEMON\n"
 	.string "from EGGS!\p"
 	.string "{STR_VAR_3} is a legendary warmer\n"
 	.string "of EGGS!$"
@@ -413,40 +413,40 @@ MauvilleCity_PokemonCenter_1F_Text_PokemonEvolvedTitle::
 	.string "The Evolver TRAINER$"
 
 MauvilleCity_PokemonCenter_1F_Text_PokemonEvolvedAction::
-	.string "Evolved POKeMON$"
+	.string "Evolved POKEMON$"
 
 MauvilleCity_PokemonCenter_1F_Text_PokemonEvolvedStory::
 	.string "This is a tale of a TRAINER\n"
 	.string "named {STR_VAR_3}.\p"
-	.string "This TRAINER made {STR_VAR_1} POKeMON\n"
+	.string "This TRAINER made {STR_VAR_1} POKEMON\n"
 	.string "evolve!\p"
 	.string "{STR_VAR_3} is the ultimate evolver\n"
-	.string "of POKeMON!$"
+	.string "of POKEMON!$"
 
 MauvilleCity_PokemonCenter_1F_Text_UsedPokemonCenterTitle::
-	.string "The POKeMON CENTER-Loving TRAINER$"
+	.string "The POKEMON CENTER-Loving TRAINER$"
 
 MauvilleCity_PokemonCenter_1F_Text_UsedPokemonCenterAction::
-	.string "Used POKeMON CENTERS$"
+	.string "Used POKEMON CENTERS$"
 
 MauvilleCity_PokemonCenter_1F_Text_UsedPokemonCenterStory::
 	.string "This is a tale of a TRAINER\n"
 	.string "named {STR_VAR_3}.\p"
-	.string "This TRAINER healed POKeMON\n"
-	.string "{STR_VAR_1} times at POKeMON CENTERS!\p"
+	.string "This TRAINER healed POKEMON\n"
+	.string "{STR_VAR_1} times at POKEMON CENTERS!\p"
 	.string "There could be no greater lover of\n"
-	.string "POKeMON CENTERS than {STR_VAR_3}!$"
+	.string "POKEMON CENTERS than {STR_VAR_3}!$"
 
 MauvilleCity_PokemonCenter_1F_Text_RestedAtHomeTitle::
 	.string "The Homebody TRAINER$"
 
 MauvilleCity_PokemonCenter_1F_Text_RestedAtHomeAction::
-	.string "Rested POKeMON at home$"
+	.string "Rested POKEMON at home$"
 
 MauvilleCity_PokemonCenter_1F_Text_RestedAtHomeStory::
 	.string "This is a tale of a TRAINER\n"
 	.string "named {STR_VAR_3}.\p"
-	.string "This TRAINER healed POKeMON\n"
+	.string "This TRAINER healed POKEMON\n"
 	.string "{STR_VAR_1} times at home!\p"
 	.string "There could be no more of a homebody\n"
 	.string "than {STR_VAR_3}!$"
@@ -603,7 +603,7 @@ MauvilleCity_PokemonCenter_1F_Text_EnteredContestsStory::
 	.string "This TRAINER entered CONTESTS\n"
 	.string "{STR_VAR_1} times!\p"
 	.string "{STR_VAR_3} must love showing off\n"
-	.string "POKeMON to others!$"
+	.string "POKEMON to others!$"
 
 MauvilleCity_PokemonCenter_1F_Text_WonContestsTitle::
 	.string "The CONTEST Master$"
@@ -673,7 +673,7 @@ MauvilleCity_PokemonCenter_1F_Text_CheckedPokedexStory::
 	.string "This TRAINER checked a POKeDEX\n"
 	.string "{STR_VAR_1} times!\p"
 	.string "{STR_VAR_3} must love inspecting\n"
-	.string "POKeMON in a POKeDEX!$"
+	.string "POKEMON in a POKeDEX!$"
 
 MauvilleCity_PokemonCenter_1F_Text_ReceivedRibbonsTitle::
 	.string "The RIBBON Collector$"
@@ -731,32 +731,32 @@ MauvilleCity_PokemonCenter_1F_Text_CheckedClockStory::
 	.string "who's conscious of the time.$"
 
 MauvilleCity_PokemonCenter_1F_Text_WonLotteryTitle::
-	.string "The POKeMON LOTTERY Wizard$"
+	.string "The POKEMON LOTTERY Wizard$"
 
 MauvilleCity_PokemonCenter_1F_Text_WonLotteryAction::
-	.string "Won POKeMON LOTTERIES$"
+	.string "Won POKEMON LOTTERIES$"
 
 MauvilleCity_PokemonCenter_1F_Text_WonLotteryStory::
 	.string "This is a tale of a TRAINER\n"
 	.string "named {STR_VAR_3}.\p"
-	.string "This TRAINER won POKeMON LOTTERIES\n"
+	.string "This TRAINER won POKEMON LOTTERIES\n"
 	.string "{STR_VAR_1} times!\p"
 	.string "{STR_VAR_3} must have many friends\n"
-	.string "to trade POKeMON with!$"
+	.string "to trade POKEMON with!$"
 
 MauvilleCity_PokemonCenter_1F_Text_UsedDaycareTitle::
 	.string "The DAY CARE-Using Trainer$"
 
 MauvilleCity_PokemonCenter_1F_Text_UsedDaycareAction::
-	.string "Left POKeMON at the DAY CARE$"
+	.string "Left POKEMON at the DAY CARE$"
 
 MauvilleCity_PokemonCenter_1F_Text_UsedDaycareStory::
 	.string "This is a tale of a TRAINER\n"
 	.string "named {STR_VAR_3}.\p"
-	.string "This TRAINER left POKeMON with the\n"
+	.string "This TRAINER left POKEMON with the\n"
 	.string "DAY CARE {STR_VAR_1} times!\p"
 	.string "{STR_VAR_3} must be a real go-getter\n"
-	.string "who raises POKeMON aggressively!$"
+	.string "who raises POKEMON aggressively!$"
 
 MauvilleCity_PokemonCenter_1F_Text_RodeCableCarTitle::
 	.string "The CABLE CAR-Loving TRAINER$"
@@ -858,14 +858,14 @@ MauvilleCity_PokemonCenter_1F_Text_HearMyStory:
 	.string "Would you like to hear my story?$"
 
 MauvilleCity_PokemonCenter_1F_Text_GiddyFeelingTheBlues:
-	.string "Oh…\n"
-	.string "You've left me feeling the blues…$"
+	.string "Oh...\n"
+	.string "You've left me feeling the blues...$"
 
 MauvilleCity_PokemonCenter_1F_Text_AlsoIWasThinking:
-	.string "Also, I was thinking…$"
+	.string "Also, I was thinking...$"
 
 MauvilleCity_PokemonCenter_1F_Text_WeShouldChatAgain:
-	.string "That's about it, I think…\p"
+	.string "That's about it, I think...\p"
 	.string "We should chat again!\n"
 	.string "Bye-bye!$"
 
@@ -920,12 +920,12 @@ MauvilleCity_PokemonCenter_1F_Text_WouldYouLikeToHearMySong:
 	.string "Would you like to hear my song?$"
 
 MauvilleCity_PokemonCenter_1F_Text_BardFeelingTheBlues1:
-	.string "Oh…\n"
-	.string "You've left me feeling the blues…$"
+	.string "Oh...\n"
+	.string "You've left me feeling the blues...$"
 
 MauvilleCity_PokemonCenter_1F_Text_WishICouldPlaySongForOthers:
-	.string "Oh, what a moving song…\n"
-	.string "I wish I could play it for others…$"
+	.string "Oh, what a moving song...\n"
+	.string "I wish I could play it for others...$"
 
 MauvilleCity_PokemonCenter_1F_Text_WouldYouLikeToWriteSomeLyrics:
 	.string "So?\n"
@@ -936,8 +936,8 @@ MauvilleCity_PokemonCenter_1F_Text_WouldYouLikeToWriteSomeLyrics:
 	.string "new lyrics for me?$"
 
 MauvilleCity_PokemonCenter_1F_Text_BardFeelingTheBlues2:
-	.string "Oh…\n"
-	.string "You've left me feeling the blues…$"
+	.string "Oh...\n"
+	.string "You've left me feeling the blues...$"
 
 MauvilleCity_PokemonCenter_1F_Text_LetMeSingItForYou:
 	.string "Thank you kindly!\n"
@@ -968,6 +968,6 @@ MauvilleCity_PokemonCenter_1F_Text_IveGotNothingNewToTeach:
 
 MauvilleCity_PokemonCenter_1F_Text_HaveYouHeardOfWord:
 	.string "Hey, have you heard about\n"
-	.string "“{STR_VAR_1}”?\p"
-	.string "What's it mean? Well…\n"
+	.string ""{STR_VAR_1}"?\p"
+	.string "What's it mean? Well...\n"
 	.string "Ask your daddy or mommy, okay?$"

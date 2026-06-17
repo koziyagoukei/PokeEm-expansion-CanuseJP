@@ -28,7 +28,7 @@ CeladonCity_PokemonCenter_1F_EventScript_Youngster::
 
 CeladonCity_PokemonCenter_1F_Text_PokeFluteAwakensSleepingMons::
 	.string "A POKe FLUTE awakens sleeping\n"
-	.string "POKeMON. You know that.\p"
+	.string "POKEMON. You know that.\p"
 	.string "It does so with a sound that only\n"
 	.string "they can hear.$"
 

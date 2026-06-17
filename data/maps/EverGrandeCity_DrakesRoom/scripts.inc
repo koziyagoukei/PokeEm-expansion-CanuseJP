@@ -62,13 +62,13 @@ EverGrandeCity_DrakesRoom_EventScript_Defeated::
 	end
 
 EverGrandeCity_DrakesRoom_Text_IntroSpeech:
-	.string "I am the last of the POKeMON LEAGUE\n"
+	.string "I am the last of the POKEMON LEAGUE\n"
 	.string "ELITE FOUR, DRAKE the DRAGON master!\p"
-	.string "In their natural state, POKeMON are\n"
+	.string "In their natural state, POKEMON are\n"
 	.string "wild living things. They are free.\p"
 	.string "At times, they hinder us.\n"
 	.string "At times, they help us.\p"
-	.string "For us to battle with POKeMON as\n"
+	.string "For us to battle with POKEMON as\n"
 	.string "partners, do you know what it takes?\p"
 	.string "Do you know what is needed?\p"
 	.string "If you don't, then you will never\n"
@@ -79,11 +79,11 @@ EverGrandeCity_DrakesRoom_Text_Defeat:
 
 EverGrandeCity_DrakesRoom_Text_PostBattleSpeech:
 	.string "You deserve every credit for coming\n"
-	.string "this far as a TRAINER of POKeMON.\p"
+	.string "this far as a TRAINER of POKEMON.\p"
 	.string "You do seem to know what is needed.\p"
 	.string "Yes, what a TRAINER needs is a\n"
 	.string "virtuous heart.\p"
-	.string "POKeMON touch the good hearts of\n"
+	.string "POKEMON touch the good hearts of\n"
 	.string "TRAINERS and learn good from wrong.\p"
 	.string "They touch the good hearts of\n"
 	.string "TRAINERS and grow strong.\p"

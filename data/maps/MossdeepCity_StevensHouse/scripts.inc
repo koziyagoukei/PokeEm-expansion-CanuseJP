@@ -148,7 +148,7 @@ MossdeepCity_StevensHouse_EventScript_DiveItemBall::
 	end
 
 MossdeepCity_StevensHouse_Text_YouveEarnedHMDive:
-	.string "STEVEN: {PLAYER}{KUN}…\p"
+	.string "STEVEN: {PLAYER}{KUN}...\p"
 	.string "As you can see, there's not much here,\n"
 	.string "but this is my home.\p"
 	.string "Thank you for all that you've done.\p"
@@ -176,7 +176,7 @@ MossdeepCity_StevensHouse_Text_UnderwateCavernBetweenMossdeepSootopolis:
 
 MossdeepCity_StevensHouse_Text_TakeBallContainingBeldum:
 	.string "{PLAYER} checked the POKe BALL.\p"
-	.string "It contained the POKeMON\n"
+	.string "It contained the POKEMON\n"
 	.string "BELDUM.\p"
 	.string "Take the POKe BALL?$"
 
@@ -185,7 +185,7 @@ MossdeepCity_StevensHouse_Text_ObtainedBeldum:
 
 @ Unused
 MossdeepCity_StevensHouse_Text_NoSpaceForAnotherMon:
-	.string "There is no space for another POKeMON.$"
+	.string "There is no space for another POKEMON.$"
 
 MossdeepCity_StevensHouse_Text_LeftPokeBallWhereItWas:
 	.string "{PLAYER} left the POKe BALL where\n"
@@ -193,8 +193,8 @@ MossdeepCity_StevensHouse_Text_LeftPokeBallWhereItWas:
 
 MossdeepCity_StevensHouse_Text_LetterFromSteven:
 	.string "It's a letter.\p"
-	.string "… … … … … …\p"
-	.string "To {PLAYER}{KUN}…\p"
+	.string "... ... ... ... ... ...\p"
+	.string "To {PLAYER}{KUN}...\p"
 	.string "I've decided to do a little soul-\n"
 	.string "searching and train on the road.\p"
 	.string "I don't plan to return home for some\n"
@@ -203,7 +203,7 @@ MossdeepCity_StevensHouse_Text_LetterFromSteven:
 	.string "I want you to take the POKe BALL on\n"
 	.string "the desk.\p"
 	.string "Inside it is a BELDUM, my favorite\n"
-	.string "POKeMON.\p"
+	.string "POKEMON.\p"
 	.string "I'm counting on you.\p"
 	.string "May our paths cross someday.\p"
 	.string "STEVEN STONE$"

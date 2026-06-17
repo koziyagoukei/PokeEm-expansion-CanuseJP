@@ -84,7 +84,7 @@ FiveIsland_MemorialPillar_EventScript_MemorialLemonadeAlreadyPlaced::
 FiveIsland_MemorialPillar_Text_MiloIntro::
 	.string "I'm the eldest of the BIRD\n"
 	.string "BROTHERS.\p"
-	.string "The best thing about birds…\n"
+	.string "The best thing about birds...\n"
 	.string "It has to be the beak.$"
 
 FiveIsland_MemorialPillar_Text_MiloDefeat::
@@ -97,7 +97,7 @@ FiveIsland_MemorialPillar_Text_MiloPostBattle::
 FiveIsland_MemorialPillar_Text_ChazIntro::
 	.string "I'm the middle kid of the BIRD\n"
 	.string "BROTHERS.\p"
-	.string "The best thing about birds…\n"
+	.string "The best thing about birds...\n"
 	.string "It has to be the wings.$"
 
 FiveIsland_MemorialPillar_Text_ChazDefeat::
@@ -110,30 +110,30 @@ FiveIsland_MemorialPillar_Text_ChazPostBattle::
 FiveIsland_MemorialPillar_Text_HaroldIntro::
 	.string "I'm the youngest of the BIRD\n"
 	.string "BROTHERS.\p"
-	.string "The best thing about birds…\n"
+	.string "The best thing about birds...\n"
 	.string "It has to be the down.$"
 
 FiveIsland_MemorialPillar_Text_HaroldDefeat::
-	.string "Down is so comfy…\n"
-	.string "It makes me drowsy…$"
+	.string "Down is so comfy...\n"
+	.string "It makes me drowsy...$"
 
 FiveIsland_MemorialPillar_Text_HaroldPostBattle::
 	.string "It fills me with happiness when\n"
-	.string "bird POKeMON beg playfully…$"
+	.string "bird POKEMON beg playfully...$"
 
 FiveIsland_MemorialPillar_Text_ScrubScrub::
-	.string "Scrub, scrub…$"
+	.string "Scrub, scrub...$"
 
 FiveIsland_MemorialPillar_Text_YourMonsLookHealthy::
-	.string "Hello…\n"
-	.string "Your POKeMON look healthy…$"
+	.string "Hello...\n"
+	.string "Your POKEMON look healthy...$"
 
 FiveIsland_MemorialPillar_Text_ThisIsWhereIBuriedMyOnix::
-	.string "This is where I buried my ONIX…\n"
-	.string "It was named TECTONIX…$"
+	.string "This is where I buried my ONIX...\n"
+	.string "It was named TECTONIX...$"
 
 FiveIsland_MemorialPillar_Text_HereLiesTectonixLemonadeOffering::
-	.string "“Here lies TECTONIX” is engraved\n"
+	.string ""Here lies TECTONIX" is engraved\n"
 	.string "on a boulder.\p"
 	.string "There is a LEMONADE placed as an\n"
 	.string "offering in front of the grave.$"
@@ -147,17 +147,17 @@ FiveIsland_MemorialPillar_Text_PlacedCanOfLemonade::
 	.string "in front of the grave.$"
 
 FiveIsland_MemorialPillar_Text_ThankYouPleaseTakeThis::
-	.string "Th-thank you…\p"
+	.string "Th-thank you...\p"
 	.string "That was my TECTONIX's favorite\n"
-	.string "drink…\p"
+	.string "drink...\p"
 	.string "I don't even know you, but your\n"
-	.string "act of kindness…\p"
+	.string "act of kindness...\p"
 	.string "It's uplifted me a little.\p"
 	.string "Can you please take this as my\n"
 	.string "thanks?$"
 
 FiveIsland_MemorialPillar_Text_BeGoodToYourMonsToo::
-	.string "Please be good to your POKeMON,\n"
+	.string "Please be good to your POKEMON,\n"
 	.string "too.$"
 
 FiveIsland_MemorialPillar_Text_DontHaveRoomForIt::
@@ -165,18 +165,18 @@ FiveIsland_MemorialPillar_Text_DontHaveRoomForIt::
 	.string "I'll hold it for you till next time.$"
 
 FiveIsland_MemorialPillar_Text_StillHaveThingAsMyThanks::
-	.string "Oh, it's you from that time…\p"
+	.string "Oh, it's you from that time...\p"
 	.string "I still have that thing I wanted\n"
 	.string "you to have as my thanks.$"
 
 FiveIsland_MemorialPillar_Text_ScrubScrubTectonix::
-	.string "Scrub, scrub…\p"
-	.string "… … …\n"
-	.string "TECTONIX…$"
+	.string "Scrub, scrub...\p"
+	.string "... ... ...\n"
+	.string "TECTONIX...$"
 
 FiveIsland_MemorialPillar_Text_HereLiesTectonix::
 	.string "Boulders and rocks are neatly piled\n"
 	.string "up as a cairn.\p"
-	.string "“Here lies TECTONIX” is engraved\n"
+	.string ""Here lies TECTONIX" is engraved\n"
 	.string "on a boulder.$"
 

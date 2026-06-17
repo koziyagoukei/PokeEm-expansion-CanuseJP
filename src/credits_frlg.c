@@ -378,11 +378,11 @@ ALIGNED(4) const u8 gCreditsString_Parametric_Designers[] = _("\nParametric Desi
 ALIGNED(4) const u8 gCreditsString_Koji_Nishino_Tetsuji_Ohta_Shigeki_Morimoto[] = _("\n\nKoji Nishino\nTetsuji Ohta\nShigeki Morimoto\n\n");
 ALIGNED(4) const u8 gCreditsString_POKeDEX_Text[] = _("\n\nPOKeDEX Text\n\n\n\n");
 ALIGNED(4) const u8 gCreditsString_Kenji_Matsushima[] = _("\n\n\nKenji Matsushima\n\n\n");
-ALIGNED(4) const u8 gCreditsString_POKeMON_Designers[] = _("POKeMON Designers\n\n\n\n\n\n");
+ALIGNED(4) const u8 gCreditsString_POKEMON_Designers[] = _("POKEMON Designers\n\n\n\n\n\n");
 ALIGNED(4) const u8 gCreditsString_Ken_Sugimori_Motofumi_Fujiwara_Shigeki_Morimoto_Hironobu_Yoshida[] = _("\nKen Sugimori\nMotofumi Fujiwara\nShigeki Morimoto\nHironobu Yoshida\n\n");
-ALIGNED(4) const u8 gCreditsString_POKeMON_Designers_2[] = _("POKeMON Designers\n\n\n\n\n\n");
+ALIGNED(4) const u8 gCreditsString_POKEMON_Designers_2[] = _("POKEMON Designers\n\n\n\n\n\n");
 ALIGNED(4) const u8 gCreditsString_Satoshi_Ohta_Asuka_Iwashita_Takao_Unno_Kanako_Eo_Aimi_Tomita[] = _("\nSatoshi Ohta\nAsuka Iwashita\nTakao Unno\nKanako Eo\nAimi Tomita\n");
-ALIGNED(4) const u8 gCreditsString_POKeMON_Designers_3[] = _("POKeMON Designers\n\n\n\n\n\n");
+ALIGNED(4) const u8 gCreditsString_POKEMON_Designers_3[] = _("POKEMON Designers\n\n\n\n\n\n");
 ALIGNED(4) const u8 gCreditsString_Atsuko_Nishida_Muneo_Saito_Rena_Yoshikawa_Jun_Okutani[] = _("\nAtsuko Nishida\nMuneo Saito\nRena Yoshikawa\nJun Okutani\n\n");
 ALIGNED(4) const u8 gCreditsString_Supporting_Programmers[] = _("Supporting Programmers\n\n\n\n");
 ALIGNED(4) const u8 gCreditsString_Teruyuki_Yoshioka_Takao_Nakano_Satoshi_Mitsuhara_Daisuke_Hoshino[] = _("\nTeruyuki Yoshioka\nTakao Nakano\n\nSatoshi Mitsuhara\nDaisuke Hoshino\n");
@@ -788,9 +788,9 @@ static const struct CreditsTextHeader sCreditsTexts[] = {
     { gCreditsString_Script_Designer_Map_Designer, gCreditsString_Satoshi_Nohara_Shigeru_Ohmori, FALSE },
     { gCreditsString_Parametric_Designers, gCreditsString_Koji_Nishino_Tetsuji_Ohta_Shigeki_Morimoto, FALSE },
     { gCreditsString_POKeDEX_Text, gCreditsString_Kenji_Matsushima, FALSE },
-    { gCreditsString_POKeMON_Designers, gCreditsString_Ken_Sugimori_Motofumi_Fujiwara_Shigeki_Morimoto_Hironobu_Yoshida, TRUE  },
-    { gCreditsString_POKeMON_Designers_2, gCreditsString_Satoshi_Ohta_Asuka_Iwashita_Takao_Unno_Kanako_Eo_Aimi_Tomita, FALSE },
-    { gCreditsString_POKeMON_Designers_3, gCreditsString_Atsuko_Nishida_Muneo_Saito_Rena_Yoshikawa_Jun_Okutani, TRUE  },
+    { gCreditsString_POKEMON_Designers, gCreditsString_Ken_Sugimori_Motofumi_Fujiwara_Shigeki_Morimoto_Hironobu_Yoshida, TRUE  },
+    { gCreditsString_POKEMON_Designers_2, gCreditsString_Satoshi_Ohta_Asuka_Iwashita_Takao_Unno_Kanako_Eo_Aimi_Tomita, FALSE },
+    { gCreditsString_POKEMON_Designers_3, gCreditsString_Atsuko_Nishida_Muneo_Saito_Rena_Yoshikawa_Jun_Okutani, TRUE  },
     { gCreditsString_Supporting_Programmers, gCreditsString_Teruyuki_Yoshioka_Takao_Nakano_Satoshi_Mitsuhara_Daisuke_Hoshino, FALSE },
     { gCreditsString_NCL_Product_Testing, gCreditsString_NCL_Super_Mario_Club, FALSE },
     { gCreditsString_Special_Thanks, gCreditsString_Hiro_Nakamura_Hiroyuki_Uesugi_Teruki_Murakawa_Kazuya_Suyama, FALSE },

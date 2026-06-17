@@ -961,7 +961,7 @@ BattleFrontier_BattleDomeBattleRoom_Text_RefereeDecisionPleaseWait:
 BattleFrontier_BattleDomeBattleRoom_Text_RefereesDecidedWinnerTrainer:
 	.string "The REFEREES have reached\n"
 	.string "a decision!\p"
-	.string "The winner is…\n"
+	.string "The winner is...\n"
 	.string "Oh, my goodness!\l"
 	.string "The winner is {STR_VAR_1}!\l"
 	.string "Congratulations!$"
@@ -969,7 +969,7 @@ BattleFrontier_BattleDomeBattleRoom_Text_RefereesDecidedWinnerTrainer:
 BattleFrontier_BattleDomeBattleRoom_Text_RefereesDecidedWinnerPlayer:
 	.string "The REFEREES have reached\n"
 	.string "a decision!\p"
-	.string "The winner is…\n"
+	.string "The winner is...\n"
 	.string "Oh, my goodness!\l"
 	.string "The winner is {PLAYER}!\l"
 	.string "Congratulations!$"
@@ -1053,8 +1053,8 @@ BattleFrontier_BattleDomeBattleRoom_Text_FeelGlowOfTrueMaster:
 	.string "Feel the glow of a true master!$"
 
 BattleFrontier_BattleDomeBattleRoom_Text_MakeWayForDomeAceTucker:
-	.string "And now… The TRAINER standing in\n"
-	.string "{PLAYER}'s record-setting path…\p"
+	.string "And now... The TRAINER standing in\n"
+	.string "{PLAYER}'s record-setting path...\p"
 	.string "Yes! The one and only!\n"
 	.string "The BATTLE DOME COMMISSIONER!\l"
 	.string "Our very own DOME ACE!\l"
@@ -1098,9 +1098,9 @@ BattleFrontier_BattleDomeBattleRoom_Text_ReceivedTacticsSymbol:
 	.string "the FRONTIER PASS!$"
 
 BattleFrontier_BattleDomeBattleRoom_Text_WontUnderestimateYouNextTime:
-	.string "… … … … … …\p"
+	.string "... ... ... ... ... ...\p"
 	.string "I sorely underestimated you. I won't\n"
-	.string "make the same mistake next time…$"
+	.string "make the same mistake next time...$"
 
 BattleFrontier_BattleDomeBattleRoom_Text_CanWinStreakBeStretched:
 	.string "Can the win streak be stretched?\n"
@@ -1108,7 +1108,7 @@ BattleFrontier_BattleDomeBattleRoom_Text_CanWinStreakBeStretched:
 
 BattleFrontier_BattleDomeBattleRoom_Text_LegendHasReturnedDomeAceTucker:
 	.string "Ladies and gentlemen!\n"
-	.string "Boys, girls, and POKeMON!\p"
+	.string "Boys, girls, and POKEMON!\p"
 	.string "Finally!\n"
 	.string "Finally, the legend has returned!\p"
 	.string "Yes, the name of that legend!\n"
@@ -1116,13 +1116,13 @@ BattleFrontier_BattleDomeBattleRoom_Text_LegendHasReturnedDomeAceTucker:
 	.string "It's none other than TUCKER!$"
 
 BattleFrontier_BattleDomeBattleRoom_Text_TuckerGoldIntro:
-	.string "TUCKER: Ah…\n"
-	.string "The pummeling roar of the crowd…\l"
-	.string "Their furnace-like heat of excitement…\l"
-	.string "This is a wonderful place…\p"
-	.string "To the crowd, I am the DOME ACE…\n"
-	.string "I represent their hopes and dreams…\l"
-	.string "I must never fade from their sight…\p"
+	.string "TUCKER: Ah...\n"
+	.string "The pummeling roar of the crowd...\l"
+	.string "Their furnace-like heat of excitement...\l"
+	.string "This is a wonderful place...\p"
+	.string "To the crowd, I am the DOME ACE...\n"
+	.string "I represent their hopes and dreams...\l"
+	.string "I must never fade from their sight...\p"
 	.string "I must burn!\n"
 	.string "Brighter and more brilliant!\l"
 	.string "I must light all that gather here!$"
@@ -1170,7 +1170,7 @@ BattleFrontier_BattleDomeBattleRoom_Text_PlayerVersusTucker:
 BattleFrontier_BattleDomeBattleRoom_Text_RefereesDecidedWinnerTucker:
 	.string "The REFEREES have reached\n"
 	.string "a decision!\p"
-	.string "The winner is…\n"
+	.string "The winner is...\n"
 	.string "Oh, my goodness!\l"
 	.string "The winner is our very own DOME ACE!\l"
 	.string "It's TUCKER!\p"

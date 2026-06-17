@@ -1,18 +1,18 @@
 gFameCheckerFlavorText_ProfOak0:: @ 0x81AD106
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}What does this person do?\p"
-	.string "{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}OAK POKeMON RESEARCH LAB$"
+	.string "{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}OAK POKEMON RESEARCH LAB$"
 
 gFameCheckerFlavorText_ProfOak1:: @ 0x81AD145
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}What is this person like?\p"
 	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}To make a complete guide on all\n"
-	.string "the POKeMON in the world…\p"
+	.string "the POKEMON in the world...\p"
 	.string "That was my dream!$"
 
 gFameCheckerFlavorText_ProfOak2:: @ 0x81AD1BB
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}What is this person like?\p"
 	.string "{FONT_FEMALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}PROF. OAK may not look like much,\n"
-	.string "but he's the authority on POKeMON.\p"
-	.string "Many POKeMON TRAINERS hold him in\n"
+	.string "but he's the authority on POKEMON.\p"
+	.string "Many POKEMON TRAINERS hold him in\n"
 	.string "high regard.$"
 
 gFameCheckerFlavorText_ProfOak3:: @ 0x81AD258
@@ -34,25 +34,25 @@ gFameCheckerFlavorText_ProfOak5:: @ 0x81AD377
 	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}PROF. OAK is going to have his own\n"
 	.string "radio show soon.\p"
 	.string "The program will be called PROF.\n"
-	.string "OAK'S POKeMON SEMINAR.$"
+	.string "OAK'S POKEMON SEMINAR.$"
 
 gFameCheckerFlavorText_Daisy0:: @ 0x81AD40C
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}What does this person do?\p"
-	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}If you show DAISY your POKeMON,\n"
+	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}If you show DAISY your POKEMON,\n"
 	.string "she can tell how much it likes you.\p"
 	.string "Occasionally, she will even groom\n"
-	.string "a POKeMON for you.$"
+	.string "a POKEMON for you.$"
 
 gFameCheckerFlavorText_Daisy1:: @ 0x81AD4AE
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}What is this person like?\p"
 	.string "{FONT_FEMALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}But the person who is most liked by\n"
-	.string "POKeMON is DAISY, I think.$"
+	.string "POKEMON is DAISY, I think.$"
 
 gFameCheckerFlavorText_Daisy2:: @ 0x81AD516
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}What is this person like?\p"
-	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}She was gently grooming POKeMON…\n"
+	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}She was gently grooming POKEMON...\n"
 	.string "She was a little angel.\p"
-	.string "That little girl's name…\n"
+	.string "That little girl's name...\n"
 	.string "I think it was DAISY.$"
 
 gFameCheckerFlavorText_Daisy3:: @ 0x81AD5A7
@@ -68,29 +68,29 @@ gFameCheckerFlavorText_Daisy4:: @ 0x81AD608
 	.string "to buy some TEA.$"
 
 gFameCheckerFlavorText_Daisy5:: @ 0x81AD69F
-	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}There's a rumor…\p"
-	.string "{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}The Spring POKeMON CONTEST's\n"
+	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}There's a rumor...\p"
+	.string "{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}The Spring POKEMON CONTEST's\n"
 	.string "Grand Champion is DAISY OAK of\l"
 	.string "PALLET TOWN!$"
 
 gFameCheckerFlavorText_Brock0:: @ 0x81AD705
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}What does this person do?\p"
-	.string "{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}PEWTER CITY POKeMON GYM\n"
+	.string "{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}PEWTER CITY POKEMON GYM\n"
 	.string "LEADER: BROCK\l"
-	.string "The Rock-Solid POKeMON TRAINER!$"
+	.string "The Rock-Solid POKEMON TRAINER!$"
 
 gFameCheckerFlavorText_Brock1:: @ 0x81AD771
-	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}Favorite kind of POKeMON?\p"
+	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}Favorite kind of POKEMON?\p"
 	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}My rock-hard willpower is evident\n"
-	.string "in even my POKeMON.\p"
-	.string "My POKeMON are all rock hard and\n"
+	.string "in even my POKEMON.\p"
+	.string "My POKEMON are all rock hard and\n"
 	.string "have true-grit determination.\p"
-	.string "That's right - my POKeMON are all\n"
+	.string "That's right - my POKEMON are all\n"
 	.string "the ROCK type!$"
 
 gFameCheckerFlavorText_Brock2:: @ 0x81AD840
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}What is this person like?\p"
-	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}There aren't many serious POKeMON\n"
+	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}There aren't many serious POKEMON\n"
 	.string "TRAINERS here.\p"
 	.string "They're all like BUG CATCHERS,\n"
 	.string "you know, just hobbyists.\p"
@@ -118,14 +118,14 @@ gFameCheckerFlavorText_Brock5:: @ 0x81ADA27
 
 gFameCheckerFlavorText_Misty0:: @ 0x81ADA91
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}What does this person do?\p"
-	.string "{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}CERULEAN CITY POKeMON GYM\n"
+	.string "{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}CERULEAN CITY POKEMON GYM\n"
 	.string "LEADER: MISTY\l"
 	.string "The Tomboyish Mermaid!$"
 
 gFameCheckerFlavorText_Misty1:: @ 0x81ADAF6
-	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}Favorite kind of POKeMON?\p"
+	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}Favorite kind of POKEMON?\p"
 	.string "{FONT_FEMALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}My policy is an all-out offensive\n"
-	.string "with WATER-type POKeMON!$"
+	.string "with WATER-type POKEMON!$"
 
 gFameCheckerFlavorText_Misty2:: @ 0x81ADB5A
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}What is this person like?\p"
@@ -134,32 +134,32 @@ gFameCheckerFlavorText_Misty2:: @ 0x81ADB5A
 	.string "She won't lose to someone like you!$"
 
 gFameCheckerFlavorText_Misty3:: @ 0x81ADBD9
-	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}There's a rumor…\p"
-	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}Strong TRAINERS and WATER POKeMON\n"
+	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}There's a rumor...\p"
+	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}Strong TRAINERS and WATER POKEMON\n"
 	.string "are common sights in these parts.\p"
 	.string "They say that MISTY of the\n"
 	.string "CERULEAN GYM trains here.$"
 
 gFameCheckerFlavorText_Misty4:: @ 0x81ADC72
-	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}There's a rumor…\p"
+	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}There's a rumor...\p"
 	.string "{FONT_FEMALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}This cape is a famous date spot.\p"
 	.string "MISTY, the GYM LEADER, has high\n"
 	.string "hopes about this place.$"
 
 gFameCheckerFlavorText_Misty5:: @ 0x81ADCEB
-	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}There's a rumor…\p"
+	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}There's a rumor...\p"
 	.string "{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}MISTY is said to worship LORELEI\n"
 	.string "of the ELITE FOUR.$"
 
 gFameCheckerFlavorText_LtSurge0:: @ 0x81ADD3C
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}What does this person do?\p"
-	.string "{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}VERMILION CITY POKeMON GYM\n"
+	.string "{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}VERMILION CITY POKEMON GYM\n"
 	.string "LEADER: LT. SURGE\l"
 	.string "The Lightning American!$"
 
 gFameCheckerFlavorText_LtSurge1:: @ 0x81ADDA7
-	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}Favorite kind of POKeMON?\p"
-	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}I tell you, kid, electric POKeMON\n"
+	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}Favorite kind of POKEMON?\p"
+	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}I tell you, kid, electric POKEMON\n"
 	.string "saved me during the war!$"
 
 gFameCheckerFlavorText_LtSurge2:: @ 0x81ADE0B
@@ -180,23 +180,23 @@ gFameCheckerFlavorText_LtSurge4:: @ 0x81ADEEC
 	.string "He set up double locks everywhere.$"
 
 gFameCheckerFlavorText_LtSurge5:: @ 0x81ADF6A
-	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}There's a rumor…\p"
+	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}There's a rumor...\p"
 	.string "{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}LT. SURGE is rumored to have been\n"
 	.string "a pilot while home in America.\p"
 	.string "He used the electricity generated\n"
-	.string "by POKeMON to power his plane.$"
+	.string "by POKEMON to power his plane.$"
 
 gFameCheckerFlavorText_Erika0:: @ 0x81AE009
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}What does this person do?\p"
-	.string "{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}CELADON CITY POKeMON GYM\n"
+	.string "{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}CELADON CITY POKEMON GYM\n"
 	.string "LEADER: ERIKA\l"
 	.string "The Nature-Loving Princess!$"
 
 gFameCheckerFlavorText_Erika1:: @ 0x81AE072
-	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}Favorite kind of POKeMON?\p"
+	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}Favorite kind of POKEMON?\p"
 	.string "{FONT_FEMALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}I am a student of the art of\n"
 	.string "flower arranging.\p"
-	.string "My POKeMON are solely of the\n"
+	.string "My POKEMON are solely of the\n"
 	.string "GRASS type.$"
 
 gFameCheckerFlavorText_Erika2:: @ 0x81AE0F3
@@ -206,32 +206,32 @@ gFameCheckerFlavorText_Erika2:: @ 0x81AE0F3
 
 gFameCheckerFlavorText_Erika3:: @ 0x81AE15B
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}What is this person like?\p"
-	.string "{FONT_FEMALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}We only use GRASS-type POKeMON at\n"
+	.string "{FONT_FEMALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}We only use GRASS-type POKEMON at\n"
 	.string "our GYM.\p"
 	.string "Why? We also use them for making\n"
 	.string "flower arrangements!$"
 
 gFameCheckerFlavorText_Erika4:: @ 0x81AE1E5
-	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}Favorite kind of POKeMON?\p"
-	.string "{FONT_FEMALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}I would never collect POKeMON if\n"
+	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}Favorite kind of POKEMON?\p"
+	.string "{FONT_FEMALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}I would never collect POKEMON if\n"
 	.string "they were unattractive.$"
 
 gFameCheckerFlavorText_Erika5:: @ 0x81AE247
-	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}There's a rumor…\p"
+	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}There's a rumor...\p"
 	.string "{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}Rumor has it that if you peek into\n"
 	.string "CELADON GYM, you can often\l"
 	.string "see ERIKA snoozing.$"
 
 gFameCheckerFlavorText_Koga0:: @ 0x81AE2B6
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}What does this person do?\p"
-	.string "{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}FUCHSIA CITY POKeMON GYM\n"
+	.string "{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}FUCHSIA CITY POKEMON GYM\n"
 	.string "LEADER: KOGA\l"
 	.string "The Poisonous Ninja Master$"
 
 gFameCheckerFlavorText_Koga1:: @ 0x81AE31D
-	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}Favorite kind of POKeMON?\p"
+	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}Favorite kind of POKEMON?\p"
 	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}Despair to the creeping horror of\n"
-	.string "POISON-type POKeMON!$"
+	.string "POISON-type POKEMON!$"
 
 gFameCheckerFlavorText_Koga2:: @ 0x81AE37D
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}What is this person like?\p"
@@ -243,15 +243,15 @@ gFameCheckerFlavorText_Koga3:: @ 0x81AE407
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}Family and friends?\p"
 	.string "{FONT_FEMALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}My father is the GYM LEADER of\n"
 	.string "this town.\p"
-	.string "I'm training to use POISON POKeMON\n"
+	.string "I'm training to use POISON POKEMON\n"
 	.string "as well as my father.$"
 
 gFameCheckerFlavorText_Koga4:: @ 0x81AE48D
-	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}There's a rumor…\p"
+	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}There's a rumor...\p"
 	.string "{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}KOGA is said to have a thorough\n"
 	.string "knowledge of medicine.\p"
 	.string "He even concocts medicine to nurse\n"
-	.string "his POKeMON to health.$"
+	.string "his POKEMON to health.$"
 
 gFameCheckerFlavorText_Koga5:: @ 0x81AE51B
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}What does this person do?\p"
@@ -264,15 +264,15 @@ gFameCheckerFlavorText_Koga5:: @ 0x81AE51B
 
 gFameCheckerFlavorText_Sabrina0:: @ 0x81AE5E8
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}What does this person do?\p"
-	.string "{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}SAFFRON CITY POKeMON GYM\n"
+	.string "{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}SAFFRON CITY POKEMON GYM\n"
 	.string "LEADER: SABRINA\l"
-	.string "The Master of PSYCHIC POKeMON!$"
+	.string "The Master of PSYCHIC POKEMON!$"
 
 gFameCheckerFlavorText_Sabrina1:: @ 0x81AE656
-	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}Favorite kind of POKeMON?\p"
+	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}Favorite kind of POKEMON?\p"
 	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}You know about a girl GYM LEADER\n"
 	.string "in SAFFRON CITY?\p"
-	.string "She uses PSYCHIC-type POKeMON,\n"
+	.string "She uses PSYCHIC-type POKEMON,\n"
 	.string "right?$"
 
 gFameCheckerFlavorText_Sabrina2:: @ 0x81AE6D7
@@ -288,9 +288,9 @@ gFameCheckerFlavorText_Sabrina3:: @ 0x81AE762
 	.string "I will show you my powers!$"
 
 gFameCheckerFlavorText_Sabrina4:: @ 0x81AE7CB
-	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}There's a rumor…\p"
+	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}There's a rumor...\p"
 	.string "{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}People say that SABRINA can\n"
-	.string "communicate with her POKeMON\l"
+	.string "communicate with her POKEMON\l"
 	.string "during battle without speaking.$"
 
 gFameCheckerFlavorText_Sabrina5:: @ 0x81AE841
@@ -300,22 +300,22 @@ gFameCheckerFlavorText_Sabrina5:: @ 0x81AE841
 
 gFameCheckerFlavorText_Blaine0:: @ 0x81AE89E
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}What does this person do?\p"
-	.string "{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}CINNABAR ISLAND POKeMON GYM\n"
+	.string "{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}CINNABAR ISLAND POKEMON GYM\n"
 	.string "LEADER: BLAINE\l"
 	.string "The Hotheaded Quiz Master!$"
 
 gFameCheckerFlavorText_Blaine1:: @ 0x81AE90A
-	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}Favorite kind of POKeMON?\p"
-	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}My fiery POKeMON are all rough\n"
+	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}Favorite kind of POKEMON?\p"
+	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}My fiery POKEMON are all rough\n"
 	.string "and ready with intense heat!\p"
 	.string "They incinerate all challengers!$"
 
 gFameCheckerFlavorText_Blaine2:: @ 0x81AE990
-	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}Favorite kind of POKeMON?\p"
+	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}Favorite kind of POKEMON?\p"
 	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}Our LEADER, BLAINE, became lost\n"
 	.string "in the mountains but good.\p"
 	.string "Night fell when a fiery bird\n"
-	.string "POKeMON appeared.\p"
+	.string "POKEMON appeared.\p"
 	.string "Its light allowed BLAINE to find\n"
 	.string "his way down safely.$"
 
@@ -334,7 +334,7 @@ gFameCheckerFlavorText_Blaine4:: @ 0x81AEAEE
 	.string "shoulder with big grins.$"
 
 gFameCheckerFlavorText_Blaine5:: @ 0x81AEB69
-	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}There's a rumor…\p"
+	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}There's a rumor...\p"
 	.string "{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}BLAINE is said to remove his dark\n"
 	.string "shades only when he is thinking up\l"
 	.string "new quiz questions.$"
@@ -344,9 +344,9 @@ gFameCheckerFlavorText_Lorelei0:: @ 0x81AEBDF
 	.string "{FONT_FEMALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}I am LORELEI of the ELITE FOUR.$"
 
 gFameCheckerFlavorText_Lorelei1:: @ 0x81AEC28
-	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}Favorite kind of POKeMON?\p"
+	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}Favorite kind of POKEMON?\p"
 	.string "{FONT_FEMALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}No one can best me when it comes\n"
-	.string "to icy POKeMON.$"
+	.string "to icy POKEMON.$"
 
 gFameCheckerFlavorText_Lorelei2:: @ 0x81AEC82
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}Where was this person born?\p"
@@ -369,12 +369,12 @@ gFameCheckerFlavorText_Lorelei4:: @ 0x81AEDAA
 	.string "FOUR ISLAND, her collection grows!$"
 
 gFameCheckerFlavorText_Lorelei5:: @ 0x81AEE51
-	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}Favorite kind of POKeMON?\p"
+	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}Favorite kind of POKEMON?\p"
 	.string "{FONT_FEMALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}The LAPRAS she has, I imagine it\n"
 	.string "to be the one she met as a child.\p"
 	.string "I believe it was in ICEFALL CAVE\n"
 	.string "that she caught it.\p"
-	.string "Perhaps that POKeMON has been with\n"
+	.string "Perhaps that POKEMON has been with\n"
 	.string "her ever since.$"
 
 gFameCheckerFlavorText_Bruno0:: @ 0x81AEF25
@@ -382,9 +382,9 @@ gFameCheckerFlavorText_Bruno0:: @ 0x81AEF25
 	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}I am BRUNO of the ELITE FOUR!$"
 
 gFameCheckerFlavorText_Bruno1:: @ 0x81AEF6C
-	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}Favorite kind of POKeMON?\p"
+	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}Favorite kind of POKEMON?\p"
 	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}I've lived and trained with my\n"
-	.string "fighting POKeMON!$"
+	.string "fighting POKEMON!$"
 
 gFameCheckerFlavorText_Bruno2:: @ 0x81AEFC6
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}What is this person like?\p"
@@ -397,10 +397,10 @@ gFameCheckerFlavorText_Bruno3:: @ 0x81AF04C
 	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}BRUNO, who's a senior ahead of me,\n"
 	.string "visits the SPA on occasion.\p"
 	.string "He comes to rehab injuries, both\n"
-	.string "his own and his POKeMON's.$"
+	.string "his own and his POKEMON's.$"
 
 gFameCheckerFlavorText_Bruno4:: @ 0x81AF0F0
-	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}There's a rumor…\p"
+	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}There's a rumor...\p"
 	.string "{FONT_FEMALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}He's one of the ELITE FOUR.\n"
 	.string "His name is BRUNO.\p"
 	.string "He went away disappointed when he\n"
@@ -409,7 +409,7 @@ gFameCheckerFlavorText_Bruno4:: @ 0x81AF0F0
 
 gFameCheckerFlavorText_Bruno5:: @ 0x81AF19A
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}Family and friends?\p"
-	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}Even BRUNO…\n"
+	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}Even BRUNO...\n"
 	.string "He trained with a fellow by the\l"
 	.string "name of BRAWLY before.$"
 
@@ -418,8 +418,8 @@ gFameCheckerFlavorText_Agatha0:: @ 0x81AF200
 	.string "{FONT_FEMALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}I am AGATHA of the ELITE FOUR.$"
 
 gFameCheckerFlavorText_Agatha1:: @ 0x81AF248
-	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}Favorite kind of POKeMON?\p"
-	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}AGATHA's GHOST-type POKeMON are\n"
+	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}Favorite kind of POKEMON?\p"
+	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}AGATHA's GHOST-type POKEMON are\n"
 	.string "horrifically terrifying in toughness.$"
 
 gFameCheckerFlavorText_Agatha2:: @ 0x81AF2B7
@@ -430,7 +430,7 @@ gFameCheckerFlavorText_Agatha2:: @ 0x81AF2B7
 	.string "that scary lady hollering.$"
 
 gFameCheckerFlavorText_Agatha3:: @ 0x81AF34E
-	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}There's a rumor…\p"
+	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}There's a rumor...\p"
 	.string "{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}In her youth, AGATHA and PROF.\n"
 	.string "OAK were rivals who vied for\l"
 	.string "supremacy as TRAINERS.$"
@@ -457,9 +457,9 @@ gFameCheckerFlavorText_Lance0:: @ 0x81AF4FD
 	.string "TRAINER.$"
 
 gFameCheckerFlavorText_Lance1:: @ 0x81AF567
-	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}Favorite kind of POKeMON?\p"
+	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}Favorite kind of POKEMON?\p"
 	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}You know that dragons are\n"
-	.string "mythical POKeMON.\p"
+	.string "mythical POKEMON.\p"
 	.string "They're hard to catch and raise,\n"
 	.string "but their powers are superior.\p"
 	.string "They're virtually indestructible.\n"
@@ -472,11 +472,11 @@ gFameCheckerFlavorText_Lance2:: @ 0x81AF641
 	.string "He's the greatest, LANCE!$"
 
 gFameCheckerFlavorText_Lance3:: @ 0x81AF6BA
-	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}There's a rumor…\p"
+	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}There's a rumor...\p"
 	.string "{FONT_FEMALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}We have a customer, LANCE, who\n"
 	.string "occasionally comes.\p"
 	.string "He always buys capes.\p"
-	.string "I wonder… Does he have many\n"
+	.string "I wonder... Does he have many\n"
 	.string "identical capes at home?$"
 
 gFameCheckerFlavorText_Lance4:: @ 0x81AF758
@@ -495,12 +495,12 @@ gFameCheckerFlavorText_Bill0:: @ 0x81AF83E
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}What does this person do?\p"
 	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}After all, BILL's world-famous as a\n"
 	.string "POKeMANIAC.\p"
-	.string "He invented the POKeMON Storage\n"
+	.string "He invented the POKEMON Storage\n"
 	.string "System on PC, too.$"
 
 gFameCheckerFlavorText_Bill1:: @ 0x81AF8CA
-	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}Favorite kind of POKeMON?\p"
-	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}BILL has lots of POKeMON!\n"
+	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}Favorite kind of POKEMON?\p"
+	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}BILL has lots of POKEMON!\n"
 	.string "He collects rare ones, too!$"
 
 gFameCheckerFlavorText_Bill2:: @ 0x81AF929
@@ -510,7 +510,7 @@ gFameCheckerFlavorText_Bill2:: @ 0x81AF929
 	.string "even as a child!$"
 
 gFameCheckerFlavorText_Bill3:: @ 0x81AF998
-	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}Favorite kind of POKeMON?\p"
+	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}Favorite kind of POKEMON?\p"
 	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}BILL is a POKeMANIAC, so he loves\n"
 	.string "every kind.\p"
 	.string "Apparently, the first one he caught\n"
@@ -524,7 +524,7 @@ gFameCheckerFlavorText_Bill4:: @ 0x81AFA20
 	.string "festive, bustling city.$"
 
 gFameCheckerFlavorText_Bill5:: @ 0x81AFAB9
-	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}There's a rumor…\p"
+	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}There's a rumor...\p"
 	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}Apparently, BILL simply can't\n"
 	.string "stomach milk at all.$"
 
@@ -532,27 +532,27 @@ gFameCheckerFlavorText_MrFuji0:: @ 0x81AFB0C
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}What does this person do?\p"
 	.string "{FONT_FEMALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}He's really kind.\p"
 	.string "He looks after abandoned and\n"
-	.string "orphaned POKeMON.$"
+	.string "orphaned POKEMON.$"
 
 gFameCheckerFlavorText_MrFuji1:: @ 0x81AFB76
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}What is this person like?\p"
 	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}This old guy marched right up to\n"
 	.string "our HIDEOUT.\p"
 	.string "Then, he starts ranting about how\n"
-	.string "TEAM ROCKET's abusing POKeMON.\p"
+	.string "TEAM ROCKET's abusing POKEMON.\p"
 	.string "So, we're just talking it over as\n"
 	.string "adults.$"
 
 gFameCheckerFlavorText_MrFuji2:: @ 0x81AFC38
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}What is this person like?\p"
-	.string "{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}POKeMON FAN MAGAZINE\n"
+	.string "{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}POKEMON FAN MAGAZINE\n"
 	.string "Monthly Grand Prize Drawing!\p"
-	.string "The application form is…\p"
+	.string "The application form is...\p"
 	.string "Gone! It's been clipped out.\n"
 	.string "Someone must have applied already.$"
 
 gFameCheckerFlavorText_MrFuji3:: @ 0x81AFCE9
-	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}There's a rumor…\p"
+	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}There's a rumor...\p"
 	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}I hear that MR. FUJI's not from\n"
 	.string "these parts originally, either.$"
 
@@ -572,24 +572,24 @@ gFameCheckerFlavorText_MrFuji5:: @ 0x81AFDC4
 
 gFameCheckerFlavorText_Giovanni0:: @ 0x81AFE68
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}What does this person do?\p"
-	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}TEAM ROCKET captures POKeMON from\n"
+	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}TEAM ROCKET captures POKEMON from\n"
 	.string "around the world.\p"
 	.string "They're important tools for keeping\n"
 	.string "our criminal enterprise going.\p"
 	.string "I am the leader, GIOVANNI!$"
 
 gFameCheckerFlavorText_Giovanni1:: @ 0x81AFF23
-	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}Favorite kind of POKeMON?\p"
+	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}Favorite kind of POKEMON?\p"
 	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}Those thugs that took over our\n"
-	.string "building…\p"
+	.string "building...\p"
 	.string "Their BOSS said he was looking for\n"
-	.string "strong POKeMON.$"
+	.string "strong POKEMON.$"
 
 gFameCheckerFlavorText_Giovanni2:: @ 0x81AFFA8
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}What is this person like?\p"
 	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}TEAM ROCKET's BOSS is terribly\n"
 	.string "cruel!\p"
-	.string "To him, POKeMON are just tools to\n"
+	.string "To him, POKEMON are just tools to\n"
 	.string "be used.$"
 
 gFameCheckerFlavorText_Giovanni3:: @ 0x81B0022
@@ -605,7 +605,7 @@ gFameCheckerFlavorText_Giovanni4:: @ 0x81B00A6
 
 gFameCheckerFlavorText_Giovanni5:: @ 0x81B0106
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}Family and friends?\p"
-	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}You… You're not GIOVANNI's kid,\n"
+	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}You... You're not GIOVANNI's kid,\n"
 	.string "are you?\p"
 	.string "No, that can't be right.\n"
 	.string "GIOVANNI's kid has red hair.$"
@@ -617,11 +617,11 @@ gFameCheckerPersonName_ProfOak:: @ 0x81B0188
 gFameCheckerPersonQuote_ProfOak:: @ 0x81B0198
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}From: PROF. OAK\n"
 	.string "To: {PLAYER}\p"
-	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}Why do POKeMON compete and battle\n"
+	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}Why do POKEMON compete and battle\n"
 	.string "so hard for you?\p"
 	.string "They do so because they can see\n"
 	.string "the love and trust you have\l"
-	.string "towards POKeMON.\p"
+	.string "towards POKEMON.\p"
 	.string "Never forget that.$"
 
 gFameCheckerPersonName_Daisy:: @ 0x81B0251
@@ -682,7 +682,7 @@ gFameCheckerPersonQuote_Erika:: @ 0x81B0510
 	.string "That awareness alone inspires and\n"
 	.string "motivates me to try harder.\p"
 	.string "Please visit me again.\n"
-	.string "Zzz…$"
+	.string "Zzz...$"
 
 gFameCheckerPersonName_Koga:: @ 0x81B05C2
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}KOGA$"
@@ -702,7 +702,7 @@ gFameCheckerPersonQuote_Sabrina:: @ 0x81B0675
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}From: SABRINA\n"
 	.string "To: {PLAYER}\p"
 	.string "{FONT_FEMALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}The love you have towards your\n"
-	.string "POKeMON…\p"
+	.string "POKEMON...\p"
 	.string "It was a power that was never\n"
 	.string "bested by my psychic power.$"
 
@@ -712,10 +712,10 @@ gFameCheckerPersonName_Blaine:: @ 0x81B06FB
 gFameCheckerPersonQuote_Blaine:: @ 0x81B0708
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}From: BLAINE\n"
 	.string "To: {PLAYER}\p"
-	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}My fire POKeMON!\n"
+	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}My fire POKEMON!\n"
 	.string "They'll become even more powerful!\p"
 	.string "And now, a quiz. How many kinds of\n"
-	.string "FIRE-type POKeMON are there?$"
+	.string "FIRE-type POKEMON are there?$"
 
 gFameCheckerPersonName_Lorelei:: @ 0x81B079F
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}LORELEI$"
@@ -735,7 +735,7 @@ gFameCheckerPersonName_Bruno:: @ 0x81B0845
 gFameCheckerPersonQuote_Bruno:: @ 0x81B0851
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}From: BRUNO\n"
 	.string "To: {PLAYER}\p"
-	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}The super power of your POKeMON\n"
+	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}The super power of your POKEMON\n"
 	.string "and you I've experienced myself.\p"
 	.string "Next time, maybe I should show you\n"
 	.string "how to train yourself.$"
@@ -759,7 +759,7 @@ gFameCheckerPersonQuote_Lance:: @ 0x81B098B
 	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}I'm considering going back to my\n"
 	.string "hometown.\p"
 	.string "I want to retrain my DRAGON-type\n"
-	.string "POKeMON and strengthen them.\p"
+	.string "POKEMON and strengthen them.\p"
 	.string "I'd like to invite you to my\n"
 	.string "hometown one day.$"
 
@@ -772,7 +772,7 @@ gFameCheckerPersonQuote_Bill:: @ 0x81B0A50
 	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}Hey, there! CELIO had nothing but\n"
 	.string "praise for you.\p"
 	.string "Hearing that makes me happy.\p"
-	.string "When you catch some rare POKeMON,\n"
+	.string "When you catch some rare POKEMON,\n"
 	.string "come show me, okay? Promise!$"
 
 gFameCheckerPersonName_MrFuji:: @ 0x81B0AFF
@@ -782,9 +782,9 @@ gFameCheckerPersonQuote_MrFuji:: @ 0x81B0B0E
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}From: MR. FUJI\n"
 	.string "To: {PLAYER}\p"
 	.string "{FONT_MALE}{COLOR DARK_GRAY}{SHADOW LIGHT_GRAY}Instead of hoping for the happiness\n"
-	.string "of just your POKeMON…\p"
-	.string "…Can I get you to wish for the\n"
-	.string "happiness of all POKeMON?$"
+	.string "of just your POKEMON...\p"
+	.string "...Can I get you to wish for the\n"
+	.string "happiness of all POKEMON?$"
 
 gFameCheckerPersonName_Giovanni:: @ 0x81B0BA6
 	.string "{COLOR BLUE}{SHADOW LIGHT_BLUE}GIOVANNI$"
@@ -810,7 +810,7 @@ gFameCheckerFlavorTextOriginLocation_ProfOak3::
 	.string "VIRIDIAN CITY$"
 
 gFameCheckerFlavorTextOriginLocation_ProfOak4::
-	.string "POKeMON LEAGUE$"
+	.string "POKEMON LEAGUE$"
 
 gFameCheckerFlavorTextOriginLocation_ProfOak5::
 	.string "RESEARCH LAB$"
@@ -960,10 +960,10 @@ gFameCheckerFlavorTextOriginLocation_Blaine5::
 	.string "RESORT GORGEOUS$"
 
 gFameCheckerFlavorTextOriginLocation_Lorelei0::
-	.string "POKeMON LEAGUE$"
+	.string "POKEMON LEAGUE$"
 
 gFameCheckerFlavorTextOriginLocation_Lorelei1::
-	.string "POKeMON LEAGUE$"
+	.string "POKEMON LEAGUE$"
 
 gFameCheckerFlavorTextOriginLocation_Lorelei2::
 	.string "FOUR ISLAND$"
@@ -978,10 +978,10 @@ gFameCheckerFlavorTextOriginLocation_Lorelei5::
 	.string "FOUR ISLAND$"
 
 gFameCheckerFlavorTextOriginLocation_Bruno0::
-	.string "POKeMON LEAGUE$"
+	.string "POKEMON LEAGUE$"
 
 gFameCheckerFlavorTextOriginLocation_Bruno1::
-	.string "POKeMON LEAGUE$"
+	.string "POKEMON LEAGUE$"
 
 gFameCheckerFlavorTextOriginLocation_Bruno2::
 	.string "SAFFRON CITY$"
@@ -996,7 +996,7 @@ gFameCheckerFlavorTextOriginLocation_Bruno5::
 	.string "SEVAULT CANYON$"
 
 gFameCheckerFlavorTextOriginLocation_Agatha0::
-	.string "POKeMON LEAGUE$"
+	.string "POKEMON LEAGUE$"
 
 gFameCheckerFlavorTextOriginLocation_Agatha1::
 	.string "INDIGO PLATEAU$"
@@ -1008,16 +1008,16 @@ gFameCheckerFlavorTextOriginLocation_Agatha3::
 	.string "SEVEN ISLAND$"
 
 gFameCheckerFlavorTextOriginLocation_Agatha4::
-	.string "POKeMON LEAGUE$"
+	.string "POKEMON LEAGUE$"
 
 gFameCheckerFlavorTextOriginLocation_Agatha5::
 	.string "SIX ISLAND$"
 
 gFameCheckerFlavorTextOriginLocation_Lance0::
-	.string "POKeMON LEAGUE$"
+	.string "POKEMON LEAGUE$"
 
 gFameCheckerFlavorTextOriginLocation_Lance1::
-	.string "POKeMON LEAGUE$"
+	.string "POKEMON LEAGUE$"
 
 gFameCheckerFlavorTextOriginLocation_Lance2::
 	.string "SAFFRON CITY$"
@@ -1053,7 +1053,7 @@ gFameCheckerFlavorTextOriginLocation_MrFuji0::
 	.string "LAVENDER TOWN$"
 
 gFameCheckerFlavorTextOriginLocation_MrFuji1::
-	.string "POKeMON TOWER$"
+	.string "POKEMON TOWER$"
 
 gFameCheckerFlavorTextOriginLocation_MrFuji2::
 	.string "LAVENDER TOWN$"
@@ -1095,7 +1095,7 @@ gFameCheckerFlavorTextOriginObjectName_ProfOak2::
 	.string "AIDE$"
 
 gFameCheckerFlavorTextOriginObjectName_ProfOak3::
-	.string "POKeMON JOURNAL$"
+	.string "POKEMON JOURNAL$"
 
 gFameCheckerFlavorTextOriginObjectName_ProfOak4::
 	.string "AGATHA$"
@@ -1113,13 +1113,13 @@ gFameCheckerFlavorTextOriginObjectName_Daisy2::
 	.string "MAN$"
 
 gFameCheckerFlavorTextOriginObjectName_Daisy3::
-	.string "POKeMON JOURNAL$"
+	.string "POKEMON JOURNAL$"
 
 gFameCheckerFlavorTextOriginObjectName_Daisy4::
 	.string "OLD LADY$"
 
 gFameCheckerFlavorTextOriginObjectName_Daisy5::
-	.string "POKeMON JOURNAL$"
+	.string "POKEMON JOURNAL$"
 
 gFameCheckerFlavorTextOriginObjectName_Brock0::
 	.string "SIGN$"
@@ -1137,7 +1137,7 @@ gFameCheckerFlavorTextOriginObjectName_Brock4::
 	.string "MAN$"
 
 gFameCheckerFlavorTextOriginObjectName_Brock5::
-	.string "POKeMON JOURNAL$"
+	.string "POKEMON JOURNAL$"
 
 gFameCheckerFlavorTextOriginObjectName_Misty0::
 	.string "SIGN$"
@@ -1155,7 +1155,7 @@ gFameCheckerFlavorTextOriginObjectName_Misty4::
 	.string "DAME$"
 
 gFameCheckerFlavorTextOriginObjectName_Misty5::
-	.string "POKeMON JOURNAL$"
+	.string "POKEMON JOURNAL$"
 
 gFameCheckerFlavorTextOriginObjectName_LtSurge0::
 	.string "SIGN$"
@@ -1173,7 +1173,7 @@ gFameCheckerFlavorTextOriginObjectName_LtSurge4::
 	.string "DWAYNE$"
 
 gFameCheckerFlavorTextOriginObjectName_LtSurge5::
-	.string "POKeMON JOURNAL$"
+	.string "POKEMON JOURNAL$"
 
 gFameCheckerFlavorTextOriginObjectName_Erika0::
 	.string "SIGN$"
@@ -1191,7 +1191,7 @@ gFameCheckerFlavorTextOriginObjectName_Erika4::
 	.string "ERIKA$"
 
 gFameCheckerFlavorTextOriginObjectName_Erika5::
-	.string "POKeMON JOURNAL$"
+	.string "POKEMON JOURNAL$"
 
 gFameCheckerFlavorTextOriginObjectName_Koga0::
 	.string "SIGN$"
@@ -1206,7 +1206,7 @@ gFameCheckerFlavorTextOriginObjectName_Koga3::
 	.string "CHARINE$"
 
 gFameCheckerFlavorTextOriginObjectName_Koga4::
-	.string "POKeMON JOURNAL$"
+	.string "POKEMON JOURNAL$"
 
 gFameCheckerFlavorTextOriginObjectName_Koga5::
 	.string "MAN$"
@@ -1224,7 +1224,7 @@ gFameCheckerFlavorTextOriginObjectName_Sabrina3::
 	.string "SABRINA$"
 
 gFameCheckerFlavorTextOriginObjectName_Sabrina4::
-	.string "POKeMON JOURNAL$"
+	.string "POKEMON JOURNAL$"
 
 gFameCheckerFlavorTextOriginObjectName_Sabrina5::
 	.string "TYRON$"
@@ -1245,7 +1245,7 @@ gFameCheckerFlavorTextOriginObjectName_Blaine4::
 	.string "PHOTO$"
 
 gFameCheckerFlavorTextOriginObjectName_Blaine5::
-	.string "POKeMON JOURNAL$"
+	.string "POKEMON JOURNAL$"
 
 gFameCheckerFlavorTextOriginObjectName_Lorelei0::
 	.string "LORELEI$"
@@ -1257,7 +1257,7 @@ gFameCheckerFlavorTextOriginObjectName_Lorelei2::
 	.string "OLD MAN$"
 
 gFameCheckerFlavorTextOriginObjectName_Lorelei3::
-	.string "POKeMON JOURNAL$"
+	.string "POKEMON JOURNAL$"
 
 gFameCheckerFlavorTextOriginObjectName_Lorelei4::
 	.string "LITTLE GIRL$"
@@ -1272,7 +1272,7 @@ gFameCheckerFlavorTextOriginObjectName_Bruno1::
 	.string "BRUNO$"
 
 gFameCheckerFlavorTextOriginObjectName_Bruno2::
-	.string "POKeMON JOURNAL$"
+	.string "POKEMON JOURNAL$"
 
 gFameCheckerFlavorTextOriginObjectName_Bruno3::
 	.string "CRUSHER$"
@@ -1293,7 +1293,7 @@ gFameCheckerFlavorTextOriginObjectName_Agatha2::
 	.string "CRUSHER$"
 
 gFameCheckerFlavorTextOriginObjectName_Agatha3::
-	.string "POKeMON JOURNAL$"
+	.string "POKEMON JOURNAL$"
 
 gFameCheckerFlavorTextOriginObjectName_Agatha4::
 	.string "AGATHA$"
@@ -1314,7 +1314,7 @@ gFameCheckerFlavorTextOriginObjectName_Lance3::
 	.string "LITTLE GIRL$"
 
 gFameCheckerFlavorTextOriginObjectName_Lance4::
-	.string "POKeMON JOURNAL$"
+	.string "POKEMON JOURNAL$"
 
 gFameCheckerFlavorTextOriginObjectName_Lance5::
 	.string "YOUNG MAN$"
@@ -1353,7 +1353,7 @@ gFameCheckerFlavorTextOriginObjectName_MrFuji4::
 	.string "PHOTO$"
 
 gFameCheckerFlavorTextOriginObjectName_MrFuji5::
-	.string "POKeMON JOURNAL$"
+	.string "POKEMON JOURNAL$"
 
 gFameCheckerFlavorTextOriginObjectName_Giovanni0::
 	.string "GIOVANNI$"
@@ -1374,30 +1374,30 @@ gFameCheckerFlavorTextOriginObjectName_Giovanni5::
 	.string "GIDEON$"
 
 PokemonJournal_Text_SpecialFeatureBrock::
-	.string "POKeMON JOURNAL\p"
+	.string "POKEMON JOURNAL\p"
 	.string "Special Feature: PEWTER GYM\n"
 	.string "LEADER BROCK!\p"
 	.string "BROCK rarely laughs, but is said to\n"
 	.string "be unable to stop if he starts.$"
 
 PokemonJournal_Text_SpecialFeatureMisty::
-	.string "POKeMON JOURNAL\p"
+	.string "POKEMON JOURNAL\p"
 	.string "Special Feature: CERULEAN GYM\n"
 	.string "LEADER MISTY!\p"
 	.string "MISTY is said to worship LORELEI\n"
 	.string "of the ELITE FOUR.$"
 
 PokemonJournal_Text_SpecialFeatureLtSurge::
-	.string "POKeMON JOURNAL\p"
+	.string "POKEMON JOURNAL\p"
 	.string "Special Feature: VERMILION GYM\n"
 	.string "LEADER LT. SURGE!\p"
 	.string "LT. SURGE is rumored to have been\n"
 	.string "a pilot while home in America.\p"
 	.string "He used the electricity generated\n"
-	.string "by POKeMON to power his plane.$"
+	.string "by POKEMON to power his plane.$"
 
 PokemonJournal_Text_SpecialFeatureErika::
-	.string "POKeMON JOURNAL\p"
+	.string "POKEMON JOURNAL\p"
 	.string "Special Feature: CELADON GYM\n"
 	.string "LEADER ERIKA!\p"
 	.string "Rumor has it that if you peek into\n"
@@ -1405,24 +1405,24 @@ PokemonJournal_Text_SpecialFeatureErika::
 	.string "see ERIKA snoozing.$"
 
 PokemonJournal_Text_SpecialFeatureKoga::
-	.string "POKeMON JOURNAL\p"
+	.string "POKEMON JOURNAL\p"
 	.string "Special Feature: FUCHSIA GYM\n"
 	.string "LEADER KOGA!\p"
 	.string "KOGA is said to have a thorough\n"
 	.string "knowledge of medicine.\p"
 	.string "He even concocts medicine to nurse\n"
-	.string "his POKeMON to health.$"
+	.string "his POKEMON to health.$"
 
 PokemonJournal_Text_SpecialFeatureSabrina::
-	.string "POKeMON JOURNAL\p"
+	.string "POKEMON JOURNAL\p"
 	.string "Special Feature: SAFFRON GYM\n"
 	.string "LEADER SABRINA!\p"
 	.string "People say that SABRINA can\n"
-	.string "communicate with her POKeMON\l"
+	.string "communicate with her POKEMON\l"
 	.string "during battle without speaking.$"
 
 PokemonJournal_Text_SpecialFeatureBlaine::
-	.string "POKeMON JOURNAL\p"
+	.string "POKEMON JOURNAL\p"
 	.string "Special Feature: CINNABAR GYM\n"
 	.string "LEADER BLAINE!\p"
 	.string "BLAINE is said to remove his dark\n"
@@ -1430,7 +1430,7 @@ PokemonJournal_Text_SpecialFeatureBlaine::
 	.string "new quiz questions.$"
 
 PokemonJournal_Text_SpecialFeatureLorelei::
-	.string "POKeMON JOURNAL\p"
+	.string "POKEMON JOURNAL\p"
 	.string "Special Feature:\n"
 	.string "ELITE FOUR's LORELEI!\p"
 	.string "Known for her logical, calculated,\n"
@@ -1438,7 +1438,7 @@ PokemonJournal_Text_SpecialFeatureLorelei::
 	.string "has a surprising secret!$"
 
 PokemonJournal_Text_SpecialFeatureBruno::
-	.string "POKeMON JOURNAL\p"
+	.string "POKEMON JOURNAL\p"
 	.string "Special Feature:\n"
 	.string "ELITE FOUR's BRUNO!\p"
 	.string "BRUNO apparently joined the ELITE\n"
@@ -1446,7 +1446,7 @@ PokemonJournal_Text_SpecialFeatureBruno::
 	.string "battle the best TRAINERS.$"
 
 PokemonJournal_Text_SpecialFeatureAgatha::
-	.string "POKeMON JOURNAL\p"
+	.string "POKEMON JOURNAL\p"
 	.string "Special Feature:\n"
 	.string "ELITE FOUR's AGATHA!\p"
 	.string "In her youth, AGATHA and PROF.\n"
@@ -1454,7 +1454,7 @@ PokemonJournal_Text_SpecialFeatureAgatha::
 	.string "supremacy as TRAINERS.$"
 
 PokemonJournal_Text_SpecialFeatureLance::
-	.string "POKeMON JOURNAL\p"
+	.string "POKEMON JOURNAL\p"
 	.string "Special Feature:\n"
 	.string "ELITE FOUR's LANCE!\p"
 	.string "LANCE's grandfather is thought to\n"
@@ -1462,25 +1462,25 @@ PokemonJournal_Text_SpecialFeatureLance::
 	.string "dragon masters.$"
 
 PokemonJournal_Text_SpecialFeatureProfOak::
-	.string "POKeMON JOURNAL\p"
+	.string "POKEMON JOURNAL\p"
 	.string "Special Feature: PROF. OAK,\n"
-	.string "the POKeMON Researcher!\p"
+	.string "the POKEMON Researcher!\p"
 	.string "PROF. OAK reportedly lives with his\n"
 	.string "grandchildren DAISY and {RIVAL}.$"
 
 PokemonJournal_Text_SpecialFeatureDaisyOak::
-	.string "This is a POKeMON JOURNAL from\n"
-	.string "years ago…\p"
-	.string "POKeMON JOURNAL\n"
+	.string "This is a POKEMON JOURNAL from\n"
+	.string "years ago...\p"
+	.string "POKEMON JOURNAL\n"
 	.string "CONTEST Special!\p"
-	.string "The Spring POKeMON CONTEST's\n"
+	.string "The Spring POKEMON CONTEST's\n"
 	.string "Grand Champion is DAISY OAK of\l"
 	.string "PALLET TOWN!$"
 
 PokemonJournal_Text_SpecialFeatureMrFuji::
-	.string "POKeMON JOURNAL\p"
+	.string "POKEMON JOURNAL\p"
 	.string "Special Feature:\n"
-	.string "MR. FUJI of POKeMON HOUSE!\p"
+	.string "MR. FUJI of POKEMON HOUSE!\p"
 	.string "Editor: The shy MR. FUJI turned\n"
 	.string "down our interview requests.\p"
 	.string "He is a kindly man who is adored\n"

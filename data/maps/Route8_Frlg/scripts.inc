@@ -6,7 +6,7 @@ Route8_EventScript_UndergroundPathSign::
 	end
 
 Route8_Text_AidanIntro::
-	.string "You look good at POKeMON, but how\n"
+	.string "You look good at POKEMON, but how\n"
 	.string "is your chemistry grade?$"
 
 Route8_Text_AidanDefeat::
@@ -35,8 +35,8 @@ Route8_Text_GlennDefeat::
 	.string "It's not logical!$"
 
 Route8_Text_GlennPostBattle::
-	.string "Go with GRIMER first…and…\n"
-	.string "…and…then…$"
+	.string "Go with GRIMER first...and...\n"
+	.string "...and...then...$"
 
 Route8_Text_PaigeIntro::
 	.string "I like NIDORAN, so I collect them!$"
@@ -46,11 +46,11 @@ Route8_Text_PaigeDefeat::
 	.string "Why??$"
 
 Route8_Text_PaigePostBattle::
-	.string "When POKeMON grow up, they get\n"
+	.string "When POKEMON grow up, they get\n"
 	.string "ugly! They shouldn't evolve.$"
 
 Route8_Text_LeslieIntro::
-	.string "School is fun, but so are POKeMON.$"
+	.string "School is fun, but so are POKEMON.$"
 
 Route8_Text_LeslieDefeat::
 	.string "You made it clear to me that\n"
@@ -58,7 +58,7 @@ Route8_Text_LeslieDefeat::
 
 Route8_Text_LesliePostBattle::
 	.string "I was planning on getting some\n"
-	.string "fresh air for a change, but…\p"
+	.string "fresh air for a change, but...\p"
 	.string "We're stuck here because of the\n"
 	.string "gates at SAFFRON.$"
 
@@ -79,7 +79,7 @@ Route8_Text_MeganIntro::
 
 Route8_Text_MeganDefeat::
 	.string "Look what you did to my poor, cute\n"
-	.string "POKeMON!$"
+	.string "POKEMON!$"
 
 Route8_Text_MeganPostBattle::
 	.string "SAFFRON's gatekeeper won't let us\n"
@@ -94,12 +94,12 @@ Route8_Text_RichDefeat::
 	.string "Missed the big chance!$"
 
 Route8_Text_RichPostBattle::
-	.string "Playing games and POKeMON are like\n"
+	.string "Playing games and POKEMON are like\n"
 	.string "eating peanuts! I just can't stop!$"
 
 Route8_Text_JuliaIntro::
 	.string "What's a cute, round, and fluffy\n"
-	.string "POKeMON?$"
+	.string "POKEMON?$"
 
 Route8_Text_JuliaDefeat::
 	.string "Stop!\p"
@@ -108,7 +108,7 @@ Route8_Text_JuliaDefeat::
 Route8_Text_JuliaPostBattle::
 	.string "I read that CLEFAIRY evolves when\n"
 	.string "it's exposed to a MOON STONE.\p"
-	.string "I read that in a POKeMON JOURNAL.\n"
+	.string "I read that in a POKEMON JOURNAL.\n"
 	.string "I wonder if it's true?$"
 
 Route8_Text_UndergroundPathSign::
@@ -120,31 +120,31 @@ Route8_Text_EliIntro::
 	.string "Did you know?$"
 
 Route8_Text_EliDefeat::
-	.string "ELI: But…\n"
-	.string "We used our twin power…$"
+	.string "ELI: But...\n"
+	.string "We used our twin power...$"
 
 Route8_Text_EliPostBattle::
-	.string "ELI: I caught my POKeMON with\n"
+	.string "ELI: I caught my POKEMON with\n"
 	.string "ANNE!$"
 
 Route8_Text_EliNotEnoughMons::
 	.string "ELI: We can't battle if you don't\n"
-	.string "have two POKeMON.$"
+	.string "have two POKEMON.$"
 
 Route8_Text_AnneIntro::
 	.string "ANNE: We'll shock you with our twin\n"
 	.string "power!$"
 
 Route8_Text_AnneDefeat::
-	.string "ANNE: Our twin power…$"
+	.string "ANNE: Our twin power...$"
 
 Route8_Text_AnnePostBattle::
-	.string "ANNE: I'm raising POKeMON with\n"
+	.string "ANNE: I'm raising POKEMON with\n"
 	.string "ELI.$"
 
 Route8_Text_AnneNotEnoughMons::
 	.string "ANNE: Hi, hi! Let's battle!\n"
-	.string "But bring two POKeMON.$"
+	.string "But bring two POKEMON.$"
 
 Route8_Text_RicardoIntro::
 	.string "My bike's acting up, man.$"

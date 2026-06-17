@@ -24,7 +24,7 @@ BerryBlender_Text_BlendMasterNoBerries:
 BerryBlender_Text_BlendMasterKnowHowToMakePokeblocks:
 	.string "Of course!\n"
 	.string "Of course!\p"
-	.string "Incidentally…\n"
+	.string "Incidentally...\n"
 	.string "You do know how to blend ポロックS\l"
 	.string "from BERRIES?$"
 
@@ -72,9 +72,9 @@ BerryBlender_Text_MadeAmazingPokeblocksWithMaster:
 
 BerryBlender_Text_QualitiesOfBlendMaster:
 	.string "Eyes that track the arrow with\n"
-	.string "machinelike intensity…\p"
+	.string "machinelike intensity...\p"
 	.string "A hand that taps the A Button\n"
-	.string "with clockwork-like precision…\p"
+	.string "with clockwork-like precision...\p"
 	.string "Possessing these qualities makes\n"
 	.string "the BLEND MASTER truly great.$"
 

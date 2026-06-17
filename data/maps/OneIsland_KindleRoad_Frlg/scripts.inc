@@ -21,14 +21,14 @@ OneIsland_KindleRoad_Text_MariaPostBattle::
 	.string "You'll ruin the makeup.$"
 
 OneIsland_KindleRoad_Text_AbigailIntro::
-	.string "I'm beginning to get a sunburn…$"
+	.string "I'm beginning to get a sunburn...$"
 
 OneIsland_KindleRoad_Text_AbigailDefeat::
 	.string "Oh, you're so awful.$"
 
 OneIsland_KindleRoad_Text_AbigailPostBattle::
 	.string "I like that cap you have.\n"
-	.string "Maybe I should wear one, too…$"
+	.string "Maybe I should wear one, too...$"
 
 OneIsland_KindleRoad_Text_FinnIntro::
 	.string "Seen from here, MT. EMBER towers\n"
@@ -46,7 +46,7 @@ OneIsland_KindleRoad_Text_GarrettIntro::
 	.string "only to have you challenge me?$"
 
 OneIsland_KindleRoad_Text_GarrettDefeat::
-	.string "Hey, what the…\n"
+	.string "Hey, what the...\n"
 	.string "You're good, you!$"
 
 OneIsland_KindleRoad_Text_GarrettPostBattle::
@@ -58,7 +58,7 @@ OneIsland_KindleRoad_Text_TommyIntro::
 	.string "I think I've hooked a big one!$"
 
 OneIsland_KindleRoad_Text_TommyDefeat::
-	.string "I've lost it all again…$"
+	.string "I've lost it all again...$"
 
 OneIsland_KindleRoad_Text_TommyPostBattle::
 	.string "Not only did I lose, the big one\n"
@@ -90,12 +90,12 @@ OneIsland_KindleRoad_Text_SheaIntro::
 	.string "I swim around this island.$"
 
 OneIsland_KindleRoad_Text_SheaDefeat::
-	.string "Gasp…\n"
-	.string "Gasp…$"
+	.string "Gasp...\n"
+	.string "Gasp...$"
 
 OneIsland_KindleRoad_Text_SheaPostBattle::
 	.string "I lost because I'm pooped from all\n"
-	.string "the running I did…$"
+	.string "the running I did...$"
 
 OneIsland_KindleRoad_Text_HughIntro::
 	.string "Dress appropriately for battle!\n"
@@ -106,7 +106,7 @@ OneIsland_KindleRoad_Text_HughDefeat::
 
 OneIsland_KindleRoad_Text_HughPostBattle::
 	.string "Even martial artists are becoming\n"
-	.string "fashion conscious these days…$"
+	.string "fashion conscious these days...$"
 
 OneIsland_KindleRoad_Text_BryceIntro::
 	.string "You know, everything tastes great\n"
@@ -145,7 +145,7 @@ OneIsland_KindleRoad_Text_KiaPostBattle::
 OneIsland_KindleRoad_Text_KiaNotEnoughMons::
 	.string "KIA: If you want to battle with\n"
 	.string "us, you have to bring at least two\l"
-	.string "POKeMON with you.$"
+	.string "POKEMON with you.$"
 
 OneIsland_KindleRoad_Text_MikIntro::
 	.string "MIK: Together with KIA, I'm afraid\n"
@@ -162,7 +162,7 @@ OneIsland_KindleRoad_Text_MikPostBattle::
 OneIsland_KindleRoad_Text_MikNotEnoughMons::
 	.string "MIK: Hey, do you want to battle\n"
 	.string "with us two?\p"
-	.string "Bring two or more POKeMON with\n"
+	.string "Bring two or more POKEMON with\n"
 	.string "you, then.$"
 
 OneIsland_KindleRoad_Text_RouteSign::

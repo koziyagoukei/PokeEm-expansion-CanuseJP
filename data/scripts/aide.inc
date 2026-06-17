@@ -14,15 +14,15 @@ Aide_EventScript_DeclineCheckMons::
 	end
 
 Aide_Text_HaventCaughtEnoughMonsForItem::
-	.string "Let's see…\n"
+	.string "Let's see...\n"
 	.string "Uh-oh! You have caught only\l"
-	.string "{STR_VAR_3} kinds of POKeMON!\p"
+	.string "{STR_VAR_3} kinds of POKEMON!\p"
 	.string "You need {STR_VAR_1} kinds\n"
 	.string "if you want the {STR_VAR_2}.$"
 
 Aide_Text_GetEnoughMonsComeBackForItem::
-	.string "…Oh. I see.\p"
-	.string "When you get {STR_VAR_1} kinds of POKeMON,\n"
+	.string "...Oh. I see.\p"
+	.string "When you get {STR_VAR_1} kinds of POKEMON,\n"
 	.string "come back for the {STR_VAR_2}.$"
 
 Aide_Text_DontHaveAnyRoomForItem::

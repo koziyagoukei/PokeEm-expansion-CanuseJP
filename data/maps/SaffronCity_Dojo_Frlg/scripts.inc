@@ -166,7 +166,7 @@ SaffronCity_Dojo_Text_ChoosePrizedFightingMon::
 	.string "But, I beseech you, do not take\n"
 	.string "our emblem as your trophy!\p"
 	.string "In return, I will give you a prized\n"
-	.string "FIGHTING POKeMON!\p"
+	.string "FIGHTING POKEMON!\p"
 	.string "Choose whichever one you like!$"
 
 SaffronCity_Dojo_Text_StayAndTrainWithUs::
@@ -236,11 +236,11 @@ SaffronCity_Dojo_Text_YouWantHitmonchan::
 	.string "HITMONCHAN?$"
 
 SaffronCity_Dojo_Text_ReceivedMonFromKarateMaster2::
-	.string "{PLAYER}は　カラテ　だいおう　から\n"
-	.string "{STR_VAR_1}を　もらった!$"
+	.string "{PLAYER}は カラテ だいおう から\n"
+	.string "{STR_VAR_1}を もらった!$"
 
 SaffronCity_Dojo_Text_BetterNotGetGreedy::
-	.string "Better not get greedy…$"
+	.string "Better not get greedy...$"
 
 SaffronCity_Dojo_Text_EnemiesOnEverySide::
 	.string "Enemies on every side!$"

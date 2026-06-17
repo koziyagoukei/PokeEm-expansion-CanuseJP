@@ -138,7 +138,7 @@ FortreeCity_Gym_Text_GymGuideAdvice:
 	.string "Yo, how's it going, CHAMPION-\n"
 	.string "bound {PLAYER}?\p"
 	.string "FORTREE GYM LEADER WINONA is\n"
-	.string "a master of FLYING-type POKeMON.\p"
+	.string "a master of FLYING-type POKEMON.\p"
 	.string "She's waiting at the back of this GYM,\n"
 	.string "behind the rotating doors.\p"
 	.string "She's waiting for new challengers\n"
@@ -151,11 +151,11 @@ FortreeCity_Gym_Text_GymGuidePostVictory:
 
 FortreeCity_Gym_Text_JaredIntro:
 	.string "Behold the elegant battle style of\n"
-	.string "BIRD POKeMON!$"
+	.string "BIRD POKEMON!$"
 
 FortreeCity_Gym_Text_JaredDefeat:
-	.string "You…\n"
-	.string "You're strong…$"
+	.string "You...\n"
+	.string "You're strong...$"
 
 FortreeCity_Gym_Text_JaredPostBattle:
 	.string "A TRAINER has to be smart to keep\n"
@@ -164,14 +164,14 @@ FortreeCity_Gym_Text_JaredPostBattle:
 	.string "our LEADER?$"
 
 FortreeCity_Gym_Text_EdwardoIntro:
-	.string "The lovers of BIRD POKeMON aspire\n"
+	.string "The lovers of BIRD POKEMON aspire\n"
 	.string "to join this GYM.\p"
 	.string "As a member of the FORTREE GYM,\n"
 	.string "I'm not allowed to lose!$"
 
 FortreeCity_Gym_Text_EdwardoDefeat:
 	.string "It was too much of a load for me\n"
-	.string "to bear…$"
+	.string "to bear...$"
 
 FortreeCity_Gym_Text_EdwardoPostBattle:
 	.string "The world is huge, and there are\n"
@@ -185,20 +185,20 @@ FortreeCity_Gym_Text_FlintIntro:
 	.string "I'm plenty good enough for you!$"
 
 FortreeCity_Gym_Text_FlintDefeat:
-	.string "WINONA, I…\n"
+	.string "WINONA, I...\n"
 	.string "I lost!$"
 
 FortreeCity_Gym_Text_FlintPostBattle:
 	.string "WINONA is cute and she's strong.\n"
 	.string "She's the ultimate LEADER!\p"
-	.string "Blush…$"
+	.string "Blush...$"
 
 FortreeCity_Gym_Text_AshleyIntro:
 	.string "WINONA taught me personally!\n"
 	.string "You can't beat me easily!$"
 
 FortreeCity_Gym_Text_AshleyDefeat:
-	.string "I was beaten…$"
+	.string "I was beaten...$"
 
 FortreeCity_Gym_Text_AshleyPostBattle:
 	.string "Thanks to WINONA, the people of\n"
@@ -206,7 +206,7 @@ FortreeCity_Gym_Text_AshleyPostBattle:
 
 FortreeCity_Gym_Text_HumbertoIntro:
 	.string "When WINONA takes to battle, her face\n"
-	.string "shines with beautiful determination…\p"
+	.string "shines with beautiful determination...\p"
 	.string "I'm not letting you witness that\n"
 	.string "lovely sight!$"
 
@@ -221,7 +221,7 @@ FortreeCity_Gym_Text_HumbertoPostBattle:
 
 FortreeCity_Gym_Text_DariusIntro:
 	.string "You'd better know that there are all\n"
-	.string "sorts of FLYING-type POKeMON.\p"
+	.string "sorts of FLYING-type POKEMON.\p"
 	.string "You do know that, right?$"
 
 FortreeCity_Gym_Text_DariusDefeat:
@@ -230,22 +230,22 @@ FortreeCity_Gym_Text_DariusDefeat:
 FortreeCity_Gym_Text_DariusPostBattle:
 	.string "Sure, you beat me all right.\n"
 	.string "But you'd better watch it! Our LEADER\l"
-	.string "WINONA's POKeMON are all business.$"
+	.string "WINONA's POKEMON are all business.$"
 
 FortreeCity_Gym_Text_WinonaIntro:
 	.string "I am WINONA. I am the LEADER of\n"
-	.string "the FORTREE POKeMON GYM.\p"
-	.string "I have become one with BIRD POKeMON\n"
-	.string "and have soared the skies…\p"
+	.string "the FORTREE POKEMON GYM.\p"
+	.string "I have become one with BIRD POKEMON\n"
+	.string "and have soared the skies...\p"
 	.string "However grueling the battle, we have\n"
-	.string "triumphed with grace…\p"
+	.string "triumphed with grace...\p"
 	.string "Witness the elegant choreography\n"
-	.string "of BIRD POKeMON and I!$"
+	.string "of BIRD POKEMON and I!$"
 
 FortreeCity_Gym_Text_WinonaDefeat:
 	.string "Never before have I seen a TRAINER\n"
-	.string "command POKeMON with more grace\l"
-	.string "than I…\p"
+	.string "command POKEMON with more grace\l"
+	.string "than I...\p"
 	.string "In recognition of your prowess,\n"
 	.string "I present to you this GYM BADGE.$"
 
@@ -254,19 +254,19 @@ FortreeCity_Gym_Text_ReceivedFeatherBadge:
 	.string "from WINONA.$"
 
 FortreeCity_Gym_Text_ExplainFeatherBadgeTakeThis:
-	.string "With the FEATHER BADGE, all POKeMON up\n"
+	.string "With the FEATHER BADGE, all POKEMON up\n"
 	.string "to LV 70, even those received through\l"
 	.string "trades, will obey your every command.\p"
 	.string "You will also be able to use\n"
 	.string "the HM move FLY outside of battle.\p"
-	.string "And this…\n"
+	.string "And this...\n"
 	.string "This is a gift from me.$"
 
 FortreeCity_Gym_Text_ExplainAerialAce:
 	.string "TM40 contains AERIAL ACE.\p"
-	.string "Its speed…\n"
-	.string "No POKeMON should be able to avoid it.\p"
-	.string "… … … … … …$"
+	.string "Its speed...\n"
+	.string "No POKEMON should be able to avoid it.\p"
+	.string "... ... ... ... ... ...$"
 
 FortreeCity_Gym_Text_RegisteredWinona:
 	.string "Registered GYM LEADER WINONA\n"
@@ -274,13 +274,13 @@ FortreeCity_Gym_Text_RegisteredWinona:
 
 FortreeCity_Gym_Text_WinonaPostBattle:
 	.string "Though I fell to you, I will remain\n"
-	.string "devoted to BIRD POKeMON.$"
+	.string "devoted to BIRD POKEMON.$"
 
 FortreeCity_Gym_Text_GymStatue:
-	.string "FORTREE CITY POKeMON GYM$"
+	.string "FORTREE CITY POKEMON GYM$"
 
 FortreeCity_Gym_Text_GymStatueCertified:
-	.string "FORTREE CITY POKeMON GYM\p"
+	.string "FORTREE CITY POKEMON GYM\p"
 	.string "WINONA'S CERTIFIED TRAINERS:\n"
 	.string "{PLAYER}$"
 
@@ -295,7 +295,7 @@ FortreeCity_Gym_Text_WinonaPreRematch:
 	.string "at full flight!$"
 
 FortreeCity_Gym_Text_WinonaRematchDefeat:
-	.string "I failed to reach your height again…$"
+	.string "I failed to reach your height again...$"
 
 FortreeCity_Gym_Text_WinonaPostRematch:
 	.string "WINONA: Even though I have lost,\n"
@@ -313,7 +313,7 @@ FortreeCity_Gym_Text_WinonaRematchNeedTwoMons:
 	.string "the reigning CHAMPION.\p"
 	.string "Please, allow me to see your power\n"
 	.string "at full flight!\p"
-	.string "Oh, no… Do you have but one\n"
-	.string "POKeMON with you?\p"
-	.string "Please return with two POKeMON\n"
+	.string "Oh, no... Do you have but one\n"
+	.string "POKEMON with you?\p"
+	.string "Please return with two POKEMON\n"
 	.string "at the very least.$"

@@ -257,7 +257,7 @@ SSTidalCorridor_Text_ScottBattleFrontierInvite:
 	.string "Congratulations, LEAGUE CHAMPION!\p"
 	.string "There's a place I'd like to invite\n"
 	.string "someone like you.\p"
-	.string "It's the…\n"
+	.string "It's the...\n"
 	.string "BATTLE FRONTIER!\p"
 	.string "What's the place like?\n"
 	.string "You'll understand when you see it!\p"
@@ -316,12 +316,12 @@ SSTidalCorridor_Text_BrineyWelcomeAboard:
 	.string "the S.S. TIDAL!\p"
 	.string "You can call me CAPTAIN BRINEY now!\p"
 	.string "You know, I retired once before,\n"
-	.string "but when I saw this majestic ship…\p"
+	.string "but when I saw this majestic ship...\p"
 	.string "Let me just say, it stirred my sleeping\n"
 	.string "soul as a sailor!$"
 
 SSTidalCorridor_Text_Peeko:
-	.string "PEEKO: Pihyo pihyohyo…$"
+	.string "PEEKO: Pihyo pihyohyo...$"
 
 SSTidalCorridor_Text_Cabin1:
 	.string "Cabin 1$"

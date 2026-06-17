@@ -517,7 +517,7 @@ CeladonCity_GameCorner_Text_WinsComeAndGo::
 	.string "Nothing's a sure thing.$"
 
 CeladonCity_GameCorner_Text_WinOrLoseItsOnlyLuck::
-	.string "These slot games…\n"
+	.string "These slot games...\n"
 	.string "Win or lose, it's only by luck.$"
 
 CeladonCity_GameCorner_Text_GymGuyAdvice::
@@ -526,14 +526,14 @@ CeladonCity_GameCorner_Text_GymGuyAdvice::
 	.string "champ in the making!\p"
 	.string "CELADON GYM's LEADER is ERIKA.\p"
 	.string "She is a user of GRASS-type\n"
-	.string "POKeMON, and at one with nature.\p"
+	.string "POKEMON, and at one with nature.\p"
 	.string "She might appear docile because of\n"
-	.string "her flower arranging…\p"
+	.string "her flower arranging...\p"
 	.string "But she's not one to be taken\n"
 	.string "lightly!$"
 
 CeladonCity_GameCorner_Text_RareMonsForCoins::
-	.string "They offer rare POKeMON that can\n"
+	.string "They offer rare POKEMON that can\n"
 	.string "be exchanged for your COINS.\p"
 	.string "But, I just can't seem to win!$"
 
@@ -554,7 +554,7 @@ CeladonCity_GameCorner_Text_YouHaveLotsOfCoins::
 
 CeladonCity_GameCorner_Text_NeedMoreCoinsForMonIWant::
 	.string "Darn! I need more COINS for the\n"
-	.string "POKeMON I want!$"
+	.string "POKEMON I want!$"
 
 CeladonCity_GameCorner_Text_HereAreSomeCoinsShoo::
 	.string "Hey, what? You're throwing me off!\n"
@@ -590,7 +590,7 @@ CeladonCity_GameCorner_Text_SwitchBehindPosterPushIt::
 	.string "Let's push it!$"
 
 CeladonCity_GameCorner_Text_CoinCaseIsRequired::
-	.string "A COIN CASE is required…$"
+	.string "A COIN CASE is required...$"
 
 CeladonCity_GameCorner_Text_DontHaveCoinCase::
 	.string "Oops!\n"

@@ -55,14 +55,14 @@ AbandonedShip_Rooms2_1F_Text_DanIntro:
 
 AbandonedShip_Rooms2_1F_Text_DanDefeat:
 	.string "DAN: We couldn't win even though\n"
-	.string "we worked together…$"
+	.string "we worked together...$"
 
 AbandonedShip_Rooms2_1F_Text_DanPostBattle:
-	.string "DAN: We can't find any treasures…\n"
+	.string "DAN: We can't find any treasures...\n"
 	.string "I wonder if someone got them already?$"
 
 AbandonedShip_Rooms2_1F_Text_DanNotEnoughMons:
-	.string "DAN: You don't even have two POKeMON.\n"
+	.string "DAN: You don't even have two POKEMON.\n"
 	.string "You can't expect to beat us like that.$"
 
 AbandonedShip_Rooms2_1F_Text_KiraIntro:
@@ -79,7 +79,7 @@ AbandonedShip_Rooms2_1F_Text_KiraPostBattle:
 	.string "when we find the treasures!$"
 
 AbandonedShip_Rooms2_1F_Text_KiraNotEnoughMons:
-	.string "KIRA: Oh, you don't have two POKeMON?\n"
+	.string "KIRA: Oh, you don't have two POKEMON?\n"
 	.string "We'll have to battle some other time!$"
 
 AbandonedShip_Rooms2_1F_Text_KiraRegister:
@@ -89,7 +89,7 @@ AbandonedShip_Rooms2_1F_Text_KiraRegister:
 AbandonedShip_Rooms2_1F_Text_DanRematchIntro:
 	.string "DAN: We've been searching for\n"
 	.string "treasures all this time.\p"
-	.string "Our POKeMON have grown stronger, too.\n"
+	.string "Our POKEMON have grown stronger, too.\n"
 	.string "Let us show you, okay?$"
 
 AbandonedShip_Rooms2_1F_Text_DanRematchDefeat:
@@ -97,12 +97,12 @@ AbandonedShip_Rooms2_1F_Text_DanRematchDefeat:
 
 AbandonedShip_Rooms2_1F_Text_DanPostRematch:
 	.string "DAN: We can't find any treasures,\n"
-	.string "we lose at POKeMON…\p"
-	.string "I want to go home… But if I say that,\n"
-	.string "she gets all angry with me…$"
+	.string "we lose at POKEMON...\p"
+	.string "I want to go home... But if I say that,\n"
+	.string "she gets all angry with me...$"
 
 AbandonedShip_Rooms2_1F_Text_DanRematchNotEnoughMons:
-	.string "DAN: You don't even have two POKeMON.\n"
+	.string "DAN: You don't even have two POKEMON.\n"
 	.string "You can't expect to beat us like that.$"
 
 AbandonedShip_Rooms2_1F_Text_KiraRematchIntro:
@@ -113,15 +113,15 @@ AbandonedShip_Rooms2_1F_Text_KiraRematchIntro:
 	.string "to give up searching?$"
 
 AbandonedShip_Rooms2_1F_Text_KiraRematchDefeat:
-	.string "KIRA: Oh, we lost again…$"
+	.string "KIRA: Oh, we lost again...$"
 
 AbandonedShip_Rooms2_1F_Text_KiraPostRematch:
 	.string "KIRA: We're not leaving until we raise\n"
-	.string "our POKeMON some more and we find\l"
+	.string "our POKEMON some more and we find\l"
 	.string "the treasures here!$"
 
 AbandonedShip_Rooms2_1F_Text_KiraRematchNotEnoughMons:
-	.string "KIRA: Oh, you don't have two POKeMON?\n"
+	.string "KIRA: Oh, you don't have two POKEMON?\n"
 	.string "We'll have to battle some other time!$"
 
 AbandonedShip_Rooms2_1F_Text_JaniIntro:
@@ -137,7 +137,7 @@ AbandonedShip_Rooms2_1F_Text_JaniPostBattle:
 	.string "is kind of gross.$"
 
 AbandonedShip_Rooms2_1F_Text_GarrisonIntro:
-	.string "Strength and compassion…\n"
+	.string "Strength and compassion...\n"
 	.string "Those are a TRAINER's treasures!$"
 
 AbandonedShip_Rooms2_1F_Text_GarrisonDefeat:

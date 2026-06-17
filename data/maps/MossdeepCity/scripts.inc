@@ -325,9 +325,9 @@ MossdeepCity_Text_WhatToDoWithWeirdRock:
 MossdeepCity_Text_WailmerWatching:
 	.string "Around MOSSDEEP, you can see wild\n"
 	.string "WAILMER.\p"
-	.string "It's called, uh…\n"
-	.string "What was it now…\p"
-	.string "WAI, WAI, WAI…\p"
+	.string "It's called, uh...\n"
+	.string "What was it now...\p"
+	.string "WAI, WAI, WAI...\p"
 	.string "WAILMER watching!$"
 
 MossdeepCity_Text_SpaceCenterReceivedLetter:
@@ -372,8 +372,8 @@ MossdeepCity_Text_LifeNeedsSeaToLive:
 
 MossdeepCity_Text_SurfExhilarating:
 	.string "A voyage on a ship is fine.\p"
-	.string "But crossing the sea with POKeMON\n"
-	.string "using SURF…\p"
+	.string "But crossing the sea with POKEMON\n"
+	.string "using SURF...\p"
 	.string "Now that's an exhilarating trip!\n"
 	.string "Wouldn't you agree, youngster?$"
 
@@ -391,17 +391,17 @@ MossdeepCity_Text_ItsAWhiteRock:
 	.string "It's a white rock.$"
 
 MossdeepCity_Text_GymSign:
-	.string "MOSSDEEP CITY POKeMON GYM\n"
+	.string "MOSSDEEP CITY POKEMON GYM\n"
 	.string "LEADERS: LIZA & TATE\p"
-	.string "“The mystic combination!”$"
+	.string ""The mystic combination!"$"
 
 MossdeepCity_Text_CitySign:
 	.string "MOSSDEEP CITY\n"
-	.string "“Our slogan: Cherish POKeMON!”$"
+	.string ""Our slogan: Cherish POKEMON!"$"
 
 MossdeepCity_Text_SpaceCenterSign:
 	.string "MOSSDEEP SPACE CENTER\n"
-	.string "“The closest place to space.”$"
+	.string ""The closest place to space."$"
 
 MossdeepCity_Text_ScottSomethingWrongWithTown:
 	.string "SCOTT: {PLAYER}{KUN}, feeling good?\n"
@@ -412,13 +412,13 @@ MossdeepCity_Text_ScottSomethingWrongWithTown:
 	.string "But there's something wrong about\n"
 	.string "this town.\p"
 	.string "People are going on about a warning\n"
-	.string "letter and the SPACE CENTER…\p"
+	.string "letter and the SPACE CENTER...\p"
 	.string "I don't think it concerns me in any\n"
 	.string "way, though.$"
 
 MossdeepCity_Text_SootopolisNewGymLeader:
-	.string "Ahh… It feels great letting the waves\n"
-	.string "wash over my feet…\p"
+	.string "Ahh... It feels great letting the waves\n"
+	.string "wash over my feet...\p"
 	.string "Speaking of the waves, you know that\n"
 	.string "island city SOOTOPOLIS?\p"
 	.string "I think the GYM there had a new\n"

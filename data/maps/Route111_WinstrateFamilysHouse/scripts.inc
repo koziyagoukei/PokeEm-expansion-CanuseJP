@@ -58,22 +58,22 @@ Route111_WinstrateFamilysHouse_EventScript_FaceOriginalDirection::
 
 Route111_WinstrateFamilysHouse_Text_MySonIsStrongerThanYou:
 	.string "You're the first TRAINER I've seen who\n"
-	.string "deploys POKeMON so masterfully.\p"
+	.string "deploys POKEMON so masterfully.\p"
 	.string "But, I should tell you--my son is\n"
 	.string "stronger than you.\p"
-	.string "He even took the POKeMON LEAGUE\n"
+	.string "He even took the POKEMON LEAGUE\n"
 	.string "challenge, I'll have you know.$"
 
 Route111_WinstrateFamilysHouse_Text_LikeYouToHaveMachoBrace:
 	.string "We use this MACHO BRACE to more\n"
-	.string "effectively strengthen our POKeMON\l"
+	.string "effectively strengthen our POKEMON\l"
 	.string "in training.\p"
 	.string "Since you've beaten all of us here,\n"
 	.string "I don't know if you need it, but we\l"
 	.string "would like you to have our MACHO BRACE.$"
 
 Route111_WinstrateFamilysHouse_Text_PassionateAboutBattles:
-	.string "When it comes to POKeMON battles,\n"
+	.string "When it comes to POKEMON battles,\n"
 	.string "we tend to be pretty passionate.$"
 
 Route111_WinstrateFamilysHouse_Text_StrongerFamilyMembers:
@@ -89,14 +89,14 @@ Route111_WinstrateFamilysHouse_Text_GrandsonStrong:
 	.string "you'd end up crying in frustration.\p"
 	.string "He's much stronger than any TRAINER\n"
 	.string "our family knows.\p"
-	.string "He must be challenging the POKeMON\n"
+	.string "He must be challenging the POKEMON\n"
 	.string "LEAGUE CHAMPION by now.\p"
 	.string "Knowing my grandson, he could be the\n"
 	.string "CHAMPION already!$"
 
 Route111_WinstrateFamilysHouse_Text_GrandsonStrongShort:
 	.string "My grandson must be challenging the\n"
-	.string "POKeMON LEAGUE CHAMPION by now.\p"
+	.string "POKEMON LEAGUE CHAMPION by now.\p"
 	.string "Knowing my grandson, he could be the\n"
 	.string "CHAMPION already!$"
 

@@ -455,12 +455,12 @@ BattleFrontier_BattleDomeLobby_Text_ExplainSinglesChallenge:
 	.string "is exactly as the name suggests--\l"
 	.string "a tournament of SINGLE BATTLES.\p"
 	.string "All participating TRAINERS must\n"
-	.string "enter three POKeMON each.\p"
+	.string "enter three POKEMON each.\p"
 	.string "In each battle, one of the three\n"
-	.string "POKeMON must be held in reserve.\p"
-	.string "The other two POKeMON can battle\n"
+	.string "POKEMON must be held in reserve.\p"
+	.string "The other two POKEMON can battle\n"
 	.string "one at a time.\p"
-	.string "Choose the two battling POKeMON after\n"
+	.string "Choose the two battling POKEMON after\n"
 	.string "examining the opponent's trio.\p"
 	.string "You win the tournament by defeating\n"
 	.string "four TRAINERS.\p"
@@ -481,13 +481,13 @@ BattleFrontier_BattleDomeLobby_Text_WhichLevelMode:
 	.string "Which is your choice?$"
 
 BattleFrontier_BattleDomeLobby_Text_SelectThreeMons:
-	.string "Now select the three POKeMON that\n"
+	.string "Now select the three POKEMON that\n"
 	.string "you wish to enter, please.$"
 
 BattleFrontier_BattleDomeLobby_Text_NotEnoughValidMonsLvOpen:
 	.string "Excuse me!\p"
-	.string "You don't have three eligible POKeMON.\p"
-	.string "Also, the POKeMON must be holding\n"
+	.string "You don't have three eligible POKEMON.\p"
+	.string "Also, the POKEMON must be holding\n"
 	.string "different kinds of items.\p"
 	.string "EGGS{STR_VAR_1}.$"
 
@@ -496,8 +496,8 @@ BattleFrontier_BattleDomeLobby_Text_NotEnoughValidMonsEnd:
 
 BattleFrontier_BattleDomeLobby_Text_NotEnoughValidMonsLv50:
 	.string "Excuse me!\p"
-	.string "You don't have three eligible POKeMON.\p"
-	.string "You must have three different POKeMON\n"
+	.string "You don't have three eligible POKEMON.\p"
+	.string "You must have three different POKEMON\n"
 	.string "of Level 50 or less to enter.\p"
 	.string "They also must be holding different\n"
 	.string "kinds of items.\p"
@@ -564,12 +564,12 @@ BattleFrontier_BattleDomeLobby_Text_ExplainDoublesChallenge:
 	.string "is exactly as the name suggests--\l"
 	.string "a tournament of DOUBLE BATTLES.\p"
 	.string "All participating TRAINERS must\n"
-	.string "enter three POKeMON each.\p"
+	.string "enter three POKEMON each.\p"
 	.string "In each battle, one of the three\n"
-	.string "POKeMON must be held in reserve.\p"
-	.string "The remaining two POKeMON must take\n"
+	.string "POKEMON must be held in reserve.\p"
+	.string "The remaining two POKEMON must take\n"
 	.string "part in a DOUBLE BATTLE.\p"
-	.string "Choose the two battling POKeMON after\n"
+	.string "Choose the two battling POKEMON after\n"
 	.string "examining the opponent's trio.\p"
 	.string "You win the tournament by defeating\n"
 	.string "four TRAINERS.\p"
@@ -605,7 +605,7 @@ BattleFrontier_BattleDomeLobby_Text_LastWinnerWasTough:
 	.string "on the monitor beside the PC.$"
 
 BattleFrontier_OutsideWest_Text_LongDreamedAboutBattleFrontier:
-	.string "The BATTLE FRONTIER…\n"
+	.string "The BATTLE FRONTIER...\n"
 	.string "I've long dreamed about a place like it.$"
 
 @ Functionally unused
@@ -630,14 +630,14 @@ BattleFrontier_BattleDomeLobby_Text_WinnersGainReputation:
 BattleFrontier_BattleDomeLobby_Text_TrashedInFirstRound:
 	.string "I ran into one of the tournament\n"
 	.string "favorites in the very first round.\p"
-	.string "Of course I got trashed…$"
+	.string "Of course I got trashed...$"
 
 BattleFrontier_BattleDomeLobby_Text_NeedToCheckOpponentCarefully:
-	.string "I would've won if I'd kept this POKeMON\n"
+	.string "I would've won if I'd kept this POKEMON\n"
 	.string "held in reserve.\p"
 	.string "You need to check your opponent's\n"
-	.string "POKeMON carefully before choosing\l"
-	.string "your battling POKeMON.$"
+	.string "POKEMON carefully before choosing\l"
+	.string "your battling POKEMON.$"
 
 BattleFrontier_BattleDomeLobby_Text_CongratsDefeatedTucker:
 	.string "Congratulations!\p"
@@ -663,24 +663,24 @@ BattleFrontier_BattleDomeLobby_Text_ReadWhichHeading:
 
 BattleFrontier_BattleDomeLobby_Text_ExplainMatchupRules:
 	.string "The tournament matchups are drawn up\n"
-	.string "based on the toughness of POKeMON\l"
+	.string "based on the toughness of POKEMON\l"
 	.string "held by TRAINERS.\p"
 	.string "The matchups avoid having tough\n"
 	.string "TRAINERS face each other right away.$"
 
 BattleFrontier_BattleDomeLobby_Text_ExplainTourneyTree:
 	.string "The tournament chart, or as we call it,\n"
-	.string "the “Tree,” is available for viewing\l"
+	.string "the "Tree," is available for viewing\l"
 	.string "in the Waiting Room from any guide.\p"
 	.string "The Tournament Tree will provide\n"
 	.string "several kinds of data.\p"
 	.string "The data on view includes the previous\n"
-	.string "tournament's results, the POKeMON held\l"
+	.string "tournament's results, the POKEMON held\l"
 	.string "by TRAINERS, and the battle styles of\l"
 	.string "TRAINERS.$"
 
 BattleFrontier_BattleDomeLobby_Text_ExplainDoubleKORules:
-	.string "If battling POKeMON faint at the same\n"
+	.string "If battling POKEMON faint at the same\n"
 	.string "time--a double KO--in a tournament\l"
 	.string "match, the REFEREES will review\l"
 	.string "the match and declare the winner.$"

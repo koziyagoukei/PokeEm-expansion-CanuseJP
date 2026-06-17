@@ -296,28 +296,28 @@ Route25_SeaCottage_Movement_BillExitTeleporter::
 	step_end
 
 Route25_SeaCottage_Text_ImBillHelpMeOutPal::
-	.string "Hiya! I'm a POKeMON…\n"
-	.string "…No I'm not!\p"
+	.string "Hiya! I'm a POKEMON...\n"
+	.string "...No I'm not!\p"
 	.string "Call me BILL!\n"
 	.string "I'm a true-blue POKeMANIAC!\p"
 	.string "Hey!\n"
 	.string "What's with that skeptical look?\p"
 	.string "I'm not joshing you, pal.\p"
 	.string "I screwed up an experiment and got\n"
-	.string "combined with a POKeMON!\p"
+	.string "combined with a POKEMON!\p"
 	.string "So, how about it?\n"
 	.string "Help me out here!$"
 
 Route25_SeaCottage_Text_ImBillHelpMeOutLady::
-	.string "Hiya! I'm a POKeMON…\n"
-	.string "…No I'm not!\p"
+	.string "Hiya! I'm a POKEMON...\n"
+	.string "...No I'm not!\p"
 	.string "Call me BILL!\n"
 	.string "I'm a true-blue POKeMANIAC!\p"
 	.string "Hey!\n"
 	.string "What's with that skeptical look?\p"
 	.string "I'm not joshing you, lady.\p"
 	.string "I screwed up an experiment and got\n"
-	.string "combined with a POKeMON!\p"
+	.string "combined with a POKEMON!\p"
 	.string "So, how about it?\n"
 	.string "Help me out here!$"
 
@@ -351,20 +351,20 @@ Route25_SeaCottage_Text_ThanksBudTakeThis::
 	.string "BILL: Yeehah!\n"
 	.string "Thanks, bud! I owe you one!\p"
 	.string "So, did you come to see my\n"
-	.string "POKeMON collection?\p"
+	.string "POKEMON collection?\p"
 	.string "You didn't?\n"
 	.string "That's a bummer.\p"
-	.string "I've got to thank you…\n"
+	.string "I've got to thank you...\n"
 	.string "Oh, here, maybe this'll do.$"
 
 Route25_SeaCottage_Text_ThanksLadyTakeThis::
 	.string "BILL: Yeehah!\n"
 	.string "Thanks, lady! I owe you one!\p"
 	.string "So, did you come to see my\n"
-	.string "POKeMON collection?\p"
+	.string "POKEMON collection?\p"
 	.string "You didn't?\n"
 	.string "That's a bummer.\p"
-	.string "I've got to thank you…\n"
+	.string "I've got to thank you...\n"
 	.string "Oh, here, maybe this'll do.$"
 
 Route25_SeaCottage_Text_ReceivedSSTicketFromBill::
@@ -386,7 +386,7 @@ Route25_SeaCottage_Text_SSAnnePartyYouGoInstead::
 
 Route25_SeaCottage_Text_CheckOutRareMonsOnPC::
 	.string "BILL: Feel like checking out some\n"
-	.string "of my rare POKeMON on my PC?\p"
+	.string "of my rare POKEMON on my PC?\p"
 	.string "Go on, check out my PC.$"
 
 Route25_SeaCottage_Text_TeleporterIsDisplayed::
@@ -398,8 +398,8 @@ Route25_SeaCottage_Text_InitiatedTeleportersCellSeparator::
 	.string "Cell Separator.$"
 
 Route25_SeaCottage_Text_BillsFavoriteMonList::
-	.string "BILL's favorite POKeMON list!$"
+	.string "BILL's favorite POKEMON list!$"
 
 Route25_SeaCottage_Text_SeeWhichMon::
-	.string "Which POKeMON do you want to see?$"
+	.string "Which POKEMON do you want to see?$"
 

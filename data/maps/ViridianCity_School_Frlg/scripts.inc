@@ -104,38 +104,38 @@ ViridianCity_School_Text_ReadBlackboardCarefully::
 
 ViridianCity_School_Text_NotebookFirstPage::
 	.string "Let's check out the notebook.\p"
-	.string "First page…\p"
+	.string "First page...\p"
 	.string "POKe BALLS are used to catch\n"
-	.string "POKeMON.\p"
-	.string "Up to six POKeMON can be carried\n"
+	.string "POKEMON.\p"
+	.string "Up to six POKEMON can be carried\n"
 	.string "in your party.\p"
 	.string "People who raise and battle\n"
-	.string "with POKeMON are called TRAINERS.$"
+	.string "with POKEMON are called TRAINERS.$"
 
 ViridianCity_School_Text_NotebookSecondPage::
-	.string "Second page…\p"
-	.string "A healthy POKeMON may be hard to\n"
+	.string "Second page...\p"
+	.string "A healthy POKEMON may be hard to\n"
 	.string "catch, so weaken it first.\p"
 	.string "Poison, burn, or cause another\n"
 	.string "status problem to weaken it.$"
 
 ViridianCity_School_Text_NotebookThirdPage::
-	.string "Third page…\p"
-	.string "POKeMON TRAINERS seek others to\n"
-	.string "engage in POKeMON battles.\p"
+	.string "Third page...\p"
+	.string "POKEMON TRAINERS seek others to\n"
+	.string "engage in POKEMON battles.\p"
 	.string "To TRAINERS, the taste of victory\n"
 	.string "is sweet, indeed.\p"
 	.string "Battles are constantly waged at\n"
-	.string "POKeMON GYMS everywhere.$"
+	.string "POKEMON GYMS everywhere.$"
 
 ViridianCity_School_Text_NotebookFourthPage::
-	.string "Fourth page…\p"
-	.string "The ultimate goal for all POKeMON\n"
+	.string "Fourth page...\p"
+	.string "The ultimate goal for all POKEMON\n"
 	.string "TRAINERS is simple.\p"
 	.string "It is to defeat the top eight\n"
-	.string "POKeMON GYM LEADERS.\p"
-	.string "Do so to earn the right to face…\p"
-	.string "The ELITE FOUR of the POKeMON\n"
+	.string "POKEMON GYM LEADERS.\p"
+	.string "Do so to earn the right to face...\p"
+	.string "The ELITE FOUR of the POKEMON\n"
 	.string "LEAGUE!$"
 
 ViridianCity_School_Text_TurnThePage::
@@ -146,16 +146,16 @@ ViridianCity_School_Text_HeyDontLookAtMyNotes::
 	.string "Don't look at my notes!$"
 
 ViridianCity_School_Text_BlackboardListsStatusProblems::
-	.string "The blackboard lists POKeMON\n"
+	.string "The blackboard lists POKEMON\n"
 	.string "STATUS problems during battles.$"
 
 ViridianCity_School_Text_ReadWhichTopic::
 	.string "Which topic do you want to read?$"
 
 ViridianCity_School_Text_ExplainSleep::
-	.string "A POKeMON can't attack if it's\n"
+	.string "A POKEMON can't attack if it's\n"
 	.string "asleep.\p"
-	.string "POKeMON will stay asleep even\n"
+	.string "POKEMON will stay asleep even\n"
 	.string "after battles.\p"
 	.string "Use AWAKENING to awaken one\n"
 	.string "from sleep.$"
@@ -167,22 +167,22 @@ ViridianCity_School_Text_ExplainBurn::
 	.string "Use BURN HEAL to cure a burn.$"
 
 ViridianCity_School_Text_ExplainPoison::
-	.string "When poisoned, a POKeMON's health\n"
+	.string "When poisoned, a POKEMON's health\n"
 	.string "steadily drops.\p"
 	.string "Poison lingers after battles.\n"
 	.string "Use an ANTIDOTE to cure poison!$"
 
 ViridianCity_School_Text_ExplainFreeze::
-	.string "A frozen POKeMON becomes\n"
+	.string "A frozen POKEMON becomes\n"
 	.string "helplessly immobile.\p"
 	.string "It stays frozen even after the\n"
 	.string "battle ends.\p"
 	.string "Use ICE HEAL to thaw out the\n"
-	.string "suffering POKeMON.$"
+	.string "suffering POKEMON.$"
 
 ViridianCity_School_Text_ExplainParalysis::
 	.string "Paralysis reduces SPEED and may\n"
-	.string "prevent the POKeMON from moving.\p"
+	.string "prevent the POKEMON from moving.\p"
 	.string "Paralysis remains after battles.\n"
 	.string "Use PARLYZ HEAL for treatment.$"
 

@@ -10,15 +10,15 @@ SevenIsland_SevaultCanyon_Text_CyndyIntro::
 
 SevenIsland_SevaultCanyon_Text_CyndyDefeat::
 	.string "Huh?\n"
-	.string "Something's not right…$"
+	.string "Something's not right...$"
 
 SevenIsland_SevaultCanyon_Text_CyndyPostBattle::
 	.string "The way I am now, I may have to\n"
-	.string "hold off on TRAINER TOWER…$"
+	.string "hold off on TRAINER TOWER...$"
 
 SevenIsland_SevaultCanyon_Text_EvanIntro::
 	.string "It doesn't matter if you happen to\n"
-	.string "have the strongest POKeMON…\p"
+	.string "have the strongest POKEMON...\p"
 	.string "It doesn't mean a thing if you don't\n"
 	.string "know how to use them properly!$"
 
@@ -27,9 +27,9 @@ SevenIsland_SevaultCanyon_Text_EvanDefeat::
 
 SevenIsland_SevaultCanyon_Text_EvanPostBattle::
 	.string "You see them every so often,\n"
-	.string "TRAINERS with awesome POKeMON\l"
+	.string "TRAINERS with awesome POKEMON\l"
 	.string "who have no idea what to do.\p"
-	.string "Before training POKeMON, TRAINERS\n"
+	.string "Before training POKEMON, TRAINERS\n"
 	.string "themselves need to grow up.$"
 
 SevenIsland_SevaultCanyon_Text_JacksonIntro::
@@ -93,7 +93,7 @@ SevenIsland_SevaultCanyon_Text_LexIntro::
 
 SevenIsland_SevaultCanyon_Text_LexDefeat::
 	.string "LEX: I seem to have been too\n"
-	.string "careless…$"
+	.string "careless...$"
 
 SevenIsland_SevaultCanyon_Text_LexPostBattle::
 	.string "LEX: I think it was a good\n"
@@ -109,14 +109,14 @@ SevenIsland_SevaultCanyon_Text_NyaIntro::
 	.string "drag down my mentor, LEX!$"
 
 SevenIsland_SevaultCanyon_Text_NyaDefeat::
-	.string "NYA: Oh, no…\n"
-	.string "I'm so sorry, I…$"
+	.string "NYA: Oh, no...\n"
+	.string "I'm so sorry, I...$"
 
 SevenIsland_SevaultCanyon_Text_NyaPostBattle::
 	.string "NYA: I think I'm going to need\n"
 	.string "much more seasoning and tutoring\l"
-	.string "under LEX…\p"
-	.string "…So, LEX, please, may I stay with\n"
+	.string "under LEX...\p"
+	.string "...So, LEX, please, may I stay with\n"
 	.string "you like this?$"
 
 SevenIsland_SevaultCanyon_Text_NyaNotEnoughMons::
@@ -132,6 +132,6 @@ SevenIsland_SevaultCanyon_Text_BrunoTrainedWithBrawly::
 	.string "not a bad thing.\p"
 	.string "But it's also not bad to aim for\n"
 	.string "the top with a partner.\p"
-	.string "Even BRUNO…\n"
+	.string "Even BRUNO...\n"
 	.string "He trained with a fellow by the\l"
 	.string "name of BRAWLY before.$"

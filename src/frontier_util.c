@@ -112,12 +112,12 @@ const struct FrontierBrain gFrontierBrainInfo[NUM_FRONTIER_FACILITIES] =
         .objEventGfx = OBJ_EVENT_GFX_ANABEL,
         .isFemale = TRUE,
         .lostTexts = {
-            COMPOUND_STRING("Okay, I understand…"), //Silver
-            COMPOUND_STRING("Thank you…")           //Gold
+            COMPOUND_STRING("Okay, I understand..."), //Silver
+            COMPOUND_STRING("Thank you...")           //Gold
         },
         .wonTexts = {
-            COMPOUND_STRING("It's very disappointing…"), //Silver
-            COMPOUND_STRING("I'm terribly sorry…")       //Gold
+            COMPOUND_STRING("It's very disappointing..."), //Silver
+            COMPOUND_STRING("I'm terribly sorry...")       //Gold
         },
         .battledBit = {1 << 0, 1 << 1},
         .streakAppearances = {35, 70, 35, 1},
@@ -129,8 +129,8 @@ const struct FrontierBrain gFrontierBrainInfo[NUM_FRONTIER_FACILITIES] =
         .isFemale = FALSE,
         .lostTexts = {
             COMPOUND_STRING(
-                "Grr…\n"
-                "What the…"),        //Silver
+                "Grr...\n"
+                "What the..."),        //Silver
             COMPOUND_STRING(
                 "Ahahaha!\n"
                 "You're inspiring!") //Gold
@@ -151,15 +151,15 @@ const struct FrontierBrain gFrontierBrainInfo[NUM_FRONTIER_FACILITIES] =
         .isFemale = FALSE,
         .lostTexts = {
             COMPOUND_STRING(
-                "Ah…\n"
-                "Now this is something else…"), //Silver
+                "Ah...\n"
+                "Now this is something else..."), //Silver
             COMPOUND_STRING(
                 "Gwah!\n"
                 "Hahahaha!")                    //Gold
         },
         .wonTexts = {
             COMPOUND_STRING(
-                "Your POKeMON are wimpy because\n"
+                "Your POKEMON are wimpy because\n"
                 "you're wimpy as a TRAINER!"),           //Silver
             COMPOUND_STRING(
                 "Gwahahaha!\n"
@@ -220,11 +220,11 @@ const struct FrontierBrain gFrontierBrainInfo[NUM_FRONTIER_FACILITIES] =
         .objEventGfx = OBJ_EVENT_GFX_LUCY,
         .isFemale = TRUE,
         .lostTexts = {
-            COMPOUND_STRING("Urk…"), //Silver
+            COMPOUND_STRING("Urk..."), //Silver
             COMPOUND_STRING("Darn!") //Gold
         },
         .wonTexts = {
-            COMPOUND_STRING("Humph…"), //Silver
+            COMPOUND_STRING("Humph..."), //Silver
             COMPOUND_STRING("Hah!")    //Gold
         },
         .battledBit = {1 << 10, 1 << 11},

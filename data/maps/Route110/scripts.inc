@@ -739,7 +739,7 @@ Route110_Movement_BirchExit4:
 	step_end
 
 Route110_Text_WeCantTalkAboutAquaActivities:
-	.string "TEAM AQUA's activities…\n"
+	.string "TEAM AQUA's activities...\n"
 	.string "We can't talk about them yet.$"
 
 Route110_Text_KickUpARuckus:
@@ -757,8 +757,8 @@ Route110_Text_AquaActionsBringSmiles:
 Route110_Text_MayLetsBattle:
 	.string "MAY: Hi, {PLAYER}{KUN}, long time no see!\p"
 	.string "While I was searching for other\n"
-	.string "POKeMON, my POKeMON grew stronger.\p"
-	.string "So…\n"
+	.string "POKEMON, my POKEMON grew stronger.\p"
+	.string "So...\n"
 	.string "How about a little battle?$"
 
 Route110_Text_MayDefeated:
@@ -784,16 +784,16 @@ Route110_Text_BrendanLetsBattle:
 	.string "BRENDAN: Hey, {PLAYER}.\n"
 	.string "So this is where you were.\l"
 	.string "How's it going?\p"
-	.string "Have you been raising your POKeMON?\n"
+	.string "Have you been raising your POKEMON?\n"
 	.string "I'll check for you.$"
 
 Route110_Text_BrendanDefeated:
-	.string "Hmm…\n"
+	.string "Hmm...\n"
 	.string "You're pretty good.$"
 
 Route110_Text_BrendanTakeThis:
 	.string "BRENDAN: {PLAYER}, you've trained\n"
-	.string "without me noticing…\p"
+	.string "without me noticing...\p"
 	.string "Good enough!\n"
 	.string "Here, take this.$"
 
@@ -804,7 +804,7 @@ Route110_Text_BrendanExplainItemfinder:
 	.string "If it senses something, it emits\n"
 	.string "a sound.\p"
 	.string "Anyway, I'm off to look for new\n"
-	.string "POKeMON.$"
+	.string "POKEMON.$"
 
 Route110_Text_RideBikeAtFullSpeed:
 	.string "Wouldn't it be great to ride a BIKE\n"
@@ -818,7 +818,7 @@ Route110_Text_HairStreamsBehindMe:
 Route110_Text_YouGotBikeFromRydel:
 	.string "Oh, hey, you got that BIKE from RYDEL!\p"
 	.string "Oh, it's glaringly obvious.\n"
-	.string "It says right on your bike…\p"
+	.string "It says right on your bike...\p"
 	.string "RYDEL, RYDEL, RYDEL, RYDEL, RYDEL,\n"
 	.string "RYDEL, RYDEL, RYDEL, RYDEL, RYDEL,\p"
 	.string "RYDEL, RYDEL, RYDEL, RYDEL, RYDEL,\n"
@@ -827,14 +827,14 @@ Route110_Text_YouGotBikeFromRydel:
 	.string "RYDEL, RYDEL, RYDEL, RYDEL, RYDEL,\p"
 	.string "RYDEL, RYDEL, RYDEL, RYDEL, RYDEL,\n"
 	.string "RYDEL, RYDEL, RYDEL, RYDEL, RYDEL,\p"
-	.string "RYDEL, RYDEL, RYDEL, RYDEL, RYDEL…\n"
+	.string "RYDEL, RYDEL, RYDEL, RYDEL, RYDEL...\n"
 	.string "That name's everywhere.\p"
 	.string "You should ride it around all over\n"
 	.string "the place--it's good advertising!$"
 
 Route110_Text_TwoRoads:
-	.string "The two roads, one above, one below…\p"
-	.string "A road each for people and POKeMON.\n"
+	.string "The two roads, one above, one below...\p"
+	.string "A road each for people and POKEMON.\n"
 	.string "Perhaps that is right and fair.$"
 
 Route110_Text_WalkOnTheLowRoad:
@@ -851,13 +851,13 @@ Route110_Text_WhichShouldIChoose:
 	.string "Which should I choose?\p"
 	.string "Make a beeline for MAUVILLE on\n"
 	.string "CYCLING ROAD, or take the low road\l"
-	.string "and look for POKeMON?$"
+	.string "and look for POKEMON?$"
 
 Route110_Text_CyclingChallengeResultSummary:
 	.string "Number of collisions:\n"
-	.string "… … {STR_VAR_1}!\p"
+	.string "... ... {STR_VAR_1}!\p"
 	.string "Total time:\n"
-	.string "… … {STR_VAR_2}!$"
+	.string "... ... {STR_VAR_2}!$"
 
 Route110_Text_ChallengeReactionBest:
 	.string "Bravo! Splendid showing!\p"
@@ -877,13 +877,13 @@ Route110_Text_ChallengeReactionOk:
 	.string "sheer pleasure of cycling.$"
 
 Route110_Text_ChallengeReactionBad:
-	.string "My word… Your cycling skills border\n"
+	.string "My word... Your cycling skills border\n"
 	.string "on terrifying.\p"
 	.string "Most certainly, you need much more\n"
 	.string "practice riding.$"
 
 Route110_Text_ChallengeReactionWorst:
-	.string "…I am aghast…\p"
+	.string "...I am aghast...\p"
 	.string "You're perhaps not cut out for this\n"
 	.string "unfortunate cycling business.\p"
 	.string "You ought to give serious thought to\n"
@@ -916,10 +916,10 @@ Route110_Text_CyclingRoadSign:
 	.string "SEASIDE CYCLING ROAD$"
 
 Route110_Text_AquaWasHere:
-	.string "“TEAM AQUA was here!”\p"
+	.string ""TEAM AQUA was here!"\p"
 	.string "Someone painted that onto this sign,\n"
 	.string "but then someone else painted over it.\p"
-	.string "“TEAM MAGMA rules!” is what it\n"
+	.string ""TEAM MAGMA rules!" is what it\n"
 	.string "says now.$"
 
 Route110_Text_Route103Sign:
@@ -938,7 +938,7 @@ Route110_Text_TrainerTipsPrlzSleep:
 	.string "The foe can be made helpless by\n"
 	.string "paralyzing it or causing it to sleep.\p"
 	.string "It is an important technique for\n"
-	.string "POKeMON battles.$"
+	.string "POKEMON battles.$"
 
 Route110_Text_TrainerTipsRegisterItems:
 	.string "TRAINER TIPS\p"
@@ -946,18 +946,18 @@ Route110_Text_TrainerTipsRegisterItems:
 	.string "by pressing SELECT.$"
 
 Route110_Text_TrickHouseSign:
-	.string "“Three steps {RIGHT_ARROW} and two steps {UP_ARROW}\n"
-	.string "to reach the wondrous TRICK HOUSE.”$"
+	.string ""Three steps {RIGHT_ARROW} and two steps {UP_ARROW}\n"
+	.string "to reach the wondrous TRICK HOUSE."$"
 
 Route110_Text_BestRecord:
-	.string "THE BEST RECORD TO DATE…\p"
+	.string "THE BEST RECORD TO DATE...\p"
 	.string "No. of collisions: {STR_VAR_1}\p"
 	.string "Elapsed time: {STR_VAR_2}$"
 
 Route110_Text_ThereIsNoRecord:
-	.string "THE BEST RECORD TO DATE…\p"
+	.string "THE BEST RECORD TO DATE...\p"
 	.string "No one seems to have taken the\n"
-	.string "challenge. There is no record…$"
+	.string "challenge. There is no record...$"
 
 Route110_Text_ImagineSeeingYouHere:
 	.string "PROF. BIRCH: Oh, {PLAYER}{KUN}!\n"
@@ -974,16 +974,16 @@ Route110_Text_HeardYouInstallMatchCall:
 	.string "my POKeNAV as well.\p"
 	.string "That way, even when we're apart,\n"
 	.string "I can rate your POKeDEX anytime.\p"
-	.string "… … … … … …$"
+	.string "... ... ... ... ... ...$"
 
 Route110_Text_RegisteredBirchInPokenav:
 	.string "Registered PROF. BIRCH\n"
 	.string "in the POKeNAV.$"
 
 Route110_Text_KeepAnEyeOutForRival:
-	.string "PROF. BIRCH: {PLAYER}{KUN}…\p"
+	.string "PROF. BIRCH: {PLAYER}{KUN}...\p"
 	.string "Please keep an eye out for my {RIVAL}.\n"
-	.string "… … … … … …\p"
+	.string "... ... ... ... ... ...\p"
 	.string "Well, I had better get going.\n"
 	.string "See you again, {PLAYER}{KUN}!$"
 

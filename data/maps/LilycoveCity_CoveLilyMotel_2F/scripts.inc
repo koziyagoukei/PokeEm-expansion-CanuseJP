@@ -78,7 +78,7 @@ LilycoveCity_CoveLilyMotel_2F_Text_FilledPokedexGiveYouThis:
 	.string "Wow! That's awesome!\n"
 	.string "Yep, it's totally awesome!\p"
 	.string "This POKeDEX is completely filled!\n"
-	.string "You really must love POKeMON!\p"
+	.string "You really must love POKEMON!\p"
 	.string "I'm so impressed!\p"
 	.string "Let me give you something in\n"
 	.string "recognition of your feat!$"
@@ -91,14 +91,14 @@ LilycoveCity_CoveLilyMotel_2F_Text_ImTheProgrammer:
 
 LilycoveCity_CoveLilyMotel_2F_Text_ImTheGraphicArtist:
 	.string "I'm the GRAPHIC ARTIST! Aren't the\n"
-	.string "POKeMON of HOENN interesting?$"
+	.string "POKEMON of HOENN interesting?$"
 
 LilycoveCity_CoveLilyMotel_2F_Text_GirlsAreCute:
 	.string "The girl TUBERS, they're cute, hey?\n"
-	.string "To battle against a cute TUBER…\p"
+	.string "To battle against a cute TUBER...\p"
 	.string "Whoop, it's so awesome!\p"
 	.string "And the TWINS! Aren't they cute?\n"
-	.string "A 2-on-2 battle with TWINS…\p"
+	.string "A 2-on-2 battle with TWINS...\p"
 	.string "Whoop, it's unbearably fun!$"
 
 LilycoveCity_CoveLilyMotel_2F_Text_SeaBreezeTicklesHeart:
@@ -112,14 +112,14 @@ LilycoveCity_CoveLilyMotel_2F_Text_NeverLeaveWithoutGameBoy:
 	.string "my GAME BOY ADVANCE.$"
 
 LilycoveCity_CoveLilyMotel_2F_Text_SnoozingPreferBattles:
-	.string "SCOTT: … … … … …\n"
-	.string "… … … … … Zzz…\p"
-	.string "… … … … … Huh?!\n"
+	.string "SCOTT: ... ... ... ... ...\n"
+	.string "... ... ... ... ... Zzz...\p"
+	.string "... ... ... ... ... Huh?!\n"
 	.string "Oh, sorry, sorry! I was snoozing!\p"
-	.string "I came to check out this POKeMON\n"
+	.string "I came to check out this POKEMON\n"
 	.string "CONTEST thing.\p"
 	.string "I have to admit, it does look quite\n"
-	.string "entertaining, but…\p"
+	.string "entertaining, but...\p"
 	.string "Consider me a purist--I prefer\n"
 	.string "battles and tough TRAINERS.\p"
 	.string "But that's just me.\p"

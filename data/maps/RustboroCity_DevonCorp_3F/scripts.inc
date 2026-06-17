@@ -221,8 +221,8 @@ RustboroCity_DevonCorp_3F_Text_ReceivedPokenav:
 	.string "{PLAYER} received a POKeNAV.$"
 
 RustboroCity_DevonCorp_3F_Text_MrStoneExplainPokenavRestUp:
-	.string "MR. STONE: That device…\p"
-	.string "It's a POKeMON NAVIGATOR, or POKeNAV\n"
+	.string "MR. STONE: That device...\p"
+	.string "It's a POKEMON NAVIGATOR, or POKeNAV\n"
 	.string "for short.\p"
 	.string "It's an indispensable tool for any\n"
 	.string "TRAINER on an adventure.\p"
@@ -249,13 +249,13 @@ RustboroCity_DevonCorp_3F_Text_ThankYouForDeliveringLetter:
 	.string "It should help you, a TRAINER.$"
 
 RustboroCity_DevonCorp_3F_Text_ExplainExpShare:
-	.string "MR. STONE: A POKeMON holding that\n"
+	.string "MR. STONE: A POKEMON holding that\n"
 	.string "EXP. SHARE will be given some of the\l"
 	.string "EXP Points from battle.\p"
 	.string "It will get EXP Points even if it didn't\n"
 	.string "actually battle.\p"
 	.string "I would say EXP. SHARE is quite useful\n"
-	.string "for raising weak POKeMON.$"
+	.string "for raising weak POKEMON.$"
 
 RustboroCity_DevonCorp_3F_Text_NotFamiliarWithTrends:
 	.string "MR. STONE: Since my youth, I've immersed\n"
@@ -263,7 +263,7 @@ RustboroCity_DevonCorp_3F_Text_NotFamiliarWithTrends:
 	.string "Consequently, I'm not familiar with\n"
 	.string "trends and that sort of thing.\p"
 	.string "But do young people all want to be\n"
-	.string "TRAINERS in the POKeMON LEAGUE?$"
+	.string "TRAINERS in the POKEMON LEAGUE?$"
 
 RustboroCity_DevonCorp_3F_Text_ThisIs3rdFloorWaitHere:
 	.string "This is the DEVON CORPORATION's\n"
@@ -272,13 +272,13 @@ RustboroCity_DevonCorp_3F_Text_ThisIs3rdFloorWaitHere:
 	.string "this floor.\p"
 	.string "Anyway, I can't tell you how much I'm\n"
 	.string "grateful for what you've done.\p"
-	.string "Um… By the way, that parcel\n"
-	.string "you got back for us…\p"
+	.string "Um... By the way, that parcel\n"
+	.string "you got back for us...\p"
 	.string "Could I get you to deliver that to\n"
 	.string "the SHIPYARD in SLATEPORT?\p"
 	.string "It would be awful if those robbers\n"
 	.string "tried to take it again.\p"
-	.string "Uh… Hehehe, so, uh, could I count\n"
+	.string "Uh... Hehehe, so, uh, could I count\n"
 	.string "on you to do that for me?\p"
 	.string "Oh, that's right.\n"
 	.string "Could you wait here a second?$"

@@ -3279,8 +3279,8 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
         .weight = 12,
         .description = COMPOUND_STRING(
             "Because of the way it floats aimlessly,\n"
-            "an old folktale calls it a “Signpost for\n"
-            "Wandering Spirits.” Children holding\n"
+            "an old folktale calls it a "Signpost for\n"
+            "Wandering Spirits." Children holding\n"
             "them sometimes vanish."),
         .pokemonScale = 491,
         .pokemonOffset = 12,
@@ -5726,7 +5726,7 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
             "It lives a quiet life on mountains that\n"
             "are perpetually covered in snow. It hides\n"
             "itself by whipping up blizzards.\n"
-            "It is also known as “The Ice Monster.”"),
+            "It is also known as "The Ice Monster.""),
         .pokemonScale = 256,
         .pokemonOffset = 0,
         .trainerScale = 348,
@@ -6374,7 +6374,7 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
         .height = 3,
         .weight = 3,
         .description = COMPOUND_STRING(
-            "Known as ”The Being of Knowledge,”\n"
+            "Known as "The Being of Knowledge,"\n"
             "according to some sources, this Pokemon\n"
             "provided people with the intelligence\n"
             "necessary to solve various problems."),

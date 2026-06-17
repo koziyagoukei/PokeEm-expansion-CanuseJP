@@ -13,7 +13,7 @@ Route11_Text_HugoDefeat::
 	.string "Didn't go my way!$"
 
 Route11_Text_HugoPostBattle::
-	.string "POKeMON is life!\n"
+	.string "POKEMON is life!\n"
 	.string "And to live is to play games!$"
 
 Route11_Text_JasperIntro::
@@ -25,7 +25,7 @@ Route11_Text_JasperDefeat::
 
 Route11_Text_JasperPostBattle::
 	.string "You can't be a coward in the world\n"
-	.string "of POKeMON!$"
+	.string "of POKEMON!$"
 
 Route11_Text_EddieIntro::
 	.string "Let's go, but don't cheat!$"
@@ -53,7 +53,7 @@ Route11_Text_DillonIntro::
 	.string "But, I think I can win.$"
 
 Route11_Text_DillonDefeat::
-	.string "My POKeMON couldn't win…\n"
+	.string "My POKEMON couldn't win...\n"
 	.string "Haven't they grown enough?$"
 
 Route11_Text_DillonPostBattle::
@@ -71,10 +71,10 @@ Route11_Text_DirkPostBattle::
 	.string "You were just lucky, that's all.$"
 
 Route11_Text_DarianIntro::
-	.string "I have never won before…$"
+	.string "I have never won before...$"
 
 Route11_Text_DarianDefeat::
-	.string "I saw this coming…$"
+	.string "I saw this coming...$"
 
 Route11_Text_DarianPostBattle::
 	.string "I was unlucky, as always.$"
@@ -85,10 +85,10 @@ Route11_Text_YasuIntro::
 
 Route11_Text_YasuDefeat::
 	.string "Darn!\n"
-	.string "My POKeMON need to be stronger!$"
+	.string "My POKEMON need to be stronger!$"
 
 Route11_Text_YasuPostBattle::
-	.string "There's a fat POKeMON that comes\n"
+	.string "There's a fat POKEMON that comes\n"
 	.string "down from the mountains.\p"
 	.string "I bet it'd be strong if you can\n"
 	.string "catch it.$"
@@ -104,7 +104,7 @@ Route11_Text_BerniePostBattle::
 	.string "Well, better get back to work.$"
 
 Route11_Text_DaveIntro::
-	.string "I raised my POKeMON carefully.\n"
+	.string "I raised my POKEMON carefully.\n"
 	.string "They should be ready by now!$"
 
 Route11_Text_DaveDefeat::
@@ -112,7 +112,7 @@ Route11_Text_DaveDefeat::
 	.string "Thank you, and good-bye!$"
 
 Route11_Text_DavePostBattle::
-	.string "Tch…\n"
+	.string "Tch...\n"
 	.string "I better go find stronger ones!$"
 
 Route11_Text_DiglettsCave::

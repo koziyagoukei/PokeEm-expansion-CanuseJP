@@ -492,7 +492,7 @@ BattleFrontier_BattleTowerMultiBattleRoom_Text_7thOpponentSetNext:
 	.string "Do your best!$"
 
 gText_LinkStandby3::
-	.string "Link standby…$"
+	.string "Link standby...$"
 
 gText_YourPartnerHasRetired::
 	.string "Your partner has retired.\p"

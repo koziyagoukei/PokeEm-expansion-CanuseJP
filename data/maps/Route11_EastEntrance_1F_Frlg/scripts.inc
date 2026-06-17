@@ -11,18 +11,18 @@ Route11_EastEntrance_1F_EventScript_BottomGuard::
 
 @ Unclear where this is originally from
 Route11_EastEntrance_1F_Text_BagIsFull::
-	.string "{PLAYER}{KUN}の　バッグ\n"
-	.string "いっぱい　みたい　だね$"
+	.string "{PLAYER}{KUN}の バッグ\n"
+	.string "いっぱい みたい だね$"
 
 Route11_EastEntrance_1F_Text_ManInLavenderRatesNames::
 	.string "Don't you think it's hard to think\n"
-	.string "up good names for POKeMON?\p"
+	.string "up good names for POKEMON?\p"
 	.string "Especially if you've caught a\n"
 	.string "whole bunch?\p"
 	.string "In LAVENDER TOWN, there's a man\n"
-	.string "who rates POKeMON nicknames.\p"
+	.string "who rates POKEMON nicknames.\p"
 	.string "He can even help you rename your\n"
-	.string "POKeMON, too.$"
+	.string "POKEMON, too.$"
 
 Route11_EastEntrance_1F_Text_RockTunnelToReachLavender::
 	.string "If you're aiming to reach LAVENDER\n"

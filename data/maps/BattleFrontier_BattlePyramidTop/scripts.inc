@@ -234,7 +234,7 @@ BattleFrontier_BattlePyramidTop_Text_ChiefBeatYouHere:
 	.string "a mere fraction of time!\p"
 	.string "Our chief has already conquered\n"
 	.string "the PYRAMID ahead of you.\p"
-	.string "However, my young explorer…\n"
+	.string "However, my young explorer...\n"
 	.string "You are a TRAINER!\p"
 	.string "Assert your power and take the glory\n"
 	.string "of the pinnacle from our chief!\p"
@@ -242,14 +242,14 @@ BattleFrontier_BattlePyramidTop_Text_ChiefBeatYouHere:
 	.string "take one more step of courage!$"
 
 BattleFrontier_BattlePyramidTop_Text_ExplorationsAreGrandestAdventure:
-	.string "Young adventurer…\p"
+	.string "Young adventurer...\p"
 	.string "Wouldn't you agree that explorations\n"
 	.string "are the grandest of adventures?\p"
 	.string "Your own wits!\p"
 	.string "Your own strength!\p"
-	.string "Your own POKeMON!\p"
+	.string "Your own POKEMON!\p"
 	.string "And, above all, only your own courage\n"
-	.string "to lead you through unknown worlds…$"
+	.string "to lead you through unknown worlds...$"
 
 BattleFrontier_BattlePyramidTop_Text_ImPyramidKingBrandon:
 	.string "Aah, yes, indeed this life is grand!\n"
@@ -283,18 +283,18 @@ BattleFrontier_BattlePyramidTop_Text_LookForwardToNextMeeting:
 	.string "I look forward to our next meeting!$"
 
 BattleFrontier_BattlePyramidTop_Text_BrandonYouveReturned:
-	.string "BRANDON: …You've finally returned,\n"
-	.string "young explorer…\p"
+	.string "BRANDON: ...You've finally returned,\n"
+	.string "young explorer...\p"
 	.string "Your love of adventure seems to come\n"
-	.string "deep from within your heart…\p"
-	.string "Yes… You are exactly as I was in\n"
-	.string "my own youth…\p"
-	.string "… … …Ah…\p"
+	.string "deep from within your heart...\p"
+	.string "Yes... You are exactly as I was in\n"
+	.string "my own youth...\p"
+	.string "... ... ...Ah...\p"
 	.string "The passionate!\p"
 	.string "The dangerous!\p"
 	.string "The desperate!\p"
 	.string "Those days of death-defying,\n"
-	.string "life-affirming adventures are back…$"
+	.string "life-affirming adventures are back...$"
 
 BattleFrontier_BattlePyramidTop_Text_MyCourageIsOffMeter:
 	.string "Now, then!\p"

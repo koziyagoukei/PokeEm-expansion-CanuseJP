@@ -542,19 +542,19 @@ MtChimney_EventScript_SawyerRematch::
 	end
 
 MtChimney_Text_MeteoriteWillActivateVolcano:
-	.string "The power contained in the METEORITE…\p"
+	.string "The power contained in the METEORITE...\p"
 	.string "By amplifying its power with this\n"
 	.string "machine, MT. CHIMNEY's volcanic\l"
-	.string "activity will instantly intensify…\p"
+	.string "activity will instantly intensify...\p"
 	.string "Its energy will grow deep inside\n"
-	.string "the crater and…\l"
-	.string "Fufufu…$"
+	.string "the crater and...\l"
+	.string "Fufufu...$"
 
 MtChimney_Text_MaxieIntro:
 	.string "MAXIE: Hm?\n"
 	.string "Who are you?\p"
-	.string "… … … … … …\n"
-	.string "… … … … … …\p"
+	.string "... ... ... ... ... ...\n"
+	.string "... ... ... ... ... ...\p"
 	.string "I'd heard ARCHIE bemoaning a child\n"
 	.string "who's been meddling in TEAM AQUA's\l"
 	.string "affairs.\p"
@@ -569,9 +569,9 @@ MtChimney_Text_MaxieIntro:
 	.string "That is why TEAM MAGMA is dedicated\n"
 	.string "to the expansion of the land mass.\p"
 	.string "It is for further advancement of\n"
-	.string "humankind and POKeMON!\p"
+	.string "humankind and POKEMON!\p"
 	.string "And for that, we need the power of\n"
-	.string "what sleeps within this mountain…\p"
+	.string "what sleeps within this mountain...\p"
 	.string "Oh! There was no need for you to\n"
 	.string "learn that much.\p"
 	.string "But, no matter!\n"
@@ -587,9 +587,9 @@ MtChimney_Text_MaxieYouHaventSeenLastOfMagma:
 	.string "I will back off this time.\p"
 	.string "But don't think that this is the last\n"
 	.string "you've seen of TEAM MAGMA.\p"
-	.string "Fufufu…\p"
+	.string "Fufufu...\p"
 	.string "Even without the METEORITE, if we\n"
-	.string "obtain that ORB… Fufufu…$"
+	.string "obtain that ORB... Fufufu...$"
 
 MtChimney_Text_TabithaIntro:
 	.string "Hehehe!\p"
@@ -599,14 +599,14 @@ MtChimney_Text_TabithaIntro:
 	.string "from METEOR FALLS to the BOSS!$"
 
 MtChimney_Text_TabithaDefeat:
-	.string "Hehehe…\p"
+	.string "Hehehe...\p"
 	.string "Even though I've lost, if our leader\n"
-	.string "awakens that thing…$"
+	.string "awakens that thing...$"
 
 MtChimney_Text_TabithaPostBattle:
 	.string "BOSS, hurry!\n"
 	.string "Give it the METEORITE's energy!\p"
-	.string "Hehehe…$"
+	.string "Hehehe...$"
 
 MtChimney_Text_Grunt2Intro:
 	.string "We of TEAM MAGMA are working hard for\n"
@@ -620,8 +620,8 @@ MtChimney_Text_Grunt2Defeat:
 	.string "What do you mean I lost?$"
 
 MtChimney_Text_Grunt2PostBattle:
-	.string "Our BOSS says, “It will make everyone\n"
-	.string "happy.”\p"
+	.string "Our BOSS says, "It will make everyone\n"
+	.string "happy."\p"
 	.string "But why does everyone keep getting\n"
 	.string "in our way?$"
 
@@ -631,14 +631,14 @@ MtChimney_Text_Grunt1Intro:
 	.string "I'm going to build it on hardened lava!$"
 
 MtChimney_Text_Grunt1Defeat:
-	.string "My dream of a big house…$"
+	.string "My dream of a big house...$"
 
 MtChimney_Text_Grunt1PostBattle:
 	.string "A kid like you, you ought to be\n"
 	.string "splashing about in the waves!$"
 
 MtChimney_Text_TeamAquaAlwaysMessingWithPlans:
-	.string "That annoying TEAM AQUA…\n"
+	.string "That annoying TEAM AQUA...\n"
 	.string "They always mess with our plans!$"
 
 MtChimney_Text_MeteoritesPackAmazingPower:
@@ -676,7 +676,7 @@ MtChimney_Text_ArchieGoStopTeamMagma:
 	.string "the volcano's eruption!$"
 
 MtChimney_Text_ArchieIHaveMyHandsFull:
-	.string "ARCHIE: Grrr…\p"
+	.string "ARCHIE: Grrr...\p"
 	.string "I want to stop that MAXIE,\n"
 	.string "but I can't!\p"
 	.string "Not when I have my hands full battling\n"
@@ -687,7 +687,7 @@ MtChimney_Text_ArchieThankYou:
 	.string "Thank you!\p"
 	.string "With your help, we thwarted TEAM\n"
 	.string "MAGMA's destructive plan!\p"
-	.string "But… You…\n"
+	.string "But... You...\n"
 	.string "Whose side are you on?\p"
 	.string "Ah, it doesn't matter.\p"
 	.string "We will remain vigilant and keep up\n"
@@ -695,12 +695,12 @@ MtChimney_Text_ArchieThankYou:
 	.string "{PLAYER}, we shall meet again!$"
 
 MtChimney_Text_MagmaOutnumbersUs:
-	.string "Darn… TEAM MAGMA outnumbers us!\n"
+	.string "Darn... TEAM MAGMA outnumbers us!\n"
 	.string "We can't keep up with them!$"
 
 MtChimney_Text_LessHabitatForWaterPokemon:
 	.string "If they expand the land, there'll be\n"
-	.string "less habitats for WATER POKeMON!$"
+	.string "less habitats for WATER POKEMON!$"
 
 MtChimney_Text_MagmasNameSimilar:
 	.string "We're TEAM AQUA!\p"
@@ -728,13 +728,13 @@ MtChimney_Text_OhFineThen:
 
 MtChimney_Text_MeteoriteFittedOnMachine:
 	.string "A METEORITE is fitted on a mysterious\n"
-	.string "machine…\p"
+	.string "machine...\p"
 	.string "The machine seems to be storing\n"
 	.string "energy in the METEORITE.$"
 
 MtChimney_Text_RemoveTheMeteorite:
 	.string "A METEORITE is fitted on a mysterious\n"
-	.string "machine…\p"
+	.string "machine...\p"
 	.string "Do you want to remove the METEORITE?$"
 
 MtChimney_Text_PlayerRemovedMeteorite:
@@ -746,7 +746,7 @@ MtChimney_Text_PlayerLeftMeteorite:
 	.string "it was.$"
 
 MtChimney_Text_MachineMakesNoResponse:
-	.string "This mysterious machine…\n"
+	.string "This mysterious machine...\n"
 	.string "It makes no response whatsoever.$"
 
 MtChimney_Text_RouteSign:
@@ -774,7 +774,7 @@ MtChimney_Text_ShelbyRegister:
 
 MtChimney_Text_ShelbyRematchIntro:
 	.string "If you can mesh your heart with those\n"
-	.string "of your POKeMON, why, you should be\l"
+	.string "of your POKEMON, why, you should be\l"
 	.string "able to achieve great things.$"
 
 MtChimney_Text_ShelbyRematchDefeat:
@@ -783,7 +783,7 @@ MtChimney_Text_ShelbyRematchDefeat:
 
 MtChimney_Text_ShelbyPostRematch:
 	.string "Perhaps your heart has become one\n"
-	.string "with the hearts of your POKeMON.$"
+	.string "with the hearts of your POKEMON.$"
 
 MtChimney_Text_MelissaIntro:
 	.string "I've got the fire in me, baby.\n"
@@ -798,16 +798,16 @@ MtChimney_Text_MelissaPostBattle:
 
 MtChimney_Text_SheilaIntro:
 	.string "I've finally made it to MT. CHIMNEY.\n"
-	.string "I want to make my POKeMON battle!$"
+	.string "I want to make my POKEMON battle!$"
 
 MtChimney_Text_SheilaDefeat:
-	.string "The way you battle…\n"
+	.string "The way you battle...\n"
 	.string "It's like a MT. CHIMNEY eruption!$"
 
 MtChimney_Text_SheilaPostBattle:
 	.string "Like I said, I've finally made it to\n"
 	.string "MT. CHIMNEY. It would be a shame if\l"
-	.string "I only do a little sightseeing…\p"
+	.string "I only do a little sightseeing...\p"
 	.string "I want to get in some battles and buy\n"
 	.string "COOKIES as souvenirs.$"
 

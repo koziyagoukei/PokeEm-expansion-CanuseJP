@@ -161,7 +161,7 @@ CinnabarIsland_PokemonCenter_1F_Text_VisitUnionRoom::
 	.string "to check the UNION ROOM.$"
 
 CinnabarIsland_PokemonCenter_1F_Text_EvolutionCanWaitForNewMoves::
-	.string "POKeMON can still learn techniques\n"
+	.string "POKEMON can still learn techniques\n"
 	.string "after canceling evolution.\p"
 	.string "Evolution can wait until new moves\n"
 	.string "have been learned.$"

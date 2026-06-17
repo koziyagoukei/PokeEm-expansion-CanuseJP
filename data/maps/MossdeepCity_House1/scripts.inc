@@ -23,7 +23,7 @@ MossdeepCity_House1_EventScript_Woman::
 
 MossdeepCity_House1_Text_HmmYourPokemon:
 	.string "Hmm!\n"
-	.string "Your {STR_VAR_1}…$"
+	.string "Your {STR_VAR_1}...$"
 
 MossdeepCity_House1_Text_ItLikesXPokeblocks:
 	.string "It likes {STR_VAR_1}S,\n"
@@ -37,5 +37,5 @@ MossdeepCity_House1_Text_DoesntLikeOrDislikePokeblocks:
 
 MossdeepCity_House1_Text_HusbandCanTellPokeblockMonLikes:
 	.string "My husband can tell what kind of\n"
-	.string "ポロックS a POKeMON likes at a glance.$"
+	.string "ポロックS a POKEMON likes at a glance.$"
 

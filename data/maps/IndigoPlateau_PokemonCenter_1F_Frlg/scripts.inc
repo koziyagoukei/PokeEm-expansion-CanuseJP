@@ -71,7 +71,7 @@ IndigoPlateau_PokemonCenter_1F_EventScript_Nurse::
 IndigoPlateau_PokemonCenter_1F_Text_GymGuyAdvice::
 	.string "Yo!\n"
 	.string "Champ in the making!\p"
-	.string "At the POKeMON LEAGUE, you will\n"
+	.string "At the POKEMON LEAGUE, you will\n"
 	.string "face the ELITE FOUR all in a row.\p"
 	.string "If you lose, you have to start all\n"
 	.string "over again!\p"
@@ -89,13 +89,13 @@ IndigoPlateau_PokemonCenter_1F_Text_LoreleiIsAbsentClosedForTimeBeing::
 	.string "your time coming here.\p"
 	.string "LORELEI of the ELITE FOUR is\n"
 	.string "absent, you see.\p"
-	.string "As a result, the POKeMON LEAGUE is\n"
+	.string "As a result, the POKEMON LEAGUE is\n"
 	.string "closed for the time being.$"
 
 IndigoPlateau_PokemonCenter_1F_Text_AgathaWhuppedUs::
-	.string "AGATHA's GHOST-type POKeMON are\n"
+	.string "AGATHA's GHOST-type POKEMON are\n"
 	.string "horrifically terrifying in toughness.\p"
-	.string "I took my FIGHTING-type POKeMON\n"
+	.string "I took my FIGHTING-type POKEMON\n"
 	.string "and raised them to the max.\p"
 	.string "I went at AGATHA feeling pretty\n"
 	.string "confident, but she whupped us.\p"

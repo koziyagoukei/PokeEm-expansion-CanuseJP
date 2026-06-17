@@ -10,16 +10,16 @@ ThreeIsland_BondBridge_EventScript_BondBridgeSign::
 	end
 
 ThreeIsland_BondBridge_Text_NikkiIntro::
-	.string "The salty tang of the sea…\n"
+	.string "The salty tang of the sea...\n"
 	.string "It tickles my heart.$"
 
 ThreeIsland_BondBridge_Text_NikkiDefeat::
-	.string "…Sniff, sniff…\n"
-	.string "Something smells unpleasant…$"
+	.string "...Sniff, sniff...\n"
+	.string "Something smells unpleasant...$"
 
 ThreeIsland_BondBridge_Text_NikkiPostBattle::
 	.string "Perhaps that reek is your sweaty\n"
-	.string "POKeMON's body odor…$"
+	.string "POKEMON's body odor...$"
 
 ThreeIsland_BondBridge_Text_VioletIntro::
 	.string "Where are you off to in such\n"
@@ -27,7 +27,7 @@ ThreeIsland_BondBridge_Text_VioletIntro::
 
 ThreeIsland_BondBridge_Text_VioletDefeat::
 	.string "You're raising some wonderful\n"
-	.string "POKeMON.$"
+	.string "POKEMON.$"
 
 ThreeIsland_BondBridge_Text_VioletPostBattle::
 	.string "If you keep going this way, you'll\n"
@@ -47,7 +47,7 @@ ThreeIsland_BondBridge_Text_AmiraPostBattle::
 
 ThreeIsland_BondBridge_Text_AlexisIntro::
 	.string "Yay, yay!\n"
-	.string "POKeMON!$"
+	.string "POKEMON!$"
 
 ThreeIsland_BondBridge_Text_AlexisDefeat::
 	.string "What happens now?$"
@@ -65,16 +65,16 @@ ThreeIsland_BondBridge_Text_TishaDefeat::
 	.string "Now will you please go away?$"
 
 ThreeIsland_BondBridge_Text_TishaPostBattle::
-	.string "A POKeMON bit through my \n"
+	.string "A POKEMON bit through my \n"
 	.string "swimsuit.\p"
 	.string "I can't get out of the water!$"
 
 ThreeIsland_BondBridge_Text_JoyIntro::
 	.string "JOY: We'll teach you what our\n"
-	.string "favorite POKeMON is!$"
+	.string "favorite POKEMON is!$"
 
 ThreeIsland_BondBridge_Text_JoyDefeat::
-	.string "JOY: Ohh…\n"
+	.string "JOY: Ohh...\n"
 	.string "MEG!$"
 
 ThreeIsland_BondBridge_Text_JoyPostBattle::
@@ -84,14 +84,14 @@ ThreeIsland_BondBridge_Text_JoyPostBattle::
 ThreeIsland_BondBridge_Text_JoyNotEnoughMons::
 	.string "JOY: I really want to battle with\n"
 	.string "MEG.\p"
-	.string "One POKeMON isn't enough.$"
+	.string "One POKEMON isn't enough.$"
 
 ThreeIsland_BondBridge_Text_MegIntro::
 	.string "MEG: We'll show you our favorite\n"
-	.string "POKeMON.$"
+	.string "POKEMON.$"
 
 ThreeIsland_BondBridge_Text_MegDefeat::
-	.string "MEG: Ohh…\n"
+	.string "MEG: Ohh...\n"
 	.string "JOY!$"
 
 ThreeIsland_BondBridge_Text_MegPostBattle::
@@ -100,7 +100,7 @@ ThreeIsland_BondBridge_Text_MegPostBattle::
 ThreeIsland_BondBridge_Text_MegNotEnoughMons::
 	.string "MEG: I want to battle together\n"
 	.string "with JOY.\p"
-	.string "One POKeMON isn't enough.$"
+	.string "One POKEMON isn't enough.$"
 
 ThreeIsland_BondBridge_Text_BerryForestAhead::
 	.string "BERRY FOREST AHEAD$"

@@ -94,11 +94,11 @@ Route11_EastEntrance_2F_Text_GiveItemfinderIfCaught30::
 	.string "{STR_VAR_2} for you.\p"
 	.string "So, {PLAYER}, let me ask you.\p"
 	.string "Have you gathered data on at least\n"
-	.string "{STR_VAR_1} kinds of POKeMON?$"
+	.string "{STR_VAR_1} kinds of POKEMON?$"
 
 Route11_EastEntrance_2F_Text_GreatHereYouGo::
 	.string "Great! You have caught or owned\n"
-	.string "{STR_VAR_3} kinds of POKeMON!\p"
+	.string "{STR_VAR_3} kinds of POKEMON!\p"
 	.string "Congratulations!\n"
 	.string "Here you go!$"
 
@@ -120,19 +120,19 @@ Route11_EastEntrance_2F_Text_ExplainItemfinder::
 
 Route11_EastEntrance_2F_Text_BigMonAsleepOnRoad::
 	.string "Let's see what the binoculars have\n"
-	.string "to show…\p"
-	.string "A big POKeMON is asleep on a road!$"
+	.string "to show...\p"
+	.string "A big POKEMON is asleep on a road!$"
 
 Route11_EastEntrance_2F_Text_WhatABreathtakingView::
 	.string "Let's see what the binoculars have\n"
-	.string "to show…\p"
+	.string "to show...\p"
 	.string "What a breathtaking view!$"
 
 Route11_EastEntrance_2F_Text_RockTunnelGoodRouteToLavender::
 	.string "Let's see what the binoculars have\n"
-	.string "to show…\p"
+	.string "to show...\p"
 	.string "To get to LAVENDER TOWN from\n"
-	.string "CERULEAN CITY…\p"
+	.string "CERULEAN CITY...\p"
 	.string "ROCK TUNNEL appears to be a good\n"
 	.string "route to take.$"
 

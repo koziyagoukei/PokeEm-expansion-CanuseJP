@@ -54,8 +54,8 @@ VermilionCity_House1_Text_FishingIsAWayOfLife::
 	.string "and land the big one, my friend.$"
 
 VermilionCity_House1_Text_OhThatsSoDisappointing::
-	.string "Oh…\n"
-	.string "That's so disappointing…$"
+	.string "Oh...\n"
+	.string "That's so disappointing...$"
 
 VermilionCity_House1_Text_HowAreTheFishBiting::
 	.string "Hello there, {PLAYER}!\p"

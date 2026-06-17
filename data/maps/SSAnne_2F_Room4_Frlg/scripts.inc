@@ -13,14 +13,14 @@ SSAnne_2F_Room4_EventScript_Dawn::
 
 SSAnne_2F_Room4_Text_LamarIntro::
 	.string "Which do you find more worthy,\n"
-	.string "a strong or a rare POKeMON?$"
+	.string "a strong or a rare POKEMON?$"
 
 SSAnne_2F_Room4_Text_LamarDefeat::
 	.string "I must salute you!$"
 
 SSAnne_2F_Room4_Text_LamarPostBattle::
 	.string "Personally, I prefer strong and\n"
-	.string "rare POKeMON.$"
+	.string "rare POKEMON.$"
 
 SSAnne_2F_Room4_Text_DawnIntro::
 	.string "I don't believe I saw you at the\n"
@@ -30,6 +30,6 @@ SSAnne_2F_Room4_Text_DawnDefeat::
 	.string "Take it easy!$"
 
 SSAnne_2F_Room4_Text_DawnPostBattle::
-	.string "Oh, I adore your strong POKeMON!\n"
+	.string "Oh, I adore your strong POKEMON!\n"
 	.string "Oh, how I envy you for them!$"
 

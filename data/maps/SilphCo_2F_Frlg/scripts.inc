@@ -85,25 +85,25 @@ Text_ThunderWaveTeach::
 	.string "Eeek!\n"
 	.string "No! Stop! Help!\p"
 	.string "Oh, you're not with TEAM ROCKET.\n"
-	.string "I'm sorry, I thought…\p"
+	.string "I'm sorry, I thought...\p"
 	.string "Will you forgive me if I teach\n"
 	.string "you the THUNDER WAVE technique?$"
 
 Text_ThunderWaveDeclined::
-	.string "Oh…\n"
-	.string "But THUNDER WAVE is convenient…$"
+	.string "Oh...\n"
+	.string "But THUNDER WAVE is convenient...$"
 
 Text_ThunderWaveWhichMon::
-	.string "Which POKeMON should I teach\n"
+	.string "Which POKEMON should I teach\n"
 	.string "THUNDER WAVE?$"
 
 Text_ThunderWaveTaught::
 	.string "THUNDER WAVE causes paralysis in\n"
-	.string "the target POKeMON.\p"
-	.string "A paralyzed POKeMON may be unable\n"
+	.string "the target POKEMON.\p"
+	.string "A paralyzed POKEMON may be unable\n"
 	.string "to move in battle.\p"
 	.string "It's an ELECTRIC-type move, so it\n"
-	.string "won't work on some POKeMON.$"
+	.string "won't work on some POKEMON.$"
 
 SilphCo_2F_Text_FloorSign::
 	.string "SILPH CO. HEAD OFFICE\n"

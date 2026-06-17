@@ -148,7 +148,7 @@ FiveIsland_ResortGorgeous_House_Text_PleaseHearMyWish::
 	.string "Please, hear my wish.$"
 
 FiveIsland_ResortGorgeous_House_Text_WishToSeeMonPlease::
-	.string "I wish to see a POKeMON.\n"
+	.string "I wish to see a POKEMON.\n"
 	.string "A darling {STR_VAR_1}.\p"
 	.string "I want to see one right away.\n"
 	.string "Please, make my wish come true.$"
@@ -163,13 +163,13 @@ FiveIsland_ResortGorgeous_House_Text_MonYouCaughtForMeThankYou::
 	.string "SELPHY: Oh, hello, there.\p"
 	.string "Oh, my gracious. That must be the\n"
 	.string "{STR_VAR_1} you caught for me.\p"
-	.string "Giggle…\n"
+	.string "Giggle...\n"
 	.string "I see a resemblance to you.\p"
 	.string "Thank you so kindly.\p"
-	.string "… …  … …  … …\n"
+	.string "... ...  ... ...  ... ...\n"
 	.string "Is something the matter?\p"
 	.string "You may leave.\p"
-	.string "… …  … …  … …\n"
+	.string "... ...  ... ...  ... ...\n"
 	.string "Oh, fine. I understand now.\p"
 	.string "SEBASTIAN!\n"
 	.string "I need you here this instant!$"
@@ -188,14 +188,14 @@ FiveIsland_ResortGorgeous_House_Text_ButlerIShallDoAsYouBid::
 FiveIsland_ResortGorgeous_House_Text_ButlerPleaseAcceptThisAsHerThanks::
 	.string "Butler: I sincerely thank you for\n"
 	.string "pleasing Lady SELPHY.\p"
-	.string "Please accept this as her thanks…$"
+	.string "Please accept this as her thanks...$"
 
 FiveIsland_ResortGorgeous_House_Text_ButlerBagAppearsToBeFull::
 	.string "Butler: Your BAG appears to be\n"
 	.string "unfortunately full.$"
 
 FiveIsland_ResortGorgeous_House_Text_OhHowDisappointing::
-	.string "Oh…\n"
+	.string "Oh...\n"
 	.string "How disappointing.$"
 
 FiveIsland_ResortGorgeous_House_Text_SelphyWishYouBestOfLuck::

@@ -45,7 +45,7 @@ CeladonCity_Restaurant_Text_TakingBreakRightNow::
 	.string "right now.$"
 
 CeladonCity_Restaurant_Text_OftenGoToDrugstore::
-	.string "My POKeMON are weak, so I often\n"
+	.string "My POKEMON are weak, so I often\n"
 	.string "have to go to the DRUGSTORE.$"
 
 CeladonCity_Restaurant_Text_PsstBasementUnderGameCorner::
@@ -53,7 +53,7 @@ CeladonCity_Restaurant_Text_PsstBasementUnderGameCorner::
 	.string "GAME CORNER, I hear.$"
 
 CeladonCity_Restaurant_Text_ManLostItAllAtSlots::
-	.string "Munch…\p"
+	.string "Munch...\p"
 	.string "The man at that table lost it all\n"
 	.string "at the slots.$"
 
@@ -74,5 +74,5 @@ CeladonCity_Restaurant_Text_MakeRoomForThis::
 
 CeladonCity_Restaurant_Text_ThoughtIdWinItBack::
 	.string "I always thought I was going to\n"
-	.string "win it back…$"
+	.string "win it back...$"
 

@@ -43,17 +43,17 @@ MtPyre_2F_EventScript_Zander::
 	end
 
 MtPyre_2F_Text_MemoriesOfSkitty:
-	.string "Memories of my darling SKITTY…\n"
+	.string "Memories of my darling SKITTY...\n"
 	.string "My eyes overflow thinking about it.$"
 
 MtPyre_2F_Text_TumbledFromFloorAbove:
-	.string "Ooch, ouch… There are holes in the\n"
+	.string "Ooch, ouch... There are holes in the\n"
 	.string "ground here and there.\p"
 	.string "I didn't notice and took a tumble from\n"
 	.string "the floor above.$"
 
 MtPyre_2F_Text_MarkIntro:
-	.string "Hey! Are you searching for POKeMON?\n"
+	.string "Hey! Are you searching for POKEMON?\n"
 	.string "You came along after me! You're rude!$"
 
 MtPyre_2F_Text_MarkDefeat:
@@ -62,7 +62,7 @@ MtPyre_2F_Text_MarkDefeat:
 
 MtPyre_2F_Text_MarkPostBattle:
 	.string "People don't come here often, so\n"
-	.string "I thought there'd be rare POKeMON.$"
+	.string "I thought there'd be rare POKEMON.$"
 
 MtPyre_2F_Text_LukeIntro:
 	.string "LUKE: We're here on a dare.\p"
@@ -81,7 +81,7 @@ MtPyre_2F_Text_LukePostBattle:
 
 MtPyre_2F_Text_LukeNotEnoughMons:
 	.string "LUKE: If you want to take me on,\n"
-	.string "bring some more POKeMON.\p"
+	.string "bring some more POKEMON.\p"
 	.string "If you don't, I won't be able to show\n"
 	.string "off to my girl how cool I am!$"
 
@@ -102,23 +102,23 @@ MtPyre_2F_Text_DezPostBattle:
 
 MtPyre_2F_Text_DezNotEnoughMons:
 	.string "DEZ: If you want to challenge us, you\n"
-	.string "should bring at least two POKeMON.\p"
+	.string "should bring at least two POKEMON.\p"
 	.string "My boyfriend's strong.\n"
-	.string "Just one POKeMON won't do at all.$"
+	.string "Just one POKEMON won't do at all.$"
 
 MtPyre_2F_Text_LeahIntro:
-	.string "You are an unfamiliar sight…\n"
+	.string "You are an unfamiliar sight...\n"
 	.string "Depart before anything befalls you!$"
 
 MtPyre_2F_Text_LeahDefeat:
-	.string "Hmm…\n"
+	.string "Hmm...\n"
 	.string "You're durable.$"
 
 MtPyre_2F_Text_LeahPostBattle:
 	.string "Our family has been TRAINERS here\n"
-	.string "since my great-grandmother's time…\p"
+	.string "since my great-grandmother's time...\p"
 	.string "It is my duty to protect this\n"
-	.string "mountain…$"
+	.string "mountain...$"
 
 MtPyre_2F_Text_ZanderIntro:
 	.string "Kiyaaaaah!\n"
@@ -130,6 +130,6 @@ MtPyre_2F_Text_ZanderDefeat:
 
 MtPyre_2F_Text_ZanderPostBattle:
 	.string "I get freaked out every time I see\n"
-	.string "anything move…\p"
-	.string "I shouldn't have come here to train…$"
+	.string "anything move...\p"
+	.string "I shouldn't have come here to train...$"
 

@@ -61,12 +61,12 @@ SurfPichu_Slot5:
 sText_MysteryGiftEgg:
 	.string "Thank you for using the MYSTERY\n"
 	.string "GIFT System.\p"
-	.string "From the POKeMON CENTER we\n"
-	.string "have a gift--a POKeMON EGG!\p"
+	.string "From the POKEMON CENTER we\n"
+	.string "have a gift--a POKEMON EGG!\p"
 	.string "Please raise it with love and\n"
 	.string "kindness.$"
 
 sText_FullParty:
 	.string "Oh, your party appears to be full.\p"
 	.string "Please come see me after storing\n"
-	.string "a POKeMON on a PC.$"
+	.string "a POKEMON on a PC.$"

@@ -17,7 +17,7 @@ MagmaHideout_3F_1R_Text_Grunt9Intro:
 	.string "My left ear is burning up!$"
 
 MagmaHideout_3F_1R_Text_Grunt9Defeat:
-	.string "I'm getting heat exhaustion…$"
+	.string "I'm getting heat exhaustion...$"
 
 MagmaHideout_3F_1R_Text_Grunt9PostBattle:
 	.string "Do you think it's odd that we're wearing\n"

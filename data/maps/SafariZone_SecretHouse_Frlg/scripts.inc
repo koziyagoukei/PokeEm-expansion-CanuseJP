@@ -41,7 +41,7 @@ SafariZone_SecretHouse_Text_ReceivedHM03FromAttendant::
 
 SafariZone_SecretHouse_Text_ExplainSurf::
 	.string "HM03 is SURF.\p"
-	.string "POKeMON will be able to ferry you\n"
+	.string "POKEMON will be able to ferry you\n"
 	.string "across water using it.\p"
 	.string "And, this HM isn't disposable, so\n"
 	.string "you can use it over and over.\p"

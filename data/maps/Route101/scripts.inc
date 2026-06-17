@@ -270,26 +270,26 @@ Route101_Text_DontLeaveMe:
 	.string "Don't leave me like this!$"
 
 Route101_Text_YouSavedMe:
-	.string "PROF. BIRCH: Whew…\p"
+	.string "PROF. BIRCH: Whew...\p"
 	.string "I was in the tall grass studying wild\n"
-	.string "POKeMON when I was jumped.\p"
+	.string "POKEMON when I was jumped.\p"
 	.string "You saved me.\n"
 	.string "Thanks a lot!\p"
 	.string "Oh?\p"
 	.string "Hi, you're {PLAYER}{KUN}!\p"
 	.string "This is not the place to chat, so come\n"
-	.string "by my POKeMON LAB later, okay?$"
+	.string "by my POKEMON LAB later, okay?$"
 
 Route101_Text_TakeTiredPokemonToPokeCenter:
-	.string "If POKeMON get tired, take them to\n"
-	.string "a POKeMON CENTER.\p"
-	.string "There's a POKeMON CENTER in OLDALE\n"
+	.string "If POKEMON get tired, take them to\n"
+	.string "a POKEMON CENTER.\p"
+	.string "There's a POKEMON CENTER in OLDALE\n"
 	.string "TOWN right close by.$"
 
 Route101_Text_WildPokemonInTallGrass:
-	.string "Wild POKeMON will jump out at you in\n"
+	.string "Wild POKEMON will jump out at you in\n"
 	.string "tall grass.\p"
-	.string "If you want to catch POKeMON, you have\n"
+	.string "If you want to catch POKEMON, you have\n"
 	.string "to go into the tall grass and search.$"
 
 Route101_Text_RouteSign:

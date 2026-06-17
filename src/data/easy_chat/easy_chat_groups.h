@@ -26,7 +26,7 @@
 const struct EasyChatGroup gEasyChatGroups[EC_NUM_GROUPS] = {
     [EC_GROUP_POKEMON] =
     {
-        .name = COMPOUND_STRING("POKeMON"),
+        .name = COMPOUND_STRING("POKEMON"),
         .wordData = {.valueList = gEasyChatGroup_Pokemon},
         .numWords = ARRAY_COUNT(gEasyChatGroup_Pokemon),
         .numEnabledWords = ARRAY_COUNT(gEasyChatGroup_Pokemon),
@@ -173,7 +173,7 @@ const struct EasyChatGroup gEasyChatGroups[EC_NUM_GROUPS] = {
     },
     [EC_GROUP_POKEMON_NATIONAL] =
     {
-        .name = COMPOUND_STRING("POKeMON2"),
+        .name = COMPOUND_STRING("POKEMON2"),
         .wordData = {.valueList = gEasyChatGroup_Pokemon2},
         .numWords = ARRAY_COUNT(gEasyChatGroup_Pokemon2),
         .numEnabledWords = ARRAY_COUNT(gEasyChatGroup_Pokemon2),

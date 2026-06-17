@@ -15,6 +15,6 @@ OneIsland_House1_Text_GazeUponVolcanoOnSunnyDays::
 	.string "That's my daily routine.$"
 
 OneIsland_House1_Text_LastTimeMtEmberErupted::
-	.string "Let me think… When was the last\n"
+	.string "Let me think... When was the last\n"
 	.string "time MT. EMBER erupted?$"
 

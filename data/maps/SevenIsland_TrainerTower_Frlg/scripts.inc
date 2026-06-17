@@ -18,7 +18,7 @@ SevenIsland_TrainerTower_Text_DarioIntro::
 	.string "I sensed your approach.$"
 
 SevenIsland_TrainerTower_Text_DarioDefeat::
-	.string "Give up…$"
+	.string "Give up...$"
 
 SevenIsland_TrainerTower_Text_DarioPostBattle::
 	.string "In your future, I sense that you\n"
@@ -28,14 +28,14 @@ SevenIsland_TrainerTower_Text_DarioPostBattle::
 
 SevenIsland_TrainerTower_Text_RodetteIntro::
 	.string "Somewhere on this island, peculiar\n"
-	.string "POKeMON are sleeping.$"
+	.string "POKEMON are sleeping.$"
 
 SevenIsland_TrainerTower_Text_RodetteDefeat::
 	.string "What an amazing TRAINER!$"
 
 SevenIsland_TrainerTower_Text_RodettePostBattle::
 	.string "Somewhere on this island, peculiar\n"
-	.string "POKeMON are sleeping.\p"
+	.string "POKEMON are sleeping.\p"
 	.string "Could it be that they're waiting\n"
 	.string "for you?$"
 

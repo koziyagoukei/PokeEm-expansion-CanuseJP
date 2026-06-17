@@ -151,77 +151,77 @@ BattleFrontier_Lounge1_EventScript_Boy2::
 	end
 
 BattleFrontier_Lounge1_Text_PokemonBreederIntro:
-	.string "For 70 years I have raised POKeMON!\n"
+	.string "For 70 years I have raised POKEMON!\n"
 	.string "I am the man they revere as\l"
-	.string "the legendary top POKeMON BREEDER!\p"
+	.string "the legendary top POKEMON BREEDER!\p"
 	.string "If you ever become as seasoned as me,\n"
-	.string "you'll see the abilities of POKeMON\l"
+	.string "you'll see the abilities of POKEMON\l"
 	.string "at a glance.\p"
 	.string "You're a TRAINER. Doesn't it interest\n"
-	.string "you to know your own POKeMON's\l"
+	.string "you to know your own POKEMON's\l"
 	.string "abilities?\p"
 	.string "Here!\n"
-	.string "Let's have a look at your POKeMON!$"
+	.string "Let's have a look at your POKEMON!$"
 
 BattleFrontier_Lounge1_Text_AverageAbility:
-	.string "…Hmm…\p"
+	.string "...Hmm...\p"
 	.string "This one, overall, I would describe\n"
 	.string "as being of average ability.$"
 
 BattleFrontier_Lounge1_Text_BetterThanAverageAbility:
-	.string "…Hmm…\p"
+	.string "...Hmm...\p"
 	.string "This one, overall, I would describe as\n"
 	.string "having better-than-average ability.$"
 
 BattleFrontier_Lounge1_Text_ImpressiveAbility:
-	.string "…Hmm…\p"
+	.string "...Hmm...\p"
 	.string "This one, overall, I would say is\n"
 	.string "quite impressive in ability!$"
 
 BattleFrontier_Lounge1_Text_OutstandingAbility:
-	.string "…Hmm…\p"
+	.string "...Hmm...\p"
 	.string "This one, overall, I would say is\n"
 	.string "wonderfully outstanding in ability!$"
 
 BattleFrontier_Lounge1_Text_BestAspectHP:
 	.string "Incidentally, the best aspect of it,\n"
-	.string "I would say, is its HP…$"
+	.string "I would say, is its HP...$"
 
 BattleFrontier_Lounge1_Text_BestAspectAtk:
 	.string "Incidentally, the best aspect of it,\n"
-	.string "I would say, is its ATTACK…$"
+	.string "I would say, is its ATTACK...$"
 
 BattleFrontier_Lounge1_Text_BestAspectDef:
 	.string "Incidentally, the best aspect of it,\n"
-	.string "I would say, is its DEFENSE…$"
+	.string "I would say, is its DEFENSE...$"
 
 BattleFrontier_Lounge1_Text_BestAspectSpAtk:
 	.string "Incidentally, the best aspect of it,\n"
-	.string "I would say, is its SPECIAL ATTACK…$"
+	.string "I would say, is its SPECIAL ATTACK...$"
 
 BattleFrontier_Lounge1_Text_BestAspectSpDef:
 	.string "Incidentally, the best aspect of it,\n"
-	.string "I would say, is its SPECIAL DEFENSE…$"
+	.string "I would say, is its SPECIAL DEFENSE...$"
 
 BattleFrontier_Lounge1_Text_BestAspectSpeed:
 	.string "Incidentally, the best aspect of it,\n"
-	.string "I would say, is its SPEED…$"
+	.string "I would say, is its SPEED...$"
 
 BattleFrontier_Lounge1_Text_StatRelativelyGood:
 	.string "That stat is relatively good.\n"
-	.string "…Hm… That's how I call it.$"
+	.string "...Hm... That's how I call it.$"
 
 BattleFrontier_Lounge1_Text_StatImpressive:
 	.string "That stat is quite impressive.\n"
-	.string "…Hm… That's how I call it.$"
+	.string "...Hm... That's how I call it.$"
 
 BattleFrontier_Lounge1_Text_StatOutstanding:
 	.string "That stat is outstanding!\n"
-	.string "…Hm… That's how I call it.$"
+	.string "...Hm... That's how I call it.$"
 
 BattleFrontier_Lounge1_Text_StatFlawless:
 	.string "It's flawless! A thing of perfection!\n"
-	.string "…Hm… That's how I call it.$"
+	.string "...Hm... That's how I call it.$"
 
 BattleFrontier_Lounge1_Text_NoTimeForMyAdvice:
 	.string "What?\n"
@@ -236,23 +236,23 @@ BattleFrontier_Lounge1_Text_HaveBusinessNeedsTending:
 	.string "Save it for next time!$"
 
 BattleFrontier_Lounge1_Text_LetsLookAtYourPokemon:
-	.string "Ah, youngster! Do your POKeMON's\n"
+	.string "Ah, youngster! Do your POKEMON's\n"
 	.string "abilities intrigue you?\p"
 	.string "Here, here!\n"
-	.string "Let's have a look at your POKeMON!$"
+	.string "Let's have a look at your POKEMON!$"
 
 BattleFrontier_Lounge1_Text_EvenICantTell:
 	.string "An expert I am, but even I can't tell\n"
-	.string "anything about an unhatched POKeMON!\p"
-	.string "Show me a POKeMON!\n"
-	.string "A POKeMON is what I need to see!$"
+	.string "anything about an unhatched POKEMON!\p"
+	.string "Show me a POKEMON!\n"
+	.string "A POKEMON is what I need to see!$"
 
 BattleFrontier_Lounge1_Text_SaidMyMonIsOutstanding:
-	.string "He said my POKeMON is outstanding!\n"
+	.string "He said my POKEMON is outstanding!\n"
 	.string "I'm glad I raised it carefully!$"
 
 BattleFrontier_Lounge1_Text_DidntDoAnythingSpecialRaisingIt:
-	.string "He said my POKeMON is outstanding!\n"
+	.string "He said my POKEMON is outstanding!\n"
 	.string "But I didn't do anything special\l"
-	.string "raising it…$"
+	.string "raising it...$"
 

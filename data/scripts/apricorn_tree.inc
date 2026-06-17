@@ -64,10 +64,10 @@ ApricornTree_Text_Intro:
 	.string "It's an Apricorn Tree!$"
 
 ApricornTree_Text_Empty:
-	.string "There are no Apricorns…$"
+	.string "There are no Apricorns...$"
 
 ApricornTree_Text_WantToPick:
-	.string "…It's {STR_VAR_2} {STR_VAR_1}!\n"
+	.string "...It's {STR_VAR_2} {STR_VAR_1}!\n"
 	.string "Do you want to pick the\l"
 	.string "{STR_VAR_1}?$"
 
@@ -83,8 +83,8 @@ ApricornTree_Text_PutAwayApricorn:
 ApricornTree_Text_PocketFull:
 	.string "The BAG's {STR_VAR_3} POCKET is full.\p"
 	.string "{PLAYER} gave up on the\n"
-	.string "{STR_VAR_1}…$"
+	.string "{STR_VAR_1}...$"
 
 ApricornTree_Text_ApricornLeftUnpicked:
 	.string "{PLAYER} gave up on the\n"
-	.string "{STR_VAR_1}…$"
+	.string "{STR_VAR_1}...$"

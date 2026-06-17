@@ -133,12 +133,12 @@ BattleFrontier_Lounge2_Text_MyInformationsBeenUsefulRight::
 	.string "seriously useful to you, right?$"
 
 BattleFrontier_Lounge2_Text_FacilityIsHottest::
-	.string "Let's see now…\p"
+	.string "Let's see now...\p"
 	.string "It sounds like the {STR_VAR_1}\n"
 	.string "is the hottest place going.$"
 
 BattleFrontier_Lounge2_Text_BattleTowerIsHottest::
-	.string "Let's see now…\p"
+	.string "Let's see now...\p"
 	.string "It sounds like BATTLE TOWER\n"
 	.string "{STR_VAR_1} is the hottest.$"
 
@@ -152,19 +152,19 @@ BattleFrontier_Lounge2_Text_SalonMaidenIsThere::
 BattleFrontier_Lounge2_Text_SalonMaidenSilverMons::
 	.string "Have you battled the SALON MAIDEN?\p"
 	.string "When she's measuring up her opponent,\n"
-	.string "she apparently uses these POKeMON:\p"
-	.string "A PSYCHIC-type PSI POKeMON,\n"
-	.string "a FIRE-type VOLCANO POKeMON,\l"
-	.string "and a NORMAL-type SLEEPING POKeMON.$"
+	.string "she apparently uses these POKEMON:\p"
+	.string "A PSYCHIC-type PSI POKEMON,\n"
+	.string "a FIRE-type VOLCANO POKEMON,\l"
+	.string "and a NORMAL-type SLEEPING POKEMON.$"
 
 BattleFrontier_Lounge2_Text_SalonMaidenGoldMons::
 	.string "Have you battled the SALON MAIDEN\n"
 	.string "when she's serious?\p"
 	.string "When she's battling flat out,\n"
-	.string "she apparently uses these POKeMON:\p"
-	.string "A DRAGON & PSYCHIC EON POKeMON,\n"
-	.string "an ELECTRIC-type THUNDER POKeMON,\l"
-	.string "and a NORMAL-type SLEEPING POKeMON.$"
+	.string "she apparently uses these POKEMON:\p"
+	.string "A DRAGON & PSYCHIC EON POKEMON,\n"
+	.string "an ELECTRIC-type THUNDER POKEMON,\l"
+	.string "and a NORMAL-type SLEEPING POKEMON.$"
 
 BattleFrontier_Lounge2_Text_DomeAceIsThere::
 	.string "Bet you didn't know this!\p"
@@ -176,20 +176,20 @@ BattleFrontier_Lounge2_Text_DomeAceIsThere::
 BattleFrontier_Lounge2_Text_DomeAceSilverMons::
 	.string "Have you battled the DOME ACE?\p"
 	.string "When he's treating the opponent\n"
-	.string "lightly, he uses these three POKeMON:\p"
-	.string "A DRAGON & FLYING DRAGON POKeMON,\n"
-	.string "a WATER & GROUND MUD FISH POKeMON,\l"
-	.string "and a FIRE & FLYING FLAME POKeMON.$"
+	.string "lightly, he uses these three POKEMON:\p"
+	.string "A DRAGON & FLYING DRAGON POKEMON,\n"
+	.string "a WATER & GROUND MUD FISH POKEMON,\l"
+	.string "and a FIRE & FLYING FLAME POKEMON.$"
 
 BattleFrontier_Lounge2_Text_DomeAceGoldMons::
 	.string "Have you battled the DOME ACE\n"
 	.string "when he's serious?\p"
 	.string "When he's demonstrating his strategy,\n"
-	.string "he uses these three POKeMON:\p"
-	.string "A DRAGON & FLYING EON POKeMON,\n"
-	.string "a WATER & GROUND MUD FISH POKeMON,\l"
+	.string "he uses these three POKEMON:\p"
+	.string "A DRAGON & FLYING EON POKEMON,\n"
+	.string "a WATER & GROUND MUD FISH POKEMON,\l"
 	.string "and a STEEL- & PSYCHIC-type IRON LEG\l"
-	.string "POKeMON.$"
+	.string "POKEMON.$"
 
 BattleFrontier_Lounge2_Text_FactoryHeadIsThere::
 	.string "Bet you didn't know this!\p"
@@ -201,8 +201,8 @@ BattleFrontier_Lounge2_Text_FactoryHeadIsThere::
 BattleFrontier_Lounge2_Text_FactoryHeadSilverMons::
 	.string "Have you battled the FACTORY HEAD\n"
 	.string "already?\p"
-	.string "Let me think… When he goes to battle,\n"
-	.string "he just gets three rental POKeMON.\p"
+	.string "Let me think... When he goes to battle,\n"
+	.string "he just gets three rental POKEMON.\p"
 	.string "He battles under pretty much the same\n"
 	.string "conditions as you.$"
 
@@ -210,7 +210,7 @@ BattleFrontier_Lounge2_Text_FactoryHeadGoldMons::
 	.string "Have you battled the FACTORY HEAD\n"
 	.string "when he's serious?\p"
 	.string "When he goes seriously to battle,\n"
-	.string "he still gets three rental POKeMON.\p"
+	.string "he still gets three rental POKEMON.\p"
 	.string "He battles under virtually the same\n"
 	.string "conditions as you.$"
 
@@ -225,20 +225,20 @@ BattleFrontier_Lounge2_Text_PikeQueenSilverMons::
 	.string "Have you battled the PIKE QUEEN\n"
 	.string "before?\p"
 	.string "When she's in a good mood, they say\n"
-	.string "she uses these three POKeMON:\p"
-	.string "A POISON-type FANG SNAKE POKeMON,\n"
-	.string "a BUG & ROCK MOLD POKeMON,\l"
-	.string "and a WATER-type TENDER POKeMON.$"
+	.string "she uses these three POKEMON:\p"
+	.string "A POISON-type FANG SNAKE POKEMON,\n"
+	.string "a BUG & ROCK MOLD POKEMON,\l"
+	.string "and a WATER-type TENDER POKEMON.$"
 
 BattleFrontier_Lounge2_Text_PikeQueenGoldMons::
 	.string "Have you battled the PIKE QUEEN\n"
 	.string "when she's serious?\p"
 	.string "When she's seriously annoyed, they say\n"
-	.string "she uses these three POKeMON:\p"
-	.string "A POISON-type FANG SNAKE POKeMON,\n"
-	.string "a STEEL & GROUND IRON SNAKE POKeMON,\l"
+	.string "she uses these three POKEMON:\p"
+	.string "A POISON-type FANG SNAKE POKEMON,\n"
+	.string "a STEEL & GROUND IRON SNAKE POKEMON,\l"
 	.string "and a WATER- & FLYING-type ATROCIOUS\l"
-	.string "POKeMON.$"
+	.string "POKEMON.$"
 
 BattleFrontier_Lounge2_Text_ArenaTycoonIsThere::
 	.string "Bet you didn't know this!\p"
@@ -251,20 +251,20 @@ BattleFrontier_Lounge2_Text_ArenaTycoonSilverMons::
 	.string "Have you battled the ARENA TYCOON\n"
 	.string "before?\p"
 	.string "When she's assessing the foe's ability,\n"
-	.string "she supposedly uses these POKeMON:\p"
-	.string "A BUG & FIGHTING SINGLE HORN POKeMON,\n"
-	.string "a DARK-type MOONLIGHT POKeMON,\l"
-	.string "and a BUG & GHOST SHED POKeMON.$"
+	.string "she supposedly uses these POKEMON:\p"
+	.string "A BUG & FIGHTING SINGLE HORN POKEMON,\n"
+	.string "a DARK-type MOONLIGHT POKEMON,\l"
+	.string "and a BUG & GHOST SHED POKEMON.$"
 
 BattleFrontier_Lounge2_Text_ArenaTycoonGoldMons::
 	.string "Have you battled the ARENA TYCOON\n"
 	.string "when she's serious?\p"
 	.string "When she battles for keeps,\n"
-	.string "she supposedly uses these POKeMON:\p"
-	.string "A DARK-type MOONLIGHT POKeMON,\n"
-	.string "a GHOST & POISON SHADOW POKeMON\l"
+	.string "she supposedly uses these POKEMON:\p"
+	.string "A DARK-type MOONLIGHT POKEMON,\n"
+	.string "a GHOST & POISON SHADOW POKEMON\l"
 	.string "and a GRASS- & FIGHTING-type\l"
-	.string "MUSHROOM POKeMON.$"
+	.string "MUSHROOM POKEMON.$"
 
 BattleFrontier_Lounge2_Text_PalaceMavenIsThere::
 	.string "Bet you didn't know this!\p"
@@ -277,19 +277,19 @@ BattleFrontier_Lounge2_Text_PalaceMavenSilverMons::
 	.string "Have you battled the PALACE MAVEN\n"
 	.string "before?\p"
 	.string "When he's testing the opponent's\n"
-	.string "spirit, he's said to use these POKeMON:\p"
-	.string "A POISON & FLYING-type BAT POKeMON,\n"
-	.string "a NORMAL-type LAZY POKeMON, and a\l"
-	.string "WATER- & ICE-type TRANSPORT POKeMON.$"
+	.string "spirit, he's said to use these POKEMON:\p"
+	.string "A POISON & FLYING-type BAT POKEMON,\n"
+	.string "a NORMAL-type LAZY POKEMON, and a\l"
+	.string "WATER- & ICE-type TRANSPORT POKEMON.$"
 
 BattleFrontier_Lounge2_Text_PalaceMavenGoldMons::
 	.string "Have you battled the PALACE MAVEN\n"
 	.string "when he's serious?\p"
 	.string "When he throws his entire might into\n"
-	.string "battle, he's said to use these POKeMON:\p"
-	.string "A FIRE-type LEGENDARY POKeMON,\n"
-	.string "a NORMAL-type LAZY POKeMON,\l"
-	.string "and a WATER-type AURORA POKeMON.$"
+	.string "battle, he's said to use these POKEMON:\p"
+	.string "A FIRE-type LEGENDARY POKEMON,\n"
+	.string "a NORMAL-type LAZY POKEMON,\l"
+	.string "and a WATER-type AURORA POKEMON.$"
 
 BattleFrontier_Lounge2_Text_PyramidKingIsThere::
 	.string "Bet you didn't know this!\p"
@@ -302,20 +302,20 @@ BattleFrontier_Lounge2_Text_PyramidKingSilverMons::
 	.string "Have you battled the PYRAMID KING\n"
 	.string "before?\p"
 	.string "When he's checking the foe's power,\n"
-	.string "he apparently uses these POKeMON:\p"
-	.string "A ROCK-type ROCK PEAK POKeMON,\n"
-	.string "an ICE-type ICEBERG POKeMON,\l"
-	.string "and a STEEL-type IRON POKeMON.$"
+	.string "he apparently uses these POKEMON:\p"
+	.string "A ROCK-type ROCK PEAK POKEMON,\n"
+	.string "an ICE-type ICEBERG POKEMON,\l"
+	.string "and a STEEL-type IRON POKEMON.$"
 
 BattleFrontier_Lounge2_Text_PyramidKingGoldMons::
 	.string "Have you battled the PYRAMID KING\n"
 	.string "when he's serious?\p"
 	.string "When he's pumped with hot power,\n"
-	.string "he apparently uses these POKeMON:\p"
-	.string "An ICE & FLYING FREEZE POKeMON, an\n"
-	.string "ELECTRIC & FLYING ELECTRIC POKeMON,\l"
+	.string "he apparently uses these POKEMON:\p"
+	.string "An ICE & FLYING FREEZE POKEMON, an\n"
+	.string "ELECTRIC & FLYING ELECTRIC POKEMON,\l"
 	.string "and a FIRE- & FLYING-type FLAME\l"
-	.string "POKeMON.$"
+	.string "POKEMON.$"
 
 BattleFrontier_Lounge2_Text_DoubleBattleAdvice1::
 	.string "Sure, there are several places where\n"
@@ -364,6 +364,6 @@ BattleFrontier_Lounge2_Text_AmazingPowerOfPersuasion::
 	.string "My mentor's like none other!$"
 
 BattleFrontier_Lounge2_Text_ThisPlaceIsScaringMe::
-	.string "…What is this place?\n"
-	.string "It's scaring me…$"
+	.string "...What is this place?\n"
+	.string "It's scaring me...$"
 

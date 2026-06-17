@@ -26,11 +26,11 @@ MagmaHideout_1F_Text_Grunt1Intro:
 MagmaHideout_1F_Text_Grunt1Defeat:
 	.string "I'm always late for training sessions,\n"
 	.string "too!\p"
-	.string "I hate to say it, but I'm wimpy…$"
+	.string "I hate to say it, but I'm wimpy...$"
 
 MagmaHideout_1F_Text_Grunt1PostBattle:
 	.string "Okay, I'll try to put a little more\n"
-	.string "effort into things from now on…$"
+	.string "effort into things from now on...$"
 
 MagmaHideout_1F_Text_Grunt2Intro:
 	.string "Our leader told us to dig into\n"

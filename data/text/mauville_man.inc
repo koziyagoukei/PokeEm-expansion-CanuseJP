@@ -55,7 +55,7 @@ GiddyText_WhenYouSeeTheSettingSunDoesIt::
 	.string "make you want to go home?$"
 
 GiddyText_LyingBackInTheGreenGrass::
-	.string "Lying back in the green grass…\n"
+	.string "Lying back in the green grass...\n"
 	.string "Oh, it's so, so nice!$"
 
 GiddyText_SecretBasesAreSoWonderful::

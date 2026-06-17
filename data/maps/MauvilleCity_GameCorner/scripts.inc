@@ -645,15 +645,15 @@ MauvilleCity_GameCorner_Text_ThankYouHereAreYourCoins:
 	.string "Here are your COINS!$"
 
 MauvilleCity_GameCorner_Text_DontHaveEnoughMoney:
-	.string "Um… You don't appear to have\n"
-	.string "enough money…$"
+	.string "Um... You don't appear to have\n"
+	.string "enough money...$"
 
 MauvilleCity_GameCorner_Text_CoinCaseIsFull:
 	.string "Oh?\n"
 	.string "Your COIN CASE is full.$"
 
 MauvilleCity_GameCorner_Text_DontNeedCoinsThen:
-	.string "Oh… You don't need COINS, then?\n"
+	.string "Oh... You don't need COINS, then?\n"
 	.string "Good luck on your adventure!$"
 
 MauvilleCity_GameCorner_Text_ExchangeCoinsForPrizes:
@@ -746,7 +746,7 @@ MauvilleCity_GameCorner_Text_CoinsAreNeededToPlay:
 	.string "in the GAME CORNER.$"
 
 MauvilleCity_GameCorner_Text_RouletteOnlyLuck:
-	.string "This ROULETTE thing…\n"
+	.string "This ROULETTE thing...\n"
 	.string "It's rather demanding.\p"
 	.string "Win or lose, it's only by luck.$"
 
@@ -756,8 +756,8 @@ MauvilleCity_GameCorner_Text_UpTo3CoinsCanBeUsed:
 
 MauvilleCity_GameCorner_Text_DifficultToStopOn7:
 	.string "It's very difficult to make it stop\n"
-	.string "right on “7.”\p"
-	.string "If it stops on “7” during the REEL TIME\n"
+	.string "right on "7."\p"
+	.string "If it stops on "7" during the REEL TIME\n"
 	.string "bonus game, you'll receive extra COINS.$"
 
 MauvilleCity_GameCorner_Text_HeresSomeSlotsInfo:
@@ -766,7 +766,7 @@ MauvilleCity_GameCorner_Text_HeresSomeSlotsInfo:
 	.string "The more lightning bolts you stock,\n"
 	.string "the more REEL TIME chances you get.\p"
 	.string "In a game with the maximum five\n"
-	.string "REEL TIME chances…\p"
+	.string "REEL TIME chances...\p"
 	.string "It is possible to receive four regular\n"
 	.string "bonuses, then a big bonus.\p"
 	.string "That would total 660 COINS, but it's\n"

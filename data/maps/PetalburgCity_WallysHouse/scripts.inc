@@ -66,7 +66,7 @@ PetalburgCity_WallysHouse_EventScript_ReceivedHMSurf::
 	end
 
 PetalburgCity_WallysHouse_Text_ThanksForPlayingWithWally:
-	.string "You're…\n"
+	.string "You're...\n"
 	.string "Ah, you must be {PLAYER}{KUN}, right?\p"
 	.string "Thank you for playing with WALLY a\n"
 	.string "little while ago.\p"
@@ -91,7 +91,7 @@ PetalburgCity_WallysHouse_Text_PleaseExcuseUs:
 	.string "since he went to VERDANTURF TOWN.\p"
 	.string "We owe it all to you!\p"
 	.string "When WALLY left town, you helped\n"
-	.string "him catch a POKeMON, right?\p"
+	.string "him catch a POKEMON, right?\p"
 	.string "I think that made WALLY really\n"
 	.string "happy.\p"
 	.string "Actually, not just WALLY.\n"
@@ -102,7 +102,7 @@ PetalburgCity_WallysHouse_Text_PleaseExcuseUs:
 	.string "I'd really like you to have this.$"
 
 PetalburgCity_WallysHouse_Text_SurfGoAllSortsOfPlaces:
-	.string "If your POKeMON can SURF, you'll be\n"
+	.string "If your POKEMON can SURF, you'll be\n"
 	.string "able to go to all sorts of places.$"
 
 PetalburgCity_WallysHouse_Text_WallyIsComingHomeSoon:
@@ -119,13 +119,13 @@ PetalburgCity_WallysHouse_Text_YouMetWallyInEverGrandeCity:
 
 PetalburgCity_WallysHouse_Text_WallyWasReallyHappy:
 	.string "WALLY was really happy when he told\n"
-	.string "us that he caught a POKeMON.\p"
+	.string "us that he caught a POKEMON.\p"
 	.string "It's been ages since I've seen him\n"
 	.string "smile like that.$"
 
 PetalburgCity_WallysHouse_Text_WallyLeftWithoutTelling:
 	.string "I want you to keep this a secret\n"
-	.string "from my husband…\p"
+	.string "from my husband...\p"
 	.string "But our WALLY left VERDANTURF TOWN\n"
 	.string "without telling anyone.\p"
 	.string "You know, WALLY is frail, but\n"

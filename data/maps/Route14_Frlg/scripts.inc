@@ -7,24 +7,24 @@ Route14_EventScript_RouteSign::
 
 Route14_Text_CarterIntro::
 	.string "You need to use TMs to teach good\n"
-	.string "moves to POKeMON.$"
+	.string "moves to POKEMON.$"
 
 Route14_Text_CarterDefeat::
 	.string "Not good enough quite yet.$"
 
 Route14_Text_CarterPostBattle::
-	.string "You have some HMs, right? POKeMON\n"
+	.string "You have some HMs, right? POKEMON\n"
 	.string "can't forget those moves easily.$"
 
 Route14_Text_MitchIntro::
-	.string "My bird POKeMON should be ready\n"
+	.string "My bird POKEMON should be ready\n"
 	.string "for battle.$"
 
 Route14_Text_MitchDefeat::
 	.string "Not ready yet!$"
 
 Route14_Text_MitchPostBattle::
-	.string "My bird POKeMON need to learn\n"
+	.string "My bird POKEMON need to learn\n"
 	.string "better moves.$"
 
 Route14_Text_BeckIntro::
@@ -37,13 +37,13 @@ Route14_Text_BeckDefeat::
 	.string "Aww, bummer!$"
 
 Route14_Text_BeckPostBattle::
-	.string "Try teaching POKeMON a move that's\n"
+	.string "Try teaching POKEMON a move that's\n"
 	.string "the same type as it.\p"
 	.string "That apparently boosts the power\n"
 	.string "of the move.$"
 
 Route14_Text_MarlonIntro::
-	.string "Have you taught your bird POKeMON\n"
+	.string "Have you taught your bird POKEMON\n"
 	.string "how to FLY?\p"
 	.string "You'll be able to soar with it into\n"
 	.string "the sky!$"
@@ -52,7 +52,7 @@ Route14_Text_MarlonDefeat::
 	.string "Shot down in flames!$"
 
 Route14_Text_MarlonPostBattle::
-	.string "Bird POKeMON are my one true love.\n"
+	.string "Bird POKEMON are my one true love.\n"
 	.string "I don't want to raise anything else.$"
 
 Route14_Text_DonaldIntro::
@@ -65,7 +65,7 @@ Route14_Text_DonaldDefeat::
 
 Route14_Text_DonaldPostBattle::
 	.string "Well, the winged mirages are the\n"
-	.string "legendary bird POKeMON.\p"
+	.string "legendary bird POKEMON.\p"
 	.string "There are three of them: ARTICUNO,\n"
 	.string "ZAPDOS, and MOLTRES.$"
 
@@ -77,7 +77,7 @@ Route14_Text_BennyDefeat::
 	.string "I knew it!$"
 
 Route14_Text_BennyPostBattle::
-	.string "Winning, losing… It's insignificant\n"
+	.string "Winning, losing... It's insignificant\n"
 	.string "under this huge sky.$"
 
 Route14_Text_LukasIntro::
@@ -101,7 +101,7 @@ Route14_Text_IsaacDefeat::
 	.string "You!?$"
 
 Route14_Text_IsaacPostBattle::
-	.string "Raising POKeMON is a drag, man.$"
+	.string "Raising POKEMON is a drag, man.$"
 
 Route14_Text_GeraldIntro::
 	.string "We ride out here because of the\n"
@@ -111,13 +111,13 @@ Route14_Text_GeraldDefeat::
 	.string "Wipeout!$"
 
 Route14_Text_GeraldPostBattle::
-	.string "It's cool you made your POKeMON so\n"
+	.string "It's cool you made your POKEMON so\n"
 	.string "strong.\p"
 	.string "Might is right!\n"
 	.string "And you know it!$"
 
 Route14_Text_MalikIntro::
-	.string "POKeMON battle?\n"
+	.string "POKEMON battle?\n"
 	.string "Cool! Rumble!$"
 
 Route14_Text_MalikDefeat::
@@ -136,7 +136,7 @@ Route14_Text_KiriIntro::
 	.string "really hard together.$"
 
 Route14_Text_KiriDefeat::
-	.string "KIRI: Whimper…\n"
+	.string "KIRI: Whimper...\n"
 	.string "We lost, didn't we?$"
 
 Route14_Text_KiriPostBattle::
@@ -144,7 +144,7 @@ Route14_Text_KiriPostBattle::
 
 Route14_Text_KiriNotEnoughMons::
 	.string "KIRI: We can battle if you have\n"
-	.string "two POKeMON.$"
+	.string "two POKEMON.$"
 
 Route14_Text_JanIntro::
 	.string "JAN: KIRI, here we go!\n"
@@ -160,4 +160,4 @@ Route14_Text_JanPostBattle::
 
 Route14_Text_JanNotEnoughMons::
 	.string "JAN: You want to battle?\n"
-	.string "You don't have enough POKeMON.$"
+	.string "You don't have enough POKEMON.$"

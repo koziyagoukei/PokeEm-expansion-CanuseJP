@@ -2,7 +2,7 @@ gText_ObtainedTheItem::
 	.string "Obtained the {STR_VAR_2}!$"
 
 gText_TheBagIsFull::
-	.string "The BAG is full…$"
+	.string "The BAG is full...$"
 
 gText_PutItemInPocket::
 	.string "{PLAYER} put away the {STR_VAR_2}\n"
@@ -13,7 +13,7 @@ gText_PlayerFoundOneItem::
 
 gText_TooBadBagIsFull::
 	.string "Too bad!\n"
-	.string "The BAG is full…$"
+	.string "The BAG is full...$"
 
 gText_PlayerPutItemInBag::
 	.string "{PLAYER} put away the {STR_VAR_2}\n"
@@ -24,7 +24,7 @@ gText_ObtainedTheDecor::
 
 gText_NoRoomLeftForAnother::
 	.string "Too bad! There's no room left for\n"
-	.string "another {STR_VAR_2}…$"
+	.string "another {STR_VAR_2}...$"
 
 gText_TheDecorWasTransferredToThePC::
 	.string "The {STR_VAR_2} was transferred\n"
@@ -50,8 +50,8 @@ gText_FoundXItems::
 
 gText_CoinCaseIsFull::
 	.string "Too bad!\n"
-	.string "The COIN CASE is full…$"
+	.string "The COIN CASE is full...$"
 
 gText_NothingToPutThemIn::
 	.string "Too bad!\n"
-	.string "There's nothing to put them in…$"
+	.string "There's nothing to put them in...$"

@@ -19,5 +19,5 @@ FiveIsland_LostCave_Room1_Text_LawsonPostBattle::
 	.string "I'm trying to get out of here, but\n"
 	.string "I always end up at the same spot.\p"
 	.string "Maybe the number of boulders is\n"
-	.string "a hint…$"
+	.string "a hint...$"
 

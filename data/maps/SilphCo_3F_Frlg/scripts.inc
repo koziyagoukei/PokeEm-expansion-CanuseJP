@@ -40,7 +40,7 @@ SilphCo_3F_Text_WhatAmIToDo::
 
 SilphCo_3F_Text_YouAndYourMonsSavedUs::
 	.string "{PLAYER}!\n"
-	.string "You and your POKeMON saved us!$"
+	.string "You and your POKEMON saved us!$"
 
 SilphCo_3F_Text_GruntIntro::
 	.string "Quit messing with us, kid!$"
@@ -60,9 +60,9 @@ SilphCo_3F_Text_JoseDefeat::
 	.string "You really got me!$"
 
 SilphCo_3F_Text_JosePostBattle::
-	.string "Humph…\p"
+	.string "Humph...\p"
 	.string "TEAM ROCKET said that if I helped\n"
-	.string "them, they'd let me study POKeMON.$"
+	.string "them, they'd let me study POKEMON.$"
 
 SilphCo_3F_Text_FloorSign::
 	.string "SILPH CO. HEAD OFFICE\n"

@@ -1,6 +1,6 @@
 CeladonCity_GameCorner_Text_TryPokemonPrinter::
-	.string "It's a POKeMON PRINTER!\p"
-	.string "It can put a print of your POKeMON\n"
+	.string "It's a POKEMON PRINTER!\p"
+	.string "It can put a print of your POKEMON\n"
 	.string "on the back of your TRAINER CARD.\p"
 	.string "It costs only ¥50.\n"
 	.string "Would you like to try it?$"
@@ -13,17 +13,17 @@ CeladonCity_GameCorner_Text_ChoosePrintType::
 
 CeladonCity_GameCorner_Text_BigSmileForPhoto::
 	.string "A big smile for the photo, please!\n"
-	.string "Three… Two… One…\p"
+	.string "Three... Two... One...\p"
 	.string "Flash!$"
 
 CeladonCity_GameCorner_Text_PrintIsReadyCheckTrainerCard::
-	.string "Your POKeMON print is ready!\n"
+	.string "Your POKEMON print is ready!\n"
 	.string "Check your TRAINER CARD.$"
 
 FourIsland_House2_Text_WishICouldShowOffStickers::
-	.string "Giggle…\n"
+	.string "Giggle...\n"
 	.string "I collected a ton of STICKERS.\l"
-	.string "I wish I could show them off…$"
+	.string "I wish I could show them off...$"
 
 FourIsland_House2_Text_GiveYouStickerIfYouBrag::
 	.string "Oh, excellent!\n"
@@ -64,7 +64,7 @@ FourIsland_House2_Text_WowHoFHigh::
 	.string "Whoa! You've made it into the\n"
 	.string "HALL OF FAME that often?\l"
 	.string "That's seriously incredible, yup!\p"
-	.string "You own the POKeMON LEAGUE!\n"
+	.string "You own the POKEMON LEAGUE!\n"
 	.string "I'll give you one of these.$"
 
 FourIsland_House2_Text_WowHoFHighest::
@@ -78,7 +78,7 @@ FourIsland_House2_Text_HoFStickerApplied::
 	.string "applied to the TRAINER CARD.$"
 
 FourIsland_House2_Text_ComeBackWithBetterStoryHoF::
-	.string "Hmm…\p"
+	.string "Hmm...\p"
 	.string "Come back with a better story next\n"
 	.string "time, okay?$"
 
@@ -88,7 +88,7 @@ FourIsland_House2_Text_LivingLegendHoF::
 	.string "I have no SITCKERS left to give.$"
 
 FourIsland_House2_Text_WowEggsLowest::
-	.string "Oh, wow, there are POKeMON EGGS?\n"
+	.string "Oh, wow, there are POKEMON EGGS?\n"
 	.string "I didn't know that!\p"
 	.string "That's pretty good, yup!\n"
 	.string "I'll give you one of these.$"
@@ -106,7 +106,7 @@ FourIsland_House2_Text_WowEggsHigh::
 	.string "I'll give you one of these.$"
 
 FourIsland_House2_Text_WowEggsHighest::
-	.string "Wh… You hatched that many EGGS?\p"
+	.string "Wh... You hatched that many EGGS?\p"
 	.string "What's behind your love of EGGS?\n"
 	.string "It's beyond incredible, yup!\p"
 	.string "You're too awesome, I tell you.\n"
@@ -117,7 +117,7 @@ FourIsland_House2_Text_EggStickerApplied::
 	.string "to the TRAINER CARD.$"
 
 FourIsland_House2_Text_ComeBackWithBetterStoryEggs::
-	.string "Hmm…\p"
+	.string "Hmm...\p"
 	.string "Come back with a better story next\n"
 	.string "time, okay?$"
 
@@ -145,7 +145,7 @@ FourIsland_House2_Text_WowLinkWinsHigh::
 	.string "I'll give you one of these.$"
 
 FourIsland_House2_Text_WowLinkWinsHighest::
-	.string "Wh… Wickedly whoa!\n"
+	.string "Wh... Wickedly whoa!\n"
 	.string "You've won mind-blowingly often!\p"
 	.string "It just knocks me out thinking\n"
 	.string "about how tough you are.\p"
@@ -157,7 +157,7 @@ FourIsland_House2_Text_VictoryStickerApplied::
 	.string "to the TRAINER CARD.$"
 
 FourIsland_House2_Text_ComeBackWithBetterStoryLinkWins::
-	.string "Hmm…\p"
+	.string "Hmm...\p"
 	.string "Come back with a better story next\n"
 	.string "time, okay?$"
 

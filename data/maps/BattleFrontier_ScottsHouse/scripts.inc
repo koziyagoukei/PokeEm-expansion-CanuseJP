@@ -211,7 +211,7 @@ BattleFrontier_ScottsHouse_EventScript_ScottFaceAwayWest::
 
 BattleFrontier_ScottsHouse_Text_WelcomeToBattleFrontier:
 	.string "SCOTT: Well, hello and welcome!\n"
-	.string "Heheh… Sorry about the cramped space.\p"
+	.string "Heheh... Sorry about the cramped space.\p"
 	.string "Anyway, {PLAYER}{KUN}, let me formally\n"
 	.string "welcome you to the BATTLE FRONTIER.\p"
 	.string "This is my dream come true.\n"
@@ -220,7 +220,7 @@ BattleFrontier_ScottsHouse_Text_WelcomeToBattleFrontier:
 
 BattleFrontier_ScottsHouse_Text_HowMuchEffortItTookToMakeReal:
 	.string "On reflection, it was a terribly long\n"
-	.string "journey…\p"
+	.string "journey...\p"
 	.string "I left home alone on a quest to find\n"
 	.string "strong TRAINERS.\p"
 	.string "No one can imagine how much effort\n"
@@ -279,14 +279,14 @@ BattleFrontier_ScottsHouse_Text_MayFindWildMonsInFrontier:
 	.string "I think I remember you working on\n"
 	.string "a POKeDEX as well.\p"
 	.string "Well, guess what?\p"
-	.string "You may run into wild POKeMON in\n"
-	.string "the BATTLE FRONTIER somewhere…\l"
+	.string "You may run into wild POKEMON in\n"
+	.string "the BATTLE FRONTIER somewhere...\l"
 	.string "Fufufu!$"
 
 BattleFrontier_ScottsHouse_Text_YouveCollectedAllSilverSymbols:
 	.string "SCOTT: Are you enjoying things in\n"
 	.string "the BATTLE FRONTIER?\p"
-	.string "…Wait a second…\n"
+	.string "...Wait a second...\n"
 	.string "Oh!\p"
 	.string "Your FRONTIER PASS!\n"
 	.string "You've collected the full set\l"
@@ -301,14 +301,14 @@ BattleFrontier_ScottsHouse_Text_YouveCollectedAllSilverSymbols:
 BattleFrontier_ScottsHouse_Text_YouveCollectedAllGoldSymbols:
 	.string "SCOTT: I hope you're enjoying\n"
 	.string "everything in the BATTLE FRONTIER.\p"
-	.string "…Wait a second…\n"
+	.string "...Wait a second...\n"
 	.string "Oh, my disbelieving eyes!\p"
 	.string "Your FRONTIER PASS!\n"
 	.string "You've gathered up the full set\l"
 	.string "of gold symbols!\p"
 	.string "That's more than stupendous!\n"
 	.string "You're incredible, just as I suspected!\p"
-	.string "… … … … … …\p"
+	.string "... ... ... ... ... ...\p"
 	.string "{PLAYER}, you've got to accept this!\p"
 	.string "I think you will be able to\n"
 	.string "appreciate the value of my gift!$"

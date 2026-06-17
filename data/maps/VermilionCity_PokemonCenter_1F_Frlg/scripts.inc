@@ -45,26 +45,26 @@ VermilionCity_PokemonCenter_1F_EventScript_ExplainVSSeeker::
 
 VermilionCity_PokemonCenter_1F_Text_TrainerMonsStrongerThanWild::
 	.string "Even if they are the same level,\n"
-	.string "POKeMON can have very different\l"
+	.string "POKEMON can have very different\l"
 	.string "stats and abilities.\p"
-	.string "A POKeMON raised by a TRAINER is\n"
+	.string "A POKEMON raised by a TRAINER is\n"
 	.string "stronger than one in the wild.$"
 
 VermilionCity_PokemonCenter_1F_Text_PoisonedMonFaintedWhileWalking::
-	.string "My POKeMON was poisoned!\n"
+	.string "My POKEMON was poisoned!\n"
 	.string "It fainted while we were walking!$"
 
 VermilionCity_PokemonCenter_1F_Text_AllMonWeakToSpecificTypes::
 	.string "It is true that a higher-level\n"
-	.string "POKeMON will be more powerful…\p"
-	.string "But, all POKeMON will have weak\n"
+	.string "POKEMON will be more powerful...\p"
+	.string "But, all POKEMON will have weak\n"
 	.string "points against specific types.\p"
 	.string "So, there appears to be no\n"
-	.string "universally strong POKeMON.$"
+	.string "universally strong POKEMON.$"
 
 VermilionCity_PokemonCenter_1F_Text_UrgeToBattleSomeoneAgain::
 	.string "The urge to battle with someone\n"
-	.string "you've tangled with before…\p"
+	.string "you've tangled with before...\p"
 	.string "Have you ever had that urge?\n"
 	.string "I'm sure you have.\p"
 	.string "I wanted to battle certain people\n"

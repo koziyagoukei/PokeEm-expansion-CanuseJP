@@ -367,16 +367,16 @@ BattleFrontier_ExchangeServiceCorner_Text_HereIsYourPrize:
 	.string "Here is your prize!$"
 
 BattleFrontier_ExchangeServiceCorner_Text_DontHaveEnoughPoints:
-	.string "I'm so sorry…\n"
-	.string "You don't have enough Battle Points…$"
+	.string "I'm so sorry...\n"
+	.string "You don't have enough Battle Points...$"
 
 BattleFrontier_ExchangeServiceCorner_Text_PCIsFull:
-	.string "I'm so sorry…\n"
-	.string "Your PC appears to be full…$"
+	.string "I'm so sorry...\n"
+	.string "Your PC appears to be full...$"
 
 BattleFrontier_ExchangeServiceCorner_Text_DontHaveSpaceToHoldIt:
-	.string "I'm so sorry…\n"
-	.string "You don't have space to hold it…$"
+	.string "I'm so sorry...\n"
+	.string "You don't have space to hold it...$"
 
 BattleFrontier_ExchangeServiceCorner_Text_ThankYouVisitWithPoints:
 	.string "Thank you very much.\p"
@@ -398,7 +398,7 @@ BattleFrontier_ExchangeServiceCorner_Text_GetYouAnythingYouWant:
 
 BattleFrontier_ExchangeServiceCorner_Text_ItemsWillGetMonTougher:
 	.string "If I can get hold of the items here,\n"
-	.string "my POKeMON will get tougher.\p"
+	.string "my POKEMON will get tougher.\p"
 	.string "You bet they will!\n"
 	.string "No question about it!$"
 
@@ -461,26 +461,26 @@ BattleFrontier_ExchangeServiceCorner_Text_LargeDollDesc::
 
 BattleFrontier_ExchangeServiceCorner_Text_ProteinDesc::
 	.string "Raises the stat ATTACK of one\n"
-	.string "POKeMON.$"
+	.string "POKEMON.$"
 
 BattleFrontier_ExchangeServiceCorner_Text_CalciumDesc::
 	.string "Raises the stat SP. ATK of one\n"
-	.string "POKeMON.$"
+	.string "POKEMON.$"
 
 BattleFrontier_ExchangeServiceCorner_Text_IronDesc::
 	.string "Raises the stat DEFENSE of one\n"
-	.string "POKeMON.$"
+	.string "POKEMON.$"
 
 BattleFrontier_ExchangeServiceCorner_Text_ZincDesc::
 	.string "Raises the stat SP. DEF of one\n"
-	.string "POKeMON.$"
+	.string "POKEMON.$"
 
 BattleFrontier_ExchangeServiceCorner_Text_CarbosDesc::
 	.string "Raises the stat SPEED of one\n"
-	.string "POKeMON.$"
+	.string "POKEMON.$"
 
 BattleFrontier_ExchangeServiceCorner_Text_HPUpDesc::
-	.string "Raises the HP of one POKeMON.$"
+	.string "Raises the HP of one POKEMON.$"
 
 BattleFrontier_ExchangeServiceCorner_Text_LeftoversDesc::
 	.string "A hold item that gradually restores\n"
@@ -495,7 +495,7 @@ BattleFrontier_ExchangeServiceCorner_Text_QuickClawDesc::
 	.string "the first strike.$"
 
 BattleFrontier_ExchangeServiceCorner_Text_MentalHerbDesc::
-	.string "A hold item that snaps POKeMON out\n"
+	.string "A hold item that snaps POKEMON out\n"
 	.string "of infatuation.$"
 
 BattleFrontier_ExchangeServiceCorner_Text_BrightpowderDesc::

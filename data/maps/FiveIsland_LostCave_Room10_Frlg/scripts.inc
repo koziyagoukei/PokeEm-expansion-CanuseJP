@@ -66,7 +66,7 @@ FiveIsland_LostCave_Room10_Text_SelphyIntro::
 	.string "me?$"
 
 FiveIsland_LostCave_Room10_Text_SelphyDefeat::
-	.string "Oh… I was afraid that you meant to\n"
+	.string "Oh... I was afraid that you meant to\n"
 	.string "harm me.$"
 
 FiveIsland_LostCave_Room10_Text_MayIAskYouToTakeMeHome::

@@ -309,35 +309,35 @@ LittlerootTown_MaysHouse_2F_EventScript_TurnOffPlayerPC::
 
 RivalsHouse_2F_Text_MayWhoAreYou:
 	.string "Huh?\n"
-	.string "Who… Who are you?\p"
-	.string "… … … … … … … …\n"
-	.string "… … … … … … … …\p"
+	.string "Who... Who are you?\p"
+	.string "... ... ... ... ... ... ... ...\n"
+	.string "... ... ... ... ... ... ... ...\p"
 	.string "Oh, you're {PLAYER}{KUN}.\n"
 	.string "So your move was today.\p"
-	.string "Um… I'm MAY.\n"
+	.string "Um... I'm MAY.\n"
 	.string "Glad to meet you!\p"
-	.string "I…\n"
+	.string "I...\n"
 	.string "I have this dream of becoming friends\l"
-	.string "with POKeMON all over the world.\p"
-	.string "I… I heard about you, {PLAYER}{KUN}, from\n"
+	.string "with POKEMON all over the world.\p"
+	.string "I... I heard about you, {PLAYER}{KUN}, from\n"
 	.string "my dad, PROF. BIRCH.\p"
 	.string "I was hoping that you would be nice,\n"
 	.string "{PLAYER}{KUN}, and that we could be friends.\p"
 	.string "Oh, this is silly, isn't it?\n"
-	.string "I… I've just met you, {PLAYER}{KUN}.\p"
-	.string "Eheheh…\p"
+	.string "I... I've just met you, {PLAYER}{KUN}.\p"
+	.string "Eheheh...\p"
 	.string "Oh, no! I forgot!\p"
 	.string "I was supposed to go help Dad catch\n"
-	.string "some wild POKeMON!\p"
+	.string "some wild POKEMON!\p"
 	.string "{PLAYER}{KUN}, I'll catch you later!$"
 
 RivalsHouse_2F_Text_MayGettingReady:
-	.string "POKeMON fully restored!\n"
-	.string "Items ready, and…$"
+	.string "POKEMON fully restored!\n"
+	.string "Items ready, and...$"
 
 RivalsHouse_2F_Text_BrendanWhoAreYou:
 	.string "Hey!\n"
-	.string "You…\p"
+	.string "You...\p"
 	.string "Who are you?\p"
 	.string "Oh, you're {PLAYER}, aren't you?\n"
 	.string "Moved in next door, right?\p"
@@ -348,16 +348,16 @@ RivalsHouse_2F_Text_BrendanWhoAreYou:
 	.string "My name's BRENDAN.\n"
 	.string "So, hi, neighbor!\p"
 	.string "Huh? Hey, {PLAYER}, don't you have\n"
-	.string "a POKeMON?\p"
+	.string "a POKEMON?\p"
 	.string "Do you want me to go catch you one?\p"
-	.string "Aw, darn, I forgot…\p"
+	.string "Aw, darn, I forgot...\p"
 	.string "I'm supposed to go help my dad catch\n"
-	.string "some wild POKeMON.\p"
+	.string "some wild POKEMON.\p"
 	.string "Some other time, okay?$"
 
 RivalsHouse_2F_Text_BrendanGettingReady:
-	.string "POKeMON fully restored…\n"
-	.string "Items all packed, and…$"
+	.string "POKEMON fully restored...\n"
+	.string "Items all packed, and...$"
 
 RivalsHouse_2F_Text_ItsRivalsPokeBall:
 	.string "It's {RIVAL}'s POKe BALL!\p"
@@ -366,23 +366,23 @@ RivalsHouse_2F_Text_ItsRivalsPokeBall:
 RivalsHouse_2F_Text_MayJustCheckingMyPokedex:
 	.string "MAY: {PLAYER}{KUN}!\p"
 	.string "I was just checking my POKeDEX.\p"
-	.string "There's still a lot of POKeMON that\n"
+	.string "There's still a lot of POKEMON that\n"
 	.string "I've seen but haven't caught.\p"
 	.string "And there are many others that\n"
 	.string "I think will evolve.\p"
 	.string "I wonder where I should go catch\n"
-	.string "some POKeMON next?$"
+	.string "some POKEMON next?$"
 
 RivalsHouse_2F_Text_MayWhereShouldIGoNext:
 	.string "MAY: I wonder where I should go catch\n"
-	.string "some POKeMON next?\p"
+	.string "some POKEMON next?\p"
 	.string "Wouldn't it be funny if we ran into each\n"
 	.string "other, {PLAYER}{KUN}?$"
 
 RivalsHouse_2F_Text_BrendanJustCheckingMyPokedex:
 	.string "BRENDAN: Hey, it's {PLAYER}.\p"
 	.string "I was just checking out my POKeDEX.\p"
-	.string "There are still many POKeMON that\n"
+	.string "There are still many POKEMON that\n"
 	.string "I need to catch, I know, but this\l"
 	.string "is looking pretty good.\p"
 	.string "Checking this POKeDEX out gives me\n"
@@ -390,7 +390,7 @@ RivalsHouse_2F_Text_BrendanJustCheckingMyPokedex:
 
 RivalsHouse_2F_Text_BrendanWhereShouldIGoNext:
 	.string "BRENDAN: I'm having a hard time deciding\n"
-	.string "where I should catch POKeMON next.\p"
+	.string "where I should catch POKEMON next.\p"
 	.string "Hey, {PLAYER}, if I see you while I'm out\n"
-	.string "catching POKeMON, I can pitch you a\l"
+	.string "catching POKEMON, I can pitch you a\l"
 	.string "battle if you'd like.$"

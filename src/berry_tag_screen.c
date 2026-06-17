@@ -176,7 +176,7 @@ static void HandleBagCursorPositionChange(s8 toMove);
 
 static const u8 sText_SizeSlash[] = _("SIZE /");
 static const u8 sText_FirmSlash[] = _("FIRM /");
-static const u8 sText_Var1DotVar2[] = _("{STR_VAR_1}.{STR_VAR_2}”");
+static const u8 sText_Var1DotVar2[] = _("{STR_VAR_1}.{STR_VAR_2}"");
 static const u8 sText_NumberVar1Var2[] = _("{NO}{STR_VAR_1} {STR_VAR_2}");
 static const u8 sText_BerryTag[] = _("BERRY TAG");
 static const u8 sText_ThreeMarks[] = _("???");

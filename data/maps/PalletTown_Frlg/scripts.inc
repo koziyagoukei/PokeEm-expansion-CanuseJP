@@ -454,24 +454,24 @@ PalletTown_Text_OakDontGoOut::
 
 PalletTown_Text_OakGrassUnsafeNeedMon::
 	.string "OAK: It's unsafe!\n"
-	.string "Wild POKeMON live in tall grass!\p"
-	.string "You need your own POKeMON for\n"
+	.string "Wild POKEMON live in tall grass!\p"
+	.string "You need your own POKEMON for\n"
 	.string "your protection.\p"
 	.string "I know!\n"
 	.string "Here, come with me!$"
 
 PalletTown_Text_RaisingMonsToo::
-	.string "I'm raising POKeMON, too.\p"
+	.string "I'm raising POKEMON, too.\p"
 	.string "When they get strong, they can\n"
 	.string "protect me.$"
 
 PalletTown_Text_CanStoreItemsAndMonsInPC::
 	.string "Technology is incredible!\p"
 	.string "You can now store and recall items\n"
-	.string "and POKeMON as data via PC.$"
+	.string "and POKEMON as data via PC.$"
 
 PalletTown_Text_OakPokemonResearchLab::
-	.string "OAK POKeMON RESEARCH LAB$"
+	.string "OAK POKEMON RESEARCH LAB$"
 
 PalletTown_Text_PlayersHouse::
 	.string "{PLAYER}'s house$"
@@ -489,17 +489,17 @@ PalletTown_Text_OakLetMeSeePokedex::
 	.string "How much have you filled in your\n"
 	.string "POKeDEX?\p"
 	.string "May I see it?\p"
-	.string "Let's see…$"
+	.string "Let's see...$"
 
 PalletTown_Text_CaughtXPuttingInHonestEffort::
-	.string "You've caught {STR_VAR_2}…\p"
+	.string "You've caught {STR_VAR_2}...\p"
 	.string "Hm, it looks as if you're putting\n"
 	.string "in an honest effort.\p"
 	.string "When you manage to fill it some\n"
 	.string "more, come show me, please.$"
 
 PalletTown_Text_CaughtXImpressiveFollowMe::
-	.string "You've caught… {STR_VAR_2}!?\n"
+	.string "You've caught... {STR_VAR_2}!?\n"
 	.string "Now, this is impressive!\p"
 	.string "There's something I wanted to ask\n"
 	.string "of you, {PLAYER}.\p"
@@ -517,8 +517,8 @@ PalletTown_Text_OakYouEnjoyingTraveling::
 
 @ For the NPC in Pallet Town that talks about the Trainer Tips sign
 PalletTown_Text_HmmIsThatRight::
-	.string "Hmm…\n"
-	.string "Is that right…$"
+	.string "Hmm...\n"
+	.string "Is that right...$"
 
 PalletTown_Text_OhLookLook::
 	.string "Oh!\n"

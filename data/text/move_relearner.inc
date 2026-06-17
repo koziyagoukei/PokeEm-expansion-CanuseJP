@@ -27,11 +27,11 @@ MoveRelearner_Text_HaveNoPkmn:
 	.string "You have no Pokemon.$"
 
 MoveRelearner_Text_CantTeachMoveToEgg:
-	.string "Sorry…\n"
+	.string "Sorry...\n"
 	.string "But an Egg can't learn moves.$"
 
 MoveRelearner_Text_CantTeachMoveToPkmn:
-	.string "Sorry…\p"
+	.string "Sorry...\p"
 	.string "It doesn't appear as if I have any move\n"
 	.string "I can teach that Pokemon.$"
 

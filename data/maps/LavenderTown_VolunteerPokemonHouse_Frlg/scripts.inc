@@ -97,11 +97,11 @@ LavenderTown_VolunteerPokemonHouse_Text_MrFujiLooksAfterOrphanedMons::
 	.string "This is really MR. FUJI's house.\p"
 	.string "He's really kind.\p"
 	.string "He looks after abandoned and\n"
-	.string "orphaned POKeMON.$"
+	.string "orphaned POKEMON.$"
 
 LavenderTown_VolunteerPokemonHouse_Text_MonsNiceToHug::
 	.string "It's so warm!\n"
-	.string "POKeMON are so nice to hug.$"
+	.string "POKEMON are so nice to hug.$"
 
 LavenderTown_VolunteerPokemonHouse_Text_Nidorino::
 	.string "NIDORINO: Gaoo!$"
@@ -110,10 +110,10 @@ LavenderTown_VolunteerPokemonHouse_Text_Psyduck::
 	.string "PSYDUCK: Gwappa!$"
 
 LavenderTown_VolunteerPokemonHouse_Text_IdLikeYouToHaveThis::
-	.string "MR. FUJI: {PLAYER}…\p"
+	.string "MR. FUJI: {PLAYER}...\p"
 	.string "Your POKeDEX quest is one that\n"
 	.string "requires strong dedication.\p"
-	.string "Without deep love for POKeMON,\n"
+	.string "Without deep love for POKEMON,\n"
 	.string "your quest may fail.\p"
 	.string "I'm not sure if this will help you,\n"
 	.string "but I'd like you to have it.$"
@@ -124,8 +124,8 @@ LavenderTown_VolunteerPokemonHouse_Text_ReceivedPokeFluteFromMrFuji::
 
 LavenderTown_VolunteerPokemonHouse_Text_ExplainPokeFlute::
 	.string "Upon hearing the POKe FLUTE,\n"
-	.string "sleeping POKeMON will spring awake.\p"
-	.string "Try using it on POKeMON that are\n"
+	.string "sleeping POKEMON will spring awake.\p"
+	.string "Try using it on POKEMON that are\n"
 	.string "sleeping obstacles.$"
 
 LavenderTown_VolunteerPokemonHouse_Text_MustMakeRoomForThis::
@@ -136,14 +136,14 @@ LavenderTown_VolunteerPokemonHouse_Text_HasPokeFluteHelpedYou::
 	.string "helped you?$"
 
 LavenderTown_VolunteerPokemonHouse_Text_GrandPrizeDrawingClipped::
-	.string "POKeMON FAN MAGAZINE\n"
+	.string "POKEMON FAN MAGAZINE\n"
 	.string "Monthly Grand Prize Drawing!\p"
-	.string "The application form is…\p"
+	.string "The application form is...\p"
 	.string "Gone! It's been clipped out.\n"
 	.string "Someone must have applied already.$"
 
 LavenderTown_VolunteerPokemonHouse_Text_PokemonMagazinesLineShelf::
-	.string "POKeMON magazines line the shelf.\p"
-	.string "POKeMON INSIDER…\p"
-	.string "POKeMON FAN…$"
+	.string "POKEMON magazines line the shelf.\p"
+	.string "POKEMON INSIDER...\p"
+	.string "POKEMON FAN...$"
 

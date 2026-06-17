@@ -56,7 +56,7 @@ SootopolisCity_Gym_B1F_Text_AndreaIntro:
 	.string "I learned from our LEADER JUAN!$"
 
 SootopolisCity_Gym_B1F_Text_AndreaDefeat:
-	.string "Please forgive me, JUAN…$"
+	.string "Please forgive me, JUAN...$"
 
 SootopolisCity_Gym_B1F_Text_AndreaPostBattle:
 	.string "Watch what happens if you crack all\n"
@@ -77,19 +77,19 @@ SootopolisCity_Gym_B1F_Text_CrissyPostBattle:
 
 SootopolisCity_Gym_B1F_Text_DaphneIntro:
 	.string "The sight of JUAN conducting\n"
-	.string "a battle…\p"
+	.string "a battle...\p"
 	.string "The very beauty of it compelled me to\n"
 	.string "become a TRAINER.$"
 
 SootopolisCity_Gym_B1F_Text_DaphneDefeat:
 	.string "You battled with more beauty than\n"
-	.string "I could muster…$"
+	.string "I could muster...$"
 
 SootopolisCity_Gym_B1F_Text_DaphnePostBattle:
 	.string "The grace you bring to battle is\n"
 	.string "fabulous.\p"
-	.string "Oh… I'm so fortunate to have found\n"
-	.string "POKeMON.$"
+	.string "Oh... I'm so fortunate to have found\n"
+	.string "POKEMON.$"
 
 SootopolisCity_Gym_B1F_Text_ConnieIntro:
 	.string "I should teach you how harsh battles\n"
@@ -105,8 +105,8 @@ SootopolisCity_Gym_B1F_Text_ConniePostBattle:
 	.string "need to walk on each floor tile once.$"
 
 SootopolisCity_Gym_B1F_Text_BridgetIntro:
-	.string "The POKeMON GYM of the highest level\n"
-	.string "in the HOENN region…\p"
+	.string "The POKEMON GYM of the highest level\n"
+	.string "in the HOENN region...\p"
 	.string "That's the SOOTOPOLIS GYM.$"
 
 SootopolisCity_Gym_B1F_Text_BridgetDefeat:
@@ -119,12 +119,12 @@ SootopolisCity_Gym_B1F_Text_BridgetPostBattle:
 	.string "But above all, it looks more fun.$"
 
 SootopolisCity_Gym_B1F_Text_OliviaIntro:
-	.string "I train my POKeMON together with\n"
+	.string "I train my POKEMON together with\n"
 	.string "JUAN.\p"
 	.string "Don't think I'm a pushover.$"
 
 SootopolisCity_Gym_B1F_Text_OliviaDefeat:
-	.string "I was beaten…$"
+	.string "I was beaten...$"
 
 SootopolisCity_Gym_B1F_Text_OliviaPostBattle:
 	.string "I think you have potential.\n"
@@ -132,7 +132,7 @@ SootopolisCity_Gym_B1F_Text_OliviaPostBattle:
 
 SootopolisCity_Gym_B1F_Text_TiffanyIntro:
 	.string "A graceful glide across the ice while\n"
-	.string "crossing no lines…\p"
+	.string "crossing no lines...\p"
 	.string "A TRAINER putting on that performance\n"
 	.string "would be elegantly beautiful!$"
 
@@ -145,32 +145,32 @@ SootopolisCity_Gym_B1F_Text_TiffanyPostBattle:
 	.string "with how young or old you are.$"
 
 SootopolisCity_Gym_B1F_Text_BethanyIntro:
-	.string "When I'm with my POKeMON, the time\n"
-	.string "flies by before you can say, “Oops!”$"
+	.string "When I'm with my POKEMON, the time\n"
+	.string "flies by before you can say, "Oops!"$"
 
 SootopolisCity_Gym_B1F_Text_BethanyDefeat:
 	.string "Oops!$"
 
 SootopolisCity_Gym_B1F_Text_BethanyPostBattle:
 	.string "I wish I could forget about lost causes\n"
-	.string "before I can manage an “Oops!”$"
+	.string "before I can manage an "Oops!"$"
 
 SootopolisCity_Gym_B1F_Text_AnnikaIntro:
-	.string "I can battle with really rare POKeMON\n"
+	.string "I can battle with really rare POKEMON\n"
 	.string "if you'd like.$"
 
 SootopolisCity_Gym_B1F_Text_AnnikaDefeat:
 	.string "Oh, there now! Did you have a good look\n"
-	.string "at my POKeMON?$"
+	.string "at my POKEMON?$"
 
 SootopolisCity_Gym_B1F_Text_AnnikaPostBattle:
 	.string "I came to this GYM because JUAN\n"
-	.string "praised me for my darling POKeMON.\p"
+	.string "praised me for my darling POKEMON.\p"
 	.string "Oh, if only I'd met JUAN years ago\n"
-	.string "when I was younger…$"
+	.string "when I was younger...$"
 
 SootopolisCity_Gym_B1F_Text_BriannaIntro:
-	.string "Giggle…\n"
+	.string "Giggle...\n"
 	.string "Your grim look is so charming.$"
 
 SootopolisCity_Gym_B1F_Text_BriannaDefeat:
@@ -179,5 +179,5 @@ SootopolisCity_Gym_B1F_Text_BriannaDefeat:
 
 SootopolisCity_Gym_B1F_Text_BriannaPostBattle:
 	.string "You couldn't lay a finger on JUAN,\n"
-	.string "I'm sure. Giggle…$"
+	.string "I'm sure. Giggle...$"
 

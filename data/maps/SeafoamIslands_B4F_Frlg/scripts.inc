@@ -206,12 +206,12 @@ Text_RockSlideDeclined::
 	.string "Oh, so you are scared after all.$"
 
 Text_RockSlideWhichMon::
-	.string "Which POKeMON should I teach\n"
+	.string "Which POKEMON should I teach\n"
 	.string "ROCK SLIDE?$"
 
 Text_RockSlideTaught::
 	.string "It might be scary to use it in this\n"
-	.string "tunnel…$"
+	.string "tunnel...$"
 
 SeafoamIslands_B4F_Text_BouldersMightChangeWaterFlow::
 	.string "Hint: Boulders might change the\n"

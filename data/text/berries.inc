@@ -13,7 +13,7 @@ Route104_Text_PlantBerriesInSoilTakeThis:
 Route104_Text_TrainersOftenMakeMonHoldBerries:
 	.string "The way you look, you must be a\n"
 	.string "TRAINER, no?\p"
-	.string "TRAINERS often make POKeMON hold\n"
+	.string "TRAINERS often make POKEMON hold\n"
 	.string "BERRIES.\p"
 	.string "It's up to you whether to grow BERRIES\n"
 	.string "or use them.$"
@@ -60,8 +60,8 @@ Route120_Text_YesYouUnderstand:
 	.string "You should take this.$"
 
 Route120_Text_MakeYourOwnImpressions:
-	.string "Oh… But it is important to make your\n"
-	.string "own impressions, I guess…\p"
+	.string "Oh... But it is important to make your\n"
+	.string "own impressions, I guess...\p"
 	.string "You can have this.$"
 
 Route120_Text_BerryIsRareRaiseItWithCare:
@@ -73,20 +73,20 @@ Route120_Text_IllGetMoreBerriesFromBerryMaster:
 	.string "the BERRY MASTER.$"
 
 LilycoveCity_Text_BerrySuitsYou:
-	.string "When it gets right down to it…\p"
+	.string "When it gets right down to it...\p"
 	.string "The same way suits suit me perfectly,\n"
 	.string "a crisp breeze suits the sea.\p"
-	.string "And you, a BERRY suits you to a “T”…\p"
+	.string "And you, a BERRY suits you to a "T"...\p"
 	.string "Why should that be so?$"
 
 LilycoveCity_Text_BecauseYoureTrainer:
-	.string "When it gets right down to it…\p"
+	.string "When it gets right down to it...\p"
 	.string "It's because you're a TRAINER!$"
 
 LilycoveCity_Text_PokeblocksSuitPokemon:
-	.string "When it gets right down to it…\p"
+	.string "When it gets right down to it...\p"
 	.string "The way dignified simplicity suits me,\n"
-	.string "ポロックS perfectly suit POKeMON.$"
+	.string "ポロックS perfectly suit POKEMON.$"
 
 Route123_BerryMastersHouse_Text_YoureDeservingOfBerry:
 	.string "You may call me the BERRY MASTER.\p"
@@ -132,7 +132,7 @@ Route123_BerryMastersHouse_Text_JoyNeverGoesOutOfMyLife:
 	.string "Joy never goes out of my life!$"
 
 Route123_BerryMastersHouse_Text_Ah:
-	.string "Ah…$"
+	.string "Ah...$"
 
 Route104_PrettyPetalFlowerShop_Text_ThisIsPrettyPetalFlowerShop:
 	.string "Hello!\p"
@@ -193,15 +193,15 @@ Route104_PrettyPetalFlowerShop_Text_ImGrowingFlowers:
 
 Route104_PrettyPetalFlowerShop_Text_MachineMixesBerries:
 	.string "You can plant a BERRY and grow it big,\n"
-	.string "or you can make a POKeMON hold it.\p"
+	.string "or you can make a POKEMON hold it.\p"
 	.string "But now they have a machine that mixes\n"
 	.string "up different BERRIES and makes candies\l"
-	.string "for POKeMON.\p"
+	.string "for POKEMON.\p"
 	.string "I want some candy, too.$"
 
 SootopolisCity_Text_NameIsKiriHaveOneOfThese:
 	.string "Hi, what's your name?\p"
-	.string "… … …  … … …  … … …\n"
+	.string "... ... ...  ... ... ...  ... ... ...\n"
 	.string "Okay. That's nice!\p"
 	.string "My name is KIRI.\p"
 	.string "My mommy and daddy named me that so\n"
@@ -229,6 +229,6 @@ SootopolisCity_Text_ThenILoveAutumn:
 	.string "Which season do you like?$"
 
 SootopolisCity_Text_OhDoesntMatter:
-	.string "Oh…\n"
-	.string "It doesn't matter…\p"
-	.string "There's so much that I want to know…$"
+	.string "Oh...\n"
+	.string "It doesn't matter...\p"
+	.string "There's so much that I want to know...$"

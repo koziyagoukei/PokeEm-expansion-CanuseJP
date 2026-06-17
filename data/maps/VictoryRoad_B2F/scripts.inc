@@ -42,9 +42,9 @@ VictoryRoad_B2F_Text_VitoDefeat:
 
 VictoryRoad_B2F_Text_VitoPostBattle:
 	.string "I was better than everyone in my\n"
-	.string "family. I've never lost before…\p"
-	.string "I've lost my confidence…\n"
-	.string "Maybe I'll go home…$"
+	.string "family. I've never lost before...\p"
+	.string "I've lost my confidence...\n"
+	.string "Maybe I'll go home...$"
 
 VictoryRoad_B2F_Text_OwenIntro:
 	.string "I'd heard that there was a tough\n"
@@ -64,7 +64,7 @@ VictoryRoad_B2F_Text_CarolineDefeat:
 	.string "No signs of tiring at all!$"
 
 VictoryRoad_B2F_Text_CarolinePostBattle:
-	.string "VICTORY ROAD and the POKeMON LEAGUE\n"
+	.string "VICTORY ROAD and the POKEMON LEAGUE\n"
 	.string "are long and grueling challenges.\l"
 	.string "Beware of fatigue!$"
 
@@ -83,15 +83,15 @@ VictoryRoad_B2F_Text_JuliePostBattle:
 
 VictoryRoad_B2F_Text_FelixIntro:
 	.string "I've come this far, but the tension's\n"
-	.string "giving me awful stomach pain…$"
+	.string "giving me awful stomach pain...$"
 
 VictoryRoad_B2F_Text_FelixDefeat:
-	.string "Ooh…\n"
-	.string "It hurts…$"
+	.string "Ooh...\n"
+	.string "It hurts...$"
 
 VictoryRoad_B2F_Text_FelixPostBattle:
 	.string "I can't help getting all tense knowing\n"
-	.string "that I'm nearing the POKeMON LEAGUE.\p"
+	.string "that I'm nearing the POKEMON LEAGUE.\p"
 	.string "It's all I can do to feign calm.$"
 
 VictoryRoad_B2F_Text_DianneIntro:

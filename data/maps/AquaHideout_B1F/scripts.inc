@@ -111,14 +111,14 @@ AquaHideout_B1F_Text_Grunt2Intro:
 	.string "our HIDEOUT, you have me to beat!$"
 
 AquaHideout_B1F_Text_Grunt2Defeat:
-	.string "I can't win at all…$"
+	.string "I can't win at all...$"
 
 AquaHideout_B1F_Text_Grunt2PostBattle:
 	.string "Our HIDEOUT's secret?\p"
-	.string "Well, let's just say…\n"
+	.string "Well, let's just say...\n"
 	.string "There's a submarine at the far end!\p"
-	.string "But, by now…\n"
-	.string "Kekekeke…$"
+	.string "But, by now...\n"
+	.string "Kekekeke...$"
 
 AquaHideout_B1F_Text_Grunt3Intro:
 	.string "Fuel supply loaded A-OK!\n"
@@ -135,12 +135,12 @@ AquaHideout_B1F_Text_Grunt3PostBattle:
 	.string "My mission was to just hold you up!$"
 
 AquaHideout_B1F_Text_Grunt5Intro:
-	.string "Yawn… Keeping watch over the\n"
+	.string "Yawn... Keeping watch over the\n"
 	.string "HIDEOUT bores me. I'll take you on.$"
 
 AquaHideout_B1F_Text_Grunt5Defeat:
-	.string "Yawn…\n"
-	.string "Oh, I lost…$"
+	.string "Yawn...\n"
+	.string "Oh, I lost...$"
 
 AquaHideout_B1F_Text_Grunt5PostBattle:
 	.string "If you scurry too much, other TEAM\n"
@@ -153,7 +153,7 @@ AquaHideout_B1F_Text_Grunt7Intro:
 	.string "TEAM AQUA's uniform or TEAM MAGMA's?$"
 
 AquaHideout_B1F_Text_Grunt7Defeat:
-	.string "I lost in a cool way…$"
+	.string "I lost in a cool way...$"
 
 AquaHideout_B1F_Text_Grunt7PostBattle:
 	.string "If you have a cool uniform, you look\n"

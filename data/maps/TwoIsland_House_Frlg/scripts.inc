@@ -116,31 +116,31 @@ TwoIsland_House_EventScript_SetHasBothMushrooms::
 	return
 
 TwoIsland_House_Text_TeachMonMoveForMushroom::
-	.string "I'm the POKeMON MOVE MANIAC.\p"
+	.string "I'm the POKEMON MOVE MANIAC.\p"
 	.string "I know every single move that\n"
-	.string "POKeMON learn growing up.\p"
+	.string "POKEMON learn growing up.\p"
 	.string "I'm also a mushroom maniac.\p"
 	.string "Bring me two TINYMUSHROOMS,\n"
 	.string "or one BIG MUSHROOM.\p"
 	.string "If you do that for me, I'll teach\n"
-	.string "a move to one POKeMON.$"
+	.string "a move to one POKEMON.$"
 
 TwoIsland_House_Text_WantMeToTeachMove::
-	.string "Sniff, sniff…\n"
+	.string "Sniff, sniff...\n"
 	.string "Hm! You smell of MUSHROOMS!\p"
 	.string "Do you want me to teach a move\n"
-	.string "to a POKeMON of yours?$"
+	.string "to a POKEMON of yours?$"
 
 TwoIsland_House_Text_TutorWhichMon::
-	.string "Which POKeMON needs tutoring?$"
+	.string "Which POKEMON needs tutoring?$"
 
 TwoIsland_House_Text_TeachWhichMove::
 	.string "Which move should I teach?$"
 
 TwoIsland_House_Text_NoMoveICanTeachThatMon::
-	.string "Sorry…\p"
+	.string "Sorry...\p"
 	.string "It doesn't appear as if I have a\n"
-	.string "move I can teach that POKeMON.$"
+	.string "move I can teach that POKEMON.$"
 
 TwoIsland_House_Text_IllNeedMushroomOrTwo::
 	.string "Then, I'll need a MUSHROOM or two.\n"
@@ -155,7 +155,7 @@ TwoIsland_House_Text_HandedOverOneBigMushroom::
 	.string "BIG MUSHROOM in exchange.$"
 
 TwoIsland_House_Text_NeedMushroomOrTwoToLearnMove::
-	.string "If your POKeMON need to learn a\n"
+	.string "If your POKEMON need to learn a\n"
 	.string "move, I need a MUSHROOM or two.$"
 
 TwoIsland_House_Text_CantTeachAnEgg::

@@ -45,8 +45,8 @@ Route110_TrickHousePuzzle6_EventScript_Sebastian::
 Route110_TrickHousePuzzle6_Text_WroteSecretCodeLockOpened:
 	.string "{PLAYER} wrote down the secret code\n"
 	.string "on the door.\p"
-	.string "“TRICK MASTER is my life.”\n"
-	.string "… … … … … … … …\p"
+	.string ""TRICK MASTER is my life."\n"
+	.string "... ... ... ... ... ... ... ...\p"
 	.string "The lock clicked open!$"
 
 Route110_TrickHousePuzzle6_Text_SophiaIntro:
@@ -63,23 +63,23 @@ Route110_TrickHousePuzzle6_Text_SophiaPostBattle:
 	.string "repeating!$"
 
 Route110_TrickHousePuzzle6_Text_BennyIntro:
-	.string "Maybe I could get my BIRD POKeMON\n"
-	.string "to fly over the wall…$"
+	.string "Maybe I could get my BIRD POKEMON\n"
+	.string "to fly over the wall...$"
 
 Route110_TrickHousePuzzle6_Text_BennyDefeat:
 	.string "Gwaaah! I blew it!$"
 
 Route110_TrickHousePuzzle6_Text_BennyPostBattle:
-	.string "Ehehehe… I guess I lost because\n"
+	.string "Ehehehe... I guess I lost because\n"
 	.string "I was trying to cheat.$"
 
 Route110_TrickHousePuzzle6_Text_SebastianIntro:
 	.string "I'm getting dizzy from these rotating\n"
-	.string "doors…$"
+	.string "doors...$"
 
 Route110_TrickHousePuzzle6_Text_SebastianDefeat:
 	.string "Everything's spinning around and\n"
-	.string "around. I can't take this anymore…$"
+	.string "around. I can't take this anymore...$"
 
 Route110_TrickHousePuzzle6_Text_SebastianPostBattle:
 	.string "You don't seem to be affected at all.\n"

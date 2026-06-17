@@ -105,26 +105,26 @@ SilphCo_5F_Text_Grunt2Intro::
 	.string "Show TEAM ROCKET a little respect!$"
 
 SilphCo_5F_Text_Grunt2Defeat::
-	.string "Cough…\n"
-	.string "Cough…$"
+	.string "Cough...\n"
+	.string "Cough...$"
 
 SilphCo_5F_Text_Grunt2PostBattle::
 	.string "Which reminds me.\p"
 	.string "KOFFING evolves into WEEZING!$"
 
 SilphCo_5F_Text_PorygonFirstVRMon::
-	.string "It's a POKeMON REPORT!\p"
-	.string "POKeMON LAB created PORYGON,\n"
-	.string "the first virtual-reality POKeMON.$"
+	.string "It's a POKEMON REPORT!\p"
+	.string "POKEMON LAB created PORYGON,\n"
+	.string "the first virtual-reality POKEMON.$"
 
 SilphCo_5F_Text_Over350TechniquesConfirmed::
-	.string "It's a POKeMON REPORT!\p"
-	.string "Over 350 POKeMON techniques have\n"
+	.string "It's a POKEMON REPORT!\p"
+	.string "Over 350 POKEMON techniques have\n"
 	.string "been confirmed.$"
 
 SilphCo_5F_Text_SomeMonsEvolveWhenTraded::
-	.string "It's a POKeMON REPORT!\p"
-	.string "Some POKeMON have been confirmed\n"
+	.string "It's a POKEMON REPORT!\p"
+	.string "Some POKEMON have been confirmed\n"
 	.string "to evolve when they are traded.$"
 
 SilphCo_5F_Text_FloorSign::
@@ -133,8 +133,8 @@ SilphCo_5F_Text_FloorSign::
 
 SilphCo_5F_Text_RocketBossLookingForStrongMons::
 	.string "Those thugs that took over our\n"
-	.string "building…\p"
+	.string "building...\p"
 	.string "Their BOSS said he was looking for\n"
-	.string "strong POKeMON.\p"
+	.string "strong POKEMON.\p"
 	.string "I hope our PRESIDENT managed to\n"
-	.string "avoid trouble…$"
+	.string "avoid trouble...$"

@@ -55,7 +55,7 @@ FallarborTown_Text_ShadyCharactersCozmosHome:
 	.string "Something's happening,\n"
 	.string "and I don't like it!\p"
 	.string "I've seen shady characters wandering\n"
-	.string "in and out of PROF. COZMO's home…$"
+	.string "in and out of PROF. COZMO's home...$"
 
 FallarborTown_Text_RegionKnownForMeteors:
 	.string "This region's been known for meteors\n"
@@ -76,20 +76,20 @@ FallarborTown_Text_HaveYouChallengedFlannery:
 	.string "the LEADER of LAVARIDGE GYM?\p"
 	.string "The girl's grandfather was famous.\n"
 	.string "He was one of the ELITE FOUR in the\l"
-	.string "POKeMON LEAGUE at one point.\p"
+	.string "POKEMON LEAGUE at one point.\p"
 	.string "It wouldn't surprise me to see FLANNERY\n"
 	.string "become a great TRAINER in her own\l"
 	.string "right.$"
 
 FallarborTown_Text_BattleTentSign:
 	.string "BATTLE TENT FALLARBOR SITE\n"
-	.string "“May the Greatest Teams Gather!”$"
+	.string ""May the Greatest Teams Gather!"$"
 
 FallarborTown_Text_TownSign:
 	.string "FALLARBOR TOWN\n"
-	.string "“A farm community with small gardens.”$"
+	.string ""A farm community with small gardens."$"
 
 FallarborTown_Text_MoveTutorSign:
 	.string "MOVE TUTOR'S HOUSE\n"
-	.string "“New moves taught to POKeMON.”$"
+	.string ""New moves taught to POKEMON."$"
 

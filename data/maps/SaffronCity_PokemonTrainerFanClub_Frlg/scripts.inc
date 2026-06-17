@@ -385,11 +385,11 @@ SaffronCity_PokemonTrainerFanClub_EventScript_BlackBeltOnlyNonFan::
 
 SaffronCity_PokemonTrainerFanClub_Text_HuhYou::
 	.string "Huh?\n"
-	.string "You…$"
+	.string "You...$"
 
 SaffronCity_PokemonTrainerFanClub_Text_YourePlayerWereYourFansNow::
-	.string "Are you maybe…\n"
-	.string "… …\p"
+	.string "Are you maybe...\n"
+	.string "... ...\p"
 	.string "You are!\n"
 	.string "You are {PLAYER}!\p"
 	.string "We were just talking about you!\p"
@@ -447,8 +447,8 @@ SaffronCity_PokemonTrainerFanClub_Text_CanYouAutographShorts::
 	.string "How about my shorts?$"
 
 SaffronCity_PokemonTrainerFanClub_Text_CountingOnYou::
-	.string "However hot it's been…\p"
-	.string "And however cold it may get…\p"
+	.string "However hot it's been...\p"
+	.string "And however cold it may get...\p"
 	.string "I've always believed in, and worn,\n"
 	.string "shorts!\p"
 	.string "I'm counting on you to keep\n"
@@ -461,12 +461,12 @@ SaffronCity_PokemonTrainerFanClub_Text_BrocksMyHero::
 	.string "He's a man among men!\p"
 	.string "Heheh, I got my mom to do\n"
 	.string "something for me.\p"
-	.string "I got her to embroider “BROCK”\n"
+	.string "I got her to embroider "BROCK"\n"
 	.string "on my shorts!$"
 
 SaffronCity_PokemonTrainerFanClub_Text_BrocksFanToBitterEnd::
-	.string "…  …\p"
-	.string "…  …\n"
+	.string "...  ...\p"
+	.string "...  ...\n"
 	.string "I'm BROCK's fan!\p"
 	.string "Even if I were his only fan,\n"
 	.string "I swear it on my rock-hard will,\l"
@@ -498,7 +498,7 @@ SaffronCity_PokemonTrainerFanClub_Text_NeverSeenTrainerOfYourMagnificence::
 	.string "my young idol!$"
 
 SaffronCity_PokemonTrainerFanClub_Text_HmmAndYouAre::
-	.string "Hmm…\n"
+	.string "Hmm...\n"
 	.string "And you are?\p"
 	.string "Were you hoping to sign up for\n"
 	.string "a membership in our FAN CLUB?$"
@@ -509,14 +509,14 @@ SaffronCity_PokemonTrainerFanClub_Text_YouveStillAWaysToGo::
 	.string "You certainly do have the look of\n"
 	.string "a winner.\p"
 	.string "But for me to accept you as\n"
-	.string "a true POKeMON great…\p"
-	.string "… …\p"
+	.string "a true POKEMON great...\p"
+	.string "... ...\p"
 	.string "You've still a ways to go!$"
 
 SaffronCity_PokemonTrainerFanClub_Text_YoullBeTalkedAboutIfYouKeepWinning::
 	.string "All of us gathered here are fans\n"
-	.string "of POKeMON TRAINERS.\p"
-	.string "The way they look in battle…\n"
+	.string "of POKEMON TRAINERS.\p"
+	.string "The way they look in battle...\n"
 	.string "They are the picture of coolness.\p"
 	.string "Perhaps you will be talked about\n"
 	.string "here, too, if you keep winning.$"
@@ -528,7 +528,7 @@ SaffronCity_PokemonTrainerFanClub_Text_WantToBeLikeYouOneDay::
 
 SaffronCity_PokemonTrainerFanClub_Text_EveryoneButMeStoppedBeingYourFan::
 	.string "Everyone stopped being {PLAYER}'s\n"
-	.string "fan…\p"
+	.string "fan...\p"
 	.string "But that means I can have {PLAYER}\n"
 	.string "all to myself!\p"
 	.string "Yay! Go for it!\n"
@@ -555,7 +555,7 @@ SaffronCity_PokemonTrainerFanClub_Text_CanIBecomeCoolTrainerOneDay::
 SaffronCity_PokemonTrainerFanClub_Text_TheWayYouBattleIsCool::
 	.string "Oh, man, oh, man!\n"
 	.string "Cool! Too cool!\p"
-	.string "…Huh?\n"
+	.string "...Huh?\n"
 	.string "No, not you.\p"
 	.string "Just the way you battle.\n"
 	.string "That's cool.$"
@@ -565,7 +565,7 @@ SaffronCity_PokemonTrainerFanClub_Text_ImOnlyOneLeftOfYourFans::
 	.string "Looks like I'm the only one left\n"
 	.string "out of your fans.\p"
 	.string "But, you know, I like being an only\n"
-	.string "fan… It's less stressful.\p"
+	.string "fan... It's less stressful.\p"
 	.string "Keep up and at it!$"
 
 SaffronCity_PokemonTrainerFanClub_Text_LoveWayTrainerTalks::
@@ -593,7 +593,7 @@ SaffronCity_PokemonTrainerFanClub_Text_AdoreWayYouBattle::
 SaffronCity_PokemonTrainerFanClub_Text_ImYourNumberOneFan::
 	.string "Oh, my goodness!\n"
 	.string "If it isn't {PLAYER}!\p"
-	.string "It's so disappointing… I realized\n"
+	.string "It's so disappointing... I realized\n"
 	.string "I'm your number-one-and-only fan!\p"
 	.string "Well, it can't be helped!\n"
 	.string "Let me cheer you on, at least!\p"
@@ -602,7 +602,7 @@ SaffronCity_PokemonTrainerFanClub_Text_ImYourNumberOneFan::
 SaffronCity_PokemonTrainerFanClub_Text_TrainerHasBeenOnFire::
 	.string "Recently, {STR_VAR_1} has been on\n"
 	.string "fire.\p"
-	.string "The way he battles… It's just \n"
+	.string "The way he battles... It's just \n"
 	.string "the way that I like it!$"
 
 SaffronCity_PokemonTrainerFanClub_Text_EveryoneTalksAboutYou::
@@ -620,13 +620,13 @@ SaffronCity_PokemonTrainerFanClub_Text_YouReallyAreAmazing::
 	.string "I should become a TRAINER, too.$"
 
 SaffronCity_PokemonTrainerFanClub_Text_ImYourOnlyFan::
-	.string "I'm your only fan…\n"
-	.string "Sigh… This is lonely…\p"
+	.string "I'm your only fan...\n"
+	.string "Sigh... This is lonely...\p"
 	.string "Can't you try harder and make the\n"
 	.string "others take notice of you?$"
 
 SaffronCity_PokemonTrainerFanClub_Text_WhyCantOthersSeeMastersDignity::
-	.string "Master {STR_VAR_1} is so dignified…\n"
+	.string "Master {STR_VAR_1} is so dignified...\n"
 	.string "He is so my type.\p"
 	.string "Why can't the others see the\n"
 	.string "dignity he simply oozes?$"
@@ -650,8 +650,8 @@ SaffronCity_PokemonTrainerFanClub_Text_YourBattleStyleIsEducational::
 SaffronCity_PokemonTrainerFanClub_Text_WontStopBeingYourFan::
 	.string "Instead of just watching others\n"
 	.string "battle, battle yourself!\p"
-	.string "…My DOJO's MASTER chewed me out\n"
-	.string "like that…\p"
+	.string "...My DOJO's MASTER chewed me out\n"
+	.string "like that...\p"
 	.string "But I won't let that stop me from\n"
 	.string "being your fan!\p"
 	.string "I can't stop being your fan!$"

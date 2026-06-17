@@ -61,7 +61,7 @@ Route10_PokemonCenter_1F_EventScript_GetAideRequestInfo::
 	return
 
 Route10_PokemonCenter_1F_Text_EveryTypeStrongerThanOthers::
-	.string "The types of POKeMON match up\n"
+	.string "The types of POKEMON match up\n"
 	.string "differently with each other.\p"
 	.string "Every type is stronger than some\n"
 	.string "types and weaker than others.$"
@@ -75,7 +75,7 @@ Route10_PokemonCenter_1F_Text_HeardGhostsHauntLavender::
 	.string "LAVENDER TOWN.$"
 
 Route10_PokemonCenter_1F_Text_GiveEverstoneIfCaught20Mons::
-	.string "Oh… {PLAYER}!\n"
+	.string "Oh... {PLAYER}!\n"
 	.string "I've been looking for you!\p"
 	.string "It's me, one of the ever-present\n"
 	.string "AIDES to PROF. OAK.\p"
@@ -86,11 +86,11 @@ Route10_PokemonCenter_1F_Text_GiveEverstoneIfCaught20Mons::
 	.string "EVERSTONE.\p"
 	.string "So, {PLAYER}, let me ask you.\p"
 	.string "Have you gathered data on at least\n"
-	.string "twenty kinds of POKeMON?$"
+	.string "twenty kinds of POKEMON?$"
 
 Route10_PokemonCenter_1F_Text_GreatHereYouGo::
 	.string "Great! You have caught or owned\n"
-	.string "{STR_VAR_3} kinds of POKeMON!\p"
+	.string "{STR_VAR_3} kinds of POKEMON!\p"
 	.string "Congratulations!\n"
 	.string "Here you go!$"
 
@@ -99,12 +99,12 @@ Route10_PokemonCenter_1F_Text_ReceivedEverstoneFromAide::
 	.string "from the AIDE.$"
 
 Route10_PokemonCenter_1F_Text_ExplainEverstone::
-	.string "Making POKeMON evolve certainly\n"
+	.string "Making POKEMON evolve certainly\n"
 	.string "can add to the POKeDEX.\p"
 	.string "However, at times, you may not\n"
-	.string "want a certain POKeMON to evolve.\p"
+	.string "want a certain POKEMON to evolve.\p"
 	.string "In that case, give the EVERSTONE\n"
-	.string "to that POKeMON.\p"
+	.string "to that POKEMON.\p"
 	.string "It will prevent evolution according\n"
 	.string "to the PROFESSOR.$"
 

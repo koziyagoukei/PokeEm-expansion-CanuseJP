@@ -318,8 +318,8 @@ LittlerootTown_MaysHouse_1F_Movement_MayGoUpstairs2:
 
 RivalsHouse_1F_Text_OhYoureTheNewNeighbor:
 	.string "Oh, hello. And you are?\p"
-	.string "… … … … … … … … …\n"
-	.string "… … … … … … … … …\p"
+	.string "... ... ... ... ... ... ... ... ...\n"
+	.string "... ... ... ... ... ... ... ... ...\p"
 	.string "Oh, you're {PLAYER}{KUN}, our new next-door\n"
 	.string "neighbor! Hi!\p"
 	.string "We have a {STR_VAR_1} about the same\n"
@@ -330,7 +330,7 @@ RivalsHouse_1F_Text_OhYoureTheNewNeighbor:
 
 RivalsHouse_1F_Text_LikeChildLikeFather:
 	.string "Like child, like father.\p"
-	.string "My husband is as wild about POKeMON\n"
+	.string "My husband is as wild about POKEMON\n"
 	.string "as our child.\p"
 	.string "If he's not at his LAB, he's likely\n"
 	.string "scrabbling about in grassy places.$"
@@ -338,7 +338,7 @@ RivalsHouse_1F_Text_LikeChildLikeFather:
 RivalsHouse_1F_Text_TooBusyToNoticeVisit:
 	.string "That {RIVAL}!\p"
 	.string "I guess our child is too busy with\n"
-	.string "POKeMON to notice that you came\l"
+	.string "POKEMON to notice that you came\l"
 	.string "to visit, {PLAYER}{KUN}.$"
 
 RivalsHouse_1F_Text_WentOutToRoute103:
@@ -349,7 +349,7 @@ RivalsHouse_1F_Text_WentOutToRoute103:
 
 RivalsHouse_1F_Text_ShouldGoHomeEverySoOften:
 	.string "I think it's wonderful for people to\n"
-	.string "travel with POKeMON.\p"
+	.string "travel with POKEMON.\p"
 	.string "But you should go home every so often\n"
 	.string "to let your mother know you're okay.\p"
 	.string "She might not say it, but I'm sure she\n"
@@ -357,31 +357,31 @@ RivalsHouse_1F_Text_ShouldGoHomeEverySoOften:
 
 RivalsHouse_1F_Text_MayWhoAreYou:
 	.string "Huh?\n"
-	.string "Who… Who are you?\p"
-	.string "… … … … … … … …\n"
-	.string "… … … … … … … …\p"
+	.string "Who... Who are you?\p"
+	.string "... ... ... ... ... ... ... ...\n"
+	.string "... ... ... ... ... ... ... ...\p"
 	.string "Oh, you're {PLAYER}{KUN}.\n"
 	.string "So your move was today.\p"
-	.string "Um… I'm MAY.\n"
+	.string "Um... I'm MAY.\n"
 	.string "Glad to meet you!\p"
-	.string "I…\n"
+	.string "I...\n"
 	.string "I have this dream of becoming friends\l"
-	.string "with POKeMON all over the world.\p"
-	.string "I… I heard about you, {PLAYER}{KUN}, from\n"
+	.string "with POKEMON all over the world.\p"
+	.string "I... I heard about you, {PLAYER}{KUN}, from\n"
 	.string "my dad, PROF. BIRCH.\p"
 	.string "I was hoping that you would be nice,\n"
 	.string "{PLAYER}{KUN}, and that we could be friends.\p"
 	.string "Oh, this is silly, isn't it?\n"
-	.string "I… I've just met you, {PLAYER}{KUN}.\p"
-	.string "Eheheh…\p"
+	.string "I... I've just met you, {PLAYER}{KUN}.\p"
+	.string "Eheheh...\p"
 	.string "Oh, no! I forgot!\p"
 	.string "I was supposed to go help Dad catch\n"
-	.string "some wild POKeMON!\p"
+	.string "some wild POKEMON!\p"
 	.string "{PLAYER}{KUN}, I'll catch you later!$"
 
 RivalsHouse_1F_Text_BrendanWhoAreYou:
 	.string "Hey!\n"
-	.string "You…\p"
+	.string "You...\p"
 	.string "Who are you?\p"
 	.string "Oh, you're {PLAYER}, aren't you?\n"
 	.string "Moved in next door, right?\p"
@@ -392,14 +392,14 @@ RivalsHouse_1F_Text_BrendanWhoAreYou:
 	.string "My name's BRENDAN.\n"
 	.string "So, hi, neighbor!\p"
 	.string "Huh? Hey, {PLAYER}, don't you have\n"
-	.string "a POKeMON?\p"
+	.string "a POKEMON?\p"
 	.string "Do you want me to go catch you one?\p"
-	.string "Aw, darn, I forgot…\p"
+	.string "Aw, darn, I forgot...\p"
 	.string "I'm supposed to go help my dad catch\n"
-	.string "some wild POKeMON.\p"
+	.string "some wild POKEMON.\p"
 	.string "Some other time, okay?$"
 
 RivalsHouse_1F_Text_DoYouHavePokemon:
 	.string "Hi, neighbor!\p"
 	.string "Do you already have your\n"
-	.string "own POKeMON?$"
+	.string "own POKEMON?$"

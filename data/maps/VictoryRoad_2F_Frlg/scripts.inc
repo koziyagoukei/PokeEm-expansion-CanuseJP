@@ -86,7 +86,7 @@ VictoryRoad_2F_Text_DawsonDefeat::
 
 VictoryRoad_2F_Text_DawsonPostBattle::
 	.string "I can beat you when it comes to\n"
-	.string "knowledge about POKeMON!$"
+	.string "knowledge about POKEMON!$"
 
 VictoryRoad_2F_Text_DaisukeIntro::
 	.string "This here is VICTORY ROAD.\n"
@@ -118,7 +118,7 @@ VictoryRoad_2F_Text_VincentDefeat::
 
 VictoryRoad_2F_Text_VincentPostBattle::
 	.string "You earned the right to be on\n"
-	.string "VICTORY ROAD…$"
+	.string "VICTORY ROAD...$"
 
 VictoryRoad_2F_Text_GregoryIntro::
 	.string "Is VICTORY ROAD too tough?$"

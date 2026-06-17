@@ -959,7 +959,7 @@ static const u8 *const sBattleDomeOpponentStatsTexts[] =
     COMPOUND_STRING("Neglects SPEED."),
     COMPOUND_STRING("Neglects SP. ATTACK."),
     COMPOUND_STRING("Neglects SP. DEFENSE."),
-    [DOME_TEXT_WELL_BALANCED] = COMPOUND_STRING("Raises POKeMON in a well-balanced way."),
+    [DOME_TEXT_WELL_BALANCED] = COMPOUND_STRING("Raises POKEMON in a well-balanced way."),
 };
 
 static const u8 sInfoTrainerMonX[FRONTIER_PARTY_SIZE] = {104, 136, 104};

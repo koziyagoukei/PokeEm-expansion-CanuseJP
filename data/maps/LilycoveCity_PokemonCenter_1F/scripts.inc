@@ -49,18 +49,18 @@ LilycoveCity_PokemonCenter_1F_EventScript_ManiacBadTeamGone::
 	end
 
 LilycoveCity_PokemonCenter_1F_Text_HowManyKindsOfPokemon:
-	.string "I wonder how many kinds of POKeMON\n"
+	.string "I wonder how many kinds of POKEMON\n"
 	.string "there are in the world.\p"
 	.string "It'd be great to cross seas and\n"
-	.string "trade POKeMON with people far away.$"
+	.string "trade POKEMON with people far away.$"
 
 LilycoveCity_PokemonCenter_1F_Text_HeardAboutRottenScoundrels:
 	.string "I've been hearing about some rotten\n"
-	.string "scoundrels who steal POKeMON and rip\l"
+	.string "scoundrels who steal POKEMON and rip\l"
 	.string "off METEORITES.$"
 
 LilycoveCity_PokemonCenter_1F_Text_HaventSeenRottenScoundrels:
 	.string "Those rotten scoundrels who steal\n"
-	.string "POKeMON and rip off METEORITES…\p"
+	.string "POKEMON and rip off METEORITES...\p"
 	.string "I haven't seen them around recently.$"
 

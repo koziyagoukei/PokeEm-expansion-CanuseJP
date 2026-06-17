@@ -441,8 +441,8 @@ ThreeIsland_Text_OughtToBeThankingUs::
 	.string "making us leave.$"
 
 ThreeIsland_Text_YouCowardsToughInPack::
-	.string "Grr… You cowards…\n"
-	.string "So tough in a pack…$"
+	.string "Grr... You cowards...\n"
+	.string "So tough in a pack...$"
 
 ThreeIsland_Text_WannaMakeSomethingOfYourStaring::
 	.string "You, what are you staring at?\n"
@@ -456,14 +456,14 @@ ThreeIsland_Text_ThatsSmart::
 
 ThreeIsland_Text_Biker1Intro::
 	.string "Heh, I like your guts.\n"
-	.string "You'll be losing money to me, but…$"
+	.string "You'll be losing money to me, but...$"
 
 ThreeIsland_Text_Biker1Defeat::
-	.string "Wha…\n"
+	.string "Wha...\n"
 	.string "What is this kid?!$"
 
 ThreeIsland_Text_Biker1PostBattle::
-	.string "Aww, man…\n"
+	.string "Aww, man...\n"
 	.string "Don't you dare laugh!$"
 
 ThreeIsland_Text_Biker2Intro::
@@ -484,7 +484,7 @@ ThreeIsland_Text_Biker3Intro::
 	.string "You embarrassed us, man!$"
 
 ThreeIsland_Text_Biker3Defeat::
-	.string "… … …   … … …$"
+	.string "... ... ...   ... ... ...$"
 
 ThreeIsland_Text_Biker3PostBattle::
 	.string "Boss, I'm telling you, you've gotta\n"
@@ -511,7 +511,7 @@ ThreeIsland_Text_PaxtonPostBattle::
 ThreeIsland_Text_ThankYouOhYourMonGotHurt::
 	.string "Thank you! Those goons were\n"
 	.string "nothing but bad trouble.\p"
-	.string "Oh, look, your POKeMON got hurt\n"
+	.string "Oh, look, your POKEMON got hurt\n"
 	.string "on my account.$"
 
 ThreeIsland_Text_GivenFullRestore::
@@ -524,14 +524,14 @@ ThreeIsland_Text_OhYourBagIsFull::
 
 ThreeIsland_Text_YouveGotImpressiveMons::
 	.string "You've got seriously impressive\n"
-	.string "POKeMON with you.$"
+	.string "POKEMON with you.$"
 
 ThreeIsland_Text_LostelleWentOffTowardsBondBridge::
 	.string "It'd be fantastic if someone as\n"
 	.string "strong as you lived here.\p"
 	.string "I hope you'll at least stay here\n"
 	.string "a while.\p"
-	.string "…I beg your pardon?\n"
+	.string "...I beg your pardon?\n"
 	.string "You're looking for LOSTELLE?\p"
 	.string "LOSTELLE went off towards BOND\n"
 	.string "BRIDGE a while ago.$"

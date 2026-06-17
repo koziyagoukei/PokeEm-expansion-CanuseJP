@@ -22,9 +22,9 @@ RustboroCity_CuttersHouse_EventScript_Lass::
 	end
 
 RustboroCity_CuttersHouse_Text_YouCanPutThisHMToGoodUse:
-	.string "That determined expression…\n"
-	.string "That limber way you move…\l"
-	.string "And your well-trained POKeMON…\p"
+	.string "That determined expression...\n"
+	.string "That limber way you move...\l"
+	.string "And your well-trained POKEMON...\p"
 	.string "You're obviously a skilled TRAINER!\p"
 	.string "No, wait, don't say a word.\n"
 	.string "I can tell just by looking at you.\p"
@@ -37,8 +37,8 @@ RustboroCity_CuttersHouse_Text_ExplainCut:
 	.string "That HIDDEN MACHINE, or HM for\n"
 	.string "short, is CUT.\p"
 	.string "An HM move is one that can be used\n"
-	.string "by POKeMON outside of battle.\p"
-	.string "Any POKeMON that's learned CUT can\n"
+	.string "by POKEMON outside of battle.\p"
+	.string "Any POKEMON that's learned CUT can\n"
 	.string "chop down thin trees if the TRAINER\l"
 	.string "has earned the STONE BADGE.\p"
 	.string "And, unlike a TM, an HM can be used\n"
@@ -47,6 +47,6 @@ RustboroCity_CuttersHouse_Text_ExplainCut:
 RustboroCity_CuttersHouse_Text_DadHelpedClearLandOfTrees:
 	.string "When they were expanding the city of\n"
 	.string "RUSTBORO, my dad helped out.\p"
-	.string "He made his POKeMON use CUT to clear\n"
+	.string "He made his POKEMON use CUT to clear\n"
 	.string "the land of trees.$"
 

@@ -59,19 +59,19 @@ CeladonCity_DepartmentStore_5F_Vitamins::
 	end
 
 CeladonCity_DepartmentStore_5F_Text_ExplainStatEnhancers::
-	.string "POKeMON stat enhancers can be\n"
+	.string "POKEMON stat enhancers can be\n"
 	.string "bought only here.\p"
 	.string "HP UP increases the base HP of a\n"
-	.string "POKeMON.\p"
+	.string "POKEMON.\p"
 	.string "CALCIUM raises the base SP. ATK\n"
-	.string "stat of one POKeMON.\p"
+	.string "stat of one POKEMON.\p"
 	.string "ZINC boosts the base SP. DEF stat\n"
-	.string "of one POKeMON.\p"
+	.string "of one POKEMON.\p"
 	.string "CARBOS enhances the base SPEED\n"
 	.string "stat.$"
 
 CeladonCity_DepartmentStore_5F_Text_HereForStatEnhancers::
-	.string "I'm here for POKeMON stat\n"
+	.string "I'm here for POKEMON stat\n"
 	.string "enhancers.\p"
 	.string "PROTEIN increases the base ATTACK\n"
 	.string "power.\p"

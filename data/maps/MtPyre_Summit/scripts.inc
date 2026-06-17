@@ -428,10 +428,10 @@ MtPyre_Summit_Text_Grunt1Intro:
 
 MtPyre_Summit_Text_Grunt1Defeat:
 	.string "I thought you were one of the MAGMAS\n"
-	.string "who happened to come back…$"
+	.string "who happened to come back...$"
 
 MtPyre_Summit_Text_Grunt1PostBattle:
-	.string "Yeah, so you are strong…\n"
+	.string "Yeah, so you are strong...\n"
 	.string "But there're a lot of us!$"
 
 MtPyre_Summit_Text_Grunt2Intro:
@@ -443,22 +443,22 @@ MtPyre_Summit_Text_Grunt2Intro:
 	.string "to take on us toughies!$"
 
 MtPyre_Summit_Text_Grunt2Defeat:
-	.string "Urgh… I should've let you take on\n"
-	.string "TEAM MAGMA first…$"
+	.string "Urgh... I should've let you take on\n"
+	.string "TEAM MAGMA first...$"
 
 MtPyre_Summit_Text_Grunt2PostBattle:
 	.string "You don't know anything!\n"
 	.string "So why are you messing with us?$"
 
 MtPyre_Summit_Text_Grunt3Intro:
-	.string "You…\n"
+	.string "You...\n"
 	.string "We saw you at MT. CHIMNEY.\p"
 	.string "You don't belong to either TEAM,\n"
 	.string "so why would you be here?$"
 
 MtPyre_Summit_Text_Grunt3Defeat:
 	.string "If you're going to mess with anyone,\n"
-	.string "let it be TEAM MAGMA…$"
+	.string "let it be TEAM MAGMA...$"
 
 MtPyre_Summit_Text_Grunt3PostBattle:
 	.string "Heh, it doesn't matter!\n"
@@ -475,7 +475,7 @@ MtPyre_Summit_Text_Grunt4Intro:
 
 MtPyre_Summit_Text_Grunt4Defeat:
 	.string "If you want to join TEAM AQUA that\n"
-	.string "badly, we can consider it…$"
+	.string "badly, we can consider it...$"
 
 MtPyre_Summit_Text_Grunt4PostBattle:
 	.string "We have a great combination going\n"
@@ -484,24 +484,24 @@ MtPyre_Summit_Text_Grunt4PostBattle:
 MtPyre_Summit_Text_ArchieWeGotTheOrbLetsGo:
 	.string "ARCHIE: TEAM MAGMA's MAXIE got ahead\n"
 	.string "of us, but we also got what we wanted.\p"
-	.string "The RED ORB preserved at MT. PYRE…\n"
+	.string "The RED ORB preserved at MT. PYRE...\n"
 	.string "I, ARCHIE, now have it in my possession!\p"
-	.string "Fufufu… Now we can bring our ultimate\n"
+	.string "Fufufu... Now we can bring our ultimate\n"
 	.string "objective to fruition!\p"
 	.string "Okay, TEAM!\n"
 	.string "We're pulling out!$"
 
 MtPyre_Summit_Text_BothOrbsTakenMagmaLeftThis:
-	.string "Oh, no…\n"
-	.string "This cannot happen…\p"
+	.string "Oh, no...\n"
+	.string "This cannot happen...\p"
 	.string "Not only the BLUE ORB, but even\n"
-	.string "the RED ORB has been taken…\p"
+	.string "the RED ORB has been taken...\p"
 	.string "The BLUE ORB and RED ORB must never\n"
 	.string "be separated. They belong together.\p"
 	.string "What are those men trying to do with\n"
 	.string "the two ORBS?\p"
-	.string "… … … … … …\n"
-	.string "… … … … … …\p"
+	.string "... ... ... ... ... ...\n"
+	.string "... ... ... ... ... ...\p"
 	.string "Oh, yes. Was it TEAM MAGMA who came\n"
 	.string "and took the BLUE ORB first?\p"
 	.string "Well, in their haste, they left this\n"
@@ -513,61 +513,61 @@ MtPyre_Summit_Text_BothOrbsTakenMagmaLeftThis:
 
 MtPyre_Summit_Text_OrbsHaveBeenTaken:
 	.string "The BLUE ORB and RED ORB taken by\n"
-	.string "those sinister men…\p"
-	.string "They must never be apart…\n"
-	.string "I fear something terrible will happen…$"
+	.string "those sinister men...\p"
+	.string "They must never be apart...\n"
+	.string "I fear something terrible will happen...$"
 
 MtPyre_Summit_Text_GroudonKyogreAwakened:
-	.string "Oh, my goodness…\p"
+	.string "Oh, my goodness...\p"
 	.string "You say that both GROUDON and KYOGRE\n"
 	.string "have been awakened?\p"
 	.string "It is said that the BLUE ORB and\n"
 	.string "the RED ORB quelled the rage of\l"
-	.string "the two POKeMON…\p"
+	.string "the two POKEMON...\p"
 	.string "It is also said that the true owner\n"
 	.string "of the ORBS still exists.\p"
 	.string "However, no one knows who, or what\n"
 	.string "exactly, the ORBS belong to.\p"
 	.string "It could be a human, or perhaps\n"
-	.string "a POKeMON, but no one knows.$"
+	.string "a POKEMON, but no one knows.$"
 
 MtPyre_Summit_Text_ThoseTwoMenReturnedOrbs:
 	.string "The two men who took the ORBS came\n"
 	.string "back to return them on their own.\p"
-	.string "Those men…\n"
-	.string "Perhaps they are not so evil after all…$"
+	.string "Those men...\n"
+	.string "Perhaps they are not so evil after all...$"
 
 MtPyre_Summit_Text_SuperAncientPokemonTaughtUs:
 	.string "The embodiments of the land, sea,\n"
-	.string "and the sky…\p"
+	.string "and the sky...\p"
 	.string "That is said to be the identities of\n"
-	.string "the super-ancient POKeMON…\p"
+	.string "the super-ancient POKEMON...\p"
 	.string "In the same way that we humans and\n"
-	.string "POKeMON have life, our world, too,\l"
-	.string "is alive…\p"
-	.string "The super-ancient POKeMON have\n"
-	.string "taught us that…$"
+	.string "POKEMON have life, our world, too,\l"
+	.string "is alive...\p"
+	.string "The super-ancient POKEMON have\n"
+	.string "taught us that...$"
 
 MtPyre_Summit_Text_WillYouHearOutMyTale:
 	.string "MT. PYRE is where we calm the spirits\n"
-	.string "of POKeMON that have passed on…\p"
+	.string "of POKEMON that have passed on...\p"
 	.string "This is a high place where one can\n"
-	.string "see all of HOENN…\p"
-	.string "The disembodied spirits of POKeMON\n"
-	.string "must find solace here…\p"
-	.string "Is it coincidence that you are here…\p"
+	.string "see all of HOENN...\p"
+	.string "The disembodied spirits of POKEMON\n"
+	.string "must find solace here...\p"
+	.string "Is it coincidence that you are here...\p"
 	.string "Will you hear out my tale? A tale long\n"
 	.string "told in the HOENN region?$"
 
 MtPyre_Summit_Text_GroudonKyogreTale:
-	.string "It happened long, long ago…\p"
+	.string "It happened long, long ago...\p"
 	.string "The world was wracked by a ferocious\n"
-	.string "clash between the POKeMON of the land\l"
-	.string "and the POKeMON of the sea…\p"
-	.string "The POKeMON of the land raised\n"
-	.string "mountains and created continents…\p"
-	.string "The POKeMON of the sea raised huge\n"
-	.string "waves and carved out oceans…\p"
+	.string "clash between the POKEMON of the land\l"
+	.string "and the POKEMON of the sea...\p"
+	.string "The POKEMON of the land raised\n"
+	.string "mountains and created continents...\p"
+	.string "The POKEMON of the sea raised huge\n"
+	.string "waves and carved out oceans...\p"
 	.string "Their fierce duel raged without end.\p"
 	.string "The world was engulfed in massive\n"
 	.string "infernos and vicious storms.\p"
@@ -577,41 +577,41 @@ MtPyre_Summit_Text_GroudonKyogreTale:
 	.string "becalmed the enraged adversaries.\p"
 	.string "The pair, made docile, dove deep into\n"
 	.string "the sea where eventually they\l"
-	.string "disappeared…$"
+	.string "disappeared...$"
 
 MtPyre_Summit_Text_WellThatTooIsFine:
-	.string "I see…\n"
-	.string "Well, that, too, is fine…$"
+	.string "I see...\n"
+	.string "Well, that, too, is fine...$"
 
 MtPyre_Summit_Text_MaxieSilence:
-	.string "MAXIE: {PLAYER}…\p"
-	.string "… … … … … …\n"
-	.string "… … … … … …$"
+	.string "MAXIE: {PLAYER}...\p"
+	.string "... ... ... ... ... ...\n"
+	.string "... ... ... ... ... ...$"
 
 MtPyre_Summit_Text_HearTheNewLegendOfHoenn:
 	.string "It is my role to pass on the legends\n"
 	.string "of HOENN to future generations.\p"
 	.string "And the crisis that just ended in\n"
-	.string "SOOTOPOLIS rewrote a legend…\p"
+	.string "SOOTOPOLIS rewrote a legend...\p"
 	.string "Have you the time to hear the new\n"
 	.string "legend of HOENN?$"
 
 MtPyre_Summit_Text_HoennTrioTale:
-	.string "It happened long, long ago…\p"
+	.string "It happened long, long ago...\p"
 	.string "The world was wracked by a ferocious\n"
-	.string "clash between the POKeMON of the land\l"
-	.string "and the POKeMON of the sea…\p"
-	.string "The POKeMON of the land raised\n"
-	.string "mountains and created continents…\p"
-	.string "The POKeMON of the sea raised huge\n"
-	.string "waves and carved out oceans…\p"
+	.string "clash between the POKEMON of the land\l"
+	.string "and the POKEMON of the sea...\p"
+	.string "The POKEMON of the land raised\n"
+	.string "mountains and created continents...\p"
+	.string "The POKEMON of the sea raised huge\n"
+	.string "waves and carved out oceans...\p"
 	.string "Their fierce duel raged without end.\p"
 	.string "The world was engulfed in massive\n"
 	.string "fires and vicious storms.\p"
-	.string "It was then that the POKeMON of\n"
+	.string "It was then that the POKEMON of\n"
 	.string "the sky descended from a storm.\p"
-	.string "The POKeMON, shining a vivid green,\n"
-	.string "becalmed the two enraged POKeMON.\p"
-	.string "Then, its duty done, the green POKeMON\n"
-	.string "flew off into the wild blue yonder…$"
+	.string "The POKEMON, shining a vivid green,\n"
+	.string "becalmed the two enraged POKEMON.\p"
+	.string "Then, its duty done, the green POKEMON\n"
+	.string "flew off into the wild blue yonder...$"
 

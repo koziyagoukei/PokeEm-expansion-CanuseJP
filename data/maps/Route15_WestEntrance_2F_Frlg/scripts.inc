@@ -60,11 +60,11 @@ Route15_WestEntrance_2F_Text_GiveItemIfCaughtEnough::
 	.string "{STR_VAR_2} for you.\p"
 	.string "So, {PLAYER}, let me ask you.\p"
 	.string "Have you gathered data on at least\n"
-	.string "{STR_VAR_1} kinds of POKeMON?$"
+	.string "{STR_VAR_1} kinds of POKEMON?$"
 
 Route15_WestEntrance_2F_Text_GreatHereYouGo::
 	.string "Great! You have caught or owned\n"
-	.string "{STR_VAR_3} kinds of POKeMON!\p"
+	.string "{STR_VAR_3} kinds of POKEMON!\p"
 	.string "Congratulations!\n"
 	.string "Here you go!$"
 
@@ -74,20 +74,20 @@ Route15_WestEntrance_2F_Text_ReceivedItemFromAide::
 
 Route15_WestEntrance_2F_Text_ExplainExpShare::
 	.string "EXP. SHARE is an item to be held\n"
-	.string "by a POKeMON.\p"
-	.string "The POKeMON will receive a share\n"
+	.string "by a POKEMON.\p"
+	.string "The POKEMON will receive a share\n"
 	.string "of the EXP. Points without having\l"
 	.string "to battle.$"
 
 Route15_WestEntrance_2F_Text_LargeShiningBird::
 	.string "Let's see what the binoculars have\n"
-	.string "to show…\p"
+	.string "to show...\p"
 	.string "A large, shining bird is flying\n"
 	.string "toward the sea.$"
 
 Route15_WestEntrance_2F_Text_SmallIslandOnHorizon::
 	.string "Let's see what the binoculars have\n"
-	.string "to show…\p"
+	.string "to show...\p"
 	.string "It looks like a small island on\n"
 	.string "the horizon!$"
 

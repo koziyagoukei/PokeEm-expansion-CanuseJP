@@ -922,10 +922,10 @@ LittlerootTown_Text_WaitPlayer:
 LittlerootTown_Text_WearTheseRunningShoes:
 	.string "MOM: {PLAYER}! {PLAYER}! Did you\n"
 	.string "introduce yourself to PROF. BIRCH?\p"
-	.string "Oh! What an adorable POKeMON!\n"
+	.string "Oh! What an adorable POKEMON!\n"
 	.string "You got it from PROF. BIRCH. How nice!\p"
 	.string "You're your father's child, all right.\n"
-	.string "You look good together with POKeMON!\p"
+	.string "You look good together with POKEMON!\p"
 	.string "Here, honey! If you're going out on an\n"
 	.string "adventure, wear these RUNNING SHOES.\p"
 	.string "They'll put a zip in your step!$"
@@ -937,48 +937,48 @@ LittlerootTown_Text_SwitchShoesWithRunningShoes:
 LittlerootTown_Text_ExplainRunningShoes:
 	.string "MOM: {PLAYER}, those shoes came with\n"
 	.string "instructions.\p"
-	.string "“Press the B Button while wearing these\n"
+	.string ""Press the B Button while wearing these\n"
 	.string "RUNNING SHOES to run extra-fast!\p"
-	.string "“Slip on these RUNNING SHOES and race\n"
-	.string "in the great outdoors!”$"
+	.string ""Slip on these RUNNING SHOES and race\n"
+	.string "in the great outdoors!"$"
 
 LittlerootTown_Text_ComeHomeIfAnythingHappens:
-	.string "… … … … … … … …\n"
-	.string "… … … … … … … …\p"
+	.string "... ... ... ... ... ... ... ...\n"
+	.string "... ... ... ... ... ... ... ...\p"
 	.string "To think that you have your very own\n"
-	.string "POKeMON now…\l"
+	.string "POKEMON now...\l"
 	.string "Your father will be overjoyed.\p"
-	.string "…But please be careful.\n"
+	.string "...But please be careful.\n"
 	.string "If anything happens, you can come home.\p"
 	.string "Go on, go get them, honey!$"
 
 LittlerootTown_Text_CanUsePCToStoreItems:
 	.string "If you use a PC, you can store items\n"
-	.string "and POKeMON.\p"
+	.string "and POKEMON.\p"
 	.string "The power of science is staggering!$"
 
 LittlerootTown_Text_BirchSpendsDaysInLab:
 	.string "PROF. BIRCH spends days in his LAB\n"
 	.string "studying, then he'll suddenly go out in\l"
-	.string "the wild to do more research…\p"
+	.string "the wild to do more research...\p"
 	.string "When does PROF. BIRCH spend time\n"
 	.string "at home?$"
 
 LittlerootTown_Text_IfYouGoInGrassPokemonWillJumpOut:
 	.string "Um, um, um!\p"
 	.string "If you go outside and go in the grass,\n"
-	.string "wild POKeMON will jump out!$"
+	.string "wild POKEMON will jump out!$"
 
 LittlerootTown_Text_DangerousIfYouDontHavePokemon:
 	.string "It's dangerous if you don't have\n"
-	.string "your own POKeMON.$"
+	.string "your own POKEMON.$"
 
 LittlerootTown_Text_CanYouGoSeeWhatsHappening:
 	.string "Um, hi!\p"
-	.string "There are scary POKeMON outside!\n"
+	.string "There are scary POKEMON outside!\n"
 	.string "I can hear their cries!\p"
 	.string "I want to go see what's going on,\n"
-	.string "but I don't have any POKeMON…\p"
+	.string "but I don't have any POKEMON...\p"
 	.string "Can you go see what's happening\n"
 	.string "for me?$"
 
@@ -987,15 +987,15 @@ LittlerootTown_Text_YouSavedBirch:
 	.string "I'm so glad!$"
 
 LittlerootTown_Text_GoodLuckCatchingPokemon:
-	.string "Are you going to catch POKeMON?\n"
+	.string "Are you going to catch POKEMON?\n"
 	.string "Good luck!$"
 
 LittlerootTown_Text_TownSign:
 	.string "LITTLEROOT TOWN\n"
-	.string "“A town that can't be shaded any hue.”$"
+	.string ""A town that can't be shaded any hue."$"
 
 LittlerootTown_Text_ProfBirchsLab:
-	.string "PROF. BIRCH'S POKeMON LAB$"
+	.string "PROF. BIRCH'S POKEMON LAB$"
 
 LittlerootTown_Text_PlayersHouse:
 	.string "{PLAYER}'s HOUSE$"

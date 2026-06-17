@@ -59,10 +59,10 @@ FallarborTown_MoveRelearnersHouse_EventScript_ComeBackWithHeartScale::
 
 FallarborTown_MoveRelearnersHouse_Text_ImTheMoveTutor:
 	.string "I'm the MOVE TUTOR.\p"
-	.string "I know all the moves that POKeMON\n"
+	.string "I know all the moves that POKEMON\n"
 	.string "learn--every one of them--and I can\l"
-	.string "teach POKeMON those moves.\p"
-	.string "I can teach a move to a POKeMON\n"
+	.string "teach POKEMON those moves.\p"
+	.string "I can teach a move to a POKEMON\n"
 	.string "of yours if you'd like.\p"
 	.string "I'll do it for a HEART SCALE.\n"
 	.string "I'm collecting those now.$"
@@ -74,22 +74,22 @@ FallarborTown_MoveRelearnersHouse_Text_ThatsAHeartScaleWantMeToTeachMove:
 	.string "a move?$"
 
 FallarborTown_MoveRelearnersHouse_Text_TutorWhichMon:
-	.string "Which POKeMON needs tutoring?$"
+	.string "Which POKEMON needs tutoring?$"
 
 FallarborTown_MoveRelearnersHouse_Text_TeachWhichMove:
 	.string "Which move should I teach?$"
 
 FallarborTown_MoveRelearnersHouse_Text_DontHaveMoveToTeachPokemon:
-	.string "Sorry…\p"
+	.string "Sorry...\p"
 	.string "It doesn't appear as if I have any move\n"
-	.string "I can teach that POKeMON.$"
+	.string "I can teach that POKEMON.$"
 
 FallarborTown_MoveRelearnersHouse_Text_HandedOverHeartScale:
 	.string "{PLAYER} handed over one HEART SCALE\n"
 	.string "in exchange.$"
 
 FallarborTown_MoveRelearnersHouse_Text_ComeBackWithHeartScale:
-	.string "If your POKeMON need to learn a move,\n"
+	.string "If your POKEMON need to learn a move,\n"
 	.string "come back with a HEART SCALE.$"
 
 FallarborTown_MoveRelearnersHouse_Text_CantTeachEgg:

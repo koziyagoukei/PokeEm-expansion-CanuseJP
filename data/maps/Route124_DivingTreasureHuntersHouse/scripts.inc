@@ -295,12 +295,12 @@ Route124_DivingTreasureHuntersHouse_Text_HaveYouSeenAnyShards:
 
 Route124_DivingTreasureHuntersHouse_Text_YouHaventGotAnyShards:
 	.string "You haven't got any treasures\n"
-	.string "for me…\p"
+	.string "for me...\p"
 	.string "If you see any SHARDS, like the RED\n"
 	.string "SHARD, you've got to trade it with me!$"
 
 Route124_DivingTreasureHuntersHouse_Text_ThatsAShardIllTradeYou:
-	.string "Oh, hey! That…\n"
+	.string "Oh, hey! That...\n"
 	.string "That's a SHARD! I'm looking for those!\p"
 	.string "Oh, man, you've got to trade that\n"
 	.string "with me! I'll give you something good!$"

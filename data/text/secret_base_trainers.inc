@@ -11,11 +11,11 @@ SecretBase_Text_Trainer0AcceptBattle:
 
 SecretBase_Text_Trainer0DeclineBattle:
 	.string "Hunh?\n"
-	.string "Oh, you can't now…$"
+	.string "Oh, you can't now...$"
 
 SecretBase_Text_Trainer0Defeated::
 	.string "Waaargh! You're too strong!\n"
-	.string "About me losing… Please keep it secret!$"
+	.string "About me losing... Please keep it secret!$"
 
 SecretBase_Text_Trainer0PostBattle:
 	.string "What do you think of my SECRET BASE?\n"
@@ -38,11 +38,11 @@ SecretBase_Text_Trainer5AcceptBattle:
 	.string "Okay, here goes!$"
 
 SecretBase_Text_Trainer5DeclineBattle:
-	.string "Oh…\n"
+	.string "Oh...\n"
 	.string "You can't now, okay.$"
 
 SecretBase_Text_Trainer5Defeated::
-	.string "Hmmm… It's our loss…\n"
+	.string "Hmmm... It's our loss...\n"
 	.string "But don't tell anyone!\l"
 	.string "It's a confidential secret!$"
 
@@ -87,7 +87,7 @@ SecretBase_Text_Trainer1PreChampion:
 	.string "I finally got to use it!$"
 
 SecretBase_Text_Trainer6Intro:
-	.string "Welcome to my POKeMON LAB.\p"
+	.string "Welcome to my POKEMON LAB.\p"
 	.string "I carry out research on battling in\n"
 	.string "secrecy.\p"
 	.string "Would you like to see how strong I am?$"
@@ -100,7 +100,7 @@ SecretBase_Text_Trainer6DeclineBattle:
 	.string "Some other time, then!$"
 
 SecretBase_Text_Trainer6Defeated::
-	.string "Hmm… I've still got lots to learn.\n"
+	.string "Hmm... I've still got lots to learn.\n"
 	.string "I have to study some more.$"
 
 SecretBase_Text_Trainer6PostBattle:
@@ -108,7 +108,7 @@ SecretBase_Text_Trainer6PostBattle:
 	.string "Please come back again tomorrow.$"
 
 SecretBase_Text_Trainer6PreChampion:
-	.string "Welcome to my POKeMON LAB.\p"
+	.string "Welcome to my POKEMON LAB.\p"
 	.string "I carry out research on battling in\n"
 	.string "secrecy.$"
 
@@ -144,10 +144,10 @@ SecretBase_Text_Trainer2PreChampion:
 SecretBase_Text_Trainer7Intro:
 	.string "I simply adore shopping for decorations\n"
 	.string "and furniture.\p"
-	.string "I also love raising POKeMON just\n"
+	.string "I also love raising POKEMON just\n"
 	.string "as much.\p"
 	.string "If you would be so kind, will you battle\n"
-	.string "with my POKeMON?$"
+	.string "with my POKEMON?$"
 
 SecretBase_Text_Trainer7AcceptBattle:
 	.string "Thank you.\n"
@@ -155,10 +155,10 @@ SecretBase_Text_Trainer7AcceptBattle:
 
 SecretBase_Text_Trainer7DeclineBattle:
 	.string "Oh.\n"
-	.string "How disappointing…$"
+	.string "How disappointing...$"
 
 SecretBase_Text_Trainer7Defeated::
-	.string "I concede…$"
+	.string "I concede...$"
 
 SecretBase_Text_Trainer7PostBattle:
 	.string "That was all in good fun!\n"
@@ -167,7 +167,7 @@ SecretBase_Text_Trainer7PostBattle:
 SecretBase_Text_Trainer7PreChampion:
 	.string "I simply adore shopping for decorations\n"
 	.string "and furniture.\p"
-	.string "I also love raising POKeMON just\n"
+	.string "I also love raising POKEMON just\n"
 	.string "as much.$"
 
 SecretBase_Text_Trainer3Intro:
@@ -181,11 +181,11 @@ SecretBase_Text_Trainer3AcceptBattle:
 	.string "I'm not going down easily!$"
 
 SecretBase_Text_Trainer3DeclineBattle:
-	.string "Oh… Are you maybe tired from searching\n"
+	.string "Oh... Are you maybe tired from searching\n"
 	.string "for this place?$"
 
 SecretBase_Text_Trainer3Defeated::
-	.string "I went down…$"
+	.string "I went down...$"
 
 SecretBase_Text_Trainer3PostBattle:
 	.string "Where's your SECRET BASE?\n"
@@ -227,7 +227,7 @@ SecretBase_Text_Trainer8PreChampion:
 SecretBase_Text_Trainer4Intro:
 	.string "I found a spot I liked, and I did it up\n"
 	.string "with my favorite decorations.\p"
-	.string "I raise my favorite POKeMON and grow\n"
+	.string "I raise my favorite POKEMON and grow\n"
 	.string "stronger with it.\p"
 	.string "That's what I do.\n"
 	.string "Want to battle with me?$"
@@ -249,7 +249,7 @@ SecretBase_Text_Trainer4PostBattle:
 SecretBase_Text_Trainer4PreChampion:
 	.string "I found a spot I liked, and I did it up\n"
 	.string "with my favorite decorations.\p"
-	.string "I raise my favorite POKeMON and grow\n"
+	.string "I raise my favorite POKEMON and grow\n"
 	.string "stronger with it.\p"
 	.string "Every day is a great day.$"
 
@@ -271,7 +271,7 @@ SecretBase_Text_Trainer9DeclineBattle:
 
 SecretBase_Text_Trainer9Defeated::
 	.string "You're supremely talented!\n"
-	.string "Your power seems to be limitless…$"
+	.string "Your power seems to be limitless...$"
 
 SecretBase_Text_Trainer9PostBattle:
 	.string "What did you think of my style?\n"

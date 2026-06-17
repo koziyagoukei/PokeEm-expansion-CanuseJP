@@ -39,7 +39,7 @@ Route20_Text_BarryDefeat::
 	.string "Splash!$"
 
 Route20_Text_BarryPostBattle::
-	.string "I wish I could ride my POKeMON.\n"
+	.string "I wish I could ride my POKEMON.\n"
 	.string "I bet you're not tired.$"
 
 Route20_Text_ShirleyIntro::
@@ -81,10 +81,10 @@ Route20_Text_DeanDefeat::
 
 Route20_Text_DeanPostBattle::
 	.string "I should've been buffing up my\n"
-	.string "POKeMON, not me!$"
+	.string "POKEMON, not me!$"
 
 Route20_Text_DarrinIntro::
-	.string "Why are you riding a POKeMON?\n"
+	.string "Why are you riding a POKEMON?\n"
 	.string "Can't you swim?$"
 
 Route20_Text_DarrinDefeat::
@@ -92,10 +92,10 @@ Route20_Text_DarrinDefeat::
 	.string "Torpedoed!$"
 
 Route20_Text_DarrinPostBattle::
-	.string "Riding a POKeMON sure looks fun!$"
+	.string "Riding a POKEMON sure looks fun!$"
 
 Route20_Text_RogerIntro::
-	.string "I rode my bird POKeMON here.$"
+	.string "I rode my bird POKEMON here.$"
 
 Route20_Text_RogerDefeat::
 	.string "Oh, no!\n"
@@ -124,14 +124,14 @@ Route20_Text_MissyDefeat::
 	.string "I'm so disappointed!$"
 
 Route20_Text_MissyPostBattle::
-	.string "POKeMON have taken over an\n"
+	.string "POKEMON have taken over an\n"
 	.string "abandoned mansion on CINNABAR.\p"
-	.string "They call it the POKeMON MANSION\n"
+	.string "They call it the POKEMON MANSION\n"
 	.string "now.$"
 
 Route20_Text_MelissaIntro::
 	.string "CINNABAR, in the west, has a LAB\n"
-	.string "for POKeMON.\p"
+	.string "for POKEMON.\p"
 	.string "My daddy works there.$"
 
 Route20_Text_MelissaDefeat::
@@ -147,7 +147,7 @@ Route20_Text_SeafoamIslands::
 	.string "SEAFOAM ISLANDS$"
 
 Route20_Text_MistyTrainsHere::
-	.string "Strong TRAINERS and WATER POKeMON\n"
+	.string "Strong TRAINERS and WATER POKEMON\n"
 	.string "are common sights in these parts.\p"
 	.string "They say that MISTY of the\n"
 	.string "CERULEAN GYM trains here.$"

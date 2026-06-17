@@ -36,7 +36,7 @@ Route19_Text_MatthewDefeat::
 	.string "Belly flop!$"
 
 Route19_Text_MatthewPostBattle::
-	.string "I can beat even marine POKeMON\n"
+	.string "I can beat even marine POKEMON\n"
 	.string "at swimming.$"
 
 Route19_Text_DouglasIntro::
@@ -50,7 +50,7 @@ Route19_Text_DouglasPostBattle::
 	.string "yonder!$"
 
 Route19_Text_DavidIntro::
-	.string "I tried diving for POKeMON, but it\n"
+	.string "I tried diving for POKEMON, but it\n"
 	.string "was a no-go.$"
 
 Route19_Text_DavidDefeat::
@@ -58,7 +58,7 @@ Route19_Text_DavidDefeat::
 
 Route19_Text_DavidPostBattle::
 	.string "I guess you have to fish for sea\n"
-	.string "POKeMON.$"
+	.string "POKEMON.$"
 
 Route19_Text_TonyIntro::
 	.string "I look at the sea to forget all\n"
@@ -81,8 +81,8 @@ Route19_Text_AnyaDefeat::
 
 Route19_Text_AnyaPostBattle::
 	.string "It's still a long way to go to\n"
-	.string "SEAFOAM ISLANDS…\p"
-	.string "I want to go back to FUCHSIA…$"
+	.string "SEAFOAM ISLANDS...\p"
+	.string "I want to go back to FUCHSIA...$"
 
 Route19_Text_AliceIntro::
 	.string "Swimming's great!\n"
@@ -105,17 +105,17 @@ Route19_Text_AxleDefeat::
 
 Route19_Text_AxlePostBattle::
 	.string "M-my legs! They cramped up!\n"
-	.string "Glub, glub…$"
+	.string "Glub, glub...$"
 
 Route19_Text_ConnieIntro::
-	.string "I swam here with my friends…\n"
-	.string "I'm tired…$"
+	.string "I swam here with my friends...\n"
+	.string "I'm tired...$"
 
 Route19_Text_ConnieDefeat::
-	.string "I'm exhausted…$"
+	.string "I'm exhausted...$"
 
 Route19_Text_ConniePostBattle::
-	.string "If I were to ride a POKeMON on\n"
+	.string "If I were to ride a POKEMON on\n"
 	.string "the sea, I'd like a LAPRAS.\p"
 	.string "LAPRAS is so big, I bet it\n"
 	.string "would keep me dry on water.$"
@@ -141,11 +141,11 @@ Route19_Text_LiaPostBattle::
 Route19_Text_LiaNotEnoughMons::
 	.string "LIA: I want to battle together\n"
 	.string "with my little brother.\p"
-	.string "Don't you have two POKeMON?$"
+	.string "Don't you have two POKEMON?$"
 
 Route19_Text_LucIntro::
 	.string "LUC: My big sis taught me how\n"
-	.string "to swim and train POKeMON.$"
+	.string "to swim and train POKEMON.$"
 
 Route19_Text_LucDefeat::
 	.string "LUC: Oh, wow!\n"
@@ -158,4 +158,4 @@ Route19_Text_LucPostBattle::
 Route19_Text_LucNotEnoughMons::
 	.string "LUC: I don't want to if I can't\n"
 	.string "battle you with my big sis.\p"
-	.string "Don't you have two POKeMON?$"
+	.string "Don't you have two POKEMON?$"

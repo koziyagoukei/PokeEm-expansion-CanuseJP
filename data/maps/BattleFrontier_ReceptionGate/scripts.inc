@@ -298,7 +298,7 @@ BattleFrontier_ReceptionGate_Text_FirstTimeHereThisWay:
 	.string "Please step this way!$"
 
 BattleFrontier_ReceptionGate_Text_WelcomeToBattleFrontier:
-	.string "The front lines of POKeMON battling!\n"
+	.string "The front lines of POKEMON battling!\n"
 	.string "Welcome to the BATTLE FRONTIER!$"
 
 BattleFrontier_ReceptionGate_Text_IssueFrontierPass:
@@ -385,7 +385,7 @@ BattleFrontier_ReceptionGate_Text_BattleFactoryInfo:
 
 BattleFrontier_ReceptionGate_Text_BattlePikeInfo:
 	.string "The BATTLE PIKE is the building shaped\n"
-	.string "like a POKeMON at the center-left of\l"
+	.string "like a POKEMON at the center-left of\l"
 	.string "the BATTLE FRONTIER.\p"
 	.string "An event called the Battle Choice\n"
 	.string "is conducted there.$"
@@ -426,11 +426,11 @@ BattleFrontier_ReceptionGate_Text_LevelModeInfo:
 	.string "two courses--Level 50 and Open Level.$"
 
 BattleFrontier_ReceptionGate_Text_Level50Info:
-	.string "The Level 50 course is open to POKeMON\n"
+	.string "The Level 50 course is open to POKEMON\n"
 	.string "up to and including Level 50.\p"
 	.string "Please keep in mind, however, that\n"
 	.string "no TRAINER you face will have any\l"
-	.string "POKeMON below Level 50.\p"
+	.string "POKEMON below Level 50.\p"
 	.string "This course is the entry level for\n"
 	.string "battles at the BATTLE FRONTIER.\p"
 	.string "To begin, we hope you will challenge\n"
@@ -438,30 +438,30 @@ BattleFrontier_ReceptionGate_Text_Level50Info:
 
 BattleFrontier_ReceptionGate_Text_OpenLevelInfo:
 	.string "The Open Level course places no limit\n"
-	.string "on the levels of POKeMON entering\l"
+	.string "on the levels of POKEMON entering\l"
 	.string "challenges.\p"
 	.string "The levels of your opponents will\n"
 	.string "be adjusted to match the levels of\l"
-	.string "your POKeMON.\p"
+	.string "your POKEMON.\p"
 	.string "However, no TRAINER you face will\n"
-	.string "have any POKeMON below Level 60.$"
+	.string "have any POKEMON below Level 60.$"
 
 BattleFrontier_ReceptionGate_Text_MonEntryInfo:
-	.string "Virtually any kind of POKeMON may take\n"
+	.string "Virtually any kind of POKEMON may take\n"
 	.string "on the challenges at all facilities.\p"
-	.string "EGGS and certain kinds of POKeMON,\n"
+	.string "EGGS and certain kinds of POKEMON,\n"
 	.string "however, are not permitted.\p"
-	.string "The numbers of POKeMON required for\n"
+	.string "The numbers of POKEMON required for\n"
 	.string "challenges will depend on the facility.\p"
 	.string "At all facilities, however, two or more\n"
-	.string "of the same kind of POKeMON are not\l"
+	.string "of the same kind of POKEMON are not\l"
 	.string "permitted.$"
 
 BattleFrontier_ReceptionGate_Text_HoldItemsInfo:
 	.string "When entering a challenge at a BATTLE\n"
-	.string "FRONTIER facility, POKeMON may not\l"
+	.string "FRONTIER facility, POKEMON may not\l"
 	.string "be holding the same kind of item.\p"
-	.string "Please make sure that all POKeMON\n"
+	.string "Please make sure that all POKEMON\n"
 	.string "entering a challenge are holding\l"
 	.string "different items.$"
 

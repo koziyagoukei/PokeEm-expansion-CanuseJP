@@ -1,11 +1,11 @@
 LilycoveCity_DepartmentStore_1F_Text_LotteryCornerDrawTicket:
-	.string "This is the POKeMON LOTTERY CORNER.\p"
+	.string "This is the POKEMON LOTTERY CORNER.\p"
 	.string "All shoppers at our DEPARTMENT STORE\n"
-	.string "get to draw a POKeMON LOTO TICKET.\p"
+	.string "get to draw a POKEMON LOTO TICKET.\p"
 	.string "If the LOTO TICKET's number matches\n"
-	.string "the ID number of any of your POKeMON,\l"
+	.string "the ID number of any of your POKEMON,\l"
 	.string "you will receive a fabulous gift.\p"
-	.string "Would you like to draw a POKeMON\n"
+	.string "Would you like to draw a POKEMON\n"
 	.string "LOTO TICKET?$"
 
 LilycoveCity_DepartmentStore_1F_Text_ComeBackTomorrow:
@@ -16,13 +16,13 @@ LilycoveCity_DepartmentStore_1F_Text_PleaseVisitAgain:
 
 LilycoveCity_DepartmentStore_1F_Text_PleasePickTicket:
 	.string "Please pick a LOTO TICKET.\n"
-	.string "…{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}…{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}…{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
+	.string "...{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}...{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}...{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
 
 LilycoveCity_DepartmentStore_1F_Text_TicketNumberIsXPleaseWait:
 	.string "The LOTO TICKET number is {STR_VAR_1}.\p"
 	.string "I need to run a check on this number\n"
 	.string "to see if it matches any of your\l"
-	.string "POKeMON's ID numbers. Please wait.$"
+	.string "POKEMON's ID numbers. Please wait.$"
 
 LilycoveCity_DepartmentStore_1F_Text_TicketMatchesPartyMon:
 	.string "Congratulations!\p"

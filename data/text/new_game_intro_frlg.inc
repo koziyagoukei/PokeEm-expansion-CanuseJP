@@ -189,23 +189,23 @@ gPikachuIntro_Text_Page3::
 gOakSpeech_Text_WelcomeToTheWorld::
 	.string "Hello, there!\n"
 	.string "Glad to meet you!\p"
-	.string "Welcome to the world of POKeMON!\p"
+	.string "Welcome to the world of POKEMON!\p"
 	.string "My name is OAK.\p"
 	.string "People affectionately refer to me\n"
-	.string "as the POKeMON PROFESSOR.\p$"
+	.string "as the POKEMON PROFESSOR.\p$"
 
 gOakSpeech_Text_ThisWorld::
-	.string "This world…$"
+	.string "This world...$"
 
 gOakSpeech_Text_IsInhabitedFarAndWide::
-	.string "…is inhabited far and wide by\n"
-	.string "creatures called POKeMON.\p$"
+	.string "...is inhabited far and wide by\n"
+	.string "creatures called POKEMON.\p$"
 
 gOakSpeech_Text_IStudyPokemon::
-	.string "For some people, POKeMON are pets.\n"
+	.string "For some people, POKEMON are pets.\n"
 	.string "Others use them for battling.\p"
-	.string "As for myself…\p"
-	.string "I study POKeMON as a profession.\p$"
+	.string "As for myself...\p"
+	.string "I study POKEMON as a profession.\p$"
 
 gOakSpeech_Text_TellMeALittleAboutYourself::
 	.string "But first, tell me a little about\n"
@@ -216,20 +216,20 @@ gOakSpeech_Text_YourNameWhatIsIt::
 	.string "What is it?\p$"
 
 gOakSpeech_Text_SoYourNameIsPlayer::
-	.string "Right…\n"
+	.string "Right...\n"
 	.string "So your name is {PLAYER}.$"
 
 gOakSpeech_Text_WhatWasHisName::
 	.string "This is my grandson.\p"
 	.string "He's been your rival since you both\n"
 	.string "were babies.\p"
-	.string "…Erm, what was his name now?$"
+	.string "...Erm, what was his name now?$"
 
 gOakSpeech_Text_YourRivalsNameWhatWasIt::
 	.string "Your rival's name, what was it now?$"
 
 gOakSpeech_Text_ConfirmRivalName::
-	.string "…Er, was it {RIVAL}?$"
+	.string "...Er, was it {RIVAL}?$"
 
 gOakSpeech_Text_RememberRivalsName::
 	.string "That's right! I remember now!\n"
@@ -237,7 +237,7 @@ gOakSpeech_Text_RememberRivalsName::
 
 gOakSpeech_Text_LetsGo::
 	.string "{PLAYER}!\p"
-	.string "Your very own POKeMON legend is\n"
+	.string "Your very own POKEMON legend is\n"
 	.string "about to unfold!\p"
 	.string "A world of dreams and adventures\n"
-	.string "with POKeMON awaits! Let's go!$"
+	.string "with POKEMON awaits! Let's go!$"

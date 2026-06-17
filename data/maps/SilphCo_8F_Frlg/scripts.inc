@@ -39,7 +39,7 @@ SilphCo_8F_EventScript_Grunt2::
 	end
 
 SilphCo_8F_Text_WonderIfSilphIsFinished::
-	.string "I wonder if SILPH is finished…$"
+	.string "I wonder if SILPH is finished...$"
 
 SilphCo_8F_Text_ThanksForSavingUs::
 	.string "Thanks for saving us!$"
@@ -51,7 +51,7 @@ SilphCo_8F_Text_Grunt1Defeat::
 	.string "Not enough grit!$"
 
 SilphCo_8F_Text_Grunt1PostBattle::
-	.string "If you don't turn back…\n"
+	.string "If you don't turn back...\n"
 	.string "I'll call for backup!$"
 
 SilphCo_8F_Text_ParkerIntro::
@@ -83,7 +83,7 @@ SilphCo_8F_Text_FloorSign::
 SilphCo_8F_Text_ToRocketBossMonsAreTools::
 	.string "TEAM ROCKET's BOSS is terribly\n"
 	.string "cruel!\p"
-	.string "To him, POKeMON are just tools to\n"
+	.string "To him, POKEMON are just tools to\n"
 	.string "be used.\p"
 	.string "What will happen if that tyrant\n"
-	.string "takes over our company…$"
+	.string "takes over our company...$"

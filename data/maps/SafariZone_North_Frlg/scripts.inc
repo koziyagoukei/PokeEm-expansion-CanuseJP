@@ -33,7 +33,7 @@ SafariZone_North_Text_Area2::
 
 SafariZone_North_Text_ZigzagThroughTallGrass::
 	.string "TRAINER TIPS\p"
-	.string "POKeMON hide in tall grass.\p"
+	.string "POKEMON hide in tall grass.\p"
 	.string "Zigzag through grassy areas to\n"
 	.string "flush them out.$"
 

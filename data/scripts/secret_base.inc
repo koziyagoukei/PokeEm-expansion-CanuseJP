@@ -720,11 +720,11 @@ SecretBase_Text_ToyTV:
 
 SecretBase_Text_SeedotTV:
 	.string "A toy TV shaped like a SEEDOT.\n"
-	.string "It looks ready to roll away on its own…$"
+	.string "It looks ready to roll away on its own...$"
 
 SecretBase_Text_SkittyTV:
 	.string "A toy TV shaped like a SKITTY.\n"
-	.string "It looks ready to stroll away…$"
+	.string "It looks ready to stroll away...$"
 
 SecretBase_Text_WouldYouLikeToMoveBases:
 	.string "You may only make one SECRET BASE.\p"

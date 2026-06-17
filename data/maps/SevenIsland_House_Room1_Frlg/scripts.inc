@@ -171,7 +171,7 @@ SevenIsland_House_Room1_EventScript_Box::
 
 SevenIsland_House_Room1_Text_OnlyEnjoymentWatchingBattles::
 	.string "I may not look like much now,\n"
-	.string "but when I was younger…\p"
+	.string "but when I was younger...\p"
 	.string "I flew everywhere, challenging\n"
 	.string "TRAINERS wherever I found them.\p"
 	.string "Now, my only source of enjoyment\n"
@@ -193,10 +193,10 @@ SevenIsland_House_Room1_Text_ChallengeVisitingTrainer::
 	.string "{STR_VAR_1}, am I right?$"
 
 SevenIsland_House_Room1_Text_OhYouWontBattle::
-	.string "Oh…\n"
-	.string "You won't battle…\p"
+	.string "Oh...\n"
+	.string "You won't battle...\p"
 	.string "I see, I see.\n"
-	.string "… …\p"
+	.string "... ...\p"
 	.string "Well, perhaps if you change your\n"
 	.string "mind, do come back.$"
 
@@ -205,12 +205,12 @@ SevenIsland_House_Room1_Text_LimitThreeMonsPerSide::
 	.string "You will battle for me?\p"
 	.string "It was worth my time moving the\n"
 	.string "box aside, then.\p"
-	.string "… …\n"
+	.string "... ...\n"
 	.string "But there is one slight problem.\p"
 	.string "This hidden room is not built very\n"
 	.string "sturdy.\p"
 	.string "Can I get you to limit it to\n"
-	.string "battles of three POKeMON per side?$"
+	.string "battles of three POKEMON per side?$"
 
 SevenIsland_House_Room1_Text_SaveProgressBeforeBattle::
 	.string "Fine! Before your battle, would\n"

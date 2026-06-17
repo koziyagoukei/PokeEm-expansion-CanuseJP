@@ -134,14 +134,14 @@ ViridianCity_Gym_Text_GiovanniPostBattle::
 	.string "Farewell!$"
 
 ViridianCity_Gym_Text_ExplainEarthBadgeTakeThis::
-	.string "The EARTHBADGE makes POKeMON of\n"
+	.string "The EARTHBADGE makes POKEMON of\n"
 	.string "any level obey without question.\p"
 	.string "It is evidence of your mastery as\n"
-	.string "a POKeMON TRAINER.\p"
+	.string "a POKEMON TRAINER.\p"
 	.string "With it, you can challenge the\n"
-	.string "POKeMON LEAGUE.\p"
+	.string "POKEMON LEAGUE.\p"
 	.string "Also, take this TM.\p"
-	.string "Consider it a gift for your POKeMON\n"
+	.string "Consider it a gift for your POKEMON\n"
 	.string "LEAGUE challenge.$"
 
 ViridianCity_Gym_Text_ReceivedTM26FromGiovanni::
@@ -153,7 +153,7 @@ ViridianCity_Gym_Text_ExplainTM26::
 	.string "It is a powerful attack that causes\n"
 	.string "a massive tremor.\p"
 	.string "I made it when I ran the GYM here,\n"
-	.string "far too long ago… $"
+	.string "far too long ago... $"
 
 ViridianCity_Gym_Text_YouDoNotHaveSpace::
 	.string "You do not have space for this!$"
@@ -181,7 +181,7 @@ ViridianCity_Gym_Text_AtsushiPostBattle::
 	.string "I'm still not worthy!$"
 
 ViridianCity_Gym_Text_JasonIntro::
-	.string "POKeMON and I, we make wonderful\n"
+	.string "POKEMON and I, we make wonderful\n"
 	.string "music together!$"
 
 ViridianCity_Gym_Text_JasonDefeat::
@@ -199,8 +199,8 @@ ViridianCity_Gym_Text_KiyoDefeat::
 	.string "Aiyah!$"
 
 ViridianCity_Gym_Text_KiyoPostBattle::
-	.string "If my POKeMON were as good at\n"
-	.string "karate as I…$"
+	.string "If my POKEMON were as good at\n"
+	.string "karate as I...$"
 
 ViridianCity_Gym_Text_WarrenIntro::
 	.string "The truly talented win with style.$"
@@ -210,7 +210,7 @@ ViridianCity_Gym_Text_WarrenDefeat::
 
 ViridianCity_Gym_Text_WarrenPostBattle::
 	.string "The LEADER will scold me for\n"
-	.string "losing this way…$"
+	.string "losing this way...$"
 
 ViridianCity_Gym_Text_TakashiIntro::
 	.string "I'm the KARATE KING!\n"
@@ -220,11 +220,11 @@ ViridianCity_Gym_Text_TakashiDefeat::
 	.string "Ayah!$"
 
 ViridianCity_Gym_Text_TakashiPostBattle::
-	.string "The POKeMON LEAGUE?\n"
+	.string "The POKEMON LEAGUE?\n"
 	.string "You? Don't get cocky!$"
 
 ViridianCity_Gym_Text_ColeIntro::
-	.string "Your POKeMON will cower at the\n"
+	.string "Your POKEMON will cower at the\n"
 	.string "crack of my whip!$"
 
 ViridianCity_Gym_Text_ColeDefeat::
@@ -244,7 +244,7 @@ ViridianCity_Gym_Text_SamuelDefeat::
 	.string "I was beaten?$"
 
 ViridianCity_Gym_Text_SamuelPostBattle::
-	.string "You can go on to the POKeMON\n"
+	.string "You can go on to the POKEMON\n"
 	.string "LEAGUE only by defeating our GYM\l"
 	.string "LEADER!$"
 
@@ -257,20 +257,20 @@ ViridianCity_Gym_Text_GymGuyAdvice::
 	.string "This will be the toughest of all\l"
 	.string "the GYM LEADERS.\p"
 	.string "Also, I heard that the TRAINERS\n"
-	.string "here like GROUND-type POKeMON.$"
+	.string "here like GROUND-type POKEMON.$"
 
 ViridianCity_Gym_Text_GymGuyPostVictory::
 	.string "Blow me away! GIOVANNI was the\n"
 	.string "GYM LEADER of VIRIDIAN?$"
 
 ViridianCity_Gym_Text_GymStatue::
-	.string "VIRIDIAN POKeMON GYM\n"
+	.string "VIRIDIAN POKEMON GYM\n"
 	.string "LEADER: ?\p"
 	.string "WINNING TRAINERS:\n"
 	.string "{RIVAL}$"
 
 ViridianCity_Gym_Text_GymStatuePlayerWon::
-	.string "VIRIDIAN POKeMON GYM\n"
+	.string "VIRIDIAN POKEMON GYM\n"
 	.string "LEADER: GIOVANNI\p"
 	.string "WINNING TRAINERS:\n"
 	.string "{RIVAL}, {PLAYER}$"

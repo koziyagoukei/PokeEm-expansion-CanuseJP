@@ -519,11 +519,11 @@ Route109_Text_ChillAtMyPapasSpot:
 	.string "chill at my papa's spot!$"
 
 Route109_Text_LittleKidsDartAround:
-	.string "Little kids can dart around so quickly…\p"
+	.string "Little kids can dart around so quickly...\p"
 	.string "You don't dare take your eyes off them\n"
 	.string "for an instant. It's very taxing.\p"
-	.string "Mine are with my POKeMON, so they\n"
-	.string "should be okay, but…$"
+	.string "Mine are with my POKEMON, so they\n"
+	.string "should be okay, but...$"
 
 Route109_Text_SandCastleTakingLongTime:
 	.string "Our sand castle's taking a long time\n"
@@ -544,7 +544,7 @@ Route109_Text_ZigzagoonPicksUpLitter:
 	.string "But, I get my ZIGZAGOON to pick up\n"
 	.string "litter from the shoreline at times.\p"
 	.string "Dirty water becomes rain and joins our\n"
-	.string "rivers, which we drink from…\p"
+	.string "rivers, which we drink from...\p"
 	.string "If we pollute the sea, it all comes\n"
 	.string "back to haunt us eventually.$"
 
@@ -553,12 +553,12 @@ Route109_Text_ZigzagoonCry:
 
 Route109_Text_SeashoreHouseSign:
 	.string "SEASHORE HOUSE\p"
-	.string "“May hot battles rage on hot sands!\n"
-	.string "The place for hot TRAINERS!”$"
+	.string ""May hot battles rage on hot sands!\n"
+	.string "The place for hot TRAINERS!"$"
 
 Route109_Text_TrainerTipsSign:
 	.string "TRAINER TIPS\p"
-	.string "POKeMON at the same level may not\n"
+	.string "POKEMON at the same level may not\n"
 	.string "always have identical stats.\p"
-	.string "POKeMON raised by TRAINERS are said\n"
-	.string "to grow stronger than wild POKeMON.$"
+	.string "POKEMON raised by TRAINERS are said\n"
+	.string "to grow stronger than wild POKEMON.$"

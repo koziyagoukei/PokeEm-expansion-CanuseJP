@@ -270,21 +270,21 @@ RustboroCity_DevonCorp_2F_EventScript_WorkOnNext::
 
 RustboroCity_DevonCorp_2F_Text_DeviceForTalkingToPokemon:
 	.string "We're developing a device for talking\n"
-	.string "with POKeMON.\p"
-	.string "But we haven't had much success…$"
+	.string "with POKEMON.\p"
+	.string "But we haven't had much success...$"
 
 RustboroCity_DevonCorp_2F_Text_DevelopingNewBalls:
 	.string "I'm developing new kinds of\n"
-	.string "POKe BALLS…\p"
-	.string "But I haven't made much headway…$"
+	.string "POKe BALLS...\p"
+	.string "But I haven't made much headway...$"
 
 RustboroCity_DevonCorp_2F_Text_WeFinallyMadeNewBalls:
 	.string "We finally made new kinds of\n"
 	.string "POKe BALLS!\p"
 	.string "The REPEAT BALL makes it easier to\n"
-	.string "catch POKeMON you've caught before.\p"
+	.string "catch POKEMON you've caught before.\p"
 	.string "The TIMER BALL gets better at catching\n"
-	.string "POKeMON the longer a battle runs.\p"
+	.string "POKEMON the longer a battle runs.\p"
 	.string "Both are proudly developed by\n"
 	.string "the DEVON CORPORATION.\p"
 	.string "Please give them a try!$"
@@ -299,7 +299,7 @@ RustboroCity_DevonCorp_2F_Text_WowThatsAPokenav:
 	.string "That's a POKeNAV!\p"
 	.string "It came about as a result of our\n"
 	.string "PRESIDENT's desire to learn about\l"
-	.string "the feelings of POKeMON.\p"
+	.string "the feelings of POKEMON.\p"
 	.string "Would you like me to describe its\n"
 	.string "features in detail?\p"
 	.string "No, no. I think you'll find out just by\n"
@@ -308,18 +308,18 @@ RustboroCity_DevonCorp_2F_Text_WowThatsAPokenav:
 RustboroCity_DevonCorp_2F_Text_DeviceToVisualizePokemonDreams:
 	.string "I'm trying to develop a device that\n"
 	.string "visually reproduces the dreams of\l"
-	.string "POKeMON…\p"
+	.string "POKEMON...\p"
 	.string "But it's not going well.$"
 
 RustboroCity_DevonCorp_2F_Text_DevelopDeviceToResurrectFossils:
 	.string "I've been trying to develop a device\n"
-	.string "that resurrects POKeMON from fossils…\p"
+	.string "that resurrects POKEMON from fossils...\p"
 	.string "And, it's working!$"
 
 RustboroCity_DevonCorp_2F_Text_WantToBringFossilBackToLife:
-	.string "Wait! That thing you have there…\n"
-	.string "Is that a POKeMON fossil?\p"
-	.string "Would you like to bring that POKeMON\n"
+	.string "Wait! That thing you have there...\n"
+	.string "Is that a POKEMON fossil?\p"
+	.string "Would you like to bring that POKEMON\n"
 	.string "back to life?\p"
 	.string "I can with my newly developed\n"
 	.string "FOSSIL REGENERATOR.$"
@@ -333,7 +333,7 @@ RustboroCity_DevonCorp_2F_Text_TwoFossilsPickOne:
 	.string "Oh, now that's a surprise!\n"
 	.string "You have not one, but two, fossils?\p"
 	.string "Unfortunately, my machine can only\n"
-	.string "regenerate one POKeMON at a time.\p"
+	.string "regenerate one POKEMON at a time.\p"
 	.string "Would you like to pick one of your\n"
 	.string "fossils for regeneration?$"
 
@@ -348,14 +348,14 @@ RustboroCity_DevonCorp_2F_Text_FossilRegeneratorTakesTime:
 	.string "is incredible.\p"
 	.string "But it has one drawback--it takes\n"
 	.string "a long time to work.\p"
-	.string "So, uh… How about you go for a stroll\n"
+	.string "So, uh... How about you go for a stroll\n"
 	.string "and look around for a while?$"
 
 RustboroCity_DevonCorp_2F_Text_FossilizedMonBroughtBackToLife:
 	.string "Thanks for waiting!\p"
-	.string "Your fossilized POKeMON has been\n"
+	.string "Your fossilized POKEMON has been\n"
 	.string "brought back to life!\p"
-	.string "The fossil was an ancient POKeMON.\n"
+	.string "The fossil was an ancient POKEMON.\n"
 	.string "{STR_VAR_2}, it was!$"
 
 RustboroCity_DevonCorp_2F_Text_ReceivedMonFromResearcher:
@@ -364,12 +364,12 @@ RustboroCity_DevonCorp_2F_Text_ReceivedMonFromResearcher:
 
 @ Unused
 RustboroCity_DevonCorp_2F_Text_TooManyPokemon:
-	.string "Uh-oh, you've got too many POKeMON.\n"
+	.string "Uh-oh, you've got too many POKEMON.\n"
 	.string "You have no room for this one.$"
 
 RustboroCity_DevonCorp_2F_Text_DevelopNewPokenavFeature:
 	.string "I'm trying to develop a new feature\n"
-	.string "for the POKeNAV…\p"
+	.string "for the POKeNAV...\p"
 	.string "But it's not going well.$"
 
 RustboroCity_DevonCorp_2F_Text_WhatToWorkOnNext:

@@ -313,7 +313,7 @@ FallarborTown_BattleTentLobby_Text_FallarborTentMyFavorite:
 	.string "TENT in FALLARBOR TOWN.\p"
 	.string "I think it's fantastic how TRAINERS\n"
 	.string "try to win with all their faith in\l"
-	.string "their POKeMON.$"
+	.string "their POKEMON.$"
 
 FallarborTown_BattleTentLobby_Text_CameToCampOut:
 	.string "I heard something about some tent,\n"
@@ -329,12 +329,12 @@ FallarborTown_BattleTentLobby_Text_ScottLookingForSomeone:
 	.string "The people in these parts tend to be\n"
 	.string "easygoing and laid-back.\p"
 	.string "But, you see, what I'm looking for are\n"
-	.string "people with…\p"
+	.string "people with...\p"
 	.string "How should I say this?\p"
 	.string "Someone bursting with the desire\n"
 	.string "and the drive to win.\p"
 	.string "If there were a TRAINER like that,\n"
-	.string "I'd immediately…\p"
+	.string "I'd immediately...\p"
 	.string "Whoops! Never mind!\n"
 	.string "Keep working at it!$"
 

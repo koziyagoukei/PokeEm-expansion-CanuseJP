@@ -36,7 +36,7 @@ SaffronCity_PokemonCenter_1F_EventScript_YoungsterRocketsGone::
 	end
 
 SaffronCity_PokemonCenter_1F_Text_GrowthRatesDifferBySpecies::
-	.string "POKeMON growth rates differ from\n"
+	.string "POKEMON growth rates differ from\n"
 	.string "species to species.$"
 
 SaffronCity_PokemonCenter_1F_Text_SilphCoVictimOfFame::
@@ -45,7 +45,7 @@ SaffronCity_PokemonCenter_1F_Text_SilphCoVictimOfFame::
 	.string "attracted TEAM ROCKET.$"
 
 SaffronCity_PokemonCenter_1F_Text_GreatIfEliteFourCameBeatRockets::
-	.string "Sigh…\n"
+	.string "Sigh...\n"
 	.string "Wouldn't this be great?\p"
 	.string "If the ELITE FOUR came and\n"
 	.string "stomped TEAM ROCKET?$"

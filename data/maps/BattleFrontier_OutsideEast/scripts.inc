@@ -237,7 +237,7 @@ BattleFrontier_OutsideEast_Text_BattleTowerSign:
 
 BattleFrontier_OutsideEast_Text_BattlePalaceSign:
 	.string "This is the BATTLE PALACE!\n"
-	.string "Keep your eyes on POKeMON battles!$"
+	.string "Keep your eyes on POKEMON battles!$"
 
 BattleFrontier_OutsideEast_Text_BattleArenaSign:
 	.string "This is the BATTLE ARENA!\n"
@@ -263,22 +263,22 @@ BattleFrontier_OutsideEast_Text_BattleTowerFeelsSpecial:
 
 BattleFrontier_OutsideEast_Text_ConquerLeagueAndFrontier:
 	.string "My grand ambition is to conquer both\n"
-	.string "the BATTLE FRONTIER and the POKeMON\l"
+	.string "the BATTLE FRONTIER and the POKEMON\l"
 	.string "LEAGUE.\p"
-	.string "And if my dream comes true…\p"
-	.string "I… I'm going to ask MIMI next door\n"
+	.string "And if my dream comes true...\p"
+	.string "I... I'm going to ask MIMI next door\n"
 	.string "if she will be friends with me!$"
 
 BattleFrontier_OutsideEast_Text_PyramidTooHarsh:
 	.string "The BATTLE PYRAMID's too harsh!\n"
 	.string "I just can't make it to the top!\p"
 	.string "Since I'm out of options, maybe I can\n"
-	.string "climb the outside…$"
+	.string "climb the outside...$"
 
 BattleFrontier_OutsideEast_Text_ThriveInDarkness:
-	.string "I thrive in darkness…\n"
-	.string "Yes… What is worthy of me?\l"
-	.string "None other than the BATTLE PYRAMID…\p"
+	.string "I thrive in darkness...\n"
+	.string "Yes... What is worthy of me?\l"
+	.string "None other than the BATTLE PYRAMID...\p"
 	.string "What say you to wandering in darkness\n"
 	.string "and in utter and total desperation?$"
 
@@ -292,7 +292,7 @@ BattleFrontier_OutsideEast_Text_DidScottBringYouHere:
 	.string "Did SCOTT bring you here, too?\n"
 	.string "What is it with that guy?\p"
 	.string "It sounds like he really does know\n"
-	.string "how to spot talented TRAINERS, but…\p"
+	.string "how to spot talented TRAINERS, but...\p"
 	.string "I've never seen him battling in person\n"
 	.string "ever.$"
 
@@ -303,7 +303,7 @@ BattleFrontier_OutsideEast_Text_BelieveInYouBuddy:
 	.string "tasty treats you like if you win!$"
 
 BattleFrontier_OutsideEast_Text_ZigzagoonLooksVacant:
-	.string "ZIGZAGOON looks vacant…$"
+	.string "ZIGZAGOON looks vacant...$"
 
 BattleFrontier_OutsideEast_Text_PeopleCallMeBusybody:
 	.string "People call me a busybody,\n"
@@ -312,7 +312,7 @@ BattleFrontier_OutsideEast_Text_PeopleCallMeBusybody:
 	.string "Oh, no, trash on the ground!\l"
 	.string "Oops, it's almost dinnertime!\p"
 	.string "I don't know if I can stand to just\n"
-	.string "watch at the BATTLE PALACE…$"
+	.string "watch at the BATTLE PALACE...$"
 
 BattleFrontier_OutsideEast_Text_OnceBeatGymLeader:
 	.string "I may not look that impressive now,\n"
@@ -328,7 +328,7 @@ BattleFrontier_OutsideEast_Text_FastOnBikeAndBattles:
 
 BattleFrontier_OutsideEast_Text_BetterThanDaddyAtPokemon:
 	.string "I'm better than my daddy\n"
-	.string "at POKeMON.$"
+	.string "at POKEMON.$"
 
 BattleFrontier_OutsideEast_Text_GoRackUpSomeWinsForDaddy:
 	.string "Go on, my baby sweetie!\n"
@@ -348,7 +348,7 @@ BattleFrontier_OutsideEast_Text_HeardPrettyGirlAtBattleArena:
 BattleFrontier_OutsideEast_Text_SometimesImportantOldManInThere:
 	.string "I sometimes see this really important-\n"
 	.string "looking old man going in there.\p"
-	.string "He has these really awesome POKeMON.\n"
+	.string "He has these really awesome POKEMON.\n"
 	.string "He seems really nice, though.$"
 
 BattleFrontier_OutsideEast_Text_LegendOfBattlePyramid:
@@ -375,7 +375,7 @@ BattleFrontier_OutsideEast_Text_ToughTrainerInBattleTower:
 	.string "This guy ran into a horribly tough\n"
 	.string "TRAINER while he was on the BATTLE\l"
 	.string "TOWER challenge.\p"
-	.string "Now look at him…\p"
+	.string "Now look at him...\p"
 	.string "You need to be cautious if you ever\n"
 	.string "decide to go to the BATTLE TOWER.$"
 
@@ -411,9 +411,9 @@ BattleFrontier_OutsideEast_Text_FrontierNotExclusivelyForToughTrainers:
 	.string "for tough TRAINERS.\p"
 	.string "Many people with special abilities\n"
 	.string "have been invited, it seems.\p"
-	.string "That man SCOTT…\p"
+	.string "That man SCOTT...\p"
 	.string "He may have built this place to serve\n"
-	.string "a bigger objective…$"
+	.string "a bigger objective...$"
 
 BattleFrontier_OutsideEast_Text_OddTreeHereSeemsToWiggle:
 	.string "Excuse me, young one.\n"
@@ -428,9 +428,9 @@ BattleFrontier_OutsideEast_Text_OnceAnOddTreePastHere:
 	.string "an odd tree past here.$"
 
 BattleFrontier_OutsideEast_Text_StickyMonWithLongTail:
-	.string "I…\n"
+	.string "I...\n"
 	.string "I saw it!\p"
-	.string "There was a sticky sort of a POKeMON\n"
+	.string "There was a sticky sort of a POKEMON\n"
 	.string "with a long tail up ahead!\p"
 	.string "It was hiding under a boulder, and\n"
 	.string "it kept staring at me!$"

@@ -307,13 +307,13 @@ BattleFrontier_Lounge7_Text_LeftTutorIntro:
 	.string "but I used to be one tough TRAINER.\p"
 	.string "I had a reputation as the toughest\n"
 	.string "BEAUTY around, I tell you!\p"
-	.string "… … … … … …\p"
+	.string "... ... ... ... ... ...\p"
 	.string "What is it now?\n"
 	.string "You don't believe me.\p"
 	.string "I'm not like that blowhard woman over\n"
 	.string "there. I'm actually talented!\p"
 	.string "Let me prove it to you.\n"
-	.string "I can teach your POKeMON special and\l"
+	.string "I can teach your POKEMON special and\l"
 	.string "yet cute moves.\p"
 	.string "But my lessons don't come free.\n"
 	.string "How about paying for the moves I teach\l"
@@ -322,7 +322,7 @@ BattleFrontier_Lounge7_Text_LeftTutorIntro:
 BattleFrontier_Lounge7_Text_LeftTutorWelcomeBack:
 	.string "Buhahaha!\p"
 	.string "Are you back to learn special and\n"
-	.string "yet cute POKeMON moves?$"
+	.string "yet cute POKEMON moves?$"
 
 BattleFrontier_Lounge7_Text_TeachWhichMove:
 	.string "Fine, fine, look here!\n"
@@ -333,11 +333,11 @@ BattleFrontier_Lounge7_Text_MoveWillBeXBattlePoints:
 	.string "That will be {STR_VAR_2} Battle Points, okay?$"
 
 BattleFrontier_Lounge7_Text_TeachMoveToWhichMon:
-	.string "Fine, fine, now pick the POKeMON\n"
+	.string "Fine, fine, now pick the POKEMON\n"
 	.string "I should teach the move to.$"
 
 BattleFrontier_Lounge7_Text_HaventGotEnoughPoints:
-	.string "What the…\n"
+	.string "What the...\n"
 	.string "You haven't got enough Battle Points!$"
 
 BattleFrontier_Lounge7_Text_IllTakeBattlePoints:
@@ -346,7 +346,7 @@ BattleFrontier_Lounge7_Text_IllTakeBattlePoints:
 
 BattleFrontier_Lounge7_Text_YouDontWantTo:
 	.string "What's that?\n"
-	.string "You don't want to…\p"
+	.string "You don't want to...\p"
 	.string "If you want to see how skilled I am,\n"
 	.string "you come see me anytime!$"
 
@@ -356,13 +356,13 @@ BattleFrontier_Lounge7_Text_RightTutorIntro:
 	.string "to be one fantastic TRAINER.\p"
 	.string "I had a reputation as the most\n"
 	.string "invincible SWIMMER around, I tell you!\p"
-	.string "… … … … … …\p"
+	.string "... ... ... ... ... ...\p"
 	.string "What's wrong?\n"
 	.string "You don't believe me.\p"
 	.string "I'm not like that buffoonish woman over\n"
 	.string "there. I'm actually experienced!\p"
 	.string "I can prove it to you.\n"
-	.string "I can teach your POKeMON hard and\l"
+	.string "I can teach your POKEMON hard and\l"
 	.string "yet pretty moves.\p"
 	.string "But my lessons don't come free.\n"
 	.string "How about paying for the moves I teach\l"
@@ -371,7 +371,7 @@ BattleFrontier_Lounge7_Text_RightTutorIntro:
 BattleFrontier_Lounge7_Text_RightTutorWelcomeBack:
 	.string "Ihihihi!\p"
 	.string "Have you come to learn hard and\n"
-	.string "yet pretty POKeMON moves?$"
+	.string "yet pretty POKEMON moves?$"
 
 BattleFrontier_Lounge7_Text_ThinkLadiesDontGetAlong:
 	.string "Those ladies, the way they bad-mouth\n"
@@ -386,11 +386,11 @@ BattleFrontier_Lounge7_Text_LadiesWereStrongAndBeautiful:
 	.string "They were idols among us TRAINERS.\p"
 	.string "Even now, age hasn't dulled their\n"
 	.string "abilities.\p"
-	.string "In fact, their POKeMON moves have\n"
+	.string "In fact, their POKEMON moves have\n"
 	.string "grown even more polished.\p"
-	.string "But… For some reason, I can't help\n"
-	.string "but feel this…\p"
-	.string "Time is so cruel…$"
+	.string "But... For some reason, I can't help\n"
+	.string "but feel this...\p"
+	.string "Time is so cruel...$"
 
 BattleFrontier_Lounge7_Text_SoftboiledDesc::
 	.string "Recovers up to\n"

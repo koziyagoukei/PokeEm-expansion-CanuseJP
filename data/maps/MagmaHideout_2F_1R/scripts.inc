@@ -26,13 +26,13 @@ MagmaHideout_2F_1R_Text_Grunt14Intro:
 	.string "Only TEAM MAGMA members are supposed\n"
 	.string "to be in here!\p"
 	.string "But you're not dressed in TEAM MAGMA's\n"
-	.string "uniform…\p"
+	.string "uniform...\p"
 	.string "You rouse my suspicion!\n"
 	.string "Battle with me!$"
 
 MagmaHideout_2F_1R_Text_Grunt14Defeat:
-	.string "Aiyiyi…\n"
-	.string "My pride as a TEAM MAGMA member…$"
+	.string "Aiyiyi...\n"
+	.string "My pride as a TEAM MAGMA member...$"
 
 MagmaHideout_2F_1R_Text_Grunt14PostBattle:
 	.string "If you suffer from chills, you should\n"
@@ -49,7 +49,7 @@ MagmaHideout_2F_1R_Text_Grunt3Defeat:
 
 MagmaHideout_2F_1R_Text_Grunt3PostBattle:
 	.string "Maybe it would've been better if I did\n"
-	.string "just let you go unchallenged…$"
+	.string "just let you go unchallenged...$"
 
 MagmaHideout_2F_1R_Text_Grunt4Intro:
 	.string "Ahah!\n"
@@ -68,8 +68,8 @@ MagmaHideout_2F_1R_Text_Grunt5Intro:
 	.string "An intruder!$"
 
 MagmaHideout_2F_1R_Text_Grunt5Defeat:
-	.string "Mutter…$"
+	.string "Mutter...$"
 
 MagmaHideout_2F_1R_Text_Grunt5PostBattle:
-	.string "Actually, I'm no expert at battling…$"
+	.string "Actually, I'm no expert at battling...$"
 

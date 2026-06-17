@@ -34,18 +34,18 @@ AbandonedShip_Rooms_1F_EventScript_ThaliaRematch::
 AbandonedShip_Rooms_1F_Text_TakingALookAround:
 	.string "Ships of this sort are rare, so I'm\n"
 	.string "taking a look around.\p"
-	.string "Hmhm…\n"
-	.string "There appear to be other cabins…$"
+	.string "Hmhm...\n"
+	.string "There appear to be other cabins...$"
 
 AbandonedShip_Rooms_1F_Text_ThaliaIntro:
 	.string "What on earth would compel you to\n"
 	.string "come here? You must be curious!$"
 
 AbandonedShip_Rooms_1F_Text_ThaliaDefeat:
-	.string "Not just curious, but also strong…$"
+	.string "Not just curious, but also strong...$"
 
 AbandonedShip_Rooms_1F_Text_ThaliaPostBattle:
-	.string "The man next door…\p"
+	.string "The man next door...\p"
 	.string "He says he's just sightseeing,\n"
 	.string "but I don't know about that.$"
 
@@ -66,7 +66,7 @@ AbandonedShip_Rooms_1F_Text_ThaliaPostRematch:
 
 AbandonedShip_Rooms_1F_Text_DemetriusIntro:
 	.string "Waaah!\n"
-	.string "I've been found! …Huh?$"
+	.string "I've been found! ...Huh?$"
 
 AbandonedShip_Rooms_1F_Text_DemetriusDefeat:
 	.string "Oh, you're not my mom.$"

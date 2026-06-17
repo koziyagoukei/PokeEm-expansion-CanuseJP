@@ -10,8 +10,8 @@ Route3_EventScript_RouteSign::
 	end
 
 Route3_Text_TunnelFromCeruleanTiring::
-	.string "Whew… I better take a rest…\n"
-	.string "Groan…\p"
+	.string "Whew... I better take a rest...\n"
+	.string "Groan...\p"
 	.string "That tunnel from CERULEAN takes a\n"
 	.string "lot out of you!$"
 
@@ -23,7 +23,7 @@ Route3_Text_ColtonDefeat::
 	.string "You beat me again!$"
 
 Route3_Text_ColtonPostBattle::
-	.string "There are other kinds of POKeMON\n"
+	.string "There are other kinds of POKEMON\n"
 	.string "than the ones you find in forests.$"
 
 Route3_Text_BenIntro::
@@ -36,10 +36,10 @@ Route3_Text_BenDefeat::
 	.string "I don't believe it!$"
 
 Route3_Text_BenPostBattle::
-	.string "Are you using a POKeMON CENTER's\n"
-	.string "PC for storing your POKeMON?\p"
+	.string "Are you using a POKEMON CENTER's\n"
+	.string "PC for storing your POKEMON?\p"
 	.string "Each BOX can hold up to\n"
-	.string "30 POKeMON.$"
+	.string "30 POKEMON.$"
 
 Route3_Text_JaniceIntro::
 	.string "Excuse me!\n"
@@ -57,15 +57,15 @@ Route3_Text_GregIntro::
 	.string "Let's get with it right away!$"
 
 Route3_Text_GregDefeat::
-	.string "If I had new POKeMON, I would've\n"
+	.string "If I had new POKEMON, I would've\n"
 	.string "won!$"
 
 Route3_Text_GregPostBattle::
-	.string "If a POKeMON BOX on the PC gets\n"
+	.string "If a POKEMON BOX on the PC gets\n"
 	.string "full, just switch to another BOX.$"
 
 Route3_Text_SallyIntro::
-	.string "That look you gave me…\n"
+	.string "That look you gave me...\n"
 	.string "It's so intriguing!$"
 
 Route3_Text_SallyDefeat::
@@ -88,14 +88,14 @@ Route3_Text_CalvinPostBattle::
 	.string "winter. That's my policy.$"
 
 Route3_Text_JamesIntro::
-	.string "I'll battle you with the POKeMON\n"
+	.string "I'll battle you with the POKEMON\n"
 	.string "I just caught.$"
 
 Route3_Text_JamesDefeat::
 	.string "Done like dinner!$"
 
 Route3_Text_JamesPostBattle::
-	.string "Trained POKeMON are stronger than\n"
+	.string "Trained POKEMON are stronger than\n"
 	.string "the wild ones.$"
 
 Route3_Text_RobinIntro::

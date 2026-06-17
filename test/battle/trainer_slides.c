@@ -149,7 +149,7 @@ AI_SINGLE_BATTLE_TEST("Trainer Slide: Singles: Last Half Hp")
     } WHEN {
         TURN { MOVE(player, MOVE_SUPER_FANG); }
     } SCENE {
-        MESSAGE("Trainer A: Enemy last Mon has < 51% HP.{PAUSE_UNTIL_PRESS}");
+        MESSAGE("Trainer A: Enemy last Mon has below 51% HP.{PAUSE_UNTIL_PRESS}");
     }
 }
 
@@ -164,7 +164,7 @@ AI_SINGLE_BATTLE_TEST("Trainer Slide: Singles: Last Low Hp")
     } WHEN {
         TURN { MOVE(player, MOVE_FALSE_SWIPE); }
     } SCENE {
-        MESSAGE("Trainer A: Enemy last Mon has < 26% HP.{PAUSE_UNTIL_PRESS}");
+        MESSAGE("Trainer A: Enemy last Mon has below 26% HP.{PAUSE_UNTIL_PRESS}");
     }
 }
 
@@ -407,9 +407,9 @@ AI_DOUBLE_BATTLE_TEST("Trainer Slide: Doubles: Last Half Hp")
     } WHEN {
         TURN { MOVE(playerLeft, MOVE_SUPER_FANG, target: opponentRight); }
     } SCENE {
-        MESSAGE("Trainer A: Enemy last Mon has < 51% HP.{PAUSE_UNTIL_PRESS}");
+        MESSAGE("Trainer A: Enemy last Mon has below 51% HP.{PAUSE_UNTIL_PRESS}");
         NONE_OF {
-            MESSAGE("Trainer A: Enemy last Mon has < 51% HP.{PAUSE_UNTIL_PRESS}");
+            MESSAGE("Trainer A: Enemy last Mon has below 51% HP.{PAUSE_UNTIL_PRESS}");
         }
     }
 }
@@ -427,9 +427,9 @@ AI_DOUBLE_BATTLE_TEST("Trainer Slide: Doubles: Last Low Hp")
     } WHEN {
         TURN { MOVE(playerLeft, MOVE_FALSE_SWIPE, target: opponentRight); }
     } SCENE {
-        MESSAGE("Trainer A: Enemy last Mon has < 26% HP.{PAUSE_UNTIL_PRESS}");
+        MESSAGE("Trainer A: Enemy last Mon has below 26% HP.{PAUSE_UNTIL_PRESS}");
         NONE_OF {
-            MESSAGE("Trainer A: Enemy last Mon has < 26% HP.{PAUSE_UNTIL_PRESS}");
+            MESSAGE("Trainer A: Enemy last Mon has below 26% HP.{PAUSE_UNTIL_PRESS}");
         }
     }
 }
@@ -724,9 +724,9 @@ AI_MULTI_BATTLE_TEST("Trainer Slide: Multi: Last Half Hp")
         TURN { MOVE(playerLeft, MOVE_SUPER_FANG, target: opponentLeft); SEND_OUT(playerLeft, 1);
             MOVE(playerRight, MOVE_SUPER_FANG, target: opponentRight); }
     } SCENE {
-        MESSAGE("Trainer A: Enemy last Mon has < 51% HP.{PAUSE_UNTIL_PRESS}");
-        MESSAGE("Trainer B: Enemy last Mon has < 51% HP.{PAUSE_UNTIL_PRESS}");
-        MESSAGE("Trainer Partner: Enemy last Mon has < 51% HP.{PAUSE_UNTIL_PRESS}");
+        MESSAGE("Trainer A: Enemy last Mon has below 51% HP.{PAUSE_UNTIL_PRESS}");
+        MESSAGE("Trainer B: Enemy last Mon has below 51% HP.{PAUSE_UNTIL_PRESS}");
+        MESSAGE("Trainer Partner: Enemy last Mon has below 51% HP.{PAUSE_UNTIL_PRESS}");
     }
 }
 
@@ -745,9 +745,9 @@ AI_MULTI_BATTLE_TEST("Trainer Slide: Multi: Last Low Hp")
         TURN { MOVE(playerLeft, MOVE_SUPER_FANG, target: opponentLeft); SEND_OUT(playerLeft, 1);
             MOVE(playerRight, MOVE_SUPER_FANG, target: opponentRight); }
     } SCENE {
-        MESSAGE("Trainer A: Enemy last Mon has < 26% HP.{PAUSE_UNTIL_PRESS}");
-        MESSAGE("Trainer B: Enemy last Mon has < 26% HP.{PAUSE_UNTIL_PRESS}");
-        MESSAGE("Trainer Partner: Enemy last Mon has < 26% HP.{PAUSE_UNTIL_PRESS}");
+        MESSAGE("Trainer A: Enemy last Mon has below 26% HP.{PAUSE_UNTIL_PRESS}");
+        MESSAGE("Trainer B: Enemy last Mon has below 26% HP.{PAUSE_UNTIL_PRESS}");
+        MESSAGE("Trainer Partner: Enemy last Mon has below 26% HP.{PAUSE_UNTIL_PRESS}");
     }
 }
 

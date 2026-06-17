@@ -250,57 +250,57 @@ Route110_TrickHouseEnd_Movement_TrickMasterSurprise:
 Route110_TrickHouseEnd_Text_YouveMadeItToMe:
 	.string "Aak!\n"
 	.string "You've made it to me?\l"
-	.string "Hmmm… You're sharp!$"
+	.string "Hmmm... You're sharp!$"
 
 Route110_TrickHouseEnd_Text_AllNightToPlantTrees:
 	.string "It took me all night to plant all those\n"
-	.string "trees…\p"
+	.string "trees...\p"
 	.string "You're almost my equal in greatness by\n"
 	.string "one, two, three, four, five, six places!$"
 
 Route110_TrickHouseEnd_Text_AllNightToMakeMaze:
-	.string "It took me all night to make the maze…\p"
+	.string "It took me all night to make the maze...\p"
 	.string "You're almost my equal in greatness by\n"
 	.string "one, two, three, four, five places!$"
 
 Route110_TrickHouseEnd_Text_AllNightToPreparePanels:
 	.string "It took me all night to prepare\n"
-	.string "the wall panels…\p"
+	.string "the wall panels...\p"
 	.string "You're almost my equal in greatness by\n"
 	.string "one, two, three, four places!$"
 
 Route110_TrickHouseEnd_Text_AllNightToShoveBoulders:
 	.string "It took me all night to shove in those\n"
-	.string "boulders…\p"
+	.string "boulders...\p"
 	.string "You're almost my equal in greatness by\n"
 	.string "one, two, three places!$"
 
 Route110_TrickHouseEnd_Text_AllNightToMakeMechadolls:
 	.string "It took me all night to make MECHADOLLS\n"
-	.string "and another to think up the quiz…\p"
+	.string "and another to think up the quiz...\p"
 	.string "You're almost my equal in greatness by\n"
 	.string "one, two places!$"
 
 Route110_TrickHouseEnd_Text_AllNightToInstallDoors:
 	.string "It took me all night to install\n"
-	.string "the doors…\p"
+	.string "the doors...\p"
 	.string "You're almost my equal in greatness!$"
 
 Route110_TrickHouseEnd_Text_AllNightSettingUpArrows:
-	.string "It took me all night setting up arrows…\p"
+	.string "It took me all night setting up arrows...\p"
 	.string "You're my equal in greatness!$"
 
 Route110_TrickHouseEnd_Text_AllNightPolishingFloors:
-	.string "It took me all night polishing floors…\p"
+	.string "It took me all night polishing floors...\p"
 	.string "You're above me in greatness!\n"
-	.string "Possibly…$"
+	.string "Possibly...$"
 
 Route110_TrickHouseEnd_Text_FountainOfIdeasRunDry:
 	.string "Wh-what should I do?\n"
 	.string "My fountain of ideas for tricks has\l"
-	.string "run dry…\p"
+	.string "run dry...\p"
 	.string "Perhaps it is time I toured the country\n"
-	.string "on a quest to devise new tricks…$"
+	.string "on a quest to devise new tricks...$"
 
 Route110_TrickHouseEnd_Text_DefeatedMePreferWhichTent:
 	.string "I hate to admit defeat, but you have\n"
@@ -325,7 +325,7 @@ Route110_TrickHouseEnd_Text_NoRoomInPC:
 	.string "too kind and caring, so come back later!$"
 
 Route110_TrickHouseEnd_Text_LeavingOnJourney:
-	.string "… … … … … …\p"
+	.string "... ... ... ... ... ...\p"
 	.string "I am leaving on a journey of discovery.\n"
 	.string "A quest in search of new tricks.\p"
 	.string "I wish that you will one day visit and\n"

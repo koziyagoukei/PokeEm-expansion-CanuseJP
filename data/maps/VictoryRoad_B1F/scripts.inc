@@ -28,20 +28,20 @@ VictoryRoad_B1F_EventScript_Halle::
 
 VictoryRoad_B1F_Text_SamuelIntro:
 	.string "The thought that I'm getting closer to\n"
-	.string "the POKeMON LEAGUE…\p"
-	.string "I'm getting stage fright…$"
+	.string "the POKEMON LEAGUE...\p"
+	.string "I'm getting stage fright...$"
 
 VictoryRoad_B1F_Text_SamuelDefeat:
-	.string "I couldn't do a thing…$"
+	.string "I couldn't do a thing...$"
 
 VictoryRoad_B1F_Text_SamuelPostBattle:
-	.string "The POKeMON LEAGUE became distant\n"
-	.string "again… What a letdown…$"
+	.string "The POKEMON LEAGUE became distant\n"
+	.string "again... What a letdown...$"
 
 VictoryRoad_B1F_Text_ShannonIntro:
-	.string "To win your way through the POKeMON\n"
+	.string "To win your way through the POKEMON\n"
 	.string "LEAGUE, you need the trust of your\l"
-	.string "POKeMON.$"
+	.string "POKEMON.$"
 
 VictoryRoad_B1F_Text_ShannonDefeat:
 	.string "Your relationship is based on\n"
@@ -49,21 +49,21 @@ VictoryRoad_B1F_Text_ShannonDefeat:
 
 VictoryRoad_B1F_Text_ShannonPostBattle:
 	.string "By being together all the time, trust\n"
-	.string "grows between POKeMON and TRAINERS.$"
+	.string "grows between POKEMON and TRAINERS.$"
 
 VictoryRoad_B1F_Text_MichelleIntro:
 	.string "This isn't the goal. It's only a place\n"
-	.string "on the way to the POKeMON LEAGUE.$"
+	.string "on the way to the POKEMON LEAGUE.$"
 
 VictoryRoad_B1F_Text_MichelleDefeat:
 	.string "That's the way!$"
 
 VictoryRoad_B1F_Text_MichellePostBattle:
 	.string "You'll do fine, for sure!\n"
-	.string "Your POKeMON are all eager to go!$"
+	.string "Your POKEMON are all eager to go!$"
 
 VictoryRoad_B1F_Text_MitchellIntro:
-	.string "My POKeMON are cosmically\n"
+	.string "My POKEMON are cosmically\n"
 	.string "awe inspiring!$"
 
 VictoryRoad_B1F_Text_MitchellDefeat:
@@ -72,7 +72,7 @@ VictoryRoad_B1F_Text_MitchellDefeat:
 VictoryRoad_B1F_Text_MitchellPostBattle:
 	.string "Even outside of battle, I sense\n"
 	.string "incredible power emanating from you\l"
-	.string "and your POKeMON.$"
+	.string "and your POKEMON.$"
 
 VictoryRoad_B1F_Text_HalleIntro:
 	.string "Okay, no need to get your back up!\n"

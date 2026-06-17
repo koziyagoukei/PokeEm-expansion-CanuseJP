@@ -60,12 +60,12 @@ Route16_NorthEntrance_2F_Text_RidingTogetherOnNewBikes::
 
 Route16_NorthEntrance_2F_Text_ItsCeladonDeptStore::
 	.string "Let's see what the binoculars have\n"
-	.string "to show…\p"
+	.string "to show...\p"
 	.string "It's the CELADON DEPT. STORE!$"
 
 Route16_NorthEntrance_2F_Text_LongPathOverWater::
 	.string "Let's see what the binoculars have\n"
-	.string "to show…\p"
+	.string "to show...\p"
 	.string "There's a long path over water far\n"
 	.string "away.$"
 
@@ -79,11 +79,11 @@ Route16_NorthEntrance_2F_Text_GiveAmuletCoinIfCaught40::
 	.string "AMULET COIN for you.\p"
 	.string "So, {PLAYER}, let me ask you.\p"
 	.string "Have you gathered data on at least\n"
-	.string "40 kinds of POKeMON?$"
+	.string "40 kinds of POKEMON?$"
 
 Route16_NorthEntrance_2F_Text_GreatHereYouGo::
 	.string "Great! You have caught or owned\n"
-	.string "{STR_VAR_3} kinds of POKeMON!\p"
+	.string "{STR_VAR_3} kinds of POKEMON!\p"
 	.string "Congratulations!\n"
 	.string "Here you go!$"
 
@@ -93,7 +93,7 @@ Route16_NorthEntrance_2F_Text_ReceivedAmuletCoinFromAide::
 
 Route16_NorthEntrance_2F_Text_ExplainAmuletCoin::
 	.string "An AMULET COIN is an item to be\n"
-	.string "held by a POKeMON.\p"
-	.string "If the POKeMON appears in a winning\n"
+	.string "held by a POKEMON.\p"
+	.string "If the POKEMON appears in a winning\n"
 	.string "battle, you will earn more money.$"
 

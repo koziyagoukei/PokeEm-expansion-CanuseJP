@@ -8,8 +8,8 @@ BerryBlender_Text_Excellent:
 	.string "Excellent!$"
 
 BerryBlender_Text_MadeOldTimerSad:
-	.string "Oh…\n"
-	.string "You've made this old-timer sad…$"
+	.string "Oh...\n"
+	.string "You've made this old-timer sad...$"
 
 BerryBlender_Text_KnowHowToMakePokeblocks:
 	.string "Do you know how to make a ポロック?$"
@@ -41,7 +41,7 @@ BerryBlender_Text_CanHaveOneOfMyBerries:
 
 BerryBlender_Text_DontHaveAnyBerriesToSpare:
 	.string "If I had some BERRIES left over,\n"
-	.string "I'd gladly give you one…\p"
+	.string "I'd gladly give you one...\p"
 	.string "But, I don't have any to spare today.\n"
 	.string "We'll have to do this another time.$"
 
@@ -70,7 +70,7 @@ BerryBlender_Text_Okay:
 	.string "Okay!$"
 
 BerryBlender_Text_ThatsTooBad:
-	.string "That's too bad…\p"
+	.string "That's too bad...\p"
 	.string "But we'll always be around whenever\n"
 	.string "you get the urge to blend!$"
 
@@ -92,21 +92,21 @@ BerryBlender_Text_ExplainBerryBlending2:
 	.string "Pretty easy, don't you think?$"
 
 BerryBlender_Text_DontHaveAnyBerries2:
-	.string "Oh, but wait a second here…\n"
+	.string "Oh, but wait a second here...\n"
 	.string "You don't have any BERRIES.\p"
 	.string "You can't make any ポロックS without\n"
-	.string "BERRIES…\p"
+	.string "BERRIES...\p"
 	.string "We'll always be around whenever you\n"
 	.string "get hold of some BERRIES to blend.$"
 
 BerryBlender_Text_PokeblockCaseIsFull2:
-	.string "Oh, but wait a second here…\n"
+	.string "Oh, but wait a second here...\n"
 	.string "Your ポロック CASE is full.\p"
 	.string "You should use some ポロックS and\n"
 	.string "then come back.$"
 
 BerryBlender_Text_DontHavePokeblockCase2:
-	.string "Oh, but wait a second here…\n"
+	.string "Oh, but wait a second here...\n"
 	.string "You don't have a ポロック CASE.\p"
 	.string "You should get a ポロック CASE and\n"
 	.string "then come back.$"
@@ -120,7 +120,7 @@ BerryBlender_Text_OhDear:
 	.string "Oh, dear!$"
 
 BerryBlender_Text_LeftUsInShock:
-	.string "Oh, dear me…\p"
+	.string "Oh, dear me...\p"
 	.string "You've left us in shock!$"
 
 BerryBlender_Text_KnowHowToMakePokeblocks3:
@@ -172,7 +172,7 @@ BerryBlender_Text_LookGoodAtBlendingJoinUs:
 
 BerryBlender_Text_MakeDeliciousPokeblocks:
 	.string "I'm going to make delicious ポロックS\n"
-	.string "and make my POKeMON cuter.$"
+	.string "and make my POKEMON cuter.$"
 
 BerryBlender_Text_SaveGameBeforeBerryBlenderLink:
 	.string "ポロックS will be made with your friends \n"
@@ -181,8 +181,8 @@ BerryBlender_Text_SaveGameBeforeBerryBlenderLink:
 	.string "linking with your friends?$"
 
 BerryBlender_Text_SearchingForFriends:
-	.string "Searching for your friends…\n"
-	.string "… … B Button: Cancel$"
+	.string "Searching for your friends...\n"
+	.string "... ... B Button: Cancel$"
 
 BerryBlender_Text_Player1Arrived:
 	.string "{STR_VAR_1} arrived.$"
@@ -230,7 +230,7 @@ BerryBlender_Text_DontHaveAnyBerriesNoneToSpare:
 	.string "Oh?\n"
 	.string "You don't have any BERRIES?\p"
 	.string "If I had some left over, I'd gladly\n"
-	.string "give you one…\p"
+	.string "give you one...\p"
 	.string "But, I don't have any to spare today.\n"
 	.string "Sorry about that.$"
 

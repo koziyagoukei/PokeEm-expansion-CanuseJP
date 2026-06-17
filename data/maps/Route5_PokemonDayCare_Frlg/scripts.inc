@@ -6,13 +6,13 @@ Route5_PokemonDayCare_Frlg_MapScripts::
 Route5_PokemonDayCare_Text_WantMeToRaiseMon::
 	.string "I run the DAY-CARE service.\p"
 	.string "Would you like me to raise one of\n"
-	.string "your POKeMON?$"
+	.string "your POKEMON?$"
 
 Route5_PokemonDayCare_Text_ComeAgain::
 	.string "Come again.$"
 
 Route5_PokemonDayCare_Text_WhichMonShouldIRaise::
-	.string "Which POKeMON should I raise?$"
+	.string "Which POKEMON should I raise?$"
 
 Route5_PokemonDayCare_Text_ComeAnytimeYouLike::
 	.string "Fine.\n"
@@ -32,33 +32,33 @@ Route5_PokemonDayCare_Text_MonNeedsToSpendMoreTime::
 
 Route5_PokemonDayCare_Text_OweMeXForMonsReturn::
 	.string "You owe me ¥{STR_VAR_2} for the return\n"
-	.string "of this POKeMON.$"
+	.string "of this POKEMON.$"
 
 Route5_PokemonDayCare_Text_ThankYouHeresMon::
 	.string "Thank you!\n"
-	.string "Here's your POKeMON.$"
+	.string "Here's your POKEMON.$"
 
 Route5_PokemonDayCare_Text_PlayerGotMonBack::
 	.string "{PLAYER} got {STR_VAR_1} back\n"
 	.string "from the DAY-CARE MAN.$"
 
 Route5_PokemonDayCare_Text_OnlyHaveOneMonWithYou::
-	.string "Oh? You only have one POKeMON\n"
+	.string "Oh? You only have one POKEMON\n"
 	.string "with you.$"
 
 Route5_PokemonDayCare_Text_WhatWillYouBattleWith::
-	.string "If you leave me that POKeMON,\n"
+	.string "If you leave me that POKEMON,\n"
 	.string "what will you battle with?$"
 
 Route5_PokemonDayCare_Text_MonHasGrownByXLevels::
 	.string "Your {STR_VAR_1} has grown a lot.\n"
 	.string "Yes, quite a lot, I'd say.\p"
-	.string "Let me see…\n"
+	.string "Let me see...\n"
 	.string "By level, it's grown by {STR_VAR_2}.\p"
 	.string "Aren't I great?$"
 
 Route5_PokemonDayCare_Text_YouveGotNoRoomForIt::
-	.string "You can't take this POKeMON back\n"
+	.string "You can't take this POKEMON back\n"
 	.string "if you've got no room for it.$"
 
 Route5_PokemonDayCare_Text_DontHaveEnoughMoney::
@@ -69,5 +69,5 @@ Route5_PokemonDayCare_Text_WantMeToTakeALookAtYours::
 	.string "みてみるかね?$"
 
 Route5_PokemonDayCare_Text_CantAcceptMonWithHM::
-	.string "わるいけど　ひでんのわざを　もった\n"
-	.string "ポケモンは　あずかれないなぁ$"
+	.string "わるいけど ひでんのわざを もった\n"
+	.string "ポケモンは あずかれないなぁ$"
