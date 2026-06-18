@@ -131,34 +131,34 @@ Debug_FlagsNotSetOverworldConfigMessage::
 	goto Debug_MessageEnd
 
 Debug_FlagsNotSetOverworldConfigMessage_Text:
-	.string "Feature unavailable!\n"
-	.string "Please define a usable flag in:\l"
-	.string "'include/config/overworld.h'!$"
+	.string "きのうが つかえません!\n"
+	.string "つかえるフラグを せっていしてください:\l"
+	.string "コンフィグ オーバーワールド!$"
 
 Debug_FlagsNotSetBattleConfigMessage::
 	message Debug_FlagsNotSetBattleConfigMessage_Text
 	goto Debug_MessageEnd
 
 Debug_FlagsNotSetBattleConfigMessage_Text:
-	.string "Feature unavailable!\n"
-	.string "Please define a usable flag in:\l"
-	.string "'include/config/battle.h'!$"
+	.string "きのうが つかえません!\n"
+	.string "つかえるフラグを せっていしてください:\l"
+	.string "コンフィグ バトル!$"
 
 Debug_VarsNotSetBattleConfigMessage::
 	message Debug_VarsNotSetBattleConfigMessage_Text
 	goto Debug_MessageEnd
 
 Debug_VarsNotSetBattleConfigMessage_Text:
-	.string "Feature unavailable!\n"
-	.string "Please define a usable var in:\l"
-	.string "'include/config/battle.h'!$"
+	.string "きのうが つかえません!\n"
+	.string "つかえるへんすうを せっていしてください:\l"
+	.string "コンフィグ バトル!$"
 
 Debug_BoxFilledMessage::
 	message Debug_BoxFilledMessage_Text
 	goto Debug_MessageEnd
 
 Debug_BoxFilledMessage_Text:
-	.string "Storage boxes filled!$"
+	.string "ボックスを うめました!$"
 
 Debug_EventScript_CheckEVs::
 	lockall
@@ -175,10 +175,10 @@ Debug_EventScript_CheckEVs_End::
 	end
 
 Debug_EventScript_Text_OffensiveEVs:
-	.string "ATK EVs: {STR_VAR_1}, SPATK EVs: {STR_VAR_2}, SPEED EVs: {STR_VAR_3}$"
+	.string "こうげき: {STR_VAR_1}, とくこう: {STR_VAR_2}, すばやさ: {STR_VAR_3}$"
 
 Debug_EventScript_Text_DefensiveEVs:
-	.string "HP EVs: {STR_VAR_1}, DEF EVs: {STR_VAR_2}, SPDEF EVs: {STR_VAR_3}$"
+	.string "エイチピー: {STR_VAR_1}, ぼうぎょ: {STR_VAR_2}, とくぼう: {STR_VAR_3}$"
 
 Debug_EventScript_CheckIVs::
 	lockall
@@ -195,10 +195,10 @@ Debug_EventScript_CheckIVs_End::
 	end
 
 Debug_EventScript_Text_OffensiveIVs:
-	.string "ATK IVs: {STR_VAR_1}, SPATK IVs: {STR_VAR_2}, SPEED IVs: {STR_VAR_3}$"
+	.string "こうげき: {STR_VAR_1}, とくこう: {STR_VAR_2}, すばやさ: {STR_VAR_3}$"
 
 Debug_EventScript_Text_DefensiveIVs:
-	.string "HP IVs: {STR_VAR_1}, DEF IVs: {STR_VAR_2}, SPDEF IVs: {STR_VAR_3}$"
+	.string "エイチピー: {STR_VAR_1}, ぼうぎょ: {STR_VAR_2}, とくぼう: {STR_VAR_3}$"
 
 Debug_EventScript_Script_1::
 	release
@@ -245,20 +245,20 @@ Debug_CheckSaveBlock::
 	end
 
 Debug_SaveBlock1Size::
-	.string "SaveBlock1 size: {STR_VAR_1}b/{STR_VAR_2}b.\n"
-	.string "Free space: {STR_VAR_3}b.$"
+	.string "セーブブロック1: {STR_VAR_1}バイト/{STR_VAR_2}バイト.\n"
+	.string "あき: {STR_VAR_3}バイト.$"
 
 Debug_SaveBlock2Size::
-	.string "SaveBlock2 size: {STR_VAR_1}b/{STR_VAR_2}b.\n"
-	.string "Free space: {STR_VAR_3}b.$"
+	.string "セーブブロック2: {STR_VAR_1}バイト/{STR_VAR_2}バイト.\n"
+	.string "あき: {STR_VAR_3}バイト.$"
 
 Debug_SaveBlock3Size::
-	.string "SaveBlock3 size: {STR_VAR_1}b/{STR_VAR_2}b.\n"
-	.string "Free space: {STR_VAR_3}b.$"
+	.string "セーブブロック3: {STR_VAR_1}バイト/{STR_VAR_2}バイト.\n"
+	.string "あき: {STR_VAR_3}バイト.$"
 
 Debug_PokemonStorageSize::
-	.string "ポケモンStorage size: {STR_VAR_1}b/{STR_VAR_2}b.\n"
-	.string "Free space: {STR_VAR_3}b.$"
+	.string "ポケモンボックス: {STR_VAR_1}バイト/{STR_VAR_2}バイト.\n"
+	.string "あき: {STR_VAR_3}バイト.$"
 
 Debug_CheckROMSpace::
 	callnative CheckROMSize
@@ -267,8 +267,8 @@ Debug_CheckROMSpace::
 	end
 
 Debug_ROMSize::
-	.string "ROM size: {STR_VAR_1}MB/32MB.\n"
-	.string "Free space: {STR_VAR_2}MB.$"
+	.string "ロムサイズ: {STR_VAR_1}メガバイト/32メガバイト.\n"
+	.string "あき: {STR_VAR_2}メガバイト.$"
 
 Debug_HatchAnEgg::
 	lockall
@@ -294,10 +294,10 @@ DebugScript_HatchAnEgg_CantForceHatch::
 	end
 
 DebugScript_Text_EmptyParty::
-	.string "You have no Pokemon nor Eggs.$"
+	.string "ポケモンも タマゴも いません.$"
 
 DebugScript_HatchAnEgg_Text_NotAnEgg::
-	.string "That's not a Pokemon Egg.$"
+	.string "それは ポケモンの タマゴではありません.$"
 
 DebugScript_ZeroDaycareMons::
 	msgbox DebugText_DaycareNoPokemon, MSGBOX_DEFAULT
@@ -315,13 +315,13 @@ DebugScript_DaycareMonsNotCompatible::
 	end
 
 DebugText_DaycareNoPokemon:
-	.string "You have no Pokemon at Daycare.$"
+	.string "そだてやに ポケモンが いません.$"
 
 DebugText_DaycareOnePokemon:
-	.string "You have only one Pokemon at Daycare.$"
+	.string "そだてやの ポケモンは 1ひきだけです.$"
 
 DebugText_DaycarePokemonNotCompatible:
-	.string "Your Pokemon at Daycare can't\nhave babies together!$"
+	.string "そだてやの ポケモンは\nタマゴを みつけられません!$"
 
 Debug_ShowExpansionVersion::
 	callnative BufferExpansionVersion
@@ -338,7 +338,7 @@ Debug_Follower_NPC_Not_Enabled::
 	end
 
 Debug_Enable_To_Use_Follower_NPCs:
-	.string "Feature unavailable.\nSet FNPC_ENABLE_NPC_FOLLOWERS to\lTRUE in 'include/config/follower_npc.h'.$"
+	.string "きのうが つかえません.\nインクルード コンフィグ フォロワーを\lオンに してください.$"
 
 Debug_Follower_NPC_Event_Script::
 	lock
@@ -348,7 +348,7 @@ Debug_Follower_NPC_Event_Script::
 	end
 
 Debug_Follower_NPC_Test_Message:
-	.string "This is a Follower NPC test.$"
+	.string "これは つれあるきテストです.$"
 
 Debug_EventScript_Steven_Multi::
 	call MossdeepCity_SpaceCenter_2F_EventScript_ChoosePartyForMultiBattle
@@ -369,8 +369,8 @@ Debug_BerryPestsDisabled::
 	end
 
 DebugText_BerryPestsDisabled:
-	.string "OW_BERRY_PESTS is disabled.\n"
-	.string "Unable to force pests onto berry trees.$"
+	.string "きのみのむしが オフです.\n"
+	.string "きのみに むしを つけられません.$"
 
 Debug_BerryWeedsDisabled::
 	msgbox DebugText_BerryWeedsDisabled, MSGBOX_DEFAULT
@@ -378,8 +378,8 @@ Debug_BerryWeedsDisabled::
 	end
 
 DebugText_BerryWeedsDisabled:
-	.string "OW_BERRY_WEEDS is disabled.\n"
-	.string "Unable to force weeds onto berry trees.$"
+	.string "きのみのくさが オフです.\n"
+	.string "きのみに くさを はやせません.$"
 
 Debug_EventScript_InflictStatus1::
 	lockall
@@ -576,85 +576,85 @@ Debug_EventScript_InflictStatus1_Party_Frostbite:
 	end
 
 Debug_EventScript_InflictStatus1_Text_Single:
-	.string "Single$"
+	.string "1ひき$"
 
 Debug_EventScript_InflictStatus1_Text_PartyWide:
-	.string "Party-wide$"
+	.string "てもちぜんたい$"
 
 Debug_EventScript_InflictStatus1_Text_Close:
-	.string "Close$"
+	.string "とじる$"
 
 Debug_EventScript_InflictStatus1_Text_Poison:
-	.string "Poison$"
+	.string "どく$"
 
 Debug_EventScript_InflictStatus1_Text_Paralysis:
-	.string "Paralysis$"
+	.string "まひ$"
 
 Debug_EventScript_InflictStatus1_Text_Sleep:
-	.string "Sleep$"
+	.string "ねむり$"
 
 Debug_EventScript_InflictStatus1_Text_Burn:
-	.string "Burn$"
+	.string "やけど$"
 
 Debug_EventScript_InflictStatus1_Text_Freeze:
-	.string "Freeze$"
+	.string "こおり$"
 
 Debug_EventScript_InflictStatus1_Text_Frostbite:
-	.string "Frostbite$"
+	.string "しもやけ$"
 
 Debug_EventScript_InflictStatus1_Text_KO:
-	.string "KO$"
+	.string "ひんし$"
 
 Debug_EventScript_ChangeNature_Text_Hardy:
-	.string "Hardy$"
+	.string "がんばりや$"
 Debug_EventScript_ChangeNature_Text_Lonely:
-	.string "Lonely$"
+	.string "さみしがり$"
 Debug_EventScript_ChangeNature_Text_Brave:
-	.string "Brave$"
+	.string "ゆうかん$"
 Debug_EventScript_ChangeNature_Text_Adamant:
-	.string "Adamant$"
+	.string "いじっぱり$"
 Debug_EventScript_ChangeNature_Text_Naughty:
-	.string "Naughty$"
+	.string "やんちゃ$"
 Debug_EventScript_ChangeNature_Text_Bold:
-	.string "Bold$"
+	.string "ずぶとい$"
 Debug_EventScript_ChangeNature_Text_Docile:
-	.string "Docile$"
+	.string "すなお$"
 Debug_EventScript_ChangeNature_Text_Relaxed:
-	.string "Relaxed$"
+	.string "のんき$"
 Debug_EventScript_ChangeNature_Text_Impish:
-	.string "Impish$"
+	.string "わんぱく$"
 Debug_EventScript_ChangeNature_Text_Lax:
-	.string "Lax$"
+	.string "のうてんき$"
 Debug_EventScript_ChangeNature_Text_Timid:
-	.string "Timid$"
+	.string "おくびょう$"
 Debug_EventScript_ChangeNature_Text_Hasty:
-	.string "Hasty$"
+	.string "せっかち$"
 Debug_EventScript_ChangeNature_Text_Serious:
-	.string "Serious$"
+	.string "まじめ$"
 Debug_EventScript_ChangeNature_Text_Jolly:
-	.string "Jolly$"
+	.string "ようき$"
 Debug_EventScript_ChangeNature_Text_Naive:
-	.string "Naive$"
+	.string "むじゃき$"
 Debug_EventScript_ChangeNature_Text_Modest:
-	.string "Modest$"
+	.string "ひかえめ$"
 Debug_EventScript_ChangeNature_Text_Mild:
-	.string "Mild$"
+	.string "おっとり$"
 Debug_EventScript_ChangeNature_Text_Quiet:
-	.string "Quiet$"
+	.string "れいせい$"
 Debug_EventScript_ChangeNature_Text_Bashful:
-	.string "Bashful$"
+	.string "てれや$"
 Debug_EventScript_ChangeNature_Text_Rash:
-	.string "Rash$"
+	.string "うっかりや$"
 Debug_EventScript_ChangeNature_Text_Calm:
-	.string "Calm$"
+	.string "おだやか$"
 Debug_EventScript_ChangeNature_Text_Gentle:
-	.string "Gentle$"
+	.string "おとなしい$"
 Debug_EventScript_ChangeNature_Text_Sassy:
-	.string "Sassy$"
+	.string "なまいき$"
 Debug_EventScript_ChangeNature_Text_Careful:
-	.string "Careful$"
+	.string "しんちょう$"
 Debug_EventScript_ChangeNature_Text_Quirky:
-	.string "Quirky$"
+	.string "きまぐれ$"
 
 Debug_EventScript_EWRAMCounters::
 	callnative CheckEWRAMCounters
@@ -663,8 +663,8 @@ Debug_EventScript_EWRAMCounters::
 	end
 
 Debug_EventScript_EWRAMCounters_Text::
-	.string "Follower Steps: {STR_VAR_1}.\n"
-	.string "Fishing Chain: {STR_VAR_2}.$"
+	.string "つれあるきほすう: {STR_VAR_1}.\n"
+	.string "つりチェイン: {STR_VAR_2}.$"
 
 Debug_EventScript_FontTest_Text_1::
 	.string "{FONT_SMALL_NARROWER}"                 @ Edit this to test your font
@@ -819,12 +819,12 @@ Debug_EventScript_FakeRTCNotEnabled::
 	return
 
 Debug_EventScript_FakeRTCNotEnabled_Text_0:
-	.string "You currently do not have Fake RTC\nenabled. Please enable it in include/\lconfig/overworld.h$"
+	.string "フェイクアールティーシーが\nオンではありません.コンフィグで\lオンに してください$"
 
 
 Debug_EventScript_TellTheTime_Text_0:
-	.string "Time and date:\n"
+	.string "ひづけと じこく:\n"
 	.string "{STR_VAR_1}, {STR_VAR_2}:{STR_VAR_3}$"
 
 DebugEventScript_PrintWeekday_Text_0:
-	.string "Time of day: {STR_VAR_1}$"
+	.string "じかんたい: {STR_VAR_1}$"

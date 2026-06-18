@@ -232,9 +232,9 @@ enum
 static const u8 *GetHoldEffectName(enum HoldEffect holdEffect);
 
 // const rom data
-static const u8 sText_Ability[] = _("Ability");
-static const u8 sText_HeldItem[] = _("Held Item");
-static const u8 sText_HoldEffect[] = _("Hold Effect");
+static const u8 sText_Ability[] = _("とくせい");
+static const u8 sText_HeldItem[] = _("もちもの");
+static const u8 sText_HoldEffect[] = _("もちものこうか");
 static const u8 sText_EmptyString[] = _("");
 
 static const struct BitfieldInfo sStatus1Bitfield[] =
@@ -311,152 +311,152 @@ static const struct BitfieldInfo sAIBitfield[] =
 
 static const struct ListMenuItem sMainListItems[] =
 {
-    {COMPOUND_STRING("Moves"),        LIST_ITEM_MOVES},
+    {COMPOUND_STRING("わざ"),        LIST_ITEM_MOVES},
     {sText_Ability,                   LIST_ITEM_ABILITY},
     {sText_HeldItem,                  LIST_ITEM_HELD_ITEM},
-    {COMPOUND_STRING("PP"),           LIST_ITEM_PP},
-    {COMPOUND_STRING("Types"),        LIST_ITEM_TYPES},
-    {COMPOUND_STRING("Stats"),        LIST_ITEM_STATS},
-    {COMPOUND_STRING("Stat Stages"),  LIST_ITEM_STAT_STAGES},
-    {COMPOUND_STRING("Status1"),      LIST_ITEM_STATUS1},
-    {COMPOUND_STRING("Volatiles"),    LIST_ITEM_VOLATILE},
-    {COMPOUND_STRING("Hazards"),      LIST_ITEM_HAZARDS},
-    {COMPOUND_STRING("Side Status"),  LIST_ITEM_SIDE_STATUS},
-    {COMPOUND_STRING("AI"),           LIST_ITEM_AI},
-    {COMPOUND_STRING("AI Pts/Dmg"),   LIST_ITEM_AI_MOVES_PTS},
-    {COMPOUND_STRING("AI Info"),      LIST_ITEM_AI_INFO},
-    {COMPOUND_STRING("AI Party"),     LIST_ITEM_AI_PARTY},
-    {COMPOUND_STRING("Various"),      LIST_ITEM_VARIOUS},
-    {COMPOUND_STRING("Instant Win"),  LIST_ITEM_INSTANT_WIN},
+    {COMPOUND_STRING("ピーピー"),           LIST_ITEM_PP},
+    {COMPOUND_STRING("タイプ"),        LIST_ITEM_TYPES},
+    {COMPOUND_STRING("ステータス"),        LIST_ITEM_STATS},
+    {COMPOUND_STRING("ランク"),  LIST_ITEM_STAT_STAGES},
+    {COMPOUND_STRING("じょうたい"),      LIST_ITEM_STATUS1},
+    {COMPOUND_STRING("へんか"),    LIST_ITEM_VOLATILE},
+    {COMPOUND_STRING("わな"),      LIST_ITEM_HAZARDS},
+    {COMPOUND_STRING("サイドじょうたい"),  LIST_ITEM_SIDE_STATUS},
+    {COMPOUND_STRING("エーアイ"),           LIST_ITEM_AI},
+    {COMPOUND_STRING("エーアイてん ダメージ"),   LIST_ITEM_AI_MOVES_PTS},
+    {COMPOUND_STRING("エーアイじょうほう"),      LIST_ITEM_AI_INFO},
+    {COMPOUND_STRING("エーアイてもち"),     LIST_ITEM_AI_PARTY},
+    {COMPOUND_STRING("そのほか"),      LIST_ITEM_VARIOUS},
+    {COMPOUND_STRING("すぐに かつ"),  LIST_ITEM_INSTANT_WIN},
 };
 
 static const struct ListMenuItem sStatsListItems[] =
 {
-    {COMPOUND_STRING("HP Current"), LIST_STAT_HP_CURRENT},
-    {COMPOUND_STRING("HP Max"),     LIST_STAT_HP_MAX},
-    {COMPOUND_STRING("Attack"),     LIST_STAT_ATTACK},
-    {COMPOUND_STRING("Defense"),    LIST_STAT_DEFENSE},
-    {COMPOUND_STRING("Speed"),      LIST_STAT_SPEED},
-    {COMPOUND_STRING("Sp. Atk"),    LIST_STAT_SP_ATK},
-    {COMPOUND_STRING("Sp. Def"),    LIST_STAT_SP_DEF},
+    {COMPOUND_STRING("いまのエイチピー"), LIST_STAT_HP_CURRENT},
+    {COMPOUND_STRING("さいだいエイチピー"),     LIST_STAT_HP_MAX},
+    {COMPOUND_STRING("こうげき"),     LIST_STAT_ATTACK},
+    {COMPOUND_STRING("ぼうぎょ"),    LIST_STAT_DEFENSE},
+    {COMPOUND_STRING("すばやさ"),      LIST_STAT_SPEED},
+    {COMPOUND_STRING("とくこう"),    LIST_STAT_SP_ATK},
+    {COMPOUND_STRING("とくぼう"),    LIST_STAT_SP_DEF},
 };
 
 static const struct ListMenuItem sStatus1ListItems[] =
 {
-    {COMPOUND_STRING("Sleep"),         LIST_STATUS1_SLEEP},
-    {COMPOUND_STRING("Poison"),        LIST_STATUS1_POISON},
-    {COMPOUND_STRING("Burn"),          LIST_STATUS1_BURN},
-    {COMPOUND_STRING("Freeze"),        LIST_STATUS1_FREEZE},
-    {COMPOUND_STRING("Paralysis"),     LIST_STATUS1_PARALYSIS},
-    {COMPOUND_STRING("Toxic Poison"),  LIST_STATUS1_TOXIC_POISON},
-    {COMPOUND_STRING("Toxic Counter"), LIST_STATUS1_TOXIC_COUNTER},
-    {COMPOUND_STRING("Frostbite"),     LIST_STATUS1_FROSTBITE},
+    {COMPOUND_STRING("ねむり"),         LIST_STATUS1_SLEEP},
+    {COMPOUND_STRING("どく"),        LIST_STATUS1_POISON},
+    {COMPOUND_STRING("やけど"),          LIST_STATUS1_BURN},
+    {COMPOUND_STRING("こおり"),        LIST_STATUS1_FREEZE},
+    {COMPOUND_STRING("まひ"),     LIST_STATUS1_PARALYSIS},
+    {COMPOUND_STRING("もうどく"),  LIST_STATUS1_TOXIC_POISON},
+    {COMPOUND_STRING("もうどくカウンタ"), LIST_STATUS1_TOXIC_COUNTER},
+    {COMPOUND_STRING("しもやけ"),     LIST_STATUS1_FROSTBITE},
 };
 
 static const struct ListMenuItem sVolatileStatusListItems[] =
 {
-    {COMPOUND_STRING("Confusion"),          VOLATILE_CONFUSION},
-    {COMPOUND_STRING("Flinched"),           VOLATILE_FLINCHED},
-    {COMPOUND_STRING("Torment"),            VOLATILE_TORMENT},
-    {COMPOUND_STRING("Powder"),             VOLATILE_POWDER},
-    {COMPOUND_STRING("DefenseCurl"),        VOLATILE_DEFENSE_CURL},
-    {COMPOUND_STRING("Rage"),               VOLATILE_RAGE},
-    {COMPOUND_STRING("DestinyBond"),        VOLATILE_DESTINY_BOND},
-    {COMPOUND_STRING("EscapePrevention"),   VOLATILE_ESCAPE_PREVENTION},
-    {COMPOUND_STRING("Cursed"),             VOLATILE_CURSED},
-    {COMPOUND_STRING("Foresight"),          VOLATILE_FORESIGHT},
-    {COMPOUND_STRING("DragonCheer"),        VOLATILE_DRAGON_CHEER},
-    {COMPOUND_STRING("FocusEnergy"),        VOLATILE_FOCUS_ENERGY},
-    {COMPOUND_STRING("Electrified"),        VOLATILE_ELECTRIFIED},
-    {COMPOUND_STRING("MudSport"),           VOLATILE_MUD_SPORT},
-    {COMPOUND_STRING("WaterSport"),         VOLATILE_WATER_SPORT},
-    {COMPOUND_STRING("Infinite Confusion"), VOLATILE_INFINITE_CONFUSION},
-    {COMPOUND_STRING("Salt Cure"),          VOLATILE_SALT_CURE},
-    {COMPOUND_STRING("Syrup Bomb"),         VOLATILE_SYRUP_BOMB},
-    {COMPOUND_STRING("Glaive Rush"),        VOLATILE_GLAIVE_RUSH},
-    {COMPOUND_STRING("Leech Seed"),         VOLATILE_LEECH_SEED},
-    {COMPOUND_STRING("Lock On"),            VOLATILE_LOCK_ON},
-    {COMPOUND_STRING("Perish Song"),        VOLATILE_PERISH_SONG},
-    {COMPOUND_STRING("Minimize"),           VOLATILE_MINIMIZE},
-    {COMPOUND_STRING("Charge"),             VOLATILE_CHARGE_TIMER},
-    {COMPOUND_STRING("Root"),               VOLATILE_ROOT},
-    {COMPOUND_STRING("Yawn"),               VOLATILE_YAWN},
-    {COMPOUND_STRING("Imprison"),           VOLATILE_IMPRISON},
-    {COMPOUND_STRING("Grudge"),             VOLATILE_GRUDGE},
-    {COMPOUND_STRING("Gastro Acid"),        VOLATILE_GASTRO_ACID},
-    {COMPOUND_STRING("Embargo"),            VOLATILE_EMBARGO},
-    {COMPOUND_STRING("Smack Down"),         VOLATILE_SMACK_DOWN},
-    {COMPOUND_STRING("Telekinesis"),        VOLATILE_TELEKINESIS},
-    {COMPOUND_STRING("Miracle Eye"),        VOLATILE_MIRACLE_EYE},
-    {COMPOUND_STRING("Magnet Rise"),        VOLATILE_MAGNET_RISE},
-    {COMPOUND_STRING("Heal Block"),         VOLATILE_HEAL_BLOCK},
-    {COMPOUND_STRING("Aqua Ring"),          VOLATILE_AQUA_RING},
-    {COMPOUND_STRING("Laser Focus"),        VOLATILE_LASER_FOCUS},
-    {COMPOUND_STRING("Power Trick"),        VOLATILE_POWER_TRICK},
+    {COMPOUND_STRING("こんらん"),          VOLATILE_CONFUSION},
+    {COMPOUND_STRING("ひるみ"),           VOLATILE_FLINCHED},
+    {COMPOUND_STRING("いちゃもん"),            VOLATILE_TORMENT},
+    {COMPOUND_STRING("ふんじん"),             VOLATILE_POWDER},
+    {COMPOUND_STRING("まるくなる"),        VOLATILE_DEFENSE_CURL},
+    {COMPOUND_STRING("いかり"),               VOLATILE_RAGE},
+    {COMPOUND_STRING("みちづれ"),        VOLATILE_DESTINY_BOND},
+    {COMPOUND_STRING("にげられない"),   VOLATILE_ESCAPE_PREVENTION},
+    {COMPOUND_STRING("のろわれ"),             VOLATILE_CURSED},
+    {COMPOUND_STRING("みやぶる"),          VOLATILE_FORESIGHT},
+    {COMPOUND_STRING("ドラゴンエール"),        VOLATILE_DRAGON_CHEER},
+    {COMPOUND_STRING("きあいだめ"),        VOLATILE_FOCUS_ENERGY},
+    {COMPOUND_STRING("そうでん"),        VOLATILE_ELECTRIFIED},
+    {COMPOUND_STRING("どろあそび"),           VOLATILE_MUD_SPORT},
+    {COMPOUND_STRING("みずあそび"),         VOLATILE_WATER_SPORT},
+    {COMPOUND_STRING("むげんこんらん"), VOLATILE_INFINITE_CONFUSION},
+    {COMPOUND_STRING("しおづけ"),          VOLATILE_SALT_CURE},
+    {COMPOUND_STRING("みずあめボム"),         VOLATILE_SYRUP_BOMB},
+    {COMPOUND_STRING("きょけんとつげき"),        VOLATILE_GLAIVE_RUSH},
+    {COMPOUND_STRING("やどりぎ"),         VOLATILE_LEECH_SEED},
+    {COMPOUND_STRING("ロックオン"),            VOLATILE_LOCK_ON},
+    {COMPOUND_STRING("ほろびのうた"),        VOLATILE_PERISH_SONG},
+    {COMPOUND_STRING("ちいさくなる"),           VOLATILE_MINIMIZE},
+    {COMPOUND_STRING("じゅうでん"),             VOLATILE_CHARGE_TIMER},
+    {COMPOUND_STRING("ねをはる"),               VOLATILE_ROOT},
+    {COMPOUND_STRING("あくび"),               VOLATILE_YAWN},
+    {COMPOUND_STRING("ふういん"),           VOLATILE_IMPRISON},
+    {COMPOUND_STRING("おんねん"),             VOLATILE_GRUDGE},
+    {COMPOUND_STRING("いえき"),        VOLATILE_GASTRO_ACID},
+    {COMPOUND_STRING("さしおさえ"),            VOLATILE_EMBARGO},
+    {COMPOUND_STRING("うちおとす"),         VOLATILE_SMACK_DOWN},
+    {COMPOUND_STRING("テレキネシス"),        VOLATILE_TELEKINESIS},
+    {COMPOUND_STRING("ミラクルアイ"),        VOLATILE_MIRACLE_EYE},
+    {COMPOUND_STRING("でんじふゆう"),        VOLATILE_MAGNET_RISE},
+    {COMPOUND_STRING("かいふくふうじ"),         VOLATILE_HEAL_BLOCK},
+    {COMPOUND_STRING("アクアリング"),          VOLATILE_AQUA_RING},
+    {COMPOUND_STRING("とぎすます"),        VOLATILE_LASER_FOCUS},
+    {COMPOUND_STRING("パワートリック"),        VOLATILE_POWER_TRICK},
 };
 
 static const struct ListMenuItem sHazardsListItems[] =
 {
-    {COMPOUND_STRING("Spikes"),       LIST_SIDE_SPIKES},
-    {COMPOUND_STRING("Sticky Web"),   LIST_SIDE_STICKY_WEB},
-    {COMPOUND_STRING("Toxic Spikes"), LIST_SIDE_TOXIC_SPIKES},
-    {COMPOUND_STRING("Stealth Rock"), LIST_SIDE_STEALTH_ROCK},
-    {COMPOUND_STRING("Steelsurge"),   LIST_SIDE_STEELSURGE},
+    {COMPOUND_STRING("まきびし"),       LIST_SIDE_SPIKES},
+    {COMPOUND_STRING("ねばねばネット"),   LIST_SIDE_STICKY_WEB},
+    {COMPOUND_STRING("どくびし"), LIST_SIDE_TOXIC_SPIKES},
+    {COMPOUND_STRING("ステルスロック"), LIST_SIDE_STEALTH_ROCK},
+    {COMPOUND_STRING("キョダイコウジン"),   LIST_SIDE_STEELSURGE},
 };
 
 static const struct ListMenuItem sSideStatusListItems[] =
 {
-    {COMPOUND_STRING("Reflect"),          LIST_SIDE_REFLECT},
-    {COMPOUND_STRING("Light Screen"),     LIST_SIDE_LIGHTSCREEN},
-    {COMPOUND_STRING("Safeguard"),        LIST_SIDE_SAFEGUARD},
-    {COMPOUND_STRING("Mist"),             LIST_SIDE_MIST},
-    {COMPOUND_STRING("Tailwind"),         LIST_SIDE_TAILWIND},
-    {COMPOUND_STRING("Aurora Veil"),      LIST_SIDE_AURORA_VEIL},
-    {COMPOUND_STRING("Lucky Chant"),      LIST_SIDE_LUCKY_CHANT},
-    {COMPOUND_STRING("Damage Non-Types"), LIST_SIDE_DAMAGE_NON_TYPES},
-    {COMPOUND_STRING("Rainbow"),          LIST_SIDE_RAINBOW},
-    {COMPOUND_STRING("Sea of Fire"),      LIST_SIDE_SEA_OF_FIRE},
-    {COMPOUND_STRING("Swamp"),            LIST_SIDE_SWAMP},
+    {COMPOUND_STRING("リフレクター"),          LIST_SIDE_REFLECT},
+    {COMPOUND_STRING("ひかりのかべ"),     LIST_SIDE_LIGHTSCREEN},
+    {COMPOUND_STRING("しんぴのまもり"),        LIST_SIDE_SAFEGUARD},
+    {COMPOUND_STRING("しろいきり"),             LIST_SIDE_MIST},
+    {COMPOUND_STRING("おいかぜ"),         LIST_SIDE_TAILWIND},
+    {COMPOUND_STRING("オーロラベール"),      LIST_SIDE_AURORA_VEIL},
+    {COMPOUND_STRING("おまじない"),      LIST_SIDE_LUCKY_CHANT},
+    {COMPOUND_STRING("タイプなしダメージ"), LIST_SIDE_DAMAGE_NON_TYPES},
+    {COMPOUND_STRING("にじ"),          LIST_SIDE_RAINBOW},
+    {COMPOUND_STRING("ひのうみ"),      LIST_SIDE_SEA_OF_FIRE},
+    {COMPOUND_STRING("しつげん"),            LIST_SIDE_SWAMP},
 };
 
 static const struct ListMenuItem sAIListItems[] =
 {
-    {COMPOUND_STRING("Check Bad Move"),             LIST_AI_CHECK_BAD_MOVE},
-    {COMPOUND_STRING("Try to Faint"),               LIST_AI_TRY_TO_FAINT},
-    {COMPOUND_STRING("Check Viability"),            LIST_AI_CHECK_VIABILITY},
-    {COMPOUND_STRING("Force Setup First Turn"),     LIST_AI_FORCE_SETUP_FIRST_TURN},
-    {COMPOUND_STRING("Risky"),                      LIST_AI_RISKY},
-    {COMPOUND_STRING("Try to 2HKO"),                LIST_AI_TRY_TO_2HKO},
-    {COMPOUND_STRING("Prefer Baton Pass"),          LIST_AI_PREFER_BATON_PASS},
-    {COMPOUND_STRING("Double Battle"),              LIST_AI_DOUBLE_BATTLE},
-    {COMPOUND_STRING("HP Aware"),                   LIST_AI_HP_AWARE},
-    {COMPOUND_STRING("Powerful Status"),            LIST_AI_POWERFUL_STATUS},
-    {COMPOUND_STRING("Negate Unaware"),             LIST_AI_NEGATE_UNAWARE},
-    {COMPOUND_STRING("Will Suicide"),               LIST_AI_WILL_SUICIDE},
-    {COMPOUND_STRING("Prefer Status Moves"),        LIST_AI_PREFER_STATUS_MOVES},
-    {COMPOUND_STRING("Stall"),                      LIST_AI_STALL},
-    {COMPOUND_STRING("Smart Switching"),            LIST_AI_SMART_SWITCHING},
-    {COMPOUND_STRING("Ace Pokemon"),                LIST_AI_ACE_POKEMON},
-    {COMPOUND_STRING("Omniscient"),                 LIST_AI_OMNISCIENT},
-    {COMPOUND_STRING("Smart Mon Choices"),          LIST_AI_SMART_MON_CHOICES},
-    {COMPOUND_STRING("Conservative"),               LIST_AI_CONSERVATIVE},
-    {COMPOUND_STRING("Sequence Switching"),         LIST_AI_SEQUENCE_SWITCHING},
-    {COMPOUND_STRING("Double Ace Pokemon"),         LIST_AI_DOUBLE_ACE_POKEMON},
-    {COMPOUND_STRING("Weigh Ability Prediction"),   LIST_AI_WEIGH_ABILITY_PREDICTION},
-    {COMPOUND_STRING("Prefer Highest Damage Move"), LIST_AI_PREFER_HIGHEST_DAMAGE_MOVE},
-    {COMPOUND_STRING("Predict Switch"),             LIST_AI_PREDICT_SWITCH},
-    {COMPOUND_STRING("Predict Incoming Mon"),       LIST_AI_PREDICT_INCOMING_MON},
-    {COMPOUND_STRING("Dynamic Func"),               LIST_AI_DYNAMIC_FUNC},
-    {COMPOUND_STRING("Roaming"),                    LIST_AI_ROAMING},
-    {COMPOUND_STRING("Safari"),                     LIST_AI_SAFARI},
-    {COMPOUND_STRING("First Battle"),               LIST_AI_FIRST_BATTLE},
+    {COMPOUND_STRING("わるいわざチェック"),             LIST_AI_CHECK_BAD_MOVE},
+    {COMPOUND_STRING("ひんしをねらう"),               LIST_AI_TRY_TO_FAINT},
+    {COMPOUND_STRING("ゆうこうどチェック"),            LIST_AI_CHECK_VIABILITY},
+    {COMPOUND_STRING("しょてセット"),     LIST_AI_FORCE_SETUP_FIRST_TURN},
+    {COMPOUND_STRING("リスク"),                      LIST_AI_RISKY},
+    {COMPOUND_STRING("にげきひんし"),                LIST_AI_TRY_TO_2HKO},
+    {COMPOUND_STRING("バトンタッチゆうせん"),          LIST_AI_PREFER_BATON_PASS},
+    {COMPOUND_STRING("ダブルバトル"),              LIST_AI_DOUBLE_BATTLE},
+    {COMPOUND_STRING("エイチピーいしき"),                   LIST_AI_HP_AWARE},
+    {COMPOUND_STRING("つよいへんか"),            LIST_AI_POWERFUL_STATUS},
+    {COMPOUND_STRING("てんねんむし"),             LIST_AI_NEGATE_UNAWARE},
+    {COMPOUND_STRING("じばくよてい"),               LIST_AI_WILL_SUICIDE},
+    {COMPOUND_STRING("へんかわざゆうせん"),        LIST_AI_PREFER_STATUS_MOVES},
+    {COMPOUND_STRING("ねばり"),                      LIST_AI_STALL},
+    {COMPOUND_STRING("かしこくいれかえ"),            LIST_AI_SMART_SWITCHING},
+    {COMPOUND_STRING("エースポケモン"),                LIST_AI_ACE_POKEMON},
+    {COMPOUND_STRING("ぜんち"),                 LIST_AI_OMNISCIENT},
+    {COMPOUND_STRING("かしこくてもちえらび"),          LIST_AI_SMART_MON_CHOICES},
+    {COMPOUND_STRING("ほしゅてき"),               LIST_AI_CONSERVATIVE},
+    {COMPOUND_STRING("じゅんばんいれかえ"),         LIST_AI_SEQUENCE_SWITCHING},
+    {COMPOUND_STRING("ダブルエース"),         LIST_AI_DOUBLE_ACE_POKEMON},
+    {COMPOUND_STRING("とくせいよそく"),   LIST_AI_WEIGH_ABILITY_PREDICTION},
+    {COMPOUND_STRING("さいだいダメージゆうせん"), LIST_AI_PREFER_HIGHEST_DAMAGE_MOVE},
+    {COMPOUND_STRING("いれかえよそく"),             LIST_AI_PREDICT_SWITCH},
+    {COMPOUND_STRING("でるポケモンよそく"),       LIST_AI_PREDICT_INCOMING_MON},
+    {COMPOUND_STRING("どうてききのう"),               LIST_AI_DYNAMIC_FUNC},
+    {COMPOUND_STRING("ローミング"),                    LIST_AI_ROAMING},
+    {COMPOUND_STRING("サファリ"),                     LIST_AI_SAFARI},
+    {COMPOUND_STRING("はつバトル"),               LIST_AI_FIRST_BATTLE},
 };
 
 static const struct ListMenuItem sVariousListItems[] =
 {
-    {COMPOUND_STRING("Show HP"),       VARIOUS_SHOW_HP},
-    {COMPOUND_STRING("Substitute HP"), VARIOUS_SUBSTITUTE_HP},
-    {COMPOUND_STRING("In Love"),       VARIOUS_IN_LOVE},
+    {COMPOUND_STRING("エイチピーを みせる"),       VARIOUS_SHOW_HP},
+    {COMPOUND_STRING("みがわりエイチピー"), VARIOUS_SUBSTITUTE_HP},
+    {COMPOUND_STRING("メロメロ"),       VARIOUS_IN_LOVE},
 };
 
 static const struct ListMenuItem sSecondaryListItems[] =
@@ -733,7 +733,7 @@ static void PutMovesPointsText(struct BattleDebugMenu *data)
     u8 *text = Alloc(0x50);
 
     FillWindowPixelBuffer(data->aiMovesWindowId, 0x11);
-    AddTextPrinterParameterized(data->aiMovesWindowId, FONT_NORMAL, COMPOUND_STRING("Score/Dmg"), 3, 0, 0, NULL);
+    AddTextPrinterParameterized(data->aiMovesWindowId, FONT_NORMAL, COMPOUND_STRING("てん ダメージ"), 3, 0, 0, NULL);
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
         text[0] = CHAR_SPACE;
@@ -774,7 +774,7 @@ static void PutMovesPointsText(struct BattleDebugMenu *data)
     {
         struct Pokemon *party = GetBattlerParty(data->aiBattlerId);
         u32 switchMon = GetMonData(&party[gAiLogicData->mostSuitableMonId[data->aiBattlerId]], MON_DATA_SPECIES);
-        AddTextPrinterParameterized3(data->aiMovesWindowId, FONT_NORMAL, 74, 79, sTextColorTable[COLORID_RED], 0, COMPOUND_STRING("Switching to "));
+        AddTextPrinterParameterized3(data->aiMovesWindowId, FONT_NORMAL, 74, 79, sTextColorTable[COLORID_RED], 0, COMPOUND_STRING("いれかえさき "));
         AddTextPrinterParameterized3(data->aiMovesWindowId, FONT_NORMAL, 74 + 68, 79, sTextColorTable[COLORID_RED], 0, gSpeciesInfo[switchMon].speciesName);
     }
 
@@ -1436,7 +1436,7 @@ static void PadString(const u8 *src, u8 *dst)
     dst[i] = EOS;
 }
 
-static const u8 sTextAll[] = _("All");
+static const u8 sTextAll[] = _("すべて");
 
 static void PrintSecondaryEntries(struct BattleDebugMenu *data)
 {

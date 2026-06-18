@@ -261,20 +261,20 @@ static const u8 gText_SaveFileErased[] = _("The save file has been erased\ndue t
 static const u8 gJPText_No1MSubCircuit[] = _("1Mサブきばんが ささっていません!");
 static const u8 gText_BatteryRunDry[] = _("The internal battery has run dry.\nThe game can be played.\pHowever, clock-based events will\nno longer occur.");
 
-static const u8 gText_MainMenuNewGame[] = _("NEW GAME");
-static const u8 gText_MainMenuContinue[] = _("CONTINUE");
-static const u8 gText_MainMenuOption[] = _("OPTION");
-static const u8 gText_MainMenuMysteryGift[] = _("MYSTERY GIFT");
-static const u8 gText_MainMenuMysteryGift2[] = _("MYSTERY GIFT");
-static const u8 gText_MainMenuMysteryEvents[] = _("MYSTERY EVENTS");
+static const u8 gText_MainMenuNewGame[] = _("さいしょから");
+static const u8 gText_MainMenuContinue[] = _("つづきから");
+static const u8 gText_MainMenuOption[] = _("せってい");
+static const u8 gText_MainMenuMysteryGift[] = _("ふしぎな おくりもの");
+static const u8 gText_MainMenuMysteryGift2[] = _("ふしぎな おくりもの");
+static const u8 gText_MainMenuMysteryEvents[] = _("ふしぎな できごと");
 static const u8 gText_WirelessNotConnected[] = _("The Wireless Adapter is not\nconnected.");
 static const u8 gText_MysteryGiftCantUse[] = _("MYSTERY GIFT can't be used while\nthe Wireless Adapter is attached.");
 static const u8 gText_MysteryEventsCantUse[] = _("MYSTERY EVENTS can't be used while\nthe Wireless Adapter is attached.");
 
-static const u8 gText_ContinueMenuPlayer[] = _("PLAYER");
-static const u8 gText_ContinueMenuTime[] = _("TIME");
-static const u8 gText_ContinueMenuPokedex[] = _("POKeDEX");
-static const u8 gText_ContinueMenuBadges[] = _("BADGES");
+static const u8 gText_ContinueMenuPlayer[] = _("しゅじんこう");
+static const u8 gText_ContinueMenuTime[] = _("じかん");
+static const u8 gText_ContinueMenuPokedex[] = _("ずかん");
+static const u8 gText_ContinueMenuBadges[] = _("バッジ");
 
 #define MENU_LEFT 2
 #define MENU_TOP_WIN0 1
