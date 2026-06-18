@@ -19,7 +19,6 @@ Gender: Male
 Music: Male
 
 
-
 ヴィクトリア (Pheromosa) @	Fightinium Z
 Adamant Nature
 Level: 100
@@ -29,6 +28,36 @@ EVs: 252 Atk / 252 Def / 6 SpA
 - Poison Jab
 - Drill Run
 - Throat Chop
+
+レッちゃん (Rayquaza) @	Covert Cloak
+Lonely Nature
+Level: 100
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+EVs: 252 Atk / 252 Def / 6 SpA
+- Dragon Ascent
+- Draco Meteor
+- Dragon Dance
+- Extreme Speed
+
+ぽんかん (Ogerpon) @	Hearthflame Mask
+Lonely Nature
+Level: 100
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+EVs: 252 Atk / 252 Def / 6 SpA
+- Ivy Cudgel
+- Horn Leech
+- Knock Off
+- Encore
+
+テツノオロチ (Miraidon) @	Electric Seed Mask
+Quirky Nature
+Level: 100
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+EVs:  252 Def / 252 SpA
+- Electro Drift
+- Volt Switch
+- Dragon Pulse
+- Protect
 
 === DEBUG_TRAINER_AI ===
 Name: デバッグ
