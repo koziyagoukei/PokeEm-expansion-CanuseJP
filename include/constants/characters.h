@@ -236,6 +236,7 @@
 #define EXT_CTRL_CODE_ACCENT                 0x1A
 #define EXT_CTRL_CODE_BACKGROUND             0x1B
 #define EXT_CTRL_CODE_TEXT_COLORS            0x1C
+#define EXT_CTRL_CODE_AUTO                   0x1D
 
 #define TEXT_COLOR_TRANSPARENT  0x0
 #define TEXT_COLOR_WHITE        0x1
