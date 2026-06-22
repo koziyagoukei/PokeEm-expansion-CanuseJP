@@ -270,32 +270,31 @@ PlayersHouse_2F_EventScript_GameCube::
 	end
 
 PlayersHouse_2F_Text_ClockIsStopped:
-	.string "The clock is stopped...\p"
-	.string "Better set it and start it!$"
+	.string "かべの　とけいが　とまっている……\p"
+	.string "じかんを　あわせて　おかなくちゃ!$"
 
 PlayersHouse_2F_Text_HowDoYouLikeYourRoom:
-	.string "MOM: {PLAYER}, how do you like your\n"
-	.string "new room?\p"
-	.string "Good! Everything's put away neatly!\p"
-	.string "They finished moving everything in\n"
-	.string "downstairs, too.\p"
-	.string "POKEMON movers are so convenient!\p"
-	.string "Oh, you should make sure that\n"
-	.string "everything's all there on your desk.$"
+	.string "ママ『{PLAYER}\n"
+	.string "どう　あたらしい　へやは?\p"
+	.string "うん!　きれいに　かたづいてるわね!\n"
+	.string "したも　もう　かたづいたわ\l"
+	.string "ポケモンが　いると　ほんとうに　らくね!\p"
+	.string "そうだ!　つくえの　うえの　ものも\n"
+	.string "だいじょうぶか　みておいてね$"
 
 PlayersHouse_2F_Text_Notebook:
-	.string "{PLAYER} flipped open the notebook.\p"
-	.string "ADVENTURE RULE NO. 1\n"
-	.string "Open the MENU with START.\p"
-	.string "ADVENTURE RULE NO. 2\n"
-	.string "Record your progress with SAVE.\p"
-	.string "The remaining pages are blank...$"
+	.string "{PLAYER}は　ノートを　ひらいた!\p"
+	.string "たんけんの　こころえ　その1\n"
+	.string "スタートボタンで　メニューが　ひらく!\p"
+	.string "たんけんの　こころえ　その2\n"
+	.string "ポケモン　レポートで　きろく　できる!\p"
+	.string "あとは　まっしろ　だ……$"
 
 Common_Text_LookCloserAtMap:
-	.string "{PLAYER} took a closer look at the\n"
-	.string "{REGION} region map.$"
+	.string "{PLAYER}は　{REGION}ちほうの\n"
+	.string "タウンマップに　かおを　ちかづけた!$"
 
 PlayersHouse_2F_Text_ItsAGameCube:
-	.string "It's a Nintendo GameCube.\p"
-	.string "A Game Boy Advance is connected to\n"
-	.string "serve as the Controller.$"
+	.string "ゲームキューブが　ある!\p"
+	.string "コントローラの　かわりに\n"
+	.string "ゲームボーイ　アドバンスが　つながってる!$"
