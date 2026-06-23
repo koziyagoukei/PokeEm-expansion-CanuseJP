@@ -32,6 +32,7 @@
 #include "constants/rgb.h"
 #include "constants/songs.h"
 #include "data/tutor_moves.h"
+#include "data/pokemon/frontier_full_learnsets.h"
 
 // The different versions of hearts are selected using animation
 // commands.
@@ -65,7 +66,7 @@ static EWRAM_DATA struct
     u16 movesToLearn[MAX_RELEARNER_MOVES];
     struct ListMenuItem menuItems[MAX_RELEARNER_MOVES + 1];
     u8 mainTask;
-    u8 numMenuChoices;
+    u32 numMenuChoices;
     u8 numToShowAtOnce;
     u8 moveListMenuTask;
     u8 moveListScrollArrowTask;
@@ -264,7 +265,10 @@ static bool32 HasRelearnerLevelUpMoves(struct BoxPokemon *boxMon);
 static bool32 HasRelearnerEggMoves(struct BoxPokemon *boxMon);
 static bool32 HasRelearnerTMMoves(struct BoxPokemon *boxMon);
 static bool32 HasRelearnerTutorMoves(struct BoxPokemon *boxMon);
+static bool32 IsFrontierFullMoveRelearnerActive(void);
 static u32 GetRelearnerLevelUpMoves(struct BoxPokemon *mon, u16 *moves);
+static bool32 HasRelearnerFrontierFullMoves(struct BoxPokemon *boxMon);
+static u32 GetRelearnerFrontierFullMoves(struct BoxPokemon *mon, u16 *moves);
 static u32 GetRelearnerEggMoves(struct BoxPokemon *mon, u16 *moves);
 static u32 GetRelearnerTMMoves(struct BoxPokemon *mon, u16 *moves);
 static u32 GetRelearnerTutorMoves(struct BoxPokemon *mon, u16 *moves);
@@ -300,6 +304,12 @@ static const struct RelearnType sRelearnTypes[MOVE_RELEARNER_COUNT] =
         .hasMoveToRelearn = HasRelearnerTutorMoves,
         .getMoves = GetRelearnerTutorMoves,
         .moveText = MoveRelearner_Text_TutorMoveLWR
+    },
+    [MOVE_RELEARNER_FRONTIER_FULL_MOVES] = {
+        .isActive = IsFrontierFullMoveRelearnerActive,
+        .hasMoveToRelearn = HasRelearnerFrontierFullMoves,
+        .getMoves = GetRelearnerFrontierFullMoves,
+        .moveText = MoveRelearner_Text_FrontierFullMoveLWR
     },
 };
 
@@ -735,11 +745,12 @@ static void CreateLearnableMovesList(void)
     s32 i;
 
     struct BoxPokemon *boxmon = GetSelectedBoxMonFromPcOrParty();
+
     if (gRelearnMode == RELEARN_MODE_SCRIPT || sRelearnTypes[gMoveRelearnerState].isActive())
         sMoveRelearnerStruct->numMenuChoices = sRelearnTypes[gMoveRelearnerState].getMoves(boxmon, sMoveRelearnerStruct->movesToLearn);
 
-    if (P_SORT_MOVES)
-        SortMovesAlphabetically(sMoveRelearnerStruct->movesToLearn, sMoveRelearnerStruct->numMenuChoices);
+if (P_SORT_MOVES)
+    SortMovesAlphabetically(sMoveRelearnerStruct->movesToLearn, sMoveRelearnerStruct->numMenuChoices);
 
     for (i = 0; i < sMoveRelearnerStruct->numMenuChoices; i++)
     {
@@ -959,6 +970,38 @@ static u32 GetRelearnerTutorMoves(struct BoxPokemon *mon, u16 *moves)
     return numMoves;
 }
 
+static u32 GetRelearnerFrontierFullMoves(struct BoxPokemon *mon, u16 *moves)
+{
+    u16 species = GetBoxMonData(mon, MON_DATA_SPECIES);
+    const u16 *learnset;
+    u32 count = 0;
+
+    if (species >= NUM_SPECIES)
+        return 0;
+
+    learnset = sFrontierFullLearnsets[species];
+    if (learnset == NULL)
+        return count;
+
+    for (u32 i = 0; learnset[i] != MOVE_UNAVAILABLE; i++)
+    {
+        enum Move move = learnset[i];
+
+        if (move == MOVE_NONE || move == MOVE_UNAVAILABLE)
+            continue;
+
+        if (BoxMonKnowsMove(mon, move))
+            continue;
+
+        moves[count++] = move;
+
+        if (count >= MAX_RELEARNER_MOVES)
+            break;
+    }
+
+    return count;
+}
+
 void Special_HasMoveToRelearn(void)
 {
     struct BoxPokemon *boxmon = GetSelectedBoxMonFromPcOrParty();
@@ -1083,6 +1126,32 @@ static bool32 HasRelearnerTutorMoves(struct BoxPokemon *boxMon)
     return FALSE;
 }
 
+static bool32 HasRelearnerFrontierFullMoves(struct BoxPokemon *boxMon)
+{
+    u16 species = GetBoxMonData(boxMon, MON_DATA_SPECIES);
+    const u16 *learnset;
+
+    if (species >= NUM_SPECIES)
+        return FALSE;
+
+    learnset = sFrontierFullLearnsets[species];
+    if (learnset == NULL)
+        return FALSE;
+
+    for (u32 i = 0; learnset[i] != MOVE_UNAVAILABLE; i++)
+    {
+        enum Move move = learnset[i];
+
+        if (move == MOVE_NONE || move == MOVE_UNAVAILABLE)
+            continue;
+
+        if (!BoxMonKnowsMove(boxMon, move))
+            return TRUE;
+    }
+
+    return FALSE;
+}
+
 static bool32 IsLevelUpMoveRelearnerActive(void)
 {
     return TRUE;
@@ -1101,4 +1170,9 @@ static bool32 IsTMMoveRelearnerActive(void)
 static bool32 IsTutorMoveRelearnerActive(void)
 {
     return (FlagGet(P_FLAG_TUTOR_MOVES) || P_ENABLE_MOVE_RELEARNERS);
+}
+
+static bool32 IsFrontierFullMoveRelearnerActive(void)
+{
+    return TRUE;
 }

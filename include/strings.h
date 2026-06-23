@@ -2139,6 +2139,7 @@ extern const u8 MoveRelearner_Text_EggMoveLWR[];
 extern const u8 MoveRelearner_Text_TMMoveLWR[];
 extern const u8 MoveRelearner_Text_TutorMoveLWR[];
 extern const u8 MoveRelearner_Text_MoveLWR[];
+extern const u8 MoveRelearner_Text_FrontierFullMoveLWR[];
 
 extern const u8 gText_Ghost[];
 extern const u8 gText_Boulderbadge[];
