@@ -1,80 +1,77 @@
 LilycoveCity_DepartmentStore_1F_Text_LotteryCornerDrawTicket:
-	.string "Tこちらは　ポケモンくじ\n"
-	.string "ちゅうせん　コーナーです\p"
-	.string "とうデパートに　おこし　いただいた　かたに\n"
-	.string "もれなく　ポケモンくじを\l"
-	.string "ひいて　いただいて　います!\p"
-	.string "ひいた　くじの　ナンバーと\n"
-	.string "おきゃくさまの　ポケモンの　IDが\l"
-	.string "あっていましたら　すてきな　しょうひんを\l"
-	.string "プレゼント　いたします!\p"
-	.string "ポケモンくじを　ひかれますか?$"
+	.string "This is the POKEMON LOTTERY CORNER.\p"
+	.string "All shoppers at our DEPARTMENT STORE\n"
+	.string "get to draw a POKEMON LOTO TICKET.\p"
+	.string "If the LOTO TICKET's number matches\n"
+	.string "the ID number of any of your POKEMON,\l"
+	.string "you will receive a fabulous gift.\p"
+	.string "Would you like to draw a POKEMON\n"
+	.string "LOTO TICKET?$"
 
 LilycoveCity_DepartmentStore_1F_Text_ComeBackTomorrow:
-	.string "また　あした　いこう\n"
-	.string "おこし　ください$"
+	.string "Please come back tomorrow.$"
 
 LilycoveCity_DepartmentStore_1F_Text_PleaseVisitAgain:
-	.string "それでは　また　おこし　ください$"
+	.string "Please do visit again.$"
 
 LilycoveCity_DepartmentStore_1F_Text_PleasePickTicket:
-	.string "では　くじを　ひいて　ください\n"
-	.string "…{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}…{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}…{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
+	.string "Please pick a LOTO TICKET.\n"
+	.string "...{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}...{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}...{PAUSE 15}{PAUSE 15}{PAUSE 15}{PAUSE 15}$"
 
 LilycoveCity_DepartmentStore_1F_Text_TicketNumberIsXPleaseWait:
-	.string "くじの　ナンバーは　{STR_VAR_1}です!\p"
-	.string "ナンバーが　あなたの　ポケモンの　IDと\n"
-	.string "いっちしているか　おしらべ　いたしますので\l"
-	.string "しょうしょう　おまちください$"
+	.string "The LOTO TICKET number is {STR_VAR_1}.\p"
+	.string "I need to run a check on this number\n"
+	.string "to see if it matches any of your\l"
+	.string "POKEMON's ID numbers. Please wait.$"
 
 LilycoveCity_DepartmentStore_1F_Text_TicketMatchesPartyMon:
-	.string "おめでとう　ございます!\p"
-	.string "あなたが　つれている\n"
-	.string "{STR_VAR_1}ちゃんの　IDが　みごとに\l"
-	.string "くじの　ナンバーと　いっち　しました!$"
+	.string "Congratulations!\p"
+	.string "The ID number of your team's\n"
+	.string "{STR_VAR_1} matches your\l"
+	.string "LOTO TICKET's number!$"
 
 LilycoveCity_DepartmentStore_1F_Text_TicketMatchesPCMon:
-	.string "おめでとう　ございます!\p"
-	.string "パソコンに　あずけている\n"
-	.string "{STR_VAR_1}ちゃんの　IDが　みごとに\l"
-	.string "くじの　ナンバーと　いっち　しました!$"
+	.string "Congratulations!\p"
+	.string "The ID number of your PC-boxed\n"
+	.string "{STR_VAR_1} matches your\l"
+	.string "LOTO TICKET's number!$"
 
 LilycoveCity_DepartmentStore_1F_Text_NoNumbersMatched:
-	.string "ざんねんでした\n"
-	.string "すべて　はずれの　ようです$"
+	.string "I'm sorry.\n"
+	.string "None of the numbers matched.$"
 
 LilycoveCity_DepartmentStore_1F_Text_TwoDigitsMatched:
-	.string "2ケタ　あって　いましたので\n"
-	.string "3とう　です!\l"
-	.string "{STR_VAR_1}を　さしあげます!!$"
+	.string "Two digits matched, so you win the\n"
+	.string "third prize!\l"
+	.string "You've won the {STR_VAR_1}!$"
 
 LilycoveCity_DepartmentStore_1F_Text_ThreeDigitsMatched:
-	.string "3ケタ　あって　いましたので\n"
-	.string "2とう　です!\l"
-	.string "{STR_VAR_1}を　さしあげます!!$"
+	.string "Three digits matched, so you win the\n"
+	.string "second prize!\l"
+	.string "You've won the {STR_VAR_1}!$"
 
 LilycoveCity_DepartmentStore_1F_Text_FourDigitsMatched:
-	.string "4ケタ　あって　いましたので\n"
-	.string "1とう　です!\l"
-	.string "{STR_VAR_1}を　さしあげます!!$"
+	.string "Four digits matched, so you win the\n"
+	.string "first prize!\l"
+	.string "You've won the {STR_VAR_1}!$"
 
 LilycoveCity_DepartmentStore_1F_Text_AllFiveDigitsMatched:
-	.string "なんと　5ケタ　すべて\n"
-	.string "あって　いました!!\p"
-	.string "とくとうです!!\n"
-	.string "{STR_VAR_1}を　さしあげます!!$"
+	.string "Oh, my goodness, all five digits\n"
+	.string "matched!\p"
+	.string "You've won the jackpot prize!\n"
+	.string "You've won the {STR_VAR_1}!$"
 
 LilycoveCity_DepartmentStore_1F_Text_NoRoomForThis:
-	.string "………あら?\n"
-	.string "どうぐが　いっぱいの　ようですね\p"
-	.string "どうぐを　せいりしてから　もういちど\n"
-	.string "おこし　ください.$"
+	.string "Oh?\n"
+	.string "You seem to have no room for this.\p"
+	.string "Please make room in your BAG and\n"
+	.string "let me know.$"
 
 LilycoveCity_DepartmentStore_1F_Text_PrizeWeveBeenHolding:
-	.string "{PLAYER}さん　ですね\n"
-	.string "おまちして　おりました!\p"
-	.string "では　しょうひんを\n"
-	.string "おわたし　いたします$"
+	.string "{PLAYER}?\n"
+	.string "Yes, I've been expecting you.\p"
+	.string "This is the prize we've been holding\n"
+	.string "for you.$"
 
 LilycoveCity_DepartmentStore_1F_Text_PleaseVisitAgain2:
-	.string "それでは　また　おこし　ください$"
+	.string "Please do visit again.$"

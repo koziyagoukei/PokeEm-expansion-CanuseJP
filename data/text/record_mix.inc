@@ -1,7 +1,6 @@
 Text_WouldYouLikeToMixRecords:
-	.string "おともだちと　レポートを\n"
-	.string "まぜますか?$"
+	.string "Would you like to mix records with\n"
+	.string "other TRAINERS?$"
 
 Text_WeHopeToSeeYouAgain:
-	.string "またの\n"
-	.string "ごりようを　おまち　してます!$"
+	.string "We hope to see you again!$"

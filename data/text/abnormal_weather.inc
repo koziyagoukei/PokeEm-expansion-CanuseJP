@@ -1,6 +1,7 @@
 gText_AbnormalWeatherEnded_Rain::
-	.string "おおあめは　おさまったようだ……$"
+	.string "The massive downpour appears to\n"
+	.string "have stopped...$"
 
 gText_AbnormalWeatherEnded_Sun::
-	.string "ひでりは　おさまったようだ……$"
-
+	.string "The intense sunshine appears to\n"
+	.string "have subsided...$"

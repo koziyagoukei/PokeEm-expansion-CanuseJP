@@ -257,43 +257,42 @@ Route101_Movement_BirchApproachPlayer:
 	step_end
 
 Route101_Text_HelpMe:
-	.string "たっ　たすけて　くれーっ!!$"
+	.string "H-help me!$"
 
 Route101_Text_PleaseHelp:
-	.string "おーい!　そこの　きみ!\n"
-	.string "たすけて　おくれーっ!!\p"
-	.string "そこに　ある　カバンに\n"
-	.string "モンスターボールが　はいってる!$"
+	.string "Hello! You over there!\n"
+	.string "Please! Help!\p"
+	.string "In my BAG!\n"
+	.string "There's a POKe BALL!$"
 
 Route101_Text_DontLeaveMe:
-	.string "どっ　どこへ　いくんだ!?\n"
-	.string "わたしを　みすてないで　おくれーっ!$"
+	.string "Wh-Where are you going?!\n"
+	.string "Don't leave me like this!$"
 
 Route101_Text_YouSavedMe:
-	.string "オダマキ『はあ　はあ……\p"
-	.string "やせいの　ポケモンを　ちょうさ　しようと\n"
-	.string "くさむらに　はいったら\l"
-	.string "とつぜん　ポケモンに　おそわれて……\p"
-	.string "とにかく　たすかったよ　ありがとう!\p"
-	.string "……おや?\p"
-	.string "きみは　{PLAYER}{KUN}　じゃないか!\p"
-	.string "こんな　ところでは　なんだから\n"
-	.string "ちょっと　けんきゅうじょ　まで　きておくれ$"
+	.string "PROF. BIRCH: Whew...\p"
+	.string "I was in the tall grass studying wild\n"
+	.string "POKEMON when I was jumped.\p"
+	.string "You saved me.\n"
+	.string "Thanks a lot!\p"
+	.string "Oh?\p"
+	.string "Hi, you're {PLAYER}{KUN}!\p"
+	.string "This is not the place to chat, so come\n"
+	.string "by my POKEMON LAB later, okay?$"
 
 Route101_Text_TakeTiredPokemonToPokeCenter:
-	.string "ポケモンが　よわってきたら\n"
-	.string "ポケモンセンターに　いくと　いいよ!\p"
-	.string "ポケモンセンターなら　すぐ　ちかく\n"
-	.string "コトキタウンに　あるからね$"
+	.string "If POKEMON get tired, take them to\n"
+	.string "a POKEMON CENTER.\p"
+	.string "There's a POKEMON CENTER in OLDALE\n"
+	.string "TOWN right close by.$"
 
 Route101_Text_WildPokemonInTallGrass:
-	.string "やせいの　ポケモンは\n"
-	.string "くさむらから　とびだしてくる　からな!\p"
-	.string "こうして　くさむらの　なかに　はいって\n"
-	.string "つかまえたい　ポケモンを　さがすんだよ!$"
+	.string "Wild POKEMON will jump out at you in\n"
+	.string "tall grass.\p"
+	.string "If you want to catch POKEMON, you have\n"
+	.string "to go into the tall grass and search.$"
 
 Route101_Text_RouteSign:
-	.string "ここは　101ばん　どうろ\n"
-	.string "{UP_ARROW} コトキタウン$"
-
+	.string "ROUTE 101\n"
+	.string "{UP_ARROW} OLDALE TOWN$"
 

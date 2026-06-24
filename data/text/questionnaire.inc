@@ -1,47 +1,43 @@
 Questionnaire_Text_FillOut::
-	.string "アンケートようの　メモようしが　ある\n"
-	.string "アンケートに　なにか　かきますか?$"
+	.string "There is a questionnaire.\n"
+	.string "Would you like to fill it out?$"
 
 Questionnaire_Text_ThankYou::
-	.string "アンケートに　ごきょうりょく\n"
-	.string "いただき　ありがとう　ございます!\p"
-	.string "この　アンケートは　こんごの\n"
-	.string "さんこうに　させて　いただきます!$"
+	.string "Thank you for taking the time to\n"
+	.string "fill out our questionnaire.\p"
+	.string "Your feedback will be used for\n"
+	.string "future reference.$"
 
 Questionnaire_Text_YouKnowThoseWordsGift::
-	.string "……　おきゃくさま!\n"
-	.string "そのことばを　しってるの　ですか!\p"
-	.string "ということは　ふしぎなおくりもの　を\n"
-	.string "しって　いらっしゃるの　ですね!\p"
-	.string "これからは　あなたにも\n"
-	.string "ふしぎなおくりもの　が\l"
-	.string "とどくように　なるでしょう!$"
+	.string "Oh, hello!\n"
+	.string "You know those words?\p"
+	.string "That means you must know about\n"
+	.string "the MYSTERY GIFT.\p"
+	.string "From now on, you should be\n"
+	.string "receiving MYSTERY GIFTS!$"
 
 Questionnaire_Text_YouCanAccessMysteryGift::
-	.string "レポートをかくと　ふしぎなおくりもの　が\n"
-	.string "つかえるように　なります$"
+	.string "Once you save your game, you can\n"
+	.string "access the MYSTERY GIFT.$"
 
 Questionnaire_Text_YouKnowThoseWordsEvent::
-	.string "……　おきゃくさま!\n"
-	.string "そのことばを　しってるの　ですか!\p"
-	.string "ということは　ふしぎなできごと　を\n"
-	.string "しって　いらっしゃるの　ですね!$"
+	.string "Oh, hello!\n"
+	.string "You know those words?\p"
+	.string "That means you must know about\n"
+	.string "the MYSTERY EVENT.$"
 
 Questionnaire_Text_YouCanAccessMysteryEvent::
-	.string "レポートをかくと　ふしぎなできごと　が\n"
-	.string "つかえるように　なります$"
+	.string "Once you save your game, you can\n"
+	.string "access the MYSTERY EVENT.$"
 
 MysteryGift_Text_TheresATicketForYou::
-	.string "ふしぎなできごと　を　ごりよう\n"
-	.string "いただき　ありがとう　ございます!\l"
-	.string "{PLAYER}さま　ですね\p"
-	.string "あなたさま　あてに\n"
-	.string "この　チケットが\l"
-	.string "おくられて　きました$"
+	.string "Thank you for using the MYSTERY\n"
+	.string "EVENT System.\p"
+	.string "You must be {PLAYER}.\n"
+	.string "There is a ticket here for you.$"
 
 MysteryGift_Text_TryUsingItAtLilycovePort::
-	.string "ミナモシティの　ふなつきば　で\n"
-	.string "つかえる　ようですね\p"
-	.string "ぜひ　ごりよう　してみては\n"
-	.string "いかがでしょうか?$"
-
+	.string "It appears to be for use at\n"
+	.string "the LILYCOVE CITY port.\p"
+	.string "Why not give it a try and see what\n"
+	.string "it is about?$"

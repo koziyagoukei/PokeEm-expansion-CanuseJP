@@ -1,36 +1,33 @@
 	.align 2
 gText_ConfirmSave::
-	.string "ここまでの　かつやくを\n"
-	.string "ポケモンレポートに　かきこみますか?$"
+	.string "レポート を かきますか?$"
 
 gText_AlreadySavedFile::
-	.string "まえに　かかれた　レポートに\n"
-	.string "うえから　かいても　いいですか?$"
+	.string "There is already a saved file.\n"
+	.string "Is it okay to overwrite it?$"
 
 gText_SavingDontTurnOff::
-	.string "ポケモンレポートに　かきこんでいます\n"
-	.string "でんげんを　きらないで　ください$"
+	.string "SAVING...\n"
+	.string "DON'T TURN OFF THE POWER.$"
 
 gText_PlayerSavedGame::
-	.string "{PLAYER}　は\n"
-	.string "レポートに　しっかり　かきのこした$"
+	.string "{PLAYER} saved the game.$"
 
 gText_DifferentSaveFile::
-	.string "ちゅうい!!\p"
-	.string "『つづきから　はじめる』で\n"
-	.string "ぼうけん　していた　レポートが\l"
-	.string "かかれています!\p"
-	.string "そちらで　プレイしていた　ぼうけんや\n"
-	.string "すべての　ポケモン　どうぐ　などが\l
-	.string "きえてしまいます……\p"
-	.string "ほんとうに\n"
-	.string "うえから　かいても　いいですか?$"
+	.string "WARNING!\p"
+	.string "There is a different game file that\n"
+	.string "is already saved.\p"
+	.string "If you save now, the other file's\n"
+	.string "adventure, including items and\l"
+	.string "POKEMON, will be entirely lost.\p"
+	.string "Are you sure you want to save now\n"
+	.string "and overwrite the other save file?$"
 
 gText_SaveError::
-	.string "レポートが　かけませんでした\p"
-	.string "バックアップカートリッジを\n"
-	.string "こうかんしてください!$"
+	.string "Save error.\p"
+	.string "Please exchange the\n"
+	.string "backup memory.$"
 
 gText_SavingDontTurnOffPower::
-	.string "ポケモンレポートに　かきこんでいます\n"
-	.string "でんげんを　きらないで　ください$"
+	.string "SAVING...\n"
+	.string "DON'T TURN OFF THE POWER.$"

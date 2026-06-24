@@ -284,152 +284,153 @@ LittlerootTown_BrendansHouse_1F_Movement_BrendanGoUpstairs2:
 	step_end
 
 PlayersHouse_1F_Text_IsntItNiceInHere:
-	.string "ママ『ほら　{PLAYER}!\n"
-	.string "おうちの　なかも　すてき　でしょ!$"
+	.string "MOM: See, {PLAYER}?\n"
+	.string "Isn't it nice in here, too?$"
 
 PlayersHouse_1F_Text_MoversPokemonGoSetClock:
-	.string "おうちの　かたづけは\n"
-	.string "ひっこしやさんの　ポケモンが\l"
-	.string "てつだって　くれるから　らくちんね!\p"
-	.string "{PLAYER}も　2かいに　ある\n"
-	.string "じぶんの　おへやに　いってごらん!\p"
-	.string "パパが　ひっこしの　おいわいに\n"
-	.string "かってくれた　とけいが　あるから\l"
-	.string "じかんを　あわせて　おきなさいよ$"
+	.string "The mover's POKEMON do all the work\n"
+	.string "of moving us in and cleaning up after.\l"
+	.string "This is so convenient!\p"
+	.string "{PLAYER}, your room is upstairs.\n"
+	.string "Go check it out, dear!\p"
+	.string "DAD bought you a new clock to mark\n"
+	.string "our move here.\l"
+	.string "Don't forget to set it!$"
 
 PlayersHouse_1F_Text_ArentYouInterestedInRoom:
-	.string "ママ『{PLAYER}\p"
-	.string "じぶんの　へやを　みてこないの?$"
+	.string "MOM: Well, {PLAYER}?\p"
+	.string "Aren't you interested in seeing your\n"
+	.string "very own room?$"
 
 PlayersHouse_1F_Text_GoSetTheClock:
-	.string "ママ『{PLAYER}\p"
-	.string "おへやの　とけい　あわせてきて$"
+	.string "MOM: {PLAYER}.\p"
+	.string "Go set the clock in your room, honey.$"
 
 PlayersHouse_1F_Text_OhComeQuickly:
-	.string "ママ『……あ!　{PLAYER}, {PLAYER}!\n"
-	.string "はやく　こっちに　いらっしゃい!$"
+	.string "MOM: Oh! {PLAYER}, {PLAYER}!\n"
+	.string "Quick! Come quickly!$"
 
 PlayersHouse_1F_Text_MaybeDadWillBeOn:
-	.string "ママ『トウカの　ジムが　うつってるわ\n"
-	.string "パパが　でるかもよ!!$"
+	.string "MOM: Look! It's PETALBURG GYM!\n"
+	.string "Maybe DAD will be on!$"
 
 PlayersHouse_1F_Text_ItsOverWeMissedHim:
-	.string "ママ『あらら……　おわっちゃった\p"
-	.string "パパが　でてたみたい　だったのに　ざんねんね$"
+	.string "MOM: Oh... It's over.\p"
+	.string "I think DAD was on, but we missed him.\n"
+	.string "Too bad.$"
 
 PlayersHouse_1F_Text_GoIntroduceYourselfNextDoor:
-	.string "……あ　そうそう!　このまち　には\n"
-	.string "オダマキはかせ　っていう\l"
-	.string "パパの　おともだちが　いるの\p"
-	.string "はかせの　いえは　おとなり　だから\n"
-	.string "きちんと　あいさつ　してくると　いいわ!$"
+	.string "Oh, yes.\n"
+	.string "One of DAD's friends lives in town.\p"
+	.string "PROF. BIRCH is his name.\p"
+	.string "He lives right next door, so you should\n"
+	.string "go over and introduce yourself.$"
 
 PlayersHouse_1F_Text_SeeYouHoney:
-	.string "ママ『いってらっしゃい!$"
+	.string "MOM: See you, honey!$"
 
 PlayersHouse_1F_Text_DidYouMeetProfBirch:
-	.string "ママ『オダマキはかせ　には　あえたの?$"
+	.string "MOM: Did you introduce yourself to\n"
+	.string "PROF. BIRCH?$"
 
 PlayersHouse_1F_Text_YouShouldRestABit:
-	.string "ママ『どう?　{PLAYER}\n"
-	.string "すこし　つかれたんじゃ　ないかしら?\p"
-	.string "おうちで　やすんでいくと　いいわ$"
+	.string "MOM: How are you doing, {PLAYER}?\n"
+	.string "You look a little tired.\p"
+	.string "I think you should rest a bit.$"
 
 PlayersHouse_1F_Text_TakeCareHoney:
-	.string "ママ『じゃあ　きをつけてね!$"
+	.string "MOM: Take care, honey!$"
 
 PlayersHouse_1F_Text_GotDadsBadgeHeresSomethingFromMom:
-	.string "ママ『あら\n"
-	.string "その　バッジ　パパから　もらったの!?\p"
-	.string "じゃあ　ママも　これ　あげようかな$"
+	.string "MOM: Oh? Did DAD give you that BADGE?\p"
+	.string "Then here's something from your MOM!$"
 
 PlayersHouse_1F_Text_DontPushYourselfTooHard:
-	.string "あんまり　むりは　しないでね\n"
-	.string "なにか　あれば　かえって　くればいいから\p"
-	.string "じゃあ　がんばってね!$"
+	.string "Don't push yourself too hard, dear.\n"
+	.string "You can always come home.\p"
+	.string "Go for it, honey!$"
 
 PlayersHouse_1F_Text_IsThatAPokenav:
-	.string "ママ『なあに　それ?　ポケナビ?\n"
-	.string "デボンの　ひとから　いただいたの?\p"
-	.string "じゃあ　ママの　ことも\n"
-	.string "とうろくして　もらっちゃおうかな!\p"
-	.string "……　……　……$"
+	.string "MOM: What is that, honey? A POKeNAV?\n"
+	.string "Someone from DEVON gave it to you?\p"
+	.string "Well, honey, how about registering\n"
+	.string "your mom?\p"
+	.string "... ... ...$"
 
 PlayersHouse_1F_Text_RegisteredMom:
-	.string "ママを\n"
-	.string "ポケナビに　とうろく　した!$"
+	.string "Registered MOM\n"
+	.string "in the POKeNAV.$"
 
 PlayersHouse_1F_Text_Vigoroth1:
-	.string "ふぎーっ$"
+	.string "Fugiiiiih!$"
 
 PlayersHouse_1F_Text_Vigoroth2:
-	.string "ふごっ　ふご　ふご……$"
+	.string "Huggoh, uggo uggo...$"
 
 PlayersHouse_1F_Text_ReportFromPetalburgGym:
-	.string "インタビュアー『……　いじょう\n"
-	.string "トウカジムの　まえ　からでした!$"
+	.string "INTERVIEWER: ...We brought you this\n"
+	.string "report from in front of PETALBURG GYM.$"
 
 PlayersHouse_1F_Text_TheresAMovieOnTV:
-	.string "テレビで　えいがを　やってる!\p"
-	.string "おとなと　こどもが　ふたり　ならんで\n"
-	.string "おおきな　ピアノの　うえで　おどってる!\p"
-	.string "もう　いかなきゃ!$"
+	.string "There is a movie on TV.\p"
+	.string "Two men are dancing on a big piano\n"
+	.string "keyboard.\p"
+	.string "Better get going!$"
 
 PlayersHouse_1F_Text_RunningShoesManual:
-	.string "ランニングシューズの\n"
-	.string "せつめいしょが　ある!\p"
-	.string "「ランニングシューズは\n"
-	.string "　Bボタンを　おすことで　いままでよりも\l"
-	.string "　はやく　はしれるように　なります!\p"
-	.string "　ランニングシューズを　はいて\n"
-	.string "　おもいっきり　そとを　はしろう!」$"
+	.string "It's the instruction booklet for the\n"
+	.string "RUNNING SHOES.\p"
+	.string "Press the B Button to run while\n"
+	.string "wearing your RUNNING SHOES.\p"
+	.string "Lace up your RUNNING SHOES and hit\n"
+	.string "the road running!$"
 
 PlayersHouse_1F_Text_TicketFromBrineyCameForYou:
-	.string "パパ『ん?\n"
-	.string "{PLAYER}じゃ　ないか!\p"
-	.string "ひさしぶりに　かおを　みたが\n"
-	.string "どこか　たくましくなった……\l"
-	.string "そんな　かんじ　だな\p"
-	.string "……おっと　そうだった\n"
-	.string "ハギさん　という　ひとから\l"
-	.string "おまえあてに　なにか　とどいていたぞ!$"
+	.string "DAD: Hm?\p"
+	.string "Hey, it's {PLAYER}!\p"
+	.string "It's been a while since I saw you,\n"
+	.string "but you look...stronger, somehow.\p"
+	.string "That's the impression I get.\n"
+	.string "But your old man hasn't given up yet!\p"
+	.string "Oh, yes, I have something for you.\n"
+	.string "This came to you from someone named\l"
+	.string "MR. BRINEY.$"
 
 PlayersHouse_1F_Text_PortsInSlateportLilycove:
-	.string "パパ『ふねのチケットか……\p"
-	.string "ふねに　のるなら　カイナか　ミナモに\n"
-	.string "ふねのりばが　あったよな$"
+	.string "DAD: Hm, a TICKET for a ferry?\p"
+	.string "If I recall, there are ferry ports in\n"
+	.string "SLATEPORT and LILYCOVE.$"
 
 PlayersHouse_1F_Text_BetterGetBackToGym:
-	.string "では　わたしは\n"
-	.string "トウカの　ジムに　もどるよ\p"
-	.string "ママ\n"
-	.string "いえのこと　たのんだよ$"
+	.string "I'd better get back to PETALBURG GYM.\p"
+	.string "MOM, thanks for looking after the house\n"
+	.string "while I'm away.$"
 
 PlayersHouse_1F_Text_DadShouldStayLonger:
-	.string "ママ『パパったら\n"
-	.string "ひさしぶりに　かえって　きたのに\l"
-	.string "ポケモンの　はなし　ばっかり!\p"
-	.string "もっと　ゆっくり　すれば　いいのにね!$"
+	.string "MOM: That DAD of yours...\p"
+	.string "He comes home for the first time in a\n"
+	.string "while, but all he talks about is POKEMON.\p"
+	.string "He should relax and stay a little longer.$"
 
 PlayersHouse_1F_Text_IsThatABreakingStory:
-	.string "ママ『なにかの　ニュース　かしら?$"
+	.string "MOM: Is that a breaking news story?$"
 
 PlayersHouse_1F_Text_LatiEmergencyNewsFlash:
-	.string "りんじ　ニュース　です\p"
-	.string "ホウエンちほうの　かくちで\n"
-	.string "……いろの　ポケモンが　とんでいた\l"
-	.string "という　じょうほうが　よせられています\p"
-	.string "いまのところ　しょうたいは\n"
-	.string "わかって　いない　ようです……\p"
-	.string "では　ひきつづき\n"
-	.string "えいがを　おたのしみ　ください$"
+	.string "We bring you this emergency\n"
+	.string "news flash!\p"
+	.string "In various HOENN locales, there have\n"
+	.string "been reports of a BZZT...colored\l"
+	.string "POKEMON in flight.\p"
+	.string "The identity of this POKEMON is\n"
+	.string "currently unknown.\p"
+	.string "We now return you to the regular\n"
+	.string "movie program.$"
 
 PlayersHouse_1F_Text_WhatColorDidTheySay:
-	.string "ママ『ねえ　ねえ　{PLAYER}\n"
-	.string "いまの　ニュース\l"
-	.string "なにいろの　ポケモンって　いってたの?$"
+	.string "MOM: {PLAYER}, did you catch that?\p"
+	.string "What color did the announcer say\n"
+	.string "that POKEMON was?$"
 
 PlayersHouse_1F_Text_StillUnknownPokemon:
-	.string "ママ『へえー　まだまだ\n"
-	.string "しられていない　ポケモンは　いるのねえ$"
-
+	.string "MOM: Well, isn't that something!\n"
+	.string "There are still unknown POKEMON.$"

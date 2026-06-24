@@ -340,55 +340,58 @@ OldaleTown_Movement_ReturnToOriginalPosition:
 	step_end
 
 OldaleTown_Text_SavingMyProgress:
-	.string "ちょっと　ひとやすみ　したいから\n"
-	.string "レポート　かいてるの$"
+	.string "I want to take a rest, so I'm saving my\n"
+	.string "progress.$"
 
 OldaleTown_Text_IWorkAtPokemonMart:
-	.string "おれ　フレンドリィショップの　てんいん!\p"
-	.string "きみ!　きみ!\n"
-	.string "ちょっと　ついてきて!$"
+	.string "Hi!\n"
+	.string "I work at a POKEMON MART.\p"
+	.string "Can I get you to come with me?$"
 
 OldaleTown_Text_ThisIsAPokemonMart:
-	.string "ここが　フレンドリィショップ!\n"
-	.string "あおい　やねが　めじるし　なのさ!\p"
-	.string "ポケモンを　つかまえる　ボールとか\n"
-	.string "いろんな　グッズを　うってるよ!\p"
-	.string "キミには　サービスとして\n"
-	.string "これを　あげよう!$"
+	.string "This is a POKEMON MART.\n"
+	.string "Just look for our blue roof.\p"
+	.string "We sell a variety of goods including\n"
+	.string "POKe BALLS for catching POKEMON.\p"
+	.string "Here, I'd like you to have this as\n"
+	.string "a promotional item.$"
 
 OldaleTown_Text_PotionExplanation:
-	.string "どんな　ときでも　つかえる\n"
-	.string "キズぐすりは　ばあいに　よっては\l"
-	.string "ポケモンセンターより　たよりに　なるからね$"
+	.string "A POTION can be used anytime, so it's\n"
+	.string "even more useful than a POKEMON CENTER\l"
+	.string "in certain situations.$"
 
 OldaleTown_Text_WaitDontComeInHere:
-	.string "あーー!\n"
-	.string "こっちに　はいらないで　くれよ!\p"
-	.string "めずらしい　ポケモンの　あしあとを\n"
-	.string "はっけん　したんだ!\l"
-	.string "スケッチが　おわるまで　まっててくれよ$"
+	.string "Aaaaah! Wait!\n"
+	.string "Please don't come in here.\p"
+	.string "I just discovered the footprints of\n"
+	.string "a rare POKEMON!\p"
+	.string "Wait until I finish sketching\n"
+	.string "them, okay?$"
 
 OldaleTown_Text_DiscoveredFootprints:
-	.string "めずらしい　ポケモンの　あしあとを\n"
-	.string "はっけん　したんだ!\l"
-	.string "スケッチが　おわるまで　まっててくれよ$"
+	.string "I just discovered the footprints of\n"
+	.string "a rare POKEMON!\p"
+	.string "Wait until I finish sketching\n"
+	.string "them, okay?$"
 
 OldaleTown_Text_FinishedSketchingFootprints:
-	.string "かんせい　させた　めずらしい\n"
-	.string "ポケモンの　あしあとの　スケッチ\l"
-	.string "よくみたら　じぶんの　あしあと　だったよ……$"
+	.string "I finished sketching the footprints of\n"
+	.string "a rare POKEMON.\p"
+	.string "But it turns out they were only my\n"
+	.string "own footprints...$"
 
 OldaleTown_Text_MayLetsGoBack:
-	.string "ハルカ『{PLAYER}{KUN}!\n"
-	.string "こっち　こっち!\l"
-	.string "はやく　かえろうよ!$"
+	.string "MAY: {PLAYER}{KUN}!\n"
+	.string "Over here!\l"
+	.string "Let's hurry home!$"
 
 OldaleTown_Text_BrendanLetsGoBack:
-	.string "ユウキ『オレ　さきに\n"
-	.string "けんきゅうじょに　もどるから\l"
-	.string "{PLAYER}も　はやく　こいよな$"
+	.string "BRENDAN: I'm heading back to my dad's\n"
+	.string "LAB now.\l"
+	.string "{PLAYER}, you should hustle back, too.$"
 
 OldaleTown_Text_TownSign:
-	.string "ここは　コトキ　タウン\n"
-	.string "なにかが　かすかに　はじまる　ところ$"
+	.string "OLDALE TOWN\n"
+	.string "Where things start off scarce.$"
 

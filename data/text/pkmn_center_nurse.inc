@@ -1,54 +1,51 @@
 gText_WouldYouLikeToRestYourPkmn::
-	.string "おつかれさまです!\n"
-	.string "ポケモン　センター　です\p"
-	.string "ここでは　ポケモンの\n"
-	.string "たいりょく　かいふくを　します\p"
-	.string "あなたの　ポケモンを\n"
-	.string "やすませて　あげますか?$"
+	.string "Hello, and welcome to\n"
+	.string "the POKEMON CENTER.\p"
+	.string "We restore your tired POKEMON\n"
+	.string "to full health.\p"
+	.string "Would you like to rest your POKEMON?$"
 
 gText_IllTakeYourPkmn::
-	.string "それでは\n"
-	.string "おあずかり　いたします!$"
+	.string "Okay, I'll take your POKEMON\n"
+	.string "for a few seconds.$"
 
 gText_RestoredPkmnToFullHealth::
-	.string "おまちどおさま!\p"
-	.string "おあずかり　した　ポケモンは\n"
-	.string "みんな　げんきに　なりましたよ!$"
+	.string "Thank you for waiting.\p"
+	.string "We've restored your POKEMON\n"
+	.string "to full health.$"
 
 gText_WeHopeToSeeYouAgain::
-	.string "またの\n"
-	.string "ごりようを　おまち　してます!$"
+	.string "We hope to see you again!$"
 
 gText_WelcomeCutShort::
-	.string "おつかれさまです!\n"
-	.string "ポケモン　センター　です\p"
-	.string "ここでは　ポケモンの\n"
-	.string "たいりょく　かいふくを　します\p"
-	.string "あなたの　ポケモンを……$"
+	.string "Hello, and welcome to\n"
+	.string "the POKEMON CENTER.\p"
+	.string "We restore your tired POKEMON\n"
+	.string "to full health.\p"
+	.string "Would you like to...$"
 
 gText_NoticesGoldCard::
-	.string "そ　それは……\n"
-	.string "ひょっとして　ゴールドカード!?\p"
-	.string "ああ……　きんいろが　まぶしい!\n"
-	.string "4つの　ほしが　かがやかしい!\p"
-	.string "わたしも　これまでに\n"
-	.string "シルバーカードの　トレーナーさんなら\l"
-	.string "なんにんか　みてきましたが\l"
-	.string "ゴールドカードを　おもちの　かたは\l"
-	.string "{PLAYER}さんが　はじめて　ですよ!\p"
-	.string "さあ　{PLAYER}さんの\n"
-	.string "ポケモンを　やすませて　あげましょう!$"
+	.string "Th-that card...\n"
+	.string "Could it be... The GOLD CARD?!\p"
+	.string "Oh, the gold color is brilliant!\n"
+	.string "The four stars seem to sparkle!\p"
+	.string "I've seen several TRAINERS with\n"
+	.string "a SILVER CARD before, but, {PLAYER},\l"
+	.string "you're the first TRAINER I've ever\l"
+	.string "seen with a GOLD CARD!\p"
+	.string "Okay, {PLAYER}, please allow me\n"
+	.string "the honor of resting your POKEMON!$"
 
 gText_YouWantTheUsual::
-	.string "{PLAYER}さん　おつかれさまです!\n"
-	.string "いつもので　よろしい　ですね!$"
+	.string "I'm delighted to see you, {PLAYER}!\n"
+	.string "You want the usual, am I right?$"
 
 gText_IllTakeYourPkmn2::
-	.string "では　おあずかりさせて　いただきます!$"
+	.string "Okay, I'll take your POKEMON\n"
+	.string "for a few seconds.$"
 
 gText_ThankYouForWaiting::
-	.string "たいへん　おまたせ　いたしました!$"
+	.string "Thank you for waiting.$"
 
 gText_WeHopeToSeeYouAgain2::
-	.string "また　いつでも　おこしください!$"
-
+	.string "We hope to see you again!$"

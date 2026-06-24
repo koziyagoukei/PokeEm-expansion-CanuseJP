@@ -79,69 +79,66 @@ RustboroCity_DevonCorp_1F_EventScript_ProductsDisplay::
 	end
 
 RustboroCity_DevonCorp_1F_Text_WelcomeToDevonCorp:
-	.string "いらっしゃいませ!\n"
-	.string "デボン　コーポレーション　です!\p"
-	.string "みなさまの　せいかつに　やくだつ\n"
-	.string "どうぐや　くすりを　おつくりしてます!$"
+	.string "Hello and welcome to the DEVON\n"
+	.string "CORPORATION.\p"
+	.string "We're proud producers of items and\n"
+	.string "medicine that enhance your life.$"
 
 RustboroCity_DevonCorp_1F_Text_StaffGotRobbed:
-	.string "ドジな　けんきゅういんが\n"
-	.string "にもつを　とられちゃって……$"
+	.string "One of our research staff stupidly\n"
+	.string "got robbed of an important parcel.$"
 
 RustboroCity_DevonCorp_1F_Text_ThoseShoesAreOurProduct:
-	.string "おっ!　ランニングシューズ!\p"
-	.string "じぶんたちの　かいしゃの　しょうひんを\n"
-	.string "じっさいに　つかっている　ひとを　みると\l"
-	.string "すごく　うれしくなるよね!$"
+	.string "Hey, those RUNNING SHOES!\n"
+	.string "They're one of our products!\p"
+	.string "It makes me happy when I see someone\n"
+	.string "using something we made.$"
 
 RustboroCity_DevonCorp_1F_Text_RobberWasntVeryBright:
-	.string "たしかに　あの　にもつは\n"
-	.string "だいじな　もの　だけど\l"
-	.string "ほかの　ひとが　ぬすんでいっても\l"
-	.string "つかえないと　おもうんだよね\p"
-	.string "ぼくの　すいりでは　あの　どろぼう……\n"
-	.string "たんなる　マヌケ　なんじゃないかな?$"
+	.string "That stolen parcel...\p"
+	.string "Well, sure it's important, but it's not\n"
+	.string "anything that anyone can use.\p"
+	.string "In my estimation, that robber must not\n"
+	.string "have been very bright.$"
 
 RustboroCity_DevonCorp_1F_Text_SoundsLikeStolenGoodsRecovered:
-	.string "どうやら　デボンのにもつは\n"
-	.string "もどってきた　らしいね$"
+	.string "It sounds like they've recovered\n"
+	.string "the ripped-off DEVON GOODS.$"
 
 RustboroCity_DevonCorp_1F_Text_OnlyAuthorizedPeopleEnter:
-	.string "おっと　かんけいしゃ　いがいの　かたは\n"
-	.string "ここから　さきには　はいれませんよ!$"
+	.string "I'm sorry, only authorized people\n"
+	.string "are allowed to enter here.$"
 
 RustboroCity_DevonCorp_1F_Text_HowCouldWeGetRobbed:
-	.string "どろぼうに　にもつを　うばわれるなんて\n"
-	.string "なんて　ドジなんだろう……$"
+	.string "It's beyond stupid.\n"
+	.string "How could we get robbed?$"
 
 RustboroCity_DevonCorp_1F_Text_YoureAlwaysWelcomeHere:
-	.string "やあ!\n"
-	.string "きみなら　いつでも　だいかんげい　だよ!$"
+	.string "Hi, there!\n"
+	.string "You're always welcome here!$"
 
 RustboroCity_DevonCorp_1F_Text_RocksMetalDisplay:
-	.string "いしや　きんぞくの　サンプルが\n"
-	.string "ガラスケースの　なかに　ならんでいる!\p"
-	.string "パネルに　せつめいが　かいてあるから\n"
-	.string "よんでみよう……\p"
-	.string "「デボン　コーポレーションは　もともと\n"
-	.string "　やまから　いしを　きりだしたり\p"
-	.string "　さてつから　てつざいを　つくるために\n"
-	.string "　せつりつ　された　かいしゃ　です」\p"
-	.string "「やがて　デボン　コーポレーションは\n"
-	.string "　ざいりょう　だけに　とどまらず\p"
-	.string "　さまざまな　こうぎょう　せいひんも\n"
-	.string "　つくるように　なったのです」$"
+	.string "Samples of rocks and metal are\n"
+	.string "displayed in the glass case.\p"
+	.string "There's a panel with some writing\n"
+	.string "on it...\p"
+	.string "DEVON CORPORATION got its start as\n"
+	.string "a producer of stones from quarries.\p"
+	.string "The company also produced iron from\n"
+	.string "filings in the sand.\p"
+	.string "From that humble start as a producer\n"
+	.string "of raw materials, DEVON developed.\p"
+	.string "DEVON is now a manufacturer of a wide\n"
+	.string "range of industrial products.$"
 
 RustboroCity_DevonCorp_1F_Text_ProductDisplay:
-	.string "いろんな　どうぐの　しさくひんが\n"
-	.string "ガラスケースの　なかに　ならんでいる!\p"
-	.string "パネルに　せつめいが　かいてあるから\n"
-	.string "よんでみよう……\p"
-	.string "「げんざい　デボン　コーポレーションでは\n"
-	.string "　こうぎょう　せいひんの　ほかにも\l"
-	.string "　にちようひんや　くすりなど\p"
-	.string "　ひとびとの　くらしに　やくだつ　ものを\n"
-	.string "　かいはつ　しています」\p"
-	.string "「また　げんざいでは　モンスターボールや\n"
-	.string "　ポケナビなどの　トレーナーようひんも\l"
-	.string "　てがけるように　なりました」$"
+	.string "Prototypes and test products fill\n"
+	.string "the glass display case.\p"
+	.string "There's a panel with a description...\p"
+	.string "In addition to industrial products,\n"
+	.string "DEVON now markets sundries and\l"
+	.string "pharmaceuticals for better lifestyles.\p"
+	.string "Recently, DEVON has begun marketing\n"
+	.string "tools for POKEMON TRAINERS, including\l"
+	.string "POKe BALLS and POKeNAV systems.$"
+
