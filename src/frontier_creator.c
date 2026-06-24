@@ -427,6 +427,7 @@ static const enum Species sFrontierCreatorAllowedBaseSpecies[] =
     SPECIES_MEW,
     SPECIES_CHIKORITA,
     SPECIES_BAYLEEF,
+    SPECIES_MEGANIUM,
     SPECIES_CYNDAQUIL,
     SPECIES_QUILAVA,
     SPECIES_TYPHLOSION,
