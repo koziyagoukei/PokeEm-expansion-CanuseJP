@@ -301,11 +301,11 @@ static const s8 sCenterToCornerVecXs[8] ={-32, -16, -16, -32, -32};
 // [TRAINER_CLASS_XYZ] = { _("name"), <money=5>, <ball=BALL_POKE> }
 const struct TrainerClass gTrainerClasses[TRAINER_CLASS_COUNT] =
 {
-    [TRAINER_CLASS_PKMN_TRAINER_1] = { _("ポケモン TRAINER") },
-    [TRAINER_CLASS_PKMN_TRAINER_2] = { _("ポケモン TRAINER") },
+    [TRAINER_CLASS_PKMN_TRAINER_1] = { _("ポケモン トレーナー") },
+    [TRAINER_CLASS_PKMN_TRAINER_2] = { _("ポケモン トレーナー") },
     [TRAINER_CLASS_HIKER] = { _("HIKER"), 10, B_TRAINER_CLASS_POKE_BALLS >= GEN_8 ? BALL_ULTRA : BALL_POKE },
     [TRAINER_CLASS_TEAM_AQUA] = { _("TEAM AQUA") },
-    [TRAINER_CLASS_PKMN_BREEDER] = { _("ポケモン BREEDER"), 10, B_TRAINER_CLASS_POKE_BALLS >= GEN_8 ? BALL_HEAL : BALL_FRIEND },
+    [TRAINER_CLASS_PKMN_BREEDER] = { _("ポケモン ブリーダー"), 10, B_TRAINER_CLASS_POKE_BALLS >= GEN_8 ? BALL_HEAL : BALL_FRIEND },
     [TRAINER_CLASS_COOLTRAINER] = { _("COOLTRAINER"), 12, BALL_ULTRA },
     [TRAINER_CLASS_BIRD_KEEPER] = { _("BIRD KEEPER"), 8 },
     [TRAINER_CLASS_COLLECTOR] = { _("COLLECTOR"), 15, BALL_PREMIER },
@@ -351,9 +351,9 @@ const struct TrainerClass gTrainerClasses[TRAINER_CLASS_COUNT] =
     [TRAINER_CLASS_SAILOR] = { _("SAILOR"), 8 },
     [TRAINER_CLASS_COOLTRAINER_2] = { _("COOLTRAINER"), 5, BALL_ULTRA },
     [TRAINER_CLASS_MAGMA_ADMIN] = { _("MAGMA ADMIN"), 10 },
-    [TRAINER_CLASS_RIVAL] = { _("ポケモン TRAINER"), 15 },
+    [TRAINER_CLASS_RIVAL] = { _("ポケモン トレーナー"), 15 },
     [TRAINER_CLASS_BUG_CATCHER] = { _("BUG CATCHER"), 4 },
-    [TRAINER_CLASS_PKMN_RANGER] = { _("ポケモン RANGER"), 12 },
+    [TRAINER_CLASS_PKMN_RANGER] = { _("ポケモン レンジャー"), 12 },
     [TRAINER_CLASS_MAGMA_LEADER] = { _("MAGMA LEADER"), 20, BALL_MASTER },
     [TRAINER_CLASS_LASS] = { _("LASS"), 4 },
     [TRAINER_CLASS_YOUNG_COUPLE] = { _("YOUNG COUPLE"), 8 },
@@ -366,7 +366,7 @@ const struct TrainerClass gTrainerClasses[TRAINER_CLASS_COUNT] =
     [TRAINER_CLASS_FACTORY_HEAD] = { _("FACTORY HEAD") },
     [TRAINER_CLASS_PIKE_QUEEN] = { _("PIKE QUEEN") },
     [TRAINER_CLASS_PYRAMID_KING] = { _("PYRAMID KING") },
-    [TRAINER_CLASS_RS_PROTAG] = { _("ポケモン TRAINER") },
+    [TRAINER_CLASS_RS_PROTAG] = { _("ポケモン トレーナー") },
 
     [TRAINER_CLASS_YOUNGSTER_FRLG] =       { _("YOUNGSTER"), 4 },
     [TRAINER_CLASS_BUG_CATCHER_FRLG] =     { _("BUG CATCHER"), 3 },
@@ -408,12 +408,12 @@ const struct TrainerClass gTrainerClasses[TRAINER_CLASS_COUNT] =
     [TRAINER_CLASS_YOUNG_COUPLE_FRLG] =    { _("YOUNG COUPLE"), 7 },
     [TRAINER_CLASS_CRUSH_KIN_FRLG] =       { _("CRUSH KIN"), 6 },
     [TRAINER_CLASS_SIS_AND_BRO_FRLG] =     { _("SIS AND BRO"), 1 },
-    [TRAINER_CLASS_PKMN_PROF_FRLG] =       { _("ポケモン PROF."), 25 },
-    [TRAINER_CLASS_PLAYER_FRLG] =          { _("ポケモン TRAINER"), 1 },
+    [TRAINER_CLASS_PKMN_PROF_FRLG] =       { _("ポケモン はかせ"), 25 },
+    [TRAINER_CLASS_PLAYER_FRLG] =          { _("ポケモン トレーナー"), 1 },
     [TRAINER_CLASS_CRUSH_GIRL_FRLG] =      { _("CRUSH GIRL"), 6 },
     [TRAINER_CLASS_TUBER_FRLG] =           { _("TUBER"), 1 },
-    [TRAINER_CLASS_PKMN_BREEDER_FRLG] =    { _("ポケモン BREEDER"), 7, B_TRAINER_CLASS_POKE_BALLS >= GEN_8 ? BALL_HEAL : BALL_FRIEND },
-    [TRAINER_CLASS_PKMN_RANGER_FRLG] =     { _("ポケモン RANGER"), 9 },
+    [TRAINER_CLASS_PKMN_BREEDER_FRLG] =    { _("ポケモン ブリーダー"), 7, B_TRAINER_CLASS_POKE_BALLS >= GEN_8 ? BALL_HEAL : BALL_FRIEND },
+    [TRAINER_CLASS_PKMN_RANGER_FRLG] =     { _("ポケモン レンジャー"), 9 },
     [TRAINER_CLASS_AROMA_LADY_FRLG] =      { _("AROMA LADY"), 7 },
     [TRAINER_CLASS_RUIN_MANIAC_FRLG] =     { _("RUIN MANIAC"), 12 },
     [TRAINER_CLASS_LADY_FRLG] =            { _("LADY"), 50 },
@@ -454,13 +454,13 @@ static void (*const sEndTurnFuncsTable[])(void) =
     [B_OUTCOME_MON_TELEPORTED]    = HandleEndTurn_FinishBattle,
 };
 
-const u8 gStatusConditionString_PoisonJpn[] = _("どく$$$$$");
-const u8 gStatusConditionString_SleepJpn[] = _("ねむり$$$$");
-const u8 gStatusConditionString_ParalysisJpn[] = _("まひ$$$$$");
-const u8 gStatusConditionString_BurnJpn[] = _("やけど$$$$");
-const u8 gStatusConditionString_IceJpn[] = _("こおり$$$$");
-const u8 gStatusConditionString_ConfusionJpn[] = _("こんらん$$$");
-const u8 gStatusConditionString_LoveJpn[] = _("メロメロ$$$");
+const u8 gStatusConditionString_PoisonJpn[] = _("どく");
+const u8 gStatusConditionString_SleepJpn[] = _("ねむり");
+const u8 gStatusConditionString_ParalysisJpn[] = _("まひ");
+const u8 gStatusConditionString_BurnJpn[] = _("やけど");
+const u8 gStatusConditionString_IceJpn[] = _("こおり");
+const u8 gStatusConditionString_ConfusionJpn[] = _("こんらん");
+const u8 gStatusConditionString_LoveJpn[] = _("メロメロ");
 
 const u8 *const gStatusConditionStringsTable[][2] =
 {
