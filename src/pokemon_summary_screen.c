@@ -1259,6 +1259,7 @@ void ShowPokemonSummaryScreen(u8 mode, void *mons, u8 monIndex, u8 maxMonIndex, 
     if (mode != SUMMARY_MODE_SELECT_MOVE && mode != SUMMARY_MODE_RELEARNER_BATTLE && mode != SUMMARY_MODE_RELEARNER_CONTEST)
         gMoveRelearnerState = MOVE_RELEARNER_LEVEL_UP_MOVES;
 
+    gMain.state = 0;
     SetMainCallback2(CB2_InitSummaryScreen);
 }
 

@@ -14,9 +14,11 @@
 #include "script.h"
 #include "script_pokemon_util.h"
 #include "sound.h"
+#include "sprite.h"
 #include "string_util.h"
 #include "task.h"
 #include "text.h"
+#include "trainer_pokemon_sprites.h"
 #include "constants/abilities.h"
 #include "constants/flags.h"
 #include "constants/items.h"
@@ -43,6 +45,10 @@
 #define FRONTIER_CREATOR_TYPE_DIGITS    2
 #define FRONTIER_CREATOR_IV_DIGITS      2
 #define FRONTIER_CREATOR_EV_DIGITS      3
+#define FRONTIER_CREATOR_PREVIEW_X      196
+#define FRONTIER_CREATOR_PREVIEW_Y      40
+#define FRONTIER_CREATOR_PREVIEW_PAL    14
+#define FRONTIER_CREATOR_PREVIEW_NONE   MAX_SPRITES
 
 #define tItemIndex data[1]
 
@@ -70,6 +76,8 @@ static EWRAM_DATA struct FrontierCreatorData *sFrontierCreatorData = NULL;
 #define tInput    data[1]
 #define tDigit    data[2]
 #define tStatId   data[3]
+#define tPreviewSpriteId data[4]
+#define tPreviewSpecies  data[5]
 
 static void Task_FrontierCreator_SelectSpecies(u8 taskId);
 static void Task_FrontierCreator_SelectLevel(u8 taskId);
@@ -94,7 +102,8 @@ static void FrontierHub_GiveAutoItems(void);
 static enum Species FrontierCreator_GetFirstAllowedSpecies(void);
 static enum Species FrontierCreator_GetNextAllowedSpecies(enum Species species, s16 delta);
 static void FrontierCreator_HandleSpeciesInput(u8 taskId);
-
+static void FrontierCreator_UpdateSpeciesPreview(u8 taskId, enum Species species, bool8 playCry);
+static void FrontierCreator_DestroySpeciesPreview(u8 taskId);
 
 static const struct WindowTemplate sFrontierCreatorWindowTemplate =
 {
@@ -1338,7 +1347,6 @@ static const enum Species sFrontierCreatorAllowedBaseSpecies[] =
     SPECIES_BURMY_TRASH,
     SPECIES_WORMADAM_SANDY,
     SPECIES_WORMADAM_TRASH,
-    SPECIES_CHERRIM_SUNSHINE,
     SPECIES_SHELLOS_EAST,
     SPECIES_GASTRODON_EAST,
     SPECIES_ROTOM_HEAT,
@@ -1346,26 +1354,7 @@ static const enum Species sFrontierCreatorAllowedBaseSpecies[] =
     SPECIES_ROTOM_FROST,
     SPECIES_ROTOM_FAN,
     SPECIES_ROTOM_MOW,
-    SPECIES_ARCEUS_FIGHTING,
-    SPECIES_ARCEUS_FLYING,
-    SPECIES_ARCEUS_POISON,
-    SPECIES_ARCEUS_GROUND,
-    SPECIES_ARCEUS_ROCK,
-    SPECIES_ARCEUS_BUG,
-    SPECIES_ARCEUS_GHOST,
-    SPECIES_ARCEUS_STEEL,
-    SPECIES_ARCEUS_FIRE,
-    SPECIES_ARCEUS_WATER,
-    SPECIES_ARCEUS_GRASS,
-    SPECIES_ARCEUS_ELECTRIC,
-    SPECIES_ARCEUS_PSYCHIC,
-    SPECIES_ARCEUS_ICE,
-    SPECIES_ARCEUS_DRAGON,
-    SPECIES_ARCEUS_DARK,
-    SPECIES_ARCEUS_FAIRY,
     SPECIES_BASCULIN_BLUE_STRIPED,
-    SPECIES_DARMANITAN_ZEN,
-    SPECIES_DARMANITAN_GALAR_ZEN,
     SPECIES_DEERLING_SUMMER,
     SPECIES_DEERLING_AUTUMN,
     SPECIES_DEERLING_WINTER,
@@ -1434,23 +1423,6 @@ static const enum Species sFrontierCreatorAllowedBaseSpecies[] =
     SPECIES_ROCKRUFF_OWN_TEMPO,
     SPECIES_LYCANROC_MIDNIGHT,
     SPECIES_LYCANROC_DUSK,
-    SPECIES_SILVALLY_FIGHTING,
-    SPECIES_SILVALLY_FLYING,
-    SPECIES_SILVALLY_POISON,
-    SPECIES_SILVALLY_GROUND,
-    SPECIES_SILVALLY_ROCK,
-    SPECIES_SILVALLY_BUG,
-    SPECIES_SILVALLY_GHOST,
-    SPECIES_SILVALLY_STEEL,
-    SPECIES_SILVALLY_FIRE,
-    SPECIES_SILVALLY_WATER,
-    SPECIES_SILVALLY_GRASS,
-    SPECIES_SILVALLY_ELECTRIC,
-    SPECIES_SILVALLY_PSYCHIC,
-    SPECIES_SILVALLY_ICE,
-    SPECIES_SILVALLY_DRAGON,
-    SPECIES_SILVALLY_DARK,
-    SPECIES_SILVALLY_FAIRY,
     SPECIES_MINIOR_METEOR_ORANGE,
     SPECIES_MINIOR_METEOR_YELLOW,
     SPECIES_MINIOR_METEOR_GREEN,
@@ -1463,16 +1435,6 @@ static const enum Species sFrontierCreatorAllowedBaseSpecies[] =
     SPECIES_MINIOR_BLUE,
     SPECIES_MINIOR_INDIGO,
     SPECIES_MINIOR_VIOLET,
-    SPECIES_MINIOR_CORE_RED,
-    SPECIES_MINIOR_CORE,
-    SPECIES_MINIOR_CORE_ORANGE,
-    SPECIES_MINIOR_CORE_YELLOW,
-    SPECIES_MINIOR_CORE_GREEN,
-    SPECIES_MINIOR_CORE_BLUE,
-    SPECIES_MINIOR_CORE_INDIGO,
-    SPECIES_MINIOR_CORE_VIOLET,
-    SPECIES_CRAMORANT_GULPING,
-    SPECIES_CRAMORANT_GORGING,
     SPECIES_SINISTEA_ANTIQUE,
     SPECIES_POLTEAGEIST_ANTIQUE,
     SPECIES_ALCREMIE_STRAWBERRY_RUBY_CREAM,
@@ -1491,9 +1453,7 @@ static const enum Species sFrontierCreatorAllowedBaseSpecies[] =
     SPECIES_ALCREMIE_RUBY_SWIRL,
     SPECIES_ALCREMIE_CARAMEL_SWIRL,
     SPECIES_ALCREMIE_RAINBOW_SWIRL,
-    SPECIES_EISCUE_NOICE,
     SPECIES_INDEEDEE_F,
-    SPECIES_MORPEKO_HANGRY,
     SPECIES_URSHIFU_RAPID_STRIKE,
     SPECIES_ZARUDE_DADA,
     SPECIES_CALYREX_ICE,
@@ -2222,6 +2182,49 @@ static void FrontierCreator_HandleSpeciesInput(u8 taskId)
     gTasks[taskId].tInput = value;
 }
 
+static void FrontierCreator_DestroySpeciesPreview(u8 taskId)
+{
+    StopCry();
+
+    if (gTasks[taskId].tPreviewSpriteId != FRONTIER_CREATOR_PREVIEW_NONE)
+    {
+        FreeAndDestroyMonPicSprite(gTasks[taskId].tPreviewSpriteId);
+        gTasks[taskId].tPreviewSpriteId = FRONTIER_CREATOR_PREVIEW_NONE;
+    }
+
+    gTasks[taskId].tPreviewSpecies = SPECIES_NONE;
+}
+
+static void FrontierCreator_UpdateSpeciesPreview(u8 taskId, enum Species species, bool8 playCry)
+{
+    u16 spriteId;
+
+    if (gTasks[taskId].tPreviewSpriteId != FRONTIER_CREATOR_PREVIEW_NONE
+     && gTasks[taskId].tPreviewSpecies == species)
+        return;
+
+    FrontierCreator_DestroySpeciesPreview(taskId);
+
+    spriteId = CreateMonPicSprite(
+        species,
+        FALSE,
+        0,
+        TRUE,
+        FRONTIER_CREATOR_PREVIEW_X,
+        FRONTIER_CREATOR_PREVIEW_Y,
+        FRONTIER_CREATOR_PREVIEW_PAL,
+        TAG_NONE);
+
+    if (spriteId == 0xFFFF)
+        return;
+
+    gTasks[taskId].tPreviewSpriteId = spriteId;
+    gTasks[taskId].tPreviewSpecies = species;
+
+    if (playCry)
+        PlayCry_Normal(species, 0);
+}
+
 static u16 FrontierCreator_GetEVTotalExcept(u8 statId)
 {
     u16 total = 0;
@@ -2541,6 +2544,7 @@ static void FrontierCreator_CreateMonAndGive(void)
 
 static void FrontierCreator_DestroyAndReturn(u8 taskId)
 {
+    FrontierCreator_DestroySpeciesPreview(taskId);
     ClearStdWindowAndFrame(gTasks[taskId].tWindowId, TRUE);
     RemoveWindow(gTasks[taskId].tWindowId);
     DestroyTask(taskId);
@@ -2560,9 +2564,14 @@ static void Task_FrontierCreator_SelectSpecies(u8 taskId)
 {
     if (JOY_NEW(DPAD_ANY))
     {
+        enum Species oldSpecies = gTasks[taskId].tInput;
+
         PlaySE(SE_SELECT);
         FrontierCreator_HandleSpeciesInput(taskId);
         FrontierCreator_DrawSpeciesScreen(taskId);
+
+        if (gTasks[taskId].tInput != oldSpecies)
+            FrontierCreator_UpdateSpeciesPreview(taskId, gTasks[taskId].tInput, TRUE);
     }
 
     if (JOY_NEW(A_BUTTON))
@@ -2572,12 +2581,14 @@ static void Task_FrontierCreator_SelectSpecies(u8 taskId)
             PlaySE(SE_PC_OFF);
             gTasks[taskId].tInput = FrontierCreator_GetFirstAllowedSpecies();
             FrontierCreator_DrawSpeciesScreen(taskId);
+            FrontierCreator_UpdateSpeciesPreview(taskId, gTasks[taskId].tInput, FALSE);
             return;
         }
 
         PlaySE(SE_SELECT);
         sFrontierCreatorData->species = gTasks[taskId].tInput;
 
+        FrontierCreator_DestroySpeciesPreview(taskId);
         FrontierCreator_DrawLevelScreen(taskId);
         gTasks[taskId].func = Task_FrontierCreator_SelectLevel;
     }
@@ -3106,11 +3117,16 @@ void Special_OpenFrontierPokemonCreator(void)
     gTasks[taskId].tInput = sFrontierCreatorData->species;
     gTasks[taskId].tDigit = 0;
     gTasks[taskId].tStatId = 0;
+    gTasks[taskId].tPreviewSpriteId = FRONTIER_CREATOR_PREVIEW_NONE;
+    gTasks[taskId].tPreviewSpecies = SPECIES_NONE;
 
     FrontierCreator_DrawSpeciesScreen(taskId);
+    FrontierCreator_UpdateSpeciesPreview(taskId, gTasks[taskId].tInput, FALSE);
 }
 
 #undef tWindowId
 #undef tInput
 #undef tDigit
 #undef tStatId
+#undef tPreviewSpriteId
+#undef tPreviewSpecies

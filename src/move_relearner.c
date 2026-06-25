@@ -434,6 +434,7 @@ void CB2_InitLearnMove(void)
         gTasks[sMoveRelearnerStruct->mainTask].tCategory = CONTEST_INFO;
     else
         gTasks[sMoveRelearnerStruct->mainTask].tCategory = BATTLE_INFO;
+    gMain.state = 0;
     SetMainCallback2(CB2_InitLearnMove_Basic);
 }
 
@@ -446,6 +447,7 @@ static void CB2_InitLearnMoveReturnFromSelectMove(void)
     gTasks[sMoveRelearnerStruct->mainTask].tPartyIndex = gSpecialVar_0x8008;
     gTasks[sMoveRelearnerStruct->mainTask].tMove = gSpecialVar_0x8009;
     gTasks[sMoveRelearnerStruct->mainTask].tCategory = gSpecialVar_0x800A;
+    gMain.state = 0;
     SetMainCallback2(CB2_InitLearnMove_Basic);
 }
 
@@ -524,12 +526,17 @@ static void UIPlayFanfare(u32 songId)
 
 static void UIShowMoveList(u8 taskId)
 {
-    gSpecialVar_0x8008 = gTasks[taskId].tPartyIndex;
-    gSpecialVar_0x8009 = gTasks[taskId].tMove;
-    gSpecialVar_0x800A = gTasks[taskId].tCategory;
-    ShowSelectMovePokemonSummaryScreen(gParties[B_TRAINER_PLAYER], gTasks[taskId].tPartyIndex, CB2_InitLearnMoveReturnFromSelectMove, gTasks[taskId].tMove);
-    DestroyTask(taskId);
+    u16 partyIndex = gTasks[taskId].tPartyIndex;
+    u16 move = gTasks[taskId].tMove;
+    u16 category = gTasks[taskId].tCategory;
+
+    gSpecialVar_0x8008 = partyIndex;
+    gSpecialVar_0x8009 = move;
+    gSpecialVar_0x800A = category;
+
     FreeMoveRelearnerResources();
+    DestroyTask(taskId);
+    ShowSelectMovePokemonSummaryScreen(gParties[B_TRAINER_PLAYER], partyIndex, CB2_InitLearnMoveReturnFromSelectMove, move);
 }
 
 static void UIEndTask(u8 taskId)
