@@ -2,7 +2,7 @@ const struct AbilityInfo gAbilitiesInfo[ABILITIES_COUNT] =
 {
     [ABILITY_NONE] =
     {
-        .name = _("{JPN}-------"),
+        .name = _("{JPN}？？？？？？？"),
         .description = COMPOUND_STRING("{JPN}とくせい なし"),
         .aiRating = 0,
         .cantBeSwapped = TRUE,
@@ -2447,13 +2447,13 @@ const struct AbilityInfo gAbilitiesInfo[ABILITIES_COUNT] =
 
     [ABILITY_313] =
     {
-        .name = _("{JPN}-------"),
+        .name = _("{JPN}？？？？？？？"),
         .description = COMPOUND_STRING("{JPN}とくせい なし"),
     },
 
     [ABILITY_314] =
     {
-        .name = _("{JPN}-------"),
+        .name = _("{JPN}？？？？？？？"),
         .description = COMPOUND_STRING("{JPN}とくせい なし"),
     },
 
@@ -2465,13 +2465,13 @@ const struct AbilityInfo gAbilitiesInfo[ABILITIES_COUNT] =
 
     [ABILITY_316] =
     {
-        .name = _("{JPN}-------"),
+        .name = _("{JPN}？？？？？？？"),
         .description = COMPOUND_STRING("{JPN}とくせい なし"),
     },
 
     [ABILITY_317] =
     {
-        .name = _("{JPN}-------"),
+        .name = _("{JPN}？？？？？？？"),
         .description = COMPOUND_STRING("{JPN}とくせい なし"),
     },
 

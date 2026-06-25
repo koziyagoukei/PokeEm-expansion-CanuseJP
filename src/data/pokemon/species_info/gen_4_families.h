@@ -965,7 +965,7 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
         .height = 19,
         .weight = 500,
         .description = COMPOUND_STRING(
-            "Mega Staraptor is a top-class flier.\n"
+            "Mega Staraptor is a top？class flier.\n"
             "It can easily soar through the sky while\n"
             "gripping a Steelix that weighs more than\n"
             "880 lbs."),
@@ -1832,7 +1832,7 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
         .height = 13,
         .weight = 1495,
         .description = COMPOUND_STRING(
-            "Their rock-hard faces serve to protect\n"
+            "Their rock？hard faces serve to protect\n"
             "them from any frontral attacks.\n"
             "When attacked, they form a wall.\n"
             "They shielded their young in that way."),
@@ -3147,7 +3147,7 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
         .height = 9,
         .weight = 299,
         .description = COMPOUND_STRING(
-            "It appears on shallow-water beaches to\n"
+            "It appears on shallow？water beaches to\n"
             "eat sand for nourishment. Should one\n"
             "Gastrodon encounter another of a\n"
             "different color, a fierce battle will ensue."),
@@ -3779,7 +3779,7 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
         .weight = 192,
         .description = COMPOUND_STRING(
             "It protects itself by spraying a\n"
-            "nose-curling, stinky fluid from its rear\n"
+            "nose？curling, stinky fluid from its rear\n"
             "to repel attackers. The stench lingers\n"
             "for 24 hours."),
         .pokemonScale = 491,
@@ -4000,7 +4000,7 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
             "In ages past, this Pokemon was revered as\n"
             "a bringer of rain. One caused a news stir\n"
             "when it was dug up at a construction site\n"
-            "after a 2000-year sleep."),
+            "after a 2000？year sleep."),
         .pokemonScale = 272,
         .pokemonOffset = 3,
         .trainerScale = 256,
@@ -4561,7 +4561,7 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
         .height = 19,
         .weight = 990,
         .description = COMPOUND_STRING(
-            "Garchomp has gained a new Mega-Evolved\n"
+            "Garchomp has gained a new Mega？Evolved\n"
             "form. It flies around foes at Mach speed\n"
             "and cuts them to shreds with its sinister\n"
             "wing claws."),
@@ -5388,7 +5388,7 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
         .description = COMPOUND_STRING(
             "Hanging from branches using its\n"
             "tentacles, it looks like a plant.\n"
-            "It attracts prey with its sweet-smelling\n"
+            "It attracts prey with its sweet？smelling\n"
             "saliva, then chomps down."),
         .pokemonScale = 265,
         .pokemonOffset = 2,
@@ -6045,7 +6045,7 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
         .height = 3,
         .weight = 3,
         .description = COMPOUND_STRING(
-            "It enjoys coming up with water-based\n"
+            "It enjoys coming up with water？based\n"
             "pranks. The model of washing machine that\n"
             "Rotom can inspirit has been discontinued,\n"
             "so they are now traded at high prices."),
@@ -6122,7 +6122,7 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
         .description = COMPOUND_STRING(
             "In this form, Rotom likes to play freezing\n"
             "cold pranks. You may find it's turned the\n"
-            "bath you just filled to solid ice!\n"
+            "bath you just filled to solid ice？\n"
             "It battles by spewing cold air."),
         .pokemonScale = 530,
         .pokemonOffset = 13,
@@ -6912,7 +6912,7 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
         .description = COMPOUND_STRING(
             "Boiling blood, like magma, circulates\n"
             "through its body. It dwells in volcanic\n"
-            "caves, using its cross-shaped feet\n"
+            "caves, using its cross？shaped feet\n"
             "to crawl on ceilings and walls."),
         .pokemonScale = 259,
         .pokemonOffset = 1,
@@ -7527,7 +7527,7 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
         .speciesName = _("ダークライ"),
         .cryId = CRY_DARKRAI,
         .natDexNum = NATIONAL_DEX_DARKRAI,
-        .categoryName = _("Pitch-Black"),
+        .categoryName = _("Pitch？Black"),
         .height = 15,
         .weight = 505,
         .description = COMPOUND_STRING(
@@ -7612,7 +7612,7 @@ const struct SpeciesInfo gSpeciesInfoGen4[] =
         .cryId = CRY_DARKRAI,
     #endif // P_MODIFIED_MEGA_CRIES
         .natDexNum = NATIONAL_DEX_DARKRAI,
-        .categoryName = _("Pitch-Black"),
+        .categoryName = _("Pitch？Black"),
         .height = 30,
         .weight = 2400,
         .description = COMPOUND_STRING(

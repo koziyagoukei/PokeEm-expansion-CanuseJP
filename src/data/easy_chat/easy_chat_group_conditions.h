@@ -271,7 +271,7 @@ const struct EasyChatWordInfo gEasyChatGroup_Conditions[] = {
     },
     [EC_INDEX(EC_WORD_NON_STOP)] =
     {
-        .text = COMPOUND_STRING("NON-STOP"),
+        .text = COMPOUND_STRING("NON？STOP"),
         .alphabeticalOrder = EC_INDEX(EC_WORD_NOISY),
         .enabled = TRUE,
     },

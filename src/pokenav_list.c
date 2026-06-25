@@ -98,7 +98,7 @@ static const u32 sListArrow_Gfx[] = INCGFX_U32("graphics/pokenav/list_arrows.png
 
 static const u8 gText_PokenavMatchCall_Strategy[] = _("STRATEGY");
 static const u8 gText_PokenavMatchCall_TrainerPokemon[] = _("TRAINER'S POKEMON");
-static const u8 gText_PokenavMatchCall_SelfIntroduction[] = _("SELF-INTRODUCTION");
+static const u8 gText_PokenavMatchCall_SelfIntroduction[] = _("SELF？INTRODUCTION");
 
 bool32 CreatePokenavList(const struct BgTemplate *bgTemplate, struct PokenavListTemplate *listTemplate, s32 tileOffset)
 {

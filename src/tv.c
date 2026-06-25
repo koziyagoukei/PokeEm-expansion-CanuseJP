@@ -180,7 +180,7 @@ static void DoTVShowLilycoveContestLady(void);
 static const u8 sText_Good[] = _("Good");
 static const u8 sText_VeryGood[] = _("Very good");
 static const u8 sText_Excellent[] = _("Excellent");
-static const u8 sText_SoSo[] = _("So-so");
+static const u8 sText_SoSo[] = _("So？so");
 static const u8 sText_Bad[] = _("Bad");
 static const u8 sText_TheWorst[] = _("The worst");
 

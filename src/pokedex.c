@@ -848,7 +848,7 @@ static const struct WindowTemplate sPokemonList_WindowTemplate[] =
 static const u8 sText_No0000[] = _("{NO}0000");
 static const u8 sText_No000[] = _("{NO}000");
 static const u8 sCaughtBall_Gfx[] = INCGFX_U8("graphics/pokedex/caught_ball.png", ".4bpp");
-static const u8 sText_TenDashes[] = _("----------");
+static const u8 sText_TenDashes[] = _("？？？？？？？？？？");
 
 ALIGNED(4) static const u8 sExpandedPlaceholder_PokedexDescription[] = _("");
 
@@ -986,7 +986,7 @@ static const struct WindowTemplate sNewEntryInfoScreen_WindowTemplates[] =
     DUMMY_WIN_TEMPLATE
 };
 
-static const u8 sText_TenDashes2[] = _("----------");
+static const u8 sText_TenDashes2[] = _("？？？？？？？？？？");
 
 // First character in range followed by number of characters in range for upper and lowercase
 static const u8 sLetterSearchRanges[][4] =

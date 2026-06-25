@@ -26,7 +26,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
 {
     [MOVE_NONE] =
     {
-        .name = COMPOUND_STRING("{JPN}-"),
+        .name = COMPOUND_STRING("{JPN}？"),
         .description = COMPOUND_STRING("{JPN}こうかなし さわらない"),
         .effect = EFFECT_HIT,
         .power = 0,
@@ -89,7 +89,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
     [MOVE_DOUBLE_SLAP] =
     {
         .name = COMPOUND_STRING("{JPN}おうふくビンタ"),
-        .description = COMPOUND_STRING("{JPN}れんぞく2-5 さわる"),
+        .description = COMPOUND_STRING("{JPN}れんぞく2？5 さわる"),
         .effect = EFFECT_HIT,
         .power = 15,
         .type = TYPE_NORMAL,
@@ -111,7 +111,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
     [MOVE_COMET_PUNCH] =
     {
         .name = COMPOUND_STRING("{JPN}れんぞくパンチ"),
-        .description = COMPOUND_STRING("{JPN}れんぞく2-5 さわる"),
+        .description = COMPOUND_STRING("{JPN}れんぞく2？5 さわる"),
         .effect = EFFECT_HIT,
         .power = 18,
         .type = TYPE_NORMAL,
@@ -700,7 +700,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
     [MOVE_SAND_ATTACK] =
     {
         .name = COMPOUND_STRING("{JPN}すなかけ"),
-        .description = COMPOUND_STRING("{JPN}あいての めいちゅう-1 さわらない"),
+        .description = COMPOUND_STRING("{JPN}あいての めいちゅう？1 さわらない"),
         .effect = EFFECT_STAT_CHANGE,
         .power = 0,
         .type = B_UPDATED_MOVE_TYPES >= GEN_2 ? TYPE_GROUND : TYPE_NORMAL,
@@ -771,7 +771,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
     [MOVE_FURY_ATTACK] =
     {
         .name = COMPOUND_STRING("{JPN}みだれづき"),
-        .description = COMPOUND_STRING("{JPN}れんぞく2-5 さわる"),
+        .description = COMPOUND_STRING("{JPN}れんぞく2？5 さわる"),
         .effect = EFFECT_HIT,
         .power = 15,
         .type = TYPE_NORMAL,
@@ -962,7 +962,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
     [MOVE_TAIL_WHIP] =
     {
         .name = COMPOUND_STRING("{JPN}しっぽをふる"),
-        .description = COMPOUND_STRING("{JPN}あいての ぼうぎょ-1 さわらない"),
+        .description = COMPOUND_STRING("{JPN}あいての ぼうぎょ？1 さわらない"),
         .effect = EFFECT_STAT_CHANGE,
         .power = 0,
         .type = TYPE_NORMAL,
@@ -1036,7 +1036,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
     [MOVE_PIN_MISSILE] =
     {
         .name = COMPOUND_STRING("{JPN}ミサイルばり"),
-        .description = COMPOUND_STRING("{JPN}れんぞく2-5 さわらない"),
+        .description = COMPOUND_STRING("{JPN}れんぞく2？5 さわらない"),
         .effect = EFFECT_HIT,
         .power = B_UPDATED_MOVE_DATA >= GEN_6 ? 25 : 14,
         .type = TYPE_BUG,
@@ -1056,7 +1056,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
     [MOVE_LEER] =
     {
         .name = COMPOUND_STRING("{JPN}にらみつける"),
-        .description = COMPOUND_STRING("{JPN}あいての ぼうぎょ-1 さわらない"),
+        .description = COMPOUND_STRING("{JPN}あいての ぼうぎょ？1 さわらない"),
         .effect = EFFECT_STAT_CHANGE,
         .power = 0,
         .type = TYPE_NORMAL,
@@ -1107,7 +1107,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
     [MOVE_GROWL] =
     {
         .name = COMPOUND_STRING("{JPN}なきごえ"),
-        .description = COMPOUND_STRING("{JPN}あいての こうげき-1 さわらない"),
+        .description = COMPOUND_STRING("{JPN}あいての こうげき？1 さわらない"),
         .effect = EFFECT_STAT_CHANGE,
         .power = 0,
         .type = TYPE_NORMAL,
@@ -1266,7 +1266,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
     [MOVE_ACID] =
     {
         .name = COMPOUND_STRING("{JPN}ようかいえき"),
-        .description = COMPOUND_STRING("{JPN}あいての ぼうぎょ-1 あいての とくぼう-1 さわらない"),
+        .description = COMPOUND_STRING("{JPN}あいての ぼうぎょ？1 あいての とくぼう？1 さわらない"),
         .effect = EFFECT_HIT,
         .power = 40,
         .type = TYPE_POISON,
@@ -1499,7 +1499,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
     [MOVE_BUBBLE_BEAM] =
     {
         .name = COMPOUND_STRING("{JPN}バブルこうせん"),
-        .description = COMPOUND_STRING("{JPN}あいての すばやさ-1 さわらない"),
+        .description = COMPOUND_STRING("{JPN}あいての すばやさ？1 さわらない"),
         .effect = EFFECT_HIT,
         .power = 65,
         .type = TYPE_WATER,
@@ -1523,7 +1523,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
     [MOVE_AURORA_BEAM] =
     {
         .name = COMPOUND_STRING("{JPN}オーロラビーム"),
-        .description = COMPOUND_STRING("{JPN}あいての こうげき-1 さわらない"),
+        .description = COMPOUND_STRING("{JPN}あいての こうげき？1 さわらない"),
         .effect = EFFECT_HIT,
         .power = 65,
         .type = TYPE_ICE,
@@ -1985,7 +1985,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
     [MOVE_STRING_SHOT] =
     {
         .name = COMPOUND_STRING("{JPN}いとをはく"),
-        .description = COMPOUND_STRING("{JPN}あいての すばやさ-2 さわらない"),
+        .description = COMPOUND_STRING("{JPN}あいての すばやさ？2 さわらない"),
         .effect = EFFECT_STAT_CHANGE,
         .power = 0,
         .type = TYPE_BUG,
@@ -2297,7 +2297,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
     [MOVE_PSYCHIC] =
     {
         .name = COMPOUND_STRING("{JPN}サイコキネシス"),
-        .description = COMPOUND_STRING("{JPN}あいての とくぼう-1 さわらない"),
+        .description = COMPOUND_STRING("{JPN}あいての とくぼう？1 さわらない"),
         .effect = EFFECT_HIT,
         .power = 90,
         .type = TYPE_PSYCHIC,
@@ -2517,7 +2517,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
     [MOVE_SCREECH] =
     {
         .name = COMPOUND_STRING("{JPN}いやなおと"),
-        .description = COMPOUND_STRING("{JPN}あいての ぼうぎょ-2 さわらない"),
+        .description = COMPOUND_STRING("{JPN}あいての ぼうぎょ？2 さわらない"),
         .effect = EFFECT_STAT_CHANGE,
         .power = 0,
         .type = TYPE_NORMAL,
@@ -2660,7 +2660,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
     [MOVE_SMOKESCREEN] =
     {
         .name = COMPOUND_STRING("{JPN}えんまく"),
-        .description = COMPOUND_STRING("{JPN}あいての めいちゅう-1 さわらない"),
+        .description = COMPOUND_STRING("{JPN}あいての めいちゅう？1 さわらない"),
         .effect = EFFECT_STAT_CHANGE,
         .power = 0,
         .type = TYPE_NORMAL,
@@ -3246,7 +3246,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
     [MOVE_SPIKE_CANNON] =
     {
         .name = COMPOUND_STRING("{JPN}とげキャノン"),
-        .description = COMPOUND_STRING("{JPN}れんぞく2-5 さわらない"),
+        .description = COMPOUND_STRING("{JPN}れんぞく2？5 さわらない"),
         .effect = EFFECT_HIT,
         .power = 20,
         .type = TYPE_NORMAL,
@@ -3266,7 +3266,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
     [MOVE_CONSTRICT] =
     {
         .name = COMPOUND_STRING("{JPN}からみつく"),
-        .description = COMPOUND_STRING("{JPN}あいての すばやさ-1 さわる"),
+        .description = COMPOUND_STRING("{JPN}あいての すばやさ？1 さわる"),
         .effect = EFFECT_HIT,
         .power = 10,
         .type = TYPE_NORMAL,
@@ -3319,7 +3319,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
     [MOVE_KINESIS] =
     {
         .name = COMPOUND_STRING("{JPN}スプーンまげ"),
-        .description = COMPOUND_STRING("{JPN}あいての めいちゅう-1 さわらない"),
+        .description = COMPOUND_STRING("{JPN}あいての めいちゅう？1 さわらない"),
         .effect = EFFECT_STAT_CHANGE,
         .power = 0,
         .type = TYPE_PSYCHIC,
@@ -3477,7 +3477,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
     [MOVE_BARRAGE] =
     {
         .name = COMPOUND_STRING("{JPN}たまなげ"),
-        .description = COMPOUND_STRING("{JPN}れんぞく2-5 さわらない"),
+        .description = COMPOUND_STRING("{JPN}れんぞく2？5 さわらない"),
         .effect = EFFECT_HIT,
         .power = 15,
         .type = TYPE_NORMAL,
@@ -3604,7 +3604,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
     [MOVE_BUBBLE] =
     {
         .name = COMPOUND_STRING("{JPN}あわ"),
-        .description = COMPOUND_STRING("{JPN}あいての すばやさ-1 さわらない"),
+        .description = COMPOUND_STRING("{JPN}あいての すばやさ？1 さわらない"),
         .effect = EFFECT_HIT,
         .power = B_UPDATED_MOVE_DATA >= GEN_6 ? 40 : 20,
         .type = TYPE_WATER,
@@ -3680,7 +3680,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
     [MOVE_FLASH] =
     {
         .name = COMPOUND_STRING("{JPN}フラッシュ"),
-        .description = COMPOUND_STRING("{JPN}あいての めいちゅう-1 さわらない"),
+        .description = COMPOUND_STRING("{JPN}あいての めいちゅう？1 さわらない"),
         .effect = EFFECT_STAT_CHANGE,
         .power = 0,
         .type = TYPE_NORMAL,
@@ -3822,7 +3822,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
     [MOVE_FURY_SWIPES] =
     {
         .name = COMPOUND_STRING("{JPN}みだれひっかき"),
-        .description = COMPOUND_STRING("{JPN}れんぞく2-5 さわる"),
+        .description = COMPOUND_STRING("{JPN}れんぞく2？5 さわる"),
         .effect = EFFECT_HIT,
         .power = 18,
         .type = TYPE_NORMAL,
@@ -4333,7 +4333,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
     [MOVE_CURSE] =
     {
         .name = COMPOUND_STRING("{JPN}のろい"),
-        .description = COMPOUND_STRING("{JPN}あいての すばやさ-1 さわらない"),
+        .description = COMPOUND_STRING("{JPN}あいての すばやさ？1 さわらない"),
         .effect = EFFECT_CURSE,
         .power = 0,
         .type = B_UPDATED_MOVE_TYPES >= GEN_5 ? TYPE_GHOST : TYPE_MYSTERY,
@@ -4433,7 +4433,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
     [MOVE_COTTON_SPORE] =
     {
         .name = COMPOUND_STRING("{JPN}わたほうし"),
-        .description = COMPOUND_STRING("{JPN}あいての すばやさ-2 さわらない"),
+        .description = COMPOUND_STRING("{JPN}あいての すばやさ？2 さわらない"),
         .effect = EFFECT_STAT_CHANGE,
         .power = 0,
         .type = TYPE_GRASS,
@@ -4582,7 +4582,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
     [MOVE_SCARY_FACE] =
     {
         .name = COMPOUND_STRING("{JPN}こわいかお"),
-        .description = COMPOUND_STRING("{JPN}あいての すばやさ-2 さわらない"),
+        .description = COMPOUND_STRING("{JPN}あいての すばやさ？2 さわらない"),
         .effect = EFFECT_STAT_CHANGE,
         .power = 0,
         .type = TYPE_NORMAL,
@@ -4704,7 +4704,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
     [MOVE_MUD_SLAP] =
     {
         .name = COMPOUND_STRING("{JPN}どろかけ"),
-        .description = COMPOUND_STRING("{JPN}あいての めいちゅう-1 さわらない"),
+        .description = COMPOUND_STRING("{JPN}あいての めいちゅう？1 さわらない"),
         .effect = EFFECT_HIT,
         .power = 20,
         .type = TYPE_GROUND,
@@ -4729,7 +4729,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
     [MOVE_OCTAZOOKA] =
     {
         .name = COMPOUND_STRING("{JPN}オクタンほう"),
-        .description = COMPOUND_STRING("{JPN}あいての めいちゅう-1 さわらない"),
+        .description = COMPOUND_STRING("{JPN}あいての めいちゅう？1 さわらない"),
         .effect = EFFECT_HIT,
         .power = 65,
         .type = TYPE_WATER,
@@ -4881,7 +4881,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
     [MOVE_ICY_WIND] =
     {
         .name = COMPOUND_STRING("{JPN}こごえるかぜ"),
-        .description = COMPOUND_STRING("{JPN}あいての すばやさ-1 さわらない"),
+        .description = COMPOUND_STRING("{JPN}あいての すばやさ？1 さわらない"),
         .effect = EFFECT_HIT,
         .power = 55,
         .type = TYPE_ICE,
@@ -4940,7 +4940,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
     [MOVE_BONE_RUSH] =
     {
         .name = COMPOUND_STRING("{JPN}ボーンラッシュ"),
-        .description = COMPOUND_STRING("{JPN}れんぞく2-5 さわらない"),
+        .description = COMPOUND_STRING("{JPN}れんぞく2？5 さわらない"),
         .effect = EFFECT_HIT,
         .power = 25,
         .type = TYPE_GROUND,
@@ -5087,7 +5087,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
     [MOVE_CHARM] =
     {
         .name = COMPOUND_STRING("{JPN}あまえる"),
-        .description = COMPOUND_STRING("{JPN}あいての こうげき-2 さわらない"),
+        .description = COMPOUND_STRING("{JPN}あいての こうげき？2 さわらない"),
         .effect = EFFECT_STAT_CHANGE,
         .power = 0,
         .type = B_UPDATED_MOVE_TYPES >= GEN_6 ? TYPE_FAIRY : TYPE_NORMAL,
@@ -5715,7 +5715,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
     [MOVE_SWEET_SCENT] =
     {
         .name = COMPOUND_STRING("{JPN}あまいかおり"),
-        .description = COMPOUND_STRING("{JPN}あいての かいひ-2 さわらない"),
+        .description = COMPOUND_STRING("{JPN}あいての かいひ？2 さわらない"),
         .effect = EFFECT_STAT_CHANGE,
         .power = 0,
         .type = TYPE_NORMAL,
@@ -5741,7 +5741,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
     [MOVE_IRON_TAIL] =
     {
         .name = COMPOUND_STRING("{JPN}アイアンテール"),
-        .description = COMPOUND_STRING("{JPN}あいての ぼうぎょ-1 さわる"),
+        .description = COMPOUND_STRING("{JPN}あいての ぼうぎょ？1 さわる"),
         .effect = EFFECT_HIT,
         .power = 100,
         .type = TYPE_STEEL,
@@ -6006,7 +6006,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
     [MOVE_CRUNCH] =
     {
         .name = COMPOUND_STRING("{JPN}かみくだく"),
-        .description = COMPOUND_STRING("{JPN}あいての ぼうぎょ-1 あいての とくぼう-1 さわる"),
+        .description = COMPOUND_STRING("{JPN}あいての ぼうぎょ？1 あいての とくぼう？1 さわる"),
         .effect = EFFECT_HIT,
         .power = 80,
         .type = TYPE_DARK,
@@ -6141,7 +6141,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
     [MOVE_SHADOW_BALL] =
     {
         .name = COMPOUND_STRING("{JPN}シャドーボール"),
-        .description = COMPOUND_STRING("{JPN}あいての とくぼう-1 さわらない"),
+        .description = COMPOUND_STRING("{JPN}あいての とくぼう？1 さわらない"),
         .effect = EFFECT_HIT,
         .power = 80,
         .type = TYPE_GHOST,
@@ -6195,7 +6195,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
     [MOVE_ROCK_SMASH] =
     {
         .name = COMPOUND_STRING("{JPN}いわくだき"),
-        .description = COMPOUND_STRING("{JPN}あいての ぼうぎょ-1 さわる"),
+        .description = COMPOUND_STRING("{JPN}あいての ぼうぎょ？1 さわる"),
         .effect = EFFECT_HIT,
         .power = B_UPDATED_MOVE_DATA >= GEN_4 ? 40 : 20,
         .type = TYPE_FIGHTING,
@@ -6522,7 +6522,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
     [MOVE_MEMENTO] =
     {
         .name = COMPOUND_STRING("{JPN}おきみやげ"),
-        .description = COMPOUND_STRING("{JPN}あいての こうげき-2 あいての とくこう-2 さわらない"),
+        .description = COMPOUND_STRING("{JPN}あいての こうげき？2 あいての とくこう？2 さわらない"),
         .effect = EFFECT_MEMENTO,
         .power = 0,
         .type = TYPE_DARK,
@@ -6886,7 +6886,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
     [MOVE_SUPERPOWER] =
     {
         .name = COMPOUND_STRING("{JPN}ばかぢから"),
-        .description = COMPOUND_STRING("{JPN}じぶんの こうげき-1 じぶんの ぼうぎょ-1 さわる"),
+        .description = COMPOUND_STRING("{JPN}じぶんの こうげき？1 じぶんの ぼうぎょ？1 さわる"),
         .effect = EFFECT_HIT,
         .power = 120,
         .type = TYPE_FIGHTING,
@@ -7266,7 +7266,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
     [MOVE_ARM_THRUST] =
     {
         .name = COMPOUND_STRING("{JPN}つっぱり"),
-        .description = COMPOUND_STRING("{JPN}れんぞく2-5 さわる"),
+        .description = COMPOUND_STRING("{JPN}れんぞく2？5 さわる"),
         .effect = EFFECT_HIT,
         .power = 15,
         .type = TYPE_FIGHTING,
@@ -7339,7 +7339,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
     [MOVE_LUSTER_PURGE] =
     {
         .name = COMPOUND_STRING("{JPN}ラスターパージ"),
-        .description = COMPOUND_STRING("{JPN}あいての とくぼう-1 さわらない"),
+        .description = COMPOUND_STRING("{JPN}あいての とくぼう？1 さわらない"),
         .effect = EFFECT_HIT,
         .power = (B_UPDATED_MOVE_DATA >= GEN_9) ? 95 : 70,
         .type = TYPE_PSYCHIC,
@@ -7364,7 +7364,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
     [MOVE_MIST_BALL] =
     {
         .name = COMPOUND_STRING("{JPN}ミストボール"),
-        .description = COMPOUND_STRING("{JPN}あいての とくこう-1 さわらない"),
+        .description = COMPOUND_STRING("{JPN}あいての とくこう？1 さわらない"),
         .effect = EFFECT_HIT,
         .power = (B_UPDATED_MOVE_DATA >= GEN_9) ? 95 : 70,
         .type = TYPE_PSYCHIC,
@@ -7390,7 +7390,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
     [MOVE_FEATHER_DANCE] =
     {
         .name = COMPOUND_STRING("{JPN}フェザーダンス"),
-        .description = COMPOUND_STRING("{JPN}あいての こうげき-2 さわらない"),
+        .description = COMPOUND_STRING("{JPN}あいての こうげき？2 さわらない"),
         .effect = EFFECT_STAT_CHANGE,
         .power = 0,
         .type = TYPE_FLYING,
@@ -7612,7 +7612,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
     [MOVE_CRUSH_CLAW] =
     {
         .name = COMPOUND_STRING("{JPN}ブレイククロー"),
-        .description = COMPOUND_STRING("{JPN}あいての ぼうぎょ-1 さわる"),
+        .description = COMPOUND_STRING("{JPN}あいての ぼうぎょ？1 さわる"),
         .effect = EFFECT_HIT,
         .power = 75,
         .type = TYPE_NORMAL,
@@ -7787,7 +7787,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
     [MOVE_FAKE_TEARS] =
     {
         .name = COMPOUND_STRING("{JPN}うそなき"),
-        .description = COMPOUND_STRING("{JPN}あいての とくぼう-2 さわらない"),
+        .description = COMPOUND_STRING("{JPN}あいての とくぼう？2 さわらない"),
         .effect = EFFECT_STAT_CHANGE,
         .power = 0,
         .type = TYPE_DARK,
@@ -7836,7 +7836,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
     [MOVE_OVERHEAT] =
     {
         .name = COMPOUND_STRING("{JPN}オーバーヒート"),
-        .description = COMPOUND_STRING("{JPN}じぶんの とくこう-2 さわらない"),
+        .description = COMPOUND_STRING("{JPN}じぶんの とくこう？2 さわらない"),
         .effect = EFFECT_HIT,
         .power = B_UPDATED_MOVE_DATA >= GEN_6 ? 130 : 140,
         .type = TYPE_FIRE,
@@ -7885,7 +7885,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
     [MOVE_ROCK_TOMB] =
     {
         .name = COMPOUND_STRING("{JPN}がんせきふうじ"),
-        .description = COMPOUND_STRING("{JPN}あいての すばやさ-1 さわらない"),
+        .description = COMPOUND_STRING("{JPN}あいての すばやさ？1 さわらない"),
         .effect = EFFECT_HIT,
         .power = B_UPDATED_MOVE_DATA >= GEN_6 ? 60 : 50,
         .type = TYPE_ROCK,
@@ -7941,7 +7941,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
     [MOVE_METAL_SOUND] =
     {
         .name = COMPOUND_STRING("{JPN}きんぞくおん"),
-        .description = COMPOUND_STRING("{JPN}あいての とくぼう-2 さわらない"),
+        .description = COMPOUND_STRING("{JPN}あいての とくぼう？2 さわらない"),
         .effect = EFFECT_STAT_CHANGE,
         .power = 0,
         .type = TYPE_STEEL,
@@ -7994,7 +7994,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
     [MOVE_TICKLE] =
     {
         .name = COMPOUND_STRING("{JPN}くすぐる"),
-        .description = COMPOUND_STRING("{JPN}あいての こうげき-1 あいての ぼうぎょ-1 さわらない"),
+        .description = COMPOUND_STRING("{JPN}あいての こうげき？1 あいての ぼうぎょ？1 さわらない"),
         .effect = EFFECT_STAT_CHANGE,
         .power = 0,
         .type = TYPE_NORMAL,
@@ -8211,7 +8211,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
     [MOVE_MUDDY_WATER] =
     {
         .name = COMPOUND_STRING("{JPN}だくりゅう"),
-        .description = COMPOUND_STRING("{JPN}あいての めいちゅう-1 さわらない"),
+        .description = COMPOUND_STRING("{JPN}あいての めいちゅう？1 さわらない"),
         .effect = EFFECT_HIT,
         .power = B_UPDATED_MOVE_DATA >= GEN_6 ? 90 : 95,
         .type = TYPE_WATER,
@@ -8237,7 +8237,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
     [MOVE_BULLET_SEED] =
     {
         .name = COMPOUND_STRING("{JPN}タネマシンガン"),
-        .description = COMPOUND_STRING("{JPN}れんぞく2-5 さわらない"),
+        .description = COMPOUND_STRING("{JPN}れんぞく2？5 さわらない"),
         .effect = EFFECT_HIT,
         .power = B_UPDATED_MOVE_DATA >= GEN_5 ? 25 : 10,
         .type = TYPE_GRASS,
@@ -8280,7 +8280,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
     [MOVE_ICICLE_SPEAR] =
     {
         .name = COMPOUND_STRING("{JPN}つららばり"),
-        .description = COMPOUND_STRING("{JPN}れんぞく2-5 さわらない"),
+        .description = COMPOUND_STRING("{JPN}れんぞく2？5 さわらない"),
         .effect = EFFECT_HIT,
         .power = B_UPDATED_MOVE_DATA >= GEN_5 ? 25 : 10,
         .type = TYPE_ICE,
@@ -8485,7 +8485,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
     [MOVE_MUD_SHOT] =
     {
         .name = COMPOUND_STRING("{JPN}マッドショット"),
-        .description = COMPOUND_STRING("{JPN}あいての すばやさ-1 さわらない"),
+        .description = COMPOUND_STRING("{JPN}あいての すばやさ？1 さわらない"),
         .effect = EFFECT_HIT,
         .power = 55,
         .type = TYPE_GROUND,
@@ -8715,7 +8715,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
     [MOVE_ROCK_BLAST] =
     {
         .name = COMPOUND_STRING("{JPN}ロックブラスト"),
-        .description = COMPOUND_STRING("{JPN}れんぞく2-5 さわらない"),
+        .description = COMPOUND_STRING("{JPN}れんぞく2？5 さわらない"),
         .effect = EFFECT_HIT,
         .power = 25,
         .type = TYPE_ROCK,
@@ -8803,7 +8803,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
     [MOVE_PSYCHO_BOOST] =
     {
         .name = COMPOUND_STRING("{JPN}サイコブースト"),
-        .description = COMPOUND_STRING("{JPN}じぶんの とくこう-2 さわらない"),
+        .description = COMPOUND_STRING("{JPN}じぶんの とくこう？2 さわらない"),
         .effect = EFFECT_HIT,
         .power = 140,
         .type = TYPE_PSYCHIC,
@@ -8921,7 +8921,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
     [MOVE_HAMMER_ARM] =
     {
         .name = COMPOUND_STRING("{JPN}アームハンマー"),
-        .description = COMPOUND_STRING("{JPN}じぶんの すばやさ-1 さわる"),
+        .description = COMPOUND_STRING("{JPN}じぶんの すばやさ？1 さわる"),
         .effect = EFFECT_HIT,
         .power = 100,
         .type = TYPE_FIGHTING,
@@ -9171,7 +9171,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
     [MOVE_CLOSE_COMBAT] =
     {
         .name = COMPOUND_STRING("{JPN}インファイト"),
-        .description = COMPOUND_STRING("{JPN}じぶんの ぼうぎょ-1 じぶんの とくぼう-1 さわる"),
+        .description = COMPOUND_STRING("{JPN}じぶんの ぼうぎょ？1 じぶんの とくぼう？1 さわる"),
         .effect = EFFECT_HIT,
         .power = 120,
         .type = TYPE_FIGHTING,
@@ -9963,7 +9963,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
     [MOVE_BUG_BUZZ] =
     {
         .name = COMPOUND_STRING("{JPN}むしのさざめき"),
-        .description = COMPOUND_STRING("{JPN}あいての とくぼう-1 さわらない"),
+        .description = COMPOUND_STRING("{JPN}あいての とくぼう？1 さわらない"),
         .effect = EFFECT_HIT,
         .power = 90,
         .type = TYPE_BUG,
@@ -10095,7 +10095,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
     [MOVE_FOCUS_BLAST] =
     {
         .name = COMPOUND_STRING("{JPN}きあいだま"),
-        .description = COMPOUND_STRING("{JPN}あいての とくぼう-1 さわらない"),
+        .description = COMPOUND_STRING("{JPN}あいての とくぼう？1 さわらない"),
         .effect = EFFECT_HIT,
         .power = 120,
         .type = TYPE_FIGHTING,
@@ -10120,7 +10120,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
     [MOVE_ENERGY_BALL] =
     {
         .name = COMPOUND_STRING("{JPN}エナジーボール"),
-        .description = COMPOUND_STRING("{JPN}あいての とくぼう-1 さわらない"),
+        .description = COMPOUND_STRING("{JPN}あいての とくぼう？1 さわらない"),
         .effect = EFFECT_HIT,
         .power = B_UPDATED_MOVE_DATA >= GEN_6 ? 90 : 80,
         .type = TYPE_GRASS,
@@ -10166,7 +10166,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
     [MOVE_EARTH_POWER] =
     {
         .name = COMPOUND_STRING("{JPN}だいちのちから"),
-        .description = COMPOUND_STRING("{JPN}あいての とくぼう-1 さわらない"),
+        .description = COMPOUND_STRING("{JPN}あいての とくぼう？1 さわらない"),
         .effect = EFFECT_HIT,
         .power = 90,
         .type = TYPE_GROUND,
@@ -10453,7 +10453,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
     [MOVE_MUD_BOMB] =
     {
         .name = COMPOUND_STRING("{JPN}どろばくだん"),
-        .description = COMPOUND_STRING("{JPN}あいての めいちゅう-1 さわらない"),
+        .description = COMPOUND_STRING("{JPN}あいての めいちゅう？1 さわらない"),
         .effect = EFFECT_HIT,
         .power = 65,
         .type = TYPE_GROUND,
@@ -10523,7 +10523,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
     [MOVE_MIRROR_SHOT] =
     {
         .name = COMPOUND_STRING("{JPN}ミラーショット"),
-        .description = COMPOUND_STRING("{JPN}あいての めいちゅう-1 さわらない"),
+        .description = COMPOUND_STRING("{JPN}あいての めいちゅう？1 さわらない"),
         .effect = EFFECT_HIT,
         .power = 65,
         .type = TYPE_STEEL,
@@ -10547,7 +10547,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
     [MOVE_FLASH_CANNON] =
     {
         .name = COMPOUND_STRING("{JPN}ラスターカノン"),
-        .description = COMPOUND_STRING("{JPN}あいての とくぼう-1 さわらない"),
+        .description = COMPOUND_STRING("{JPN}あいての とくぼう？1 さわらない"),
         .effect = EFFECT_HIT,
         .power = 80,
         .type = TYPE_STEEL,
@@ -10595,7 +10595,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
     [MOVE_DEFOG] =
     {
         .name = COMPOUND_STRING("{JPN}きりばらい"),
-        .description = COMPOUND_STRING("{JPN}あいての かいひ-1 さわらない"),
+        .description = COMPOUND_STRING("{JPN}あいての かいひ？1 さわらない"),
         .effect = EFFECT_DEFOG,
         .power = 0,
         .type = TYPE_FLYING,
@@ -10642,7 +10642,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
     [MOVE_DRACO_METEOR] =
     {
         .name = COMPOUND_STRING("{JPN}りゅうせいぐん"),
-        .description = COMPOUND_STRING("{JPN}じぶんの とくこう-2 さわらない"),
+        .description = COMPOUND_STRING("{JPN}じぶんの とくこう？2 さわらない"),
         .effect = EFFECT_HIT,
         .power = B_UPDATED_MOVE_DATA >= GEN_6 ? 130 : 140,
         .type = TYPE_DRAGON,
@@ -10712,7 +10712,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
     [MOVE_LEAF_STORM] =
     {
         .name = COMPOUND_STRING("{JPN}リーフストーム"),
-        .description = COMPOUND_STRING("{JPN}じぶんの とくこう-2 さわらない"),
+        .description = COMPOUND_STRING("{JPN}じぶんの とくこう？2 さわらない"),
         .effect = EFFECT_HIT,
         .power = B_UPDATED_MOVE_DATA >= GEN_6 ? 130 : 140,
         .type = TYPE_GRASS,
@@ -10893,7 +10893,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
     [MOVE_CAPTIVATE] =
     {
         .name = COMPOUND_STRING("{JPN}ゆうわく"),
-        .description = COMPOUND_STRING("{JPN}あいての とくこう-2 さわらない"),
+        .description = COMPOUND_STRING("{JPN}あいての とくこう？2 さわらない"),
         .effect = EFFECT_CAPTIVATE,
         .power = 0,
         .type = TYPE_NORMAL,
@@ -11358,7 +11358,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
     [MOVE_SEED_FLARE] =
     {
         .name = COMPOUND_STRING("{JPN}シードフレア"),
-        .description = COMPOUND_STRING("{JPN}あいての とくぼう-2 さわらない"),
+        .description = COMPOUND_STRING("{JPN}あいての とくぼう？2 さわらない"),
         .effect = EFFECT_HIT,
         .power = 120,
         .type = TYPE_GRASS,
@@ -11947,7 +11947,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
     [MOVE_LOW_SWEEP] =
     {
         .name = COMPOUND_STRING("{JPN}ローキック"),
-        .description = COMPOUND_STRING("{JPN}あいての すばやさ-1 さわる"),
+        .description = COMPOUND_STRING("{JPN}あいての すばやさ？1 さわる"),
         .effect = EFFECT_HIT,
         .power = B_UPDATED_MOVE_DATA >= GEN_6 ? 65 : 60,
         .type = TYPE_FIGHTING,
@@ -11972,7 +11972,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
     [MOVE_ACID_SPRAY] =
     {
         .name = COMPOUND_STRING("{JPN}アシッドボム"),
-        .description = COMPOUND_STRING("{JPN}あいての とくぼう-2 さわらない"),
+        .description = COMPOUND_STRING("{JPN}あいての とくぼう？2 さわらない"),
         .effect = EFFECT_HIT,
         .power = 40,
         .type = TYPE_POISON,
@@ -12262,7 +12262,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
     [MOVE_SHELL_SMASH] =
     {
         .name = COMPOUND_STRING("{JPN}からをやぶる"),
-        .description = COMPOUND_STRING("{JPN}じぶんの ぼうぎょ-1 じぶんの とくぼう-1 さわらない"),
+        .description = COMPOUND_STRING("{JPN}じぶんの ぼうぎょ？1 じぶんの とくぼう？1 さわらない"),
         .effect = EFFECT_STAT_CHANGE,
         .power = 0,
         .type = TYPE_NORMAL,
@@ -12695,7 +12695,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
     [MOVE_STRUGGLE_BUG] =
     {
         .name = COMPOUND_STRING("{JPN}むしのていこう"),
-        .description = COMPOUND_STRING("{JPN}あいての とくこう-1 さわらない"),
+        .description = COMPOUND_STRING("{JPN}あいての とくこう？1 さわらない"),
         .effect = EFFECT_HIT,
         .power = B_UPDATED_MOVE_DATA >= GEN_6 ? 50 : 30,
         .type = TYPE_BUG,
@@ -12719,7 +12719,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
     [MOVE_BULLDOZE] =
     {
         .name = COMPOUND_STRING("{JPN}じならし"),
-        .description = COMPOUND_STRING("{JPN}あいての すばやさ-1 さわらない"),
+        .description = COMPOUND_STRING("{JPN}あいての すばやさ？1 さわらない"),
         .effect = EFFECT_EARTHQUAKE,
         .power = 60,
         .type = TYPE_GROUND,
@@ -12814,7 +12814,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
     [MOVE_ELECTROWEB] =
     {
         .name = COMPOUND_STRING("{JPN}エレキネット"),
-        .description = COMPOUND_STRING("{JPN}あいての すばやさ-1 さわらない"),
+        .description = COMPOUND_STRING("{JPN}あいての すばやさ？1 さわらない"),
         .effect = EFFECT_HIT,
         .power = 55,
         .type = TYPE_ELECTRIC,
@@ -12969,7 +12969,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
     [MOVE_RAZOR_SHELL] =
     {
         .name = COMPOUND_STRING("{JPN}シェルブレード"),
-        .description = COMPOUND_STRING("{JPN}あいての ぼうぎょ-1 さわる"),
+        .description = COMPOUND_STRING("{JPN}あいての ぼうぎょ？1 さわる"),
         .effect = EFFECT_HIT,
         .power = 75,
         .type = TYPE_WATER,
@@ -13016,7 +13016,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
     [MOVE_LEAF_TORNADO] =
     {
         .name = COMPOUND_STRING("{JPN}グラスミキサー"),
-        .description = COMPOUND_STRING("{JPN}あいての めいちゅう-1 さわらない"),
+        .description = COMPOUND_STRING("{JPN}あいての めいちゅう？1 さわらない"),
         .effect = EFFECT_HIT,
         .power = 65,
         .type = TYPE_GRASS,
@@ -13092,7 +13092,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
     [MOVE_NIGHT_DAZE] =
     {
         .name = COMPOUND_STRING("{JPN}ナイトバースト"),
-        .description = COMPOUND_STRING("{JPN}あいての めいちゅう-1 さわらない"),
+        .description = COMPOUND_STRING("{JPN}あいての めいちゅう？1 さわらない"),
         .effect = EFFECT_HIT,
         .power = 85,
         .type = TYPE_DARK,
@@ -13135,7 +13135,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
     [MOVE_TAIL_SLAP] =
     {
         .name = COMPOUND_STRING("{JPN}スイープビンタ"),
-        .description = COMPOUND_STRING("{JPN}れんぞく2-5 さわる"),
+        .description = COMPOUND_STRING("{JPN}れんぞく2？5 さわる"),
         .effect = EFFECT_HIT,
         .power = 25,
         .type = TYPE_NORMAL,
@@ -13319,7 +13319,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
     [MOVE_GLACIATE] =
     {
         .name = COMPOUND_STRING("{JPN}こごえるせかい"),
-        .description = COMPOUND_STRING("{JPN}あいての すばやさ-1 さわらない"),
+        .description = COMPOUND_STRING("{JPN}あいての すばやさ？1 さわらない"),
         .effect = EFFECT_HIT,
         .power = 65,
         .type = TYPE_ICE,
@@ -13470,7 +13470,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
     [MOVE_SNARL] =
     {
         .name = COMPOUND_STRING("{JPN}バークアウト"),
-        .description = COMPOUND_STRING("{JPN}あいての とくこう-1 さわらない"),
+        .description = COMPOUND_STRING("{JPN}あいての とくこう？1 さわらない"),
         .effect = EFFECT_HIT,
         .power = 55,
         .type = TYPE_DARK,
@@ -13520,7 +13520,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
     [MOVE_V_CREATE] =
     {
         .name = COMPOUND_STRING("{JPN}Vジェネレート"),
-        .description = COMPOUND_STRING("{JPN}じぶんの ぼうぎょ-1 じぶんの すばやさ-1 じぶんの とくぼう-1 さわる"),
+        .description = COMPOUND_STRING("{JPN}じぶんの ぼうぎょ？1 じぶんの すばやさ？1 じぶんの とくぼう？1 さわる"),
         .effect = EFFECT_HIT,
         .power = 180,
         .type = TYPE_FIRE,
@@ -13792,7 +13792,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
     [MOVE_NOBLE_ROAR] =
     {
         .name = COMPOUND_STRING("{JPN}おたけび"),
-        .description = COMPOUND_STRING("{JPN}あいての こうげき-1 あいての とくこう-1 さわらない"),
+        .description = COMPOUND_STRING("{JPN}あいての こうげき？1 あいての とくこう？1 さわらない"),
         .effect = EFFECT_STAT_CHANGE,
         .power = 0,
         .type = TYPE_NORMAL,
@@ -13950,7 +13950,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
     [MOVE_PARTING_SHOT] =
     {
         .name = COMPOUND_STRING("{JPN}すてゼリフ"),
-        .description = COMPOUND_STRING("{JPN}あいての こうげき-1 あいての とくこう-1 さわらない"),
+        .description = COMPOUND_STRING("{JPN}あいての こうげき？1 あいての とくこう？1 さわらない"),
         .effect = EFFECT_PARTING_SHOT,
         .power = 0,
         .type = TYPE_DARK,
@@ -14138,7 +14138,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
     [MOVE_PLAY_ROUGH] =
     {
         .name = COMPOUND_STRING("{JPN}じゃれつく"),
-        .description = COMPOUND_STRING("{JPN}あいての こうげき-1 さわる"),
+        .description = COMPOUND_STRING("{JPN}あいての こうげき？1 さわる"),
         .effect = EFFECT_HIT,
         .power = 90,
         .type = TYPE_FAIRY,
@@ -14183,7 +14183,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
     [MOVE_MOONBLAST] =
     {
         .name = COMPOUND_STRING("{JPN}ムーンフォース"),
-        .description = COMPOUND_STRING("{JPN}あいての とくこう-1 さわらない"),
+        .description = COMPOUND_STRING("{JPN}あいての とくこう？1 さわらない"),
         .effect = EFFECT_HIT,
         .power = 95,
         .type = TYPE_FAIRY,
@@ -14277,7 +14277,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
     [MOVE_PLAY_NICE] =
     {
         .name = COMPOUND_STRING("{JPN}なかよくする"),
-        .description = COMPOUND_STRING("{JPN}あいての こうげき-1 さわらない"),
+        .description = COMPOUND_STRING("{JPN}あいての こうげき？1 さわらない"),
         .effect = EFFECT_STAT_CHANGE,
         .power = 0,
         .type = TYPE_NORMAL,
@@ -14304,7 +14304,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
     [MOVE_CONFIDE] =
     {
         .name = COMPOUND_STRING("{JPN}ないしょばなし"),
-        .description = COMPOUND_STRING("{JPN}あいての とくこう-1 さわらない"),
+        .description = COMPOUND_STRING("{JPN}あいての とくこう？1 さわらない"),
         .effect = EFFECT_STAT_CHANGE,
         .power = 0,
         .type = TYPE_NORMAL,
@@ -14408,7 +14408,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
     [MOVE_WATER_SHURIKEN] =
     {
         .name = COMPOUND_STRING("{JPN}みずしゅりけん"),
-        .description = COMPOUND_STRING("{JPN}れんぞく2-5 さわらない"),
+        .description = COMPOUND_STRING("{JPN}れんぞく2？5 さわらない"),
         .effect = EFFECT_SPECIES_POWER_OVERRIDE,
         .power = 15,
         .type = TYPE_WATER,
@@ -14433,7 +14433,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
     [MOVE_MYSTICAL_FIRE] =
     {
         .name = COMPOUND_STRING("{JPN}マジカルフレイム"),
-        .description = COMPOUND_STRING("{JPN}あいての とくこう-1 さわらない"),
+        .description = COMPOUND_STRING("{JPN}あいての とくこう？1 さわらない"),
         .effect = EFFECT_HIT,
         .power = B_UPDATED_MOVE_DATA >= GEN_7 ? 75 : 65,
         .type = TYPE_FIRE,
@@ -14510,7 +14510,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
     [MOVE_EERIE_IMPULSE] =
     {
         .name = COMPOUND_STRING("{JPN}かいでんぱ"),
-        .description = COMPOUND_STRING("{JPN}あいての とくこう-2 さわらない"),
+        .description = COMPOUND_STRING("{JPN}あいての とくこう？2 さわらない"),
         .effect = EFFECT_STAT_CHANGE,
         .power = 0,
         .type = TYPE_ELECTRIC,
@@ -14535,7 +14535,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
     [MOVE_VENOM_DRENCH] =
     {
         .name = COMPOUND_STRING("{JPN}ベノムトラップ"),
-        .description = COMPOUND_STRING("{JPN}あいての こうげき-1 あいての すばやさ-1 あいての とくこう-1 さわらない"),
+        .description = COMPOUND_STRING("{JPN}あいての こうげき？1 あいての すばやさ？1 あいての とくこう？1 さわらない"),
         .effect = EFFECT_STAT_CHANGE_ON_STATUS,
         .power = 0,
         .type = TYPE_POISON,
@@ -14764,7 +14764,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
     [MOVE_BABY_DOLL_EYES] =
     {
         .name = COMPOUND_STRING("{JPN}つぶらなひとみ"),
-        .description = COMPOUND_STRING("{JPN}あいての こうげき-1 さわらない"),
+        .description = COMPOUND_STRING("{JPN}あいての こうげき？1 さわらない"),
         .effect = EFFECT_STAT_CHANGE,
         .power = 0,
         .type = TYPE_FAIRY,
@@ -15035,7 +15035,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
     [MOVE_DRAGON_ASCENT] =
     {
         .name = COMPOUND_STRING("{JPN}ガリョウテンセイ"),
-        .description = COMPOUND_STRING("{JPN}じぶんの ぼうぎょ-1 じぶんの とくぼう-1 さわる"),
+        .description = COMPOUND_STRING("{JPN}じぶんの ぼうぎょ？1 じぶんの とくぼう？1 さわる"),
         .effect = EFFECT_HIT,
         .power = 120,
         .type = TYPE_FLYING,
@@ -15062,7 +15062,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
     [MOVE_HYPERSPACE_FURY] =
     {
         .name = COMPOUND_STRING("{JPN}いじげんラッシュ"),
-        .description = COMPOUND_STRING("{JPN}まもりをつらぬき じぶんの ぼうぎょ-1 さわらない"),
+        .description = COMPOUND_STRING("{JPN}まもりをつらぬき じぶんの ぼうぎょ？1 さわらない"),
         .effect = EFFECT_HYPERSPACE_FURY,
         .power = 100,
         .type = TYPE_DARK,
@@ -15234,7 +15234,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
     [MOVE_ICE_HAMMER] =
     {
         .name = COMPOUND_STRING("{JPN}アイスハンマー"),
-        .description = COMPOUND_STRING("{JPN}じぶんの すばやさ-1 さわる"),
+        .description = COMPOUND_STRING("{JPN}じぶんの すばやさ？1 さわる"),
         .effect = EFFECT_HIT,
         .power = 100,
         .type = TYPE_ICE,
@@ -15304,7 +15304,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
     [MOVE_STRENGTH_SAP] =
     {
         .name = COMPOUND_STRING("{JPN}ちからをすいとる"),
-        .description = COMPOUND_STRING("{JPN}あいての こうげき-1 さわらない"),
+        .description = COMPOUND_STRING("{JPN}あいての こうげき？1 さわらない"),
         .effect = EFFECT_STRENGTH_SAP,
         .power = 0,
         .type = TYPE_GRASS,
@@ -15398,7 +15398,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
     [MOVE_TOXIC_THREAD] =
     {
         .name = COMPOUND_STRING("{JPN}どくのいと"),
-        .description = COMPOUND_STRING("{JPN}あいての すばやさ-1 さわらない"),
+        .description = COMPOUND_STRING("{JPN}あいての すばやさ？1 さわらない"),
         .effect = EFFECT_TOXIC_THREAD,
         .power = 0,
         .type = TYPE_POISON,
@@ -15566,7 +15566,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
     [MOVE_LUNGE] =
     {
         .name = COMPOUND_STRING("{JPN}とびかかる"),
-        .description = COMPOUND_STRING("{JPN}あいての こうげき-1 さわる"),
+        .description = COMPOUND_STRING("{JPN}あいての こうげき？1 さわる"),
         .effect = EFFECT_HIT,
         .power = 80,
         .type = TYPE_BUG,
@@ -15591,7 +15591,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
     [MOVE_FIRE_LASH] =
     {
         .name = COMPOUND_STRING("{JPN}ほのおのムチ"),
-        .description = COMPOUND_STRING("{JPN}あいての ぼうぎょ-1 さわる"),
+        .description = COMPOUND_STRING("{JPN}あいての ぼうぎょ？1 さわる"),
         .effect = EFFECT_HIT,
         .power = 80,
         .type = TYPE_FIRE,
@@ -15768,7 +15768,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
     [MOVE_TROP_KICK] =
     {
         .name = COMPOUND_STRING("{JPN}トロピカルキック"),
-        .description = COMPOUND_STRING("{JPN}あいての こうげき-1 さわる"),
+        .description = COMPOUND_STRING("{JPN}あいての こうげき？1 さわる"),
         .effect = EFFECT_HIT,
         .power = 70,
         .type = TYPE_GRASS,
@@ -15844,7 +15844,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
     [MOVE_CLANGING_SCALES] =
     {
         .name = COMPOUND_STRING("{JPN}スケイルノイズ"),
-        .description = COMPOUND_STRING("{JPN}じぶんの ぼうぎょ-1 さわらない"),
+        .description = COMPOUND_STRING("{JPN}じぶんの ぼうぎょ？1 さわらない"),
         .effect = EFFECT_HIT,
         .power = 110,
         .type = TYPE_DRAGON,
@@ -15959,7 +15959,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
     [MOVE_FLEUR_CANNON] =
     {
         .name = COMPOUND_STRING("{JPN}フルールカノン"),
-        .description = COMPOUND_STRING("{JPN}じぶんの とくこう-2 さわらない"),
+        .description = COMPOUND_STRING("{JPN}じぶんの とくこう？2 さわらない"),
         .effect = EFFECT_HIT,
         .power = 130,
         .type = TYPE_FAIRY,
@@ -16030,7 +16030,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
     [MOVE_SHADOW_BONE] =
     {
         .name = COMPOUND_STRING("{JPN}シャドーボーン"),
-        .description = COMPOUND_STRING("{JPN}あいての ぼうぎょ-1 さわらない"),
+        .description = COMPOUND_STRING("{JPN}あいての ぼうぎょ？1 さわらない"),
         .effect = EFFECT_HIT,
         .power = 85,
         .type = TYPE_GHOST,
@@ -16074,7 +16074,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
     [MOVE_LIQUIDATION] =
     {
         .name = COMPOUND_STRING("{JPN}アクアブレイク"),
-        .description = COMPOUND_STRING("{JPN}あいての ぼうぎょ-1 さわる"),
+        .description = COMPOUND_STRING("{JPN}あいての ぼうぎょ？1 さわる"),
         .effect = EFFECT_HIT,
         .power = 85,
         .type = TYPE_WATER,
@@ -16191,7 +16191,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
     [MOVE_TEARFUL_LOOK] =
     {
         .name = COMPOUND_STRING("{JPN}なみだめ"),
-        .description = COMPOUND_STRING("{JPN}あいての こうげき-1 あいての とくこう-1 さわらない"),
+        .description = COMPOUND_STRING("{JPN}あいての こうげき？1 あいての とくこう？1 さわらない"),
         .effect = EFFECT_STAT_CHANGE,
         .power = 0,
         .type = TYPE_NORMAL,
@@ -16778,7 +16778,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
     [MOVE_TAR_SHOT] =
     {
         .name = COMPOUND_STRING("{JPN}タールショット"),
-        .description = COMPOUND_STRING("{JPN}あいての すばやさ-1 さわらない"),
+        .description = COMPOUND_STRING("{JPN}あいての すばやさ？1 さわらない"),
         .effect = EFFECT_TAR_SHOT,
         .power = 0,
         .type = TYPE_ROCK,
@@ -17029,7 +17029,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
     [MOVE_DRUM_BEATING] =
     {
         .name = COMPOUND_STRING("{JPN}ドラムアタック"),
-        .description = COMPOUND_STRING("{JPN}あいての すばやさ-1 さわらない"),
+        .description = COMPOUND_STRING("{JPN}あいての すばやさ？1 さわらない"),
         .effect = EFFECT_HIT,
         .power = 80,
         .type = TYPE_GRASS,
@@ -17181,7 +17181,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
     [MOVE_BREAKING_SWIPE] =
     {
         .name = COMPOUND_STRING("{JPN}ワイドブレイカー"),
-        .description = COMPOUND_STRING("{JPN}あいての こうげき-1 さわる"),
+        .description = COMPOUND_STRING("{JPN}あいての こうげき？1 さわる"),
         .effect = EFFECT_HIT,
         .power = 60,
         .type = TYPE_DRAGON,
@@ -17250,7 +17250,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
     [MOVE_APPLE_ACID] =
     {
         .name = COMPOUND_STRING("{JPN}りんごさん"),
-        .description = COMPOUND_STRING("{JPN}あいての とくぼう-1 さわらない"),
+        .description = COMPOUND_STRING("{JPN}あいての とくぼう？1 さわらない"),
         .effect = EFFECT_HIT,
         .power = 80,
         .type = TYPE_GRASS,
@@ -17275,7 +17275,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
     [MOVE_GRAV_APPLE] =
     {
         .name = COMPOUND_STRING("{JPN}Gのちから"),
-        .description = COMPOUND_STRING("{JPN}あいての ぼうぎょ-1 さわらない"),
+        .description = COMPOUND_STRING("{JPN}あいての ぼうぎょ？1 さわらない"),
         .effect = EFFECT_GRAV_APPLE,
         .power = 80,
         .type = TYPE_GRASS,
@@ -17300,7 +17300,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
     [MOVE_SPIRIT_BREAK] =
     {
         .name = COMPOUND_STRING("{JPN}ソウルクラッシュ"),
-        .description = COMPOUND_STRING("{JPN}あいての とくこう-1 さわる"),
+        .description = COMPOUND_STRING("{JPN}あいての とくこう？1 さわる"),
         .effect = EFFECT_HIT,
         .power = 75,
         .type = TYPE_FAIRY,
@@ -17535,7 +17535,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
     [MOVE_SCALE_SHOT] =
     {
         .name = COMPOUND_STRING("{JPN}スケイルショット"),
-        .description = COMPOUND_STRING("{JPN}れんぞく2-5 さわらない"),
+        .description = COMPOUND_STRING("{JPN}れんぞく2？5 さわらない"),
         .effect = EFFECT_SCALE_SHOT,
         .power = 25,
         .type = TYPE_DRAGON,
@@ -17697,7 +17697,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
     [MOVE_SKITTER_SMACK] =
     {
         .name = COMPOUND_STRING("{JPN}はいよるいちげき"),
-        .description = COMPOUND_STRING("{JPN}あいての とくこう-1 さわる"),
+        .description = COMPOUND_STRING("{JPN}あいての とくこう？1 さわる"),
         .effect = EFFECT_HIT,
         .power = 70,
         .type = TYPE_BUG,
@@ -18085,7 +18085,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
     [MOVE_THUNDEROUS_KICK] =
     {
         .name = COMPOUND_STRING("{JPN}らいめいげり"),
-        .description = COMPOUND_STRING("{JPN}あいての ぼうぎょ-1 さわる"),
+        .description = COMPOUND_STRING("{JPN}あいての ぼうぎょ？1 さわる"),
         .effect = EFFECT_HIT,
         .power = 90,
         .type = TYPE_FIGHTING,
@@ -18257,7 +18257,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
     [MOVE_SPRINGTIDE_STORM] =
     {
         .name = COMPOUND_STRING("{JPN}はるのあらし"),
-        .description = COMPOUND_STRING("{JPN}あいての こうげき-1 さわらない"),
+        .description = COMPOUND_STRING("{JPN}あいての こうげき？1 さわらない"),
         .effect = EFFECT_HIT,
         .power = B_UPDATED_MOVE_DATA >= GEN_9 ? 100 : 95,
         .type = TYPE_FAIRY,
@@ -18406,7 +18406,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
     [MOVE_HEADLONG_RUSH] =
     {
         .name = COMPOUND_STRING("{JPN}ぶちかまし"),
-        .description = COMPOUND_STRING("{JPN}じぶんの ぼうぎょ-1 じぶんの とくぼう-1 さわる"),
+        .description = COMPOUND_STRING("{JPN}じぶんの ぼうぎょ？1 じぶんの とくぼう？1 さわる"),
         .effect = EFFECT_HIT,
         .power = B_UPDATED_MOVE_DATA >= GEN_9 ? 120 : 100,
         .type = TYPE_GROUND,
@@ -18474,7 +18474,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
     [MOVE_BITTER_MALICE] =
     {
         .name = COMPOUND_STRING("{JPN}うらみつらみ"),
-        .description = COMPOUND_STRING("{JPN}あいての こうげき-1 さわらない"),
+        .description = COMPOUND_STRING("{JPN}あいての こうげき？1 さわらない"),
         .effect = EFFECT_HIT,
         .power = B_UPDATED_MOVE_DATA >= GEN_9 ? 75 : 60,
         .type = TYPE_GHOST,
@@ -18516,7 +18516,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
     [MOVE_TRIPLE_ARROWS] =
     {
         .name = COMPOUND_STRING("{JPN}3ぼんのや"),
-        .description = COMPOUND_STRING("{JPN}ひるみあり あいての ぼうぎょ-1 さわらない"),
+        .description = COMPOUND_STRING("{JPN}ひるみあり あいての ぼうぎょ？1 さわらない"),
         .effect = EFFECT_HIT,
         .power = B_UPDATED_MOVE_DATA >= GEN_9 ? 90 : 50,
         .type = TYPE_FIGHTING,
@@ -18581,7 +18581,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
     [MOVE_BLEAKWIND_STORM] =
     {
         .name = COMPOUND_STRING("{JPN}こがらしあらし"),
-        .description = COMPOUND_STRING("{JPN}あいての すばやさ-1 さわらない"),
+        .description = COMPOUND_STRING("{JPN}あいての すばやさ？1 さわらない"),
         .effect = EFFECT_HIT,
         .power = B_UPDATED_MOVE_DATA >= GEN_9 ? 100 : 95,
         .type = TYPE_FLYING,
@@ -18761,7 +18761,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
     [MOVE_LUMINA_CRASH] =
     {
         .name = COMPOUND_STRING("{JPN}ルミナコリジョン"),
-        .description = COMPOUND_STRING("{JPN}あいての とくぼう-2 さわらない"),
+        .description = COMPOUND_STRING("{JPN}あいての とくぼう？2 さわらない"),
         .effect = EFFECT_HIT,
         .power = 80,
         .type = TYPE_PSYCHIC,
@@ -18849,7 +18849,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
     [MOVE_SPIN_OUT] =
     {
         .name = COMPOUND_STRING("{JPN}ホイールスピン"),
-        .description = COMPOUND_STRING("{JPN}じぶんの すばやさ-2 さわる"),
+        .description = COMPOUND_STRING("{JPN}じぶんの すばやさ？2 さわる"),
         .effect = EFFECT_HIT,
         .power = 100,
         .type = TYPE_STEEL,
@@ -19312,7 +19312,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
     [MOVE_POUNCE] =
     {
         .name = COMPOUND_STRING("{JPN}とびつく"),
-        .description = COMPOUND_STRING("{JPN}あいての すばやさ-1 さわる"),
+        .description = COMPOUND_STRING("{JPN}あいての すばやさ？1 さわる"),
         .effect = EFFECT_HIT,
         .power = 50,
         .type = TYPE_BUG,
@@ -19360,7 +19360,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
     [MOVE_CHILLING_WATER] =
     {
         .name = COMPOUND_STRING("{JPN}ひやみず"),
-        .description = COMPOUND_STRING("{JPN}あいての こうげき-1 さわらない"),
+        .description = COMPOUND_STRING("{JPN}あいての こうげき？1 さわらない"),
         .effect = EFFECT_HIT,
         .power = 50,
         .type = TYPE_WATER,
@@ -19437,7 +19437,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
     [MOVE_ARMOR_CANNON] =
     {
         .name = COMPOUND_STRING("{JPN}アーマーキャノン"),
-        .description = COMPOUND_STRING("{JPN}じぶんの ぼうぎょ-1 じぶんの とくぼう-1 さわらない"),
+        .description = COMPOUND_STRING("{JPN}じぶんの ぼうぎょ？1 じぶんの とくぼう？1 さわらない"),
         .effect = EFFECT_HIT,
         .power = 120,
         .type = TYPE_FIRE,
@@ -20426,7 +20426,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
     },
     [MOVE_PULVERIZING_PANCAKE] =
     {
-        .name = COMPOUND_STRING("{JPN}ほんきをだす　こうげき"),
+        .name = COMPOUND_STRING("{JPN}ほんきをだす こうげき"),
         .description = COMPOUND_STRING("{JPN}ギガインパクト からでたZわざ さわらない"),
         .effect = EFFECT_HIT,
         .power = 210,

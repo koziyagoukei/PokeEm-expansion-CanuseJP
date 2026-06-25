@@ -364,7 +364,7 @@ const struct Decoration gDecorations[] =
         .category = DECORCAT_PLANT,
         .price = 5000,
         .description = COMPOUND_STRING(
-            "A large, umbrella-\n"
+            "A large, umbrella？\n"
             "shaped plant in a\n"
             "big pot."),
         .tiles = DecorGfx_BIG_PLANT,
@@ -395,7 +395,7 @@ const struct Decoration gDecorations[] =
         .category = DECORCAT_ORNAMENT,
         .price = 500,
         .description = COMPOUND_STRING(
-            "A red-colored brick.\n"
+            "A red？colored brick.\n"
             "Decorations can be\n"
             "placed on top."),
         .tiles = DecorGfx_RED_BRICK,
@@ -411,7 +411,7 @@ const struct Decoration gDecorations[] =
         .category = DECORCAT_ORNAMENT,
         .price = 500,
         .description = COMPOUND_STRING(
-            "A yellow-colored\n"
+            "A yellow？colored\n"
             "brick. Put some\n"
             "decorations on top."),
         .tiles = DecorGfx_YELLOW_BRICK,
@@ -427,7 +427,7 @@ const struct Decoration gDecorations[] =
         .category = DECORCAT_ORNAMENT,
         .price = 500,
         .description = COMPOUND_STRING(
-            "A blue-colored\n"
+            "A blue？colored\n"
             "brick. Put some\n"
             "decorations on top."),
         .tiles = DecorGfx_BLUE_BRICK,
@@ -711,7 +711,7 @@ const struct Decoration gDecorations[] =
         .category = DECORCAT_ORNAMENT,
         .price = 3000,
         .description = COMPOUND_STRING(
-            "A small, gray-\n"
+            "A small, gray？\n"
             "colored toy TV."),
         .tiles = DecorGfx_TV,
         .icon = {NULL, NULL},
@@ -1710,7 +1710,7 @@ const struct Decoration gDecorations[] =
         .category = DECORCAT_CUSHION,
         .price = 2000,
         .description = COMPOUND_STRING(
-            "A grass-mark\n"
+            "A grass？mark\n"
             "cushion. Place it on\n"
             "a mat or a desk."),
         .tiles = DecorGfx_GRASS_CUSHION,
@@ -1726,7 +1726,7 @@ const struct Decoration gDecorations[] =
         .category = DECORCAT_CUSHION,
         .price = 2000,
         .description = COMPOUND_STRING(
-            "A fire-mark\n"
+            "A fire？mark\n"
             "cushion. Place it on\n"
             "a mat or a desk."),
         .tiles = DecorGfx_FIRE_CUSHION,
@@ -1742,7 +1742,7 @@ const struct Decoration gDecorations[] =
         .category = DECORCAT_CUSHION,
         .price = 2000,
         .description = COMPOUND_STRING(
-            "A water-mark\n"
+            "A water？mark\n"
             "cushion. Place it on\n"
             "a mat or a desk."),
         .tiles = DecorGfx_WATER_CUSHION,

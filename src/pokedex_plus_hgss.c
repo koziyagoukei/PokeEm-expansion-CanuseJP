@@ -128,24 +128,24 @@ extern const u16 gPokedexOrder_Weight[];
 
 static const u8 sText_No0000[] = _("0000");
 static const u8 sCaughtBall_Gfx[] = INCGFX_U8("graphics/pokedex/caught_ball.png", ".4bpp");
-static const u8 sText_TenDashes[] = _("----------");
+static const u8 sText_TenDashes[] = _("？？？？？？？？？？");
 ALIGNED(4) static const u8 sExpandedPlaceholder_PokedexDescription[] = _("");
 static const u16 sSizeScreenSilhouette_Pal[] = INCGFX_U16("graphics/pokedex/size_silhouette.pal", ".gbapal");
 
-static const u8 sText_Stats_Buttons[] = _("{A_BUTTON}TOGGLE   {DPAD_UPDOWN}MOVES");
-static const u8 sText_Stats_Buttons_Decapped[] = _("{A_BUTTON}Toggle   {DPAD_UPDOWN}Moves");
+static const u8 sText_Stats_Buttons[] = _("{A_BUTTON}きりかえ   {DPAD_UPDOWN}わざ");
+static const u8 sText_Stats_Buttons_Decapped[] = _("{A_BUTTON}きりかえ   {DPAD_UPDOWN}わざ");
 static const u8 sText_Stats_HP[] = _("HP");
-static const u8 sText_Stats_Attack[] = _("ATK");
-static const u8 sText_Stats_Defense[] = _("DEF");
-static const u8 sText_Stats_Speed[] = _("SPE");
-static const u8 sText_Stats_SpAttack[] = _("SP.A");
-static const u8 sText_Stats_SpDefense[] = _("SP.D");
+static const u8 sText_Stats_Attack[] = _("こうげき");
+static const u8 sText_Stats_Defense[] = _("ぼうぎょ");
+static const u8 sText_Stats_Speed[] = _("すばやさ");
+static const u8 sText_Stats_SpAttack[] = _("とくこう");
+static const u8 sText_Stats_SpDefense[] = _("とくぼう");
 static const u8 sText_Stats_EV_Plus1[] = _("{UP_ARROW_2}");
 static const u8 sText_Stats_EV_Plus2[] = _("{UP_ARROW_2}{UP_ARROW_2}");
 static const u8 sText_Stats_EV_Plus3[] = _("{UP_ARROW_2}{UP_ARROW_2}{UP_ARROW_2}");
 static const u8 sText_Stats_EvStr1Str2[] = _("{STR_VAR_1}{STR_VAR_2}");
 static const u8 sText_Stats_MoveSelectedMax[] = _("{STR_VAR_1} / {STR_VAR_2}");
-static const u8 sText_Stats_MoveLevel[] = _("LVL");
+static const u8 sText_Stats_MoveLevel[] = _("Lv");
 static const u8 sText_Stats_Gender_0[] = _("♂");
 static const u8 sText_Stats_Gender_12_5[] = _("♀ 1/7 ♂"); //_("♀ 12.5 / 87.5 ♂");
 static const u8 sText_Stats_Gender_25[] = _("♀ 1/3 ♂");     //_("♀ 25 / 75 ♂");
@@ -153,81 +153,81 @@ static const u8 sText_Stats_Gender_50[] = _("♀ 1/1 ♂");     //_("♀ 50 / 50
 static const u8 sText_Stats_Gender_75[] = _("♀ 3/1 ♂");     //_("♀ 75 / 25 ♂");
 static const u8 sText_Stats_Gender_87_5[] = _("♀ 7/1 ♂");
 static const u8 sText_Stats_Gender_100[] = _("♀");
-static const u8 sText_Stats_CatchRate[] = _("CATCH{0x5B}: ");
-static const u8 sText_Stats_CatchRate_Legend[] = _("LEGENDARY");
-static const u8 sText_Stats_CatchRate_VeryHard[] = _("VERY HARD");
-static const u8 sText_Stats_CatchRate_Difficult[] = _("DIFFICULT");
-static const u8 sText_Stats_CatchRate_Medium[] = _("MEDIUM");
-static const u8 sText_Stats_CatchRate_Relaxed[] = _("RELAXED");
-static const u8 sText_Stats_CatchRate_Easy[] = _("EASY");
-static const u8 sText_Stats_ExpYield[] = _("EXP YIELD: ");
-static const u8 sText_Stats_EggCycles[] = _("HATCH STEPS:");
+static const u8 sText_Stats_CatchRate[] = _("つかまえ{0x5B}: ");
+static const u8 sText_Stats_CatchRate_Legend[] = _("でんせつ");
+static const u8 sText_Stats_CatchRate_VeryHard[] = _("とてもむずかしい");
+static const u8 sText_Stats_CatchRate_Difficult[] = _("むずかしい");
+static const u8 sText_Stats_CatchRate_Medium[] = _("ふつう");
+static const u8 sText_Stats_CatchRate_Relaxed[] = _("ややかんたん");
+static const u8 sText_Stats_CatchRate_Easy[] = _("かんたん");
+static const u8 sText_Stats_ExpYield[] = _("けいけんち: ");
+static const u8 sText_Stats_EggCycles[] = _("ふかほすう:");
 static const u8 sText_Stats_EggCycles_VeryFast[] = _("{EMOJI_BOLT}{EMOJI_DIZZYEGG}");
 static const u8 sText_Stats_EggCycles_Fast[] = _("{EMOJI_DIZZYEGG}");
 static const u8 sText_Stats_EggCycles_Normal[] = _("{EMOJI_DIZZYEGG}{EMOJI_DIZZYEGG}");
 static const u8 sText_Stats_EggCycles_Slow[] = _("{EMOJI_DIZZYEGG}{EMOJI_DIZZYEGG}{EMOJI_DIZZYEGG}");
-static const u8 sText_Stats_Growthrate[] = _("GROW: ");
-static const u8 sText_Stats_Friendship[] = _("FRIENDSHIP:");
+static const u8 sText_Stats_Growthrate[] = _("そだち: ");
+static const u8 sText_Stats_Friendship[] = _("なつき:");
 static const u8 sText_Stats_Friendship_BigAnger[] = _("{EMOJI_BIGANGER}");
 static const u8 sText_Stats_Friendship_Neutral[] = _("{EMOJI_NEUTRAL}");
 static const u8 sText_Stats_Friendship_Happy[] = _("{EMOJI_HAPPY}");
 static const u8 sText_Stats_Friendship_BigSmile[] = _("{EMOJI_BIGSMILE}");
-static const u8 sText_Stats_MEDIUM_FAST[] = _("MED. FAST");
-static const u8 sText_Stats_ERRATIC[] = _("ERRATIC");
-static const u8 sText_Stats_FLUCTUATING[] = _("FLUCTUATING");
-static const u8 sText_Stats_MEDIUM_SLOW[] = _("MED. SLOW");
-static const u8 sText_Stats_FAST[] = _("FAST");
-static const u8 sText_Stats_SLOW[] = _("SLOW");
+static const u8 sText_Stats_MEDIUM_FAST[] = _("ふつうはやい");
+static const u8 sText_Stats_ERRATIC[] = _("きまぐれ");
+static const u8 sText_Stats_FLUCTUATING[] = _("ふあんてい");
+static const u8 sText_Stats_MEDIUM_SLOW[] = _("ふつうおそい");
+static const u8 sText_Stats_FAST[] = _("はやい");
+static const u8 sText_Stats_SLOW[] = _("おそい");
 static const u8 sText_Stats_ContestHeart[] = _("H");
-static const u8 sText_Stats_Minus[] = _("-");
-static const u8 sText_Stats_eggGroup[] = _("EGG G1:");
+static const u8 sText_Stats_Minus[] = _("？");
+static const u8 sText_Stats_eggGroup[] = _("タマゴG1:");
 static const u8 sText_Stats_eggGroup_Groups[] = _("{STR_VAR_1}/{STR_VAR_2}");
-static const u8 sText_Stats_eggGroup_MONSTER[] = _("MONSTER");
-static const u8 sText_Stats_eggGroup_WATER_1[] = _("WATER {CIRCLE_1}");
-static const u8 sText_Stats_eggGroup_BUG[] = _("BUG");
-static const u8 sText_Stats_eggGroup_FLYING[] = _("FLYING");
-static const u8 sText_Stats_eggGroup_FIELD[] = _("FIELD");
-static const u8 sText_Stats_eggGroup_FAIRY[] = _("FAIRY");
-static const u8 sText_Stats_eggGroup_GRASS[] = _("GRASS");
-static const u8 sText_Stats_eggGroup_HUMAN_LIKE[] = _("HUMANE");
-static const u8 sText_Stats_eggGroup_WATER_3[] = _("WATER {CIRCLE_3}");
-static const u8 sText_Stats_eggGroup_MINERAL[] = _("MINERAL");
-static const u8 sText_Stats_eggGroup_AMORPHOUS[] = _("AMORPHOUS");
-static const u8 sText_Stats_eggGroup_WATER_2[] = _("WATER {CIRCLE_2}");
-static const u8 sText_Stats_eggGroup_DITTO[] = _("DITTO");
-static const u8 sText_Stats_eggGroup_DRAGON[] = _("DRAGON");
-static const u8 sText_Stats_eggGroup_NO_EGGS_DISCOVERED[] = _("---");
-static const u8 sText_Stats_eggGroup_UNKNOWN[] = _("???");
-static const u8 sText_Dex_SEEN[] = _("SEEN");
-static const u8 sText_Dex_OWN[] = _("OWN");
+static const u8 sText_Stats_eggGroup_MONSTER[] = _("かいじゅう");
+static const u8 sText_Stats_eggGroup_WATER_1[] = _("すいちゅう {CIRCLE_1}");
+static const u8 sText_Stats_eggGroup_BUG[] = _("むし");
+static const u8 sText_Stats_eggGroup_FLYING[] = _("ひこう");
+static const u8 sText_Stats_eggGroup_FIELD[] = _("りくじょう");
+static const u8 sText_Stats_eggGroup_FAIRY[] = _("ようせい");
+static const u8 sText_Stats_eggGroup_GRASS[] = _("しょくぶつ");
+static const u8 sText_Stats_eggGroup_HUMAN_LIKE[] = _("ひとがた");
+static const u8 sText_Stats_eggGroup_WATER_3[] = _("すいちゅう {CIRCLE_3}");
+static const u8 sText_Stats_eggGroup_MINERAL[] = _("こうぶつ");
+static const u8 sText_Stats_eggGroup_AMORPHOUS[] = _("ふていけい");
+static const u8 sText_Stats_eggGroup_WATER_2[] = _("すいちゅう {CIRCLE_2}");
+static const u8 sText_Stats_eggGroup_DITTO[] = _("メタモン");
+static const u8 sText_Stats_eggGroup_DRAGON[] = _("ドラゴン");
+static const u8 sText_Stats_eggGroup_NO_EGGS_DISCOVERED[] = _("？？？");
+static const u8 sText_Stats_eggGroup_UNKNOWN[] = _("？？？");
+static const u8 sText_Dex_SEEN[] = _("みつけた");
+static const u8 sText_Dex_OWN[] = _("つかまえた");
 
-static const u8 sText_EVO_Buttons[] = _("{DPAD_UPDOWN}EVOs  {A_BUTTON}CHECK");
-static const u8 sText_EVO_Buttons_Decapped[] = _("{DPAD_UPDOWN}Evos  {A_BUTTON}Check");
-static const u8 sText_EVO_Buttons_PE[] = _("{DPAD_UPDOWN}EVOs  {A_BUTTON}CHECK  {START_BUTTON}FORMs");
-static const u8 sText_EVO_Buttons_Decapped_PE[] = _("{DPAD_UPDOWN}Evos  {A_BUTTON}Check  {START_BUTTON}Forms");
+static const u8 sText_EVO_Buttons[] = _("{DPAD_UPDOWN}しんか  {A_BUTTON}みる");
+static const u8 sText_EVO_Buttons_Decapped[] = _("{DPAD_UPDOWN}しんか  {A_BUTTON}みる");
+static const u8 sText_EVO_Buttons_PE[] = _("{DPAD_UPDOWN}しんか  {A_BUTTON}みる  {START_BUTTON}フォルム");
+static const u8 sText_EVO_Buttons_Decapped_PE[] = _("{DPAD_UPDOWN}しんか  {A_BUTTON}みる  {START_BUTTON}フォルム");
 static const u8 sText_EVO_Name[] = _("{STR_VAR_3}:");
-static const u8 sText_EVO_PreEvo[] = _("{STR_VAR_1} evolves from {STR_VAR_2}");
-static const u8 sText_EVO_PreEvo_PE_Mega[] = _("{STR_VAR_1} Mega Evolves with {STR_VAR_2}");
-static const u8 sText_EVO_LEVEL_SILCOON[] = _("{LV}{UP_ARROW} to {STR_VAR_2}, Silcoon persona");
-static const u8 sText_EVO_LEVEL_CASCOON[] = _("{LV}{UP_ARROW} to {STR_VAR_2}, Cascoon persona");
-static const u8 sText_EVO_MOVE[] = _("{LV}{UP_ARROW}, knows {STR_VAR_2}");
-static const u8 sText_EVO_LEVEL_RAIN[] = _("{LV}{UP_ARROW} to {STR_VAR_2} while raining");
-static const u8 sText_EVO_TRADE_SPECIFIC_MON[] = _("Traded for {STR_VAR_2}");
-static const u8 sText_EVO_CRITICAL_HITS[] = _("Land {STR_VAR_2} critical hits in\nsingle battle");
-static const u8 sText_EVO_SCRIPT_TRIGGER_DMG[] = _("Takes at least {STR_VAR_2} HP in damage");
-static const u8 sText_EVO_DARK_SCROLL[] = _("ScrllOfDrknss is used");
-static const u8 sText_EVO_WATER_SCROLL[] = _("ScrollOfWatrs is used");
-static const u8 sText_EVO_USE_MOVE_TWENTY_TIMES[] = _("{LV}{UP_ARROW} after 20x {STR_VAR_2}");
-static const u8 sText_EVO_RECOIL_DAMAGE_MALE[] = _("{LV}{UP_ARROW} with {STR_VAR_2} recoil, male");
-static const u8 sText_EVO_RECOIL_DAMAGE_FEMALE[] = _("{LV}{UP_ARROW} with {STR_VAR_2} recoil, female");
-static const u8 sText_EVO_DEFEAT_THREE_WITH_ITEM[] = _("{LV}{UP_ARROW} defeating 3 {STR_VAR_3} holding {STR_VAR_2}");
-static const u8 sText_EVO_NONE[] = _("{STR_VAR_1} has no evolution.");
+static const u8 sText_EVO_PreEvo[] = _("{STR_VAR_2}から しんか");
+static const u8 sText_EVO_PreEvo_PE_Mega[] = _("{STR_VAR_2}で メガシンカ");
+static const u8 sText_EVO_LEVEL_SILCOON[] = _("{LV}{UP_ARROW}{STR_VAR_2} カラサリス");
+static const u8 sText_EVO_LEVEL_CASCOON[] = _("{LV}{UP_ARROW}{STR_VAR_2} マユルド");
+static const u8 sText_EVO_MOVE[] = _("{LV}{UP_ARROW}{STR_VAR_2}を おぼえる");
+static const u8 sText_EVO_LEVEL_RAIN[] = _("{LV}{UP_ARROW}{STR_VAR_2} あめのとき");
+static const u8 sText_EVO_TRADE_SPECIFIC_MON[] = _("{STR_VAR_2}と こうかん");
+static const u8 sText_EVO_CRITICAL_HITS[] = _("1かいのバトルで\nきゅうしょ {STR_VAR_2}かい");
+static const u8 sText_EVO_SCRIPT_TRIGGER_DMG[] = _("HPを {STR_VAR_2}いじょう へらす");
+static const u8 sText_EVO_DARK_SCROLL[] = _("あくのかけじくを つかう");
+static const u8 sText_EVO_WATER_SCROLL[] = _("みずのかけじくを つかう");
+static const u8 sText_EVO_USE_MOVE_TWENTY_TIMES[] = _("{STR_VAR_2}を 20かい つかう");
+static const u8 sText_EVO_RECOIL_DAMAGE_MALE[] = _("{STR_VAR_2}の はんどう おす");
+static const u8 sText_EVO_RECOIL_DAMAGE_FEMALE[] = _("{STR_VAR_2}の はんどう めす");
+static const u8 sText_EVO_DEFEAT_THREE_WITH_ITEM[] = _("{STR_VAR_3}を 3ひき たおす\n{STR_VAR_2}もち");
+static const u8 sText_EVO_NONE[] = _("{STR_VAR_1}は しんかしない。");
 
-static const u8 sText_FORMS_Buttons_PE[] = _("{A_BUTTON}FORM MODE  {START_BUTTON}EVOs");
-static const u8 sText_FORMS_Buttons_Decapped_PE[] = _("{A_BUTTON}Form Mode  {START_BUTTON}Evos");
-static const u8 sText_FORMS_Buttons_Submenu_PE[] = _("{DPAD_NONE}FORMs {A_BUTTON}CHECK {START_BUTTON}EVOs");
-static const u8 sText_FORMS_Buttons_Submenu_Decapped_PE[] = _("{DPAD_NONE}Forms {A_BUTTON}Check {START_BUTTON}Evos");
-static const u8 sText_FORMS_NONE[] = _("{STR_VAR_1} has no alternate forms.");
+static const u8 sText_FORMS_Buttons_PE[] = _("{A_BUTTON}フォルム  {START_BUTTON}しんか");
+static const u8 sText_FORMS_Buttons_Decapped_PE[] = _("{A_BUTTON}フォルム  {START_BUTTON}しんか");
+static const u8 sText_FORMS_Buttons_Submenu_PE[] = _("{DPAD_NONE}フォルム {A_BUTTON}みる {START_BUTTON}しんか");
+static const u8 sText_FORMS_Buttons_Submenu_Decapped_PE[] = _("{DPAD_NONE}フォルム {A_BUTTON}みる {START_BUTTON}しんか");
+static const u8 sText_FORMS_NONE[] = _("{STR_VAR_1}に べつのフォルムは ありません。");
 static const u8 sText_PlusSymbol[] = _("+");
 
 // static .rodata graphics
@@ -6509,7 +6509,7 @@ static void PrintEvolutionTargetSpeciesAndMethod(u8 taskId, enum Species species
         bool32 caught = GetSetPokedexFlag(SpeciesToNationalPokedexNum(targetSpecies), FLAG_GET_CAUGHT);
         if (HGSS_HIDE_UNOWNED_EVOLUTION_METHODS == TRUE && !caught)
         {
-            StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("Unknown"));
+            StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("ふめい"));
         }
         else
         {
@@ -6517,7 +6517,7 @@ static void PrintEvolutionTargetSpeciesAndMethod(u8 taskId, enum Species species
             {
             case EVO_SCRIPT_TRIGGER:
             case EVO_NONE:
-                StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("Unknown"));
+                StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("ふめい"));
                 break;
             case EVO_LEVEL:
             case EVO_LEVEL_BATTLE_ONLY:
@@ -6528,34 +6528,34 @@ static void PrintEvolutionTargetSpeciesAndMethod(u8 taskId, enum Species species
                     StringAppend(gStringVar4, gStringVar2);
                 }
                 if ((enum EvolutionMethods)evolutions[i].method == EVO_LEVEL_BATTLE_ONLY)
-                    StringAppend(gStringVar4, COMPOUND_STRING(", in battle"));
+                    StringAppend(gStringVar4, COMPOUND_STRING(" バトルちゅう"));
                 break;
             case EVO_TRADE:
-                StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("Trading"));
+                StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("こうかん"));
                 break;
             case EVO_ITEM:
                 CopyItemName(evolutions[i].param, gStringVar2);
-                StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("{STR_VAR_2} is used"));
+                StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("{STR_VAR_2}を つかう"));
                 break;
             case EVO_SPLIT_FROM_EVO:
-                StringCopy(gStringVar4, COMPOUND_STRING("Splits from "));
+                StringCopy(gStringVar4, COMPOUND_STRING("ぶんれつ: "));
                 StringAppend(gStringVar4, GetSpeciesName(evolutions[i].param)); //mon name
                 break;
             case EVO_BATTLE_END:
-                StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("End battle"));
+                StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("バトルご"));
                 break;
             case EVO_SPIN:
-                StringCopy(gStringVar4, COMPOUND_STRING("Spin "));
+                StringCopy(gStringVar4, COMPOUND_STRING("かいてん "));
                 if (evolutions[i].param == SPIN_CW_SHORT)
-                    StringAppend(gStringVar4, COMPOUND_STRING("CW under 5s"));
+                    StringAppend(gStringVar4, COMPOUND_STRING("みぎ 5びょういか"));
                 else if (evolutions[i].param == SPIN_CW_LONG)
-                    StringAppend(gStringVar4, COMPOUND_STRING("CW over 5s"));
+                    StringAppend(gStringVar4, COMPOUND_STRING("みぎ 5びょういじょう"));
                 else if (evolutions[i].param == SPIN_CCW_SHORT)
-                    StringAppend(gStringVar4, COMPOUND_STRING("CCW under 5s"));
+                    StringAppend(gStringVar4, COMPOUND_STRING("ひだり 5びょういか"));
                 else if (evolutions[i].param == SPIN_CCW_LONG)
-                    StringAppend(gStringVar4, COMPOUND_STRING("CCW over 5s"));
+                    StringAppend(gStringVar4, COMPOUND_STRING("ひだり 5びょういじょう"));
                 else
-                    StringAppend(gStringVar4, COMPOUND_STRING("CW/CCW over 10s"));
+                    StringAppend(gStringVar4, COMPOUND_STRING("10びょういじょう"));
                 break;
             }//Switch end
 
@@ -6564,7 +6564,7 @@ static void PrintEvolutionTargetSpeciesAndMethod(u8 taskId, enum Species species
             {
                 if (j == 0)
                 {
-                    StringAppend(gStringVar4, COMPOUND_STRING(", "));
+                    StringAppend(gStringVar4, COMPOUND_STRING(" "));
                 }
 
                 enum EvolutionConditions condition = evolutions[i].params[j].condition;
@@ -6574,45 +6574,45 @@ static void PrintEvolutionTargetSpeciesAndMethod(u8 taskId, enum Species species
                 case IF_GENDER:
                     switch (evolutions[i].params[j].arg1)
                     {
-                    case MON_MALE:   StringAppend(gStringVar4, COMPOUND_STRING("Male"));   break;
-                    case MON_FEMALE: StringAppend(gStringVar4, COMPOUND_STRING("Female")); break;
+                    case MON_MALE:   StringAppend(gStringVar4, COMPOUND_STRING("おす"));   break;
+                    case MON_FEMALE: StringAppend(gStringVar4, COMPOUND_STRING("めす")); break;
                     }
                     break;
                 case IF_MIN_FRIENDSHIP:
-                    StringAppend(gStringVar4, COMPOUND_STRING("{UP_ARROW_2}friendship"));
+                    StringAppend(gStringVar4, COMPOUND_STRING("{UP_ARROW_2}なつき"));
                     break;
                 case IF_ATK_GT_DEF:
-                    StringAppend(gStringVar4, COMPOUND_STRING("Atk over Def"));
+                    StringAppend(gStringVar4, COMPOUND_STRING("こうげき>ぼうぎょ"));
                     break;
                 case IF_ATK_EQ_DEF:
-                    StringAppend(gStringVar4, COMPOUND_STRING("Atk = Def"));
+                    StringAppend(gStringVar4, COMPOUND_STRING("こうげき=ぼうぎょ"));
                     break;
                 case IF_ATK_LT_DEF:
-                    StringAppend(gStringVar4, COMPOUND_STRING("Atk under Def"));
+                    StringAppend(gStringVar4, COMPOUND_STRING("こうげき<ぼうぎょ"));
                     break;
                 case IF_TIME:
                     switch (evolutions[i].params[j].arg1)
                     {
-                    case TIME_MORNING: StringAppend(gStringVar4, COMPOUND_STRING("Morning")); break;
-                    case TIME_DAY:     StringAppend(gStringVar4, COMPOUND_STRING("Day"));     break;
-                    case TIME_EVENING: StringAppend(gStringVar4, COMPOUND_STRING("Evening")); break;
-                    case TIME_NIGHT:   StringAppend(gStringVar4, COMPOUND_STRING("Night"));   break;
+                    case TIME_MORNING: StringAppend(gStringVar4, COMPOUND_STRING("あさ")); break;
+                    case TIME_DAY:     StringAppend(gStringVar4, COMPOUND_STRING("ひる")); break;
+                    case TIME_EVENING: StringAppend(gStringVar4, COMPOUND_STRING("ゆうがた")); break;
+                    case TIME_NIGHT:   StringAppend(gStringVar4, COMPOUND_STRING("よる")); break;
                     }
                     break;
                 case IF_NOT_TIME:
                     switch (evolutions[i].params[j].arg1)
                     {
-                    case TIME_MORNING: StringAppend(gStringVar4, COMPOUND_STRING("NOT Morning")); break;
-                    case TIME_DAY:     StringAppend(gStringVar4, COMPOUND_STRING("NOT Day"));     break;
-                    case TIME_EVENING: StringAppend(gStringVar4, COMPOUND_STRING("NOT Evening")); break;
-                    case TIME_NIGHT:   StringAppend(gStringVar4, COMPOUND_STRING("Day"));         break; // More intuitive than "NOT Night"
+                    case TIME_MORNING: StringAppend(gStringVar4, COMPOUND_STRING("あさいがい")); break;
+                    case TIME_DAY:     StringAppend(gStringVar4, COMPOUND_STRING("ひるいがい")); break;
+                    case TIME_EVENING: StringAppend(gStringVar4, COMPOUND_STRING("ゆうがたいがい")); break;
+                    case TIME_NIGHT:   StringAppend(gStringVar4, COMPOUND_STRING("ひる"));         break; // More intuitive than "NOT Night"
                     }
                     break;
                 case IF_HOLD_ITEM:
-                    StringAppend(gStringVar4, COMPOUND_STRING("holds "));
+                    StringAppend(gStringVar4, COMPOUND_STRING("もち "));
                     if (isAlcremie && IsItemSweet(evolutions[i].params[j].arg1))
                     {
-                        StringAppend(gStringVar4, COMPOUND_STRING("Sweet")); //item
+                        StringAppend(gStringVar4, COMPOUND_STRING("あまい")); //item
                     }
                     else
                     {
@@ -6632,85 +6632,85 @@ static void PrintEvolutionTargetSpeciesAndMethod(u8 taskId, enum Species species
                              && arg < 10 && arg >= 0)
                             arg = 1;
                     ConvertIntToDecimalStringN(gStringVar2, arg * 10, STR_CONV_MODE_LEFT_ALIGN, 3);
-                    StringAppend(gStringVar4, COMPOUND_STRING("random %"));
+                    StringAppend(gStringVar4, COMPOUND_STRING("ランダム %"));
                     StringAppend(gStringVar4, gStringVar2);
                     break;
                 case IF_MIN_BEAUTY:
-                    StringAppend(gStringVar4, COMPOUND_STRING("{UP_ARROW_2}beauty"));
+                    StringAppend(gStringVar4, COMPOUND_STRING("{UP_ARROW_2}うつくしさ"));
                     break;
                 case IF_MIN_COOLNESS:
-                    StringAppend(gStringVar4, COMPOUND_STRING("{UP_ARROW_2}coolness"));
+                    StringAppend(gStringVar4, COMPOUND_STRING("{UP_ARROW_2}かっこよさ"));
                     break;
                 case IF_MIN_SMARTNESS:
-                    StringAppend(gStringVar4, COMPOUND_STRING("{UP_ARROW_2}smartness"));
+                    StringAppend(gStringVar4, COMPOUND_STRING("{UP_ARROW_2}かしこさ"));
                     break;
                 case IF_MIN_TOUGHNESS:
-                    StringAppend(gStringVar4, COMPOUND_STRING("{UP_ARROW_2}toughness"));
+                    StringAppend(gStringVar4, COMPOUND_STRING("{UP_ARROW_2}たくましさ"));
                     break;
                 case IF_MIN_CUTENESS:
-                    StringAppend(gStringVar4, COMPOUND_STRING("{UP_ARROW_2}cuteness"));
+                    StringAppend(gStringVar4, COMPOUND_STRING("{UP_ARROW_2}かわいさ"));
                     break;
                 // Gen 4
                 case IF_SPECIES_IN_PARTY:
                     StringAppend(gStringVar4, GetSpeciesName(evolutions[i].params[j].arg1)); //mon name
-                    StringAppend(gStringVar4, COMPOUND_STRING(" in party"));
+                    StringAppend(gStringVar4, COMPOUND_STRING(" てもち"));
                     break;
                 case IF_IN_MAPSEC:
-                    StringAppend(gStringVar4, COMPOUND_STRING("in "));
+                    StringAppend(gStringVar4, COMPOUND_STRING("で "));
                     StringCopy(gStringVar2, gRegionMapEntries[evolutions[i].params[j].arg1].name);
                     StringAppend(gStringVar4, gStringVar2);
                     break;
                 case IF_IN_MAP:
-                    StringAppend(gStringVar4, COMPOUND_STRING("in "));
+                    StringAppend(gStringVar4, COMPOUND_STRING("で "));
                     GetMapName(gStringVar2, Overworld_GetMapHeaderByGroupAndId(evolutions[i].params[j].arg1 >> 8, evolutions[i].params[j].arg1 & 0xFF)->regionMapSectionId, 0);
                     StringAppend(gStringVar4, gStringVar2);
                     break;
                 case IF_KNOWS_MOVE:
-                    StringAppend(gStringVar4, COMPOUND_STRING("knows "));
+                    StringAppend(gStringVar4, COMPOUND_STRING("おぼえる "));
                     StringAppend(gStringVar4, GetMoveName(evolutions[i].params[j].arg1));
                     break;
                 // Gen 5
                 case IF_TRADE_PARTNER_SPECIES:
-                    StringAppend(gStringVar4, COMPOUND_STRING("traded with "));
+                    StringAppend(gStringVar4, COMPOUND_STRING("こうかん "));
                     StringAppend(gStringVar4, GetSpeciesName(evolutions[i].params[j].arg1));
                     break;
                 // Gen 6
                 case IF_TYPE_IN_PARTY:
                     StringAppend(gStringVar4, gTypesInfo[evolutions[i].params[j].arg1].name); //type name
-                    StringAppend(gStringVar4, COMPOUND_STRING("-type in party"));
+                    StringAppend(gStringVar4, COMPOUND_STRING("タイプ てもち"));
                     break;
                 case IF_WEATHER:
-                    StringAppend(gStringVar4, COMPOUND_STRING("weather "));
+                    StringAppend(gStringVar4, COMPOUND_STRING("てんき "));
                     StringAppend(gStringVar4, GetWeatherName(evolutions[i].params[j].arg1));
                     break;
                 case IF_KNOWS_MOVE_TYPE:
                     StringAppend(gStringVar4, gTypesInfo[evolutions[i].params[j].arg1].name);
-                    StringAppend(gStringVar4, COMPOUND_STRING(" move"));
+                    StringAppend(gStringVar4, COMPOUND_STRING(" わざ"));
                     break;
                 case IF_REGION:
                 case IF_NOT_REGION:
                 {
                     if (condition == IF_REGION)
-                        StringAppend(gStringVar4, COMPOUND_STRING("in "));
+                        StringAppend(gStringVar4, COMPOUND_STRING("で "));
                     else if (condition == IF_NOT_REGION)
-                        StringAppend(gStringVar4, COMPOUND_STRING("out of "));
+                        StringAppend(gStringVar4, COMPOUND_STRING("のそと "));
 
                     switch ((enum Region)evolutions[i].params[j].arg1)
                     {
                     case REGION_NONE:
                     case REGIONS_COUNT:
-                        StringAppend(gStringVar4, COMPOUND_STRING("???"));
+                        StringAppend(gStringVar4, COMPOUND_STRING("？？？"));
                         break;
-                    case REGION_KANTO: StringAppend(gStringVar4, COMPOUND_STRING("Kanto")); break;
-                    case REGION_JOHTO: StringAppend(gStringVar4, COMPOUND_STRING("Johto")); break;
-                    case REGION_HOENN: StringAppend(gStringVar4, COMPOUND_STRING("Hoenn")); break;
-                    case REGION_SINNOH: StringAppend(gStringVar4, COMPOUND_STRING("Sinnoh")); break;
-                    case REGION_UNOVA: StringAppend(gStringVar4, COMPOUND_STRING("Unova")); break;
-                    case REGION_KALOS: StringAppend(gStringVar4, COMPOUND_STRING("Kalos")); break;
-                    case REGION_ALOLA: StringAppend(gStringVar4, COMPOUND_STRING("Alola")); break;
-                    case REGION_GALAR: StringAppend(gStringVar4, COMPOUND_STRING("Galar")); break;
-                    case REGION_HISUI: StringAppend(gStringVar4, COMPOUND_STRING("Hisui")); break;
-                    case REGION_PALDEA: StringAppend(gStringVar4, COMPOUND_STRING("Paldea")); break;
+                    case REGION_KANTO: StringAppend(gStringVar4, COMPOUND_STRING("カントー")); break;
+                    case REGION_JOHTO: StringAppend(gStringVar4, COMPOUND_STRING("ジョウト")); break;
+                    case REGION_HOENN: StringAppend(gStringVar4, COMPOUND_STRING("ホウエン")); break;
+                    case REGION_SINNOH: StringAppend(gStringVar4, COMPOUND_STRING("シンオウ")); break;
+                    case REGION_UNOVA: StringAppend(gStringVar4, COMPOUND_STRING("イッシュ")); break;
+                    case REGION_KALOS: StringAppend(gStringVar4, COMPOUND_STRING("カロス")); break;
+                    case REGION_ALOLA: StringAppend(gStringVar4, COMPOUND_STRING("アローラ")); break;
+                    case REGION_GALAR: StringAppend(gStringVar4, COMPOUND_STRING("ガラル")); break;
+                    case REGION_HISUI: StringAppend(gStringVar4, COMPOUND_STRING("ヒスイ")); break;
+                    case REGION_PALDEA: StringAppend(gStringVar4, COMPOUND_STRING("パルデア")); break;
                     }
                     break;
                 }
@@ -6718,46 +6718,46 @@ static void PrintEvolutionTargetSpeciesAndMethod(u8 taskId, enum Species species
                 case IF_NATURE:
                     StringCopy(gStringVar2, gNaturesInfo[evolutions[i].params[j].arg1].name);
                     StringAppend(gStringVar4, gStringVar2);
-                    StringAppend(gStringVar4, COMPOUND_STRING(" nature"));
+                    StringAppend(gStringVar4, COMPOUND_STRING(" せいかく"));
                     break;
                 case IF_AMPED_NATURE:
-                    StringAppend(gStringVar4, COMPOUND_STRING("amped natures"));
+                    StringAppend(gStringVar4, COMPOUND_STRING("ハイな せいかく"));
                     break;
                 case IF_LOW_KEY_NATURE:
-                    StringAppend(gStringVar4, COMPOUND_STRING("low-Key natures"));
+                    StringAppend(gStringVar4, COMPOUND_STRING("ローな せいかく"));
                     break;
                 case IF_RECOIL_DAMAGE_GE:
-                    StringAppend(gStringVar4, COMPOUND_STRING("takes at least= "));
+                    StringAppend(gStringVar4, COMPOUND_STRING("いじょううける= "));
                     ConvertIntToDecimalStringN(gStringVar2, evolutions[i].params[j].arg1, STR_CONV_MODE_LEFT_ALIGN, 3);
                     StringAppend(gStringVar4, gStringVar2);
-                    StringAppend(gStringVar4, COMPOUND_STRING(" recoil dmg"));
+                    StringAppend(gStringVar4, COMPOUND_STRING(" はんどうダメージ"));
                     break;
                 case IF_CURRENT_DAMAGE_GE:
                     ConvertIntToDecimalStringN(gStringVar2, evolutions[i].params[j].arg1, STR_CONV_MODE_LEFT_ALIGN, 3);
                     StringAppend(gStringVar4, gStringVar2);
-                    StringAppend(gStringVar4, COMPOUND_STRING(" current dmg"));
+                    StringAppend(gStringVar4, COMPOUND_STRING(" いまのダメージ"));
                     break;
                 case IF_CRITICAL_HITS_GE:
                     ConvertIntToDecimalStringN(gStringVar2, evolutions[i].params[j].arg1, STR_CONV_MODE_LEFT_ALIGN, 2);
                     StringAppend(gStringVar4, gStringVar2);
-                    StringAppend(gStringVar4, COMPOUND_STRING(" critical hits"));
+                    StringAppend(gStringVar4, COMPOUND_STRING(" きゅうしょ"));
                     break;
                 case IF_USED_MOVE_X_TIMES:
-                    StringAppend(gStringVar4, COMPOUND_STRING("use move "));
+                    StringAppend(gStringVar4, COMPOUND_STRING("わざをつかう "));
                     StringAppend(gStringVar4, GetMoveName(evolutions[i].params[j].arg1));
                     StringAppend(gStringVar4, COMPOUND_STRING(" "));
                     ConvertIntToDecimalStringN(gStringVar2, evolutions[i].params[j].arg2, STR_CONV_MODE_LEFT_ALIGN, 3);
                     StringAppend(gStringVar4, gStringVar2);
-                    StringAppend(gStringVar4, COMPOUND_STRING(" times"));
+                    StringAppend(gStringVar4, COMPOUND_STRING(" かい"));
                     break;
                 // Gen 9
                 case IF_DEFEAT_X_WITH_ITEMS:
-                    StringAppend(gStringVar4, COMPOUND_STRING("defeat "));
+                    StringAppend(gStringVar4, COMPOUND_STRING("たおす "));
                     ConvertIntToDecimalStringN(gStringVar2, evolutions[i].params[j].arg3, STR_CONV_MODE_LEFT_ALIGN, 3);
                     StringAppend(gStringVar4, gStringVar2);
                     StringAppend(gStringVar4, COMPOUND_STRING(" "));
                     StringAppend(gStringVar4, GetSpeciesName(evolutions[i].params[j].arg1));
-                    StringAppend(gStringVar4, COMPOUND_STRING(" that hold "));
+                    StringAppend(gStringVar4, COMPOUND_STRING(" もち "));
                     CopyItemName(evolutions[i].params[j].arg2, gStringVar2);
                     StringAppend(gStringVar4, gStringVar2);
                     break;
@@ -6776,10 +6776,10 @@ static void PrintEvolutionTargetSpeciesAndMethod(u8 taskId, enum Species species
                     StringAppend(gStringVar4, gStringVar2);
                     break;
                 case IF_MIN_OVERWORLD_STEPS:
-                    StringAppend(gStringVar4, COMPOUND_STRING("after "));
+                    StringAppend(gStringVar4, COMPOUND_STRING(""));
                     ConvertIntToDecimalStringN(gStringVar2, evolutions[i].params[j].arg1, STR_CONV_MODE_LEFT_ALIGN, 4);
                     StringAppend(gStringVar4, gStringVar2);
-                    StringAppend(gStringVar4, COMPOUND_STRING(" steps"));
+                    StringAppend(gStringVar4, COMPOUND_STRING(" ほ"));
                     break;
                 case IF_BAG_ITEM_COUNT:
                     ConvertIntToDecimalStringN(gStringVar2, evolutions[i].params[j].arg2, STR_CONV_MODE_LEFT_ALIGN, 3);
@@ -6787,7 +6787,7 @@ static void PrintEvolutionTargetSpeciesAndMethod(u8 taskId, enum Species species
                     StringAppend(gStringVar4, COMPOUND_STRING(" "));
                     CopyItemNameHandlePlural(evolutions[i].params[j].arg1, gStringVar2, evolutions[i].params[j].arg2);
                     StringAppend(gStringVar4, gStringVar2);
-                    StringAppend(gStringVar4, COMPOUND_STRING(" in bag"));
+                    StringAppend(gStringVar4, COMPOUND_STRING(" バッグ"));
                     break;
                 case CONDITIONS_END:
                     break;
@@ -6795,7 +6795,7 @@ static void PrintEvolutionTargetSpeciesAndMethod(u8 taskId, enum Species species
 
                 if (evolutions[i].params[j+1].condition != CONDITIONS_END)
                 {
-                    StringAppend(gStringVar4, COMPOUND_STRING(", "));
+                    StringAppend(gStringVar4, COMPOUND_STRING(" "));
                 }
             }
         }
@@ -6807,7 +6807,7 @@ static void PrintEvolutionTargetSpeciesAndMethod(u8 taskId, enum Species species
 
         u32 fontHeight = GetFontAttribute(fontId, FONTATTR_MAX_LETTER_HEIGHT);
 
-        StringAppend(gStringVar4, COMPOUND_STRING("."));
+        StringAppend(gStringVar4, COMPOUND_STRING("。"));
         BreakStringAutomatic(gStringVar4, maxScreenWidth, MAX_EVO_METHOD_LINES, fontId, HIDE_SCROLL_PROMPT);
 
         PrintInfoScreenTextSmall(gStringVar4, fontId, base_x_offset, base_y + base_y_offset*(*depth_i) + numLines); //Print actual instructions

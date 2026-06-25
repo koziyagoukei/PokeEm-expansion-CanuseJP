@@ -858,108 +858,108 @@ static const u8 sTournamentIdToPairedTrainerIds[DOME_TOURNAMENT_TRAINERS_COUNT] 
 // Dome Ace Tucker has their own separate potential text.
 static const u8 *const sBattleDomePotentialTexts[DOME_TOURNAMENT_TRAINERS_COUNT + 1] =
 {
-    COMPOUND_STRING("The best candidate to be a champ!"), // Highest potential
-    COMPOUND_STRING("A sure-finalist team."),
-    COMPOUND_STRING("A likely top-three finisher."),
-    COMPOUND_STRING("A candidate to finish first."),
-    COMPOUND_STRING("A team with top-class potential."),
-    COMPOUND_STRING("The dark horse team this tournament."),
-    COMPOUND_STRING("A better-than-average team."),
-    COMPOUND_STRING("This tournament's average team."),
-    COMPOUND_STRING("A team with average potential."),
-    COMPOUND_STRING("A weaker-than-average team."),
-    COMPOUND_STRING("A team looking for its first win."),
-    COMPOUND_STRING("One win will make this team proud."),
-    COMPOUND_STRING("Overall, a weak team."),
-    COMPOUND_STRING("A team with very low potential."),
-    COMPOUND_STRING("A team unlikely to win the tournament."),
-    COMPOUND_STRING("The team most unlikely to win."), // Lowest potential
-    COMPOUND_STRING("The perfect, invincible superstar!"), // Dome Ace Tucker
+    COMPOUND_STRING("ゆうしょうこうほ！"), // Highest potential
+    COMPOUND_STRING("ゆうしょうに ちかいチーム。"),
+    COMPOUND_STRING("ベスト4を ねらえるチーム。"),
+    COMPOUND_STRING("1いを ねらえるチーム。"),
+    COMPOUND_STRING("じつりょく じゅうぶん。"),
+    COMPOUND_STRING("ダークホースの チーム。"),
+    COMPOUND_STRING("へいきんより つよいチーム。"),
+    COMPOUND_STRING("へいきんな チーム。"),
+    COMPOUND_STRING("ふつうの じつりょく。"),
+    COMPOUND_STRING("へいきんより よわいチーム。"),
+    COMPOUND_STRING("はつしょうりを ねらうチーム。"),
+    COMPOUND_STRING("1しょうで ほこらしいチーム。"),
+    COMPOUND_STRING("そうごうてきに よわめ。"),
+    COMPOUND_STRING("じつりょくが かなりひくい。"),
+    COMPOUND_STRING("ゆうしょうは むずかしい。"),
+    COMPOUND_STRING("もっとも きびしいチーム。"), // Lowest potential
+    COMPOUND_STRING("むてきの スーパースター！"), // Dome Ace Tucker
 };
 
 // The second line of text on a trainers info card. It gives information about their battle style (dependent on their party's moves).
 static const u8 *const sBattleDomeOpponentStyleTexts[NUM_BATTLE_STYLES] =
 {
-    [DOME_BATTLE_STYLE_RISKY]           = COMPOUND_STRING("Willing to risk total disaster at times."),
-    [DOME_BATTLE_STYLE_STALL]           = COMPOUND_STRING("Skilled at enduring long battles."),
-    [DOME_BATTLE_STYLE_VARIED]          = COMPOUND_STRING("Varies tactics to suit the opponent."),
-    [DOME_BATTLE_STYLE_COMBO_HIGH]      = COMPOUND_STRING("Has a tough winning pattern."),
-    [DOME_BATTLE_STYLE_RARE_MOVES]      = COMPOUND_STRING("Occasionally uses a very rare move."),  // Seems like the text for these two was swapped
-    [DOME_BATTLE_STYLE_RARE_MOVE]       = COMPOUND_STRING("Uses startling and disruptive moves."), //
-    [DOME_BATTLE_STYLE_HP]              = COMPOUND_STRING("Constantly watches HP in battle."),
-    [DOME_BATTLE_STYLE_STORE_POWER]     = COMPOUND_STRING("Good at storing then loosing power."),
-    [DOME_BATTLE_STYLE_ENFEEBLE_LOW]    = COMPOUND_STRING("Skilled at enfeebling foes."),
-    [DOME_BATTLE_STYLE_LUCK]            = COMPOUND_STRING("Prefers tactics that rely on luck."),
-    [DOME_BATTLE_STYLE_REGAL]           = COMPOUND_STRING("Attacks with a regal atmosphere."),
-    [DOME_BATTLE_STYLE_LOW_PP]          = COMPOUND_STRING("Attacks with powerful, low-PP moves."),
-    [DOME_BATTLE_STYLE_STATUS_ATK]      = COMPOUND_STRING("Skilled at enfeebling, then attacking."),
-    [DOME_BATTLE_STYLE_ENDURE]          = COMPOUND_STRING("Battles while enduring all attacks."),
-    [DOME_BATTLE_STYLE_STATUS]          = COMPOUND_STRING("Skilled at upsetting foes emotionally."),
-    [DOME_BATTLE_STYLE_STRAIGHTFORWARD] = COMPOUND_STRING("Uses strong and straightforward moves."),
-    [DOME_BATTLE_STYLE_AGGRESSIVE]      = COMPOUND_STRING("Aggressively uses strong moves."),
-    [DOME_BATTLE_STYLE_DEF]             = COMPOUND_STRING("Battles while cleverly dodging attacks."),
-    [DOME_BATTLE_STYLE_ENFEEBLE_HIGH]   = COMPOUND_STRING("Skilled at using upsetting attacks."),
-    [DOME_BATTLE_STYLE_POPULAR_POWER]   = COMPOUND_STRING("Uses many popular moves."),
-    [DOME_BATTLE_STYLE_COMBO_LOW]       = COMPOUND_STRING("Has moves for powerful combinations."),
-    [DOME_BATTLE_STYLE_ACCURATE]        = COMPOUND_STRING("Uses high-probability attacks."),
-    [DOME_BATTLE_STYLE_POWERFUL]        = COMPOUND_STRING("Aggressively uses spectacular moves."),
-    [DOME_BATTLE_STYLE_ATK_OVER_DEF]    = COMPOUND_STRING("Emphasizes offense over defense."),
-    [DOME_BATTLE_STYLE_DEF_OVER_ATK]    = COMPOUND_STRING("Emphasizes defense over offense."),
-    [DOME_BATTLE_STYLE_POPULAR_STRONG]  = COMPOUND_STRING("Attacks quickly with strong moves."),
-    [DOME_BATTLE_STYLE_EFFECTS]         = COMPOUND_STRING("Often uses moves with added effects."),
-    [DOME_BATTLE_STYLE_BALANCED]        = COMPOUND_STRING("Uses a well-balanced mix of moves."),
-    [DOME_BATTLE_STYLE_UNUSED1]         = COMPOUND_STRING("This is sample message 1."),
-    [DOME_BATTLE_STYLE_UNUSED2]         = COMPOUND_STRING("This is sample message 2."),
-    [DOME_BATTLE_STYLE_UNUSED3]         = COMPOUND_STRING("This is sample message 3."),
-    [DOME_BATTLE_STYLE_UNUSED4]         = COMPOUND_STRING("This is sample message 4."),
+    [DOME_BATTLE_STYLE_RISKY]           = COMPOUND_STRING("ときどき おおきなかけにでる。"),
+    [DOME_BATTLE_STYLE_STALL]           = COMPOUND_STRING("ながいバトルに たえる。"),
+    [DOME_BATTLE_STYLE_VARIED]          = COMPOUND_STRING("あいてに あわせてたたかう。"),
+    [DOME_BATTLE_STYLE_COMBO_HIGH]      = COMPOUND_STRING("つよい かちパターンをもつ。"),
+    [DOME_BATTLE_STYLE_RARE_MOVES]      = COMPOUND_STRING("ごくまれな わざをつかう。"),  // Seems like the text for these two was swapped
+    [DOME_BATTLE_STYLE_RARE_MOVE]       = COMPOUND_STRING("おどろくわざで かきみだす。"), //
+    [DOME_BATTLE_STYLE_HP]              = COMPOUND_STRING("HPを よくみてたたかう。"),
+    [DOME_BATTLE_STYLE_STORE_POWER]     = COMPOUND_STRING("ちからを ためてはなつ。"),
+    [DOME_BATTLE_STYLE_ENFEEBLE_LOW]    = COMPOUND_STRING("あいてを よわらせるのがうまい。"),
+    [DOME_BATTLE_STYLE_LUCK]            = COMPOUND_STRING("うんに たよるさくせん。"),
+    [DOME_BATTLE_STYLE_REGAL]           = COMPOUND_STRING("ひんよく せめる。"),
+    [DOME_BATTLE_STYLE_LOW_PP]          = COMPOUND_STRING("つよいわざを ねらう。"),
+    [DOME_BATTLE_STYLE_STATUS_ATK]      = COMPOUND_STRING("よわらせてから せめる。"),
+    [DOME_BATTLE_STYLE_ENDURE]          = COMPOUND_STRING("たえながら たたかう。"),
+    [DOME_BATTLE_STYLE_STATUS]          = COMPOUND_STRING("あいての こころをゆさぶる。"),
+    [DOME_BATTLE_STYLE_STRAIGHTFORWARD] = COMPOUND_STRING("まっすぐ つよくせめる。"),
+    [DOME_BATTLE_STYLE_AGGRESSIVE]      = COMPOUND_STRING("つよいわざで せめる。"),
+    [DOME_BATTLE_STYLE_DEF]             = COMPOUND_STRING("うまく かわしてたたかう。"),
+    [DOME_BATTLE_STYLE_ENFEEBLE_HIGH]   = COMPOUND_STRING("いやな こうげきがうまい。"),
+    [DOME_BATTLE_STYLE_POPULAR_POWER]   = COMPOUND_STRING("にんきの わざをおおくつかう。"),
+    [DOME_BATTLE_STYLE_COMBO_LOW]       = COMPOUND_STRING("れんけいできる わざをもつ。"),
+    [DOME_BATTLE_STYLE_ACCURATE]        = COMPOUND_STRING("あたりやすい わざをつかう。"),
+    [DOME_BATTLE_STYLE_POWERFUL]        = COMPOUND_STRING("はでな わざでせめる。"),
+    [DOME_BATTLE_STYLE_ATK_OVER_DEF]    = COMPOUND_STRING("まもりより こうげき。"),
+    [DOME_BATTLE_STYLE_DEF_OVER_ATK]    = COMPOUND_STRING("こうげきより まもり。"),
+    [DOME_BATTLE_STYLE_POPULAR_STRONG]  = COMPOUND_STRING("すばやく つよくせめる。"),
+    [DOME_BATTLE_STYLE_EFFECTS]         = COMPOUND_STRING("ついかこうかの わざがおおい。"),
+    [DOME_BATTLE_STYLE_BALANCED]        = COMPOUND_STRING("バランスよく たたかう。"),
+    [DOME_BATTLE_STYLE_UNUSED1]         = COMPOUND_STRING("サンプルメッセージ 1。"),
+    [DOME_BATTLE_STYLE_UNUSED2]         = COMPOUND_STRING("サンプルメッセージ 2。"),
+    [DOME_BATTLE_STYLE_UNUSED3]         = COMPOUND_STRING("サンプルメッセージ 3。"),
+    [DOME_BATTLE_STYLE_UNUSED4]         = COMPOUND_STRING("サンプルメッセージ 4。"),
 };
 
 // The third line of text on a trainers info card. It that gives information about their party's stat spread (based on their Pokemon's effort values and Nature).
 static const u8 *const sBattleDomeOpponentStatsTexts[] =
 {
-    COMPOUND_STRING("Emphasizes HP and ATTACK."),              // DOME_TEXT_TWO_GOOD_STATS and DOME_TEXT_HP start here
-    COMPOUND_STRING("Emphasizes HP and DEFENSE."),
-    COMPOUND_STRING("Emphasizes HP and SPEED."),
-    COMPOUND_STRING("Emphasizes HP and SP. ATTACK."),
-    COMPOUND_STRING("Emphasizes HP and SP. DEFENSE."),
-    COMPOUND_STRING("Emphasizes ATTACK and DEFENSE."),         // DOME_TEXT_ATK starts here
-    COMPOUND_STRING("Emphasizes ATTACK and SPEED."),
-    COMPOUND_STRING("Emphasizes ATTACK and SP. ATTACK."),
-    COMPOUND_STRING("Emphasizes ATTACK and SP. DEFENSE."),
-    COMPOUND_STRING("Emphasizes DEFENSE and SPEED."),          // DOME_TEXT_DEF starts here
-    COMPOUND_STRING("Emphasizes DEFENSE and SP. ATTACK."),
-    COMPOUND_STRING("Emphasizes DEFENSE and SP. DEFENSE."),
-    COMPOUND_STRING("Emphasizes SPEED and SP. ATTACK."),       // DOME_TEXT_SPEED starts here
-    COMPOUND_STRING("Emphasizes SPEED and SP. DEFENSE."),
-    COMPOUND_STRING("Emphasizes SP. ATTACK and SP. DEFENSE."), // DOME_TEXT_SPATK starts here
-    COMPOUND_STRING("Emphasizes HP."),                         // DOME_TEXT_ONE_GOOD_STAT starts here
-    COMPOUND_STRING("Emphasizes ATTACK."),
-    COMPOUND_STRING("Emphasizes DEFENSE."),
-    COMPOUND_STRING("Emphasizes SPEED."),
-    COMPOUND_STRING("Emphasizes SP. ATTACK."),
-    COMPOUND_STRING("Emphasizes SP. DEFENSE."),
-    COMPOUND_STRING("Neglects HP and ATTACK."),                // DOME_TEXT_TWO_BAD_STATS starts here
-    COMPOUND_STRING("Neglects HP and DEFENSE."),
-    COMPOUND_STRING("Neglects HP and SPEED."),
-    COMPOUND_STRING("Neglects HP and SP. ATTACK."),
-    COMPOUND_STRING("Neglects HP and SP. DEFENSE."),
-    COMPOUND_STRING("Neglects ATTACK and DEFENSE."),
-    COMPOUND_STRING("Neglects ATTACK and SPEED."),
-    COMPOUND_STRING("Neglects ATTACK and SP. ATTACK."),
-    COMPOUND_STRING("Neglects ATTACK and SP. DEFENSE."),
-    COMPOUND_STRING("Neglects DEFENSE and SPEED."),
-    COMPOUND_STRING("Neglects DEFENSE and SP. ATTACK."),
-    COMPOUND_STRING("Neglects DEFENSE and SP. DEFENSE."),
-    COMPOUND_STRING("Neglects SPEED and SP. ATTACK."),
-    COMPOUND_STRING("Neglects SPEED and SP. DEFENSE."),
-    COMPOUND_STRING("Neglects SP. ATTACK and SP. DEFENSE."),
-    COMPOUND_STRING("Neglects HP."),                           // DOME_TEXT_ONE_BAD_STAT starts here
-    COMPOUND_STRING("Neglects ATTACK."),
-    COMPOUND_STRING("Neglects DEFENSE."),
-    COMPOUND_STRING("Neglects SPEED."),
-    COMPOUND_STRING("Neglects SP. ATTACK."),
-    COMPOUND_STRING("Neglects SP. DEFENSE."),
-    [DOME_TEXT_WELL_BALANCED] = COMPOUND_STRING("Raises POKEMON in a well-balanced way."),
+    COMPOUND_STRING("HPと こうげきが たかめ。"),              // DOME_TEXT_TWO_GOOD_STATS and DOME_TEXT_HP start here
+    COMPOUND_STRING("HPと ぼうぎょが たかめ。"),
+    COMPOUND_STRING("HPと すばやさが たかめ。"),
+    COMPOUND_STRING("HPと とくこうが たかめ。"),
+    COMPOUND_STRING("HPと とくぼうが たかめ。"),
+    COMPOUND_STRING("こうげきと ぼうぎょが たかめ。"),         // DOME_TEXT_ATK starts here
+    COMPOUND_STRING("こうげきと すばやさが たかめ。"),
+    COMPOUND_STRING("こうげきと とくこうが たかめ。"),
+    COMPOUND_STRING("こうげきと とくぼうが たかめ。"),
+    COMPOUND_STRING("ぼうぎょと すばやさが たかめ。"),          // DOME_TEXT_DEF starts here
+    COMPOUND_STRING("ぼうぎょと とくこうが たかめ。"),
+    COMPOUND_STRING("ぼうぎょと とくぼうが たかめ。"),
+    COMPOUND_STRING("すばやさと とくこうが たかめ。"),       // DOME_TEXT_SPEED starts here
+    COMPOUND_STRING("すばやさと とくぼうが たかめ。"),
+    COMPOUND_STRING("とくこうと とくぼうが たかめ。"), // DOME_TEXT_SPATK starts here
+    COMPOUND_STRING("HPが たかめ。"),                         // DOME_TEXT_ONE_GOOD_STAT starts here
+    COMPOUND_STRING("こうげきが たかめ。"),
+    COMPOUND_STRING("ぼうぎょが たかめ。"),
+    COMPOUND_STRING("すばやさが たかめ。"),
+    COMPOUND_STRING("とくこうが たかめ。"),
+    COMPOUND_STRING("とくぼうが たかめ。"),
+    COMPOUND_STRING("HPと こうげきが ひくめ。"),                // DOME_TEXT_TWO_BAD_STATS starts here
+    COMPOUND_STRING("HPと ぼうぎょが ひくめ。"),
+    COMPOUND_STRING("HPと すばやさが ひくめ。"),
+    COMPOUND_STRING("HPと とくこうが ひくめ。"),
+    COMPOUND_STRING("HPと とくぼうが ひくめ。"),
+    COMPOUND_STRING("こうげきと ぼうぎょが ひくめ。"),
+    COMPOUND_STRING("こうげきと すばやさが ひくめ。"),
+    COMPOUND_STRING("こうげきと とくこうが ひくめ。"),
+    COMPOUND_STRING("こうげきと とくぼうが ひくめ。"),
+    COMPOUND_STRING("ぼうぎょと すばやさが ひくめ。"),
+    COMPOUND_STRING("ぼうぎょと とくこうが ひくめ。"),
+    COMPOUND_STRING("ぼうぎょと とくぼうが ひくめ。"),
+    COMPOUND_STRING("すばやさと とくこうが ひくめ。"),
+    COMPOUND_STRING("すばやさと とくぼうが ひくめ。"),
+    COMPOUND_STRING("とくこうと とくぼうが ひくめ。"),
+    COMPOUND_STRING("HPが ひくめ。"),                           // DOME_TEXT_ONE_BAD_STAT starts here
+    COMPOUND_STRING("こうげきが ひくめ。"),
+    COMPOUND_STRING("ぼうぎょが ひくめ。"),
+    COMPOUND_STRING("すばやさが ひくめ。"),
+    COMPOUND_STRING("とくこうが ひくめ。"),
+    COMPOUND_STRING("とくぼうが ひくめ。"),
+    [DOME_TEXT_WELL_BALANCED] = COMPOUND_STRING("バランスよく そだてている。"),
 };
 
 static const u8 sInfoTrainerMonX[FRONTIER_PARTY_SIZE] = {104, 136, 104};
@@ -979,32 +979,32 @@ static const u8 sStatTextOffsets[NUM_STATS - 1] =
 
 static const u8 *const sBattleDomeMatchNumberTexts[DOME_TOURNAMENT_MATCHES_COUNT] =
 {
-    COMPOUND_STRING("Round 1, Match 1"),
-    COMPOUND_STRING("Round 1, Match 2"),
-    COMPOUND_STRING("Round 1, Match 3"),
-    COMPOUND_STRING("Round 1, Match 4"),
-    COMPOUND_STRING("Round 1, Match 5"),
-    COMPOUND_STRING("Round 1, Match 6"),
-    COMPOUND_STRING("Round 1, Match 7"),
-    COMPOUND_STRING("Round 1, Match 8"),
-    COMPOUND_STRING("Round 2, Match 1"),
-    COMPOUND_STRING("Round 2, Match 2"),
-    COMPOUND_STRING("Round 2, Match 3"),
-    COMPOUND_STRING("Round 2, Match 4"),
-    COMPOUND_STRING("Semifinal Match 1"),
-    COMPOUND_STRING("Semifinal Match 2"),
-    COMPOUND_STRING("Final Match"),
+    COMPOUND_STRING("1かいせん 1しあい"),
+    COMPOUND_STRING("1かいせん 2しあい"),
+    COMPOUND_STRING("1かいせん 3しあい"),
+    COMPOUND_STRING("1かいせん 4しあい"),
+    COMPOUND_STRING("1かいせん 5しあい"),
+    COMPOUND_STRING("1かいせん 6しあい"),
+    COMPOUND_STRING("1かいせん 7しあい"),
+    COMPOUND_STRING("1かいせん 8しあい"),
+    COMPOUND_STRING("2かいせん 1しあい"),
+    COMPOUND_STRING("2かいせん 2しあい"),
+    COMPOUND_STRING("2かいせん 3しあい"),
+    COMPOUND_STRING("2かいせん 4しあい"),
+    COMPOUND_STRING("じゅんけっしょう 1しあい"),
+    COMPOUND_STRING("じゅんけっしょう 2しあい"),
+    COMPOUND_STRING("けっしょう"),
 };
 
 static const u8 *const sBattleDomeWinTexts[] =
 {
-    [DOME_TEXT_NO_WINNER_YET]    = COMPOUND_STRING("Let the battle begin!"),
-    [DOME_TEXT_WON_USING_MOVE]   = COMPOUND_STRING("{STR_VAR_1} won using {STR_VAR_2}!"),
-    [DOME_TEXT_CHAMP_USING_MOVE] = COMPOUND_STRING("{STR_VAR_1} became the champ!"),
-    [DOME_TEXT_WON_ON_FORFEIT]   = COMPOUND_STRING("{STR_VAR_1} won by default!"),
-    [DOME_TEXT_CHAMP_ON_FORFEIT] = COMPOUND_STRING("{STR_VAR_1} won outright by default!"),
-    [DOME_TEXT_WON_NO_MOVES]     = COMPOUND_STRING("{STR_VAR_1} won without using a move!"),
-    [DOME_TEXT_CHAMP_NO_MOVES]   = COMPOUND_STRING("{STR_VAR_1} won outright with no moves!"),
+    [DOME_TEXT_NO_WINNER_YET]    = COMPOUND_STRING("バトル スタート！"),
+    [DOME_TEXT_WON_USING_MOVE]   = COMPOUND_STRING("{STR_VAR_1}が {STR_VAR_2}で しょうり！"),
+    [DOME_TEXT_CHAMP_USING_MOVE] = COMPOUND_STRING("{STR_VAR_1}が ゆうしょう！"),
+    [DOME_TEXT_WON_ON_FORFEIT]   = COMPOUND_STRING("{STR_VAR_1}の ふせんしょう！"),
+    [DOME_TEXT_CHAMP_ON_FORFEIT] = COMPOUND_STRING("{STR_VAR_1}が ふせんしょうで ゆうしょう！"),
+    [DOME_TEXT_WON_NO_MOVES]     = COMPOUND_STRING("{STR_VAR_1}が わざをつかわず しょうり！"),
+    [DOME_TEXT_CHAMP_NO_MOVES]   = COMPOUND_STRING("{STR_VAR_1}が わざなしで ゆうしょう！"),
 };
 
 static const u8 sLeftTrainerMonX[FRONTIER_PARTY_SIZE]  = { 96,  96,  96};

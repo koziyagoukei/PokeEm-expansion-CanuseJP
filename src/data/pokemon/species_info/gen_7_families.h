@@ -929,7 +929,7 @@ const struct SpeciesInfo gSpeciesInfoGen7[] =
         .weight = 60,
         .description = COMPOUND_STRING(
             "With its sharp fangs, it will bite anything.\n"
-            "It wanders around in a never-ending\n"
+            "It wanders around in a never？ending\n"
             "search for food. At dusk, it collapses\n"
             "and falls asleep on the spot."),
         .pokemonScale = 491,
@@ -2579,7 +2579,7 @@ const struct SpeciesInfo gSpeciesInfoGen7[] =
         .description = COMPOUND_STRING(
             "It's found crawling on beaches and\n"
             "seafloors. The coral that grows on\n"
-            "Corsola's head is as good as a five-star\n"
+            "Corsola's head is as good as a five？star\n"
             "banquet to this Pokemon."),
         .pokemonScale = 491,
         .pokemonOffset = 12,
@@ -2649,7 +2649,7 @@ const struct SpeciesInfo gSpeciesInfoGen7[] =
         .description = COMPOUND_STRING(
             "Those attacked by Toxapex's poison will\n"
             "suffer intense pain for three days and\n"
-            "three nights. Post-recovery, there will be\n"
+            "three nights. Post？recovery, there will be\n"
             "some aftereffects."),
         .pokemonScale = 365,
         .pokemonOffset = 12,
@@ -2785,7 +2785,7 @@ const struct SpeciesInfo gSpeciesInfoGen7[] =
         .height = 25,
         .weight = 9200,
         .description = COMPOUND_STRING(
-            "Its heavy, mud-covered kicks are its\n"
+            "Its heavy, mud？covered kicks are its\n"
             "best means of attack, and it can reduce\n"
             "large trucks to scrap without breaking\n"
             "a sweat."),
@@ -2859,7 +2859,7 @@ const struct SpeciesInfo gSpeciesInfoGen7[] =
             "It crawls onto the land in search of food.\n"
             "When it comes across enemies or potential\n"
             "prey, this Pokemon smashes its\n"
-            "water-bubble-covered head into them."),
+            "water？bubble？covered head into them."),
         .pokemonScale = 530,
         .pokemonOffset = 13,
         .trainerScale = 256,
@@ -3402,7 +3402,7 @@ const struct SpeciesInfo gSpeciesInfoGen7[] =
         .weight = 48,
         .description = COMPOUND_STRING(
             "It burns its bodily fluids to create a\n"
-            "sweet-smelling poisonous gas. When its\n"
+            "sweet？smelling poisonous gas. When its\n"
             "enemies become disoriented from inhaling\n"
             "the gas, it attacks them."),
         .pokemonScale = 422,
@@ -4228,8 +4228,8 @@ const struct SpeciesInfo gSpeciesInfoGen7[] =
         .description = COMPOUND_STRING(
             "It battles skillfully with its six arms,\n"
             "with a flashing slash of its giant sharp\n"
-            "claws, it cleaves seawater--or even\n"
-            "air--right in two."),
+            "claws, it cleaves seawater？？or even\n"
+            "air？？right in two."),
         .pokemonScale = 261,
         .pokemonOffset = 1,
         .trainerScale = 334,
@@ -4359,7 +4359,7 @@ const struct SpeciesInfo gSpeciesInfoGen7[] =
         .description = COMPOUND_STRING(
             "It takes control of anyone who puts a\n"
             "hand in its mouth, to add to the pile\n"
-            "of its sand-mound body. This Pokemon\n"
+            "of its sand？mound body. This Pokemon\n"
             "embodies the grudges of the departed."),
         .pokemonScale = 432,
         .pokemonOffset = 13,
@@ -4499,7 +4499,7 @@ const struct SpeciesInfo gSpeciesInfoGen7[] =
             "It lives in shallow seas, such as areas\n"
             "near a beach. The sticky mucous that\n"
             "covers their bodies can be used to soothe\n"
-            "sunburned skin. How convenient!"),
+            "sunburned skin. How convenient？"),
         .pokemonScale = 530,
         .pokemonOffset = 13,
         .trainerScale = 256,
@@ -4980,7 +4980,7 @@ const struct SpeciesInfo gSpeciesInfoGen7[] =
         .speciesName = _("トゲデマル"),
         .cryId = CRY_TOGEDEMARU,
         .natDexNum = NATIONAL_DEX_TOGEDEMARU,
-        .categoryName = _("Roly-Poly"),
+        .categoryName = _("Roly？Poly"),
         .height = 3,
         .weight = 33,
         .description = gTogedemaruPokedexText,
@@ -5042,7 +5042,7 @@ const struct SpeciesInfo gSpeciesInfoGen7[] =
         .speciesName = _("トゲデマル"),
         .cryId = CRY_TOGEDEMARU,
         .natDexNum = NATIONAL_DEX_TOGEDEMARU,
-        .categoryName = _("Roly-Poly"),
+        .categoryName = _("Roly？Poly"),
         .height = 6,
         .weight = 130,
         .description = gTogedemaruPokedexText,
@@ -5635,7 +5635,7 @@ const struct SpeciesInfo gSpeciesInfoGen7[] =
         .description = COMPOUND_STRING(
             "It expresses its feelings by smacking its\n"
             "scales. Metallic sounds echo through the\n"
-            "tall mountains where Jangmo-o live. They\n"
+            "tall mountains where Jangmo？o live. They\n"
             "grow little by little battling one another."),
         .pokemonScale = 422,
         .pokemonOffset = 12,
@@ -5904,7 +5904,7 @@ const struct SpeciesInfo gSpeciesInfoGen7[] =
         .description = COMPOUND_STRING(
             "It confuses its enemies by flying too\n"
             "quickly for the eye to follow. It has a\n"
-            "hair-trigger temper but forgets what\n"
+            "hair？trigger temper but forgets what\n"
             "made it angry an instant later."),
         .pokemonScale = 267,
         .pokemonOffset = 2,
@@ -6547,7 +6547,7 @@ const struct SpeciesInfo gSpeciesInfoGen7[] =
         .height = 24,
         .weight = 3336,
         .description = COMPOUND_STRING(
-            "This life-form called an Ultra Beast\n"
+            "This life？form called an Ultra Beast\n"
             "appeared from another world. It shows\n"
             "off its body, but whether that display\n"
             "is a boast or a threat remains unclear."),
@@ -6681,7 +6681,7 @@ const struct SpeciesInfo gSpeciesInfoGen7[] =
         .height = 38,
         .weight = 1000,
         .description = COMPOUND_STRING(
-            "One of the mysterious life-forms known\n"
+            "One of the mysterious life？forms known\n"
             "as Ultra Beasts. Astonishing electric\n"
             "shocks emanate from its entire body,\n"
             "according to witnesses."),
@@ -6960,7 +6960,7 @@ const struct SpeciesInfo gSpeciesInfoGen7[] =
         .weight = 2300,
         .description = COMPOUND_STRING(
             "Reminiscent of the Ultra Beasts, this\n"
-            "life-form, apparently asleep underground,\n"
+            "life？form, apparently asleep underground,\n"
             "is thought to have come from another\n"
             "world in ancient times."),
         .pokemonScale = 256,
@@ -7253,7 +7253,7 @@ const struct SpeciesInfo gSpeciesInfoGen7[] =
             "This artificial Pokemon, constructed more\n"
             "than 500 years ago, can understand human\n"
             "speech but cannot itself speak. Its true\n"
-            "self is its Soul-Heart, an artificial soul."),
+            "self is its Soul？Heart, an artificial soul."),
         .pokemonScale = 305,
         .pokemonOffset = 7,
         .trainerScale = 257,
@@ -7320,8 +7320,8 @@ const struct SpeciesInfo gSpeciesInfoGen7[] =
         .description = COMPOUND_STRING(
             "This is its form from almost 500\n"
             "years ago. Its body is nothing more\n"
-            "than a container-its artificial heart\n"
-            "is the actual life-form."),
+            "than a container？its artificial heart\n"
+            "is the actual life？form."),
         .pokemonScale = 305,
         .pokemonOffset = 7,
         .trainerScale = 257,
@@ -7394,7 +7394,7 @@ const struct SpeciesInfo gSpeciesInfoGen7[] =
             "This artificial Pokemon, constructed more\n"
             "than 500 years ago, can understand human\n"
             "speech but cannot itself speak. Its true\n"
-            "self is its Soul-Heart, an artificial soul."),
+            "self is its Soul？Heart, an artificial soul."),
         .frontPic = gMonFrontPic_MagearnaMega,
         .frontPicSize = MON_COORDS_SIZE(64, 64),
         .frontPicYOffset = 0,
@@ -7726,7 +7726,7 @@ const struct SpeciesInfo gSpeciesInfoGen7[] =
         .weight = 8200,
         .description = COMPOUND_STRING(
             "It appeared from an Ultra Wormhole. Each\n"
-            "one appears to be made up of many life-\n"
+            "one appears to be made up of many life？\n"
             "forms stacked one on top of each other."),
         .pokemonScale = 256,
         .pokemonOffset = 0,

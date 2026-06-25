@@ -20,7 +20,7 @@ const u8 gPichuPokedexText[] = _(
 
 const u8 gPikachuPokedexText[] = _(
     "It stores electricity in the electric sacs\n"
-    "on its cheeks. When it releases pent-up\n"
+    "on its cheeks. When it releases pent？up\n"
     "energy in a burst, the electric power is\n"
     "equal to a lightning bolt.");
 
@@ -277,6 +277,6 @@ const u8 gOgerponHearthflameMaskPokedexText[] = _(
 
 const u8 gOgerponCornerstoneMaskPokedexText[] = _(
     "In this form, it draws on the power\n"
-    "of stone. Its body is rock-solid,\n"
+    "of stone. Its body is rock？solid,\n"
     "protecting it from all manner of\n"
     "attacks.");

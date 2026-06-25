@@ -2160,7 +2160,7 @@ static void UpdateMonData(struct BattleDebugMenu *data)
 
 static const u8 *const sHoldEffectNames[HOLD_EFFECT_COUNT] =
 {
-    [HOLD_EFFECT_NONE]             = COMPOUND_STRING("????????"),
+    [HOLD_EFFECT_NONE]             = COMPOUND_STRING("？？？？？？？？"),
     [HOLD_EFFECT_RESTORE_HP]       = COMPOUND_STRING("Restore Hp"),
     [HOLD_EFFECT_CURE_PAR]         = COMPOUND_STRING("Cure Par"),
     [HOLD_EFFECT_CURE_SLP]         = COMPOUND_STRING("Cure Slp"),
@@ -2274,7 +2274,7 @@ static const u8 *const sHoldEffectNames[HOLD_EFFECT_COUNT] =
     [HOLD_EFFECT_TERRAIN_SEED]     = COMPOUND_STRING("Seeds"),
     [HOLD_EFFECT_ADRENALINE_ORB]   = COMPOUND_STRING("Adrenaline Orb"),
     [HOLD_EFFECT_MEMORY]           = COMPOUND_STRING("Memory"),
-    [HOLD_EFFECT_Z_CRYSTAL]        = COMPOUND_STRING("Z-Crystal"),
+    [HOLD_EFFECT_Z_CRYSTAL]        = COMPOUND_STRING("Z？Crystal"),
     [HOLD_EFFECT_UTILITY_UMBRELLA] = COMPOUND_STRING("Utility Umbrella"),
     [HOLD_EFFECT_EJECT_PACK]       = COMPOUND_STRING("Eject Pack"),
     [HOLD_EFFECT_ROOM_SERVICE]     = COMPOUND_STRING("Room Service"),

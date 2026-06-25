@@ -7,7 +7,7 @@ const struct EasyChatWordInfo gEasyChatGroup_TrendySaying[] = {
     },
     [EC_INDEX(EC_WORD_YES_SIR_EXCL)] =
     {
-        .text = COMPOUND_STRING("YES, SIR!"),
+        .text = COMPOUND_STRING("YES, SIR？"),
         .alphabeticalOrder = EC_INDEX(EC_WORD_AVANT_GARDE),
         .enabled = TRUE,
     },
@@ -31,7 +31,7 @@ const struct EasyChatWordInfo gEasyChatGroup_TrendySaying[] = {
     },
     [EC_INDEX(EC_WORD_YEEHAW_EXCL)] =
     {
-        .text = COMPOUND_STRING("YEEHAW!"),
+        .text = COMPOUND_STRING("YEEHAW？"),
         .alphabeticalOrder = EC_INDEX(EC_WORD_COUPLE),
         .enabled = TRUE,
     },
@@ -43,7 +43,7 @@ const struct EasyChatWordInfo gEasyChatGroup_TrendySaying[] = {
     },
     [EC_INDEX(EC_WORD_1_HIT_KO_EXCL)] =
     {
-        .text = COMPOUND_STRING("1-HIT KO!"),
+        .text = COMPOUND_STRING("1？HIT KO？"),
         .alphabeticalOrder = EC_INDEX(EC_WORD_FEVER),
         .enabled = TRUE,
     },

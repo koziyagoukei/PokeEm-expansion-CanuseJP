@@ -767,14 +767,14 @@ static const TaskFunc sTextPrinterTasks[] =
     [PSS_PAGE_CONTEST_MOVES] = Task_PrintContestMoves
 };
 
-static const u8 sText_Relearn[] = _("{START_BUTTON} RELEARN"); // future note: don't decap this, because it mimics the summary screen BG graphics which will not get decapped
+static const u8 sText_Relearn[] = _("{START_BUTTON} おもいだす"); // future note: don't decap this, because it mimics the summary screen BG graphics which will not get decapped
 
 static const u8 *const sRelearnTexts[MOVE_RELEARNER_COUNT] =
 {
-    [MOVE_RELEARNER_LEVEL_UP_MOVES] = COMPOUND_STRING("{START_BUTTON} RELEARN LEVEL"),
-    [MOVE_RELEARNER_EGG_MOVES] =      COMPOUND_STRING("{START_BUTTON} RELEARN EGG"),
-    [MOVE_RELEARNER_TM_MOVES] =       COMPOUND_STRING("{START_BUTTON} RELEARN TM"),
-    [MOVE_RELEARNER_TUTOR_MOVES] =    COMPOUND_STRING("{START_BUTTON} RELEARN TUTOR"),
+    [MOVE_RELEARNER_LEVEL_UP_MOVES] = COMPOUND_STRING("{START_BUTTON} レベル"),
+    [MOVE_RELEARNER_EGG_MOVES] =      COMPOUND_STRING("{START_BUTTON} タマゴ"),
+    [MOVE_RELEARNER_TM_MOVES] =       COMPOUND_STRING("{START_BUTTON} わざマシン"),
+    [MOVE_RELEARNER_TUTOR_MOVES] =    COMPOUND_STRING("{START_BUTTON} おしえ"),
 };
 
 static const u8 sMemoNatureTextColor[] = _("{COLOR LIGHT_RED}{SHADOW GREEN}");
@@ -4794,10 +4794,10 @@ static inline bool32 ShouldShowIvEvPrompt(void)
 static inline void ShowUtilityPrompt(s16 mode)
 {
     const u8* promptText = NULL;
-    const u8* gText_SkillPageIvs = COMPOUND_STRING("IVs");
-    const u8* gText_SkillPageEvs = COMPOUND_STRING("EVs");
-    const u8* gText_SkillPageStats = COMPOUND_STRING("STATS");
-    const u8* gText_Rename = COMPOUND_STRING("RENAME");
+    const u8* gText_SkillPageIvs = COMPOUND_STRING("こたい");
+    const u8* gText_SkillPageEvs = COMPOUND_STRING("きそ");
+    const u8* gText_SkillPageStats = COMPOUND_STRING("のうりょく");
+    const u8* gText_Rename = COMPOUND_STRING("なまえ");
 
     if (sMonSummaryScreen->currPageIndex == PSS_PAGE_INFO)
     {

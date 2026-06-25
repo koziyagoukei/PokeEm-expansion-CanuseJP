@@ -416,18 +416,18 @@ static void SetBallStuck(struct Sprite *);
 static void SpriteCB_Shroomish(struct Sprite *);
 static void SpriteCB_Taillow(struct Sprite *);
 
-static const u8 Roulette_Text_PlayMinimumWagerIsX[] = _("The minimum wager at this table\nis {STR_VAR_1}. Do you want to play?");
-static const u8 Roulette_Text_NotEnoughCoins[] = _("You don't have enough COINS.");
-static const u8 Roulette_Text_SpecialRateTable[] = _("Special rate table right now!");
-static const u8 Roulette_Text_ControlsInstruction[] = _("Place your wager with the + Control\nPad, then press the A Button.");
-static const u8 Roulette_Text_ItsAHit[] = _("It's a hit!");
-static const u8 Roulette_Text_Jackpot[] = _("Jackpot!");
-static const u8 Roulette_Text_NothingDoing[] = _("Nothing doing!");
-static const u8 Roulette_Text_YouveWonXCoins[] = _("You've won {STR_VAR_1} COINS!");
-static const u8 Roulette_Text_NoCoinsLeft[] = _("No COINS left...");
-static const u8 Roulette_Text_KeepPlaying[] = _("Keep playing?");
-static const u8 Roulette_Text_BoardWillBeCleared[] = _("The ROULETTE board will be cleared.");
-static const u8 Roulette_Text_CoinCaseIsFull[] = _("Your COIN CASE is full!\nCoins can be exchanged for prizes.");
+static const u8 Roulette_Text_PlayMinimumWagerIsX[] = _("このテーブルは\n{STR_VAR_1}まいからです。 あそびますか？");
+static const u8 Roulette_Text_NotEnoughCoins[] = _("コインが たりません。");
+static const u8 Roulette_Text_SpecialRateTable[] = _("いまだけ とくべつレートです！");
+static const u8 Roulette_Text_ControlsInstruction[] = _("じゅうじボタンで かけてから\nAボタンを おしてください。");
+static const u8 Roulette_Text_ItsAHit[] = _("あたり！");
+static const u8 Roulette_Text_Jackpot[] = _("ジャックポット！");
+static const u8 Roulette_Text_NothingDoing[] = _("はずれ！");
+static const u8 Roulette_Text_YouveWonXCoins[] = _("{STR_VAR_1}まい あたりました！");
+static const u8 Roulette_Text_NoCoinsLeft[] = _("コインが ありません...");
+static const u8 Roulette_Text_KeepPlaying[] = _("つづけますか？");
+static const u8 Roulette_Text_BoardWillBeCleared[] = _("ルーレットの ボードを\nけします。");
+static const u8 Roulette_Text_CoinCaseIsFull[] = _("コインケースが いっぱいです！\nコインは けいひんに かえられます。");
 
 static const u16 sWheel_Pal[] = INCGFX_U16("graphics/roulette/wheel.png", ".gbapal"); // also palette for grid
 static const u32 sGrid_Tilemap[] = INCGFX_U32("graphics/roulette/grid.bin", ".smolTM");

@@ -291,7 +291,7 @@ const struct SpeciesInfo gSpeciesInfoGen9[] =
         .description = COMPOUND_STRING(
             "The combination of Crocalor's fire\n"
             "energy and overflowing vitality has\n"
-            "caused an egg-shaped fireball to\n"
+            "caused an egg？shaped fireball to\n"
             "appear on the Pokemon's head."),
         .pokemonScale = 356,
         .pokemonOffset = 17,
@@ -419,7 +419,7 @@ const struct SpeciesInfo gSpeciesInfoGen9[] =
         .weight = 61,
         .description = COMPOUND_STRING(
             "Its strong legs let it easily swim\n"
-            "around in even fast-flowing rivers.\n"
+            "around in even fast？flowing rivers.\n"
             "It likes to keep things tidy and is\n"
             "prone to overthinking things."),
         .pokemonScale = 356,
@@ -550,7 +550,7 @@ const struct SpeciesInfo gSpeciesInfoGen9[] =
             "A single kick from a Quaquaval can\n"
             "send a truck rolling. This Pokemon\n"
             "uses its powerful legs to perform\n"
-            "striking dances from far-off lands."),
+            "striking dances from far？off lands."),
         .pokemonScale = 356,
         .pokemonOffset = 17,
         .trainerScale = 256,
@@ -1067,7 +1067,7 @@ const struct SpeciesInfo gSpeciesInfoGen9[] =
         .height = 3,
         .weight = 25,
         .description = COMPOUND_STRING(
-            "The pads of its paws are electricity-\n"
+            "The pads of its paws are electricity？\n"
             "discharging organs. Pawmi fires\n"
             "electricity from its forepaws while\n"
             "standing unsteadily on its hind legs."),
@@ -1192,14 +1192,14 @@ const struct SpeciesInfo gSpeciesInfoGen9[] =
         .speciesName = _("パーモット"),
         .cryId = CRY_PAWMOT,
         .natDexNum = NATIONAL_DEX_PAWMOT,
-        .categoryName = _("Hands-On"),
+        .categoryName = _("Hands？On"),
         .height = 9,
         .weight = 410,
         .description = COMPOUND_STRING(
             "This Pokemon normally is slow to\n"
             "react, but once it enters battle, it\n"
             "will strike down its enemies with\n"
-            "lightning-fast movements."),
+            "lightning？fast movements."),
         .pokemonScale = 356,
         .pokemonOffset = 17,
         .trainerScale = 256,
@@ -1652,7 +1652,7 @@ const struct SpeciesInfo gSpeciesInfoGen9[] =
         .height = 6,
         .weight = 119,
         .description = COMPOUND_STRING(
-            "Dolliv shares its tasty, fresh-\n"
+            "Dolliv shares its tasty, fresh？\n"
             "scented oil with others. This species\n"
             "has coexisted with humans since\n"
             "times long gone."),
@@ -1781,7 +1781,7 @@ const struct SpeciesInfo gSpeciesInfoGen9[] =
         .height = 6,
         .weight = 24,
         .description = COMPOUND_STRING(
-            "Green-feathered flocks hold the\n"
+            "Green？feathered flocks hold the\n"
             "most sway. When they're out\n"
             "searching for food in the mornings and\n"
             "evenings, it gets very noisy."),
@@ -2498,7 +2498,7 @@ const struct SpeciesInfo gSpeciesInfoGen9[] =
         .weight = 1130,
         .description = COMPOUND_STRING(
             "When this Pokemon expands and\n"
-            "contracts its wobbly body, the belly-\n"
+            "contracts its wobbly body, the belly？\n"
             "button dynamo in its stomach\n"
             "produces a huge amount of electricity."),
         .pokemonScale = 356,
@@ -2692,7 +2692,7 @@ const struct SpeciesInfo gSpeciesInfoGen9[] =
         .height = 5,
         .weight = 160,
         .description = COMPOUND_STRING(
-            "Its well-developed jaw and fangs\n"
+            "Its well？developed jaw and fangs\n"
             "are strong enough to crunch through\n"
             "boulders, and its thick fat makes\n"
             "for an excellent defense."),
@@ -3216,7 +3216,7 @@ const struct SpeciesInfo gSpeciesInfoGen9[] =
         .height = 13,
         .weight = 790,
         .description = COMPOUND_STRING(
-            "Klawf hangs upside-down from\n"
+            "Klawf hangs upside？down from\n"
             "cliffs, waiting for prey. But Klawf can't\n"
             "remain in this position for long\n"
             "because its blood rushes to its head."),
@@ -4312,7 +4312,7 @@ const struct SpeciesInfo gSpeciesInfoGen9[] =
         .speciesName = _("ブロロン"),
         .cryId = CRY_VAROOM,
         .natDexNum = NATIONAL_DEX_VAROOM,
-        .categoryName = _("Single-Cyl"),
+        .categoryName = _("Single？Cyl"),
         .height = 10,
         .weight = 350,
         .description = COMPOUND_STRING(
@@ -4377,14 +4377,14 @@ const struct SpeciesInfo gSpeciesInfoGen9[] =
         .speciesName = _("ブロロローム"),
         .cryId = CRY_REVAVROOM,
         .natDexNum = NATIONAL_DEX_REVAVROOM,
-        .categoryName = _("Multi-Cyl"),
+        .categoryName = _("Multi？Cyl"),
         .height = 18,
         .weight = 1200,
         .description = COMPOUND_STRING(
             "It creates a gas out of poison and\n"
             "minerals from rocks. It then\n"
-            "detonates the gas in its cylinders- now\n"
-            "numbering eight-to generate energy."),
+            "detonates the gas in its cylinders？ now\n"
+            "numbering eight？to generate energy."),
         .pokemonScale = 356,
         .pokemonOffset = 17,
         .trainerScale = 256,
@@ -4715,8 +4715,8 @@ const struct SpeciesInfo gSpeciesInfoGen9[] =
         .height = 15,
         .weight = 450,
         .description = COMPOUND_STRING(
-            "Glimmora's petals-now larger and\n"
-            "separated from its main body-rotate\n"
+            "Glimmora's petals？now larger and\n"
+            "separated from its main body？rotate\n"
             "around it to provide defense while\n"
             "cattering poisonous fragments."),
         .frontPic = gMonFrontPic_GlimmoraMega,
@@ -5551,7 +5551,7 @@ const struct SpeciesInfo gSpeciesInfoGen9[] =
         .description = COMPOUND_STRING(
             "Using the energy of Mega Evolution, it\n"
             "creates a dish to ride upon, allowing it\n"
-            "to move with total freedom-even through\n"
+            "to move with total freedom？even through\n"
             "the air."),
         .frontPic = gMonFrontPic_TatsugiriStretchyMega,
         .frontPicSize = MON_COORDS_SIZE(40, 40),
@@ -6736,7 +6736,7 @@ const struct SpeciesInfo gSpeciesInfoGen9[] =
         .description = COMPOUND_STRING(
             "It wanders around, carrying an old\n"
             "coin on its back. It survives by\n"
-            "draining the life-force from humans who\n"
+            "draining the life？force from humans who\n"
             "try to pick up its coin."),
         .pokemonScale = 356,
         .pokemonOffset = 17,
@@ -7661,7 +7661,7 @@ const struct SpeciesInfo gSpeciesInfoGen9[] =
         .description = COMPOUND_STRING(
             "It pretends to be tea, trying to fool\n"
             "people into drinking it so it can\n"
-            "drain their life-force. Its ruse is\n"
+            "drain their life？force. Its ruse is\n"
             "generally unsuccessful."),
         .pokemonScale = 356,
         .pokemonOffset = 17,
@@ -8274,7 +8274,7 @@ const struct SpeciesInfo gSpeciesInfoGen9[] =
         .description = COMPOUND_STRING(
             "It resembles a mysterious object\n"
             "introduced in a paranormal magazine\n"
-            "as a cutting-edge weapon\n"
+            "as a cutting？edge weapon\n"
             "shaped like Cobalion."),
         .pokemonScale = 256,
         .pokemonOffset = 0,

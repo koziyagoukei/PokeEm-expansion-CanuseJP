@@ -86,8 +86,8 @@ static const struct WindowTemplate sLinkBattleRecordsWindow =
     .baseBlock = 1
 };
 
-static const u8 sText_DashesNoPlayer[] = _("-------");
-static const u8 sText_DashesNoScore[] = _("----");
+static const u8 sText_DashesNoPlayer[] = _("？？？？？？？");
+static const u8 sText_DashesNoScore[] = _("？？？？");
 
 // code
 #if FREE_LINK_BATTLE_RECORDS == FALSE

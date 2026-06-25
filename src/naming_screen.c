@@ -221,8 +221,8 @@ static const u8 *const sTransferredToPCMessages[] =
 };
 
 
-static const u8 sText_RivalsName[] = _("RIVAL's NAME?");
-static const u8 sText_AlphabetUpperLower[] = _("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz!");
+static const u8 sText_RivalsName[] = _("ライバルの なまえ？");
+static const u8 sText_AlphabetUpperLower[] = _("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz！");
 
 static const struct BgTemplate sBgTemplates[] =
 {
@@ -518,7 +518,7 @@ static void VBlankCB_NamingScreen(void);
 static void NamingScreen_ShowBgs(void);
 static bool8 IsWideLetter(u8);
 
-static const u8 sText_MoveOkBack[] = _("{ENG}L shift  R {JPN}きりかえ  {ENG}A {JPN}けってい  {ENG}B {JPN}もどる");
+static const u8 sText_MoveOkBack[] = _("{ENG}L {JPN}きりかえ  {ENG}R {JPN}きりかえ  {ENG}A {JPN}けってい  {ENG}B {JPN}もどる");
 
 void DoNamingScreen(u8 templateNum, u8 *destBuffer, u16 monSpeciesOrPlayerGender, u16 monGender, u32 monPersonality, MainCallback returnCallback)
 {
@@ -1422,8 +1422,8 @@ static const u16 sPageSwapPalTags[] = {
     [KBPAGE_SYMBOLS]  = PALTAG_PAGE_SWAP_OTHERS
 };
 
-static const u8 sText_PageSwapEnglish[] = _("ABC");
-static const u8 sText_PageSwapSymbols[] = _("EX");
+static const u8 sText_PageSwapEnglish[] = _("えいじ");
+static const u8 sText_PageSwapSymbols[] = _("きごう");
 static const u8 sText_PageSwapJapanese[] = _("にほん");
 
 static const u8 *const sPageSwapLabels[] =
@@ -2575,7 +2575,7 @@ static const struct NamingScreenTemplate sPlayerNamingScreenTemplate =
     .addGenderIcon = FALSE,
     .initialPage = KBPAGE_JAPANESE,
     .unused = 35,
-    .title = COMPOUND_STRING("YOUR NAME?"),
+    .title = COMPOUND_STRING("あなたの なまえ？"),
 };
 
 static const struct NamingScreenTemplate sPCBoxNamingTemplate =
@@ -2586,7 +2586,7 @@ static const struct NamingScreenTemplate sPCBoxNamingTemplate =
     .addGenderIcon = FALSE,
     .initialPage = KBPAGE_JAPANESE,
     .unused = 19,
-    .title = COMPOUND_STRING("BOX NAME?"),
+    .title = COMPOUND_STRING("ボックスの なまえ？"),
 };
 
 static const struct NamingScreenTemplate sMonNamingScreenTemplate =
@@ -2597,7 +2597,7 @@ static const struct NamingScreenTemplate sMonNamingScreenTemplate =
     .addGenderIcon = TRUE,
     .initialPage = KBPAGE_JAPANESE,
     .unused = 35,
-    .title = COMPOUND_STRING("{STR_VAR_1}'s nickname?"),
+    .title = COMPOUND_STRING("{STR_VAR_1}の ニックネーム？"),
 };
 
 static const struct NamingScreenTemplate sWaldaWordsScreenTemplate =
@@ -2608,7 +2608,7 @@ static const struct NamingScreenTemplate sWaldaWordsScreenTemplate =
     .addGenderIcon = FALSE,
     .initialPage = KBPAGE_JAPANESE,
     .unused = 11,
-    .title = COMPOUND_STRING("Tell him the words."),
+    .title = COMPOUND_STRING("ことばを おしえて。"),
 };
 
 static const struct NamingScreenTemplate sCodeScreenTemplate =
@@ -2619,7 +2619,7 @@ static const struct NamingScreenTemplate sCodeScreenTemplate =
     .addGenderIcon = FALSE,
     .initialPage = KBPAGE_JAPANESE,
     .unused = 35,
-    .title = COMPOUND_STRING("Enter code:"),
+    .title = COMPOUND_STRING("コードを いれて:"),
 };
 
 static const struct NamingScreenTemplate sRivalNamingScreenTemplate =

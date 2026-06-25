@@ -578,7 +578,7 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
         .description = COMPOUND_STRING(
             "It protects its skin by covering its body\n"
             "in bubbles it secretes from its chest and\n"
-            "back. Beneath its happy-go-lucky air, it\n"
+            "back. Beneath its happy？go？lucky air, it\n"
             "keeps a watchful eye on its surroundings."),
         .pokemonScale = 530,
         .pokemonOffset = 13,
@@ -649,7 +649,7 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
         .height = 6,
         .weight = 109,
         .description = COMPOUND_STRING(
-            "It can throw bubble-covered pebbles with\n"
+            "It can throw bubble？covered pebbles with\n"
             "precise control, hitting empty cans up to\n"
             "a hundred feet away. Frogadier's swiftness\n"
             "is unparalleled."),
@@ -1602,7 +1602,7 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
         .description = COMPOUND_STRING(
             "Its pattern depends on the climate and\n"
             "topography of the land it was born in.\n"
-            "This form is from sun-drenched lands.\n"
+            "This form is from sun？drenched lands.\n"
             "It scatters toxic color scales in battle."),
     },
 
@@ -1756,7 +1756,7 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
         .description = COMPOUND_STRING(
             "They set off on their own from their pride\n"
             "and live by themselves to become stronger.\n"
-            "These hot-blooded Pokemon are quick\n"
+            "These hot？blooded Pokemon are quick\n"
             "to start a fight."),
         .pokemonScale = 422,
         .pokemonOffset = 12,
@@ -1959,7 +1959,7 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
         .eggGroups = MON_EGG_GROUPS(EGG_GROUP_FAIRY),                           \
         .abilities = { ABILITY_FLOWER_VEIL, ABILITY_NONE, ABILITY_SYMBIOSIS },  \
         .bodyColor = BODY_COLOR_WHITE,                                          \
-        .speciesName = _("????"),                                            \
+        .speciesName = _("？？？？"),                                            \
         .cryId = CRY_FLABEBE,                                                   \
         .natDexNum = NATIONAL_DEX_FLABEBE,                                      \
         .categoryName = _("Single Bloom"),                                      \
@@ -2292,7 +2292,7 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
     {
         FLORGES_MISC_INFO(White, 0),
         .description = COMPOUND_STRING(
-            "A flower garden made by a white-\n"
+            "A flower garden made by a white？\n"
             "flowered Florges will be beautifully\n"
             "decorated with flowering plants of\n"
             "many different colors."),
@@ -3642,7 +3642,7 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
         .height = 4,
         .weight = 35,
         .description = COMPOUND_STRING(
-            "It flashes the light-emitting spots on its\n"
+            "It flashes the light？emitting spots on its\n"
             "body, which drains its opponent's will\n"
             "to fight. It takes the opportunity to\n"
             "scuttle away and hide."),
@@ -3790,7 +3790,7 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
         .description = COMPOUND_STRING(
             "It uses its colorful lights to\n"
             "overwrite the personality and\n"
-            "memories of others-and to\n"
+            "memories of others？and to\n"
             "control them."),
         .frontPic = gMonFrontPic_MalamarMega,
         .frontPicSize = MON_COORDS_SIZE(64, 64),
@@ -3840,7 +3840,7 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
         .speciesName = _("カメテテ"),
         .cryId = CRY_BINACLE,
         .natDexNum = NATIONAL_DEX_BINACLE,
-        .categoryName = _("Two-Handed"),
+        .categoryName = _("Two？Handed"),
         .height = 5,
         .weight = 310,
         .description = COMPOUND_STRING(
@@ -4751,7 +4751,7 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
         .height = 27,
         .weight = 2250,
         .description = COMPOUND_STRING(
-            "Using the diamond-shaped crystals on its\n"
+            "Using the diamond？shaped crystals on its\n"
             "body it can instantly create a wall of ice\n"
             "to block an opponent's attack, or encase\n"
             "them in ice."),
@@ -5105,9 +5105,9 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
         .weight = 28,
         .description = COMPOUND_STRING(
             "Its source of protection is its slimy,\n"
-            "germ-laden mucous membrane. Anyone\n"
+            "germ？laden mucous membrane. Anyone\n"
             "who touches it will need some thorough\n"
-            "hand-washing."),
+            "hand？washing."),
         .pokemonScale = 530,
         .pokemonOffset = 13,
         .trainerScale = 256,
@@ -5390,7 +5390,7 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
         .weight = 3341,
         .description = COMPOUND_STRING(
             "It loathes solitude and is extremely\n"
-            "clingy--it will fume and run riot if\n"
+            "clingy？？it will fume and run riot if\n"
             "those dearest to it ever leave its\n"
             "side."),
         .pokemonScale = 261,
@@ -6009,8 +6009,8 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
         .height = 7,
         .weight = 95,
         .description = COMPOUND_STRING(
-            "A small-sized Pumpkaboo evolves\n"
-            "into a small-sized Gourgeist. Its\n"
+            "A small？sized Pumpkaboo evolves\n"
+            "into a small？sized Gourgeist. Its\n"
             "bodily proportions also get passed on\n"
             "to its descendants."),
         .pokemonScale = 338,
@@ -6073,8 +6073,8 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
         .height = 11,
         .weight = 140,
         .description = COMPOUND_STRING(
-            "A large-sized Pumpkaboo evolves\n"
-            "into a large-sized Gourgeist. Its\n"
+            "A large？sized Pumpkaboo evolves\n"
+            "into a large？sized Gourgeist. Its\n"
             "bodily proportions also get passed on\n"
             "to its descendants."),
         .pokemonScale = 338,
@@ -6429,10 +6429,10 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
         .height = 5,
         .weight = 80,
         .description = COMPOUND_STRING(
-            "They live in pitch-black caves. Even a\n"
+            "They live in pitch？black caves. Even a\n"
             "robust wrestler will become dizzy and\n"
             "unable to stand when exposed to its\n"
-            "200,000-hertz ultrasonic waves."),
+            "200,000？hertz ultrasonic waves."),
         .pokemonScale = 432,
         .pokemonOffset = 13,
         .trainerScale = 256,
@@ -7039,7 +7039,7 @@ const struct SpeciesInfo gSpeciesInfoGen6[] =
         .description = COMPOUND_STRING(
             "This is Zygarde's perfected form.\n"
             "From the orifice on its chest, it\n"
-            "radiates high-powered energy that\n"
+            "radiates high？powered energy that\n"
             "eliminates everything."),
         .pokemonScale = 256,
         .pokemonOffset = 0,

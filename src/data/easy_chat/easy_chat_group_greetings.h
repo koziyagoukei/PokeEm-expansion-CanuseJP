@@ -97,7 +97,7 @@ const struct EasyChatWordInfo gEasyChatGroup_Greetings[] = {
     },
     [EC_INDEX(EC_WORD_GOOD_BYE)] =
     {
-        .text = COMPOUND_STRING("GOOD-BYE"),
+        .text = COMPOUND_STRING("GOOD？BYE"),
         .alphabeticalOrder = EC_INDEX(EC_WORD_HEY),
         .enabled = TRUE,
     },
@@ -157,19 +157,19 @@ const struct EasyChatWordInfo gEasyChatGroup_Greetings[] = {
     },
     [EC_INDEX(EC_WORD_HEY_QUES)] =
     {
-        .text = COMPOUND_STRING("HEY?"),
+        .text = COMPOUND_STRING("HEY？"),
         .alphabeticalOrder = EC_INDEX(EC_WORD_NO),
         .enabled = TRUE,
     },
     [EC_INDEX(EC_WORD_WHAT_S_UP_QUES)] =
     {
-        .text = COMPOUND_STRING("WHAT'S UP?"),
+        .text = COMPOUND_STRING("WHAT'S UP？"),
         .alphabeticalOrder = EC_INDEX(EC_WORD_OI),
         .enabled = TRUE,
     },
     [EC_INDEX(EC_WORD_HUH_QUES)] =
     {
-        .text = COMPOUND_STRING("HUH?"),
+        .text = COMPOUND_STRING("HUH？"),
         .alphabeticalOrder = EC_INDEX(EC_WORD_PARDON),
         .enabled = TRUE,
     },
@@ -193,7 +193,7 @@ const struct EasyChatWordInfo gEasyChatGroup_Greetings[] = {
     },
     [EC_INDEX(EC_WORD_BYE_BYE)] =
     {
-        .text = COMPOUND_STRING("BYE-BYE"),
+        .text = COMPOUND_STRING("BYE？BYE"),
         .alphabeticalOrder = EC_INDEX(EC_WORD_THANK_YOU),
         .enabled = TRUE,
     },
@@ -223,7 +223,7 @@ const struct EasyChatWordInfo gEasyChatGroup_Greetings[] = {
     },
     [EC_INDEX(EC_WORD_HOO_HAH)] =
     {
-        .text = COMPOUND_STRING("HOO-HAH"),
+        .text = COMPOUND_STRING("HOO？HAH"),
         .alphabeticalOrder = EC_INDEX(EC_WORD_YAHOO),
         .enabled = TRUE,
     },

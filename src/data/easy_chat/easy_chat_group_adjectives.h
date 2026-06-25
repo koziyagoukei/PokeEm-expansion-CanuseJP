@@ -13,7 +13,7 @@ const struct EasyChatWordInfo gEasyChatGroup_Adjectives[] = {
     },
     [EC_INDEX(EC_WORD_ROCK_SOLID)] =
     {
-        .text = COMPOUND_STRING("ROCK-SOLID"),
+        .text = COMPOUND_STRING("ROCK？SOLID"),
         .alphabeticalOrder = EC_INDEX(EC_WORD_BREAK),
         .enabled = TRUE,
     },
@@ -199,7 +199,7 @@ const struct EasyChatWordInfo gEasyChatGroup_Adjectives[] = {
     },
     [EC_INDEX(EC_WORD_LOVEY_DOVEY)] =
     {
-        .text = COMPOUND_STRING("LOVEY-DOVEY"),
+        .text = COMPOUND_STRING("LOVEY？DOVEY"),
         .alphabeticalOrder = EC_INDEX(EC_WORD_WIMPY),
         .enabled = TRUE,
     },

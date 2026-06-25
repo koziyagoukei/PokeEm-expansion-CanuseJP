@@ -31,7 +31,7 @@ const struct EasyChatWordInfo gEasyChatGroup_Endings[] = {
     },
     [EC_INDEX(EC_WORD_IS_IT_QUES)] =
     {
-        .text = COMPOUND_STRING("IS IT?"),
+        .text = COMPOUND_STRING("IS IT？"),
         .alphabeticalOrder = EC_INDEX(EC_WORD_ANYWHERE),
         .enabled = TRUE,
     },
@@ -73,7 +73,7 @@ const struct EasyChatWordInfo gEasyChatGroup_Endings[] = {
     },
     [EC_INDEX(EC_WORD_ISN_T_IT_QUES)] =
     {
-        .text = COMPOUND_STRING("ISN'T IT?"),
+        .text = COMPOUND_STRING("ISN'T IT？"),
         .alphabeticalOrder = EC_INDEX(EC_WORD_BETTER),
         .enabled = TRUE,
     },
@@ -217,7 +217,7 @@ const struct EasyChatWordInfo gEasyChatGroup_Endings[] = {
     },
     [EC_INDEX(EC_WORD_OK_QUES)] =
     {
-        .text = COMPOUND_STRING("OK?"),
+        .text = COMPOUND_STRING("OK？"),
         .alphabeticalOrder = EC_INDEX(EC_WORD_MAYBE),
         .enabled = TRUE,
     },

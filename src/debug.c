@@ -433,7 +433,7 @@ static const u8 sDebugText_True[] =          _("オン");
 static const u8 sDebugText_False[] =         _("オフ");
 static const u8 sDebugText_Colored_True[] =  _("{COLOR GREEN}オン");
 static const u8 sDebugText_Colored_False[] = _("{COLOR RED}オフ");
-static const u8 sDebugText_Dashes[] =        _("---");
+static const u8 sDebugText_Dashes[] =        _("？？？");
 static const u8 sDebugText_Empty[] =         _("");
 static const u8 sDebugText_Continue[] =      _("つづける...");
 // Util Menu
