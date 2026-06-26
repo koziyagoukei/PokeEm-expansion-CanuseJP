@@ -256,42 +256,71 @@ Route101_Movement_BirchApproachPlayer:
 	walk_right
 	step_end
 
-Route101_Text_HelpMe:
-	.string "{JPN}たっ たすけて くれーっ!!$"
+Route103_Text_MayRoute103Pokemon:
+	.string "{JPN}ハルカ『えーと 103ばん どうろに いる\n"
+	.string "{JPN}ポケモンは あれと あれね……$"
 
-Route101_Text_PleaseHelp:
-	.string "{JPN}おーい! そこの きみ!\n"
-	.string "{JPN}たすけて おくれーっ!!\p"
-	.string "{JPN}そこに ある カバンに\n"
-	.string "{JPN}モンスターボールが はいってる!$"
+Route103_Text_MayLetsBattle:
+	.string "{JPN}あら {PLAYER}{KUN}!\p"
+	.string "{JPN}……そうか! おとうさん から\n"
+	.string "{JPN}ポケモンを プレゼントして もらったのね!\p"
+	.string "{JPN}せっかくだから ちょっと\n"
+	.string "{JPN}ポケモンしょうぶ しようよ!\p"
+	.string "{JPN}トレーナーって どんな ものか\n"
+	.string "{JPN}あたしが おしえて あげるから!$"
 
-Route101_Text_DontLeaveMe:
-	.string "{JPN}どっ どこへ いくんだ!?\n"
-	.string "{JPN}わたしを みすてないで おくれーっ!$"
+Route103_Text_MayDefeated:
+	.string "{JPN}うわっ! すごい すごい!\n"
+	.string "{JPN}{PLAYER}{KUN} つよい じゃない$"
 
-Route101_Text_YouSavedMe:
-	.string "{JPN}オダマキ『はあ はあ……\p"
-	.string "{JPN}やせいの ポケモンを ちょうさ しようと\n"
-	.string "{JPN}くさむらに はいったら\l"
-	.string "{JPN}とつぜん ポケモンに おそわれて……\p"
-	.string "{JPN}とにかく たすかったよ ありがとう!\p"
-	.string "{JPN}……おや?\p"
-	.string "{JPN}きみは {PLAYER}{KUN} じゃないか!\p"
-	.string "{JPN}こんな ところでは なんだから\n"
-	.string "{JPN}ちょっと けんきゅうじょ まで きておくれ$"
+Route103_Text_MayTimeToHeadBack:
+	.string "{JPN}ハルカ『あたし おとうさんが\n"
+	.string "{JPN}あなたの ことを ちゅうもく するのも\l"
+	.string "{JPN}わかるような きが する!\p"
+	.string "{JPN}だって もらって すぐの ポケモンが\n"
+	.string "{JPN}もう あなたに なついているもの!\p"
+	.string "{JPN}あなたなら どんな ポケモンとでも\n"
+	.string "{JPN}なかよく なれるかも!\p"
+	.string "{JPN}じゃあ\n"
+	.string "{JPN}けんきゅうじょに かえろっか!$"
 
-Route101_Text_TakeTiredPokemonToPokeCenter:
-	.string "{JPN}ポケモンが よわってきたら\n"
-	.string "{JPN}ポケモンセンターに いくと いいよ!\p"
-	.string "{JPN}ポケモンセンターなら すぐ ちかく\n"
-	.string "{JPN}コトキタウンに あるからね$"
+Route103_Text_BrendanRoute103Pokemon:
+	.string "{JPN}ユウキ『そうか あいつと あいつが\n"
+	.string "{JPN}103ばん どうろに いる ポケモンか……$"
 
-Route101_Text_WildPokemonInTallGrass:
-	.string "{JPN}やせいの ポケモンは\n"
-	.string "{JPN}くさむらから とびだしてくる からな!\p"
-	.string "{JPN}こうして くさむらの なかに はいって\n"
-	.string "{JPN}つかまえたい ポケモンを さがすんだよ!$"
+Route103_Text_BrendanLetsBattle:
+	.string "{JPN}おや? {PLAYER}!\p"
+	.string "{JPN}……そうか とうさん から\n"
+	.string "{JPN}ポケモンを もらったのか\p"
+	.string "{JPN}じゃあ ついでだ\n"
+	.string "{JPN}ポケモンしょうぶ してやろうか?\p"
+	.string "{JPN}トレーナーって どんな ものか\n"
+	.string "{JPN}オレが おしえてやるよ!$"
 
-Route101_Text_RouteSign:
-	.string "{JPN}ここは 101ばん どうろ\n"
-	.string "{JPN}{UP_ARROW} コトキタウン$"
+Route103_Text_BrendanDefeated:
+	.string "{JPN}ふうん\n"
+	.string "{JPN}{PLAYER}って つよいんだね$"
+
+Route103_Text_BrendanTimeToHeadBack:
+	.string "{JPN}ユウキ『とうさんが\n"
+	.string "{JPN}{PLAYER}の ことを ちゅうもく するのも\l"
+	.string "{JPN}わかったような きが する……\p"
+	.string "{JPN}もらって すぐの ポケモンが\n"
+	.string "{JPN}もう なついているよ\p"
+	.string "{JPN}{PLAYER}なら どんな ポケモンとでも\n"
+	.string "{JPN}なかよく なれるかも しれないな\p"
+	.string "{JPN}じゃ\n"
+	.string "{JPN}けんきゅうじょに もどろうか$"
+
+Route103_Text_ShouldHaveBroughtPotion:
+	.string "{JPN}ぼくの ポケモン もう へろへろ……\n"
+	.string "{JPN}キズぐすり もってくれば よかった……$"
+
+Route103_Text_ShortcutToOldale:
+	.string "{JPN}ここから うみを わたっていけば\n"
+	.string "{JPN}コトキタウンまで ちかみちが できるぞ!\p"
+	.string "{JPN}ふふふ おとくな じょうほう だろ?$"
+
+Route103_Text_RouteSign:
+	.string "{JPN}ここは 103ばん どうろ\n"
+	.string "{JPN}{DOWN_ARROW} コトキタウン$"
