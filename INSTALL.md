@@ -242,6 +242,14 @@ C:\Users\<Windowsユーザー名>\Desktop\decomps
 
 /mnt/c/Users/<Windowsユーザー名>/Desktop/decomps
 
+devkitARM / ARMツールチェインがない
+
+このプロジェクトのビルドには、GBA向けの ARM コンパイラ環境が必要です。
+
+Windows + WSL 環境では、以下のような arm-none-eabi 系パッケージでビルドできる場合があります。
+
+sudo apt update
+sudo apt install binutils-arm-none-eabi gcc-arm-none-eabi
 
 日本語化プロジェクト向けの注意
 
