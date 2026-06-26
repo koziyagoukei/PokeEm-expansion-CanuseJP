@@ -216,11 +216,11 @@ static void ConfirmSell(u8);
 static void CancelSell(u8);
 static void Task_FadeAndCloseBagMenuIfMulch(u8 taskId);
 
-static const u8 sText_Var1CantBeHeldHere[] = _("ここでは {STR_VAR_1}を\nもたせられません。");
-static const u8 sText_DepositHowManyVar1[] = _("{STR_VAR_1}を いくつ\nあずけますか？");
-static const u8 sText_DepositedVar2Var1s[] = _("{STR_VAR_2}こ {STR_VAR_1}を\nあずけました。");
-static const u8 sText_NoRoomForItems[] = _("どうぐを しまう ばしょが\nありません。");
-static const u8 sText_CantStoreImportantItems[] = _("たいせつなものは\nPCに あずけられません！");
+static const u8 sText_Var1CantBeHeldHere[] = _("{JPN}ここでは {STR_VAR_1}を\nもたせることは できません!");
+static const u8 sText_DepositHowManyVar1[] = _("{STR_VAR_1} を\nいくつ あずけますか?");
+static const u8 sText_DepositedVar2Var1s[] = _("{JPN}{STR_VAR_1} を\n{STR_VAR_2}コ　あずけました");
+static const u8 sText_NoRoomForItems[] = _("{JPN}これいじょう\nあずけられません!");
+static const u8 sText_CantStoreImportantItems[] = _("{JPN}たいせつな どうぐは\nパソコンに　\nいれられません!");
 
 static void Task_LoadBagSortOptions(u8 taskId);
 static void ItemMenu_SortByName(u8 taskId);
