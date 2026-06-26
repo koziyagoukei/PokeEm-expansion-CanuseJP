@@ -130,10 +130,10 @@ static void ReturnToPokeblockCaseOnField(void);
 static void CreateTossPokeblockYesNoMenu(u8);
 static void TossPokeblock(u8);
 
-static const u8 sText_StowCase[] = _("Stow CASE.");
-static const u8 sText_LvVar1[] = _("{LV}{STR_VAR_1}");
-static const u8 sText_ThrowAwayVar1[] = _("Throw away this\n{STR_VAR_1}?");
-static const u8 sText_Var1ThrownAway[] = _("The {STR_VAR_1}\nwas thrown away.");
+static const u8 sText_StowCase[] = _("{JPN}ケースをしまう");
+static const u8 sText_LvVar1[] = _("{JPN}{LV}{STR_VAR_1}");
+static const u8 sText_ThrowAwayVar1[] = _("{JPN}{STR_VAR_1}を\nすてても よろしいですか?");
+static const u8 sText_Var1ThrownAway[] = _("{JPN}{STR_VAR_1}を\nすてました");
 
 EWRAM_DATA static struct PokeblockSavedData sSavedPokeblockData = {0};
 EWRAM_DATA static struct PokeblockMenuStruct *sPokeblockMenu = NULL;
@@ -202,20 +202,20 @@ static const struct BgTemplate sBgTemplatesForPokeblockMenu[] =
 const u8 *const gPokeblockNames[] =
 {
     [PBLOCK_CLR_NONE]      = NULL,
-    [PBLOCK_CLR_RED]       = COMPOUND_STRING("RED ポロック"),
-    [PBLOCK_CLR_BLUE]      = COMPOUND_STRING("BLUE ポロック"),
-    [PBLOCK_CLR_PINK]      = COMPOUND_STRING("PINK ポロック"),
-    [PBLOCK_CLR_GREEN]     = COMPOUND_STRING("GREEN ポロック"),
-    [PBLOCK_CLR_YELLOW]    = COMPOUND_STRING("YELLOW ポロック"),
-    [PBLOCK_CLR_PURPLE]    = COMPOUND_STRING("PURPLE ポロック"),
-    [PBLOCK_CLR_INDIGO]    = COMPOUND_STRING("INDIGO ポロック"),
-    [PBLOCK_CLR_BROWN]     = COMPOUND_STRING("BROWN ポロック"),
-    [PBLOCK_CLR_LITE_BLUE] = COMPOUND_STRING("LITEBLUE ポロック"),
-    [PBLOCK_CLR_OLIVE]     = COMPOUND_STRING("OLIVE ポロック"),
-    [PBLOCK_CLR_GRAY]      = COMPOUND_STRING("GRAY ポロック"),
-    [PBLOCK_CLR_BLACK]     = COMPOUND_STRING("BLACK ポロック"),
-    [PBLOCK_CLR_WHITE]     = COMPOUND_STRING("WHITE ポロック"),
-    [PBLOCK_CLR_GOLD]      = COMPOUND_STRING("GOLD ポロック")
+    [PBLOCK_CLR_RED]       = COMPOUND_STRING("{JPN}あかいポロック"),
+    [PBLOCK_CLR_BLUE]      = COMPOUND_STRING("{JPN}あおいポロック"),
+    [PBLOCK_CLR_PINK]      = COMPOUND_STRING("{JPN}ももいろポロック"),
+    [PBLOCK_CLR_GREEN]     = COMPOUND_STRING("{JPN}みどりのポロック"),
+    [PBLOCK_CLR_YELLOW]    = COMPOUND_STRING("{JPN}きいろのポロック"),
+    [PBLOCK_CLR_PURPLE]    = COMPOUND_STRING("{JPN}むらさきポロック"),
+    [PBLOCK_CLR_INDIGO]    = COMPOUND_STRING("{JPN}こんいろポロック"),
+    [PBLOCK_CLR_BROWN]     = COMPOUND_STRING("{JPN}ちゃいろポロック"),
+    [PBLOCK_CLR_LITE_BLUE] = COMPOUND_STRING("{JPN}そらいろポロック"),
+    [PBLOCK_CLR_OLIVE]     = COMPOUND_STRING("{JPN}きみどりポロック"),
+    [PBLOCK_CLR_GRAY]      = COMPOUND_STRING("{JPN}はいいろポロック"),
+    [PBLOCK_CLR_BLACK]     = COMPOUND_STRING("{JPN}くろいポロック"),
+    [PBLOCK_CLR_WHITE]     = COMPOUND_STRING("{JPN}しろいポロック"),
+    [PBLOCK_CLR_GOLD]      = COMPOUND_STRING("{JPN}きんいろポロック")
 };
 
 static const struct MenuAction sPokeblockMenuActions[] =
@@ -704,11 +704,11 @@ static void DrawPokeblockMenuTitleText(void)
     const u8 *itemName = GetItemName(ITEM_POKEBLOCK_CASE);
     PrintOnPokeblockWindow(WIN_TITLE, itemName, GetStringCenterAlignXOffset(FONT_NORMAL, itemName, 0x48));
 
-    PrintOnPokeblockWindow(WIN_SPICY,  COMPOUND_STRING("SPICY"),  0);
-    PrintOnPokeblockWindow(WIN_DRY,    COMPOUND_STRING("DRY"),    0);
-    PrintOnPokeblockWindow(WIN_SWEET,  COMPOUND_STRING("SWEET"),  0);
-    PrintOnPokeblockWindow(WIN_BITTER, COMPOUND_STRING("BITTER"), 0);
-    PrintOnPokeblockWindow(WIN_SOUR,   COMPOUND_STRING("SOUR"),   0);
+    PrintOnPokeblockWindow(WIN_SPICY,  COMPOUND_STRING("{JPN}からい"),  0);
+    PrintOnPokeblockWindow(WIN_DRY,    COMPOUND_STRING("{JPN}しぶい"),  0);
+    PrintOnPokeblockWindow(WIN_SWEET,  COMPOUND_STRING("{JPN}あまい"),  0);
+    PrintOnPokeblockWindow(WIN_BITTER, COMPOUND_STRING("{JPN}にがい"),  0);
+    PrintOnPokeblockWindow(WIN_SOUR,   COMPOUND_STRING("{JPN}すっぱい"), 0);
 
     for (i = 0; i < WIN_ACTIONS_TALL; i++)
         PutWindowTilemap(i);
