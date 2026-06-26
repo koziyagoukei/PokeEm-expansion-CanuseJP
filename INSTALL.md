@@ -86,26 +86,99 @@ cd <リポジトリ名>
 
 7. agbccを用意する
 
-pokeemerald 系プロジェクトでは、agbcc が必要になる場合があります。
-本家手順に従い、同じ作業フォルダ内に agbcc を配置します。
+pokeemerald 系プロジェクトでは、GBA向けの古いCコンパイラである agbcc が必要になる場合があります。
 
-例として、作業フォルダが以下の場合:
+agbcc の導入方法は、使用しているプロジェクトや環境によって差が出ることがあります。
+この手順は一例です。うまくいかない場合は、本家 pret/pokeemerald の INSTALL.md や、使用しているリポジトリの説明を確認してください。
 
-C:\Users\<Windowsユーザー名>\Desktop\decomps
+7-1. 作業フォルダの構成
 
-以下のような構成になります。
+この文書では、以下のような構成を想定します。
 
 decomps/
   agbcc/
   pokeemerald/
 
-または
+または、pokeemerald-expansion 系の場合は以下のようになります。
 
 decomps/
   agbcc/
   pokeemerald-expansion/
 
-agbcc の導入手順はプロジェクトや時期によって変わる可能性があるため、基本的には本家 INSTALL.md または使用しているリポジトリの説明に従ってください。
+つまり、agbcc と pokeemerald / pokeemerald-expansion を同じ階層に置きます。
+
+例:
+
+cd /mnt/c/Users/<Windowsユーザー名>/Desktop/decomps
+
+7-2. agbccを取得する
+
+作業フォルダで、以下を実行します。
+
+git clone https://github.com/pret/agbcc.git
+
+取得後、以下のような構成になっていればOKです。
+
+decomps/
+  agbcc/
+  pokeemerald/
+
+7-3. agbccをビルドする
+
+agbcc フォルダに移動します。
+
+cd agbcc
+
+ビルドします。
+
+./build.sh
+
+環境によっては、実行権限がないと言われる場合があります。
+
+その場合は、以下を実行してからもう一度試してください。
+
+chmod +x build.sh
+./build.sh
+
+7-4. pokeemerald側へ戻る
+
+agbcc の準備が終わったら、プロジェクト側へ戻ります。
+
+cd ../pokeemerald
+
+pokeemerald-expansion の場合は、以下のように移動します。
+
+cd ../pokeemerald-expansion
+
+その後、通常どおりビルドします。
+
+make -j5
+
+7-5. agbcc関連で失敗する場合
+
+agbcc 周りで失敗する場合、以下を確認してください。
+
+- agbcc と pokeemerald が同じ階層にあるか
+- agbcc/build.sh を実行したか
+- build.sh に実行権限があるか
+- WSL上で作業しているか
+- WindowsのPowerShellやcmdではなく、Ubuntu側で実行しているか
+
+想定する配置は以下です。
+
+decomps/
+  agbcc/
+  pokeemerald/
+
+ありがちな失敗例です。
+
+pokeemerald/
+  agbcc/
+
+このように、pokeemerald フォルダの中に agbcc を入れてしまうと、プロジェクト側から見つからない場合があります。
+
+また、agbcc の導入手順はプロジェクト側の更新で変わる可能性があります。
+この手順で失敗する場合は、本家の INSTALL.md を確認してください。
 
 8. ビルドする
 
