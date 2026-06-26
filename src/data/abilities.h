@@ -1608,7 +1608,7 @@ const struct AbilityInfo gAbilitiesInfo[ABILITIES_COUNT] =
     [ABILITY_POWER_CONSTRUCT] =
     {
         .name = _("{JPN}スワームチェンジ"),
-        .description = COMPOUND_STRING("{JPN}HPが はんぶんに なると すがたを かえる"),
+        .description = COMPOUND_STRING("{JPN}HPが はんぶんになると すがたをかえる"),
         .aiRating = 10,
         .cantBeCopied = TRUE,
         .cantBeSwapped = TRUE,
@@ -1655,7 +1655,7 @@ const struct AbilityInfo gAbilitiesInfo[ABILITIES_COUNT] =
     [ABILITY_DANCER] =
     {
         .name = _("{JPN}おどりこ"),
-        .description = COMPOUND_STRING("{JPN}おどりわざに つづいて おどりわざを だす"),
+        .description = COMPOUND_STRING("{JPN}おどりわざに つづいて おどりだす"),
         .aiRating = 5,
     },
 
@@ -1772,7 +1772,7 @@ const struct AbilityInfo gAbilitiesInfo[ABILITIES_COUNT] =
     [ABILITY_SHADOW_SHIELD] =
     {
         .name = _("{JPN}ファントムガード"),
-        .description = COMPOUND_STRING("{JPN}HHPまんたんで うける ダメージが へる"),
+        .description = COMPOUND_STRING("{JPN}HPまんたんで うける ダメージが へる"),
         .aiRating = 8,
     },
 
@@ -1820,7 +1820,7 @@ const struct AbilityInfo gAbilitiesInfo[ABILITIES_COUNT] =
     [ABILITY_COTTON_DOWN] =
     {
         .name = _("{JPN}わたげ"),
-        .description = COMPOUND_STRING("{JPN}こうげきを うけると みんなを おそくする"),
+        .description = COMPOUND_STRING("{JPN}こうげきを うけると みんなをおそくする"),
         .aiRating = 3,
     },
 
@@ -1899,7 +1899,7 @@ const struct AbilityInfo gAbilitiesInfo[ABILITIES_COUNT] =
     [ABILITY_ICE_FACE] =
     {
         .name = _("{JPN}アイスフェイス"),
-        .description = COMPOUND_STRING("{JPN}ぶつりこうげきは こおりが みがわりに なる"),
+        .description = COMPOUND_STRING("{JPN}あたまの こおりが みがわりに なる"),
         .aiRating = 4,
         .cantBeCopied = TRUE,
         .cantBeSwapped = TRUE,
@@ -1948,7 +1948,7 @@ const struct AbilityInfo gAbilitiesInfo[ABILITIES_COUNT] =
     [ABILITY_WANDERING_SPIRIT] =
     {
         .name = _("{JPN}さまようたましい"),
-        .description = COMPOUND_STRING("{JPN}せっしょく すると とくせいを いれかえる"),
+        .description = COMPOUND_STRING("{JPN}せっしょくすると とくせいを いれかえる"),
         .aiRating = 2,
     },
 
@@ -2254,7 +2254,7 @@ const struct AbilityInfo gAbilitiesInfo[ABILITIES_COUNT] =
     [ABILITY_OPPORTUNIST] =
     {
         .name = _("{JPN}びんじょう"),
-        .description = COMPOUND_STRING("{JPN}のうりょくが あがったら じぶんも あがる"),
+        .description = COMPOUND_STRING("{JPN}のうりょくが あがると じぶんも あがる"),
         .aiRating = 5,
     },
 
@@ -2289,7 +2289,7 @@ const struct AbilityInfo gAbilitiesInfo[ABILITIES_COUNT] =
     [ABILITY_TOXIC_DEBRIS] =
     {
         .name = _("{JPN}どくげしょう"),
-        .description = COMPOUND_STRING("{JPN}こうげきを うけると どくびしを ばらまく"),
+        .description = COMPOUND_STRING("{JPN}こうげきをうけると どくびしを ばらまく"),
         .aiRating = 4,
     },
 
@@ -2416,7 +2416,7 @@ const struct AbilityInfo gAbilitiesInfo[ABILITIES_COUNT] =
     [ABILITY_TERAFORM_ZERO] =
     {
         .name = _("{JPN}ゼロフォーミング"),
-        .description = COMPOUND_STRING("{JPN}てんきと フィールドを すべて ゼロにする"),
+        .description = COMPOUND_STRING("{JPN}てんきと フィールドを すべてゼロにする"),
         .aiRating = 10,
         .cantBeCopied = TRUE,
         .cantBeSwapped = TRUE,
@@ -2442,7 +2442,7 @@ const struct AbilityInfo gAbilitiesInfo[ABILITIES_COUNT] =
     [ABILITY_DRAGONIZE] =
     {
         .name = _("{JPN}ドラゴンスキン"),
-        .description = COMPOUND_STRING("{JPN}ノーマルわざが ドラゴンになり つよくなる"),
+        .description = COMPOUND_STRING("{JPN}ノーマルわざが ドラゴンになり つよい"),
     },
 
     [ABILITY_313] =
@@ -2460,7 +2460,7 @@ const struct AbilityInfo gAbilitiesInfo[ABILITIES_COUNT] =
     [ABILITY_MEGA_SOL] =
     {
         .name = _("{JPN}メガソーラー"),
-        .description = COMPOUND_STRING("{JPN}にほんばれの じょうたいで わざを つかう"),
+        .description = COMPOUND_STRING("{JPN}にほんばれの じょうたいで わざをつかう"),
     },
 
     [ABILITY_316] =

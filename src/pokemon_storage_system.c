@@ -857,20 +857,20 @@ void SetMonFormPSS(struct BoxPokemon *boxMon, enum FormChanges method);
 void SetMonFormPSS_ItemHold(struct BoxPokemon *boxMon);
 void UpdateSpeciesSpritePSS(struct BoxPokemon *boxmon);
 
-static const u8 gText_JustOnePkmn[] = _("ポケモンが 1ぴきしかいません。");
-static const u8 gText_PartyFull[] = _("てもちが いっぱいです！");
-static const u8 gText_Box[] = _("ボックス");
+static const u8 gText_JustOnePkmn[] = _("{JPN}てもちポケモンが 1ひきしかいません!");
+static const u8 gText_PartyFull[] = _("{JPN}てもちポケモンが いっぱいです!");
+static const u8 gText_Box[] = _("{JPN}ボックス");
 
 struct {
     const u8 *text;
     const u8 *desc;
 } static const sMainMenuTexts[OPTIONS_COUNT] =
 {
-    [OPTION_WITHDRAW]   = {COMPOUND_STRING("ひきだす"), COMPOUND_STRING("ボックスの ポケモンを\nてもちに いれます。")},
-    [OPTION_DEPOSIT]    = {COMPOUND_STRING("あずける"), COMPOUND_STRING("てもちの ポケモンを\nボックスに あずけます。")},
-    [OPTION_MOVE_MONS]  = {COMPOUND_STRING("いどう"),   COMPOUND_STRING("ボックスや てもちの\nポケモンを せいりします。")},
-    [OPTION_MOVE_ITEMS] = {COMPOUND_STRING("どうぐ"),   COMPOUND_STRING("ポケモンの もちものを\nいどうします。")},
-    [OPTION_EXIT]       = {COMPOUND_STRING("やめる"),   COMPOUND_STRING("まえの メニューに もどります。")}
+    [OPTION_WITHDRAW]   = {COMPOUND_STRING("{JPN}ポケモンを つれていく"), COMPOUND_STRING("{JPN}ボックスに あずけている ポケモンを \nてもちに くわえる ことが できます ")},
+    [OPTION_DEPOSIT]    = {COMPOUND_STRING("{JPN}ポケモンを あずける"),  COMPOUND_STRING("{JPN}てもちの ポケモンを         \nボックスに あずける ことが できます   ")},
+    [OPTION_MOVE_MONS]  = {COMPOUND_STRING("{JPN}ポケモンを せいりする"),     COMPOUND_STRING("{JPN}ボックスに あずけている ポケモンや \nてもちの ポケモンを せいり できます")},
+    [OPTION_MOVE_ITEMS] = {COMPOUND_STRING("{JPN}どうぐせいり"),       COMPOUND_STRING("{JPN}ポケモンが もっている どうぐを\nせいり できます")},
+    [OPTION_EXIT]       = {COMPOUND_STRING("{JPN}さようなら"),          COMPOUND_STRING("{JPN}ひとつ まえの メニューに もどります")}
 };
 
 static const struct WindowTemplate sWindowTemplate_MainMenu =
@@ -1043,41 +1043,41 @@ static const struct SpriteTemplate sSpriteTemplate_DisplayMon =
     .oam = &sOamData_DisplayMon,
 };
 
-static const u8 gText_PkmnIsSelected[] = _("{DYNAMIC 0}を えらびました。");
+static const u8 gText_PkmnIsSelected[] = _("{DYNAMIC 0} を どうしますか?");
 
 static const struct StorageMessage sMessages[] =
 {
-    [MSG_EXIT_BOX]             = {COMPOUND_STRING("ボックスを やめますか？"),        MSG_VAR_NONE},
-    [MSG_WHAT_YOU_DO]          = {COMPOUND_STRING("なにを しますか？"),             MSG_VAR_NONE},
-    [MSG_PICK_A_THEME]         = {COMPOUND_STRING("テーマを えらんでください。"),    MSG_VAR_NONE},
-    [MSG_PICK_A_WALLPAPER]     = {COMPOUND_STRING("かべがみを えらんでください。"),  MSG_VAR_NONE},
+    [MSG_EXIT_BOX]             = {COMPOUND_STRING("{JPN}ボックスを しゅうりょうしますか?"),         MSG_VAR_NONE},
+    [MSG_WHAT_YOU_DO]          = {COMPOUND_STRING("{JPN}このボックスを どうしますか?"),    MSG_VAR_NONE},
+    [MSG_PICK_A_THEME]         = {COMPOUND_STRING("{JPN}どの テーマにしますか?"),       MSG_VAR_NONE},
+    [MSG_PICK_A_WALLPAPER]     = {COMPOUND_STRING("{JPN}どの かべがみにしますか?"),        MSG_VAR_NONE},
     [MSG_IS_SELECTED]          = {gText_PkmnIsSelected,                          MSG_VAR_MON_NAME_1},
-    [MSG_JUMP_TO_WHICH_BOX]    = {COMPOUND_STRING("どの ボックスに とびますか？"),   MSG_VAR_NONE},
-    [MSG_DEPOSIT_IN_WHICH_BOX] = {COMPOUND_STRING("どの ボックスに あずけますか？"), MSG_VAR_NONE},
-    [MSG_WAS_DEPOSITED]        = {COMPOUND_STRING("{DYNAMIC 0}を あずけました。"),  MSG_VAR_MON_NAME_1},
-    [MSG_BOX_IS_FULL]          = {COMPOUND_STRING("ボックスが いっぱいです。"),      MSG_VAR_NONE},
-    [MSG_RELEASE_POKE]         = {COMPOUND_STRING("このポケモンを にがしますか？"),  MSG_VAR_NONE},
-    [MSG_WAS_RELEASED]         = {COMPOUND_STRING("{DYNAMIC 0}を にがしました。"),  MSG_VAR_RELEASE_MON_1},
-    [MSG_BYE_BYE]              = {COMPOUND_STRING("バイバイ {DYNAMIC 0}！"),      MSG_VAR_RELEASE_MON_3},
-    [MSG_MARK_POKE]            = {COMPOUND_STRING("ポケモンに マークをつけます。"),  MSG_VAR_NONE},
-    [MSG_LAST_POKE]            = {COMPOUND_STRING("さいごの ポケモンです！"),       MSG_VAR_NONE},
+    [MSG_JUMP_TO_WHICH_BOX]    = {COMPOUND_STRING("{JPN}どの ボックスに ジャンプしますか?"),         MSG_VAR_NONE},
+    [MSG_DEPOSIT_IN_WHICH_BOX] = {COMPOUND_STRING("{JPN}どの ボックスに あずけますか?"),      MSG_VAR_NONE},
+    [MSG_WAS_DEPOSITED]        = {COMPOUND_STRING("{JPN}{DYNAMIC 0}  を あずけました"), MSG_VAR_MON_NAME_1},
+    [MSG_BOX_IS_FULL]          = {COMPOUND_STRING("{JPN}このボックスは いっぱいだ!"),           MSG_VAR_NONE},
+    [MSG_RELEASE_POKE]         = {COMPOUND_STRING("{JPN}ほんとうに にがしますか?"),      MSG_VAR_NONE},
+    [MSG_WAS_RELEASED]         = {COMPOUND_STRING("{JPN}{DYNAMIC 0} を そとに にがしてあげた"),  MSG_VAR_RELEASE_MON_1},
+    [MSG_BYE_BYE]              = {COMPOUND_STRING("{JPN}ばいばい {DYNAMIC 0} !"),      MSG_VAR_RELEASE_MON_3},
+    [MSG_MARK_POKE]            = {COMPOUND_STRING("{JPN}マーキングしてください"),         MSG_VAR_NONE},
+    [MSG_LAST_POKE]            = {COMPOUND_STRING("{JPN}たたかうポケモンが いなくなります!"),  MSG_VAR_NONE},
     [MSG_PARTY_FULL]           = {gText_YourPartysFull,                          MSG_VAR_NONE},
-    [MSG_HOLDING_POKE]         = {COMPOUND_STRING("ポケモンを もっています！"),      MSG_VAR_NONE},
-    [MSG_WHICH_ONE_WILL_TAKE]  = {COMPOUND_STRING("どれを つれていきますか？"),     MSG_VAR_NONE},
-    [MSG_CANT_RELEASE_EGG]     = {COMPOUND_STRING("タマゴは にがせません。"),       MSG_VAR_NONE},
-    [MSG_CONTINUE_BOX]         = {COMPOUND_STRING("ボックスを つづけますか？"),     MSG_VAR_NONE},
-    [MSG_CAME_BACK]            = {COMPOUND_STRING("{DYNAMIC 0}が もどってきた！"), MSG_VAR_MON_NAME_1},
-    [MSG_WORRIED]              = {COMPOUND_STRING("あなたが しんぱいだったのかな？"), MSG_VAR_NONE},
-    [MSG_SURPRISE]             = {COMPOUND_STRING("... ... ... ... ？"),                  MSG_VAR_NONE},
-    [MSG_PLEASE_REMOVE_MAIL]   = {COMPOUND_STRING("メールを はずしてください。"),   MSG_VAR_NONE},
+    [MSG_HOLDING_POKE]         = {COMPOUND_STRING("{JPN}ポケモンを つかんだままですよ!"),  MSG_VAR_NONE},
+    [MSG_WHICH_ONE_WILL_TAKE]  = {COMPOUND_STRING("{JPN}つれていく ポケモンを えらんで!"),   MSG_VAR_NONE},
+    [MSG_CANT_RELEASE_EGG]     = {COMPOUND_STRING("{JPN}タマゴを にがすことは できません!"),  MSG_VAR_NONE},
+    [MSG_CONTINUE_BOX]         = {COMPOUND_STRING("{JPN}ボックスそうさを つづけますか?"),   MSG_VAR_NONE},
+    [MSG_CAME_BACK]            = {COMPOUND_STRING("{JPN}{DYNAMIC 0} は かえってきた!"),     MSG_VAR_MON_NAME_1},
+    [MSG_WORRIED]              = {COMPOUND_STRING("{JPN}しんぱい だったのかな……"),  MSG_VAR_NONE},
+    [MSG_SURPRISE]             = {COMPOUND_STRING("{JPN}……………!"),                  MSG_VAR_NONE},
+    [MSG_PLEASE_REMOVE_MAIL]   = {COMPOUND_STRING("{JPN}メールを はずして ください!"),    MSG_VAR_NONE},
     [MSG_IS_SELECTED2]         = {gText_PkmnIsSelected,                          MSG_VAR_ITEM_NAME},
-    [MSG_GIVE_TO_MON]          = {COMPOUND_STRING("ポケモンに もたせますか？"),      MSG_VAR_NONE},
-    [MSG_PLACED_IN_BAG]        = {COMPOUND_STRING("バッグに しまいました。"),       MSG_VAR_ITEM_NAME},
-    [MSG_BAG_FULL]             = {COMPOUND_STRING("バッグが いっぱいです。"),       MSG_VAR_NONE},
-    [MSG_PUT_IN_BAG]           = {COMPOUND_STRING("このどうぐを バッグにいれますか？"), MSG_VAR_NONE},
-    [MSG_ITEM_IS_HELD]         = {COMPOUND_STRING("{DYNAMIC 0}を もたせました。"), MSG_VAR_ITEM_NAME},
-    [MSG_CHANGED_TO_ITEM]      = {COMPOUND_STRING("{DYNAMIC 0}に かえました。"),   MSG_VAR_ITEM_NAME},
-    [MSG_CANT_STORE_MAIL]      = {COMPOUND_STRING("メールは あずけられません！"),   MSG_VAR_NONE},
+    [MSG_GIVE_TO_MON]          = {COMPOUND_STRING("{JPN}どうぐを もたせますか?"),         MSG_VAR_NONE},
+    [MSG_PLACED_IN_BAG]        = {COMPOUND_STRING("{JPN}{DYNAMIC 0} を バッグへいれた!"),    MSG_VAR_ITEM_NAME},
+    [MSG_BAG_FULL]             = {COMPOUND_STRING("{JPN}バッグが いっぱいです!"),           MSG_VAR_NONE},
+    [MSG_PUT_IN_BAG]           = {COMPOUND_STRING("{JPN}どうぐを バッグに いれますか?"),  MSG_VAR_NONE},
+    [MSG_ITEM_IS_HELD]         = {COMPOUND_STRING("{JPN}{DYNAMIC 0} を もたせた!"),   MSG_VAR_ITEM_NAME},
+    [MSG_CHANGED_TO_ITEM]      = {COMPOUND_STRING("{JPN}{DYNAMIC 0} と とりかえた!"),    MSG_VAR_ITEM_NAME},
+    [MSG_CANT_STORE_MAIL]      = {COMPOUND_STRING("{JPN}メールを あずかることは できません!"),      MSG_VAR_NONE},
 };
 
 static const struct WindowTemplate sYesNoWindowTemplate =
@@ -8036,50 +8036,50 @@ static void InitMenu(void)
     sStorage->menuWindow.baseBlock = 92;
 }
 
-static const u8 gPCText_Give[] = _("もたせる");
+static const u8 gPCText_Give[] = _("GIVE");
 
 static const u8 *const sMenuTexts[] =
 {
-    [MENU_CANCEL]     = COMPOUND_STRING("やめる"),
-    [MENU_STORE]      = COMPOUND_STRING("あずける"),
-    [MENU_WITHDRAW]   = COMPOUND_STRING("ひきだす"),
-    [MENU_MOVE]       = COMPOUND_STRING("いどう"),
-    [MENU_SHIFT]      = COMPOUND_STRING("いれかえ"),
-    [MENU_PLACE]      = COMPOUND_STRING("おく"),
-    [MENU_SUMMARY]    = COMPOUND_STRING("つよさ"),
-    [MENU_RELEASE]    = COMPOUND_STRING("にがす"),
-    [MENU_MARK]       = COMPOUND_STRING("マーク"),
-    [MENU_JUMP]       = COMPOUND_STRING("ジャンプ"),
-    [MENU_WALLPAPER]  = COMPOUND_STRING("かべがみ"),
-    [MENU_NAME]       = COMPOUND_STRING("なまえ"),
-    [MENU_TAKE]       = COMPOUND_STRING("とる"),
+    [MENU_CANCEL]     = COMPOUND_STRING("{JPN}やめる"),
+    [MENU_STORE]      = COMPOUND_STRING("{JPN}あずける"),
+    [MENU_WITHDRAW]   = COMPOUND_STRING("{JPN}つれていく"),
+    [MENU_MOVE]       = COMPOUND_STRING("{JPN}いれかえる"),
+    [MENU_SHIFT]      = COMPOUND_STRING("{JPN}つかむ"),
+    [MENU_PLACE]      = COMPOUND_STRING("{JPN}ここにおく"),
+    [MENU_SUMMARY]    = COMPOUND_STRING("{JPN}ようすをみる"),
+    [MENU_RELEASE]    = COMPOUND_STRING("{JPN}にがす"),
+    [MENU_MARK]       = COMPOUND_STRING("{JPN}マーキング"),
+    [MENU_JUMP]       = COMPOUND_STRING("{JPN}ジャンプ"),
+    [MENU_WALLPAPER]  = COMPOUND_STRING("{JPN}かべがみ"),
+    [MENU_NAME]       = COMPOUND_STRING("{JPN}なまえ"),
+    [MENU_TAKE]       = COMPOUND_STRING("{JPN}もたせる"),
     [MENU_GIVE]       = gPCText_Give,
     [MENU_GIVE_2]     = gPCText_Give,
-    [MENU_SWITCH]     = COMPOUND_STRING("いれかえ"),
-    [MENU_BAG]        = COMPOUND_STRING("バッグ"),
-    [MENU_INFO]       = COMPOUND_STRING("せつめい"),
-    [MENU_SCENERY_1]  = COMPOUND_STRING("けしき 1"),
-    [MENU_SCENERY_2]  = COMPOUND_STRING("けしき 2"),
-    [MENU_SCENERY_3]  = COMPOUND_STRING("けしき 3"),
-    [MENU_ETCETERA]   = COMPOUND_STRING("そのほか"),
-    [MENU_FRIENDS]    = COMPOUND_STRING("ともだち"),
-    [MENU_FOREST]     = COMPOUND_STRING("もり"),
-    [MENU_CITY]       = COMPOUND_STRING("まち"),
-    [MENU_DESERT]     = COMPOUND_STRING("さばく"),
-    [MENU_SAVANNA]    = COMPOUND_STRING("サバンナ"),
-    [MENU_CRAG]       = COMPOUND_STRING("いわば"),
-    [MENU_VOLCANO]    = COMPOUND_STRING("かざん"),
-    [MENU_SNOW]       = COMPOUND_STRING("ゆき"),
-    [MENU_CAVE]       = COMPOUND_STRING("どうくつ"),
-    [MENU_BEACH]      = COMPOUND_STRING("すなはま"),
-    [MENU_SEAFLOOR]   = COMPOUND_STRING("かいてい"),
-    [MENU_RIVER]      = COMPOUND_STRING("かわ"),
-    [MENU_SKY]        = COMPOUND_STRING("そら"),
-    [MENU_POLKADOT]   = COMPOUND_STRING("みずたま"),
-    [MENU_POKECENTER] = COMPOUND_STRING("ポケセン"),
-    [MENU_MACHINE]    = COMPOUND_STRING("マシン"),
-    [MENU_SIMPLE]     = COMPOUND_STRING("シンプル"),
-    [MENU_SELECT]     = COMPOUND_STRING("えらぶ"),
+    [MENU_SWITCH]     = COMPOUND_STRING("{JPN}とりかえる"),
+    [MENU_BAG]        = COMPOUND_STRING("{JPN}バッグへ"),
+    [MENU_INFO]       = COMPOUND_STRING("{JPN}せつめい"),
+    [MENU_SCENERY_1]  = COMPOUND_STRING("{JPN}ふうけい1"),
+    [MENU_SCENERY_2]  = COMPOUND_STRING("{JPN}ふうけい2"),
+    [MENU_SCENERY_3]  = COMPOUND_STRING("{JPN}ふうけい3"),
+    [MENU_ETCETERA]   = COMPOUND_STRING("{JPN}エトセトラ"),
+    [MENU_FRIENDS]    = COMPOUND_STRING("{JPN}だいすき"),
+    [MENU_FOREST]     = COMPOUND_STRING("{JPN}もり"),
+    [MENU_CITY]       = COMPOUND_STRING("{JPN}シティ"),
+    [MENU_DESERT]     = COMPOUND_STRING("{JPN}さばく"),
+    [MENU_SAVANNA]    = COMPOUND_STRING("{JPN}サバンナ"),
+    [MENU_CRAG]       = COMPOUND_STRING("{JPN}いわやま"),
+    [MENU_VOLCANO]    = COMPOUND_STRING("{JPN}かざん"),
+    [MENU_SNOW]       = COMPOUND_STRING("{JPN}ゆきやま"),
+    [MENU_CAVE]       = COMPOUND_STRING("{JPN}どうくつ"),
+    [MENU_BEACH]      = COMPOUND_STRING("{JPN}うみべ"),
+    [MENU_SEAFLOOR]   = COMPOUND_STRING("{JPN}かいてい"),
+    [MENU_RIVER]      = COMPOUND_STRING("{JPN}かわ"),
+    [MENU_SKY]        = COMPOUND_STRING("{JPN}そら"),
+    [MENU_POLKADOT]   = COMPOUND_STRING("{JPN}みずたま"),
+    [MENU_POKECENTER] = COMPOUND_STRING("{JPN}ポケセン"),
+    [MENU_MACHINE]    = COMPOUND_STRING("{JPN}きかい"),
+    [MENU_SIMPLE]     = COMPOUND_STRING("{JPN}シンプル"),
+    [MENU_SELECT]     = COMPOUND_STRING("{JPN}なにを しますか?"),
 };
 
 static void SetMenuText(u8 textId)
