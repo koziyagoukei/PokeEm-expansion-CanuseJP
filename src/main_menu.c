@@ -548,6 +548,7 @@ enum
 
 #define MAIN_MENU_BORDER_TILE   0x1D5
 #define BIRCH_DLG_BASE_TILE_NUM 0xFC
+#define BIRCH_INTRO_MON_SPECIES SPECIES_CHIMECHO_MEGA
 
 static void CB2_MainMenu(void)
 {
@@ -1379,6 +1380,7 @@ static void Task_NewGameBirchSpeech_ThisIsAPokemon(u8 taskId)
     if (!gPaletteFade.active && !RunTextPrintersAndIsPrinter0Active())
     {
         gTasks[taskId].func = Task_NewGameBirchSpeech_MainSpeech;
+        NewGameBirchSpeech_ClearWindow(0);
         StringExpandPlaceholders(gStringVar4, gText_ThisIsAPokemon);
         AddTextPrinterWithCallbackForMessage(TRUE, NewGameBirchSpeech_WaitForThisIsPokemonText);
         sBirchSpeechMainTaskId = taskId;
@@ -1389,6 +1391,7 @@ static void Task_NewGameBirchSpeech_MainSpeech(u8 taskId)
 {
     if (!RunTextPrintersAndIsPrinter0Active())
     {
+        NewGameBirchSpeech_ClearWindow(0);
         StringExpandPlaceholders(gStringVar4, gText_Birch_MainSpeech);
         AddTextPrinterForMessage(TRUE);
         gTasks[taskId].func = Task_NewGameBirchSpeech_AndYouAre;
@@ -1406,7 +1409,7 @@ static void Task_NewGameBirchSpeechSub_InitPokeBall(u8 taskId)
     gSprites[spriteId].invisible = FALSE;
     gSprites[spriteId].data[0] = 0;
 
-    CreatePokeballSpriteToReleaseMon(spriteId, gSprites[spriteId].oam.paletteNum, 112, 58, 0, 0, 32, PALETTES_BG, SPECIES_LOTAD);
+    CreatePokeballSpriteToReleaseMon(spriteId, gSprites[spriteId].oam.paletteNum, 112, 58, 0, 0, 32, PALETTES_BG, BIRCH_INTRO_MON_SPECIES);
     gTasks[taskId].func = Task_NewGameBirchSpeechSub_WaitForLotad;
     gTasks[sBirchSpeechMainTaskId].tTimer = 0;
 }
@@ -1422,6 +1425,7 @@ static void Task_NewGameBirchSpeechSub_WaitForLotad(u8 taskId)
         if (sprite->callback != SpriteCallbackDummy)
             return;
         sprite->oam.affineMode = ST_OAM_AFFINE_OFF;
+        PlayCry_Normal(BIRCH_INTRO_MON_SPECIES, 0);
         break;
     case 1:
         if (gTasks[sBirchSpeechMainTaskId].tTimer >= 96)
@@ -1444,6 +1448,7 @@ static void Task_NewGameBirchSpeech_AndYouAre(u8 taskId)
     if (!RunTextPrintersAndIsPrinter0Active())
     {
         sStartedPokeBallTask = FALSE;
+        NewGameBirchSpeech_ClearWindow(0);
         StringExpandPlaceholders(gStringVar4, gText_Birch_AndYouAre);
         AddTextPrinterForMessage(TRUE);
         gTasks[taskId].func = Task_NewGameBirchSpeech_StartBirchLotadPlatformFade;
@@ -1757,6 +1762,7 @@ static void Task_NewGameBirchSpeech_AreYouReady(u8 taskId)
         gTasks[taskId].tPlayerSpriteId = spriteId;
         NewGameBirchSpeech_StartFadeInTarget1OutTarget2(taskId, 2);
         NewGameBirchSpeech_StartFadePlatformOut(taskId, 1);
+        NewGameBirchSpeech_ClearWindow(0);
         StringExpandPlaceholders(gStringVar4, gText_Birch_AreYouReady);
         AddTextPrinterForMessage(TRUE);
         gTasks[taskId].func = Task_NewGameBirchSpeech_ShrinkPlayer;
@@ -1910,7 +1916,7 @@ static void SpriteCB_MovePlayerDownWhileShrinking(struct Sprite *sprite)
 
 static u8 NewGameBirchSpeech_CreateLotadSprite(u8 x, u8 y)
 {
-    return CreateMonPicSprite_Affine(SPECIES_LOTAD, FALSE, 0, MON_PIC_AFFINE_FRONT, x, y, 14, TAG_NONE);
+    return CreateMonPicSprite_Affine(BIRCH_INTRO_MON_SPECIES, FALSE, 0, MON_PIC_AFFINE_FRONT, x, y, 14, TAG_NONE);
 }
 
 static void AddBirchSpeechObjects(u8 taskId)

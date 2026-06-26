@@ -1,53 +1,44 @@
 gText_Birch_Welcome::
-	.string "にほんご がつかえるか テストするよ\p"
-	.string   "あいうえお かきくけこ\n"
-	.string   "さしすせそ たちつてと\p"
-	.string   "なにぬねの はひふへほ\n"
-	.string   "まみむめも やゆよ\p"
-	.string   "らりるれろ わをん\n"
-	.string   "ぁぃぅぇぉ ゃゅょっ\p"
-	.string   "がぎぐげご ざじずぜぞ\n"
-	.string   "だぢづでど ばびぶべぼ\p"
-        .string   "ぱぴぷぺぽ\n"
-	.string   "アイウエオ カキクケコ\p"
-	.string   "サシスセソ タチツテト\n"
-	.string   "ナニヌネノ ハヒフヘホ\p"
-	.string   "マミムメモ ヤユヨ\n"
-	.string   "ラリルレロ ワヲン\p"
-	.string   "ァィゥェォ ャュョッ\n"
-	.string   "ガギグゲゴ ザジズゼゾ\p"
-	.string   "ダヂヅデド バビブベボ\n"
-	.string   "パピプペポ \p"
-	.string   "ー!?.,-/ 0123456789$"
+	.string "はじめまして！\p"
+	.string "ポケットモンスターの せかいへ\n"
+	.string "ようこそ！\p"
+	.string "わたしは オダマキ。\p"
+	.string "みんなからは ポケモンはかせと\n"
+	.string "よばれて いるよ。$"
 
 gText_Birch_Pokemon::
-	.string "ハスボー だすよ\p"
+	.string "これが ポケモンだよ。\p"
 	.string "$"
 
 gText_Birch_MainSpeech::
-	.string "ハスボー Lv.50 HP 123/456\p"
-	.string "ABC xyz 0123456789$"
+	.string "この せかいには ポケモンと\n"
+	.string "よばれる いきものが いる。\p"
+	.string "ひとは ポケモンと なかよく\n"
+	.string "くらして いるんだ。$"
 
 gText_Birch_AndYouAre::
-	.string "せんたくしの テストだよ?$"
+	.string "さて きみのことを\n"
+	.string "おしえて くれるかな？$"
 
 gText_Birch_BoyOrGirl::
-	.string "きみはおとこ?\n"
-	.string "おんな?　ってやつだね$"
+	.string "きみは おとこのこ？\n"
+	.string "それとも おんなのこ？$"
 
 gText_Birch_WhatsYourName::
-	.string "おっけー。\n"
-	.string "なまえ にゅうりょく テストするね?$"
+	.string "では きみの なまえを\n"
+	.string "おしえて くれるかな？$"
 
 gText_Birch_SoItsPlayer::
-	.string "きみは {PLAYER}くんだね?$"
+	.string "ふむ……\n"
+	.string "{PLAYER} で いいかな？$"
 
 gText_Birch_YourePlayer::
-	.string "おっけー!\p"
-	.string "きみは {PLAYER}くん という\n"
-	.string "なまえになったよ\p"
-	.string "これでよし$"
+	.string "そうか！\p"
+	.string "きみの なまえは\n"
+	.string "{PLAYER} なんだね。\p"
+	.string "よろしく！$"
 
 gText_Birch_AreYouReady::
-	.string "じゃあ ゲームスタートだ\p"
-	.string "$"
+	.string "きみの ものがたりが\n"
+	.string "いま はじまる！\p"
+	.string "さあ いっておいで！$"

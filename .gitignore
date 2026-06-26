@@ -72,3 +72,4 @@ __pycache__
 # TranslationEditor backups
 *.bak
 *.bak.*
+.expansionstudio/
