@@ -456,6 +456,11 @@
 	.byte \battler
 	.endm
 
+	.macro tryfrontiernicknamesendoutmsg battler:req
+	.byte B_SCR_OP_TRYFRONTIERNICKNAMESENDOUTMSG
+	.byte \battler
+	.endm
+
 	.macro switchinanim battler:req, dontClearTransform:req, dontClearSubstitute:req
 	.byte B_SCR_OP_SWITCHINANIM
 	.byte \battler

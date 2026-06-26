@@ -1910,9 +1910,8 @@ static void SetDomeData(void)
 
 static void InitDomeTrainers(void)
 {
-    int i, j, k;
+    int i, j;
     int monLevel;
-    enum Species species[FRONTIER_PARTY_SIZE];
     int monTypesBits, monTypesCount;
     int trainerId;
     int monId;
@@ -1920,9 +1919,6 @@ static void InitDomeTrainers(void)
     int *statValues;
     u8 ivs = 0;
 
-    species[0] = SPECIES_NONE;
-    species[1] = SPECIES_NONE;
-    species[2] = SPECIES_NONE;
     rankingScores = AllocZeroed(sizeof(u16) * DOME_TOURNAMENT_TRAINERS_COUNT);
     statValues = AllocZeroed(sizeof(int) * NUM_STATS);
 
@@ -1979,23 +1975,9 @@ static void InitDomeTrainers(void)
         // Choose party
         for (j = 0; j < FRONTIER_PARTY_SIZE; j++)
         {
-            do
-            {
-                monId = GetRandomFrontierMonFromSet(trainerId);
-                for (k = 0; k < j; k++)
-                {
-                    // Make sure the mon is valid.
-                    int alreadySelectedMonId = DOME_MONS[i][k];
-                    if (alreadySelectedMonId == monId
-                        || species[0] == gFacilityTrainerMons[monId].species
-                        || species[1] == gFacilityTrainerMons[monId].species
-                        || gFacilityTrainerMons[alreadySelectedMonId].heldItem == gFacilityTrainerMons[monId].heldItem)
-                        break;
-                }
-            } while (k != j);
+            monId = GetRandomFrontierMonFromFullPool(DOME_MONS[i], j, NULL, 0, NULL, 0);
 
             DOME_MONS[i][j] = monId;
-            species[j] = gFacilityTrainerMons[monId].species;
         }
 
         DOME_TRAINERS[i].isEliminated = FALSE;
@@ -5704,9 +5686,8 @@ static void BufferLastDomeWinnerName(void)
 // For showing the previous tourney results before the player has entered a challenge
 static void InitRandomTourneyTreeResults(void)
 {
-    int i, j, k;
+    int i, j;
     int monLevel;
-    enum Species species[FRONTIER_PARTY_SIZE];
     int monTypesBits;
     int trainerId;
     int monId;
@@ -5717,9 +5698,6 @@ static void InitRandomTourneyTreeResults(void)
     int *statValues;
     u8 ivs = 0;
 
-    species[0] = SPECIES_NONE;
-    species[1] = SPECIES_NONE;
-    species[2] = SPECIES_NONE;
     if ((gSaveBlock2Ptr->frontier.domeLvlMode != -gSaveBlock2Ptr->frontier.domeBattleMode) && gSaveBlock2Ptr->frontier.challengeStatus != CHALLENGE_STATUS_SAVING)
         return;
 
@@ -5754,23 +5732,9 @@ static void InitRandomTourneyTreeResults(void)
         DOME_TRAINERS[i].trainerId = trainerId;
         for (j = 0; j < FRONTIER_PARTY_SIZE; j++)
         {
-            do
-            {
-                monId = GetRandomFrontierMonFromSet(trainerId);
-                for (k = 0; k < j; k++)
-                {
-                    // Make sure the mon is valid.
-                    int alreadySelectedMonId = DOME_MONS[i][k];
-                    if (alreadySelectedMonId == monId
-                        || species[0] == gFacilityTrainerMons[monId].species
-                        || species[1] == gFacilityTrainerMons[monId].species
-                        || gFacilityTrainerMons[alreadySelectedMonId].heldItem == gFacilityTrainerMons[monId].heldItem)
-                        break;
-                }
-            } while (k != j);
+            monId = GetRandomFrontierMonFromFullPool(DOME_MONS[i], j, NULL, 0, NULL, 0);
 
             DOME_MONS[i][j] = monId;
-            species[j] = gFacilityTrainerMons[monId].species;
         }
         DOME_TRAINERS[i].isEliminated = FALSE;
         DOME_TRAINERS[i].eliminatedAt = 0;

@@ -11,6 +11,7 @@
 #include "battle_main.h"
 #include "battle_message.h"
 #include "battle_pyramid.h"
+#include "battle_script_commands.h"
 #include "battle_scripts.h"
 #include "battle_setup.h"
 #include "battle_tower.h"
@@ -3554,6 +3555,27 @@ static void DoBattleIntro(void)
                     gBattleStruct->eventState.battleIntro = BATTLE_INTRO_STATE_WAIT_FOR_TRAINER_2_SEND_OUT_ANIM;
             }
         }
+        break;
+    case BATTLE_INTRO_STATE_FRONTIER_NICKNAME_SEND_OUT_TEXT:
+        if (TryPrepareFrontierNicknameSendOutMessage(GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT)))
+            gBattleStruct->eventState.battleIntro++;
+        else
+            gBattleStruct->eventState.battleIntro += 2;
+        break;
+    case BATTLE_INTRO_STATE_WAIT_FOR_FRONTIER_NICKNAME_SEND_OUT_TEXT:
+        if (!gBattleControllerExecFlags)
+            gBattleStruct->eventState.battleIntro++;
+        break;
+    case BATTLE_INTRO_STATE_FRONTIER_NICKNAME_SEND_OUT_TEXT_2:
+        battler = GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT);
+        if (IsDoubleBattle() && TryPrepareFrontierNicknameSendOutMessage(battler))
+            gBattleStruct->eventState.battleIntro++;
+        else
+            gBattleStruct->eventState.battleIntro += 2;
+        break;
+    case BATTLE_INTRO_STATE_WAIT_FOR_FRONTIER_NICKNAME_SEND_OUT_TEXT_2:
+        if (!gBattleControllerExecFlags)
+            gBattleStruct->eventState.battleIntro++;
         break;
     case BATTLE_INTRO_STATE_TRAINER_SEND_OUT_TEXT:
         if (gBattleTypeFlags & BATTLE_TYPE_RECORDED_LINK && !(gBattleTypeFlags & BATTLE_TYPE_RECORDED_IS_MASTER))

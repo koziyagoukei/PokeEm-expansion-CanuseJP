@@ -205,15 +205,12 @@ static void FillTrainerParty(u16 trainerId, enum BattleTrainer trainer, u8 monCo
     u16 chosenMonIndices[MAX_FRONTIER_PARTY_SIZE];
     u8 level = SetFacilityPtrsGetLevel();
     u8 fixedIV = 0;
-    u8 bfMonCount;
-    const u16 *monSet = NULL;
     u32 otID = 0;
 
     if (trainerId < FRONTIER_TRAINERS_COUNT)
     {
         // Normal battle frontier trainer.
         fixedIV = GetFrontierTrainerFixedIvs(trainerId);
-        monSet = gFacilityTrainers[trainerId].monSet;
     }
     else if (trainerId == TRAINER_EREADER)
     {
@@ -253,47 +250,11 @@ static void FillTrainerParty(u16 trainerId, enum BattleTrainer trainer, u8 monCo
     // Attempt to fill the trainer's party with random Pokemon until 3 have been
     // successfully chosen. The trainer's party may not have duplicate Pokemon species
     // or duplicate held items.
-    for (bfMonCount = 0; monSet[bfMonCount] != 0xFFFF; bfMonCount++)
-        ;
     i = 0;
     otID = Random32();
     while (i != monCount)
     {
-        u16 monId = monSet[Random() % bfMonCount];
-
-        // "High tier" Pokemon are only allowed on open level mode
-        // 20 is not a possible value for level here
-        if ((level == FRONTIER_MAX_LEVEL_50 || level == 20) && monId > FRONTIER_MONS_HIGH_TIER)
-            continue;
-
-        // Ensure this Pokemon species isn't a duplicate.
-        for (j = 0; j < i; j++)
-        {
-            if (GetMonData(&gParties[trainer][j], MON_DATA_SPECIES) == gFacilityTrainerMons[monId].species)
-                break;
-        }
-        if (j != i)
-            continue;
-
-        // Ensure this Pokemon's held item isn't a duplicate.
-        for (j = 0; j < i; j++)
-        {
-            if (GetMonData(&gParties[trainer][j], MON_DATA_HELD_ITEM) != ITEM_NONE
-             && GetMonData(&gParties[trainer][j], MON_DATA_HELD_ITEM) == gFacilityTrainerMons[monId].heldItem)
-                break;
-        }
-        if (j != i)
-            continue;
-
-        // Ensure this exact Pokemon index isn't a duplicate. This check doesn't seem necessary
-        // because the species and held items were already checked directly above.
-        for (j = 0; j < i; j++)
-        {
-            if (chosenMonIndices[j] == monId)
-                break;
-        }
-        if (j != i)
-            continue;
+        u16 monId = GetRandomFrontierMonFromFullPool(chosenMonIndices, i, NULL, 0, NULL, 0);
 
         chosenMonIndices[i] = monId;
 

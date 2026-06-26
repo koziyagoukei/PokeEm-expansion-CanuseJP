@@ -17,6 +17,7 @@
 #include "text.h"
 #include "battle_records.h"
 #include "international_string_util.h"
+#include "item.h"
 #include "string_util.h"
 #include "new_game.h"
 #include "link.h"
@@ -3213,7 +3214,6 @@ void GetFrontierTrainerName(u8 *dst, u16 trainerId)
 
 u16 GetRandomFrontierMonFromSet(u16 trainerId)
 {
-    u8 level = SetFacilityPtrsGetLevel();
     const u16 *monSet = gFacilityTrainers[trainerId].monSet;
     u8 numMons = 0;
     u32 monId = monSet[numMons];
@@ -3226,14 +3226,97 @@ u16 GetRandomFrontierMonFromSet(u16 trainerId)
             break;
     }
 
-    do
-    {
-        // "High tier" Pokemon are only allowed on open level mode
-        // 20 is not a possible value for level here
-        monId = monSet[Random() % numMons];
-    } while ((level == FRONTIER_MAX_LEVEL_50 || level == 20) && monId > FRONTIER_MONS_HIGH_TIER);
+    return monSet[Random() % numMons];
+}
 
-    return monId;
+static bool8 FrontierMonHeldItemHasSortType(u16 monId, enum ItemSortType sortType)
+{
+    enum Item item = gFacilityTrainerMons[monId].heldItem;
+
+    return item != ITEM_NONE && gItemsInfo[item].sortType == sortType;
+}
+
+static bool8 IsFrontierMonSelectableForParty(u16 monId, const u16 *selectedMonIds, u8 selectedCount, const u16 *excludedMonIds, u8 excludedMonIdCount, const enum Species *excludedSpecies, u8 excludedSpeciesCount, bool8 enforceSpecialStoneClause)
+{
+    u8 i;
+    enum Species species = gFacilityTrainerMons[monId].species;
+    enum Item heldItem = gFacilityTrainerMons[monId].heldItem;
+    bool8 hasMegaStone = FrontierMonHeldItemHasSortType(monId, ITEM_TYPE_MEGA_STONE);
+    bool8 hasZCrystal = FrontierMonHeldItemHasSortType(monId, ITEM_TYPE_Z_CRYSTAL);
+
+    for (i = 0; i < excludedMonIdCount; i++)
+    {
+        if (excludedMonIds[i] == monId)
+            return FALSE;
+    }
+
+    for (i = 0; i < excludedSpeciesCount; i++)
+    {
+        if (excludedSpecies[i] == species)
+            return FALSE;
+    }
+
+    for (i = 0; i < selectedCount; i++)
+    {
+        u16 selectedMonId = selectedMonIds[i];
+
+        if (selectedMonId == monId)
+            return FALSE;
+        if (gFacilityTrainerMons[selectedMonId].species == species)
+            return FALSE;
+        if (heldItem != ITEM_NONE && gFacilityTrainerMons[selectedMonId].heldItem == heldItem)
+            return FALSE;
+        if (enforceSpecialStoneClause && hasMegaStone && FrontierMonHeldItemHasSortType(selectedMonId, ITEM_TYPE_MEGA_STONE))
+            return FALSE;
+        if (enforceSpecialStoneClause && hasZCrystal && FrontierMonHeldItemHasSortType(selectedMonId, ITEM_TYPE_Z_CRYSTAL))
+            return FALSE;
+    }
+
+    return TRUE;
+}
+
+static u16 CountSelectableFrontierMons(const u16 *selectedMonIds, u8 selectedCount, const u16 *excludedMonIds, u8 excludedMonIdCount, const enum Species *excludedSpecies, u8 excludedSpeciesCount, bool8 enforceSpecialStoneClause)
+{
+    u16 monId;
+    u16 count = 0;
+
+    for (monId = 0; monId < NUM_FRONTIER_MONS; monId++)
+    {
+        if (IsFrontierMonSelectableForParty(monId, selectedMonIds, selectedCount, excludedMonIds, excludedMonIdCount, excludedSpecies, excludedSpeciesCount, enforceSpecialStoneClause))
+            count++;
+    }
+
+    return count;
+}
+
+u16 GetRandomFrontierMonFromFullPool(const u16 *selectedMonIds, u8 selectedCount, const u16 *excludedMonIds, u8 excludedMonIdCount, const enum Species *excludedSpecies, u8 excludedSpeciesCount)
+{
+    u16 monId;
+    u16 count;
+    u16 target;
+    bool8 enforceSpecialStoneClause = TRUE;
+
+    count = CountSelectableFrontierMons(selectedMonIds, selectedCount, excludedMonIds, excludedMonIdCount, excludedSpecies, excludedSpeciesCount, enforceSpecialStoneClause);
+    if (count == 0)
+    {
+        enforceSpecialStoneClause = FALSE;
+        count = CountSelectableFrontierMons(selectedMonIds, selectedCount, excludedMonIds, excludedMonIdCount, excludedSpecies, excludedSpeciesCount, enforceSpecialStoneClause);
+        if (count == 0)
+            return Random() % NUM_FRONTIER_MONS;
+    }
+
+    target = Random() % count;
+    for (monId = 0; monId < NUM_FRONTIER_MONS; monId++)
+    {
+        if (IsFrontierMonSelectableForParty(monId, selectedMonIds, selectedCount, excludedMonIds, excludedMonIdCount, excludedSpecies, excludedSpeciesCount, enforceSpecialStoneClause))
+        {
+            if (target == 0)
+                return monId;
+            target--;
+        }
+    }
+
+    return Random() % NUM_FRONTIER_MONS;
 }
 
 void FrontierSpeechToString(const u16 *words)

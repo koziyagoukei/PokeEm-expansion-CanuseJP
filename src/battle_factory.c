@@ -234,16 +234,17 @@ static void SetPerformedRentalSwap(void)
 
 static void GenerateOpponentMons(void)
 {
-    int i, j, k;
-    enum Species species[FRONTIER_PARTY_SIZE];
-    u16 heldItems[FRONTIER_PARTY_SIZE];
-    int firstMonId = 0;
+    int i, j;
+    u16 selectedMonIds[FRONTIER_PARTY_SIZE];
+    enum Species excludedSpecies[FRONTIER_PARTY_SIZE * 2 + 1];
+    u8 excludedSpeciesCount = 0;
     u16 trainerId = 0;
     enum FrontierLevelMode lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
     u32 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
     u32 winStreak = gSaveBlock2Ptr->frontier.factoryWinStreaks[battleMode][lvlMode];
     u32 challengeNum = winStreak / FRONTIER_STAGES_PER_CHALLENGE;
     gFacilityTrainers = gBattleFrontierTrainers;
+    gFacilityTrainerMons = gBattleFrontierMons;
 
     do
     {
@@ -260,49 +261,25 @@ static void GenerateOpponentMons(void)
     if (gSaveBlock2Ptr->frontier.curChallengeBattleNum < FRONTIER_STAGES_PER_CHALLENGE - 1)
         gSaveBlock2Ptr->frontier.trainerIds[gSaveBlock2Ptr->frontier.curChallengeBattleNum] = trainerId;
 
+    excludedSpecies[excludedSpeciesCount++] = SPECIES_UNOWN;
+    for (j = 0; j < (int)ARRAY_COUNT(gSaveBlock2Ptr->frontier.rentalMons); j++)
+    {
+        u16 rentalMonId = gSaveBlock2Ptr->frontier.rentalMons[j].monId;
+
+        if (rentalMonId < NUM_FRONTIER_MONS)
+            excludedSpecies[excludedSpeciesCount++] = gFacilityTrainerMons[rentalMonId].species;
+    }
+
     i = 0;
+    for (j = 0; j < FRONTIER_PARTY_SIZE; j++)
+        selectedMonIds[j] = 0xFFFF;
+
     while (i != FRONTIER_PARTY_SIZE)
     {
-        u16 monId = GetFactoryMonId(lvlMode, challengeNum, FALSE);
-
-        // Unown (FRONTIER_MON_UNOWN) is forbidden on opponent Factory teams.
-        if (gFacilityTrainerMons[monId].species == SPECIES_UNOWN)
-            continue;
-
-        // Ensure none of the opponent's Pokemon are the same as the potential rental Pokemon for the player
-        for (j = 0; j < (int)ARRAY_COUNT(gSaveBlock2Ptr->frontier.rentalMons); j++)
-        {
-            if (gFacilityTrainerMons[monId].species == gFacilityTrainerMons[gSaveBlock2Ptr->frontier.rentalMons[j].monId].species)
-                break;
-        }
-        if (j != (int)ARRAY_COUNT(gSaveBlock2Ptr->frontier.rentalMons))
-            continue;
-
-        // "High tier" Pokemon are only allowed on open level mode
-        if (lvlMode == FRONTIER_LVL_50 && monId > FRONTIER_MONS_HIGH_TIER)
-            continue;
-
-        // Ensure this species hasn't already been chosen for the opponent
-        for (k = firstMonId; k < firstMonId + i; k++)
-        {
-            if (species[k] == gFacilityTrainerMons[monId].species)
-                break;
-        }
-        if (k != firstMonId + i)
-            continue;
-
-        // Ensure held items don't repeat on the opponent's team
-        for (k = firstMonId; k < firstMonId + i; k++)
-        {
-            if (heldItems[k] != ITEM_NONE && heldItems[k] == gFacilityTrainerMons[monId].heldItem)
-                break;
-        }
-        if (k != firstMonId + i)
-            continue;
+        u16 monId = GetRandomFrontierMonFromFullPool(selectedMonIds, i, NULL, 0, excludedSpecies, excludedSpeciesCount);
 
         // Successful selection
-        species[i] = gFacilityTrainerMons[monId].species;
-        heldItems[i] = gFacilityTrainerMons[monId].heldItem;
+        selectedMonIds[i] = monId;
         gFrontierTempParty[i] = monId;
         i++;
     }
@@ -653,9 +630,11 @@ u8 GetFactoryMonFixedIV(u8 challengeNum, bool8 isLastBattle)
 
 void FillFactoryBrainParty(void)
 {
-    int i, j, k;
-    enum Species species[FRONTIER_PARTY_SIZE];
-    enum Item heldItems[FRONTIER_PARTY_SIZE];
+    int i, j;
+    u16 selectedMonIds[FRONTIER_PARTY_SIZE];
+    u16 excludedMonIds[PARTY_SIZE];
+    u8 excludedMonIdCount = 0;
+    enum Species excludedSpecies[1];
     int monLevel;
     u8 fixedIV;
     u32 otId;
@@ -667,42 +646,22 @@ void FillFactoryBrainParty(void)
     monLevel = SetFacilityPtrsGetLevel();
     i = 0;
     otId = READ_OTID_FROM_SAVE;
+    excludedSpecies[0] = SPECIES_UNOWN;
+    for (j = 0; j < (int)ARRAY_COUNT(gSaveBlock2Ptr->frontier.rentalMons); j++)
+    {
+        u16 rentalMonId = gSaveBlock2Ptr->frontier.rentalMons[j].monId;
+
+        if (rentalMonId < NUM_FRONTIER_MONS)
+            excludedMonIds[excludedMonIdCount++] = rentalMonId;
+    }
+    for (j = 0; j < FRONTIER_PARTY_SIZE; j++)
+        selectedMonIds[j] = 0xFFFF;
 
     while (i != FRONTIER_PARTY_SIZE)
     {
-        u16 monId = GetFactoryMonId(lvlMode, challengeNum, FALSE);
+        u16 monId = GetRandomFrontierMonFromFullPool(selectedMonIds, i, excludedMonIds, excludedMonIdCount, excludedSpecies, ARRAY_COUNT(excludedSpecies));
 
-        if (gFacilityTrainerMons[monId].species == SPECIES_UNOWN)
-            continue;
-        if (monLevel == FRONTIER_MAX_LEVEL_50 && monId > FRONTIER_MONS_HIGH_TIER)
-            continue;
-
-        for (j = 0; j < (int)ARRAY_COUNT(gSaveBlock2Ptr->frontier.rentalMons); j++)
-        {
-            if (monId == gSaveBlock2Ptr->frontier.rentalMons[j].monId)
-                break;
-        }
-        if (j != (int)ARRAY_COUNT(gSaveBlock2Ptr->frontier.rentalMons))
-            continue;
-
-        for (k = 0; k < i; k++)
-        {
-            if (species[k] == gFacilityTrainerMons[monId].species)
-                break;
-        }
-        if (k != i)
-            continue;
-
-        for (k = 0; k < i; k++)
-        {
-            if (heldItems[k] != ITEM_NONE && heldItems[k] == gFacilityTrainerMons[monId].heldItem)
-                break;
-        }
-        if (k != i)
-            continue;
-
-        species[i] = gFacilityTrainerMons[monId].species;
-        heldItems[i] = gFacilityTrainerMons[monId].heldItem;
+        selectedMonIds[i] = monId;
         CreateFacilityMon(&gFacilityTrainerMons[monId],
                 monLevel, fixedIV, otId, FLAG_FRONTIER_MON_FACTORY,
                 &gParties[B_TRAINER_OPPONENT_A][i]);

@@ -426,6 +426,7 @@ static void Cmd_openpartyscreen(void);
 static void Cmd_switchhandleorder(void);
 static void Cmd_switchineffects(void);
 static void Cmd_switchinevents(void);
+static void Cmd_tryfrontiernicknamesendoutmsg(void);
 static void Cmd_playse(void);
 static void Cmd_fanfare(void);
 static void Cmd_playfaintcry(void);
@@ -783,7 +784,7 @@ void (*const gBattleScriptingCommandsTable[])(void) =
     [B_SCR_OP_TRYMOVESTATCHANGES]                    = Cmd_trymovestatchanges,
     [B_SCR_OP_TRYSTATCHANGES]                        = Cmd_trystatchanges,
     [B_SCR_OP_TRYBATTLERSTATCHANGE]                  = Cmd_trybattlerstatchange,
-    [B_SCR_OP_UNUSED_1]                              = Cmd_dummy,
+    [B_SCR_OP_TRYFRONTIERNICKNAMESENDOUTMSG]        = Cmd_tryfrontiernicknamesendoutmsg,
     [B_SCR_OP_UNUSED_2]                              = Cmd_dummy,
     [B_SCR_OP_UNUSED_3]                              = Cmd_dummy,
     [B_SCR_OP_UNUSED_4]                              = Cmd_dummy,
@@ -5067,6 +5068,103 @@ static void Cmd_switchindataupdate(void)
     PREPARE_MON_NICK_BUFFER(gBattleTextBuff1, battler, gBattlerPartyIndexes[battler]);
 
     gBattlescriptCurrInstr = cmd->nextInstr;
+}
+
+static bool32 FrontierBattlerHasCustomNickname(enum BattlerId battler)
+{
+    u8 nickname[POKEMON_NAME_LENGTH + 1];
+
+    StringCopy(nickname, gBattleMons[battler].nickname);
+    StringGet_Nickname(nickname);
+
+    return StringCompareWithoutExtCtrlCodes(nickname, GetSpeciesName(gBattleMons[battler].species)) != 0;
+}
+
+static bool32 TryBufferFrontierNicknameReactionMon(enum BattlerId opponentBattler)
+{
+    enum BattlerId playerBattler = BATTLE_OPPOSITE(opponentBattler);
+
+    if (playerBattler < gBattlersCount
+     && IsOnPlayerSide(playerBattler)
+     && IsBattlerAlive(playerBattler))
+    {
+        PREPARE_MON_NICK_BUFFER(gBattleTextBuff1, playerBattler, gBattlerPartyIndexes[playerBattler]);
+        return TRUE;
+    }
+
+    playerBattler = GetBattlerAtPosition(B_POSITION_PLAYER_LEFT);
+    if (playerBattler < gBattlersCount
+     && IsOnPlayerSide(playerBattler)
+     && IsBattlerAlive(playerBattler))
+    {
+        PREPARE_MON_NICK_BUFFER(gBattleTextBuff1, playerBattler, gBattlerPartyIndexes[playerBattler]);
+        return TRUE;
+    }
+
+    playerBattler = GetBattlerAtPosition(B_POSITION_PLAYER_RIGHT);
+    if (playerBattler < gBattlersCount
+     && IsOnPlayerSide(playerBattler)
+     && IsBattlerAlive(playerBattler))
+    {
+        PREPARE_MON_NICK_BUFFER(gBattleTextBuff1, playerBattler, gBattlerPartyIndexes[playerBattler]);
+        return TRUE;
+    }
+
+    return FALSE;
+}
+
+bool32 TryPrepareFrontierNicknameSendOutMessage(enum BattlerId battler)
+{
+    static const enum StringID sFrontierNicknameSendOutStringIds[] =
+    {
+        STRINGID_FRONTIERNICKNAMEPRESSURE,
+        STRINGID_FRONTIERNICKNAMEBRACED,
+        STRINGID_FRONTIERNICKNAMEGREATMON,
+    };
+    struct PartyState *partyState;
+    enum StringID stringId;
+    u8 partyIndex;
+    u32 choice;
+
+    if (!(gBattleTypeFlags & BATTLE_TYPE_FRONTIER)
+     || gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED | BATTLE_TYPE_RECORDED_LINK)
+     || battler >= gBattlersCount
+     || IsOnPlayerSide(battler)
+     || !IsBattlerAlive(battler))
+        return FALSE;
+
+    partyIndex = gBattlerPartyIndexes[battler];
+    if (partyIndex >= PARTY_SIZE)
+        return FALSE;
+
+    partyState = GetBattlerPartyState(battler);
+    if (partyState->frontierNicknameSendOutMsgShown || !FrontierBattlerHasCustomNickname(battler))
+        return FALSE;
+
+    partyState->frontierNicknameSendOutMsgShown = TRUE;
+    choice = (gBattleMons[battler].personality ^ (gBattleMons[battler].personality >> 16) ^ partyIndex) % ARRAY_COUNT(sFrontierNicknameSendOutStringIds);
+    stringId = sFrontierNicknameSendOutStringIds[choice];
+
+    if (stringId == STRINGID_FRONTIERNICKNAMEBRACED && !TryBufferFrontierNicknameReactionMon(battler))
+        stringId = STRINGID_FRONTIERNICKNAMEGREATMON;
+
+    PrepareStringBattle(stringId, battler);
+    gBattleCommunication[MSG_DISPLAY] = 1;
+    return TRUE;
+}
+
+static void Cmd_tryfrontiernicknamesendoutmsg(void)
+{
+    CMD_ARGS(u8 battler);
+
+    if (gBattleControllerExecFlags == 0)
+    {
+        enum BattlerId battler = GetBattlerForBattleScript(cmd->battler);
+
+        gBattlescriptCurrInstr = cmd->nextInstr;
+        if (!TryPrepareFrontierNicknameSendOutMessage(battler))
+            gBattleCommunication[MSG_DISPLAY] = 0;
+    }
 }
 
 static void Cmd_switchinanim(void)
@@ -13959,4 +14057,3 @@ void BS_RestoreStatChangeQueue(void)
     ClearOtherStatChangeValues(gBattlerAttacker);
     gBattlescriptCurrInstr = cmd->nextInstr;
 }
-

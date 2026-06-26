@@ -2,8 +2,8 @@
 #define GUARD_CONSTANTS_MOVE_RELEARNER_H
 
 // Max number of moves shown by the move relearner.
-// Increased from 25 to 60 so Mew can display all TMs/HMs.
-// If you plan on adding more TMs, increase this number too.
+// Keep this above the largest generated learnset; this is also used by the
+// Frontier full-move relearner.
 #define MAX_RELEARNER_MOVES 500
 
 // Move Relearner menu change constants

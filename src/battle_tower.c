@@ -1174,6 +1174,9 @@ static void LoadMultiPartnerCandidatesData(void)
     s32 r10;
     u16 trainerId;
     u16 monId;
+    u16 selectedMonIds[MULTI_PARTY_SIZE];
+    enum Species excludedSpecies[2 + 6 * MULTI_PARTY_SIZE];
+    u8 excludedSpeciesCount;
     enum FrontierLevelMode lvlMode;
     u32 battleMode;
     s32 challengeNum;
@@ -1214,25 +1217,17 @@ static void LoadMultiPartnerCandidatesData(void)
         objEventTemplates[i + 1].graphicsId = GetBattleFacilityTrainerGfxId(trainerId);
         for (j = 0; j < 2; j++)
         {
-            while (1)
+            selectedMonIds[j] = 0xFFFF;
+            excludedSpeciesCount = 0;
+            excludedSpecies[excludedSpeciesCount++] = species1;
+            excludedSpecies[excludedSpeciesCount++] = species2;
+            for (k = 8; k < r10; k++)
             {
-                monId = GetRandomFrontierMonFromSet(trainerId);
-                if (j % 2 != 0 && gFacilityTrainerMons[gSaveBlock2Ptr->frontier.trainerIds[r10 - 1]].heldItem == gFacilityTrainerMons[monId].heldItem)
-                    continue;
-
-                for (k = 8; k < r10; k++)
-                {
-                    if (gFacilityTrainerMons[gSaveBlock2Ptr->frontier.trainerIds[k]].species == gFacilityTrainerMons[monId].species)
-                        break;
-                    if (species1 == gFacilityTrainerMons[monId].species)
-                        break;
-                    if (species2 == gFacilityTrainerMons[monId].species)
-                        break;
-                }
-                if (k == r10)
-                    break;
+                excludedSpecies[excludedSpeciesCount++] = gFacilityTrainerMons[gSaveBlock2Ptr->frontier.trainerIds[k]].species;
             }
 
+            monId = GetRandomFrontierMonFromFullPool(selectedMonIds, j, NULL, 0, excludedSpecies, excludedSpeciesCount);
+            selectedMonIds[j] = monId;
             gSaveBlock2Ptr->frontier.trainerIds[r10] = monId;
             r10++;
         }
