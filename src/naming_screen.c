@@ -508,6 +508,8 @@ static void DrawBgTilemap(u8, const void *);
 static void NamingScreen_Dummy(u8, u8);
 static void DrawTextEntry(void);
 static void PrintKeyboardKeys(u8, u8);
+static bool8 IsNamingScreenJapaneseChar(u8);
+static void BuildSingleCharText(u8 *, u8);
 static void DrawCurrentKeyboardPage(void);
 static void DrawKeyboardPageOnDeck(void);
 static void PrintControls(void);
@@ -1974,6 +1976,28 @@ static bool8 IsKeyboardHiragana(u8 ch)
     return ch >= JAPANESE_HIRAGANA_START && ch <= JAPANESE_HIRAGANA_END;
 }
 
+static bool8 IsNamingScreenJapaneseChar(u8 ch)
+{
+    return (ch >= JAPANESE_HIRAGANA_START && ch <= JAPANESE_KATAKANA_END)
+        || ch == JAPANESE_CHAR_VU;
+}
+
+static void BuildSingleCharText(u8 *dest, u8 ch)
+{
+    if (IsNamingScreenJapaneseChar(ch))
+    {
+        dest[0] = EXT_CTRL_CODE_BEGIN;
+        dest[1] = EXT_CTRL_CODE_JPN;
+        dest[2] = ch;
+        dest[3] = EOS;
+    }
+    else
+    {
+        dest[0] = ch;
+        dest[1] = EOS;
+    }
+}
+
 static bool8 IsKeyboardUppercaseLetter(u8 ch)
 {
     return ch >= CHAR_A && ch <= CHAR_Z;
@@ -2347,7 +2371,8 @@ static void NamingScreen_Dummy(u8 bg, u8 page)
 static void DrawTextEntry(void)
 {
     u8 i;
-    u8 temp[2];
+    u8 ch;
+    u8 temp[4];
     u16 extraWidth;
     u8 maxChars = GetMaxInputChars();
     u16 x = sNamingScreen->inputCharBaseXPos - 0x40;
@@ -2356,9 +2381,9 @@ static void DrawTextEntry(void)
 
     for (i = 0; i < maxChars; i++)
     {
-        temp[0] = sNamingScreen->textBuffer[i];
-        temp[1] = gText_ExpandedPlaceholder_Empty[0];
-        extraWidth = (IsWideLetter(temp[0]) == TRUE) ? 2 : 0;
+        ch = sNamingScreen->textBuffer[i];
+        BuildSingleCharText(temp, ch);
+        extraWidth = (IsWideLetter(ch) == TRUE) ? 2 : 0;
 
         AddTextPrinterParameterized(sNamingScreen->windows[WIN_TEXT_ENTRY], FONT_NORMAL, temp, i * 8 + x + extraWidth, 1, TEXT_SKIP_DRAW, NULL);
     }
@@ -2393,7 +2418,8 @@ static void PrintKeyboardKeys(u8 window, u8 page)
 {
     u8 x;
     u8 y;
-    u8 text[2];
+    u8 ch;
+    u8 text[4];
 
     FillWindowPixelBuffer(window, sFillValues[page]);
 
@@ -2402,9 +2428,12 @@ static void PrintKeyboardKeys(u8 window, u8 page)
     {
         for (x = 0; x < KBCOL_COUNT; x++)
         {
-            text[0] = GetDisplayCharAtKeyboardPos(page, x, y);
-            if (text[0] != 0)
+            ch = GetDisplayCharAtKeyboardPos(page, x, y);
+            if (ch != 0)
+            {
+                BuildSingleCharText(text, ch);
                 AddTextPrinterParameterized3(window, FONT_NORMAL, sPageColumnXPos[x] + KEYBOARD_TEXT_X, y * 16 + 1, sKeyboardTextColors[page], 0, text);
+            }
         }
     }
 
