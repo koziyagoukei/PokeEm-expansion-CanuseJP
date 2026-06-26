@@ -335,7 +335,7 @@ SlateportCity_BattleTentLobby_Text_ExplainBasicRules:
 	.string "{JPN}ポケモンは 3ひき まで です\p"
 	.string "{JPN}レンタルするとき トレードするとき\n"
 	.string "{JPN}どちらの ときも\l"
-	.string "{JPN}おなじ しゅるいの ポケモンを\n"
+	.string "{JPN}おなじ しゅるいの ポケモンを\l"
 	.string "{JPN}2ひき いじょう もつことは できません$"
 
 SlateportCity_BattleTentLobby_Text_ExplainSwapPartnerRules:
