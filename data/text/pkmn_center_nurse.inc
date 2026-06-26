@@ -1,51 +1,53 @@
 gText_WouldYouLikeToRestYourPkmn::
-	.string "Hello, and welcome to\n"
-	.string "the POKEMON CENTER.\p"
-	.string "We restore your tired POKEMON\n"
-	.string "to full health.\p"
-	.string "Would you like to rest your POKEMON?$"
+	.string "{JPN}おつかれさまです!\n"
+	.string "{JPN}ポケモン センター です\p"
+	.string "{JPN}ここでは ポケモンの\n"
+	.string "{JPN}たいりょく かいふくを します\p"
+	.string "{JPN}あなたの ポケモンを\n"
+	.string "{JPN}やすませて あげますか?$"
 
 gText_IllTakeYourPkmn::
-	.string "Okay, I'll take your POKEMON\n"
-	.string "for a few seconds.$"
+	.string "{JPN}それでは\n"
+	.string "{JPN}おあずかり いたします!$"
 
 gText_RestoredPkmnToFullHealth::
-	.string "Thank you for waiting.\p"
-	.string "We've restored your POKEMON\n"
-	.string "to full health.$"
+	.string "{JPN}おまちどおさま!\p"
+	.string "{JPN}おあずかり した ポケモンは\n"
+	.string "{JPN}みんな げんきに なりましたよ!$"
 
 gText_WeHopeToSeeYouAgain::
-	.string "We hope to see you again!$"
+	.string "{JPN}またの\n"
+	.string "{JPN}ごりようを おまち してます!$"
 
 gText_WelcomeCutShort::
-	.string "Hello, and welcome to\n"
-	.string "the POKEMON CENTER.\p"
-	.string "We restore your tired POKEMON\n"
-	.string "to full health.\p"
-	.string "Would you like to...$"
+	.string "{JPN}おつかれさまです!\n"
+	.string "{JPN}ポケモン センター です\p"
+	.string "{JPN}ここでは ポケモンの\n"
+	.string "{JPN}たいりょく かいふくを します\p"
+	.string "{JPN}あなたの ポケモンを……$"
 
 gText_NoticesGoldCard::
-	.string "Th-that card...\n"
-	.string "Could it be... The GOLD CARD?!\p"
-	.string "Oh, the gold color is brilliant!\n"
-	.string "The four stars seem to sparkle!\p"
-	.string "I've seen several TRAINERS with\n"
-	.string "a SILVER CARD before, but, {PLAYER},\l"
-	.string "you're the first TRAINER I've ever\l"
-	.string "seen with a GOLD CARD!\p"
-	.string "Okay, {PLAYER}, please allow me\n"
-	.string "the honor of resting your POKEMON!$"
+	.string "{JPN}そ それは……\n"
+	.string "{JPN}ひょっとして ゴールドカード!?\p"
+	.string "{JPN}ああ…… きんいろが まぶしい!\n"
+	.string "{JPN}4つの ほしが かがやかしい!\p"
+	.string "{JPN}わたしも これまでに\n"
+	.string "{JPN}シルバーカードの トレーナーさんなら\l"
+	.string "{JPN}なんにんか みてきましたが\l"
+	.string "{JPN}ゴールドカードを おもちの かたは\l"
+	.string "{JPN}{PLAYER}さんが はじめて ですよ!\p"
+	.string "{JPN}さあ {PLAYER}さんの\n"
+	.string "{JPN}ポケモンを やすませて あげましょう!$"
 
 gText_YouWantTheUsual::
-	.string "I'm delighted to see you, {PLAYER}!\n"
-	.string "You want the usual, am I right?$"
+	.string "{JPN}{PLAYER}さん おつかれさまです!\n"
+	.string "{JPN}いつもので よろしい ですね!$"
 
 gText_IllTakeYourPkmn2::
-	.string "Okay, I'll take your POKEMON\n"
-	.string "for a few seconds.$"
+	.string "{JPN}では おあずかりさせて いただきます!$"
 
 gText_ThankYouForWaiting::
-	.string "Thank you for waiting.$"
+	.string "{JPN}たいへん おまたせ いたしました!$"
 
 gText_WeHopeToSeeYouAgain2::
-	.string "We hope to see you again!$"
+	.string "{JPN}また いつでも おこしください!$"

@@ -1,50 +1,52 @@
 gText_PkmnTransferredSomeonesPC::
-	.string "{STR_VAR_2} was transferred to\n"
-	.string "SOMEONE'S PC.\p"
-	.string "It was placed in \n"
-	.string "BOX {STR_VAR_1}.$"
+	.string "{JPN}{STR_VAR_2}は だれかのパソコンの\n"
+	.string "{JPN}ボックス『{STR_VAR_1}』に\l"
+	.string "{JPN}てんそう された!$"
 
 gText_PkmnTransferredLanettesPC::
-	.string "{STR_VAR_2} was transferred to\n"
+	.string "{JPN}{STR_VAR_2}は "
 #if IS_FRLG
-	.string "BILL'S PC.\p"
+	.string "{JPN}マサキのパソコンの\n"
 #else
-	.string "LANETTE'S PC.\p"
+	.string "{JPN}マユミのパソコンの\n"
 #endif
-	.string "It was placed in \n"
-	.string "BOX {STR_VAR_1}.$"
+	.string "{JPN}ボックス『{STR_VAR_1} 』に\l"
+	.string "{JPN}てんそう された!$"
 
 gText_PkmnTransferredSomeonesPCBoxFull::
-	.string "BOX {STR_VAR_3} on\n"
-	.string "SOMEONE'S PC was full.\p"
-	.string "{STR_VAR_2} was transferred to\n"
-	.string "BOX {STR_VAR_1}.$"
+	.string "{JPN}だれかのパソコンの\n"
+	.string "{JPN}ボックス『{STR_VAR_3}』が\l"
+	.string "{JPN}いっぱいだ!!\p"
+	.string "{JPN}{STR_VAR_2}は\n"
+	.string "{JPN}ボックス『{STR_VAR_1}』に\l"
+	.string "{JPN}てんそう された!$"
 
 gText_PkmnTransferredLanettesPCBoxFull::
-	.string "BOX {STR_VAR_3} on\n"
 #if IS_FRLG
-	.string "BILL'S PC was full.\p"
+	.string "{JPN}マサキのパソコンの\n"
 #else
-	.string "LANETTE'S PC was full.\p"
+	.string "{JPN}マユミのパソコンの\n"
 #endif
-	.string "{STR_VAR_2} was transferred to\n"
-	.string "BOX {STR_VAR_1}.$"
+	.string "{JPN}ボックス『{STR_VAR_3}』が\n"
+	.string "{JPN}いっぱいだ!!"
+	.string "{JPN}{STR_VAR_2}は\n"
+	.string "{JPN}ボックス『{STR_VAR_1}』に\l"
+	.string "{JPN}てんそう された!$"
 
 gText_PkmnSentToPCAfterCatch::
-	.string "{STR_VAR_2} was sent to\n"
-	.string "{B_PC_CREATOR_NAME} PC.\p"
-	.string "It was placed in \n"
-	.string "BOX {STR_VAR_1}.$"
+	.string "{JPN}{STR_VAR_2}は {B_PC_CREATOR_NAME}のパソコンの\n"
+	.string "{JPN}ボックス『{STR_VAR_1}』に\l
+	.string "{JPN}てんそう された!$"
 
 gText_PlayerObtainedTheMon::
-	.string "{PLAYER} obtained\n"
-	.string "the {STR_VAR_1}!$"
+	.string "{JPN}{PLAYER}は {STR_VAR_1}を\n"
+	.string "{JPN}てにいれた!$"
 
 gText_NoMoreRoomForPokemon::
-	.string "There's no more room for POKEMON!\p"
-	.string "The POKEMON BOXES are full and\n"
-	.string "can't accept any more!$"
+	.string "{JPN}ポケモンを もちきれません!\p"
+	.string "{JPN}ボックスも いっぱいで\n"
+	.string "{JPN}てんそう できません$"
 
 gText_NicknameThisPokemon::
-	.string "Do you want to give a nickname to\n"
-	.string "this {STR_VAR_1}?$"
+	.string "{JPN}{STR_VAR_1}に\n"
+	.string "{JPN}ニックネームを つけますか?$"

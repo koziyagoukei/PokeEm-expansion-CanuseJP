@@ -256,25 +256,25 @@ static const u32 sBirchSpeechShadowGfx[] = INCGFX_U32("graphics/birch_speech/sha
 static const u32 sBirchSpeechBgMap[] = INCGFX_U32("graphics/birch_speech/map.bin", ".smolTM");
 static const u16 sBirchSpeechBgGradientPal[] = INCGFX_U16("graphics/birch_speech/bg2.pal", ".gbapal");
 
-static const u8 gText_SaveFileCorrupted[] = _("レポートが こわれています。\nまえの レポートを よみこみます。");
-static const u8 gText_SaveFileErased[] = _("こわれたか こしょうしたため\nレポートが けされました。");
-static const u8 gJPText_No1MSubCircuit[] = _("1Mサブきばんが ささっていません？");
-static const u8 gText_BatteryRunDry[] = _("ないぞうでんちが きれました。\nゲームは あそべます。\pただし とけいを つかう イベントは\nおこりません。");
+static const u8 gText_SaveFileCorrupted[] = _("{JPN}レポートが せいかくに かかれていないので\nそのまえのレポートを よみます!");
+static const u8 gText_SaveFileErased[] = _("{JPN}レポートの ないようが きえてしまった!");
+static const u8 gJPText_No1MSubCircuit[] = _("{JPN}1Mサブきばんが ささっていません!");
+static const u8 gText_BatteryRunDry[] = _("{JPN}でんちぎれの ために\nとけいが うごかなくなりました\pとけいに かんけいする できごとは おきませんが\nゲームを つづけて あそぶことは できます");
 
-static const u8 gText_MainMenuNewGame[] = _("さいしょから");
-static const u8 gText_MainMenuContinue[] = _("つづきから");
-static const u8 gText_MainMenuOption[] = _("せってい");
-static const u8 gText_MainMenuMysteryGift[] = _("ふしぎな おくりもの");
-static const u8 gText_MainMenuMysteryGift2[] = _("ふしぎな おくりもの");
-static const u8 gText_MainMenuMysteryEvents[] = _("ふしぎな できごと");
-static const u8 gText_WirelessNotConnected[] = _("ワイヤレスアダプタが\nつながっていません。");
-static const u8 gText_MysteryGiftCantUse[] = _("ワイヤレスアダプタが つながっていると\nふしぎな おくりものは つかえません。");
-static const u8 gText_MysteryEventsCantUse[] = _("ワイヤレスアダプタが つながっていると\nふしぎな できごとは つかえません。");
+static const u8 gText_MainMenuNewGame[] = _("{JPN}さいしょから はじめる");
+static const u8 gText_MainMenuContinue[] = _("{JPN}つづきから はじめる");
+static const u8 gText_MainMenuOption[] = _("{JPN}せっていを かえる");
+static const u8 gText_MainMenuMysteryGift[] = _("{JPN}ふしぎな おくりもの");
+static const u8 gText_MainMenuMysteryGift2[] = _("{JPN}ふしぎな もらいもの");
+static const u8 gText_MainMenuMysteryEvents[] = _("{JPN}ふしぎな できごと");
+static const u8 gText_WirelessNotConnected[] = _("{JPN}ワイヤレスアダプタ が\nつながっていません");
+static const u8 gText_MysteryGiftCantUse[] = _("{JPN}ワイヤレスアダプタ を さしたまま\nふしぎなもらいもの は できません");
+static const u8 gText_MysteryEventsCantUse[] = _("{JPN}ワイヤレスアダプタ を さしたまま\nふしぎなできごと は できません");
 
-static const u8 gText_ContinueMenuPlayer[] = _("しゅじんこう");
-static const u8 gText_ContinueMenuTime[] = _("じかん");
-static const u8 gText_ContinueMenuPokedex[] = _("ずかん");
-static const u8 gText_ContinueMenuBadges[] = _("バッジ");
+static const u8 gText_ContinueMenuPlayer[] = _("{JPN}しゅじんこう");
+static const u8 gText_ContinueMenuTime[] = _("{JPN}プレイじかん");
+static const u8 gText_ContinueMenuPokedex[] = _("{JPN}ポケモンずかん");
+static const u8 gText_ContinueMenuBadges[] = _("{JPN}もっているバッジ");
 
 #define MENU_LEFT 2
 #define MENU_TOP_WIN0 1
@@ -478,50 +478,51 @@ static const struct MenuAction sMenuActions_Gender[] = {
 };
 
 static const u8 *const sMalePresetNames[] = {
-    COMPOUND_STRING("STU"),
-    COMPOUND_STRING("MILTON"),
-    COMPOUND_STRING("TOM"),
-    COMPOUND_STRING("KENNY"),
-    COMPOUND_STRING("REID"),
-    COMPOUND_STRING("JUDE"),
-    COMPOUND_STRING("JAXSON"),
-    COMPOUND_STRING("EASTON"),
-    COMPOUND_STRING("WALKER"),
-    COMPOUND_STRING("TERU"),
-    COMPOUND_STRING("JOHNNY"),
-    COMPOUND_STRING("BRETT"),
-    COMPOUND_STRING("SETH"),
-    COMPOUND_STRING("TERRY"),
-    COMPOUND_STRING("CASEY"),
-    COMPOUND_STRING("DARREN"),
-    COMPOUND_STRING("LANDON"),
-    COMPOUND_STRING("COLLIN"),
-    COMPOUND_STRING("STANLEY"),
-    COMPOUND_STRING("QUINCY")
+    COMPOUND_STRING("{JPN}イツオ"),
+    COMPOUND_STRING("{JPN}ギョク"),
+    COMPOUND_STRING("{JPN}ケイ"),
+    COMPOUND_STRING("{JPN}シュウサク"),
+    COMPOUND_STRING("{JPN}セイゴ"),
+    COMPOUND_STRING("{JPN}ダイサク"),
+    COMPOUND_STRING("{JPN}タカヒト"),
+    COMPOUND_STRING("{JPN}タツヤ"),
+    COMPOUND_STRING("{JPN}ダニエル"),
+    COMPOUND_STRING("{JPN}テルキ"),
+    COMPOUND_STRING("{JPN}トム"),
+    COMPOUND_STRING("{JPN}トモヤ"),
+    COMPOUND_STRING("{JPN}ヒトシ"),
+    COMPOUND_STRING("{JPN}ヒロアキ"),
+    COMPOUND_STRING("{JPN}ユキヒコ"),
+    COMPOUND_STRING("{JPN}ラルド"),
+    COMPOUND_STRING("{JPN}リクヤ"),
+    COMPOUND_STRING("{JPN}リチャード"),
+    COMPOUND_STRING("{JPN}リュウ"),
+    COMPOUND_STRING("{JPN}リョウタ")
 };
 
 static const u8 *const sFemalePresetNames[] = {
-    COMPOUND_STRING("KIMMY"),
-    COMPOUND_STRING("TIARA"),
-    COMPOUND_STRING("BELLA"),
-    COMPOUND_STRING("JAYLA"),
-    COMPOUND_STRING("ALLIE"),
-    COMPOUND_STRING("LIANNA"),
-    COMPOUND_STRING("SARA"),
-    COMPOUND_STRING("MONICA"),
-    COMPOUND_STRING("CAMILA"),
-    COMPOUND_STRING("AUBREE"),
-    COMPOUND_STRING("RUTHIE"),
-    COMPOUND_STRING("HAZEL"),
-    COMPOUND_STRING("NADINE"),
-    COMPOUND_STRING("TANJA"),
-    COMPOUND_STRING("YASMIN"),
-    COMPOUND_STRING("NICOLA"),
-    COMPOUND_STRING("LILLIE"),
-    COMPOUND_STRING("TERRA"),
-    COMPOUND_STRING("LUCY"),
-    COMPOUND_STRING("HALIE")
+    COMPOUND_STRING("{JPN}アイコ"),
+    COMPOUND_STRING("{JPN}アヤナ"),
+    COMPOUND_STRING("{JPN}アン"),
+    COMPOUND_STRING("{JPN}エミィ"),
+    COMPOUND_STRING("{JPN}カオリ"),
+    COMPOUND_STRING("{JPN}カレン"),
+    COMPOUND_STRING("{JPN}キョウコ"),
+    COMPOUND_STRING("{JPN}サエ"),
+    COMPOUND_STRING("{JPN}スイ"),
+    COMPOUND_STRING("{JPN}ジュリ"),
+    COMPOUND_STRING("{JPN}チエミ"),
+    COMPOUND_STRING("{JPN}チヨコ"),
+    COMPOUND_STRING("{JPN}テルコ"),
+    COMPOUND_STRING("{JPN}ナナエ"),
+    COMPOUND_STRING("{JPN}ヒナ"),
+    COMPOUND_STRING("{JPN}マキコ"),
+    COMPOUND_STRING("{JPN}ミサコ"),
+    COMPOUND_STRING("{JPN}ムツミ"),
+    COMPOUND_STRING("{JPN}モニカ"),
+    COMPOUND_STRING("{JPN}ユウメ")
 };
+
 
 // The number of male vs. female names is assumed to be the same.
 // If they aren't, the smaller of the two sizes will be used and any extra names will be ignored.
