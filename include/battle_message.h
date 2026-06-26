@@ -104,6 +104,8 @@
 #define B_BUFF_PLACEHOLDER_BEGIN        0xFD
 #define B_BUFF_EOS                      0xFF
 
+#define BATTLE_TEXT_BUFF_ARRAY_COUNT (TEXT_BUFF_ARRAY_COUNT + 13)
+
 #define PREPARE_FLAVOR_BUFFER(textVar, flavorId)                            \
 {                                                                           \
     textVar[0] = B_BUFF_PLACEHOLDER_BEGIN;                                  \
@@ -246,7 +248,7 @@ struct BattleMsgData
     u8 itemEffectBattler;
     enum Type moveType;
     enum Ability abilities[MAX_BATTLERS_COUNT];
-    u8 textBuffs[3][TEXT_BUFF_ARRAY_COUNT];
+    u8 textBuffs[3][BATTLE_TEXT_BUFF_ARRAY_COUNT];
 };
 
 void BufferStringBattle(enum StringID stringID, enum BattlerId battler);

@@ -77,6 +77,7 @@
 extern u16 gSpecialVar_ItemId;
 
 #define FRIENDSHIP_EVO_THRESHOLD ((P_FRIENDSHIP_EVO_THRESHOLD >= GEN_8) ? 160 : 220)
+#define JAPANESE_POKEMON_NAME_LENGTH 6
 
 struct SpeciesItem
 {
@@ -91,6 +92,7 @@ static union PokemonSubstruct *GetSubstruct(struct BoxPokemon *boxMon, u32 perso
 static void EncryptBoxMon(struct BoxPokemon *boxMon);
 static void DecryptBoxMon(struct BoxPokemon *boxMon);
 static void Task_PlayMapChosenOrBattleBGM(u8 taskId);
+static void SetBoxMonNicknameBytes(struct BoxPokemon *boxMon, struct PokemonSubstruct0 *substruct0, const u8 *src, bool32 nickname10);
 void TrySpecialOverworldEvo();
 
 EWRAM_DATA static u8 sLearningMoveTableID = 0;
@@ -965,7 +967,8 @@ void SetBoxMonPerfectIVs(struct BoxPokemon *mon, u32 numPerfect)
 
 void CreateBoxMon(struct BoxPokemon *boxMon, enum Species species, u8 level, u32 personality, struct OriginalTrainerId trainerId)
 {
-    u8 speciesName[POKEMON_NAME_LENGTH + 1];
+    u8 speciesName[POKEMON_NAME_BUFFER_SIZE];
+    enum Language language;
     u32 value;
     u16 checksum;
     bool32 isShiny;
@@ -996,8 +999,9 @@ void CreateBoxMon(struct BoxPokemon *boxMon, enum Species species, u8 level, u32
     EncryptBoxMon(boxMon);
     SetBoxMonData(boxMon, MON_DATA_IS_SHINY, &isShiny);
     StringCopy(speciesName, GetSpeciesName(species));
+    language = IsStringNJapanese(speciesName, POKEMON_NAME_LENGTH) ? LANGUAGE_JAPANESE : gGameLanguage;
     SetBoxMonData(boxMon, MON_DATA_NICKNAME, speciesName);
-    SetBoxMonData(boxMon, MON_DATA_LANGUAGE, &gGameLanguage);
+    SetBoxMonData(boxMon, MON_DATA_LANGUAGE, &language);
     SetBoxMonData(boxMon, MON_DATA_OT_NAME, gSaveBlock2Ptr->playerName);
     SetBoxMonData(boxMon, MON_DATA_SPECIES, &species);
     SetBoxMonData(boxMon, MON_DATA_EXP, &gExperienceTables[gSpeciesInfo[species].growthRate][level]);
@@ -1949,6 +1953,42 @@ static void DecryptBoxMon(struct BoxPokemon *boxMon)
     }
 }
 
+static void SetBoxMonNicknameBytes(struct BoxPokemon *boxMon, struct PokemonSubstruct0 *substruct0, const u8 *src, bool32 nickname10)
+{
+    u32 i;
+    u8 rawNickname[POKEMON_NAME_BUFFER_SIZE];
+    u32 maxLength;
+
+    for (i = 0; i < ARRAY_COUNT(rawNickname) - 1 && src[i] != EOS; i++)
+        rawNickname[i] = src[i];
+    rawNickname[i] = EOS;
+
+    StripExtCtrlCodes(rawNickname);
+
+    maxLength = IsStringNJapanese(rawNickname, POKEMON_NAME_LENGTH)
+        ? min(JAPANESE_POKEMON_NAME_LENGTH, POKEMON_NAME_LENGTH)
+        : POKEMON_NAME_LENGTH;
+
+    if (nickname10)
+        maxLength = min(maxLength, sizeof(boxMon->nickname));
+
+    for (i = 0; i < sizeof(boxMon->nickname); i++)
+        boxMon->nickname[i] = EOS;
+
+    substruct0->nickname11 = EOS;
+    substruct0->nickname12 = EOS;
+
+    for (i = 0; i < maxLength && rawNickname[i] != EOS; i++)
+    {
+        if (i < sizeof(boxMon->nickname))
+            boxMon->nickname[i] = rawNickname[i];
+        else if (i == 10 && POKEMON_NAME_LENGTH >= 11)
+            substruct0->nickname11 = rawNickname[i];
+        else if (i == 11 && POKEMON_NAME_LENGTH >= 12)
+            substruct0->nickname12 = rawNickname[i];
+    }
+}
+
 static const u8 sSubstructOffsets[4][24] =
 {
     [SUBSTRUCT_TYPE_0] = {0, 0, 0, 0, 0, 0, 1, 1, 2, 3, 2, 3, 1, 1, 2, 3, 2, 3, 1, 1, 2, 3, 2, 3},
@@ -2087,7 +2127,15 @@ u32 GetBoxMonData3(struct BoxPokemon *boxMon, s32 field, u8 *data)
         case MON_DATA_NICKNAME:
         case MON_DATA_NICKNAME10:
         {
-            if (IsBadEgg(boxMon))
+            if (field == MON_DATA_NICKNAME10)
+            {
+                for (retVal = 0;
+                    retVal < sizeof(boxMon->nickname) && boxMon->nickname[retVal] != EOS;
+                    data[retVal] = boxMon->nickname[retVal], retVal++) {}
+
+                data[retVal] = EOS;
+            }
+            else if (IsBadEgg(boxMon))
             {
                 for (retVal = 0;
                     retVal < POKEMON_NAME_LENGTH && gText_BadEgg[retVal] != EOS;
@@ -2100,17 +2148,15 @@ u32 GetBoxMonData3(struct BoxPokemon *boxMon, s32 field, u8 *data)
                 StringCopy(data, gText_EggNickname);
                 retVal = StringLength(data);
             }
-            else if (boxMon->language == LANGUAGE_JAPANESE)
+            else if (boxMon->language == LANGUAGE_JAPANESE || IsStringNJapanese(boxMon->nickname, sizeof(boxMon->nickname)))
             {
                 data[0] = EXT_CTRL_CODE_BEGIN;
                 data[1] = EXT_CTRL_CODE_JPN;
 
                 for (retVal = 2, i = 0;
-                    i < 5 && boxMon->nickname[i] != EOS;
+                    i < JAPANESE_POKEMON_NAME_LENGTH && boxMon->nickname[i] != EOS;
                     data[retVal] = boxMon->nickname[i], retVal++, i++) {}
 
-                data[retVal++] = EXT_CTRL_CODE_BEGIN;
-                data[retVal++] = EXT_CTRL_CODE_ENG;
                 data[retVal] = EOS;
             }
             else
@@ -2646,22 +2692,8 @@ void SetBoxMonData(struct BoxPokemon *boxMon, s32 field, const void *dataArg)
         case MON_DATA_NICKNAME:
         case MON_DATA_NICKNAME10:
         {
-            s32 i;
             struct PokemonSubstruct0 *substruct0 = GetSubstruct0(boxMon);
-            for (i = 0; i < min(sizeof(boxMon->nickname), POKEMON_NAME_LENGTH); i++)
-                boxMon->nickname[i] = data[i];
-            if (field != MON_DATA_NICKNAME10)
-            {
-                if (POKEMON_NAME_LENGTH >= 11)
-                    substruct0->nickname11 = data[10];
-                if (POKEMON_NAME_LENGTH >= 12)
-                    substruct0->nickname12 = data[11];
-            }
-            else
-            {
-                substruct0->nickname11 = EOS;
-                substruct0->nickname12 = EOS;
-            }
+            SetBoxMonNicknameBytes(boxMon, substruct0, data, field == MON_DATA_NICKNAME10);
             break;
         }
         case MON_DATA_SPECIES:

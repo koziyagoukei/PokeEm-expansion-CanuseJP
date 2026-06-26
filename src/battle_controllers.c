@@ -1020,7 +1020,7 @@ void BtlController_EmitPrintString(enum BattlerId battler, u32 bufferId, enum St
 
     for (i = 0; i < MAX_BATTLERS_COUNT; i++)
         stringInfo->abilities[i] = gBattleMons[i].ability;
-    for (i = 0; i < TEXT_BUFF_ARRAY_COUNT; i++)
+    for (i = 0; i < BATTLE_TEXT_BUFF_ARRAY_COUNT; i++)
     {
         stringInfo->textBuffs[0][i] = gBattleTextBuff1[i];
         stringInfo->textBuffs[1][i] = gBattleTextBuff2[i];
@@ -1049,7 +1049,7 @@ void BtlController_EmitPrintSelectionString(enum BattlerId battler, u32 bufferId
 
     for (i = 0; i < MAX_BATTLERS_COUNT; i++)
         stringInfo->abilities[i] = gBattleMons[i].ability;
-    for (i = 0; i < TEXT_BUFF_ARRAY_COUNT; i++)
+    for (i = 0; i < BATTLE_TEXT_BUFF_ARRAY_COUNT; i++)
     {
         stringInfo->textBuffs[0][i] = gBattleTextBuff1[i];
         stringInfo->textBuffs[1][i] = gBattleTextBuff2[i];

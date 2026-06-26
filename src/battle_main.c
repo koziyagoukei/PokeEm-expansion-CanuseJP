@@ -90,7 +90,7 @@ static void CB2_PreInitIngamePlayerPartnerBattle(void);
 static void CB2_HandleStartMultiPartnerBattle(void);
 static void CB2_HandleStartMultiBattle(void);
 static void CB2_HandleStartBattle(void);
-static void TryCorrectShedinjaLanguage(struct Pokemon *mon);
+static void TryCorrectJapaneseNicknameLanguage(struct Pokemon *mon);
 static enum BattleTrainer GetBattlerTrainerFromParty(struct Pokemon *party);
 static u8 CreateNPCTrainerParty(struct Pokemon *party, u16 trainerNum);
 static void BattleMainCB1(void);
@@ -144,8 +144,8 @@ EWRAM_DATA u16 gBattle_WIN0V = 0;
 EWRAM_DATA u16 gBattle_WIN1H = 0;
 EWRAM_DATA u16 gBattle_WIN1V = 0;
 EWRAM_DATA u8 gDisplayedStringBattle[425] = {0}; // Increased in size to fit Juan's defeat text (SootopolisCity_Gym_1F_Text_JuanDefeat)
-EWRAM_DATA u8 gBattleTextBuff1[TEXT_BUFF_ARRAY_COUNT] = {0};
-EWRAM_DATA u8 gBattleTextBuff2[TEXT_BUFF_ARRAY_COUNT] = {0};
+EWRAM_DATA u8 gBattleTextBuff1[TEXT_BUFF_ARRAY_COUNT + 13] = {0};
+EWRAM_DATA u8 gBattleTextBuff2[TEXT_BUFF_ARRAY_COUNT + 13] = {0};
 EWRAM_DATA u8 gBattleTextBuff3[TEXT_BUFF_ARRAY_COUNT + 13] = {0};   // expanded for stupidly long z move names
 EWRAM_DATA u32 gBattleTypeFlags = 0;
 EWRAM_DATA u8 gBattleEnvironment = 0;
@@ -262,8 +262,6 @@ static const struct ScanlineEffectParams sIntroScanlineParams32Bit =
 {
     &REG_BG3HOFS, SCANLINE_EFFECT_DMACNT_32BIT, 1
 };
-
-static const u8 sText_ShedinjaJpnName[] = _("ヌケニン"); // Nukenin
 
 const struct OamData gOamData_BattleSpriteOpponentSide =
 {
@@ -1012,6 +1010,11 @@ static void CB2_HandleStartBattle(void)
         }
         break;
     case 15:
+        for (enum BattleTrainer trainer = B_TRAINER_PLAYER; trainer < MAX_BATTLE_TRAINERS; trainer++)
+        {
+            for (u32 i = 0; i < PARTY_SIZE; i++)
+                TryCorrectJapaneseNicknameLanguage(&gParties[trainer][i]);
+        }
         InitBattleControllers();
         RecordedBattle_SetTrainerInfo();
         gBattleCommunication[SPRITES_INIT_STATE1] = 0;
@@ -1311,7 +1314,7 @@ static void CB2_HandleStartMultiPartnerBattle(void)
             for (enum BattleTrainer trainer = B_TRAINER_PLAYER; trainer < MAX_BATTLE_TRAINERS; trainer++)
             {
                 for (u32 i = 0; i < PARTY_SIZE; i++)
-                    TryCorrectShedinjaLanguage(&gParties[trainer][i]);
+                    TryCorrectJapaneseNicknameLanguage(&gParties[trainer][i]);
             }
             gBattleCommunication[MULTIUSE_STATE]++;
         }
@@ -1676,7 +1679,7 @@ static void CB2_HandleStartMultiBattle(void)
             {
                 for (u32 i = 0; i < MULTI_PARTY_SIZE; i++)
                 {
-                    TryCorrectShedinjaLanguage(&gParties[trainerParty][i]);
+                    TryCorrectJapaneseNicknameLanguage(&gParties[trainerParty][i]);
                 }
             }
 
@@ -2600,16 +2603,16 @@ static void AskRecordBattle(void)
     }
 }
 
-static void TryCorrectShedinjaLanguage(struct Pokemon *mon)
+static void TryCorrectJapaneseNicknameLanguage(struct Pokemon *mon)
 {
-    u8 nickname[POKEMON_NAME_LENGTH + 1];
+    u8 nickname[POKEMON_NAME_BUFFER_SIZE];
     enum Language language = LANGUAGE_JAPANESE;
 
-    if (GetMonData(mon, MON_DATA_SPECIES) == SPECIES_SHEDINJA
+    if (GetMonData(mon, MON_DATA_SPECIES_OR_EGG) != SPECIES_NONE
      && GetMonData(mon, MON_DATA_LANGUAGE) != language)
     {
-        GetMonData(mon, MON_DATA_NICKNAME, nickname);
-        if (StringCompareWithoutExtCtrlCodes(nickname, sText_ShedinjaJpnName) == 0)
+        GetMonData(mon, MON_DATA_NICKNAME10, nickname);
+        if (IsStringNJapanese(nickname, POKEMON_NAME_LENGTH))
             SetMonData(mon, MON_DATA_LANGUAGE, &language);
     }
 }
@@ -3006,6 +3009,14 @@ static void BattleStartClearSetData(void)
     memset(&gSideTimers, 0, sizeof(gSideTimers));
     memset(&gBattleResults, 0, sizeof(gBattleResults));
     ClearSetBScriptingStruct();
+
+    // Battle text buffers must be initialized with EOS, not 0.
+    // 0 is a valid character code in Pokémon text encoding, so zero-filled
+    // unused buffers can be read past their end until EOS is found.
+    memset(gBattleTextBuff1, EOS, BATTLE_TEXT_BUFF_ARRAY_COUNT);
+    memset(gBattleTextBuff2, EOS, BATTLE_TEXT_BUFF_ARRAY_COUNT);
+    memset(gBattleTextBuff3, EOS, BATTLE_TEXT_BUFF_ARRAY_COUNT);
+    memset(gDisplayedStringBattle, EOS, sizeof(gDisplayedStringBattle));
 
     for (i = 0; i < MAX_BATTLERS_COUNT; i++)
     {
