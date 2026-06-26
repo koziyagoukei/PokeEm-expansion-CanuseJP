@@ -53,7 +53,7 @@ gText_Birch_AreYouReady::
 	.string "{JPN}これから きみ だけの ものがたりが\n"
 	.string "{JPN}はじまろうと している!\p"
 	.string "{JPN}ゆめと ぼうけんと であいに みちた\n"
-	.string "{JPN}ポケットモンスターの せかいへ\n"
+	.string "{JPN}ポケットモンスターの せかいへ\l"
 	.string "{JPN}ゆうきを もって とびこんで みてくれ!\p"
 	.string "{JPN}では また あとで あおう!\n"
 	.string "{JPN}けんきゅうじょで まって いるぞ!\p$"
