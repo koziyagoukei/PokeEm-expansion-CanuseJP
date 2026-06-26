@@ -27,6 +27,62 @@
 #include "utf8.h"
 
 // Reads a charmap char or escape sequence.
+
+void StringParser::NoticeBracketedConstant(const std::string& ident)
+{
+    if (!m_autoJpn)
+        return;
+
+    if (ident == "JPN")
+        m_autoMode = AutoTextMode_Jpn;
+    else if (ident == "ENG")
+        m_autoMode = AutoTextMode_Eng;
+}
+static bool IsAutoJpnAsciiAlpha(std::int32_t code)
+{
+    return (code >= 'A' && code <= 'Z') || (code >= 'a' && code <= 'z');
+}
+
+static bool IsAutoJpnJapaneseChar(std::int32_t code)
+{
+    return code >= 0x80;
+}
+
+std::string StringParser::GetAutoModePrefix(std::int32_t code, bool isEscape)
+{
+    std::string sequence;
+
+    if (!m_autoJpn || isEscape)
+        return sequence;
+
+    if (IsAutoJpnAsciiAlpha(code))
+    {
+        if (m_autoMode != AutoTextMode_Eng)
+        {
+            sequence = g_charmap->Constant("ENG");
+
+            if (sequence.length() == 0)
+                RaiseError("no mapping exists for auto text mode constant '{ENG}'");
+
+            m_autoMode = AutoTextMode_Eng;
+        }
+    }
+    else if (IsAutoJpnJapaneseChar(code))
+    {
+        if (m_autoMode != AutoTextMode_Jpn)
+        {
+            sequence = g_charmap->Constant("JPN");
+
+            if (sequence.length() == 0)
+                RaiseError("no mapping exists for auto text mode constant '{JPN}'");
+
+            m_autoMode = AutoTextMode_Jpn;
+        }
+    }
+
+    return sequence;
+}
+
 std::string StringParser::ReadCharOrEscape()
 {
     std::string sequence;
@@ -72,6 +128,7 @@ std::string StringParser::ReadCharOrEscape()
 
     UnicodeChar unicodeChar = DecodeUtf8(&m_buffer[m_pos]);
     m_pos += unicodeChar.encodingLength;
+
     std::int32_t code = unicodeChar.code;
 
     if (code == -1)
@@ -90,9 +147,8 @@ std::string StringParser::ReadCharOrEscape()
             RaiseError("unknown character U+%X\nIf this character is intended to be used, it needs to be implemented", code);
     }
 
-    return sequence;
+    return GetAutoModePrefix(code, isEscape) + sequence;
 }
-
 // Reads a charmap constant, i.e. "{FOO}".
 std::string StringParser::ReadBracketedConstants()
 {
@@ -113,7 +169,8 @@ std::string StringParser::ReadBracketedConstants()
             while (IsIdentifierChar(m_buffer[m_pos]))
                 m_pos++;
 
-            std::string sequence = g_charmap->Constant(std::string(&m_buffer[startPos], m_pos - startPos));
+            std::string ident(&m_buffer[startPos], m_pos - startPos);
+            std::string sequence = g_charmap->Constant(ident);
 
             if (sequence.length() == 0)
             {
@@ -121,6 +178,7 @@ std::string StringParser::ReadBracketedConstants()
                 RaiseError("unknown constant '%s'", &m_buffer[startPos]);
             }
 
+            NoticeBracketedConstant(ident);
             totalSequence += sequence;
         }
         else if (IsAsciiDigit(m_buffer[m_pos]))
@@ -166,7 +224,7 @@ std::string StringParser::ReadBracketedConstants()
 }
 
 // Reads a charmap string.
-int StringParser::ParseString(long srcPos, unsigned char* dest, int& destLength)
+int StringParser::ParseString(long srcPos, unsigned char* dest, int& destLength, bool autoJpn)
 {
     m_pos = srcPos;
 
@@ -178,6 +236,27 @@ int StringParser::ParseString(long srcPos, unsigned char* dest, int& destLength)
     m_pos++;
 
     destLength = 0;
+
+    m_autoJpn = autoJpn;
+    m_autoMode = AutoTextMode_None;
+
+    if (m_autoJpn)
+    {
+        std::string sequence = g_charmap->Constant("JPN");
+
+        if (sequence.length() == 0)
+            RaiseError("no mapping exists for auto text mode constant '{JPN}'");
+
+        for (const char& c : sequence)
+        {
+            if (destLength == kMaxStringLength)
+                RaiseError("mapped string longer than %d bytes", kMaxStringLength);
+
+            dest[destLength++] = c;
+        }
+
+        m_autoMode = AutoTextMode_Jpn;
+    }
 
     while (m_buffer[m_pos] != '"')
     {

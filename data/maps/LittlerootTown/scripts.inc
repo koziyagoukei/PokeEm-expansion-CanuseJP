@@ -905,112 +905,116 @@ LittlerootTown_EventScript_GiveRunningShoes::
 	return
 
 LittlerootTown_Text_OurNewHomeLetsGoInside:
-	.string "MOM: {PLAYER}, we're here, honey!\p"
-	.string "It must be tiring riding with our things\n"
-	.string "in the moving truck.\p"
-	.string "Well, this is LITTLEROOT TOWN.\p"
-	.string "How do you like it?\n"
-	.string "This is our new home!\p"
-	.string "It has a quaint feel, but it seems to be\n"
-	.string "an easy place to live, don't you think?\p"
-	.string "And, you get your own room, {PLAYER}!\n"
-	.string "Let's go inside.$"
+	.string "{JPN}ママ『{PLAYER} おつかれさま!\p"
+	.string "{JPN}ながいあいだ トラックに ゆられて\n"
+	.string "{JPN}たいへん だったでしょ?\p"
+	.string "{JPN}ここが ミシロタウンよ!\p"
+	.string "{JPN}どう? これが わたしたちの\n"
+	.string "{JPN}あたらしい おうち!\p"
+	.string "{JPN}ちょっと こふうな かんじで\n"
+	.string "{JPN}すみやすそうな ところ でしょ?\p"
+	.string "{JPN}こんどは {PLAYER}の おへやも あるのよ!\n"
+	.string "{JPN}さあ なかに はいりましょ!$"
 
 LittlerootTown_Text_WaitPlayer:
-	.string "MOM: Wait, {PLAYER}!$"
+	.string "{JPN}ママ『まって {PLAYER}!$"
 
 LittlerootTown_Text_WearTheseRunningShoes:
-	.string "MOM: {PLAYER}! {PLAYER}! Did you\n"
-	.string "introduce yourself to PROF. BIRCH?\p"
-	.string "Oh! What an adorable POKEMON!\n"
-	.string "You got it from PROF. BIRCH. How nice!\p"
-	.string "You're your father's child, all right.\n"
-	.string "You look good together with POKEMON!\p"
-	.string "Here, honey! If you're going out on an\n"
-	.string "adventure, wear these RUNNING SHOES.\p"
-	.string "They'll put a zip in your step!$"
+	.string "{JPN}ママ『{PLAYER}! {PLAYER}!\n"
+	.string "{JPN}オダマキはかせに あいさつ した?\p"
+	.string "{JPN}あら! かわいい ポケモン!\n"
+	.string "{JPN}オダマキはかせ に いただいたのね\p"
+	.string "{JPN}やっぱり パパの こども なのね……\n"
+	.string "{JPN}ポケモンと いっしょに いるのが\l"
+	.string "{JPN}ほらっ! ぼうけんに でるなら\n"
+	.string "{JPN}ランニングシューズを はくと いいわ!\p"
+	.string "{JPN}いろんな ところ\n"
+	.string "{JPN}はしれるように なるわよ!$"
 
 LittlerootTown_Text_SwitchShoesWithRunningShoes:
-	.string "{PLAYER} switched shoes with the\n"
-	.string "RUNNING SHOES.$"
+	.string "{JPN}{PLAYER}は ランニングシューズに\n"
+	.string "{JPN}はきかえた!$"
 
 LittlerootTown_Text_ExplainRunningShoes:
-	.string "MOM: {PLAYER}, those shoes came with\n"
-	.string "instructions.\p"
-	.string "Press the B Button while wearing these\n"
-	.string "RUNNING SHOES to run extra-fast!\p"
-	.string "Slip on these RUNNING SHOES and race\n"
-	.string "in the great outdoors!$"
+	.string "{JPN}ママ『{PLAYER}!\n"
+	.string "{JPN}これが せつめいしょ よ\p"
+	.string "{JPN}「ランニングシューズは\n"
+	.string "{JPN} Bボタンを おすことで いままでよりも\l"
+	.string "{JPN} はやく はしれるように なります!\p"
+	.string "{JPN} ランニングシューズを はいて\n"
+	.string "{JPN} おもいっきり そとを はしろう!」$"
 
 LittlerootTown_Text_ComeHomeIfAnythingHappens:
-	.string "... ... ... ... ... ... ... ...\n"
-	.string "... ... ... ... ... ... ... ...\p"
-	.string "To think that you have your very own\n"
-	.string "POKEMON now...\l"
-	.string "Your father will be overjoyed.\p"
-	.string "...But please be careful.\n"
-	.string "If anything happens, you can come home.\p"
-	.string "Go on, go get them, honey!$"
+	.string "{JPN}…… …… ……\n"
+	.string "{JPN}…… …… ……\p"
+	.string "{JPN}あなたが じぶんの ポケモンを\n"
+	.string "{JPN}もつように なった だなんて……\l"
+	.string "{JPN}パパが しったら おおよろこび するわよ!\p"
+	.string "{JPN}……でも むりは しないでね\n"
+	.string "{JPN}なにか あれば かえって くればいいから\p"
+	.string "{JPN}じゃあ がんばってね!$"
 
 LittlerootTown_Text_CanUsePCToStoreItems:
-	.string "If you use a PC, you can store items\n"
-	.string "and POKEMON.\p"
-	.string "The power of science is staggering!$"
+	.string "{JPN}パソコンを つかえば\n"
+	.string "{JPN}どうぐや ポケモンが ほぞん できるんだ!\p"
+	.string "{JPN}かがくの ちからって しびれるーっ!$"
 
 LittlerootTown_Text_BirchSpendsDaysInLab:
-	.string "PROF. BIRCH spends days in his LAB\n"
-	.string "studying, then he'll suddenly go out in\l"
-	.string "the wild to do more research...\p"
-	.string "When does PROF. BIRCH spend time\n"
-	.string "at home?$"
+	.string "{JPN}ずーっと けんきゅうしつに こもって\n"
+	.string "{JPN}しらべものを しているかと おもえば\l"
+	.string "{JPN}とつぜん のやまに とびだしていく……\p"
+	.string "{JPN}オダマキはかせって いったい\n"
+	.string "{JPN}いつ うちに かえっているんだろう?$"
 
 LittlerootTown_Text_IfYouGoInGrassPokemonWillJumpOut:
-	.string "Um, um, um!\p"
-	.string "If you go outside and go in the grass,\n"
-	.string "wild POKEMON will jump out!$"
+	.string "{JPN}あの あの あのね!\p"
+	.string "{JPN}ここから さきの どうろ\n"
+	.string "{JPN}くさむらに はいると\l"
+	.string "{JPN}やせいの ポケモンが でてくるの!$"
 
 LittlerootTown_Text_DangerousIfYouDontHavePokemon:
-	.string "It's dangerous if you don't have\n"
-	.string "your own POKEMON.$"
+	.string "{JPN}じぶんの ポケモンを もってないと\n"
+	.string "{JPN}あぶないの!$"
 
 LittlerootTown_Text_CanYouGoSeeWhatsHappening:
-	.string "Um, hi!\p"
-	.string "There are scary POKEMON outside!\n"
-	.string "I can hear their cries!\p"
-	.string "I want to go see what's going on,\n"
-	.string "but I don't have any POKEMON...\p"
-	.string "Can you go see what's happening\n"
-	.string "for me?$"
+	.string "{JPN}ねえ ねえ!\p"
+	.string "{JPN}いま まちの そとから\n"
+	.string "{JPN}こわーい ポケモンの こえが きこえたよ!\p"
+	.string "{JPN}なにが おこってるのか みにいきたいけど\n"
+	.string "{JPN}わたし ポケモン もってないし……\p"
+	.string "{JPN}{STR_VAR_1}\n"
+	.string "{JPN}わたしの かわりに みてきて くれる?$"
 
 LittlerootTown_Text_YouSavedBirch:
-	.string "You saved PROF. BIRCH!\n"
-	.string "I'm so glad!$"
+	.string "{JPN}{STR_VAR_1}の おかげで\n"
+	.string "{JPN}はかせ たすかった! よかったー$"
 
 LittlerootTown_Text_GoodLuckCatchingPokemon:
-	.string "Are you going to catch POKEMON?\n"
-	.string "Good luck!$"
+	.string "{JPN}ポケモンを つかまえに いくの?\n"
+	.string "{JPN}がんばってね!$"
 
 LittlerootTown_Text_TownSign:
-	.string "LITTLEROOT TOWN\n"
-	.string "A town that can't be shaded any hue.$"
+	.string "{JPN}ここは ミシロ タウン\n"
+	.string "{JPN}どんな いろにも そまらない まち$"
 
 LittlerootTown_Text_ProfBirchsLab:
-	.string "PROF. BIRCH'S POKEMON LAB$"
+	.string "{JPN}「オダマキ ポケモン けんきゅうじょ」$"
 
 LittlerootTown_Text_PlayersHouse:
-	.string "{PLAYER}'s HOUSE$"
+	.string "{JPN}「{PLAYER}の いえ」$"
 
 LittlerootTown_Text_ProfBirchsHouse:
-	.string "PROF. BIRCH'S HOUSE$"
+	.string "{JPN}「オダマキ はかせの いえ」$"
 
 LittlerootTown_Text_BirchSomethingToShowYouAtLab:
-	.string "PROF. BIRCH: Well, well, {PLAYER}{KUN}!\n"
-	.string "That was good work out there!\p"
-	.string "I knew there was something special\n"
-	.string "about you when I first saw you,\l"
-	.string "but I never expected this.\p"
-	.string "Oh, yes. Do you still have the POKeDEX\n"
-	.string "I gave you?\p"
-	.string "I have something to show you.\n"
-	.string "Let's go to my LAB.$"
+	.string "{JPN}オダマキ『いやー {PLAYER}{KUN}!\n"
+	.string "{JPN}それにしても みごと だったね\p"
+	.string "{JPN}さいしょに きみを みたときから\n"
+	.string "{JPN}ただもの ではないと おもったけど\l"
+	.string "{JPN}まさか これほど とはねえ\p"
+	.string "{JPN}そうそう!\n"
+	.string "{JPN}きみに あげた ポケモンずかん\l"
+	.string "{JPN}まだ もってるよね?\p"
+	.string "{JPN}ちょっと はなしが あるから\n"
+	.string "{JPN}いっしょに けんきゅうじょまで おいで$"
 

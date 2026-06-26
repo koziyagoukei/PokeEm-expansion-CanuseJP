@@ -58,7 +58,7 @@ private:
     bool ConsumeNewline();
     void Newline();
     void SkipWhitespace();
-    std::vector<unsigned char> ConvertString();
+    std::vector<unsigned char> ConvertString(bool autoJpn = false);
     void TryConvertString();
     void TryConvertCompoundString();
     std::unique_ptr<unsigned char[]> ReadWholeFile(const std::string& path, int& size);

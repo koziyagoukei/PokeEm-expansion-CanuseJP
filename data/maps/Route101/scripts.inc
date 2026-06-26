@@ -257,42 +257,41 @@ Route101_Movement_BirchApproachPlayer:
 	step_end
 
 Route101_Text_HelpMe:
-	.string "H-help me!$"
+	.string "{JPN}たっ たすけて くれーっ!!$"
 
 Route101_Text_PleaseHelp:
-	.string "Hello! You over there!\n"
-	.string "Please! Help!\p"
-	.string "In my BAG!\n"
-	.string "There's a POKe BALL!$"
+	.string "{JPN}おーい! そこの きみ!\n"
+	.string "{JPN}たすけて おくれーっ!!\p"
+	.string "{JPN}そこに ある カバンに\n"
+	.string "{JPN}モンスターボールが はいってる!$"
 
 Route101_Text_DontLeaveMe:
-	.string "Wh-Where are you going?!\n"
-	.string "Don't leave me like this!$"
+	.string "{JPN}どっ どこへ いくんだ!?\n"
+	.string "{JPN}わたしを みすてないで おくれーっ!$"
 
 Route101_Text_YouSavedMe:
-	.string "PROF. BIRCH: Whew...\p"
-	.string "I was in the tall grass studying wild\n"
-	.string "POKEMON when I was jumped.\p"
-	.string "You saved me.\n"
-	.string "Thanks a lot!\p"
-	.string "Oh?\p"
-	.string "Hi, you're {PLAYER}{KUN}!\p"
-	.string "This is not the place to chat, so come\n"
-	.string "by my POKEMON LAB later, okay?$"
+	.string "{JPN}オダマキ『はあ はあ……\p"
+	.string "{JPN}やせいの ポケモンを ちょうさ しようと\n"
+	.string "{JPN}くさむらに はいったら\l"
+	.string "{JPN}とつぜん ポケモンに おそわれて……\p"
+	.string "{JPN}とにかく たすかったよ ありがとう!\p"
+	.string "{JPN}……おや?\p"
+	.string "{JPN}きみは {PLAYER}{KUN} じゃないか!\p"
+	.string "{JPN}こんな ところでは なんだから\n"
+	.string "{JPN}ちょっと けんきゅうじょ まで きておくれ$"
 
 Route101_Text_TakeTiredPokemonToPokeCenter:
-	.string "If POKEMON get tired, take them to\n"
-	.string "a POKEMON CENTER.\p"
-	.string "There's a POKEMON CENTER in OLDALE\n"
-	.string "TOWN right close by.$"
+	.string "{JPN}ポケモンが よわってきたら\n"
+	.string "{JPN}ポケモンセンターに いくと いいよ!\p"
+	.string "{JPN}ポケモンセンターなら すぐ ちかく\n"
+	.string "{JPN}コトキタウンに あるからね$"
 
 Route101_Text_WildPokemonInTallGrass:
-	.string "Wild POKEMON will jump out at you in\n"
-	.string "tall grass.\p"
-	.string "If you want to catch POKEMON, you have\n"
-	.string "to go into the tall grass and search.$"
+	.string "{JPN}やせいの ポケモンは\n"
+	.string "{JPN}くさむらから とびだしてくる からな!\p"
+	.string "{JPN}こうして くさむらの なかに はいって\n"
+	.string "{JPN}つかまえたい ポケモンを さがすんだよ!$"
 
 Route101_Text_RouteSign:
-	.string "ROUTE 101\n"
-	.string "{UP_ARROW} OLDALE TOWN$"
-
+	.string "{JPN}ここは 101ばん どうろ\n"
+	.string "{JPN}{UP_ARROW} コトキタウン$"

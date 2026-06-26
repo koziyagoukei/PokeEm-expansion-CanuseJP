@@ -1,237 +1,232 @@
 MoveTutor_Text_ThisMoveCanOnlyBeLearnedOnce:
-	.string "This move can be learned only\n"
-	.string "once. Is that okay?$"
+	.string "{JPN}この わざを おしえて もらえるのは\n"
+	.string "{JPN}いちど だけですが いいですか?$"
 
 MoveTutor_Text_SwaggerTeach:
-	.string "Heh! My POKEMON totally rules!\n"
-	.string "It's cooler than any POKEMON!\p"
-	.string "I was lipping off with a swagger in\n"
-	.string "my step like that when the CHAIRMAN\l"
-	.string "chewed me out.\p"
-	.string "That took the swagger out of my step.\p"
-	.string "If you'd like, I'll teach the move\n"
-	.string "SWAGGER to a POKEMON of yours.$"
+	.string "{JPN}ふふーん\n"
+	.string "{JPN}おれの ポケモンは すごいのさ!\l"
+	.string "{JPN}どの ポケモンよりも かっこいいのさ!\p"
+	.string "{JPN}……って いばってたら\n"
+	.string "{JPN}もう いばらない ことに したから\n"
+	.string "{JPN}かわりに おまえの ポケモンに\l"
+	.string "{JPN}いばる わざを おしえて やってもいいぜ$"
 
 MoveTutor_Text_SwaggerDeclined:
-	.string "What, no? Can't you get into\n"
-	.string "the spirit of things?$"
+	.string "{JPN}えー\n"
+	.string "{JPN}なんだよ つきあい わるいな$"
 
 MoveTutor_Text_SwaggerWhichMon:
-	.string "All right, which POKEMON wants to\n"
-	.string "learn how to SWAGGER?$"
+	.string "{JPN}おう!\n"
+	.string "{JPN}どの ポケモンが いばりたいんだ?$"
 
 MoveTutor_Text_SwaggerTaught:
-	.string "I'll just praise my POKEMON from now\n"
-	.string "on without the swagger.$"
+	.string "{JPN}こんどっから いばる かわりに\n"
+	.string "{JPN}じまん するだけに しておくよ……$"
 
 MoveTutor_Text_RolloutTeach:
-	.string "Did you know that you can go from\n"
-	.string "here a long way in that direction\l"
-	.string "without changing direction?\p"
-	.string "I might even be able to roll\n"
-	.string "that way.\p"
-	.string "Do you think your POKEMON will\n"
-	.string "want to roll, too?\p"
-	.string "I can teach one the move ROLLOUT\n"
-	.string "if you'd like.$"
+	.string "{JPN}ねえ ここから あっちに むかって\n"
+	.string "{JPN}いちども まがらずに ずーっと\l"
+	.string "{JPN}あるいて いけるって しってた?\l"
+	.string "{JPN}ぼく なら ころがって いけるかも……!\p"
+	.string "{JPN}きみの ポケモンも ころがって みる?\n"
+	.string "{JPN}ころがる なら おしえて あげられるよ$"
 
 MoveTutor_Text_RolloutDeclined:
-	.string "You don't need to be shy about it.\n"
-	.string "Let's roll!$"
+	.string "{JPN}えんりょ いらないのに!\n"
+	.string "{JPN}ごろ ごろ$"
 
 MoveTutor_Text_RolloutWhichMon:
-	.string "Ehehe, sure thing! It'd be great if\n"
-	.string "the POKEMON looked like me.$"
+	.string "{JPN}えへへ いいよ!\n"
+	.string "{JPN}ぼく そっくりの ポケモンだと いいな$"
 
 MoveTutor_Text_RolloutTaught:
-	.string "Rolling around in the grass makes me\n"
-	.string "happy. Come on, let's roll!$"
+	.string "{JPN}くさに ねころがると しあわせだなー\n"
+	.string "{JPN}ごろ ごろ$"
 
 MoveTutor_Text_FuryCutterTeach:
-	.string "There's a move that gets stronger\n"
-	.string "when you keep using it in a row.\p"
-	.string "It's a BUG-type move, and it is\n"
-	.string "wickedly cool.\p"
-	.string "It's called FURY CUTTER.\n"
-	.string "Want me to teach it to a POKEMON?$"
+	.string "{JPN}おなじ わざをさ\n"
+	.string "{JPN}つづけて なんども だすと\l"
+	.string "{JPN}どんどん つよくなる わざが あるの!\l"
+	.string "{JPN}しかも むしタイプで かっこいいの!\p"
+	.string "{JPN}れんぞくぎりって いうんだけど\n"
+	.string "{JPN}おぼえて みたい?$"
 
 MoveTutor_Text_FuryCutterDeclined:
-	.string "We're not on the same wavelength.$"
+	.string "{JPN}きが あわないねぇ$"
 
 MoveTutor_Text_FuryCutterWhichMon:
-	.string "Yay!\n"
-	.string "Show me which POKEMON I should teach.$"
+	.string "{JPN}わーい!\n"
+	.string "{JPN}じゃ おぼえさせる ポケモンを おしえてね$"
 
 MoveTutor_Text_FuryCutterTaught:
-	.string "I get a thrill watching to see if\n"
-	.string "the move keeps hitting in succession!$"
+	.string "{JPN}れんぞくして あたるか どうかの\n"
+	.string "{JPN}スリルが たのしいんだよねぇ$"
 
 MoveTutor_MimicTeach:
-	.string "Ah, young one!\p"
-	.string "I am also a young one, but I mimic\n"
-	.string "the styles and speech of the elderly\l"
-	.string "folks of this town.\p"
-	.string "What do you say, young one?\n"
-	.string "Would you agree to it if I were to\l"
-	.string "offer to teach the move MIMIC?$"
+	.string "{JPN}おお おわかいの!\n"
+	.string "{JPN}わしは こども じゃが\l"
+	.string "{JPN}このまちの じいちゃんや ばあちゃんの\l"
+	.string "{JPN}はなしかたを ものまね しておるのじゃ!\p"
+	.string "{JPN}どうかね? おわかいの\n"
+	.string "{JPN}おぬしの ポケモンに わしが\l"
+	.string "{JPN}ものまねを おしえて やろうかね?$"
 
 MoveTutor_MimicDeclined:
-	.string "Oh, boo! I wanted to teach MIMIC\n"
-	.string "to your POKEMON!$"
+	.string "{JPN}ちぇっ なーんだ!\n"
+	.string "{JPN}ボク ものまね おしえたいのにな!$"
 
 MoveTutor_Text_MimicWhichMon:
-	.string "Fwofwo! And so I shall!\n"
-	.string "Let me see the POKEMON\l"
-	.string "you wish me to teach.$"
+	.string "{JPN}ふぉっ ふぉっ! よかろう!\n"
+	.string "{JPN}おしえさせる ポケモンを みせてみぃ$"
 
 MoveTutor_Text_MimicTaught:
-	.string "MIMIC is a move of great depth.\p"
-	.string "Could you execute it to perfection\n"
-	.string "as well as me...?$"
+	.string "{JPN}ものまねは おくの ふかい わざじゃ!\n"
+	.string "{JPN}ボ… わしの ように\l"
+	.string "{JPN}うまく できるかな?$"
 
 MoveTutor_Text_MetronomeTeach:
-	.string "I want all sorts of things!\n"
-	.string "But I used up my allowance...\p"
-	.string "Wouldn't it be nice if there were\n"
-	.string "a spell that made money appear when\l"
-	.string "you waggle a finger?\p"
-	.string "If you want, I can teach your POKEMON\n"
-	.string "the move METRONOME.\p"
-	.string "Money won't appear, but your POKEMON\n"
-	.string "will waggle a finger. Yes?$"
+	.string "{JPN}あーん ほしいものが いっぱい!\n"
+	.string "{JPN}でも おこづかいは なくなっちゃったし……\p"
+	.string "{JPN}ゆびを ふれば まほうで\n"
+	.string "{JPN}おこづかい でてくれば いーのにな!\l"
+	.string "{JPN}なんてね エヘヘ……\p"
+	.string "{JPN}しかたが ないから\n"
+	.string "{JPN}あなたの ポケモンに\l"
+	.string "{JPN}ゆびをふる でも おしえて あげよっか?$"
 
 MoveTutor_Text_MetronomeDeclined:
-	.string "Okay. I'll be here if you change\n"
-	.string "your mind.$"
+	.string "{JPN}そっか\n"
+	.string "{JPN}きが むいたら またおいでよ!$"
 
 MoveTutor_Text_MetronomeWhichMon:
-	.string "Okay! I'll teach it!\n"
-	.string "Which POKEMON should I teach?$"
+	.string "{JPN}うん! じゃ おしえるね\n"
+	.string "{JPN}どのコが いいのかな?$"
 
 MoveTutor_Text_MetronomeTaught:
-	.string "When a POKEMON waggles its finger\n"
-	.string "like a METRONOME, all sorts of nice\l"
-	.string "things happen.\p"
-	.string "Wouldn't it be nice if we could\n"
-	.string "use it, too?$"
+	.string "{JPN}ゆびをふると ステキな ことが\n"
+	.string "{JPN}いっぱい おきるんだよー!\p"
+	.string "{JPN}わたしたちも つかえたら いーのにね!$"
 
 MoveTutor_Text_SleepTalkTeach:
-	.string "Humph! My wife relies on HIDDEN\n"
-	.string "POWER to stay awake.\p"
-	.string "She should just take a nap like I do,\n"
-	.string "and SLEEP TALK.\p"
-	.string "I can teach your POKEMON how to\n"
-	.string "SLEEP TALK instead. Interested?$"
+	.string "{JPN}ふん…… ばあさんめ\n"
+	.string "{JPN}めざめるパワー などに\l"
+	.string "{JPN}たより おって……\p"
+	.string "{JPN}ワシと いっしょに おひるね して\n"
+	.string "{JPN}ねごとでも いってたほうが たのしいのに\p"
+	.string "{JPN}もう あんたの ポケモンでも ええわ\n"
+	.string "{JPN}ねごとを おぼえて つかってみんか?$"
 
 MoveTutor_Text_SleepTalkDeclined:
-	.string "Oh, fine, fine. You want to stay awake\n"
-	.string "with HIDDEN POWER, too...$"
+	.string "{JPN}そうかい そうかい……\n"
+	.string "{JPN}みんな めざめるパワーが だいすきかい$"
 
 MoveTutor_Text_SleepTalkWhichMon:
-	.string "Ah, an appreciative child!\n"
-	.string "Which POKEMON should I teach?$"
+	.string "{JPN}むぉう! ものわかりの いい こどもよ!\n"
+	.string "{JPN}さて ポケモンは どいつが いいかな?$"
 
 MoveTutor_Text_SleepTalkTaught:
-	.string "I've never once gotten my wife's\n"
-	.string "coin trick right.\p"
-	.string "I would be happy if I got it right\n"
-	.string "even as I SLEEP TALK...$"
+	.string "{JPN}ワシ ばあさんの コイン\n"
+	.string "{JPN}いちども あてたことが なくてな……\l"
+	.string "{JPN}ねごとでも ええから あたらんかな$"
 
 MoveTutor_Text_SubstituteTeach:
-	.string "When I see the wide world from up\n"
-	.string "here on the roof...\p"
-	.string "I think about how nice it would be\n"
-	.string "if there were more than just one me\l"
-	.string "so I could enjoy all sorts of lives.\p"
-	.string "Of course it's not possible.\n"
-	.string "Giggle...\p"
-	.string "I know! Would you be interested in\n"
-	.string "having a POKEMON learn SUBSTITUTE?$"
+	.string "{JPN}ふう\n"
+	.string "{JPN}こうやって おくじょうから\l"
+	.string "{JPN}ひろい せかいを みていると……\p"
+	.string "{JPN}なんにんもの じぶんが いて\n"
+	.string "{JPN}いくつもの じんせいを たのしめたらなー\l"
+	.string "{JPN}って おもうの!\l"
+	.string "{JPN}って おもうの!\l"
+	.string "{JPN}そうだわ あなたの ポケモンちゃん!\n"
+	.string "{JPN}みがわりの わざ おぼえてみない?$"
 
 MoveTutor_Text_SubstituteDeclined:
-	.string "Oh, no?\p"
-	.string "A POKEMON can make a copy of\n"
-	.string "itself using it, you know.$"
+	.string "{JPN}あら そう?\n"
+	.string "{JPN}ポケモンなら じぶんの ぶんしんを\l"
+	.string "{JPN}つくる ことが できるのに$"
 
 MoveTutor_Text_SubstituteWhichMon:
-	.string "Giggle...\n"
-	.string "Which POKEMON do you want me to\l"
-	.string "teach SUBSTITUTE?$"
+	.string "{JPN}うふふ\n"
+	.string "{JPN}どの ポケモンちゃんが いいかしら?$"
 
 MoveTutor_Text_SubstituteTaught:
-	.string "We human beings should enjoy our\n"
-	.string "own lives to the utmost!\p"
-	.string "I hope you'll get that way, too!$"
+	.string "{JPN}わたしたち にんげんは\n"
+	.string "{JPN}じぶんの じんせいを\l"
+	.string "{JPN}おもいきり たのしまなきゃ ね!\l"
+	.string "{JPN}あなたも そうなるように いのってる!$"
 
 MoveTutor_Text_DynamicPunchTeach:
-	.string "I can't do this anymore!\p"
-	.string "It's utterly hopeless!\p"
-	.string "I'm a FIGHTING-type TRAINER,\n"
-	.string "so I can't win at the MOSSDEEP GYM\l"
-	.string "no matter how hard I try!\p"
-	.string "Argh! Punch! Punch! Punch!\n"
-	.string "Punch! Punch! Punch!\p"
-	.string "What, don't look at me that way!\n"
-	.string "I'm only hitting the ground!\p"
-	.string "Or do you want me to teach your\n"
-	.string "POKEMON DYNAMICPUNCH?$"
+	.string "{JPN}もう できんわ!\p"
+	.string "{JPN}ぜったい ムリだわ!\p"
+	.string "{JPN}かくとうタイプの オレは\n"
+	.string "{JPN}トクサネの ジムでは\l"
+	.string "{JPN}ぜんぜん かてんわ!\p"
+	.string "{JPN}ちきしょーっ! ボカ ボカ!\n"
+	.string "{JPN}ボカ ボカ! ボカ ボカ!\p"
+	.string "{JPN}なんだよ\n"
+	.string "{JPN}じめんを なぐってる だけだろ!\p"
+	.string "{JPN}それとも おまえの ポケモンに\n"
+	.string "{JPN}ばくれつパンチを おしえて ほしいのかよ?$"
 
 MoveTutor_Text_DynamicPunchDeclined:
-	.string "Darn! You're even making fun of me?\n"
-	.string "Punch! Punch! Punch!$"
+	.string "{JPN}ちきしょー おまえまで\n"
+	.string "{JPN}オレを ばかに するかっ!?\l"
+	.string "{JPN}ボカ ボカ!$"
 
 MoveTutor_Text_DynamicPunchWhichMon:
-	.string "What? You do? You're a good person!\n"
-	.string "Which POKEMON should I teach?$"
+	.string "{JPN}うぉー! ほんとか! いいやつだな!\n"
+	.string "{JPN}どのポケモンに おしえれば いい?$"
 
 MoveTutor_Text_DynamicPunchTaught:
-	.string "I want you to win at the MOSSDEEP GYM\n"
-	.string "using that DYNAMICPUNCH!$"
+	.string "{JPN}なあ ばくれつパンチ つかって\n"
+	.string "{JPN}トクサネジムで かって きてくれよ!$"
 
 MoveTutor_Text_DoubleEdgeTeach:
-	.string "Sigh...\p"
-	.string "SOOTOPOLIS's GYM LEADER is really\n"
-	.string "lovably admirable.\p"
-	.string "But that also means I have many\n"
-	.string "rivals for his attention.\p"
-	.string "He's got appeal with a DOUBLE-EDGE.\n"
-	.string "I couldn't even catch his eye.\p"
-	.string "Please, let me teach your POKEMON\n"
-	.string "the move DOUBLE-EDGE!$"
+	.string "{JPN}あーあ\n"
+	.string "{JPN}ルネシティの ジムリーダーって\l"
+	.string "{JPN}すっごく すてきだから\l"
+	.string "{JPN}ライバルが いっぱい なのよねー\p"
+	.string "{JPN}この あたしが すてみで ぶつかっても\n"
+	.string "{JPN}ダメだったわ!\p"
+	.string "{JPN}ねえ あなた!\n"
+	.string "{JPN}じきでんの すてみタックル!\l"
+	.string "{JPN}あなたの ポケモンに おしえさせてよ!$"
 
 MoveTutor_Text_DoubleEdgeDeclined:
-	.string "Oh...\n"
-	.string "Even you rejected me...$"
+	.string "{JPN}うん もう!\n"
+	.string "{JPN}あなたに まで ふられちゃったわ$"
 
 MoveTutor_Text_DoubleEdgeWhichMon:
-	.string "Okay, which POKEMON should I teach\n"
-	.string "DOUBLE-EDGE?$"
+	.string "{JPN}ん じゃあ\n"
+	.string "{JPN}どの ポケモンが いいか きめてよ$"
 
 MoveTutor_Text_DoubleEdgeTaught:
-	.string "I won't live for love anymore!\n"
-	.string "I'll become tough!$"
+	.string "{JPN}もう いいわっ!\n"
+	.string "{JPN}あたしも こいを すてて\l"
+	.string "{JPN}つよい オンナに なってやるっ!$"
 
 MoveTutor_Text_ExplosionTeach:
-	.string "I don't intend to be going nowhere\n"
-	.string "fast in the sticks like this forever.\p"
-	.string "You watch me, I'll get out to the city\n"
-	.string "and become a huge hit.\p"
-	.string "Seriously, I'm going to cause\n"
-	.string "a huge EXPLOSION of popularity!\p"
-	.string "If you overheard that, I'll happily\n"
-	.string "teach EXPLOSION to your POKEMON!$"
+	.string "{JPN}ぼかぁ こんな イナカで\n"
+	.string "{JPN}いつまでも くすぶっとる つもりは\l"
+	.string "{JPN}まったく ないんじゃあー!\p"
+	.string "{JPN}みとれよ いつか トカイに でて\n"
+	.string "{JPN}ドッカーンと はでに やって やるわい!\p"
+	.string "{JPN}おいっ! おまえ きいとったん なら\n"
+	.string "{JPN}けいきよく だいばくはつを おしえさせろ!$"
 
 MoveTutor_Text_ExplosionDeclined:
-	.string "Gaah! You're turning me down because\n"
-	.string "I live in the country?$"
+	.string "{JPN}がーっ!\n"
+	.string "{JPN}イナカもん だからって ことわるなあ!$"
 
 MoveTutor_Text_ExplosionWhichMon:
-	.string "Fine! An EXPLOSION it is!\n"
-	.string "Which POKEMON wants to blow up?$"
+	.string "{JPN}ぃよーし ドッカーンと おぼえさせるか!\n"
+	.string "{JPN}どの ポケモンが ぶちかますんか?$"
 
 MoveTutor_Text_ExplosionTaught:
-	.string "For a long time, I've taught POKEMON\n"
-	.string "how to use EXPLOSION, but I've yet\l"
-	.string "to ignite my own EXPLOSION...\p"
-	.string "Maybe it's because deep down,\n"
-	.string "I would rather stay here...$"
+	.string "{JPN}いつも ポケモンに ばっか\n"
+	.string "{JPN}だいばくはつを おしえとって\l"
+	.string "{JPN}かんじんの ぼくは いつまでも\l"
+	.string "{JPN}ばくはつ できん……\p"
+	.string "{JPN}でも ほんとは\n"
+	.string "{JPN}このまちに いつまでも いたいから\l"
+	.string "{JPN}かも しれん……$"

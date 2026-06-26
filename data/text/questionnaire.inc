@@ -1,43 +1,46 @@
 Questionnaire_Text_FillOut::
-	.string "There is a questionnaire.\n"
-	.string "Would you like to fill it out?$"
+	.string "{JPN}アンケートようの メモようしが ある\n"
+	.string "{JPN}アンケートに なにか かきますか?$"
 
 Questionnaire_Text_ThankYou::
-	.string "Thank you for taking the time to\n"
-	.string "fill out our questionnaire.\p"
-	.string "Your feedback will be used for\n"
-	.string "future reference.$"
+	.string "{JPN}アンケートに ごきょうりょく\n"
+	.string "{JPN}いただき ありがとう ございます!\p"
+	.string "{JPN}この アンケートは こんごの\n"
+	.string "{JPN}さんこうに させて いただきます!$"
 
 Questionnaire_Text_YouKnowThoseWordsGift::
-	.string "Oh, hello!\n"
-	.string "You know those words?\p"
-	.string "That means you must know about\n"
-	.string "the MYSTERY GIFT.\p"
-	.string "From now on, you should be\n"
-	.string "receiving MYSTERY GIFTS!$"
+	.string "{JPN}…… おきゃくさま!\n"
+	.string "{JPN}そのことばを しってるの ですか!\p"
+	.string "{JPN}ということは ふしぎなおくりもの を\n"
+	.string "{JPN}しって いらっしゃるの ですね!\p"
+	.string "{JPN}これからは あなたにも\n"
+	.string "{JPN}ふしぎなおくりもの が\l"
+	.string "{JPN}とどくように なるでしょう!$"
 
 Questionnaire_Text_YouCanAccessMysteryGift::
-	.string "Once you save your game, you can\n"
-	.string "access the MYSTERY GIFT.$"
+	.string "{JPN}レポートをかくと ふしぎなおくりもの が\n"
+	.string "{JPN}つかえるように なります$"
 
 Questionnaire_Text_YouKnowThoseWordsEvent::
-	.string "Oh, hello!\n"
-	.string "You know those words?\p"
-	.string "That means you must know about\n"
-	.string "the MYSTERY EVENT.$"
+	.string "{JPN}…… おきゃくさま!\n"
+	.string "{JPN}そのことばを しってるの ですか!\p"
+	.string "{JPN}ということは ふしぎなできごと を\n"
+	.string "{JPN}しって いらっしゃるの ですね!$"
 
 Questionnaire_Text_YouCanAccessMysteryEvent::
-	.string "Once you save your game, you can\n"
-	.string "access the MYSTERY EVENT.$"
+	.string "{JPN}レポートをかくと ふしぎなできごと が\n"
+	.string "{JPN}つかえるように なります$"
 
 MysteryGift_Text_TheresATicketForYou::
-	.string "Thank you for using the MYSTERY\n"
-	.string "EVENT System.\p"
-	.string "You must be {PLAYER}.\n"
-	.string "There is a ticket here for you.$"
+	.string "{JPN}ふしぎなできごと を ごりよう\n"
+	.string "{JPN}いただき ありがとう ございます!\l"
+	.string "{JPN}{PLAYER}さま ですね\p"
+	.string "{JPN}あなたさま あてに\n"
+	.string "{JPN}この チケットが\l"
+	.string "{JPN}おくられて きました$"
 
 MysteryGift_Text_TryUsingItAtLilycovePort::
-	.string "It appears to be for use at\n"
-	.string "the LILYCOVE CITY port.\p"
-	.string "Why not give it a try and see what\n"
-	.string "it is about?$"
+	.string "{JPN}ミナモシティの ふなつきば で\n"
+	.string "{JPN}つかえる ようですね\p"
+	.string "{JPN}ぜひ ごりよう してみては\n"
+	.string "{JPN}いかがでしょうか?$"

@@ -29,7 +29,7 @@ class StringParser
 {
 public:
     StringParser(char* buffer, long size) : m_buffer(buffer), m_size(size), m_pos(0) {}
-    int ParseString(long srcPos, unsigned char* dest, int &destLength);
+    int ParseString(long srcPos, unsigned char* dest, int &destLength, bool autoJpn = false);
 
 private:
     struct Integer
@@ -50,6 +50,18 @@ private:
     void SkipWhitespace();
     void SkipRestOfInteger(int radix);
     void RaiseError(const char* format, ...);
+    enum AutoTextMode
+    {
+        AutoTextMode_None,
+        AutoTextMode_Jpn,
+        AutoTextMode_Eng,
+    };
+
+    bool m_autoJpn = false;
+    AutoTextMode m_autoMode = AutoTextMode_None;
+
+    std::string GetAutoModePrefix(std::int32_t code, bool isEscape);
+    void NoticeBracketedConstant(const std::string& ident);
 };
 
 #endif // STRING_PARSER_H

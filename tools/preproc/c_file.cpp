@@ -264,7 +264,7 @@ void CFile::SkipWhitespace()
         ;
 }
 
-std::vector<unsigned char> CFile::ConvertString()
+std::vector<unsigned char> CFile::ConvertString(bool autoJpn)
 {
     std::vector<unsigned char> converted;
 
@@ -279,7 +279,7 @@ std::vector<unsigned char> CFile::ConvertString()
             StringParser stringParser(m_buffer, m_size);
             try
             {
-                m_pos += stringParser.ParseString(m_pos, s, length);
+                m_pos += stringParser.ParseString(m_pos, s, length, autoJpn);
             }
             catch (std::runtime_error& e)
             {
@@ -312,10 +312,36 @@ void CFile::TryConvertString()
     auto oldLocation = m_location;
     bool noTerminator = false;
 
-    if (m_buffer[m_pos] != '_' || (m_pos > 0 && IsIdentifierChar(m_buffer[m_pos - 1])))
+    bool autoJpn = false;
+
+    if (m_pos > 0 && IsIdentifierChar(m_buffer[m_pos - 1]))
         return;
 
-    m_pos++;
+    if (m_buffer[m_pos] == '_')
+    {
+        m_pos++;
+
+        if (m_buffer[m_pos] == '_')
+        {
+            noTerminator = true;
+            m_pos++;
+        }
+    }
+    else if (m_buffer[m_pos] == 'J' && m_buffer[m_pos + 1] == '_')
+    {
+        autoJpn = true;
+        m_pos += 2;
+
+        if (m_buffer[m_pos] == '_')
+        {
+            noTerminator = true;
+            m_pos++;
+        }
+    }
+    else
+    {
+        return;
+    }
 
     if (m_buffer[m_pos] == '_')
     {
@@ -338,7 +364,7 @@ void CFile::TryConvertString()
 
     printf("{ ");
 
-    std::vector<unsigned char> converted = ConvertString();
+    std::vector<unsigned char> converted = ConvertString(autoJpn);
     for (std::size_t i = 0; i < converted.size(); i++)
         printf("0x%02X, ", converted[i]);
 
@@ -360,10 +386,21 @@ void CFile::TryConvertCompoundString()
 {
     long oldPos = m_pos;
     auto oldLocation = m_location;
+    bool autoJpn = false;
     std::string ident = "COMPOUND_STRING";
 
-    if ((m_pos > 0 && IsIdentifierChar(m_buffer[m_pos - 1])) || !CheckIdentifier(ident))
+    if (m_pos > 0 && IsIdentifierChar(m_buffer[m_pos - 1]))
         return;
+
+    if (CheckIdentifier("J_COMPOUND_STRING"))
+    {
+        ident = "J_COMPOUND_STRING";
+        autoJpn = true;
+    }
+    else if (!CheckIdentifier("COMPOUND_STRING"))
+    {
+        return;
+    }
 
     m_pos += ident.length();
 
@@ -377,7 +414,7 @@ void CFile::TryConvertCompoundString()
     }
 
     m_pos++;
-    std::vector<unsigned char> converted = ConvertString();
+    std::vector<unsigned char> converted = ConvertString(autoJpn);
     converted.push_back(0xFF);
 
     std::uint64_t hash = fnv1a(converted);

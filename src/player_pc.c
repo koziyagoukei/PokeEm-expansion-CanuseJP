@@ -168,30 +168,30 @@ static EWRAM_DATA u8 sTopMenuNumOptions = 0;
 EWRAM_DATA struct PlayerPCItemPageStruct gPlayerPCItemPageInfo = {};
 static EWRAM_DATA struct ItemStorageMenu *sItemStorageMenu = NULL;
 
-static const u8 sText_WithdrawItem[] = _("どうぐをひきだす");
-static const u8 sText_DepositItem[] = _("どうぐをあずける");
-static const u8 sText_TossItem[] = _("どうぐをすてる");
-static const u8 sText_Mailbox[] = _("メールボックス");
+static const u8 sText_WithdrawItem[] = _("{JPN}どうぐを ひきだす");
+static const u8 sText_DepositItem[] = _("{JPN}どうぐを あずける");
+static const u8 sText_TossItem[] = _("{JPN}どうぐを すてる");
+static const u8 sText_Mailbox[] = _("{JPN}メールボックス");
 
-static const u8 sText_WithdrawHowManyItems[] = _("{STR_VAR_1}を\nいくつ ひきだしますか？");
-static const u8 sText_WithdrawXItems[] = _("{STR_VAR_1}を\n{STR_VAR_2}こ ひきだした。");
-static const u8 sText_NoRoomInBag[] = _("バッグに\nあきが ありません。");
-static const u8 sText_TooImportantToToss[] = _("だいじな ものなので\nすてられません！");
+static const u8 sText_WithdrawHowManyItems[] = _("{JPN}{STR_VAR_1}を\nいくつ ひきだしますか?");
+static const u8 sText_WithdrawXItems[] = _("{JPN}{STR_VAR_1}を\n{STR_VAR_2}コ ひきだしました");
+static const u8 sText_NoRoomInBag[] = _("{JPN}これいじょう\nバッグに はいりません");
+static const u8 sText_TooImportantToToss[] = _("{JPN}これは とても\nたいせつなモノ なので\nすてられません!");
 
 static const u8 *const sItemStorage_OptionDescriptions[] =
 {
-    [MENU_WITHDRAW] = COMPOUND_STRING("PCから どうぐを ひきだします。"),
-    [MENU_DEPOSIT]  = COMPOUND_STRING("PCに どうぐを あずけます。"),
-    [MENU_TOSS]     = COMPOUND_STRING("PCの どうぐを すてます。"),
+    [MENU_WITHDRAW] = COMPOUND_STRING("{JPN}パソコン から\nどうぐを ひきだします"),
+    [MENU_DEPOSIT]  = COMPOUND_STRING("{JPN}パソコン に\nどうぐを あずけます"),
+    [MENU_TOSS]     = COMPOUND_STRING("{JPN}パソコン に あずけている\nどうぐを すてます"),
     [MENU_EXIT]     = gText_GoBackPrevMenu,
 };
 
 static const struct MenuAction sPlayerPCMenuActions[] =
 {
-    [MENU_ITEMSTORAGE] = { COMPOUND_STRING("どうぐあずかり"), {PlayerPC_ItemStorage} },
+    [MENU_ITEMSTORAGE] = { COMPOUND_STRING("{JPN}どうぐ あずかり"), {PlayerPC_ItemStorage} },
     [MENU_MAILBOX]     = { sText_Mailbox,                   {PlayerPC_Mailbox} },
-    [MENU_DECORATION]  = { COMPOUND_STRING("もようがえ"),     {PlayerPC_Decoration} },
-    [MENU_TURNOFF]     = { COMPOUND_STRING("やめる"),         {PlayerPC_TurnOff} }
+    [MENU_DECORATION]  = { COMPOUND_STRING("{JPN}もようがえ"),     {PlayerPC_Decoration} },
+    [MENU_TURNOFF]     = { COMPOUND_STRING("{JPN}せつぞくを きる"),         {PlayerPC_TurnOff} }
 };
 
 static const u8 sBedroomPC_OptionOrder[] =
@@ -227,9 +227,9 @@ static const u16 sNewGamePCItems[][2] =
 
 const struct MenuAction gMailboxMailOptions[] =
 {
-    { COMPOUND_STRING("よむ"),        {Mailbox_DoMailRead} },
-    { COMPOUND_STRING("バッグへ"),    {Mailbox_MoveToBag} },
-    { COMPOUND_STRING("もたせる"),    {Mailbox_Give} },
+    { COMPOUND_STRING("{JPN}ないようを よむ"),        {Mailbox_DoMailRead} },
+    { COMPOUND_STRING("{JPN}バッグに もどす"),    {Mailbox_MoveToBag} },
+    { COMPOUND_STRING("{JPN}ポケモンに もたせる"),    {Mailbox_Give} },
     { gText_Cancel2,                  {Mailbox_Cancel} }
 };
 
