@@ -5,7 +5,6 @@ gText_Birch_Welcome::
 	.string "{JPN}わたしの なまえは オダマキ!\p"
 	.string "{JPN}でも みんな からは\n"
 	.string "{JPN}「ポケモンはかせ」と よばれて いるよ!\p"
-	.string "{JPN}いやー おまたせ おまたせ!\p$"
 
 gText_Birch_Pokemon::
 	.string "{JPN}ポケットモンスター\n"
