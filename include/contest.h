@@ -285,6 +285,38 @@ struct ContestUnused
     u8 filler[12];
 };
 
+enum ContestGimmick
+{
+    CONTEST_GIMMICK_NONE,
+    CONTEST_GIMMICK_MEGA,
+    CONTEST_GIMMICK_ULTRA_BURST,
+    CONTEST_GIMMICK_Z_APPEAL,
+    CONTEST_GIMMICK_TERA,
+    CONTEST_GIMMICK_DYNAMAX,
+    CONTEST_GIMMICK_COUNT,
+};
+
+struct ContestGimmickStatus
+{
+    enum ContestGimmick selected;
+    enum ContestGimmick moveGimmick;
+    enum ContestGimmick usedGimmick;
+    enum Species originalSpecies;
+    u16 heldItem;
+    s16 extraAppeal;
+    enum Type teraType;
+    u8 dynamaxLevel;
+    u8 dynamaxTurns;
+    bool8 gmaxFactor:1;
+    bool8 megaActive:1;
+    bool8 ultraActive:1;
+    bool8 teraActive:1;
+    bool8 gigantamaxActive:1;
+    bool8 zUsed:1;
+    bool8 stellarBoostUsed:1;
+    bool8 jammedSinceLastAppeal:1;
+};
+
 struct ContestResources
 {
     struct Contest *contest;
@@ -292,6 +324,7 @@ struct ContestResources
     struct ContestAppealMoveResults *appealResults;
     struct ContestAIInfo *aiData;
     struct ContestExcitement *excitement;
+    struct ContestGimmickStatus *gimmickStatus;
     struct ContestGraphicsState *gfxState;
     struct ContestMoveAnimData *moveAnim;
     struct ContestTV *tv;
@@ -319,6 +352,7 @@ extern const struct ContestCategory gContestCategoryInfo[CONTEST_CATEGORIES_COUN
 #define eContestAppealResults (*gContestResources->appealResults)
 #define eContestAI (*gContestResources->aiData)
 #define eContestExcitement (*gContestResources->excitement)
+#define eContestGimmickStatus (gContestResources->gimmickStatus)
 #define eContestGfxState (gContestResources->gfxState)
 #define eUnzippedContestAudience_Gfx (gHeap + 0x18000)
 #define eContestAudienceFrame2_Gfx (gHeap + 0x19000)
@@ -364,6 +398,7 @@ void SetContestantEffectStringID2(u8 contestant, u8 effectStringId);
 void SetStartledString(u8 contestant, u8 jam);
 void MakeContestantNervous(u8 p);
 s8 Contest_GetMoveExcitement(enum Move move);
+void ContestGimmick_RecordJammed(u8 contestant, u8 jam);
 bool8 IsContestantAllowedToCombo(u8 contestant);
 void Contest_PrintTextToBg0WindowAt(u32 windowId, u8 *currChar, s32 x, s32 y, s32 fontId);
 void ResetContestLinkResults(void);

@@ -1069,6 +1069,7 @@ static void JamContestant(u8 i, u8 jam)
 {
     eContestantStatus[i].appeal -= jam;
     eContestantStatus[i].jam += jam;
+    ContestGimmick_RecordJammed(i, jam);
 }
 
 static s16 RoundTowardsZero(s16 score)

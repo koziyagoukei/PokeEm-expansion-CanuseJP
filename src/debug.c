@@ -236,7 +236,7 @@ struct DebugMenuListData
 {
     const struct DebugMenuOption *subMenuItems[DEBUG_MAX_SUB_MENU_LEVELS];
     struct ListMenuItem listItems[DEBUG_MAX_MENU_ITEMS + 1];
-    u8 itemNames[DEBUG_MAX_MENU_ITEMS + 1][26];
+    u8 itemNames[DEBUG_MAX_MENU_ITEMS + 1][64];
     enum DebugMenuTypes menuType:2;
     u32 padding:30;
     s16 data[8];
@@ -1335,16 +1335,25 @@ static u32 Debug_GenerateListFlagsMenu(const struct DebugMenuOption *items)
 static void DebugTask_HandleMenuInput_General(u8 taskId)
 {
     const struct DebugMenuOption *options = Debug_GetCurrentCallbackMenu();
-    u32 input = ListMenu_ProcessInput(gTasks[taskId].tMenuTaskId);
-    struct DebugMenuOption option = options[input];
+    s32 input = ListMenu_ProcessInput(gTasks[taskId].tMenuTaskId);
 
     if (JOY_NEW(A_BUTTON))
     {
+        struct DebugMenuOption option;
+
+        if (options == NULL)
+            return;
+
+        if (input == LIST_NOTHING_CHOSEN || input == LIST_CANCEL)
+            return;
+
+        option = options[input];
+
         PlaySE(SE_SELECT);
         if (option.action != NULL)
         {
-            if (option.actionParams  != NULL)
-                 ((DebugFuncWithParams)option.action)(taskId, option.actionParams);
+            if (option.actionParams != NULL)
+                ((DebugFuncWithParams)option.action)(taskId, option.actionParams);
             else
                 ((DebugFunc)option.action)(taskId);
         }
@@ -2201,11 +2210,15 @@ static void Debug_Display_FlagInfo(u32 flag, u32 digit, u8 windowId)
 {
     ConvertIntToDecimalStringN(gStringVar1, flag, STR_CONV_MODE_LEADING_ZEROS, DEBUG_NUMBER_DIGITS_FLAGS);
     ConvertIntToHexStringN(gStringVar2, flag, STR_CONV_MODE_LEFT_ALIGN, 3);
-    StringExpandPlaceholders(gStringVar1, COMPOUND_STRING("{JPN}{STR_VAR_1}{CLEAR_TO 90}\n0x{STR_VAR_2}{CLEAR_TO 90}"));
+
+    StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("{JPN}{STR_VAR_1}{CLEAR_TO 90}\n0x{STR_VAR_2}{CLEAR_TO 90}"));
+    StringCopy(gStringVar1, gStringVar4);
+
     if (FlagGet(flag))
         StringCopyPadded(gStringVar2, sDebugText_True, CHAR_SPACE, 15);
     else
         StringCopyPadded(gStringVar2, sDebugText_False, CHAR_SPACE, 15);
+
     StringCopy(gStringVar3, gText_DigitIndicator[digit]);
     StringExpandPlaceholders(gStringVar4, COMPOUND_STRING("{JPN}フラグ{ENG}: {STR_VAR_1}{CLEAR_TO 90}\n{JPN}{STR_VAR_2}{CLEAR_TO 90}\n{ENG}{STR_VAR_3}"));
     AddTextPrinterParameterized(windowId, DEBUG_MENU_FONT, gStringVar4, 0, 0, 0, NULL);
@@ -2376,7 +2389,8 @@ static void DebugAction_FlagsVars_SetValue(u8 taskId)
     if (JOY_NEW(A_BUTTON))
     {
         PlaySE(SE_SELECT);
-        VarSet(gTasks[taskId].tInput, gTasks[taskId].data[6]);
+        if (VarGetIfExist(gTasks[taskId].tInput) != 0xFFFF)
+            VarSet(gTasks[taskId].tInput, gTasks[taskId].data[6]);
     }
     else if (JOY_NEW(B_BUTTON))
     {
