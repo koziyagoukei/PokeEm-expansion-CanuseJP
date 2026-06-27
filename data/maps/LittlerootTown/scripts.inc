@@ -926,6 +926,7 @@ LittlerootTown_Text_WearTheseRunningShoes:
 	.string "{JPN}オダマキはかせ に いただいたのね\p"
 	.string "{JPN}やっぱり パパの こども なのね……\n"
 	.string "{JPN}ポケモンと いっしょに いるのが\l"
+	.string "{JPN}さまに なっているわよ!\p"
 	.string "{JPN}ほらっ! ぼうけんに でるなら\n"
 	.string "{JPN}ランニングシューズを はくと いいわ!\p"
 	.string "{JPN}いろんな ところ\n"

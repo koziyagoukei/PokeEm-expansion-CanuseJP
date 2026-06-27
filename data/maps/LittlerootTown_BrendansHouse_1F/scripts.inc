@@ -306,7 +306,7 @@ PlayersHouse_1F_Text_GoSetTheClock:
 	.string "{JPN}おへやの とけい あわせてきて$"
 
 PlayersHouse_1F_Text_OhComeQuickly:
-	.string "{JPN}ママ『……あ! {PLAYER}, {PLAYER}!\n"
+	.string "{JPN}ママ『……あ! {PLAYER}! {PLAYER}!\n"
 	.string "{JPN}はやく こっちに いらっしゃい!$"
 
 PlayersHouse_1F_Text_MaybeDadWillBeOn:

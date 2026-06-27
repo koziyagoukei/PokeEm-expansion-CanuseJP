@@ -86,7 +86,9 @@ static bool32 IsJapaneseGlyph(u16 glyphId)
     {
     case EOS:
     case CHAR_SPACE:
+#if CHAR_SPACER != CHAR_SPACE
     case CHAR_SPACER:
+#endif
     case CHAR_NEWLINE:
     case CHAR_PROMPT_SCROLL:
     case CHAR_PROMPT_CLEAR:

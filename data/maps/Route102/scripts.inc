@@ -74,36 +74,22 @@ Route102_EventScript_Allen::
 	end
 
 Route102_Text_WatchMeCatchPokemon:
-	.string "WALLY: {PLAYER}...\n"
-	.string "POKEMON hide in tall grass like this,\l"
-	.string "don't they?\p"
-	.string "Please watch me and see if I can\n"
-	.string "catch one properly.\p"
-	.string "...Whoa!$"
+	.string "{JPN}ミツル『{PLAYER}さん……\nポケモンって こういう くさむらに\lいたり するんでしょ……?\pぼくが じょうずに　つかまえられるか\nそこで みてて くださいね……\p……うわっ!!$"
 
 Route102_Text_WallyIDidIt:
-	.string "WALLY: I did it... It's my...\n"
-	.string "My POKEMON!$"
+	.string "{JPN}ミツル『やった…… ぼくの……\nぼくの ポケモンだ……!!$"
 
 Route102_Text_LetsGoBack:
-	.string "{PLAYER}, thank you!\n"
-	.string "Let's go back to the GYM!$"
+	.string "{JPN}{PLAYER}さん ありがとう!\nジムに もどろうよ!$"
 
 Route102_Text_ImNotVeryTall:
-	.string "I'm...not very tall, so I sink right\n"
-	.string "into tall grass.\p"
-	.string "The grass goes up my nose and...\n"
-	.string "Fwafwafwafwafwa...\p"
-	.string "Fwatchoo!$"
+	.string "{JPN}ぼく…… せが ひくいから\nくさむらを あるくと もぐっちゃうんだ\pハッパが はなの あなに はいって\nふぁ　ふぁ ふぁ ふぁ……\pぶわっくしょーん!$"
 
 Route102_Text_CatchWholeBunchOfPokemon:
-	.string "I'm going to catch a whole bunch of\n"
-	.string "POKEMON!$"
+	.string "{JPN}ポケモン たくさん つかまえよーっと!$"
 
 Route102_Text_RouteSignOldale:
-	.string "ROUTE 102\n"
-	.string "{RIGHT_ARROW} OLDALE TOWN$"
+	.string "{JPN}ここは 102ばん どうろ\n{RIGHT_ARROW} コトキタウン$"
 
 Route102_Text_RouteSignPetalburg:
-	.string "ROUTE 102\n"
-	.string "{LEFT_ARROW} PETALBURG CITY$"
+	.string "{JPN}ここは 102ばん どうろ\n{LEFT_ARROW} トウカシティ$"

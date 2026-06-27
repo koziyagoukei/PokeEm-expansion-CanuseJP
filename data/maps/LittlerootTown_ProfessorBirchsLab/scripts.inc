@@ -657,7 +657,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_ScottAboardSSTidalCall::
 	end
 
 LittlerootTown_ProfessorBirchsLab_Text_BirchAwayOnFieldwork:
-	.string "{JPN}? オダマキはかせ?\p"
+	.string "{JPN}え? オダマキはかせ?\p"
 	.string "{JPN}はかせ なら フィールドワークに\n"
 	.string "{JPN}でかけていて いませんよ\p"
 	.string "{JPN}……あ フィールドワークって いうのは\p"
