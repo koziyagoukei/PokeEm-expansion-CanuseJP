@@ -3569,6 +3569,36 @@ bool32 GetAbnormalWeatherMapNameAndType(void)
         return TRUE;
 }
 
+bool32 IsCurrentMapAbnormalWeatherLocation(void)
+{
+    static const u8 sAbnormalWeatherMapNumbers[] =
+    {
+        MAP_NUM(MAP_ROUTE114),
+        MAP_NUM(MAP_ROUTE114),
+        MAP_NUM(MAP_ROUTE115),
+        MAP_NUM(MAP_ROUTE115),
+        MAP_NUM(MAP_ROUTE116),
+        MAP_NUM(MAP_ROUTE116),
+        MAP_NUM(MAP_ROUTE118),
+        MAP_NUM(MAP_ROUTE118),
+        MAP_NUM(MAP_ROUTE105),
+        MAP_NUM(MAP_ROUTE105),
+        MAP_NUM(MAP_ROUTE125),
+        MAP_NUM(MAP_ROUTE125),
+        MAP_NUM(MAP_ROUTE127),
+        MAP_NUM(MAP_ROUTE127),
+        MAP_NUM(MAP_ROUTE129),
+        MAP_NUM(MAP_ROUTE129)
+    };
+    u16 abnormalWeather = VarGet(VAR_ABNORMAL_WEATHER_LOCATION);
+
+    if (abnormalWeather == ABNORMAL_WEATHER_NONE || abnormalWeather > ABNORMAL_WEATHER_LOCATIONS)
+        return FALSE;
+
+    return gSaveBlock1Ptr->location.mapGroup == 0
+        && gSaveBlock1Ptr->location.mapNum == sAbnormalWeatherMapNumbers[abnormalWeather - 1];
+}
+
 bool8 AbnormalWeatherHasExpired(void)
 {
     // Duplicate array.

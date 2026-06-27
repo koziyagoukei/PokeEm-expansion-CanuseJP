@@ -6,6 +6,7 @@
 #include "wild_encounter_ow.h"
 
 #define HEADER_NONE 0xFFFF
+#define WILD_WEATHER_ENCOUNTER_TERMINATOR 0xFF
 
 enum WildPokemonArea {
     WILD_AREA_LAND,
@@ -37,11 +38,18 @@ struct WildEncounterTypes
     const struct WildPokemonInfo *hiddenMonsInfo;
 };
 
+struct WildWeatherEncounterTypes
+{
+    u8 weather;
+    const struct WildEncounterTypes encounterTypes[TIMES_OF_DAY_COUNT];
+};
+
 struct WildPokemonHeader
 {
     u8 mapGroup;
     u8 mapNum;
     const struct WildEncounterTypes encounterTypes[TIMES_OF_DAY_COUNT];
+    const struct WildWeatherEncounterTypes *weatherEncounterTypes;
 };
 
 
@@ -80,5 +88,6 @@ u32 ChooseWildMonIndex_Rocks(void);
 u32 ChooseHiddenMonIndex(void);
 bool32 MapHasNoEncounterData(void);
 enum TimeOfDay GetTimeOfDayForEncounters(u32 headerId, enum WildPokemonArea area);
+const struct WildPokemonInfo *GetWildMonInfoForArea(u32 headerId, enum WildPokemonArea area);
 
 #endif // GUARD_WILD_ENCOUNTER_H

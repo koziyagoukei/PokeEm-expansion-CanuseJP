@@ -2,6 +2,7 @@
 #include "battle_anim.h"
 #include "event_object_movement.h"
 #include "fieldmap.h"
+#include "field_specials.h"
 #include "field_weather.h"
 #include "overworld.h"
 #include "random.h"
@@ -18,6 +19,11 @@
 #include "palette.h"
 
 EWRAM_DATA static u8 sCurrentAbnormalWeather = 0;
+EWRAM_DATA static bool8 sRandomFrontierWeatherActive = FALSE;
+EWRAM_DATA static u8 sRandomFrontierLogicalWeather = WEATHER_NONE;
+EWRAM_DATA static u8 sRandomFrontierVisualWeather = WEATHER_NONE;
+EWRAM_DATA static u8 sRandomFrontierMapGroup = 0;
+EWRAM_DATA static u8 sRandomFrontierMapNum = 0;
 
 const u16 gCloudsWeatherPalette[] = INCGFX_U16("graphics/weather/cloud.png", ".gbapal");
 const u16 gSandstormWeatherPalette[] = INCGFX_U16("graphics/weather/sandstorm.png", ".gbapal");
@@ -2511,6 +2517,7 @@ static void CreateAbnormalWeatherTask(void)
 static u8 TranslateWeatherNum(u8);
 static void UpdateRainCounter(u8, u8);
 static u8 GetDynamicWeather(void);
+static u8 GetRandomFrontierWeather(void);
 
 void SetSavedWeather(u32 weather)
 {
@@ -2522,6 +2529,108 @@ void SetSavedWeather(u32 weather)
 u8 GetSavedWeather(void)
 {
     return gSaveBlock1Ptr->weather;
+}
+
+static bool32 IsRandomFrontierWeatherForCurrentMap(void)
+{
+    return sRandomFrontierWeatherActive
+        && sRandomFrontierMapGroup == gSaveBlock1Ptr->location.mapGroup
+        && sRandomFrontierMapNum == gSaveBlock1Ptr->location.mapNum;
+}
+
+static u8 GetRandomFrontierVisualWeather(u8 weather)
+{
+    if (weather == WEATHER_FOG)
+        return WEATHER_FOG_DIAGONAL;
+    return weather;
+}
+
+static u8 GetRandomFrontierLogicalWeatherFromVisual(u8 weather)
+{
+    if (weather == WEATHER_FOG_DIAGONAL)
+        return WEATHER_FOG;
+    return weather;
+}
+
+static bool32 IsRandomFrontierVisualWeather(u8 weather)
+{
+    static const u8 sRandomFrontierVisualWeathers[] =
+    {
+        WEATHER_NONE,
+        WEATHER_SUNNY_CLOUDS,
+        WEATHER_SUNNY,
+        WEATHER_RAIN,
+        WEATHER_SNOW,
+        WEATHER_RAIN_THUNDERSTORM,
+        WEATHER_FOG_HORIZONTAL,
+        WEATHER_SANDSTORM,
+        WEATHER_SHADE,
+        WEATHER_FOG_DIAGONAL,
+    };
+
+    for (u32 i = 0; i < ARRAY_COUNT(sRandomFrontierVisualWeathers); i++)
+    {
+        if (sRandomFrontierVisualWeathers[i] == weather)
+            return TRUE;
+    }
+
+    return FALSE;
+}
+
+static void SetRandomFrontierWeatherState(u8 logicalWeather, u8 visualWeather)
+{
+    sRandomFrontierWeatherActive = TRUE;
+    sRandomFrontierLogicalWeather = logicalWeather;
+    sRandomFrontierVisualWeather = visualWeather;
+    sRandomFrontierMapGroup = gSaveBlock1Ptr->location.mapGroup;
+    sRandomFrontierMapNum = gSaveBlock1Ptr->location.mapNum;
+}
+
+static void ClearRandomFrontierWeatherState(void)
+{
+    sRandomFrontierWeatherActive = FALSE;
+    sRandomFrontierLogicalWeather = WEATHER_NONE;
+    sRandomFrontierVisualWeather = WEATHER_NONE;
+    sRandomFrontierMapGroup = 0;
+    sRandomFrontierMapNum = 0;
+}
+
+static bool32 RestoreRandomFrontierWeatherStateFromSavedWeather(void)
+{
+    u8 visualWeather = GetSavedWeather();
+
+    if (gMapHeader.weather != WEATHER_RANDOM_FRONTIER || !IsRandomFrontierVisualWeather(visualWeather))
+        return FALSE;
+
+    SetRandomFrontierWeatherState(GetRandomFrontierLogicalWeatherFromVisual(visualWeather), visualWeather);
+    return TRUE;
+}
+
+bool32 TryGetRandomFrontierLogicalWeather(u8 *weather)
+{
+    if (weather == NULL)
+        return FALSE;
+
+    if (!IsRandomFrontierWeatherForCurrentMap() && !RestoreRandomFrontierWeatherStateFromSavedWeather())
+        return FALSE;
+
+    *weather = sRandomFrontierLogicalWeather;
+    return TRUE;
+}
+
+bool32 TryGetFieldWeatherForEncounters(u8 *weather)
+{
+    if (weather == NULL)
+        return FALSE;
+
+    if (GetSavedWeather() == WEATHER_ABNORMAL || IsCurrentMapAbnormalWeatherLocation())
+        return FALSE;
+
+    if (TryGetRandomFrontierLogicalWeather(weather))
+        return TRUE;
+
+    *weather = GetSavedWeather();
+    return TRUE;
 }
 
 void SetSavedWeatherFromCurrMapHeader(void)
@@ -2618,6 +2727,20 @@ static const u8 sDefaultDynamicWeathers[] =
     WEATHER_DROUGHT,
 };
 
+static const u8 sRandomFrontierWeathers[] =
+{
+    WEATHER_NONE,
+    WEATHER_SUNNY_CLOUDS,
+    WEATHER_SUNNY,
+    WEATHER_RAIN,
+    WEATHER_SNOW,
+    WEATHER_RAIN_THUNDERSTORM,
+    WEATHER_FOG_HORIZONTAL,
+    WEATHER_SANDSTORM,
+    WEATHER_SHADE,
+    WEATHER_FOG,
+};
+
 /*static const u8 sDynamicWeathers_DewfordTown[] =
 {
     WEATHER_SUNNY,
@@ -2668,8 +2791,26 @@ static u8 GetDynamicWeather(void)
     return weathers[LocalRandom32(&localRngState) % count];
 }
 
+static u8 GetRandomFrontierWeather(void)
+{
+    u8 logicalWeather;
+    u8 visualWeather;
+
+    if (IsRandomFrontierWeatherForCurrentMap())
+        return sRandomFrontierVisualWeather;
+
+    logicalWeather = sRandomFrontierWeathers[Random() % ARRAY_COUNT(sRandomFrontierWeathers)];
+    visualWeather = GetRandomFrontierVisualWeather(logicalWeather);
+    SetRandomFrontierWeatherState(logicalWeather, visualWeather);
+
+    return visualWeather;
+}
+
 static u8 TranslateWeatherNum(u8 weather)
 {
+    if (weather != WEATHER_RANDOM_FRONTIER)
+        ClearRandomFrontierWeatherState();
+
     switch (weather)
     {
     case WEATHER_NONE:               return WEATHER_NONE;
@@ -2691,6 +2832,7 @@ static u8 TranslateWeatherNum(u8 weather)
     case WEATHER_ROUTE119_CYCLE:     return sWeatherCycleRoute119[gSaveBlock1Ptr->weatherCycleStage];
     case WEATHER_ROUTE123_CYCLE:     return sWeatherCycleRoute123[gSaveBlock1Ptr->weatherCycleStage];
     case WEATHER_DYNAMIC:            return GetDynamicWeather();
+    case WEATHER_RANDOM_FRONTIER:    return GetRandomFrontierWeather();
     default:                         return WEATHER_NONE;
     }
 }

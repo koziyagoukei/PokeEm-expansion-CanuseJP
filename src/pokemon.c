@@ -4906,10 +4906,19 @@ enum NationalDexOrder HoennToNationalOrder(enum HoennDexOrder hoennNum)
 
 void EvolutionRenameMon(struct Pokemon *mon, enum Species oldSpecies, enum Species newSpecies)
 {
-    u8 language;
-    GetMonData(mon, MON_DATA_NICKNAME, gStringVar1);
-    language = GetMonData(mon, MON_DATA_LANGUAGE, &language);
-    if (language == GAME_LANGUAGE && !StringCompare(GetSpeciesName(oldSpecies), gStringVar1))
+    u32 i;
+    u8 oldSpeciesName[POKEMON_NAME_BUFFER_SIZE];
+    u32 maxLength = min(sizeof(mon->box.nickname), POKEMON_NAME_LENGTH);
+
+    GetMonData(mon, MON_DATA_NICKNAME10, gStringVar1);
+
+    for (i = 0; i < ARRAY_COUNT(oldSpeciesName) - 1 && GetSpeciesName(oldSpecies)[i] != EOS; i++)
+        oldSpeciesName[i] = GetSpeciesName(oldSpecies)[i];
+    oldSpeciesName[i] = EOS;
+    StripExtCtrlCodes(oldSpeciesName);
+    oldSpeciesName[maxLength] = EOS;
+
+    if (!StringCompare(gStringVar1, oldSpeciesName))
         SetMonData(mon, MON_DATA_NICKNAME, GetSpeciesName(newSpecies));
 }
 

@@ -142,8 +142,230 @@
                 "max_level": 3,
                 "species": "SPECIES_ZIGZAGOON"
               }
+        ]
+      },
+      "weather_encounters": {
+        "WEATHER_RAIN": {
+          "land_mons": {
+            "encounter_rate": 20,
+            "mons": [
+              { "min_level": 2, 
+                "max_level": 2, 
+                "species": "SPECIES_POLIWAG"
+              },
+              { "min_level": 2,
+                "max_level": 2,
+                "species": "SPECIES_LOTAD"
+              },
+              { "min_level": 3, 
+                "max_level": 3, 
+                "species": "SPECIES_POLIWAG" 
+              },
+              { "min_level": 2, 
+                "max_level": 2, 
+                "species": "SPECIES_LOTAD"
+              },
+              { "min_level": 2,
+                "max_level": 2,
+                "species": "SPECIES_DEWPIDER"
+              },
+              { "min_level": 2, 
+                "max_level": 2, 
+                "species": "SPECIES_LOTAD" 
+              },
+              { "min_level": 3, 
+                "max_level": 3, 
+                "species": "SPECIES_DEWPIDER"
+              },
+              { "min_level": 2,
+                "max_level": 2,
+                "species": "SPECIES_LOTAD"
+              },
+              { "min_level": 2, 
+                "max_level": 2, 
+                "species": "SPECIES_WIMPOD" 
+              },
+              { "min_level": 3, 
+                "max_level": 3, 
+                "species": "SPECIES_WIMPOD"
+              },
+              { "min_level": 2,
+                "max_level": 2,
+                "species": "SPECIES_ZIGZAGOON"
+              },
+              { "min_level": 2, 
+                "max_level": 2, 
+                "species": "SPECIES_ZIGZAGOON" 
+              }
+             ]
+            }
+          },
+        "WEATHER_SNOW": {
+          "land_mons": {
+            "encounter_rate": 20,
+            "mons": [
+              { "min_level": 2, 
+                "max_level": 2, 
+                "species": "SPECIES_POOCHYENA"
+              },
+              { "min_level": 2,
+                "max_level": 2,
+                "species": "SPECIES_POOCHYENA"
+              },
+              { "min_level": 3, 
+                "max_level": 3, 
+                "species": "SPECIES_POOCHYENA" 
+              },
+              { "min_level": 2, 
+                "max_level": 2, 
+                "species": "SPECIES_DARUMAKA_GALAR"
+              },
+              { "min_level": 4,
+                "max_level": 4,
+                "species": "SPECIES_DARUMAKA_GALAR"
+              },
+              { "min_level": 2, 
+                "max_level": 2, 
+                "species": "SPECIES_SNOM" 
+              },
+              { "min_level": 3, 
+                "max_level": 3, 
+                "species": "SPECIES_SNOM"
+              },
+              { "min_level": 2,
+                "max_level": 2,
+                "species": "SPECIES_SNOM"
+              },
+              { "min_level": 2, 
+                "max_level": 2, 
+                "species": "SPECIES_ZIGZAGOON" 
+              },
+              { "min_level": 3, 
+                "max_level": 3, 
+                "species": "SPECIES_FRIGIBAX"
+              },
+              { "min_level": 2,
+                "max_level": 2,
+                "species": "SPECIES_ZIGZAGOON"
+              },
+              { "min_level": 2, 
+                "max_level": 2, 
+                "species": "SPECIES_ZIGZAGOON" 
+              }
+             ]
+            }
+          },
+        "WEATHER_SANDSTORM": {
+          "land_mons": {
+            "encounter_rate": 20,
+            "mons": [
+              { "min_level": 2, 
+                "max_level": 2, 
+                "species": "SPECIES_POOCHYENA"
+              },
+              { "min_level": 2,
+                "max_level": 2,
+                "species": "SPECIES_POOCHYENA"
+              },
+              { "min_level": 3, 
+                "max_level": 3, 
+                "species": "SPECIES_POOCHYENA" 
+              },
+              { "min_level": 2, 
+                "max_level": 2, 
+                "species": "SPECIES_SANDILE"
+              },
+              { "min_level": 4,
+                "max_level": 4,
+                "species": "SPECIES_PHANPY"
+              },
+              { "min_level": 2, 
+                "max_level": 2, 
+                "species": "SPECIES_PHANPY" 
+              },
+              { "min_level": 3, 
+                "max_level": 3, 
+                "species": "SPECIES_GLIGAR"
+              },
+              { "min_level": 2,
+                "max_level": 2,
+                "species": "SPECIES_SANDSHREW"
+              },
+              { "min_level": 2, 
+                "max_level": 2, 
+                "species": "SPECIES_ZIGZAGOON" 
+              },
+              { "min_level": 3, 
+                "max_level": 3, 
+                "species": "SPECIES_SANDSHREW"
+              },
+              { "min_level": 2,
+                "max_level": 2,
+                "species": "SPECIES_ZIGZAGOON"
+              },
+              { "min_level": 2, 
+                "max_level": 2, 
+                "species": "SPECIES_ZIGZAGOON" 
+              }
+             ]
+            }
+          },
+        "WEATHER_RAIN_THUNDERSTORM": {
+          "land_mons": {
+            "encounter_rate": 20,
+            "mons": [
+              { "min_level": 2, 
+                "max_level": 2, 
+                "species": "SPECIES_POLIWAG"
+              },
+              { "min_level": 2,
+                "max_level": 2,
+                "species": "SPECIES_MAGNEMITE"
+              },
+              { "min_level": 3, 
+                "max_level": 3, 
+                "species": "SPECIES_POLIWAG" 
+              },
+              { "min_level": 2, 
+                "max_level": 2, 
+                "species": "SPECIES_MAGNEMITE"
+              },
+              { "min_level": 2,
+                "max_level": 2,
+                "species": "SPECIES_DEWPIDER"
+              },
+              { "min_level": 2, 
+                "max_level": 2, 
+                "species": "SPECIES_PICHU" 
+              },
+              { "min_level": 3, 
+                "max_level": 3, 
+                "species": "SPECIES_DEWPIDER"
+              },
+              { "min_level": 2,
+                "max_level": 2,
+                "species": "SPECIES_ELECTRIKE"
+              },
+              { "min_level": 2, 
+                "max_level": 2, 
+                "species": "SPECIES_WIMPOD" 
+              },
+              { "min_level": 3, 
+                "max_level": 3, 
+                "species": "SPECIES_WIMPOD"
+              },
+              { "min_level": 2,
+                "max_level": 2,
+                "species": "SPECIES_ELECTRIKE"
+              },
+              { "min_level": 2, 
+                "max_level": 2, 
+                "species": "SPECIES_TYNAMO" 
+              }
             ]
           }
+        }
+      }
         },
         {
           "map": "MAP_ROUTE102",

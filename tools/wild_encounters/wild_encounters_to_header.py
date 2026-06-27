@@ -83,6 +83,9 @@ class WildEncounterAssembler:
     def WriteMacro(self, macro, value):
         self.output_file.write("#define " + macro + " " + value + "\n")
 
+    def WeatherLabel(self, weather):
+        return weather.title().replace("_", "")
+
     def WriteMacros(self):
         wild_encounter_groups = self.json_data["wild_encounter_groups"]
         for wild_encounter_group in wild_encounter_groups:
@@ -153,8 +156,52 @@ class WildEncounterAssembler:
         self.WriteLine("},", 2)
         self.WriteLine("},", 1)
 
+    def WriteWeatherEncounterTypes(self, headers):
+        for shared_label in headers["data"]:
+            map_data = headers["data"][shared_label]
+            weather_data = map_data.get("weatherEncounterTypes")
+            if not weather_data:
+                continue
+
+            version = "EMERALD"
+            if "FireRed" in shared_label:
+                version = "FIRERED"
+            elif "LeafGreen" in shared_label:
+                version = "LEAFGREEN"
+
+            self.WriteLine(f"#ifdef {version}")
+            self.WriteLine(f"const struct WildWeatherEncounterTypes {shared_label}_WeatherEncounterTypes[] =")
+            self.WriteLine("{")
+            for weather in weather_data:
+                self.WriteLine("{", 1)
+                self.WriteLine(f".weather = {weather},", 2)
+                self.WriteLine(".encounterTypes =", 2)
+                self.WriteLine("{", 2)
+                for time in self.config.times_of_day:
+                    if not self.config.time_encounters and time != self.config.time_fallback:
+                        continue
+                    self.WriteLine(f"[{time}] =", 3)
+                    self.WriteLine("{", 3)
+                    for mon_type in self.config.mon_types:
+                        member_name = mon_type.title().replace("_", "")
+                        member_name = member_name[0].lower() + member_name[1:] + "Info"
+                        value = "NULL"
+                        if time in weather_data[weather] and mon_type in weather_data[weather][time]:
+                            value = weather_data[weather][time][mon_type]
+                        if value != "NULL":
+                            value = "&" + value
+                        self.WriteLine(f".{member_name} = {value},", 4)
+                    self.WriteLine("},", 3)
+                self.WriteLine("},", 2)
+                self.WriteLine("},", 1)
+            self.WriteLine("{ .weather = WILD_WEATHER_ENCOUNTER_TERMINATOR },", 1)
+            self.WriteLine("};")
+            self.WriteLine(f"#endif")
+            self.WriteLine()
+
     def WritePokemonHeaders(self, headers):
         label = headers["label"]
+        self.WriteWeatherEncounterTypes(headers)
         self.WriteLine(f"const struct WildPokemonHeader {label}[] =")
         self.WriteLine("{")
         for shared_label in headers["data"]:
@@ -194,6 +241,8 @@ class WildEncounterAssembler:
                 self.WriteLine("},", 3)
             
             self.WriteLine("},", 2)
+            if "weatherEncounterTypes" in map_data and map_data["weatherEncounterTypes"]:
+                self.WriteLine(f".weatherEncounterTypes = {shared_label}_WeatherEncounterTypes,", 2)
             self.WriteLine("},", 1)
             self.WriteLine(f"#endif")
         self.WriteTerminator()
@@ -233,6 +282,8 @@ class WildEncounterAssembler:
                     headers["data"][shared_label] = {}
                 if time not in headers["data"][shared_label]:
                     headers["data"][shared_label][time] = {}
+                if "weatherEncounterTypes" not in headers["data"][shared_label]:
+                    headers["data"][shared_label]["weatherEncounterTypes"] = {}
                 headers["data"][shared_label]["mapGroup"] = map_group
                 headers["data"][shared_label]["mapNum"] = map_num
 
@@ -254,6 +305,25 @@ class WildEncounterAssembler:
                     mon_array_name = base_label + "_" + mon_type.title().replace("_", "")
                     self.WriteMonInfos(mon_array_name, mons, encounter_rate)
                     headers["data"][shared_label][time][mon_type] = mon_array_name + "Info"
+
+                if "weather_encounters" in map_encounters:
+                    for weather, weather_encounter_data in map_encounters["weather_encounters"].items():
+                        if weather not in headers["data"][shared_label]["weatherEncounterTypes"]:
+                            headers["data"][shared_label]["weatherEncounterTypes"][weather] = {}
+                        if time not in headers["data"][shared_label]["weatherEncounterTypes"][weather]:
+                            headers["data"][shared_label]["weatherEncounterTypes"][weather][time] = {}
+
+                        for mon_type in self.config.mon_types:
+                            if mon_type not in weather_encounter_data:
+                                continue
+
+                            mons_entry = weather_encounter_data[mon_type]
+                            encounter_rate = mons_entry["encounter_rate"]
+                            mons = mons_entry["mons"]
+
+                            mon_array_name = base_label + "_" + self.WeatherLabel(weather) + "_" + mon_type.title().replace("_", "")
+                            self.WriteMonInfos(mon_array_name, mons, encounter_rate)
+                            headers["data"][shared_label]["weatherEncounterTypes"][weather][time][mon_type] = mon_array_name + "Info"
                 self.WriteLine(f"#endif")
 
             self.WritePokemonHeaders(headers)

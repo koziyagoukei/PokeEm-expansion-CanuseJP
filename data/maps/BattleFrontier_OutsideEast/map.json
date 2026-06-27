@@ -5,7 +5,7 @@
   "music": "MUS_B_FRONTIER",
   "region_map_section": "MAPSEC_BATTLE_FRONTIER",
   "requires_flash": false,
-  "weather": "WEATHER_NONE",
+  "weather": "WEATHER_RANDOM_FRONTIER",
   "map_type": "MAP_TYPE_ROUTE",
   "allow_cycling": true,
   "allow_escaping": false,

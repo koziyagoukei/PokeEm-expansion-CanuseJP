@@ -227,6 +227,8 @@ void Bubbles_InitAll(void);
 bool8 Bubbles_Finish(void);
 
 u8 GetSavedWeather(void);
+bool32 TryGetFieldWeatherForEncounters(u8 *weather);
+bool32 TryGetRandomFrontierLogicalWeather(u8 *weather);
 void SetSavedWeather(u32 weather);
 void SetSavedWeatherFromCurrMapHeader(void);
 void SetWeather(u32 weather);

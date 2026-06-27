@@ -25,6 +25,7 @@ sound/**/*.bin
 sound/songs/midi/*.s
 tools/agbcc
 tools/compresSmol/
+patches
 *.map
 *.bat
 *.dump
