@@ -7,8 +7,8 @@ gText_Birch_Welcome::
 	.string "{JPN}「ポケモンはかせ」と よばれて いるよ!\p"
 
 gText_Birch_Pokemon::
-	.string "{JPN}ポケットモンスター\n"
-	.string "{JPN}……すなわち ポケモン\p$"
+
+	.string "$"
 
 gText_Birch_MainSpeech::
 	.string "{JPN}この せかいには\n"
