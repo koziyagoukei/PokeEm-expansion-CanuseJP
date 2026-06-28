@@ -338,6 +338,7 @@ struct ContestResources
     void *boxBlinkTiles1;
     void *boxBlinkTiles2;
     void *animBgTileBuffer;
+    u8 *cutawayAnimBgTilemapBuffer;
 };
 
 struct ContestCategory

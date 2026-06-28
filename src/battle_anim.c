@@ -95,6 +95,7 @@ static void Task_PanFromInitialToTarget(u8 taskId);
 static void Task_LoopAndPlaySE(u8 taskId);
 static void Task_WaitAndPlaySE(u8 taskId);
 static void LoadDefaultBg(void);
+static bool32 IsValidAnimBattlerSprite(enum BattlerId battler);
 
 EWRAM_DATA static const u8 *sBattleAnimScriptPtr = NULL;
 EWRAM_DATA static const u8 *sBattleAnimScriptRetAddr[MAX_ANIM_CALL_DEPTH] = {0};
@@ -122,6 +123,27 @@ EWRAM_DATA enum BattlerId gBattleAnimTarget = 0;
 EWRAM_DATA enum Species gAnimBattlerSpecies[MAX_BATTLERS_COUNT] = {SPECIES_NONE};
 EWRAM_DATA u8 gAnimCustomPanning = 0;
 EWRAM_DATA static bool8 sAnimHideHpBoxes = FALSE;
+
+bool32 BattleAnim_IsContestCutawayActive(void)
+{
+    return gContestMoveAnimInCutaway
+        && (gAnimScriptActive
+         || gAnimVisualTaskCount != 0
+         || gAnimSoundTaskCount != 0
+         || sMonAnimTaskIdArray[0] != TASK_NONE
+         || sMonAnimTaskIdArray[1] != TASK_NONE);
+}
+
+static bool32 IsValidAnimBattlerSprite(enum BattlerId battler)
+{
+    u8 spriteId;
+
+    if (battler >= MAX_BATTLERS_COUNT)
+        return FALSE;
+
+    spriteId = gBattlerSpriteIds[battler];
+    return spriteId < MAX_SPRITES && gSprites[spriteId].inUse;
+}
 
 #include "data/battle_anim.h"
 
@@ -1136,6 +1158,11 @@ static void Task_InitUpdateMonBg(u8 taskId)
 
     s16 *data = gTasks[taskId].data;
     u8 battlerSpriteId = gBattlerSpriteIds[tBattlerId];
+    if (!IsValidAnimBattlerSprite(tBattlerId))
+    {
+        DestroyAnimVisualTask(taskId);
+        return;
+    }
     gSprites[battlerSpriteId].invisible = TRUE;
 
     if (!tActive)
@@ -1249,7 +1276,7 @@ bool8 IsBattlerSpriteVisible(enum BattlerId battler)
     if (IsContest())
     {
         if (battler == gBattleAnimAttacker)
-            return TRUE;
+            return IsValidAnimBattlerSprite(battler);
         else
             return FALSE;
     }
@@ -1267,6 +1294,9 @@ void MoveBattlerSpriteToBG(enum BattlerId battler, bool8 toBG_2, bool8 setSprite
 {
     struct BattleAnimBgData animBg;
     u8 battlerSpriteId;
+
+    if (!IsValidAnimBattlerSprite(battler))
+        return;
 
     if (!toBG_2)
     {
@@ -1416,6 +1446,15 @@ static void Task_UpdateMonBg(u8 taskId)
 
     spriteId = gTasks[taskId].t2_SpriteId;
     battler = gTasks[taskId].t2_BattlerId;
+    if (spriteId >= MAX_SPRITES || !gSprites[spriteId].inUse)
+    {
+        if (sMonAnimTaskIdArray[0] == taskId)
+            sMonAnimTaskIdArray[0] = TASK_NONE;
+        if (sMonAnimTaskIdArray[1] == taskId)
+            sMonAnimTaskIdArray[1] = TASK_NONE;
+        DestroyTask(taskId);
+        return;
+    }
     GetBattleAnimBg1Data(&animBg);
     x = gTasks[taskId].t2_SpriteX - (gSprites[spriteId].x + gSprites[spriteId].x2);
     y = gTasks[taskId].t2_SpriteY - (gSprites[spriteId].y + gSprites[spriteId].y2);
@@ -1466,9 +1505,9 @@ static void Cmd_clearmonbg(void)
     else
         battler = gBattleAnimTarget;
 
-    if (sMonAnimTaskIdArray[0] != TASK_NONE)
+    if (sMonAnimTaskIdArray[0] != TASK_NONE && IsValidAnimBattlerSprite(battler))
         gSprites[gBattlerSpriteIds[battler]].invisible = FALSE;
-    if (animBattlerId > 1 && sMonAnimTaskIdArray[1] != TASK_NONE)
+    if (animBattlerId > 1 && sMonAnimTaskIdArray[1] != TASK_NONE && IsValidAnimBattlerSprite(BATTLE_PARTNER(battler)))
         gSprites[gBattlerSpriteIds[BATTLE_PARTNER(battler)]].invisible = FALSE;
     else
         animBattlerId = 0;

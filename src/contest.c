@@ -240,14 +240,29 @@ static void DestroyContestSpriteById(u8 *spriteId);
 static void DestroyContestNormalViewForCutaway(void);
 static void RestoreContestNormalViewAfterCutaway(void);
 static void RestoreContestBgAfterCutaway(void);
+static void SetContestCutawayAnimBgBuffers(void);
+static void RestoreContestBgTilemapBuffersAfterCutaway(void);
+static void ResetContestCutawayAnimSurface(void);
+static void ResetContestCutawayBgForMove(void);
 static void LoadContestCutawayBackground(void);
 static void LoadContestCutawayTextbox(void);
+static void InitContestCutawayAnimState(u8 contestant);
+static void ClearContestCutawayAnimState(void);
+static void PrepareContestCutawayMoveData(u8 contestant);
+static bool32 EnsureContestCutawayAttackerSprite(u8 contestant);
+static void PrepareContestCutawayAnimBattlers(u8 contestant, enum Move effectMove);
 static void NormalizeContestCutawayAttackerSprite(u8 contestant);
+static bool32 ContestCutawayAnimComplete(void);
+static bool32 ContestCutawayAnimRunning(void);
+static void EnsureContestCutawayAttackerAfterAnim(u8 contestant);
+static void SyncContestCutawaySpriteState(void);
 static void StartContestCutawayTransition(u8 taskId, u8 nextState);
 static void PrintContestCutawayMoveName(enum Move animMove);
+static void SetContestCutawayDisplayText(const u8 *src);
 static void RemoveContestCutawayMoveNameWindow(void);
 static void SaveContestCutawayBg0Tilemap(void);
 static void RestoreContestCutawayBg0Tilemap(void);
+static void ClearContestCutawayTempState(void);
 static void ApplyContestPostAnimSpeciesChange(u8 contestant);
 
 // An index into a palette where the text color for each contestant is stored.
@@ -330,6 +345,7 @@ enum {
 #define CONTEST_CUTAWAY_START_WAIT_FRAMES 8
 #define CONTEST_CUTAWAY_END_WAIT_FRAMES 24
 #define CONTEST_CUTAWAY_BG0_TILEMAP_SIZE 0x1000
+#define CONTEST_CUTAWAY_DISPLAY_TEXT_SIZE 64
 
 #define TILE_FILLED_APPEAL_HEART 0x5012
 #define TILE_FILLED_JAM_HEART    0x5014
@@ -461,6 +477,16 @@ static EWRAM_DATA struct {
     u16 mosaic;
     bool8 valid;
 } sContestCutawayGpuState = {0};
+static EWRAM_DATA struct {
+    u8 contestant;
+    enum Move baseMove;
+    enum Move effectMove;
+    enum Move animMove;
+    u8 attackerSpriteId;
+    u8 targetSpriteId;
+    u8 displayText[CONTEST_CUTAWAY_DISPLAY_TEXT_SIZE];
+    bool8 active;
+} sContestCutawayAnimState = {0};
 EWRAM_DATA struct ContestWinner gCurContestWinner = {0};
 EWRAM_DATA bool8 gCurContestWinnerIsForArtist = 0;
 EWRAM_DATA u8 gCurContestWinnerSaveIdx = 0;
@@ -1817,7 +1843,54 @@ static void RestoreContestCutawayGpuState(void)
     gBattle_WIN1V = sContestCutawayGpuState.winv[1];
 }
 
+static void SetContestCutawayAnimBgBuffers(void)
+{
+    if (gContestResources == NULL)
+        return;
+
+    gBattleAnimBgTileBuffer = gContestResources->animBgTileBuffer;
+    gBattleAnimBgTilemapBuffer = gContestResources->cutawayAnimBgTilemapBuffer;
+    if (gBattleAnimBgTileBuffer != NULL)
+        CpuFill32(0, gBattleAnimBgTileBuffer, 0x2000);
+    if (gBattleAnimBgTilemapBuffer != NULL)
+    {
+        CpuFill32(0, gBattleAnimBgTilemapBuffer, 0x1000);
+        SetBgTilemapBuffer(1, gBattleAnimBgTilemapBuffer);
+        SetBgTilemapBuffer(2, gBattleAnimBgTilemapBuffer);
+    }
+}
+
+static void RestoreContestBgTilemapBuffersAfterCutaway(void)
+{
+    s32 i;
+
+    if (gContestResources == NULL)
+        return;
+
+    for (i = 0; i < CONTESTANT_COUNT; i++)
+        SetBgTilemapBuffer(i, gContestResources->contestBgTilemaps[i]);
+}
+
 static void PrepareContestCutawayVideo(void)
+{
+    SaveContestCutawayBg0Tilemap();
+    ResetContestCutawayAnimSurface();
+
+    ResetOamRange(0, MAX_SPRITES);
+    LoadOam();
+    CpuFill32(0, (void *)OBJ_VRAM0, OBJ_VRAM0_SIZE);
+    SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_1D_MAP | DISPCNT_BG0_ON | DISPCNT_BG2_ON | DISPCNT_BG3_ON);
+    Contest_SetBgCopyFlags(0);
+}
+
+static void ResetContestCutawayAnimSurface(void)
+{
+    RemoveContestCutawayMoveNameWindow();
+    SetContestCutawayAnimBgBuffers();
+    ResetContestCutawayBgForMove();
+}
+
+static void ResetContestCutawayBgForMove(void)
 {
     SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_1D_MAP);
     SetGpuReg(REG_OFFSET_BG0CNT, BGCNT_PRIORITY(0) | BGCNT_CHARBASE(0) | BGCNT_SCREENBASE(24) | BGCNT_16COLOR | BGCNT_TXT512x512);
@@ -1855,20 +1928,15 @@ static void PrepareContestCutawayVideo(void)
     gBattle_WIN1V = 0;
 
     ResetPaletteFade();
-    FillPalette(RGB_BLACK, 0, PLTT_SIZE);
-    SaveContestCutawayBg0Tilemap();
+    gPaletteFade.bufferTransferDisabled = FALSE;
+    FillPalette(RGB_BLACK, BG_PLTT_OFFSET, BG_PLTT_SIZE);
     CpuFill32(0, (void *)BG_CHAR_ADDR(0), BG_CHAR_SIZE);
+    CpuFill32(0, (void *)BG_CHAR_ADDR(1), BG_CHAR_SIZE);
     CpuFill32(0, (void *)BG_CHAR_ADDR(2), BG_CHAR_SIZE);
-    CpuFill32(0, (void *)BG_SCREEN_ADDR(24), BG_SCREEN_SIZE);
-    CpuFill32(0, (void *)BG_SCREEN_ADDR(26), BG_SCREEN_SIZE);
-    CpuFill32(0, (void *)BG_SCREEN_ADDR(28), BG_SCREEN_SIZE);
+    CpuFill32(0, (void *)BG_SCREEN_ADDR(24), BG_SCREEN_SIZE * 8);
     LoadContestCutawayBackground();
     LoadContestCutawayTextbox();
-
-    ResetOamRange(0, MAX_SPRITES);
-    LoadOam();
-    CpuFill32(0, (void *)OBJ_VRAM0, OBJ_VRAM0_SIZE);
-    SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_1D_MAP | DISPCNT_BG0_ON | DISPCNT_BG2_ON | DISPCNT_BG3_ON);
+    SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_1D_MAP | DISPCNT_OBJ_ON | DISPCNT_BG0_ON | DISPCNT_BG2_ON | DISPCNT_BG3_ON);
     Contest_SetBgCopyFlags(0);
 }
 
@@ -1885,6 +1953,40 @@ static void LoadContestCutawayTextbox(void)
     CopyToBgTilemapBuffer(0, gBattleTextboxTilemap, 0, 0);
     CopyBgTilemapBufferToVram(0);
     LoadPalette(gBattleTextboxPalette, BG_PLTT_ID(0), 2 * PLTT_SIZE_4BPP);
+}
+
+static void ClearContestCutawayAnimState(void)
+{
+    memset(&sContestCutawayAnimState, 0, sizeof(sContestCutawayAnimState));
+    sContestCutawayAnimState.contestant = CONTESTANT_NONE;
+    sContestCutawayAnimState.baseMove = MOVE_NONE;
+    sContestCutawayAnimState.effectMove = MOVE_NONE;
+    sContestCutawayAnimState.animMove = MOVE_NONE;
+    sContestCutawayAnimState.attackerSpriteId = SPRITE_NONE;
+    sContestCutawayAnimState.targetSpriteId = SPRITE_NONE;
+}
+
+static void InitContestCutawayAnimState(u8 contestant)
+{
+    ClearContestCutawayAnimState();
+    sContestCutawayAnimState.active = TRUE;
+    PrepareContestCutawayMoveData(contestant);
+}
+
+static void PrepareContestCutawayMoveData(u8 contestant)
+{
+    enum Move baseMove = eContestantStatus[contestant].currMove;
+    enum ContestGimmick selected = eContestGimmickStatus[contestant].moveGimmick;
+
+    StoreContestTurnMoves(contestant, baseMove, selected);
+    SetMoveAnimAttackerData(contestant);
+    if (sContestCutawayAnimState.active)
+    {
+        sContestCutawayAnimState.contestant = contestant;
+        sContestCutawayAnimState.baseMove = baseMove;
+        sContestCutawayAnimState.effectMove = SanitizeMove(GetContestTurnEffectMove(contestant));
+        sContestCutawayAnimState.animMove = GetContestTurnAnimMove(contestant);
+    }
 }
 
 static void SetContestNormalViewBattlers(void)
@@ -1943,7 +2045,28 @@ static void SetupContestBattleAnimSandbox(void)
     SetVBlankCallback(VBlankCB_Contest);
 }
 
-static u8 UNUSED CreateContestCutawayAttackerSprite(u8 contestant)
+static bool32 ContestCutawayAnimRunning(void)
+{
+    return BattleAnim_IsContestCutawayActive();
+}
+
+static bool32 ContestCutawayAnimComplete(void)
+{
+    return !BattleAnim_IsContestCutawayActive();
+}
+
+static void SyncContestCutawaySpriteState(void)
+{
+    if (!sContestCutawayAnimState.active)
+        return;
+
+    if (gBattlerAttacker < MAX_BATTLERS_COUNT)
+        sContestCutawayAnimState.attackerSpriteId = gBattlerSpriteIds[gBattlerAttacker];
+    if (gBattlerTarget < MAX_BATTLERS_COUNT)
+        sContestCutawayAnimState.targetSpriteId = gBattlerSpriteIds[gBattlerTarget];
+}
+
+static u8 CreateContestCutawayAttackerSprite(u8 contestant)
 {
     enum Species species = SanitizeSpecies(gContestMons[contestant].species);
     bool32 isShiny = gContestMons[contestant].isShiny;
@@ -1968,7 +2091,111 @@ static u8 UNUSED CreateContestCutawayAttackerSprite(u8 contestant)
         gSprites[spriteId].affineAnims = gAffineAnims_BattleSpriteContest;
     gBattlerSpriteIds[gBattlerAttacker] = spriteId;
     NormalizeContestCutawayAttackerSprite(contestant);
+    SyncContestCutawaySpriteState();
     return spriteId;
+}
+
+static bool32 RecreateContestCutawayAttackerSprite(u8 contestant)
+{
+    u8 spriteId;
+
+    if (ContestCutawayAnimRunning())
+        return FALSE;
+
+    gBattlerAttacker = B_BATTLER_1;
+    gBattleAnimAttacker = gBattlerAttacker;
+    DestroyContestSpriteById(&gBattlerSpriteIds[gBattlerAttacker]);
+    spriteId = CreateContestCutawayAttackerSprite(contestant);
+    if (spriteId == SPRITE_NONE)
+        return FALSE;
+
+    gBattlerSpriteIds[gBattlerAttacker] = spriteId;
+    if (gBattlerTarget == gBattlerAttacker)
+        gBattleAnimTarget = gBattlerAttacker;
+    gBattleAnimAttacker = gBattlerAttacker;
+    SyncContestCutawaySpriteState();
+    return TRUE;
+}
+
+static bool32 EnsureContestCutawayAttackerSprite(u8 contestant)
+{
+    u8 spriteId;
+
+    gBattlerAttacker = B_BATTLER_1;
+    gBattleAnimAttacker = gBattlerAttacker;
+    spriteId = gBattlerSpriteIds[gBattlerAttacker];
+    if (ContestCutawayAnimRunning())
+    {
+        SyncContestCutawaySpriteState();
+        return spriteId != SPRITE_NONE && spriteId < MAX_SPRITES && gSprites[spriteId].inUse;
+    }
+
+    if (spriteId == SPRITE_NONE || spriteId >= MAX_SPRITES || !gSprites[spriteId].inUse)
+    {
+        spriteId = CreateContestCutawayAttackerSprite(contestant);
+        if (spriteId == SPRITE_NONE)
+            return FALSE;
+        gBattlerSpriteIds[gBattlerAttacker] = spriteId;
+    }
+
+    NormalizeContestCutawayAttackerSprite(contestant);
+    gBattleAnimAttacker = gBattlerAttacker;
+    SyncContestCutawaySpriteState();
+    return TRUE;
+}
+
+static void PrepareContestCutawayAnimBattlers(u8 contestant, enum Move effectMove)
+{
+    u8 i;
+
+    if (!EnsureContestCutawayAttackerSprite(contestant))
+        return;
+    SetMoveTargetPosition(effectMove);
+
+    for (i = 0; i < MAX_BATTLERS_COUNT; i++)
+    {
+        if (i != gBattlerAttacker && i != gBattlerTarget)
+            DestroyContestSpriteById(&gBattlerSpriteIds[i]);
+    }
+
+    if (gBattlerTarget != gBattlerAttacker)
+    {
+        if (gBattlerSpriteIds[gBattlerTarget] == SPRITE_NONE
+            || gBattlerSpriteIds[gBattlerTarget] >= MAX_SPRITES
+            || !gSprites[gBattlerSpriteIds[gBattlerTarget]].inUse)
+            CreateInvisibleBattleTargetSprite();
+        else
+            SetBattleTargetSpritePosition();
+    }
+
+    NormalizeContestCutawayAttackerSprite(contestant);
+    gBattleAnimAttacker = gBattlerAttacker;
+    gBattleAnimTarget = gBattlerTarget;
+    SyncContestCutawaySpriteState();
+}
+
+static void EnsureContestCutawayAttackerAfterAnim(u8 contestant)
+{
+    u8 spriteId;
+
+    if (ContestCutawayAnimRunning())
+        return;
+
+    gBattlerAttacker = B_BATTLER_1;
+    gBattleAnimAttacker = gBattlerAttacker;
+    spriteId = gBattlerSpriteIds[gBattlerAttacker];
+
+    if (spriteId == SPRITE_NONE || spriteId >= MAX_SPRITES || !gSprites[spriteId].inUse || gSprites[spriteId].invisible)
+    {
+        RecreateContestCutawayAttackerSprite(contestant);
+        return;
+    }
+
+    NormalizeContestCutawayAttackerSprite(contestant);
+    gBattleAnimAttacker = gBattlerAttacker;
+    if (gBattlerTarget == gBattlerAttacker)
+        gBattleAnimTarget = gBattlerAttacker;
+    SyncContestCutawaySpriteState();
 }
 
 static void NormalizeContestCutawayAttackerSprite(u8 contestant)
@@ -2029,6 +2256,12 @@ static void RestoreContestCutawayBg0Tilemap(void)
     }
 }
 
+static void ClearContestCutawayTempState(void)
+{
+    RemoveContestCutawayMoveNameWindow();
+    RestoreContestCutawayBg0Tilemap();
+}
+
 static void RemoveContestCutawayMoveNameWindow(void)
 {
     if (sContestCutawayMoveNameWindowActive)
@@ -2037,6 +2270,21 @@ static void RemoveContestCutawayMoveNameWindow(void)
         sContestCutawayMoveNameWindowId = 0;
         sContestCutawayMoveNameWindowActive = FALSE;
     }
+}
+
+static void SetContestCutawayDisplayText(const u8 *src)
+{
+    u32 i;
+
+    if (src == NULL)
+    {
+        sContestCutawayAnimState.displayText[0] = EOS;
+        return;
+    }
+
+    for (i = 0; i < CONTEST_CUTAWAY_DISPLAY_TEXT_SIZE - 1 && src[i] != EOS; i++)
+        sContestCutawayAnimState.displayText[i] = src[i];
+    sContestCutawayAnimState.displayText[i] = EOS;
 }
 
 static void PrintContestCutawayMoveName(enum Move animMove)
@@ -2055,7 +2303,8 @@ static void PrintContestCutawayMoveName(enum Move animMove)
             sContestCutawayMoveNameWindowActive = TRUE;
         }
 
-        moveName = GetMoveName(animMove);
+        SetContestCutawayDisplayText(GetMoveName(animMove));
+        moveName = sContestCutawayAnimState.displayText;
         FillWindowPixelBuffer(sContestCutawayMoveNameWindowId, PIXEL_FILL(0xF));
         fontId = GetFontIdToFit(moveName, FONT_NORMAL, 0, WindowWidthPx(sContestCutawayMoveNameWindowId));
         x = GetStringCenterAlignXOffset(fontId, moveName, WindowWidthPx(sContestCutawayMoveNameWindowId));
@@ -2087,11 +2336,9 @@ static void ApplyContestPostAnimSpeciesChange(u8 contestant)
 
 static void BeginContestMoveAnimCutaway(u8 contestant, enum Move effectMove)
 {
-#if !CONTEST_CUTAWAY_RESTORE_TEST
-    u8 spriteId;
-#endif
-
     SaveContestCutawayGpuState();
+    InitContestCutawayAnimState(contestant);
+    effectMove = sContestCutawayAnimState.effectMove;
     gContestMoveAnimInCutaway = TRUE;
     DestroyContestNormalViewForCutaway();
     SetupContestBattleAnimSandbox();
@@ -2100,14 +2347,7 @@ static void BeginContestMoveAnimCutaway(u8 contestant, enum Move effectMove)
 #if CONTEST_CUTAWAY_RESTORE_TEST
     (void)effectMove;
 #else
-    spriteId = CreateContestCutawayAttackerSprite(contestant);
-    if (spriteId != SPRITE_NONE)
-        gBattlerSpriteIds[gBattlerAttacker] = spriteId;
-    SetMoveTargetPosition(effectMove);
-    if (gBattlerTarget != gBattlerAttacker)
-        CreateInvisibleBattleTargetSprite();
-    gBattleAnimAttacker = gBattlerAttacker;
-    gBattleAnimTarget = gBattlerTarget;
+    PrepareContestCutawayAnimBattlers(contestant, effectMove);
     SetGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_OBJ_ON);
 #endif
 }
@@ -2123,8 +2363,7 @@ static void RestoreContestNormalViewAfterCutaway(void)
     u8 spriteId;
 
     SetVBlankCallback(NULL);
-    RemoveContestCutawayMoveNameWindow();
-    RestoreContestCutawayBg0Tilemap();
+    ClearContestCutawayTempState();
     RestoreContestCutawayGpuState();
     ResetPaletteFade();
     gPaletteFade.bufferTransferDisabled = FALSE;
@@ -2170,6 +2409,8 @@ static void RestoreContestNormalViewAfterCutaway(void)
 static void RestoreContestBgAfterCutaway(void)
 {
     s32 i;
+
+    RestoreContestBgTilemapBuffersAfterCutaway();
 
     // Battle animations can overwrite the contest BG charblocks/screenblocks.
     // Restore tile graphics from source, then copy preserved contest tilemaps
@@ -2221,6 +2462,7 @@ static void EndContestMoveAnimCutaway(u8 contestant)
     gReservedSpritePaletteCount = 4;
     ResetContestVisualSpriteIds();
     RestoreContestNormalViewAfterCutaway();
+    ClearContestCutawayAnimState();
 }
 
 static enum Gimmick GetContestActiveTabGimmick(u8 contestant)
@@ -2885,8 +3127,9 @@ static void AllocContestResources(void)
     gContestResources->boxBlinkTiles1 = AllocZeroed(0x800);
     gContestResources->boxBlinkTiles2 = AllocZeroed(0x800);
     gContestResources->animBgTileBuffer = AllocZeroed(0x2000);
+    gContestResources->cutawayAnimBgTilemapBuffer = AllocZeroed(0x1000);
     gBattleAnimBgTileBuffer = gContestResources->animBgTileBuffer;
-    gBattleAnimBgTilemapBuffer = gContestResources->contestBgTilemaps[1];
+    gBattleAnimBgTilemapBuffer = gContestResources->cutawayAnimBgTilemapBuffer;
 
     for (i = 0; i < CONTESTANT_COUNT; i++)
     {
@@ -2895,6 +3138,7 @@ static void AllocContestResources(void)
     }
     InitContestNormalViewState();
     gContestMoveAnimInCutaway = FALSE;
+    ClearContestCutawayAnimState();
 }
 
 static void FreeContestResources(void)
@@ -2903,6 +3147,7 @@ static void FreeContestResources(void)
 
     RemoveContestCutawayMoveNameWindow();
     FREE_AND_SET_NULL(sContestCutawaySavedBg0Tilemap);
+    ClearContestCutawayAnimState();
 
     if (gContestResources->gimmickStatus != NULL)
     {
@@ -2927,6 +3172,7 @@ static void FreeContestResources(void)
     FREE_AND_SET_NULL(gContestResources->boxBlinkTiles1);
     FREE_AND_SET_NULL(gContestResources->boxBlinkTiles2);
     FREE_AND_SET_NULL(gContestResources->animBgTileBuffer);
+    FREE_AND_SET_NULL(gContestResources->cutawayAnimBgTilemapBuffer);
     FREE_AND_SET_NULL(gContestResources);
     gBattleAnimBgTileBuffer = NULL;
     gBattleAnimBgTilemapBuffer = NULL;
@@ -3660,17 +3906,21 @@ static void Task_DoAppeals(u8 taskId)
     case APPEALSTATE_WAIT_GIMMICK_CUTAWAY_START:
         if (++gTasks[taskId].tCounter >= CONTEST_CUTAWAY_START_WAIT_FRAMES)
         {
+            enum Move effectMove;
+
+            PrepareContestCutawayMoveData(contestant);
+            effectMove = sContestCutawayAnimState.effectMove;
+            ResetContestCutawayAnimSurface();
+            PrepareContestCutawayAnimBattlers(contestant, effectMove);
             LaunchContestGimmickIntroAnim(contestant, gTasks[taskId].tGimmickAnimStep);
             gTasks[taskId].tState = APPEALSTATE_WAIT_GIMMICK_ANIM;
         }
         return;
     case APPEALSTATE_WAIT_GIMMICK_ANIM:
         gAnimScriptCallback();
-        if (!gAnimScriptActive)
+        if (ContestCutawayAnimComplete())
         {
-            NormalizeContestCutawayAttackerSprite(contestant);
-            gBattleAnimAttacker = gBattlerAttacker;
-            gBattleAnimTarget = gBattlerTarget;
+            EnsureContestCutawayAttackerAfterAnim(contestant);
             gTasks[taskId].tGimmickAnimStep++;
             if (gTasks[taskId].tGimmickAnimStep < GetContestGimmickIntroAnimCount(contestant))
             {
@@ -3747,8 +3997,8 @@ static void Task_DoAppeals(u8 taskId)
         return;
     case APPEALSTATE_MOVE_ANIM:
         {
-            enum Move animMove = GetContestTurnAnimMove(eContest.currentContestant);
-            enum Move effectMove = SanitizeMove(GetContestTurnEffectMove(eContest.currentContestant));
+            u8 currentContestant = eContest.currentContestant;
+            enum Move effectMove;
 
             if (!gContestMoveAnimInCutaway)
             {
@@ -3756,25 +4006,14 @@ static void Task_DoAppeals(u8 taskId)
                 return;
             }
 
-            SetMoveTargetPosition(effectMove);
-            if (gBattlerTarget != gBattlerAttacker
-                && (gBattlerSpriteIds[gBattlerTarget] == SPRITE_NONE
-                 || !gSprites[gBattlerSpriteIds[gBattlerTarget]].inUse))
-                CreateInvisibleBattleTargetSprite();
-            SetMoveSpecificAnimData(eContest.currentContestant, effectMove);
-            SetMoveAnimAttackerData(eContest.currentContestant);
+            PrepareContestCutawayMoveData(currentContestant);
+            effectMove = sContestCutawayAnimState.effectMove;
+            SetMoveSpecificAnimData(currentContestant, effectMove);
+            PrepareContestCutawayAnimBattlers(currentContestant, effectMove);
 
             // コンテスト効果・対象判定は元技
-            SetMoveTargetPosition(effectMove);
-            if (gBattlerTarget != gBattlerAttacker
-                && (gBattlerSpriteIds[gBattlerTarget] == SPRITE_NONE
-                 || !gSprites[gBattlerSpriteIds[gBattlerTarget]].inUse))
-                CreateInvisibleBattleTargetSprite();
-            gBattleAnimAttacker = gBattlerAttacker;
-            gBattleAnimTarget = gBattlerTarget;
 
             // 実際の見た目はZ/Max/G-Max技
-            (void)animMove;
             gTasks[taskId].tCounter = 0;
             gTasks[taskId].tState = APPEALSTATE_WAIT_CUTAWAY_START;
         }
@@ -3782,11 +4021,14 @@ static void Task_DoAppeals(u8 taskId)
     case APPEALSTATE_WAIT_CUTAWAY_START:
         if (++gTasks[taskId].tCounter >= CONTEST_CUTAWAY_START_WAIT_FRAMES)
         {
-            enum Move animMove = GetContestTurnAnimMove(contestant);
+            enum Move animMove;
+            enum Move effectMove;
 
-            NormalizeContestCutawayAttackerSprite(contestant);
-            gBattleAnimAttacker = gBattlerAttacker;
-            gBattleAnimTarget = gBattlerTarget;
+            ResetContestCutawayAnimSurface();
+            PrepareContestCutawayMoveData(contestant);
+            animMove = sContestCutawayAnimState.animMove;
+            effectMove = sContestCutawayAnimState.effectMove;
+            PrepareContestCutawayAnimBattlers(contestant, effectMove);
 #if CONTEST_CUTAWAY_RESTORE_TEST
             (void)animMove;
             gTasks[taskId].tCounter = 0;
@@ -3800,8 +4042,9 @@ static void Task_DoAppeals(u8 taskId)
         return;
     case APPEALSTATE_WAIT_MOVE_ANIM:
         gAnimScriptCallback();
-        if (!gAnimScriptActive)
+        if (ContestCutawayAnimComplete())
         {
+            EnsureContestCutawayAttackerAfterAnim(contestant);
             gTasks[taskId].tCounter = 0;
             gTasks[taskId].tState = APPEALSTATE_WAIT_CUTAWAY_END;
         }
@@ -5525,6 +5768,7 @@ static void SetContestantStatusesForNextRound(void)
         eContest.excitementHistory[eContest.appealNumber][i] = Contest_GetMoveExcitementForContestant(i, eContestantStatus[i].currMove);
         eContestantStatus[i].currMove = MOVE_NONE;
         eContestGimmickStatus[i].moveGimmick = CONTEST_GIMMICK_NONE;
+        ClearContestTurnMoves(i);
     }
     eContestExcitement.frozen = FALSE;
 }
@@ -7398,17 +7642,28 @@ static void SetBattleTargetSpritePosition(void)
 
     if (gBattlerTarget >= MAX_BATTLERS_COUNT)
         return;
+    if (gContestMoveAnimInCutaway && gBattlerTarget == gBattlerAttacker)
+        return;
     spriteId = gBattlerSpriteIds[gBattlerTarget];
     if (spriteId >= MAX_SPRITES || !gSprites[spriteId].inUse)
         return;
 
     sprite = &gSprites[spriteId];
 
+    if (sprite->oam.affineMode & ST_OAM_AFFINE_ON_MASK)
+        ResetSpriteRotScale(spriteId);
+    sprite->oam.affineMode = ST_OAM_AFFINE_OFF;
+    sprite->oam.matrixNum = 0;
+    sprite->oam.objMode = ST_OAM_OBJ_NORMAL;
     sprite->x2 = 0;
     sprite->y2 = 0;
     sprite->x = GetBattlerSpriteCoord(gBattlerTarget, BATTLER_COORD_X);
     sprite->y = GetBattlerSpriteCoord(gBattlerTarget, BATTLER_COORD_Y);
     sprite->invisible = TRUE;
+    memset(sprite->data, 0, sizeof(sprite->data));
+    sprite->callback = SpriteCallbackDummy;
+    sprite->animPaused = FALSE;
+    sprite->affineAnimPaused = FALSE;
 }
 
 static void SetMoveTargetPosition(enum Move move)
