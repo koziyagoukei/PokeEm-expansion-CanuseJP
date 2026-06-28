@@ -80,40 +80,20 @@ GraniteCave_StevensRoom_Movement_StevenExitSouth:
 	step_end
 
 GraniteCave_StevensRoom_Text_ImStevenLetterForMe:
-	.string "My name is STEVEN.\p"
-	.string "I'm interested in rare stones,\n"
-	.string "so I travel here and there.\p"
-	.string "Oh?\n"
-	.string "A LETTER for me?$"
+	.string "{JPN}ボクの なまえは ダイゴ\pめずらしい いしに きょうみが あって\nあちこち たび してるんだよ\pえっ?\nボクに てがみ……?$"
 
 GraniteCave_StevensRoom_Text_ThankYouTakeThis:
-	.string "STEVEN: Okay, thank you.\p"
-	.string "You went through all this trouble to\n"
-	.string "deliver that. I need to thank you.\p"
-	.string "Let me see...\n"
-	.string "I'll give you this TM.\p"
-	.string "It contains my favorite move,\n"
-	.string "STEEL WING.$"
+	.string "{JPN}ダイゴ『うん ありがとう\pわざわざ とどけて くれたんだ\nなにか おれいを させてもらうよ\pそうだね\nこの わざマシンを あげよう\pはがねのつばさ といって\nボクの おきにいりの わざ だから$"
 
 GraniteCave_StevensRoom_Text_CouldBecomeChampionLetsRegister:
-	.string "STEVEN: Your POKEMON appear quite\n"
-	.string "capable.\p"
-	.string "If you keep training, you could even\n"
-	.string "become the CHAMPION of the POKEMON\l"
-	.string "LEAGUE one day. That's what I think.\p"
-	.string "I know, since we've gotten to know each\n"
-	.string "other, let's register one another in\l"
-	.string "our POKeNAVS.\p"
-	.string "... ... ... ... ... ...$"
+	.string "{JPN}ダイゴ『きみの ポケモン\nなかなか いい かんじ だね\pしゅぎょうを つづければ\nいつかは ポケモンリーグの\lチャンピオンに だって なれる\lボクは そう おもうな\pそうだ!\nせっかく きみと しりあえたんだ\lおたがい ポケナビに\lなまえを とうろく しておこう!\p…… …… ……$"
 
 GraniteCave_StevensRoom_Text_RegisteredSteven:
-	.string "Registered STEVEN\n"
-	.string "in the POKeNAV.$"
+	.string "{JPN}ダイゴを\n"ポケナビに とうろく した!$"
 
 GraniteCave_StevensRoom_Text_IveGotToHurryAlong:
-	.string "Now, I've got to hurry along.$"
+	.string "{JPN}……じゃあ\nボクは さきを いそぐから$"
 
 GraniteCave_StevensRoom_Text_OhBagIsFull:
-	.string "Oh, your BAG is full...\n"
-	.string "That's too bad, then.$"
+	.string "{JPN}バッグが いっぱい なのか……\nじゃあ しかたないね$"
 
