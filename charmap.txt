@@ -170,10 +170,6 @@ TALL_PLUS   = FC 0C FB
 '？' = AC
 '。' = AD
 'ー' = AE
-'『' = B1
-'』' = B2
-'「' = B3
-'」' = B4
 '円' = B7
 JPN_PLUS = FF 04
 
