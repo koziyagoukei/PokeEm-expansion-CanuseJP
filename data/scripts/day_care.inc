@@ -299,7 +299,7 @@ Route117_Text_YourMonsAreDoingFine:
 	.string "{JPN}おお あんたか! よくきたな\n{STR_VAR_1}と {STR_VAR_2}は げんきじゃぞ$"
 
 Route117_Text_IWillKeepDoYouWantIt:
-	.string "{JPN}わしが もらってしまうぞ\nほんとうは ほしいんじゃろ?$""
+	.string "{JPN}わしが もらってしまうぞ\nほんとうは ほしいんじゃろ?$"
 
 Route117_PokemonDayCare_Text_WouldYouLikeUsToRaiseAMon:
 	.string "{JPN}わしは そだてや ばあさんじゃ\pおまえさんの かわりに ポケモンを\nそだてて あげるよ\pなにか そだてて ほしいのかい?$"
@@ -332,7 +332,7 @@ Route117_PokemonDayCare_Text_GoodToSeeYou:
 	.string "{JPN}おお あんたか! よくきたな\nおまえさんの ポケモンは ゲンキじゃぞ$"
 
 Route117_PokemonDayCare_Text_YourMonHasGrownXLevels:
-	.string "{JPN}{STR_VAR_1}は レベルで いうと\n{STR_VAR_2}くらい そだって おるぞ$
+	.string "{JPN}{STR_VAR_1}は レベルで いうと\n{STR_VAR_2}くらい そだって おるぞ$"
 
 Route117_PokemonDayCare_Text_YourTeamIsFull:
 	.string "{JPN}てもちの ポケモンがいっぱいじゃよ!\nポケモンを せいりしてから きなさい$"
