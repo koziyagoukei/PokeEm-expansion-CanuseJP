@@ -69,6 +69,8 @@ Workspace/
 *.fastSmol
 *.smolTM
 __pycache__
+
+!tools/check_jp_text.py
 .map_version
 # TranslationEditor backups
 *.bak

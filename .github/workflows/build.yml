@@ -15,6 +15,16 @@ env:
   DEPRECATED_ERROR: 1
 
 jobs:
+  jp-text-check:
+    if: github.actor != 'allcontributors[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Check Japanese text imports
+        run: python3 tools/check_jp_text.py
+
   build-emerald:
     if: github.actor != 'allcontributors[bot]'
     runs-on: ubuntu-latest
@@ -204,7 +214,7 @@ jobs:
   build:
     if: github.actor != 'allcontributors[bot]'
     runs-on: ubuntu-latest
-    needs: [build-emerald, build-firered, build-leafgreen, release, test]
+    needs: [jp-text-check, build-emerald, build-firered, build-leafgreen, release, test]
     steps:
       - name: All builds passed
         run: echo "All builds and tests passed."
