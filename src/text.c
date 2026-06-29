@@ -448,8 +448,13 @@ static const u8 sKeypadIconTiles[] = INCGFX_U8("graphics/fonts/keypad_icons.png"
 
 static u8 sCurGlyphAdvance;
 
-static u32 GetJapaneseGlyphWidth(u8 fontId, u16 glyphId UNUSED)
+#define CHAR_JP_VU 0xF1
+
+static u32 GetJapaneseGlyphWidth(u8 fontId, u16 glyphId)
 {
+    if (glyphId == CHAR_JP_VU)
+        return 8;
+
     // Japanese halfwidth glyphs are still read from 8px cells.  Advance by
     // 7px for selected UI fonts to fit English-sized layouts more easily;
     // dakuten and long vowels may need per-glyph tuning later.
