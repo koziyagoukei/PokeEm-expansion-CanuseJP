@@ -269,167 +269,157 @@ SlateportCity_OceanicMuseum_2F_EventScript_MuseumPatron3::
 	end
 
 SlateportCity_OceanicMuseum_2F_Text_ThankYouForTheParts:
-	.string "Yes? If you're looking for STERN,\n"
-	.string "that would be me.\p"
-	.string "Ah! Those must be the parts I ordered\n"
-	.string "from MR. STONE of DEVON.\p"
-	.string "Thank you! That's great!\n"
-	.string "We can prepare for our expedition now.$"
+	.string "{JPN}はい? クスノキは わたし だが……?\pおお! それは デボンの ツワブキさんに\nたのんで おいた パーツだね!\pいやー どうも ごくろうさま!\nおかげで しゅっぱつ できそうだ……"
+	.string ""
+	.string ""
+	.string ""
+	.string "$"
 
 SlateportCity_OceanicMuseum_2F_Text_WellTakeThoseParts:
-	.string "Hehehe, hold it!\n"
-	.string "We'll take those parts!$"
+	.string "{JPN}へへへ その パーツ\nおれたちが いただくぜ!"
+	.string "$"
 
 SlateportCity_OceanicMuseum_2F_Text_SternWhoAreYou:
-	.string "CAPT. STERN: Wh-what?\n"
-	.string "Who are you people?$"
+	.string "{JPN}クスノキ『だ だれだ きみたちは!$"
 
 SlateportCity_OceanicMuseum_2F_Text_WereTeamAqua:
-	.string "We're TEAM AQUA!\p"
-	.string "Our BOSS wants those parts!\n"
-	.string "Shut your yap and fork them over!$"
+	.string "{JPN}おれたち アクアだん!\pリーダーが そのパーツを ほしがってるんだ!\nなにも いわずに よこせ!"
+	.string ""
+	.string "$"
 
 SlateportCity_OceanicMuseum_2F_Text_Grunt1Defeat:
-	.string "Awaaaah!\n"
-	.string "A kid beat me!$"
+	.string "{JPN}うわー!\nこどもに やられちまった!"
+	.string "$"
 
 SlateportCity_OceanicMuseum_2F_Text_BossGoingToBeFurious:
-	.string "Oh, man, what a disaster...\n"
-	.string "The BOSS is going to be furious...$"
+	.string "{JPN}やばい……\nリーダーに おこられちまうぞ……"
+	.string "$"
 
 SlateportCity_OceanicMuseum_2F_Text_LetMeTakeCareOfThis:
-	.string "Humph, sniveling wimp!\n"
-	.string "Let me take care of this!$"
+	.string "{JPN}ふん! だらしない やつめ!\nここは おれに まかせてもらうぜ!"
+	.string "$"
 
 SlateportCity_OceanicMuseum_2F_Text_Grunt2Defeat:
-	.string "What?!\n"
-	.string "I lost, too!$"
+	.string "{JPN}なんだと!\nおれも まけてしまった!"
+	.string "$"
 
 SlateportCity_OceanicMuseum_2F_Text_MeddlingKid:
-	.string "Now what? If we don't get the parts,\n"
-	.string "we're in for it!\p"
-	.string "Arrgh, I didn't count on being meddled\n"
-	.string "with by some meddling kid!$"
+	.string "{JPN}ど どうしよう……\nパーツを うばえないと まずくないか?\pうむ……\nまさか こどもに じゃま されるなんて\lこれっぽっちも おもってなかったぜ"
+	.string ""
+	.string ""
+	.string ""
+	.string "$"
 
 SlateportCity_OceanicMuseum_2F_Text_CameToSeeWhatsTakingSoLong:
-	.string "I came to see what was taking so\n"
-	.string "long to snatch some parts, and you\l"
-	.string "simps are held up by a mere child?$"
+	.string "{JPN}パーツを うばうのに\nいつまで かかっているのかと おもえば\lこんな こどもに じゃま されていたのか?"
+	.string ""
+	.string "$"
 
 SlateportCity_OceanicMuseum_2F_Text_ArchieWarning:
-	.string "We are TEAM AQUA,\n"
-	.string "and we love the sea!\p"
-	.string "And I am TEAM AQUA's leader,\n"
-	.string "ARCHIE!\p"
-	.string "What makes you interfere with us?\p"
-	.string "...No! You can't be!\n"
-	.string "You're not one of TEAM MAGMA?\p"
-	.string "Wait, that can't be right.\n"
-	.string "You're not dressed for the part.\p"
-	.string "... ... ... ... ... ...\n"
-	.string "... ... ... ... ... ...\p"
-	.string "POKEMON, people... All life depends on\n"
-	.string "the sea.\p"
-	.string "So, TEAM AQUA is dedicated to\n"
-	.string "the expansion of the sea.\p"
-	.string "Don't you agree? What we are doing\n"
-	.string "is a magnificent undertaking.\p"
-	.string "Ah, fine...\n"
-	.string "You're still too young to understand\l"
-	.string "our noble objective.\p"
-	.string "But, I warn you, don't even consider\n"
-	.string "interfering with our plans again.\p"
-	.string "The consequences will cost you\n"
-	.string "dearly!\p"
-	.string "And don't you forget it!$"
+	.string "{JPN}マグマだんの なかま なのか!?\pいや それにしては\nみにつけている ふくが ちがうな\p…… …… ……\n…… …… ……\pポケモンも ひとも すべての いのちは\nうみから うまれた……\pだから アクアだんは\nうみを ふやそうと しているのだよ\pどうだい?\nとても すばらしい ことだろう?\pまあ いい……\nまだ わかい おまえに\lわれわれの りそうなど わかるまい……\pだが このさきも われわれの\nかつどうを じゃまする つもりなら\lただでは すまさない からな!\pそれだけは おぼえて おくのだ!"
+	.string ""
+	.string ""
+	.string ""
+	.string ""
+	.string ""
+	.string ""
+	.string ""
+	.string ""
+	.string ""
+	.string ""
+	.string ""
+	.string ""
+	.string ""
+	.string ""
+	.string ""
+	.string ""
+	.string "$"
 
 SlateportCity_OceanicMuseum_2F_Text_SternThankYouForSavingUs:
-	.string "CAPT. STERN: You're...\n"
-	.string "Ah, okay, you're {PLAYER}{KUN}...\p"
-	.string "Anyway, that was a tense situation!\n"
-	.string "Thank you for saving us!\p"
-	.string "Oh, yes, I almost forgot that you\n"
-	.string "even brought the parts from DEVON!$"
+	.string "{JPN}クスノキ『きみは……\nそうか {PLAYER}{KUN} というのか……\pいやあ あぶない ところ だった!\nたすけてくれて ありがとうよ!\pおっと そうだった!\nデボンに たのんでおいた パーツを\lもってきて くれたの わすれていたよ!"
+	.string ""
+	.string ""
+	.string ""
+	.string ""
+	.string ""
+	.string "$"
 
 SlateportCity_OceanicMuseum_2F_Text_SternIveGotToGo:
-	.string "CAPT. STERN: Whoops!\n"
-	.string "There's no time to lose!\p"
-	.string "We have to set out on our ocean-floor\n"
-	.string "expedition really soon.\p"
-	.string "Thanks again, but now I've got\n"
-	.string "to go!\p"
-	.string "Feel free to wander around and check\n"
-	.string "out our facilities, though.$"
+	.string "{JPN}クスノキ『おっと!\nこうしちゃ いられない!\pそろそろ かいてい ちょうさに\nしゅっぱつ する じかんだ!\pわたしは これで しつれい するけど\nきみは ゆっくり かんないを\lけんぶつ していって くれたまえ!"
+	.string ""
+	.string ""
+	.string ""
+	.string ""
+	.string ""
+	.string "$"
 
 SlateportCity_OceanicMuseum_2F_Text_RemindsMeOfAbandonedShip:
-	.string "I saw a model of a ship here.\p"
-	.string "It reminded me of the ABANDONED SHIP\n"
-	.string "near DEWFORD TOWN...$"
+	.string "{JPN}ふねの もけいを みておると\nムロの ちかくに ある\lすてられぶねを おもいだすのう……"
+	.string ""
+	.string "$"
 
 SlateportCity_OceanicMuseum_2F_Text_DontRunInMuseum:
-	.string "Don't you dare run around inside\n"
-	.string "the MUSEUM!$"
+	.string "{JPN}はくぶつかんの なかを\nはしり まわるんじゃ ありませんよッ!"
+	.string "$"
 
 SlateportCity_OceanicMuseum_2F_Text_WantToRideSubmarine:
-	.string "Wow, the submarine's awesome!\n"
-	.string "I want to go for a ride!$"
+	.string "{JPN}せんすいてい かっこいー!\nおれも のりてーよ!"
+	.string "$"
 
 SlateportCity_OceanicMuseum_2F_Text_WaterQualitySample1:
-	.string "WATER QUALITY SAMPLE 1, the\n"
-	.string "label says.\p"
-	.string "The sea is all connected, but the\n"
-	.string "water seems to differ by region.$"
+	.string "{JPN}「すいしつ サンプル 1」\nと かかれた ラベルが はってある!\pうみは みんな つながって いるのに\nちいきに よって すこし ちがうらしい"
+	.string ""
+	.string ""
+	.string "$"
 
 SlateportCity_OceanicMuseum_2F_Text_WaterQualitySample2:
-	.string "WATER QUALITY SAMPLE 2, the\n"
-	.string "label says.\p"
-	.string "Does the saltiness of seawater differ\n"
-	.string "by region, too?$"
+	.string "{JPN}「すいしつ サンプル 2」\nと かかれた ラベルが はってある!\pちいきが ちがえば うみの みずの\nしょっぱさも ちがったり するのかな?"
+	.string ""
+	.string ""
+	.string "$"
 
 SlateportCity_OceanicMuseum_2F_Text_PressureExperiment:
-	.string "A rubber ball is expanding and\n"
-	.string "shrinking.\p"
-	.string "In the sea, the weight of water itself\n"
-	.string "exerts pressure.\p"
-	.string "In shallow water, the pressure is not\n"
-	.string "very heavy.\p"
-	.string "However, in extremely deep water,\n"
-	.string "the pressure can reach even tens of\l"
-	.string "thousands of tons on a small area.$"
+	.string "{JPN}ゴムで できた ボールが\nふくらんだり しぼんだり している!\p「うみの そこには すいあつ といって\n みずじたいの おもさが かかります」\p「あさい ところでは すいあつも かるく\n ふかい ところでは なんまんトン もの\l すいあつが かかるのです」"
+	.string ""
+	.string ""
+	.string ""
+	.string ""
+	.string ""
+	.string "$"
 
 SlateportCity_OceanicMuseum_2F_Text_HoennModel:
-	.string "MODEL OF HOENN REGION\p"
-	.string "It's a miniature diorama of the\n"
-	.string "HOENN region.\p"
-	.string "Where is LITTLEROOT TOWN on this?$"
+	.string "{JPN}「ホウエン ちほうの もけい」\pホウエンちほう ぜんたいの ミニチュアだ!\nミシロタウンは どのへん だろう?"
+	.string ""
+	.string "$"
 
 SlateportCity_OceanicMuseum_2F_Text_DeepSeawaterDisplay:
-	.string "It's a display on the flow of seawater.\p"
-	.string "Near the bottom of the sea, water\n"
-	.string "flows due to differences in such\l"
-	.string "factors as temperature and salinity.$"
+	.string "{JPN}かいすいの ながれに ついての てんじだ!\p「うみの そこに ちかい ところ では\n みずの おんどや えんぶんの ちがいで\l うみの みずが ながれて いきます」"
+	.string ""
+	.string ""
+	.string "$"
 
 SlateportCity_OceanicMuseum_2F_Text_SurfaceSeawaterDisplay:
-	.string "It's a display on the flow of seawater.\p"
-	.string "Toward the surface, seawater flows\n"
-	.string "as currents driven by the winds.$"
+	.string "{JPN}かいすいの ながれに ついての てんじだ!\p「うみの ひょうめん あたり では\n かぜの ちからに よって\l うみの みずが ながれて いきます」"
+	.string ""
+	.string ""
+	.string "$"
 
 SlateportCity_OceanicMuseum_2F_Text_SSTidalReplica:
-	.string "THE FERRY S.S. TIDAL\p"
-	.string "A scale replica of the ship under\n"
-	.string "construction at STERN'S SHIPYARD.$"
+	.string "{JPN}れんらくせん タイドリップごう」\pこれは げんざい クスノキ ぞうせんじょで\nつくられている ふねの もけい です!"
+	.string ""
+	.string "$"
 
 SlateportCity_OceanicMuseum_2F_Text_SubmarineReplica:
-	.string "SUBMARINE EXPLORER 1\p"
-	.string "A replica of the high-performance\n"
-	.string "ocean floor exploration submarine.$"
+	.string "{JPN}「せんすいてい かいえん 1ごう」\pうみの そこを ちょうさ するための\nこうせいのう せんすいていの もけい です!"
+	.string ""
+	.string "$"
 
 SlateportCity_OceanicMuseum_2F_Text_SumbersibleReplica:
-	.string "SUBMERSIBLE POD\p"
-	.string "A replica of a compact, unmanned\n"
-	.string "pod for seafloor exploration.$"
+	.string "{JPN}「せんすい ポッド」\pかいていで さぎょうを するための\nむじん こがたポッドの もけい です!"
+	.string ""
+	.string "$"
 
 SlateportCity_OceanicMuseum_2F_Text_SSAnneReplica:
-	.string "S.S. ANNE\p"
-	.string "A replica of the luxury liner that\n"
-	.string "circles the globe.$"
+	.string "{JPN}「サント・アンヌ ごう」\pせかいを いっしゅう している\nごうか きゃくせんの もけい です!"
+	.string ""
+	.string "$"
