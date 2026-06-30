@@ -2674,6 +2674,7 @@
 #define FLAG_DAILY_SOOTOPOLIS_RECEIVED_BERRY        0
 #define FLAG_UNUSED_0x933                           0
 #define FLAG_DAILY_APPRENTICE_LEAVES                0
+#define FLAG_DAILY_PARTY_ROAMER_PARK_NORMAN_GIFT    0
 
 // Special Flags (Stored in EWRAM (sSpecialFlags), not in the SaveBlock)
 #define SPECIAL_FLAGS_START                     0x4000

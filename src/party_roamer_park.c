@@ -2,6 +2,8 @@
 #include "data.h"
 #include "event_data.h"
 #include "event_object_movement.h"
+#include "field_effect.h"
+#include "field_player_avatar.h"
 #include "field_screen_effect.h"
 #include "field_weather.h"
 #include "follower_helper.h"
@@ -161,7 +163,8 @@ static void FieldCallback_EnterPartyRoamerPark(void)
         WARP_ID_NONE,
         PARTY_ROAMER_PARK_ENTRY_X,
         PARTY_ROAMER_PARK_ENTRY_Y);
-    DoWarp();
+    SetPlayerAvatarTransitionFlags(PLAYER_AVATAR_FLAG_ON_FOOT);
+    FldEff_TeleportWarpOutWithPresetDestination();
 }
 
 void Special_SpawnPartyRoamerMons(void)

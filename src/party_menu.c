@@ -302,6 +302,10 @@ static void HandleChooseMonSelection(u8, s8 *);
 static u16 PartyMenuButtonHandler(s8 *);
 static s8 *GetCurrentPartySlotPtr(void);
 static bool8 CanEnterPartyRoamerParkFromPartyMenu(void);
+static void PromptEnterPartyRoamerPark(u8);
+static void Task_PartyRoamerParkYesNo(u8);
+static void Task_HandlePartyRoamerParkYesNoInput(u8);
+static void EnterPartyRoamerParkFromPartyMenu(u8);
 static bool8 IsSelectedMonNotEgg(u8 *);
 static bool8 DoesSelectedMonKnowHM(u8 *);
 static void PartyMenuRemoveWindow(u8 *);
@@ -513,6 +517,8 @@ static const u8 sText_doneText[] = _("{STR_VAR_1}の とくせいは\n{STR_VAR_2
 static const u8 sText_BasePointsResetToZero[] = _("{STR_VAR_1}の きそポイントが\nすべて 0に なった！{PAUSE_UNTIL_PRESS}");
 static const u8 sText_CannotSendMonToBoxHM[] = _("ひでんわざを おぼえているので\nボックスへ おくれません。{PAUSE_UNTIL_PRESS}");
 static const u8 sText_CannotSendMonToBoxPartner[] = _("あなたの ポケモンでは ないので\nボックスへ おくれません。{PAUSE_UNTIL_PRESS}");
+
+static const u8 sText_EnterPartyRoamerParkPrompt[] = _("{JPN}「{PLAYER}」の パソコンへ \nせつぞくしますか？");
 
 // static const data
 #include "data/party_menu.h"
@@ -1481,11 +1487,7 @@ void Task_HandleChooseMonInput(u8 taskId)
 
         if (CanEnterPartyRoamerParkFromPartyMenu() && JOY_NEW(SELECT_BUTTON))
         {
-            PlaySE(SE_SELECT);
-            gFieldCallback2 = FieldCallback_PrepareEnterPartyRoamerPark;
-            gPostMenuFieldCallback = NULL;
-            gPartyMenu.exitCallback = CB2_ReturnToField;
-            Task_ClosePartyMenu(taskId);
+            PromptEnterPartyRoamerPark(taskId);
             return;
         }
 
@@ -1531,6 +1533,48 @@ static bool8 CanEnterPartyRoamerParkFromPartyMenu(void)
         && gPartyMenu.action == PARTY_ACTION_CHOOSE_MON
         && (gSaveBlock1Ptr->location.mapGroup != MAP_GROUP(MAP_PARTY_ROAMER_PARK)
          || gSaveBlock1Ptr->location.mapNum != MAP_NUM(MAP_PARTY_ROAMER_PARK));
+}
+
+static void PromptEnterPartyRoamerPark(u8 taskId)
+{
+    PlaySE(SE_SELECT);
+    PartyMenuRemoveWindow(&sPartyMenuInternal->windowId[1]);
+    StringExpandPlaceholders(gStringVar4, sText_EnterPartyRoamerParkPrompt);
+    DisplayPartyMenuMessage(gStringVar4, TRUE);
+    gTasks[taskId].func = Task_PartyRoamerParkYesNo;
+}
+
+static void Task_PartyRoamerParkYesNo(u8 taskId)
+{
+    if (IsPartyMenuTextPrinterActive() != TRUE)
+    {
+        PartyMenuDisplayYesNoMenu();
+        gTasks[taskId].func = Task_HandlePartyRoamerParkYesNoInput;
+    }
+}
+
+static void Task_HandlePartyRoamerParkYesNoInput(u8 taskId)
+{
+    switch (Menu_ProcessInputNoWrapClearOnChoose())
+    {
+    case 0:
+        EnterPartyRoamerParkFromPartyMenu(taskId);
+        break;
+    case MENU_B_PRESSED:
+        PlaySE(SE_SELECT);
+        // fallthrough
+    case 1:
+        Task_ReturnToChooseMonAfterText(taskId);
+        break;
+    }
+}
+
+static void EnterPartyRoamerParkFromPartyMenu(u8 taskId)
+{
+    gFieldCallback2 = FieldCallback_PrepareEnterPartyRoamerPark;
+    gPostMenuFieldCallback = NULL;
+    gPartyMenu.exitCallback = CB2_ReturnToField;
+    Task_ClosePartyMenu(taskId);
 }
 
 static s8 *GetCurrentPartySlotPtr(void)

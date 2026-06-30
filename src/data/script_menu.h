@@ -816,6 +816,15 @@ static const struct MenuAction MultichoiceList_BerryPlot[] =
     {gText_Exit},
 };
 
+static const struct MenuAction MultichoiceList_PartyRoamerPokeblockFlavor[] =
+{
+    {COMPOUND_STRING("{JPN}からい")},
+    {COMPOUND_STRING("{JPN}あまい")},
+    {COMPOUND_STRING("{JPN}にがい")},
+    {COMPOUND_STRING("{JPN}しぶい")},
+    {COMPOUND_STRING("{JPN}すっぱい")},
+};
+
 static const struct MenuAction sMultichoiceList_BikeShop[] = {
     {COMPOUND_STRING("じてんしゃ{CLEAR_TO 73}{FONT_SMALL}1,000,000円")},
     {COMPOUND_STRING("いりません")}
@@ -1294,6 +1303,7 @@ static const struct MultichoiceListStruct sMultichoiceLists[] =
     [MULTI_HOF_VICTORIES_QUIT]                         = MULTICHOICE(sMultichoiceList_HOF_Victories_Quit),
     [MULTI_EGGS_VICTORIES_QUIT]                        = MULTICHOICE(sMultichoiceList_Eggs_Victories_Quit),
     [MULTI_HOF_EGGS_VICTORIES_QUIT]                    = MULTICHOICE(sMultichoiceList_HOF_Eggs_Victories_Quit),
+    [MULTI_PARTY_ROAMER_POKEBLOCK_FLAVOR]              = MULTICHOICE(MultichoiceList_PartyRoamerPokeblockFlavor),
 };
 
 const u8 *const gStdStrings[] =

@@ -68,6 +68,15 @@ enum {
 };
 
 enum {
+    PARTY_ROAMER_POKEBLOCK_SPICY,
+    PARTY_ROAMER_POKEBLOCK_SWEET,
+    PARTY_ROAMER_POKEBLOCK_BITTER,
+    PARTY_ROAMER_POKEBLOCK_DRY,
+    PARTY_ROAMER_POKEBLOCK_SOUR,
+    PARTY_ROAMER_POKEBLOCK_FLAVOR_COUNT,
+};
+
+enum {
     BLENDER_MISTER,
     BLENDER_LADDIE,
     BLENDER_LASSIE,
@@ -279,6 +288,22 @@ static const u8 sText_Min[] = _("ふん ");
 static const u8 sText_Sec[] = _("びょう");
 static const u8 sText_MaximumSpeed[] = _("さいこうそくど");
 static const u8 sText_RPM[] = _(" RPM");
+static const u8 sPartyRoamerBlenderMomName[] = _("{JPN}ママ");
+static const u8 sPartyRoamerBlenderDadName[] = _("{JPN}パパ");
+
+static const enum Item sPartyRoamerBlenderBerries[PARTY_ROAMER_POKEBLOCK_FLAVOR_COUNT][2] =
+{
+    [PARTY_ROAMER_POKEBLOCK_SPICY]  = {ITEM_TAMATO_BERRY, ITEM_BABIRI_BERRY},
+    [PARTY_ROAMER_POKEBLOCK_SWEET]  = {ITEM_MAGOST_BERRY, ITEM_SALAC_BERRY},
+    [PARTY_ROAMER_POKEBLOCK_BITTER] = {ITEM_RABUTA_BERRY, ITEM_HABAN_BERRY},
+    [PARTY_ROAMER_POKEBLOCK_DRY]    = {ITEM_CORNN_BERRY,  ITEM_CHARTI_BERRY},
+    [PARTY_ROAMER_POKEBLOCK_SOUR]   = {ITEM_NOMEL_BERRY,  ITEM_YACHE_BERRY},
+};
+
+static EWRAM_DATA bool8 sPartyRoamerBlenderActive = FALSE;
+static EWRAM_DATA u8 sPartyRoamerBlenderFlavor = 0;
+static EWRAM_DATA bool8 sPartyRoamerBlenderCompleted = FALSE;
+
 static const u8 sText_Dot[] = _(".");
 static const u8 sText_NewLine[] = _("\n");
 static const u8 sText_Ranking[] = _("ランキング");
@@ -1030,6 +1055,32 @@ void DoBerryBlending(void)
     SetMainCallback2(CB2_LoadBerryBlender);
 }
 
+void SetPartyRoamerParkBerryBlenderFlavor(void)
+{
+    sPartyRoamerBlenderCompleted = FALSE;
+
+    if (gSpecialVar_0x8005 < PARTY_ROAMER_POKEBLOCK_FLAVOR_COUNT)
+    {
+        sPartyRoamerBlenderActive = TRUE;
+        sPartyRoamerBlenderFlavor = gSpecialVar_0x8005;
+    }
+    else
+    {
+        sPartyRoamerBlenderActive = FALSE;
+        sPartyRoamerBlenderFlavor = 0;
+    }
+}
+
+bool32 DidPartyRoamerParkBerryBlenderComplete(void)
+{
+    bool32 completed = sPartyRoamerBlenderCompleted;
+
+    sPartyRoamerBlenderCompleted = FALSE;
+    sPartyRoamerBlenderActive = FALSE;
+    sPartyRoamerBlenderFlavor = 0;
+    return completed;
+}
+
 // Show the blender screen initially and prompt to choose a berry
 static void CB2_LoadBerryBlender(void)
 {
@@ -1234,8 +1285,16 @@ static void InitLocalPlayers(u8 opponentsNum)
         gInGameOpponentsNo = 2;
         sBerryBlender->numPlayers = 3;
         StringCopy(gLinkPlayers[0].name, gSaveBlock2Ptr->playerName);
-        StringCopy(gLinkPlayers[1].name, sBlenderOpponentsNames[BLENDER_DUDE]);
-        StringCopy(gLinkPlayers[2].name, sBlenderOpponentsNames[BLENDER_LASSIE]);
+        if (sPartyRoamerBlenderActive)
+        {
+            StringCopy(gLinkPlayers[1].name, sPartyRoamerBlenderMomName);
+            StringCopy(gLinkPlayers[2].name, sPartyRoamerBlenderDadName);
+        }
+        else
+        {
+            StringCopy(gLinkPlayers[1].name, sBlenderOpponentsNames[BLENDER_DUDE]);
+            StringCopy(gLinkPlayers[2].name, sBlenderOpponentsNames[BLENDER_LASSIE]);
+        }
 
         gLinkPlayers[0].language = GAME_LANGUAGE;
         gLinkPlayers[1].language = GAME_LANGUAGE;
@@ -1534,6 +1593,13 @@ static void SetOpponentsBerryData(u16 playerBerryItemId, u8 playersNum, struct B
     u16 opponentBerryId;
     u16 berryMasterDiff;
     u16 i;
+
+    if (sPartyRoamerBlenderActive && sPartyRoamerBlenderFlavor < PARTY_ROAMER_POKEBLOCK_FLAVOR_COUNT && playersNum == 3)
+    {
+        SetPlayerBerryData(1, sPartyRoamerBlenderBerries[sPartyRoamerBlenderFlavor][0]);
+        SetPlayerBerryData(2, sPartyRoamerBlenderBerries[sPartyRoamerBlenderFlavor][1]);
+        return;
+    }
 
     if (playerBerryItemId == ITEM_ENIGMA_BERRY_E_READER)
     {
@@ -2957,9 +3023,15 @@ static void CB2_CheckPlayAgainLocal(void)
         if (!gPaletteFade.active)
         {
             if (sBerryBlender->playAgainState == PLAY_AGAIN_YES)
+            {
                 SetMainCallback2(DoBerryBlending);
+            }
             else
+            {
+                sPartyRoamerBlenderActive = FALSE;
+                sPartyRoamerBlenderFlavor = 0;
                 SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
+            }
 
             FreeAllWindowBuffers();
             UnsetBgTilemapBuffer(2);
@@ -3557,6 +3629,8 @@ static bool8 PrintBlendingResults(void)
 
         RemoveBagItem(gSpecialVar_ItemId, 1);
         AddPokeblock(&pokeblock);
+        if (sPartyRoamerBlenderActive)
+            sPartyRoamerBlenderCompleted = TRUE;
 
         sBerryBlender->textState = 0;
         sBerryBlender->mainState++;

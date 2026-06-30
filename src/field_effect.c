@@ -2680,10 +2680,18 @@ static void EscapeRopeWarpInEffect_Spin(struct Task *task)
 #undef tStartDir
 
 #define tState data[0]
+#define tUsePresetWarp data[6]
 
 void FldEff_TeleportWarpOut(void)
 {
     CreateTask(Task_TeleportWarpOut, 0);
+}
+
+void FldEff_TeleportWarpOutWithPresetDestination(void)
+{
+    u8 taskId = CreateTask(Task_TeleportWarpOut, 0);
+
+    gTasks[taskId].tUsePresetWarp = TRUE;
 }
 
 static void (*const sTeleportWarpOutFieldEffectFuncs[])(struct Task *) = {
@@ -2768,7 +2776,8 @@ static void TeleportWarpOutFieldEffect_End(struct Task *task)
 
         if (BGMusicStopped() == TRUE)
         {
-            SetWarpDestinationForTeleport();
+            if (!task->tUsePresetWarp)
+                SetWarpDestinationForTeleport();
             WarpIntoMap();
             SetMainCallback2(CB2_LoadMap);
             gFieldCallback = FieldCallback_TeleportWarpIn;
@@ -3100,6 +3109,7 @@ static void LoadFieldMoveOutdoorStreaksTilemap(u16 offs)
 }
 
 #undef tState
+#undef tUsePresetWarp
 #undef tWinHoriz
 #undef tWinVert
 #undef tWinIn

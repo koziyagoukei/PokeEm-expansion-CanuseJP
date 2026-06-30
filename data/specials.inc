@@ -181,6 +181,8 @@ gSpecials::
 	def_special ChangePokemonNickname, waitstate=1
 	def_special ChoosePartyMon, waitstate=1
 	def_special GetFirstFreePokeblockSlot
+	def_special SetPartyRoamerParkBerryBlenderFlavor
+	def_special DidPartyRoamerParkBerryBlenderComplete
 	def_special DoBerryBlending, waitstate=1
 	def_special PlayRoulette, waitstate=1
 	def_special IsFanClubMemberFanOfPlayer
