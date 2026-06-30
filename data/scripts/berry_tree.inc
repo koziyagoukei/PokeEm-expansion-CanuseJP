@@ -255,91 +255,80 @@ BerryTree_EventScript_PlantBerry::
 	return
 
 BerryTree_Text_ItsSoftLoamySoil:
-	.string "It's soft, loamy soil.$"
+	.string "{JPN}ふかふかの つちだ!$"
 
 BerryTree_Text_WantToPlant:
-	.string "It's soft, loamy soil.\n"
-	.string "Want to plant a BERRY?$"
+	.string "{JPN}ふかふかの つちだ!\nきのみを うめますか？$"
 
 BerryTree_Text_PlantedOneBerry:
-	.string "{PLAYER} planted one {STR_VAR_1} in\n"
-	.string "the soft, loamy soil.$"
+	.string "{JPN}{PLAYER}は ふかふかの つちに\n{STR_VAR_1}のみを うめた!$"
 
 BerryTree_Text_BerryGrowthStage1:
 .if OW_BERRY_SIX_STAGES == TRUE
-	.string "This is where you planted the\n{STR_VAR_1}!$"
+	.string "{JPN}{STR_VAR_1}のみを うめた ばしょだ!"
 .else
-	.string "One {STR_VAR_1} was planted here.$"
+	.string "{JPN}{STR_VAR_1}のみを うめた ばしょだ!$"
 .endif
 
 BerryTree_Text_BerryGrowthStage2:
 .if OW_BERRY_SIX_STAGES == TRUE
-	.string "The {STR_VAR_1} is sprouting!$"
+	.string "{JPN}{STR_VAR_1}の めが でてきた!$"
 .else
-	.string "{STR_VAR_1} has sprouted.$"
+	.string "{JPN}{STR_VAR_1}の めが でてきた!$"
 .endif
 
 BerryTree_Text_BerryGrowthStage3:
 .if OW_BERRY_SIX_STAGES == TRUE
-	.string "The {STR_VAR_1}'s seedling is growing well!$"
+	.string "{JPN}{STR_VAR_1}の みきが おおきく なってきた!$"
 .else
-	.string "This {STR_VAR_1} plant is growing taller.$"
+	.string "{JPN}{STR_VAR_1}の みきが おおきく なってきた!$"
 .endif
 
 BerryTree_Text_BerryGrowthStageTrunk:
-	.string "The {STR_VAR_1}'s trunk is getting bigger!$"
+	.string "{JPN}{STR_VAR_1}の めが でてきた!$"
 
 BerryTree_Text_BerryGrowthStageBudding:
-	.string "The {STR_VAR_1} tree has buds!$"
+	.string "The {STR_VAR_1}の めが でてきた!$"
 
 BerryTree_Text_BerryGrowthStage4:
 .if OW_BERRY_SIX_STAGES == TRUE
-	.string "The {STR_VAR_1} tree is in bloom!$"
+	.string "{JPN}{STR_VAR_1}の はなが {STR_VAR_2} さいてる!$"
 .else
-	.string "These {STR_VAR_1} flowers are blooming\n"
-	.string "{STR_VAR_2}.$"
+	.string "{JPN}{STR_VAR_1}の はなが {STR_VAR_2} さいてる!$"
 .endif
 
 BerryTree_Text_CareAdverbGreat:
-	.string "very beautifully$"
+	.string "{JPN}とてもうつくしく$"
 
 BerryTree_Text_CareAdverbPoor:
-	.string "cutely$"
+	.string "{JPN}かわいく$"
 
 BerryTree_Text_CareAdverbGood:
-	.string "prettily$"
+	.string "{JPN}きれいに$"
 
 BerryTree_Text_WantToPick:
-	.string "You found {STR_VAR_2} {STR_VAR_1}!\p"
-	.string "Do you want to pick the\n"
-	.string "{STR_VAR_1}?$"
+	.string "{JPN}{STR_VAR_1}のみが {STR_VAR_2}こ できてる!\p{STR_VAR_1}のみを とりますか？$"
 
 BerryTree_Text_PickedTheBerry:
-	.string "{PLAYER} picked the {STR_VAR_2} {STR_VAR_1}.$"
+	.string "{JPN}{PLAYER}は {STR_VAR_1}のみを {STR_VAR_2}こ とった!$"
 
 BerryTree_Text_PutAwayBerry:
-	.string "{PLAYER} put away the {STR_VAR_1}\n"
-	.string "in the BAG's BERRIES POCKET.\p"
-	.string "The soil returned to its soft and\n"
-	.string "loamy state.$"
+	.string "{JPN}{PLAYER}は {STR_VAR_1}のみを\nきのみポケットに しまった!\pつちは もとの ふかふかに もどった!$"
 
 BerryTree_Text_BerryPocketFull:
-	.string "The BAG's BERRIES POCKET is full.\p"
-	.string "The {STR_VAR_1} couldn't be taken.$"
+	.string "{JPN}バッグの きのみポケットが いっぱいだった\p{STR_VAR_1}のみを あきらめた$"
 
 BerryTree_Text_BerryLeftUnpicked:
-	.string "{PLAYER} left the {STR_VAR_1}\n"
-	.string "unpicked.$"
+	.string "{JPN}{PLAYER}は {STR_VAR_1}のみを\nそのままに しておいた$"
 
 BerryTree_Text_WantToWater:
-	.string "Want to water the {STR_VAR_1} with the\n"
-	.string "WAILMER PAIL?$"
+	.string "{JPN}もっている ホエルコじょうろ で\n{STR_VAR_1}に みずを あげますか？$"
 
 BerryTree_Text_WateredTheBerry:
-	.string "{PLAYER} watered the {STR_VAR_1}.$"
+	.string "{JPN}{PLAYER}は {STR_VAR_1}に みずを あげた!$"
 
 BerryTree_Text_PlantIsDelighted:
-	.string "The plant seems to be delighted.$"
+	.string "{JPN}とっても よろこんでる みたい!$"
 
 BerryTree_Text_ExclamationPoint:
 	.string "!$"
@@ -397,11 +386,7 @@ BerryTree_Text_PickedTheBerry_Mutation:
 	.string "and the {STR_VAR_3}.$"
 
 BerryTree_Text_PutAwayBerry_Mutation:
-	.string "{PLAYER} put away the {STR_VAR_1}\n"
-	.string "and the {STR_VAR_3} in the BAG's\l"
-	.string "BERRIES POCKET.\p"
-	.string "The soil returned to its soft and\n"
-	.string "loamy state.$"
+	.string "{JPN}{PLAYER}は {STR_VAR_1}のみと\n{STR_VAR_3}のみを きのみポケットに しまった!\pつちは もとの ふかふかに もどった!$"
 .endif
 
 .if OW_BERRY_MULCH_USAGE == TRUE
@@ -413,12 +398,10 @@ BerryTree_EventScript_UseMulch::
 	return
 
 BerryTree_Text_WantToMulch:
-	.string "It's soft, loamy soil.\n"
-	.string "Put down some fertilizer?$"
+	.string "{JPN}ふかふかの つちだ!\nこやしを つかいますか?$"
 
 BerryTree_Text_ScatteredMulch:
-	.string "{PLAYER} scattered the {STR_VAR_1}\n"
-	.string "on the soft, loamy soil.$"
+	.string "{JPN}{PLAYER}は ふかふかの つちに\n{STR_VAR_1}を まいた!$"
 .endif
 
 .if OW_BERRY_WEEDS == TRUE
