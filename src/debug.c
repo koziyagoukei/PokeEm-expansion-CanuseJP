@@ -4887,7 +4887,6 @@ static void DebugNativeStep_Party_SetFriendshipMain(u8 taskId)
     gTasks[taskId].tFriendship = friendship;
     gTasks[taskId].tInput = friendship;
     gTasks[taskId].tDigit = 0;
-    gTasks[taskId].tPartyId = 0;
 }
 
 void DebugNative_Party_SetFriendship(void)

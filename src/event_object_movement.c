@@ -1876,7 +1876,11 @@ static u8 TrySetupObjectEventSprite(const struct ObjectEventTemplate *objectEven
     if (spriteTemplate->paletteTag == OBJ_EVENT_PAL_TAG_DYNAMIC)
         sprite->oam.paletteNum = LoadDynamicFollowerPalette(OW_SPECIES(objectEvent), OW_SHINY(objectEvent), OW_FEMALE(objectEvent));
     if (OW_GFX_COMPRESS && sprite->usingSheet)
+    {
+        // Compressed overworld sheets reserve the first frame; recalc after sheetSpan is known.
         sprite->sheetSpan = GetSpanPerImage(sprite->oam.shape, sprite->oam.size);
+        SetSpriteSheetFrameTileNum(sprite);
+    }
     GetMapCoordsFromSpritePos(objectEvent->currentCoords.x + cameraX, objectEvent->currentCoords.y + cameraY, &sprite->x, &sprite->y);
     sprite->centerToCornerVecX = -(graphicsInfo->width >> 1);
     sprite->centerToCornerVecY = -(graphicsInfo->height >> 1);
@@ -2034,13 +2038,19 @@ u8 CreateObjectGraphicsSpriteWithTag(u16 graphicsId, void (*callback)(struct Spr
 
     Free(spriteTemplate);
 
-    if (spriteId != MAX_SPRITES && subspriteTables != NULL)
+    if (spriteId != MAX_SPRITES)
     {
         sprite = &gSprites[spriteId];
         if (OW_GFX_COMPRESS && graphicsInfo->compressed)
+        {
             sprite->sheetSpan = GetSpanPerImage(sprite->oam.shape, sprite->oam.size);
-        SetSubspriteTables(sprite, subspriteTables);
-        sprite->subspriteMode = SUBSPRITES_IGNORE_PRIORITY;
+            SetSpriteSheetFrameTileNum(sprite);
+        }
+        if (subspriteTables != NULL)
+        {
+            SetSubspriteTables(sprite, subspriteTables);
+            sprite->subspriteMode = SUBSPRITES_IGNORE_PRIORITY;
+        }
     }
     return spriteId;
 }
@@ -3029,7 +3039,10 @@ static void SpawnObjectEventOnReturnToField(u8 objectEventId, s16 x, s16 y)
         sprite = &gSprites[i];
         // Use palette from species palette table
         if (OW_GFX_COMPRESS && sprite->usingSheet)
+        {
             sprite->sheetSpan = GetSpanPerImage(sprite->oam.shape, sprite->oam.size);
+            SetSpriteSheetFrameTileNum(sprite);
+        }
         GetMapCoordsFromSpritePos(x + objectEvent->currentCoords.x, y + objectEvent->currentCoords.y, &sprite->x, &sprite->y);
         sprite->centerToCornerVecX = -(graphicsInfo->width >> 1);
         sprite->centerToCornerVecY = -(graphicsInfo->height >> 1);
@@ -3127,6 +3140,8 @@ static void ObjectEventSetGraphics(struct ObjectEvent *objectEvent, const struct
     sprite->images = graphicsInfo->images;
     sprite->anims = graphicsInfo->anims;
     sprite->subspriteTables = graphicsInfo->subspriteTables;
+    if (OW_GFX_COMPRESS && sprite->usingSheet)
+        SetSpriteSheetFrameTileNum(sprite);
     objectEvent->inanimate = graphicsInfo->inanimate;
     SetSpritePosToMapCoords(objectEvent->currentCoords.x, objectEvent->currentCoords.y, &sprite->x, &sprite->y);
     sprite->centerToCornerVecX = -(graphicsInfo->width >> 1);
