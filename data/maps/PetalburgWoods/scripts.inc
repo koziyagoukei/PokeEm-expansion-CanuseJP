@@ -316,7 +316,7 @@ PetalburgWoods_EventScript_JamesRematch::
 	end
 
 PetalburgWoods_Text_NotAOneToBeFound:
-	.string "{JPN}いないなあ……$"
+	.string "{JPN}うーん\nいないなあ……$"
 
 PetalburgWoods_Text_HaveYouSeenShroomish:
 	.string "{JPN}ねえ きみきみ このあたりで\nキノココって ポケモン みなかった?\pおじさん あの ポケモン すき なのよね"

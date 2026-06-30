@@ -542,312 +542,312 @@ MtChimney_EventScript_SawyerRematch::
 	end
 
 MtChimney_Text_MeteoriteWillActivateVolcano:
-	.string "The power contained in the METEORITE...\p"
-	.string "By amplifying its power with this\n"
-	.string "machine, MT. CHIMNEY's volcanic\l"
-	.string "activity will instantly intensify...\p"
-	.string "Its energy will grow deep inside\n"
-	.string "the crater and...\l"
-	.string "Fufufu...$"
+	.string "{JPN}いんせきに ひめられた ちから\pこの そうちで ぞうふく すれば\nたちまちの うちに えんとつやまの\lかざん かつどうは かっぱつになる……\pその エネルギーが\nかこうの おくふかくに はたらきかけ\lそして ふふふ……"
+	.string ""
+	.string ""
+	.string ""
+	.string ""
+	.string ""
+	.string "$"
 
 MtChimney_Text_MaxieIntro:
-	.string "MAXIE: Hm?\n"
-	.string "Who are you?\p"
-	.string "... ... ... ... ... ...\n"
-	.string "... ... ... ... ... ...\p"
-	.string "I'd heard ARCHIE bemoaning a child\n"
-	.string "who's been meddling in TEAM AQUA's\l"
-	.string "affairs.\p"
-	.string "It must be you he meant.\p"
-	.string "Humph! So you're thinking of\n"
-	.string "interfering with us, TEAM MAGMA?\p"
-	.string "Now you listen.\n"
-	.string "Long ago, living things used the\l"
-	.string "land to live and grow.\p"
-	.string "That is why land is all important!\n"
-	.string "It is the cradle of all!\p"
-	.string "That is why TEAM MAGMA is dedicated\n"
-	.string "to the expansion of the land mass.\p"
-	.string "It is for further advancement of\n"
-	.string "humankind and POKEMON!\p"
-	.string "And for that, we need the power of\n"
-	.string "what sleeps within this mountain...\p"
-	.string "Oh! There was no need for you to\n"
-	.string "learn that much.\p"
-	.string "But, no matter!\n"
-	.string "I'll teach you the consequences of\l"
-	.string "meddling in our grand design!$"
+	.string "{JPN}マツブサ『ん? だれだ おまえは\p…… …… ……\n…… …… ……\pさいきん アクアだんの かつどうを\nじゃまする こどもがいる と\lアオギリの やつが ぼやいて いたが\lそれは おまえの ことか\p……ふん!\nわれわれ マグマだんの じゃまも\lしてくれようって わけだな!\pいいか? いきものは りくちに あがり\nしんかを くりかえしてきた\pそう だいちこそが すべてなのだ!\pだから われわれ マグマだんは\nだいちを ふやすことで\lひとと ポケモンの はってんを めざす!\pそのために ひつよう なのが\nこのやまに ねむる アイツ……\pおっと! そんなことまで\nおまえが しる ひつようは なかったな\pそんなことより\nわれわれの じゃまを したら どうなるか\lおまえに わからせて やろう!"
+	.string ""
+	.string ""
+	.string ""
+	.string ""
+	.string ""
+	.string ""
+	.string ""
+	.string ""
+	.string ""
+	.string ""
+	.string ""
+	.string ""
+	.string ""
+	.string ""
+	.string ""
+	.string ""
+	.string ""
+	.string ""
+	.string ""
+	.string ""
+	.string ""
+	.string ""
+	.string ""
+	.string ""
+	.string "$"
 
 MtChimney_Text_MaxieDefeat:
-	.string "What?!\p"
-	.string "I, MAXIE, was caught off guard?!$"
+	.string "{JPN}なに!?\pこの マツブサとも あろう ものが\nゆだん したか!?"
+	.string "$"
 
 MtChimney_Text_MaxieYouHaventSeenLastOfMagma:
-	.string "MAXIE: But, enough.\n"
-	.string "I will back off this time.\p"
-	.string "But don't think that this is the last\n"
-	.string "you've seen of TEAM MAGMA.\p"
-	.string "Fufufu...\p"
-	.string "Even without the METEORITE, if we\n"
-	.string "obtain that ORB... Fufufu...$"
+	.string "{JPN}マツブサ『まあ いい\nこのばは ひとまず あきらめよう……\pだが マグマだんの かつどうは\nこれで おわったわけでは ないのだ!\pふふふ……\pいんせきなど つかわなくとも\nあの たまが てにはいれば ふふふ……"
+	.string ""
+	.string ""
+	.string ""
+	.string ""
+	.string ""
+	.string "$"
 
 MtChimney_Text_TabithaIntro:
-	.string "Hehehe!\p"
-	.string "So you've come all the way here!\p"
-	.string "But you're too late!\n"
-	.string "I've already delivered the METEORITE\l"
-	.string "from METEOR FALLS to the BOSS!$"
+	.string "{JPN}ウヒョヒョ!\pおまえ ここまで きたのか!\pだけど おそかったぜ\nりゅうせいのたきで みつけた\lいんせきは リーダーに わたしたからな!"
+	.string ""
+	.string ""
+	.string ""
+	.string "$"
 
 MtChimney_Text_TabithaDefeat:
-	.string "Hehehe...\p"
-	.string "Even though I've lost, if our leader\n"
-	.string "awakens that thing...$"
+	.string "{JPN}ウヒョヒョ……\pオレが まけても リーダーが ちゃんと\nアイツを めざめさせて……"
+	.string ""
+	.string "$"
 
 MtChimney_Text_TabithaPostBattle:
-	.string "BOSS, hurry!\n"
-	.string "Give it the METEORITE's energy!\p"
-	.string "Hehehe...$"
+	.string "{JPN}リーダー! はやく!\nいんせきの パワーを アイツに!\pウヒョヒョ……!"
+	.string ""
+	.string "$"
 
 MtChimney_Text_Grunt2Intro:
-	.string "We of TEAM MAGMA are working hard for\n"
-	.string "everyone's sake.\p"
-	.string "Like, if that thing's power made more\n"
-	.string "land, there'd be more places to live.\p"
-	.string "Everyone'd be happy!$"
+	.string "{JPN}オレら マグマだんは\nみんなの ために がんばってるんだ!\pだって アイツの ちからで\nだいちが ふえれば みんなも\lすむところが ふえて うれしいだろ?"
+	.string ""
+	.string ""
+	.string ""
+	.string "$"
 
 MtChimney_Text_Grunt2Defeat:
-	.string "Hunh?\n"
-	.string "What do you mean I lost?$"
+	.string "{JPN}あれー?\nオレ まけたのー!?"
+	.string "$"
 
 MtChimney_Text_Grunt2PostBattle:
-	.string "Our BOSS says, It will make everyone\n"
-	.string "happy.\p"
-	.string "But why does everyone keep getting\n"
-	.string "in our way?$"
+	.string "{JPN}オレらの リーダーは\n「みんなが よろこぶ ことだ」って\lいってるんだ!\pなのに なんで みんな ジャマするんだ?"
+	.string ""
+	.string ""
+	.string "$"
 
 MtChimney_Text_Grunt1Intro:
-	.string "If there were more land, I'd be able\n"
-	.string "to get a big house of my own!\p"
-	.string "I'm going to build it on hardened lava!$"
+	.string "{JPN}りくちが ふえて くれたら\nおおきな マイホーム だって もてるわ!\pようがんの うえに ひっこし するのよ!"
+	.string ""
+	.string "$"
 
 MtChimney_Text_Grunt1Defeat:
-	.string "My dream of a big house...$"
+	.string "{JPN}わたしの マイホームの ゆめが……$"
 
 MtChimney_Text_Grunt1PostBattle:
-	.string "A kid like you, you ought to be\n"
-	.string "splashing about in the waves!$"
+	.string "{JPN}あんた なんか うみに プカプカ\nうかんで いれば いいのよ!"
+	.string "$"
 
 MtChimney_Text_TeamAquaAlwaysMessingWithPlans:
-	.string "That annoying TEAM AQUA...\n"
-	.string "They always mess with our plans!$"
+	.string "{JPN}アクアだんの やつらめ……\nいちいち オレたちの じゃまを しやがって!"
+	.string "$"
 
 MtChimney_Text_MeteoritesPackAmazingPower:
-	.string "METEORITES pack amazing power!$"
+	.string "{JPN}いんせきには すごい パワーが あるのだ!$"
 
 MtChimney_Text_YouBetterNotMessWithUs:
-	.string "You'd better not mess with us!\p"
-	.string "We're trying to awaken that thing\n"
-	.string "for the benefit of everyone!$"
+	.string "{JPN}オレたちの じゃまを するな!\pアイツを ふっかつ させるのは\nみんなの ために やってること なんだ!"
+	.string ""
+	.string "$"
 
 MtChimney_Text_AquasNameSimilar:
-	.string "We're TEAM MAGMA!\p"
-	.string "They're TEAM AQUA!\p"
-	.string "It totally annoys me that they'd\n"
-	.string "use a name like ours!$"
+	.string "{JPN}オレたちは マグマだん!\pやつらは アクアだん!\pにたような なまえを つけやがって\nいまいましい やつらだ!"
+	.string ""
+	.string ""
+	.string "$"
 
 MtChimney_Text_DouseThemInFire:
-	.string "Yeah!\n"
-	.string "Douse them in fire!$"
+	.string "{JPN}あつい たたかい だったわ"
+	.string "$"
 
 MtChimney_Text_KeepMakingMoreLand:
-	.string "We're going to keep making more land!$"
+	.string "{JPN}もっと もっと だいちを ふやすぜ!!$"
 
 MtChimney_Text_Bufoh:
-	.string "Bufoh!$"
+	.string "{JPN}ぶふぉー!!$"
 
 MtChimney_Text_ArchieGoStopTeamMagma:
-	.string "ARCHIE: Grr, {PLAYER}!\n"
-	.string "I should've guessed you'd show up!\p"
-	.string "See for yourself what the fanatics\n"
-	.string "of TEAM MAGMA are up to!\p"
-	.string "They're trying to inject the stolen\n"
-	.string "METEORITE's power into the volcano!\p"
-	.string "Doing something like that will cause\n"
-	.string "the volcano's eruption!$"
+	.string "{JPN}アオギリ『むむむ {PLAYER}!\nやっぱり ここにも あらわれたか!\pほら! マグマだんの れんちゅうが\nなにを たくらんで いるのか みてみろ!\pやつらは うばった いんせきの パワーを\nかざんに ながしこもうと しているんだ!\pそんなことを したら\nかざんが だいふんか するじゃないか!"
+	.string ""
+	.string ""
+	.string ""
+	.string ""
+	.string ""
+	.string ""
+	.string "$"
 
 MtChimney_Text_ArchieIHaveMyHandsFull:
-	.string "ARCHIE: Grrr...\p"
-	.string "I want to stop that MAXIE,\n"
-	.string "but I can't!\p"
-	.string "Not when I have my hands full battling\n"
-	.string "three opponents at once!$"
+	.string "{JPN}アオギリ『うーむ むむむ!\pマツブサの やつを とめに いきたいが\nさすがの おれも\l3にん どうじに あいてを していては\lてが はなせない!"
+	.string ""
+	.string ""
+	.string ""
+	.string "$"
 
 MtChimney_Text_ArchieThankYou:
-	.string "ARCHIE: {PLAYER}!\n"
-	.string "Thank you!\p"
-	.string "With your help, we thwarted TEAM\n"
-	.string "MAGMA's destructive plan!\p"
-	.string "But... You...\n"
-	.string "Whose side are you on?\p"
-	.string "Ah, it doesn't matter.\p"
-	.string "We will remain vigilant and keep up\n"
-	.string "our pursuit of TEAM MAGMA.\p"
-	.string "{PLAYER}, we shall meet again!$"
+	.string "{JPN}アオギリ『{PLAYER}…… たすかったよ\nおまえの おかげで マグマだんの\lはかいかつどうを ふせぐことが できた\pだが おまえは……\nどちらの みかた なんだ……\pまあ いい\pわれわれは ひきつづき\nマグマだんを おいかけると しよう!\p{PLAYER} おまえとは また\nどこかで あうことに なりそうだな……"
+	.string ""
+	.string ""
+	.string ""
+	.string ""
+	.string ""
+	.string ""
+	.string ""
+	.string ""
+	.string "$"
 
 MtChimney_Text_MagmaOutnumbersUs:
-	.string "Darn... TEAM MAGMA outnumbers us!\n"
-	.string "We can't keep up with them!$"
+	.string "{JPN}くそう マグマだんが おおすぎる……\nこのままでは まずいぞ!"
+	.string "$"
 
 MtChimney_Text_LessHabitatForWaterPokemon:
-	.string "If they expand the land, there'll be\n"
-	.string "less habitats for WATER POKEMON!$"
+	.string "{JPN}だいちを ふやしたら\nみずポケモンが すむ ばしょが\lへってしまう じゃねーか!"
+	.string "$"
 
 MtChimney_Text_MagmasNameSimilar:
-	.string "We're TEAM AQUA!\p"
-	.string "They're TEAM MAGMA!\p"
-	.string "It burns me up that they'd use such\n"
-	.string "a confusing name!$"
+	.string "{JPN}オレたちは アクアだん!\pやつらは マグマだん!\pまぎらわしい なまえを つけやがって\nしゃくにさわる やつらだ!"
+	.string ""
+	.string ""
+	.string "$"
 
 MtChimney_Text_Bushaa:
-	.string "Bushaa!$"
+	.string "{JPN}ぷしゃー!!$"
 
 MtChimney_Text_LavaCookiesJust200:
-	.string "LAVA COOKIES are MT. CHIMNEY's local\n"
-	.string "specialty.\p"
-	.string "Try one. It's just ¥200.$"
+	.string "{JPN}えんとつやま めいぶつ\nフエンせんべい ひとつ 200えん!\lかって おいきよ"
+	.string ""
+	.string "$"
 
 MtChimney_Text_ThankYouDear:
-	.string "Thank you, dear!$"
+	.string "{JPN}どうも ありがとね$"
 
 MtChimney_Text_YouveNotGotTheMoney:
-	.string "Oh, dear. You can't buy a thing if\n"
-	.string "you've not got the money.$"
+	.string "{JPN}おやまあ おかねが なくちゃ\nものは かえないよ"
+	.string "$"
 
 MtChimney_Text_OhFineThen:
-	.string "Oh, fine then.$"
+	.string "{JPN}あら そうかい$"
 
 MtChimney_Text_MeteoriteFittedOnMachine:
-	.string "A METEORITE is fitted on a mysterious\n"
-	.string "machine...\p"
-	.string "The machine seems to be storing\n"
-	.string "energy in the METEORITE.$"
+	.string "{JPN}なぞの そうちに\nいんせきが はめられている……\pなにかの エネルギーを\nためている さいちゅうの ようだ"
+	.string ""
+	.string ""
+	.string "$"
 
 MtChimney_Text_RemoveTheMeteorite:
-	.string "A METEORITE is fitted on a mysterious\n"
-	.string "machine...\p"
-	.string "Do you want to remove the METEORITE?$"
+	.string "{JPN}なぞの そうちに\nいんせきが はめられている……\pいんせきを とりますか?"
+	.string ""
+	.string "$"
 
 MtChimney_Text_PlayerRemovedMeteorite:
-	.string "{PLAYER} removed the METEORITE from\n"
-	.string "the mysterious machine.$"
+	.string "{JPN}{PLAYER}は いんせきを\nそうちから とりはずした!"
+	.string "$"
 
 MtChimney_Text_PlayerLeftMeteorite:
-	.string "{PLAYER} left the METEORITE where\n"
-	.string "it was.$"
+	.string "{JPN}{PLAYER}は いんせきを\nそのままに しておいた"
+	.string "$"
 
 MtChimney_Text_MachineMakesNoResponse:
-	.string "This mysterious machine...\n"
-	.string "It makes no response whatsoever.$"
+	.string "{JPN}なぞの そうち……\nまったく はんのう しない……"
+	.string "$"
 
 MtChimney_Text_RouteSign:
-	.string "{DOWN_ARROW} JAGGED PATH\n"
-	.string "LAVARIDGE TOWN AHEAD$"
+	.string "{JPN}{DOWN_ARROW} デコボコさんどう\nとおりぬけると フエンタウン"
+	.string "$"
 
 MtChimney_Text_ShelbyIntro:
-	.string "I've been to the hot springs and\n"
-	.string "refreshed my tired bones.\l"
-	.string "Right now I'm feeling strong!$"
+	.string "{JPN}おんせんに つかって\nリフレッシュ してきたからねえ\lいまの あたしゃあ つよいよ!"
+	.string ""
+	.string "$"
 
 MtChimney_Text_ShelbyDefeat:
-	.string "Oh, my goodness.\n"
-	.string "Now, aren't you something!$"
+	.string "{JPN}おんや まぁ\nたいした もんだよ"
+	.string "$"
 
 MtChimney_Text_ShelbyPostBattle:
-	.string "Well, well, I've lost. I can't call\n"
-	.string "myself an EXPERT now, can I?$"
+	.string "{JPN}まけて しもうたら\nたつじん とは いえないねえ"
+	.string "$"
 
 MtChimney_Text_ShelbyRegister:
-	.string "Thank you, child. It was fun, as if\n"
-	.string "I were battling my own grandchild.\p"
-	.string "Please, come see me again for\n"
-	.string "a rematch.$"
+	.string "{JPN}マゴと たたかってる ようで たのしかった\nよかったら また あいてを しておくれ!"
+	.string ""
+	.string ""
+	.string "$"
 
 MtChimney_Text_ShelbyRematchIntro:
-	.string "If you can mesh your heart with those\n"
-	.string "of your POKEMON, why, you should be\l"
-	.string "able to achieve great things.$"
+	.string "{JPN}ポケモンと こころを ひとつに できれば\nすばらしいことが できそうじゃの"
+	.string ""
+	.string "$"
 
 MtChimney_Text_ShelbyRematchDefeat:
-	.string "Oh, my goodness.\n"
-	.string "Now, aren't you something!$"
+	.string "{JPN}おんや まぁ\nたいした もんだよ"
+	.string "$"
 
 MtChimney_Text_ShelbyPostRematch:
-	.string "Perhaps your heart has become one\n"
-	.string "with the hearts of your POKEMON.$"
+	.string "{JPN}おまえさんの こころと\nポケモンの こころは ひとつ なのかもな"
+	.string "$"
 
 MtChimney_Text_MelissaIntro:
-	.string "I've got the fire in me, baby.\n"
-	.string "I can't stand it! I have to battle!$"
+	.string "{JPN}なんだか もえあがってきて\nたたかいたくて たまらないのっ!"
+	.string "$"
 
 MtChimney_Text_MelissaDefeat:
-	.string "Ooh, that was a scorching-hot match!$"
+	.string "{JPN}よーし!\nほのおを ぶっかけてやれー!!$"
 
 MtChimney_Text_MelissaPostBattle:
-	.string "The heat of MT. CHIMNEY warms\n"
-	.string "me up, baby!$"
+	.string "{JPN}えんとつやまの あつさが\nおんなを もえあがらせるの"
+	.string "$"
 
 MtChimney_Text_SheilaIntro:
-	.string "I've finally made it to MT. CHIMNEY.\n"
-	.string "I want to make my POKEMON battle!$"
+	.string "{JPN}せっかく えんとつやまに きたんだから\nここでも ポケモンを たたかわせたいの!"
+	.string "$"
 
 MtChimney_Text_SheilaDefeat:
-	.string "The way you battle...\n"
-	.string "It's like a MT. CHIMNEY eruption!$"
+	.string "{JPN}その たたかいかた\nまさに えんとつやま だいふんか!"
+	.string "$"
 
 MtChimney_Text_SheilaPostBattle:
-	.string "Like I said, I've finally made it to\n"
-	.string "MT. CHIMNEY. It would be a shame if\l"
-	.string "I only do a little sightseeing...\p"
-	.string "I want to get in some battles and buy\n"
-	.string "COOKIES as souvenirs.$"
+	.string "{JPN}せっかく えんとつやまに きたんだから\nかんこう だけじゃ もったいないわ\pしょうぶも たのしみたいし\nおみやげに せんべい かわなきゃ!"
+	.string ""
+	.string ""
+	.string ""
+	.string "$"
 
 MtChimney_Text_ShirleyIntro:
-	.string "Since I bathed in the hot springs,\n"
-	.string "I've been feeling great!\l"
-	.string "I'm sure I'm going to win!$"
+	.string "{JPN}おんせんに はいったら\nちょうし バッチリ なのよね!\lぜったい かてるわ!"
+	.string ""
+	.string "$"
 
 MtChimney_Text_ShirleyDefeat:
-	.string "Yowch!\n"
-	.string "I'm getting a chill out of the water.$"
+	.string "{JPN}うーん ゆざめ しちゃう"
+	.string "$"
 
 MtChimney_Text_ShirleyPostBattle:
-	.string "I'll have to take another dip in the\n"
-	.string "hot springs. Want to join me?\p"
-	.string "Just joking!$"
+	.string "{JPN}もういちど おんせんに はいらなきゃ!\nあなたも いっしょに はいる?\pなんてねっ!"
+	.string ""
+	.string "$"
 
 MtChimney_Text_SawyerIntro:
-	.string "This is one fine mountain! Plenty of\n"
-	.string "hot people around for company!$"
+	.string "{JPN}ここは いい やまだ!\nあっつい おねいさんたちが いっぱいだあ!"
+	.string "$"
 
 MtChimney_Text_SawyerDefeat:
-	.string "Oh, you're a real firebrand, too!$"
+	.string "{JPN}おおっ あんたも あついねぇ!$"
 
 MtChimney_Text_SawyerPostBattle:
-	.string "I think I need a dip in LAVARIDGE\n"
-	.string "HOT SPRING with the locals!$"
+	.string "{JPN}いまから あつい おねいさんたちを つれて\nフエンおんせん でも いこうかな"
+	.string "$"
 
 MtChimney_Text_SawyerRegister:
-	.string "I like little fireballs like you.\n"
-	.string "Let me register you in my POKeNAV.$"
+	.string "{JPN}あつい トレーナーは すきだなあ!\nポケナビに とうろくしても いいかい"
+	.string "$"
 
 MtChimney_Text_SawyerRematchIntro:
-	.string "I'm happily surrounded by hot people\n"
-	.string "around these parts. I won't lose!$"
+	.string "{JPN}あっつい おねいさん たちに\nかこまれて しあわせな おれは まけんぜ!"
+	.string "$"
 
 MtChimney_Text_SawyerRematchDefeat:
-	.string "Gosh, you're still the same\n"
-	.string "firebrand as before!$"
+	.string "{JPN}おおっ やっぱり\nあんたの ほうが あついねぇ!"
+	.string "$"
 
 MtChimney_Text_SawyerPostRematch:
-	.string "Actually, it really is hot here.\n"
-	.string "I'm overdressed for these parts.$"
+	.string "{JPN}しかし ほんとに あついや……\nふく いっぱい きすぎちゃった かな"
+	.string "$"

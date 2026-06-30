@@ -83,12 +83,10 @@ MtChimney_CableCarStation_Movement_ExitCableCar:
 	step_end
 
 MtChimney_CableCarStation_Text_CableCarReadyGetOn:
-	.string "The CABLE CAR is ready to go down.\n"
-	.string "Would you like to be on it?$"
+	.string "{JPN}くだり ロープウェイ\nまもなく しゅっぱつ です\lごりように なられますか?$"
 
 MtChimney_CableCarStation_Text_StepThisWay:
-	.string "Please step this way.$"
+	.string "{JPN}では こちらに どうぞ!$"
 
 MtChimney_CableCarStation_Text_RideAnotherTime:
-	.string "Please ride with us another time.$"
-
+	.string "{JPN}またの ごりようを\nよろしく おねがい しまーす!$"
