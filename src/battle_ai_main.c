@@ -557,16 +557,21 @@ void AI_TrySwitchOrUseItem(enum BattlerId battler)
 u32 BattleAI_ChooseMoveIndex(enum BattlerId battler)
 {
     u32 chosenMoveIndex;
+    bool32 forceFrontierGimmick = (gBattleTypeFlags & BATTLE_TYPE_FRONTIER)
+                               && !(gBattleTypeFlags & BATTLE_TYPE_LINK)
+                               && !IsOnPlayerSide(battler);
 
     SetAIUsingGimmick(battler, USE_GIMMICK);
     SetupRandomRollsForAIMoveSelection(battler);
 
-    if (gBattleStruct->gimmick.usableGimmick[battler] == GIMMICK_TERA && (gAiThinkingStruct->aiFlags[battler] & AI_FLAG_SMART_TERA))
+    if (!forceFrontierGimmick
+     && gBattleStruct->gimmick.usableGimmick[battler] == GIMMICK_TERA
+     && (gAiThinkingStruct->aiFlags[battler] & AI_FLAG_SMART_TERA))
         DecideTerastal(battler);
 
     chosenMoveIndex = ChooseMoveOrAction(battler);
 
-    if (gBattleStruct->gimmick.usableGimmick[battler] != GIMMICK_NONE)
+    if (!forceFrontierGimmick && gBattleStruct->gimmick.usableGimmick[battler] != GIMMICK_NONE)
         ReconsiderGimmick(battler, gBattlerTarget, gBattleMons[battler].moves[chosenMoveIndex]);
 
     // Clear protect structures, some flags may be set during AI calcs

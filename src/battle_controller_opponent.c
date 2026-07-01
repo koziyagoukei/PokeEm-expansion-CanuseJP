@@ -440,7 +440,20 @@ static void OpponentHandleChooseMove(enum BattlerId battler)
     {
         if (gBattleTypeFlags & BATTLE_TYPE_PALACE)
         {
-            BtlController_EmitTwoReturnValues(battler, B_COMM_TO_ENGINE, B_ACTION_EXEC_SCRIPT, ChooseMoveAndTargetInBattlePalace(battler));
+            u32 chosenMoveAndTarget = ChooseMoveAndTargetInBattlePalace(battler);
+            enum Gimmick usableGimmick = gBattleStruct->gimmick.usableGimmick[battler];
+
+            if (usableGimmick != GIMMICK_NONE && !HasTrainerUsedGimmick(battler, usableGimmick))
+            {
+                SetAIUsingGimmick(battler, USE_GIMMICK);
+                gBattleStruct->gimmick.toActivate |= 1u << battler;
+                chosenMoveAndTarget |= RET_GIMMICK;
+            }
+            else
+            {
+                SetAIUsingGimmick(battler, NO_GIMMICK);
+            }
+            BtlController_EmitTwoReturnValues(battler, B_COMM_TO_ENGINE, B_ACTION_EXEC_SCRIPT, chosenMoveAndTarget);
         }
         else if (gAiBattleData->actionFlee)
         {
