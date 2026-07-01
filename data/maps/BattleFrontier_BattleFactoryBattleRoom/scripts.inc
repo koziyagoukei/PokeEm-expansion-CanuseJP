@@ -240,71 +240,70 @@ BattleFrontier_BattleFactoryBattleRoom_EventScript_ScientistsFaceBattle::
 	return
 
 BattleFrontier_BattleFactoryBattleRoom_Text_GetAMoveOn:
-	.string "Hey, hey!\n"
-	.string "Get a move on!$"
+	.string "{JPN}ほらほら! はやく きなっ!"
+	.string "$"
 
 BattleFrontier_BattleFactoryBattleRoom_Text_NolandImFactoryHead:
-	.string "Hey, my name's NOLAND!\n"
-	.string "I'm basically in charge of this place,\l"
-	.string "which is why I'm the FACTORY HEAD!\p"
-	.string "I had a look at your Battle Swap data.\p"
-	.string "You seem to have the right idea,\n"
-	.string "but you're still square in your head!\p"
-	.string "Listen up, okay? Knowledge isn't only\n"
-	.string "about reading books or doing desk work.\p"
-	.string "Just doing that sort of thing...\n"
-	.string "It may as well be useless!\p"
-	.string "You have to experience things with\n"
-	.string "your heart and your body, understand?\p"
-	.string "I'll take you on under the same\n"
-	.string "conditions as you.\p"
-	.string "I'll be using rental POKEMON, too!$"
+	.string "{JPN}おれの なまえは ダツラ!\nいちおう ここの せきにんしゃで\lファクトリーヘッド ってのを やってる!\pおめえの バトルトレードの\nデータは みせて もらったぜ!\pまあまあ いいスジ してる みてぇ だが\nまだまだ あたまが カッテぇ なぁ!\pイイかー? ちしき っつうのは\nただ ほんを よんだり\lつくえに むかってる だけじゃ\lなーんにも みには ならねぇんだぜ!\pじぶんの こころと からだで じっさいに\nたいけん して みねぇと なあ……\pおれも おめえと おんなじ じょうけん!\nレンタルポケモンで たたかう!!"
+	.string ""
+	.string ""
+	.string ""
+	.string ""
+	.string ""
+	.string ""
+	.string ""
+	.string ""
+	.string ""
+	.string ""
+	.string ""
+	.string ""
+	.string ""
+	.string "$"
 
 BattleFrontier_BattleFactoryBattleRoom_Text_ShakeOutKnowledgeBringItOn:
-	.string "Shake out every last bit of your\n"
-	.string "knowledge and bring it on!$"
+	.string "{JPN}ありったけの ちしき ふりしぼって\nかかって こいやっ!"
+	.string "$"
 
 BattleFrontier_BattleFactoryBattleRoom_Text_NolandLetsSeeFrontierPass:
-	.string "NOLAND: Smart going!\n"
-	.string "Let's see your FRONTIER PASS.$"
+	.string "{JPN}ダツラ『イイぜ!\nフロンティアパス かしな!"
+	.string "$"
 
 BattleFrontier_BattleFactoryBattleRoom_Text_ReceivedKnowledgeSymbol:
-	.string "The Knowledge Symbol was embossed\n"
-	.string "on the FRONTIER PASS!$"
+	.string "{JPN}フロンティアパスに\nノウレッジシンボルが きざまれた!"
+	.string "$"
 
 BattleFrontier_BattleFactoryBattleRoom_Text_NextTimeNoHoldsBarred:
-	.string "Heh...\n"
-	.string "You're a pretty bright spark...\p"
-	.string "Next time, I'll come after you hard.\n"
-	.string "No holds barred, understand?\p"
-	.string "You keep up your studies!$"
+	.string "{JPN}へっ…… おもしれぇじゃ ねえか……\pつぎに あうときゃー\nおれも マジで いく からな!\pしっかり べんきょう しとけよ!!"
+	.string ""
+	.string ""
+	.string ""
+	.string "$"
 
 BattleFrontier_BattleFactoryBattleRoom_Text_HarderLookThanLastTime:
-	.string "NOLAND: Hey, hey! How's it going?\n"
-	.string "You keeping up with your studies?\p"
-	.string "...Oh?\p"
-	.string "You've taken on a harder look than\n"
-	.string "the last time I saw you.\p"
-	.string "Now, this should be fun!\n"
-	.string "I'm getting excited, hey!$"
+	.string "{JPN}ダツラ『オース! どうよー? ちょうしはー?\nしっかり べんきょう してるか?\p…… お?\pおめえ まえに あった ときより\nちょっと イイ ツラしてるじゃ ねえか!\pこりゃ たのしみ だねー!\nワクワクして きたぜ! おい!"
+	.string ""
+	.string ""
+	.string ""
+	.string ""
+	.string ""
+	.string "$"
 
 BattleFrontier_BattleFactoryBattleRoom_Text_AllRightBringItOn:
-	.string "All right!\n"
-	.string "Bring it on!$"
+	.string "{JPN}よっしゃ!! バチッと こい!!"
+	.string "$"
 
 BattleFrontier_BattleFactoryBattleRoom_Text_OutOfMyLeagueLetsSeePass:
-	.string "NOLAND: What the...\n"
-	.string "You're getting out of my league!\p"
-	.string "Sheesh!\n"
-	.string "Let's see that FRONTIER PASS!$"
+	.string "{JPN}ダツラ『なんだよ! おめえー!!\nすっげぇ ことに なってんじゃ ねぇかよ!\pったく フロンティアパス よこしな!"
+	.string ""
+	.string ""
+	.string "$"
 
 BattleFrontier_BattleFactoryBattleRoom_Text_KnowledgeSymbolTookGoldenShine:
-	.string "The Knowledge Symbol took on\n"
-	.string "a golden shine!$"
+	.string "{JPN}ノウレッジシンボルが\nきんいろに かがやいた!"
+	.string "$"
 
 BattleFrontier_BattleFactoryBattleRoom_Text_LastTimeILoseToYou:
-	.string "Pfft, man!\p"
-	.string "That's absolutely the last time\n"
-	.string "I lose to you!\p"
-	.string "We have to do this again, hey?$"
-
+	.string "{JPN}ちっくしょー!!\pつぎは ぜってぇに まけねぇ からな!\nまた やろうぜっ!!"
+	.string ""
+	.string ""
+	.string "$"

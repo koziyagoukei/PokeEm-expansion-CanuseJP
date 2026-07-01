@@ -249,7 +249,7 @@ SlateportCity_OceanicMuseum_1F_Text_OurBossIsntHere:
 	.string "$"
 
 SlateportCity_OceanicMuseum_1F_Text_WouldStuffHereMakeMeRich:
-	.string "{JPN}なかまが カナズミで ドジらなければ\nここに こなくて すんだのによ!"
+	.string "{JPN}ここに おいてある もの\nかっぱらうと もうかるかな?"
 	.string "$"
 
 SlateportCity_OceanicMuseum_1F_Text_CanLearnForNefariousDeeds:
