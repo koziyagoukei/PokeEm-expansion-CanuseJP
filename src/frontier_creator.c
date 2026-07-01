@@ -39,6 +39,10 @@
 #define FRONTIER_CREATOR_MAX_PER_STAT_EVS 252
 #define FRONTIER_CREATOR_MAX_IVS 31
 
+#define FRONTIER_HUB_INITIAL_GIFT_LEVEL 100
+#define FRONTIER_HUB_INITIAL_GIFT_DYNAMAX_LEVEL 10
+#define FRONTIER_HUB_INITIAL_GIFT_IVS 31
+
 #define FRONTIER_CREATOR_SPECIES_DIGITS 4
 #define FRONTIER_CREATOR_NATURE_DIGITS  2
 #define FRONTIER_CREATOR_ABILITY_DIGITS 1
@@ -70,6 +74,18 @@ struct FrontierHubAutoItem
     u16 quantity;
 };
 
+struct FrontierHubInitialGiftMon
+{
+    enum Species species;
+    enum Item itemId;
+    enum Ability ability;
+    u8 nature;
+    enum Type teraType;
+    bool8 gmaxFactor;
+    u8 evs[NUM_STATS];
+    enum Move moves[MAX_MON_MOVES];
+};
+
 static EWRAM_DATA struct FrontierCreatorData *sFrontierCreatorData = NULL;
 
 #define tWindowId data[0]
@@ -98,6 +114,9 @@ static void FrontierItemGiver_DrawScreen(u8 taskId);
 static u16 FrontierItemGiver_GetItemCount(void);
 static void FrontierItemGiver_DestroyAndReturn(u8 taskId);
 static void FrontierHub_GiveAutoItems(void);
+static void FrontierHub_TryGiveInitialParty(void);
+static void FrontierHub_CreateInitialGiftMon(const struct FrontierHubInitialGiftMon *gift, struct Pokemon *mon);
+static u8 FrontierHub_GetAbilityNum(enum Species species, enum Ability ability);
 
 static enum Species FrontierCreator_GetFirstAllowedSpecies(void);
 static enum Species FrontierCreator_GetNextAllowedSpecies(enum Species species, s16 delta);
@@ -158,6 +177,47 @@ static const u8 *const sFrontierCreatorTypeNames[NUMBER_OF_MON_TYPES] =
     [TYPE_DARK] = COMPOUND_STRING("あく"),
     [TYPE_FAIRY] = COMPOUND_STRING("フェアリー"),
     [TYPE_STELLAR] = COMPOUND_STRING("ステラ"),
+};
+
+static const struct FrontierHubInitialGiftMon sFrontierHubInitialGiftMons[] =
+{
+    {
+        .species = SPECIES_PIKACHU_ORIGINAL,
+        .itemId = ITEM_PIKASHUNIUM_Z,
+        .ability = ABILITY_STATIC,
+        .nature = NATURE_HARDY,
+        .teraType = TYPE_ELECTRIC,
+        .evs = { [STAT_SPEED] = 252, [STAT_SPATK] = 252 },
+        .moves = { MOVE_THUNDERBOLT, MOVE_QUICK_ATTACK, MOVE_IRON_TAIL, MOVE_ELECTROWEB },
+    },
+    {
+        .species = SPECIES_GENGAR,
+        .itemId = ITEM_NONE,
+        .ability = ABILITY_CURSED_BODY,
+        .nature = NATURE_TIMID,
+        .teraType = TYPE_FLYING,
+        .gmaxFactor = TRUE,
+        .evs = { [STAT_SPEED] = 252, [STAT_SPATK] = 252 },
+        .moves = { MOVE_SHADOW_BALL, MOVE_DAZZLING_GLEAM, MOVE_SLUDGE_BOMB, MOVE_WILL_O_WISP },
+    },
+    {
+        .species = SPECIES_SCEPTILE,
+        .itemId = ITEM_SCEPTILITE,
+        .ability = ABILITY_UNBURDEN,
+        .nature = NATURE_ADAMANT,
+        .teraType = TYPE_STEEL,
+        .evs = { [STAT_ATK] = 252, [STAT_SPEED] = 252 },
+        .moves = { MOVE_LEAF_BLADE, MOVE_AERIAL_ACE, MOVE_DRAGON_CLAW, MOVE_BRICK_BREAK },
+    },
+    {
+        .species = SPECIES_LYCANROC_DUSK,
+        .itemId = ITEM_NONE,
+        .ability = ABILITY_TOUGH_CLAWS,
+        .nature = NATURE_JOLLY,
+        .teraType = TYPE_FIRE,
+        .evs = { [STAT_ATK] = 252, [STAT_SPEED] = 252 },
+        .moves = { MOVE_STONE_EDGE, MOVE_TERA_BLAST, MOVE_ACCELEROCK, MOVE_PSYCHIC_FANGS },
+    },
 };
 
 static const u8 *const sFrontierCreatorNatureNames[NUM_NATURES + 1] =
@@ -3040,8 +3100,90 @@ void Special_SetupFrontierHubState(void)
     for (i = 0; i < ARRAY_COUNT(gBadgeFlags); i++)
         FlagSet(gBadgeFlags[i]);
 
-FrontierHub_GiveAllKeyItems();
-FrontierHub_GiveAutoItems();
+    FrontierHub_GiveAllKeyItems();
+    FrontierHub_GiveAutoItems();
+    FrontierHub_TryGiveInitialParty();
+}
+
+static void FrontierHub_TryGiveInitialParty(void)
+{
+    u32 i;
+    bool8 allGiven = TRUE;
+    struct Pokemon mon;
+
+    if (FlagGet(FLAG_RECEIVED_ULTRA_FRONTIE_HUB_INITIAL_PARTY))
+    {
+        gSpecialVar_Result = FALSE;
+        return;
+    }
+
+    for (i = 0; i < ARRAY_COUNT(sFrontierHubInitialGiftMons); i++)
+    {
+        FrontierHub_CreateInitialGiftMon(&sFrontierHubInitialGiftMons[i], &mon);
+        if (GiveScriptedMonToPlayer(&mon, PARTY_SIZE) == MON_CANT_GIVE)
+            allGiven = FALSE;
+    }
+
+    if (allGiven)
+    {
+        FlagSet(FLAG_RECEIVED_ULTRA_FRONTIE_HUB_INITIAL_PARTY);
+        FlagSet(FLAG_SYS_POKEMON_GET);
+    }
+
+    gSpecialVar_Result = allGiven;
+}
+
+static void FrontierHub_CreateInitialGiftMon(const struct FrontierHubInitialGiftMon *gift, struct Pokemon *mon)
+{
+    u32 i;
+    u32 data;
+    u32 personality;
+    u8 abilityNum;
+    enum Item itemId;
+    enum Type teraType;
+    enum PokeBall ball;
+
+    personality = GetMonPersonality(gift->species, MON_MALE, gift->nature, RANDOM_UNOWN_LETTER);
+    CreateMonWithIVs(mon, gift->species, FRONTIER_HUB_INITIAL_GIFT_LEVEL, personality, OTID_STRUCT_PLAYER_ID, FRONTIER_HUB_INITIAL_GIFT_IVS);
+
+    for (i = 0; i < MAX_MON_MOVES; i++)
+        SetMonMoveSlot(mon, gift->moves[i], i);
+
+    for (i = 0; i < NUM_STATS; i++)
+        SetMonData(mon, MON_DATA_HP_EV + i, &gift->evs[i]);
+
+    abilityNum = FrontierHub_GetAbilityNum(gift->species, gift->ability);
+    SetMonData(mon, MON_DATA_ABILITY_NUM, &abilityNum);
+
+    itemId = gift->itemId;
+    SetMonData(mon, MON_DATA_HELD_ITEM, &itemId);
+
+    data = FRONTIER_HUB_INITIAL_GIFT_DYNAMAX_LEVEL;
+    SetMonData(mon, MON_DATA_DYNAMAX_LEVEL, &data);
+
+    data = gift->gmaxFactor;
+    SetMonData(mon, MON_DATA_GIGANTAMAX_FACTOR, &data);
+
+    teraType = gift->teraType;
+    SetMonData(mon, MON_DATA_TERA_TYPE, &teraType);
+
+    ball = BALL_POKE;
+    SetMonData(mon, MON_DATA_POKEBALL, &ball);
+
+    CalculateMonStats(mon);
+}
+
+static u8 FrontierHub_GetAbilityNum(enum Species species, enum Ability ability)
+{
+    u32 i;
+
+    for (i = 0; i < NUM_ABILITY_SLOTS; i++)
+    {
+        if (gSpeciesInfo[species].abilities[i] == ability)
+            return i;
+    }
+
+    return 0;
 }
 
 void Special_OpenFrontierItemGiver(void)

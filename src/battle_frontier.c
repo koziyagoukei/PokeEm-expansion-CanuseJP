@@ -21,6 +21,7 @@
 #include "constants/battle_frontier_mons.h"
 
 static void FillTrainerParty(u16 trainerId, enum BattleTrainer trainer, u8 monCount);
+static void MarkFacilityMonGimmicksForOpponent(const struct TrainerMon *fmon, const struct Pokemon *dst);
 
 // EWRAM vars.
 EWRAM_DATA const struct BattleFrontierTrainer *gFacilityTrainers = NULL;
@@ -267,6 +268,27 @@ static void FillTrainerParty(u16 trainerId, enum BattleTrainer trainer, u8 monCo
     }
 }
 
+static void MarkFacilityMonGimmicksForOpponent(const struct TrainerMon *fmon, const struct Pokemon *dst)
+{
+    u32 i;
+
+    if (gBattleStruct == NULL)
+        return;
+
+    for (i = 0; i < PARTY_SIZE; i++)
+    {
+        if (dst == &gParties[B_TRAINER_OPPONENT_A][i]
+         || dst == &gParties[B_TRAINER_OPPONENT_B][i])
+        {
+            if (fmon->dynamaxLevel > 0 && fmon->shouldUseDynamax)
+                gBattleStruct->opponentMonCanDynamax |= 1 << i;
+            if (fmon->teraType > 0)
+                gBattleStruct->opponentMonCanTera |= 1 << i;
+            break;
+        }
+    }
+}
+
 void CreateFacilityMon(const struct TrainerMon *fmon, u16 level, u8 fixedIV, u32 otID, u32 flags, struct Pokemon *dst)
 {
     enum PokeBall ball = (fmon->ball == 0xFF) ? Random() % POKEBALL_COUNT : fmon->ball;
@@ -353,6 +375,7 @@ void CreateFacilityMon(const struct TrainerMon *fmon, u16 level, u8 fixedIV, u32
         SetMonData(dst, MON_DATA_TERA_TYPE, &data);
     }
 
+    MarkFacilityMonGimmicksForOpponent(fmon, dst);
 
     SetMonData(dst, MON_DATA_POKEBALL, &ball);
     CalculateMonStats(dst);
