@@ -1,27 +1,28 @@
-### Setting up WSL1 (Legacy Portion)
+### WSL1 のセットアップ レガシー部分
 
-1. Certain packages are required to build pokeemerald. Install these packages by running the following command:
+1. pokeemerald のビルドにはいくつかのパッケージが必要です。次のコマンドでインストールしてください。
 
     ```bash
     sudo apt install build-essential git libpng-dev gdebi-core
     ```
-    > Note: If the above command does not work, try the above command but replacing `apt` with `apt-get`.
 
-2. Once the packages have finished installing, download the devkitPro pacman package [here](https://github.com/devkitPro/pacman/releases). The file to download is `devkitpro-pacman.amd64.deb`.
+    > 補足: 上のコマンドが動作しない場合は、`apt` を `apt-get` に置き換えて試してください。
 
-3. WSL has its own file system that's not accessible from Windows, but Windows files *are* accessible from WSL. To install the devkitPro package, you'll need to change to the **current working directory** where the package file was saved.
+2. パッケージのインストールが終わったら、devkitPro pacman パッケージを[ここ](https://github.com/devkitPro/pacman/releases)からダウンロードします。ダウンロードするファイルは `devkitpro-pacman.amd64.deb` です。
 
-    For example, if the package file was saved to **C:\Users\\_\<user>_\Downloads** (the Downloads location for most users), enter this command, where *\<user>* is your **Windows** username:
+3. WSL には Windows からアクセスできない独自のファイルシステムがありますが、WSL から Windows のファイルにはアクセスできます。devkitPro パッケージをインストールするには、パッケージファイルを保存したディレクトリへ移動する必要があります。
+
+    たとえばパッケージファイルを **C:\Users\\_\<user>_\Downloads** に保存した場合、多くの環境では Downloads フォルダになります。*\<user>* を **Windows** のユーザー名に置き換えて、次のコマンドを入力してください。
 
     ```bash
     cd /mnt/c/Users/<user>/Downloads
     ```
 
-    > Note 1: The Windows C:\ drive is called /mnt/c/ in WSL.
-    > Note 2: If the path has spaces, then the path must be wrapped with quotations, e.g. `cd     "/mnt/c/users/<user>/Downloads folder"`.
-    > Note 3: Windows path names are case-insensitive so adhering to capitalization isn't needed
+    > 補足 1: Windows の C:\ ドライブは WSL では `/mnt/c/` です。
+    > 補足 2: パスにスペースが含まれる場合は、`cd "/mnt/c/users/<user>/Downloads folder"` のように引用符で囲んでください。
+    > 補足 3: Windows のパス名は大文字小文字を区別しないため、厳密な大文字小文字は不要です。
 
-4. Once the directory has been changed to the folder containing the devkitPro pacman package, run the following commands to install devkitARM.
+4. devkitPro pacman パッケージがあるフォルダへ移動したら、次のコマンドで devkitARM をインストールします。
 
     ```bash
     sudo gdebi devkitpro-pacman.amd64.deb
@@ -29,13 +30,14 @@
     sudo dkp-pacman -S gba-dev
     ```
 
-    The last command will ask for the selection of packages to install. Just press Enter to install all of them, followed by entering Y to proceed with the installation.
+    最後のコマンドではインストールするパッケージの選択を求められます。Enter を押してすべてを選択し、その後 Y を入力してインストールを続行してください。
 
-    > Note: `devkitpro-pacman.amd64.deb` is the expected filename of the devkitPro package downloaded (for the first command). If the downloaded package filename differs, then use that filename instead.
+    > 補足: `devkitpro-pacman.amd64.deb` は、ダウンロードした devkitPro パッケージの想定ファイル名です。ファイル名が異なる場合は、そのファイル名を使ってください。
 
-5. Run the following command to set devkitPro related environment variables (alternatively, close and re-open WSL):
+5. 次のコマンドで devkitPro 関連の環境変数を設定します。WSL を閉じて開き直してもかまいません。
+
     ```bash
     source /etc/profile.d/devkit-env.sh
     ```
 
-Proceed to [Choosing where to store pokeemerald (WSL1) of the current INSTALL.md](/INSTALL.md#choosing-where-to-store-pokeemerald-expansion-WSL1).
+続きは現在の INSTALL.md の [pokeemerald の保存場所を選ぶ WSL1](/INSTALL.md#choosing-where-to-store-pokeemerald-expansion-WSL1) に進んでください。

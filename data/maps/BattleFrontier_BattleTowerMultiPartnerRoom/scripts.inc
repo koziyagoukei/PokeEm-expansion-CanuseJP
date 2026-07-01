@@ -277,23 +277,24 @@ BattleFrontier_BattleTowerMultiPartnerRoom_EventScript_Partner8::
 	end
 
 BattleFrontier_BattleTowerMultiPartnerRoom_Text_PleaseFindPartner:
-	.string "Please find a partner from out of\n"
-	.string "the TRAINERS gathered here.$"
+	.string "{JPN}ここに あつまった トレーナーから\n"
+	.string "パートナーを さがしてください$"
 
 BattleFrontier_BattleTowerMultiPartnerRoom_Text_QuitLookingForPartner:
-	.string "{PLAYER}, you have not found a partner\n"
-	.string "for your tag team.\p"
-	.string "Would you like to quit looking and\n"
-	.string "return to the reception counter?$"
+	.string "{JPN}{PLAYER}さんは タッグの\n"
+	.string "パートナーを まだ みつけていません\p"
+	.string "パートナーさがしを やめて\n"
+	.string "うけつけへ もどりますか?$"
 
 BattleFrontier_BattleTowerMultiPartnerRoom_Text_PleaseFindPartner2:
-	.string "Then, please find a partner from\n"
-	.string "the TRAINERS gathered here.$"
+	.string "{JPN}それでは ここに あつまった\n"
+	.string "トレーナーから パートナーを さがしてください$"
 
 BattleFrontier_BattleTowerMultiPartnerRoom_Text_ThankYouForChoosingPartner::
-	.string "Thank you for choosing a partner.\p"
-	.string "I will now show you to your\n"
-	.string "MULTI BATTLE ROOM.$"
+	.string "{JPN}パートナーを えらんでいただき\n"
+	.string "ありがとうございます\p"
+	.string "マルチバトルルームへ\n"
+	.string "ごあんないします$"
 
 BattleFrontier_BattleTowerMultiPartnerRoom_Text_UnusedApprentice1Intro::
 	.string "I'm {STR_VAR_1}'s no. {STR_VAR_2} apprentice.\n"
@@ -1803,4 +1804,3 @@ BattleFrontier_BattleTowerMultiPartnerRoom_Text_SwimmerMAccept::
 BattleFrontier_BattleTowerMultiPartnerRoom_Text_SwimmerMReject::
 	.string "If we meet again, you have to team up\n"
 	.string "with me. You'll do that, right?$"
-

@@ -1,14 +1,16 @@
-# Instructions for ChromeOS
+# ChromeOS 向け手順
 
-1. Enable the Linux terminal by following the instructions on [this page](https://chromeos.dev/en/productivity/terminal). Be sure to allocate enough space for the Linux install.
-2. After the Linux terminal has finished installing, run the following command in the terminal to update and upgrade the Linux terminal:
+1. [このページ](https://chromeos.dev/en/productivity/terminal)の手順に従って Linux ターミナルを有効にしてください。Linux のインストール用に十分な容量を割り当ててください。
+2. Linux ターミナルのインストールが終わったら、ターミナルで次のコマンドを実行して更新してください。
 
     ```console
     sudo apt update && apt upgrade
     ```
-3. Then install all dependencies by running the following command:
+
+3. 次のコマンドで依存パッケージをすべてインストールします。
 
     ```console
     sudo apt install build-essential binutils-arm-none-eabi gcc-arm-none-eabi libnewlib-arm-none-eabi git libpng-dev python3
     ```
-**NOTE**: The project must be kept in a directory inside the Linux filesystem, for example under `~/Decomps/pokeemerald-expansion`
+
+**注意**: このプロジェクトは Linux ファイルシステム内のディレクトリに置く必要があります。例: `~/Decomps/pokeemerald-expansion`

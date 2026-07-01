@@ -1,4 +1,5 @@
-# msys2
-Don't, just don't.
-Currently doesn't work on current Expansion versions.
-This is a bug from upstream pret `pokeemerald`.
+# MSYS2
+
+使用しないでください。
+現在の Expansion バージョンでは動作しません。
+これは上流の pret `pokeemerald` 由来の不具合です。

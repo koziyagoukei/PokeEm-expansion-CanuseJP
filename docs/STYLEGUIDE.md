@@ -1,8 +1,8 @@
-# Styleguide and Principles
+# スタイルガイドと方針
 
-## Naming Conventions
+## 命名規則
 
-Function names and struct names should be formatted in `PascalCase`.
+関数名と構造体名は `PascalCase` にしてください。
 
 ```c
 void ThisIsCorrect(void);
@@ -15,14 +15,13 @@ struct MyStruct
 };
 ```
 
-Variables and struct fields should be formatted in `camelCase`.
+変数名と構造体メンバー名は `camelCase` にしてください。
 
 ```c
 int thisIsCorrect = 0;
 ```
 
-Global variables should be prefixed with `g`, and static variables should be
-prefixed with `s`.
+グローバル変数には `g` を、static 変数には `s` を接頭辞として付けてください。
 
 ```c
 extern s32 gMyGlobalVariable;
@@ -30,7 +29,7 @@ extern s32 gMyGlobalVariable;
 static u8 sMyStaticVariable = 0;
 ```
 
-Macros and constants should use `CAPS_WITH_UNDERSCORES`.
+マクロと定数には `CAPS_WITH_UNDERSCORES` を使ってください。
 
 ```c
 #define MAX_LEVEL 100
@@ -45,13 +44,13 @@ enum
 #define ADD_FIVE(x) ((x) + 5)
 ```
 
-## Coding Style
+## コーディングスタイル
 
-### Comments
+### コメント
 
-Ideally, contributions have descriptive variable, function and constant names so as to explain functionality without comments. When a comment is used, the content of the comment should explain _WHY_ a specific system or component works the way it does.
+理想的には、変数名、関数名、定数名だけで動作を説明できるようにし、コメントに頼りすぎないようにします。コメントを使う場合は、特定の仕組みやコンポーネントがその形になっている _理由_ を説明してください。
 
-When describing a system/component in-depth, use block comment syntax.
+システムやコンポーネントを詳しく説明する場合は、ブロックコメントを使ってください。
 
 ```c
 /*
@@ -63,9 +62,8 @@ When describing a system/component in-depth, use block comment syntax.
  */
 ```
 
-When briefly describing a function or block of code, use a single-line comments
-placed on its own line.
-There should be a single space directly to the right of `//`.
+関数やコードブロックを短く説明する場合は、単独行のコメントを使ってください。
+`//` の右側には空白を 1 つ入れてください。
 
 ```c
 // This is supplemental information for the function. If there is a bunch of info, it should
@@ -78,8 +76,8 @@ void ProcessSingleTask(void)
 }
 ```
 
-When tagging a data structure that corresponds to an `enum` or some noteworthy
-value, place the comment on the same line as the code.
+`enum` や重要な値に対応するデータ構造へ注釈を付ける場合は、コメントをコードと同じ行に置いてください。
+
 ```c
 const u8 gPlantlikeMons[] =
 {
@@ -91,15 +89,15 @@ const u8 gPlantlikeMons[] =
 };
 ```
 
-### Whitespace
+### 空白
 
-All `.c` and `.h` files should use 4 spaces--not tabs.
-Assembler files (`.s)` use tabs.
-Script files (`.inc)` use tabs.
+すべての `.c` と `.h` ファイルでは、タブではなく 4 スペースを使ってください。
+アセンブラファイル、つまり `.s` ではタブを使います。
+スクリプトファイル、つまり `.inc` でもタブを使います。
 
-### Operators
+### 演算子
 
-Assignments and comparison operators should have one space on both sides of `=`.
+代入演算子と比較演算子の両側には空白を 1 つ入れてください。
 
 ```c
 int i = 0; // correct
@@ -109,14 +107,14 @@ a > b // correct
 a>b   // incorrect
 ```
 
-The incrementor and decrementor operators should NOT have a space.
+インクリメント演算子とデクリメント演算子には空白を入れないでください。
 
 ```c
 i++;  // correct
 i ++; // incorrect
 ```
 
-A control statement should have a space between them and their expressions, and the opening bracket should be on the next line.
+制御文では、キーワードと式の間に空白を入れ、開始波括弧は次の行に置いてください。
 
 ```c
 for (...)
@@ -129,7 +127,7 @@ for(...) {
 }
 ```
 
-A `switch` statement's cases should left-align with the `switch`'s block.
+`switch` 文の `case` は、`switch` ブロックと同じ位置に左揃えしてください。
 
 ```c
 switch (foo)
@@ -147,7 +145,7 @@ switch (foo)
 }
 ```
 
-A single empty line should follow a block.
+ブロックの後には空行を 1 行入れてください。
 
 ```c
 int MyFunction(int bar)
@@ -168,9 +166,7 @@ int MyFunction(int bar)
 }
 ```
 
-A chain of `if-else` statements in which any condition or block is more
-than one line of code should use braces. If all blocks *and* conditions
-are single-line, then no braces are necessary.
+`if-else` の連鎖で、条件またはブロックが 1 行を超える場合は波括弧を使ってください。すべてのブロックと条件が 1 行だけの場合は、波括弧なしでもかまいません。
 
 ```c
 if (foo) // correct
@@ -226,7 +222,7 @@ else if (foo
     return 0;
 ```
 
-The exception is `assertf` which should always use braces if it has a recovery path, even for one line of conditions and one line of code.
+例外として、`assertf` に復帰処理がある場合は、条件と処理が 1 行ずつでも常に波括弧を使ってください。
 
 ```c
 assertf(true); // correct
@@ -240,10 +236,9 @@ assertf(true) // incorrect
     return NULL;
 ```
 
-### Control Structures
+### 制御構造
 
-When comparing whether or not a value equals `0`, don't be explicit unless the
-situation calls for it.
+値が `0` と等しいかどうかを比較する場合、必要な場面を除いて明示的に書かないでください。
 
 ```c
 if (runTasks) // correct
@@ -259,8 +254,7 @@ if (PlayerIsOutside() == 0) // incorrect
     RemoveSunglasses();
 ```
 
-When writing a `for` or `while` loop with no body, use a semicolon `;` on the
-same line, rather than empty braces.
+本体のない `for` または `while` ループを書く場合は、空の波括弧ではなく同じ行にセミコロン `;` を置いてください。
 
 ```c
 for (i = 0; gParty[i].species != SPECIES_NONE; i++); // correct
@@ -268,9 +262,11 @@ for (i = 0; gParty[i].species != SPECIES_NONE; i++); // correct
 for (i = 0; gParty[i].species != SPECIES_NONE; i++) // incorrect
 { }
 ```
-### Inline Configs
 
-When adding functionality that is controlled by a config, defines should be checked within the normal control flow of the function unless a data structure requires a change at runtime.
+### インライン設定
+
+設定で制御される機能を追加する場合、実行時にデータ構造の変更が必要な場合を除き、define の確認は関数の通常の制御フロー内で行ってください。
+
 ```c
 void SetCurrentDifficultyLevel(enum DifficultyLevel desiredDifficulty)
 {
@@ -284,6 +280,7 @@ void SetCurrentDifficultyLevel(enum DifficultyLevel desiredDifficulty)
     VarSet(B_VAR_DIFFICULTY, desiredDifficulty);
 }
 ```
+
 ```c
 void SetCurrentDifficultyLevel(enum DifficultyLevel desiredDifficulty)
 {
@@ -296,6 +293,7 @@ void SetCurrentDifficultyLevel(enum DifficultyLevel desiredDifficulty)
     VarSet(B_VAR_DIFFICULTY, desiredDifficulty);
 }
 ```
+
 ```c
     [MOVE_VINE_WHIP] =
     {
@@ -314,8 +312,11 @@ void SetCurrentDifficultyLevel(enum DifficultyLevel desiredDifficulty)
         .power = B_UPDATED_MOVE_DATA >= GEN_6 ? 45 : 35,
     },
 ```
-### Variable Declarations
-Loop iterators should be declared as part of the loop unless there's a very good reason not to.
+
+### 変数宣言
+
+ループイテレータは、よほど強い理由がない限りループの一部として宣言してください。
+
 ```C
 for (u32 i = 0; i < LOOP_ITERATIONS; i++)
 {
@@ -323,14 +324,18 @@ for (u32 i = 0; i < LOOP_ITERATIONS; i++)
     dst2[i] = i;
 }
 ```
-## Data Type Sizes
-When a variable number is used, the data type should generally `u32` (unsigned) or `s32` (signed). There are a few exceptions to this rule, such as:
-* Values stored in the saveblock should use the smallest data type possible.
-* `EWRAM` variables should use the smallest data type possible.
-* Global variables / global struct members use the smallest data type possible.
 
-## Constants, Enums and Type Checking
-Avoid using magic numbers when possible - constants help to make clear why a specific value is used.
+## データ型のサイズ
+
+変数に数値を使う場合、一般的には `u32`、符号付きなら `s32` を使ってください。ただし、次の例外があります。
+
+* セーブブロックに保存される値は、可能な限り小さいデータ型にしてください。
+* `EWRAM` 変数は、可能な限り小さいデータ型にしてください。
+* グローバル変数とグローバル構造体メンバーは、可能な限り小さいデータ型にしてください。
+
+## 定数、enum、型チェック
+
+可能な限りマジックナンバーは避けてください。定数を使うことで、その値が使われる理由が明確になります。
 
 ```c
 // Incorrect
@@ -352,7 +357,7 @@ Avoid using magic numbers when possible - constants help to make clear why a spe
             return TRUE;
 ```
 
-When several numbers in sequence are used AND those values are not utilized in the saveblock, an enum is used instead.
+連続した複数の数値を使い、その値がセーブブロックで使われない場合は、代わりに enum を使ってください。
 
 ```c
 //Correct
@@ -373,7 +378,7 @@ enum Gimmick
             return TRUE;
 ```
 
-When an enum is used, the enum type is used instead of a regular number type to prevent incorrectly set values.
+enum を使う場合は、誤った値の設定を防ぐため、通常の数値型ではなく enum 型を使ってください。
 
 ```c
 // Incorrect
@@ -408,21 +413,21 @@ enum DifficultyLevel GetCurrentDifficultyLevel(void)
 }
 ```
 
-## Data file format
+## データファイル形式
 
-External data files should use JSON.
+外部データファイルには JSON を使ってください。
 
-## Principles
+## 方針
 
-### Minimally Invasive
+### できるだけ侵襲を小さくする
 
-New functionality must be as minimally invasive to existing files as possible. When a large amount of new code is introduced, it is best to isolate it in its own file.
+新機能は、既存ファイルへの影響を可能な限り小さくしてください。大量の新規コードを追加する場合は、専用ファイルへ分離するのが望ましいです。
 
-The [`B_VAR_DIFFICULTY`](https://patch-diff.githubusercontent.com/raw/rh-hideout/pokeemerald-expansion/pull/5337.diff) pull request is a good example of lots of new code being introduced in minimally invasive ways.
+[`B_VAR_DIFFICULTY`](https://patch-diff.githubusercontent.com/raw/rh-hideout/pokeemerald-expansion/pull/5337.diff) のプルリクエストは、大量の新規コードを低侵襲な形で導入している良い例です。
 
 ### `UNUSED`
 
-If a function or data is introduced but is never called, it is designated as `UNUSED`. `UNUSED` functions should not be introduced unless neccesary.
+関数やデータを追加しても呼び出されない場合は、`UNUSED` と指定します。必要がない限り、`UNUSED` 関数は追加しないでください。
 
 ```c
 static void UNUSED PadString(const u8 *src, u8 *dst)
@@ -439,25 +444,27 @@ static void UNUSED PadString(const u8 *src, u8 *dst)
 }
 ```
 
-### Config Philosophy
+### 設定に関する考え方
 
-If a branch can modifies saves, the functionality that does so must be gated behind a config, and off by default.
+セーブデータを変更する可能性があるブランチでは、その機能を設定で制御できるようにし、デフォルトでは無効にしてください。
 
-If a branch has a config that performs either of the following, it should be on by default:
-*  improves the backend / developer quality of life
-*  emulates present day, modern day Pokémon
+ブランチに次のいずれかを行う設定がある場合、その設定はデフォルトで有効にしてください。
 
-The sole excpetion to this is content who's sole source is Pokémon Champions. Champions content should use the `GEN_CHAMPIONS` config, but `GEN_LATEST` will remain `GEN_9` unless explicitly stated otherwise by a maintainer.
+* バックエンドや開発者の作業効率を改善する。
+* 現在のモダンなポケモンを再現する。
 
-If a branch's behavior is one that Game Freak does not have a consistent stance on, the default behavior of the config should be disussed by the maintainers.
+唯一の例外は、Pokemon Champions だけを出典とするコンテンツです。Champions コンテンツは `GEN_CHAMPIONS` 設定を使うべきですが、メンテナーが明示しない限り `GEN_LATEST` は `GEN_9` のままです。
 
-All other configs should be off.
+Game Freak の方針が一貫していない挙動をブランチが扱う場合、その設定のデフォルト挙動はメンテナーが議論してください。
 
-### Save Philosophy
+その他の設定はすべてデフォルトで無効にしてください。
 
-Until [save migration](https://discord.com/channels/419213663107416084/1108733346864963746) is implemented, branches will only merged in if they do not forcefully break existing game saves.
+### セーブに関する考え方
 
-When `pokemeerald-expansion` gets to a point where new functionality will require that we break saves, we will merge as many [save-breaking features](https://discord.com/channels/419213663107416084/1202774957776441427) together as possible, and increment the major version number of the project.
+[セーブ移行](https://discord.com/channels/419213663107416084/1108733346864963746)が実装されるまでは、既存のゲームセーブを強制的に壊さないブランチだけがマージされます。
 
-# Attribution
-* The majority of the styleguide was written by [garakmon](https://github.com/garakmon) as part of their [PR to pokefirered](<https://github.com/pret/pokefirered/pull/63>).
+`pokeemerald-expansion` が、新機能のためにセーブ破壊を避けられない段階に到達した場合は、できるだけ多くの[セーブ破壊を伴う機能](https://discord.com/channels/419213663107416084/1202774957776441427)をまとめてマージし、プロジェクトのメジャーバージョン番号を上げます。
+
+# 帰属
+
+* このスタイルガイドの大部分は、[garakmon](https://github.com/garakmon) によって、[pokefirered への PR](<https://github.com/pret/pokefirered/pull/63>) の一部として書かれました。

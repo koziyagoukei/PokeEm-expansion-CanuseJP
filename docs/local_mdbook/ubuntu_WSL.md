@@ -1,16 +1,19 @@
-Note: For further information beyond this very basic guide, please visit mdBook's [official documentation](https://rust-lang.github.io/mdBook/).
+## ドキュメントサイトをローカルで動かす Ubuntu WSL1/WSL2
 
-## Running documentation website locally (Ubuntu WSL1/WSL2)
-### Previous Requirements:
-- Option 1: Install via Rust toolchain
-    - Install Rust toolchain if you don't have it via the `sudo apt install cargo` command.
-    - Install mdBook via the `cargo install mdbook` command. Once finished, this message will pop up, with {USER} being your Ubuntu
+### 事前要件
+
+- 方法 1: Rust ツールチェーン経由でインストールする
+    - Rust ツールチェーンが未インストールの場合は、`sudo apt install cargo` コマンドでインストールします。
+    - `cargo install mdbook` コマンドで mdBook をインストールします。完了すると次のようなメッセージが表示されます。`{USER}` は Ubuntu のユーザー名です。
+
         ```
         warning: be sure to add `/home/{USER}/.cargo/bin` to your PATH to be able to run the installed binaries
         ```
-    - Add `/home/{USER}/.cargo/bin` to your PATH (with {USER} being the Ubuntu username.)
-        - Run command `nano ~/.profile` to edit the file.
-        - Add the following lines, ***replacing {USER} with your Linux username.***
+
+    - `/home/{USER}/.cargo/bin` を PATH に追加します。`{USER}` は Ubuntu のユーザー名に置き換えてください。
+        - `nano ~/.profile` コマンドでファイルを編集します。
+        - 次の行を追加します。***{USER} は Linux のユーザー名に置き換えてください。***
+
             ```diff
             # set PATH so it includes user's private bin if it exists
             if [ -d "$HOME/bin" ] ; then
@@ -27,25 +30,31 @@ Note: For further information beyond this very basic guide, please visit mdBook'
             +    PATH="/home/{USER}/.cargo/bin:$PATH"
             +fi
             ```
-        - Run the `source ~/.profile` command to refresh the path in the current session.
-- Option 2: Install downloaded binaries directly
-    - TODO: Add documentation of this process.
 
-### Running the website
-- Navigate to the `docs` folder on the repository.
-- Run `mdbook serve`. Once started, you may now open the website on your browser by going to `http://127.0.0.1:3000`.
-- Every change done to the `docs` folder will be reflected with an automatic refresh.
-- To stop the server and go back to the terminal, press `Ctrl + C`.
+        - `source ~/.profile` コマンドを実行し、現在のセッションの PATH を更新します。
 
-### Modifying the website
-- The navigation menu on the left is handled by `docs/SUMMARY.md`. Every file added needs to be added somewhere here in order to become visible, otherwise you'll get a 404 error.
-- Any Markdown files (.md extension) added to the `docs/` directory will automatically be read by mdBook.
-- To add Markdown files that are not in the `docs/` directory, you may create an empty `.md` file and add the following ***without the "----"***:
+- 方法 2: ダウンロードしたバイナリを直接インストールする
+    - TODO: この手順のドキュメントを追加する。
+
+### サイトを起動する
+
+- リポジトリの `docs` フォルダへ移動します。
+- `mdbook serve` を実行します。起動後、ブラウザで `http://127.0.0.1:3000` を開くとサイトを確認できます。
+- `docs` フォルダへの変更は自動更新で反映されます。
+- サーバーを止めてターミナルへ戻るには `Ctrl + C` を押します。
+
+### サイトを編集する
+
+- 左側のナビゲーションメニューは `docs/SUMMARY.md` で管理されています。追加したファイルを表示するには、このファイルのどこかへ追加する必要があります。追加しない場合は 404 エラーになります。
+- `docs/` ディレクトリに追加した Markdown ファイル、つまり `.md` 拡張子のファイルは mdBook に自動で読み込まれます。
+- `docs/` ディレクトリ外の Markdown ファイルを追加する場合は、空の `.md` ファイルを作り、次を追加できます。***"----" は含めないでください。***
+
     ```md
     {{ ----#include ../INSTALL.md}}`
     ```
-    This will include the `INSTALL.md` Markdown file from the root directory.
 
-Once you're set up, you can now check your changes before pushing them to your repo! :D
+    これにより、ルートディレクトリの `INSTALL.md` Markdown ファイルが読み込まれます。
 
-We hope that this will make it easier for users to contribute to the documentation :)
+セットアップが終われば、リポジトリへ push する前に変更を確認できます。
+
+この仕組みにより、ドキュメントへのコントリビュートがしやすくなることを期待しています。
