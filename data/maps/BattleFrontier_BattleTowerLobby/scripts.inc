@@ -928,68 +928,68 @@ BattleFrontier_BattleTowerLobby_EventScript_ExitRules::
 
 @ Unused
 BattleFrontier_BattleTowerLobby_Text_DirectYouToBattleRoom:
-	.string "I'll direct you to your BATTLE ROOM now.$"
+	.string "{JPN}バトルルームへ ごあんないします$"
 
 BattleFrontier_BattleTowerLobby_Text_DidntSaveBeforeQuitting:
-	.string "Excuse me!\p"
-	.string "You didn't save before you quit your\n"
-	.string "challenge last time.\p"
-	.string "Because of that, your challenge so far\n"
-	.string "has been disqualified. Sorry!$"
+	.string "{JPN}すみません！\p"
+	.string "まえの ちょうせんを やめるまえに\n"
+	.string "レポートを かいていませんでした\p"
+	.string "そのため ここまでの ちょうせんは\n"
+	.string "しっかくに なりました$"
 
 BattleFrontier_BattleTowerLobby_Text_CongratsBeatenSeven:
-	.string "Congratulations!\n"
-	.string "You've beaten all seven TRAINERS!\p"
+	.string "{JPN}おめでとうございます！\n"
+	.string "7にんの トレーナーに かちぬきました！\p"
 	.string "$"
 
 @ Unused
 BattleFrontier_BattleTowerLobby_Text_EarnedFabulousPrize:
-	.string "For beating seven TRAINERS in a row,\n"
-	.string "you have earned this fabulous prize!\p"
+	.string "{JPN}7にんの トレーナーに かちぬいたので\n"
+	.string "すてきな しょうひんを さしあげます！\p"
 	.string "$"
 
 BattleFrontier_BattleTowerLobby_Text_ReceivedPrize:
-	.string "{PLAYER} received the prize\n"
-	.string "{STR_VAR_1}.$"
+	.string "{JPN}{PLAYER}は しょうひんの\n"
+	.string "{STR_VAR_1}を もらった$"
 
 @ Unused
 BattleFrontier_BattleTowerLobby_Text_BagFullMakeRoom:
-	.string "Oh, your BAG appears to be full.\p"
-	.string "Please make room in your BAG, then come\n"
-	.string "see me.$"
+	.string "{JPN}バッグが いっぱいのようです\p"
+	.string "バッグを あけてから\n"
+	.string "また きてください$"
 
 BattleFrontier_BattleTowerLobby_Text_ThankYouForPlaying:
-	.string "Thank you for playing!\p"
+	.string "{JPN}おつかれさまでした！\p"
 	.string "$"
 
 BattleFrontier_BattleTowerLobby_Text_RecordWillBeSaved:
-	.string "Your record will be saved.\n"
-	.string "Please wait.$"
+	.string "{JPN}きろくを レポートに かきこみます\n"
+	.string "しばらく おまちください$"
 
 BattleFrontier_BattleTowerLobby_Text_WeveBeenWaitingForYou:
-	.string "We've been waiting for you!\p"
+	.string "{JPN}おまちしていました！\p"
 	.string "$"
 
 BattleFrontier_BattleTowerLobby_Text_ProgressWillBeSaved:
-	.string "Before entering a BATTLE ROOM, your\n"
-	.string "progress will be saved. Please wait.$"
+	.string "{JPN}バトルルームへ はいるまえに\n"
+	.string "レポートを かきます おまちください$"
 
 BattleFrontier_BattleTowerLobby_Text_AboutToFace50thTrainer:
-	.string "You're finally about to face the\n"
-	.string "50th TRAINER.\p"
-	.string "From here on, every time you beat seven\n"
-	.string "TRAINERS in a row, your POKEMON will\l"
-	.string "receive a commemorative RIBBON.\p"
-	.string "Good luck!$"
+	.string "{JPN}いよいよ 50にんめの\n"
+	.string "トレーナーとの しょうぶです\p"
+	.string "ここから 7にん かちぬくたびに\n"
+	.string "ポケモンに きねんの リボンが\l"
+	.string "おくられます\p"
+	.string "がんばってください！$"
 
 BattleFrontier_BattleTowerLobby_Text_HereAreSomeRibbons:
-	.string "Here are some RIBBONS for beating\n"
-	.string "seven tough TRAINERS in a row.\p"
-	.string "{PLAYER} received some RIBBONS!$"
+	.string "{JPN}つよい トレーナーに 7にん\n"
+	.string "かちぬいた きねんの リボンです\p"
+	.string "{PLAYER}は リボンを もらった！$"
 
 BattleFrontier_BattleTowerLobby_Text_PutRibbonOnMons:
-	.string "{PLAYER} put the RIBBONS on\n"
-	.string "the challenger POKEMON.$"
+	.string "{JPN}{PLAYER}は ちょうせんした ポケモンに\n"
+	.string "リボンを つけた$"
 
 BattleFrontier_BattleTowerLobby_Text_DescribeFeelingsAboutBattleTower:
 	.string "Excuse me, do you have a moment?\p"

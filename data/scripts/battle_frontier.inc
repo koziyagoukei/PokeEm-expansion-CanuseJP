@@ -9,5 +9,5 @@ BattleFrontier_ShowCaughtBannedSpeciesEnd:
 
 
 BattleFrontier_DoYouWantToSeeTheListOfCaughtBannedSpecies:
-	.string "Do you want to see the list of\n"
-	.string "POKEMON species you can't bring?$"
+	.string "{JPN}つれていけない ポケモンの\n"
+	.string "いちらんを みますか？$"

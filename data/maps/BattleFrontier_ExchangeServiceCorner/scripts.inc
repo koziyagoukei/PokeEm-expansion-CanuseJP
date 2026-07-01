@@ -345,43 +345,43 @@ BattleFrontier_ExchangeServiceCorner_EventScript_Girl::
 	end
 
 BattleFrontier_ExchangeServiceCorner_Text_WelcomePleaseChoosePrize:
-	.string "Hello, this is the EXCHANGE SERVICE\n"
-	.string "CORNER.\p"
-	.string "We exchange the Battle Points you\n"
-	.string "have collected for lovely prizes.\p"
-	.string "Please choose a prize from this list.$"
+	.string "{JPN}こんにちは こちらは\n"
+	.string "こうかんサービスコーナーです\p"
+	.string "あつめた バトルポイントを\n"
+	.string "すてきな しょうひんと こうかんします\p"
+	.string "リストから しょうひんを えらんでください$"
 
 @ Unused
 BattleFrontier_ExchangeServiceCorner_Text_PleaseChoosePrize:
-	.string "Please choose a prize from this list.$"
+	.string "{JPN}リストから しょうひんを えらんでください$"
 
 BattleFrontier_ExchangeServiceCorner_Text_ConfirmPurchase:
-	.string "You've chosen the {STR_VAR_1}.\n"
-	.string "Is that correct?$"
+	.string "{JPN}{STR_VAR_1}を えらびました\n"
+	.string "よろしいですか？$"
 
 BattleFrontier_ExchangeServiceCorner_Text_WellSendItToPC:
-	.string "Thank you!\n"
-	.string "We'll send it to your PC at home.$"
+	.string "{JPN}ありがとうございます！\n"
+	.string "じたくの パソコンに おくります$"
 
 BattleFrontier_ExchangeServiceCorner_Text_HereIsYourPrize:
-	.string "Here is your prize!$"
+	.string "{JPN}しょうひんを どうぞ！$"
 
 BattleFrontier_ExchangeServiceCorner_Text_DontHaveEnoughPoints:
-	.string "I'm so sorry...\n"
-	.string "You don't have enough Battle Points...$"
+	.string "{JPN}もうしわけ ありません……\n"
+	.string "バトルポイントが たりません……$"
 
 BattleFrontier_ExchangeServiceCorner_Text_PCIsFull:
-	.string "I'm so sorry...\n"
-	.string "Your PC appears to be full...$"
+	.string "{JPN}もうしわけ ありません……\n"
+	.string "パソコンが いっぱいのようです……$"
 
 BattleFrontier_ExchangeServiceCorner_Text_DontHaveSpaceToHoldIt:
-	.string "I'm so sorry...\n"
-	.string "You don't have space to hold it...$"
+	.string "{JPN}もうしわけ ありません……\n"
+	.string "もちものが いっぱいのようです……$"
 
 BattleFrontier_ExchangeServiceCorner_Text_ThankYouVisitWithPoints:
-	.string "Thank you very much.\p"
-	.string "Please visit us when you have\n"
-	.string "saved up Battle Points.$"
+	.string "{JPN}ありがとうございました\p"
+	.string "バトルポイントを ためたら\n"
+	.string "また おこしください$"
 
 BattleFrontier_ExchangeServiceCorner_Text_WishIHadAllDolls:
 	.string "Oh, they're so nice!\n"

@@ -299,21 +299,21 @@ BattleFrontier_OutsideWest_EventScript_PokefanF::
 	end
 
 BattleFrontier_OutsideWest_Text_BattleDomeSign:
-	.string "This is the BATTLE DOME!\n"
-	.string "Your path to the invincible superstar!$"
+	.string "{JPN}ここは バトルドーム！\n"
+	.string "むてきの スターへの みち！$"
 
 BattleFrontier_OutsideWest_Text_BattleFactorySign:
-	.string "This is the BATTLE FACTORY!\n"
-	.string "Seek out the toughest POKEMON!$"
+	.string "{JPN}ここは バトルファクトリー！\n"
+	.string "さいきょうの ポケモンを さがせ！$"
 
 BattleFrontier_OutsideWest_Text_BattlePikeSign:
-	.string "This is the BATTLE PIKE!\n"
-	.string "Choose one of three paths!$"
+	.string "{JPN}ここは バトルチューブ！\n"
+	.string "3つの みちから 1つを えらべ！$"
 
 BattleFrontier_OutsideWest_Text_ThisIsBattleTower:
-	.string "This is the BATTLE TOWER.\p"
-	.string "TRAINERS bring their best-raised\n"
-	.string "POKEMON for elimination-style matches.$"
+	.string "{JPN}ここは バトルタワーです\p"
+	.string "トレーナーが じまんの ポケモンで\n"
+	.string "かちぬきバトルに ちょうせんします$"
 
 BattleFrontier_OutsideWest_Text_MayISeeYourTicket:
 	.string "Hello, are you here for the ferry?\n"
@@ -514,4 +514,3 @@ BattleFrontier_OutsideWest_Text_MonWithLongTailInFrontier:
 	.string "It must be adorable. I'm sure of it...\p"
 	.string "Oh, challenges can wait. I feel driven\n"
 	.string "to find the delightful creature!$"
-

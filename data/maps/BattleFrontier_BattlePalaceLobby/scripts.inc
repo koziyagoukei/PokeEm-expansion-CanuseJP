@@ -378,47 +378,45 @@ BattleFrontier_BattlePalaceLobby_EventScript_ExitRules::
 	end
 
 BattleFrontier_BattlePalaceLobby_Text_WelcomeForSingleBattle:
-	.string "Where the hearts of TRAINERS\n"
-	.string "are put to the test.\p"
-	.string "I welcome you to the BATTLE PALACE.\p"
-	.string "I accept challenges to the SINGLE\n"
-	.string "BATTLE HALLS.$"
+	.string "{JPN}トレーナーの こころが\n"
+	.string "ためされる しせつ\p"
+	.string "バトルパレスへ ようこそ\p"
+	.string "シングルバトルホールへの\n"
+	.string "ちょうせんを うけつけます$"
 
 BattleFrontier_BattlePalaceLobby_Text_TakeSingleBattleChallenge:
-	.string "Do you wish to take\n"
-	.string "the SINGLE BATTLE HALL challenge?$"
+	.string "{JPN}シングルバトルホールに\n"
+	.string "ちょうせんしますか？$"
 
 BattleFrontier_BattlePalaceLobby_Text_ExplainSingleBattleChallenge:
-	.string "In the BATTLE PALACE, there are\n"
-	.string "several auditoriums for SINGLE BATTLES\l"
-	.string "that are named SINGLE BATTLE HALLS.\p"
-	.string "The SINGLE BATTLES are conducted in\n"
-	.string "the usual way, except with one crucial\l"
-	.string "rule that must be obeyed.\p"
-	.string "TRAINERS are permitted only to switch\n"
-	.string "their POKEMON in and out.\p"
-	.string "TRAINERS are otherwise forbidden to\n"
-	.string "command their POKEMON.\p"
-	.string "The POKEMON are to behave according\n"
-	.string "to their nature and battle on their own.\p"
-	.string "You must put your trust in your\n"
-	.string "POKEMON and watch over them.\p"
-	.string "If you achieve the honor of beating\n"
-	.string "seven TRAINERS in succession,\l"
-	.string "we will present you with Battle Points.\p"
-	.string "If you want to interrupt your\n"
-	.string "challenge, you must save the game.\p"
-	.string "If you don't save before interrupting,\n"
-	.string "you will be disqualified.$"
+	.string "{JPN}バトルパレスには\n"
+	.string "シングルバトルホールが あります\p"
+	.string "ここでは ふつうの バトルと\n"
+	.string "1つだけ おおきく ちがう ルールが\l"
+	.string "あります\p"
+	.string "トレーナーが できるのは\n"
+	.string "ポケモンの いれかえだけです\p"
+	.string "それいがいの しじは\n"
+	.string "いっさい できません\p"
+	.string "ポケモンは せいかくに あわせて\n"
+	.string "じぶんで たたかいます\p"
+	.string "ポケモンを しんじて\n"
+	.string "みまもってください\p"
+	.string "7にんの トレーナーに かちぬけば\n"
+	.string "バトルポイントが もらえます\p"
+	.string "とちゅうで やめるときは\n"
+	.string "レポートを かいてください\p"
+	.string "レポートを かかずに やめると\n"
+	.string "しっかくに なります$"
 
 BattleFrontier_BattlePalaceLobby_Text_ReturnWhenFortified:
-	.string "When you have fortified your heart\n"
-	.string "and POKEMON, you must return.$"
+	.string "{JPN}こころと ポケモンを きたえて\n"
+	.string "また おこしください$"
 
 BattleFrontier_BattlePalaceLobby_Text_WhichChallenge:
-	.string "There are two BATTLE HALLS,\n"
-	.string "Level 50 and Open Level.\l"
-	.string "Which is your choice of a challenge?$"
+	.string "{JPN}レベル50と オープンレベルの\n"
+	.string "2つの バトルホールが あります\l"
+	.string "どちらに ちょうせんしますか？$"
 
 BattleFrontier_BattlePalaceLobby_Text_NotEnoughValidMonsLv50:
 	.string "Sigh...\p"
@@ -650,4 +648,3 @@ BattleFrontier_BattlePalaceLobby_Text_ExplainRulesWhenInDanger:
 	.string "nature when it is in trouble.\p"
 	.string "If a POKEMON begins behaving oddly\n"
 	.string "in a pinch, watch it carefully.$"
-

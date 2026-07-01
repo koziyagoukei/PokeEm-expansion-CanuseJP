@@ -828,6 +828,7 @@ const u8 *const gBattleStringsTable[STRINGID_COUNT] =
     [STRINGID_BIZARREARENACREATED]                  = COMPOUND_STRING("{JPN}もちものの こうかが なくなる\nふしぎな くうかんが できた！"),
     [STRINGID_BIZARREAREACREATED]                   = COMPOUND_STRING("{JPN}ぼうぎょと とくぼうが いれかわる\nふしぎな くうかんが できた！"),
     [STRINGID_TIDYINGUPCOMPLETE]                    = COMPOUND_STRING("{JPN}おかたづけ かんりょう！"),
+    [STRINGID_TIMETOTERASTALLIZE]                   = COMPOUND_STRING("{JPN}ひかりかがやけ テラスタル！"),
     [STRINGID_PKMNTERASTALLIZEDINTO]                = COMPOUND_STRING("{JPN}{B_ATK_NAME_WITH_PREFIX}は {B_BUFF1}タイプに テラスタルした！"), // Does not exist, meant to mimic form change strings
     [STRINGID_BOOSTERENERGYACTIVATES]               = COMPOUND_STRING("{JPN}{B_SCR_NAME_WITH_PREFIX}は {B_LAST_ITEM}で\n{B_SCR_ABILITY}を はつどうした！"),
     [STRINGID_FOGCREPTUP]                           = COMPOUND_STRING("{JPN}こい きりが たちこめた！"),

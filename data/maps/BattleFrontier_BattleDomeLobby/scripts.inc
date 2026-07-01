@@ -437,52 +437,50 @@ BattleFrontier_BattleDomeLobby_EventScript_ExitRules::
 	end
 
 BattleFrontier_BattleDomeLobby_Text_WelcomeSingleBattle:
-	.string "Where the strategies of TRAINERS\n"
-	.string "are put to the test!\p"
-	.string "Welcome to the BATTLE DOME!\p"
-	.string "I am your guide to the SINGLE BATTLE\n"
-	.string "Tournament.$"
+	.string "{JPN}トレーナーの さくせんが\n"
+	.string "ためされる しせつ！\p"
+	.string "バトルドームへ ようこそ！\p"
+	.string "シングルバトル トーナメントへ\n"
+	.string "ごあんないします$"
 
 BattleFrontier_BattleDomeLobby_Text_TakeSinglesChallenge:
-	.string "Would you like to challenge\n"
-	.string "the SINGLE BATTLE Tournament?$"
+	.string "{JPN}シングルバトル トーナメントに\n"
+	.string "ちょうせんしますか？$"
 
 BattleFrontier_BattleDomeLobby_Text_HopeToSeeYouAgain:
-	.string "We hope to see you again.$"
+	.string "{JPN}またの おこしを おまちしています$"
 
 BattleFrontier_BattleDomeLobby_Text_ExplainSinglesChallenge:
-	.string "The SINGLE BATTLE Tournament\n"
-	.string "is exactly as the name suggests--\l"
-	.string "a tournament of SINGLE BATTLES.\p"
-	.string "All participating TRAINERS must\n"
-	.string "enter three POKEMON each.\p"
-	.string "In each battle, one of the three\n"
-	.string "POKEMON must be held in reserve.\p"
-	.string "The other two POKEMON can battle\n"
-	.string "one at a time.\p"
-	.string "Choose the two battling POKEMON after\n"
-	.string "examining the opponent's trio.\p"
-	.string "You win the tournament by defeating\n"
-	.string "four TRAINERS.\p"
-	.string "Battle Points are awarded to\n"
-	.string "the tournament winner.\p"
-	.string "If you want to interrupt your\n"
-	.string "tournament, please save the game.\p"
-	.string "If you don't save before interrupting,\n"
-	.string "you will be disqualified.$"
+	.string "{JPN}シングルバトル トーナメントは\n"
+	.string "シングルバトルで おこなう\l"
+	.string "トーナメントです\p"
+	.string "さんかする トレーナーは\n"
+	.string "3びきの ポケモンを エントリーします\p"
+	.string "しょうぶでは 3びきの うち\n"
+	.string "1ぴきは ひかえに まわします\p"
+	.string "あいての 3びきを みてから\n"
+	.string "たたかう 2ひきを えらんでください\p"
+	.string "4にんの トレーナーに かてば\n"
+	.string "ゆうしょうです\p"
+	.string "ゆうしょうすると バトルポイントが\n"
+	.string "もらえます\p"
+	.string "とちゅうで やめるときは\n"
+	.string "レポートを かいてください\p"
+	.string "レポートを かかずに やめると\n"
+	.string "しっかくに なります$"
 
 BattleFrontier_BattleDomeLobby_Text_OkayToSaveBeforeChallenge:
-	.string "Before I show you to the BATTLE DOME,\n"
-	.string "I must save the data. Is that okay?$"
+	.string "{JPN}バトルドームへ ごあんないするまえに\n"
+	.string "レポートを かきます よろしいですか？$"
 
 BattleFrontier_BattleDomeLobby_Text_WhichLevelMode:
-	.string "The tournament offers two levels\n"
-	.string "of challenge, Level 50 and Open Level.\l"
-	.string "Which is your choice?$"
+	.string "{JPN}レベル50と オープンレベルの\n"
+	.string "2つの ちょうせんが あります\l"
+	.string "どちらに しますか？$"
 
 BattleFrontier_BattleDomeLobby_Text_SelectThreeMons:
-	.string "Now select the three POKEMON that\n"
-	.string "you wish to enter, please.$"
+	.string "{JPN}エントリーする ポケモンを\n"
+	.string "3びき えらんでください$"
 
 BattleFrontier_BattleDomeLobby_Text_NotEnoughValidMonsLvOpen:
 	.string "Excuse me!\p"

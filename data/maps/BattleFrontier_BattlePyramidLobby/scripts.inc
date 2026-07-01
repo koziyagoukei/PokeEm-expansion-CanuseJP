@@ -527,46 +527,46 @@ BattleFrontier_BattlePyramidLobby_EventScript_ExitRules::
 	end
 
 BattleFrontier_BattlePyramidLobby_Text_WelcomeToBattlePyramid:
-	.string "Where the courage of TRAINERS\n"
-	.string "is put to the test!\p"
-	.string "Welcome to the BATTLE PYRAMID!\p"
-	.string "I am your guide to\n"
-	.string "the Battle Quest.$"
+	.string "{JPN}トレーナーの ゆうきが\n"
+	.string "ためされる しせつ！\p"
+	.string "バトルピラミッドへ ようこそ！\p"
+	.string "バトルクエストへ\n"
+	.string "ごあんないします$"
 
 BattleFrontier_BattlePyramidLobby_Text_EmbarkOnChallenge:
-	.string "Have you the courage to embark on\n"
-	.string "the Battle Quest challenge?$"
+	.string "{JPN}バトルクエストに いどむ\n"
+	.string "ゆうきは ありますか？$"
 
 BattleFrontier_BattlePyramidLobby_Text_AwaitFutureChallenge:
-	.string "We await your challenge in the future!$"
+	.string "{JPN}またの ちょうせんを おまちしています！$"
 
 BattleFrontier_BattlePyramidLobby_Text_ExplainBattlePyramid:
-	.string "The Battle Quest is a battling\n"
-	.string "event in which you must explore\l"
-	.string "the PYRAMID and try to reach the top.\p"
-	.string "In the PYRAMID are seven floors of\n"
-	.string "mazes, all of them filled with not only\l"
-	.string "skilled TRAINERS but also wild POKEMON.\p"
-	.string "You must enter with three POKEMON,\n"
-	.string "none of them holding an item.\p"
-	.string "On your ascent, you will be provided\n"
-	.string "with a BATTLE BAG for items.\p"
-	.string "If you fail in your challenge, any item\n"
-	.string "placed in the BATTLE BAG disappears.\p"
-	.string "If you want to interrupt your\n"
-	.string "challenge, you must select REST\l"
-	.string "and save the game.\p"
-	.string "If you don't save before interrupting,\n"
-	.string "you will be disqualified.$"
+	.string "{JPN}バトルクエストは\n"
+	.string "ピラミッドを たんけんして\l"
+	.string "ちょうじょうを めざす しせつです\p"
+	.string "ピラミッドは 7つの フロアに\n"
+	.string "わかれていて つよい トレーナーや\l"
+	.string "やせいの ポケモンが います\p"
+	.string "もちものを もたない 3びきの\n"
+	.string "ポケモンで ちょうせんします\p"
+	.string "なかでは どうぐを いれる\n"
+	.string "バトルバッグを おわたしします\p"
+	.string "ちょうせんに しっぱいすると\n"
+	.string "バトルバッグの どうぐは なくなります\p"
+	.string "とちゅうで やめるときは\n"
+	.string "やすむを えらんで レポートを\l"
+	.string "かいてください\p"
+	.string "レポートを かかずに やめると\n"
+	.string "しっかくに なります$"
 
 BattleFrontier_BattlePyramidLobby_Text_WhichLevelMode:
-	.string "The PYRAMID offers two courses,\n"
-	.string "Level 50 and Open Level.\l"
-	.string "Which will you enter?$"
+	.string "{JPN}レベル50と オープンレベルの\n"
+	.string "2つの コースが あります\l"
+	.string "どちらに はいりますか？$"
 
 BattleFrontier_BattlePyramidLobby_Text_SelectThreeMons:
-	.string "Very good. Now, please select the three\n"
-	.string "POKEMON you wish to accompany you.$"
+	.string "{JPN}それでは つれていく ポケモンを\n"
+	.string "3びき えらんでください$"
 
 BattleFrontier_BattlePyramidLobby_Text_NotEnoughValidMonsLvOpen:
 	.string "A slight problem, adventurer!\p"
@@ -591,16 +591,16 @@ BattleFrontier_BattlePyramidLobby_Text_NotEnoughValidMonsEnd:
 	.string "a word with me.$"
 
 BattleFrontier_BattlePyramidLobby_Text_OkayToSaveBeforeChallenge:
-	.string "Before you enter the BATTLE PYRAMID,\n"
-	.string "the game must be saved. Is that okay?$"
+	.string "{JPN}バトルピラミッドへ はいるまえに\n"
+	.string "レポートを かきます よろしいですか？$"
 
 BattleFrontier_BattlePyramidLobby_Text_ShowYouIntoPyramid:
-	.string "Very good. I will now show you into\n"
-	.string "the BATTLE PYRAMID.$"
+	.string "{JPN}それでは バトルピラミッドへ\n"
+	.string "ごあんないします$"
 
 BattleFrontier_BattlePyramidLobby_Text_WeWillHoldBagForSafekeeping:
-	.string "We will hold your BAG for safekeeping,\n"
-	.string "{PLAYER}, while you are exploring.$"
+	.string "{JPN}{PLAYER}さんが たんけんしている あいだ\n"
+	.string "バッグは おあずかりします$"
 
 BattleFrontier_BattlePyramidLobby_Text_PleaseTakePreviousBattleBag:
 	.string "In exchange, please take this BATTLE\n"
@@ -902,4 +902,3 @@ BattleFrontier_BattlePyramidLobby_Text_ExplainBagRules:
 	.string "of ten kinds of items.\p"
 	.string "The contents of the BATTLE BAG are\n"
 	.string "lost if you fail in your quest.$"
-

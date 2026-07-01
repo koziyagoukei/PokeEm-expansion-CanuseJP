@@ -272,42 +272,40 @@ BattleFrontier_BattlePike_EventScript_CloseCurtain::
 	return
 
 BattleFrontier_BattlePikeLobby_Text_WelcomeToBattlePike:
-	.string "Where the luck of TRAINERS\n"
-	.string "is put to the test...\p"
-	.string "Welcome to the BATTLE PIKE...\p"
-	.string "I am your guide to the BATTLE PIKE...$"
+	.string "{JPN}トレーナーの うんが\n"
+	.string "ためされる しせつ……\p"
+	.string "バトルチューブへ ようこそ……\p"
+	.string "バトルチューブへ ごあんないします……$"
 
 BattleFrontier_BattlePikeLobby_Text_TakeChallenge:
-	.string "Would you like to take the Battle\n"
-	.string "Choice challenge?$"
+	.string "{JPN}バトルチョイスに\n"
+	.string "ちょうせんしますか？$"
 
 BattleFrontier_BattlePikeLobby_Text_ExplainBattlePike:
-	.string "Here we conduct an event we call\n"
-	.string "the Battle Choice.\p"
-	.string "The Battle Choice rules are very\n"
-	.string "simple...\p"
-	.string "Choose one of three paths and make\n"
-	.string "your way to the goal room at the end\l"
-	.string "of the BATTLE PIKE. It's that simple.\p"
-	.string "However, what happens on the chosen\n"
-	.string "path depends entirely on the luck\l"
-	.string "of the challenger...\p"
-	.string "If you reach the goal, you will be\n"
-	.string "rewarded with Battle Points.\p"
-	.string "If you want to interrupt your\n"
-	.string "challenge, please have a word with\l"
-	.string "our staff in the big rooms on the way.\p"
-	.string "If you don't save before interrupting,\n"
-	.string "you will be disqualified.$"
+	.string "{JPN}ここでは バトルチョイスを\n"
+	.string "おこなっています\p"
+	.string "ルールは とても かんたんです……\p"
+	.string "3つの みちから 1つを えらび\n"
+	.string "おくの ゴールの へやを めざします\p"
+	.string "ただし えらんだ みちで\n"
+	.string "なにが おこるかは\l"
+	.string "ちょうせんしゃの うんしだいです……\p"
+	.string "ゴールに たどりつくと\n"
+	.string "バトルポイントが もらえます\p"
+	.string "とちゅうで やめるときは\n"
+	.string "おおきな へやにいる スタッフに\l"
+	.string "はなしかけてください\p"
+	.string "レポートを かかずに やめると\n"
+	.string "しっかくに なります$"
 
 BattleFrontier_BattlePikeLobby_Text_LookForwardToSeeingYou:
-	.string "We look forward to seeing you\n"
-	.string "on another occasion...$"
+	.string "{JPN}またの おこしを\n"
+	.string "おまちしています……$"
 
 BattleFrontier_BattlePikeLobby_Text_WhichChallengeMode:
-	.string "You have the choice of two courses,\n"
-	.string "Level 50 and Open Level.\l"
-	.string "Which will you challenge?$"
+	.string "{JPN}レベル50と オープンレベルの\n"
+	.string "2つの コースが あります\l"
+	.string "どちらに ちょうせんしますか？$"
 
 BattleFrontier_BattlePikeLobby_Text_NotEnoughValidMonsLv50:
 	.string "I beg your pardon, but...\p"
@@ -334,30 +332,30 @@ BattleFrontier_BattlePikeLobby_Text_NotEnoughValidMonsLvOpen:
 	.string "EGGS{STR_VAR_1}.$"
 
 BattleFrontier_BattlePikeLobby_Text_PleaseChooseThreeMons:
-	.string "Please choose the three POKEMON\n"
-	.string "you wish to enter in the challenge...$"
+	.string "{JPN}ちょうせんする ポケモンを\n"
+	.string "3びき えらんでください……$"
 
 BattleFrontier_BattlePikeLobby_Text_SaveBeforeChallenge:
-	.string "Before starting your Battle Choice\n"
-	.string "challenge, I must save the game.\l"
-	.string "Is that acceptable?$"
+	.string "{JPN}バトルチョイスを はじめるまえに\n"
+	.string "レポートを かきます\l"
+	.string "よろしいですか？$"
 
 BattleFrontier_BattlePikeLobby_Text_StepThisWay:
-	.string "Please step this way...$"
+	.string "{JPN}こちらへ どうぞ……$"
 
 BattleFrontier_BattlePikeLobby_Text_ChallengeEndedRecordResults:
-	.string "Your challenge has ended...\p"
-	.string "I shall record your results.\n"
-	.string "Please wait...$"
+	.string "{JPN}ちょうせんは おわりました……\p"
+	.string "けっかを レポートに かきます\n"
+	.string "おまちください……$"
 
 BattleFrontier_BattlePikeLobby_Text_PossessLuckInAbundance:
-	.string "You have completed the challenge...\p"
-	.string "I must say... You seem to possess luck\n"
-	.string "in abundance...$"
+	.string "{JPN}ちょうせん たっせいです……\p"
+	.string "あなたは たいへんな こううんを\n"
+	.string "おもちのようですね……$"
 
 BattleFrontier_BattlePikeLobby_Text_ShallRecordResults:
-	.string "I shall record your results.\n"
-	.string "Please wait...$"
+	.string "{JPN}けっかを レポートに かきます\n"
+	.string "おまちください……$"
 
 @ Unused
 BattleFrontier_BattlePikeLobby_Text_AwardYouTheseBattlePoints2:
@@ -434,4 +432,3 @@ BattleFrontier_BattlePikeLobby_Text_ExplainMonOrderRules:
 	.string "changed.\p"
 	.string "The sequence must be set before\n"
 	.string "starting your challenge.$"
-

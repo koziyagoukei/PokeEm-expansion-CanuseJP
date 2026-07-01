@@ -357,52 +357,52 @@ BattleFrontier_BattleArenaLobby_EventScript_ExitRules::
 	end
 
 BattleFrontier_BattleArenaLobby_Text_WelcomeToBattleArena:
-	.string "Where the battling spirit of TRAINERS\n"
-	.string "is put to the test!\p"
-	.string "I welcome you to the BATTLE ARENA!\p"
-	.string "I am your guide to the Set KO Tourney!$"
+	.string "{JPN}トレーナーの とうしが\n"
+	.string "ためされる しせつ！\p"
+	.string "バトルアリーナへ ようこそ！\p"
+	.string "セットKOトーナメントへ\n"
+	.string "ごあんないします$"
 
 BattleFrontier_BattleArenaLobby_Text_WishToTakeChallenge:
-	.string "Now, do you wish to take\n"
-	.string "the BATTLE ARENA challenge?$"
+	.string "{JPN}バトルアリーナに\n"
+	.string "ちょうせんしますか？$"
 
 BattleFrontier_BattleArenaLobby_Text_AwaitAnotherChallenge:
-	.string "We await your challenge on\n"
-	.string "another occasion!$"
+	.string "{JPN}またの ちょうせんを\n"
+	.string "おまちしています！$"
 
 BattleFrontier_BattleArenaLobby_Text_ExplainChallenge:
-	.string "In the BATTLE ARENA, we undertake\n"
-	.string "the Set KO Tourney.\p"
-	.string "All participants enter with a team of\n"
-	.string "three POKEMON.\p"
-	.string "The three POKEMON must be lined up in\n"
-	.string "the order in which they are to appear.\p"
-	.string "During battle, the POKEMON will appear\n"
-	.string "one at a time in the preset order.\p"
-	.string "Once a POKEMON enters battle, it must\n"
-	.string "remain out until the match is decided.\p"
-	.string "If a match remains undecided in\n"
-	.string "three turns, it goes to judging.\p"
-	.string "If you wish to interrupt your challenge,\n"
-	.string "please save the game.\p"
-	.string "If you don't save, you will not be able\n"
-	.string "to continue with your challenge.\p"
-	.string "If you pull off the feat of beating\n"
-	.string "seven TRAINERS in succession,\l"
-	.string "we will present you with Battle Points.$"
+	.string "{JPN}バトルアリーナでは\n"
+	.string "セットKOトーナメントを おこないます\p"
+	.string "さんかする ポケモンは\n"
+	.string "3びきです\p"
+	.string "3びきは でる じゅんばんを\n"
+	.string "きめて ならべます\p"
+	.string "バトルでは その じゅんばんに\n"
+	.string "1ぴきずつ たたかいます\p"
+	.string "いちど でた ポケモンは\n"
+	.string "しょうぶが つくまで こうたいできません\p"
+	.string "3ターンで しょうぶが つかないと\n"
+	.string "はんていに なります\p"
+	.string "とちゅうで やめるときは\n"
+	.string "レポートを かいてください\p"
+	.string "レポートを かかないと\n"
+	.string "つづきから ちょうせんできません\p"
+	.string "7にんの トレーナーに かちぬけば\n"
+	.string "バトルポイントが もらえます$"
 
 BattleFrontier_BattleArenaLobby_Text_OkayToSave:
-	.string "Before showing you to the BATTLE\n"
-	.string "ARENA, you must save. Is that okay?$"
+	.string "{JPN}バトルアリーナへ ごあんないするまえに\n"
+	.string "レポートを かきます よろしいですか？$"
 
 BattleFrontier_BattleArenaLobby_Text_WhichLevelMode:
-	.string "The BATTLE ARENA offers two levels\n"
-	.string "of challenge, Level 50 and Open Level.\l"
-	.string "Which is your choice?$"
+	.string "{JPN}レベル50と オープンレベルの\n"
+	.string "2つの ちょうせんが あります\l"
+	.string "どちらに しますか？$"
 
 BattleFrontier_BattleArenaLobby_Text_SelectThreeMons:
-	.string "Very well, now select your\n"
-	.string "three POKEMON, please.$"
+	.string "{JPN}それでは ポケモンを\n"
+	.string "3びき えらんでください$"
 
 BattleFrontier_BattleArenaLobby_Text_NotEnoughValidMonsLvOpen:
 	.string "My dear challenger!\p"

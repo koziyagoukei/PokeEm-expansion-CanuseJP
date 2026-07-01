@@ -231,29 +231,29 @@ BattleFrontier_OutsideEast_EventScript_Camper::
 	end
 
 BattleFrontier_OutsideEast_Text_BattleTowerSign:
-	.string "This is the BATTLE TOWER!\n"
-	.string "Keep the win streak as the toughest\l"
-	.string "TRAINER!$"
+	.string "{JPN}ここは バトルタワー！\n"
+	.string "さいきょう トレーナーとして\l"
+	.string "かちぬけ！$"
 
 BattleFrontier_OutsideEast_Text_BattlePalaceSign:
-	.string "This is the BATTLE PALACE!\n"
-	.string "Keep your eyes on POKEMON battles!$"
+	.string "{JPN}ここは バトルパレス！\n"
+	.string "ポケモンの たたかいを みまもれ！$"
 
 BattleFrontier_OutsideEast_Text_BattleArenaSign:
-	.string "This is the BATTLE ARENA!\n"
-	.string "Let the toughest teams gather!$"
+	.string "{JPN}ここは バトルアリーナ！\n"
+	.string "つよき チームよ あつまれ！$"
 
 BattleFrontier_OutsideEast_Text_BattlePyramidSign:
-	.string "This is the BATTLE PYRAMID!\n"
-	.string "Advance through the Battle Quest!$"
+	.string "{JPN}ここは バトルピラミッド！\n"
+	.string "バトルクエストを つきすすめ！$"
 
 BattleFrontier_OutsideEast_Text_RankingHallSign:
-	.string "BATTLE FRONTIER RANKING HALL\n"
-	.string "Set your sights on new records!$"
+	.string "{JPN}バトルフロンティア ランキングホール\n"
+	.string "あらたな きろくを めざせ！$"
 
 BattleFrontier_OutsideEast_Text_ExchangeCornerSign:
-	.string "BATTLE POINT EXCHANGE SERVICE CORNER\n"
-	.string "Exchange your Battle Points!$"
+	.string "{JPN}バトルポイント こうかんサービスコーナー\n"
+	.string "バトルポイントを こうかんしよう！$"
 
 BattleFrontier_OutsideEast_Text_BattleTowerFeelsSpecial:
 	.string "Wow!\n"

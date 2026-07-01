@@ -323,44 +323,44 @@ BattleFrontier_BattleFactoryLobby_EventScript_ExitRules::
 	end
 
 BattleFrontier_BattleFactoryLobby_Text_WelcomeForSingleBattle:
-	.string "Where the intelligence of TRAINERS\n"
-	.string "is put to the test!\p"
-	.string "Welcome to the BATTLE FACTORY!\p"
-	.string "I am your guide to the Battle Swap\n"
-	.string "Single Tournament.$"
+	.string "{JPN}トレーナーの ちしきが\n"
+	.string "ためされる しせつ！\p"
+	.string "バトルファクトリーへ ようこそ！\p"
+	.string "バトルスワップ シングルへ\n"
+	.string "ごあんないします$"
 
 BattleFrontier_BattleFactoryLobby_Text_TakeSinglesChallenge:
-	.string "Would you like to take the Battle\n"
-	.string "Swap Single challenge?$"
+	.string "{JPN}バトルスワップ シングルに\n"
+	.string "ちょうせんしますか？$"
 
 BattleFrontier_BattleFactoryLobby_Text_ExplainSinglesChallenge:
-	.string "The Battle Swap Single Tournament\n"
-	.string "is a SINGLE BATTLE competition using\l"
-	.string "only rental POKEMON.\p"
-	.string "First, you will be loaned three\n"
-	.string "POKEMON specifically for this event.\p"
-	.string "Using the supplied rental POKEMON,\n"
-	.string "you must conduct a SINGLE BATTLE.\p"
-	.string "If you win, you are permitted to trade\n"
-	.string "one of your rental POKEMON.\p"
-	.string "Repeat this cycle of battling and\n"
-	.string "trading--if you win seven times in\l"
-	.string "a row, you will earn Battle Points.\p"
-	.string "If you want to interrupt your\n"
-	.string "challenge, please save the game.\p"
-	.string "If you don't save, you will be\n"
-	.string "disqualified from your challenge.$"
+	.string "{JPN}バトルスワップ シングルは\n"
+	.string "レンタルポケモンだけを つかう\l"
+	.string "シングルバトルです\p"
+	.string "はじめに 3びきの ポケモンを\n"
+	.string "レンタルします\p"
+	.string "その ポケモンで\n"
+	.string "シングルバトルを おこないます\p"
+	.string "かつと レンタルポケモンを\n"
+	.string "1ぴき こうかんできます\p"
+	.string "バトルと こうかんを くりかえし\n"
+	.string "7れんしょうすれば バトルポイントが\l"
+	.string "もらえます\p"
+	.string "とちゅうで やめるときは\n"
+	.string "レポートを かいてください\p"
+	.string "レポートを かかずに やめると\n"
+	.string "しっかくに なります$"
 
 BattleFrontier_BattleFactoryLobby_Text_LookForwardToNextVisit:
-	.string "We look forward to your next visit.$"
+	.string "{JPN}またの おこしを おまちしています$"
 
 BattleFrontier_BattleFactoryLobby_Text_WhichLevelMode:
-	.string "Which level do you wish to challenge?\n"
-	.string "Level 50 or Open Level?$"
+	.string "{JPN}レベル50と オープンレベル\n"
+	.string "どちらに ちょうせんしますか？$"
 
 BattleFrontier_BattleFactoryLobby_Text_OkayToSaveBeforeChallenge:
-	.string "Before you begin your challenge,\n"
-	.string "I need to save the game. Is that okay?$"
+	.string "{JPN}ちょうせんを はじめるまえに\n"
+	.string "レポートを かきます よろしいですか？$"
 
 @ Unused
 BattleFrontier_BattleFactoryLobby_Text_WillHoldMonsForSafekeeping:
@@ -368,7 +368,7 @@ BattleFrontier_BattleFactoryLobby_Text_WillHoldMonsForSafekeeping:
 	.string "safekeeping while you compete.$"
 
 BattleFrontier_BattleFactoryLobby_Text_StepThisWay:
-	.string "Please step this way.$"
+	.string "{JPN}こちらへ どうぞ$"
 
 BattleFrontier_BattleFactoryLobby_Text_ReturnMonsSaveResults:
 	.string "Thank you for participating!\p"
