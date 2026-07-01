@@ -57,30 +57,7 @@ SeafloorCavern_Entrance_EventScript_GruntFacePlayerNorth::
 	return
 
 SeafloorCavern_Entrance_Text_HearMagmaNearMossdeep:
-	.string "Hey!\n"
-	.string "I remember your face!\p"
-	.string "If you're here, it must mean that\n"
-	.string "you're about to mess with us again!\p"
-	.string "A punk like you, do you really think\n"
-	.string "you can take on TEAM AQUA?\p"
-	.string "I'd say you're too early by about\n"
-	.string "a trillion years!\p"
-	.string "You're a perfect fit for the likes of\n"
-	.string "TEAM MAGMA!\p"
-	.string "Speaking of TEAM MAGMA, I hear they\n"
-	.string "were spotted near MOSSDEEP.\p"
-	.string "That bunch of goons, they sure don't\n"
-	.string "look good near the sea!$"
+	.string "{JPN}あーーーーーっ!\nみおぼえの ある そのかおは!\pこんな ところまで きたって ことは\nまた オレたちの ジャマをしに!?\pおまえ ごときが アクアだんに\nはむかおう だなんて\l100おくまんねん はえーんだよ!\pおまえにゃ マグマだんが おにあいさ!\p……そういえば トクサネの ちかくで\nマグマだんを みかけたっけな\pあいつら……\nほんっとーーに うみが にあわねえぜ!$"
 
 SeafloorCavern_Entrance_Text_HearMagmaNearMossdeepShort:
-	.string "A punk like you, do you really think\n"
-	.string "you can take on TEAM AQUA?\p"
-	.string "I'd say you're too early by about\n"
-	.string "a trillion years!\p"
-	.string "You're a perfect fit for the likes of\n"
-	.string "TEAM MAGMA!\p"
-	.string "Speaking of TEAM MAGMA, I hear they\n"
-	.string "were spotted near MOSSDEEP.\p"
-	.string "That bunch of goons, they sure don't\n"
-	.string "look good near the sea!$"
-
+	.string "{JPN}おまえ ごときが アクアだんに\nはむかおう だなんて\l100おくまんねん はえーんだよ!\pおまえにゃ マグマだんが おにあいさ!\p……そういえば トクサネの ちかくで\nマグマだんを みかけたっけな\pあいつら……\nほんっとーーに うみが にあわねえぜ!$"
