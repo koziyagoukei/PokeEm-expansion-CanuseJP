@@ -62,31 +62,10 @@ EverGrandeCity_DrakesRoom_EventScript_Defeated::
 	end
 
 EverGrandeCity_DrakesRoom_Text_IntroSpeech:
-	.string "I am the last of the POKEMON LEAGUE\n"
-	.string "ELITE FOUR, DRAKE the DRAGON master!\p"
-	.string "In their natural state, POKEMON are\n"
-	.string "wild living things. They are free.\p"
-	.string "At times, they hinder us.\n"
-	.string "At times, they help us.\p"
-	.string "For us to battle with POKEMON as\n"
-	.string "partners, do you know what it takes?\p"
-	.string "Do you know what is needed?\p"
-	.string "If you don't, then you will never\n"
-	.string "prevail over me!$"
+	.string "{JPN}わしが ポケモン リーグ\nしてんのう さいごの ひとり\lドラゴンつかいの ゲンジ!\pポケモンは もともと\nじゆうきままな やせいの いきもの\pときとして ひとを こまらせ\nときとして ひとを たすける\pそんな ポケモンと いっしょに たたかうのに\nなにが ひつようか\lおまえ わかって いるのか?\pわかって いなければ\nこの わしに かつことなど できまい!$"
 
 EverGrandeCity_DrakesRoom_Text_Defeat:
-	.string "Superb, it should be said.$"
+	.string "{JPN}みごと! というべきだな!$"
 
 EverGrandeCity_DrakesRoom_Text_PostBattleSpeech:
-	.string "You deserve every credit for coming\n"
-	.string "this far as a TRAINER of POKEMON.\p"
-	.string "You do seem to know what is needed.\p"
-	.string "Yes, what a TRAINER needs is a\n"
-	.string "virtuous heart.\p"
-	.string "POKEMON touch the good hearts of\n"
-	.string "TRAINERS and learn good from wrong.\p"
-	.string "They touch the good hearts of\n"
-	.string "TRAINERS and grow strong.\p"
-	.string "Go! Go onwards!\n"
-	.string "The CHAMPION is waiting!$"
-
+	.string "{JPN}さすがは ここまで\nやってきた ポケモン トレーナー\lひつような もの わかっている ようだな\pそう! トレーナーに\nひつよう なのは ただしい こころ!\pポケモンは トレーナーの\nただしい こころに ふれて\lものごとの ぜんあくを はんだんし\lただしい こころに ふれて つよくなる!\pさあ つぎに すすめ!\nチャンピオンが まって おるぞ!!$"

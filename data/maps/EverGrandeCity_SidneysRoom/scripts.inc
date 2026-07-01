@@ -65,23 +65,10 @@ EverGrandeCity_SidneysRoom_EventScript_Defeated::
 	end
 
 EverGrandeCity_SidneysRoom_Text_IntroSpeech:
-	.string "Welcome, challenger!\n"
-	.string "I'm SIDNEY of the ELITE FOUR.\p"
-	.string "I like that look you're giving me.\n"
-	.string "I guess you'll give me a good match.\l"
-	.string "That's good! Looking real good!\p"
-	.string "All right! You and me, let's enjoy\n"
-	.string "a battle that can only be staged\l"
-	.string "here in the POKEMON LEAGUE!$"
+	.string "{JPN}ようこそ チャレンジャー!\nおれは してんのうの カゲツ\pうーん いい かお してるな\nなかなか たのしませて くれそうだぞ!\lいいぞ! いい かんじだぞ!\pよーし! おれと おまえ とで\nポケモン リーグでしか できない\lたたかいを たのしむと しようぜ!!$"
 
 EverGrandeCity_SidneysRoom_Text_Defeat:
-	.string "Well, how do you like that? I lost!\n"
-	.string "Eh, it was fun, so it doesn't matter.$"
+	.string "{JPN}おやおや まけちまったよ\nまっ たのしんだから いいんだけどよ$"
 
 EverGrandeCity_SidneysRoom_Text_PostBattleSpeech:
-	.string "Well, listen to what this loser has\n"
-	.string "to say.\p"
-	.string "You've got what it takes to go far.\n"
-	.string "Now, go on to the next room and enjoy\l"
-	.string "your next battle!$"
-
+	.string "{JPN}まけた おれから ひとこと\pおまえなら もっと さきに すすめるぜ\nさあ つぎの へやに いって\lたたかいを たのしんで きなよ!$"

@@ -1183,7 +1183,7 @@ PetalburgCity_Gym_Text_IllLoanYouMyZigzagoon:
 	.string "$"
 
 PetalburgCity_Gym_Text_WallyThankYouAndDadGivesPokeBall:
-	.string "{JPN}ミツル『わあ……\nポケモンだぁ……!\pパパ『うむ……\nがんばって みなさい!\pミツルは\nモンスターボールを もらった!"
+	.string "{JPN}ミツル『わあ……\nポケモンだぁ……!\pパパ『うむ……\nモンスターボールは あげるから\lがんばって　みなさい!\pミツルは\nモンスターボールを もらった!"
 	.string ""
 	.string ""
 	.string ""

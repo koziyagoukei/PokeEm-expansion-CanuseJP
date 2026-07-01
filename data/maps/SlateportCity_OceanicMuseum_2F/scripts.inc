@@ -316,7 +316,7 @@ SlateportCity_OceanicMuseum_2F_Text_CameToSeeWhatsTakingSoLong:
 	.string "$"
 
 SlateportCity_OceanicMuseum_2F_Text_ArchieWarning:
-	.string "{JPN}マグマだんの なかま なのか!?\pいや それにしては\nみにつけている ふくが ちがうな\p…… …… ……\n…… …… ……\pポケモンも ひとも すべての いのちは\nうみから うまれた……\pだから アクアだんは\nうみを ふやそうと しているのだよ\pどうだい?\nとても すばらしい ことだろう?\pまあ いい……\nまだ わかい おまえに\lわれわれの りそうなど わかるまい……\pだが このさきも われわれの\nかつどうを じゃまする つもりなら\lただでは すまさない からな!\pそれだけは おぼえて おくのだ!"
+	.string "{JPN}れわれは\nうみを あいする アクアだん!\pそして おれは\nアクアだんの リーダー アオギリだ\pわれわれの じゃまをする おまえは……\nま まさか!\lマグマだんの なかま なのか!?\pいや それにしては\nみにつけている ふくが ちがうな\p…… …… ……\n…… …… ……\pポケモンも ひとも すべての いのちは\nうみから うまれた……\pだから アクアだんは\nうみを ふやそうと しているのだよ\pどうだい?\nとても すばらしい ことだろう?\pまあ いい……\nまだ わかい おまえに\lわれわれの りそうなど わかるまい……\pだが このさきも われわれの\nかつどうを じゃまする つもりなら\lただでは すまさない からな!\pそれだけは おぼえて おくのだ!"
 	.string ""
 	.string ""
 	.string ""
@@ -405,7 +405,7 @@ SlateportCity_OceanicMuseum_2F_Text_SurfaceSeawaterDisplay:
 	.string "$"
 
 SlateportCity_OceanicMuseum_2F_Text_SSTidalReplica:
-	.string "{JPN}れんらくせん タイドリップごう」\pこれは げんざい クスノキ ぞうせんじょで\nつくられている ふねの もけい です!"
+	.string "{JPN}「れんらくせん タイドリップごう」\pこれは げんざい クスノキ ぞうせんじょで\nつくられている ふねの もけい です!"
 	.string ""
 	.string "$"
 

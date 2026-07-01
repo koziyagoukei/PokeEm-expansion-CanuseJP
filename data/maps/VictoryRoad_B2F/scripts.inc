@@ -32,77 +32,55 @@ VictoryRoad_B2F_EventScript_Dianne::
 	end
 
 VictoryRoad_B2F_Text_VitoIntro:
-	.string "I trained together with my whole family,\n"
-	.string "every one of us!\l"
-	.string "I'm not losing to anyone!$"
+	.string "{JPN}かぞく ぜんいんで\nポケモンの しゅぎょうを してたんだ!\lだれにも まけないぜ!$"
 
 VictoryRoad_B2F_Text_VitoDefeat:
-	.string "Better than my family?!\n"
-	.string "Is that possible?!$"
+	.string "{JPN}おれの かぞく より つよい!?\nそんなことって あるのか!?$"
 
 VictoryRoad_B2F_Text_VitoPostBattle:
-	.string "I was better than everyone in my\n"
-	.string "family. I've never lost before...\p"
-	.string "I've lost my confidence...\n"
-	.string "Maybe I'll go home...$"
+	.string "{JPN}かぞくの だれよりも つよかった おれ……\nいままで だれにも まけなかった おれ……\pだけど じしん なくしちゃったよ\nいえに かえろうかなあ$"
 
 VictoryRoad_B2F_Text_OwenIntro:
-	.string "I'd heard that there was a tough\n"
-	.string "little kid around. Do they mean you?$"
+	.string "{JPN}つよい こどもが いるって ウワサだ!\nそれって きみの ことかい?$"
 
 VictoryRoad_B2F_Text_OwenDefeat:
-	.string "The little shrimp is tough!$"
+	.string "{JPN}たしかに つよい!$"
 
 VictoryRoad_B2F_Text_OwenPostBattle:
-	.string "The rumors I heard, that tough little\n"
-	.string "kid is from PETALBURG CITY.$"
+	.string "{JPN}おれが きいた ウワサだと\nその つよい こども ってのは\lトウカ しゅっしん らしいな!$"
 
 VictoryRoad_B2F_Text_CarolineIntro:
-	.string "You must be getting a little tired.$"
+	.string "{JPN}そろそろ へばって きたかな?$"
 
 VictoryRoad_B2F_Text_CarolineDefeat:
-	.string "No signs of tiring at all!$"
+	.string "{JPN}ぜんぜん へばってないわ!$"
 
 VictoryRoad_B2F_Text_CarolinePostBattle:
-	.string "VICTORY ROAD and the POKEMON LEAGUE\n"
-	.string "are long and grueling challenges.\l"
-	.string "Beware of fatigue!$"
+	.string "{JPN}この チャンピオンロードも\nポケモンリーグも ながちょうば!\lたいりょくには ちゅうい してね!$"
 
 VictoryRoad_B2F_Text_JulieIntro:
-	.string "You shouldn't get complacent just\n"
-	.string "because you have a lot of GYM BADGES.\p"
-	.string "There's always going to be someone\n"
-	.string "who's better than you!$"
+	.string "{JPN}ジムバッジを たくさん もってるからって\nゆだん しないでよ\lうえには うえが いるんだから!$"
 
 VictoryRoad_B2F_Text_JulieDefeat:
-	.string "You're better than me!$"
+	.string "{JPN}あなたの ほうが うえね!$"
 
 VictoryRoad_B2F_Text_JuliePostBattle:
-	.string "Gaze on your collected BADGES and\n"
-	.string "remember the TRAINERS you've faced.$"
+	.string "{JPN}じぶんの あつめた ジムバッジを みて\nいままでの トレーナーを おもいだすのよ$"
 
 VictoryRoad_B2F_Text_FelixIntro:
-	.string "I've come this far, but the tension's\n"
-	.string "giving me awful stomach pain...$"
+	.string "{JPN}ここまで きて\nきんちょう して おなかが いたいんです!$"
 
 VictoryRoad_B2F_Text_FelixDefeat:
-	.string "Ooh...\n"
-	.string "It hurts...$"
+	.string "{JPN}ああ\n……いたい$"
 
 VictoryRoad_B2F_Text_FelixPostBattle:
-	.string "I can't help getting all tense knowing\n"
-	.string "that I'm nearing the POKEMON LEAGUE.\p"
-	.string "It's all I can do to feign calm.$"
+	.string "{JPN}もうすぐ ポケモンリーグと おもうと\nきんちょう して きんちょう して!\lみため ごまかすのが せいいっぱい です$"
 
 VictoryRoad_B2F_Text_DianneIntro:
-	.string "The elite among the elite gather in\n"
-	.string "this cave.\p"
-	.string "How are you finding it?$"
+	.string "{JPN}エリート ちゅうの エリートが あつまる\nこの どうくつは どうかしら?$"
 
 VictoryRoad_B2F_Text_DianneDefeat:
-	.string "Not rattled in the least bit!$"
+	.string "{JPN}ぜんぜん どうじて いないわ……!$"
 
 VictoryRoad_B2F_Text_DiannePostBattle:
-	.string "You do have guts! I like that!\n"
-	.string "Keep it going!$"
-
+	.string "{JPN}あなた どきょうが あるのね\nきにいったわ がんばって!$"

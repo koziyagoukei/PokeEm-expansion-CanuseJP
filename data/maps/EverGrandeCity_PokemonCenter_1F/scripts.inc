@@ -74,26 +74,10 @@ EverGrandeCity_PokemonCenter_1F_Movement_ScottExit:
 	step_end
 
 EverGrandeCity_PokemonCenter_1F_Text_LeagueAfterVictoryRoad:
-	.string "The POKEMON LEAGUE is only a short\n"
-	.string "distance after the VICTORY ROAD.\p"
-	.string "If you've come this far, what choice\n"
-	.string "do you have but to keep going?$"
+	.string "{JPN}ポケモンリーグは\nチャンピオンロードを ぬけると すぐ!\pここまで きたら\nまえに すすむしかないわ!$"
 
 EverGrandeCity_PokemonCenter_1F_Text_BelieveInYourPokemon:
-	.string "The long and harrowing VICTORY ROAD...\p"
-	.string "It's like reliving the path one has\n"
-	.string "traveled in life...\p"
-	.string "Believe in your POKEMON and give it\n"
-	.string "your very best!$"
+	.string "{JPN}チャンピオンロードの\nながくて けわしい みちのり……\pまるで いままで あるいてきた みちを\nおもいださせるかの ようだな\pきみ じぶんの ポケモンを\nしんじて がんばりたまえ!$"
 
 EverGrandeCity_PokemonCenter_1F_Text_ScottHappyForYou:
-	.string "SCOTT: {PLAYER}{KUN}, you've clawed your\n"
-	.string "way up to face the POKEMON LEAGUE!\p"
-	.string "I'm happy for you!\n"
-	.string "You made my cheering worthwhile!\p"
-	.string "{PLAYER}{KUN}, if you were to become\n"
-	.string "the POKEMON LEAGUE CHAMPION...\p"
-	.string "I'll get in touch with you then.\p"
-	.string "Okay, {PLAYER}{KUN}.\n"
-	.string "Go for greatness!$"
-
+	.string "{JPN}エニシダ『{PLAYER}{KUN}\nついに ポケモンリーグだね!\lわたしも おうえん した かいがあったよ!\pもし {PLAYER}{KUN}が\nポケモンチャンピオンに なったら……\lそのときは また れんらく するからね\pじゃ……\n{PLAYER}{KUN} がんばってね!$"

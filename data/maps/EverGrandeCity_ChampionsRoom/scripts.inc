@@ -220,121 +220,40 @@ EverGrandeCity_ChampionsRoom_Movement_BirchArrives:
 	step_end
 
 EverGrandeCity_ChampionsRoom_Text_IntroSpeech:
-	.string "WALLACE: Welcome, {PLAYER}{KUN}.\p"
-	.string "That incident in SOOTOPOLIS CITY...\n"
-	.string "That was superb work, putting an end\l"
-	.string "to that crisis all by yourself.\p"
-	.string "Oops!\p"
-	.string "It wouldn't be fair to say that you\n"
-	.string "alone ended the crisis.\p"
-	.string "You overcame that difficult situation\n"
-	.string "by working as one with your POKEMON.\p"
-	.string "We TRAINERS raise POKEMON by giving\n"
-	.string "them items and by teaching them new\l"
-	.string "techniques for battle.\p"
-	.string "But we ourselves also learn many\n"
-	.string "things from POKEMON.\p"
-	.string "And this is where your achievements\n"
-	.string "are put to the test against what\l"
-	.string "others like you have achieved.\p"
-	.string "Now!\p"
-	.string "Who can most elegantly dance with\n"
-	.string "their POKEMON in HOENN?\p"
-	.string "Show me right here and now!$"
+	.string "{JPN}ミクリ『ようこそ {PLAYER}{KUN}\pルネシティで おこった だいじけんを\nきみが ひとりで かいけつ したのは\lなかなか みごと だったよ\p……おっと!\pきみひとりの ちからで\nかいけつ したわけでは なかったな\pきみと…… きみの ポケモンが\nちからを あわせたからこそ\lこんなんを のりこえ られたんだ\pわたしたち トレーナーは\nいろんな どうぐを あたえたり\lいろんな わざを おしえたり して\lポケモンを そだてている……\pけれど わたしたち じしんも\nポケモンから たくさんの ことを\lおしえられて いるのさ\pそして ここは……\nその せいかを ぶつけあう ばしょ\pさあ!\pホウエンで いちばん かれいに\nポケモンと おどれるのは だれなのか!\pいま ここで みせて もらおう!$"
 
 EverGrandeCity_ChampionsRoom_Text_Defeat:
-	.string "I, the CHAMPION, fall in defeat...\p"
-	.string "That was wonderful work.\n"
-	.string "You were elegant, infuriatingly so.\l"
-	.string "And yet it was utterly glorious!\p"
-	.string "Kudos to you, {PLAYER}{KUN}!\p"
-	.string "You are a truly noble POKEMON\n"
-	.string "TRAINER!$"
+	.string "{JPN}チャンピオンである\nわたしを うちまかす とは……\pなんと ワンダフル!\nにくらしいほど エレガント!\lだけど とっても グロリアス!\pさすがだよ {PLAYER}{KUN}!\pきみは ほんとうに すばらしい\nポケモン トレーナーだ!$"
 
 EverGrandeCity_ChampionsRoom_Text_PostBattleSpeech:
-	.string "WALLACE: The POKEMON you sent into\n"
-	.string "battle...\p"
-	.string "At times they danced like a spring\n"
-	.string "breeze, and at times they struck\l"
-	.string "like lightning.\p"
-	.string "It was with light, yet surefooted,\n"
-	.string "elegance that you led your POKEMON.\p"
-	.string "Even I felt bedazzled by your\n"
-	.string "masterful performance!\p"
-	.string "You now stand at the glorious peak\n"
-	.string "of the POKEMON LEAGUE.\p"
-	.string "I now proclaim you to be the new\n"
-	.string "HOENN region...$"
+	.string "{JPN}ミクリ『きみが くりだしてきた\nポケモンの かずかず……\pときに はるかぜの ように まい\nあるいは いなづまの ように さす\pそんな ポケモンたちを\nかろやかに あやつる きみの すがた\pこの わたしで さえも\nほれぼれ するほど だったよ!\pこの ポケモンリーグで\nみごと ちょうてんに たった きみこそ\lホウエンちほうの あたらしい……$"
 
 EverGrandeCity_ChampionsRoom_Text_MayAdvice:
-	.string "MAY: {PLAYER}{KUN}!\p"
-	.string "Here's some advice before you challenge\n"
-	.string "the CHAMPION...$"
+	.string "{JPN}ハルカ『{PLAYER}{KUN}!\pチャンピオンに ちょうせん するまえに\nアドバイス……!$"
 
 EverGrandeCity_ChampionsRoom_Text_MayItsAlreadyOver:
-	.string "MAY: Huh?\n"
-	.string "What, what, what?\p"
-	.string "{PLAYER}{KUN}...\n"
-	.string "Could it be that...\l"
-	.string "It's already over?$"
+	.string "{JPN}ハルカ『あれ? あれれ?\p{PLAYER}{KUN}……\nひょっとして……\lもう おわっちゃった……?$"
 
 EverGrandeCity_ChampionsRoom_Text_BrendanAdvice:
-	.string "BRENDAN: {PLAYER}!\p"
-	.string "How would you like some advice before\n"
-	.string "you challenge the CHAMPION?...$"
+	.string "{JPN}ユウキ『{PLAYER}!\pチャンピオンに ちょうせん するまえに\nオレが アドバイス してやろうか……$"
 
 EverGrandeCity_ChampionsRoom_Text_BrendanYouveWon:
-	.string "BRENDAN: {PLAYER}...\p"
-	.string "Are you trying to tell me...\n"
-	.string "You've beaten the CHAMPION?$"
+	.string "{JPN}ユウキ『{PLAYER}……\pおまえ ひょっとして\nチャンピオンに かったのか?$"
 
 EverGrandeCity_ChampionsRoom_Text_BirchArriveRatePokedex:
-	.string "PROF. BIRCH: See?\n"
-	.string "What did I tell you, {RIVAL}?\p"
-	.string "Didn't I tell you that you don't need\n"
-	.string "to worry about {PLAYER}{KUN}?\p"
-	.string "... ... ... ... ... ... ... ...\n"
-	.string "{PLAYER}{KUN}, you've finally done it.\p"
-	.string "When I heard that you defeated your\n"
-	.string "own father at the PETALBURG GYM,\l"
-	.string "I thought perhaps you had a chance...\p"
-	.string "But to think you've actually become\n"
-	.string "the CHAMPION!\p"
-	.string "Ah, yes!\p"
-	.string "What became of your POKeDEX?\n"
-	.string "Here, let me see.$"
+	.string "{JPN}オダマキ『ほれみろ {RIVAL}!\p{PLAYER}{KUN}なら しんぱい いらんと\nわたしが いったとおり だろう!\p…… …… ……\n{PLAYER}{KUN} とうとう やりとげたな\pきみが トウカ ジムの おとうさんに\nかちぬいたと きいた ときに\lもしや…… とは おもったが\pまさか ほんとうに チャンピオンに\nなってしまうとは な!\p……おお そうだ!\pきみの ポケモンずかんは どうなった?\nわたしに みせて ごらん!$"
 
 EverGrandeCity_ChampionsRoom_Text_BirchCongratulations:
-	.string "PROF. BIRCH: Anyways,\n"
-	.string "congratulations!\p"
-	.string "Now, go proudly into the final room!$"
+	.string "{JPN}オダマキ『とにかく おめでとう!\pさあ むねをはって おくの へやに\nいってくるが いいよ!$"
 
 EverGrandeCity_ChampionsRoom_Text_WallaceComeWithMe:
-	.string "WALLACE: {PLAYER}{KUN}...\p"
-	.string "No, let me rephrase that properly.\p"
-	.string "The new CHAMPION!\p"
-	.string "Come with me.$"
+	.string "{JPN}ミクリ『{PLAYER}{KUN}\p……いや あらためて よびなおそう\pあたらしい チャンピオン!\pさあ わたしに ついて きたまえ$"
 
 EverGrandeCity_ChampionsRoom_Text_WallaceWaitOutside:
-	.string "WALLACE: I'm sorry, but...\p"
-	.string "From here on, only those TRAINERS who\n"
-	.string "have become CHAMPIONS may enter.\p"
-	.string "You'll have to wait outside with\n"
-	.string "PROF. BIRCH.$"
+	.string "{JPN}ミクリ『もうしわけ ないが……\pここから さきの へやは\nチャンピオンに なった トレーナー だけが\lはいることの できる ばしょ\pきみは そこで オダマキはかせと\nいっしょに まっていて くれたまえ$"
 
 EverGrandeCity_ChampionsRoom_Text_MayCongratulations:
-	.string "MAY: Groan...\p"
-	.string "... ... ... ... ... ... ... ...\n"
-	.string "... ... ... ... ... ... ... ...\p"
-	.string "I'm just joking! That's okay!\n"
-	.string "That's the rule!\p"
-	.string "{PLAYER}{KUN}!\n"
-	.string "Honestly, congratulations!$"
+	.string "{JPN}ハルカ『……がーん!\p…… …… ……\n…… …… ……\pなーんてね いいの いいの!\nだって そういう きまり だもんね!\p{PLAYER}{KUN}!\nほんとうに おめでとう!!$"
 
 EverGrandeCity_ChampionsRoom_Text_BrendanCongratulations:
-	.string "BRENDAN: Whaaaat?! ... ... ... ... ...\n"
-	.string "... ... ... ... ... ... ... ...\p"
-	.string "It can't be helped if that's the rule.\p"
-	.string "{PLAYER}, way to go!\n"
-	.string "Congratulations!$"
-
+	.string "{JPN}ユウキ『……えーっ!\n…… …… ……\n…… …… ……\pま しかたないか\nそういう きまり だもんな\p{PLAYER}! よかったな\nおめでとう!!$"

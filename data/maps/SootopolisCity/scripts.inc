@@ -1379,322 +1379,148 @@ SootopolisCity_Movement_DestroyTask::
 	step_end
 
 SootopolisCity_Text_GymSign:
-	.string "SOOTOPOLIS CITY POKEMON GYM\n"
-	.string "LEADER: JUAN\p"
-	.string "The GYM LEADER with the beauty\n"
-	.string "of pure water!$"
+	.string "{JPN}ルネ シティ ポケモンジム\nリーダー アダン\lみずも したたる ジムリーダー!$"
 
 SootopolisCity_Text_CitySign:
-	.string "SOOTOPOLIS CITY\p"
-	.string "The mystical city where history\n"
-	.string "slumbers.$"
+	.string "{JPN}ここは ルネ シティ\nれきしが ねむる しんぴの まち$"
 
 SootopolisCity_Text_DoorIsClosed:
-	.string "The door is closed.$"
+	.string "{JPN}とびらは とざされて いる!$"
 
 SootopolisCity_Text_PhysicallyFitLivingHere:
-	.string "Diving in the sea. Climbing up and\n"
-	.string "down stairs all the time...\p"
-	.string "If you live in this town, you end up\n"
-	.string "getting physically fit.$"
+	.string "{JPN}うみに もぐったり\nかいだんを のぼったり おりたり……\pこのまちで くらして いると\nけっこう たくましく なるんだよね$"
 
 SootopolisCity_Text_GiantPokemonSuddenlyAppeared:
-	.string "These giant POKEMON suddenly appeared\n"
-	.string "in the middle of the city!\p"
-	.string "And, I've never seen them before!\p"
-	.string "Why are they smashing into each\n"
-	.string "other like that?\p"
-	.string "Why can't they be friends, those\n"
-	.string "POKEMON?$"
+	.string "{JPN}おっきな ポケモンが とつぜん\nまちの まんなかに あらわれたんだ!\lしかも みたことない やつが 2ひきも!\pあの 2ひき……\nどうして ぶつかり あってるの?\lポケモンどうし なかよく できないの?$"
 
 SootopolisCity_Text_WhatIsThatGreenPokemon:
-	.string "What? What? What?\n"
-	.string "What is that green POKEMON?!$"
+	.string "{JPN}なに? なに? なに?\nあの みどりの ポケモン なにー!?$"
 
 SootopolisCity_Text_WhereDidLegendariesGo:
-	.string "GROUDON and KYOGRE...\n"
-	.string "Where did they go?\p"
-	.string "Will they cause droughts or downpours\n"
-	.string "somewhere else?$"
+	.string "{JPN}グラードンと カイオーガ\nどこ いっちゃったんだろう……\pまた どこかで ひでりに したり\nおおあめ ふらせたり してるのかな?$"
 
 SootopolisCity_Text_TwoPokemonArentAngry:
-	.string "I just get this sense somehow that\n"
-	.string "the two POKEMON aren't angry.\p"
-	.string "I think... They probably can't control\n"
-	.string "their own power...$"
+	.string "{JPN}なんとなく かんじるよ…… あの2ひき\nおこってる わけじゃ ないみたい\pたぶん…… じぶんの ちからを\nコントロール できなく なってるんだ……$"
 
 SootopolisCity_Text_FlyingMonStoppedRampage:
-	.string "That flying POKEMON came down from\n"
-	.string "the sky and stopped the rampaging\l"
-	.string "POKEMON...$"
+	.string "{JPN}そらから きた ポケモンが\nあばれていた 2ひきを\lおとなしく させちゃった……$"
 
 SootopolisCity_Text_WonderWhatWorldIsLike:
-	.string "I... I've never been out of this city.\p"
-	.string "I wonder what the world is like on\n"
-	.string "the other side of this round sky?$"
+	.string "{JPN}ぼく…… まだ いちども このまちから\nそとに でたこと ないんだ\pあの まあるい そらの むこうには\nどんな せかいが あるのかな?$"
 
 SootopolisCity_Text_ThisIsWicked:
-	.string "Wow!\n"
-	.string "This is wicked!$"
+	.string "{JPN}すげー だいはくりょく!$"
 
 SootopolisCity_Text_ThatWasWicked:
-	.string "Wow!\n"
-	.string "That was wicked!$"
+	.string "{JPN}すげー だいはくりょく だった!$"
 
 SootopolisCity_Text_GoRedAndBlueMon:
-	.string "Go for it, red POKEMON!\n"
-	.string "Don't back off, blue POKEMON!$"
+	.string "{JPN}それいけ! あかい ポケモン!\nまけるな! あおい ポケモン!$"
 
 SootopolisCity_Text_DoYouKnowMonNames:
-	.string "... ... ... ... ... ...\p"
-	.string "Hi, do you know the names of those\n"
-	.string "POKEMON fighting over there?$"
+	.string "{JPN}…… …… ……\pきみ あそこで たたかってる\nポケモンたちの なまえ しってる?$"
 
 SootopolisCity_Text_GreenOneSettlesThings:
-	.string "I was wondering which one would win,\n"
-	.string "the red one or the blue one, but, oh no,\l"
-	.string "it's the green one that settles things!\p"
-	.string "Talk about a huge turn of events!$"
+	.string "{JPN}あかい ポケモンと あおい ポケモン\nどっちが かつのかと おもったら\lみどりの ポケモンかよ!\pこりゃ だいドンデンがえしだ!$"
 
 SootopolisCity_Text_SeeingLegendWithOwnEyes:
-	.string "There's an ancient legend that claims\n"
-	.string "the land and sea were shaped by\l"
-	.string "a colossal battle between POKEMON.\p"
-	.string "Well, I'm seeing that happen with\n"
-	.string "my very own eyes!\p"
-	.string "Whoa! I never expected to be\n"
-	.string "witness to something this huge!$"
+	.string "{JPN}ポケモンの たたかいに よって\nりくちと うみが つくられた という\lおおむかし からの いいつたえが\pいま めのまえで さいげん されている!\pうぉぉー! こんな すごいものを\nこの めで みられる なんてー!!$"
 
 SootopolisCity_Text_SawLegendWithOwnEyes:
-	.string "There's an ancient legend that claims\n"
-	.string "the land and sea were shaped by\l"
-	.string "a colossal battle between POKEMON.\p"
-	.string "Well, I saw that happen with\n"
-	.string "my very own eyes!\p"
-	.string "Whoa! I never expected to be\n"
-	.string "witness to something this huge!$"
+	.string "{JPN}ポケモンの たたかいに よって\nりくちと うみが つくられた という\lおおむかし からの いいつたえが\pいま このまちで さいげん された!\pうぉぉー! こんな すごいものを\nこの めで みられた なんてー!!$"
 
 SootopolisCity_Text_BigPokemonFighting:
-	.string "A big POKEMON is fighting with\n"
-	.string "another big POKEMON!\p"
-	.string "Please, someone make them stop!$"
+	.string "{JPN}おっきな ポケモンと ポケモンが\nけんか してるよ!\pだれか とめて あげて!$"
 
 SootopolisCity_Text_PrettyMonCameFromSky:
-	.string "A pretty POKEMON came down from\n"
-	.string "the sky...$"
+	.string "{JPN}きれいな ポケモン\nおそらから おりて きた……$"
 
 SootopolisCity_Text_SootopolisWillBeWrecked:
-	.string "Oh, no!\n"
-	.string "SOOTOPOLIS CITY will get wrecked!$"
+	.string "{JPN}ひー ルネシティが こわれちゃうよー!$"
 
 SootopolisCity_Text_SootopolisDidntGetWrecked:
-	.string "SOOTOPOLIS CITY didn't get wrecked!$"
+	.string "{JPN}ルネシティ こわれないで すんだよー!$"
 
 SootopolisCity_Text_NoOrdinaryTourist:
-	.string "Hm!\n"
-	.string "You've come all the way to SOOTOPOLIS?\l"
-	.string "You're no ordinary tourist.\p"
-	.string "But I suppose that doesn't make you\n"
-	.string "an extraordinary tourist, either.$"
+	.string "{JPN}ほう!\nわざわざ ルネに やってくるとは\lただの かんこうきゃく じゃ ないな!\pだからといって おかねを はらった\nかんこうきゃく でも ないな……$"
 
 SootopolisCity_Text_CityRegainedCalm:
-	.string "The city has regained its calm...$"
+	.string "{JPN}まちが また しずかに なった……$"
 
 SootopolisCity_Text_CaveOfOriginPleaseLeave:
-	.string "Who might you be?\p"
-	.string "This is the CAVE OF ORIGIN.\p"
-	.string "The spirits of POKEMON, becalmed at\n"
-	.string "MT. PYRE, are said to be revived here.\p"
-	.string "Please leave.$"
+	.string "{JPN}あなたは なんですかな?\pここは めざめのほこら……\pおくりびやまで しずめられた\nポケモンの たましいが\lよみがえると いわれる ばしょ……\pどうか おひきとり ください$"
 
 SootopolisCity_Text_LeadSuperiorTrainerToCave:
-	.string "A person with a strong will and\n"
-	.string "superior talent...\p"
-	.string "A TRAINER who has knowledge and\n"
-	.string "experience of many kinds of POKEMON...\p"
-	.string "If such a person were to appear, I was\n"
-	.string "instructed by WALLACE to lead that\l"
-	.string "TRAINER to this CAVE.$"
+	.string "{JPN}つよい いしと すぐれた さいのう\pそして たくさんの ポケモンを みてきた\nちしきと けいけん……\pそんな じんぶつが やってきたら\nこの ほこらへ あんない するよう\lミクリから もうしつけられて いたのです$"
 
 SootopolisCity_Text_AwakenedPokemonClash:
-	.string "Oh, my...\p"
-	.string "The clash between the two awakened\n"
-	.string "POKEMON was quelled by the awakening\l"
-	.string "of a third POKEMON...$"
+	.string "{JPN}おお……\pめざめた 2ひきの あらそいを\nもう 1ひきの めざめが しずめた……$"
 
 SootopolisCity_Text_CaveOfOriginSleepsToo:
-	.string "This is the CAVE OF ORIGIN...\p"
-	.string "With the passing of the crisis,\n"
-	.string "the cave, too, shall sleep...$"
+	.string "{JPN}ここは めざめのほこら……\pけれど わざわいが きえさった いま\nほこらも しずかに ねむるのです……$"
 
 SootopolisCity_Text_SootopolisSkyBeautiful:
-	.string "SOOTOPOLIS sprang up as a town in\n"
-	.string "the crater of a volcano.\p"
-	.string "If you look up at the sky, the lip of\n"
-	.string "the crater is also visible.\l"
-	.string "So, all you see is the sky in a circle.\p"
-	.string "But that's what makes the sky above\n"
-	.string "SOOTOPOLIS the most beautiful.$"
+	.string "{JPN}ルネは かざんの\nかこうの なかに できた まち\pうえを みあげると\nかこうも いっしょに みえてしまって\lそらの すべては みえない\pでも だからこそ\nルネから みえる そらが\lいちばん うつくしいの$"
 
 SootopolisCity_Text_GiganticPokemonFight:
-	.string "When two POKEMON that gigantic\n"
-	.string "are fighting that savagely, there's\l"
-	.string "not much that we can do.$"
+	.string "{JPN}あんなに おおきな ポケモンが\n2ひきも あばれている なんて\lとても わたしたちの てに おえないわ!$"
 
 SootopolisCity_Text_FearedWorstWhenPokemonFlewDown:
-	.string "When that third POKEMON flew down,\n"
-	.string "I feared the worst.$"
+	.string "{JPN}3ひきめの おおきな ポケモンが\nそらから おりてきた ときには\lもう どうなることかと おもったわ……$"
 
 SootopolisCity_Text_NightSkyFavoriteScenery:
-	.string "A circle of a night sky framed by\n"
-	.string "the crater of a volcano...\p"
-	.string "And in that ring, stars flicker and\n"
-	.string "blink as if they were alive...\l"
-	.string "It's my favorite scenery.$"
+	.string "{JPN}かざんの かこう という\nわっかに かこまれた まるい よぞら\pその なかでは たくさんの ほしが\nいきている みたいに またたくの……\lわたしが いちばん すきな けしき$"
 
 SootopolisCity_Text_WeatherWentWild:
-	.string "The weather was clear this morning,\n"
-	.string "but...\p"
-	.string "All of a sudden, dark clouds brewed up,\n"
-	.string "rain started falling in sheets, and\l"
-	.string "there was thunder and lightning, too.\p"
-	.string "The weather just went completely\n"
-	.string "wild!\p"
-	.string "Is all of this because of those\n"
-	.string "POKEMON?$"
+	.string "{JPN}きょうの あさは いいてんき だったのよ\nそれが……\pとつぜん くもり はじめたと おもったら\nつよい あめが ふりだして\lかみなりも ゴロゴロ なりだして\lてんきが メチャメチャに なっちゃったの\pそれも これも ぜんぶ\nあの ポケモンの せい かしら……?$"
 
 SootopolisCity_Text_YouBroughtFlyingMon:
-	.string "Oh?\p"
-	.string "It was you who brought that flying\n"
-	.string "POKEMON here?\p"
-	.string "Well, aren't you amazing!$"
+	.string "{JPN}えっ!\pあの そらから おりてきた ポケモンを\nつれてきたの って あなたなの!?\p……へえ やるじゃない!$"
 
 SootopolisCity_Text_GroudonPleaseStop:
-	.string "MAXIE: G... GROUDON...\n"
-	.string "Please! Stop what you're doing!\p"
-	.string "I know the extent of your power now!\p"
-	.string "If you keep going, all HOENN, not just\n"
-	.string "SOOTOPOLIS, will be utterly ruined!$"
+	.string "{JPN}マツブサ『グ… グラードン……\nたのむから もう やめてくれ!\pおまえの ちからは もう わかった!\pこのままでは ルネ だけじゃない\nホウエンじゅうが\lめちゃめちゃに なってしまう!$"
 
 SootopolisCity_Text_AfterAllOurScheming:
-	.string "MAXIE: So the super-ancient POKEMON\n"
-	.string "weren't only GROUDON and KYOGRE...\p"
-	.string "After all our fruitless scheming and\n"
-	.string "frantic efforts, that one POKEMON's\l"
-	.string "simple action puts everything right\l"
-	.string "again as if nothing had happened...\p"
-	.string "Fu...\n"
-	.string "Fuhahaha...$"
+	.string "{JPN}マツブサ『ちょうこだい ポケモンは\nグラードンと カイオーガ だけじゃ\lなかったと いうのか……\pわれわれは ひっしに なって\nあれこれ うごきまわって きたが\lあの ポケモンの ひとはたらきで\lぜんぶ もとどおり というわけか……\pふ…… ふははは……$"
 
 SootopolisCity_Text_KyogreCalmDown:
-	.string "ARCHIE: KYOGRE! What's wrong?!\n"
-	.string "Look over here! It's the RED ORB!\l"
-	.string "Calm down! KYOGRE!\p"
-	.string "... ... ... ... ... ...\n"
-	.string "... ... ... ... ... ...\p"
-	.string "It's no good!\n"
-	.string "It's not responding at all!$"
+	.string "{JPN}アオギリ『カイオーガ! どうした!?\nこれを みろ! べにいろのたま だぞ!\lおとなしくなるんだ! カイオーガ!\p…… …… ……\n…… …… ……\pだめだ! ぜんぜん きかない!$"
 
 SootopolisCity_Text_TryingMeaninglessToPokemon:
-	.string "ARCHIE: KYOGRE and GROUDON both\n"
-	.string "flew off to who knows where.\p"
-	.string "The weather in HOENN has returned\n"
-	.string "to its normal state...\p"
-	.string "Haha...\n"
-	.string "Hahaha...\p"
-	.string "Maybe what we were trying to do was\n"
-	.string "something small, even meaningless,\l"
-	.string "to POKEMON...$"
+	.string "{JPN}アオギリ『カイオーガと グラードンは\nどこかへ とびさって しまった\pそして ホウエンの てんきも\nまた もとどおりに なった……\pはは ははは……\pおれたちの やろうと したことは\nポケモンから みれば\lちっぽけなこと だったの かもな……$"
 
 SootopolisCity_Text_InvolvedWithCrisisComeWithMe:
-	.string "STEVEN: Those POKEMON fighting...\n"
-	.string "GROUDON... And KYOGRE...\p"
-	.string "The two super-ancient POKEMON\n"
-	.string "were awakened from a long sleep...\p"
-	.string "And now they are smashing each other\n"
-	.string "with their uncontrollable energy...\p"
-	.string "...{PLAYER}{KUN}.\p"
-	.string "You being here now I'll take to mean\n"
-	.string "that you're prepared to become\l"
-	.string "involved in this crisis.\p"
-	.string "Well, then, there's someone that\n"
-	.string "I'd like you to meet.\p"
-	.string "Come with me, please.$"
+	.string "{JPN}ダイゴ『あそこで たたかって いるのは\nグラードン……\lそして カイオーガ……\pながい ねむりから めざめた\n2ひきの ちょうこだい ポケモンは\pやりばのない エネルギーを\nおたがいに ぶつけあっている……\p……{PLAYER}{KUN}\pここまで きた ということは\nきみは このじけんに かかわる\lかくごが できている ということだね\pよし! それなら\nきみに あわせたい ひとが いるんだ\pちょっと ボクに ついておいで$"
 
 SootopolisCity_Text_DoesThisMakeYourFearPokemon:
-	.string "STEVEN: Listen, {PLAYER}{KUN}.\p"
-	.string "Does seeing GROUDON and KYOGRE make\n"
-	.string "you think POKEMON are to be feared?\p"
-	.string "But that's not true.\n"
-	.string "POKEMON are really more...\p"
-	.string "...Why am I asking you this?\n"
-	.string "You already know.$"
+	.string "{JPN}ダイゴ『ねえ {PLAYER}{KUN}\nグラードンと カイオーガを みて\lポケモンは こわいものだと おもったかい?\pでも そんなことは ないんだよ\nポケモンって ほんとうは もっと……\p……いや きみなら そんなことは\nもう とっくに きがついて いるよね$"
 
 SootopolisCity_Text_HereWereAreHelpWallace:
-	.string "STEVEN: Okay, here we are!\p"
-	.string "Inside here you'll find someone named\n"
-	.string "WALLACE.\p"
-	.string "I think you have what's needed to\n"
-	.string "help him...$"
+	.string "{JPN}ダイゴ『さあ ついた!\pこのおくに ミクリさん という\nひとが いるんだ\pきみなら かれの ちからに\nなって あげられると おもうよ……$"
 
 SootopolisCity_Text_KnowWhatsNeededToHelpHim:
-	.string "STEVEN: I think you have what's\n"
-	.string "needed to help him...$"
+	.string "{JPN}ダイゴ『きみなら かれの ちからに\nなって あげられると おもうよ……$"
 
 SootopolisCity_Text_NeverBeenToSkyPillar:
-	.string "STEVEN: The SKY PILLAR...\p"
-	.string "I've never been there.\n"
-	.string "I wonder where it could be?$"
+	.string "{JPN}ダイゴ『そらのはしら……\nボクも まだ いったことが ないけど\lいったい どこに あるんだろうね$"
 
 SootopolisCity_Text_SoThatsRayquaza:
-	.string "STEVEN: So that's RAYQUAZA...\p"
-	.string "It's incredible how the two rampaging\n"
-	.string "POKEMON would flee from it in fear...$"
+	.string "{JPN}ダイゴ『あれが レックウザか……\pあばれていた 2ひきが おそれをなして\nさっていく なんて すごいや……$"
 
 SootopolisCity_Text_MaxieArchieLeft:
-	.string "STEVEN: It looks like both MAXIE and\n"
-	.string "ARCHIE have gone away somewhere.\p"
-	.string "Perhaps they've gone to MT. PYRE to\n"
-	.string "return those ORBS...$"
+	.string "{JPN}ダイゴ『マツブサと アオギリの ふたりは\nどこかへ いって しまった ようだね\pもしかすると おくりびやまに\nたまを かえしに いったのかも……$"
 
 SootopolisCity_Text_HaventYouScaledSkyPillar:
-	.string "WALLACE: Oh?\n"
-	.string "{PLAYER}{KUN}?\p"
-	.string "Haven't you scaled the SKY PILLAR\n"
-	.string "yet?\p"
-	.string "I'm sure that you can make it to\n"
-	.string "the top of the SKY PILLAR...$"
+	.string "{JPN}ミクリ『おや? {PLAYER}{KUN}\pあれから そらのはしらを のぼって\nいかなかったのかい?\pきみなら きっと いけるさ\nそらのはしらの おくじょうへ……$"
 
 SootopolisCity_Text_AquaMagmaDidntMeanHarm:
-	.string "WALLACE: {PLAYER}{KUN}...\p"
-	.string "The leaders of TEAM MAGMA and AQUA,\n"
-	.string "I don't think they meant harm.\p"
-	.string "It wouldn't hurt to hear what they\n"
-	.string "have to say for themselves.$"
+	.string "{JPN}ミクリ『{PLAYER}{KUN}……\pマグマだんと アクアだんの ふたりも\nきっと わるぎは なかったの だろうね\pちょっと かれらの はなしを\nきいてやって みては どうかな……$"
 
 SootopolisCity_Text_ThankYouForHelpAcceptThis:
-	.string "WALLACE: {PLAYER}{KUN}...\n"
-	.string "My eyes didn't deceive me.\p"
-	.string "Thanks to your help, SOOTOPOLIS...\n"
-	.string "No, all of HOENN was saved.\p"
-	.string "On behalf of the people, I thank you.\p"
-	.string "This is a gift from me.\n"
-	.string "Please accept it.$"
+	.string "{JPN}ミクリ『{PLAYER}{KUN}……\nやはり わたしの めは ただしかった\pきみが ちからを かしてくれた おかげで\nルネシティは……\lいや ホウエンは すくわれたんだよ\pまちの みんなを だいひょうして\nおれいを いわせて もらうよ\l……ありがとう\pこれは わたしからの プレゼントだ\nうけとって くれたまえ!$"
 
 SootopolisCity_Text_ExplainWaterfallGoToGym:
-	.string "That HIDDEN MACHINE contains\n"
-	.string "WATERFALL.\p"
-	.string "If you have the RAIN BADGE, a POKEMON\n"
-	.string "that has learned that HM move can\l"
-	.string "force its way up waterfalls.\p"
-	.string "And where does one get the RAIN BADGE?\n"
-	.string "You know, don't you?\p"
-	.string "That's right! You have to beat\n"
-	.string "the SOOTOPOLIS GYM LEADER.\p"
-	.string "When you're all set to go, step through\n"
-	.string "that door.$"
+	.string "{JPN}その ひでんマシンは たきのぼり!\pレインバッジを もっていれば\nそのわざを おぼえさせた ポケモンが\lたきを のぼれるように なるのさ!\pそして…… レインバッジは\nどこで もらえるのか というと……\pもう おわかりだね\nそう! ルネの ジムリーダーに かつこと\pさあ じゅんびが できたら\nなかに はいって くれたまえ!$"
 
 SootopolisCity_Text_DazzledByMentor:
-	.string "WALLACE: I'm sure that you will be\n"
-	.string "dazzled by my mentor's breathtakingly\l"
-	.string "elegant battle style.$"
+	.string "{JPN}ミクリ『わたしの ししょうの\nかれい かつ ゆうがな たたかいぶりに\lきっと きみは おどろく だろうよ!$"

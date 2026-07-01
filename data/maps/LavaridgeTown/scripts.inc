@@ -361,16 +361,16 @@ LavaridgeTown_Text_HotSpringsNeverRunDry:
 	.string "$"
 
 LavaridgeTown_Text_PokemonNippedBackside:
-	.string "Being buried in this hot sand is...\n"
-	.string "Sigh...\p"
-	.string "So warm and heavenly...\p"
-	.string "Eh? Gyaah! Ouch!\p"
-	.string "A POKEMON nipped my backside!$"
+	.string "{JPN}こうして すなに うまっていると\nはあぁ……\pあたたかくって イイキモチ……\p……ん? イテテッ!\pしりを ポケモンに かまれた!"
+	.string ""
+	.string ""
+	.string ""
+	.string "$"
 
 LavaridgeTown_Text_OhYouLikeHotSprings:
-	.string "Oh, you like hot springs, do you?\p"
-	.string "That's surprising for one as young\n"
-	.string "as you.$"
+	.string "{JPN}おや あんた\nおんせんが すき なのかい?\pまだ わかいのに めずらしいねえ……"
+	.string ""
+	.string "$"
 
 LavaridgeTown_Text_BatheInHotSpringsEveryDay:
 	.string "{JPN}あたし アスナさん みたいに\nすてきで つよい ジムリーダーに なるため\lまいにち おんせんに はいってるの!おんせんに ポケモン いれると\nでんきぶろや あわぶろ はたまた\lようがんぶろに なって すごそうだわ"
@@ -378,7 +378,7 @@ LavaridgeTown_Text_BatheInHotSpringsEveryDay:
 	.string "$"
 
 LavaridgeTown_Text_IfPokemonInHotSprings:
-	.string "{JPN}こうして すなに うまっていると\nはあぁ……\pあたたかくって イイキモチ……\p……ん? イテテッ!\pしりを ポケモンに かまれた!おや あんた\nおんせんが すき なのかい?\pまだ わかいのに めずらしいねえ……"
+	.string "{JPN}おんせんに ポケモン いれると\nでんきぶろや あわぶろ はたまた\lようがんぶろに なって すごそうだわ"
 	.string ""
 	.string ""
 	.string "$"

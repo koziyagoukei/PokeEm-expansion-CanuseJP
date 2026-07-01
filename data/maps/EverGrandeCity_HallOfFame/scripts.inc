@@ -80,16 +80,7 @@ EverGrandeCity_HallOfFame_Movement_WalkIntoHallOfFame2:
 	step_end
 
 EverGrandeCity_HallOfFame_Text_HereWeHonorLeagueChampions:
-	.string "WALLACE: This room...\p"
-	.string "This is where we keep records of\n"
-	.string "POKEMON that prevailed through\l"
-	.string "harsh battles.\p"
-	.string "It is here that the LEAGUE CHAMPIONS\n"
-	.string "are honored.$"
+	.string "{JPN}ミクリ『ここは……\pはげしい たたかいを かちぬいた\nポケモンを きろくする ばしょ\pリーグ チャンピオンの\nえいこうを たたえる ための へやさ!$"
 
 EverGrandeCity_HallOfFame_Text_LetsRecordYouAndYourPartnersNames:
-	.string "WALLACE: Come on, let's record your\n"
-	.string "name as a TRAINER who triumphed over\l"
-	.string "the POKEMON LEAGUE, and the names of\l"
-	.string "the partners who battled with you.$"
-
+	.string "{JPN}ミクリ『さあ! ポケモン リーグを\nかちぬいた きみの なまえと\pともに たたかった きみの パートナーを\nこの マシンに きろく するのだ!$"

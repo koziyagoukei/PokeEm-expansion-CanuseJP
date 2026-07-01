@@ -656,7 +656,7 @@ MtChimney_Text_AquasNameSimilar:
 	.string "$"
 
 MtChimney_Text_DouseThemInFire:
-	.string "{JPN}あつい たたかい だったわ"
+	.string "{JPN}よーし!\nほのおを ぶっかけてやれー!!"
 	.string "$"
 
 MtChimney_Text_KeepMakingMoreLand:
@@ -790,7 +790,7 @@ MtChimney_Text_MelissaIntro:
 	.string "$"
 
 MtChimney_Text_MelissaDefeat:
-	.string "{JPN}よーし!\nほのおを ぶっかけてやれー!!$"
+	.string "{JPN}あつい たたかい だったわ$"
 
 MtChimney_Text_MelissaPostBattle:
 	.string "{JPN}えんとつやまの あつさが\nおんなを もえあがらせるの"
