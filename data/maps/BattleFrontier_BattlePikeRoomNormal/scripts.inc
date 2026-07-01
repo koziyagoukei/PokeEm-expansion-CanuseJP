@@ -634,205 +634,204 @@ BattleFrontier_BattlePikeRoomNormal_Movement_CameraPanDown:
 	step_end
 
 BattleFrontier_BattlePikeRoomNormal_Text_WillRestoreToFullHealth:
-	.string "Welcome...\n"
-	.string "You must be commended for your luck...\p"
-	.string "Your POKEMON shall be restored\n"
-	.string "to full health...$"
+	.string "{JPN}ようこそ……\nおきゃくさまは ラッキー ですね……\pポケモンを かいふくして さしあげます……"
+	.string ""
+	.string ""
+	.string "$"
 
 BattleFrontier_BattlePikeRoomNormal_Text_EnjoyRestOfChallenge:
-	.string "I urge you to enjoy the rest of your\n"
-	.string "Battle Choice challenge...$"
+	.string "{JPN}それでは ひきつづき\nゲームを おたのしみ ください……"
+	.string "$"
 
 BattleFrontier_BattlePikeRoomNormal_Text_WillRestoreOneMon:
-	.string "Ah, you're a lucky one.\n"
-	.string "I'm in somewhat-good spirits now.\p"
-	.string "I will restore one of your POKEMON\n"
-	.string "to full health.$"
+	.string "{JPN}おお きみは ツイてるな\pいまの わしは ちょっとだけ\nきげんが いいからな\pきみの ポケモンを 1ひき だけ\nかいふくして あげようじゃ ないか!"
+	.string ""
+	.string ""
+	.string "$"
 
 BattleFrontier_BattlePikeRoomNormal_Text_BestOfLuckFarewell:
-	.string "The best of luck to you.\n"
-	.string "Farewell.$"
+	.string "{JPN}それでは ごきげんよう……"
+	.string "$"
 
 @ Seems there was a planned room type where the player could choose to battle and would be healed if they won
 @ Possibly replaced/superseded by the hard battle room, which is the same but the battle isnt optional
 @ Unused
 BattleFrontier_BattlePikeRoomNormal_Text_CareForBattleWillRestoreMons:
-	.string "Excuse me...\p"
-	.string "Would you care for a battle?\n"
-	.string "I'll restore your POKEMON if you win.$"
+	.string "{JPN}きみ……\pわたしと バトルしないかね?\nかてば ポケモンを かいふくして あげよう"
+	.string ""
+	.string "$"
 
 @ Unused
 BattleFrontier_BattlePikeRoomNormal_Text_NowShallWe:
-	.string "Very well...\n"
-	.string "Now, shall we?$"
+	.string "{JPN}よろしい……\n……それでは いくぞ!"
+	.string "$"
 
 @ Unused
 BattleFrontier_BattlePikeRoomNormal_Text_HowUnsportingOfYou:
-	.string "I see...\n"
-	.string "How unsporting of you...$"
+	.string "{JPN}そうか… ざんねんだな……"
+	.string "$"
 
 @ Unused
 BattleFrontier_BattlePikeRoomNormal_Text_WillRestoreMonsAsPromised:
-	.string "Magnificent...\p"
-	.string "As promised, I shall restore your\n"
-	.string "POKEMON to full health.$"
+	.string "{JPN}すばらしい……\pやくそくどおり ポケモンを\nかいふくしよう……"
+	.string ""
+	.string "$"
 
 @ Unused
 BattleFrontier_BattlePikeRoomNormal_Text_BestOfLuckFarewell2:
-	.string "The best of luck to you.\n"
-	.string "Farewell.$"
+	.string "{JPN}それでは ごきげんよう……"
+	.string "$"
 
 BattleFrontier_BattlePikeRoomNormal_Text_WatchOut:
-	.string "Oh, my!\p"
-	.string "Watch out!$"
+	.string "{JPN}!!\pきみ! あぶないっ!!"
+	.string "$"
 
 BattleFrontier_BattlePikeRoomNormal_Text_KirliaStop:
-	.string "Now, now!\n"
-	.string "KIRLIA, stop that!$"
+	.string "{JPN}おいっ!\nキルリア!! やめなさいっ!"
+	.string "$"
 
 BattleFrontier_BattlePikeRoomNormal_Text_DusclopsStop:
-	.string "Now, now!\n"
-	.string "DUSCLOPS, stop that!$"
+	.string "{JPN}おいっ!\nサマヨール!! やめなさいっ!"
+	.string "$"
 
 BattleFrontier_BattlePikeRoomNormal_Text_KirliaUsedToxic:
-	.string "KIRLIA used TOXIC!$"
+	.string "{JPN}キルリアの どくどく こうげき!$"
 
 BattleFrontier_BattlePikeRoomNormal_Text_KirliaUsedHypnosis:
-	.string "KIRLIA used HYPNOSIS!$"
+	.string "{JPN}キルリアの さいみんじゅつ!$"
 
 BattleFrontier_BattlePikeRoomNormal_Text_KirliaUsedThunderWave:
-	.string "KIRLIA used THUNDER WAVE!$"
+	.string "{JPN}キルリアの でんじは!$"
 
 BattleFrontier_BattlePikeRoomNormal_Text_KirliaUsedWillOWisp:
-	.string "KIRLIA used WILL-O-WISP!$"
+	.string "{JPN}キルリアの おにび!$"
 
 BattleFrontier_BattlePikeRoomNormal_Text_DusclopsUsedWillOWisp:
-	.string "DUSCLOPS used WILL-O-WISP!$"
+	.string "{JPN}サマヨールの おにび!$"
 
 BattleFrontier_BattlePikeRoomNormal_Text_DusclopsUsedIceBeam:
-	.string "DUSCLOPS used ICE BEAM!$"
+	.string "{JPN}サマヨールの れいとうビーム!$"
 
 BattleFrontier_BattlePikeRoomNormal_Text_ThatsEnough:
-	.string "Look here!\n"
-	.string "That's quite enough!$"
+	.string "{JPN}ええいっ! いいかげんに しないかっ!!"
+	.string "$"
 
 BattleFrontier_BattlePikeRoomNormal_Text_ApologizeForKirlia:
-	.string "I must apologize to you...\p"
-	.string "My KIRLIA has a TIMID nature...$"
+	.string "{JPN}もうしわけない……\pわたしの キルリアは おくびょう でな……"
+	.string "$"
 
 BattleFrontier_BattlePikeRoomNormal_Text_ApologizeForDusclops:
-	.string "I must apologize to you...\p"
-	.string "My DUSCLOPS has a TIMID nature...$"
+	.string "{JPN}もうしわけない ……\pわたしの サマヨールは おくびょう でな……"
+	.string "$"
 
 BattleFrontier_BattlePikeRoomNormal_Text_AttacksWhenStartled:
-	.string "It attacks without warning if it is\n"
-	.string "startled by another person...\p"
-	.string "Are you and your POKEMON all right?$"
+	.string "{JPN}きゅうに ひとを みると おどろいて\nおそいかかって しまうのだ……\pきみも ポケモンも だいじょうぶか?"
+	.string ""
+	.string "$"
 
 BattleFrontier_BattlePikeRoomNormal_Text_ApologizeHopeMonsAreFine:
-	.string "I do apologize for what happened...\n"
-	.string "I do hope your POKEMON are fine.$"
+	.string "{JPN}すまなかったな……\nきみの ポケモンは ぶじか?"
+	.string "$"
 
 BattleFrontier_BattlePikeRoomNormal_Text_Silence:
-	.string "... ... ... ... ... ...\n"
-	.string "... ... ... ... ... ...$"
+	.string "{JPN}…… …… ……\n…… …… ……"
+	.string "$"
 
 BattleFrontier_BattlePikeRoomNormal_Text_BattleSomewhatToughTrainer:
-	.string "Welcome...\p"
-	.string "Here, we will have you battle\n"
-	.string "a somewhat-tough TRAINER...$"
+	.string "{JPN}ようこそ……\pこちらでは しょうしょう うでの たつ\nトレーナーと たたかって いただきます……"
+	.string ""
+	.string "$"
 
 BattleFrontier_BattlePikeRoomNormal_Text_RestoreToFullHealth:
-	.string "How wonderful...\p"
-	.string "To honor your victory, your POKEMON\n"
-	.string "shall be restored to full health...$"
+	.string "{JPN}……すばらしい……\pおきゃくさまの しょうりを たたえ\nポケモンを かいふくして さしあげます……"
+	.string ""
+	.string "$"
 
 BattleFrontier_BattlePikeRoomNormal_Text_EnjoyRestOfChallenge2:
-	.string "I urge you to enjoy the rest of your\n"
-	.string "Battle Choice challenge...$"
+	.string "{JPN}それでは ひきつづき\nゲームを おたのしみ ください……"
+	.string "$"
 
 BattleFrontier_BattlePikeRoomNormal_Text_ImThePikeQueen:
-	.string "I am LUCY...\n"
-	.string "I am the law here...\l"
-	.string "For I am the PIKE QUEEN...\p"
-	.string "You already know it, but to advance,\n"
-	.string "you must defeat me...\p"
-	.string "...I'm not one for idle chatter.\n"
-	.string "Hurry. Come on...$"
+	.string "{JPN}あたしは アザミ……\nここの あるじ…… チューブクイーン……\p…… まあ わかると おもうけど\nあたしを たおさなきゃ\lこのさき すすめないよ……\p…… おしゃべりは すきじゃ ないからね\nさっさと かかっといで……"
+	.string ""
+	.string ""
+	.string ""
+	.string ""
+	.string ""
+	.string "$"
 
 BattleFrontier_BattlePikeRoomNormal_Text_HopeYouDidntUseUpLuck:
-	.string "Your luck...\n"
-	.string "I hope you didn't use it all up here...$"
+	.string "{JPN}あんたの うん……\nここで つきなきゃ いい けどね……"
+	.string "$"
 
 BattleFrontier_BattlePikeRoomNormal_Text_LucyShowMeFrontierPass:
-	.string "LUCY: ... ... ... ... ... ...\n"
-	.string "Show me your FRONTIER PASS...$"
+	.string "{JPN}アザミ『…… …… …… ……\nフロンティアパス よこしな……"
+	.string "$"
 
 BattleFrontier_BattlePikeRoomNormal_Text_ReceivedLuckSymbol:
-	.string "The Luck Symbol was embossed on\n"
-	.string "the FRONTIER PASS!$"
+	.string "{JPN}フロンティアパスに\nラックシンボルが きざまれた!"
+	.string "$"
 
 BattleFrontier_BattlePikeRoomNormal_Text_AllThereIsDisappear:
-	.string "...That's all there is...\n"
-	.string "Disappear already...$"
+	.string "{JPN}…… ほら…… さっさと きえな………"
+	.string "$"
 
 BattleFrontier_BattlePikeRoomNormal_Text_LucyYouAgain:
-	.string "LUCY: ...You again...\p"
-	.string "... ... ... ... ... ...\p"
-	.string "...I've trampled flowers and braved\n"
-	.string "storms to get to where I am...\p"
-	.string "I don't feel any compulsion to keep\n"
-	.string "losing to the same opponent...\p"
-	.string "... ... ... ... ... ...\n"
-	.string "Fine... I'll do it...$"
+	.string "{JPN}アザミ『…… また あんたか……\p…… …… …… ……\p…… …… はなも あらしも ふみこえて\nいきてきた この あたし…… ……\pそうそう おなじ あいてに\nまけて やる ひつようも ないね……\l…… …… …… …… いいわ……\lやって やるよ…… …… …… ……"
+	.string ""
+	.string ""
+	.string ""
+	.string ""
+	.string ""
+	.string ""
+	.string "$"
 
 BattleFrontier_BattlePikeRoomNormal_Text_NowComeOn:
-	.string "Now!\n"
-	.string "Come on!$"
+	.string "{JPN}おらっ!! かかっといでっ!!"
+	.string "$"
 
 BattleFrontier_BattlePikeRoomNormal_Text_LucyFrontierPass:
-	.string "LUCY: ... ... ... ... ... ...\p"
-	.string "...FRONTIER PASS...$"
+	.string "{JPN}アザミ『…… …… …… ……\p…… …… フロンティアパス……"
+	.string "$"
 
 BattleFrontier_BattlePikeRoomNormal_Text_LuckSymbolTookGoldenShine:
-	.string "The Luck Symbol took on\n"
-	.string "a golden shine!$"
+	.string "{JPN}ラックシンボルが\nきんいろに かがやいた!"
+	.string "$"
 
 BattleFrontier_BattlePikeRoomNormal_Text_IWontForget:
-	.string "...You, I won't forget...\n"
-	.string "...Ever...$"
+	.string "{JPN}…… …… あんた……\nいっしょう わすれない からね………"
+	.string "$"
 
 BattleFrontier_BattlePikeRoomNormal_Text_ChoseRoomNoHeal:
-	.string "I welcome you...\p"
-	.string "Giggle...\n"
-	.string "You seem to be bereft of luck...\p"
-	.string "If only you hadn't chosen this room,\n"
-	.string "your POKEMON could have been healed...$"
+	.string "{JPN}ようこそ いらっしゃい ました……\pうふふ……\nなんて うんの ない おかた……\pさいごに えらんだのが\nこのへやで なければ ポケモンたちを\lかいふくして さしあげたのに……"
+	.string ""
+	.string ""
+	.string ""
+	.string "$"
 
 BattleFrontier_BattlePikeRoomNormal_Text_ChoseRoomHealOne:
-	.string "I welcome you...\p"
-	.string "Since you have chosen this room, I will\n"
-	.string "restore one POKEMON to full health...$"
+	.string "{JPN}ようこそ いらっしゃい ました……\pさいごに このへやを えらばれた\nおきゃくさまは ポケモンを 1ひきだけ\lかいふくして さしあげましょう……"
+	.string ""
+	.string "$"
 
 BattleFrontier_BattlePikeRoomNormal_Text_ChoseRoomHealTwo:
-	.string "I welcome you...\p"
-	.string "Since you have chosen this room, I will\n"
-	.string "restore two POKEMON to full health...$"
+	.string "{JPN}ようこそ いらっしゃい ました……\pさいごに このへやを えらばれた\nおきゃくさまは ポケモンを 2ひき\lかいふくして さしあげましょう……"
+	.string ""
+	.string "$"
 
 @ Unused
 BattleFrontier_BattlePikeRoomNormal_Text_WillRestoreAllMons:
-	.string "I welcome you...\p"
-	.string "Giggle...\n"
-	.string "You should thank your lucky stars...\p"
-	.string "Since you have chosen this room,\n"
-	.string "all your POKEMON will be restored...$"
+	.string "{JPN}ようこそ いらっしゃい ました……\pうふふ……\nほんとうに ラッキーな おかた……\pさいごに このへやを えらばれた\nおきゃくさまは ポケモンを すべて\lかいふくして さしあげましょう……"
+	.string ""
+	.string ""
+	.string ""
+	.string "$"
 
 BattleFrontier_BattlePikeRoomNormal_Text_ShallFetchOurMaster:
-	.string "I shall go fetch our master...$"
+	.string "{JPN}では わたくしどもの あるじを\nよんで まいり ますね……$"
 
 BattleFrontier_BattlePikeRoomNormal_Text_WillRestoreTwoMons:
-	.string "Ah, you're a lucky one!\n"
-	.string "I'm in good spirits now.\p"
-	.string "I will restore two of your POKEMON\n"
-	.string "to full health!$"
-
+	.string "{JPN}おお きみは ツイてるぞ!\pいまの わしは きげんが いいからな!\nきみの ポケモンを 2ひき\lかいふくして あげよう!"
+	.string ""
+	.string ""
+	.string "$"
