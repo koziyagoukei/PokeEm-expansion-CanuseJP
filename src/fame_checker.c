@@ -142,6 +142,7 @@ static void PlaceListMenuCursor(bool8 isActive);
 static void NormalizeFameCheckerSaveData(void);
 static void UnlockAllFameCheckerPeople(void);
 static void CB2_ReturnToFameCheckerFromUltraHelp(void);
+static bool8 ShouldShowFameCheckerPerson(u8 fcPersonIdx);
 
 static const u32 gFameCheckerBgTiles[] = INCGFX_U32("graphics/fame_checker/bg.png", ".4bpp");
 static const u16 gFameCheckerBgPals[] = INCGFX_U16("graphics/fame_checker/bg.png", ".gbapal");
@@ -2212,22 +2213,38 @@ static void FC_DoMoveCursor(s32 itemIndex, bool8 onInit)
     sFameCheckerData->listMenuTopIdx2 = listY;
 }
 
+static bool8 ShouldShowFameCheckerPerson(u8 fcPersonIdx)
+{
+    switch (fcPersonIdx)
+    {
+    case FAMECHECKER_BIRCH:
+    case FAMECHECKER_SCOTT:
+        return FALSE;
+    default:
+        return TRUE;
+    }
+}
+
 static u8 FC_PopulateListMenu(void)
 {
     u8 nitems = 0;
     u8 i;
 
-    for (i = 0; i < NUM_FAMECHECKER_PERSONS; i++)
+for (i = 0; i < NUM_FAMECHECKER_PERSONS; i++)
+{
+    u8 fameCheckerIdx = AdjustGiovanniIndexIfBeatenInGym(i);
+
+    if (!ShouldShowFameCheckerPerson(fameCheckerIdx))
+        continue;
+
+    if (gSaveBlock1Ptr->fameChecker[fameCheckerIdx].pickState != FCPICKSTATE_NO_DRAW)
     {
-        u8 fameCheckerIdx = AdjustGiovanniIndexIfBeatenInGym(i);
-        if (gSaveBlock1Ptr->fameChecker[fameCheckerIdx].pickState != FCPICKSTATE_NO_DRAW)
-        {
-            sListMenuItems[nitems].name = sFameCheckerPersonNamePointers[fameCheckerIdx];
-            sListMenuItems[nitems].id = nitems;
-            sFameCheckerData->unlockedPersons[nitems] = fameCheckerIdx;
-            nitems++;
-        }
+        sListMenuItems[nitems].name = sFameCheckerPersonNamePointers[fameCheckerIdx];
+        sListMenuItems[nitems].id = nitems;
+        sFameCheckerData->unlockedPersons[nitems] = fameCheckerIdx;
+        nitems++;
     }
+}
     sListMenuItems[nitems].name = sText_FameCheckerHelp;
     sListMenuItems[nitems].id = nitems;
     sFameCheckerData->unlockedPersons[nitems] = FAMECHECKER_HELP_ENTRY;
