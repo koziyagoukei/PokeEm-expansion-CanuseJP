@@ -69,6 +69,7 @@ Workspace/
 *.fastSmol
 *.smolTM
 __pycache__
+expansionstudio
 
 !tools/check_jp_text.py
 .map_version
@@ -79,4 +80,5 @@ __pycache__
 Flips
 libagbsyscall
 migration_scripts
-patches
+patchesexpansionstudio
+expansionstudio/
