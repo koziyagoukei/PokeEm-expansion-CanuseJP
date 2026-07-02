@@ -2,14 +2,11 @@
 #define GUARD_ULTRA_HELP_H
 
 #include "main.h"
+#include "constants/info_viewer.h"
 
-enum UltraHelpTopicId
-{
-    ULTRA_HELP_TOPIC_FRONTIER_RULES,
-    ULTRA_HELP_TOPIC_COUNT
-};
-
+void Special_OpenInfoViewer(void);
 void ultra_help(void);
+void StartInfoViewer(u16 infoId, MainCallback exitCallback);
 void StartUltraHelp(u16 topic, MainCallback exitCallback);
 
 #endif // GUARD_ULTRA_HELP_H
