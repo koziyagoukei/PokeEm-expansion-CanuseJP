@@ -1775,7 +1775,7 @@ void SetPokemonAnglerSpecies(enum Species species)
 }
 
 // World of Masters is initialized in the last slot by InitWorldOfMastersShowAttempt
-// If enough Pokemon were caught during the day the show can be put on air (and will
+// If enough Pokémon were caught during the day the show can be put on air (and will
 // be moved out of the last slot).
 // Either way the temporary version of the show in the last slot is deleted.
 static void ResolveWorldOfMastersShow(u16 days)
@@ -2039,7 +2039,7 @@ static void SecretBaseVisit_CalculatePartyData(TVShow *show)
             secretBaseVisitMonsTemp[numPokemon].level = GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_LEVEL);
             secretBaseVisitMonsTemp[numPokemon].species = GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_SPECIES);
 
-            // Check all the Pokemon's moves, then randomly select one to save
+            // Check all the Pokémon's moves, then randomly select one to save
             for (u32 moveIndex = 0; moveIndex < MAX_MON_MOVES; moveIndex++)
             {
                 enum Move move = GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_MOVE1 + moveIndex);
@@ -3049,24 +3049,30 @@ static enum Species GetRandomDifferentSpeciesAndNameSeenByPlayer(u8 varIdx, enum
 
 static enum Species GetRandomDifferentSpeciesSeenByPlayer(enum Species excludedSpecies)
 {
-    enum Species species = Random() % (NUM_SPECIES - 1) + 1;
-    enum Species initSpecies = species;
-
-    while (GetSetPokedexFlag(SpeciesToNationalPokedexNum(species), FLAG_GET_SEEN) != TRUE || species == excludedSpecies)
+    enum NationalDexOrder selectedNatDex;
+    enum NationalDexOrder excludexNatDex = SpeciesToNationalPokedexNum(excludedSpecies);
+    enum NationalDexOrder *natDexArray = Alloc(POKEMON_SLOTS_NUMBER * sizeof(enum NationalDexOrder));
+    u32 count = 0;
+    for (u32 i = 0; i < NUM_DEX_FLAG_BYTES; i++)
     {
-        if (species == SPECIES_NONE + 1)
-            species = NUM_SPECIES - 1;
-        else
-            species--;
-
-        if (species == initSpecies)
+        u32 tmp = gSaveBlock1Ptr->dexSeen[i];
+        for (u32 j = 0; j < 8; j++)
         {
-            // Looped back to initial species (only Pokemon seen), must choose excluded species
-            species = excludedSpecies;
-            return species;
+            if (tmp & 1)
+                natDexArray[count++] = i * 8 + j + 1;
+            tmp >>= 1;
         }
-    };
-    return species;
+    }
+    if (count <= 1)
+    {
+        Free(natDexArray);
+        return excludedSpecies;
+    }
+    do {
+        selectedNatDex = natDexArray[RandomUniform(RNG_NONE, 0, count - 1)];
+    } while (selectedNatDex == excludexNatDex);
+    Free(natDexArray);
+    return NationalPokedexNumToSpecies(selectedNatDex);
 }
 
 static void Script_FindFirstEmptyNormalTVShowSlot(void)
@@ -6195,7 +6201,7 @@ static void DoTVShowSpotTheCuties(void)
         TVShowConvertInternationalString(gStringVar1, show->cuties.playerName, show->cuties.language);
         TVShowConvertInternationalString(gStringVar2, show->cuties.nickname, show->cuties.pokemonNameLanguage);
 
-        // Comments following the intro depend on how many ribbons the Pokemon has
+        // Comments following the intro depend on how many ribbons the Pokémon has
         if (show->cuties.nRibbons < 10)
             sTVShowState = SPOTCUTIES_STATE_RIBBONS_LOW;
         else if (show->cuties.nRibbons < 20)

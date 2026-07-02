@@ -3967,6 +3967,7 @@ u32 AbilityBattleEffects(enum AbilityEffect caseID, enum BattlerId battler, enum
             break;
         case ABILITY_CURSED_BODY:
             if (IsBattlerTurnDamaged(gBattlerTarget, EXCLUDING_SUBSTITUTES)
+             && GetMoveEffect(move) != EFFECT_FUTURE_SIGHT
              && gBattleMons[gBattlerAttacker].volatiles.disabledMove == MOVE_NONE
              && IsBattlerAlive(gBattlerAttacker)
              && !gSpecialStatuses[gBattlerAttacker].attackerInParty
@@ -4673,7 +4674,7 @@ u32 AbilityBattleEffects(enum AbilityEffect caseID, enum BattlerId battler, enum
         switch (ability)
         {
         case ABILITY_OPPORTUNIST:
-            if (gProtectStructs[battler].activateOpportunist == 2)
+            if (gProtectStructs[battler].activateOpportunist)
             {
                 for (enum Stat stat = STAT_ATK; stat < NUM_BATTLE_STATS; stat++)
                 {
@@ -4683,7 +4684,7 @@ u32 AbilityBattleEffects(enum AbilityEffect caseID, enum BattlerId battler, enum
 
                 }
                 gBattleScripting.battler = gBattlerAbility = battler;
-                gProtectStructs[battler].activateOpportunist--;
+                gProtectStructs[battler].activateOpportunist = FALSE;
                 BattleScriptCall(BattleScript_OpportunistCopyStatChange);
                 effect = 1;
             }
@@ -4762,6 +4763,7 @@ u32 AbilityBattleEffects(enum AbilityEffect caseID, enum BattlerId battler, enum
             if (IsBattlerAlive(partner)
              && gBattleStruct->battlerState[partner].commanderSpecies == SPECIES_NONE
              && gBattleMons[partner].species == SPECIES_DONDOZO
+             && (gChosenActionByBattler[battler] != B_ACTION_SWITCH || HasBattlerActedThisTurn(battler))
              && (gChosenActionByBattler[partner] != B_ACTION_SWITCH || HasBattlerActedThisTurn(partner))
              && GET_BASE_SPECIES_ID(GetMonData(GetBattlerMon(battler), MON_DATA_SPECIES)) == SPECIES_TATSUGIRI)
             {
@@ -10023,6 +10025,7 @@ bool32 TrySwitchInEjectPack(enum EjectPackTiming timing)
         if (gBattleMons[i].volatiles.tryEjectPack
          && GetBattlerHoldEffect(i) == HOLD_EFFECT_EJECT_PACK
          && IsBattlerAlive(i)
+         && gBattleStruct->battlerState[i].commanderSpecies == SPECIES_NONE
          && CanBattlerSwitch(i))
         {
             ejectPackBattlers |= 1u << i;
@@ -10071,6 +10074,8 @@ bool32 EmergencyExitCanBeTriggered(enum BattlerId battler, enum Ability ability)
         return FALSE;
 
     if (IsBattlerAlive(battler)
+     && !IsPursuitTargetSet()
+     && gBattleStruct->battlerState[battler].commanderSpecies == SPECIES_NONE
      && (HadMoreThanHalfHpNowDoesnt(battler) || gSpecialStatuses[battler].shellBellEmergencyExit)
      && (CanBattlerSwitch(battler) || !(gBattleTypeFlags & BATTLE_TYPE_TRAINER))
      && !(gBattleTypeFlags & BATTLE_TYPE_ARENA)
@@ -10091,8 +10096,8 @@ bool32 TryTriggerSymbiosis(enum BattlerId battler, u32 ally)
         && IsBattlerAlive(ally);
 }
 
-// Called by Cmd_removeitem. itemId represents the item that was removed, not being given.
-bool32 TrySymbiosis(enum BattlerId battler, enum Item itemId, bool32 moveEnd)
+// itemId represents the item that was removed, not the item being given.
+bool32 TrySymbiosis(enum BattlerId battler, enum Item itemId, const u8 *nextInstr)
 {
     if (!gBattleStruct->itemLost[B_SIDE_PLAYER][gBattlerPartyIndexes[battler]].stolen
         && GetItemHoldEffect(itemId) != HOLD_EFFECT_EJECT_BUTTON
@@ -10105,10 +10110,10 @@ bool32 TrySymbiosis(enum BattlerId battler, enum Item itemId, bool32 moveEnd)
         gLastUsedAbility = gBattleMons[BATTLE_PARTNER(battler)].ability;
         gEffectBattler = battler;
         gBattleScripting.battler = gBattlerAbility = BATTLE_PARTNER(battler);
-        if (moveEnd)
+        if (nextInstr == NULL)
             BattleScriptPushCursor();
         else
-            BattleScriptPush(gBattlescriptCurrInstr + 2);
+            BattleScriptPush(nextInstr);
         gBattlescriptCurrInstr = BattleScript_SymbiosisActivates;
         return TRUE;
     }
@@ -10849,9 +10854,15 @@ void SetWrapTurns(enum BattlerId battler, enum HoldEffect holdEffect)
 {
     u32 normalWrapTurns = B_WRAP_TURNS - 2; // 5 turns
     if (holdEffect == HOLD_EFFECT_GRIP_CLAW)
+    {
         gBattleMons[battler].volatiles.wrapTurns = GetConfig(B_BINDING_TURNS) >= GEN_5 ? B_WRAP_TURNS : normalWrapTurns;
+        gBattleMons[battler].volatiles.wrappedBindingBand = FALSE;
+    }
     else
+    {
         gBattleMons[battler].volatiles.wrapTurns = GetConfig(B_BINDING_TURNS) >= GEN_5 ? RandomUniform(RNG_WRAP, 4, normalWrapTurns) : RandomUniform(RNG_WRAP, 2, normalWrapTurns);
+        gBattleMons[battler].volatiles.wrappedBindingBand = holdEffect == HOLD_EFFECT_BINDING_BAND;
+    }
 }
 
 // Return True if the order was changed, and false if the order was not changed(for example because the target would move after the attacker anyway).

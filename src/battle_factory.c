@@ -572,7 +572,7 @@ static enum FactoryStyle GetMoveBattleStyle(enum Move move)
         return FACTORY_STYLE_SLOW_STEADY;
 
     if (IsExplosionMove(move))
-        return FACTORY_STYLE_SLOW_STEADY;
+        return FACTORY_STYLE_HIGH_RISK;
 
     return FACTORY_STYLE_NONE;
 }

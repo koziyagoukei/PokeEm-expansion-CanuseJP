@@ -2158,8 +2158,6 @@ const struct AbilityInfo gAbilitiesInfo[ABILITIES_COUNT] =
         .cantBeCopied = TRUE,
         .cantBeSwapped = TRUE,
         .cantBeTraced = TRUE,
-        .cantBeSuppressed = TRUE,
-        .cantBeOverwritten = TRUE,
     },
 
     [ABILITY_ELECTROMORPHOSIS] =
@@ -2445,10 +2443,10 @@ const struct AbilityInfo gAbilitiesInfo[ABILITIES_COUNT] =
         .description = COMPOUND_STRING("{JPN}ノーマルわざが ドラゴンになり つよい"),
     },
 
-    [ABILITY_313] =
+    [ABILITY_EELEVATE] =
     {
-        .name = _("{JPN}-------"),
-        .description = COMPOUND_STRING("{JPN}とくせい なし"),
+        .name = _("うなぎのぼり"),
+        .description = COMPOUND_STRING("{JPN}たおすと のうりょくあがる ういてる"),
     },
 
     [ABILITY_314] =
@@ -2463,10 +2461,10 @@ const struct AbilityInfo gAbilitiesInfo[ABILITIES_COUNT] =
         .description = COMPOUND_STRING("{JPN}にほんばれの じょうたいで わざをつかう"),
     },
 
-    [ABILITY_316] =
+    [ABILITY_FIRE_MANE] =
     {
-        .name = _("{JPN}-------"),
-        .description = COMPOUND_STRING("{JPN}とくせい なし"),
+        .name = _("ほのおのたてがみ"),
+        .description = COMPOUND_STRING("ほのおわざが つよくなる"),
     },
 
     [ABILITY_317] =
