@@ -1,69 +1,75 @@
-# Instructions for macOS
-1. If the Xcode Command Line Tools are not installed, download the tools [here](https://developer.apple.com/xcode/resources/), open your Terminal, and run the following command:
+# macOS 向け手順
+
+1. Xcode Command Line Tools が未インストールの場合は、[ここ](https://developer.apple.com/xcode/resources/)からツールをダウンロードし、ターミナルを開いて次のコマンドを実行してください。
 
     ```bash
     xcode-select --install
     ```
 
-2.  - If libpng is **not installed**, then go to [Installing libpng (macOS)](#installing-libpng-macos).
-    - If pkg-config is **not installed**, then go to [Installing pkg-config (macos)](#installing-pkg-config-macos).
-    - If devkitARM is **not installed**, then go to [Installing devkitARM (macOS)](#installing-devkitarm-macos).
-    - Otherwise, **open the Terminal** and go to [Choosing where to store pokeemerald-expansion (macOS)](#choosing-where-to-store-pokeemerald-expansion-macos)
+2.  - libpng が**未インストール**の場合は、[libpng のインストール macOS](#libpng-のインストール-macos)へ進みます。
+    - pkg-config が**未インストール**の場合は、[pkg-config のインストール macOS](#pkg-config-のインストール-macos)へ進みます。
+    - devkitARM が**未インストール**の場合は、[devkitARM のインストール macOS](#devkitarm-のインストール-macos)へ進みます。
+    - それ以外の場合は、**ターミナルを開き**、[pokeemerald-expansion の保存場所を選ぶ macOS](#pokeemerald-expansion-の保存場所を選ぶ-macos)へ進みます。
 
-3. **Optional: To run tests**, if the homebrew environment is not installed, install the package manager using [this reference](https://brew.sh). Open your terminal and run the following commands:
+3. **任意: テストを実行する場合**、Homebrew 環境が未インストールなら、[この案内](https://brew.sh)を参照してパッケージマネージャをインストールします。ターミナルを開いて次のコマンドを実行してください。
 
     ```bash
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
     brew install coreutils
     ```
 
-4. **Optional: To run tests via Rosetta**
-    - You probably don't want to do this as it's much slower. Most users can use native tools, but some may have other reasons to use this setup such as working with Intel-only custom tooling.
-    - You will need an Intel-compatible homebrew installation. Understanding how to get one can be found [here](https://github.com/Homebrew/brew/issues/9173#issuecomment-729206868).
-    - Install `coreutils` like in step 3, but using your Intel-compatible installation of homebrew.
+4. **任意: Rosetta 経由でテストを実行する場合**
+    - これはかなり遅いため、通常は推奨しません。多くのユーザーはネイティブツールを使えますが、Intel 専用のカスタムツールなどを使う事情がある場合は、この構成が必要になることがあります。
+    - Intel 互換の Homebrew インストールが必要です。入手方法は[こちら](https://github.com/Homebrew/brew/issues/9173#issuecomment-729206868)を参照してください。
+    - 手順 3 と同じように `coreutils` をインストールします。ただし Intel 互換の Homebrew を使ってください。
 
-### Installing libpng (macOS)
+### libpng のインストール macOS
+
 <details>
-    <summary><i>Note for advanced users...</i></summary>
+    <summary><i>上級者向け補足...</i></summary>
 
->   This guide installs libpng via Homebrew as it is the easiest method, however advanced users can install libpng through other means if they so desire.
+> この手順では、もっとも簡単な方法として Homebrew 経由で libpng をインストールします。必要であれば、上級者は別の方法で libpng をインストールしてもかまいません。
 </details>
 
-1. Open the Terminal.
-2. If Homebrew is not installed, then install [Homebrew](https://brew.sh/) by following the instructions on the website.
-3. Run the following command to install libpng.
+1. ターミナルを開きます。
+2. Homebrew が未インストールの場合は、[Homebrew](https://brew.sh/) のサイトの手順に従ってインストールします。
+3. 次のコマンドで libpng をインストールします。
 
     ```bash
     brew install libpng
     ```
-    libpng is now installed.
 
-    Continue to [Installing pkg-config (macOS)](#installing-pkg-config-macos) if **pkg-config is not installed**. Otherwise, continue to [Installing devkitARM (macOS)](#installing-devkitarm-macos) if **devkitARM is not installed**.
+    これで libpng がインストールされます。
 
-    If both pkg-config and devkitARM are already installed, go to [Choosing where to store pokeemerald-expansion (macOS)](#choosing-where-to-store-pokeemerald-expansion-macos).
+    **pkg-config が未インストール**の場合は [pkg-config のインストール macOS](#pkg-config-のインストール-macos)へ進みます。**devkitARM が未インストール**の場合は [devkitARM のインストール macOS](#devkitarm-のインストール-macos)へ進みます。
 
-### Installing pkg-config (macOS)
+    pkg-config と devkitARM の両方がすでにインストールされている場合は、[pokeemerald-expansion の保存場所を選ぶ macOS](#pokeemerald-expansion-の保存場所を選ぶ-macos)へ進みます。
+
+### pkg-config のインストール macOS
+
 <details>
-    <summary><i>Note for advanced users...</i></summary>
+    <summary><i>上級者向け補足...</i></summary>
 
->   This guide installs pkg-config via Homebrew as it is the easiest method, however advanced users can install pkg-config through other means if they so desire.
+> この手順では、もっとも簡単な方法として Homebrew 経由で pkg-config をインストールします。必要であれば、上級者は別の方法で pkg-config をインストールしてもかまいません。
 </details>
 
-1. Open the Terminal.
-2. If Homebrew is not installed, then install [Homebrew](https://brew.sh/) by following the instructions on the website.
-3. Run the following command to install libpng.
+1. ターミナルを開きます。
+2. Homebrew が未インストールの場合は、[Homebrew](https://brew.sh/) のサイトの手順に従ってインストールします。
+3. 次のコマンドで pkg-config をインストールします。
 
     ```bash
     brew install pkg-config
     ```
-    pkg-config is now installed.
 
-    Continue to [Installing devkitARM (macOS)](#installing-devkitarm-macos) if **devkitARM is not installed**, otherwise, go to [Choosing where to store pokeemerald-expansion (macOS)](#choosing-where-to-store-pokeemerald-expansion-macos).
+    これで pkg-config がインストールされます。
 
-### Installing devkitARM (macOS)
-1. Download the `devkitpro-pacman-installer.pkg` package from [here](https://github.com/devkitPro/pacman/releases).
-2. Open the package to install devkitPro pacman.
-3. In the Terminal, run the following commands to install devkitARM:
+    **devkitARM が未インストール**の場合は [devkitARM のインストール macOS](#devkitarm-のインストール-macos)へ進みます。それ以外の場合は、[pokeemerald-expansion の保存場所を選ぶ macOS](#pokeemerald-expansion-の保存場所を選ぶ-macos)へ進みます。
+
+### devkitARM のインストール macOS
+
+1. [ここ](https://github.com/devkitPro/pacman/releases)から `devkitpro-pacman-installer.pkg` パッケージをダウンロードします。
+2. パッケージを開き、devkitPro pacman をインストールします。
+3. ターミナルで次のコマンドを実行し、devkitARM をインストールします。
 
     ```bash
     sudo dkp-pacman -Sy
@@ -71,9 +77,9 @@
     sudo dkp-pacman -S devkitarm-rules
     ```
 
-    The command with gba-dev will ask for the selection of packages to install. Just press Enter to install all of them, followed by entering Y to proceed with the installation.
+    `gba-dev` のコマンドでは、インストールするパッケージの選択を求められます。Enter を押してすべてを選択し、その後 Y を入力してインストールを続行してください。
 
-4. After the tools are installed, devkitARM must now be made accessible from anywhere by the system. To do so, run the following commands:
+4. ツールのインストール後、devkitARM をシステムのどこからでも使えるようにする必要があります。次のコマンドを実行してください。
 
     ```bash
     export DEVKITPRO=/opt/devkitpro
@@ -83,9 +89,11 @@
 
     echo "if [ -f ~/.zshrc ]; then . ~/.zshrc; fi" >> ~/.zprofile
     ```
-    *Note: Starting with macOS 10.15, the default Unix shell is now zsh. If you migrated from an older version of macOS, you might still be using bash. You can check my running `echo $0` in the terminal.*
+
+    *補足: macOS 10.15 以降、標準の Unix シェルは zsh です。古い macOS から移行した場合は bash を使っている可能性があります。ターミナルで `echo $0` を実行すると確認できます。*
+
     <details>
-        <summary><i>If your terminal is using bash instead of zsh...</i></summary>
+        <summary><i>ターミナルが zsh ではなく bash を使っている場合...</i></summary>
 
     ```bash
     export DEVKITPRO=/opt/devkitpro
@@ -97,9 +105,20 @@
     ```
     </details>
 
-### Installing Python (macOS)
-1. Download the latest Python package from [here](https://www.python.org/downloads/).
-2. Open the package to install Python.
+### Python のインストール macOS
 
-Python is now installed.
+1. [ここ](https://www.python.org/downloads/)から最新の Python パッケージをダウンロードします。
+2. パッケージを開き、Python をインストールします。
 
+これで Python がインストールされます。
+
+### pokeemerald-expansion の保存場所を選ぶ macOS
+
+任意の作業用ディレクトリに移動し、リポジトリを配置してください。例として `~/Decomps` を使う場合は、次のようにします。
+
+```bash
+mkdir -p ~/Decomps
+cd ~/Decomps
+```
+
+その後、通常の手順に従ってリポジトリを取得し、ビルドしてください。

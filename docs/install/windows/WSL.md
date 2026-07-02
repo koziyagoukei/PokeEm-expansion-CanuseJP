@@ -1,84 +1,97 @@
-# Windows WSL instructions
-## Choosing WSL version
-If you must store your project on the Windows file system (under /mnt/c/), you should use WSL1.
-If you want the best performance and least amount of issues with Windows interfering with compiling the project, use WSL2 and store the project on the Linux file system (under ~/).
-## Installing WSL
-1. Open [Windows Powershell **as Administrator**](https://i.imgur.com/QKmVbP9.png), and run the following commands (Right Click or Shift+Insert is paste in the Powershell).
+# Windows WSL 向け手順
+
+## WSL バージョンの選択
+
+プロジェクトを Windows ファイルシステム上、つまり `/mnt/c/` 配下に置く必要がある場合は WSL1 を使ってください。
+コンパイル時の性能を重視し、Windows 側の干渉による問題を減らしたい場合は、WSL2 を使い、プロジェクトを Linux ファイルシステム上、つまり `~/` 配下に置いてください。
+
+## WSL のインストール
+
+1. [Windows PowerShell を管理者として開き](https://i.imgur.com/QKmVbP9.png)、次のコマンドを実行します。PowerShell では右クリックまたは Shift+Insert で貼り付けできます。
 
     ```powershell
-	wsl --install -d Ubuntu --enable-wsl1
+    wsl --install -d Ubuntu --enable-wsl1
     ```
 
-2. Once the process finishes, restart your machine.
+2. 処理が終わったら PC を再起動します。
 
 ### WSL1
-3. Open Windows Powershell **as Administrator** again (after restarting), and run the following command to configure Ubuntu to use WSL1.
+
+3. 再起動後、もう一度 Windows PowerShell を管理者として開き、Ubuntu を WSL1 で使うように次のコマンドを実行します。
 
     ```powershell
     wsl --set-version Ubuntu 1
     ```
+
 ### WSL2
-3. Open Windows Powershell **as Administrator** again (after restarting), and run the following command to configure Ubuntu to use WSL2.
+
+3. 再起動後、もう一度 Windows PowerShell を管理者として開き、Ubuntu を WSL2 で使うように次のコマンドを実行します。
 
     ```powershell
     wsl --set-version Ubuntu 2
     ```
 
     <details>
-        <summary><i>Note...</i></summary>
+        <summary><i>補足...</i></summary>
 
-    >   WSL may open automatically after restarting, but you can ignore it for now.
+    > 再起動後に WSL が自動で開く場合がありますが、この時点では無視してかまいません。
     </details>
 
-## Installing dependencies
-Some tips before proceeding:
-- In WSL, Copy and Paste is either done via
-    - **right-click** (selection + right click to Copy, right click with no selection to Paste)
-    - **Ctrl+Shift+C/Ctrl+Shift+V** (enabled by right-clicking the title bar, going to Properties, then checking the checkbox next to "Use Ctrl+Shift+C/V as Copy/Paste").
-- Some of the commands that you'll run will ask for your WSL password and/or confirmation to perform the stated action. This is to be expected, just enter your WSL password and/or the yes action when necessary.
+## 依存パッケージのインストール
 
-1. Open **Ubuntu** (e.g. using Search).
-2. WSL/Ubuntu will set up its own installation when it runs for the first time. Once WSL/Ubuntu finishes installing, it will ask for a username and password (to be input in).
+作業前の補足:
+
+- WSL でのコピーと貼り付けは、次のどちらかで行います。
+    - **右クリック**: 選択して右クリックでコピー、未選択で右クリックすると貼り付け。
+    - **Ctrl+Shift+C/Ctrl+Shift+V**: タイトルバーを右クリックしてプロパティを開き、「Ctrl+Shift+C/V をコピー/貼り付けとして使う」を有効にします。
+- 実行するコマンドによっては、WSL のパスワードや確認入力を求められます。必要に応じて WSL のパスワード、または yes に相当する入力を行ってください。
+
+1. 検索などから **Ubuntu** を開きます。
+2. WSL/Ubuntu は初回起動時に独自のセットアップを行います。完了すると、ユーザー名とパスワードの入力を求められます。
+
     <details>
-        <summary><i>Note...</i></summary>
+        <summary><i>補足...</i></summary>
 
-    >   When typing in the password, there will be no visible response, but the terminal will still read in input.
+    > パスワード入力中は画面に文字が表示されませんが、入力自体は受け付けられています。
     </details>
 
-3. Update WSL/Ubuntu before continuing. Do this by running the following command. These commands will likely take a long time to finish:
+3. 続行する前に WSL/Ubuntu を更新します。次のコマンドを実行してください。完了まで時間がかかる場合があります。
 
     ```bash
     sudo apt update && sudo apt upgrade
     ```
 
-4. Certain packages are required to build pokeemerald Expansion. Install these packages by running the following command:
+4. pokeemerald Expansion のビルドに必要なパッケージをインストールします。
 
     ```bash
     sudo apt install build-essential binutils-arm-none-eabi gcc-arm-none-eabi libnewlib-arm-none-eabi git libpng-dev python3
     ```
 
-## Choosing a location to store pokeemerald Expansion, WSL1
-WSL has its own file system that's not natively accessible from Windows, but Windows files *are* accessible from WSL. So you're going to want to store pokeemerald Expansion within Windows.
+## pokeemerald Expansion の保存場所を選ぶ WSL1
 
-For example, say you want to store pokeemerald Expansion in **C:\Users\\_\<user>_\Desktop\decomps**. First, ensure that the folder already exists. Then, enter this command to **change directory** to said folder, where *\<user>* is your **Windows** username:
+WSL には Windows から直接扱いにくい独自のファイルシステムがありますが、WSL から Windows のファイルにはアクセスできます。そのため WSL1 では pokeemerald Expansion を Windows 側に置くことになります。
+
+たとえば pokeemerald Expansion を **C:\Users\\_\<user>_\Desktop\decomps** に置きたい場合、まずそのフォルダが存在することを確認してください。その後、次のコマンドでそのフォルダへ移動します。*\<user>* は **Windows** のユーザー名に置き換えてください。
 
 ```bash
 cd /mnt/c/Users/<user>/Desktop/decomps
 ```
 
 <details>
-    <summary><i>Notes...</i></summary>
+    <summary><i>補足...</i></summary>
 
->   Note 1: The Windows C:\ drive is called /mnt/c/ in WSL.
->   Note 2: If the path has spaces, then the path must be wrapped with quotations, e.g. `cd "/mnt/c/users/<user>/Desktop/decomp folder"`.
->   Note 3: Windows path names are case-insensitive so adhering to capitalization isn't needed
+> 補足 1: Windows の C:\ ドライブは WSL では `/mnt/c/` です。
+> 補足 2: パスにスペースが含まれる場合は、`cd "/mnt/c/users/<user>/Desktop/decomp folder"` のように引用符で囲んでください。
+> 補足 3: Windows のパス名は大文字小文字を区別しないため、厳密な大文字小文字は不要です。
 </details>
 
-## Choosing a location to store pokeemerald Expansion, WSL2
-WSL has its own file system that's not natively accessible from Windows, but Windows files *are* accessible from WSL. But accessing files on the Windows file system with WSL2 is very slow, so you're going to want to store pokeemerald Expansion within WSL2.
-To access the files on the WSL filesystem from Windowsm, you have to open the WSL filesystem as a network attached storage in the file explorer, it should be at the bottom of the left sidebar as "Ubuntu".
+## pokeemerald Expansion の保存場所を選ぶ WSL2
 
-Thus you're going to make sure that you're in the WSL filesystem, then create the folder for decomps if it doesn't already exist, then move into that folder.
+WSL には Windows から直接扱いにくい独自のファイルシステムがありますが、WSL から Windows のファイルにはアクセスできます。ただし WSL2 から Windows ファイルシステム上のファイルへアクセスすると非常に遅いため、pokeemerald Expansion は WSL2 側に置いてください。
+
+Windows から WSL ファイルシステム上のファイルへアクセスするには、ファイルエクスプローラーで WSL ファイルシステムをネットワークストレージとして開きます。左サイドバーの下の方に "Ubuntu" として表示されます。
+
+そのため、WSL ファイルシステム内にいることを確認し、必要なら decomps フォルダを作成して、そのフォルダへ移動します。
 
 ```bash
 cd ~/

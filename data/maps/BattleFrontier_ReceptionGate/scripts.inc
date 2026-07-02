@@ -215,13 +215,19 @@ BattleFrontier_ReceptionGate_EventScript_ChooseRuleToLearnAbout::
 	waitmessage
 	multichoice 15, 0, MULTI_FRONTIER_RULES, FALSE
 	switch VAR_RESULT
-	case 0, BattleFrontier_ReceptionGate_EventScript_LevelMode
+	case 0, BattleFrontier_ReceptionGate_EventScript_UltraHelp
 	case 1, BattleFrontier_ReceptionGate_EventScript_Level50
 	case 2, BattleFrontier_ReceptionGate_EventScript_OpenLevel
 	case 3, BattleFrontier_ReceptionGate_EventScript_MonEntry
 	case 4, BattleFrontier_ReceptionGate_EventScript_HoldItems
 	case 5, BattleFrontier_ReceptionGate_EventScript_ExitRulesGuide
 	case MULTI_B_PRESSED, BattleFrontier_ReceptionGate_EventScript_ExitRulesGuide
+	end
+
+BattleFrontier_ReceptionGate_EventScript_UltraHelp::
+	setvar VAR_0x8004, 0
+	special ultra_help
+	goto BattleFrontier_ReceptionGate_EventScript_ChooseRuleToLearnAbout
 	end
 
 BattleFrontier_ReceptionGate_EventScript_LevelMode::

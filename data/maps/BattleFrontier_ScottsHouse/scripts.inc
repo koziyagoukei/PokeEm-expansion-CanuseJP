@@ -219,37 +219,37 @@ BattleFrontier_ScottsHouse_Text_WelcomeToBattleFrontier:
 	.string "finally given shape to my dream.$"
 
 BattleFrontier_ScottsHouse_Text_HowMuchEffortItTookToMakeReal:
-	.string "On reflection, it was a terribly long\n"
-	.string "journey...\p"
-	.string "I left home alone on a quest to find\n"
-	.string "strong TRAINERS.\p"
-	.string "No one can imagine how much effort\n"
-	.string "or time it took to make this real.$"
+	.string "{JPN}おもえば ほんとうに ながい\n"
+	.string "たびだった...\p"
+	.string "つよい トレーナーを さがすため\n"
+	.string "ひとり いえを とびだしてね\p"
+	.string "ここを じつげんするまでに\n"
+	.string "どれだけの じかんと どりょくが\l"
+	.string "かかったか わからないよ$"
 
 BattleFrontier_ScottsHouse_Text_HaveThisAsMementoOfOurPathsCrossing:
-	.string "But that's all in the past.\n"
-	.string "No point dwelling on that!\p"
-	.string "All I want for you is to enjoy battling\n"
-	.string "to your heart's content here.\p"
-	.string "{PLAYER}{KUN}, I want you to have this\n"
-	.string "as a memento for all the time our\l"
-	.string "paths crossed on our journeys.$"
+	.string "{JPN}でも それは もう むかしの はなし\n"
+	.string "いつまでも こだわることじゃない!\p"
+	.string "きみには ここで こころゆくまで\n"
+	.string "バトルを たのしんでほしいんだ\p"
+	.string "{PLAYER}{KUN} たびのなかで\n"
+	.string "なんども であった きねんに\l"
+	.string "これを うけとってくれ$"
 
 BattleFrontier_ScottsHouse_Text_ObtainedXBattlePoints:
-	.string "{PLAYER} obtained\n"
-	.string "{STR_VAR_1} Battle Point(s).$"
+	.string "{JPN}{PLAYER}は\n"
+	.string "{STR_VAR_1}BPを てにいれた$"
 
 BattleFrontier_ScottsHouse_Text_ExplainBattlePoints:
-	.string "SCOTT: You can check your Battle\n"
-	.string "Points on your FRONTIER PASS.\p"
-	.string "The more success you have here at\n"
-	.string "the BATTLE FRONTIER, the more Battle\l"
-	.string "Points you will collect.\p"
-	.string "Use your Battle Points the way you\n"
-	.string "see fit, like trading them for items.$"
+	.string "{JPN}エニシダ: バトルポイントは\n"
+	.string "フロンティアパスで かくにんできる\p"
+	.string "バトルフロンティアで かつやくすれば\n"
+	.string "それだけ たくさん たまっていくぞ\p"
+	.string "どうぐと こうかんするなど\n"
+	.string "すきなように つかってくれ$"
 
 BattleFrontier_ScottsHouse_Text_ExpectingGreatThings:
-	.string "I'm expecting great things from you!$"
+	.string "{JPN}きみには おおいに きたいしているよ!$"
 
 BattleFrontier_ScottsHouse_Text_WhyIGoSeekingTrainers:
 	.string "SCOTT: Every TRAINER is an individual.\n"
@@ -344,4 +344,3 @@ BattleFrontier_ScottsHouse_Text_ExpectingToHearEvenGreaterThings:
 BattleFrontier_ScottsHouse_Text_ComeBackForThisLater:
 	.string "Oops, well, if you have too much\n"
 	.string "stuff, come back for this later.$"
-

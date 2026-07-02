@@ -1,5 +1,6 @@
-# Instructions for other distributions
-1. Try to find the required software in its repositories:
+# その他のディストリビューション向け手順
+
+1. 使用しているディストリビューションのリポジトリで、次のソフトウェアを探してインストールしてください。
     - `gcc`
     - `g++`
     - `arm-none-eabi-gcc`
