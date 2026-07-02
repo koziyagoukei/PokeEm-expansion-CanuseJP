@@ -20,6 +20,7 @@
 #include "constants/maps.h"
 #include "constants/pokemon.h"
 #include "constants/easy_chat.h"
+#include "constants/fame_checker.h"
 #include "constants/trainer_hill.h"
 #include "constants/trainer_tower.h"
 #include "constants/items.h"
@@ -1091,6 +1092,13 @@ struct Bag
     struct ItemSlot berries[BAG_BERRIES_COUNT];
 };
 
+struct FameCheckerSaveData
+{
+    u8 pickState;
+    u8 flavorTextFlags;
+    u8 unk_0_E;
+};
+
 struct SaveBlock1
 {
     /*0x00*/ struct Coords16 pos;
@@ -1116,8 +1124,9 @@ struct SaveBlock1
     /*0x560 -> 0x848 is bag storage*/
     /*0x560*/ struct Bag bag;
     /*0x848*/ struct Pokeblock pokeblocks[POKEBLOCKS_COUNT];
+    /*0x988*/ struct FameCheckerSaveData fameChecker[NUM_FAMECHECKER_PERSONS];
 #if FREE_EXTRA_SEEN_FLAGS_SAVEBLOCK1 == FALSE
-    /*0x988*/ u8 filler1[0x34]; // Previously Dex Flags, feel free to remove.
+    /*0x9B8*/ u8 filler1[0x4]; // Previously Dex Flags, remainder kept for layout compatibility.
 #endif //FREE_EXTRA_SEEN_FLAGS_SAVEBLOCK1
     /*0x9BC*/ u16 berryBlenderRecords[3];
     /*0x9C2*/ u8 unused_9C2[2];

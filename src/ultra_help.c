@@ -20,12 +20,6 @@
 
 enum
 {
-    ULTRA_HELP_TOPIC_FRONTIER_RULES,
-    ULTRA_HELP_TOPIC_COUNT
-};
-
-enum
-{
     WIN_HELP,
 };
 
@@ -57,6 +51,8 @@ static void ClearTasksAndGraphicalStructs(void);
 EWRAM_DATA static u8 *sUltraHelpTilemapBuffer = NULL;
 EWRAM_DATA static const struct UltraHelpTopic *sUltraHelpTopic = NULL;
 EWRAM_DATA static u8 sUltraHelpPage = 0;
+EWRAM_DATA static u16 sUltraHelpTopicId = ULTRA_HELP_TOPIC_FRONTIER_RULES;
+EWRAM_DATA static MainCallback sUltraHelpExitCallback = NULL;
 
 static const struct BgTemplate sUltraHelpBgTemplates[] =
 {
@@ -93,28 +89,28 @@ static const u8 sUltraHelpTextColors[] =
     TEXT_COLOR_LIGHT_GRAY
 };
 
-static const u8 sText_CannotEnterPokemonTitle1[] = _("{JPN}さんか できない ポケモン");
+static const u8 sText_CannotEnterPokemonTitle1[] = _("{JPN}さんかできない ポケモン");
 static const u8 sText_CannotEnterPokemonBody1[] = _(
-    "{JPN}ミュウツー ホウオウ ルギア グラードン カイオーガ\n"
-    "レックウザ ディアルガ パルキア ギラティナ レシラム\n"
-    "ゼクロム キュレム ゼルネアス イベルタル ジガルデ\n"
-    "ソルガレオ ルナアーラ ネクロズマ ザシアン ザマゼンタ\n"
-    "ムゲンダイナ パドレックス コライドン ミライドン テラパゴス");
+    "{JPN}ミュウツー ホウオウ ルギア\n"
+    "グラードン カイオーガ\n"
+    "レックウザ ディアルガ パルキア\n"
+    "ギラティナ レシラム ゼクロム\n"
+    "キュレム ゼルネアス イベルタル");
 
-static const u8 sText_CannotEnterPokemonTitle2[] = _("{JPN}さんか できない ポケモン");
+static const u8 sText_CannotEnterPokemonTitle2[] = _("{JPN}さんかできない ポケモン");
 static const u8 sText_CannotEnterPokemonBody2[] = _(
-    "{JPN}ミュウ セレビィ ジラーチ デオキシス マナフィ\n"
-    "フィオネ ダークライ シェイミ アルセウス ビクティニ\n"
-    "ケルディオ メロエッタ ゲノセクト ディアンシー フーパ\n"
-    "ボルケニオン マギアナ マーシャドー ゼラオラ メルタン\n"
-    "メルメタル ザルード モモワロウ コスモッグ コスモウム");
+    "{JPN}ジガルデ ソルガレオ ルナアーラ\n"
+    "ネクロズマ ザシアン ザマゼンタ\n"
+    "ムゲンダイナ コライドン\n"
+    "ミライドン テラパゴス\n"
+    "そのほか とくべつな ポケモン");
 
 static const u8 sText_CannotUseItemsTitle[] = _("{JPN}つかえない アイテム");
 static const u8 sText_CannotUseItemsBody[] = _(
-    "{JPN}こころのしずく おなじどうぐ\n"
-    "フロンティアないのルールによっては\n"
-    "もちこめなかったり\n"
-    "つかえない ことがあります");
+    "{JPN}こころのしずく など\n"
+    "フロンティアの ルールで\n"
+    "もちこめない もちものが\n"
+    "あります");
 
 static const struct UltraHelpPage sUltraHelpPages_FrontierRules[] =
 {
@@ -158,8 +154,17 @@ static void MainCB2_UltraHelp(void)
 
 void ultra_help(void)
 {
+    StartUltraHelp(gSpecialVar_0x8004, CB2_ReturnToFieldContinueScriptPlayMapMusic);
+}
+
+void StartUltraHelp(u16 topic, MainCallback exitCallback)
+{
     sUltraHelpPage = 0;
     sUltraHelpTopic = NULL;
+    if (topic >= ULTRA_HELP_TOPIC_COUNT)
+        topic = ULTRA_HELP_TOPIC_FRONTIER_RULES;
+    sUltraHelpTopicId = topic;
+    sUltraHelpExitCallback = exitCallback;
     SetVBlankCallback(NULL);
     SetMainCallback2(CB2_InitUltraHelp);
 }
@@ -270,10 +275,15 @@ static void Task_UltraHelpExit(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
-        SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
+        MainCallback exitCallback = sUltraHelpExitCallback;
+        if (exitCallback == NULL)
+            exitCallback = CB2_ReturnToFieldContinueScriptPlayMapMusic;
+        SetMainCallback2(exitCallback);
         Free(sUltraHelpTilemapBuffer);
         sUltraHelpTilemapBuffer = NULL;
         sUltraHelpTopic = NULL;
+        sUltraHelpTopicId = ULTRA_HELP_TOPIC_FRONTIER_RULES;
+        sUltraHelpExitCallback = NULL;
         ClearStdWindowAndFrame(WIN_HELP, FALSE);
         FreeAllWindowBuffers();
         DestroyTask(taskId);
@@ -282,7 +292,7 @@ static void Task_UltraHelpExit(u8 taskId)
 
 static void DrawUltraHelpPage(void)
 {
-    u16 topic = gSpecialVar_0x8004;
+    u16 topic = sUltraHelpTopicId;
 
     if (topic >= ULTRA_HELP_TOPIC_COUNT)
         topic = ULTRA_HELP_TOPIC_FRONTIER_RULES;

@@ -44,6 +44,7 @@
 #include "string_util.h"
 #include "player_pc.h"
 #include "field_specials.h"
+#include "fame_checker.h"
 #include "berry_powder.h"
 #include "mystery_gift.h"
 #include "union_room_chat.h"
@@ -196,6 +197,7 @@ void NewGameInitData(void)
     PlayTimeCounter_Reset();
     ClearPokedexFlags();
     InitEventData();
+    ResetFameChecker();
     ClearTVShowData();
     ResetGabbyAndTy();
     ClearSecretBases();
