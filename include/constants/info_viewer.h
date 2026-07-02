@@ -1,0 +1,19 @@
+#ifndef GUARD_CONSTANTS_INFO_VIEWER_H
+#define GUARD_CONSTANTS_INFO_VIEWER_H
+
+#define INFO_FRONTIER_RULES  0
+#define INFO_BANNED_MONS     1
+#define INFO_GIMMICK_HELP    2
+#define INFO_DIARY_TEST      3
+#define INFO_MONOLOGUE_TEST  4
+#define INFO_CHOICE_TEST     5
+#define INFO_COUNT           6
+
+#define INFO_VIEWER_CLOSE    0xFFFE
+#define INFO_VIEWER_BACK     0xFFFF
+
+// Backward-compatible names for the old ultra_help API.
+#define ULTRA_HELP_TOPIC_FRONTIER_RULES INFO_FRONTIER_RULES
+#define ULTRA_HELP_TOPIC_COUNT          INFO_COUNT
+
+#endif // GUARD_CONSTANTS_INFO_VIEWER_H
