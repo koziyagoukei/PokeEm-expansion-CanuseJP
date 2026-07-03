@@ -294,208 +294,97 @@ BattleFrontier_ReceptionGate_EventScript_ExitFrontierPassGuide::
 	end
 
 BattleFrontier_ReceptionGate_Text_FirstTimeHereThisWay:
-	.string "{JPN}こちらは はじめて ですか？\n"
-	.string "どうぞ こちらへ！$"
+	.string "{JPN}はじめての おきゃくさまですね!\nこちらへ どうぞ!$"
 
 BattleFrontier_ReceptionGate_Text_WelcomeToBattleFrontier:
-	.string "{JPN}ポケモンバトルの さいぜんせん！\n"
-	.string "バトルフロンティアへ ようこそ！$"
+	.string "{JPN}ポケモンバトルの さいぜんせん!\nバトルフロンティアへ ようこそ!$"
 
 BattleFrontier_ReceptionGate_Text_IssueFrontierPass:
-	.string "{JPN}はじめての かたには\n"
-	.string "フロンティアパスを おわたしします\p"
-	.string "バトルフロンティアの しせつで\n"
-	.string "つかう パスです\p"
-	.string "どうぞ！$"
+	.string "{JPN}はじめての おきゃくさまには\nバトルフロンティアの なかで\lごりよう いただける フロンティアパスを\lはっこうして おります!\pどうぞ おうけとり ください!$"
 
 BattleFrontier_ReceptionGate_Text_ObtainedFrontierPass:
-	.string "{JPN}{PLAYER}は\n"
-	.string "フロンティアパスを てにいれた$"
+	.string "{JPN}{PLAYER}は\nフロンティアパスを もらった!$"
 
 BattleFrontier_ReceptionGate_Text_PlacedTrainerCardInFrontierPass:
-	.string "{JPN}{PLAYER}は トレーナーカードを\n"
-	.string "フロンティアパスに いれた$"
+	.string "{JPN}{PLAYER}は トレーナーカードを\nフロンティアパスに いれかえた!$"
 
 BattleFrontier_ReceptionGate_Text_EnjoyBattleFrontier:
-	.string "{JPN}バトルフロンティアを\n"
-	.string "こころゆくまで おたのしみください！$"
+	.string "{JPN}それでは バトルフロンティアを\nぞんぶんに おたのしみ ください!$"
 
 BattleFrontier_ReceptionGate_Text_IfItIsntPlayerYouCame:
-	.string "{JPN}？？？: おお {PLAYER}{KUN}！\n"
-	.string "ここまで きてくれたか！$"
+	.string "{JPN}???『やあ きて くれたんだね\n{PLAYER}{KUN}!$"
 
 BattleFrontier_ReceptionGate_Text_OhMrScottGoodDay:
-	.string "{JPN}ガイド: あっ！ エニシダさん！\n"
-	.string "こんにちは！$"
+	.string "{JPN}うけつけ『あっ エニシダさま!\nおつかれさまです!$"
 
 BattleFrontier_ReceptionGate_Text_ScottGreatToSeeYouHere:
-	.string "{JPN}エニシダ: よく きてくれた！\n"
-	.string "ほんとうに うれしいぞ！\p"
-	.string "ゆっくり いろいろな しせつを\n"
-	.string "みていって くれ\p"
-	.string "もちろん しょうぶの しんずいも\n"
-	.string "あじわって ほしい！\p"
-	.string "わしの いえも ここに あるから\n"
-	.string "ひまなら よってくれよ！$"
+	.string "{JPN}エニシダ『きみが きてくれて\nとっても うれしいよ!\pぜひ ゆっくりと そして じっくりと\nポケモンしょうぶの しんずいを\lあじわって いって くれ!\pわたしの へやも あるから\nひまが あるときに たずねて きてくれよ!$"
 
 BattleFrontier_ReceptionGate_Text_YourGuideToFacilities:
-	.string "{JPN}バトルフロンティアの\n"
-	.string "しせつを ごあんない します$"
+	.string "{JPN}こちらでは バトルフロンティアに ある\nさまざまな しせつの\lごあんないを いたします!$"
 
 BattleFrontier_ReceptionGate_Text_LearnAboutWhich2:
-	.string "{JPN}どれに ついて ききますか？$"
+	.string "{JPN}どの せつめいが ききたいですか?$"
 
 BattleFrontier_ReceptionGate_Text_BattleTowerInfo:
-	.string "{JPN}バトルフロンティアの\n"
-	.string "シンボルとも いえる おおきな タワーです\p"
-	.string "シングル ダブル マルチ\n"
-	.string "つうしんマルチの 4つの\l"
-	.string "バトルルームが あります$"
+	.string "{JPN}バトルフロンティアの シンボル とも\nいえる きょだいな とう です\pこちらの たてもの では シングル\nダブル マルチ つうしんマルチの\l4つの バトルルームで たたかいを\lたのしむことが できます!$"
 
 BattleFrontier_ReceptionGate_Text_BattleDomeInfo:
-	.string "{JPN}バトルドームは\n"
-	.string "おおきな タマゴのような たてものです\p"
-	.string "ここでは バトルトーナメントが\n"
-	.string "ひらかれます\p"
-	.string "シングルと ダブルの\n"
-	.string "2つの コースが あります$"
+	.string "{JPN}バトルドームは たまごの ような\nかたちをした おおきな たてものです\pこちらでは バトルトーナメント という\nイベントが かいさいされて います\pなお バトルトーナメントには\nシングルバトルよう ダブルバトルようの\l2つの コースが あります!$"
 
 BattleFrontier_ReceptionGate_Text_BattlePalaceInfo:
-	.string "{JPN}バトルパレスは\n"
-	.string "みぎがわに ある あかい たてものです\p"
-	.string "シングルと ダブルの\n"
-	.string "2つの バトルホールが あります$"
+	.string "{JPN}バトルパレスは バトルフロンティアの\nみぎはじに ある あかい たてものです\pこちらの たてもの では\nシングル ダブルの 2つの\lバトルホールへの ちょうせんが できます$"
 
 BattleFrontier_ReceptionGate_Text_BattleArenaInfo:
-	.string "{JPN}バトルアリーナは\n"
-	.string "まんなかより みぎに ある\l"
-	.string "どうじょうのような たてものです\p"
-	.string "ここでは 3ターンで しょうぶする\n"
-	.string "イベントが おこなわれます$"
+	.string "{JPN}バトルアリーナは バトルフロンティアの\nちゅうおう みぎに いちする\lどうじょうの ような たてものです\pこちらでは かちぬきチームバトル という\nイベントを かいさい しております!$"
 
 BattleFrontier_ReceptionGate_Text_BattleFactoryInfo:
-	.string "{JPN}バトルファクトリーは\n"
-	.string "ここから いちばん ちかい おおきな たてものです\p"
-	.string "ここでは レンタルポケモンを\n"
-	.string "こうかんしながら たたかいます\p"
-	.string "シングルと ダブルの\n"
-	.string "2つの コースが あります$"
+	.string "{JPN}バトルファクトリーは ここをでて いちばん\nちかくにある おおきな ビルに なります\pこちらでは バトルトレード という\nイベントを かいさいして おります\pなお バトルトレードには\nシングルバトルよう ダブルバトルようの\l2つの コースが ようい されています!$"
 
 BattleFrontier_ReceptionGate_Text_BattlePikeInfo:
-	.string "{JPN}バトルチューブは\n"
-	.string "まんなかより ひだりに ある\l"
-	.string "ポケモンの かたちをした たてものです\p"
-	.string "3つの へやから 1つを えらんで\n"
-	.string "すすんでいきます$"
+	.string "{JPN}バトルチューブは バトルフロンティアの\nちゅうおう ひだりに いちする\lポケモンの かたちを した たてものです\pこちらでは バトルゲーム という\nイベントを かいさい しております!$"
 
 BattleFrontier_ReceptionGate_Text_BattlePyramidInfo:
-	.string "{JPN}バトルピラミッドは\n"
-	.string "とても おおきな ピラミッドです\p"
-	.string "くらい フロアを すすんで\n"
-	.string "ちょうじょうを めざします$"
+	.string "{JPN}バトルピラミッドは きょだいな\nピラミッドの かたちをした たてものです\pこちらでは バトルアドベンチャー という\nイベントを かいさい しております!$"
 
 BattleFrontier_ReceptionGate_Text_RankingHallInfo:
-	.string "{JPN}ランキングホールは\n"
-	.string "バトルタワーの ちかくに あります\p"
-	.string "バトルフロンティアに いどんだ\n"
-	.string "トレーナーたちの すばらしい\l"
-	.string "きろくを みることが できます$"
+	.string "{JPN}ランキングホールは\nバトルタワーの ちかくに あります\pこちらは バトルフロンティアで\nたたかった トレーナーたちの\lもっとも すばらしい きろくを\lみることが できます$"
 
 BattleFrontier_ReceptionGate_Text_ExchangeCornerInfo:
-	.string "{JPN}こうかんサービスコーナーは\n"
-	.string "バトルタワーの ちかくに あります\p"
-	.string "バトルフロンティアで ためた\n"
-	.string "バトルポイントを すてきな\l"
-	.string "しょうひんと こうかんできます$"
+	.string "{JPN}ひきかえサービス コーナーは\nバトルタワーの ちかくに あります\pこちらでは バトルフロンティアの\nなかで ためた バトルポイントを\lすてきな けいひんと\lこうかんする ことが できます!$"
 
 BattleFrontier_ReceptionGate_Text_YourGuideToRules:
-	.string "{JPN}バトルフロンティアの しせつに\n"
-	.string "きょうつうする きほんルールを\l"
-	.string "ごあんないします$"
+	.string "{JPN}こちらでは バトルフロンティアに ある\nすべての しせつに きょうつう した\lちょうせんの ための きほんてきな\lルールを せつめい いたします!$"
 
 BattleFrontier_ReceptionGate_Text_LearnAboutWhat:
-	.string "{JPN}なにに ついて ききますか？$"
+	.string "{JPN}どの せつめいが ききたいですか?$"
 
 BattleFrontier_ReceptionGate_Text_LevelModeInfo:
-	.string "{JPN}バトルフロンティアの しせつには\n"
-	.string "レベル50と オープンレベルの\l"
-	.string "2つの コースが あります$"
+	.string "{JPN}バトルフロンティアに ある\nすべての しせつの ちょうせんは\lおおきく レベル50の コースと\lオープンレベルの コースに わかれています$"
 
 BattleFrontier_ReceptionGate_Text_Level50Info:
-	.string "{JPN}レベル50は レベル50までの\n"
-	.string "ポケモンで ちょうせんできます\p"
-	.string "ただし あいての ポケモンは\n"
-	.string "レベル50みまんには なりません\p"
-	.string "バトルフロンティアの\n"
-	.string "きほんとなる コースです\p"
-	.string "まずは この コースに\n"
-	.string "ちょうせんしてみてください$"
+	.string "{JPN}レベル50の コースでは なまえの とおり\nレベル50までの ポケモンを\lちょうせん させることが できます\pただし レベル50より ひくい レベルの\nポケモンを つれた トレーナーが\lとうじょう することは ありません\lくれぐれも ごちゅうい ください\pなお このコースが バトルフロンティアの\nたたかいの きほんと なって いますので\lぜひ チャレンジして みてください$"
 
 BattleFrontier_ReceptionGate_Text_OpenLevelInfo:
-	.string "{JPN}オープンレベルは\n"
-	.string "ちょうせんする ポケモンの レベルに\l"
-	.string "せいげんが ありません\p"
-	.string "あいての レベルは\n"
-	.string "あなたの ポケモンに あわせて\l"
-	.string "ちょうせいされます\p"
-	.string "ただし あいての ポケモンは\n"
-	.string "レベル60みまんには なりません$"
+	.string "{JPN}オープンレベルの コースでは\nちょうせんに さんかする ポケモンの\lレベルに せいげんが ありません\pあなたの ポケモンの レベルに あわせて\nたいせんする トレーナーの ポケモンの\lレベルが かわります\pただし レベル60より ひくい レベルの\nポケモンを つれた トレーナーが\lとうじょう することは ありません$"
 
 BattleFrontier_ReceptionGate_Text_MonEntryInfo:
-	.string "{JPN}ほとんどの ポケモンは\n"
-	.string "どの しせつにも ちょうせんできます\p"
-	.string "ただし タマゴと いちぶの\n"
-	.string "ポケモンは さんかできません\p"
-	.string "ひつような ポケモンの かずは\n"
-	.string "しせつに よって ちがいます\p"
-	.string "ただし どの しせつでも\n"
-	.string "おなじ ポケモンを 2ひき いじょう\l"
-	.string "つれていくことは できません$"
+	.string "{JPN}タマゴや いちぶの れいがいを\nのぞいて ほとんどの ポケモンが\lすべての しせつに ちょうせん できます\pちょうせんの ために\nひつような ポケモンの かずは\lしせつに よって ちがいます\pただし どの しせつでも\nおなじ しゅるいの ポケモンを\l2ひき いじょう さんか させることは\lできませんので ごちゅうい ください$"
 
 BattleFrontier_ReceptionGate_Text_HoldItemsInfo:
-	.string "{JPN}バトルフロンティアの しせつでは\n"
-	.string "おなじ どうぐを もった ポケモンを\l"
-	.string "いっしょに さんかさせられません\p"
-	.string "ちょうせんする ポケモンには\n"
-	.string "それぞれ ちがう どうぐを\l"
-	.string "もたせてください$"
+	.string "{JPN}バトルフロンティアの しせつに\nポケモンを ちょうせん させるとき\pそれぞれの ポケモンが\nおなじ どうぐを もつことは できません\pちょうせん させる ポケモンには\nすべて ちがう どうぐを\lもたせて おくように してください$"
 
 BattleFrontier_ReceptionGate_Text_YourGuideToFrontierPass:
-	.string "{JPN}フロンティアパスに ついて\n"
-	.string "ごあんないします$"
+	.string "{JPN}こちらでは フロンティアパスの\nせつめいを いたします!$"
 
 BattleFrontier_ReceptionGate_Text_LearnAboutWhich1:
-	.string "{JPN}どれに ついて ききますか？$"
+	.string "{JPN}どの せつめいが ききたいですか?$"
 
 BattleFrontier_ReceptionGate_Text_SymbolsInfo:
-	.string "{JPN}バトルフロンティアには\n"
-	.string "7つの しせつが あります\p"
-	.string "じつりょくを みとめられた\n"
-	.string "トレーナーは それぞれの しせつで\l"
-	.string "シンボルを もらえることがあります\p"
-	.string "シンボルを えるには\n"
-	.string "トレーナーに れんぞくで かったり\l"
-	.string "イベントで なんども かつ ひつようが\l"
-	.string "あります\p"
-	.string "シンボルを えるのは かんたんでは\n"
-	.string "ありません がんばってください！$"
+	.string "{JPN}バトルフロンティアの 7つの しせつで\nつよさを みとめられた トレーナーが\lそれぞれの しせつの シンボルを\lもらえることが あります\pシンボルを もらう ためには\nなんにんも トレーナーを かちぬいたり\lなんども せいは したり……\pなかなか たいへんな みちのりですが\nぜひ がんばって くださいね!$"
 
 BattleFrontier_ReceptionGate_Text_RecordedBattleInfo:
-	.string "{JPN}フロンティアパスには\n"
-	.string "バトルを 1つ きろくできます\p"
-	.string "ともだちとの バトルを\n"
-	.string "きろくすることも できます\p"
-	.string "また バトルチューブと\n"
-	.string "バトルピラミッドを のぞく\l"
-	.string "バトルフロンティアの しょうぶも\l"
-	.string "きろくできます\p"
-	.string "バトルの あとに\n"
-	.string "きろくするか えらべます$"
+	.string "{JPN}あなたの たいせんを ひとつだけ\nパスに きろくする ことが できます\pおともだち との たいせんか\nバトルチューブ バトルピラミッド いがいの\lバトルフロンティアでの\lたいせんが きろくできます\pたいせんが おわった ときに\nきろく するか どうかを きめられます$"
 
 BattleFrontier_ReceptionGate_Text_BattlePointsInfo:
-	.string "{JPN}バトルポイントは\n"
-	.string "バトルフロンティアで すぐれた\l"
-	.string "しょうぶをした トレーナーに\l"
-	.string "おくられる ポイントです\p"
-	.string "こうかんサービスコーナーで\n"
-	.string "しょうひんと こうかんできます$"
+	.string "{JPN}バトルポイントは\nバトルフロンティアで すばらしい\lたたかいを した トレーナーに\lあたえられる ごほうびです\pためた ポイントは ひきかえサービスで\nしょうひんと ひきかえることが できます$"
