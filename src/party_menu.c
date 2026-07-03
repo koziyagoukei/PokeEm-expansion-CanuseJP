@@ -68,6 +68,7 @@
 #include "text.h"
 #include "text_window.h"
 #include "trade.h"
+#include "tv.h"
 #include "union_room.h"
 #include "window.h"
 #include "constants/battle.h"
@@ -112,6 +113,7 @@ enum {
     MENU_CATALOG_MOWER,
     MENU_CHANGE_FORM,
     MENU_CHANGE_ABILITY,
+    MENU_NICKNAME,
     MENU_FIELD_MOVES
 };
 
@@ -187,7 +189,7 @@ struct PartyMenuInternal
     u32 spriteIdCancelPokeball:7;
     u32 messageId:14;
     u8 windowId[3];
-    u8 actions[8];
+    u8 actions[MAX_MON_MOVES + 5];
     u8 numActions;
     // In vanilla Emerald, only the first 0xB0 hwords (0x160 bytes) are actually used.
     // However, a full 0x100 hwords (0x200 bytes) are allocated.
@@ -489,6 +491,10 @@ static void CursorCb_CatalogFan(u8);
 static void CursorCb_CatalogMower(u8);
 static void CursorCb_ChangeForm(u8);
 static void CursorCb_ChangeAbility(u8);
+static void CursorCb_Nickname(u8);
+static bool32 CanRenameSelectedPartyMon(void);
+static void CB2_ChangeSelectedPartyMonNickname(void);
+static void CB2_ReturnToPartyMenuFromNamingScreen(void);
 void TryItemHoldFormChange(struct Pokemon *mon, s8 slotId, enum BattleTrainer trainer);
 static void ShowMoveSelectWindow(u8 slot);
 static void Task_HandleWhichMoveInput(u8 taskId);
@@ -517,6 +523,7 @@ static const u8 sText_doneText[] = _("{STR_VAR_1}の とくせいは\n{STR_VAR_2
 static const u8 sText_BasePointsResetToZero[] = _("{STR_VAR_1}の きそポイントが\nすべて 0に なった！{PAUSE_UNTIL_PRESS}");
 static const u8 sText_CannotSendMonToBoxHM[] = _("ひでんわざを おぼえているので\nボックスへ おくれません。{PAUSE_UNTIL_PRESS}");
 static const u8 sText_CannotSendMonToBoxPartner[] = _("あなたの ポケモンでは ないので\nボックスへ おくれません。{PAUSE_UNTIL_PRESS}");
+static const u8 sText_CannotRenameMon[] = _("{JPN}その ポケモンの なまえは\nかえられません{PAUSE_UNTIL_PRESS}");
 
 static const u8 sText_EnterPartyRoamerParkPrompt[] = _("{JPN}「{PLAYER}」の パソコンへ \nせつぞくしますか？");
 
@@ -3036,6 +3043,8 @@ static void SetPartyMonFieldSelectionActions(struct Pokemon *mons, u8 slotId)
 
     if (!InBattlePike())
     {
+        if (P_SUMMARY_SCREEN_RENAME)
+            AppendToList(sPartyMenuInternal->actions, &sPartyMenuInternal->numActions, MENU_NICKNAME);
         if (GetMonData(&mons[1], MON_DATA_SPECIES) != SPECIES_NONE)
             AppendToList(sPartyMenuInternal->actions, &sPartyMenuInternal->numActions, MENU_SWITCH);
         if (ItemIsMail(GetMonData(&mons[slotId], MON_DATA_HELD_ITEM)))
@@ -3233,6 +3242,58 @@ void CB2_ReturnToPartyMenuFromSummaryScreen(void)
     gPaletteFade.bufferTransferDisabled = TRUE;
     gPartyMenu.slotId = gLastViewedMonIndex;
     InitPartyMenu(gPartyMenu.menuType, KEEP_PARTY_LAYOUT, gPartyMenu.action, TRUE, PARTY_MSG_DO_WHAT_WITH_MON, Task_TryCreateSelectionWindow, gPartyMenu.exitCallback);
+}
+
+static bool32 CanRenameSelectedPartyMon(void)
+{
+    u8 otName[PLAYER_NAME_LENGTH + 1];
+    struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][gPartyMenu.slotId];
+
+    if (!P_SUMMARY_SCREEN_RENAME)
+        return FALSE;
+    if (GetMonData(mon, MON_DATA_IS_EGG))
+        return FALSE;
+    if (GetMonData(mon, MON_DATA_LANGUAGE) != GAME_LANGUAGE)
+        return FALSE;
+    if (GetPlayerIDAsU32() != GetMonData(mon, MON_DATA_OT_ID))
+        return FALSE;
+
+    GetMonData(mon, MON_DATA_OT_NAME, otName);
+    if (StringCompare(gSaveBlock2Ptr->playerName, otName) != 0)
+        return FALSE;
+
+    return TRUE;
+}
+
+static void CB2_ReturnToPartyMenuFromNamingScreen(void)
+{
+    SetBoxMonData(GetSelectedBoxMonFromPcOrParty(), MON_DATA_NICKNAME, gStringVar2);
+    gPaletteFade.bufferTransferDisabled = TRUE;
+    InitPartyMenu(gPartyMenu.menuType, KEEP_PARTY_LAYOUT, gPartyMenu.action, TRUE, PARTY_MSG_DO_WHAT_WITH_MON, Task_TryCreateSelectionWindow, gPartyMenu.exitCallback);
+}
+
+static void CB2_ChangeSelectedPartyMonNickname(void)
+{
+    ChangePokemonNicknameWithCallback(CB2_ReturnToPartyMenuFromNamingScreen);
+}
+
+static void CursorCb_Nickname(u8 taskId)
+{
+    if (!CanRenameSelectedPartyMon())
+    {
+        PlaySE(SE_FAILURE);
+        PartyMenuRemoveWindow(&sPartyMenuInternal->windowId[0]);
+        PartyMenuRemoveWindow(&sPartyMenuInternal->windowId[1]);
+        DisplayPartyMenuMessage(sText_CannotRenameMon, FALSE);
+        ScheduleBgCopyTilemapToVram(2);
+        gTasks[taskId].func = Task_ReturnToChooseMonAfterText;
+        return;
+    }
+
+    PlaySE(SE_SELECT);
+    gSpecialVar_0x8004 = gPartyMenu.slotId;
+    sPartyMenuInternal->exitCallback = CB2_ChangeSelectedPartyMonNickname;
+    Task_ClosePartyMenu(taskId);
 }
 
 static void CursorCb_Switch(u8 taskId)

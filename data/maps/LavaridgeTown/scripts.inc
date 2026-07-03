@@ -373,7 +373,7 @@ LavaridgeTown_Text_OhYouLikeHotSprings:
 	.string "$"
 
 LavaridgeTown_Text_BatheInHotSpringsEveryDay:
-	.string "{JPN}あたし アスナさん みたいに\nすてきで つよい ジムリーダーに なるため\lまいにち おんせんに はいってるの!おんせんに ポケモン いれると\nでんきぶろや あわぶろ はたまた\lようがんぶろに なって すごそうだわ"
+	.string "{JPN}あたし アスナさん みたいに\nすてきで つよい ジムリーダーに なるため\lまいにち おんせんに はいってるの!"
 	.string ""
 	.string "$"
 

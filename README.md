@@ -114,13 +114,15 @@ Our community uses the [ROM Hacking Hideout (RHH) Discord server](https://discor
 This fork includes a local stdio MCP wrapper for ExpansionStudio CLI.
 See [docs/ExpansionStudio_MCP.md](docs/ExpansionStudio_MCP.md) for startup commands, ChatGPT Desktop/MCP client configuration examples, safety rules, and smoke tests.
 
-# ExpansionStudio PNG to JASC-PAL
+# ExpansionStudio PNG palette tools
 
-ExpansionStudio can generate gbagfx-readable JASC-PAL `.pal` files from PNG images in the Asset tab.
-The CLI command is also available:
+ExpansionStudio can inspect PNG assets, convert PNG files to indexed PNG, and generate gbagfx-readable JASC-PAL `.pal` files from PNG images in the Asset tab.
+The CLI commands are also available:
 
 ```powershell
+python -m expansionstudio analyze-png --root "C:\path\to\pokeemerald-expansion" --png graphics/example.png --pretty
+python -m expansionstudio png-to-indexed --root "C:\path\to\pokeemerald-expansion" --png graphics/example.png --output graphics/example_indexed.png --colors 16 --pretty
 python -m expansionstudio png-to-jasc-pal --root "C:\path\to\pokeemerald-expansion" --png graphics/example.png --output graphics/example.pal --colors 16 --pretty
 ```
 
-Supported palette sizes are `16`, `224`, and `256`. If the PNG uses more colors than the selected size, the command fails. Missing entries are padded with `0 0 0`.
+Supported palette sizes are `16`, `224`, and `256`. Existing JASC-PAL files can be passed with `--base-pal` to prefer their palette order. `png-to-indexed` reduces colors by default when needed; use `--no-quantize` to fail instead. Missing JASC-PAL entries are padded with `0 0 0`.

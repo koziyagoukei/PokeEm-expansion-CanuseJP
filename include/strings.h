@@ -333,6 +333,7 @@ extern const u8 gText_NumberClear01[];
 extern const u8 gText_5MarksPokemon[];
 extern const u8 gText_UnkHeight[];
 extern const u8 gText_UnkHeightMetric[];
+extern const u8 gText_UnkHeightCentimeters[];
 extern const u8 gText_UnkWeight[];
 extern const u8 gText_UnkWeightMetric[];
 extern const u8 gText_HTHeight[];
