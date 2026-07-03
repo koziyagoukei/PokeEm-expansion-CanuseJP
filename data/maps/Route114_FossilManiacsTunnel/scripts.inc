@@ -54,38 +54,13 @@ Route114_FossilManiacsTunnel_EventScript_PlayerRevivedFossil::
 	end
 
 Route114_FossilManiacsTunnel_Text_LookInDesertForFossils:
-	.string "I'm the FOSSIL MANIAC...\n"
-	.string "I'm a nice guy who loves FOSSILS...\p"
-	.string "Do you want a FOSSIL?\p"
-	.string "But the FOSSILS around these parts all\n"
-	.string "belong to me... None for you...\p"
-	.string "If you can't bear to go without\n"
-	.string "a FOSSIL, look in a desert where there\l"
-	.string "are boulders and sand that may hide\l"
-	.string "FOSSILS...$"
+	.string "{JPN}ぼく かせきマニア……\nかせき だいすき ナイスガイ さ……\pきみも カセキが ほしいの……?\pここで みつかる カセキは\nぜんぶ ぼくの ものだから あげないよ……\pどうしても ほしければ\nカセキの みつかりそうな\lいわや すなが おおい さばくでも\lさがして みなよ……$"
 
 Route114_FossilManiacsTunnel_Text_DevonCorpRevivingFossils:
-	.string "You found a FOSSIL, didn't you?\n"
-	.string "That's so nice... It's so dreamy...\p"
-	.string "What are you going to do with that\n"
-	.string "FOSSIL?\p"
-	.string "From what I've heard, DEVON is doing\n"
-	.string "research on reviving POKEMON from\l"
-	.string "FOSSILS...\p"
-	.string "I love my FOSSILS, so I would never\n"
-	.string "do anything like that...$"
+	.string "{JPN}きみも カセキを みつけたんだね……\nすてき…… うっとり しちゃうよ……\pきみ その カセキ どうするの……?\pきいた はなしでは デボンでは\nカセキを ポケモンに いきかえらせる\lけんきゅうを している そうだよ……\pぼくは カセキが すきだから\nそんなこと しないけどね……$"
 
 Route114_FossilManiacsTunnel_Text_FossilsAreWonderful:
-	.string "FOSSILS are so... Wonderful...\n"
-	.string "It's so dreamy...$"
+	.string "{JPN}カセキって……\nすてき…… うっとり しちゃうよ……$"
 
 Route114_FossilManiacsTunnel_Text_NotSafeThatWay:
-	.string "Oh...\n"
-	.string "It's not safe that way...\p"
-	.string "I was digging away, you see...\n"
-	.string "When the whole wall collapsed...\p"
-	.string "I think there's a giant cavern\n"
-	.string "underneath now...\p"
-	.string "But I've left it alone because I don't\n"
-	.string "think there are any FOSSILS there...$"
-
+	.string "{JPN}あ……\nそっちに いくと あぶないよ……\pほりまくって いたら\nカベが くずれて しまったんだ……\pしたに おおきな くうどうが\nあるみたい だけど……\lカセキも なさそう だから\lそのままに してあるんだ……$"
