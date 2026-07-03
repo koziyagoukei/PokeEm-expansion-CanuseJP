@@ -80,3 +80,4 @@ FallarborTown_MoveRelearnersHouse_Text_ComeBackWithHeartScale:
 
 FallarborTown_MoveRelearnersHouse_Text_CantTeachEgg:
 	.string "{JPN}えっ?\nタマゴに おしえられる わざは ないよ$"
+

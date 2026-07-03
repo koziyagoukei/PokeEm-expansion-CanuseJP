@@ -29,3 +29,4 @@ VerdanturfTown_PokemonCenter_1F_Text_FaithInYourPokemon:
 
 VerdanturfTown_PokemonCenter_1F_Text_VisitForBattleTent:
 	.string "{JPN}シダケにくる りゆうと いえば\nずばり バトルテントじゃろ?\pそれとも だれか あいたい ひとでも\nいるのかね?$"
+

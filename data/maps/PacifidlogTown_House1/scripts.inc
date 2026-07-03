@@ -14,3 +14,4 @@ PacifidlogTown_House1_Text_RegiStory:
 
 PacifidlogTown_House1_Text_SixDotsOpenThreeDoors:
 	.string "{JPN}「むっつの てんが\n みっつの とびらを あける」\pおじいちゃんが よく いっていたけど\nいまだに なんのことだか わからないわ$"
+

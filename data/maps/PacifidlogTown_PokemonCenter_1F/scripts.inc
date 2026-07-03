@@ -35,3 +35,4 @@ PacifidlogTown_PokemonCenter_1F_Text_OnColonyOfCorsola:
 
 PacifidlogTown_PokemonCenter_1F_Text_AncestorsLivedOnBoats:
 	.string "{JPN}キナギで くらす ひとびとの せんぞは\nふねの うえで うまれて\lそして ふねの うえで しんだ という\pなにかを さがすために\nそんな いきかたを していたそうじゃ$"
+

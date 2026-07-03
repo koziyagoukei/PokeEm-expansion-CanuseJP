@@ -38,3 +38,4 @@ PacifidlogTown_Text_SkyPillarTooScary:
 
 PacifidlogTown_Text_TownSign:
 	.string "{JPN}ここは キナギ タウン\nあさひが みずべを てらす まち$"
+

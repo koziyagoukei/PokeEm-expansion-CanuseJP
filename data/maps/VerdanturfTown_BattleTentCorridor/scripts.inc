@@ -56,3 +56,4 @@ VerdanturfTown_ContestHall_Text_MyMonRules:
 @ Unused
 VerdanturfTown_ContestHall_Text_NormalRankStage:
 	.string "{JPN}ポケモン コンテスト\nノーマルランク ステージ!$"
+

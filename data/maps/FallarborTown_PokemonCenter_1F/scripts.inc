@@ -89,3 +89,4 @@ FallarborTown_PokemonCenter_1F_Text_FossilManiacEdgeOfTown:
 
 FallarborTown_PokemonCenter_1F_Text_PlantHardyTrees:
 	.string "{JPN}この ハジツゲの はたけ ではな\nかざんばいの なかでも そだつような\lじょうぶな きの なえを うえてるんじゃ$"
+

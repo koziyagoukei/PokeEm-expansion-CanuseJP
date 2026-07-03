@@ -47,3 +47,4 @@ PacifidlogTown_House3_Text_ReallyWantedToGetBagon:
 
 PacifidlogTown_House3_Text_IsThatAPokedex:
 	.string "{JPN}それって ポケモンずかん?\pそれって あなた たくさんの\nポケモンと であった ってこと?\pそれって すっごい うらやましい!$"
+

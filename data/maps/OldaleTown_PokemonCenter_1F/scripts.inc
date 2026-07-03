@@ -48,3 +48,4 @@ OldaleTown_PokemonCenter_1F_Text_WirelessClubNotAvailable:
 
 OldaleTown_PokemonCenter_1F_Text_TradedInWirelessClub:
 	.string "{JPN}2かいの ポケモン ワイヤレス クラブは\nつい さいきん できたの\pあたし さっそく\nポケモンこうかん しちゃった!$"
+

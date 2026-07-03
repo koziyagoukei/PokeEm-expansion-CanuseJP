@@ -313,3 +313,4 @@ FallarborTown_BattleTentLobby_Text_ScottLookingForSomeone:
 
 FallarborTown_BattleTentLobby_Text_ScottMakeChallenge:
 	.string "{JPN}エニシダ『わたし なんかに\nいつまでも かまって いないで\lさっそく チャレンジ\lして みたら どうだい?$"
+

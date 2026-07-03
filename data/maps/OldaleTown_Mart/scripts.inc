@@ -60,3 +60,4 @@ OldaleTown_Mart_Text_ImGoingToBuyPokeBalls:
 
 OldaleTown_Mart_Text_RestoreHPWithPotion:
 	.string "{JPN}ポケモンは たいりょくが なくなると\nたたかう げんきも なくなる\pそんな ときは キズぐすりを つかって\nたいりょくを かいふく してあげるんだ!$"
+

@@ -14,3 +14,4 @@ OldaleTown_House2_Text_PokemonLevelUp:
 
 OldaleTown_House2_Text_YoullGoFurtherWithStrongPokemon:
 	.string "{JPN}つれて あるく ポケモンが つよかったら\nとおくまで いけるように なるね!$"
+

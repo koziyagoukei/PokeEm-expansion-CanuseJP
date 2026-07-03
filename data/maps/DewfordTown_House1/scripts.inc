@@ -27,3 +27,4 @@ DewfordTown_House1_Text_LifeGoesSlowlyOnIsland:
 
 DewfordTown_House1_Text_Zigzagoon:
 	.string "{JPN}ジグザグマ『ぐぐう!$"
+

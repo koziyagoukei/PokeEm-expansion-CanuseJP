@@ -27,3 +27,4 @@ PacifidlogTown_House5_Text_CanSeeMirageIslandToday:
 
 PacifidlogTown_House5_Text_MirageIslandAppearDependingOnWeather:
 	.string "{JPN}マボロシじま……\nおそらく しんきろうの かんけいで\lみえたり みえなかったり するんだろう\pいや ひょっとしたら ほんとうに\nあらわれたり きえたり しているのか……?$"
+

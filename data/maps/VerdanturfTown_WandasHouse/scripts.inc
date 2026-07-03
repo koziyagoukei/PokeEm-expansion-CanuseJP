@@ -117,3 +117,4 @@ VerdanturfTown_WandasHouse_Text_IfAnythingHappenedToWally:
 
 VerdanturfTown_WandasHouse_Text_WallyWasInEverGrande:
 	.string "{JPN}ミツルくんが サイユウに いたって!?\pそりゃ トウカの ごりょうしんも\nびっくり するだろうねぇ$"
+

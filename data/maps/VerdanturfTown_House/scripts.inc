@@ -14,3 +14,4 @@ VerdanturfTown_House_Text_TrainersGatherAtPokemonLeague:
 
 VerdanturfTown_House_Text_DefeatEliteFourInARow:
 	.string "{JPN}ポケモン リーグは\nしてんのう 4にん つづけて\lしょうぶする という ルールらしいの!\pとちゅうで まけたら ひとりめ から\nやりなおし だなんて きびしいのね!$"
+

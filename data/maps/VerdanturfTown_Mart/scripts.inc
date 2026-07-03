@@ -46,3 +46,4 @@ VerdanturfTown_Mart_Text_NoStrategyGuidesForBattleTent:
 
 VerdanturfTown_Mart_Text_NestBallOnWeakenedPokemon:
 	.string "{JPN}シダケでしか かえない ネストボール\nよわい ポケモンほど つかまえ やすくなるの$"
+

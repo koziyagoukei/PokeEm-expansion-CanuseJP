@@ -37,3 +37,4 @@ DewfordTown_House2_Text_ExplainSilkScarf:
 
 DewfordTown_House2_Text_BrawlySoCool:
 	.string "{JPN}へえ! きみ うみを こえて\nわざわざ ムロまで きたの!\pもしかして トウキさんの うわさを きいて\nあいに きたんじゃない?\pトウキさん かっこよくて\nみんなが あこがれるもんな!$"
+

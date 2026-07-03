@@ -53,3 +53,4 @@ FallarborTown_Mart_Text_Skitty:
 
 FallarborTown_Mart_Text_SellNuggetIFound:
 	.string "{JPN}ひろった きんのたま……\nやっぱり うるしか ないのかなあ?\lほかに つかいみちも ないからなあ……$"
+

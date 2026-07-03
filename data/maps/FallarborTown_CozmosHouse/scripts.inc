@@ -90,3 +90,4 @@ FallarborTown_CozmosHouse_Text_FeelSorryForCozmo:
 
 FallarborTown_CozmosHouse_Text_CozmoIsSoHappy:
 	.string "{JPN}ソライシはかせ ったら\nあんなに よろこんで かわいい!$"
+

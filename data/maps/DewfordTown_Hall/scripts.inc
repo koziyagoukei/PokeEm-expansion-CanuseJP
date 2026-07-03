@@ -331,3 +331,4 @@ DewfordTown_Hall_Text_GiveYouSludgeBomb:
 
 DewfordTown_Hall_Text_LoveSludgeBombButTrendInToo:
 	.string "{JPN}「ヘドロばくだん」も いいけど\n「{STR_VAR_1}」って\lわざを つかえる\lポケモンも いいよね!$"
+

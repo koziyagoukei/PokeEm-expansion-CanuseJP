@@ -55,3 +55,4 @@ FallarborTown_ContestHall_Text_CantWinEverywhere:
 @ Unused
 FallarborTown_ContestHall_Text_SuperRankStage:
 	.string "{JPN}ポケモン コンテスト\nスーパーランク ステージ!$"
+

@@ -90,3 +90,4 @@ VerdanturfTown_Text_BattleTentSign:
 
 VerdanturfTown_Text_RusturfTunnelSign:
 	.string "{JPN}カナズミと シダケを むすぶ\n「カナシダ トンネル」\pかいつう こうじは ちゅうしに なりました$"
+

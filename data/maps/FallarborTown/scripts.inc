@@ -74,3 +74,4 @@ FallarborTown_Text_TownSign:
 
 FallarborTown_Text_MoveTutorSign:
 	.string "{JPN}「わざおしえマニアの いえ」\nポケモンの わざ おしえます!$"
+

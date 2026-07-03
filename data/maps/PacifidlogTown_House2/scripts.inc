@@ -122,3 +122,4 @@ PacifidlogTown_House2_Text_Rururi:
 
 PacifidlogTown_House2_Text_DoesntLikeTrainerVeryMuch:
 	.string "{JPN}あんまり なついて いないようだ……$"
+
