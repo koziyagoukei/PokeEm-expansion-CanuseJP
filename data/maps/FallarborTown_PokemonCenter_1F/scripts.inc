@@ -82,30 +82,10 @@ FallarborTown_PokemonCenter_1F_Movement_LanetteExitWest:
 	step_end
 
 FallarborTown_PokemonCenter_1F_Text_LanetteGreeting:
-	.string "Oh, hello.\n"
-	.string "You are?\p"
-	.string "Okay, your name's {PLAYER}{KUN}.\n"
-	.string "I can see that you're a TRAINER.\p"
-	.string "So that means you use the POKEMON\n"
-	.string "Storage System I developed.\p"
-	.string "How I arrived at that conclusion is\n"
-	.string "a simple deductive process.\p"
-	.string "You spoke to me because you wanted\n"
-	.string "to access something on this PC.\p"
-	.string "Oh, I'm sorry. I'm LANETTE.\p"
-	.string "Honestly, I'm glad to meet you--it's\n"
-	.string "great you're using the Storage System.\p"
-	.string "If you could, please visit me at home.\n"
-	.string "My house is on ROUTE 114.$"
+	.string "{JPN}あなたは……?\p{PLAYER}{KUN} というのですか\nあなた トレーナー なんですね\pということは あたしの つくった\nあずかりシステム つかってますね?\pだって つかいたいから\nパソコンの まえに いる あたしに\lはなしかけてきた という わけですよね\lかんたんな すいり です\pあっ あたし マユミ といいます\pあずかりシステムを つかっている\nトレーナーに あえて すごく うれしいです\pよかったら あたしの いえにも\nあそびに きてください\l114ばんどうろに ありますから$"
 
 FallarborTown_PokemonCenter_1F_Text_FossilManiacEdgeOfTown:
-	.string "I wonder what POKEMON looked like\n"
-	.string "long, long ago?\p"
-	.string "Maybe the FOSSIL MANIAC at the edge\n"
-	.string "of town will know.$"
+	.string "{JPN}おおむかしの ポケモンって\nどんな すがた だったのかしら?\pこの まちの はずれにいる\nかせきマニアなら おしえてくれるかも$"
 
 FallarborTown_PokemonCenter_1F_Text_PlantHardyTrees:
-	.string "In the fields of FALLARBOR, we plant\n"
-	.string "seedlings of hardy trees that thrive\l"
-	.string "even in volcanic ash.$"
-
+	.string "{JPN}この ハジツゲの はたけ ではな\nかざんばいの なかでも そだつような\lじょうぶな きの なえを うえてるんじゃ$"
