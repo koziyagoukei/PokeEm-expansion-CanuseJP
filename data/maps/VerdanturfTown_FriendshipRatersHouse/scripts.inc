@@ -63,28 +63,42 @@ VerdanturfTown_FriendshipRatersHouse_EventScript_Pikachu::
 	end
 
 VerdanturfTown_FriendshipRatersHouse_Text_SeeHowMuchPokemonLikesYou:
-	.string "{JPN}あなたの ポケモンが\nどれくらい なついているか みてあげる\pあら……\nあなたの ポケモン$"
+	.string "Let me see your POKEMON.\n"
+	.string "I'll check to see how much it likes you.\p"
+	.string "Oh.\n"
+	.string "Your POKEMON...$"
 
 VerdanturfTown_FriendshipRatersHouse_Text_AdoresYou:
-	.string "{JPN}これいじょうは ない ってぐらい\nあなたに なついているわね\lみている こっちも しあわせに なるわ!$"
+	.string "It adores you.\n"
+	.string "It can't possibly love you any more.\l"
+	.string "I even feel happy seeing it.$"
 
 VerdanturfTown_FriendshipRatersHouse_Text_VeryHappy:
-	.string "{JPN}なんだか しあわせそう\nすごく あなたに なついているわね$"
+	.string "It seems to be very happy.\n"
+	.string "It obviously likes you a whole lot.$"
 
 VerdanturfTown_FriendshipRatersHouse_Text_LikesYouQuiteALot:
-	.string "{JPN}かなり なついているわね\nあなたに あまえたそうに しているわよ$"
+	.string "It likes you quite a lot.\n"
+	.string "It seems to want to be babied a little.$"
 
 VerdanturfTown_FriendshipRatersHouse_Text_GettingUsedToYou:
-	.string "{JPN}ちょっと なついてきた って かんじ かな\nあなたのこと しんじている みたい$"
+	.string "It's getting used to you.\n"
+	.string "It seems to believe in you.$"
 
 VerdanturfTown_FriendshipRatersHouse_Text_NotUsedToYou:
-	.string "{JPN}まだ あなたに なれていない ようね\nふつうの かんけい って かんじが するわ$"
+	.string "It's not very used to you yet.\n"
+	.string "It neither loves nor hates you.$"
 
 VerdanturfTown_FriendshipRatersHouse_Text_VeryWary:
-	.string "{JPN}…… なんだか けいかい しているみたい\nめつきも ちょっと こわいし\lぜんぜん あなたに なついていないわ$"
+	.string "It's very wary.\n"
+	.string "It has scary viciousness in its eyes.\l"
+	.string "It doesn't like you much at all.$"
 
 VerdanturfTown_FriendshipRatersHouse_Text_DetestsYou:
-	.string "{JPN}…… ちょっと いいづらいんだけど\pあなた じぶんの ポケモンに\nそんなに きらわれていて だいじょうぶ?$"
+	.string "This is a little hard for me to say...\p"
+	.string "Your POKEMON simply detests you.\n"
+	.string "Doesn't that make you uncomfortable?$"
 
 VerdanturfTown_FriendshipRatersHouse_Text_Pikachu:
-	.string "{JPN}ピカチュウ『ピカピカッ!$"
+	.string "PIKACHU: Pika pika!$"
+

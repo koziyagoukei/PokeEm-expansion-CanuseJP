@@ -25,7 +25,18 @@ VerdanturfTown_PokemonCenter_1F_EventScript_ExpertM::
 	end
 
 VerdanturfTown_PokemonCenter_1F_Text_FaithInYourPokemon:
-	.string "{JPN}ポケモンを しんじられない ようでは\nいちにんまえ とは いえないね\pたたかう ポケモンたちを\nさいごまで しんじる ものだけが\lかちぬく ことが できるんだ$"
+	.string "You can't consider yourself a real\n"
+	.string "TRAINER if you don't have faith\l"
+	.string "in your POKEMON.\p"
+	.string "Only those people who can believe\n"
+	.string "in their battling POKEMON can win\l"
+	.string "through to the very end.$"
 
 VerdanturfTown_PokemonCenter_1F_Text_VisitForBattleTent:
-	.string "{JPN}シダケにくる りゆうと いえば\nずばり バトルテントじゃろ?\pそれとも だれか あいたい ひとでも\nいるのかね?$"
+	.string "The reason why anyone would visit\n"
+	.string "VERDANTURF...\p"
+	.string "It's the BATTLE TENT. It goes without\n"
+	.string "saying.\p"
+	.string "Or is there somebody here that you\n"
+	.string "came to see?$"
+

@@ -58,25 +58,41 @@ FallarborTown_MoveRelearnersHouse_EventScript_ComeBackWithHeartScale::
 	end
 
 FallarborTown_MoveRelearnersHouse_Text_ImTheMoveTutor:
-	.string "{JPN}ぼく ポケモン わざマニア\pポケモンが せいちょうして おぼえていく\nわざを すべて しっていて\lポケモンに おしえることが できるんだ!\pぼくが いま あつめている\nハートのウロコを くれたら\lしってる わざを おしえてあげるよ!$"
+	.string "I'm the MOVE TUTOR.\p"
+	.string "I know all the moves that POKEMON\n"
+	.string "learn--every one of them--and I can\l"
+	.string "teach POKEMON those moves.\p"
+	.string "I can teach a move to a POKEMON\n"
+	.string "of yours if you'd like.\p"
+	.string "I'll do it for a HEART SCALE.\n"
+	.string "I'm collecting those now.$"
 
 FallarborTown_MoveRelearnersHouse_Text_ThatsAHeartScaleWantMeToTeachMove:
-	.string "{JPN}おおっ!\nそれは まさしく ハートのウロコ!\pわざを おぼえさせたいんだね?$"
+	.string "Oh! That's it! That's an honest to\n"
+	.string "goodness HEART SCALE!\p"
+	.string "Let me guess, you want me to teach\n"
+	.string "a move?$"
 
 FallarborTown_MoveRelearnersHouse_Text_TutorWhichMon:
-	.string "{JPN}どの ポケモンに するんだい?$"
+	.string "Which POKEMON needs tutoring?$"
 
 FallarborTown_MoveRelearnersHouse_Text_TeachWhichMove:
-	.string "{JPN}どの わざに するんだい?$"
+	.string "Which move should I teach?$"
 
 FallarborTown_MoveRelearnersHouse_Text_DontHaveMoveToTeachPokemon:
-	.string "{JPN}ごめんね……\pぼくが その ポケモンに\nおしえられる わざは ないみたいだよ$"
+	.string "Sorry...\p"
+	.string "It doesn't appear as if I have any move\n"
+	.string "I can teach that POKEMON.$"
 
 FallarborTown_MoveRelearnersHouse_Text_HandedOverHeartScale:
-	.string "{JPN}{PLAYER}は おれいに\nハートのウロコを 1まい あげた!$"
+	.string "{PLAYER} handed over one HEART SCALE\n"
+	.string "in exchange.$"
 
 FallarborTown_MoveRelearnersHouse_Text_ComeBackWithHeartScale:
-	.string "{JPN}おぼえさせたい わざが あったら\nハートのウロコを もってきてね!$"
+	.string "If your POKEMON need to learn a move,\n"
+	.string "come back with a HEART SCALE.$"
 
 FallarborTown_MoveRelearnersHouse_Text_CantTeachEgg:
-	.string "{JPN}えっ?\nタマゴに おしえられる わざは ないよ$"
+	.string "Hunh? There isn't a single move that\n"
+	.string "I can teach an EGG.$"
+

@@ -91,34 +91,57 @@ PacifidlogTown_House2_EventScript_UnhappyAzurill::
 	end
 
 PacifidlogTown_House2_Text_ChairmansYoungerBrotherOnVacation:
-	.string "{JPN}ウォッホン!!\pわしが ポケモン だいすきクラブで\nいちばーん えらい かいちょうの……\pおとうと ですぞ!\pまあ ここで ポケモンと いっしょに\nバカンスを たのしんで おるのですな!$"
+	.string "Er-hem!\p"
+	.string "I am the POKEMON FAN CLUB's most\n"
+	.string "important person, the CHAIRMAN's\l"
+	.string "younger brother.\p"
+	.string "I'm here enjoying my vacation with\n"
+	.string "POKEMON, yes, indeed.$"
 
 PacifidlogTown_House2_Text_AhYourPokemon:
-	.string "{JPN}ほう!\nきみの ポケモン……$"
+	.string "Ah!\n"
+	.string "Your POKEMON...$"
 
 PacifidlogTown_House2_Text_AdoringPokemonTakeThis:
-	.string "{JPN}とっても なついて いますなあ\pそんな かわいらしい ポケモンには\nこの わざマシン どうですかな?$"
+	.string "It clearly likes you very much.\p"
+	.string "A POKEMON that adoring and adorable\n"
+	.string "deserves a TM like this, no?$"
 
 PacifidlogTown_House2_Text_PutInSomeMoreEffort:
-	.string "{JPN}ふむう……\nわるくは ないんだが よくもない……\pおやの トレーナーである きみの\nどりょくが ひつよう ですな!$"
+	.string "Hmm...\n"
+	.string "It's not bad, but it's also not good.\p"
+	.string "You, as the TRAINER, need to put in\n"
+	.string "some more effort.$"
 
 PacifidlogTown_House2_Text_ViciousPokemonTakeThis:
-	.string "{JPN}なんだか めつきが わるいですのう\pそんな こわそうな ポケモンには\nこの わざマシン どうですかな?$"
+	.string "It has a vicious look to it.\p"
+	.string "A frightening POKEMON like that\n"
+	.string "deserves a TM like this.$"
 
 PacifidlogTown_House2_Text_ExplainReturnFrustration:
-	.string "{JPN}ポケモンの なつきぐあいが たかいと\nおんがえしの いりょくも たかくなる\pなつきぐあいが ひくいと\nやつあたりの いりょくが つよまるんだよ!$"
+	.string "If a POKEMON likes you a lot, RETURN's\n"
+	.string "power is enhanced.\p"
+	.string "If it doesn't like you, FRUSTRATION's\n"
+	.string "power goes up.$"
 
 PacifidlogTown_House2_Text_GetGoodTMInXDays:
-	.string "{JPN}そうそう あと{STR_VAR_1}にち たてば\nいい わざマシンが てに はいるんだよ!\pそのとき また あそびに きたまえ!\nきみの ポケモンに あった\lすてきな わざマシンを あげるから$"
+	.string "Oh, yes. In about {STR_VAR_1} or so days,\n"
+	.string "I should be getting a good TM or two.\p"
+	.string "You should come see me then.\n"
+	.string "I'll give you a TM that's suitable for\l"
+	.string "your POKEMON.$"
 
 PacifidlogTown_House2_Text_Rurii:
-	.string "{JPN}ルリリ『るりー$"
+	.string "AZURILL: Rurii.$"
 
 PacifidlogTown_House2_Text_VeryFriendlyWithTrainer:
-	.string "{JPN}とっても なついて いるようだ$"
+	.string "It appears to be very friendly with the\n"
+	.string "TRAINER.$"
 
 PacifidlogTown_House2_Text_Rururi:
-	.string "{JPN}ルリリ『ルルリッ!!$"
+	.string "AZURILL: Rururi!$"
 
 PacifidlogTown_House2_Text_DoesntLikeTrainerVeryMuch:
-	.string "{JPN}あんまり なついて いないようだ……$"
+	.string "It doesn't appear to like the TRAINER\n"
+	.string "very much.$"
+
