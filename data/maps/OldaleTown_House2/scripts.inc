@@ -10,11 +10,7 @@ OldaleTown_House2_EventScript_Man::
 	end
 
 OldaleTown_House2_Text_PokemonLevelUp:
-	.string "When POKEMON battle, they eventually\n"
-	.string "level up and become stronger.$"
+	.string "{JPN}ポケモンって たたかうと\nレベルアップして つよくなるのよ!$"
 
 OldaleTown_House2_Text_YoullGoFurtherWithStrongPokemon:
-	.string "If the POKEMON with you become\n"
-	.string "stronger, you'll be able to go farther\l"
-	.string "away from here.$"
-
+	.string "{JPN}つれて あるく ポケモンが つよかったら\nとおくまで いけるように なるね!$"
