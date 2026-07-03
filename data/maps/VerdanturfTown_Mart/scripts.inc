@@ -39,20 +39,10 @@ VerdanturfTown_Mart_EventScript_Lass::
 	end
 
 VerdanturfTown_Mart_Text_XSpecialIsCrucial:
-	.string "For any POKEMON match, X SPECIAL\n"
-	.string "is crucial.\p"
-	.string "It jacks up the power of some moves\n"
-	.string "even though it's only for one battle.$"
+	.string "{JPN}ポケモン しょうぶに\nスペシャルアップは かかせない!\pたたかいの ときだけ とはいえ\nわざの いりょくが あがるんだからな!$"
 
 VerdanturfTown_Mart_Text_NoStrategyGuidesForBattleTent:
-	.string "They don't seem to sell any winning\n"
-	.string "strategy guides for the BATTLE TENT...\p"
-	.string "It seems one must rely on one's\n"
-	.string "own wits after all...$"
+	.string "{JPN}バトルテント ひっしょう\nこうりゃくぼん というのは\lうってない ですねえ……\pやはり じぶんで\nがんばらないと ダメなんですねえ$"
 
 VerdanturfTown_Mart_Text_NestBallOnWeakenedPokemon:
-	.string "The NEST BALL works better on\n"
-	.string "weakened POKEMON.\p"
-	.string "VERDANTURF is the only place you can\n"
-	.string "buy it.$"
-
+	.string "{JPN}シダケでしか かえない ネストボール\nよわい ポケモンほど つかまえ やすくなるの$"
