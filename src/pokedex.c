@@ -288,6 +288,7 @@ static void PrintOwnedMonHeight(enum Species species);
 static void PrintOwnedMonWeight(enum Species species);
 static u8* ConvertMonHeightToImperialString(u32 height);
 static u8* ConvertMonHeightToMetricString(u32 height);
+static u8* ConvertMonHeightToCentimeterString(u32 height);
 static u8* ConvertMonWeightToImperialString(u32 weight);
 static u8* ConvertMonWeightToMetricString(u32 weight);
 static u8* ConvertMeasurementToMetricString(u32 num, u32* index);
@@ -4279,6 +4280,8 @@ static u8* GetUnknownMonHeightString(void)
 {
     if (UNITS == UNITS_IMPERIAL)
         return ReplaceDecimalSeparator(gText_UnkHeight);
+    else if (UNITS == UNITS_METRIC_CM)
+        return ReplaceDecimalSeparator(gText_UnkHeightCentimeters);
     else
         return ReplaceDecimalSeparator(gText_UnkHeightMetric);
 }
@@ -4336,6 +4339,8 @@ u8* ConvertMonHeightToString(u32 height)
 {
     if (UNITS == UNITS_IMPERIAL)
         return ConvertMonHeightToImperialString(height);
+    else if (UNITS == UNITS_METRIC_CM)
+        return ConvertMonHeightToCentimeterString(height);
     else
         return ConvertMonHeightToMetricString(height);
 }
@@ -4399,6 +4404,37 @@ static u8* ConvertMonHeightToMetricString(u32 height)
     u32 index = 0;
     u8* heightString = ConvertMeasurementToMetricString(height, &index);
 
+    heightString[index++] = CHAR_m;
+    heightString[index++] = EOS;
+    return heightString;
+}
+
+static u8* ConvertMonHeightToCentimeterString(u32 height)
+{
+    u8* heightString = Alloc(WEIGHT_HEIGHT_STR_MEM);
+    u32 centimeters = height * 10;
+    u32 divisor = 10000;
+    u32 index = 0;
+    bool32 outputted = FALSE;
+
+    while (divisor != 0)
+    {
+        u32 digit = centimeters / divisor;
+
+        if (digit == 0 && !outputted && divisor != 1)
+            heightString[index++] = CHAR_SPACER;
+        else
+        {
+            heightString[index++] = CHAR_0 + digit;
+            outputted = TRUE;
+        }
+
+        centimeters %= divisor;
+        divisor /= 10;
+    }
+
+    heightString[index++] = CHAR_SPACE;
+    heightString[index++] = CHAR_c;
     heightString[index++] = CHAR_m;
     heightString[index++] = EOS;
     return heightString;

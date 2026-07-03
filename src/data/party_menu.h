@@ -821,6 +821,7 @@ struct
     [MENU_CATALOG_MOWER]   = {COMPOUND_STRING("しばかりき"),      CursorCb_CatalogMower},
     [MENU_CHANGE_FORM]     = {COMPOUND_STRING("フォルムチェンジ"),     CursorCb_ChangeForm},
     [MENU_CHANGE_ABILITY]  = {COMPOUND_STRING("とくせいへんこう"),  CursorCb_ChangeAbility},
+    [MENU_NICKNAME]        = {COMPOUND_STRING("{JPN}ニックネーム"), CursorCb_Nickname},
 };
 
 static const u8 sPartyMenuAction_SummarySwitchCancel[] = {MENU_SUMMARY, MENU_SWITCH, MENU_CANCEL1};

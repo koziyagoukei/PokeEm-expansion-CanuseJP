@@ -47,6 +47,7 @@ const u8 gText_ThisIsAPokemon[] = _("{JPN}ポケットモンスター\n……す
 const u8 gText_5MarksPokemon[] = _("{JPN}????? ポケモン");
 const u8 gText_UnkHeight[] = _("{JPN}{CLEAR_TO 12}??'??");
 const u8 gText_UnkHeightMetric[] = _("{JPN}???.? m");
+const u8 gText_UnkHeightCentimeters[] = _("{JPN}????? cm");
 const u8 gText_UnkWeight[] = _("{JPN}????.? kg");
 const u8 gText_UnkWeightMetric[] = _("{JPN}???.? kg");
 const u8 gText_EmptyPkmnCategory[] = _("{JPN}                       ポケモン"); // Unused
