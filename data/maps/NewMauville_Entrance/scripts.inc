@@ -47,10 +47,12 @@ NewMauville_Entrance_EventScript_DontOpenDoor::
 	end
 
 NewMauville_Entrance_Text_DoorIsLocked:
-	.string "{JPN}とびらは しまっている$"
+	.string "The door is locked.$"
 
 NewMauville_Entrance_Text_UseBasementKey:
-	.string "{JPN}ちかのカギを つかいますか?$"
+	.string "Use the BASEMENT KEY?$"
 
 NewMauville_Entrance_Text_UsedBasementKey:
-	.string "{JPN}{PLAYER}は\nちかのカギを つかった!\pとびらは ひらいた！$"
+	.string "{PLAYER} used the BASEMENT KEY.\p"
+	.string "The door opened!$"
+

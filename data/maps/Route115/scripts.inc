@@ -130,10 +130,16 @@ Route115_EventScript_Marlene::
 	end
 
 Route115_Text_NeverKnowWhenCavePokemonWillAppear:
-	.string "{JPN}どうくつの なかって\nくさむらの ある どうろと ちがって\lいつ ポケモンが とびだして くるのか\lわからないから ドキドキ しちゃうわ$"
+	.string "Exploring a cave isn't like walking\n"
+	.string "on a road.\p"
+	.string "You never know when wild POKEMON will\n"
+	.string "appear. It's full of suspense.$"
 
 Route115_Text_RouteSignRustboro:
-	.string "{JPN}ここは 115ばん どうろ\n{DOWN_ARROW} カナズミシティ$"
+	.string "ROUTE 115\n"
+	.string "{DOWN_ARROW} RUSTBORO CITY$"
 
 Route115_Text_MeteorFallsSign:
-	.string "{JPN}ここは りゅうせいのたき\nとおりぬけると ハジツゲタウン$"
+	.string "METEOR FALLS\n"
+	.string "FALLARBOR TOWN THROUGH HERE$"
+

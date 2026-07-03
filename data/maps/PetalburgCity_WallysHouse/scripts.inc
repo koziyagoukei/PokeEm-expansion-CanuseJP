@@ -66,25 +66,70 @@ PetalburgCity_WallysHouse_EventScript_ReceivedHMSurf::
 	end
 
 PetalburgCity_WallysHouse_Text_ThanksForPlayingWithWally:
-	.string "{JPN}きみは……\nそうか {PLAYER}{KUN} だね?\pさっきは ミツルの あいてを してくれて\nありがとう……\pあのこは うまれた ときから\nからだが じょうぶでは なくてね\pそれで すこしの あいだ シダケタウンの\nわたしの しんせきの うちで\lあずかってもらう ことに したんだよ\pあそこは ここよりも ずっと\nくうきが きれいな ところ だからね!\p……で ミツルかい? ミツルなら\nもう しゅっぱつ していったよ\pいまごろは どの あたりかなあ……$"
+	.string "You're...\n"
+	.string "Ah, you must be {PLAYER}{KUN}, right?\p"
+	.string "Thank you for playing with WALLY a\n"
+	.string "little while ago.\p"
+	.string "He's been frail and sickly ever\n"
+	.string "since he was a baby.\p"
+	.string "We've sent him to stay with my relatives\n"
+	.string "in VERDANTURF TOWN for a while.\p"
+	.string "The air is a lot cleaner there\n"
+	.string "than it is here.\p"
+	.string "What's that? Where's WALLY?\n"
+	.string "He's already left, our WALLY.\p"
+	.string "I wonder where he could have\n"
+	.string "gotten by now?$"
 
 PetalburgCity_WallysHouse_Text_WonderHowWallyIsDoing:
-	.string "{JPN}ミツルは どうしてるかなあ……$"
+	.string "I wonder how our WALLY is doing?$"
 
 PetalburgCity_WallysHouse_Text_PleaseExcuseUs:
-	.string "{JPN}{PLAYER}{KUN}!\nむりに よびだして すまなかったね!\pミツルは シダケタウンに いってから\nすっかり げんきを とりもどしたよ!\pそれも みんな きみの おかげさ!\pなにしろ このまちを でるときに\nミツルが ポケモンを つかまえるのを\lてつだって くれただろう?\pあのときの ことが ミツルは とっても\nうれしかった らしいんだ!\pいや ミツル だけじゃない\nちちおやの わたしも うれしいよ!\pあのこに きみの ような\nやさしい ともだちが できたことが ね!\pそのおれい という わけでは ないけど\nこれを うけとって くれないか!$"
+	.string "{PLAYER}{KUN}! Please excuse us for\n"
+	.string "dragging you here this way.\p"
+	.string "But our WALLY's become very healthy\n"
+	.string "since he went to VERDANTURF TOWN.\p"
+	.string "We owe it all to you!\p"
+	.string "When WALLY left town, you helped\n"
+	.string "him catch a POKEMON, right?\p"
+	.string "I think that made WALLY really\n"
+	.string "happy.\p"
+	.string "Actually, not just WALLY.\n"
+	.string "It made me, his father, happy too.\p"
+	.string "Happy that he's gained such a great\n"
+	.string "friend as you.\p"
+	.string "This isn't a bribe or anything, but\n"
+	.string "I'd really like you to have this.$"
 
 PetalburgCity_WallysHouse_Text_SurfGoAllSortsOfPlaces:
-	.string "{JPN}なみのりを つかえるように なれば\nいろんな ばしょに いけるように なるよ!$"
+	.string "If your POKEMON can SURF, you'll be\n"
+	.string "able to go to all sorts of places.$"
 
 PetalburgCity_WallysHouse_Text_WallyIsComingHomeSoon:
-	.string "{JPN}もうすぐ ミツルが かえってくるぞ!\nたのしみだなあ……!$"
+	.string "WALLY's coming home soon.\n"
+	.string "I'm looking forward to that.$"
 
 PetalburgCity_WallysHouse_Text_YouMetWallyInEverGrandeCity:
-	.string "{JPN}ええっ!? サイユウシティで\nミツルと であった だって……?\pんもう {PLAYER}{KUN}ってばー\pいくら あのこが げんきに なったからって\nそんな とおくの まち まで\lひとりで いけるわけ ないよねえ……$"
+	.string "Oh? You met WALLY in\n"
+	.string "EVER GRANDE CITY?\p"
+	.string "Oh, {PLAYER}{KUN}, don't be silly.\p"
+	.string "He may have gotten healthy, but he\n"
+	.string "can't go somewhere far away like\l"
+	.string "that all by himself.$"
 
 PetalburgCity_WallysHouse_Text_WallyWasReallyHappy:
-	.string "{JPN}ミツルが ポケモンを つかまえた って\nすごく うれしそうに はなしていたの\pあのこの あんな えがお ひさしぶり$"
+	.string "WALLY was really happy when he told\n"
+	.string "us that he caught a POKEMON.\p"
+	.string "It's been ages since I've seen him\n"
+	.string "smile like that.$"
 
 PetalburgCity_WallysHouse_Text_WallyLeftWithoutTelling:
-	.string "{JPN}うちの しゅじんには ないしょ だけど\pじつは ミツルったら シダケタウンを\nかってに でて いっちゃった らしいの……\pあのこ からだは よわかったけど\nあんがい しっかりした せいかく だから\lかならず ぶじで かえってくると\lわたしは しんじてるわ!$"
+	.string "I want you to keep this a secret\n"
+	.string "from my husband...\p"
+	.string "But our WALLY left VERDANTURF TOWN\n"
+	.string "without telling anyone.\p"
+	.string "You know, WALLY is frail, but\n"
+	.string "he's surprisingly strong-willed.\p"
+	.string "I'm sure that he'll come back safe\n"
+	.string "and sound one day!$"
+

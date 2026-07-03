@@ -12,19 +12,28 @@ SSTidalLowerDeck_EventScript_Leonard::
 	end
 
 SSTidalLowerDeck_Text_PhillipIntro:
-	.string "{JPN}こんなに でっかい ところ\nそうじ してるのも あきたぞ!\lちょいと しょうぶ しようや!$"
+	.string "Arrrgh! I'm fed up and dog-tired of\n"
+	.string "cleaning this huge place!\p"
+	.string "Let's have a quick battle!$"
 
 SSTidalLowerDeck_Text_PhillipDefeat:
-	.string "{JPN}おとうと まけちまったよ!$"
+	.string "Little bro, I lost!$"
 
 SSTidalLowerDeck_Text_PhillipPostBattle:
-	.string "{JPN}おれたち おそうじ ブラザーズ!\pあにきが せんざい ぶちまけてー\nおとうと せっせと みがくのさー$"
+	.string "We're the CLEANUP BROTHERS!\p"
+	.string "The old one dumps the detergent,\n"
+	.string "and the young one does the scrubbing!$"
 
 SSTidalLowerDeck_Text_LeonardIntro:
-	.string "{JPN}こんなに ひろいから\nふなぞこで ポケモンしょうぶ しても\lだいじょうぶ だろ?$"
+	.string "This is the bottom of the ship's hull.\n"
+	.string "There's plenty of room.\l"
+	.string "It'll be alright for a POKEMON battle.$"
 
 SSTidalLowerDeck_Text_LeonardDefeat:
-	.string "{JPN}あにき まけちまったよ!$"
+	.string "Big bro, I lost!$"
 
 SSTidalLowerDeck_Text_LeonardPostBattle:
-	.string "{JPN}おれたち おそうじ ブラザーズ!\pあにきが せんざい ぶちまけてー\nおとうと せっせと みがくのさー$"
+	.string "We're the CLEANUP BROTHERS!\p"
+	.string "The old one dumps the detergent,\n"
+	.string "and the young one does the scrubbing!$"
+
