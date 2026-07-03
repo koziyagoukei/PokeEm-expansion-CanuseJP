@@ -284,55 +284,34 @@ Route124_DivingTreasureHuntersHouse_EventScript_ShardTradeBoard::
 	end
 
 Route124_DivingTreasureHuntersHouse_Text_Greeting:
-	.string "I'm the DIVING TREASURE HUNTER!\p"
-	.string "I'm the awesome dude who makes\n"
-	.string "deep-sea dives to gather treasures\l"
-	.string "resting at the bottom.$"
+	.string "{JPN}オレは ダイビング トレジャーハンター!\pふかい うみに もぐっては\nかいていに ねむる おたからを あつめる\lすげえ やろう なのさ!$"
 
 Route124_DivingTreasureHuntersHouse_Text_HaveYouSeenAnyShards:
-	.string "Tell me, have you seen any SHARDS of\n"
-	.string "tools made in ancient times?$"
+	.string "{JPN}おおむかしに つくられた という\nいろいろな かけら みつかったかい?$"
 
 Route124_DivingTreasureHuntersHouse_Text_YouHaventGotAnyShards:
-	.string "You haven't got any treasures\n"
-	.string "for me...\p"
-	.string "If you see any SHARDS, like the RED\n"
-	.string "SHARD, you've got to trade it with me!$"
+	.string "{JPN}きみ おたから もってないのか……\pあかいかけら とか\nいろいろな かけらを みつけたら\lこうかん してくれよな!$"
 
 Route124_DivingTreasureHuntersHouse_Text_ThatsAShardIllTradeYou:
-	.string "Oh, hey! That...\n"
-	.string "That's a SHARD! I'm looking for those!\p"
-	.string "Oh, man, you've got to trade that\n"
-	.string "with me! I'll give you something good!$"
+	.string "{JPN}おおっ! それは!\nオレが さがしている かけら!!\pなっ なっ!\nきみの もってる おたからと\lオレの おたから こうかん してくれよ!$"
 
 Route124_DivingTreasureHuntersHouse_Text_WhatDoYouWantToTrade:
-	.string "What do you want to trade?$"
+	.string "{JPN}どれを こうかん するんだい?$"
 
 Route124_DivingTreasureHuntersHouse_Text_YoullTradeShardForStone:
-	.string "You'll trade your {STR_VAR_1} for\n"
-	.string "my {STR_VAR_2}, then?$"
+	.string "{JPN}{STR_VAR_1} を {STR_VAR_2}に\nこうかん するんだな?$"
 
 Route124_DivingTreasureHuntersHouse_Text_ItsADeal:
-	.string "It's a done deal!\n"
-	.string "Use that wisely!$"
+	.string "{JPN}とりひき せいりつ!\nだいじに つかって くれよな!$"
 
 Route124_DivingTreasureHuntersHouse_Text_TradeSomethingElse:
-	.string "Do you want to trade something else?$"
+	.string "{JPN}まだ こうかん するかい?$"
 
 Route124_DivingTreasureHuntersHouse_Text_BagFull:
-	.string "Whoops, your BAG's full.\n"
-	.string "Get rid of some items, friend!$"
+	.string "{JPN}おっと バッグが いっぱい だぜ\nどうぐを へらして きなよ$"
 
 Route124_DivingTreasureHuntersHouse_Text_ComeBackIfYouChangeMind:
-	.string "No? That's a downer.\n"
-	.string "Well, if you change your mind, come back.$"
+	.string "{JPN}そいつは がっかりだ\nきが むいたら また きてくれよな!$"
 
 Route124_DivingTreasureHuntersHouse_Text_ShardTradeBoard:
-	.string "{CLEAR_TO 10}Wanted item{CLEAR_TO 124}Trade item\n"
-	.string "{CLEAR_TO 15}RED SHARD{CLEAR_TO 89}{LEFT_ARROW}{RIGHT_ARROW}{CLEAR_TO 123}FIRE STONE{CLEAR_TO 200}\p"
-	.string "{CLEAR_TO 10}Wanted item{CLEAR_TO 124}Trade item\n"
-	.string "{CLEAR_TO 6}YELLOW SHARD{CLEAR_TO 89}{LEFT_ARROW}{RIGHT_ARROW}{CLEAR_TO 115}THUNDERSTONE{CLEAR_TO 200}\p"
-	.string "{CLEAR_TO 10}Wanted item{CLEAR_TO 124}Trade item\n"
-	.string "{CLEAR_TO 12}BLUE SHARD{CLEAR_TO 89}{LEFT_ARROW}{RIGHT_ARROW}{CLEAR_TO 121}WATER STONE{CLEAR_TO 200}\p"
-	.string "{CLEAR_TO 10}Wanted item{CLEAR_TO 124}Trade item\n"
-	.string "{CLEAR_TO 8}GREEN SHARD{CLEAR_TO 89}{LEFT_ARROW}{RIGHT_ARROW}{CLEAR_TO 123}LEAF STONE$"
+	.string "{JPN}ほしいモノ       あげるモノ\n あかいかけら   {LEFT_ARROW}{RIGHT_ARROW} ほのおのいし\pほしいモノ       あげるモノ\n きいろいかけら  {LEFT_ARROW}{RIGHT_ARROW} かみなりのいし\pほしいモノ       あげるモノ\n あおいかけら   {LEFT_ARROW}{RIGHT_ARROW} みずのいし\pほしいモノ       あげるモノ\n みどりのかけら  {LEFT_ARROW}{RIGHT_ARROW} リーフのいし$"
