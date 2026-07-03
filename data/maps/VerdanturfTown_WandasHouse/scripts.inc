@@ -83,86 +83,37 @@ VerdanturfTown_WandasHouse_EventScript_WallysAuntEverGrande::
 	end
 
 VerdanturfTown_WandasHouse_Text_StrongerSpeech:
-	.string "WALLY: I lost to you, {PLAYER}, but I'm\n"
-	.string "not feeling down anymore.\p"
-	.string "Because I have a new purpose in life.\n"
-	.string "Together with my RALTS, I'm going\l"
-	.string "to challenge POKEMON GYMS and become\l"
-	.string "a great TRAINER.\p"
-	.string "Please watch me, {PLAYER}.\n"
-	.string "I'm going to be stronger than you.\p"
-	.string "When I do, I'm going to challenge you\n"
-	.string "to another battle.$"
+	.string "{JPN}ミツル『{PLAYER}さんに まけたけど\nもう おちこんでないよ\pだって ラルトスと いっしょに\nあちこちの ジムで うでだめし して\lすごい トレーナーに なるって\lもくひょうが できたから!\pいつか {PLAYER}さん よりも\nつよくなって もういちど\lポケモンしょうぶを おねがい するからね!$"
 
 VerdanturfTown_WandasHouse_Text_StrongerSpeechShort:
-	.string "WALLY: Please watch me, {PLAYER}.\n"
-	.string "I'm going to get stronger than you.\p"
-	.string "When I do, I'm going to challenge you\n"
-	.string "to another battle.$"
+	.string "{JPN}ミツル『いつか {PLAYER}さん よりも\nつよくなって もういちど\lポケモンしょうぶを おねがい するからね!$"
 
 VerdanturfTown_WandasHouse_Text_WallysNextDoor:
-	.string "UNCLE: Oh! {PLAYER}{KUN}!\n"
-	.string "WALLY's next door.\p"
-	.string "But, boy, there's something I have to\n"
-	.string "tell you.\p"
-	.string "This natural environment is doing\n"
-	.string "wonders for WALLY's health.\p"
-	.string "Maybe it's not just the environment.\n"
-	.string "It could be POKEMON that are giving\l"
-	.string "the boy hope.$"
+	.string "{JPN}おじさん『おお! {PLAYER}{KUN}\nミツルくんは となりに いるよ!\pしかし たいした もんだね!\pしぜんに かこまれた かんきょうが\nミツルくんを げんきに させている!\p……いや もしかすると\nあのこに きぼうを あたえて いるのは\pポケモンなのかも しれないな……$"
 
 VerdanturfTown_WandasHouse_Text_WallySlippedOff:
-	.string "WALLY's gone away...\n"
-	.string "He slipped off on his own...$"
+	.string "{JPN}ミツルくん……\nいつのまにか いなくなっちゃった……$"
 
 VerdanturfTown_WandasHouse_Text_WallyGoneThatFar:
-	.string "UNCLE: Is that right?\n"
-	.string "WALLY's gone away that far all by\l"
-	.string "himself...\p"
-	.string "Well, I have to give him credit--he is\n"
-	.string "my little brother's son.$"
+	.string "{JPN}おじさん『そうですか……\nあの ミツルくんが\lひとりで そんな とおくまで……\pさすがは わたしの おとうとの むすこだ!$"
 
 VerdanturfTown_WandasHouse_Text_MeetWanda:
-	.string "WANDA: You are?\n"
-	.string "Oh, right, I get it!\p"
-	.string "You're the {PLAYER} who WALLY was\n"
-	.string "telling me about.\p"
-	.string "I'm WALLY's cousin.\n"
-	.string "Glad to meet you!\p"
-	.string "I think WALLY's become a lot more lively\n"
-	.string "and healthy since he came here.$"
+	.string "{JPN}ミチル『あなたは……?\n……あ そうか!\pミツルくんが いってた\n{PLAYER}さんって あなたの ことね!\pわたしは ミツルくんの いとこ なの!\pどう? あのこ こっちに きてから\nずいぶん げんきに なったでしょう?$"
 
 VerdanturfTown_WandasHouse_Text_DontWorryAboutWally:
-	.string "WANDA: Don't worry about WALLY.\n"
-	.string "He'll be just fine.\p"
-	.string "I know my little cousin, and he has\n"
-	.string "POKEMON with him, too.$"
+	.string "{JPN}ミチル『ミツルくんの ことなら\nだいじょうぶ! しんぱい ないわよ!\pだって わたしの いとこ だし\nなにより ポケモンが いっしょ ですもの!$"
 
 VerdanturfTown_WandasHouse_Text_CanSeeGirlfriendEveryDay:
-	.string "Thanks to you, I can see my girlfriend\n"
-	.string "every day.\l"
-	.string "Happy? You bet I am!$"
+	.string "{JPN}きみの おかげで\nまいにち かのじょに あえて\lおれは ハッピーだよ!$"
 
 VerdanturfTown_WandasHouse_Text_DaughtersBoyfriendDriven:
-	.string "My daughter's boyfriend is a very\n"
-	.string "driven and passionate sort of person.\p"
-	.string "He's been digging a tunnel nonstop\n"
-	.string "just so he can see my daughter.\p"
-	.string "My daughter's a little concerned,\n"
-	.string "so she goes out to the tunnel a lot.$"
+	.string "{JPN}うちの むすめの こいびとは\nずいぶん じょうねつてきな ひとでね\pむすめに あうため だけに\nひたすら トンネルを ほってるってよ!\pむすめも しんぱい なのか\nいつも トンネルに あしを はこんでるよ$"
 
 VerdanturfTown_WandasHouse_Text_DaughtersBoyfriendWasDigging:
-	.string "It's amazing. My daughter's boyfriend\n"
-	.string "was digging the tunnel by hand!\p"
-	.string "It's so incredible!$"
+	.string "{JPN}なんと! むすめの こいびと ときたら\nすでで トンネルを ほっていたって!\pそりゃあ たまげた もんだ!$"
 
 VerdanturfTown_WandasHouse_Text_IfAnythingHappenedToWally:
-	.string "If anything were to happen to WALLY,\n"
-	.string "I would never be able to look his\l"
-	.string "parents in PETALBURG in the eye...$"
+	.string "{JPN}ミツルくんに もしものことが あったら\nあたしゃ トウカにいる ごりょうしんに\lあわせる かおが ないよ……$"
 
 VerdanturfTown_WandasHouse_Text_WallyWasInEverGrande:
-	.string "WALLY was in EVER GRANDE?\p"
-	.string "His parents in PETALBURG would be\n"
-	.string "astonished to hear that!$"
-
+	.string "{JPN}ミツルくんが サイユウに いたって!?\pそりゃ トウカの ごりょうしんも\nびっくり するだろうねぇ$"
