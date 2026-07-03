@@ -286,6 +286,9 @@ static bool8 MugshotTrainerPic_Slide(struct Sprite *);
 static bool8 MugshotTrainerPic_SlideSlow(struct Sprite *);
 static bool8 MugshotTrainerPic_SlidePartner(struct Sprite *);
 static bool8 MugshotTrainerPic_SlideOffscreen(struct Sprite *);
+static bool32 IsValidMugshotTrainerId(u16);
+static enum TrainerPicID GetMugshotTrainerPicFromId(u16);
+static enum MugshotColor GetMugshotColorFromId(u16);
 
 static s16 sDebug_RectangularSpiralData;
 static u8 sTestingTransitionId;
@@ -2278,7 +2281,7 @@ static bool8 Mugshot_SetGfx(struct Task *task)
     s16 i, j;
     u16 *tilemap, *tileset;
     const u16 *mugshotsMap = sMugshotsTilemap;
-    enum MugshotColor mugshotColor = GetTrainerMugshotColorFromId(TRAINER_BATTLE_PARAM.opponentA);
+    enum MugshotColor mugshotColor = GetMugshotColorFromId(TRAINER_BATTLE_PARAM.opponentA);
 
     GetBg0TilesDst(&tilemap, &tileset);
     CpuSet(sEliteFour_Tileset, tileset, 0xF0);
@@ -2583,9 +2586,9 @@ static void Mugshots_CreateTrainerPics(struct Task *task)
 {
     struct Sprite *opponentSpriteA, *opponentSpriteB=0, *playerSprite, *partnerSprite=0;
 
-    enum TrainerPicID trainerAPicId = GetTrainerPicFromId(TRAINER_BATTLE_PARAM.opponentA);
-    enum TrainerPicID trainerBPicId = GetTrainerPicFromId(TRAINER_BATTLE_PARAM.opponentB);
-    enum TrainerPicID partnerPicId = GetTrainerPicFromId(gPartnerTrainerId);
+    enum TrainerPicID trainerAPicId = GetMugshotTrainerPicFromId(TRAINER_BATTLE_PARAM.opponentA);
+    enum TrainerPicID trainerBPicId = GetMugshotTrainerPicFromId(TRAINER_BATTLE_PARAM.opponentB);
+    enum TrainerPicID partnerPicId = GetMugshotTrainerPicFromId(gPartnerTrainerId);
     struct Coords16 mugshotCoordsA = GetTrainerFrontPicMugshotCoords(trainerAPicId);
     s16 opponentARotationScales = 0;
     s16 opponentBRotationScales = 0;
@@ -2661,6 +2664,31 @@ static void Mugshots_CreateTrainerPics(struct Task *task)
 
     SetOamMatrixRotationScaling(opponentSpriteA->oam.matrixNum, opponentARotationScales, opponentARotationScales, 0);
     SetOamMatrixRotationScaling(playerSprite->oam.matrixNum, -512, 512, 0);
+}
+
+static bool32 IsValidMugshotTrainerId(u16 trainerId)
+{
+    if (trainerId == TRAINER_NONE || IsSpecialTrainer(trainerId))
+        return FALSE;
+    if (IsPartnerTrainerId(trainerId))
+        return TRUE;
+    return trainerId < TRAINERS_COUNT;
+}
+
+static enum TrainerPicID GetMugshotTrainerPicFromId(u16 trainerId)
+{
+    if (!IsValidMugshotTrainerId(trainerId))
+        return TRAINER_PIC_NONE;
+
+    return GetTrainerPicFromId(trainerId);
+}
+
+static enum MugshotColor GetMugshotColorFromId(u16 trainerId)
+{
+    if (!IsValidMugshotTrainerId(trainerId))
+        return MUGSHOT_COLOR_PURPLE;
+
+    return GetTrainerMugshotColorFromId(trainerId);
 }
 
 static void SpriteCB_MugshotTrainerPic(struct Sprite *sprite)
