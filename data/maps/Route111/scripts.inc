@@ -562,91 +562,156 @@ Route111_EventScript_TrainerHillSign::
 	end
 
 Route111_Text_BattleOurFamily:
-	.string "{JPN}きみ! たびの とちゅう だろうけれど\pどうだ? ここは ひとつ\nわたしたち かぞく 4にんと\lポケモン しょうぶを してみないか?$"
+	.string "Hello! I take it you're a traveler.\p"
+	.string "How's this? What do you say to taking\n"
+	.string "on our family of four in a series of\l"
+	.string "POKEMON battles?$"
 
 Route111_Text_IsThatSo:
-	.string "{JPN}あっそ!\nきが むいたら また おいで!$"
+	.string "Is that so?\n"
+	.string "Drop in, if you change your mind!$"
 
 Route111_Text_VictorIntro:
-	.string "{JPN}いい どきょうだ! きにいったぞ!$"
+	.string "That's the spirit! I like you!$"
 
 Route111_Text_VictorDefeat:
-	.string "{JPN}たはーっ!\nおもっていたより つよいんだね きみは!$"
+	.string "Aiyah!\n"
+	.string "You're a lot tougher than I expected!$"
 
 Route111_Text_VictorPostBattle:
-	.string "{JPN}おーい!\nなかなか つよい トレーナーが いたぞー!$"
+	.string "Hey, all!\n"
+	.string "I've found a pretty strong TRAINER!$"
 
 Route111_Text_VictoriaIntro:
-	.string "{JPN}あれま! いがいに わかいのね!\pうちの しゅじんに かってしまう とは\nなんと すごうでの トレーナー なの!\pじゃあ こんどは わたしと しょうぶよ!$"
+	.string "Oh, my goodness! Aren't you young?\p"
+	.string "You must be quite the TRAINER to beat\n"
+	.string "my husband, though.\p"
+	.string "It's my turn to battle now!$"
 
 Route111_Text_VictoriaDefeat:
-	.string "{JPN}んまーっ!\nあなたって なんて つよいのかしら!$"
+	.string "Oh, gosh!\n"
+	.string "I can't get over how strong you are!$"
 
 Route111_Text_VictoriaPostBattle:
-	.string "{JPN}つよいわよー!\nこのひと すっごく つよいわよー!$"
+	.string "There's a strong TRAINER here!\n"
+	.string "This one's really strong!$"
 
 Route111_Text_ViviIntro:
-	.string "{JPN}ママより つよいなんて すごーい!\pでも あたし だって つよいんだから!\nほんと なんだってば!$"
+	.string "You're stronger than Mommy? Wow!\p"
+	.string "But I'm strong, too!\n"
+	.string "Really! Honestly!$"
 
 Route111_Text_ViviDefeat:
-	.string "{JPN}えっ もしかして まけちゃった……$"
+	.string "Huh? Did I just lose?$"
 
 Route111_Text_ViviPostBattle:
-	.string "{JPN}くやしい……\p…… ぐっすん! おばあちゃーん!!$"
+	.string "This stinks...\p"
+	.string "...Snivel... Grandma!$"
 
 Route111_Text_VickyIntro:
-	.string "{JPN}こらーっ!\nわしの かわいい まごに なにすんじゃ!\pこうなったら わしが おまえさんを\nメタメタに してやるから かくごせぇ!$"
+	.string "How dare you make my granddaughter\n"
+	.string "cry!\p"
+	.string "For that, I'm going to smack you!\n"
+	.string "Prepare to lose!$"
 
 Route111_Text_VickyDefeat:
-	.string "{JPN}フガッ! つよいのう……\nまごの いうことは ほんとう じゃった$"
+	.string "Kwah! You are strong...\n"
+	.string "My granddaughter was right...$"
 
 Route111_Text_VickyPostBattle:
-	.string "{JPN}あんた…… いそぎのたびで ないのなら\nうちに よっていって おくれ……$"
+	.string "If you're not in any hurry,\n"
+	.string "visit with us awhile.$"
 
 Route111_Text_ToughToKeepWinningUpTheRanks:
-	.string "{JPN}もっと ポケモン きたえないと\nかちぬくのは きびしそうだ\pいままでの ジムリーダーより\nはるかに つよいと きくからな\lポケモンリーグにいる してんのうは!$"
+	.string "If you don't raise your POKEMON some\n"
+	.string "more, it could be tough to keep winning\l"
+	.string "up through the ranks.\p"
+	.string "I've heard the POKEMON LEAGUE's\n"
+	.string "ELITE FOUR are far stronger than\l"
+	.string "any GYM LEADER.$"
 
 Route111_Text_WinstrateFamilyDestroyedMe:
-	.string "{JPN}カチヌキいっかに いどんだけれど\n4にん つづけての ポケモンしょうぶは\lきびしいよな…… ボロまけ したよ$"
+	.string "I challenged the WINSTRATE family,\n"
+	.string "but four matches in a row is tough\l"
+	.string "going... They destroyed me.$"
 
 Route111_Text_RouteSignMauville:
-	.string "{JPN}ここは 111ばん どうろ\n{DOWN_ARROW} キンセツシティ$"
+	.string "ROUTE 111\n"
+	.string "{DOWN_ARROW} MAUVILLE CITY$"
 
 Route111_Text_WinstrateHouseSign:
-	.string "{JPN}われら かぞくの こころは ひとつ\n「カチヌキ ファミリーの いえ」$"
+	.string "Our family's hearts beat as one!\n"
+	.string "THE WINSTRATE'S HOUSE$"
 
 Route111_Text_RouteSign112:
-	.string "{JPN}ここは 111ばん どうろ\n{LEFT_ARROW} 112ばん どうろ$"
+	.string "ROUTE 111\n"
+	.string "{LEFT_ARROW} ROUTE 112$"
 
 Route111_Text_RouteSign113:
-	.string "{JPN}ここは 111ばん どうろ\n{LEFT_ARROW} 113ばん どうろ$"
+	.string "ROUTE 111\n"
+	.string "{LEFT_ARROW} ROUTE 113$"
 
 Route111_Text_OldLadysRestStopSign:
-	.string "{JPN}「ケンコーばあさんの いえ」\nつかれたと おもうなら よってらっしゃい!$"
+	.string "OLD LADY'S REST STOP\n"
+	.string "Come in and rest your tired bones.$"
 
 Route111_Text_TrainerTipsSpAtkSpDef:
-	.string "{JPN}おとくな けいじばん!!\pポケモンの つよさを あらわす ことばで\nとくこう とは\lとくしゅ こうげきりょく のこと!\pとくぼう とは\nとくしゅ ぼうぎょりょく のこと です!$"
+	.string "TRAINER TIPS\p"
+	.string "One of the indicators of a POKEMON's\n"
+	.string "powerfulness is SP. ATK. It stands for\l"
+	.string "SPECIAL ATTACK.\p"
+	.string "Likewise, SP. DEF stands for SPECIAL\n"
+	.string "DEFENSE.$"
 
 Route111_Text_ShouldBeMirageTowerAroundHere:
-	.string "{JPN}この あたりに すなで できた\nとうが たっている はず なんだが\pどうしたわけか\nみえるときと みえないときが あるのだ\pだから わたしは それを\nげんえいのとう と よんでいる……$"
+	.string "There should be a tower made of sand\n"
+	.string "around here somewhere.\p"
+	.string "But for some reason, it can be seen\n"
+	.string "sometimes, and sometimes not.\p"
+	.string "That's why I call it the MIRAGE TOWER.$"
 
 Route111_Text_MirageTowerClearlyVisible:
-	.string "{JPN}みえるぞ! すなのとう が!\nげんえい と よばれた すなのとうが\nはっきりと みえる!\pしかし そのすがたは はかなくて\nいまにも くずれて しまいそうだ……\pうーん はいって みたいが\nこわくて ゆうきが でん!$"
+	.string "I see it!\n"
+	.string "The tower of sand!\p"
+	.string "The sand tower they called a mirage\n"
+	.string "is clearly visible!\p"
+	.string "But it looks so fragile...\n"
+	.string "It could crumble away anytime...\p"
+	.string "I want to go inside it, but I can't\n"
+	.string "get my courage up for it...$"
 
 Route111_Text_ThatWasShockingSandRainedDown:
-	.string "{JPN}はー びっくりした……\pいきなり すなが そらから\nバラバラと ふって きたんじゃ\pで なかは どうじゃった?\nやはり すなの オバケ とか でたか?$"
+	.string "Whoa...\n"
+	.string "That was shocking.\p"
+	.string "Sand rained down in chunks all of\n"
+	.string "a sudden.\p"
+	.string "What was it like inside?\n"
+	.string "Were there sandy ghosts and such?$"
 
 Route111_Text_MirageTowerHasntBeenSeenSince:
-	.string "{JPN}あれから\nすなのとう は みえなく なった\pやはり げんえいのとう だったのか……$"
+	.string "Since I spoke to you, the tower of sand\n"
+	.string "hasn't been seen.\p"
+	.string "Perhaps it really was\n"
+	.string "the MIRAGE TOWER...$"
 
 Route111_Text_ClawFossilDisappeared:
-	.string "{JPN}ツメのかせきは\nすなに もぐって しまった……$"
+	.string "The CLAW FOSSIL disappeared into\n"
+	.string "the sand...$"
 
 Route111_Text_RootFossilDisappeared:
-	.string "{JPN}ねっこのかせきは\nすなに もぐって しまった……$"
+	.string "The ROOT FOSSIL disappeared into\n"
+	.string "the sand...$"
 
 Route111_Text_MauvilleUncleToldMeToTakeRockSmash:
-	.string "{JPN}しまった!\p111ばんどうろに いくなら\nいわくだきを もっていけ って\lキンセツの おじさんに いわれてたんだ!\pおじさん? サイクルショップの\nむかいがわの いえに すんでるよ$"
+	.string "Oh, no!\p"
+	.string "My uncle in MAUVILLE told me to take\n"
+	.string "ROCK SMASH with me if I was going to\l"
+	.string "ROUTE 111!\p"
+	.string "My uncle? He lives across from\n"
+	.string "the bike shop in MAUVILLE.$"
 
 Route111_Text_TrainerHillSign:
-	.string "{JPN}{RIGHT_ARROW} トレーナーヒル いりぐち\nかけあがれ! あつき トレーナーたち!$"
+	.string "{RIGHT_ARROW} TRAINER HILL ENTRANCE\p"
+	.string "Scale the heights, you hot-blooded\n"
+	.string "TRAINERS!$"
+

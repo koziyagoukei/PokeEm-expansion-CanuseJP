@@ -57,19 +57,46 @@ Route111_WinstrateFamilysHouse_EventScript_FaceOriginalDirection::
 	end
 
 Route111_WinstrateFamilysHouse_Text_MySonIsStrongerThanYou:
-	.string "{JPN}きみほど ポケモンを じょうずに\nつかいこなす トレーナーは はじめてだ!\pだが きみよりも\nわたしの むすこの ほうが つよいぞ!\pなんたって ポケモン リーグへ\nちょうせんに いった ぐらい だからな!$"
+	.string "You're the first TRAINER I've seen who\n"
+	.string "deploys POKEMON so masterfully.\p"
+	.string "But, I should tell you--my son is\n"
+	.string "stronger than you.\p"
+	.string "He even took the POKEMON LEAGUE\n"
+	.string "challenge, I'll have you know.$"
 
 Route111_WinstrateFamilysHouse_Text_LikeYouToHaveMachoBrace:
-	.string "{JPN}この きょうせいギプスを つかって\nわたしたち かぞくは\lポケモンを きたえて います!\pわたしたち かぞく ぜんいんに かった\nあなたには ひつようない かもしれませんが\lぜひ うけとって くださいな!$"
+	.string "We use this MACHO BRACE to more\n"
+	.string "effectively strengthen our POKEMON\l"
+	.string "in training.\p"
+	.string "Since you've beaten all of us here,\n"
+	.string "I don't know if you need it, but we\l"
+	.string "would like you to have our MACHO BRACE.$"
 
 Route111_WinstrateFamilysHouse_Text_PassionateAboutBattles:
-	.string "{JPN}わたしたちは ポケモンでの しょうぶに\nじょうねつを そそいで います!$"
+	.string "When it comes to POKEMON battles,\n"
+	.string "we tend to be pretty passionate.$"
 
 Route111_WinstrateFamilysHouse_Text_StrongerFamilyMembers:
-	.string "{JPN}パパより ママが つよくて\pママより あたしが つよくて\pあたしより おばあちゃんが つよくて\pでも おばあちゃんより つよかったのが\nあたしの あにき なの!$"
+	.string "Mommy is stronger than Daddy.\p"
+	.string "I'm stronger than Mommy.\p"
+	.string "And Grandma's stronger than me!\p"
+	.string "But my big brother is even stronger\n"
+	.string "than Grandma.$"
 
 Route111_WinstrateFamilysHouse_Text_GrandsonStrong:
-	.string "{JPN}あんたが いくら つよくても\nわしの まごに あったら\lかてなくて なきだすこと じゃろう……\pわしら かぞくが しってる トレーナーの\nだれよりも つよかった からのう!\pまごの やつも いまごろは\nポケモンリーグの チャンピオンに\lちょうせん しているの じゃろうか?\pそれとも わしの まご じゃから\nもう チャンピオン かもな…… ウヒヒ!$"
+	.string "There's no question that you're strong.\p"
+	.string "But if you were to battle my grandson,\n"
+	.string "you'd end up crying in frustration.\p"
+	.string "He's much stronger than any TRAINER\n"
+	.string "our family knows.\p"
+	.string "He must be challenging the POKEMON\n"
+	.string "LEAGUE CHAMPION by now.\p"
+	.string "Knowing my grandson, he could be the\n"
+	.string "CHAMPION already!$"
 
 Route111_WinstrateFamilysHouse_Text_GrandsonStrongShort:
-	.string "{JPN}まごの やつも いまごろは\nポケモンリーグの チャンピオンに\lちょうせん しているの じゃろうか?\pそれとも わしの まご じゃから\nもう チャンピオン かもな…… ウヒヒ!$"
+	.string "My grandson must be challenging the\n"
+	.string "POKEMON LEAGUE CHAMPION by now.\p"
+	.string "Knowing my grandson, he could be the\n"
+	.string "CHAMPION already!$"
+

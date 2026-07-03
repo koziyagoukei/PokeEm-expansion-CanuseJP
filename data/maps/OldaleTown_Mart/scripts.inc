@@ -53,10 +53,16 @@ OldaleTown_Mart_EventScript_Boy::
 	end
 
 OldaleTown_Mart_Text_PokeBallsAreSoldOut:
-	.string "{JPN}なんでも うりきれ らしくて\nモンスターボール かえないの……$"
+	.string "The clerk says they're all sold out.\n"
+	.string "I can't buy any POKe BALLS.$"
 
 OldaleTown_Mart_Text_ImGoingToBuyPokeBalls:
-	.string "{JPN}どんどん モンスターボール かって\nどんどん ポケモン つかまえちゃうわよ!$"
+	.string "I'm going to buy a bunch of POKe BALLS\n"
+	.string "and catch a bunch of POKEMON!$"
 
 OldaleTown_Mart_Text_RestoreHPWithPotion:
-	.string "{JPN}ポケモンは たいりょくが なくなると\nたたかう げんきも なくなる\pそんな ときは キズぐすりを つかって\nたいりょくを かいふく してあげるんだ!$"
+	.string "If a POKEMON gets hurt and loses its HP\n"
+	.string "and faints, it won't be able to battle.\p"
+	.string "To prevent your POKEMON from fainting,\n"
+	.string "restore its HP with a POTION.$"
+
