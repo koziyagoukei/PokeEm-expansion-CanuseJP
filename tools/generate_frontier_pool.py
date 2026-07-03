@@ -15,6 +15,7 @@ LEVEL_UP_DIR = ROOT / "src" / "data" / "pokemon" / "level_up_learnsets"
 FRONTIER_FULL_LEARNSETS = ROOT / "src" / "data" / "pokemon" / "frontier_full_learnsets.h"
 FORM_CHANGE_TABLES = ROOT / "src" / "data" / "pokemon" / "form_change_tables.h"
 SIGNATURE_Z_MOVES = ROOT / "src" / "battle_z_move.c"
+MOVE_INFO = ROOT / "src" / "data" / "moves_info.h"
 BATTLE_FRONTIER_MONS = ROOT / "src" / "data" / "battle_frontier" / "battle_frontier_mons.h"
 BATTLE_FRONTIER_TRAINER_MONS = ROOT / "src" / "data" / "battle_frontier" / "battle_frontier_trainer_mons.h"
 
@@ -139,6 +140,212 @@ NATURES = {
     ("spdef", "spatk"): "NATURE_CAREFUL",
 }
 
+Z_CRYSTALS_BY_TYPE = {
+    "TYPE_NORMAL": "ITEM_NORMALIUM_Z",
+    "TYPE_FIRE": "ITEM_FIRIUM_Z",
+    "TYPE_WATER": "ITEM_WATERIUM_Z",
+    "TYPE_ELECTRIC": "ITEM_ELECTRIUM_Z",
+    "TYPE_GRASS": "ITEM_GRASSIUM_Z",
+    "TYPE_ICE": "ITEM_ICIUM_Z",
+    "TYPE_FIGHTING": "ITEM_FIGHTINIUM_Z",
+    "TYPE_POISON": "ITEM_POISONIUM_Z",
+    "TYPE_GROUND": "ITEM_GROUNDIUM_Z",
+    "TYPE_FLYING": "ITEM_FLYINIUM_Z",
+    "TYPE_PSYCHIC": "ITEM_PSYCHIUM_Z",
+    "TYPE_BUG": "ITEM_BUGINIUM_Z",
+    "TYPE_ROCK": "ITEM_ROCKIUM_Z",
+    "TYPE_GHOST": "ITEM_GHOSTIUM_Z",
+    "TYPE_DRAGON": "ITEM_DRAGONIUM_Z",
+    "TYPE_DARK": "ITEM_DARKINIUM_Z",
+    "TYPE_STEEL": "ITEM_STEELIUM_Z",
+    "TYPE_FAIRY": "ITEM_FAIRIUM_Z",
+}
+
+DEFENSIVE_TERA_TYPES = (
+    "TYPE_WATER",
+    "TYPE_FAIRY",
+    "TYPE_STEEL",
+    "TYPE_POISON",
+    "TYPE_FIRE",
+    "TYPE_GRASS",
+)
+
+MOVE_BLACKLIST = {
+    "MOVE_NONE",
+    "MOVE_UNAVAILABLE",
+    "MOVE_SKETCH",
+    "MOVE_CELEBRATE",
+    "MOVE_HAPPY_HOUR",
+    "MOVE_HOLD_HANDS",
+    "MOVE_HYPER_BEAM",
+    "MOVE_GIGA_IMPACT",
+    "MOVE_BLAST_BURN",
+    "MOVE_FRENZY_PLANT",
+    "MOVE_HYDRO_CANNON",
+    "MOVE_ROCK_WRECKER",
+    "MOVE_ROAR_OF_TIME",
+    "MOVE_FOCUS_PUNCH",
+}
+
+PHYSICAL_SETUP_MOVES = (
+    "MOVE_SWORDS_DANCE",
+    "MOVE_DRAGON_DANCE",
+    "MOVE_BULK_UP",
+    "MOVE_COIL",
+    "MOVE_SHELL_SMASH",
+    "MOVE_SHIFT_GEAR",
+    "MOVE_BELLY_DRUM",
+    "MOVE_HONE_CLAWS",
+    "MOVE_VICTORY_DANCE",
+    "MOVE_CURSE",
+)
+
+SPECIAL_SETUP_MOVES = (
+    "MOVE_NASTY_PLOT",
+    "MOVE_QUIVER_DANCE",
+    "MOVE_CALM_MIND",
+    "MOVE_TAIL_GLOW",
+    "MOVE_GEOMANCY",
+    "MOVE_TAKE_HEART",
+    "MOVE_AGILITY",
+)
+
+RECOVERY_MOVES = (
+    "MOVE_RECOVER",
+    "MOVE_ROOST",
+    "MOVE_SLACK_OFF",
+    "MOVE_SOFT_BOILED",
+    "MOVE_MILK_DRINK",
+    "MOVE_MOONLIGHT",
+    "MOVE_SYNTHESIS",
+    "MOVE_MORNING_SUN",
+    "MOVE_SHORE_UP",
+    "MOVE_STRENGTH_SAP",
+    "MOVE_WISH",
+    "MOVE_REST",
+)
+
+UTILITY_MOVES = (
+    "MOVE_STEALTH_ROCK",
+    "MOVE_SPIKES",
+    "MOVE_TOXIC_SPIKES",
+    "MOVE_STICKY_WEB",
+    "MOVE_DEFOG",
+    "MOVE_RAPID_SPIN",
+    "MOVE_TAUNT",
+    "MOVE_ENCORE",
+    "MOVE_THUNDER_WAVE",
+    "MOVE_WILL_O_WISP",
+    "MOVE_TOXIC",
+    "MOVE_YAWN",
+    "MOVE_LEECH_SEED",
+    "MOVE_SUBSTITUTE",
+    "MOVE_PROTECT",
+    "MOVE_TRICK_ROOM",
+    "MOVE_LIGHT_SCREEN",
+    "MOVE_REFLECT",
+    "MOVE_AURORA_VEIL",
+    "MOVE_HAZE",
+    "MOVE_ROAR",
+    "MOVE_WHIRLWIND",
+)
+
+PIVOT_MOVES = (
+    "MOVE_U_TURN",
+    "MOVE_VOLT_SWITCH",
+    "MOVE_FLIP_TURN",
+    "MOVE_PARTING_SHOT",
+    "MOVE_BATON_PASS",
+    "MOVE_SHED_TAIL",
+    "MOVE_CHILLY_RECEPTION",
+    "MOVE_TELEPORT",
+)
+
+PRIORITY_MOVES = (
+    "MOVE_EXTREME_SPEED",
+    "MOVE_SUCKER_PUNCH",
+    "MOVE_FAKE_OUT",
+    "MOVE_FIRST_IMPRESSION",
+    "MOVE_JET_PUNCH",
+    "MOVE_AQUA_JET",
+    "MOVE_BULLET_PUNCH",
+    "MOVE_MACH_PUNCH",
+    "MOVE_ICE_SHARD",
+    "MOVE_SHADOW_SNEAK",
+    "MOVE_VACUUM_WAVE",
+    "MOVE_GRASSY_GLIDE",
+    "MOVE_ACCELEROCK",
+    "MOVE_QUICK_ATTACK",
+)
+
+HIGH_VALUE_ATTACKS = (
+    "MOVE_KNOCK_OFF",
+    "MOVE_EARTHQUAKE",
+    "MOVE_STOMPING_TANTRUM",
+    "MOVE_HIGH_HORSEPOWER",
+    "MOVE_CLOSE_COMBAT",
+    "MOVE_DRAIN_PUNCH",
+    "MOVE_BODY_PRESS",
+    "MOVE_SUPERPOWER",
+    "MOVE_FLARE_BLITZ",
+    "MOVE_FIRE_BLAST",
+    "MOVE_HEAT_WAVE",
+    "MOVE_WAVE_CRASH",
+    "MOVE_SURF",
+    "MOVE_SCALD",
+    "MOVE_LIQUIDATION",
+    "MOVE_HEADLONG_RUSH",
+    "MOVE_ICICLE_CRASH",
+    "MOVE_ICE_SPINNER",
+    "MOVE_TRIPLE_AXEL",
+    "MOVE_MOONBLAST",
+    "MOVE_PLAY_ROUGH",
+    "MOVE_SHADOW_BALL",
+    "MOVE_POLTERGEIST",
+    "MOVE_SHADOW_CLAW",
+    "MOVE_EARTH_POWER",
+    "MOVE_THUNDERBOLT",
+    "MOVE_WILD_CHARGE",
+    "MOVE_THUNDER",
+    "MOVE_ICE_BEAM",
+    "MOVE_FLAMETHROWER",
+    "MOVE_HYDRO_PUMP",
+    "MOVE_WATERFALL",
+    "MOVE_DRACO_METEOR",
+    "MOVE_DRAGON_CLAW",
+    "MOVE_OUTRAGE",
+    "MOVE_LEAF_STORM",
+    "MOVE_GIGA_DRAIN",
+    "MOVE_POWER_WHIP",
+    "MOVE_ENERGY_BALL",
+    "MOVE_MAKE_IT_RAIN",
+    "MOVE_FLASH_CANNON",
+    "MOVE_IRON_HEAD",
+    "MOVE_POISON_JAB",
+    "MOVE_SLUDGE_BOMB",
+    "MOVE_SLUDGE_WAVE",
+    "MOVE_BRAVE_BIRD",
+    "MOVE_AIR_SLASH",
+    "MOVE_HURRICANE",
+    "MOVE_STONE_EDGE",
+    "MOVE_ROCK_SLIDE",
+    "MOVE_BUG_BUZZ",
+    "MOVE_X_SCISSOR",
+    "MOVE_DARK_PULSE",
+    "MOVE_PSYCHIC",
+    "MOVE_PSYSHOCK",
+)
+
+MULTI_HIT_MOVES = {
+    "MOVE_ICICLE_SPEAR",
+    "MOVE_BULLET_SEED",
+    "MOVE_ROCK_BLAST",
+    "MOVE_SCALE_SHOT",
+    "MOVE_TAIL_SLAP",
+    "MOVE_ARM_THRUST",
+    "MOVE_BONEMERANG",
+}
+
 
 @dataclass
 class SpeciesData:
@@ -147,11 +354,23 @@ class SpeciesData:
     order: int
     stats: dict[str, int]
     type1: str
+    type2: str
     abilities: list[str]
     level_up_table: str | None
     form_change_table: str | None
     evolutions: list[str]
     flags: set[str]
+
+
+@dataclass
+class MoveData:
+    move: str
+    power: int
+    type: str
+    category: str
+    accuracy: int
+    priority: int
+    effect: str
 
 
 def read_text(path: Path) -> str:
@@ -355,10 +574,12 @@ def parse_species_info(values: dict[str, int], order: dict[str, int]) -> dict[st
 
             type_match = re.search(r"\.types\s*=\s*MON_TYPES\(([^)]*)\)", block, re.S)
             type1 = "TYPE_NORMAL"
+            type2 = "TYPE_NORMAL"
             if type_match:
                 type_tokens = [token.strip() for token in type_match.group(1).split(",") if token.strip()]
                 if type_tokens:
                     type1 = resolve_type_token(type_tokens[0], macros)
+                    type2 = resolve_type_token(type_tokens[1], macros) if len(type_tokens) > 1 else type1
 
             ability_match = re.search(r"\.abilities\s*=\s*\{([^}]*)\}", block, re.S)
             abilities = re.findall(r"ABILITY_[A-Z0-9_]+", ability_match.group(1)) if ability_match else []
@@ -402,6 +623,7 @@ def parse_species_info(values: dict[str, int], order: dict[str, int]) -> dict[st
                 order=order.get(species, len(order)),
                 stats=stats,
                 type1=type1,
+                type2=type2,
                 abilities=abilities,
                 level_up_table=level_match.group(1) if level_match else None,
                 form_change_table=form_match.group(1) if form_match else None,
@@ -485,6 +707,44 @@ def parse_signature_z_moves() -> dict[str, tuple[str, str]]:
     return z_moves
 
 
+def first_int(expr: str, default: int = 0) -> int:
+    if "?" in expr and ":" in expr:
+        expr = expr.split("?", 1)[1].split(":", 1)[0]
+    m = re.search(r"-?\d+", expr)
+    return int(m.group(0)) if m else default
+
+
+def first_token(expr: str, prefix: str, default: str) -> str:
+    m = re.search(rf"{prefix}[A-Z0-9_]+", expr)
+    return m.group(0) if m else default
+
+
+def get_move_field(block: str, field: str) -> str:
+    m = re.search(rf"\.{field}\s*=\s*([^,\n]+)", block)
+    return m.group(1).strip() if m else ""
+
+
+def parse_move_info() -> dict[str, MoveData]:
+    text = read_text(MOVE_INFO)
+    moves: dict[str, MoveData] = {}
+    for match in re.finditer(r"\[(MOVE_[A-Z0-9_]+)\]\s*=\s*\{", text):
+        move = match.group(1)
+        start = text.find("{", match.start())
+        end = find_matching_brace(text, start)
+        block = text[start : end + 1]
+
+        moves[move] = MoveData(
+            move=move,
+            power=first_int(get_move_field(block, "power")),
+            type=first_token(get_move_field(block, "type"), "TYPE_", "TYPE_NORMAL"),
+            category=first_token(get_move_field(block, "category"), "DAMAGE_CATEGORY_", "DAMAGE_CATEGORY_STATUS"),
+            accuracy=first_int(get_move_field(block, "accuracy"), 100),
+            priority=first_int(get_move_field(block, "priority")),
+            effect=first_token(get_move_field(block, "effect"), "EFFECT_", "EFFECT_HIT"),
+        )
+    return moves
+
+
 def is_excluded_base(species: str, data: SpeciesData) -> bool:
     if species in EXTRA_SPECIES:
         return False
@@ -529,55 +789,223 @@ def choose_ability(species: str, abilities: list[str], slot: int) -> str:
     return ability if ability != "ABILITY_NONE" else fallback
 
 
-def choose_ev(stats: dict[str, int]) -> str:
-    if stats["atk"] > stats["spatk"]:
+def choose_role(data: SpeciesData, slot: int) -> str:
+    physical = data.stats["atk"] >= data.stats["spatk"]
+    if slot == 3:
+        return "bulky"
+    if slot == 1:
+        return "physical" if physical else "special"
+    if abs(data.stats["atk"] - data.stats["spatk"]) <= 30:
+        return "special" if physical else "physical"
+    return "physical" if physical else "special"
+
+
+def choose_ev(stats: dict[str, int], role: str) -> str:
+    if role == "physical":
         return "TRAINER_PARTY_EVS(0, 252, 0, 252, 0, 0)"
-    if stats["spatk"] > stats["atk"]:
+    if role == "special":
         return "TRAINER_PARTY_EVS(0, 0, 0, 252, 252, 0)"
-    return "TRAINER_PARTY_EVS(0, 252, 0, 0, 252, 0)"
+    if stats["def"] <= stats["spdef"]:
+        return "TRAINER_PARTY_EVS(252, 0, 252, 0, 0, 4)"
+    return "TRAINER_PARTY_EVS(252, 0, 4, 0, 0, 252)"
 
 
-def choose_nature(stats: dict[str, int]) -> str:
-    relevant = {key: stats[key] for key in ("atk", "def", "speed", "spatk", "spdef")}
-    max_value = max(relevant.values())
-    min_value = min(relevant.values())
-    max_stats = [key for key, value in relevant.items() if value == max_value]
-    min_stats = [key for key, value in relevant.items() if value == min_value]
-    if len(max_stats) != 1 or len(min_stats) != 1 or max_stats[0] == min_stats[0]:
-        return "NATURE_QUIRKY"
-    return NATURES.get((max_stats[0], min_stats[0]), "NATURE_QUIRKY")
+def choose_nature(stats: dict[str, int], role: str) -> str:
+    if role == "physical":
+        return "NATURE_JOLLY" if stats["speed"] >= 80 else "NATURE_ADAMANT"
+    if role == "special":
+        return "NATURE_TIMID" if stats["speed"] >= 80 else "NATURE_MODEST"
+    return "NATURE_BOLD" if stats["def"] <= stats["spdef"] else "NATURE_CALM"
 
 
-def choose_moves(species: str, data: SpeciesData, level_up: dict[str, list[str]], full: dict[str, list[str]], z_source: str | None) -> list[str]:
+def species_types(data: SpeciesData) -> set[str]:
+    return {data.type1, data.type2}
+
+
+def legal_move_pool(species: str, data: SpeciesData, level_up: dict[str, list[str]], full: dict[str, list[str]], move_info: dict[str, MoveData], z_source: str | None) -> list[str]:
     level_moves = list(level_up.get(data.level_up_table or "", []))
     full_moves = list(full.get(species, []))
 
     moves: list[str] = []
     if z_source:
         moves.append(z_source)
-        for move in reversed(level_moves):
-            if move not in moves:
-                moves.append(move)
-            if len(moves) == 4:
-                return moves
-        for move in full_moves:
-            if move not in moves:
-                moves.append(move)
-            if len(moves) == 4:
-                return moves
-    else:
-        for move in level_moves[-4:]:
-            if move not in moves:
-                moves.append(move)
-        for move in full_moves:
-            if move not in moves:
-                moves.append(move)
-            if len(moves) == 4:
-                return moves
+    for move in full_moves + list(reversed(level_moves)):
+        if move in MOVE_BLACKLIST or move not in move_info:
+            continue
+        if move not in moves:
+            moves.append(move)
+    return moves
 
+
+def add_move(moves: list[str], move: str, available: set[str]) -> bool:
+    if move in available and move not in moves:
+        moves.append(move)
+        return True
+    return False
+
+
+def add_from_priority(moves: list[str], priority: tuple[str, ...], available: set[str], limit: int = 4) -> bool:
+    for move in priority:
+        if len(moves) >= limit:
+            return False
+        if add_move(moves, move, available):
+            return True
+    return False
+
+
+def move_damage_score(move: str, data: SpeciesData, move_info: dict[str, MoveData], wanted_category: str | None, used_types: set[str]) -> int:
+    info = move_info[move]
+    if info.category == "DAMAGE_CATEGORY_STATUS":
+        return -10000
+    if wanted_category is not None and info.category != wanted_category:
+        return -10000
+
+    power = info.power
+    if power <= 1:
+        power = 45
+    score = power
+    if info.type in species_types(data):
+        score += 35
+    if info.type not in used_types:
+        score += 15
+    if move in HIGH_VALUE_ATTACKS:
+        score += 25
+    if move in PRIORITY_MOVES or info.priority > 0:
+        score += 20
+    if info.accuracy and info.accuracy < 90:
+        score -= 90 - info.accuracy
+    return score
+
+
+def add_best_damage(moves: list[str], available: list[str], data: SpeciesData, move_info: dict[str, MoveData], wanted_category: str | None = None) -> bool:
+    used_types = {move_info[move].type for move in moves if move in move_info}
+    candidates = [move for move in available if move not in moves]
+    candidates.sort(
+        key=lambda move: move_damage_score(move, data, move_info, wanted_category, used_types),
+        reverse=True,
+    )
+    for move in candidates:
+        if move_damage_score(move, data, move_info, wanted_category, used_types) > -10000:
+            moves.append(move)
+            return True
+    return False
+
+
+def fill_moves(moves: list[str], available: list[str], data: SpeciesData, move_info: dict[str, MoveData]) -> list[str]:
+    while len(moves) < 4 and add_best_damage(moves, available, data, move_info):
+        pass
+    for move in UTILITY_MOVES + PIVOT_MOVES + RECOVERY_MOVES:
+        if len(moves) >= 4:
+            break
+        add_move(moves, move, set(available))
+    for move in available:
+        if len(moves) >= 4:
+            break
+        add_move(moves, move, set(available))
     while len(moves) < 4:
         moves.append("MOVE_NONE")
     return moves[:4]
+
+
+def choose_moves(species: str, data: SpeciesData, level_up: dict[str, list[str]], full: dict[str, list[str]], move_info: dict[str, MoveData], z_source: str | None, slot: int) -> list[str]:
+    if species == "SPECIES_DITTO":
+        return ["MOVE_TRANSFORM", "MOVE_TRANSFORM", "MOVE_TRANSFORM", "MOVE_TRANSFORM"]
+
+    required_z_move = z_source if slot == 1 else None
+    available = legal_move_pool(species, data, level_up, full, move_info, required_z_move)
+    available_set = set(available)
+    role = choose_role(data, slot)
+    moves: list[str] = []
+
+    if required_z_move:
+        add_move(moves, required_z_move, available_set)
+
+    if role == "physical":
+        if slot != 2:
+            add_from_priority(moves, PHYSICAL_SETUP_MOVES, available_set)
+        add_best_damage(moves, available, data, move_info, "DAMAGE_CATEGORY_PHYSICAL")
+        add_from_priority(moves, PRIORITY_MOVES + PIVOT_MOVES, available_set)
+        add_best_damage(moves, available, data, move_info, "DAMAGE_CATEGORY_PHYSICAL")
+        if slot == 2:
+            add_from_priority(moves, UTILITY_MOVES, available_set)
+    elif role == "special":
+        if slot != 2:
+            add_from_priority(moves, SPECIAL_SETUP_MOVES, available_set)
+        add_best_damage(moves, available, data, move_info, "DAMAGE_CATEGORY_SPECIAL")
+        add_from_priority(moves, PIVOT_MOVES, available_set)
+        if slot == 2:
+            add_move(moves, "MOVE_HIDDEN_POWER", available_set)
+            add_move(moves, "MOVE_TERA_BLAST", available_set)
+        add_best_damage(moves, available, data, move_info, "DAMAGE_CATEGORY_SPECIAL")
+    else:
+        add_from_priority(moves, RECOVERY_MOVES, available_set)
+        if "MOVE_REST" in moves:
+            add_move(moves, "MOVE_SLEEP_TALK", available_set)
+        add_from_priority(moves, UTILITY_MOVES, available_set, limit=3)
+        preferred_category = "DAMAGE_CATEGORY_PHYSICAL" if data.stats["atk"] >= data.stats["spatk"] else "DAMAGE_CATEGORY_SPECIAL"
+        add_best_damage(moves, available, data, move_info, preferred_category)
+        add_from_priority(moves, PIVOT_MOVES, available_set)
+
+    if role == "physical":
+        while len(moves) < 4 and add_best_damage(moves, available, data, move_info, "DAMAGE_CATEGORY_PHYSICAL"):
+            pass
+    elif role == "special":
+        while len(moves) < 4 and add_best_damage(moves, available, data, move_info, "DAMAGE_CATEGORY_SPECIAL"):
+            pass
+
+    return fill_moves(moves, available, data, move_info)
+
+
+def choose_tera_type(data: SpeciesData, moves: list[str], move_info: dict[str, MoveData], slot: int) -> str:
+    if slot == 3:
+        return DEFENSIVE_TERA_TYPES[data.order % len(DEFENSIVE_TERA_TYPES)]
+    for move in moves:
+        info = move_info.get(move)
+        if info and info.category != "DAMAGE_CATEGORY_STATUS" and info.type not in species_types(data):
+            return info.type
+    return data.type1
+
+
+def z_item_for_moves(moves: list[str], move_info: dict[str, MoveData]) -> str:
+    for move in moves:
+        info = move_info.get(move)
+        if info and info.category != "DAMAGE_CATEGORY_STATUS":
+            return Z_CRYSTALS_BY_TYPE.get(info.type, "ITEM_NORMALIUM_Z")
+    return "ITEM_NORMALIUM_Z"
+
+
+def has_status_move(moves: list[str], move_info: dict[str, MoveData]) -> bool:
+    return any(move_info.get(move, MoveData(move, 0, "TYPE_NORMAL", "DAMAGE_CATEGORY_STATUS", 0, 0, "EFFECT_HIT")).category == "DAMAGE_CATEGORY_STATUS" for move in moves)
+
+
+def choose_held_item(data: SpeciesData, slot: int, role: str, moves: list[str], move_info: dict[str, MoveData], mega_items: list[str], z_item: str, z_source: str | None) -> str:
+    if data.species == "SPECIES_DITTO":
+        return ("ITEM_CHOICE_SCARF", "ITEM_QUICK_POWDER", "ITEM_FOCUS_SASH")[slot - 1]
+    if z_source and slot == 1:
+        return z_item
+    if mega_items and slot <= len(mega_items):
+        return mega_items[slot - 1]
+    if data.species in EXTRA_SPECIES and slot == 3:
+        return "ITEM_EVIOLITE"
+    if "isParadox" in data.flags and slot != 3:
+        return "ITEM_BOOSTER_ENERGY"
+    if "MOVE_SHELL_SMASH" in moves or "MOVE_GEOMANCY" in moves:
+        return "ITEM_WHITE_HERB"
+    if any(move in MULTI_HIT_MOVES for move in moves):
+        return "ITEM_LOADED_DICE"
+    if slot == 2:
+        return z_item_for_moves(moves, move_info)
+    if role == "physical":
+        if has_status_move(moves, move_info):
+            return "ITEM_LIFE_ORB" if data.stats["speed"] >= 75 else "ITEM_CLEAR_AMULET"
+        return "ITEM_LIFE_ORB" if data.stats["speed"] >= 75 else "ITEM_CHOICE_BAND"
+    if role == "special":
+        if has_status_move(moves, move_info):
+            return "ITEM_LIFE_ORB"
+        return "ITEM_LIFE_ORB" if data.stats["speed"] >= 75 else "ITEM_CHOICE_SPECS"
+    if all(move_info.get(move, MoveData(move, 0, "TYPE_NORMAL", "DAMAGE_CATEGORY_STATUS", 0, 0, "EFFECT_HIT")).category != "DAMAGE_CATEGORY_STATUS" for move in moves):
+        return "ITEM_ASSAULT_VEST"
+    return "ITEM_LEFTOVERS" if data.stats["hp"] >= 80 else "ITEM_SITRUS_BERRY"
 
 
 def write_frontier_constants(selected: list[SpeciesData]) -> None:
@@ -609,6 +1037,7 @@ def write_frontier_constants(selected: list[SpeciesData]) -> None:
 def write_battle_frontier_mons(selected: list[SpeciesData]) -> None:
     level_up = parse_level_up_learnsets()
     full = parse_full_learnsets()
+    move_info = parse_move_info()
     mega_stones_by_form_table = parse_mega_stones_by_form_table()
     z_moves = parse_signature_z_moves()
 
@@ -622,29 +1051,26 @@ def write_battle_frontier_mons(selected: list[SpeciesData]) -> None:
         mega_items = mega_stones_by_form_table.get(data.form_change_table or "", [])
 
         for slot in range(1, 4):
-            held_item = "ITEM_NONE"
-            if z_source:
-                held_item = z_item
-            elif mega_items:
-                held_item = mega_items[(slot - 1) % len(mega_items)]
-            elif data.species in EXTRA_SPECIES:
-                held_item = "ITEM_EVIOLITE"
-
-            moves = choose_moves(data.species, data, level_up, full, z_source)
+            role = choose_role(data, slot)
+            if data.species == "SPECIES_DITTO":
+                role = "physical"
+            moves = choose_moves(data.species, data, level_up, full, move_info, z_source, slot)
+            held_item = choose_held_item(data, slot, role, moves, move_info, mega_items, z_item, z_source)
             lines.extend(
                 [
                     f"    [{mon_label(data.species, slot)}] = {{",
                     f"        .species = {data.species},",
                     f"        .moves = {{{', '.join(moves)}}},",
                     f"        .heldItem = {held_item},",
-                    f"        .ev = {choose_ev(data.stats)},",
-                    f"        .nature = {choose_nature(data.stats)},",
+                    f"        .ev = {choose_ev(data.stats, role)},",
+                    f"        .nature = {choose_nature(data.stats, role)},",
                     "        .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),",
                     f"        .ability = {choose_ability(data.species, data.abilities, slot - 1)},",
-                    f"        .teraType = {data.type1},",
+                    f"        .teraType = {choose_tera_type(data, moves, move_info, slot)},",
                     "        .shouldUseDynamax = TRUE,",
                     "        .dynamaxLevel = 10,",
                     "        .ball = BALL_POKE,",
+                    "        .gender = TRAINER_MON_RANDOM_GENDER,",
                     "    },",
                 ]
             )
