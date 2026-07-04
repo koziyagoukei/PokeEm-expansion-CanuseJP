@@ -9335,6 +9335,18 @@
       "blockdata_filepath": "data/layouts/ultra_frontie_hub/map.bin",
       "border_height": 2,
       "border_width": 2
+    },
+    {
+      "id": "LAYOUT_PARTY_ROAMER_PARK",
+      "name": "PartyRoamerPark_Layout",
+      "width": 28,
+      "height": 24,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Fortree",
+      "border_filepath": "data/layouts/PartyRoamerPark/border.bin",
+      "blockdata_filepath": "data/layouts/PartyRoamerPark/map.bin",
+      "border_height": 2,
+      "border_width": 2
     }
   ]
 }

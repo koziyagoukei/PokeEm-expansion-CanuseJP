@@ -1,7 +1,7 @@
 {
   "id": "MAP_PARTY_ROAMER_PARK",
   "name": "PartyRoamerPark",
-  "layout": "LAYOUT_ULTRA_FRONTIE_HUB",
+  "layout": "LAYOUT_PARTY_ROAMER_PARK",
   "music": "MUS_SAFARI_ZONE",
   "region_map_section": "MAPSEC_SPECIAL_AREA",
   "requires_flash": false,

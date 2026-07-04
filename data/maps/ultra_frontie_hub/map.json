@@ -2,7 +2,7 @@
   "id": "MAP_ULTRA_FRONTIE_HUB",
   "name": "ultra_frontie_hub",
   "layout": "LAYOUT_ULTRA_FRONTIE_HUB",
-  "music": "MUS_VS_FRONTIER_BRAIN",
+  "music": "MUS_RG_FOLLOW_ME",
   "region_map_section": "MAPSEC_SPECIAL_AREA",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

@@ -7,6 +7,7 @@
 #include "data.h"
 #include "decompress.h"
 #include "event_object_movement.h"
+#include "field_effect.h"
 #include "field_weather.h"
 #include "gpu_regs.h"
 #include "graphics.h"
@@ -568,6 +569,65 @@ static void SetStructPtr(u8 taskId, void *ptr)
     taskDataPtr[1] = structPtr >> 8;
     taskDataPtr[2] = structPtr >> 16;
     taskDataPtr[3] = structPtr >> 24;
+}
+
+static bool8 IsValidVisualizerSpriteId(u8 spriteId)
+{
+    return spriteId != SPRITE_NONE && spriteId < MAX_SPRITES && gSprites[spriteId].inUse;
+}
+
+static void InitVisualizerSpriteIds(struct PokemonSpriteVisualizer *data)
+{
+    data->frontspriteId = SPRITE_NONE;
+    data->backspriteId = SPRITE_NONE;
+    data->iconspriteId = SPRITE_NONE;
+    data->followerspriteId = SPRITE_NONE;
+    data->frontShadowSpriteIdPrimary = SPRITE_NONE;
+    data->frontShadowSpriteIdSecondary = SPRITE_NONE;
+    data->modifyArrows.arrowSpriteId[0] = SPRITE_NONE;
+    data->modifyArrows.arrowSpriteId[1] = SPRITE_NONE;
+    data->optionArrows.arrowSpriteId[0] = SPRITE_NONE;
+    data->yPosModifyArrows.arrowSpriteId[0] = SPRITE_NONE;
+}
+
+static void DestroyVisualizerSprite(u8 *spriteId)
+{
+    if (IsValidVisualizerSpriteId(*spriteId))
+        DestroySprite(&gSprites[*spriteId]);
+
+    *spriteId = SPRITE_NONE;
+}
+
+static void DestroyVisualizerFollowerSprite(struct PokemonSpriteVisualizer *data)
+{
+    if (IsValidVisualizerSpriteId(data->followerspriteId))
+    {
+        struct Sprite *sprite = &gSprites[data->followerspriteId];
+        u16 tileStart = sprite->sheetTileStart;
+        u8 paletteNum = sprite->oam.paletteNum;
+
+        DestroySprite(sprite);
+
+        if (tileStart != TAG_NONE)
+            FieldEffectFreeTilesIfUnused(tileStart);
+        FieldEffectFreePaletteIfUnused(paletteNum);
+    }
+
+    data->followerspriteId = SPRITE_NONE;
+}
+
+static void DestroyPokemonSpriteVisualizerSprites(struct PokemonSpriteVisualizer *data)
+{
+    DestroyVisualizerSprite(&data->frontspriteId);
+    DestroyVisualizerSprite(&data->backspriteId);
+    DestroyVisualizerSprite(&data->iconspriteId);
+    DestroyVisualizerFollowerSprite(data);
+    DestroyVisualizerSprite(&data->frontShadowSpriteIdPrimary);
+    DestroyVisualizerSprite(&data->frontShadowSpriteIdSecondary);
+    DestroyVisualizerSprite(&data->modifyArrows.arrowSpriteId[0]);
+    DestroyVisualizerSprite(&data->modifyArrows.arrowSpriteId[1]);
+    DestroyVisualizerSprite(&data->optionArrows.arrowSpriteId[0]);
+    DestroyVisualizerSprite(&data->yPosModifyArrows.arrowSpriteId[0]);
 }
 
 //Digit and arrow functions
@@ -1267,6 +1327,7 @@ void CB2_Pokemon_Sprite_Visualizer(void)
 
         data = AllocZeroed(sizeof(struct PokemonSpriteVisualizer));
         SetStructPtr(taskId, data);
+        InitVisualizerSpriteIds(data);
 
         data->currentmonId = SPECIES_BULBASAUR;
         species = IsSpeciesEnabled(data->currentmonId) ? SanitizeSpeciesId(data->currentmonId) : SPECIES_NONE;
@@ -1825,7 +1886,7 @@ static void HandleInput_PokemonSpriteVisualizer(u8 taskId)
         {
             OpenSubmenu(SUBMENU_SPRITE_COORDS, taskId);
 
-            if (data->followerspriteId != 0)
+            if (IsValidVisualizerSpriteId(data->followerspriteId))
                 gSprites[data->followerspriteId].invisible = TRUE;
         }
         else if (JOY_NEW(B_BUTTON))
@@ -1887,7 +1948,7 @@ static void HandleInput_PokemonSpriteVisualizer(u8 taskId)
             OpenSubmenu(SUBMENU_ANIMS_BG, taskId);
             UpdateMonAnimNames(taskId);
 
-            if (data->followerspriteId != 0)
+            if (IsValidVisualizerSpriteId(data->followerspriteId))
                 gSprites[data->followerspriteId].invisible = FALSE;
         }
         else if (JOY_NEW(DPAD_DOWN))
@@ -1993,19 +2054,9 @@ static void ReloadPokemonSprites(struct PokemonSpriteVisualizer *data)
     u8 front_x = sBattlerCoords[0][1].x;
     u8 front_y;
 
-    DestroySprite(&gSprites[data->frontspriteId]);
-    DestroySprite(&gSprites[data->backspriteId]);
-    DestroySprite(&gSprites[data->iconspriteId]);
-
-    if (data->followerspriteId != 0)
-        DestroySprite(&gSprites[data->followerspriteId]);
-
-    DestroySprite(&gSprites[data->frontShadowSpriteIdPrimary]);
-    if (B_ENEMY_MON_SHADOW_STYLE >= GEN_4 && P_GBA_STYLE_SPECIES_GFX == FALSE)
-        DestroySprite(&gSprites[data->frontShadowSpriteIdSecondary]);
+    DestroyPokemonSpriteVisualizerSprites(data);
 
     FreeMonSpritesGfx();
-    ResetSpriteData();
     ResetPaletteFade();
     FreeAllSpritePalettes();
     ResetAllPicSprites();
@@ -2079,8 +2130,10 @@ static void Exit_PokemonSpriteVisualizer(u8 taskId)
     if (!gPaletteFade.active)
     {
         struct PokemonSpriteVisualizer *data = GetStructPtr(taskId);
+        DestroyPokemonSpriteVisualizerSprites(data);
         Free(data);
         FreeMonSpritesGfx();
+        FreeMonIconPalettes();
         DestroyTask(taskId);
         SetMainCallback2(CB2_ReturnToFieldWithOpenMenu);
         m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 0x100);
