@@ -31,6 +31,7 @@
 #include "constants/event_object_movement.h"
 #include "constants/field_effects.h"
 #include "constants/items.h"
+#include "constants/maps.h"
 #include "constants/metatile_behaviors.h"
 #include "constants/moves.h"
 #include "constants/songs.h"
@@ -1775,6 +1776,13 @@ static void HideShowWarpArrow(struct ObjectEvent *objectEvent)
     s16 y;
     enum Direction direction;
     u8 metatileBehavior = objectEvent->currentMetatileBehavior;
+
+    if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_PARTY_ROAMER_PARK)
+     && gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_PARTY_ROAMER_PARK))
+    {
+        SetSpriteInvisible(objectEvent->warpArrowSpriteId);
+        return;
+    }
 
     for (x = 0, direction = DIR_SOUTH; x < 4; x++, direction++)
     {
