@@ -16,11 +16,8 @@ LilycoveCity_House1_EventScript_Kecleon::
 	end
 
 LilycoveCity_House1_Text_PokemonPartnersNotTools:
-	.string "POKEMON are partners to people.\n"
-	.string "They aren't our tools.\p"
-	.string "Unfortunately, there are some people\n"
-	.string "who fail to understand that...$"
+	.string "{JPN}ポケモンは にんげんの パートナーであって\nけっして にんげんの どうぐ じゃないよ\pそこを かんちがい しておる\nにんげんも たまに いるんだよ……$"
 
 LilycoveCity_House1_Text_Kecleon:
-	.string "KECLEON: Ruroro?$"
+	.string "{JPN}カクレオン『るろろ……?$"
 

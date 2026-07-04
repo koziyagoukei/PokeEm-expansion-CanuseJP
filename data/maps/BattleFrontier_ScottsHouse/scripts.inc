@@ -210,13 +210,7 @@ BattleFrontier_ScottsHouse_EventScript_ScottFaceAwayWest::
 	return
 
 BattleFrontier_ScottsHouse_Text_WelcomeToBattleFrontier:
-	.string "SCOTT: Well, hello and welcome!\n"
-	.string "Heheh... Sorry about the cramped space.\p"
-	.string "Anyway, {PLAYER}{KUN}, let me formally\n"
-	.string "welcome you to the BATTLE FRONTIER.\p"
-	.string "This is my dream come true.\n"
-	.string "It took me years and years, but I've\l"
-	.string "finally given shape to my dream.$"
+	.string "{JPN}エニシダ『ああ いらっしゃい\nへへ…… せまい ところで ごめんよ\pでは あらためて {PLAYER}{KUN}\nようこそ バトルフロンティアへ!\pここは わたしの ゆめの けっしょう!\nなんねんも かかって やっと\lかたちに することが できたんだ!$"
 
 BattleFrontier_ScottsHouse_Text_HowMuchEffortItTookToMakeReal:
 	.string "{JPN}おもえば ほんとうに ながい\n"
@@ -252,95 +246,34 @@ BattleFrontier_ScottsHouse_Text_ExpectingGreatThings:
 	.string "{JPN}きみには おおいに きたいしているよ!$"
 
 BattleFrontier_ScottsHouse_Text_WhyIGoSeekingTrainers:
-	.string "SCOTT: Every TRAINER is an individual.\n"
-	.string "They all lead lives of their own.\p"
-	.string "But when they're in a battle,\n"
-	.string "it doesn't matter who they are.\p"
-	.string "They're all the same!\p"
-	.string "I love the purity of battle,\n"
-	.string "where everyone is equal.\p"
-	.string "That's why I go everywhere seeking\n"
-	.string "TRAINERS who are serious about\l"
-	.string "battling, and invite them here.$"
+	.string "{JPN}エニシダ『どの トレーナーにも\nそれぞれの じんせいが あるだろ?\pでも たたかう ときは\nそんなこと ぜんぜん かんけいない\lみんな いっしょ なんだよね!\pわたしは そういう\nたたかいの じゅんすいさ ってのが\lとても すきなんだよ\pだから いろんな ところに でかけて\nしんけんに たたかってる トレーナーを\lいっぱい しょうたい してくるのさ!$"
 
 BattleFrontier_ScottsHouse_Text_HaveYouMetFrontierBrain:
-	.string "SCOTT: Have you met any of\n"
-	.string "the FRONTIER BRAINS?\p"
-	.string "Better yet, have you obtained any\n"
-	.string "symbols from them?\p"
-	.string "I handpicked the FRONTIER BRAINS\n"
-	.string "as the toughest TRAINERS anywhere.\p"
-	.string "But I'm sure that seeing how tough\n"
-	.string "you are will startle even them!$"
+	.string "{JPN}エニシダ『わが ブレーンたち から\nフロンティアパスの シンボルは\lもう もらったかな?\pわたしが みいだした\nさいきょうの フロンティアブレーンも\lきみの つよさを みたら\lおそらく おどろく だろうね!$"
 
 BattleFrontier_ScottsHouse_Text_MayFindWildMonsInFrontier:
-	.string "SCOTT: You don't just train for battle,\n"
-	.string "right?\p"
-	.string "I think I remember you working on\n"
-	.string "a POKeDEX as well.\p"
-	.string "Well, guess what?\p"
-	.string "You may run into wild POKEMON in\n"
-	.string "the BATTLE FRONTIER somewhere...\l"
-	.string "Fufufu!$"
+	.string "{JPN}エニシダ『きみは たしか\nしょうぶ だけでは なくて\lポケモンずかんも つくって いたね!\pもしかしたら バトルフロンティア にも\nポケモンと であえる ばしょが\lあるかも しれないよ? うふふ……$"
 
 BattleFrontier_ScottsHouse_Text_YouveCollectedAllSilverSymbols:
-	.string "SCOTT: Are you enjoying things in\n"
-	.string "the BATTLE FRONTIER?\p"
-	.string "...Wait a second...\n"
-	.string "Oh!\p"
-	.string "Your FRONTIER PASS!\n"
-	.string "You've collected the full set\l"
-	.string "of silver symbols!\p"
-	.string "That's more than impressive!\n"
-	.string "You are tough, just as I suspected!\p"
-	.string "Normally, I wouldn't do something\n"
-	.string "like this, but this is a special time!\p"
-	.string "I want you to have this.\n"
-	.string "I'm sure you can put it to proper use.$"
+	.string "{JPN}エニシダ『バトルフロンティアを\nたのしんで くれて いるかな?\p……って おおっっ!\pきみの フロンティアパスっ!\nぎんのシンボルが すべて\lそろって いるじゃ ないか!\pすごいなあ きみは おもったとおり\nつよい トレーナー だったんだなあ!\pふつうは こんな ことは しないんだが\nぜひ きねんに これを もらってくれ!\lきみなら つかいこなせる はずだよ……!$"
 
 BattleFrontier_ScottsHouse_Text_YouveCollectedAllGoldSymbols:
-	.string "SCOTT: I hope you're enjoying\n"
-	.string "everything in the BATTLE FRONTIER.\p"
-	.string "...Wait a second...\n"
-	.string "Oh, my disbelieving eyes!\p"
-	.string "Your FRONTIER PASS!\n"
-	.string "You've gathered up the full set\l"
-	.string "of gold symbols!\p"
-	.string "That's more than stupendous!\n"
-	.string "You're incredible, just as I suspected!\p"
-	.string "... ... ... ... ... ...\p"
-	.string "{PLAYER}, you've got to accept this!\p"
-	.string "I think you will be able to\n"
-	.string "appreciate the value of my gift!$"
+	.string "{JPN}エニシダ『バトルフロンティアは\nまんきつ してるかな?\p……って うひょおおっっ!\pきみの フロンティアパスーっ!\nきんのシンボルが すべて\lそろって いるじゃ ないか!\pこれはすごいっ!\nやっぱり きみは おもったとおり\lすごい トレーナー だったんだなあ!\p…… …… ……\p{PLAYER}{KUN}! ぜひ きみに\nこれを プレゼント させて くれ!\pきみならば これの かちを\nわかって くれると おもうんだ!$"
 
 BattleFrontier_ScottsHouse_Text_SoGladIBroughtYouHere:
-	.string "I must say I have the gift of knowing\n"
-	.string "a good TRAINER when I see one.\p"
-	.string "I'm so glad I had the foresight to\n"
-	.string "bring you here!$"
+	.string "{JPN}いやー われながら\nトレーナーを みるめが さえてるなー\lきみを つれてきて ほんと よかった!\lほく ほく$"
 
 BattleFrontier_ScottsHouse_Text_BerryPocketStuffed:
-	.string "Your BERRY POCKET seems to\n"
-	.string "be stuffed.$"
+	.string "{JPN}きのみポケットが いっぱい みたいね$"
 
 BattleFrontier_ScottsHouse_Text_Beat50TrainersInARow:
-	.string "SCOTT: Oh, I heard about you!\n"
-	.string "How you ruled the BATTLE TOWER!\l"
-	.string "You beat over 50 TRAINERS in a row?\p"
-	.string "That's fantastic!\n"
-	.string "I want you to have this!$"
+	.string "{JPN}エニシダ『おっ きいたよ!\nバトルタワーでの かつやく!\l50にん いじょう かちぬいたって?\pすごいなあ きねんに\nこれを うけとって くれよ!$"
 
 BattleFrontier_ScottsHouse_Text_Beat100TrainersInARow:
-	.string "SCOTT: Oh, my! I heard about you!\n"
-	.string "How you overwhelmed the BATTLE TOWER!\l"
-	.string "You beat over 100 TRAINERS in a row?\p"
-	.string "That's ridiculously spectacular!\n"
-	.string "You've got to have this!$"
+	.string "{JPN}エニシダ『おおうっ きいたよ!\nバトルタワーでの だいかつやく!\l100にん いじょう かちぬいたって?\pすごすぎるなー!\nぜひ これを きねんに うけとってくれ!$"
 
 BattleFrontier_ScottsHouse_Text_ExpectingToHearEvenGreaterThings:
-	.string "I'll be expecting to hear even greater\n"
-	.string "things about you now!$"
+	.string "{JPN}これからも ますます\nきたい しているよ!$"
 
 BattleFrontier_ScottsHouse_Text_ComeBackForThisLater:
-	.string "Oops, well, if you have too much\n"
-	.string "stuff, come back for this later.$"
+	.string "{JPN}……って にもつが いっぱいなら\nとって おくから またおいで!$"

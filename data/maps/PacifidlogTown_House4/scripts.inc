@@ -28,26 +28,17 @@ PacifidlogTown_House4_EventScript_No::
 	end
 
 PacifidlogTown_House4_Text_PeopleSawHighFlyingPokemon:
-	.string "People were saying they saw a POKEMON\n"
-	.string "flying high above HOENN.\p"
-	.string "Is it flying around all the time?\n"
-	.string "Doesn't it need to rest somewhere?$"
+	.string "{JPN}ホウエンの そらたかくを とんでいく\nポケモンを みた! って ひとが いるけど\pずっと とびまわって いるのかしら?\nどこかで やすんだり しそうだけど$"
 
 PacifidlogTown_House4_Text_SkyPokemon:
-	.string "A sky POKEMON!\n"
-	.string "A sky POKEMON!$"
+	.string "{JPN}おそらの ポケモン!\nおそらの ポケモン!$"
 
 PacifidlogTown_House4_Text_WhereDidYouComeFrom:
-	.string "Where did you come from?$"
+	.string "{JPN}きみ どこから きたの?$"
 
 PacifidlogTown_House4_Text_YesTown:
-	.string "Yes?\n"
-	.string "YES TOWN?\p"
-	.string "I've never heard of a place like that.$"
+	.string "{JPN}はい……?\nハイ… タウン……?\pしらないなぁ そんな まち$"
 
 PacifidlogTown_House4_Text_YouHaveToComeFromSomewhere:
-	.string "No? That doesn't make any sense.\n"
-	.string "You have to come from somewhere.\p"
-	.string "Oh! Wait! You're not going to say you\n"
-	.string "were born at the bottom of the sea?$"
+	.string "{JPN}いいえ って そんな……\nどこからも きてない はずが ないでしょ\pま まさか きみ……\nうみの そこで うまれた とか……?$"
 

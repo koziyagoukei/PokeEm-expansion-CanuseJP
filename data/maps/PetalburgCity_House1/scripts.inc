@@ -10,19 +10,8 @@ PetalburgCity_House1_EventScript_Woman::
 	end
 
 PetalburgCity_House1_Text_TravelingIsWonderful:
-	.string "Traveling is wonderful!\p"
-	.string "When I was young, I roamed the seas\n"
-	.string "and the mountains!$"
+	.string "{JPN}たびは いいぞ!\pわしも わかいときは あちこちの\nうみや やまを わたりあるいた ものだ!$"
 
 PetalburgCity_House1_Text_GoOnAdventure:
-	.string "Sigh...\p"
-	.string "I wish I could go on an adventure\n"
-	.string "with some POKEMON...\p"
-	.string "Crawl through some damp grass...\n"
-	.string "Climb rocky, rugged mountains...\p"
-	.string "Cross the raging seas...\n"
-	.string "Wander about in dark caves...\p"
-	.string "And, sometimes, even get a little\n"
-	.string "homesick...\p"
-	.string "It must be fabulous to travel!$"
+	.string "{JPN}あぁ……\pわたしも ポケモンと いっしょに\nぼうけんの たびに でかけて みたい……\pしめった くさむらに もぐったり\nごつごつの いわやまを のぼったり\lうみの あらなみを わたったり\lまっくらな どうくつを さまよったり……\pそれでいて ときには じぶんの おうちが\nこいしく なったりして……\pたびって いいよね!$"
 

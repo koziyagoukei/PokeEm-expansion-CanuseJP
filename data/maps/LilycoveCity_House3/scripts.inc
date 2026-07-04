@@ -98,71 +98,26 @@ LilycoveCity_House3_EventScript_WereDoingContest::
 	end
 
 LilycoveCity_House3_Text_LearnFromMasterOfPokeblocks:
-	.string "Oh, my, my! Are you traveling alone?\n"
-	.string "But you're so young! Good for you!\p"
-	.string "I'm sure my kids could learn a thing\n"
-	.string "or two from you!\p"
-	.string "Me? I'm a master of ポロックS.\p"
-	.string "If I get serious just a little, why,\n"
-	.string "I can concoct great ポロックS.\p"
-	.string "Would you like to learn from me,\n"
-	.string "a master of ポロックS?$"
+	.string "{JPN}あら あら あら！ あなた わかいのに\nひとりたび? えらいわねえー！\lうちのこ たちにも みならわせたいわあ\pおばさんは ポロックめいじん！\nちょいと ほんきを だせば\lすごく いい ポロックを つくれるのよー！\pポロックめいじんの おばさんが\nいろいろと おしえてあげようか?$"
 
 LilycoveCity_House3_Text_OhAreYouSure:
-	.string "Oh? Are you sure?\p"
-	.string "You shouldn't always try to do\n"
-	.string "everything by yourself, dear!$"
+	.string "{JPN}あらあ そう?\nなんでも じぶん ひとりだけで\lがんばろうと しちゃ ダメよー！$"
 
 LilycoveCity_House3_Text_ExplainPokeblocks:
-	.string "Oh, good! You're a smart soul!\n"
-	.string "This is a bit long, so listen up!\p"
-	.string "Are you ready?\p"
-	.string "If you look at ポロックS, you should see\n"
-	.string "that they are rated on how they feel.\p"
-	.string "The lower the feel rating,\n"
-	.string "the better it is. Don't forget this!\p"
-	.string "A good ポロック has a low feel\n"
-	.string "rating and a high level.\p"
-	.string "A POKEMON can eat more good\n"
-	.string "ポロックS than ordinary ones, too.\p"
-	.string "And this is important.\p"
-	.string "If you want to make smooth ポロックS,\n"
-	.string "use different kinds of BERRIES.\p"
-	.string "Don't be stingy--the kinds of BERRIES\n"
-	.string "affect the smoothness of ポロックS.\p"
-	.string "And another thing.\p"
-	.string "The more people blending BERRIES,\n"
-	.string "the smoother the ポロックS.\p"
-	.string "That's why you should talk to other\n"
-	.string "people and make ポロックS together.\p"
-	.string "That's about all you need to know to\n"
-	.string "make good ポロックS.\p"
-	.string "If everyone had POKEMON they love,\n"
-	.string "smooth ポロックS, and a loving family,\l"
-	.string "the world would be a happier place.\p"
-	.string "Don't give up, dear!$"
+	.string "{JPN}あらあ すなおな いいコねえー！\nじゃ ちょっとながいけど ききなさいよ\pいい?\pポロックには なめらかさって もんが あるの\nポロックを みれば わかるでしょ?\lこの すうじが ひくいほど なめらかなの！\lここ まちがっちゃ ダメよ！\pなめらかさの すうじが ひくくて\nレベルが たかいのが いい ポロック！\lいい ポロックは たくさん\lポケモンが たべて くれるんだから！\pそれと いい?\pなめらかな ポロックが つくりたかったら\nけちらないで いろんな しゅるいの\lきのみで つくってみるのよ！\lまぜた きのみによって なめらかさが\lちがって くるんだから！\pそれと いい?\pなるべく おおぜいで つくったほうが\nなめらかな ポロックが できるのよ！\lだれでも いいから おねがいして\lいっしょに つくって もらいなさいよ！\pさてと このくらい おぼえて おけば\nあなたも いちにんまえに なれるわよ！\pだいすきな ポケモンと なめらか ポロック\nそして なかよし かぞくが いれば\lこのよは しあわせ！\lあなたも がんばりなさいな！$"
 
 LilycoveCity_House3_Text_HappyToHaveQuadruplets:
-	.string "When my wife gave birth to quadruplets,\n"
-	.string "you bet I was shocked.\p"
-	.string "But, now, seeing them play together,\n"
-	.string "it makes me happy.$"
+	.string "{JPN}よつごが うまれた ときは\nすごく ビックリ したが\lみんなで なかよく あそんでいる すがたを\lみていると しあわせ きぶんに なるよ！$"
 
 LilycoveCity_House3_Text_GoingToWinMultiBattles:
-	.string "We're having MULTI BATTLES, but I know\n"
-	.string "I'm going to win.$"
+	.string "{JPN}マルチバトル してるけど\nぼくが かつに きまってるぜ！$"
 
 LilycoveCity_House3_Text_LikeMixingAtRecordCorner:
-	.string "We like mixing stuff at\n"
-	.string "the RECORD CORNER.\p"
-	.string "But what gets mixed up?$"
+	.string "{JPN}レコードコーナーで まぜまくる！\nって なにが まざってるんだ?$"
 
 LilycoveCity_House3_Text_MakePokeblocksWithBerryBlender:
-	.string "We're going to make super ポロックS\n"
-	.string "with a BERRY BLENDER!$"
+	.string "{JPN}きのみブレンダーで\nとびっきりの ポロック つくっちゃうぜ！$"
 
 LilycoveCity_House3_Text_GoingToEnterContest:
-	.string "I want to brag about how tough my\n"
-	.string "POKEMON is, so we're going to enter\l"
-	.string "a CONTEST together.$"
+	.string "{JPN}ポケモンの たくましさ じまん したいから\nみんなで コンテスト してるんだ！$"
 
