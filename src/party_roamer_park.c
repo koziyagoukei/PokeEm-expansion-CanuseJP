@@ -19,11 +19,13 @@
 #include "constants/event_objects.h"
 #include "constants/maps.h"
 #include "constants/map_groups.h"
+#include "constants/pokemon.h"
 #include "constants/trainer_types.h"
 
 #define PARTY_ROAMER_LOCAL_ID_START 1
 #define PARTY_ROAMER_PARK_ENTRY_X 13
 #define PARTY_ROAMER_PARK_ENTRY_Y 19
+#define PARTY_BATH_TIME_FRIENDSHIP_INTERVAL (5 * 60)
 
 static const u16 sPartyRoamerObjectFlags[PARTY_SIZE] =
 {
@@ -41,6 +43,9 @@ extern const u8 PartyRoamerPark_EventScript_Talk[];
 
 static void FieldCallback_EnterPartyRoamerPark(void);
 static void Task_WaitToEnterPartyRoamerPark(u8 taskId);
+static void Task_PartyBathTimeFriendship(u8 taskId);
+static bool8 IsInPartyBathTimeMap(void);
+static void IncreasePartyBathTimeFriendship(void);
 
 static bool8 IsPartyRoamerLocalId(u16 localId)
 {
@@ -165,6 +170,54 @@ static void FieldCallback_EnterPartyRoamerPark(void)
         PARTY_ROAMER_PARK_ENTRY_Y);
     SetPlayerAvatarTransitionFlags(PLAYER_AVATAR_FLAG_ON_FOOT);
     FldEff_TeleportWarpOutWithPresetDestination();
+}
+
+static bool8 IsInPartyBathTimeMap(void)
+{
+    return gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_PARTYBATHTIME)
+        && gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_PARTYBATHTIME);
+}
+
+static void IncreasePartyBathTimeFriendship(void)
+{
+    u8 i;
+
+    for (i = 0; i < PARTY_SIZE; i++)
+    {
+        struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][i];
+
+        if (GetMonData(mon, MON_DATA_SPECIES) != SPECIES_NONE && !GetMonData(mon, MON_DATA_IS_EGG))
+        {
+            u32 friendship = GetMonData(mon, MON_DATA_FRIENDSHIP);
+
+            if (friendship < MAX_FRIENDSHIP)
+            {
+                friendship++;
+                SetMonData(mon, MON_DATA_FRIENDSHIP, &friendship);
+            }
+        }
+    }
+}
+
+static void Task_PartyBathTimeFriendship(u8 taskId)
+{
+    if (!IsInPartyBathTimeMap())
+    {
+        DestroyTask(taskId);
+        return;
+    }
+
+    if (++gTasks[taskId].data[0] >= PARTY_BATH_TIME_FRIENDSHIP_INTERVAL)
+    {
+        gTasks[taskId].data[0] = 0;
+        IncreasePartyBathTimeFriendship();
+    }
+}
+
+void Special_StartPartyBathTimeFriendship(void)
+{
+    if (IsInPartyBathTimeMap() && FindTaskIdByFunc(Task_PartyBathTimeFriendship) == TASK_NONE)
+        CreateTask(Task_PartyBathTimeFriendship, 8);
 }
 
 void Special_SpawnPartyRoamerMons(void)

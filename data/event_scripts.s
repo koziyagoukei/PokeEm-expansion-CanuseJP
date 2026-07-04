@@ -1745,3 +1745,5 @@ EventScript_PalletTown_PlayersHouse_2F_TurnOnPC::
 
 	.include "data/maps/ultra_frontie_hub/scripts.inc"
 	.include "data/maps/PartyRoamerPark/scripts.inc"
+
+	.include "data/maps/Partybathtime/scripts.inc"
