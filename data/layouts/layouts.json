@@ -9325,8 +9325,8 @@
       "layout_version": "frlg"
     },
     {
-      "id": "LAYOUT_ULTRA_FRONTIE_HUB",
-      "name": "ultra_frontie_hub_Layout",
+      "id": "LAYOUT_PARTY_ROAMER_PARK",
+      "name": "party_roamer_park_Layout",
       "width": 28,
       "height": 24,
       "primary_tileset": "gTileset_General",
