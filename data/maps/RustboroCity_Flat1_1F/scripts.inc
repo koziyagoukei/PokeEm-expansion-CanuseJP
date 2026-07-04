@@ -10,9 +10,8 @@ RustboroCity_Flat1_1F_EventScript_Woman::
 	end
 
 RustboroCity_Flat1_1F_Text_EveryPokemonHasAbility:
-	.string "Every POKEMON has a special ability\n"
-	.string "that it can use.$"
+	.string "{JPN}ポケモンには それぞれ\nとくせい とよばれる ふしぎな ちからが\lそなわって いるんだよな$"
 
 RustboroCity_Flat1_1F_Text_PokemonStrange:
-	.string "POKEMON are such strange creatures.$"
+	.string "{JPN}ほんとうに ポケモンって\nふしぎな いきもの なのね$"
 

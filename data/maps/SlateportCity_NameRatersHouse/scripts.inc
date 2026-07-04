@@ -62,50 +62,29 @@ SlateportCity_NameRatersHouse_EventScript_NewNameDifferent::
 	end
 
 SlateportCity_NameRatersHouse_Text_PleasedToRateMonNickname:
-	.string "Hi, hi! I'm the NAME RATER!\n"
-	.string "I'm the fortune-teller of names!\p"
-	.string "I shall be pleased to rate your\n"
-	.string "POKEMON's nickname.$"
+	.string "{JPN}はい はい！\nわたしは せいめい はんだんし\lいうなれば なまえの うらないです\pはい あなたの ポケモンの\nニックネームを うらなって あげるよ$"
 
 SlateportCity_NameRatersHouse_Text_CritiqueWhichMonNickname:
-	.string "Which POKEMON's nickname should\n"
-	.string "I critique?$"
+	.string "{JPN}どの ポケモンの\nニックネームを うらなうかね？$"
 
 SlateportCity_NameRatersHouse_Text_FineNameSuggestBetterOne:
-	.string "Hmmm... {STR_VAR_1}, is it? That is\n"
-	.string "quite a fine name you bestowed.\p"
-	.string "But! What say you, if I were to\n"
-	.string "suggest a slightly better name?$"
+	.string "{JPN}うーむ {STR_VAR_1}か……\nなかなか いい ニックネームを つけたね\pでもねー\nもう すこしだけ いい なまえを\lわたしが つけて あげようか？ どうかな？$"
 
 SlateportCity_NameRatersHouse_Text_WhatShallNewNameBe:
-	.string "Ah, good. Then, what shall the new\n"
-	.string "nickname be?$"
+	.string "{JPN}そうか では\nどんな ニックネームに しようかな$"
 
 SlateportCity_NameRatersHouse_Text_MonShallBeKnownAsName:
-	.string "Done! From now on, this POKEMON\n"
-	.string "shall be known as {STR_VAR_1}!\p"
-	.string "It is a better name than before!\n"
-	.string "How fortunate for you!$"
+	.string "{JPN}よし これから\nこの ポケモンは {STR_VAR_1}だ！\pまえより いい なまえ じゃないか\nよかったな！$"
 
 SlateportCity_NameRatersHouse_Text_DoVisitAgain:
-	.string "I see.\n"
-	.string "Do come visit again.$"
+	.string "{JPN}そうか\nわかった また きなさいよ$"
 
 SlateportCity_NameRatersHouse_Text_NameNoDifferentYetSuperior:
-	.string "Done! From now on, this POKEMON\n"
-	.string "shall be known as {STR_VAR_1}!\p"
-	.string "It looks no different from before,\n"
-	.string "and yet, this is vastly superior!\p"
-	.string "How fortunate for you!$"
+	.string "{JPN}よし これから\nこの ポケモンは {STR_VAR_1}だ！\pまえと おなじように みえるが\nこっちの ほうが だんぜん いいぞ！\lよかったな！$"
 
 SlateportCity_NameRatersHouse_Text_MagnificentName:
-	.string "Hmmm... {STR_VAR_1} it is!\p"
-	.string "This is a magnificent nickname!\n"
-	.string "It is impeccably beyond reproach!\p"
-	.string "You'll do well to cherish your\n"
-	.string "{STR_VAR_1} now and beyond.$"
+	.string "{JPN}うーむ {STR_VAR_1}か！\nこれは すばらしい ニックネームだ！\lけちの つけようもない！\pこれからも {STR_VAR_1}を\nかわいがって あげなさいよ！$"
 
 SlateportCity_NameRatersHouse_Text_ThatIsMerelyAnEgg:
-	.string "Now, now.\n"
-	.string "That is merely an EGG!$"
+	.string "{JPN}おいおい……\nそれは タマゴ じゃないか！$"
 

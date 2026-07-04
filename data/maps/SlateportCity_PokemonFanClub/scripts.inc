@@ -253,148 +253,68 @@ SlateportCity_PokemonFanClub_EventScript_Azumarill::
 	end
 
 SlateportCity_PokemonFanClub_Text_MeetChairman:
-	.string "Er-hem! I am the CHAIRMAN of the\n"
-	.string "POKEMON FAN CLUB!\p"
-	.string "Being the CHAIRMAN, I am naturally\n"
-	.string "the most important!\p"
-	.string "No one can best me when it comes\n"
-	.string "to raising POKEMON. No one!\p"
-	.string "Well, let me tell you about\n"
-	.string "POKEMON CONTESTS.\p"
-	.string "They're events where one can show off\n"
-	.string "POKEMON for the world to see!\p"
-	.string "However, they're held in far-off towns,\n"
-	.string "so I cannot participate often enough.\p"
-	.string "That is why we gather here to show\n"
-	.string "off our POKEMON, and have others\l"
-	.string "show us theirs.$"
+	.string "{JPN}ウォッホン!!\pわしが ポケモン だいすきクラブで\nいちばーん えらい かいちょう ですぞ!\pなんたって かいちょう ですからな\nポケモンを そだてさせたら\lみぎに でるもの なし!\pそんな ポケモンを じまんできる\nポケモンコンテストという\lもよおしが あるの ですが…\pなにしろ とおくの まちで やっているので\nあまり さんか できんのですよ\pですから いまは ここで\nじぶんの ポケモンを じまんしたり\lみなさんの ポケモンを\lみせて いただくだけに しておるのです$"
 
 SlateportCity_PokemonFanClub_Text_LikeToSeeEnteredContestPokemon:
-	.string "The POKEMON of a TRAINER who has\n"
-	.string "entered a POKEMON CONTEST...\l"
-	.string "That, I would like to see.$"
+	.string "{JPN}ポケモンコンテストに でた ことが\nある トレーナーの ポケモン…\lぜひとも みて みたい ものですな$"
 
 SlateportCity_PokemonFanClub_Text_AllowMeToExamineYourPokemon:
-	.string "Er-hem! I see you've participated in\n"
-	.string "a POKEMON CONTEST!\p"
-	.string "Please! Allow me to examine how you\n"
-	.string "have raised your POKEMON.\p"
-	.string "It delights me no end to see POKEMON\n"
-	.string "raised by other TRAINERS.\p"
-	.string "The happy expressions of POKEMON\n"
-	.string "raised with proper care...\p"
-	.string "The kindly eyes of the TRAINER that\n"
-	.string "nurtured and raised the POKEMON...\p"
-	.string "The very thought fills my heart to\n"
-	.string "overwhelming with joy.\p"
-	.string "Oh! I do beg your pardon!\n"
-	.string "Forgive me for prattling on so!\p"
-	.string "Please! Allow me to examine how much\n"
-	.string "your POKEMON has grown!$"
+	.string "{JPN}ウォッホン!!\nおっ コンテストに でられましたな!\pどれ あなたは ポケモンを\nどんな ふうに そだてられて いるのかな？\pいやー ひとの そだてた ポケモンを\nはいけん するのは たのしい ですぞ!\pきちんと そだてられた ポケモンの\nしあわせそうな かお……\pそれを みつめる トレーナーの\nやさしげな ひとみ……\pいやー しあわせで\nむねが いっぱいに なりますな……\pおっと しつれい! ついつい\nはなしが ながくなって しまいましたな\pでは さっそく きみの ポケモンが\nどれほど そだっているのか\lはいけん させて もらいますかな!$"
 
 SlateportCity_PokemonFanClub_Text_HowIsYourPokemonGrowing:
-	.string "How is your POKEMON growing?\n"
-	.string "Allow me to examine it.$"
+	.string "{JPN}きみの ポケモン そだって ますかな？\nちょっと はいけん させて もらいますぞ!$"
 
 SlateportCity_PokemonFanClub_Text_HmHmISee:
-	.string "Hm, hm...\n"
-	.string "I see...$"
+	.string "{JPN}ふむふむ……\nなるほど……$"
 
 SlateportCity_PokemonFanClub_Text_GiveMonMorePokeblocks:
-	.string "Hmmm... It's not bad, but it's not\n"
-	.string "good, either...\p"
-	.string "You, the TRAINER, must put more\n"
-	.string "effort into raising this POKEMON!\p"
-	.string "For instance, may I suggest that\n"
-	.string "you give it more ポロックS?$"
+	.string "{JPN}ふむう……\nわるくは ないんだが よくもない……\pおやの トレーナーである きみの\nどりょくが ひつよう ですな!\pたとえば もっと たくさん\nポロックを あげるのは どうですかな？$"
 
 SlateportCity_PokemonFanClub_Text_NoSpaceForReward:
-	.string "Oh, my...\p"
-	.string "Your POKEMON is growing quite well,\n"
-	.string "so you deserve a reward.\p"
-	.string "Unfortunately, you have no space for\n"
-	.string "this in your BAG.$"
+	.string "{JPN}あらら……\pけっこう ポケモンが そだっているので\nいいものを あげようと おもったのですが\lもちものが いっぱい ですな$"
 
 SlateportCity_PokemonFanClub_Text_MonMostImpressiveGiveItThis:
-	.string "Your {STR_VAR_1}, it is growing in\n"
-	.string "a most impressive manner!\l"
-	.string "It is one fine specimen!\p"
-	.string "But! If you were to give it this,\n"
-	.string "it would grow even better! Indeed!$"
+	.string "{JPN}きみの {STR_VAR_1} ですが\nなかなか みごとに そだって おりますな!\lいやー たいした ものです!\pだが この どうぐを つかって あげたなら\nもっと そだつこと まちがいなし! ですぞ!$"
 
 SlateportCity_PokemonFanClub_Text_ExplainRedScarf:
-	.string "Let a POKEMON hold that RED SCARF.\p"
-	.string "Everyone will recognize the coolness\n"
-	.string "of that POKEMON!$"
+	.string "{JPN}その あかいバンダナを もたせると\nポケモンの かっこよさを\lみんなに みとめさせることが できますぞ!$"
 
 SlateportCity_PokemonFanClub_Text_ExplainBlueScarf:
-	.string "Let a POKEMON hold that BLUE SCARF.\p"
-	.string "Its beauty will be accentuated much\n"
-	.string "more than now!$"
+	.string "{JPN}その あおいバンダナを もたせると\nポケモンの うつくしさを\lいまより きわだたせることが できますぞ!$"
 
 SlateportCity_PokemonFanClub_Text_ExplainPinkScarf:
-	.string "Let a POKEMON hold that PINK SCARF.\p"
-	.string "It will draw out the cuteness of\n"
-	.string "the POKEMON some more!$"
+	.string "{JPN}その ピンクのバンダナを もたせると\nポケモンの かわいさを\lもっと ひきだすことが できますぞ!$"
 
 SlateportCity_PokemonFanClub_Text_ExplainGreenScarf:
-	.string "Let a POKEMON hold that GREEN SCARF.\p"
-	.string "That will enhance the\n"
-	.string "smartness of POKEMON!$"
+	.string "{JPN}その みどりのバンダナを もたせると\nポケモンの かしこさを\lさらに みがくことが できますぞ!$"
 
 SlateportCity_PokemonFanClub_Text_ExplainYellowScarf:
-	.string "Let a POKEMON hold that YELLOW SCARF.\p"
-	.string "It will bolster your POKEMON's\n"
-	.string "toughness so much more!$"
+	.string "{JPN}その きいろのバンダナを もたせると\nポケモンの たくましさを\lいっそう アピール できますぞ!$"
 
 SlateportCity_PokemonFanClub_Text_NothingElseToGiveYou:
-	.string "I'm sorry, but I've nothing else to\n"
-	.string "give you! None at all!\p"
-	.string "After all, you're blessed with the gift\n"
-	.string "of raising POKEMON without resorting\l"
-	.string "to any items!$"
+	.string "{JPN}きみに あげる どうぐは\nもう なにも ないですぞ!\pなにしろ どうぐに たよらんでも\nきみの ポケモンを そだてる\lさいのうは バツグン ですからな!$"
 
 SlateportCity_PokemonFanClub_Text_ShowMePokemonThatLoveYou:
-	.string "I love seeing POKEMON that love\n"
-	.string "their TRAINERS.\p"
-	.string "POKEMON are very sensitive to\n"
-	.string "the feelings of their TRAINERS.\p"
-	.string "If you treat your POKEMON with love\n"
-	.string "and care, they'll love you back.\p"
-	.string "When your POKEMON grow to love you,\n"
-	.string "please come show me.$"
+	.string "{JPN}わたし ポケモンが なついている\nすがたを みるのが すき\pポケモンって いっしょに いる\nひとの きもちに すごく びんかん!\pあなたが ポケモンを だいじに すれば\nポケモンも あなたに なついてくれるわ!\pあなたの ポケモンが あなたに なついたら\nわたしにも みせてね$"
 
 SlateportCity_PokemonFanClub_Text_PokemonAdoresYou:
-	.string "Your POKEMON really adores you.\p"
-	.string "For you, a most compassionate\n"
-	.string "TRAINER, a gift from the FAN CLUB!$"
+	.string "{JPN}あなたの ポケモン\nあなたに なついているのね\pポケモンに やさしい トレーナーさんに\nだいすきクラブからの おくりもの よ$"
 
 SlateportCity_PokemonFanClub_Text_TreatPokemonWithLove:
-	.string "POKEMON are very sensitive to\n"
-	.string "the feelings of their TRAINERS.\p"
-	.string "If you treat your POKEMON with love\n"
-	.string "and care, they'll love you back.$"
+	.string "{JPN}ポケモンって いっしょに いる\nひとの きもちに すごく びんかん!\pあなたが ポケモンを だいじに すれば\nポケモンも あなたに なついてくれるわ!$"
 
 SlateportCity_PokemonFanClub_Text_PokemonDontLikeFainting:
-	.string "If you keep letting a POKEMON faint\n"
-	.string "in battle, it'll come to resent it.\p"
-	.string "Soon, it will become less trusting\n"
-	.string "of the TRAINER.\p"
-	.string "In other words, it certainly won't\n"
-	.string "like you very much.$"
+	.string "{JPN}ポケモンしょうぶに まけて\nひんしに させて ばかりだと\lポケモンが どんどん すさんで\lトレーナーのこと うたがう ようになる\pつまり なついて くれなくなるよ$"
 
 SlateportCity_PokemonFanClub_Text_MonEnjoyedProtein:
-	.string "Do POKEMON enjoy having items used\n"
-	.string "on them?\p"
-	.string "Mine acted really happy when I gave\n"
-	.string "it some PROTEIN.$"
+	.string "{JPN}ポケモンって どうぐ\nつかってもらうのが すきなのかな？\pだって タウリンとか あげると\nすごく うれしそうに するのよ!$"
 
 SlateportCity_PokemonFanClub_Text_Skitty:
-	.string "SKITTY: Fffnyaaaah...$"
+	.string "{JPN}エネコ『ふにゃあーあ$"
 
 SlateportCity_PokemonFanClub_Text_Zigzagoon:
-	.string "ZIGZAGOON: Kyuuu...$"
+	.string "{JPN}ジグザグマ『キュウウ……$"
 
 SlateportCity_PokemonFanClub_Text_Azumarill:
-	.string "AZUMARILL: Marimari?$"
+	.string "{JPN}マリルリ『マリ マリ!？$"
 

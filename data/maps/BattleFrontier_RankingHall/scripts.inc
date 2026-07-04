@@ -101,33 +101,23 @@ BattleFrontier_RankingHall_EventScript_Boy::
 	end
 
 BattleFrontier_RankingHall_Text_ExplainRankingHall:
-	.string "{JPN}ここは ランキングホールです\p"
-	.string "バトルフロンティアの イベントで\n"
-	.string "すばらしい きろくを のこした\l"
-	.string "トレーナーを しょうかいしています$"
+	.string "{JPN}ここは ランキングホール\pバトルフロンティアに ちょうせん した\nトレーナーたちの いだいな きろくを\lたたえる ばしょ です$"
 
 BattleFrontier_RankingHall_Text_DomePikeFactoryRecords:
-	.string "{JPN}バトルドーム バトルチューブ\n"
-	.string "バトルファクトリーの きろく$"
+	.string "{JPN}バトルドーム バトルチューブ\nバトルファクトリー の きろくは こちら$"
 
 BattleFrontier_RankingHall_Text_PalaceArenaPyramidRecords:
-	.string "{JPN}バトルパレス バトルアリーナ\n"
-	.string "バトルピラミッドの きろく$"
+	.string "{JPN}バトルパレス バトルアリーナ\nバトルピラミッド の きろくは こちら$"
 
 BattleFrontier_RankingHall_Text_IsYourNameOnThisList:
-	.string "{JPN}あなたの なまえは ありますか？$"
+	.string "{JPN}ねえ きみの なまえ\nここに のってるの?$"
 
 BattleFrontier_RankingHall_Text_WowThatsSuper:
-	.string "{JPN}わあ すごい！\n"
-	.string "わたしも がんばらなくちゃ！$"
+	.string "{JPN}へー すごいね!\nぼくも がんばらなきゃ!$"
 
 BattleFrontier_RankingHall_Text_WorkHarderIfYouSawFriendsName:
-	.string "{JPN}そうなんですか？\p"
-	.string "ともだちの なまえが あったら\n"
-	.string "もっと がんばれそうですね！$"
+	.string "{JPN}そうなんだ…\pでも ともだちの なまえを ここで みると\nがんばろうって きもちに なるよね!$"
 
 BattleFrontier_RankingHall_Text_MyNamesNotUpThere:
-	.string "{JPN}うーん……\n"
-	.string "ぼくの なまえは ないなあ……\p"
-	.string "まだ ちょうせんして いないから\n"
-	.string "あたりまえだけどね$"
+	.string "{JPN}うーん ぼくの なまえ\nのって ないなあ……\pまだ どこにも ちょうせん してないから\nあたりまえか……$"
+

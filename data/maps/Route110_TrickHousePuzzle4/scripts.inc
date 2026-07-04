@@ -28,43 +28,32 @@ Route110_TrickHousePuzzle4_EventScript_Paula::
 	end
 
 Route110_TrickHousePuzzle4_Text_WroteSecretCodeLockOpened:
-	.string "{PLAYER} wrote down the secret code\n"
-	.string "on the door.\p"
-	.string "TRICK MASTER is cool.\n"
-	.string "... ... ... ... ... ... ... ...\p"
-	.string "The lock clicked open!$"
+	.string "{JPN}{PLAYER}は あいことばを\nとびらに かきつけた!\p「カラクリだいおう さま かっこいい」\p…… …… ……\pかぎの はずれる おとがした!$"
 
 Route110_TrickHousePuzzle4_Text_CoraIntro:
-	.string "It's too much bother to think this out.\n"
-	.string "I only wanted to battle!$"
+	.string "{JPN}こういうの かんがえるのって めんどう!\nわたしは しょうぶだけ したいのにー!$"
 
 Route110_TrickHousePuzzle4_Text_CoraDefeat:
-	.string "Even though I lost, I still like battling\n"
-	.string "the best!$"
+	.string "{JPN}まけちゃった けど やっぱり\nしょうぶが いちばん たのしい!$"
 
 Route110_TrickHousePuzzle4_Text_CoraPostBattle:
-	.string "Wouldn't you agree? You would go\n"
-	.string "anywhere if TRAINERS were there.$"
+	.string "{JPN}トレーナーが いそうな ところは\nどこにでも いきたく なるわよね!$"
 
 Route110_TrickHousePuzzle4_Text_YujiIntro:
-	.string "Heh! Boulders like this, I can brush\n"
-	.string "aside with one finger!$"
+	.string "{JPN}このくらいの いわは\nゆび いっぽんで らくしょう だぜ!$"
 
 Route110_TrickHousePuzzle4_Text_YujiDefeat:
-	.string "I can push boulders, but I can't solve\n"
-	.string "the puzzle...$"
+	.string "{JPN}いわが おせても\nパズルが とけない……$"
 
 Route110_TrickHousePuzzle4_Text_YujiPostBattle:
-	.string "It's not good enough to be brawny...\n"
-	.string "You have to use your head. Be brainy!$"
+	.string "{JPN}ちからが つよいだけじゃ ダメだね……\nアタマ つかわないと$"
 
 Route110_TrickHousePuzzle4_Text_PaulaIntro:
-	.string "The TRICK HOUSE is getting trickier,\n"
-	.string "isn't it?$"
+	.string "{JPN}カラクリやしきも だんだん\nむずかしく なってきたわね!$"
 
 Route110_TrickHousePuzzle4_Text_PaulaDefeat:
-	.string "Aaak!$"
+	.string "{JPN}ああっ!$"
 
 Route110_TrickHousePuzzle4_Text_PaulaPostBattle:
-	.string "Has anyone made it to the end?$"
+	.string "{JPN}さいごまで いった\nひとって いるのかしらね?$"
 
