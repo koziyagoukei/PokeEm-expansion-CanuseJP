@@ -200,152 +200,59 @@ RustboroCity_PokemonSchool_EventScript_ScottWatchStudents::
 	end
 
 RustboroCity_PokemonSchool_Text_BlackboardListsStatusChanges:
-	.string "The blackboard lists status changes\n"
-	.string "that may affect POKEMON in battle.$"
+	.string "{JPN}こくばんに\nポケモンが たたかってるときに おこる\lたいちょうの へんかに ついて かかれてる$"
 
 RustboroCity_PokemonSchool_Text_ReadWhichTopic:
-	.string "Which topic do you want to read?$"
+	.string "{JPN}どの こうもくを みますか?$"
 
 RustboroCity_PokemonSchool_Text_ExplainPoison:
-	.string "If a POKEMON is poisoned, it will\n"
-	.string "steadily lose HP.\p"
-	.string "The effects of poison remain after\n"
-	.string "a battle.\p"
-	.string "A poisoned POKEMON's HP will drop\n"
-	.string "while it is traveling.\p"
-	.string "Heal a poisoning using an ANTIDOTE.$"
+	.string "{JPN}どくを うけると\nたいりょくが へっていきます\pせんとうのあとも どくは のこるので\nあるくたびに たいりょくが へります\lどくけしで なおしましょう$"
 
 RustboroCity_PokemonSchool_Text_ExplainParalysis:
-	.string "If a POKEMON becomes paralyzed,\n"
-	.string "its SPEED drops.\p"
-	.string "It may also not be able to move while\n"
-	.string "it is in battle.\p"
-	.string "Paralysis remains after battle.\n"
-	.string "Cure it using a PARLYZ HEAL.$"
+	.string "{JPN}まひすると すばやさが さがり\nときどき わざが だせなくなります\pたたかい おわっても まひした ままです\nまひなおしで なおしましょう$"
 
 RustboroCity_PokemonSchool_Text_ExplainSleep:
-	.string "If a POKEMON falls asleep, it will be\n"
-	.string "unable to attack.\p"
-	.string "A POKEMON may wake up on its own,\n"
-	.string "but if a battle ends while it is\l"
-	.string "sleeping, it will stay asleep.\p"
-	.string "Wake it up using an AWAKENING.$"
+	.string "{JPN}ねむって しまうと\nその あいだ こうげき できません\pじぶんで めざめることも ありますが\nねむったまま せんとうが おわると\lずっと ねむっています\pねむけざましで おこして あげましょう$"
 
 RustboroCity_PokemonSchool_Text_ExplainBurn:
-	.string "A burn reduces ATTACK power, and it\n"
-	.string "steadily reduces the victim's HP.\p"
-	.string "A burn lingers after battle.\n"
-	.string "Cure a burn using a BURN HEAL.$"
+	.string "{JPN}やけどは こうげきりょくが さがるだけでなく\nたいりょくも どんどん へっていきます\pせんとうが おわっても やけどの ままです\nやけどなおしで なおしましょう$"
 
 RustboroCity_PokemonSchool_Text_ExplainFreeze:
-	.string "If a POKEMON is frozen, it becomes\n"
-	.string "completely helpless.\p"
-	.string "It will remain frozen after battle.\n"
-	.string "Thaw it out using an ICE HEAL.$"
+	.string "{JPN}こおって しまうと なにも できなくなります\pたたかい おわっても こおりついた ままです\nこおりなおしで とかしましょう$"
 
 RustboroCity_PokemonSchool_Text_StudentsWhoDontStudyGetQuickClaw:
-	.string "Students who don't study get a little\n"
-	.string "taste of my QUICK CLAW.\p"
-	.string "Whether or not you are a good student \n"
-	.string "will be evident from the way you use\l"
-	.string "this item.$"
+	.string "{JPN}べんきょうを しない せいとは\nわたくしの ツメの あかを\lせんじて のませるのです!\pきみが べんきょう する しないは\nこの どうぐを つかいこなせるか どうかで\lわかること でしょう!$"
 
 RustboroCity_PokemonSchool_Text_ExplainQuickClaw:
-	.string "A POKEMON holding the QUICK CLAW will\n"
-	.string "occasionally speed up and get to move\l"
-	.string "before its opponent.\p"
-	.string "There are many other items that are\n"
-	.string "meant to be held by POKEMON.\p"
-	.string "Just those alone will give you many\n"
-	.string "topics to study!$"
+	.string "{JPN}ポケモンに せんせいのツメを もたせると\nときどき ですが すばやくなって\lせんせい こうげきを するのです!\pこのように ポケモンに もたせる\nどうぐの こと だけでも\lべんきょう することは いっぱい なのです!$"
 
 RustboroCity_PokemonSchool_Text_TradingRightNow:
-	.string "I'm trading POKEMON with my friend\n"
-	.string "right now.$"
+	.string "{JPN}いま ともだちと\nポケモンを こうかん してるんだ!$"
 
 RustboroCity_PokemonSchool_Text_AlwaysWantedSeedot:
-	.string "I always wanted a SEEDOT, and\n"
-	.string "I'm finally getting one!$"
+	.string "{JPN}ほしかった タネボーちゃん が\nやっと てに はいるよ!$"
 
 RustboroCity_PokemonSchool_Text_PokemontCantUseManMadeItems:
-	.string "POKEMON can hold items, but they\n"
-	.string "don't know what to do with man-made\l"
-	.string "items like POTION and ANTIDOTE.$"
+	.string "{JPN}ポケモンも どうぐ もてるけど\nキズぐすりとか どくけしとか\lひとが つくった どうぐは\lつかいかたが わからない みたい$"
 
 RustboroCity_PokemonSchool_Text_ConfusedPokemonAttacksItself:
-	.string "You know how some POKEMON moves can\n"
-	.string "confuse a POKEMON?\p"
-	.string "A confused POKEMON will sometimes\n"
-	.string "attack itself without meaning to.\p"
-	.string "But once it leaves battle, it will\n"
-	.string "return to normal.$"
+	.string "{JPN}ポケモンの わざで\nこんらん することが あるでしょ?\pこんらん すると たまに まちがえて\nじぶんを こうげき しちゃうの……\pでも いちどでも せんとうから はなれると\nもとに もどるわよ!$"
 
 RustboroCity_PokemonSchool_Text_PokemonHealItselfWithBerry:
-	.string "A POKEMON holding a BERRY will heal\n"
-	.string "itself...\p"
-	.string "There are many kinds of items that\n"
-	.string "POKEMON can hold...\p"
-	.string "Boy, it sure is hard taking notes\n"
-	.string "down...$"
+	.string "{JPN}……ポケモンに きのみを もたせると\nじぶんで たいりょくを かいふくする\pポケモンが もてる どうぐは\nほかにも たくさん……\pノートを ちゃんと とるのは\nたいへんだなあ……$"
 
 RustboroCity_PokemonSchool_Text_StudentsNotes:
-	.string "It's this student's notebook...\p"
-	.string "POKEMON are to be caught using\n"
-	.string "POKe BALLS.\p"
-	.string "Up to six POKEMON can accompany\n"
-	.string "a TRAINER.\p"
-	.string "A TRAINER is someone who catches\n"
-	.string "POKEMON, raises them, and battles\l"
-	.string "with them.\p"
-	.string "A TRAINER's mission is to defeat\n"
-	.string "the strong TRAINERS who await\l"
-	.string "challengers in POKEMON GYMS.$"
+	.string "{JPN}このこの ノートだ……\pポケモンは モンスターボールで つかまえて\nどうじに 6ぴき もちあるける\pそうして つかまえた ポケモンを\nそだてて たたかわせる ひとを\lポケモントレーナーと いう\pトレーナーの もくひょうは\nかくちの ポケモンジムに いる\lつよい トレーナーに かつこと!$"
 
 RustboroCity_PokemonSchool_Text_ScottMetAlreadyCut:
-	.string "Hello? Didn't we meet before?\n"
-	.string "I think back in PETALBURG CITY.\p"
-	.string "Let me introduce myself.\n"
-	.string "My name's SCOTT.\p"
-	.string "I've been traveling everywhere in\n"
-	.string "search of outstanding TRAINERS.\p"
-	.string "More specifically, I'm looking for\n"
-	.string "POKEMON battle experts.\p"
-	.string "So, what brings you to this SCHOOL?\n"
-	.string "Are you a TRAINER, too?\p"
-	.string "The first thing you should do is to\n"
-	.string "have a POKEMON learn the move CUT.\p"
-	.string "If I remember correctly, someone in\n"
-	.string "this town has CUT.$"
+	.string "{JPN}おや? きみとは たしか\nトウカシティで あった きがするね\pわたしの なまえは エニシダ\pポケモンしょうぶの さいのうを もった\nゆうしゅうな じんざいを もとめて\lかくちを たびして いるのさ\pスクールを のぞきにきた ということは\nきみも トレーナー?\pならば まずは いあいぎりを\nポケモンに おぼえさせると いいね!\pいあいぎりは たしか このまちの\nだれかが もっていた はずだよ$"
 
 RustboroCity_PokemonSchool_Text_StudentTalentLevelUnknown:
-	.string "SCOTT: Hmm...\p"
-	.string "The talent levels of the students here\n"
-	.string "are unknown. The potential's there.$"
+	.string "{JPN}エニシダ『うーん ここに いる\nせいとさん たちの さいのうは\lまだまだ みちすう! これから だな!$"
 
 RustboroCity_PokemonSchool_Text_ScottStoneBadge:
-	.string "SCOTT: Oh, what's that?\p"
-	.string "It's a STONE BADGE, isn't it?\n"
-	.string "That's pretty impressive, I'd say.\p"
-	.string "But, you know, I would've loved to see\n"
-	.string "you in battle.\p"
-	.string "It's hard to tell what you're like as\n"
-	.string "a TRAINER from a LEAGUE BADGE.$"
+	.string "{JPN}エニシダ『ん それは……\nストーンバッジ だね\lなかなか やるじゃ ないか!\pだけど できれば\nたたかっている ところを みたかったな\lリーグバッジ だけでは きみが\lどんな トレーナー なのかは\lよく わからない からね$"
 
 RustboroCity_PokemonSchool_Text_ScottMetAlreadyStoneBadge:
-	.string "Hello? Didn't we meet before?\n"
-	.string "I think back in PETALBURG CITY.\p"
-	.string "Let me introduce myself.\n"
-	.string "My name's SCOTT.\p"
-	.string "I've been traveling everywhere in\n"
-	.string "search of outstanding TRAINERS.\p"
-	.string "More specifically, I'm looking for\n"
-	.string "POKEMON battle experts.\p"
-	.string "Oh, what's that?\n"
-	.string "It's a STONE BADGE, isn't it?\p"
-	.string "That's pretty impressive, I'd say, for\n"
-	.string "a starting TRAINER like yourself.\p"
-	.string "But, you know, I would've loved to see\n"
-	.string "you in battle.\p"
-	.string "It's hard to tell what you're like as\n"
-	.string "a TRAINER from a LEAGUE BADGE.$"
+	.string "{JPN}おや? きみとは たしか\nトウカシティで あった きがするね\pわたしの なまえは エニシダ\pポケモンしょうぶの さいのうを もった\nゆうしゅうな じんざいを もとめて\lかくちを たびして いるのさ\pきみの それは……\nストーンバッジ だね\lトレーナーに なりたてに しては やるね\pだけど できれば\nたたかっている ところを みたかったな\lリーグバッジ だけでは きみが\lどんな トレーナー なのかは\lよく わからない からね$"
 

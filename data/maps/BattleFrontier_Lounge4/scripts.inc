@@ -14,17 +14,11 @@ BattleFrontier_Lounge4_EventScript_Man::
 	end
 
 BattleFrontier_Lounge4_Text_WonderIfInterviewsAiring:
-	.string "I wonder if they'll be airing interviews\n"
-	.string "with tough TRAINERS today?$"
+	.string "{JPN}つよい トレーナーの インタビュー\nきょうは やって いるかなー?$"
 
 BattleFrontier_Lounge4_Text_IfIOpenedRestaurantHere:
-	.string "If I opened a restaurant here,\n"
-	.string "it'd make money for sure.$"
+	.string "{JPN}ここで おいしい レストランでも\nやったら もうかりそうやな$"
 
 BattleFrontier_Lounge4_Text_NeedBreatherAfterBattles:
-	.string "Whew...\p"
-	.string "I need to take a breather after\n"
-	.string "some intense battles...\p"
-	.string "But even now, I never take a break\n"
-	.string "from plotting strategy and combos.$"
+	.string "{JPN}ふう\pたたかいの あいまに\nちょっと ひとやすみ……\pと いっても\nおれの あたまの なかでは\lやすみなく せんりゃくが ねられているぜ!$"
 

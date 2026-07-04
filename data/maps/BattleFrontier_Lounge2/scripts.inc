@@ -113,257 +113,108 @@ BattleFrontier_Lounge2_EventScript_TriathleteF::
 	end
 
 BattleFrontier_Lounge2_Text_FrontierManiacIntro::
-	.string "Howdy! When it comes to news about\n"
-	.string "the BATTLE FRONTIER, I'm no. 1.\p"
-	.string "You can think of me as\n"
-	.string "the FRONTIER MANIAC.\p"
-	.string "Just checking, but you are a TRAINER,\n"
-	.string "isn't that right?\p"
-	.string "I'll happily share the hottest news\n"
-	.string "I gathered about the BATTLE FRONTIER.$"
+	.string "{JPN}やあやあ ぼくは バトルフロンティアいちの\nじょうほうつう!\pフロンティアマニアって よんでくれよ!\pきみ トレーナーだろ?\pぼくが あつめた バトルフロンティアの\nホットな じょうほうを おしえて あげるよ!$"
 
 BattleFrontier_Lounge2_Text_SwingByForTheLatestWord::
-	.string "Howdy! Did you swing by to grill me\n"
-	.string "about the latest word? Oh, all right!$"
+	.string "{JPN}やあやあ また ぼくの じょうほうを\nききに きたんだね! しかたないなー!$"
 
 @ Unused
 BattleFrontier_Lounge2_Text_MyInformationsBeenUsefulRight::
-	.string "Well? Well? Well?\p"
-	.string "I'm sure my information's been\n"
-	.string "seriously useful to you, right?$"
+	.string "{JPN}どう? どう? どう?\pぼくの じょうほうは もちろん\nすごーく さんこうに なってるだろ?$"
 
 BattleFrontier_Lounge2_Text_FacilityIsHottest::
-	.string "Let's see now...\p"
-	.string "It sounds like the {STR_VAR_1}\n"
-	.string "is the hottest place going.$"
+	.string "{JPN}そうだねぇ……\pいまは {STR_VAR_1}が\nアッつい みたいだね!$"
 
 BattleFrontier_Lounge2_Text_BattleTowerIsHottest::
-	.string "Let's see now...\p"
-	.string "It sounds like BATTLE TOWER\n"
-	.string "{STR_VAR_1} is the hottest.$"
+	.string "{JPN}そうだねぇ……\pいまは バトルタワー{STR_VAR_1}が\nアッつい みたいだね!$"
 
 BattleFrontier_Lounge2_Text_SalonMaidenIsThere::
-	.string "Bet you didn't know this!\p"
-	.string "One of those top TRAINERS that SCOTT\n"
-	.string "calls the FRONTIER BRAINS is there.\p"
-	.string "It's this mysterious TRAINER called\n"
-	.string "the SALON MAIDEN that runs the place.$"
+	.string "{JPN}しってるかい?\pあそこは エニシダが\nフロンティアブレーンって よんでる\lトレーナーの うちの ひとり……\lタワータイクーンって いう\lなぞの トレーナーが おさめてるのさ!$"
 
 BattleFrontier_Lounge2_Text_SalonMaidenSilverMons::
-	.string "Have you battled the SALON MAIDEN?\p"
-	.string "When she's measuring up her opponent,\n"
-	.string "she apparently uses these POKEMON:\p"
-	.string "A PSYCHIC-type PSI POKEMON,\n"
-	.string "a FIRE-type VOLCANO POKEMON,\l"
-	.string "and a NORMAL-type SLEEPING POKEMON.$"
+	.string "{JPN}きみは タワータイクーンと\nたたかったこと あるかい?\pやつは あいての ちからを はかるとき\nエスパーの ねんりきポケモン!\lほのおの かざんポケモン!\lノーマルの いねむりポケモンの\l3ひきを つかってくる らしいぜ!$"
 
 BattleFrontier_Lounge2_Text_SalonMaidenGoldMons::
-	.string "Have you battled the SALON MAIDEN\n"
-	.string "when she's serious?\p"
-	.string "When she's battling flat out,\n"
-	.string "she apparently uses these POKEMON:\p"
-	.string "A DRAGON & PSYCHIC EON POKEMON,\n"
-	.string "an ELECTRIC-type THUNDER POKEMON,\l"
-	.string "and a NORMAL-type SLEEPING POKEMON.$"
+	.string "{JPN}きみは ほんきの タワータイクーンと\nたたかったこと あるかい?\pやつは ほんとの ちからで たたかうとき\nドラゴンと エスパーの むげんポケモン!\lでんきの いかづちポケモン!\lノーマルの いねむりポケモンの\l3ひきを つかってくる らしいぜ!$"
 
 BattleFrontier_Lounge2_Text_DomeAceIsThere::
-	.string "Bet you didn't know this!\p"
-	.string "One of those top TRAINERS that SCOTT\n"
-	.string "calls the FRONTIER BRAINS is there.\p"
-	.string "It's this flamboyant TRAINER called\n"
-	.string "the DOME ACE that runs the place.$"
+	.string "{JPN}しってるかい?\pあそこは エニシダが\nフロンティアブレーンって よんでる\lトレーナーの うちの ひとり……\lドームスーパースターって いう\lどハデな トレーナーが おさめてるのさ!$"
 
 BattleFrontier_Lounge2_Text_DomeAceSilverMons::
-	.string "Have you battled the DOME ACE?\p"
-	.string "When he's treating the opponent\n"
-	.string "lightly, he uses these three POKEMON:\p"
-	.string "A DRAGON & FLYING DRAGON POKEMON,\n"
-	.string "a WATER & GROUND MUD FISH POKEMON,\l"
-	.string "and a FIRE & FLYING FLAME POKEMON.$"
+	.string "{JPN}きみは ドームスーパースターと\nたたかったこと あるかい?\pやつは あいての ちからを なめてるとき\nドラゴンと ひこうの ドラゴンポケモン!\lみずと じめんの ぬまうおポケモン!\lほのおと ひこうの かえんポケモンの\l3ひきを つかってくる らしいぜ!$"
 
 BattleFrontier_Lounge2_Text_DomeAceGoldMons::
-	.string "Have you battled the DOME ACE\n"
-	.string "when he's serious?\p"
-	.string "When he's demonstrating his strategy,\n"
-	.string "he uses these three POKEMON:\p"
-	.string "A DRAGON & FLYING EON POKEMON,\n"
-	.string "a WATER & GROUND MUD FISH POKEMON,\l"
-	.string "and a STEEL- & PSYCHIC-type IRON LEG\l"
-	.string "POKEMON.$"
+	.string "{JPN}きみは ほんきの ドームスーパースターと\nたたかったこと あるかい?\pやつは じぶんの せんりゃくを みせるとき\nドラゴンと エスパーの むげんポケモン!\lみずと じめんの ぬまうおポケモン!\lはがねと エスパーの てつあしポケモンの\l3ひきを つかってくる らしいぜ!$"
 
 BattleFrontier_Lounge2_Text_FactoryHeadIsThere::
-	.string "Bet you didn't know this!\p"
-	.string "One of those top TRAINERS that SCOTT\n"
-	.string "calls the FRONTIER BRAINS is there.\p"
-	.string "It's this freaky TRAINER called\n"
-	.string "the FACTORY HEAD that runs the place.$"
+	.string "{JPN}しってるかい?\pあそこは エニシダが\nフロンティアブレーンって よんでる\lトレーナーの うちの ひとり……\lファクトリーヘッドって いう\lやばい トレーナーが おさめてるのさ!$"
 
 BattleFrontier_Lounge2_Text_FactoryHeadSilverMons::
-	.string "Have you battled the FACTORY HEAD\n"
-	.string "already?\p"
-	.string "Let me think... When he goes to battle,\n"
-	.string "he just gets three rental POKEMON.\p"
-	.string "He battles under pretty much the same\n"
-	.string "conditions as you.$"
+	.string "{JPN}きみは もう ファクトリーヘッドと\nたたかったこと あるかい?\pあいつが つかう ポケモンは\nレンタルポケモンの\lなかから どれか 3ひき!\lきみと ほぼ おなじ じょうけん らしいぜ!$"
 
 BattleFrontier_Lounge2_Text_FactoryHeadGoldMons::
-	.string "Have you battled the FACTORY HEAD\n"
-	.string "when he's serious?\p"
-	.string "When he goes seriously to battle,\n"
-	.string "he still gets three rental POKEMON.\p"
-	.string "He battles under virtually the same\n"
-	.string "conditions as you.$"
+	.string "{JPN}きみは ほんきの ファクトリーヘッドと\nたたかったこと あるかい?\pあいつは ほんきで たたかう ときでも\nレンタルポケモンの\lなかから どれか 3ひき!\lきみと ほとんど おなじ じょうけんで\lたたかう らしいぜ!$"
 
 BattleFrontier_Lounge2_Text_PikeQueenIsThere::
-	.string "Bet you didn't know this!\p"
-	.string "One of those top TRAINERS that SCOTT\n"
-	.string "calls the FRONTIER BRAINS is there.\p"
-	.string "It's this scary TRAINER called\n"
-	.string "the PIKE QUEEN that runs the place.$"
+	.string "{JPN}しってるかい?\pあそこには エニシダが\nフロンティアブレーンって よんでる\lトレーナーの うちの ひとり……\lチューブクイーンって いう\lこわーい トレーナーが おさめてるのさ!$"
 
 BattleFrontier_Lounge2_Text_PikeQueenSilverMons::
-	.string "Have you battled the PIKE QUEEN\n"
-	.string "before?\p"
-	.string "When she's in a good mood, they say\n"
-	.string "she uses these three POKEMON:\p"
-	.string "A POISON-type FANG SNAKE POKEMON,\n"
-	.string "a BUG & ROCK MOLD POKEMON,\l"
-	.string "and a WATER-type TENDER POKEMON.$"
+	.string "{JPN}きみは チューブクイーンと\nたたかったこと あるかい?\pやつは きげんの いいとき\nどくの キバへびポケモン!\lむしと いわの はっこうポケモン!\lみずの いつくしみポケモンの\l3ひきを つかってくる らしいぜ!$"
 
 BattleFrontier_Lounge2_Text_PikeQueenGoldMons::
-	.string "Have you battled the PIKE QUEEN\n"
-	.string "when she's serious?\p"
-	.string "When she's seriously annoyed, they say\n"
-	.string "she uses these three POKEMON:\p"
-	.string "A POISON-type FANG SNAKE POKEMON,\n"
-	.string "a STEEL & GROUND IRON SNAKE POKEMON,\l"
-	.string "and a WATER- & FLYING-type ATROCIOUS\l"
-	.string "POKEMON.$"
+	.string "{JPN}きみは ほんきの チューブクイーンと\nたたかったこと あるかい?\pやつは ほんきで おこったとき\nどくの キバへびポケモン!\lはがねと じめんの てつへびポケモン!\lみずと ひこうの きょうあくポケモンの\l3ひきを つかってくる らしいぜ!$"
 
 BattleFrontier_Lounge2_Text_ArenaTycoonIsThere::
-	.string "Bet you didn't know this!\p"
-	.string "One of those top TRAINERS that SCOTT\n"
-	.string "calls the FRONTIER BRAINS is there.\p"
-	.string "It's this cute TRAINER called\n"
-	.string "the ARENA TYCOON that runs the place.$"
+	.string "{JPN}しってるかい?\pあそこには エニシダが\nフロンティアブレーンって よんでる\lトレーナーの うちの ひとり……\lアリーナキャプテンって いう\lかわいい トレーナーが おさめてるのさ!$"
 
 BattleFrontier_Lounge2_Text_ArenaTycoonSilverMons::
-	.string "Have you battled the ARENA TYCOON\n"
-	.string "before?\p"
-	.string "When she's assessing the foe's ability,\n"
-	.string "she supposedly uses these POKEMON:\p"
-	.string "A BUG & FIGHTING SINGLE HORN POKEMON,\n"
-	.string "a DARK-type MOONLIGHT POKEMON,\l"
-	.string "and a BUG & GHOST SHED POKEMON.$"
+	.string "{JPN}きみは もう アリーナキャプテンと\nたたかったこと あるかい?\pあのこは あいての ちからを うかがうとき\nむしと かくとうの 1ぽんヅノポケモン!\lあくの げっこうポケモン!\lむしと ゴーストの ぬけがらポケモンの\l3ひきを つかってくる らしいぜ!$"
 
 BattleFrontier_Lounge2_Text_ArenaTycoonGoldMons::
-	.string "Have you battled the ARENA TYCOON\n"
-	.string "when she's serious?\p"
-	.string "When she battles for keeps,\n"
-	.string "she supposedly uses these POKEMON:\p"
-	.string "A DARK-type MOONLIGHT POKEMON,\n"
-	.string "a GHOST & POISON SHADOW POKEMON\l"
-	.string "and a GRASS- & FIGHTING-type\l"
-	.string "MUSHROOM POKEMON.$"
+	.string "{JPN}きみは ほんきの アリーナキャプテンと\nたたかったこと あるかい?\pあのこは マジで たたかう とき\nあくの げっこうポケモン!\lゴーストと どくの シャドーポケモン!\lくさと かくとうの きのこポケモンの\l3ひきを つかってくる らしいぜ!$"
 
 BattleFrontier_Lounge2_Text_PalaceMavenIsThere::
-	.string "Bet you didn't know this!\p"
-	.string "One of those top TRAINERS that SCOTT\n"
-	.string "calls the FRONTIER BRAINS is there.\p"
-	.string "It's this sinister TRAINER called\n"
-	.string "the PALACE MAVEN that runs the place.$"
+	.string "{JPN}あそこには エニシダが\nフロンティアブレーンって よんでる\lトレーナーの うちの ひとり……\lパレスガーディアンって いう\lあやしい トレーナーが おさめてるのさ!$"
 
 BattleFrontier_Lounge2_Text_PalaceMavenSilverMons::
-	.string "Have you battled the PALACE MAVEN\n"
-	.string "before?\p"
-	.string "When he's testing the opponent's\n"
-	.string "spirit, he's said to use these POKEMON:\p"
-	.string "A POISON & FLYING-type BAT POKEMON,\n"
-	.string "a NORMAL-type LAZY POKEMON, and a\l"
-	.string "WATER- & ICE-type TRANSPORT POKEMON.$"
+	.string "{JPN}きみは パレスガーディアンと\nたたかったこと あるかい?\pやつは あいての こころを ためすとき\nどくと ひこうの こうもりポケモン!\lノーマルの ものぐさポケモン\lみずと こおりの のりものポケモンの\l3ひきを つかってくる らしいぜ!$"
 
 BattleFrontier_Lounge2_Text_PalaceMavenGoldMons::
-	.string "Have you battled the PALACE MAVEN\n"
-	.string "when he's serious?\p"
-	.string "When he throws his entire might into\n"
-	.string "battle, he's said to use these POKEMON:\p"
-	.string "A FIRE-type LEGENDARY POKEMON,\n"
-	.string "a NORMAL-type LAZY POKEMON,\l"
-	.string "and a WATER-type AURORA POKEMON.$"
+	.string "{JPN}きみは ほんきの パレスガーディアンと\nたたかったこと あるかい?\pやつが てかげんぬきで たたかうときは\nほのおの でんせつポケモン!\lノーマルの ものぐさポケモン\lみずの オーロラポケモンの\l3ひきを つかってくる らしいぜ!$"
 
 BattleFrontier_Lounge2_Text_PyramidKingIsThere::
-	.string "Bet you didn't know this!\p"
-	.string "One of those top TRAINERS that SCOTT\n"
-	.string "calls the FRONTIER BRAINS is there.\p"
-	.string "It's this fiery-hot TRAINER called\n"
-	.string "the PYRAMID KING that runs the place.$"
+	.string "{JPN}しってるかい?\pあそこには エニシダが\nフロンティアブレーンって よんでる\lトレーナーの うちの ひとり……\lピラミッドキングって いう\lアツーい トレーナーが おさめてるのさ!$"
 
 BattleFrontier_Lounge2_Text_PyramidKingSilverMons::
-	.string "Have you battled the PYRAMID KING\n"
-	.string "before?\p"
-	.string "When he's checking the foe's power,\n"
-	.string "he apparently uses these POKEMON:\p"
-	.string "A ROCK-type ROCK PEAK POKEMON,\n"
-	.string "an ICE-type ICEBERG POKEMON,\l"
-	.string "and a STEEL-type IRON POKEMON.$"
+	.string "{JPN}きみは もう ピラミッドキングと\nたたかったこと あるかい?\pかれは あいての ちからを ためすとき\nいわの いわやまポケモン!\lこおりの ひょうざんポケモン!\lはがねの くろがねポケモンの\l3ひきを つかってくる らしいぜ!$"
 
 BattleFrontier_Lounge2_Text_PyramidKingGoldMons::
-	.string "Have you battled the PYRAMID KING\n"
-	.string "when he's serious?\p"
-	.string "When he's pumped with hot power,\n"
-	.string "he apparently uses these POKEMON:\p"
-	.string "An ICE & FLYING FREEZE POKEMON, an\n"
-	.string "ELECTRIC & FLYING ELECTRIC POKEMON,\l"
-	.string "and a FIRE- & FLYING-type FLAME\l"
-	.string "POKEMON.$"
+	.string "{JPN}きみは ほんきの ピラミッドキングと\nたたかったこと あるかい?\pかれに あつい ちからが みなぎるときは\nこおりと ひこうの れいとうポケモン!\lでんきと ひこうの でんげきポケモン!\lほのおと ひこうの かえんポケモンの\l3ひきを つかってくる らしいぜ!$"
 
 BattleFrontier_Lounge2_Text_DoubleBattleAdvice1::
-	.string "Sure, there are several places where\n"
-	.string "you can enter DOUBLE BATTLES.\p"
-	.string "But the DOUBLE BATTLE ROOMS of\n"
-	.string "the BATTLE TOWER are, like, basic!\p"
-	.string "They're where you should learn about\n"
-	.string "how DOUBLE BATTLES are played here\l"
-	.string "in the BATTLE FRONTIER.$"
+	.string "{JPN}ダブルバトルが できる ばしょは\nいくつか あるけど やっぱり きほんは\lバトルタワーの ダブル バトルルーム!\pまずは ここから バトルフロンティアでの\nダブルバトルを まなんで いくと いいぜ!$"
 
 BattleFrontier_Lounge2_Text_DoubleBattleAdvice2::
-	.string "Watch yourself in the battles here.\p"
-	.string "I hear there are TRAINERS that have\n"
-	.string "strategies they developed just for\l"
-	.string "DOUBLE BATTLES.$"
+	.string "{JPN}ここでの たたかいには\nちゅうい しなよ!\pダブルバトル ならではの せんぽうで\nたたかう トレーナーも いるみたいだぜ!$"
 
 BattleFrontier_Lounge2_Text_DoubleBattleAdvice3::
-	.string "Once you're confident and comfortable\n"
-	.string "with DOUBLE BATTLES here, you should\l"
-	.string "think about challenging other places\l"
-	.string "offering DOUBLE BATTLES.$"
+	.string "{JPN}ここの たたかいで\nダブルバトルに じしんが ついたら\lほかの ダブルバトルが できる ばしょに\lチャレンジ してみると いいかもな!$"
 
 BattleFrontier_Lounge2_Text_MultiBattleAdvice::
-	.string "All sorts of TRAINERS gather in\n"
-	.string "the BATTLE SALON.\p"
-	.string "Just think--you may run into your\n"
-	.string "friends or followers!\l"
-	.string "You should look carefully!$"
+	.string "{JPN}バトルサロンには\nいろんな トレーナーが あつまるんだぜ!\pもしかしたら きみの ともだちや\nでしにも あえるかも しれないな!\lよーく さがして みると いいぜ!$"
 
 BattleFrontier_Lounge2_Text_LinkMultiBattleAdvice::
-	.string "If you're with a friend, head for the\n"
-	.string "LINK MULTI BATTLE ROOM.\p"
-	.string "If you play with a strong friend,\n"
-	.string "you can expect to see tough foes!$"
+	.string "{JPN}ともだちが あつまったら\nつうしんマルチ バトルルーム!!\pつよい ともだちと いっしょに あそべば\nつよい トレーナーたち との\lたたかいが まってるぜ!$"
 
 BattleFrontier_Lounge2_Text_NewsGatheringPower::
-	.string "What amazing news-gathering power!\n"
-	.string "My mentor's like none other!$"
+	.string "{JPN}すっげえ じょうほうりょくー!!\nやっぱ センパイは ちがうっすよー$"
 
 BattleFrontier_Lounge2_Text_AmazingPowersOfObservation::
-	.string "What amazing powers of observation!\n"
-	.string "My mentor's like none other!$"
+	.string "{JPN}すっげえ かんさつりょくー!!\nやっぱ センパイは ちがうっすわー$"
 
 BattleFrontier_Lounge2_Text_AmazingPowerOfPersuasion::
-	.string "What amazing power of persuasion!\n"
-	.string "My mentor's like none other!$"
+	.string "{JPN}すっげえ せっとくりょくー!!\nやっぱ センパイは ちがうっすねー$"
 
 BattleFrontier_Lounge2_Text_ThisPlaceIsScaringMe::
-	.string "...What is this place?\n"
-	.string "It's scaring me...$"
+	.string "{JPN}なによ ここ……\nちょっと こわい……$"
 

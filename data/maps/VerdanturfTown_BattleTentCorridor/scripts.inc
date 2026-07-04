@@ -43,32 +43,17 @@ VerdanturfTown_BattleTentCorridor_Movement_AttendantEnterDoor:
 @ Leftover text from when this was a Contest Hall in R/S
 @ Unused
 VerdanturfTown_ContestHall_Text_WhichContestYouEntering:
-	.string "Which CONTEST are you entering?\n"
-	.string "Want a piece of advice?\p"
-	.string "In any CONTEST, for example, a CUTE\n"
-	.string "CONTEST, I don't think they judge you\l"
-	.string "only on cuteness in the first round.\p"
-	.string "You need to work out ways for raising\n"
-	.string "POKEMON better.$"
+	.string "{JPN}きみ なにコンテストに でるの?\nひとつ アドバイス してあげるよ!\pたとえば かわいさコンテスト でも\n1じしんさで かわいさ だけが\lみられてる わけじゃ ないみたいなんだ\pそだてかたを くふう したほうが いいよ!$"
 
 @ Unused
 VerdanturfTown_ContestHall_Text_RaisedMonToBeCute:
-	.string "I raised my POKEMON to be cute.\p"
-	.string "I found out you can put POKEMON in\n"
-	.string "a CONTEST for cuteness!\p"
-	.string "I'm so glad I raised my POKEMON with\n"
-	.string "loving care...$"
+	.string "{JPN}ポケモンが かわいく なるように\nそだてて いたんだけど\pコンテストって かわいらしさも\nきそう ことが できるのね!\pだいじに そだてて よかった……$"
 
 @ Unused
 VerdanturfTown_ContestHall_Text_MyMonRules:
-	.string "My POKEMON rules!\p"
-	.string "It's cool, tough yet beautiful, cute,\n"
-	.string "and smart. It's complete!\p"
-	.string "I may as well go for wins in every\n"
-	.string "single CONTEST.$"
+	.string "{JPN}おれの ポケモン……\pそりゃあ もう かっこよくて\nたくましくて うつくしくて\lかわいくて かしこいんだけど さ\pこうなったら ぜんぶの コンテストで\nかたっぱし から ゆうしょう ねらうか!$"
 
 @ Unused
 VerdanturfTown_ContestHall_Text_NormalRankStage:
-	.string "POKEMON CONTESTS\n"
-	.string "NORMAL RANK STAGE!$"
+	.string "{JPN}ポケモン コンテスト\nノーマルランク ステージ!$"
 

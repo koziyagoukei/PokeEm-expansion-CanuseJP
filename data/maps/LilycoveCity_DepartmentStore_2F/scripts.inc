@@ -63,14 +63,11 @@ LilycoveCity_DepartmentStore_2F_Pokemart2:
 	pokemartlistend
 
 LilycoveCity_DepartmentStore_2F_Text_LearnToUseItemsProperly:
-	.string "Learn to use items properly.\n"
-	.string "That's basic, really.$"
+	.string "{JPN}どうぐの きほんは うまく つかいこなすこと\nこれ いちばん だいじ なのヨ$"
 
 LilycoveCity_DepartmentStore_2F_Text_GoodGiftForHusband:
-	.string "My husband is waiting at home.\n"
-	.string "What would make a good gift for him?$"
+	.string "{JPN}いえで まってる ダンナの\nおみやげ なんだけど どれが いいかしら?$"
 
 LilycoveCity_DepartmentStore_2F_Text_StockUpOnItems:
-	.string "I'm leaving on a long journey soon.\n"
-	.string "I need to stock up on items.$"
+	.string "{JPN}これから とおい ところへ\nたびに いくからな\lここで どっさり どうぐを かっておくのさ$"
 

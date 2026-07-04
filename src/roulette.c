@@ -416,18 +416,18 @@ static void SetBallStuck(struct Sprite *);
 static void SpriteCB_Shroomish(struct Sprite *);
 static void SpriteCB_Taillow(struct Sprite *);
 
-static const u8 Roulette_Text_PlayMinimumWagerIsX[] = _("このテーブルは\n{STR_VAR_1}まいからです。 あそびますか？");
-static const u8 Roulette_Text_NotEnoughCoins[] = _("コインが たりません。");
-static const u8 Roulette_Text_SpecialRateTable[] = _("いまだけ とくべつレートです！");
-static const u8 Roulette_Text_ControlsInstruction[] = _("じゅうじボタンで かけてから\nAボタンを おしてください。");
-static const u8 Roulette_Text_ItsAHit[] = _("あたり！");
-static const u8 Roulette_Text_Jackpot[] = _("ジャックポット！");
-static const u8 Roulette_Text_NothingDoing[] = _("はずれ！");
-static const u8 Roulette_Text_YouveWonXCoins[] = _("{STR_VAR_1}まい あたりました！");
-static const u8 Roulette_Text_NoCoinsLeft[] = _("コインが ありません...");
-static const u8 Roulette_Text_KeepPlaying[] = _("つづけますか？");
-static const u8 Roulette_Text_BoardWillBeCleared[] = _("ルーレットの ボードを\nけします。");
-static const u8 Roulette_Text_CoinCaseIsFull[] = _("コインケースが いっぱいです！\nコインは けいひんに かえられます。");
+static const u8 Roulette_Text_PlayMinimumWagerIsX[] = _("{JPN}ここは レート{STR_VAR_1}の ルーレットだい です\nルーレットで あそびますか?");
+static const u8 Roulette_Text_NotEnoughCoins[] = _("{JPN}コインが たりません");
+static const u8 Roulette_Text_SpecialRateTable[] = _("{JPN}ほんじつ このだいでは\nレート アップ じっしちゅう!");
+static const u8 Roulette_Text_ControlsInstruction[] = _("{JPN}ベットする わくを じゅうじボタンで えらんで\nAボタンで けってい します");
+static const u8 Roulette_Text_ItsAHit[] = _("{JPN}あたりー!");
+static const u8 Roulette_Text_Jackpot[] = _("{JPN}おおあたり!!");
+static const u8 Roulette_Text_NothingDoing[] = _("{JPN}はずれー");
+static const u8 Roulette_Text_YouveWonXCoins[] = _("{JPN}おめでとう ございます!\nコイン {STR_VAR_1}まい はいります!");
+static const u8 Roulette_Text_NoCoinsLeft[] = _("{JPN}コインが なくなりました");
+static const u8 Roulette_Text_KeepPlaying[] = _("{JPN}つづけて あそびますか?");
+static const u8 Roulette_Text_BoardWillBeCleared[] = _("{JPN}だいの うえの たまを\nクリア します");
+static const u8 Roulette_Text_CoinCaseIsFull[] = _("{JPN}コインが いっぱいです!\nけいひんと こうかん して ください");
 
 static const u16 sWheel_Pal[] = INCGFX_U16("graphics/roulette/wheel.png", ".gbapal"); // also palette for grid
 static const u32 sGrid_Tilemap[] = INCGFX_U32("graphics/roulette/grid.bin", ".smolTM");

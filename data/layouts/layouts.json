@@ -9338,7 +9338,7 @@
     },
     {
       "id": "LAYOUT_PARTY_ROAMER_PARK",
-      "name": "PartyRoamerPark_Layout",
+      "name": "party_roamer_park_Layout",
       "width": 28,
       "height": 24,
       "primary_tileset": "gTileset_General",

@@ -22,31 +22,11 @@ RustboroCity_CuttersHouse_EventScript_Lass::
 	end
 
 RustboroCity_CuttersHouse_Text_YouCanPutThisHMToGoodUse:
-	.string "That determined expression...\n"
-	.string "That limber way you move...\l"
-	.string "And your well-trained POKEMON...\p"
-	.string "You're obviously a skilled TRAINER!\p"
-	.string "No, wait, don't say a word.\n"
-	.string "I can tell just by looking at you.\p"
-	.string "I'm sure that you can put this\n"
-	.string "HIDDEN MACHINE to good use.\p"
-	.string "No need to be modest or shy.\n"
-	.string "Go on, take it!$"
+	.string "{JPN}その めつき\nしなやかな みの こなし……\lそして きたえられた ポケモン……\pきみは できる トレーナーだな!\pなにも いわなくて いい\nわたしには わかる わかるのだよ!\pきみならば この ひでんマシン\nうまく つかえるだろう\lさあ えんりょ せずに もっていきたまえ!$"
 
 RustboroCity_CuttersHouse_Text_ExplainCut:
-	.string "That HIDDEN MACHINE, or HM for\n"
-	.string "short, is CUT.\p"
-	.string "An HM move is one that can be used\n"
-	.string "by POKEMON outside of battle.\p"
-	.string "Any POKEMON that's learned CUT can\n"
-	.string "chop down thin trees if the TRAINER\l"
-	.string "has earned the STONE BADGE.\p"
-	.string "And, unlike a TM, an HM can be used\n"
-	.string "more than once.$"
+	.string "{JPN}その ひでんマシンは いあいぎり!\pひでんは たたかっていない ときでも\nポケモンが つかえる わざ!\pいあいぎりを おぼえた ポケモンは\nストーンバッジを もっていれば\lほそい きを きれるように なるのだよ!\pしかも ひでんマシンは わざマシンと ちがい\nつかっても なくならないぞ!$"
 
 RustboroCity_CuttersHouse_Text_DadHelpedClearLandOfTrees:
-	.string "When they were expanding the city of\n"
-	.string "RUSTBORO, my dad helped out.\p"
-	.string "He made his POKEMON use CUT to clear\n"
-	.string "the land of trees.$"
+	.string "{JPN}この カナズミが おおきくなるとき\nおとうさん みんなの ために\lいあいぎりを つかって\lあたりを きりひらいたんだって!$"
 
