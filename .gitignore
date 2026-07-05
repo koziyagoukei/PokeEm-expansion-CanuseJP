@@ -5,6 +5,7 @@ agbcc
 *.elf
 *.gba
 !data/*.gba
+/baserom.gba
 *.sgm
 *.sa1
 *.ss[0-9]
@@ -32,6 +33,7 @@ patches
 *.sa*
 Thumbs.db
 build/
+/build/generated/
 .DS_Store
 *.ddump
 .idea/
