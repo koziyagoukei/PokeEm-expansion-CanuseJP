@@ -210,6 +210,9 @@ endif
 # Variable filled out in other make files
 AUTO_GEN_TARGETS :=
 include make_tools.mk
+
+BUILD_GENERATED_DIR := $(BUILD_DIR)/generated
+BPEJ_VERIFIED_OK := $(BUILD_GENERATED_DIR)/bpej_verified.ok
 # Tool executables
 SMOLTM       := $(TOOLS_DIR)/compresSmol/compresSmolTilemap$(EXE)
 SMOL         := $(TOOLS_DIR)/compresSmol/compresSmol$(EXE)
@@ -249,12 +252,19 @@ AUTO_GEN_TARGETS += $(DATA_SRC_SUBDIR)/wild_encounters.h
 
 MISC_TOOL_DIR := $(TOOLS_DIR)/misc
 AUTO_GEN_TARGETS +=  $(INCLUDE_DIRS)/constants/script_commands.h
+AUTO_GEN_TARGETS += $(BPEJ_VERIFIED_OK)
 
 $(DATA_SRC_SUBDIR)/wild_encounters.h: $(DATA_SRC_SUBDIR)/wild_encounters.json $(WILD_ENCOUNTERS_TOOL_DIR)/wild_encounters_to_header.py $(INCLUDE_DIRS)/config/overworld.h $(INCLUDE_DIRS)/config/dexnav.h
 	python3 $(WILD_ENCOUNTERS_TOOL_DIR)/wild_encounters_to_header.py
 
 $(INCLUDE_DIRS)/constants/script_commands.h: $(MISC_TOOL_DIR)/make_scr_cmd_constants.py $(DATA_ASM_SUBDIR)/script_cmd_table.inc
 	python3  $(MISC_TOOL_DIR)/make_scr_cmd_constants.py
+
+$(BUILD_GENERATED_DIR):
+	mkdir -p $@
+
+$(BPEJ_VERIFIED_OK): baserom.gba $(TOOLS_DIR)/check_baserom_jp.py | $(BUILD_GENERATED_DIR)
+	python3 $(TOOLS_DIR)/check_baserom_jp.py --baserom baserom.gba --output $@
 
 PERL := perl
 SHA1 := $(shell { command -v sha1sum || command -v shasum; } 2>/dev/null) -c
@@ -445,6 +455,8 @@ clean-teachables_intermediates:
 clean-generated: clean-teachables_intermediates
 	@rm -f $(AUTO_GEN_TARGETS)
 	@echo "rm -f <AUTO_GEN_TARGETS>"
+	@rm -rf $(BUILD_GENERATED_DIR)
+	@echo "rm -rf <BUILD_GENERATED_DIR>"
 
 clean-teachables: clean-teachables_intermediates
 	rm -f $(ALL_LEARNABLES_JSON)
