@@ -3,5 +3,7 @@ Partybathtime_MapScripts::
 	.byte 0
 
 Partybathtime_OnTransition:
+	setflag FLAG_TEMP_HIDE_FOLLOWER
+	special Special_SpawnPartyRoamerMons
 	special Special_StartPartyBathTimeFriendship
 	end

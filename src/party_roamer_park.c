@@ -55,6 +55,10 @@ static bool8 IsPartyRoamerLocalId(u16 localId)
 
 static u8 GetPartySlotFromRoamerLocalId(u16 localId)
 {
+    // Partybathtime places OBJ_EVENT_GFX_VAR_0 last, so local IDs map to 1, 2, 3, 4, 5, 0.
+    if (IsInPartyBathTimeMap())
+        return localId % PARTY_SIZE;
+
     return localId - PARTY_ROAMER_LOCAL_ID_START;
 }
 
@@ -216,7 +220,12 @@ static void Task_PartyBathTimeFriendship(u8 taskId)
 
 void Special_StartPartyBathTimeFriendship(void)
 {
-    if (IsInPartyBathTimeMap() && FindTaskIdByFunc(Task_PartyBathTimeFriendship) == TASK_NONE)
+    if (!IsInPartyBathTimeMap())
+        return;
+
+    RemoveFollowingPokemon();
+
+    if (FindTaskIdByFunc(Task_PartyBathTimeFriendship) == TASK_NONE)
         CreateTask(Task_PartyBathTimeFriendship, 8);
 }
 
