@@ -46,6 +46,10 @@
 
 AUTOは次に続く文字が日本語か英数字かが不明な場合に使うコードです。
 
+作成したROMに関しては、差分パッチ以外の形式での配布を禁止します。
+また、公式のコピーライトは削除しないようにした上で、作成したROMを利用した金銭のやり取りが関わる行為を禁止します。
+収益化しているチャンネルでの実況配信や、ハックロムのデータを書き込んだGBA ROMの販売はやめてください。
+
 「どうやってこのプロジェクト扱うの?」に関してはここを読んでね。
 [インストール手順](https://github.com/koziyagoukei/PokeEm-expansion-CanuseJP/blob/master/INSTALL.md)
 [機能説明](https://github.com/koziyagoukei/PokeEm-expansion-CanuseJP/blob/master/FEATURES.md)
