@@ -1356,430 +1356,237 @@ LilycoveCity_ContestLobby_EventScript_DelayForRSPlayer::
 	return
 
 LilycoveCity_ContestLobby_Text_ReceptionDontHavePokeblockCase:
-	.string "Hello!\p"
-	.string "This is the reception counter for\n"
-	.string "POKEMON CONTESTS.\p"
-	.string "Oh? It appears that you don't have\n"
-	.string "a ポロック CASE yet.\p"
-	.string "In that case, we need to provide you\n"
-	.string "with this!$"
+	.string "{JPN}こんにちは!\pこちらでは ポケモンコンテスト\nうけつけを おこなって……\l……あら?\pおきゃくさまは まだ ポロックケースを\nもっていらっしゃらない ようですね\pでは こちらを さしあげましょう!$"
 
 LilycoveCity_ContestLobby_Text_NowThatWeveClearedThatUp:
-	.string "Okay, now that we've cleared that\n"
-	.string "up...\p"
-	.string "Hello!\p"
-	.string "This is the reception counter for\n"
-	.string "POKEMON CONTESTS.$"
+	.string "{JPN}というわけで あらためまして……\pこんにちは!\pこちらでは ポケモンコンテスト\nうけつけを おこなって います!$"
 
 LilycoveCity_ContestLobby_Text_ContestReception:
-	.string "Hello!\p"
-	.string "This is the reception counter for\n"
-	.string "POKEMON CONTESTS.$"
+	.string "{JPN}こんにちは!\pこちらでは ポケモンコンテスト\nうけつけを おこなって います!$"
 
 @ Unused
 LilycoveCity_ContestLobby_Text_CounterOnlyFor4PlayerContests:
-	.string "Hello!\p"
-	.string "This reception counter is only\n"
-	.string "for 4-player POKEMON CONTESTS.$"
+	.string "{JPN}こんにちは\pこちらは ポケモンコンテストの\n4めいさま せんようの うけつけです!$"
 
 LilycoveCity_ContestLobby_Text_EnterContest1:
-	.string "Would you like to enter your POKEMON\n"
-	.string "in our CONTESTS?$"
+	.string "{JPN}あなたの ポケモンも コンテストに\nさんか させて みませんか?$"
 
 LilycoveCity_ContestLobby_Text_WhichTopic1:
-	.string "Which topic would you like?$"
+	.string "{JPN}どの せつめいを ききますか?$"
 
 LilycoveCity_ContestLobby_Text_ExplainContests:
-	.string "A POKEMON CONTEST involves four\n"
-	.string "TRAINERS entering one POKEMON each\l"
-	.string "in competitive judging.\p"
-	.string "A CONTEST has two stages of judging,\n"
-	.string "primary and secondary.\p"
-	.string "Primary judging is a popularity poll\n"
-	.string "involving the audience.\p"
-	.string "Secondary judging features appeals\n"
-	.string "by the POKEMON using their moves.\p"
-	.string "Plan appeals carefully to earn the\n"
-	.string "most attention of the JUDGE and\l"
-	.string "excite the audience.\l"
-	.string "Do your best to stand out.\p"
-	.string "The primary and secondary scores are\n"
-	.string "added at the end.\p"
-	.string "The POKEMON garnering the highest\n"
-	.string "score is declared the winner.$"
+	.string "{JPN}ポケモンコンテストは 4にんの トレーナーが\n1ぴきずつ ポケモンを もちよって\l4ひきで おこなわれます!\pコンテスト には 1じ しんさと\n2じ しんさが あります!\p1じ しんさでは かいじょうの\nおきゃくさまが きにいった ポケモンを\lとうひょう します!\p2じ しんさでは ポケモンが じゅんばんに\nとくいな わざで アピールを します!\lしんさいんに ちゅうもくされたり\lおきゃくさまに わざを きにいられたり……\lとにかく たくさん めだって ください!\p1じしんさと 2じしんさの けっかから\nそうごうポイントを だして\lいちばん たかかった ポケモンが\lゆうしょう できます!$"
 
 LilycoveCity_ContestLobby_Text_ExplainContestTypes:
-	.string "There are five kinds of CONTESTS.\p"
-	.string "COOL, BEAUTY, CUTE, SMART, and\n"
-	.string "TOUGH are the five categories.\p"
-	.string "Choose the CONTEST that is right for\n"
-	.string "the POKEMON you plan to enter.$"
+	.string "{JPN}コンテストには 5しゅるい あります!\pかっこよさ うつくしさ かわいさ\nかしこさ そして たくましさ\lいじょうの 5しゅるい です!\pエントリー する ポケモンに\nピッタリの コンテストを\lえらんで あげて くださいね!$"
 
 LilycoveCity_ContestLobby_Text_ExplainContestRanks:
-	.string "There are four ranks of POKEMON\n"
-	.string "CONTESTS.\p"
-	.string "NORMAL, SUPER, HYPER, and MASTER\n"
-	.string "are the four ranks.\p"
-	.string "In the NORMAL Rank, any POKEMON may\n"
-	.string "enter.\p"
-	.string "Any POKEMON that won a NORMAL Rank\n"
-	.string "CONTEST may move up to the SUPER Rank\l"
-	.string "in the same category.\p"
-	.string "In the same way, a SUPER Rank winner\n"
-	.string "can move up to the HYPER Rank, and\l"
-	.string "a HYPER Rank winner can advance to\l"
-	.string "the MASTER Rank in the same category.\p"
-	.string "A POKEMON that won in the MASTER Rank\n"
-	.string "may compete in the MASTER Rank as\l"
-	.string "often as its TRAINER wants.$"
+	.string "{JPN}ポケモンコンテスト には\nノーマルランク スーパーランク\lハイパーランク そしてマスターランク\lという 4つの ランクが あります\pノーマルランク には すべての\nポケモンが でることが できます\pノーマルランクで ゆうしょう できた\nポケモンは おなじ しゅるいの\lスーパーランクの コンテストに でられます\pおなじように スーパーで ゆうしょう すれば\nハイパーに ハイパーで ゆうしょう すれば\lマスターランクに でられるのです\pマスターランクで ゆうしょう した\nポケモンは なんどでも マスターランクの\lコンテストに でる ことが できます$"
 
 LilycoveCity_ContestLobby_Text_EnterWhichRank:
-	.string "Which Rank would you like to enter?$"
+	.string "{JPN}どの ランクに さんか しますか?$"
 
 LilycoveCity_ContestLobby_Text_EnterWhichContest1:
-	.string "Which CONTEST would you like to enter?$"
+	.string "{JPN}どの コンテストに さんか しますか?$"
 
 LilycoveCity_ContestLobby_Text_EnterWhichPokemon1:
-	.string "Which POKEMON would you like to enter?$"
+	.string "{JPN}どの ポケモンを さんか させますか?$"
 
 LilycoveCity_ContestLobby_Text_MonNotQualifiedForRank:
-	.string "I'm terribly sorry, but your POKEMON\n"
-	.string "is not qualified to compete at this\l"
-	.string "Rank yet...$"
+	.string "{JPN}もうしわけ ないのですが\nおきゃくさまの ポケモンですと\lこのランクには まだ しゅつじょう\lできないようです…$"
 
 LilycoveCity_ContestLobby_Text_EggCannotTakePart:
-	.string "I'm sorry, but an EGG cannot take part\n"
-	.string "in a POKEMON CONTEST.$"
+	.string "{JPN}ごめんなさい!\nタマゴは しゅつじょう できないんです……$"
 
 LilycoveCity_ContestLobby_Text_MonInNoConditionForContest:
-	.string "Your POKEMON appears to be in no\n"
-	.string "condition to take part in a CONTEST...$"
+	.string "{JPN}そちらの ポケモンは げんきがない\nようなので しゅつじょう できないです……$"
 
 LilycoveCity_ContestLobby_Text_AlreadyWonEnterAnyway:
-	.string "Oh, but that RIBBON...\p"
-	.string "Your POKEMON has won this CONTEST\n"
-	.string "before, hasn't it?\p"
-	.string "Would you like to enter it in this\n"
-	.string "CONTEST anyway?$"
+	.string "{JPN}あら そちらの リボンは……\pおきゃくさまの ポケモンは もう\nこの コンテストで ゆうしょう したことが\lあるのですね… それでも いいですか?$"
 
 LilycoveCity_ContestLobby_Text_ConfirmContestMon:
-	.string "Is that your CONTEST POKEMON?$"
+	.string "{JPN}そちらの ポケモンで よろしいですか?$"
 
 LilycoveCity_ContestLobby_Text_YourMonIsEntryNum4:
-	.string "Okay, your POKEMON will be entered\n"
-	.string "in this CONTEST.\p"
-	.string "Your POKEMON is Entry No. 4.\n"
-	.string "The CONTEST will begin shortly.$"
+	.string "{JPN}それでは おきゃくさまの ポケモンを\nエントリー します!\lおきゃくさまの エントリーナンバーは\l4ばん に なります!\lコンテストは すぐに はじまります!$"
 
 LilycoveCity_ContestLobby_Text_ComeThroughHere:
-	.string "Please come in through here.\n"
-	.string "Good luck!$"
+	.string "{JPN}それでは こちらへ どうぞ!\nがんばって くださいね!$"
 
 LilycoveCity_ContestLobby_Text_PokemonWonWeHavePrize:
-	.string "Congratulations! Your POKEMON is the\n"
-	.string "CONTEST winner!\p"
-	.string "We have your prize right here.\n"
-	.string "Please, right this way!$"
+	.string "{JPN}コンテストでの ゆうしょう\nおめでとう ございます!\pしょうひんは こちらで おあずかり\nして ありますよ! さあ どうぞ!$"
 
 LilycoveCity_ContestLobby_Text_ComeBackForPrizeLater:
-	.string "Please come back for your prize\n"
-	.string "later on.$"
+	.string "{JPN}それでは また あとで\nとりに きて くださいね!$"
 
 ContestHall_Text_GettingStartedParticipantsAsFollows:
-	.string "MC: Hello! We're just getting started\n"
-	.string "with a {STR_VAR_3} Rank POKEMON\l"
-	.string "{STR_VAR_2}!\p"
-	.string "The participating TRAINERS and their\n"
-	.string "POKEMON are as follows:$"
+	.string "{JPN}しかい『はい! これより\n{STR_VAR_3} ランクの\lポケモン {STR_VAR_2}コンテストが\lはじまります!\pしゅつじょう される トレーナーと\nポケモンの みなさんは こちら!$"
 
 ContestHall_Text_GettingStartedParticipantsAsFollowsLink:
-	.string "MC: Hello! We're just getting started\n"
-	.string "with a 4-player linked POKEMON\l"
-	.string "{STR_VAR_2}!\p"
-	.string "The participating TRAINERS and their\n"
-	.string "POKEMON are as follows:$"
+	.string "{JPN}しかい『はい! これより\nおともだち 4にん つうしんの\lポケモン {STR_VAR_2}コンテストが\lはじまります!\pしゅつじょう される トレーナーと\nポケモンの みなさんは こちら!$"
 
 ContestHall_Text_EntryXTrainersMon:
-	.string "MC: Entry No. {STR_VAR_2}!\n"
-	.string "{STR_VAR_1}'s {STR_VAR_3}!$"
+	.string "{JPN}しかい『エントリーナンバー {STR_VAR_2}ばん!\n{STR_VAR_1}さんの {STR_VAR_3} です!$"
 
 ContestHall_Text_SeenContestantsAudienceWillVote:
-	.string "MC: We've just seen the four POKEMON\n"
-	.string "contestants.\p"
-	.string "Now it's time for primary judging!\p"
-	.string "The audience will vote on their\n"
-	.string "favorite POKEMON contestants.\p"
-	.string "Without any further ado, let the\n"
-	.string "voting begin!$"
+	.string "{JPN}しかい『さあ\nポケモンの しょうかいが おわりました\l1じ しんさに はいりましょう!\pかいじょうの おきゃくさまに よる\nポケモンの にんき とうひょうです!\pでは さっそく はじめましょう!\nとうひょう おねがいします!$"
 
 ContestHall_Text_VotingUnderWay:
-	.string "Voting under way...$"
+	.string "{JPN}    とうひょう ちゅう…$"
 
 ContestHall_Text_VotingCompleteLetsAppeal:
-	.string "Voting is now complete!\p"
-	.string "While the votes are being tallied,\n"
-	.string "let's move on to secondary judging!\p"
-	.string "The second stage of judging is the\n"
-	.string "much anticipated appeal time!\p"
-	.string "May the contestants amaze us with\n"
-	.string "superb appeals of dazzling moves!\p"
-	.string "Let's see a little enthusiasm!\n"
-	.string "Let's appeal!$"
+	.string "{JPN}さあ!\nいま とうひょうが おわりました!\lしゅうけいを している あいだに\l2じ しんさに うつりましょう!\p2じ しんさは いよいよ\nおまちかねの アピールタイム!\lわざで アピール しまくりましょうー!\pでは はりきって どうぞ!\nレッツ! アピール!$"
 
 ContestHall_Text_ThatsItForJudging:
-	.string "MC: That's it for judging!$"
+	.string "{JPN}しかい『はあい そこまでえーー!$"
 
 ContestHall_Text_ThankYouForAppeals:
-	.string "Thank you all for a most wonderful\n"
-	.string "display of quality appeals!\p"
-	.string "This concludes all judging!\n"
-	.string "Thank you for your fine efforts!$"
+	.string "{JPN}みなさん すばらしい アピールでした!\nこれで すべて しゅうりょう です!\lおつかれさまでした!$"
 
 ContestHall_Text_JudgeLooksReady:
-	.string "Now, all that remains is the pulse-\n"
-	.string "pounding proclamation of the winner.\p"
-	.string "The JUDGE looks ready to make\n"
-	.string "the announcement!$"
+	.string "{JPN}さて のこるは\nドキドキの けっかはっぴょう ですね!\lはっぴょうは しんさいんの ほうから\lおこなわれます!$"
 
 ContestHall_Text_WeWillNowDeclareWinner:
-	.string "JUDGE: We will now declare the winner!$"
+	.string "{JPN}しんさいん『では… はっぴょう します!$"
 
 ContestHall_Text_CongratsTrainerXandMon:
-	.string "MC: Entry No. {STR_VAR_2}!\p"
-	.string "{STR_VAR_3} and {STR_VAR_1},\n"
-	.string "congratulations!$"
+	.string "{JPN}しかい『エントリーナンバー {STR_VAR_2}ばん\n{STR_VAR_3}さん! そして {STR_VAR_1}!\lおめでとう ございます!$"
 
 ContestHall_Text_CongratsPleaseCompeteAgain:
-	.string "MC: Congratulations!\n"
-	.string "Please do compete again!$"
+	.string "{JPN}しかい『おめでとう ございます!\nまた さんか してくださいね!$"
 
 ContestHall_Text_AcceptYourPrize:
-	.string "MC: Here you are!\n"
-	.string "Please accept your prize!$"
+	.string "{JPN}しかい『さあ!\nしょうひんを おうけとり ください!$"
 
 ContestHall_Text_ConferRibbonAsPrize:
-	.string "We confer on you this RIBBON\n"
-	.string "as your prize!$"
+	.string "{JPN}しょうひんと して\nこの リボンを おうけとり ください!$"
 
 ContestHall_Text_ReceivedRibbon:
-	.string "{PLAYER} received a RIBBON.$"
+	.string "{JPN}{PLAYER}は リボンを もらった!$"
 
 ContestHall_Text_PutRibbonOnMon:
-	.string "{PLAYER} put the RIBBON on\n"
-	.string "{STR_VAR_1}.$"
+	.string "{JPN}{PLAYER}は リボンを\n{STR_VAR_1}に つけて あげた!$"
 
 ContestHall_Text_PickUpPrizeAtCounterLater:
-	.string "Please pick up your prize at\n"
-	.string "the reception counter later.\l"
-	.string "Please do compete again!$"
+	.string "{JPN}それでは しょうひんは あとで\nうけつけで おうけとり ください!\lまたの さんかを おまち してます!$"
 
 @ Unused
 ContestHall_Text_OnlyRegister4Players:
-	.string "I only register four players for\n"
-	.string "POKEMON CONTESTS.\p"
-	.string "If three other players link up, all\n"
-	.string "four may enter the same CONTEST.\p"
-	.string "Would you like to take part?$"
+	.string "{JPN}こちらは ポケモンコンテストの\n4めいさま せんようの うけつけです!\pおともだちが あと3めい そろえば\n4にんで おなじ コンテストに でられます!\lさんか しますか?$"
 
 LilycoveCity_ContestLobby_Text_ProgressWillBeSaved:
-	.string "Before entering a CONTEST, your\n"
-	.string "progress will be saved.$"
+	.string "{JPN}コンテストに エントリーする まえに\nレポートを かきます$"
 
 LilycoveCity_ContestLobby_Text_ParticipateAnotherTime:
-	.string "We hope you will participate another\n"
-	.string "time.$"
+	.string "{JPN}またの さんかを おまち してます!$"
 
 @ Unused
 LilycoveCity_ContestLobby_Text_EnterContest2:
-	.string "Would you like to enter a CONTEST?$"
+	.string "{JPN}コンテストに\nさんか しますか?$"
 
 @ Unused
 LilycoveCity_ContestLobby_Text_Explain4PlayerContest:
-	.string "When four players are ready, connect\n"
-	.string "over a Game Link cable, and register\l"
-	.string "with me, please.\p"
-	.string "Please choose the same CONTEST\n"
-	.string "as your fellow contestants.\p"
-	.string "The CONTEST begins as soon as all\n"
-	.string "players register their entry.\p"
-	.string "After that, the usual CONTEST rules\n"
-	.string "apply.$"
+	.string "{JPN}トレーナーの おともだちが 4めい\nそろったら ケーブルを つないで\lこちらで エントリー して ください!\pコンテストは おなじ ものを\nえらんで くださいね!\pみなさんの エントリーが おわれば\nコンテストが はじまりますので\lあとは いつもと おなじ ちょうしで\lがんばって ください!$"
 
 @ Unused
 LilycoveCity_ContestLobby_Text_EnterWhichContest2:
-	.string "Which CONTEST would you like to enter?$"
+	.string "{JPN}どの コンテストに さんか しますか?$"
 
 @ Unused
 LilycoveCity_ContestLobby_Text_EnterWhichPokemon2:
-	.string "Which POKEMON would you like to enter?$"
+	.string "{JPN}どの ポケモンを さんか させますか?$"
 
 LilycoveCity_ContestLobby_Text_Transmitting:
-	.string "Transmitting...$"
+	.string "{JPN}つうしん しています……$"
 
 LilycoveCity_ContestLobby_Text_TransmissionError:
-	.string "Transmission error...$"
+	.string "{JPN}つうしんに しっぱい しました$"
 
 LilycoveCity_ContestLobby_Text_PlayersChoseDifferentContest:
-	.string "You may have chosen a different\n"
-	.string "CONTEST than another player.$"
+	.string "{JPN}えらんだ コンテストが\nおともだちと ちがう ようです!$"
 
 LilycoveCity_ContestLobby_Text_PlayersMadeDifferentChoice:
-	.string "You may have made a different\n"
-	.string "choice than another player.$"
+	.string "{JPN}おたがいの せんたくが ちがっているようです$"
 
 LilycoveCity_ContestLobby_Text_PleaseWaitBButtonCancel:
-	.string "Please wait.\n"
-	.string "... ... B Button: Cancel$"
+	.string "{JPN}しょうしょう おまち ください\n……Bボタンで キャンセル$"
 
 @ Unused
 LilycoveCity_ContestLobby_Text_ParticipateAnotherTime2:
-	.string "We hope you will participate another\n"
-	.string "time.$"
+	.string "{JPN}またの さんかを おまち してます!$"
 
 @ Unused
 LilycoveCity_ContestLobby_Text_TransmissionErrorTryAgain:
-	.string "Transmission error.\n"
-	.string "Please try again.$"
+	.string "{JPN}つうしん エラーです\nもう1ど やりなおして ください$"
 
 LilycoveCity_ContestLobby_Text_YourMonIsEntryNumX:
-	.string "Your POKEMON will be entered in\n"
-	.string "the CONTEST.\p"
-	.string "Your POKEMON is Entry No. {STR_VAR_2}.$"
+	.string "{JPN}それでは おきゃくさまの ポケモンを\nエントリー します!\pおきゃくさまの エントリーナンバーは\n{STR_VAR_2}ばん に なります!$"
 
 LilycoveCity_ContestLobby_Text_ContestBeginShortly:
-	.string "The CONTEST will begin shortly.$"
+	.string "{JPN}コンテストは すぐに はじまります!$"
 
 LilycoveCity_ContestLobby_Text_LinkContestReception:
-	.string "Welcome! This is the POKEMON CONTEST\n"
-	.string "link reception counter.\p"
-	.string "You may enter CONTESTS together with\n"
-	.string "one or more friends.$"
+	.string "{JPN}ポケモン コンテスト\nつうしん うけつけへ ようこそ!\pこちらでは ともだちと\nおなじ コンテストに でられます$"
 
 LilycoveCity_ContestLobby_Text_WhichTopic2:
-	.string "Which topic would you like?$"
+	.string "{JPN}どの せつめいを ききますか?$"
 
 LilycoveCity_ContestLobby_Text_EnterContest3:
-	.string "Would you like to enter a CONTEST?$"
+	.string "{JPN}コンテストに\nさんか しますか?$"
 
 LilycoveCity_ContestLobby_Text_EnterWhichContest3:
-	.string "Which CONTEST would you like to enter?$"
+	.string "{JPN}どの コンテストに さんか しますか?$"
 
 LilycoveCity_ContestLobby_Text_MonInNoCondition2:
-	.string "Your POKEMON appears to be in no\n"
-	.string "condition to take part in a CONTEST...$"
+	.string "{JPN}そちらの ポケモンは げんきがない\nようなので しゅつじょう できないです…$"
 
 LilycoveCity_ContestLobby_Text_EggCannotTakePart2:
-	.string "I'm sorry, but an EGG cannot take part\n"
-	.string "in a POKEMON CONTEST.$"
+	.string "{JPN}ごめんなさい!\nタマゴは コンテストに でられないんです…$"
 
 LilycoveCity_ContestLobby_Text_EnterWhichPokemon3:
-	.string "Which POKEMON would you like to enter?$"
+	.string "{JPN}どの ポケモンを さんか させますか?$"
 
 LilycoveCity_ContestLobby_Text_PleaseDecideLinkLeader:
-	.string "Please decide which of you will\n"
-	.string "become the GROUP LEADER.\p"
-	.string "The other players must then choose\n"
-	.string "JOIN GROUP.$"
+	.string "{JPN}みんなで はなしあって ひとりが\nグループリーダーに なってください\pほかの ひとは グループにはいる を\nえらんでください$"
 
 LilycoveCity_ContestLobby_Text_PlayerAt4PCounterUseGMode:
-	.string "At least one player has entered using\n"
-	.string "the 4-player reception counter.\p"
-	.string "There must be four players connected\n"
-	.string "using a GBA Game Link cable.\p"
-	.string "When the four players are ready,\n"
-	.string "select G-MODE (GLOBAL MODE),\l"
-	.string "then register to enter again, please.$"
+	.string "{JPN}ともだちの なかに\n4にんせんようの うけつけから\lエントリーしている かたが います\pつうしんケーブルを つなげた ともだちを\n4にん あつめて\lグローバルモードを えらんで\lとうろくを やりなおして ください$"
 
 LilycoveCity_ContestLobby_Text_ExplainLinkContest:
-	.string "This is a CONTEST for two to four\n"
-	.string "players linked using a Wireless\l"
-	.string "Adapter or a GBA Game Link cable.\p"
-	.string "Participants are first asked to choose\n"
-	.string "the mode they wish to enter.\p"
-	.string "There are two different modes.\p"
-	.string "E-MODE (EMERALD MODE) is for\n"
-	.string "two to four players, each with a\l"
-	.string "POKEMON Emerald Game Pak.\p"
-	.string "G-MODE (GLOBAL MODE) is only for\n"
-	.string "four players, each with a POKEMON\l"
-	.string "Emerald, Ruby, or Sapphire Game Pak.\p"
-	.string "The players should discuss which mode\n"
-	.string "they want, then choose the same mode.\p"
-	.string "Once all the players have chosen\n"
-	.string "the same CONTEST in the same mode,\l"
-	.string "the entry registration is complete.\p"
-	.string "After that, a CONTEST will start in\n"
-	.string "the usual manner.$"
+	.string "{JPN}ワイヤレスアダプタか つうしんケーブルを\nつないだ ともだちが 2にん いじょう\lあつまると おこなえます!\pさんかする かたには\nまず エントリーする モードを\lえらんで いただきます!\p2にん から 4にん まで じゆうに\nとうろく できる エメラルドモードと\p4にんせんようの うけつけから さんかする\nともだちとも いっしょに とうろく できる\lグローバルモードと\p2しゅるいの モードが ありますので\nともだちと そうだんして\lおなじ モードを えらんで くださいね!\pともだちと おなじ モードで\nおなじ コンテストを えらぶと\lエントリー かんりょうと なります!\pいつもの とおりに コンテストが\nはじまりますので がんばって くださいね!$"
 
 LilycoveCity_ContestLobby_Text_ExplainEMode:
-	.string "In E-MODE (EMERALD MODE),\n"
-	.string "a LINK CONTEST can be held with\l"
-	.string "two to four players. Each player must\l"
-	.string "have a POKEMON Emerald Game Pak.\p"
-	.string "The players must be linked with each\n"
-	.string "other using Wireless Adapters or\l"
-	.string "GBA Game Link cables.\p"
-	.string "If there are fewer than four players,\n"
-	.string "TRAINERS in the hall will join to fill\l"
-	.string "the 4-player CONTEST lineup.\p"
-	.string "Please be aware that E-MODE is not\n"
-	.string "available in POKEMON Ruby or Sapphire.$"
+	.string "{JPN}エメラルドモードでは\nつうしんケーブルか ワイヤレスアダプタを\lつなげた ともだちが\l2にん いじょう あつまれば\lつうしんコンテストが おこなえます!\p4にん いない ときは\nかいじょうに いる トレーナーが\lコンテストに さんかして くれますよ!\pただし モードを えらぶことが できない\n4にんせんようの うけつけから\lさんかする ともだちが いるばあいは\lこちらの モードでは できませんので\lごちゅうい ください!$"
 
 LilycoveCity_ContestLobby_Text_ExplainGMode:
-	.string "G-MODE (GLOBAL MODE) is specifically\n"
-	.string "for four players who are linked using\l"
-	.string "GBA Game Link cables.\p"
-	.string "Each player must have a POKEMON\n"
-	.string "Emerald, Ruby, or Sapphire Game Pak.\p"
-	.string "The CONTEST starts after all players\n"
-	.string "choose G-MODE (POKEMON Emerald) or\l"
-	.string "enter through the 4-player reception\l"
-	.string "counter (POKEMON Ruby or Sapphire).$"
+	.string "{JPN}グローバルモードでは\nモードを えらぶことが できない\l4にんせんようの うけつけから\lさんかする ともだち とも\lつうしんコンテストが おこなえます!\pこの モードでは\nつうしんケーブルを つないだ\lともだちが 4にん あつまらないと\lコンテストが おこなえません!$"
 
 LilycoveCity_ContestLobby_Text_NoWirelessAdapterInGMode:
-	.string "I'm terribly sorry.\p"
-	.string "G-MODE does not function\n"
-	.string "with Wireless Adapters.\p"
-	.string "Please select E-MODE or try\n"
-	.string "again using a GBA Game Link cable.$"
+	.string "{JPN}もうしわけ ありません!\pワイヤレスアダプタでは\nグローバルモードは おこなえません!\pエメラルドモードを えらぶか\nつうしんケーブルを つなげて\lやりなおして ください!$"
 
 LilycoveCity_ContestLobby_Text_WhichContestMode:
-	.string "Which CONTEST MODE would you like\n"
-	.string "to enter?$"
+	.string "{JPN}どの モードで\nコンテストに さんかしますか?$"
 
 ContestHall_Text_GettingStartedWireless:
-	.string "MC: Hello! We're just getting started\n"
-	.string "with a 4-player linked POKEMON\l"
-	.string "{STR_VAR_2}!$"
+	.string "{JPN}しかい『はい! これより\nおともだち 4にん つうしんの\lポケモン {STR_VAR_2}コンテストが\lはじまります!$"
 
 ContestHall_Text_ParticipantsAsFollows:
-	.string "The participating TRAINERS and their\n"
-	.string "POKEMON are as follows:$"
+	.string "{JPN}しゅつじょう される トレーナーと\nポケモンの みなさんは こちら!$"
 
 ContestHall_Text_WeveSeenContestants:
-	.string "MC: We've just seen the four POKEMON\n"
-	.string "contestants.\p"
-	.string "Now it's time for primary judging!$"
+	.string "{JPN}しかい『さあ\nポケモンの しょうかいが おわりました\l1じ しんさに はいりましょう!$"
 
 ContestHall_Text_AudienceWillVote:
-	.string "The audience will vote on their\n"
-	.string "favorite POKEMON contestants.$"
+	.string "{JPN}かいじょうの おきゃくさまに よる\nポケモンの にんき とうひょうです!$"
 
 ContestHall_Text_LetVotingBegin:
-	.string "Without any further ado,\n"
-	.string "let the voting begin!$"
+	.string "{JPN}では さっそく はじめましょう!\nとうひょう おねがいします!$"
 
 ContestHall_Text_VotingComplete:
-	.string "Voting is now complete!\p"
-	.string "While the votes are being tallied,\n"
-	.string "let's move on to secondary judging!$"
+	.string "{JPN}さあ!\nいま とうひょうが おわりました!\lしゅうけいを している あいだに\l2じ しんさに うつりましょう!$"
 
 ContestHall_Text_SecondStageOfJudging:
-	.string "The second stage of judging is\n"
-	.string "the much-anticipated appeal time!\p"
-	.string "May the contestants amaze us with\n"
-	.string "superb appeals of dazzling moves!$"
+	.string "{JPN}2じ しんさは いよいよ\nおまちかねの アピールタイム!\lわざで アピール しまくりましょうー!$"
 
 ContestHall_Text_LetsAppeal:
-	.string "Let's see a little enthusiasm!\n"
-	.string "Let's appeal!$"
+	.string "{JPN}では はりきって どうぞ!\nレッツ! アピール!$"
