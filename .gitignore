@@ -34,6 +34,7 @@ patches
 Thumbs.db
 build/
 /build/generated/
+/build/extracted_sound/
 .DS_Store
 *.ddump
 .idea/

@@ -14,6 +14,14 @@ SPECIAL_OUTDIRS += $(SOUND_BIN_DIR) $(SOUND_BIN_DIR)/direct_sound_samples/phonem
 $(shell mkdir -p $(SPECIAL_OUTDIRS) )
 
 # Assembly song compilation
+ifneq ($(strip $(BPEJ_EXTRACTED_MID_NAMES)),)
+BPEJ_EXTRACTED_MID_ASM_DIR := $(BPEJ_EXTRACTED_SOUND_DIR)/sound/songs/midi
+BPEJ_EXTRACTED_MID_OBJS := $(addprefix $(MID_BUILDDIR)/,$(addsuffix .o,$(BPEJ_EXTRACTED_MID_NAMES)))
+
+$(BPEJ_EXTRACTED_MID_OBJS): $(MID_BUILDDIR)/%.o: $(BPEJ_EXTRACTED_MID_ASM_DIR)/%.s $(EXPANSION_BATTLE_CONFIG) $(BPEJ_SOUND_EXTRACTED_OK)
+	$(AS) $(ASFLAGS) -I sound -o $@ $<
+endif
+
 $(SONG_BUILDDIR)/%.o: $(SONG_SUBDIR)/%.s $(EXPANSION_BATTLE_CONFIG)
 	$(AS) $(ASFLAGS) -I sound -o $@ $<
 $(MID_BUILDDIR)/%.o: $(MID_ASM_DIR)/%.s

@@ -1,6 +1,6 @@
 	.align 2
 DirectSoundWaveData_sc88pro_glockenspiel::
-	.incbin "sound/direct_sound_samples/sc88pro_glockenspiel.bin"
+	.incbin "build/extracted_sound/sound/direct_sound_samples/sc88pro_glockenspiel.bin"
 
 	.align 2
 DirectSoundWaveData_sc88pro_organ2::
@@ -280,7 +280,7 @@ DirectSoundWaveData_sc88pro_square_wave::
 
 	.align 2
 DirectSoundWaveData_bicycle_bell::
-	.incbin "sound/direct_sound_samples/bicycle_bell.bin"
+	.incbin "build/extracted_sound/sound/direct_sound_samples/bicycle_bell.bin"
 
 	.align 2
 DirectSoundWaveData_unknown_1::

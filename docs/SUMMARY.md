@@ -3,6 +3,7 @@
 - [README](./README.md)
 - [FEATURES](./FEATURES.md)
 - [Info Viewer](./info_viewer.md)
+- [BPEJ Sound Extraction](./bpej_sound_extraction.md)
 - [Installation](./INSTALL.md)
     - [Setting up WSL1 (Legacy Portion)](./legacy_WSL1_INSTALL.md)
     - [ChromeOS](./install/chromeos/CHROME_OS.md)
