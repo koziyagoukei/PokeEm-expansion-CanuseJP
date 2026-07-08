@@ -216,7 +216,7 @@ BPEJ_VERIFIED_OK := $(BUILD_GENERATED_DIR)/bpej_verified.ok
 BPEJ_EXTRACTED_SOUND_DIR := $(BUILD_DIR)/extracted_sound
 BPEJ_SOUND_MANIFEST := $(TOOLS_DIR)/data/bpej_sound_manifest.json
 BPEJ_SOUND_EXTRACTED_OK := $(BUILD_GENERATED_DIR)/bpej_sound_extracted.ok
-BPEJ_EXTRACTED_MID_NAMES := mus_dummy mus_level_up se_use_item
+BPEJ_EXTRACTED_MID_NAMES := mus_dummy mus_level_up se_use_item se_pc_login se_pc_off se_pc_on se_select se_win_open se_wall_hit se_door se_exit se_bike_bell se_flee
 # Tool executables
 SMOLTM       := $(TOOLS_DIR)/compresSmol/compresSmolTilemap$(EXE)
 SMOL         := $(TOOLS_DIR)/compresSmol/compresSmol$(EXE)

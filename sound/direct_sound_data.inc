@@ -4,15 +4,15 @@ DirectSoundWaveData_sc88pro_glockenspiel::
 
 	.align 2
 DirectSoundWaveData_sc88pro_organ2::
-	.incbin "sound/direct_sound_samples/sc88pro_organ2.bin"
+	.incbin "build/extracted_sound/sound/direct_sound_samples/sc88pro_organ2.bin"
 
 	.align 2
 DirectSoundWaveData_sc88pro_fretless_bass::
-	.incbin "sound/direct_sound_samples/sc88pro_fretless_bass.bin"
+	.incbin "build/extracted_sound/sound/direct_sound_samples/sc88pro_fretless_bass.bin"
 
 	.align 2
 DirectSoundWaveData_sc88pro_slap_bass::
-	.incbin "sound/direct_sound_samples/sc88pro_slap_bass.bin"
+	.incbin "build/extracted_sound/sound/direct_sound_samples/sc88pro_slap_bass.bin"
 
 	.align 2
 DirectSoundWaveData_sc88pro_synth_bass::

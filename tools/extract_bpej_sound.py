@@ -36,6 +36,14 @@ def load_manifest(path: Path) -> dict:
         return json.load(f)
 
 
+def manifest_value(entry: dict, key: str, legacy_key: str | None = None):
+    if key in entry:
+        return entry[key]
+    if legacy_key and legacy_key in entry:
+        return entry[legacy_key]
+    raise KeyError(key)
+
+
 def validate_baserom(data: bytes, manifest: dict, baserom_path: Path) -> None:
     expected = manifest["baserom"]
     game_code = data[0xAC:0xB0].decode("ascii", errors="replace")
@@ -68,11 +76,12 @@ def slice_rom(data: bytes, offset_value: int | str, size_value: int | str, label
 
 
 def write_blob(rom: bytes, entry: dict, out_dir: Path) -> Path:
-    data = slice_rom(rom, entry["romOffset"], entry["size"], entry["label"])
+    rom_offset = manifest_value(entry, "rom_offset", "romOffset")
+    data = slice_rom(rom, rom_offset, entry["size"], entry["label"])
     expected_sha1 = entry.get("sha1")
     if expected_sha1 and sha1(data) != expected_sha1:
-        raise ValueError(f"{entry['label']} hash mismatch at {entry['romOffset']}.")
-    path = output_path(out_dir, entry["output"])
+        raise ValueError(f"{entry['label']} hash mismatch at {rom_offset}.")
+    path = output_path(out_dir, manifest_value(entry, "output_path", "output"))
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_bytes(data)
     return path
@@ -92,7 +101,7 @@ def song_wrapper(song: dict) -> str:
         lines.extend(
             [
                 f"{track['label']}:",
-                f"\t.incbin \"{track['output']}\"",
+                f"\t.incbin \"{manifest_value(track, 'output_path', 'output')}\"",
                 "",
             ]
         )
@@ -118,7 +127,12 @@ def song_wrapper(song: dict) -> str:
 
 def write_song(rom: bytes, song: dict, out_dir: Path) -> list[Path]:
     written: list[Path] = []
-    header = slice_rom(rom, song["songOffset"], song["headerSize"], song["label"])
+    header = slice_rom(
+        rom,
+        manifest_value(song, "song_offset", "songOffset"),
+        manifest_value(song, "header_size", "headerSize"),
+        song["label"],
+    )
     if header[0] != len(song["tracks"]):
         raise ValueError(f"{song['label']} track count mismatch in manifest.")
     if header[2] != song["priority"] or header[3] != song["reverb"]:
@@ -127,7 +141,7 @@ def write_song(rom: bytes, song: dict, out_dir: Path) -> list[Path]:
     for track in song["tracks"]:
         written.append(write_blob(rom, track, out_dir))
 
-    path = output_path(out_dir, song["output"])
+    path = output_path(out_dir, manifest_value(song, "output_path", "output"))
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(song_wrapper(song), encoding="utf-8", newline="\n")
     written.append(path)
@@ -137,11 +151,11 @@ def write_song(rom: bytes, song: dict, out_dir: Path) -> list[Path]:
 def expected_outputs(manifest: dict, out_dir: Path) -> list[Path]:
     paths: list[Path] = []
     for song in manifest.get("songs", []):
-        paths.append(output_path(out_dir, song["output"]))
+        paths.append(output_path(out_dir, manifest_value(song, "output_path", "output")))
         for track in song.get("tracks", []):
-            paths.append(output_path(out_dir, track["output"]))
+            paths.append(output_path(out_dir, manifest_value(track, "output_path", "output")))
     for blob in manifest.get("blobs", []):
-        paths.append(output_path(out_dir, blob["output"]))
+        paths.append(output_path(out_dir, manifest_value(blob, "output_path", "output")))
     return paths
 
 
