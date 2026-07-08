@@ -33,7 +33,13 @@ patches
 *.sa*
 Thumbs.db
 build/
-/build/generated/
+# BPEJ sound extraction outputs. Keep this list limited to files generated
+# from the user's verified BPEJ ROM, not existing tracked sound sources.
+/build/generated/bpej_verified.ok
+/build/generated/bpej_sound_extracted.ok
+/build/extracted_sound/sound/songs/midi/*.s
+/build/extracted_sound/sound/songs/midi/*.bin
+/build/extracted_sound/sound/direct_sound_samples/*.bin
 .DS_Store
 *.ddump
 .idea/

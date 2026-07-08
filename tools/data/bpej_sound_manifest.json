@@ -1,0 +1,494 @@
+{
+  "format_version": 1,
+  "baserom": {
+    "gameCode": "BPEJ",
+    "sha1": "d7cf8f156ba9c455d164e1ea780a6bf1945465c2",
+    "crc32": "4881f3f8"
+  },
+  "jp_disassembly_reference": {
+    "path": "../pokeemerald-jp",
+    "evidence": "The sibling Japanese disassembly uses the same BPEJ baserom hash and confirms the JP build contains the standard m4a/sound code paths. Its current map/cfg do not preserve split song/sample labels, so each manifest item is additionally limited to ROM offsets whose bytes match the current named Expansion asset."
+  },
+  "song_table": {
+    "rom_offset": "0x0063C2AC",
+    "evidence": "The table is the only BPEJ structure found with the expected Emerald gSongTable entry pattern: mus_dummy followed by SE entries, valid song pointers, and music player ids 0/1/1."
+  },
+  "songs": [
+    {
+      "label": "mus_dummy",
+      "song_table_index": 0,
+      "player": 0,
+      "unknown": 0,
+      "rom_offset": "0x008683E0",
+      "song_offset": "0x008683E0",
+      "size": 8,
+      "header_size": 8,
+      "output_path": "build/extracted_sound/sound/songs/midi/mus_dummy.s",
+      "existing_file": "sound/songs/midi/mus_dummy.s",
+      "byte_match": true,
+      "byte_match_detail": "BPEJ song header bytes match the current mus_dummy header.",
+      "voicegroup": "voicegroup_dummy",
+      "priority": 0,
+      "reverb": 168,
+      "tracks": [],
+      "evidence": "BPEJ song table index 0 points to this header; it is the dummy BGM entry."
+    },
+    {
+      "label": "mus_level_up",
+      "song_table_index": 367,
+      "player": 2,
+      "unknown": 2,
+      "rom_offset": "0x00879E9C",
+      "song_offset": "0x00879E9C",
+      "size": 28,
+      "header_size": 28,
+      "output_path": "build/extracted_sound/sound/songs/midi/mus_level_up.s",
+      "existing_file": "sound/songs/midi/mus_level_up.s",
+      "byte_match": true,
+      "byte_match_detail": "All BPEJ track byte ranges match the current mus_level_up track bytes exactly.",
+      "voicegroup": "voicegroup_fanfare",
+      "priority": 5,
+      "reverb": 178,
+      "tracks": [
+        {
+          "label": "mus_level_up_1",
+          "rom_offset": "0x00879DD4",
+          "size": 31,
+          "output_path": "build/extracted_sound/sound/songs/midi/mus_level_up_1.bin",
+          "existing_file": "sound/songs/midi/mus_level_up.s",
+          "byte_match": true,
+          "byte_match_detail": "BPEJ bytes match the current mus_level_up_1 track bytes exactly.",
+          "sha1": "b3dc2f96bae12fd11d282377a16b36aa412fb6f6"
+        },
+        {
+          "label": "mus_level_up_2",
+          "rom_offset": "0x00879DF3",
+          "size": 35,
+          "output_path": "build/extracted_sound/sound/songs/midi/mus_level_up_2.bin",
+          "existing_file": "sound/songs/midi/mus_level_up.s",
+          "byte_match": true,
+          "byte_match_detail": "BPEJ bytes match the current mus_level_up_2 track bytes exactly.",
+          "sha1": "1cbf5d0b5f1eb09a2f0a3c453b3bb5f8e60778f8"
+        },
+        {
+          "label": "mus_level_up_3",
+          "rom_offset": "0x00879E16",
+          "size": 29,
+          "output_path": "build/extracted_sound/sound/songs/midi/mus_level_up_3.bin",
+          "existing_file": "sound/songs/midi/mus_level_up.s",
+          "byte_match": true,
+          "byte_match_detail": "BPEJ bytes match the current mus_level_up_3 track bytes exactly.",
+          "sha1": "41a11990df599503027c892d8baacd5615736a97"
+        },
+        {
+          "label": "mus_level_up_4",
+          "rom_offset": "0x00879E33",
+          "size": 51,
+          "output_path": "build/extracted_sound/sound/songs/midi/mus_level_up_4.bin",
+          "existing_file": "sound/songs/midi/mus_level_up.s",
+          "byte_match": true,
+          "byte_match_detail": "BPEJ bytes match the current mus_level_up_4 track bytes exactly.",
+          "sha1": "767bf4a02e673c3b8369f88c2628209f2998316b"
+        },
+        {
+          "label": "mus_level_up_5",
+          "rom_offset": "0x00879E66",
+          "size": 51,
+          "output_path": "build/extracted_sound/sound/songs/midi/mus_level_up_5.bin",
+          "existing_file": "sound/songs/midi/mus_level_up.s",
+          "byte_match": true,
+          "byte_match_detail": "BPEJ bytes match the current mus_level_up_5 track bytes exactly.",
+          "sha1": "231fdc77129f1a5387d2f3067c2a2f0562e43784"
+        }
+      ],
+      "evidence": "BPEJ song table index 367 points to this header; all tracks match current Expansion bytes and contain no pointer commands requiring relocation."
+    },
+    {
+      "label": "se_use_item",
+      "song_table_index": 1,
+      "player": 1,
+      "unknown": 1,
+      "rom_offset": "0x00868400",
+      "song_offset": "0x00868400",
+      "size": 12,
+      "header_size": 12,
+      "output_path": "build/extracted_sound/sound/songs/midi/se_use_item.s",
+      "existing_file": "sound/songs/midi/se_use_item.s",
+      "byte_match": true,
+      "byte_match_detail": "BPEJ track bytes match the current se_use_item track bytes exactly.",
+      "voicegroup": "voicegroup_rs_sfx_1",
+      "priority": 5,
+      "reverb": 178,
+      "tracks": [
+        {
+          "label": "se_use_item_1",
+          "rom_offset": "0x008683E8",
+          "size": 21,
+          "output_path": "build/extracted_sound/sound/songs/midi/se_use_item_1.bin",
+          "existing_file": "sound/songs/midi/se_use_item.s",
+          "byte_match": true,
+          "byte_match_detail": "BPEJ bytes match the current se_use_item_1 track bytes exactly.",
+          "sha1": "c76cc8718eb7f4aba4a688b832ffc9290b203226"
+        }
+      ],
+      "evidence": "BPEJ song table index 1 points to this header; the track matches current Expansion bytes and contains no pointer commands requiring relocation."
+    },
+    {
+      "label": "se_pc_login",
+      "song_table_index": 2,
+      "player": 1,
+      "unknown": 1,
+      "rom_offset": "0x0086842C",
+      "song_offset": "0x0086842C",
+      "size": 12,
+      "header_size": 12,
+      "output_path": "build/extracted_sound/sound/songs/midi/se_pc_login.s",
+      "existing_file": "sound/songs/midi/se_pc_login.s",
+      "byte_match": true,
+      "byte_match_detail": "BPEJ track bytes match the current se_pc_login track bytes exactly.",
+      "voicegroup": "voicegroup_rs_sfx_1",
+      "priority": 5,
+      "reverb": 178,
+      "tracks": [
+        {
+          "label": "se_pc_login_1",
+          "rom_offset": "0x0086840C",
+          "size": 32,
+          "output_path": "build/extracted_sound/sound/songs/midi/se_pc_login_1.bin",
+          "existing_file": "sound/songs/midi/se_pc_login.s",
+          "byte_match": true,
+          "byte_match_detail": "BPEJ bytes match the current se_pc_login_1 track bytes exactly.",
+          "sha1": "d29ddf95c4e39a13969a55b2e77ffda5663a5393"
+        }
+      ],
+      "evidence": "BPEJ song table index 2 points to this header; the track matches current Expansion bytes and contains no pointer commands requiring relocation."
+    },
+    {
+      "label": "se_pc_off",
+      "song_table_index": 3,
+      "player": 1,
+      "unknown": 1,
+      "rom_offset": "0x00868450",
+      "song_offset": "0x00868450",
+      "size": 12,
+      "header_size": 12,
+      "output_path": "build/extracted_sound/sound/songs/midi/se_pc_off.s",
+      "existing_file": "sound/songs/midi/se_pc_off.s",
+      "byte_match": true,
+      "byte_match_detail": "BPEJ track bytes match the current se_pc_off track bytes exactly.",
+      "voicegroup": "voicegroup_rs_sfx_1",
+      "priority": 5,
+      "reverb": 178,
+      "tracks": [
+        {
+          "label": "se_pc_off_1",
+          "rom_offset": "0x00868438",
+          "size": 23,
+          "output_path": "build/extracted_sound/sound/songs/midi/se_pc_off_1.bin",
+          "existing_file": "sound/songs/midi/se_pc_off.s",
+          "byte_match": true,
+          "byte_match_detail": "BPEJ bytes match the current se_pc_off_1 track bytes exactly.",
+          "sha1": "68bc3c87347b7215570905abcb329556c03c0add"
+        }
+      ],
+      "evidence": "BPEJ song table index 3 points to this header; the track matches current Expansion bytes and contains no pointer commands requiring relocation."
+    },
+    {
+      "label": "se_pc_on",
+      "song_table_index": 4,
+      "player": 1,
+      "unknown": 1,
+      "rom_offset": "0x00868494",
+      "song_offset": "0x00868494",
+      "size": 12,
+      "header_size": 12,
+      "output_path": "build/extracted_sound/sound/songs/midi/se_pc_on.s",
+      "existing_file": "sound/songs/midi/se_pc_on.s",
+      "byte_match": true,
+      "byte_match_detail": "BPEJ track bytes match the current se_pc_on track bytes exactly.",
+      "voicegroup": "voicegroup_rs_sfx_1",
+      "priority": 5,
+      "reverb": 178,
+      "tracks": [
+        {
+          "label": "se_pc_on_1",
+          "rom_offset": "0x0086845C",
+          "size": 55,
+          "output_path": "build/extracted_sound/sound/songs/midi/se_pc_on_1.bin",
+          "existing_file": "sound/songs/midi/se_pc_on.s",
+          "byte_match": true,
+          "byte_match_detail": "BPEJ bytes match the current se_pc_on_1 track bytes exactly.",
+          "sha1": "5d6c998d52bbb4dfd7d2f206c74a9cb3654c9212"
+        }
+      ],
+      "evidence": "BPEJ song table index 4 points to this header; the track matches current Expansion bytes and contains no pointer commands requiring relocation."
+    },
+    {
+      "label": "se_select",
+      "song_table_index": 5,
+      "player": 2,
+      "unknown": 2,
+      "rom_offset": "0x008684C0",
+      "song_offset": "0x008684C0",
+      "size": 12,
+      "header_size": 12,
+      "output_path": "build/extracted_sound/sound/songs/midi/se_select.s",
+      "existing_file": "sound/songs/midi/se_select.s",
+      "byte_match": true,
+      "byte_match_detail": "BPEJ track bytes match the current se_select track bytes exactly.",
+      "voicegroup": "voicegroup_rs_sfx_1",
+      "priority": 5,
+      "reverb": 178,
+      "tracks": [
+        {
+          "label": "se_select_1",
+          "rom_offset": "0x008684A0",
+          "size": 30,
+          "output_path": "build/extracted_sound/sound/songs/midi/se_select_1.bin",
+          "existing_file": "sound/songs/midi/se_select.s",
+          "byte_match": true,
+          "byte_match_detail": "BPEJ bytes match the current se_select_1 track bytes exactly.",
+          "sha1": "e2eb30487b756c547b4ff94314ff8580d7037db6"
+        }
+      ],
+      "evidence": "BPEJ song table index 5 points to this header; the track matches current Expansion bytes and contains no pointer commands requiring relocation."
+    },
+    {
+      "label": "se_win_open",
+      "song_table_index": 6,
+      "player": 1,
+      "unknown": 1,
+      "rom_offset": "0x008684DC",
+      "song_offset": "0x008684DC",
+      "size": 12,
+      "header_size": 12,
+      "output_path": "build/extracted_sound/sound/songs/midi/se_win_open.s",
+      "existing_file": "sound/songs/midi/se_win_open.s",
+      "byte_match": true,
+      "byte_match_detail": "BPEJ track bytes match the current se_win_open track bytes exactly.",
+      "voicegroup": "voicegroup_rs_sfx_1",
+      "priority": 5,
+      "reverb": 178,
+      "tracks": [
+        {
+          "label": "se_win_open_1",
+          "rom_offset": "0x008684CC",
+          "size": 16,
+          "output_path": "build/extracted_sound/sound/songs/midi/se_win_open_1.bin",
+          "existing_file": "sound/songs/midi/se_win_open.s",
+          "byte_match": true,
+          "byte_match_detail": "BPEJ bytes match the current se_win_open_1 track bytes exactly.",
+          "sha1": "449a588b743b0a8560d91962885fa4a03cd838f3"
+        }
+      ],
+      "evidence": "BPEJ song table index 6 points to this header; the track matches current Expansion bytes and contains no pointer commands requiring relocation."
+    },
+    {
+      "label": "se_wall_hit",
+      "song_table_index": 7,
+      "player": 2,
+      "unknown": 2,
+      "rom_offset": "0x008684F8",
+      "song_offset": "0x008684F8",
+      "size": 12,
+      "header_size": 12,
+      "output_path": "build/extracted_sound/sound/songs/midi/se_wall_hit.s",
+      "existing_file": "sound/songs/midi/se_wall_hit.s",
+      "byte_match": true,
+      "byte_match_detail": "BPEJ track bytes match the current se_wall_hit track bytes exactly.",
+      "voicegroup": "voicegroup_rs_sfx_1",
+      "priority": 2,
+      "reverb": 178,
+      "tracks": [
+        {
+          "label": "se_wall_hit_1",
+          "rom_offset": "0x008684E8",
+          "size": 15,
+          "output_path": "build/extracted_sound/sound/songs/midi/se_wall_hit_1.bin",
+          "existing_file": "sound/songs/midi/se_wall_hit.s",
+          "byte_match": true,
+          "byte_match_detail": "BPEJ bytes match the current se_wall_hit_1 track bytes exactly.",
+          "sha1": "f111b4f97506cd5291ce1ec4546f505c57f6ac61"
+        }
+      ],
+      "evidence": "BPEJ song table index 7 points to this header; the track matches current Expansion bytes and contains no pointer commands requiring relocation."
+    },
+    {
+      "label": "se_door",
+      "song_table_index": 8,
+      "player": 1,
+      "unknown": 1,
+      "rom_offset": "0x00868514",
+      "song_offset": "0x00868514",
+      "size": 12,
+      "header_size": 12,
+      "output_path": "build/extracted_sound/sound/songs/midi/se_door.s",
+      "existing_file": "sound/songs/midi/se_door.s",
+      "byte_match": true,
+      "byte_match_detail": "BPEJ track bytes match the current se_door track bytes exactly.",
+      "voicegroup": "voicegroup_rs_sfx_1",
+      "priority": 5,
+      "reverb": 178,
+      "tracks": [
+        {
+          "label": "se_door_1",
+          "rom_offset": "0x00868504",
+          "size": 16,
+          "output_path": "build/extracted_sound/sound/songs/midi/se_door_1.bin",
+          "existing_file": "sound/songs/midi/se_door.s",
+          "byte_match": true,
+          "byte_match_detail": "BPEJ bytes match the current se_door_1 track bytes exactly.",
+          "sha1": "fb91fa89464c97dba73a2f119f30dd4d3590825c"
+        }
+      ],
+      "evidence": "BPEJ song table index 8 points to this header; the track matches current Expansion bytes and contains no pointer commands requiring relocation."
+    },
+    {
+      "label": "se_exit",
+      "song_table_index": 9,
+      "player": 1,
+      "unknown": 1,
+      "rom_offset": "0x00868548",
+      "song_offset": "0x00868548",
+      "size": 12,
+      "header_size": 12,
+      "output_path": "build/extracted_sound/sound/songs/midi/se_exit.s",
+      "existing_file": "sound/songs/midi/se_exit.s",
+      "byte_match": true,
+      "byte_match_detail": "BPEJ track bytes match the current se_exit track bytes exactly.",
+      "voicegroup": "voicegroup_rs_sfx_1",
+      "priority": 5,
+      "reverb": 178,
+      "tracks": [
+        {
+          "label": "se_exit_1",
+          "rom_offset": "0x00868520",
+          "size": 40,
+          "output_path": "build/extracted_sound/sound/songs/midi/se_exit_1.bin",
+          "existing_file": "sound/songs/midi/se_exit.s",
+          "byte_match": true,
+          "byte_match_detail": "BPEJ bytes match the current se_exit_1 track bytes exactly.",
+          "sha1": "e8bc6550cb721aefad5ad443360b5f352d2b4d3a"
+        }
+      ],
+      "evidence": "BPEJ song table index 9 points to this header; the track matches current Expansion bytes and contains no pointer commands requiring relocation."
+    },
+    {
+      "label": "se_bike_bell",
+      "song_table_index": 11,
+      "player": 1,
+      "unknown": 1,
+      "rom_offset": "0x00868588",
+      "song_offset": "0x00868588",
+      "size": 12,
+      "header_size": 12,
+      "output_path": "build/extracted_sound/sound/songs/midi/se_bike_bell.s",
+      "existing_file": "sound/songs/midi/se_bike_bell.s",
+      "byte_match": true,
+      "byte_match_detail": "BPEJ track bytes match the current se_bike_bell track bytes exactly.",
+      "voicegroup": "voicegroup_rs_sfx_2",
+      "priority": 4,
+      "reverb": 178,
+      "tracks": [
+        {
+          "label": "se_bike_bell_1",
+          "rom_offset": "0x00868578",
+          "size": 13,
+          "output_path": "build/extracted_sound/sound/songs/midi/se_bike_bell_1.bin",
+          "existing_file": "sound/songs/midi/se_bike_bell.s",
+          "byte_match": true,
+          "byte_match_detail": "BPEJ bytes match the current se_bike_bell_1 track bytes exactly.",
+          "sha1": "199ab6f892767ae272089440ce0c1d25d0dbcbce"
+        }
+      ],
+      "evidence": "BPEJ song table index 11 points to this header; the track matches current Expansion bytes and contains no pointer commands requiring relocation."
+    },
+    {
+      "label": "se_flee",
+      "song_table_index": 17,
+      "player": 1,
+      "unknown": 1,
+      "rom_offset": "0x00868774",
+      "song_offset": "0x00868774",
+      "size": 12,
+      "header_size": 12,
+      "output_path": "build/extracted_sound/sound/songs/midi/se_flee.s",
+      "existing_file": "sound/songs/midi/se_flee.s",
+      "byte_match": true,
+      "byte_match_detail": "BPEJ track bytes match the current se_flee track bytes exactly.",
+      "voicegroup": "voicegroup_rs_sfx_1",
+      "priority": 5,
+      "reverb": 178,
+      "tracks": [
+        {
+          "label": "se_flee_1",
+          "rom_offset": "0x00868738",
+          "size": 58,
+          "output_path": "build/extracted_sound/sound/songs/midi/se_flee_1.bin",
+          "existing_file": "sound/songs/midi/se_flee.s",
+          "byte_match": true,
+          "byte_match_detail": "BPEJ bytes match the current se_flee_1 track bytes exactly.",
+          "sha1": "fea09e913263e396a15e52a27c50f8e18911a420"
+        }
+      ],
+      "evidence": "BPEJ song table index 17 points to this header; the track matches current Expansion bytes and contains no pointer commands requiring relocation."
+    }
+  ],
+  "blobs": [
+    {
+      "label": "DirectSoundWaveData_sc88pro_glockenspiel",
+      "rom_offset": "0x0063D428",
+      "size": 1700,
+      "output_path": "build/extracted_sound/sound/direct_sound_samples/sc88pro_glockenspiel.bin",
+      "existing_file": "sound/direct_sound_samples/sc88pro_glockenspiel.bin",
+      "byte_match": true,
+      "byte_match_detail": "The existing sc88pro_glockenspiel.bin byte sequence occurs exactly once in BPEJ at this offset.",
+      "sha1": "2babd41e4f3a45d3870c7958684bb27ba41ffc85",
+      "evidence": "Unique byte match against the current Expansion direct sound sample."
+    },
+    {
+      "label": "DirectSoundWaveData_sc88pro_organ2",
+      "rom_offset": "0x0063DACC",
+      "size": 2040,
+      "output_path": "build/extracted_sound/sound/direct_sound_samples/sc88pro_organ2.bin",
+      "existing_file": "sound/direct_sound_samples/sc88pro_organ2.bin",
+      "byte_match": true,
+      "byte_match_detail": "The existing sc88pro_organ2.bin byte sequence occurs exactly once in BPEJ at this offset.",
+      "sha1": "d5ba49df9ffd5ddb33ac87fe3d17fc241eaf65a7",
+      "evidence": "Unique byte match against the current Expansion direct sound sample."
+    },
+    {
+      "label": "DirectSoundWaveData_sc88pro_fretless_bass",
+      "rom_offset": "0x0063E2C4",
+      "size": 3020,
+      "output_path": "build/extracted_sound/sound/direct_sound_samples/sc88pro_fretless_bass.bin",
+      "existing_file": "sound/direct_sound_samples/sc88pro_fretless_bass.bin",
+      "byte_match": true,
+      "byte_match_detail": "The existing sc88pro_fretless_bass.bin byte sequence occurs exactly once in BPEJ at this offset.",
+      "sha1": "03dd87b3d06798b2472a7bbc6c78fe8179fadcd3",
+      "evidence": "Unique byte match against the current Expansion direct sound sample."
+    },
+    {
+      "label": "DirectSoundWaveData_sc88pro_slap_bass",
+      "rom_offset": "0x0063EE90",
+      "size": 3896,
+      "output_path": "build/extracted_sound/sound/direct_sound_samples/sc88pro_slap_bass.bin",
+      "existing_file": "sound/direct_sound_samples/sc88pro_slap_bass.bin",
+      "byte_match": true,
+      "byte_match_detail": "The existing sc88pro_slap_bass.bin byte sequence occurs exactly once in BPEJ at this offset.",
+      "sha1": "4a171e395865f50dd1a98b5fb5df0c1e23645552",
+      "evidence": "Unique byte match against the current Expansion direct sound sample."
+    },
+    {
+      "label": "DirectSoundWaveData_bicycle_bell",
+      "rom_offset": "0x006AB7F0",
+      "size": 6496,
+      "output_path": "build/extracted_sound/sound/direct_sound_samples/bicycle_bell.bin",
+      "existing_file": "sound/direct_sound_samples/bicycle_bell.bin",
+      "byte_match": true,
+      "byte_match_detail": "The existing bicycle_bell.bin byte sequence occurs exactly once in BPEJ at this offset.",
+      "sha1": "19f3cfaf0350f11fc50c95d04c667bc9e5777284",
+      "evidence": "Unique byte match against the current Expansion direct sound sample."
+    }
+  ]
+}
