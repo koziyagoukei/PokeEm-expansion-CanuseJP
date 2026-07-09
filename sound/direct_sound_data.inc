@@ -240,15 +240,15 @@ DirectSoundWaveData_sd90_classical_distortion_guitar_low::
 
 	.align 2
 DirectSoundWaveData_heart_of_asia_gamelan::
-	.incbin "sound/direct_sound_samples/heart_of_asia_gamelan.bin"
+	.incbin "build/extracted_sound/sound/direct_sound_samples/heart_of_asia_gamelan.bin"
 
 	.align 2
 DirectSoundWaveData_sc88pro_church_organ3_low::
-	.incbin "sound/direct_sound_samples/sc88pro_church_organ3_low.bin"
+	.incbin "build/extracted_sound/sound/direct_sound_samples/sc88pro_church_organ3_low.bin"
 
 	.align 2
 DirectSoundWaveData_sc88pro_church_organ3_high::
-	.incbin "sound/direct_sound_samples/sc88pro_church_organ3_high.bin"
+	.incbin "build/extracted_sound/sound/direct_sound_samples/sc88pro_church_organ3_high.bin"
 
 	.align 2
 DirectSoundWaveData_unknown_female_voice::
@@ -308,7 +308,7 @@ DirectSoundWaveData_sc88pro_wind::
 
 	.align 2
 DirectSoundWaveData_sc88pro_bubbles::
-	.incbin "sound/direct_sound_samples/sc88pro_bubbles.bin"
+	.incbin "build/extracted_sound/sound/direct_sound_samples/sc88pro_bubbles.bin"
 
 	.align 2
 DirectSoundWaveData_unknown_5::
@@ -8748,7 +8748,7 @@ Cry_Pecharunt::
 
 	.align 2
 DirectSoundWaveData_register_noise::
-	.incbin "sound/direct_sound_samples/register_noise.bin"
+	.incbin "build/extracted_sound/sound/direct_sound_samples/register_noise.bin"
 
 	.align 2
 DirectSoundWaveData_unknown_18::
