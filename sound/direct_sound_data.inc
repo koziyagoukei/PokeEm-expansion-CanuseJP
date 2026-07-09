@@ -16,19 +16,19 @@ DirectSoundWaveData_sc88pro_slap_bass::
 
 	.align 2
 DirectSoundWaveData_sc88pro_synth_bass::
-	.incbin "sound/direct_sound_samples/sc88pro_synth_bass.bin"
+	.incbin "build/extracted_sound/sound/direct_sound_samples/sc88pro_synth_bass.bin"
 
 	.align 2
 DirectSoundWaveData_sc88pro_timpani::
-	.incbin "sound/direct_sound_samples/sc88pro_timpani.bin"
+	.incbin "build/extracted_sound/sound/direct_sound_samples/sc88pro_timpani.bin"
 
 	.align 2
 DirectSoundWaveData_classical_choir_voice_ahhs::
-	.incbin "sound/direct_sound_samples/classical_choir_voice_ahhs.bin"
+	.incbin "build/extracted_sound/sound/direct_sound_samples/classical_choir_voice_ahhs.bin"
 
 	.align 2
 DirectSoundWaveData_sd90_classical_oboe::
-	.incbin "sound/direct_sound_samples/sd90_classical_oboe.bin"
+	.incbin "build/extracted_sound/sound/direct_sound_samples/sd90_classical_oboe.bin"
 
 	.align 2
 DirectSoundWaveData_unused_sd90_oboe::
@@ -48,11 +48,11 @@ DirectSoundWaveData_unknown_snare::
 
 	.align 2
 DirectSoundWaveData_ethnic_flavours_ohtsuzumi::
-	.incbin "sound/direct_sound_samples/ethnic_flavours_ohtsuzumi.bin"
+	.incbin "build/extracted_sound/sound/direct_sound_samples/ethnic_flavours_ohtsuzumi.bin"
 
 	.align 2
 DirectSoundWaveData_ethnic_flavours_hyoushigi::
-	.incbin "sound/direct_sound_samples/ethnic_flavours_hyoushigi.bin"
+	.incbin "build/extracted_sound/sound/direct_sound_samples/ethnic_flavours_hyoushigi.bin"
 
 	.align 2
 DirectSoundWaveData_sc88pro_rnd_kick::
@@ -108,7 +108,7 @@ DirectSoundWaveData_sc88pro_open_low_conga::
 
 	.align 2
 DirectSoundWaveData_drum_and_percussion_kick::
-	.incbin "sound/direct_sound_samples/drum_and_percussion_kick.bin"
+	.incbin "build/extracted_sound/sound/direct_sound_samples/drum_and_percussion_kick.bin"
 
 	.align 2
 DirectSoundWaveData_sd90_solo_snare::
@@ -120,7 +120,7 @@ DirectSoundWaveData_sd90_ambient_tom::
 
 	.align 2
 DirectSoundWaveData_dance_drums_ride_bell::
-	.incbin "sound/direct_sound_samples/dance_drums_ride_bell.bin"
+	.incbin "build/extracted_sound/sound/direct_sound_samples/dance_drums_ride_bell.bin"
 
 	.align 2
 DirectSoundWaveData_sd90_cowbell::
@@ -140,7 +140,7 @@ DirectSoundWaveData_sc88pro_jingle_bell::
 
 	.align 2
 DirectSoundWaveData_ethnic_flavours_atarigane::
-	.incbin "sound/direct_sound_samples/ethnic_flavours_atarigane.bin"
+	.incbin "build/extracted_sound/sound/direct_sound_samples/ethnic_flavours_atarigane.bin"
 
 	.align 2
 DirectSoundWaveData_sc88pro_taiko::
@@ -148,7 +148,7 @@ DirectSoundWaveData_sc88pro_taiko::
 
 	.align 2
 DirectSoundWaveData_ethnic_flavours_kotsuzumi::
-	.incbin "sound/direct_sound_samples/ethnic_flavours_kotsuzumi.bin"
+	.incbin "build/extracted_sound/sound/direct_sound_samples/ethnic_flavours_kotsuzumi.bin"
 
 	.align 2
 DirectSoundWaveData_sc88pro_piano1_48::

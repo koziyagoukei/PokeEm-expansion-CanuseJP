@@ -216,7 +216,7 @@ BPEJ_VERIFIED_OK := $(BUILD_GENERATED_DIR)/bpej_verified.ok
 BPEJ_EXTRACTED_SOUND_DIR := $(BUILD_DIR)/extracted_sound
 BPEJ_SOUND_MANIFEST := $(TOOLS_DIR)/data/bpej_sound_manifest.json
 BPEJ_SOUND_EXTRACTED_OK := $(BUILD_GENERATED_DIR)/bpej_sound_extracted.ok
-BPEJ_EXTRACTED_MID_NAMES := mus_dummy mus_level_up se_use_item se_pc_login se_pc_off se_pc_on se_select se_win_open se_wall_hit se_door se_exit se_bike_bell se_flee
+BPEJ_EXTRACTED_MID_NAMES := mus_dummy mus_level_up se_use_item se_pc_login se_pc_off se_pc_on se_select se_win_open se_wall_hit se_door se_exit se_bike_bell se_flee se_not_effective se_effective se_super_effective se_ball_open se_faint se_sliding_door se_ship se_bang se_pin se_boo se_ball se_a se_i se_u se_e se_o se_n se_success se_failure se_bike_hop se_switch se_click se_fu_zaku se_contest_condition_lose se_lavaridge_fall_warp se_ice_stairs se_ice_break se_ice_crack se_fall se_unlock se_warp_in se_warp_out se_rotating_gate se_truck_stop se_truck_unload
 # Tool executables
 SMOLTM       := $(TOOLS_DIR)/compresSmol/compresSmolTilemap$(EXE)
 SMOL         := $(TOOLS_DIR)/compresSmol/compresSmol$(EXE)
@@ -341,6 +341,10 @@ DATA_ASM_OBJS := $(patsubst $(DATA_ASM_SUBDIR)/%.s,$(DATA_ASM_BUILDDIR)/%.o,$(DA
 
 MID_SRCS := $(wildcard $(MID_SUBDIR)/*.mid)
 MID_OBJS := $(patsubst $(MID_SUBDIR)/%.mid,$(MID_BUILDDIR)/%.o,$(MID_SRCS))
+ifneq ($(strip $(BPEJ_EXTRACTED_MID_NAMES)),)
+BPEJ_EXTRACTED_MID_OBJS := $(addprefix $(MID_BUILDDIR)/,$(addsuffix .o,$(BPEJ_EXTRACTED_MID_NAMES)))
+MID_OBJS += $(BPEJ_EXTRACTED_MID_OBJS)
+endif
 
 OBJS     := $(C_OBJS) $(C_ASM_OBJS) $(ASM_OBJS) $(DATA_ASM_OBJS) $(MID_OBJS)
 OBJS_REL := $(patsubst $(OBJ_DIR)/%,%,$(OBJS))
