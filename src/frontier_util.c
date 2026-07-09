@@ -90,6 +90,9 @@ static void SaveRecordBattle(void);
 static void BufferFrontierTrainerName(void);
 static void ResetSketchedMoves(void);
 static void SetFacilityBrainObjectEvent(void);
+static bool8 ShouldTemporarilyScaleFrontierMonsToLevel50(void);
+static void SetMonExpToLevelAndRecalculate(struct Pokemon *mon, u8 level);
+static void ApplyTemporaryFrontierLevel50ToPlayerParty(void);
 static void ShowTowerResultsWindow(u8);
 static void ShowDomeResultsWindow(u8);
 static void ShowPalaceResultsWindow(u8);
@@ -979,6 +982,7 @@ static void SetSelectedPartyOrder(void)
     for (i = 0; i < gSpecialVar_0x8005; i++)
         gSelectedOrderFromParty[i] = gSaveBlock2Ptr->frontier.selectedPartyMons[i];
     ReducePlayerPartyToSelectedMons();
+    ApplyTemporaryFrontierLevel50ToPlayerParty();
 }
 
 static void DoSoftReset_(void)
@@ -999,8 +1003,70 @@ static void SaveSelectedParty(void)
     {
         u16 monId = gSaveBlock2Ptr->frontier.selectedPartyMons[i] - 1;
         if (monId < PARTY_SIZE)
+        {
+            RestoreTemporaryFrontierLevel50BeforeSave(&gParties[B_TRAINER_PLAYER][i], monId);
             SavePlayerPartyMon(gSaveBlock2Ptr->frontier.selectedPartyMons[i] - 1, &gParties[B_TRAINER_PLAYER][i]);
+        }
     }
+}
+
+static bool8 ShouldTemporarilyScaleFrontierMonsToLevel50(void)
+{
+    return gSaveBlock2Ptr->frontier.lvlMode == FRONTIER_LVL_50
+        && VarGet(VAR_FRONTIER_FACILITY) < NUM_FRONTIER_FACILITIES;
+}
+
+static void SetMonExpToLevelAndRecalculate(struct Pokemon *mon, u8 level)
+{
+    enum Species species = GetMonData(mon, MON_DATA_SPECIES);
+    u32 exp;
+
+    if (species == SPECIES_NONE || species == SPECIES_EGG)
+        return;
+
+    exp = gExperienceTables[gSpeciesInfo[species].growthRate][level];
+    SetMonData(mon, MON_DATA_EXP, &exp);
+    CalculateMonStats(mon);
+}
+
+static void ApplyTemporaryFrontierLevel50ToPlayerParty(void)
+{
+    u32 i;
+
+    if (!ShouldTemporarilyScaleFrontierMonsToLevel50())
+        return;
+
+    for (i = 0; i < MAX_FRONTIER_PARTY_SIZE; i++)
+    {
+        struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][i];
+
+        if (GetMonData(mon, MON_DATA_LEVEL) > FRONTIER_MAX_LEVEL_50)
+            SetMonExpToLevelAndRecalculate(mon, FRONTIER_MAX_LEVEL_50);
+    }
+}
+
+void RestoreTemporaryFrontierLevel50BeforeSave(struct Pokemon *mon, u16 partyIndex)
+{
+    struct Pokemon *savedMon;
+    enum Species species;
+    u32 exp;
+
+    if (!ShouldTemporarilyScaleFrontierMonsToLevel50() || partyIndex >= PARTY_SIZE)
+        return;
+
+    savedMon = GetSavedPlayerPartyMon(partyIndex);
+    species = GetMonData(savedMon, MON_DATA_SPECIES);
+    if (species == SPECIES_NONE
+        || species == SPECIES_EGG
+        || species != GetMonData(mon, MON_DATA_SPECIES)
+        || GetMonData(savedMon, MON_DATA_LEVEL) <= FRONTIER_MAX_LEVEL_50)
+    {
+        return;
+    }
+
+    exp = GetMonData(savedMon, MON_DATA_EXP);
+    SetMonData(mon, MON_DATA_EXP, &exp);
+    CalculateMonStats(mon);
 }
 
 static void ShowFacilityResultsWindow(void)
@@ -2048,11 +2114,12 @@ static void AppendIfValid(enum Species species, u16 heldItem, u16 hp, enum Front
 {
     s32 i = 0;
 
+    (void)lvlMode;
+    (void)monLevel;
+
     if (species == SPECIES_EGG || species == SPECIES_NONE)
         return;
     if (gSpeciesInfo[species].isFrontierBanned)
-        return;
-    if (lvlMode == FRONTIER_LVL_50 && monLevel > FRONTIER_MAX_LEVEL_50)
         return;
 
     for (i = 0; i < *count && speciesArray[i] != species; i++)
@@ -2307,6 +2374,7 @@ static void ResetSketchedMoves(void)
                 if (k == MAX_MON_MOVES)
                     SetMonMoveSlot(&gParties[B_TRAINER_PLAYER][i], MOVE_SKETCH, j);
             }
+            RestoreTemporaryFrontierLevel50BeforeSave(&gParties[B_TRAINER_PLAYER][i], monId);
             SavePlayerPartyMon(gSaveBlock2Ptr->frontier.selectedPartyMons[i] - 1, &gParties[B_TRAINER_PLAYER][i]);
         }
     }

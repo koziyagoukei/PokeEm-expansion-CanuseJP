@@ -545,6 +545,7 @@ static void MapNamePopupAppendFloorNum(u8 *map_name, s8 floorNum)
 
 static bool32 IsCeladonDeptStore(const struct MapHeader *mapHeader)
 {
+#if defined(LAYOUT_CELADON_CITY_DEPARTMENT_STORE_1F)
     if (mapHeader->regionMapSectionId != MAPSEC_CELADON_CITY)
         return FALSE;
     if (mapHeader->mapLayoutId != LAYOUT_CELADON_CITY_DEPARTMENT_STORE_1F
@@ -558,6 +559,9 @@ static bool32 IsCeladonDeptStore(const struct MapHeader *mapHeader)
         return FALSE;
     }
     return TRUE;
+#else
+    return FALSE;
+#endif
 }
 
 u8 *GetPopUpMapName(u8 *dest, const struct MapHeader *mapHeader)

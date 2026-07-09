@@ -3,6 +3,8 @@
 
 #include "constants/species.h"
 
+struct Pokemon;
+
 void CallFrontierUtilFunc(void);
 u8 GetFrontierBrainStatus(void);
 void CopyFrontierTrainerText(u8 whichText, u16 trainerId);
@@ -38,6 +40,7 @@ u8 GetFrontierTrainerFacilityClass(u16 trainerId);
 void GetFrontierTrainerName(u8 *dst, u16 trainerId);
 u16 GetRandomFrontierMonFromSet(u16 trainerId);
 u16 GetRandomFrontierMonFromFullPool(const u16 *selectedMonIds, u8 selectedCount, const u16 *excludedMonIds, u8 excludedMonIdCount, const enum Species *excludedSpecies, u8 excludedSpeciesCount);
+void RestoreTemporaryFrontierLevel50BeforeSave(struct Pokemon *mon, u16 partyIndex);
 void FrontierSpeechToString(const u16 *words);
 u8 SetFacilityPtrsGetLevel(void);
 u8 GetFrontierEnemyMonLevel(enum FrontierLevelMode lvlMode);

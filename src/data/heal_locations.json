@@ -194,7 +194,7 @@
       "x": 6,
       "y": 8,
       "respawn_map": "MAP_PALLET_TOWN_PLAYERS_HOUSE_1F",
-      "respawn_npc": "LOCALID_PLAYERS_HOUSE_1F_MOM",
+      "respawn_npc": "0",
       "respawn_x": 8,
       "respawn_y": 5
     },
@@ -204,7 +204,7 @@
       "x": 26,
       "y": 27,
       "respawn_map": "MAP_VIRIDIAN_CITY_POKEMON_CENTER_1F",
-      "respawn_npc": "LOCALID_VIRIDIAN_NURSE"
+      "respawn_npc": "0"
     },
     {
       "id": "HEAL_LOCATION_PEWTER_CITY",
@@ -212,7 +212,7 @@
       "x": 17,
       "y": 26,
       "respawn_map": "MAP_PEWTER_CITY_POKEMON_CENTER_1F",
-      "respawn_npc": "LOCALID_PEWTER_NURSE"
+      "respawn_npc": "0"
     },
     {
       "id": "HEAL_LOCATION_CERULEAN_CITY",
@@ -220,7 +220,7 @@
       "x": 22,
       "y": 20,
       "respawn_map": "MAP_CERULEAN_CITY_POKEMON_CENTER_1F",
-      "respawn_npc": "LOCALID_CERULEAN_NURSE"
+      "respawn_npc": "0"
     },
     {
       "id": "HEAL_LOCATION_LAVENDER_TOWN",
@@ -228,7 +228,7 @@
       "x": 6,
       "y": 6,
       "respawn_map": "MAP_LAVENDER_TOWN_POKEMON_CENTER_1F",
-      "respawn_npc": "LOCALID_LAVENDER_NURSE"
+      "respawn_npc": "0"
     },
     {
       "id": "HEAL_LOCATION_VERMILION_CITY",
@@ -236,7 +236,7 @@
       "x": 15,
       "y": 7,
       "respawn_map": "MAP_VERMILION_CITY_POKEMON_CENTER_1F",
-      "respawn_npc": "LOCALID_VERMILION_NURSE"
+      "respawn_npc": "0"
     },
     {
       "id": "HEAL_LOCATION_CELADON_CITY",
@@ -244,7 +244,7 @@
       "x": 48,
       "y": 12,
       "respawn_map": "MAP_CELADON_CITY_POKEMON_CENTER_1F",
-      "respawn_npc": "LOCALID_CELADON_NURSE"
+      "respawn_npc": "0"
     },
     {
       "id": "HEAL_LOCATION_FUCHSIA_CITY",
@@ -252,7 +252,7 @@
       "x": 25,
       "y": 32,
       "respawn_map": "MAP_FUCHSIA_CITY_POKEMON_CENTER_1F",
-      "respawn_npc": "LOCALID_FUCHSIA_NURSE"
+      "respawn_npc": "0"
     },
     {
       "id": "HEAL_LOCATION_CINNABAR_ISLAND",
@@ -260,7 +260,7 @@
       "x": 14,
       "y": 12,
       "respawn_map": "MAP_CINNABAR_ISLAND_POKEMON_CENTER_1F",
-      "respawn_npc": "LOCALID_CINNABAR_NURSE"
+      "respawn_npc": "0"
     },
     {
       "id": "HEAL_LOCATION_INDIGO_PLATEAU",
@@ -268,7 +268,7 @@
       "x": 11,
       "y": 7,
       "respawn_map": "MAP_INDIGO_PLATEAU_POKEMON_CENTER_1F",
-      "respawn_npc": "LOCALID_LEAGUE_NURSE"
+      "respawn_npc": "0"
     },
     {
       "id": "HEAL_LOCATION_SAFFRON_CITY",
@@ -276,7 +276,7 @@
       "x": 24,
       "y": 39,
       "respawn_map": "MAP_SAFFRON_CITY_POKEMON_CENTER_1F",
-      "respawn_npc": "LOCALID_SAFFRON_NURSE"
+      "respawn_npc": "0"
     },
     {
       "id": "HEAL_LOCATION_ROUTE4",
@@ -284,7 +284,7 @@
       "x": 12,
       "y": 6,
       "respawn_map": "MAP_ROUTE4_POKEMON_CENTER_1F",
-      "respawn_npc": "LOCALID_ROUTE4_NURSE"
+      "respawn_npc": "0"
     },
     {
       "id": "HEAL_LOCATION_ROUTE10",
@@ -292,7 +292,7 @@
       "x": 13,
       "y": 21,
       "respawn_map": "MAP_ROUTE10_POKEMON_CENTER_1F",
-      "respawn_npc": "LOCALID_ROUTE10_NURSE"
+      "respawn_npc": "0"
     },
     {
       "id": "HEAL_LOCATION_ONE_ISLAND",
@@ -300,7 +300,7 @@
       "x": 14,
       "y": 6,
       "respawn_map": "MAP_ONE_ISLAND_POKEMON_CENTER_1F",
-      "respawn_npc": "LOCALID_ONE_ISLAND_NURSE"
+      "respawn_npc": "0"
     },
     {
       "id": "HEAL_LOCATION_TWO_ISLAND",
@@ -308,7 +308,7 @@
       "x": 21,
       "y": 8,
       "respawn_map": "MAP_TWO_ISLAND_POKEMON_CENTER_1F",
-      "respawn_npc": "LOCALID_TWO_ISLAND_NURSE"
+      "respawn_npc": "0"
     },
     {
       "id": "HEAL_LOCATION_THREE_ISLAND",
@@ -316,7 +316,7 @@
       "x": 14,
       "y": 28,
       "respawn_map": "MAP_THREE_ISLAND_POKEMON_CENTER_1F",
-      "respawn_npc": "LOCALID_THREE_ISLAND_NURSE"
+      "respawn_npc": "0"
     },
     {
       "id": "HEAL_LOCATION_FOUR_ISLAND",
@@ -324,7 +324,7 @@
       "x": 18,
       "y": 21,
       "respawn_map": "MAP_FOUR_ISLAND_POKEMON_CENTER_1F",
-      "respawn_npc": "LOCALID_FOUR_ISLAND_NURSE"
+      "respawn_npc": "0"
     },
     {
       "id": "HEAL_LOCATION_FIVE_ISLAND",
@@ -332,7 +332,7 @@
       "x": 18,
       "y": 7,
       "respawn_map": "MAP_FIVE_ISLAND_POKEMON_CENTER_1F",
-      "respawn_npc": "LOCALID_FIVE_ISLAND_NURSE"
+      "respawn_npc": "0"
     },
     {
       "id": "HEAL_LOCATION_SEVEN_ISLAND",
@@ -340,7 +340,7 @@
       "x": 12,
       "y": 4,
       "respawn_map": "MAP_SEVEN_ISLAND_POKEMON_CENTER_1F",
-      "respawn_npc": "LOCALID_SEVEN_ISLAND_NURSE"
+      "respawn_npc": "0"
     },
     {
       "id": "HEAL_LOCATION_SIX_ISLAND",
@@ -348,7 +348,7 @@
       "x": 11,
       "y": 12,
       "respawn_map": "MAP_SIX_ISLAND_POKEMON_CENTER_1F",
-      "respawn_npc": "LOCALID_SIX_ISLAND_NURSE"
+      "respawn_npc": "0"
     }
   ]
 }

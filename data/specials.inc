@@ -653,3 +653,8 @@ gSpecials::
 	def_special Special_OpenInfoViewer, waitstate=1
 	def_special ultra_help, waitstate=1
 	def_special Special_StartPartyBathTimeFriendship
+	def_special ChooseNonEggPartyMon, waitstate=1
+	def_special Special_TeishokuyaChangeTeraType
+	def_special Special_TeishokuyaToggleGigantamax
+	def_special Special_TeishokuyaIncreasePartyFriendship
+	def_special Special_TeishokuyaCanToggleGigantamax

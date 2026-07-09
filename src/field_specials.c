@@ -4636,6 +4636,103 @@ void DaisyMassageServices(void)
     VarSet(VAR_MASSAGE_COOLDOWN_STEP_COUNTER, 0);
 }
 
+static bool32 Teishokuya_IsValidSelectedPartyMon(void)
+{
+    struct Pokemon *mon;
+
+    if (gSpecialVar_0x8004 >= PARTY_SIZE)
+        return FALSE;
+
+    mon = &gParties[B_TRAINER_PLAYER][gSpecialVar_0x8004];
+    if (GetMonData(mon, MON_DATA_SPECIES_OR_EGG) == SPECIES_NONE
+     || GetMonData(mon, MON_DATA_IS_EGG))
+        return FALSE;
+
+    return TRUE;
+}
+
+static bool32 Teishokuya_CanToggleGigantamax(struct Pokemon *mon)
+{
+    enum Species species = GetMonData(mon, MON_DATA_SPECIES);
+
+    return gSpeciesInfo[species].isGigantamax
+        || DoesSpeciesHaveFormChangeMethod(species, FORM_CHANGE_BATTLE_GIGANTAMAX);
+}
+
+void Special_TeishokuyaChangeTeraType(void)
+{
+    u32 teraType = gSpecialVar_Result;
+
+    if (!Teishokuya_IsValidSelectedPartyMon()
+     || teraType == TYPE_NONE
+     || teraType >= NUMBER_OF_MON_TYPES)
+    {
+        gSpecialVar_Result = FALSE;
+        return;
+    }
+
+    SetMonData(&gParties[B_TRAINER_PLAYER][gSpecialVar_0x8004], MON_DATA_TERA_TYPE, &teraType);
+    gSpecialVar_Result = TRUE;
+}
+
+void Special_TeishokuyaToggleGigantamax(void)
+{
+    struct Pokemon *mon;
+    u32 gigantamaxFactor;
+
+    if (!Teishokuya_IsValidSelectedPartyMon())
+    {
+        gSpecialVar_Result = FALSE;
+        return;
+    }
+
+    mon = &gParties[B_TRAINER_PLAYER][gSpecialVar_0x8004];
+    if (!Teishokuya_CanToggleGigantamax(mon))
+    {
+        gSpecialVar_Result = FALSE;
+        return;
+    }
+
+    gigantamaxFactor = !GetMonData(mon, MON_DATA_GIGANTAMAX_FACTOR);
+    SetMonData(mon, MON_DATA_GIGANTAMAX_FACTOR, &gigantamaxFactor);
+    gSpecialVar_Result = TRUE;
+}
+
+void Special_TeishokuyaIncreasePartyFriendship(void)
+{
+    u32 i;
+
+    for (i = 0; i < PARTY_SIZE; i++)
+    {
+        struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][i];
+        u32 friendship;
+
+        if (GetMonData(mon, MON_DATA_SPECIES_OR_EGG) == SPECIES_NONE
+         || GetMonData(mon, MON_DATA_IS_EGG))
+            continue;
+
+        friendship = GetMonData(mon, MON_DATA_FRIENDSHIP);
+        friendship += 10;
+        if (friendship > MAX_FRIENDSHIP)
+            friendship = MAX_FRIENDSHIP;
+        SetMonData(mon, MON_DATA_FRIENDSHIP, &friendship);
+    }
+}
+
+void Special_TeishokuyaCanToggleGigantamax(void)
+{
+    struct Pokemon *mon;
+
+    if (!Teishokuya_IsValidSelectedPartyMon())
+    {
+        gSpecialVar_Result = FALSE;
+        return;
+    }
+
+    mon = &gParties[B_TRAINER_PLAYER][gSpecialVar_0x8004];
+    gSpecialVar_Result = Teishokuya_CanToggleGigantamax(mon);
+}
+
 u8 GetLeadMonFriendship(void)
 {
     struct Pokemon * pokemon = &gParties[B_TRAINER_PLAYER][GetLeadMonIndex()];
