@@ -41,6 +41,41 @@
 - `se_exit`
 - `se_bike_bell`
 - `se_flee`
+- `se_not_effective`
+- `se_effective`
+- `se_super_effective`
+- `se_ball_open`
+- `se_faint`
+- `se_sliding_door`
+- `se_ship`
+- `se_bang`
+- `se_pin`
+- `se_boo`
+- `se_ball`
+- `se_a`
+- `se_i`
+- `se_u`
+- `se_e`
+- `se_o`
+- `se_n`
+- `se_success`
+- `se_failure`
+- `se_bike_hop`
+- `se_switch`
+- `se_click`
+- `se_fu_zaku`
+- `se_contest_condition_lose`
+- `se_lavaridge_fall_warp`
+- `se_ice_stairs`
+- `se_ice_break`
+- `se_ice_crack`
+- `se_fall`
+- `se_unlock`
+- `se_warp_in`
+- `se_warp_out`
+- `se_rotating_gate`
+- `se_truck_stop`
+- `se_truck_unload`
 
 現在のDirectSound sample対象は以下です。
 
@@ -49,6 +84,16 @@
 - `DirectSoundWaveData_sc88pro_fretless_bass`
 - `DirectSoundWaveData_sc88pro_slap_bass`
 - `DirectSoundWaveData_bicycle_bell`
+- `DirectSoundWaveData_sc88pro_synth_bass`
+- `DirectSoundWaveData_sc88pro_timpani`
+- `DirectSoundWaveData_classical_choir_voice_ahhs`
+- `DirectSoundWaveData_sd90_classical_oboe`
+- `DirectSoundWaveData_ethnic_flavours_ohtsuzumi`
+- `DirectSoundWaveData_dance_drums_ride_bell`
+- `DirectSoundWaveData_drum_and_percussion_kick`
+- `DirectSoundWaveData_ethnic_flavours_atarigane`
+- `DirectSoundWaveData_ethnic_flavours_hyoushigi`
+- `DirectSoundWaveData_ethnic_flavours_kotsuzumi`
 
 根拠は、同階層の `../pokeemerald-jp` にある日本版エメラルド逆アセンブル資産と、BPEJ ROM内の実データを参照したものです。JP逆アセンブル側は現在、Expansionのような分割済み音ラベルを保持していないため、manifestでは「BPEJ ROM offset」と「現行Expansion側の同名音源byte列との一致」を併用して確認しています。
 
@@ -97,8 +142,12 @@ DirectSound sampleは、manifest対象だけ `sound/direct_sound_data.inc` の `
 - 決定/選択系SE: `se_select`, `se_use_item`
 - メニュー/フィールド系SE: `se_win_open`, `se_wall_hit`, `se_door`, `se_exit`
 - 自転車ベル/逃走SE: `se_bike_bell`, `se_flee`
+- 戦闘効果音: `se_not_effective`, `se_effective`, `se_super_effective`, `se_ball_open`, `se_faint`
+- 汎用効果音: `se_sliding_door`, `se_ship`, `se_bang`, `se_pin`, `se_boo`, `se_ball`
+- 音声母音SE: `se_a`, `se_i`, `se_u`, `se_e`
+- 追加確認SE: `se_o`, `se_n`, `se_success`, `se_failure`, `se_bike_hop`, `se_switch`, `se_click`, `se_fu_zaku`, `se_contest_condition_lose`, `se_lavaridge_fall_warp`, `se_ice_stairs`, `se_ice_break`, `se_ice_crack`, `se_fall`, `se_unlock`, `se_warp_in`, `se_warp_out`, `se_rotating_gate`, `se_truck_stop`, `se_truck_unload`
 - レベルアップファンファーレ: `mus_level_up`
-- DirectSound sample組み込み確認: `sc88pro_glockenspiel`, `sc88pro_organ2`, `sc88pro_fretless_bass`, `sc88pro_slap_bass`, `bicycle_bell`
+- DirectSound sample組み込み確認: `sc88pro_glockenspiel`, `sc88pro_organ2`, `sc88pro_fretless_bass`, `sc88pro_slap_bass`, `bicycle_bell`, `sc88pro_synth_bass`, `sc88pro_timpani`, `classical_choir_voice_ahhs`, `sd90_classical_oboe`, `ethnic_flavours_ohtsuzumi`, `dance_drums_ride_bell`, `drum_and_percussion_kick`, `ethnic_flavours_atarigane`, `ethnic_flavours_hyoushigi`, `ethnic_flavours_kotsuzumi`
 
 DirectSound sampleは複数曲や複数SEから参照されるため、まずはビルド対象として正しく組み込まれることを確認し、聴感確認は対象サンプルを使う曲/SEを特定して段階的に進めます。
 
