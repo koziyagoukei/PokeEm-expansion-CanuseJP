@@ -24,22 +24,7 @@ MysteryGiftScript_BattleCardInfo:
 	end
 
 sText_MysteryGiftBattleCountCard:
-	.string "Thank you for using the MYSTERY\n"
-	.string "GIFT System.\p"
-	.string "Your BATTLE COUNT CARD keeps\n"
-	.string "track of your battle record against\l"
-	.string "TRAINERS with the same CARD.\p"
-	.string "Look for and battle TRAINERS who\n"
-	.string "have the same CARD as you.\p"
-	.string "You may check the overall rankings\n"
-	.string "by reading the NEWS.\p"
-	.string "Please do give it a try!$"
+	.string "{JPN}ふしぎなおくりもの を ごりよう\nいただき ありがとう ございます\pあなたの もっている\nたいせん カウント カード は\pおなじ カードを もっている\nトレーナーと たいせん することで\lせいせきが きろくされて いきます\pぜひ おなじ カードをもつ\nトレーナーと たいせん してください\pまた ニュースを よみこむことで\nランキングを みれますので\lぜひ ごりよう ください!$"
 
 sText_MysteryGiftBattleCountCard_WonPrize:
-	.string "Thank you for using the MYSTERY\n"
-	.string "GIFT System.\p"
-	.string "Congratulations!\p"
-	.string "You have won a prize for winning\n"
-	.string "three battles!\p"
-	.string "We hope you will be inspired to\n"
-	.string "battle some more.$"
+	.string "{JPN}ふしぎなおくりもの を ごりよう\nいただき ありがとう ございます\pおめでとう ございます!\pただいま たいせんで 3しょうした\nトレーナーには プレゼントを\lさしあげて います!\pこれからも どんどん\nたいせんを たのしんで ください!$"

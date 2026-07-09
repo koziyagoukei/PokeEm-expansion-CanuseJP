@@ -1,37 +1,14 @@
 Route111_Text_MakingRoomUseTMToMakeYourOwn:
-	.string "What's that?\n"
-	.string "What am I doing?\p"
-	.string "I'm thinking about making my own room\n"
-	.string "here using a POKEMON move.\p"
-	.string "I know! I'll give you this TM.\n"
-	.string "Will you use it to make your own room?$"
+	.string "{JPN}えっ なにを してるかって?\pポケモンの わざを つかって\nここに ぼくだけの へやを\lつくろうと おもってね!\pそうだっ この わざマシンを あげるから\nきみも つくって みるかい?$"
 
 Route111_Text_ExplainSecretPower:
-	.string "Find a big tree that looks like it might\n"
-	.string "drop some vines.\p"
-	.string "Use SECRET POWER in front of the tree.\n"
-	.string "Some vines should get free and drop\l"
-	.string "down, so you can climb the tree.\p"
-	.string "You'll find a lot of space for putting\n"
-	.string "your favorite things.\p"
-	.string "It'll be your own secret room...\n"
-	.string "A SECRET BASE!\p"
-	.string "You should make one, too.\p"
-	.string "Another thing, you don't always have\n"
-	.string "to make your SECRET BASE in a tree.\p"
-	.string "Try using SECRET POWER on rock walls\n"
-	.string "that have small indents in them.\p"
-	.string "I'm going to look for other places, too.\n"
-	.string "Okay, bye!$"
+	.string "{JPN}ツルが おちそうな きにむかって\nひみつのちからを つかってごらん!\lツルが おちてきて きのうえに のぼれるよ!\pそれでね うえには ひろいへやが あるから\nぼくは そこに すきなものを おくんだ!\lじぶんだけの ひみつのへや…\lそう ひみつきちさ!\lきみも つくると いいよー\pそうそう ひみつきちを つくれる ばしょは\nきのうえ だけじゃ ないよ!\pちいさな くぼみがある かべなんかにも\nひみつのちからを つかって みるといいよ!\pぼくも ほかの ばしょを さがして みるね\nそれじゃ!$"
 
 Route111_Text_DontWantThis:
-	.string "Oh, you don't want this?\n"
-	.string "If you change your mind, tell me, okay?$"
+	.string "{JPN}そう いらないんだ…\nほしくなったら また こえかけてね!$"
 
 Route111_Text_DontHaveAnyRoom:
-	.string "Oh, you don't have any room for this.\p"
-	.string "I'll hold on to it, so come back for it\n"
-	.string "another time, okay?$"
+	.string "{JPN}あれ?\nそれいじょうは もてない みたいだよ\pまた こんど とりに きてね!$"
 
 Route111_EventScript_SecretPowerMan::
 	lock
