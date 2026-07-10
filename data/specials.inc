@@ -647,6 +647,9 @@ gSpecials::
 	def_special Special_SetFrontierAiNormal
 	def_special Special_SetFrontierAiHard
 	def_special Special_SetFrontierAiStrongest
+	def_special Special_SetFrontierAllowBannedSpecies
+	def_special Special_ClearFrontierAllowBannedSpecies
+	def_special Special_GetFrontierAllowBannedSpecies
 	def_special Special_SpawnPartyRoamerMons
 	def_special Special_RefreshPartyRoamerMons
 	def_special Special_BufferPartyRoamerMessage
@@ -658,3 +661,4 @@ gSpecials::
 	def_special Special_TeishokuyaToggleGigantamax
 	def_special Special_TeishokuyaIncreasePartyFriendship
 	def_special Special_TeishokuyaCanToggleGigantamax
+	def_special Special_TeishokuyaPlayMealScene, waitstate=1

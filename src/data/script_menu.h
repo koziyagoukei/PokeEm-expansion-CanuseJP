@@ -1144,6 +1144,13 @@ static const struct MenuAction MultichoiceList_FrontierAiLevel[] =
     { gText_Exit },
 };
 
+static const struct MenuAction MultichoiceList_FrontierBannedSpecies[] =
+{
+    { COMPOUND_STRING("ALLOW") },
+    { COMPOUND_STRING("BAN") },
+    { gText_Exit },
+};
+
 struct MultichoiceListStruct
 {
     const struct MenuAction *list;
@@ -1312,6 +1319,7 @@ static const struct MultichoiceListStruct sMultichoiceLists[] =
     [MULTI_EGGS_VICTORIES_QUIT]                        = MULTICHOICE(sMultichoiceList_Eggs_Victories_Quit),
     [MULTI_HOF_EGGS_VICTORIES_QUIT]                    = MULTICHOICE(sMultichoiceList_HOF_Eggs_Victories_Quit),
     [MULTI_FRONTIER_AI_LEVEL]                          = MULTICHOICE(MultichoiceList_FrontierAiLevel),
+    [MULTI_FRONTIER_BANNED_SPECIES]                    = MULTICHOICE(MultichoiceList_FrontierBannedSpecies),
     [MULTI_PARTY_ROAMER_POKEBLOCK_FLAVOR]              = MULTICHOICE(MultichoiceList_PartyRoamerPokeblockFlavor),
 };
 

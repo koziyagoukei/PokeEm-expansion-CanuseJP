@@ -198,6 +198,30 @@ UltraFrontieHub_EventScript_SetFrontierAi_Strongest::
 	release
 	end
 
+UltraFrontieHub_EventScript_SetFrontierBannedSpecies::
+	lock
+	faceplayer
+	msgbox UltraFrontieHub_Text_SetFrontierBannedSpecies, MSGBOX_DEFAULT
+	multichoice 0, 0, MULTI_FRONTIER_BANNED_SPECIES, FALSE
+	switch VAR_RESULT
+	case 0, UltraFrontieHub_EventScript_AllowFrontierBannedSpecies
+	case 1, UltraFrontieHub_EventScript_BanFrontierBannedSpecies
+	msgbox UltraFrontieHub_Text_Cancel, MSGBOX_DEFAULT
+	release
+	end
+
+UltraFrontieHub_EventScript_AllowFrontierBannedSpecies::
+	special Special_SetFrontierAllowBannedSpecies
+	msgbox UltraFrontieHub_Text_SetFrontierBannedSpeciesAllowDone, MSGBOX_DEFAULT
+	release
+	end
+
+UltraFrontieHub_EventScript_BanFrontierBannedSpecies::
+	special Special_ClearFrontierAllowBannedSpecies
+	msgbox UltraFrontieHub_Text_SetFrontierBannedSpeciesBanDone, MSGBOX_DEFAULT
+	release
+	end
+
 UltraFrontieHub_Text_SetFrontierAi::
 	.string "フロンティアの AIを\nえらんでください。$"
 
@@ -206,6 +230,15 @@ UltraFrontieHub_Text_SetFrontierAi_NormalDone::
 
 UltraFrontieHub_Text_SetFrontierAi_HardDone::
 	.string "AIを むずかしいに\nしました。$"
+
+UltraFrontieHub_Text_SetFrontierBannedSpecies::
+	.string "BANNED POKEMON RULE$"
+
+UltraFrontieHub_Text_SetFrontierBannedSpeciesAllowDone::
+	.string "BANNED POKEMON ALLOWED.$"
+
+UltraFrontieHub_Text_SetFrontierBannedSpeciesBanDone::
+	.string "BANNED POKEMON BANNED.$"
 
 UltraFrontieHub_Text_SetFrontierAi_StrongestDone::
 	.string "AIを さいきょうに\nしました。$"

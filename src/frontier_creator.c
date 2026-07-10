@@ -3072,6 +3072,21 @@ void Special_SetFrontierAiStrongest(void)
     VarSet(VAR_FRONTIER_AI_LEVEL, 2);
 }
 
+void Special_SetFrontierAllowBannedSpecies(void)
+{
+    FlagSet(FLAG_FRONTIER_ALLOW_BANNED_SPECIES);
+}
+
+void Special_ClearFrontierAllowBannedSpecies(void)
+{
+    FlagClear(FLAG_FRONTIER_ALLOW_BANNED_SPECIES);
+}
+
+void Special_GetFrontierAllowBannedSpecies(void)
+{
+    gSpecialVar_Result = FlagGet(FLAG_FRONTIER_ALLOW_BANNED_SPECIES);
+}
+
 void Special_SetupFrontierHubState(void)
 {
     u32 i;

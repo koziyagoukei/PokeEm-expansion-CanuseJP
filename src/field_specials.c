@@ -19,6 +19,7 @@
 #include "field_specials.h"
 #include "field_weather.h"
 #include "graphics.h"
+#include "gpu_regs.h"
 #include "international_string_util.h"
 #include "item.h"
 #include "item_icon.h"
@@ -37,6 +38,7 @@
 #include "pokeblock.h"
 #include "pokedex.h"
 #include "pokemon.h"
+#include "pokemon_icon.h"
 #include "pokemon_storage_system.h"
 #include "pokemon_summary_screen.h"
 #include "random.h"
@@ -53,7 +55,10 @@
 #include "text.h"
 #include "text_window.h"
 #include "tilesets.h"
+#include "trainer.h"
+#include "trainer_pokemon_sprites.h"
 #include "tv.h"
+#include "util.h"
 #include "wallclock.h"
 #include "window.h"
 #include "constants/battle_frontier.h"
@@ -4657,6 +4662,300 @@ static bool32 Teishokuya_CanToggleGigantamax(struct Pokemon *mon)
 
     return gSpeciesInfo[species].isGigantamax
         || DoesSpeciesHaveFormChangeMethod(species, FORM_CHANGE_BATTLE_GIGANTAMAX);
+}
+
+#define TEISHOKUYA_MEAL_SPRITE_NONE 0xFF
+#define TEISHOKUYA_MEAL_INVALID_PIC 0xFFFF
+#define TEISHOKUYA_MEAL_BG_COLOR RGB(31, 25, 27)
+
+struct TeishokuyaMealScene
+{
+    u8 selectedSlot;
+    u8 centerSpriteId;
+    u8 playerSpriteId;
+    u8 iconSpriteIds[PARTY_SIZE];
+    u8 iconCount;
+    u8 surroundBlend;
+};
+
+static EWRAM_DATA struct TeishokuyaMealScene *sTeishokuyaMealScene = NULL;
+
+static void CB2_TeishokuyaMealScene(void);
+static void VBlankCB_TeishokuyaMealScene(void);
+static void Task_TeishokuyaMealScene(u8 taskId);
+static void TeishokuyaMealScene_CreateCenterMon(void);
+static void TeishokuyaMealScene_CreateSurroundingSprites(void);
+static void TeishokuyaMealScene_BlendSurroundingSprites(u8 blend);
+static void TeishokuyaMealScene_StartBounce(void);
+static void SpriteCB_TeishokuyaMealBounce(struct Sprite *sprite);
+static void TeishokuyaMealScene_Destroy(void);
+
+static const struct Coords16 sTeishokuyaMealIconCoords[PARTY_SIZE - 1] =
+{
+    { 56,  48},
+    {184,  48},
+    { 40, 104},
+    {200, 104},
+    {168, 132},
+};
+
+static void CB2_TeishokuyaMealScene(void)
+{
+    RunTasks();
+    AnimateSprites();
+    BuildOamBuffer();
+    UpdatePaletteFade();
+}
+
+static void VBlankCB_TeishokuyaMealScene(void)
+{
+    LoadOam();
+    ProcessSpriteCopyRequests();
+    TransferPlttBuffer();
+}
+
+static void TeishokuyaMealScene_ReturnToField(void)
+{
+    TeishokuyaMealScene_Destroy();
+    SetMainCallback2(CB2_ReturnToFieldContinueScript);
+}
+
+void Special_TeishokuyaPlayMealScene(void)
+{
+    u32 i;
+
+    if (!Teishokuya_IsValidSelectedPartyMon())
+    {
+        SetMainCallback2(CB2_ReturnToFieldContinueScript);
+        return;
+    }
+
+    sTeishokuyaMealScene = AllocZeroed(sizeof(*sTeishokuyaMealScene));
+    if (sTeishokuyaMealScene == NULL)
+    {
+        SetMainCallback2(CB2_ReturnToFieldContinueScript);
+        return;
+    }
+
+    sTeishokuyaMealScene->selectedSlot = gSpecialVar_0x8004;
+    sTeishokuyaMealScene->centerSpriteId = TEISHOKUYA_MEAL_SPRITE_NONE;
+    sTeishokuyaMealScene->playerSpriteId = TEISHOKUYA_MEAL_SPRITE_NONE;
+    for (i = 0; i < ARRAY_COUNT(sTeishokuyaMealScene->iconSpriteIds); i++)
+        sTeishokuyaMealScene->iconSpriteIds[i] = TEISHOKUYA_MEAL_SPRITE_NONE;
+
+    SetVBlankHBlankCallbacksToNull();
+    ResetVramOamAndBgCntRegs();
+    ResetPaletteFade();
+    ResetSpriteData();
+    FreeAllSpritePalettes();
+    ResetAllPicSprites();
+    LoadMonIconPalettes();
+    SetBackdropFromColor(TEISHOKUYA_MEAL_BG_COLOR);
+    SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_ON | DISPCNT_OBJ_1D_MAP);
+
+    TeishokuyaMealScene_CreateCenterMon();
+    if (sTeishokuyaMealScene->centerSpriteId == TEISHOKUYA_MEAL_SPRITE_NONE)
+    {
+        TeishokuyaMealScene_ReturnToField();
+        return;
+    }
+
+    BlendPalettes(PALETTES_ALL, 16, RGB_BLACK);
+    BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
+    CreateTask(Task_TeishokuyaMealScene, 0);
+    SetVBlankCallback(VBlankCB_TeishokuyaMealScene);
+    SetMainCallback2(CB2_TeishokuyaMealScene);
+}
+
+static void TeishokuyaMealScene_CreateCenterMon(void)
+{
+    struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][sTeishokuyaMealScene->selectedSlot];
+    enum Species species = GetMonData(mon, MON_DATA_SPECIES_OR_EGG);
+    u32 personality = GetMonData(mon, MON_DATA_PERSONALITY);
+    bool32 isShiny = GetMonData(mon, MON_DATA_IS_SHINY);
+    u16 spriteId;
+
+    spriteId = CreateMonPicSprite(species, isShiny, personality, TRUE, 120, 64, 0, species);
+    if (spriteId == TEISHOKUYA_MEAL_INVALID_PIC)
+        return;
+
+    sTeishokuyaMealScene->centerSpriteId = spriteId;
+    gSprites[spriteId].subpriority = 1;
+}
+
+static void TeishokuyaMealScene_CreateSurroundingSprites(void)
+{
+    u32 i;
+    u32 iconPos = 0;
+    u16 playerSpriteId;
+
+    for (i = 0; i < PARTY_SIZE && iconPos < ARRAY_COUNT(sTeishokuyaMealIconCoords); i++)
+    {
+        struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][i];
+        enum Species species;
+        u32 personality;
+        u8 spriteId;
+
+        if (i == sTeishokuyaMealScene->selectedSlot)
+            continue;
+        if (GetMonData(mon, MON_DATA_SPECIES_OR_EGG) == SPECIES_NONE
+         || GetMonData(mon, MON_DATA_IS_EGG))
+            continue;
+
+        species = GetMonData(mon, MON_DATA_SPECIES_OR_EGG);
+        personality = GetMonData(mon, MON_DATA_PERSONALITY);
+        spriteId = CreateMonIcon(species, SpriteCallbackDummy, sTeishokuyaMealIconCoords[iconPos].x, sTeishokuyaMealIconCoords[iconPos].y, 2, personality);
+        sTeishokuyaMealScene->iconSpriteIds[sTeishokuyaMealScene->iconCount++] = spriteId;
+        iconPos++;
+    }
+
+    playerSpriteId = CreateTrainerPicSprite(PlayerGenderToFrontTrainerPicId(gSaveBlock2Ptr->playerGender), TRUE, 120, 128, 7, GetTrainerPicTag(PlayerGenderToFrontTrainerPicId(gSaveBlock2Ptr->playerGender), TRUE));
+    if (playerSpriteId != TEISHOKUYA_MEAL_INVALID_PIC)
+    {
+        sTeishokuyaMealScene->playerSpriteId = playerSpriteId;
+        gSprites[playerSpriteId].subpriority = 3;
+    }
+
+    sTeishokuyaMealScene->surroundBlend = 16;
+    TeishokuyaMealScene_BlendSurroundingSprites(sTeishokuyaMealScene->surroundBlend);
+}
+
+static void TeishokuyaMealScene_BlendSpritePalette(u8 spriteId, u8 blend)
+{
+    if (spriteId != TEISHOKUYA_MEAL_SPRITE_NONE && spriteId < MAX_SPRITES && gSprites[spriteId].inUse)
+        BlendPalette(OBJ_PLTT_ID(gSprites[spriteId].oam.paletteNum), 16, blend, RGB_BLACK);
+}
+
+static void TeishokuyaMealScene_BlendSurroundingSprites(u8 blend)
+{
+    u32 i;
+
+    for (i = 0; i < sTeishokuyaMealScene->iconCount; i++)
+        TeishokuyaMealScene_BlendSpritePalette(sTeishokuyaMealScene->iconSpriteIds[i], blend);
+    TeishokuyaMealScene_BlendSpritePalette(sTeishokuyaMealScene->playerSpriteId, blend);
+}
+
+static void TeishokuyaMealScene_StartBounceSprite(u8 spriteId)
+{
+    if (spriteId != TEISHOKUYA_MEAL_SPRITE_NONE && spriteId < MAX_SPRITES && gSprites[spriteId].inUse)
+    {
+        gSprites[spriteId].data[0] = 0;
+        gSprites[spriteId].callback = SpriteCB_TeishokuyaMealBounce;
+    }
+}
+
+static void TeishokuyaMealScene_StartBounce(void)
+{
+    u32 i;
+
+    TeishokuyaMealScene_StartBounceSprite(sTeishokuyaMealScene->centerSpriteId);
+    TeishokuyaMealScene_StartBounceSprite(sTeishokuyaMealScene->playerSpriteId);
+    for (i = 0; i < sTeishokuyaMealScene->iconCount; i++)
+        TeishokuyaMealScene_StartBounceSprite(sTeishokuyaMealScene->iconSpriteIds[i]);
+}
+
+static void SpriteCB_TeishokuyaMealBounce(struct Sprite *sprite)
+{
+    static const s8 sBounceOffsets[] =
+    {
+        0, -2, -4, -5, -4, -2, 0, 1, 0,
+        0, -2, -4, -5, -4, -2, 0, 1, 0,
+        0, -2, -4, -5, -4, -2, 0, 1, 0,
+    };
+
+    if (sprite->data[0] < ARRAY_COUNT(sBounceOffsets))
+    {
+        sprite->y2 = sBounceOffsets[sprite->data[0]];
+        sprite->data[0]++;
+    }
+    else
+    {
+        sprite->y2 = 0;
+        sprite->callback = SpriteCallbackDummy;
+    }
+}
+
+static void Task_TeishokuyaMealScene(u8 taskId)
+{
+    switch (gTasks[taskId].data[0])
+    {
+    case 0:
+        if (!gPaletteFade.active)
+        {
+            gTasks[taskId].data[1] = 30;
+            gTasks[taskId].data[0]++;
+        }
+        break;
+    case 1:
+        if (--gTasks[taskId].data[1] == 0)
+        {
+            TeishokuyaMealScene_CreateSurroundingSprites();
+            gTasks[taskId].data[0]++;
+        }
+        break;
+    case 2:
+        if (sTeishokuyaMealScene->surroundBlend != 0)
+        {
+            sTeishokuyaMealScene->surroundBlend--;
+            TeishokuyaMealScene_BlendSurroundingSprites(sTeishokuyaMealScene->surroundBlend);
+        }
+        else
+        {
+            PlaySE(SE_M_BITE);
+            TeishokuyaMealScene_StartBounce();
+            gTasks[taskId].data[1] = 30;
+            gTasks[taskId].data[0]++;
+        }
+        break;
+    case 3:
+        if (gTasks[taskId].data[1] == 20 || gTasks[taskId].data[1] == 10)
+            PlaySE(SE_M_BITE);
+        if (--gTasks[taskId].data[1] == 0)
+        {
+            gTasks[taskId].data[1] = 60;
+            gTasks[taskId].data[0]++;
+        }
+        break;
+    case 4:
+        if (--gTasks[taskId].data[1] == 0)
+        {
+            BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
+            gTasks[taskId].data[0]++;
+        }
+        break;
+    case 5:
+        if (!gPaletteFade.active)
+        {
+            DestroyTask(taskId);
+            TeishokuyaMealScene_ReturnToField();
+        }
+        break;
+    }
+}
+
+static void TeishokuyaMealScene_Destroy(void)
+{
+    u32 i;
+
+    if (sTeishokuyaMealScene == NULL)
+        return;
+
+    for (i = 0; i < sTeishokuyaMealScene->iconCount; i++)
+    {
+        u8 spriteId = sTeishokuyaMealScene->iconSpriteIds[i];
+        if (spriteId != TEISHOKUYA_MEAL_SPRITE_NONE && spriteId < MAX_SPRITES && gSprites[spriteId].inUse)
+            FreeAndDestroyMonIconSprite(&gSprites[spriteId]);
+    }
+    if (sTeishokuyaMealScene->centerSpriteId != TEISHOKUYA_MEAL_SPRITE_NONE)
+        FreeAndDestroyMonPicSprite(sTeishokuyaMealScene->centerSpriteId);
+    if (sTeishokuyaMealScene->playerSpriteId != TEISHOKUYA_MEAL_SPRITE_NONE)
+        FreeAndDestroyTrainerPicSprite(sTeishokuyaMealScene->playerSpriteId);
+
+    FreeMonIconPalettes();
+    ResetSpriteData();
+    FreeAllSpritePalettes();
+    Free(sTeishokuyaMealScene);
+    sTeishokuyaMealScene = NULL;
 }
 
 void Special_TeishokuyaChangeTeraType(void)

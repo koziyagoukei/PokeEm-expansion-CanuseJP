@@ -5,6 +5,7 @@
 
 ALIGNED(4)
 const u8 gText_ExpandedPlaceholder_Empty[] = _("");
+const u8 gText_OnlyOneFrontierBannedPokemon[] = _("{JPN}とくべつなポケモンは1ぴきまで！");
 const u8 gText_ExpandedPlaceholder_Kun[] = _("{JPN}くん");
 const u8 gText_ExpandedPlaceholder_Chan[] = _("{JPN}ちゃん");
 const u8 gText_ExpandedPlaceholder_Sapphire[] = _("{JPN}サファイア");

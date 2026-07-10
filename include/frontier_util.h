@@ -5,6 +5,11 @@
 
 struct Pokemon;
 
+#define FRONTIER_MON_FILTER_NONE                     0
+#define FRONTIER_MON_FILTER_SPECIAL_STONE            1
+#define FRONTIER_MON_FILTER_BANNED_SPECIES           2
+#define FRONTIER_MON_FILTER_SPECIAL_STONE_NOT_BANNED 3
+
 void CallFrontierUtilFunc(void);
 u8 GetFrontierBrainStatus(void);
 void CopyFrontierTrainerText(u8 whichText, u16 trainerId);
@@ -27,6 +32,8 @@ void SetFrontierBrainObjEventGfx(u8 facility);
 u16 GetFrontierBrainMonMove(u8 monId, u8 moveSlotId);
 u8 GetFrontierBrainMonNature(u8 monId);
 u8 GetFrontierBrainMonEvs(u8 monId, u8 evStatId);
+bool8 IsFrontierSpeciesBannedByCurrentRules(enum Species species);
+bool8 IsFrontierSpeciesSubjectToBannedLimit(enum Species species);
 s32 GetFronterBrainSymbol(void);
 void ClearEnemyPartyAfterChallenge(void);
 bool8 IsFrontierTrainerFemale(u16 trainerId);
@@ -40,6 +47,7 @@ u8 GetFrontierTrainerFacilityClass(u16 trainerId);
 void GetFrontierTrainerName(u8 *dst, u16 trainerId);
 u16 GetRandomFrontierMonFromSet(u16 trainerId);
 u16 GetRandomFrontierMonFromFullPool(const u16 *selectedMonIds, u8 selectedCount, const u16 *excludedMonIds, u8 excludedMonIdCount, const enum Species *excludedSpecies, u8 excludedSpeciesCount);
+u16 GetRandomFrontierMonFromFullPoolWithFilter(const u16 *selectedMonIds, u8 selectedCount, const u16 *excludedMonIds, u8 excludedMonIdCount, const enum Species *excludedSpecies, u8 excludedSpeciesCount, u8 filter);
 void RestoreTemporaryFrontierLevel50BeforeSave(struct Pokemon *mon, u16 partyIndex);
 void FrontierSpeechToString(const u16 *words);
 u8 SetFacilityPtrsGetLevel(void);

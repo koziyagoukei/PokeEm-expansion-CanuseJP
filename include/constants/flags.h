@@ -1545,7 +1545,8 @@
 
 #define FLAG_RECEIVED_ULTRA_FRONTIE_HUB_INITIAL_PARTY (SYSTEM_FLAGS + 0x85)
 #define FLAG_UNUSED_0x8E5                           FLAG_RECEIVED_ULTRA_FRONTIE_HUB_INITIAL_PARTY
-#define FLAG_UNUSED_0x8E6                           (SYSTEM_FLAGS + 0x86) // Unused Flag
+#define FLAG_FRONTIER_ALLOW_BANNED_SPECIES          (SYSTEM_FLAGS + 0x86)
+#define FLAG_UNUSED_0x8E6                           FLAG_FRONTIER_ALLOW_BANNED_SPECIES
 #define FLAG_UNUSED_0x8E7                           (SYSTEM_FLAGS + 0x87) // Unused Flag
 #define FLAG_UNUSED_0x8E8                           (SYSTEM_FLAGS + 0x88) // Unused Flag
 #define FLAG_UNUSED_0x8E9                           (SYSTEM_FLAGS + 0x89) // Unused Flag

@@ -44,7 +44,6 @@ BATTLE_ONLY_FLAGS = {
     "isGigantamax",
     "isTeraForm",
     "isTotem",
-    "isFrontierBanned",
 }
 
 BATTLE_ONLY_NAME_PARTS = (
@@ -559,77 +558,116 @@ def parse_species_info(values: dict[str, int], order: dict[str, int]) -> dict[st
     macros = parse_stat_macros()
     species_data: dict[str, SpeciesData] = {}
 
+    def add_species_data(species: str, block: str) -> None:
+        if species not in values:
+            return
+
+        stats = {key: get_scalar_field(block, field, macros) for key, field in STAT_FIELDS.items()}
+
+        type_match = re.search(r"\.types\s*=\s*MON_TYPES\(([^)]*)\)", block, re.S)
+        type1 = "TYPE_NORMAL"
+        type2 = "TYPE_NORMAL"
+        if type_match:
+            type_tokens = [token.strip() for token in type_match.group(1).split(",") if token.strip()]
+            if type_tokens:
+                type1 = resolve_type_token(type_tokens[0], macros)
+                type2 = resolve_type_token(type_tokens[1], macros) if len(type_tokens) > 1 else type1
+
+        ability_match = re.search(r"\.abilities\s*=\s*\{([^}]*)\}", block, re.S)
+        abilities = re.findall(r"ABILITY_[A-Z0-9_]+", ability_match.group(1)) if ability_match else []
+        while len(abilities) < 3:
+            abilities.append("ABILITY_NONE")
+        abilities = abilities[:3]
+
+        level_match = re.search(r"\.levelUpLearnset\s*=\s*(s[A-Za-z0-9_]+LevelUpLearnset)", block)
+        form_match = re.search(r"\.formChangeTable\s*=\s*(s[A-Za-z0-9_]+FormChangeTable)", block)
+
+        flags = {
+            flag
+            for flag in (
+                "isRestrictedLegendary",
+                "isSubLegendary",
+                "isMythical",
+                "isUltraBeast",
+                "isParadox",
+                "isTotem",
+                "isMegaEvolution",
+                "isPrimalReversion",
+                "isUltraBurst",
+                "isGigantamax",
+                "isTeraForm",
+                "isFrontierBanned",
+            )
+            if re.search(rf"\.{flag}\s*=\s*TRUE", block)
+        }
+
+        evolutions: list[str] = []
+        evo_start = block.find(".evolutions")
+        if evo_start >= 0:
+            evo_text = block[evo_start:]
+            for target in re.findall(r"SPECIES_[A-Z0-9_]+", evo_text):
+                if target != species and target != "SPECIES_NONE":
+                    evolutions.append(target)
+
+        species_data[species] = SpeciesData(
+            species=species,
+            value=values[species],
+            order=order.get(species, len(order)),
+            stats=stats,
+            type1=type1,
+            type2=type2,
+            abilities=abilities,
+            level_up_table=level_match.group(1) if level_match else None,
+            form_change_table=form_match.group(1) if form_match else None,
+            evolutions=evolutions,
+            flags=flags,
+        )
+
+    def parse_function_macros(text: str) -> dict[str, tuple[list[str], str]]:
+        function_macros: dict[str, tuple[list[str], str]] = {}
+        lines = text.splitlines()
+        i = 0
+        while i < len(lines):
+            match = re.match(r"\s*#define\s+([A-Z0-9_]+_SPECIES_INFO)\(([^)]*)\)\s*(.*)", lines[i])
+            if not match:
+                i += 1
+                continue
+
+            name = match.group(1)
+            params = [param.strip() for param in match.group(2).split(",") if param.strip()]
+            body_parts = [match.group(3).rstrip("\\").strip()]
+            while lines[i].rstrip().endswith("\\") and i + 1 < len(lines):
+                i += 1
+                body_parts.append(lines[i].rstrip().rstrip("\\").strip())
+            function_macros[name] = (params, "\n".join(body_parts))
+            i += 1
+        return function_macros
+
+    def expand_macro_body(body: str, params: list[str], args: list[str]) -> str:
+        expanded = body
+        for param, arg in zip(params, args):
+            expanded = re.sub(rf"\b{re.escape(param)}\b", arg.strip(), expanded)
+        return expanded.replace("##", "")
+
     for path in sorted(SPECIES_INFO_DIR.glob("gen_*_families.h")):
         text = read_text(path)
+        function_macros = parse_function_macros(text)
+
         for match in re.finditer(r"\[(SPECIES_[A-Z0-9_]+)\]\s*=\s*\{", text):
             species = match.group(1)
             start = text.find("{", match.start())
             end = find_matching_brace(text, start)
             block = text[start : end + 1]
+            add_species_data(species, block)
 
-            if species not in values:
+        for match in re.finditer(r"\[(SPECIES_[A-Z0-9_]+)\]\s*=\s*([A-Z0-9_]+_SPECIES_INFO)\(([^)]*)\)", text):
+            species = match.group(1)
+            macro = match.group(2)
+            if species in species_data or macro not in function_macros:
                 continue
-
-            stats = {key: get_scalar_field(block, field, macros) for key, field in STAT_FIELDS.items()}
-
-            type_match = re.search(r"\.types\s*=\s*MON_TYPES\(([^)]*)\)", block, re.S)
-            type1 = "TYPE_NORMAL"
-            type2 = "TYPE_NORMAL"
-            if type_match:
-                type_tokens = [token.strip() for token in type_match.group(1).split(",") if token.strip()]
-                if type_tokens:
-                    type1 = resolve_type_token(type_tokens[0], macros)
-                    type2 = resolve_type_token(type_tokens[1], macros) if len(type_tokens) > 1 else type1
-
-            ability_match = re.search(r"\.abilities\s*=\s*\{([^}]*)\}", block, re.S)
-            abilities = re.findall(r"ABILITY_[A-Z0-9_]+", ability_match.group(1)) if ability_match else []
-            while len(abilities) < 3:
-                abilities.append("ABILITY_NONE")
-            abilities = abilities[:3]
-
-            level_match = re.search(r"\.levelUpLearnset\s*=\s*(s[A-Za-z0-9_]+LevelUpLearnset)", block)
-            form_match = re.search(r"\.formChangeTable\s*=\s*(s[A-Za-z0-9_]+FormChangeTable)", block)
-
-            flags = {
-                flag
-                for flag in (
-                    "isRestrictedLegendary",
-                    "isSubLegendary",
-                    "isMythical",
-                    "isUltraBeast",
-                    "isParadox",
-                    "isTotem",
-                    "isMegaEvolution",
-                    "isPrimalReversion",
-                    "isUltraBurst",
-                    "isGigantamax",
-                    "isTeraForm",
-                    "isFrontierBanned",
-                )
-                if re.search(rf"\.{flag}\s*=\s*TRUE", block)
-            }
-
-            evolutions: list[str] = []
-            evo_start = block.find(".evolutions")
-            if evo_start >= 0:
-                evo_text = block[evo_start:]
-                for target in re.findall(r"SPECIES_[A-Z0-9_]+", evo_text):
-                    if target != species and target != "SPECIES_NONE":
-                        evolutions.append(target)
-
-            species_data[species] = SpeciesData(
-                species=species,
-                value=values[species],
-                order=order.get(species, len(order)),
-                stats=stats,
-                type1=type1,
-                type2=type2,
-                abilities=abilities,
-                level_up_table=level_match.group(1) if level_match else None,
-                form_change_table=form_match.group(1) if form_match else None,
-                evolutions=evolutions,
-                flags=flags,
-            )
+            params, body = function_macros[macro]
+            args = [arg.strip() for arg in match.group(3).split(",")]
+            add_species_data(species, expand_macro_body(body, params, args))
 
     return species_data
 

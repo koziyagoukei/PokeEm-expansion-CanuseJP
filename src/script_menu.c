@@ -360,7 +360,7 @@ static void DrawMultichoiceMenuDynamic(u8 left, u8 top, u8 argc, struct ListMenu
     }
     LoadMessageBoxAndBorderGfx();
     windowHeight = (argc < maxBeforeScroll) ? argc * 2 : maxBeforeScroll * 2;
-    newWidth = ConvertPixelWidthToTileWidth(width);
+    newWidth = ConvertPixelWidthToTileWidth(width + sScriptableListMenuTemplate.item_X + 8);
     left = ScriptMenu_AdjustLeftCoordFromWidth(left, newWidth);
     windowId = CreateWindowFromRect(left, top, newWidth, windowHeight);
     SetStandardWindowBorderStyle(windowId, FALSE);

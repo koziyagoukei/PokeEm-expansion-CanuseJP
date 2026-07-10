@@ -90,8 +90,7 @@ PartyEatTime_EventScript_AfterOrder::
 	fadescreen FADE_TO_BLACK
 	playse SE_BIKE_BELL
 	waitse
-	delay 60
-	fadescreen FADE_FROM_BLACK
+	special Special_TeishokuyaPlayMealScene
 	special Special_TeishokuyaIncreasePartyFriendship
 	msgbox PartyEatTime_Text_Satisfied, MSGBOX_DEFAULT
 	release
@@ -120,7 +119,7 @@ PartyEatTime_Text_ChooseMealMon:
 	.string "{JPN}あ? めし?$"
 
 PartyEatTime_Text_ChooseMenu:
-	.string "{JPN}オラ メニューだ なにを くう?$"
+	.string "{JPN}オラ メニューだ なにをくう?$"
 
 PartyEatTime_Text_Satisfied:
 	.string "{JPN}{STR_VAR_1}たちは まんぞくしたようだ!$"
@@ -129,22 +128,22 @@ PartyEatTime_Text_CantChooseEgg:
 	.string "{JPN}タマゴに くわせる メシは ねえぞ$"
 
 PartyEatTime_Text_ComeAgain:
-	.string "{JPN}……また くいに こいよ$"
+	.string "{JPN}……また くいに こいや$"
 
 PartyEatTime_Text_TypeNormal:
 	.string "{JPN}いつものすうどん$"
 
 PartyEatTime_Text_TypeFire:
-	.string "{JPN}ろうそくカラメルプリン$"
+	.string "{JPN}ろうそくプリン$"
 
 PartyEatTime_Text_TypeGrass:
-	.string "{JPN}くさつきにんじんまるかじり$"
+	.string "{JPN}くさごとかしわもち$"
 
 PartyEatTime_Text_TypeWater:
 	.string "{JPN}みずみずしいギョーザ$"
 
 PartyEatTime_Text_TypeElectric:
-	.string "{JPN}しょっぱみビリビリがゆ$"
+	.string "{JPN}しおみビリビリがゆ$"
 
 PartyEatTime_Text_TypeIce:
 	.string "{JPN}こなゆきかきごおり$"
@@ -159,22 +158,22 @@ PartyEatTime_Text_TypeGround:
 	.string "{JPN}つちいろトリュフ$"
 
 PartyEatTime_Text_TypeFlying:
-	.string "{JPN}ひこうしょうじょのたまごやき$"
+	.string "{JPN}ひこうきグミ$"
 
 PartyEatTime_Text_TypePsychic:
-	.string "{JPN}エスパーにおまかせドン$"
+	.string "{JPN}エスパーおまかせドン$"
 
 PartyEatTime_Text_TypeBug:
 	.string "{JPN}ミツミツむしパン$"
 
 PartyEatTime_Text_TypeRock:
-	.string "{JPN}いわノリノリおこのみやき$"
+	.string "{JPN}いわノリノリビーフン$"
 
 PartyEatTime_Text_TypeGhost:
 	.string "{JPN}ばけのかおチップス$"
 
 PartyEatTime_Text_TypeDragon:
-	.string "{JPN}たつのおろしていしょく$"
+	.string "{JPN}たつのこていしょく$"
 
 PartyEatTime_Text_TypeDark:
 	.string "{JPN}あくぬきさんさいそば$"
@@ -183,10 +182,10 @@ PartyEatTime_Text_TypeSteel:
 	.string "{JPN}ハガネのビスケット$"
 
 PartyEatTime_Text_TypeFairy:
-	.string "{JPN}フェアリーパンケーキ$"
+	.string "{JPN}フェアリーばえケーキ$"
 
 PartyEatTime_Text_TypeStellar:
-	.string "{JPN}まかないごはん$"
+	.string "{JPN}にじいろまかない$"
 
 PartyEatTime_Text_Gigantamax:
 	.string "{JPN}マックスやくぜんなべ$"

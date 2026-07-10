@@ -1352,6 +1352,7 @@ extern const u8 gText_ChoosePokemon2[];
 extern const u8 gText_NotEnoughHp[];
 extern const u8 gText_PokemonAreNeeded[];
 extern const u8 gText_PokemonCantBeSame[];
+extern const u8 gText_OnlyOneFrontierBannedPokemon[];
 extern const u8 gText_NoIdenticalHoldItems[];
 extern const u8 gText_DoWhatWithPokemon[];
 extern const u8 gText_RestoreWhichMove[];

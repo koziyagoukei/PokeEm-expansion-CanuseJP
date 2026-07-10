@@ -19,8 +19,10 @@
 #include "constants/abilities.h"
 #include "constants/battle_frontier.h"
 #include "constants/battle_frontier_mons.h"
+#include "constants/flags.h"
 
 static void FillTrainerParty(u16 trainerId, enum BattleTrainer trainer, u8 monCount);
+static u8 GetForcedFrontierMonPoolFilter(u8 partySlot, u8 monCount);
 static bool32 TryGetOpponentPartySlot(const struct Pokemon *mon, enum BattleTrainer *trainer, u32 *slot);
 static void ClearFacilityOpponentGimmickSources(void);
 static void MarkFrontierOpponentPartyGimmicksForTrainer(enum BattleTrainer trainer);
@@ -207,6 +209,27 @@ void FillFrontierTrainersParties(u8 monsCount)
     FillTrainerParty(TRAINER_BATTLE_PARAM.opponentB, B_TRAINER_OPPONENT_B, monsCount);
 }
 
+static u8 GetForcedFrontierMonPoolFilter(u8 partySlot, u8 monCount)
+{
+    bool8 forceSpecialStone = gSaveBlock2Ptr->frontier.curChallengeBattleNum >= 3;
+    bool8 forceBannedSpecies = forceSpecialStone && FlagGet(FLAG_FRONTIER_ALLOW_BANNED_SPECIES);
+
+    if (!forceSpecialStone)
+        return FRONTIER_MON_FILTER_NONE;
+
+    if (partySlot == 0)
+    {
+        if (forceBannedSpecies && monCount > 1)
+            return FRONTIER_MON_FILTER_SPECIAL_STONE_NOT_BANNED;
+        return FRONTIER_MON_FILTER_SPECIAL_STONE;
+    }
+
+    if (forceBannedSpecies && partySlot == 1)
+        return FRONTIER_MON_FILTER_BANNED_SPECIES;
+
+    return FRONTIER_MON_FILTER_NONE;
+}
+
 static void FillTrainerParty(u16 trainerId, enum BattleTrainer trainer, u8 monCount)
 {
     s32 i, j;
@@ -262,7 +285,8 @@ static void FillTrainerParty(u16 trainerId, enum BattleTrainer trainer, u8 monCo
     otID = Random32();
     while (i != monCount)
     {
-        u16 monId = GetRandomFrontierMonFromFullPool(chosenMonIndices, i, NULL, 0, NULL, 0);
+        u8 poolFilter = GetForcedFrontierMonPoolFilter(i, monCount);
+        u16 monId = GetRandomFrontierMonFromFullPoolWithFilter(chosenMonIndices, i, NULL, 0, NULL, 0, poolFilter);
 
         chosenMonIndices[i] = monId;
 

@@ -7457,7 +7457,7 @@ static bool8 GetBattleEntryEligibility(struct Pokemon *mon)
         return TRUE;
     default: // Battle Frontier
         species = GetMonData(mon, MON_DATA_SPECIES);
-        if (gSpeciesInfo[species].isFrontierBanned)
+        if (IsFrontierSpeciesBannedByCurrentRules(species))
             return FALSE;
         return TRUE;
     }
@@ -7491,6 +7491,13 @@ static u8 CheckBattleEntriesAndGetMessage(void)
         return 0xFF;
 
     maxBattlers = GetMaxBattleEntries();
+    for (i = 0, j = 0; i < maxBattlers; i++)
+    {
+        enum Species species = GetMonData(&party[order[i] - 1], MON_DATA_SPECIES);
+        if (IsFrontierSpeciesSubjectToBannedLimit(species) && ++j > 1)
+            return PARTY_MSG_ONLY_ONE_FRONTIER_BANNED;
+    }
+
     for (i = 0; i < maxBattlers - 1; i++)
     {
         enum Species species = GetMonData(&party[order[i] - 1], MON_DATA_SPECIES);

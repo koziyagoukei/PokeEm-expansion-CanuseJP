@@ -746,6 +746,7 @@ static const u8 *const sActionStringTable[] =
     [PARTY_MSG_X_MONS_ARE_NEEDED]      = gText_PokemonAreNeeded,
     [PARTY_MSG_MONS_CANT_BE_SAME]      = gText_PokemonCantBeSame,
     [PARTY_MSG_NO_SAME_HOLD_ITEMS]     = gText_NoIdenticalHoldItems,
+    [PARTY_MSG_ONLY_ONE_FRONTIER_BANNED] = gText_OnlyOneFrontierBannedPokemon,
     [PARTY_MSG_UNUSED]                 = gText_EmptyString2,
     [PARTY_MSG_DO_WHAT_WITH_MON]       = gText_DoWhatWithPokemon,
     [PARTY_MSG_RESTORE_WHICH_MOVE]     = gText_RestoreWhichMove,

@@ -13,6 +13,7 @@
 #include "constants/battle_frontier.h"
 #include "constants/battle_frontier_mons.h"
 #include "constants/battle_tent.h"
+#include "constants/flags.h"
 #include "constants/frontier_util.h"
 #include "constants/layouts.h"
 #include "constants/trainers.h"
@@ -33,6 +34,7 @@ static void SetPerformedRentalSwap(void);
 static void SetRentalsToOpponentParty(void);
 static void SetPlayerAndOpponentParties(void);
 static void SetOpponentGfxVar(void);
+static u8 GetForcedFactoryOpponentMonPoolFilter(u8 partySlot, u8 monCount);
 static void GenerateOpponentMons(void);
 static void GenerateInitialRentalMons(void);
 static void GetOpponentMostCommonMonType(void);
@@ -276,13 +278,35 @@ static void GenerateOpponentMons(void)
 
     while (i != FRONTIER_PARTY_SIZE)
     {
-        u16 monId = GetRandomFrontierMonFromFullPool(selectedMonIds, i, NULL, 0, excludedSpecies, excludedSpeciesCount);
+        u8 poolFilter = GetForcedFactoryOpponentMonPoolFilter(i, FRONTIER_PARTY_SIZE);
+        u16 monId = GetRandomFrontierMonFromFullPoolWithFilter(selectedMonIds, i, NULL, 0, excludedSpecies, excludedSpeciesCount, poolFilter);
 
         // Successful selection
         selectedMonIds[i] = monId;
         gFrontierTempParty[i] = monId;
         i++;
     }
+}
+
+static u8 GetForcedFactoryOpponentMonPoolFilter(u8 partySlot, u8 monCount)
+{
+    bool8 forceSpecialStone = gSaveBlock2Ptr->frontier.curChallengeBattleNum >= 3;
+    bool8 forceBannedSpecies = forceSpecialStone && FlagGet(FLAG_FRONTIER_ALLOW_BANNED_SPECIES);
+
+    if (!forceSpecialStone)
+        return FRONTIER_MON_FILTER_NONE;
+
+    if (partySlot == 0)
+    {
+        if (forceBannedSpecies && monCount > 1)
+            return FRONTIER_MON_FILTER_SPECIAL_STONE_NOT_BANNED;
+        return FRONTIER_MON_FILTER_SPECIAL_STONE;
+    }
+
+    if (forceBannedSpecies && partySlot == 1)
+        return FRONTIER_MON_FILTER_BANNED_SPECIES;
+
+    return FRONTIER_MON_FILTER_NONE;
 }
 
 static void SetOpponentGfxVar(void)
@@ -659,7 +683,8 @@ void FillFactoryBrainParty(void)
 
     while (i != FRONTIER_PARTY_SIZE)
     {
-        u16 monId = GetRandomFrontierMonFromFullPool(selectedMonIds, i, excludedMonIds, excludedMonIdCount, excludedSpecies, ARRAY_COUNT(excludedSpecies));
+        u8 poolFilter = GetForcedFactoryOpponentMonPoolFilter(i, FRONTIER_PARTY_SIZE);
+        u16 monId = GetRandomFrontierMonFromFullPoolWithFilter(selectedMonIds, i, excludedMonIds, excludedMonIdCount, excludedSpecies, ARRAY_COUNT(excludedSpecies), poolFilter);
 
         selectedMonIds[i] = monId;
         CreateFacilityMon(&gFacilityTrainerMons[monId],
