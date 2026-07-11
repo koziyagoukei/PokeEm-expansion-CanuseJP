@@ -3,7 +3,7 @@
 A command was added to delete all FRLG maps at once. This doesn't save space in the ROM because the maps are not compiled in the ROM if you are compiling in "emerald mode". This solely exists for users that want to clean up their repo. The command is
 
 ```shell
-python dev_scripts/delete_frlg_maps.py
+This project no longer ships FRLG maps or the legacy FRLG map deletion helper.
 ```
 It will take care of all the map constants in the c files but you will need to fix mention the to fuschia city entrance in the `safari_zone.inc` script.
 

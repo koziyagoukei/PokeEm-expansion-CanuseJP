@@ -3,7 +3,6 @@
 #include "credits.h"
 #include "event_data.h"
 #include "hall_of_fame.h"
-#include "hall_of_fame_frlg.h"
 #include "load_save.h"
 #include "overworld.h"
 #include "script_pokemon_util.h"
@@ -113,7 +112,10 @@ bool8 EnterHallOfFame(void)
         SetGameStat(GAME_STAT_FIRST_HOF_PLAY_TIME, (gSaveBlock2Ptr->playTimeHours << 16) | (gSaveBlock2Ptr->playTimeMinutes << 8) | gSaveBlock2Ptr->playTimeSeconds);
     }
     SetContinueGameWarpStatus();
-    SetContinueGameWarpToHealLocation(HEAL_LOCATION_PALLET_TOWN);
+    if (gSaveBlock2Ptr->playerGender == MALE)
+        SetContinueGameWarpToHealLocation(HEAL_LOCATION_LITTLEROOT_TOWN_BRENDANS_HOUSE_2F);
+    else
+        SetContinueGameWarpToHealLocation(HEAL_LOCATION_LITTLEROOT_TOWN_MAYS_HOUSE_2F);
     gaveAtLeastOneRibbon = FALSE;
     for (i = 0, r7 = &ribbonState; i < PARTY_SIZE; i++)
     {
@@ -132,6 +134,6 @@ bool8 EnterHallOfFame(void)
         IncrementGameStat(GAME_STAT_RECEIVED_RIBBONS);
         FlagSet(FLAG_SYS_RIBBON_GET);
     }
-    SetMainCallback2(CB2_DoHallOfFameScreenFrlg);
+    SetMainCallback2(CB2_DoHallOfFameScreen);
     return FALSE;
 }

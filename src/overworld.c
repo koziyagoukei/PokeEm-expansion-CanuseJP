@@ -6,7 +6,6 @@
 #include "berry.h"
 #include "bg.h"
 #include "cable_club.h"
-#include "credits_frlg.h"
 #include "clock.h"
 #include "dexnav.h"
 #include "event_data.h"
@@ -82,6 +81,12 @@
 #include "constants/songs.h"
 #include "constants/trainer_hill.h"
 #include "constants/weather.h"
+
+#define CREDITSOVWLDCMD_FB      0xFB
+#define CREDITSOVWLDCMD_FC      0xFC
+#define CREDITSOVWLDCMD_END     0xFD
+#define CREDITSOVWLDCMD_LOADMAP 0xFE
+#define CREDITSOVWLDCMD_FF      0xFF
 
 STATIC_ASSERT((B_FLAG_FOLLOWERS_DISABLED == 0 || OW_FOLLOWERS_ENABLED), FollowersFlagAssignedWithoutEnablingThem);
 

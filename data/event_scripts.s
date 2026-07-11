@@ -75,6 +75,11 @@
 #include "constants/vars.h"
 #include "constants/weather.h"
 #include "constants/speaker_names.h"
+
+#define NPC_TEXT_COLOR_MALE    0
+#define NPC_TEXT_COLOR_FEMALE  1
+#define NPC_TEXT_COLOR_NEUTRAL 2
+
 	.include "asm/macros.inc"
 	.include "asm/macros/event.inc"
 	.include "constants/constants.inc"
@@ -605,28 +610,15 @@ gStdScripts_End::
 @ FRLG scripts
 
 	.include "data/scripts/trainer_tower.inc"
-	.include "data/scripts/fame_checker_frlg.inc"
-	.include "data/scripts/item_ball_scripts_frlg.inc"
 	.include "data/scripts/silphco_doors.inc"
-	.include "data/scripts/move_tutors_frlg.inc"
-	.include "data/scripts/cable_club_frlg.inc"
-	.include "data/scripts/trainer_card_frlg.inc"
-	.include "data/text/trainer_card_frlg.inc"
 	.include "data/scripts/mystery_event_club.inc"
-	.include "data/scripts/day_care_frlg.inc"
-	.include "data/text/day_care_frlg.inc"
 	.include "data/scripts/seagallop.inc"
 	.include "data/scripts/static_pokemon.inc"
 	.include "data/scripts/aide.inc"
 	.include "data/scripts/pokemon_mansion.inc"
 	.include "data/scripts/pokemon_league.inc"
 	.include "data/scripts/route23.inc"
-	.include "data/text/new_game_intro_frlg.inc"
-	.include "data/scripts/trainers_frlg.inc"
-	.include "data/text/trainers_frlg.inc"
-	.include "data/text/ingame_trade_frlg.inc"
 	.include "data/scripts/flavor_text.inc"
-	.include "data/scripts/pkmn_center_nurse_frlg.inc"
 
 .endif
 
@@ -634,7 +626,6 @@ gStdScripts_End::
 	.include "data/scripts/trainer_battle.inc"
 	.include "data/scripts/new_game.inc"
 	.include "data/scripts/hall_of_fame.inc"
-	.include "data/scripts/hall_of_fame_frlg.inc"
 
 	.include "data/scripts/config.inc"
 	.include "data/scripts/debug.inc"

@@ -56,11 +56,11 @@ DirectSoundWaveData_ethnic_flavours_hyoushigi::
 
 	.align 2
 DirectSoundWaveData_sc88pro_rnd_kick::
-	.incbin "sound/direct_sound_samples/sc88pro_rnd_kick.bin"
+	.incbin "build/extracted_sound/sound/direct_sound_samples/sc88pro_rnd_kick.bin"
 
 	.align 2
 DirectSoundWaveData_sc88pro_rnd_snare::
-	.incbin "sound/direct_sound_samples/sc88pro_rnd_snare.bin"
+	.incbin "build/extracted_sound/sound/direct_sound_samples/sc88pro_rnd_snare.bin"
 
 	.align 2
 DirectSoundWaveData_sc88pro_tr909_hand_clap::
@@ -68,7 +68,7 @@ DirectSoundWaveData_sc88pro_tr909_hand_clap::
 
 	.align 2
 DirectSoundWaveData_sc88pro_orchestra_snare::
-	.incbin "sound/direct_sound_samples/sc88pro_orchestra_snare.bin"
+	.incbin "build/extracted_sound/sound/direct_sound_samples/sc88pro_orchestra_snare.bin"
 
 	.align 2
 DirectSoundWaveData_unused_sc55_tom::
@@ -88,7 +88,7 @@ DirectSoundWaveData_unknown_bell::
 
 	.align 2
 DirectSoundWaveData_sc88pro_tambourine::
-	.incbin "sound/direct_sound_samples/sc88pro_tambourine.bin"
+	.incbin "build/extracted_sound/sound/direct_sound_samples/sc88pro_tambourine.bin"
 
 	.align 2
 DirectSoundWaveData_trinity_cymbal_crash::
@@ -96,15 +96,15 @@ DirectSoundWaveData_trinity_cymbal_crash::
 
 	.align 2
 DirectSoundWaveData_sc88pro_orchestra_cymbal_crash::
-	.incbin "sound/direct_sound_samples/sc88pro_orchestra_cymbal_crash.bin"
+	.incbin "build/extracted_sound/sound/direct_sound_samples/sc88pro_orchestra_cymbal_crash.bin"
 
 	.align 2
 DirectSoundWaveData_sc88pro_mute_high_conga::
-	.incbin "sound/direct_sound_samples/sc88pro_mute_high_conga.bin"
+	.incbin "build/extracted_sound/sound/direct_sound_samples/sc88pro_mute_high_conga.bin"
 
 	.align 2
 DirectSoundWaveData_sc88pro_open_low_conga::
-	.incbin "sound/direct_sound_samples/sc88pro_open_low_conga.bin"
+	.incbin "build/extracted_sound/sound/direct_sound_samples/sc88pro_open_low_conga.bin"
 
 	.align 2
 DirectSoundWaveData_drum_and_percussion_kick::
@@ -136,7 +136,7 @@ DirectSoundWaveData_sd90_open_triangle::
 
 	.align 2
 DirectSoundWaveData_sc88pro_jingle_bell::
-	.incbin "sound/direct_sound_samples/sc88pro_jingle_bell.bin"
+	.incbin "build/extracted_sound/sound/direct_sound_samples/sc88pro_jingle_bell.bin"
 
 	.align 2
 DirectSoundWaveData_ethnic_flavours_atarigane::
@@ -144,7 +144,7 @@ DirectSoundWaveData_ethnic_flavours_atarigane::
 
 	.align 2
 DirectSoundWaveData_sc88pro_taiko::
-	.incbin "sound/direct_sound_samples/sc88pro_taiko.bin"
+	.incbin "build/extracted_sound/sound/direct_sound_samples/sc88pro_taiko.bin"
 
 	.align 2
 DirectSoundWaveData_ethnic_flavours_kotsuzumi::
@@ -152,31 +152,31 @@ DirectSoundWaveData_ethnic_flavours_kotsuzumi::
 
 	.align 2
 DirectSoundWaveData_sc88pro_piano1_48::
-	.incbin "sound/direct_sound_samples/sc88pro_piano1_48.bin"
+	.incbin "build/extracted_sound/sound/direct_sound_samples/sc88pro_piano1_48.bin"
 
 	.align 2
 DirectSoundWaveData_sc88pro_piano1_60::
-	.incbin "sound/direct_sound_samples/sc88pro_piano1_60.bin"
+	.incbin "build/extracted_sound/sound/direct_sound_samples/sc88pro_piano1_60.bin"
 
 	.align 2
 DirectSoundWaveData_sc88pro_piano1_72::
-	.incbin "sound/direct_sound_samples/sc88pro_piano1_72.bin"
+	.incbin "build/extracted_sound/sound/direct_sound_samples/sc88pro_piano1_72.bin"
 
 	.align 2
 DirectSoundWaveData_sc88pro_piano1_84::
-	.incbin "sound/direct_sound_samples/sc88pro_piano1_84.bin"
+	.incbin "build/extracted_sound/sound/direct_sound_samples/sc88pro_piano1_84.bin"
 
 	.align 2
 DirectSoundWaveData_sc88pro_string_ensemble_60::
-	.incbin "sound/direct_sound_samples/sc88pro_string_ensemble_60.bin"
+	.incbin "build/extracted_sound/sound/direct_sound_samples/sc88pro_string_ensemble_60.bin"
 
 	.align 2
 DirectSoundWaveData_sc88pro_string_ensemble_72::
-	.incbin "sound/direct_sound_samples/sc88pro_string_ensemble_72.bin"
+	.incbin "build/extracted_sound/sound/direct_sound_samples/sc88pro_string_ensemble_72.bin"
 
 	.align 2
 DirectSoundWaveData_sc88pro_string_ensemble_84::
-	.incbin "sound/direct_sound_samples/sc88pro_string_ensemble_84.bin"
+	.incbin "build/extracted_sound/sound/direct_sound_samples/sc88pro_string_ensemble_84.bin"
 
 	.align 2
 DirectSoundWaveData_sc88pro_trumpet_60::
@@ -200,19 +200,19 @@ DirectSoundWaveData_sc88pro_tuba_51::
 
 	.align 2
 DirectSoundWaveData_sc88pro_french_horn_60::
-	.incbin "sound/direct_sound_samples/sc88pro_french_horn_60.bin"
+	.incbin "build/extracted_sound/sound/direct_sound_samples/sc88pro_french_horn_60.bin"
 
 	.align 2
 DirectSoundWaveData_sc88pro_french_horn_72::
-	.incbin "sound/direct_sound_samples/sc88pro_french_horn_72.bin"
+	.incbin "build/extracted_sound/sound/direct_sound_samples/sc88pro_french_horn_72.bin"
 
 	.align 2
 DirectSoundWaveData_sc88pro_flute::
-	.incbin "sound/direct_sound_samples/sc88pro_flute.bin"
+	.incbin "build/extracted_sound/sound/direct_sound_samples/sc88pro_flute.bin"
 
 	.align 2
 DirectSoundWaveData_sc88pro_fingered_bass::
-	.incbin "sound/direct_sound_samples/sc88pro_fingered_bass.bin"
+	.incbin "build/extracted_sound/sound/direct_sound_samples/sc88pro_fingered_bass.bin"
 
 	.align 2
 DirectSoundWaveData_unknown_koto_high::
@@ -268,7 +268,7 @@ DirectSoundWaveData_sd90_classical_detuned_ep1_high::
 
 	.align 2
 DirectSoundWaveData_sc88pro_timpani_with_snare::
-	.incbin "sound/direct_sound_samples/sc88pro_timpani_with_snare.bin"
+	.incbin "build/extracted_sound/sound/direct_sound_samples/sc88pro_timpani_with_snare.bin"
 
 	.align 2
 DirectSoundWaveData_unknown_synth_snare::
@@ -276,7 +276,7 @@ DirectSoundWaveData_unknown_synth_snare::
 
 	.align 2
 DirectSoundWaveData_sc88pro_square_wave::
-	.incbin "sound/direct_sound_samples/sc88pro_square_wave.bin"
+	.incbin "build/extracted_sound/sound/direct_sound_samples/sc88pro_square_wave.bin"
 
 	.align 2
 DirectSoundWaveData_bicycle_bell::
@@ -288,7 +288,7 @@ DirectSoundWaveData_unknown_1::
 
 	.align 2
 DirectSoundWaveData_sc88pro_pizzicato_strings::
-	.incbin "sound/direct_sound_samples/sc88pro_pizzicato_strings.bin"
+	.incbin "build/extracted_sound/sound/direct_sound_samples/sc88pro_pizzicato_strings.bin"
 
 	.align 2
 DirectSoundWaveData_unknown_2::
@@ -344,7 +344,7 @@ DirectSoundWaveData_trinity_big_boned::
 
 	.align 2
 DirectSoundWaveData_sc88pro_harp::
-	.incbin "sound/direct_sound_samples/sc88pro_harp.bin"
+	.incbin "build/extracted_sound/sound/direct_sound_samples/sc88pro_harp.bin"
 
 	.align 2
 DirectSoundWaveData_sc88pro_xylophone::
@@ -8756,7 +8756,7 @@ DirectSoundWaveData_unknown_18::
 
 	.align 2
 DirectSoundWaveData_sc88pro_nylon_str_guitar::
-	.incbin "sound/direct_sound_samples/sc88pro_nylon_str_guitar.bin"
+	.incbin "build/extracted_sound/sound/direct_sound_samples/sc88pro_nylon_str_guitar.bin"
 
 	.align 2
 DirectSoundWaveData_sd90_special_scream_drive::

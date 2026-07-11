@@ -136,7 +136,7 @@ static const u16 sDoorNullPalette49[16] = {};
 
 #if IS_FRLG
 
-static const u8 sDoorAnimTiles_GeneralFrlg[] = INCGFX_U8("graphics/door_anims/general_frlg.png", ".4bpp");
+static const u8 sDoorAnimTiles_GeneralFrlg[] = INCGFX_U8("graphics/door_anims/general.png", ".4bpp");
 static const u8 sDoorAnimTiles_SlidingSingle[] = INCGFX_U8("graphics/door_anims/sliding_single.png", ".4bpp");
 static const u8 sDoorAnimTiles_SlidingDouble[] = INCGFX_U8("graphics/door_anims/sliding_double.png", ".4bpp");
 static const u8 sDoorAnimTiles_Pallet[] = INCGFX_U8("graphics/door_anims/pallet.png", ".4bpp");
@@ -151,10 +151,10 @@ static const u8 sDoorAnimTiles_Vermilion[] = INCGFX_U8("graphics/door_anims/verm
 static const u8 sDoorAnimTiles_PokemonFanClub[] = INCGFX_U8("graphics/door_anims/pokemon_fan_club.png", ".4bpp");
 static const u8 sDoorAnimTiles_DeptStore[] = INCGFX_U8("graphics/door_anims/dept_store.png", ".4bpp");
 static const u8 sDoorAnimTiles_Fuchsia[] = INCGFX_U8("graphics/door_anims/fuchsia.png", ".4bpp");
-static const u8 sDoorAnimTiles_SafariZoneFrlg[] = INCGFX_U8("graphics/door_anims/safari_zone_frlg.png", ".4bpp");
+static const u8 sDoorAnimTiles_SafariZoneFrlg[] = INCGFX_U8("graphics/door_anims/safari_zone.png", ".4bpp");
 static const u8 sDoorAnimTiles_CinnabarLab[] = INCGFX_U8("graphics/door_anims/cinnabar_lab.png", ".4bpp");
 static const u8 sDoorAnimTiles_DeptStoreElevator[] = INCGFX_U8("graphics/door_anims/dept_store_elevator.png", ".4bpp");
-static const u8 sDoorAnimTiles_CableClubFrlg[] = INCGFX_U8("graphics/door_anims/cable_club_frlg.png", ".4bpp");
+static const u8 sDoorAnimTiles_CableClubFrlg[] = INCGFX_U8("graphics/door_anims/cable_club.png", ".4bpp");
 static const u8 sDoorAnimTiles_HideoutElevator[] = INCGFX_U8("graphics/door_anims/hideout_elevator.png", ".4bpp");
 static const u8 sDoorAnimTiles_SSAnne[] = INCGFX_U8("graphics/door_anims/ss_anne.png", ".4bpp");
 static const u8 sDoorAnimTiles_SilphCoElevator[] = INCGFX_U8("graphics/door_anims/silph_co_elevator.png", ".4bpp");

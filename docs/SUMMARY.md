@@ -47,7 +47,6 @@
   - [Vs. Seeker](tutorials/vs_seeker.md)
   - [Teachable Learnsets Explanations](tutorials/teachable_learnsets.md)
   - [Struct Pokemon Generation](tutorials/mon_generation.md)
-  - [How to use FRLG](tutorials/how_to_frlg.md)
   - [How to delete vanilla maps](tutorials/how_to_delete_vanilla_maps.md)
   - [How to use Map Previews](tutorials/how_to_map_preview_screen.md)
   - [Quickstart Documentation](tutorials/quickstart.md)
