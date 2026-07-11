@@ -3408,16 +3408,8 @@ static void ChangeDeoxysRockLevel(u8 rockLevel)
 
     CreateTask(WaitForDeoxysRockMovement, 8);
     gFieldEffectArguments[0] = LOCALID_BIRTH_ISLAND_EXTERIOR_ROCK;
-    if (gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_BIRTH_ISLAND_EXTERIOR_FRLG) && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_BIRTH_ISLAND_EXTERIOR_FRLG))
-    {
-        gFieldEffectArguments[1] = MAP_NUM(MAP_BIRTH_ISLAND_EXTERIOR_FRLG);
-        gFieldEffectArguments[2] = MAP_GROUP(MAP_BIRTH_ISLAND_EXTERIOR_FRLG);
-    }
-    else
-    {
-        gFieldEffectArguments[1] = MAP_NUM(MAP_BIRTH_ISLAND_EXTERIOR);
-        gFieldEffectArguments[2] = MAP_GROUP(MAP_BIRTH_ISLAND_EXTERIOR);
-    }
+    gFieldEffectArguments[1] = MAP_NUM(MAP_BIRTH_ISLAND_EXTERIOR);
+    gFieldEffectArguments[2] = MAP_GROUP(MAP_BIRTH_ISLAND_EXTERIOR);
     gFieldEffectArguments[3] = sDeoxysRockCoords[rockLevel][0];
     gFieldEffectArguments[4] = sDeoxysRockCoords[rockLevel][1];
 
@@ -3444,8 +3436,7 @@ static void WaitForDeoxysRockMovement(u8 taskId)
 void IncrementBirthIslandRockStepCount(void)
 {
     u16 stepCount = VarGet(VAR_DEOXYS_ROCK_STEP_COUNT);
-    if ((gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_BIRTH_ISLAND_EXTERIOR) && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_BIRTH_ISLAND_EXTERIOR))
-     || (gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_BIRTH_ISLAND_EXTERIOR_FRLG) && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_BIRTH_ISLAND_EXTERIOR_FRLG)))
+    if (gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_BIRTH_ISLAND_EXTERIOR) && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_BIRTH_ISLAND_EXTERIOR))
     {
         if (++stepCount > 99)
             VarSet(VAR_DEOXYS_ROCK_STEP_COUNT, 0);
@@ -5151,27 +5142,6 @@ void GetElevatorFloor(void)
             break;
         }
     }
-    if (gSaveBlock1Ptr->dynamicWarp.mapGroup == MAP_GROUP(MAP_CELADON_CITY_DEPARTMENT_STORE_1F))
-    {
-        switch (gSaveBlock1Ptr->dynamicWarp.mapNum)
-        {
-        case MAP_NUM(MAP_CELADON_CITY_DEPARTMENT_STORE_1F):
-            floor = 4;
-            break;
-        case MAP_NUM(MAP_CELADON_CITY_DEPARTMENT_STORE_2F):
-            floor = 5;
-            break;
-        case MAP_NUM(MAP_CELADON_CITY_DEPARTMENT_STORE_3F):
-            floor = 6;
-            break;
-        case MAP_NUM(MAP_CELADON_CITY_DEPARTMENT_STORE_4F):
-            floor = 7;
-            break;
-        case MAP_NUM(MAP_CELADON_CITY_DEPARTMENT_STORE_5F):
-            floor = 8;
-            break;
-        }
-    }
     if (gSaveBlock1Ptr->dynamicWarp.mapGroup == MAP_GROUP(MAP_TRAINER_TOWER_1F))
     {
         switch (gSaveBlock1Ptr->dynamicWarp.mapNum)
@@ -5259,32 +5229,6 @@ u16 InitElevatorFloorSelectMenuPos(void)
         case MAP_NUM(MAP_ROCKET_HIDEOUT_B4F):
             sElevatorScroll = 0;
             sElevatorCursorPos = 2;
-            break;
-        }
-    }
-    if (gSaveBlock1Ptr->dynamicWarp.mapGroup == MAP_GROUP(MAP_CELADON_CITY_DEPARTMENT_STORE_1F))
-    {
-        switch (gSaveBlock1Ptr->dynamicWarp.mapNum)
-        {
-        case MAP_NUM(MAP_CELADON_CITY_DEPARTMENT_STORE_5F):
-            sElevatorScroll = 0;
-            sElevatorCursorPos = 0;
-            break;
-        case MAP_NUM(MAP_CELADON_CITY_DEPARTMENT_STORE_4F):
-            sElevatorScroll = 0;
-            sElevatorCursorPos = 1;
-            break;
-        case MAP_NUM(MAP_CELADON_CITY_DEPARTMENT_STORE_3F):
-            sElevatorScroll = 0;
-            sElevatorCursorPos = 2;
-            break;
-        case MAP_NUM(MAP_CELADON_CITY_DEPARTMENT_STORE_2F):
-            sElevatorScroll = 0;
-            sElevatorCursorPos = 3;
-            break;
-        case MAP_NUM(MAP_CELADON_CITY_DEPARTMENT_STORE_1F):
-            sElevatorScroll = 0;
-            sElevatorCursorPos = 4;
             break;
         }
     }

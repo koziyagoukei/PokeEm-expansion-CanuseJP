@@ -277,12 +277,12 @@ static const u32 sPokeballGlow_Gfx[] = INCGFX_U32("graphics/field_effects/pics/p
 static const u16 sPokeballGlow_Pal[16] = INCGFX_U16("graphics/field_effects/palettes/pokeball_glow.pal", ".gbapal");
 static const u32 sPokecenterMonitor0_Gfx[] = INCGFX_U32("graphics/field_effects/pics/pokecenter_monitor/0.png", ".4bpp");
 static const u32 sPokecenterMonitor1_Gfx[] = INCGFX_U32("graphics/field_effects/pics/pokecenter_monitor/1.png", ".4bpp");
-static const u16 sPokecenterMonitor_Gfx_Frlg[] = INCGFX_U16("graphics/field_effects/pics/pokecenter_monitor/frlg.png", ".4bpp");
+static const u16 sPokecenterMonitor_Gfx_Frlg[] = INCGFX_U16("graphics/field_effects/pics/pokecenter_monitor/0.png", ".4bpp");
 static const u32 sHofMonitorBig_Gfx[] = INCGFX_U32("graphics/field_effects/pics/hof_monitor_big.png", ".4bpp");
 static const u8 sHofMonitorSmall_Gfx[] = INCGFX_U8("graphics/field_effects/pics/hof_monitor_small.png", ".4bpp");
 static const u16 sHofMonitor_Pal[16] = INCGFX_U16("graphics/field_effects/palettes/hof_monitor.pal", ".gbapal");
-static const u16 sHofMonitor_Gfx_Frlg[] = INCGFX_U16("graphics/field_effects/pics/hof_monitor_frlg.png", ".4bpp");
-static const u16 sHofMonitor_Pal_Frlg[] = INCGFX_U16("graphics/field_effects/pics/hof_monitor_frlg.png", ".gbapal");
+static const u16 sHofMonitor_Gfx_Frlg[] = INCGFX_U16("graphics/field_effects/pics/hof_monitor_small.png", ".4bpp");
+static const u16 sHofMonitor_Pal_Frlg[] = INCGFX_U16("graphics/field_effects/palettes/hof_monitor.pal", ".gbapal");
 
 // Graphics for the lights streaking past your Pokemon when it uses a field move.
 static const u32 sFieldMoveStreaksOutdoors_Gfx[] = INCGFX_U32("graphics/field_effects/pics/field_move_streaks.png", ".4bpp");

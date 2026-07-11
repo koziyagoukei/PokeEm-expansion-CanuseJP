@@ -45,12 +45,6 @@
 #define TEMP_FLAGS_END   FLAG_TEMP_1F
 #define NUM_TEMP_FLAGS   (TEMP_FLAGS_END - TEMP_FLAGS_START + 1)
 
-#if IS_FRLG
-
-#include "constants/flags_frlg.h"
-
-#else
-
 #define FLAG_UNUSED_0x020    0x20 // Unused Flag
 #define FLAG_UNUSED_0x021    0x21 // Unused Flag
 #define FLAG_UNUSED_0x022    0x22 // Unused Flag
@@ -2470,8 +2464,6 @@
 #define FLAG_WORLD_MAP_THREE_ISLAND_DUNSPARCE_TUNNEL                0
 #define FLAG_WORLD_MAP_SEVEN_ISLAND_SEVAULT_CANYON_TANOBY_KEY       0
 #define FLAG_WORLD_MAP_BIRTH_ISLAND_EXTERIOR                        0
-
-#endif
 
 #if TESTING
 #define TESTING_FLAGS_START                     0x5000

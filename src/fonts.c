@@ -327,7 +327,7 @@ ALIGNED(4) const u8 gFontShortNarrowerLatinGlyphWidths[] = {
 ALIGNED(4) const u16 gFontSmallJapaneseGlyphs[] = INCGFX_U16("graphics/fonts/japanese_small.png", ".hwjpnfont");
 ALIGNED(4) const u16 gFontNormalJapaneseGlyphs[] = INCGFX_U16("graphics/fonts/japanese_normal.png", ".hwjpnfont");
 
-ALIGNED(4) const u16 gFontFRLGMaleJapaneseGlyphs[] = INCGFX_U16("graphics/fonts/japanese_frlg_male.png", ".fwjpnfont");
+ALIGNED(4) const u16 gFontFRLGMaleJapaneseGlyphs[] = INCGFX_U16("graphics/fonts/japanese_normal.png", ".hwjpnfont");
 ALIGNED(4) const u8 gFontFRLGMaleJapaneseGlyphWidths[] = {
     0, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10,
     10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10,
@@ -363,7 +363,7 @@ ALIGNED(4) const u8 gFontFRLGMaleJapaneseGlyphWidths[] = {
     10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10,
 };
 
-ALIGNED(4) const u16 gFontFRLGFemaleJapaneseGlyphs[] = INCGFX_U16("graphics/fonts/japanese_frlg_female.png", ".fwjpnfont");
+ALIGNED(4) const u16 gFontFRLGFemaleJapaneseGlyphs[] = INCGFX_U16("graphics/fonts/japanese_normal.png", ".hwjpnfont");
 ALIGNED(4) const u8 gFontFRLGFemaleJapaneseGlyphWidths[] = {
     0, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10,
     10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10,
