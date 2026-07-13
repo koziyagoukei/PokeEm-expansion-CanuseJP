@@ -64,7 +64,7 @@ DirectSoundWaveData_sc88pro_rnd_snare::
 
 	.align 2
 DirectSoundWaveData_sc88pro_tr909_hand_clap::
-	.incbin "sound/direct_sound_samples/sc88pro_tr909_hand_clap.bin"
+	.incbin "build/extracted_sound/sound/direct_sound_samples/sc88pro_tr909_hand_clap.bin"
 
 	.align 2
 DirectSoundWaveData_sc88pro_orchestra_snare::
@@ -116,7 +116,7 @@ DirectSoundWaveData_sd90_solo_snare::
 
 	.align 2
 DirectSoundWaveData_sd90_ambient_tom::
-	.incbin "sound/direct_sound_samples/sd90_ambient_tom.bin"
+	.incbin "build/extracted_sound/sound/direct_sound_samples/sd90_ambient_tom.bin"
 
 	.align 2
 DirectSoundWaveData_dance_drums_ride_bell::
@@ -124,7 +124,7 @@ DirectSoundWaveData_dance_drums_ride_bell::
 
 	.align 2
 DirectSoundWaveData_sd90_cowbell::
-	.incbin "sound/direct_sound_samples/sd90_cowbell.bin"
+	.incbin "build/extracted_sound/sound/direct_sound_samples/sd90_cowbell.bin"
 
 	.align 2
 DirectSoundWaveData_unused_heart_of_asia_indian_drum::
@@ -132,7 +132,7 @@ DirectSoundWaveData_unused_heart_of_asia_indian_drum::
 
 	.align 2
 DirectSoundWaveData_sd90_open_triangle::
-	.incbin "sound/direct_sound_samples/sd90_open_triangle.bin"
+	.incbin "build/extracted_sound/sound/direct_sound_samples/sd90_open_triangle.bin"
 
 	.align 2
 DirectSoundWaveData_sc88pro_jingle_bell::
@@ -180,23 +180,23 @@ DirectSoundWaveData_sc88pro_string_ensemble_84::
 
 	.align 2
 DirectSoundWaveData_sc88pro_trumpet_60::
-	.incbin "sound/direct_sound_samples/sc88pro_trumpet_60.bin"
+	.incbin "build/extracted_sound/sound/direct_sound_samples/sc88pro_trumpet_60.bin"
 
 	.align 2
 DirectSoundWaveData_sc88pro_trumpet_72::
-	.incbin "sound/direct_sound_samples/sc88pro_trumpet_72.bin"
+	.incbin "build/extracted_sound/sound/direct_sound_samples/sc88pro_trumpet_72.bin"
 
 	.align 2
 DirectSoundWaveData_sc88pro_trumpet_84::
-	.incbin "sound/direct_sound_samples/sc88pro_trumpet_84.bin"
+	.incbin "build/extracted_sound/sound/direct_sound_samples/sc88pro_trumpet_84.bin"
 
 	.align 2
 DirectSoundWaveData_sc88pro_tuba_39:: @N.B.: These tuba samples are actually sampled at 36 and 48, then pitched up
-	.incbin "sound/direct_sound_samples/sc88pro_tuba_39.bin"
+	.incbin "build/extracted_sound/sound/direct_sound_samples/sc88pro_tuba_39.bin"
 
 	.align 2
 DirectSoundWaveData_sc88pro_tuba_51::
-	.incbin "sound/direct_sound_samples/sc88pro_tuba_51.bin"
+	.incbin "build/extracted_sound/sound/direct_sound_samples/sc88pro_tuba_51.bin"
 
 	.align 2
 DirectSoundWaveData_sc88pro_french_horn_60::
@@ -220,7 +220,7 @@ DirectSoundWaveData_unknown_koto_high::
 
 	.align 2
 DirectSoundWaveData_sd90_classical_shakuhachi::
-	.incbin "sound/direct_sound_samples/sd90_classical_shakuhachi.bin"
+	.incbin "build/extracted_sound/sound/direct_sound_samples/sd90_classical_shakuhachi.bin"
 
 	.align 2
 DirectSoundWaveData_unknown_koto_low::
@@ -228,15 +228,15 @@ DirectSoundWaveData_unknown_koto_low::
 
 	.align 2
 DirectSoundWaveData_sd90_classical_overdrive_guitar::
-	.incbin "sound/direct_sound_samples/sd90_classical_overdrive_guitar.bin"
+	.incbin "build/extracted_sound/sound/direct_sound_samples/sd90_classical_overdrive_guitar.bin"
 
 	.align 2
 DirectSoundWaveData_sd90_classical_distortion_guitar_high::
-	.incbin "sound/direct_sound_samples/sd90_classical_distortion_guitar_high.bin"
+	.incbin "build/extracted_sound/sound/direct_sound_samples/sd90_classical_distortion_guitar_high.bin"
 
 	.align 2
 DirectSoundWaveData_sd90_classical_distortion_guitar_low::
-	.incbin "sound/direct_sound_samples/sd90_classical_distortion_guitar_low.bin"
+	.incbin "build/extracted_sound/sound/direct_sound_samples/sd90_classical_distortion_guitar_low.bin"
 
 	.align 2
 DirectSoundWaveData_heart_of_asia_gamelan::
@@ -260,11 +260,11 @@ DirectSoundWaveData_unused_unknown_male_voice::
 
 	.align 2
 DirectSoundWaveData_sd90_classical_detuned_ep1_low::
-	.incbin "sound/direct_sound_samples/sd90_classical_detuned_ep1_low.bin"
+	.incbin "build/extracted_sound/sound/direct_sound_samples/sd90_classical_detuned_ep1_low.bin"
 
 	.align 2
 DirectSoundWaveData_sd90_classical_detuned_ep1_high::
-	.incbin "sound/direct_sound_samples/sd90_classical_detuned_ep1_high.bin"
+	.incbin "build/extracted_sound/sound/direct_sound_samples/sd90_classical_detuned_ep1_high.bin"
 
 	.align 2
 DirectSoundWaveData_sc88pro_timpani_with_snare::
@@ -304,7 +304,7 @@ DirectSoundWaveData_unknown_4::
 
 	.align 2
 DirectSoundWaveData_sc88pro_wind::
-	.incbin "sound/direct_sound_samples/sc88pro_wind.bin"
+	.incbin "build/extracted_sound/sound/direct_sound_samples/sc88pro_wind.bin"
 
 	.align 2
 DirectSoundWaveData_sc88pro_bubbles::
@@ -332,7 +332,7 @@ DirectSoundWaveData_unknown_8::
 
 	.align 2
 DirectSoundWaveData_sc88pro_tubular_bell::
-	.incbin "sound/direct_sound_samples/sc88pro_tubular_bell.bin"
+	.incbin "build/extracted_sound/sound/direct_sound_samples/sc88pro_tubular_bell.bin"
 
 	.align 2
 DirectSoundWaveData_unknown_9::
@@ -348,7 +348,7 @@ DirectSoundWaveData_sc88pro_harp::
 
 	.align 2
 DirectSoundWaveData_sc88pro_xylophone::
-	.incbin "sound/direct_sound_samples/sc88pro_xylophone.bin"
+	.incbin "build/extracted_sound/sound/direct_sound_samples/sc88pro_xylophone.bin"
 
 	.align 2
 DirectSoundWaveData_unknown_10::
@@ -9036,8 +9036,8 @@ DirectSoundWaveData_steinway_b_piano::
 
 	.align 2
 DirectSoundWaveData_sd90_classical_whistle::
-	.incbin "sound/direct_sound_samples/sd90_classical_whistle.bin"
+	.incbin "build/extracted_sound/sound/direct_sound_samples/sd90_classical_whistle.bin"
 
 	.align 2
 DirectSoundWaveData_sd90_enhanced_delay_shaku::
-	.incbin "sound/direct_sound_samples/sd90_enhanced_delay_shaku.bin"
+	.incbin "build/extracted_sound/sound/direct_sound_samples/sd90_enhanced_delay_shaku.bin"
