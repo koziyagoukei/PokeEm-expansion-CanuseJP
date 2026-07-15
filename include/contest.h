@@ -405,6 +405,7 @@ void SetContestantEffectStringID2(u8 contestant, u8 effectStringId);
 void SetStartledString(u8 contestant, u8 jam);
 void MakeContestantNervous(u8 p);
 s8 Contest_GetMoveExcitement(enum Move move);
+u8 ContestGimmick_GetJamReduction(u8 contestant);
 void ContestGimmick_RecordJammed(u8 contestant, u8 jam);
 void ContestCutawayApplyPendingFormForAnim(void);
 bool8 IsContestantAllowedToCombo(u8 contestant);

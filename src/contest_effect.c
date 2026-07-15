@@ -1035,24 +1035,24 @@ static bool8 WasAtLeastOneOpponentJammed(void)
             if (eContestantStatus[contestant].moreEasilyStartled)
                 eContestAppealResults.jam2 *= 2;
             if (eContestantStatus[contestant].resistant)
-            {
                 eContestAppealResults.jam2 = 10;
-                SetContestantEffectStringID(contestant, CONTEST_STRING_LITTLE_DISTRACTED);
+            else
+                eContestAppealResults.jam2 -= eContestantStatus[contestant].jamReduction;
+
+            eContestAppealResults.jam2 -= ContestGimmick_GetJamReduction(contestant);
+            if (eContestAppealResults.jam2 <= 0)
+            {
+                eContestAppealResults.jam2 = 0;
+                SetContestantEffectStringID(contestant, CONTEST_STRING_NOT_FAZED);
             }
             else
             {
-                eContestAppealResults.jam2 -= eContestantStatus[contestant].jamReduction;
-                if (eContestAppealResults.jam2 <= 0)
-                {
-                    eContestAppealResults.jam2 = 0;
-                    SetContestantEffectStringID(contestant, CONTEST_STRING_NOT_FAZED);
-                }
+                JamContestant(contestant, eContestAppealResults.jam2);
+                if (eContestantStatus[contestant].resistant)
+                    SetContestantEffectStringID(contestant, CONTEST_STRING_LITTLE_DISTRACTED);
                 else
-                {
-                    JamContestant(contestant, eContestAppealResults.jam2);
                     SetStartledString(contestant, eContestAppealResults.jam2);
-                    jamBuffer[contestant] = eContestAppealResults.jam2;
-                }
+                jamBuffer[contestant] = eContestAppealResults.jam2;
             }
         }
     }

@@ -14,6 +14,8 @@
 #include "wild_encounter_ow.h"
 #include "constants/event_objects.h"
 #include "constants/field_effects.h"
+#include "constants/map_groups.h"
+#include "constants/maps.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
 #include "constants/species.h"
@@ -996,6 +998,13 @@ u32 FldEff_Ripple(void)
 #define sWaterXOffset  data[3]
 #define sIsChildSprite data[4]
 
+static bool8 IsPartyBathTimePlayerHotSpringsWater(const struct ObjectEvent *objectEvent)
+{
+    return objectEvent->isPlayer
+        && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_PARTYBATHTIME)
+        && gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_PARTYBATHTIME);
+}
+
 static u8 CreateHotSpringsWaterSprite(struct ObjectEvent *objectEvent, s16 xOffset, bool8 isChildSprite)
 {
     u8 spriteId = CreateSpriteAtEnd(gFieldEffectObjectTemplatePointers[FLDEFFOBJ_HOT_SPRINGS_WATER], 0, 0, 0);
@@ -1029,7 +1038,10 @@ u32 FldEff_HotSpringsWater(void)
         return 0;
 
     graphicsInfo = GetObjectEventGraphicsInfo(objectEvent->graphicsId);
-    waterSpriteCount = (graphicsInfo->width + HOT_SPRINGS_WATER_SPRITE_WIDTH - 1) / HOT_SPRINGS_WATER_SPRITE_WIDTH;
+    if (IsPartyBathTimePlayerHotSpringsWater(objectEvent))
+        waterSpriteCount = 1;
+    else
+        waterSpriteCount = (graphicsInfo->width + HOT_SPRINGS_WATER_SPRITE_WIDTH - 1) / HOT_SPRINGS_WATER_SPRITE_WIDTH;
     if (waterSpriteCount < 1)
         waterSpriteCount = 1;
     if (waterSpriteCount > MAX_HOT_SPRINGS_WATER_SPRITES)
@@ -1063,7 +1075,10 @@ void UpdateHotSpringsWaterFieldEffect(struct Sprite *sprite)
         struct Sprite *linkedSprite = &gSprites[gObjectEvents[objectEventId].spriteId];
         sprite->x = linkedSprite->x + sprite->sWaterXOffset;
         sprite->y = (graphicsInfo->height >> 1) + linkedSprite->y - 8;
-        sprite->subpriority = linkedSprite->subpriority - 1;
+        if (IsPartyBathTimePlayerHotSpringsWater(&gObjectEvents[objectEventId]))
+            sprite->subpriority = linkedSprite->subpriority;
+        else
+            sprite->subpriority = linkedSprite->subpriority - 1;
         UpdateObjectEventSpriteInvisibility(sprite, FALSE);
     }
 }

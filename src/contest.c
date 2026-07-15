@@ -52,6 +52,8 @@
 #include "constants/battle_anim.h"
 #include "constants/songs.h"
 
+#define CONTEST_DYNAMAX_JAM_REDUCTION 10
+
 // This file's functions.
 static void LoadContestPalettes(void);
 static void Task_StartContestWaitFade(u8 taskId);
@@ -73,6 +75,7 @@ static void Task_ShowMoveSelectScreen(u8 taskId);
 static void Task_HandleMoveSelectInput(u8 taskId);
 static void DrawMoveSelectArrow(s8);
 static void EraseMoveSelectArrow(s8);
+static void PrintContestMoveNames(void);
 static void PrintContestGimmickMessageHolder(enum Move move);
 static void ClearContestGimmickMessageHolder(void);
 static void Task_SelectedMove(u8 taskId);
@@ -1340,7 +1343,7 @@ static enum Move GetContestZMove(u8 contestant, enum Move move)
     struct ContestGimmickStatus *gimmick = &eContestGimmickStatus[contestant];
     enum Move zMove;
 
-    if (move == MOVE_NONE || !IsContestHeldItemZCrystal(gimmick->heldItem))
+    if (move == MOVE_NONE || move >= MOVES_COUNT || !IsContestHeldItemZCrystal(gimmick->heldItem))
         return MOVE_NONE;
 
     zMove = GetSignatureZMove(move, gContestMons[contestant].species, gimmick->heldItem);
@@ -1452,7 +1455,7 @@ static bool32 ContestGimmickCanSelect(u8 contestant, enum ContestGimmick selecte
             && gimmick->usedGimmick == CONTEST_GIMMICK_ULTRA_BURST
             && gimmick->ultraActive
             && !gimmick->zUsed
-            && IsContestHeldItemZCrystal(gimmick->heldItem);
+            && GetContestZMove(contestant, move) != MOVE_NONE;
     }
 
     switch (selected)
@@ -1465,7 +1468,7 @@ static bool32 ContestGimmickCanSelect(u8 contestant, enum ContestGimmick selecte
     case CONTEST_GIMMICK_ULTRA_BURST:
         return GetContestGimmickFormTarget(contestant, FORM_CHANGE_BATTLE_ULTRA_BURST) != gContestMons[contestant].species;
     case CONTEST_GIMMICK_Z_APPEAL:
-        return !gimmick->zUsed && IsContestHeldItemZCrystal(gimmick->heldItem);
+        return !gimmick->zUsed && GetContestZMove(contestant, move) != MOVE_NONE;
     case CONTEST_GIMMICK_TERA:
         return !gimmick->teraActive && IsContestTeraTypeValid(gimmick->teraType);
     case CONTEST_GIMMICK_DYNAMAX:
@@ -1498,6 +1501,7 @@ static void CycleContestGimmickSelection(void)
         if (ContestGimmickCanSelect(gContestPlayerMonIndex, selected, move))
         {
             eContestGimmickStatus[gContestPlayerMonIndex].selected = selected;
+            PrintContestMoveNames();
             PrintContestMoveDescription(move);
             PrintContestGimmickMessageHolder(move);
             PlaySE(SE_SELECT);
@@ -1690,7 +1694,6 @@ static void ApplyContestGimmickMoveImpact(u8 contestant)
         eContestantStatus[contestant].appeal = eContestantStatus[contestant].baseAppeal;
         eContestAppealResults.jam = 0;
         eContestAppealResults.jam2 = 0;
-        eContestantStatus[contestant].immune = TRUE;
     }
     else
     {
@@ -1865,12 +1868,20 @@ static bool32 IsContestGMaxMove(u8 contestant, enum Move move)
     return FALSE;
 }
 
+u8 ContestGimmick_GetJamReduction(u8 contestant)
+{
+    if (!IsContestGimmickEnabled() || contestant >= CONTESTANT_COUNT)
+        return 0;
+    if (eContestGimmickStatus[contestant].dynamaxTurns != 0)
+        return CONTEST_DYNAMAX_JAM_REDUCTION;
+    return 0;
+}
+
 void ContestGimmick_RecordJammed(u8 contestant, u8 jam)
 {
     if (jam != 0 && IsContestGimmickEnabled())
         eContestGimmickStatus[contestant].jammedSinceLastAppeal = TRUE;
 }
-
 
 static void InitContestNormalViewState(void)
 {
@@ -3083,18 +3094,34 @@ static void Task_TryShowMoveSelectScreen(u8 taskId)
 
 static void Task_ShowMoveSelectScreen(u8 taskId)
 {
-    u8 i;
-    u8 moveName[32];
-
     gBattle_BG0_Y = DISPLAY_HEIGHT;
     gBattle_BG2_Y = DISPLAY_HEIGHT;
+
+    PrintContestMoveNames();
+
+    DrawMoveSelectArrow(eContest.playerMoveChoice);
+    PrintContestMoveDescription(gContestMons[gContestPlayerMonIndex].moves[eContest.playerMoveChoice]);
+    PrintContestGimmickMessageHolder(gContestMons[gContestPlayerMonIndex].moves[eContest.playerMoveChoice]);
+    gTasks[taskId].func = Task_HandleMoveSelectInput;
+}
+
+static void PrintContestMoveNames(void)
+{
+    u8 i;
+    u8 moveName[32];
 
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
         enum Move move = gContestMons[gContestPlayerMonIndex].moves[i];
         u8 *moveNameBuffer = moveName;
 
-        if (eContestantStatus[gContestPlayerMonIndex].prevMove != MOVE_NONE
+        if (i == eContest.playerMoveChoice
+            && GetSelectedContestGimmick(gContestPlayerMonIndex, move) == CONTEST_GIMMICK_Z_APPEAL)
+        {
+            // Make the base move selected for Z-Power unambiguous.
+            moveNameBuffer = StringCopy(moveName, COMPOUND_STRING("{COLOR RED}{SHADOW LIGHT_RED}"));
+        }
+        else if (eContestantStatus[gContestPlayerMonIndex].prevMove != MOVE_NONE
             && IsContestantAllowedToCombo(gContestPlayerMonIndex)
             && AreMovesContestCombo(eContestantStatus[gContestPlayerMonIndex].prevMove, move)
             && eContestantStatus[gContestPlayerMonIndex].hasJudgesAttention)
@@ -3114,11 +3141,6 @@ static void Task_ShowMoveSelectScreen(u8 taskId)
         FillWindowPixelBuffer(i + MOVE_WINDOWS_START, PIXEL_FILL(0));
         Contest_PrintTextToBg0WindowAt(i + MOVE_WINDOWS_START, moveName, 5, 1, GetFontIdToFit(moveName, FONT_NARROW, 0, WindowWidthPx(i + MOVE_WINDOWS_START) - 11));
     }
-
-    DrawMoveSelectArrow(eContest.playerMoveChoice);
-    PrintContestMoveDescription(gContestMons[gContestPlayerMonIndex].moves[eContest.playerMoveChoice]);
-    PrintContestGimmickMessageHolder(gContestMons[gContestPlayerMonIndex].moves[eContest.playerMoveChoice]);
-    gTasks[taskId].func = Task_HandleMoveSelectInput;
 }
 
 static void Task_HandleMoveSelectInput(u8 taskId)
@@ -3171,6 +3193,7 @@ static void Task_HandleMoveSelectInput(u8 taskId)
                 eContest.playerMoveChoice = numMoves - 1;
             else
                 eContest.playerMoveChoice--;
+            PrintContestMoveNames();
             DrawMoveSelectArrow(eContest.playerMoveChoice);
             PrintContestMoveDescription(gContestMons[gContestPlayerMonIndex].moves[eContest.playerMoveChoice]);
             PrintContestGimmickMessageHolder(gContestMons[gContestPlayerMonIndex].moves[eContest.playerMoveChoice]);
@@ -3183,6 +3206,7 @@ static void Task_HandleMoveSelectInput(u8 taskId)
                 eContest.playerMoveChoice = 0;
             else
                 eContest.playerMoveChoice++;
+            PrintContestMoveNames();
             DrawMoveSelectArrow(eContest.playerMoveChoice);
             PrintContestMoveDescription(gContestMons[gContestPlayerMonIndex].moves[eContest.playerMoveChoice]);
             PrintContestGimmickMessageHolder(gContestMons[gContestPlayerMonIndex].moves[eContest.playerMoveChoice]);
@@ -5037,7 +5061,8 @@ static bool8 DrawStatusSymbol(u8 contestant)
     if (eContestantStatus[contestant].resistant
      || eContestantStatus[contestant].immune
      || eContestantStatus[contestant].jamSafetyCount != 0
-     || eContestantStatus[contestant].jamReduction != 0)
+     || eContestantStatus[contestant].jamReduction != 0
+     || ContestGimmick_GetJamReduction(contestant) != 0)
         symbolOffset = GetStatusSymbolTileOffset(STAT_SYMBOL_CIRCLE);
     else if (eContestantStatus[contestant].nervous)
         symbolOffset = GetStatusSymbolTileOffset(STAT_SYMBOL_WAVE);
