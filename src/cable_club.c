@@ -7,6 +7,7 @@
 #include "data.h"
 #include "event_data.h"
 #include "field_message_box.h"
+#include "field_screen_effect.h"
 #include "field_specials.h"
 #include "field_weather.h"
 #include "international_string_util.h"
@@ -70,6 +71,9 @@ static void Task_ReestablishLink(u8 taskId);
 static void Task_ReestablishLinkAwaitConnection(u8 taskId);
 static void Task_ReestablishLinkLeader(u8 taskId);
 static void Task_ReestablishLinkAwaitConfirmation(u8 taskId);
+static bool32 TryAbortIncompatibleLinkTask(u8 taskId);
+static void FieldCB_ReturnFromLinkIncompatible(void);
+static void Task_ShowLinkIncompatibleMessage(u8 taskId);
 
 #define tState      data[0]
 
@@ -143,6 +147,8 @@ static u32 ExchangeDataAndGetLinkupStatus(u8 minPlayers, u8 maxPlayers)
         return LINKUP_WRONG_NUM_PLAYERS;
     case EXCHANGE_STAT_7:
         return LINKUP_FAILED_CONTEST_GMODE;
+    case EXCHANGE_INCOMPATIBLE:
+        return LINKUP_INCOMPATIBLE;
     case EXCHANGE_TIMED_OUT:
     default:
         return LINKUP_ONGOING;
@@ -352,9 +358,13 @@ static void Task_LinkupExchangeDataWithLeader(u8 taskId)
     if (gSpecialVar_Result == LINKUP_ONGOING)
         return;
     if (gSpecialVar_Result == LINKUP_DIFF_SELECTIONS
-     || gSpecialVar_Result == LINKUP_WRONG_NUM_PLAYERS)
+     || gSpecialVar_Result == LINKUP_WRONG_NUM_PLAYERS
+     || gSpecialVar_Result == LINKUP_INCOMPATIBLE)
     {
-        SetCloseLinkCallback();
+        if (gSpecialVar_Result == LINKUP_INCOMPATIBLE)
+            CloseLinkForIncompatibility();
+        else
+            SetCloseLinkCallback();
         HideFieldMessageBox();
         gTasks[taskId].func = Task_StopLinkup;
     }
@@ -385,7 +395,13 @@ static void Task_LinkupCheckStatusAfterConfirm(u8 taskId)
     if (CheckLinkErrored(taskId) == TRUE)
         return;
 
-    if (gSpecialVar_Result == LINKUP_WRONG_NUM_PLAYERS)
+    if (gSpecialVar_Result == LINKUP_INCOMPATIBLE)
+    {
+        CloseLinkForIncompatibility();
+        HideFieldMessageBox();
+        gTasks[taskId].func = Task_StopLinkup;
+    }
+    else if (gSpecialVar_Result == LINKUP_WRONG_NUM_PLAYERS)
     {
         if (!Link_AnyPartnersPlayingRubyOrSapphire())
         {
@@ -830,6 +846,20 @@ static void SetLinkBattleTypeFlags(int linkService)
 
 #define tTimer data[1]
 
+static bool32 TryAbortIncompatibleLinkTask(u8 taskId)
+{
+    if (AreAllLinkPlayersCompatible())
+        return FALSE;
+
+    gSpecialVar_Result = LINKUP_INCOMPATIBLE;
+    CloseLinkForIncompatibility();
+    ShowFieldMessage(gText_LinkIncompatible);
+    UnlockPlayerFieldControls();
+    ScriptContext_Enable();
+    DestroyTask(taskId);
+    return TRUE;
+}
+
 static void Task_StartWiredCableClubBattle(u8 taskId)
 {
     struct Task *task = &gTasks[taskId];
@@ -837,6 +867,8 @@ static void Task_StartWiredCableClubBattle(u8 taskId)
     switch (task->tState)
     {
     case 0:
+        if (TryAbortIncompatibleLinkTask(taskId))
+            break;
         FadeScreen(FADE_TO_BLACK, 0);
         gLinkType = LINKTYPE_BATTLE;
         ClearLinkCallback_2();
@@ -883,6 +915,8 @@ static void Task_StartWirelessCableClubBattle(u8 taskId)
     switch (tState)
     {
     case 0:
+        if (TryAbortIncompatibleLinkTask(taskId))
+            break;
         FadeScreen(FADE_TO_BLACK, 0);
         gLinkType = LINKTYPE_BATTLE;
         ClearLinkCallback_2();
@@ -1098,6 +1132,8 @@ static void Task_StartWiredTrade(u8 taskId)
     switch (task->tState)
     {
     case 0:
+        if (TryAbortIncompatibleLinkTask(taskId))
+            break;
         LockPlayerFieldControls();
         FadeScreen(FADE_TO_BLACK, 0);
         ClearLinkCallback_2();
@@ -1131,6 +1167,8 @@ static void Task_StartWirelessTrade(u8 taskId)
     switch (tState)
     {
     case 0:
+        if (TryAbortIncompatibleLinkTask(taskId))
+            break;
         LockPlayerFieldControls();
         FadeScreen(FADE_TO_BLACK, 0);
         ClearLinkRfuCallback();
@@ -1163,6 +1201,32 @@ void PlayerEnteredTradeSeat(void)
         CreateTask_EnterCableClubSeat(Task_StartWirelessTrade);
     else
         CreateTask_EnterCableClubSeat(Task_StartWiredTrade);
+}
+
+static void Task_ShowLinkIncompatibleMessage(u8 taskId)
+{
+    if (!gPaletteFade.active)
+    {
+        UnlockPlayerFieldControls();
+        ShowFieldMessage(gText_LinkIncompatible);
+        DestroyTask(taskId);
+    }
+}
+
+static void FieldCB_ReturnFromLinkIncompatible(void)
+{
+    LockPlayerFieldControls();
+    Overworld_PlaySpecialMapMusic();
+    WarpFadeInScreen();
+    CreateTask(Task_ShowLinkIncompatibleMessage, 10);
+}
+
+void CB2_ReturnToFieldFromLinkIncompatible(void)
+{
+    gFieldCallback = FieldCB_ReturnFromLinkIncompatible;
+    ScriptContext_Init();
+    UnlockPlayerFieldControls();
+    CB2_ReturnToField();
 }
 
 static void UNUSED CreateTask_StartWiredTrade(void)

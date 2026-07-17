@@ -54,6 +54,9 @@ Text_SomeoneIsNotReadyToLink:
 Text_LinkErrorPleaseReset:
 	.string "{JPN}つうしんエラー です\nリセットして やりなおしてください$"
 
+gText_LinkIncompatible::
+	.string "{JPN}このゲームとは\nつうしん できません\pおなじ バージョンの\nゲームROMを つかってください$"
+
 Text_PlayersMadeDifferentSelections:
 	.string "{JPN}おたがいが えらんだ ものが\nちがっている ようです$"
 

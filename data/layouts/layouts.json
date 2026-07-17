@@ -4887,6 +4887,17 @@
       "blockdata_filepath": "data/layouts/Party_eat_time/map.bin",
       "border_height": 2,
       "border_width": 2
+    },
+    {
+      "id": "LAYOUT_ULTRAFLONTIE_POKEMON_CENTER_2F_2",
+      "name": "ultraflontie_PokemonCenter_2F_2_Layout",
+      "width": 14,
+      "height": 10,
+      "primary_tileset": "gTileset_Building",
+      "secondary_tileset": "gTileset_PokemonCenter",
+      "border_filepath": "data/layouts/ultraflontie_PokemonCenter_2F_2/border.bin",
+      "blockdata_filepath": "data/layouts/ultraflontie_PokemonCenter_2F_2/map.bin",
+      "layout_version": "emerald"
     }
   ]
 }

@@ -332,6 +332,15 @@ Debug_ShowExpansionVersion::
 Debug_ExpansionVersion:
 	.string "pokeemerald-expansion {STR_VAR_1}$"
 
+Debug_ShowLinkCompatibility::
+	callnative BufferLinkCompatibilityInfo
+	msgbox Debug_LinkCompatibilityInfo, MSGBOX_DEFAULT
+	release
+	end
+
+Debug_LinkCompatibilityInfo:
+	.string "{STR_VAR_1}$"
+
 Debug_Follower_NPC_Not_Enabled::
 	msgbox Debug_Enable_To_Use_Follower_NPCs, MSGBOX_DEFAULT
 	release

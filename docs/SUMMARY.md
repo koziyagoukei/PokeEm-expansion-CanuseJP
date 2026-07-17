@@ -2,6 +2,7 @@
 
 - [README](./README.md)
 - [FEATURES](./FEATURES.md)
+- [VBALink Online Play](./vbalink_online_play.md)
 - [Info Viewer](./info_viewer.md)
 - [BPEJ Sound Extraction](./bpej_sound_extraction.md)
 - [Installation](./INSTALL.md)

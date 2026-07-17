@@ -151,6 +151,9 @@ static enum Move GetContestAnimMove(u8 contestant, enum Move move);
 static enum Move GetContestTurnEffectMove(u8 contestant);
 static enum Move GetContestTurnAnimMove(u8 contestant);
 static void InitPlayerContestGimmickStatus(u8 partyIndex, u16 heldItem);
+static void InitLinkContestGimmickStatus(u8 contestant);
+static void InitNpcContestGimmickStatus(u8 contestant);
+static void TrySelectNpcContestGimmick(u8 contestant, enum Move move);
 static enum ContestCategories GetContestMoveCategoryWithGimmick(u8 contestant, enum Move move);
 static s8 Contest_GetMoveExcitementForContestant(u8 contestant, enum Move move);
 static void CycleContestGimmickSelection(void);
@@ -1258,7 +1261,7 @@ static const u8 *const sContestGimmickNames[CONTEST_GIMMICK_COUNT] =
 
 static bool32 IsContestGimmickEnabled(void)
 {
-    return !(gLinkContestFlags & LINK_CONTEST_FLAG_IS_LINK);
+    return TRUE;
 }
 
 static bool32 IsContestHeldItemMegaStone(enum Item item)
@@ -1447,11 +1450,12 @@ static bool32 ContestGimmickCanSelect(u8 contestant, enum ContestGimmick selecte
 
     if (selected == CONTEST_GIMMICK_NONE)
         return TRUE;
-    if (!IsContestGimmickEnabled() || contestant != gContestPlayerMonIndex || move == MOVE_NONE)
+    if (!IsContestGimmickEnabled() || move == MOVE_NONE)
         return FALSE;
     if (gimmick->usedGimmick != CONTEST_GIMMICK_NONE)
     {
-        return selected == CONTEST_GIMMICK_Z_APPEAL
+        return contestant == gContestPlayerMonIndex
+            && selected == CONTEST_GIMMICK_Z_APPEAL
             && gimmick->usedGimmick == CONTEST_GIMMICK_ULTRA_BURST
             && gimmick->ultraActive
             && !gimmick->zUsed
@@ -1523,6 +1527,63 @@ static void InitPlayerContestGimmickStatus(u8 partyIndex, u16 heldItem)
     sContestPendingGimmickSpecies[gContestPlayerMonIndex] = SPECIES_NONE;
     sContestPendingGimmickSpeciesValid[gContestPlayerMonIndex] = FALSE;
     SetContestCutawayPendingAttackerSpecies(SPECIES_NONE);
+}
+
+static void InitLinkContestGimmickStatus(u8 contestant)
+{
+    struct ContestGimmickStatus *gimmick = &eContestGimmickStatus[contestant];
+
+    *gimmick = (struct ContestGimmickStatus){};
+    gimmick->heldItem = gContestMons[contestant].heldItem;
+    gimmick->teraType = gContestMons[contestant].teraType;
+    gimmick->dynamaxLevel = gContestMons[contestant].dynamaxLevel;
+    gimmick->gmaxFactor = gContestMons[contestant].gmaxFactor;
+    gimmick->originalSpecies = gContestMons[contestant].species;
+    sContestPendingGimmickSpecies[contestant] = SPECIES_NONE;
+    sContestPendingGimmickSpeciesValid[contestant] = FALSE;
+}
+
+static void InitNpcContestGimmickStatus(u8 contestant)
+{
+    struct ContestGimmickStatus *gimmick = &eContestGimmickStatus[contestant];
+    enum Species species = SanitizeSpecies(gContestMons[contestant].species);
+
+    *gimmick = (struct ContestGimmickStatus){};
+    gimmick->teraType = GetSpeciesType(species, 0);
+    gimmick->dynamaxLevel = MAX_DYNAMAX_LEVEL;
+    gimmick->gmaxFactor = TRUE;
+    gimmick->originalSpecies = species;
+    sContestPendingGimmickSpecies[contestant] = SPECIES_NONE;
+    sContestPendingGimmickSpeciesValid[contestant] = FALSE;
+}
+
+static void TrySelectNpcContestGimmick(u8 contestant, enum Move move)
+{
+    struct ContestGimmickStatus *gimmick = &eContestGimmickStatus[contestant];
+    enum ContestGimmick candidates[CONTEST_GIMMICK_COUNT - 1];
+    enum ContestGimmick candidate;
+    u8 count = 0;
+
+    if (!IsContestGimmickEnabled()
+        || (gLinkContestFlags & LINK_CONTEST_FLAG_IS_LINK)
+        || contestant == gContestPlayerMonIndex
+        || gimmick->usedGimmick != CONTEST_GIMMICK_NONE
+        || move == MOVE_NONE)
+        return;
+
+    if (gimmick->selected != CONTEST_GIMMICK_NONE
+        && ContestGimmickCanSelect(contestant, gimmick->selected, move))
+        return;
+
+    gimmick->selected = CONTEST_GIMMICK_NONE;
+    for (candidate = CONTEST_GIMMICK_MEGA; candidate < CONTEST_GIMMICK_COUNT; candidate++)
+    {
+        if (ContestGimmickCanSelect(contestant, candidate, move))
+            candidates[count++] = candidate;
+    }
+
+    if (count != 0)
+        gimmick->selected = candidates[Random() % count];
 }
 
 static enum ContestCategories GetContestMoveCategoryWithGimmick(u8 contestant, enum Move move)
@@ -2681,9 +2742,25 @@ static void InitContestResources(void)
     eContestAI = (struct ContestAIInfo){};
     *gContestResources->excitement = (struct ContestExcitement){};
     memset(eContestGimmickStatus, 0, CONTESTANT_COUNT * sizeof(struct ContestGimmickStatus));
-    if (!(gLinkContestFlags & LINK_CONTEST_FLAG_IS_LINK))
+    if (gLinkContestFlags & LINK_CONTEST_FLAG_IS_LINK)
+    {
+        for (i = 0; i < CONTESTANT_COUNT; i++)
+        {
+            if (i < gNumLinkContestPlayers)
+                InitLinkContestGimmickStatus(i);
+            else
+                InitNpcContestGimmickStatus(i);
+        }
+    }
+    else
     {
         u16 heldItem = GetMonData(&gParties[B_TRAINER_PLAYER][gContestMonPartyIndex], MON_DATA_HELD_ITEM);
+
+        for (i = 0; i < CONTESTANT_COUNT; i++)
+        {
+            if (i != gContestPlayerMonIndex)
+                InitNpcContestGimmickStatus(i);
+        }
         InitPlayerContestGimmickStatus(gContestMonPartyIndex, heldItem);
     }
     memset(eContestGfxState, 0, CONTESTANT_COUNT * sizeof(struct ContestGraphicsState));
@@ -4560,6 +4637,10 @@ void CreateContestMonFromParty(u8 partyIndex)
     gContestMons[gContestPlayerMonIndex].isShiny = GetMonData(&gParties[B_TRAINER_PLAYER][partyIndex], MON_DATA_IS_SHINY);
 
     heldItem = GetMonData(&gParties[B_TRAINER_PLAYER][partyIndex], MON_DATA_HELD_ITEM);
+    gContestMons[gContestPlayerMonIndex].heldItem = heldItem;
+    gContestMons[gContestPlayerMonIndex].teraType = GetMonData(&gParties[B_TRAINER_PLAYER][partyIndex], MON_DATA_TERA_TYPE);
+    gContestMons[gContestPlayerMonIndex].dynamaxLevel = GetMonData(&gParties[B_TRAINER_PLAYER][partyIndex], MON_DATA_DYNAMAX_LEVEL);
+    gContestMons[gContestPlayerMonIndex].gmaxFactor = GetMonData(&gParties[B_TRAINER_PLAYER][partyIndex], MON_DATA_GIGANTAMAX_FACTOR);
     InitPlayerContestGimmickStatus(partyIndex, heldItem);
     cool   = gContestMons[gContestPlayerMonIndex].cool;
     beauty = gContestMons[gContestPlayerMonIndex].beauty;
@@ -5109,10 +5190,13 @@ static enum Move GetChosenMove(u8 contestant)
     else
     {
         u8 moveChoice;
+        enum Move move;
 
         ContestAI_ResetAI(contestant);
         moveChoice = ContestAI_GetActionToUse();
-        return gContestMons[contestant].moves[moveChoice];
+        move = gContestMons[contestant].moves[moveChoice];
+        TrySelectNpcContestGimmick(contestant, move);
+        return move;
     }
 }
 

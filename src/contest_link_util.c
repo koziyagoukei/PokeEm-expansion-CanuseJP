@@ -153,6 +153,9 @@ static void Task_LinkContest_CommunicateMonsEm(u8 taskId)
 {
     int i;
 
+    if (LinkContest_AbortIfIncompatible(taskId))
+        return;
+
     if (!LinkContest_TryLinkStandby(&gTasks[taskId].data[12]))
         return;
 

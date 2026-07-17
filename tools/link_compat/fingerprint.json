@@ -1,0 +1,78 @@
+{
+  "components": {
+    "data_layout": {
+      "ability_ids": "6214f96536cd345fe395d8080f9c736edbd734d13b79a9815b050cfd5b2a2184",
+      "battle_pokemon": "87c9493c08660a4918e2c7860272d2fdec6be099d4de6db9dffd00b7ab2eb89a",
+      "battle_volatile_layout": "683e2722bdfe5553ae86ac10242878854ac260ba16d8a5fe6545920766313344",
+      "battle_volatiles": "49f07bad9c2522920b83565e5e722d6d59ee9fad6ed46071c408c03ee0862742",
+      "box_pokemon": "7269b31bf963339c61fb6c4110c2bfd16099150dd668ac95a35229bdcce7e7f0",
+      "contest_appeal_results": "d656f2a14e0d752229c00375183d44c9c388dc95ba54d8d9e7615ec5e889b951",
+      "contest_excitement": "7e496719d5122779ffd3693e7a83095b50950b4e1bdb60ee9b47eceb91de3b06",
+      "contest_move_selection_packet": "e812e01519bcd5dba5c5ee49c660a80a07b388761ee6e6f72ab522ed10ac317f",
+      "contest_pokemon": "d1b79e139b577c859fd5eb5e143f0016d01a1551036190ba719b9cfecb417f16",
+      "contestant_status": "c32872caa6d8a8028ef02b9fb0a6a9540e69d683ab03f534d253da3adf7f989a",
+      "item_ids": "d3b6bc452edfc532232ed445a0de51a3f5bda1d8e5b69803c4e141574ff6de10",
+      "layout_constants": "0d0912871a97431eb5d9e3610a48f5ea777d40201af4ee403590da087b2ddb94",
+      "link_battler_header": "db8d44e3e79b8d6aaf5a4c9b585896ab4165a99721fd602d3cd058439bade856",
+      "link_player": "572b6e36c674657663bbb8d291c88334bf767bb59392d8ec00e9cfc81e991142",
+      "link_player_block": "b65526d79b2000802aeea41e97e97fc2a757d21cf5879cf0e2f16301f6f7dfab",
+      "move_ids": "9d40396a5390623563ccd68694e70ee87aadf05117076dff31d5f44961fc47e2",
+      "multi_partner_menu_pokemon": "a2e1db655d39f4877ac6cb0a524bbf6cfc7d64451106a269a26a031ef1f27934",
+      "pokemon": "4919c01c8d3d30427e95716b69d16f902368edd46462c3727b3bed7edde01868",
+      "pokemon_substruct_0": "947a962336c90d9c328b7975bd346d44a5570b5433b09e6beec2665c1aa7f582",
+      "pokemon_substruct_1": "3671aabef9355402c97d2d6be813922abc5a776a6f69dd60521bb2e9f7cd6698",
+      "pokemon_substruct_2": "ded16268f08b25fed3dd4568d66de24fc29e9a7603bfa38295c724243f82f993",
+      "pokemon_substruct_3": "4ef8ac2496c79d46ecaf3bb576003922da42bb4bba5cd6a0ca4acf96d18bb22e",
+      "rfu_sio_info": "4e17aab73e7598ba30f973b91aeee13bb7bfdbd9c3c8467a3216da332123fda1",
+      "species_ids": "2b0b9237a38b50a7846478f6a99a3b91713c82d36a88d625d5c482e488a53e23",
+      "trainer_card": "11ba6cc5560db09f04f0b39f19e5889fcc703f89de165ed07ffa5b6d0c49936f"
+    },
+    "protocol": {
+      "battle_controller_commands": "e75651b87efc2adb4441c6f9d016b7a5c87ad8e8dbfa2f59301fdec794e1a3cf",
+      "battle_controller_requests": "e96abd3b5da6767581339bf8f3a569132350091d0a8e19167827c5a68d8a4fe5",
+      "battle_gimmicks": "efa8e37a44255b7092b09923104bfb18e9885de80615ea804f2f05f99bc2dd7a",
+      "battle_sync_config": "77dbf4e9ef5042cca92f6cd6231082cfa0d2afd89c970ce3e6ac71504363bec2",
+      "battle_type_flags": "ff98d28d17414754d12b9a0be3509b63bb33233738d16c0a0e4e32edd3ddf935",
+      "contest_gimmicks": "d037568d4ca0ccb419b59d31866e1cbe98fcf02754c33a64ff6f924ac03d38ab",
+      "gimmick_feature_flags": "6a903cc36f1f683fc5c7fb81f98384b74425269708272a156d0cb07fcf01cc51",
+      "link_commands_and_types": "ee8b862510ad04aa2f2a614843d074f109fdb0a060c361602a6ef487d8c2fbb2",
+      "union_room_activities": "9024f4f9a004353a2222be88d9d6768d42d00f21df05a589394ff353895686cf"
+    }
+  },
+  "data_layout_version": 1,
+  "fingerprints": {
+    "combined": "da644e575d1c2ab5fe812623ed5e9d54a676aa817322fce046a3e441e69e94e6",
+    "data_layout": "55c8e25511d5ec670ba0ae4e75470bd7c8c79a4255f5c8343a08c7dfb91da354",
+    "protocol": "bfa1681ac860f08305a0aa05725ddd3cdbf6d0db9f9f0086968faa7bde1ddf18"
+  },
+  "link_compat_version": 1,
+  "schema_version": 1,
+  "summary": {
+    "buffer_sizes": {
+      "battle_link": 4096,
+      "link_block": 256
+    },
+    "controller_command_end": "CONTROLLER_CMDS_COUNT",
+    "enum_values": {
+      "ABILITIES_COUNT": 319,
+      "ITEMS_COUNT": 874,
+      "MOVES_COUNT": 848,
+      "MOVES_COUNT_ALL": 935,
+      "NUM_SPECIES": 1573
+    },
+    "identifier_counts": {
+      "ability_ids": 319,
+      "item_ids": 932,
+      "move_ids": 959,
+      "species_ids": 1673
+    },
+    "struct_sizes": {
+      "LINK_SIZEOF_BATTLE_POKEMON": 140,
+      "LINK_SIZEOF_BOX_POKEMON": 80,
+      "LINK_SIZEOF_CONTEST_POKEMON": 64,
+      "LINK_SIZEOF_LINK_PLAYER": 28,
+      "LINK_SIZEOF_LINK_PLAYER_BLOCK": 60,
+      "LINK_SIZEOF_POKEMON": 100
+    }
+  }
+}

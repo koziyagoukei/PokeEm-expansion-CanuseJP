@@ -27,6 +27,7 @@
 #include "link_rfu.h"
 #include "constants/rgb.h"
 #include "constants/trade.h"
+#include "config/link_compat.h"
 
 // Window IDs for the link error screens
 enum {
@@ -316,7 +317,8 @@ static void InitLocalLinkPlayer(void)
     gLocalLinkPlayer.linkType = gLinkType;
     gLocalLinkPlayer.language = gGameLanguage;
     gLocalLinkPlayer.version = gGameVersion + 0x4000;
-    gLocalLinkPlayer.lp_field_2 = 0x8000;
+    gLocalLinkPlayer.lp_field_2 = LINK_PROJECT_ID;
+    gLocalLinkPlayer.neverRead = LINK_PACKED_VERSIONS;
     gLocalLinkPlayer.progressFlags = IsNationalPokedexEnabled();
     if (FlagGet(FLAG_IS_CHAMPION))
     {
@@ -769,6 +771,69 @@ bool32 Link_AnyPartnersPlayingFRLG_JP(void)
     return (i >= 0 && gLinkPlayers[i].language == LANGUAGE_JAPANESE);
 }
 
+enum LinkCompatibilityStatus GetLinkPlayerCompatibilityStatus(const struct LinkPlayer *player)
+{
+    if (player->lp_field_2 != LINK_PROJECT_ID)
+        return LINK_COMPATIBILITY_PROJECT_MISMATCH;
+    if (LINK_UNPACK_COMPAT_VERSION(player->neverRead) != LINK_COMPAT_VERSION)
+        return LINK_COMPATIBILITY_VERSION_MISMATCH;
+    if (LINK_UNPACK_DATA_VERSION(player->neverRead) != LINK_DATA_LAYOUT_VERSION)
+        return LINK_COMPATIBILITY_DATA_LAYOUT_MISMATCH;
+
+    return LINK_COMPATIBILITY_OK;
+}
+
+bool32 AreAllLinkPlayersCompatible(void)
+{
+    u32 i;
+    u32 playerCount;
+
+    if (!gReceivedRemoteLinkPlayers)
+        return FALSE;
+
+    playerCount = GetLinkPlayerCount();
+    if (playerCount < 2 || playerCount > MAX_RFU_PLAYERS)
+        return FALSE;
+
+    for (i = 0; i < playerCount; i++)
+    {
+        if (GetLinkPlayerCompatibilityStatus(&gLinkPlayers[i]) != LINK_COMPATIBILITY_OK)
+            return FALSE;
+    }
+
+    return TRUE;
+}
+
+bool32 DoesLinkTypeRequireCompatibility(u32 linkType)
+{
+    switch (linkType)
+    {
+    case LINKTYPE_TRADE:
+    case LINKTYPE_TRADE_CONNECTING:
+    case LINKTYPE_TRADE_SETUP:
+    case LINKTYPE_BATTLE:
+    case LINKTYPE_SINGLE_BATTLE:
+    case LINKTYPE_DOUBLE_BATTLE:
+    case LINKTYPE_MULTI_BATTLE:
+    case LINKTYPE_BATTLE_TOWER_50:
+    case LINKTYPE_BATTLE_TOWER_OPEN:
+    case LINKTYPE_BATTLE_TOWER:
+    case LINKTYPE_CONTEST_GMODE:
+    case LINKTYPE_CONTEST_EMODE:
+        return TRUE;
+    default:
+        return FALSE;
+    }
+}
+
+void CloseLinkForIncompatibility(void)
+{
+    // A foreign peer will not enter the graceful ready-to-close handshake.
+    // Shut down locally so compatibility rejection cannot wait forever.
+    if (gReceivedRemoteLinkPlayers)
+        CloseLink();
+}
+
 void OpenLinkTimed(void)
 {
     sPlayerDataExchangeStatus = EXCHANGE_NOT_STARTED;
@@ -800,6 +865,12 @@ u8 GetLinkPlayerDataExchangeStatusTimed(int minPlayers, int maxPlayers)
             {
                 gLinkErrorOccurred = TRUE;
                 CloseLink();
+            }
+            if (DoesLinkTypeRequireCompatibility(gLinkType) && !AreAllLinkPlayersCompatible())
+            {
+                sPlayerDataExchangeStatus = EXCHANGE_INCOMPATIBLE;
+                CloseLinkForIncompatibility();
+                return sPlayerDataExchangeStatus;
             }
             for (i = 0, index = 0; i < GetLinkPlayerCount(); index++, i++)
             {
@@ -1310,7 +1381,9 @@ void CheckLinkPlayersMatchSaved(void)
     for (i = 0; i < gSavedLinkPlayerCount; i++)
     {
         if (sSavedLinkPlayers[i].trainerId != gLinkPlayers[i].trainerId
-         || StringCompare(sSavedLinkPlayers[i].name, gLinkPlayers[i].name) != 0)
+         || StringCompare(sSavedLinkPlayers[i].name, gLinkPlayers[i].name) != 0
+         || sSavedLinkPlayers[i].lp_field_2 != gLinkPlayers[i].lp_field_2
+         || sSavedLinkPlayers[i].neverRead != gLinkPlayers[i].neverRead)
         {
             gLinkErrorOccurred = TRUE;
             CloseLink();

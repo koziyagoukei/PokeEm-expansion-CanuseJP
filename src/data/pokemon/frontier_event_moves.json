@@ -1,0 +1,925 @@
+{
+  "metadata": {
+    "description": "Event-distribution move additions for Frontier Move",
+    "source": "https://github.com/smogon/pokemon-showdown/blob/d3893717da0c73ae8ad2b27843f3661699a7a2b0/data/learnsets.ts",
+    "source_commit": "d3893717da0c73ae8ad2b27843f3661699a7a2b0",
+    "source_commit_date": "2026-07-17T03:40:36Z",
+    "source_marker": "S (Pokemon Showdown event source)",
+    "event_source_species": 532,
+    "propagate_through_evolution": true,
+    "ignored_unmapped_source_species": [
+      "caribolt",
+      "chromera",
+      "chuggalong",
+      "equilibra",
+      "kerfluffle",
+      "krilowatt",
+      "necturine",
+      "smokomodo",
+      "snaelstrom"
+    ],
+    "verification_sources": [
+      "https://bulbapedia.bulbagarden.net/wiki/Event_Pokemon",
+      "https://www.serebii.net/games/eventmoves.shtml"
+    ]
+  },
+  "species": {
+    "SPECIES_ABSOL": [
+      "MOVE_WISH"
+    ],
+    "SPECIES_AERODACTYL": [
+      "MOVE_CELEBRATE"
+    ],
+    "SPECIES_ALCREMIE": [
+      "MOVE_CELEBRATE"
+    ],
+    "SPECIES_AMPHAROS": [
+      "MOVE_HOLD_BACK"
+    ],
+    "SPECIES_ARBOK": [
+      "MOVE_REFRESH"
+    ],
+    "SPECIES_ARCEUS": [
+      "MOVE_BLAST_BURN",
+      "MOVE_HYDRO_CANNON",
+      "MOVE_ROAR_OF_TIME",
+      "MOVE_SHADOW_FORCE",
+      "MOVE_SPACIAL_REND"
+    ],
+    "SPECIES_ARIADOS": [
+      "MOVE_REFRESH"
+    ],
+    "SPECIES_ARMAROUGE": [
+      "MOVE_CELEBRATE"
+    ],
+    "SPECIES_ARTICUNO": [
+      "MOVE_EXTRASENSORY",
+      "MOVE_HEAL_BELL"
+    ],
+    "SPECIES_AUDINO": [
+      "MOVE_PRESENT"
+    ],
+    "SPECIES_BAGON": [
+      "MOVE_WISH"
+    ],
+    "SPECIES_BALTOY": [
+      "MOVE_REFRESH"
+    ],
+    "SPECIES_BANETTE": [
+      "MOVE_COTTON_GUARD",
+      "MOVE_FEINT_ATTACK"
+    ],
+    "SPECIES_BAYLEEF": [
+      "MOVE_FRENZY_PLANT"
+    ],
+    "SPECIES_BEEDRILL": [
+      "MOVE_BATON_PASS"
+    ],
+    "SPECIES_BELDUM": [
+      "MOVE_HOLD_BACK"
+    ],
+    "SPECIES_BELLSPROUT": [
+      "MOVE_TEETER_DANCE"
+    ],
+    "SPECIES_BLASTOISE": [
+      "MOVE_BLOCK",
+      "MOVE_CELEBRATE",
+      "MOVE_FOLLOW_ME"
+    ],
+    "SPECIES_BLAZIKEN": [
+      "MOVE_HIGH_JUMP_KICK"
+    ],
+    "SPECIES_BLISSEY": [
+      "MOVE_SWEET_SCENT",
+      "MOVE_WISH"
+    ],
+    "SPECIES_BRELOOM": [
+      "MOVE_REFRESH"
+    ],
+    "SPECIES_BULBASAUR": [
+      "MOVE_BLOCK",
+      "MOVE_CELEBRATE",
+      "MOVE_FRENZY_PLANT"
+    ],
+    "SPECIES_BUTTERFREE": [
+      "MOVE_MORNING_SUN"
+    ],
+    "SPECIES_CACTURNE": [
+      "MOVE_FEINT_ATTACK"
+    ],
+    "SPECIES_CARVANHA": [
+      "MOVE_REFRESH"
+    ],
+    "SPECIES_CELEBI": [
+      "MOVE_HOLD_BACK"
+    ],
+    "SPECIES_CERULEDGE": [
+      "MOVE_CELEBRATE"
+    ],
+    "SPECIES_CHANSEY": [
+      "MOVE_SWEET_SCENT",
+      "MOVE_WISH"
+    ],
+    "SPECIES_CHARCADET": [
+      "MOVE_CELEBRATE"
+    ],
+    "SPECIES_CHARIZARD": [
+      "MOVE_BLOCK",
+      "MOVE_CELEBRATE",
+      "MOVE_HOLD_HANDS",
+      "MOVE_HOWL",
+      "MOVE_QUICK_ATTACK"
+    ],
+    "SPECIES_CHARMANDER": [
+      "MOVE_BLAST_BURN",
+      "MOVE_BLOCK",
+      "MOVE_CELEBRATE",
+      "MOVE_HOWL",
+      "MOVE_QUICK_ATTACK"
+    ],
+    "SPECIES_CHARMELEON": [
+      "MOVE_BLAST_BURN",
+      "MOVE_BLOCK",
+      "MOVE_CELEBRATE",
+      "MOVE_HOWL",
+      "MOVE_QUICK_ATTACK"
+    ],
+    "SPECIES_CHIKORITA": [
+      "MOVE_FRENZY_PLANT"
+    ],
+    "SPECIES_CLAYDOL": [
+      "MOVE_REFRESH"
+    ],
+    "SPECIES_CLOYSTER": [
+      "MOVE_REFRESH"
+    ],
+    "SPECIES_COMFEY": [
+      "MOVE_CELEBRATE"
+    ],
+    "SPECIES_CORPHISH": [
+      "MOVE_WATER_SPORT"
+    ],
+    "SPECIES_CORSOLA": [
+      "MOVE_MUD_SPORT"
+    ],
+    "SPECIES_COSMOEM": [
+      "MOVE_SPLASH"
+    ],
+    "SPECIES_CRAWDAUNT": [
+      "MOVE_WATER_SPORT"
+    ],
+    "SPECIES_CROCONAW": [
+      "MOVE_HYDRO_CANNON"
+    ],
+    "SPECIES_CYNDAQUIL": [
+      "MOVE_BLAST_BURN"
+    ],
+    "SPECIES_DARKRAI": [
+      "MOVE_FEINT_ATTACK",
+      "MOVE_PHANTOM_FORCE",
+      "MOVE_ROAR_OF_TIME",
+      "MOVE_SPACIAL_REND"
+    ],
+    "SPECIES_DEERLING": [
+      "MOVE_FEINT_ATTACK"
+    ],
+    "SPECIES_DELCATTY": [
+      "MOVE_PAY_DAY",
+      "MOVE_SWEET_KISS"
+    ],
+    "SPECIES_DELIBIRD": [
+      "MOVE_HAPPY_HOUR"
+    ],
+    "SPECIES_DEOXYS_NORMAL": [
+      "MOVE_COUNTER",
+      "MOVE_DETECT",
+      "MOVE_EXTREME_SPEED",
+      "MOVE_IRON_DEFENSE",
+      "MOVE_METEOR_MASH",
+      "MOVE_MIRROR_COAT",
+      "MOVE_SPIKES",
+      "MOVE_SUPERPOWER",
+      "MOVE_ZAP_CANNON"
+    ],
+    "SPECIES_DRAGONITE": [
+      "MOVE_BARRIER",
+      "MOVE_HEAL_BELL"
+    ],
+    "SPECIES_DROWZEE": [
+      "MOVE_BELLY_DRUM",
+      "MOVE_WISH"
+    ],
+    "SPECIES_EEVEE": [
+      "MOVE_CELEBRATE",
+      "MOVE_SING"
+    ],
+    "SPECIES_ELECTRODE": [
+      "MOVE_REFRESH"
+    ],
+    "SPECIES_EMBOAR": [
+      "MOVE_HOLD_BACK"
+    ],
+    "SPECIES_EMPOLEON": [
+      "MOVE_SING",
+      "MOVE_WATER_SPORT"
+    ],
+    "SPECIES_ENTEI": [
+      "MOVE_CRUSH_CLAW",
+      "MOVE_HOWL"
+    ],
+    "SPECIES_ESPEON": [
+      "MOVE_CELEBRATE",
+      "MOVE_SING",
+      "MOVE_TRUMP_CARD"
+    ],
+    "SPECIES_EXEGGCUTE": [
+      "MOVE_SWEET_SCENT",
+      "MOVE_WISH"
+    ],
+    "SPECIES_EXEGGUTOR": [
+      "MOVE_REFRESH",
+      "MOVE_SWEET_SCENT",
+      "MOVE_WISH"
+    ],
+    "SPECIES_EXEGGUTOR_ALOLA": [
+      "MOVE_CELEBRATE",
+      "MOVE_SWEET_SCENT",
+      "MOVE_WISH"
+    ],
+    "SPECIES_EXPLOUD": [
+      "MOVE_TEETER_DANCE"
+    ],
+    "SPECIES_FARFETCHD": [
+      "MOVE_WISH",
+      "MOVE_YAWN"
+    ],
+    "SPECIES_FEAROW": [
+      "MOVE_BATON_PASS"
+    ],
+    "SPECIES_FLAAFFY": [
+      "MOVE_HOLD_BACK"
+    ],
+    "SPECIES_FLABEBE": [
+      "MOVE_CELEBRATE"
+    ],
+    "SPECIES_FLAREON": [
+      "MOVE_CELEBRATE",
+      "MOVE_SING",
+      "MOVE_TRUMP_CARD"
+    ],
+    "SPECIES_FLOETTE": [
+      "MOVE_CELEBRATE"
+    ],
+    "SPECIES_FLORGES": [
+      "MOVE_CELEBRATE"
+    ],
+    "SPECIES_FORRETRESS": [
+      "MOVE_REFRESH"
+    ],
+    "SPECIES_FROSLASS": [
+      "MOVE_SING"
+    ],
+    "SPECIES_GALLADE": [
+      "MOVE_SING",
+      "MOVE_WISH"
+    ],
+    "SPECIES_GARDEVOIR": [
+      "MOVE_SING"
+    ],
+    "SPECIES_GENESECT": [
+      "MOVE_EXTREME_SPEED",
+      "MOVE_SHIFT_GEAR"
+    ],
+    "SPECIES_GLACEON": [
+      "MOVE_CELEBRATE",
+      "MOVE_SING",
+      "MOVE_TRUMP_CARD"
+    ],
+    "SPECIES_GLALIE": [
+      "MOVE_SING"
+    ],
+    "SPECIES_GOLDUCK": [
+      "MOVE_CHARM",
+      "MOVE_MUD_SPORT"
+    ],
+    "SPECIES_GRENINJA": [
+      "MOVE_HAPPY_HOUR"
+    ],
+    "SPECIES_GULPIN": [
+      "MOVE_SING"
+    ],
+    "SPECIES_GYARADOS": [
+      "MOVE_CELEBRATE",
+      "MOVE_HAPPY_HOUR"
+    ],
+    "SPECIES_HARIYAMA": [
+      "MOVE_REFRESH"
+    ],
+    "SPECIES_HEATRAN": [
+      "MOVE_ERUPTION"
+    ],
+    "SPECIES_HITMONLEE": [
+      "MOVE_REFRESH"
+    ],
+    "SPECIES_HOUNDOOM": [
+      "MOVE_CHARM",
+      "MOVE_FEINT_ATTACK"
+    ],
+    "SPECIES_HOUNDOUR": [
+      "MOVE_CHARM",
+      "MOVE_FEINT_ATTACK"
+    ],
+    "SPECIES_HO_OH": [
+      "MOVE_CELEBRATE"
+    ],
+    "SPECIES_HYPNO": [
+      "MOVE_BELLY_DRUM",
+      "MOVE_WISH"
+    ],
+    "SPECIES_IGGLYBUFF": [
+      "MOVE_TICKLE"
+    ],
+    "SPECIES_INKAY": [
+      "MOVE_HAPPY_HOUR"
+    ],
+    "SPECIES_IVYSAUR": [
+      "MOVE_BLOCK",
+      "MOVE_CELEBRATE",
+      "MOVE_FRENZY_PLANT"
+    ],
+    "SPECIES_JIGGLYPUFF": [
+      "MOVE_TICKLE"
+    ],
+    "SPECIES_JIRACHI": [
+      "MOVE_DRACO_METEOR",
+      "MOVE_FOLLOW_ME",
+      "MOVE_HAPPY_HOUR",
+      "MOVE_HEART_STAMP",
+      "MOVE_MOONBLAST"
+    ],
+    "SPECIES_JOLTEON": [
+      "MOVE_CELEBRATE",
+      "MOVE_SING",
+      "MOVE_TRUMP_CARD"
+    ],
+    "SPECIES_JUMPLUFF": [
+      "MOVE_FALSE_SWIPE"
+    ],
+    "SPECIES_KANGASKHAN": [
+      "MOVE_SING",
+      "MOVE_WISH",
+      "MOVE_YAWN"
+    ],
+    "SPECIES_KIRLIA": [
+      "MOVE_SING",
+      "MOVE_WISH"
+    ],
+    "SPECIES_KLAWF": [
+      "MOVE_BLOCK"
+    ],
+    "SPECIES_KLEAVOR": [
+      "MOVE_MORNING_SUN",
+      "MOVE_RAZOR_WIND",
+      "MOVE_WING_ATTACK"
+    ],
+    "SPECIES_LATIAS": [
+      "MOVE_SWEET_KISS"
+    ],
+    "SPECIES_LEAFEON": [
+      "MOVE_CELEBRATE",
+      "MOVE_SING",
+      "MOVE_TRUMP_CARD"
+    ],
+    "SPECIES_LEDIAN": [
+      "MOVE_REFRESH"
+    ],
+    "SPECIES_LEDYBA": [
+      "MOVE_REFRESH"
+    ],
+    "SPECIES_LICKILICKY": [
+      "MOVE_HEAL_BELL",
+      "MOVE_WISH"
+    ],
+    "SPECIES_LICKITUNG": [
+      "MOVE_HEAL_BELL",
+      "MOVE_WISH"
+    ],
+    "SPECIES_LOUDRED": [
+      "MOVE_TEETER_DANCE"
+    ],
+    "SPECIES_LUCARIO": [
+      "MOVE_HIGH_JUMP_KICK"
+    ],
+    "SPECIES_LUGIA": [
+      "MOVE_FEATHER_DANCE",
+      "MOVE_PSYCHO_BOOST"
+    ],
+    "SPECIES_LUNALA": [
+      "MOVE_SPLASH"
+    ],
+    "SPECIES_LYCANROC_DUSK": [
+      "MOVE_HAPPY_HOUR"
+    ],
+    "SPECIES_MAGCARGO": [
+      "MOVE_REFRESH"
+    ],
+    "SPECIES_MAGIKARP": [
+      "MOVE_CELEBRATE",
+      "MOVE_HAPPY_HOUR"
+    ],
+    "SPECIES_MAGMAR": [
+      "MOVE_FEINT_ATTACK"
+    ],
+    "SPECIES_MAGMORTAR": [
+      "MOVE_FEINT_ATTACK"
+    ],
+    "SPECIES_MAGNETON": [
+      "MOVE_REFRESH"
+    ],
+    "SPECIES_MAGNEZONE": [
+      "MOVE_REFRESH"
+    ],
+    "SPECIES_MAKUHITA": [
+      "MOVE_REFRESH"
+    ],
+    "SPECIES_MALAMAR": [
+      "MOVE_HAPPY_HOUR"
+    ],
+    "SPECIES_MANDIBUZZ": [
+      "MOVE_FEINT_ATTACK"
+    ],
+    "SPECIES_MANECTRIC": [
+      "MOVE_REFRESH"
+    ],
+    "SPECIES_MAREEP": [
+      "MOVE_HOLD_BACK"
+    ],
+    "SPECIES_MAROWAK": [
+      "MOVE_HEX",
+      "MOVE_SING",
+      "MOVE_WILL_O_WISP"
+    ],
+    "SPECIES_MASQUERAIN": [
+      "MOVE_MUD_SPORT"
+    ],
+    "SPECIES_MAUSHOLD": [
+      "MOVE_CELEBRATE"
+    ],
+    "SPECIES_MAWILE": [
+      "MOVE_SING",
+      "MOVE_VISE_GRIP"
+    ],
+    "SPECIES_MELOETTA": [
+      "MOVE_CELEBRATE"
+    ],
+    "SPECIES_MEOWTH": [
+      "MOVE_HAPPY_HOUR",
+      "MOVE_PETAL_DANCE",
+      "MOVE_SING"
+    ],
+    "SPECIES_METAGROSS": [
+      "MOVE_HOLD_BACK",
+      "MOVE_REFRESH"
+    ],
+    "SPECIES_METANG": [
+      "MOVE_HOLD_BACK",
+      "MOVE_REFRESH"
+    ],
+    "SPECIES_MEW": [
+      "MOVE_FAKE_OUT",
+      "MOVE_FEINT_ATTACK",
+      "MOVE_HYPNOSIS"
+    ],
+    "SPECIES_MEWTWO": [
+      "MOVE_HEAL_PULSE"
+    ],
+    "SPECIES_MIGHTYENA": [
+      "MOVE_HEAL_BELL"
+    ],
+    "SPECIES_MILCERY": [
+      "MOVE_CELEBRATE"
+    ],
+    "SPECIES_MIMIKYU": [
+      "MOVE_FEINT_ATTACK"
+    ],
+    "SPECIES_MINUN": [
+      "MOVE_MUD_SPORT"
+    ],
+    "SPECIES_MOLTRES": [
+      "MOVE_EXTRASENSORY",
+      "MOVE_MORNING_SUN"
+    ],
+    "SPECIES_MR_MIME": [
+      "MOVE_FOLLOW_ME"
+    ],
+    "SPECIES_MUNCHLAX": [
+      "MOVE_HAPPY_HOUR",
+      "MOVE_HOLD_BACK"
+    ],
+    "SPECIES_NINETALES_ALOLA": [
+      "MOVE_CELEBRATE"
+    ],
+    "SPECIES_NUZLEAF": [
+      "MOVE_BIDE",
+      "MOVE_REFRESH"
+    ],
+    "SPECIES_ORTHWORM": [
+      "MOVE_HEADBUTT"
+    ],
+    "SPECIES_PARAS": [
+      "MOVE_REFRESH"
+    ],
+    "SPECIES_PARASECT": [
+      "MOVE_REFRESH"
+    ],
+    "SPECIES_PAWMI": [
+      "MOVE_CELEBRATE"
+    ],
+    "SPECIES_PAWMO": [
+      "MOVE_CELEBRATE"
+    ],
+    "SPECIES_PAWMOT": [
+      "MOVE_CELEBRATE"
+    ],
+    "SPECIES_PERSIAN": [
+      "MOVE_HAPPY_HOUR",
+      "MOVE_PETAL_DANCE",
+      "MOVE_SING"
+    ],
+    "SPECIES_PHEROMOSA": [
+      "MOVE_HIGH_JUMP_KICK"
+    ],
+    "SPECIES_PICHU": [
+      "MOVE_ENDEAVOR",
+      "MOVE_FOLLOW_ME",
+      "MOVE_PAIN_SPLIT",
+      "MOVE_TEETER_DANCE"
+    ],
+    "SPECIES_PIDGEOT": [
+      "MOVE_REFRESH"
+    ],
+    "SPECIES_PIDGEOTTO": [
+      "MOVE_REFRESH"
+    ],
+    "SPECIES_PIKACHU": [
+      "MOVE_CELEBRATE",
+      "MOVE_EXTREME_SPEED",
+      "MOVE_FLY",
+      "MOVE_FOLLOW_ME",
+      "MOVE_HAPPY_HOUR",
+      "MOVE_HEART_STAMP",
+      "MOVE_HOLD_HANDS",
+      "MOVE_LAST_RESORT",
+      "MOVE_REFRESH",
+      "MOVE_SING",
+      "MOVE_SWEET_SCENT",
+      "MOVE_TEETER_DANCE",
+      "MOVE_YAWN"
+    ],
+    "SPECIES_PINECO": [
+      "MOVE_REFRESH"
+    ],
+    "SPECIES_PIPLUP": [
+      "MOVE_SING"
+    ],
+    "SPECIES_PLUSLE": [
+      "MOVE_WATER_SPORT"
+    ],
+    "SPECIES_POLITOED": [
+      "MOVE_BUBBLE",
+      "MOVE_SWEET_KISS"
+    ],
+    "SPECIES_POLIWAG": [
+      "MOVE_SWEET_KISS"
+    ],
+    "SPECIES_POLIWHIRL": [
+      "MOVE_SWEET_KISS"
+    ],
+    "SPECIES_POLIWRATH": [
+      "MOVE_SWEET_KISS"
+    ],
+    "SPECIES_POLTEAGEIST": [
+      "MOVE_CELEBRATE"
+    ],
+    "SPECIES_POOCHYENA": [
+      "MOVE_HEAL_BELL"
+    ],
+    "SPECIES_PORYGON2": [
+      "MOVE_SHARPEN"
+    ],
+    "SPECIES_PORYGON_Z": [
+      "MOVE_SHARPEN"
+    ],
+    "SPECIES_PRINPLUP": [
+      "MOVE_SING"
+    ],
+    "SPECIES_PSYDUCK": [
+      "MOVE_MUD_SPORT"
+    ],
+    "SPECIES_QUILAVA": [
+      "MOVE_BLAST_BURN"
+    ],
+    "SPECIES_RAICHU": [
+      "MOVE_CELEBRATE",
+      "MOVE_EXTREME_SPEED",
+      "MOVE_FLY",
+      "MOVE_FOLLOW_ME",
+      "MOVE_HAPPY_HOUR",
+      "MOVE_HEART_STAMP",
+      "MOVE_HOLD_HANDS",
+      "MOVE_LAST_RESORT",
+      "MOVE_REFRESH",
+      "MOVE_SING",
+      "MOVE_SWEET_SCENT",
+      "MOVE_TEETER_DANCE",
+      "MOVE_YAWN"
+    ],
+    "SPECIES_RAICHU_ALOLA": [
+      "MOVE_CELEBRATE",
+      "MOVE_COUNTER",
+      "MOVE_EXTREME_SPEED",
+      "MOVE_FLASH",
+      "MOVE_FLY",
+      "MOVE_FOLLOW_ME",
+      "MOVE_HAPPY_HOUR",
+      "MOVE_HEART_STAMP",
+      "MOVE_HOLD_HANDS",
+      "MOVE_LAST_RESORT",
+      "MOVE_REFRESH",
+      "MOVE_SING",
+      "MOVE_SWEET_SCENT",
+      "MOVE_TEETER_DANCE",
+      "MOVE_YAWN"
+    ],
+    "SPECIES_RALTS": [
+      "MOVE_SING",
+      "MOVE_WISH"
+    ],
+    "SPECIES_RATICATE": [
+      "MOVE_REFRESH"
+    ],
+    "SPECIES_RAYQUAZA": [
+      "MOVE_CELEBRATE",
+      "MOVE_V_CREATE"
+    ],
+    "SPECIES_RESHIRAM": [
+      "MOVE_MIST"
+    ],
+    "SPECIES_ROCKRUFF": [
+      "MOVE_HAPPY_HOUR"
+    ],
+    "SPECIES_ROSELIA": [
+      "MOVE_SWEET_KISS"
+    ],
+    "SPECIES_ROSERADE": [
+      "MOVE_SWEET_KISS"
+    ],
+    "SPECIES_ROTOM": [
+      "MOVE_DISARMING_VOICE"
+    ],
+    "SPECIES_SABLEYE": [
+      "MOVE_FEINT_ATTACK",
+      "MOVE_OCTAZOOKA",
+      "MOVE_TICKLE"
+    ],
+    "SPECIES_SALAMENCE": [
+      "MOVE_REFRESH",
+      "MOVE_WISH"
+    ],
+    "SPECIES_SAMUROTT": [
+      "MOVE_HOLD_BACK"
+    ],
+    "SPECIES_SAWSBUCK": [
+      "MOVE_FEINT_ATTACK"
+    ],
+    "SPECIES_SCIZOR": [
+      "MOVE_MORNING_SUN"
+    ],
+    "SPECIES_SCYTHER": [
+      "MOVE_MORNING_SUN"
+    ],
+    "SPECIES_SEALEO": [
+      "MOVE_CHARM"
+    ],
+    "SPECIES_SEEDOT": [
+      "MOVE_REFRESH"
+    ],
+    "SPECIES_SERPERIOR": [
+      "MOVE_AROMATHERAPY",
+      "MOVE_HOLD_BACK"
+    ],
+    "SPECIES_SERVINE": [
+      "MOVE_AROMATHERAPY"
+    ],
+    "SPECIES_SHARPEDO": [
+      "MOVE_REFRESH"
+    ],
+    "SPECIES_SHAYMIN_LAND": [
+      "MOVE_CELEBRATE"
+    ],
+    "SPECIES_SHELGON": [
+      "MOVE_WISH"
+    ],
+    "SPECIES_SHELLDER": [
+      "MOVE_REFRESH"
+    ],
+    "SPECIES_SHIFTRY": [
+      "MOVE_BIDE",
+      "MOVE_REFRESH"
+    ],
+    "SPECIES_SHROOMISH": [
+      "MOVE_REFRESH"
+    ],
+    "SPECIES_SHUPPET": [
+      "MOVE_FEINT_ATTACK"
+    ],
+    "SPECIES_SINISTEA": [
+      "MOVE_CELEBRATE"
+    ],
+    "SPECIES_SKITTY": [
+      "MOVE_PAY_DAY"
+    ],
+    "SPECIES_SMEARGLE": [
+      "MOVE_DOUBLE_SLAP",
+      "MOVE_FALSE_SWIPE",
+      "MOVE_FLAMETHROWER",
+      "MOVE_FURY_SWIPES",
+      "MOVE_IRON_TAIL",
+      "MOVE_MEAN_LOOK",
+      "MOVE_ODOR_SLEUTH",
+      "MOVE_SEISMIC_TOSS",
+      "MOVE_SPORE",
+      "MOVE_TAIL_WHIP"
+    ],
+    "SPECIES_SNIVY": [
+      "MOVE_AROMATHERAPY"
+    ],
+    "SPECIES_SNORLAX": [
+      "MOVE_CELEBRATE",
+      "MOVE_HAPPY_HOUR",
+      "MOVE_HOLD_BACK",
+      "MOVE_ODOR_SLEUTH",
+      "MOVE_REFRESH"
+    ],
+    "SPECIES_SNORUNT": [
+      "MOVE_SING"
+    ],
+    "SPECIES_SOLGALEO": [
+      "MOVE_SPLASH"
+    ],
+    "SPECIES_SPEAROW": [
+      "MOVE_BATON_PASS"
+    ],
+    "SPECIES_SPHEAL": [
+      "MOVE_CHARM"
+    ],
+    "SPECIES_SPINARAK": [
+      "MOVE_REFRESH"
+    ],
+    "SPECIES_SPINDA": [
+      "MOVE_SING"
+    ],
+    "SPECIES_SQUIRTLE": [
+      "MOVE_BLOCK",
+      "MOVE_CELEBRATE",
+      "MOVE_FOLLOW_ME",
+      "MOVE_HYDRO_CANNON"
+    ],
+    "SPECIES_STARMIE": [
+      "MOVE_REFRESH"
+    ],
+    "SPECIES_STEENEE": [
+      "MOVE_CELEBRATE"
+    ],
+    "SPECIES_SUICUNE": [
+      "MOVE_AQUA_RING"
+    ],
+    "SPECIES_SURSKIT": [
+      "MOVE_MUD_SPORT"
+    ],
+    "SPECIES_SWALOT": [
+      "MOVE_SING"
+    ],
+    "SPECIES_SWELLOW": [
+      "MOVE_BATON_PASS",
+      "MOVE_FEATHER_DANCE"
+    ],
+    "SPECIES_SYLVEON": [
+      "MOVE_CELEBRATE",
+      "MOVE_SING",
+      "MOVE_TRUMP_CARD"
+    ],
+    "SPECIES_TAILLOW": [
+      "MOVE_FEATHER_DANCE"
+    ],
+    "SPECIES_TANDEMAUS": [
+      "MOVE_CELEBRATE"
+    ],
+    "SPECIES_TANGELA": [
+      "MOVE_MORNING_SUN"
+    ],
+    "SPECIES_TANGROWTH": [
+      "MOVE_MORNING_SUN"
+    ],
+    "SPECIES_TATSUGIRI": [
+      "MOVE_CELEBRATE"
+    ],
+    "SPECIES_TAUROS": [
+      "MOVE_REFRESH"
+    ],
+    "SPECIES_TEDDIURSA": [
+      "MOVE_REFRESH"
+    ],
+    "SPECIES_TOEDSCOOL": [
+      "MOVE_CELEBRATE"
+    ],
+    "SPECIES_TOEDSCRUEL": [
+      "MOVE_CELEBRATE"
+    ],
+    "SPECIES_TOTODILE": [
+      "MOVE_HYDRO_CANNON"
+    ],
+    "SPECIES_TSAREENA": [
+      "MOVE_CELEBRATE"
+    ],
+    "SPECIES_UMBREON": [
+      "MOVE_CELEBRATE",
+      "MOVE_FEINT_ATTACK",
+      "MOVE_SING",
+      "MOVE_TRUMP_CARD"
+    ],
+    "SPECIES_URSALUNA": [
+      "MOVE_REFRESH",
+      "MOVE_RETURN"
+    ],
+    "SPECIES_URSARING": [
+      "MOVE_REFRESH"
+    ],
+    "SPECIES_VAPOREON": [
+      "MOVE_CELEBRATE",
+      "MOVE_SING",
+      "MOVE_TRUMP_CARD"
+    ],
+    "SPECIES_VENOMOTH": [
+      "MOVE_REFRESH"
+    ],
+    "SPECIES_VENUSAUR": [
+      "MOVE_CELEBRATE"
+    ],
+    "SPECIES_VICTINI": [
+      "MOVE_BLUE_FLARE",
+      "MOVE_BOLT_STRIKE",
+      "MOVE_CELEBRATE",
+      "MOVE_FUSION_BOLT",
+      "MOVE_FUSION_FLARE",
+      "MOVE_GLACIATE"
+    ],
+    "SPECIES_VICTREEBEL": [
+      "MOVE_MORNING_SUN",
+      "MOVE_TEETER_DANCE"
+    ],
+    "SPECIES_VIVILLON": [
+      "MOVE_HOLD_HANDS"
+    ],
+    "SPECIES_VOLTORB": [
+      "MOVE_REFRESH"
+    ],
+    "SPECIES_VULPIX_ALOLA": [
+      "MOVE_CELEBRATE"
+    ],
+    "SPECIES_WALREIN": [
+      "MOVE_CHARM"
+    ],
+    "SPECIES_WARTORTLE": [
+      "MOVE_BLOCK",
+      "MOVE_CELEBRATE",
+      "MOVE_FOLLOW_ME",
+      "MOVE_HYDRO_CANNON"
+    ],
+    "SPECIES_WEEPINBELL": [
+      "MOVE_MORNING_SUN",
+      "MOVE_TEETER_DANCE"
+    ],
+    "SPECIES_WHISMUR": [
+      "MOVE_TEETER_DANCE"
+    ],
+    "SPECIES_WIGGLYTUFF": [
+      "MOVE_TICKLE"
+    ],
+    "SPECIES_WOBBUFFET": [
+      "MOVE_TICKLE"
+    ],
+    "SPECIES_WYNAUT": [
+      "MOVE_TICKLE"
+    ],
+    "SPECIES_ZANGOOSE": [
+      "MOVE_REFRESH"
+    ],
+    "SPECIES_ZAPDOS": [
+      "MOVE_EXTRASENSORY"
+    ],
+    "SPECIES_ZOROARK_HISUI": [
+      "MOVE_HAPPY_HOUR"
+    ]
+  }
+}

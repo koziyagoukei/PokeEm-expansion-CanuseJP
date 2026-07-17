@@ -644,6 +644,7 @@ extern const u8 gText_ConfirmLinkWhenPlayersReady[];
 extern const u8 gText_ConfirmStartLinkWithXPlayers[];
 extern const u8 gText_AwaitingLinkup[];
 extern const u8 gText_PleaseWaitForLink[];
+extern const u8 gText_LinkIncompatible[];
 extern const u8 gText_BronzeCard[];
 extern const u8 gText_CopperCard[];
 extern const u8 gText_SilverCard[];

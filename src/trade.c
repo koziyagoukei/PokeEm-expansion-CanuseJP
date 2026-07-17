@@ -523,6 +523,14 @@ static void CB2_CreateTradeMenu(void)
     case 4:
         if (gReceivedRemoteLinkPlayers == TRUE && IsLinkPlayerDataExchangeComplete() == TRUE)
         {
+            if (!AreAllLinkPlayersCompatible())
+            {
+                gSpecialVar_Result = LINKUP_INCOMPATIBLE;
+                DestroyTask_RfuIdle();
+                CloseLinkForIncompatibility();
+                gMain.state = 100;
+                break;
+            }
             DestroyTask_RfuIdle();
             CalculatePlayerPartyCount();
             gMain.state++;
@@ -695,6 +703,15 @@ static void CB2_CreateTradeMenu(void)
         {
             gMain.callback1 = CB1_UpdateLink;
             SetMainCallback2(CB2_TradeMenu);
+        }
+        break;
+    case 100:
+        if (!gReceivedRemoteLinkPlayers)
+        {
+            FREE_AND_SET_NULL(sMenuTextTileBuffer);
+            FREE_AND_SET_NULL(sTradeMenu);
+            FreeAllWindowBuffers();
+            SetMainCallback2(CB2_ReturnToFieldFromLinkIncompatible);
         }
         break;
     }

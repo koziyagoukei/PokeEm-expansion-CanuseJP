@@ -66,6 +66,7 @@
 #include "constants/songs.h"
 #include "constants/species.h"
 #include "constants/weather.h"
+#include "config/link_compat.h"
 #include "siirtc.h"
 #include "rtc.h"
 #include "fake_rtc.h"
@@ -409,6 +410,7 @@ extern const u8 Debug_CheckSaveBlock[];
 extern const u8 Debug_CheckROMSpace[];
 extern const u8 Debug_BoxFilledMessage[];
 extern const u8 Debug_ShowExpansionVersion[];
+extern const u8 Debug_ShowLinkCompatibility[];
 extern const u8 Debug_EventScript_EWRAMCounters[];
 extern const u8 Debug_Follower_NPC_Event_Script[];
 extern const u8 Debug_Follower_NPC_Not_Enabled[];
@@ -714,6 +716,7 @@ static const struct DebugMenuOption sDebugMenu_Actions_ROMInfo2[] =
     { COMPOUND_STRING("{JPN}セーブブロックようりょう"),  DebugAction_ExecuteScript, Debug_CheckSaveBlock },
     { COMPOUND_STRING("{JPN}ロムようりょう"),         DebugAction_ExecuteScript, Debug_CheckROMSpace },
     { COMPOUND_STRING("{JPN}かくちょうバージョン"), DebugAction_ExecuteScript, Debug_ShowExpansionVersion },
+    { COMPOUND_STRING("Link Compat"), DebugAction_ExecuteScript, Debug_ShowLinkCompatibility },
     { NULL }
 };
 
@@ -1786,6 +1789,24 @@ void BufferExpansionVersion(struct ScriptContext *ctx)
         string = StringCopy(string, sText_Released);
     else
         string = StringCopy(string, sText_Unreleased);
+}
+
+void BufferLinkCompatibilityInfo(struct ScriptContext *ctx)
+{
+    static const u8 sText_LinkCompat[] = _("Link Compat: ");
+    static const u8 sText_DataLayout[] = _("\nData Layout: ");
+    static const u8 sText_Variant[] = _("\nVariant: ");
+    static const u8 sText_FrontierHack[] = _("Frontier Hack");
+    u8 *string;
+
+    (void)ctx;
+    string = StringCopy(gStringVar1, sText_LinkCompat);
+    string = ConvertIntToDecimalStringN(string, LINK_COMPAT_VERSION, STR_CONV_MODE_LEFT_ALIGN, 2);
+    string = StringCopy(string, sText_DataLayout);
+    string = ConvertIntToDecimalStringN(string, LINK_DATA_LAYOUT_VERSION, STR_CONV_MODE_LEFT_ALIGN, 2);
+    string = StringCopy(string, sText_Variant);
+    if (LINK_BUILD_VARIANT == LINK_VARIANT_FRONTIER_HACK)
+        StringCopy(string, sText_FrontierHack);
 }
 
 void DebugMenu_CalculateTime(struct ScriptContext *ctx)

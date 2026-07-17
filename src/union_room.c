@@ -12,6 +12,7 @@
 #include "event_data.h"
 #include "event_object_lock.h"
 #include "fieldmap.h"
+#include "field_message_box.h"
 #include "field_control_avatar.h"
 #include "field_player_avatar.h"
 #include "field_screen_effect.h"
@@ -147,7 +148,8 @@ enum {
     LL_STATE_FAILED,
     LL_STATE_TRY_START_ACTIVITY = 26,
     LL_STATE_MEMBER_DISCONNECTED = 29,
-    LL_STATE_CANCEL_WITH_MSG
+    LL_STATE_CANCEL_WITH_MSG,
+    LL_STATE_INCOMPATIBLE,
 };
 
 // States for Task_TryJoinLinkGroup
@@ -172,6 +174,8 @@ enum {
     LG_STATE_READY_START_ACTIVITY,
     LG_STATE_START_ACTIVITY,
     LG_STATE_SHUTDOWN = 23,
+    LG_STATE_INCOMPATIBLE,
+    LG_STATE_INCOMPATIBLE_WAIT,
 };
 
 // Color types for PrintUnionRoomText
@@ -245,6 +249,9 @@ static bool32 ArePlayerDataDifferent(struct RfuPlayerData *, struct RfuPlayerDat
 static u32 GetPartyPositionOfRegisteredMon(struct UnionRoomTrade *, u8);
 static void ResetUnionRoomTrade(struct UnionRoomTrade *);
 static void CreateTask_StartActivity(void);
+static bool32 ActivityUsesProjectLinkProtocol(u16 activity);
+static void AbortIncompatibleActivity(u8 taskId);
+static void Task_WaitForIncompatibleActivityDisconnect(u8 taskId);
 static bool32 HasWonderCardOrNewsByLinkGroup(struct RfuGameData *, s16);
 static u8 CreateTask_SearchForChildOrParent(struct RfuIncomingPlayerList *, struct RfuIncomingPlayerList *, u32);
 static bool32 RegisterTradeMonAndGetIsEgg(u32, struct UnionRoomTrade *);
@@ -705,6 +712,14 @@ static void Task_TryBecomeLinkLeader(u8 taskId)
         {
             if (gReceivedRemoteLinkPlayers)
             {
+                if (ActivityUsesProjectLinkProtocol(gPlayerCurrActivity) && !AreAllLinkPlayersCompatible())
+                {
+                    gSpecialVar_Result = LINKUP_INCOMPATIBLE;
+                    CloseLinkForIncompatibility();
+                    Leader_DestroyResources(data);
+                    data->state = LL_STATE_INCOMPATIBLE;
+                    break;
+                }
                 if (IsActivityWithVariableGroupSize(gPlayerCurrActivity))
                     GetOtherPlayersInfoFlags();
                 UpdateGameData_GroupLockedIn(TRUE);
@@ -712,6 +727,15 @@ static void Task_TryBecomeLinkLeader(u8 taskId)
                 Leader_DestroyResources(data);
                 DestroyTask(taskId);
             }
+        }
+        break;
+    case LL_STATE_INCOMPATIBLE:
+        if (!gReceivedRemoteLinkPlayers)
+        {
+            DestroyWirelessStatusIndicatorSprite();
+            LinkRfu_Shutdown();
+            ScriptContext_Enable();
+            DestroyTask(taskId);
         }
         break;
     }
@@ -1089,6 +1113,13 @@ static void Task_TryJoinLinkGroup(u8 taskId)
         if (gReceivedRemoteLinkPlayers)
         {
             gPlayerCurrActivity = data->playerList->players[data->leaderId].rfu.data.activity;
+            if (ActivityUsesProjectLinkProtocol(gPlayerCurrActivity) && !AreAllLinkPlayersCompatible())
+            {
+                gSpecialVar_Result = LINKUP_INCOMPATIBLE;
+                CloseLinkForIncompatibility();
+                data->state = LG_STATE_INCOMPATIBLE;
+                break;
+            }
             RfuSetStatus(RFU_STATUS_OK, 0);
             switch (gPlayerCurrActivity)
             {
@@ -1205,6 +1236,7 @@ static void Task_TryJoinLinkGroup(u8 taskId)
     case LG_STATE_DISCONNECTED:         // next: LG_STATE_RETRY_CONNECTION
     case LG_STATE_TRADE_NOT_READY:      // next: LG_STATE_TRADE_NOT_READY_RETRY
     case LG_STATE_READY_START_ACTIVITY: // next: LG_STATE_START_ACTIVITY
+    case LG_STATE_INCOMPATIBLE:          // next: LG_STATE_INCOMPATIBLE_WAIT
         ClearWindowTilemap(data->playerNameAndIdWindowId);
         ClearStdWindowAndFrame(data->playerNameAndIdWindowId, FALSE);
         DestroyListMenuTask(data->listTaskId, 0, 0);
@@ -1254,6 +1286,15 @@ static void Task_TryJoinLinkGroup(u8 taskId)
         DestroyTask(taskId);
         JoinGroup_EnableScriptContexts();
         LinkRfu_Shutdown();
+        break;
+    case LG_STATE_INCOMPATIBLE_WAIT:
+        if (!gReceivedRemoteLinkPlayers)
+        {
+            DestroyWirelessStatusIndicatorSprite();
+            LinkRfu_Shutdown();
+            DestroyTask(taskId);
+            JoinGroup_EnableScriptContexts();
+        }
         break;
     case LG_STATE_START_ACTIVITY:
         CreateTask_RunScriptAndFadeToActivity();
@@ -1480,6 +1521,11 @@ static void Task_StartUnionRoomTrade(u8 taskId)
     switch (gTasks[taskId].data[0])
     {
     case 0:
+        if (!AreAllLinkPlayersCompatible())
+        {
+            AbortIncompatibleActivity(taskId);
+            break;
+        }
         gTasks[taskId].data[0]++;
         SendBlock(0, &gParties[B_TRAINER_PLAYER][monId], sizeof(struct Pokemon));
         break;
@@ -1639,8 +1685,47 @@ static void CreateTrainerCardInBuffer(void *dest, bool32 setWonderCard)
         card->hasAllFrontierSymbols = 0;
 }
 
+static bool32 ActivityUsesProjectLinkProtocol(u16 activity)
+{
+    u8 baseActivity = activity & 0xFF;
+
+    if ((baseActivity == ACTIVITY_NONE)
+     && (gSpecialVar_0x8004 == LINK_GROUP_WONDER_CARD || gSpecialVar_0x8004 == LINK_GROUP_WONDER_NEWS))
+        return FALSE;
+
+    baseActivity &= ~IN_UNION_ROOM;
+    return baseActivity != ACTIVITY_WONDER_CARD
+        && baseActivity != ACTIVITY_WONDER_NEWS
+        && baseActivity != ACTIVITY_WONDER_CARD_DUP
+        && baseActivity != ACTIVITY_WONDER_NEWS_DUP;
+}
+
+static void AbortIncompatibleActivity(u8 taskId)
+{
+    gSpecialVar_Result = LINKUP_INCOMPATIBLE;
+    CloseLinkForIncompatibility();
+    gTasks[taskId].func = Task_WaitForIncompatibleActivityDisconnect;
+}
+
+static void Task_WaitForIncompatibleActivityDisconnect(u8 taskId)
+{
+    if (!gReceivedRemoteLinkPlayers)
+    {
+        DestroyWirelessStatusIndicatorSprite();
+        LinkRfu_Shutdown();
+        DestroyTask(taskId);
+        SetMainCallback2(CB2_ReturnToFieldFromLinkIncompatible);
+    }
+}
+
 static void Task_StartActivity(u8 taskId)
 {
+    if (ActivityUsesProjectLinkProtocol(gPlayerCurrActivity) && !AreAllLinkPlayersCompatible())
+    {
+        AbortIncompatibleActivity(taskId);
+        return;
+    }
+
     MysteryGift_DisableStats();
     switch (gPlayerCurrActivity)
     {
@@ -2677,9 +2762,18 @@ static void Task_RunUnionRoom(u8 taskId)
 
         if (gReceivedRemoteLinkPlayers)
         {
-            CreateTrainerCardInBuffer(gBlockSendBuffer, TRUE);
-            CreateTask(Task_ExchangeCards, 5);
-            uroom->state = UR_STATE_COMMUNICATING_WAIT_FOR_DATA;
+            if (!AreAllLinkPlayersCompatible())
+            {
+                StringCopy(gStringVar4, gText_LinkIncompatible);
+                CloseLinkForIncompatibility();
+                uroom->state = UR_STATE_CANCEL_REQUEST_PRINT_MSG;
+            }
+            else
+            {
+                CreateTrainerCardInBuffer(gBlockSendBuffer, TRUE);
+                CreateTask(Task_ExchangeCards, 5);
+                uroom->state = UR_STATE_COMMUNICATING_WAIT_FOR_DATA;
+            }
         }
         break;
     case UR_STATE_COMMUNICATING_WAIT_FOR_DATA:
@@ -2889,7 +2983,18 @@ static void Task_RunUnionRoom(u8 taskId)
                 ScheduleFieldMessageWithFollowupState(UR_STATE_CANCEL_ACTIVITY_LINK_ERROR, sChatDeclinedTexts[playerGender]);
         }
         if (gReceivedRemoteLinkPlayers)
-            uroom->state = UR_STATE_START_ACTIVITY_FREE_UROOM;
+        {
+            if (!AreAllLinkPlayersCompatible())
+            {
+                StringCopy(gStringVar4, gText_LinkIncompatible);
+                CloseLinkForIncompatibility();
+                uroom->state = UR_STATE_CANCEL_REQUEST_PRINT_MSG;
+            }
+            else
+            {
+                uroom->state = UR_STATE_START_ACTIVITY_FREE_UROOM;
+            }
+        }
         break;
     case UR_STATE_PLAYER_CONTACTED_YOU:
         PlaySE(SE_DING_DONG);
@@ -2905,9 +3010,18 @@ static void Task_RunUnionRoom(u8 taskId)
         }
         else if (gReceivedRemoteLinkPlayers)
         {
-            CreateTrainerCardInBuffer(gBlockSendBuffer, TRUE);
-            CreateTask(Task_ExchangeCards, 5);
-            uroom->state = UR_STATE_WAIT_FOR_CONTACT_DATA;
+            if (!AreAllLinkPlayersCompatible())
+            {
+                StringCopy(gStringVar4, gText_LinkIncompatible);
+                CloseLinkForIncompatibility();
+                uroom->state = UR_STATE_CANCEL_REQUEST_PRINT_MSG;
+            }
+            else
+            {
+                CreateTrainerCardInBuffer(gBlockSendBuffer, TRUE);
+                CreateTask(Task_ExchangeCards, 5);
+                uroom->state = UR_STATE_WAIT_FOR_CONTACT_DATA;
+            }
         }
         break;
     case UR_STATE_WAIT_FOR_CONTACT_DATA:

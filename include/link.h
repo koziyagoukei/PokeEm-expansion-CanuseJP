@@ -149,7 +149,16 @@ enum
     EXCHANGE_PLAYER_NOT_READY,
     EXCHANGE_PARTNER_NOT_READY,
     EXCHANGE_WRONG_NUM_PLAYERS,
-    EXCHANGE_STAT_7
+    EXCHANGE_STAT_7,
+    EXCHANGE_INCOMPATIBLE,
+};
+
+enum LinkCompatibilityStatus
+{
+    LINK_COMPATIBILITY_OK,
+    LINK_COMPATIBILITY_PROJECT_MISMATCH,
+    LINK_COMPATIBILITY_VERSION_MISMATCH,
+    LINK_COMPATIBILITY_DATA_LAYOUT_MISMATCH,
 };
 
 enum
@@ -169,11 +178,11 @@ enum
 struct LinkPlayer
 {
     /* 0x00 */ u16 version;
-    /* 0x02 */ u16 lp_field_2;
+    /* 0x02 */ u16 lp_field_2; // LINK_PROJECT_ID
     /* 0x04 */ u32 trainerId;
     /* 0x08 */ u8 name[PLAYER_NAME_LENGTH + 1];
     /* 0x10 */ u8 progressFlags; // (& 0x0F) is hasNationalDex, (& 0xF0) is hasClearedGame
-    /* 0x11 */ u8 neverRead;
+    /* 0x11 */ u8 neverRead; // Packed LINK_COMPAT_VERSION / LINK_DATA_LAYOUT_VERSION
     /* 0x12 */ u8 progressFlagsCopy;
     /* 0x13 */ u8 gender;
     /* 0x14 */ u32 linkType;
@@ -303,6 +312,10 @@ void ResetLinkPlayerCount(void);
 void SaveLinkPlayers(u8 playerCount);
 void SetWirelessCommType0(void);
 bool32 IsLinkRecvQueueAtOverworldMax(void);
+enum LinkCompatibilityStatus GetLinkPlayerCompatibilityStatus(const struct LinkPlayer *player);
+bool32 AreAllLinkPlayersCompatible(void);
+bool32 DoesLinkTypeRequireCompatibility(u32 linkType);
+void CloseLinkForIncompatibility(void);
 
 extern u16 gLinkPartnersHeldKeys[6];
 extern u32 gLinkDebugSeed;

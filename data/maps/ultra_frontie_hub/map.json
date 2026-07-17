@@ -115,6 +115,14 @@
       "elevation": 0,
       "dest_map": "MAP_LILYCOVE_CITY_CONTEST_LOBBY",
       "dest_warp_id": "0"
+    },
+    {
+      "warp_id": "gotoconnect",
+      "x": 17,
+      "y": 1,
+      "elevation": 0,
+      "dest_map": "MAP_ULTRAFLONTIE_POKEMON_CENTER_2F_2",
+      "dest_warp_id": "tuusin"
     }
   ],
   "coord_events": [],

@@ -112,6 +112,10 @@ struct ContestPokemon
     u32 personality;
     u32 otId;
     u8 filter;
+    u16 heldItem;
+    u8 teraType;
+    u8 dynamaxLevel;
+    bool8 gmaxFactor;
 };
 
 struct ContestTempSave
