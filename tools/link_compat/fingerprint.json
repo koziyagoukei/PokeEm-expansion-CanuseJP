@@ -6,6 +6,7 @@
       "battle_volatile_layout": "683e2722bdfe5553ae86ac10242878854ac260ba16d8a5fe6545920766313344",
       "battle_volatiles": "49f07bad9c2522920b83565e5e722d6d59ee9fad6ed46071c408c03ee0862742",
       "box_pokemon": "7269b31bf963339c61fb6c4110c2bfd16099150dd668ac95a35229bdcce7e7f0",
+      "choose_move_packet": "2f88099affd8b0d2c688b6a6920d88db2ac562ec83bd58bc88ccd9c4d1240ff3",
       "contest_appeal_results": "d656f2a14e0d752229c00375183d44c9c388dc95ba54d8d9e7615ec5e889b951",
       "contest_excitement": "7e496719d5122779ffd3693e7a83095b50950b4e1bdb60ee9b47eceb91de3b06",
       "contest_move_selection_packet": "e812e01519bcd5dba5c5ee49c660a80a07b388761ee6e6f72ab522ed10ac317f",
@@ -39,13 +40,13 @@
       "union_room_activities": "9024f4f9a004353a2222be88d9d6768d42d00f21df05a589394ff353895686cf"
     }
   },
-  "data_layout_version": 1,
+  "data_layout_version": 2,
   "fingerprints": {
-    "combined": "da644e575d1c2ab5fe812623ed5e9d54a676aa817322fce046a3e441e69e94e6",
-    "data_layout": "55c8e25511d5ec670ba0ae4e75470bd7c8c79a4255f5c8343a08c7dfb91da354",
+    "combined": "e99c82a39cdad0bb99820c205782619256293c747b28c2b7e78d13fffae26717",
+    "data_layout": "4b54a91b38d2c0a285b8e163d731274b421107944d3f2f4183fff96137bd7276",
     "protocol": "bfa1681ac860f08305a0aa05725ddd3cdbf6d0db9f9f0086968faa7bde1ddf18"
   },
-  "link_compat_version": 1,
+  "link_compat_version": 2,
   "schema_version": 1,
   "summary": {
     "buffer_sizes": {

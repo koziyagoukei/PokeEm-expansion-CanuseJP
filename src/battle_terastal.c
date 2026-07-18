@@ -70,7 +70,7 @@ bool32 CanTerastallize(enum BattlerId battler)
     if (gBattleTypeFlags & BATTLE_TYPE_FIRST_BATTLE && !IsOnPlayerSide(battler))
         return FALSE;
 
-    if (TESTING || !IsOnPlayerSide(battler))
+    if (TESTING || !BattlerIsPlayer(battler))
     {
         // Skip all other checks in this block, go to HasTrainerUsedGimmick
     }

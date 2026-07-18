@@ -41,7 +41,7 @@ TEST("Link compatibility rejects a different project")
 TEST("Link compatibility rejects a different protocol version")
 {
     struct LinkPlayer player = CompatibleLinkPlayer();
-    u8 otherVersion = (LINK_COMPAT_VERSION ^ 1) & LINK_COMPAT_VERSION_MASK;
+    u8 otherVersion = (LINK_COMPAT_VERSION ^ 0x1) & LINK_COMPAT_VERSION_MASK;
 
     player.neverRead = (otherVersion << LINK_COMPAT_VERSION_SHIFT) | LINK_DATA_LAYOUT_VERSION;
     EXPECT_EQ(GetLinkPlayerCompatibilityStatus(&player), LINK_COMPATIBILITY_VERSION_MISMATCH);
@@ -50,7 +50,7 @@ TEST("Link compatibility rejects a different protocol version")
 TEST("Link compatibility rejects a different data layout version")
 {
     struct LinkPlayer player = CompatibleLinkPlayer();
-    u8 otherVersion = (LINK_DATA_LAYOUT_VERSION ^ 1) & LINK_COMPAT_VERSION_MASK;
+    u8 otherVersion = (LINK_DATA_LAYOUT_VERSION ^ 0x1) & LINK_COMPAT_VERSION_MASK;
 
     player.neverRead = (LINK_COMPAT_VERSION << LINK_COMPAT_VERSION_SHIFT) | otherVersion;
     EXPECT_EQ(GetLinkPlayerCompatibilityStatus(&player), LINK_COMPATIBILITY_DATA_LAYOUT_MISMATCH);

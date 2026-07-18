@@ -2183,6 +2183,16 @@ void PlayerHandleChooseMove(enum BattlerId battler)
     {
         struct ChooseMoveStruct *moveInfo = (struct ChooseMoveStruct *)(&gBattleResources->bufferA[battler][4]);
 
+        // Link clients do not run the authoritative battle engine. Keep the local
+        // move UI in sync with the types and gimmick selected by the link master.
+        for (enum BattlerId typeBattler = 0; typeBattler < MAX_BATTLERS_COUNT; typeBattler++)
+        {
+            gBattleMons[typeBattler].types[0] = moveInfo->battlerTypes[typeBattler][0];
+            gBattleMons[typeBattler].types[1] = moveInfo->battlerTypes[typeBattler][1];
+            gBattleMons[typeBattler].types[2] = moveInfo->battlerTypes[typeBattler][2];
+        }
+        gBattleStruct->gimmick.usableGimmick[battler] = moveInfo->usableGimmick;
+
         gBattleStruct->gimmick.playerSelect = FALSE;
         InitMoveSelectionsVarsAndStrings(battler);
         TryToAddMoveInfoWindow();

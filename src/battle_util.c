@@ -8532,11 +8532,10 @@ bool32 DoesSpeciesUseHoldItemToChangeForm(enum Species species, u16 heldItemId)
 bool32 CanMegaEvolve(enum BattlerId battler)
 {
     enum HoldEffect holdEffect = GetBattlerHoldEffectIgnoreNegation(battler);
-    enum BattlerPosition position = GetBattlerPosition(battler);
 
     // Check if Player has a Mega Ring.
     if (!TESTING
-        && (position == B_POSITION_PLAYER_LEFT || (!(gBattleTypeFlags & BATTLE_TYPE_MULTI) && position == B_POSITION_PLAYER_RIGHT))
+        && BattlerIsPlayer(battler)
         && !CheckBagHasItem(ITEM_MEGA_RING, 1))
         return FALSE;
 
@@ -8573,12 +8572,9 @@ bool32 CanMegaEvolve(enum BattlerId battler)
 bool32 CanUltraBurst(enum BattlerId battler)
 {
     enum HoldEffect holdEffect = GetBattlerHoldEffectIgnoreNegation(battler);
-    enum BattlerPosition position = GetBattlerPosition(battler);
 
     // Check if Player has a Z-Ring
-    if (!TESTING && (position == B_POSITION_PLAYER_LEFT
-        || (!(gBattleTypeFlags & BATTLE_TYPE_MULTI) && position == B_POSITION_PLAYER_RIGHT))
-        && !CheckBagHasItem(ITEM_Z_POWER_RING, 1))
+    if (!TESTING && BattlerIsPlayer(battler) && !CheckBagHasItem(ITEM_Z_POWER_RING, 1))
         return FALSE;
 
     // Check if Trainer has already Ultra Bursted.

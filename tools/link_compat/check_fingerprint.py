@@ -34,6 +34,7 @@ DATA_STRUCTS = {
     "link_player": ("include/link.h", "LinkPlayer"),
     "link_player_block": ("include/link.h", "LinkPlayerBlock"),
     "link_battler_header": ("include/battle.h", "LinkBattlerHeader"),
+    "choose_move_packet": ("include/battle_controllers.h", "ChooseMoveStruct"),
     "multi_partner_menu_pokemon": ("include/battle_main.h", "MultiPartnerMenuPokemon"),
     "trainer_card": ("include/trainer_card.h", "TrainerCard"),
     "contest_move_selection_packet": ("src/contest_link.c", "LinkContestMoveSelection"),

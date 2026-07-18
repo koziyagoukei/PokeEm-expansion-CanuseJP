@@ -5,10 +5,10 @@
 #define LINK_PROJECT_ID          0x4652
 
 // Bump for synchronized battle/protocol changes.
-#define LINK_COMPAT_VERSION      1
+#define LINK_COMPAT_VERSION      2
 
 // Bump for transmitted Pokemon, battle, or contest data layout changes.
-#define LINK_DATA_LAYOUT_VERSION 1
+#define LINK_DATA_LAYOUT_VERSION 2
 
 #define LINK_VARIANT_FRONTIER_HACK 1
 #define LINK_BUILD_VARIANT         LINK_VARIANT_FRONTIER_HACK

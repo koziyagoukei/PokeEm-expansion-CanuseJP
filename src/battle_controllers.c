@@ -592,6 +592,44 @@ enum
     LINK_BUFF_DATA,
 };
 
+static bool32 ReserveLinkBattleBufferSpace(u8 taskId, u16 requiredSize, u8 queueFullType)
+{
+    s16 start = gTasks[taskId].tCurrentBlock_Start;
+    s16 end = gTasks[taskId].tCurrentBlock_End;
+
+    if (requiredSize > BATTLE_BUFFER_LINK_SIZE)
+        goto full;
+
+    if (start == end)
+    {
+        gTasks[taskId].tCurrentBlock_Start = 0;
+        gTasks[taskId].tCurrentBlock_End = 0;
+        gTasks[taskId].tCurrentBlock_WrapFrom = 0;
+        return TRUE;
+    }
+
+    if (end < start)
+    {
+        if (end + requiredSize < start)
+            return TRUE;
+        goto full;
+    }
+
+    if (end + requiredSize <= BATTLE_BUFFER_LINK_SIZE)
+        return TRUE;
+
+    if (requiredSize < start)
+    {
+        gTasks[taskId].tCurrentBlock_WrapFrom = end;
+        gTasks[taskId].tCurrentBlock_End = 0;
+        return TRUE;
+    }
+
+full:
+    gLink.queueFull = queueFullType;
+    return FALSE;
+}
+
 // We want to send a message. Place it into the "send" buffer.
 // First argument is a BATTLELINKCOMMTYPE_
 void PrepareBufferDataTransferLink(enum BattlerId battler, u32 bufferId, u16 size, u8 *data)
@@ -599,12 +637,9 @@ void PrepareBufferDataTransferLink(enum BattlerId battler, u32 bufferId, u16 siz
     s32 alignedSize;
     s32 i;
 
-    alignedSize = size - size % 4 + 4;
-    if (gTasks[sLinkSendTaskId].tCurrentBlock_End + alignedSize + LINK_BUFF_DATA + 1 > BATTLE_BUFFER_LINK_SIZE)
-    {
-        gTasks[sLinkSendTaskId].tCurrentBlock_WrapFrom = gTasks[sLinkSendTaskId].tCurrentBlock_End;
-        gTasks[sLinkSendTaskId].tCurrentBlock_End      = 0;
-    }
+    alignedSize = (size + 3) & ~3;
+    if (!ReserveLinkBattleBufferSpace(sLinkSendTaskId, alignedSize + LINK_BUFF_DATA, QUEUE_FULL_SEND))
+        return;
 
     #define BYTE_TO_SEND(offset) \
         gLinkBattleSendBuffer[gTasks[sLinkSendTaskId].tCurrentBlock_End + offset]
@@ -750,11 +785,14 @@ void TryReceiveLinkBattleData(void)
                     u8 *dest, *src;
                     u16 dataSize = gBlockRecvBuffer[i][2];
 
-                    if (gTasks[sLinkReceiveTaskId].tCurrentBlock_End + 9 + dataSize > 0x1000)
+                    if (dataSize + LINK_BUFF_DATA > BLOCK_BUFFER_SIZE)
                     {
-                        gTasks[sLinkReceiveTaskId].tCurrentBlock_WrapFrom = gTasks[sLinkReceiveTaskId].tCurrentBlock_End;
-                        gTasks[sLinkReceiveTaskId].tCurrentBlock_End = 0;
+                        gLink.badChecksum = TRUE;
+                        continue;
                     }
+
+                    if (!ReserveLinkBattleBufferSpace(sLinkReceiveTaskId, dataSize + LINK_BUFF_DATA, QUEUE_FULL_RECV))
+                        continue;
 
                     dest = &gLinkBattleRecvBuffer[gTasks[sLinkReceiveTaskId].tCurrentBlock_End];
                     src = recvBuffer;

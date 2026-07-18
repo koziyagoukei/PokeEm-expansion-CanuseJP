@@ -113,12 +113,9 @@ bool32 IsZMove(enum Move move)
 bool32 CanUseZMove(enum BattlerId battler)
 {
     enum HoldEffect holdEffect = GetBattlerHoldEffectIgnoreNegation(battler);
-    enum BattlerPosition position = GetBattlerPosition(battler);
 
     // Check if Player has Z-Power Ring.
-    if (!TESTING && (position == B_POSITION_PLAYER_LEFT
-        || (!(gBattleTypeFlags & BATTLE_TYPE_MULTI) && position == B_POSITION_PLAYER_RIGHT))
-        && !CheckBagHasItem(ITEM_Z_POWER_RING, 1))
+    if (!TESTING && BattlerIsPlayer(battler) && !CheckBagHasItem(ITEM_Z_POWER_RING, 1))
         return FALSE;
 
     // Add '| BATTLE_TYPE_FRONTIER' to below if issues occur
@@ -181,10 +178,8 @@ bool32 IsViableZMove(enum BattlerId battler, enum Move move)
             return FALSE;
     }
 
-    enum BattlerPosition position = GetBattlerPosition(battler);
     // Check if Player has Z-Power Ring.
-    if ((position == B_POSITION_PLAYER_LEFT || (!(gBattleTypeFlags & BATTLE_TYPE_MULTI) && position == B_POSITION_PLAYER_RIGHT))
-        && !CheckBagHasItem(ITEM_Z_POWER_RING, 1))
+    if (BattlerIsPlayer(battler) && !CheckBagHasItem(ITEM_Z_POWER_RING, 1))
     {
         return FALSE;
     }

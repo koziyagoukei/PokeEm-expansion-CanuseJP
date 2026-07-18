@@ -232,6 +232,8 @@ struct ChooseMoveStruct
     u8 maxPp[MAX_MON_MOVES];
     enum Species species;
     enum Type monTypes[3];
+    enum Type battlerTypes[MAX_BATTLERS_COUNT][3];
+    enum Gimmick usableGimmick;
     struct ZMoveData zmove;
 };
 

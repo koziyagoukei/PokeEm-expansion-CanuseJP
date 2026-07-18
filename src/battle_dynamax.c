@@ -80,8 +80,7 @@ bool32 CanDynamax(enum BattlerId battler)
         return FALSE;
 
     // Check if Player has a Dynamax Band.
-    if (!TESTING && (GetBattlerPosition(battler) == B_POSITION_PLAYER_LEFT
-        || (!(gBattleTypeFlags & BATTLE_TYPE_MULTI) && GetBattlerPosition(battler) == B_POSITION_PLAYER_RIGHT)))
+    if (!TESTING && BattlerIsPlayer(battler))
     {
         if (!CheckBagHasItem(ITEM_DYNAMAX_BAND, 1))
             return FALSE;
