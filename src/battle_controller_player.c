@@ -866,7 +866,7 @@ void HandleInputChooseMove(enum BattlerId battler)
         }
     }
     else if (!gBattleStruct->zmove.viewing && !gBattleStruct->descriptionSubmenu
-          && JOY_NEW(SELECT_BUTTON) && TryToggleRequestedGimmick(battler, GIMMICK_DYNAMAX))
+          && JOY_NEW(SELECT_BUTTON) && TryToggleRequestedGimmick(battler, GIMMICK_TERA))
     {
     }
     else if (B_MOVE_REARRANGEMENT_IN_BATTLE < GEN_4 && JOY_NEW(SELECT_BUTTON) && !gBattleStruct->zmove.viewing && !gBattleStruct->descriptionSubmenu)
@@ -915,7 +915,7 @@ void HandleInputChooseMove(enum BattlerId battler)
         gBattleStruct->descriptionSubmenu = TRUE;
         TryMoveSelectionDisplayMoveDescription(battler);
     }
-    else if (JOY_NEW(START_BUTTON) && TryToggleRequestedGimmick(battler, GIMMICK_TERA))
+    else if (JOY_NEW(START_BUTTON) && TryToggleRequestedGimmick(battler, GIMMICK_DYNAMAX))
     {
     }
 }

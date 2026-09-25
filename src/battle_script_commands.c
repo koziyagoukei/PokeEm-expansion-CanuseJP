@@ -3273,6 +3273,9 @@ static void Cmd_switchindataupdate(void)
 
     SwitchInClearSetData(battler, &oldData.volatiles);
 
+    if (GetMoveEffect(gCurrentMove) == EFFECT_REVIVAL_BLESSING)
+        RestoreGimmickFormAfterRevival(battler);
+
     if (gBattleTypeFlags & BATTLE_TYPE_PALACE
         && gBattleMons[battler].maxHP / 2 >= gBattleMons[battler].hp
         && IsBattlerAlive(battler)

@@ -62,6 +62,26 @@ enum Gimmick GetActiveGimmick(enum BattlerId battler)
     return gBattleStruct->gimmick.activeGimmick[GetBattlerTrainer(battler)][gBattlerPartyIndexes[battler]];
 }
 
+// Revival Blessing brings back a fainted Pokemon whose battle form was reverted by FORM_CHANGE_FAINT.
+// Restore only Mega Evolution and Terastallization; Dynamax is intentionally not persistent through fainting.
+void RestoreGimmickFormAfterRevival(enum BattlerId battler)
+{
+    enum Ability ability = GetBattlerAbility(battler);
+
+    switch (GetActiveGimmick(battler))
+    {
+    case GIMMICK_MEGA:
+        if (!TryBattleFormChange(battler, FORM_CHANGE_BATTLE_MEGA_EVOLUTION_MOVE, ability))
+            TryBattleFormChange(battler, FORM_CHANGE_BATTLE_MEGA_EVOLUTION_ITEM, ability);
+        break;
+    case GIMMICK_TERA:
+        TryBattleFormChange(battler, FORM_CHANGE_BATTLE_TERASTALLIZATION, ability);
+        break;
+    default:
+        break;
+    }
+}
+
 // Returns whether a trainer mon is intended to use an unrestrictive gimmick via .useGimmick (i.e Tera).
 bool32 ShouldTrainerBattlerUseGimmick(enum BattlerId battler, enum Gimmick gimmick)
 {
