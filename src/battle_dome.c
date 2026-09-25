@@ -5699,6 +5699,8 @@ static void InitRandomTourneyTreeResults(void)
     if ((gSaveBlock2Ptr->frontier.domeLvlMode != -gSaveBlock2Ptr->frontier.domeBattleMode) && gSaveBlock2Ptr->frontier.challengeStatus != CHALLENGE_STATUS_SAVING)
         return;
 
+    SetFacilityTrainerAndMonPtrs();
+
     statSums = AllocZeroed(sizeof(u16) * DOME_TOURNAMENT_TRAINERS_COUNT);
     statValues = AllocZeroed(sizeof(int) * NUM_STATS);
     lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
