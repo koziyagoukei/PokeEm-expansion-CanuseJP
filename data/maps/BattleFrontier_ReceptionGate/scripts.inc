@@ -327,15 +327,15 @@ BattleFrontier_ReceptionGate_Text_EnjoyBattleFrontier:
 	.string "こころゆくまで おたのしみください！$"
 
 BattleFrontier_ReceptionGate_Text_IfItIsntPlayerYouCame:
-	.string "{JPN}？？？: おお {PLAYER}{KUN}！\n"
+	.string "{JPN}？？？『おお {PLAYER}{KUN}！\n"
 	.string "ここまで きてくれたか！$"
 
 BattleFrontier_ReceptionGate_Text_OhMrScottGoodDay:
-	.string "{JPN}ガイド: あっ！ エニシダさん！\n"
+	.string "{JPN}ガイド『あっ！ エニシダさん！\n"
 	.string "こんにちは！$"
 
 BattleFrontier_ReceptionGate_Text_ScottGreatToSeeYouHere:
-	.string "{JPN}エニシダ: よく きてくれた！\n"
+	.string "{JPN}エニシダ『よく きてくれた！\n"
 	.string "ほんとうに うれしいぞ！\p"
 	.string "ゆっくり いろいろな しせつを\n"
 	.string "みていって くれ\p"

@@ -214,7 +214,7 @@ BattleFrontier_ScottsHouse_Text_WelcomeToBattleFrontier:
 
 BattleFrontier_ScottsHouse_Text_HowMuchEffortItTookToMakeReal:
 	.string "{JPN}おもえば ほんとうに ながい\n"
-	.string "たびだった...\p"
+	.string "たびだった……\p"
 	.string "つよい トレーナーを さがすため\n"
 	.string "ひとり いえを とびだしてね\p"
 	.string "ここを じつげんするまでに\n"
@@ -235,7 +235,7 @@ BattleFrontier_ScottsHouse_Text_ObtainedXBattlePoints:
 	.string "{STR_VAR_1}BPを てにいれた$"
 
 BattleFrontier_ScottsHouse_Text_ExplainBattlePoints:
-	.string "{JPN}エニシダ: バトルポイントは\n"
+	.string "{JPN}エニシダ『バトルポイントは\n"
 	.string "フロンティアパスで かくにんできる\p"
 	.string "バトルフロンティアで かつやくすれば\n"
 	.string "それだけ たくさん たまっていくぞ\p"

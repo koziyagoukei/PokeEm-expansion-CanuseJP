@@ -767,7 +767,7 @@ static const TaskFunc sTextPrinterTasks[] =
     [PSS_PAGE_CONTEST_MOVES] = Task_PrintContestMoves
 };
 
-static const u8 sText_Relearn[] = _("{START_BUTTON} おもいだす"); // future note: don't decap this, because it mimics the summary screen BG graphics which will not get decapped
+static const u8 sText_Relearn[] = _("{START_BUTTON} {JPN}おもいだす"); // future note: don't decap this, because it mimics the summary screen BG graphics which will not get decapped
 
 static const u8 *const sRelearnTexts[MOVE_RELEARNER_COUNT] =
 {
