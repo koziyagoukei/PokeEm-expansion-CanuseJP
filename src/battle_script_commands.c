@@ -3274,9 +3274,6 @@ static void Cmd_switchindataupdate(void)
 
     SwitchInClearSetData(battler, &oldData.volatiles);
 
-    if (GetMoveEffect(gCurrentMove) == EFFECT_REVIVAL_BLESSING)
-        RestoreGimmickFormAfterRevival(battler);
-
     if (gBattleTypeFlags & BATTLE_TYPE_PALACE
         && gBattleMons[battler].maxHP / 2 >= gBattleMons[battler].hp
         && IsBattlerAlive(battler)
@@ -10044,6 +10041,7 @@ void BS_TryRevivalBlessing(void)
     {
         struct Pokemon *party = GetBattlerParty(gBattlerAttacker);
 
+        RestoreGimmickFormAfterRevival(gBattlerAttacker);
         u16 hp = GetMonData(&party[gSelectedMonPartyId], MON_DATA_MAX_HP) / 2;
         BtlController_EmitSetMonData(gBattlerAttacker, B_COMM_TO_CONTROLLER, REQUEST_HP_BATTLE, 1u << gSelectedMonPartyId, sizeof(hp), &hp);
         MarkBattlerForControllerExec(gBattlerAttacker);

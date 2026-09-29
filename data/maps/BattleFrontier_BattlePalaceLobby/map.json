@@ -107,8 +107,8 @@
       "x": 13,
       "y": 11,
       "elevation": 0,
-      "dest_map": "MAP_BATTLE_FRONTIER_OUTSIDE_EAST",
-      "dest_warp_id": "2"
+      "dest_map": "MAP_ULTRA_FRONTIE_HUB",
+      "dest_warp_id": "ultra_hub"
     },
     {
       "x": 5,

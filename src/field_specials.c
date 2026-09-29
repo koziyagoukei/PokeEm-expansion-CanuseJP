@@ -31,6 +31,7 @@
 #include "main.h"
 #include "match_call.h"
 #include "menu.h"
+#include "move.h"
 #include "metatile_behavior.h"
 #include "mystery_gift.h"
 #include "overworld.h"
@@ -4979,6 +4980,33 @@ void Special_TeishokuyaToggleGigantamax(void)
 
     gigantamaxFactor = !GetMonData(mon, MON_DATA_GIGANTAMAX_FACTOR);
     SetMonData(mon, MON_DATA_GIGANTAMAX_FACTOR, &gigantamaxFactor);
+    gSpecialVar_Result = TRUE;
+}
+
+void Special_TeishokuyaMaxMovePP(void)
+{
+    struct Pokemon *mon;
+    u32 i;
+    u8 ppBonuses;
+
+    if (!Teishokuya_IsValidSelectedPartyMon())
+    {
+        gSpecialVar_Result = FALSE;
+        return;
+    }
+
+    mon = &gParties[B_TRAINER_PLAYER][gSpecialVar_0x8004];
+    ppBonuses = GetMonData(mon, MON_DATA_PP_BONUSES);
+    for (i = 0; i < MAX_MON_MOVES; i++)
+    {
+        enum Move move = GetMonData(mon, MON_DATA_MOVE1 + i);
+
+        if (move != MOVE_NONE && GetMovePP(move) >= 5)
+            ppBonuses |= gPPUpGetMask[i];
+    }
+
+    // Increase only the PP limits, leaving current PP untouched.
+    SetMonData(mon, MON_DATA_PP_BONUSES, &ppBonuses);
     gSpecialVar_Result = TRUE;
 }
 

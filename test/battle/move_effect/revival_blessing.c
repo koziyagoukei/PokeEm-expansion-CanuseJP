@@ -124,3 +124,70 @@ SINGLE_BATTLE_TEST("Revival Blessing keeps Mimikyu Busted forms and Eiscue Noice
         HP_BAR(player);
     }
 }
+
+SINGLE_BATTLE_TEST("Revival Blessing restores Mega Evolution before the revived Pokemon returns")
+{
+    enum Species species, megaSpecies;
+    enum Item item;
+    enum Move move;
+
+    PARAMETRIZE { species = SPECIES_VENUSAUR; item = ITEM_VENUSAURITE; move = MOVE_CELEBRATE; megaSpecies = SPECIES_VENUSAUR_MEGA; }
+    PARAMETRIZE { species = SPECIES_RAYQUAZA; item = ITEM_NONE; move = MOVE_DRAGON_ASCENT; megaSpecies = SPECIES_RAYQUAZA_MEGA; }
+
+    GIVEN {
+        PLAYER(species) { HP(1); Item(item); Moves(move, MOVE_CELEBRATE); }
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(player, MOVE_CELEBRATE, gimmick: GIMMICK_MEGA); MOVE(opponent, MOVE_CRUNCH); SEND_OUT(player, 1); }
+        TURN { MOVE(player, MOVE_REVIVAL_BLESSING, partyIndex: 0); }
+        TURN { SWITCH(player, 0); }
+    } THEN {
+        EXPECT_EQ(GetActiveGimmick(GetBattlerAtPosition(B_POSITION_PLAYER_LEFT)), GIMMICK_MEGA);
+        EXPECT_EQ(player->species, megaSpecies);
+    }
+}
+
+SINGLE_BATTLE_TEST("Revival Blessing restores a Terastallized form before the revived Pokemon returns")
+{
+    GIVEN {
+        PLAYER(SPECIES_OGERPON_WELLSPRING) { HP(1); Item(ITEM_WELLSPRING_MASK); TeraType(TYPE_WATER); }
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(player, MOVE_CELEBRATE, gimmick: GIMMICK_TERA); MOVE(opponent, MOVE_CRUNCH); SEND_OUT(player, 1); }
+        TURN { MOVE(player, MOVE_REVIVAL_BLESSING, partyIndex: 0); }
+        TURN { SWITCH(player, 0); }
+    } THEN {
+        EXPECT_EQ(GetActiveGimmick(GetBattlerAtPosition(B_POSITION_PLAYER_LEFT)), GIMMICK_TERA);
+        EXPECT_EQ(player->species, SPECIES_OGERPON_WELLSPRING_TERA);
+    }
+}
+
+DOUBLE_BATTLE_TEST("Revival Blessing restores an on-field partner's Mega or Tera form")
+{
+    enum Species species, transformedSpecies;
+    enum Item item;
+    enum Gimmick gimmick;
+
+    PARAMETRIZE { species = SPECIES_VENUSAUR; item = ITEM_VENUSAURITE; gimmick = GIMMICK_MEGA; transformedSpecies = SPECIES_VENUSAUR_MEGA; }
+    PARAMETRIZE { species = SPECIES_OGERPON_WELLSPRING; item = ITEM_WELLSPRING_MASK; gimmick = GIMMICK_TERA; transformedSpecies = SPECIES_OGERPON_WELLSPRING_TERA; }
+
+    GIVEN {
+        if (gimmick == GIMMICK_TERA) {
+            PLAYER(species) { HP(1); Item(item); TeraType(TYPE_WATER); }
+        } else {
+            PLAYER(species) { HP(1); Item(item); }
+        }
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WYNAUT);
+    } WHEN {
+        TURN { MOVE(playerLeft, MOVE_CELEBRATE, gimmick: gimmick); MOVE(opponentLeft, MOVE_CRUNCH, target: playerLeft); }
+        TURN { MOVE(playerRight, MOVE_REVIVAL_BLESSING, partyIndex: 0); SKIP_TURN(playerLeft); }
+    } THEN {
+        EXPECT_EQ(playerLeft->species, transformedSpecies);
+        EXPECT_EQ(GetActiveGimmick(GetBattlerAtPosition(B_POSITION_PLAYER_LEFT)), gimmick);
+        EXPECT(playerLeft->hp > 0);
+    }
+}

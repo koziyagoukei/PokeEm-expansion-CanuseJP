@@ -10,6 +10,7 @@
 #include "battle_util.h"
 #include "item.h"
 #include "palette.h"
+#include "party_menu.h"
 #include "pokemon.h"
 #include "sprite.h"
 #include "util.h"
@@ -83,20 +84,25 @@ enum Gimmick GetActiveGimmick(enum BattlerId battler)
     return gBattleStruct->gimmick.activeGimmick[GetBattlerTrainer(battler)][gBattlerPartyIndexes[battler]] & ACTIVE_GIMMICK_MASK;
 }
 
-// Revival Blessing brings back a fainted Pokemon whose battle form was reverted by FORM_CHANGE_FAINT.
-// Restore only Mega Evolution and Terastallization; Dynamax is intentionally not persistent through fainting.
+// FORM_CHANGE_FAINT reverted the party mon, but its Mega/Tera state remains active.
 void RestoreGimmickFormAfterRevival(enum BattlerId battler)
 {
-    enum Ability ability = GetBattlerAbility(battler);
+    u8 partyIndex = gSelectedMonPartyId;
+    if (partyIndex >= PARTY_SIZE)
+        return;
 
-    switch (GetActiveGimmick(battler))
+    enum BattleTrainer trainer = GetBattlerTrainer(battler);
+    struct Pokemon *mon = &GetBattlerParty(battler)[partyIndex];
+    enum Gimmick gimmick = gBattleStruct->gimmick.activeGimmick[trainer][partyIndex] & ACTIVE_GIMMICK_MASK;
+
+    switch (gimmick)
     {
     case GIMMICK_MEGA:
-        if (!TryBattleFormChange(battler, FORM_CHANGE_BATTLE_MEGA_EVOLUTION_MOVE, ability))
-            TryBattleFormChange(battler, FORM_CHANGE_BATTLE_MEGA_EVOLUTION_ITEM, ability);
+        if (!TryFormChange(mon, FORM_CHANGE_BATTLE_MEGA_EVOLUTION_MOVE, trainer))
+            TryFormChange(mon, FORM_CHANGE_BATTLE_MEGA_EVOLUTION_ITEM, trainer);
         break;
     case GIMMICK_TERA:
-        TryBattleFormChange(battler, FORM_CHANGE_BATTLE_TERASTALLIZATION, ability);
+        TryFormChange(mon, FORM_CHANGE_BATTLE_TERASTALLIZATION, trainer);
         break;
     default:
         break;

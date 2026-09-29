@@ -5953,7 +5953,11 @@ enum Species GetFormChangeTargetSpeciesBoxMon(struct BoxPokemon *boxMon, enum Fo
         .partyItemUsed = gSpecialVar_ItemId,
         .multichoiceSelection = gSpecialVar_Result,
         .status = GetBoxMonData(boxMon, MON_DATA_STATUS),
+        .teraType = GetBoxMonData(boxMon, MON_DATA_TERA_TYPE),
     };
+
+    for (u32 i = 0; i < MAX_MON_MOVES; i++)
+        ctx.moves[i] = GetBoxMonData(boxMon, MON_DATA_MOVE1 + i);
 
     return GetFormChangeTargetSpecies_Internal(ctx);
 }
