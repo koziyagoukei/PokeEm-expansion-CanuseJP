@@ -166,16 +166,15 @@ int MyFunction(int bar)
 }
 ```
 
-`if-else` の連鎖で、条件またはブロックが 1 行を超える場合は波括弧を使ってください。すべてのブロックと条件が 1 行だけの場合は、波括弧なしでもかまいません。
+原則として、制御文の本体を次の行に書く場合は波括弧で囲んでください。例外は後述します。
 
 ```c
-if (foo) // correct
+if (foo) // incorrect
     return 1;
 
-if (foo
- && bar) // correct
+if (foo)
 {
-    return 1;
+    return 1; // correct
 }
 
 if (foo) // correct
@@ -196,11 +195,6 @@ else if (foo
       && bar)
 {
     return 0;
-}
-
-if (foo) // incorrect
-{
-    return 1;
 }
 
 if (foo
@@ -220,12 +214,14 @@ if (foo) // incorrect
 else if (foo
       && bar)
     return 0;
-```
 
-例外として、`assertf` に復帰処理がある場合は、条件と処理が 1 行ずつでも常に波括弧を使ってください。
+while (foo) // incorrect
+    MyFunction();
 
-```c
-assertf(true); // correct
+while (foo) // correct
+{
+    MyFunction();
+}
 
 assertf(true) // correct
 {
@@ -235,6 +231,32 @@ assertf(true) // correct
 assertf(true) // incorrect
     return NULL;
 ```
+
+例外として、短い制御フロー文は条件と同じ行に書けます。
+
+```c
+if (foo)
+    break; // incorrect
+
+if (foo) break; // correct
+
+if (foo) continue; // correct
+
+if (foo) return; // correct
+
+assertf(true); // correct
+```
+
+値を返す `return` 文も例外で、次のどちらも使用できます。
+
+```c
+if (foo) return something;
+
+if (foo)
+    return something;
+```
+
+`assertf` に復帰処理がある場合は、常に波括弧を使ってください。
 
 ### 制御構造
 
