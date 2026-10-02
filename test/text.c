@@ -598,6 +598,14 @@ TEST("Map names fit in popup")
 extern u16 sBattlerAbilities[MAX_BATTLERS_COUNT];
 //*
 #define BATTLE_STRING_BUFFER_SIZE 1000
+TEST("All table-backed battle messages have text")
+{
+    u32 i;
+
+    for (i = STRINGID_TABLE_START + 1; i < STRINGID_COUNT; i++)
+        EXPECT(gBattleStringsTable[i] != NULL);
+}
+
 TEST("Battle strings fit on the battle message window")
 {
     u32 i, j, strWidth;

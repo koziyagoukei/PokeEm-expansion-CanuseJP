@@ -3307,7 +3307,7 @@ static bool32 TryBufferFrontierNicknameReactionMon(enum BattlerId opponentBattle
      && IsOnPlayerSide(playerBattler)
      && IsBattlerAlive(playerBattler))
     {
-        PREPARE_MON_NICK_BUFFER(gBattleTextBuff1, playerBattler, gBattlerPartyIndexes[playerBattler]);
+        PREPARE_MON_NICK_BUFFER(gBattleTextBuff2, playerBattler, gBattlerPartyIndexes[playerBattler]);
         return TRUE;
     }
 
@@ -3316,7 +3316,7 @@ static bool32 TryBufferFrontierNicknameReactionMon(enum BattlerId opponentBattle
      && IsOnPlayerSide(playerBattler)
      && IsBattlerAlive(playerBattler))
     {
-        PREPARE_MON_NICK_BUFFER(gBattleTextBuff1, playerBattler, gBattlerPartyIndexes[playerBattler]);
+        PREPARE_MON_NICK_BUFFER(gBattleTextBuff2, playerBattler, gBattlerPartyIndexes[playerBattler]);
         return TRUE;
     }
 
@@ -3325,7 +3325,7 @@ static bool32 TryBufferFrontierNicknameReactionMon(enum BattlerId opponentBattle
      && IsOnPlayerSide(playerBattler)
      && IsBattlerAlive(playerBattler))
     {
-        PREPARE_MON_NICK_BUFFER(gBattleTextBuff1, playerBattler, gBattlerPartyIndexes[playerBattler]);
+        PREPARE_MON_NICK_BUFFER(gBattleTextBuff2, playerBattler, gBattlerPartyIndexes[playerBattler]);
         return TRUE;
     }
 
