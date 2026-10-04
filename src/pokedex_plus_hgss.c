@@ -2187,18 +2187,25 @@ static u32 CountSpeciesEggMoves(enum Species species)
     return numEggMoves;
 }
 
-static bool8 CalculateMoves(void)
+static enum Species GetStatsScreenLearnsetSpecies(void)
 {
     enum Species species = NationalPokedexNumToSpeciesForm(sPokedexListItem->dexNum);
+
+    // Mega and Gmax forms share the base species' learnsets.
+    if (gSpeciesInfo[species].isMegaEvolution || gSpeciesInfo[species].isGigantamax)
+        return GetFormSpeciesId(species, 0);
+
+    return species;
+}
+
+static bool8 CalculateMoves(void)
+{
+    enum Species species = GetStatsScreenLearnsetSpecies();
 
     u32 numEggMoves = 0;
     u32 numLevelUpMoves = 0;
     u32 numTeachableMoves = 0;
     u32 i;
-
-    // Mega and Gmax Pokemon don't have distinct learnsets from their base form; so use base species for calculation
-    if (gSpeciesInfo[species].isMegaEvolution || gSpeciesInfo[species].isGigantamax)
-        species = GetFormSpeciesId(species, 0);
 
     // Egg moves
     if (HGSS_SHOW_EGG_MOVES_FOR_EVOS)
@@ -2250,7 +2257,7 @@ static void PrintStatsScreen_Moves_Top(u8 taskId)
     u8 moves_y = 3;
 
     enum Item item = ITEM_MASTER_BALL;
-    enum Species species = NationalPokedexNumToSpeciesForm(sPokedexListItem->dexNum);
+    enum Species species = GetStatsScreenLearnsetSpecies();
     u32 selected = sPokedexView->moveSelected;
     enum Move move = GetSelectedMove(species, selected);
     //Moves selected from move max
@@ -2331,7 +2338,7 @@ static void PrintStatsScreen_Moves_Description(u8 taskId)
     u8 moves_x = 5;
     u8 moves_y = 5;
 
-    enum Species species = NationalPokedexNumToSpeciesForm(sPokedexListItem->dexNum);
+    enum Species species = GetStatsScreenLearnsetSpecies();
     enum Move move = GetSelectedMove(species, sPokedexView->moveSelected);
 
     //Move description
@@ -2374,7 +2381,7 @@ static void PrintStatsScreen_Moves_Bottom(u8 taskId)
     u8 contest_appeal = 0;
     u8 contest_jam = 0;
 
-    enum Species species = NationalPokedexNumToSpeciesForm(sPokedexListItem->dexNum);
+    enum Species species = GetStatsScreenLearnsetSpecies();
     enum Move move = GetSelectedMove(species, sPokedexView->moveSelected);
 
     //Power + Accuracy
