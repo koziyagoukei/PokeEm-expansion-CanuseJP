@@ -2177,10 +2177,20 @@ static void PrintStatsScreen_DestroyMoveItemIcon(u8 taskId)
     DestroySprite(&gSprites[gTasks[taskId].data[3]]);       //Destroy item icon
 }
 
-static u32 CountSpeciesEggMoves(enum Species species)
+static EWRAM_DATA enum Species sStatsScreenLearnsetSpecies = SPECIES_NONE;
+static EWRAM_DATA const u16 *sStatsScreenEggMoves = NULL;
+
+static const u16 *GetStatsScreenEggMoves(enum Species species)
+{
+    if (HGSS_SHOW_EGG_MOVES_FOR_EVOS)
+        species = GetEggSpecies(species);
+
+    return GetSpeciesEggMoves(species);
+}
+
+static u32 CountSpeciesEggMoves(const u16 *eggMoveLearnset)
 {
     u32 numEggMoves = 0;
-    const u16 *eggMoveLearnset = GetSpeciesEggMoves(species);
     for (u32 i = 0; eggMoveLearnset[i] != MOVE_UNAVAILABLE; i++)
         numEggMoves++;
 
@@ -2207,11 +2217,11 @@ static bool8 CalculateMoves(void)
     u32 numTeachableMoves = 0;
     u32 i;
 
+    sStatsScreenLearnsetSpecies = species;
+    sStatsScreenEggMoves = GetStatsScreenEggMoves(species);
+
     // Egg moves
-    if (HGSS_SHOW_EGG_MOVES_FOR_EVOS)
-        numEggMoves = CountSpeciesEggMoves(GetEggSpecies(species));
-    else
-        numEggMoves = CountSpeciesEggMoves(species);
+    numEggMoves = CountSpeciesEggMoves(sStatsScreenEggMoves);
 
     // Level up moves
     const struct LevelUpMove *learnset = GetSpeciesLevelUpLearnset(species);
@@ -2234,14 +2244,7 @@ static bool8 CalculateMoves(void)
 static enum Move GetSelectedMove(enum Species species, u32 selected)
 {
     if (selected < sPokedexView->numEggMoves)
-    {
-        if (!HGSS_SHOW_EGG_MOVES_FOR_EVOS)
-            return GetSpeciesEggMoves(species)[selected];
-        enum Species preSpecies = species;
-        while (GetSpeciesPreEvolution(preSpecies) != SPECIES_NONE)
-            preSpecies = GetSpeciesPreEvolution(preSpecies);
-        return GetSpeciesEggMoves(preSpecies)[selected];
-    }
+        return sStatsScreenEggMoves[selected];
     selected -= sPokedexView->numEggMoves;
     if (selected < sPokedexView->numLevelUpMoves)
         return GetSpeciesLevelUpLearnset(species)[selected].move;
@@ -2257,7 +2260,7 @@ static void PrintStatsScreen_Moves_Top(u8 taskId)
     u8 moves_y = 3;
 
     enum Item item = ITEM_MASTER_BALL;
-    enum Species species = GetStatsScreenLearnsetSpecies();
+    enum Species species = sStatsScreenLearnsetSpecies;
     u32 selected = sPokedexView->moveSelected;
     enum Move move = GetSelectedMove(species, selected);
     //Moves selected from move max
@@ -2338,7 +2341,7 @@ static void PrintStatsScreen_Moves_Description(u8 taskId)
     u8 moves_x = 5;
     u8 moves_y = 5;
 
-    enum Species species = GetStatsScreenLearnsetSpecies();
+    enum Species species = sStatsScreenLearnsetSpecies;
     enum Move move = GetSelectedMove(species, sPokedexView->moveSelected);
 
     //Move description
@@ -2381,7 +2384,7 @@ static void PrintStatsScreen_Moves_Bottom(u8 taskId)
     u8 contest_appeal = 0;
     u8 contest_jam = 0;
 
-    enum Species species = GetStatsScreenLearnsetSpecies();
+    enum Species species = sStatsScreenLearnsetSpecies;
     enum Move move = GetSelectedMove(species, sPokedexView->moveSelected);
 
     //Power + Accuracy
