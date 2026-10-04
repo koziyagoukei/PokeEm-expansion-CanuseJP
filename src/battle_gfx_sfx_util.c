@@ -949,6 +949,13 @@ void HandleSpeciesGfxDataChange(enum BattlerId battlerAtk, enum BattlerId battle
         }
         else
         {
+            // Terastallization changes the palette, but does not break Illusion.
+            if (changeType == SPECIES_GFX_CHANGE_FORM_CHANGE && GetActiveGimmick(battlerAtk) == GIMMICK_TERA)
+            {
+                struct Pokemon *illusionMon = GetIllusionMonPtr(battlerAtk);
+                if (illusionMon != NULL)
+                    monAtk = illusionMon;
+            }
             targetSpecies = GetMonData(monAtk, MON_DATA_SPECIES);
         }
         gBattleSpritesDataPtr->battlerData[battlerAtk].transformSpecies = targetSpecies;

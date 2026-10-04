@@ -1,5 +1,6 @@
 #include "global.h"
 #include "test/battle.h"
+#include "battle_util.h"
 
 // Base Power and STAB Checks
 
@@ -746,6 +747,46 @@ SINGLE_BATTLE_TEST("(TERA) Illusion doesn't break upon Terastallizing when illus
     } SCENE {
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, opponent);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_ILLUSION_OFF, player);
+    }
+}
+
+SINGLE_BATTLE_TEST("(TERA) Illusion retains the disguised sprite after Terastallizing")
+{
+    enum Species species;
+    PARAMETRIZE { species = SPECIES_WOBBUFFET; }
+    PARAMETRIZE { species = SPECIES_ZIGZAGOON; }
+    GIVEN {
+        FORCE_MOVE_ANIM(TRUE);
+        PLAYER(SPECIES_ZOROARK) { TeraType(TYPE_BUG); }
+        PLAYER(species);
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(player, MOVE_CELEBRATE, gimmick: GIMMICK_TERA); MOVE(opponent, MOVE_CELEBRATE); }
+    } THEN {
+        enum BattlerId battler = GetBattlerAtPosition(B_POSITION_PLAYER_LEFT);
+        EXPECT_EQ(GetIllusionMonSpecies(battler), species);
+        EXPECT_EQ(gBattleSpritesDataPtr->battlerData[battler].transformSpecies, species);
+        FORCE_MOVE_ANIM(FALSE);
+    }
+}
+
+SINGLE_BATTLE_TEST("(TERA) Opponent Illusion retains the disguised sprite after Terastallizing")
+{
+    enum Species species;
+    PARAMETRIZE { species = SPECIES_WOBBUFFET; }
+    PARAMETRIZE { species = SPECIES_ZIGZAGOON; }
+    GIVEN {
+        FORCE_MOVE_ANIM(TRUE);
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_ZOROARK) { TeraType(TYPE_BUG); }
+        OPPONENT(species);
+    } WHEN {
+        TURN { MOVE(player, MOVE_CELEBRATE); MOVE(opponent, MOVE_CELEBRATE, gimmick: GIMMICK_TERA); }
+    } THEN {
+        enum BattlerId battler = GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
+        EXPECT_EQ(GetIllusionMonSpecies(battler), species);
+        EXPECT_EQ(gBattleSpritesDataPtr->battlerData[battler].transformSpecies, species);
+        FORCE_MOVE_ANIM(FALSE);
     }
 }
 

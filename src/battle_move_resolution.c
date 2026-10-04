@@ -4343,6 +4343,9 @@ static enum MoveEndResult MoveEndMoveBlock(struct BattleCalcValues *cv)
             }
             break;
         case EFFECT_HIT_SWITCH_TARGET:
+            if (gBattleTypeFlags & BATTLE_TYPE_ARENA)
+                break;
+
             battlerDef = gBattlerTarget;
             if (IsBattlerTurnDamaged(battlerDef , EXCLUDING_SUBSTITUTES)
              && IsBattlerAlive(battlerDef)
@@ -4781,7 +4784,8 @@ static enum MoveEndResult MoveEndHitEscape(struct BattleCalcValues *cv)
     switch (GetMoveEffect(cv->move))
     {
     case EFFECT_HIT_ESCAPE:
-        if (!HasAnyBattlerQueuedSwitch()
+        if (!(gBattleTypeFlags & BATTLE_TYPE_ARENA)
+         && !HasAnyBattlerQueuedSwitch()
          && gBattleStruct->battlerState[cv->battlerAtk].originalBattlerPartyId == PARTY_SIZE
          && !gBattleStruct->unableToUseMove
          && IsAnyTargetTurnDamaged(cv->battlerAtk, INCLUDING_SUBSTITUTES)

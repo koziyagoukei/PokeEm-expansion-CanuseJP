@@ -3416,6 +3416,9 @@ bool32 CanBattlerSwitch(enum BattlerId battler)
     enum BattlerId battlerIn1, battlerIn2;
     struct Pokemon *party = GetBattlerParty(battler);
 
+    if (gBattleTypeFlags & BATTLE_TYPE_ARENA)
+        return FALSE;
+
     if (BattleSideHasTwoTrainers(GetBattlerSide(battler)) && !AreMultiPartiesFullTeams())
         lastMonId = MULTI_PARTY_SIZE;
     else
@@ -5573,6 +5576,12 @@ static void Cmd_forcerandomswitch(void)
     s32 validMonsCount = 0;
 
     bool32 redCardForcedSwitch = FALSE;
+
+    if (gBattleTypeFlags & BATTLE_TYPE_ARENA)
+    {
+        gBattlescriptCurrInstr = cmd->failInstr;
+        return;
+    }
 
     // Red card checks against wild Pokemon. If we have reached here, the player has a mon to switch into
     // Red card swaps attacker with target to get the animation correct, so here we check attacker which is really the target. Thanks GF...
