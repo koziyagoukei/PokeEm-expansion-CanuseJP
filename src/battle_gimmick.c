@@ -63,6 +63,14 @@ bool32 CanActivateGimmick(enum BattlerId battler, enum Gimmick gimmick)
     return gGimmicksInfo[gimmick].CanActivate != NULL && gGimmicksInfo[gimmick].CanActivate(battler);
 }
 
+bool32 IsBattlerInMegaOrPrimalForm(enum BattlerId battler)
+{
+    const struct SpeciesInfo *speciesInfo = &gSpeciesInfo[gBattleMons[battler].species];
+
+    // Primal Reversion changes species without setting an active gimmick.
+    return speciesInfo->isMegaEvolution || speciesInfo->isPrimalReversion;
+}
+
 // Returns whether the player has a gimmick selected while in the move selection menu.
 bool32 IsGimmickSelected(enum BattlerId battler, enum Gimmick gimmick)
 {

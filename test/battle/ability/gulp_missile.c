@@ -1,6 +1,26 @@
 #include "global.h"
 #include "test/battle.h"
 
+SINGLE_BATTLE_TEST("Gulp Missile: Cramorant drops its prey when Dynamaxing")
+{
+    u32 hp;
+    PARAMETRIZE { hp = 240; }
+    PARAMETRIZE { hp = 120; }
+    GIVEN {
+        PLAYER(SPECIES_CRAMORANT) { HP(hp); MaxHP(250); Ability(ABILITY_GULP_MISSILE); }
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(player, MOVE_SURF); MOVE(opponent, MOVE_CELEBRATE); }
+        TURN { MOVE(player, MOVE_CELEBRATE, gimmick: GIMMICK_DYNAMAX); MOVE(opponent, MOVE_CELEBRATE); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_FORM_CHANGE_INSTANT, player);
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_DYNAMAX_GROWTH, player);
+    } THEN {
+        EXPECT_EQ(player->species, SPECIES_CRAMORANT);
+        EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_SPECIES), SPECIES_CRAMORANT);
+    }
+}
+
 SINGLE_BATTLE_TEST("Gulp Missile: Cramorant cannot change between Gorging and Gulping Forms")
 {
     enum Species species;

@@ -10,6 +10,44 @@
 #include "constants/daycare.h"
 #include "constants/move_relearner.h"
 
+TEST("Fused species are distinguished from their component species")
+{
+    EXPECT(!IsFusedSpecies(SPECIES_NONE));
+    EXPECT(!IsFusedSpecies(NUM_SPECIES));
+
+#if P_FUSION_FORMS && P_FAMILY_KYUREM
+    EXPECT(!IsFusedSpecies(SPECIES_KYUREM));
+#if P_FAMILY_RESHIRAM
+    EXPECT(IsFusedSpecies(SPECIES_KYUREM_WHITE));
+    EXPECT(!IsFusedSpecies(SPECIES_RESHIRAM));
+#endif
+#if P_FAMILY_ZEKROM
+    EXPECT(IsFusedSpecies(SPECIES_KYUREM_BLACK));
+    EXPECT(!IsFusedSpecies(SPECIES_ZEKROM));
+#endif
+#endif
+
+#if P_FUSION_FORMS && P_FAMILY_NECROZMA && P_FAMILY_COSMOG
+    EXPECT(!IsFusedSpecies(SPECIES_NECROZMA));
+    EXPECT(IsFusedSpecies(SPECIES_NECROZMA_DUSK_MANE));
+    EXPECT(IsFusedSpecies(SPECIES_NECROZMA_DAWN_WINGS));
+    EXPECT(!IsFusedSpecies(SPECIES_SOLGALEO));
+    EXPECT(!IsFusedSpecies(SPECIES_LUNALA));
+#endif
+
+#if P_FUSION_FORMS && P_FAMILY_CALYREX
+    EXPECT(!IsFusedSpecies(SPECIES_CALYREX));
+#if P_FAMILY_GLASTRIER
+    EXPECT(IsFusedSpecies(SPECIES_CALYREX_ICE));
+    EXPECT(!IsFusedSpecies(SPECIES_GLASTRIER));
+#endif
+#if P_FAMILY_SPECTRIER
+    EXPECT(IsFusedSpecies(SPECIES_CALYREX_SHADOW));
+    EXPECT(!IsFusedSpecies(SPECIES_SPECTRIER));
+#endif
+#endif
+}
+
 TEST("Nature independent from Hidden Nature")
 {
     u32 i, j, nature = 0, hiddenNature = 0;

@@ -96,6 +96,7 @@ enum {
     MSG_HOLDING_POKE,
     MSG_WHICH_ONE_WILL_TAKE,
     MSG_CANT_RELEASE_EGG,
+    MSG_CANT_RELEASE_FUSION,
     MSG_CONTINUE_BOX,
     MSG_CAME_BACK,
     MSG_WORRIED,
@@ -1066,6 +1067,7 @@ static const struct StorageMessage sMessages[] =
     [MSG_HOLDING_POKE]         = {COMPOUND_STRING("{JPN}ポケモンを つかんだままですよ!"),  MSG_VAR_NONE},
     [MSG_WHICH_ONE_WILL_TAKE]  = {COMPOUND_STRING("{JPN}つれていく ポケモンを えらんで!"),   MSG_VAR_NONE},
     [MSG_CANT_RELEASE_EGG]     = {COMPOUND_STRING("{JPN}タマゴを にがすことは できません!"),  MSG_VAR_NONE},
+    [MSG_CANT_RELEASE_FUSION]  = {COMPOUND_STRING("{JPN}がったいちゅうの ポケモンは\nにがせません!"), MSG_VAR_NONE},
     [MSG_CONTINUE_BOX]         = {COMPOUND_STRING("{JPN}ボックスそうさを つづけますか?"),   MSG_VAR_NONE},
     [MSG_CAME_BACK]            = {COMPOUND_STRING("{JPN}{DYNAMIC 0} は かえってきた!"),     MSG_VAR_MON_NAME_1},
     [MSG_WORRIED]              = {COMPOUND_STRING("{JPN}しんぱい だったのかな……"),  MSG_VAR_NONE},
@@ -2643,6 +2645,10 @@ static void Task_OnSelectedMon(u8 taskId)
             {
                 sStorage->state = 5; // Cannot release an Egg.
             }
+            else if (IsFusedSpecies(sStorage->displayMonSpecies))
+            {
+                sStorage->state = 7;
+            }
             else if (ItemIsMail(sStorage->displayMonItemId))
             {
                 sStorage->state = 4;
@@ -2713,6 +2719,11 @@ static void Task_OnSelectedMon(u8 taskId)
     case 5:
         PlaySE(SE_FAILURE);
         PrintMessage(MSG_CANT_RELEASE_EGG);
+        sStorage->state = 6;
+        break;
+    case 7:
+        PlaySE(SE_FAILURE);
+        PrintMessage(MSG_CANT_RELEASE_FUSION);
         sStorage->state = 6;
         break;
     case 4:
