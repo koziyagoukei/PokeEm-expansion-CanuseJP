@@ -171,6 +171,11 @@ u32 GetNonDynamaxMaxHP(enum BattlerId battler)
 // Sets flags used for Dynamaxing and checks Gigantamax forms.
 void ActivateDynamax(enum BattlerId battler)
 {
+    // Cramorant drops its prey before Dynamax HP is applied.
+    if (gBattleMons[battler].species == SPECIES_CRAMORANT_GULPING
+     || gBattleMons[battler].species == SPECIES_CRAMORANT_GORGING)
+        TryBattleFormChange(battler, FORM_CHANGE_BATTLE_SWITCH_OUT, GetBattlerAbility(battler));
+
     // Set appropriate use flags.
     SetActiveGimmick(battler, GIMMICK_DYNAMAX);
     SetGimmickAsActivated(battler, GIMMICK_DYNAMAX);
