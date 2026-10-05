@@ -692,6 +692,7 @@ struct Fusion
 };
 
 extern const struct Fusion *const gFusionTablePointers[NUM_SPECIES];
+bool32 IsFusedSpecies(enum Species species);
 
 #if P_FUSION_FORMS
 #if P_FAMILY_KYUREM

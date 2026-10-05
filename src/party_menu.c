@@ -4170,6 +4170,9 @@ static void CursorCb_Trade2(u8 taskId)
     case CANT_TRADE_EGG_YET:
         StringExpandPlaceholders(gStringVar4, gText_EggCantBeTradedNow);
         break;
+    case CANT_TRADE_INVALID_MON:
+        StringExpandPlaceholders(gStringVar4, gText_PkmnCantBeTraded);
+        break;
     default: // CAN_TRADE_MON
         PlaySE(SE_SELECT);
         GetMonNickname(&gParties[B_TRAINER_PLAYER][gPartyMenu.slotId], gStringVar1);

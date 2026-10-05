@@ -68,6 +68,9 @@ bool32 IsTeraOrbCharged(void)
 // Returns whether a battler can Terastallize.
 bool32 CanTerastallize(enum BattlerId battler)
 {
+    if (IsBattlerInMegaOrPrimalForm(battler))
+        return FALSE;
+
     enum HoldEffect holdEffect = GetBattlerHoldEffectIgnoreNegation(battler);
 
     if (gBattleMons[battler].volatiles.transformed && GET_BASE_SPECIES_ID(gBattleMons[battler].species) == SPECIES_TERAPAGOS)

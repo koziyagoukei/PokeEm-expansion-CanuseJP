@@ -3364,6 +3364,26 @@ const u16 *GetSpeciesFormTable(enum Species species)
     return formTable;
 }
 
+bool32 IsFusedSpecies(enum Species species)
+{
+    const struct Fusion *fusionTable;
+
+    if ((u32)species >= NUM_SPECIES)
+        return FALSE;
+
+    fusionTable = gFusionTablePointers[species];
+    if (fusionTable == NULL)
+        return FALSE;
+
+    for (u32 i = 0; fusionTable[i].fusionStorageIndex != FUSION_TERMINATOR; i++)
+    {
+        if (fusionTable[i].fusingIntoMon == species)
+            return TRUE;
+    }
+
+    return FALSE;
+}
+
 const struct FormChange *GetSpeciesFormChanges(enum Species species)
 {
     const struct FormChange *formChanges = gSpeciesInfo[SanitizeSpeciesId(species)].formChangeTable;

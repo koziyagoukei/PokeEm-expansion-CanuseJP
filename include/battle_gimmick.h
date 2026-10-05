@@ -29,6 +29,7 @@ struct GimmickInfo
 
 void AssignUsableGimmicks(void);
 bool32 CanActivateGimmick(enum BattlerId battler, enum Gimmick gimmick);
+bool32 IsBattlerInMegaOrPrimalForm(enum BattlerId battler);
 bool32 IsGimmickSelected(enum BattlerId battler, enum Gimmick gimmick);
 void SetActiveGimmick(enum BattlerId battler, enum Gimmick gimmick);
 enum Gimmick GetActiveGimmick(enum BattlerId battler);
