@@ -663,3 +663,6 @@ gSpecials::
 	def_special Special_TeishokuyaIncreasePartyFriendship
 	def_special Special_TeishokuyaCanToggleGigantamax
 	def_special Special_TeishokuyaPlayMealScene, waitstate=1
+	def_special Special_TeishokuyaHasGoldSymbol
+	def_special Special_TeishokuyaGetShinyMealStatus
+	def_special Special_TeishokuyaPlayShinyMealScene, waitstate=1

@@ -10,6 +10,10 @@ void CB2_InitLearnMove(void);
 bool32 CanBoxMonRelearnMoves(struct BoxPokemon *boxMon, enum MoveRelearnerStates state);
 bool32 HasMoveToRelearn(struct BoxPokemon *boxMon, enum MoveRelearnerStates state);
 
+#if TESTING
+u32 Test_GetRelearnerFrontierFullMoves(struct BoxPokemon *mon, u16 *moves);
+#endif
+
 extern enum MoveRelearnerStates gMoveRelearnerState;
 extern enum RelearnMode gRelearnMode;
 

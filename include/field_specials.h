@@ -41,5 +41,11 @@ bool32 CheckObjectAtXY(u32, u32);
 bool32 CheckPartyHasSpecies(enum Species);
 bool8 CutMoveRuinValleyCheck(void);
 void CutMoveOpenDottedHoleDoor(void);
+bool8 Special_TeishokuyaHasGoldSymbol(void);
+u16 Special_TeishokuyaGetShinyMealStatus(void);
+
+#if TESTING
+u16 Test_TeishokuyaTryMakeMonShiny(u16 partyIndex);
+#endif
 
 #endif // GUARD_FIELD_SPECIALS_H
