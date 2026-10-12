@@ -1,17 +1,17 @@
 #ifndef GUARD_CONFIG_DEBUG_H
 #define GUARD_CONFIG_DEBUG_H
 
-// Overworld Debug
-#define DEBUG_OVERWORLD_MENU            DISABLED_ON_RELEASE // Enables an overworld debug menu to change flags, variables, giving Pokemon and more, accessed by holding R and pressing START while in the overworld by default.
-#define DEBUG_OVERWORLD_HELD_KEYS       (R_BUTTON)          // The keys required to be held to open the debug menu.
-#define DEBUG_OVERWORLD_TRIGGER_EVENT   pressedStartButton  // The event that opens the menu when holding the key(s) defined in DEBUG_OVERWORLD_HELD_KEYS.
-#define DEBUG_OVERWORLD_IN_MENU         TRUE               // Replaces the overworld debug menu button combination with a start menu entry (above Pokedex).
+// フィールドのデバッグ
+#define DEBUG_OVERWORLD_MENU            DISABLED_ON_RELEASE // フラグ・変数の変更やポケモンの入手などを行うデバッグメニューを有効にする。既定ではフィールドでRを押しながらSTARTを押して開く。
+#define DEBUG_OVERWORLD_HELD_KEYS       (R_BUTTON)          // デバッグメニューを開く際に押し続ける必要があるボタン。
+#define DEBUG_OVERWORLD_TRIGGER_EVENT   pressedStartButton  // DEBUG_OVERWORLD_HELD_KEYSのボタンを押している間に、メニューを開くきっかけとなるイベント。
+#define DEBUG_OVERWORLD_IN_MENU         TRUE               // ボタンの組み合わせによる起動を、STARTメニュー内の項目（図鑑の上）に置き換える。
 
-// Battle Debug Menu
-#define DEBUG_BATTLE_MENU               DISABLED_ON_RELEASE // If set to TRUE, enables a debug menu to use in battles by pressing the Select button.
-#define DEBUG_AI_DELAY_TIMER            TRUE // If set to TRUE, displays the number of frames it takes for the AI to choose a move. Replaces the "What will PKMN do" text. Useful for devs or anyone who modifies the AI code and wants to see if it doesn't take too long to run.
+// 戦闘のデバッグメニュー
+#define DEBUG_BATTLE_MENU               DISABLED_ON_RELEASE // TRUEなら、戦闘中にSELECTで開けるデバッグメニューを有効にする。
+#define DEBUG_AI_DELAY_TIMER            TRUE // TRUEなら、AIが技を選ぶまでにかかったフレーム数を行動選択時のメッセージの代わりに表示する。AI変更時の処理時間確認に使用できる。
 
-// Pokemon Debug
-#define DEBUG_POKEMON_SPRITE_VISUALIZER DISABLED_ON_RELEASE // Enables a debug menu for Pokemon sprites and icons, accessed by pressing Select in the summary screen.
+// ポケモンのデバッグ
+#define DEBUG_POKEMON_SPRITE_VISUALIZER DISABLED_ON_RELEASE // つよさをみる画面でSELECTを押すと開く、ポケモンのスプライト・アイコン確認用メニューを有効にする。
 
 #endif // GUARD_CONFIG_DEBUG_H

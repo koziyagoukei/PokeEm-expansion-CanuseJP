@@ -1,90 +1,90 @@
 #ifndef GUARD_CONFIG_POKEMON_H
 #define GUARD_CONFIG_POKEMON_H
 
-// Species data settings
-#define P_UPDATED_TYPES             GEN_LATEST  // Some Pokémon have received type updates after their introduction.
-#define P_UPDATED_STATS             GEN_LATEST  // Some Pokémon have received base stat updates after their introduction.
-#define P_UPDATED_ABILITIES         GEN_LATEST  // Since Gen 4, certain Pokémon have had their abilities changed.
-#define P_UPDATED_EGG_GROUPS        GEN_LATEST  // Since Gen 8, certain Pokémon have gained new egg groups.
-#define P_UPDATED_FRIENDSHIP        GEN_LATEST  // Since Gen 8, the base friendship of certain Pokémon was changed.
-#define P_UPDATED_EVS               GEN_LATEST  // Since Gen 4, some Pokémon have received EV updates.
-#define P_UPDATED_EXP_YIELDS        GEN_LATEST  // Since Gen 5, some Pokémon have received base Experience changes.
+// 種族データの設定
+#define P_UPDATED_TYPES             GEN_LATEST  // 登場後に変更された、一部のポケモンのタイプを指定世代に合わせる。
+#define P_UPDATED_STATS             GEN_LATEST  // 登場後に変更された、一部のポケモンの種族値を指定世代に合わせる。
+#define P_UPDATED_ABILITIES         GEN_LATEST  // 第4世代以降の、一部のポケモンの特性変更を適用する。
+#define P_UPDATED_EGG_GROUPS        GEN_LATEST  // 第8世代以降の、一部のポケモンのタマゴグループ追加を適用する。
+#define P_UPDATED_FRIENDSHIP        GEN_LATEST  // 第8世代以降の、一部のポケモンの初期なつき度変更を適用する。
+#define P_UPDATED_EVS               GEN_LATEST  // 第4世代以降の、一部のポケモンから得る努力値の変更を適用する。
+#define P_UPDATED_EXP_YIELDS        GEN_LATEST  // 第5世代以降の、一部のポケモンの基礎経験値変更を適用する。
 
-// Learnsets
-#define P_LVL_UP_LEARNSETS          GEN_LATEST  // Choose which set of Level Up Learnsets to use.
-                                                // For generations that hadn't introduced a species yet, we use their first appearence (eg. Chikorita's Gen2 data if the config is set to GEN_1).
-                                                // For generations that don't include a previously introduced species, we use their last apperance (eg. Snivy's Gen7 data if the config is set to GEN_8).
-                                                // GEN_1/2/3/4/5/6/7: Yellow, Crystal, RSE, HGSS, B2W2, ORAS, USUM learnsets respectively.
-                                                // GEN_8: Use the following priority: BDSP for Gen1-4 Pokémon, then LA for species introduced in that game, then SwSh for species present in those games. Otherwise, use GEN_7.
-                                                // GEN_9: SV For species present in those games. Otherwise use GEN_8.
-#define P_EVOLUTION_LEVEL_1_LEARN   GEN_LATEST  // Since Gen 8, Pokémon evolving while at level 1 do not get the chance to learn their level 1 moves, while before they did.
+// 習得技
+#define P_LVL_UP_LEARNSETS          GEN_LATEST  // 使用するレベルアップ習得技の世代を選ぶ。
+                                                // その世代では未登場の種族は初登場時のデータを使う（例: GEN_1指定時のチコリータは第2世代）。
+                                                // 登場済みでもその世代に収録されていない種族は直近の登場時のデータを使う（例: GEN_8指定時のツタージャは第7世代）。
+                                                // GEN_1/2/3/4/5/6/7は、それぞれピカチュウ版・クリスタル・RSE・HGSS・B2W2・ORAS・USUMの習得技を使う。
+                                                // GEN_8は、第1〜4世代のポケモンにはBDSP、PLAで登場した種族にはPLA、剣盾収録の種族には剣盾をこの順で優先し、それ以外はGEN_7を使う。
+                                                // GEN_9はSV収録の種族にはSV、それ以外はGEN_8を使う。
+#define P_EVOLUTION_LEVEL_1_LEARN   GEN_LATEST  // 第8世代以降では、レベル1で進化した際にレベル1の技を覚える機会がなくなる。以前は習得可能だった。
 
-// Evolution settings
-#define P_FRIENDSHIP_EVO_THRESHOLD   GEN_LATEST  // Since Gen 8, Pokémon that evolve by friendship evolve at or above 160 friendship instead of 220.
+// 進化の設定
+#define P_FRIENDSHIP_EVO_THRESHOLD   GEN_LATEST  // 第8世代以降では、なつき進化に必要ななつき度が220以上から160以上になる。
 
-// Breeding settings
-#define P_NIDORAN_M_DITTO_BREED        GEN_LATEST                // Since Gen 5, when Nidoran♂ breeds with Ditto it can produce Nidoran♀ offspring. Before, it would only yield male offspring. This change also applies to Volbeat.
-#define P_INCENSE_BREEDING             GEN_LATEST                // Since Gen 9, cross-generation Baby Pokémon don't require Incense being held by the parents to be obtained via breeding.
-#define P_EGG_HATCH_LEVEL              GEN_LATEST                // Since Gen 4, Pokémon will hatch from Eggs at level 1 instead of 5.
-#define P_BALL_INHERITANCE             GEN_LATEST                // Since Gen 6, Eggs from the Day Care will inherit the Poké Ball from their mother. From Gen 7 onwards, the father can pass it down as well, as long as it's of the same species as the mother.
-#define P_MOVE_INHERITANCE             GEN_LATEST                // Prior to Gen 6, Eggs would inherit Egg moves from their father, TM moves from their father, level-up moves shared by both parents in that order. In Gen 6 and higher, Eggs would inherit level-up moves shared by both parents, Egg moves from their father, Egg moves from their mother in that order.
-#define P_NATURE_INHERITANCE           GEN_LATEST                // In Gen 3, Everstone grants Ditto and mothers a 50% chance to pass on Nature. Since Gen 4, anyone can pass on a Nature. Since Gen 5, the chance is 100%.
-#define P_ABILITY_INHERITANCE          GEN_LATEST                // In B2W2, a female Pokémon has an 80% chance of passing down their Ability if bred with a male. Since Gen 6, the chance is 80% for regular Ability and 60% for Hidden Ability, and anyone can pass down their Abilities if bred with Ditto. NOTE: BW's effect: 60% chance to pass down HA and random for regular Ability has been omitted.
-#define P_EGG_MOVE_TRANSFER            GEN_LATEST                // Starting in Gen 8, if two Pokémon of the same species are together in the Day Care, one knows an Egg Move, and the other has an empty slot, the other Pokémon will receive the Egg Move in the empty slot. In Gen 9, if a Pokémon holds a Mirror Herb, it will receive Egg Moves from the other regardless of species.
-#define P_SCATTERBUG_LINE_FORM_BREED   SPECIES_SCATTERBUG_FANCY  // Choose the Scatterbug form all Vivillon/Spewpa/Scatterbug will breed into, basically aligning with the "location" of the player's game.
+// タマゴ・遺伝の設定
+#define P_NIDORAN_M_DITTO_BREED        GEN_LATEST                // 第5世代以降では、ニドラン♂とメタモンからニドラン♀も生まれる。以前は♂のみ。同じ変更をバルビートにも適用する。
+#define P_INCENSE_BREEDING             GEN_LATEST                // 第9世代以降では、後の世代で追加されたベビィポケモンを生むために親へおこうを持たせる必要がない。
+#define P_EGG_HATCH_LEVEL              GEN_LATEST                // 第4世代以降では、ふ化時のレベルが5から1になる。
+#define P_BALL_INHERITANCE             GEN_LATEST                // 第6世代以降では母親のボールを遺伝する。第7世代以降では両親が同じ種族なら父親のボールも遺伝できる。
+#define P_MOVE_INHERITANCE             GEN_LATEST                // 第6世代より前は父親のタマゴ技、父親の技マシン技、両親共通のレベル技の順で遺伝する。第6世代以降は両親共通のレベル技、父親のタマゴ技、母親のタマゴ技の順になる。
+#define P_NATURE_INHERITANCE           GEN_LATEST                // 第3世代では、かわらずのいしを持つメタモンまたは母親から50%で性格を遺伝する。第4世代以降はどちらの親からも遺伝でき、第5世代以降は確率が100%になる。
+#define P_ABILITY_INHERITANCE          GEN_LATEST                // B2W2では♂と預けた♀の特性を80%で遺伝する。第6世代以降は通常特性80%、隠れ特性60%で、メタモンとならどちらの性別からも遺伝できる。BWの「隠れ特性60%、通常特性はランダム」という仕様は未実装。
+#define P_EGG_MOVE_TRANSFER            GEN_LATEST                // 第8世代以降では、同種2匹を預けて一方がタマゴ技を覚え、もう一方に技の空きがあれば、その技を空き枠へ移せる。第9世代では、ものまねハーブを持つポケモンが種族を問わずほかのポケモンからタマゴ技を習得できる。
+#define P_SCATTERBUG_LINE_FORM_BREED   SPECIES_SCATTERBUG_FANCY  // ビビヨン・コフーライ・コフキムシから生まれるコフキムシのフォルムを選ぶ。原作のゲームの地域設定に相当する。
 
-// Species-specific settings
-#define P_SHEDINJA_BALL             GEN_LATEST  // Since Gen 4, Shedinja requires a Poké Ball for its evolution. In Gen 3, Shedinja inherits Nincada's Ball.
-#define P_KADABRA_EVERSTONE         GEN_LATEST  // Since Gen 4, Kadabra can evolve even when holding an Everstone.
-#define P_SHUCKLE_BERRY_JUICE       GEN_LATEST  // In Gen 2, Shuckle had a 1/16 chance of converting Berry that it's holding into Berry Juice. Enabling this will allow Shuckle to do this with an Oran Berry, which is the spiritual succesor of the Berry item.
+// 種族固有の設定
+#define P_SHEDINJA_BALL             GEN_LATEST  // 第4世代以降では、ヌケニンの入手にモンスターボールが必要。第3世代ではツチニンのボールを引き継ぐ。
+#define P_KADABRA_EVERSTONE         GEN_LATEST  // 第4世代以降では、ユンゲラーはかわらずのいしを持っていても進化できる。
+#define P_SHUCKLE_BERRY_JUICE       GEN_LATEST  // 第2世代では、ツボツボが持つ「きのみ」を1/16で「きのみジュース」に変える。有効にすると、旧「きのみ」に相当するオレンのみでこの挙動を再現する。
 
-// Species graphic settings
-#define P_GENDER_DIFFERENCES            TRUE        // If TRUE, Pokémon will have graphical-only differences when they're female. Female *forms* such as Meowstic are not affected by this.
-#define P_CUSTOM_GENDER_DIFF_ICONS      TRUE        // If TRUE, more Pokémon will have custom icons for their female differences, such as Hippopotas and Hippowdon.
-#define P_ARCEUS_UNIQUE_FORM_ICONS      GEN_LATEST  // Since Gen 9, Arceus changes its icon to reflect its current form.
-#define P_FOOTPRINTS                    TRUE        // If TRUE, Pokémon will have footprints (as was the case up to Gen 5 and in BDSP). Disabling this saves some ROM space.
-#define P_TWO_FRAME_FRONT_SPRITES       TRUE        // In Pokémon Emerald, Pokémon front sprites always consist of two frames. This config can revert it to only use the first frame, as is the case in the other Gen 3 games.
-#define P_GBA_STYLE_SPECIES_GFX         FALSE       // By default, Pokémon sprites use Gen 4/5's style. This config can revert them back to GBA-style. NOTE: B_ENEMY_MON_SHADOW_STYLE is disabled when using these sprites for now.
-#define P_GBA_STYLE_SPECIES_ICONS       FALSE       // By default, Pokémon have their updated icons. This config can revert them back to GBA-style.
-#define P_GBA_STYLE_SPECIES_FOOTPRINTS  FALSE       // By default, Pokémon have their updated footprints. This config can revert them back to GBA-style.
+// 種族画像の設定
+#define P_GENDER_DIFFERENCES            TRUE        // TRUEなら、♀の見た目の違いを表示する。ニャオニクスのように♀が独立したフォルムである種族には影響しない。
+#define P_CUSTOM_GENDER_DIFF_ICONS      TRUE        // TRUEなら、ヒポポタス・カバルドンなどにも独自の♀用アイコンを使用する。
+#define P_ARCEUS_UNIQUE_FORM_ICONS      GEN_LATEST  // 第9世代以降では、アルセウスの現在のフォルムに合わせてアイコンを変える。
+#define P_FOOTPRINTS                    TRUE        // TRUEなら、第5世代までとBDSPのように足跡を表示する。無効にするとROM容量を節約できる。
+#define P_TWO_FRAME_FRONT_SPRITES       TRUE        // エメラルドの正面スプライトは2コマ構成。無効にすると、ほかの第3世代作品と同じく最初の1コマのみを使用する。
+#define P_GBA_STYLE_SPECIES_GFX         FALSE       // 既定の第4・5世代風スプライトをGBA風に変更する。現在、この画像を使う場合はB_ENEMY_MON_SHADOW_STYLEが無効になる。
+#define P_GBA_STYLE_SPECIES_ICONS       FALSE       // 既定の更新済みアイコンをGBA風に変更する。
+#define P_GBA_STYLE_SPECIES_FOOTPRINTS  FALSE       // 既定の更新済み足跡をGBA風に変更する。
 
-// Other settings
-#define P_CRIES_ENABLED                  TRUE        // If TRUE, Pokémon will have cries. Disabling this saves around a LOT of ROM space (over 25%!), but instead we recommend disabling individual unused Pokémon families in include/config/species_enabled.h.
-#define P_LEGENDARY_PERFECT_IVS          GEN_LATEST  // Since Gen 6, Legendaries, Mythicals and Ultra Beasts found in the wild or given through gifts have at least 3 perfect IVs.
-#define P_EV_CAP                         GEN_LATEST  // Since Gen 6, the max EVs per stat is 252 instead of 255.
-#define P_SHOW_TERA_TYPE                 GEN_LATEST       // Since Gen 9, the Tera Type is shown on the summary screen.
-#define P_TM_LITERACY                    GEN_LATEST  // Since Gen 6, TM illiterate Pokémon can learn TMs that teach moves that are in their level-up learnsets.
-#define P_CAN_FORGET_HIDDEN_MOVE         TRUE       // If TRUE, Pokémon can forget any move, even if it is an HM.
-#define P_ASK_MOVE_CONFIRMATION          FALSE       // If FALSE, when a player decides not to learn a move, the game does not ask the player for confirmation.
-#define P_EGG_CYCLE_LENGTH               GEN_LATEST  // Since Gen 8, Egg cycles take half as many steps as before. Previous generations have some varied step counts around 255.
-#define P_ONLY_OBTAINABLE_SHINIES        FALSE       // If TRUE, Pokémon encountered in the Battle Pyramid or while catching is disabled won't be Shiny.
-#define P_NO_SHINIES_WITHOUT_POKEBALLS   FALSE       // If TRUE, Pokémon encountered when the player is out of Poké Balls won't be Shiny.
-#define P_SHOW_DYNAMIC_TYPES             TRUE       // If TRUE, all moves with dynamic type changes will be reflected as their current type in battle/summary screens instead of just select ones like in vanilla.
-#define P_BASE_HP_1_SHEDINJA_HANDLING    FALSE       // If TRUE, all species with 1 Base HP will have their handling match Shedinja's.
+// その他の設定
+#define P_CRIES_ENABLED                  TRUE        // TRUEなら鳴き声を有効にする。無効化で大きくROM容量を節約できる（元の説明では25%以上）が、代わりにinclude/config/species_enabled.hで未使用の種族系列を個別に無効化することを推奨する。
+#define P_LEGENDARY_PERFECT_IVS          GEN_LATEST  // 第6世代以降では、野生・贈り物の伝説・幻・ウルトラビーストの個体値を最低3か所最大にする。
+#define P_EV_CAP                         GEN_LATEST  // 第6世代以降では、各能力の努力値上限が255から252になる。
+#define P_SHOW_TERA_TYPE                 GEN_LATEST       // 第9世代以降では、つよさをみる画面にテラタイプを表示する。
+#define P_TM_LITERACY                    GEN_LATEST  // 第6世代以降では、通常は技マシン非対応のポケモンも、その技がレベルアップ習得技に含まれていれば技マシンで習得できる。
+#define P_CAN_FORGET_HIDDEN_MOVE         TRUE       // TRUEなら、秘伝技を含むすべての技を忘れられる。
+#define P_ASK_MOVE_CONFIRMATION          FALSE       // FALSEなら、技を覚えないと選んだ際の再確認を省略する。
+#define P_EGG_CYCLE_LENGTH               GEN_LATEST  // 第8世代以降では、タマゴの1周期に必要な歩数が以前の半分になる。以前の世代ではおおむね255歩前後で差がある。
+#define P_ONLY_OBTAINABLE_SHINIES        FALSE       // TRUEなら、バトルピラミッドや捕獲禁止中の野生ポケモンを色違いにしない。
+#define P_NO_SHINIES_WITHOUT_POKEBALLS   FALSE       // TRUEなら、ボールを所持していないときの野生ポケモンを色違いにしない。
+#define P_SHOW_DYNAMIC_TYPES             TRUE       // TRUEなら、タイプが変化するすべての技について、現在のタイプを戦闘・つよさをみる画面へ反映する。原作では一部の技のみ対象。
+#define P_BASE_HP_1_SHEDINJA_HANDLING    FALSE       // TRUEなら、HP種族値が1の種族をすべてヌケニンと同じ方式で扱う。
 
-// Learnset helper toggles
-#define P_LEARNSET_HELPER_TEACHABLE      TRUE   // If FALSE, make sure to remove teachable_learnset.h from your .gitignore file. If TRUE, teachable_learnsets.h will be populated by tools/learnset_helpers/make_teachables.py using the included JSON files based on available TMs and tutors.
+// 習得技生成ツールの設定
+#define P_LEARNSET_HELPER_TEACHABLE      TRUE   // TRUEなら、tools/learnset_helpers/make_teachables.pyが付属のJSONと利用可能な技マシン・教え技からteachable_learnsets.hを生成する。FALSEにする場合は、対応する習得技ヘッダを.gitignoreの対象から外す必要がある。
 
-// Flag settings
-// To use the following features in scripting, replace the 0s with the flag ID you're assigning it to.
-// Eg: Replace with FLAG_UNUSED_0x264 so you can use that flag to toggle the feature.
-#define P_FLAG_FORCE_SHINY               FLAG_EXPANSION_FORCE_SHINY  // If this flag is set, all wild and gift Pokémon will forced into being Shiny.
-#define P_FLAG_FORCE_NO_SHINY            FLAG_EXPANSION_FORCE_NO_SHINY  // If this flag is set, all wild and gift Pokémon will forced into NOT being Shiny.
+// フラグの設定
+// スクリプトから制御するには、0の項目に使用するフラグIDを指定する。
+// 例: FLAG_UNUSED_0x264を指定すると、そのフラグで機能を切り替えられる。
+#define P_FLAG_FORCE_SHINY               FLAG_EXPANSION_FORCE_SHINY  // このフラグが立つと、野生・贈り物のポケモンを必ず色違いにする。
+#define P_FLAG_FORCE_NO_SHINY            FLAG_EXPANSION_FORCE_NO_SHINY  // このフラグが立つと、野生・贈り物のポケモンを必ず通常色にする。
 
-// Go here if you want to disable specific families of Pokémon.
+// 特定のポケモンの進化系列を無効にする場合は、このファイルで設定する。
 #include "config/species_enabled.h"
 
 #include "constants/sound.h"
 
-// Sound related settings
-#define P_MODIFIED_MEGA_CRIES            P_MEGA_EVOLUTIONS  // If TRUE, will use the extra separate Mega Cries (approx. 3% space of ROM). if FALSE, will use the same cry for all Mega Evolutions except modified with P_MODIFIED_MEGA_CRY_MODE. By default, this is set based on if mega evolutions are enabled.
+// 音声の設定
+#define P_MODIFIED_MEGA_CRIES            P_MEGA_EVOLUTIONS  // TRUEなら、メガシンカ専用の追加鳴き声を使用する（元の説明ではROM容量の約3%）。FALSEなら通常の鳴き声をP_MODIFIED_MEGA_CRY_MODEで加工する。既定ではメガシンカの有効・無効に連動する。
 #define P_MODIFIED_MEGA_CRY_MODE         CRY_MODE_HIGH_PITCH
 
-// Pokédex
-#define DONT_SKIP_GAPS                   0              // Does not skip any gaps in the Pokédex.
-#define SKIP_GAPS_EXCEPT_ONE             1              // Skips all gaps in the Pokédex other than one blank entry in between seen entries.
-#define SKIP_GAPS_EXCEPT_BEFORE_AFTER    2              // Skips all gaps in the Pokédex other than one before and after seen entries. Most similar to whats seen in Pokémon SV.
-#define SKIP_ALL_GAPS                    3              // Skips all gaps in the Pokédex.
-#define P_SKIP_POKEDEX_GAPS              DONT_SKIP_GAPS // Pokémon SV skip large gaps in the Pokédex.
+// ポケモン図鑑
+#define DONT_SKIP_GAPS                   0              // 図鑑の未発見の空欄を省略しない。
+#define SKIP_GAPS_EXCEPT_ONE             1              // 発見済みの項目の間に空欄を1つだけ残し、ほかの空欄を省略する。
+#define SKIP_GAPS_EXCEPT_BEFORE_AFTER    2              // 発見済みの項目の前後に空欄を1つずつ残し、ほかを省略する。SVに最も近い表示。
+#define SKIP_ALL_GAPS                    3              // 図鑑の空欄をすべて省略する。
+#define P_SKIP_POKEDEX_GAPS              DONT_SKIP_GAPS // SVのように、図鑑の長い未発見区間を省略する方法を選ぶ。
 
 #endif // GUARD_CONFIG_POKEMON_H

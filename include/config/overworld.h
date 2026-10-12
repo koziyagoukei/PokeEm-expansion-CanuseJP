@@ -1,169 +1,169 @@
 #ifndef GUARD_CONFIG_OVERWORLD_H
 #define GUARD_CONFIG_OVERWORLD_H
 
-// Movement config
-#define OW_RUNNING_INDOORS          GEN_LATEST  // In Gen4+, players are allowed to run indoors.
-#define SLOW_MOVEMENT_ON_STAIRS     FALSE       // If enabled, the player will move slower up/down stairs like in FR
+// 移動の設定。
+#define OW_RUNNING_INDOORS          GEN_LATEST  // 第4世代以降では、屋内でも走れる。
+#define SLOW_MOVEMENT_ON_STAIRS     FALSE       // 有効にすると、ファイアレッドのように階段の上り下りで移動速度を落とす。
 
-// Other settings
-#define OW_POISON_DAMAGE                GEN_LATEST // In Gen4, Pokemon no longer faint from Poison in the overworld. In Gen5+, they no longer take damage at all.
-#define OW_DOUBLE_APPROACH_WITH_ONE_MON FALSE      // If enabled, you can be spotted by two trainers at the same time even if you only have one eligible Pokemon in your party.
-#define OW_HIDE_REPEAT_MAP_POPUP        FALSE      // If enabled, map popups will not appear if entering a map with the same Map Section Id as the last.
-#define OW_WHITEOUT_CUTSCENE            GEN_LATEST // In Gen4+, whiting out shows an additional message and post whiteout event script cutscene with a healing NPC. (While this change was also in FRLG, for the sake of simplicity, setting this to GEN_3 will result in RSE behavior.)
-#define OW_DEFOG_FIELD_MOVE             FALSE      // If enabled, Defog can be used as a Field Move as seen in DPPt.
-#define OW_ROCK_CLIMB_FIELD_MOVE        FALSE      // If enabled, Rock Climb can be used as a Field Move as seen in DPPt.
-#define OW_CHOOSE_FROM_PC_AND_PARTY     TRUE       // If enabled, NPCs like move tutors or trainers asking for trade will let you pick a Pokemon from your PC or party instead of just your party
+// その他の設定。
+#define OW_POISON_DAMAGE                GEN_LATEST // 第4世代ではフィールド上のどくでひんしにならず、第5世代以降ではフィールド上のどくダメージ自体がなくなる。
+#define OW_DOUBLE_APPROACH_WITH_ONE_MON FALSE      // 有効にすると、戦闘可能な手持ちが1匹だけでも、2人のトレーナーに同時に見つかる。
+#define OW_HIDE_REPEAT_MAP_POPUP        FALSE      // 有効にすると、直前と同じMap Section IDのマップへ入った場合、地名表示を出さない。
+#define OW_WHITEOUT_CUTSCENE            GEN_LATEST // 第4世代以降では、全滅時に追加メッセージと回復NPCによる復帰イベントを表示する。FRLGにもある仕様だが、簡略化のためGEN_3ではRSEの挙動を使う。
+#define OW_DEFOG_FIELD_MOVE             FALSE      // 有効にすると、DPPtのようにきりばらいをフィールドで使える。
+#define OW_ROCK_CLIMB_FIELD_MOVE        FALSE      // 有効にすると、DPPtのようにロッククライムをフィールドで使える。
+#define OW_CHOOSE_FROM_PC_AND_PARTY     TRUE       // 有効にすると、技教えや交換などのNPCで、手持ちだけでなくボックスからもポケモンを選べる。
 
-// Item Obtain Description Box
-#define OW_ITEM_DESCRIPTIONS_OFF        0   // never show descriptions
-#define OW_ITEM_DESCRIPTIONS_FIRST_TIME 1   // show first time (** SAVE-BREAKING - see struct SaveBlock3 **)
-#define OW_ITEM_DESCRIPTIONS_ALWAYS     2   // always show description
-#define OW_SHOW_ITEM_DESCRIPTIONS       OW_ITEM_DESCRIPTIONS_ALWAYS // If enabled, item descriptions/images will be shown when finding items.
+// アイテム入手時の説明枠。
+#define OW_ITEM_DESCRIPTIONS_OFF        0   // 説明を表示しない。
+#define OW_ITEM_DESCRIPTIONS_FIRST_TIME 1   // 初回のみ表示する。注意: セーブ互換性を壊す変更になるため、struct SaveBlock3を参照する。
+#define OW_ITEM_DESCRIPTIONS_ALWAYS     2   // 毎回説明を表示する。
+#define OW_SHOW_ITEM_DESCRIPTIONS       OW_ITEM_DESCRIPTIONS_ALWAYS // アイテム入手時の説明・画像の表示方法を指定する。
 
-// These generational defines only make a distinction for Berries and the OW_PC_MOVE_ORDER
+// 以下の世代定義は、きのみとOW_PC_MOVE_ORDERの設定でのみ区別する。
 #define GEN_6_XY GEN_6
 #define GEN_6_ORAS GEN_COUNT + 1
 
-// PC settings
-#define OW_PC_PRESS_B               GEN_LATEST // In Gen4, pressing B when holding a Pokemon is equivalent to placing it. In Gen3, it gives the "You're holding a Pokemon!" error.
-#define OW_PC_JAPAN_WALDA_ICONS     TRUE       // In the US release of Emerald, the Cross, Bolt, and Plusle icons for Walda's wallpapers were left blank from the Japan release. Setting this to TRUE will restore them.
-#define OW_PC_HEAL                  GEN_LATEST // In Gen8+, Pokemon are not healed when deposited in the PC.
-#define OW_PC_MOVE_ORDER            GEN_LATEST // Starting in Gen4, the order of options in the PC menu change.
-#define OW_PC_RELEASE_ITEM          GEN_LATEST // In Gen8+, Pokemon that get released with a held item return it to the bag.
+// パソコンの設定。
+#define OW_PC_PRESS_B               GEN_LATEST // 第4世代では、ポケモンをつかんだ状態のBボタンで置く操作を行う。第3世代では「ポケモンをつかんでいる」というエラーになる。
+#define OW_PC_JAPAN_WALDA_ICONS     TRUE       // 米国版エメラルドで空白になったアヤミの壁紙用アイコン（十字・稲妻・プラスル）を、日本版と同様に復元する。
+#define OW_PC_HEAL                  GEN_LATEST // 第8世代以降では、ボックスに預けてもポケモンを回復しない。
+#define OW_PC_MOVE_ORDER            GEN_LATEST // 第4世代以降では、パソコンのメニュー項目の順番が変わる。
+#define OW_PC_RELEASE_ITEM          GEN_LATEST // 第8世代以降では、持ち物を持ったポケモンを逃がすと持ち物がバッグへ戻る。
 
-#define OW_BERRY_MUTATIONS             FALSE      // If enabled, Berry plants can mutate based on berries planted next to them.
-#define OW_BERRY_MUTATION_CHANCE       25         // Determines the % chance of a mutation.
-#define OW_BERRY_MOISTURE              FALSE      // If enabled, Berry watering is not a matter of watering it once per stage, but rather of keeping the soil moist.
-#define OW_BERRY_ALWAYS_WATERABLE      FALSE      // If OW_BERRY_MOISTURE is enabled, this setting allows the player to continuously water soil; dry soil will cause a decrease in Berry Yield (like Gen4). When off, soil can only be watered when dry and watering increases yield (like Gen6).
-#define OW_BERRY_MULCH_USAGE           FALSE      // If enabled, Mulch can be used on soil to fertilize it. Otherwise, it is considered unusable. Note that moisture effects only work with OW_BERRY_MOISTURE enabled!
-#define OW_BERRY_WEEDS                 FALSE      // If enabled, weeds may grow on Berry plants that the player needs to take care of. Without OW_BERRY_MOISTURE, weeding bonuses are rounded down.
-#define OW_BERRY_PESTS                 FALSE      // If enabled, pests may approach Berry plants that the player needs to take care of. Without OW_BERRY_MOISTURE, pest bonuses are rounded down.
-#define OW_BERRY_SIX_STAGES            FALSE      // In XY, Berries go through six stages instead of four. This toggle does not affect the time it takes for a tree to be ready for harvest. Without OW_BERRY_MOISTURE, the two extra stages count as BERRY_STAGE_TALLER for watering purposes.
+#define OW_BERRY_MUTATIONS             FALSE      // 有効にすると、隣に植えたきのみに応じて突然変異が起こる。
+#define OW_BERRY_MUTATION_CHANCE       25         // 突然変異が起こる確率（%）。
+#define OW_BERRY_MOISTURE              FALSE      // 有効にすると、成長段階ごとに一度水をやる方式ではなく、土の湿り気を維持する方式になる。
+#define OW_BERRY_ALWAYS_WATERABLE      FALSE      // OW_BERRY_MOISTUREが有効な場合、常に水をやれるようにし、乾燥で収穫量が減る第4世代方式を使う。無効なら乾いたときだけ水をやれて、収穫量が増える第6世代方式になる。
+#define OW_BERRY_MULCH_USAGE           FALSE      // 有効にすると、土にこやしを使える。無効では使用不可になる。湿り気への効果にはOW_BERRY_MOISTUREも必要。
+#define OW_BERRY_WEEDS                 FALSE      // 有効にすると、きのみの木に雑草が生え、手入れが必要になる。OW_BERRY_MOISTUREが無効なら、草取りのボーナスは切り捨てになる。
+#define OW_BERRY_PESTS                 FALSE      // 有効にすると、きのみの木に害虫が寄り、手入れが必要になる。OW_BERRY_MOISTUREが無効なら、害虫対処のボーナスは切り捨てになる。
+#define OW_BERRY_SIX_STAGES            FALSE      // XYのように成長段階を4段階から6段階にする。収穫までの時間は変わらない。OW_BERRY_MOISTUREが無効なら、追加の2段階は水やり判定でBERRY_STAGE_TALLERとして扱う。
 
-#define OW_BERRY_GROWTH_RATE           GEN_3      // Presets for how long each Berry plant takes to grow.
-#define OW_BERRY_YIELD_RATE            GEN_3      // Presets for how many Berries each plant can yield.
-#define OW_BERRY_DRAIN_RATE            GEN_6_ORAS // If OW_BERRY_MOISTURE is enabled, this setting changes how fast the soil dries out. GEN_4 uses a Berry-dependent drain rate, GEN_6_XY dries out in 24 hours (4 hours with the relevant Mulch) and GEN_6_ORAS dries out in 4 hours. Other values are illegal.
-#define OW_BERRY_IMMORTAL              FALSE      // If enabled, once a Berry tree has grown a Berry, the tree will not disappear until picked by the player.
-#define OW_BERRY_COLORS                GEN_6_ORAS // If set to GEN_6_XY or GEN_6_ORAS, the Chesto, Wiki, Bluk, Cornn, Pamtre, Belue, Ganlon, Watmel, Qualot, Spelon, Kasib, Colbur, Lansat, Kee, Payapa, Roseli, Liechi, Enigma, and Maranga will use their colors from the stated game. Other values are illegal.
+#define OW_BERRY_GROWTH_RATE           GEN_3      // 各きのみの成長時間に使う世代別設定。
+#define OW_BERRY_YIELD_RATE            GEN_3      // 各きのみの収穫量に使う世代別設定。
+#define OW_BERRY_DRAIN_RATE            GEN_6_ORAS // OW_BERRY_MOISTUREが有効な場合の土の乾燥速度。GEN_4はきのみごとに異なり、GEN_6_XYは24時間（対応するこやし使用時は4時間）、GEN_6_ORASは4時間で乾く。他の値は使用不可。
+#define OW_BERRY_IMMORTAL              FALSE      // 有効にすると、実ったきのみの木はプレイヤーが収穫するまで消えない。
+#define OW_BERRY_COLORS                GEN_6_ORAS // GEN_6_XYまたはGEN_6_ORASにすると、カゴ・ウイ・ブリー・モコシ・シーヤ・ベリブ・リュガ・カイス・タポル・ノワキ・カシブ・ナモ・サン・アッキ・ウタン・ロゼル・チイラ・ナゾ・タラプのみの色を対応作品に合わせる。他の値は使用不可。
 
-// Overworld Pokemon
-#define OW_POKEMON_OBJECT_EVENTS       TRUE       // Adds Object Event fields for every species. Can be used for NPCs using the OBJ_EVENT_GFX_SPECIES macro (eg. OBJ_EVENT_GFX_SPECIES(BULBASAUR))
-#define OW_SUBSTITUTE_PLACEHOLDER      TRUE       // Use a substitute OW for Pokemon that are missing overworld sprites
-#define OW_LARGE_OW_SUPPORT            TRUE       // If TRUE, adds a small amount of overhead to OW code so that large (48x48, 64x64) OWs will display correctly under bridges, etc.
-#define OW_PKMN_OBJECTS_SHARE_PALETTES FALSE      // [WIP!! NOT ALL PALETTES HAVE BEEN ADJUSTED FOR THIS!!] If TRUE, follower palettes are taken from battle sprites.
-#define OW_GFX_COMPRESS                TRUE       // Adds support for compressed OW graphics, (Also compresses Pokemon follower graphics).
-                                                  // IMPORTANT: Gfx are loaded into VRAM to avoid continous decompression. If you require more VRAM or want to use a lot of overworld Pokemon at once, you should disable this config.
-                                                  // Compressed gfx are incompatible with non-power-of-two sprite sizes:
-                                                  // (You should not use 48x48 sprites/tables for compressed gfx)
-                                                  // 16x32, 32x32, 64x64 etc are fine
-#define OW_MON_WANDER_WALK             TRUE       // If true, OW Pokemon with MOVEMENT_TYPE_WANDER will walk-in-place in between steps.
-// Follower Pokemon
-#define OW_FOLLOWERS_ENABLED           TRUE       // Enables follower Pokemon, HGSS style. Requires OW_POKEMON_OBJECT_EVENTS. Note that additional scripting may be required for them to be fully supported!
-#define OW_FOLLOWERS_BOBBING           TRUE       // If TRUE, follower Pokemon will bob up and down during their idle & walking animations
-#define OW_FOLLOWERS_POKEBALLS         TRUE       // If TRUE, follower Pokemon will emerge from the Poke Ball they are stored in, instead of a normal Poke Ball
-#define OW_FOLLOWERS_WEATHER_FORMS     FALSE      // If TRUE, Castform and Cherrim gain FORM_CHANGE_OVERWORLD_WEATHER, which will make them transform in the overworld based on the weather.
-#define OW_FOLLOWERS_COPY_WILD_PKMN    FALSE      // If TRUE, follower Pokemon that know Transform or have Illusion/Imposter will copy wild Pokemon at random.
-#define OW_BATTLE_ONLY_FORMS           TRUE       // If TRUE, loads overworld sprites for battle-only forms like Mega Evos. Requires OW_POKEMON_OBJECT_EVENTS.
-#define B_FLAG_FOLLOWERS_DISABLED      FLAG_EXPANSION_FOLLOWING_MON_DISABLED // Enables / Disables followers by using a flag. Helpful to disable followers for a period of time.
-#define OW_FOLLOWERS_SCRIPT_MOVEMENT   TRUE       // If TRUE, follower Pokemon only go back to their Poke Ball if a non-player collides with them by setting the FLAG_SAFE_FOLLOWER_MOVEMENT flag by default.
-// Follower Pokemon Restrictions
-// If set, the only Pokemon allowed to follow you will be those matching species, met location, and/or met level; These accept vars, too: VAR_TEMP_1, etc
-// For examples, see "docs/tutorials/how_to_new_pokemon.md"
+// フィールド上のポケモン。
+#define OW_POKEMON_OBJECT_EVENTS       TRUE       // 全種族のオブジェクトイベント情報を追加する。OBJ_EVENT_GFX_SPECIESマクロでNPCに使用できる（例: OBJ_EVENT_GFX_SPECIES(BULBASAUR)）。
+#define OW_SUBSTITUTE_PLACEHOLDER      TRUE       // フィールド用スプライトがないポケモンに、みがわりのスプライトを使う。
+#define OW_LARGE_OW_SUPPORT            TRUE       // TRUEでは、フィールド処理に少量の負荷を追加し、大型スプライト（48x48、64x64）を橋の下などでも正しく表示する。
+#define OW_PKMN_OBJECTS_SHARE_PALETTES FALSE      // 注意: 作業中で、すべてのパレットは未調整。TRUEでは連れ歩き用パレットを戦闘スプライトから取得する。
+#define OW_GFX_COMPRESS                TRUE       // 圧縮されたフィールド画像に対応する。連れ歩き用画像も圧縮する。
+                                                  // 重要: 繰り返しの展開を避けるため画像をVRAMに読み込む。VRAMを節約したい場合や多数のポケモンを同時表示する場合は、この設定を無効にする。
+                                                  // 圧縮画像は、各辺が2の累乗でないスプライトサイズに対応しない。
+                                                  // 圧縮画像に48x48のスプライト・テーブルを使わないこと。
+                                                  // 16x32、32x32、64x64などは使用可能。
+#define OW_MON_WANDER_WALK             TRUE       // TRUEでは、MOVEMENT_TYPE_WANDERのフィールドポケモンが移動の合間にもその場で足踏みする。
+// ポケモンの連れ歩き。
+#define OW_FOLLOWERS_ENABLED           TRUE       // HGSS方式の連れ歩きを有効にする。OW_POKEMON_OBJECT_EVENTSが必要。完全な対応には追加スクリプトが必要になる場合がある。
+#define OW_FOLLOWERS_BOBBING           TRUE       // TRUEでは、連れ歩きポケモンが待機・歩行アニメーション中に上下に揺れる。
+#define OW_FOLLOWERS_POKEBALLS         TRUE       // TRUEでは、通常のモンスターボールではなく、そのポケモンを捕獲したボールから出てくる。
+#define OW_FOLLOWERS_WEATHER_FORMS     FALSE      // TRUEでは、ポワルン・チェリムにFORM_CHANGE_OVERWORLD_WEATHERを追加し、フィールドの天気に合わせて姿を変える。
+#define OW_FOLLOWERS_COPY_WILD_PKMN    FALSE      // TRUEでは、へんしんを覚えているかイリュージョン・かわりものを持つ連れ歩きポケモンが、ランダムに野生ポケモンの姿をコピーする。
+#define OW_BATTLE_ONLY_FORMS           TRUE       // TRUEでは、メガシンカなど戦闘専用フォルムのフィールドスプライトを読み込む。OW_POKEMON_OBJECT_EVENTSが必要。
+#define B_FLAG_FOLLOWERS_DISABLED      FLAG_EXPANSION_FOLLOWING_MON_DISABLED // フラグで連れ歩きを有効・無効にする。イベント中など一時的に無効化する場合に使用する。
+#define OW_FOLLOWERS_SCRIPT_MOVEMENT   TRUE       // TRUEでは、初期状態でFLAG_SAFE_FOLLOWER_MOVEMENTを立て、プレイヤー以外との衝突時にのみ連れ歩きポケモンをボールへ戻す。
+// 連れ歩きの対象制限。
+// 値を指定すると、種族・出会った場所・出会ったレベルの指定条件に一致するポケモンだけを連れ歩ける。VAR_TEMP_1などの変数も使用可能。
+// 設定例はdocs/tutorials/how_to_new_pokemon.mdを参照する。
 #define OW_FOLLOWERS_ALLOWED_SPECIES (0)
 #define OW_FOLLOWERS_ALLOWED_MET_LVL (0)
 #define OW_FOLLOWERS_ALLOWED_MET_LOC (0)
 
-// Out-of-battle Ability effects
-#define OW_SYNCHRONIZE_NATURE       GEN_LATEST // In Gen8+, if a Pokemon with Synchronize leads the party, wild Pokemon will always have their same Nature as opposed to the 50% chance in previous games. Gift Pokemon excluded.
-                                               // In USUM (here GEN_7), if a Pokemon with Synchronize leads the party, gift Pokemon will always have their same Nature regardless of their Egg Group.
-                                               // In ORAS (here GEN_6), if a Pokemon with Synchronize leads the party, gift Pokemon from the No Eggs Discovered Egg Group will always have their same Nature.
-#define OW_SUPER_LUCK               GEN_LATEST // In Gen8+, if a Pokemon with Super Luck is leading the party, the wild held item rate is increased to 60%/20%.
-#define OW_INFILTRATOR              GEN_LATEST // In Gen8+, if a Pokemon with Infiltrator is leading the party, the wild encounter rate is halved.
-#define OW_HARVEST                  GEN_LATEST // In Gen8+, if a Pokemon with Harvest is leading the party, there is a 50% chance to encounter a Grass-type Pokemon.
-#define OW_LIGHTNING_ROD            GEN_LATEST // In Gen8+, if a Pokemon with Lightning Rod is leading the party, there is a 50% chance to encounter an Electric-type Pokemon.
-#define OW_STORM_DRAIN              GEN_LATEST // In Gen8+, if a Pokemon with Storm Drain is leading the party, there is a 50% chance to encounter a Water-type Pokemon.
-#define OW_FLASH_FIRE               GEN_LATEST // In Gen8+, if a Pokemon with Flash Fire is leading the party, there is a 50% chance to encounter a Fire-type Pokemon.
+// 戦闘外での特性の効果。
+#define OW_SYNCHRONIZE_NATURE       GEN_LATEST // 第8世代以降では、先頭がシンクロのポケモンなら野生ポケモンの性格が必ず一致する（以前は50%）。もらうポケモンは対象外。
+                                               // USUM（この設定ではGEN_7）では、先頭がシンクロなら、もらうポケモンのタマゴグループに関係なく性格が一致する。
+                                               // ORAS（この設定ではGEN_6）では、先頭がシンクロなら、タマゴ未発見グループのもらうポケモンの性格が一致する。
+#define OW_SUPER_LUCK               GEN_LATEST // 第8世代以降では、先頭がきょううんのポケモンなら、野生の持ち物所持率が60%/20%に上がる。
+#define OW_INFILTRATOR              GEN_LATEST // 第8世代以降では、先頭がすりぬけのポケモンなら、野生遭遇率が半分になる。
+#define OW_HARVEST                  GEN_LATEST // 第8世代以降では、先頭がしゅうかくのポケモンなら、50%の確率でくさタイプと遭遇する。
+#define OW_LIGHTNING_ROD            GEN_LATEST // 第8世代以降では、先頭がひらいしんのポケモンなら、50%の確率ででんきタイプと遭遇する。
+#define OW_STORM_DRAIN              GEN_LATEST // 第8世代以降では、先頭がよびみずのポケモンなら、50%の確率でみずタイプと遭遇する。
+#define OW_FLASH_FIRE               GEN_LATEST // 第8世代以降では、先頭がもらいびのポケモンなら、50%の確率でほのおタイプと遭遇する。
 
-// These defines only make a distinction for OW_ALTERED_TIME_RATIO
+// 以下の定義は、OW_ALTERED_TIME_RATIOの設定でのみ区別する。
 #define GEN_8_PLA                       GEN_COUNT + 2
 #define TIME_DEBUG                      GEN_COUNT + 3
 
-// Time
-#define OW_TIMES_OF_DAY                 GEN_LATEST   // Different generations have the times of day change at different times.
-#define OW_USE_FAKE_RTC                 FALSE        // When TRUE, seconds on the in-game clock will only advance once every 60 playTimeVBlanks (every 60 frames).
-#define OW_ALTERED_TIME_RATIO           GEN_LATEST   // In GEN_8_PLA, the time in game moves forward 60 seconds for every second in the RTC. In GEN_9, it is 20 seconds. TIME_DEBUG is 1:1, and meant for debugging purposes. This has no effect if OW_USE_FAKE_RTC is FALSE.
-#define OW_TIME_OF_DAY_ENCOUNTERS       TRUE        // If TRUE, will allow the user to define and use different encounter tables based on the time of day.
-#define OW_TIME_OF_DAY_DISABLE_FALLBACK FALSE        // If TRUE, if the encounter table for a specific map and time is empty, the area will have no encounters instead of falling back to the vanilla map and time.
-#define OW_TIME_OF_DAY_FALLBACK         TIME_MORNING // The time of day that encounter tables fall back to. If you set OW_TIMES_OF_DAY to GEN_3, change this to TIME_DAY or you won't have any encounters!
+// 時刻。
+#define OW_TIMES_OF_DAY                 GEN_LATEST   // 世代ごとに、朝・昼・夜などが切り替わる時刻を変える。
+#define OW_USE_FAKE_RTC                 FALSE        // TRUEでは、ゲーム内時計の秒をplayTimeVBlanksが60進むごと（60フレームごと）に進める。
+#define OW_ALTERED_TIME_RATIO           GEN_LATEST   // GEN_8_PLAでは時計の1秒につきゲーム内で60秒、GEN_9では20秒進む。TIME_DEBUGはデバッグ用の1:1。OW_USE_FAKE_RTCがFALSEなら無効。
+#define OW_TIME_OF_DAY_ENCOUNTERS       TRUE        // TRUEでは、時間帯ごとに異なる遭遇テーブルを定義・使用できる。
+#define OW_TIME_OF_DAY_DISABLE_FALLBACK FALSE        // TRUEでは、指定マップ・時間帯の遭遇テーブルが空なら、従来のテーブルへ戻さず、その場所で遭遇しないようにする。
+#define OW_TIME_OF_DAY_FALLBACK         TIME_MORNING // 遭遇テーブルがない場合に使う代替時間帯。OW_TIMES_OF_DAYをGEN_3にする場合、TIME_DAYへ変更しないと遭遇できなくなる。
 
-// Lighting
-#define OW_SHADOW_INTENSITY             4       // Ranges from 0 to 16, where 0 is fully transparent and 16 is black.
-#define OW_OBJECT_SUBPRIORITY           148     // The higher the value, the farther back compared to other sprites. Shadows should be behind object events.
-#define OW_ENABLE_DNS                   TRUE    // If set to TRUE, the overworld will be tinted depending on time of day.
+// 明るさ。
+#define OW_SHADOW_INTENSITY             4       // 0～16。0は完全に透明、16は黒。
+#define OW_OBJECT_SUBPRIORITY           148     // 値が大きいほど、他のスプライトより奥に表示する。影はオブジェクトイベントの背面に置く。
+#define OW_ENABLE_DNS                   TRUE    // TRUEでは、時間帯に応じてフィールドの色調を変える。
 
-// Object Event Shadows
-#define OW_OBJECT_VANILLA_SHADOWS      FALSE    // When FALSE, every object in the overworld has a shadow. WARNING: This means every object will take up two sprites instead of one. When TRUE, an object's shadow is only shown when jumping.
+// オブジェクトイベントの影。
+#define OW_OBJECT_VANILLA_SHADOWS      FALSE    // FALSEでは、すべてのフィールドオブジェクトに影を付ける。注意: 各オブジェクトが1個ではなく2個のスプライトを使用する。TRUEではジャンプ中だけ影を表示する。
 
-// Overworld flags
-// To use the following features in scripting, replace the 0s with the flag ID you're assigning it to.
-// Eg: Replace with FLAG_UNUSED_0x264 so you can use that flag to toggle the feature.
-#define OW_FLAG_PAUSE_TIME          0  // If this flag is set and OW_USE_FAKE_RTC is enabled, seconds on the in-game clock will not advance.
-#define OW_FLAG_NO_TRAINER_SEE      FLAG_EXPANSION_TRAINER_SEE_DISABLED  // If this flag is set, trainers will not battle the player unless they're talked to.
-#define OW_FLAG_NO_COLLISION        FLAG_EXPANSION_COLLISION_DISABLED    // If this flag is set, the player will be able to walk over tiles with collision. Mainly intended for debugging purposes.
-#define OW_FLAG_POKE_RIDER          FLAG_EXPANSION_POKE_RIDER      // If this flag is set, the player will be able to use fly from the Pokenav Region Map and the Town Map key item by pressing 'R' on a city/location they are able to fly to.
+// フィールド用のフラグ。
+// 以下の機能をスクリプトから切り替える場合、0を割り当てたいフラグIDに置き換える。
+// 例えばFLAG_UNUSED_0x264に置き換えると、そのフラグで機能を切り替えられる。
+#define OW_FLAG_PAUSE_TIME          0  // 指定フラグが立ち、OW_USE_FAKE_RTCも有効な場合、ゲーム内時計の秒を進めない。
+#define OW_FLAG_NO_TRAINER_SEE      FLAG_EXPANSION_TRAINER_SEE_DISABLED  // 指定フラグが立っている場合、話しかけない限りトレーナー戦を開始しない。
+#define OW_FLAG_NO_COLLISION        FLAG_EXPANSION_COLLISION_DISABLED    // 指定フラグが立っている場合、衝突判定のあるタイルも歩いて通過できる。主にデバッグ用。
+#define OW_FLAG_POKE_RIDER          FLAG_EXPANSION_POKE_RIDER      // 指定フラグが立っている場合、ポケナビの地図やたいせつなもののタウンマップで、飛行可能な地点に合わせてRを押すとそらをとぶを使える。
 
-#define BATTLE_PYRAMID_RANDOM_ENCOUNTERS    FALSE    // If set to TRUE, battle pyramid Pokemon will be generated randomly based on the round's challenge instead of hardcoded in src/data/battle_frontier/battle_pyramid_level_50_wild_mons.h (or open_level_wild_mons.h)
+#define BATTLE_PYRAMID_RANDOM_ENCOUNTERS    FALSE    // TRUEでは、src/data/battle_frontier/battle_pyramid_level_50_wild_mons.h（またはopen_level_wild_mons.h）の固定データではなく、その周回の課題に応じてポケモンをランダム生成する。
 
-// Map pop-up config
-#define OW_POPUP_GENERATION        GEN_5    // Different generations display location names in overworld pop-ups differently.
-                                            // Only choices are GEN_3 and GEN_5, all others will default to Gen3 pop-ups.
-                                            // Due to changes in project scope, as detailed in docs/team_procedures/scope.md,
-                                            // no other overworld popups will be implemented in expansion.
+// 地名ポップアップの設定。
+#define OW_POPUP_GENERATION        GEN_5    // 世代ごとに、フィールドでの地名表示方式を変える。
+                                            // 対応する値はGEN_3とGEN_5のみ。他の値では第3世代方式を使う。
+                                            // docs/team_procedures/scope.mdに記載したプロジェクト範囲の変更により、
+                                            // Expansionにはこれ以外の地名表示方式を追加しない。
 
-// Gen5 map pop-up config
-// Constants
-#define OW_POPUP_BW_TIME_NONE      0   // Don't show the time
-#define OW_POPUP_BW_TIME_12_HR     1   // Use 12 hour (AM/PM) time
-#define OW_POPUP_BW_TIME_24_HR     2   // Use 24 hour time
+// 第5世代方式の地名ポップアップ設定。
+// 定数。
+#define OW_POPUP_BW_TIME_NONE      0   // 時刻を表示しない。
+#define OW_POPUP_BW_TIME_12_HR     1   // 12時間制（AM/PM）で表示する。
+#define OW_POPUP_BW_TIME_24_HR     2   // 24時間制で表示する。
 
-#define OW_POPUP_BW_COLOR_BLACK    0   // Black pop-up from B2
-#define OW_POPUP_BW_COLOR_WHITE    1   // White pop-up from W2
+#define OW_POPUP_BW_COLOR_BLACK    0   // ブラック2の黒いポップアップ。
+#define OW_POPUP_BW_COLOR_WHITE    1   // ホワイト2の白いポップアップ。
 
-// Configuration
-#define OW_POPUP_BW_COLOR          OW_POPUP_BW_COLOR_WHITE  // B2W2 use different colors for their map pop-ups.
-#define OW_POPUP_BW_TIME_MODE      OW_POPUP_BW_TIME_24_HR    // Determines what type of time is shown.
-#define OW_POPUP_BW_ALPHA_BLEND    FALSE                    // Enables alpha blending/transparency for the pop-ups. Mainly intended to be used with the black color option.
-                                                            // Setting this to TRUE will cause graphical errors with the Day Night System enabled.
-                                                            // It will also cause minor visual glitches of shadow and reflection sprites adjusting their transparency when the pop-up disappear
+// 設定。
+#define OW_POPUP_BW_COLOR          OW_POPUP_BW_COLOR_WHITE  // B2W2で異なる地名ポップアップの色を選ぶ。
+#define OW_POPUP_BW_TIME_MODE      OW_POPUP_BW_TIME_24_HR    // 時刻の表示形式を指定する。
+#define OW_POPUP_BW_ALPHA_BLEND    FALSE                    // ポップアップの半透明合成を有効にする。主に黒色の表示向け。
+                                                            // TRUEでは、昼夜の色調変更システムが有効な場合に表示不具合が起こる。
+                                                            // ポップアップが消える際、影や反射スプライトの透明度調整にも軽微な表示不具合が起こる。
 
-// Pokemon Center
-#define OW_IGNORE_EGGS_ON_HEAL           GEN_LATEST         // In Gen 4+, the nurse in the Pokemon Center does not heal Eggs on healing machine.
-#define OW_UNION_DISABLE_CHECK           FALSE              // When TRUE, the nurse does not inform the player if there is a trainer waiting in the Union Room. This speeds up the loading of the Pokemon Center.
-#define OW_FLAG_MOVE_UNION_ROOM_CHECK    0                  // If this flag is set, the game will only check if players are in the Union Room while healing Pokemon, and not when players enter the Pokemon Center. This speeds up the loading of the Pokemon Center. This is ignored if OW_UNION_DISABLE_CHECK is TRUE.
+// ポケモンセンター。
+#define OW_IGNORE_EGGS_ON_HEAL           GEN_LATEST         // 第4世代以降では、回復装置でタマゴを回復対象に含めない。
+#define OW_UNION_DISABLE_CHECK           FALSE              // TRUEでは、ユニオンルームで待つトレーナーがいても受付で通知しない。ポケモンセンターの読み込みを速める。
+#define OW_FLAG_MOVE_UNION_ROOM_CHECK    0                  // 指定フラグが立っている場合、入場時ではなく回復時だけユニオンルームの利用者を確認し、入場時の読み込みを速める。OW_UNION_DISABLE_CHECKがTRUEなら無視する。
 
-// Berry Blender
-#define BERRY_BLENDER_THROW_ALL_BERRIES_AT_ONCE TRUE        // This is a small little addition, that basically speeds up the animation where all players' berries are thrown into the blender. Self-explanatory I hope!
+// きのみブレンダー。
+#define BERRY_BLENDER_THROW_ALL_BERRIES_AT_ONCE TRUE        // 全参加者がきのみを同時に投入し、投入アニメーションを短縮する。
 
-// Trainer Rematches
-#define OW_REMATCH_BADGE_COUNT      5 // Number of badges necessary before the match call or vs seeker features allow rematches
+// トレーナーとの再戦。
+#define OW_REMATCH_BADGE_COUNT      5 // エントリーコールやバトルサーチャーで再戦するために必要なバッジ数。
 
-// Ambient Cries
-// Constants
-#define OW_AMBIENT_CRIES_NONE           0   // Do not play ambient cries.
-#define OW_AMBIENT_CRIES_VANILLA        1   // Play ambient cries taken from encounter tables, as in vanilla.
-#define OW_AMBIENT_CRIES_OWE_PRIORITY   2   // Play ambient cries based on active Overworld Wild Encounters, reverting to vanilla cries if none are present.
-#define OW_AMBIENT_CRIES_OWE_ONLY       3   // Play ambient cries based on active Overworld Wild Encounters only.
-                                            // Overworld Wild Encounters will play ambient cries based on their location relative to the player.
+// フィールドの環境音としての鳴き声。
+// 定数。
+#define OW_AMBIENT_CRIES_NONE           0   // 環境音の鳴き声を再生しない。
+#define OW_AMBIENT_CRIES_VANILLA        1   // 原作と同様に、遭遇テーブルのポケモンの鳴き声を再生する。
+#define OW_AMBIENT_CRIES_OWE_PRIORITY   2   // 出現中のOWEの鳴き声を優先し、OWEがいなければ原作方式を使う。
+#define OW_AMBIENT_CRIES_OWE_ONLY       3   // 出現中のOWEの鳴き声だけを再生する。
+                                            // OWEの鳴き声は、プレイヤーとの位置関係に応じて再生する。
 
-// Configuration
-#define OW_AMBIENT_CRIES                OW_AMBIENT_CRIES_OWE_ONLY // Selects how ambient cries are played, if at all. As in vanilla, no matter what is chosen, cries will not play if the player is not on a map with Land or Water encounter tables.
+// 設定。
+#define OW_AMBIENT_CRIES                OW_AMBIENT_CRIES_OWE_ONLY // 環境音の鳴き声の再生方法を指定する。どの設定でも、原作と同様に草むら・水上の遭遇テーブルがないマップでは再生しない。
 
 
-// Daily Seed
-#define OW_USE_DAILY_SEED_FOR_VANILLA_VARIABLES     FALSE // If TRUE, use daily seed to compute mirage island chance and lottery corner tickets.
-                                                          // This has a side effect of removing the deterministic/anti save scumming aspect of the mirage island randomisation
+// 日替わり乱数シード。
+#define OW_USE_DAILY_SEED_FOR_VANILLA_VARIABLES     FALSE // TRUEでは、マボロシじまの出現判定とくじ番号の計算に日替わりシードを使う。
+                                                          // 副作用として、マボロシじまの抽選にある決定的な挙動・セーブ再読込による引き直し防止の性質が失われる。
 
-// Script Config
-#define OW_CHECK_FOR_TOTAL_EVS TRUE        // If FALSE, givemon and createmon will not check for total EVs when generating a new Pokemon
+// スクリプトの設定。
+#define OW_CHECK_FOR_TOTAL_EVS TRUE        // FALSEでは、givemonとcreatemonで新しいポケモンを生成する際に努力値合計を確認しない。
 
 #endif // GUARD_CONFIG_OVERWORLD_H
