@@ -1,21 +1,21 @@
 #ifndef GUARD_CONFIG_GENERAL_H
 #define GUARD_CONFIG_GENERAL_H
 
-// In the Generation 3 games, Asserts were used in various debug builds.
-// Ruby/Sapphire and Emerald do not have these asserts while Fire Red
-// still has them in the ROM. This is because the developers forgot
-// to define NDEBUG before release, however this has been changed as
-// Ruby's actual debug build does not use the AGBPrint features.
+// 第3世代では、各種デバッグビルドでアサートが使用されていた。
+// ルビー・サファイアとエメラルドには残っていないが、ファイアレッドの
+// ROMには残っている。発売前にNDEBUGを定義し忘れたためである。
+// ただし、ルビーの実際のデバッグビルドはAGBPrintを使用しないため、
+// このプロジェクトでは元の扱いを変更している。
 //
-// Use `make release` to automatically enable NDEBUG.
+// `make release`を使うとNDEBUGを自動で有効にする。
 #ifdef RELEASE
 #define NDEBUG
 #endif
 
-// printf debugging is now enabled by default. This allows
-// the various AGBPrint functions to be used. (See include/gba/isagbprint.h).
-// See below for enabling different pretty printing versions.
-// To disable printf debugging, build a release build using `make release`.
+// printfによるデバッグ出力は既定で有効。各種AGBPrint関数を使用できる
+// （include/gba/isagbprint.hを参照）。
+// 書式付き出力の方式は下の設定で切り替える。
+// printfデバッグを無効にするには、`make release`でリリースビルドを作成する。
 
 #ifndef NDEBUG
 
@@ -26,39 +26,39 @@
 #define LOG_HANDLER_NOCASH_PRINT (1)
 #define LOG_HANDLER_MGBA_PRINT (2)
 
-// Use this switch to choose a handler for pretty printing.
-// NOTE: mini_printf supports a custom pretty printing formatter to display preproc encoded strings. (%S)
-//       some libc distributions (especially dkp arm-libc) will fail to link pretty printing.
+// 書式付き出力を処理する方式を選ぶ。
+// 注意: mini_printfは、preprocで変換した文字列を表示する独自の%S書式に対応する。
+//       一部のlibc（特にdkp arm-libc）では、書式付き出力のリンクに失敗する。
 #define PRETTY_PRINT_HANDLER (PRETTY_PRINT_MINI_PRINTF)
 
-// Use this switch to choose a handler for printf output.
-// NOTE: These will only work on the respective emulators and should not be used in a productive environment.
-//       Some emulators or real hardware might (and is allowed to) crash if they are used.
-//       AGB_PRINT is supported on respective debug units.
+// printfの出力先を選ぶ。
+// 注意: 各方式は対応するエミュレータでのみ動作するため、配布用ビルドでは使用しない。
+//       未対応のエミュレータや実機ではクラッシュする可能性がある。
+//       AGB_PRINTは対応するデバッグ機材で使用できる。
 
 #define LOG_HANDLER (LOG_HANDLER_MGBA_PRINT)
 #endif
 
-// Uncomment to fix some identified minor bugs
+// 一部の既知の軽微な不具合を修正する。無効の場合はコメントアウトを外して有効にする。
 #define BUGFIX
 
-// Various undefined behavior bugs may or may not prevent compilation with
-// newer compilers. So always fix them when using a modern compiler.
+// 未定義動作に関する不具合は、新しいコンパイラでのコンパイルを妨げることがある。
+// そのため、modernコンパイラを使用する場合は常に修正を有効にする。
 #if MODERN || defined(BUGFIX)
 #ifndef UBFIX
 #define UBFIX
 #endif
 #endif
 
-// Compatibility definition for other projects to detect pokeemerald-expansion
+// 他のプロジェクトがpokeemerald-expansionを判別するための互換用定義。
 #define RHH_EXPANSION
 
-// Legacy branch-based defines included for backwards compatibility
+// 後方互換性のために残している、旧ブランチ構成の定義。
 #define BATTLE_ENGINE
 #define POKEMON_EXPANSION
 #define ITEM_EXPANSION
 
-// Generation constants used in configs to define behavior.
+// 設定で世代ごとの挙動を指定するための定数。
 #define GEN_1 0
 #define GEN_2 1
 #define GEN_3 2
@@ -70,22 +70,22 @@
 #define GEN_9 8
 #define GEN_CHAMPIONS GEN_9 + 1
 #define GEN_COUNT GEN_CHAMPIONS + 1
-// Changing GEN_LATEST's value to a different Generation will change every default setting that uses it at once.
+// GEN_LATESTを別の世代に変更すると、これを参照する設定をまとめて変更できる。
 #define GEN_LATEST GEN_9
 
-// General settings
-#define EXPANSION_INTRO              TRUE    // If TRUE, a custom RHH intro will play after the vanilla copyright screen.
-#define PHONEMES_SHARED              FALSE   // If TRUE, bard phonemes all reference the same sound (sound/direct_sound_samples/phonemes/shared.bin) to save ROM space.
+// 全般設定
+#define EXPANSION_INTRO              TRUE    // TRUEなら、原作の著作権表示後にRHH独自のイントロを再生する。
+#define PHONEMES_SHARED              FALSE   // TRUEなら、吟遊詩人の音素をすべて同じ音声（sound/direct_sound_samples/phonemes/shared.bin）にしてROM容量を節約する。
 
-// Measurement system constants to be used for UNITS
-#define UNITS_IMPERIAL               0       // Inches, feet, pounds
-#define UNITS_METRIC                 1       // meters, kilograms
-#define UNITS_METRIC_CM              2       // centimeters, kilograms
+// UNITSに指定する単位系の定数。
+#define UNITS_IMPERIAL               0       // インチ・フィート・ポンド。
+#define UNITS_METRIC                 1       // メートル・キログラム。
+#define UNITS_METRIC_CM              2       // センチメートル・キログラム。
 
 #define UNITS                        UNITS_METRIC_CM
-#define CHAR_DEC_SEPARATOR           CHAR_PERIOD // CHAR_PERIOD is used as a decimal separator only in the UK and the US. The rest of the world uses CHAR_COMMA.
+#define CHAR_DEC_SEPARATOR           CHAR_PERIOD // 小数点の区切り文字。CHAR_PERIODはピリオド、CHAR_COMMAはコンマを使用する。地域の表記に合わせて選ぶ。
 
-// Naming Screen
-#define AUTO_LOWERCASE_KEYBOARD      GEN_LATEST  // Starting in GEN_6, after entering the first uppercase character, the keyboard switches to lowercase letters.
+// 名前入力画面
+#define AUTO_LOWERCASE_KEYBOARD      GEN_LATEST  // 第6世代以降では、最初の大文字を入力した後にキーボードが小文字へ切り替わる。
 
 #endif // GUARD_CONFIG_GENERAL_H

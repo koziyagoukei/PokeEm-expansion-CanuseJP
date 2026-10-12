@@ -1,67 +1,67 @@
 #ifndef GUARD_CONFIG_DEXNAV_H
 #define GUARD_CONFIG_DEXNAV_H
 
-#define DEXNAV_ENABLED                TRUE   // Whether or not DexNav is enabled. If TRUE, flags/vars below must all be non-zero
-#define USE_DEXNAV_SEARCH_LEVELS      FALSE  /* WARNING: POSSIBLY EXCEEDS SAVEBLOCK SPACE! REQUIRES 1 BYTE PER SPECIES */
+#define DEXNAV_ENABLED                TRUE   // ずかんナビを有効にするか。TRUEの場合、下記のフラグ・変数IDはすべて0以外にする必要がある。
+#define USE_DEXNAV_SEARCH_LEVELS      FALSE  /* 注意: 1種族につき1バイト必要なため、セーブ領域を超える可能性がある。 */
 
-// Flag/var defines
-#define DN_FLAG_SEARCHING             FLAG_EXPANSION_DEXNAV_SEARCHING      // Searching for mon
-#define DN_FLAG_DEXNAV_GET            FLAG_EXPANSION_DEXNAV_DISPLAY  // DexNav shows in start menu
-#define DN_FLAG_DETECTOR_MODE         FLAG_EXPANSION_DEXNAV_DETECT   // Allow player to find hidden mons
-#define DN_VAR_SPECIES                VAR_EXPANSION_DEXNAV_SPECIES         // Registered DexNav species
-#define DN_VAR_STEP_COUNTER           VAR_EXPANSION_DEXNAV_STEP_COUNTER    // Steps for finding hidden Pokemon
+// フラグ・変数の定義
+#define DN_FLAG_SEARCHING             FLAG_EXPANSION_DEXNAV_SEARCHING      // ポケモンをサーチ中であることを示すフラグ。
+#define DN_FLAG_DEXNAV_GET            FLAG_EXPANSION_DEXNAV_DISPLAY  // STARTメニューにずかんナビを表示するフラグ。
+#define DN_FLAG_DETECTOR_MODE         FLAG_EXPANSION_DEXNAV_DETECT   // 隠れたポケモンを発見できるようにするフラグ。
+#define DN_VAR_SPECIES                VAR_EXPANSION_DEXNAV_SPECIES         // ずかんナビに登録した種族。
+#define DN_VAR_STEP_COUNTER           VAR_EXPANSION_DEXNAV_STEP_COUNTER    // 隠れたポケモンを探すための歩数。
 
-// Search parameters
-#define DEXNAV_TIMEOUT                  15  // 15 seconds is the time out. Max of 1092 seconds allowed
-#define SNEAKING_PROXIMITY              4   // Tile amount
+// サーチの設定
+#define DEXNAV_TIMEOUT                  15  // サーチの制限時間（秒）。この値は15秒。最大1092秒まで指定できる。
+#define SNEAKING_PROXIMITY              4   // 距離をマス数で指定する。
 #define CREEPING_PROXIMITY              2
 #define MAX_PROXIMITY                   20
 
-#define DEXNAV_CHAIN_MAX                100 // maximum chain value
+#define DEXNAV_CHAIN_MAX                100 // 連続サーチ回数の上限。
 
-// hidden Pokemon options - an approximation of values due to lack of available data
-#define HIDDEN_MON_STEP_COUNT       100  // Look for hidden Pokemon every x steps
-#define HIDDEN_MON_SEARCH_RATE      25   // x% chance of finding hidden Pokemon every x steps
-#define HIDDEN_MON_PROBABILTY       15   // x% chance of finding hidden mon compared to regular encounter data
+// 隠れたポケモンの設定。原作の十分な情報がないため、数値は近似値を使用する。
+#define HIDDEN_MON_STEP_COUNT       100  // 指定歩数ごとに隠れたポケモンの発見判定を行う。
+#define HIDDEN_MON_SEARCH_RATE      25   // 歩数による判定時に、隠れたポケモンを発見する確率（%）。
+#define HIDDEN_MON_PROBABILTY       15   // 通常の遭遇データと比べて、隠れたポケモンを選ぶ確率（%）。
 
-//// SEARCH PROBABILITIES
-// See https://bulbapedia.bulbagarden.net/wiki/DexNav#Benefits
-// Chance of encountering egg move at search levels
+//// サーチレベル別の確率
+// 参照: https://bulbapedia.bulbagarden.net/wiki/DexNav#Benefits
+// 各サーチレベルでタマゴ技を持つポケモンが出現する確率。
 #define SEARCHLEVEL0_MOVECHANCE         0
 #define SEARCHLEVEL5_MOVECHANCE         21
 #define SEARCHLEVEL10_MOVECHANCE        46
 #define SEARCHLEVEL25_MOVECHANCE        58
 #define SEARCHLEVEL50_MOVECHANCE        63
 #define SEARCHLEVEL100_MOVECHANCE       83
-// Chance of encountering Hidden Abilities at search levels
+// 各サーチレベルで隠れ特性を持つポケモンが出現する確率。
 #define SEARCHLEVEL0_ABILITYCHANCE      0
 #define SEARCHLEVEL5_ABILITYCHANCE      0
 #define SEARCHLEVEL10_ABILITYCHANCE     5
 #define SEARCHLEVEL25_ABILITYCHANCE     15
 #define SEARCHLEVEL50_ABILITYCHANCE     20
 #define SEARCHLEVEL100_ABILITYCHANCE    23
-// Chance of encountering held item
+// 持ち物を持つポケモンが出現する確率。
 #define SEARCHLEVEL0_ITEM               0
 #define SEARCHLEVEL5_ITEM               0
 #define SEARCHLEVEL10_ITEM              1
 #define SEARCHLEVEL25_ITEM              7
 #define SEARCHLEVEL50_ITEM              6
 #define SEARCHLEVEL100_ITEM             12
-// Chance of encountering one star potential
+// 能力の潜在評価が星1つとなる確率。
 #define SEARCHLEVEL0_ONESTAR            0
 #define SEARCHLEVEL5_ONESTAR            14
 #define SEARCHLEVEL10_ONESTAR           17
 #define SEARCHLEVEL25_ONESTAR           17
 #define SEARCHLEVEL50_ONESTAR           15
 #define SEARCHLEVEL100_ONESTAR          8
-// Chance of encountering two star potential
+// 能力の潜在評価が星2つとなる確率。
 #define SEARCHLEVEL0_TWOSTAR            0
 #define SEARCHLEVEL5_TWOSTAR            1
 #define SEARCHLEVEL10_TWOSTAR           9
 #define SEARCHLEVEL25_TWOSTAR           16
 #define SEARCHLEVEL50_TWOSTAR           17
 #define SEARCHLEVEL100_TWOSTAR          24
-// Chance of encountering three star potential
+// 能力の潜在評価が星3つとなる確率。
 #define SEARCHLEVEL0_THREESTAR          0
 #define SEARCHLEVEL5_THREESTAR          0
 #define SEARCHLEVEL10_THREESTAR         1

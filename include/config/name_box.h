@@ -1,16 +1,16 @@
 #ifndef GUARD_CONFIG_NAME_BOX_H
 #define GUARD_CONFIG_NAME_BOX_H
 
-#define OW_FLAG_SUPPRESS_NAME_BOX   0  // If this flag is set, any namebox (whether its from a macro or a code) will not show up until this flag is unset.
+#define OW_FLAG_SUPPRESS_NAME_BOX   0  // このフラグが立っている間は、マクロ・コードのどちらから呼び出した名前ウィンドウも表示しない。
 
-// Namebox Speaker configs
-#define OW_NAME_BOX_USE_DYNAMIC_WIDTH TRUE  // When TRUE, the namebox window can use different width depending on the length of the speaker's name.
-#define OW_NAME_BOX_NPC_TRAINER       FALSE // When TRUE, any approaching NPC trainers will have a namebox shown automagically. The name will be taken from their trainer data.
-#define OW_NAME_BOX_DEFAULT_WIDTH     8     // Maximum width of what OW_NAME_BOX_USE_DYNAMIC_WIDTH can set. Also the default width when the config above is set to FALSE (or the dynamic width exceeds this value).
-#define OW_NAME_BOX_DEFAULT_HEIGHT    2     // Maximum height of the namebox window.
+// 話者名ウィンドウの設定
+#define OW_NAME_BOX_USE_DYNAMIC_WIDTH TRUE  // TRUEなら、話者名の長さに応じてウィンドウ幅を変える。
+#define OW_NAME_BOX_NPC_TRAINER       FALSE // TRUEなら、近づいてくるNPCトレーナーの名前を自動表示する。名前はトレーナーデータから取得する。
+#define OW_NAME_BOX_DEFAULT_WIDTH     8     // OW_NAME_BOX_USE_DYNAMIC_WIDTHによる可変幅の上限。可変幅が無効、またはこの値を超えた場合の既定幅でもある。
+#define OW_NAME_BOX_DEFAULT_HEIGHT    2     // 名前ウィンドウの高さの上限。
 
-// Text colors of Namebox. The numbers corresponds to the palette index.
-// The BG color is not provided as it always needs to be 0.
+// 名前ウィンドウの文字色。数値はパレットのインデックスを指定する。
+// 背景色は常に0である必要があるため、設定項目を設けていない。
 #define OW_NAME_BOX_FOREGROUND_COLOR  1
 #define OW_NAME_BOX_SHADOW_COLOR      2
 
