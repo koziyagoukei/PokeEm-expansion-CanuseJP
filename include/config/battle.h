@@ -121,7 +121,7 @@
 #define B_METRONOME_MOVES               GEN_LATEST // ゆびをふるで呼び出せる技の上限世代を指定する。指定世代の技も含む。
 #define B_TELEPORT_BEHAVIOR             GEN_LATEST // LGPE以降（この設定では第8世代以降）では、テレポートは逃走ではなく交代する技になる。
 #define B_BEAT_UP                       GEN_LATEST // 第5世代以降では、ふくろだたきの計算式が変わり、あくタイプのダメージを与える。第4世代以前は各攻撃で手持ちの名前を表示する。
-#define B_DARK_VOID_FAIL                GEN_LATEST // 第7世代以降では、ダークホールはダークライだけが使える。
+#define B_DARK_VOID_FAIL                GEN_6 // 第7世代以降では、ダークホールはダークライだけが使える。
 #define B_HIT_THAW                      GEN_LATEST // 第6世代以降では、使用者のこおりを解く攻撃技は対象のこおりも解く。第3世代以降ではほのお技がこおりを解く。第1～2世代では、やけどの追加効果がある攻撃技で、やけど可能かに関係なくこおりが解ける。
 #define B_HEALING_WISH_SWITCH           GEN_LATEST // 第5世代以降では、いやしのねがい・みかづきのまいの受け手をターン終了時に出す。第8世代以降では、傷ついた・状態異常のポケモンを出すまで効果を保持する。
 #define B_DEFOG_EFFECT_CLEARING         GEN_LATEST // 第5世代以降では、みがわり状態の対象にきりばらいで回避率を下げない。第6世代以降では自分側の設置技も除去し、第8世代以降ではフィールドも解除する。
@@ -140,7 +140,7 @@
 #define B_QUICK_GUARD                   GEN_LATEST // 第5世代のみ、ファストガードは連続使用すると失敗する可能性がある。
 #define B_IMPRISON                      GEN_LATEST // 第5世代以降では、相手が使用者と同じ技を持たなくてもふういんが成功する。
 #define B_TAUNT_ME_FIRST                GEN_LATEST // 第5世代以降では、ちょうはつでさきどりを防げない。
-#define B_ALLY_SWITCH_FAIL_CHANCE       GEN_LATEST // 第9世代以降では、サイドチェンジは連続使用すると失敗する可能性がある。
+#define B_ALLY_SWITCH_FAIL_CHANCE       GEN_8 // 第9世代以降では、サイドチェンジは連続使用すると失敗する可能性がある。
 #define B_SKETCH_BANS                   GEN_LATEST // 第9世代以降では、スケッチでコピーできない技が増える。
 #define B_KNOCK_OFF_REMOVAL             GEN_LATEST // 第5世代以降では、はたきおとすは持ち物を使用不能にするのではなく取り除く。
                                                    // Championsでは、対象の持ち物で使用者のフォルムが変わるか（メガシンカ・ゲンシカイキ）を確認しない。
@@ -436,10 +436,10 @@
 #define SHOW_EFFECTIVENESS_ALWAYS   1           // 技選択時に相性を常に表示する。
 #define SHOW_EFFECTIVENESS_CAUGHT   2           // その種族を捕獲済みの場合だけ相性を表示する。
 #define SHOW_EFFECTIVENESS_SEEN     3           // その種族を見たことがある場合だけ相性を表示する。
-#define B_SHOW_EFFECTIVENESS        SHOW_EFFECTIVENESS_SEEN // SHOW_EFFECTIVENESS_NEVER以外では、PPの表示を技と対象に基づくタイプ相性の表示へ置き換える。
+#define B_SHOW_EFFECTIVENESS        define SHOW_EFFECTIVENESS_ALWAYS // SHOW_EFFECTIVENESS_NEVER以外では、PPの表示を技と対象に基づくタイプ相性の表示へ置き換える。
 
 // 戦闘ポケモンスプライトの設定。
-#define B_ENEMY_MON_SHADOW_STYLE        GEN_LATEST // 第4世代以降では、相手のポケモン全員の足元に影を描く。
+#define B_ENEMY_MON_SHADOW_STYLE        GEN_3 // 第4世代以降では、相手のポケモン全員の足元に影を描く。
 
 // 戦闘画面の設定。
 #define B_MOVE_REARRANGEMENT_IN_BATTLE  GEN_LATEST  // 第4世代以降では、戦闘中に技の順番を入れ替えられない。

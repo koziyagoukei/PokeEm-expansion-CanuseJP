@@ -1786,36 +1786,53 @@ static void Script_GetFrontierBrainStatus(void)
 
 u8 GetFrontierBrainStatus(void)
 {
-    s32 status = FRONTIER_BRAIN_NOT_READY;
-    s32 facility = VarGet(VAR_FRONTIER_FACILITY);
-    s32 battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);
-    u16 winStreakNoModifier = GetCurrentFacilityWinStreak();
-    s32 winStreak = winStreakNoModifier + gFrontierBrainInfo[facility].streakAppearances[3];
-    s32 symbolsCount;
+    u32 facility = VarGet(VAR_FRONTIER_FACILITY);
 
-    if (battleMode != FRONTIER_MODE_SINGLES)
+    if (facility >= NUM_FRONTIER_FACILITIES
+        || VarGet(VAR_FRONTIER_BATTLE_MODE) != FRONTIER_MODE_SINGLES
+        || gSaveBlock2Ptr->frontier.lvlMode >= FRONTIER_LVL_TENT)
         return FRONTIER_BRAIN_NOT_READY;
 
+    return GetFrontierBrainStatusForStreak(facility, GetCurrentFacilityWinStreak());
+}
+
+u8 GetFrontierBrainStatusForStreak(u8 facility, u32 streak)
+{
+    u8 symbolsCount;
+    u8 status = FRONTIER_BRAIN_NOT_READY;
+    u32 winStreak;
+    u32 stagesPerChallenge;
+    const u8 *appearances;
+
+    if (facility >= NUM_FRONTIER_FACILITIES)
+        return FRONTIER_BRAIN_NOT_READY;
+
+    appearances = gFrontierBrainInfo[facility].streakAppearances;
+    winStreak = streak + appearances[3];
     symbolsCount = GetPlayerSymbolCountForFacility(facility);
+    stagesPerChallenge = facility == FRONTIER_FACILITY_DOME ? 1
+        : facility == FRONTIER_FACILITY_PIKE ? NUM_PIKE_ROOMS
+        : FRONTIER_STAGES_PER_CHALLENGE;
     switch (symbolsCount)
     {
     // Missing a symbol
     case 0:
     case 1:
-        if (winStreak == gFrontierBrainInfo[facility].streakAppearances[symbolsCount])
+        // Retry missed symbol fights at a challenge's final stage, never mid-round.
+        if (winStreak >= appearances[symbolsCount] && winStreak % stagesPerChallenge == 0)
             status = symbolsCount + 1; // FRONTIER_BRAIN_SILVER and FRONTIER_BRAIN_GOLD
         break;
     // Already received both symbols
     case 2:
     default:
         // Silver streak is reached
-        if (winStreak == gFrontierBrainInfo[facility].streakAppearances[0])
+        if (winStreak == appearances[0])
             status = FRONTIER_BRAIN_STREAK;
         // Gold streak is reached
-        else if (winStreak == gFrontierBrainInfo[facility].streakAppearances[1])
+        else if (winStreak == appearances[1])
             status = FRONTIER_BRAIN_STREAK_LONG;
         // Some increment of the gold streak is reached
-        else if (winStreak > gFrontierBrainInfo[facility].streakAppearances[1] && (winStreak - gFrontierBrainInfo[facility].streakAppearances[1]) % gFrontierBrainInfo[facility].streakAppearances[2] == 0)
+        else if (winStreak > appearances[1] && (winStreak - appearances[1]) % appearances[2] == 0)
             status = FRONTIER_BRAIN_STREAK_LONG;
         break;
     }
@@ -2644,61 +2661,67 @@ void SetFrontierBrainObjEventGfx_2(void)
     VarSet(VAR_OBJ_GFX_ID_0, gFrontierBrainInfo[facility].objEventGfx);
 }
 
-#define FRONTIER_BRAIN_OTID 61226
-
 void CreateFrontierBrainPokemon(void)
 {
-    s32 i, j;
-    s32 selectedMonBits;
-    s32 monPartyId;
-    s32 monLevel = 0;
-    u8 friendship;
-    s32 facility = VarGet(VAR_FRONTIER_FACILITY);
-    s32 symbol = GetFronterBrainSymbol();
+    u32 i;
+    u32 selectedMonBits;
+    u32 monPartyId = 0;
+    u8 level = SetFacilityPtrsGetLevel();
+    u8 facility = VarGet(VAR_FRONTIER_FACILITY);
+    u8 symbol = GetFronterBrainSymbol();
+    u16 monIds[FRONTIER_PARTY_SIZE];
+    u32 otId = Random32();
 
     if (facility == FRONTIER_FACILITY_DOME)
-        selectedMonBits = GetDomeTrainerSelectedMons(TrainerIdToDomeTournamentId(TRAINER_FRONTIER_BRAIN));
+    {
+        u32 tournamentId = TrainerIdToDomeTournamentId(TRAINER_FRONTIER_BRAIN);
+
+        // Use the same random sets shown on Tucker's tournament card.
+        for (i = 0; i < FRONTIER_PARTY_SIZE; i++)
+            monIds[i] = gSaveBlock2Ptr->frontier.domeMonIds[tournamentId][i];
+        selectedMonBits = GetDomeTrainerSelectedMons(tournamentId);
+    }
     else
-        selectedMonBits = (1 << FRONTIER_PARTY_SIZE) - 1; // all 3 mons selected
+    {
+        for (i = 0; i < FRONTIER_PARTY_SIZE; i++)
+            monIds[i] = GetRandomFrontierMonFromFullPool(monIds, i, NULL, 0, NULL, 0);
+        selectedMonBits = (1 << FRONTIER_PARTY_SIZE) - 1;
+    }
 
     ZeroEnemyPartyMons();
-    monPartyId = 0;
-    monLevel = SetFacilityPtrsGetLevel();
     for (i = 0; i < FRONTIER_PARTY_SIZE; selectedMonBits >>= 1, i++)
     {
         if (!(selectedMonBits & 1))
             continue;
 
-        u32 personality = GetMonPersonality(sFrontierBrainsMons[facility][symbol][i].species,
-                                            MON_GENDER_RANDOM,
-                                            sFrontierBrainsMons[facility][symbol][i].nature,
-                                            RANDOM_UNOWN_LETTER);
-        CreateMonWithIVs(&gParties[B_TRAINER_OPPONENT_A][monPartyId],
-                  sFrontierBrainsMons[facility][symbol][i].species,
-                  monLevel,
-                  personality,
-                  OTID_STRUCT_PRESET(FRONTIER_BRAIN_OTID),
-                  sFrontierBrainsMons[facility][symbol][i].fixedIV);
-        SetMonData(&gParties[B_TRAINER_OPPONENT_A][monPartyId], MON_DATA_HELD_ITEM, &sFrontierBrainsMons[facility][symbol][i].heldItem);
-        for (j = 0; j < NUM_STATS; j++)
-            SetMonData(&gParties[B_TRAINER_OPPONENT_A][monPartyId], MON_DATA_HP_EV + j, &sFrontierBrainsMons[facility][symbol][i].evs[j]);
-        friendship = MAX_FRIENDSHIP;
-        for (j = 0; j < MAX_MON_MOVES; j++)
-        {
-            SetMonMoveSlot(&gParties[B_TRAINER_OPPONENT_A][monPartyId], sFrontierBrainsMons[facility][symbol][i].moves[j], j);
-            if (GetMoveEffect(sFrontierBrainsMons[facility][symbol][i].moves[j]) == EFFECT_FRUSTRATION)
-                friendship = 0;
-        }
-        SetMonData(&gParties[B_TRAINER_OPPONENT_A][monPartyId], MON_DATA_FRIENDSHIP, &friendship);
-        CalculateMonStats(&gParties[B_TRAINER_OPPONENT_A][monPartyId]);
+        CreateFacilityMon(&gFacilityTrainerMons[monIds[i]], level,
+            sFrontierBrainsMons[facility][symbol][i].fixedIV, otId, 0,
+            &gParties[B_TRAINER_OPPONENT_A][monPartyId]);
         monPartyId++;
     }
+}
+
+static const struct TrainerMon *GetDomeBrainMon(u8 monId)
+{
+    u32 tournamentId = TrainerIdToDomeTournamentId(TRAINER_FRONTIER_BRAIN);
+
+    if (tournamentId >= DOME_TOURNAMENT_TRAINERS_COUNT || monId >= FRONTIER_PARTY_SIZE)
+        return NULL;
+
+    return &gBattleFrontierMons[gSaveBlock2Ptr->frontier.domeMonIds[tournamentId][monId]];
 }
 
 enum Species GetFrontierBrainMonSpecies(u8 monId)
 {
     s32 facility = VarGet(VAR_FRONTIER_FACILITY);
     s32 symbol = GetFronterBrainSymbol();
+
+    if (facility == FRONTIER_FACILITY_DOME)
+    {
+        const struct TrainerMon *mon = GetDomeBrainMon(monId);
+        if (mon != NULL)
+            return mon->species;
+    }
 
     return sFrontierBrainsMons[facility][symbol][monId].species;
 }
@@ -2714,6 +2737,13 @@ u16 GetFrontierBrainMonMove(u8 monId, u8 moveSlotId)
     s32 facility = VarGet(VAR_FRONTIER_FACILITY);
     s32 symbol = GetFronterBrainSymbol();
 
+    if (facility == FRONTIER_FACILITY_DOME)
+    {
+        const struct TrainerMon *mon = GetDomeBrainMon(monId);
+        if (mon != NULL)
+            return mon->moves[moveSlotId];
+    }
+
     return sFrontierBrainsMons[facility][symbol][monId].moves[moveSlotId];
 }
 
@@ -2722,6 +2752,13 @@ u8 GetFrontierBrainMonNature(u8 monId)
     s32 facility = VarGet(VAR_FRONTIER_FACILITY);
     s32 symbol = GetFronterBrainSymbol();
 
+    if (facility == FRONTIER_FACILITY_DOME)
+    {
+        const struct TrainerMon *mon = GetDomeBrainMon(monId);
+        if (mon != NULL)
+            return mon->nature;
+    }
+
     return sFrontierBrainsMons[facility][symbol][monId].nature;
 }
 
@@ -2729,6 +2766,13 @@ u8 GetFrontierBrainMonEvs(u8 monId, u8 evStatId)
 {
     s32 facility = VarGet(VAR_FRONTIER_FACILITY);
     s32 symbol = GetFronterBrainSymbol();
+
+    if (facility == FRONTIER_FACILITY_DOME)
+    {
+        const struct TrainerMon *mon = GetDomeBrainMon(monId);
+        if (mon != NULL)
+            return mon->ev != NULL ? mon->ev[evStatId] : 0;
+    }
 
     return sFrontierBrainsMons[facility][symbol][monId].evs[evStatId];
 }
@@ -2740,14 +2784,8 @@ s32 GetFronterBrainSymbol(void)
 
     if (symbol == 2)
     {
-        u16 winStreak = GetCurrentFacilityWinStreak();
-        if (winStreak + gFrontierBrainInfo[facility].streakAppearances[3] == gFrontierBrainInfo[facility].streakAppearances[0])
-            symbol = 0;
-        else if (winStreak + gFrontierBrainInfo[facility].streakAppearances[3] == gFrontierBrainInfo[facility].streakAppearances[1])
-            symbol = 1;
-        else if (winStreak + gFrontierBrainInfo[facility].streakAppearances[3] > gFrontierBrainInfo[facility].streakAppearances[1]
-                 && (winStreak + gFrontierBrainInfo[facility].streakAppearances[3] - gFrontierBrainInfo[facility].streakAppearances[1]) % gFrontierBrainInfo[facility].streakAppearances[2] == 0)
-            symbol = 1;
+        // Speech and party tables have two entries, not a third for rematches.
+        symbol = GetFrontierBrainStatusForStreak(facility, GetCurrentFacilityWinStreak()) == FRONTIER_BRAIN_STREAK ? 0 : 1;
     }
     return symbol;
 }
