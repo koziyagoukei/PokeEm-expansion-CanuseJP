@@ -4815,7 +4815,7 @@ const struct SpriteTemplate gShatteredPsycheReflectHitSpriteTemplate =
 {
     .tileTag = ANIM_TAG_BLUE_LIGHT_WALL,
     .paletteTag = ANIM_TAG_BLUE_LIGHT_WALL,
-    .oam = &gOamData_AffineNormal_ObjBlend_32x32,
+    .oam = &gOamData_AffineNormal_ObjBlend_64x64,
     .affineAnims = gAffineAnims_HitSplat,
     .callback = AnimHitSplatBasic,
 };

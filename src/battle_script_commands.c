@@ -3055,7 +3055,7 @@ static void PlayAnimation(enum BattlerId battler, u8 animId, const u16 *argPtr, 
         return;
     }
 
-    if (animId == B_ANIM_STATS_CHANGE
+    if ((animId == B_ANIM_STATS_CHANGE && !(gHitMarker & HITMARKER_NO_ANIMATIONS))
      || animId == B_ANIM_SNATCH_MOVE
      || animId == B_ANIM_MEGA_EVOLUTION
      || animId == B_ANIM_ILLUSION_OFF
@@ -11123,6 +11123,13 @@ void BS_PlayMoveAnimation(void)
     if (move == MOVE_NONE)
         move = gCurrentMove;
 
+    // Transform's animation also updates the battler sprite.
+    if (gHitMarker & HITMARKER_NO_ANIMATIONS && move != MOVE_TRANSFORM)
+    {
+        gBattlescriptCurrInstr = cmd->nextInstr;
+        return;
+    }
+
     BtlController_EmitMoveAnimation(
         gBattlerAttacker,
         B_COMM_TO_CONTROLLER,
@@ -12288,8 +12295,11 @@ void BS_RaiseCritStatChangeAnim(void)
     NATIVE_ARGS(u8 battler);
 
     enum BattlerId battler = GetBattlerForBattleScript(cmd->battler);
-    BtlController_EmitBattleAnimation(battler, B_COMM_TO_CONTROLLER, B_ANIM_STATS_CHANGE, STAT_ANIM_PLUS1 + STAT_ATK);
-    MarkBattlerForControllerExec(battler);
+    if (!(gHitMarker & HITMARKER_NO_ANIMATIONS))
+    {
+        BtlController_EmitBattleAnimation(battler, B_COMM_TO_CONTROLLER, B_ANIM_STATS_CHANGE, STAT_ANIM_PLUS1 + STAT_ATK);
+        MarkBattlerForControllerExec(battler);
+    }
     gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
