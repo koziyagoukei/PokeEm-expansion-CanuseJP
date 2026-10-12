@@ -436,7 +436,7 @@
 #define SHOW_EFFECTIVENESS_ALWAYS   1           // 技選択時に相性を常に表示する。
 #define SHOW_EFFECTIVENESS_CAUGHT   2           // その種族を捕獲済みの場合だけ相性を表示する。
 #define SHOW_EFFECTIVENESS_SEEN     3           // その種族を見たことがある場合だけ相性を表示する。
-#define B_SHOW_EFFECTIVENESS        define SHOW_EFFECTIVENESS_ALWAYS // SHOW_EFFECTIVENESS_NEVER以外では、PPの表示を技と対象に基づくタイプ相性の表示へ置き換える。
+#define B_SHOW_EFFECTIVENESS        SHOW_EFFECTIVENESS_ALWAYS // SHOW_EFFECTIVENESS_NEVER以外では、PPの表示を技と対象に基づくタイプ相性の表示へ置き換える。
 
 // 戦闘ポケモンスプライトの設定。
 #define B_ENEMY_MON_SHADOW_STYLE        GEN_3 // 第4世代以降では、相手のポケモン全員の足元に影を描く。
