@@ -18,6 +18,7 @@
 #include "field_screen_effect.h"
 #include "field_specials.h"
 #include "field_weather.h"
+#include "frontier_util.h"
 #include "graphics.h"
 #include "gpu_regs.h"
 #include "international_string_util.h"
@@ -4627,20 +4628,75 @@ void DaisyMassageServices(void)
     VarSet(VAR_MASSAGE_COOLDOWN_STEP_COUNTER, 0);
 }
 
-static bool32 Teishokuya_IsValidSelectedPartyMon(void)
+static bool32 Teishokuya_IsValidPartyMon(u16 partyIndex)
 {
     struct Pokemon *mon;
 
-    if (gSpecialVar_0x8004 >= PARTY_SIZE)
+    if (partyIndex >= PARTY_SIZE)
         return FALSE;
 
-    mon = &gParties[B_TRAINER_PLAYER][gSpecialVar_0x8004];
+    mon = &gParties[B_TRAINER_PLAYER][partyIndex];
     if (GetMonData(mon, MON_DATA_SPECIES_OR_EGG) == SPECIES_NONE
      || GetMonData(mon, MON_DATA_IS_EGG))
         return FALSE;
 
     return TRUE;
 }
+
+static bool32 Teishokuya_IsValidSelectedPartyMon(void)
+{
+    return Teishokuya_IsValidPartyMon(gSpecialVar_0x8004);
+}
+
+bool8 Special_TeishokuyaHasGoldSymbol(void)
+{
+    u32 facility;
+
+    for (facility = 0; facility < NUM_FRONTIER_FACILITIES; facility++)
+    {
+        if (FlagGet(gFrontierBrainInfo[facility].goldSymbolFlag))
+            return TRUE;
+    }
+    return FALSE;
+}
+
+static u16 Teishokuya_GetShinyMealStatus(u16 partyIndex)
+{
+    if (!Special_TeishokuyaHasGoldSymbol())
+        return TEISHOKUYA_SHINY_MEAL_LOCKED;
+    if (!Teishokuya_IsValidPartyMon(partyIndex))
+        return TEISHOKUYA_SHINY_MEAL_INVALID_MON;
+    if (GetMonData(&gParties[B_TRAINER_PLAYER][partyIndex], MON_DATA_IS_SHINY))
+        return TEISHOKUYA_SHINY_MEAL_ALREADY_SHINY;
+    if (gSaveBlock2Ptr->frontier.battlePoints < TEISHOKUYA_SHINY_MEAL_COST)
+        return TEISHOKUYA_SHINY_MEAL_NOT_ENOUGH_BP;
+    return TEISHOKUYA_SHINY_MEAL_OK;
+}
+
+u16 Special_TeishokuyaGetShinyMealStatus(void)
+{
+    return Teishokuya_GetShinyMealStatus(gSpecialVar_0x8004);
+}
+
+static u16 Teishokuya_TryMakeMonShiny(u16 partyIndex)
+{
+    u16 result = Teishokuya_GetShinyMealStatus(partyIndex);
+    bool8 isShiny = TRUE;
+
+    if (result == TEISHOKUYA_SHINY_MEAL_OK)
+    {
+        SetMonData(&gParties[B_TRAINER_PLAYER][partyIndex], MON_DATA_IS_SHINY, &isShiny);
+        gSaveBlock2Ptr->frontier.battlePoints -= TEISHOKUYA_SHINY_MEAL_COST;
+    }
+    return result;
+}
+
+#if TESTING
+u16 Test_TeishokuyaTryMakeMonShiny(u16 partyIndex)
+{
+    return Teishokuya_TryMakeMonShiny(partyIndex);
+}
+#endif
 
 static bool32 Teishokuya_CanToggleGigantamax(struct Pokemon *mon)
 {
@@ -4653,6 +4709,20 @@ static bool32 Teishokuya_CanToggleGigantamax(struct Pokemon *mon)
 #define TEISHOKUYA_MEAL_SPRITE_NONE 0xFF
 #define TEISHOKUYA_MEAL_INVALID_PIC 0xFFFF
 #define TEISHOKUYA_MEAL_BG_COLOR RGB(31, 25, 27)
+#define TEISHOKUYA_MEAL_SHINY_BLEND_DELAY 4
+
+enum TeishokuyaMealState
+{
+    TEISHOKUYA_MEAL_FADE_IN,
+    TEISHOKUYA_MEAL_WAIT_SURROUND,
+    TEISHOKUYA_MEAL_FADE_SURROUND,
+    TEISHOKUYA_MEAL_CHEW,
+    TEISHOKUYA_MEAL_WAIT_FINISH,
+    TEISHOKUYA_MEAL_FADE_OUT,
+    TEISHOKUYA_MEAL_TURN_WHITE,
+    TEISHOKUYA_MEAL_HOLD_WHITE,
+    TEISHOKUYA_MEAL_REVEAL_SHINY,
+};
 
 struct TeishokuyaMealScene
 {
@@ -4662,6 +4732,8 @@ struct TeishokuyaMealScene
     u8 iconSpriteIds[PARTY_SIZE];
     u8 iconCount;
     u8 surroundBlend;
+    bool8 makeShiny;
+    u8 shinyBlend;
 };
 
 static EWRAM_DATA struct TeishokuyaMealScene *sTeishokuyaMealScene = NULL;
@@ -4669,6 +4741,7 @@ static EWRAM_DATA struct TeishokuyaMealScene *sTeishokuyaMealScene = NULL;
 static void CB2_TeishokuyaMealScene(void);
 static void VBlankCB_TeishokuyaMealScene(void);
 static void Task_TeishokuyaMealScene(u8 taskId);
+static void TeishokuyaMealScene_Start(bool32 makeShiny);
 static void TeishokuyaMealScene_CreateCenterMon(void);
 static void TeishokuyaMealScene_CreateSurroundingSprites(void);
 static void TeishokuyaMealScene_BlendSurroundingSprites(u8 blend);
@@ -4708,6 +4781,24 @@ static void TeishokuyaMealScene_ReturnToField(void)
 
 void Special_TeishokuyaPlayMealScene(void)
 {
+    TeishokuyaMealScene_Start(FALSE);
+}
+
+void Special_TeishokuyaPlayShinyMealScene(void)
+{
+    gSpecialVar_Result = Teishokuya_GetShinyMealStatus(gSpecialVar_0x8004);
+    if (gSpecialVar_Result != TEISHOKUYA_SHINY_MEAL_OK)
+    {
+        SetMainCallback2(CB2_ReturnToFieldContinueScript);
+        return;
+    }
+
+    gSpecialVar_Result = TEISHOKUYA_SHINY_MEAL_SCENE_FAILED;
+    TeishokuyaMealScene_Start(TRUE);
+}
+
+static void TeishokuyaMealScene_Start(bool32 makeShiny)
+{
     u32 i;
 
     if (!Teishokuya_IsValidSelectedPartyMon())
@@ -4724,6 +4815,7 @@ void Special_TeishokuyaPlayMealScene(void)
     }
 
     sTeishokuyaMealScene->selectedSlot = gSpecialVar_0x8004;
+    sTeishokuyaMealScene->makeShiny = makeShiny;
     sTeishokuyaMealScene->centerSpriteId = TEISHOKUYA_MEAL_SPRITE_NONE;
     sTeishokuyaMealScene->playerSpriteId = TEISHOKUYA_MEAL_SPRITE_NONE;
     for (i = 0; i < ARRAY_COUNT(sTeishokuyaMealScene->iconSpriteIds); i++)
@@ -4865,21 +4957,21 @@ static void Task_TeishokuyaMealScene(u8 taskId)
 {
     switch (gTasks[taskId].data[0])
     {
-    case 0:
+    case TEISHOKUYA_MEAL_FADE_IN:
         if (!gPaletteFade.active)
         {
             gTasks[taskId].data[1] = 30;
             gTasks[taskId].data[0]++;
         }
         break;
-    case 1:
+    case TEISHOKUYA_MEAL_WAIT_SURROUND:
         if (--gTasks[taskId].data[1] == 0)
         {
             TeishokuyaMealScene_CreateSurroundingSprites();
             gTasks[taskId].data[0]++;
         }
         break;
-    case 2:
+    case TEISHOKUYA_MEAL_FADE_SURROUND:
         if (sTeishokuyaMealScene->surroundBlend != 0)
         {
             sTeishokuyaMealScene->surroundBlend--;
@@ -4893,23 +4985,68 @@ static void Task_TeishokuyaMealScene(u8 taskId)
             gTasks[taskId].data[0]++;
         }
         break;
-    case 3:
-        if (gTasks[taskId].data[1] == 20 || gTasks[taskId].data[1] == 10)
-            PlaySE(SE_M_BITE);
-        if (--gTasks[taskId].data[1] == 0)
+    case TEISHOKUYA_MEAL_CHEW:
+        if (gTasks[taskId].data[1] != 0)
+        {
+            if (gTasks[taskId].data[1] == 20 || gTasks[taskId].data[1] == 10)
+                PlaySE(SE_M_BITE);
+            gTasks[taskId].data[1]--;
+        }
+        if (gTasks[taskId].data[1] == 0 && !IsSEPlaying())
         {
             gTasks[taskId].data[1] = 60;
-            gTasks[taskId].data[0]++;
+            gTasks[taskId].data[0] = sTeishokuyaMealScene->makeShiny ? TEISHOKUYA_MEAL_TURN_WHITE : TEISHOKUYA_MEAL_WAIT_FINISH;
         }
         break;
-    case 4:
+    case TEISHOKUYA_MEAL_TURN_WHITE:
+        if (++gTasks[taskId].data[2] == TEISHOKUYA_MEAL_SHINY_BLEND_DELAY)
+        {
+            u16 paletteOffset = OBJ_PLTT_ID(gSprites[sTeishokuyaMealScene->centerSpriteId].oam.paletteNum);
+
+            gTasks[taskId].data[2] = 0;
+            sTeishokuyaMealScene->shinyBlend++;
+            if (sTeishokuyaMealScene->shinyBlend == 16)
+            {
+                struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][sTeishokuyaMealScene->selectedSlot];
+                enum Species species = GetMonData(mon, MON_DATA_SPECIES);
+                u32 personality = GetMonData(mon, MON_DATA_PERSONALITY);
+
+                // Change only the palette while the Pokemon is fully white.
+                gSpecialVar_Result = Teishokuya_TryMakeMonShiny(sTeishokuyaMealScene->selectedSlot);
+                LoadPalette(GetMonSpritePalFromSpeciesAndPersonality(species, GetMonData(mon, MON_DATA_IS_SHINY), personality), paletteOffset, PLTT_SIZE_4BPP);
+                gTasks[taskId].data[1] = 20;
+                gTasks[taskId].data[0] = TEISHOKUYA_MEAL_HOLD_WHITE;
+            }
+            BlendPalette(paletteOffset, 16, sTeishokuyaMealScene->shinyBlend, RGB_WHITE);
+        }
+        break;
+    case TEISHOKUYA_MEAL_HOLD_WHITE:
+        if (--gTasks[taskId].data[1] == 0)
+            gTasks[taskId].data[0] = TEISHOKUYA_MEAL_REVEAL_SHINY;
+        break;
+    case TEISHOKUYA_MEAL_REVEAL_SHINY:
+        if (++gTasks[taskId].data[2] == TEISHOKUYA_MEAL_SHINY_BLEND_DELAY)
+        {
+            u16 paletteOffset = OBJ_PLTT_ID(gSprites[sTeishokuyaMealScene->centerSpriteId].oam.paletteNum);
+
+            gTasks[taskId].data[2] = 0;
+            sTeishokuyaMealScene->shinyBlend--;
+            BlendPalette(paletteOffset, 16, sTeishokuyaMealScene->shinyBlend, RGB_WHITE);
+            if (sTeishokuyaMealScene->shinyBlend == 0)
+            {
+                gTasks[taskId].data[1] = 60;
+                gTasks[taskId].data[0] = TEISHOKUYA_MEAL_WAIT_FINISH;
+            }
+        }
+        break;
+    case TEISHOKUYA_MEAL_WAIT_FINISH:
         if (--gTasks[taskId].data[1] == 0)
         {
             BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
             gTasks[taskId].data[0]++;
         }
         break;
-    case 5:
+    case TEISHOKUYA_MEAL_FADE_OUT:
         if (!gPaletteFade.active)
         {
             DestroyTask(taskId);

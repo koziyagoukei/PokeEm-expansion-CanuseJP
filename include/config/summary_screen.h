@@ -1,18 +1,18 @@
 #ifndef GUARD_CONFIG_SUMMARY_SCREEN_H
 #define GUARD_CONFIG_SUMMARY_SCREEN_H
 
-// Settings
-#define P_SUMMARY_SCREEN_NATURE_COLORS   TRUE   // If TRUE, nature-based stat boosts and reductions will be red and blue in the summary screen.
-#define P_SUMMARY_SCREEN_RENAME          TRUE   // If TRUE, an option to change Pokemon nicknames replaces the cancel prompt on the summary screen info page.
+// 基本設定
+#define P_SUMMARY_SCREEN_NATURE_COLORS   TRUE   // TRUEなら、つよさをみる画面で性格による能力上昇を赤、低下を青で表示する。
+#define P_SUMMARY_SCREEN_RENAME          TRUE   // TRUEなら、情報ページの戻る案内をニックネーム変更の案内に置き換える。
 
-// IV/EV settings
-#define P_SUMMARY_SCREEN_IV_EV_INFO      TRUE   // If TRUE, will allow player to cycle through the Stats, IVs, and EVs in the summary screen skills page.
-#define P_SUMMARY_SCREEN_IV_EV_BOX_ONLY  FALSE  // If TRUE, will allow player to cycle through the Stats, IVs, and EVs in the summary screen skills page, but only in the PC storage box.
-#define P_SUMMARY_SCREEN_IV_HYPERTRAIN   TRUE   // If TRUE, stats that have been hyper trained will show as 31/S when viewing them in the summary screen
-#define P_SUMMARY_SCREEN_IV_EV_TILESET   FALSE  // If TRUE, loads an alternate tileset to allow changing the "STATS" label in the summary screen skills page. Note: if it's still loading the alternate tileset after changing this and recompiling, you may need a `make clean` before compilation.
-#define P_SUMMARY_SCREEN_IV_EV_VALUES    TRUE   // If TRUE, will show the actual IV value instead of the letter grade.
+// 個体値（IV）・努力値（EV）の設定
+#define P_SUMMARY_SCREEN_IV_EV_INFO      TRUE   // TRUEなら、能力ページで能力値・個体値・努力値の表示を切り替えられる。
+#define P_SUMMARY_SCREEN_IV_EV_BOX_ONLY  FALSE  // TRUEなら、ボックス内でのつよさをみる画面に限り、能力値・個体値・努力値の表示を切り替えられる。
+#define P_SUMMARY_SCREEN_IV_HYPERTRAIN   TRUE   // TRUEなら、すごいとっくん済みの能力の個体値を31またはSと表示する。
+#define P_SUMMARY_SCREEN_IV_EV_TILESET   FALSE  // TRUEなら、能力ページの「STATS」表示を変更できる別のタイルセットを読み込む。設定変更後も以前のタイルセットが使われる場合は、ビルド前に`make clean`が必要なことがある。
+#define P_SUMMARY_SCREEN_IV_EV_VALUES    TRUE   // TRUEなら、ランク記号の代わりに個体値の数値を表示する。
 /*
-LETTER GRADE GUIDE:
+ランク記号と個体値の対応:
 
     F = 0
     D = 1 - 15
@@ -21,34 +21,34 @@ LETTER GRADE GUIDE:
     A = 30
     S = 31
 
-Info taken from https://bulbapedia.bulbagarden.net/wiki/Stats_judge.
+参照元: https://bulbapedia.bulbagarden.net/wiki/Stats_judge.
 */
-#define P_SUMMARY_SCREEN_IV_ONLY         FALSE  // If TRUE, will only show IV info in the summary screen.
-#define P_SUMMARY_SCREEN_EV_ONLY         FALSE  // If TRUE, will only show EV info in the summary screen.
+#define P_SUMMARY_SCREEN_IV_ONLY         FALSE  // TRUEなら、個体値の情報だけを表示する。
+#define P_SUMMARY_SCREEN_EV_ONLY         FALSE  // TRUEなら、努力値の情報だけを表示する。
 
-// IV/EV flags
-#define P_FLAG_SUMMARY_SCREEN_IV_EV_INFO FLAG_EXPANSION_SUMMARY_SCREEN_IV_EV_INFO // If this flag is set, will allow player to cycle through the Stats, IVs, and EVs in the summary screen skills page. Note: if P_SUMMARY_SCREEN_IV_EV_INFO is TRUE, this flag does nothing.
+// 個体値・努力値表示のフラグ
+#define P_FLAG_SUMMARY_SCREEN_IV_EV_INFO FLAG_EXPANSION_SUMMARY_SCREEN_IV_EV_INFO // このフラグが立つと、能力ページで能力値・個体値・努力値を切り替えられる。P_SUMMARY_SCREEN_IV_EV_INFOがTRUEの場合、このフラグは使わない。
 
-// Move Relearner settings
-#define P_ENABLE_MOVE_RELEARNERS         TRUE    // If TRUE, it enables move relearners for egg, TM and tutor. (see below for specific configs /flags)
-#define P_SORT_MOVES                     TRUE    // If TRUE, sorts all moves alphabetically in the relearner's list.
+// 技思い出しの設定
+#define P_ENABLE_MOVE_RELEARNERS         TRUE    // TRUEなら、タマゴ技・技マシン・教え技の思い出しを有効にする。個別の設定・フラグは下記を参照。
+#define P_SORT_MOVES                     TRUE    // TRUEなら、技思い出しの一覧を名前順に並べる。
 
-// Level up Relearner
-#define P_PRE_EVO_MOVES                  TRUE    // If TRUE, it enables the Pokemon to learn moves from it's pre evolution.
-#define P_ENABLE_ALL_LEVEL_UP_MOVES      TRUE    // If TRUE, it enables the Pokemon to learn all level up moves, regardless of its level.
+// レベルアップ技の思い出し
+#define P_PRE_EVO_MOVES                  TRUE    // TRUEなら、進化前のポケモンが覚える技も習得できる。
+#define P_ENABLE_ALL_LEVEL_UP_MOVES      TRUE    // TRUEなら、現在のレベルに関係なくすべてのレベルアップ技を習得できる。
 
-// TM Relearner
-#define P_TM_MOVES_RELEARNER             TRUE    // If TRUE, enables machine move relearner.
-#define P_ENABLE_ALL_TM_MOVES            TRUE    // If TRUE, it enables the Pokemon to learn all TMs its compatible with, regardless of it being in the bag.
+// 技マシンの思い出し
+#define P_TM_MOVES_RELEARNER             TRUE    // TRUEなら、技マシンの技思い出しを有効にする。
+#define P_ENABLE_ALL_TM_MOVES            TRUE    // TRUEなら、バッグ内の所持状況に関係なく、対応するすべての技マシンの技を習得できる。
 
-// Relearner flags - Redundant if P_ENABLE_MOVE_RELEARNERS is TRUE, but still added here incase you don't want all relearners unlocked at the same time.
-// To use the following features in scripting, replace the 0s with the flag ID you're assigning it to.
-// Eg: Replace with FLAG_UNUSED_0x264 so you can use that flag to toggle the feature.
-#define P_FLAG_EGG_MOVES                 FLAG_EXPANSION_EGG_MOVE_RELEARNER    // If this flag is set, enables egg move relearner.
-#define P_FLAG_TUTOR_MOVES               FLAG_EXPANSION_TUTOR_MOVE_RELEARNER  // If this flag is set, enables tutor move relearner.
+// 技思い出しのフラグ。P_ENABLE_MOVE_RELEARNERSがTRUEなら不要だが、種類ごとに解禁したい場合に使用できる。
+// スクリプトから制御するには、0の項目に使用するフラグIDを指定する。
+// 例: FLAG_UNUSED_0x264を指定すると、そのフラグで機能を切り替えられる。
+#define P_FLAG_EGG_MOVES                 FLAG_EXPANSION_EGG_MOVE_RELEARNER    // このフラグが立つと、タマゴ技の思い出しを有効にする。
+#define P_FLAG_TUTOR_MOVES               FLAG_EXPANSION_TUTOR_MOVE_RELEARNER  // このフラグが立つと、教え技の思い出しを有効にする。
 
-// Move Relearner summary screen
-#define P_SUMMARY_SCREEN_MOVE_RELEARNER  TRUE   // If TRUE, shows an option for Pokemon to relearn moves on the summary screen moves page.
-#define P_SUMMARY_MOVE_RELEARNER_FULL_PP TRUE   // If TRUE, the move relearner in the summary screen restores relearned moves' PP to full.
+// つよさをみる画面での技思い出し
+#define P_SUMMARY_SCREEN_MOVE_RELEARNER  TRUE   // TRUEなら、技ページに技思い出しの選択肢を表示する。
+#define P_SUMMARY_MOVE_RELEARNER_FULL_PP TRUE   // TRUEなら、この画面で思い出した技のPPを全回復する。
 
 #endif // GUARD_CONFIG_SUMMARY_SCREEN_H

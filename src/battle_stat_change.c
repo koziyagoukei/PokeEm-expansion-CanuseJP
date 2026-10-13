@@ -533,8 +533,11 @@ static void TryPlayStatChangeAnimation(struct BattleCalcValues *cv, struct StatC
             statAnimId = isStatChangeByTwo ? STAT_ANIM_MULTIPLE_PLUS2 : STAT_ANIM_MULTIPLE_PLUS1;
     }
 
-    BtlController_EmitBattleAnimation(cv->battlerDef, B_COMM_TO_CONTROLLER, B_ANIM_STATS_CHANGE, statAnimId);
-    MarkBattlerForControllerExec(cv->battlerDef);
+    if (!(gHitMarker & HITMARKER_NO_ANIMATIONS))
+    {
+        BtlController_EmitBattleAnimation(cv->battlerDef, B_COMM_TO_CONTROLLER, B_ANIM_STATS_CHANGE, statAnimId);
+        MarkBattlerForControllerExec(cv->battlerDef);
+    }
 }
 
 static bool32 IsSubstituteBlocked(struct BattleCalcValues *cv, struct StatChange *st)

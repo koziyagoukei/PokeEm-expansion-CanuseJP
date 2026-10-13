@@ -10,6 +10,7 @@ Party_eat_time_OnTransition:
 #define TEISHOKUYA_MENU_GIGANTAMAX 21
 #define TEISHOKUYA_MENU_CANCEL 22
 #define TEISHOKUYA_MENU_PP_MAX 23
+#define TEISHOKUYA_MENU_SHINY_MEAL 3
 
 PartyEatTime_EventScript_RocketCook::
 	lock
@@ -17,14 +18,60 @@ PartyEatTime_EventScript_RocketCook::
 	msgbox PartyEatTime_Text_RocketCookGreeting, MSGBOX_DEFAULT
 	dynmultipush PartyEatTime_Text_Order, 0
 	dynmultipush PartyEatTime_Text_AfterMealMint, 1
+	specialvar VAR_RESULT, Special_TeishokuyaHasGoldSymbol
+	call_if_eq VAR_RESULT, TRUE, PartyEatTime_EventScript_PushShinyMeal
 	dynmultipush PartyEatTime_Text_Cancel, 2
-	dynmultistack 0, 0, FALSE, 3, 0, 0, DYN_MULTICHOICE_CB_NONE
+	dynmultistack 0, 0, FALSE, 4, 0, 0, DYN_MULTICHOICE_CB_NONE
 	closemessage
 	switch VAR_RESULT
 	case 0, PartyEatTime_EventScript_Order
 	case 1, PartyEatTime_EventScript_AfterMealMint
 	case 2, PartyEatTime_EventScript_Cancel
+	case TEISHOKUYA_MENU_SHINY_MEAL, PartyEatTime_EventScript_ShinyMeal
 	case MULTI_B_PRESSED, PartyEatTime_EventScript_Cancel
+	release
+	end
+
+PartyEatTime_EventScript_PushShinyMeal::
+	dynmultipush PartyEatTime_Text_RocketFastFood, TEISHOKUYA_MENU_SHINY_MEAL
+	return
+
+PartyEatTime_EventScript_ShinyMeal::
+	msgbox PartyEatTime_Text_ShinyMealPrompt, MSGBOX_DEFAULT
+	specialvar VAR_RESULT, GetFrontierBattlePoints
+	goto_if_lt VAR_RESULT, TEISHOKUYA_SHINY_MEAL_COST, PartyEatTime_EventScript_NotEnoughBP
+	special ChooseNonEggPartyMon
+	lock
+	faceplayer
+	goto_if_ge VAR_0x8004, PARTY_SIZE, PartyEatTime_EventScript_Cancel
+	specialvar VAR_RESULT, Special_TeishokuyaGetShinyMealStatus
+	goto_if_eq VAR_RESULT, TEISHOKUYA_SHINY_MEAL_INVALID_MON, PartyEatTime_EventScript_CantChooseEgg
+	goto_if_eq VAR_RESULT, TEISHOKUYA_SHINY_MEAL_ALREADY_SHINY, PartyEatTime_EventScript_AlreadyShiny
+	goto_if_eq VAR_RESULT, TEISHOKUYA_SHINY_MEAL_NOT_ENOUGH_BP, PartyEatTime_EventScript_NotEnoughBP
+	goto_if_ne VAR_RESULT, TEISHOKUYA_SHINY_MEAL_OK, PartyEatTime_EventScript_ShinyMealFailed
+	special BufferMonNickname
+	fadescreen FADE_TO_BLACK
+	playse SE_BIKE_BELL
+	waitse
+	special Special_TeishokuyaPlayShinyMealScene
+	goto_if_ne VAR_RESULT, TEISHOKUYA_SHINY_MEAL_OK, PartyEatTime_EventScript_ShinyMealFailed
+	special Special_RefreshPartyRoamerMons
+	msgbox PartyEatTime_Text_ShinyMealDone, MSGBOX_DEFAULT
+	release
+	end
+
+PartyEatTime_EventScript_NotEnoughBP::
+	msgbox PartyEatTime_Text_NotEnoughBP, MSGBOX_DEFAULT
+	release
+	end
+
+PartyEatTime_EventScript_AlreadyShiny::
+	msgbox PartyEatTime_Text_AlreadyShiny, MSGBOX_DEFAULT
+	release
+	end
+
+PartyEatTime_EventScript_ShinyMealFailed::
+	msgbox PartyEatTime_Text_ShinyMealFailed, MSGBOX_DEFAULT
 	release
 	end
 
@@ -139,6 +186,24 @@ PartyEatTime_Text_AfterMealMintPrompt:
 
 PartyEatTime_Text_AfterMealMintDone:
 	.string "{JPN}ありゃーしゃー$"
+
+PartyEatTime_Text_RocketFastFood:
+	.string "{JPN}ロケットファストフード$"
+
+PartyEatTime_Text_ShinyMealPrompt:
+	.string "{JPN}……！ BP1つ よこしな$"
+
+PartyEatTime_Text_NotEnoughBP:
+	.string "{JPN}BPが たりねえぞ$"
+
+PartyEatTime_Text_AlreadyShiny:
+	.string "{JPN}そいつは もう いろちがいだぞ$"
+
+PartyEatTime_Text_ShinyMealFailed:
+	.string "{JPN}すまん いまは つくれねえ\nBPは とってねえぞ$"
+
+PartyEatTime_Text_ShinyMealDone:
+	.string "{JPN}{STR_VAR_1}は\nいろちがいに なった!$"
 
 PartyEatTime_Text_Cancel:
 	.string "{JPN}やめる$"

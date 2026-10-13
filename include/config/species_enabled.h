@@ -1,60 +1,60 @@
 #ifndef GUARD_CONFIG_SPECIES_ENABLED_H
 #define GUARD_CONFIG_SPECIES_ENABLED_H
 
-// Modifying the latest generation WILL change the saveblock due to Dex flags and will require a new save file.
-// Generations of Pokemon are defined by the first member introduced,
-// so Pikachu depends on the Gen 1 setting despite Pichu being the lowest member of the evolution tree.
-// Eg: If P_GEN_2_POKEMON is set to FALSE, all members of the Sneasel Family will be disabled
-// (Sneasel + Hisuian, Weavile and Sneasler).
-#define P_GEN_1_POKEMON                  TRUE // Generation 1 Pokemon (RGBY)
-#define P_GEN_2_POKEMON                  TRUE // Generation 2 Pokemon (GSC)
-#define P_GEN_3_POKEMON                  TRUE // Generation 3 Pokemon (RSE, FRLG)
-#define P_GEN_4_POKEMON                  TRUE // Generation 4 Pokemon (DPPt, HGSS)
-#define P_GEN_5_POKEMON                  TRUE // Generation 5 Pokemon (BW, B2W2)
-#define P_GEN_6_POKEMON                  TRUE // Generation 6 Pokemon (XY, ORAS)
-#define P_GEN_7_POKEMON                  TRUE // Generation 7 Pokemon (SM, USUM, LGPE)
-#define P_GEN_8_POKEMON                  TRUE // Generation 8 Pokemon (SwSh, BDSP, LA)
-#define P_GEN_9_POKEMON                  TRUE // Generation 9 Pokemon (SV)
+// 有効にする最新世代を変更すると、図鑑フラグによってセーブ領域の構造が変わるため、新しいセーブデータが必要になる。
+// 進化系統の世代は、最初に登場したポケモンを基準にする。
+// そのため、進化前にピチューがいても、ピカチュウの系統は第1世代の設定に従う。
+// 例えばP_GEN_2_POKEMONをFALSEにすると、ニューラの系統すべてを無効にする
+// （ニューラとヒスイのすがた、マニューラ、オオニューラ）。
+#define P_GEN_1_POKEMON                  TRUE // 第1世代のポケモン（RGBY）。
+#define P_GEN_2_POKEMON                  TRUE // 第2世代のポケモン（GSC）。
+#define P_GEN_3_POKEMON                  TRUE // 第3世代のポケモン（RSE、FRLG）。
+#define P_GEN_4_POKEMON                  TRUE // 第4世代のポケモン（DPPt、HGSS）。
+#define P_GEN_5_POKEMON                  TRUE // 第5世代のポケモン（BW、B2W2）。
+#define P_GEN_6_POKEMON                  TRUE // 第6世代のポケモン（XY、ORAS）。
+#define P_GEN_7_POKEMON                  TRUE // 第7世代のポケモン（SM、USUM、LGPE）。
+#define P_GEN_8_POKEMON                  TRUE // 第8世代のポケモン（SwSh、BDSP、LA）。
+#define P_GEN_9_POKEMON                  TRUE // 第9世代のポケモン（SV）。
 
-// Setting this to TRUE will add the new evolutions to the Regional Dex.
+// TRUEでは、後の世代で追加された進化先を地域図鑑に含める。
 #define P_NEW_EVOS_IN_REGIONAL_DEX       TRUE
 
-// Battle gimmick specific Forms.
+// 戦闘ギミック専用のフォルム。
 #define P_MEGA_EVOLUTIONS                TRUE
-#define P_PRIMAL_REVERSIONS              TRUE // Groudon and Kyogre only.
-#define P_ULTRA_BURST_FORMS              TRUE // Ultra Necrozma only.
+#define P_PRIMAL_REVERSIONS              TRUE // グラードンとカイオーガのみ。
+#define P_ULTRA_BURST_FORMS              TRUE // ウルトラネクロズマのみ。
 #define P_GIGANTAMAX_FORMS               TRUE
 #define P_TERA_FORMS                     TRUE
 
-#define P_GEN_9_MEGA_EVOLUTIONS          P_MEGA_EVOLUTIONS // Mega Evolutions introduced in Z-A and its DLC
+#define P_GEN_9_MEGA_EVOLUTIONS          P_MEGA_EVOLUTIONS // Z-AとそのDLCで追加されたメガシンカ。
 
-// Fusion forms
+// 合体フォルム。
 #define P_FUSION_FORMS                   TRUE
 
-// Regional Forms. Includes Regional Form evolutions, like Sirfetch'd.
+// リージョンフォーム。ネギガナイトなど、リージョンフォームからの進化先も含む。
 #define P_REGIONAL_FORMS                 TRUE
 #define P_ALOLAN_FORMS                   P_REGIONAL_FORMS
 #define P_GALARIAN_FORMS                 P_REGIONAL_FORMS
 #define P_HISUIAN_FORMS                  P_REGIONAL_FORMS
 #define P_PALDEAN_FORMS                  P_REGIONAL_FORMS
 
-// Big groups of forms that aren't always desired when choosing families.
+// 進化系統を有効にしても、必ずしも必要とは限らない追加フォルム群。
 #define P_PIKACHU_EXTRA_FORMS            TRUE
 #define P_COSPLAY_PIKACHU_FORMS          P_PIKACHU_EXTRA_FORMS
 #define P_CAP_PIKACHU_FORMS              P_PIKACHU_EXTRA_FORMS
 
-// Cross-generation evolutions. Includes pre-evolutions.
+// 別の世代で追加された進化先・進化前。
 #define P_CROSS_GENERATION_EVOS          TRUE
 #define P_GEN_2_CROSS_EVOS               P_CROSS_GENERATION_EVOS
 #define P_GEN_3_CROSS_EVOS               P_CROSS_GENERATION_EVOS
 #define P_GEN_4_CROSS_EVOS               P_CROSS_GENERATION_EVOS
-//#define P_GEN_5_CROSS_EVOS             // Gen 5 didn't introduce any cross-gen evos.
-#define P_GEN_6_CROSS_EVOS               P_CROSS_GENERATION_EVOS // Just Sylveon.
-//#define P_GEN_7_CROSS_EVOS             // Alolan evolutions handled by P_ALOLAN_FORMS.
-#define P_GEN_8_CROSS_EVOS               P_CROSS_GENERATION_EVOS // Regional evolutions handled by P_GALARIAN_FORMS and P_HISUIAN_FORMS.
-#define P_GEN_9_CROSS_EVOS               P_CROSS_GENERATION_EVOS // Clodsire handled by P_PALDEAN_FORMS.
+//#define P_GEN_5_CROSS_EVOS             // 第5世代には、既存の系統への進化先・進化前の追加はない。
+#define P_GEN_6_CROSS_EVOS               P_CROSS_GENERATION_EVOS // ニンフィアのみ。
+//#define P_GEN_7_CROSS_EVOS             // アローラの進化先はP_ALOLAN_FORMSで扱う。
+#define P_GEN_8_CROSS_EVOS               P_CROSS_GENERATION_EVOS // リージョンフォームの進化先はP_GALARIAN_FORMSとP_HISUIAN_FORMSで扱う。
+#define P_GEN_9_CROSS_EVOS               P_CROSS_GENERATION_EVOS // ドオーはP_PALDEAN_FORMSで扱う。
 
-// To disable specific families, replace P_GEN_x_POKEMON with FALSE.
+// 特定の進化系統を無効にする場合は、該当するP_GEN_x_POKEMONをFALSEに置き換える。
 #define P_FAMILY_BULBASAUR               P_GEN_1_POKEMON
 #define P_FAMILY_CHARMANDER              P_GEN_1_POKEMON
 #define P_FAMILY_SQUIRTLE                P_GEN_1_POKEMON

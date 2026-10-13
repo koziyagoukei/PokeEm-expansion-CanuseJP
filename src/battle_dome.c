@@ -2088,8 +2088,7 @@ static void InitDomeTrainers(void)
             DOME_TRAINERS[j].trainerId = TRAINER_FRONTIER_BRAIN;
         }
 
-        for (i = 0; i < FRONTIER_PARTY_SIZE; i++)
-            DOME_MONS[j][i] = GetFrontierBrainMonSpecies(i);
+        // Keep this seed's random pool IDs for Tucker's preview and actual party.
     }
 
     Free(rankingScores);
@@ -4137,7 +4136,7 @@ static void DisplayTrainerInfoOnCard(u8 flags, u8 trainerTourneyId)
         }
         else if (trainerId == TRAINER_FRONTIER_BRAIN)
         {
-            sInfoCard->spriteIds[2 + i + arrId] = CreateMonIcon(DOME_MONS[trainerTourneyId][i],
+            sInfoCard->spriteIds[2 + i + arrId] = CreateMonIcon(GetFrontierBrainMonSpecies(i),
                                                                   SpriteCB_MonIconDomeInfo,
                                                                   x | sInfoTrainerMonX[i],
                                                                   y + sInfoTrainerMonY[i],
@@ -4217,7 +4216,7 @@ static void DisplayTrainerInfoOnCard(u8 flags, u8 trainerTourneyId)
         if (trainerId == TRAINER_PLAYER)
             textPrinter.currentChar = GetSpeciesName(DOME_MONS[trainerTourneyId][i]);
         else if (trainerId == TRAINER_FRONTIER_BRAIN)
-            textPrinter.currentChar = GetSpeciesName(DOME_MONS[trainerTourneyId][i]);
+            textPrinter.currentChar = GetSpeciesName(GetFrontierBrainMonSpecies(i));
         else
             textPrinter.currentChar = GetSpeciesName(gFacilityTrainerMons[DOME_MONS[trainerTourneyId][i]].species);
         textPrinter.fontId = GetFontIdToFit(textPrinter.currentChar, FONT_SHORT, 0, 60);
@@ -4682,7 +4681,7 @@ static void DisplayMatchInfoOnCard(u8 flags, u8 matchNo)
         }
         else if (trainerIds[0] == TRAINER_FRONTIER_BRAIN)
         {
-            sInfoCard->spriteIds[2 + i + arrId] = CreateMonIcon(DOME_MONS[tournamentIds[0]][i],
+            sInfoCard->spriteIds[2 + i + arrId] = CreateMonIcon(GetFrontierBrainMonSpecies(i),
                                                                   SpriteCB_MonIconDomeInfo,
                                                                   x | sLeftTrainerMonX[i],
                                                                   y + sLeftTrainerMonY[i],
@@ -4722,7 +4721,7 @@ static void DisplayMatchInfoOnCard(u8 flags, u8 matchNo)
         }
         else if (trainerIds[1] == TRAINER_FRONTIER_BRAIN)
         {
-            sInfoCard->spriteIds[5 + i + arrId] = CreateMonIcon(DOME_MONS[tournamentIds[1]][i],
+            sInfoCard->spriteIds[5 + i + arrId] = CreateMonIcon(GetFrontierBrainMonSpecies(i),
                                                                   SpriteCB_MonIconDomeInfo,
                                                                   x | sRightTrainerMonX[i],
                                                                   y + sRightTrainerMonY[i],

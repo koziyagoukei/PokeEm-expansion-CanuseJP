@@ -1482,34 +1482,10 @@ static bool8 AtLeastTwoAliveMons(void)
 
 static u8 GetPikeQueenFightType(u8 nextRoom)
 {
-    u8 numPikeSymbols;
-
-    const u8 *streakAppearances = gFrontierBrainInfo[FRONTIER_FACILITY_PIKE].streakAppearances;
-    u8 ret = FRONTIER_BRAIN_NOT_READY;
     enum FrontierLevelMode lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
-    u16 winStreak = gSaveBlock2Ptr->frontier.pikeWinStreaks[lvlMode];
-    winStreak += nextRoom;
-    numPikeSymbols = GetPlayerSymbolCountForFacility(FRONTIER_FACILITY_PIKE);
 
-    switch (numPikeSymbols)
-    {
-    case 0:
-    case 1:
-        if (winStreak == streakAppearances[numPikeSymbols] - streakAppearances[3])
-            ret = numPikeSymbols + 1; // FRONTIER_BRAIN_SILVER and FRONTIER_BRAIN_GOLD
-        break;
-    case 2:
-    default:
-        if (winStreak == streakAppearances[0] - streakAppearances[3])
-            ret = FRONTIER_BRAIN_STREAK;
-        else if (winStreak == streakAppearances[1] - streakAppearances[3]
-                 || (winStreak > streakAppearances[1]
-                     && (winStreak - streakAppearances[1] + streakAppearances[3]) % streakAppearances[2] == 0))
-            ret = FRONTIER_BRAIN_STREAK_LONG;
-        break;
-    }
-
-    return ret;
+    return GetFrontierBrainStatusForStreak(FRONTIER_FACILITY_PIKE,
+        gSaveBlock2Ptr->frontier.pikeWinStreaks[lvlMode] + nextRoom);
 }
 
 static void GetCurrentRoomPikeQueenFightType(void)

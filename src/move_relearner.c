@@ -83,6 +83,13 @@ static EWRAM_DATA struct {
 EWRAM_DATA enum MoveRelearnerStates gMoveRelearnerState = MOVE_RELEARNER_LEVEL_UP_MOVES;
 EWRAM_DATA enum RelearnMode gRelearnMode = RELEARN_MODE_NONE;
 
+static const u16 sFrontierUniversalRelearnerMoves[] =
+{
+    MOVE_TERA_BLAST,
+    MOVE_HIDDEN_POWER,
+    MOVE_UNAVAILABLE,
+};
+
 // Keep LGPE partner moves relearner-only so they do not alter the starter's
 // initial moves or normal level-up progression.
 static const u16 sPikachuStarterRelearnerMoves[] =
@@ -1164,13 +1171,14 @@ static u32 GetRelearnerFrontierFullMoves(struct BoxPokemon *mon, u16 *moves)
     u16 species = GetBoxMonData(mon, MON_DATA_SPECIES);
     const u16 *learnsets[] =
     {
+        sFrontierUniversalRelearnerMoves,
         GetFrontierFullLearnset(species),
         GetFrontierEventLearnset(species),
         GetFrontierZaDlcLearnset(species),
     };
     u32 count = 0;
 
-    if (species >= NUM_SPECIES)
+    if (species == SPECIES_NONE || species >= NUM_SPECIES)
         return 0;
 
     for (u32 learnsetId = 0; learnsetId < ARRAY_COUNT(learnsets); learnsetId++)
@@ -1210,6 +1218,13 @@ static u32 GetRelearnerFrontierFullMoves(struct BoxPokemon *mon, u16 *moves)
 
     return count;
 }
+
+#if TESTING
+u32 Test_GetRelearnerFrontierFullMoves(struct BoxPokemon *mon, u16 *moves)
+{
+    return GetRelearnerFrontierFullMoves(mon, moves);
+}
+#endif
 
 void Special_HasMoveToRelearn(void)
 {
@@ -1336,12 +1351,13 @@ static bool32 HasRelearnerFrontierFullMoves(struct BoxPokemon *boxMon)
     u16 species = GetBoxMonData(boxMon, MON_DATA_SPECIES);
     const u16 *learnsets[] =
     {
+        sFrontierUniversalRelearnerMoves,
         GetFrontierFullLearnset(species),
         GetFrontierEventLearnset(species),
         GetFrontierZaDlcLearnset(species),
     };
 
-    if (species >= NUM_SPECIES)
+    if (species == SPECIES_NONE || species >= NUM_SPECIES)
         return FALSE;
 
     for (u32 learnsetId = 0; learnsetId < ARRAY_COUNT(learnsets); learnsetId++)
