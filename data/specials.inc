@@ -676,3 +676,5 @@ gSpecials::
 	def_special LocalRoom_SetRoamerCount
 	def_special LocalRoom_ClearDecorations
 	def_special LocalRoom_BufferMonMessage
+	def_special VillaShop_OpenCatalog, waitstate=1
+	def_special VillaShop_Purchase

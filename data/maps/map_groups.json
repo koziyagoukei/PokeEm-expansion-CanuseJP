@@ -629,6 +629,7 @@
     "Route124_DivingTreasureHuntersHouse"
   ],
   "gMapGroup_IndoorMiniMiniVilla": [
-    "MiniMiniVilla_LocalRoom"
+    "MiniMiniVilla_LocalRoom",
+    "MiniMiniVilla_Shop"
   ]
 }

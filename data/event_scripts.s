@@ -76,6 +76,7 @@
 #include "constants/vars.h"
 #include "constants/weather.h"
 #include "constants/speaker_names.h"
+#include "constants/villa_shop.h"
 
 #define NPC_TEXT_COLOR_MALE    0
 #define NPC_TEXT_COLOR_FEMALE  1
@@ -1321,6 +1322,7 @@ EventScript_PalletTown_PlayersHouse_2F_TurnOnPC::
 	.include "data/maps/PartyRoamerPark/scripts.inc"
 	.include "data/maps/MiniMiniVilla/scripts.inc"
 	.include "data/maps/MiniMiniVilla_LocalRoom/scripts.inc"
+	.include "data/maps/MiniMiniVilla_Shop/scripts.inc"
 
 	.include "data/maps/Partybathtime/scripts.inc"
 
