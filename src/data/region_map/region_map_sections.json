@@ -1630,6 +1630,10 @@
     {
       "id": "MAPSEC_MINI_MINI_VILLA",
       "name": "{JPN}ミニミニべっそう"
+    },
+    {
+      "id": "MAPSEC_LOCAL_ROOM",
+      "name": "{JPN}マイルーム"
     }
   ]
 }

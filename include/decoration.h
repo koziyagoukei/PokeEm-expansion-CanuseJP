@@ -40,6 +40,13 @@ enum DecorationCategory
     DECORCAT_COUNT,
 };
 
+enum DecorationContextType
+{
+    DECOR_CONTEXT_SECRET_BASE,
+    DECOR_CONTEXT_PLAYER_ROOM,
+    DECOR_CONTEXT_LOCAL_ROOM,
+};
+
 struct DecorItem
 {
     const u32 *pic;
@@ -67,9 +74,15 @@ void InitDecorationContextItems(void);
 void DoSecretBaseDecorationMenu(u8 taskId);
 void ShowDecorationOnMap(u16 mapX, u16 mapY, u16 decoration);
 void DoPlayerRoomDecorationMenu(u8 taskId);
+void DoLocalRoomDecorationMenu(u8 taskId);
+bool8 GetDecorationDimensions(u16 decoration, u8 *width, u8 *height);
 void ShowDecorationCategoriesWindow(u8 taskId);
 void CopyDecorationCategoryName(u8 *dest, u8 category);
 bool8 IsSelectedDecorInThePC(void);
 u8 AddDecorationIconObject(u8 decor, s16 x, s16 y, u8 priority, u16 tilesTag, u16 paletteTag);
+
+#if TESTING
+bool8 Test_CanPlaceDecorationAt(enum DecorationContextType context, u16 decoration, s16 x, s16 y);
+#endif
 
 #endif //GUARD_DECORATION_H

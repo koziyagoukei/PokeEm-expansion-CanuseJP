@@ -1,4 +1,5 @@
 const u32 gTilesetTiles_SecretBase[] = INCGFX_U32("data/tilesets/primary/secret_base/tiles.png", ".4bpp");
+const u32 gTilesetTiles_LocalRoom[] = INCBIN_U32("data/tilesets/secondary/local_room/tiles.bin");
 
 const u16 gTilesetPalettes_SecretBase[][16] =
 {

@@ -32,7 +32,7 @@
       "x": 3,
       "y": 6,
       "elevation": 0,
-      "dest_map": "MAP_MINI_MINI_VILLA",
+      "dest_map": "MAP_MINI_MINI_VILLA_LOCAL_ROOM",
       "dest_warp_id": "0"
     }
   ],

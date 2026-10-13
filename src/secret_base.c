@@ -19,6 +19,7 @@
 #include "item_menu.h"
 #include "link.h"
 #include "list_menu.h"
+#include "local_room.h"
 #include "main.h"
 #include "map_name_popup.h"
 #include "menu.h"
@@ -560,7 +561,14 @@ void InitSecretBaseDecorationSprites(void)
     u8 numDecorations;
 
     objectEventId = 0;
-    if (!CurMapIsSecretBase())
+    if (LocalRoom_IsCurrentMap())
+    {
+        LocalRoom_EnsureSaveData();
+        decorations = gSaveBlock3Ptr->localRoom.decorations;
+        decorationPositions = gSaveBlock3Ptr->localRoom.decorationPositions;
+        numDecorations = LOCAL_ROOM_DECOR_COUNT;
+    }
+    else if (!CurMapIsSecretBase())
     {
         decorations = gSaveBlock1Ptr->playerRoomDecorations;
         decorationPositions = gSaveBlock1Ptr->playerRoomDecorationPositions;
@@ -576,7 +584,7 @@ void InitSecretBaseDecorationSprites(void)
 
     for (i = 0; i < numDecorations; i++)
     {
-        if (decorations[i] == DECOR_NONE)
+        if (decorations[i] == DECOR_NONE || decorations[i] > NUM_DECORATIONS)
             continue;
 
         permission = gDecorations[decorations[i]].permission;
@@ -596,7 +604,8 @@ void InitSecretBaseDecorationSprites(void)
             gSpecialVar_0x8007 = decorationPositions[i] & 0xF;
             metatileBehavior = MapGridGetMetatileBehaviorAt(gSpecialVar_0x8006 + MAP_OFFSET, gSpecialVar_0x8007 + MAP_OFFSET);
             if (MetatileBehavior_HoldsSmallDecoration(metatileBehavior) == TRUE
-             || MetatileBehavior_HoldsLargeDecoration(metatileBehavior) == TRUE)
+             || MetatileBehavior_HoldsLargeDecoration(metatileBehavior) == TRUE
+             || LocalRoom_IsPlainFloor(gSpecialVar_0x8006 + MAP_OFFSET, gSpecialVar_0x8007 + MAP_OFFSET))
             {
                 gSpecialVar_Result = VAR_OBJ_GFX_ID_0 + (gMapHeader.events->objectEvents[objectEventId].graphicsId - OBJ_EVENT_GFX_VAR_0);
                 VarSet(gSpecialVar_Result, gDecorations[decorations[i]].tiles[0]);
