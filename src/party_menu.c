@@ -1541,7 +1541,9 @@ static bool8 CanEnterPartyRoamerParkFromPartyMenu(void)
         && gPartyMenu.layout == PARTY_LAYOUT_SINGLE
         && gPartyMenu.action == PARTY_ACTION_CHOOSE_MON
         && (gSaveBlock1Ptr->location.mapGroup != MAP_GROUP(MAP_PARTY_ROAMER_PARK)
-         || gSaveBlock1Ptr->location.mapNum != MAP_NUM(MAP_PARTY_ROAMER_PARK));
+         || gSaveBlock1Ptr->location.mapNum != MAP_NUM(MAP_PARTY_ROAMER_PARK))
+        && (gSaveBlock1Ptr->location.mapGroup != MAP_GROUP(MAP_MINI_MINI_VILLA)
+         || gSaveBlock1Ptr->location.mapNum != MAP_NUM(MAP_MINI_MINI_VILLA));
 }
 
 static void PromptEnterPartyRoamerPark(u8 taskId)

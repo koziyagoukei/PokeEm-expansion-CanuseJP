@@ -4898,6 +4898,18 @@
       "border_filepath": "data/layouts/ultraflontie_PokemonCenter_2F_2/border.bin",
       "blockdata_filepath": "data/layouts/ultraflontie_PokemonCenter_2F_2/map.bin",
       "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_MINI_MINI_VILLA",
+      "name": "MiniMiniVilla_Layout",
+      "width": 28,
+      "height": 22,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Fortree",
+      "border_filepath": "data/layouts/MiniMiniVilla/border.bin",
+      "blockdata_filepath": "data/layouts/MiniMiniVilla/map.bin",
+      "border_height": 2,
+      "border_width": 2
     }
   ]
 }
