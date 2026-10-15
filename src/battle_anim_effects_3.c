@@ -2441,13 +2441,11 @@ void AnimTask_HideOpponentShadows(u8 taskId)
         return;
     }
 
-    gSprites[gBattleSpritesDataPtr->healthBoxesData[battlerLeft].shadowSpriteIdPrimary].callback = SpriteCB_SetInvisible;
-    gSprites[gBattleSpritesDataPtr->healthBoxesData[battlerLeft].shadowSpriteIdSecondary].callback = SpriteCB_SetInvisible;
+    HideBattlerShadowSprite(battlerLeft);
     if (IsDoubleBattle())
     {
         enum BattlerId battlerRight = GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT);
-        gSprites[gBattleSpritesDataPtr->healthBoxesData[battlerRight].shadowSpriteIdPrimary].callback = SpriteCB_SetInvisible;
-        gSprites[gBattleSpritesDataPtr->healthBoxesData[battlerRight].shadowSpriteIdSecondary].callback = SpriteCB_SetInvisible;
+        HideBattlerShadowSprite(battlerRight);
     }
     DestroyAnimVisualTask(taskId);
 }

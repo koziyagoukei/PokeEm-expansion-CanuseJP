@@ -1368,9 +1368,16 @@ void SetBattlerShadowSpriteCallback(enum BattlerId battler, enum Species species
 
 void HideBattlerShadowSprite(enum BattlerId battler)
 {
-    gSprites[gBattleSpritesDataPtr->healthBoxesData[battler].shadowSpriteIdPrimary].callback = SpriteCB_SetInvisible;
+    u8 spriteId = gBattleSpritesDataPtr->healthBoxesData[battler].shadowSpriteIdPrimary;
+
+    if (spriteId < MAX_SPRITES && gSprites[spriteId].inUse)
+        gSprites[spriteId].callback = SpriteCB_SetInvisible;
     if (B_ENEMY_MON_SHADOW_STYLE >= GEN_4 && P_GBA_STYLE_SPECIES_GFX == FALSE)
-        gSprites[gBattleSpritesDataPtr->healthBoxesData[battler].shadowSpriteIdSecondary].callback = SpriteCB_SetInvisible;
+    {
+        spriteId = gBattleSpritesDataPtr->healthBoxesData[battler].shadowSpriteIdSecondary;
+        if (spriteId < MAX_SPRITES && gSprites[spriteId].inUse)
+            gSprites[spriteId].callback = SpriteCB_SetInvisible;
+    }
 }
 
 // Color the background tiles surrounding the action selection and move windows
