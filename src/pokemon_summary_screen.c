@@ -1259,7 +1259,7 @@ void ShowPokemonSummaryScreen(u8 mode, void *mons, u8 monIndex, u8 maxMonIndex, 
         CreateMonSpritesGfxManager(MON_SPR_GFX_MANAGER_A, MON_SPR_GFX_MODE_NORMAL);
 
     if (mode != SUMMARY_MODE_SELECT_MOVE && mode != SUMMARY_MODE_RELEARNER_BATTLE && mode != SUMMARY_MODE_RELEARNER_CONTEST)
-        gMoveRelearnerState = MOVE_RELEARNER_LEVEL_UP_MOVES;
+        gMoveRelearnerState = MOVE_RELEARNER_FRONTIER_FULL_MOVES;
 
     gMain.state = 0;
     SetMainCallback2(CB2_InitSummaryScreen);
@@ -2036,7 +2036,7 @@ static void Task_ChangeSummaryMon(u8 taskId)
 
         if (P_SUMMARY_SCREEN_MOVE_RELEARNER && IS_MOVE_PAGE(sMonSummaryScreen->currPageIndex))
         {
-            gMoveRelearnerState = MOVE_RELEARNER_LEVEL_UP_MOVES;
+            gMoveRelearnerState = MOVE_RELEARNER_FRONTIER_FULL_MOVES;
             UpdateMoveRelearnerState();
         }
         break;
