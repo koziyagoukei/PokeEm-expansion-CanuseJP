@@ -982,8 +982,7 @@ static void SaveSelectedParty(void)
         u16 monId = gSaveBlock2Ptr->frontier.selectedPartyMons[i] - 1;
         if (monId < PARTY_SIZE)
         {
-            RestoreTemporaryFrontierLevel50BeforeSave(&gParties[B_TRAINER_PLAYER][i], monId);
-            SavePlayerPartyMon(gSaveBlock2Ptr->frontier.selectedPartyMons[i] - 1, &gParties[B_TRAINER_PLAYER][i]);
+            SaveFrontierPlayerPartyMon(monId, &gParties[B_TRAINER_PLAYER][i]);
         }
     }
 }
@@ -1023,28 +1022,32 @@ static void ApplyTemporaryFrontierLevel50ToPlayerParty(void)
     }
 }
 
-void RestoreTemporaryFrontierLevel50BeforeSave(struct Pokemon *mon, u16 partyIndex)
+void SaveFrontierPlayerPartyMon(u16 partyIndex, const struct Pokemon *mon)
 {
+    struct Pokemon copy;
     struct Pokemon *savedMon;
     enum Species species;
     u32 exp;
 
-    if (!ShouldTemporarilyScaleFrontierMonsToLevel50() || partyIndex >= PARTY_SIZE)
+    if (partyIndex >= PARTY_SIZE)
         return;
 
+    copy = *mon;
     savedMon = GetSavedPlayerPartyMon(partyIndex);
     species = GetMonData(savedMon, MON_DATA_SPECIES);
-    if (species == SPECIES_NONE
-        || species == SPECIES_EGG
-        || species != GetMonData(mon, MON_DATA_SPECIES)
-        || GetMonData(savedMon, MON_DATA_LEVEL) <= FRONTIER_MAX_LEVEL_50)
+    if (ShouldTemporarilyScaleFrontierMonsToLevel50()
+        && species != SPECIES_NONE
+        && species != SPECIES_EGG
+        && species == GetMonData(&copy, MON_DATA_SPECIES)
+        && GetMonData(savedMon, MON_DATA_LEVEL) > FRONTIER_MAX_LEVEL_50)
     {
-        return;
+        // Restore only the saved copy; live challenge mons must stay at level 50.
+        exp = GetMonData(savedMon, MON_DATA_EXP);
+        SetMonData(&copy, MON_DATA_EXP, &exp);
+        CalculateMonStats(&copy);
     }
 
-    exp = GetMonData(savedMon, MON_DATA_EXP);
-    SetMonData(mon, MON_DATA_EXP, &exp);
-    CalculateMonStats(mon);
+    SavePlayerPartyMon(partyIndex, &copy);
 }
 
 static void ShowFacilityResultsWindow(void)
@@ -2369,8 +2372,7 @@ static void ResetSketchedMoves(void)
                 if (k == MAX_MON_MOVES)
                     SetMonMoveSlot(&gParties[B_TRAINER_PLAYER][i], MOVE_SKETCH, j);
             }
-            RestoreTemporaryFrontierLevel50BeforeSave(&gParties[B_TRAINER_PLAYER][i], monId);
-            SavePlayerPartyMon(gSaveBlock2Ptr->frontier.selectedPartyMons[i] - 1, &gParties[B_TRAINER_PLAYER][i]);
+            SaveFrontierPlayerPartyMon(monId, &gParties[B_TRAINER_PLAYER][i]);
         }
     }
 }

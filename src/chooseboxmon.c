@@ -36,6 +36,11 @@ struct PcMonSelection
 
 static EWRAM_DATA u8 sSelectionType = 0;
 
+bool32 IsMoveRelearnerMonSelection(void)
+{
+    return sSelectionType == SELECT_PC_MON_MOVE_RELEARNER;
+}
+
 // All these filter functions return 0 when a mon is a valid or a number corresponding to the type of error
 static u32 ChooseBoxMon_NoFilter(struct BoxPokemon *boxmon);
 static u32 ChooseBoxMon_IsNotEgg(struct BoxPokemon *boxmon);

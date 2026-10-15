@@ -49,7 +49,7 @@ void GetFrontierTrainerName(u8 *dst, u16 trainerId);
 u16 GetRandomFrontierMonFromSet(u16 trainerId);
 u16 GetRandomFrontierMonFromFullPool(const u16 *selectedMonIds, u8 selectedCount, const u16 *excludedMonIds, u8 excludedMonIdCount, const enum Species *excludedSpecies, u8 excludedSpeciesCount);
 u16 GetRandomFrontierMonFromFullPoolWithFilter(const u16 *selectedMonIds, u8 selectedCount, const u16 *excludedMonIds, u8 excludedMonIdCount, const enum Species *excludedSpecies, u8 excludedSpeciesCount, u8 filter);
-void RestoreTemporaryFrontierLevel50BeforeSave(struct Pokemon *mon, u16 partyIndex);
+void SaveFrontierPlayerPartyMon(u16 partyIndex, const struct Pokemon *mon);
 void FrontierSpeechToString(const u16 *words);
 u8 SetFacilityPtrsGetLevel(void);
 u8 GetFrontierEnemyMonLevel(enum FrontierLevelMode lvlMode);

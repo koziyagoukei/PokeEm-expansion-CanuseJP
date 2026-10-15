@@ -5636,8 +5636,7 @@ static void ResetSketchedMoves(void)
                 SetMonMoveSlot(&gParties[B_TRAINER_PLAYER][i], MOVE_SKETCH, moveSlot);
         }
 
-        RestoreTemporaryFrontierLevel50BeforeSave(&gParties[B_TRAINER_PLAYER][i], playerMonId);
-        SavePlayerPartyMon(playerMonId, &gParties[B_TRAINER_PLAYER][i]);
+        SaveFrontierPlayerPartyMon(playerMonId, &gParties[B_TRAINER_PLAYER][i]);
     }
 }
 
