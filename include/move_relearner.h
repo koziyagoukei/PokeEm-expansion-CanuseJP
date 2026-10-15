@@ -4,6 +4,8 @@
 #include "constants/move_relearner.h"
 
 void TeachMoveRelearnerMove(void);
+void MoveRelearner_SaveMonSelectionContext(void);
+void MoveRelearner_RestoreMonSelectionContext(void);
 void MoveRelearnerShowHideHearts(s32 move);
 void MoveRelearnerShowHideCategoryIcon(s32);
 void CB2_InitLearnMove(void);

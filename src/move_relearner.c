@@ -83,6 +83,13 @@ static EWRAM_DATA struct {
 EWRAM_DATA enum MoveRelearnerStates gMoveRelearnerState = MOVE_RELEARNER_LEVEL_UP_MOVES;
 EWRAM_DATA enum RelearnMode gRelearnMode = RELEARN_MODE_NONE;
 
+static EWRAM_DATA struct
+{
+    enum MoveRelearnerStates state;
+    enum RelearnMode mode;
+    bool8 active;
+} sMonSelectionContext = {0};
+
 static const u16 sFrontierUniversalRelearnerMoves[] =
 {
     MOVE_TERA_BLAST,
@@ -358,6 +365,26 @@ static const struct RelearnType sRelearnTypes[MOVE_RELEARNER_COUNT] =
         .moveText = MoveRelearner_Text_FrontierFullMoveLWR
     },
 };
+
+void MoveRelearner_SaveMonSelectionContext(void)
+{
+    sMonSelectionContext.active = (u32)gMoveRelearnerState < MOVE_RELEARNER_COUNT;
+    if (!sMonSelectionContext.active)
+        return;
+    sMonSelectionContext.state = gMoveRelearnerState;
+    sMonSelectionContext.mode = gRelearnMode;
+}
+
+void MoveRelearner_RestoreMonSelectionContext(void)
+{
+    if (!sMonSelectionContext.active)
+        return;
+    sMonSelectionContext.active = FALSE;
+    gMoveRelearnerState = sMonSelectionContext.state;
+    gRelearnMode = sMonSelectionContext.mode;
+    // Summary pages reuse STR_VAR_3 for nature and stats; regenerate the NPC's label.
+    StringCopy(gStringVar3, sRelearnTypes[gMoveRelearnerState].moveText);
+}
 
 static void VBlankCB_MoveRelearner(void)
 {

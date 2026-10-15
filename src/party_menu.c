@@ -3218,6 +3218,9 @@ static void CursorCb_Summary(u8 taskId)
 
 static void CB2_ShowPokemonSummaryScreen(void)
 {
+    if (gPartyMenu.menuType == PARTY_MENU_TYPE_MOVE_RELEARNER)
+        MoveRelearner_SaveMonSelectionContext();
+
     if (gPartyMenu.menuType == PARTY_MENU_TYPE_IN_BATTLE)
     {
         if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
@@ -3250,6 +3253,7 @@ static void CB2_ShowPokemonSummaryScreen(void)
 
 void CB2_ReturnToPartyMenuFromSummaryScreen(void)
 {
+    MoveRelearner_RestoreMonSelectionContext();
     if (gBattleTypeFlags & BATTLE_TYPE_MULTI && !AreMultiPartiesFullTeams() && gPartyMenu.menuType == PARTY_MENU_TYPE_IN_BATTLE)
         RestoreMultiPartyFromSummaryScreen();
     gPaletteFade.bufferTransferDisabled = TRUE;

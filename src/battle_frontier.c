@@ -20,6 +20,7 @@
 #include "constants/abilities.h"
 #include "constants/battle_frontier.h"
 #include "constants/battle_frontier_mons.h"
+#include "constants/battle_pike.h"
 #include "constants/flags.h"
 
 static void FillTrainerParty(u16 trainerId, enum BattleTrainer trainer, u8 monCount);
@@ -29,6 +30,8 @@ static void ClearFacilityOpponentGimmickSources(void);
 static void MarkFrontierOpponentPartyGimmicksForTrainer(enum BattleTrainer trainer);
 static void SetFacilityMonGimmickAvailability(const struct TrainerMon *fmon, struct Pokemon *mon);
 static void MarkFacilityMonGimmicksForOpponent(const struct TrainerMon *fmon, struct Pokemon *dst);
+static void ApplyFrontierOpponentIVPenalty(void);
+static void RestoreFactoryOpponentIVs(void);
 
 // EWRAM vars.
 EWRAM_DATA const struct BattleFrontierTrainer *gFacilityTrainers = NULL;
@@ -38,10 +41,116 @@ EWRAM_DATA const struct TrainerMon *gFacilityTrainerMons = NULL;
 COMMON_DATA u16 gFrontierTempParty[MAX_FRONTIER_PARTY_SIZE] = {0};
 
 EWRAM_DATA static const struct TrainerMon *sFacilityOpponentMonSources[MAX_BATTLE_TRAINERS][PARTY_SIZE] = {0};
+static EWRAM_DATA u32 sFactoryOpponentOriginalIVs[FRONTIER_PARTY_SIZE] = {0};
+static EWRAM_DATA bool8 sRestoreFactoryOpponentIVs = FALSE;
+
+static u8 GetFrontierOpponentIVPenalty(u32 facility, u32 streak)
+{
+    u32 round;
+
+    if (facility >= NUM_FRONTIER_FACILITIES)
+        return 0;
+    if (facility == FRONTIER_FACILITY_DOME)
+        round = streak;
+    else if (facility == FRONTIER_FACILITY_PIKE)
+        round = streak / NUM_PIKE_ROOMS;
+    else
+        round = streak / FRONTIER_STAGES_PER_CHALLENGE;
+
+    if (round < 2)
+        return 30;
+    if (round < 4)
+        return 20;
+    if (round < 6)
+        return 10;
+    return 0;
+}
+
+static void ApplyFrontierOpponentIVPenalty(void)
+{
+    static const enum BattleTrainer trainers[] = {B_TRAINER_OPPONENT_A, B_TRAINER_OPPONENT_B};
+    u32 facility = VarGet(VAR_FRONTIER_FACILITY);
+    u32 mode = VarGet(VAR_FRONTIER_BATTLE_MODE);
+    u32 penalty, trainer, slot, stat;
+
+    sRestoreFactoryOpponentIVs = FALSE;
+    if (!(gBattleTypeFlags & BATTLE_TYPE_FRONTIER)
+        || !(gBattleTypeFlags & BATTLE_TYPE_TRAINER)
+        || (gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED | BATTLE_TYPE_RECORDED_LINK))
+        || facility >= NUM_FRONTIER_FACILITIES
+        || mode >= FRONTIER_MODE_LINK_MULTIS
+        || (facility != FRONTIER_FACILITY_TOWER && mode > FRONTIER_MODE_DOUBLES)
+        || gSaveBlock2Ptr->frontier.lvlMode >= FRONTIER_LVL_MODE_COUNT)
+        return;
+
+    penalty = GetFrontierOpponentIVPenalty(facility, GetCurrentFacilityWinStreak());
+    if (penalty == 0)
+        return;
+
+    // Apply once, after all set-specific IV overrides and party reconstruction.
+    for (trainer = 0; trainer < ARRAY_COUNT(trainers); trainer++)
+    {
+        for (slot = 0; slot < PARTY_SIZE; slot++)
+        {
+            struct Pokemon *mon = &gParties[trainers[trainer]][slot];
+            if (GetMonData(mon, MON_DATA_SPECIES_OR_EGG) == SPECIES_NONE
+                || GetMonData(mon, MON_DATA_IS_EGG))
+                continue;
+
+            if (facility == FRONTIER_FACILITY_FACTORY && trainers[trainer] == B_TRAINER_OPPONENT_A && slot < FRONTIER_PARTY_SIZE)
+                sFactoryOpponentOriginalIVs[slot] = GetMonData(mon, MON_DATA_IVS);
+            for (stat = 0; stat < NUM_STATS; stat++)
+            {
+                u32 iv = GetMonData(mon, MON_DATA_HP_IV + stat);
+                iv = iv > penalty ? iv - penalty : 0;
+                SetMonData(mon, MON_DATA_HP_IV + stat, &iv);
+            }
+            CalculateMonStats(mon);
+        }
+    }
+    sRestoreFactoryOpponentIVs = facility == FRONTIER_FACILITY_FACTORY;
+}
+
+static void RestoreFactoryOpponentIVs(void)
+{
+    u32 slot;
+    if (!sRestoreFactoryOpponentIVs)
+        return;
+    sRestoreFactoryOpponentIVs = FALSE;
+    // Rental records are populated after battle; never persist the opponent-only handicap.
+    for (slot = 0; slot < FRONTIER_PARTY_SIZE; slot++)
+    {
+        struct Pokemon *mon = &gParties[B_TRAINER_OPPONENT_A][slot];
+        if (GetMonData(mon, MON_DATA_SPECIES_OR_EGG) == SPECIES_NONE)
+            continue;
+        SetMonData(mon, MON_DATA_IVS, &sFactoryOpponentOriginalIVs[slot]);
+        CalculateMonStats(mon);
+    }
+    memset(sFactoryOpponentOriginalIVs, 0, sizeof(sFactoryOpponentOriginalIVs));
+}
+
+#if TESTING
+u8 Test_GetFrontierOpponentIVPenalty(u32 facility, u32 streak)
+{
+    return GetFrontierOpponentIVPenalty(facility, streak);
+}
+
+void Test_ApplyFrontierOpponentIVPenalty(void)
+{
+    ApplyFrontierOpponentIVPenalty();
+}
+
+void Test_RestoreFactoryOpponentIVs(void)
+{
+    RestoreFactoryOpponentIVs();
+}
+#endif
 
 static void HandleFacilityTrainerBattleEnd(void)
 {
     u8 facility = gBattleScripting.specialTrainerBattleType;
+    if (facility == FACILITY_BATTLE_FACTORY)
+        RestoreFactoryOpponentIVs();
     switch (facility)
     {
     case FACILITY_BATTLE_TOWER:
@@ -179,6 +288,9 @@ static void DoFacilityTrainerBattleInternal(u8 facility)
     default:
         break;
     }
+
+    if (facility <= FACILITY_BATTLE_PYRAMID)
+        ApplyFrontierOpponentIVPenalty();
 }
 
 void DoFacilityTrainerBattle(struct ScriptContext *ctx)

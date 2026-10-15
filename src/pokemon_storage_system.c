@@ -19,6 +19,7 @@
 #include "mail.h"
 #include "main.h"
 #include "menu.h"
+#include "move_relearner.h"
 #include "mon_markings.h"
 #include "naming_screen.h"
 #include "overworld.h"
@@ -1997,6 +1998,7 @@ static void EnterPokeStorage(u8 boxOption)
 
 static void CB2_ReturnToPokeStorage(void)
 {
+    MoveRelearner_RestoreMonSelectionContext();
     ResetTasks();
     sStorage = Alloc(sizeof(*sStorage));
     if (sStorage == NULL)
@@ -3785,6 +3787,8 @@ static void Task_ChangeScreen(u8 taskId)
         monIndex = sStorage->summaryStartPos;
         maxMonIndex = sStorage->summaryMaxPos;
         mode = sStorage->summaryScreenMode;
+        if (sStorage->boxOption == OPTION_SELECT_MON && IsMoveRelearnerMonSelection())
+            MoveRelearner_SaveMonSelectionContext();
         FreePokeStorageData();
         ShowPokemonSummaryScreen(mode, boxMons, monIndex, maxMonIndex, CB2_ReturnToPokeStorage);
         break;

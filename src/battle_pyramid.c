@@ -1216,7 +1216,9 @@ static void RestorePyramidPlayerParty(void)
 
     for (i = 0; i < FRONTIER_PARTY_SIZE; i++)
     {
-        int partyIndex = gSaveBlock2Ptr->frontier.selectedPartyMons[i] - 1;
+        u16 partyIndex = gSaveBlock2Ptr->frontier.selectedPartyMons[i] - 1;
+        if (partyIndex >= PARTY_SIZE)
+            continue;
         for (j = 0; j < FRONTIER_PARTY_SIZE; j++)
         {
             if (GetMonData(GetSavedPlayerPartyMon(partyIndex), MON_DATA_SPECIES) == GetMonData(&gParties[B_TRAINER_PLAYER][j], MON_DATA_SPECIES))
@@ -1231,8 +1233,7 @@ static void RestorePyramidPlayerParty(void)
                     if (l == MAX_MON_MOVES)
                         SetMonMoveSlot(&gParties[B_TRAINER_PLAYER][j], MOVE_SKETCH, k);
                 }
-                RestoreTemporaryFrontierLevel50BeforeSave(&gParties[B_TRAINER_PLAYER][j], partyIndex);
-                SavePlayerPartyMon(partyIndex, &gParties[B_TRAINER_PLAYER][j]);
+                SaveFrontierPlayerPartyMon(partyIndex, &gParties[B_TRAINER_PLAYER][j]);
                 gSelectedOrderFromParty[j] = partyIndex + 1;
                 break;
             }

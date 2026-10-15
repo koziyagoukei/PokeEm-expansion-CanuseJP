@@ -2,7 +2,7 @@
 #define GUARD_CONFIG_DEBUG_H
 
 // フィールドのデバッグ
-#define DEBUG_OVERWORLD_MENU            FALSE // フラグ・変数の変更やポケモンの入手などを行うデバッグメニューを有効にする。既定ではフィールドでRを押しながらSTARTを押して開く。
+#define DEBUG_OVERWORLD_MENU            TRUE // フラグ・変数の変更やポケモンの入手などを行うデバッグメニューを有効にする。既定ではフィールドでRを押しながらSTARTを押して開く。
 #define DEBUG_OVERWORLD_HELD_KEYS       (R_BUTTON)          // デバッグメニューを開く際に押し続ける必要があるボタン。
 #define DEBUG_OVERWORLD_TRIGGER_EVENT   pressedStartButton  // DEBUG_OVERWORLD_HELD_KEYSのボタンを押している間に、メニューを開くきっかけとなるイベント。
 #define DEBUG_OVERWORLD_IN_MENU         FALSE               // ボタンの組み合わせによる起動を、STARTメニュー内の項目（図鑑の上）に置き換える。
