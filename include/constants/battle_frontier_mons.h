@@ -978,9 +978,9 @@
 #define FRONTIER_MON_PYROAR_1                         972
 #define FRONTIER_MON_PYROAR_2                         973
 #define FRONTIER_MON_PYROAR_3                         974
-#define FRONTIER_MON_FLABEBE_RED_1                    975
-#define FRONTIER_MON_FLABEBE_RED_2                    976
-#define FRONTIER_MON_FLABEBE_RED_3                    977
+#define FRONTIER_MON_MEGANIUM_1                       975
+#define FRONTIER_MON_MEGANIUM_2                       976
+#define FRONTIER_MON_MEGANIUM_3                       977
 #define FRONTIER_MON_FLOETTE_RED_1                    978
 #define FRONTIER_MON_FLOETTE_RED_2                    979
 #define FRONTIER_MON_FLOETTE_RED_3                    980

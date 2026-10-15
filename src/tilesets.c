@@ -1,4 +1,5 @@
 #include "global.h"
+#include "local_room.h"
 #include "tilesets.h"
 #include "tileset_anims.h"
 

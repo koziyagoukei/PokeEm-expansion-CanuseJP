@@ -419,7 +419,8 @@ const u8 gText_Var3Var1SlashVar2[] = _("{JPN}{STR_VAR_3}{STR_VAR_1}/{STR_VAR_2}"
 const u8 gText_Decorate[] = _("{JPN}グッズを おく");
 const u8 gText_PutAway[] = _("{JPN}グッズを もどす");
 const u8 gText_Toss2[] = _("{JPN}グッズを すてる");
-const u8 gText_Color161Shadow161[] = _("{JPN}{COLOR 161}{SHADOW 161}");
+// Decoration menus replace the color arguments at byte offsets 2 and 5.
+const u8 gText_Color161Shadow161[] = _("{COLOR 161}{SHADOW 161}{JPN}");
 const u8 gText_PutOutSelectedDecorItem[] = _("{JPN}えらんだ グッズを へやに おきます!");
 const u8 gText_StoreChosenDecorInPC[] = _("{JPN}えらんだ グッズを パソコンに もどします!");
 const u8 gText_ThrowAwayUnwantedDecors[] = _("{JPN}いらなくなった グッズを すてます!");

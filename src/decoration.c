@@ -16,6 +16,7 @@
 #include "item_icon.h"
 #include "item_menu.h"
 #include "list_menu.h"
+#include "local_room.h"
 #include "main.h"
 #include "menu.h"
 #include "menu_helpers.h"
@@ -92,7 +93,7 @@ struct DecorationPCContext
     u8 *items;
     u8 *pos;
     u8 size;
-    u8 isPlayerRoom;
+    enum DecorationContextType type;
 };
 
 enum Windows
@@ -109,6 +110,7 @@ EWRAM_DATA static u8 sDecorationActionsCursorPos = 0;
 EWRAM_DATA static u8 sNumOwnedDecorationsInCurCategory = 0;
 EWRAM_DATA static u8 sSecretBaseItemsIndicesBuffer[DECOR_MAX_SECRET_BASE] = {};
 EWRAM_DATA static u8 sPlayerRoomItemsIndicesBuffer[DECOR_MAX_PLAYERS_HOUSE] = {};
+EWRAM_DATA static u8 sLocalRoomItemsIndicesBuffer[LOCAL_ROOM_DECOR_COUNT] = {};
 EWRAM_DATA static u16 sDecorationsCursorPos = 0;
 EWRAM_DATA static u16 sDecorationsScrollOffset = 0;
 EWRAM_DATA u8 gCurDecorationIndex = 0;
@@ -153,6 +155,7 @@ static void PrintDecorationItemDescription(s32 itemIndex);
 static void RemoveDecorationItemsOtherWindows(void);
 static bool8 IsDecorationIndexInSecretBase(u8 idx);
 static bool8 IsDecorationIndexInPlayersRoom(u8 idx);
+static bool8 IsDecorationIndexInLocalRoom(u8 idx);
 static void IdentifyOwnedDecorationsCurrentlyInUse(u8 taskId);
 static void InitDecorationItemsWindow(u8 taskId);
 static void ShowDecorationCategorySummaryWindow(u8 category);
@@ -595,16 +598,24 @@ void InitDecorationContextItems(void)
     if (sCurDecorationCategory < DECORCAT_COUNT)
         gCurDecorationItems = gDecorationInventories[sCurDecorationCategory].items;
 
-    if (sDecorationContext.isPlayerRoom == FALSE)
+    switch (sDecorationContext.type)
     {
+    case DECOR_CONTEXT_SECRET_BASE:
         sDecorationContext.items = gSaveBlock1Ptr->secretBases[0].decorations;
         sDecorationContext.pos = gSaveBlock1Ptr->secretBases[0].decorationPositions;
-    }
-
-    if (sDecorationContext.isPlayerRoom == TRUE)
-    {
+        sDecorationContext.size = DECOR_MAX_SECRET_BASE;
+        break;
+    case DECOR_CONTEXT_PLAYER_ROOM:
         sDecorationContext.items = gSaveBlock1Ptr->playerRoomDecorations;
         sDecorationContext.pos = gSaveBlock1Ptr->playerRoomDecorationPositions;
+        sDecorationContext.size = DECOR_MAX_PLAYERS_HOUSE;
+        break;
+    case DECOR_CONTEXT_LOCAL_ROOM:
+        LocalRoom_EnsureSaveData();
+        sDecorationContext.items = gSaveBlock3Ptr->localRoom.decorations;
+        sDecorationContext.pos = gSaveBlock3Ptr->localRoom.decorationPositions;
+        sDecorationContext.size = LOCAL_ROOM_DECOR_COUNT;
+        break;
     }
 }
 
@@ -658,21 +669,26 @@ static void InitDecorationActionsWindow(void)
 
 void DoSecretBaseDecorationMenu(u8 taskId)
 {
+    sDecorationContext.type = DECOR_CONTEXT_SECRET_BASE;
+    InitDecorationContextItems();
     InitDecorationActionsWindow();
-    sDecorationContext.items = gSaveBlock1Ptr->secretBases[0].decorations;
-    sDecorationContext.pos = gSaveBlock1Ptr->secretBases[0].decorationPositions;
-    sDecorationContext.size = DECOR_MAX_SECRET_BASE;
-    sDecorationContext.isPlayerRoom = FALSE;
     gTasks[taskId].func = HandleDecorationActionsMenuInput;
 }
 
 void DoPlayerRoomDecorationMenu(u8 taskId)
 {
+    sDecorationContext.type = DECOR_CONTEXT_PLAYER_ROOM;
+    InitDecorationContextItems();
     InitDecorationActionsWindow();
-    sDecorationContext.items = gSaveBlock1Ptr->playerRoomDecorations;
-    sDecorationContext.pos = gSaveBlock1Ptr->playerRoomDecorationPositions;
-    sDecorationContext.size = DECOR_MAX_PLAYERS_HOUSE;
-    sDecorationContext.isPlayerRoom = TRUE;
+    gTasks[taskId].func = HandleDecorationActionsMenuInput;
+}
+
+void DoLocalRoomDecorationMenu(u8 taskId)
+{
+    LocalRoom_BeginDecorating();
+    sDecorationContext.type = DECOR_CONTEXT_LOCAL_ROOM;
+    InitDecorationContextItems();
+    InitDecorationActionsWindow();
     gTasks[taskId].func = HandleDecorationActionsMenuInput;
 }
 
@@ -756,14 +772,20 @@ static void DecorationMenuAction_Toss(u8 taskId)
 static void DecorationMenuAction_Cancel(u8 taskId)
 {
     RemoveDecorationWindow(WINDOW_MAIN_MENU);
-    if (!sDecorationContext.isPlayerRoom)
+    if (sDecorationContext.type == DECOR_CONTEXT_SECRET_BASE)
     {
         ScriptContext_SetupScript(SecretBase_EventScript_PCCancel);
         DestroyTask(taskId);
     }
-    else
+    else if (sDecorationContext.type == DECOR_CONTEXT_PLAYER_ROOM)
     {
         ReshowPlayerPC(taskId);
+    }
+    else
+    {
+        LocalRoom_EndDecorating();
+        ScriptContext_SetupScript(LocalRoom_EventScript_PCMainMenu);
+        DestroyTask(taskId);
     }
 }
 
@@ -802,7 +824,7 @@ static void PrintDecorationCategoryMenuItems(u8 taskId)
     u8 i;
     s16 *data = gTasks[taskId].data;
     u8 windowId = sDecorMenuWindowIds[WINDOW_DECORATION_CATEGORIES];
-    bool8 isPlayerRoom = sDecorationContext.isPlayerRoom;
+    bool8 isPlayerRoom = sDecorationContext.type == DECOR_CONTEXT_PLAYER_ROOM;
     bool8 shouldDisable = FALSE;
     if (isPlayerRoom == TRUE && tDecorationMenuCommand == DECOR_MENU_PLACE)
         shouldDisable = TRUE;
@@ -964,7 +986,7 @@ static void PrintDecorationItemMenuItems(u8 taskId)
     u16 i;
 
     data = gTasks[taskId].data;
-    if ((sCurDecorationCategory < DECORCAT_DOLL || sCurDecorationCategory > DECORCAT_CUSHION) && sDecorationContext.isPlayerRoom == TRUE && tDecorationMenuCommand == DECOR_MENU_PLACE)
+    if ((sCurDecorationCategory < DECORCAT_DOLL || sCurDecorationCategory > DECORCAT_CUSHION) && sDecorationContext.type == DECOR_CONTEXT_PLAYER_ROOM && tDecorationMenuCommand == DECOR_MENU_PLACE)
         ColorMenuItemString(gStringVar1, TRUE);
     else
         ColorMenuItemString(gStringVar1, FALSE);
@@ -1007,6 +1029,8 @@ static void DecorationItemsMenu_PrintDecorationInUse(u8 windowId, u32 itemIndex,
         if (IsDecorationIndexInSecretBase(itemIndex + 1) == TRUE)
             BlitMenuInfoIcon(windowId, MENU_INFO_ICON_BALL_RED, 92, y + 2);
         else if (IsDecorationIndexInPlayersRoom(itemIndex + 1) == TRUE)
+            BlitMenuInfoIcon(windowId, MENU_INFO_ICON_BALL_BLUE, 92, y + 2);
+        else if (IsDecorationIndexInLocalRoom(itemIndex + 1) == TRUE)
             BlitMenuInfoIcon(windowId, MENU_INFO_ICON_BALL_BLUE, 92, y + 2);
     }
 }
@@ -1153,6 +1177,8 @@ static void IdentifyOwnedDecorationsCurrentlyInUseInternal(u8 taskId)
     count = 0;
     memset(sSecretBaseItemsIndicesBuffer, 0, sizeof(sSecretBaseItemsIndicesBuffer));
     memset(sPlayerRoomItemsIndicesBuffer, 0, sizeof(sPlayerRoomItemsIndicesBuffer));
+    memset(sLocalRoomItemsIndicesBuffer, 0, sizeof(sLocalRoomItemsIndicesBuffer));
+    LocalRoom_EnsureSaveData();
 
     for (i = 0; i < ARRAY_COUNT(sSecretBaseItemsIndicesBuffer); i++)
     {
@@ -1196,6 +1222,35 @@ static void IdentifyOwnedDecorationsCurrentlyInUseInternal(u8 taskId)
             }
         }
     }
+
+    count = 0;
+    for (i = 0; i < ARRAY_COUNT(sLocalRoomItemsIndicesBuffer); i++)
+    {
+        u8 decor = gSaveBlock3Ptr->localRoom.decorations[i];
+        if (decor != DECOR_NONE)
+        {
+            for (j = 0; j < gDecorationInventories[sCurDecorationCategory].size; j++)
+            {
+                if (gCurDecorationItems[j] == decor
+                 && !IsDecorationIndexInSecretBase(j + 1)
+                 && !IsDecorationIndexInPlayersRoom(j + 1)
+                 && !IsDecorationIndexInLocalRoom(j + 1))
+                {
+                    sLocalRoomItemsIndicesBuffer[count++] = j + 1;
+                    break;
+                }
+            }
+        }
+    }
+}
+
+static bool8 IsDecorationIndexInLocalRoom(u8 idx)
+{
+    u8 i;
+    for (i = 0; i < ARRAY_COUNT(sLocalRoomItemsIndicesBuffer); i++)
+        if (sLocalRoomItemsIndicesBuffer[i] == idx)
+            return TRUE;
+    return FALSE;
 }
 
 static void IdentifyOwnedDecorationsCurrentlyInUse(u8 taskId)
@@ -1216,6 +1271,9 @@ bool8 IsSelectedDecorInThePC(void)
         {
             return FALSE;
         }
+        if (i < ARRAY_COUNT(sLocalRoomItemsIndicesBuffer)
+         && sLocalRoomItemsIndicesBuffer[i] == sDecorationsScrollOffset + sDecorationsCursorPos + 1)
+            return FALSE;
     }
 
     return TRUE;
@@ -1327,21 +1385,32 @@ void ShowDecorationOnMap(u16 mapX, u16 mapY, u16 decoration)
     ShowDecorationOnMap_(mapX, mapY, sDecorShapes[gDecorations[decoration].shape].width, sDecorShapes[gDecorations[decoration].shape].height , decoration);
 }
 
+bool8 GetDecorationDimensions(u16 decoration, u8 *width, u8 *height)
+{
+    if (decoration == DECOR_NONE || decoration > NUM_DECORATIONS)
+        return FALSE;
+    *width = sDecorShapes[gDecorations[decoration].shape].width;
+    *height = sDecorShapes[gDecorations[decoration].shape].height;
+    return TRUE;
+}
+
 void SetDecoration(void)
 {
     u8 i;
     u8 j;
 
-    for (i = 0; i < NUM_DECORATION_FLAGS; i++)
+    for (i = 0; i < (sDecorationContext.type == DECOR_CONTEXT_LOCAL_ROOM ? LOCAL_ROOM_DECOR_SPRITES : NUM_DECORATION_FLAGS); i++)
     {
         if (FlagGet(FLAG_DECORATION_1 + i) == TRUE)
         {
-            FlagClear(FLAG_DECORATION_1 + i);
             for (j = 0; j < gMapHeader.events->objectEventCount; j++)
             {
                 if (gMapHeader.events->objectEvents[j].flagId == FLAG_DECORATION_1 + i)
                     break;
             }
+            if (j == gMapHeader.events->objectEventCount)
+                continue;
+            FlagClear(FLAG_DECORATION_1 + i);
 
             VarSet(
                 VAR_OBJ_GFX_ID_0 + (gMapHeader.events->objectEvents[j].graphicsId - OBJ_EVENT_GFX_VAR_0),
@@ -1372,7 +1441,7 @@ static bool8 HasDecorationSpace(void)
 
 static void DecorationItemsMenuAction_AttemptPlace(u8 taskId)
 {
-    if (sDecorationContext.isPlayerRoom == TRUE && sCurDecorationCategory != DECORCAT_DOLL && sCurDecorationCategory != DECORCAT_CUSHION)
+    if (sDecorationContext.type == DECOR_CONTEXT_PLAYER_ROOM && sCurDecorationCategory != DECORCAT_DOLL && sCurDecorationCategory != DECORCAT_CUSHION)
     {
         StringExpandPlaceholders(gStringVar4, gText_CantPlaceInRoom);
         DisplayItemMessageOnField(taskId, gStringVar4, ReturnToDecorationItemsAfterInvalidSelection);
@@ -1388,7 +1457,7 @@ static void DecorationItemsMenuAction_AttemptPlace(u8 taskId)
         else
         {
             ConvertIntToDecimalStringN(gStringVar1, sDecorationContext.size, STR_CONV_MODE_RIGHT_ALIGN, 2);
-            if (sDecorationContext.isPlayerRoom == FALSE)
+            if (sDecorationContext.type == DECOR_CONTEXT_SECRET_BASE)
             {
                 StringExpandPlaceholders(gStringVar4, gText_NoMoreDecorations);
             }
@@ -1548,6 +1617,11 @@ static bool8 CanPlaceDecoration(u8 taskId, const struct Decoration *decoration)
     mapY = gTasks[taskId].tDecorHeight;
     mapX = gTasks[taskId].tDecorWidth;
 
+    if (sDecorationContext.type == DECOR_CONTEXT_LOCAL_ROOM
+     && !LocalRoom_IsPlacementAllowed(decoration->id,
+         gTasks[taskId].tCursorX - MAP_OFFSET, gTasks[taskId].tCursorY - MAP_OFFSET))
+        return FALSE;
+
     switch (decoration->permission)
     {
     case DECORPERM_SOLID_FLOOR:
@@ -1630,15 +1704,18 @@ static bool8 CanPlaceDecoration(u8 taskId, const struct Decoration *decoration)
         {
             curX = gTasks[taskId].tCursorX + j;
             behaviorAt = MapGridGetMetatileBehaviorAt(curX, curY);
-            if (decoration->shape == DECORSHAPE_1x2)
+            if (!(sDecorationContext.type == DECOR_CONTEXT_LOCAL_ROOM && LocalRoom_IsPlainFloor(curX, curY)))
             {
-                if (!MetatileBehavior_HoldsLargeDecoration(behaviorAt))
-                    return FALSE;
-            }
-            else if (!MetatileBehavior_HoldsSmallDecoration(behaviorAt))
-            {
-                if (!MetatileBehavior_HoldsLargeDecoration(behaviorAt))
-                    return FALSE;
+                if (decoration->shape == DECORSHAPE_1x2)
+                {
+                    if (!MetatileBehavior_HoldsLargeDecoration(behaviorAt))
+                        return FALSE;
+                }
+                else if (!MetatileBehavior_HoldsSmallDecoration(behaviorAt))
+                {
+                    if (!MetatileBehavior_HoldsLargeDecoration(behaviorAt))
+                        return FALSE;
+                }
             }
 
             if (GetObjectEventIdByPosition(curX, curY, 0) != OBJECT_EVENTS_COUNT)
@@ -1647,10 +1724,15 @@ static bool8 CanPlaceDecoration(u8 taskId, const struct Decoration *decoration)
         break;
     }
 
+    if (sDecorationContext.type == DECOR_CONTEXT_LOCAL_ROOM
+     && !LocalRoom_HasAccessPathAfterPlacement(decoration->id,
+         gTasks[taskId].tCursorX - MAP_OFFSET, gTasks[taskId].tCursorY - MAP_OFFSET))
+        return FALSE;
+
     // If sprite(like), check if there is an available object event slot for it
     if (decoration->permission == DECORPERM_SPRITE)
     {
-        for (i = 0; i < NUM_DECORATION_FLAGS; i++)
+        for (i = 0; i < (sDecorationContext.type == DECOR_CONTEXT_LOCAL_ROOM ? LOCAL_ROOM_DECOR_SPRITES : NUM_DECORATION_FLAGS); i++)
         {
             if (FlagGet(FLAG_DECORATION_1 + i) == TRUE)
                 return TRUE;
@@ -1659,6 +1741,27 @@ static bool8 CanPlaceDecoration(u8 taskId, const struct Decoration *decoration)
     }
     return TRUE;
 }
+
+#if TESTING
+bool8 Test_CanPlaceDecorationAt(enum DecorationContextType context, u16 decoration, s16 x, s16 y)
+{
+    struct DecorationPCContext savedContext = sDecorationContext;
+    u8 taskId = CreateTask(TaskDummy, 0);
+    bool8 result;
+
+    sDecorationContext.type = context;
+    gTasks[taskId].tCursorX = x + MAP_OFFSET;
+    gTasks[taskId].tCursorY = y + MAP_OFFSET;
+    gTasks[taskId].tInitialX = 1;
+    gTasks[taskId].tInitialY = 4;
+    gTasks[taskId].tDecorWidth = sDecorShapes[gDecorations[decoration].shape].width;
+    gTasks[taskId].tDecorHeight = sDecorShapes[gDecorations[decoration].shape].height;
+    result = CanPlaceDecoration(taskId, &gDecorations[decoration]);
+    sDecorationContext = savedContext;
+    DestroyTask(taskId);
+    return result;
+}
+#endif
 
 static void AttemptPlaceDecoration_(u8 taskId)
 {
@@ -1717,7 +1820,7 @@ static void PlaceDecoration_(u8 taskId)
         }
     }
 
-    if (!sDecorationContext.isPlayerRoom)
+    if (sDecorationContext.type == DECOR_CONTEXT_SECRET_BASE)
     {
         for (i = 0; i < DECOR_MAX_SECRET_BASE; i++)
         {
@@ -1728,7 +1831,7 @@ static void PlaceDecoration_(u8 taskId)
             }
         }
     }
-    else
+    else if (sDecorationContext.type == DECOR_CONTEXT_PLAYER_ROOM)
     {
         for (i = 0; i < DECOR_MAX_PLAYERS_HOUSE; i++)
         {
@@ -1738,6 +1841,18 @@ static void PlaceDecoration_(u8 taskId)
                 break;
             }
         }
+    }
+    else
+    {
+        for (i = 0; i < LOCAL_ROOM_DECOR_COUNT; i++)
+        {
+            if (sLocalRoomItemsIndicesBuffer[i] == 0)
+            {
+                sLocalRoomItemsIndicesBuffer[i] = gCurDecorationIndex + 1;
+                break;
+            }
+        }
+        LocalRoom_UpdateChecksum();
     }
 }
 
@@ -1792,7 +1907,8 @@ static void Task_InitDecorationItemsWindow(u8 taskId)
         tState++;
         break;
     case 1:
-        ScriptContext_SetupScript(SecretBase_EventScript_InitDecorations);
+        ScriptContext_SetupScript(sDecorationContext.type == DECOR_CONTEXT_LOCAL_ROOM
+            ? LocalRoom_EventScript_InitDecorations : SecretBase_EventScript_InitDecorations);
         tState++;
         break;
     case 2:
@@ -2208,6 +2324,8 @@ static void ClearDecorationContextIndex(u8 idx)
 {
     sDecorationContext.items[idx] = DECOR_NONE;
     sDecorationContext.pos[idx] = 0;
+    if (sDecorationContext.type == DECOR_CONTEXT_LOCAL_ROOM)
+        LocalRoom_UpdateChecksum();
 }
 
 // Input
@@ -2236,6 +2354,8 @@ void PutAwayDecorationIteration(void)
             if (gMapHeader.events->objectEvents[i].flagId == gSpecialVar_0x8005)
             {
                 gSpecialVar_0x8006 = gMapHeader.events->objectEvents[i].localId;
+                if (sDecorationContext.type == DECOR_CONTEXT_LOCAL_ROOM)
+                    FlagSet(gSpecialVar_0x8005);
                 break;
             }
         }
@@ -2298,7 +2418,8 @@ static void Task_PutAwayDecoration(u8 taskId)
         if (!gPaletteFade.active)
         {
             DrawWholeMapView();
-            ScriptContext_SetupScript(SecretBase_EventScript_PutAwayDecoration);
+            ScriptContext_SetupScript(sDecorationContext.type == DECOR_CONTEXT_LOCAL_ROOM
+                ? LocalRoom_EventScript_PutAwayDecoration : SecretBase_EventScript_PutAwayDecoration);
             ClearDialogWindowAndFrame(0, TRUE);
             gTasks[taskId].tState = 2;
         }

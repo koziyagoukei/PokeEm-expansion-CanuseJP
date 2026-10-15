@@ -666,3 +666,15 @@ gSpecials::
 	def_special Special_TeishokuyaHasGoldSymbol
 	def_special Special_TeishokuyaGetShinyMealStatus
 	def_special Special_TeishokuyaPlayShinyMealScene, waitstate=1
+	def_special LocalRoom_PrepareMap
+	def_special LocalRoom_LoadDecorations
+	def_special LocalRoom_InitObjects
+	def_special LocalRoom_Resume
+	def_special LocalRoom_ShowDecorationMenu
+	def_special LocalRoom_SetFloorStyle
+	def_special LocalRoom_SetWallStyle
+	def_special LocalRoom_SetRoamerCount
+	def_special LocalRoom_ClearDecorations
+	def_special LocalRoom_BufferMonMessage
+	def_special VillaShop_OpenCatalog, waitstate=1
+	def_special VillaShop_Purchase

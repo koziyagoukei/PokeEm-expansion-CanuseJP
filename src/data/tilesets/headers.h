@@ -28,6 +28,17 @@ const struct Tileset gTileset_SecretBaseRedCave =
 const struct Tileset *const gTilesetPointer_SecretBase = &gTileset_SecretBase;
 const struct Tileset *const gTilesetPointer_SecretBaseRedCave = &gTileset_SecretBaseRedCave;
 
+const struct Tileset gTileset_LocalRoom =
+{
+    .isCompressed = FALSE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_LocalRoom,
+    .palettes = gTilesetPalettes_SecretBaseRedCave,
+    .metatiles = gMetatiles_LocalRoom,
+    .metatileAttributes = gMetatileAttributes_LocalRoom,
+    .callback = LocalRoom_ApplyStyle,
+};
+
 #if !IS_FRLG
 
 const struct Tileset gTileset_General =

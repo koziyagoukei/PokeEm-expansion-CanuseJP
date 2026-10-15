@@ -2,6 +2,7 @@
 #define GUARD_SECRET_BASE_H
 
 void HideSecretBaseDecorationSprites(void);
+void InitSecretBaseDecorationSprites(void);
 void CopyCurSecretBaseOwnerName_StrVar1(void);
 void ClearJapaneseSecretBases(struct SecretBase *bases);
 void SetPlayerSecretBaseParty(void);

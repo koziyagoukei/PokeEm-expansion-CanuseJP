@@ -825,6 +825,41 @@ static const struct MenuAction MultichoiceList_PartyRoamerPokeblockFlavor[] =
     {COMPOUND_STRING("{JPN}すっぱい")},
 };
 
+static const struct MenuAction sMultichoiceList_LocalRoomPC[] =
+{
+    {COMPOUND_STRING("{JPN}もようがえ")},
+    {COMPOUND_STRING("{JPN}ゆかを かえる")},
+    {COMPOUND_STRING("{JPN}かべを かえる")},
+    {COMPOUND_STRING("{JPN}ポケモンを はなす")},
+    {COMPOUND_STRING("{JPN}ぜんぶ かたづける")},
+    {gText_Exit},
+};
+
+static const struct MenuAction sMultichoiceList_LocalRoomFloorStyle[] =
+{
+    {COMPOUND_STRING("{JPN}きの ゆか")},
+    {COMPOUND_STRING("{JPN}あかるい きの ゆか")},
+    {COMPOUND_STRING("{JPN}タイルの ゆか")},
+    {gText_Exit},
+};
+
+static const struct MenuAction sMultichoiceList_LocalRoomWallStyle[] =
+{
+    {COMPOUND_STRING("{JPN}しろい かべ")},
+    {COMPOUND_STRING("{JPN}あおい かべ")},
+    {COMPOUND_STRING("{JPN}もくめの かべ")},
+    {gText_Exit},
+};
+
+static const struct MenuAction sMultichoiceList_LocalRoomRoamers[] =
+{
+    {COMPOUND_STRING("{JPN}はなさない")},
+    {COMPOUND_STRING("{JPN}1ぴき")},
+    {COMPOUND_STRING("{JPN}2ひき")},
+    {COMPOUND_STRING("{JPN}3びき")},
+    {gText_Exit},
+};
+
 static const struct MenuAction sMultichoiceList_BikeShop[] = {
     {COMPOUND_STRING("じてんしゃ{CLEAR_TO 73}{FONT_SMALL}1,000,000円")},
     {COMPOUND_STRING("いりません")}
@@ -1321,6 +1356,10 @@ static const struct MultichoiceListStruct sMultichoiceLists[] =
     [MULTI_FRONTIER_AI_LEVEL]                          = MULTICHOICE(MultichoiceList_FrontierAiLevel),
     [MULTI_FRONTIER_BANNED_SPECIES]                    = MULTICHOICE(MultichoiceList_FrontierBannedSpecies),
     [MULTI_PARTY_ROAMER_POKEBLOCK_FLAVOR]              = MULTICHOICE(MultichoiceList_PartyRoamerPokeblockFlavor),
+    [MULTI_LOCAL_ROOM_PC]                            = MULTICHOICE(sMultichoiceList_LocalRoomPC),
+    [MULTI_LOCAL_ROOM_FLOOR_STYLE]                   = MULTICHOICE(sMultichoiceList_LocalRoomFloorStyle),
+    [MULTI_LOCAL_ROOM_WALL_STYLE]                    = MULTICHOICE(sMultichoiceList_LocalRoomWallStyle),
+    [MULTI_LOCAL_ROOM_ROAMERS]                       = MULTICHOICE(sMultichoiceList_LocalRoomRoamers),
 };
 
 const u8 *const gStdStrings[] =

@@ -4898,6 +4898,30 @@
       "border_filepath": "data/layouts/ultraflontie_PokemonCenter_2F_2/border.bin",
       "blockdata_filepath": "data/layouts/ultraflontie_PokemonCenter_2F_2/map.bin",
       "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_MINI_MINI_VILLA",
+      "name": "MiniMiniVilla_Layout",
+      "width": 28,
+      "height": 22,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Fortree",
+      "border_filepath": "data/layouts/MiniMiniVilla/border.bin",
+      "blockdata_filepath": "data/layouts/MiniMiniVilla/map.bin",
+      "border_height": 2,
+      "border_width": 2
+    },
+    {
+      "id": "LAYOUT_MINI_MINI_VILLA_LOCAL_ROOM",
+      "name": "MiniMiniVilla_LocalRoom_Layout",
+      "width": 16,
+      "height": 14,
+      "primary_tileset": "gTileset_SecretBase",
+      "secondary_tileset": "gTileset_LocalRoom",
+      "border_filepath": "data/layouts/MiniMiniVilla_LocalRoom/border.bin",
+      "blockdata_filepath": "data/layouts/MiniMiniVilla_LocalRoom/map.bin",
+      "border_height": 2,
+      "border_width": 2
     }
   ]
 }

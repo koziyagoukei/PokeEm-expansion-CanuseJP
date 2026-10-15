@@ -255,6 +255,21 @@ struct NPCFollower
 #include "constants/items.h"
 #define ITEM_FLAGS_COUNT ((ITEMS_COUNT / 8) + ((ITEMS_COUNT % 8) ? 1 : 0))
 
+#include "constants/local_room.h"
+
+struct LocalRoomSave
+{
+    u32 magic;
+    u8 version;
+    u8 floorStyle;
+    u8 wallStyle;
+    u8 roamerCount;
+    u8 decorations[LOCAL_ROOM_DECOR_COUNT];
+    u8 decorationPositions[LOCAL_ROOM_DECOR_COUNT];
+    u16 checksum;
+    u16 reserved;
+};
+
 struct SaveBlock3
 {
 #if OW_USE_FAKE_RTC
@@ -273,6 +288,8 @@ struct SaveBlock3
 #if APRICORN_TREE_COUNT > 0
     u8 apricornTrees[NUM_APRICORN_TREE_BYTES];
 #endif
+    // Append-only, local data. Not part of any link or record-mixing payload.
+    struct LocalRoomSave localRoom;
 }; /* max size 1624 bytes */
 
 extern struct SaveBlock3 *gSaveBlock3Ptr;

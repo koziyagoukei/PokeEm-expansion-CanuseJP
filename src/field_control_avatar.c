@@ -23,6 +23,7 @@
 #include "follower_npc.h"
 #include "item_menu.h"
 #include "link.h"
+#include "local_room.h"
 #include "match_call.h"
 #include "metatile_behavior.h"
 #include "overworld.h"
@@ -478,6 +479,18 @@ static const u8 *GetInteractedBackgroundEventScript(struct MapPosition *position
 static const u8 *GetInteractedMetatileScript(struct MapPosition *position, u8 metatileBehavior, enum Direction direction)
 {
     s8 elevation;
+
+    if (LocalRoom_IsCurrentMap())
+    {
+        if (MetatileBehavior_IsSecretBasePC(metatileBehavior) && direction == DIR_NORTH)
+            return LocalRoom_EventScript_PC;
+        if (MetatileBehavior_IsSecretBaseSandOrnament(metatileBehavior))
+            return LocalRoom_EventScript_SandOrnament;
+        if (MetatileBehavior_IsSecretBaseShieldOrToyTV(metatileBehavior))
+            return LocalRoom_EventScript_Ornament;
+        // Do not record furniture interactions against a previously visited friend's base.
+        return NULL;
+    }
 
     if (MetatileBehavior_IsPlayerFacingTVScreen(metatileBehavior, direction) == TRUE)
     {

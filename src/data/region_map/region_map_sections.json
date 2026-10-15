@@ -1626,6 +1626,14 @@
       "y": 4,
       "width": 1,
       "height": 1
+    },
+    {
+      "id": "MAPSEC_MINI_MINI_VILLA",
+      "name": "{JPN}ミニミニべっそう"
+    },
+    {
+      "id": "MAPSEC_LOCAL_ROOM",
+      "name": "{JPN}マイルーム"
     }
   ]
 }

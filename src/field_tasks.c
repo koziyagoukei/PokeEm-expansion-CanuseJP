@@ -9,6 +9,7 @@
 #include "field_tasks.h"
 #include "fieldmap.h"
 #include "item.h"
+#include "local_room.h"
 #include "main.h"
 #include "metatile_behavior.h"
 #include "overworld.h"
@@ -67,7 +68,8 @@ static const TaskFunc sPerStepCallbacks[] =
     [STEP_CB_TRUCK]             = EndTruckSequence,
     [STEP_CB_SECRET_BASE]       = SecretBasePerStepCallback,
     [STEP_CB_CRACKED_FLOOR]     = CrackedFloorPerStepCallback,
-    [STEP_CB_ICEFALL_CAVE]      = IcefallCaveIcePerStepCallback
+    [STEP_CB_ICEFALL_CAVE]      = IcefallCaveIcePerStepCallback,
+    [STEP_CB_LOCAL_ROOM]        = LocalRoom_PerStepCallback,
 };
 
 // The positions of each map space with crackable ice in Icefall Cave.

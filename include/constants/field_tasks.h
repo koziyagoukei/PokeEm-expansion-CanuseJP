@@ -10,5 +10,6 @@
 #define STEP_CB_SECRET_BASE         6
 #define STEP_CB_CRACKED_FLOOR       7
 #define STEP_CB_ICEFALL_CAVE        8
+#define STEP_CB_LOCAL_ROOM          9
 
 #endif // GUARD_CONSTANTS_FIELD_TASKS_H

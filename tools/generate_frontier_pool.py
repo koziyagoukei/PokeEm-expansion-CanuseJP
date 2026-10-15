@@ -35,6 +35,7 @@ EXTRA_SPECIES = {
 
 EXCLUDED_SPECIES = {
     "SPECIES_SMEARGLE",
+    "SPECIES_FLABEBE_RED",
 }
 
 BATTLE_ONLY_FLAGS = {
@@ -81,7 +82,6 @@ PIKACHU_COSTUME_NAMES = {
 
 REPRESENTATIVE_FORM_NAMES = {
     "SPECIES_VIVILLON_ICY_SNOW",
-    "SPECIES_FLABEBE_RED",
     "SPECIES_FLOETTE_RED",
     "SPECIES_FLORGES_RED",
     "SPECIES_FURFROU_NATURAL",
@@ -794,7 +794,7 @@ def is_excluded_base(species: str, data: SpeciesData) -> bool:
         return True
     if species not in REPRESENTATIVE_FORM_NAMES and any(species.startswith(prefix) for prefix in COSMETIC_FORM_PREFIXES):
         return True
-    return any(part in species for part in BATTLE_ONLY_NAME_PARTS)
+    return any(species.endswith(part) or f"{part}_" in species for part in BATTLE_ONLY_NAME_PARTS)
 
 
 def select_species(species_data: dict[str, SpeciesData]) -> list[SpeciesData]:
@@ -1073,6 +1073,11 @@ def write_frontier_constants(selected: list[SpeciesData]) -> None:
 
 
 def write_battle_frontier_mons(selected: list[SpeciesData]) -> None:
+    if __package__:
+        from .frontier_sets_gen5_9 import SETS, fields_for_set
+    else:
+        from frontier_sets_gen5_9 import SETS, fields_for_set
+
     level_up = parse_level_up_learnsets()
     full = parse_full_learnsets()
     move_info = parse_move_info()
@@ -1094,17 +1099,29 @@ def write_battle_frontier_mons(selected: list[SpeciesData]) -> None:
                 role = "physical"
             moves = choose_moves(data.species, data, level_up, full, move_info, z_source, slot)
             held_item = choose_held_item(data, slot, role, moves, move_info, mega_items, z_item, z_source)
+            fields = {
+                "moves": "{" + ", ".join(moves) + "}",
+                "heldItem": held_item,
+                "ev": choose_ev(data.stats, role),
+                "nature": choose_nature(data.stats, role),
+                "iv": "TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31)",
+                "ability": choose_ability(data.species, data.abilities, slot - 1),
+                "teraType": choose_tera_type(data, moves, move_info, slot),
+            }
+            curated = SETS.get(data.species.removeprefix("SPECIES_"))
+            if curated is not None:
+                fields.update(fields_for_set(curated[slot - 1], move_info))
             lines.extend(
                 [
                     f"    [{mon_label(data.species, slot)}] = {{",
                     f"        .species = {data.species},",
-                    f"        .moves = {{{', '.join(moves)}}},",
-                    f"        .heldItem = {held_item},",
-                    f"        .ev = {choose_ev(data.stats, role)},",
-                    f"        .nature = {choose_nature(data.stats, role)},",
-                    "        .iv = TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31),",
-                    f"        .ability = {choose_ability(data.species, data.abilities, slot - 1)},",
-                    f"        .teraType = {choose_tera_type(data, moves, move_info, slot)},",
+                    f"        .moves = {fields['moves']},",
+                    f"        .heldItem = {fields['heldItem']},",
+                    f"        .ev = {fields['ev']},",
+                    f"        .nature = {fields['nature']},",
+                    f"        .iv = {fields['iv']},",
+                    f"        .ability = {fields['ability']},",
+                    f"        .teraType = {fields['teraType']},",
                     "        .shouldUseDynamax = TRUE,",
                     "        .dynamaxLevel = 10,",
                     "        .ball = BALL_POKE,",
