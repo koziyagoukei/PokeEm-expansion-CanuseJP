@@ -1183,6 +1183,7 @@ static void LoadMultiPartnerCandidatesData(void)
     enum Species species1, species2;
     struct ObjectEventTemplate *objEventTemplates;
 
+    SetFacilityPtrsGetLevel();
     objEventTemplates = gSaveBlock1Ptr->objectEventTemplates;
     lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
     battleMode = VarGet(VAR_FRONTIER_BATTLE_MODE);

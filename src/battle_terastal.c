@@ -72,6 +72,15 @@ bool32 CanTerastallize(enum BattlerId battler)
     if (IsBattlerInMegaOrPrimalForm(battler))
         return FALSE;
 
+    switch (gBattleMons[battler].species)
+    {
+    case SPECIES_ETERNATUS_ETERNAMAX:
+    case SPECIES_NECROZMA_ULTRA:
+        return FALSE;
+    default:
+        break;
+    }
+
     enum HoldEffect holdEffect = GetBattlerHoldEffectIgnoreNegation(battler);
 
     if (gBattleMons[battler].volatiles.transformed && GET_BASE_SPECIES_ID(gBattleMons[battler].species) == SPECIES_TERAPAGOS)
