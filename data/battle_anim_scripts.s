@@ -32311,17 +32311,8 @@ gBattleAnimMove_StokedSparksurfer::
 	waitforvisualfinish
 	unloadspritegfx ANIM_TAG_ROUND_SHADOW
 	unloadspritepal ANIM_TAG_ROUND_SHADOW
-	createvisualtask AnimTask_GetTimeOfDay, 2
-	jumpargeq 0 0 StokedSparksurferDay
-	jumpargeq 0 2 StokedSparksurferAfternoon
-StokedSparksurferNight:
+	@ All times of day use the same background; start only one fade task.
 	fadetobg BG_MAX_LIGHTNING
-	goto StokedSparksurferFinish
-StokedSparksurferAfternoon:
-	fadetobg BG_MAX_LIGHTNING
-StokedSparksurferDay:
-	fadetobg BG_MAX_LIGHTNING
-StokedSparksurferFinish:
 	waitbgfadeout
 	visible ANIM_ATTACKER
 	playsewithpan SE_M_DRAGON_RAGE, SOUND_PAN_ATTACKER
@@ -32374,7 +32365,7 @@ StokedSparksurferFinish:
 	waitforvisualfinish
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, (F_PAL_TARGET | F_PAL_ATTACKER), 2, 16, 0, RGB(31, 31, 22)
 	restorebg
-	delay 24
+	waitbgfadein
 	createvisualtask AnimTask_AllBattlersVisible, 10
 	waitforvisualfinish
 	end

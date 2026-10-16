@@ -7937,7 +7937,7 @@ void AnimTask_AllBattlersInvisibleExceptAttackerAndTarget(u8 taskId)
         u8 spriteId = gBattlerSpriteIds[i];
         if (spriteId == GetAnimBattlerSpriteId(ANIM_ATTACKER) || spriteId == GetAnimBattlerSpriteId(ANIM_TARGET))
             continue;
-        if (spriteId != 0xFF || !IsBattlerSpriteVisible(i)) //Pokemon that are already hidden
+        if (spriteId < MAX_SPRITES && gSprites[spriteId].inUse && IsBattlerSpriteVisible(i))
             gSprites[spriteId].invisible = TRUE;
     }
     DestroyAnimVisualTask(taskId);
