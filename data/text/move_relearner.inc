@@ -14,6 +14,21 @@ MoveRelearner_Text_TMMoves:
 MoveRelearner_Text_TutormoveMoves:
 	.string "{JPN}おしえわざ$"
 
+MoveRelearner_Text_ForgetMoves:
+	.string "{JPN}わざを わすれる$"
+
+MoveRelearner_Text_ChooseMoveToForget:
+	.string "{JPN}どの わざを\nわすれさせるんだい？$"
+
+MoveRelearner_Text_ConfirmForgetMove:
+	.string "{JPN}{STR_VAR_1}の {STR_VAR_2}を\nわすれさせても いいかい？$"
+
+MoveRelearner_Text_ForgotMove:
+	.string "{JPN}{STR_VAR_1}は {STR_VAR_2}を\nきれいに わすれた！$"
+
+MoveRelearner_Text_CantForgetMove:
+	.string "{JPN}ごめんね……\nわざを わすれさせられないよ$"
+
 MoveRelearner_Text_SeeYa:
 	.string "{JPN}やめる$"
 

@@ -1,6 +1,8 @@
 #include "global.h"
 #include "event_data.h"
 #include "move_relearner.h"
+#include "party_menu.h"
+#include "pokemon.h"
 #include "string_util.h"
 #include "strings.h"
 #include "test/test.h"
@@ -99,4 +101,45 @@ TEST("Move relearner selection: invalid category cannot index the label table")
     gMoveRelearnerState = MOVE_RELEARNER_FRONTIER_FULL_MOVES;
     MoveRelearner_RestoreMonSelectionContext();
     EXPECT_EQ(gMoveRelearnerState, MOVE_RELEARNER_FRONTIER_FULL_MOVES);
+}
+
+TEST("Move relearner selection: forgetting removes only the chosen move and preserves remaining PP")
+{
+    static const enum Move originalMoves[] = {MOVE_TACKLE, MOVE_GROWL, MOVE_SURF, MOVE_PROTECT};
+    u32 numMoves = 4, forgottenSlot = 0;
+    u8 bonuses = 0x39;
+    struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][0];
+
+    for (u32 count = 2; count <= MAX_MON_MOVES; count++)
+        for (u32 slot = 0; slot < count; slot++)
+            PARAMETRIZE { numMoves = count; forgottenSlot = slot; }
+
+    CreateMon(mon, SPECIES_SMEARGLE, 50, 0, OTID_STRUCT_PRESET(0));
+    for (u32 i = 0; i < MAX_MON_MOVES; i++)
+    {
+        u8 pp = i < numMoves ? i + 1 : 0;
+        SetMonMoveSlot(mon, i < numMoves ? originalMoves[i] : MOVE_NONE, i);
+        SetMonData(mon, MON_DATA_PP1 + i, &pp);
+    }
+    SetMonData(mon, MON_DATA_PP_BONUSES, &bonuses);
+    gSpecialVar_0x8004 = 0;
+    gSpecialVar_0x8005 = forgottenSlot;
+    MoveDeleterForgetMove();
+
+    for (u32 i = 0; i < MAX_MON_MOVES; i++)
+    {
+        if (i < numMoves - 1)
+        {
+            u32 oldSlot = i < forgottenSlot ? i : i + 1;
+            EXPECT_EQ(GetMonData(mon, MON_DATA_MOVE1 + i), originalMoves[oldSlot]);
+            EXPECT_EQ(GetMonData(mon, MON_DATA_PP1 + i), oldSlot + 1);
+            EXPECT_EQ((GetMonData(mon, MON_DATA_PP_BONUSES) >> (2 * i)) & 3,
+                      (bonuses >> (2 * oldSlot)) & 3);
+        }
+        else
+        {
+            EXPECT_EQ(GetMonData(mon, MON_DATA_MOVE1 + i), MOVE_NONE);
+            EXPECT_EQ(GetMonData(mon, MON_DATA_PP1 + i), 0);
+        }
+    }
 }

@@ -32,6 +32,7 @@
 #include "save.h"
 #include "load_save.h"
 #include "battle_dome.h"
+#include "trainer_hill.h"
 #include "constants/battle_frontier.h"
 #include "constants/battle_frontier_mons.h"
 #include "constants/battle_move_effects.h"
@@ -42,6 +43,7 @@
 #include "constants/game_stat.h"
 #include "constants/moves.h"
 #include "constants/items.h"
+#include "constants/layouts.h"
 #include "constants/event_objects.h"
 #include "party_menu.h"
 #include "list_menu.h"
@@ -227,6 +229,42 @@ const struct FrontierBrain gFrontierBrainInfo[NUM_FRONTIER_FACILITIES] =
         .silverSymbolFlag = FLAG_SYS_PYRAMID_SILVER,
     },
 };
+
+bool8 InBattleFacilityChallenge(void)
+{
+    // Saved challenge status and facility IDs can remain set after returning to a lobby.
+    switch (gMapHeader.mapLayoutId)
+    {
+    case LAYOUT_BATTLE_ELEVATOR:
+    case LAYOUT_BATTLE_FRONTIER_BATTLE_TOWER_CORRIDOR:
+    case LAYOUT_BATTLE_FRONTIER_BATTLE_TOWER_BATTLE_ROOM:
+    case LAYOUT_BATTLE_FRONTIER_BATTLE_TOWER_MULTI_PARTNER_ROOM:
+    case LAYOUT_BATTLE_FRONTIER_BATTLE_TOWER_MULTI_CORRIDOR:
+    case LAYOUT_BATTLE_FRONTIER_BATTLE_DOME_CORRIDOR:
+    case LAYOUT_BATTLE_FRONTIER_BATTLE_DOME_PRE_BATTLE_ROOM:
+    case LAYOUT_BATTLE_FRONTIER_BATTLE_DOME_BATTLE_ROOM:
+    case LAYOUT_BATTLE_FRONTIER_BATTLE_PALACE_CORRIDOR:
+    case LAYOUT_BATTLE_FRONTIER_BATTLE_PALACE_BATTLE_ROOM:
+    case LAYOUT_BATTLE_FRONTIER_BATTLE_ARENA_CORRIDOR:
+    case LAYOUT_BATTLE_FRONTIER_BATTLE_ARENA_BATTLE_ROOM:
+    case LAYOUT_BATTLE_FRONTIER_BATTLE_FACTORY_PRE_BATTLE_ROOM:
+    case LAYOUT_BATTLE_FRONTIER_BATTLE_FACTORY_BATTLE_ROOM:
+    case LAYOUT_BATTLE_FRONTIER_BATTLE_PIKE_CORRIDOR:
+    case LAYOUT_BATTLE_FRONTIER_BATTLE_PIKE_THREE_PATH_ROOM:
+    case LAYOUT_BATTLE_FRONTIER_BATTLE_PIKE_ROOM_NORMAL:
+    case LAYOUT_BATTLE_FRONTIER_BATTLE_PIKE_ROOM_FINAL:
+    case LAYOUT_BATTLE_FRONTIER_BATTLE_PIKE_ROOM_WILD_MONS:
+    case LAYOUT_BATTLE_FRONTIER_BATTLE_PIKE_ROOM_UNUSED:
+    case LAYOUT_BATTLE_FRONTIER_BATTLE_PYRAMID_FLOOR:
+    case LAYOUT_BATTLE_FRONTIER_BATTLE_PYRAMID_TOP:
+    case LAYOUT_BATTLE_TENT_CORRIDOR:
+    case LAYOUT_BATTLE_TENT_BATTLE_ROOM:
+    case LAYOUT_VERDANTURF_TOWN_BATTLE_TENT_BATTLE_ROOM:
+        return TRUE;
+    default:
+        return InTrainerHillChallenge();
+    }
+}
 
 bool8 IsFrontierSpeciesBannedByCurrentRules(enum Species species)
 {

@@ -1193,6 +1193,28 @@ static u32 GetRelearnerTutorMoves(struct BoxPokemon *mon, u16 *moves)
     return numMoves;
 }
 
+static bool32 IsFrontierSketchMove(enum Move move)
+{
+    return move > MOVE_NONE && move < MOVES_COUNT
+        && GetMovePP(move) != 0 && !IsMoveSketchBanned(move);
+}
+
+static u32 AddFrontierRelearnerMove(struct BoxPokemon *mon, u16 *moves, u32 count, enum Move move)
+{
+    if (move == MOVE_NONE || move == MOVE_UNAVAILABLE
+        || count >= MAX_RELEARNER_MOVES || BoxMonKnowsMove(mon, move))
+        return count;
+
+    for (u32 i = 0; i < count; i++)
+    {
+        if (moves[i] == move)
+            return count;
+    }
+
+    moves[count++] = move;
+    return count;
+}
+
 static u32 GetRelearnerFrontierFullMoves(struct BoxPokemon *mon, u16 *moves)
 {
     u16 species = GetBoxMonData(mon, MON_DATA_SPECIES);
@@ -1217,29 +1239,18 @@ static u32 GetRelearnerFrontierFullMoves(struct BoxPokemon *mon, u16 *moves)
 
         for (u32 i = 0; learnset[i] != MOVE_UNAVAILABLE; i++)
         {
-            enum Move move = learnset[i];
-            bool32 alreadyListed = FALSE;
-
-            if (move == MOVE_NONE || move == MOVE_UNAVAILABLE)
-                continue;
-
-            if (BoxMonKnowsMove(mon, move))
-                continue;
-
-            for (u32 j = 0; j < count; j++)
-            {
-                if (moves[j] == move)
-                {
-                    alreadyListed = TRUE;
-                    break;
-                }
-            }
-            if (alreadyListed)
-                continue;
-
-            moves[count++] = move;
+            count = AddFrontierRelearnerMove(mon, moves, count, learnset[i]);
             if (count >= MAX_RELEARNER_MOVES)
                 return count;
+        }
+    }
+
+    if (species == SPECIES_SMEARGLE)
+    {
+        for (enum Move move = MOVE_NONE + 1; move < MOVES_COUNT; move++)
+        {
+            if (IsFrontierSketchMove(move))
+                count = AddFrontierRelearnerMove(mon, moves, count, move);
         }
     }
 
@@ -1386,6 +1397,15 @@ static bool32 HasRelearnerFrontierFullMoves(struct BoxPokemon *boxMon)
 
     if (species == SPECIES_NONE || species >= NUM_SPECIES)
         return FALSE;
+
+    if (species == SPECIES_SMEARGLE)
+    {
+        for (enum Move move = MOVE_NONE + 1; move < MOVES_COUNT; move++)
+        {
+            if (IsFrontierSketchMove(move) && !BoxMonKnowsMove(boxMon, move))
+                return TRUE;
+        }
+    }
 
     for (u32 learnsetId = 0; learnsetId < ARRAY_COUNT(learnsets); learnsetId++)
     {

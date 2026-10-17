@@ -6787,6 +6787,8 @@ void ItemUseCB_Fusion(u8 taskId, TaskFunc taskFunc)
     case FALSE: // Cancel if Not a Fuse Mon
         break;
     case UNFUSE_MON:
+        if (InBattleFacilityChallenge())
+            break;
         if (task->fusionType == FUSE_MON) // Cancel if An already Fused Mon Is Chosen For The Second Fusion Mon
             break;
         if (gPartiesCount[B_TRAINER_PLAYER] == PARTY_SIZE)

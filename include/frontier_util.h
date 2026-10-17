@@ -11,6 +11,7 @@ struct Pokemon;
 #define FRONTIER_MON_FILTER_SPECIAL_STONE_NOT_BANNED 3
 
 void CallFrontierUtilFunc(void);
+bool8 InBattleFacilityChallenge(void);
 u8 GetFrontierBrainStatus(void);
 u8 GetFrontierBrainStatusForStreak(u8 facility, u32 streak);
 void CopyFrontierTrainerText(u8 whichText, u16 trainerId);
