@@ -1,10 +1,11 @@
 #ifndef GUARD_CONSTANTS_MOVE_RELEARNER_H
 #define GUARD_CONSTANTS_MOVE_RELEARNER_H
 
+#include "constants/moves.h"
+
 // Max number of moves shown by the move relearner.
-// Keep this above the largest generated learnset; this is also used by the
-// Frontier full-move relearner.
-#define MAX_RELEARNER_MOVES 500
+// Smeargle's Frontier list can contain every ordinary move, excluding MOVE_NONE.
+#define MAX_RELEARNER_MOVES (MOVES_COUNT - 1)
 
 // Move Relearner menu change constants
 enum MoveRelearnerStates

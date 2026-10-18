@@ -5,6 +5,8 @@ BattleFrontier_BattlePyramidFloor_MapScripts::
 	.byte 0
 
 BattleFrontier_BattlePyramidFloor_OnFrame:
+	map_script_2 VAR_TEMP_CHALLENGE_STATUS, CHALLENGE_STATUS_LOST, BattleFrontier_BattlePyramid_EventScript_WarpToLobbyLost
+	map_script_2 VAR_TEMP_CHALLENGE_STATUS, CHALLENGE_STATUS_SAVING, BattleFrontier_BattlePyramid_EventScript_WarpToLobby
 	map_script_2 VAR_TEMP_D, 1, BattleFrontier_BattlePyramidFloor_EventScript_UpdateLight
 	map_script_2 VAR_TEMP_PLAYING_PYRAMID_MUSIC, 0, BattleFrontier_BattlePyramidFloor_EventScript_PlayPyramidMusic
 	map_script_2 VAR_TEMP_F, 1, BattleFrontier_BattlePyramidFloor_EventScript_ShowMapName
@@ -41,19 +43,25 @@ BattleFrontier_BattlePyramidFloor_OnResume:
 	frontier_getstatus
 	switch VAR_TEMP_CHALLENGE_STATUS
 	case 0, BattleFrontier_BattlePyramidFloor_EventScript_ReadyChallenge
-	case CHALLENGE_STATUS_SAVING, BattleFrontier_BattlePyramid_EventScript_WarpToLobby
+	case CHALLENGE_STATUS_SAVING, BattleFrontier_BattlePyramid_EventScript_WaitForLobbyWarp
 	case CHALLENGE_STATUS_PAUSED, BattleFrontier_BattlePyramidFloor_EventScript_ReadyChallenge
 	frontier_get FRONTIER_DATA_BATTLE_OUTCOME
 	goto_if_eq VAR_RESULT, B_OUTCOME_RAN, BattleFrontier_BattlePyramidFloor_EventScript_ResetParty
 	goto_if_eq VAR_RESULT, B_OUTCOME_PLAYER_TELEPORTED, BattleFrontier_BattlePyramidFloor_EventScript_ResetParty
 	goto_if_eq VAR_RESULT, 0, BattleFrontier_BattlePyramidFloor_EventScript_ResetParty
-	goto_if_eq VAR_RESULT, B_OUTCOME_LOST, BattleFrontier_BattlePyramid_EventScript_WarpToLobbyLost
-	goto_if_eq VAR_RESULT, B_OUTCOME_DREW, BattleFrontier_BattlePyramid_EventScript_WarpToLobbyLost
-	goto_if_eq VAR_RESULT, B_OUTCOME_FORFEITED, BattleFrontier_BattlePyramid_EventScript_WarpToLobbyLost
+	goto_if_eq VAR_RESULT, B_OUTCOME_LOST, BattleFrontier_BattlePyramid_EventScript_QueueLobbyWarpLost
+	goto_if_eq VAR_RESULT, B_OUTCOME_DREW, BattleFrontier_BattlePyramid_EventScript_QueueLobbyWarpLost
+	goto_if_eq VAR_RESULT, B_OUTCOME_FORFEITED, BattleFrontier_BattlePyramid_EventScript_QueueLobbyWarpLost
 	frontier_isbattletype BATTLE_TYPE_TRAINER  @ VAR_RESULT seems to be ignored here
 	setvar VAR_TEMP_D, 1
 BattleFrontier_BattlePyramidFloor_EventScript_ResetParty::
 	pyramid_resetparty
+	end
+
+@ OnResume runs immediately and cannot wait for a warp task.
+BattleFrontier_BattlePyramid_EventScript_QueueLobbyWarpLost::
+	setvar VAR_TEMP_CHALLENGE_STATUS, CHALLENGE_STATUS_LOST
+BattleFrontier_BattlePyramid_EventScript_WaitForLobbyWarp::
 	end
 
 BattleFrontier_BattlePyramid_EventScript_WarpToLobbyLost::
@@ -105,6 +113,7 @@ BattlePyramid_WarpToTop::
 
 BattlePyramid_TrainerBattle::
 	facilitytrainerbattle FACILITY_BATTLE_PYRAMID
+	goto_if_eq VAR_TEMP_CHALLENGE_STATUS, CHALLENGE_STATUS_LOST, BattleFrontier_BattlePyramid_EventScript_WarpToLobbyLost
 	pyramid_showhint
 	waitmessage
 	waitbuttonpress

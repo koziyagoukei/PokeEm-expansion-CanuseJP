@@ -121,7 +121,7 @@ UltraFrontieHub_EventScript_FrontierMoveTutor::
 
 UltraFrontieHub_EventScript_StartFrontierMoveTutor::
 	closemessage
-	goto MoveRelearner_EventScript_TeachFrontierFullMoves
+	goto Common_EventScript_MoveRelearnerDynMultiChoice
 	end
 
 UltraFrontieHub_Text_FrontierMoveTutor::
@@ -242,3 +242,15 @@ UltraFrontieHub_Text_SetFrontierBannedSpeciesBanDone::
 
 UltraFrontieHub_Text_SetFrontierAi_StrongestDone::
 	.string "AIを さいきょうに\nしました。$"
+
+@ PORYMAP_VISUAL_BEGIN ultra_frontie_hub_VisualEvent1 v1
+@ PORYMAP_VISUAL_DATA eyJjb21tYW5kcyI6W3siYXJndW1lbnQiOiIiLCJjb21wYXJpc29uIjoiPT0iLCJpZCI6Im1lc3NhZ2UiLCJ0ZXh0Ijoi44G844GP44GvIOOBqOOBiuOCiuOBmeOBjOOCiuOBrlxu44GK44KT44GM44GPIOOCquOCv+OCr1xccOOBk+OBk+OBriDjgYrjgpPjgYzjgY/jga8g44Gm44GE44GN44Gm44GN44GrXG7jgYvjgo/jgovjgogiLCJ2YWx1ZSI6IiJ9LHsiYXJndW1lbnQiOiIiLCJjb21wYXJpc29uIjoiPT0iLCJpZCI6ImVuZCIsInRleHQiOiIiLCJ2YWx1ZSI6IiJ9XSwibGFiZWwiOiJ1bHRyYV9mcm9udGllX2h1Yl9WaXN1YWxFdmVudDEiLCJsb2NrUGxheWVyIjp0cnVlLCJ2ZXJzaW9uIjoxfQ==
+ultra_frontie_hub_VisualEvent1::
+	lockall
+	msgbox ultra_frontie_hub_VisualEvent1_Text_1, MSGBOX_DEFAULT
+	releaseall
+	end
+
+ultra_frontie_hub_VisualEvent1_Text_1:
+	.string "ぼくは とおりすがりの\nおんがく オタク\pここの おんがくは ていきてきに\nかわるよ$"
+@ PORYMAP_VISUAL_END ultra_frontie_hub_VisualEvent1

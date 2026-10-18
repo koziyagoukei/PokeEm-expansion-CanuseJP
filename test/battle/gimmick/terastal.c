@@ -1,6 +1,31 @@
 #include "global.h"
 #include "test/battle.h"
+#include "battle_gimmick.h"
 #include "battle_util.h"
+
+SINGLE_BATTLE_TEST("Tera form restrictions: base Eternatus and non-Ultra Necrozma can still Terastallize on both sides")
+{
+    enum Species species;
+    PARAMETRIZE { species = SPECIES_ETERNATUS; }
+    PARAMETRIZE { species = SPECIES_NECROZMA; }
+    PARAMETRIZE { species = SPECIES_NECROZMA_DUSK_MANE; }
+    PARAMETRIZE { species = SPECIES_NECROZMA_DAWN_WINGS; }
+    GIVEN {
+        PLAYER(species) { TeraType(TYPE_NORMAL); Speed(2); }
+        OPPONENT(species) { TeraType(TYPE_NORMAL); Speed(1); }
+    } WHEN {
+        TURN {
+            MOVE(player, MOVE_CELEBRATE, gimmick: GIMMICK_TERA);
+            MOVE(opponent, MOVE_CELEBRATE, gimmick: GIMMICK_TERA);
+        }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_TERA_ACTIVATE, player);
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_TERA_ACTIVATE, opponent);
+    } THEN {
+        EXPECT_EQ(GetActiveGimmick(GetBattlerAtPosition(B_POSITION_PLAYER_LEFT)), GIMMICK_TERA);
+        EXPECT_EQ(GetActiveGimmick(GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT)), GIMMICK_TERA);
+    }
+}
 
 // Base Power and STAB Checks
 

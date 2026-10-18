@@ -6,6 +6,28 @@
 #include "battle_z_move.h"
 #include "test/test.h"
 
+TEST("Tera form restrictions: Eternamax and Ultra Necrozma cannot Terastallize in any battler slot")
+{
+    enum Species species;
+    enum BattlerId battler;
+    PARAMETRIZE { species = SPECIES_ETERNATUS_ETERNAMAX; battler = B_BATTLER_0; }
+    PARAMETRIZE { species = SPECIES_ETERNATUS_ETERNAMAX; battler = B_BATTLER_1; }
+    PARAMETRIZE { species = SPECIES_ETERNATUS_ETERNAMAX; battler = B_BATTLER_2; }
+    PARAMETRIZE { species = SPECIES_ETERNATUS_ETERNAMAX; battler = B_BATTLER_3; }
+    PARAMETRIZE { species = SPECIES_NECROZMA_ULTRA; battler = B_BATTLER_0; }
+    PARAMETRIZE { species = SPECIES_NECROZMA_ULTRA; battler = B_BATTLER_1; }
+    PARAMETRIZE { species = SPECIES_NECROZMA_ULTRA; battler = B_BATTLER_2; }
+    PARAMETRIZE { species = SPECIES_NECROZMA_ULTRA; battler = B_BATTLER_3; }
+
+    enum Species originalSpecies = gBattleMons[battler].species;
+    gBattleMons[battler].species = species;
+
+    EXPECT(!CanTerastallize(battler));
+    EXPECT(!CanActivateGimmick(battler, GIMMICK_TERA));
+
+    gBattleMons[battler].species = originalSpecies;
+}
+
 TEST("Mega and Primal forms cannot use Dynamax, Terastallization, or Z-Moves")
 {
     enum Species species, originalSpecies;

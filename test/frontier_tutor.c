@@ -1,5 +1,6 @@
 #include "global.h"
 #include "frontier_tutor.h"
+#include "move.h"
 #include "pokemon.h"
 #include "move_relearner.h"
 #include "test/test.h"
@@ -139,4 +140,82 @@ TEST("Frontier Move does not offer universal moves for empty slots or eggs")
     CreateMon(&mon, SPECIES_DITTO, 50, 0, OTID_STRUCT_PRESET(0));
     SetMonData(&mon, MON_DATA_IS_EGG, &isEgg);
     EXPECT(!CanBoxMonRelearnMoves(&mon.box, MOVE_RELEARNER_FRONTIER_FULL_MOVES));
+}
+
+TEST("Frontier Move offers every Sketch-compatible move once for Smeargle without truncation")
+{
+    struct Pokemon mon;
+    struct
+    {
+        u16 moves[MAX_RELEARNER_MOVES];
+        u16 guard;
+    } list;
+    u32 count;
+
+    CreateMon(&mon, SPECIES_SMEARGLE, 50, 0, OTID_STRUCT_PRESET(0));
+    for (u32 i = 0; i < MAX_MON_MOVES; i++)
+        SetMonMoveSlot(&mon, MOVE_NONE, i);
+    list.guard = 0xCAFE;
+
+    count = Test_GetRelearnerFrontierFullMoves(&mon.box, list.moves);
+    EXPECT_GT(count, 500);
+    EXPECT_LE(count, MAX_RELEARNER_MOVES);
+    EXPECT_EQ(list.guard, 0xCAFE);
+    for (enum Move move = MOVE_NONE + 1; move < MOVES_COUNT; move++)
+    {
+        if (GetMovePP(move) != 0 && !IsMoveSketchBanned(move))
+            EXPECT_EQ(CountMoveInList(list.moves, count, move), 1);
+    }
+    EXPECT_EQ(CountMoveInList(list.moves, count, MOVE_SKETCH), 1);
+    EXPECT_EQ(CountMoveInList(list.moves, count, MOVE_TERA_BLAST), 1);
+    EXPECT_EQ(CountMoveInList(list.moves, count, MOVE_HIDDEN_POWER), 1);
+    EXPECT_EQ(CountMoveInList(list.moves, count, MOVE_UPPER_HAND), 1);
+    EXPECT_EQ(CountMoveInList(list.moves, count, MOVE_MALIGNANT_CHAIN), 1);
+    for (u32 i = 0; i < count; i++)
+    {
+        EXPECT_GT(list.moves[i], MOVE_NONE);
+        EXPECT_LT(list.moves[i], MOVES_COUNT);
+        EXPECT(list.moves[i] == MOVE_SKETCH
+            || list.moves[i] == MOVE_TERA_BLAST
+            || list.moves[i] == MOVE_HIDDEN_POWER
+            || !IsMoveSketchBanned(list.moves[i]));
+    }
+}
+
+TEST("Frontier Move excludes known and Sketch-banned moves from Smeargle's additions")
+{
+    struct Pokemon mon;
+    u16 moves[MAX_RELEARNER_MOVES];
+    u32 count;
+
+    CreateMon(&mon, SPECIES_SMEARGLE, 50, 0, OTID_STRUCT_PRESET(0));
+    SetMonMoveSlot(&mon, MOVE_SKETCH, 0);
+    SetMonMoveSlot(&mon, MOVE_TERA_BLAST, 1);
+    SetMonMoveSlot(&mon, MOVE_HIDDEN_POWER, 2);
+    SetMonMoveSlot(&mon, MOVE_SPORE, 3);
+    EXPECT(HasMoveToRelearn(&mon.box, MOVE_RELEARNER_FRONTIER_FULL_MOVES));
+
+    count = Test_GetRelearnerFrontierFullMoves(&mon.box, moves);
+    EXPECT_EQ(CountMoveInList(moves, count, MOVE_SKETCH), 0);
+    EXPECT_EQ(CountMoveInList(moves, count, MOVE_TERA_BLAST), 0);
+    EXPECT_EQ(CountMoveInList(moves, count, MOVE_HIDDEN_POWER), 0);
+    EXPECT_EQ(CountMoveInList(moves, count, MOVE_SPORE), 0);
+    EXPECT_EQ(CountMoveInList(moves, count, MOVE_STRUGGLE), 0);
+    EXPECT_EQ(CountMoveInList(moves, count, MOVE_CHATTER), 0);
+    EXPECT_EQ(CountMoveInList(moves, count, MOVE_THUNDERBOLT), 1);
+    EXPECT_EQ(CountMoveInList(moves, count, MOVE_EXTREME_EVOBOOST), 0);
+    EXPECT_EQ(CountMoveInList(moves, count, MOVE_MAX_STRIKE), 0);
+    EXPECT_EQ(CountMoveInList(moves, count, MOVE_G_MAX_WILDFIRE), 0);
+}
+
+TEST("Frontier Move does not add Sketch-compatible moves to other species")
+{
+    struct Pokemon mon;
+    u16 moves[MAX_RELEARNER_MOVES];
+    u32 count;
+
+    CreateMon(&mon, SPECIES_DITTO, 50, 0, OTID_STRUCT_PRESET(0));
+    count = Test_GetRelearnerFrontierFullMoves(&mon.box, moves);
+    EXPECT_EQ(CountMoveInList(moves, count, MOVE_SPORE), 0);
+    EXPECT_EQ(CountMoveInList(moves, count, MOVE_THUNDERBOLT), 0);
 }

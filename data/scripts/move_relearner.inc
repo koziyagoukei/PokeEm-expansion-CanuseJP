@@ -12,8 +12,9 @@ Common_EventScript_MoveRelearnerDynMultiChoice::
 	dynmultipush MoveRelearner_Text_TMMoves, 2
 	dynmultipush MoveRelearner_Text_TutormoveMoves, 3
 	dynmultipush MoveRelearner_Text_FrontierFullMoves, 4
+	dynmultipush MoveRelearner_Text_ForgetMoves, 6
 	dynmultipush MoveRelearner_Text_SeeYa, 5
-	dynmultistack 0, 0, FALSE, 6, 0, 0, DYN_MULTICHOICE_CB_NONE
+	dynmultistack 0, 0, FALSE, 7, 0, 0, DYN_MULTICHOICE_CB_NONE
 	closemessage
 	switch VAR_RESULT
 	case 0, MoveRelearner_EventScript_TeachLevelUpMoves
@@ -21,6 +22,7 @@ Common_EventScript_MoveRelearnerDynMultiChoice::
 	case 2, MoveRelearner_EventScript_TeachTMMoves
 	case 3, MoveRelearner_EventScript_TeachTutorMoves
 	case 4, MoveRelearner_EventScript_TeachFrontierFullMoves
+	case 6, MoveRelearner_EventScript_ForgetMove
 	case 5, MoveRelearner_EventScript_PleaseComeAgain
 MoveRelearner_EventScript_PleaseComeAgain:
 	msgbox MoveRelearner_Text_ThankYouComeAgain, MSGBOX_DEFAULT
@@ -86,6 +88,38 @@ MoveRelearner_EventScript_TeachMove::
 	call_if_eq VAR_RESULT, FALSE, MoveRelearner_EventScript_CantTeachMoveToPkmn
 	msgbox MoveRelearner_Text_WhichXmoveShouldTeach, MSGBOX_DEFAULT
 	special TeachMoveRelearnerMove
+	goto MoveRelearner_EventScript_AnythingElse
+	end
+
+MoveRelearner_EventScript_ForgetMove:
+	getpartysize
+	goto_if_eq VAR_RESULT, 0, MoveRelearner_EventScript_NoPkmn
+	msgbox MoveRelearner_Text_ChoosePkmn, MSGBOX_DEFAULT
+	special ChoosePartyMon
+	goto_if_eq VAR_0x8004, PARTY_NOTHING_CHOSEN, MoveRelearner_EventScript_AnythingElse
+	special IsSelectedMonEgg
+	goto_if_eq VAR_RESULT, TRUE, MoveRelearner_EventScript_CantForgetMove
+	special GetNumMovesSelectedMonHas
+	goto_if_le VAR_RESULT, 1, MoveRelearner_EventScript_CantForgetMove
+	msgbox MoveRelearner_Text_ChooseMoveToForget, MSGBOX_DEFAULT
+	fadescreen FADE_TO_BLACK
+	special MoveDeleterChooseMoveToForget
+	fadescreen FADE_FROM_BLACK
+	goto_if_eq VAR_0x8005, MAX_MON_MOVES, MoveRelearner_EventScript_AnythingElse
+	special BufferMoveDeleterNicknameAndMove
+	msgbox MoveRelearner_Text_ConfirmForgetMove, MSGBOX_YESNO
+	goto_if_ne VAR_RESULT, YES, MoveRelearner_EventScript_AnythingElse
+	special IsLastMonThatKnowsSurf
+	goto_if_eq VAR_RESULT, TRUE, MoveRelearner_EventScript_CantForgetMove
+	special MoveDeleterForgetMove
+	playfanfare MUS_MOVE_DELETED
+	waitfanfare
+	msgbox MoveRelearner_Text_ForgotMove, MSGBOX_DEFAULT
+	goto MoveRelearner_EventScript_AnythingElse
+	end
+
+MoveRelearner_EventScript_CantForgetMove:
+	msgbox MoveRelearner_Text_CantForgetMove, MSGBOX_DEFAULT
 	goto MoveRelearner_EventScript_AnythingElse
 	end
 
