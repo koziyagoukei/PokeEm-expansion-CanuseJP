@@ -28,6 +28,7 @@ void FillFrontierTrainerParty(u8 monsCount);
 void FillFrontierTrainersParties(u8 monsCount);
 void CreateFacilityMon(const struct TrainerMon *fmon, u16 level, u8 fixedIV, u32 otID, u32 flags, struct Pokemon *dst);
 void MarkFrontierOpponentPartyGimmicks(void);
+void MarkFacilityMonGimmicksForOpponent(const struct TrainerMon *fmon, struct Pokemon *dst);
 
 #if TESTING
 u8 Test_GetFrontierOpponentIVPenalty(u32 facility, u32 streak);
