@@ -21,5 +21,9 @@ void LoadBattlePyramidFloorObjectEventScripts(void);
 u8 GetNumBattlePyramidObjectEvents(void);
 u16 GetBattlePyramidPickupItemId(void);
 const u8 *GetBattlePyramidTrainerScript();
+void PreparePyramidTrainerBattle(void);
+void BalancePyramidOpponentParties(void);
+enum Item GetPyramidZCrystalForMon(struct Pokemon *mon, u32 seed);
+enum Item GetPyramidPartyZCrystal(u32 seed);
 
 #endif // GUARD_BATTLE_PYRAMID_H

@@ -3,6 +3,13 @@
 
 #define TOTAL_PYRAMID_ROUNDS 20
 #define PICKUP_ITEMS_PER_ROUND 10
+#define PYRAMID_WILD_MON_COUNT 8
+
+// Rates are per generated NPC, not per turn. Paired NPCs still share battle limits.
+#define PYRAMID_EARLY_GIMMICK_CHANCE 20
+#define PYRAMID_LATE_GIMMICK_CHANCE  40
+#define PYRAMID_BERRY_CHANCE         50
+#define PYRAMID_Z_PICKUP_CHANCE      10
 
 #define HINT_EXIT_DIRECTION                   0
 #define HINT_REMAINING_ITEMS                  1

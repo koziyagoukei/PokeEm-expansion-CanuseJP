@@ -1486,6 +1486,7 @@ void BattleSetup_StartTrainerBattle(void)
             ZeroMonData(&gParties[B_TRAINER_OPPONENT_A][2]);
         }
 
+        PreparePyramidTrainerBattle();
         MarkApproachingPyramidTrainersAsBattled();
     }
     else if (InTrainerHillChallenge())

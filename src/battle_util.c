@@ -8656,6 +8656,9 @@ bool32 DoesSpeciesUseHoldItemToChangeForm(enum Species species, enum Item heldIt
 
 bool32 CanMegaEvolve(enum BattlerId battler)
 {
+    if (gBattleTypeFlags & BATTLE_TYPE_PYRAMID)
+        return FALSE;
+
     enum HoldEffect holdEffect = GetBattlerHoldEffectIgnoreNegation(battler);
 
     // Check if Player has a Mega Ring.
@@ -8701,6 +8704,9 @@ bool32 CanMegaEvolve(enum BattlerId battler)
 
 bool32 CanUltraBurst(enum BattlerId battler)
 {
+    if (gBattleTypeFlags & BATTLE_TYPE_PYRAMID)
+        return FALSE;
+
     enum HoldEffect holdEffect = GetBattlerHoldEffectIgnoreNegation(battler);
 
     // Check if Player has a Z-Ring
@@ -8797,6 +8803,13 @@ enum Species GetBattleFormChangeTargetSpecies(enum BattlerId battler, enum FormC
 {
     enum Species species = gBattleMons[battler].species;
     const struct FormChange *formChanges = GetSpeciesFormChanges(species);
+
+    if ((gBattleTypeFlags & BATTLE_TYPE_PYRAMID)
+        && (method == FORM_CHANGE_BATTLE_PRIMAL_REVERSION
+         || method == FORM_CHANGE_BATTLE_MEGA_EVOLUTION_ITEM
+         || method == FORM_CHANGE_BATTLE_MEGA_EVOLUTION_MOVE
+         || method == FORM_CHANGE_BATTLE_ULTRA_BURST))
+        return species;
 
     if (formChanges == NULL)
         return species;

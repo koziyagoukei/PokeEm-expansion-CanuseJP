@@ -7,6 +7,7 @@
 #include "battle_dome.h"
 #include "battle_factory.h"
 #include "battle_partner.h"
+#include "battle_pyramid.h"
 #include "battle_tower.h"
 #include "battle_transition.h"
 #include "event_data.h"
@@ -289,8 +290,18 @@ static void DoFacilityTrainerBattleInternal(u8 facility)
         break;
     }
 
-    if (facility <= FACILITY_BATTLE_PYRAMID)
+    if (facility == FACILITY_BATTLE_PYRAMID)
+        PreparePyramidTrainerBattle();
+    else if (facility <= FACILITY_BATTLE_PYRAMID)
         ApplyFrontierOpponentIVPenalty();
+}
+
+void PreparePyramidTrainerBattle(void)
+{
+    if (!(gBattleTypeFlags & BATTLE_TYPE_PYRAMID))
+        return;
+    BalancePyramidOpponentParties();
+    ApplyFrontierOpponentIVPenalty();
 }
 
 void DoFacilityTrainerBattle(struct ScriptContext *ctx)
@@ -324,6 +335,9 @@ void FillFrontierTrainersParties(u8 monsCount)
 
 static u8 GetForcedFrontierMonPoolFilter(u8 partySlot, u8 monCount)
 {
+    if (gBattleTypeFlags & BATTLE_TYPE_PYRAMID)
+        return FRONTIER_MON_FILTER_NONE;
+
     bool8 forceSpecialStone = gSaveBlock2Ptr->frontier.curChallengeBattleNum >= 3;
     bool8 forceBannedSpecies = forceSpecialStone && FlagGet(FLAG_FRONTIER_ALLOW_BANNED_SPECIES);
 
@@ -457,7 +471,7 @@ static void MarkFrontierOpponentPartyGimmicksForTrainer(enum BattleTrainer train
 
 void MarkFrontierOpponentPartyGimmicks(void)
 {
-    if (gBattleStruct == NULL || !(gBattleTypeFlags & BATTLE_TYPE_FRONTIER) || (gBattleTypeFlags & BATTLE_TYPE_LINK))
+    if (gBattleStruct == NULL || !(gBattleTypeFlags & BATTLE_TYPE_FRONTIER) || (gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_PYRAMID)))
         return;
 
     MarkFrontierOpponentPartyGimmicksForTrainer(B_TRAINER_OPPONENT_A);

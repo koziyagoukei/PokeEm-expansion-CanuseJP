@@ -25,7 +25,8 @@ void ActivateTera(enum BattlerId battler)
     SetGimmickAsActivated(battler, GIMMICK_TERA);
 
     // Remove Tera Orb charge.
-    if (IsTeraOrbCharged()
+    if (!(gBattleTypeFlags & BATTLE_TYPE_PYRAMID)
+        && IsTeraOrbCharged()
         && IsOnPlayerSide(battler)
         && !(IsDoubleBattle() && !IsPartnerMonFromSameTrainer(battler)))
     {
@@ -90,9 +91,9 @@ bool32 CanTerastallize(enum BattlerId battler)
     if (gBattleTypeFlags & BATTLE_TYPE_FIRST_BATTLE && !IsOnPlayerSide(battler))
         return FALSE;
 
-    if (TESTING || !BattlerIsPlayer(battler) || (gBattleTypeFlags & BATTLE_TYPE_PALACE))
+    if (TESTING || !BattlerIsPlayer(battler) || (gBattleTypeFlags & (BATTLE_TYPE_PALACE | BATTLE_TYPE_PYRAMID)))
     {
-        // Battle Palace handles both sides through AI, without requiring the player's Tera Orb state.
+        // These facilities do not require the player's Tera Orb state.
     }
     else if (!CheckBagHasItem(ITEM_TERA_ORB, 1))
     {

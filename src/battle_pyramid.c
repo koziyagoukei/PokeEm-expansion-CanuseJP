@@ -1016,6 +1016,18 @@ static void SetPickupItem(void)
     else
         gSpecialVar_0x8000 = sPickupItemsLvl50[round][sPickupItemSlots[i][1]];
 
+    // Keep healing slots intact except for one guaranteed first-floor crystal.
+    // Other crystals replace only battle equipment, never medicine or berries.
+    if ((floor == 0 && itemIndex == 0)
+        || (GetItemPocket(gSpecialVar_0x8000) == POCKET_ITEMS
+            && GetItemHoldEffect(gSpecialVar_0x8000) != HOLD_EFFECT_NONE
+            && LocalRandom(&rand) % 100 < PYRAMID_Z_PICKUP_CHANCE))
+    {
+        enum Item crystal = GetPyramidPartyZCrystal(randSeed + itemIndex + floor);
+        if (crystal != ITEM_NONE)
+            gSpecialVar_0x8000 = crystal;
+    }
+
     // Quantity of item to give
     gSpecialVar_0x8001 = 1;
 }
@@ -1571,77 +1583,82 @@ void GenerateBattlePyramidWildMon(enum Species forceSpecies)
     CalculateMonStats(&gParties[B_TRAINER_OPPONENT_A][0]);
 }
 #else
+static bool32 ArePyramidWildMovesLegal(const struct PyramidWildMon *wildMon, u32 level)
+{
+    const struct LevelUpMove *learnset = GetSpeciesLevelUpLearnset(wildMon->species);
+    for (u32 slot = 0; slot < MAX_MON_MOVES; slot++)
+    {
+        bool32 found = wildMon->moves[slot] == MOVE_NONE;
+        for (u32 i = 0; !found && learnset[i].move != LEVEL_UP_MOVE_END; i++)
+            if (learnset[i].move == wildMon->moves[slot] && learnset[i].level <= level)
+                found = TRUE;
+        if (!found)
+            return FALSE;
+    }
+    return TRUE;
+}
+
 void GenerateBattlePyramidWildMon(enum Species forceSpecies)
 {
-    u8 name[POKEMON_NAME_LENGTH + 1];
-    int i;
-    const struct PyramidWildMon *wildMons;
-    u32 id;
-    enum FrontierLevelMode lvl = gSaveBlock2Ptr->frontier.lvlMode;
-    u16 round = (gSaveBlock2Ptr->frontier.pyramidWinStreaks[lvl] / FRONTIER_STAGES_PER_CHALLENGE) % TOTAL_PYRAMID_ROUNDS;
+    struct Pokemon *mon = &gParties[B_TRAINER_OPPONENT_A][0];
+    enum FrontierLevelMode lvlMode = gSaveBlock2Ptr->frontier.lvlMode;
+    u32 streak = gSaveBlock2Ptr->frontier.pyramidWinStreaks[lvlMode];
+    u32 round = (streak / FRONTIER_STAGES_PER_CHALLENGE) % TOTAL_PYRAMID_ROUNDS;
+    const struct PyramidWildMon *wildMons = lvlMode == FRONTIER_LVL_50
+        ? sLevel50WildMonPointers[round] : sOpenLevelWildMonPointers[round];
+    u32 id = GetMonData(mon, MON_DATA_SPECIES) - 1;
+    u32 personality = GetMonData(mon, MON_DATA_PERSONALITY);
+    u32 otId = GetMonData(mon, MON_DATA_OT_ID);
+    u32 ivs = GetMonData(mon, MON_DATA_IVS);
+    u32 ability, value;
+    s32 level;
+    enum Species species;
 
-    if (round >= TOTAL_PYRAMID_ROUNDS)
-        round = TOTAL_PYRAMID_ROUNDS - 1;
-
-    if (lvl != FRONTIER_LVL_50)
-        wildMons = sOpenLevelWildMonPointers[round];
-    else
-        wildMons = sLevel50WildMonPointers[round];
-
-    id = GetMonData(&gParties[B_TRAINER_OPPONENT_A][0], MON_DATA_SPECIES) - 1;
-    SetMonData(&gParties[B_TRAINER_OPPONENT_A][0], MON_DATA_SPECIES, &wildMons[id].species);
-    StringCopy(name, GetSpeciesName(wildMons[id].species));
-    SetMonData(&gParties[B_TRAINER_OPPONENT_A][0], MON_DATA_NICKNAME, &name);
-    if (lvl != FRONTIER_LVL_50)
-    {
-        lvl = SetFacilityPtrsGetLevel();
-        lvl -= wildMons[id].lvl;
-        lvl = lvl - 5 + (Random() % 11);
-    }
-    else
-    {
-        lvl = wildMons[id].lvl - 5 + ((Random() % 11));
-    }
-    SetMonData(&gParties[B_TRAINER_OPPONENT_A][0],
-               MON_DATA_EXP,
-               &gExperienceTables[gSpeciesInfo[wildMons[id].species].growthRate][lvl]);
-
-    switch (wildMons[id].abilityNum)
-    {
-    case 0:
-    case 1:
-        SetMonData(&gParties[B_TRAINER_OPPONENT_A][0], MON_DATA_ABILITY_NUM, &wildMons[id].abilityNum);
-        break;
-    case ABILITY_RANDOM:
-    default:
-        if (GetSpeciesAbility(wildMons[id].species, 1))
+    if (id >= PYRAMID_WILD_MON_COUNT)
+        id = 0;
+    for (u32 i = 0; forceSpecies != SPECIES_NONE && i < PYRAMID_WILD_MON_COUNT; i++)
+        if (wildMons[i].species == forceSpecies)
         {
-            i = GetMonData(&gParties[B_TRAINER_OPPONENT_A][0], MON_DATA_PERSONALITY) % 2;
-            SetMonData(&gParties[B_TRAINER_OPPONENT_A][0], MON_DATA_ABILITY_NUM, &i);
+            id = i;
+            break;
         }
-        else
-        {
-            i = 0;
-            SetMonData(&gParties[B_TRAINER_OPPONENT_A][0], MON_DATA_ABILITY_NUM, &i);
-        }
-        break;
-    }
 
-    for (i = 0; i < MAX_MON_MOVES; i++)
-        SetMonMoveSlot(&gParties[B_TRAINER_OPPONENT_A][0], wildMons[id].moves[i], i);
+    species = wildMons[id].species;
+    if (!IsSpeciesEnabled(species))
+        species = SPECIES_PIKACHU;
+    level = lvlMode == FRONTIER_LVL_50 ? wildMons[id].lvl : (s32)SetFacilityPtrsGetLevel() - wildMons[id].lvl;
+    level += (s32)(Random() % 11) - 5;
+    level = max(1, min(MAX_LEVEL, level));
 
-    // UB: Reading outside the array as lvl was used for mon level instead of frontier lvl mode.
-    #ifndef UBFIX
-    if (gSaveBlock2Ptr->frontier.pyramidWinStreaks[lvl] >= 140)
-    #else
-    if (gSaveBlock2Ptr->frontier.pyramidWinStreaks[gSaveBlock2Ptr->frontier.lvlMode] >= 140)
-    #endif
+    // Rebuild the placeholder encounter so its old species' HP, Tera type,
+    // ability, moves, and other derived fields cannot leak into the real mon.
+    CreateMon(mon, species, level, personality, OTID_STRUCT_PRESET(otId));
+    SetMonData(mon, MON_DATA_IVS, &ivs);
+    ability = wildMons[id].abilityNum;
+    if (ability == ABILITY_RANDOM)
+        ability = personality % 2;
+    if (GetSpeciesAbility(species, ability) == ABILITY_NONE)
+        ability = 0;
+    SetMonData(mon, MON_DATA_ABILITY_NUM, &ability);
+    value = TYPE_MYSTERY;
+    SetMonData(mon, MON_DATA_TERA_TYPE, &value);
+    value = BLOCK_AI_DYNAMAX;
+    SetMonData(mon, MON_DATA_DYNAMAX_LEVEL, &value);
+
+    // Respect generation-dependent learnset configurations as well.
+    if (species == wildMons[id].species && ArePyramidWildMovesLegal(&wildMons[id], level))
+        for (u32 i = 0; i < MAX_MON_MOVES; i++)
+            SetMonMoveSlot(mon, wildMons[id].moves[i], i);
+
+    if (streak >= 140)
     {
-        id = (Random() % 17) + 15;
-        for (i = 0; i < NUM_STATS; i++)
-            SetMonData(&gParties[B_TRAINER_OPPONENT_A][0], MON_DATA_HP_IV + i, &id);
+        value = (Random() % 17) + 15;
+        for (u32 i = 0; i < NUM_STATS; i++)
+            SetMonData(mon, MON_DATA_HP_IV + i, &value);
     }
-    CalculateMonStats(&gParties[B_TRAINER_OPPONENT_A][0]);
+    CalculateMonStats(mon);
+    value = GetMonData(mon, MON_DATA_MAX_HP);
+    SetMonData(mon, MON_DATA_HP, &value);
 }
 #endif
 
@@ -2196,6 +2213,19 @@ u16 GetBattlePyramidPickupItemId(void)
 
     if (i >= PICKUP_ITEMS_PER_ROUND)
         i = PICKUP_ITEMS_PER_ROUND - 1;
+
+    if (rand >= 100 - PYRAMID_Z_PICKUP_CHANCE)
+    {
+        enum Item crystal = GetPyramidPartyZCrystal(Random());
+        // Pickup is random loot, unlike fixed floor objects. Avoid wasting bag
+        // slots on crystals already in the bag or held by a party member.
+        bool32 owned = crystal != ITEM_NONE && CheckBagHasItem(crystal, 1);
+        for (u32 slot = 0; slot < PARTY_SIZE; slot++)
+            if (GetMonData(&gParties[B_TRAINER_PLAYER][slot], MON_DATA_HELD_ITEM) == crystal)
+                owned = TRUE;
+        if (crystal != ITEM_NONE && !owned)
+            return crystal;
+    }
 
     if (lvlMode != FRONTIER_LVL_50)
         return sPickupItemsLvlOpen[round][i];
