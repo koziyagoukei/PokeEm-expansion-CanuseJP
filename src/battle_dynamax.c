@@ -73,6 +73,9 @@ static const struct GMaxMove sGMaxMoveTable[] =
 // Returns whether a battler can Dynamax.
 bool32 CanDynamax(enum BattlerId battler)
 {
+    if (gBattleTypeFlags & BATTLE_TYPE_PYRAMID)
+        return FALSE;
+
     if (IsBattlerInMegaOrPrimalForm(battler))
         return FALSE;
 

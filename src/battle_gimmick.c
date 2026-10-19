@@ -55,6 +55,10 @@ u8 GetUsableGimmickMask(enum BattlerId battler)
 // Returns whether a battler is able to use a gimmick. Checks consumption and gimmick specific functions.
 bool32 CanActivateGimmick(enum BattlerId battler, enum Gimmick gimmick)
 {
+    if ((gBattleTypeFlags & BATTLE_TYPE_PYRAMID)
+     && gimmick != GIMMICK_Z_MOVE && gimmick != GIMMICK_TERA)
+        return FALSE;
+
     if ((gBattleTypeFlags & BATTLE_TYPE_PALACE)
      && gimmick != GIMMICK_MEGA
      && gimmick != GIMMICK_TERA)
@@ -150,7 +154,7 @@ bool32 ShouldTrainerBattlerUseGimmick(enum BattlerId battler, enum Gimmick gimmi
 // Returns whether a trainer has used a gimmick during a battle.
 bool32 HasTrainerUsedGimmick(enum BattlerId battler, enum Gimmick gimmick)
 {
-    if (IsDoubleBattle() && (IsPartnerMonFromSameTrainer(battler) || (gimmick == GIMMICK_DYNAMAX)))
+    if (IsDoubleBattle() && (IsPartnerMonFromSameTrainer(battler) || (gimmick == GIMMICK_DYNAMAX) || (gBattleTypeFlags & BATTLE_TYPE_PYRAMID)))
     {
         enum BattlerId partner = GetPartnerBattler(battler);
         if (gBattleStruct->gimmick.activated[partner][gimmick]
@@ -188,7 +192,7 @@ void SetGimmickAsActivated(enum BattlerId battler, enum Gimmick gimmick)
 {
     gBattleStruct->gimmick.activated[battler][gimmick] = TRUE;
     gBattleStruct->gimmick.activeGimmick[GetBattlerTrainer(battler)][gBattlerPartyIndexes[battler]] |= USED_ANY_GIMMICK_FLAG;
-    if (IsDoubleBattle() && (IsPartnerMonFromSameTrainer(battler) || (gimmick == GIMMICK_DYNAMAX)))
+    if (IsDoubleBattle() && (IsPartnerMonFromSameTrainer(battler) || (gimmick == GIMMICK_DYNAMAX) || (gBattleTypeFlags & BATTLE_TYPE_PYRAMID)))
         gBattleStruct->gimmick.activated[GetPartnerBattler(battler)][gimmick] = TRUE;
 }
 
@@ -196,7 +200,7 @@ void ClearGimmickAsActivated(enum BattlerId battler, enum Gimmick gimmick)
 {
     gBattleStruct->gimmick.activated[battler][gimmick] = FALSE;
     gBattleStruct->gimmick.activeGimmick[GetBattlerTrainer(battler)][gBattlerPartyIndexes[battler]] &= ~USED_ANY_GIMMICK_FLAG;
-    if (IsDoubleBattle() && (IsPartnerMonFromSameTrainer(battler) || (gimmick == GIMMICK_DYNAMAX)))
+    if (IsDoubleBattle() && (IsPartnerMonFromSameTrainer(battler) || (gimmick == GIMMICK_DYNAMAX) || (gBattleTypeFlags & BATTLE_TYPE_PYRAMID)))
         gBattleStruct->gimmick.activated[GetPartnerBattler(battler)][gimmick] = FALSE;
 }
 

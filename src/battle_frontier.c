@@ -7,6 +7,7 @@
 #include "battle_dome.h"
 #include "battle_factory.h"
 #include "battle_partner.h"
+#include "battle_pyramid.h"
 #include "battle_tower.h"
 #include "battle_transition.h"
 #include "event_data.h"
@@ -29,7 +30,6 @@ static bool32 TryGetOpponentPartySlot(const struct Pokemon *mon, enum BattleTrai
 static void ClearFacilityOpponentGimmickSources(void);
 static void MarkFrontierOpponentPartyGimmicksForTrainer(enum BattleTrainer trainer);
 static void SetFacilityMonGimmickAvailability(const struct TrainerMon *fmon, struct Pokemon *mon);
-static void MarkFacilityMonGimmicksForOpponent(const struct TrainerMon *fmon, struct Pokemon *dst);
 static void ApplyFrontierOpponentIVPenalty(void);
 static void RestoreFactoryOpponentIVs(void);
 
@@ -289,8 +289,18 @@ static void DoFacilityTrainerBattleInternal(u8 facility)
         break;
     }
 
-    if (facility <= FACILITY_BATTLE_PYRAMID)
+    if (facility == FACILITY_BATTLE_PYRAMID)
+        PreparePyramidTrainerBattle();
+    else if (facility <= FACILITY_BATTLE_PYRAMID)
         ApplyFrontierOpponentIVPenalty();
+}
+
+void PreparePyramidTrainerBattle(void)
+{
+    if (!(gBattleTypeFlags & BATTLE_TYPE_PYRAMID))
+        return;
+    BalancePyramidOpponentParties();
+    ApplyFrontierOpponentIVPenalty();
 }
 
 void DoFacilityTrainerBattle(struct ScriptContext *ctx)
@@ -324,6 +334,9 @@ void FillFrontierTrainersParties(u8 monsCount)
 
 static u8 GetForcedFrontierMonPoolFilter(u8 partySlot, u8 monCount)
 {
+    if (gBattleTypeFlags & BATTLE_TYPE_PYRAMID)
+        return FRONTIER_MON_FILTER_NONE;
+
     bool8 forceSpecialStone = gSaveBlock2Ptr->frontier.curChallengeBattleNum >= 3;
     bool8 forceBannedSpecies = forceSpecialStone && FlagGet(FLAG_FRONTIER_ALLOW_BANNED_SPECIES);
 
@@ -457,7 +470,7 @@ static void MarkFrontierOpponentPartyGimmicksForTrainer(enum BattleTrainer train
 
 void MarkFrontierOpponentPartyGimmicks(void)
 {
-    if (gBattleStruct == NULL || !(gBattleTypeFlags & BATTLE_TYPE_FRONTIER) || (gBattleTypeFlags & BATTLE_TYPE_LINK))
+    if (gBattleStruct == NULL || !(gBattleTypeFlags & BATTLE_TYPE_FRONTIER) || (gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_PYRAMID)))
         return;
 
     MarkFrontierOpponentPartyGimmicksForTrainer(B_TRAINER_OPPONENT_A);
@@ -473,7 +486,7 @@ static void SetFacilityMonGimmickAvailability(const struct TrainerMon *fmon, str
     SetMonData(mon, MON_DATA_TERA_TYPE, &teraType);
 }
 
-static void MarkFacilityMonGimmicksForOpponent(const struct TrainerMon *fmon, struct Pokemon *dst)
+void MarkFacilityMonGimmicksForOpponent(const struct TrainerMon *fmon, struct Pokemon *dst)
 {
     enum BattleTrainer trainer;
     u32 slot;
@@ -489,17 +502,18 @@ void CreateFacilityMon(const struct TrainerMon *fmon, u16 level, u8 fixedIV, u32
 {
     enum PokeBall ball = (fmon->ball == 0xFF) ? Random() % POKEBALL_COUNT : fmon->ball;
     enum Move move;
-    u32 personality = 0, friendship, j;
-    enum Ability ability;
+    u32 friendship, j;
+    u32 data;
 
+    u32 personality = (Random32() & 0xFFFFDF00) + 0x1000;
+    u32 genderValue = Random32();
     if (fmon->gender == TRAINER_MON_MALE)
-    {
-        personality = GeneratePersonalityForGender(MON_MALE, fmon->species) + 0x1000;
-    }
+        genderValue = GeneratePersonalityForGender(MON_MALE, fmon->species, genderValue);
     else if (fmon->gender == TRAINER_MON_FEMALE)
-    {
-        personality = GeneratePersonalityForGender(MON_FEMALE, fmon->species) + 0x1000;
-    }
+        genderValue = GeneratePersonalityForGender(MON_FEMALE, fmon->species, genderValue);
+    else
+        genderValue = genderValue & 0x000000FF;
+    personality |= genderValue;
 
     ModifyPersonalityForNature(&personality, fmon->nature);
     CreateMonWithIVs(dst, fmon->species, level, personality, OTID_STRUCT_PRESET(otID), fixedIV);
@@ -521,18 +535,9 @@ void CreateFacilityMon(const struct TrainerMon *fmon, u16 level, u8 fixedIV, u32
     SetMonData(dst, MON_DATA_HELD_ITEM, &fmon->heldItem);
 
     // try to set ability. Otherwise, random of non-hidden as per vanilla
-    if (fmon->ability != ABILITY_NONE)
+    if (fmon->ability)
     {
-        const struct SpeciesInfo *speciesInfo = &gSpeciesInfo[fmon->species];
-        u32 maxAbilities = ARRAY_COUNT(speciesInfo->abilities);
-        for (ability = 0; ability < maxAbilities; ++ability)
-        {
-            if (speciesInfo->abilities[ability] == fmon->ability)
-                break;
-        }
-        if (ability >= maxAbilities)
-            ability = 0;
-        SetMonData(dst, MON_DATA_ABILITY_NUM, &ability);
+        SetCorrectAbilityNum(dst, fmon->species, fmon->ability);
     }
 
     if (fmon->ev != NULL)
@@ -545,30 +550,40 @@ void CreateFacilityMon(const struct TrainerMon *fmon, u16 level, u8 fixedIV, u32
         SetMonData(dst, MON_DATA_SPEED_EV, &(fmon->ev[5]));
     }
 
+    // Custom Frontier spreads determine Hidden Power; the IV handicap is applied later.
     if (fmon->iv)
-        SetMonData(dst, MON_DATA_IVS, &(fmon->iv));
+        SetMonData(dst, MON_DATA_IVS, &fmon->iv);
 
     if (fmon->nickname != NULL)
         SetMonData(dst, MON_DATA_NICKNAME, fmon->nickname);
 
     if (fmon->isShiny)
     {
-        u32 data = TRUE;
+        data = TRUE;
         SetMonData(dst, MON_DATA_IS_SHINY, &data);
     }
-    if (fmon->dynamaxLevel > 0)
+    if (fmon->shouldUseDynamax)
     {
-        u32 data = fmon->dynamaxLevel;
-        SetMonData(dst, MON_DATA_DYNAMAX_LEVEL, &data);
+        data = fmon->dynamaxLevel;
     }
+    else
+    {
+        data = BLOCK_AI_DYNAMAX;
+    }
+    SetMonData(dst, MON_DATA_DYNAMAX_LEVEL, &data);
     if (fmon->gigantamaxFactor)
     {
-        u32 data = fmon->gigantamaxFactor;
+        data = fmon->gigantamaxFactor;
         SetMonData(dst, MON_DATA_GIGANTAMAX_FACTOR, &data);
     }
     if (fmon->teraType)
     {
-        u32 data = fmon->teraType;
+        data = fmon->teraType;
+        SetMonData(dst, MON_DATA_TERA_TYPE, &data);
+    }
+    else
+    {
+        data = TYPE_MYSTERY;
         SetMonData(dst, MON_DATA_TERA_TYPE, &data);
     }
 
