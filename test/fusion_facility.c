@@ -148,11 +148,14 @@ TEST("Party resort warp: stale challenge status does not block entry from the hu
     EXPECT(Test_CanEnterPartyRoamerParkFromPartyMenu());
 }
 
-TEST("Party resort warp: resort and villa maps still disallow recursive entry")
+TEST("Party resort warp: resort dining bath villa shop and local room block recursive entry")
 {
     u16 map = MAP_PARTY_ROAMER_PARK;
     PARAMETRIZE { map = MAP_PARTY_ROAMER_PARK; }
+    PARAMETRIZE { map = MAP_PARTY_EAT_TIME; }
+    PARAMETRIZE { map = MAP_PARTYBATHTIME; }
     PARAMETRIZE { map = MAP_MINI_MINI_VILLA; }
+    PARAMETRIZE { map = MAP_MINI_MINI_VILLA_SHOP; }
     PARAMETRIZE { map = MAP_MINI_MINI_VILLA_LOCAL_ROOM; }
     SetMap(map);
     SetFieldPartyMenu();

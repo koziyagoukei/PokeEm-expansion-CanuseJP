@@ -49,7 +49,7 @@ TEST("Frontier curated sets: Smeargle has three selectable Sketch-legal four-mov
     const struct TrainerMon *mon = &gBattleFrontierMons[id];
     EXPECT(IsFrontierMonPoolEntryEnabled(id));
     EXPECT_EQ(mon->species, SPECIES_SMEARGLE);
-    EXPECT_EQ(mon->gender, TRAINER_MON_RANDOM_GENDER);
+    EXPECT_EQ((u32)mon->gender, TRAINER_MON_RANDOM_GENDER);
     for (u32 slot = 0; slot < MAX_MON_MOVES; slot++)
     {
         EXPECT_NE(mon->moves[slot], MOVE_NONE);

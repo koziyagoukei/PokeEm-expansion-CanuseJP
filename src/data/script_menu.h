@@ -832,6 +832,7 @@ static const struct MenuAction sMultichoiceList_LocalRoomPC[] =
     {COMPOUND_STRING("{JPN}かべを かえる")},
     {COMPOUND_STRING("{JPN}ポケモンを はなす")},
     {COMPOUND_STRING("{JPN}ぜんぶ かたづける")},
+    {COMPOUND_STRING("{JPN}とくしゅドール")},
     {gText_Exit},
 };
 

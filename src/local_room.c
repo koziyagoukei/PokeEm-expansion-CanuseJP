@@ -12,6 +12,8 @@
 #include "pokemon.h"
 #include "script.h"
 #include "secret_base.h"
+#include "special_doll.h"
+#include "sprite.h"
 #include "string_util.h"
 #include "task.h"
 #include "util.h"
@@ -70,14 +72,21 @@ static bool8 IsProtectedTile(s16 x, s16 y)
 
 bool8 LocalRoom_IsPlacementAllowed(u8 decor, s16 x, s16 y)
 {
+    if (decor == DECOR_NONE || decor > NUM_DECORATIONS)
+        return FALSE;
+    return LocalRoom_IsPlacementAllowedForDecoration(&gDecorations[decor], x, y);
+}
+
+bool8 LocalRoom_IsPlacementAllowedForDecoration(const struct Decoration *decoration, s16 x, s16 y)
+{
     u8 width, height;
     s16 dx, dy;
     u8 permission;
 
-    if (!GetDecorationDimensions(decor, &width, &height))
+    if (!GetDecorationDimensionsForDecoration(decoration, &width, &height))
         return FALSE;
 
-    permission = gDecorations[decor].permission;
+    permission = decoration->permission;
     if (x < 1 || x + width > LOCAL_ROOM_WIDTH - 1 || y >= LOCAL_ROOM_HEIGHT - 2)
         return FALSE;
     if (permission == DECORPERM_NA_WALL)
@@ -102,6 +111,13 @@ bool8 LocalRoom_IsPlainFloor(s16 mapX, s16 mapY)
 
 bool8 LocalRoom_HasAccessPathAfterPlacement(u8 decor, s16 x, s16 y)
 {
+    if (decor == DECOR_NONE || decor > NUM_DECORATIONS)
+        return FALSE;
+    return LocalRoom_HasAccessPathForDecoration(&gDecorations[decor], x, y);
+}
+
+bool8 LocalRoom_HasAccessPathForDecoration(const struct Decoration *decoration, s16 x, s16 y)
+{
     static const s8 dx[] = {0, 1, 0, -1};
     static const s8 dy[] = {-1, 0, 1, 0};
     u16 blocked[LOCAL_ROOM_HEIGHT] = {};
@@ -110,12 +126,10 @@ bool8 LocalRoom_HasAccessPathAfterPlacement(u8 decor, s16 x, s16 y)
     u16 head = 0, tail = 0;
     s16 tx, ty;
     u8 width, height, i;
-    const struct Decoration *decoration;
 
-    if (!LocalRoom_IsCurrentMap() || !LocalRoom_IsPlacementAllowed(decor, x, y))
+    if (!LocalRoom_IsCurrentMap() || !LocalRoom_IsPlacementAllowedForDecoration(decoration, x, y))
         return FALSE;
-    GetDecorationDimensions(decor, &width, &height);
-    decoration = &gDecorations[decor];
+    GetDecorationDimensionsForDecoration(decoration, &width, &height);
 
     for (ty = 0; ty < LOCAL_ROOM_HEIGHT; ty++)
     {
@@ -213,6 +227,7 @@ void LocalRoom_EnsureSaveData(void)
         }
     }
     LocalRoom_UpdateChecksum();
+    SpecialDoll_EnsureSaveData();
 }
 
 static void HideRoamers(void)
@@ -225,6 +240,13 @@ static void HideRoamers(void)
             gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
         sRoamerPartySlots[i] = PARTY_SIZE;
     }
+}
+
+static void ReserveRoomSpritePalettes(void)
+{
+    // Field/weather code can overwrite the fixed player/NPC palette banks.
+    if (gReservedSpritePaletteCount < SPECIAL_DOLL_FIRST_PALETTE_SLOT)
+        gReservedSpritePaletteCount = SPECIAL_DOLL_FIRST_PALETTE_SLOT;
 }
 
 void LocalRoom_PrepareMap(void)
@@ -352,9 +374,11 @@ void LocalRoom_InitObjects(void)
 {
     if (!LocalRoom_IsCurrentMap())
         return;
+    ReserveRoomSpritePalettes();
     HideSecretBaseDecorationSprites();
     gSpecialVar_0x8004 = 0;
     InitSecretBaseDecorationSprites();
+    SpecialDoll_InitObjects();
     RefreshRoamers();
 }
 
@@ -362,6 +386,7 @@ void LocalRoom_Resume(void)
 {
     if (!LocalRoom_IsCurrentMap())
         return;
+    ReserveRoomSpritePalettes();
     FlagSet(FLAG_TEMP_HIDE_FOLLOWER);
     LocalRoom_ApplyStyle();
 }
@@ -377,6 +402,7 @@ void LocalRoom_ReturnToField(void)
 
 void LocalRoom_BeginDecorating(void)
 {
+    ReserveRoomSpritePalettes();
     sDecorating = TRUE;
     HideRoamers();
 }
@@ -448,6 +474,7 @@ void LocalRoom_ClearDecorationData(void)
     memset(gSaveBlock3Ptr->localRoom.decorations, 0, LOCAL_ROOM_DECOR_COUNT);
     memset(gSaveBlock3Ptr->localRoom.decorationPositions, 0, LOCAL_ROOM_DECOR_COUNT);
     LocalRoom_UpdateChecksum();
+    SpecialDoll_ClearPlacements();
 }
 
 void LocalRoom_BufferMonMessage(void)

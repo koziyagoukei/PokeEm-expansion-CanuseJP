@@ -2,24 +2,37 @@
 #include "decoration.h"
 #include "decoration_inventory.h"
 #include "event_data.h"
+#include "frontier_util.h"
 #include "item.h"
 #include "international_string_util.h"
 #include "list_menu.h"
 #include "malloc.h"
 #include "map_name_popup.h"
 #include "menu.h"
+#include "menu_helpers.h"
 #include "pokeball.h"
 #include "pokemon.h"
 #include "script.h"
 #include "sound.h"
+#include "special_doll.h"
 #include "string_util.h"
 #include "strings.h"
 #include "task.h"
 #include "villa_shop.h"
+#include "constants/battle_frontier.h"
 #include "constants/decorations.h"
 #include "constants/songs.h"
 
 static const u8 sText_Cancel[] = _("{JPN}やめる");
+static const u8 sText_ShinyDolls[] = _("{JPN}いろちがいドール");
+
+static const u8 *const sCategoryNames[VILLA_SHOP_CATEGORY_COUNT] =
+{
+    gText_Desk, gText_Chair, gText_Plant, gText_Ornament,
+    gText_Mat, gText_Poster, gText_Doll, gText_Cushion, gText_SpecialDolls, sText_ShinyDolls,
+};
+
+STATIC_ASSERT(DECORCAT_COUNT == VILLA_SHOP_SPECIAL_DOLL_CATEGORY, VillaShopDecorationCategories);
 
 static const u8 sBallPrices[POKEBALL_COUNT] =
 {
@@ -56,6 +69,7 @@ struct VillaShopCatalog
 {
     struct ListMenuItem items[NUM_DECORATIONS + 1];
     u16 mode;
+    u16 category;
     u16 scroll;
     u16 row;
     u8 windowId;
@@ -66,6 +80,27 @@ struct VillaShopCatalog
 static EWRAM_DATA struct VillaShopCatalog *sCatalog = NULL;
 static EWRAM_DATA u16 sLastScroll = 0;
 static EWRAM_DATA u16 sLastRow = 0;
+static EWRAM_DATA u16 sLastCategory = 0;
+
+static void DrawCatalog(void);
+
+static bool8 IsSpecialDollCategory(u16 category)
+{
+    return category == VILLA_SHOP_SPECIAL_DOLL_CATEGORY || category == VILLA_SHOP_SHINY_DOLL_CATEGORY;
+}
+
+bool8 VillaShop_IsCategoryAvailable(u16 category)
+{
+    u32 facility, goldSymbols = 0;
+    if (category >= VILLA_SHOP_CATEGORY_COUNT)
+        return FALSE;
+    if (category != VILLA_SHOP_SHINY_DOLL_CATEGORY)
+        return TRUE;
+    for (facility = 0; facility < NUM_FRONTIER_FACILITIES; facility++)
+        if (FlagGet(gFrontierBrainInfo[facility].goldSymbolFlag))
+            goldSymbols++;
+    return goldSymbols >= VILLA_SHOP_SHINY_DOLL_GOLD_SYMBOLS;
+}
 
 u16 VillaShop_GetBallPrice(u16 ball)
 {
@@ -84,6 +119,30 @@ u16 VillaShop_BuyDecoration(u16 decoration)
         return VILLA_SHOP_STORAGE_FULL;
     gSaveBlock2Ptr->frontier.battlePoints -= VILLA_SHOP_DECOR_PRICE;
     return VILLA_SHOP_OK;
+}
+
+u16 VillaShop_BuySpecialDoll(u16 doll)
+{
+    if (SpecialDoll_GetDecoration(doll) == NULL)
+        return VILLA_SHOP_INVALID;
+    if (SpecialDoll_IsShiny(doll) && !VillaShop_IsCategoryAvailable(VILLA_SHOP_SHINY_DOLL_CATEGORY))
+        return VILLA_SHOP_INVALID;
+    if (gSaveBlock2Ptr->frontier.battlePoints < VILLA_SHOP_DECOR_PRICE)
+        return VILLA_SHOP_NOT_ENOUGH_BP;
+    if (!SpecialDoll_Add(doll))
+        return VILLA_SHOP_STORAGE_FULL;
+    gSaveBlock2Ptr->frontier.battlePoints -= VILLA_SHOP_DECOR_PRICE;
+    return VILLA_SHOP_OK;
+}
+
+bool8 VillaShop_IsInCategory(u16 category, u16 item)
+{
+    if (category == VILLA_SHOP_SPECIAL_DOLL_CATEGORY)
+        return SpecialDoll_GetDecoration(item) != NULL && !SpecialDoll_IsShiny(item);
+    if (category == VILLA_SHOP_SHINY_DOLL_CATEGORY)
+        return SpecialDoll_IsShiny(item);
+    return category < DECORCAT_COUNT && item != DECOR_NONE && item <= NUM_DECORATIONS
+        && gDecorations[item].category == category;
 }
 
 u16 VillaShop_ChangeBall(u16 partySlot, u16 ball)
@@ -112,6 +171,8 @@ void VillaShop_Purchase(void)
         gSpecialVar_Result = VillaShop_BuyDecoration(gSpecialVar_0x8005);
     else if (gSpecialVar_0x8006 == VILLA_SHOP_BALLS)
         gSpecialVar_Result = VillaShop_ChangeBall(gSpecialVar_0x8004, gSpecialVar_0x8005);
+    else if (gSpecialVar_0x8006 == VILLA_SHOP_SPECIAL_DOLLS)
+        gSpecialVar_Result = VillaShop_BuySpecialDoll(gSpecialVar_0x8005);
     else
         gSpecialVar_Result = VILLA_SHOP_INVALID;
 }
@@ -122,7 +183,7 @@ static void PrintCatalogPrice(u8 windowId, u32 id, u8 y)
     u16 price;
     if (id == 0)
         return;
-    price = sCatalog->mode == VILLA_SHOP_DECORATIONS ? VILLA_SHOP_DECOR_PRICE : VillaShop_GetBallPrice(id);
+    price = sCatalog->mode == VILLA_SHOP_BALLS ? VillaShop_GetBallPrice(id) : VILLA_SHOP_DECOR_PRICE;
     StringCopy(ConvertIntToDecimalStringN(text, price, STR_CONV_MODE_LEFT_ALIGN, 3), gText_BP);
     AddTextPrinterParameterized(windowId, FONT_NORMAL, text,
         GetStringRightAlignXOffset(FONT_NORMAL, text, 204), y, TEXT_SKIP_DRAW, NULL);
@@ -141,15 +202,44 @@ static void Task_VillaShopCatalog(u8 taskId)
     if (id == LIST_NOTHING_CHOSEN)
         return;
     PlaySE(SE_SELECT);
+    if (sCatalog->mode != VILLA_SHOP_BALLS && sCatalog->category == VILLA_SHOP_CATEGORY_NONE && id > 0)
+    {
+        DestroyListMenuTask(sCatalog->listTaskId, NULL, NULL);
+        RemoveScrollIndicatorArrowPair(sCatalog->arrowsTaskId);
+        sCatalog->category = id - 1;
+        sCatalog->mode = IsSpecialDollCategory(sCatalog->category)
+            ? VILLA_SHOP_SPECIAL_DOLLS : VILLA_SHOP_DECORATIONS;
+        sCatalog->scroll = 0;
+        sCatalog->row = 0;
+        DrawCatalog();
+        return;
+    }
+    if (sCatalog->mode != VILLA_SHOP_BALLS && sCatalog->category != VILLA_SHOP_CATEGORY_NONE && id <= 0)
+    {
+        u16 category = sCatalog->category;
+        DestroyListMenuTask(sCatalog->listTaskId, NULL, NULL);
+        RemoveScrollIndicatorArrowPair(sCatalog->arrowsTaskId);
+        sCatalog->category = VILLA_SHOP_CATEGORY_NONE;
+        sCatalog->mode = VILLA_SHOP_DECORATIONS;
+        sCatalog->row = min(category, 5);
+        sCatalog->scroll = category - sCatalog->row;
+        DrawCatalog();
+        return;
+    }
     gSpecialVar_Result = id > 0;
     if (id > 0)
     {
         gSpecialVar_0x8005 = id;
-        StringCopy(gStringVar1, sCatalog->mode == VILLA_SHOP_DECORATIONS
-            ? gDecorations[id].name : GetItemName(gPokeBalls[id].itemId));
-        ConvertIntToDecimalStringN(gStringVar2, sCatalog->mode == VILLA_SHOP_DECORATIONS
-            ? VILLA_SHOP_DECOR_PRICE : VillaShop_GetBallPrice(id), STR_CONV_MODE_LEFT_ALIGN, 3);
+        gSpecialVar_0x8006 = sCatalog->mode;
+        if (sCatalog->mode == VILLA_SHOP_SPECIAL_DOLLS)
+            StringCopy(gStringVar1, SpecialDoll_GetDecoration(id)->name);
+        else
+            StringCopy(gStringVar1, sCatalog->mode == VILLA_SHOP_DECORATIONS
+                ? gDecorations[id].name : GetItemName(gPokeBalls[id].itemId));
+        ConvertIntToDecimalStringN(gStringVar2, sCatalog->mode == VILLA_SHOP_BALLS
+            ? VillaShop_GetBallPrice(id) : VILLA_SHOP_DECOR_PRICE, STR_CONV_MODE_LEFT_ALIGN, 3);
     }
+    sLastCategory = sCatalog->category == VILLA_SHOP_CATEGORY_NONE ? 0 : sCatalog->category + 1;
     DestroyListMenuTask(sCatalog->listTaskId, &sLastScroll, &sLastRow);
     RemoveScrollIndicatorArrowPair(sCatalog->arrowsTaskId);
     ClearStdWindowAndFrameToTransparent(sCatalog->windowId, TRUE);
@@ -166,24 +256,28 @@ static void Task_VillaShopResume(u8 taskId)
     ScriptContext_Enable();
 }
 
-void VillaShop_OpenCatalog(void)
+static void DrawCatalog(void)
 {
-    const struct WindowTemplate window = {0, 2, 4, 26, 12, 15, 64};
     struct ListMenuTemplate list = {0};
     u32 id, count = 0;
-    u8 taskId = CreateTask(Task_VillaShopResume, 8);
-
-    gSpecialVar_Result = FALSE;
-    if (sCatalog != NULL || gSpecialVar_0x8006 > VILLA_SHOP_BALLS)
-        return;
-    sCatalog = AllocZeroed(sizeof(*sCatalog));
-    if (sCatalog == NULL)
-        return;
-    sCatalog->mode = gSpecialVar_0x8006;
-    if (sCatalog->mode == VILLA_SHOP_DECORATIONS)
+    bool8 categories = sCatalog->mode != VILLA_SHOP_BALLS && sCatalog->category == VILLA_SHOP_CATEGORY_NONE;
+    if (categories)
+    {
+        for (id = 0; id < VILLA_SHOP_CATEGORY_COUNT; id++)
+            if (VillaShop_IsCategoryAvailable(id))
+                sCatalog->items[count++] = (struct ListMenuItem){sCategoryNames[id], id + 1};
+    }
+    else if (sCatalog->mode == VILLA_SHOP_DECORATIONS)
     {
         for (id = 1; id <= NUM_DECORATIONS; id++)
-            sCatalog->items[count++] = (struct ListMenuItem){gDecorations[id].name, id};
+            if (VillaShop_IsInCategory(sCatalog->category, id))
+                sCatalog->items[count++] = (struct ListMenuItem){gDecorations[id].name, id};
+    }
+    else if (sCatalog->mode == VILLA_SHOP_SPECIAL_DOLLS)
+    {
+        for (id = 1; id < SPECIAL_DOLL_COUNT; id++)
+            if (VillaShop_IsInCategory(sCatalog->category, id))
+                sCatalog->items[count++] = (struct ListMenuItem){SpecialDoll_GetDecoration(id)->name, id};
     }
     else
     {
@@ -192,12 +286,57 @@ void VillaShop_OpenCatalog(void)
                 sCatalog->items[count++] = (struct ListMenuItem){GetItemName(gPokeBalls[id].itemId), id};
     }
     sCatalog->items[count++] = (struct ListMenuItem){sText_Cancel, 0};
+    FillWindowPixelBuffer(sCatalog->windowId, PIXEL_FILL(1));
+    SetStandardWindowBorderStyle(sCatalog->windowId, FALSE);
+    list.items = sCatalog->items;
+    list.moveCursorFunc = CatalogMoveCursor;
+    list.itemPrintFunc = categories ? NULL : PrintCatalogPrice;
+    list.totalItems = count;
+    list.maxShowed = min(6, count);
+    list.windowId = sCatalog->windowId;
+    list.item_X = 8;
+    list.upText_Y = 1;
+    list.cursorPal = 2;
+    list.fillValue = 1;
+    list.cursorShadowPal = 3;
+    list.fontId = FONT_NORMAL;
+    list.scrollMultiple = LIST_MULTIPLE_SCROLL_DPAD;
+    SetCursorWithinListBounds(&sCatalog->scroll, &sCatalog->row, list.maxShowed, count);
+    sCatalog->listTaskId = ListMenuInit(&list, sCatalog->scroll, sCatalog->row);
+    sCatalog->arrowsTaskId = AddScrollIndicatorArrowPairParameterized(
+        SCROLL_ARROW_UP, 228, 32, 132, count - list.maxShowed, 0xFCE0, 0xFCE0, &sCatalog->scroll);
+    CopyWindowToVram(sCatalog->windowId, COPYWIN_FULL);
+}
+
+void VillaShop_OpenCatalog(void)
+{
+    const struct WindowTemplate window = {0, 2, 4, 26, 12, 15, 64};
+    u8 taskId = CreateTask(Task_VillaShopResume, 8);
+
+    gSpecialVar_Result = FALSE;
+    if (sCatalog != NULL || gSpecialVar_0x8006 > VILLA_SHOP_SPECIAL_DOLLS)
+        return;
+    sCatalog = AllocZeroed(sizeof(*sCatalog));
+    if (sCatalog == NULL)
+        return;
     if (gSpecialVar_0x8008)
     {
         sLastScroll = 0;
         sLastRow = 0;
+        sLastCategory = 0;
         gSpecialVar_0x8008 = FALSE;
     }
+    sCatalog->category = sLastCategory == 0 ? VILLA_SHOP_CATEGORY_NONE : sLastCategory - 1;
+    if (sCatalog->category != VILLA_SHOP_CATEGORY_NONE && !VillaShop_IsCategoryAvailable(sCatalog->category))
+    {
+        sCatalog->category = VILLA_SHOP_CATEGORY_NONE;
+        sLastScroll = 0;
+        sLastRow = 0;
+    }
+    sCatalog->mode = gSpecialVar_0x8006 == VILLA_SHOP_BALLS ? VILLA_SHOP_BALLS
+        : IsSpecialDollCategory(sCatalog->category) ? VILLA_SHOP_SPECIAL_DOLLS : VILLA_SHOP_DECORATIONS;
+    sCatalog->scroll = sLastScroll;
+    sCatalog->row = sLastRow;
     HideMapNamePopUpWindow();
     LoadMessageBoxAndBorderGfx();
     sCatalog->windowId = AddWindow(&window);
@@ -207,25 +346,6 @@ void VillaShop_OpenCatalog(void)
         sCatalog = NULL;
         return;
     }
-    SetStandardWindowBorderStyle(sCatalog->windowId, FALSE);
-    list.items = sCatalog->items;
-    list.moveCursorFunc = CatalogMoveCursor;
-    list.itemPrintFunc = PrintCatalogPrice;
-    list.totalItems = count;
-    list.maxShowed = 6;
-    list.windowId = sCatalog->windowId;
-    list.item_X = 8;
-    list.upText_Y = 1;
-    list.cursorPal = 2;
-    list.fillValue = 1;
-    list.cursorShadowPal = 3;
-    list.fontId = FONT_NORMAL;
-    list.scrollMultiple = LIST_MULTIPLE_SCROLL_DPAD;
-    sCatalog->scroll = sLastScroll;
-    sCatalog->row = sLastRow;
-    sCatalog->listTaskId = ListMenuInit(&list, sLastScroll, sLastRow);
-    sCatalog->arrowsTaskId = AddScrollIndicatorArrowPairParameterized(
-        SCROLL_ARROW_UP, 228, 32, 132, count - list.maxShowed, 0xFCE0, 0xFCE0, &sCatalog->scroll);
-    CopyWindowToVram(sCatalog->windowId, COPYWIN_FULL);
+    DrawCatalog();
     gTasks[taskId].func = Task_VillaShopCatalog;
 }

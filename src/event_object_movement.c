@@ -35,6 +35,7 @@
 #include "rtc.h"
 #include "script.h"
 #include "sound.h"
+#include "special_doll.h"
 #include "sprite.h"
 #include "task.h"
 #include "trainer_see.h"
@@ -495,6 +496,12 @@ const u8 gInitialMovementTypeFacingDirections[NUM_MOVEMENT_TYPES] = {
 #include "data/object_events/object_event_graphics_info.h"
 #include "data/object_events/object_event_graphics_info_followers.h"
 
+#define SPECIAL_DOLL(_id, symbol, label, path, frameSize) \
+    extern const u16 gSpecialDollPalette_##symbol[]; \
+    extern const u16 gSpecialDollShinyPalette_##symbol[];
+#include "constants/special_doll_list.h"
+#undef SPECIAL_DOLL
+
 static const struct SpritePalette sObjectEventSpritePalettes[] = {
     {gObjectEventPal_Npc1,                  OBJ_EVENT_PAL_TAG_NPC_1},
     {gObjectEventPal_Npc2,                  OBJ_EVENT_PAL_TAG_NPC_2},
@@ -583,6 +590,11 @@ static const struct SpritePalette sObjectEventSpritePalettes[] = {
     {gObjectEventPaletteLight2,             OBJ_EVENT_PAL_TAG_LIGHT_2},
     {gObjectEventPaletteEmotes,             OBJ_EVENT_PAL_TAG_EMOTES},
     {gObjectEventPaletteNeonLight,          OBJ_EVENT_PAL_TAG_NEON_LIGHT},
+#define SPECIAL_DOLL(_id, symbol, label, path, frameSize) \
+    {gSpecialDollPalette_##symbol, SPECIAL_DOLL_PAL_FIRST + SPECIAL_DOLL_##_id - 1}, \
+    {gSpecialDollShinyPalette_##symbol, SPECIAL_DOLL_PAL_FIRST + SPECIAL_DOLL_##_id##_SHINY - 1},
+#include "constants/special_doll_list.h"
+#undef SPECIAL_DOLL
 #ifdef BUGFIX
     {NULL,                                  OBJ_EVENT_PAL_TAG_NONE},
 #else
@@ -2041,7 +2053,17 @@ u8 CreateObjectGraphicsSpriteWithTag(u16 graphicsId, void (*callback)(struct Spr
         }
     }
 
-    if (spriteTemplate->paletteTag == OBJ_EVENT_PAL_TAG_DYNAMIC)
+    if (SpecialDoll_GetGraphicsInfo(graphicsId) != NULL && paletteTag != TAG_NONE)
+    {
+        // Decoration previews own their palette; returning to the field frees this tag.
+        if (LoadObjectEventPaletteCopy(graphicsInfo->paletteTag, paletteTag) == 0xFF)
+        {
+            Free(spriteTemplate);
+            return MAX_SPRITES;
+        }
+        spriteTemplate->paletteTag = paletteTag;
+    }
+    else if (spriteTemplate->paletteTag == OBJ_EVENT_PAL_TAG_DYNAMIC)
     {
         u32 paletteNum = LoadDynamicFollowerPaletteFromGraphicsId(graphicsId, spriteTemplate);
         spriteTemplate->paletteTag = GetSpritePaletteTagByPaletteNum(paletteNum);
@@ -3248,8 +3270,13 @@ static void SetBerryTreeGraphics(struct ObjectEvent *objectEvent, struct Sprite 
 
 const struct ObjectEventGraphicsInfo *GetObjectEventGraphicsInfo(u16 graphicsId)
 {
+    const struct ObjectEventGraphicsInfo *specialDoll;
     if (graphicsId >= OBJ_EVENT_GFX_VARS && graphicsId <= OBJ_EVENT_GFX_VAR_F)
         graphicsId = VarGetObjectEventGraphicsId(graphicsId - OBJ_EVENT_GFX_VARS);
+
+    specialDoll = SpecialDoll_GetGraphicsInfo(graphicsId);
+    if (specialDoll != NULL)
+        return specialDoll;
 
     if (graphicsId == OBJ_EVENT_GFX_BARD)
         return gMauvilleOldManGraphicsInfoPointers[GetCurrentMauvilleOldMan()];
