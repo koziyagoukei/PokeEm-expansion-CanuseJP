@@ -9,6 +9,7 @@ struct ObjectEventGraphicsInfo;
 extern const u8 gText_SpecialDolls[];
 const struct Decoration *SpecialDoll_GetDecoration(u16 doll);
 const struct ObjectEventGraphicsInfo *SpecialDoll_GetGraphicsInfo(u16 graphicsId);
+bool8 SpecialDoll_IsShiny(u16 doll);
 void SpecialDoll_EnsureSaveData(void);
 void SpecialDoll_UpdateChecksum(void);
 bool8 SpecialDoll_Add(u16 doll);

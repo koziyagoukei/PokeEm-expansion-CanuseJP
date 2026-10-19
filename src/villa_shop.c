@@ -2,6 +2,7 @@
 #include "decoration.h"
 #include "decoration_inventory.h"
 #include "event_data.h"
+#include "frontier_util.h"
 #include "item.h"
 #include "international_string_util.h"
 #include "list_menu.h"
@@ -18,15 +19,17 @@
 #include "strings.h"
 #include "task.h"
 #include "villa_shop.h"
+#include "constants/battle_frontier.h"
 #include "constants/decorations.h"
 #include "constants/songs.h"
 
 static const u8 sText_Cancel[] = _("{JPN}やめる");
+static const u8 sText_ShinyDolls[] = _("{JPN}いろちがいドール");
 
 static const u8 *const sCategoryNames[VILLA_SHOP_CATEGORY_COUNT] =
 {
     gText_Desk, gText_Chair, gText_Plant, gText_Ornament,
-    gText_Mat, gText_Poster, gText_Doll, gText_Cushion, gText_SpecialDolls,
+    gText_Mat, gText_Poster, gText_Doll, gText_Cushion, gText_SpecialDolls, sText_ShinyDolls,
 };
 
 STATIC_ASSERT(DECORCAT_COUNT == VILLA_SHOP_SPECIAL_DOLL_CATEGORY, VillaShopDecorationCategories);
@@ -81,6 +84,24 @@ static EWRAM_DATA u16 sLastCategory = 0;
 
 static void DrawCatalog(void);
 
+static bool8 IsSpecialDollCategory(u16 category)
+{
+    return category == VILLA_SHOP_SPECIAL_DOLL_CATEGORY || category == VILLA_SHOP_SHINY_DOLL_CATEGORY;
+}
+
+bool8 VillaShop_IsCategoryAvailable(u16 category)
+{
+    u32 facility, goldSymbols = 0;
+    if (category >= VILLA_SHOP_CATEGORY_COUNT)
+        return FALSE;
+    if (category != VILLA_SHOP_SHINY_DOLL_CATEGORY)
+        return TRUE;
+    for (facility = 0; facility < NUM_FRONTIER_FACILITIES; facility++)
+        if (FlagGet(gFrontierBrainInfo[facility].goldSymbolFlag))
+            goldSymbols++;
+    return goldSymbols >= VILLA_SHOP_SHINY_DOLL_GOLD_SYMBOLS;
+}
+
 u16 VillaShop_GetBallPrice(u16 ball)
 {
     if (ball >= ARRAY_COUNT(sBallPrices))
@@ -104,6 +125,8 @@ u16 VillaShop_BuySpecialDoll(u16 doll)
 {
     if (SpecialDoll_GetDecoration(doll) == NULL)
         return VILLA_SHOP_INVALID;
+    if (SpecialDoll_IsShiny(doll) && !VillaShop_IsCategoryAvailable(VILLA_SHOP_SHINY_DOLL_CATEGORY))
+        return VILLA_SHOP_INVALID;
     if (gSaveBlock2Ptr->frontier.battlePoints < VILLA_SHOP_DECOR_PRICE)
         return VILLA_SHOP_NOT_ENOUGH_BP;
     if (!SpecialDoll_Add(doll))
@@ -115,7 +138,9 @@ u16 VillaShop_BuySpecialDoll(u16 doll)
 bool8 VillaShop_IsInCategory(u16 category, u16 item)
 {
     if (category == VILLA_SHOP_SPECIAL_DOLL_CATEGORY)
-        return SpecialDoll_GetDecoration(item) != NULL;
+        return SpecialDoll_GetDecoration(item) != NULL && !SpecialDoll_IsShiny(item);
+    if (category == VILLA_SHOP_SHINY_DOLL_CATEGORY)
+        return SpecialDoll_IsShiny(item);
     return category < DECORCAT_COUNT && item != DECOR_NONE && item <= NUM_DECORATIONS
         && gDecorations[item].category == category;
 }
@@ -182,7 +207,7 @@ static void Task_VillaShopCatalog(u8 taskId)
         DestroyListMenuTask(sCatalog->listTaskId, NULL, NULL);
         RemoveScrollIndicatorArrowPair(sCatalog->arrowsTaskId);
         sCatalog->category = id - 1;
-        sCatalog->mode = sCatalog->category == VILLA_SHOP_SPECIAL_DOLL_CATEGORY
+        sCatalog->mode = IsSpecialDollCategory(sCatalog->category)
             ? VILLA_SHOP_SPECIAL_DOLLS : VILLA_SHOP_DECORATIONS;
         sCatalog->scroll = 0;
         sCatalog->row = 0;
@@ -239,7 +264,8 @@ static void DrawCatalog(void)
     if (categories)
     {
         for (id = 0; id < VILLA_SHOP_CATEGORY_COUNT; id++)
-            sCatalog->items[count++] = (struct ListMenuItem){sCategoryNames[id], id + 1};
+            if (VillaShop_IsCategoryAvailable(id))
+                sCatalog->items[count++] = (struct ListMenuItem){sCategoryNames[id], id + 1};
     }
     else if (sCatalog->mode == VILLA_SHOP_DECORATIONS)
     {
@@ -250,7 +276,8 @@ static void DrawCatalog(void)
     else if (sCatalog->mode == VILLA_SHOP_SPECIAL_DOLLS)
     {
         for (id = 1; id < SPECIAL_DOLL_COUNT; id++)
-            sCatalog->items[count++] = (struct ListMenuItem){SpecialDoll_GetDecoration(id)->name, id};
+            if (VillaShop_IsInCategory(sCatalog->category, id))
+                sCatalog->items[count++] = (struct ListMenuItem){SpecialDoll_GetDecoration(id)->name, id};
     }
     else
     {
@@ -300,8 +327,14 @@ void VillaShop_OpenCatalog(void)
         gSpecialVar_0x8008 = FALSE;
     }
     sCatalog->category = sLastCategory == 0 ? VILLA_SHOP_CATEGORY_NONE : sLastCategory - 1;
+    if (sCatalog->category != VILLA_SHOP_CATEGORY_NONE && !VillaShop_IsCategoryAvailable(sCatalog->category))
+    {
+        sCatalog->category = VILLA_SHOP_CATEGORY_NONE;
+        sLastScroll = 0;
+        sLastRow = 0;
+    }
     sCatalog->mode = gSpecialVar_0x8006 == VILLA_SHOP_BALLS ? VILLA_SHOP_BALLS
-        : sCatalog->category == VILLA_SHOP_SPECIAL_DOLL_CATEGORY ? VILLA_SHOP_SPECIAL_DOLLS : VILLA_SHOP_DECORATIONS;
+        : IsSpecialDollCategory(sCatalog->category) ? VILLA_SHOP_SPECIAL_DOLLS : VILLA_SHOP_DECORATIONS;
     sCatalog->scroll = sLastScroll;
     sCatalog->row = sLastRow;
     HideMapNamePopUpWindow();

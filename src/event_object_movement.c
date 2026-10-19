@@ -497,7 +497,8 @@ const u8 gInitialMovementTypeFacingDirections[NUM_MOVEMENT_TYPES] = {
 #include "data/object_events/object_event_graphics_info_followers.h"
 
 #define SPECIAL_DOLL(_id, symbol, label, path, frameSize) \
-    extern const u16 gSpecialDollPalette_##symbol[];
+    extern const u16 gSpecialDollPalette_##symbol[]; \
+    extern const u16 gSpecialDollShinyPalette_##symbol[];
 #include "constants/special_doll_list.h"
 #undef SPECIAL_DOLL
 
@@ -590,7 +591,8 @@ static const struct SpritePalette sObjectEventSpritePalettes[] = {
     {gObjectEventPaletteEmotes,             OBJ_EVENT_PAL_TAG_EMOTES},
     {gObjectEventPaletteNeonLight,          OBJ_EVENT_PAL_TAG_NEON_LIGHT},
 #define SPECIAL_DOLL(_id, symbol, label, path, frameSize) \
-    {gSpecialDollPalette_##symbol, SPECIAL_DOLL_PAL_FIRST + SPECIAL_DOLL_##_id - 1},
+    {gSpecialDollPalette_##symbol, SPECIAL_DOLL_PAL_FIRST + SPECIAL_DOLL_##_id - 1}, \
+    {gSpecialDollShinyPalette_##symbol, SPECIAL_DOLL_PAL_FIRST + SPECIAL_DOLL_##_id##_SHINY - 1},
 #include "constants/special_doll_list.h"
 #undef SPECIAL_DOLL
 #ifdef BUGFIX

@@ -12,6 +12,7 @@
 
 const u8 gText_SpecialDolls[] = _("{JPN}とくしゅドール");
 static const u8 sDescription[] = _("{JPN}とくべつな すがたの\nドール。べっそうに\n3たいまで かざれる。");
+static const u8 sShinyDescription[] = _("{JPN}いろちがいの すがたの\nドール。べっそうに\n3たいまで かざれる。");
 
 static const union AnimCmd sStillAnim[] =
 {
@@ -25,7 +26,8 @@ static const union AnimCmd *const sStillAnims[] = {sStillAnim};
 // Only the front-facing frame is loaded, not the entire follower animation sheet.
 #define SPECIAL_DOLL(_id, symbol, label, path, frameSize) \
     static const struct SpriteFrameImage sImages_##symbol[] = {{.data = sPic_##symbol, .size = frameSize * frameSize / 2}}; \
-    static const u16 sGraphics_##symbol[] = {SPECIAL_DOLL_GFX_FIRST + SPECIAL_DOLL_##_id - 1};
+    static const u16 sGraphics_##symbol[] = {SPECIAL_DOLL_GFX_FIRST + SPECIAL_DOLL_##_id - 1}; \
+    static const u16 sShinyGraphics_##symbol[] = {SPECIAL_DOLL_GFX_FIRST + SPECIAL_DOLL_##_id##_SHINY - 1};
 #include "constants/special_doll_list.h"
 #undef SPECIAL_DOLL
 
@@ -36,6 +38,14 @@ static const struct Decoration sDecorations[SPECIAL_DOLL_COUNT] =
         .id = SPECIAL_DOLL_##_id, .name = _(label), \
         .permission = DECORPERM_SPRITE, .shape = DECORSHAPE_1x1, .category = DECORCAT_DOLL, \
         .description = sDescription, .tiles = sGraphics_##symbol, \
+    },
+#include "constants/special_doll_list.h"
+#undef SPECIAL_DOLL
+#define SPECIAL_DOLL(_id, symbol, label, path, frameSize) \
+    [SPECIAL_DOLL_##_id##_SHINY] = { \
+        .id = SPECIAL_DOLL_##_id##_SHINY, .name = _("{ENG}{STAR}" label), \
+        .permission = DECORPERM_SPRITE, .shape = DECORSHAPE_1x1, .category = DECORCAT_DOLL, \
+        .description = sShinyDescription, .tiles = sShinyGraphics_##symbol, \
     },
 #include "constants/special_doll_list.h"
 #undef SPECIAL_DOLL
@@ -53,8 +63,20 @@ static const struct ObjectEventGraphicsInfo sGraphicsInfo[SPECIAL_DOLL_COUNT - 1
     },
 #include "constants/special_doll_list.h"
 #undef SPECIAL_DOLL
+#define SPECIAL_DOLL(_id, symbol, label, path, frameSize) \
+    [SPECIAL_DOLL_##_id##_SHINY - 1] = { \
+        .tileTag = TAG_NONE, .paletteTag = SPECIAL_DOLL_PAL_FIRST + SPECIAL_DOLL_##_id##_SHINY - 1, \
+        .reflectionPaletteTag = OBJ_EVENT_PAL_TAG_NONE, .size = frameSize * frameSize / 2, \
+        .width = frameSize, .height = frameSize, .paletteSlot = PALSLOT_NPC_1, \
+        .inanimate = TRUE, .oam = &gObjectEventBaseOam_##frameSize##x##frameSize, \
+        .anims = sStillAnims, .images = sImages_##symbol, .affineAnims = gDummySpriteAffineAnimTable, \
+    },
+#include "constants/special_doll_list.h"
+#undef SPECIAL_DOLL
 };
 
+// Extending the base list must not renumber the already-saved shiny IDs.
+STATIC_ASSERT(SPECIAL_DOLL_NORMAL_COUNT == SPECIAL_DOLL_SHINY_OFFSET + 1, SpecialDollStableShinyIds);
 STATIC_ASSERT(SPECIAL_DOLL_COUNT <= 256, SpecialDollSavedIds);
 STATIC_ASSERT(SPECIAL_DOLL_CAPACITY < 255, SpecialDollInventoryCapacity);
 STATIC_ASSERT(SPECIAL_DOLL_GFX_FIRST > OBJ_EVENT_GFX_VAR_F, SpecialDollGraphicsRange);
@@ -74,6 +96,11 @@ const struct ObjectEventGraphicsInfo *SpecialDoll_GetGraphicsInfo(u16 graphicsId
     if (graphicsId < SPECIAL_DOLL_GFX_FIRST || graphicsId >= SPECIAL_DOLL_GFX_FIRST + SPECIAL_DOLL_COUNT - 1)
         return NULL;
     return &sGraphicsInfo[graphicsId - SPECIAL_DOLL_GFX_FIRST];
+}
+
+bool8 SpecialDoll_IsShiny(u16 doll)
+{
+    return doll >= SPECIAL_DOLL_NORMAL_COUNT && doll < SPECIAL_DOLL_COUNT;
 }
 
 void SpecialDoll_UpdateChecksum(void)

@@ -1,10 +1,17 @@
 #ifndef GUARD_CONSTANTS_SPECIAL_DOLLS_H
 #define GUARD_CONSTANTS_SPECIAL_DOLLS_H
 
+// Saved shiny IDs start after the original 51 dolls. Keep this offset fixed.
+#define SPECIAL_DOLL_SHINY_OFFSET 51
+
 enum
 {
     SPECIAL_DOLL_NONE,
 #define SPECIAL_DOLL(id, symbol, name, path, size) SPECIAL_DOLL_##id,
+#include "constants/special_doll_list.h"
+#undef SPECIAL_DOLL
+    SPECIAL_DOLL_NORMAL_COUNT,
+#define SPECIAL_DOLL(id, symbol, name, path, size) SPECIAL_DOLL_##id##_SHINY = SPECIAL_DOLL_##id + SPECIAL_DOLL_SHINY_OFFSET,
 #include "constants/special_doll_list.h"
 #undef SPECIAL_DOLL
     SPECIAL_DOLL_COUNT,

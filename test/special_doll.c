@@ -5,6 +5,7 @@
 #include "fieldmap.h"
 #include "local_room.h"
 #include "overworld.h"
+#include "palette.h"
 #include "secret_base.h"
 #include "special_doll.h"
 #include "sprite.h"
@@ -13,6 +14,21 @@
 #include "constants/event_objects.h"
 #include "constants/maps.h"
 #include "constants/map_groups.h"
+
+#define SPECIAL_DOLL(_id, symbol, label, path, frameSize) \
+    extern const u16 gSpecialDollShinyPalette_##symbol[];
+#include "constants/special_doll_list.h"
+#undef SPECIAL_DOLL
+
+static const u16 *const sShinyPalettes[SPECIAL_DOLL_COUNT] =
+{
+#define SPECIAL_DOLL(_id, symbol, label, path, frameSize) \
+    [SPECIAL_DOLL_##_id##_SHINY] = gSpecialDollShinyPalette_##symbol,
+#include "constants/special_doll_list.h"
+#undef SPECIAL_DOLL
+};
+
+static const u8 sShinyNamePrefix[] = _("{ENG}{STAR}{JPN}");
 
 static void PrepareRoom(void)
 {
@@ -58,9 +74,10 @@ TEST("Special dolls: old save bytes initialize without clearing any existing fur
     EXPECT_EQ(SpecialDoll_GetPlacedCount(), 0);
 }
 
-TEST("Special dolls: all 51 dolls have dedicated single-frame overworld graphics")
+TEST("Special dolls: all 102 dolls have dedicated single-frame overworld graphics")
 {
-    EXPECT_EQ(SPECIAL_DOLL_COUNT - 1, 51);
+    EXPECT_EQ(SPECIAL_DOLL_NORMAL_COUNT - 1, 51);
+    EXPECT_EQ(SPECIAL_DOLL_COUNT - 1, 102);
     for (u32 doll = 1; doll < SPECIAL_DOLL_COUNT; doll++)
     {
         const struct Decoration *decoration = SpecialDoll_GetDecoration(doll);
@@ -95,10 +112,13 @@ TEST("Special dolls: every supported form can be placed on room floor")
 
 TEST("Special dolls: placement preview owns a separate palette and cannot free placed doll colors")
 {
+    u16 dollId = SPECIAL_DOLL_VENUSAUR_MEGA;
+    PARAMETRIZE { dollId = SPECIAL_DOLL_VENUSAUR_MEGA; }
+    PARAMETRIZE { dollId = SPECIAL_DOLL_VENUSAUR_MEGA_SHINY; }
     u16 previewTag = 0xBE5;
     ResetSpriteData();
     FreeAndReserveObjectSpritePalettes();
-    const struct Decoration *doll = SpecialDoll_GetDecoration(SPECIAL_DOLL_VENUSAUR_MEGA);
+    const struct Decoration *doll = SpecialDoll_GetDecoration(dollId);
     const struct ObjectEventGraphicsInfo *graphics = SpecialDoll_GetGraphicsInfo(doll->tiles[0]);
     u8 placedPalette = LoadObjectEventPalette(graphics->paletteTag);
     u8 spriteId = CreateObjectGraphicsSpriteWithTag(doll->tiles[0], SpriteCallbackDummy, 0, 0, 1, previewTag);
@@ -121,7 +141,7 @@ TEST("Special dolls: three dolls count toward the existing twelve-sprite furnitu
     }
     LocalRoom_UpdateChecksum();
     PlaceDoll(0, SPECIAL_DOLL_CHARIZARD_MEGA_X, 0x36);
-    PlaceDoll(1, SPECIAL_DOLL_CHARIZARD_MEGA_Y, 0x96);
+    PlaceDoll(1, SPECIAL_DOLL_CHARIZARD_MEGA_Y_SHINY, 0x96);
     PlaceDoll(2, SPECIAL_DOLL_NECROZMA_ULTRA, 0xC9);
     SpecialDoll_EnsureSaveData();
     EXPECT_EQ(LocalRoom_GetSpriteDecorationCount(), 9);
@@ -168,7 +188,7 @@ TEST("Special dolls: inventory and placement survive a serialized save round tri
     struct SaveBlock3 saved;
     PrepareRoom();
     PlaceDoll(0, SPECIAL_DOLL_NECROZMA_ULTRA, 0x36);
-    PlaceDoll(1, SPECIAL_DOLL_GROUDON_PRIMAL, 0x96);
+    PlaceDoll(1, SPECIAL_DOLL_GROUDON_PRIMAL_SHINY, 0x96);
     memcpy(&saved, gSaveBlock3Ptr, sizeof(saved));
     memset(gSaveBlock3Ptr, 0, sizeof(saved));
     memcpy(gSaveBlock3Ptr, &saved, sizeof(saved));
@@ -177,6 +197,7 @@ TEST("Special dolls: inventory and placement survive a serialized save round tri
     EXPECT_EQ(SpecialDoll_GetPlacedCount(), 2);
     EXPECT_EQ(gSaveBlock3Ptr->specialDolls.decorations[0], SPECIAL_DOLL_NECROZMA_ULTRA);
     EXPECT_EQ(gSaveBlock3Ptr->specialDolls.positions[0], 0x36);
+    EXPECT_EQ(gSaveBlock3Ptr->specialDolls.decorations[1], SPECIAL_DOLL_GROUDON_PRIMAL_SHINY);
 }
 
 TEST("Special dolls: clearing or deleting ordinary secret bases does not clear special inventory")
@@ -203,8 +224,8 @@ TEST("Special dolls: three large doll objects reload without duplicates and clea
     memcpy(gSaveBlock1Ptr->objectEventTemplates, gMapHeader.events->objectEvents,
         gMapHeader.events->objectEventCount * sizeof(struct ObjectEventTemplate));
     PlaceDoll(0, SPECIAL_DOLL_GROUDON_PRIMAL, 0x36);
-    PlaceDoll(1, SPECIAL_DOLL_KYOGRE_PRIMAL, 0x96);
-    PlaceDoll(2, SPECIAL_DOLL_RAYQUAZA_MEGA, 0xC9);
+    PlaceDoll(1, SPECIAL_DOLL_GROUDON_PRIMAL_SHINY, 0x96);
+    PlaceDoll(2, SPECIAL_DOLL_RAYQUAZA_MEGA_SHINY, 0xC9);
     for (u32 reload = 0; reload < 2; reload++)
     {
         u32 count = 0;
@@ -234,4 +255,68 @@ TEST("Special dolls: three large doll objects reload without duplicates and clea
         EXPECT(!gObjectEvents[i].active);
     for (u32 i = 0; i < SPECIAL_DOLL_PLACEMENT_COUNT; i++)
         EXPECT(!gSprites[dollSprites[i]].inUse);
+}
+
+TEST("Special dolls: shiny variants share pixels but load their own palette without changing normal colors")
+{
+    ResetSpriteData();
+    FreeAndReserveObjectSpritePalettes();
+    for (u32 doll = 1; doll < SPECIAL_DOLL_NORMAL_COUNT; doll++)
+    {
+        u16 shinyDoll = doll + SPECIAL_DOLL_SHINY_OFFSET;
+        const struct ObjectEventGraphicsInfo *normal = SpecialDoll_GetGraphicsInfo(SpecialDoll_GetDecoration(doll)->tiles[0]);
+        const struct ObjectEventGraphicsInfo *shiny = SpecialDoll_GetGraphicsInfo(SpecialDoll_GetDecoration(shinyDoll)->tiles[0]);
+        u8 normalPalette = LoadObjectEventPalette(normal->paletteTag);
+        u8 shinyPalette = LoadObjectEventPalette(shiny->paletteTag);
+        EXPECT(!SpecialDoll_IsShiny(doll));
+        EXPECT(SpecialDoll_IsShiny(shinyDoll));
+        EXPECT_EQ(memcmp(SpecialDoll_GetDecoration(shinyDoll)->name, sShinyNamePrefix, sizeof(sShinyNamePrefix) - 1), 0);
+        EXPECT_EQ(normal->images, shiny->images);
+        EXPECT(normalPalette < 16);
+        EXPECT(shinyPalette < 16);
+        EXPECT(normalPalette != shinyPalette);
+        EXPECT_EQ(memcmp(&gPlttBufferUnfaded[OBJ_PLTT_ID(shinyPalette)], sShinyPalettes[shinyDoll], PLTT_SIZE_4BPP), 0);
+        EXPECT(memcmp(&gPlttBufferUnfaded[OBJ_PLTT_ID(normalPalette)], sShinyPalettes[shinyDoll], PLTT_SIZE_4BPP) != 0);
+        FreeSpritePaletteByTag(normal->paletteTag);
+        FreeSpritePaletteByTag(shiny->paletteTag);
+    }
+    EXPECT(!SpecialDoll_IsShiny(SPECIAL_DOLL_NONE));
+    EXPECT(!SpecialDoll_IsShiny(SPECIAL_DOLL_COUNT));
+    EXPECT(!SpecialDoll_IsShiny(0xFFFF));
+}
+
+TEST("Special dolls: old normal IDs and valid version one save bytes remain unchanged")
+{
+    struct SpecialDollSave before;
+    PrepareRoom();
+    PlaceDoll(0, 2, 0x36);
+    PlaceDoll(1, 50, 0x96);
+    PlaceDoll(2, 51, 0xC9);
+    before = gSaveBlock3Ptr->specialDolls;
+    SpecialDoll_EnsureSaveData();
+    EXPECT_EQ(memcmp(&before, &gSaveBlock3Ptr->specialDolls, sizeof(before)), 0);
+    EXPECT_EQ(SPECIAL_DOLL_CHARIZARD_MEGA_X, 2);
+    EXPECT_EQ(SPECIAL_DOLL_GROUDON_PRIMAL, 50);
+    EXPECT_EQ(SPECIAL_DOLL_NECROZMA_ULTRA, 51);
+    EXPECT_EQ(SPECIAL_DOLL_VENUSAUR_MEGA_SHINY, 52);
+    EXPECT_EQ(SPECIAL_DOLL_NECROZMA_ULTRA_SHINY, 102);
+    EXPECT_EQ(gSaveBlock3Ptr->specialDolls.version, 1);
+}
+
+TEST("Special dolls: normal and shiny dolls share the same bounded inventory without replacing each other")
+{
+    PrepareRoom();
+    for (u32 slot = 0; slot < SPECIAL_DOLL_CAPACITY / 2; slot++)
+    {
+        EXPECT(SpecialDoll_Add(SPECIAL_DOLL_VENUSAUR_MEGA));
+        EXPECT(SpecialDoll_Add(SPECIAL_DOLL_VENUSAUR_MEGA_SHINY));
+    }
+    EXPECT_EQ(SpecialDoll_GetOwnedCount(), SPECIAL_DOLL_CAPACITY);
+    EXPECT(!SpecialDoll_Add(SPECIAL_DOLL_NECROZMA_ULTRA_SHINY));
+    gSaveBlock3Ptr->specialDolls.inventory[0] = SPECIAL_DOLL_NONE;
+    SpecialDoll_CondenseInventory();
+    EXPECT_EQ(SpecialDoll_GetOwnedCount(), SPECIAL_DOLL_CAPACITY - 1);
+    EXPECT_EQ(gSaveBlock3Ptr->specialDolls.inventory[0], SPECIAL_DOLL_VENUSAUR_MEGA_SHINY);
+    EXPECT(SpecialDoll_Add(SPECIAL_DOLL_NECROZMA_ULTRA_SHINY));
+    EXPECT_EQ(gSaveBlock3Ptr->specialDolls.inventory[SPECIAL_DOLL_CAPACITY - 1], SPECIAL_DOLL_NECROZMA_ULTRA_SHINY);
 }
