@@ -8,8 +8,25 @@ import struct
 ROOT = Path(__file__).resolve().parents[2]
 WIDTH, HEIGHT = 16, 14
 
-FLOOR_SOURCES = (("brendans_mays_house", 0x201), ("generic_building", 0x224), ("lilycove_museum", 0x269))
-WALL_SOURCES = (("brendans_mays_house", 0x276, 0x26E), ("brendans_mays_house", 0x276, 0x26E), ("seashore_house", 0x20A, 0x20A))
+# Append styles only: their indices are stored in existing saves.
+FLOOR_SOURCES = (
+    ("brendans_mays_house", 0x201),
+    ("generic_building", 0x224),
+    ("lilycove_museum", 0x269),
+    ("seashore_house", 0x224),
+    ("pokemon_day_care", 0x201),
+    ("pokemon_fan_club", 0x22A),
+    ("brendans_mays_house", 0x2A4),
+)
+WALL_SOURCES = (
+    ("brendans_mays_house", 0x276, 0x26E),
+    ("brendans_mays_house", 0x276, 0x26E),
+    ("seashore_house", 0x20A, 0x20A),
+    ("pokemon_fan_club", 0x21D, 0x21C),
+    ("generic_building", 0x32C, 0x32C),
+    ("pokemon_day_care", 0x209, 0x208),
+    ("generic_building", 0x20D, 0x218),
+)
 
 
 def indexed_pixels(image):
@@ -284,11 +301,11 @@ if __name__ == "__main__":
     if args.preview:
         from PIL import Image, ImageDraw
         preview().resize((WIDTH * 48, HEIGHT * 48), Image.Resampling.NEAREST).save(ROOT / "build/local_room_preview.png")
-        sheet = Image.new("RGB", (WIDTH * 32 * 3, (HEIGHT * 32 + 24) * 3), "#333333")
+        sheet = Image.new("RGB", (WIDTH * 16 * len(WALL_SOURCES), (HEIGHT * 16 + 24) * len(FLOOR_SOURCES)), "#333333")
         draw = ImageDraw.Draw(sheet)
-        for floor_style in range(3):
-            for wall_style in range(3):
-                x, y = wall_style * WIDTH * 32, floor_style * (HEIGHT * 32 + 24)
-                sheet.paste(preview(floor_style, wall_style).resize((WIDTH * 32, HEIGHT * 32), Image.Resampling.NEAREST), (x, y + 24))
+        for floor_style in range(len(FLOOR_SOURCES)):
+            for wall_style in range(len(WALL_SOURCES)):
+                x, y = wall_style * WIDTH * 16, floor_style * (HEIGHT * 16 + 24)
+                sheet.paste(preview(floor_style, wall_style), (x, y + 24))
                 draw.text((x + 8, y + 4), f"Floor {floor_style} / Wall {wall_style}", fill="white")
         sheet.save(ROOT / "build/local_room_styles.png")

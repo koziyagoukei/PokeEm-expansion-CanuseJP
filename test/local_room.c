@@ -6,6 +6,8 @@
 #include "local_room.h"
 #include "overworld.h"
 #include "secret_base.h"
+#include "script.h"
+#include "sprite.h"
 #include "string_util.h"
 #include "strings.h"
 #include "text.h"
@@ -14,6 +16,8 @@
 #include "constants/maps.h"
 #include "constants/map_groups.h"
 #include "constants/metatile_labels.h"
+#include "constants/event_objects.h"
+#include "constants/map_scripts.h"
 
 static void SaveDecoration(u8 slot, u8 decor, u8 position)
 {
@@ -234,6 +238,65 @@ TEST("Local room: map is indoor and not an ordinary secret base")
     EXPECT_EQ(gMapHeader.mapType, MAP_TYPE_INDOOR);
 }
 
+TEST("Local room: resume cannot destroy a sprite referenced by a stale roaming object")
+{
+    u32 localId = LOCAL_ROOM_DECOR_SPRITES + 1;
+    for (u32 i = 0; i < LOCAL_ROOM_MAX_ROAMERS; i++)
+        PARAMETRIZE { localId = LOCAL_ROOM_DECOR_SPRITES + 1 + i; }
+
+    EnterLocalRoomMap();
+    LocalRoom_EnsureSaveData();
+    VarSet(VAR_TEMP_0, 1);
+    ResetSpriteData();
+    u32 spriteId = CreateSprite(&gDummySpriteTemplate, 12, 34, 0);
+    struct Sprite spriteBefore = gSprites[spriteId];
+    struct ObjectEvent *object = &gObjectEvents[1];
+    *object = (struct ObjectEvent) {
+        .active = TRUE,
+        .localId = localId,
+        .mapNum = gSaveBlock1Ptr->location.mapNum,
+        .mapGroup = gSaveBlock1Ptr->location.mapGroup,
+        .graphicsId = OBJ_EVENT_GFX_PIKACHU,
+        .spriteId = spriteId,
+    };
+    struct ObjectEvent objectBefore = *object;
+
+    RunOnResumeMapScript();
+
+    EXPECT_EQ(memcmp(object, &objectBefore, sizeof(objectBefore)), 0);
+    EXPECT_EQ(memcmp(&gSprites[spriteId], &spriteBefore, sizeof(spriteBefore)), 0);
+    object->active = FALSE;
+    DestroySprite(&gSprites[spriteId]);
+}
+
+TEST("Local room: return hook refreshes roamers only after object sprites are rebuilt")
+{
+    EnterLocalRoomMap();
+    LocalRoom_EnsureSaveData();
+    VarSet(VAR_TEMP_0, 1);
+    EXPECT(MapHeaderGetScriptTable(MAP_SCRIPT_ON_RETURN_TO_FIELD) != NULL);
+    ResetSpriteData();
+    u32 roamerSprite = CreateSprite(&gDummySpriteTemplate, 12, 34, 0);
+    u32 otherSprite = CreateSprite(&gDummySpriteTemplate, 56, 78, 0);
+    struct Sprite otherBefore = gSprites[otherSprite];
+    struct ObjectEvent *object = &gObjectEvents[1];
+    *object = (struct ObjectEvent) {
+        .active = TRUE,
+        .localId = LOCAL_ROOM_DECOR_SPRITES + 1,
+        .mapNum = gSaveBlock1Ptr->location.mapNum,
+        .mapGroup = gSaveBlock1Ptr->location.mapGroup,
+        .graphicsId = OBJ_EVENT_GFX_PIKACHU,
+        .spriteId = roamerSprite,
+    };
+
+    RunOnReturnToFieldMapScript();
+
+    EXPECT(!object->active);
+    EXPECT(!gSprites[roamerSprite].inUse);
+    EXPECT_EQ(memcmp(&gSprites[otherSprite], &otherBefore, sizeof(otherBefore)), 0);
+    DestroySprite(&gSprites[otherSprite]);
+}
+
 TEST("Local room: every existing decoration has an in-bounds footprint")
 {
     u32 decor;
@@ -348,29 +411,59 @@ TEST("Local room: walls, furniture overlaps and sprite slot limits still reject 
     EXPECT(!Test_CanPlaceDecorationAt(DECOR_CONTEXT_LOCAL_ROOM, DECOR_PIKACHU_DOLL, 3, 9));
 }
 
-TEST("Local room: all three floor styles preserve furniture and placement permissions")
+TEST("Local room: all floor and wall styles preserve furniture and placement permissions")
 {
-    u32 style, decor;
+    u32 style = 0, wall = 0, decor;
     u16 deskTile;
+    for (u32 floorStyle = 0; floorStyle < LOCAL_ROOM_STYLE_COUNT; floorStyle++)
+        for (u32 wallStyle = 0; wallStyle < LOCAL_ROOM_STYLE_COUNT; wallStyle++)
+            PARAMETRIZE { style = floorStyle; wall = wallStyle; }
+
     PreparePlacementTest();
     SaveDecoration(0, DECOR_SMALL_DESK, 0x36);
     SaveDecoration(1, DECOR_PIKACHU_DOLL, 0x56);
     LocalRoom_LoadDecorations();
     deskTile = MapGridGetMetatileIdAt(3 + MAP_OFFSET, 6 + MAP_OFFSET);
-    for (style = 0; style < LOCAL_ROOM_STYLE_COUNT; style++)
+    gSpecialVar_Result = style;
+    LocalRoom_SetFloorStyle();
+    gSpecialVar_Result = wall;
+    LocalRoom_SetWallStyle();
+    EXPECT_EQ(gSaveBlock3Ptr->localRoom.floorStyle, style);
+    EXPECT_EQ(gSaveBlock3Ptr->localRoom.wallStyle, wall);
+    EXPECT_EQ(gSaveBlock3Ptr->localRoom.decorations[0], DECOR_SMALL_DESK);
+    EXPECT_EQ(gSaveBlock3Ptr->localRoom.decorations[1], DECOR_PIKACHU_DOLL);
+    EXPECT_EQ(MapGridGetMetatileIdAt(3 + MAP_OFFSET, 6 + MAP_OFFSET), deskTile);
+    for (decor = 1; decor <= NUM_DECORATIONS; decor++)
+    {
+        s16 y = gDecorations[decor].permission == DECORPERM_NA_WALL ? 2 : 9;
+        if (!Test_CanPlaceDecorationAt(DECOR_CONTEXT_LOCAL_ROOM, decor, 9, y))
+            Test_ExitWithResult(TEST_RESULT_FAIL, __LINE__, "Floor %d / wall %d rejects decoration %d", style, wall, decor);
+    }
+}
+
+TEST("Local room: added styles survive serialization and cancel does not change them")
+{
+    struct LocalRoomSave saved;
+    u32 style;
+    PreparePlacementTest();
+    for (style = 3; style < LOCAL_ROOM_STYLE_COUNT; style++)
     {
         gSpecialVar_Result = style;
         LocalRoom_SetFloorStyle();
+        LocalRoom_SetWallStyle();
+        saved = gSaveBlock3Ptr->localRoom;
+        memset(&gSaveBlock3Ptr->localRoom, 0, sizeof(saved));
+        gSaveBlock3Ptr->localRoom = saved;
+        LocalRoom_EnsureSaveData();
         EXPECT_EQ(gSaveBlock3Ptr->localRoom.floorStyle, style);
-        EXPECT_EQ(gSaveBlock3Ptr->localRoom.decorations[0], DECOR_SMALL_DESK);
-        EXPECT_EQ(gSaveBlock3Ptr->localRoom.decorations[1], DECOR_PIKACHU_DOLL);
-        EXPECT_EQ(MapGridGetMetatileIdAt(3 + MAP_OFFSET, 6 + MAP_OFFSET), deskTile);
-        for (decor = 1; decor <= NUM_DECORATIONS; decor++)
-        {
-            s16 y = gDecorations[decor].permission == DECORPERM_NA_WALL ? 2 : 9;
-            if (!Test_CanPlaceDecorationAt(DECOR_CONTEXT_LOCAL_ROOM, decor, 9, y))
-                Test_ExitWithResult(TEST_RESULT_FAIL, __LINE__, "Floor style %d rejects decoration %d", style, decor);
-        }
+        EXPECT_EQ(gSaveBlock3Ptr->localRoom.wallStyle, style);
+        gSpecialVar_Result = LOCAL_ROOM_STYLE_COUNT;
+        LocalRoom_SetFloorStyle();
+        LocalRoom_SetWallStyle();
+        gSpecialVar_Result = 127;
+        LocalRoom_SetFloorStyle();
+        LocalRoom_SetWallStyle();
+        EXPECT_EQ(memcmp(&saved, &gSaveBlock3Ptr->localRoom, sizeof(saved)), 0);
     }
 }
 

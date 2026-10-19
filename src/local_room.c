@@ -364,6 +364,13 @@ void LocalRoom_Resume(void)
         return;
     FlagSet(FLAG_TEMP_HIDE_FOLLOWER);
     LocalRoom_ApplyStyle();
+}
+
+void LocalRoom_ReturnToField(void)
+{
+    // Resume runs after ResetSpriteData, before object sprites have been rebuilt.
+    if (!LocalRoom_IsCurrentMap())
+        return;
     if (VarGet(VAR_TEMP_0) != 0)
         RefreshRoamers();
 }
