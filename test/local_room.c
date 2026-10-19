@@ -39,7 +39,8 @@ TEST("Local room: append-only extension preserves its pre-existing prefix")
 {
     EXPECT_EQ(offsetof(struct SaveBlock3, localRoom), 28);
     EXPECT_EQ(sizeof(struct LocalRoomSave), 44);
-    EXPECT_EQ(sizeof(struct SaveBlock3), 72);
+    EXPECT_EQ(offsetof(struct SaveBlock3, specialDolls), 72);
+    EXPECT_EQ(sizeof(struct SaveBlock3), 152);
 }
 
 TEST("Local room: new save starts empty and roaming disabled")
@@ -295,6 +296,18 @@ TEST("Local room: return hook refreshes roamers only after object sprites are re
     EXPECT(!gSprites[roamerSprite].inUse);
     EXPECT_EQ(memcmp(&gSprites[otherSprite], &otherBefore, sizeof(otherBefore)), 0);
     DestroySprite(&gSprites[otherSprite]);
+}
+
+TEST("Local room: resume reserves fixed field palette banks without resetting sprite state")
+{
+    EnterLocalRoomMap();
+    LocalRoom_EnsureSaveData();
+    gReservedSpritePaletteCount = 0;
+    LocalRoom_Resume();
+    EXPECT_EQ(gReservedSpritePaletteCount, SPECIAL_DOLL_FIRST_PALETTE_SLOT);
+    gReservedSpritePaletteCount = OBJ_PALSLOT_COUNT;
+    LocalRoom_Resume();
+    EXPECT_EQ(gReservedSpritePaletteCount, OBJ_PALSLOT_COUNT);
 }
 
 TEST("Local room: every existing decoration has an in-bounds footprint")

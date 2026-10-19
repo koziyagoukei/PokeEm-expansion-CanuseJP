@@ -3,6 +3,7 @@
 #include "decoration_inventory.h"
 #include "event_data.h"
 #include "pokemon.h"
+#include "special_doll.h"
 #include "villa_shop.h"
 #include "test/test.h"
 #include "constants/decorations.h"
@@ -120,4 +121,59 @@ TEST("Villa shop: script dispatcher cannot treat unknown services as purchases")
     VillaShop_Purchase();
     EXPECT_EQ(gSpecialVar_Result, VILLA_SHOP_INVALID);
     EXPECT_EQ(gSaveBlock2Ptr->frontier.battlePoints, 100);
+}
+
+TEST("Villa shop: every decoration belongs to exactly one of the eight ordinary categories")
+{
+    for (u32 decor = 1; decor <= NUM_DECORATIONS; decor++)
+    {
+        u32 matches = 0;
+        for (u32 category = 0; category < DECORCAT_COUNT; category++)
+            matches += VillaShop_IsInCategory(category, decor);
+        EXPECT_EQ(matches, 1);
+    }
+    EXPECT(!VillaShop_IsInCategory(DECORCAT_DESK, DECOR_PIKACHU_DOLL));
+    EXPECT(!VillaShop_IsInCategory(DECORCAT_DOLL, DECOR_SMALL_DESK));
+    EXPECT(!VillaShop_IsInCategory(0xFFFF, DECOR_SMALL_DESK));
+}
+
+TEST("Villa shop: all special dolls cost ten BP and use separate inventory")
+{
+    u8 ordinary[sizeof(gSaveBlock1Ptr->decorationDolls)];
+    memset(gSaveBlock1Ptr->decorationDolls, DECOR_PIKACHU_DOLL, sizeof(ordinary));
+    memcpy(ordinary, gSaveBlock1Ptr->decorationDolls, sizeof(ordinary));
+    for (u32 doll = 1; doll < SPECIAL_DOLL_COUNT; doll++)
+    {
+        gSaveBlock2Ptr->frontier.battlePoints = 10;
+        EXPECT(VillaShop_IsInCategory(VILLA_SHOP_SPECIAL_DOLL_CATEGORY, doll));
+        EXPECT_EQ(VillaShop_BuySpecialDoll(doll), VILLA_SHOP_OK);
+        EXPECT_EQ(gSaveBlock2Ptr->frontier.battlePoints, 0);
+        EXPECT_EQ(SpecialDoll_GetOwnedCount(), doll);
+    }
+    EXPECT_EQ(memcmp(ordinary, gSaveBlock1Ptr->decorationDolls, sizeof(ordinary)), 0);
+}
+
+TEST("Villa shop: invalid full or unaffordable special doll purchases do not spend BP")
+{
+    gSaveBlock2Ptr->frontier.battlePoints = 9;
+    EXPECT_EQ(VillaShop_BuySpecialDoll(SPECIAL_DOLL_VENUSAUR_MEGA), VILLA_SHOP_NOT_ENOUGH_BP);
+    EXPECT_EQ(gSaveBlock2Ptr->frontier.battlePoints, 9);
+    EXPECT_EQ(VillaShop_BuySpecialDoll(0), VILLA_SHOP_INVALID);
+    EXPECT_EQ(VillaShop_BuySpecialDoll(255), VILLA_SHOP_INVALID);
+    for (u32 i = 0; i < SPECIAL_DOLL_CAPACITY; i++)
+        EXPECT(SpecialDoll_Add(SPECIAL_DOLL_VENUSAUR_MEGA));
+    gSaveBlock2Ptr->frontier.battlePoints = 100;
+    EXPECT_EQ(VillaShop_BuySpecialDoll(SPECIAL_DOLL_NECROZMA_ULTRA), VILLA_SHOP_STORAGE_FULL);
+    EXPECT_EQ(gSaveBlock2Ptr->frontier.battlePoints, 100);
+}
+
+TEST("Villa shop: script dispatcher purchases special dolls without treating their IDs as ordinary furniture")
+{
+    gSaveBlock2Ptr->frontier.battlePoints = 10;
+    gSpecialVar_0x8006 = VILLA_SHOP_SPECIAL_DOLLS;
+    gSpecialVar_0x8005 = SPECIAL_DOLL_CHARIZARD_MEGA_X;
+    VillaShop_Purchase();
+    EXPECT_EQ(gSpecialVar_Result, VILLA_SHOP_OK);
+    EXPECT_EQ(gSaveBlock2Ptr->frontier.battlePoints, 0);
+    EXPECT_EQ(SpecialDoll_GetOwnedCount(), 1);
 }

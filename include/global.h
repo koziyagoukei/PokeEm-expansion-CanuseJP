@@ -256,6 +256,7 @@ struct NPCFollower
 #define ITEM_FLAGS_COUNT ((ITEMS_COUNT / 8) + ((ITEMS_COUNT % 8) ? 1 : 0))
 
 #include "constants/local_room.h"
+#include "constants/special_dolls.h"
 
 struct LocalRoomSave
 {
@@ -268,6 +269,17 @@ struct LocalRoomSave
     u8 decorationPositions[LOCAL_ROOM_DECOR_COUNT];
     u16 checksum;
     u16 reserved;
+};
+
+struct SpecialDollSave
+{
+    u32 magic;
+    u8 version;
+    u8 reserved;
+    u8 inventory[SPECIAL_DOLL_CAPACITY];
+    u8 decorations[SPECIAL_DOLL_PLACEMENT_COUNT];
+    u8 positions[SPECIAL_DOLL_PLACEMENT_COUNT];
+    u16 checksum;
 };
 
 struct SaveBlock3
@@ -290,6 +302,7 @@ struct SaveBlock3
 #endif
     // Append-only, local data. Not part of any link or record-mixing payload.
     struct LocalRoomSave localRoom;
+    struct SpecialDollSave specialDolls;
 }; /* max size 1624 bytes */
 
 extern struct SaveBlock3 *gSaveBlock3Ptr;

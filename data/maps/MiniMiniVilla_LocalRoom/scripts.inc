@@ -34,8 +34,7 @@ LocalRoom_OnReturnToField:
 	end
 
 LocalRoom_EventScript_InitDecorations::
-	setvar VAR_0x8004, 0
-	special InitSecretBaseDecorationSprites
+	special LocalRoom_InitObjects
 	end
 
 LocalRoom_EventScript_PutAwayDecoration::
@@ -67,10 +66,15 @@ LocalRoom_EventScript_PCMainMenu::
 	case 2, LocalRoom_EventScript_Wall
 	case 3, LocalRoom_EventScript_Roamers
 	case 4, LocalRoom_EventScript_Clear
+	case 5, LocalRoom_EventScript_SpecialDolls
 	goto LocalRoom_EventScript_ClosePC
 
 LocalRoom_EventScript_Decorate:
 	special LocalRoom_ShowDecorationMenu
+	end
+
+LocalRoom_EventScript_SpecialDolls:
+	special SpecialDoll_ShowDecorationMenu
 	end
 
 LocalRoom_EventScript_Floor:

@@ -679,3 +679,4 @@ gSpecials::
 	def_special VillaShop_OpenCatalog, waitstate=1
 	def_special VillaShop_Purchase
 	def_special LocalRoom_ReturnToField
+	def_special SpecialDoll_ShowDecorationMenu

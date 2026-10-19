@@ -80,7 +80,7 @@ VillaShop_EventScript_Goodbye:
 	end
 
 VillaShop_Text_Decorations:
-	.string "{JPN}いらっしゃいませ！\nひみつきちの かざりは すべて 10BPです。$"
+	.string "{JPN}いらっしゃいませ！\nかざりは すべて 10BPです。\pとくしゅドールは べっそうの\nへやに 3たいまで かざれます。$"
 
 VillaShop_Text_ChooseMon:
 	.string "{JPN}ボールを かえたい ポケモンを\nえらんでください。$"

@@ -3,12 +3,16 @@
 
 #include "constants/local_room.h"
 
+struct Decoration;
+
 bool8 LocalRoom_IsCurrentMap(void);
 void LocalRoom_EnsureSaveData(void);
 void LocalRoom_UpdateChecksum(void);
 bool8 LocalRoom_IsPlacementAllowed(u8 decor, s16 x, s16 y);
+bool8 LocalRoom_IsPlacementAllowedForDecoration(const struct Decoration *decoration, s16 x, s16 y);
 bool8 LocalRoom_IsPlainFloor(s16 mapX, s16 mapY);
 bool8 LocalRoom_HasAccessPathAfterPlacement(u8 decor, s16 x, s16 y);
+bool8 LocalRoom_HasAccessPathForDecoration(const struct Decoration *decoration, s16 x, s16 y);
 void LocalRoom_PrepareMap(void);
 void LocalRoom_LoadDecorations(void);
 void LocalRoom_InitObjects(void);

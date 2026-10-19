@@ -45,6 +45,7 @@ enum DecorationContextType
     DECOR_CONTEXT_SECRET_BASE,
     DECOR_CONTEXT_PLAYER_ROOM,
     DECOR_CONTEXT_LOCAL_ROOM,
+    DECOR_CONTEXT_SPECIAL_DOLL,
 };
 
 struct DecorItem
@@ -75,7 +76,9 @@ void DoSecretBaseDecorationMenu(u8 taskId);
 void ShowDecorationOnMap(u16 mapX, u16 mapY, u16 decoration);
 void DoPlayerRoomDecorationMenu(u8 taskId);
 void DoLocalRoomDecorationMenu(u8 taskId);
+void DoSpecialDollDecorationMenu(u8 taskId);
 bool8 GetDecorationDimensions(u16 decoration, u8 *width, u8 *height);
+bool8 GetDecorationDimensionsForDecoration(const struct Decoration *decoration, u8 *width, u8 *height);
 void ShowDecorationCategoriesWindow(u8 taskId);
 void CopyDecorationCategoryName(u8 *dest, u8 category);
 bool8 IsSelectedDecorInThePC(void);
