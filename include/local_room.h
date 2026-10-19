@@ -13,6 +13,7 @@ void LocalRoom_PrepareMap(void);
 void LocalRoom_LoadDecorations(void);
 void LocalRoom_InitObjects(void);
 void LocalRoom_Resume(void);
+void LocalRoom_ReturnToField(void);
 void LocalRoom_ApplyStyle(void);
 void LocalRoom_ShowDecorationMenu(void);
 void LocalRoom_BeginDecorating(void);

@@ -5,6 +5,9 @@
     "source_commit": "d3893717da0c73ae8ad2b27843f3661699a7a2b0",
     "source_commit_date": "2026-07-17T03:40:36Z",
     "source_marker": "S (Pokemon Showdown event source)",
+    "historical_sources": {
+      "SPECIES_SPINDA": "https://www.serebii.net/pokedex-bw/327.shtml"
+    },
     "event_source_species": 532,
     "propagate_through_evolution": true,
     "ignored_unmapped_source_species": [
@@ -777,7 +780,8 @@
       "MOVE_REFRESH"
     ],
     "SPECIES_SPINDA": [
-      "MOVE_SING"
+      "MOVE_SING",
+      "MOVE_SUPERPOWER"
     ],
     "SPECIES_SQUIRTLE": [
       "MOVE_BLOCK",

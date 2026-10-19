@@ -3,6 +3,7 @@ MiniMiniVilla_LocalRoom_MapScripts::
 	map_script MAP_SCRIPT_ON_LOAD, LocalRoom_OnLoad
 	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, LocalRoom_OnWarp
 	map_script MAP_SCRIPT_ON_RESUME, LocalRoom_OnResume
+	map_script MAP_SCRIPT_ON_RETURN_TO_FIELD, LocalRoom_OnReturnToField
 	.byte 0
 
 LocalRoom_OnTransition:
@@ -26,6 +27,10 @@ LocalRoom_EventScript_InitObjects:
 LocalRoom_OnResume:
 	setstepcallback STEP_CB_LOCAL_ROOM
 	special LocalRoom_Resume
+	end
+
+LocalRoom_OnReturnToField:
+	special LocalRoom_ReturnToField
 	end
 
 LocalRoom_EventScript_InitDecorations::
@@ -71,14 +76,14 @@ LocalRoom_EventScript_Decorate:
 LocalRoom_EventScript_Floor:
 	message LocalRoom_Text_Floor
 	waitmessage
-	multichoice 0, 0, MULTI_LOCAL_ROOM_FLOOR_STYLE, FALSE
+	multichoicegrid 0, 0, MULTI_LOCAL_ROOM_FLOOR_STYLE, 2, FALSE
 	special LocalRoom_SetFloorStyle
 	goto LocalRoom_EventScript_PCMainMenu
 
 LocalRoom_EventScript_Wall:
 	message LocalRoom_Text_Wall
 	waitmessage
-	multichoice 0, 0, MULTI_LOCAL_ROOM_WALL_STYLE, FALSE
+	multichoicegrid 0, 0, MULTI_LOCAL_ROOM_WALL_STYLE, 2, FALSE
 	special LocalRoom_SetWallStyle
 	goto LocalRoom_EventScript_PCMainMenu
 

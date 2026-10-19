@@ -2041,7 +2041,11 @@
 #define FRONTIER_MON_PECHARUNT_2                      2035
 #define FRONTIER_MON_PECHARUNT_3                      2036
 
-#define NUM_FRONTIER_MONS 2037
+#define FRONTIER_MON_SMEARGLE_1                      2037
+#define FRONTIER_MON_SMEARGLE_2                      2038
+#define FRONTIER_MON_SMEARGLE_3                      2039
+
+#define NUM_FRONTIER_MONS 2040
 #define FRONTIER_MONS_HIGH_TIER (NUM_FRONTIER_MONS - 1)
 
 #endif // GUARD_CONSTANTS_BATTLE_FRONTIER_MONS_H

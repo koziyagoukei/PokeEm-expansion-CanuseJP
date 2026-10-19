@@ -28,6 +28,10 @@ SHOWDOWN_REPOSITORY = "https://github.com/smogon/pokemon-showdown"
 SHOWDOWN_API_HEAD = "https://api.github.com/repos/smogon/pokemon-showdown/commits/master"
 SHOWDOWN_RAW = "https://raw.githubusercontent.com/smogon/pokemon-showdown/{commit}/data/{name}"
 
+# Dream World sources use D rather than the event marker S.
+HISTORICAL_ADDITIONS = {"SPECIES_SPINDA": {"MOVE_SUPERPOWER"}}
+HISTORICAL_SOURCES = {"SPECIES_SPINDA": "https://www.serebii.net/pokedex-bw/327.shtml"}
+
 # Showdown uses the unqualified name for these default forms. Expansion uses
 # an explicit form suffix in the Frontier table.
 SHOWDOWN_SPECIES_ALIASES = {
@@ -182,6 +186,10 @@ def build_overlay(learnsets_source: str, pokedex_source: str, root: Path):
 
             pending.extend(children[species_id])
 
+    for species, moves in HISTORICAL_ADDITIONS.items():
+        if species in frontier_learnsets:
+            overlay[species].update(moves - frontier_learnsets[species])
+
     overlay = {
         species: sorted(moves)
         for species, moves in sorted(overlay.items())
@@ -199,6 +207,7 @@ def make_document(overlay, ignored, event_species_count, commit, commit_date):
             "source_commit": commit,
             "source_commit_date": commit_date,
             "source_marker": "S (Pokemon Showdown event source)",
+            "historical_sources": HISTORICAL_SOURCES,
             "event_source_species": event_species_count,
             "propagate_through_evolution": True,
             "ignored_unmapped_source_species": ignored,

@@ -1358,6 +1358,7 @@ static const u16 sFrontierEventLearnset_SPECIES_SPINARAK[] =
 static const u16 sFrontierEventLearnset_SPECIES_SPINDA[] =
 {
     MOVE_SING,
+    MOVE_SUPERPOWER,
     MOVE_UNAVAILABLE,
 };
 

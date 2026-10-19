@@ -840,6 +840,10 @@ static const struct MenuAction sMultichoiceList_LocalRoomFloorStyle[] =
     {COMPOUND_STRING("{JPN}きの ゆか")},
     {COMPOUND_STRING("{JPN}あかるい きの ゆか")},
     {COMPOUND_STRING("{JPN}タイルの ゆか")},
+    {COMPOUND_STRING("{JPN}たたみ")},
+    {COMPOUND_STRING("{JPN}あおい じゅうたん")},
+    {COMPOUND_STRING("{JPN}あかい タイルの ゆか")},
+    {COMPOUND_STRING("{JPN}ピンクの じゅうたん")},
     {gText_Exit},
 };
 
@@ -848,8 +852,16 @@ static const struct MenuAction sMultichoiceList_LocalRoomWallStyle[] =
     {COMPOUND_STRING("{JPN}しろい かべ")},
     {COMPOUND_STRING("{JPN}あおい かべ")},
     {COMPOUND_STRING("{JPN}もくめの かべ")},
+    {COMPOUND_STRING("{JPN}きいろい しまの かべ")},
+    {COMPOUND_STRING("{JPN}タイルの かべ")},
+    {COMPOUND_STRING("{JPN}みずいろの かべ")},
+    {COMPOUND_STRING("{JPN}みどりの かべ")},
     {gText_Exit},
 };
+
+STATIC_ASSERT(ARRAY_COUNT(sMultichoiceList_LocalRoomFloorStyle) == LOCAL_ROOM_STYLE_COUNT + 1, LocalRoomFloorMenuSize);
+STATIC_ASSERT(ARRAY_COUNT(sMultichoiceList_LocalRoomWallStyle) == LOCAL_ROOM_STYLE_COUNT + 1, LocalRoomWallMenuSize);
+STATIC_ASSERT((LOCAL_ROOM_STYLE_COUNT + 1) % 2 == 0, LocalRoomStyleMenuGridRows);
 
 static const struct MenuAction sMultichoiceList_LocalRoomRoamers[] =
 {

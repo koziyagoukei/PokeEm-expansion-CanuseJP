@@ -31,10 +31,10 @@ EXTRA_SPECIES = {
     "SPECIES_CORSOLA_GALAR",
     "SPECIES_DIPPLIN",
     "SPECIES_URSARING",
+    "SPECIES_SMEARGLE",
 }
 
 EXCLUDED_SPECIES = {
-    "SPECIES_SMEARGLE",
     "SPECIES_FLABEBE_RED",
 }
 
@@ -1075,8 +1075,11 @@ def write_frontier_constants(selected: list[SpeciesData]) -> None:
 def write_battle_frontier_mons(selected: list[SpeciesData]) -> None:
     if __package__:
         from .frontier_sets_gen5_9 import SETS, fields_for_set
+        from .frontier_sets_gen2_4 import SETS as earlier_sets
     else:
         from frontier_sets_gen5_9 import SETS, fields_for_set
+        from frontier_sets_gen2_4 import SETS as earlier_sets
+    curated_sets = SETS | earlier_sets
 
     level_up = parse_level_up_learnsets()
     full = parse_full_learnsets()
@@ -1094,23 +1097,24 @@ def write_battle_frontier_mons(selected: list[SpeciesData]) -> None:
         mega_items = mega_stones_by_form_table.get(data.form_change_table or "", [])
 
         for slot in range(1, 4):
-            role = choose_role(data, slot)
-            if data.species == "SPECIES_DITTO":
-                role = "physical"
-            moves = choose_moves(data.species, data, level_up, full, move_info, z_source, slot)
-            held_item = choose_held_item(data, slot, role, moves, move_info, mega_items, z_item, z_source)
-            fields = {
-                "moves": "{" + ", ".join(moves) + "}",
-                "heldItem": held_item,
-                "ev": choose_ev(data.stats, role),
-                "nature": choose_nature(data.stats, role),
-                "iv": "TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31)",
-                "ability": choose_ability(data.species, data.abilities, slot - 1),
-                "teraType": choose_tera_type(data, moves, move_info, slot),
-            }
-            curated = SETS.get(data.species.removeprefix("SPECIES_"))
+            curated = curated_sets.get(data.species.removeprefix("SPECIES_"))
             if curated is not None:
-                fields.update(fields_for_set(curated[slot - 1], move_info))
+                fields = fields_for_set(curated[min(slot - 1, len(curated) - 1)], move_info)
+            else:
+                role = choose_role(data, slot)
+                if data.species == "SPECIES_DITTO":
+                    role = "physical"
+                moves = choose_moves(data.species, data, level_up, full, move_info, z_source, slot)
+                held_item = choose_held_item(data, slot, role, moves, move_info, mega_items, z_item, z_source)
+                fields = {
+                    "moves": "{" + ", ".join(moves) + "}",
+                    "heldItem": held_item,
+                    "ev": choose_ev(data.stats, role),
+                    "nature": choose_nature(data.stats, role),
+                    "iv": "TRAINER_PARTY_IVS(31, 31, 31, 31, 31, 31)",
+                    "ability": choose_ability(data.species, data.abilities, slot - 1),
+                    "teraType": choose_tera_type(data, moves, move_info, slot),
+                }
             lines.extend(
                 [
                     f"    [{mon_label(data.species, slot)}] = {{",

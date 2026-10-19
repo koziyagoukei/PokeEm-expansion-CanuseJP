@@ -1760,6 +1760,19 @@ def read_learnsets() -> dict[str, set[str]]:
         learnsets.setdefault(target, set()).add(move)
     for target, move in re.findall(r"\{\d+,\s*ITEM_[A-Z0-9_]+,\s*SPECIES_[A-Z0-9_]+,\s*SPECIES_[A-Z0-9_]+,\s*(SPECIES_[A-Z0-9_]+),\s*(MOVE_[A-Z0-9_]+),", form_changes):
         learnsets.setdefault(target, set()).add(move)
+    # Appliance moves are assigned by the catalog, not ordinary learnsets.
+    party_data = generator.read_text(generator.ROOT / "src/data/party_menu.h")
+    for form, move in re.findall(r"#define ROTOM_(HEAT|WASH|FROST|FAN|MOW)_MOVE\s+(MOVE_[A-Z0-9_]+)", party_data):
+        learnsets.setdefault(f"SPECIES_ROTOM_{form}", set()).add(move)
+    # Match IsFrontierSketchMove: real PP and not sketchBanned.
+    move_text = generator.read_text(generator.MOVE_INFO)
+    sketch_moves = set()
+    for match in re.finditer(r"\[(MOVE_[A-Z0-9_]+)\]\s*=\s*\{", move_text):
+        start = move_text.index("{", match.start())
+        body = move_text[start:generator.find_matching_brace(move_text, start) + 1]
+        if generator.first_int(generator.get_move_field(body, "pp")) > 0 and not re.search(r"\.sketchBanned\s*=\s*TRUE", body):
+            sketch_moves.add(match.group(1))
+    learnsets.setdefault("SPECIES_SMEARGLE", set()).update(sketch_moves)
     aliases = dict(re.findall(r"\b(MOVE_[A-Z0-9_]+)\s*=\s*(MOVE_[A-Z0-9_]+)\b", generator.read_text(generator.ROOT / "include/constants/moves.h")))
     for moves in learnsets.values():
         for old_name, current_name in aliases.items():
@@ -1795,7 +1808,8 @@ def fields_for_set(set_data: FrontierSet, move_info) -> dict[str, str]:
     }
 
 
-def validate_sets(registered: set[str], require_all: bool = True) -> None:
+def validate_sets(registered: set[str], require_all: bool = True, *, sets=None, required_species=None) -> None:
+    sets = SETS if sets is None else sets
     generator = get_generator()
     values, order = generator.parse_species_constants()
     species_info = generator.parse_species_info(values, order)
@@ -1810,13 +1824,14 @@ def validate_sets(registered: set[str], require_all: bool = True) -> None:
     all_mega_items = {item for stones in mega_items.values() for item in stones}
     errors = []
     if require_all:
-        for species in sorted(target_species(registered, values) - SETS.keys()):
+        required = target_species(registered, values) if required_species is None else required_species
+        for species in sorted(required - sets.keys()):
             errors.append(f"{species}: no curated sets")
-    for species in sorted(registered & SETS.keys()):
+    for species in sorted(registered & sets.keys()):
         data = species_info[f"SPECIES_{species}"]
-        variants = SETS[species]
-        if len({(tuple(variant.moves), variant.hidden_power) for variant in variants}) != 3:
-            errors.append(f"{species}: the three move sets must differ")
+        variants = sets[species]
+        if len(variants) not in (1, 3) or len({(tuple(variant.moves), variant.hidden_power) for variant in variants}) != len(variants):
+            errors.append(f"{species}: expected one or three distinct move sets")
         for slot, variant in enumerate(variants, 1):
             prefix = f"{species}_{slot}"
             item = f"ITEM_{variant.item}"
@@ -1879,19 +1894,21 @@ def validate_sets(registered: set[str], require_all: bool = True) -> None:
         raise ValueError("\n".join(errors))
 
 
-def apply_curated_sets(path: Path, *, require_all: bool = True, check: bool = False) -> int:
+def apply_curated_sets(path: Path, *, require_all: bool = True, check: bool = False, sets=None, required_species=None) -> int:
+    sets = SETS if sets is None else sets
     generator = get_generator()
     original = generator.read_text(path)
     entries = read_entries(original)
     registered = {entry[1] for entry in entries}
-    validate_sets(registered, require_all)
+    validate_sets(registered, require_all, sets=sets, required_species=required_species)
     move_info = generator.parse_move_info()
     replacements = []
     changed = 0
     for label, species, start, end, body in entries:
-        if species not in SETS:
+        if species not in sets:
             continue
-        variant = SETS[species][int(label[-1]) - 1]
+        variants = sets[species]
+        variant = variants[min(int(label[-1]) - 1, len(variants) - 1)]
         expected = fields_for_set(variant, move_info)
         updated = body
         for field, value in expected.items():
