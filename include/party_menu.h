@@ -149,6 +149,7 @@ bool32 SetUpFieldMove_Dive(void);
 bool32 SetUpFieldMove_RockClimb(void);
 
 #if TESTING
+bool8 Test_CanEnterPartyRoamerParkFromPartyMenu(void);
 s8 Test_UpdatePartySelectionSingleLayout(s8 slotId, s8 movementDir, bool8 chooseHalf, u8 lastSelectedSlot);
 #endif
 

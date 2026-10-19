@@ -1540,6 +1540,7 @@ static bool8 CanEnterPartyRoamerParkFromPartyMenu(void)
     return gPartyMenu.menuType == PARTY_MENU_TYPE_FIELD
         && gPartyMenu.layout == PARTY_LAYOUT_SINGLE
         && gPartyMenu.action == PARTY_ACTION_CHOOSE_MON
+        && !InBattleFacilityChallenge()
         && (gSaveBlock1Ptr->location.mapGroup != MAP_GROUP(MAP_PARTY_ROAMER_PARK)
          || gSaveBlock1Ptr->location.mapNum != MAP_NUM(MAP_PARTY_ROAMER_PARK))
         && (gSaveBlock1Ptr->location.mapGroup != MAP_GROUP(MAP_MINI_MINI_VILLA)
@@ -8787,6 +8788,11 @@ static u8 IndividualToCombinedPartyId(u8 index, enum BattlerId battler)
 }
 
 #if TESTING
+bool8 Test_CanEnterPartyRoamerParkFromPartyMenu(void)
+{
+    return CanEnterPartyRoamerParkFromPartyMenu();
+}
+
 s8 Test_UpdatePartySelectionSingleLayout(s8 slotId, s8 movementDir, bool8 chooseHalf, u8 lastSelectedSlot)
 {
     struct PartyMenuInternal internal = {0};

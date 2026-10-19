@@ -3386,11 +3386,36 @@ static bool8 SelectedFrontierMonsContainHeldItemSortType(const u16 *selectedMonI
     return FALSE;
 }
 
+bool8 IsFrontierMonPoolEntryEnabled(u16 monId)
+{
+    if (monId >= NUM_FRONTIER_MONS)
+        return FALSE;
+
+    // Keep retired Castform IDs readable by existing Factory/Dome saves.
+    switch (monId)
+    {
+    case FRONTIER_MON_CASTFORM_NORMAL_2:
+    case FRONTIER_MON_CASTFORM_NORMAL_3:
+    case FRONTIER_MON_CASTFORM_SUNNY_2:
+    case FRONTIER_MON_CASTFORM_SUNNY_3:
+    case FRONTIER_MON_CASTFORM_RAINY_2:
+    case FRONTIER_MON_CASTFORM_RAINY_3:
+    case FRONTIER_MON_CASTFORM_SNOWY_2:
+    case FRONTIER_MON_CASTFORM_SNOWY_3:
+        return FALSE;
+    default:
+        return TRUE;
+    }
+}
+
 static bool8 FrontierMonMatchesPoolFilter(u16 monId, u8 filter)
 {
     enum Species species = gFacilityTrainerMons[monId].species;
     bool8 hasSpecialStone = FrontierMonHeldItemHasSortType(monId, ITEM_TYPE_MEGA_STONE)
         || FrontierMonHeldItemHasSortType(monId, ITEM_TYPE_Z_CRYSTAL);
+
+    if (gFacilityTrainerMons == gBattleFrontierMons && !IsFrontierMonPoolEntryEnabled(monId))
+        return FALSE;
 
     switch (filter)
     {
@@ -3497,7 +3522,13 @@ static u16 GetRandomFrontierMonIgnoringSoftPartyClauses(const u16 *selectedMonId
     }
 
     if (count == 0)
-        return Random() % NUM_FRONTIER_MONS;
+    {
+        do
+        {
+            monId = Random() % NUM_FRONTIER_MONS;
+        } while (gFacilityTrainerMons == gBattleFrontierMons && !IsFrontierMonPoolEntryEnabled(monId));
+        return monId;
+    }
 
     target = Random() % count;
     for (monId = 0; monId < NUM_FRONTIER_MONS; monId++)
