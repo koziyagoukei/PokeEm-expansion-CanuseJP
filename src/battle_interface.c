@@ -1869,7 +1869,7 @@ static void CopyStatusIconToHealthbox(const u8 *statusGfx, void *dest, enum Batt
     u8 *pixels = (u8 *)tiles;
     u32 statusColor = HEALTHBOX_STATUS_COLOR_START + battler;
 
-    // Localized sheets can share one color index; keep each battler's status color independent.
+    // Build outputs already use independent slots; also normalize older/custom sheets.
     for (u32 i = 0; i < sizeof(tiles); i++)
     {
         u32 low = statusGfx[i] & 0xF;
