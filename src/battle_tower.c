@@ -1,4 +1,5 @@
 #include "global.h"
+#include "frontier_guest.h"
 #include "battle_tower.h"
 #include "apprentice.h"
 #include "event_data.h"
@@ -875,6 +876,11 @@ static void SetNextTowerOpponent(void)
             SetBattleFacilityTrainerGfxId(TRAINER_BATTLE_PARAM.opponentA, 0);
             SetBattleFacilityTrainerGfxId(TRAINER_BATTLE_PARAM.opponentB, 1);
         }
+        else if (IsFrontierGuestBattle(gSaveBlock2Ptr->frontier.curChallengeBattleNum))
+        {
+            TRAINER_BATTLE_PARAM.opponentA = GetRandomFrontierGuestTrainer();
+            SetBattleFacilityTrainerGfxId(TRAINER_BATTLE_PARAM.opponentA, 0);
+        }
         else if (ChooseSpecialBattleTowerTrainer())
         {
             SetBattleFacilityTrainerGfxId(TRAINER_BATTLE_PARAM.opponentA, 0);
@@ -1015,6 +1021,12 @@ static void GetOpponentIntroSpeech(void)
         trainerId = TRAINER_BATTLE_PARAM.opponentB;
     else
         trainerId = TRAINER_BATTLE_PARAM.opponentA;
+
+    if (GetFrontierGuestTrainer(trainerId) != NULL)
+    {
+        CopyFrontierGuestText(FRONTIER_BEFORE_TEXT, trainerId);
+        return;
+    }
 
 #if FREE_BATTLE_TOWER_E_READER == FALSE
     if (trainerId == TRAINER_EREADER)
@@ -1433,6 +1445,7 @@ static void ShowPartnerCandidateMessage(void)
             }
             gSaveBlock2Ptr->frontier.trainerIds[k] = i;
         }
+        SetFrontierGuestMultiPair(gSaveBlock2Ptr->frontier.trainerIds);
         gSaveBlock2Ptr->frontier.trainerIds[17] = trainerId;
         break;
     case PARTNER_MSGID_REJECT:
@@ -1508,6 +1521,8 @@ static void LoadLinkMultiOpponentsData(void)
                 if (i == j) // This condition is always true, because of the loop above.
                     gSaveBlock2Ptr->frontier.trainerIds[i] = trainerId;
             }
+            // Choose before sending: both peers must use the host's same pair.
+            SetFrontierGuestMultiPair(gSaveBlock2Ptr->frontier.trainerIds);
             gSpecialVar_Result = 2;
         }
         break;
@@ -1863,6 +1878,11 @@ static void ValidateApprenticesChecksums(void)
 
 void GetBattleTowerTrainerLanguage(u8 *dst, u16 trainerId)
 {
+    if (GetFrontierGuestTrainer(trainerId) != NULL)
+    {
+        *dst = gGameLanguage;
+        return;
+    }
     if (trainerId == TRAINER_EREADER)
     {
         *dst = gGameLanguage;

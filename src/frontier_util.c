@@ -1,5 +1,6 @@
 #include "global.h"
 #include "frontier_util.h"
+#include "frontier_guest.h"
 #include "easy_chat.h"
 #include "event_data.h"
 #include "battle_setup.h"
@@ -1883,6 +1884,11 @@ u8 GetFrontierBrainStatusForStreak(u8 facility, u32 streak)
 
 void CopyFrontierTrainerText(u8 whichText, u16 trainerId)
 {
+    if (GetFrontierGuestTrainer(trainerId) != NULL)
+    {
+        CopyFrontierGuestText(whichText, trainerId);
+        return;
+    }
     switch (whichText)
     {
     case FRONTIER_BEFORE_TEXT:
@@ -2873,6 +2879,10 @@ bool8 IsFrontierTrainerFemale(u16 trainerId)
 {
     u32 i;
     u8 facilityClass;
+    const struct FrontierGuestTrainer *guest = GetFrontierGuestTrainer(trainerId);
+
+    if (guest != NULL)
+        return guest->female;
 
     SetFacilityPtrsGetLevel();
     if (trainerId == TRAINER_EREADER)
@@ -3002,6 +3012,13 @@ void SetBattleFacilityTrainerGfxId(u16 trainerId, u8 tempVarId)
     u8 facilityClass;
     u8 trainerObjectGfxId;
 
+    if (GetFrontierGuestTrainer(trainerId) != NULL)
+    {
+        u16 var = tempVarId == 1 ? VAR_OBJ_GFX_ID_1 : tempVarId == 15 ? VAR_OBJ_GFX_ID_E : VAR_OBJ_GFX_ID_0;
+        VarSet(var, GetFrontierGuestTrainer(trainerId)->objectGfx);
+        return;
+    }
+
     SetFacilityPtrsGetLevel();
 #if FREE_BATTLE_TOWER_E_READER == FALSE
     if (trainerId == TRAINER_EREADER)
@@ -3098,6 +3115,9 @@ u16 GetBattleFacilityTrainerGfxId(u16 trainerId)
     u8 facilityClass;
     u16 trainerObjectGfxId;
 
+    if (GetFrontierGuestTrainer(trainerId) != NULL)
+        return GetFrontierGuestTrainer(trainerId)->objectGfx;
+
     SetFacilityPtrsGetLevel();
 #if FREE_BATTLE_TOWER_E_READER == FALSE
     if (trainerId == TRAINER_EREADER)
@@ -3151,6 +3171,8 @@ u16 GetBattleFacilityTrainerGfxId(u16 trainerId)
 
 u8 GetFrontierTrainerFrontSpriteId(u16 trainerId)
 {
+    if (GetFrontierGuestTrainer(trainerId) != NULL)
+        return GetFrontierGuestTrainer(trainerId)->portrait;
     SetFacilityPtrsGetLevel();
 
 #if FREE_BATTLE_TOWER_E_READER == FALSE
@@ -3187,6 +3209,8 @@ u8 GetFrontierTrainerFrontSpriteId(u16 trainerId)
 
 enum TrainerClassID GetFrontierOpponentClass(u16 trainerId)
 {
+    if (GetFrontierGuestTrainer(trainerId) != NULL)
+        return GetFrontierGuestTrainer(trainerId)->trainerClass;
     u8 trainerClass = 0;
     enum DifficultyLevel difficulty = GetBattlePartnerDifficultyLevel(trainerId);
     SetFacilityPtrsGetLevel();
@@ -3239,6 +3263,8 @@ enum TrainerClassID GetFrontierOpponentClass(u16 trainerId)
 
 u8 GetFrontierTrainerFacilityClass(u16 trainerId)
 {
+    if (GetFrontierGuestTrainer(trainerId) != NULL)
+        return GetFrontierGuestTrainer(trainerId)->female ? FACILITY_CLASS_COOLTRAINER_F : FACILITY_CLASS_COOLTRAINER_M;
     u8 facilityClass;
     SetFacilityPtrsGetLevel();
 
@@ -3274,6 +3300,11 @@ u8 GetFrontierTrainerFacilityClass(u16 trainerId)
 
 void GetFrontierTrainerName(u8 *dst, u16 trainerId)
 {
+    if (GetFrontierGuestTrainer(trainerId) != NULL)
+    {
+        StringCopy(dst, GetFrontierGuestTrainer(trainerId)->name);
+        return;
+    }
     s32 i = 0;
     enum DifficultyLevel difficulty = GetBattlePartnerDifficultyLevel(trainerId);
     SetFacilityPtrsGetLevel();
@@ -3338,6 +3369,8 @@ void GetFrontierTrainerName(u8 *dst, u16 trainerId)
 
 u16 GetRandomFrontierMonFromSet(u16 trainerId)
 {
+    if (GetFrontierGuestTrainer(trainerId) != NULL)
+        return GetRandomFrontierMonFromFullPoolWithFilter(NULL, 0, NULL, 0, NULL, 0, GetFrontierGuestMonFilter(trainerId, 0));
     const u16 *monSet = gFacilityTrainers[trainerId].monSet;
     u8 numMons = 0;
     u32 monId = monSet[numMons];
@@ -3416,6 +3449,12 @@ static bool8 FrontierMonMatchesPoolFilter(u16 monId, u8 filter)
 
     if (gFacilityTrainerMons == gBattleFrontierMons && !IsFrontierMonPoolEntryEnabled(monId))
         return FALSE;
+
+    if (filter >= FRONTIER_MON_FILTER_TYPE_BASE)
+    {
+        enum Type type = filter - FRONTIER_MON_FILTER_TYPE_BASE;
+        return gSpeciesInfo[species].types[0] == type || gSpeciesInfo[species].types[1] == type;
+    }
 
     switch (filter)
     {

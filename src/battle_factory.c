@@ -1,4 +1,5 @@
 #include "global.h"
+#include "frontier_guest.h"
 #include "battle.h"
 #include "battle_factory.h"
 #include "battle_factory_screen.h"
@@ -259,6 +260,8 @@ static void GenerateOpponentMons(void)
         }
     } while (i != gSaveBlock2Ptr->frontier.curChallengeBattleNum);
 
+    if (IsFrontierGuestBattle(gSaveBlock2Ptr->frontier.curChallengeBattleNum))
+        trainerId = GetRandomFrontierGuestTrainer();
     TRAINER_BATTLE_PARAM.opponentA = trainerId;
     if (gSaveBlock2Ptr->frontier.curChallengeBattleNum < FRONTIER_STAGES_PER_CHALLENGE - 1)
         gSaveBlock2Ptr->frontier.trainerIds[gSaveBlock2Ptr->frontier.curChallengeBattleNum] = trainerId;
@@ -279,6 +282,8 @@ static void GenerateOpponentMons(void)
     while (i != FRONTIER_PARTY_SIZE)
     {
         u8 poolFilter = GetForcedFactoryOpponentMonPoolFilter(i, FRONTIER_PARTY_SIZE);
+        if (GetFrontierGuestTrainer(trainerId) != NULL)
+            poolFilter = GetFrontierGuestMonFilter(trainerId, i);
         u16 monId = GetRandomFrontierMonFromFullPoolWithFilter(selectedMonIds, i, NULL, 0, excludedSpecies, excludedSpeciesCount, poolFilter);
 
         // Successful selection
@@ -836,7 +841,7 @@ static void FillFactoryFrontierTrainerParty(u16 trainerId, u8 firstMonId)
     u8 fixedIV;
     u32 otID;
 
-    if (trainerId < FRONTIER_TRAINERS_COUNT)
+    if (trainerId < FRONTIER_TRAINERS_COUNT || GetFrontierGuestTrainer(trainerId) != NULL)
     {
     // By mistake Battle Tower's Level 50 challenge number is used to determine the IVs for Battle Factory.
     #ifdef BUGFIX

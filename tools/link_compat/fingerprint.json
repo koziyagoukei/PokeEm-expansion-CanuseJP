@@ -48,7 +48,7 @@
     "data_layout": "fc47029bea51ca82e4e014544ab37782714128af8456c1d210ba2f581a4cbc2b",
     "protocol": "e6e82d6841e40c54ca85b31a4f42c0d520aaacf418e5604451699e27b9ae19cb"
   },
-  "link_compat_version": 10,
+  "link_compat_version": 11,
   "schema_version": 1,
   "summary": {
     "buffer_sizes": {

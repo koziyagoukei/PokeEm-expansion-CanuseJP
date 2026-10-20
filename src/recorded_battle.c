@@ -396,21 +396,21 @@ bool32 MoveRecordedBattleToSaveData(void)
         battleSave->recordMixFriendLanguage = gSaveBlock2Ptr->frontier.towerRecords[gPartnerTrainerId - TRAINER_RECORD_MIXING_FRIEND].language;
     }
 
-    if (TRAINER_BATTLE_PARAM.opponentA >= TRAINER_RECORD_MIXING_APPRENTICE)
+    if (TRAINER_BATTLE_PARAM.opponentA >= TRAINER_RECORD_MIXING_APPRENTICE && TRAINER_BATTLE_PARAM.opponentA < TRAINER_EREADER)
     {
         battleSave->apprenticeId = gSaveBlock2Ptr->apprentices[TRAINER_BATTLE_PARAM.opponentA - TRAINER_RECORD_MIXING_APPRENTICE].id;
         for (i = 0; i < EASY_CHAT_BATTLE_WORDS_COUNT; i++)
             battleSave->easyChatSpeech[i] = gSaveBlock2Ptr->apprentices[TRAINER_BATTLE_PARAM.opponentA - TRAINER_RECORD_MIXING_APPRENTICE].speechWon[i];
         battleSave->apprenticeLanguage = gSaveBlock2Ptr->apprentices[TRAINER_BATTLE_PARAM.opponentA - TRAINER_RECORD_MIXING_APPRENTICE].language;
     }
-    else if (TRAINER_BATTLE_PARAM.opponentB >= TRAINER_RECORD_MIXING_APPRENTICE)
+    else if (TRAINER_BATTLE_PARAM.opponentB >= TRAINER_RECORD_MIXING_APPRENTICE && TRAINER_BATTLE_PARAM.opponentB < TRAINER_EREADER)
     {
         battleSave->apprenticeId = gSaveBlock2Ptr->apprentices[TRAINER_BATTLE_PARAM.opponentB - TRAINER_RECORD_MIXING_APPRENTICE].id;
         for (i = 0; i < EASY_CHAT_BATTLE_WORDS_COUNT; i++)
             battleSave->easyChatSpeech[i] = gSaveBlock2Ptr->apprentices[TRAINER_BATTLE_PARAM.opponentB - TRAINER_RECORD_MIXING_APPRENTICE].speechWon[i];
         battleSave->apprenticeLanguage = gSaveBlock2Ptr->apprentices[TRAINER_BATTLE_PARAM.opponentB - TRAINER_RECORD_MIXING_APPRENTICE].language;
     }
-    else if (gPartnerTrainerId >= TRAINER_RECORD_MIXING_APPRENTICE)
+    else if (gPartnerTrainerId >= TRAINER_RECORD_MIXING_APPRENTICE && gPartnerTrainerId < TRAINER_EREADER)
     {
         battleSave->apprenticeId = gSaveBlock2Ptr->apprentices[gPartnerTrainerId - TRAINER_RECORD_MIXING_APPRENTICE].id;
 

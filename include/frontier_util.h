@@ -9,6 +9,8 @@ struct Pokemon;
 #define FRONTIER_MON_FILTER_SPECIAL_STONE            1
 #define FRONTIER_MON_FILTER_BANNED_SPECIES           2
 #define FRONTIER_MON_FILTER_SPECIAL_STONE_NOT_BANNED 3
+#define FRONTIER_MON_FILTER_TYPE_BASE               32
+#define FRONTIER_MON_FILTER_TYPE(type) (FRONTIER_MON_FILTER_TYPE_BASE + (type))
 
 void CallFrontierUtilFunc(void);
 bool8 InBattleFacilityChallenge(void);

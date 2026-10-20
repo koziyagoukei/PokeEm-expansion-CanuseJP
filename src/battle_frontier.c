@@ -1,4 +1,5 @@
 #include "global.h"
+#include "frontier_guest.h"
 #include "main.h"
 #include "battle.h"
 #include "battle_main.h"
@@ -364,7 +365,7 @@ static void FillTrainerParty(u16 trainerId, enum BattleTrainer trainer, u8 monCo
     u8 fixedIV = 0;
     u32 otID = 0;
 
-    if (trainerId < FRONTIER_TRAINERS_COUNT)
+    if (trainerId < FRONTIER_TRAINERS_COUNT || GetFrontierGuestTrainer(trainerId) != NULL)
     {
         // Normal battle frontier trainer.
         fixedIV = GetFrontierTrainerFixedIvs(trainerId);
@@ -412,6 +413,8 @@ static void FillTrainerParty(u16 trainerId, enum BattleTrainer trainer, u8 monCo
     while (i != monCount)
     {
         u8 poolFilter = GetForcedFrontierMonPoolFilter(i, monCount);
+        if (GetFrontierGuestTrainer(trainerId) != NULL)
+            poolFilter = GetFrontierGuestMonFilter(trainerId, i);
         u16 monId = GetRandomFrontierMonFromFullPoolWithFilter(chosenMonIndices, i, NULL, 0, NULL, 0, poolFilter);
 
         chosenMonIndices[i] = monId;

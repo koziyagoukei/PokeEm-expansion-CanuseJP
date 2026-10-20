@@ -1,4 +1,5 @@
 #include "global.h"
+#include "frontier_guest.h"
 #include "event_data.h"
 #include "battle_setup.h"
 #include "overworld.h"
@@ -159,7 +160,9 @@ static void SetPalaceOpponent(void)
 
 static void BufferOpponentIntroSpeech(void)
 {
-    if (TRAINER_BATTLE_PARAM.opponentA < FRONTIER_TRAINERS_COUNT)
+    if (GetFrontierGuestTrainer(TRAINER_BATTLE_PARAM.opponentA) != NULL)
+        CopyFrontierGuestText(FRONTIER_BEFORE_TEXT, TRAINER_BATTLE_PARAM.opponentA);
+    else if (TRAINER_BATTLE_PARAM.opponentA < FRONTIER_TRAINERS_COUNT)
         FrontierSpeechToString(gFacilityTrainers[TRAINER_BATTLE_PARAM.opponentA].speechBefore);
 }
 
