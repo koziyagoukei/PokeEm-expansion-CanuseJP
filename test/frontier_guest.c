@@ -5,13 +5,18 @@
 #include "battle_setup.h"
 #include "battle_tower.h"
 #include "event_data.h"
+#include "event_object_movement.h"
+#include "fieldmap.h"
 #include "frontier_guest.h"
 #include "frontier_music.h"
 #include "frontier_util.h"
 #include "item.h"
+#include "overworld.h"
+#include "palette.h"
 #include "pokemon.h"
 #include "random.h"
 #include "string_util.h"
+#include "sprite.h"
 #include "text.h"
 #include "test/test.h"
 #include "constants/battle_factory.h"
@@ -21,6 +26,8 @@
 #include "constants/battle_tower.h"
 #include "constants/event_objects.h"
 #include "constants/frontier_util.h"
+#include "constants/maps.h"
+#include "constants/map_groups.h"
 #include "constants/songs.h"
 
 void CallBattlePalaceFunction(void);
@@ -88,7 +95,7 @@ TEST("Frontier guest: roster is separate from the original saved trainer IDs")
     EXPECT_EQ(GetFrontierGuestTrainer(TRAINER_PLAYER), NULL);
     EXPECT_EQ(GetFrontierGuestTrainer(TRAINER_FRONTIER_GUEST_END), NULL);
     EXPECT_EQ(GetFrontierGuestTrainer(TRAINER_FRONTIER_BRAIN), NULL);
-    EXPECT_EQ(GetFrontierGuestTrainer(TRAINER_FRONTIER_VITO)->objectGfx, OBJ_EVENT_GFX_COOLTRAINER_M);
+    EXPECT_EQ(GetFrontierGuestTrainer(TRAINER_FRONTIER_VITO)->objectGfx, OBJ_EVENT_GFX_MAN_3);
     EXPECT_EQ(GetFrontierGuestTrainer(TRAINER_FRONTIER_VITO)->portrait, TRAINER_PIC_COOLTRAINER_M);
     EXPECT_EQ(GetFrontierGuestTrainer(TRAINER_FRONTIER_COURTNEY)->portrait, TRAINER_PIC_MAGMA_GRUNT_F);
     EXPECT_EQ(GetFrontierGuestTrainer(TRAINER_FRONTIER_TATE_AND_LIZA)->portrait, TRAINER_PIC_LEADER_TATE_AND_LIZA);
@@ -135,6 +142,58 @@ TEST("Frontier guest: all identity and dialogue paths accept guest IDs including
     EXPECT_EQ(VarGet(VAR_OBJ_GFX_ID_0), guest->objectGfx);
     EXPECT_EQ(VarGet(VAR_OBJ_GFX_ID_1), guest->objectGfx);
     EXPECT_EQ(VarGet(VAR_OBJ_GFX_ID_E), guest->objectGfx);
+}
+
+TEST("Frontier guest: every Arena opponent has visible overworld frames and a loaded palette")
+{
+    u32 id = TRAINER_FRONTIER_GUEST_FIRST;
+    for (u32 i = TRAINER_FRONTIER_GUEST_FIRST; i < TRAINER_FRONTIER_GUEST_END; i++)
+        PARAMETRIZE { id = i; }
+    SetUpGuests(FRONTIER_FACILITY_ARENA, FRONTIER_MODE_SINGLES);
+    gSaveBlock1Ptr->location.mapGroup = MAP_GROUP(MAP_BATTLE_FRONTIER_BATTLE_ARENA_BATTLE_ROOM);
+    gSaveBlock1Ptr->location.mapNum = MAP_NUM(MAP_BATTLE_FRONTIER_BATTLE_ARENA_BATTLE_ROOM);
+    gMapHeader = *Overworld_GetMapHeaderByGroupAndId(gSaveBlock1Ptr->location.mapGroup, gSaveBlock1Ptr->location.mapNum);
+    InitMap();
+    memset(gObjectEvents, 0, sizeof(gObjectEvents));
+    ResetSpriteData();
+    FreeAndReserveObjectSpritePalettes();
+    SetBattleFacilityTrainerGfxId(id, 0);
+    const struct ObjectEventGraphicsInfo *info = GetObjectEventGraphicsInfo(GetFrontierGuestTrainer(id)->objectGfx);
+    EXPECT(info != NULL);
+    EXPECT_EQ(GetObjectEventGraphicsInfo(OBJ_EVENT_GFX_VAR_0), info);
+    const struct ObjectEventTemplate *template = &gMapHeader.events->objectEvents[LOCALID_ARENA_BATTLE_OPPONENT - 1];
+    EXPECT_EQ(template->graphicsId, OBJ_EVENT_GFX_VAR_0);
+    u8 objectId = TrySpawnObjectEventTemplate(template, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, 0, 0);
+    EXPECT(objectId < OBJECT_EVENTS_COUNT);
+    struct ObjectEvent *object = &gObjectEvents[objectId];
+    EXPECT_EQ(object->graphicsId, GetFrontierGuestTrainer(id)->objectGfx);
+    EXPECT(object->spriteId < MAX_SPRITES);
+    struct Sprite *sprite = &gSprites[object->spriteId];
+    EXPECT(sprite->inUse);
+    EXPECT_EQ(sprite->images, info->images);
+    EXPECT_EQ((u32)sprite->oam.paletteNum, IndexOfSpritePaletteTag(info->paletteTag));
+    for (u32 dir = DIR_SOUTH; dir <= DIR_EAST; dir++)
+    {
+        for (u32 walking = 0; walking < 2; walking++)
+        {
+            u32 anim = walking ? GetMoveDirectionAnimNum(dir) : GetFaceDirectionAnimNum(dir);
+            StartSpriteAnim(sprite, anim);
+            for (u32 tick = 0; tick < 24; tick++)
+            {
+                AnimateSprite(sprite);
+                u32 frame = info->anims[anim][sprite->animCmdIndex].frame.imageValue;
+                const u8 *pixels = info->images[0].relativeFrames ? info->images[0].data + frame * info->images[0].size : info->images[frame].data;
+                u32 visible = 0;
+                for (u32 i = 0; i < info->size; i++)
+                    visible += pixels[i] != 0;
+                EXPECT(visible > 0);
+                BuildOamBuffer();
+                ProcessSpriteCopyRequests();
+                EXPECT_EQ(memcmp((const void *)(OBJ_VRAM0 + TILE_SIZE_4BPP * sprite->oam.tileNum), pixels, info->size), 0);
+            }
+        }
+    }
+    RemoveObjectEvent(object);
 }
 
 TEST("Frontier guest: only the final stage in seven-battle facilities is eligible")

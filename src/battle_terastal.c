@@ -70,6 +70,9 @@ bool32 IsTeraOrbCharged(void)
 // Returns whether a battler can Terastallize.
 bool32 CanTerastallize(enum BattlerId battler)
 {
+    if (gBattleTypeFlags & BATTLE_TYPE_ARENA)
+        return FALSE;
+
     if (IsBattlerInMegaOrPrimalForm(battler))
         return FALSE;
 

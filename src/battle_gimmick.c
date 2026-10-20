@@ -59,6 +59,12 @@ bool32 CanActivateGimmick(enum BattlerId battler, enum Gimmick gimmick)
      && gimmick != GIMMICK_Z_MOVE && gimmick != GIMMICK_TERA)
         return FALSE;
 
+    if ((gBattleTypeFlags & BATTLE_TYPE_ARENA)
+     && gimmick != GIMMICK_DYNAMAX
+     && gimmick != GIMMICK_Z_MOVE
+     && gimmick != GIMMICK_ULTRA_BURST)
+        return FALSE;
+
     if ((gBattleTypeFlags & BATTLE_TYPE_PALACE)
      && gimmick != GIMMICK_MEGA
      && gimmick != GIMMICK_TERA)

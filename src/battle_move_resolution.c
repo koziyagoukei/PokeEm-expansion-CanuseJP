@@ -493,7 +493,17 @@ static enum CancelerResult CancelerInfatuation(struct BattleCalcValues *cv)
 
 static enum CancelerResult CancelerZMoves(struct BattleCalcValues *cv)
 {
-    if (GetActiveGimmick(cv->battlerAtk) == GIMMICK_Z_MOVE)
+    enum Gimmick gimmick = GetActiveGimmick(cv->battlerAtk);
+
+    // Old saves may still contain special move IDs copied before the ban.
+    if ((IsZMove(cv->move) && gimmick != GIMMICK_Z_MOVE)
+     || (IsMaxMove(cv->move) && gimmick != GIMMICK_DYNAMAX))
+    {
+        gBattlescriptCurrInstr = BattleScript_ButItFailed;
+        return CANCELER_RESULT_FAILURE;
+    }
+
+    if (gimmick == GIMMICK_Z_MOVE)
     {
         // attacker has a queued z move
         RecordItemEffectBattle(cv->battlerAtk, HOLD_EFFECT_Z_CRYSTAL);
@@ -577,12 +587,11 @@ static enum CancelerResult CancelerCallSubmove(struct BattleCalcValues *cv)
         return CANCELER_RESULT_SUCCESS;
     }
 
-    if (calledMove != MOVE_NONE)
+    if (calledMove != MOVE_NONE && !IsGimmickMove(calledMove))
     {
+        // Convert only the caller's ordinary move using its own Z-Power.
         if (GetActiveGimmick(cv->battlerAtk) == GIMMICK_Z_MOVE && !IsBattleMoveStatus(calledMove))
             calledMove = GetTypeBasedZMove(calledMove);
-        if (cv->moveEffect == EFFECT_COPYCAT && IsMaxMove(calledMove))
-            calledMove = gBattleStruct->dynamax.lastUsedBaseMove;
 
         gBattleStruct->submoveAnnouncement = SUBMOVE_SUCCESS;
         gCalledMove = calledMove;
@@ -5941,7 +5950,7 @@ static enum Move GetMirrorMoveMove(void)
         if (i != gBattlerAttacker)
         {
             move = gBattleStruct->lastTakenMoveFrom[gBattlerAttacker][i];
-            if (move != MOVE_NONE && move != MOVE_UNAVAILABLE)
+            if (move != MOVE_NONE && move != MOVE_UNAVAILABLE && !IsMoveMirrorMoveBanned(move))
             {
                 validMoves[validMovesCount] = move;
                 validMovesCount++;
@@ -5950,11 +5959,8 @@ static enum Move GetMirrorMoveMove(void)
     }
 
     move = gBattleStruct->lastTakenMove[gBattlerAttacker];
-    if ((move == MOVE_NONE || move == MOVE_UNAVAILABLE) && validMovesCount != 0)
-        move = validMoves[Random() % validMovesCount];
-
-    if (GetActiveGimmick(gBattlerAttacker) == GIMMICK_Z_MOVE && !IsBattleMoveStatus(move))
-        move = GetTypeBasedZMove(move);
+    if (move == MOVE_NONE || move == MOVE_UNAVAILABLE || IsMoveMirrorMoveBanned(move))
+        move = validMovesCount != 0 ? validMoves[Random() % validMovesCount] : MOVE_NONE;
 
     return move;
 }
@@ -6093,20 +6099,28 @@ static enum Move GetSleepTalkMove(void)
 
 static enum Move GetCopycatMove(void)
 {
-    if (gLastUsedMove == MOVE_NONE
-     || gLastUsedMove == MOVE_UNAVAILABLE
-     || IsMoveCopycatBanned(gLastUsedMove)
-     || IsZMove(gLastUsedMove))
+    enum Move move = gLastUsedMove;
+
+    // Copycat may call the ordinary base move, never the Max move itself.
+    if (IsMaxMove(move))
+        move = gBattleStruct->dynamax.lastUsedBaseMove;
+
+    if (move == MOVE_NONE
+     || move == MOVE_UNAVAILABLE
+     || IsMoveCopycatBanned(move))
         return MOVE_NONE;
 
-    return gLastUsedMove;
+    return move;
 }
 
 static enum Move GetMeFirstMove(void)
 {
     enum Move move = GetBattlerChosenMove(gBattlerTarget);
+    enum Gimmick gimmick = GetActiveGimmick(gBattlerTarget);
 
-    if (IsBattleMoveStatus(move)
+    if (gimmick == GIMMICK_Z_MOVE
+     || gimmick == GIMMICK_DYNAMAX
+     || IsBattleMoveStatus(move)
      || IsMoveMeFirstBanned(move)
      || HasBattlerActedThisTurn(gBattlerTarget))
         return MOVE_NONE;

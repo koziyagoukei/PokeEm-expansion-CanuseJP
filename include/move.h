@@ -529,44 +529,50 @@ static inline bool32 IsMoveGravityBanned(enum Move moveId)
     return gMovesInfo[SanitizeMoveId(moveId)].gravityBanned;
 }
 
+static inline bool32 IsGimmickMove(enum Move moveId)
+{
+    return (moveId >= FIRST_Z_MOVE && moveId <= LAST_Z_MOVE)
+        || (moveId >= FIRST_MAX_MOVE && moveId <= LAST_MAX_MOVE);
+}
+
 static inline bool32 IsMoveMirrorMoveBanned(enum Move moveId)
 {
-    return gMovesInfo[SanitizeMoveId(moveId)].mirrorMoveBanned;
+    return IsGimmickMove(moveId) || gMovesInfo[SanitizeMoveId(moveId)].mirrorMoveBanned;
 }
 
 static inline bool32 IsMoveMeFirstBanned(enum Move moveId)
 {
-    return gMovesInfo[SanitizeMoveId(moveId)].meFirstBanned;
+    return IsGimmickMove(moveId) || gMovesInfo[SanitizeMoveId(moveId)].meFirstBanned;
 }
 
 static inline bool32 IsMoveMimicBanned(enum Move moveId)
 {
-    return gMovesInfo[SanitizeMoveId(moveId)].mimicBanned;
+    return IsGimmickMove(moveId) || gMovesInfo[SanitizeMoveId(moveId)].mimicBanned;
 }
 
 static inline bool32 IsMoveMetronomeBanned(enum Move moveId)
 {
-    return gMovesInfo[SanitizeMoveId(moveId)].metronomeBanned;
+    return IsGimmickMove(moveId) || gMovesInfo[SanitizeMoveId(moveId)].metronomeBanned;
 }
 
 static inline bool32 IsMoveCopycatBanned(enum Move moveId)
 {
-    return gMovesInfo[SanitizeMoveId(moveId)].copycatBanned;
+    return IsGimmickMove(moveId) || gMovesInfo[SanitizeMoveId(moveId)].copycatBanned;
 }
 
 static inline bool32 IsMoveAssistBanned(enum Move moveId)
 {
-    return gMovesInfo[SanitizeMoveId(moveId)].assistBanned;
+    return IsGimmickMove(moveId) || gMovesInfo[SanitizeMoveId(moveId)].assistBanned;
 }
 
 static inline bool32 IsMoveSleepTalkBanned(enum Move moveId)
 {
-    return gMovesInfo[SanitizeMoveId(moveId)].sleepTalkBanned;
+    return IsGimmickMove(moveId) || gMovesInfo[SanitizeMoveId(moveId)].sleepTalkBanned;
 }
 
 static inline bool32 IsMoveInstructBanned(enum Move moveId)
 {
-    return gMovesInfo[SanitizeMoveId(moveId)].instructBanned;
+    return IsGimmickMove(moveId) || gMovesInfo[SanitizeMoveId(moveId)].instructBanned;
 }
 
 static inline bool32 IsMoveEncoreBanned(enum Move moveId)
@@ -586,7 +592,7 @@ static inline bool32 IsMoveSkyBattleBanned(enum Move moveId)
 
 static inline bool32 IsMoveSketchBanned(enum Move moveId)
 {
-    return gMovesInfo[SanitizeMoveId(moveId)].sketchBanned;
+    return IsGimmickMove(moveId) || gMovesInfo[SanitizeMoveId(moveId)].sketchBanned;
 }
 
 static inline bool32 IsMoveDampBanned(enum Move moveId)
