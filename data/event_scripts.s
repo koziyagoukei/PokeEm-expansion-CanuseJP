@@ -36,6 +36,7 @@
 #include "constants/flags.h"
 #include "constants/follower_npc.h"
 #include "constants/frontier_util.h"
+#include "constants/frontier_music.h"
 #include "constants/game_stat.h"
 #include "constants/info_viewer.h"
 #include "constants/item.h"

@@ -282,6 +282,17 @@ struct SpecialDollSave
     u16 checksum;
 };
 
+struct FrontierMusicSave
+{
+    u32 magic;
+    u32 unlocked;
+    u16 selectedSong;
+    u8 mode;
+    u8 version;
+    u16 checksum;
+    u16 reserved;
+};
+
 struct SaveBlock3
 {
 #if OW_USE_FAKE_RTC
@@ -303,6 +314,7 @@ struct SaveBlock3
     // Append-only, local data. Not part of any link or record-mixing payload.
     struct LocalRoomSave localRoom;
     struct SpecialDollSave specialDolls;
+    struct FrontierMusicSave frontierMusic;
 }; /* max size 1624 bytes */
 
 extern struct SaveBlock3 *gSaveBlock3Ptr;

@@ -680,3 +680,7 @@ gSpecials::
 	def_special VillaShop_Purchase
 	def_special LocalRoom_ReturnToField
 	def_special SpecialDoll_ShowDecorationMenu
+	def_special FrontierMusic_OpenCatalog, waitstate=1
+	def_special FrontierMusic_ApplySelection
+	def_special FrontierMusic_UnlockSelection
+	def_special FrontierMusic_BufferSelection

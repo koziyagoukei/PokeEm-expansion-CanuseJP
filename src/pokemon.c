@@ -24,6 +24,7 @@
 #include "fishing.h"
 #include "follower_npc.h"
 #include "frontier_util.h"
+#include "frontier_music.h"
 #include "graphics.h"
 #include "item.h"
 #include "link.h"
@@ -5225,17 +5226,14 @@ void PlayBattleBGM(void)
 {
     ResetMapMusic();
     m4aMPlayAllStop();
-    PlayBGM(GetBattleBGM());
+    PlayBGM(FrontierMusic_ChooseBattleBGM(GetBattleBGM()));
 }
 
 void PlayMapChosenOrBattleBGM(u16 songId)
 {
     ResetMapMusic();
     m4aMPlayAllStop();
-    if (songId)
-        PlayNewMapMusic(songId);
-    else
-        PlayNewMapMusic(GetBattleBGM());
+    PlayNewMapMusic(FrontierMusic_ChooseBattleBGM(songId ? songId : GetBattleBGM()));
 }
 
 // Identical to PlayMapChosenOrBattleBGM, but uses a task instead
@@ -5249,7 +5247,7 @@ void CreateTask_PlayMapChosenOrBattleBGM(u16 songId)
     m4aMPlayAllStop();
 
     taskId = CreateTask(Task_PlayMapChosenOrBattleBGM, 0);
-    gTasks[taskId].tSongId = songId;
+    gTasks[taskId].tSongId = FrontierMusic_ChooseBattleBGM(songId ? songId : GetBattleBGM());
 }
 
 static void Task_PlayMapChosenOrBattleBGM(u8 taskId)

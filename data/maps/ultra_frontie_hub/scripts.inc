@@ -243,14 +243,114 @@ UltraFrontieHub_Text_SetFrontierBannedSpeciesBanDone::
 UltraFrontieHub_Text_SetFrontierAi_StrongestDone::
 	.string "AIを さいきょうに\nしました。$"
 
-@ PORYMAP_VISUAL_BEGIN ultra_frontie_hub_VisualEvent1 v1
-@ PORYMAP_VISUAL_DATA eyJjb21tYW5kcyI6W3siYXJndW1lbnQiOiIiLCJjb21wYXJpc29uIjoiPT0iLCJpZCI6Im1lc3NhZ2UiLCJ0ZXh0Ijoi44G844GP44GvIOOBqOOBiuOCiuOBmeOBjOOCiuOBrlxu44GK44KT44GM44GPIOOCquOCv+OCr1xccOOBk+OBk+OBriDjgYrjgpPjgYzjgY/jga8g44Gm44GE44GN44Gm44GN44GrXG7jgYvjgo/jgovjgogiLCJ2YWx1ZSI6IiJ9LHsiYXJndW1lbnQiOiIiLCJjb21wYXJpc29uIjoiPT0iLCJpZCI6ImVuZCIsInRleHQiOiIiLCJ2YWx1ZSI6IiJ9XSwibGFiZWwiOiJ1bHRyYV9mcm9udGllX2h1Yl9WaXN1YWxFdmVudDEiLCJsb2NrUGxheWVyIjp0cnVlLCJ2ZXJzaW9uIjoxfQ==
 ultra_frontie_hub_VisualEvent1::
 	lockall
-	msgbox ultra_frontie_hub_VisualEvent1_Text_1, MSGBOX_DEFAULT
+	faceplayer
+	msgbox UltraFrontieHub_Text_MusicIntro, MSGBOX_DEFAULT
+	goto UltraFrontieHub_EventScript_MusicMenu
+
+UltraFrontieHub_EventScript_MusicMenu:
+	special FrontierMusic_BufferSelection
+	msgbox UltraFrontieHub_Text_MusicCurrent, MSGBOX_DEFAULT
+	dynmultipush UltraFrontieHub_Text_MusicChoose, 0
+	dynmultipush UltraFrontieHub_Text_MusicRandom, 1
+	dynmultipush UltraFrontieHub_Text_MusicDefault, 2
+	dynmultipush UltraFrontieHub_Text_Cancel, 3
+	dynmultistack 0, 0, FALSE, 4, 0, 0, DYN_MULTICHOICE_CB_NONE
+	switch VAR_RESULT
+	case 0, UltraFrontieHub_EventScript_MusicCatalog
+	case 1, UltraFrontieHub_EventScript_MusicRandom
+	case 2, UltraFrontieHub_EventScript_MusicDefault
+	goto UltraFrontieHub_EventScript_MusicGoodbye
+
+UltraFrontieHub_EventScript_MusicCatalog:
+	closemessage
+	special ShowBattlePointsWindow
+	special FrontierMusic_OpenCatalog
+	special CloseBattlePointsWindow
+	goto_if_eq VAR_RESULT, FALSE, UltraFrontieHub_EventScript_MusicMenu
+	setvar VAR_0x8006, FRONTIER_MUSIC_FIXED
+	special FrontierMusic_ApplySelection
+	goto_if_eq VAR_RESULT, FRONTIER_MUSIC_NOT_UNLOCKED, UltraFrontieHub_EventScript_MusicUnlock
+	goto_if_ne VAR_RESULT, FRONTIER_MUSIC_OK, UltraFrontieHub_EventScript_MusicMenu
+	msgbox UltraFrontieHub_Text_MusicFixedDone, MSGBOX_DEFAULT
+	goto UltraFrontieHub_EventScript_MusicMenu
+
+UltraFrontieHub_EventScript_MusicUnlock:
+	msgbox UltraFrontieHub_Text_MusicConfirm, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, UltraFrontieHub_EventScript_MusicCatalog
+	special FrontierMusic_UnlockSelection
+	goto_if_eq VAR_RESULT, FRONTIER_MUSIC_NOT_ENOUGH_BP, UltraFrontieHub_EventScript_MusicNotEnough
+	goto_if_eq VAR_RESULT, FRONTIER_MUSIC_ALREADY_UNLOCKED, UltraFrontieHub_EventScript_MusicUnlocked
+	goto_if_ne VAR_RESULT, FRONTIER_MUSIC_OK, UltraFrontieHub_EventScript_MusicMenu
+	playse SE_SHOP
+	waitse
+UltraFrontieHub_EventScript_MusicUnlocked:
+	special FrontierMusic_ApplySelection
+	msgbox UltraFrontieHub_Text_MusicUnlockDone, MSGBOX_DEFAULT
+	goto UltraFrontieHub_EventScript_MusicMenu
+
+UltraFrontieHub_EventScript_MusicNotEnough:
+	msgbox UltraFrontieHub_Text_MusicNotEnough, MSGBOX_DEFAULT
+	goto UltraFrontieHub_EventScript_MusicCatalog
+
+UltraFrontieHub_EventScript_MusicRandom:
+	setvar VAR_0x8006, FRONTIER_MUSIC_RANDOM
+	special FrontierMusic_ApplySelection
+	goto_if_eq VAR_RESULT, FRONTIER_MUSIC_EMPTY, UltraFrontieHub_EventScript_MusicEmpty
+	msgbox UltraFrontieHub_Text_MusicRandomDone, MSGBOX_DEFAULT
+	goto UltraFrontieHub_EventScript_MusicMenu
+
+UltraFrontieHub_EventScript_MusicEmpty:
+	msgbox UltraFrontieHub_Text_MusicEmpty, MSGBOX_DEFAULT
+	goto UltraFrontieHub_EventScript_MusicMenu
+
+UltraFrontieHub_EventScript_MusicDefault:
+	setvar VAR_0x8006, FRONTIER_MUSIC_DEFAULT
+	special FrontierMusic_ApplySelection
+	msgbox UltraFrontieHub_Text_MusicDefaultDone, MSGBOX_DEFAULT
+	goto UltraFrontieHub_EventScript_MusicMenu
+
+UltraFrontieHub_EventScript_MusicGoodbye:
+	msgbox UltraFrontieHub_Text_MusicGoodbye, MSGBOX_DEFAULT
 	releaseall
 	end
 
-ultra_frontie_hub_VisualEvent1_Text_1:
-	.string "ぼくは とおりすがりの\nおんがく オタク\pここの おんがくは ていきてきに\nかわるよ$"
-@ PORYMAP_VISUAL_END ultra_frontie_hub_VisualEvent1
+UltraFrontieHub_Text_MusicIntro:
+	.string "{JPN}ぼくは とおりすがりの\nおんがく オタク。\p1きょく 5BPで かいほうすると\nしせつの バトルで ながせるよ！\pブレーンせんは いつもどおり\nとくべつな BGMに なるよ。$"
+
+UltraFrontieHub_Text_MusicCurrent:
+	.string "{JPN}いまの せっていは\n{STR_VAR_1} だよ。$"
+
+UltraFrontieHub_Text_MusicChoose:
+	.string "{JPN}きょくを えらぶ$"
+
+UltraFrontieHub_Text_MusicRandom:
+	.string "{JPN}まいせん ランダム$"
+
+UltraFrontieHub_Text_MusicDefault:
+	.string "{JPN}もとの BGMに もどす$"
+
+UltraFrontieHub_Text_MusicConfirm:
+	.string "{JPN}{STR_VAR_1}を\n5BPで かいほうして せっていする？$"
+
+UltraFrontieHub_Text_MusicUnlockDone:
+	.string "{JPN}かいほうしたよ！\n{STR_VAR_1}に せっていしたよ。$"
+
+UltraFrontieHub_Text_MusicFixedDone:
+	.string "{JPN}{STR_VAR_1}に\nせっていしたよ。BPは つかわないよ。$"
+
+UltraFrontieHub_Text_MusicRandomDone:
+	.string "{JPN}かいほうずみの きょくから\n1せんごとに ランダムで ながすよ！$"
+
+UltraFrontieHub_Text_MusicDefaultDone:
+	.string "{JPN}もとの BGMに もどしたよ。\nかいほうした きょくは のこるよ！$"
+
+UltraFrontieHub_Text_MusicNotEnough:
+	.string "{JPN}BPが たりないよ。\n1きょくの かいほうには 5BPだよ。$"
+
+UltraFrontieHub_Text_MusicEmpty:
+	.string "{JPN}まだ きょくを かいほうしてないよ。\nまずは すきな きょくを えらんでね！$"
+
+UltraFrontieHub_Text_MusicGoodbye:
+	.string "{JPN}おんがくと いっしょに\nバトルを たのしんでね！$"
