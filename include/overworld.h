@@ -198,6 +198,8 @@ enum ItemObtainFlags
     FLAG_SET_ITEM_OBTAINED,
 };
 bool8 GetSetItemObtained(enum Item item, enum ItemObtainFlags caseId);
+// dest must have room for the item description (256 bytes).
+u8 FormatItemDescriptionForHeader(enum Item item, u8 *dest);
 
 void Overworld_CreditsMainCB(void);
 bool32 Overworld_DoScrollSceneForCredits(u8 *, const struct CreditsOverworldCmd *);

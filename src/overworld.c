@@ -3712,10 +3712,10 @@ EWRAM_DATA u8 sItemIconSpriteId = 0;
 static void ShowItemIconSprite(enum Item item, bool8 firstTime, bool8 flash);
 static void DestroyItemIconSprite(void);
 
-static u8 ReformatItemDescription(enum Item item, u8 *dest)
+u8 FormatItemDescriptionForHeader(enum Item item, u8 *dest)
 {
     StringCopy(dest, GetItemDescription(item));
-    StripLineBreaks(dest);
+    // Item descriptions already contain deliberate Japanese line breaks.
     BreakStringAutomatic(dest, 196, 2, FONT_SMALL, HIDE_SCROLL_PROMPT);
     return CountLineBreaks(dest) + 1;
 }
@@ -3731,6 +3731,8 @@ void ScriptShowItemDescription(struct ScriptContext *ctx)
     struct WindowTemplate template;
     enum Item item = gSpecialVar_0x8006;
     u8 textY;
+    u8 lines;
+    u8 height;
     u8 dst[0x100];
     bool8 handleFlash = FALSE;
 
@@ -3743,7 +3745,10 @@ void ScriptShowItemDescription(struct ScriptContext *ctx)
         return; //no box if item obtained previously
     }
 
-    SetWindowTemplateFields(&template, 0, 1, 1, 28, 3, 15, 8);
+    lines = FormatItemDescriptionForHeader(item, dst);
+    height = max(3, (lines * (GetFontAttribute(FONT_SMALL, FONTATTR_MAX_LETTER_HEIGHT)
+        + GetFontAttribute(FONT_SMALL, FONTATTR_LINE_SPACING)) + 7) / 8);
+    SetWindowTemplateFields(&template, 0, 1, 1, 28, height, 15, 8);
     sHeaderBoxWindowId = AddWindow(&template);
     FillWindowPixelBuffer(sHeaderBoxWindowId, PIXEL_FILL(0));
     PutWindowTilemap(sHeaderBoxWindowId);
@@ -3751,13 +3756,13 @@ void ScriptShowItemDescription(struct ScriptContext *ctx)
     SetStandardWindowBorderStyle(sHeaderBoxWindowId, FALSE);
     DrawStdFrameWithCustomTileAndPalette(sHeaderBoxWindowId, FALSE, 0x214, 14);
 
-    if (ReformatItemDescription(item, dst) == 1)
+    if (lines == 1)
         textY = 4;
     else
         textY = 0;
 
     ShowItemIconSprite(item, TRUE, handleFlash);
-    AddTextPrinterParameterized(sHeaderBoxWindowId, 0, dst, ITEM_ICON_X + 2, textY, 0, NULL);
+    AddTextPrinterParameterized(sHeaderBoxWindowId, FONT_SMALL, dst, ITEM_ICON_X + 2, textY, 0, NULL);
 }
 
 void ScriptHideItemDescription(struct ScriptContext *ctx)

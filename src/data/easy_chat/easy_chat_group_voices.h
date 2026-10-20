@@ -373,7 +373,7 @@ const struct EasyChatWordInfo gEasyChatGroup_Voices[] = {
     },
     [EC_INDEX(EC_WORD_WAHAHAHA)] =
     {
-        .text = COMPOUND_STRING("わはは"),
+        .text = COMPOUND_STRING("わははは！"),
         .alphabeticalOrder = EC_INDEX(EC_WORD_YUP),
         .enabled = TRUE,
     },
