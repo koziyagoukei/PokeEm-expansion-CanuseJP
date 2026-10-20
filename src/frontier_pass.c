@@ -624,7 +624,7 @@ static u32 AllocateFrontierPassData(MainCallback callback)
     }
 
     sPassData->battlePoints = gSaveBlock2Ptr->frontier.battlePoints;
-    sPassData->hasBattleRecord = CanCopyRecordedBattleSaveData();
+    sPassData->hasBattleRecord = IsRecordedBattlePlaybackAllowed() && CanCopyRecordedBattleSaveData();
     sPassData->areaToShow = CURSOR_AREA_NOTHING;
     sPassData->trainerStars = CountPlayerTrainerStars();
     for (i = 0; i < NUM_FRONTIER_FACILITIES; i++)
@@ -952,7 +952,7 @@ static bool32 TryCallPassAreaFunction(u8 taskId, u8 cursorArea)
     switch (cursorArea)
     {
     case CURSOR_AREA_RECORD:
-        if (!sPassData->hasBattleRecord)
+        if (!sPassData->hasBattleRecord || !IsRecordedBattlePlaybackAllowed())
             return FALSE;
         sPassData->areaToShow = CURSOR_AREA_RECORD;
         DestroyTask(taskId);

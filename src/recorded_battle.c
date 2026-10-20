@@ -547,9 +547,23 @@ void SetVariablesForRecordedBattle(struct RecordedBattleSave *src)
             sBattleRecords[i][j] = src->battleRecord[i][j];
 }
 
+bool32 IsRecordedBattlePlaybackAllowed(void)
+{
+    return !InBattleFacilityChallenge();
+}
+
 void PlayRecordedBattle(void (*CB2_After)(void))
 {
-    struct RecordedBattleSave *battleSave = AllocZeroed(sizeof(struct RecordedBattleSave));
+    struct RecordedBattleSave *battleSave;
+
+    // Recordings replace RNG, parties and facility state. Reject before loading any of them.
+    if (!IsRecordedBattlePlaybackAllowed())
+    {
+        SetMainCallback2(CB2_After);
+        return;
+    }
+
+    battleSave = AllocZeroed(sizeof(struct RecordedBattleSave));
     if (CopyRecordedBattleFromSave(battleSave) == TRUE)
     {
         u8 taskId;
