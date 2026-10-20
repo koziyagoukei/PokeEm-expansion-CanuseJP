@@ -64,7 +64,7 @@ const struct TypeInfo gTypesInfo[NUMBER_OF_MON_TYPES] =
     },
     [TYPE_NORMAL] =
     {
-        .name = _("ノーマル"),
+        .name = _("{JPN}ノーマル"),
         .generic = _("ノーマルタイプの わざ"),
         .palette = 13,
         .zMove = MOVE_BREAKNECK_BLITZ,
@@ -84,7 +84,7 @@ const struct TypeInfo gTypesInfo[NUMBER_OF_MON_TYPES] =
     },
     [TYPE_FIGHTING] =
     {
-        .name = _("かくとう"),
+        .name = _("{JPN}かくとう"),
         .generic = _("かくとうタイプの わざ"),
         .palette = 13,
         .zMove = MOVE_ALL_OUT_PUMMELING,
@@ -106,7 +106,7 @@ const struct TypeInfo gTypesInfo[NUMBER_OF_MON_TYPES] =
     },
     [TYPE_FLYING] =
     {
-        .name = _("ひこう"),
+        .name = _("{JPN}ひこう"),
         .generic = _("ひこうタイプの わざ"),
         .palette = 14,
         .zMove = MOVE_SUPERSONIC_SKYSTRIKE,
@@ -128,7 +128,7 @@ const struct TypeInfo gTypesInfo[NUMBER_OF_MON_TYPES] =
     },
     [TYPE_POISON] =
     {
-        .name = _("どく"),
+        .name = _("{JPN}どく"),
         .generic = _("どくタイプの わざ"),
         .palette = 14,
         .zMove = MOVE_ACID_DOWNPOUR,
@@ -150,7 +150,7 @@ const struct TypeInfo gTypesInfo[NUMBER_OF_MON_TYPES] =
     },
     [TYPE_GROUND] =
     {
-        .name = _("じめん"),
+        .name = _("{JPN}じめん"),
         .generic = _("じめんタイプの わざ"),
         .palette = 13,
         .zMove = MOVE_TECTONIC_RAGE,
@@ -172,7 +172,7 @@ const struct TypeInfo gTypesInfo[NUMBER_OF_MON_TYPES] =
     },
     [TYPE_ROCK] =
     {
-        .name = _("いわ"),
+        .name = _("{JPN}いわ"),
         .generic = _("いわタイプの わざ"),
         .palette = 13,
         .zMove = MOVE_CONTINENTAL_CRUSH,
@@ -194,7 +194,7 @@ const struct TypeInfo gTypesInfo[NUMBER_OF_MON_TYPES] =
     },
     [TYPE_BUG] =
     {
-        .name = _("むし"),
+        .name = _("{JPN}むし"),
         .generic = _("むしタイプの わざ"),
         .palette = 15,
         .zMove = MOVE_SAVAGE_SPIN_OUT,
@@ -216,7 +216,7 @@ const struct TypeInfo gTypesInfo[NUMBER_OF_MON_TYPES] =
     },
     [TYPE_GHOST] =
     {
-        .name = _("ゴースト"),
+        .name = _("{JPN}ゴースト"),
         .generic = _("ゴーストタイプの わざ"),
         .palette = 14,
         .zMove = MOVE_NEVER_ENDING_NIGHTMARE,
@@ -238,7 +238,7 @@ const struct TypeInfo gTypesInfo[NUMBER_OF_MON_TYPES] =
     },
     [TYPE_STEEL] =
     {
-        .name = _("はがね"),
+        .name = _("{JPN}はがね"),
         .generic = _("はがねタイプの わざ"),
         .palette = 13,
         .zMove = MOVE_CORKSCREW_CRASH,
@@ -260,7 +260,7 @@ const struct TypeInfo gTypesInfo[NUMBER_OF_MON_TYPES] =
     },
     [TYPE_MYSTERY] =
     {
-        .name = _("？？？"),
+        .name = _("{JPN}???"),
         .generic = _("？？？タイプの わざ"),
         .palette = 15,
         .zMove = MOVE_BREAKNECK_BLITZ,
@@ -274,7 +274,7 @@ const struct TypeInfo gTypesInfo[NUMBER_OF_MON_TYPES] =
     },
     [TYPE_FIRE] =
     {
-        .name = _("ほのお"),
+        .name = _("{JPN}ほのお"),
         .generic = _("ほのおタイプの わざ"),
         .palette = 13,
         .zMove = MOVE_INFERNO_OVERDRIVE,
@@ -296,7 +296,7 @@ const struct TypeInfo gTypesInfo[NUMBER_OF_MON_TYPES] =
     },
     [TYPE_WATER] =
     {
-        .name = _("みず"),
+        .name = _("{JPN}みず"),
         .generic = _("みずタイプの わざ"),
         .palette = 14,
         .zMove = MOVE_HYDRO_VORTEX,
@@ -318,7 +318,7 @@ const struct TypeInfo gTypesInfo[NUMBER_OF_MON_TYPES] =
     },
     [TYPE_GRASS] =
     {
-        .name = _("くさ"),
+        .name = _("{JPN}くさ"),
         .generic = _("くさタイプの わざ"),
         .palette = 15,
         .zMove = MOVE_BLOOM_DOOM,
@@ -340,7 +340,7 @@ const struct TypeInfo gTypesInfo[NUMBER_OF_MON_TYPES] =
     },
     [TYPE_ELECTRIC] =
     {
-        .name = _("でんき"),
+        .name = _("{JPN}でんき"),
         .generic = _("でんきタイプの わざ"),
         .palette = 13,
         .zMove = MOVE_GIGAVOLT_HAVOC,
@@ -362,7 +362,7 @@ const struct TypeInfo gTypesInfo[NUMBER_OF_MON_TYPES] =
     },
     [TYPE_PSYCHIC] =
     {
-        .name = _("エスパー"),
+        .name = _("{JPN}エスパー"),
         .generic = _("エスパータイプの わざ"),
         .palette = 14,
         .zMove = MOVE_SHATTERED_PSYCHE,
@@ -384,7 +384,7 @@ const struct TypeInfo gTypesInfo[NUMBER_OF_MON_TYPES] =
     },
     [TYPE_ICE] =
     {
-        .name = _("こおり"),
+        .name = _("{JPN}こおり"),
         .generic = _("こおりタイプの わざ"),
         .palette = 14,
         .zMove = MOVE_SUBZERO_SLAMMER,
@@ -406,7 +406,7 @@ const struct TypeInfo gTypesInfo[NUMBER_OF_MON_TYPES] =
     },
     [TYPE_DRAGON] =
     {
-        .name = _("ドラゴン"),
+        .name = _("{JPN}ドラゴン"),
         .generic = _("ドラゴンタイプの わざ"),
         .palette = 15,
         .zMove = MOVE_DEVASTATING_DRAKE,
@@ -428,7 +428,7 @@ const struct TypeInfo gTypesInfo[NUMBER_OF_MON_TYPES] =
     },
     [TYPE_DARK] =
     {
-        .name = _("あく"),
+        .name = _("{JPN}あく"),
         .generic = _("あくタイプの わざ"),
         .palette = 13,
         .zMove = MOVE_BLACK_HOLE_ECLIPSE,

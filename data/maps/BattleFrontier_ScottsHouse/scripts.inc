@@ -213,37 +213,19 @@ BattleFrontier_ScottsHouse_Text_WelcomeToBattleFrontier:
 	.string "{JPN}エニシダ『ああ いらっしゃい\nへへ…… せまい ところで ごめんよ\pでは あらためて {PLAYER}{KUN}\nようこそ バトルフロンティアへ!\pここは わたしの ゆめの けっしょう!\nなんねんも かかって やっと\lかたちに することが できたんだ!$"
 
 BattleFrontier_ScottsHouse_Text_HowMuchEffortItTookToMakeReal:
-	.string "{JPN}おもえば ほんとうに ながい\n"
-	.string "たびだった……\p"
-	.string "つよい トレーナーを さがすため\n"
-	.string "ひとり いえを とびだしてね\p"
-	.string "ここを じつげんするまでに\n"
-	.string "どれだけの じかんと どりょくが\l"
-	.string "かかったか わからないよ$"
+	.string "{JPN}おもえば ながい みちのりだった……\nつよい トレーナーを もとめて\lただひとり たびだち……\lここまで くるのに どれだけの\lどりょくと じかんが ひつようだったか……$"
 
 BattleFrontier_ScottsHouse_Text_HaveThisAsMementoOfOurPathsCrossing:
-	.string "{JPN}でも それは もう むかしの はなし\n"
-	.string "いつまでも こだわることじゃない!\p"
-	.string "きみには ここで こころゆくまで\n"
-	.string "バトルを たのしんでほしいんだ\p"
-	.string "{PLAYER}{KUN} たびのなかで\n"
-	.string "なんども であった きねんに\l"
-	.string "これを うけとってくれ$"
+	.string "{JPN}いや こんな むかしばなしを\nしていても はじまらないな!\pとにかく こころ ゆくまで\nポケモンしょうぶを たのしんで くれ!\pこれは わたしと {PLAYER}{KUN}が\nなんども たびさきで であった\lきねんだよ!$"
 
 BattleFrontier_ScottsHouse_Text_ObtainedXBattlePoints:
-	.string "{JPN}{PLAYER}は\n"
-	.string "{STR_VAR_1}BPを てにいれた$"
+	.string "{JPN}{PLAYER}は バトルポイントを\n{STR_VAR_1} BP もらった!$"
 
 BattleFrontier_ScottsHouse_Text_ExplainBattlePoints:
-	.string "{JPN}エニシダ『バトルポイントは\n"
-	.string "フロンティアパスで かくにんできる\p"
-	.string "バトルフロンティアで かつやくすれば\n"
-	.string "それだけ たくさん たまっていくぞ\p"
-	.string "どうぐと こうかんするなど\n"
-	.string "すきなように つかってくれ$"
+	.string "{JPN}エニシダ『バトルポイントは\nフロンティアパスで みられるからね!\lポイントは この フロンティアで\lかつやく すれば するほど\lたまっていく ものなんだ!\pほしい ものと ひきかえたり\nすきなように かつようして くれ!$"
 
 BattleFrontier_ScottsHouse_Text_ExpectingGreatThings:
-	.string "{JPN}きみには おおいに きたいしているよ!$"
+	.string "{JPN}きみの かつやく\nおおいに きたい しているからね!$"
 
 BattleFrontier_ScottsHouse_Text_WhyIGoSeekingTrainers:
 	.string "{JPN}エニシダ『どの トレーナーにも\nそれぞれの じんせいが あるだろ?\pでも たたかう ときは\nそんなこと ぜんぜん かんけいない\lみんな いっしょ なんだよね!\pわたしは そういう\nたたかいの じゅんすいさ ってのが\lとても すきなんだよ\pだから いろんな ところに でかけて\nしんけんに たたかってる トレーナーを\lいっぱい しょうたい してくるのさ!$"

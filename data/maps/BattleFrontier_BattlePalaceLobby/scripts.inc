@@ -378,263 +378,115 @@ BattleFrontier_BattlePalaceLobby_EventScript_ExitRules::
 	end
 
 BattleFrontier_BattlePalaceLobby_Text_WelcomeForSingleBattle:
-	.string "{JPN}トレーナーの こころが\n"
-	.string "ためされる しせつ\p"
-	.string "バトルパレスへ ようこそ\p"
-	.string "シングルバトルホールへの\n"
-	.string "ちょうせんを うけつけます$"
+	.string "{JPN}トレーナーの こころを ためす ばしょ\nバトルパレスへ ようこそ\pここでは シングル バトルホールへの\nちょうせんを うけつけて おる……$"
 
 BattleFrontier_BattlePalaceLobby_Text_TakeSingleBattleChallenge:
-	.string "{JPN}シングルバトルホールに\n"
-	.string "ちょうせんしますか？$"
+	.string "{JPN}シングル バトルホールに\nちょうせん するか?$"
 
 BattleFrontier_BattlePalaceLobby_Text_ExplainSingleBattleChallenge:
-	.string "{JPN}バトルパレスには\n"
-	.string "シングルバトルホールが あります\p"
-	.string "ここでは ふつうの バトルと\n"
-	.string "1つだけ おおきく ちがう ルールが\l"
-	.string "あります\p"
-	.string "トレーナーが できるのは\n"
-	.string "ポケモンの いれかえだけです\p"
-	.string "それいがいの しじは\n"
-	.string "いっさい できません\p"
-	.string "ポケモンは せいかくに あわせて\n"
-	.string "じぶんで たたかいます\p"
-	.string "ポケモンを しんじて\n"
-	.string "みまもってください\p"
-	.string "7にんの トレーナーに かちぬけば\n"
-	.string "バトルポイントが もらえます\p"
-	.string "とちゅうで やめるときは\n"
-	.string "レポートを かいてください\p"
-	.string "レポートを かかずに やめると\n"
-	.string "しっかくに なります$"
+	.string "{JPN}ここには シングル バトルホールと\nよばれる シングルバトルの ための\lひろまを いくつか ようい しておる\pここでの たたかいには\nまもらなければ ならない\lひとつの おきてが ある\pここでは ポケモンは\nいれかえ しか できない!\pそれいがいの めいれいは\nいっさい きんし して おるのだ!\pポケモンには せいかくの ままに\nかんがえ こうどう して もらう!\pおぬしは じぶんの\nポケモンたちを しんじて\lたたかいを みまもって やれ\pみごと 7にんの トレーナーを\nうちやぶることが できれば\lバトルポイントを さしあげよう\pまた とちゅうで ちょうせんを\nちゅうだん したい ときは\lきちんと レポートを かかないと\lつづけて ちょうせん できんからな\lきを つけてくれ……$"
 
 BattleFrontier_BattlePalaceLobby_Text_ReturnWhenFortified:
-	.string "{JPN}こころと ポケモンを きたえて\n"
-	.string "また おこしください$"
+	.string "{JPN}おのれの こころと ポケモンを きたえたら\nまた くるがよい……$"
 
 BattleFrontier_BattlePalaceLobby_Text_WhichChallenge:
-	.string "{JPN}レベル50と オープンレベルの\n"
-	.string "2つの バトルホールが あります\l"
-	.string "どちらに ちょうせんしますか？$"
+	.string "{JPN}レベル50のへや オープンレベルのへやが\nあるが どちらに ちょうせん するのだ?$"
 
 BattleFrontier_BattlePalaceLobby_Text_NotEnoughValidMonsLv50:
-	.string "{JPN}ふう...\p"
-	.string "ちょうせんに ひつような\n"
-	.string "ポケモンが 3びき たりません\p"
-	.string "さんかするには ちがう しゅるいの\n"
-	.string "ポケモンを 3びき えらんでください\p"
-	.string "ポケモンは すべて\n"
-	.string "レベル50いかで なければなりません\p"
-	.string "また おなじ しゅるいの どうぐを\n"
-	.string "もたせることは できません\p"
-	.string "タマゴ{STR_VAR_1}$"
+	.string "{JPN}おぬし……\pちょうせん できる ポケモンが\n3ひき おらんぞ!\pちょうせん するには レベルが 50いかで\nすべて ちがう しゅるいの ポケモンを\p3ひき ようい してくれ\pまた もたせる どうぐも\nすべて ちがう もので なければ いかん\pそして タマゴ{STR_VAR_1}ちょうせん させる ことは できん!\pじゅんびを ととのえてから また きなさい$"
 
 BattleFrontier_BattlePalaceLobby_Text_NotEnoughValidMonsEnd:
 	.string "{JPN}じゅんびが できましたら\n"
 	.string "また おこしください$"
 
 BattleFrontier_BattlePalaceLobby_Text_NotEnoughValidMonsLvOpen:
-	.string "{JPN}ふう...\p"
-	.string "ちょうせんに ひつような\n"
-	.string "ポケモンが 3びき たりません\p"
-	.string "さんかするには ちがう しゅるいの\n"
-	.string "ポケモンを 3びき えらんでください\p"
-	.string "また おなじ しゅるいの どうぐを\n"
-	.string "もたせることは できません\p"
-	.string "タマゴ{STR_VAR_1}$"
+	.string "{JPN}おぬし……\pちょうせん できる ポケモンが\n3ひき おらんぞ!\pちょうせん するには\nすべて ちがう しゅるいの ポケモンを\p3ひき ようい してくれ\pまた もたせる どうぐも\nすべて ちがう もので なければ いかん\pそして タマゴ{STR_VAR_1}ちょうせん させる ことは できん!\pじゅんびを ととのえてから また きなさい$"
 
 BattleFrontier_BattlePalaceLobby_Text_NowSelectThreeMons:
-	.string "{JPN}それでは ポケモンを\n"
-	.string "3びき えらんでください$"
+	.string "{JPN}では ちょうせんする ポケモンを\n3ひき えらんでくれ$"
 
 BattleFrontier_BattlePalaceLobby_Text_MustSaveBeforeChallenge2:
-	.string "{JPN}バトルホールへ ごあんないするまえに\n"
-	.string "レポートを かきます よろしいですか?$"
+	.string "{JPN}バトルホールへ むかうまえに\nレポートを かくが よろしいか?$"
 
 BattleFrontier_BattlePalaceLobby_Text_FollowMe:
-	.string "{JPN}それでは\n"
-	.string "ついてきてください$"
+	.string "{JPN}それでは\nわしに ついてこい……$"
 
 BattleFrontier_BattlePalaceLobby_Text_ResultsWillBeRecorded:
-	.string "{JPN}あなたの ポケモンの たたかい\n"
-	.string "しかと みとどけました\p"
-	.string "けっかを レポートに かきます\n"
-	.string "しばらく おまちください$"
+	.string "{JPN}よいものを みせて もらった\pそれでは せいせきを レポートに かくぞ\nしばし またれよ……$"
 
 BattleFrontier_BattlePalaceLobby_Text_FirmTrueBondsFor7WinStreak:
-	.string "{JPN}7れんしょうを なしとげるとは...\p"
-	.string "あなたと ポケモンの きずなは\n"
-	.string "たしかなもののようです$"
+	.string "{JPN}7にんぬき たっせい とは……\pおぬしと ポケモンの こころの きずなは\nまことの ようじゃな……$"
 
 BattleFrontier_BattlePalaceLobby_Text_FeatWillBeRecorded:
-	.string "{JPN}きろくを レポートに かきます\n"
-	.string "しばらく おまちください$"
+	.string "{JPN}せいせきを レポートに かくぞ\nしばし またれよ……$"
 
 @ Unused
 BattleFrontier_BattlePalaceLobby_Text_BattlePointsFor7WinStreak:
-	.string "{JPN}7れんしょうの きろくを たたえ\n"
-	.string "バトルポイントを さしあげます$"
+	.string "{JPN}7にんぬきの あかしに\nバトルポイントを さしあげよう……$"
 
 BattleFrontier_BattlePalaceLobby_Text_NoSpaceForPrize:
-	.string "{JPN}しょうひんを もつ あきが\n"
-	.string "ないようです\p"
-	.string "バッグを せいりしてから\n"
-	.string "また おこしください$"
+	.string "{JPN}どうぐが いっぱいの ようだな……\pどうぐを せいりしてから\nまた くるがよい……$"
 
 BattleFrontier_BattlePalaceLobby_Text_WeHaveBeenWaiting:
-	.string "{JPN}おまちしていました...$"
+	.string "{JPN}まっておったぞ……$"
 
 BattleFrontier_BattlePalaceLobby_Text_MustSaveBeforeChallenge:
-	.string "{JPN}バトルホールへ ごあんないするまえに\n"
-	.string "レポートを かきます よろしいですか?$"
+	.string "{JPN}バトルホールへ むかうまえに\nレポートを かくぞ……$"
 
 BattleFrontier_BattlePalaceLobby_Text_FailedToSaveBeforeEndingChallenge:
-	.string "{JPN}ふう...\p"
-	.string "ぜんかい ちょうせんを やめるまえに\n"
-	.string "レポートを かきませんでしたね\p"
-	.string "そのため ちょうせんは\n"
-	.string "むこうと なります$"
+	.string "{JPN}おぬし……\pぜんかい ちゃんと レポートを かいて\nしゅうりょう しなかったな?\pざんねんだが そのばあい\nちょうせんは むこうと なる……$"
 
 @ Unused
 BattleFrontier_BattlePalaceLobby_Text_ReceivedPrize:
-	.string "{JPN}{PLAYER}は しょうひんの\n"
-	.string "{STR_VAR_1}を もらった$"
+	.string "{JPN}{PLAYER}は\n{STR_VAR_1}を もらった!$"
 
 BattleFrontier_BattlePalaceLobby_Text_LadyCanTellWhatMonsThink:
-	.string "{JPN}おれみたいに たくましい やつには\n"
-	.string "たくましい ポケモンが いちばんだ\p"
-	.string "こうげきは さいだいの ぼうぎょ!\n"
-	.string "ひたすら せめるのが さいこうだ!\p"
-	.string "いや そのはなしを\n"
-	.string "したかったんじゃ ないんだ\p"
-	.string "ときどき すごく かわいい おねえさんが\n"
-	.string "ここに くるんだよ\p"
-	.string "ポケモンの きもちが\n"
-	.string "わかるんだってさ\p"
-	.string "ほんとか どうかは しらないけど\n"
-	.string "とにかく かわいいんだ\p"
-	.string "ん?\n"
-	.string "なんで そんな めで みるんだ?$"
+	.string "{JPN}ウス! ウス! がんばりやの わしには\nがんばりやの ポケモンが ぴったりっス!\pこうげき こそ さいだいの ぼうぎょ!\nガンガン せめまくって さいこうっス!\pところで きいて くださいッスよー\pときどき ここに とっても\nかわいい おじょうちゃんが\lあそびに くるッスけど\lそのこったら ポケモンの きもちが\lわかるとか いうんスよー\pいやー ほんと かわいいッスよねー……\p…… ん なんスか? そのめは?$"
 
 BattleFrontier_BattlePalaceLobby_Text_NatureAndMovesKeyHere:
-	.string "{JPN}うーむ...\p"
-	.string "ここでは ポケモンの せいかくと\n"
-	.string "おぼえている わざが かぎになるようだ\p"
-	.string "もっと くわしくいえば\n"
-	.string "せいかくと わざが どれだけ\l"
-	.string "あっているか ということだな\p"
-	.string "ポケモンが ちからを だしきれないなら\n"
-	.string "せいかくと わざの あいしょうを\l"
-	.string "みなおすと いいだろう$"
+	.string "{JPN}うーん……\pどうやら ここでは ポケモンの せいかくと\nおぼえさせている わざとの あいしょうが\lたたかいの カギを にぎってる ようだ\pそう…… もし きみの ポケモンが\nじぶんの ちからが はっき できなくて\lこまっている ようす だったら\lおぼえさせている わざから\lかんがえ なおす ひつようが あるかもな$"
 
 BattleFrontier_BattlePalaceLobby_Text_MonDocileButTransforms:
-	.string "{JPN}うちの ポケモンは\n"
-	.string "ふだん とても おとなしいの\p"
-	.string "でも バトルホールに はいると\n"
-	.string "ときどき まるで べつの すがたに\l"
-	.string "なったみたいに なるの!\p"
-	.string "すごく こわいくらいで\n"
-	.string "びっくり しちゃうわ$"
+	.string "{JPN}あたしの ポケモン\nふだんは とーっても おとなしいのよ\pだけど バトルホールで たたかってると\nときどき めつきが\lガラッと かわっちゃうの!\pすっごい はくりょくで びっくりしちゃう!$"
 
 BattleFrontier_BattlePalaceLobby_Text_WhatNatureFavorsChippingAway:
-	.string "{JPN}あいてを よわらせて\n"
-	.string "じわじわ せめるのが すきな ポケモンは\l"
-	.string "どんな せいかく なのかな\p"
-	.string "のんきな せいかくだったら\n"
-	.string "びっくり しちゃうね\p"
-	.string "でも それは ちがうかな$"
+	.string "{JPN}あいてを よわらせたり……\nじわじわ せめて くれるのは\lどんな せいかくかな……\p…… いがいに のうてんき とか?\p…… まさかねぇ……$"
 
 BattleFrontier_BattlePalaceLobby_Text_WelcomeForDoubleBattle:
-	.string "{JPN}トレーナーの こころが\n"
-	.string "ためされる しせつ\p"
-	.string "バトルパレスへ ようこそ\p"
-	.string "ダブルバトルホールへの\n"
-	.string "ちょうせんを うけつけます$"
+	.string "{JPN}トレーナーの こころを ためす ばしょ\nバトルパレスへ ようこそ\pここでは ダブル バトルホールへの\nちょうせんを うけつけておる……$"
 
 BattleFrontier_BattlePalaceLobby_Text_TakeDoubleBattleChallenge:
-	.string "{JPN}ダブルバトルホールに\n"
-	.string "ちょうせんしますか?$"
+	.string "{JPN}ダブル バトルホールに\nちょうせん するか?$"
 
 BattleFrontier_BattlePalaceLobby_Text_ExplainDoubleBattleChallenge:
-	.string "{JPN}バトルパレスには\n"
-	.string "ダブルバトルホールが あります\p"
-	.string "ここでは ふつうの ダブルバトルと\n"
-	.string "1つだけ おおきく ちがう ルールが\l"
-	.string "あります\p"
-	.string "トレーナーが できるのは\n"
-	.string "ポケモンの いれかえだけです\p"
-	.string "それいがいの しじは\n"
-	.string "いっさい できません\p"
-	.string "ポケモンは せいかくに あわせて\n"
-	.string "じぶんで たたかいます\p"
-	.string "ポケモンを しんじて\n"
-	.string "みまもってください\p"
-	.string "7にんの トレーナーに かちぬけば\n"
-	.string "バトルポイントが もらえます\p"
-	.string "とちゅうで やめるときは\n"
-	.string "レポートを かいてください\p"
-	.string "レポートを かかずに やめると\n"
-	.string "しっかくに なります$"
+	.string "{JPN}ここには ダブル バトルホールと\nよばれる ダブルバトルの ための\lひろまを いくつか ようい しておる\pここでの たたかいには\nまもらなければ ならない\lひとつの おきてが ある\pここでは ポケモンは\nいれかえ しか できない!\pそれいがいの めいれいは\nいっさい きんし して おるのだ!\pポケモンには せいかくの ままに\nかんがえ こうどう して もらう!\pおぬしは じぶんの\nポケモンたちを しんじて\lたたかいを みまもって やれ\pみごと 7にんの トレーナーを\nうちやぶることが できれば\lバトルポイントを さしあげよう\pまた とちゅうで ちょうせんを\nちゅうだん したい ときは\lきちんと レポートを かかないと\lつづけて ちょうせん できんからな\lきを つけてくれ……$"
 
 BattleFrontier_BattlePalaceLobby_Text_ToDefeatMavenAnd7Trainers:
-	.string "{JPN}パレスガーディアンと\n"
-	.string "7にんの トレーナーに かつとは...$"
+	.string "{JPN}パレスガーディアンを たおし\n7にんぬきを たっせいするとは……$"
 
 BattleFrontier_BattlePalaceLobby_Text_PresentYouWithBattlePoints:
-	.string "{JPN}ポケモンとの きずなを たたえ\n"
-	.string "バトルポイントを さしあげます$"
+	.string "{JPN}おぬしと ポケモンの きずなを たたえ\nバトルポイントを おくろう……$"
 
 BattleFrontier_BattlePalaceLobby_Text_LikeToRecordMatch:
-	.string "{JPN}いまの バトルパレスの しょうぶを\n"
-	.string "フロンティアパスに きろくしますか?$"
+	.string "{JPN}バトルパレスで\nさいごに おこなった たたかいを\lフロンティアパスに きろく するか?$"
 
 BattleFrontier_BattlePalaceLobby_Text_RulesAreListed:
-	.string "{JPN}バトルホールの ルールです$"
+	.string "{JPN}バトルホールの ルールが かかれている!$"
 
 BattleFrontier_BattlePalaceLobby_Text_ReadWhichHeading:
-	.string "{JPN}どの こうもくを よみますか?$"
+	.string "{JPN}どの せつめいを よみますか?$"
 
 BattleFrontier_BattlePalaceLobby_Text_ExplainRulesBasics:
-	.string "{JPN}ここでは ポケモンが\n"
-	.string "じぶんで かんがえて たたかいます\p"
-	.string "ひとと くらす ポケモンは\n"
-	.string "せいかくによって たたかいかたが\l"
-	.string "かわります$"
+	.string "{JPN}ここでは ポケモンたちが\nじぶんで かんがえ たたかいます\pじゅんすいな やせいの ときとは ちがって\nひとと くらしている ポケモンは\lせいかくに よって どんな こうどうを\lするかが かわるのです$"
 
 BattleFrontier_BattlePalaceLobby_Text_ExplainRulesNature:
-	.string "{JPN}せいかくによって\n"
-	.string "こうげきを このむ ポケモンや\p"
-	.string "じぶんを まもることを\n"
-	.string "このむ ポケモンが います\p"
-	.string "あいてを まどわせる わざを\n"
-	.string "このむ ポケモンも います\p"
-	.string "ポケモンには せいかくに あった\n"
-	.string "とくいな わざが あります\p"
-	.string "ぎゃくに にがてな わざは\n"
-	.string "うまく つかえないことが あります$"
+	.string "{JPN}とにかく こうげきが\nすきな せいかく\pじぶんの からだを まもる ことが\nすきな せいかく\pあいてを こまらせたり かわった ことを\nするのが すきな せいかく\pポケモンは せいかくに よって\nすきで とくいな わざと\lきらいで にがてな わざが ちがいます$"
 
 BattleFrontier_BattlePalaceLobby_Text_ExplainRulesMoves:
-	.string "{JPN}わざには あいてに ダメージを\n"
-	.string "あたえる こうげきわざや\p"
-	.string "こうげきに そなえたり\n"
-	.string "HPを かいふくする ぼうぎょわざが\l"
-	.string "あります\p"
-	.string "どくや まひなどで\n"
-	.string "あいてを よわらせる わざも あります\p"
-	.string "ポケモンは これらの わざを\n"
-	.string "じぶんで えらんで たたかいます$"
+	.string "{JPN}あいてに むかって じぶんから\nちょくせつ ダメージを あたえる\lこうげきの わざ\pたたかいの じゅんびや キズついた からだの\nかいふくを する ぼうぎょの わざ\pあいての のうりょくを さげたり\nどくや まひに したり などの\lすこし かわった ことを する わざ\pポケモンは すべての わざを\nおおきく 3つの しゅるいに わけて\lどんな わざを だすか かんがえて います$"
 
 BattleFrontier_BattlePalaceLobby_Text_ExplainRulesUnderpowered:
-	.string "{JPN}トレーナーの しじが ないと\n"
-	.string "うまく つかえない わざも あります\p"
-	.string "ポケモンは にがてな わざを\n"
-	.string "うまく つかえません\p"
-	.string "せいかくに あわない わざばかりだと\n"
-	.string "ちからを だしきれないことが あります$"
+	.string "{JPN}トレーナーの めいれいを うけて いない\nポケモンは うまく わざを\lだせない ことが あります\pポケモンは きらいな わざを\nつかうのは とくいでは ありません\pせいかくに あわない わざ ばかりを\nおぼえさせて いると たたかいで\lポケモンが じぶんの ちからを はっき\lできない ことが おおく なります$"
 
 BattleFrontier_BattlePalaceLobby_Text_ExplainRulesWhenInDanger:
-	.string "{JPN}ピンチに なると せいかくに\n"
-	.string "あわない わざを つかうことも あります\p"
-	.string "いつもと ちがう うごきを したら\n"
-	.string "よく みまもってください$"
+	.string "{JPN}ポケモンの せいかくの なかには\nピンチに なることで もともとの\lせいかくとは ちがう タイプの\lわざを つかう ように\lなるものが あります\pピンチに なって すこし かわった\nこうどうを はじめた ポケモンには\lじゅうぶん ちゅうい しましょう$"

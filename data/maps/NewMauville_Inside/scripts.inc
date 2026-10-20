@@ -254,10 +254,4 @@ NewMauville_Inside_Text_GeneratorQuietedDown:
 	.string "{JPN}はつでんそうちは しずかに なった$"
 
 NewMauville_Inside_Text_SteppedOnSwitchGeneratorStopped:
-	.string "{JPN}{PLAYER}は\n"
-	.string "スイッチを ふんだ！\p"
-	.string "{0xB0}{0xB0}ポチッとな！\p"
-	.string "{0xB0}{0xB0} {0xB0}{0xB0} {0xB0}{0xB0}\n"
-	.string "{0xB0}{0xB0} {0xB0}{0xB0} {0xB0}{0xB0}\p"
-	.string "はつでんそうち は\n"
-	.string "とまった ようだ$"
+	.string "{JPN}{PLAYER}は\nスイッチを ふんだ!\p……ポチッとな!\p…… …… ……\n…… …… ……\pはつでんそうち は\nとまった ようだ$"

@@ -195,8 +195,7 @@ RustboroCity_Gym_Text_RoxanneDefeat:
 	.string "$"
 
 RustboroCity_Gym_Text_ReceivedStoneBadge:
-	.string "{PLAYER}は ツツジから\n"
-	.string "ストーンバッジを もらった!$"
+	.string "{JPN}{PLAYER}は ツツジから\nストーンバッジを もらった!$"
 
 RustboroCity_Gym_Text_StoneBadgeInfoTakeThis:
 	.string "{JPN}ストーンバッジ には あなたの\nポケモンの こうげきりょくを\lたかめる こうかが あるの\pあと たたかっていない ときでも\nひでんわざの いあいぎり が\lつかえるようにも なるわ\pそれから……\nこれも もっていって ください"

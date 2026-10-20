@@ -35,27 +35,27 @@ static int BerryFix_TrySetScene(int);
 static void BerryFix_SetScene(int);
 static void BerryFix_HideScene(void);
 
-static const u8 sText_BerryProgramUpdate[] = _("Berry Program Update");
-static const u8 sText_RubySapphire[] = _("Ruby/Sapphire");
-static const u8 sText_Emerald[] = _("Emerald");
-static const u8 sText_BerryProgramWillBeUpdatedPressA[] = _("The Berry Program on your POKEMON\n"
-                                                            "Ruby/Sapphire Game Pak will be updated.\n"
-                                                            "{COLOR RED}{SHADOW LIGHT_RED}Press the A Button.");
-static const u8 sText_EnsureGBAConnectionMatches[] = _("Please ensure the connection of your\n"
-                                                       "Game Boy Advance system matches this.\n"
-                                                       "{COLOR RED}{SHADOW LIGHT_RED}YES: Press the A Button.\n"
-                                                       "NO: Turn off the power and try again.");
-static const u8 sText_TurnOffPowerHoldingStartSelect[] = _("Please turn on the power of POKEMON\n"
-                                                           "Ruby/Sapphire while holding START and\n"
-                                                           "SELECT simultaneously. Then, ensure\n"
-                                                           "the picture above appears.");
-static const u8 sText_TransmittingPleaseWait[] = _("Transmitting. Please wait.\n"
-                                                   "{COLOR RED}{SHADOW LIGHT_RED}Please do not turn off the power or\n"
-                                                   "unplug the Game Boy Advance Game\nLink Cable.");
-static const u8 sText_PleaseFollowInstructionsOnScreen[] = _("Please follow the instructions on your\n"
-                                                             "POKEMON Ruby/Sapphire screen.");
-static const u8 sText_TransmissionFailureTryAgain[] = _("Transmission failure.\n"
-                                                        "{COLOR RED}{SHADOW LIGHT_RED}Please try again.");
+static const u8 sText_BerryProgramUpdate[] = _("{JPN}きのみ しゅうせいプログラム");
+static const u8 sText_RubySapphire[] = _("{JPN}ルビー/サファイア");
+static const u8 sText_Emerald[] = _("{JPN}エメラルド");
+static const u8 sText_BerryProgramWillBeUpdatedPressA[] = _("{JPN}ルビー・サファイアの カートリッジの\n"
+                                                            "きのみプログラムを しゅうせいします\n"
+                                                            "{COLOR RED}{SHADOW LIGHT_RED}Aボタンを おしてください");
+static const u8 sText_EnsureGBAConnectionMatches[] = _("{JPN}ゲームボーイアドバンスが えのとおりに\n"
+                                                       "つながっているか たしかめてください\n"
+                                                       "{COLOR RED}{SHADOW LIGHT_RED}はい: Aボタンを おしてください\n"
+                                                       "いいえ: でんげんを きり やりなおしてください");
+static const u8 sText_TurnOffPowerHoldingStartSelect[] = _("{JPN}ルビー・サファイアを\n"
+                                                           "STARTと SELECTを おしながら\n"
+                                                           "でんげんを いれてください\n"
+                                                           "うえの えと おなじ がめんに なりますか?");
+static const u8 sText_TransmittingPleaseWait[] = _("{JPN}そうしんちゅうです おまちください\n"
+                                                   "{COLOR RED}{SHADOW LIGHT_RED}でんげんを きったり\n"
+                                                   "つうしんケーブルを ぬいたり\nしないでください");
+static const u8 sText_PleaseFollowInstructionsOnScreen[] = _("{JPN}ルビー・サファイアの がめんの\n"
+                                                             "しじに したがってください");
+static const u8 sText_TransmissionFailureTryAgain[] = _("{JPN}そうしんに しっぱいしました\n"
+                                                        "{COLOR RED}{SHADOW LIGHT_RED}もういちど やりなおしてください");
 
 static const struct BgTemplate sBerryFixBgTemplates[] = {
     {

@@ -67,11 +67,7 @@ LilycoveCity_MoveDeletersHouse_EventScript_LastMonWithSurf::
 	end
 
 LilycoveCity_MoveDeletersHouse_Text_ICanMakeMonForgetMove:
-	.string "{JPN}えーと{0xB0}{0xB0}\n"
-	.string "そうじゃ わし わすれじいさん\p"
-	.string "ポケモンの わざを\n"
-	.string "わすれさせる ことが できるんじゃ！\p"
-	.string "わざを わすれ させるかね？$"
+	.string "{JPN}えーと……\nそうじゃ わし わすれじいさん\pポケモンの わざを\nわすれさせる ことが できるんじゃ!\pわざを わすれ させるかね?$"
 
 LilycoveCity_MoveDeletersHouse_Text_WhichMonShouldForget:
 	.string "{JPN}どの ポケモンに するんじゃ？$"
@@ -81,8 +77,7 @@ LilycoveCity_MoveDeletersHouse_Text_WhichMoveShouldBeForgotten:
 	.string "わすれ させるんじゃ？$"
 
 LilycoveCity_MoveDeletersHouse_Text_MonOnlyKnowsOneMove:
-	.string "{JPN}{STR_VAR_1}は わざを 1つしか\n"
-	.string "もっていない ようじゃ{0xB0}{0xB0}$"
+	.string "{JPN}{STR_VAR_1}は わざを 1つしか\nもってない ようじゃ……$"
 
 LilycoveCity_MoveDeletersHouse_Text_MonsMoveShouldBeForgotten:
 	.string "{JPN}むむ！\n"

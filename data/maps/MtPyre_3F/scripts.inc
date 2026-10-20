@@ -33,10 +33,7 @@ MtPyre_3F_EventScript_RematchGabrielle::
 	end
 
 MtPyre_3F_Text_WilliamIntro:
-	.string "{JPN}あらたかな やまの ちからで\nサイコパワーの アップした わたしに\lこどもの おまえが かてるかな!?"
-	.string ""
-	.string ""
-	.string "$"
+	.string "{JPN}れいげん あらたかな やまの ちからで\nサイコパワーの アップした わたしに\lこどもの おまえが かてるかな!?$"
 
 MtPyre_3F_Text_WilliamDefeat:
 	.string "{JPN}アップ アップ……$"

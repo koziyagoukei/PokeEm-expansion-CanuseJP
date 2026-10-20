@@ -485,23 +485,13 @@ BattleFrontier_BattleDomeLobby_Text_SelectThreeMons:
 	.string "$"
 
 BattleFrontier_BattleDomeLobby_Text_NotEnoughValidMonsLvOpen:
-	.string "{JPN}おきゃくさま!\pさんかできる ポケモンが 3ひき いません!\pまた もたせる どうぐも\nすべて ちがう どうぐに してください!\pなお タマゴ{STR_VAR_1}さんか させる ことは できません!"
-	.string ""
-	.string ""
-	.string ""
-	.string "$"
+	.string "{JPN}おきゃくさま!\pさんかできる ポケモンが 3ひき いません!\pまた もたせる どうぐも\nすべて ちがう どうぐに してください!\pなお タマゴ{STR_VAR_1}さんか させる ことは できません!\pじゅんびが できましたら\nまた おこし ください$"
 
 BattleFrontier_BattleDomeLobby_Text_NotEnoughValidMonsEnd:
 	.string "{JPN}じゅんびが できましたら\nまた おこし ください$"
 
 BattleFrontier_BattleDomeLobby_Text_NotEnoughValidMonsLv50:
-	.string "{JPN}おきゃくさま!\pさんかできる ポケモンが 3ひき いません!\pさんかする ためには レベルが 50いかで\nすべて ちがう しゅるいの ポケモンを\l3ひき よういして ください\pまた もたせる どうぐも\nすべて ちがう どうぐに してください!\pなお タマゴ{STR_VAR_1}さんか させる ことは できません!"
-	.string ""
-	.string ""
-	.string ""
-	.string ""
-	.string ""
-	.string "$"
+	.string "{JPN}おきゃくさま!\pさんかできる ポケモンが 3ひき いません!\pさんかする ためには レベルが 50いかで\nすべて ちがう しゅるいの ポケモンを\l3ひき よういして ください\pまた もたせる どうぐも\nすべて ちがう どうぐに してください!\pなお タマゴ{STR_VAR_1}さんか させる ことは できません!\pじゅんびが できましたら\nまた おこし ください$"
 
 BattleFrontier_BattleDomeLobby_Text_ShowYouToBattleDome:
 	.string "{JPN}それでは バトルドームへ\nごあんない します!"
@@ -545,8 +535,7 @@ BattleFrontier_BattleDomeLobby_Text_WeveBeenWaitingForYou:
 	.string "{JPN}おまちしておりました!$"
 
 BattleFrontier_BattleDomeLobby_Text_OkayToSaveBeforeChallenge2:
-	.string "{JPN}バトルドームへ ごあんないする まえに\nレポートを かきますが よろしいですか?"
-	.string "$"
+	.string "{JPN}バトルドームに ごあんないする まえに\nレポートを かきますので おまちください$"
 
 BattleFrontier_BattleDomeLobby_Text_WelcomeDoubleBattle:
 	.string "{JPN}トレーナーの せんりゃくを ためす ばしょ!\nバトルドームへ ようこそ!\pこちらでは\nダブル バトルトーナメントの\lごあんないを しております"

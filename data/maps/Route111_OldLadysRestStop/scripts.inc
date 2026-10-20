@@ -45,6 +45,4 @@ Route111_OldLadysRestStop_Text_StillTiredTakeAnotherRest:
 	.string "そうだ それがいい！ そうしなさい！$"
 
 Route111_OldLadysRestStop_Text_DontNeedToBeShy:
-	.string "{JPN}そうかね{0xB0}{0xB0}\n"
-	.string "ほんとうに だいじょうぶ かえ？\l"
-	.string "えんりょ しなくたって いいんだよ$"
+	.string "{JPN}そうかね……\nほんとうに だいじょうぶ かえ?\lえんりょ しなくたって いいんだよ$"

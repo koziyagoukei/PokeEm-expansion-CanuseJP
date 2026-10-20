@@ -36,6 +36,7 @@
 #include "caps.h"
 
 #define HEALTHBOX_BG_INDEX 2
+#define HEALTHBOX_STATUS_COLOR_START 12
 
 enum
 {   // Corresponds to gHealthboxElementsGfxTable (and the tables after it) in graphics.c
@@ -178,6 +179,7 @@ static const u8 *GetHealthboxElementGfxPtr(u8);
 
 static void UpdateHpTextInHealthboxInDoubles(u32 healthboxSpriteId, u32 maxOrCurrent, s16 currHp, s16 maxHp);
 static void UpdateStatusIconInHealthbox(u8);
+static void CopyStatusIconToHealthbox(const u8 *statusGfx, void *dest, enum BattlerId battler);
 
 static void FillHealthboxObject(void *, u32, u32);
 
@@ -1861,6 +1863,29 @@ void TryAddPokeballIconToHealthbox(u8 healthboxSpriteId, bool8 noStatus)
         CpuFill32(0, (void *)(OBJ_VRAM0 + (gSprites[healthBarSpriteId].oam.tileNum + 8) * TILE_SIZE_4BPP), 32);
 }
 
+static void CopyStatusIconToHealthbox(const u8 *statusGfx, void *dest, enum BattlerId battler)
+{
+    u32 tiles[3 * TILE_SIZE_4BPP / sizeof(u32)];
+    u8 *pixels = (u8 *)tiles;
+    u32 statusColor = HEALTHBOX_STATUS_COLOR_START + battler;
+
+    // Build outputs already use independent slots; also normalize older/custom sheets.
+    for (u32 i = 0; i < sizeof(tiles); i++)
+    {
+        u32 low = statusGfx[i] & 0xF;
+        u32 high = statusGfx[i] >> 4;
+
+        if (low >= HEALTHBOX_STATUS_COLOR_START)
+            low = statusColor;
+        if (high >= HEALTHBOX_STATUS_COLOR_START)
+            high = statusColor;
+
+        pixels[i] = low | (high << 4);
+    }
+
+    CpuCopy32(tiles, dest, sizeof(tiles));
+}
+
 static void UpdateStatusIconInHealthbox(u8 healthboxSpriteId)
 {
     s32 i;
@@ -1939,11 +1964,11 @@ static void UpdateStatusIconInHealthbox(u8 healthboxSpriteId)
     }
 
     pltAdder = PLTT_ID(gSprites[healthboxSpriteId].oam.paletteNum);
-    pltAdder += battler + 12;
+    pltAdder += battler + HEALTHBOX_STATUS_COLOR_START;
 
     FillPalette(sStatusIconColors[statusPalId], OBJ_PLTT_OFFSET + pltAdder, PLTT_SIZEOF(1));
     CpuCopy16(&gPlttBufferUnfaded[OBJ_PLTT_OFFSET + pltAdder], (u16 *)OBJ_PLTT + pltAdder, PLTT_SIZEOF(1));
-    CpuCopy32(statusGfxPtr, (void *)(OBJ_VRAM0 + (gSprites[healthboxSpriteId].oam.tileNum + tileNumAdder) * TILE_SIZE_4BPP), 96);
+    CopyStatusIconToHealthbox(statusGfxPtr, (void *)(OBJ_VRAM0 + (gSprites[healthboxSpriteId].oam.tileNum + tileNumAdder) * TILE_SIZE_4BPP), battler);
     if ((!B_HP_PERCENTAGE_DISPLAY && !IsOnPlayerSide(battler)) || GetBattlerCoordsIndex(battler) == BATTLE_COORDS_DOUBLES)
     {
         if (!gBattleSpritesDataPtr->battlerData[battler].hpNumbersNoBars)

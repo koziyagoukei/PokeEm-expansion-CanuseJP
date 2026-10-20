@@ -204,8 +204,7 @@ SootopolisCity_Text_NameIsKiriHaveOneOfThese:
 	.string "{JPN}{STR_VAR_1}にも これ あげる$"
 
 SootopolisCity_Text_GiveYouThisBerryToo:
-	.string "{JPN}あと {STR_VAR_1}には キリの だいすきな\nn"
-	.string "{JPN}この きのみも あげちゃう!$"
+	.string "{JPN}あと {STR_VAR_1}には キリの だいすきな\nこの きのみも あげちゃう!$"
 
 SootopolisCity_Text_WhatKindOfWishInYourName:
 	.string "{JPN}{STR_VAR_1}の なまえには\n"

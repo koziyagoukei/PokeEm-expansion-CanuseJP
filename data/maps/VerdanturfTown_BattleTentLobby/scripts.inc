@@ -342,18 +342,10 @@ VerdanturfTown_BattleTentLobby_Text_GentleMonsScaryIfAngry:
 	.string "おこったら きっと こわーーーいよ！！$"
 
 VerdanturfTown_BattleTentLobby_Text_AttractionRunsDeep:
-	.string "{JPN}あたしの ポケモンへの きもち{0xB0}{0xB0}\n"
-	.string "それは まさに メロメロなのよ{0xB0}{0xB0}\p"
-	.string "あら へんなところ みられちゃった\p"
-	.string "まあ いいわ\n"
-	.string "あたなの ポケモンに\l"
-	.string "この わざマシンは いかが？$"
+	.string "{JPN}あたしの ポケモンへの きもち……\nそれは まさに メロメロなのよ……\pあら へんなところ みられちゃった\pまあ いいわ\nあなたの ポケモンに\lこの わざマシンは いかが?$"
 
 VerdanturfTown_BattleTentLobby_Text_AttractionMutual:
-	.string "{JPN}ポケモンの あたしへの きもちも{0xB0}{0xB0}\n"
-	.string "やっぱり メロメロに ちがいないわ！\p"
-	.string "だって あたしの おもう とおりに\n"
-	.string "たたかって くれるもの！$"
+	.string "{JPN}ポケモンの あたしへの きもちも……\nやっぱり メロメロに ちがいないわ!\pだって あたしの おもう とおりに\nたたかって くれるもの!$"
 
 VerdanturfTown_BattleTentLobby_Text_TaughtWhatKindsOfMoves:
 	.string "{JPN}きみの ポケモンには\n"
@@ -363,15 +355,7 @@ VerdanturfTown_BattleTentLobby_Text_TaughtWhatKindsOfMoves:
 	.string "ゆうり だと おもうんだよ$"
 
 VerdanturfTown_BattleTentLobby_Text_ScottCanMeetToughTrainers:
-	.string "{JPN}エニシダ『これは これは\n"
-	.string "{PLAYER}{KUN} あえると おもっていたよ！\p"
-	.string "バトルテント って いうのはさ！\n"
-	.string "どんな ルール だって\l"
-	.string "どんな たたかいかた だって\l"
-	.string "かんけいなく つよい トレーナーと\l"
-	.string "であえる ばしょだと おもうよ！\p"
-	.string "{PLAYER}{KUN}も めいっぱい\n"
-	.string "がんばってよ！$"
+	.string "{JPN}エニシダ『これは これは\n{PLAYER}{KUN} あえると おもってたよ!\pバトルテント って いうのはさ!\nどんな ルール だって\lどんな たたかいかた だって\lかんけいなく つよい トレーナーと\lであえる ばしょだと おもうよ!\p{PLAYER}{KUN}も めいっぱい\nがんばってよ!$"
 
 VerdanturfTown_BattleTentLobby_Text_ScottVisitRegularly:
 	.string "{JPN}エニシダ『どんな ときにも つよい\n"

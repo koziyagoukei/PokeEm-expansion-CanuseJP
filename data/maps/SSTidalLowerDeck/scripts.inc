@@ -20,9 +20,7 @@ SSTidalLowerDeck_Text_PhillipDefeat:
 	.string "{JPN}おとうと まけちまったよ！$"
 
 SSTidalLowerDeck_Text_PhillipPostBattle:
-	.string "{JPN}おれたち おそうじ ブラザーズ！\p"
-	.string "あにきが ぜんざい ぶちまけてー\n"
-	.string "おとうと せっせと みがくのさー$"
+	.string "{JPN}おれたち おそうじ ブラザーズ!\pあにきが せんざい ぶちまけてー\nおとうと せっせと みがくのさー$"
 
 SSTidalLowerDeck_Text_LeonardIntro:
 	.string "{JPN}こんなに ひろいから\n"

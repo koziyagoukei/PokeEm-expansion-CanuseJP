@@ -17,8 +17,8 @@
 #endif
 
 const u8 gNotDoneYetDescription[] = _(
-    "This move can't be used.\n"
-    "Its effect is in development.");
+    "{JPN}この わざは つかえない\n"
+    "こうかは じゅんびちゅう");
 
 const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
 {

@@ -1230,7 +1230,7 @@ EventScript_TryDarkenRuins::
 	return
 
 Text_MonFlewAway::
-	.string "The {STR_VAR_1} flew away!$"
+	.string "{JPN}{STR_VAR_1}は とんでいった!$"
 
 @ Call for legendary bird trio
 Text_Gyaoo::

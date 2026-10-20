@@ -51,14 +51,7 @@ FallarborTown_BattleTentLobby_Text_SelectThreeMons:
 	.string "{JPN}3ひき おえらび くだされ!$"
 
 FallarborTown_BattleTentLobby_Text_NotEnoughValidMonsLv50:
-	.string "{JPN}おきゃくじん!!\p"
-	.string "{JPN}さんかできる ポケモンが\n"
-	.string "{JPN}3ひき おりませんぬ!\p"
-	.string "{JPN}また もたせる どうぐも\n"
-	.string "{JPN}すべて ちがう どうぐに してくだされ!\p"
-	.string "{JPN}なお タマゴ{STR_VAR_1} さんか させる ことは できませぬ!\p"
-	.string "{JPN}じゅんびが できましたら\n"
-	.string "{JPN}また おこし くだされ!$"
+	.string "{JPN}おきゃくじん!!\pさんかできる ポケモンが\n3ひき おりませんぬ!\pまた もたせる どうぐも\nすべて ちがう どうぐに してくだされ!\pなお タマゴ{STR_VAR_1}さんか させる ことは できませぬ!\pじゅんびが できましたら\nまた おこし くだされ!$"
 
 FallarborTown_BattleTentLobby_Text_NotEnoughValidMonsLvOpen:
 	.string "{JPN}おきゃくじん!!\p"
@@ -118,8 +111,7 @@ FallarborTown_BattleTentLobby_Text_AwaitAnotherChallenge2:
 	.string "{JPN}おまちして おりますぞ!$"
 
 FallarborTown_BattleTentLobby_Text_LookingForwardToArrival:
-	.string "{JPN}バトルテントに おつれする まえに\n"
-	.string "{JPN}レポートを かきますので おまちくだされ!$"
+	.string "{JPN}おまちしておりました!\pバトルテントに おつれする まえに\nレポートを かきますので おまちくだされ!$"
 
 VerdanturfTown_BattleTentLobby_Text_WelcomeToBattleTent:
 	.string "{JPN}バトルテント\n"
@@ -200,9 +192,7 @@ VerdanturfTown_BattleTentLobby_Text_NowFollowMe:
 	.string "{JPN}わしに ついてこい……$"
 
 VerdanturfTown_BattleTentLobby_Text_ResultsWillBeRecorded:
-	.string "{JPN}よいものを みせて もらった\p"
-	.string "{JPN}それでは レポートを かこう……\n"
-	.string "{JPN}しばし またれよ……"
+	.string "{JPN}よいものを みせて もらった\pそれでは レポートを かこう……\nしばし またれよ……$"
 
 VerdanturfTown_BattleTentLobby_Text_AchievedThreeWinStreak:
 	.string "{JPN}3にんぬき たっせい とは……\p"
@@ -292,8 +282,7 @@ SlateportCity_BattleTentLobby_Text_WonThreeMatchesReturnMons:
 	.string "{JPN}しょうしょう おまちください!$"
 
 SlateportCity_BattleTentLobby_Text_AwardYouThisPrize:
-	.string "{JPN}3れんしょうを きねんして"
-	.string "{JPN}こちらを さしあげます!$"
+	.string "{JPN}3れんしょうを きねんして\nこちらを さしあげます!$"
 
 SlateportCity_BattleTentLobby_Text_NoRoomInBagMakeRoom:
 	.string "{JPN}おやや?\n"
@@ -302,8 +291,7 @@ SlateportCity_BattleTentLobby_Text_NoRoomInBagMakeRoom:
 	.string "{JPN}また きてください!$"
 
 SlateportCity_BattleTentLobby_Text_BeenWaitingForYou:
-	.string "{JPN}ちょうせんを さいかいする まえに\n"
-	.string "{JPN}レポートを かきます!$"
+	.string "{JPN}おまちして おりましたよ!\pちょうせんを さいかいする まえに\nレポートを かきます!$"
 
 SlateportCity_BattleTentLobby_Text_DidntSaveBeforeQuitting:
 	.string "{JPN}おきゃくさまー!!\p"
@@ -372,8 +360,7 @@ SlateportCity_BattleTentLobby_Text_ExplainMonRules:
 
 @ Unused
 VerdanturfTown_BattleTentLobby_Text_RulesAreListed2:
-	.string "{JPN}バトルテント シダケかいじょうの\n"
-	.string "{JPN}ルールが かかれている!$"
+	.string "{JPN}バトルテント シダケ かいじょうの\nルールが かかれてる!$"
 
 @ Unused
 VerdanturfTown_BattleTentLobby_Text_ReadWhichHeading:

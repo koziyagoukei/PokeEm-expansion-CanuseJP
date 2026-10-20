@@ -63,6 +63,16 @@ $(UNUSEDGFXDIR)/redyellowgreen_frame.bin: $(UNUSEDGFXDIR)/red_frame.bin \
 $(BATINTGFXDIR)/ability_pop_up.4bpp: %.4bpp: %.png
 	$(GFX) $< $@ -mwidth 8 -mheight 4
 
+# All four healthboxes share a palette. Each sheet must use its battler's own
+# status-color entry even when a localized PNG uses identical source indices.
+HEALTHBOX_STATUS_GFX := $(addprefix $(BATINTGFXDIR)/,status.4bpp status2.4bpp status3.4bpp status4.4bpp)
+$(BATINTGFXDIR)/status.4bpp: private STATUS_BATTLER := 0
+$(BATINTGFXDIR)/status2.4bpp: private STATUS_BATTLER := 1
+$(BATINTGFXDIR)/status3.4bpp: private STATUS_BATTLER := 2
+$(BATINTGFXDIR)/status4.4bpp: private STATUS_BATTLER := 3
+$(HEALTHBOX_STATUS_GFX): %.4bpp: %.png tools/build_healthbox_status.py
+	python3 tools/build_healthbox_status.py --gfx $(GFX) --battler $(STATUS_BATTLER) $< $@
+
 $(JPCONTESTGFXDIR)/composite_1.4bpp: $(JPCONTESTGFXDIR)/frame_1.4bpp \
                                      $(JPCONTESTGFXDIR)/floor.4bpp \
                                      $(JPCONTESTGFXDIR)/frame_2.4bpp \

@@ -284,16 +284,7 @@ LavaridgeTown_Text_MayNiceBadgesTakeThis:
 	.string "$"
 
 LavaridgeTown_Text_MayExplainGoGogglesChallengeDad:
-	.string "{JPN}ハルカ『その ゴーゴーゴーグルが あると\n111ばん どうろの さばくにも\lはいれるように なるんだよ!\p\nそれにしても {PLAYER}{KUN}\nポケモンジムに ちょうせん だなんて……\pあたしに まけたくない からって\nがんばって いるのね!\pじゃあ あたし トウカで {PLAYER}{KUN}の\nおとうさんに ちょうせん しようかな?\p{PLAYER}{KUN} じゃあ またね!"
-	.string ""
-	.string ""
-	.string ""
-	.string ""
-	.string ""
-	.string ""
-	.string ""
-	.string ""
-	.string "$"
+	.string "{JPN}ハルカ『その ゴーゴーゴーグルが あると\n111ばん どうろの さばくにも\lはいれるように なるんだよ!\pそれにしても {PLAYER}{KUN}\nポケモンジムに ちょうせん だなんて……\pあたしに まけたくない からって\nがんばって いるのね!\pじゃあ あたし トウカで {PLAYER}{KUN}の\nおとうさんに ちょうせん しようかな?\p{PLAYER}{KUN} じゃあ またね!$"
 
 LavaridgeTown_Text_BrendanNiceBadgesTakeThis:
 	.string "{JPN}ユウキ『{PLAYER} ひさしぶり だな\nちょうしは どう?\pふうん……\nバッジは けっこう あつめてるんだな\pじゃ\nこいつを やろうかな?"

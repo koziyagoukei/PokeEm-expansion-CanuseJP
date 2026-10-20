@@ -102,30 +102,16 @@ Route109_SeashoreHouse_EventScript_TrainersNotCompleted::
 	end
 
 Route109_SeashoreHouse_Text_SeashoreHouseIntro:
-	.string "{JPN}わし うみのいえ の オヤジ！\n"
-	.string "ひとよんで うみサン！\p"
-	.string "とにかく あつい ポケモンしょうぶを\n"
-	.string "みることが だいすき なんだよねー！\p"
-	.string "キミもねー あつーい ハートで\n"
-	.string "ここに いる トレーナーぜんいんに\l"
-	.string "かてたら いいもの あげるよー$"
+	.string "{JPN}わし うみのいえ の オヤジ!\nひとよんで うみサン!\pとにかく あつい ポケモンしょうぶを\nみることが だいすき なんだよねー!\pキミもねー あつーい ハートで\nここに いる トレーナーぜんいんに\lかてたら いいものを あげるよー$"
 
 Route109_SeashoreHouse_Text_ShowMeSomeHotMatches:
-	.string "{JPN}あつーい しょうぶ みせてくれー！\p"
-	.string "そのためだけに わし\n"
-	.string "この うみのいえ やってるんだねー！$"
+	.string "{JPN}あつーい しょうぶ みせてくれー!\pそのためだけに わし\nこの うみのいえを やってるんだねー!$"
 
 Route109_SeashoreHouse_Text_TakeTheseSodaPopBottles:
-	.string "{JPN}きみ すごいねー！\n"
-	.string "あつい ポケモンしょうぶ だったー！\l"
-	.string "わし だいまんぞく だよー！\p"
-	.string "これは あつい しょうぶを みせてくれた\n"
-	.string "きみへの おれい だよー\p"
-	.string "サイコソーダ はんダース もっていきなよー$"
+	.string "{JPN}きみ すごいねー!\nあつい ポケモンしょうぶ だったー\lわし だいまんぞく だよー!\pこれは あつい しょうぶを みせてくれた\nきみへの おれい だよー\pサイコソーダ はんダース もっていきなよー$"
 
 Route109_SeashoreHouse_Text_BagFull:
-	.string "{JPN}おっと バッグが いっぱい みたいだね\n"
-	.string "これは あずかって おくよ$"
+	.string "{JPN}と おもったけど バッグ いっぱいかー\nじゃあ あずかっておくよー$"
 
 Route109_SeashoreHouse_Text_WantToBuySodaPop:
 	.string "{JPN}ポケモンも だいすき サイコソーダ\n"
@@ -172,7 +158,7 @@ Route109_SeashoreHouse_Text_SimonIntro:
 	.string "みせちゃうけど なかないでよ！$"
 
 Route109_SeashoreHouse_Text_SimonDefeated:
-	.string "{JPN}{0xB0}{0xB0}まけたけど なかないぞ$"
+	.string "{JPN}……まけたけど なかないぞ$"
 
 Route109_SeashoreHouse_Text_SimonPostBattle:
 	.string "{JPN}ポケモンが ぼくを のせて\n"

@@ -294,10 +294,7 @@ Route124_DivingTreasureHuntersHouse_Text_HaveYouSeenAnyShards:
 	.string "いろいろな かけら みつかったかい？$"
 
 Route124_DivingTreasureHuntersHouse_Text_YouHaventGotAnyShards:
-	.string "{JPN}きみ おたから もってないのか{0xB0}{0xB0}\p"
-	.string "あかいかけら とか\n"
-	.string "いろいろな かけらを みつけたら\l"
-	.string "こうかん してくれよな！$"
+	.string "{JPN}きみ おたから もってないのか……\pあかいかけら とか\nいろいろな かけらを みつけたら\lこうかん してくれよな!$"
 
 Route124_DivingTreasureHuntersHouse_Text_ThatsAShardIllTradeYou:
 	.string "{JPN}おおっ！ それは！\n"
@@ -329,11 +326,4 @@ Route124_DivingTreasureHuntersHouse_Text_ComeBackIfYouChangeMind:
 	.string "きが むいたら また きてくれよな！$"
 
 Route124_DivingTreasureHuntersHouse_Text_ShardTradeBoard:
-	.string "{JPN}{CLEAR_TO 10}ほしいモノ{CLEAR_TO 124}あげるモノ\n"
-	.string "{CLEAR_TO 15}あかいかけら{CLEAR_TO 89}{LEFT_ARROW}{RIGHT_ARROW}{CLEAR_TO 123}ほのおのいし{CLEAR_TO 200}\p"
-	.string "{CLEAR_TO 10}ほしいモノ{CLEAR_TO 124}あげるモノ\n"
-	.string "{CLEAR_TO 6}きいろいかけら{CLEAR_TO 89}{LEFT_ARROW}{RIGHT_ARROW}{CLEAR_TO 115}かみなりのいし{CLEAR_TO 200}\p"
-	.string "{CLEAR_TO 10}ほしいモノ{CLEAR_TO 124}あげるモノ\n"
-	.string "{CLEAR_TO 12}あおいかけら{CLEAR_TO 89}{LEFT_ARROW}{RIGHT_ARROW}{CLEAR_TO 121}みずのいし{CLEAR_TO 200}\p"
-	.string "{CLEAR_TO 10}ほしいモノ{CLEAR_TO 124}あげるモノ\n"
-	.string "{CLEAR_TO 8}みどりのかけら{CLEAR_TO 89}{LEFT_ARROW}{RIGHT_ARROW}{CLEAR_TO 123}リーフのいし$"
+	.string "{JPN}ほしいモノ       あげるモノ\n あかいかけら   {LEFT_ARROW}{RIGHT_ARROW} ほのおのいし\pほしいモノ       あげるモノ\n きいろいかけら  {LEFT_ARROW}{RIGHT_ARROW} かみなりのいし\pほしいモノ       あげるモノ\n あおいかけら   {LEFT_ARROW}{RIGHT_ARROW} みずのいし\pほしいモノ       あげるモノ\n みどりのかけら  {LEFT_ARROW}{RIGHT_ARROW} リーフのいし$"

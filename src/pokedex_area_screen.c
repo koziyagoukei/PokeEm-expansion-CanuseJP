@@ -625,10 +625,10 @@ static void DoAreaGlow(void)
 
 static const u8 *GetTimeOfDayTextWithButton(enum TimeOfDay timeOfDay)
 {
-    static const u8 gText_Morning[] = _("{DPAD_UPDOWN} MORNING");
-    static const u8 gText_Day[] = _("{DPAD_UPDOWN} DAY");
-    static const u8 gText_Evening[] = _("{DPAD_UPDOWN} EVENING");
-    static const u8 gText_Night[] = _("{DPAD_UPDOWN} NIGHT");
+    static const u8 gText_Morning[] = _("{JPN}{DPAD_UPDOWN} あさ");
+    static const u8 gText_Day[] = _("{JPN}{DPAD_UPDOWN} ひる");
+    static const u8 gText_Evening[] = _("{JPN}{DPAD_UPDOWN} ゆうがた");
+    static const u8 gText_Night[] = _("{JPN}{DPAD_UPDOWN} よる");
 
     switch (gAreaTimeOfDay)
     {

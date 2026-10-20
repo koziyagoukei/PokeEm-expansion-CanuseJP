@@ -291,8 +291,7 @@ PlayersHouse_2F_Text_Notebook:
 	.string "{JPN}あとは まっしろ だ……$"
 
 Common_Text_LookCloserAtMap:
-	.string "{JPN}{PLAYER}は {REGION}の\n"
-	.string "{JPN}タウンマップに かおを ちかづけた!$"
+	.string "{JPN}{PLAYER}は ホウエンちほうの\nタウンマップに かおを ちかづけた!$"
 
 PlayersHouse_2F_Text_ItsAGameCube:
 	.string "{JPN}ゲームキューブが ある!\p"

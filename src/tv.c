@@ -174,15 +174,15 @@ static void DoTVShowSecretBaseSecrets(void);
 static void DoTVShowSafariFanClub(void);
 static void DoTVShowLilycoveContestLady(void);
 
-static const u8 sText_Good[] = _("Good");
-static const u8 sText_VeryGood[] = _("Very good");
-static const u8 sText_Excellent[] = _("Excellent");
-static const u8 sText_SoSo[] = _("So-so");
-static const u8 sText_Bad[] = _("Bad");
-static const u8 sText_TheWorst[] = _("The worst");
+static const u8 sText_Good[] = _("{JPN}いい");
+static const u8 sText_VeryGood[] = _("{JPN}おいしい");
+static const u8 sText_Excellent[] = _("{JPN}さいこう");
+static const u8 sText_SoSo[] = _("{JPN}いまいち");
+static const u8 sText_Bad[] = _("{JPN}まずい");
+static const u8 sText_TheWorst[] = _("{JPN}さいあく");
 
-static const u8 sText_Slots[] = _("SLOTS");
-static const u8 sText_Roulette[] = _("ROULETTE");
+static const u8 sText_Slots[] = _("{JPN}スロット");
+static const u8 sText_Roulette[] = _("{JPN}ルーレット");
 static const u8 sText_Jackpot[] = _("jackpot");
 
 static const u16 sNumberOneVarsAndThresholds[][2] = {

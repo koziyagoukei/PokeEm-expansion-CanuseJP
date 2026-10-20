@@ -287,11 +287,11 @@ TrainerHill_Entrance_Pokemart_Expanded:
 	pokemartlistend
 
 TrainerHill_Entrance_Text_StillGettingReady:
-	.string "This is the TRAINER HILL where\n"
-	.string "you may enjoy tag battles with many\l"
-	.string "TRAINERS.\p"
-	.string "Unfortunately, we're still getting\n"
-	.string "things ready. Please come back later!$"
+	.string "{JPN}ここは さまざまな トレーナーさんとの\n"
+	.string "タッグバトルが たのしめる\l"
+	.string "トレーナーヒルです!\p"
+	.string "ただいま じゅんびちゅうですので\n"
+	.string "また おこしくださいませ!$"
 
 TrainerHill_Entrance_Text_WelcomeToTrainerHill:
 	.string "{JPN}ようこそ いらっしゃいました!\pここは さまざまな トレーナーさんとの\nタッグバトルが たのしめる\lトレーナーヒルです!$"
@@ -362,20 +362,20 @@ TrainerHill_Entrance_Text_WhatSortOfTrainersAreAhead:
 	.string "{JPN}どんな くみあわせの トレーナーが\nまっているのか!\pどんな やつがきても\nおれが たおしてみせるぜ!$"
 
 TrainerHill_Entrance_Text_CantWaitToTestTheWaters:
-	.string "I heard tough TRAINERS come to this\n"
-	.string "TRAINER HILL from all over.\p"
-	.string "I can't wait to test the waters!\p"
-	.string "I'll knock aside anyone that stands\n"
-	.string "in my way!$"
+	.string "{JPN}この トレーナーヒルには あちこちから\n"
+	.string "つよい トレーナーが あつまるそうだ!\p"
+	.string "はやく うでだめしを したいぜ!\p"
+	.string "どんな やつが たちはだかっても\n"
+	.string "おれが たおしてみせるぜ!$"
 
 TrainerHill_Entrance_Text_FriendsTryingToReachTimeBoardTop:
 	.string "{JPN}あそこに タイムボードが\nあるでしょ?\pわたしは ともだちと どっちがはやく\nいちばん うえまで いけるか\lタイムを きそってるのよ!$"
 
 TrainerHill_Entrance_Text_DoYouKnowWhenTheyOpen:
-	.string "Do you know when they're opening\n"
-	.string "this place up?\p"
-	.string "I'm waiting here to be the first\n"
-	.string "challenger ever!$"
+	.string "{JPN}ここが いつ オープンするか\n"
+	.string "しってる?\p"
+	.string "いちばん さいしょの チャレンジャーに\n"
+	.string "なりたくて ここで まってるの!$"
 
 TrainerHill_Elevator_Text_ReturnToReception:
 	.string "{JPN}うけつけに もどりますか?$"

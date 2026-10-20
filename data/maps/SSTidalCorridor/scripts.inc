@@ -250,23 +250,7 @@ SSTidalCorridor_Movement_SailorReturn:
 	step_end
 
 SSTidalCorridor_Text_ScottBattleFrontierInvite:
-	.string "{JPN}エニシダ『やあ やあ やあ\n"
-	.string "{PLAYER}{KUN} {PLAYER}{KUN}！\p"
-	.string "わたしは ようじが あって\n"
-	.string "もう ふねを おりるんだけど\l"
-	.string "あえて よかったよ！\p"
-	.string "リーグチャンピオン おめでとう！\n"
-	.string "そんな きみを しょうたい したい\l"
-	.string "ところが ある！\p"
-	.string "それは{0xB0}{0xB0} バトルフロンティア だ！\p"
-	.string "どんな ところかって？\n"
-	.string "とにかく きてみれば わかるよ\p"
-	.string "このふねの せんちょうには\n"
-	.string "はなしを しておいた から{0xB0}{0xB0}\l"
-	.string "つぎから ふねに のるときは\l"
-	.string "バトルフロンティアに いける はずだよ！\p"
-	.string "じゃあね {PLAYER}{KUN}\n"
-	.string "バトルフロンティアで まっているよ！$"
+	.string "{JPN}エニシダ『やあ やあ やあ\n{PLAYER}{KUN} {PLAYER}{KUN}!\pわたしは ようじが あって\nもう ふねを おりるんだけど\lあえて よかったよ!\pリーグチャンピオン おめでとう!\nそんな きみを しょうたい したい\lところが ある!\pそれは…… バトルフロンティア だ!\pどんな ところかって?\nとにかく きてみれば わかるよ\pこのふねの せんちょうには\nはなしを しておいた から……\lつぎから ふねに のるときは\lバトルフロンティアに いける はずだよ!\pじゃあね {PLAYER}{KUN}\nバトルフロンティアで まっているよ!$"
 
 SSTidal_Text_FastCurrentsHopeYouEnjoyVoyage:
 	.string "{JPN}かいりゅうを ものともせず すすむ\n"
@@ -308,15 +292,10 @@ SSTidalCorridor_Text_HorizonSpreadsBeyondPorthole:
 	.string "すいへいせんが ひろがっている！$"
 
 SSTidalCorridor_Text_BrineyWelcomeAboard:
-	.string "{JPN}ハギ『ようこそ！ {PLAYER}{KUN}！\p"
-	.string "わしが この タイドリップごうの\n"
-	.string "めいよ せんちょう ハギ じゃよ！\p"
-	.string "いやぁ いちど いんたい したが\n"
-	.string "こんな すごい ふねを みてしまうと\l"
-	.string "ふなのりの ちが さわぐのう！！$"
+	.string "{JPN}ハギ『ようこそ! {PLAYER}{KUN}!\pわしが この タイドリップごうの\nめいよ せんちょう ハギ じゃよ!\pいやぁ いちどは いんたい したが\nこんな すごい ふねを みてしまうと\lふなのりの ちが さわぐのう!!$"
 
 SSTidalCorridor_Text_Peeko:
-	.string "{JPN}ピーコ『ピひょ ピひょひょ{0xB0}{0xB0}！$"
+	.string "{JPN}ピーコ『ピひょ ピひょひょ……!$"
 
 SSTidalCorridor_Text_Cabin1:
 	.string "{JPN}1ごうしつ$"

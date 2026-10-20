@@ -216,10 +216,7 @@ Route117_EventScript_Aisha::
 	end
 
 Route117_Text_DayCarePokemonHadNewMove:
-	.string "{JPN}そだてやに ポケモン あずけていたの\p"
-	.string "そしたら あたしの ポケモン\n"
-	.string "いつのまにか しらない わざ おぼえていて\l"
-	.string "わたしが とまっどっちゃった！$"
+	.string "{JPN}そだてやに ポケモン あずけていたの\pそしたら あたしの ポケモン\nいつのまにか しらない わざ おぼえていて\lわたしが とまどっちゃった!$"
 
 Route117_Text_ArentTheseFlowersPretty:
 	.string "{JPN}どお？\n"
@@ -230,12 +227,10 @@ Route117_Text_AirIsTastyHere:
 	.string "{JPN}くうきが うまーい！$"
 
 Route117_Text_RouteSignVerdanturf:
-	.string "{JPN}ここは 117ばん どうろ\n"
-	.string "{LEFT_ARROW} キンセツシティ$"
+	.string "{JPN}ここは 117ばん どうろ\n{LEFT_ARROW} シダケタウン$"
 
 Route117_Text_RouteSignMauville:
-	.string "{JPN}ここは 117ばん どうろ\n"
-	.string "{RIGHT_ARROW} シダケタウン$"
+	.string "{JPN}ここは 117ばん どうろ\n{RIGHT_ARROW} キンセツシティ$"
 
 Route117_Text_DayCareSign:
 	.string "{JPN}「ポケモン そだてや」\n"

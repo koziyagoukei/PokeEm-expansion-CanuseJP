@@ -8078,7 +8078,7 @@ static void InitMenu(void)
     sStorage->menuWindow.baseBlock = 92;
 }
 
-static const u8 gPCText_Give[] = _("GIVE");
+static const u8 gPCText_Give[] = _("{JPN}もたせる");
 
 static const u8 *const sMenuTexts[] =
 {
@@ -8094,7 +8094,7 @@ static const u8 *const sMenuTexts[] =
     [MENU_JUMP]       = COMPOUND_STRING("{JPN}ジャンプ"),
     [MENU_WALLPAPER]  = COMPOUND_STRING("{JPN}かべがみ"),
     [MENU_NAME]       = COMPOUND_STRING("{JPN}なまえ"),
-    [MENU_TAKE]       = COMPOUND_STRING("{JPN}もたせる"),
+    [MENU_TAKE]       = COMPOUND_STRING("{JPN}とる"),
     [MENU_GIVE]       = gPCText_Give,
     [MENU_GIVE_2]     = gPCText_Give,
     [MENU_SWITCH]     = COMPOUND_STRING("{JPN}とりかえる"),

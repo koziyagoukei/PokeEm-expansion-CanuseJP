@@ -28,14 +28,7 @@ Route116_TunnelersRestHouse_EventScript_TunnelOpened::
 	end
 
 Route116_TunnelersRestHouse_Text_WeHadToStopBoring:
-	.string "{JPN}あの カナシダトンネル{0xB0}{0xB0}\p"
-	.string "はじめは たくさんの にんげんと\n"
-	.string "さいしんの キカイで ほりすすんでいた\p"
-	.string "だが そのまま ほりすすむと\n"
-	.string "あたりの ポケモンに\l"
-	.string "あくえいきょうを あたえる らしくてね\p"
-	.string "で おれら どうしようもなく\n"
-	.string "ここで ぼんやりと しているわけさ$"
+	.string "{JPN}あの カナシダトンネル……\pはじめは たくさんの にんげんと\nさいしんの キカイで ほりすすんでいた\pだが そのまま ほりすすむと\nあたりの ポケモンに\lあくえいきょうを あたえる らしくてね\pで おれら どうしようもなく\nここで ぼんやりと しているわけさ$"
 
 Route116_TunnelersRestHouse_Text_ManDiggingHisWayToVerdanturf:
 	.string "{JPN}どうしても シダケに いきたい\n"

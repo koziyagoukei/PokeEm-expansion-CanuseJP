@@ -535,20 +535,14 @@ LilycoveCity_Harbor_Movement_SailorBoardWithBrineyEast:
 	step_end
 
 LilycoveCity_Harbor_Text_FerryUnavailable:
-	.string "{JPN}えっ？ ふね ですか？\p"
-	.string "もうしわけ ございません げんざい\n"
-	.string "れんらくせんは ないんです{0xB0}{0xB0}$"
+	.string "{JPN}えっ? ふね ですか?\pもうしわけ ございません げんざい\nれんらくせんは ないんです……$"
 
 LilycoveCity_Harbor_Text_MayISeeYourTicket:
 	.string "{JPN}れんらくせんを ごりよう ですね!\n"
 	.string "チケットは おもち でしょうか?$"
 
 LilycoveCity_Harbor_Text_NoTicket:
-	.string "{JPN}{PLAYER}は\n"
-	.string "チケットを もっていない!\p"
-	.string "{0xB0}{0xB0}もうしわけ ありません!\p"
-	.string "ふねに のれるのは\n"
-	.string "チケットの ある かた だけです$"
+	.string "{JPN}{PLAYER}は\nチケットを もっていない!\p……もうしわけ ありません!\pふねに のれるのは\nチケットの ある かた だけです$"
 
 LilycoveCity_Harbor_Text_FlashTicketWhereTo:
 	.string "{JPN}{PLAYER}は\n"
@@ -572,10 +566,7 @@ LilycoveCity_Harbor_Text_WhereWouldYouLikeToGo:
 	.string "{JPN}いきさきは どちら でしょう？$"
 
 LilycoveCity_Harbor_Text_SailorFerryUnavailable:
-	.string "{JPN}れんらくせんが かんせい しないと\n"
-	.string "ふなのり というものは ヒマだぜ{0xB0}{0xB0}\p"
-	.string "カイナの ぞうせんじょの れんちゅう\n"
-	.string "しゃかりきに がんばって くれよな$"
+	.string "{JPN}れんらくせんが かんせい しないと\nふなのり というものは ヒマだぜ……\pカイナの ぞうせんじょの れんちゅう\nしゃかりきに がんばって くれよな$"
 
 LilycoveCity_Harbor_Text_SailorFerryAvailable:
 	.string "{JPN}やっと れんらくせん タイドリップごうが\n"

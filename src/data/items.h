@@ -2570,7 +2570,7 @@ const struct ItemInfo gItemsInfo[] =
 
     [ITEM_DIRE_HIT] =
     {
-        .name = ITEM_NAME("{JPN}クリティカット"),
+        .name = ITEM_NAME("{JPN}クリティカッター"),
         .price = (I_PRICE >= GEN_7) ? 1000 : 650,
         .description = COMPOUND_STRING(
             "{JPN}つかった せんとうちゅう\n"

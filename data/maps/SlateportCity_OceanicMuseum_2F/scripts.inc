@@ -316,24 +316,7 @@ SlateportCity_OceanicMuseum_2F_Text_CameToSeeWhatsTakingSoLong:
 	.string "$"
 
 SlateportCity_OceanicMuseum_2F_Text_ArchieWarning:
-	.string "{JPN}れわれは\nうみを あいする アクアだん!\pそして おれは\nアクアだんの リーダー アオギリだ\pわれわれの じゃまをする おまえは……\nま まさか!\lマグマだんの なかま なのか!?\pいや それにしては\nみにつけている ふくが ちがうな\p…… …… ……\n…… …… ……\pポケモンも ひとも すべての いのちは\nうみから うまれた……\pだから アクアだんは\nうみを ふやそうと しているのだよ\pどうだい?\nとても すばらしい ことだろう?\pまあ いい……\nまだ わかい おまえに\lわれわれの りそうなど わかるまい……\pだが このさきも われわれの\nかつどうを じゃまする つもりなら\lただでは すまさない からな!\pそれだけは おぼえて おくのだ!"
-	.string ""
-	.string ""
-	.string ""
-	.string ""
-	.string ""
-	.string ""
-	.string ""
-	.string ""
-	.string ""
-	.string ""
-	.string ""
-	.string ""
-	.string ""
-	.string ""
-	.string ""
-	.string ""
-	.string "$"
+	.string "{JPN}われわれは\nうみを あいする アクアだん!\pそして おれは\nアクアだんの リーダー アオギリだ\pわれわれの じゃまをする おまえは……\nま まさか!\lマグマだんの なかま なのか!?\pいや それにしては\nみにつけている ふくが ちがうな\p…… …… ……\n…… …… ……\pポケモンも ひとも すべての いのちは\nうみから うまれた……\pだから アクアだんは\nうみを ふやそうと しているのだよ\pどうだい?\nとても すばらしい ことだろう?\pまあ いい……\nまだ わかい おまえに\lわれわれの りそうなど わかるまい……\pだが このさきも われわれの\nかつどうを じゃまする つもりなら\lただでは すまさない からな!\pそれだけは おぼえて おくのだ!$"
 
 SlateportCity_OceanicMuseum_2F_Text_SternThankYouForSavingUs:
 	.string "{JPN}クスノキ『きみは……\nそうか {PLAYER}{KUN} というのか……\pいやあ あぶない ところ だった!\nたすけてくれて ありがとうよ!\pおっと そうだった!\nデボンに たのんでおいた パーツを\lもってきて くれたの わすれていたよ!"

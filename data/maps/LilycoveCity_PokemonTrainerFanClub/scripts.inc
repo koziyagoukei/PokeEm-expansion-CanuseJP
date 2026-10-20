@@ -558,7 +558,7 @@ LilycoveCity_PokemonTrainerFanClub_EventScript_AlreadyInterviewed2::
 	end
 
 LilycoveCity_PokemonTrainerFanClub_Text_OhWowItsPlayer:
-	.string "{JPN}いいあ！\n{PLAYER}だ！！$"
+	.string "{JPN}あ!\n{PLAYER}だ!!$"
 
 LilycoveCity_PokemonTrainerFanClub_Text_HeardAboutYouImYourFan:
 	.string "{JPN}きいたよ！\nきみ つよいんだってな\pここでは みんな\nだれが いちばん つよい トレーナーか\lはなしを してるんだけど\pおれ きみの うわさを きいて\nきみの ファンに なることに したよ！\pこれからも つよい トレーナーと\nバンバン たたかって\pおれたちに あつい\nたたかいを みせてくれよ！\pそうすれば きっと みんなも\nきみの ことを みなおすと おもうんだ\pじゃあ きたい してるよ！\n{PLAYER}！！$"

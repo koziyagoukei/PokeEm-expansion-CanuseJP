@@ -173,7 +173,7 @@ CableClub_Text_ReturnsToPreviousStep:
 	.string "{JPN}どちらの しょうぶに しますか?$"
 
 CableClub_Text_NeedBerryForBerryCrush:
-	.string "{JPN}ひとつ まえに もどります$"
+	.string "{JPN}きのみを もって いないと\nきのみクラッシュは できません$"
 
 CableClub_Text_NeedTwoMonsForUnionRoom:
 	.string "{JPN}ユニオンルームに はいるには\n2ひき いじょうの ポケモンを\lもって おこしください$"

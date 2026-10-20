@@ -31,22 +31,13 @@ Route114_FossilManiacsHouse_EventScript_Bookshelf::
 	end
 
 Route114_FossilManiacsHouse_Text_HaveThisToDigLikeMyBrother:
-	.string "{JPN}ぼくの にいちゃん かせきマニア{0xB0}{0xB0}\n"
-	.string "かせき だいすき ナイスガイ さ{0xB0}{0xB0}\p"
-	.string "ちなみに あなを ほるのも だいすきで{0xB0}{0xB0}\n"
-	.string "この あなも じぶんで ほったんだ{0xB0}{0xB0}\p"
-	.string "これを あげるから{0xB0}{0xB0}\n"
-	.string "きみも にいちゃん みたいに\l"
-	.string "あなを ほってみなよ{0xB0}{0xB0}$"
+	.string "{JPN}ぼくの にいちゃん かせきマニア……\nかせき だいすき ナイスガイ さ……\pちなみに あなを ほるのも だいすきで……\nこの あなも じぶんで ほったんだ……\pこれを あげるから……\nきみも にいちゃん みたいに\lあなを ほってみなよ……$"
 
 Route114_FossilManiacsHouse_Text_DigReturnsYouToEntrance:
-	.string "{JPN}ちなみに ポケモンが あなをほると\n"
-	.string "どうくつの いりぐち まで\l"
-	.string "いっしゅんで もどれるんだ{0xB0}{0xB0}$"
+	.string "{JPN}ちなみに ポケモンが あなをほると\nどうくつの いりぐち まで\lいっしゅんで もどれるんだ……$"
 
 Route114_FossilManiacsHouse_Text_RocksFillDisplayCase:
-	.string "{JPN}ケースのなかに かわった かたちの いしが\n"
-	.string "いくつも かざってある{0xB0}{0xB0}$"
+	.string "{JPN}ケースのなかに かわった かたちの いしが\nいくつも かざってある……$"
 
 Route114_FossilManiacsHouse_Text_CrammedWithBooks:
 	.string "{JPN}『ちそうが できるまで』\n"
