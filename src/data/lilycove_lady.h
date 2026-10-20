@@ -39,36 +39,36 @@ static const struct LilycoveContestLadyValues sContestLadyValues[] =
     [CONTEST_CATEGORY_COOL] = {
         .monGfxId = OBJ_EVENT_GFX_ZIGZAGOON_1,
         .monSpecies = SPECIES_ZIGZAGOON,
-        .monName = COMPOUND_STRING("HANDSOME"),
-        .categoryName = COMPOUND_STRING("coolness"),
+        .monName = COMPOUND_STRING("{JPN}ハンサム"),
+        .categoryName = COMPOUND_STRING("{JPN}かっこよ"),
         .contestName = gText_CoolnessContest,
     },
     [CONTEST_CATEGORY_BEAUTY] = {
         .monGfxId = OBJ_EVENT_GFX_SKITTY,
         .monSpecies = SPECIES_SKITTY,
-        .monName = COMPOUND_STRING("VINNY"),
-        .categoryName = COMPOUND_STRING("beauty"),
+        .monName = COMPOUND_STRING("{JPN}ジョバンニ"),
+        .categoryName = COMPOUND_STRING("{JPN}うつくし"),
         .contestName = gText_BeautyContest,
     },
     [CONTEST_CATEGORY_CUTE] = {
         .monGfxId = OBJ_EVENT_GFX_POOCHYENA,
         .monSpecies = SPECIES_POOCHYENA,
-        .monName = COMPOUND_STRING("MOREME"),
-        .categoryName = COMPOUND_STRING("cuteness"),
+        .monName = COMPOUND_STRING("{JPN}もあもあ"),
+        .categoryName = COMPOUND_STRING("{JPN}かわい"),
         .contestName = gText_CutenessContest,
     },
     [CONTEST_CATEGORY_SMART] = {
         .monGfxId = OBJ_EVENT_GFX_KECLEON,
         .monSpecies = SPECIES_KECLEON,
-        .monName = COMPOUND_STRING("IRONHARD"),
-        .categoryName = COMPOUND_STRING("smartness"),
+        .monName = COMPOUND_STRING("{JPN}てつ"),
+        .categoryName = COMPOUND_STRING("{JPN}かしこ"),
         .contestName = gText_SmartnessContest,
     },
     [CONTEST_CATEGORY_TOUGH] = {
         .monGfxId = OBJ_EVENT_GFX_PIKACHU,
         .monSpecies = SPECIES_PIKACHU,
-        .monName = COMPOUND_STRING("MUSCLE"),
-        .categoryName = COMPOUND_STRING("toughness"),
+        .monName = COMPOUND_STRING("{JPN}きんにくん"),
+        .categoryName = COMPOUND_STRING("{JPN}たくまし"),
         .contestName = gText_ToughnessContest,
     },
 };
@@ -417,10 +417,10 @@ static const enum Item sFavorLadyAcceptedItems_Pointy[] =
 
 static const struct LilycoveFavorLady sFavorLady[] =
 {
-    {.request = COMPOUND_STRING("slippery"), .acceptedItems = sFavorLadyAcceptedItems_Slippery, .prize = ITEM_LUXURY_BALL},
-    {.request = COMPOUND_STRING("roundish"), .acceptedItems = sFavorLadyAcceptedItems_Roundish, .prize = ITEM_NUGGET},
-    {.request = COMPOUND_STRING("wham-ish"), .acceptedItems = sFavorLadyAcceptedItems_Whamish,  .prize = ITEM_PROTEIN},
-    {.request = COMPOUND_STRING("shiny"),    .acceptedItems = sFavorLadyAcceptedItems_Shiny,    .prize = ITEM_HEART_SCALE},
-    {.request = COMPOUND_STRING("sticky"),   .acceptedItems = sFavorLadyAcceptedItems_Sticky,   .prize = ITEM_RARE_CANDY},
-    {.request = COMPOUND_STRING("pointy"),   .acceptedItems = sFavorLadyAcceptedItems_Pointy,   .prize = ITEM_PP_MAX},
+    {.request = COMPOUND_STRING("{JPN}すべすべ"), .acceptedItems = sFavorLadyAcceptedItems_Slippery, .prize = ITEM_LUXURY_BALL},
+    {.request = COMPOUND_STRING("{JPN}まるまる"), .acceptedItems = sFavorLadyAcceptedItems_Roundish, .prize = ITEM_NUGGET},
+    {.request = COMPOUND_STRING("{JPN}バキバキ"), .acceptedItems = sFavorLadyAcceptedItems_Whamish,  .prize = ITEM_PROTEIN},
+    {.request = COMPOUND_STRING("{JPN}ピカピカ"),    .acceptedItems = sFavorLadyAcceptedItems_Shiny,    .prize = ITEM_HEART_SCALE},
+    {.request = COMPOUND_STRING("{JPN}ねばねば"),   .acceptedItems = sFavorLadyAcceptedItems_Sticky,   .prize = ITEM_RARE_CANDY},
+    {.request = COMPOUND_STRING("{JPN}ちくちく"),   .acceptedItems = sFavorLadyAcceptedItems_Pointy,   .prize = ITEM_PP_MAX},
 };

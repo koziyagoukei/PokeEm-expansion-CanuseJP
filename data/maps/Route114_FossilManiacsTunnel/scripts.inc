@@ -54,37 +54,14 @@ Route114_FossilManiacsTunnel_EventScript_PlayerRevivedFossil::
 	end
 
 Route114_FossilManiacsTunnel_Text_LookInDesertForFossils:
-	.string "{JPN}ぼく かせきマニア{0xB0}{0xB0}\n"
-	.string "かせき だいすき ナイスガイ さ{0xB0}{0xB0}\p"
-	.string "きみも カセキが ほしいの{0xB0}{0xB0}？\p"
-	.string "ここで みつかる カセキは\n"
-	.string "ぜんぶ ぼくの ものだから あげないよ{0xB0}{0xB0}\p"
-	.string "どうしても ほしければ\n"
-	.string "カセキの みつかりそうな\l"
-	.string "いわや すなが おおい さばくでも\l"
-	.string "さがして みなよ{0xB0}{0xB0}$"
+	.string "{JPN}ぼく かせきマニア……\nかせき だいすき ナイスガイ さ……\pきみも カセキが ほしいの……?\pここで みつかる カセキは\nぜんぶ ぼくの ものだから あげないよ……\pどうしても ほしければ\nカセキの みつかりそうな\lいわや すなが おおい さばくでも\lさがして みなよ……$"
 
 Route114_FossilManiacsTunnel_Text_DevonCorpRevivingFossils:
-	.string "{JPN}きみも カセキを みつけたんだね{0xB0}{0xB0}\n"
-	.string "すてき{0xB0}{0xB0} うっとり しちゃうよ{0xB0}{0xB0}\p"
-	.string "きみ その カセキ どうするの{0xB0}{0xB0}？\p"
-	.string "きいた はなしでは デボンでは\n"
-	.string "カセキを ポケモンに いきかえらせる\l"
-	.string "けんきゅうを している そうだよ{0xB0}{0xB0}\p"
-	.string "ぼくは カセキが すきだらか\n"
-	.string "そんなこと しないけどね{0xB0}{0xB0}$"
+	.string "{JPN}きみも カセキを みつけたんだね……\nすてき…… うっとり しちゃうよ……\pきみ その カセキ どうするの……?\pきいた はなしでは デボンでは\nカセキを ポケモンに いきかえらせる\lけんきゅうを している そうだよ……\pぼくは カセキが すきだから\nそんなこと しないけどね……$"
 
 Route114_FossilManiacsTunnel_Text_FossilsAreWonderful:
-	.string "{JPN}カセキって{0xB0}{0xB0}\n"
-	.string "すてき{0xB0}{0xB0} うっとり しちゃうよ{0xB0}{0xB0}$"
+	.string "{JPN}カセキって……\nすてき…… うっとり しちゃうよ……$"
 
 Route114_FossilManiacsTunnel_Text_NotSafeThatWay:
-	.string "{JPN}あ{0xB0}{0xB0}\n"
-	.string "そっちに いくと あぶないよ{0xB0}{0xB0}\p"
-	.string "ほりまくって いたら\n"
-	.string "かべが くずれて しまったんだ{0xB0}{0xB0}\p"
-	.string "したに おおきな くうどうが\n"
-	.string "あるみたい だけど{0xB0}{0xB0}\l"
-	.string "カセキも なさそう だから\l"
-	.string "そのままに してあるんだ{0xB0}{0xB0}$"
+	.string "{JPN}あ……\nそっちに いくと あぶないよ……\pほりまくって いたら\nカベが くずれて しまったんだ……\pしたに おおきな くうどうが\nあるみたい だけど……\lカセキも なさそう だから\lそのままに してあるんだ……$"
 

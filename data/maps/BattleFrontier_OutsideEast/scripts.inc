@@ -231,29 +231,22 @@ BattleFrontier_OutsideEast_EventScript_Camper::
 	end
 
 BattleFrontier_OutsideEast_Text_BattleTowerSign:
-	.string "{JPN}ここは バトルタワー！\n"
-	.string "さいきょう トレーナーとして\l"
-	.string "かちぬけ！$"
+	.string "{JPN}ここは バトルタワー!\nかちぬけ! さいきょう トレーナー!$"
 
 BattleFrontier_OutsideEast_Text_BattlePalaceSign:
-	.string "{JPN}ここは バトルパレス！\n"
-	.string "ポケモンの たたかいを みまもれ！$"
+	.string "{JPN}ここは バトルパレス!\nみまもれ! ポケモンバトル!$"
 
 BattleFrontier_OutsideEast_Text_BattleArenaSign:
-	.string "{JPN}ここは バトルアリーナ！\n"
-	.string "つよき チームよ あつまれ！$"
+	.string "{JPN}ここは バトルアリーナ!\nつどえ! さいきょう チーム!$"
 
 BattleFrontier_OutsideEast_Text_BattlePyramidSign:
-	.string "{JPN}ここは バトルピラミッド！\n"
-	.string "バトルクエストを つきすすめ！$"
+	.string "{JPN}ここは バトルピラミッド!\nすすめ! バトルアドベンチャー!$"
 
 BattleFrontier_OutsideEast_Text_RankingHallSign:
-	.string "{JPN}バトルフロンティア ランキングホール\n"
-	.string "あらたな きろくを めざせ！$"
+	.string "{JPN}バトルフロンティア ランキングホール\nきざめ! さいこうの きろく!$"
 
 BattleFrontier_OutsideEast_Text_ExchangeCornerSign:
-	.string "{JPN}バトルポイント こうかんサービスコーナー\n"
-	.string "バトルポイントを こうかんしよう！$"
+	.string "{JPN}バトルポイント ひきかえサービス コーナー\nひきかえろ! キミの バトルポイント!$"
 
 BattleFrontier_OutsideEast_Text_BattleTowerFeelsSpecial:
 	.string "{JPN}うっひゃー でかい!\pやはり バトルタワーは\nとくべつ って かんじが するな$"

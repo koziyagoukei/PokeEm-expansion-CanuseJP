@@ -291,7 +291,7 @@ Route117_Text_FriendlyWithOtherTrainersMon:
 
 @ Unused
 Route117_Text_SeeWifeIfYouWantToPickUpMon:
-	.string "{JPN}ポケモンを ひきとりたい ときは\nばあさんに いって おくれ$"
+	.string "{JPN}ポケモンを ひきとりたい ときは\nばさんに いって おくれ$"
 
 Route117_Text_YourMonsAreDoingFine:
 	.string "{JPN}おお あんたか! よくきたな\n{STR_VAR_1}と {STR_VAR_2}は げんきじゃぞ$"

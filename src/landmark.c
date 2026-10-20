@@ -15,7 +15,7 @@ struct LandmarkList
     const struct Landmark *const *landmarks;
 };
 
-static const u8 LandmarkName_MagmaHideout[] = _("MAGMA HIDEOUT"); //Unused
+static const u8 LandmarkName_MagmaHideout[] = _("{JPN}マグマだんアジト"); //Unused
 
 static const struct Landmark Landmark_FlowerShop = {COMPOUND_STRING("{JPN}フラワーショップ"), FLAG_LANDMARK_FLOWER_SHOP};
 static const struct Landmark Landmark_PetalburgWoods = {COMPOUND_STRING("{JPN}トウカのもり"), -1};

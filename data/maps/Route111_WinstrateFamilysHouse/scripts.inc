@@ -84,20 +84,7 @@ Route111_WinstrateFamilysHouse_Text_StrongerFamilyMembers:
 	.string "あたしの あにき なの！$"
 
 Route111_WinstrateFamilysHouse_Text_GrandsonStrong:
-	.string "{JPN}あんたが いくら つよくても\n"
-	.string "わしの まごに あったら\l"
-	.string "かてなくて なきだすこと じゃろう{0xB0}{0xB0}\p"
-	.string "わしら かぞくが しってる トレーナーの\n"
-	.string "だれよりも つよかった からのう！\p"
-	.string "まごの やつも いまごろは\n"
-	.string "ポケモンリーグ チャンピオンに\l"
-	.string "ちょうせん しているの じゃろうか？\p"
-	.string "それとも わしの まご じゃから\n"
-	.string "もう チャンピオン かもな{0xB0}{0xB0} ウヒヒ！$"
+	.string "{JPN}あんたが いくら つよくても\nわしの まごに あったら\lかてなくて なきだすこと じゃろう……\pわしら かぞくが しってる トレーナーの\nだれよりも つよかった からのう!\pまごの やつも いまごろは\nポケモンリーグの チャンピオンに\lちょうせん しているの じゃろうか?\pそれとも わしの まご じゃから\nもう チャンピオン かもな…… ウヒヒ!$"
 
 Route111_WinstrateFamilysHouse_Text_GrandsonStrongShort:
-	.string "{JPN}まごの やつも いまごろは\n"
-	.string "ポケモンリーグの チャンピオンに\l"
-	.string "ちょうせん しているの じゃろうか？\p"
-	.string "それとも わしの まご じゃから\n"
-	.string "もう チャンピオン かもな{0xB0}{0xB0} ウヒヒ！$"
+	.string "{JPN}まごの やつも いまごろは\nポケモンリーグの チャンピオンに\lちょうせん しているの じゃろうか?\pそれとも わしの まご じゃから\nもう チャンピオン かもな…… ウヒヒ!$"

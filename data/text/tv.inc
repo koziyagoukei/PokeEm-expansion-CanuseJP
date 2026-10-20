@@ -403,8 +403,6 @@ gTVTodaysRivalTrainerText09::
 gTVTodaysRivalTrainerText10::
 	.string "{JPN}こんかいの トレーナーは\nげんざい れんらくせんに のっている\l{STR_VAR_1}さん です!\p{STR_VAR_1}さんは\nポケモン ずかんを {STR_VAR_2}ひき\lとうろく されていますねー!$"
 
-	.string "$"
-
 gTVTodaysRivalTrainerText01::
 	.string "{JPN}バッジは {STR_VAR_1}こ\nかくとく されていますよー!$"
 

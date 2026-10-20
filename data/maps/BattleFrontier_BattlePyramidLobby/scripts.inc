@@ -545,10 +545,10 @@ BattleFrontier_BattlePyramidLobby_Text_SelectThreeMons:
 	.string "{JPN}では つれていく ポケモンを\n3ひき おえらび くだされ!$"
 
 BattleFrontier_BattlePyramidLobby_Text_NotEnoughValidMonsLvOpen:
-	.string "{JPN}ぼうけんしゃよ!!\pつれていける ポケモンが\n3ひき いないようですぞ!\pまた ポケモンに もたせている どうぐは\nすべて はずしてくだされ!\pなお タマゴ{STR_VAR_1}さんか させる ことは できませんぞ!$"
+	.string "{JPN}ぼうけんしゃよ!!\pつれていける ポケモンが\n3ひき いないようですぞ!\pまた ポケモンに もたせている どうぐは\nすべて はずしてくだされ!\pなお タマゴ{STR_VAR_1}さんか させる ことは できませんぞ!\pじゅんびが できましたら\nまた おこし くだされ!$"
 
 BattleFrontier_BattlePyramidLobby_Text_NotEnoughValidMonsLv50:
-	.string "{JPN}ぼうけんしゃよ!!\pつれていける ポケモンが\n3ひき いないようですぞ!\pつれていく ためには レベルが 50いかで\nすべて ちがう しゅるいの ポケモンを\l3ひき よういして くだされ!\pまた ポケモンに もたせている どうぐは\nすべて はずしてくだされ!\pなお タマゴ{STR_VAR_1}さんか させる ことは できませんぞ!$"
+	.string "{JPN}ぼうけんしゃよ!!\pつれていける ポケモンが\n3ひき いないようですぞ!\pつれていく ためには レベルが 50いかで\nすべて ちがう しゅるいの ポケモンを\l3ひき よういして くだされ!\pまた ポケモンに もたせている どうぐは\nすべて はずしてくだされ!\pなお タマゴ{STR_VAR_1}さんか させる ことは できませんぞ!\pじゅんびが できましたら\nまた おこし くだされ!$"
 
 BattleFrontier_BattlePyramidLobby_Text_NotEnoughValidMonsEnd:
 	.string "{JPN}じゅんびが できましたら\nまた おこし くだされ!$"

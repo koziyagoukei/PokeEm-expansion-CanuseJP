@@ -300,8 +300,7 @@ Route103_Text_MayLetsBattle:
 	.string "{JPN}あたしが おしえて あげるから!$"
 
 Route103_Text_MayDefeated:
-	.string "{JPN}うわっ! すごい すごい!\n"
-	.string "{JPN}{PLAYER}{KUN} つよい じゃない$"
+	.string "{JPN}うわっ! すごい すごい!\n{PLAYER}{KUN} つよい じゃない!$"
 
 Route103_Text_MayTimeToHeadBack:
 	.string "{JPN}ハルカ『あたし おとうさんが\n"

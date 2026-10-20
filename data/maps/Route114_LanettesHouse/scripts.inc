@@ -46,12 +46,7 @@ Route114_LanettesHouse_EventScript_PC::
 	end
 
 Route114_LanettesHouse_Text_EverythingClutteredKeepThis:
-	.string "{JPN}マユミ『あっ！ {PLAYER}{KUN}\p"
-	.string "ちらかっていて ごめんなさい{0xB0}{0xB0}\n"
-	.string "けんきゅうに むちゅうに なると\l"
-	.string "つい こう なっちゃうんです{0xB0}{0xB0}\p"
-	.string "はずかしいから ヒミツに してくださいね\n"
-	.string "これ あげますから{0xB0}{0xB0}$"
+	.string "{JPN}マユミ『あっ! {PLAYER}{KUN}\pちらかっていて ごめんなさい……\nけんきゅうに むちゅうに なると\lつい こう なっちゃうんです……\pはずかしいから ヒミツに してくださいね\nこれ あげますから……$"
 
 Route114_LanettesHouse_Text_OrganizeYourBoxes:
 	.string "{JPN}あずかりシステムを つくった\n"
@@ -90,17 +85,5 @@ Route114_LanettesHouse_Text_ClosedTheNotebook:
 	.string "{JPN}{PLAYER}は ノートを とじた$"
 
 Route114_LanettesHouse_Text_EmailFromBill:
-	.string "{JPN}パソコンを みると\n"
-	.string "なんと でんしメールが きていた！\p"
-	.string "「{0xB0}{0xB0} {0xB0}{0xB0} {0xB0}{0xB0}\p"
-	.string "きみの あずかり システム\n"
-	.string "なかなか べんり やな\p"
-	.string "いろんな ところに\n"
-	.string "じょせい らしい きくばりが あって\l"
-	.string "つかってて たのしいし\p"
-	.string "いっしょに かいはつ した\n"
-	.string "なかま として うれしいわ！\p"
-	.string "ほな これからも あずかりシステムの\n"
-	.string "けんきゅう がんばってな\p"
-	.string "{0xB0}{0xB0} {0xB0}{0xB0} {0xB0}{0xB0}」$"
+	.string "{JPN}パソコンを みると\nなんと でんしメールが きていた!\p「…… …… ……\pきみの あずかり システム\nなかなか べんり やな\pいろんな ところに\nじょせい らしい きくばりが あって\lつかってて たのしいし\pいっしょに かいはつ した\nなかま として うれしいわ!\pほな これからも あずかりシステムの\nけんきゅう がんばってな\p…… …… ……」$"
 

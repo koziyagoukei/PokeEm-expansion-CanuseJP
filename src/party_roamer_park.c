@@ -35,7 +35,7 @@ static const u16 sPartyRoamerObjectFlags[PARTY_SIZE] =
     FLAG_TEMP_16,
 };
 
-static const u8 sDefaultPartyRoamerText[] = _("{STR_VAR_1} seems relaxed.");
+static const u8 sDefaultPartyRoamerText[] = _("{JPN}{STR_VAR_1}は のんびりしている");
 
 extern const u8 PartyRoamerPark_EventScript_Talk[];
 

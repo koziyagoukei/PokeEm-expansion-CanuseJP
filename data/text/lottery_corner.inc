@@ -65,10 +65,7 @@ LilycoveCity_DepartmentStore_1F_Text_AllFiveDigitsMatched:
 	.string "{JPN}{STR_VAR_1}を さしあげます!!$"
 
 LilycoveCity_DepartmentStore_1F_Text_NoRoomForThis:
-	.string "{JPN}………あら?\n"
-	.string "{JPN}どうぐが いっぱいの ようですね\p"
-	.string "{JPN}どうぐを せいりしてから もういちど\n"
-	.string "{JPN}おこし ください.$"
+	.string "{JPN}………あら?\nどうぐが いっぱいの ようですね\pどうぐを せいりしてから もういちど\nおこし ください$"
 
 LilycoveCity_DepartmentStore_1F_Text_PrizeWeveBeenHolding:
 	.string "{JPN}{PLAYER}さん ですね\n"

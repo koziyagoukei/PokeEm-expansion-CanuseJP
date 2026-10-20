@@ -3,13 +3,7 @@ MoveTutor_Text_ThisMoveCanOnlyBeLearnedOnce:
 	.string "{JPN}いちど だけですが いいですか?$"
 
 MoveTutor_Text_SwaggerTeach:
-	.string "{JPN}ふふーん\n"
-	.string "{JPN}おれの ポケモンは すごいのさ!\l"
-	.string "{JPN}どの ポケモンよりも かっこいいのさ!\p"
-	.string "{JPN}……って いばってたら\n"
-	.string "{JPN}もう いばらない ことに したから\n"
-	.string "{JPN}かわりに おまえの ポケモンに\l"
-	.string "{JPN}いばる わざを おしえて やってもいいぜ$"
+	.string "{JPN}ふふーん\nおれの ポケモンは すごいのさ!\lどの ポケモンよりも かっこいいのさ!\p……って いばってたら\nかいちょうに おこられちゃった\pもう いばらない ことに したから\nかわりに おまえの ポケモンに\lいばる わざを おしえて やってもいいぜ$"
 
 MoveTutor_Text_SwaggerDeclined:
 	.string "{JPN}えー\n"
@@ -130,15 +124,7 @@ MoveTutor_Text_SleepTalkTaught:
 	.string "{JPN}ねごとでも ええから あたらんかな$"
 
 MoveTutor_Text_SubstituteTeach:
-	.string "{JPN}ふう\n"
-	.string "{JPN}こうやって おくじょうから\l"
-	.string "{JPN}ひろい せかいを みていると……\p"
-	.string "{JPN}なんにんもの じぶんが いて\n"
-	.string "{JPN}いくつもの じんせいを たのしめたらなー\l"
-	.string "{JPN}って おもうの!\l"
-	.string "{JPN}って おもうの!\l"
-	.string "{JPN}そうだわ あなたの ポケモンちゃん!\n"
-	.string "{JPN}みがわりの わざ おぼえてみない?$"
+	.string "{JPN}ふう\nこうやって おくじょうから\lひろい せかいを みていると……\pなんにんもの じぶんが いて\nいくつもの じんせいを たのしめたらなー\lって おもうの!\lムリな はなしだけどね うふふ\pそうだわ あなたの ポケモンちゃん!\nみがわりの わざ おぼえてみない?$"
 
 MoveTutor_Text_SubstituteDeclined:
 	.string "{JPN}あら そう?\n"
@@ -156,17 +142,7 @@ MoveTutor_Text_SubstituteTaught:
 	.string "{JPN}あなたも そうなるように いのってる!$"
 
 MoveTutor_Text_DynamicPunchTeach:
-	.string "{JPN}もう できんわ!\p"
-	.string "{JPN}ぜったい ムリだわ!\p"
-	.string "{JPN}かくとうタイプの オレは\n"
-	.string "{JPN}トクサネの ジムでは\l"
-	.string "{JPN}ぜんぜん かてんわ!\p"
-	.string "{JPN}ちきしょーっ! ボカ ボカ!\n"
-	.string "{JPN}ボカ ボカ! ボカ ボカ!\p"
-	.string "{JPN}なんだよ\n"
-	.string "{JPN}じめんを なぐってる だけだろ!\p"
-	.string "{JPN}それとも おまえの ポケモンに\n"
-	.string "{JPN}ばくれつパンチを おしえて ほしいのかよ?$"
+	.string "{JPN}もう できんわ!\pぜったい ムリだわ!\pかくとうタイプの オレは\nトクサネの ジムでは\lぜんぜん かてんわ!\pちきしょーっ! ボカ ボカ!\nボカ ボカ! ボカ ボカ!\pなんだよ\nそんな めで みるなよ!\lじめんを なぐってる だけだろ!\pそれとも おまえの ポケモンに\nばくれつパンチを おしえて ほしいのかよ?$"
 
 MoveTutor_Text_DynamicPunchDeclined:
 	.string "{JPN}ちきしょー おまえまで\n"
@@ -182,15 +158,7 @@ MoveTutor_Text_DynamicPunchTaught:
 	.string "{JPN}トクサネジムで かって きてくれよ!$"
 
 MoveTutor_Text_DoubleEdgeTeach:
-	.string "{JPN}あーあ\n"
-	.string "{JPN}ルネシティの ジムリーダーって\l"
-	.string "{JPN}すっごく すてきだから\l"
-	.string "{JPN}ライバルが いっぱい なのよねー\p"
-	.string "{JPN}この あたしが すてみで ぶつかっても\n"
-	.string "{JPN}ダメだったわ!\p"
-	.string "{JPN}ねえ あなた!\n"
-	.string "{JPN}じきでんの すてみタックル!\l"
-	.string "{JPN}あなたの ポケモンに おしえさせてよ!$"
+	.string "{JPN}あーあ\nルネシティの ジムリーダーって\lすっごく すてきだから\lライバルが いっぱい なのよねー\pこの あたしが すてみで ぶつかっても\nダメだったわ!\pねえ あなた!\nせっかく だから この あたしの\lじきでんの すてみタックル!\lあなたの ポケモンに おしえさせてよ!$"
 
 MoveTutor_Text_DoubleEdgeDeclined:
 	.string "{JPN}うん もう!\n"

@@ -1279,8 +1279,7 @@ SlateportCity_Text_ExchangeWhatWithIt:
 	.string "{JPN}なにと こうかん しましょ?$"
 
 SlateportCity_Text_ExchangeBerryPowderForItem:
-	.string "{JPN}{STR_VAR_1}と\nこうかん するのね?"
-	.string "$"
+	.string "{JPN}{STR_VAR_1} と\nこうかん するのね?$"
 
 SlateportCity_Text_DontHaveEnoughBerryPowder:
 	.string "{JPN}あれま!?\nこなが たりない じゃないの!"

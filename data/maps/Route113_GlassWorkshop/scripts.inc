@@ -301,24 +301,14 @@ Route113_GlassWorkshop_Text_GoCollectAshWithThis:
 	.string "かざんばいを あつめなさい ペコペコ！$"
 
 Route113_GlassWorkshop_Text_ExplainSootSack:
-	.string "{JPN}その ふくろを もって\n"
-	.string "はいの つもった ところを あるくと\l"
-	.string "あら ふしぎ！\p"
-	.string "ふくろの なかに かざんばいが\n"
-	.string "どんどん たまっていくよ ペコペコ\p"
-	.string "かざんばいが たまっと おもったら\n"
-	.string "わたしの ところに きなさい ペコペコ！$"
+	.string "{JPN}その ふくろを もって\nはいの つもった ところを あるくと\lあら ふしぎ!\pふくろの なかに かざんばいが\nどんどん たまっていくよ ペコペコ!\pかざんばいが たまったと おもったら\nわたしの ところに きなさい ペコペコ!$"
 
 Route113_GlassWorkshop_Text_LetsSeeCollectedAshes:
 	.string "{JPN}かざんばい あるのかね ペコペコ！\n"
 	.string "どれどれ みせてごらん ペコポコ！$"
 
 Route113_GlassWorkshop_Text_NotEnoughAshNeedX:
-	.string "{JPN}うーん{0xB0}{0xB0}\n"
-	.string "かざんばいが すくないよ ペコペコ！\l"
-	.string "ガラスのどうぐ できないよ ペコペコ！\p"
-	.string "あと {STR_VAR_1}ほ あるけば\n"
-	.string "あおいビードロ つくれるよ ペコペコ！$"
+	.string "{JPN}うーん……\nかざんばいが すくないよ ペコペコ!\lガラスのどうぐ できないよ ペコペコ!\pあと {STR_VAR_1}ほ あるけば\nあおいビードロ つくれるよ ペコペコ!$"
 
 Route113_GlassWorkshop_Text_WhichGlassItemWoudYouLike:
 	.string "{JPN}おほっ\n"
@@ -347,30 +337,20 @@ Route113_GlassWorkshop_Text_NotEnoughAshToMakeItem:
 	.string "どれが いいかね ペコペコ$"
 
 Route113_GlassWorkshop_Text_AllThatAshButDontWantAnything:
-	.string "{JPN}せっかく かざんばいを あつめたのに\n"
-	.string "ほしい ものは ないのかね ペコペコ{0xB0}{0xB0}$"
+	.string "{JPN}せっかく かざんばいを あつめたのに\nほしい ものは ないのかね ペコペコ……$"
 
 Route113_GlassWorkshop_Text_IveFinishedGlassItem:
 	.string "{JPN}おお {STR_VAR_1} できたよ\n"
 	.string "もって いきなさいよ ペコペコ$"
 
 Route113_GlassWorkshop_Text_NoRoomInBag:
-	.string "{JPN}おほっ\n"
-	.string "バッグが いっぱいで はいらないよ ペコペコ！\p"
-	.string "あずかって おくから\n"
-	.string "あとで また おいで ペコペコ$"
+	.string "{JPN}あら?\nそれいじょう もてないよ ペコペコ\pあずかって おくから\nこんど きなさい ペコペコ$"
 
 Route113_GlassWorkshop_Text_NoRoomInPC:
-	.string "{JPN}おほっ\n"
-	.string "パソコンに あきが ないよ ペコペコ！\p"
-	.string "あずかって おくから\n"
-	.string "あとで また おいで ペコペコ$"
+	.string "{JPN}あら?\nパソコン いっぱい なのか ペコペコ\pあずかって おくから\nこんど きなさい ペコペコ$"
 
 Route113_GlassWorkshop_Text_HaventGotYourSootSack:
-	.string "{JPN}おや？ はいぶくろを\n"
-	.string "もって ないのかい ペコペコ！\p"
-	.string "かざんばいを あつめるには それを\n"
-	.string "もっていないと ダメ なんだよ ペコペコ$"
+	.string "{JPN}あら?\nはいぶくろ もっていないのか ペコペコ\pもちあるかないと\nかざんばい たまらないよ ペコペコ$"
 
 Route113_GlassWorkshop_Text_FunToBlowGlassFlute:
 	.string "{JPN}おやかたが はなすのに あわせて\n"

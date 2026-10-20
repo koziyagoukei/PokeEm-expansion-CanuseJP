@@ -288,7 +288,7 @@ BerryTree_Text_BerryGrowthStageTrunk:
 	.string "{JPN}{STR_VAR_1}の めが でてきた!$"
 
 BerryTree_Text_BerryGrowthStageBudding:
-	.string "The {STR_VAR_1}の めが でてきた!$"
+	.string "{JPN}{STR_VAR_1}に つぼみが ついた!$"
 
 BerryTree_Text_BerryGrowthStage4:
 .if OW_BERRY_SIX_STAGES == TRUE
@@ -331,7 +331,7 @@ BerryTree_Text_PlantIsDelighted:
 	.string "{JPN}とっても よろこんでる みたい!$"
 
 BerryTree_Text_ExclamationPoint:
-	.string "!$"
+	.string "{JPN}!$"
 
 .if OW_BERRY_MUTATIONS == TRUE
 BerryTree_EventScript_CheckBerryFullyGrown_Mutation:
@@ -368,22 +368,22 @@ BerryTree_EventScript_PickBerry_Mutation::
 	end
 
 BerryTree_Text_WantToPick_Mutation:
-	.string "You found {STR_VAR_2} {STR_VAR_1}\n"
-	.string "and 1 {STR_VAR_3}!\p"
-	.string "Do you want to pick them?$"
+	.string "{JPN}{STR_VAR_1}のみが {STR_VAR_2}こ\n"
+	.string "{STR_VAR_3}のみが 1こ できてる!\p"
+	.string "きのみを とりますか?$"
 
 BerryTree_Text_BerryLeftUnpicked_Mutation:
-	.string "{PLAYER} left the {STR_VAR_1}\n"
-	.string "and the {STR_VAR_3} unpicked.$"
+	.string "{JPN}{PLAYER}は {STR_VAR_1}のみと\n"
+	.string "{STR_VAR_3}のみを そのままに しておいた$"
 
 BerryTree_Text_BerryPocketFull_Mutation:
-	.string "The BAG's BERRIES POCKET is full.\p"
-	.string "The {STR_VAR_1} and the\n"
-	.string "{STR_VAR_3} couldn't be taken.$"
+	.string "{JPN}バッグの きのみポケットが いっぱいだった\p"
+	.string "{STR_VAR_1}のみと {STR_VAR_3}のみを\n"
+	.string "あきらめた$"
 
 BerryTree_Text_PickedTheBerry_Mutation:
-	.string "{PLAYER} picked the {STR_VAR_2} {STR_VAR_1}\n"
-	.string "and the {STR_VAR_3}.$"
+	.string "{JPN}{PLAYER}は {STR_VAR_1}のみを {STR_VAR_2}こ\n"
+	.string "{STR_VAR_3}のみを 1こ とった!$"
 
 BerryTree_Text_PutAwayBerry_Mutation:
 	.string "{JPN}{PLAYER}は {STR_VAR_1}のみと\n{STR_VAR_3}のみを きのみポケットに しまった!\pつちは もとの ふかふかに もどった!$"
@@ -423,11 +423,11 @@ BerryTree_EventScript_PullOutWeed::
 	return
 
 BerryTree_Text_WeedIsGrowing:
-	.string "A weed is growing here.\n"
-	.string "Do you want to pull it out?$"
+	.string "{JPN}ざっそうが はえている\n"
+	.string "ひきぬきますか?$"
 
 BerryTree_Text_PulledOutTheWeed:
-	.string "{PLAYER} pulled out the weed!$"
+	.string "{JPN}{PLAYER}は ざっそうを ひきぬいた!$"
 .endif
 
 .if OW_BERRY_PESTS == TRUE
@@ -444,5 +444,5 @@ BerryTree_EventScript_EncounterPests::
 	return
 
 BerryTree_Text_APokemonAppeared:
-	.string "A Pokemon appeared!$"
+	.string "{JPN}ポケモンが とびだしてきた!$"
 .endif

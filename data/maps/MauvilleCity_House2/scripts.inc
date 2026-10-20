@@ -52,8 +52,7 @@ MauvilleCity_House2_Text_TradeHarborMailForCoinCase:
 	.string "$"
 
 MauvilleCity_House2_Text_IllTradeYouCoinCase:
-	.string "うれしい!\n"
-	.string "じゃ コインケースと こうかんね!$"
+	.string "{JPN}うれしい!\nじゃ コインケースと こうかんね!$"
 
 MauvilleCity_House2_Text_UseCoinCaseAtGameCorner:
 	.string "{JPN}コインケースが あれば ゲームコーナーで\nルーレットや スロットを たのしめるわ!"

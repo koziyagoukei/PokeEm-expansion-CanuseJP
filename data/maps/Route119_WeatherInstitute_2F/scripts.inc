@@ -319,7 +319,4 @@ Route119_WeatherInstitute_2F_Text_KyogreWeather:
 	.string "$"
 
 Route119_WeatherInstitute_2F_Text_NoAbnormalWeather:
-	.string "{JPN}いじょう きしょうは\nもう かんそく されなく なりました\pたまに あめが ふっても\nそれは めぐみのあめと いえるでしょう! "
-	.string ""
-	.string ""
-	.string "$"
+	.string "{JPN}いじょう きしょうは\nもう かんそく されなく なりました\pたまに あめが ふっても\nそれは めぐみのあめと いえるでしょう!$"

@@ -673,12 +673,7 @@ LittlerootTown_ProfessorBirchsLab_Text_BirchIsntOneForDeskWork:
 	.string "{JPN}たいけんする タイプのひと なんです!$"
 
 LittlerootTown_ProfessorBirchsLab_Text_BirchEnjoysRivalsHelpToo:
-	.string "{JPN}オダマキはかせは\n"
-	.string "{JPN}ポケモンが どこに すんでいるのか\l"
-	.string "{JPN}ぶんぷの ちょうさを なさっています\p"
-	.string "{JPN}{RIVAL}さんは すきな おとうさんの\n"
-	.string "{JPN}ポケモンが どこに すんでいるのか\l"
-	.string "{JPN}おてつだいを なさって いるのですよ$"
+	.string "{JPN}オダマキはかせは\nポケモンが どこに すんでいるのか\lぶんぷの ちょうさを なさっています\p{RIVAL}さんは すきな おとうさんの\nおてつだいを なさって いるのですよ$"
 
 LittlerootTown_ProfessorBirchsLab_Text_LikeYouToHavePokemon:
 	.string "{JPN}オダマキ『……さて {PLAYER}{KUN}!\p"

@@ -299,21 +299,16 @@ BattleFrontier_OutsideWest_EventScript_PokefanF::
 	end
 
 BattleFrontier_OutsideWest_Text_BattleDomeSign:
-	.string "{JPN}ここは バトルドーム！\n"
-	.string "むてきの スターへの みち！$"
+	.string "{JPN}ここは バトルドーム!\nめざせ! むてきの スーパースター!$"
 
 BattleFrontier_OutsideWest_Text_BattleFactorySign:
-	.string "{JPN}ここは バトルファクトリー！\n"
-	.string "さいきょうの ポケモンを さがせ！$"
+	.string "{JPN}ここは バトルファクトリー!\nさがせ! さいきょう ポケモン!$"
 
 BattleFrontier_OutsideWest_Text_BattlePikeSign:
-	.string "{JPN}ここは バトルチューブ！\n"
-	.string "3つの みちから 1つを えらべ！$"
+	.string "{JPN}ここは バトルチューブ!\nえらべ! 3つの みち!$"
 
 BattleFrontier_OutsideWest_Text_ThisIsBattleTower:
-	.string "{JPN}ここは バトルタワーです\p"
-	.string "トレーナーが じまんの ポケモンで\n"
-	.string "かちぬきバトルに ちょうせんします$"
+	.string "{JPN}ここは バトルタワー さ!\pトレーナーは きたえあげた ポケモンで\nひたすら かちぬいて いくのさ!$"
 
 BattleFrontier_OutsideWest_Text_MayISeeYourTicket:
 	.string "{JPN}れんらくせんを ごりよう ですね!\nチケットは おもち でしょうか?$"

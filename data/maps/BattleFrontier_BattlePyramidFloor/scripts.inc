@@ -125,7 +125,7 @@ BattlePyramid_Retire::
 
 @ Also used by Trainer Hill
 BattleFacility_TrainerBattle_PlaceholderText:
-	.string "This is a sample message.$"
+	.string "{JPN}これは テストメッセージです$"
 
 gText_BattlePyramidConfirmRest::
 	.string "{JPN}バトルピラミッドの できごとを\nレポートに かいて ちゅうだん します\lよろしいですか?$"

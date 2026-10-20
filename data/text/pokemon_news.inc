@@ -121,22 +121,7 @@ gPokeNewsTextLilycove_Ending::
 	.string "{JPN}『ポケモン ニュース』でした$"
 
 gPokeNewsTextBlendMaster_Upcoming::
-	.string "{JPN}こんにちは\n"
-	.string "{JPN}『ポケモン ニュース』の じかんです\p"
-	.string "{JPN}ポロックを つくっている みなさんへ\n"
-	.string "{JPN}ビッグニュースが はいって きました!\p"
-	.string "{JPN}あの でんせつの ブレンドめいじんが\n"
-	.string "{JPN}{STR_VAR_1}にちご ミナモシティで\l"
-	.string "{JPN}a mere {STR_VAR_1}-day wait to go!\p"
-	.string "{JPN}きのみブレンダーを するそうです\p"
-	.string "{JPN}ブレンドめいじん といえば\n"
-	.string "{JPN}きのみブレンダーを まわさせたら\l"
-	.string "{JPN}ホウエンで いちばんと いわれています\p"
-	.string "{JPN}すばらしい ポロックを つくりたい かたや\n"
-	.string "{JPN}めいじんの テクニックを みたい かたは\l"
-	.string "{JPN}きのみを いっぱい あつめて おきましょう!\p"
-	.string "{JPN}いじょう\n"
-	.string "{JPN}『ポケモン ニュース』でした$"
+	.string "{JPN}こんにちは\n『ポケモン ニュース』の じかんです\pポロックを つくっている みなさんへ\nビッグニュースが はいって きました!\pあの でんせつの ブレンドめいじんが\n{STR_VAR_1}にちご ミナモシティで\lきのみブレンダーを するそうです\pブレンドめいじん といえば\nきのみブレンダーを まわさせたら\lホウエンで いちばんと いわれています\pすばらしい ポロックを つくりたい かたや\nめいじんの テクニックを みたい かたは\lきのみを いっぱい あつめて おきましょう!\pいじょう\n『ポケモン ニュース』でした$"
 
 gPokeNewsTextBlendMaster_Ongoing::
 	.string "{JPN}こんにちは\n"

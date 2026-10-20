@@ -3,7 +3,7 @@ const struct ContestEffect gContestEffects[] =
     [CONTEST_EFFECT_HIGHLY_APPEALING] =
     {
         #if C_UPDATED_MOVE_EFFECTS >= GEN_6
-        .description = COMPOUND_STRING("Quite the appealing move."),
+        .description = COMPOUND_STRING("{JPN}たくさん アピール できる"),
         #else
         .description = COMPOUND_STRING("{JPN}たくさん アピール できる"),
         #endif
@@ -87,7 +87,7 @@ const struct ContestEffect gContestEffects[] =
     [CONTEST_EFFECT_STARTLE_PREV_MON] =
     {
         #if C_UPDATED_MOVE_EFFECTS >= GEN_6
-        .description = COMPOUND_STRING("Startles the last Pokemon\nto act before the user."),
+        .description = COMPOUND_STRING("{JPN}じぶんの まえに アピールした\nポケモンを おどろかす"),
         #else
         .description = COMPOUND_STRING("{JPN}じぶんの まえに アピールした\nポケモンを おどろかす"),
         #endif
@@ -99,7 +99,7 @@ const struct ContestEffect gContestEffects[] =
     [CONTEST_EFFECT_STARTLE_PREV_MONS] =
     {
         #if C_UPDATED_MOVE_EFFECTS >= GEN_6
-        .description = COMPOUND_STRING("Startles all of the Pokemon\nto act before the user."),
+        .description = COMPOUND_STRING("{JPN}アピールが おわっている ポケモン\nみんなを おどろかす"),
         #else
         .description = COMPOUND_STRING("{JPN}アピールが おわっている ポケモン\nみんなを おどろかす"),
         #endif
@@ -143,7 +143,7 @@ const struct ContestEffect gContestEffects[] =
     [CONTEST_EFFECT_SHIFT_JUDGE_ATTENTION] =
     {
         #if C_UPDATED_MOVE_EFFECTS >= GEN_6
-        .description = COMPOUND_STRING("Makes audience expect\nlittle of other contestants."),
+        .description = COMPOUND_STRING("{JPN}しんさいんの ほかの ポケモンへの\nちゅうもくを そらすことが できる"),
         #else
         .description = COMPOUND_STRING("{JPN}しんさいんの ほかの ポケモンへの\nちゅうもくを そらすことが できる"),
         #endif
@@ -227,7 +227,7 @@ const struct ContestEffect gContestEffects[] =
     [CONTEST_EFFECT_MAKE_FOLLOWING_MONS_NERVOUS] =
     {
         #if C_UPDATED_MOVE_EFFECTS >= GEN_6
-        .description = COMPOUND_STRING("Makes the remaining\nPokemon nervous."),
+        .description = COMPOUND_STRING("{JPN}このあと アピールする ポケモン\nみんなを きんちょう させる"),
         #else
         .description = COMPOUND_STRING("{JPN}このあと アピールする ポケモン\nみんなを きんちょう させる"),
         #endif
@@ -295,7 +295,7 @@ const struct ContestEffect gContestEffects[] =
     [CONTEST_EFFECT_QUALITY_DEPENDS_ON_TIMING] =
     {
         #if C_UPDATED_MOVE_EFFECTS >= GEN_6
-        .description = COMPOUND_STRING("Effectiveness varies\ndepending on when it is used."),
+        .description = COMPOUND_STRING("{JPN}だすときに よって アピールの\nできぐあいが いろいろと かわる"),
         #else
         .description = COMPOUND_STRING("{JPN}だすときに よって アピールの\nできぐあいが いろいろと かわる"),
         #endif
@@ -323,7 +323,7 @@ const struct ContestEffect gContestEffects[] =
     [CONTEST_EFFECT_AFFECTED_BY_PREV_APPEAL] =
     {
         #if C_UPDATED_MOVE_EFFECTS >= GEN_6
-        .description = COMPOUND_STRING("Affected by how well the\nprevious Pokemon's move went."),
+        .description = COMPOUND_STRING("{JPN}1つまえの ポケモンの アピールの\nうまさに えいきょう される"),
         #else
         .description = COMPOUND_STRING("{JPN}1つまえの ポケモンの アピールの\nうまさに えいきょう される"),
         #endif
@@ -351,7 +351,7 @@ const struct ContestEffect gContestEffects[] =
     [CONTEST_EFFECT_NEXT_APPEAL_EARLIER] =
     {
         #if C_UPDATED_MOVE_EFFECTS >= GEN_6
-        .description = COMPOUND_STRING("Causes the user to move\nearlier on the next turn."),
+        .description = COMPOUND_STRING("{JPN}このつぎの アピールを\nはじめの ほうに だすことが できる"),
         #else
         .description = COMPOUND_STRING("{JPN}このつぎの アピールを\nはじめの ほうに だすことが できる"),
         #endif
@@ -363,7 +363,7 @@ const struct ContestEffect gContestEffects[] =
     [CONTEST_EFFECT_NEXT_APPEAL_LATER] =
     {
         #if C_UPDATED_MOVE_EFFECTS >= GEN_6
-        .description = COMPOUND_STRING("Causes the user to move\nlater on the next turn."),
+        .description = COMPOUND_STRING("{JPN}このつぎの アピールを\nおわりの ほうに だすことが できる"),
         #else
         .description = COMPOUND_STRING("{JPN}このつぎの アピールを\nおわりの ほうに だすことが できる"),
         #endif

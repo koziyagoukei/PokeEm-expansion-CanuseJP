@@ -1164,12 +1164,12 @@ static const struct ContestGMaxMove sContestGMaxMoveTable[] =
     {SPECIES_URSHIFU_RAPID_STRIKE_GMAX,       TYPE_WATER},
 };
 
-static const u8 sText_ContestGimmickNone[] = _("SELECT:NONE");
-static const u8 sText_ContestGimmickMega[] = _("SELECT:MEGA");
-static const u8 sText_ContestGimmickUltra[] = _("SELECT:ULTRA BURST");
-static const u8 sText_ContestGimmickZ[] = _("SELECT:Z");
-static const u8 sText_ContestGimmickTera[] = _("SELECT:TERA");
-static const u8 sText_ContestGimmickDynamax[] = _("SELECT:DYNAMAX");
+static const u8 sText_ContestGimmickNone[] = _("{JPN}{SELECT_BUTTON}:なし");
+static const u8 sText_ContestGimmickMega[] = _("{JPN}{SELECT_BUTTON}:メガシンカ");
+static const u8 sText_ContestGimmickUltra[] = _("{JPN}{SELECT_BUTTON}:ウルトラバースト");
+static const u8 sText_ContestGimmickZ[] = _("{JPN}{SELECT_BUTTON}:Zワザ");
+static const u8 sText_ContestGimmickTera[] = _("{JPN}{SELECT_BUTTON}:テラスタル");
+static const u8 sText_ContestGimmickDynamax[] = _("{JPN}{SELECT_BUTTON}:ダイマックス");
 
 static const u8 *const sContestGimmickNames[CONTEST_GIMMICK_COUNT] =
 {

@@ -174,10 +174,7 @@ Route114_EventScript_Kai::
 	end
 
 Route114_Text_AllMyMonDoesIsRoarTakeThis:
-	.string "{JPN}わたしの ポケモン ほえてばかりで\n"
-	.string "みんなが にげてしまって\p"
-	.string "あなた よかったら\n"
-	.string "この わざマシン もらってください$"
+	.string "{JPN}わたしの ポケモン ほえてばかりで\nみんなが にげてしまって……\pあなた よかったら\nこの わざマシン もらってください$"
 
 Route114_Text_ExplainRoar:
 	.string "{JPN}わざマシン05の なかみは ほえる です\n"
