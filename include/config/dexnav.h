@@ -1,15 +1,15 @@
 #ifndef GUARD_CONFIG_DEXNAV_H
 #define GUARD_CONFIG_DEXNAV_H
 
-#define DEXNAV_ENABLED                TRUE   // ずかんナビを有効にするか。TRUEの場合、下記のフラグ・変数IDはすべて0以外にする必要がある。
+#define DEXNAV_ENABLED                FALSE   // ずかんナビを有効にするか。TRUEの場合、下記のフラグ・変数IDはすべて0以外にする必要がある。
 #define USE_DEXNAV_SEARCH_LEVELS      FALSE  /* 注意: 1種族につき1バイト必要なため、セーブ領域を超える可能性がある。 */
 
 // フラグ・変数の定義
-#define DN_FLAG_SEARCHING             FLAG_EXPANSION_DEXNAV_SEARCHING      // ポケモンをサーチ中であることを示すフラグ。
-#define DN_FLAG_DEXNAV_GET            FLAG_EXPANSION_DEXNAV_DISPLAY  // STARTメニューにずかんナビを表示するフラグ。
-#define DN_FLAG_DETECTOR_MODE         FLAG_EXPANSION_DEXNAV_DETECT   // 隠れたポケモンを発見できるようにするフラグ。
-#define DN_VAR_SPECIES                VAR_EXPANSION_DEXNAV_SPECIES         // ずかんナビに登録した種族。
-#define DN_VAR_STEP_COUNTER           VAR_EXPANSION_DEXNAV_STEP_COUNTER    // 隠れたポケモンを探すための歩数。
+#define DN_FLAG_SEARCHING             0 /*FLAG_EXPANSION_DEXNAV_SEARCHING*/      // ポケモンをサーチ中であることを示すフラグ。
+#define DN_FLAG_DEXNAV_GET            0 /*FLAG_EXPANSION_DEXNAV_DISPLAY*/  // STARTメニューにずかんナビを表示するフラグ。
+#define DN_FLAG_DETECTOR_MODE         0 /*FLAG_EXPANSION_DEXNAV_DETECT*/   // 隠れたポケモンを発見できるようにするフラグ。
+#define DN_VAR_SPECIES                0 /*VAR_EXPANSION_DEXNAV_SPECIES*/         // ずかんナビに登録した種族。
+#define DN_VAR_STEP_COUNTER           0 /*VAR_EXPANSION_DEXNAV_STEP_COUNTER*/    // 隠れたポケモンを探すための歩数。
 
 // サーチの設定
 #define DEXNAV_TIMEOUT                  15  // サーチの制限時間（秒）。この値は15秒。最大1092秒まで指定できる。
