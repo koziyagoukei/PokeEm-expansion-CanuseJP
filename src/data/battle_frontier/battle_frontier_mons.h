@@ -1163,7 +1163,7 @@ const struct TrainerMon gBattleFrontierMons[NUM_FRONTIER_MONS] =
         .shouldUseDynamax = TRUE,
         .dynamaxLevel = 10,
         .ball = BALL_POKE,
-        .gender = TRAINER_MON_FEMALE,
+        .gender = TRAINER_MON_RANDOM_GENDER,
         .nickname = J_COMPOUND_STRING("ヨシダ"),
         .isShiny = FALSE,
     },
@@ -1179,7 +1179,7 @@ const struct TrainerMon gBattleFrontierMons[NUM_FRONTIER_MONS] =
         .shouldUseDynamax = TRUE,
         .dynamaxLevel = 10,
         .ball = BALL_POKE,
-        .gender = TRAINER_MON_FEMALE,
+        .gender = TRAINER_MON_RANDOM_GENDER,
         .nickname = J_COMPOUND_STRING("ヨシダ"),
     },
     [FRONTIER_MON_MACHAMP_3] = {
@@ -1194,7 +1194,7 @@ const struct TrainerMon gBattleFrontierMons[NUM_FRONTIER_MONS] =
         .shouldUseDynamax = FALSE,
         .dynamaxLevel = 10,
         .ball = BALL_POKE,
-        .gender = TRAINER_MON_FEMALE,
+        .gender = TRAINER_MON_RANDOM_GENDER,
         .nickname = J_COMPOUND_STRING("ヨシダ"),
     },
     [FRONTIER_MON_VICTREEBEL_1] = {

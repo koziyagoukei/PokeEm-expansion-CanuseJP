@@ -642,16 +642,9 @@ bool32 AddPyramidBagItem(enum Item itemId, u16 count)
     {
         if (newItems[i] == itemId && newQuantities[i] < MAX_PYRAMID_BAG_ITEM_CAPACITY)
         {
-            newQuantities[i] += count;
-            if (newQuantities[i] > MAX_PYRAMID_BAG_ITEM_CAPACITY)
-            {
-                count = newQuantities[i] - MAX_PYRAMID_BAG_ITEM_CAPACITY;
-                newQuantities[i] = MAX_PYRAMID_BAG_ITEM_CAPACITY;
-            }
-            else
-            {
-                count = 0;
-            }
+            u16 added = min(count, MAX_PYRAMID_BAG_ITEM_CAPACITY - newQuantities[i]);
+            newQuantities[i] += added;
+            count -= added;
 
             if (count == 0)
                 break;
@@ -665,16 +658,9 @@ bool32 AddPyramidBagItem(enum Item itemId, u16 count)
             if (newItems[i] == ITEM_NONE)
             {
                 newItems[i] = itemId;
-                newQuantities[i] = count;
-                if (newQuantities[i] > MAX_PYRAMID_BAG_ITEM_CAPACITY)
-                {
-                    count = newQuantities[i] - MAX_PYRAMID_BAG_ITEM_CAPACITY;
-                    newQuantities[i] = MAX_PYRAMID_BAG_ITEM_CAPACITY;
-                }
-                else
-                {
-                    count = 0;
-                }
+                u16 added = min(count, MAX_PYRAMID_BAG_ITEM_CAPACITY);
+                newQuantities[i] = added;
+                count -= added;
 
                 if (count == 0)
                     break;
@@ -700,7 +686,7 @@ bool32 AddPyramidBagItem(enum Item itemId, u16 count)
 
 bool32 RemovePyramidBagItem(enum Item itemId, u16 count)
 {
-    u16 i;
+    u32 i;
 
     enum Item *items = gSaveBlock2Ptr->frontier.pyramidBag.itemId[gSaveBlock2Ptr->frontier.lvlMode];
 #if MAX_PYRAMID_BAG_ITEM_CAPACITY > 255
@@ -710,7 +696,7 @@ bool32 RemovePyramidBagItem(enum Item itemId, u16 count)
 #endif
 
     i = gPyramidBagMenuState.cursorPosition + gPyramidBagMenuState.scrollPosition;
-    if (items[i] == itemId && quantities[i] >= count)
+    if (i < PYRAMID_BAG_ITEMS_COUNT && items[i] == itemId && quantities[i] >= count)
     {
         quantities[i] -= count;
         if (quantities[i] == 0)

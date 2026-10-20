@@ -1341,7 +1341,14 @@ u16 LocalIdToPyramidTrainerId(u8 localId)
 
 bool8 GetBattlePyramidTrainerFlag(u8 eventId)
 {
-    return gSaveBlock2Ptr->frontier.pyramidTrainerFlags & ((1u << gObjectEvents[eventId].localId) - 1);
+    if (eventId >= OBJECT_EVENTS_COUNT)
+        return FALSE;
+
+    u32 localId = gObjectEvents[eventId].localId;
+    if (localId == LOCALID_NONE || localId > MAX_PYRAMID_TRAINERS)
+        return FALSE;
+
+    return (gSaveBlock2Ptr->frontier.pyramidTrainerFlags & (1u << (localId - 1))) != 0;
 }
 
 void MarkApproachingPyramidTrainersAsBattled(void)
@@ -1365,7 +1372,9 @@ static void MarkPyramidTrainerAsBattled(u16 trainerId)
     }
 
     gObjectEvents[gSelectedObjectEvent].movementType = MOVEMENT_TYPE_WANDER_AROUND;
-    gSaveBlock1Ptr->objectEventTemplates[gSpecialVar_LastTalked - 1].movementType = MOVEMENT_TYPE_WANDER_AROUND;
+    u32 localId = gObjectEvents[gSelectedObjectEvent].localId;
+    if (localId != LOCALID_NONE && localId <= MAX_PYRAMID_TRAINERS)
+        gSaveBlock1Ptr->objectEventTemplates[localId - 1].movementType = MOVEMENT_TYPE_WANDER_AROUND;
     gObjectEvents[gSelectedObjectEvent].initialCoords.x = gObjectEvents[gSelectedObjectEvent].currentCoords.x;
     gObjectEvents[gSelectedObjectEvent].initialCoords.y = gObjectEvents[gSelectedObjectEvent].currentCoords.y;
 }
@@ -1978,7 +1987,7 @@ static bool8 SetPyramidObjectPositionsInAndNearSquare(u8 objType, u8 squareId)
                 do
                 {
                     borderedIndex++;
-                    if (sBorderedSquareIds[squareId][borderedIndex] == 0xFF || borderedIndex >= 4)
+                    if (borderedIndex >= ARRAY_COUNT(sBorderedSquareIds[squareId]) || sBorderedSquareIds[squareId][borderedIndex] == 0xFF)
                         borderedIndex = 0;
                     r7 += 2;
                 } while (r7 >> 1 != 4 && TrySetPyramidObjectEventPositionInSquare(objType, floorLayoutOffsets, sBorderedSquareIds[squareId][borderedIndex], objectStartIndex + i));
@@ -1987,7 +1996,7 @@ static bool8 SetPyramidObjectPositionsInAndNearSquare(u8 objType, u8 squareId)
             else
             {
                 borderedIndex++;
-                if (sBorderedSquareIds[squareId][borderedIndex] == 0xFF || borderedIndex >= 4)
+                if (borderedIndex >= ARRAY_COUNT(sBorderedSquareIds[squareId]) || sBorderedSquareIds[squareId][borderedIndex] == 0xFF)
                     borderedIndex = 0;
                 numPlacedObjects++;
             }
@@ -2035,7 +2044,7 @@ static bool8 SetPyramidObjectPositionsNearSquare(u8 objType, u8 squareId)
             do
             {
                 borderOffset++;
-                if (sBorderedSquareIds[squareId][borderOffset] == 0xFF || borderOffset >= 4)
+                if (borderOffset >= ARRAY_COUNT(sBorderedSquareIds[squareId]) || sBorderedSquareIds[squareId][borderOffset] == 0xFF)
                     borderOffset = 0;
                 r8++;
             } while (r8 != 4 && TrySetPyramidObjectEventPositionInSquare(objType, floorLayoutOffsets, sBorderedSquareIds[squareId][borderOffset], objectStartIndex + i));
@@ -2044,7 +2053,7 @@ static bool8 SetPyramidObjectPositionsNearSquare(u8 objType, u8 squareId)
         else
         {
             borderOffset++;
-            if (sBorderedSquareIds[squareId][borderOffset] == 0xFF || borderOffset >= 4)
+            if (borderOffset >= ARRAY_COUNT(sBorderedSquareIds[squareId]) || sBorderedSquareIds[squareId][borderOffset] == 0xFF)
                 borderOffset = 0;
             numPlacedObjects++;
         }
