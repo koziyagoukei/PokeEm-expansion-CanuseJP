@@ -927,8 +927,8 @@ static void Task_StartWirelessCableClubBattle(u8 taskId)
             tState = 2;
         break;
     case 2:
-        SendBlock(0, &gLocalLinkPlayer, sizeof(gLocalLinkPlayer));
-        tState = 3;
+        if (IsLinkTaskFinished() && SendBlock(0, &gLocalLinkPlayer, sizeof(gLocalLinkPlayer)))
+            tState = 3;
         break;
     case 3:
         if (GetBlockReceivedStatus() == GetLinkPlayerCountAsBitFlags())

@@ -31,6 +31,7 @@ DATA_STRUCTS = {
     "contestant_status": ("include/contest.h", "ContestantStatus"),
     "contest_appeal_results": ("include/contest.h", "ContestAppealMoveResults"),
     "contest_excitement": ("include/contest.h", "ContestExcitement"),
+    "contest_gimmick_state_packet": ("include/contest.h", "LinkContestGimmickState"),
     "link_player": ("include/link.h", "LinkPlayer"),
     "link_player_block": ("include/link.h", "LinkPlayerBlock"),
     "link_battler_header": ("include/battle.h", "LinkBattlerHeader"),

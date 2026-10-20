@@ -22,6 +22,8 @@ struct LinkContestMoveSelection
     u8 reserved;
 };
 
+STATIC_ASSERT(CONTESTANT_COUNT * sizeof(struct LinkContestGimmickState) <= BLOCK_BUFFER_SIZE, ContestGimmickStateFitsLinkBlock);
+
 #define tState         data[0]
 #define tDelayTimer    data[1]
 #define tCategories(i) data[(i) + 1]
@@ -433,6 +435,8 @@ void Task_LinkContest_CommunicateFinalStandings(u8 taskId)
 
 void Task_LinkContest_CommunicateAppealsState(u8 taskId)
 {
+    u32 i;
+
     switch (gTasks[taskId].tState)
     {
     case 0:
@@ -498,6 +502,27 @@ void Task_LinkContest_CommunicateAppealsState(u8 taskId)
         if (LinkContest_GetBlockReceivedFromAllPlayers())
         {
             memcpy(gContestantTurnOrder, gBlockRecvBuffer[gContestLinkLeaderIndex], sizeof(gContestantTurnOrder));
+            gTasks[taskId].tState++;
+        }
+        break;
+    case 12:
+        if (IsLinkTaskFinished())
+        {
+            struct LinkContestGimmickState states[CONTESTANT_COUNT];
+
+            for (i = 0; i < CONTESTANT_COUNT; i++)
+                Contest_GetLinkGimmickState(i, &states[i]);
+            if (LinkContest_SendBlock(states, sizeof(states)))
+                gTasks[taskId].tState++;
+        }
+        break;
+    case 13:
+        if (LinkContest_GetBlockReceivedFromAllPlayers())
+        {
+            const struct LinkContestGimmickState *states = (const void *)gBlockRecvBuffer[gContestLinkLeaderIndex];
+
+            for (i = 0; i < CONTESTANT_COUNT; i++)
+                Contest_SetLinkGimmickState(i, &states[i]);
             gTasks[taskId].tState++;
         }
         break;

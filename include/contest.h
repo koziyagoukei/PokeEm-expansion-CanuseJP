@@ -326,6 +326,31 @@ struct ContestGimmickStatus
     bool8 showGimmickIntro:1;
 };
 
+// Link state contains gameplay data only, never local sprite IDs or anim caches.
+struct LinkContestGimmickState
+{
+    u16 species;
+    u16 originalSpecies;
+    u16 pendingSpecies;
+    u16 heldItem;
+    s16 extraAppeal;
+    u8 selected;
+    u8 moveGimmick;
+    u8 usedGimmick;
+    u8 teraType;
+    u8 dynamaxLevel;
+    u8 dynamaxTurns;
+    bool8 gmaxFactor:1;
+    bool8 megaActive:1;
+    bool8 ultraActive:1;
+    bool8 teraActive:1;
+    bool8 gigantamaxActive:1;
+    bool8 zUsed:1;
+    bool8 stellarBoostUsed:1;
+    bool8 jammedSinceLastAppeal:1;
+    bool8 showGimmickIntro:1;
+};
+
 struct ContestResources
 {
     struct Contest *contest;
@@ -401,6 +426,8 @@ extern u8 gCurContestWinnerSaveIdx;
 extern rng_value_t gContestRngValue;
 
 // contest.c
+void Contest_GetLinkGimmickState(u8 contestant, struct LinkContestGimmickState *state);
+void Contest_SetLinkGimmickState(u8 contestant, const struct LinkContestGimmickState *state);
 void ResetLinkContestBoolean(void);
 void LoadContestBgAfterMoveAnim(void);
 void CB2_StartContest(void);

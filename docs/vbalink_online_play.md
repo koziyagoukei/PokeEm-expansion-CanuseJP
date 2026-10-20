@@ -47,12 +47,14 @@ VBALinkは、配布元の[VBALinkダウンロードページ](https://www.vbalin
 参加者全員が同じリリース版を使用していることを確認します。デバッグメニューを利用できるビルドでは、通信互換情報の表示から次の値も確認できます。
 
 ```text
-Link Compat: 1
-Data Layout: 1
+Link Compat: 10
+Data Layout: 6
 Variant: Frontier Hack
 ```
 
 `Variant`は現在の接続拒否条件ではありませんが、異なる配布物を混在させないための確認情報として使用します。
+
+通信状態同期の修正により、旧版（Link Compat 9 / Data Layout 5）とは接続できません。セーブデータの配置は変更していません。修正内容と検証範囲は[通信処理の調査記録](link_communication_audit.md)を参照してください。
 
 ## Tailscaleを使用する標準手順
 

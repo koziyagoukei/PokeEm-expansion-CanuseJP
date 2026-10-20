@@ -9,6 +9,7 @@
       "choose_move_packet": "480358c2cf5f949539066a6dee068ca69fb65fe1eed43e1771bf46cf1409d664",
       "contest_appeal_results": "d656f2a14e0d752229c00375183d44c9c388dc95ba54d8d9e7615ec5e889b951",
       "contest_excitement": "7e496719d5122779ffd3693e7a83095b50950b4e1bdb60ee9b47eceb91de3b06",
+      "contest_gimmick_state_packet": "29d099a6172cb3617e416beb5d86a8d67c1c496612982cf5ae09a4fccbd9d7e7",
       "contest_move_selection_packet": "e812e01519bcd5dba5c5ee49c660a80a07b388761ee6e6f72ab522ed10ac317f",
       "contest_pokemon": "d1b79e139b577c859fd5eb5e143f0016d01a1551036190ba719b9cfecb417f16",
       "contestant_status": "c32872caa6d8a8028ef02b9fb0a6a9540e69d683ab03f534d253da3adf7f989a",
@@ -41,13 +42,13 @@
       "union_room_activities": "9024f4f9a004353a2222be88d9d6768d42d00f21df05a589394ff353895686cf"
     }
   },
-  "data_layout_version": 5,
+  "data_layout_version": 6,
   "fingerprints": {
-    "combined": "97f1b06f42662fc781e1057667046fff26a8b5305ae3d648592b8f060f13f004",
-    "data_layout": "37915f472897ad261482ffde88ad49126ff858a29ff719fd1f4a78b40b951631",
+    "combined": "8586acda5180850f9b37639205100d24d47f487644b85d5d2b2c52d10b753d38",
+    "data_layout": "fc47029bea51ca82e4e014544ab37782714128af8456c1d210ba2f581a4cbc2b",
     "protocol": "e6e82d6841e40c54ca85b31a4f42c0d520aaacf418e5604451699e27b9ae19cb"
   },
-  "link_compat_version": 9,
+  "link_compat_version": 10,
   "schema_version": 1,
   "summary": {
     "buffer_sizes": {

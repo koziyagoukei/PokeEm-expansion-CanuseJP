@@ -38,6 +38,9 @@
 #include "constants/songs.h"
 #include "test/battle.h"
 #include "test/test.h"
+#if TESTING
+#include "test/link.h"
+#endif
 
 static EWRAM_DATA u8 sLinkSendTaskId = 0;
 static EWRAM_DATA u8 sLinkReceiveTaskId = 0;
@@ -603,6 +606,15 @@ static void CreateTasksForSendRecvLinkBuffers(void)
     gTasks[sLinkReceiveTaskId].tCurrentBlock_Start    = 0;
 }
 
+#if TESTING
+void Test_InitLinkBattleBufferTasks(u8 *sendTaskId, u8 *receiveTaskId)
+{
+    CreateTasksForSendRecvLinkBuffers();
+    *sendTaskId = sLinkSendTaskId;
+    *receiveTaskId = sLinkReceiveTaskId;
+}
+#endif
+
 enum
 {
     LINK_BUFF_BUFFER_ID,
@@ -780,8 +792,9 @@ static void Task_HandleSendLinkBuffersData(u8 taskId)
                     gTasks[taskId].tCurrentBlock_Start    = 0;
                 }
                 blockSize = (BYTE_TO_SEND(LINK_BUFF_SIZE_LO) | (BYTE_TO_SEND(LINK_BUFF_SIZE_HI) << 8)) + LINK_BUFF_DATA;
-                SendBlock(BitmaskAllOtherLinkPlayers(), &BYTE_TO_SEND(0), blockSize);
-                gTasks[taskId].tState++;
+                // A busy link has not accepted this packet. Keep it queued for retry.
+                if (IsLinkTaskFinished() && SendBlock(BitmaskAllOtherLinkPlayers(), &BYTE_TO_SEND(0), blockSize))
+                    gTasks[taskId].tState++;
             }
             else
             {
@@ -837,9 +850,19 @@ void TryReceiveLinkBattleData(void)
                     u8 *dest, *src;
                     u16 dataSize = gBlockRecvBuffer[i][2];
 
-                    if (dataSize + LINK_BUFF_DATA > BLOCK_BUFFER_SIZE)
+                    if (dataSize == 0 || (dataSize & 3) != 0
+                     || dataSize + LINK_BUFF_DATA > BLOCK_BUFFER_SIZE
+                     || recvBuffer[LINK_BUFF_ACTIVE_BATTLER] >= gBattlersCount
+                     || recvBuffer[LINK_BUFF_BUFFER_ID] > B_COMM_CONTROLLER_IS_DONE
+                     || (recvBuffer[LINK_BUFF_BUFFER_ID] == B_COMM_CONTROLLER_IS_DONE
+                      && (dataSize != 4 || recvBuffer[LINK_BUFF_DATA] >= GetLinkPlayerCount())))
                     {
                         gLink.badChecksum = TRUE;
+                        if (gWirelessCommType)
+                        {
+                            RfuSetStatus(RFU_STATUS_FATAL_ERROR, F_RFU_ERROR_1 | F_RFU_ERROR_8);
+                            RfuSetErrorParams(F_RFU_ERROR_1 | F_RFU_ERROR_8);
+                        }
                         ResetBlockReceivedFlag(i);
                         continue;
                     }

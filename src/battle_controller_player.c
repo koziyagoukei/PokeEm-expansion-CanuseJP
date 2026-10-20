@@ -542,7 +542,10 @@ void HandleInputChooseTarget(enum BattlerId battler)
         B_POSITION_OPPONENT_RIGHT,
         B_POSITION_OPPONENT_LEFT,
     };
-    enum Move move = GetMonData(GetBattlerMon(battler), MON_DATA_MOVE1 + gMoveSelectionCursor[battler]);
+    const struct ChooseMoveStruct *moveInfo = (const void *)&gBattleResources->bufferA[battler][4];
+    enum Move move = (gBattleTypeFlags & BATTLE_TYPE_LINK)
+        ? moveInfo->moves[gMoveSelectionCursor[battler]]
+        : GetMonData(GetBattlerMon(battler), MON_DATA_MOVE1 + gMoveSelectionCursor[battler]);
     enum MoveTarget moveTarget = GetBattlerMoveSelectionTargetType(battler, move);
 
     DoBounceEffect(gMultiUsePlayerCursor, BOUNCE_HEALTHBOX, 15, 1);

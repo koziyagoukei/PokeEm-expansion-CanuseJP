@@ -53,6 +53,9 @@
 #include "constants/battle_anim.h"
 #include "constants/script_menu.h"
 #include "constants/songs.h"
+#if TESTING
+#include "test/link.h"
+#endif
 
 #define CONTEST_DYNAMAX_JAM_REDUCTION 10
 
@@ -1512,7 +1515,8 @@ static bool32 ContestGimmickCanSelect(u8 contestant, enum ContestGimmick selecte
         return FALSE;
     if (gimmick->usedGimmick != CONTEST_GIMMICK_NONE)
     {
-        return contestant == gContestPlayerMonIndex
+        return ((gLinkContestFlags & LINK_CONTEST_FLAG_IS_LINK)
+                ? contestant < gNumLinkContestPlayers : contestant == gContestPlayerMonIndex)
             && selected == CONTEST_GIMMICK_Z_APPEAL
             && gimmick->usedGimmick == CONTEST_GIMMICK_ULTRA_BURST
             && gimmick->ultraActive
@@ -1600,6 +1604,74 @@ static void InitLinkContestGimmickStatus(u8 contestant)
     sContestPendingGimmickSpecies[contestant] = SPECIES_NONE;
     sContestPendingGimmickSpeciesValid[contestant] = FALSE;
 }
+
+void Contest_GetLinkGimmickState(u8 contestant, struct LinkContestGimmickState *state)
+{
+    const struct ContestGimmickStatus *gimmick = &eContestGimmickStatus[contestant];
+
+    *state = (struct LinkContestGimmickState)
+    {
+        .species = gContestMons[contestant].species,
+        .originalSpecies = gimmick->originalSpecies,
+        .pendingSpecies = sContestPendingGimmickSpeciesValid[contestant] ? sContestPendingGimmickSpecies[contestant] : SPECIES_NONE,
+        .heldItem = gimmick->heldItem,
+        .extraAppeal = gimmick->extraAppeal,
+        .selected = gimmick->selected,
+        .moveGimmick = gimmick->moveGimmick,
+        .usedGimmick = gimmick->usedGimmick,
+        .teraType = gimmick->teraType,
+        .dynamaxLevel = gimmick->dynamaxLevel,
+        .dynamaxTurns = gimmick->dynamaxTurns,
+        .gmaxFactor = gimmick->gmaxFactor,
+        .megaActive = gimmick->megaActive,
+        .ultraActive = gimmick->ultraActive,
+        .teraActive = gimmick->teraActive,
+        .gigantamaxActive = gimmick->gigantamaxActive,
+        .zUsed = gimmick->zUsed,
+        .stellarBoostUsed = gimmick->stellarBoostUsed,
+        .jammedSinceLastAppeal = gimmick->jammedSinceLastAppeal,
+        .showGimmickIntro = gimmick->showGimmickIntro,
+    };
+}
+
+void Contest_SetLinkGimmickState(u8 contestant, const struct LinkContestGimmickState *state)
+{
+    struct ContestGimmickStatus *gimmick = &eContestGimmickStatus[contestant];
+
+    gContestMons[contestant].species = state->species;
+    gimmick->originalSpecies = state->originalSpecies;
+    sContestPendingGimmickSpecies[contestant] = state->pendingSpecies;
+    sContestPendingGimmickSpeciesValid[contestant] = state->pendingSpecies != SPECIES_NONE;
+    gimmick->heldItem = state->heldItem;
+    gimmick->extraAppeal = state->extraAppeal;
+    gimmick->selected = state->selected;
+    gimmick->moveGimmick = state->moveGimmick;
+    gimmick->usedGimmick = state->usedGimmick;
+    gimmick->teraType = state->teraType;
+    gimmick->dynamaxLevel = state->dynamaxLevel;
+    gimmick->dynamaxTurns = state->dynamaxTurns;
+    gimmick->gmaxFactor = state->gmaxFactor;
+    gimmick->megaActive = state->megaActive;
+    gimmick->ultraActive = state->ultraActive;
+    gimmick->teraActive = state->teraActive;
+    gimmick->gigantamaxActive = state->gigantamaxActive;
+    gimmick->zUsed = state->zUsed;
+    gimmick->stellarBoostUsed = state->stellarBoostUsed;
+    gimmick->jammedSinceLastAppeal = state->jammedSinceLastAppeal;
+    gimmick->showGimmickIntro = state->showGimmickIntro;
+}
+
+#if TESTING
+bool32 Test_ContestGimmickCanSelect(u8 contestant, enum ContestGimmick selected, enum Move move)
+{
+    return ContestGimmickCanSelect(contestant, selected, move);
+}
+
+void Test_CalculateAppealMoveImpact(u8 contestant)
+{
+    CalculateAppealMoveImpact(contestant);
+}
+#endif
 
 static void InitNpcContestGimmickStatus(u8 contestant)
 {
