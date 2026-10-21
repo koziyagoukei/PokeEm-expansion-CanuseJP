@@ -28,7 +28,7 @@ TEST("Frontier TIPS: all pages and choices fit the explanation window")
     }
 }
 
-TEST("Frontier TIPS: all seven facilities and rule topics are reachable from TIPS")
+TEST("Frontier TIPS: all facilities, hub, resort and rule topics are reachable from TIPS")
 {
     bool8 seen[INFO_COUNT] = {0};
     seen[INFO_TIPS] = TRUE;
@@ -45,6 +45,10 @@ TEST("Frontier TIPS: all seven facilities and rule topics are reachable from TIP
     EXPECT(seen[INFO_BANNED_MONS]);
     EXPECT(seen[INFO_GIMMICK_HELP]);
     for (u32 id = INFO_TIPS_TOWER; id <= INFO_TIPS_PYRAMID; id++)
+        EXPECT(seen[id]);
+    for (u32 id = INFO_TIPS_HUB; id <= INFO_TIPS_HUB_SUPPORT; id++)
+        EXPECT(seen[id]);
+    for (u32 id = INFO_TIPS_RESORT; id <= INFO_TIPS_RESORT_DOLLS; id++)
         EXPECT(seen[id]);
     EXPECT(!seen[INFO_DIARY_TEST]);
     EXPECT(!seen[INFO_CHOICE_TEST]);

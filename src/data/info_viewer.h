@@ -190,6 +190,7 @@ static const struct InfoViewerChoice sInfoViewerChoices_ChoiceTest[] =
     },
 };
 
+#include "resort_tips.h"
 #include "frontier_tips.h"
 
 static const struct InfoViewerEntry sInfoViewerEntries[INFO_COUNT] =
@@ -204,13 +205,37 @@ static const struct InfoViewerEntry sInfoViewerEntries[INFO_COUNT] =
         .choices = sInfoViewerChoices_Facilities,
         .choiceCount = ARRAY_COUNT(sInfoViewerChoices_Facilities),
     },
-    [INFO_TIPS_TOWER] = TIPS_FACILITY_ENTRY(Tower),
-    [INFO_TIPS_DOME] = TIPS_FACILITY_ENTRY(Dome),
-    [INFO_TIPS_PALACE] = TIPS_FACILITY_ENTRY(Palace),
-    [INFO_TIPS_ARENA] = TIPS_FACILITY_ENTRY(Arena),
-    [INFO_TIPS_FACTORY] = TIPS_FACILITY_ENTRY(Factory),
-    [INFO_TIPS_PIKE] = TIPS_FACILITY_ENTRY(Pike),
-    [INFO_TIPS_PYRAMID] = TIPS_FACILITY_ENTRY(Pyramid),
+    [INFO_TIPS_TOWER] = TIPS_PAGE_ENTRY(Tower),
+    [INFO_TIPS_DOME] = TIPS_PAGE_ENTRY(Dome),
+    [INFO_TIPS_PALACE] = TIPS_PAGE_ENTRY(Palace),
+    [INFO_TIPS_ARENA] = TIPS_PAGE_ENTRY(Arena),
+    [INFO_TIPS_FACTORY] = TIPS_PAGE_ENTRY(Factory),
+    [INFO_TIPS_PIKE] = TIPS_PAGE_ENTRY(Pike),
+    [INFO_TIPS_PYRAMID] = TIPS_PAGE_ENTRY(Pyramid),
+    [INFO_TIPS_HUB] = {
+        .title = sInfoText_TitleHub,
+        .choices = sInfoViewerChoices_Hub,
+        .choiceCount = ARRAY_COUNT(sInfoViewerChoices_Hub),
+    },
+    [INFO_TIPS_HUB_POKEMON] = TIPS_PAGE_ENTRY(HubPokemon),
+    [INFO_TIPS_HUB_ITEMS] = TIPS_PAGE_ENTRY(HubItems),
+    [INFO_TIPS_HUB_MUSIC] = TIPS_PAGE_ENTRY(HubMusic),
+    [INFO_TIPS_HUB_DIFFICULTY] = TIPS_PAGE_ENTRY(HubDifficulty),
+    [INFO_TIPS_HUB_BANNED] = TIPS_PAGE_ENTRY(HubBanned),
+    [INFO_TIPS_HUB_SUPPORT] = TIPS_PAGE_ENTRY(HubSupport),
+    [INFO_TIPS_RESORT] = {
+        .title = sInfoText_TitleResort,
+        .choices = sInfoViewerChoices_Resort,
+        .choiceCount = ARRAY_COUNT(sInfoViewerChoices_Resort),
+    },
+    [INFO_TIPS_RESORT_OVERVIEW] = TIPS_PAGE_ENTRY(ResortOverview),
+    [INFO_TIPS_RESORT_CAMP] = TIPS_PAGE_ENTRY(ResortCamp),
+    [INFO_TIPS_RESORT_DINER] = TIPS_PAGE_ENTRY(ResortDiner),
+    [INFO_TIPS_RESORT_BATH] = TIPS_PAGE_ENTRY(ResortBath),
+    [INFO_TIPS_RESORT_VILLA] = TIPS_PAGE_ENTRY(ResortVilla),
+    [INFO_TIPS_RESORT_SHOP] = TIPS_PAGE_ENTRY(ResortShop),
+    [INFO_TIPS_RESORT_ROOM] = TIPS_PAGE_ENTRY(ResortRoom),
+    [INFO_TIPS_RESORT_DOLLS] = TIPS_PAGE_ENTRY(ResortDolls),
     [INFO_FRONTIER_RULES] =
     {
         .title = sInfoText_TitleFrontierRules,
