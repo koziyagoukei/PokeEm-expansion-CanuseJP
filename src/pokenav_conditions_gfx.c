@@ -24,11 +24,13 @@ static u32 LoopedTask_CloseMonMarkingsWindow(s32);
 
 static u8 sInitialLoadId; // Never read
 
-const u16 gConditionGraphData_Pal[] = INCGFX_U16("graphics/pokenav/condition/graph_data.pal", ".gbapal");
-const u16 gConditionText_Pal[] = INCGFX_U16("graphics/pokenav/condition/text.pal", ".gbapal");
-static const u32 sConditionGraphData_Gfx[] = INCGFX_U32("graphics/pokenav/condition/graph_data.png", ".4bpp.smol");
-static const u32 sConditionGraphData_Tilemap[] = INCGFX_U32("graphics/pokenav/condition/graph_data.bin", ".smolTM");
-static const u16 sMonMarkings_Pal[] = INCGFX_U16("graphics/pokenav/condition/mon_markings.pal", ".gbapal");
+const u16 gConditionGraphData_Pal[] = INCBIN_U16("build/extracted_contest/pokenav/condition/graph_data.gbapal");
+const u16 gConditionText_Pal[] = INCBIN_U16("build/extracted_contest/pokenav/condition/text.gbapal");
+static const u32 sConditionGraphData_Gfx[] = INCBIN_U32("build/extracted_contest/pokenav/condition/graph_data.4bpp.lz");
+static const u32 sConditionGraphData_Tilemap[] = INCBIN_U32("build/extracted_contest/pokenav/condition/graph_data.bin.lz");
+static const u16 sMonMarkings_Pal[] = INCBIN_U16("build/extracted_contest/pokenav/condition/mon_markings.gbapal");
+// The Japanese graph has its own 9x4 overlay, not the English options tiles.
+static const u16 sConditionSearchOptions_Tilemap[] = INCBIN_U16("build/extracted_contest/pokenav/condition/search_options.bin");
 
 static const u8 gText_Number2[] = _("No. ");
 
@@ -225,7 +227,7 @@ static u32 LoopedTask_OpenConditionGraphMenu(s32 state)
         DecompressDataWithHeaderVram(gPokenavCondition_Tilemap, menu->tilemapBuffers[0]);
         SetBgTilemapBuffer(3, menu->tilemapBuffers[0]);
         if (IsConditionMenuSearchMode() == TRUE)
-            CopyToBgTilemapBufferRect(3, gPokenavOptions_Tilemap, 0, 5, 9, 4);
+            CopyToBgTilemapBufferRect(3, sConditionSearchOptions_Tilemap, 0, 5, 9, 4);
 
         CopyBgTilemapBufferToVram(3);
         CopyPaletteIntoBufferUnfaded(gPokenavCondition_Pal, BG_PLTT_ID(1), PLTT_SIZE_4BPP);

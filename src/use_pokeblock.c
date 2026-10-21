@@ -177,10 +177,10 @@ static EWRAM_DATA u8 *sGraph_Gfx = NULL;
 static EWRAM_DATA u8 *sMonFrame_TilemapPtr = NULL;
 static EWRAM_DATA struct UsePokeblockMenu *sMenu = NULL;
 
-static const u32 sMonFrame_Pal[] = INCBIN_U32("graphics/pokeblock/use_screen/mon_frame_pal.bin");
-static const u32 sMonFrame_Gfx[] = INCGFX_U32("graphics/pokeblock/use_screen/mon_frame.png", ".4bpp");
-static const u32 sMonFrame_Tilemap[] = INCGFX_U32("graphics/pokeblock/use_screen/mon_frame.bin", ".smolTM");
-static const u32 sGraphData_Tilemap[] = INCGFX_U32("graphics/pokeblock/use_screen/graph_data.bin", ".smolTM");
+static const u32 sMonFrame_Pal[] = INCBIN_U32("build/extracted_contest/pokeblock/use_screen/mon_frame_pal.bin");
+static const u32 sMonFrame_Gfx[] = INCBIN_U32("build/extracted_contest/pokeblock/use_screen/mon_frame.4bpp");
+static const u32 sMonFrame_Tilemap[] = INCBIN_U32("build/extracted_contest/pokeblock/use_screen/mon_frame.bin.lz");
+static const u32 sGraphData_Tilemap[] = INCBIN_U32("build/extracted_contest/pokeblock/use_screen/graph_data.bin.lz");
 
 // The condition/flavors aren't listed in their normal order in this file, they're listed as shown on the graph going counter-clockwise
 // Normally they would go Cool/Spicy, Beauty/Dry, Cute/Sweet, Smart/Bitter, Tough/Sour (also graph order, but clockwise)
@@ -1325,7 +1325,7 @@ static bool8 LoadUsePokeblockMenuGfx(void)
         SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(11, 4));
         break;
     case 1:
-        sGraph_Gfx = Alloc(6656);
+        sGraph_Gfx = Alloc(GetDecompressedDataSize(gUsePokeblockGraph_Gfx));
         sGraph_Tilemap = Alloc(1280);
         sMonFrame_TilemapPtr = Alloc(1280);
         break;
@@ -1350,11 +1350,11 @@ static bool8 LoadUsePokeblockMenuGfx(void)
         LoadPalette(gUsePokeblockGraph_Pal, BG_PLTT_ID(2), PLTT_SIZE_4BPP);
         break;
     case 8:
-        LoadBgTiles(1, sGraph_Gfx, 6656, 160 << 2);
+        LoadBgTiles(1, sGraph_Gfx, GetDecompressedDataSize(gUsePokeblockGraph_Gfx), 160 << 2);
         break;
     case 9:
         SetBgTilemapBuffer(1, sGraph_Tilemap);
-        CopyToBgTilemapBufferRect(1, gUsePokeblockNatureWin_Pal, 0, 13, 12, 4);
+        CopyToBgTilemapBufferRect(1, gUsePokeblockNatureWin_Pal, 0, 13, 11, 4);
         CopyBgTilemapBufferToVram(1);
         break;
     case 10:

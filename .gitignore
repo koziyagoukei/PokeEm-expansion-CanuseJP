@@ -1383,3 +1383,5 @@ build/generated/bpej_pokedex_extracted.ok
 build/extracted_battle_backgrounds/
 build/generated/bpej_battle_backgrounds_manifest.json
 build/generated/bpej_battle_backgrounds_extracted.ok
+build/extracted_contest/
+build/generated/bpej_contest_extracted.ok

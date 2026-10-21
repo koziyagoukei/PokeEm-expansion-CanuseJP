@@ -588,22 +588,22 @@ static const struct CompressedSpriteSheet sSpriteSheet_NextTurn[CONTESTANT_COUNT
 {
     {
         .data = gContestNextTurnGfx,
-        .size = 0x100,
+        .size = 0xA0,
         .tag = TAG_NEXT_TURN_1_GFX
     },
     {
         .data = gContestNextTurnGfx,
-        .size = 0x100,
+        .size = 0xA0,
         .tag = TAG_NEXT_TURN_2_GFX
     },
     {
         .data = gContestNextTurnGfx,
-        .size = 0x100,
+        .size = 0xA0,
         .tag = TAG_NEXT_TURN_3_GFX
     },
     {
         .data = gContestNextTurnGfx,
-        .size = 0x100,
+        .size = 0xA0,
         .tag = TAG_NEXT_TURN_4_GFX
     }
 };
@@ -656,12 +656,12 @@ static const struct SpriteTemplate sSpriteTemplates_NextTurn[CONTESTANT_COUNT] =
 };
 
 /*    v-- Origin
-[0    +][1     ]   64x8
+[0    +][1]   40x8 (BPEJ: number at tile 2)
 */
 static const struct Subsprite sSubsprites_NextTurn[] =
 {
     {
-        .x = -28,
+        .x = -20,
         .y = -4,
         .shape = SPRITE_SHAPE(32x8),
         .size = SPRITE_SIZE(32x8),
@@ -669,10 +669,10 @@ static const struct Subsprite sSubsprites_NextTurn[] =
         .priority = 0
     },
     {
-        .x = 4,
+        .x = 12,
         .y = -4,
-        .shape = SPRITE_SHAPE(32x8),
-        .size = SPRITE_SIZE(32x8),
+        .shape = SPRITE_SHAPE(8x8),
+        .size = SPRITE_SIZE(8x8),
         .tileOffset = 4,
         .priority = 0
     }
@@ -798,7 +798,7 @@ static const struct SpriteTemplate sSpriteTemplate_JudgeSpeechBubble =
     .oam = &gOamData_AffineOff_ObjNormal_16x16,
 };
 
-static const u16 sText_Pal[] = INCGFX_U16("graphics/contest/text.pal", ".gbapal");
+static const u16 sText_Pal[] = INCBIN_U16("build/extracted_contest/contest/text.gbapal");
 
 #include "data/contest_text_tables.h"
 
@@ -6958,7 +6958,7 @@ static void ShowHideNextTurnGfx(bool8 show)
     {
         if (eContestantStatus[i].turnOrderMod != 0 && show)
         {
-            CpuCopy32(GetTurnOrderNumberGfx(i), (void *)(OBJ_VRAM0 + (gSprites[eContestGfxState[i].nextTurnSpriteId].oam.tileNum + 6) * 32), 32);
+            CpuCopy32(GetTurnOrderNumberGfx(i), (void *)(OBJ_VRAM0 + (gSprites[eContestGfxState[i].nextTurnSpriteId].oam.tileNum + 2) * 32), 32);
             gSprites[eContestGfxState[i].nextTurnSpriteId].y = sNextTurnSpriteYPositions[gContestantTurnOrder[i]];
             gSprites[eContestGfxState[i].nextTurnSpriteId].invisible = FALSE;
         }
