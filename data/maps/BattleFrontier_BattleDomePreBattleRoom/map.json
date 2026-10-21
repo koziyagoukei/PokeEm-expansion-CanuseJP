@@ -3,7 +3,6 @@
   "name": "BattleFrontier_BattleDomePreBattleRoom",
   "layout": "LAYOUT_BATTLE_FRONTIER_BATTLE_DOME_PRE_BATTLE_ROOM",
   "music": "MUS_B_DOME",
-  "region": "REGION_HOENN",
   "region_map_section": "MAPSEC_BATTLE_FRONTIER",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
@@ -12,7 +11,6 @@
   "allow_escaping": false,
   "allow_running": false,
   "show_map_name": false,
-  "write_specialvar_iseffect": true,
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": null,
   "object_events": [
@@ -48,5 +46,7 @@
     }
   ],
   "coord_events": [],
-  "bg_events": []
+  "bg_events": [],
+  "region": "REGION_HOENN",
+  "write_specialvar_iseffect": true
 }

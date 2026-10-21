@@ -75,7 +75,7 @@
       "y": 17,
       "elevation": 4,
       "dest_map": "MAP_ULTRA_FRONTIE_HUB",
-      "dest_warp_id": "3"
+      "dest_warp_id": "gotoconnect"
     }
   ],
   "coord_events": [],
