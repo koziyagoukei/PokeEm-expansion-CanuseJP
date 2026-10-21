@@ -43,6 +43,7 @@
 #include "text.h"
 #include "text_window.h"
 #include "trainer_card.h"
+#include "ultra_help.h"
 #include "window.h"
 #include "union_room.h"
 #include "dexnav.h"
@@ -69,7 +70,11 @@ enum
     MENU_ACTION_PYRAMID_BAG,
     MENU_ACTION_DEBUG,
     MENU_ACTION_DEXNAV,
+    MENU_ACTION_TIPS,
+    MENU_ACTION_COUNT,
 };
+
+#define START_MENU_VISIBLE_ACTIONS 8
 
 // Save status
 enum
@@ -88,7 +93,8 @@ EWRAM_DATA static u8 sSafariBallsWindowId = 0;
 EWRAM_DATA static u8 sBattlePyramidFloorWindowId = 0;
 EWRAM_DATA static u8 sStartMenuCursorPos = 0;
 EWRAM_DATA static u8 sNumStartMenuActions = 0;
-EWRAM_DATA static u8 sCurrentStartMenuActions[9] = {0};
+EWRAM_DATA static u8 sCurrentStartMenuActions[MENU_ACTION_COUNT] = {0};
+EWRAM_DATA static u8 sStartMenuScroll = 0;
 EWRAM_DATA static s8 sInitStartMenuData[2] = {0};
 
 EWRAM_DATA static u8 (*sSaveDialogCallback)(void) = NULL;
@@ -111,6 +117,7 @@ static bool8 StartMenuBattlePyramidRetireCallback(void);
 static bool8 StartMenuBattlePyramidBagCallback(void);
 static bool8 StartMenuDebugCallback(void);
 static bool8 StartMenuDexNavCallback(void);
+static bool8 StartMenuTipsCallback(void);
 
 // Menu callbacks
 static bool8 SaveStartCallback(void);
@@ -188,6 +195,7 @@ static const struct WindowTemplate sWindowTemplate_PyramidPeak = {
 };
 
 static const u8 sText_MenuDebug[] = _("デバッグ");
+static const u8 sText_MenuTips[] = _("TIPS");
 
 static const struct MenuAction sStartMenuItems[] =
 {
@@ -206,6 +214,7 @@ static const struct MenuAction sStartMenuItems[] =
     [MENU_ACTION_PYRAMID_BAG]     = {gText_MenuBag,     {.u8_void = StartMenuBattlePyramidBagCallback}},
     [MENU_ACTION_DEBUG]           = {sText_MenuDebug,   {.u8_void = StartMenuDebugCallback}},
     [MENU_ACTION_DEXNAV]          = {gText_MenuDexNav,  {.u8_void = StartMenuDexNavCallback}},
+    [MENU_ACTION_TIPS]            = {sText_MenuTips,    {.u8_void = StartMenuTipsCallback}},
 };
 
 static const struct BgTemplate sBgTemplates_LinkBattleSave[] =
@@ -283,6 +292,7 @@ static void HideStartMenuDebug(void);
 static void BuildStartMenuActions(void)
 {
     sNumStartMenuActions = 0;
+    AddStartMenuAction(MENU_ACTION_TIPS);
 
     if (IsOverworldLinkActive() == TRUE)
     {
@@ -486,18 +496,19 @@ static bool32 PrintStartMenuActions(s8 *pIndex, u32 count)
 
     do
     {
-        if (sStartMenuItems[sCurrentStartMenuActions[index]].func.u8_void == StartMenuPlayerNameCallback)
+        u8 action = sCurrentStartMenuActions[sStartMenuScroll + index];
+        if (sStartMenuItems[action].func.u8_void == StartMenuPlayerNameCallback)
         {
-            PrintPlayerNameOnWindow(GetStartMenuWindowId(), sStartMenuItems[sCurrentStartMenuActions[index]].text, 8, (index << 4) + 9);
+            PrintPlayerNameOnWindow(GetStartMenuWindowId(), sStartMenuItems[action].text, 8, (index << 4) + 9);
         }
         else
         {
-            StringExpandPlaceholders(gStringVar4, sStartMenuItems[sCurrentStartMenuActions[index]].text);
+            StringExpandPlaceholders(gStringVar4, sStartMenuItems[action].text);
             AddTextPrinterParameterized(GetStartMenuWindowId(), FONT_NORMAL, gStringVar4, 8, (index << 4) + 9, TEXT_SKIP_DRAW, NULL);
         }
 
         index++;
-        if (index >= sNumStartMenuActions)
+        if (index >= min(sNumStartMenuActions, START_MENU_VISIBLE_ACTIONS))
         {
             *pIndex = index;
             return TRUE;
@@ -522,11 +533,15 @@ static bool32 InitStartMenuStep(void)
         break;
     case 1:
         BuildStartMenuActions();
+        if (sStartMenuCursorPos >= sNumStartMenuActions)
+            sStartMenuCursorPos = 0;
+        sStartMenuScroll = sStartMenuCursorPos >= START_MENU_VISIBLE_ACTIONS
+            ? sStartMenuCursorPos - START_MENU_VISIBLE_ACTIONS + 1 : 0;
         sInitStartMenuData[0]++;
         break;
     case 2:
         LoadMessageBoxAndBorderGfx();
-        DrawStdWindowFrame(AddStartMenuWindow(sNumStartMenuActions), FALSE);
+        DrawStdWindowFrame(AddStartMenuWindow(min(sNumStartMenuActions, START_MENU_VISIBLE_ACTIONS)), FALSE);
         sInitStartMenuData[1] = 0;
         sInitStartMenuData[0]++;
         break;
@@ -542,7 +557,8 @@ static bool32 InitStartMenuStep(void)
             sInitStartMenuData[0]++;
         break;
     case 5:
-        sStartMenuCursorPos = InitMenuNormal(GetStartMenuWindowId(), FONT_NORMAL, 0, 9, 16, sNumStartMenuActions, sStartMenuCursorPos);
+        InitMenuNormal(GetStartMenuWindowId(), FONT_NORMAL, 0, 9, 16,
+            min(sNumStartMenuActions, START_MENU_VISIBLE_ACTIONS), sStartMenuCursorPos - sStartMenuScroll);
         CopyWindowToVram(GetStartMenuWindowId(), COPYWIN_MAP);
         return TRUE;
     }
@@ -624,18 +640,47 @@ void ShowStartMenu(void)
     LockPlayerFieldControls();
 }
 
+static void MoveStartMenuCursor(s8 delta)
+{
+    s8 index = 0;
+    u8 oldScroll = sStartMenuScroll;
+
+    if (delta < 0)
+        sStartMenuCursorPos = sStartMenuCursorPos == 0 ? sNumStartMenuActions - 1 : sStartMenuCursorPos - 1;
+    else
+        sStartMenuCursorPos = (sStartMenuCursorPos + 1) % sNumStartMenuActions;
+
+    if (sStartMenuCursorPos < sStartMenuScroll)
+        sStartMenuScroll = sStartMenuCursorPos;
+    else if (sStartMenuCursorPos >= sStartMenuScroll + START_MENU_VISIBLE_ACTIONS)
+        sStartMenuScroll = sStartMenuCursorPos - START_MENU_VISIBLE_ACTIONS + 1;
+
+    if (oldScroll != sStartMenuScroll)
+    {
+        FillWindowPixelBuffer(GetStartMenuWindowId(), PIXEL_FILL(TEXT_COLOR_WHITE));
+        PrintStartMenuActions(&index, START_MENU_VISIBLE_ACTIONS);
+        InitMenuNormal(GetStartMenuWindowId(), FONT_NORMAL, 0, 9, 16,
+            min(sNumStartMenuActions, START_MENU_VISIBLE_ACTIONS), sStartMenuCursorPos - sStartMenuScroll);
+        CopyWindowToVram(GetStartMenuWindowId(), COPYWIN_GFX);
+    }
+    else
+    {
+        Menu_MoveCursor(delta);
+    }
+}
+
 static bool8 HandleStartMenuInput(void)
 {
     if (JOY_NEW(DPAD_UP))
     {
         PlaySE(SE_SELECT);
-        sStartMenuCursorPos = Menu_MoveCursor(-1);
+        MoveStartMenuCursor(-1);
     }
 
     if (JOY_NEW(DPAD_DOWN))
     {
         PlaySE(SE_SELECT);
-        sStartMenuCursorPos = Menu_MoveCursor(1);
+        MoveStartMenuCursor(1);
     }
 
     if (JOY_NEW(A_BUTTON))
@@ -672,6 +717,18 @@ static bool8 HandleStartMenuInput(void)
     }
 
     return FALSE;
+}
+
+static bool8 StartMenuTipsCallback(void)
+{
+    if (gPaletteFade.active)
+        return FALSE;
+
+    PlayRainStoppingSoundEffect();
+    RemoveExtraStartMenuWindows();
+    CleanupOverworldWindowsAndTilemaps();
+    StartInfoViewer(INFO_TIPS, CB2_ReturnToFieldWithOpenMenu);
+    return TRUE;
 }
 
 bool8 StartMenuPokedexCallback(void)

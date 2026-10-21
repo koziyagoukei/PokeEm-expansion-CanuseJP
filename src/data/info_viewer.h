@@ -23,61 +23,67 @@ static const struct InfoViewerStyle sInfoViewerStyle_BlueFrame =
 };
 
 static const u8 sInfoText_TitleFrontierRules[] = _("{JPN}バトルフロンティア");
-static const u8 sInfoText_TitleBannedMons[] = _("{JPN}さんかできない ポケモン");
-static const u8 sInfoText_TitleBannedItems[] = _("{JPN}つかえない もちもの");
+static const u8 sInfoText_TitleBannedMons[] = _("{JPN}きんしポケモン いちらん");
 static const u8 sInfoText_TitleGimmickHelp[] = _("{JPN}ギミック");
 static const u8 sInfoText_TitleDiaryTest[] = _("{JPN}にっき");
 static const u8 sInfoText_TitleMonologueTest[] = _("{JPN}ひとりごと");
 static const u8 sInfoText_TitleChoiceTest[] = _("{JPN}ぶんきテスト");
 
 static const u8 sInfoText_FrontierRulesPage1[] = _(
-    "{JPN}フロンティアでは\n"
-    "レベルと ルールを そろえて\n"
-    "バトルを おこないます\n\n"
-    "つかえる ポケモンや\n"
-    "もちものには せいげんがあります");
+    "{JPN}タマゴは さんかできません。\n"
+    "おなじ しゅるいの ポケモンや\n"
+    "おなじ もちものは えらべません。\n"
+    "きんしポケモンの あつかいは\n"
+    "ハブで せっていした ルールに\n"
+    "したがいます。");
 
 static const u8 sInfoText_FrontierRulesPage2[] = _(
-    "{JPN}いちど ちょうせんを はじめると\n"
-    "きめられた かいすうまで\n"
-    "れんぞくで たたかいます\n\n"
-    "とちゅうで まけると\n"
-    "その ちょうせんは おわります");
+    "{JPN}レベル50では レベル51いじょうも\n"
+    "さんかでき ちょうせんちゅうだけ\n"
+    "レベル50に なります。\n"
+    "オープンでは あいての レベルが\n"
+    "こちらに あわせて きまります。\n"
+    "あいては さいてい レベル60です。");
 
 static const u8 sInfoText_BannedMonsPage1[] = _(
-    "{JPN}ミュウツー ホウオウ ルギア\n"
-    "グラードン カイオーガ\n"
-    "レックウザ ディアルガ パルキア\n"
-    "ギラティナ レシラム ゼクロム\n"
-    "キュレム ゼルネアス イベルタル");
+    "{JPN}せつめいの あとに たいしょうの\n"
+    "ポケモンを すべて ひょうじします。\n"
+    "フォルムちがいは まとめています。\n"
+    "きんしルールでは さんかできません。\n"
+    "かいきんルールでは おたがいに\n"
+    "たいしょうを 1ぴきまで つかえます。");
 
-static const u8 sInfoText_BannedMonsPage2[] = _(
-    "{JPN}ジガルデ ソルガレオ ルナアーラ\n"
-    "ネクロズマ ザシアン ザマゼンタ\n"
-    "ムゲンダイナ コライドン\n"
-    "ミライドン テラパゴス\n"
-    "そのほか とくべつな ポケモン");
-
-static const u8 sInfoText_BannedItemsPage1[] = _(
-    "{JPN}こころのしずく など\n"
-    "フロンティアの ルールで\n"
-    "もちこめない もちものが\n"
-    "あります\n\n"
-    "くわしくは しせつごとの\n"
-    "せつめいを かくにんしてください");
+static const u8 sInfoText_FrontierRulesPage3[] = _(
+    "{JPN}とちゅうで まけるか リタイアすると\n"
+    "れんしょうは おわります。\n"
+    "ちょうせんちゅうは わざの へんこうや\n"
+    "リゾートへの ワープは できません。\n"
+    "ちゅうだんは しせつの あんないか\n"
+    "メニューの やすむを つかいます。");
 
 static const u8 sInfoText_GimmickHelpPage1[] = _(
-    "{JPN}しせつごとに\n"
-    "とくべつな ルールや\n"
-    "ギミックが あります\n\n"
-    "せつめいを よんでから\n"
-    "ちょうせんしてください");
+    "{JPN}つかえる ギミックは しせつごとに\n"
+    "きまっており おたがいに おなじです。\n"
+    "メガには たいおうする メガストーン\n"
+    "Zワザには わざに あう Zクリスタルが\n"
+    "ひつようです。 せんようZワザには\n"
+    "しゅるいと わざの じょうけんも あります。");
 
 static const u8 sInfoText_GimmickHelpPage2[] = _(
-    "{JPN}ギミックは\n"
-    "バトルの じゅんびや\n"
-    "ポケモンの えらびかたに\n"
-    "かかわることが あります");
+    "{JPN}ダイマックスは 3ターン つづきます。\n"
+    "テラスタルは テラタイプに かわります。\n"
+    "しゅるいや もちものに よっては\n"
+    "えらべない ギミックも あります。\n"
+    "いちど ギミックを つかった こたいは\n"
+    "べつの ギミックを かさねられません。");
+
+static const u8 sInfoText_GimmickHelpPage3[] = _(
+    "{JPN}ウルトラバーストは にっしょくか\n"
+    "げっしょくの ネクロズマに\n"
+    "ウルトラネクロZを もたせて つかいます。\n"
+    "ギミックの かいすうは バトルごとです。\n"
+    "しせつで きんしされた ギミックは\n"
+    "もちものを そろえても つかえません。");
 
 static const u8 sInfoText_DiaryTestPage1[] = _(
     "{JPN}きょうは フロンティアで\n"
@@ -123,21 +129,19 @@ static const u8 *const sInfoViewerPages_FrontierRules[] =
 {
     sInfoText_FrontierRulesPage1,
     sInfoText_FrontierRulesPage2,
-    sInfoText_BannedMonsPage1,
-    sInfoText_BannedMonsPage2,
-    sInfoText_BannedItemsPage1,
+    sInfoText_FrontierRulesPage3,
 };
 
 static const u8 *const sInfoViewerPages_BannedMons[] =
 {
     sInfoText_BannedMonsPage1,
-    sInfoText_BannedMonsPage2,
 };
 
 static const u8 *const sInfoViewerPages_GimmickHelp[] =
 {
     sInfoText_GimmickHelpPage1,
     sInfoText_GimmickHelpPage2,
+    sInfoText_GimmickHelpPage3,
 };
 
 static const u8 *const sInfoViewerPages_DiaryTest[] =
@@ -186,8 +190,27 @@ static const struct InfoViewerChoice sInfoViewerChoices_ChoiceTest[] =
     },
 };
 
+#include "frontier_tips.h"
+
 static const struct InfoViewerEntry sInfoViewerEntries[INFO_COUNT] =
 {
+    [INFO_TIPS] = {
+        .title = sInfoText_TitleTips,
+        .choices = sInfoViewerChoices_Tips,
+        .choiceCount = ARRAY_COUNT(sInfoViewerChoices_Tips),
+    },
+    [INFO_TIPS_FACILITIES] = {
+        .title = sInfoText_TitleFacilities,
+        .choices = sInfoViewerChoices_Facilities,
+        .choiceCount = ARRAY_COUNT(sInfoViewerChoices_Facilities),
+    },
+    [INFO_TIPS_TOWER] = TIPS_FACILITY_ENTRY(Tower),
+    [INFO_TIPS_DOME] = TIPS_FACILITY_ENTRY(Dome),
+    [INFO_TIPS_PALACE] = TIPS_FACILITY_ENTRY(Palace),
+    [INFO_TIPS_ARENA] = TIPS_FACILITY_ENTRY(Arena),
+    [INFO_TIPS_FACTORY] = TIPS_FACILITY_ENTRY(Factory),
+    [INFO_TIPS_PIKE] = TIPS_FACILITY_ENTRY(Pike),
+    [INFO_TIPS_PYRAMID] = TIPS_FACILITY_ENTRY(Pyramid),
     [INFO_FRONTIER_RULES] =
     {
         .title = sInfoText_TitleFrontierRules,

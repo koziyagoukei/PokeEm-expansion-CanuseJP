@@ -7,7 +7,16 @@
 #define INFO_DIARY_TEST      3
 #define INFO_MONOLOGUE_TEST  4
 #define INFO_CHOICE_TEST     5
-#define INFO_COUNT           6
+#define INFO_TIPS            6
+#define INFO_TIPS_FACILITIES 7
+#define INFO_TIPS_TOWER      8
+#define INFO_TIPS_DOME       9
+#define INFO_TIPS_PALACE     10
+#define INFO_TIPS_ARENA      11
+#define INFO_TIPS_FACTORY    12
+#define INFO_TIPS_PIKE       13
+#define INFO_TIPS_PYRAMID    14
+#define INFO_COUNT          15
 
 #define INFO_VIEWER_CLOSE    0xFFFE
 #define INFO_VIEWER_BACK     0xFFFF
