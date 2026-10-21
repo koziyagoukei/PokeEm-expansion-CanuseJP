@@ -1,0 +1,4475 @@
+{
+  "format_version": 1,
+  "baserom": {
+    "file": "baserom.gba",
+    "gameCode": "BPEJ",
+    "size": 16777216,
+    "sha1": "d7cf8f156ba9c455d164e1ea780a6bf1945465c2",
+    "crc32": "4881f3f8"
+  },
+  "asset_count": 85,
+  "assets": [
+    {
+      "symbol_id": "bpej:contest_ui:gContestInterfaceAudiencePalette",
+      "status": "verified",
+      "group": "contest",
+      "label": "gContestInterfaceAudiencePalette",
+      "consumer_file": "src/graphics.c",
+      "element_type": "u16",
+      "source_file": "graphics/contest/interface.png",
+      "source_conversion": [
+        ".gbapal"
+      ],
+      "comparison_file": "build/assets/graphics/contest/interface.png.gbapal",
+      "rom_offset": "0x00C16E98",
+      "size": 280,
+      "compression": "gba_lz77",
+      "compressed_payload_size": 278,
+      "transform": "gba_lz77_decompress",
+      "output_representation": "raw",
+      "output_path": "build/extracted_contest/contest/interface.gbapal",
+      "custom_path": "graphics/custom/bpej/contest/contest/interface.gbapal",
+      "expected_source_hash": "19f37f7a8575129705bca92f4f834a394caef4e5",
+      "expected_hash": "213ea08fee9e1095257f5d3ce0ebbb72e0554ad9",
+      "decoded_size": 512,
+      "expected_decoded_hash": "213ea08fee9e1095257f5d3ce0ebbb72e0554ad9",
+      "verification": {
+        "byte_match": true,
+        "method": "lz77_decoded_byte_match",
+        "comparison_size": 512,
+        "comparison_sha1": "213ea08fee9e1095257f5d3ce0ebbb72e0554ad9",
+        "references": [
+          {
+            "file": "asm/contest.s",
+            "function": "LoadContestBgAfterMoveAnim",
+            "line": 139
+          },
+          {
+            "file": "asm/contest.s",
+            "function": "SetupContestGraphics",
+            "line": 1126
+          }
+        ],
+        "detail": "The entire decoded ROM range matches the current converted asset byte for byte.",
+        "kind": "identical"
+      },
+      "relations": [
+        {
+          "kind": "replaces_asset",
+          "target": "graphics/contest/interface.png"
+        },
+        {
+          "kind": "consumed_by",
+          "target": "src/graphics.c:gContestInterfaceAudiencePalette"
+        }
+      ]
+    },
+    {
+      "symbol_id": "bpej:contest_ui:gContestAudienceTilemap",
+      "status": "verified",
+      "group": "contest",
+      "label": "gContestAudienceTilemap",
+      "consumer_file": "src/graphics.c",
+      "element_type": "u32",
+      "source_file": "graphics/contest/audience.bin",
+      "source_conversion": [
+        ".smolTM"
+      ],
+      "comparison_file": "graphics/contest/audience.bin",
+      "rom_offset": "0x00C16FB0",
+      "size": 456,
+      "compression": "gba_lz77",
+      "compressed_payload_size": 453,
+      "transform": "copy",
+      "output_representation": "gba_lz77_stream",
+      "output_path": "build/extracted_contest/contest/audience.bin.lz",
+      "custom_path": "graphics/custom/bpej/contest/contest/audience.bin.lz",
+      "expected_source_hash": "25b1a2ba8fcaf29382c687e03fb8df70d40cf6d5",
+      "expected_hash": "25b1a2ba8fcaf29382c687e03fb8df70d40cf6d5",
+      "decoded_size": 2048,
+      "expected_decoded_hash": "fba9d3afc6d2899f97a7951b5274a82995943f34",
+      "verification": {
+        "byte_match": true,
+        "method": "lz77_decoded_byte_match",
+        "comparison_size": 2048,
+        "comparison_sha1": "fba9d3afc6d2899f97a7951b5274a82995943f34",
+        "references": [
+          {
+            "file": "asm/contest.s",
+            "function": "LoadContestBgAfterMoveAnim",
+            "line": 138
+          },
+          {
+            "file": "asm/contest.s",
+            "function": "SetupContestGraphics",
+            "line": 1052
+          }
+        ],
+        "detail": "The entire decoded ROM range matches the current converted asset byte for byte.",
+        "kind": "identical"
+      },
+      "relations": [
+        {
+          "kind": "replaces_asset",
+          "target": "graphics/contest/audience.bin"
+        },
+        {
+          "kind": "consumed_by",
+          "target": "src/graphics.c:gContestAudienceTilemap"
+        }
+      ]
+    },
+    {
+      "symbol_id": "bpej:contest_ui:gContestInterfaceTilemap",
+      "status": "verified",
+      "group": "contest",
+      "label": "gContestInterfaceTilemap",
+      "consumer_file": "src/graphics.c",
+      "element_type": "u32",
+      "source_file": "graphics/contest/interface.bin",
+      "source_conversion": [
+        ".smolTM"
+      ],
+      "comparison_file": "graphics/contest/interface.bin",
+      "rom_offset": "0x00C17178",
+      "size": 672,
+      "compression": "gba_lz77",
+      "compressed_payload_size": 671,
+      "transform": "copy",
+      "output_representation": "gba_lz77_stream",
+      "output_path": "build/extracted_contest/contest/interface.bin.lz",
+      "custom_path": "graphics/custom/bpej/contest/contest/interface.bin.lz",
+      "expected_source_hash": "09f020994418356b615d8d8cce774078d7ac5995",
+      "expected_hash": "09f020994418356b615d8d8cce774078d7ac5995",
+      "decoded_size": 4096,
+      "expected_decoded_hash": "11fc73b7e819ca49b198f687c8d74af5aefd8f08",
+      "verification": {
+        "byte_match": true,
+        "method": "lz77_decoded_byte_match",
+        "comparison_size": 4096,
+        "comparison_sha1": "11fc73b7e819ca49b198f687c8d74af5aefd8f08",
+        "references": [
+          {
+            "file": "asm/contest.s",
+            "function": "SetupContestGraphics",
+            "line": 1073
+          }
+        ],
+        "detail": "The entire decoded ROM range matches the current converted asset byte for byte.",
+        "kind": "identical"
+      },
+      "relations": [
+        {
+          "kind": "replaces_asset",
+          "target": "graphics/contest/interface.bin"
+        },
+        {
+          "kind": "consumed_by",
+          "target": "src/graphics.c:gContestInterfaceTilemap"
+        }
+      ]
+    },
+    {
+      "symbol_id": "bpej:contest_ui:gContestCurtainTilemap",
+      "status": "verified",
+      "group": "contest",
+      "label": "gContestCurtainTilemap",
+      "consumer_file": "src/graphics.c",
+      "element_type": "u32",
+      "source_file": "graphics/contest/curtain.bin",
+      "source_conversion": [
+        ".smolTM"
+      ],
+      "comparison_file": "graphics/contest/curtain.bin",
+      "rom_offset": "0x00C17988",
+      "size": 304,
+      "compression": "gba_lz77",
+      "compressed_payload_size": 301,
+      "transform": "copy",
+      "output_representation": "gba_lz77_stream",
+      "output_path": "build/extracted_contest/contest/curtain.bin.lz",
+      "custom_path": "graphics/custom/bpej/contest/contest/curtain.bin.lz",
+      "expected_source_hash": "c2b4eaab7714950e151ae2a3856426807d39100f",
+      "expected_hash": "c2b4eaab7714950e151ae2a3856426807d39100f",
+      "decoded_size": 2048,
+      "expected_decoded_hash": "9a6096f92c02db3a28bff548867dd184fa318931",
+      "verification": {
+        "byte_match": true,
+        "method": "lz77_decoded_byte_match",
+        "comparison_size": 2048,
+        "comparison_sha1": "9a6096f92c02db3a28bff548867dd184fa318931",
+        "references": [
+          {
+            "file": "asm/contest.s",
+            "function": "sub_080DD988",
+            "line": 13678
+          }
+        ],
+        "detail": "The entire decoded ROM range matches the current converted asset byte for byte.",
+        "kind": "identical"
+      },
+      "relations": [
+        {
+          "kind": "replaces_asset",
+          "target": "graphics/contest/curtain.bin"
+        },
+        {
+          "kind": "consumed_by",
+          "target": "src/graphics.c:gContestCurtainTilemap"
+        }
+      ]
+    },
+    {
+      "symbol_id": "bpej:contest_ui:gContestAudienceGfx",
+      "status": "verified",
+      "group": "contest",
+      "label": "gContestAudienceGfx",
+      "consumer_file": "src/graphics.c",
+      "element_type": "u32",
+      "source_file": "graphics/contest/audience.png",
+      "source_conversion": [
+        ".4bpp.smol"
+      ],
+      "comparison_file": "build/assets/graphics/contest/audience.png.4bpp",
+      "rom_offset": "0x00C18650",
+      "size": 3164,
+      "compression": "gba_lz77",
+      "compressed_payload_size": 3161,
+      "transform": "copy",
+      "output_representation": "gba_lz77_stream",
+      "output_path": "build/extracted_contest/contest/audience.4bpp.lz",
+      "custom_path": "graphics/custom/bpej/contest/contest/audience.4bpp.lz",
+      "expected_source_hash": "98916781468e2283f1e3c6b99d13f689bd6b279d",
+      "expected_hash": "98916781468e2283f1e3c6b99d13f689bd6b279d",
+      "decoded_size": 8192,
+      "expected_decoded_hash": "1dfe911813bd77fcdc6f35a254b016fa1c7446d5",
+      "verification": {
+        "byte_match": true,
+        "method": "lz77_decoded_byte_match",
+        "comparison_size": 8192,
+        "comparison_sha1": "1dfe911813bd77fcdc6f35a254b016fa1c7446d5",
+        "references": [
+          {
+            "file": "asm/contest.s",
+            "function": "LoadContestBgAfterMoveAnim",
+            "line": 136
+          },
+          {
+            "file": "asm/contest.s",
+            "function": "SetupContestGraphics",
+            "line": 1037
+          }
+        ],
+        "detail": "The entire decoded ROM range matches the current converted asset byte for byte.",
+        "kind": "identical"
+      },
+      "relations": [
+        {
+          "kind": "replaces_asset",
+          "target": "graphics/contest/audience.png"
+        },
+        {
+          "kind": "consumed_by",
+          "target": "src/graphics.c:gContestAudienceGfx"
+        }
+      ]
+    },
+    {
+      "symbol_id": "bpej:contest_ui:gContestFaces_Gfx",
+      "status": "verified",
+      "group": "contest",
+      "label": "gContestFaces_Gfx",
+      "consumer_file": "src/graphics.c",
+      "element_type": "u32",
+      "source_file": "graphics/contest/faces.png",
+      "source_conversion": [
+        ".4bpp.smol"
+      ],
+      "comparison_file": "build/assets/graphics/contest/faces.png.4bpp",
+      "rom_offset": "0x00C192AC",
+      "size": 284,
+      "compression": "gba_lz77",
+      "compressed_payload_size": 284,
+      "transform": "copy",
+      "output_representation": "gba_lz77_stream",
+      "output_path": "build/extracted_contest/contest/faces.4bpp.lz",
+      "custom_path": "graphics/custom/bpej/contest/contest/faces.4bpp.lz",
+      "expected_source_hash": "0a69eff03e1a5fd805aac360a66d4cdd7fd60c08",
+      "expected_hash": "0a69eff03e1a5fd805aac360a66d4cdd7fd60c08",
+      "decoded_size": 384,
+      "expected_decoded_hash": "30657b40a8751d28d0f4fdf6ad80043ab72b62a9",
+      "verification": {
+        "byte_match": true,
+        "method": "lz77_decoded_byte_match",
+        "comparison_size": 384,
+        "comparison_sha1": "30657b40a8751d28d0f4fdf6ad80043ab72b62a9",
+        "references": [],
+        "detail": "The entire decoded ROM range matches the current converted asset byte for byte.",
+        "kind": "identical"
+      },
+      "relations": [
+        {
+          "kind": "replaces_asset",
+          "target": "graphics/contest/faces.png"
+        },
+        {
+          "kind": "consumed_by",
+          "target": "src/graphics.c:gContestFaces_Gfx"
+        }
+      ]
+    },
+    {
+      "symbol_id": "bpej:contest_ui:gContestJudgeSymbolsGfx",
+      "status": "verified",
+      "group": "contest",
+      "label": "gContestJudgeSymbolsGfx",
+      "consumer_file": "src/graphics.c",
+      "element_type": "u32",
+      "source_file": "graphics/contest/judge_symbols.png",
+      "source_conversion": [
+        ".4bpp.smol"
+      ],
+      "comparison_file": "build/assets/graphics/contest/judge_symbols.png.4bpp",
+      "rom_offset": "0x00C193C8",
+      "size": 420,
+      "compression": "gba_lz77",
+      "compressed_payload_size": 417,
+      "transform": "copy",
+      "output_representation": "gba_lz77_stream",
+      "output_path": "build/extracted_contest/contest/judge_symbols.4bpp.lz",
+      "custom_path": "graphics/custom/bpej/contest/contest/judge_symbols.4bpp.lz",
+      "expected_source_hash": "6ecc13714cafe1b9449c639854e2efc5d5798637",
+      "expected_hash": "6ecc13714cafe1b9449c639854e2efc5d5798637",
+      "decoded_size": 896,
+      "expected_decoded_hash": "0a3e43d8b2be432addbd9c44cd48ab79e6f92149",
+      "verification": {
+        "byte_match": true,
+        "method": "lz77_decoded_byte_match",
+        "comparison_size": 896,
+        "comparison_sha1": "0a3e43d8b2be432addbd9c44cd48ab79e6f92149",
+        "references": [],
+        "detail": "The entire decoded ROM range matches the current converted asset byte for byte.",
+        "kind": "identical"
+      },
+      "relations": [
+        {
+          "kind": "replaces_asset",
+          "target": "graphics/contest/judge_symbols.png"
+        },
+        {
+          "kind": "consumed_by",
+          "target": "src/graphics.c:gContestJudgeSymbolsGfx"
+        }
+      ]
+    },
+    {
+      "symbol_id": "bpej:contest_ui:gContestJudgeSymbolsPal",
+      "status": "verified",
+      "group": "contest",
+      "label": "gContestJudgeSymbolsPal",
+      "consumer_file": "src/graphics.c",
+      "element_type": "u16",
+      "source_file": "graphics/contest/judge_symbols.png",
+      "source_conversion": [
+        ".gbapal"
+      ],
+      "comparison_file": "build/assets/graphics/contest/judge_symbols.png.gbapal",
+      "rom_offset": "0x00C1956C",
+      "size": 40,
+      "compression": "gba_lz77",
+      "compressed_payload_size": 40,
+      "transform": "gba_lz77_decompress",
+      "output_representation": "raw",
+      "output_path": "build/extracted_contest/contest/judge_symbols.gbapal",
+      "custom_path": "graphics/custom/bpej/contest/contest/judge_symbols.gbapal",
+      "expected_source_hash": "64db665737f93f75735b460e2cf3838dbd95f7bb",
+      "expected_hash": "7f99f495e4d2f4de48ad9155643acba71e4673dd",
+      "decoded_size": 32,
+      "expected_decoded_hash": "7f99f495e4d2f4de48ad9155643acba71e4673dd",
+      "verification": {
+        "byte_match": true,
+        "method": "lz77_decoded_byte_match",
+        "comparison_size": 32,
+        "comparison_sha1": "7f99f495e4d2f4de48ad9155643acba71e4673dd",
+        "references": [],
+        "detail": "The entire decoded ROM range matches the current converted asset byte for byte.",
+        "kind": "identical"
+      },
+      "relations": [
+        {
+          "kind": "replaces_asset",
+          "target": "graphics/contest/judge_symbols.png"
+        },
+        {
+          "kind": "consumed_by",
+          "target": "src/graphics.c:gContestJudgeSymbolsPal"
+        }
+      ]
+    },
+    {
+      "symbol_id": "bpej:contest_ui:gContestSliderHeart_Gfx",
+      "status": "verified",
+      "group": "contest",
+      "label": "gContestSliderHeart_Gfx",
+      "consumer_file": "src/graphics.c",
+      "element_type": "u8",
+      "source_file": "graphics/contest/slider_heart.png",
+      "source_conversion": [
+        ".4bpp"
+      ],
+      "comparison_file": "build/assets/graphics/contest/slider_heart.png.4bpp",
+      "rom_offset": "0x00C19594",
+      "size": 32,
+      "compression": "none",
+      "compressed_payload_size": null,
+      "transform": "copy",
+      "output_representation": "raw",
+      "output_path": "build/extracted_contest/contest/slider_heart.4bpp",
+      "custom_path": "graphics/custom/bpej/contest/contest/slider_heart.4bpp",
+      "expected_source_hash": "15639ee824a3d12da37166d49327356f96cbf5bd",
+      "expected_hash": "15639ee824a3d12da37166d49327356f96cbf5bd",
+      "decoded_size": 32,
+      "expected_decoded_hash": "15639ee824a3d12da37166d49327356f96cbf5bd",
+      "verification": {
+        "byte_match": true,
+        "method": "raw_byte_match",
+        "comparison_size": 32,
+        "comparison_sha1": "15639ee824a3d12da37166d49327356f96cbf5bd",
+        "references": [],
+        "detail": "The entire uncompressed ROM range matches the current converted asset byte for byte.",
+        "kind": "identical"
+      },
+      "relations": [
+        {
+          "kind": "replaces_asset",
+          "target": "graphics/contest/slider_heart.png"
+        },
+        {
+          "kind": "consumed_by",
+          "target": "src/graphics.c:gContestSliderHeart_Gfx"
+        }
+      ]
+    },
+    {
+      "symbol_id": "bpej:contest_ui:gContestResults_WinnerBanner_Tilemap",
+      "status": "verified",
+      "group": "contest",
+      "label": "gContestResults_WinnerBanner_Tilemap",
+      "consumer_file": "src/graphics.c",
+      "element_type": "u32",
+      "source_file": "graphics/contest/results_screen/winner_banner.bin",
+      "source_conversion": [
+        ".smolTM"
+      ],
+      "comparison_file": "graphics/contest/results_screen/winner_banner.bin",
+      "rom_offset": "0x00C19F34",
+      "size": 276,
+      "compression": "gba_lz77",
+      "compressed_payload_size": 274,
+      "transform": "copy",
+      "output_representation": "gba_lz77_stream",
+      "output_path": "build/extracted_contest/contest/results_screen/winner_banner.bin.lz",
+      "custom_path": "graphics/custom/bpej/contest/contest/results_screen/winner_banner.bin.lz",
+      "expected_source_hash": "b73cc88068e87d2d892a1bdac708cac46611c605",
+      "expected_hash": "b73cc88068e87d2d892a1bdac708cac46611c605",
+      "decoded_size": 2048,
+      "expected_decoded_hash": "5266c31292917acf397f8998b8236f6b8eea5f9b",
+      "verification": {
+        "byte_match": true,
+        "method": "lz77_decoded_byte_match",
+        "comparison_size": 2048,
+        "comparison_sha1": "5266c31292917acf397f8998b8236f6b8eea5f9b",
+        "references": [
+          {
+            "file": "asm/contest_link_80F57C4.s",
+            "function": "sub_080F6114",
+            "line": 234
+          }
+        ],
+        "detail": "The entire decoded ROM range matches the current converted asset byte for byte.",
+        "kind": "identical"
+      },
+      "relations": [
+        {
+          "kind": "replaces_asset",
+          "target": "graphics/contest/results_screen/winner_banner.bin"
+        },
+        {
+          "kind": "consumed_by",
+          "target": "src/graphics.c:gContestResults_WinnerBanner_Tilemap"
+        }
+      ]
+    },
+    {
+      "symbol_id": "bpej:contest_ui:gContestResults_Interface_Tilemap",
+      "status": "verified",
+      "group": "contest",
+      "label": "gContestResults_Interface_Tilemap",
+      "consumer_file": "src/graphics.c",
+      "element_type": "u32",
+      "source_file": "graphics/contest/results_screen/interface.bin",
+      "source_conversion": [
+        ".smolTM"
+      ],
+      "comparison_file": "graphics/contest/results_screen/interface.bin",
+      "rom_offset": "0x00C1A048",
+      "size": 300,
+      "compression": "gba_lz77",
+      "compressed_payload_size": 297,
+      "transform": "copy",
+      "output_representation": "gba_lz77_stream",
+      "output_path": "build/extracted_contest/contest/results_screen/interface.bin.lz",
+      "custom_path": "graphics/custom/bpej/contest/contest/results_screen/interface.bin.lz",
+      "expected_source_hash": "72f6d3edda7238c16d8000b12135580cee33f144",
+      "expected_hash": "72f6d3edda7238c16d8000b12135580cee33f144",
+      "decoded_size": 2048,
+      "expected_decoded_hash": "259d3a6fffd03a129088b64fc419fa5be389fe4b",
+      "verification": {
+        "byte_match": true,
+        "method": "lz77_decoded_byte_match",
+        "comparison_size": 2048,
+        "comparison_sha1": "259d3a6fffd03a129088b64fc419fa5be389fe4b",
+        "references": [
+          {
+            "file": "asm/contest_link_80F57C4.s",
+            "function": "sub_080F6114",
+            "line": 233
+          }
+        ],
+        "detail": "The entire decoded ROM range matches the current converted asset byte for byte.",
+        "kind": "identical"
+      },
+      "relations": [
+        {
+          "kind": "replaces_asset",
+          "target": "graphics/contest/results_screen/interface.bin"
+        },
+        {
+          "kind": "consumed_by",
+          "target": "src/graphics.c:gContestResults_Interface_Tilemap"
+        }
+      ]
+    },
+    {
+      "symbol_id": "bpej:contest_ui:gContestResults_Bg_Tilemap",
+      "status": "verified",
+      "group": "contest",
+      "label": "gContestResults_Bg_Tilemap",
+      "consumer_file": "src/graphics.c",
+      "element_type": "u32",
+      "source_file": "graphics/contest/results_screen/bg.bin",
+      "source_conversion": [
+        ".smolTM"
+      ],
+      "comparison_file": "graphics/contest/results_screen/bg.bin",
+      "rom_offset": "0x00C1A174",
+      "size": 392,
+      "compression": "gba_lz77",
+      "compressed_payload_size": 392,
+      "transform": "copy",
+      "output_representation": "gba_lz77_stream",
+      "output_path": "build/extracted_contest/contest/results_screen/bg.bin.lz",
+      "custom_path": "graphics/custom/bpej/contest/contest/results_screen/bg.bin.lz",
+      "expected_source_hash": "981c1e00277420ff63fbe679ac6b2284b903bfc6",
+      "expected_hash": "981c1e00277420ff63fbe679ac6b2284b903bfc6",
+      "decoded_size": 2048,
+      "expected_decoded_hash": "c66377dfa56ada0a325d1315917e359695baa4c9",
+      "verification": {
+        "byte_match": true,
+        "method": "lz77_decoded_byte_match",
+        "comparison_size": 2048,
+        "comparison_sha1": "c66377dfa56ada0a325d1315917e359695baa4c9",
+        "references": [
+          {
+            "file": "asm/contest_link_80F57C4.s",
+            "function": "sub_080F6114",
+            "line": 232
+          }
+        ],
+        "detail": "The entire decoded ROM range matches the current converted asset byte for byte.",
+        "kind": "identical"
+      },
+      "relations": [
+        {
+          "kind": "replaces_asset",
+          "target": "graphics/contest/results_screen/bg.bin"
+        },
+        {
+          "kind": "consumed_by",
+          "target": "src/graphics.c:gContestResults_Bg_Tilemap"
+        }
+      ]
+    },
+    {
+      "symbol_id": "bpej:contest_ui:gContestResults_Pal",
+      "status": "verified",
+      "group": "contest",
+      "label": "gContestResults_Pal",
+      "consumer_file": "src/graphics.c",
+      "element_type": "u16",
+      "source_file": "graphics/contest/results_screen/tiles.png",
+      "source_conversion": [
+        ".gbapal"
+      ],
+      "comparison_file": "build/assets/graphics/contest/results_screen/tiles.png.gbapal",
+      "rom_offset": "0x00C1A2FC",
+      "size": 236,
+      "compression": "gba_lz77",
+      "compressed_payload_size": 234,
+      "transform": "gba_lz77_decompress",
+      "output_representation": "raw",
+      "output_path": "build/extracted_contest/contest/results_screen/tiles.gbapal",
+      "custom_path": "graphics/custom/bpej/contest/contest/results_screen/tiles.gbapal",
+      "expected_source_hash": "4a217de2a70b277356ff732f4fc56ca559f21a98",
+      "expected_hash": "f73298a92dd874638b4893bd57b8fe9ae8042552",
+      "decoded_size": 512,
+      "expected_decoded_hash": "f73298a92dd874638b4893bd57b8fe9ae8042552",
+      "verification": {
+        "byte_match": true,
+        "method": "lz77_decoded_byte_match",
+        "comparison_size": 512,
+        "comparison_sha1": "f73298a92dd874638b4893bd57b8fe9ae8042552",
+        "references": [
+          {
+            "file": "asm/contest_link_80F57C4.s",
+            "function": "sub_080F6114",
+            "line": 235
+          }
+        ],
+        "detail": "The entire decoded ROM range matches the current converted asset byte for byte.",
+        "kind": "identical"
+      },
+      "relations": [
+        {
+          "kind": "replaces_asset",
+          "target": "graphics/contest/results_screen/tiles.png"
+        },
+        {
+          "kind": "consumed_by",
+          "target": "src/graphics.c:gContestResults_Pal"
+        }
+      ]
+    },
+    {
+      "symbol_id": "bpej:contest_ui:gContestJudgeGfx",
+      "status": "verified",
+      "group": "contest",
+      "label": "gContestJudgeGfx",
+      "consumer_file": "src/graphics.c",
+      "element_type": "u32",
+      "source_file": "graphics/contest/judge.png",
+      "source_conversion": [
+        ".4bpp.smol"
+      ],
+      "comparison_file": "build/assets/graphics/contest/judge.png.4bpp",
+      "rom_offset": "0x00C1C42C",
+      "size": 724,
+      "compression": "gba_lz77",
+      "compressed_payload_size": 723,
+      "transform": "copy",
+      "output_representation": "gba_lz77_stream",
+      "output_path": "build/extracted_contest/contest/judge.4bpp.lz",
+      "custom_path": "graphics/custom/bpej/contest/contest/judge.4bpp.lz",
+      "expected_source_hash": "c89a998e6bb072a9fc1db061950e75e79ea83eaa",
+      "expected_hash": "c89a998e6bb072a9fc1db061950e75e79ea83eaa",
+      "decoded_size": 2048,
+      "expected_decoded_hash": "1ed61951653ca22c2775d98073758468e9b3abca",
+      "verification": {
+        "byte_match": true,
+        "method": "lz77_decoded_byte_match",
+        "comparison_size": 2048,
+        "comparison_sha1": "1ed61951653ca22c2775d98073758468e9b3abca",
+        "references": [],
+        "detail": "The entire decoded ROM range matches the current converted asset byte for byte.",
+        "kind": "identical"
+      },
+      "relations": [
+        {
+          "kind": "replaces_asset",
+          "target": "graphics/contest/judge.png"
+        },
+        {
+          "kind": "consumed_by",
+          "target": "src/graphics.c:gContestJudgeGfx"
+        }
+      ]
+    },
+    {
+      "symbol_id": "bpej:contest_ui:gContest2Pal",
+      "status": "verified",
+      "group": "contest",
+      "label": "gContest2Pal",
+      "consumer_file": "src/graphics.c",
+      "element_type": "u16",
+      "source_file": "graphics/contest/judge.png",
+      "source_conversion": [
+        ".gbapal"
+      ],
+      "comparison_file": "build/assets/graphics/contest/judge.png.gbapal",
+      "rom_offset": "0x00C1C700",
+      "size": 40,
+      "compression": "gba_lz77",
+      "compressed_payload_size": 40,
+      "transform": "gba_lz77_decompress",
+      "output_representation": "raw",
+      "output_path": "build/extracted_contest/contest/judge.gbapal",
+      "custom_path": "graphics/custom/bpej/contest/contest/judge.gbapal",
+      "expected_source_hash": "878e62928d6958e3d1e5d889c6a69f402f6a8e74",
+      "expected_hash": "36e80354c079f7f441167759f0d984c84f820467",
+      "decoded_size": 32,
+      "expected_decoded_hash": "36e80354c079f7f441167759f0d984c84f820467",
+      "verification": {
+        "byte_match": true,
+        "method": "lz77_decoded_byte_match",
+        "comparison_size": 32,
+        "comparison_sha1": "36e80354c079f7f441167759f0d984c84f820467",
+        "references": [
+          {
+            "file": "asm/contest.s",
+            "function": "sub_080DA828",
+            "line": 7085
+          }
+        ],
+        "detail": "The entire decoded ROM range matches the current converted asset byte for byte.",
+        "kind": "identical"
+      },
+      "relations": [
+        {
+          "kind": "replaces_asset",
+          "target": "graphics/contest/judge.png"
+        },
+        {
+          "kind": "consumed_by",
+          "target": "src/graphics.c:gContest2Pal"
+        }
+      ]
+    },
+    {
+      "symbol_id": "bpej:contest_ui:gContestNextTurnNumbersGfx",
+      "status": "verified",
+      "group": "contest",
+      "label": "gContestNextTurnNumbersGfx",
+      "consumer_file": "src/graphics.c",
+      "element_type": "u8",
+      "source_file": "graphics/contest/nextturn_numbers.png",
+      "source_conversion": [
+        ".4bpp"
+      ],
+      "comparison_file": "build/assets/graphics/contest/nextturn_numbers.png.4bpp",
+      "rom_offset": "0x00D8E97C",
+      "size": 128,
+      "compression": "none",
+      "compressed_payload_size": null,
+      "transform": "copy",
+      "output_representation": "raw",
+      "output_path": "build/extracted_contest/contest/nextturn_numbers.4bpp",
+      "custom_path": "graphics/custom/bpej/contest/contest/nextturn_numbers.4bpp",
+      "expected_source_hash": "04fcb764f7f7fac91b64f2db57698ba4a2ef65a1",
+      "expected_hash": "04fcb764f7f7fac91b64f2db57698ba4a2ef65a1",
+      "decoded_size": 128,
+      "expected_decoded_hash": "04fcb764f7f7fac91b64f2db57698ba4a2ef65a1",
+      "verification": {
+        "byte_match": true,
+        "method": "raw_byte_match",
+        "comparison_size": 128,
+        "comparison_sha1": "04fcb764f7f7fac91b64f2db57698ba4a2ef65a1",
+        "references": [
+          {
+            "file": "asm/contest.s",
+            "function": "GetTurnOrderNumberGfx",
+            "line": 13403
+          }
+        ],
+        "detail": "The entire uncompressed ROM range matches the current converted asset byte for byte.",
+        "kind": "identical"
+      },
+      "relations": [
+        {
+          "kind": "replaces_asset",
+          "target": "graphics/contest/nextturn_numbers.png"
+        },
+        {
+          "kind": "consumed_by",
+          "target": "src/graphics.c:gContestNextTurnNumbersGfx"
+        }
+      ]
+    },
+    {
+      "symbol_id": "bpej:contest_ui:gContestNextTurnRandomGfx",
+      "status": "verified",
+      "group": "contest",
+      "label": "gContestNextTurnRandomGfx",
+      "consumer_file": "src/graphics.c",
+      "element_type": "u8",
+      "source_file": "graphics/contest/nextturn_random.png",
+      "source_conversion": [
+        ".4bpp"
+      ],
+      "comparison_file": "build/assets/graphics/contest/nextturn_random.png.4bpp",
+      "rom_offset": "0x00D8E9FC",
+      "size": 32,
+      "compression": "none",
+      "compressed_payload_size": null,
+      "transform": "copy",
+      "output_representation": "raw",
+      "output_path": "build/extracted_contest/contest/nextturn_random.4bpp",
+      "custom_path": "graphics/custom/bpej/contest/contest/nextturn_random.4bpp",
+      "expected_source_hash": "9d9b7e6673162599858bd621a2c9c3a321e35fe9",
+      "expected_hash": "9d9b7e6673162599858bd621a2c9c3a321e35fe9",
+      "decoded_size": 32,
+      "expected_decoded_hash": "9d9b7e6673162599858bd621a2c9c3a321e35fe9",
+      "verification": {
+        "byte_match": true,
+        "method": "raw_byte_match",
+        "comparison_size": 32,
+        "comparison_sha1": "9d9b7e6673162599858bd621a2c9c3a321e35fe9",
+        "references": [
+          {
+            "file": "asm/contest.s",
+            "function": "GetTurnOrderNumberGfx",
+            "line": 13410
+          }
+        ],
+        "detail": "The entire uncompressed ROM range matches the current converted asset byte for byte.",
+        "kind": "identical"
+      },
+      "relations": [
+        {
+          "kind": "replaces_asset",
+          "target": "graphics/contest/nextturn_random.png"
+        },
+        {
+          "kind": "consumed_by",
+          "target": "src/graphics.c:gContestNextTurnRandomGfx"
+        }
+      ]
+    },
+    {
+      "symbol_id": "bpej:contest_ui:gContestApplauseMeterGfx",
+      "status": "verified",
+      "group": "contest",
+      "label": "gContestApplauseMeterGfx",
+      "consumer_file": "src/graphics.c",
+      "element_type": "u8",
+      "source_file": "graphics/contest/applause_meter.png",
+      "source_conversion": [
+        ".4bpp"
+      ],
+      "comparison_file": "build/assets/graphics/contest/applause_meter.png.4bpp",
+      "rom_offset": "0x00D8EBD8",
+      "size": 128,
+      "compression": "none",
+      "compressed_payload_size": null,
+      "transform": "copy",
+      "output_representation": "raw",
+      "output_path": "build/extracted_contest/contest/applause_meter.4bpp",
+      "custom_path": "graphics/custom/bpej/contest/contest/applause_meter.4bpp",
+      "expected_source_hash": "3248bd6f8a4e6de8a8b90156caa467dad4c73fb6",
+      "expected_hash": "3248bd6f8a4e6de8a8b90156caa467dad4c73fb6",
+      "decoded_size": 128,
+      "expected_decoded_hash": "3248bd6f8a4e6de8a8b90156caa467dad4c73fb6",
+      "verification": {
+        "byte_match": true,
+        "method": "raw_byte_match",
+        "comparison_size": 128,
+        "comparison_sha1": "3248bd6f8a4e6de8a8b90156caa467dad4c73fb6",
+        "references": [
+          {
+            "file": "asm/contest.s",
+            "function": "UpdateApplauseMeter",
+            "line": 12454
+          }
+        ],
+        "detail": "The entire uncompressed ROM range matches the current converted asset byte for byte.",
+        "kind": "identical"
+      },
+      "relations": [
+        {
+          "kind": "replaces_asset",
+          "target": "graphics/contest/applause_meter.png"
+        },
+        {
+          "kind": "consumed_by",
+          "target": "src/graphics.c:gContestApplauseMeterGfx"
+        }
+      ]
+    },
+    {
+      "symbol_id": "bpej:contest_ui:gContestPal",
+      "status": "verified",
+      "group": "contest",
+      "label": "gContestPal",
+      "consumer_file": "src/graphics.c",
+      "element_type": "u16",
+      "source_file": "graphics/contest/nextturn.png",
+      "source_conversion": [
+        ".gbapal"
+      ],
+      "comparison_file": "build/assets/graphics/contest/nextturn.png.gbapal",
+      "rom_offset": "0x00D8EC58",
+      "size": 32,
+      "compression": "none",
+      "compressed_payload_size": null,
+      "transform": "copy",
+      "output_representation": "raw",
+      "output_path": "build/extracted_contest/contest/nextturn.gbapal",
+      "custom_path": "graphics/custom/bpej/contest/contest/nextturn.gbapal",
+      "expected_source_hash": "9472bca023d9164f7c5880631a0e973563a622e9",
+      "expected_hash": "9472bca023d9164f7c5880631a0e973563a622e9",
+      "decoded_size": 32,
+      "expected_decoded_hash": "9472bca023d9164f7c5880631a0e973563a622e9",
+      "verification": {
+        "byte_match": true,
+        "method": "raw_byte_match",
+        "comparison_size": 32,
+        "comparison_sha1": "9472bca023d9164f7c5880631a0e973563a622e9",
+        "references": [],
+        "detail": "The entire uncompressed ROM range matches the current converted asset byte for byte.",
+        "kind": "identical"
+      },
+      "relations": [
+        {
+          "kind": "replaces_asset",
+          "target": "graphics/contest/nextturn.png"
+        },
+        {
+          "kind": "consumed_by",
+          "target": "src/graphics.c:gContestPal"
+        }
+      ]
+    },
+    {
+      "symbol_id": "bpej:contest_ui:gPokenavCondition_Pal",
+      "status": "verified",
+      "group": "condition",
+      "label": "gPokenavCondition_Pal",
+      "consumer_file": "src/graphics.c",
+      "element_type": "u16",
+      "source_file": "graphics/pokenav/condition/graph.png",
+      "source_conversion": [
+        ".gbapal"
+      ],
+      "comparison_file": "build/assets/graphics/pokenav/condition/graph.png.gbapal",
+      "rom_offset": "0x005F4E0C",
+      "size": 32,
+      "compression": "none",
+      "compressed_payload_size": null,
+      "transform": "copy",
+      "output_representation": "raw",
+      "output_path": "build/extracted_contest/pokenav/condition/graph.gbapal",
+      "custom_path": "graphics/custom/bpej/contest/pokenav/condition/graph.gbapal",
+      "expected_source_hash": "88af29c7058c39a765ef586674b85a592ce7e4f6",
+      "expected_hash": "88af29c7058c39a765ef586674b85a592ce7e4f6",
+      "decoded_size": 32,
+      "expected_decoded_hash": "88af29c7058c39a765ef586674b85a592ce7e4f6",
+      "verification": {
+        "byte_match": true,
+        "method": "raw_byte_match",
+        "comparison_size": 32,
+        "comparison_sha1": "88af29c7058c39a765ef586674b85a592ce7e4f6",
+        "references": [
+          {
+            "file": "asm/pokenav_unk_4.s",
+            "function": "sub_081CD5F4",
+            "line": 5943
+          }
+        ],
+        "detail": "The entire uncompressed ROM range matches the current converted asset byte for byte.",
+        "kind": "identical"
+      },
+      "relations": [
+        {
+          "kind": "replaces_asset",
+          "target": "graphics/pokenav/condition/graph.png"
+        },
+        {
+          "kind": "consumed_by",
+          "target": "src/graphics.c:gPokenavCondition_Pal"
+        }
+      ]
+    },
+    {
+      "symbol_id": "bpej:contest_ui:gPokenavConditionCancel_Pal",
+      "status": "verified",
+      "group": "condition",
+      "label": "gPokenavConditionCancel_Pal",
+      "consumer_file": "src/graphics.c",
+      "element_type": "u16",
+      "source_file": "graphics/pokenav/condition/cancel.pal",
+      "source_conversion": [
+        ".gbapal"
+      ],
+      "comparison_file": "build/assets/graphics/pokenav/condition/cancel.pal.gbapal",
+      "rom_offset": "0x005F9AD8",
+      "size": 64,
+      "compression": "none",
+      "compressed_payload_size": null,
+      "transform": "copy",
+      "output_representation": "raw",
+      "output_path": "build/extracted_contest/pokenav/condition/cancel.gbapal",
+      "custom_path": "graphics/custom/bpej/contest/pokenav/condition/cancel.gbapal",
+      "expected_source_hash": "230362620edc8adb8573a6d9ae47fa426a723caa",
+      "expected_hash": "230362620edc8adb8573a6d9ae47fa426a723caa",
+      "decoded_size": 64,
+      "expected_decoded_hash": "230362620edc8adb8573a6d9ae47fa426a723caa",
+      "verification": {
+        "byte_match": true,
+        "method": "raw_byte_match",
+        "comparison_size": 64,
+        "comparison_sha1": "230362620edc8adb8573a6d9ae47fa426a723caa",
+        "references": [],
+        "detail": "The entire uncompressed ROM range matches the current converted asset byte for byte.",
+        "kind": "identical"
+      },
+      "relations": [
+        {
+          "kind": "replaces_asset",
+          "target": "graphics/pokenav/condition/cancel.pal"
+        },
+        {
+          "kind": "consumed_by",
+          "target": "src/graphics.c:gPokenavConditionCancel_Pal"
+        }
+      ]
+    },
+    {
+      "symbol_id": "bpej:contest_ui:gUsePokeblockUpDown_Pal",
+      "status": "verified",
+      "group": "pokeblock_use",
+      "label": "gUsePokeblockUpDown_Pal",
+      "consumer_file": "src/graphics.c",
+      "element_type": "u16",
+      "source_file": "graphics/pokeblock/use_screen/updown.png",
+      "source_conversion": [
+        ".gbapal"
+      ],
+      "comparison_file": "build/assets/graphics/pokeblock/use_screen/updown.png.gbapal",
+      "rom_offset": "0x005BE9A0",
+      "size": 32,
+      "compression": "none",
+      "compressed_payload_size": null,
+      "transform": "copy",
+      "output_representation": "raw",
+      "output_path": "build/extracted_contest/pokeblock/use_screen/updown.gbapal",
+      "custom_path": "graphics/custom/bpej/contest/pokeblock/use_screen/updown.gbapal",
+      "expected_source_hash": "13af0fbd9c536430ba0bb6b9e60ac096c0fac1ac",
+      "expected_hash": "13af0fbd9c536430ba0bb6b9e60ac096c0fac1ac",
+      "decoded_size": 32,
+      "expected_decoded_hash": "13af0fbd9c536430ba0bb6b9e60ac096c0fac1ac",
+      "verification": {
+        "byte_match": true,
+        "method": "raw_byte_match",
+        "comparison_size": 32,
+        "comparison_sha1": "13af0fbd9c536430ba0bb6b9e60ac096c0fac1ac",
+        "references": [],
+        "detail": "The entire uncompressed ROM range matches the current converted asset byte for byte.",
+        "kind": "identical"
+      },
+      "relations": [
+        {
+          "kind": "replaces_asset",
+          "target": "graphics/pokeblock/use_screen/updown.png"
+        },
+        {
+          "kind": "consumed_by",
+          "target": "src/graphics.c:gUsePokeblockUpDown_Pal"
+        }
+      ]
+    },
+    {
+      "symbol_id": "bpej:contest_ui:gUsePokeblockUpDown_Gfx",
+      "status": "verified",
+      "group": "pokeblock_use",
+      "label": "gUsePokeblockUpDown_Gfx",
+      "consumer_file": "src/graphics.c",
+      "element_type": "u8",
+      "source_file": "graphics/pokeblock/use_screen/updown.png",
+      "source_conversion": [
+        ".4bpp"
+      ],
+      "comparison_file": "build/assets/graphics/pokeblock/use_screen/updown.png.4bpp",
+      "rom_offset": "0x005BE9C0",
+      "size": 512,
+      "compression": "none",
+      "compressed_payload_size": null,
+      "transform": "copy",
+      "output_representation": "raw",
+      "output_path": "build/extracted_contest/pokeblock/use_screen/updown.4bpp",
+      "custom_path": "graphics/custom/bpej/contest/pokeblock/use_screen/updown.4bpp",
+      "expected_source_hash": "26d08479241bee30d2933bb21826428c2e0e99b5",
+      "expected_hash": "26d08479241bee30d2933bb21826428c2e0e99b5",
+      "decoded_size": 512,
+      "expected_decoded_hash": "26d08479241bee30d2933bb21826428c2e0e99b5",
+      "verification": {
+        "byte_match": true,
+        "method": "raw_byte_match",
+        "comparison_size": 512,
+        "comparison_sha1": "26d08479241bee30d2933bb21826428c2e0e99b5",
+        "references": [],
+        "detail": "The entire uncompressed ROM range matches the current converted asset byte for byte.",
+        "kind": "identical"
+      },
+      "relations": [
+        {
+          "kind": "replaces_asset",
+          "target": "graphics/pokeblock/use_screen/updown.png"
+        },
+        {
+          "kind": "consumed_by",
+          "target": "src/graphics.c:gUsePokeblockUpDown_Gfx"
+        }
+      ]
+    },
+    {
+      "symbol_id": "bpej:contest_ui:gUsePokeblockGraph_Pal",
+      "status": "verified",
+      "group": "pokeblock_use",
+      "label": "gUsePokeblockGraph_Pal",
+      "consumer_file": "src/graphics.c",
+      "element_type": "u16",
+      "source_file": "graphics/pokeblock/use_screen/graph.png",
+      "source_conversion": [
+        ".gbapal"
+      ],
+      "comparison_file": "build/assets/graphics/pokeblock/use_screen/graph.png.gbapal",
+      "rom_offset": "0x005BFA4C",
+      "size": 32,
+      "compression": "none",
+      "compressed_payload_size": null,
+      "transform": "copy",
+      "output_representation": "raw",
+      "output_path": "build/extracted_contest/pokeblock/use_screen/graph.gbapal",
+      "custom_path": "graphics/custom/bpej/contest/pokeblock/use_screen/graph.gbapal",
+      "expected_source_hash": "1e2a485abf03dbc263b156819d603c6a36b98ea3",
+      "expected_hash": "1e2a485abf03dbc263b156819d603c6a36b98ea3",
+      "decoded_size": 32,
+      "expected_decoded_hash": "1e2a485abf03dbc263b156819d603c6a36b98ea3",
+      "verification": {
+        "byte_match": false,
+        "method": "bpej_screen_code_and_palette_load",
+        "comparison_size": 32,
+        "comparison_sha1": "88af29c7058c39a765ef586674b85a592ce7e4f6",
+        "references": [
+          {
+            "file": "asm/use_pokeblock.s",
+            "function": "sub_08167734",
+            "line": 3006
+          }
+        ],
+        "detail": "BPEJ loads this palette for the Japanese Pokeblock graph. The English graph palette is intentionally not reused with Japanese tiles.",
+        "kind": "japanese_ui",
+        "screen_set": "pokeblock_graph",
+        "compatibility": "Paired with gUsePokeblockGraph_Gfx and gUsePokeblockGraph_Tilemap from the same BPEJ loader."
+      },
+      "relations": [
+        {
+          "kind": "replaces_asset",
+          "target": "graphics/pokeblock/use_screen/graph.png"
+        },
+        {
+          "kind": "consumed_by",
+          "target": "src/graphics.c:gUsePokeblockGraph_Pal"
+        }
+      ]
+    },
+    {
+      "symbol_id": "bpej:contest_ui:sText_Pal",
+      "status": "verified",
+      "group": "contest",
+      "label": "sText_Pal",
+      "consumer_file": "src/contest.c",
+      "element_type": "u16",
+      "source_file": "graphics/contest/text.pal",
+      "source_conversion": [
+        ".gbapal"
+      ],
+      "comparison_file": "build/assets/graphics/contest/text.pal.gbapal",
+      "rom_offset": "0x00560B94",
+      "size": 32,
+      "compression": "none",
+      "compressed_payload_size": null,
+      "transform": "copy",
+      "output_representation": "raw",
+      "output_path": "build/extracted_contest/contest/text.gbapal",
+      "custom_path": "graphics/custom/bpej/contest/contest/text.gbapal",
+      "expected_source_hash": "9986ed10c08fabf5611bd156062e22250f76352a",
+      "expected_hash": "9986ed10c08fabf5611bd156062e22250f76352a",
+      "decoded_size": 32,
+      "expected_decoded_hash": "9986ed10c08fabf5611bd156062e22250f76352a",
+      "verification": {
+        "byte_match": true,
+        "method": "raw_byte_match",
+        "comparison_size": 32,
+        "comparison_sha1": "9986ed10c08fabf5611bd156062e22250f76352a",
+        "references": [
+          {
+            "file": "asm/contest.s",
+            "function": "sub_080D7058",
+            "line": 248
+          }
+        ],
+        "detail": "The entire uncompressed ROM range matches the current converted asset byte for byte. Identical copies exist; the selected range belongs to the corresponding screen code/data cluster.",
+        "kind": "identical"
+      },
+      "relations": [
+        {
+          "kind": "replaces_asset",
+          "target": "graphics/contest/text.pal"
+        },
+        {
+          "kind": "consumed_by",
+          "target": "src/contest.c:sText_Pal"
+        }
+      ]
+    },
+    {
+      "symbol_id": "bpej:contest_ui:sResultsTextWindow_Pal",
+      "status": "verified",
+      "group": "contest",
+      "label": "sResultsTextWindow_Pal",
+      "consumer_file": "src/contest_util.c",
+      "element_type": "u16",
+      "source_file": "graphics/contest/results_screen/text_window.pal",
+      "source_conversion": [
+        ".gbapal"
+      ],
+      "comparison_file": "build/assets/graphics/contest/results_screen/text_window.pal.gbapal",
+      "rom_offset": "0x0056915C",
+      "size": 32,
+      "compression": "none",
+      "compressed_payload_size": null,
+      "transform": "copy",
+      "output_representation": "raw",
+      "output_path": "build/extracted_contest/contest/results_screen/text_window.gbapal",
+      "custom_path": "graphics/custom/bpej/contest/contest/results_screen/text_window.gbapal",
+      "expected_source_hash": "9986ed10c08fabf5611bd156062e22250f76352a",
+      "expected_hash": "9986ed10c08fabf5611bd156062e22250f76352a",
+      "decoded_size": 32,
+      "expected_decoded_hash": "9986ed10c08fabf5611bd156062e22250f76352a",
+      "verification": {
+        "byte_match": true,
+        "method": "raw_byte_match",
+        "comparison_size": 32,
+        "comparison_sha1": "9986ed10c08fabf5611bd156062e22250f76352a",
+        "references": [
+          {
+            "file": "asm/contest_link_80F57C4.s",
+            "function": "sub_080F6114",
+            "line": 236
+          }
+        ],
+        "detail": "The entire uncompressed ROM range matches the current converted asset byte for byte. Identical copies exist; the selected range belongs to the corresponding screen code/data cluster.",
+        "kind": "identical"
+      },
+      "relations": [
+        {
+          "kind": "replaces_asset",
+          "target": "graphics/contest/results_screen/text_window.pal"
+        },
+        {
+          "kind": "consumed_by",
+          "target": "src/contest_util.c:sResultsTextWindow_Pal"
+        }
+      ]
+    },
+    {
+      "symbol_id": "bpej:contest_ui:sResultsTextWindow_Gfx",
+      "status": "verified",
+      "group": "contest",
+      "label": "sResultsTextWindow_Gfx",
+      "consumer_file": "src/contest_util.c",
+      "element_type": "u8",
+      "source_file": "graphics/contest/results_screen/text_window.png",
+      "source_conversion": [
+        ".4bpp"
+      ],
+      "comparison_file": "build/assets/graphics/contest/results_screen/text_window.png.4bpp",
+      "rom_offset": "0x0056917C",
+      "size": 256,
+      "compression": "none",
+      "compressed_payload_size": null,
+      "transform": "copy",
+      "output_representation": "raw",
+      "output_path": "build/extracted_contest/contest/results_screen/text_window.4bpp",
+      "custom_path": "graphics/custom/bpej/contest/contest/results_screen/text_window.4bpp",
+      "expected_source_hash": "3b9f75c75b91a9e39e8a2042aeeceac3055c0948",
+      "expected_hash": "3b9f75c75b91a9e39e8a2042aeeceac3055c0948",
+      "decoded_size": 256,
+      "expected_decoded_hash": "3b9f75c75b91a9e39e8a2042aeeceac3055c0948",
+      "verification": {
+        "byte_match": true,
+        "method": "raw_byte_match",
+        "comparison_size": 256,
+        "comparison_sha1": "3b9f75c75b91a9e39e8a2042aeeceac3055c0948",
+        "references": [
+          {
+            "file": "asm/contest_link_80F57C4.s",
+            "function": "sub_080F739C",
+            "line": 2534
+          }
+        ],
+        "detail": "The entire uncompressed ROM range matches the current converted asset byte for byte.",
+        "kind": "identical"
+      },
+      "relations": [
+        {
+          "kind": "replaces_asset",
+          "target": "graphics/contest/results_screen/text_window.png"
+        },
+        {
+          "kind": "consumed_by",
+          "target": "src/contest_util.c:sResultsTextWindow_Gfx"
+        }
+      ]
+    },
+    {
+      "symbol_id": "bpej:contest_ui:gConditionGraphData_Pal",
+      "status": "verified",
+      "group": "condition",
+      "label": "gConditionGraphData_Pal",
+      "consumer_file": "src/pokenav_conditions_gfx.c",
+      "element_type": "u16",
+      "source_file": "graphics/pokenav/condition/graph_data.pal",
+      "source_conversion": [
+        ".gbapal"
+      ],
+      "comparison_file": "build/assets/graphics/pokenav/condition/graph_data.pal.gbapal",
+      "rom_offset": "0x005F4E2C",
+      "size": 32,
+      "compression": "none",
+      "compressed_payload_size": null,
+      "transform": "copy",
+      "output_representation": "raw",
+      "output_path": "build/extracted_contest/pokenav/condition/graph_data.gbapal",
+      "custom_path": "graphics/custom/bpej/contest/pokenav/condition/graph_data.gbapal",
+      "expected_source_hash": "0af028dd619586692b3a6dc90bfeb255269a9841",
+      "expected_hash": "0af028dd619586692b3a6dc90bfeb255269a9841",
+      "decoded_size": 32,
+      "expected_decoded_hash": "0af028dd619586692b3a6dc90bfeb255269a9841",
+      "verification": {
+        "byte_match": true,
+        "method": "raw_byte_match",
+        "comparison_size": 32,
+        "comparison_sha1": "0af028dd619586692b3a6dc90bfeb255269a9841",
+        "references": [
+          {
+            "file": "asm/pokenav_unk_4.s",
+            "function": "sub_081CD5F4",
+            "line": 5974
+          },
+          {
+            "file": "asm/use_pokeblock.s",
+            "function": "sub_08167734",
+            "line": 3075
+          }
+        ],
+        "detail": "The entire uncompressed ROM range matches the current converted asset byte for byte. Identical copies exist; the selected range belongs to the corresponding screen code/data cluster.",
+        "kind": "identical"
+      },
+      "relations": [
+        {
+          "kind": "replaces_asset",
+          "target": "graphics/pokenav/condition/graph_data.pal"
+        },
+        {
+          "kind": "consumed_by",
+          "target": "src/pokenav_conditions_gfx.c:gConditionGraphData_Pal"
+        }
+      ]
+    },
+    {
+      "symbol_id": "bpej:contest_ui:gConditionText_Pal",
+      "status": "verified",
+      "group": "condition",
+      "label": "gConditionText_Pal",
+      "consumer_file": "src/pokenav_conditions_gfx.c",
+      "element_type": "u16",
+      "source_file": "graphics/pokenav/condition/text.pal",
+      "source_conversion": [
+        ".gbapal"
+      ],
+      "comparison_file": "build/assets/graphics/pokenav/condition/text.pal.gbapal",
+      "rom_offset": "0x005F4E4C",
+      "size": 32,
+      "compression": "none",
+      "compressed_payload_size": null,
+      "transform": "copy",
+      "output_representation": "raw",
+      "output_path": "build/extracted_contest/pokenav/condition/text.gbapal",
+      "custom_path": "graphics/custom/bpej/contest/pokenav/condition/text.gbapal",
+      "expected_source_hash": "b229413d8d455655467baa2b3de54942c1fd66d3",
+      "expected_hash": "b229413d8d455655467baa2b3de54942c1fd66d3",
+      "decoded_size": 32,
+      "expected_decoded_hash": "b229413d8d455655467baa2b3de54942c1fd66d3",
+      "verification": {
+        "byte_match": true,
+        "method": "raw_byte_match",
+        "comparison_size": 32,
+        "comparison_sha1": "b229413d8d455655467baa2b3de54942c1fd66d3",
+        "references": [
+          {
+            "file": "asm/pokenav_unk_4.s",
+            "function": "sub_081CD5F4",
+            "line": 5944
+          },
+          {
+            "file": "asm/use_pokeblock.s",
+            "function": "sub_08167734",
+            "line": 3076
+          }
+        ],
+        "detail": "The entire uncompressed ROM range matches the current converted asset byte for byte.",
+        "kind": "identical"
+      },
+      "relations": [
+        {
+          "kind": "replaces_asset",
+          "target": "graphics/pokenav/condition/text.pal"
+        },
+        {
+          "kind": "consumed_by",
+          "target": "src/pokenav_conditions_gfx.c:gConditionText_Pal"
+        }
+      ]
+    },
+    {
+      "symbol_id": "bpej:contest_ui:sConditionGraphData_Gfx",
+      "status": "verified",
+      "group": "condition",
+      "label": "sConditionGraphData_Gfx",
+      "consumer_file": "src/pokenav_conditions_gfx.c",
+      "element_type": "u32",
+      "source_file": "graphics/pokenav/condition/graph_data.png",
+      "source_conversion": [
+        ".4bpp.smol"
+      ],
+      "comparison_file": "build/assets/graphics/pokenav/condition/graph_data.png.4bpp",
+      "rom_offset": "0x005F57EC",
+      "size": 20,
+      "compression": "gba_lz77",
+      "compressed_payload_size": 17,
+      "transform": "copy",
+      "output_representation": "gba_lz77_stream",
+      "output_path": "build/extracted_contest/pokenav/condition/graph_data.4bpp.lz",
+      "custom_path": "graphics/custom/bpej/contest/pokenav/condition/graph_data.4bpp.lz",
+      "expected_source_hash": "5ec6f2642798ed5ca34b2dbdcce434133c3aff05",
+      "expected_hash": "5ec6f2642798ed5ca34b2dbdcce434133c3aff05",
+      "decoded_size": 64,
+      "expected_decoded_hash": "bde6707e511044fcc30f0eaeb48fbed4b4fcaee0",
+      "verification": {
+        "byte_match": true,
+        "method": "lz77_decoded_byte_match",
+        "comparison_size": 64,
+        "comparison_sha1": "bde6707e511044fcc30f0eaeb48fbed4b4fcaee0",
+        "references": [
+          {
+            "file": "asm/pokenav_unk_4.s",
+            "function": "sub_081CD5F4",
+            "line": 5897
+          }
+        ],
+        "detail": "The entire decoded ROM range matches the current converted asset byte for byte.",
+        "kind": "identical"
+      },
+      "relations": [
+        {
+          "kind": "replaces_asset",
+          "target": "graphics/pokenav/condition/graph_data.png"
+        },
+        {
+          "kind": "consumed_by",
+          "target": "src/pokenav_conditions_gfx.c:sConditionGraphData_Gfx"
+        }
+      ]
+    },
+    {
+      "symbol_id": "bpej:contest_ui:sConditionGraphData_Tilemap",
+      "status": "verified",
+      "group": "condition",
+      "label": "sConditionGraphData_Tilemap",
+      "consumer_file": "src/pokenav_conditions_gfx.c",
+      "element_type": "u32",
+      "source_file": "graphics/pokenav/condition/graph_data.bin",
+      "source_conversion": [
+        ".smolTM"
+      ],
+      "comparison_file": "graphics/pokenav/condition/graph_data.bin",
+      "rom_offset": "0x005F5800",
+      "size": 252,
+      "compression": "gba_lz77",
+      "compressed_payload_size": 249,
+      "transform": "copy",
+      "output_representation": "gba_lz77_stream",
+      "output_path": "build/extracted_contest/pokenav/condition/graph_data.bin.lz",
+      "custom_path": "graphics/custom/bpej/contest/pokenav/condition/graph_data.bin.lz",
+      "expected_source_hash": "0d652bcdc53b581200ed120ccef935cd57b1e8bd",
+      "expected_hash": "0d652bcdc53b581200ed120ccef935cd57b1e8bd",
+      "decoded_size": 2048,
+      "expected_decoded_hash": "64687ed67a459e3c63f7701fb4b570804b574ce8",
+      "verification": {
+        "byte_match": true,
+        "method": "lz77_decoded_byte_match",
+        "comparison_size": 2048,
+        "comparison_sha1": "64687ed67a459e3c63f7701fb4b570804b574ce8",
+        "references": [
+          {
+            "file": "asm/pokenav_unk_4.s",
+            "function": "sub_081CD5F4",
+            "line": 5972
+          }
+        ],
+        "detail": "The entire decoded ROM range matches the current converted asset byte for byte.",
+        "kind": "identical"
+      },
+      "relations": [
+        {
+          "kind": "replaces_asset",
+          "target": "graphics/pokenav/condition/graph_data.bin"
+        },
+        {
+          "kind": "consumed_by",
+          "target": "src/pokenav_conditions_gfx.c:sConditionGraphData_Tilemap"
+        }
+      ]
+    },
+    {
+      "symbol_id": "bpej:contest_ui:sMonMarkings_Pal",
+      "status": "verified",
+      "group": "condition",
+      "label": "sMonMarkings_Pal",
+      "consumer_file": "src/pokenav_conditions_gfx.c",
+      "element_type": "u16",
+      "source_file": "graphics/pokenav/condition/mon_markings.pal",
+      "source_conversion": [
+        ".gbapal"
+      ],
+      "comparison_file": "build/assets/graphics/pokenav/condition/mon_markings.pal.gbapal",
+      "rom_offset": "0x005F5944",
+      "size": 32,
+      "compression": "none",
+      "compressed_payload_size": null,
+      "transform": "copy",
+      "output_representation": "raw",
+      "output_path": "build/extracted_contest/pokenav/condition/mon_markings.gbapal",
+      "custom_path": "graphics/custom/bpej/contest/pokenav/condition/mon_markings.gbapal",
+      "expected_source_hash": "8550c1421da38bc58cd24c85ecbec05d61b1dbad",
+      "expected_hash": "8550c1421da38bc58cd24c85ecbec05d61b1dbad",
+      "decoded_size": 32,
+      "expected_decoded_hash": "8550c1421da38bc58cd24c85ecbec05d61b1dbad",
+      "verification": {
+        "byte_match": true,
+        "method": "raw_byte_match",
+        "comparison_size": 32,
+        "comparison_sha1": "8550c1421da38bc58cd24c85ecbec05d61b1dbad",
+        "references": [
+          {
+            "file": "asm/pokenav_unk_4.s",
+            "function": "sub_081CE118",
+            "line": 7179
+          }
+        ],
+        "detail": "The entire uncompressed ROM range matches the current converted asset byte for byte.",
+        "kind": "identical"
+      },
+      "relations": [
+        {
+          "kind": "replaces_asset",
+          "target": "graphics/pokenav/condition/mon_markings.pal"
+        },
+        {
+          "kind": "consumed_by",
+          "target": "src/pokenav_conditions_gfx.c:sMonMarkings_Pal"
+        }
+      ]
+    },
+    {
+      "symbol_id": "bpej:contest_ui:sConditionSearchResultFramePal",
+      "status": "verified",
+      "group": "condition",
+      "label": "sConditionSearchResultFramePal",
+      "consumer_file": "src/pokenav_conditions_search_results.c",
+      "element_type": "u16",
+      "source_file": "graphics/pokenav/condition/search_results.png",
+      "source_conversion": [
+        ".gbapal"
+      ],
+      "comparison_file": "build/assets/graphics/pokenav/condition/search_results.png.gbapal",
+      "rom_offset": "0x005F59D0",
+      "size": 32,
+      "compression": "none",
+      "compressed_payload_size": null,
+      "transform": "copy",
+      "output_representation": "raw",
+      "output_path": "build/extracted_contest/pokenav/condition/search_results.gbapal",
+      "custom_path": "graphics/custom/bpej/contest/pokenav/condition/search_results.gbapal",
+      "expected_source_hash": "cd690981e9901b874a2a13b12751cf5a008a95c0",
+      "expected_hash": "cd690981e9901b874a2a13b12751cf5a008a95c0",
+      "decoded_size": 32,
+      "expected_decoded_hash": "cd690981e9901b874a2a13b12751cf5a008a95c0",
+      "verification": {
+        "byte_match": true,
+        "method": "raw_byte_match",
+        "comparison_size": 32,
+        "comparison_sha1": "cd690981e9901b874a2a13b12751cf5a008a95c0",
+        "references": [
+          {
+            "file": "asm/pokenav_unk_4.s",
+            "function": "sub_081CEB4C",
+            "line": 8527
+          }
+        ],
+        "detail": "The entire uncompressed ROM range matches the current converted asset byte for byte.",
+        "kind": "identical"
+      },
+      "relations": [
+        {
+          "kind": "replaces_asset",
+          "target": "graphics/pokenav/condition/search_results.png"
+        },
+        {
+          "kind": "consumed_by",
+          "target": "src/pokenav_conditions_search_results.c:sConditionSearchResultFramePal"
+        }
+      ]
+    },
+    {
+      "symbol_id": "bpej:contest_ui:sConditionSearchResultTiles",
+      "status": "verified",
+      "group": "condition",
+      "label": "sConditionSearchResultTiles",
+      "consumer_file": "src/pokenav_conditions_search_results.c",
+      "element_type": "u32",
+      "source_file": "graphics/pokenav/condition/search_results.png",
+      "source_conversion": [
+        ".4bpp.smol"
+      ],
+      "comparison_file": "build/assets/graphics/pokenav/condition/search_results.png.4bpp",
+      "rom_offset": "0x005F59F0",
+      "size": 200,
+      "compression": "gba_lz77",
+      "compressed_payload_size": 198,
+      "transform": "copy",
+      "output_representation": "gba_lz77_stream",
+      "output_path": "build/extracted_contest/pokenav/condition/search_results.4bpp.lz",
+      "custom_path": "graphics/custom/bpej/contest/pokenav/condition/search_results.4bpp.lz",
+      "expected_source_hash": "44688564f811711207b3fee018450e4b27b0d42e",
+      "expected_hash": "44688564f811711207b3fee018450e4b27b0d42e",
+      "decoded_size": 512,
+      "expected_decoded_hash": "ea4eb1b65325425fd04f9d42cc52b767aed7902f",
+      "verification": {
+        "byte_match": true,
+        "method": "lz77_decoded_byte_match",
+        "comparison_size": 512,
+        "comparison_sha1": "ea4eb1b65325425fd04f9d42cc52b767aed7902f",
+        "references": [
+          {
+            "file": "asm/pokenav_unk_4.s",
+            "function": "sub_081CEB4C",
+            "line": 8525
+          }
+        ],
+        "detail": "The entire decoded ROM range matches the current converted asset byte for byte. Identical copies exist; the selected range belongs to the corresponding screen code/data cluster.",
+        "kind": "identical"
+      },
+      "relations": [
+        {
+          "kind": "replaces_asset",
+          "target": "graphics/pokenav/condition/search_results.png"
+        },
+        {
+          "kind": "consumed_by",
+          "target": "src/pokenav_conditions_search_results.c:sConditionSearchResultTiles"
+        }
+      ]
+    },
+    {
+      "symbol_id": "bpej:contest_ui:sConditionSearchResultTilemap",
+      "status": "verified",
+      "group": "condition",
+      "label": "sConditionSearchResultTilemap",
+      "consumer_file": "src/pokenav_conditions_search_results.c",
+      "element_type": "u32",
+      "source_file": "graphics/pokenav/condition/search_results.bin",
+      "source_conversion": [
+        ".smolTM"
+      ],
+      "comparison_file": "graphics/pokenav/condition/search_results.bin",
+      "rom_offset": "0x005F5AB8",
+      "size": 196,
+      "compression": "gba_lz77",
+      "compressed_payload_size": 194,
+      "transform": "copy",
+      "output_representation": "gba_lz77_stream",
+      "output_path": "build/extracted_contest/pokenav/condition/search_results.bin.lz",
+      "custom_path": "graphics/custom/bpej/contest/pokenav/condition/search_results.bin.lz",
+      "expected_source_hash": "c0afd737fb2f29915de2937e14c90855a48e0fce",
+      "expected_hash": "c0afd737fb2f29915de2937e14c90855a48e0fce",
+      "decoded_size": 1280,
+      "expected_decoded_hash": "874fe4296fd3f9819b6be3edfb38bdaeb34bdbcc",
+      "verification": {
+        "byte_match": true,
+        "method": "lz77_decoded_byte_match",
+        "comparison_size": 1280,
+        "comparison_sha1": "874fe4296fd3f9819b6be3edfb38bdaeb34bdbcc",
+        "references": [
+          {
+            "file": "asm/pokenav_unk_4.s",
+            "function": "sub_081CEB4C",
+            "line": 8526
+          }
+        ],
+        "detail": "The entire decoded ROM range matches the current converted asset byte for byte. Identical copies exist; the selected range belongs to the corresponding screen code/data cluster.",
+        "kind": "identical"
+      },
+      "relations": [
+        {
+          "kind": "replaces_asset",
+          "target": "graphics/pokenav/condition/search_results.bin"
+        },
+        {
+          "kind": "consumed_by",
+          "target": "src/pokenav_conditions_search_results.c:sConditionSearchResultTilemap"
+        }
+      ]
+    },
+    {
+      "symbol_id": "bpej:contest_ui:sListBg_Pal",
+      "status": "verified",
+      "group": "condition",
+      "label": "sListBg_Pal",
+      "consumer_file": "src/pokenav_conditions_search_results.c",
+      "element_type": "u16",
+      "source_file": "graphics/pokenav/condition/search_results_list.pal",
+      "source_conversion": [
+        ".gbapal"
+      ],
+      "comparison_file": "build/assets/graphics/pokenav/condition/search_results_list.pal.gbapal",
+      "rom_offset": "0x005F5B7C",
+      "size": 32,
+      "compression": "none",
+      "compressed_payload_size": null,
+      "transform": "copy",
+      "output_representation": "raw",
+      "output_path": "build/extracted_contest/pokenav/condition/search_results_list.gbapal",
+      "custom_path": "graphics/custom/bpej/contest/pokenav/condition/search_results_list.gbapal",
+      "expected_source_hash": "3db8af5287a37fa5b37c8a1322081b8dc091c6d7",
+      "expected_hash": "3db8af5287a37fa5b37c8a1322081b8dc091c6d7",
+      "decoded_size": 32,
+      "expected_decoded_hash": "3db8af5287a37fa5b37c8a1322081b8dc091c6d7",
+      "verification": {
+        "byte_match": true,
+        "method": "raw_byte_match",
+        "comparison_size": 32,
+        "comparison_sha1": "3db8af5287a37fa5b37c8a1322081b8dc091c6d7",
+        "references": [
+          {
+            "file": "asm/pokenav_unk_4.s",
+            "function": "sub_081CEB4C",
+            "line": 8549
+          }
+        ],
+        "detail": "The entire uncompressed ROM range matches the current converted asset byte for byte.",
+        "kind": "identical"
+      },
+      "relations": [
+        {
+          "kind": "replaces_asset",
+          "target": "graphics/pokenav/condition/search_results_list.pal"
+        },
+        {
+          "kind": "consumed_by",
+          "target": "src/pokenav_conditions_search_results.c:sListBg_Pal"
+        }
+      ]
+    },
+    {
+      "symbol_id": "bpej:contest_ui:sConditionPokeball_Gfx",
+      "status": "verified",
+      "group": "condition",
+      "label": "sConditionPokeball_Gfx",
+      "consumer_file": "src/menu_specialized.c",
+      "element_type": "u32",
+      "source_file": "graphics/pokenav/condition/pokeball.png",
+      "source_conversion": [
+        ".4bpp"
+      ],
+      "comparison_file": "build/assets/graphics/pokenav/condition/pokeball.png.4bpp",
+      "rom_offset": "0x005F9B18",
+      "size": 256,
+      "compression": "none",
+      "compressed_payload_size": null,
+      "transform": "copy",
+      "output_representation": "raw",
+      "output_path": "build/extracted_contest/pokenav/condition/pokeball.4bpp",
+      "custom_path": "graphics/custom/bpej/contest/pokenav/condition/pokeball.4bpp",
+      "expected_source_hash": "fff6bf2526ef0af61c056319cff8da3d2ce86f31",
+      "expected_hash": "fff6bf2526ef0af61c056319cff8da3d2ce86f31",
+      "decoded_size": 256,
+      "expected_decoded_hash": "fff6bf2526ef0af61c056319cff8da3d2ce86f31",
+      "verification": {
+        "byte_match": true,
+        "method": "raw_byte_match",
+        "comparison_size": 256,
+        "comparison_sha1": "fff6bf2526ef0af61c056319cff8da3d2ce86f31",
+        "references": [],
+        "detail": "The entire uncompressed ROM range matches the current converted asset byte for byte.",
+        "kind": "identical"
+      },
+      "relations": [
+        {
+          "kind": "replaces_asset",
+          "target": "graphics/pokenav/condition/pokeball.png"
+        },
+        {
+          "kind": "consumed_by",
+          "target": "src/menu_specialized.c:sConditionPokeball_Gfx"
+        }
+      ]
+    },
+    {
+      "symbol_id": "bpej:contest_ui:sConditionPokeballPlaceholder_Gfx",
+      "status": "verified",
+      "group": "condition",
+      "label": "sConditionPokeballPlaceholder_Gfx",
+      "consumer_file": "src/menu_specialized.c",
+      "element_type": "u32",
+      "source_file": "graphics/pokenav/condition/pokeball_placeholder.png",
+      "source_conversion": [
+        ".4bpp"
+      ],
+      "comparison_file": "build/assets/graphics/pokenav/condition/pokeball_placeholder.png.4bpp",
+      "rom_offset": "0x005F9C18",
+      "size": 32,
+      "compression": "none",
+      "compressed_payload_size": null,
+      "transform": "copy",
+      "output_representation": "raw",
+      "output_path": "build/extracted_contest/pokenav/condition/pokeball_placeholder.4bpp",
+      "custom_path": "graphics/custom/bpej/contest/pokenav/condition/pokeball_placeholder.4bpp",
+      "expected_source_hash": "5f141c04d82af41bef442fb0242fa58ff5bf14ce",
+      "expected_hash": "5f141c04d82af41bef442fb0242fa58ff5bf14ce",
+      "decoded_size": 32,
+      "expected_decoded_hash": "5f141c04d82af41bef442fb0242fa58ff5bf14ce",
+      "verification": {
+        "byte_match": true,
+        "method": "raw_byte_match",
+        "comparison_size": 32,
+        "comparison_sha1": "5f141c04d82af41bef442fb0242fa58ff5bf14ce",
+        "references": [],
+        "detail": "The entire uncompressed ROM range matches the current converted asset byte for byte.",
+        "kind": "identical"
+      },
+      "relations": [
+        {
+          "kind": "replaces_asset",
+          "target": "graphics/pokenav/condition/pokeball_placeholder.png"
+        },
+        {
+          "kind": "consumed_by",
+          "target": "src/menu_specialized.c:sConditionPokeballPlaceholder_Gfx"
+        }
+      ]
+    },
+    {
+      "symbol_id": "bpej:contest_ui:sConditionSparkle_Gfx",
+      "status": "verified",
+      "group": "condition",
+      "label": "sConditionSparkle_Gfx",
+      "consumer_file": "src/menu_specialized.c",
+      "element_type": "u16",
+      "source_file": "graphics/pokenav/condition/sparkle.png",
+      "source_conversion": [
+        ".gbapal"
+      ],
+      "comparison_file": "build/assets/graphics/pokenav/condition/sparkle.png.gbapal",
+      "rom_offset": "0x005F9D38",
+      "size": 32,
+      "compression": "none",
+      "compressed_payload_size": null,
+      "transform": "copy",
+      "output_representation": "raw",
+      "output_path": "build/extracted_contest/pokenav/condition/sparkle.gbapal",
+      "custom_path": "graphics/custom/bpej/contest/pokenav/condition/sparkle.gbapal",
+      "expected_source_hash": "0880c219ce9dfe9b6e26eef5e9a613bf7969f445",
+      "expected_hash": "0880c219ce9dfe9b6e26eef5e9a613bf7969f445",
+      "decoded_size": 32,
+      "expected_decoded_hash": "0880c219ce9dfe9b6e26eef5e9a613bf7969f445",
+      "verification": {
+        "byte_match": true,
+        "method": "raw_byte_match",
+        "comparison_size": 32,
+        "comparison_sha1": "0880c219ce9dfe9b6e26eef5e9a613bf7969f445",
+        "references": [],
+        "detail": "The entire uncompressed ROM range matches the current converted asset byte for byte.",
+        "kind": "identical"
+      },
+      "relations": [
+        {
+          "kind": "replaces_asset",
+          "target": "graphics/pokenav/condition/sparkle.png"
+        },
+        {
+          "kind": "consumed_by",
+          "target": "src/menu_specialized.c:sConditionSparkle_Gfx"
+        }
+      ]
+    },
+    {
+      "symbol_id": "bpej:contest_ui:sConditionSparkle_Pal",
+      "status": "verified",
+      "group": "condition",
+      "label": "sConditionSparkle_Pal",
+      "consumer_file": "src/menu_specialized.c",
+      "element_type": "u32",
+      "source_file": "graphics/pokenav/condition/sparkle.png",
+      "source_conversion": [
+        ".4bpp"
+      ],
+      "comparison_file": "build/assets/graphics/pokenav/condition/sparkle.png.4bpp",
+      "rom_offset": "0x005F9D58",
+      "size": 896,
+      "compression": "none",
+      "compressed_payload_size": null,
+      "transform": "copy",
+      "output_representation": "raw",
+      "output_path": "build/extracted_contest/pokenav/condition/sparkle.4bpp",
+      "custom_path": "graphics/custom/bpej/contest/pokenav/condition/sparkle.4bpp",
+      "expected_source_hash": "dfc78ec9e099127d8048426fdab64fcc47e04062",
+      "expected_hash": "dfc78ec9e099127d8048426fdab64fcc47e04062",
+      "decoded_size": 896,
+      "expected_decoded_hash": "dfc78ec9e099127d8048426fdab64fcc47e04062",
+      "verification": {
+        "byte_match": true,
+        "method": "raw_byte_match",
+        "comparison_size": 896,
+        "comparison_sha1": "dfc78ec9e099127d8048426fdab64fcc47e04062",
+        "references": [],
+        "detail": "The entire uncompressed ROM range matches the current converted asset byte for byte.",
+        "kind": "identical"
+      },
+      "relations": [
+        {
+          "kind": "replaces_asset",
+          "target": "graphics/pokenav/condition/sparkle.png"
+        },
+        {
+          "kind": "consumed_by",
+          "target": "src/menu_specialized.c:sConditionSparkle_Pal"
+        }
+      ]
+    },
+    {
+      "symbol_id": "bpej:contest_ui:sMonFrame_Pal",
+      "status": "verified",
+      "group": "pokeblock_use",
+      "label": "sMonFrame_Pal",
+      "consumer_file": "src/use_pokeblock.c",
+      "element_type": "u32",
+      "source_file": "graphics/pokeblock/use_screen/mon_frame_pal.bin",
+      "source_conversion": [],
+      "comparison_file": "graphics/pokeblock/use_screen/mon_frame_pal.bin",
+      "rom_offset": "0x005BF880",
+      "size": 32,
+      "compression": "none",
+      "compressed_payload_size": null,
+      "transform": "copy",
+      "output_representation": "raw",
+      "output_path": "build/extracted_contest/pokeblock/use_screen/mon_frame_pal.bin",
+      "custom_path": "graphics/custom/bpej/contest/pokeblock/use_screen/mon_frame_pal.bin",
+      "expected_source_hash": "7ca982d85811bd1dab39ad7aa014202b58470639",
+      "expected_hash": "7ca982d85811bd1dab39ad7aa014202b58470639",
+      "decoded_size": 32,
+      "expected_decoded_hash": "7ca982d85811bd1dab39ad7aa014202b58470639",
+      "verification": {
+        "byte_match": true,
+        "method": "raw_byte_match",
+        "comparison_size": 32,
+        "comparison_sha1": "7ca982d85811bd1dab39ad7aa014202b58470639",
+        "references": [
+          {
+            "file": "asm/use_pokeblock.s",
+            "function": "sub_08167734",
+            "line": 2979
+          }
+        ],
+        "detail": "The entire uncompressed ROM range matches the current converted asset byte for byte.",
+        "kind": "identical"
+      },
+      "relations": [
+        {
+          "kind": "replaces_asset",
+          "target": "graphics/pokeblock/use_screen/mon_frame_pal.bin"
+        },
+        {
+          "kind": "consumed_by",
+          "target": "src/use_pokeblock.c:sMonFrame_Pal"
+        }
+      ]
+    },
+    {
+      "symbol_id": "bpej:contest_ui:sMonFrame_Gfx",
+      "status": "verified",
+      "group": "pokeblock_use",
+      "label": "sMonFrame_Gfx",
+      "consumer_file": "src/use_pokeblock.c",
+      "element_type": "u32",
+      "source_file": "graphics/pokeblock/use_screen/mon_frame.png",
+      "source_conversion": [
+        ".4bpp"
+      ],
+      "comparison_file": "build/assets/graphics/pokeblock/use_screen/mon_frame.png.4bpp",
+      "rom_offset": "0x005BF8C0",
+      "size": 224,
+      "compression": "none",
+      "compressed_payload_size": null,
+      "transform": "copy",
+      "output_representation": "raw",
+      "output_path": "build/extracted_contest/pokeblock/use_screen/mon_frame.4bpp",
+      "custom_path": "graphics/custom/bpej/contest/pokeblock/use_screen/mon_frame.4bpp",
+      "expected_source_hash": "84e844a6a35e5813d96e8c0656970614f6adc4c4",
+      "expected_hash": "84e844a6a35e5813d96e8c0656970614f6adc4c4",
+      "decoded_size": 224,
+      "expected_decoded_hash": "84e844a6a35e5813d96e8c0656970614f6adc4c4",
+      "verification": {
+        "byte_match": true,
+        "method": "raw_byte_match",
+        "comparison_size": 224,
+        "comparison_sha1": "84e844a6a35e5813d96e8c0656970614f6adc4c4",
+        "references": [
+          {
+            "file": "asm/use_pokeblock.s",
+            "function": "sub_08167734",
+            "line": 2954
+          }
+        ],
+        "detail": "The entire uncompressed ROM range matches the current converted asset byte for byte.",
+        "kind": "identical"
+      },
+      "relations": [
+        {
+          "kind": "replaces_asset",
+          "target": "graphics/pokeblock/use_screen/mon_frame.png"
+        },
+        {
+          "kind": "consumed_by",
+          "target": "src/use_pokeblock.c:sMonFrame_Gfx"
+        }
+      ]
+    },
+    {
+      "symbol_id": "bpej:contest_ui:sMonFrame_Tilemap",
+      "status": "verified",
+      "group": "pokeblock_use",
+      "label": "sMonFrame_Tilemap",
+      "consumer_file": "src/use_pokeblock.c",
+      "element_type": "u32",
+      "source_file": "graphics/pokeblock/use_screen/mon_frame.bin",
+      "source_conversion": [
+        ".smolTM"
+      ],
+      "comparison_file": "graphics/pokeblock/use_screen/mon_frame.bin",
+      "rom_offset": "0x005BF9A0",
+      "size": 172,
+      "compression": "gba_lz77",
+      "compressed_payload_size": 169,
+      "transform": "copy",
+      "output_representation": "gba_lz77_stream",
+      "output_path": "build/extracted_contest/pokeblock/use_screen/mon_frame.bin.lz",
+      "custom_path": "graphics/custom/bpej/contest/pokeblock/use_screen/mon_frame.bin.lz",
+      "expected_source_hash": "f7a23c5749e622bcde20d78d1ae934adcfc63443",
+      "expected_hash": "f7a23c5749e622bcde20d78d1ae934adcfc63443",
+      "decoded_size": 1280,
+      "expected_decoded_hash": "1e21772151540a9a1947ea6c51babdbd479556e4",
+      "verification": {
+        "byte_match": true,
+        "method": "lz77_decoded_byte_match",
+        "comparison_size": 1280,
+        "comparison_sha1": "1e21772151540a9a1947ea6c51babdbd479556e4",
+        "references": [
+          {
+            "file": "asm/use_pokeblock.s",
+            "function": "sub_08167734",
+            "line": 2944
+          }
+        ],
+        "detail": "The entire decoded ROM range matches the current converted asset byte for byte.",
+        "kind": "identical"
+      },
+      "relations": [
+        {
+          "kind": "replaces_asset",
+          "target": "graphics/pokeblock/use_screen/mon_frame.bin"
+        },
+        {
+          "kind": "consumed_by",
+          "target": "src/use_pokeblock.c:sMonFrame_Tilemap"
+        }
+      ]
+    },
+    {
+      "symbol_id": "bpej:contest_ui:sGraphData_Tilemap",
+      "status": "verified",
+      "group": "pokeblock_use",
+      "label": "sGraphData_Tilemap",
+      "consumer_file": "src/use_pokeblock.c",
+      "element_type": "u32",
+      "source_file": "graphics/pokeblock/use_screen/graph_data.bin",
+      "source_conversion": [
+        ".smolTM"
+      ],
+      "comparison_file": "graphics/pokeblock/use_screen/graph_data.bin",
+      "rom_offset": "0x005C0488",
+      "size": 164,
+      "compression": "gba_lz77",
+      "compressed_payload_size": 162,
+      "transform": "copy",
+      "output_representation": "gba_lz77_stream",
+      "output_path": "build/extracted_contest/pokeblock/use_screen/graph_data.bin.lz",
+      "custom_path": "graphics/custom/bpej/contest/pokeblock/use_screen/graph_data.bin.lz",
+      "expected_source_hash": "eb9b52ab1c697476ba5c577f7ed36f56e25ba36d",
+      "expected_hash": "eb9b52ab1c697476ba5c577f7ed36f56e25ba36d",
+      "decoded_size": 1280,
+      "expected_decoded_hash": "344a8f9ee1a3b59503440d3534635e9110df52ac",
+      "verification": {
+        "byte_match": true,
+        "method": "lz77_decoded_byte_match",
+        "comparison_size": 1280,
+        "comparison_sha1": "344a8f9ee1a3b59503440d3534635e9110df52ac",
+        "references": [
+          {
+            "file": "asm/use_pokeblock.s",
+            "function": "sub_08167734",
+            "line": 3048
+          }
+        ],
+        "detail": "The entire decoded ROM range matches the current converted asset byte for byte.",
+        "kind": "identical"
+      },
+      "relations": [
+        {
+          "kind": "replaces_asset",
+          "target": "graphics/pokeblock/use_screen/graph_data.bin"
+        },
+        {
+          "kind": "consumed_by",
+          "target": "src/use_pokeblock.c:sGraphData_Tilemap"
+        }
+      ]
+    },
+    {
+      "symbol_id": "bpej:contest_ui:gContestInterfaceGfx",
+      "status": "verified",
+      "group": "contest",
+      "label": "gContestInterfaceGfx",
+      "consumer_file": "src/graphics.c",
+      "element_type": "u32",
+      "source_file": "graphics/contest/interface.png",
+      "source_conversion": [
+        ".4bpp.smol"
+      ],
+      "comparison_file": "build/assets/graphics/contest/interface.png.4bpp",
+      "rom_offset": "0x00C17AB8",
+      "size": 2968,
+      "compression": "gba_lz77",
+      "compressed_payload_size": 2965,
+      "transform": "copy",
+      "output_representation": "gba_lz77_stream",
+      "output_path": "build/extracted_contest/contest/interface.4bpp.lz",
+      "custom_path": "graphics/custom/bpej/contest/contest/interface.4bpp.lz",
+      "expected_source_hash": "01317a820b175d4179f489ec0cbaf158fad1f629",
+      "expected_hash": "01317a820b175d4179f489ec0cbaf158fad1f629",
+      "decoded_size": 8192,
+      "expected_decoded_hash": "94e7f8019e858eebd13ec520f8845c7046596ec3",
+      "verification": {
+        "kind": "japanese_ui",
+        "byte_match": false,
+        "method": "bpej_screen_code_and_sprite_table",
+        "comparison_size": 8192,
+        "comparison_sha1": "f1a977f8a075ce4efdee82a01b59012a620418ca",
+        "references": [
+          {
+            "file": "asm/contest.s",
+            "function": "SetupContestGraphics"
+          }
+        ],
+        "detail": "Official Japanese UI counterpart identified by BPEJ screen code/table; English bytes intentionally differ. The corresponding screen set and read sizes are updated together.",
+        "screen_set": "contest_main",
+        "compatibility": "ROM-derived screen set; destination buffer sizes, tilemap indices and C copy widths are checked by tests."
+      },
+      "relations": [
+        {
+          "kind": "replaces_asset",
+          "target": "graphics/contest/interface.png"
+        },
+        {
+          "kind": "consumed_by",
+          "target": "src/graphics.c:gContestInterfaceGfx"
+        },
+        {
+          "kind": "screen_set",
+          "target": "contest_main"
+        }
+      ]
+    },
+    {
+      "symbol_id": "bpej:contest_ui:gContestResults_Gfx",
+      "status": "verified",
+      "group": "contest",
+      "label": "gContestResults_Gfx",
+      "consumer_file": "src/graphics.c",
+      "element_type": "u32",
+      "source_file": "graphics/contest/results_screen/tiles.png",
+      "source_conversion": [
+        ".4bpp.smol"
+      ],
+      "comparison_file": "build/assets/graphics/contest/results_screen/tiles.png.4bpp",
+      "rom_offset": "0x00C196CC",
+      "size": 2152,
+      "compression": "gba_lz77",
+      "compressed_payload_size": 2151,
+      "transform": "copy",
+      "output_representation": "gba_lz77_stream",
+      "output_path": "build/extracted_contest/contest/results_screen/tiles.4bpp.lz",
+      "custom_path": "graphics/custom/bpej/contest/contest/results_screen/tiles.4bpp.lz",
+      "expected_source_hash": "627a2d9981a67d7d5e1734547e7384e99c22d31e",
+      "expected_hash": "627a2d9981a67d7d5e1734547e7384e99c22d31e",
+      "decoded_size": 8192,
+      "expected_decoded_hash": "176a3ee4a5ee2e4d9530bc75b24d70fbd2de9e56",
+      "verification": {
+        "kind": "japanese_ui",
+        "byte_match": false,
+        "method": "bpej_screen_code_and_sprite_table",
+        "comparison_size": 8192,
+        "comparison_sha1": "a2aac5aca3d07d31596fb6ba854378e09cfb1680",
+        "references": [
+          {
+            "file": "asm/contest_link_80F57C4.s",
+            "function": "sub_080F6114"
+          }
+        ],
+        "detail": "Official Japanese UI counterpart identified by BPEJ screen code/table; English bytes intentionally differ. The corresponding screen set and read sizes are updated together.",
+        "screen_set": "contest_results",
+        "compatibility": "ROM-derived screen set; destination buffer sizes, tilemap indices and C copy widths are checked by tests."
+      },
+      "relations": [
+        {
+          "kind": "replaces_asset",
+          "target": "graphics/contest/results_screen/tiles.png"
+        },
+        {
+          "kind": "consumed_by",
+          "target": "src/graphics.c:gContestResults_Gfx"
+        },
+        {
+          "kind": "screen_set",
+          "target": "contest_results"
+        }
+      ]
+    },
+    {
+      "symbol_id": "bpej:contest_ui:gPokenavCondition_Gfx",
+      "status": "verified",
+      "group": "condition",
+      "label": "gPokenavCondition_Gfx",
+      "consumer_file": "src/graphics.c",
+      "element_type": "u32",
+      "source_file": "graphics/pokenav/condition/graph.png",
+      "source_conversion": [
+        ".4bpp.smol"
+      ],
+      "comparison_file": "build/assets/graphics/pokenav/condition/graph.png.4bpp",
+      "rom_offset": "0x005F4E6C",
+      "size": 1940,
+      "compression": "gba_lz77",
+      "compressed_payload_size": 1940,
+      "transform": "copy",
+      "output_representation": "gba_lz77_stream",
+      "output_path": "build/extracted_contest/pokenav/condition/graph.4bpp.lz",
+      "custom_path": "graphics/custom/bpej/contest/pokenav/condition/graph.4bpp.lz",
+      "expected_source_hash": "16d1e0f963faf8d6153ee6270c0f64d9311fcf86",
+      "expected_hash": "16d1e0f963faf8d6153ee6270c0f64d9311fcf86",
+      "decoded_size": 3872,
+      "expected_decoded_hash": "7b5aa04f674e9551be8625867738612c6be03fa5",
+      "verification": {
+        "kind": "japanese_ui",
+        "byte_match": false,
+        "method": "bpej_screen_code_and_sprite_table",
+        "comparison_size": 6656,
+        "comparison_sha1": "332ed91fbc6d0a4b8e19b4e6da43917bedb7d60e",
+        "references": [
+          {
+            "file": "asm/pokenav_unk_4.s",
+            "function": "sub_081CD5F4"
+          }
+        ],
+        "detail": "Official Japanese UI counterpart identified by BPEJ screen code/table; English bytes intentionally differ. The corresponding screen set and read sizes are updated together.",
+        "screen_set": "pokenav_graph",
+        "compatibility": "ROM-derived screen set; destination buffer sizes, tilemap indices and C copy widths are checked by tests."
+      },
+      "relations": [
+        {
+          "kind": "replaces_asset",
+          "target": "graphics/pokenav/condition/graph.png"
+        },
+        {
+          "kind": "consumed_by",
+          "target": "src/graphics.c:gPokenavCondition_Gfx"
+        },
+        {
+          "kind": "screen_set",
+          "target": "pokenav_graph"
+        }
+      ]
+    },
+    {
+      "symbol_id": "bpej:contest_ui:gPokenavCondition_Tilemap",
+      "status": "verified",
+      "group": "condition",
+      "label": "gPokenavCondition_Tilemap",
+      "consumer_file": "src/graphics.c",
+      "element_type": "u32",
+      "source_file": "graphics/pokenav/condition/graph.bin",
+      "source_conversion": [
+        ".smolTM"
+      ],
+      "comparison_file": "graphics/pokenav/condition/graph.bin",
+      "rom_offset": "0x005F5600",
+      "size": 492,
+      "compression": "gba_lz77",
+      "compressed_payload_size": 489,
+      "transform": "copy",
+      "output_representation": "gba_lz77_stream",
+      "output_path": "build/extracted_contest/pokenav/condition/graph.bin.lz",
+      "custom_path": "graphics/custom/bpej/contest/pokenav/condition/graph.bin.lz",
+      "expected_source_hash": "2ce8277d903f2ceb8b2e12566afa53a72a34de8b",
+      "expected_hash": "2ce8277d903f2ceb8b2e12566afa53a72a34de8b",
+      "decoded_size": 2048,
+      "expected_decoded_hash": "3ba09b09785d92bce2c242640d9683142f799c8f",
+      "verification": {
+        "kind": "japanese_ui",
+        "byte_match": false,
+        "method": "bpej_screen_code_and_sprite_table",
+        "comparison_size": 2048,
+        "comparison_sha1": "5ec42a96ad06fc842ce01b2fbf0b8dabe798884d",
+        "references": [
+          {
+            "file": "asm/pokenav_unk_4.s",
+            "function": "sub_081CD5F4"
+          }
+        ],
+        "detail": "Official Japanese UI counterpart identified by BPEJ screen code/table; English bytes intentionally differ. The corresponding screen set and read sizes are updated together.",
+        "screen_set": "pokenav_graph",
+        "compatibility": "ROM-derived screen set; destination buffer sizes, tilemap indices and C copy widths are checked by tests."
+      },
+      "relations": [
+        {
+          "kind": "replaces_asset",
+          "target": "graphics/pokenav/condition/graph.bin"
+        },
+        {
+          "kind": "consumed_by",
+          "target": "src/graphics.c:gPokenavCondition_Tilemap"
+        },
+        {
+          "kind": "screen_set",
+          "target": "pokenav_graph"
+        }
+      ]
+    },
+    {
+      "symbol_id": "bpej:contest_ui:gUsePokeblockGraph_Gfx",
+      "status": "verified",
+      "group": "pokeblock_use",
+      "label": "gUsePokeblockGraph_Gfx",
+      "consumer_file": "src/graphics.c",
+      "element_type": "u32",
+      "source_file": "graphics/pokeblock/use_screen/graph.png",
+      "source_conversion": [
+        ".4bpp.smol"
+      ],
+      "comparison_file": "build/assets/graphics/pokeblock/use_screen/graph.png.4bpp",
+      "rom_offset": "0x005BFAAC",
+      "size": 1924,
+      "compression": "gba_lz77",
+      "compressed_payload_size": 1921,
+      "transform": "copy",
+      "output_representation": "gba_lz77_stream",
+      "output_path": "build/extracted_contest/pokeblock/use_screen/graph.4bpp.lz",
+      "custom_path": "graphics/custom/bpej/contest/pokeblock/use_screen/graph.4bpp.lz",
+      "expected_source_hash": "36dfcc186301da5be7f9da52f52794447dcb136a",
+      "expected_hash": "36dfcc186301da5be7f9da52f52794447dcb136a",
+      "decoded_size": 4000,
+      "expected_decoded_hash": "a02247894e7b98ac5879071a68edcb2cf39cd528",
+      "verification": {
+        "kind": "japanese_ui",
+        "byte_match": false,
+        "method": "bpej_screen_code_and_sprite_table",
+        "comparison_size": 6656,
+        "comparison_sha1": "d1a5d24f297c14de362c053db798cc9cad2d9cad",
+        "references": [
+          {
+            "file": "asm/use_pokeblock.s",
+            "function": "sub_08167734"
+          }
+        ],
+        "detail": "Official Japanese UI counterpart identified by BPEJ screen code/table; English bytes intentionally differ. The corresponding screen set and read sizes are updated together.",
+        "screen_set": "pokeblock_graph",
+        "compatibility": "ROM-derived screen set; destination buffer sizes, tilemap indices and C copy widths are checked by tests."
+      },
+      "relations": [
+        {
+          "kind": "replaces_asset",
+          "target": "graphics/pokeblock/use_screen/graph.png"
+        },
+        {
+          "kind": "consumed_by",
+          "target": "src/graphics.c:gUsePokeblockGraph_Gfx"
+        },
+        {
+          "kind": "screen_set",
+          "target": "pokeblock_graph"
+        }
+      ]
+    },
+    {
+      "symbol_id": "bpej:contest_ui:gUsePokeblockGraph_Tilemap",
+      "status": "verified",
+      "group": "pokeblock_use",
+      "label": "gUsePokeblockGraph_Tilemap",
+      "consumer_file": "src/graphics.c",
+      "element_type": "u32",
+      "source_file": "graphics/pokeblock/use_screen/graph.bin",
+      "source_conversion": [
+        ".smolTM"
+      ],
+      "comparison_file": "graphics/pokeblock/use_screen/graph.bin",
+      "rom_offset": "0x005C0230",
+      "size": 400,
+      "compression": "gba_lz77",
+      "compressed_payload_size": 399,
+      "transform": "copy",
+      "output_representation": "gba_lz77_stream",
+      "output_path": "build/extracted_contest/pokeblock/use_screen/graph.bin.lz",
+      "custom_path": "graphics/custom/bpej/contest/pokeblock/use_screen/graph.bin.lz",
+      "expected_source_hash": "737b6f41b99fe8338f59513551ffb61fa7b234da",
+      "expected_hash": "737b6f41b99fe8338f59513551ffb61fa7b234da",
+      "decoded_size": 1280,
+      "expected_decoded_hash": "1709bfbc3d5cff739bd39613b7025a232b624837",
+      "verification": {
+        "kind": "japanese_ui",
+        "byte_match": false,
+        "method": "bpej_screen_code_and_sprite_table",
+        "comparison_size": 1280,
+        "comparison_sha1": "2167a67dc1673898fd04c9929ed84eefb93789f2",
+        "references": [
+          {
+            "file": "asm/use_pokeblock.s",
+            "function": "sub_08167734"
+          }
+        ],
+        "detail": "Official Japanese UI counterpart identified by BPEJ screen code/table; English bytes intentionally differ. The corresponding screen set and read sizes are updated together.",
+        "screen_set": "pokeblock_graph",
+        "compatibility": "ROM-derived screen set; destination buffer sizes, tilemap indices and C copy widths are checked by tests."
+      },
+      "relations": [
+        {
+          "kind": "replaces_asset",
+          "target": "graphics/pokeblock/use_screen/graph.bin"
+        },
+        {
+          "kind": "consumed_by",
+          "target": "src/graphics.c:gUsePokeblockGraph_Tilemap"
+        },
+        {
+          "kind": "screen_set",
+          "target": "pokeblock_graph"
+        }
+      ]
+    },
+    {
+      "symbol_id": "bpej:contest_ui:gUsePokeblockCondition_Gfx",
+      "status": "verified",
+      "group": "pokeblock_use",
+      "label": "gUsePokeblockCondition_Gfx",
+      "consumer_file": "src/graphics.c",
+      "element_type": "u32",
+      "source_file": "graphics/pokeblock/use_screen/condition.png",
+      "source_conversion": [
+        ".4bpp.smol"
+      ],
+      "comparison_file": "build/assets/graphics/pokeblock/use_screen/condition.png.4bpp",
+      "rom_offset": "0x005BEBC0",
+      "size": 372,
+      "compression": "gba_lz77",
+      "compressed_payload_size": 371,
+      "transform": "copy",
+      "output_representation": "gba_lz77_stream",
+      "output_path": "build/extracted_contest/pokeblock/use_screen/condition.4bpp.lz",
+      "custom_path": "graphics/custom/bpej/contest/pokeblock/use_screen/condition.4bpp.lz",
+      "expected_source_hash": "a33d5dd8a679baae8bbe4bc18b6628545c97e284",
+      "expected_hash": "a33d5dd8a679baae8bbe4bc18b6628545c97e284",
+      "decoded_size": 2048,
+      "expected_decoded_hash": "2b3c64946afb8f8d5663f532fe3ea52d634f7a9c",
+      "verification": {
+        "kind": "japanese_ui",
+        "byte_match": false,
+        "method": "bpej_screen_code_and_sprite_table",
+        "comparison_size": 2048,
+        "comparison_sha1": "40ae28bf3aa3d695961eccd934744543f92bfbf4",
+        "references": [
+          {
+            "file": "asm/use_pokeblock.s",
+            "function": "sub_08168050",
+            "pointer_literal": "0x085BEBC0"
+          }
+        ],
+        "detail": "Official Japanese UI counterpart identified by BPEJ screen code/table; English bytes intentionally differ. The corresponding screen set and read sizes are updated together.",
+        "screen_set": "pokeblock_graph",
+        "compatibility": "ROM-derived screen set; destination buffer sizes, tilemap indices and C copy widths are checked by tests."
+      },
+      "relations": [
+        {
+          "kind": "replaces_asset",
+          "target": "graphics/pokeblock/use_screen/condition.png"
+        },
+        {
+          "kind": "consumed_by",
+          "target": "src/graphics.c:gUsePokeblockCondition_Gfx"
+        },
+        {
+          "kind": "screen_set",
+          "target": "pokeblock_graph"
+        }
+      ]
+    },
+    {
+      "symbol_id": "bpej:contest_ui:gPokenavLeftHeaderMainMenu_Gfx",
+      "status": "verified",
+      "group": "condition",
+      "label": "gPokenavLeftHeaderMainMenu_Gfx",
+      "consumer_file": "src/graphics.c",
+      "element_type": "u32",
+      "source_file": "graphics/pokenav/left_headers/main_menu.png",
+      "source_conversion": [
+        ".4bpp.smol"
+      ],
+      "comparison_file": "build/assets/graphics/pokenav/left_headers/main_menu.png.4bpp",
+      "rom_offset": "0x005F02BC",
+      "size": 364,
+      "compression": "gba_lz77",
+      "compressed_payload_size": 363,
+      "transform": "copy",
+      "output_representation": "gba_lz77_stream",
+      "output_path": "build/extracted_contest/pokenav/left_headers/main_menu.4bpp.lz",
+      "custom_path": "graphics/custom/bpej/contest/pokenav/left_headers/main_menu.4bpp.lz",
+      "expected_source_hash": "b2f20ceaee76e77903f2d5c23a079f8c1e9ce475",
+      "expected_hash": "b2f20ceaee76e77903f2d5c23a079f8c1e9ce475",
+      "decoded_size": 2048,
+      "expected_decoded_hash": "a82954d7996f010dbee13dc86b880b545c0489b6",
+      "verification": {
+        "kind": "japanese_ui",
+        "byte_match": false,
+        "method": "bpej_screen_code_and_sprite_table",
+        "comparison_size": 2048,
+        "comparison_sha1": "1c8260f3c44356b74330c908f6033c2f49e3a407",
+        "references": [
+          {
+            "file": "asm/pokenav_main_menu.s",
+            "function": "LoadLeftHeaderGfxForMenu",
+            "table_rom_offset": "0x005F1430",
+            "table_index": 0
+          }
+        ],
+        "detail": "Official Japanese UI counterpart identified by BPEJ screen code/table; English bytes intentionally differ. The corresponding screen set and read sizes are updated together.",
+        "screen_set": "condition_headers",
+        "compatibility": "ROM-derived screen set; destination buffer sizes, tilemap indices and C copy widths are checked by tests."
+      },
+      "relations": [
+        {
+          "kind": "replaces_asset",
+          "target": "graphics/pokenav/left_headers/main_menu.png"
+        },
+        {
+          "kind": "consumed_by",
+          "target": "src/graphics.c:gPokenavLeftHeaderMainMenu_Gfx"
+        },
+        {
+          "kind": "screen_set",
+          "target": "condition_headers"
+        }
+      ]
+    },
+    {
+      "symbol_id": "bpej:contest_ui:gPokenavLeftHeaderCondition_Gfx",
+      "status": "verified",
+      "group": "condition",
+      "label": "gPokenavLeftHeaderCondition_Gfx",
+      "consumer_file": "src/graphics.c",
+      "element_type": "u32",
+      "source_file": "graphics/pokenav/left_headers/condition.png",
+      "source_conversion": [
+        ".4bpp.smol"
+      ],
+      "comparison_file": "build/assets/graphics/pokenav/left_headers/condition.png.4bpp",
+      "rom_offset": "0x005F073C",
+      "size": 372,
+      "compression": "gba_lz77",
+      "compressed_payload_size": 371,
+      "transform": "copy",
+      "output_representation": "gba_lz77_stream",
+      "output_path": "build/extracted_contest/pokenav/left_headers/condition.4bpp.lz",
+      "custom_path": "graphics/custom/bpej/contest/pokenav/left_headers/condition.4bpp.lz",
+      "expected_source_hash": "a33d5dd8a679baae8bbe4bc18b6628545c97e284",
+      "expected_hash": "a33d5dd8a679baae8bbe4bc18b6628545c97e284",
+      "decoded_size": 2048,
+      "expected_decoded_hash": "2b3c64946afb8f8d5663f532fe3ea52d634f7a9c",
+      "verification": {
+        "kind": "japanese_ui",
+        "byte_match": false,
+        "method": "bpej_screen_code_and_sprite_table",
+        "comparison_size": 2048,
+        "comparison_sha1": "40ae28bf3aa3d695961eccd934744543f92bfbf4",
+        "references": [
+          {
+            "file": "asm/pokenav_main_menu.s",
+            "function": "LoadLeftHeaderGfxForMenu",
+            "table_rom_offset": "0x005F1430",
+            "table_index": 1
+          }
+        ],
+        "detail": "Official Japanese UI counterpart identified by BPEJ screen code/table; English bytes intentionally differ. The corresponding screen set and read sizes are updated together.",
+        "screen_set": "condition_headers",
+        "compatibility": "ROM-derived screen set; destination buffer sizes, tilemap indices and C copy widths are checked by tests."
+      },
+      "relations": [
+        {
+          "kind": "replaces_asset",
+          "target": "graphics/pokenav/left_headers/condition.png"
+        },
+        {
+          "kind": "consumed_by",
+          "target": "src/graphics.c:gPokenavLeftHeaderCondition_Gfx"
+        },
+        {
+          "kind": "screen_set",
+          "target": "condition_headers"
+        }
+      ]
+    },
+    {
+      "symbol_id": "bpej:contest_ui:gPokenavLeftHeaderParty_Gfx",
+      "status": "verified",
+      "group": "condition",
+      "label": "gPokenavLeftHeaderParty_Gfx",
+      "consumer_file": "src/graphics.c",
+      "element_type": "u32",
+      "source_file": "graphics/pokenav/left_headers/party.png",
+      "source_conversion": [
+        ".4bpp.smol"
+      ],
+      "comparison_file": "build/assets/graphics/pokenav/left_headers/party.png.4bpp",
+      "rom_offset": "0x005F0B24",
+      "size": 360,
+      "compression": "gba_lz77",
+      "compressed_payload_size": 359,
+      "transform": "copy",
+      "output_representation": "gba_lz77_stream",
+      "output_path": "build/extracted_contest/pokenav/left_headers/party.4bpp.lz",
+      "custom_path": "graphics/custom/bpej/contest/pokenav/left_headers/party.4bpp.lz",
+      "expected_source_hash": "2c8f45fd7cc2914770b9ae5620eab518311ce19d",
+      "expected_hash": "2c8f45fd7cc2914770b9ae5620eab518311ce19d",
+      "decoded_size": 1024,
+      "expected_decoded_hash": "97a2c6c186134041347e066ba39aa886ec8562e0",
+      "verification": {
+        "kind": "japanese_ui",
+        "byte_match": false,
+        "method": "bpej_screen_code_and_sprite_table",
+        "comparison_size": 1024,
+        "comparison_sha1": "8d71858c45eb4d7d418dd9e9a6727e9cafee9e1c",
+        "references": [
+          {
+            "file": "asm/pokenav_main_menu.s",
+            "function": "LoadLeftHeaderGfxForSubMenu",
+            "table_rom_offset": "0x005F1460",
+            "table_index": 0
+          }
+        ],
+        "detail": "Official Japanese UI counterpart identified by BPEJ screen code/table; English bytes intentionally differ. The corresponding screen set and read sizes are updated together.",
+        "screen_set": "condition_headers",
+        "compatibility": "ROM-derived screen set; destination buffer sizes, tilemap indices and C copy widths are checked by tests."
+      },
+      "relations": [
+        {
+          "kind": "replaces_asset",
+          "target": "graphics/pokenav/left_headers/party.png"
+        },
+        {
+          "kind": "consumed_by",
+          "target": "src/graphics.c:gPokenavLeftHeaderParty_Gfx"
+        },
+        {
+          "kind": "screen_set",
+          "target": "condition_headers"
+        }
+      ]
+    },
+    {
+      "symbol_id": "bpej:contest_ui:gPokenavLeftHeaderSearch_Gfx",
+      "status": "verified",
+      "group": "condition",
+      "label": "gPokenavLeftHeaderSearch_Gfx",
+      "consumer_file": "src/graphics.c",
+      "element_type": "u32",
+      "source_file": "graphics/pokenav/left_headers/search.png",
+      "source_conversion": [
+        ".4bpp.smol"
+      ],
+      "comparison_file": "build/assets/graphics/pokenav/left_headers/search.png.4bpp",
+      "rom_offset": "0x005F0C8C",
+      "size": 352,
+      "compression": "gba_lz77",
+      "compressed_payload_size": 349,
+      "transform": "copy",
+      "output_representation": "gba_lz77_stream",
+      "output_path": "build/extracted_contest/pokenav/left_headers/search.4bpp.lz",
+      "custom_path": "graphics/custom/bpej/contest/pokenav/left_headers/search.4bpp.lz",
+      "expected_source_hash": "2492b19468b1cba42454dedf325598f2df112bcb",
+      "expected_hash": "2492b19468b1cba42454dedf325598f2df112bcb",
+      "decoded_size": 1024,
+      "expected_decoded_hash": "8e87807462b827806d9a0b4d0bfda8ac061af377",
+      "verification": {
+        "kind": "japanese_ui",
+        "byte_match": false,
+        "method": "bpej_screen_code_and_sprite_table",
+        "comparison_size": 1024,
+        "comparison_sha1": "35c5b24adff285fac8c4784805ca93026b8a5afb",
+        "references": [
+          {
+            "file": "asm/pokenav_main_menu.s",
+            "function": "LoadLeftHeaderGfxForSubMenu",
+            "table_rom_offset": "0x005F1460",
+            "table_index": 1
+          }
+        ],
+        "detail": "Official Japanese UI counterpart identified by BPEJ screen code/table; English bytes intentionally differ. The corresponding screen set and read sizes are updated together.",
+        "screen_set": "condition_headers",
+        "compatibility": "ROM-derived screen set; destination buffer sizes, tilemap indices and C copy widths are checked by tests."
+      },
+      "relations": [
+        {
+          "kind": "replaces_asset",
+          "target": "graphics/pokenav/left_headers/search.png"
+        },
+        {
+          "kind": "consumed_by",
+          "target": "src/graphics.c:gPokenavLeftHeaderSearch_Gfx"
+        },
+        {
+          "kind": "screen_set",
+          "target": "condition_headers"
+        }
+      ]
+    },
+    {
+      "symbol_id": "bpej:contest_ui:gPokenavLeftHeaderCool_Gfx",
+      "status": "verified",
+      "group": "condition",
+      "label": "gPokenavLeftHeaderCool_Gfx",
+      "consumer_file": "src/graphics.c",
+      "element_type": "u32",
+      "source_file": "graphics/pokenav/left_headers/cool.png",
+      "source_conversion": [
+        ".4bpp.smol"
+      ],
+      "comparison_file": "build/assets/graphics/pokenav/left_headers/cool.png.4bpp",
+      "rom_offset": "0x005F0DEC",
+      "size": 276,
+      "compression": "gba_lz77",
+      "compressed_payload_size": 276,
+      "transform": "copy",
+      "output_representation": "gba_lz77_stream",
+      "output_path": "build/extracted_contest/pokenav/left_headers/cool.4bpp.lz",
+      "custom_path": "graphics/custom/bpej/contest/pokenav/left_headers/cool.4bpp.lz",
+      "expected_source_hash": "29f999ada6c1286f78731c44bcdd2adf3660c013",
+      "expected_hash": "29f999ada6c1286f78731c44bcdd2adf3660c013",
+      "decoded_size": 1024,
+      "expected_decoded_hash": "08be06f52a5e993eb2f861e0006c7265013a8829",
+      "verification": {
+        "kind": "japanese_ui",
+        "byte_match": false,
+        "method": "bpej_screen_code_and_sprite_table",
+        "comparison_size": 1024,
+        "comparison_sha1": "94b14edce6c0c524e8a905f35d1e114b4a9c67bc",
+        "references": [
+          {
+            "file": "asm/pokenav_main_menu.s",
+            "function": "LoadLeftHeaderGfxForSubMenu",
+            "table_rom_offset": "0x005F1460",
+            "table_index": 2
+          }
+        ],
+        "detail": "Official Japanese UI counterpart identified by BPEJ screen code/table; English bytes intentionally differ. The corresponding screen set and read sizes are updated together.",
+        "screen_set": "condition_headers",
+        "compatibility": "ROM-derived screen set; destination buffer sizes, tilemap indices and C copy widths are checked by tests."
+      },
+      "relations": [
+        {
+          "kind": "replaces_asset",
+          "target": "graphics/pokenav/left_headers/cool.png"
+        },
+        {
+          "kind": "consumed_by",
+          "target": "src/graphics.c:gPokenavLeftHeaderCool_Gfx"
+        },
+        {
+          "kind": "screen_set",
+          "target": "condition_headers"
+        }
+      ]
+    },
+    {
+      "symbol_id": "bpej:contest_ui:gPokenavLeftHeaderBeauty_Gfx",
+      "status": "verified",
+      "group": "condition",
+      "label": "gPokenavLeftHeaderBeauty_Gfx",
+      "consumer_file": "src/graphics.c",
+      "element_type": "u32",
+      "source_file": "graphics/pokenav/left_headers/beauty.png",
+      "source_conversion": [
+        ".4bpp.smol"
+      ],
+      "comparison_file": "build/assets/graphics/pokenav/left_headers/beauty.png.4bpp",
+      "rom_offset": "0x005F0F00",
+      "size": 308,
+      "compression": "gba_lz77",
+      "compressed_payload_size": 307,
+      "transform": "copy",
+      "output_representation": "gba_lz77_stream",
+      "output_path": "build/extracted_contest/pokenav/left_headers/beauty.4bpp.lz",
+      "custom_path": "graphics/custom/bpej/contest/pokenav/left_headers/beauty.4bpp.lz",
+      "expected_source_hash": "af828e6f3caa6f3b42e3c5d48fbd53c200749e39",
+      "expected_hash": "af828e6f3caa6f3b42e3c5d48fbd53c200749e39",
+      "decoded_size": 1024,
+      "expected_decoded_hash": "7ba9f602eb6bc7eaf42b7ac6d0edea4bcdeae344",
+      "verification": {
+        "kind": "japanese_ui",
+        "byte_match": false,
+        "method": "bpej_screen_code_and_sprite_table",
+        "comparison_size": 1024,
+        "comparison_sha1": "2853a9400574d8b4e407bcc9906918a513340b91",
+        "references": [
+          {
+            "file": "asm/pokenav_main_menu.s",
+            "function": "LoadLeftHeaderGfxForSubMenu",
+            "table_rom_offset": "0x005F1460",
+            "table_index": 3
+          }
+        ],
+        "detail": "Official Japanese UI counterpart identified by BPEJ screen code/table; English bytes intentionally differ. The corresponding screen set and read sizes are updated together.",
+        "screen_set": "condition_headers",
+        "compatibility": "ROM-derived screen set; destination buffer sizes, tilemap indices and C copy widths are checked by tests."
+      },
+      "relations": [
+        {
+          "kind": "replaces_asset",
+          "target": "graphics/pokenav/left_headers/beauty.png"
+        },
+        {
+          "kind": "consumed_by",
+          "target": "src/graphics.c:gPokenavLeftHeaderBeauty_Gfx"
+        },
+        {
+          "kind": "screen_set",
+          "target": "condition_headers"
+        }
+      ]
+    },
+    {
+      "symbol_id": "bpej:contest_ui:gPokenavLeftHeaderCute_Gfx",
+      "status": "verified",
+      "group": "condition",
+      "label": "gPokenavLeftHeaderCute_Gfx",
+      "consumer_file": "src/graphics.c",
+      "element_type": "u32",
+      "source_file": "graphics/pokenav/left_headers/cute.png",
+      "source_conversion": [
+        ".4bpp.smol"
+      ],
+      "comparison_file": "build/assets/graphics/pokenav/left_headers/cute.png.4bpp",
+      "rom_offset": "0x005F1034",
+      "size": 312,
+      "compression": "gba_lz77",
+      "compressed_payload_size": 310,
+      "transform": "copy",
+      "output_representation": "gba_lz77_stream",
+      "output_path": "build/extracted_contest/pokenav/left_headers/cute.4bpp.lz",
+      "custom_path": "graphics/custom/bpej/contest/pokenav/left_headers/cute.4bpp.lz",
+      "expected_source_hash": "381d02f699d8bac3a14e03d94e85036e29be3950",
+      "expected_hash": "381d02f699d8bac3a14e03d94e85036e29be3950",
+      "decoded_size": 1024,
+      "expected_decoded_hash": "e5b026b0f045e336165338533a2b703a365fff36",
+      "verification": {
+        "kind": "japanese_ui",
+        "byte_match": false,
+        "method": "bpej_screen_code_and_sprite_table",
+        "comparison_size": 1024,
+        "comparison_sha1": "8869030a1f40e4fcad47fb49bef452da6958df7d",
+        "references": [
+          {
+            "file": "asm/pokenav_main_menu.s",
+            "function": "LoadLeftHeaderGfxForSubMenu",
+            "table_rom_offset": "0x005F1460",
+            "table_index": 4
+          }
+        ],
+        "detail": "Official Japanese UI counterpart identified by BPEJ screen code/table; English bytes intentionally differ. The corresponding screen set and read sizes are updated together.",
+        "screen_set": "condition_headers",
+        "compatibility": "ROM-derived screen set; destination buffer sizes, tilemap indices and C copy widths are checked by tests."
+      },
+      "relations": [
+        {
+          "kind": "replaces_asset",
+          "target": "graphics/pokenav/left_headers/cute.png"
+        },
+        {
+          "kind": "consumed_by",
+          "target": "src/graphics.c:gPokenavLeftHeaderCute_Gfx"
+        },
+        {
+          "kind": "screen_set",
+          "target": "condition_headers"
+        }
+      ]
+    },
+    {
+      "symbol_id": "bpej:contest_ui:gPokenavLeftHeaderSmart_Gfx",
+      "status": "verified",
+      "group": "condition",
+      "label": "gPokenavLeftHeaderSmart_Gfx",
+      "consumer_file": "src/graphics.c",
+      "element_type": "u32",
+      "source_file": "graphics/pokenav/left_headers/smart.png",
+      "source_conversion": [
+        ".4bpp.smol"
+      ],
+      "comparison_file": "build/assets/graphics/pokenav/left_headers/smart.png.4bpp",
+      "rom_offset": "0x005F116C",
+      "size": 284,
+      "compression": "gba_lz77",
+      "compressed_payload_size": 283,
+      "transform": "copy",
+      "output_representation": "gba_lz77_stream",
+      "output_path": "build/extracted_contest/pokenav/left_headers/smart.4bpp.lz",
+      "custom_path": "graphics/custom/bpej/contest/pokenav/left_headers/smart.4bpp.lz",
+      "expected_source_hash": "6a9a6cc1490c45753e1c2ffa1e2fbd50f46d77b9",
+      "expected_hash": "6a9a6cc1490c45753e1c2ffa1e2fbd50f46d77b9",
+      "decoded_size": 1024,
+      "expected_decoded_hash": "c502067a4b91fc08fadd203011494985e9361421",
+      "verification": {
+        "kind": "japanese_ui",
+        "byte_match": false,
+        "method": "bpej_screen_code_and_sprite_table",
+        "comparison_size": 1024,
+        "comparison_sha1": "3315617ed13fe19b985b61204d738f1653651c0f",
+        "references": [
+          {
+            "file": "asm/pokenav_main_menu.s",
+            "function": "LoadLeftHeaderGfxForSubMenu",
+            "table_rom_offset": "0x005F1460",
+            "table_index": 5
+          }
+        ],
+        "detail": "Official Japanese UI counterpart identified by BPEJ screen code/table; English bytes intentionally differ. The corresponding screen set and read sizes are updated together.",
+        "screen_set": "condition_headers",
+        "compatibility": "ROM-derived screen set; destination buffer sizes, tilemap indices and C copy widths are checked by tests."
+      },
+      "relations": [
+        {
+          "kind": "replaces_asset",
+          "target": "graphics/pokenav/left_headers/smart.png"
+        },
+        {
+          "kind": "consumed_by",
+          "target": "src/graphics.c:gPokenavLeftHeaderSmart_Gfx"
+        },
+        {
+          "kind": "screen_set",
+          "target": "condition_headers"
+        }
+      ]
+    },
+    {
+      "symbol_id": "bpej:contest_ui:gPokenavLeftHeaderTough_Gfx",
+      "status": "verified",
+      "group": "condition",
+      "label": "gPokenavLeftHeaderTough_Gfx",
+      "consumer_file": "src/graphics.c",
+      "element_type": "u32",
+      "source_file": "graphics/pokenav/left_headers/tough.png",
+      "source_conversion": [
+        ".4bpp.smol"
+      ],
+      "comparison_file": "build/assets/graphics/pokenav/left_headers/tough.png.4bpp",
+      "rom_offset": "0x005F1288",
+      "size": 320,
+      "compression": "gba_lz77",
+      "compressed_payload_size": 318,
+      "transform": "copy",
+      "output_representation": "gba_lz77_stream",
+      "output_path": "build/extracted_contest/pokenav/left_headers/tough.4bpp.lz",
+      "custom_path": "graphics/custom/bpej/contest/pokenav/left_headers/tough.4bpp.lz",
+      "expected_source_hash": "69af58f1bdde3d24c3ebb6e13687db9cdaca27bc",
+      "expected_hash": "69af58f1bdde3d24c3ebb6e13687db9cdaca27bc",
+      "decoded_size": 1024,
+      "expected_decoded_hash": "f2a3e4f11052f21847b91016d69c2fe14c85e4a2",
+      "verification": {
+        "kind": "japanese_ui",
+        "byte_match": false,
+        "method": "bpej_screen_code_and_sprite_table",
+        "comparison_size": 1024,
+        "comparison_sha1": "297aa784eb0afa4252208030c57436e77fff09f7",
+        "references": [
+          {
+            "file": "asm/pokenav_main_menu.s",
+            "function": "LoadLeftHeaderGfxForSubMenu",
+            "table_rom_offset": "0x005F1460",
+            "table_index": 6
+          }
+        ],
+        "detail": "Official Japanese UI counterpart identified by BPEJ screen code/table; English bytes intentionally differ. The corresponding screen set and read sizes are updated together.",
+        "screen_set": "condition_headers",
+        "compatibility": "ROM-derived screen set; destination buffer sizes, tilemap indices and C copy widths are checked by tests."
+      },
+      "relations": [
+        {
+          "kind": "replaces_asset",
+          "target": "graphics/pokenav/left_headers/tough.png"
+        },
+        {
+          "kind": "consumed_by",
+          "target": "src/graphics.c:gPokenavLeftHeaderTough_Gfx"
+        },
+        {
+          "kind": "screen_set",
+          "target": "condition_headers"
+        }
+      ]
+    },
+    {
+      "symbol_id": "bpej:contest_ui:gPokenavOptions_Gfx",
+      "status": "verified",
+      "group": "condition",
+      "label": "gPokenavOptions_Gfx",
+      "consumer_file": "src/graphics.c",
+      "element_type": "u32",
+      "source_file": "graphics/pokenav/options/options.4bpp",
+      "source_conversion": [
+        ".smol"
+      ],
+      "comparison_file": "graphics/pokenav/options/options.4bpp",
+      "rom_offset": "0x005F1C90",
+      "size": 2524,
+      "compression": "gba_lz77",
+      "compressed_payload_size": 2522,
+      "transform": "copy",
+      "output_representation": "gba_lz77_stream",
+      "output_path": "build/extracted_contest/pokenav/options/options.4bpp.lz",
+      "custom_path": "graphics/custom/bpej/contest/pokenav/options/options.4bpp.lz",
+      "expected_source_hash": "c4ecb3df5071c520949c506c1e93dcfaaab229ac",
+      "expected_hash": "c4ecb3df5071c520949c506c1e93dcfaaab229ac",
+      "decoded_size": 13312,
+      "expected_decoded_hash": "3deee1a6217514bc524e59b817d45ce6a78fc667",
+      "verification": {
+        "kind": "japanese_ui",
+        "byte_match": false,
+        "method": "bpej_screen_code_and_sprite_table",
+        "comparison_size": 13312,
+        "comparison_sha1": "95ae374c092b5dc14e9d1950898cf02e4f1c1609",
+        "references": [
+          {
+            "file": "asm/pokenav_unk_2.s",
+            "function": "sub_081C9770",
+            "table_rom_offset": "0x005F272C",
+            "table_index": 0
+          }
+        ],
+        "detail": "Official Japanese UI counterpart identified by BPEJ screen code/table; English bytes intentionally differ. The corresponding screen set and read sizes are updated together.",
+        "screen_set": "condition_options",
+        "compatibility": "ROM-derived screen set; destination buffer sizes, tilemap indices and C copy widths are checked by tests."
+      },
+      "relations": [
+        {
+          "kind": "replaces_asset",
+          "target": "graphics/pokenav/options/options.4bpp"
+        },
+        {
+          "kind": "consumed_by",
+          "target": "src/graphics.c:gPokenavOptions_Gfx"
+        },
+        {
+          "kind": "screen_set",
+          "target": "condition_options"
+        }
+      ]
+    },
+    {
+      "symbol_id": "bpej:contest_ui:gContestNextTurnGfx",
+      "status": "verified",
+      "group": "contest",
+      "label": "gContestNextTurnGfx",
+      "consumer_file": "src/graphics.c",
+      "element_type": "u32",
+      "source_file": "graphics/contest/nextturn.png",
+      "source_conversion": [
+        ".4bpp.smol"
+      ],
+      "comparison_file": "build/assets/graphics/contest/nextturn.png.4bpp",
+      "rom_offset": "0x00D8E920",
+      "size": 92,
+      "compression": "gba_lz77",
+      "compressed_payload_size": 90,
+      "transform": "copy",
+      "output_representation": "gba_lz77_stream",
+      "output_path": "build/extracted_contest/contest/nextturn.4bpp.lz",
+      "custom_path": "graphics/custom/bpej/contest/contest/nextturn.4bpp.lz",
+      "expected_source_hash": "f206685a671715b9b1205097e09979dd578b4dbc",
+      "expected_hash": "f206685a671715b9b1205097e09979dd578b4dbc",
+      "decoded_size": 160,
+      "expected_decoded_hash": "06d8ac8f6307fd4f834a168f0c55f68ffebcab4d",
+      "verification": {
+        "kind": "japanese_ui",
+        "byte_match": false,
+        "method": "bpej_screen_code_and_sprite_table",
+        "comparison_size": 256,
+        "comparison_sha1": "19e8082f40091ecb37216bf0eee7a6a75ee72338",
+        "references": [
+          {
+            "file": "asm/contest.s",
+            "function": "sub_080DBC54",
+            "table_rom_offset": "0x00560A4C",
+            "table_index": 0
+          }
+        ],
+        "detail": "Official Japanese UI counterpart identified by BPEJ screen code/table; English bytes intentionally differ. The corresponding screen set and read sizes are updated together.",
+        "screen_set": "contest_main",
+        "compatibility": "ROM-derived screen set; destination buffer sizes, tilemap indices and C copy widths are checked by tests."
+      },
+      "relations": [
+        {
+          "kind": "replaces_asset",
+          "target": "graphics/contest/nextturn.png"
+        },
+        {
+          "kind": "consumed_by",
+          "target": "src/graphics.c:gContestNextTurnGfx"
+        },
+        {
+          "kind": "screen_set",
+          "target": "contest_main"
+        }
+      ]
+    },
+    {
+      "symbol_id": "bpej:contest_ui:gContestApplauseGfx",
+      "status": "verified",
+      "group": "contest",
+      "label": "gContestApplauseGfx",
+      "consumer_file": "src/graphics.c",
+      "element_type": "u32",
+      "source_file": "graphics/contest/applause.png",
+      "source_conversion": [
+        ".4bpp.smol"
+      ],
+      "comparison_file": "build/assets/graphics/contest/applause.png.4bpp",
+      "rom_offset": "0x00D8EAAC",
+      "size": 300,
+      "compression": "gba_lz77",
+      "compressed_payload_size": 299,
+      "transform": "copy",
+      "output_representation": "gba_lz77_stream",
+      "output_path": "build/extracted_contest/contest/applause.4bpp.lz",
+      "custom_path": "graphics/custom/bpej/contest/contest/applause.4bpp.lz",
+      "expected_source_hash": "948f1f5bc870f096a685fe06a4e3159999b707b4",
+      "expected_hash": "948f1f5bc870f096a685fe06a4e3159999b707b4",
+      "decoded_size": 1024,
+      "expected_decoded_hash": "360eece92a9b46eacd292215d4997560d3dcdd35",
+      "verification": {
+        "kind": "japanese_ui",
+        "byte_match": false,
+        "method": "bpej_screen_code_and_sprite_table",
+        "comparison_size": 1024,
+        "comparison_sha1": "9b49aef53326979b5c80bb285e28b18b0eac2aef",
+        "references": [
+          {
+            "file": "asm/contest.s",
+            "function": "CreateApplauseMeterSprite",
+            "table_rom_offset": "0x00560B14",
+            "table_index": 0
+          }
+        ],
+        "detail": "Official Japanese UI counterpart identified by BPEJ screen code/table; English bytes intentionally differ. The corresponding screen set and read sizes are updated together.",
+        "screen_set": "contest_main",
+        "compatibility": "ROM-derived screen set; destination buffer sizes, tilemap indices and C copy widths are checked by tests."
+      },
+      "relations": [
+        {
+          "kind": "replaces_asset",
+          "target": "graphics/contest/applause.png"
+        },
+        {
+          "kind": "consumed_by",
+          "target": "src/graphics.c:gContestApplauseGfx"
+        },
+        {
+          "kind": "screen_set",
+          "target": "contest_main"
+        }
+      ]
+    },
+    {
+      "symbol_id": "bpej:contest_ui:gContestResultsTitle_Normal_Tilemap",
+      "status": "verified",
+      "group": "contest",
+      "label": "gContestResultsTitle_Normal_Tilemap",
+      "consumer_file": "src/graphics.c",
+      "element_type": "u16",
+      "source_file": "graphics/contest/results_screen/title_normal.bin",
+      "source_conversion": [],
+      "comparison_file": "graphics/contest/results_screen/title_normal.bin",
+      "rom_offset": "0x00569334",
+      "size": 32,
+      "compression": "none",
+      "compressed_payload_size": null,
+      "transform": "copy",
+      "output_representation": "raw",
+      "output_path": "build/extracted_contest/contest/results_screen/title_normal.bin",
+      "custom_path": "graphics/custom/bpej/contest/contest/results_screen/title_normal.bin",
+      "expected_source_hash": "5503ffbc4c7973a9912a4f416dd40b3888334b63",
+      "expected_hash": "5503ffbc4c7973a9912a4f416dd40b3888334b63",
+      "decoded_size": 32,
+      "expected_decoded_hash": "5503ffbc4c7973a9912a4f416dd40b3888334b63",
+      "verification": {
+        "kind": "japanese_ui",
+        "byte_match": false,
+        "method": "bpej_screen_code_and_sprite_table",
+        "comparison_size": 40,
+        "comparison_sha1": "8bed45c9d8c8664bf9034728ab7b974ef85f8e40",
+        "references": [
+          {
+            "file": "asm/contest_link_80F57C4.s",
+            "function": "sub_080F7A3C"
+          }
+        ],
+        "detail": "Official Japanese UI counterpart identified by BPEJ screen code/table; English bytes intentionally differ. The corresponding screen set and read sizes are updated together.",
+        "screen_set": "contest_results",
+        "compatibility": "ROM-derived screen set; destination buffer sizes, tilemap indices and C copy widths are checked by tests."
+      },
+      "relations": [
+        {
+          "kind": "replaces_asset",
+          "target": "graphics/contest/results_screen/title_normal.bin"
+        },
+        {
+          "kind": "consumed_by",
+          "target": "src/graphics.c:gContestResultsTitle_Normal_Tilemap"
+        },
+        {
+          "kind": "screen_set",
+          "target": "contest_results"
+        }
+      ]
+    },
+    {
+      "symbol_id": "bpej:contest_ui:gContestResultsTitle_Super_Tilemap",
+      "status": "verified",
+      "group": "contest",
+      "label": "gContestResultsTitle_Super_Tilemap",
+      "consumer_file": "src/graphics.c",
+      "element_type": "u16",
+      "source_file": "graphics/contest/results_screen/title_super.bin",
+      "source_conversion": [],
+      "comparison_file": "graphics/contest/results_screen/title_super.bin",
+      "rom_offset": "0x00569354",
+      "size": 32,
+      "compression": "none",
+      "compressed_payload_size": null,
+      "transform": "copy",
+      "output_representation": "raw",
+      "output_path": "build/extracted_contest/contest/results_screen/title_super.bin",
+      "custom_path": "graphics/custom/bpej/contest/contest/results_screen/title_super.bin",
+      "expected_source_hash": "ca9b034dacd52a8e9b80cfd86014cd31b6888e97",
+      "expected_hash": "ca9b034dacd52a8e9b80cfd86014cd31b6888e97",
+      "decoded_size": 32,
+      "expected_decoded_hash": "ca9b034dacd52a8e9b80cfd86014cd31b6888e97",
+      "verification": {
+        "kind": "japanese_ui",
+        "byte_match": false,
+        "method": "bpej_screen_code_and_sprite_table",
+        "comparison_size": 40,
+        "comparison_sha1": "54498905984bb36a637a56321c0552501aaaa0a3",
+        "references": [
+          {
+            "file": "asm/contest_link_80F57C4.s",
+            "function": "sub_080F7A3C"
+          }
+        ],
+        "detail": "Official Japanese UI counterpart identified by BPEJ screen code/table; English bytes intentionally differ. The corresponding screen set and read sizes are updated together.",
+        "screen_set": "contest_results",
+        "compatibility": "ROM-derived screen set; destination buffer sizes, tilemap indices and C copy widths are checked by tests."
+      },
+      "relations": [
+        {
+          "kind": "replaces_asset",
+          "target": "graphics/contest/results_screen/title_super.bin"
+        },
+        {
+          "kind": "consumed_by",
+          "target": "src/graphics.c:gContestResultsTitle_Super_Tilemap"
+        },
+        {
+          "kind": "screen_set",
+          "target": "contest_results"
+        }
+      ]
+    },
+    {
+      "symbol_id": "bpej:contest_ui:gContestResultsTitle_Hyper_Tilemap",
+      "status": "verified",
+      "group": "contest",
+      "label": "gContestResultsTitle_Hyper_Tilemap",
+      "consumer_file": "src/graphics.c",
+      "element_type": "u16",
+      "source_file": "graphics/contest/results_screen/title_hyper.bin",
+      "source_conversion": [],
+      "comparison_file": "graphics/contest/results_screen/title_hyper.bin",
+      "rom_offset": "0x00569374",
+      "size": 32,
+      "compression": "none",
+      "compressed_payload_size": null,
+      "transform": "copy",
+      "output_representation": "raw",
+      "output_path": "build/extracted_contest/contest/results_screen/title_hyper.bin",
+      "custom_path": "graphics/custom/bpej/contest/contest/results_screen/title_hyper.bin",
+      "expected_source_hash": "322188005fcd3fd337998252a52fa8439185bed0",
+      "expected_hash": "322188005fcd3fd337998252a52fa8439185bed0",
+      "decoded_size": 32,
+      "expected_decoded_hash": "322188005fcd3fd337998252a52fa8439185bed0",
+      "verification": {
+        "kind": "japanese_ui",
+        "byte_match": false,
+        "method": "bpej_screen_code_and_sprite_table",
+        "comparison_size": 40,
+        "comparison_sha1": "9179052b2108e9123595ef6d16fa13c26c88567f",
+        "references": [
+          {
+            "file": "asm/contest_link_80F57C4.s",
+            "function": "sub_080F7A3C"
+          }
+        ],
+        "detail": "Official Japanese UI counterpart identified by BPEJ screen code/table; English bytes intentionally differ. The corresponding screen set and read sizes are updated together.",
+        "screen_set": "contest_results",
+        "compatibility": "ROM-derived screen set; destination buffer sizes, tilemap indices and C copy widths are checked by tests."
+      },
+      "relations": [
+        {
+          "kind": "replaces_asset",
+          "target": "graphics/contest/results_screen/title_hyper.bin"
+        },
+        {
+          "kind": "consumed_by",
+          "target": "src/graphics.c:gContestResultsTitle_Hyper_Tilemap"
+        },
+        {
+          "kind": "screen_set",
+          "target": "contest_results"
+        }
+      ]
+    },
+    {
+      "symbol_id": "bpej:contest_ui:gContestResultsTitle_Master_Tilemap",
+      "status": "verified",
+      "group": "contest",
+      "label": "gContestResultsTitle_Master_Tilemap",
+      "consumer_file": "src/graphics.c",
+      "element_type": "u16",
+      "source_file": "graphics/contest/results_screen/title_master.bin",
+      "source_conversion": [],
+      "comparison_file": "graphics/contest/results_screen/title_master.bin",
+      "rom_offset": "0x00569394",
+      "size": 32,
+      "compression": "none",
+      "compressed_payload_size": null,
+      "transform": "copy",
+      "output_representation": "raw",
+      "output_path": "build/extracted_contest/contest/results_screen/title_master.bin",
+      "custom_path": "graphics/custom/bpej/contest/contest/results_screen/title_master.bin",
+      "expected_source_hash": "8de76539dfd6c579d896a35d4467ff609deff0e5",
+      "expected_hash": "8de76539dfd6c579d896a35d4467ff609deff0e5",
+      "decoded_size": 32,
+      "expected_decoded_hash": "8de76539dfd6c579d896a35d4467ff609deff0e5",
+      "verification": {
+        "kind": "japanese_ui",
+        "byte_match": false,
+        "method": "bpej_screen_code_and_sprite_table",
+        "comparison_size": 40,
+        "comparison_sha1": "549822ff1cb3b0dde24afbd60246eb2e92e77fa6",
+        "references": [
+          {
+            "file": "asm/contest_link_80F57C4.s",
+            "function": "sub_080F7A3C"
+          }
+        ],
+        "detail": "Official Japanese UI counterpart identified by BPEJ screen code/table; English bytes intentionally differ. The corresponding screen set and read sizes are updated together.",
+        "screen_set": "contest_results",
+        "compatibility": "ROM-derived screen set; destination buffer sizes, tilemap indices and C copy widths are checked by tests."
+      },
+      "relations": [
+        {
+          "kind": "replaces_asset",
+          "target": "graphics/contest/results_screen/title_master.bin"
+        },
+        {
+          "kind": "consumed_by",
+          "target": "src/graphics.c:gContestResultsTitle_Master_Tilemap"
+        },
+        {
+          "kind": "screen_set",
+          "target": "contest_results"
+        }
+      ]
+    },
+    {
+      "symbol_id": "bpej:contest_ui:gContestResultsTitle_Link_Tilemap",
+      "status": "verified",
+      "group": "contest",
+      "label": "gContestResultsTitle_Link_Tilemap",
+      "consumer_file": "src/graphics.c",
+      "element_type": "u16",
+      "source_file": "graphics/contest/results_screen/title_link.bin",
+      "source_conversion": [],
+      "comparison_file": "graphics/contest/results_screen/title_link.bin",
+      "rom_offset": "0x005693B4",
+      "size": 32,
+      "compression": "none",
+      "compressed_payload_size": null,
+      "transform": "copy",
+      "output_representation": "raw",
+      "output_path": "build/extracted_contest/contest/results_screen/title_link.bin",
+      "custom_path": "graphics/custom/bpej/contest/contest/results_screen/title_link.bin",
+      "expected_source_hash": "cf5e907dc198b2fddc8a81c8bbc74b549262a04a",
+      "expected_hash": "cf5e907dc198b2fddc8a81c8bbc74b549262a04a",
+      "decoded_size": 32,
+      "expected_decoded_hash": "cf5e907dc198b2fddc8a81c8bbc74b549262a04a",
+      "verification": {
+        "kind": "japanese_ui",
+        "byte_match": false,
+        "method": "bpej_screen_code_and_sprite_table",
+        "comparison_size": 20,
+        "comparison_sha1": "346bf4a08a0bd65c05084c9f11cf49d434a33386",
+        "references": [
+          {
+            "file": "asm/contest_link_80F57C4.s",
+            "function": "sub_080F7A3C"
+          }
+        ],
+        "detail": "Official Japanese UI counterpart identified by BPEJ screen code/table; English bytes intentionally differ. The corresponding screen set and read sizes are updated together.",
+        "screen_set": "contest_results",
+        "compatibility": "ROM-derived screen set; destination buffer sizes, tilemap indices and C copy widths are checked by tests."
+      },
+      "relations": [
+        {
+          "kind": "replaces_asset",
+          "target": "graphics/contest/results_screen/title_link.bin"
+        },
+        {
+          "kind": "consumed_by",
+          "target": "src/graphics.c:gContestResultsTitle_Link_Tilemap"
+        },
+        {
+          "kind": "screen_set",
+          "target": "contest_results"
+        }
+      ]
+    },
+    {
+      "symbol_id": "bpej:contest_ui:gContestResultsTitle_Cool_Tilemap",
+      "status": "verified",
+      "group": "contest",
+      "label": "gContestResultsTitle_Cool_Tilemap",
+      "consumer_file": "src/graphics.c",
+      "element_type": "u16",
+      "source_file": "graphics/contest/results_screen/title_cool.bin",
+      "source_conversion": [],
+      "comparison_file": "graphics/contest/results_screen/title_cool.bin",
+      "rom_offset": "0x005693D4",
+      "size": 20,
+      "compression": "none",
+      "compressed_payload_size": null,
+      "transform": "copy",
+      "output_representation": "raw",
+      "output_path": "build/extracted_contest/contest/results_screen/title_cool.bin",
+      "custom_path": "graphics/custom/bpej/contest/contest/results_screen/title_cool.bin",
+      "expected_source_hash": "12a97cc758312d81e037be4c664e64f3a8d53e5e",
+      "expected_hash": "12a97cc758312d81e037be4c664e64f3a8d53e5e",
+      "decoded_size": 20,
+      "expected_decoded_hash": "12a97cc758312d81e037be4c664e64f3a8d53e5e",
+      "verification": {
+        "kind": "japanese_ui",
+        "byte_match": false,
+        "method": "bpej_screen_code_and_sprite_table",
+        "comparison_size": 20,
+        "comparison_sha1": "4f0e79135acf92ee4cb193e4f5fc4d60d1e80961",
+        "references": [
+          {
+            "file": "asm/contest_link_80F57C4.s",
+            "function": "sub_080F7A3C"
+          }
+        ],
+        "detail": "Official Japanese UI counterpart identified by BPEJ screen code/table; English bytes intentionally differ. The corresponding screen set and read sizes are updated together.",
+        "screen_set": "contest_results",
+        "compatibility": "ROM-derived screen set; destination buffer sizes, tilemap indices and C copy widths are checked by tests."
+      },
+      "relations": [
+        {
+          "kind": "replaces_asset",
+          "target": "graphics/contest/results_screen/title_cool.bin"
+        },
+        {
+          "kind": "consumed_by",
+          "target": "src/graphics.c:gContestResultsTitle_Cool_Tilemap"
+        },
+        {
+          "kind": "screen_set",
+          "target": "contest_results"
+        }
+      ]
+    },
+    {
+      "symbol_id": "bpej:contest_ui:gContestResultsTitle_Beauty_Tilemap",
+      "status": "verified",
+      "group": "contest",
+      "label": "gContestResultsTitle_Beauty_Tilemap",
+      "consumer_file": "src/graphics.c",
+      "element_type": "u16",
+      "source_file": "graphics/contest/results_screen/title_beauty.bin",
+      "source_conversion": [],
+      "comparison_file": "graphics/contest/results_screen/title_beauty.bin",
+      "rom_offset": "0x005693E8",
+      "size": 20,
+      "compression": "none",
+      "compressed_payload_size": null,
+      "transform": "copy",
+      "output_representation": "raw",
+      "output_path": "build/extracted_contest/contest/results_screen/title_beauty.bin",
+      "custom_path": "graphics/custom/bpej/contest/contest/results_screen/title_beauty.bin",
+      "expected_source_hash": "2195566ffd39484abea35ab27eb7baa7c4c2e7b5",
+      "expected_hash": "2195566ffd39484abea35ab27eb7baa7c4c2e7b5",
+      "decoded_size": 20,
+      "expected_decoded_hash": "2195566ffd39484abea35ab27eb7baa7c4c2e7b5",
+      "verification": {
+        "kind": "japanese_ui",
+        "byte_match": false,
+        "method": "bpej_screen_code_and_sprite_table",
+        "comparison_size": 20,
+        "comparison_sha1": "64efe464097aa096ec667f887486c6bfefb322c6",
+        "references": [
+          {
+            "file": "asm/contest_link_80F57C4.s",
+            "function": "sub_080F7A3C"
+          }
+        ],
+        "detail": "Official Japanese UI counterpart identified by BPEJ screen code/table; English bytes intentionally differ. The corresponding screen set and read sizes are updated together.",
+        "screen_set": "contest_results",
+        "compatibility": "ROM-derived screen set; destination buffer sizes, tilemap indices and C copy widths are checked by tests."
+      },
+      "relations": [
+        {
+          "kind": "replaces_asset",
+          "target": "graphics/contest/results_screen/title_beauty.bin"
+        },
+        {
+          "kind": "consumed_by",
+          "target": "src/graphics.c:gContestResultsTitle_Beauty_Tilemap"
+        },
+        {
+          "kind": "screen_set",
+          "target": "contest_results"
+        }
+      ]
+    },
+    {
+      "symbol_id": "bpej:contest_ui:gContestResultsTitle_Cute_Tilemap",
+      "status": "verified",
+      "group": "contest",
+      "label": "gContestResultsTitle_Cute_Tilemap",
+      "consumer_file": "src/graphics.c",
+      "element_type": "u16",
+      "source_file": "graphics/contest/results_screen/title_cute.bin",
+      "source_conversion": [],
+      "comparison_file": "graphics/contest/results_screen/title_cute.bin",
+      "rom_offset": "0x005693FC",
+      "size": 20,
+      "compression": "none",
+      "compressed_payload_size": null,
+      "transform": "copy",
+      "output_representation": "raw",
+      "output_path": "build/extracted_contest/contest/results_screen/title_cute.bin",
+      "custom_path": "graphics/custom/bpej/contest/contest/results_screen/title_cute.bin",
+      "expected_source_hash": "5f20d9d9f7582a33cea462e9b818df522d1a2335",
+      "expected_hash": "5f20d9d9f7582a33cea462e9b818df522d1a2335",
+      "decoded_size": 20,
+      "expected_decoded_hash": "5f20d9d9f7582a33cea462e9b818df522d1a2335",
+      "verification": {
+        "kind": "japanese_ui",
+        "byte_match": false,
+        "method": "bpej_screen_code_and_sprite_table",
+        "comparison_size": 20,
+        "comparison_sha1": "52b71fffbe708db39a37bc5579f50b1005ba9f62",
+        "references": [
+          {
+            "file": "asm/contest_link_80F57C4.s",
+            "function": "sub_080F7A3C"
+          }
+        ],
+        "detail": "Official Japanese UI counterpart identified by BPEJ screen code/table; English bytes intentionally differ. The corresponding screen set and read sizes are updated together.",
+        "screen_set": "contest_results",
+        "compatibility": "ROM-derived screen set; destination buffer sizes, tilemap indices and C copy widths are checked by tests."
+      },
+      "relations": [
+        {
+          "kind": "replaces_asset",
+          "target": "graphics/contest/results_screen/title_cute.bin"
+        },
+        {
+          "kind": "consumed_by",
+          "target": "src/graphics.c:gContestResultsTitle_Cute_Tilemap"
+        },
+        {
+          "kind": "screen_set",
+          "target": "contest_results"
+        }
+      ]
+    },
+    {
+      "symbol_id": "bpej:contest_ui:gContestResultsTitle_Smart_Tilemap",
+      "status": "verified",
+      "group": "contest",
+      "label": "gContestResultsTitle_Smart_Tilemap",
+      "consumer_file": "src/graphics.c",
+      "element_type": "u16",
+      "source_file": "graphics/contest/results_screen/title_smart.bin",
+      "source_conversion": [],
+      "comparison_file": "graphics/contest/results_screen/title_smart.bin",
+      "rom_offset": "0x00569410",
+      "size": 20,
+      "compression": "none",
+      "compressed_payload_size": null,
+      "transform": "copy",
+      "output_representation": "raw",
+      "output_path": "build/extracted_contest/contest/results_screen/title_smart.bin",
+      "custom_path": "graphics/custom/bpej/contest/contest/results_screen/title_smart.bin",
+      "expected_source_hash": "2a10c9111d789e15f5003079514da78c8fc98d6c",
+      "expected_hash": "2a10c9111d789e15f5003079514da78c8fc98d6c",
+      "decoded_size": 20,
+      "expected_decoded_hash": "2a10c9111d789e15f5003079514da78c8fc98d6c",
+      "verification": {
+        "kind": "japanese_ui",
+        "byte_match": false,
+        "method": "bpej_screen_code_and_sprite_table",
+        "comparison_size": 20,
+        "comparison_sha1": "be3ea5a15f5b7c40b4be7f6bd5283c2eebec1480",
+        "references": [
+          {
+            "file": "asm/contest_link_80F57C4.s",
+            "function": "sub_080F7A3C"
+          }
+        ],
+        "detail": "Official Japanese UI counterpart identified by BPEJ screen code/table; English bytes intentionally differ. The corresponding screen set and read sizes are updated together.",
+        "screen_set": "contest_results",
+        "compatibility": "ROM-derived screen set; destination buffer sizes, tilemap indices and C copy widths are checked by tests."
+      },
+      "relations": [
+        {
+          "kind": "replaces_asset",
+          "target": "graphics/contest/results_screen/title_smart.bin"
+        },
+        {
+          "kind": "consumed_by",
+          "target": "src/graphics.c:gContestResultsTitle_Smart_Tilemap"
+        },
+        {
+          "kind": "screen_set",
+          "target": "contest_results"
+        }
+      ]
+    },
+    {
+      "symbol_id": "bpej:contest_ui:gContestResultsTitle_Tough_Tilemap",
+      "status": "verified",
+      "group": "contest",
+      "label": "gContestResultsTitle_Tough_Tilemap",
+      "consumer_file": "src/graphics.c",
+      "element_type": "u16",
+      "source_file": "graphics/contest/results_screen/title_tough.bin",
+      "source_conversion": [],
+      "comparison_file": "graphics/contest/results_screen/title_tough.bin",
+      "rom_offset": "0x00569424",
+      "size": 20,
+      "compression": "none",
+      "compressed_payload_size": null,
+      "transform": "copy",
+      "output_representation": "raw",
+      "output_path": "build/extracted_contest/contest/results_screen/title_tough.bin",
+      "custom_path": "graphics/custom/bpej/contest/contest/results_screen/title_tough.bin",
+      "expected_source_hash": "e8ed9069599de44910110133ebbf6b4545c1230a",
+      "expected_hash": "e8ed9069599de44910110133ebbf6b4545c1230a",
+      "decoded_size": 20,
+      "expected_decoded_hash": "e8ed9069599de44910110133ebbf6b4545c1230a",
+      "verification": {
+        "kind": "japanese_ui",
+        "byte_match": false,
+        "method": "bpej_screen_code_and_sprite_table",
+        "comparison_size": 20,
+        "comparison_sha1": "bbb9522e023544b86219dc07c784e4879472ae35",
+        "references": [
+          {
+            "file": "asm/contest_link_80F57C4.s",
+            "function": "sub_080F7A3C"
+          }
+        ],
+        "detail": "Official Japanese UI counterpart identified by BPEJ screen code/table; English bytes intentionally differ. The corresponding screen set and read sizes are updated together.",
+        "screen_set": "contest_results",
+        "compatibility": "ROM-derived screen set; destination buffer sizes, tilemap indices and C copy widths are checked by tests."
+      },
+      "relations": [
+        {
+          "kind": "replaces_asset",
+          "target": "graphics/contest/results_screen/title_tough.bin"
+        },
+        {
+          "kind": "consumed_by",
+          "target": "src/graphics.c:gContestResultsTitle_Tough_Tilemap"
+        },
+        {
+          "kind": "screen_set",
+          "target": "contest_results"
+        }
+      ]
+    },
+    {
+      "symbol_id": "bpej:contest_ui:gContestResultsTitle_Tilemap",
+      "status": "verified",
+      "group": "contest",
+      "label": "gContestResultsTitle_Tilemap",
+      "consumer_file": "src/graphics.c",
+      "element_type": "u16",
+      "source_file": "graphics/contest/results_screen/title.bin",
+      "source_conversion": [],
+      "comparison_file": "graphics/contest/results_screen/title.bin",
+      "rom_offset": "0x00569438",
+      "size": 20,
+      "compression": "none",
+      "compressed_payload_size": null,
+      "transform": "copy",
+      "output_representation": "raw",
+      "output_path": "build/extracted_contest/contest/results_screen/title.bin",
+      "custom_path": "graphics/custom/bpej/contest/contest/results_screen/title.bin",
+      "expected_source_hash": "b5bb2a92f8c24c7e553df7d4457583039a49aa5e",
+      "expected_hash": "b5bb2a92f8c24c7e553df7d4457583039a49aa5e",
+      "decoded_size": 20,
+      "expected_decoded_hash": "b5bb2a92f8c24c7e553df7d4457583039a49aa5e",
+      "verification": {
+        "kind": "japanese_ui",
+        "byte_match": false,
+        "method": "bpej_screen_code_and_sprite_table",
+        "comparison_size": 24,
+        "comparison_sha1": "30b75e2ca8a0ac593d6b39c94e0b9a0b757bfa4b",
+        "references": [
+          {
+            "file": "asm/contest_link_80F57C4.s",
+            "function": "sub_080F7A3C"
+          }
+        ],
+        "detail": "Official Japanese UI counterpart identified by BPEJ screen code/table; English bytes intentionally differ. The corresponding screen set and read sizes are updated together.",
+        "screen_set": "contest_results",
+        "compatibility": "ROM-derived screen set; destination buffer sizes, tilemap indices and C copy widths are checked by tests."
+      },
+      "relations": [
+        {
+          "kind": "replaces_asset",
+          "target": "graphics/contest/results_screen/title.bin"
+        },
+        {
+          "kind": "consumed_by",
+          "target": "src/graphics.c:gContestResultsTitle_Tilemap"
+        },
+        {
+          "kind": "screen_set",
+          "target": "contest_results"
+        }
+      ]
+    },
+    {
+      "symbol_id": "bpej:contest_ui:gUsePokeblockCondition_Pal",
+      "status": "verified",
+      "group": "pokeblock_use",
+      "label": "gUsePokeblockCondition_Pal",
+      "consumer_file": "src/graphics.c",
+      "element_type": "u16",
+      "source_file": "graphics/pokeblock/use_screen/condition.png",
+      "source_conversion": [
+        ".gbapal"
+      ],
+      "comparison_file": "build/assets/graphics/pokeblock/use_screen/condition.png.gbapal",
+      "rom_offset": "0x005BED34",
+      "size": 32,
+      "compression": "none",
+      "compressed_payload_size": null,
+      "transform": "copy",
+      "output_representation": "raw",
+      "output_path": "build/extracted_contest/pokeblock/use_screen/condition.gbapal",
+      "custom_path": "graphics/custom/bpej/contest/pokeblock/use_screen/condition.gbapal",
+      "expected_source_hash": "45d396fe46cb0ec9288f252676b8418aaf2ca38a",
+      "expected_hash": "45d396fe46cb0ec9288f252676b8418aaf2ca38a",
+      "decoded_size": 32,
+      "expected_decoded_hash": "45d396fe46cb0ec9288f252676b8418aaf2ca38a",
+      "verification": {
+        "kind": "identical",
+        "byte_match": true,
+        "method": "decoded_byte_match",
+        "comparison_size": 32,
+        "comparison_sha1": "45d396fe46cb0ec9288f252676b8418aaf2ca38a",
+        "references": [
+          {
+            "file": "asm/use_pokeblock.s",
+            "function": "sub_08168050",
+            "table_rom_offset": "0x005C0A9C"
+          }
+        ],
+        "detail": "Complete BPEJ data equals the existing asset.",
+        "screen_set": "pokeblock_graph"
+      },
+      "relations": [
+        {
+          "kind": "replaces_asset",
+          "target": "graphics/pokeblock/use_screen/condition.png"
+        },
+        {
+          "kind": "consumed_by",
+          "target": "src/graphics.c:gUsePokeblockCondition_Pal"
+        },
+        {
+          "kind": "screen_set",
+          "target": "pokeblock_graph"
+        }
+      ]
+    },
+    {
+      "symbol_id": "bpej:contest_ui:gUsePokeblockNatureWin_Pal",
+      "status": "verified",
+      "group": "pokeblock_use",
+      "label": "gUsePokeblockNatureWin_Pal",
+      "consumer_file": "src/graphics.c",
+      "element_type": "u16",
+      "source_file": "graphics/pokeblock/use_screen/nature.pal",
+      "source_conversion": [
+        ".gbapal"
+      ],
+      "comparison_file": "build/assets/graphics/pokeblock/use_screen/nature.pal.gbapal",
+      "rom_offset": "0x005C0410",
+      "size": 88,
+      "compression": "none",
+      "compressed_payload_size": null,
+      "transform": "copy",
+      "output_representation": "raw",
+      "output_path": "build/extracted_contest/pokeblock/use_screen/nature.bin",
+      "custom_path": "graphics/custom/bpej/contest/pokeblock/use_screen/nature.bin",
+      "expected_source_hash": "bc8241e0037418b968df94d2b0ae3022e51f97ff",
+      "expected_hash": "bc8241e0037418b968df94d2b0ae3022e51f97ff",
+      "decoded_size": 88,
+      "expected_decoded_hash": "bc8241e0037418b968df94d2b0ae3022e51f97ff",
+      "verification": {
+        "kind": "japanese_ui",
+        "byte_match": false,
+        "method": "bpej_screen_code_and_sprite_table",
+        "comparison_size": 96,
+        "comparison_sha1": "937283d0e1afdc4ab3f3a6794ff5c37ec86feba5",
+        "references": [
+          {
+            "file": "asm/use_pokeblock.s",
+            "function": "sub_08167734"
+          }
+        ],
+        "detail": "Official Japanese UI counterpart identified by BPEJ screen code/table; English bytes intentionally differ. The corresponding screen set and read sizes are updated together.",
+        "screen_set": "pokeblock_graph",
+        "compatibility": "ROM-derived screen set; destination buffer sizes, tilemap indices and C copy widths are checked by tests."
+      },
+      "relations": [
+        {
+          "kind": "replaces_asset",
+          "target": "graphics/pokeblock/use_screen/nature.pal"
+        },
+        {
+          "kind": "consumed_by",
+          "target": "src/graphics.c:gUsePokeblockNatureWin_Pal"
+        },
+        {
+          "kind": "screen_set",
+          "target": "pokeblock_graph"
+        }
+      ]
+    },
+    {
+      "symbol_id": "bpej:contest_ui:gPokenavConditionCancel_Gfx",
+      "status": "verified",
+      "group": "condition",
+      "label": "gPokenavConditionCancel_Gfx",
+      "consumer_file": "src/graphics.c",
+      "element_type": "u8",
+      "source_file": "graphics/pokenav/condition/cancel.png",
+      "source_conversion": [
+        ".4bpp"
+      ],
+      "comparison_file": "build/assets/graphics/pokenav/condition/cancel.png.4bpp",
+      "rom_offset": "0x005F9C38",
+      "size": 256,
+      "compression": "none",
+      "compressed_payload_size": null,
+      "transform": "copy",
+      "output_representation": "raw",
+      "output_path": "build/extracted_contest/pokenav/condition/cancel.4bpp",
+      "custom_path": "graphics/custom/bpej/contest/pokenav/condition/cancel.4bpp",
+      "expected_source_hash": "9bfc9979df986afc68227aa0887e2c07945a1289",
+      "expected_hash": "9bfc9979df986afc68227aa0887e2c07945a1289",
+      "decoded_size": 256,
+      "expected_decoded_hash": "9bfc9979df986afc68227aa0887e2c07945a1289",
+      "verification": {
+        "kind": "japanese_ui",
+        "byte_match": false,
+        "method": "bpej_screen_code_and_sprite_table",
+        "comparison_size": 256,
+        "comparison_sha1": "e129c98bdbeb412f26029a24ae63f57873f5e563",
+        "references": [
+          {
+            "file": "asm/menu_specialized.s",
+            "function": "sub_081D284C",
+            "table_rom_offset": "0x005FA8C0",
+            "table_index": 2
+          }
+        ],
+        "detail": "Official Japanese UI counterpart identified by BPEJ screen code/table; English bytes intentionally differ. The corresponding screen set and read sizes are updated together.",
+        "screen_set": "pokenav_graph",
+        "compatibility": "ROM-derived screen set; destination buffer sizes, tilemap indices and C copy widths are checked by tests."
+      },
+      "relations": [
+        {
+          "kind": "replaces_asset",
+          "target": "graphics/pokenav/condition/cancel.png"
+        },
+        {
+          "kind": "consumed_by",
+          "target": "src/graphics.c:gPokenavConditionCancel_Gfx"
+        },
+        {
+          "kind": "screen_set",
+          "target": "pokenav_graph"
+        }
+      ]
+    },
+    {
+      "symbol_id": "bpej:contest_ui:gPokenavLeftHeader_Pal",
+      "status": "verified",
+      "group": "condition",
+      "label": "gPokenavLeftHeader_Pal",
+      "consumer_file": "src/graphics.c",
+      "element_type": "u16",
+      "source_file": "graphics/pokenav/left_headers/palette.pal",
+      "source_conversion": [
+        ".gbapal"
+      ],
+      "comparison_file": "build/assets/graphics/pokenav/left_headers/palette.pal.gbapal",
+      "rom_offset": "0x005F021C",
+      "size": 160,
+      "compression": "none",
+      "compressed_payload_size": null,
+      "transform": "copy",
+      "output_representation": "raw",
+      "output_path": "build/extracted_contest/pokenav/left_headers/palette.gbapal",
+      "custom_path": "graphics/custom/bpej/contest/pokenav/left_headers/palette.gbapal",
+      "expected_source_hash": "1cbb9f6b6d936f7cb484618d343fb2932c544164",
+      "expected_hash": "1cbb9f6b6d936f7cb484618d343fb2932c544164",
+      "decoded_size": 160,
+      "expected_decoded_hash": "1cbb9f6b6d936f7cb484618d343fb2932c544164",
+      "verification": {
+        "kind": "identical",
+        "byte_match": true,
+        "method": "decoded_byte_match",
+        "comparison_size": 160,
+        "comparison_sha1": "1cbb9f6b6d936f7cb484618d343fb2932c544164",
+        "references": [
+          {
+            "file": "asm/pokenav_main_menu.s",
+            "function": "LoadLeftHeaderGfxForSubMenu",
+            "pointer_literal": "0x085F021C"
+          }
+        ],
+        "detail": "Complete BPEJ data equals the existing asset.",
+        "screen_set": "condition_headers"
+      },
+      "relations": [
+        {
+          "kind": "replaces_asset",
+          "target": "graphics/pokenav/left_headers/palette.pal"
+        },
+        {
+          "kind": "consumed_by",
+          "target": "src/graphics.c:gPokenavLeftHeader_Pal"
+        },
+        {
+          "kind": "screen_set",
+          "target": "condition_headers"
+        }
+      ]
+    },
+    {
+      "symbol_id": "bpej:contest_ui:gPokenavOptions_Pal",
+      "status": "verified",
+      "group": "condition",
+      "label": "gPokenavOptions_Pal",
+      "consumer_file": "src/graphics.c",
+      "element_type": "u16",
+      "source_file": "graphics/pokenav/options/options.pal",
+      "source_conversion": [
+        ".gbapal"
+      ],
+      "comparison_file": "build/assets/graphics/pokenav/options/options.pal.gbapal",
+      "rom_offset": "0x005F1BF0",
+      "size": 160,
+      "compression": "none",
+      "compressed_payload_size": null,
+      "transform": "copy",
+      "output_representation": "raw",
+      "output_path": "build/extracted_contest/pokenav/options/options.gbapal",
+      "custom_path": "graphics/custom/bpej/contest/pokenav/options/options.gbapal",
+      "expected_source_hash": "1cbb9f6b6d936f7cb484618d343fb2932c544164",
+      "expected_hash": "1cbb9f6b6d936f7cb484618d343fb2932c544164",
+      "decoded_size": 160,
+      "expected_decoded_hash": "1cbb9f6b6d936f7cb484618d343fb2932c544164",
+      "verification": {
+        "kind": "identical",
+        "byte_match": true,
+        "method": "decoded_byte_match",
+        "comparison_size": 160,
+        "comparison_sha1": "1cbb9f6b6d936f7cb484618d343fb2932c544164",
+        "references": [
+          {
+            "file": "asm/pokenav_unk_2.s",
+            "function": "sub_081C9770",
+            "table_rom_offset": "0x005F273C",
+            "table_index": 0
+          }
+        ],
+        "detail": "Complete BPEJ data equals the existing asset.",
+        "screen_set": "condition_options"
+      },
+      "relations": [
+        {
+          "kind": "replaces_asset",
+          "target": "graphics/pokenav/options/options.pal"
+        },
+        {
+          "kind": "consumed_by",
+          "target": "src/graphics.c:gPokenavOptions_Pal"
+        },
+        {
+          "kind": "screen_set",
+          "target": "condition_options"
+        }
+      ]
+    },
+    {
+      "symbol_id": "bpej:contest_ui:sConditionSearchOptions_Tilemap",
+      "status": "verified",
+      "group": "condition",
+      "label": "sConditionSearchOptions_Tilemap",
+      "consumer_file": "src/pokenav_conditions_gfx.c",
+      "element_type": "u16",
+      "source_file": "graphics/pokenav/options/options.bin",
+      "source_conversion": [],
+      "comparison_file": "graphics/pokenav/options/options.bin",
+      "rom_offset": "0x005F58FC",
+      "size": 72,
+      "compression": "none",
+      "compressed_payload_size": null,
+      "transform": "copy",
+      "output_representation": "raw",
+      "output_path": "build/extracted_contest/pokenav/condition/search_options.bin",
+      "custom_path": "graphics/custom/bpej/contest/pokenav/condition/search_options.bin",
+      "expected_source_hash": "0ecd8ae73fde5b2937ba46432992d4258b0df94d",
+      "expected_hash": "0ecd8ae73fde5b2937ba46432992d4258b0df94d",
+      "decoded_size": 72,
+      "expected_decoded_hash": "0ecd8ae73fde5b2937ba46432992d4258b0df94d",
+      "verification": {
+        "kind": "japanese_ui",
+        "byte_match": false,
+        "method": "bpej_screen_code_and_sprite_table",
+        "comparison_size": 72,
+        "comparison_sha1": "88312e4ff5169d528aadb868ddc77b84fa6d1efe",
+        "references": [
+          {
+            "file": "asm/pokenav_unk_4.s",
+            "function": "sub_081CD5F4"
+          }
+        ],
+        "detail": "Official Japanese UI counterpart identified by BPEJ screen code/table; English bytes intentionally differ. The corresponding screen set and read sizes are updated together.",
+        "screen_set": "pokenav_graph",
+        "compatibility": "ROM-derived screen set; destination buffer sizes, tilemap indices and C copy widths are checked by tests."
+      },
+      "relations": [
+        {
+          "kind": "replaces_asset",
+          "target": "graphics/pokenav/options/options.bin"
+        },
+        {
+          "kind": "consumed_by",
+          "target": "src/pokenav_conditions_gfx.c:sConditionSearchOptions_Tilemap"
+        },
+        {
+          "kind": "screen_set",
+          "target": "pokenav_graph"
+        }
+      ]
+    },
+    {
+      "symbol_id": "bpej:contest_ui:bpej_contest_badge_cool",
+      "status": "verified",
+      "group": "contest",
+      "label": "bpej_contest_badge_cool",
+      "consumer_file": "graphics_file_rules.mk",
+      "consumer_kind": "make_input",
+      "consumer_target": "graphics/types/move_types.4bpp",
+      "element_type": "u8",
+      "source_file": "graphics/types/contest_cool.png",
+      "source_conversion": [
+        ".4bpp"
+      ],
+      "comparison_file": "graphics/types/contest_cool.4bpp",
+      "rom_offset": "0x00D971CC",
+      "size": 2696,
+      "compression": "gba_lz77",
+      "compressed_payload_size": 2693,
+      "transform": "gba_lz77_slice",
+      "output_representation": "raw",
+      "output_path": "build/extracted_contest/types/contest_cool.4bpp",
+      "custom_path": "graphics/custom/bpej/contest/types/contest_cool.4bpp",
+      "expected_source_hash": "f90e6321b09ad2f6d744bf2228a546cc40370e30",
+      "expected_source_decoded_hash": "14e787f370b3103e2d8afed84bae3b9cf335aeb3",
+      "expected_hash": "c718b46d26ca348e9932b02f64ad2f03c0ee6fa0",
+      "source_decoded_size": 5888,
+      "decoded_slice_offset": 4608,
+      "decoded_size": 256,
+      "expected_decoded_hash": "c718b46d26ca348e9932b02f64ad2f03c0ee6fa0",
+      "verification": {
+        "kind": "japanese_ui",
+        "byte_match": false,
+        "method": "summary_sprite_anim_and_category_palette_mapping",
+        "comparison_size": 256,
+        "comparison_sha1": "c718b46d26ca348e9932b02f64ad2f03c0ee6fa0",
+        "references": [
+          {
+            "file": "asm/pokemon_summary_screen.s",
+            "function": "SetContestMoveTypeIcons",
+            "template_rom_offset": "0x005ED414",
+            "animation_table_rom_offset": "0x005ED3B0",
+            "animation_index": 18,
+            "animation_command_rom_offset": "0x005ED388",
+            "image_tile_offset": 144,
+            "palette_index": 13
+          }
+        ],
+        "detail": "BPEJ SetContestMoveTypeIcons adds 18 to the contest category. Its sprite template uses the pointer table at 0x005ED3B0, whose five commands select tiles 144, 152, 160, 168 and 176. The 96-byte BPEJ palette matches the existing Expansion palette exactly.",
+        "screen_set": "summary_contest_badges",
+        "compatibility": "Extract only one verified 32x16 frame. Keep all 21 Expansion type frames and append the five contest frames in their existing order. The aggregate UI DB entry remains partial; only these five children are verified here."
+      },
+      "relations": [
+        {
+          "kind": "replaces_asset",
+          "target": "graphics/types/contest_cool.png"
+        },
+        {
+          "kind": "frame_of",
+          "target": "BPEJ summary icon sheet 0x00D971CC"
+        },
+        {
+          "kind": "appended_to",
+          "target": "graphics/types/move_types.4bpp"
+        }
+      ]
+    },
+    {
+      "symbol_id": "bpej:contest_ui:bpej_contest_badge_beauty",
+      "status": "verified",
+      "group": "contest",
+      "label": "bpej_contest_badge_beauty",
+      "consumer_file": "graphics_file_rules.mk",
+      "consumer_kind": "make_input",
+      "consumer_target": "graphics/types/move_types.4bpp",
+      "element_type": "u8",
+      "source_file": "graphics/types/contest_beauty.png",
+      "source_conversion": [
+        ".4bpp"
+      ],
+      "comparison_file": "graphics/types/contest_beauty.4bpp",
+      "rom_offset": "0x00D971CC",
+      "size": 2696,
+      "compression": "gba_lz77",
+      "compressed_payload_size": 2693,
+      "transform": "gba_lz77_slice",
+      "output_representation": "raw",
+      "output_path": "build/extracted_contest/types/contest_beauty.4bpp",
+      "custom_path": "graphics/custom/bpej/contest/types/contest_beauty.4bpp",
+      "expected_source_hash": "f90e6321b09ad2f6d744bf2228a546cc40370e30",
+      "expected_source_decoded_hash": "14e787f370b3103e2d8afed84bae3b9cf335aeb3",
+      "expected_hash": "e4eb71461d02eef50b3c31296c46b164ebb88d93",
+      "source_decoded_size": 5888,
+      "decoded_slice_offset": 4864,
+      "decoded_size": 256,
+      "expected_decoded_hash": "e4eb71461d02eef50b3c31296c46b164ebb88d93",
+      "verification": {
+        "kind": "japanese_ui",
+        "byte_match": false,
+        "method": "summary_sprite_anim_and_category_palette_mapping",
+        "comparison_size": 256,
+        "comparison_sha1": "e4eb71461d02eef50b3c31296c46b164ebb88d93",
+        "references": [
+          {
+            "file": "asm/pokemon_summary_screen.s",
+            "function": "SetContestMoveTypeIcons",
+            "template_rom_offset": "0x005ED414",
+            "animation_table_rom_offset": "0x005ED3B0",
+            "animation_index": 19,
+            "animation_command_rom_offset": "0x005ED390",
+            "image_tile_offset": 152,
+            "palette_index": 14
+          }
+        ],
+        "detail": "BPEJ SetContestMoveTypeIcons adds 18 to the contest category. Its sprite template uses the pointer table at 0x005ED3B0, whose five commands select tiles 144, 152, 160, 168 and 176. The 96-byte BPEJ palette matches the existing Expansion palette exactly.",
+        "screen_set": "summary_contest_badges",
+        "compatibility": "Extract only one verified 32x16 frame. Keep all 21 Expansion type frames and append the five contest frames in their existing order. The aggregate UI DB entry remains partial; only these five children are verified here."
+      },
+      "relations": [
+        {
+          "kind": "replaces_asset",
+          "target": "graphics/types/contest_beauty.png"
+        },
+        {
+          "kind": "frame_of",
+          "target": "BPEJ summary icon sheet 0x00D971CC"
+        },
+        {
+          "kind": "appended_to",
+          "target": "graphics/types/move_types.4bpp"
+        }
+      ]
+    },
+    {
+      "symbol_id": "bpej:contest_ui:bpej_contest_badge_cute",
+      "status": "verified",
+      "group": "contest",
+      "label": "bpej_contest_badge_cute",
+      "consumer_file": "graphics_file_rules.mk",
+      "consumer_kind": "make_input",
+      "consumer_target": "graphics/types/move_types.4bpp",
+      "element_type": "u8",
+      "source_file": "graphics/types/contest_cute.png",
+      "source_conversion": [
+        ".4bpp"
+      ],
+      "comparison_file": "graphics/types/contest_cute.4bpp",
+      "rom_offset": "0x00D971CC",
+      "size": 2696,
+      "compression": "gba_lz77",
+      "compressed_payload_size": 2693,
+      "transform": "gba_lz77_slice",
+      "output_representation": "raw",
+      "output_path": "build/extracted_contest/types/contest_cute.4bpp",
+      "custom_path": "graphics/custom/bpej/contest/types/contest_cute.4bpp",
+      "expected_source_hash": "f90e6321b09ad2f6d744bf2228a546cc40370e30",
+      "expected_source_decoded_hash": "14e787f370b3103e2d8afed84bae3b9cf335aeb3",
+      "expected_hash": "5ff96e4e19eaf74b5b357283764dbf20cd9d0c94",
+      "source_decoded_size": 5888,
+      "decoded_slice_offset": 5120,
+      "decoded_size": 256,
+      "expected_decoded_hash": "5ff96e4e19eaf74b5b357283764dbf20cd9d0c94",
+      "verification": {
+        "kind": "japanese_ui",
+        "byte_match": false,
+        "method": "summary_sprite_anim_and_category_palette_mapping",
+        "comparison_size": 256,
+        "comparison_sha1": "5ff96e4e19eaf74b5b357283764dbf20cd9d0c94",
+        "references": [
+          {
+            "file": "asm/pokemon_summary_screen.s",
+            "function": "SetContestMoveTypeIcons",
+            "template_rom_offset": "0x005ED414",
+            "animation_table_rom_offset": "0x005ED3B0",
+            "animation_index": 20,
+            "animation_command_rom_offset": "0x005ED398",
+            "image_tile_offset": 160,
+            "palette_index": 14
+          }
+        ],
+        "detail": "BPEJ SetContestMoveTypeIcons adds 18 to the contest category. Its sprite template uses the pointer table at 0x005ED3B0, whose five commands select tiles 144, 152, 160, 168 and 176. The 96-byte BPEJ palette matches the existing Expansion palette exactly.",
+        "screen_set": "summary_contest_badges",
+        "compatibility": "Extract only one verified 32x16 frame. Keep all 21 Expansion type frames and append the five contest frames in their existing order. The aggregate UI DB entry remains partial; only these five children are verified here."
+      },
+      "relations": [
+        {
+          "kind": "replaces_asset",
+          "target": "graphics/types/contest_cute.png"
+        },
+        {
+          "kind": "frame_of",
+          "target": "BPEJ summary icon sheet 0x00D971CC"
+        },
+        {
+          "kind": "appended_to",
+          "target": "graphics/types/move_types.4bpp"
+        }
+      ]
+    },
+    {
+      "symbol_id": "bpej:contest_ui:bpej_contest_badge_smart",
+      "status": "verified",
+      "group": "contest",
+      "label": "bpej_contest_badge_smart",
+      "consumer_file": "graphics_file_rules.mk",
+      "consumer_kind": "make_input",
+      "consumer_target": "graphics/types/move_types.4bpp",
+      "element_type": "u8",
+      "source_file": "graphics/types/contest_smart.png",
+      "source_conversion": [
+        ".4bpp"
+      ],
+      "comparison_file": "graphics/types/contest_smart.4bpp",
+      "rom_offset": "0x00D971CC",
+      "size": 2696,
+      "compression": "gba_lz77",
+      "compressed_payload_size": 2693,
+      "transform": "gba_lz77_slice",
+      "output_representation": "raw",
+      "output_path": "build/extracted_contest/types/contest_smart.4bpp",
+      "custom_path": "graphics/custom/bpej/contest/types/contest_smart.4bpp",
+      "expected_source_hash": "f90e6321b09ad2f6d744bf2228a546cc40370e30",
+      "expected_source_decoded_hash": "14e787f370b3103e2d8afed84bae3b9cf335aeb3",
+      "expected_hash": "450d2f31a10643ccdeec20d9c7fcca7fc85c0424",
+      "source_decoded_size": 5888,
+      "decoded_slice_offset": 5376,
+      "decoded_size": 256,
+      "expected_decoded_hash": "450d2f31a10643ccdeec20d9c7fcca7fc85c0424",
+      "verification": {
+        "kind": "japanese_ui",
+        "byte_match": false,
+        "method": "summary_sprite_anim_and_category_palette_mapping",
+        "comparison_size": 256,
+        "comparison_sha1": "450d2f31a10643ccdeec20d9c7fcca7fc85c0424",
+        "references": [
+          {
+            "file": "asm/pokemon_summary_screen.s",
+            "function": "SetContestMoveTypeIcons",
+            "template_rom_offset": "0x005ED414",
+            "animation_table_rom_offset": "0x005ED3B0",
+            "animation_index": 21,
+            "animation_command_rom_offset": "0x005ED3A0",
+            "image_tile_offset": 168,
+            "palette_index": 15
+          }
+        ],
+        "detail": "BPEJ SetContestMoveTypeIcons adds 18 to the contest category. Its sprite template uses the pointer table at 0x005ED3B0, whose five commands select tiles 144, 152, 160, 168 and 176. The 96-byte BPEJ palette matches the existing Expansion palette exactly.",
+        "screen_set": "summary_contest_badges",
+        "compatibility": "Extract only one verified 32x16 frame. Keep all 21 Expansion type frames and append the five contest frames in their existing order. The aggregate UI DB entry remains partial; only these five children are verified here."
+      },
+      "relations": [
+        {
+          "kind": "replaces_asset",
+          "target": "graphics/types/contest_smart.png"
+        },
+        {
+          "kind": "frame_of",
+          "target": "BPEJ summary icon sheet 0x00D971CC"
+        },
+        {
+          "kind": "appended_to",
+          "target": "graphics/types/move_types.4bpp"
+        }
+      ]
+    },
+    {
+      "symbol_id": "bpej:contest_ui:bpej_contest_badge_tough",
+      "status": "verified",
+      "group": "contest",
+      "label": "bpej_contest_badge_tough",
+      "consumer_file": "graphics_file_rules.mk",
+      "consumer_kind": "make_input",
+      "consumer_target": "graphics/types/move_types.4bpp",
+      "element_type": "u8",
+      "source_file": "graphics/types/contest_tough.png",
+      "source_conversion": [
+        ".4bpp"
+      ],
+      "comparison_file": "graphics/types/contest_tough.4bpp",
+      "rom_offset": "0x00D971CC",
+      "size": 2696,
+      "compression": "gba_lz77",
+      "compressed_payload_size": 2693,
+      "transform": "gba_lz77_slice",
+      "output_representation": "raw",
+      "output_path": "build/extracted_contest/types/contest_tough.4bpp",
+      "custom_path": "graphics/custom/bpej/contest/types/contest_tough.4bpp",
+      "expected_source_hash": "f90e6321b09ad2f6d744bf2228a546cc40370e30",
+      "expected_source_decoded_hash": "14e787f370b3103e2d8afed84bae3b9cf335aeb3",
+      "expected_hash": "ca7c779e58ec9744b5642a34fedfd146dcd608c9",
+      "source_decoded_size": 5888,
+      "decoded_slice_offset": 5632,
+      "decoded_size": 256,
+      "expected_decoded_hash": "ca7c779e58ec9744b5642a34fedfd146dcd608c9",
+      "verification": {
+        "kind": "japanese_ui",
+        "byte_match": false,
+        "method": "summary_sprite_anim_and_category_palette_mapping",
+        "comparison_size": 256,
+        "comparison_sha1": "ca7c779e58ec9744b5642a34fedfd146dcd608c9",
+        "references": [
+          {
+            "file": "asm/pokemon_summary_screen.s",
+            "function": "SetContestMoveTypeIcons",
+            "template_rom_offset": "0x005ED414",
+            "animation_table_rom_offset": "0x005ED3B0",
+            "animation_index": 22,
+            "animation_command_rom_offset": "0x005ED3A8",
+            "image_tile_offset": 176,
+            "palette_index": 13
+          }
+        ],
+        "detail": "BPEJ SetContestMoveTypeIcons adds 18 to the contest category. Its sprite template uses the pointer table at 0x005ED3B0, whose five commands select tiles 144, 152, 160, 168 and 176. The 96-byte BPEJ palette matches the existing Expansion palette exactly.",
+        "screen_set": "summary_contest_badges",
+        "compatibility": "Extract only one verified 32x16 frame. Keep all 21 Expansion type frames and append the five contest frames in their existing order. The aggregate UI DB entry remains partial; only these five children are verified here."
+      },
+      "relations": [
+        {
+          "kind": "replaces_asset",
+          "target": "graphics/types/contest_tough.png"
+        },
+        {
+          "kind": "frame_of",
+          "target": "BPEJ summary icon sheet 0x00D971CC"
+        },
+        {
+          "kind": "appended_to",
+          "target": "graphics/types/move_types.4bpp"
+        }
+      ]
+    }
+  ],
+  "skipped_assets": []
+}

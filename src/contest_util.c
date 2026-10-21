@@ -188,8 +188,8 @@ static void SpriteCB_Confetti(struct Sprite *sprite);
 static void Task_ShowContestEntryMonPic(u8 taskId);
 static void Task_LinkContestWaitForConnection(u8 taskId);
 
-static const u16 sResultsTextWindow_Pal[] = INCGFX_U16("graphics/contest/results_screen/text_window.pal", ".gbapal");
-static const u8 sResultsTextWindow_Gfx[] = INCGFX_U8("graphics/contest/results_screen/text_window.png", ".4bpp");
+static const u16 sResultsTextWindow_Pal[] = INCBIN_U16("build/extracted_contest/contest/results_screen/text_window.gbapal");
+static const u8 sResultsTextWindow_Gfx[] = INCBIN_U8("build/extracted_contest/contest/results_screen/text_window.4bpp");
 static const u16 sMiscBlank_Pal[] = INCGFX_U16("graphics/interface/blank.pal", ".gbapal");
 
 static const struct OamData sOamData_ResultsTextWindow =
@@ -1377,39 +1377,38 @@ static void LoadContestResultsTitleBarTilemaps(void)
     u8 palette;
     int x, y;
 
-    x = 5;
+    // BPEJ rank labels are 8x2 tiles, category/title labels are 5x2.
+    x = 13;
     y = 1;
     if (gLinkContestFlags & LINK_CONTEST_FLAG_IS_LINK)
     {
-        CopyToBgTilemapBufferRect(2, gContestResultsTitle_Link_Tilemap, 5, 1, 5, 2);
-        x = 10;
+        CopyToBgTilemapBufferRect(2, gContestResultsTitle_Link_Tilemap, 5, 1, 8, 2);
+        x = 14;
     }
     else if (gSpecialVar_ContestRank == CONTEST_RANK_NORMAL)
     {
-        CopyToBgTilemapBufferRect(2, gContestResultsTitle_Normal_Tilemap, 5, 1, 10, 2);
-        x = 15;
+        CopyToBgTilemapBufferRect(2, gContestResultsTitle_Normal_Tilemap, 5, 1, 8, 2);
     }
     else if (gSpecialVar_ContestRank == CONTEST_RANK_SUPER)
     {
-        CopyToBgTilemapBufferRect(2, gContestResultsTitle_Super_Tilemap, 5, 1, 10, 2);
-        x = 15;
+        CopyToBgTilemapBufferRect(2, gContestResultsTitle_Super_Tilemap, 5, 1, 8, 2);
     }
     else if (gSpecialVar_ContestRank == CONTEST_RANK_HYPER)
     {
-        CopyToBgTilemapBufferRect(2, gContestResultsTitle_Hyper_Tilemap, 5, 1, 10, 2);
-        x = 15;
+        CopyToBgTilemapBufferRect(2, gContestResultsTitle_Hyper_Tilemap, 5, 1, 8, 2);
     }
     else // CONTEST_RANK_MASTER
     {
-        CopyToBgTilemapBufferRect(2, gContestResultsTitle_Master_Tilemap, 5, 1, 10, 2);
-        x = 15;
+        CopyToBgTilemapBufferRect(2, gContestResultsTitle_Master_Tilemap, 5, 1, 8, 2);
     }
 
     palette = gSpecialVar_ContestCategory;
     CopyToBgTilemapBufferRect(2, gContestCategoryInfo[gSpecialVar_ContestCategory].resultsTilemap, x, y, 5, 2);
 
-    x += 5;
-    CopyToBgTilemapBufferRect(2, gContestResultsTitle_Tilemap, x, y, 6, 2);
+    x += 6;
+    if (gSpecialVar_ContestCategory == CONTEST_CATEGORY_CUTE || gSpecialVar_ContestCategory == CONTEST_CATEGORY_SMART)
+        x--;
+    CopyToBgTilemapBufferRect(2, gContestResultsTitle_Tilemap, x, y, 5, 2);
     CopyToBgTilemapBufferRect_ChangePalette(2, sContestResults->tilemapBuffers[2], 0, 0, 32, 4, palette);
 }
 
