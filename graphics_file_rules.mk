@@ -6,7 +6,6 @@ BATTRANSGFXDIR := graphics/battle_transitions
 TYPESGFXDIR := graphics/types
 ROULETTEGFXDIR := graphics/roulette
 SLOTMACHINEGFXDIR := graphics/slot_machine
-PKNAVOPTIONSGFXDIR := graphics/pokenav/options
 WALLPAPERGFXDIR := graphics/pokemon_storage/wallpapers
 JPCONTESTGFXDIR := graphics/contest/japanese
 TITLESCREENGFXDIR := graphics/title_screen
@@ -302,23 +301,4 @@ $(WALLPAPERGFXDIR)/ludicolo/tiles.4bpp: $(WALLPAPERGFXDIR)/friends_frame2.4bpp $
 	@cat $^ >$@
 
 $(WALLPAPERGFXDIR)/whiscash/tiles.4bpp: $(WALLPAPERGFXDIR)/friends_frame2.4bpp $(WALLPAPERGFXDIR)/whiscash/bg.4bpp
-	@cat $^ >$@
-
-
-
-### Pokenav ###
-
-$(PKNAVOPTIONSGFXDIR)/options.4bpp: $(PKNAVOPTIONSGFXDIR)/hoenn_map.4bpp \
-                                    $(PKNAVOPTIONSGFXDIR)/condition.4bpp \
-                                    $(PKNAVOPTIONSGFXDIR)/match_call.4bpp \
-                                    $(PKNAVOPTIONSGFXDIR)/ribbons.4bpp \
-                                    $(PKNAVOPTIONSGFXDIR)/switch_off.4bpp \
-                                    $(PKNAVOPTIONSGFXDIR)/party.4bpp \
-                                    $(PKNAVOPTIONSGFXDIR)/search.4bpp \
-                                    $(PKNAVOPTIONSGFXDIR)/cool.4bpp \
-                                    $(PKNAVOPTIONSGFXDIR)/beauty.4bpp \
-                                    $(PKNAVOPTIONSGFXDIR)/cute.4bpp \
-                                    $(PKNAVOPTIONSGFXDIR)/smart.4bpp \
-                                    $(PKNAVOPTIONSGFXDIR)/tough.4bpp \
-                                    $(PKNAVOPTIONSGFXDIR)/cancel.4bpp
 	@cat $^ >$@

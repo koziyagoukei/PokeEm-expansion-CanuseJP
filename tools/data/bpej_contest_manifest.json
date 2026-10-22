@@ -4471,5 +4471,437 @@
       ]
     }
   ],
-  "skipped_assets": []
+  "skipped_assets": [],
+  "removed_sources": [
+    {
+      "path": "graphics/contest/applause.png",
+      "size": 291,
+      "sha1": "2f91b4b29ac736ad3617e6d3974bb8dc92b12dd6"
+    },
+    {
+      "path": "graphics/contest/applause_meter.png",
+      "size": 184,
+      "sha1": "fdd04d3d6534409497aeda42dfd66f135f096bd0"
+    },
+    {
+      "path": "graphics/contest/audience.bin",
+      "size": 2048,
+      "sha1": "fba9d3afc6d2899f97a7951b5274a82995943f34"
+    },
+    {
+      "path": "graphics/contest/audience.png",
+      "size": 2086,
+      "sha1": "e79bf0ebc2b5ca54a4af1f3b63ffac575690a87d"
+    },
+    {
+      "path": "graphics/contest/curtain.bin",
+      "size": 2048,
+      "sha1": "9a6096f92c02db3a28bff548867dd184fa318931"
+    },
+    {
+      "path": "graphics/contest/faces.png",
+      "size": 1028,
+      "sha1": "026f2cd0e436314f7a15d38ff0442cafb5c6cc67"
+    },
+    {
+      "path": "graphics/contest/interface.bin",
+      "size": 4096,
+      "sha1": "11fc73b7e819ca49b198f687c8d74af5aefd8f08"
+    },
+    {
+      "path": "graphics/contest/interface.png",
+      "size": 2573,
+      "sha1": "0edfd65cac322db1cbfb640fdcc372f266429e83"
+    },
+    {
+      "path": "graphics/contest/judge.png",
+      "size": 593,
+      "sha1": "18a3edb442b388f32a8e99f47ba9a1f7415b9552"
+    },
+    {
+      "path": "graphics/contest/judge_symbols.png",
+      "size": 401,
+      "sha1": "010e40f5ca04e2512e9afd6d7d12a3b187ff0979"
+    },
+    {
+      "path": "graphics/contest/nextturn.png",
+      "size": 195,
+      "sha1": "de89a0e1cf398b879c644148ea97d8ef5ab1648b"
+    },
+    {
+      "path": "graphics/contest/nextturn_numbers.png",
+      "size": 181,
+      "sha1": "9348264fb77c08dacfa5884e88d55b979022e556"
+    },
+    {
+      "path": "graphics/contest/nextturn_random.png",
+      "size": 158,
+      "sha1": "c8481a0bca83b1f3f828a4499a3b9403966653be"
+    },
+    {
+      "path": "graphics/contest/results_screen/bg.bin",
+      "size": 2048,
+      "sha1": "c66377dfa56ada0a325d1315917e359695baa4c9"
+    },
+    {
+      "path": "graphics/contest/results_screen/interface.bin",
+      "size": 2048,
+      "sha1": "259d3a6fffd03a129088b64fc419fa5be389fe4b"
+    },
+    {
+      "path": "graphics/contest/results_screen/text_window.pal",
+      "size": 189,
+      "sha1": "7e0812ecf9c66a43a08c00ef8bed501f0053893d"
+    },
+    {
+      "path": "graphics/contest/results_screen/text_window.png",
+      "size": 223,
+      "sha1": "16b368e4b7e51b90244237d85bc105be6973930c"
+    },
+    {
+      "path": "graphics/contest/results_screen/tiles.png",
+      "size": 2683,
+      "sha1": "f433c83f2703b24f7180c09554b644743771fea9"
+    },
+    {
+      "path": "graphics/contest/results_screen/title.bin",
+      "size": 24,
+      "sha1": "30b75e2ca8a0ac593d6b39c94e0b9a0b757bfa4b"
+    },
+    {
+      "path": "graphics/contest/results_screen/title_beauty.bin",
+      "size": 20,
+      "sha1": "64efe464097aa096ec667f887486c6bfefb322c6"
+    },
+    {
+      "path": "graphics/contest/results_screen/title_cool.bin",
+      "size": 20,
+      "sha1": "4f0e79135acf92ee4cb193e4f5fc4d60d1e80961"
+    },
+    {
+      "path": "graphics/contest/results_screen/title_cute.bin",
+      "size": 20,
+      "sha1": "52b71fffbe708db39a37bc5579f50b1005ba9f62"
+    },
+    {
+      "path": "graphics/contest/results_screen/title_hyper.bin",
+      "size": 40,
+      "sha1": "9179052b2108e9123595ef6d16fa13c26c88567f"
+    },
+    {
+      "path": "graphics/contest/results_screen/title_link.bin",
+      "size": 20,
+      "sha1": "346bf4a08a0bd65c05084c9f11cf49d434a33386"
+    },
+    {
+      "path": "graphics/contest/results_screen/title_master.bin",
+      "size": 40,
+      "sha1": "549822ff1cb3b0dde24afbd60246eb2e92e77fa6"
+    },
+    {
+      "path": "graphics/contest/results_screen/title_normal.bin",
+      "size": 40,
+      "sha1": "8bed45c9d8c8664bf9034728ab7b974ef85f8e40"
+    },
+    {
+      "path": "graphics/contest/results_screen/title_smart.bin",
+      "size": 20,
+      "sha1": "be3ea5a15f5b7c40b4be7f6bd5283c2eebec1480"
+    },
+    {
+      "path": "graphics/contest/results_screen/title_super.bin",
+      "size": 40,
+      "sha1": "54498905984bb36a637a56321c0552501aaaa0a3"
+    },
+    {
+      "path": "graphics/contest/results_screen/title_tough.bin",
+      "size": 20,
+      "sha1": "bbb9522e023544b86219dc07c784e4879472ae35"
+    },
+    {
+      "path": "graphics/contest/results_screen/winner_banner.bin",
+      "size": 2048,
+      "sha1": "5266c31292917acf397f8998b8236f6b8eea5f9b"
+    },
+    {
+      "path": "graphics/contest/slider_heart.png",
+      "size": 873,
+      "sha1": "71b1a4f6ebce1a1fb5f91c2d95b0baec1adca25f"
+    },
+    {
+      "path": "graphics/contest/text.pal",
+      "size": 189,
+      "sha1": "7e0812ecf9c66a43a08c00ef8bed501f0053893d"
+    },
+    {
+      "path": "graphics/pokeblock/use_screen/condition.png",
+      "size": 287,
+      "sha1": "6910a12c3ded705e340ab59766015d42b220e728"
+    },
+    {
+      "path": "graphics/pokeblock/use_screen/graph.bin",
+      "size": 1280,
+      "sha1": "2167a67dc1673898fd04c9929ed84eefb93789f2"
+    },
+    {
+      "path": "graphics/pokeblock/use_screen/graph.png",
+      "size": 1571,
+      "sha1": "4886fa77820c2283d8de6fa502282395cef7caf4"
+    },
+    {
+      "path": "graphics/pokeblock/use_screen/graph_data.bin",
+      "size": 1280,
+      "sha1": "344a8f9ee1a3b59503440d3534635e9110df52ac"
+    },
+    {
+      "path": "graphics/pokeblock/use_screen/mon_frame.bin",
+      "size": 1280,
+      "sha1": "1e21772151540a9a1947ea6c51babdbd479556e4"
+    },
+    {
+      "path": "graphics/pokeblock/use_screen/mon_frame.png",
+      "size": 212,
+      "sha1": "fea5be7f2254e9229b05cd78cd3fbb8c85c92cb9"
+    },
+    {
+      "path": "graphics/pokeblock/use_screen/mon_frame_pal.bin",
+      "size": 32,
+      "sha1": "7ca982d85811bd1dab39ad7aa014202b58470639"
+    },
+    {
+      "path": "graphics/pokeblock/use_screen/nature.pal",
+      "size": 558,
+      "sha1": "4c4ab87385d340f3c24eeee29e9ad797d57f7229"
+    },
+    {
+      "path": "graphics/pokeblock/use_screen/updown.png",
+      "size": 234,
+      "sha1": "f2b69135a13a038919bfd270639194ea97e19272"
+    },
+    {
+      "path": "graphics/pokenav/condition/cancel.pal",
+      "size": 392,
+      "sha1": "5fc66731ad483c2ee712479a1c549efb0014305e"
+    },
+    {
+      "path": "graphics/pokenav/condition/cancel.png",
+      "size": 180,
+      "sha1": "d19dcdec604e71315e821ca95c91e8bcf43cb803"
+    },
+    {
+      "path": "graphics/pokenav/condition/graph.bin",
+      "size": 2048,
+      "sha1": "5ec42a96ad06fc842ce01b2fbf0b8dabe798884d"
+    },
+    {
+      "path": "graphics/pokenav/condition/graph.png",
+      "size": 1603,
+      "sha1": "6af53ca8638b04345309cb9f06079af731b92860"
+    },
+    {
+      "path": "graphics/pokenav/condition/graph_data.bin",
+      "size": 2048,
+      "sha1": "64687ed67a459e3c63f7701fb4b570804b574ce8"
+    },
+    {
+      "path": "graphics/pokenav/condition/graph_data.pal",
+      "size": 164,
+      "sha1": "c1e75b8eb660eee646ea007f0cdbb7a96714914c"
+    },
+    {
+      "path": "graphics/pokenav/condition/graph_data.png",
+      "size": 134,
+      "sha1": "6a5ad6c8800a508a9733416d4ae1e2cb7ced3225"
+    },
+    {
+      "path": "graphics/pokenav/condition/mon_markings.pal",
+      "size": 162,
+      "sha1": "707d77156a44c69dba805d42d3b07031e7aaccda"
+    },
+    {
+      "path": "graphics/pokenav/condition/pokeball.png",
+      "size": 260,
+      "sha1": "f446388f32cdbf3261ba3006aa844c812ef0400d"
+    },
+    {
+      "path": "graphics/pokenav/condition/pokeball_placeholder.png",
+      "size": 88,
+      "sha1": "5cc3d6e9486d575cd2a004df1cd8b9421756bc32"
+    },
+    {
+      "path": "graphics/pokenav/condition/search_results.bin",
+      "size": 1280,
+      "sha1": "874fe4296fd3f9819b6be3edfb38bdaeb34bdbcc"
+    },
+    {
+      "path": "graphics/pokenav/condition/search_results.png",
+      "size": 257,
+      "sha1": "c63418ff43b18169ca8f9b8d8810fd24bf7f4fa2"
+    },
+    {
+      "path": "graphics/pokenav/condition/search_results_list.pal",
+      "size": 169,
+      "sha1": "eedc2f69933e3b4b2f4011d32801cc5117a41d91"
+    },
+    {
+      "path": "graphics/pokenav/condition/sparkle.png",
+      "size": 256,
+      "sha1": "99d21392d2df4da5bcdf37e5fd3958308a3e51b7"
+    },
+    {
+      "path": "graphics/pokenav/condition/text.pal",
+      "size": 176,
+      "sha1": "fd19714e9f461ccb9fa85fd7c92dbc3fd1be9029"
+    },
+    {
+      "path": "graphics/pokenav/left_headers/beauty.png",
+      "size": 315,
+      "sha1": "598c1871a1c3f38bde162a87c32d40b5d4ac1a27"
+    },
+    {
+      "path": "graphics/pokenav/left_headers/condition.png",
+      "size": 287,
+      "sha1": "6910a12c3ded705e340ab59766015d42b220e728"
+    },
+    {
+      "path": "graphics/pokenav/left_headers/cool.png",
+      "size": 259,
+      "sha1": "90fb86c79e1ef1f04a31e9326781d48b9775a749"
+    },
+    {
+      "path": "graphics/pokenav/left_headers/cute.png",
+      "size": 293,
+      "sha1": "65358e582bc63b053647345a64a9bf64a209d063"
+    },
+    {
+      "path": "graphics/pokenav/left_headers/main_menu.png",
+      "size": 298,
+      "sha1": "f4bb82973c9c90276680f1d4f7f899b954b60b71"
+    },
+    {
+      "path": "graphics/pokenav/left_headers/palette.pal",
+      "size": 827,
+      "sha1": "5851e18b24b4023e67b7ddb732e1b701fe449b62"
+    },
+    {
+      "path": "graphics/pokenav/left_headers/party.png",
+      "size": 323,
+      "sha1": "6a3a70bfde802c78981779dc7534deb1420e9cd9"
+    },
+    {
+      "path": "graphics/pokenav/left_headers/search.png",
+      "size": 300,
+      "sha1": "e56b5d3eb19bad674994ffd3eee7be6345d6bb44"
+    },
+    {
+      "path": "graphics/pokenav/left_headers/smart.png",
+      "size": 308,
+      "sha1": "f86204e30b146706c44a244bc64cc7f96464abb5"
+    },
+    {
+      "path": "graphics/pokenav/left_headers/tough.png",
+      "size": 287,
+      "sha1": "6df1e8fd2cf67c33633986479076271d011fce2c"
+    },
+    {
+      "path": "graphics/pokenav/options/beauty.png",
+      "size": 259,
+      "sha1": "086fe1f7b7c9f4a15445dd2b2929ef347a8a150d"
+    },
+    {
+      "path": "graphics/pokenav/options/cancel.png",
+      "size": 273,
+      "sha1": "5d49290385afb20121d59354c1aa8f9471f84496"
+    },
+    {
+      "path": "graphics/pokenav/options/condition.png",
+      "size": 295,
+      "sha1": "cae2ffc2ccc63cf7b0a83fd8283387066095819b"
+    },
+    {
+      "path": "graphics/pokenav/options/cool.png",
+      "size": 212,
+      "sha1": "e6521fd4d900220ca61bdbf71e13a412e981cb96"
+    },
+    {
+      "path": "graphics/pokenav/options/cute.png",
+      "size": 228,
+      "sha1": "c200d8ceecfaa04b71c19fd94299130f8ecf6d24"
+    },
+    {
+      "path": "graphics/pokenav/options/hoenn_map.png",
+      "size": 305,
+      "sha1": "d0b7cf6f700d41c65588255b513d512da262889d"
+    },
+    {
+      "path": "graphics/pokenav/options/match_call.png",
+      "size": 304,
+      "sha1": "844f728fe70f943a5ddac55b9f81ed719b787520"
+    },
+    {
+      "path": "graphics/pokenav/options/options.bin",
+      "size": 72,
+      "sha1": "88312e4ff5169d528aadb868ddc77b84fa6d1efe"
+    },
+    {
+      "path": "graphics/pokenav/options/options.pal",
+      "size": 827,
+      "sha1": "5851e18b24b4023e67b7ddb732e1b701fe449b62"
+    },
+    {
+      "path": "graphics/pokenav/options/party.png",
+      "size": 318,
+      "sha1": "40d8a6f5a87fbe3d288d33942460b983aae9954e"
+    },
+    {
+      "path": "graphics/pokenav/options/ribbons.png",
+      "size": 291,
+      "sha1": "9f16c9990088190ca2fe6e7140679e0a89eb47bd"
+    },
+    {
+      "path": "graphics/pokenav/options/search.png",
+      "size": 286,
+      "sha1": "8d86536ec3f2b978b4d6fae78c1f2f957f7293ab"
+    },
+    {
+      "path": "graphics/pokenav/options/smart.png",
+      "size": 256,
+      "sha1": "83d3a0ccec3e26c7325d25a59fa22e64c1e563e9"
+    },
+    {
+      "path": "graphics/pokenav/options/switch_off.png",
+      "size": 314,
+      "sha1": "e8cfb376171dccfdd2aa11b3a4427b802e0dfe5d"
+    },
+    {
+      "path": "graphics/pokenav/options/tough.png",
+      "size": 239,
+      "sha1": "b2aada57cb0e52cccb43dd4b2b7b83ae5706d22a"
+    },
+    {
+      "path": "graphics/types/contest_beauty.png",
+      "size": 233,
+      "sha1": "8207f1482111ab8e6d39794ec8466650ff2eb8f8"
+    },
+    {
+      "path": "graphics/types/contest_cool.png",
+      "size": 241,
+      "sha1": "798110aae030daca2b947834356b6e64bd06cf35"
+    },
+    {
+      "path": "graphics/types/contest_cute.png",
+      "size": 237,
+      "sha1": "ccf22b0b6610324dc02bf81ef0aa7eb6cf291ab9"
+    },
+    {
+      "path": "graphics/types/contest_smart.png",
+      "size": 234,
+      "sha1": "87e37ebea32a894be4fbb10896f8be0d9a8861a7"
+    },
+    {
+      "path": "graphics/types/contest_tough.png",
+      "size": 243,
+      "sha1": "7f76c6ed652bb0e105e800892acd3752421c6fa5"
+    }
+  ]
 }

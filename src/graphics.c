@@ -1851,9 +1851,9 @@ const u16 gSummaryScreen_MoveEffect_Battle_Tilemap[] = INCBIN_U16("graphics/summ
 const u16 gSummaryScreen_MoveEffect_Contest_Tilemap[] = INCBIN_U16("graphics/summary_screen/effect_contest.bin");
 const u16 gSummaryScreen_MoveEffect_Cancel_Tilemap[] = INCBIN_U16("graphics/summary_screen/effect_cancel.bin");
 
-const u16 gIntroCopyright_Pal[] = INCGFX_U16("graphics/intro/copyright.png", ".gbapal");
-const u32 gIntroCopyright_Gfx[] = INCGFX_U32("graphics/intro/copyright.png", ".4bpp.smol");
-const u32 gIntroCopyright_Tilemap[] = INCGFX_U32("graphics/intro/copyright.bin", ".smolTM");
+const u16 gIntroCopyright_Pal[] = INCBIN_U16("build/extracted_intro/intro/copyright.gbapal");
+const u32 gIntroCopyright_Gfx[] = INCBIN_U32("build/extracted_intro/intro/copyright.4bpp.lz");
+const u32 gIntroCopyright_Tilemap[] = INCBIN_U32("build/extracted_intro/intro/copyright.bin.lz");
 
 const u16 gPokedexAreaScreenAreaUnknown_Pal[] = INCGFX_U16("graphics/pokedex/area_unknown.png", ".gbapal");
 const u32 gPokedexAreaScreenAreaUnknown_Gfx[] = INCGFX_U32("graphics/pokedex/area_unknown.png", ".4bpp.smol");
@@ -1885,7 +1885,7 @@ const u16 gPokenavCondition_Pal[] = INCBIN_U16("build/extracted_contest/pokenav/
 const u32 gPokenavCondition_Gfx[] = INCBIN_U32("build/extracted_contest/pokenav/condition/graph.4bpp.lz");
 const u32 gPokenavCondition_Tilemap[] = INCBIN_U32("build/extracted_contest/pokenav/condition/graph.bin.lz");
 
-const u16 gPokenavOptions_Tilemap[] = INCBIN_U16("graphics/pokenav/options/options.bin");
+const u16 gPokenavOptions_Tilemap[] = INCBIN_U16("build/extracted_contest/pokenav/condition/search_options.bin");
 const u32 gPokenavOptions_Gfx[] = INCBIN_U32("build/extracted_contest/pokenav/options/options.4bpp.lz");
 const u16 gPokenavOptions_Pal[] = INCBIN_U16("build/extracted_contest/pokenav/options/options.gbapal");
 
@@ -2112,8 +2112,8 @@ const u16 gTitleScreenEmeraldVersionPal[]  = INCGFX_U16("graphics/title_screen/e
 const u32 gTitleScreenCloudsTilemap[]      = INCGFX_U32("graphics/title_screen/clouds.bin", ".smolTM");
 const u32 gTitleScreenPokemonLogoGfx[]     = INCGFX_U32("graphics/title_screen/pokemon_logo.png", ".8bpp.smol");
 const u32 gTitleScreenEmeraldVersionGfx[]  = INCGFX_U32("graphics/title_screen/emerald_version.png", ".8bpp.smol", "-mwidth 8 -mheight 4");
-const u16 gTitleScreenPressStartPal[]      = INCGFX_U16("graphics/title_screen/press_start.png", ".gbapal");
-const u32 gTitleScreenPressStartGfx[]      = INCGFX_U32("graphics/title_screen/press_start.png", ".4bpp.smol", "-mwidth 4 -mheight 1 -num_tiles 48 -Wnum_tiles");
+const u16 gTitleScreenPressStartPal[]      = INCBIN_U16("build/extracted_intro/title_screen/press_start.gbapal");
+const u32 gTitleScreenPressStartGfx[]      = INCBIN_U32("build/extracted_intro/title_screen/press_start.4bpp.lz");
 const u32 gTitleScreenPokemonLogoTilemap[] = INCGFX_U32("graphics/title_screen/pokemon_logo.bin", ".smolTM");
 
 const u16 gFrontierPassBg_Pal[][16]                      = INCGFX_U16("graphics/frontier_pass/bg.png", ".gbapal"); // 8 x 16
