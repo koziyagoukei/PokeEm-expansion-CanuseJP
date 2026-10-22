@@ -103,6 +103,91 @@ static enum ContestCategories FirstCategory(const struct ContestNpcPreset *prese
     return CONTEST_CATEGORIES_COUNT;
 }
 
+static const struct
+{
+    enum Species species;
+    enum Move first;
+    enum Move second;
+    bool32 requiresBattleForm;
+} sComboExamples[] =
+{
+#define COMBO_CASE(species, first, second) {SPECIES_##species, MOVE_##first, MOVE_##second, FALSE},
+#define FORM_COMBO_CASE(species, first, second) {SPECIES_##species, MOVE_##first, MOVE_##second, TRUE},
+#include "contest_combo_examples.inc"
+#undef COMBO_CASE
+#undef FORM_COMBO_CASE
+};
+
+TEST("Contest combos: thematic pairs work and both moves are learnable by their example species")
+{
+    u32 illegal = 0;
+    for (u32 example = 0; example < ARRAY_COUNT(sComboExamples); example++)
+    {
+        enum Species species = sComboExamples[example].species;
+        enum Move first = sComboExamples[example].first;
+        enum Move second = sComboExamples[example].second;
+        EXPECT_GT(first, MOVE_NONE);
+        EXPECT_LT(first, MOVES_COUNT);
+        EXPECT_GT(second, MOVE_NONE);
+        EXPECT_LT(second, MOVES_COUNT);
+        EXPECT_NE(first, second);
+        EXPECT(AreMovesContestCombo(first, second));
+        bool32 canUseSecond = CanLearn(species, second);
+        if (sComboExamples[example].requiresBattleForm)
+        {
+            const struct FormChange *forms = GetSpeciesFormChanges(species);
+            if (forms != NULL)
+                for (u32 i = 0; forms[i].method != FORM_CHANGE_TERMINATOR; i++)
+                    if (forms[i].method == FORM_CHANGE_BEGIN_BATTLE
+                        && forms[i].targetSpecies == species && forms[i].param3 == second
+                        && CanLearn(species, forms[i].param2))
+                        canUseSecond = TRUE;
+        }
+        if (!CanLearn(species, first) || !canUseSecond)
+        {
+            Test_MgbaPrintf("Combo example %d: species %d cannot learn %d or %d", example, species, first, second);
+            illegal++;
+        }
+    }
+    EXPECT_EQ(illegal, 0);
+}
+
+TEST("Contest combos: new starters gain attention and finishers receive the normal combo bonus")
+{
+    u32 example = 0;
+    PARAMETRIZE { example = 1; } // Spider Web -> Sticky Web
+    PARAMETRIZE { example = 0; } // Grassy Terrain -> Grassy Glide
+    InitContest();
+    eContestantStatus[0].currMove = sComboExamples[example].first;
+    Test_CalculateAppealMoveImpact(0);
+    EXPECT(eContestantStatus[0].hasJudgesAttention);
+    EXPECT(!eContestantStatus[0].completedCombo);
+    eContestantStatus[0].prevMove = eContestantStatus[0].currMove;
+    eContestantStatus[0].currMove = sComboExamples[example].second;
+    eContest.appealNumber = 1;
+    Test_CalculateAppealMoveImpact(0);
+    EXPECT(eContestantStatus[0].completedCombo);
+    EXPECT(!eContestantStatus[0].hasJudgesAttention);
+    EXPECT_EQ(eContestantStatus[0].comboAppealBonus, eContestantStatus[0].baseAppeal);
+    EXPECT_GT(eContestantStatus[0].comboAppealBonus, 0);
+    FreeContest();
+}
+
+TEST("Contest combos: a finishing move alone or after lost attention earns no combo bonus")
+{
+    bool32 interrupted = FALSE;
+    PARAMETRIZE { interrupted = FALSE; }
+    PARAMETRIZE { interrupted = TRUE; }
+    InitContest();
+    eContestantStatus[0].prevMove = interrupted ? MOVE_SPIDER_WEB : MOVE_NONE;
+    eContestantStatus[0].currMove = MOVE_STICKY_WEB;
+    Test_CalculateAppealMoveImpact(0);
+    EXPECT(!eContestantStatus[0].completedCombo);
+    EXPECT_EQ(eContestantStatus[0].comboAppealBonus, 0);
+    EXPECT(!AreMovesContestCombo(MOVE_STICKY_WEB, MOVE_SPIDER_WEB));
+    FreeContest();
+}
+
 static u32 FindPreset(enum Species species, enum ContestGimmick gimmick)
 {
     for (u32 i = 0; i < Contest_GetNpcPresetCount(); i++)
@@ -423,6 +508,47 @@ TEST("Contest names: display controls restore Japanese and English after a slash
     EXPECT_EQ(GetStringWidth(FONT_NARROW, latinSuffix, 0), GetStringWidth(FONT_NARROW, explicitSuffix, 0));
 }
 
+TEST("Contest names: AUTO is a parameterless control and cannot consume the string terminator")
+{
+    static const u8 src[] = {EXT_CTRL_CODE_BEGIN, EXT_CTRL_CODE_AUTO, EOS, CHAR_A, EOS};
+    u8 dest[16];
+    memset(dest, 0xCC, sizeof(dest));
+    u8 *end = StringExpandPlaceholders(dest, src);
+    EXPECT_EQ(end - dest, 2);
+    EXPECT_EQ(memcmp(dest, src, 3), 0);
+    EXPECT_EQ(dest[3], 0xCC);
+    EXPECT_EQ(GetExtCtrlCodeLength(EXT_CTRL_CODE_AUTO), 1);
+    StripExtCtrlCodes(dest);
+    EXPECT_EQ(dest[0], EOS);
+}
+
+TEST("Contest names: first judging expands trainer and Rayquaza names without reading beyond them")
+{
+    static const u8 *const names[] = {
+        COMPOUND_STRING("{JPN}ハルカ"),
+        COMPOUND_STRING("{ENG}MAY"),
+        COMPOUND_STRING("あいうえおかき"),
+    };
+    u32 entry;
+    for (u32 i = 0; i < ARRAY_COUNT(names); i++)
+        PARAMETRIZE { entry = i; }
+    memset(gStringVar1, EOS, sizeof(gStringVar1));
+    memset(gStringVar3, EOS, sizeof(gStringVar3));
+    Contest_CopyDisplayName(gStringVar1, names[entry]);
+    Contest_CopyDisplayName(gStringVar3, COMPOUND_STRING("{JPN}レックウザ"));
+    u8 expected[160];
+    u8 actual[160];
+    u8 *end = StringCopy(expected, gStringVar1);
+    end = StringCopy(end, COMPOUND_STRING("さんの "));
+    end = StringCopy(end, gStringVar3);
+    end = StringCopy(end, COMPOUND_STRING(" です!"));
+    memset(actual, 0xCC, sizeof(actual));
+    u8 *actualEnd = StringExpandPlaceholders(actual, COMPOUND_STRING("{STR_VAR_1}さんの {STR_VAR_3} です!"));
+    EXPECT_EQ(actualEnd - actual, end - expected);
+    EXPECT_EQ(memcmp(actual, expected, end - expected + 1), 0);
+    EXPECT_EQ(actualEnd[1], 0xCC);
+}
+
 TEST("Contest names: maximum-length Japanese player names remain intact in saved and contestant data")
 {
     static const u8 name[] = {1, 2, 3, 4, 5, 6, 7, EOS};
@@ -710,18 +836,21 @@ TEST("Contest rules: a nervous Dynamax entrant gives no free hearts and retains 
 
 TEST("Contest rules: registration loads player metadata before appeal resources exist")
 {
+    enum Species species;
+    PARAMETRIZE { species = SPECIES_VENUSAUR; }
+    PARAMETRIZE { species = SPECIES_RAYQUAZA; }
     gContestResources = NULL;
     gLinkContestFlags = 0;
     gContestMonPartyIndex = 0;
     gSpecialVar_ContestCategory = CONTEST_CATEGORY_COOL;
     enum Item item = ITEM_GRASSIUM_Z;
     enum Type type = TYPE_STELLAR;
-    CreateMon(&gParties[B_TRAINER_PLAYER][0], SPECIES_VENUSAUR, 50, 0, OTID_STRUCT_PLAYER_ID);
+    CreateMon(&gParties[B_TRAINER_PLAYER][0], species, 50, 0, OTID_STRUCT_PLAYER_ID);
     SetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_HELD_ITEM, &item);
     SetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_TERA_TYPE, &type);
     SetContestants(CONTEST_CATEGORY_COOL, CONTEST_RANK_NORMAL);
     EXPECT(gContestResources == NULL);
-    EXPECT_EQ(gContestMons[gContestPlayerMonIndex].species, SPECIES_VENUSAUR);
+    EXPECT_EQ(gContestMons[gContestPlayerMonIndex].species, species);
     EXPECT_EQ(gContestMons[gContestPlayerMonIndex].heldItem, item);
     EXPECT_EQ(gContestMons[gContestPlayerMonIndex].teraType, type);
 }

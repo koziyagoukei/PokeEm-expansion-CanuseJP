@@ -5607,6 +5607,19 @@ void DoMonFrontSpriteAnimation(struct Sprite *sprite, enum Species species, bool
     }
 }
 
+// Cancel both owners before a front-picture sprite or its image buffers are freed.
+void StopMonFrontSpriteAnimation(struct Sprite *sprite)
+{
+    for (u32 taskId = 0; taskId < NUM_TASKS; taskId++)
+        if (gTasks[taskId].isActive && gTasks[taskId].func == Task_AnimateAfterDelay
+            && READ_PTR_FROM_TASK(taskId, 0) == sprite)
+            DestroyTask(taskId);
+    CancelMonAnimationTask(sprite);
+    sprite->callback = SpriteCallbackDummy;
+    sprite->animPaused = TRUE;
+    sprite->affineAnimPaused = TRUE;
+}
+
 void PokemonSummaryDoMonAnimation(struct Sprite *sprite, enum Species species, bool8 oneFrame)
 {
     if (!oneFrame && HasTwoFramesAnimation(species))

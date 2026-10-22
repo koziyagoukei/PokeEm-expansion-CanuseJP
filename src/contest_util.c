@@ -2465,7 +2465,7 @@ void ShowContestEntryMonPic(void)
     u8 left, top;
     bool32 isShiny;
 
-    if (FindTaskIdByFunc(Task_ShowContestEntryMonPic) == TASK_NONE)
+    if (gSpecialVar_0x8006 < CONTESTANT_COUNT && FindTaskIdByFunc(Task_ShowContestEntryMonPic) == TASK_NONE)
     {
         AllocateMonSpritesGfx();
         left = 10;
@@ -2476,12 +2476,22 @@ void ShowContestEntryMonPic(void)
         taskId = CreateTask(Task_ShowContestEntryMonPic, 0x50);
         gTasks[taskId].data[0] = 0;
         gTasks[taskId].data[1] = species;
+        gTasks[taskId].data[2] = SPRITE_NONE;
+        gTasks[taskId].data[5] = WINDOW_NONE;
         HandleLoadSpecialPokePic(TRUE, gMonSpritesGfxPtr->spritesGfx[B_POSITION_OPPONENT_LEFT], species, personality);
 
         LoadSpritePaletteWithTag(GetMonSpritePalFromSpeciesAndPersonality(species, isShiny, personality), species);
         SetMultiuseSpriteTemplateToPokemon(species, B_POSITION_OPPONENT_LEFT);
         gMultiuseSpriteTemplate.paletteTag = species;
         spriteId = CreateSprite(&gMultiuseSpriteTemplate, (left + 1) * 8 + 32, (top * 8) + 40, 0);
+        if (spriteId == SPRITE_NONE)
+        {
+            FreeSpritePaletteByTag(species);
+            FreeMonSpritesGfx();
+            DestroyTask(taskId);
+            return;
+        }
+        gSprites[spriteId].callback = SpriteCallbackDummy;
 
         if (gLinkContestFlags & LINK_CONTEST_FLAG_IS_LINK)
         {
@@ -2496,7 +2506,6 @@ void ShowContestEntryMonPic(void)
         gTasks[taskId].data[2] = spriteId;
         gTasks[taskId].data[3] = left;
         gTasks[taskId].data[4] = top;
-        gSprites[spriteId].callback = SpriteCallbackDummy;
         gSprites[spriteId].oam.priority = 0;
     }
 }
@@ -2506,8 +2515,10 @@ void HideContestEntryMonPic(void)
     u8 taskId = FindTaskIdByFunc(Task_ShowContestEntryMonPic);
     if (taskId != TASK_NONE)
     {
-        gTasks[taskId].data[0]++;
-        FreeMonSpritesGfx();
+        u8 spriteId = gTasks[taskId].data[2];
+        if (spriteId < MAX_SPRITES && gSprites[spriteId].inUse)
+            StopMonFrontSpriteAnimation(&gSprites[spriteId]);
+        gTasks[taskId].data[0] = 3;
     }
 }
 
@@ -2529,17 +2540,22 @@ static void Task_ShowContestEntryMonPic(u8 taskId)
     case 2:
         break;
     case 3:
-        sprite = &gSprites[task->data[2]];
-        FreeSpritePaletteByTag(GetSpritePaletteTagByPaletteNum(sprite->oam.paletteNum));
-
-        if (sprite->oam.affineMode)
-            FreeOamMatrix(sprite->oam.matrixNum);
-
-        DestroySprite(sprite);
+        if (task->data[2] < MAX_SPRITES && gSprites[task->data[2]].inUse)
+        {
+            sprite = &gSprites[task->data[2]];
+            StopMonFrontSpriteAnimation(sprite);
+            FreeSpritePaletteByTag(GetSpritePaletteTagByPaletteNum(sprite->oam.paletteNum));
+            FreeSpriteOamMatrix(sprite);
+            // DestroySprite reads sprite->images, owned by gMonSpritesGfxPtr.
+            DestroySprite(sprite);
+        }
+        task->data[2] = SPRITE_NONE;
+        FreeMonSpritesGfx();
         task->data[0]++;
         break;
     case 4:
-        ClearToTransparentAndRemoveWindow(gTasks[taskId].data[5]);
+        if (task->data[5] != WINDOW_NONE)
+            ClearToTransparentAndRemoveWindow(task->data[5]);
         DestroyTask(taskId);
         break;
     }
