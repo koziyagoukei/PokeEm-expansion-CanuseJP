@@ -215,7 +215,8 @@ const u8 *const gPokeblockNames[] =
     [PBLOCK_CLR_GRAY]      = COMPOUND_STRING("{JPN}はいいろポロック"),
     [PBLOCK_CLR_BLACK]     = COMPOUND_STRING("{JPN}くろいポロック"),
     [PBLOCK_CLR_WHITE]     = COMPOUND_STRING("{JPN}しろいポロック"),
-    [PBLOCK_CLR_GOLD]      = COMPOUND_STRING("{JPN}きんいろポロック")
+    [PBLOCK_CLR_GOLD]      = COMPOUND_STRING("{JPN}きんいろポロック"),
+    [PBLOCK_CLR_RAINBOW]   = COMPOUND_STRING("{JPN}にじいろポロック"),
 };
 
 static const struct MenuAction sPokeblockMenuActions[] =

@@ -28,7 +28,7 @@ TEST("Frontier TIPS: all pages and choices fit the explanation window")
     }
 }
 
-TEST("Frontier TIPS: all facilities, hub, resort and rule topics are reachable from TIPS")
+TEST("Frontier TIPS: facilities, hub, resort, contest and rule topics are reachable from TIPS")
 {
     bool8 seen[INFO_COUNT] = {0};
     seen[INFO_TIPS] = TRUE;
@@ -50,8 +50,29 @@ TEST("Frontier TIPS: all facilities, hub, resort and rule topics are reachable f
         EXPECT(seen[id]);
     for (u32 id = INFO_TIPS_RESORT; id <= INFO_TIPS_RESORT_DOLLS; id++)
         EXPECT(seen[id]);
+    for (u32 id = INFO_TIPS_CONTEST; id <= INFO_TIPS_CONTEST_REWARDS; id++)
+        EXPECT(seen[id]);
     EXPECT(!seen[INFO_DIARY_TEST]);
     EXPECT(!seen[INFO_CHOICE_TEST]);
+}
+
+TEST("Frontier TIPS: contest has eight topics and twenty pages without changing older topic IDs")
+{
+    static const u8 pages[] = {2, 3, 2, 2, 2, 4, 2, 3};
+    const struct InfoViewerEntry *contest = GetInfoViewerEntry(INFO_TIPS_CONTEST);
+    EXPECT_EQ(INFO_TIPS_RESORT_DOLLS, 30);
+    EXPECT_EQ(INFO_TIPS_CONTEST, 31);
+    EXPECT_EQ(contest->choiceCount, ARRAY_COUNT(pages) + 1);
+    u32 total = 0;
+    for (u32 i = 0; i < ARRAY_COUNT(pages); i++)
+    {
+        u32 topic = INFO_TIPS_CONTEST_BASICS + i;
+        EXPECT_EQ(contest->choices[i].nextInfoId, topic);
+        EXPECT_EQ(GetInfoViewerPageCount(topic), pages[i]);
+        total += GetInfoViewerPageCount(topic);
+    }
+    EXPECT_EQ(total, 20);
+    EXPECT_EQ(contest->choices[ARRAY_COUNT(pages)].nextInfoId, INFO_VIEWER_BACK);
 }
 
 TEST("Frontier TIPS: banned list covers actual admission rules including all forms")

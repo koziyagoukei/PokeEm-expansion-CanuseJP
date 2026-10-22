@@ -1001,6 +1001,7 @@ ContestHall_EventScript_VObjectAudienceLookAround::
 
 ContestHall_EventScript_GiveWinnerPrize::
 	goto_if_eq VAR_CONTEST_TYPE, CONTEST_TYPE_LINK, ContestHall_EventScript_EndLinkContest
+	call ContestHall_EventScript_GiveWinnerBattlePoints
 	call ContestHall_EventScript_CheckShouldSkipPrize
 	goto_if_set FLAG_TEMP_2, ContestHall_EventScript_SkipPrize
 	lockall
@@ -1014,6 +1015,52 @@ ContestHall_EventScript_GiveWinnerPrize::
 	delay 30
 	special ShouldReadyContestArtist
 	goto_if_eq VAR_0x8004, TRUE, ContestHall_EventScript_SetReadyForContestArtist
+	return
+
+ContestHall_EventScript_GiveWinnerBattlePoints::
+	call ContestHall_EventScript_AddWinnerBattlePoints
+	goto_if_eq VAR_RESULT, 0, ContestHall_EventScript_NoBattlePoints
+	lockall
+	msgbox BattleFrontier_Text_ObtainedXBattlePoints, MSGBOX_GETPOINTS
+	releaseall
+	return
+
+@ Kept separate from ribbon eligibility so repeat wins still award BP.
+ContestHall_EventScript_AddWinnerBattlePoints::
+	setvar VAR_RESULT, 0
+	goto_if_eq VAR_CONTEST_TYPE, CONTEST_TYPE_LINK, ContestHall_EventScript_NoBattlePoints
+	special GetContestWinnerId
+	goto_if_ne VAR_0x8005, 3, ContestHall_EventScript_NoBattlePoints
+	switch VAR_CONTEST_RANK
+	case CONTEST_RANK_NORMAL, ContestHall_EventScript_Award3BattlePoints
+	case CONTEST_RANK_SUPER, ContestHall_EventScript_Award5BattlePoints
+	case CONTEST_RANK_HYPER, ContestHall_EventScript_Award7BattlePoints
+	case CONTEST_RANK_MASTER, ContestHall_EventScript_Award10BattlePoints
+	return
+
+ContestHall_EventScript_Award3BattlePoints::
+	setvar VAR_0x8004, 3
+	goto ContestHall_EventScript_AddBattlePoints
+
+ContestHall_EventScript_Award5BattlePoints::
+	setvar VAR_0x8004, 5
+	goto ContestHall_EventScript_AddBattlePoints
+
+ContestHall_EventScript_Award7BattlePoints::
+	setvar VAR_0x8004, 7
+	goto ContestHall_EventScript_AddBattlePoints
+
+ContestHall_EventScript_Award10BattlePoints::
+	setvar VAR_0x8004, 10
+	goto ContestHall_EventScript_AddBattlePoints
+
+ContestHall_EventScript_AddBattlePoints::
+	special GiveFrontierBattlePoints
+	copyvar VAR_RESULT, VAR_0x8004
+	buffernumberstring STR_VAR_1, VAR_RESULT
+	return
+
+ContestHall_EventScript_NoBattlePoints::
 	return
 
 ContestHall_EventScript_SkipPrize::

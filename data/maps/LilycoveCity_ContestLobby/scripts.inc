@@ -5,6 +5,105 @@ LilycoveCity_ContestLobby_MapScripts::
 
 @ Some scripts for this room are split into data/scripts/contest_hall and data/scripts/berry_blender
 
+LilycoveCity_ContestLobby_EventScript_BpShop::
+	lock
+	faceplayer
+	special ShowBattlePointsWindow
+
+ContestShop_EventScript_Menu:
+	message ContestShop_Text_Welcome
+	waitmessage
+	multichoice 10, 0, MULTI_CONTEST_BP_SHOP, FALSE
+	switch VAR_RESULT
+	case 0, ContestShop_EventScript_RainbowPokeblock
+	case 1, ContestShop_EventScript_Scarves
+	goto ContestShop_EventScript_Goodbye
+
+ContestShop_EventScript_Scarves:
+	message ContestShop_Text_ChooseScarf
+	waitmessage
+	multichoice 14, 0, MULTI_CONTEST_BP_SHOP_SCARVES, FALSE
+	goto_if_ge VAR_RESULT, 5, ContestShop_EventScript_Menu
+	copyvar VAR_0x8004, VAR_RESULT
+	addvar VAR_0x8004, CONTEST_SHOP_RED_SCARF
+	goto ContestShop_EventScript_Confirm
+
+ContestShop_EventScript_RainbowPokeblock:
+	setvar VAR_0x8004, CONTEST_SHOP_RAINBOW_POKEBLOCK
+	msgbox ContestShop_Text_RainbowEffect, MSGBOX_DEFAULT
+
+ContestShop_EventScript_Confirm:
+	specialvar VAR_RESULT, ContestShop_BufferProduct
+	goto_if_eq VAR_RESULT, FALSE, ContestShop_EventScript_Goodbye
+	msgbox ContestShop_Text_Confirm, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, ContestShop_EventScript_Menu
+	specialvar VAR_RESULT, ContestShop_Purchase
+	switch VAR_RESULT
+	case CONTEST_SHOP_NOT_ENOUGH_BP, ContestShop_EventScript_NotEnoughBP
+	case CONTEST_SHOP_NO_CASE, ContestShop_EventScript_NoCase
+	case CONTEST_SHOP_CASE_FULL, ContestShop_EventScript_CaseFull
+	case CONTEST_SHOP_BAG_FULL, ContestShop_EventScript_BagFull
+	case CONTEST_SHOP_INVALID, ContestShop_EventScript_Goodbye
+	special CloseBattlePointsWindow
+	special ShowBattlePointsWindow
+	playse SE_SHOP
+	waitse
+	msgbox ContestShop_Text_Received, MSGBOX_DEFAULT
+	goto_if_eq VAR_0x8004, CONTEST_SHOP_RAINBOW_POKEBLOCK, ContestShop_EventScript_Menu
+	goto ContestShop_EventScript_Scarves
+
+ContestShop_EventScript_NotEnoughBP:
+	msgbox ContestShop_Text_NotEnoughBP, MSGBOX_DEFAULT
+	goto ContestShop_EventScript_Menu
+
+ContestShop_EventScript_NoCase:
+	msgbox ContestShop_Text_NoCase, MSGBOX_DEFAULT
+	goto ContestShop_EventScript_Menu
+
+ContestShop_EventScript_CaseFull:
+	msgbox ContestShop_Text_CaseFull, MSGBOX_DEFAULT
+	goto ContestShop_EventScript_Menu
+
+ContestShop_EventScript_BagFull:
+	msgbox ContestShop_Text_BagFull, MSGBOX_DEFAULT
+	goto ContestShop_EventScript_Menu
+
+ContestShop_EventScript_Goodbye:
+	special CloseBattlePointsWindow
+	msgbox ContestShop_Text_Goodbye, MSGBOX_DEFAULT
+	release
+	end
+
+ContestShop_Text_Welcome:
+	.string "{JPN}コンテストの おともに いかが？\nどれも 1つ 10BPで こうかんするよ！$"
+
+ContestShop_Text_ChooseScarf:
+	.string "{JPN}どの バンダナに する？\n1まい 10BPだよ。$"
+
+ContestShop_Text_RainbowEffect:
+	.string "{JPN}5つの コンディションが\nそれぞれ 50 あがる ポロックだよ。\pなめらかさは 20。\nポロックケースに いれてあげるね。$"
+
+ContestShop_Text_Confirm:
+	.string "{JPN}{STR_VAR_1}を\n1つ 10BPで こうかんする？$"
+
+ContestShop_Text_Received:
+	.string "{JPN}{PLAYER}は\n{STR_VAR_1}を てにいれた！$"
+
+ContestShop_Text_NotEnoughBP:
+	.string "{JPN}BPが たりない みたいだね。$"
+
+ContestShop_Text_NoCase:
+	.string "{JPN}ポロックケースが ひつようだよ。\nコンテストの うけつけで もらってね。$"
+
+ContestShop_Text_CaseFull:
+	.string "{JPN}ポロックケースが いっぱいだよ。\nあきを つくってから また きてね。$"
+
+ContestShop_Text_BagFull:
+	.string "{JPN}バッグに はいらない みたいだね。\nあきを つくってから また きてね。$"
+
+ContestShop_Text_Goodbye:
+	.string "{JPN}また きてね！$"
+
 LilycoveCity_ContestLobby_OnTransition:
 	call LilycoveCity_ContestLobby_EventScript_TryShowContestReporter
 	call LilycoveCity_ContestLobby_EventScript_TryShowBlendMaster

@@ -220,6 +220,7 @@ static const struct InfoViewerChoice sInfoViewerChoices_Tips[] = {
     {sInfoText_TitleBannedMons, INFO_BANNED_MONS},
     {sInfoText_TitleHub, INFO_TIPS_HUB},
     {sInfoText_TitleResort, INFO_TIPS_RESORT},
+    {sInfoText_TitleContest, INFO_TIPS_CONTEST},
     {sInfoText_ChoiceClose, INFO_VIEWER_CLOSE},
 };
 static const struct InfoViewerChoice sInfoViewerChoices_Facilities[] = {

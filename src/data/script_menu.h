@@ -1199,6 +1199,23 @@ static const struct MenuAction MultichoiceList_FrontierBannedSpecies[] =
     { gText_Exit },
 };
 
+static const struct MenuAction sMultichoiceList_ContestBpShop[] =
+{
+    {COMPOUND_STRING("{JPN}にじいろポロック")},
+    {COMPOUND_STRING("{JPN}コンテストの スカーフ")},
+    {gText_Exit},
+};
+
+static const struct MenuAction sMultichoiceList_ContestBpShopScarves[] =
+{
+    {COMPOUND_STRING("{JPN}あかいバンダナ")},
+    {COMPOUND_STRING("{JPN}あおいバンダナ")},
+    {COMPOUND_STRING("{JPN}ピンクのバンダナ")},
+    {COMPOUND_STRING("{JPN}みどりのバンダナ")},
+    {COMPOUND_STRING("{JPN}きいろのバンダナ")},
+    {gText_Exit},
+};
+
 struct MultichoiceListStruct
 {
     const struct MenuAction *list;
@@ -1373,6 +1390,8 @@ static const struct MultichoiceListStruct sMultichoiceLists[] =
     [MULTI_LOCAL_ROOM_FLOOR_STYLE]                   = MULTICHOICE(sMultichoiceList_LocalRoomFloorStyle),
     [MULTI_LOCAL_ROOM_WALL_STYLE]                    = MULTICHOICE(sMultichoiceList_LocalRoomWallStyle),
     [MULTI_LOCAL_ROOM_ROAMERS]                       = MULTICHOICE(sMultichoiceList_LocalRoomRoamers),
+    [MULTI_CONTEST_BP_SHOP]                          = MULTICHOICE(sMultichoiceList_ContestBpShop),
+    [MULTI_CONTEST_BP_SHOP_SCARVES]                  = MULTICHOICE(sMultichoiceList_ContestBpShopScarves),
 };
 
 const u8 *const gStdStrings[] =

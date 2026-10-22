@@ -191,6 +191,7 @@ static const struct InfoViewerChoice sInfoViewerChoices_ChoiceTest[] =
 };
 
 #include "resort_tips.h"
+#include "contest_tips.h"
 #include "frontier_tips.h"
 
 static const struct InfoViewerEntry sInfoViewerEntries[INFO_COUNT] =
@@ -236,6 +237,19 @@ static const struct InfoViewerEntry sInfoViewerEntries[INFO_COUNT] =
     [INFO_TIPS_RESORT_SHOP] = TIPS_PAGE_ENTRY(ResortShop),
     [INFO_TIPS_RESORT_ROOM] = TIPS_PAGE_ENTRY(ResortRoom),
     [INFO_TIPS_RESORT_DOLLS] = TIPS_PAGE_ENTRY(ResortDolls),
+    [INFO_TIPS_CONTEST] = {
+        .title = sInfoText_TitleContest,
+        .choices = sInfoViewerChoices_Contest,
+        .choiceCount = ARRAY_COUNT(sInfoViewerChoices_Contest),
+    },
+    [INFO_TIPS_CONTEST_BASICS] = TIPS_PAGE_ENTRY(ContestBasics),
+    [INFO_TIPS_CONTEST_PREPARATION] = TIPS_PAGE_ENTRY(ContestPreparation),
+    [INFO_TIPS_CONTEST_SELECTION] = TIPS_PAGE_ENTRY(ContestSelection),
+    [INFO_TIPS_CONTEST_MEGA] = TIPS_PAGE_ENTRY(ContestMega),
+    [INFO_TIPS_CONTEST_Z] = TIPS_PAGE_ENTRY(ContestZ),
+    [INFO_TIPS_CONTEST_TERA] = TIPS_PAGE_ENTRY(ContestTera),
+    [INFO_TIPS_CONTEST_DYNAMAX] = TIPS_PAGE_ENTRY(ContestDynamax),
+    [INFO_TIPS_CONTEST_REWARDS] = TIPS_PAGE_ENTRY(ContestRewards),
     [INFO_FRONTIER_RULES] =
     {
         .title = sInfoText_TitleFrontierRules,

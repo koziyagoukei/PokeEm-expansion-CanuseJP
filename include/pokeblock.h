@@ -20,6 +20,7 @@ enum
     PBLOCK_CLR_BLACK,
     PBLOCK_CLR_WHITE,
     PBLOCK_CLR_GOLD,
+    PBLOCK_CLR_RAINBOW,
 };
 
 enum
