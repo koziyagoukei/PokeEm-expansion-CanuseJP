@@ -146,14 +146,14 @@ struct
 #include "data/text/ribbon_descriptions.h"
 #include "data/text/gift_ribbon_descriptions.h"
 
-static const u16 sRibbonIcons1_Pal[] = INCGFX_U16("graphics/pokenav/ribbons/icons1.pal", ".gbapal");
-static const u16 sRibbonIcons2_Pal[] = INCGFX_U16("graphics/pokenav/ribbons/icons2.pal", ".gbapal");
-static const u16 sRibbonIcons3_Pal[] = INCGFX_U16("graphics/pokenav/ribbons/icons3.pal", ".gbapal");
-static const u16 sRibbonIcons4_Pal[] = INCGFX_U16("graphics/pokenav/ribbons/icons4.pal", ".gbapal");
-static const u16 sRibbonIcons5_Pal[] = INCGFX_U16("graphics/pokenav/ribbons/icons5.pal", ".gbapal");
-static const u16 sMonInfo_Pal[] = INCGFX_U16("graphics/pokenav/ribbons/mon_info.pal", ".gbapal"); // palette for Pokemon's name/gender/level text
-static const u32 sRibbonIconsSmall_Gfx[] = INCGFX_U32("graphics/pokenav/ribbons/icons.png", ".4bpp.smol");
-static const u32 sRibbonIconsBig_Gfx[] = INCGFX_U32("graphics/pokenav/ribbons/icons_big.png", ".4bpp.smol");
+static const u16 sRibbonIcons1_Pal[] = INCBIN_U16("build/extracted_pokenav/ribbons/icons1.gbapal");
+static const u16 sRibbonIcons2_Pal[] = INCBIN_U16("build/extracted_pokenav/ribbons/icons2.gbapal");
+static const u16 sRibbonIcons3_Pal[] = INCBIN_U16("build/extracted_pokenav/ribbons/icons3.gbapal");
+static const u16 sRibbonIcons4_Pal[] = INCBIN_U16("build/extracted_pokenav/ribbons/icons4.gbapal");
+static const u16 sRibbonIcons5_Pal[] = INCBIN_U16("build/extracted_pokenav/ribbons/icons5.gbapal");
+static const u16 sMonInfo_Pal[] = INCBIN_U16("build/extracted_pokenav/ribbons/mon_info.gbapal"); // palette for Pokemon's name/gender/level text
+static const u32 sRibbonIconsSmall_Gfx[] = INCBIN_U32("build/extracted_pokenav/ribbons/icons.4bpp.lz");
+static const u32 sRibbonIconsBig_Gfx[] = INCBIN_U32("build/extracted_pokenav/ribbons/icons_big.4bpp.lz");
 
 static const struct BgTemplate sBgTemplates[] =
 {
@@ -858,7 +858,7 @@ static const struct WindowTemplate sRibbonSummaryMonNameWindowTemplate =
     .bg = 2,
     .tilemapLeft = 14,
     .tilemapTop = 1,
-    .width = 13,
+    .width = 12, // BPEJ's name box ends one tile earlier than the English one.
     .height = 2,
     .paletteNum = 10,
     .baseBlock = 0x54,
@@ -881,6 +881,7 @@ static void PrintRibbbonsSummaryMonInfo(struct Pokenav_RibbonsSummaryMenu *menu)
     u8 *txtPtr;
     u8 level, gender;
     u16 windowId = menu->nameWindowId;
+    u32 levelX;
 
     FillWindowPixelBuffer(windowId, PIXEL_FILL(1));
     GetMonNicknameLevelGender(gStringVar3, &level, &gender);
@@ -896,14 +897,14 @@ static void PrintRibbbonsSummaryMonInfo(struct Pokenav_RibbonsSummaryMenu *menu)
         genderTxt = sText_NoGenderSymbol;
         break;
     }
-    AddTextPrinterParameterized(windowId, GetFontIdToFit(gStringVar3, FONT_NORMAL, 0, 60), gStringVar3, 0, 1, TEXT_SKIP_DRAW, NULL);
-
     txtPtr = StringCopy(gStringVar1, genderTxt);
     *(txtPtr++) = CHAR_SLASH;
     *(txtPtr++) = CHAR_EXTRA_SYMBOL;
     *(txtPtr++) = CHAR_LV_2;
     ConvertIntToDecimalStringN(txtPtr, level, STR_CONV_MODE_LEFT_ALIGN, 3);
-    AddTextPrinterParameterized(windowId, FONT_NORMAL, gStringVar1, 60, 1, TEXT_SKIP_DRAW, NULL);
+    levelX = GetStringRightAlignXOffset(FONT_NORMAL, gStringVar1, GetWindowAttribute(windowId, WINDOW_WIDTH) * 8);
+    AddTextPrinterParameterized(windowId, GetFontIdToFit(gStringVar3, FONT_NORMAL, 0, levelX - 4), gStringVar3, 0, 1, TEXT_SKIP_DRAW, NULL);
+    AddTextPrinterParameterized(windowId, FONT_NORMAL, gStringVar1, levelX, 1, TEXT_SKIP_DRAW, NULL);
     CopyWindowToVram(windowId, COPYWIN_GFX);
 }
 

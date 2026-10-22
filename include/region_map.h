@@ -44,6 +44,7 @@ struct RegionMapInfo
     const u32 *regionMapGfx;
     const u16 *regionMapPalette;
     u16 dexMapPaletteSize;
+    u16 regionMapPaletteSize;
 };
 
 struct RegionMap {

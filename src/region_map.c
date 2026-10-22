@@ -117,16 +117,16 @@ static void CB_FadeInFlyMap(void);
 static void CB_HandleFlyMapInput(void);
 static void CB_ExitFlyMap(void);
 
-static const u16 sRegionMapCursorPal[] = INCGFX_U16("graphics/pokenav/region_map/cursor.pal", ".gbapal");
-static const u32 sRegionMapCursorSmallGfxLZ[] = INCGFX_U32("graphics/pokenav/region_map/cursor_small.png", ".4bpp.smol");
-static const u32 sRegionMapCursorLargeGfxLZ[] = INCGFX_U32("graphics/pokenav/region_map/cursor_large.png", ".4bpp.smol");
-static const u16 sRegionMapBg_Pal[] = INCGFX_U16("graphics/pokenav/region_map/map.pal", ".gbapal");
-static const u32 sRegionMapBg_GfxLZ[] = INCGFX_U32("graphics/pokenav/region_map/map.png", ".8bpp.smol", "-num_tiles 233 -Wnum_tiles");
-static const u32 sRegionMapBg_TilemapLZ[] = INCGFX_U32("graphics/pokenav/region_map/map.bin", ".smolTM");
-static const u16 sRegionMapPlayerIcon_BrendanPal[] = INCGFX_U16("graphics/pokenav/region_map/brendan_icon.png", ".gbapal");
-static const u8 sRegionMapPlayerIcon_BrendanGfx[] = INCGFX_U8("graphics/pokenav/region_map/brendan_icon.png", ".4bpp");
-static const u16 sRegionMapPlayerIcon_MayPal[] = INCGFX_U16("graphics/pokenav/region_map/may_icon.png", ".gbapal");
-static const u8 sRegionMapPlayerIcon_MayGfx[] = INCGFX_U8("graphics/pokenav/region_map/may_icon.png", ".4bpp");
+static const u16 sRegionMapCursorPal[] = INCBIN_U16("build/extracted_pokenav/region_map/cursor.gbapal");
+static const u32 sRegionMapCursorSmallGfxLZ[] = INCBIN_U32("build/extracted_pokenav/region_map/cursor_small.4bpp.lz");
+static const u32 sRegionMapCursorLargeGfxLZ[] = INCBIN_U32("build/extracted_pokenav/region_map/cursor_large.4bpp.lz");
+static const u16 sRegionMapBg_Pal[] = INCBIN_U16("build/extracted_pokenav/region_map/map.gbapal");
+static const u32 sRegionMapBg_GfxLZ[] = INCBIN_U32("build/extracted_pokenav/region_map/map.8bpp.lz");
+static const u32 sRegionMapBg_TilemapLZ[] = INCBIN_U32("build/extracted_pokenav/region_map/map.bin.lz");
+static const u16 sRegionMapPlayerIcon_BrendanPal[] = INCBIN_U16("build/extracted_pokenav/region_map/brendan_icon.gbapal");
+static const u8 sRegionMapPlayerIcon_BrendanGfx[] = INCBIN_U8("build/extracted_pokenav/region_map/brendan_icon.4bpp");
+static const u16 sRegionMapPlayerIcon_MayPal[] = INCBIN_U16("build/extracted_pokenav/region_map/may_icon.gbapal");
+static const u8 sRegionMapPlayerIcon_MayGfx[] = INCBIN_U8("build/extracted_pokenav/region_map/may_icon.4bpp");
 static const u16 sRegionMapPlayerIcon_RedPal[] = INCGFX_U16("graphics/pokenav/region_map/red_icon.pal", ".gbapal");
 static const u8 sRegionMapPlayerIcon_RedGfx[] = INCGFX_U8("graphics/pokenav/region_map/red_icon.png", ".4bpp");
 static const u16 sRegionMapPlayerIcon_LeafPal[] = INCGFX_U16("graphics/pokenav/region_map/leaf_icon.pal", ".gbapal");
@@ -287,11 +287,11 @@ static const mapsec_u8_t sMapSecIdsOffMap[] =
     MAPSEC_NAVEL_ROCK
 };
 
-static const u16 sRegionMapFramePal[] = INCGFX_U16("graphics/pokenav/region_map/frame.png", ".gbapal");
-static const u32 sRegionMapFrameGfxLZ[] = INCGFX_U32("graphics/pokenav/region_map/frame.png", ".4bpp.smol");
-static const u32 sRegionMapFrameTilemapLZ[] = INCGFX_U32("graphics/pokenav/region_map/frame.bin", ".smolTM");
-static const u16 sFlyTargetIcons_Pal[] = INCGFX_U16("graphics/pokenav/region_map/fly_target_icons.png", ".gbapal");
-static const u32 sFlyTargetIcons_Gfx[] = INCGFX_U32("graphics/pokenav/region_map/fly_target_icons.png", ".4bpp.smol");
+static const u16 sRegionMapFramePal[] = INCBIN_U16("build/extracted_pokenav/region_map/frame.gbapal");
+static const u32 sRegionMapFrameGfxLZ[] = INCBIN_U32("build/extracted_pokenav/region_map/frame.4bpp.lz");
+static const u32 sRegionMapFrameTilemapLZ[] = INCBIN_U32("build/extracted_pokenav/region_map/frame.bin.lz");
+static const u16 sFlyTargetIcons_Pal[] = INCBIN_U16("build/extracted_pokenav/region_map/fly_target_icons.gbapal");
+static const u32 sFlyTargetIcons_Gfx[] = INCBIN_U32("build/extracted_pokenav/region_map/fly_target_icons.4bpp.lz");
 
 static const u16 ALIGNED(4) sPokedexAreaMap_Pal[] = INCGFX_U16("graphics/pokedex/region_map.pal", ".gbapal");
 static const u32 sPokedexAreaMap_Gfx[] = INCGFX_U32("graphics/pokedex/region_map.png", ".8bpp.smol", "-num_tiles 232 -Wnum_tiles");
@@ -334,6 +334,7 @@ const struct RegionMapInfo gRegionMapInfos[] =
         .dexMapTilemap = sPokedexAreaMap_Tilemap,
         .dexMapPaletteSize = sizeof(sPokedexAreaMap_Pal),
         .regionMapPalette = sRegionMapBg_Pal,
+        .regionMapPaletteSize = sizeof(sRegionMapBg_Pal),
         .regionMapGfx = sRegionMapBg_GfxLZ,
         .regionMapTilemap = sRegionMapBg_TilemapLZ,
     },
@@ -344,6 +345,7 @@ const struct RegionMapInfo gRegionMapInfos[] =
         .dexMapTilemap = sPokedexAreaMapKanto_Tilemap,
         .dexMapPaletteSize = sizeof(sPokedexAreaMapKanto_Pal),
         .regionMapPalette = sRegionMapKanto_Pal,
+        .regionMapPaletteSize = sizeof(sRegionMapKanto_Pal),
         .regionMapGfx = sRegionMapKanto_Gfx,
         .regionMapTilemap = sRegionMapKanto_Tilemap,
     },
@@ -354,6 +356,7 @@ const struct RegionMapInfo gRegionMapInfos[] =
         .dexMapTilemap = sPokedexAreaMapSevii123_Tilemap,
         .dexMapPaletteSize = sizeof(sPokedexAreaMapSevii123_Pal),
         .regionMapPalette = sRegionMapSevii123_Pal,
+        .regionMapPaletteSize = sizeof(sRegionMapSevii123_Pal),
         .regionMapGfx = sRegionMapSevii123_Gfx,
         .regionMapTilemap = sRegionMapSevii123_Tilemap,
     },
@@ -364,6 +367,7 @@ const struct RegionMapInfo gRegionMapInfos[] =
         .dexMapTilemap = sPokedexAreaMapSevii45_Tilemap,
         .dexMapPaletteSize = sizeof(sPokedexAreaMapSevii45_Pal),
         .regionMapPalette = sRegionMapSevii45_Pal,
+        .regionMapPaletteSize = sizeof(sRegionMapSevii45_Pal),
         .regionMapGfx = sRegionMapSevii45_Gfx,
         .regionMapTilemap = sRegionMapSevii45_Tilemap,
     },
@@ -374,6 +378,7 @@ const struct RegionMapInfo gRegionMapInfos[] =
         .dexMapTilemap = sPokedexAreaMapSevii67_Tilemap,
         .dexMapPaletteSize = sizeof(sPokedexAreaMapSevii67_Pal),
         .regionMapPalette = sRegionMapSevii67_Pal,
+        .regionMapPaletteSize = sizeof(sRegionMapSevii67_Pal),
         .regionMapGfx = sRegionMapSevii67_Gfx,
         .regionMapTilemap = sRegionMapSevii67_Tilemap,
     },
@@ -762,7 +767,8 @@ bool8 LoadRegionMapGfx(void)
     case 2:
         regionMapType = GetRegionMapType(gMapHeader.regionMapSectionId);
         if (!FreeTempTileDataBuffersIfPossible())
-            LoadPalette(gRegionMapInfos[regionMapType].regionMapPalette, BG_PLTT_ID(7), 3 * PLTT_SIZE_4BPP);
+            // Hoenn has two palette banks; the FRLG region additions have three.
+            LoadPalette(gRegionMapInfos[regionMapType].regionMapPalette, BG_PLTT_ID(7), gRegionMapInfos[regionMapType].regionMapPaletteSize);
         break;
     case 3:
         DecompressDataWithHeaderWram(sRegionMapCursorSmallGfxLZ, sRegionMap->cursorSmallImage);
