@@ -1889,30 +1889,30 @@ const u16 gPokenavOptions_Tilemap[] = INCBIN_U16("build/extracted_contest/pokena
 const u32 gPokenavOptions_Gfx[] = INCBIN_U32("build/extracted_contest/pokenav/options/options.4bpp.lz");
 const u16 gPokenavOptions_Pal[] = INCBIN_U16("build/extracted_contest/pokenav/options/options.gbapal");
 
-const u16 gPokenavHeader_Pal[] = INCGFX_U16("graphics/pokenav/header.png", ".gbapal");
-const u32 gPokenavHeader_Gfx[] = INCGFX_U32("graphics/pokenav/header.png", ".4bpp.smol", "-num_tiles 53 -Wnum_tiles"); // TODO: use width 9 and makefile rule for cleanliness, make wasnt behaving, didnt want to apply num_tiles to this
-const u32 gPokenavHeader_Tilemap[] = INCGFX_U32("graphics/pokenav/header.bin", ".smolTM");
+const u16 gPokenavHeader_Pal[] = INCBIN_U16("build/extracted_pokenav/header.gbapal");
+const u32 gPokenavHeader_Gfx[] = INCBIN_U32("build/extracted_pokenav/header.4bpp.lz"); // TODO: use width 9 and makefile rule for cleanliness, make wasnt behaving, didnt want to apply num_tiles to this
+const u32 gPokenavHeader_Tilemap[] = INCBIN_U32("build/extracted_pokenav/header.bin.lz");
 
 const u16 gPokenavLeftHeader_Pal[] = INCBIN_U16("build/extracted_contest/pokenav/left_headers/palette.gbapal");
 const u32 gPokenavLeftHeaderBeauty_Gfx[] = INCBIN_U32("build/extracted_contest/pokenav/left_headers/beauty.4bpp.lz");
 const u32 gPokenavLeftHeaderSmart_Gfx[] = INCBIN_U32("build/extracted_contest/pokenav/left_headers/smart.4bpp.lz");
 const u32 gPokenavLeftHeaderCondition_Gfx[] = INCBIN_U32("build/extracted_contest/pokenav/left_headers/condition.4bpp.lz");
 const u32 gPokenavLeftHeaderCute_Gfx[] = INCBIN_U32("build/extracted_contest/pokenav/left_headers/cute.4bpp.lz");
-const u32 gPokenavLeftHeaderMatchCall_Gfx[] = INCGFX_U32("graphics/pokenav/left_headers/match_call.png", ".4bpp.smol");
+const u32 gPokenavLeftHeaderMatchCall_Gfx[] = INCBIN_U32("build/extracted_pokenav/left_headers/match_call.4bpp.lz");
 const u32 gPokenavLeftHeaderMainMenu_Gfx[] = INCBIN_U32("build/extracted_contest/pokenav/left_headers/main_menu.4bpp.lz");
-const u32 gPokenavLeftHeaderHoennMap_Gfx[] = INCGFX_U32("graphics/pokenav/left_headers/hoenn_map.png", ".4bpp.smol");
-const u32 gPokenavLeftHeaderRibbons_Gfx[] = INCGFX_U32("graphics/pokenav/left_headers/ribbons.png", ".4bpp.smol");
+const u32 gPokenavLeftHeaderHoennMap_Gfx[] = INCBIN_U32("build/extracted_pokenav/left_headers/hoenn_map.4bpp.lz");
+const u32 gPokenavLeftHeaderRibbons_Gfx[] = INCBIN_U32("build/extracted_pokenav/left_headers/ribbons.4bpp.lz");
 const u32 gPokenavLeftHeaderSearch_Gfx[] = INCBIN_U32("build/extracted_contest/pokenav/left_headers/search.4bpp.lz");
 const u32 gPokenavLeftHeaderTough_Gfx[] = INCBIN_U32("build/extracted_contest/pokenav/left_headers/tough.4bpp.lz");
 const u32 gPokenavLeftHeaderCool_Gfx[] = INCBIN_U32("build/extracted_contest/pokenav/left_headers/cool.4bpp.lz");
 const u32 gPokenavLeftHeaderParty_Gfx[] = INCBIN_U32("build/extracted_contest/pokenav/left_headers/party.4bpp.lz");
 
-const u16 gPokenavMessageBox_Pal[] = INCGFX_U16("graphics/pokenav/message.png", ".gbapal");
-const u32 gPokenavMessageBox_Gfx[] = INCGFX_U32("graphics/pokenav/message.png", ".4bpp.smol");
-const u32 gPokenavMessageBox_Tilemap[] = INCGFX_U32("graphics/pokenav/message.bin", ".smolTM");
+const u16 gPokenavMessageBox_Pal[] = INCBIN_U16("build/extracted_pokenav/message.gbapal");
+const u32 gPokenavMessageBox_Gfx[] = INCBIN_U32("build/extracted_pokenav/message.4bpp.lz");
+const u32 gPokenavMessageBox_Tilemap[] = INCBIN_U32("build/extracted_pokenav/message.bin.lz");
 
-const u16 gRegionMapCityZoomTiles_Pal[] = INCGFX_U16("graphics/pokenav/region_map/zoom_tiles.png", ".gbapal");
-const u32 gRegionMapCityZoomText_Gfx[] = INCGFX_U32("graphics/pokenav/region_map/city_zoom_text.png", ".4bpp.smol");
+const u16 gRegionMapCityZoomTiles_Pal[] = INCBIN_U16("build/extracted_pokenav/region_map/zoom_tiles.gbapal");
+const u32 gRegionMapCityZoomText_Gfx[] = INCBIN_U32("build/extracted_pokenav/region_map/city_zoom_text.4bpp.lz");
 
 const u16 gPokenavConditionCancel_Pal[] = INCBIN_U16("build/extracted_contest/pokenav/condition/cancel.gbapal");
 const u8 gPokenavConditionCancel_Gfx[] = INCBIN_U8("build/extracted_contest/pokenav/condition/cancel.4bpp");
@@ -2092,9 +2092,9 @@ const u16 gWallpaperPalettes_Ribbon[][16] =
 const u32 gWallpaperTiles_Ribbon[] = INCGFX_U32("graphics/pokemon_storage/wallpapers/ribbon/tiles.4bpp", ".smol");
 const u32 gWallpaperTilemap_Ribbon[] = INCGFX_U32("graphics/pokemon_storage/wallpapers/ribbon/tilemap.bin", ".smolTM");
 
-const u16 gPokenavRibbonsSummaryBg_Pal[] = INCGFX_U16("graphics/pokenav/ribbons/summary_bg.png", ".gbapal");
-const u32 gPokenavRibbonsSummaryBg_Gfx[] = INCGFX_U32("graphics/pokenav/ribbons/summary_bg.png", ".4bpp.smol");
-const u32 gPokenavRibbonsSummaryBg_Tilemap[] = INCGFX_U32("graphics/pokenav/ribbons/summary_bg.bin", ".smolTM");
+const u16 gPokenavRibbonsSummaryBg_Pal[] = INCBIN_U16("build/extracted_pokenav/ribbons/summary_bg.gbapal");
+const u32 gPokenavRibbonsSummaryBg_Gfx[] = INCBIN_U32("build/extracted_pokenav/ribbons/summary_bg.4bpp.lz");
+const u32 gPokenavRibbonsSummaryBg_Tilemap[] = INCBIN_U32("build/extracted_pokenav/ribbons/summary_bg.bin.lz");
 
 const u16 gMonIconPalettes[][16] =
 {

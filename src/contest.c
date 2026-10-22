@@ -3439,13 +3439,13 @@ static void Task_HandleMoveSelectInput(u8 taskId)
 
 static void DrawMoveSelectArrow(s8 moveIndex)
 {
-    ContestBG_FillBoxWithIncrementingTile(2, 55, 0, 31 + moveIndex * 2, 2, 2, 17, 1);
+    // BPEJ uses tiles 1/2 for an 8x16 arrow; the English 2x2 layout reads other UI tiles.
+    ContestBG_FillBoxWithIncrementingTile(2, 1, 1, 31 + moveIndex * 2, 1, 2, 17, 1);
 }
 
 static void EraseMoveSelectArrow(s8 moveIndex)
 {
-    ContestBG_FillBoxWithIncrementingTile(2, 11, 0, 31 + moveIndex * 2, 2, 1, 17, 1);
-    ContestBG_FillBoxWithIncrementingTile(2, 11, 0, 32 + moveIndex * 2, 2, 1, 17, 1);
+    ContestBG_FillBoxWithTile(2, 12, 1, 31 + moveIndex * 2, 1, 2, 17);
 }
 
 static void PrintContestGimmickMessageHolder(enum Move move)

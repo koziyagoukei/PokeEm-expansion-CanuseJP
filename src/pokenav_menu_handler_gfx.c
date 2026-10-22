@@ -13,6 +13,7 @@
 #include "gym_leader_rematch.h"
 #include "window.h"
 #include "strings.h"
+#include "international_string_util.h"
 #include "scanline_effect.h"
 #include "constants/songs.h"
 #include "constants/rgb.h"
@@ -99,14 +100,14 @@ static void InitMenuOptionGlow(void);
 static void Task_CurrentMenuOptionGlow(u8);
 static void SetMenuOptionGlow(void);
 
-static const u16 sPokenavBgDotsPal[] = INCGFX_U16("graphics/pokenav/bg_dots.png", ".gbapal");
-static const u32 sPokenavBgDotsTiles[] = INCGFX_U32("graphics/pokenav/bg_dots.png", ".4bpp.smol");
-static const u32 sPokenavBgDotsTilemap[] = INCGFX_U32("graphics/pokenav/bg_dots.bin", ".smolTM");
-static const u16 sPokenavDeviceBgPal[] = INCGFX_U16("graphics/pokenav/device_outline.png", ".gbapal");
-static const u32 sPokenavDeviceBgTiles[] = INCGFX_U32("graphics/pokenav/device_outline.png", ".4bpp.smol", "-num_tiles 53 -Wnum_tiles");
-static const u32 sPokenavDeviceBgTilemap[] = INCGFX_U32("graphics/pokenav/device_outline_map.bin", ".smolTM");
-static const u16 sMatchCallBlueLightPal[] = INCGFX_U16("graphics/pokenav/blue_light.png", ".gbapal");
-static const u32 sMatchCallBlueLightTiles[] = INCGFX_U32("graphics/pokenav/blue_light.png", ".4bpp.smol");
+static const u16 sPokenavBgDotsPal[] = INCBIN_U16("build/extracted_pokenav/bg_dots.gbapal");
+static const u32 sPokenavBgDotsTiles[] = INCBIN_U32("build/extracted_pokenav/bg_dots.4bpp.lz");
+static const u32 sPokenavBgDotsTilemap[] = INCBIN_U32("build/extracted_pokenav/bg_dots.bin.lz");
+static const u16 sPokenavDeviceBgPal[] = INCBIN_U16("build/extracted_pokenav/device_outline.gbapal");
+static const u32 sPokenavDeviceBgTiles[] = INCBIN_U32("build/extracted_pokenav/device_outline.4bpp.lz");
+static const u32 sPokenavDeviceBgTilemap[] = INCBIN_U32("build/extracted_pokenav/device_outline_map.bin.lz");
+static const u16 sMatchCallBlueLightPal[] = INCBIN_U16("build/extracted_pokenav/blue_light.gbapal");
+static const u32 sMatchCallBlueLightTiles[] = INCBIN_U32("build/extracted_pokenav/blue_light.4bpp.lz");
 
 static const u8 gText_NoRibbonWinners[] = _("{JPN}リボンを もっている ポケモンが いません");
 
@@ -259,9 +260,10 @@ struct
 static const struct WindowTemplate sOptionDescWindowTemplate =
 {
     .bg = 1,
-    .tilemapLeft = 3,
+    // Keep the text window inside the narrower BPEJ message-box border.
+    .tilemapLeft = 4,
     .tilemapTop = 17,
-    .width = 24,
+    .width = 22,
     .height = 2,
     .paletteNum = 1,
     .baseBlock = 8
@@ -1222,9 +1224,9 @@ static void PrintCurrentOptionDescription(void)
     struct Pokenav_MenuGfx *gfx = GetSubstructPtr(POKENAV_SUBSTRUCT_MENU_GFX);
     int menuItem = GetCurrentMenuItemId();
     const u8 *desc = sPageDescriptions[menuItem];
-    u32 width = GetStringWidth(FONT_NORMAL, desc, -1);
+    u32 width = GetWindowAttribute(gfx->optionDescWindowId, WINDOW_WIDTH) * 8;
     FillWindowPixelBuffer(gfx->optionDescWindowId, PIXEL_FILL(6));
-    AddTextPrinterParameterized3(gfx->optionDescWindowId, FONT_NORMAL, (192 - width) / 2, 1, sOptionDescTextColors, 0, desc);
+    AddTextPrinterParameterized3(gfx->optionDescWindowId, FONT_NORMAL, GetStringCenterAlignXOffset(FONT_NORMAL, desc, width), 1, sOptionDescTextColors, 0, desc);
 }
 
 // Printed when Ribbons is selected if no PC/party mons have ribbons
@@ -1233,9 +1235,9 @@ static void PrintNoRibbonWinners(void)
 {
     struct Pokenav_MenuGfx *gfx = GetSubstructPtr(POKENAV_SUBSTRUCT_MENU_GFX);
     const u8 *s = gText_NoRibbonWinners;
-    u32 width = GetStringWidth(FONT_NORMAL, s, -1);
+    u32 width = GetWindowAttribute(gfx->optionDescWindowId, WINDOW_WIDTH) * 8;
     FillWindowPixelBuffer(gfx->optionDescWindowId, PIXEL_FILL(6));
-    AddTextPrinterParameterized3(gfx->optionDescWindowId, FONT_NORMAL, (192 - width) / 2, 1, sOptionDescTextColors2, 0, s);
+    AddTextPrinterParameterized3(gfx->optionDescWindowId, FONT_NORMAL, GetStringCenterAlignXOffset(FONT_NORMAL, s, width), 1, sOptionDescTextColors2, 0, s);
 }
 
 static bool32 IsDma3ManagerBusyWithBgCopy_(void)
