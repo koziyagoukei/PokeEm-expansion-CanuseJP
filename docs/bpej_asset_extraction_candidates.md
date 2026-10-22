@@ -9,6 +9,12 @@ Expansion側アセットと同一で、ROMから安全に切り出せる可能�
 全候補は `tools/data/bpej_asset_extraction_candidates.json` に記録しています。
 この一覧だけではビルド参照を変更せず、元アセットも削除しません。
 
+タイトル・オープニングの実装後、既存候補33件の状態を `extracted` へ更新し、
+実際のmanifestと出力先を追記しています。実装には独立に照合した追加素材も含め、
+計98項目を使用します。独自ロゴは維持します。
+詳細は [タイトル・オープニング素材のROM抽出](bpej_intro_extraction.md) を参照してください。
+この候補一覧の631件という集計は初回調査時の母集団であり、未抽出件数ではありません。
+
 ## 選定条件
 
 候補は次の条件をすべて満たすものに限定しています。
@@ -17,7 +23,7 @@ Expansion側アセットと同一で、ROMから安全に切り出せる可能�
 - `verification.status` が `verified`
 - Expansion側の変換後データとの `byte_match` が `true`
 - ROM offsetとsizeが確定済み
-- 現在のExpansion側に対応する元ファイルが存在する
+- 初回調査時のExpansion側に対応する元ファイルが存在する（実装済み対象は削除後も検証記録として残す）
 
 BPEJ ROMはSHA1
 `d7cf8f156ba9c455d164e1ea780a6bf1945465c2` で再確認しています。
@@ -42,10 +48,10 @@ BPEJ ROMはSHA1
 
 小さい単位で試す場合は、次の順番が安全です。
 
-1. `title_screen` 5件
+1. `title_screen` 5件（実装済み）
 2. `ui` の共通カーソル、標準メニューパレット、手持ち画面、戦闘UI
 3. `pokedex` 21件
-4. `opening` 28件
+4. `opening` 28件（実装済み）
 5. `pc_box` の共通UIを先に行い、壁紙はセット単位で追加
 6. `item_icons` はアイコン画像と共有パレットの参照関係を維持して小分けに追加
 

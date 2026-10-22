@@ -48,11 +48,12 @@ def relative_path(value: str, root: PurePosixPath) -> PurePosixPath:
     return relative
 
 
-def load_manifest(path: Path) -> dict:
+def load_manifest(path: Path, *, output_root=OUTPUT_ROOT, custom_root=CUSTOM_ROOT,
+                  source_roots=SOURCE_ROOTS, consumers=CONSUMERS, category="contest") -> dict:
     manifest = json.loads(path.read_text(encoding="utf-8"))
     assets = manifest.get("assets", [])
     if manifest.get("format_version") != 1 or not assets or manifest.get("asset_count") != len(assets):
-        raise ValueError("invalid contest manifest version or asset count")
+        raise ValueError(f"invalid {category} manifest version or asset count")
     expected_rom = {
         "file": "baserom.gba", "gameCode": EXPECTED_GAME_CODE.decode("ascii"),
         "size": EXPECTED_SIZE, "sha1": EXPECTED_SHA1, "crc32": EXPECTED_CRC32,
@@ -82,17 +83,17 @@ def load_manifest(path: Path) -> dict:
                 raise ValueError(f"{label}: Japanese replacement needs screen provenance and compatibility evidence")
         else:
             raise ValueError(f"{label}: unrecognized verification kind")
-        if not re.fullmatch(r"[A-Za-z_][A-Za-z0-9_]*", label) or asset["consumer_file"] not in CONSUMERS:
+        if not re.fullmatch(r"[A-Za-z_][A-Za-z0-9_]*", label) or asset["consumer_file"] not in consumers:
             raise ValueError(f"{label}: invalid or out-of-scope consumer")
         if asset["consumer_file"] == "graphics_file_rules.mk":
             if (asset.get("consumer_kind") != "make_input"
                     or asset.get("consumer_target") != "graphics/types/move_types.4bpp"
                     or not re.fullmatch(r"graphics/types/contest_(cool|beauty|cute|smart|tough)\.png", asset["source_file"])):
                 raise ValueError(f"{label}: only the five contest badges may replace make inputs")
-        if not asset["source_file"].startswith(SOURCE_ROOTS) or asset["element_type"] not in ("u8", "u16", "u32"):
+        if not asset["source_file"].startswith(source_roots) or asset["element_type"] not in ("u8", "u16", "u32"):
             raise ValueError(f"{label}: invalid source asset or element type")
-        output = relative_path(asset["output_path"], OUTPUT_ROOT)
-        if relative_path(asset["custom_path"], CUSTOM_ROOT) != output:
+        output = relative_path(asset["output_path"], output_root)
+        if relative_path(asset["custom_path"], custom_root) != output:
             raise ValueError(f"{label}: custom path must mirror the output path")
         for field, values in seen.items():
             if asset[field] in values:
@@ -238,11 +239,12 @@ def stamp_content(manifest_path: Path, state_hash: str, count: int, custom_count
             "file_count": count, "custom_count": custom_count, "output_state_sha1": state_hash}
 
 
-def main(argv: list[str] | None = None) -> int:
-    parser = argparse.ArgumentParser(description=__doc__)
+def run_extraction(argv, *, loader, output_root, default_manifest, category, description) -> int:
+    """Share the validated binary pipeline without broadening either manifest's scope."""
+    parser = argparse.ArgumentParser(description=description)
     parser.add_argument("--baserom", type=Path, default=Path("baserom.gba"))
-    parser.add_argument("--manifest", type=Path, default=Path("tools/data/bpej_contest_manifest.json"))
-    parser.add_argument("--out", type=Path, default=Path(str(OUTPUT_ROOT)))
+    parser.add_argument("--manifest", type=Path, default=Path(default_manifest))
+    parser.add_argument("--out", type=Path, default=Path(str(output_root)))
     parser.add_argument("--stamp", type=Path)
     mode = parser.add_mutually_exclusive_group()
     mode.add_argument("--check", action="store_true")
@@ -250,9 +252,9 @@ def main(argv: list[str] | None = None) -> int:
     mode.add_argument("--dry-run", action="store_true")
     args = parser.parse_args(argv)
     try:
-        manifest = load_manifest(args.manifest)
+        manifest = loader(args.manifest)
         assets = manifest["assets"]
-        outputs = [args.out.joinpath(*relative_path(asset["output_path"], OUTPUT_ROOT).parts) for asset in assets]
+        outputs = [args.out.joinpath(*relative_path(asset["output_path"], output_root).parts) for asset in assets]
         if args.print_outputs:
             print("\n".join(path.as_posix() for path in outputs))
             return 0
@@ -275,11 +277,17 @@ def main(argv: list[str] | None = None) -> int:
             raise ValueError("output validation failed:\n  " + "\n  ".join(failures))
         if not args.check and args.stamp:
             write_if_changed(args.stamp, (json.dumps(expected_stamp, indent=2) + "\n").encode("utf-8"))
-        print(f"{'Validated' if args.check else 'Extracted'} {len(outputs)} contest/condition assets ({custom_count} custom overrides).")
+        print(f"{'Validated' if args.check else 'Extracted'} {len(outputs)} {category} assets ({custom_count} custom overrides).")
     except (OSError, ValueError, KeyError, TypeError) as error:
-        print(f"error: {REQUIRED_MESSAGE}\ndetail: contest/condition extraction: {error}", file=sys.stderr)
+        print(f"error: {REQUIRED_MESSAGE}\ndetail: {category} extraction: {error}", file=sys.stderr)
         return 1
     return 0
+
+
+def main(argv: list[str] | None = None) -> int:
+    return run_extraction(argv, loader=load_manifest, output_root=OUTPUT_ROOT,
+                          default_manifest="tools/data/bpej_contest_manifest.json",
+                          category="contest/condition", description=__doc__)
 
 
 if __name__ == "__main__":

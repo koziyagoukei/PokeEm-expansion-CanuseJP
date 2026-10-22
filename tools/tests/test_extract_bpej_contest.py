@@ -184,24 +184,26 @@ class RomTests(unittest.TestCase):
             with self.subTest(label=label):
                 self.assertEqual(contest.sha1(self.decoded(label)), asset["expected_decoded_hash"])
 
-    def test_identical_assets_still_match_the_retained_source_data(self):
-        gfx = TOOLS / "gbagfx" / ("gbagfx.exe" if sys.platform == "win32" else "gbagfx")
-        if not gfx.is_file():
-            self.skipTest("build gbagfx before the source asset comparison")
-        with tempfile.TemporaryDirectory() as directory:
-            for label, asset in self.assets.items():
-                if asset["verification"]["kind"] != "identical":
-                    continue
-                with self.subTest(label=label):
-                    source = ROOT / asset["source_file"]
-                    if source.suffix in (".png", ".pal"):
-                        suffix = asset["source_conversion"][0].removesuffix(".smol")
-                        target = Path(directory) / ("asset" + suffix)
-                        subprocess.run([str(gfx), str(source), str(target)], check=True)
-                        data = target.read_bytes()
-                    else:
-                        data = source.read_bytes()
-                    self.assertEqual(self.decoded(label), data)
+    def test_identical_assets_match_archived_original_source_fingerprints(self):
+        # Fingerprints were captured and byte-compared before the originals were
+        # removed. A fresh checkout needs only the user's ROM, not old PNGs.
+        for label, asset in self.assets.items():
+            if asset["verification"]["kind"] != "identical":
+                continue
+            with self.subTest(label=label):
+                data = self.decoded(label)
+                self.assertEqual(len(data), asset["verification"]["comparison_size"])
+                self.assertEqual(contest.sha1(data), asset["verification"]["comparison_sha1"])
+
+    def test_replaced_original_files_are_not_required_or_retained(self):
+        removed = self.manifest["removed_sources"]
+        self.assertEqual(len(removed), 86)
+        for record in removed:
+            self.assertFalse((ROOT / record["path"]).exists(), record["path"])
+        source = (ROOT / "src/graphics.c").read_text(encoding="utf-8")
+        self.assertIn('gPokenavOptions_Tilemap[] = INCBIN_U16("build/extracted_contest/pokenav/condition/search_options.bin")', source)
+        rules = (ROOT / "graphics_file_rules.mk").read_text(encoding="utf-8")
+        self.assertNotIn("PKNAVOPTIONSGFXDIR", rules)
 
     def assert_tilemap_fits(self, map_label, gfx_label, width, height, base=0):
         data = self.decoded(map_label)

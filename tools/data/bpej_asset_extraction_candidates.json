@@ -89,7 +89,9 @@
       "rom_slice_sha1": "fcdbc90123695266f25881f45ed3d80a2f976d30",
       "byte_match_detail": "32-byte palette matches Expansion press_start.gbapal.",
       "source_db": "../pokeemerald-jp/symbols/bpej/title_screen/symbols.jsonl",
-      "extraction_status": "candidate_not_extracted"
+      "extraction_status": "extracted",
+      "active_manifest": "tools/data/bpej_intro_manifest.json",
+      "active_output_path": "build/extracted_intro/title_screen/press_start.gbapal"
     },
     {
       "id": "bpej:title_screen:gfx:rayquaza",
@@ -111,7 +113,9 @@
       "rom_slice_sha1": "f011c0d34204042347864b83cd25e5ead577e251",
       "byte_match_detail": "Direct LZ77 graphics pointer; decompressed bytes match Expansion rayquaza.4bpp.",
       "source_db": "../pokeemerald-jp/symbols/bpej/title_screen/symbols.jsonl",
-      "extraction_status": "candidate_not_extracted"
+      "extraction_status": "extracted",
+      "active_manifest": "tools/data/bpej_intro_manifest.json",
+      "active_output_path": "build/extracted_intro/title_screen/rayquaza.4bpp.lz"
     },
     {
       "id": "bpej:title_screen:tilemap:rayquaza",
@@ -133,7 +137,9 @@
       "rom_slice_sha1": "01decb45932e29a9047e4b0da366180995b5310f",
       "byte_match_detail": "Direct LZ77 tilemap pointer; decompressed bytes match Expansion rayquaza.bin.",
       "source_db": "../pokeemerald-jp/symbols/bpej/title_screen/symbols.jsonl",
-      "extraction_status": "candidate_not_extracted"
+      "extraction_status": "extracted",
+      "active_manifest": "tools/data/bpej_intro_manifest.json",
+      "active_output_path": "build/extracted_intro/title_screen/rayquaza.bin.lz"
     },
     {
       "id": "bpej:title_screen:gfx:logo_shine",
@@ -155,7 +161,9 @@
       "rom_slice_sha1": "f432e1eb9541e7fd000820b2ac4b4003ccac1b43",
       "byte_match_detail": "LZ77 stream decompresses to 0x800 bytes and matches Expansion logo_shine.4bpp.",
       "source_db": "../pokeemerald-jp/symbols/bpej/title_screen/symbols.jsonl",
-      "extraction_status": "candidate_not_extracted"
+      "extraction_status": "extracted",
+      "active_manifest": "tools/data/bpej_intro_manifest.json",
+      "active_output_path": "build/extracted_intro/title_screen/logo_shine.4bpp.lz"
     },
     {
       "id": "bpej:title_screen:gfx:clouds",
@@ -177,7 +185,9 @@
       "rom_slice_sha1": "f9b88174d039c4fb1009b22d6683d77a34031216",
       "byte_match_detail": "Direct LZ77 graphics pointer; decompressed bytes match Expansion clouds.4bpp.",
       "source_db": "../pokeemerald-jp/symbols/bpej/title_screen/symbols.jsonl",
-      "extraction_status": "candidate_not_extracted"
+      "extraction_status": "extracted",
+      "active_manifest": "tools/data/bpej_intro_manifest.json",
+      "active_output_path": "build/extracted_intro/title_screen/clouds.4bpp.lz"
     },
     {
       "id": "bpej:ui:options:palette:text",
@@ -3267,7 +3277,9 @@
       "rom_slice_sha1": "e388509144c0f399d9daf412c913dcd4a546b606",
       "byte_match_detail": "BPEJ_OpeningCopyrightPal matches Expansion reference bytes.",
       "source_db": "../pokeemerald-jp/symbols/bpej/opening/symbols.jsonl",
-      "extraction_status": "candidate_not_extracted"
+      "extraction_status": "extracted",
+      "active_manifest": "tools/data/bpej_intro_manifest.json",
+      "active_output_path": "build/extracted_intro/intro/copyright.gbapal"
     },
     {
       "id": "bpej:opening:tilemap:copyright",
@@ -3289,7 +3301,9 @@
       "rom_slice_sha1": "a12ab0cba529e626169cce10b5024c7bb39a910a",
       "byte_match_detail": "BPEJ_OpeningCopyrightTilemap decompresses to Expansion reference bytes.",
       "source_db": "../pokeemerald-jp/symbols/bpej/opening/symbols.jsonl",
-      "extraction_status": "candidate_not_extracted"
+      "extraction_status": "extracted",
+      "active_manifest": "tools/data/bpej_intro_manifest.json",
+      "active_output_path": "build/extracted_intro/intro/copyright.bin.lz"
     },
     {
       "id": "bpej:opening:palette:drops",
@@ -3311,7 +3325,9 @@
       "rom_slice_sha1": "c5a65a0b86430f2c7a14f95909ea3525281cf212",
       "byte_match_detail": "BPEJ_OpeningDropsPal matches Expansion reference bytes.",
       "source_db": "../pokeemerald-jp/symbols/bpej/opening/symbols.jsonl",
-      "extraction_status": "candidate_not_extracted"
+      "extraction_status": "extracted",
+      "active_manifest": "tools/data/bpej_intro_manifest.json",
+      "active_output_path": "build/extracted_intro/intro/scene_1/drops.gbapal"
     },
     {
       "id": "bpej:opening:palette:game_freak_logo",
@@ -3333,7 +3349,9 @@
       "rom_slice_sha1": "bbbe00e83fc63a85c9cbfc2a0ea9c2abad81eee4",
       "byte_match_detail": "BPEJ_OpeningGameFreakLogoPal matches Expansion reference bytes.",
       "source_db": "../pokeemerald-jp/symbols/bpej/opening/symbols.jsonl",
-      "extraction_status": "candidate_not_extracted"
+      "extraction_status": "extracted",
+      "active_manifest": "tools/data/bpej_intro_manifest.json",
+      "active_output_path": "build/extracted_intro/intro/scene_1/logo.gbapal"
     },
     {
       "id": "bpej:opening:gfx:drops_logo",
@@ -3355,7 +3373,9 @@
       "rom_slice_sha1": "11898308cadcfac6ddd381aded8e39244b9e5f1a",
       "byte_match_detail": "BPEJ_OpeningDropsLogoGfx decompresses to Expansion reference bytes.",
       "source_db": "../pokeemerald-jp/symbols/bpej/opening/symbols.jsonl",
-      "extraction_status": "candidate_not_extracted"
+      "extraction_status": "extracted",
+      "active_manifest": "tools/data/bpej_intro_manifest.json",
+      "active_output_path": "build/extracted_intro/intro/scene_1/drops_logo.4bpp.lz"
     },
     {
       "id": "bpej:opening:palette:scene1_bg",
@@ -3377,7 +3397,9 @@
       "rom_slice_sha1": "0bed3d34d8dd3d45c1390b8dc23fdc52703ececc",
       "byte_match_detail": "BPEJ_OpeningScene1BgPal matches Expansion reference bytes.",
       "source_db": "../pokeemerald-jp/symbols/bpej/opening/symbols.jsonl",
-      "extraction_status": "candidate_not_extracted"
+      "extraction_status": "extracted",
+      "active_manifest": "tools/data/bpej_intro_manifest.json",
+      "active_output_path": "build/extracted_intro/intro/scene_1/bg.gbapal"
     },
     {
       "id": "bpej:opening:tilemap:scene1_bg0",
@@ -3399,7 +3421,9 @@
       "rom_slice_sha1": "88a81e405b2677001c34ba521710c278bf0592b9",
       "byte_match_detail": "BPEJ_OpeningScene1BG0Tilemap decompresses to Expansion reference bytes.",
       "source_db": "../pokeemerald-jp/symbols/bpej/opening/symbols.jsonl",
-      "extraction_status": "candidate_not_extracted"
+      "extraction_status": "extracted",
+      "active_manifest": "tools/data/bpej_intro_manifest.json",
+      "active_output_path": "build/extracted_intro/intro/scene_1/bg0_map.bin.lz"
     },
     {
       "id": "bpej:opening:tilemap:scene1_bg1",
@@ -3421,7 +3445,9 @@
       "rom_slice_sha1": "155ac7263fab11f04e6ad8ceef248d15d9a0a53f",
       "byte_match_detail": "BPEJ_OpeningScene1BG1Tilemap decompresses to Expansion reference bytes.",
       "source_db": "../pokeemerald-jp/symbols/bpej/opening/symbols.jsonl",
-      "extraction_status": "candidate_not_extracted"
+      "extraction_status": "extracted",
+      "active_manifest": "tools/data/bpej_intro_manifest.json",
+      "active_output_path": "build/extracted_intro/intro/scene_1/bg1_map.bin.lz"
     },
     {
       "id": "bpej:opening:tilemap:scene1_bg2",
@@ -3443,7 +3469,9 @@
       "rom_slice_sha1": "8bd80fab2eeeb04755481e7252578da43c3e4ea6",
       "byte_match_detail": "BPEJ_OpeningScene1BG2Tilemap decompresses to Expansion reference bytes.",
       "source_db": "../pokeemerald-jp/symbols/bpej/opening/symbols.jsonl",
-      "extraction_status": "candidate_not_extracted"
+      "extraction_status": "extracted",
+      "active_manifest": "tools/data/bpej_intro_manifest.json",
+      "active_output_path": "build/extracted_intro/intro/scene_1/bg2_map.bin.lz"
     },
     {
       "id": "bpej:opening:tilemap:scene1_bg3",
@@ -3465,7 +3493,9 @@
       "rom_slice_sha1": "ed8b25357b932576a7d87590cc7f30adf4ff74d0",
       "byte_match_detail": "BPEJ_OpeningScene1BG3Tilemap decompresses to Expansion reference bytes.",
       "source_db": "../pokeemerald-jp/symbols/bpej/opening/symbols.jsonl",
-      "extraction_status": "candidate_not_extracted"
+      "extraction_status": "extracted",
+      "active_manifest": "tools/data/bpej_intro_manifest.json",
+      "active_output_path": "build/extracted_intro/intro/scene_1/bg3_map.bin.lz"
     },
     {
       "id": "bpej:opening:gfx:scene1_bg",
@@ -3487,7 +3517,9 @@
       "rom_slice_sha1": "464b1dfb88e098c70f77ba754c48d84ab8b24f94",
       "byte_match_detail": "BPEJ_OpeningScene1BgGfx decompresses to Expansion reference bytes.",
       "source_db": "../pokeemerald-jp/symbols/bpej/opening/symbols.jsonl",
-      "extraction_status": "candidate_not_extracted"
+      "extraction_status": "extracted",
+      "active_manifest": "tools/data/bpej_intro_manifest.json",
+      "active_output_path": "build/extracted_intro/intro/scene_1/bg.4bpp.lz"
     },
     {
       "id": "bpej:opening:palette:rayquaza_orb",
@@ -3509,7 +3541,9 @@
       "rom_slice_sha1": "cc68afa5edaee603dd93f5bb1dce298cb06b302a",
       "byte_match_detail": "BPEJ_OpeningRayquazaOrbPal matches Expansion reference bytes.",
       "source_db": "../pokeemerald-jp/symbols/bpej/opening/symbols.jsonl",
-      "extraction_status": "candidate_not_extracted"
+      "extraction_status": "extracted",
+      "active_manifest": "tools/data/bpej_intro_manifest.json",
+      "active_output_path": "build/extracted_intro/intro/scene_3/rayquaza_orb.gbapal"
     },
     {
       "id": "bpej:opening:gfx:rayquaza_orb",
@@ -3531,7 +3565,9 @@
       "rom_slice_sha1": "a283122abf9c5daafce1ca780f9405150214538a",
       "byte_match_detail": "BPEJ_OpeningRayquazaOrbGfx decompresses to Expansion reference bytes.",
       "source_db": "../pokeemerald-jp/symbols/bpej/opening/symbols.jsonl",
-      "extraction_status": "candidate_not_extracted"
+      "extraction_status": "extracted",
+      "active_manifest": "tools/data/bpej_intro_manifest.json",
+      "active_output_path": "build/extracted_intro/intro/scene_3/misc.4bpp.lz"
     },
     {
       "id": "bpej:opening:palette:flygon_silhouette",
@@ -3553,7 +3589,9 @@
       "rom_slice_sha1": "1275fa5f27f5458ee66d2ebc4e3cc0c367191fdf",
       "byte_match_detail": "BPEJ_OpeningFlygonSilhouettePal matches Expansion reference bytes.",
       "source_db": "../pokeemerald-jp/symbols/bpej/opening/symbols.jsonl",
-      "extraction_status": "candidate_not_extracted"
+      "extraction_status": "extracted",
+      "active_manifest": "tools/data/bpej_intro_manifest.json",
+      "active_output_path": "build/extracted_intro/intro/scene_1/flygon.gbapal"
     },
     {
       "id": "bpej:ui:common:palette:std_menu",
@@ -3774,7 +3812,9 @@
       "rom_slice_sha1": "e91d3f8f018e66794efc3eb693d4924179807346",
       "byte_match_detail": "BPEJ_OpeningGameFreakTextFadePal matches Expansion reference bytes.",
       "source_db": "../pokeemerald-jp/symbols/bpej/opening/symbols.jsonl",
-      "extraction_status": "candidate_not_extracted"
+      "extraction_status": "extracted",
+      "active_manifest": "tools/data/bpej_intro_manifest.json",
+      "active_output_path": "build/extracted_intro/intro/scene_1/text.gbapal"
     },
     {
       "id": "bpej:opening:palette:scene3_bg",
@@ -3796,7 +3836,9 @@
       "rom_slice_sha1": "ecc294c8bc4b96182f9f0a56aae967b9ec7467ac",
       "byte_match_detail": "BPEJ_OpeningScene3BgPal matches Expansion reference bytes.",
       "source_db": "../pokeemerald-jp/symbols/bpej/opening/symbols.jsonl",
-      "extraction_status": "candidate_not_extracted"
+      "extraction_status": "extracted",
+      "active_manifest": "tools/data/bpej_intro_manifest.json",
+      "active_output_path": "build/extracted_intro/intro/scene_3/bg.gbapal"
     },
     {
       "id": "bpej:opening:gfx:clouds",
@@ -3818,7 +3860,9 @@
       "rom_slice_sha1": "c87b96ea2fd1c6b312e360417678599895db3f10",
       "byte_match_detail": "BPEJ_OpeningCloudsGfx decompresses to Expansion reference bytes.",
       "source_db": "../pokeemerald-jp/symbols/bpej/opening/symbols.jsonl",
-      "extraction_status": "candidate_not_extracted"
+      "extraction_status": "extracted",
+      "active_manifest": "tools/data/bpej_intro_manifest.json",
+      "active_output_path": "build/extracted_intro/intro/scene_3/clouds.4bpp.lz"
     },
     {
       "id": "bpej:opening:tilemap:clouds_left",
@@ -3840,7 +3884,9 @@
       "rom_slice_sha1": "6e81582e43df4e86b21701b1d1d4b0f007c6d016",
       "byte_match_detail": "BPEJ_OpeningCloudsLeftTilemap decompresses to Expansion reference bytes.",
       "source_db": "../pokeemerald-jp/symbols/bpej/opening/symbols.jsonl",
-      "extraction_status": "candidate_not_extracted"
+      "extraction_status": "extracted",
+      "active_manifest": "tools/data/bpej_intro_manifest.json",
+      "active_output_path": "build/extracted_intro/intro/scene_3/clouds_left.bin.lz"
     },
     {
       "id": "bpej:opening:tilemap:clouds_right",
@@ -3862,7 +3908,9 @@
       "rom_slice_sha1": "c47e65b7a9fcba5639c409fbc29dc9bb96e81dd0",
       "byte_match_detail": "BPEJ_OpeningCloudsRightTilemap decompresses to Expansion reference bytes.",
       "source_db": "../pokeemerald-jp/symbols/bpej/opening/symbols.jsonl",
-      "extraction_status": "candidate_not_extracted"
+      "extraction_status": "extracted",
+      "active_manifest": "tools/data/bpej_intro_manifest.json",
+      "active_output_path": "build/extracted_intro/intro/scene_3/clouds_right.bin.lz"
     },
     {
       "id": "bpej:opening:tilemap:clouds_sun",
@@ -3884,7 +3932,9 @@
       "rom_slice_sha1": "c4579d5f3dd9b72b4829fdc23e62f9b6021ab3fc",
       "byte_match_detail": "BPEJ_OpeningCloudsSunTilemap decompresses to Expansion reference bytes.",
       "source_db": "../pokeemerald-jp/symbols/bpej/opening/symbols.jsonl",
-      "extraction_status": "candidate_not_extracted"
+      "extraction_status": "extracted",
+      "active_manifest": "tools/data/bpej_intro_manifest.json",
+      "active_output_path": "build/extracted_intro/intro/scene_3/clouds_sun.bin.lz"
     },
     {
       "id": "bpej:opening:gfx:lightning",
@@ -3906,7 +3956,9 @@
       "rom_slice_sha1": "3b0e3b989ddd46d8f9a8399d7ae2f62e0d1741d5",
       "byte_match_detail": "BPEJ_OpeningLightningGfx decompresses to Expansion reference bytes.",
       "source_db": "../pokeemerald-jp/symbols/bpej/opening/symbols.jsonl",
-      "extraction_status": "candidate_not_extracted"
+      "extraction_status": "extracted",
+      "active_manifest": "tools/data/bpej_intro_manifest.json",
+      "active_output_path": "build/extracted_intro/intro/scene_3/lightning.4bpp.lz"
     },
     {
       "id": "bpej:opening:palette:lightning",
@@ -3928,7 +3980,9 @@
       "rom_slice_sha1": "b50e56a40357c0670bc91fe5469a5c81c4a49ff6",
       "byte_match_detail": "BPEJ_OpeningLightningPal matches Expansion reference bytes.",
       "source_db": "../pokeemerald-jp/symbols/bpej/opening/symbols.jsonl",
-      "extraction_status": "candidate_not_extracted"
+      "extraction_status": "extracted",
+      "active_manifest": "tools/data/bpej_intro_manifest.json",
+      "active_output_path": "build/extracted_intro/intro/scene_3/lightning.gbapal"
     },
     {
       "id": "bpej:opening:gfx:rayquaza",
@@ -3950,7 +4004,9 @@
       "rom_slice_sha1": "8ddce65b2d2020fbf77b2f6df655f06824a5f3ad",
       "byte_match_detail": "BPEJ_OpeningRayquazaGfx decompresses to Expansion reference bytes.",
       "source_db": "../pokeemerald-jp/symbols/bpej/opening/symbols.jsonl",
-      "extraction_status": "candidate_not_extracted"
+      "extraction_status": "extracted",
+      "active_manifest": "tools/data/bpej_intro_manifest.json",
+      "active_output_path": "build/extracted_intro/intro/scene_3/rayquaza.4bpp.lz"
     },
     {
       "id": "bpej:opening:tilemap:rayquaza",
@@ -3972,7 +4028,9 @@
       "rom_slice_sha1": "63d3e437f0274509f2cc7bd3ab78f505fc6dc571",
       "byte_match_detail": "BPEJ_OpeningRayquazaTilemap decompresses to Expansion reference bytes.",
       "source_db": "../pokeemerald-jp/symbols/bpej/opening/symbols.jsonl",
-      "extraction_status": "candidate_not_extracted"
+      "extraction_status": "extracted",
+      "active_manifest": "tools/data/bpej_intro_manifest.json",
+      "active_output_path": "build/extracted_intro/intro/scene_3/rayquaza.bin.lz"
     },
     {
       "id": "bpej:opening:gfx:rayquaza_clouds",
@@ -3994,7 +4052,9 @@
       "rom_slice_sha1": "139c4ead98ce01043632898e44fef1b6dbf24344",
       "byte_match_detail": "BPEJ_OpeningRayquazaCloudsGfx decompresses to Expansion reference bytes.",
       "source_db": "../pokeemerald-jp/symbols/bpej/opening/symbols.jsonl",
-      "extraction_status": "candidate_not_extracted"
+      "extraction_status": "extracted",
+      "active_manifest": "tools/data/bpej_intro_manifest.json",
+      "active_output_path": "build/extracted_intro/intro/scene_3/rayquaza_clouds.4bpp.lz"
     },
     {
       "id": "bpej:opening:tilemap:rayquaza_clouds",
@@ -4016,7 +4076,9 @@
       "rom_slice_sha1": "033c5710391eed3a353592722b00511cf8583e9d",
       "byte_match_detail": "BPEJ_OpeningRayquazaCloudsTilemap decompresses to Expansion reference bytes.",
       "source_db": "../pokeemerald-jp/symbols/bpej/opening/symbols.jsonl",
-      "extraction_status": "candidate_not_extracted"
+      "extraction_status": "extracted",
+      "active_manifest": "tools/data/bpej_intro_manifest.json",
+      "active_output_path": "build/extracted_intro/intro/scene_3/rayquaza_clouds.bin.lz"
     },
     {
       "id": "bpej:opening:gfx:flygon_silhouette",
@@ -4038,7 +4100,9 @@
       "rom_slice_sha1": "188b097133291d4622296050406f746fdb271f33",
       "byte_match_detail": "BPEJ_OpeningFlygonSilhouetteGfx decompresses to Expansion reference bytes.",
       "source_db": "../pokeemerald-jp/symbols/bpej/opening/symbols.jsonl",
-      "extraction_status": "candidate_not_extracted"
+      "extraction_status": "extracted",
+      "active_manifest": "tools/data/bpej_intro_manifest.json",
+      "active_output_path": "build/extracted_intro/intro/scene_1/flygon.4bpp.lz"
     },
     {
       "id": "bpej:opening:gfx:sparkle",
@@ -4060,7 +4124,9 @@
       "rom_slice_sha1": "9773f1044f155bb2fb2ea065ed0afa2a4942e74c",
       "byte_match_detail": "BPEJ_OpeningSparkleGfx decompresses to Expansion reference bytes.",
       "source_db": "../pokeemerald-jp/symbols/bpej/opening/symbols.jsonl",
-      "extraction_status": "candidate_not_extracted"
+      "extraction_status": "extracted",
+      "active_manifest": "tools/data/bpej_intro_manifest.json",
+      "active_output_path": "build/extracted_intro/intro/scene_1/sparkle.4bpp.lz"
     },
     {
       "id": "bpej:ui:battle:gfx:enemy_shadow",
