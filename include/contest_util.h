@@ -4,6 +4,7 @@
 void BufferContestantTrainerName(void);
 void BufferContestantMonNickname(void);
 void StartContest(void);
+void TryEnterContestMon(void);
 void BufferContestantMonSpecies(void);
 void ShowContestResults(void);
 void ContestLinkTransfer(u8 category);

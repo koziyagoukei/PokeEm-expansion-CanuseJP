@@ -6,6 +6,55 @@
 #define SMART (1 << CONTEST_CATEGORY_SMART)
 #define TOUGH (1 << CONTEST_CATEGORY_TOUGH)
 #define ALL_CATEGORIES (COOL | BEAUTY | CUTE | SMART | TOUGH)
+
+enum
+{
+#define EXTRA_NPC(mon, nick, trainer, gfx, rank, pools, mode, item, tera, turn, stat, gmax, a, b, c, d) CONTEST_EXTRA_##mon,
+#include "contest_npc_extra.inc"
+#undef EXTRA_NPC
+    CONTEST_EXTRA_COUNT,
+};
+
+static const struct ContestPokemon sContestExtraOpponents[] =
+{
+#define EXTRA_NPC(mon, nick, trainer, gfx, rank, pools, mode, item, tera, turn, stat, gmax, a, b, c, d) \
+    [CONTEST_EXTRA_##mon] = { .species = SPECIES_##mon, .nickname = _("{JPN}" nick), \
+        .trainerName = _("{JPN}" trainer), .trainerGfxId = OBJ_EVENT_GFX_##gfx, \
+        .whichRank = CONTEST_RANK_##rank, .aiFlags = CONTEST_AI_COMMON, .otId = CONTEST_AI_TRAINER_ID },
+#include "contest_npc_extra.inc"
+#undef EXTRA_NPC
+};
+
+// Presets that replace a legacy species also receive a matching, individual name.
+static const u8 sContestNpcNicknameOverrides[ARRAY_COUNT(gContestOpponents)][POKEMON_NAME_LENGTH + 1] =
+{
+    [CONTEST_OPPONENT_MORGAN] = _("{JPN}どぐまる"),
+    [CONTEST_OPPONENT_AUDREY] = _("{JPN}そらうた"),
+    [CONTEST_OPPONENT_ASHTON] = _("{JPN}きんのすけ"),
+    [CONTEST_OPPONENT_SANDRA] = _("{JPN}なまずん"),
+    [CONTEST_OPPONENT_KATRINA] = _("{JPN}サンバ"),
+    [CONTEST_OPPONENT_ZEEK] = _("{JPN}ゆめみ"),
+    [CONTEST_OPPONENT_NATALIA] = _("{JPN}エレキス"),
+    [CONTEST_OPPONENT_DEVIN] = _("{JPN}ブルル"),
+    [CONTEST_OPPONENT_RONNIE] = _("{JPN}てつかぶと"),
+    [CONTEST_OPPONENT_EMILIO] = _("{JPN}ごうけつ"),
+    [CONTEST_OPPONENT_KARLA] = _("{JPN}おまつり"),
+    [CONTEST_OPPONENT_SELENA] = _("{JPN}しおふき"),
+    [CONTEST_OPPONENT_NOEL] = _("{JPN}たきのぼり"),
+    [CONTEST_OPPONENT_COLTIN] = _("{JPN}ほねまる"),
+    [CONTEST_OPPONENT_MARCUS] = _("{JPN}たいほう"),
+    [CONTEST_OPPONENT_BRYCE] = _("{JPN}とりで"),
+    [CONTEST_OPPONENT_RALPH] = _("{JPN}ビート"),
+    [CONTEST_OPPONENT_ROSA] = _("{JPN}リボン"),
+    [CONTEST_OPPONENT_LAMAR] = _("{JPN}エトワル"),
+    [CONTEST_OPPONENT_CAMILLE] = _("{JPN}プリズム"),
+    [CONTEST_OPPONENT_JANELLE] = _("{JPN}アリア"),
+    [CONTEST_OPPONENT_FRANKIE] = _("{JPN}ぴかりん"),
+    [CONTEST_OPPONENT_MARTIN] = _("{JPN}ポリリズム"),
+    [CONTEST_OPPONENT_PERLA] = _("{JPN}アロハ"),
+    [CONTEST_OPPONENT_CLARA] = _("{JPN}モフモフ"),
+};
+
 #define NPC(id, mon, pools, mode, item, tera, turn, stat, gmax, a, b, c, d) \
     [CONTEST_OPPONENT_##id] = { .species = SPECIES_##mon, .moves = {MOVE_##a, MOVE_##b, MOVE_##c, MOVE_##d}, \
         .heldItem = ITEM_##item, .teraType = TYPE_##tera, .gimmick = CONTEST_GIMMICK_##mode, \
@@ -116,9 +165,19 @@ static const struct ContestNpcPreset sContestNpcPresets[] =
     NPC(JAKOB, ESPEON, COOL | BEAUTY, TERA, NONE, PSYCHIC, 1, 230, FALSE, CALM_MIND, PSYCHIC, MORNING_SUN, SWIFT),
     NPC(TREY, SLOWKING, CUTE | SMART | TOUGH, TERA, NONE, WATER, 1, 228, FALSE, CALM_MIND, PSYCHIC, YAWN, SURF),
     NPC(LANE, URSARING, COOL | TOUGH, DYNAMAX, NONE, NORMAL, 2, 235, FALSE, SWORDS_DANCE, SLASH, THRASH, FAKE_TEARS),
+
+#define EXTRA_NPC(mon, nick, trainer, gfx, rank, pools, mode, item, tera, turn, stat, gmax, a, b, c, d) \
+    [ARRAY_COUNT(gContestOpponents) + CONTEST_EXTRA_##mon] = { \
+        .species = SPECIES_##mon, .moves = {MOVE_##a, MOVE_##b, MOVE_##c, MOVE_##d}, \
+        .heldItem = ITEM_##item, .teraType = TYPE_##tera, .gimmick = CONTEST_GIMMICK_##mode, \
+        .categories = pools, .activationTurn = turn, .condition = stat, .gmaxFactor = gmax },
+#include "contest_npc_extra.inc"
+#undef EXTRA_NPC
 };
 
-STATIC_ASSERT(ARRAY_COUNT(sContestNpcPresets) == ARRAY_COUNT(gContestOpponents), ContestNpcPresetCount);
+STATIC_ASSERT(ARRAY_COUNT(sContestExtraOpponents) == CONTEST_EXTRA_COUNT, ContestExtraOpponentCount);
+STATIC_ASSERT(ARRAY_COUNT(sContestNpcPresets) == ARRAY_COUNT(gContestOpponents) + CONTEST_EXTRA_COUNT, ContestNpcPresetCount);
+STATIC_ASSERT(ARRAY_COUNT(sContestNpcPresets) < CONTESTANT_NONE, ContestNpcPresetIdsFit);
 #undef NPC
 #undef COOL
 #undef BEAUTY

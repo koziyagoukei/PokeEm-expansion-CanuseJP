@@ -17,6 +17,7 @@ struct ContestNpcPreset
 };
 
 const struct ContestNpcPreset *Contest_GetNpcPreset(u32 opponent);
+const struct ContestPokemon *Contest_GetNpcTemplate(u32 opponent);
 u32 Contest_GetNpcPresetCount(void);
 
 #if TESTING

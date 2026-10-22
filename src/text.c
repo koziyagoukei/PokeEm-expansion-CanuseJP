@@ -2315,7 +2315,7 @@ s32 GetStringWidth(u8 fontId, const u8 *str, s16 letterSpacing)
                 isJapanese = 0;
                 break;
             case EXT_CTRL_CODE_AUTO:
-                isJapanese = TextAutoModeFromNextChar(str);
+                isJapanese = TextAutoModeFromNextChar(str + 1);
                 break;
             case EXT_CTRL_CODE_RESET_FONT:
             case EXT_CTRL_CODE_PAUSE_UNTIL_PRESS:

@@ -22,6 +22,13 @@ static const u8 sInfoText_ContestBasics2[] = _(
     "つぎの ランクに すすめます。\n"
     "アピールは 5かい。 はじめの しんさと\n"
     "アピールの ごうけいで じゅんいが きまる。");
+static const u8 sInfoText_ContestBasics3[] = _(
+    "{JPN}あいての きんしポケモンは\n"
+    "フロンティアと おなじ せっていで\n"
+    "さんかを きりかえます。\n"
+    "プレイヤーには この せいげんは なく\n"
+    "ネクロズマなども さんかできます。\n"
+    "たいしょうは TIPSの いちらんで かくにん。");
 
 static const u8 sInfoText_ContestPreparation1[] = _(
     "{JPN}コンディションは ポロックで きたえます。\n"
@@ -152,7 +159,7 @@ static const u8 sInfoText_ContestRewards3[] = _(
     "BPが たりない ときは こうかんできません。\n"
     "その ときに BPは へりません。");
 
-static const u8 *const sInfoViewerPages_ContestBasics[] = {sInfoText_ContestBasics1, sInfoText_ContestBasics2};
+static const u8 *const sInfoViewerPages_ContestBasics[] = {sInfoText_ContestBasics1, sInfoText_ContestBasics2, sInfoText_ContestBasics3};
 static const u8 *const sInfoViewerPages_ContestPreparation[] = {sInfoText_ContestPreparation1, sInfoText_ContestPreparation2, sInfoText_ContestPreparation3};
 static const u8 *const sInfoViewerPages_ContestSelection[] = {sInfoText_ContestSelection1, sInfoText_ContestSelection2};
 static const u8 *const sInfoViewerPages_ContestMega[] = {sInfoText_ContestMega1, sInfoText_ContestMega2};

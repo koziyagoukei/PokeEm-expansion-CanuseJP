@@ -56,9 +56,9 @@ TEST("Frontier TIPS: facilities, hub, resort, contest and rule topics are reacha
     EXPECT(!seen[INFO_CHOICE_TEST]);
 }
 
-TEST("Frontier TIPS: contest has eight topics and twenty pages without changing older topic IDs")
+TEST("Frontier TIPS: contest has eight topics and twenty-one pages without changing older topic IDs")
 {
-    static const u8 pages[] = {2, 3, 2, 2, 2, 4, 2, 3};
+    static const u8 pages[] = {3, 3, 2, 2, 2, 4, 2, 3};
     const struct InfoViewerEntry *contest = GetInfoViewerEntry(INFO_TIPS_CONTEST);
     EXPECT_EQ(INFO_TIPS_RESORT_DOLLS, 30);
     EXPECT_EQ(INFO_TIPS_CONTEST, 31);
@@ -71,7 +71,7 @@ TEST("Frontier TIPS: contest has eight topics and twenty pages without changing 
         EXPECT_EQ(GetInfoViewerPageCount(topic), pages[i]);
         total += GetInfoViewerPageCount(topic);
     }
-    EXPECT_EQ(total, 20);
+    EXPECT_EQ(total, 21);
     EXPECT_EQ(contest->choices[ARRAY_COUNT(pages)].nextInfoId, INFO_VIEWER_BACK);
 }
 
