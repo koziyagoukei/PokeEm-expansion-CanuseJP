@@ -2752,7 +2752,7 @@ static void DisplayPartyPokemonHP(u16 hp, u16 maxhp, struct PartyMenuBox *menuBo
 {
     bool32 fourDigits = (maxhp >= 1000);
 
-    ConvertIntToDecimalStringN(gStringVar1, hp, STR_CONV_MODE_RIGHT_ALIGN, fourDigits ? 4 : 3);
+    ConvertIntToDecimalStringN(StringCopy(gStringVar1, COMPOUND_STRING("{ENG}")), hp, STR_CONV_MODE_RIGHT_ALIGN, fourDigits ? 4 : 3);
 
     if (fourDigits)
         DisplayParty4DigitsHP(menuBox, gStringVar1, &menuBox->infoRects->dimensions[12], 10);
@@ -2776,7 +2776,7 @@ static void DisplayPartyPokemonMaxHP(u16 maxhp, struct PartyMenuBox *menuBox)
     bool32 fourDigits = (maxhp >= 1000);
 
     ConvertIntToDecimalStringN(gStringVar2, maxhp, STR_CONV_MODE_RIGHT_ALIGN, fourDigits ? 4 : 3);
-    StringCopy(gStringVar1, gText_Slash);
+    StringCopy(StringCopy(gStringVar1, COMPOUND_STRING("{ENG}")), gText_Slash);
     StringAppend(gStringVar1, gStringVar2);
 
     if (fourDigits)

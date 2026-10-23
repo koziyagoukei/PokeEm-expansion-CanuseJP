@@ -176,7 +176,7 @@ static void HandleBagCursorPositionChange(s8 toMove);
 
 static const u8 sText_SizeSlash[] = _("おおきさ");
 static const u8 sText_FirmSlash[] = _("かたさ");
-static const u8 sText_Var1DotVar2Cm[] = _("{STR_VAR_1}.{STR_VAR_2} cm");
+static const u8 sText_Var1DotVar2Cm[] = _("{ENG}{STR_VAR_1}.{STR_VAR_2} cm");
 static const u8 sText_NumberVar1Var2[] = _("{NO}{STR_VAR_1} {STR_VAR_2}");
 static const u8 sText_BerryTag[] = _("きのみのタグ");
 static const u8 sText_ThreeMarks[] = _("???");

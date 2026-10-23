@@ -104,6 +104,14 @@ static bool32 IsJapaneseGlyph(u16 glyphId)
         || glyphId == JAPANESE_CHAR_VU;
 }
 
+static bool32 ShouldUseJapaneseGlyph(u16 glyphId, bool32 isJapanese)
+{
+    // UI numbers keep their Latin glyphs/metrics without changing the mode
+    // used by the surrounding kana and Japanese punctuation.
+    return isJapanese && glyphId < 0x100
+        && !(glyphId >= CHAR_0 && glyphId <= CHAR_9);
+}
+
 static bool32 ResolveTextMode(const u8 *str, bool32 automatic)
 {
     const u8 *bufferPointer;
@@ -1812,7 +1820,7 @@ static u16 RenderText(struct TextPrinter *textPrinter)
         }
 
         // Extended symbols and EMOJI use the Latin sheet even in Japanese text.
-        bool32 useJapanese = textPrinter->japanese && currChar < 0x100;
+        bool32 useJapanese = ShouldUseJapaneseGlyph(currChar, textPrinter->japanese);
         sCurGlyphAdvance = 0;
 
         switch (textPrinter->fontId)
@@ -2047,7 +2055,7 @@ s32 GetGlyphWidth(u16 glyphId, bool32 isJapanese, u8 fontId)
     func = GetFontWidthFunc(fontId);
     if (func == NULL)
         return 0;
-    return func(glyphId, isJapanese && glyphId < 0x100);
+    return func(glyphId, ShouldUseJapaneseGlyph(glyphId, isJapanese));
 }
 
 s32 GetStringWidth(u8 fontId, const u8 *str, s16 letterSpacing)
@@ -2172,7 +2180,7 @@ s32 GetStringWidth(u8 fontId, const u8 *str, s16 letterSpacing)
         default:
             if (!isJapanese && currChar == CHAR_ZWS)
                 continue;
-            glyphWidth = func(currChar, isJapanese);
+            glyphWidth = func(currChar, ShouldUseJapaneseGlyph(currChar, isJapanese));
             break;
         }
 
@@ -2313,7 +2321,7 @@ u8 RenderTextHandleBold(u8 *pixels, u8 fontId, u8 *str)
                 break;
             case FONT_NORMAL:
             default:
-                DecompressGlyph_Normal(temp, TRUE);
+                DecompressGlyph_Normal(temp, ShouldUseJapaneseGlyph(temp, TRUE));
                 break;
             }
             CpuCopy32(gCurGlyph.gfxBufferTop, pixels, 0x20);

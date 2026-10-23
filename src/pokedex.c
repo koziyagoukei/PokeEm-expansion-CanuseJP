@@ -698,10 +698,10 @@ static const u8 sText_No000[] = _("{NO}000");
 const u8 sCaughtBall_Gfx[] = INCBIN_U8("build/extracted_pokedex/sprites/caught_ball.4bpp");
 static const u8 sText_TenDashes[] = _("----------");
 
-static const u8 sText_UnkHeight[] = _("{CLEAR_TO 12}??'??”");
-static const u8 sText_UnkHeightMetric[] = _("???.? m");
-static const u8 sText_UnkWeight[] = _("????.? lbs.");
-static const u8 sText_UnkWeightMetric[] = _("???.? kg.");
+static const u8 sText_UnkHeight[] = _("{ENG}{CLEAR_TO 12}??'??”");
+static const u8 sText_UnkHeightMetric[] = _("{ENG}???.? m");
+static const u8 sText_UnkWeight[] = _("{ENG}????.? lbs.");
+static const u8 sText_UnkWeightMetric[] = _("{ENG}???.? kg.");
 static const u8 sText_PokedexRegistration[] = _("ポケモンずかんの とうろく かんりょう!");
 static const u8 sText_HTHeight[] = _("{JPN}たかさ");
 static const u8 sText_WTWeight[] = _("{JPN}おもさ");
@@ -2241,10 +2241,12 @@ void CreatePokedexList(u8 dexMode, u8 order)
 static void PrintMonDexNum(u8 windowId, u8 fontId, const u8 *str, u8 left, u8 top)
 {
     static const u8 color[3] = { TEXT_COLOR_TRANSPARENT, TEXT_DYNAMIC_COLOR_6, TEXT_COLOR_LIGHT_GRAY };
+    u8 text[16];
+    StringCopy(StringCopy(text, COMPOUND_STRING("{ENG}")), str);
     u32 xOffset = 0;
     if (POKEDEX_PLUS_HGSS)
         xOffset = 4;
-    AddTextPrinterParameterized4(windowId, fontId, left * 8 - xOffset, (top * 8) + 1, 0, 0, color, TEXT_SKIP_DRAW, str);
+    AddTextPrinterParameterized4(windowId, fontId, left * 8 - xOffset, (top * 8) + 1, 0, 0, color, TEXT_SKIP_DRAW, text);
 }
 
 static void PrintMonName(u8 windowId, u8 fontId, const u8 *str, u8 left, u8 top)
@@ -4199,7 +4201,7 @@ static void PrintMonInfo(u32 num, u32 value, u32 owned, u32 newEntry)
         name = GetSpeciesName(species);
     else
         name = sText_TenDashes2;
-    PrintInfoScreenText(name, 114 + (6 * digitCount), 0x19);
+    PrintInfoScreenText(name, 0x60 + GetStringWidth(FONT_NORMAL, str, 0) + 4, 0x19);
 
     if (owned)
     {
@@ -4364,6 +4366,8 @@ static u8* ConvertMonHeightToImperialString(u32 height)
     u8* heightString = Alloc(WEIGHT_HEIGHT_STR_MEM);
     u32 inches, feet, index = 0;
 
+    index = StringCopy(heightString, COMPOUND_STRING("{ENG}")) - heightString;
+
     inches = (height * 10000) / CM_PER_INCH_FACTOR;
     if (inches % 10 >= 5)
         inches += 10;
@@ -4410,6 +4414,8 @@ static u8* ConvertMonHeightToCentimeterString(u32 height)
     u32 index = 0;
     bool32 outputted = FALSE;
 
+    index = StringCopy(heightString, COMPOUND_STRING("{ENG}")) - heightString;
+
     while (divisor != 0)
     {
         u32 digit = centimeters / divisor;
@@ -4438,6 +4444,8 @@ static u8* ConvertMonWeightToImperialString(u32 weight)
     u8* weightString = Alloc(WEIGHT_HEIGHT_STR_MEM);
     bool32 output = FALSE;
     u32 index = 0, lbs = (u32)(((u64)weight * 10000000) / DECAGRAMS_IN_POUND);
+
+    index = StringCopy(weightString, COMPOUND_STRING("{ENG}")) - weightString;
 
     if (lbs % 10u >= 5)
         lbs += 10;
@@ -4506,6 +4514,8 @@ static u8* ConvertMeasurementToMetricString(u32 num, u32* index)
     u8* string = Alloc(WEIGHT_HEIGHT_STR_MEM);
     bool32 outputted = FALSE;
     u32 result;
+
+    *index = StringCopy(string, COMPOUND_STRING("{ENG}")) - string;
 
     result = num / 1000;
     if (result == 0)
