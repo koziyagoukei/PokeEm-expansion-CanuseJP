@@ -199,13 +199,6 @@ static void Task_WaitToEnterPartyRoamerPark(u8 taskId)
 
 static void FieldCallback_EnterPartyRoamerPark(void)
 {
-    SetDynamicWarpWithCoords(
-        0,
-        gSaveBlock1Ptr->location.mapGroup,
-        gSaveBlock1Ptr->location.mapNum,
-        WARP_ID_NONE,
-        gSaveBlock1Ptr->pos.x,
-        gSaveBlock1Ptr->pos.y);
     SetWarpDestination(
         MAP_GROUP(MAP_PARTY_ROAMER_PARK),
         MAP_NUM(MAP_PARTY_ROAMER_PARK),

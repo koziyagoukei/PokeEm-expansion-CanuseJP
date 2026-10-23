@@ -4,7 +4,7 @@
   "layout": "LAYOUT_LILYCOVE_CITY_LILYCOVE_MUSEUM_2F",
   "music": "MUS_LILYCOVE_MUSEUM",
   "region": "REGION_HOENN",
-  "region_map_section": "MAPSEC_LILYCOVE_CITY",
+  "region_map_section": "MAPSEC_BATTLE_FRONTIER",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
   "map_type": "MAP_TYPE_INDOOR",

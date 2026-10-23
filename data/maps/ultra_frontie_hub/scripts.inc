@@ -3,6 +3,7 @@ ultra_frontie_hub_MapScripts::
 	.byte 0
 
 UltraFrontieHub_OnTransition:
+	setrespawn HEAL_LOCATION_BATTLE_FRONTIER_OUTSIDE_EAST
 	goto_if_set FLAG_TEMP_1, UltraFrontieHub_OnTransition_Done
 	special Special_SetupFrontierHubState
 	setflag FLAG_TEMP_1

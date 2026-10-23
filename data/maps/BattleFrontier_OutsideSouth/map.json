@@ -1,0 +1,35 @@
+{
+  "id": "MAP_BATTLE_FRONTIER_OUTSIDE_SOUTH",
+  "name": "BattleFrontier_OutsideSouth",
+  "layout": "LAYOUT_BATTLE_FRONTIER_OUTSIDE_SOUTH",
+  "music": "MUS_B_FRONTIER",
+  "region_map_section": "MAPSEC_BATTLE_FRONTIER",
+  "requires_flash": false,
+  "weather": "WEATHER_SUNNY",
+  "map_type": "MAP_TYPE_TOWN",
+  "allow_cycling": true,
+  "allow_escaping": false,
+  "allow_running": true,
+  "show_map_name": true,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": [
+    { "map": "MAP_BATTLE_FRONTIER_OUTSIDE_WEST", "offset": 0, "direction": "up" },
+    { "map": "MAP_PARTY_ROAMER_PARK", "offset": 13, "direction": "right" }
+  ],
+  "object_events": [],
+  "warp_events": [
+    { "warp_id": "WARP_ID_FRONTIER_SOUTH_HUB", "x": 9, "y": 11, "elevation": 0, "dest_map": "MAP_ULTRA_FRONTIE_HUB", "dest_warp_id": "ultra_hub" },
+    { "warp_id": "WARP_ID_FRONTIER_SOUTH_CONTEST", "x": 37, "y": 13, "elevation": 0, "dest_map": "MAP_LILYCOVE_CITY_CONTEST_LOBBY", "dest_warp_id": "0" },
+    { "warp_id": "WARP_ID_FRONTIER_SOUTH_MUSEUM_LEFT", "x": 38, "y": 25, "elevation": 0, "dest_map": "MAP_LILYCOVE_CITY_LILYCOVE_MUSEUM_1F", "dest_warp_id": "0" },
+    { "warp_id": "WARP_ID_FRONTIER_SOUTH_MUSEUM_RIGHT", "x": 39, "y": 25, "elevation": 0, "dest_map": "MAP_LILYCOVE_CITY_LILYCOVE_MUSEUM_1F", "dest_warp_id": "1" },
+    { "warp_id": "WARP_ID_FRONTIER_SOUTH_RESORT_RETURN", "x": 52, "y": 31, "elevation": 0, "dest_map": "MAP_PARTY_ROAMER_PARK", "dest_warp_id": "0" }
+  ],
+  "coord_events": [],
+  "bg_events": [
+    { "type": "sign", "x": 8, "y": 12, "elevation": 0, "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY", "script": "BattleFrontier_OutsideSouth_EventScript_HubSign" },
+    { "type": "sign", "x": 40, "y": 14, "elevation": 0, "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY", "script": "BattleFrontier_OutsideSouth_EventScript_ContestSign" },
+    { "type": "sign", "x": 45, "y": 29, "elevation": 0, "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY", "script": "BattleFrontier_OutsideSouth_EventScript_MuseumSign" },
+    { "type": "sign", "x": 22, "y": 4, "elevation": 0, "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY", "script": "BattleFrontier_OutsideSouth_EventScript_FacilitiesSign" },
+    { "type": "sign", "x": 52, "y": 29, "elevation": 0, "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY", "script": "BattleFrontier_OutsideSouth_EventScript_ResortSign" }
+  ]
+}

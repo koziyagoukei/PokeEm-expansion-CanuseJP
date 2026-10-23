@@ -3,7 +3,7 @@
   "name": "LilycoveCity_ContestLobby",
   "layout": "LAYOUT_LILYCOVE_CITY_CONTEST_LOBBY",
   "music": "MUS_CONTEST_LOBBY",
-  "region_map_section": "MAPSEC_LILYCOVE_CITY",
+  "region_map_section": "MAPSEC_BATTLE_FRONTIER",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
   "map_type": "MAP_TYPE_INDOOR",
@@ -369,15 +369,15 @@
       "x": 14,
       "y": 11,
       "elevation": 0,
-      "dest_map": "MAP_ULTRA_FRONTIE_HUB",
-      "dest_warp_id": "ultra_hub"
+      "dest_map": "MAP_BATTLE_FRONTIER_OUTSIDE_SOUTH",
+      "dest_warp_id": "WARP_ID_FRONTIER_SOUTH_CONTEST"
     },
     {
       "x": 15,
       "y": 11,
       "elevation": 0,
-      "dest_map": "MAP_ULTRA_FRONTIE_HUB",
-      "dest_warp_id": "ultra_hub"
+      "dest_map": "MAP_BATTLE_FRONTIER_OUTSIDE_SOUTH",
+      "dest_warp_id": "WARP_ID_FRONTIER_SOUTH_CONTEST"
     },
     {
       "x": 9,

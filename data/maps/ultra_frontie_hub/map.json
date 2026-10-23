@@ -112,22 +112,22 @@
       "x": 13,
       "y": 21,
       "elevation": 0,
-      "dest_map": "MAP_ULTRA_FRONTIE_HUB",
-      "dest_warp_id": "ultra_hub"
+      "dest_map": "MAP_BATTLE_FRONTIER_OUTSIDE_SOUTH",
+      "dest_warp_id": "WARP_ID_FRONTIER_SOUTH_HUB"
     },
     {
       "x": 14,
       "y": 21,
       "elevation": 0,
-      "dest_map": "MAP_ULTRA_FRONTIE_HUB",
-      "dest_warp_id": "0"
+      "dest_map": "MAP_BATTLE_FRONTIER_OUTSIDE_SOUTH",
+      "dest_warp_id": "WARP_ID_FRONTIER_SOUTH_HUB"
     },
     {
       "x": 23,
       "y": 1,
       "elevation": 0,
-      "dest_map": "MAP_LILYCOVE_CITY_CONTEST_LOBBY",
-      "dest_warp_id": "0"
+      "dest_map": "MAP_BATTLE_FRONTIER_OUTSIDE_SOUTH",
+      "dest_warp_id": "WARP_ID_FRONTIER_SOUTH_HUB"
     },
     {
       "warp_id": "gotoconnect",

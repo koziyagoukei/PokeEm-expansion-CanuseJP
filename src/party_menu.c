@@ -4458,13 +4458,8 @@ static void DisplayCantUseSurfMessage(void)
 
 bool32 SetUpFieldMove_Fly(void)
 {
-    if (!CheckFollowerNPCFlag(FOLLOWER_NPC_FLAG_CAN_LEAVE_ROUTE))
-        return FALSE;
-
-    if (Overworld_MapTypeAllowsTeleportAndFly(gMapHeader.mapType) == TRUE)
-        return TRUE;
-    else
-        return FALSE;
+    // This game is confined to the Frontier and its adjoining resort maps.
+    return FALSE;
 }
 
 void CB2_ReturnToPartyMenuFromFlyMap(void)

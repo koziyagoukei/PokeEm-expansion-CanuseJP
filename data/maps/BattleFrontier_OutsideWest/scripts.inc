@@ -10,13 +10,12 @@ BattleFrontier_OutsideWest_OnTransition:
 BattleFrontier_OutsideWest_EventScript_FerryAttendant::
 	lock
 	faceplayer
-	msgbox BattleFrontier_OutsideWest_Text_MayISeeYourTicket, MSGBOX_DEFAULT
-	checkitem ITEM_SS_TICKET
-	goto_if_eq VAR_RESULT, FALSE, BattleFrontier_OutsideWest_EventScript_NoSSTicket
-	message BattleFrontier_OutsideWest_Text_WhereWouldYouLikeToGo
-	waitmessage
-	goto BattleFrontier_OutsideWest_EventScript_ChooseFerryDestination
+	msgbox BattleFrontier_OutsideWest_Text_FerrySuspended, MSGBOX_DEFAULT
+	release
 	end
+
+BattleFrontier_OutsideWest_Text_FerrySuspended:
+	.string "ただいま ふねは おやすみちゅうです\nみなみの ひろばへは あるいて どうぞ！$"
 
 BattleFrontier_OutsideWest_EventScript_ChooseFerryDestination::
 	multichoicedefault 18, 6, MULTI_SSTIDAL_BATTLE_FRONTIER, 2, FALSE

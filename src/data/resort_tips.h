@@ -18,8 +18,8 @@ static const u8 sInfoText_ResortOverview1[] = _(
 static const u8 sInfoText_ResortOverview2[] = _(
     "{JPN}キャンプの きたには ていしょくやと\n"
     "おんせん みなみには べっそうが あります。\n"
-    "もとの ばしょへ もどるときは\n"
-    "キャンプの きたちゅうおうの でぐちへ。\n"
+    "にしの みちや きたちゅうおうの でぐちは\n"
+    "フロンティアの みなみひろばへ つながります。\n"
     "リゾートないでは てもちの SELECTで\n"
     "キャンプへ はいりなおすことは できません。");
 

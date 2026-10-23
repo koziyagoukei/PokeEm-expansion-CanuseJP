@@ -4,7 +4,7 @@
   "layout": "LAYOUT_LILYCOVE_CITY_LILYCOVE_MUSEUM_1F",
   "music": "MUS_LILYCOVE_MUSEUM",
   "region": "REGION_HOENN",
-  "region_map_section": "MAPSEC_LILYCOVE_CITY",
+    "region_map_section": "MAPSEC_BATTLE_FRONTIER",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
   "map_type": "MAP_TYPE_INDOOR",
@@ -153,15 +153,15 @@
       "x": 9,
       "y": 13,
       "elevation": 0,
-      "dest_map": "MAP_LILYCOVE_CITY",
-      "dest_warp_id": "3"
+        "dest_map": "MAP_BATTLE_FRONTIER_OUTSIDE_SOUTH",
+        "dest_warp_id": "WARP_ID_FRONTIER_SOUTH_MUSEUM_LEFT"
     },
     {
       "x": 10,
       "y": 13,
       "elevation": 0,
-      "dest_map": "MAP_LILYCOVE_CITY",
-      "dest_warp_id": "13"
+        "dest_map": "MAP_BATTLE_FRONTIER_OUTSIDE_SOUTH",
+        "dest_warp_id": "WARP_ID_FRONTIER_SOUTH_MUSEUM_RIGHT"
     },
     {
       "x": 16,

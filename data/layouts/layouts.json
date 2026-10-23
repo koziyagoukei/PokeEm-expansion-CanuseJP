@@ -2909,7 +2909,7 @@
       "id": "LAYOUT_BATTLE_FRONTIER_OUTSIDE_WEST",
       "name": "BattleFrontier_OutsideWest_Layout",
       "width": 56,
-      "height": 72,
+      "height": 80,
       "primary_tileset": "gTileset_General",
       "secondary_tileset": "gTileset_BattleFrontierOutsideWest",
       "border_filepath": "data/layouts/BattleFrontier_OutsideWest/border.bin",
@@ -4932,6 +4932,17 @@
       "secondary_tileset": "gTileset_PartyBath",
       "border_filepath": "data/layouts/Partybathtime/border.bin",
       "blockdata_filepath": "data/layouts/Partybathtime/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_BATTLE_FRONTIER_OUTSIDE_SOUTH",
+      "name": "BattleFrontier_OutsideSouth_Layout",
+      "width": 56,
+      "height": 42,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Lilycove",
+      "border_filepath": "data/layouts/BattleFrontier_OutsideSouth/border.bin",
+      "blockdata_filepath": "data/layouts/BattleFrontier_OutsideSouth/map.bin",
       "layout_version": "emerald"
     }
   ]
