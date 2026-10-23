@@ -143,13 +143,13 @@ LilycoveCity_DepartmentStore_5F_EventScript_LittleGirl::
 	end
 
 LilycoveCity_DepartmentStore_5F_Text_PlaceFullOfCuteDolls:
-	.string "{JPN}すてきな ぬいぐるみが いっぱい なのねー\nこどものぶん だけじゃ なくて\lあたしのぶんも かおうかしら オホホホホ!$"
+	.string "すてきな ぬいぐるみが いっぱい なのねー\nこどものぶん だけじゃ なくて\lあたしのぶんも かおうかしら オホホホホ!$"
 
 LilycoveCity_DepartmentStore_5F_Text_GettingDollInsteadOfPokemon:
-	.string "{JPN}あたし まだ ポケモン そだてられないから\nかわいい ぬいぐるみ かってもらうの$"
+	.string "あたし まだ ポケモン そだてられないから\nかわいい ぬいぐるみ かってもらうの$"
 
 LilycoveCity_DepartmentStore_5F_Text_SellManyCuteMatsHere:
-	.string "{JPN}かわいい マットが たくさん うってるの!\nどれを かおうかな……\lぜーんぶ かっちゃおうかな……$"
+	.string "かわいい マットが たくさん うってるの!\nどれを かおうかな……\lぜーんぶ かっちゃおうかな……$"
 
 LilycoveCity_DepartmentStore_5F_Text_ClosedRooftopForWeather:
-	.string "{JPN}いまは てんきが あれてるから\nおくじょうに でられない みたい……$"
+	.string "いまは てんきが あれてるから\nおくじょうに でられない みたい……$"

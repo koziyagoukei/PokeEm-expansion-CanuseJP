@@ -120,29 +120,29 @@ BattleFrontier_BattlePalaceCorridor_Movement_AttendantEnterBattleRoom:
 	step_end
 
 BattleFrontier_BattlePalaceCorridor_Text_PeopleAndMonAreSame:
-	.string "{JPN}ひとも ポケモンも みな おなじ……\pそれぞれの せいかくに よって\nとくいなこと にがてなことが ある……"
+	.string "ひとも ポケモンも みな おなじ……\pそれぞれの せいかくに よって\nとくいなこと にがてなことが ある……"
 	.string ""
 	.string ""
 	.string ""
 	.string "$"
 
 BattleFrontier_BattlePalaceCorridor_Text_LetMonDoWhatItLikes:
-	.string "{JPN}にがてなこと よりも とくいな こと……\pポケモンの きもちに なって\nおぼえさせる わざを かんがえて みろ"
+	.string "にがてなこと よりも とくいな こと……\pポケモンの きもちに なって\nおぼえさせる わざを かんがえて みろ"
 	.string ""
 	.string ""
 	.string ""
 	.string "$"
 
 BattleFrontier_BattlePalaceCorridor_Text_MonDifferentWhenCornered:
-	.string "{JPN}せいかくとは ふしぎな ものだ……\pおいつめられる ことで ガラッと\nこうどうが かわる ものも おる……"
+	.string "せいかくとは ふしぎな ものだ……\pおいつめられる ことで ガラッと\nこうどうが かわる ものも おる……"
 	.string ""
 	.string ""
 	.string "$"
 
 BattleFrontier_BattlePalaceCorridor_Text_BeginningToUnderstandNature:
-	.string "{JPN}…… そろそろ ポケモンの せいかくを\nみきわめられる ように なってきたか?"
+	.string "…… そろそろ ポケモンの せいかくを\nみきわめられる ように なってきたか?"
 	.string "$"
 
 BattleFrontier_BattlePalaceCorridor_Text_HeartfeltBondBetweenYouAndMons:
-	.string "{JPN}おお…… おぬしと ポケモンの あいだに\nつよい こころの きずなが みえる……"
+	.string "おお…… おぬしと ポケモンの あいだに\nつよい こころの きずなが みえる……"
 	.string "$"

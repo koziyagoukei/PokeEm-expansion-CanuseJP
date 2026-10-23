@@ -29,19 +29,19 @@ EventScript_TooDark::
 	end
 
 sText_NotFoundNearby:
-	.string "{JPN}ちかくには いないようだ\n"
+	.string "ちかくには いないようだ\n"
 	.string "べつの ばしょを さがしてみよう!$"
 
 sText_TryMovingSlower:
-	.string "{JPN}ポケモンに にげられた!\n"
+	.string "ポケモンに にげられた!\n"
 	.string "もっと ゆっくり うごいてみよう$"
 
 sText_PokemonGotAway:
-	.string "{JPN}ポケモンに にげられた!$"
+	.string "ポケモンに にげられた!$"
 
 sText_LostSignal:
-	.string "{JPN}はんのうが なくなった!\n"
+	.string "はんのうが なくなった!\n"
 	.string "みうしなって しまったようだ$"
 
 sText_TooDark:
-	.string "{JPN}くらすぎて ポケモンを\nさがすことが できない!$"
+	.string "くらすぎて ポケモンを\nさがすことが できない!$"

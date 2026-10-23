@@ -28,14 +28,14 @@ PacifidlogTown_EventScript_TownSign::
 	end
 
 PacifidlogTown_Text_FastRunningCurrent:
-	.string "{JPN}キナギから カイナへは\nしおの ながれが とても はげしいの\pうかつに なみのり すると\nおもわぬ ほうこうに ながされちゃう$"
+	.string "キナギから カイナへは\nしおの ながれが とても はげしいの\pうかつに なみのり すると\nおもわぬ ほうこうに ながされちゃう$"
 
 PacifidlogTown_Text_NeatHousesOnWater:
-	.string "{JPN}ね! ね! すごいでしょ!\nみずの うえに おうちが たってるの!\pぼく ここで うまれたんだよ!$"
+	.string "ね! ね! すごいでしょ!\nみずの うえに おうちが たってるの!\pぼく ここで うまれたんだよ!$"
 
 PacifidlogTown_Text_SkyPillarTooScary:
-	.string "{JPN}そらのはしら?\p……ああ このさきに たっている\nたかーーい とうの ことだね\pあんな たかい ところ\nおっかなくて のぼれないなー\pぼくは やっぱり キナギでの\nすいめん スレスレな せいかつが\lはだに あうんだよねえー$"
+	.string "そらのはしら?\p……ああ このさきに たっている\nたかーーい とうの ことだね\pあんな たかい ところ\nおっかなくて のぼれないなー\pぼくは やっぱり キナギでの\nすいめん スレスレな せいかつが\lはだに あうんだよねえー$"
 
 PacifidlogTown_Text_TownSign:
-	.string "{JPN}ここは キナギ タウン\nあさひが みずべを てらす まち$"
+	.string "ここは キナギ タウン\nあさひが みずべを てらす まち$"
 

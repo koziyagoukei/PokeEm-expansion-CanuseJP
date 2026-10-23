@@ -10,8 +10,8 @@ FortreeCity_House3_EventScript_SchoolKidM::
 	end
 
 FortreeCity_House3_Text_MetStevenHadAmazingPokemon:
-	.string "{JPN}ポケモンずかんで\nおもいだした ことが あるよ\pめずらしい いしを さがしてるとき\nダイゴって トレーナーと であったけど\lあいつの ポケモン すごいね!\pめずらしい だけでなく\nおそろしいほど きたえられてた!\pもしかしたら この まちの\nジムリーダーよりも つよいかも……$"
+	.string "ポケモンずかんで\nおもいだした ことが あるよ\pめずらしい いしを さがしてるとき\nダイゴって トレーナーと であったけど\lあいつの ポケモン すごいね!\pめずらしい だけでなく\nおそろしいほど きたえられてた!\pもしかしたら この まちの\nジムリーダーよりも つよいかも……$"
 
 FortreeCity_House3_Text_OhYouHavePokedex:
-	.string "{JPN}きみの もっている それ なに?\p…… …… ……\pへー ポケモンずかん っていうんだ?\nすごいねえ!$"
+	.string "きみの もっている それ なに?\p…… …… ……\pへー ポケモンずかん っていうんだ?\nすごいねえ!$"
 

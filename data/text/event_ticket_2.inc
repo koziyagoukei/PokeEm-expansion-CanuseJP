@@ -1,5 +1,5 @@
 EventTicket_Text_OldSeaMapTooFar:
-	.string "{JPN}なんだ?\n"
+	.string "なんだ?\n"
 	.string "{JPN}ボロっちい ちずを もってきたってのは\l"
 	.string "{JPN}おまえさんか? みせてみな!\p"
 	.string "{JPN}…… …… ……\p"
@@ -7,18 +7,18 @@ EventTicket_Text_OldSeaMapTooFar:
 	.string "{JPN}わりいが ほかを あたったほうが……$"
 
 EventTicket_Text_BrineyHoldOnASecond:
-	.string "{JPN}ハギ『こら! わしの おんじんの\n"
+	.string "ハギ『こら! わしの おんじんの\n"
 	.string "{JPN}ねがいを ことわるとは なにごとだ!$"
 
 EventTicket_Text_BrineyLetsSail:
-	.string "{JPN}{PLAYER}{KUN} すまなかったね\n"
+	.string "{PLAYER}{KUN} すまなかったね\n"
 	.string "{JPN}このふねを たよって きて くれたのに……\l"
 	.string "{JPN}もちろん いますぐに しゅっこうだ!\p"
 	.string "{JPN}さあいくぞ!\n"
 	.string "{JPN}かいずに ある しまへ しゅっぱつ!$"
 
 EventTicket_Text_OddTicketGetOnBoard:
-	.string "{JPN}みょうな チケットを\n"
+	.string "みょうな チケットを\n"
 	.string "{JPN}もってきたのは おまえさんか?\p"
 	.string "{JPN}おまえが いこうと しているのは\n"
 	.string "{JPN}とおく はなれた ちほうの しま……\l"
@@ -28,16 +28,16 @@ EventTicket_Text_OddTicketGetOnBoard:
 	.string "{JPN}さあ のりな!$"
 
 FarawayIsland_Entrance_Text_SailorReturn:
-	.string "{JPN}まったく ハギ せんちょうの\n"
+	.string "まったく ハギ せんちょうの\n"
 	.string "{JPN}きまぐれにも まいるよなあ……\p"
 	.string "{JPN}もう ミナモへ かえるのかい?$"
 
 BirthIsland_Harbor_Text_SailorReturn:
-	.string "{JPN}ふしぎな かたちの しまだなあ\n"
+	.string "ふしぎな かたちの しまだなあ\n"
 	.string "{JPN}もう ミナモへ かえるか?$"
 
 EventTicket_Text_OddTicketsWhereTo:
-	.string "{JPN}ヘンテコな チケットを\n"
+	.string "ヘンテコな チケットを\n"
 	.string "{JPN}いくつも もってきたのは おまえさんか?\p"
 	.string "{JPN}…… …… ……ふむ\p"
 	.string "{JPN}こいつらで いける ところは\n"
@@ -50,13 +50,13 @@ EventTicket_Text_OddTicketsWhereTo:
 	.string "{JPN}まずは どこから いってみるかい?$"
 
 NavelRock_Harbor_Text_SailorReturn:
-	.string "{JPN}な…… なんか おくふかくから\n"
+	.string "な…… なんか おくふかくから\n"
 	.string "{JPN}ひくい うなりが きこえたような……\p"
 	.string "{JPN}だ だいじょうぶか?\n"
 	.string "{JPN}もう かえった ほうが いいんじゃないか?$"
 
 FarawayIsland_Entrance_Text_Sign:
-	.string "{JPN}なんねんも まえに かかれたような\n"
+	.string "なんねんも まえに かかれたような\n"
 	.string "{JPN}ふるい かきおきが ある……\p"
 	.string "{JPN}……がつ 6か\n"
 	.string "{JPN}ここに たちいる にんげ……が\l"
@@ -67,4 +67,4 @@ FarawayIsland_Entrance_Text_Sign:
 	.string "{JPN}……ジ$"
 
 FarawayIsland_Interior_Text_Mew:
-	.string "{JPN}ミュー……$"
+	.string "ミュー……$"

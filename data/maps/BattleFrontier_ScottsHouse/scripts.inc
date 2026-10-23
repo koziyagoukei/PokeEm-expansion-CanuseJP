@@ -210,52 +210,52 @@ BattleFrontier_ScottsHouse_EventScript_ScottFaceAwayWest::
 	return
 
 BattleFrontier_ScottsHouse_Text_WelcomeToBattleFrontier:
-	.string "{JPN}エニシダ『ああ いらっしゃい\nへへ…… せまい ところで ごめんよ\pでは あらためて {PLAYER}{KUN}\nようこそ バトルフロンティアへ!\pここは わたしの ゆめの けっしょう!\nなんねんも かかって やっと\lかたちに することが できたんだ!$"
+	.string "エニシダ『ああ いらっしゃい\nへへ…… せまい ところで ごめんよ\pでは あらためて {PLAYER}{KUN}\nようこそ バトルフロンティアへ!\pここは わたしの ゆめの けっしょう!\nなんねんも かかって やっと\lかたちに することが できたんだ!$"
 
 BattleFrontier_ScottsHouse_Text_HowMuchEffortItTookToMakeReal:
-	.string "{JPN}おもえば ながい みちのりだった……\nつよい トレーナーを もとめて\lただひとり たびだち……\lここまで くるのに どれだけの\lどりょくと じかんが ひつようだったか……$"
+	.string "おもえば ながい みちのりだった……\nつよい トレーナーを もとめて\lただひとり たびだち……\lここまで くるのに どれだけの\lどりょくと じかんが ひつようだったか……$"
 
 BattleFrontier_ScottsHouse_Text_HaveThisAsMementoOfOurPathsCrossing:
-	.string "{JPN}いや こんな むかしばなしを\nしていても はじまらないな!\pとにかく こころ ゆくまで\nポケモンしょうぶを たのしんで くれ!\pこれは わたしと {PLAYER}{KUN}が\nなんども たびさきで であった\lきねんだよ!$"
+	.string "いや こんな むかしばなしを\nしていても はじまらないな!\pとにかく こころ ゆくまで\nポケモンしょうぶを たのしんで くれ!\pこれは わたしと {PLAYER}{KUN}が\nなんども たびさきで であった\lきねんだよ!$"
 
 BattleFrontier_ScottsHouse_Text_ObtainedXBattlePoints:
-	.string "{JPN}{PLAYER}は バトルポイントを\n{STR_VAR_1} BP もらった!$"
+	.string "{PLAYER}は バトルポイントを\n{STR_VAR_1} BP もらった!$"
 
 BattleFrontier_ScottsHouse_Text_ExplainBattlePoints:
-	.string "{JPN}エニシダ『バトルポイントは\nフロンティアパスで みられるからね!\lポイントは この フロンティアで\lかつやく すれば するほど\lたまっていく ものなんだ!\pほしい ものと ひきかえたり\nすきなように かつようして くれ!$"
+	.string "エニシダ『バトルポイントは\nフロンティアパスで みられるからね!\lポイントは この フロンティアで\lかつやく すれば するほど\lたまっていく ものなんだ!\pほしい ものと ひきかえたり\nすきなように かつようして くれ!$"
 
 BattleFrontier_ScottsHouse_Text_ExpectingGreatThings:
-	.string "{JPN}きみの かつやく\nおおいに きたい しているからね!$"
+	.string "きみの かつやく\nおおいに きたい しているからね!$"
 
 BattleFrontier_ScottsHouse_Text_WhyIGoSeekingTrainers:
-	.string "{JPN}エニシダ『どの トレーナーにも\nそれぞれの じんせいが あるだろ?\pでも たたかう ときは\nそんなこと ぜんぜん かんけいない\lみんな いっしょ なんだよね!\pわたしは そういう\nたたかいの じゅんすいさ ってのが\lとても すきなんだよ\pだから いろんな ところに でかけて\nしんけんに たたかってる トレーナーを\lいっぱい しょうたい してくるのさ!$"
+	.string "エニシダ『どの トレーナーにも\nそれぞれの じんせいが あるだろ?\pでも たたかう ときは\nそんなこと ぜんぜん かんけいない\lみんな いっしょ なんだよね!\pわたしは そういう\nたたかいの じゅんすいさ ってのが\lとても すきなんだよ\pだから いろんな ところに でかけて\nしんけんに たたかってる トレーナーを\lいっぱい しょうたい してくるのさ!$"
 
 BattleFrontier_ScottsHouse_Text_HaveYouMetFrontierBrain:
-	.string "{JPN}エニシダ『わが ブレーンたち から\nフロンティアパスの シンボルは\lもう もらったかな?\pわたしが みいだした\nさいきょうの フロンティアブレーンも\lきみの つよさを みたら\lおそらく おどろく だろうね!$"
+	.string "エニシダ『わが ブレーンたち から\nフロンティアパスの シンボルは\lもう もらったかな?\pわたしが みいだした\nさいきょうの フロンティアブレーンも\lきみの つよさを みたら\lおそらく おどろく だろうね!$"
 
 BattleFrontier_ScottsHouse_Text_MayFindWildMonsInFrontier:
-	.string "{JPN}エニシダ『きみは たしか\nしょうぶ だけでは なくて\lポケモンずかんも つくって いたね!\pもしかしたら バトルフロンティア にも\nポケモンと であえる ばしょが\lあるかも しれないよ? うふふ……$"
+	.string "エニシダ『きみは たしか\nしょうぶ だけでは なくて\lポケモンずかんも つくって いたね!\pもしかしたら バトルフロンティア にも\nポケモンと であえる ばしょが\lあるかも しれないよ? うふふ……$"
 
 BattleFrontier_ScottsHouse_Text_YouveCollectedAllSilverSymbols:
-	.string "{JPN}エニシダ『バトルフロンティアを\nたのしんで くれて いるかな?\p……って おおっっ!\pきみの フロンティアパスっ!\nぎんのシンボルが すべて\lそろって いるじゃ ないか!\pすごいなあ きみは おもったとおり\nつよい トレーナー だったんだなあ!\pふつうは こんな ことは しないんだが\nぜひ きねんに これを もらってくれ!\lきみなら つかいこなせる はずだよ……!$"
+	.string "エニシダ『バトルフロンティアを\nたのしんで くれて いるかな?\p……って おおっっ!\pきみの フロンティアパスっ!\nぎんのシンボルが すべて\lそろって いるじゃ ないか!\pすごいなあ きみは おもったとおり\nつよい トレーナー だったんだなあ!\pふつうは こんな ことは しないんだが\nぜひ きねんに これを もらってくれ!\lきみなら つかいこなせる はずだよ……!$"
 
 BattleFrontier_ScottsHouse_Text_YouveCollectedAllGoldSymbols:
-	.string "{JPN}エニシダ『バトルフロンティアは\nまんきつ してるかな?\p……って うひょおおっっ!\pきみの フロンティアパスーっ!\nきんのシンボルが すべて\lそろって いるじゃ ないか!\pこれはすごいっ!\nやっぱり きみは おもったとおり\lすごい トレーナー だったんだなあ!\p…… …… ……\p{PLAYER}{KUN}! ぜひ きみに\nこれを プレゼント させて くれ!\pきみならば これの かちを\nわかって くれると おもうんだ!$"
+	.string "エニシダ『バトルフロンティアは\nまんきつ してるかな?\p……って うひょおおっっ!\pきみの フロンティアパスーっ!\nきんのシンボルが すべて\lそろって いるじゃ ないか!\pこれはすごいっ!\nやっぱり きみは おもったとおり\lすごい トレーナー だったんだなあ!\p…… …… ……\p{PLAYER}{KUN}! ぜひ きみに\nこれを プレゼント させて くれ!\pきみならば これの かちを\nわかって くれると おもうんだ!$"
 
 BattleFrontier_ScottsHouse_Text_SoGladIBroughtYouHere:
-	.string "{JPN}いやー われながら\nトレーナーを みるめが さえてるなー\lきみを つれてきて ほんと よかった!\lほく ほく$"
+	.string "いやー われながら\nトレーナーを みるめが さえてるなー\lきみを つれてきて ほんと よかった!\lほく ほく$"
 
 BattleFrontier_ScottsHouse_Text_BerryPocketStuffed:
-	.string "{JPN}きのみポケットが いっぱい みたいね$"
+	.string "きのみポケットが いっぱい みたいね$"
 
 BattleFrontier_ScottsHouse_Text_Beat50TrainersInARow:
-	.string "{JPN}エニシダ『おっ きいたよ!\nバトルタワーでの かつやく!\l50にん いじょう かちぬいたって?\pすごいなあ きねんに\nこれを うけとって くれよ!$"
+	.string "エニシダ『おっ きいたよ!\nバトルタワーでの かつやく!\l50にん いじょう かちぬいたって?\pすごいなあ きねんに\nこれを うけとって くれよ!$"
 
 BattleFrontier_ScottsHouse_Text_Beat100TrainersInARow:
-	.string "{JPN}エニシダ『おおうっ きいたよ!\nバトルタワーでの だいかつやく!\l100にん いじょう かちぬいたって?\pすごすぎるなー!\nぜひ これを きねんに うけとってくれ!$"
+	.string "エニシダ『おおうっ きいたよ!\nバトルタワーでの だいかつやく!\l100にん いじょう かちぬいたって?\pすごすぎるなー!\nぜひ これを きねんに うけとってくれ!$"
 
 BattleFrontier_ScottsHouse_Text_ExpectingToHearEvenGreaterThings:
-	.string "{JPN}これからも ますます\nきたい しているよ!$"
+	.string "これからも ますます\nきたい しているよ!$"
 
 BattleFrontier_ScottsHouse_Text_ComeBackForThisLater:
-	.string "{JPN}……って にもつが いっぱいなら\nとって おくから またおいで!$"
+	.string "……って にもつが いっぱいなら\nとって おくから またおいで!$"

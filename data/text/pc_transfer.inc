@@ -1,5 +1,5 @@
 gText_PkmnTransferredSomeonesPC::
-	.string "{JPN}{STR_VAR_2}は だれかのパソコンの\n"
+	.string "{STR_VAR_2}は だれかのパソコンの\n"
 	.string "{JPN}ボックス『{STR_VAR_1}』に\l"
 	.string "{JPN}てんそう された!$"
 
@@ -14,7 +14,7 @@ gText_PkmnTransferredLanettesPC::
 	.string "{JPN}てんそう された!$"
 
 gText_PkmnTransferredSomeonesPCBoxFull::
-	.string "{JPN}だれかのパソコンの\n"
+	.string "だれかのパソコンの\n"
 	.string "{JPN}ボックス『{STR_VAR_3}』が\l"
 	.string "{JPN}いっぱいだ!!\p"
 	.string "{JPN}{STR_VAR_2}は\n"
@@ -43,10 +43,10 @@ gText_PlayerObtainedTheMon::
 	.string "{JPN}てにいれた!$"
 
 gText_NoMoreRoomForPokemon::
-	.string "{JPN}ポケモンを もちきれません!\p"
+	.string "ポケモンを もちきれません!\p"
 	.string "{JPN}ボックスも いっぱいで\n"
 	.string "{JPN}てんそう できません$"
 
 gText_NicknameThisPokemon::
-	.string "{JPN}{STR_VAR_1}に\n"
+	.string "{STR_VAR_1}に\n"
 	.string "{JPN}ニックネームを つけますか?$"

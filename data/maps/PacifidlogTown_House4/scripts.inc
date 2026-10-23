@@ -28,17 +28,17 @@ PacifidlogTown_House4_EventScript_No::
 	end
 
 PacifidlogTown_House4_Text_PeopleSawHighFlyingPokemon:
-	.string "{JPN}ホウエンの そらたかくを とんでいく\nポケモンを みた! って ひとが いるけど\pずっと とびまわって いるのかしら?\nどこかで やすんだり しそうだけど$"
+	.string "ホウエンの そらたかくを とんでいく\nポケモンを みた! って ひとが いるけど\pずっと とびまわって いるのかしら?\nどこかで やすんだり しそうだけど$"
 
 PacifidlogTown_House4_Text_SkyPokemon:
-	.string "{JPN}おそらの ポケモン!\nおそらの ポケモン!$"
+	.string "おそらの ポケモン!\nおそらの ポケモン!$"
 
 PacifidlogTown_House4_Text_WhereDidYouComeFrom:
-	.string "{JPN}きみ どこから きたの?$"
+	.string "きみ どこから きたの?$"
 
 PacifidlogTown_House4_Text_YesTown:
-	.string "{JPN}はい……?\nハイ… タウン……?\pしらないなぁ そんな まち$"
+	.string "はい……?\nハイ… タウン……?\pしらないなぁ そんな まち$"
 
 PacifidlogTown_House4_Text_YouHaveToComeFromSomewhere:
-	.string "{JPN}いいえ って そんな……\nどこからも きてない はずが ないでしょ\pま まさか きみ……\nうみの そこで うまれた とか……?$"
+	.string "いいえ って そんな……\nどこからも きてない はずが ないでしょ\pま まさか きみ……\nうみの そこで うまれた とか……?$"
 

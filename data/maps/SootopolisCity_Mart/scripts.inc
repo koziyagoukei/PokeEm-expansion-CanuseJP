@@ -53,13 +53,13 @@ SootopolisCity_Mart_EventScript_GentlemanNoLegendaries::
 	end
 
 SootopolisCity_Mart_Text_PPUpIsGreat:
-	.string "{JPN}ポイントアップは すごいぞ!\pなんたって ポケモンの\nパワーポイントを ふやせるからな!$"
+	.string "ポイントアップは すごいぞ!\pなんたって ポケモンの\nパワーポイントを ふやせるからな!$"
 
 SootopolisCity_Mart_Text_TooScaryOutside:
-	.string "{JPN}いったい なにが おこってるんだ!?\pものすごく きになる けど\nこわくて そとに でられないよ!$"
+	.string "いったい なにが おこってるんだ!?\pものすごく きになる けど\nこわくて そとに でられないよ!$"
 
 SootopolisCity_Mart_Text_FullRestoreItemOfDreams:
-	.string "{JPN}かいふくのくすり ごぞんじ ですか?\pポケモンの たいりょく ぜんかい!\nじょうたい いじょうも すべて かいふく!\lまさに ゆめのような どうぐ なのです$"
+	.string "かいふくのくすり ごぞんじ ですか?\pポケモンの たいりょく ぜんかい!\nじょうたい いじょうも すべて かいふく!\lまさに ゆめのような どうぐ なのです$"
 
 SootopolisCity_Mart_Text_DidSomethingAwaken:
-	.string "{JPN}この てんき……\nなにかが めざめたのか……?$"
+	.string "この てんき……\nなにかが めざめたのか……?$"

@@ -62,32 +62,32 @@ VerdanturfTown_EventScript_RusturfTunnelSign::
 	end
 
 VerdanturfTown_Text_ManTryingToDigTunnel:
-	.string "{JPN}わたしの パパが いってたの\pこの トンネルって おーきな おとに\nはんのうして さわぎだす おくびょうな\lポケモンが いっぱい なんだって!\pだから かいはつ こうじ やめたんだけど\nおとこの ひとが ひとりで\lトンネルを ほろうと してるんだって!$"
+	.string "わたしの パパが いってたの\pこの トンネルって おーきな おとに\nはんのうして さわぎだす おくびょうな\lポケモンが いっぱい なんだって!\pだから かいはつ こうじ やめたんだけど\nおとこの ひとが ひとりで\lトンネルを ほろうと してるんだって!$"
 
 VerdanturfTown_Text_ManDugTunnelForLove:
-	.string "{JPN}あいする ひとの ために\nどうくつを ほっていた ひとが いるの!\pなんだか すごーい!$"
+	.string "あいする ひとの ために\nどうくつを ほっていた ひとが いるの!\pなんだか すごーい!$"
 
 VerdanturfTown_Text_AirCleanHere:
-	.string "{JPN}かざむきの かんけいで このまち には\nかざんばいが とんでくることは ない!\pくうきの おいしい このまちで くらせば\nからだが じょうぶでない ひとでも\lきっと げんきに なれる はずさ!$"
+	.string "かざむきの かんけいで このまち には\nかざんばいが とんでくることは ない!\pくうきの おいしい このまちで くらせば\nからだが じょうぶでない ひとでも\lきっと げんきに なれる はずさ!$"
 
 VerdanturfTown_Text_MakeBattleTentDebut:
-	.string "{JPN}ぼくと ぼくの ポケモン\nさいきん すごく ちょうしが よくてね\pバトルテント デビュー させたくて\nこの まちに きたんだ!$"
+	.string "ぼくと ぼくの ポケモン\nさいきん すごく ちょうしが よくてね\pバトルテント デビュー させたくて\nこの まちに きたんだ!$"
 
 VerdanturfTown_Text_GuyTryingToBustThroughCave:
-	.string "{JPN}フレンドリィ ショップの となりに\nどうくつが あるだろ?\pなかを ふさいでいる いわを こわし\nとおれるように しようと がんばっている\lやつが いるらしいんだ!\pとおれるように なると いいのに……\nカナズミにも いきやすく なるから!$"
+	.string "フレンドリィ ショップの となりに\nどうくつが あるだろ?\pなかを ふさいでいる いわを こわし\nとおれるように しようと がんばっている\lやつが いるらしいんだ!\pとおれるように なると いいのに……\nカナズミにも いきやすく なるから!$"
 
 VerdanturfTown_Text_EasyToGetToRustboroNow:
-	.string "{JPN}フレンドリィ ショップの となりの\nどうくつが とおれるように なっただろ!\pカナズミまで デボンの しんせいひんを\nかいに いきやすくなって うれしいよ!$"
+	.string "フレンドリィ ショップの となりの\nどうくつが とおれるように なっただろ!\pカナズミまで デボンの しんせいひんを\nかいに いきやすくなって うれしいよ!$"
 
 VerdanturfTown_Text_TownSign:
-	.string "{JPN}ここは シダケ タウン\nくさの においの かぜふく こうげん$"
+	.string "ここは シダケ タウン\nくさの においの かぜふく こうげん$"
 
 VerdanturfTown_Text_WandasHouse:
-	.string "{JPN}「ミチルの いえ」$"
+	.string "「ミチルの いえ」$"
 
 VerdanturfTown_Text_BattleTentSign:
-	.string "{JPN}バトルテント シダケタウン かいじょう\nみまもれ! ポケモンバトル$"
+	.string "バトルテント シダケタウン かいじょう\nみまもれ! ポケモンバトル$"
 
 VerdanturfTown_Text_RusturfTunnelSign:
-	.string "{JPN}カナズミと シダケを むすぶ\n「カナシダ トンネル」\pかいつう こうじは ちゅうしに なりました$"
+	.string "カナズミと シダケを むすぶ\n「カナシダ トンネル」\pかいつう こうじは ちゅうしに なりました$"
 

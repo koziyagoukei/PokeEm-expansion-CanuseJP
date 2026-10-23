@@ -132,17 +132,17 @@ AbandonedShip_HiddenFloorCorridors_EventScript_TheDoorIsOpen::
 	end
 
 AbandonedShip_HiddenFloorCorridors_Text_Rm1DoorIsLocked:
-	.string "{JPN}カギが かかっている\pとびらには 1ごうしつと かかれている$"
+	.string "カギが かかっている\pとびらには 1ごうしつと かかれている$"
 
 AbandonedShip_HiddenFloorCorridors_Text_Rm2DoorIsLocked:
-	.string "{JPN}カギが かかっている\pとびらには 2ごうしつと かかれている$"
+	.string "カギが かかっている\pとびらには 2ごうしつと かかれている$"
 
 AbandonedShip_HiddenFloorCorridors_Text_Rm4DoorIsLocked:
-	.string "{JPN}カギが かかっている\pとびらには 4ごうしつと かかれている$"
+	.string "カギが かかっている\pとびらには 4ごうしつと かかれている$"
 
 AbandonedShip_HiddenFloorCorridors_Text_Rm6DoorIsLocked:
-	.string "{JPN}カギが かかっている\pとびらには 6ごうしつと かかれている$"
+	.string "カギが かかっている\pとびらには 6ごうしつと かかれている$"
 
 AbandonedShip_HiddenFloorCorridors_Text_InsertedKey:
-	.string "{JPN}{PLAYER}は\nカギを つかった!\pさしこんだ カギは ぬけなくなったが\nとびらは ひらいた!$"
+	.string "{PLAYER}は\nカギを つかった!\pさしこんだ カギは ぬけなくなったが\nとびらは ひらいた!$"
 

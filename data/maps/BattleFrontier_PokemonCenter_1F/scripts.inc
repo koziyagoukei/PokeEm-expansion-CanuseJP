@@ -38,14 +38,14 @@ BattleFrontier_PokemonCenter_1F_EventScript_Skitty::
 	end
 
 BattleFrontier_PokemonCenter_1F_Text_NeverSeenPokemon:
-	.string "{JPN}みたこともない ポケモンを\nつかってる ひとが いた!\pトレーナーズスクールでも\nならわなかった けど\lあんなの どこに いるのかなあ!$"
+	.string "みたこともない ポケモンを\nつかってる ひとが いた!\pトレーナーズスクールでも\nならわなかった けど\lあんなの どこに いるのかなあ!$"
 
 BattleFrontier_PokemonCenter_1F_Text_NextStopBattleArena:
-	.string "{JPN}よしっ! おつぎは バトルアリーナだ!\nあのポケモンと あのポケモンを\lパソコンから つれて いくぜ!$"
+	.string "よしっ! おつぎは バトルアリーナだ!\nあのポケモンと あのポケモンを\lパソコンから つれて いくぜ!$"
 
 BattleFrontier_PokemonCenter_1F_Text_GoingThroughEveryChallenge:
-	.string "{JPN}うふ わたしは ぜーんぶ\nこのコと がんばるんだ もんね!$"
+	.string "うふ わたしは ぜーんぶ\nこのコと がんばるんだ もんね!$"
 
 BattleFrontier_PokemonCenter_1F_Text_Skitty:
-	.string "{JPN}エネコ『みゃ みゃーっ!$"
+	.string "エネコ『みゃ みゃーっ!$"
 

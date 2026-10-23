@@ -47,17 +47,17 @@ FortreeCity_House1_Text_MonYouTakeCare:
 	.string "{JPN}おー やったー!\p{STR_VAR_1} よくきたなー!\n{STR_VAR_2} げんきで やれよー!$"
 
 FortreeCity_House1_Text_ThisIsntAMon:
-	.string "{JPN}いやソレ\n{STR_VAR_1}じゃないでしょ$"
+	.string "いやソレ\n{STR_VAR_1}じゃないでしょ$"
 
 FortreeCity_House1_Text_YouWontTradeMe:
-	.string "{JPN}え こうかん しないの?\nこころの さけびを きいたくせに……$"
+	.string "え こうかん しないの?\nこころの さけびを きいたくせに……$"
 
 FortreeCity_House1_Text_GoingToMakeVolbeatStrong:
-	.string "{JPN}よし いまから\nバルビートを つよく するぞー!\lプラスルも つよく してやってよ!$"
+	.string "よし いまから\nバルビートを つよく するぞー!\lプラスルも つよく してやってよ!$"
 
 FortreeCity_House1_Text_TradingMemoriesWithOthers:
-	.string "{JPN}ひとと ポケモンを こうかん する……\pつまりは それぞれの\nおもいでを こうかん しているのじゃな$"
+	.string "ひとと ポケモンを こうかん する……\pつまりは それぞれの\nおもいでを こうかん しているのじゃな$"
 
 FortreeCity_House1_Text_Zigzagoon:
-	.string "{JPN}ジグザグマ『グモモォ?$"
+	.string "ジグザグマ『グモモォ?$"
 

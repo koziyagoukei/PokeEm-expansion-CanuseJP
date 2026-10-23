@@ -277,21 +277,21 @@ BattleFrontier_BattleTowerMultiPartnerRoom_EventScript_Partner8::
 	end
 
 BattleFrontier_BattleTowerMultiPartnerRoom_Text_PleaseFindPartner:
-	.string "{JPN}ここに あつまった トレーナーから\n"
+	.string "ここに あつまった トレーナーから\n"
 	.string "パートナーを さがしてください$"
 
 BattleFrontier_BattleTowerMultiPartnerRoom_Text_QuitLookingForPartner:
-	.string "{JPN}{PLAYER}さんは タッグの\n"
+	.string "{PLAYER}さんは タッグの\n"
 	.string "パートナーを まだ みつけていません\p"
 	.string "パートナーさがしを やめて\n"
 	.string "うけつけへ もどりますか?$"
 
 BattleFrontier_BattleTowerMultiPartnerRoom_Text_PleaseFindPartner2:
-	.string "{JPN}それでは ここに あつまった\n"
+	.string "それでは ここに あつまった\n"
 	.string "トレーナーから パートナーを さがしてください$"
 
 BattleFrontier_BattleTowerMultiPartnerRoom_Text_ThankYouForChoosingPartner::
-	.string "{JPN}パートナーを えらんでいただき\n"
+	.string "パートナーを えらんでいただき\n"
 	.string "ありがとうございます\p"
 	.string "マルチバトルルームへ\n"
 	.string "ごあんないします$"

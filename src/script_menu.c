@@ -1221,7 +1221,7 @@ bool8 CloseMuseumFossilPic(void)
     return TRUE;
 }
 
-static const u8 sText_Other[] = _("{JPN}そのほか");
+static const u8 sText_Other[] = _("そのほか");
 
 void DrawSeagallopDestinationMenu(void)
 {

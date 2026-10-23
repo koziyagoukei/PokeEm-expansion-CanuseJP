@@ -34,11 +34,11 @@ MauvilleCity_PokemonCenter_1F_EventScript_Youngster::
 	end
 
 MauvilleCity_PokemonCenter_1F_Text_ManOverThereSaysWeirdThings:
-	.string "{JPN}あそこに いる オヤジ\nへんなこと いったり するの!\pなんだか おもしろくって\nわすれられない そんざい だわ!$"
+	.string "あそこに いる オヤジ\nへんなこと いったり するの!\pなんだか おもしろくって\nわすれられない そんざい だわ!$"
 
 MauvilleCity_PokemonCenter_1F_Text_MyDataUpdatedFromRecordCorner:
-	.string "{JPN}レコードコーナーを つかったらね\nムロタウンで はやっている ものが\lともだちと いっしょに なったのよ!$"
+	.string "レコードコーナーを つかったらね\nムロタウンで はやっている ものが\lともだちと いっしょに なったのよ!$"
 
 MauvilleCity_PokemonCenter_1F_Text_RecordCornerSoundsFun:
-	.string "{JPN}ポケモンセンターの 2かいに\nレコードコーナーが できたんだってさ!\pよく わからないけど おもしろそうだろ?\nとにかく やってみるよ!$"
+	.string "ポケモンセンターの 2かいに\nレコードコーナーが できたんだってさ!\pよく わからないけど おもしろそうだろ?\nとにかく やってみるよ!$"
 

@@ -10,8 +10,8 @@ RustboroCity_House2_EventScript_LittleGirl::
 	end
 
 RustboroCity_House2_Text_TrainerSchoolExcellent:
-	.string "{JPN}トレーナーズ スクールは いいわよ!\pあそこで ポケモンの べんきょう すれば\nジムリーダーに だって なれますもの!$"
+	.string "トレーナーズ スクールは いいわよ!\pあそこで ポケモンの べんきょう すれば\nジムリーダーに だって なれますもの!$"
 
 RustboroCity_House2_Text_RoxanneKnowsALot:
-	.string "{JPN}ジムリーダーの ツツジ ねーちゃん\nすっごい ポケモン くわしくて\lすっごい ポケモン つよいんだから!$"
+	.string "ジムリーダーの ツツジ ねーちゃん\nすっごい ポケモン くわしくて\lすっごい ポケモン つよいんだから!$"
 

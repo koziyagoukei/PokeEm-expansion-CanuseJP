@@ -91,35 +91,35 @@ PacifidlogTown_House2_EventScript_UnhappyAzurill::
 	end
 
 PacifidlogTown_House2_Text_ChairmansYoungerBrotherOnVacation:
-	.string "{JPN}ウォッホン!!\pわしが ポケモン だいすきクラブで\nいちばーん えらい かいちょうの……\pおとうと ですぞ!\pまあ ここで ポケモンと いっしょに\nバカンスを たのしんで おるのですな!$"
+	.string "ウォッホン!!\pわしが ポケモン だいすきクラブで\nいちばーん えらい かいちょうの……\pおとうと ですぞ!\pまあ ここで ポケモンと いっしょに\nバカンスを たのしんで おるのですな!$"
 
 PacifidlogTown_House2_Text_AhYourPokemon:
-	.string "{JPN}ほう!\nきみの ポケモン……$"
+	.string "ほう!\nきみの ポケモン……$"
 
 PacifidlogTown_House2_Text_AdoringPokemonTakeThis:
-	.string "{JPN}とっても なついて いますなあ\pそんな かわいらしい ポケモンには\nこの わざマシン どうですかな?$"
+	.string "とっても なついて いますなあ\pそんな かわいらしい ポケモンには\nこの わざマシン どうですかな?$"
 
 PacifidlogTown_House2_Text_PutInSomeMoreEffort:
-	.string "{JPN}ふむう……\nわるくは ないんだが よくもない……\pおやの トレーナーである きみの\nどりょくが ひつよう ですな!$"
+	.string "ふむう……\nわるくは ないんだが よくもない……\pおやの トレーナーである きみの\nどりょくが ひつよう ですな!$"
 
 PacifidlogTown_House2_Text_ViciousPokemonTakeThis:
-	.string "{JPN}なんだか めつきが わるいですのう\pそんな こわそうな ポケモンには\nこの わざマシン どうですかな?$"
+	.string "なんだか めつきが わるいですのう\pそんな こわそうな ポケモンには\nこの わざマシン どうですかな?$"
 
 PacifidlogTown_House2_Text_ExplainReturnFrustration:
-	.string "{JPN}ポケモンの なつきぐあいが たかいと\nおんがえしの いりょくも たかくなる\pなつきぐあいが ひくいと\nやつあたりの いりょくが つよまるんだよ!$"
+	.string "ポケモンの なつきぐあいが たかいと\nおんがえしの いりょくも たかくなる\pなつきぐあいが ひくいと\nやつあたりの いりょくが つよまるんだよ!$"
 
 PacifidlogTown_House2_Text_GetGoodTMInXDays:
-	.string "{JPN}そうそう あと{STR_VAR_1}にち たてば\nいい わざマシンが てに はいるんだよ!\pそのとき また あそびに きたまえ!\nきみの ポケモンに あった\lすてきな わざマシンを あげるから$"
+	.string "そうそう あと{STR_VAR_1}にち たてば\nいい わざマシンが てに はいるんだよ!\pそのとき また あそびに きたまえ!\nきみの ポケモンに あった\lすてきな わざマシンを あげるから$"
 
 PacifidlogTown_House2_Text_Rurii:
-	.string "{JPN}ルリリ『るりー$"
+	.string "ルリリ『るりー$"
 
 PacifidlogTown_House2_Text_VeryFriendlyWithTrainer:
-	.string "{JPN}とっても なついて いるようだ$"
+	.string "とっても なついて いるようだ$"
 
 PacifidlogTown_House2_Text_Rururi:
-	.string "{JPN}ルリリ『ルルリッ!!$"
+	.string "ルリリ『ルルリッ!!$"
 
 PacifidlogTown_House2_Text_DoesntLikeTrainerVeryMuch:
-	.string "{JPN}あんまり なついて いないようだ……$"
+	.string "あんまり なついて いないようだ……$"
 

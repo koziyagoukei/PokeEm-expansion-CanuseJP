@@ -10,8 +10,8 @@ VerdanturfTown_House_EventScript_Woman2::
 	end
 
 VerdanturfTown_House_Text_TrainersGatherAtPokemonLeague:
-	.string "{JPN}とおく はなれた\nサイユウの おくちに ある という\lポケモン リーグ\pそこに あつまるのは\nすごうでの トレーナー ばかり ですって!$"
+	.string "とおく はなれた\nサイユウの おくちに ある という\lポケモン リーグ\pそこに あつまるのは\nすごうでの トレーナー ばかり ですって!$"
 
 VerdanturfTown_House_Text_DefeatEliteFourInARow:
-	.string "{JPN}ポケモン リーグは\nしてんのう 4にん つづけて\lしょうぶする という ルールらしいの!\pとちゅうで まけたら ひとりめ から\nやりなおし だなんて きびしいのね!$"
+	.string "ポケモン リーグは\nしてんのう 4にん つづけて\lしょうぶする という ルールらしいの!\pとちゅうで まけたら ひとりめ から\nやりなおし だなんて きびしいのね!$"
 

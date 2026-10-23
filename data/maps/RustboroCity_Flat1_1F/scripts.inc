@@ -10,8 +10,8 @@ RustboroCity_Flat1_1F_EventScript_Woman::
 	end
 
 RustboroCity_Flat1_1F_Text_EveryPokemonHasAbility:
-	.string "{JPN}ポケモンには それぞれ\nとくせい とよばれる ふしぎな ちからが\lそなわって いるんだよな$"
+	.string "ポケモンには それぞれ\nとくせい とよばれる ふしぎな ちからが\lそなわって いるんだよな$"
 
 RustboroCity_Flat1_1F_Text_PokemonStrange:
-	.string "{JPN}ほんとうに ポケモンって\nふしぎな いきもの なのね$"
+	.string "ほんとうに ポケモンって\nふしぎな いきもの なのね$"
 

@@ -36,8 +36,8 @@ MauvilleCity_Mart_EventScript_Man::
 	end
 
 MauvilleCity_Mart_Text_ItemsToTemporarilyElevateStats:
-	.string "{JPN}ポケモンが たたかっているとき\nのうりょくを いちじてきに\lたかめる どうぐが あるのじゃ\pわしが しっているのは\nプラスパワー\lディフェンダー……\pたしか ほかにも あったのう……$"
+	.string "ポケモンが たたかっているとき\nのうりょくを いちじてきに\lたかめる どうぐが あるのじゃ\pわしが しっているのは\nプラスパワー\lディフェンダー……\pたしか ほかにも あったのう……$"
 
 MauvilleCity_Mart_Text_DecisionsDetermineBattle:
-	.string "{JPN}わざを くりだすのか\nそれとも どうぐを つかうのか……\pトレーナーの はんだんで\nしょうぶが きまるのかも しれないな!$"
+	.string "わざを くりだすのか\nそれとも どうぐを つかうのか……\pトレーナーの はんだんで\nしょうぶが きまるのかも しれないな!$"
 

@@ -46,11 +46,11 @@ FallarborTown_Mart_EventScript_Skitty::
 	end
 
 FallarborTown_Mart_Text_DecidingSkittyEvolve:
-	.string "{JPN}あたしの エネコにね\nつきのいしを つかってね……\pしんか させるか どうか\nすっごい まよってるのよぉ\pしんか させると つよくなるけど\nすがたかたち かわっちゃうし……$"
+	.string "あたしの エネコにね\nつきのいしを つかってね……\pしんか させるか どうか\nすっごい まよってるのよぉ\pしんか させると つよくなるけど\nすがたかたち かわっちゃうし……$"
 
 FallarborTown_Mart_Text_Skitty:
-	.string "{JPN}エネコ『みゃおう?$"
+	.string "エネコ『みゃおう?$"
 
 FallarborTown_Mart_Text_SellNuggetIFound:
-	.string "{JPN}ひろった きんのたま……\nやっぱり うるしか ないのかなあ?\lほかに つかいみちも ないからなあ……$"
+	.string "ひろった きんのたま……\nやっぱり うるしか ないのかなあ?\lほかに つかいみちも ないからなあ……$"
 

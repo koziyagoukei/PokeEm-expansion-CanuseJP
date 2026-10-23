@@ -308,7 +308,7 @@ LittlerootTown_MaysHouse_2F_EventScript_TurnOffPlayerPC::
 	end
 
 RivalsHouse_2F_Text_MayWhoAreYou:
-	.string "{JPN}えっ……!?\n"
+	.string "えっ……!?\n"
 	.string "{JPN}あなた だれ…… なの?\p"
 	.string "{JPN}…… …… ……\n"
 	.string "{JPN}…… …… ……\p"
@@ -338,11 +338,11 @@ RivalsHouse_2F_Text_MayWhoAreYou:
 
 
 RivalsHouse_2F_Text_MayGettingReady:
-	.string "{JPN}ポケモンは たいりょく まんたん!\n"
+	.string "ポケモンは たいりょく まんたん!\n"
 	.string "{JPN}どうぐも これで よし……と!$"
 
 RivalsHouse_2F_Text_BrendanWhoAreYou:
-	.string "{JPN}おまえ……\p"
+	.string "おまえ……\p"
 	.string "{JPN}だれ?\p"
 	.string "{JPN}あっ おまえが となりに\n"
 	.string "{JPN}ひっこして きた {PLAYER}か……\p"
@@ -367,15 +367,15 @@ RivalsHouse_2F_Text_BrendanWhoAreYou:
 	.string "{JPN}{PLAYER} また こんどな!$"
 
 RivalsHouse_2F_Text_BrendanGettingReady:
-	.string "{JPN}ポケモンは たいりょく まんたん\n"
+	.string "ポケモンは たいりょく まんたん\n"
 	.string "{JPN}どうぐも これで だいじょうぶ ……か$"
 
 RivalsHouse_2F_Text_ItsRivalsPokeBall:
-	.string "{JPN}{RIVAL}の モンスターボールだ!\p"
+	.string "{RIVAL}の モンスターボールだ!\p"
 	.string "{JPN}このままに しておこう……$"
 
 RivalsHouse_2F_Text_MayJustCheckingMyPokedex:
-	.string "{JPN}ハルカ『{PLAYER}{KUN}!\p"
+	.string "ハルカ『{PLAYER}{KUN}!\p"
 	.string "{JPN}あたし いまね\n"
 	.string "{JPN}ポケモンずかんを ながめていたの\p"
 	.string "{JPN}みつけた だけで\n"
@@ -386,16 +386,16 @@ RivalsHouse_2F_Text_MayJustCheckingMyPokedex:
 	.string "{JPN}ポケモン つかまえに いこうかな?$"
 
 RivalsHouse_2F_Text_MayWhereShouldIGoNext:
-	.string "{JPN}ハルカ『こんどは どこに\n"
+	.string "ハルカ『こんどは どこに\n"
 	.string "{JPN}ポケモン つかまえに いこうかな?\p"
 	.string "{JPN}いった さきで また\n"
 	.string "{JPN}{PLAYER}{KUN}と であったりして!?$"
 
 RivalsHouse_2F_Text_BrendanJustCheckingMyPokedex:
-	.string "{JPN}ユウキ『{PLAYER}か\pいま ポケモンずかんを\nチェック してたんだ\pまだまだ つかまえていない\nポケモンも いるけど\lかなり いい かんじだろ?\pこうして ずかんを みていると\nまた ぼうけんに いきたくなるな$"
+	.string "ユウキ『{PLAYER}か\pいま ポケモンずかんを\nチェック してたんだ\pまだまだ つかまえていない\nポケモンも いるけど\lかなり いい かんじだろ?\pこうして ずかんを みていると\nまた ぼうけんに いきたくなるな$"
 
 RivalsHouse_2F_Text_BrendanWhereShouldIGoNext:
-	.string "{JPN}ユウキ『こんどは どこで\n"
+	.string "ユウキ『こんどは どこで\n"
 	.string "{JPN}ポケモン つかまえるか なやむな……\p"
 	.string "{JPN}もし ポケモン つかまえているとき\n"
 	.string "{JPN}{PLAYER}と であったら\l"

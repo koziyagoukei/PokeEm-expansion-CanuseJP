@@ -24,7 +24,7 @@ MossdeepCity_PokemonCenter_1F_EventScript_Girl::
 	end
 
 MossdeepCity_PokemonCenter_1F_Text_GymLeaderDuoFormidable:
-	.string "{JPN}この まちの ジムリーダー\nなんといっても あの コンビネーションは\lさいこう! さすが! って かんじよ$"
+	.string "この まちの ジムリーダー\nなんといっても あの コンビネーションは\lさいこう! さすが! って かんじよ$"
 
 MossdeepCity_PokemonCenter_1F_Text_AbilitiesMightChangeMoves:
-	.string "{JPN}ポケモンの とくせいに よっては\nわざの いりょくが かわったり\lまったく きかなかったり するよ!$"
+	.string "ポケモンの とくせいに よっては\nわざの いりょくが かわったり\lまったく きかなかったり するよ!$"

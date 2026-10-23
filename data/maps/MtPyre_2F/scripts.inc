@@ -43,50 +43,50 @@ MtPyre_2F_EventScript_Zander::
 	end
 
 MtPyre_2F_Text_MemoriesOfSkitty:
-	.string "{JPN}かわいかった エネコとの おもいで……\nおもいだすだけで なみだが あふれる……"
+	.string "かわいかった エネコとの おもいで……\nおもいだすだけで なみだが あふれる……"
 	.string "$"
 
 MtPyre_2F_Text_TumbledFromFloorAbove:
-	.string "{JPN}アイタタタ…… ゆかの そこかしこに\nあなが あいているのに きづかないで\lおじさん うえから おちてしまったよ"
+	.string "アイタタタ…… ゆかの そこかしこに\nあなが あいているのに きづかないで\lおじさん うえから おちてしまったよ"
 	.string ""
 	.string ""
 	.string "$"
 
 MtPyre_2F_Text_MarkIntro:
-	.string "{JPN}おまえも ポケモン さがしに きたのか?\nあとから きた くせに なまいきだ!"
+	.string "おまえも ポケモン さがしに きたのか?\nあとから きた くせに なまいきだ!"
 	.string "$"
 
 MtPyre_2F_Text_MarkDefeat:
-	.string "{JPN}ふええええええっ!\nゆるして くださいーっ!"
+	.string "ふええええええっ!\nゆるして くださいーっ!"
 	.string "$"
 
 MtPyre_2F_Text_MarkPostBattle:
-	.string "{JPN}めったに ひとが はいらない やま だから\nめずらしい ポケモンが いると おもってさ"
+	.string "めったに ひとが はいらない やま だから\nめずらしい ポケモンが いると おもってさ"
 	.string "$"
 
 MtPyre_2F_Text_LukeIntro:
-	.string "{JPN}テル『きもだめし するんだ!\nぼくの かっこいい ところ みれば\lかのじょ もっと ほれるからね!\pそうだ! きみを たおして\nかっこいい ところ みせちゃおう!"
+	.string "テル『きもだめし するんだ!\nぼくの かっこいい ところ みれば\lかのじょ もっと ほれるからね!\pそうだ! きみを たおして\nかっこいい ところ みせちゃおう!"
 	.string ""
 	.string ""
 	.string ""
 	.string "$"
 
 MtPyre_2F_Text_LukeDefeat:
-	.string "{JPN}テル『あっちゃー$"
+	.string "テル『あっちゃー$"
 
 MtPyre_2F_Text_LukePostBattle:
-	.string "{JPN}テル『まけちゃったけど だいじょうぶ!\nぼくが いるからさ\lきもだめし なんて へっちゃら だよ!"
+	.string "テル『まけちゃったけど だいじょうぶ!\nぼくが いるからさ\lきもだめし なんて へっちゃら だよ!"
 	.string ""
 	.string "$"
 
 MtPyre_2F_Text_LukeNotEnoughMons:
-	.string "{JPN}テル『ぼくと しょうぶ するなら\nもっと ポケモン つれてきなよ!\pそうでないと かのじょの まえで\nいいところ みせられない じゃないか!"
+	.string "テル『ぼくと しょうぶ するなら\nもっと ポケモン つれてきなよ!\pそうでないと かのじょの まえで\nいいところ みせられない じゃないか!"
 	.string ""
 	.string ""
 	.string "$"
 
 MtPyre_2F_Text_DezIntro:
-	.string "{JPN}マコ『かれしと きもだめしに きたの\nすっごく こわいけど\lかれしが いるから だいじょうぶ!\pそうだ! あなたを たおす\nかれしの かっこいい ところ みせて!"
+	.string "マコ『かれしと きもだめしに きたの\nすっごく こわいけど\lかれしが いるから だいじょうぶ!\pそうだ! あなたを たおす\nかれしの かっこいい ところ みせて!"
 	.string ""
 	.string ""
 	.string ""
@@ -94,41 +94,41 @@ MtPyre_2F_Text_DezIntro:
 	.string "$"
 
 MtPyre_2F_Text_DezDefeat:
-	.string "{JPN}マコ『あーん こわーい!$"
+	.string "マコ『あーん こわーい!$"
 
 MtPyre_2F_Text_DezPostBattle:
-	.string "{JPN}マコ『あたしたち ラブラブだから\nまけても へいき なんだもん!"
+	.string "マコ『あたしたち ラブラブだから\nまけても へいき なんだもん!"
 	.string "$"
 
 MtPyre_2F_Text_DezNotEnoughMons:
-	.string "{JPN}マコ『あたしたちと たたかいたいなら\nせめて 2ひきは ポケモン いないと\pあたしの かれし つよいんだから\nいっぴきじゃ はなしに ならないわ"
+	.string "マコ『あたしたちと たたかいたいなら\nせめて 2ひきは ポケモン いないと\pあたしの かれし つよいんだから\nいっぴきじゃ はなしに ならないわ"
 	.string ""
 	.string ""
 	.string "$"
 
 MtPyre_2F_Text_LeahIntro:
-	.string "{JPN}みかけぬ かおね……\nなにも おきない うちに かえりなさい!"
+	.string "みかけぬ かおね……\nなにも おきない うちに かえりなさい!"
 	.string "$"
 
 MtPyre_2F_Text_LeahDefeat:
-	.string "{JPN}むん…… てごわいのね"
+	.string "むん…… てごわいのね"
 	.string "$"
 
 MtPyre_2F_Text_LeahPostBattle:
-	.string "{JPN}ひい おばあさまの だい から\nここで トレーナーを やっているの……\lこの やまを まもっていくわ……"
+	.string "ひい おばあさまの だい から\nここで トレーナーを やっているの……\lこの やまを まもっていくわ……"
 	.string ""
 	.string ""
 	.string "$"
 
 MtPyre_2F_Text_ZanderIntro:
-	.string "{JPN}ぎっ ぎゃああああっ!\nでたあああっ!"
+	.string "ぎっ ぎゃああああっ!\nでたあああっ!"
 	.string "$"
 
 MtPyre_2F_Text_ZanderDefeat:
-	.string "{JPN}ま まけたああああっ!"
+	.string "ま まけたああああっ!"
 	.string "$"
 
 MtPyre_2F_Text_ZanderPostBattle:
-	.string "{JPN}な なにかが うごく たびに\nビクっと するよ\lここで しゅぎょう するんじゃ なかったよ"
+	.string "な なにかが うごく たびに\nビクっと するよ\lここで しゅぎょう するんじゃ なかったよ"
 	.string ""
 	.string "$"

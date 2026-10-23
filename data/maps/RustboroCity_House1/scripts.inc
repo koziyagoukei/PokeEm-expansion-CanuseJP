@@ -37,14 +37,14 @@ RustboroCity_House1_Text_PleaseBeGoodToMyPokemon:
 	.string "{JPN}えへへ……\nちゃんと かわいがってね$"
 
 RustboroCity_House1_Text_DoesntLookLikeMonToMe:
-	.string "{JPN}えー どうみても {STR_VAR_1}に\nみえないんだけど……$"
+	.string "えー どうみても {STR_VAR_1}に\nみえないんだけど……$"
 
 RustboroCity_House1_Text_YouDontWantToThatsOkay:
-	.string "{JPN}あ いやなら いいけど……\nせっかく かわいい ポケモンなのに$"
+	.string "あ いやなら いいけど……\nせっかく かわいい ポケモンなのに$"
 
 RustboroCity_House1_Text_AnyPokemonCanBeCute:
-	.string "{JPN}だいじに そだてると\nどんな ポケモンも すごく かわいいよねー$"
+	.string "だいじに そだてると\nどんな ポケモンも すごく かわいいよねー$"
 
 RustboroCity_House1_Text_AllSortsOfPlaces:
-	.string "{JPN}いろんな ばしょに\nいろんな ポケモンが いる\lいろんな ひとも いる\pそれが たのしみで わしも\nいろんな ところに でかけるのさ!$"
+	.string "いろんな ばしょに\nいろんな ポケモンが いる\lいろんな ひとも いる\pそれが たのしみで わしも\nいろんな ところに でかけるのさ!$"
 

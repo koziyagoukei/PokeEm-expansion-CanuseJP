@@ -74,23 +74,23 @@ LilycoveCity_CoveLilyMotel_1F_Movement_OwnerReturn:
 	step_end
 
 LilycoveCity_CoveLilyMotel_1F_Text_GuestsDoubledByMascot:
-	.string "{JPN}ほほう ポケモンの みりょくで\nおきゃくさまが ばいぞう したって!?\pそうかあ うちも かわいい ポケモンを\nりょかんの マスコットに すれば\pもっと たくさんの おきゃくさまが\nとまりに きてくれるように なるかな?$"
+	.string "ほほう ポケモンの みりょくで\nおきゃくさまが ばいぞう したって!?\pそうかあ うちも かわいい ポケモンを\nりょかんの マスコットに すれば\pもっと たくさんの おきゃくさまが\nとまりに きてくれるように なるかな?$"
 
 LilycoveCity_CoveLilyMotel_1F_Text_NoGuestsWithTeamAqua:
-	.string "{JPN}あ ごめん ごめん!\nテレビに むちゅう だったもんで!\pアクアだん とかいう れんちゅうが\nまちに やってきた おかげで\lかんこうきゃくも さっぱり なんだよね$"
+	.string "あ ごめん ごめん!\nテレビに むちゅう だったもんで!\pアクアだん とかいう れんちゅうが\nまちに やってきた おかげで\lかんこうきゃくも さっぱり なんだよね$"
 
 LilycoveCity_CoveLilyMotel_1F_Text_CantSeeTheTV:
-	.string "{JPN}あー ちょっと じゃま しないで!\nテレビが みえない じゃないか!$"
+	.string "あー ちょっと じゃま しないで!\nテレビが みえない じゃないか!$"
 
 LilycoveCity_CoveLilyMotel_1F_Text_MonFoundLostItem:
-	.string "{JPN}なんと! なくした どうぐを\nポケモンが ひろって きたって!?\pそうかあ うちも そんな\nかしこい ポケモンが いてくれれば\pおきゃくさまの なくした ものも\nすぐに みつかるのになぁ……$"
+	.string "なんと! なくした どうぐを\nポケモンが ひろって きたって!?\pそうかあ うちも そんな\nかしこい ポケモンが いてくれれば\pおきゃくさまの なくした ものも\nすぐに みつかるのになぁ……$"
 
 LilycoveCity_CoveLilyMotel_1F_Text_HeardAquaHideoutBusted:
-	.string "{JPN}あ ごめん ごめん!\nテレビに むちゅう だったもんで!\pそういえば だれかが アクアだんの\nアジトを かいめつ させた らしいね!\pおかげで さっき だんたいさん からの\nしゅくはく よやくが はいったよ!\pたしか…… ゲームなんとか っていう\nかいしゃ だったかな……$"
+	.string "あ ごめん ごめん!\nテレビに むちゅう だったもんで!\pそういえば だれかが アクアだんの\nアジトを かいめつ させた らしいね!\pおかげで さっき だんたいさん からの\nしゅくはく よやくが はいったよ!\pたしか…… ゲームなんとか っていう\nかいしゃ だったかな……$"
 
 LilycoveCity_CoveLilyMotel_1F_Text_HouseSittingMonCaughtBurglar:
-	.string "{JPN}なんと! しのびこんだ どろぼうを\nるすばんの ポケモンが つかまえたって!?\pそうかあ うちも ガードマンの かわりに\nつよい ポケモンが いてくれれば\pおきゃくさまの あんぜんを\nまもることが できそうだなぁ……$"
+	.string "なんと! しのびこんだ どろぼうを\nるすばんの ポケモンが つかまえたって!?\pそうかあ うちも ガードマンの かわりに\nつよい ポケモンが いてくれれば\pおきゃくさまの あんぜんを\nまもることが できそうだなぁ……$"
 
 LilycoveCity_CoveLilyMotel_1F_Text_BetterGetWorkingOnGuestsDinner:
-	.string "{JPN}あ ごめん ごめん!\nテレビに むちゅう だったもんで!\pそういえば さっき\nだんたいさん が とうちゃく したよ!\pゲームフリークって いうから\nゲームの かいしゃの ひとたち かなぁ?\lああ ごはんの じゅんびを しなくちゃ……$"
+	.string "あ ごめん ごめん!\nテレビに むちゅう だったもんで!\pそういえば さっき\nだんたいさん が とうちゃく したよ!\pゲームフリークって いうから\nゲームの かいしゃの ひとたち かなぁ?\lああ ごはんの じゅんびを しなくちゃ……$"
 

@@ -219,59 +219,59 @@ LilycoveCity_LilycoveMuseum_2F_EventScript_ShowToughPainting::
 	end
 
 LilycoveCity_LilycoveMuseum_2F_Text_ThisIsExhibitHall:
-	.string "{JPN}ここは とくべつ てんじしつ です$"
+	.string "ここは とくべつ てんじしつ です$"
 
 LilycoveCity_LilycoveMuseum_2F_Text_ExplainExhibitHall:
-	.string "{JPN}ごらんの とおり まだ\nえが かざられて おりません\pここには 1かいに あるような\nいわゆる めいが といった ものとは\lちがう えを かざりたいの ですよ!\pふるい めいが ばかりが\nげいじゅつ なのでは ありません!\pこの てんじしつ には……\pいまにも ポケモンが とびだして きそうな\nモダンで いきいきとした さくひんを\lかざって みたいのです!$"
+	.string "ごらんの とおり まだ\nえが かざられて おりません\pここには 1かいに あるような\nいわゆる めいが といった ものとは\lちがう えを かざりたいの ですよ!\pふるい めいが ばかりが\nげいじゅつ なのでは ありません!\pこの てんじしつ には……\pいまにも ポケモンが とびだして きそうな\nモダンで いきいきとした さくひんを\lかざって みたいのです!$"
 
 LilycoveCity_LilycoveMuseum_2F_Text_PleaseObtainPaintingsForExhibit:
-	.string "{JPN}つい ながながと しつれい しました\pあなたは まだ おわかいし\nたびを なさって いる ようだから\pいきいきとした ポケモンや\nそれを えがいた すてきな さくひんに\lであわれる かも しれません!\pもし そんな さくひんに であったら\nそのえを ここに かざれる ように\lあなたから おねがい して くださると\lたいへん うれしいです$"
+	.string "つい ながながと しつれい しました\pあなたは まだ おわかいし\nたびを なさって いる ようだから\pいきいきとした ポケモンや\nそれを えがいた すてきな さくひんに\lであわれる かも しれません!\pもし そんな さくひんに であったら\nそのえを ここに かざれる ように\lあなたから おねがい して くださると\lたいへん うれしいです$"
 
 LilycoveCity_LilycoveMuseum_2F_Text_WishToFillExhibit:
-	.string "{JPN}この てんじしつ には\nげんだいの いきいき とした ポケモンの\lえを かざりたい ものです$"
+	.string "この てんじしつ には\nげんだいの いきいき とした ポケモンの\lえを かざりたい ものです$"
 
 LilycoveCity_LilycoveMuseum_2F_Text_ThanksAddedNewPainting:
-	.string "{JPN}おかげさまで えを\nかざる ことが できましたよ!\pあなたの ポケモン なんですって ね!\nほんとうに すばらしい です!\pどうも ありがとう……!$"
+	.string "おかげさまで えを\nかざる ことが できましたよ!\pあなたの ポケモン なんですって ね!\nほんとうに すばらしい です!\pどうも ありがとう……!$"
 
 LilycoveCity_LilycoveMuseum_2F_Text_ItsYouPlayer:
-	.string "{JPN}あ あなた! {PLAYER}さん!$"
+	.string "あ あなた! {PLAYER}さん!$"
 
 LilycoveCity_LilycoveMuseum_2F_Text_PaintingsAttractedMoreGuests:
-	.string "{JPN}どうです みて ください!\nこの すばらしい さくひん たちを!\pどれも おたがいに\nひけをとらない すばらしさ!\pこの えの おかげで びじゅつかんに\nこられる かたも ふえたんです!\pほんとうに ありがとう {PLAYER}さん!\nわたしの ゆめが かないました!$"
+	.string "どうです みて ください!\nこの すばらしい さくひん たちを!\pどれも おたがいに\nひけをとらない すばらしさ!\pこの えの おかげで びじゅつかんに\nこられる かたも ふえたんです!\pほんとうに ありがとう {PLAYER}さん!\nわたしの ゆめが かないました!$"
 
 LilycoveCity_LilycoveMuseum_2F_Text_TokenOfGratitude:
-	.string "{JPN}……これは わたしからの\nおれいの きもち です!$"
+	.string "……これは わたしからの\nおれいの きもち です!$"
 
 LilycoveCity_LilycoveMuseum_2F_Text_KeepThisForYou:
-	.string "{JPN}それでは また いらした ときに\nさしあげましょう$"
+	.string "それでは また いらした ときに\nさしあげましょう$"
 
 LilycoveCity_LilycoveMuseum_2F_Text_HonorToHaveYouVisit:
-	.string "{JPN}やあ これは {PLAYER}さん!\pおいそがしい たびの あいまに\nおたちより くださって こうえいです!\pどうぞ ごゆっくり おすごしくださいね$"
+	.string "やあ これは {PLAYER}さん!\pおいそがしい たびの あいまに\nおたちより くださって こうえいです!\pどうぞ ごゆっくり おすごしくださいね$"
 
 LilycoveCity_LilycoveMuseum_2F_Text_ItsPinkPictureFrame:
-	.string "{JPN}ももいろの かざりが ついた がくぶちだ!$"
+	.string "ももいろの かざりが ついた がくぶちだ!$"
 
 LilycoveCity_LilycoveMuseum_2F_Text_ItsYellowPictureFrame:
-	.string "{JPN}きいろの かざりが ついた がくぶちだ!$"
+	.string "きいろの かざりが ついた がくぶちだ!$"
 
 LilycoveCity_LilycoveMuseum_2F_Text_ItsBluePictureFrame:
-	.string "{JPN}あおい かざりが ついた がくぶちだ!$"
+	.string "あおい かざりが ついた がくぶちだ!$"
 
 LilycoveCity_LilycoveMuseum_2F_Text_ItsRedPictureFrame:
-	.string "{JPN}あかい かざりが ついた がくぶちだ!$"
+	.string "あかい かざりが ついた がくぶちだ!$"
 
 LilycoveCity_LilycoveMuseum_2F_Text_ItsGreenPictureFrame:
-	.string "{JPN}みどりいろの かざりが ついた がくぶちだ!$"
+	.string "みどりいろの かざりが ついた がくぶちだ!$"
 
 LilycoveCity_LilycoveMuseum_2F_Text_ItsPaintingOfPokemon:
-	.string "{JPN}ポケモンの えが かざってある!$"
+	.string "ポケモンの えが かざってある!$"
 
 LilycoveCity_LilycoveMuseum_2F_Text_NewPaintingsSurprisedMe:
-	.string "{JPN}ひさしぶりに きて みたら 2かいにも\nえが かざって あって びっくり!\pいいなあ あたしの ポケモンも\nこんなふうに すてきに かいて ほしいな$"
+	.string "ひさしぶりに きて みたら 2かいにも\nえが かざって あって びっくり!\pいいなあ あたしの ポケモンも\nこんなふうに すてきに かいて ほしいな$"
 
 LilycoveCity_LilycoveMuseum_2F_Text_NewPaintingsRatherAmusing:
-	.string "{JPN}ほう…… ここが さいきん わだいの\nポケモンの えが ある ところか……\pなるほど あたらしい えが いっぱいで\nなかなか おもしろい のう……$"
+	.string "ほう…… ここが さいきん わだいの\nポケモンの えが ある ところか……\pなるほど あたらしい えが いっぱいで\nなかなか おもしろい のう……$"
 
 LilycoveCity_LilycoveMuseum_2F_Text_ThesePaintingsOfYourPokemon:
-	.string "{JPN}へえー! これって\nきみの ポケモンの えなんだ!\pそれって トレーナー として\nさいこうの しあわせ だよな!$"
+	.string "へえー! これって\nきみの ポケモンの えなんだ!\pそれって トレーナー として\nさいこうの しあわせ だよな!$"
 

@@ -174,23 +174,23 @@ Route114_EventScript_Kai::
 	end
 
 Route114_Text_AllMyMonDoesIsRoarTakeThis:
-	.string "{JPN}わたしの ポケモン ほえてばかりで\nみんなが にげてしまって……\pあなた よかったら\nこの わざマシン もらってください$"
+	.string "わたしの ポケモン ほえてばかりで\nみんなが にげてしまって……\pあなた よかったら\nこの わざマシン もらってください$"
 
 Route114_Text_ExplainRoar:
-	.string "{JPN}わざマシン05の なかみは ほえる です\n"
+	.string "わざマシン05の なかみは ほえる です\n"
 	.string "ほえると ポケモンも にげだすのです$"
 
 Route114_Text_Poochyena:
-	.string "{JPN}ばうっ！！ ばばうっ！！$"
+	.string "ばうっ！！ ばばうっ！！$"
 
 Route114_Text_MeteorFallsSign:
-	.string "{JPN}ここは りゅうせいのたき\n"
+	.string "ここは りゅうせいのたき\n"
 	.string "とおりぬけると カナズミシティ$"
 
 Route114_Text_FossilManiacsHouseSign:
-	.string "{JPN}「かせきマニアの いえ」\n"
+	.string "「かせきマニアの いえ」\n"
 	.string "めずらしい かせき ください！$"
 
 Route114_Text_LanettesHouse:
-	.string "{JPN}「マユミの いえ」$"
+	.string "「マユミの いえ」$"
 

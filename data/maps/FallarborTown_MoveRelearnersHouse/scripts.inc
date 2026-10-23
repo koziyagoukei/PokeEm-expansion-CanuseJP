@@ -58,26 +58,26 @@ FallarborTown_MoveRelearnersHouse_EventScript_ComeBackWithHeartScale::
 	end
 
 FallarborTown_MoveRelearnersHouse_Text_ImTheMoveTutor:
-	.string "{JPN}ぼく ポケモン わざマニア\pポケモンが せいちょうして おぼえていく\nわざを すべて しっていて\lポケモンに おしえることが できるんだ!\pぼくが いま あつめている\nハートのウロコを くれたら\lしってる わざを おしえてあげるよ!$"
+	.string "ぼく ポケモン わざマニア\pポケモンが せいちょうして おぼえていく\nわざを すべて しっていて\lポケモンに おしえることが できるんだ!\pぼくが いま あつめている\nハートのウロコを くれたら\lしってる わざを おしえてあげるよ!$"
 
 FallarborTown_MoveRelearnersHouse_Text_ThatsAHeartScaleWantMeToTeachMove:
-	.string "{JPN}おおっ!\nそれは まさしく ハートのウロコ!\pわざを おぼえさせたいんだね?$"
+	.string "おおっ!\nそれは まさしく ハートのウロコ!\pわざを おぼえさせたいんだね?$"
 
 FallarborTown_MoveRelearnersHouse_Text_TutorWhichMon:
-	.string "{JPN}どの ポケモンに するんだい?$"
+	.string "どの ポケモンに するんだい?$"
 
 FallarborTown_MoveRelearnersHouse_Text_TeachWhichMove:
-	.string "{JPN}どの わざに するんだい?$"
+	.string "どの わざに するんだい?$"
 
 FallarborTown_MoveRelearnersHouse_Text_DontHaveMoveToTeachPokemon:
-	.string "{JPN}ごめんね……\pぼくが その ポケモンに\nおしえられる わざは ないみたいだよ$"
+	.string "ごめんね……\pぼくが その ポケモンに\nおしえられる わざは ないみたいだよ$"
 
 FallarborTown_MoveRelearnersHouse_Text_HandedOverHeartScale:
-	.string "{JPN}{PLAYER}は おれいに\nハートのウロコを 1まい あげた!$"
+	.string "{PLAYER}は おれいに\nハートのウロコを 1まい あげた!$"
 
 FallarborTown_MoveRelearnersHouse_Text_ComeBackWithHeartScale:
-	.string "{JPN}おぼえさせたい わざが あったら\nハートのウロコを もってきてね!$"
+	.string "おぼえさせたい わざが あったら\nハートのウロコを もってきてね!$"
 
 FallarborTown_MoveRelearnersHouse_Text_CantTeachEgg:
-	.string "{JPN}えっ?\nタマゴに おしえられる わざは ないよ$"
+	.string "えっ?\nタマゴに おしえられる わざは ないよ$"
 

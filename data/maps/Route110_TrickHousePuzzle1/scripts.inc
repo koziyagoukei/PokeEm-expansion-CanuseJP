@@ -37,32 +37,32 @@ Route110_TrickHousePuzzle1_EventScript_Robin::
 	end
 
 Route110_TrickHousePuzzle1_Text_WroteSecretCodeLockOpened::
-	.string "{JPN}{PLAYER}は あいことばを\nとびらに かきつけた!\p「カラクリだいおう さま すてき」\p…… …… ……\pかぎの はずれる おとがした!$"
+	.string "{PLAYER}は あいことばを\nとびらに かきつけた!\p「カラクリだいおう さま すてき」\p…… …… ……\pかぎの はずれる おとがした!$"
 
 Route110_TrickHousePuzzle1_Text_SallyIntro:
-	.string "{JPN}おぼえさせた ばかりの いあいぎりで\nきって きって きりまくりよ!$"
+	.string "おぼえさせた ばかりの いあいぎりで\nきって きって きりまくりよ!$"
 
 Route110_TrickHousePuzzle1_Text_SallyDefeat:
-	.string "{JPN}ほんき ださないでよー!$"
+	.string "ほんき ださないでよー!$"
 
 Route110_TrickHousePuzzle1_Text_SallyPostBattle:
-	.string "{JPN}きっても きっても あきないわ!$"
+	.string "きっても きっても あきないわ!$"
 
 Route110_TrickHousePuzzle1_Text_EddieIntro:
-	.string "{JPN}へんな やしきに\nまよいこんじゃった……$"
+	.string "へんな やしきに\nまよいこんじゃった……$"
 
 Route110_TrickHousePuzzle1_Text_EddieDefeat:
-	.string "{JPN}おまけに まけちゃった……$"
+	.string "おまけに まけちゃった……$"
 
 Route110_TrickHousePuzzle1_Text_EddiePostBattle:
-	.string "{JPN}さらに まよっちゃった……\nでられない……$"
+	.string "さらに まよっちゃった……\nでられない……$"
 
 Route110_TrickHousePuzzle1_Text_RobinIntro:
-	.string "{JPN}カラクリだいおう って\nなにもの なのかしら?$"
+	.string "カラクリだいおう って\nなにもの なのかしら?$"
 
 Route110_TrickHousePuzzle1_Text_RobinDefeat:
-	.string "{JPN}きを とられていたら\nまけちゃったわ!$"
+	.string "きを とられていたら\nまけちゃったわ!$"
 
 Route110_TrickHousePuzzle1_Text_RobinPostBattle:
-	.string "{JPN}つよいわ!\nあなたも なにもの なの?$"
+	.string "つよいわ!\nあなたも なにもの なの?$"
 

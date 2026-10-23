@@ -695,76 +695,76 @@ Route110_TrickHouseEntrance_EventScript_DoHidingSpotSparkle::
 	return
 
 Route110_TrickHouseEntrance_Text_YoureBeingWatched:
-	.string "{JPN}だれかの しせんを かんじる…$"
+	.string "だれかの しせんを かんじる…$"
 
 Route110_TrickHouseEntrance_Text_ConcealedBeneathDesk:
-	.string "{JPN}む むむ…!\pなぜ わがはいが つくえの したに\nかくれていると わかった? ……できる!$"
+	.string "む むむ…!\pなぜ わがはいが つくえの したに\nかくれていると わかった? ……できる!$"
 
 Route110_TrickHouseEntrance_Text_ConcealedBehindTree:
-	.string "{JPN}む むむ…!\pなぜ わがはいが きの うしろに\nかくれていると わかった? ……できる!$"
+	.string "む むむ…!\pなぜ わがはいが きの うしろに\nかくれていると わかった? ……できる!$"
 
 Route110_TrickHouseEntrance_Text_ConcealedInDresser:
-	.string "{JPN}む むむ…!\pなぜ わがはいが タンスの なかに\nかくれていると わかった? ……できる!$"
+	.string "む むむ…!\pなぜ わがはいが タンスの なかに\nかくれていると わかった? ……できる!$"
 
 Route110_TrickHouseEntrance_Text_ConealedBeyondWindow:
-	.string "{JPN}む むむ…!\pなぜ わがはいが まどの むこうに\nかくれていると わかった? ……できる!$"
+	.string "む むむ…!\pなぜ わがはいが まどの むこうに\nかくれていると わかった? ……できる!$"
 
 Route110_TrickHouseEntrance_Text_ConcealedInPlanter:
-	.string "{JPN}む むむ…!\pなぜ わがはいが うえきばちの なかに\nかくれていると わかった? ……できる!$"
+	.string "む むむ…!\pなぜ わがはいが うえきばちの なかに\nかくれていると わかった? ……できる!$"
 
 Route110_TrickHouseEntrance_Text_ConcealedInCupboard:
-	.string "{JPN}む むむ…!\pなぜ わがはいが とだなの なかに\nかくれていると わかった? ……できる!$"
+	.string "む むむ…!\pなぜ わがはいが とだなの なかに\nかくれていると わかった? ……できる!$"
 
 Route110_TrickHouseEntrance_Text_ConcealedBehindWindow:
-	.string "{JPN}む むむ…!\pなぜ わがはいが まどの うらに\nかくれていると わかった? ……できる!$"
+	.string "む むむ…!\pなぜ わがはいが まどの うらに\nかくれていると わかった? ……できる!$"
 
 Route110_TrickHouseEntrance_Text_ConcealedBeneathCushion:
-	.string "{JPN}む むむ…!\pなぜ わがはいが ざぶとんの したに\nかくれていると わかった? ……できる!$"
+	.string "む むむ…!\pなぜ わがはいが ざぶとんの したに\nかくれていると わかった? ……できる!$"
 
 Route110_TrickHouseEntrance_Text_TheyCallMeTrickMaster:
-	.string "{JPN}わがはい こそ!\pホウエンちほう さいだいの\nなぞの じんぶつ\lひと よんで……\pカラクリだいおう!\nわははは! はじめまして!$"
+	.string "わがはい こそ!\pホウエンちほう さいだいの\nなぞの じんぶつ\lひと よんで……\pカラクリだいおう!\nわははは! はじめまして!$"
 
 Route110_TrickHouseEntrance_Text_ComeToChallengeTrickHouse:
-	.string "{JPN}あんた わがはいの カラクリやしきに\nちょうせんしに きたって\lわけだろう そうだろう!\lよしっ ちょうせんを みとめよう!\pそこの かけじくから はいって\nちょうせん するがいい!\lわがはいは おくの へやで まってるぞ!$"
+	.string "あんた わがはいの カラクリやしきに\nちょうせんしに きたって\lわけだろう そうだろう!\lよしっ ちょうせんを みとめよう!\pそこの かけじくから はいって\nちょうせん するがいい!\lわがはいは おくの へやで まってるぞ!$"
 
 Route110_TrickHouseEntrance_Text_ItsAScroll:
-	.string "{JPN}かけじくだ!$"
+	.string "かけじくだ!$"
 
 Route110_TrickHouseEntrance_Text_GoInHoleBehindScroll:
-	.string "{JPN}かけじくの うらを のぞくと\nおおきい あなが あった!\pおくに すすんで みますか?$"
+	.string "かけじくの うらを のぞくと\nおおきい あなが あった!\pおくに すすんで みますか?$"
 
 Route110_TrickHouseEntrance_Text_LeavingOnJourneyNote:
-	.string "{JPN}かけじくの うえに メモが はってある\p「たびに でます…… さがさないでね\nカラクリだいおう」$"
+	.string "かけじくの うえに メモが はってある\p「たびに でます…… さがさないでね\nカラクリだいおう」$"
 
 Route110_TrickHouseEntrance_Text_NextTimeUseThisTrick:
-	.string "{JPN}さて こんどの しかけは\nあんなことや こんなことを……\pうふふ われながら\nむずかしいぞ… むふふ$"
+	.string "さて こんどの しかけは\nあんなことや こんなことを……\pうふふ われながら\nむずかしいぞ… むふふ$"
 
 Route110_TrickHouseEntrance_Text_InMidstOfDevisingNewChallenges:
-	.string "{JPN}わっ なんだ! あんたか!\pいま まだ つぎの しかけを\nかんがえちゅう なんだよ!\pもっと わがはいに\nかんがえる じかんを\lあたえて くれたって いいだろ!\lもうちょっと したら また きてくれ!$"
+	.string "わっ なんだ! あんたか!\pいま まだ つぎの しかけを\nかんがえちゅう なんだよ!\pもっと わがはいに\nかんがえる じかんを\lあたえて くれたって いいだろ!\lもうちょっと したら また きてくれ!$"
 
 Route110_TrickHouseEntrance_Text_YoureHereToAcceptReward:
-	.string "{JPN}おお あんた! さては このあいだの\nほうびを とりに きたんだろう そうだろう!\lよしっ いま やろう!$"
+	.string "おお あんた! さては このあいだの\nほうびを とりに きたんだろう そうだろう!\lよしっ いま やろう!$"
 
 Route110_TrickHouseEntrance_Text_DidYouNotComeToClaimReward:
-	.string "{JPN}あれ? とりに きたんじゃ ないのか?$"
+	.string "あれ? とりに きたんじゃ ないのか?$"
 
 Route110_TrickHouseEntrance_Text_MechadollWhichTent:
-	.string "{JPN}ワガハイ ハ からくりニンギョウ 5ゴウ!\nぷれぜんとヲ ウケトッテ クレナイト\lダイオウノ アトヲ オッテ イケナイヨ!\p「アカイてんと」ト「アオイてんと」\nフタツノ ウチ ドチラガ ホシイ?$"
+	.string "ワガハイ ハ からくりニンギョウ 5ゴウ!\nぷれぜんとヲ ウケトッテ クレナイト\lダイオウノ アトヲ オッテ イケナイヨ!\p「アカイてんと」ト「アオイてんと」\nフタツノ ウチ ドチラガ ホシイ?$"
 
 Route110_TrickHouseEntrance_Text_ThenFarewell:
-	.string "{JPN}ソレデハ さらば!$"
+	.string "ソレデハ さらば!$"
 
 Route110_TrickHouseEntrance_Text_PCFullAgain:
-	.string "{JPN}エッ! マタ ぱそこんガ\nイッパイ ダッテ……? アンマリダ!$"
+	.string "エッ! マタ ぱそこんガ\nイッパイ ダッテ……? アンマリダ!$"
 
 Route110_TrickHousePuzzle_Text_FoundAScroll:
-	.string "{JPN}{PLAYER}は まきものを みつけた!$"
+	.string "{PLAYER}は まきものを みつけた!$"
 
 Route110_TrickHousePuzzle_Text_MemorizedSecretCode:
-	.string "{JPN}{PLAYER}は まきものに かいてある\nあいことばを おぼえた!$"
+	.string "{PLAYER}は まきものに かいてある\nあいことばを おぼえた!$"
 
 Route110_TrickHousePuzzle_Text_SecretCodeWrittenOnIt:
-	.string "{JPN}あいことばが かいてある$"
+	.string "あいことばが かいてある$"
 
 Route110_TrickHouseEntrance_Text_DoorLockedWriteSecretCodeHere:
-	.string "{JPN}とびらには カギが かかっている!\p……よくみると とびらに もじが かいてある\n「ここに あいことばを かきつけよ」$"
+	.string "とびらには カギが かかっている!\p……よくみると とびらに もじが かいてある\n「ここに あいことばを かきつけよ」$"

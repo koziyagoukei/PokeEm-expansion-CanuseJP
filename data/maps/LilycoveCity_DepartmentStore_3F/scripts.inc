@@ -55,11 +55,11 @@ LilycoveCity_DepartmentStore_3F_EventScript_Woman::
 	end
 
 LilycoveCity_DepartmentStore_3F_Text_ItemsBestForTougheningPokemon:
-	.string "{JPN}てっとりばやく ポケモンを つよくするなら\nどうぐを あたえるのが いちばん!\pタウリンなら こうげきりょく アップ!\nリゾチウムなら とくこう アップ だぜ!$"
+	.string "てっとりばやく ポケモンを つよくするなら\nどうぐを あたえるのが いちばん!\pタウリンなら こうげきりょく アップ!\nリゾチウムなら とくこう アップ だぜ!$"
 
 LilycoveCity_DepartmentStore_3F_Text_WantMoreEndurance:
-	.string "{JPN}じょうぶな ポケモンに\nなって ほしいからね\pブロムヘキシンで ぼうぎょりょくを あげるか\nキトサンで とくぼうを あげるか\lいま かんがえている ところ なんだ$"
+	.string "じょうぶな ポケモンに\nなって ほしいからね\pブロムヘキシンで ぼうぎょりょくを あげるか\nキトサンで とくぼうを あげるか\lいま かんがえている ところ なんだ$"
 
 LilycoveCity_DepartmentStore_3F_Text_GaveCarbosToSpeedUpMon:
-	.string "{JPN}ポケモンにね\nインドメタシンを あげたら\lすばやさが あがったの!$"
+	.string "ポケモンにね\nインドメタシンを あげたら\lすばやさが あがったの!$"
 

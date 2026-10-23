@@ -64,5 +64,5 @@ PokemonLeague_EventScript_DoLightingEffect::
 	return
 
 Text_VoiceRangOutDontRunAway::
-	.string "{JPN}どこからか こえが きこえる\n"
+	.string "どこからか こえが きこえる\n"
 	.string "にげるんじゃない!$"

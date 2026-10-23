@@ -476,7 +476,7 @@ Route119_EventScript_ScottWonAtFortreeGymCall::
 	end
 
 Route119_Text_MayIntro:
-	.string "{JPN}ハルカ『{PLAYER}{KUN}!\nどこに いたのよ? さがしたわ!\pどれくらい つよく なったのか\nちょっと ためして あげる!\pポケモンの じゅんびは……\nいいに きまってるよね! それっ!"
+	.string "ハルカ『{PLAYER}{KUN}!\nどこに いたのよ? さがしたわ!\pどれくらい つよく なったのか\nちょっと ためして あげる!\pポケモンの じゅんびは……\nいいに きまってるよね! それっ!"
 	.string ""
 	.string ""
 	.string ""
@@ -484,18 +484,18 @@ Route119_Text_MayIntro:
 	.string "$"
 
 Route119_Text_MayDefeat:
-	.string "{JPN}あっちゃー!\n{PLAYER}{KUN} つよい じゃない!\pポケモン そだってなくて\nこまってるかも って しんぱい してたのに"
+	.string "あっちゃー!\n{PLAYER}{KUN} つよい じゃない!\pポケモン そだってなくて\nこまってるかも って しんぱい してたのに"
 	.string ""
 	.string ""
 	.string "$"
 
 Route119_Text_MayPresentForYou:
-	.string "{JPN}ハルカ『ぜんぜん だいじょうぶ!\nその ちょうしで がんばってね!\pこれは あたし からの プレゼントよ!"
+	.string "ハルカ『ぜんぜん だいじょうぶ!\nその ちょうしで がんばってね!\pこれは あたし からの プレゼントよ!"
 	.string ""
 	.string "$"
 
 Route119_Text_MayExplainFly:
-	.string "{JPN}ハルカ『そらをとぶを つかえば\nいちど いった まちなら いっしゅんで\lとんでいく ことが できるの!\pでも そらをとぶを つかうには\nヒワマキの ジムバッジが いるのよ\lこれ だいじだから わすれないでね!\pたまには そらをとぶで\nミシロに かえるのも いいんじゃない?\p{PLAYER}{KUN}の おかあさん\nしんぱい してるかも しれないし……\pじゃあ\nまた どこかで あおうね!"
+	.string "ハルカ『そらをとぶを つかえば\nいちど いった まちなら いっしゅんで\lとんでいく ことが できるの!\pでも そらをとぶを つかうには\nヒワマキの ジムバッジが いるのよ\lこれ だいじだから わすれないでね!\pたまには そらをとぶで\nミシロに かえるのも いいんじゃない?\p{PLAYER}{KUN}の おかあさん\nしんぱい してるかも しれないし……\pじゃあ\nまた どこかで あおうね!"
 	.string ""
 	.string ""
 	.string ""
@@ -508,7 +508,7 @@ Route119_Text_MayExplainFly:
 	.string "$"
 
 Route119_Text_BrendanIntro:
-	.string "{JPN}ユウキ『{PLAYER}!\nここで ポケモン さがしてたのか?\pどれくらい つよく なったか\nためして やるよ\pさあ!\nしょうぶ しょうぶ だぜ!"
+	.string "ユウキ『{PLAYER}!\nここで ポケモン さがしてたのか?\pどれくらい つよく なったか\nためして やるよ\pさあ!\nしょうぶ しょうぶ だぜ!"
 	.string ""
 	.string ""
 	.string ""
@@ -516,17 +516,17 @@ Route119_Text_BrendanIntro:
 	.string "$"
 
 Route119_Text_BrendanDefeat:
-	.string "{JPN}ふうん……\nけっこう つよく なってるんだな"
+	.string "ふうん……\nけっこう つよく なってるんだな"
 	.string "$"
 
 Route119_Text_BrendanIllGiveYouThis:
-	.string "{JPN}ユウキ『それなら どこで ポケモン\nさがしても だいじょうぶ だな\pこれ やるから つかってみろよ!"
+	.string "ユウキ『それなら どこで ポケモン\nさがしても だいじょうぶ だな\pこれ やるから つかってみろよ!"
 	.string ""
 	.string ""
 	.string "$"
 
 Route119_Text_BrendanExplainFly:
-	.string "{JPN}ユウキ『そらをとぶを つかえば\nいちど いった まちなら\lいっしゅんで とんでいける\pもっとも ヒワマキの\nジムバッジが ひつよう だけど……\pじゃ オレ さきにいくよ"
+	.string "ユウキ『そらをとぶを つかえば\nいちど いった まちなら\lいっしゅんで とんでいける\pもっとも ヒワマキの\nジムバッジが ひつよう だけど……\pじゃ オレ さきにいくよ"
 	.string ""
 	.string ""
 	.string ""
@@ -534,7 +534,7 @@ Route119_Text_BrendanExplainFly:
 	.string "$"
 
 Route119_Text_ScottWayToGoBeSeeingYou:
-	.string "{JPN}エニシダ『うふふ!\nやるねえ {PLAYER}{KUN}……!\pいま じてんしゃに のった トレーナーと\nすれちがったん だけどさ\lきみ あのトレーナーに かったんだろ?\lわかるよー!\pだって あのコ まっかな かおして\nすっごく くやしそう だったからね!\pそれにしても きみとは\nいろいろな ところで あうね!\lこの あとは ヒワマキジムに いくのかな?\pジムせんも きたい してるよ!\nじゃ また あおうね!"
+	.string "エニシダ『うふふ!\nやるねえ {PLAYER}{KUN}……!\pいま じてんしゃに のった トレーナーと\nすれちがったん だけどさ\lきみ あのトレーナーに かったんだろ?\lわかるよー!\pだって あのコ まっかな かおして\nすっごく くやしそう だったからね!\pそれにしても きみとは\nいろいろな ところで あうね!\lこの あとは ヒワマキジムに いくのかな?\pジムせんも きたい してるよ!\nじゃ また あおうね!"
 	.string ""
 	.string ""
 	.string ""
@@ -564,17 +564,17 @@ Route119_Text_ScottYouWonAtFortreeGym:
 	.string "$"
 
 Route119_Text_StayAwayFromWeatherInstitute:
-	.string "{JPN}オレたち ここで みはりを しているのさ\pおい おまえ! あぶないから\nてんき けんきゅうじょ には ちかづくなよ"
+	.string "オレたち ここで みはりを しているのさ\pおい おまえ! あぶないから\nてんき けんきゅうじょ には ちかづくなよ"
 	.string ""
 	.string "$"
 
 Route119_Text_DontGoNearWeatherInstitute:
-	.string "{JPN}みはりって いがいと ヒマだなあ……\pおい おまえ! おねがいだから\nてんき けんきゅうじょ には ちかづくなよ"
+	.string "みはりって いがいと ヒマだなあ……\pおい おまえ! おねがいだから\nてんき けんきゅうじょ には ちかづくなよ"
 	.string ""
 	.string "$"
 
 Route119_Text_ThoughtFlyByCatchingBirdMons:
-	.string "{JPN}とりポケモンを たくさん あつめて\nそれに つかまれば\lそらを とべると おもって いたんだ\pそしたらさ 「そらをとぶ」っていう\nひでんわざが あるんだってね!?\pもっと はやく しりたかったよ……"
+	.string "とりポケモンを たくさん あつめて\nそれに つかまれば\lそらを とべると おもって いたんだ\pそしたらさ 「そらをとぶ」っていう\nひでんわざが あるんだってね!?\pもっと はやく しりたかったよ……"
 	.string ""
 	.string ""
 	.string ""
@@ -583,25 +583,25 @@ Route119_Text_ThoughtFlyByCatchingBirdMons:
 	.string "$"
 
 Route119_Text_TallGrassSnaresBikeTires:
-	.string "{JPN}まいったぜ……\pながい くさが タイヤに からまるから\nじてんしゃに のれないよ……"
+	.string "まいったぜ……\pながい くさが タイヤに からまるから\nじてんしゃに のれないよ……"
 	.string ""
 	.string ""
 	.string "$"
 
 Route119_Text_CanYourMonMakeSecretBase:
-	.string "{JPN}きみの ポケモン\nひみつのちから つかって\lおおきな くさの かたまりに\lひみつきちを つくれるかい?"
+	.string "きみの ポケモン\nひみつのちから つかって\lおおきな くさの かたまりに\lひみつきちを つくれるかい?"
 	.string ""
 	.string "$"
 
 Route119_Text_RouteSignFortree:
-	.string "{JPN}ここは 119ばん どうろ\n{RIGHT_ARROW} ヒワマキシティ"
+	.string "ここは 119ばん どうろ\n{RIGHT_ARROW} ヒワマキシティ"
 	.string "$"
 
 Route119_Text_WeatherInstitute:
-	.string "{JPN}「てんき けんきゅうじょ」$"
+	.string "「てんき けんきゅうじょ」$"
 
 Route119_Text_TrainerTipsDecoration:
-	.string "{JPN}おとくな けいじばん!!\pひみつきち には グッズを\n16こ まで おけます!\pすきな グッズを えらんで\nあなただけの おきにいりの\lひみつきち を つくりましょう!"
+	.string "おとくな けいじばん!!\pひみつきち には グッズを\n16こ まで おけます!\pすきな グッズを えらんで\nあなただけの おきにいりの\lひみつきち を つくりましょう!"
 	.string ""
 	.string ""
 	.string ""

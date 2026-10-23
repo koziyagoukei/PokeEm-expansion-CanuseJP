@@ -50,11 +50,11 @@ LilycoveCity_DepartmentStore_4F_Pokemart_DefenseTMs:
 	pokemartlistend
 
 LilycoveCity_DepartmentStore_4F_Text_AttackOrDefenseTM:
-	.string "{JPN}うむむ……\pこうげきの わざ か……\nまもりの わざ か……\pどの わざマシンを\nポケモンに おぼえさせるか なやむ……$"
+	.string "うむむ……\pこうげきの わざ か……\nまもりの わざ か……\pどの わざマシンを\nポケモンに おぼえさせるか なやむ……$"
 
 LilycoveCity_DepartmentStore_4F_Text_FiftyDifferentTMs:
-	.string "{JPN}わざマシンって たくさん あるのね!\pなにかの カタログには\nぜんぶで 50しゅるい って\lかいて あったわ$"
+	.string "わざマシンって たくさん あるのね!\pなにかの カタログには\nぜんぶで 50しゅるい って\lかいて あったわ$"
 
 LilycoveCity_DepartmentStore_4F_Text_PokemonOnlyHaveFourMoves:
-	.string "{JPN}わざマシン ぜんぶ ほしいけど\nポケモン 4つしか わざ おぼえないもんな$"
+	.string "わざマシン ぜんぶ ほしいけど\nポケモン 4つしか わざ おぼえないもんな$"
 

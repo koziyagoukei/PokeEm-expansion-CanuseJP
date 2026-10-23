@@ -1,11 +1,11 @@
 gBirchDexRatingText_AreYouCurious::
-	.string "{JPN}オダマキ『おお {PLAYER}{KUN}!\pポケモンずかんの ようすを\nみせて くれるのかい?$"
+	.string "オダマキ『おお {PLAYER}{KUN}!\pポケモンずかんの ようすを\nみせて くれるのかい?$"
 
 gBirchDexRatingText_Cancel::
-	.string "{JPN}うん? みせるほど\nポケモンを つかまえて いないのか$"
+	.string "うん? みせるほど\nポケモンを つかまえて いないのか$"
 
 gBirchDexRatingText_SoYouveSeenAndCaught::
-	.string "{JPN}ふむふむ……\pみつけた ポケモン {STR_VAR_1}\nつかまえた ポケモン {STR_VAR_2} か……$"
+	.string "ふむふむ……\pみつけた ポケモン {STR_VAR_1}\nつかまえた ポケモン {STR_VAR_2} か……$"
 
 gBirchDexRatingText_LessThan10::
 	.string "{JPN}もっと くさむらに はいって\nポケモンを さがしてみると いいな!$"
@@ -71,7 +71,7 @@ gBirchDexRatingText_DexCompleted::
 	.string "{JPN}おめでとう!!\nポケモンずかんの かんせい だよ!!$"
 
 gBirchDexRatingText_OnANationwideBasis::
-	.string "{JPN}ふむふむ ぜんこくてき には……\pみつけた ポケモン {STR_VAR_1}\nつかまえた ポケモン {STR_VAR_2} だね$"
+	.string "ふむふむ ぜんこくてき には……\pみつけた ポケモン {STR_VAR_1}\nつかまえた ポケモン {STR_VAR_2} だね$"
 
 @ FRLG
 

@@ -22,11 +22,11 @@ RustboroCity_Flat2_2F_EventScript_GavePremierBall::
 	end
 
 RustboroCity_Flat2_2F_Text_DevonWasTinyInOldDays:
-	.string "{JPN}デボンもな むかしは\nちいさな ちいさな かいしゃ だったわい$"
+	.string "デボンもな むかしは\nちいさな ちいさな かいしゃ だったわい$"
 
 RustboroCity_Flat2_2F_Text_MyDaddyMadeThisYouCanHaveIt:
-	.string "{JPN}おとうさんは かいしゃで おしごと!\pこれ おとうさんが つくったんだぜ!\nでも ぼく まだ つかえないから あげるよ$"
+	.string "おとうさんは かいしゃで おしごと!\pこれ おとうさんが つくったんだぜ!\nでも ぼく まだ つかえないから あげるよ$"
 
 RustboroCity_Flat2_2F_Text_GoingToWorkAtDevonToo:
-	.string "{JPN}おとうさんは かいしゃで おしごと!\pぼくも おおきく なったら\nデボンで はたらくんだ!$"
+	.string "おとうさんは かいしゃで おしごと!\pぼくも おおきく なったら\nデボンで はたらくんだ!$"
 

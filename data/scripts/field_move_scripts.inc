@@ -44,7 +44,7 @@ EventScript_CancelCut::
 	end
 
 Text_WantToCut:
-	.string "{JPN}・・・・このきは なんだか\n"
+	.string "・・・・このきは なんだか\n"
 	.string "きれそうだ！\p"
 	.string "いあいぎりで きりますか？$"
 
@@ -278,7 +278,7 @@ Text_CantStrength:
 	.string "ポケモンの わざで おせるかも？$"
 
 Text_StrengthActivated:
-	.string "{JPN}かいりきの おかげで\n"
+	.string "かいりきの おかげで\n"
 	.string "いわを おして うごかせる！$"
 
 EventScript_UseWaterfall::
@@ -306,7 +306,7 @@ EventScript_EndWaterfall::
 	end
 
 Text_CantWaterfall:
-	.string "{JPN}おおきな おとを たてて\n"
+	.string "おおきな おとを たてて\n"
 	.string "みずが ながれおちている！$"
 
 Text_WantToWaterfall:
@@ -314,7 +314,7 @@ Text_WantToWaterfall:
 	.string "{0xB0}{0xB0}たきのぼりを つかいますか？$"
 
 Text_MonUsedWaterfall:
-	.string "{JPN}{STR_VAR_1} は\nたきのぼりを つかった！$"
+	.string "{STR_VAR_1} は\nたきのぼりを つかった！$"
 
 EventScript_UseDive::
 	lockall
@@ -400,22 +400,22 @@ EventScript_UseCutGrass::
 	goto EventScript_CutGrassCommon
 
 Text_CantDive:
-	.string "{JPN}ふかい うみだ！\n"
+	.string "ふかい うみだ！\n"
 	.string "ポケモンの わざで もぐれるかも？$"
 
 Text_WantToDive:
-	.string "{JPN}ふかい うみだ！\n"
+	.string "ふかい うみだ！\n"
 	.string "ダイビングを つかいますか？$"
 
 Text_MonUsedDive:
-	.string "{JPN}{STR_VAR_1} は ダイビングを つかった！$"
+	.string "{STR_VAR_1} は ダイビングを つかった！$"
 
 Text_CantSurface:
-	.string "{JPN}うえから ひかりが さしこんでいる！\n"
+	.string "うえから ひかりが さしこんでいる！\n"
 	.string "ポケモンの わざで ふじょうできるかも？$"
 
 Text_WantToSurface:
-	.string "{JPN}うえから ひかりが さしこんでいる！\n"
+	.string "うえから ひかりが さしこんでいる！\n"
 	.string "ダイビングを つかいますか？$"
 
 EventScript_FailSweetScent::

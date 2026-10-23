@@ -181,8 +181,8 @@ static const u32 sHiddenMonIconGfx[] = INCGFX_U32("graphics/dexnav/hidden.png", 
 
 // strings
 static const u8 sText_DexNav_NoInfo[] = _("--------");
-static const u8 sText_DexNav_CaptureToSee[] = _("{JPN}まず つかまえよう!");
-static const u8 sText_DexNav_PressRToRegister[] = _("{JPN}{R_BUTTON} とうろく");
+static const u8 sText_DexNav_CaptureToSee[] = _("まず つかまえよう!");
+static const u8 sText_DexNav_PressRToRegister[] = _("{R_BUTTON} とうろく");
 static const u8 sText_DexNav_SearchForRegisteredSpecies[] = _("{JPN}{STR_VAR_1}を さがす");
 static const u8 sText_DexNav_NotFoundHere[] = _("{JPN}ここには いないようだ!");
 static const u8 sText_ThreeQmarks[] = _("???");

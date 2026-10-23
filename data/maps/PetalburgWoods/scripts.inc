@@ -316,39 +316,39 @@ PetalburgWoods_EventScript_JamesRematch::
 	end
 
 PetalburgWoods_Text_NotAOneToBeFound:
-	.string "{JPN}うーん\nいないなあ……$"
+	.string "うーん\nいないなあ……$"
 
 PetalburgWoods_Text_HaveYouSeenShroomish:
-	.string "{JPN}ねえ きみきみ このあたりで\nキノココって ポケモン みなかった?\pおじさん あの ポケモン すき なのよね"
+	.string "ねえ きみきみ このあたりで\nキノココって ポケモン みなかった?\pおじさん あの ポケモン すき なのよね"
 	.string ""
 	.string "$"
 
 PetalburgWoods_Text_IWasGoingToAmbushYou:
-	.string "{JPN}まちぶせ していたのに\nいつまでも トウカのもりで うろうろと……\pまちくたびれたから きてやったぞ!"
+	.string "まちぶせ していたのに\nいつまでも トウカのもりで うろうろと……\pまちくたびれたから きてやったぞ!"
 	.string ""
 	.string "$"
 
 PetalburgWoods_Text_HandOverThosePapers:
-	.string "{JPN}やい! デボンの けんきゅういん!\pその しょるいを こっちに よこしやがれ!"
+	.string "やい! デボンの けんきゅういん!\pその しょるいを こっちに よこしやがれ!"
 	.string "$"
 
 PetalburgWoods_Text_YouHaveToHelpMe:
-	.string "{JPN}ひやー!\pきみ ポケモントレーナー だよね\nおじさんを たすけてよぉ"
+	.string "ひやー!\pきみ ポケモントレーナー だよね\nおじさんを たすけてよぉ"
 	.string ""
 	.string "$"
 
 PetalburgWoods_Text_NoOneCrossesTeamAqua:
-	.string "{JPN}……ん? なんだ おまえ?\nそいつを かばおう ってのか?\pアクアだんの じゃまを する やつは\nこどもでも ようしゃ しねえ!\lしょうぶ しやがれ!"
+	.string "……ん? なんだ おまえ?\nそいつを かばおう ってのか?\pアクアだんの じゃまを する やつは\nこどもでも ようしゃ しねえ!\lしょうぶ しやがれ!"
 	.string ""
 	.string ""
 	.string ""
 	.string "$"
 
 PetalburgWoods_Text_YoureKiddingMe:
-	.string "{JPN}……つ つよい じゃねーか!$"
+	.string "……つ つよい じゃねーか!$"
 
 PetalburgWoods_Text_YouveGotSomeNerve:
-	.string "{JPN}むむむ…… アクアだんの\nじゃまを するとは なんて やつ!\lもう いっかい しょうぶ しろ!\p……と いいたい ところ だが\nもう てもちの ポケモンは いない\pそれに カナズミ シティにも アクアだんが\nねらっている ものが あるからな!\pきょうは これぐらいに しといてやらぁ!"
+	.string "むむむ…… アクアだんの\nじゃまを するとは なんて やつ!\lもう いっかい しょうぶ しろ!\p……と いいたい ところ だが\nもう てもちの ポケモンは いない\pそれに カナズミ シティにも アクアだんが\nねらっている ものが あるからな!\pきょうは これぐらいに しといてやらぁ!"
 	.string ""
 	.string ""
 	.string ""
@@ -358,7 +358,7 @@ PetalburgWoods_Text_YouveGotSomeNerve:
 	.string "$"
 
 PetalburgWoods_Text_ThatWasAwfullyClose:
-	.string "{JPN}……ふぅ\nあぶない ところ だった!\pきみの おかげで だいじな しょるいを\nうばわれないで すんだよ!\p……そうだ! おれいに\nスーパーボールを あげちゃおう!"
+	.string "……ふぅ\nあぶない ところ だった!\pきみの おかげで だいじな しょるいを\nうばわれないで すんだよ!\p……そうだ! おれいに\nスーパーボールを あげちゃおう!"
 	.string ""
 	.string ""
 	.string ""
@@ -366,80 +366,80 @@ PetalburgWoods_Text_ThatWasAwfullyClose:
 	.string "$"
 
 PetalburgWoods_Text_TeamAquaAfterSomethingInRustboro:
-	.string "{JPN}……そういえば さっき アクアだんは\n「カナズミにも ねらっている ものがある」\lとか いってたよね……?"
+	.string "……そういえば さっき アクアだんは\n「カナズミにも ねらっている ものがある」\lとか いってたよね……?"
 	.string ""
 	.string "$"
 
 PetalburgWoods_Text_ICantBeWastingTime:
-	.string "{JPN}たいへんだ!!\nこうしちゃ いられない!"
+	.string "たいへんだ!!\nこうしちゃ いられない!"
 	.string "$"
 
 PetalburgWoods_Text_YoureLoadedWithItems:
-	.string "{JPN}どうぐ いっぱいで\nスーパーボール あげられないね"
+	.string "どうぐ いっぱいで\nスーパーボール あげられないね"
 	.string "$"
 
 PetalburgWoods_Text_GoBugPokemonTeam:
-	.string "{JPN}ポケモン いっぱい つかまえた!\pそら いけ!\nぼくの むしポケモン チーム!"
+	.string "ポケモン いっぱい つかまえた!\pそら いけ!\nぼくの むしポケモン チーム!"
 	.string ""
 	.string "$"
 
 PetalburgWoods_Text_ICouldntWin:
-	.string "{JPN}こんなに ポケモン いるのに\nかてなかったのか……"
+	.string "こんなに ポケモン いるのに\nかてなかったのか……"
 	.string "$"
 
 PetalburgWoods_Text_ImOutOfPokeBalls:
-	.string "{JPN}たくさん ポケモン つかまえたら\nモンスターボール なくなっちゃったよ"
+	.string "たくさん ポケモン つかまえたら\nモンスターボール なくなっちゃったよ"
 	.string "$"
 
 PetalburgWoods_Text_InstantlyPopularWithBugPokemon:
-	.string "{JPN}むしポケモンを がっこうに もっていくと\nそれだけで にんきもの だろ!?"
+	.string "むしポケモンを がっこうに もっていくと\nそれだけで にんきもの だろ!?"
 	.string "$"
 
 PetalburgWoods_Text_CantBePopularIfILose:
-	.string "{JPN}まけると にんきものに なれないや$"
+	.string "まけると にんきものに なれないや$"
 
 PetalburgWoods_Text_PeopleRespectYou:
-	.string "{JPN}でかい むしポケモン もってると\nそれだけで そんけー されるだろ!?"
+	.string "でかい むしポケモン もってると\nそれだけで そんけー されるだろ!?"
 	.string "$"
 
 PetalburgWoods_Text_IWantRematch1:
-	.string "{JPN}むしポケモン そだったら また しょうぶだ!\nポケナビに とうろく するぞ"
+	.string "むしポケモン そだったら また しょうぶだ!\nポケナビに とうろく するぞ"
 	.string "$"
 
 PetalburgWoods_Text_IWantRematch2:
-	.string "{JPN}むしポケモン そだったら また しょうぶだ!\nポケナビに とうろく するぞ"
+	.string "むしポケモン そだったら また しょうぶだ!\nポケナビに とうろく するぞ"
 	.string "$"
 
 PetalburgWoods_Text_MyPokemonHaveGrown:
-	.string "{JPN}ぼくの むしポケモン そだったぞ!\nこれで また にんきもの だぜ!"
+	.string "ぼくの むしポケモン そだったぞ!\nこれで また にんきもの だぜ!"
 	.string "$"
 
 PetalburgWoods_Text_CantBePopularIfLose:
-	.string "{JPN}まけると にんきものに なれないや$"
+	.string "まけると にんきものに なれないや$"
 
 PetalburgWoods_Text_IveBeenTrainingHard:
-	.string "{JPN}つよい ポケモン もってると\nにんきものに なれるだろ?\lだから がんばって そだててるのさ!"
+	.string "つよい ポケモン もってると\nにんきものに なれるだろ?\lだから がんばって そだててるのさ!"
 	.string ""
 	.string "$"
 
 PetalburgWoods_Text_StayOutOfTallGrass:
-	.string "{JPN}よお! おまえの ポケモン げんき?\pてもちの ポケモンが よわっていて\nたたかわせたく ないときは なるべく\lくさむらを よけて あるくと いいよ!"
+	.string "よお! おまえの ポケモン げんき?\pてもちの ポケモンが よわっていて\nたたかわせたく ないときは なるべく\lくさむらを よけて あるくと いいよ!"
 	.string ""
 	.string ""
 	.string "$"
 
 PetalburgWoods_Text_HiddenItemsExplanation:
-	.string "{JPN}みえて いなくても\nどうぐが おちてることが あるから\lあしもとを しらべて いるんだ!"
+	.string "みえて いなくても\nどうぐが おちてることが あるから\lあしもとを しらべて いるんだ!"
 	.string ""
 	.string "$"
 
 PetalburgWoods_Text_TryUsingThisItem:
-	.string "{JPN}それって カナズミの ジムバッジ!\pあなた トレーナーなのね\nこの どうぐ つかってみたら どうかしら?"
+	.string "それって カナズミの ジムバッジ!\pあなた トレーナーなのね\nこの どうぐ つかってみたら どうかしら?"
 	.string ""
 	.string "$"
 
 PetalburgWoods_Text_MiracleSeedExplanation:
-	.string "{JPN}きせきのタネを\nポケモンに もたせてあげると くさタイプの\lわざの いりょくが あがるのよ\pきせきのタネの ほかにも\nポケモンに もたせると べんりな\lどうぐが あるらしいわね"
+	.string "きせきのタネを\nポケモンに もたせてあげると くさタイプの\lわざの いりょくが あがるのよ\pきせきのタネの ほかにも\nポケモンに もたせると べんりな\lどうぐが あるらしいわね"
 	.string ""
 	.string ""
 	.string ""
@@ -447,7 +447,7 @@ PetalburgWoods_Text_MiracleSeedExplanation:
 	.string "$"
 
 PetalburgWoods_Text_TrainerTipsExperience:
-	.string "{JPN}おとくな けいじばん!!\pしょうぶの とき\nいちど でも かおをだした ポケモンは\lけいけんちが もらえます!\pよわい ポケモンを リストの ひだりにして\nしょうぶのとき すぐに こうたい!\lこれで よわい ポケモンも そだちます!"
+	.string "おとくな けいじばん!!\pしょうぶの とき\nいちど でも かおをだした ポケモンは\lけいけんちが もらえます!\pよわい ポケモンを リストの ひだりにして\nしょうぶのとき すぐに こうたい!\lこれで よわい ポケモンも そだちます!"
 	.string ""
 	.string ""
 	.string ""
@@ -456,7 +456,7 @@ PetalburgWoods_Text_TrainerTipsExperience:
 	.string "$"
 
 PetalburgWoods_Text_TrainerTipsPP:
-	.string "{JPN}おとくな けいじばん!!\pポケモンには ヒットポイントの ほかに\nわざを くりだす ちからの もと\lパワーポイント というものが あります\pわざの パワーポイントが なくなったときも\nポケモンセンターに いきましょう!"
+	.string "おとくな けいじばん!!\pポケモンには ヒットポイントの ほかに\nわざを くりだす ちからの もと\lパワーポイント というものが あります\pわざの パワーポイントが なくなったときも\nポケモンセンターに いきましょう!"
 	.string ""
 	.string ""
 	.string ""

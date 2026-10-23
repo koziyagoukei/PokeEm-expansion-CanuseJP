@@ -107,37 +107,37 @@ AquaHideout_B1F_EventScript_Grunt7::
 	end
 
 AquaHideout_B1F_Text_Grunt2Intro:
-	.string "{JPN}アジトの ひみつを しりたけりゃ\nおれを たおす ことだな!$"
+	.string "アジトの ひみつを しりたけりゃ\nおれを たおす ことだな!$"
 
 AquaHideout_B1F_Text_Grunt2Defeat:
-	.string "{JPN}ぜんぜん かてません……!$"
+	.string "ぜんぜん かてません……!$"
 
 AquaHideout_B1F_Text_Grunt2PostBattle:
-	.string "{JPN}アジトの ひみつ?\pそれはな…… いちばん おくに\nせんすいていが あるって ことよ!\pだが いまごろは いひひひ……!$"
+	.string "アジトの ひみつ?\pそれはな…… いちばん おくに\nせんすいていが あるって ことよ!\pだが いまごろは いひひひ……!$"
 
 AquaHideout_B1F_Text_Grunt3Intro:
-	.string "{JPN}ねんりょうの ほきゅう オッケイ!\nおやつも ほきゅう オッケイ!\pあとは ジャマものを ぶっとばす だけ!$"
+	.string "ねんりょうの ほきゅう オッケイ!\nおやつも ほきゅう オッケイ!\pあとは ジャマものを ぶっとばす だけ!$"
 
 AquaHideout_B1F_Text_Grunt3Defeat:
-	.string "{JPN}こっぴどく やられたーっ!$"
+	.string "こっぴどく やられたーっ!$"
 
 AquaHideout_B1F_Text_Grunt3PostBattle:
-	.string "{JPN}ふん! これで いいんだ\pおまえの ジャマをする というのが\nおれの にんむ だったのさ$"
+	.string "ふん! これで いいんだ\pおまえの ジャマをする というのが\nおれの にんむ だったのさ$"
 
 AquaHideout_B1F_Text_Grunt5Intro:
-	.string "{JPN}はーあ アジトで るすばんも\nたいくつ だから あいて してあげるわー$"
+	.string "はーあ アジトで るすばんも\nたいくつ だから あいて してあげるわー$"
 
 AquaHideout_B1F_Text_Grunt5Defeat:
-	.string "{JPN}はーあ まけたわー$"
+	.string "はーあ まけたわー$"
 
 AquaHideout_B1F_Text_Grunt5PostBattle:
-	.string "{JPN}あんまり うろちょろ してると\nほかの アクアだんに やられるかもよー$"
+	.string "あんまり うろちょろ してると\nほかの アクアだんに やられるかもよー$"
 
 AquaHideout_B1F_Text_Grunt7Intro:
-	.string "{JPN}ちょっと そこの あんた!\pアクアだんと マグマだんの ユニフォーム\nどっちが かっこいいと おもう?$"
+	.string "ちょっと そこの あんた!\pアクアだんと マグマだんの ユニフォーム\nどっちが かっこいいと おもう?$"
 
 AquaHideout_B1F_Text_Grunt7Defeat:
-	.string "{JPN}かっこよく まけたわ……$"
+	.string "かっこよく まけたわ……$"
 
 AquaHideout_B1F_Text_Grunt7PostBattle:
-	.string "{JPN}ユニフォームが かっこいいと\nしょうぶに まけても えになる でしょ?$"
+	.string "ユニフォームが かっこいいと\nしょうぶに まけても えになる でしょ?$"

@@ -287,11 +287,11 @@ Route103_EventScript_Isabelle::
 	end
 
 Route103_Text_MayRoute103Pokemon:
-	.string "{JPN}ハルカ『えーと 103ばん どうろに いる\n"
+	.string "ハルカ『えーと 103ばん どうろに いる\n"
 	.string "{JPN}ポケモンは あれと あれね……$"
 
 Route103_Text_MayLetsBattle:
-	.string "{JPN}あら {PLAYER}{KUN}!\p"
+	.string "あら {PLAYER}{KUN}!\p"
 	.string "{JPN}……そうか! おとうさん から\n"
 	.string "{JPN}ポケモンを プレゼントして もらったのね!\p"
 	.string "{JPN}せっかくだから ちょっと\n"
@@ -300,10 +300,10 @@ Route103_Text_MayLetsBattle:
 	.string "{JPN}あたしが おしえて あげるから!$"
 
 Route103_Text_MayDefeated:
-	.string "{JPN}うわっ! すごい すごい!\n{PLAYER}{KUN} つよい じゃない!$"
+	.string "うわっ! すごい すごい!\n{PLAYER}{KUN} つよい じゃない!$"
 
 Route103_Text_MayTimeToHeadBack:
-	.string "{JPN}ハルカ『あたし おとうさんが\n"
+	.string "ハルカ『あたし おとうさんが\n"
 	.string "{JPN}あなたの ことを ちゅうもく するのも\l"
 	.string "{JPN}わかるような きが する!\p"
 	.string "{JPN}だって もらって すぐの ポケモンが\n"
@@ -314,11 +314,11 @@ Route103_Text_MayTimeToHeadBack:
 	.string "{JPN}けんきゅうじょに かえろっか!$"
 
 Route103_Text_BrendanRoute103Pokemon:
-	.string "{JPN}ユウキ『そうか あいつと あいつが\n"
+	.string "ユウキ『そうか あいつと あいつが\n"
 	.string "{JPN}103ばん どうろに いる ポケモンか……$"
 
 Route103_Text_BrendanLetsBattle:
-	.string "{JPN}おや? {PLAYER}!\p"
+	.string "おや? {PLAYER}!\p"
 	.string "{JPN}……そうか とうさん から\n"
 	.string "{JPN}ポケモンを もらったのか\p"
 	.string "{JPN}じゃあ ついでだ\n"
@@ -327,11 +327,11 @@ Route103_Text_BrendanLetsBattle:
 	.string "{JPN}オレが おしえてやるよ!$"
 
 Route103_Text_BrendanDefeated:
-	.string "{JPN}ふうん\n"
+	.string "ふうん\n"
 	.string "{JPN}{PLAYER}って つよいんだね$"
 
 Route103_Text_BrendanTimeToHeadBack:
-	.string "{JPN}ユウキ『とうさんが\n"
+	.string "ユウキ『とうさんが\n"
 	.string "{JPN}{PLAYER}の ことを ちゅうもく するのも\l"
 	.string "{JPN}わかったような きが する……\p"
 	.string "{JPN}もらって すぐの ポケモンが\n"
@@ -342,14 +342,14 @@ Route103_Text_BrendanTimeToHeadBack:
 	.string "{JPN}けんきゅうじょに もどろうか$"
 
 Route103_Text_ShouldHaveBroughtPotion:
-	.string "{JPN}ぼくの ポケモン もう へろへろ……\n"
+	.string "ぼくの ポケモン もう へろへろ……\n"
 	.string "{JPN}キズぐすり もってくれば よかった……$"
 
 Route103_Text_ShortcutToOldale:
-	.string "{JPN}ここから うみを わたっていけば\n"
+	.string "ここから うみを わたっていけば\n"
 	.string "{JPN}コトキタウンまで ちかみちが できるぞ!\p"
 	.string "{JPN}ふふふ おとくな じょうほう だろ?$"
 
 Route103_Text_RouteSign:
-	.string "{JPN}ここは 103ばん どうろ\n"
+	.string "ここは 103ばん どうろ\n"
 	.string "{JPN}{DOWN_ARROW} コトキタウン$"

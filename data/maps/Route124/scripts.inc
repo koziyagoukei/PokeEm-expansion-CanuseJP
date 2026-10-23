@@ -100,5 +100,5 @@ Route124_EventScript_Isabella::
 	end
 
 Route124_Text_HuntersHouse:
-	.string "{JPN}「トレジャーハンターの こや」$"
+	.string "「トレジャーハンターの こや」$"
 

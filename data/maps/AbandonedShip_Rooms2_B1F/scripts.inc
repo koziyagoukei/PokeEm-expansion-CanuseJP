@@ -6,5 +6,5 @@ AbandonedShip_Rooms2_B1F_EventScript_Camper::
 	end
 
 AbandonedShip_Rooms2_B1F_Text_PerfectPlaceToGoExploring:
-	.string "{JPN}たんけんに ぴったりの ばしょだから\nなんだか わくわく してくるよ!\lきっと すっごい たからものが あるぜ!$"
+	.string "たんけんに ぴったりの ばしょだから\nなんだか わくわく してくるよ!\lきっと すっごい たからものが あるぜ!$"
 

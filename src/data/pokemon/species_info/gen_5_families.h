@@ -30,7 +30,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 4,
         .weight = 40,
         .description = COMPOUND_STRING(
-            "{JPN}しょうりを もたらす ポケモン。\nビクティニを つれた トレーナーは\nどんな しょうぶにも かてるという。"),
+            "しょうりを もたらす ポケモン。\nビクティニを つれた トレーナーは\nどんな しょうぶにも かてるという。"),
         .pokemonScale = 491,
         .pokemonOffset = 16,
         .trainerScale = 256,
@@ -99,7 +99,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 6,
         .weight = 81,
         .description = COMPOUND_STRING(
-            "{JPN}ちのうが たかく とても れいせい。\nたいようの ひかりを たっぷり\nあびると うごきが するどくなる。"),
+            "ちのうが たかく とても れいせい。\nたいようの ひかりを たっぷり\nあびると うごきが するどくなる。"),
         .pokemonScale = 422,
         .pokemonOffset = 15,
         .trainerScale = 256,
@@ -165,7 +165,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 8,
         .weight = 160,
         .description = COMPOUND_STRING(
-            "{JPN}じめんを すべるように はしる。\nすばやい うごきで てきを まどわせ\nつるのムチで しとめるのだ。"),
+            "じめんを すべるように はしる。\nすばやい うごきで てきを まどわせ\nつるのムチで しとめるのだ。"),
         .pokemonScale = 366,
         .pokemonOffset = 9,
         .trainerScale = 257,
@@ -234,7 +234,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 33,
         .weight = 630,
         .description = COMPOUND_STRING(
-            "{JPN}にらむだけで あいての うごきを\nとめてしまう。たいようエネルギーを\nたいないで ぞうふくさせる。"),
+            "にらむだけで あいての うごきを\nとめてしまう。たいようエネルギーを\nたいないで ぞうふくさせる。"),
         .pokemonScale = 256,
         .pokemonOffset = 0,
         .trainerScale = 405,
@@ -302,7 +302,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 5,
         .weight = 99,
         .description = COMPOUND_STRING(
-            "{JPN}てきの こうげきを みがるに よけて\nはなから ひのたまを うちだす。\nほのおで きのみを やいて たべる。"),
+            "てきの こうげきを みがるに よけて\nはなから ひのたまを うちだす。\nほのおで きのみを やいて たべる。"),
         .pokemonScale = 432,
         .pokemonOffset = 15,
         .trainerScale = 256,
@@ -370,7 +370,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 10,
         .weight = 555,
         .description = COMPOUND_STRING(
-            "{JPN}たいないの ほのおが もえあがると\nうごきの キレと スピードが ます。\nピンチになると けむりを ふきだす。"),
+            "たいないの ほのおが もえあがると\nうごきの キレと スピードが ます。\nピンチになると けむりを ふきだす。"),
         .pokemonScale = 305,
         .pokemonOffset = 8,
         .trainerScale = 257,
@@ -436,7 +436,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 16,
         .weight = 1500,
         .description = COMPOUND_STRING(
-            "{JPN}アゴの ほのおで こぶしを もやして\nほのおの パンチを くりだす。\nとても なかまおもいの ポケモン。"),
+            "アゴの ほのおで こぶしを もやして\nほのおの パンチを くりだす。\nとても なかまおもいの ポケモン。"),
         .pokemonScale = 259,
         .pokemonOffset = 1,
         .trainerScale = 296,
@@ -527,7 +527,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 18,
         .weight = 1803,
         .description = COMPOUND_STRING(
-            "{JPN}じゃほうの かたちに もえさかる\nほのおを ふりかざして きゅうちの\nなかまを すくうため はせさんじる。"),
+            "じゃほうの かたちに もえさかる\nほのおを ふりかざして きゅうちの\nなかまを すくうため はせさんじる。"),
         .frontPic = gMonFrontPic_EmboarMega,
         .frontPicSize = MON_COORDS_SIZE(64, 64),
         .frontPicYOffset = 0,
@@ -580,7 +580,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 5,
         .weight = 59,
         .description = COMPOUND_STRING(
-            "{JPN}おなかの ホタチで たたかう。\nこうげきを うけとめてから すかさず\nきりつけて はんげきするのだ。"),
+            "おなかの ホタチで たたかう。\nこうげきを うけとめてから すかさず\nきりつけて はんげきするのだ。"),
         .pokemonScale = 432,
         .pokemonOffset = 15,
         .trainerScale = 256,
@@ -650,7 +650,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 8,
         .weight = 245,
         .description = COMPOUND_STRING(
-            "{JPN}ながれるような たちさばきで\n2まいの ホタチを あつかう わざは\nきびしい しゅぎょうによって みにつける。"),
+            "ながれるような たちさばきで\n2まいの ホタチを あつかう わざは\nきびしい しゅぎょうによって みにつける。"),
         .pokemonScale = 366,
         .pokemonOffset = 9,
         .trainerScale = 257,
@@ -721,7 +721,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 15,
         .weight = 946,
         .description = COMPOUND_STRING(
-            "{JPN}よろいに しこまれた つるぎの\nひとふりで あいてを たおす。\nひとにらみで てきを だまらせる。"),
+            "よろいに しこまれた つるぎの\nひとふりで あいてを たおす。\nひとにらみで てきを だまらせる。"),
         .pokemonScale = 268,
         .pokemonOffset = 2,
         .trainerScale = 271,
@@ -786,7 +786,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 15,
         .weight = 582,
         .description = COMPOUND_STRING(
-            "{JPN}ひじょうなる きしつと たちすじを ゆうす。\nどとうの れんげきは ちえなみの ごとし。\nヒスイにて しんかせし けうなるすがた。"),
+            "ひじょうなる きしつと たちすじを ゆうす。\nどとうの れんげきは ちえなみの ごとし。\nヒスイにて しんかせし けうなるすがた。"),
         .pokemonScale = 268,
         .pokemonOffset = 2,
         .trainerScale = 271,
@@ -851,7 +851,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 5,
         .weight = 116,
         .description = COMPOUND_STRING(
-            "{JPN}ほほの ふくろに エサを ためこみ\nなんにちも みはりを つづける。\nしっぽで なかまに あいずする。"),
+            "ほほの ふくろに エサを ためこみ\nなんにちも みはりを つづける。\nしっぽで なかまに あいずする。"),
         .pokemonScale = 432,
         .pokemonOffset = 14,
         .trainerScale = 256,
@@ -916,7 +916,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 11,
         .weight = 270,
         .description = COMPOUND_STRING(
-            "{JPN}ほっぺの ふくろに ためた きのみの\nタネを とばして こうげき。 てきを\nはっけんすると しっぽを たてる。"),
+            "ほっぺの ふくろに ためた きのみの\nタネを とばして こうげき。 てきを\nはっけんすると しっぽを たてる。"),
         .pokemonScale = 320,
         .pokemonOffset = 7,
         .trainerScale = 256,
@@ -986,7 +986,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 4,
         .weight = 41,
         .description = COMPOUND_STRING(
-            "{JPN}つよい あいてにも ゆうかんに\nたちむかうが ふりな たたかいを\nさける ちのうの たかい ポケモン。"),
+            "つよい あいてにも ゆうかんに\nたちむかうが ふりな たたかいを\nさける ちのうの たかい ポケモン。"),
         .pokemonScale = 491,
         .pokemonOffset = 15,
         .trainerScale = 256,
@@ -1056,7 +1056,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 9,
         .weight = 147,
         .description = COMPOUND_STRING(
-            "{JPN}マントのように からだを おおう\nくろい たいもうは とても かたい。\nうけた ダメージを へらしてくれる。"),
+            "マントのように からだを おおう\nくろい たいもうは とても かたい。\nうけた ダメージを へらしてくれる。"),
         .pokemonScale = 338,
         .pokemonOffset = 9,
         .trainerScale = 256,
@@ -1130,7 +1130,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 12,
         .weight = 610,
         .description = COMPOUND_STRING(
-            "{JPN}ふぶきで とざされた やまに はいり\nそうなんした ひとを たすける。\nながい けが さむさを ふせぐ。"),
+            "ふぶきで とざされた やまに はいり\nそうなんした ひとを たすける。\nながい けが さむさを ふせぐ。"),
         .pokemonScale = 282,
         .pokemonOffset = 4,
         .trainerScale = 256,
@@ -1198,7 +1198,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 4,
         .weight = 101,
         .description = COMPOUND_STRING(
-            "{JPN}ひとの ものを あそびで ぬすむ。\nぬすまれた ひとも あいくるしい\nしぐさに つい ゆるしてしまうのだ。"),
+            "ひとの ものを あそびで ぬすむ。\nぬすまれた ひとも あいくるしい\nしぐさに つい ゆるしてしまうのだ。"),
         .pokemonScale = 491,
         .pokemonOffset = 15,
         .trainerScale = 256,
@@ -1264,7 +1264,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 11,
         .weight = 375,
         .description = COMPOUND_STRING(
-            "{JPN}しんしゅつきぼつな ポケモン。\nうつくしい スタイルと けなみが\nおおくの トレーナーを ひきつける。"),
+            "しんしゅつきぼつな ポケモン。\nうつくしい スタイルと けなみが\nおおくの トレーナーを ひきつける。"),
         .pokemonScale = 320,
         .pokemonOffset = 7,
         .trainerScale = 256,
@@ -1330,7 +1330,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 6,
         .weight = 105,
         .description = COMPOUND_STRING(
-            "{JPN}ふかい もりで くらす ポケモン。\nあたまに はえた はっぱを たべると\nつかれが うそのように きえる。"),
+            "ふかい もりで くらす ポケモン。\nあたまに はえた はっぱを たべると\nつかれが うそのように きえる。"),
         .pokemonScale = 422,
         .pokemonOffset = 12,
         .trainerScale = 256,
@@ -1398,7 +1398,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 11,
         .weight = 305,
         .description = COMPOUND_STRING(
-            "{JPN}きしょうが はげしく トゲの ついた\nしっぽを ふりまわして たたかう。\nあたまの はっぱは とても にがい。"),
+            "きしょうが はげしく トゲの ついた\nしっぽを ふりまわして たたかう。\nあたまの はっぱは とても にがい。"),
         .pokemonScale = 320,
         .pokemonOffset = 7,
         .trainerScale = 256,
@@ -1465,7 +1465,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 6,
         .weight = 110,
         .description = COMPOUND_STRING(
-            "{JPN}あたまの ふさは おこると おんどが\nあがり 300ど いじょうになる。\nきのみを ふさで やいて たべる。"),
+            "あたまの ふさは おこると おんどが\nあがり 300ど いじょうになる。\nきのみを ふさで やいて たべる。"),
         .pokemonScale = 422,
         .pokemonOffset = 12,
         .trainerScale = 256,
@@ -1531,7 +1531,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 10,
         .weight = 280,
         .description = COMPOUND_STRING(
-            "{JPN}あまいものが だいこうぶつ。\nたいないの ほのおを もやす\nエネルギーに なるのだ。"),
+            "あまいものが だいこうぶつ。\nたいないの ほのおを もやす\nエネルギーに なるのだ。"),
         .pokemonScale = 305,
         .pokemonOffset = 7,
         .trainerScale = 257,
@@ -1599,7 +1599,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 6,
         .weight = 135,
         .description = COMPOUND_STRING(
-            "{JPN}あたまの ふさに ためた みずは\nえいよう たっぷり。 しょくぶつに\nかけると おおきく そだつのだ。"),
+            "あたまの ふさに ためた みずは\nえいよう たっぷり。 しょくぶつに\nかけると おおきく そだつのだ。"),
         .pokemonScale = 422,
         .pokemonOffset = 12,
         .trainerScale = 256,
@@ -1665,7 +1665,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 10,
         .weight = 290,
         .description = COMPOUND_STRING(
-            "{JPN}あたまの ふさに みずを ためる。\nちょすいりょうが へると しっぽで\nみずを すいあげて ほきゅうする。"),
+            "あたまの ふさに みずを ためる。\nちょすいりょうが へると しっぽで\nみずを すいあげて ほきゅうする。"),
         .pokemonScale = 305,
         .pokemonOffset = 7,
         .trainerScale = 257,
@@ -1730,7 +1730,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 6,
         .weight = 233,
         .description = COMPOUND_STRING(
-            "{JPN}ムンナに ゆめを たべられてしまうと\nゆめの ないようを わすれてしまう。\nつねに くうちゅうに うかんでいる。"),
+            "ムンナに ゆめを たべられてしまうと\nゆめの ないようを わすれてしまう。\nつねに くうちゅうに うかんでいる。"),
         .pokemonScale = 422,
         .pokemonOffset = 15,
         .trainerScale = 256,
@@ -1802,7 +1802,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 11,
         .weight = 605,
         .description = COMPOUND_STRING(
-            "{JPN}おでこから でている けむりの\nなかには ひとや ポケモンの みた\nゆめが たくさん つまっているのだ。"),
+            "おでこから でている けむりの\nなかには ひとや ポケモンの みた\nゆめが たくさん つまっているのだ。"),
         .pokemonScale = 320,
         .pokemonOffset = 7,
         .trainerScale = 256,
@@ -1871,7 +1871,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 3,
         .weight = 21,
         .description = COMPOUND_STRING(
-            "{JPN}トレーナーの めいれいを よく きく\nせいかくだが むずかしい しじは\nりかい できない こともある。"),
+            "トレーナーの めいれいを よく きく\nせいかくだが むずかしい しじは\nりかい できない こともある。"),
         .pokemonScale = 530,
         .pokemonOffset = 13,
         .trainerScale = 256,
@@ -1938,7 +1938,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 6,
         .weight = 150,
         .description = COMPOUND_STRING(
-            "{JPN}どんなに とおく はなれても\nトレーナーの もとに かならず\nもどってくる ことが できる。"),
+            "どんなに とおく はなれても\nトレーナーの もとに かならず\nもどってくる ことが できる。"),
         .pokemonScale = 422,
         .pokemonOffset = 12,
         .trainerScale = 256,
@@ -2009,7 +2009,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 12,
         .weight = 290,
         .description = COMPOUND_STRING(
-            "{JPN}オスは あたまの かざりを ゆらして\nあいてを いかくする。 メスの ひこう\nのうりょくは オスを うわまわる。"),
+            "オスは あたまの かざりを ゆらして\nあいてを いかくする。 メスの ひこう\nのうりょくは オスを うわまわる。"),
         .pokemonScale = 282,
         .pokemonOffset = 4,
         .trainerScale = 256,
@@ -2094,7 +2094,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 8,
         .weight = 298,
         .description = COMPOUND_STRING(
-            "{JPN}ほうでんすると たてがみが ひかる。\nたてがみの ひかりかたで なかまと\nコミュニケーションを とっている。"),
+            "ほうでんすると たてがみが ひかる。\nたてがみの ひかりかたで なかまと\nコミュニケーションを とっている。"),
         .pokemonScale = 366,
         .pokemonOffset = 8,
         .trainerScale = 257,
@@ -2163,7 +2163,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 16,
         .weight = 795,
         .description = COMPOUND_STRING(
-            "{JPN}いなずまのような しゅんぱつりょく。\nゼブライカが ぜんそくりょくで\nはしると らいめいが ひびきわたる。"),
+            "いなずまのような しゅんぱつりょく。\nゼブライカが ぜんそくりょくで\nはしると らいめいが ひびきわたる。"),
         .pokemonScale = 259,
         .pokemonOffset = 1,
         .trainerScale = 296,
@@ -2235,7 +2235,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 4,
         .weight = 180,
         .description = COMPOUND_STRING(
-            "{JPN}6かっけいの みみを もつ。\nちていで あっしゅくされた からだは\nてつに まけないくらい かたい。"),
+            "6かっけいの みみを もつ。\nちていで あっしゅくされた からだは\nてつに まけないくらい かたい。"),
         .pokemonScale = 491,
         .pokemonOffset = 16,
         .trainerScale = 256,
@@ -2308,7 +2308,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 9,
         .weight = 1020,
         .description = COMPOUND_STRING(
-            "{JPN}パワーが みなぎると オレンジいろの\nけっしょうが ひかり かがやく。\nほらあなで ちかすいを さがす。"),
+            "パワーが みなぎると オレンジいろの\nけっしょうが ひかり かがやく。\nほらあなで ちかすいを さがす。"),
         .pokemonScale = 338,
         .pokemonOffset = 8,
         .trainerScale = 256,
@@ -2389,7 +2389,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 17,
         .weight = 2600,
         .description = COMPOUND_STRING(
-            "{JPN}たいないの コアで エネルギーを\nあっしゅくして うちだす こうげきは\nやまを ふきとばす いりょく。"),
+            "たいないの コアで エネルギーを\nあっしゅくして うちだす こうげきは\nやまを ふきとばす いりょく。"),
         .pokemonScale = 259,
         .pokemonOffset = 0,
         .trainerScale = 290,
@@ -2455,7 +2455,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 4,
         .weight = 21,
         .description = COMPOUND_STRING(
-            "{JPN}くらい もりや ほらあなで くらす。\nはなの あなから ちょうおんぱを だして\nあたりの ようすを さぐる。"),
+            "くらい もりや ほらあなで くらす。\nはなの あなから ちょうおんぱを だして\nあたりの ようすを さぐる。"),
         .pokemonScale = 491,
         .pokemonOffset = 12,
         .trainerScale = 256,
@@ -2538,7 +2538,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 9,
         .weight = 105,
         .description = COMPOUND_STRING(
-            "{JPN}いろいろな しゅうはすうの おんぱを\nはなの あなから はっしゃする。\nいわを はかいする おんぱも だす。"),
+            "いろいろな しゅうはすうの おんぱを\nはなの あなから はっしゃする。\nいわを はかいする おんぱも だす。"),
         .pokemonScale = 338,
         .pokemonOffset = 8,
         .trainerScale = 256,
@@ -2609,7 +2609,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 3,
         .weight = 85,
         .description = COMPOUND_STRING(
-            "{JPN}ちちゅうを ほりすすむ スピードは\nじそく50キロいじょう。 ちじょうを\nはしる じどうしゃと いいしょうぶ。"),
+            "ちちゅうを ほりすすむ スピードは\nじそく50キロいじょう。 ちじょうを\nはしる じどうしゃと いいしょうぶ。"),
         .pokemonScale = 530,
         .pokemonOffset = 13,
         .trainerScale = 256,
@@ -2678,7 +2678,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 7,
         .weight = 404,
         .description = COMPOUND_STRING(
-            "{JPN}はがねに しんかした ドリルは\nてっぱんを つらぬく はかいりょく。\nトンネルこうじで だいかつやくする。"),
+            "はがねに しんかした ドリルは\nてっぱんを つらぬく はかいりょく。\nトンネルこうじで だいかつやくする。"),
         .pokemonScale = 365,
         .pokemonOffset = 12,
         .trainerScale = 256,
@@ -2751,7 +2751,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 9,
         .weight = 600,
         .description = COMPOUND_STRING(
-            "{JPN}あたまと りょうてを あわせて\nりゅうせんけいと なり こうそくで\nかいてんすれば すべてを こわせる。"),
+            "あたまと りょうてを あわせて\nりゅうせんけいと なり こうそくで\nかいてんすれば すべてを こわせる。"),
         .frontPic = gMonFrontPic_ExcadrillMega,
         .frontPicSize = MON_COORDS_SIZE(64, 64),
         .frontPicYOffset = 0,
@@ -2806,7 +2806,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 11,
         .weight = 310,
         .description = COMPOUND_STRING(
-            "{JPN}みみの しょっかくで あいてに\nふれると しんぞうの おとで\nたいちょうや きもちが わかるのだ。"),
+            "みみの しょっかくで あいてに\nふれると しんぞうの おとで\nたいちょうや きもちが わかるのだ。"),
         .pokemonScale = 320,
         .pokemonOffset = 7,
         .trainerScale = 256,
@@ -2880,7 +2880,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 15,
         .weight = 320,
         .description = COMPOUND_STRING(
-            "{JPN}くびもとから はえた だいにの\nしょっかくに ふれてしまうと\nだれでも ふかい ねむりに おちる。"),
+            "くびもとから はえた だいにの\nしょっかくに ふれてしまうと\nだれでも ふかい ねむりに おちる。"),
         .pokemonScale = 320,
         .pokemonOffset = 7,
         .trainerScale = 256,
@@ -2949,7 +2949,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 6,
         .weight = 125,
         .description = COMPOUND_STRING(
-            "{JPN}かくざいを ふりまわして たたかう。\nおもい かくざいを くも なく\nもつようになると しんかは ちかい。"),
+            "かくざいを ふりまわして たたかう。\nおもい かくざいを くも なく\nもつようになると しんかは ちかい。"),
         .pokemonScale = 422,
         .pokemonOffset = 14,
         .trainerScale = 256,
@@ -3015,7 +3015,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 12,
         .weight = 400,
         .description = COMPOUND_STRING(
-            "{JPN}きたえあげられた きんにくの からだは\nプロレスラーが たばに なって\nこうげきしても びくとも しない。"),
+            "きたえあげられた きんにくの からだは\nプロレスラーが たばに なって\nこうげきしても びくとも しない。"),
         .pokemonScale = 282,
         .pokemonOffset = 3,
         .trainerScale = 256,
@@ -3085,7 +3085,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 14,
         .weight = 870,
         .description = COMPOUND_STRING(
-            "{JPN}コンクリートを つくる ぎじゅつは\n2000ねんまえに ローブシンから\nおそわったと かんがえられている。"),
+            "コンクリートを つくる ぎじゅつは\n2000ねんまえに ローブシンから\nおそわったと かんがえられている。"),
         .pokemonScale = 265,
         .pokemonOffset = 3,
         .trainerScale = 262,
@@ -3150,7 +3150,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 5,
         .weight = 45,
         .description = COMPOUND_STRING(
-            "{JPN}かんだかい けいかいおんを\nほほの しんどうで はっせいさせて\nなかまに きけんを しらせる。"),
+            "かんだかい けいかいおんを\nほほの しんどうで はっせいさせて\nなかまに きけんを しらせる。"),
         .pokemonScale = 432,
         .pokemonOffset = 15,
         .trainerScale = 256,
@@ -3215,7 +3215,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 8,
         .weight = 170,
         .description = COMPOUND_STRING(
-            "{JPN}あたまの コブを しんどうさせると\nすいちゅうが なみたつ だけでなく\nじめんも じしんのように ゆれる。"),
+            "あたまの コブを しんどうさせると\nすいちゅうが なみたつ だけでなく\nじめんも じしんのように ゆれる。"),
         .pokemonScale = 366,
         .pokemonOffset = 10,
         .trainerScale = 257,
@@ -3288,7 +3288,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 15,
         .weight = 620,
         .description = COMPOUND_STRING(
-            "{JPN}あたまの コブから しんけいを\nマヒさせる えきたいを とばす。\nしんどうで あいてを くるしめる。"),
+            "あたまの コブから しんけいを\nマヒさせる えきたいを とばす。\nしんどうで あいてを くるしめる。"),
         .pokemonScale = 268,
         .pokemonOffset = 2,
         .trainerScale = 271,
@@ -3359,7 +3359,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 13,
         .weight = 555,
         .description = COMPOUND_STRING(
-            "{JPN}おびを しめると パワーアップする。\nやせいの ナゲキは つるくさを あんで\nじぶんの おびを つくる。"),
+            "おびを しめると パワーアップする。\nやせいの ナゲキは つるくさを あんで\nじぶんの おびを つくる。"),
         .pokemonScale = 272,
         .pokemonOffset = 7,
         .trainerScale = 256,
@@ -3428,7 +3428,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 14,
         .weight = 510,
         .description = COMPOUND_STRING(
-            "{JPN}ダゲキが しゅぎょうする やまから\nおおいわや たいぼくに こぶしを\nうちつける おとが きこえてくる。"),
+            "ダゲキが しゅぎょうする やまから\nおおいわや たいぼくに こぶしを\nうちつける おとが きこえてくる。"),
         .pokemonScale = 265,
         .pokemonOffset = 4,
         .trainerScale = 262,
@@ -3494,7 +3494,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 3,
         .weight = 25,
         .description = COMPOUND_STRING(
-            "{JPN}タマゴから かえると ハハコモリに\nふくを つくってもらい きせられる。\nフードで あたまを かくして ねる。"),
+            "タマゴから かえると ハハコモリに\nふくを つくってもらい きせられる。\nフードで あたまを かくして ねる。"),
         .pokemonScale = 530,
         .pokemonOffset = 15,
         .trainerScale = 256,
@@ -3563,7 +3563,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 5,
         .weight = 73,
         .description = COMPOUND_STRING(
-            "{JPN}クルマユの すむ もりは くさきが\nよく そだつ。クルマユが おちばを\nえいようぶんに かえているのだ。"),
+            "クルマユの すむ もりは くさきが\nよく そだつ。クルマユが おちばを\nえいようぶんに かえているのだ。"),
         .pokemonScale = 432,
         .pokemonOffset = 15,
         .trainerScale = 256,
@@ -3636,7 +3636,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 12,
         .weight = 205,
         .description = COMPOUND_STRING(
-            "{JPN}ちいさい ポケモンを みつけると\nうでの カッターと ねんちゃくいとで\nはっぱの ふくを ぬう しゅうせい。"),
+            "ちいさい ポケモンを みつけると\nうでの カッターと ねんちゃくいとで\nはっぱの ふくを ぬう しゅうせい。"),
         .pokemonScale = 282,
         .pokemonOffset = 3,
         .trainerScale = 256,
@@ -3707,7 +3707,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 4,
         .weight = 53,
         .description = COMPOUND_STRING(
-            "{JPN}かみついて もうどくを あたえる。\nてんてきの おおきな とりポケモンも\nからだが しびれて うごけなくなる。"),
+            "かみついて もうどくを あたえる。\nてんてきの おおきな とりポケモンも\nからだが しびれて うごけなくなる。"),
         .pokemonScale = 491,
         .pokemonOffset = 16,
         .trainerScale = 256,
@@ -3782,7 +3782,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 12,
         .weight = 585,
         .description = COMPOUND_STRING(
-            "{JPN}かたい カラに まもられている。\nタイヤのように かいてんして\nてきに はげしく たいあたりする。"),
+            "かたい カラに まもられている。\nタイヤのように かいてんして\nてきに はげしく たいあたりする。"),
         .pokemonScale = 282,
         .pokemonOffset = 7,
         .trainerScale = 256,
@@ -3861,7 +3861,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 25,
         .weight = 2005,
         .description = COMPOUND_STRING(
-            "{JPN}すばやい うごきで てきを おいつめ\nあたまの ツノで こうげきする。\nとどめを さすまで ようしゃしない。"),
+            "すばやい うごきで てきを おいつめ\nあたまの ツノで こうげきする。\nとどめを さすまで ようしゃしない。"),
         .pokemonScale = 257,
         .pokemonOffset = 2,
         .trainerScale = 423,
@@ -3932,7 +3932,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 32,
         .weight = 2305,
         .description = COMPOUND_STRING(
-            "{JPN}にぶい ひかりを はなつ もうどくは\nペンドラーの せいしんに さようして\nきょうぼうさに みがきが かかった。"),
+            "にぶい ひかりを はなつ もうどくは\nペンドラーの せいしんに さようして\nきょうぼうさに みがきが かかった。"),
         .frontPic = gMonFrontPic_ScolipedeMega,
         .frontPicSize = MON_COORDS_SIZE(64, 64),
         .frontPicYOffset = 0,
@@ -3988,7 +3988,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 3,
         .weight = 6,
         .description = COMPOUND_STRING(
-            "{JPN}おそわれると からだから わたを とばす。\nてきが わたを モンメンと\nまちがえている すきに にげるのだ。"),
+            "おそわれると からだから わたを とばす。\nてきが わたを モンメンと\nまちがえている すきに にげるのだ。"),
         .pokemonScale = 530,
         .pokemonOffset = 15,
         .trainerScale = 256,
@@ -4061,7 +4061,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 7,
         .weight = 66,
         .description = COMPOUND_STRING(
-            "{JPN}どんなに ほそい すきまでも\nかぜのように くぐりぬけてしまう。\nしろい けだまを のこしていく。"),
+            "どんなに ほそい すきまでも\nかぜのように くぐりぬけてしまう。\nしろい けだまを のこしていく。"),
         .pokemonScale = 365,
         .pokemonOffset = 12,
         .trainerScale = 256,
@@ -4128,7 +4128,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 5,
         .weight = 66,
         .description = COMPOUND_STRING(
-            "{JPN}あたまの はっぱを かじると\nとても にがいが つかれた からだを\nげんきにする こうかが あるのだ。"),
+            "あたまの はっぱを かじると\nとても にがいが つかれた からだを\nげんきにする こうかが あるのだ。"),
         .pokemonScale = 432,
         .pokemonOffset = 13,
         .trainerScale = 256,
@@ -4203,7 +4203,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 11,
         .weight = 163,
         .description = COMPOUND_STRING(
-            "{JPN}うつくしい はなを さかせるのは\nベテラントレーナーでも むずかしい。\nセレブに にんきの ポケモン。"),
+            "うつくしい はなを さかせるのは\nベテラントレーナーでも むずかしい。\nセレブに にんきの ポケモン。"),
         .pokemonScale = 320,
         .pokemonOffset = 7,
         .trainerScale = 256,
@@ -4272,7 +4272,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 12,
         .weight = 192,
         .description = COMPOUND_STRING(
-            "{JPN}ゆきふかきやまに すみしゆえに きゃくりょくが\nはったつしたと こうさつす。 しゅういのものを\nこぶする かおりを かんむりのはなより はなつ。"),
+            "ゆきふかきやまに すみしゆえに きゃくりょくが\nはったつしたと こうさつす。 しゅういのものを\nこぶする かおりを かんむりのはなより はなつ。"),
         .pokemonScale = 320,
         .pokemonOffset = 7,
         .trainerScale = 256,
@@ -4338,7 +4338,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 10,
         .weight = 180,
         .description = COMPOUND_STRING(
-            "{JPN}あかと あおの バスラオは\nすぐに ケンカするほど なかが わるい。\nとても らんぼうな ポケモン。"),
+            "あかと あおの バスラオは\nすぐに ケンカするほど なかが わるい。\nとても らんぼうな ポケモン。"),
         .pokemonScale = 316,
         .pokemonOffset = 7,
         .trainerScale = 257,
@@ -4402,7 +4402,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 10,
         .weight = 180,
         .description = COMPOUND_STRING(
-            "{JPN}あかと あおの バスラオは なかが\nわるいが なぜか いろの ちがう\nこたいが むれに まぎれこんでいる。"),
+            "あかと あおの バスラオは なかが\nわるいが なぜか いろの ちがう\nこたいが むれに まぎれこんでいる。"),
         .pokemonScale = 316,
         .pokemonOffset = 7,
         .trainerScale = 257,
@@ -4467,7 +4467,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 10,
         .weight = 180,
         .description = COMPOUND_STRING(
-            "{JPN}ごっかんの うみで むれを つくり\nエサを わけあって くらす。 ときが\nくると うまれた かわに かえる。"),
+            "ごっかんの うみで むれを つくり\nエサを わけあって くらす。 ときが\nくると うまれた かわに かえる。"),
         .pokemonScale = 316,
         .pokemonOffset = 7,
         .trainerScale = 257,
@@ -4532,7 +4532,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 30,
         .weight = 1100,
         .description = COMPOUND_STRING(
-            "{JPN}すさまじい ジャンプりょくを もつ。\nしんでいった なかまたちの いかりが\nからだを あかく そめあげている。"),
+            "すさまじい ジャンプりょくを もつ。\nしんでいった なかまたちの いかりが\nからだを あかく そめあげている。"),
         .pokemonScale = 275,
         .pokemonOffset = 7,
         .trainerScale = 256,
@@ -4594,7 +4594,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 30,
         .weight = 1100,
         .description = COMPOUND_STRING(
-            "{JPN}おそろしい げんかくを あやつる。\nなかまの たましいの かなしみが\nふかいほど からだは しろくなる。"),
+            "おそろしい げんかくを あやつる。\nなかまの たましいの かなしみが\nふかいほど からだは しろくなる。"),
         .pokemonScale = 275,
         .pokemonOffset = 7,
         .trainerScale = 256,
@@ -4660,7 +4660,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 7,
         .weight = 152,
         .description = COMPOUND_STRING(
-            "{JPN}さばくの すなの なかで せいかつ。\nたいように あたためられた すなが\nたいおんの ていかを ふせぐのだ。"),
+            "さばくの すなの なかで せいかつ。\nたいように あたためられた すなが\nたいおんの ていかを ふせぐのだ。"),
         .pokemonScale = 365,
         .pokemonOffset = 14,
         .trainerScale = 256,
@@ -4727,7 +4727,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 10,
         .weight = 334,
         .description = COMPOUND_STRING(
-            "{JPN}すうひきで むれを つくる。\nがんきゅうを カバーする まくが\nすなあらしから めを まもる。"),
+            "すうひきで むれを つくる。\nがんきゅうを カバーする まくが\nすなあらしから めを まもる。"),
         .pokemonScale = 305,
         .pokemonOffset = 7,
         .trainerScale = 257,
@@ -4798,7 +4798,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 15,
         .weight = 963,
         .description = COMPOUND_STRING(
-            "{JPN}であった えものは にがさない。\nじどうしゃの ボディを くいちぎる\nきょうりょくな アゴを もつ。"),
+            "であった えものは にがさない。\nじどうしゃの ボディを くいちぎる\nきょうりょくな アゴを もつ。"),
         .pokemonScale = 268,
         .pokemonOffset = 2,
         .trainerScale = 271,
@@ -4866,7 +4866,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 6,
         .weight = 375,
         .description = COMPOUND_STRING(
-            "{JPN}たいないで ほのおが もえていると\nおちつかなく はしりまわっている。\nほのおが ちいさくなると ねむる。"),
+            "たいないで ほのおが もえていると\nおちつかなく はしりまわっている。\nほのおが ちいさくなると ねむる。"),
         .pokemonScale = 422,
         .pokemonOffset = 14,
         .trainerScale = 256,
@@ -4933,7 +4933,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 13,
         .weight = 929,
         .description = COMPOUND_STRING(
-            "{JPN}たいないで 1400どの ほのおを\nもやすことで ダンプカーを パンチで\nはかいするほどの パワーを つくる。"),
+            "たいないで 1400どの ほのおを\nもやすことで ダンプカーを パンチで\nはかいするほどの パワーを つくる。"),
         .pokemonScale = 272,
         .pokemonOffset = 3,
         .trainerScale = 256,
@@ -5000,7 +5000,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 13,
         .weight = 929,
         .description = COMPOUND_STRING(
-            "{JPN}めいそう することで あらぶる\nこころを しずめ サイコパワーを\nふかく とぎすませて いる。"),
+            "めいそう することで あらぶる\nこころを しずめ サイコパワーを\nふかく とぎすませて いる。"),
         .pokemonScale = 272,
         .pokemonOffset = 3,
         .trainerScale = 256,
@@ -5068,7 +5068,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 7,
         .weight = 400,
         .description = COMPOUND_STRING(
-            "{JPN}ゆきぶかい とちで くらすうち\nほのおぶくろは ひえきり たいか。\nれいきを つくる きかんが できた。"),
+            "ゆきぶかい とちで くらすうち\nほのおぶくろは ひえきり たいか。\nれいきを つくる きかんが できた。"),
         .pokemonScale = 422,
         .pokemonOffset = 14,
         .trainerScale = 256,
@@ -5132,7 +5132,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 17,
         .weight = 1200,
         .description = COMPOUND_STRING(
-            "{JPN}あたまの うえの ゆきだまに エサを\nしまって もちかえる。 ふぶきの\nひは ひとざとまで おりてくる。"),
+            "あたまの うえの ゆきだまに エサを\nしまって もちかえる。 ふぶきの\nひは ひとざとまで おりてくる。"),
         .pokemonScale = 272,
         .pokemonOffset = 3,
         .trainerScale = 256,
@@ -5196,7 +5196,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 17,
         .weight = 1200,
         .description = COMPOUND_STRING(
-            "{JPN}たいか したはずの ほのおぶくろが\nいかりで ふっかつ。 ところかまわず\nほのおを ふきまくり あばれる。"),
+            "たいか したはずの ほのおぶくろが\nいかりで ふっかつ。 ところかまわず\nほのおを ふきまくり あばれる。"),
         .pokemonScale = 272,
         .pokemonOffset = 3,
         .trainerScale = 256,
@@ -5265,7 +5265,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 10,
         .weight = 280,
         .description = COMPOUND_STRING(
-            "{JPN}アップテンポの おどりと おとで\nはなの タネを ねらう てんてきの\nとりポケモンを おいはらうのだ。"),
+            "アップテンポの おどりと おとで\nはなの タネを ねらう てんてきの\nとりポケモンを おいはらうのだ。"),
         .pokemonScale = 305,
         .pokemonOffset = 6,
         .trainerScale = 257,
@@ -5337,7 +5337,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 3,
         .weight = 145,
         .description = COMPOUND_STRING(
-            "{JPN}いしを とかす えきたいを くちから\nぶんぴつするので かたい いしでも\nかんたんに あなを あけられるのだ。"),
+            "いしを とかす えきたいを くちから\nぶんぴつするので かたい いしでも\nかんたんに あなを あけられるのだ。"),
         .pokemonScale = 530,
         .pokemonOffset = 15,
         .trainerScale = 256,
@@ -5410,7 +5410,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 14,
         .weight = 2000,
         .description = COMPOUND_STRING(
-            "{JPN}なわばりを とりあって イワパレス\nどうしが はげしく たたかう。\nいわを こわされた ほうが まけ。"),
+            "なわばりを とりあって イワパレス\nどうしが はげしく たたかう。\nいわを こわされた ほうが まけ。"),
         .pokemonScale = 265,
         .pokemonOffset = 2,
         .trainerScale = 262,
@@ -5480,7 +5480,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 6,
         .weight = 118,
         .description = COMPOUND_STRING(
-            "{JPN}かわを くびまで ひきあげて\nぼうぎょの しせい。ゴムのような だんりょくで\nダメージを へらす。"),
+            "かわを くびまで ひきあげて\nぼうぎょの しせい。ゴムのような だんりょくで\nダメージを へらす。"),
         .pokemonScale = 422,
         .pokemonOffset = 14,
         .trainerScale = 256,
@@ -5548,7 +5548,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 11,
         .weight = 300,
         .description = COMPOUND_STRING(
-            "{JPN}なわばりに はいってきた あいてを\nしゅうだんで たたきのめす。\nくちから さんせいの たいえきを とばす。"),
+            "なわばりに はいってきた あいてを\nしゅうだんで たたきのめす。\nくちから さんせいの たいえきを とばす。"),
         .pokemonScale = 320,
         .pokemonOffset = 7,
         .trainerScale = 256,
@@ -5621,7 +5621,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 11,
         .weight = 310,
         .description = COMPOUND_STRING(
-            "{JPN}メガシンカの えいきょうで かわは\nしろく かたく しなやかに へんか。\nもちろん きあいは じゅうぶんだ。"),
+            "メガシンカの えいきょうで かわは\nしろく かたく しなやかに へんか。\nもちろん きあいは じゅうぶんだ。"),
         .frontPic = gMonFrontPic_ScraftyMega,
         .frontPicSize = MON_COORDS_SIZE(64, 64),
         .frontPicYOffset = 1,
@@ -5674,7 +5674,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 14,
         .weight = 140,
         .description = COMPOUND_STRING(
-            "{JPN}こだいとしを まもっていた きおくを\nのこしているため いつも おなじ\nルートを とんでいるらしい。"),
+            "こだいとしを まもっていた きおくを\nのこしているため いつも おなじ\nルートを とんでいるらしい。"),
         .pokemonScale = 265,
         .pokemonOffset = 2,
         .trainerScale = 262,
@@ -5748,7 +5748,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 5,
         .weight = 15,
         .description = COMPOUND_STRING(
-            "{JPN}もっている マスクは デスマスが\nにんげんだった ときの かお。\nたまに みつめては ないている。"),
+            "もっている マスクは デスマスが\nにんげんだった ときの かお。\nたまに みつめては ないている。"),
         .pokemonScale = 432,
         .pokemonOffset = 13,
         .trainerScale = 256,
@@ -5819,7 +5819,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 17,
         .weight = 765,
         .description = COMPOUND_STRING(
-            "{JPN}ちかづいた にんげんを のみこんで\nミイラに してしまうという ウワサ。\nきんかいを このんで たべる。"),
+            "ちかづいた にんげんを のみこんで\nミイラに してしまうという ウワサ。\nきんかいを このんで たべる。"),
         .pokemonScale = 259,
         .pokemonOffset = 0,
         .trainerScale = 290,
@@ -5885,7 +5885,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 5,
         .weight = 15,
         .description = COMPOUND_STRING(
-            "{JPN}のろいが きざまれた ねんどばんが\nデスマスに とりついた。 おんねん\nパワーを すいとっていると いう。"),
+            "のろいが きざまれた ねんどばんが\nデスマスに とりついた。 おんねん\nパワーを すいとっていると いう。"),
         .pokemonScale = 432,
         .pokemonOffset = 13,
         .trainerScale = 256,
@@ -5951,7 +5951,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 16,
         .weight = 666,
         .description = COMPOUND_STRING(
-            "{JPN}つよい のろいを こめて かかれた\nこだいの えが デスマスの\nたましいを とりこみ うごきだした。"),
+            "つよい のろいを こめて かかれた\nこだいの えが デスマスの\nたましいを とりこみ うごきだした。"),
         .pokemonScale = 259,
         .pokemonOffset = 1,
         .trainerScale = 296,
@@ -6015,7 +6015,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 7,
         .weight = 165,
         .description = COMPOUND_STRING(
-            "{JPN}こだいの カセキから ふっかつした。\nふかさ 1000メートルまで\nせんすいすることが できる。"),
+            "こだいの カセキから ふっかつした。\nふかさ 1000メートルまで\nせんすいすることが できる。"),
         .pokemonScale = 365,
         .pokemonOffset = 12,
         .trainerScale = 256,
@@ -6082,7 +6082,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 12,
         .weight = 810,
         .description = COMPOUND_STRING(
-            "{JPN}うみと りくちで せいかつする。\nはりてで タンカーの ふなぞこに\nあなを あける パワーの もちぬし。"),
+            "うみと りくちで せいかつする。\nはりてで タンカーの ふなぞこに\nあなを あける パワーの もちぬし。"),
         .pokemonScale = 282,
         .pokemonOffset = 4,
         .trainerScale = 256,
@@ -6155,7 +6155,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 5,
         .weight = 95,
         .description = COMPOUND_STRING(
-            "{JPN}とりポケモンの そせんと いわれる。\nとぶことは できず えだから えだへ\nとびうつり せいかつしていたらしい。"),
+            "とりポケモンの そせんと いわれる。\nとぶことは できず えだから えだへ\nとびうつり せいかつしていたらしい。"),
         .pokemonScale = 432,
         .pokemonOffset = 13,
         .trainerScale = 256,
@@ -6222,7 +6222,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 14,
         .weight = 320,
         .description = COMPOUND_STRING(
-            "{JPN}ちじょうで じょそうを つけてから\nとびたつ。なかまと きょうりょくして\nえものを しとめる ちのうを もつ。"),
+            "ちじょうで じょそうを つけてから\nとびたつ。なかまと きょうりょくして\nえものを しとめる ちのうを もつ。"),
         .pokemonScale = 265,
         .pokemonOffset = 2,
         .trainerScale = 262,
@@ -6295,7 +6295,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 6,
         .weight = 310,
         .description = COMPOUND_STRING(
-            "{JPN}ふえいせいな ばしょを このむ。\nゲップのように はきだす ガスを\nすいこむと 1しゅうかん ねこむ。"),
+            "ふえいせいな ばしょを このむ。\nゲップのように はきだす ガスを\nすいこむと 1しゅうかん ねこむ。"),
         .pokemonScale = 422,
         .pokemonOffset = 14,
         .trainerScale = 256,
@@ -6364,7 +6364,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 19,
         .weight = 1073,
         .description = COMPOUND_STRING(
-            "{JPN}ひだりうでで あいてを しめつけて\nくちから はきだす あくしゅうの どくガスで\nとどめを さすのだ。"),
+            "ひだりうでで あいてを しめつけて\nくちから はきだす あくしゅうの どくガスで\nとどめを さすのだ。"),
         .pokemonScale = 256,
         .pokemonOffset = 1,
         .trainerScale = 326,
@@ -6434,7 +6434,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 210,
         .weight = 0,
         .description = COMPOUND_STRING(
-            "{JPN}キョダイマックスの パワーによって\nこくなった どくガスが すてられた\nおもちゃの かたちに かたまった。"),
+            "キョダイマックスの パワーによって\nこくなった どくガスが すてられた\nおもちゃの かたちに かたまった。"),
         .pokemonScale = 256,
         .pokemonOffset = 1,
         .trainerScale = 326,
@@ -6491,7 +6491,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 7,
         .weight = 125,
         .description = COMPOUND_STRING(
-            "{JPN}あいての すがたに ばけてみせて\nおどろかせる。むくちな こどもに\nばけている ことが おおいらしい。"),
+            "あいての すがたに ばけてみせて\nおどろかせる。むくちな こどもに\nばけている ことが おおいらしい。"),
         .pokemonScale = 365,
         .pokemonOffset = 12,
         .trainerScale = 256,
@@ -6560,7 +6560,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 16,
         .weight = 811,
         .description = COMPOUND_STRING(
-            "{JPN}あいてを ばかす ことで むれの\nあんぜんを まもってきた ポケモン。\nなかまどうしの けっそくが かたい。"),
+            "あいてを ばかす ことで むれの\nあんぜんを まもってきた ポケモン。\nなかまどうしの けっそくが かたい。"),
         .pokemonScale = 259,
         .pokemonOffset = 1,
         .trainerScale = 296,
@@ -6628,7 +6628,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 7,
         .weight = 125,
         .description = COMPOUND_STRING(
-            "{JPN}ししたたましい ヒスイのちにて よみがえる。\nおんさは ちからとなり あたまより たちのぼり\nあいてのすがたに へんじ うらみ はらしたり。"),
+            "ししたたましい ヒスイのちにて よみがえる。\nおんさは ちからとなり あたまより たちのぼり\nあいてのすがたに へんじ うらみ はらしたり。"),
         .pokemonScale = 365,
         .pokemonOffset = 12,
         .trainerScale = 256,
@@ -6693,7 +6693,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 16,
         .weight = 730,
         .description = COMPOUND_STRING(
-            "{JPN}はくはつ ふりみだしすがた しにがみのごとく。\nわがみをも きりさく はげしきおんしゅうにて\nあだ おそい みちづれかくごで しとめたり。"),
+            "はくはつ ふりみだしすがた しにがみのごとく。\nわがみをも きりさく はげしきおんしゅうにて\nあだ おそい みちづれかくごで しとめたり。"),
         .pokemonScale = 259,
         .pokemonOffset = 1,
         .trainerScale = 296,
@@ -6758,7 +6758,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 4,
         .weight = 58,
         .description = COMPOUND_STRING(
-            "{JPN}しっぽで おたがいの からだを\nなでて あいさつ。しっぽの ていれを\nかかさず いつも きれいにしている。"),
+            "しっぽで おたがいの からだを\nなでて あいさつ。しっぽの ていれを\nかかさず いつも きれいにしている。"),
         .pokemonScale = 491,
         .pokemonOffset = 12,
         .trainerScale = 256,
@@ -6824,7 +6824,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 5,
         .weight = 75,
         .description = COMPOUND_STRING(
-            "{JPN}しろい たいもうは とくべつな あぶらで\nコーティングされているので\nてきの こうげきを うけながすのだ。"),
+            "しろい たいもうは とくべつな あぶらで\nコーティングされているので\nてきの こうげきを うけながすのだ。"),
         .pokemonScale = 432,
         .pokemonOffset = 13,
         .trainerScale = 256,
@@ -6896,7 +6896,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 4,
         .weight = 58,
         .description = COMPOUND_STRING(
-            "{JPN}リボンのような しょっかくで\nサイコパワーを ぞうふくさせる。\nなにかを じっと みつめている。"),
+            "リボンのような しょっかくで\nサイコパワーを ぞうふくさせる。\nなにかを じっと みつめている。"),
         .pokemonScale = 491,
         .pokemonOffset = 14,
         .trainerScale = 256,
@@ -6967,7 +6967,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 7,
         .weight = 180,
         .description = COMPOUND_STRING(
-            "{JPN}さいみんじゅつで ポケモンや ひとを あやつる。\nねむったまま ゴチミルに つれさられる\nむかしばなしが かくちに のこっている。"),
+            "さいみんじゅつで ポケモンや ひとを あやつる。\nねむったまま ゴチミルに つれさられる\nむかしばなしが かくちに のこっている。"),
         .pokemonScale = 365,
         .pokemonOffset = 12,
         .trainerScale = 256,
@@ -7038,7 +7038,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 15,
         .weight = 440,
         .description = COMPOUND_STRING(
-            "{JPN}きょうりょくな サイコパワーの えいきょうで\nゴチルゼルの しゅういの くうかんが ねじれ\nなんまんこうねんも とおくの ほしぞらが うつるのだ。"),
+            "きょうりょくな サイコパワーの えいきょうで\nゴチルゼルの しゅういの くうかんが ねじれ\nなんまんこうねんも とおくの ほしぞらが うつるのだ。"),
         .pokemonScale = 268,
         .pokemonOffset = 2,
         .trainerScale = 271,
@@ -7106,7 +7106,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 3,
         .weight = 10,
         .description = COMPOUND_STRING(
-            "{JPN}サイコパワーを ほうしゅつして\nおそってきた てきを げきたい。\nテレパシーで なかまと かいわする。"),
+            "サイコパワーを ほうしゅつして\nおそってきた てきを げきたい。\nテレパシーで なかまと かいわする。"),
         .pokemonScale = 530,
         .pokemonOffset = 13,
         .trainerScale = 256,
@@ -7174,7 +7174,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 6,
         .weight = 80,
         .description = COMPOUND_STRING(
-            "{JPN}2つに ぶんれつした のうみそを\nもっているため いきなり ちがう\nこうどうを とることが あるのだ。"),
+            "2つに ぶんれつした のうみそを\nもっているため いきなり ちがう\nこうどうを とることが あるのだ。"),
         .pokemonScale = 422,
         .pokemonOffset = 12,
         .trainerScale = 256,
@@ -7241,7 +7241,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 10,
         .weight = 201,
         .description = COMPOUND_STRING(
-            "{JPN}ランクルス どうしが あくしゅすると\nのうみそが ネットワークで つながり\nサイコパワーが ぞうふくされるのだ。"),
+            "ランクルス どうしが あくしゅすると\nのうみそが ネットワークで つながり\nサイコパワーが ぞうふくされるのだ。"),
         .pokemonScale = 305,
         .pokemonOffset = 7,
         .trainerScale = 257,
@@ -7310,7 +7310,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 5,
         .weight = 55,
         .description = COMPOUND_STRING(
-            "{JPN}せんすいが とくいな とりポケモン。\nこうぶつの みずゴケを たべるため\nすいちゅうを およぎまわる。"),
+            "せんすいが とくいな とりポケモン。\nこうぶつの みずゴケを たべるため\nすいちゅうを およぎまわる。"),
         .pokemonScale = 432,
         .pokemonOffset = 14,
         .trainerScale = 256,
@@ -7381,7 +7381,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 13,
         .weight = 242,
         .description = COMPOUND_STRING(
-            "{JPN}よあけと ともに スワンナたちは\nおどりはじめる。まんなかで おどる\nスワンナが むれの リーダー。"),
+            "よあけと ともに スワンナたちは\nおどりはじめる。まんなかで おどる\nスワンナが むれの リーダー。"),
         .pokemonScale = 272,
         .pokemonOffset = 3,
         .trainerScale = 256,
@@ -7451,7 +7451,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 4,
         .weight = 57,
         .description = COMPOUND_STRING(
-            "{JPN}マイナス50どの いきを はく。\nゆきの けっしょうを つくって\nあたりに ゆきを ふらせる。"),
+            "マイナス50どの いきを はく。\nゆきの けっしょうを つくって\nあたりに ゆきを ふらせる。"),
         .pokemonScale = 491,
         .pokemonOffset = 12,
         .trainerScale = 256,
@@ -7524,7 +7524,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 11,
         .weight = 410,
         .description = COMPOUND_STRING(
-            "{JPN}ゆきやまに せいそくする ポケモン。\nおおむかし ひょうがきの ときに\nみなみの とちに いどうしてきた。"),
+            "ゆきやまに せいそくする ポケモン。\nおおむかし ひょうがきの ときに\nみなみの とちに いどうしてきた。"),
         .pokemonScale = 320,
         .pokemonOffset = 7,
         .trainerScale = 256,
@@ -7595,7 +7595,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 13,
         .weight = 575,
         .description = COMPOUND_STRING(
-            "{JPN}みずを たいりょうに のみこんで\nたいないで ゆきぐもを つくる。\nもうふぶきで てきを くるしめる。"),
+            "みずを たいりょうに のみこんで\nたいないで ゆきぐもを つくる。\nもうふぶきで てきを くるしめる。"),
         .pokemonScale = 272,
         .pokemonOffset = 3,
         .trainerScale = 256,
@@ -7661,7 +7661,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 6,
         .weight = 195,
         .description = COMPOUND_STRING(
-            "{JPN}たいもうが のやまの くさと\nおなじ いろと かおりに かわる。\nてきいを かんじると くさむらに かくれる。"),
+            "たいもうが のやまの くさと\nおなじ いろと かおりに かわる。\nてきいを かんじると くさむらに かくれる。"),
         .pokemonScale = 422,
         .pokemonOffset = 14,
         .trainerScale = 256,
@@ -7724,7 +7724,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 6,
         .weight = 195,
         .description = COMPOUND_STRING(
-            "{JPN}きせつの かわりめに なると\nたいもうと においが へんかする。\nきせつを つげる ポケモン。"),
+            "きせつの かわりめに なると\nたいもうと においが へんかする。\nきせつを つげる ポケモン。"),
         .pokemonScale = 422,
         .pokemonOffset = 14,
         .trainerScale = 256,
@@ -7787,7 +7787,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 6,
         .weight = 195,
         .description = COMPOUND_STRING(
-            "{JPN}きせつが かわったとき だけでなく\nきおんや しつどに よっても\nからだのいろは すこし へんかする。"),
+            "きせつが かわったとき だけでなく\nきおんや しつどに よっても\nからだのいろは すこし へんかする。"),
         .pokemonScale = 422,
         .pokemonOffset = 14,
         .trainerScale = 256,
@@ -7850,7 +7850,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 6,
         .weight = 195,
         .description = COMPOUND_STRING(
-            "{JPN}なかよくなると ずつきで じゃれる。\nはなに かくれていて わからないが\nツノが あって じみに いたい。"),
+            "なかよくなると ずつきで じゃれる。\nはなに かくれていて わからないが\nツノが あって じみに いたい。"),
         .pokemonScale = 422,
         .pokemonOffset = 14,
         .trainerScale = 256,
@@ -7913,7 +7913,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 19,
         .weight = 925,
         .description = COMPOUND_STRING(
-            "{JPN}きせつの うつりかわりと ともに\nすみかを かえるので メブキジカが\nはるを はこぶと いう ひともいる。"),
+            "きせつの うつりかわりと ともに\nすみかを かえるので メブキジカが\nはるを はこぶと いう ひともいる。"),
         .pokemonScale = 256,
         .pokemonOffset = 1,
         .trainerScale = 326,
@@ -7974,7 +7974,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 19,
         .weight = 925,
         .description = COMPOUND_STRING(
-            "{JPN}はっぱから こうちゃが つくられる。\nさんちによって あじは ことなり\nパルデアさんは かおりが つよい。"),
+            "はっぱから こうちゃが つくられる。\nさんちによって あじは ことなり\nパルデアさんは かおりが つよい。"),
         .pokemonScale = 256,
         .pokemonOffset = 1,
         .trainerScale = 326,
@@ -8035,7 +8035,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 19,
         .weight = 925,
         .description = COMPOUND_STRING(
-            "{JPN}きせつによって ツノに はえる\nくさばなが かわる。りっぱな ツノの\nもちぬしが むれを ひきいている。"),
+            "きせつによって ツノに はえる\nくさばなが かわる。りっぱな ツノの\nもちぬしが むれを ひきいている。"),
         .pokemonScale = 256,
         .pokemonOffset = 1,
         .trainerScale = 326,
@@ -8096,7 +8096,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 19,
         .weight = 925,
         .description = COMPOUND_STRING(
-            "{JPN}きせつによって すみかを かえる。\nひとびとは メブキジカの ツノで\nきせつの うつりかわりを かんじる。"),
+            "きせつによって すみかを かえる。\nひとびとは メブキジカの ツノで\nきせつの うつりかわりを かんじる。"),
         .pokemonScale = 256,
         .pokemonOffset = 1,
         .trainerScale = 326,
@@ -8160,7 +8160,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 4,
         .weight = 50,
         .description = COMPOUND_STRING(
-            "{JPN}ほほの でんきふくろで つくった でんきを\nまくの うちがわに ためて\nかっくうしながら でんきを はなつ。"),
+            "ほほの でんきふくろで つくった でんきを\nまくの うちがわに ためて\nかっくうしながら でんきを はなつ。"),
         .pokemonScale = 491,
         .pokemonOffset = 12,
         .trainerScale = 256,
@@ -8229,7 +8229,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 5,
         .weight = 59,
         .description = COMPOUND_STRING(
-            "{JPN}チョボマキと いっしょに いるときに\nでんきてきな しげきを うけると\nしんかする ふしぎな ポケモンだ。"),
+            "チョボマキと いっしょに いるときに\nでんきてきな しげきを うけると\nしんかする ふしぎな ポケモンだ。"),
         .pokemonScale = 432,
         .pokemonOffset = 15,
         .trainerScale = 256,
@@ -8294,7 +8294,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 10,
         .weight = 330,
         .description = COMPOUND_STRING(
-            "{JPN}こうそくで とびまわり するどい やりで\nあいてを つく。ふりな あいてにも\nゆうかんに たちむかう。"),
+            "こうそくで とびまわり するどい やりで\nあいてを つく。ふりな あいてにも\nゆうかんに たちむかう。"),
         .pokemonScale = 305,
         .pokemonOffset = 7,
         .trainerScale = 257,
@@ -8362,7 +8362,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 2,
         .weight = 10,
         .description = COMPOUND_STRING(
-            "{JPN}モンスターボールに にた もようで\nさそい どくほうしを ふきかける。\nなぜ にているかは ナゾである。"),
+            "モンスターボールに にた もようで\nさそい どくほうしを ふきかける。\nなぜ にているかは ナゾである。"),
         .pokemonScale = 682,
         .pokemonOffset = 24,
         .trainerScale = 256,
@@ -8433,7 +8433,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 6,
         .weight = 105,
         .description = COMPOUND_STRING(
-            "{JPN}りょううでの モンスターボールに にた\nカサを ゆらゆらと うごかして\nえものを さそう ダンスを おどる。"),
+            "りょううでの モンスターボールに にた\nカサを ゆらゆらと うごかして\nえものを さそう ダンスを おどる。"),
         .pokemonScale = 422,
         .pokemonOffset = 13,
         .trainerScale = 256,
@@ -8502,7 +8502,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 12,
         .weight = 330,
         .description = COMPOUND_STRING(
-            "{JPN}うすい ベールのような うでで\nあいての からだを しばりつけたまま\nうみの そこへ しずんでいくのだ。"),
+            "うすい ベールのような うでで\nあいての からだを しばりつけたまま\nうみの そこへ しずんでいくのだ。"),
         .pokemonScale = 282,
         .pokemonOffset = 4,
         .trainerScale = 256,
@@ -8588,7 +8588,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 22,
         .weight = 1350,
         .description = COMPOUND_STRING(
-            "{JPN}ブルンゲルの すみかに まよいこんだ\nふねは しずめられて のりくみいんの いのちは\nすいとられて しまうのだ。"),
+            "ブルンゲルの すみかに まよいこんだ\nふねは しずめられて のりくみいんの いのちは\nすいとられて しまうのだ。"),
         .pokemonScale = 256,
         .pokemonOffset = 0,
         .trainerScale = 348,
@@ -8675,7 +8675,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 12,
         .weight = 316,
         .description = COMPOUND_STRING(
-            "{JPN}ママンボウの からだを おおう\nとくしゅな ねんまくには\nきずを なおす こうかが ある。"),
+            "ママンボウの からだを おおう\nとくしゅな ねんまくには\nきずを なおす こうかが ある。"),
         .pokemonScale = 282,
         .pokemonOffset = 4,
         .trainerScale = 256,
@@ -8742,7 +8742,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 1,
         .weight = 6,
         .description = COMPOUND_STRING(
-            "{JPN}まちなかで くらす バチュルは\nみんかの コンセントから でんきを\nすいとる すべを おぼえている。"),
+            "まちなかで くらす バチュルは\nみんかの コンセントから でんきを\nすいとる すべを おぼえている。"),
         .pokemonScale = 682,
         .pokemonOffset = 24,
         .trainerScale = 256,
@@ -8810,7 +8810,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 8,
         .weight = 143,
         .description = COMPOUND_STRING(
-            "{JPN}てきに おそわれると でんきを おびびた\nいとを たくさん はきだして\nでんきの バリアを つくる。"),
+            "てきに おそわれると でんきを おびびた\nいとを たくさん はきだして\nでんきの バリアを つくる。"),
         .pokemonScale = 366,
         .pokemonOffset = 10,
         .trainerScale = 257,
@@ -8882,7 +8882,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 6,
         .weight = 188,
         .description = COMPOUND_STRING(
-            "{JPN}きけんを さっちすると トゲを\nいっせいに はっしゃして はんげき。\nその すきに ころがって にげる。"),
+            "きけんを さっちすると トゲを\nいっせいに はっしゃして はんげき。\nその すきに ころがって にげる。"),
         .pokemonScale = 422,
         .pokemonOffset = 14,
         .trainerScale = 256,
@@ -8955,7 +8955,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 10,
         .weight = 1100,
         .description = COMPOUND_STRING(
-            "{JPN}3ぼんの トゲつき しょくしゅを ふりまわして\nたたかう。はがねの トゲは たたきつけると\nおおいわを ふんさいする はかいりょくだ。"),
+            "3ぼんの トゲつき しょくしゅを ふりまわして\nたたかう。はがねの トゲは たたきつけると\nおおいわを ふんさいする はかいりょくだ。"),
         .pokemonScale = 305,
         .pokemonOffset = 7,
         .trainerScale = 257,
@@ -9025,7 +9025,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 3,
         .weight = 210,
         .description = COMPOUND_STRING(
-            "{JPN}2つの からだは くみあわせが\nきまっている。べつの からだとは\nかみあわずに はなれてしまう。"),
+            "2つの からだは くみあわせが\nきまっている。べつの からだとは\nかみあわずに はなれてしまう。"),
         .pokemonScale = 530,
         .pokemonOffset = 15,
         .trainerScale = 256,
@@ -9093,7 +9093,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 6,
         .weight = 510,
         .description = COMPOUND_STRING(
-            "{JPN}かいてんほうこうを かえる ことで\nなかまに きもちを つたえている。\nおこるほど かいてんが はやくなる。"),
+            "かいてんほうこうを かえる ことで\nなかまに きもちを つたえている。\nおこるほど かいてんが はやくなる。"),
         .pokemonScale = 422,
         .pokemonOffset = 12,
         .trainerScale = 256,
@@ -9161,7 +9161,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 6,
         .weight = 810,
         .description = COMPOUND_STRING(
-            "{JPN}あかい コアは エネルギータンクの\nやくわり。チャージした エネルギーを\nトゲから しゅういに うちだす。"),
+            "あかい コアは エネルギータンクの\nやくわり。チャージした エネルギーを\nトゲから しゅういに うちだす。"),
         .pokemonScale = 422,
         .pokemonOffset = 12,
         .trainerScale = 256,
@@ -9229,7 +9229,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 2,
         .weight = 3,
         .description = COMPOUND_STRING(
-            "{JPN}1ぴきの でんりょくは ちいさいが\nたくさんの シビシラスが つながると\nカミナリと おなじ いりょくになる。"),
+            "1ぴきの でんりょくは ちいさいが\nたくさんの シビシラスが つながると\nカミナリと おなじ いりょくになる。"),
         .pokemonScale = 682,
         .pokemonOffset = 24,
         .trainerScale = 256,
@@ -9309,7 +9309,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 12,
         .weight = 220,
         .description = COMPOUND_STRING(
-            "{JPN}まるい もようが はつでん きかん。\nあいてに まきついてから もようを\nおしつけて でんきを ながすのだ。"),
+            "まるい もようが はつでん きかん。\nあいてに まきついてから もようを\nおしつけて でんきを ながすのだ。"),
         .pokemonScale = 282,
         .pokemonOffset = 4,
         .trainerScale = 256,
@@ -9377,7 +9377,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 21,
         .weight = 805,
         .description = COMPOUND_STRING(
-            "{JPN}うでの ちからで うみから はいだし\nみずべの えものに おそいかかる。\nいっしゅんで うみへ ひきずりこむ。"),
+            "うでの ちからで うみから はいだし\nみずべの えものに おそいかかる。\nいっしゅんで うみへ ひきずりこむ。"),
         .pokemonScale = 256,
         .pokemonOffset = 1,
         .trainerScale = 365,
@@ -9452,7 +9452,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 30,
         .weight = 1800,
         .description = COMPOUND_STRING(
-            "{JPN}はつでんりょうは メガシンカまえの\n10ばい。 ねんえきで できている\nにせシビビールから ほうでんする。"),
+            "はつでんりょうは メガシンカまえの\n10ばい。 ねんえきで できている\nにせシビビールから ほうでんする。"),
         .frontPic = gMonFrontPic_EelektrossMega,
         .frontPicSize = MON_COORDS_SIZE(64, 64),
         .frontPicYOffset = 1,
@@ -9506,7 +9506,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 5,
         .weight = 90,
         .description = COMPOUND_STRING(
-            "{JPN}きょうりょくな サイコパワーを あやつる。\nサイコパワーで あいての のうみそを\nしめつけて ずつうを おこさせる。"),
+            "きょうりょくな サイコパワーを あやつる。\nサイコパワーで あいての のうみそを\nしめつけて ずつうを おこさせる。"),
         .pokemonScale = 432,
         .pokemonOffset = 13,
         .trainerScale = 256,
@@ -9577,7 +9577,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 10,
         .weight = 345,
         .description = COMPOUND_STRING(
-            "{JPN}あいての きおくを そうさする。\n3しょくの ゆびを てんめつさせて\nなかまと かいわしている らしい。"),
+            "あいての きおくを そうさする。\n3しょくの ゆびを てんめつさせて\nなかまと かいわしている らしい。"),
         .pokemonScale = 305,
         .pokemonOffset = 7,
         .trainerScale = 257,
@@ -9647,7 +9647,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 3,
         .weight = 31,
         .description = COMPOUND_STRING(
-            "{JPN}ヒトモシの ともす あかりは\nひとや ポケモンの せいめいりょくを\nすいとって もえているのだ。"),
+            "ヒトモシの ともす あかりは\nひとや ポケモンの せいめいりょくを\nすいとって もえているのだ。"),
         .pokemonScale = 530,
         .pokemonOffset = 13,
         .trainerScale = 256,
@@ -9718,7 +9718,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 6,
         .weight = 130,
         .description = COMPOUND_STRING(
-            "{JPN}ふきつな ポケモンと こわがられる。\nししゃの たましいを もとめて\nまちなかを フラフラと さまよう。"),
+            "ふきつな ポケモンと こわがられる。\nししゃの たましいを もとめて\nまちなかを フラフラと さまよう。"),
         .pokemonScale = 422,
         .pokemonOffset = 12,
         .trainerScale = 256,
@@ -9789,7 +9789,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 10,
         .weight = 343,
         .description = COMPOUND_STRING(
-            "{JPN}たましいを すいとって もやす。\nうでの ほのおを ゆらして\nあいてを さいみんじょうたいに する。"),
+            "たましいを すいとって もやす。\nうでの ほのおを ゆらして\nあいてを さいみんじょうたいに する。"),
         .pokemonScale = 305,
         .pokemonOffset = 7,
         .trainerScale = 257,
@@ -9862,7 +9862,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 25,
         .weight = 696,
         .description = COMPOUND_STRING(
-            "{JPN}かたほうの ひとみは このよと\nあのよを つなぐ まど。 おんねんを\nひきこんで パワーに かえてしまう。"),
+            "かたほうの ひとみは このよと\nあのよを つなぐ まど。 おんねんを\nひきこんで パワーに かえてしまう。"),
         .frontPic = gMonFrontPic_ChandelureMega,
         .frontPicSize = MON_COORDS_SIZE(64, 64),
         .frontPicYOffset = 0,
@@ -9916,7 +9916,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 6,
         .weight = 180,
         .description = COMPOUND_STRING(
-            "{JPN}きのみを キバで くだいて たべる。\nなんかいも はえかわることで\nつよく するどい キバに なる。"),
+            "きのみを キバで くだいて たべる。\nなんかいも はえかわることで\nつよく するどい キバに なる。"),
         .pokemonScale = 422,
         .pokemonOffset = 13,
         .trainerScale = 256,
@@ -9981,7 +9981,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 10,
         .weight = 360,
         .description = COMPOUND_STRING(
-            "{JPN}おれた キバは はえかわらないので\nたたかいが おわると かわらの いわで\nキバを たんねんに みがく。"),
+            "おれた キバは はえかわらないので\nたたかいが おわると かわらの いわで\nキバを たんねんに みがく。"),
         .pokemonScale = 305,
         .pokemonOffset = 7,
         .trainerScale = 257,
@@ -10045,7 +10045,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 18,
         .weight = 1055,
         .description = COMPOUND_STRING(
-            "{JPN}やさしい せいかくだが なわばりを あらす\nものには ようしゃしない。\nてつを きる キバで いどみかかる。"),
+            "やさしい せいかくだが なわばりを あらす\nものには ようしゃしない。\nてつを きる キバで いどみかかる。"),
         .pokemonScale = 267,
         .pokemonOffset = 2,
         .trainerScale = 286,
@@ -10116,7 +10116,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 5,
         .weight = 85,
         .description = COMPOUND_STRING(
-            "{JPN}ぐあいが わるくなると\nはなみずが みずっぽくなり こおりわざの\nいりょくが おちてしまうのだ。"),
+            "ぐあいが わるくなると\nはなみずが みずっぽくなり こおりわざの\nいりょくが おちてしまうのだ。"),
         .pokemonScale = 432,
         .pokemonOffset = 15,
         .trainerScale = 256,
@@ -10186,7 +10186,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 26,
         .weight = 2600,
         .description = COMPOUND_STRING(
-            "{JPN}はく いきを じざいに こおらせる。\nおよぎが とくいで きたの うみを\nおよぎまわり えものを つかまえる。"),
+            "はく いきを じざいに こおらせる。\nおよぎが とくいで きたの うみを\nおよぎまわり えものを つかまえる。"),
         .pokemonScale = 266,
         .pokemonOffset = 3,
         .trainerScale = 399,
@@ -10254,7 +10254,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 11,
         .weight = 1480,
         .description = COMPOUND_STRING(
-            "{JPN}たいおんが あがると すいじょうきに なって\nすがたを けす。たいおんが さがると\nもとの こおりに もどる。"),
+            "たいおんが あがると すいじょうきに なって\nすがたを けす。たいおんが さがると\nもとの こおりに もどる。"),
         .pokemonScale = 320,
         .pokemonOffset = 7,
         .trainerScale = 256,
@@ -10323,7 +10323,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 4,
         .weight = 77,
         .description = COMPOUND_STRING(
-            "{JPN}てきに おそわれると からの ふたを\nとじて ぼうぎょ。ふたの すきまから\nベトベトした どくえきを とばす。"),
+            "てきに おそわれると からの ふたを\nとじて ぼうぎょ。ふたの すきまから\nベトベトした どくえきを とばす。"),
         .pokemonScale = 491,
         .pokemonOffset = 15,
         .trainerScale = 256,
@@ -10391,7 +10391,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 8,
         .weight = 253,
         .description = COMPOUND_STRING(
-            "{JPN}からだが かわくと よわってしまう。\nうすい まくを なんじゅうも まいて\nかんそうを ふせいでいるのだ。"),
+            "からだが かわくと よわってしまう。\nうすい まくを なんじゅうも まいて\nかんそうを ふせいでいるのだ。"),
         .pokemonScale = 366,
         .pokemonOffset = 9,
         .trainerScale = 257,
@@ -10457,7 +10457,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 7,
         .weight = 110,
         .description = COMPOUND_STRING(
-            "{JPN}ひふが かたいので\nすもうとりに ふまれても へいき。\nでんきを ながすとき わらいがおに なる。"),
+            "ひふが かたいので\nすもうとりに ふまれても へいき。\nでんきを ながすとき わらいがおに なる。"),
         .pokemonScale = 365,
         .pokemonOffset = 14,
         .trainerScale = 256,
@@ -10524,7 +10524,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 7,
         .weight = 205,
         .description = COMPOUND_STRING(
-            "{JPN}てつぶん たっぷりの どろの なかで\nせいそくしていたため がんじょうな\nはがねの からだに へんかした。"),
+            "てつぶん たっぷりの どろの なかで\nせいそくしていたため がんじょうな\nはがねの からだに へんかした。"),
         .pokemonScale = 365,
         .pokemonOffset = 14,
         .trainerScale = 256,
@@ -10590,7 +10590,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 9,
         .weight = 200,
         .description = COMPOUND_STRING(
-            "{JPN}ながれるような れんぞく こうげきを\nくりだして てきを あっとうする。\nするどい ツメで てきを きりさく。"),
+            "ながれるような れんぞく こうげきを\nくりだして てきを あっとうする。\nするどい ツメで てきを きりさく。"),
         .pokemonScale = 338,
         .pokemonOffset = 10,
         .trainerScale = 256,
@@ -10655,7 +10655,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 14,
         .weight = 355,
         .description = COMPOUND_STRING(
-            "{JPN}うでの たいもうを ムチのように\nあつかう。りょううでの こうげきは\nめにも とまらぬ はやさ。"),
+            "うでの たいもうを ムチのように\nあつかう。りょううでの こうげきは\nめにも とまらぬ はやさ。"),
         .pokemonScale = 265,
         .pokemonOffset = 2,
         .trainerScale = 262,
@@ -10726,7 +10726,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 16,
         .weight = 1390,
         .description = COMPOUND_STRING(
-            "{JPN}にっこうを つばさで うけて\nからだを あたためる。 たいおんが\nさがると うごけなくなってしまう。"),
+            "にっこうを つばさで うけて\nからだを あたためる。 たいおんが\nさがると うごけなくなってしまう。"),
         .pokemonScale = 259,
         .pokemonOffset = 1,
         .trainerScale = 296,
@@ -10799,7 +10799,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 10,
         .weight = 920,
         .description = COMPOUND_STRING(
-            "{JPN}たいないで もえる エネルギーに よって\nかつどうしているが どんな\nエネルギーなのかは ふめいである。"),
+            "たいないで もえる エネルギーに よって\nかつどうしているが どんな\nエネルギーなのかは ふめいである。"),
         .pokemonScale = 305,
         .pokemonOffset = 7,
         .trainerScale = 257,
@@ -10866,7 +10866,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 28,
         .weight = 3300,
         .description = COMPOUND_STRING(
-            "{JPN}マッハの スピードで そらを とぶ。\nむねの ふういんを はがすと\nエネルギーが ぼうそうしてしまう。"),
+            "マッハの スピードで そらを とぶ。\nむねの ふういんを はがすと\nエネルギーが ぼうそうしてしまう。"),
         .pokemonScale = 275,
         .pokemonOffset = 3,
         .trainerScale = 300,
@@ -10938,7 +10938,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 40,
         .weight = 3300,
         .description = COMPOUND_STRING(
-            "{JPN}メガシンカによって たいないの\nエネルギーが かっせいかしており\nいつ ばくはつしても おかしくない。"),
+            "メガシンカによって たいないの\nエネルギーが かっせいかしており\nいつ ばくはつしても おかしくない。"),
         .frontPic = gMonFrontPic_GolurkMega,
         .frontPicSize = MON_COORDS_SIZE(64, 64),
         .frontPicYOffset = 0,
@@ -10991,7 +10991,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 5,
         .weight = 102,
         .description = COMPOUND_STRING(
-            "{JPN}ぜんしんが はものの ポケモン。\nたたかいで はこぼれすると \nかわらの いしで はを とぐ。"),
+            "ぜんしんが はものの ポケモン。\nたたかいで はこぼれすると \nかわらの いしで はを とぐ。"),
         .pokemonScale = 432,
         .pokemonOffset = 15,
         .trainerScale = 256,
@@ -11063,7 +11063,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 16,
         .weight = 700,
         .description = COMPOUND_STRING(
-            "{JPN}コマタナの むれを ひきいている。\nボスの ざを うばいあい たたかう。\nやぶれると むれを おいだされる。"),
+            "コマタナの むれを ひきいている。\nボスの ざを うばいあい たたかう。\nやぶれると むれを おいだされる。"),
         .pokemonScale = 259,
         .pokemonOffset = 1,
         .trainerScale = 296,
@@ -11130,7 +11130,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 20,
         .weight = 1200,
         .description = COMPOUND_STRING(
-            "{JPN}だいぐんぜいを ひきいて たたかうが\nむずかしい さくせんは にがてなので\nちからで おして おしまくるだけ。"),
+            "だいぐんぜいを ひきいて たたかうが\nむずかしい さくせんは にがてなので\nちからで おして おしまくるだけ。"),
         .pokemonScale = 356,
         .pokemonOffset = 17,
         .trainerScale = 256,
@@ -11193,7 +11193,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 16,
         .weight = 946,
         .description = COMPOUND_STRING(
-            "{JPN}はげしい ずつきを くらわせても\nふさふさの たいもうが\nダメージを きゅうしゅうして くれるのだ。"),
+            "はげしい ずつきを くらわせても\nふさふさの たいもうが\nダメージを きゅうしゅうして くれるのだ。"),
         .pokemonScale = 259,
         .pokemonOffset = 1,
         .trainerScale = 296,
@@ -11260,7 +11260,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 5,
         .weight = 105,
         .description = COMPOUND_STRING(
-            "{JPN}きゃくりょくで きのみを くだく。\nどんなに つよい あいてでも\nゆうかんに たちむかう しゅうせい。"),
+            "きゃくりょくで きのみを くだく。\nどんなに つよい あいてでも\nゆうかんに たちむかう しゅうせい。"),
         .pokemonScale = 432,
         .pokemonOffset = 13,
         .trainerScale = 256,
@@ -11332,7 +11332,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 15,
         .weight = 410,
         .description = COMPOUND_STRING(
-            "{JPN}なかまのため きけんを かえりみず\nたたかう。じてんしゃを つかんだまま\nおおぞらを まう ことが できる。"),
+            "なかまのため きけんを かえりみず\nたたかう。じてんしゃを つかんだまま\nおおぞらを まう ことが できる。"),
         .pokemonScale = 268,
         .pokemonOffset = 2,
         .trainerScale = 271,
@@ -11399,7 +11399,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 17,
         .weight = 434,
         .description = COMPOUND_STRING(
-            "{JPN}ききせまる ときのこえを あげ かりをする\nたけき おおとり。 こすいに しょうげきはを はなち\nすいめんに うかびし えものを とる。"),
+            "ききせまる ときのこえを あげ かりをする\nたけき おおとり。 こすいに しょうげきはを はなち\nすいめんに うかびし えものを とる。"),
         .pokemonScale = 268,
         .pokemonOffset = 2,
         .trainerScale = 271,
@@ -11465,7 +11465,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 5,
         .weight = 90,
         .description = COMPOUND_STRING(
-            "{JPN}つばさが ちいさいため とべない。\nしんかの ときが ちかづくと\nじぶんから ガイコツを ぬぎすてる。"),
+            "つばさが ちいさいため とべない。\nしんかの ときが ちかづくと\nじぶんから ガイコツを ぬぎすてる。"),
         .pokemonScale = 432,
         .pokemonOffset = 13,
         .trainerScale = 256,
@@ -11532,7 +11532,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 12,
         .weight = 395,
         .description = COMPOUND_STRING(
-            "{JPN}ほねを ひろい あつめて すづくり。\nよわった えものを あしで つかみ\nほねの すまで かるがると はこぶ。"),
+            "ほねを ひろい あつめて すづくり。\nよわった えものを あしで つかみ\nほねの すまで かるがると はこぶ。"),
         .pokemonScale = 282,
         .pokemonOffset = 4,
         .trainerScale = 256,
@@ -11598,7 +11598,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 14,
         .weight = 580,
         .description = COMPOUND_STRING(
-            "{JPN}しっぽの あなから くうきを すって\nたいないで ほのおを もやす。\nアイアントの てんてき。"),
+            "しっぽの あなから くうきを すって\nたいないで ほのおを もやす。\nアイアントの てんてき。"),
         .pokemonScale = 265,
         .pokemonOffset = 2,
         .trainerScale = 262,
@@ -11664,7 +11664,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 3,
         .weight = 330,
         .description = COMPOUND_STRING(
-            "{JPN}はがねの よろいを みにまとう。\nてんてきの クイタランの こうげきを\nしゅうだんで ふせぎ はんげきする。"),
+            "はがねの よろいを みにまとう。\nてんてきの クイタランの こうげきを\nしゅうだんで ふせぎ はんげきする。"),
         .pokemonScale = 530,
         .pokemonOffset = 19,
         .trainerScale = 256,
@@ -11745,7 +11745,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 8,
         .weight = 173,
         .description = COMPOUND_STRING(
-            "{JPN}なんにでも かみつく しゅうせい。\nたべられるものは なんでも たべる。\nうかつに ちかよると きけんだ。"),
+            "なんにでも かみつく しゅうせい。\nたべられるものは なんでも たべる。\nうかつに ちかよると きけんだ。"),
         .pokemonScale = 366,
         .pokemonOffset = 12,
         .trainerScale = 257,
@@ -11811,7 +11811,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 14,
         .weight = 500,
         .description = COMPOUND_STRING(
-            "{JPN}なわばりの エサを たべつくすと\nほかの とちへ いどうする。\n2つの あたまは なかが わるい。"),
+            "なわばりの エサを たべつくすと\nほかの とちへ いどうする。\n2つの あたまは なかが わるい。"),
         .pokemonScale = 265,
         .pokemonOffset = 3,
         .trainerScale = 262,
@@ -11875,7 +11875,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 18,
         .weight = 1600,
         .description = COMPOUND_STRING(
-            "{JPN}6まいの はねで そらを とびつづけ\nうごくものを てきと おもいこみ おそう\nきょうぼうな ポケモン。"),
+            "6まいの はねで そらを とびつづけ\nうごくものを てきと おもいこみ おそう\nきょうぼうな ポケモン。"),
         .pokemonScale = 267,
         .pokemonOffset = 2,
         .trainerScale = 286,
@@ -11947,7 +11947,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 11,
         .weight = 288,
         .description = COMPOUND_STRING(
-            "{JPN}たいようから うまれた ポケモンと\nしんじられてきた。しんかするとき\nぜんしんが ほのおに つつまれる。"),
+            "たいようから うまれた ポケモンと\nしんじられてきた。しんかするとき\nぜんしんが ほのおに つつまれる。"),
         .pokemonScale = 320,
         .pokemonOffset = 10,
         .trainerScale = 256,
@@ -12023,7 +12023,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 16,
         .weight = 460,
         .description = COMPOUND_STRING(
-            "{JPN}かざんばいで ちじょうが まっくらに\nなったとき ウルガモスの ほのおが\nたいようの かわりに なったという。"),
+            "かざんばいで ちじょうが まっくらに\nなったとき ウルガモスの ほのおが\nたいようの かわりに なったという。"),
         .pokemonScale = 259,
         .pokemonOffset = 1,
         .trainerScale = 296,
@@ -12091,7 +12091,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 21,
         .weight = 2500,
         .description = COMPOUND_STRING(
-            "{JPN}ポケモンを まもるため にんげんと\nあらそった でんせつの ポケモン。\nちんちゃく れいせいな せいかく。"),
+            "ポケモンを まもるため にんげんと\nあらそった でんせつの ポケモン。\nちんちゃく れいせいな せいかく。"),
         .pokemonScale = 256,
         .pokemonOffset = 0,
         .trainerScale = 365,
@@ -12159,7 +12159,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 19,
         .weight = 2600,
         .description = COMPOUND_STRING(
-            "{JPN}にんげん どうしの せんそうによって\nすみかを うしなった ポケモンたちを\nまもるため にんげんと たたかった。"),
+            "にんげん どうしの せんそうによって\nすみかを うしなった ポケモンたちを\nまもるため にんげんと たたかった。"),
         .pokemonScale = 256,
         .pokemonOffset = 1,
         .trainerScale = 336,
@@ -12231,7 +12231,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 20,
         .weight = 2000,
         .description = COMPOUND_STRING(
-            "{JPN}なかまを まもるため にんげんに\nたたかいを いどんだ ポケモン。\nでんせつで かたりつがれている。"),
+            "なかまを まもるため にんげんに\nたたかいを いどんだ ポケモン。\nでんせつで かたりつがれている。"),
         .pokemonScale = 261,
         .pokemonOffset = 1,
         .trainerScale = 344,
@@ -12298,7 +12298,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 15,
         .weight = 630,
         .description = COMPOUND_STRING(
-            "{JPN}くものような エネルギーたいに\nかはんしんが つつまれている。\nじそく300キロで そらを とぶ。"),
+            "くものような エネルギーたいに\nかはんしんが つつまれている。\nじそく300キロで そらを とぶ。"),
         .pokemonScale = 268,
         .pokemonOffset = 2,
         .trainerScale = 271,
@@ -12386,7 +12386,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 14,
         .weight = 630,
         .description = COMPOUND_STRING(
-            "{JPN}しほうはっぽうを とびまわる。\nこのときに だす かぜは つよすぎて\nどんなものでも ふきとばしてしまう。"),
+            "しほうはっぽうを とびまわる。\nこのときに だす かぜは つよすぎて\nどんなものでも ふきとばしてしまう。"),
         .pokemonScale = 268,
         .pokemonOffset = 2,
         .trainerScale = 271,
@@ -12458,7 +12458,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 15,
         .weight = 610,
         .description = COMPOUND_STRING(
-            "{JPN}ボルトロスが とおりすぎた とちには\nかみなりの おちた むすうの あとが\nやけこげとなって のこっている。"),
+            "ボルトロスが とおりすぎた とちには\nかみなりの おちた むすうの あとが\nやけこげとなって のこっている。"),
         .pokemonScale = 268,
         .pokemonOffset = 2,
         .trainerScale = 271,
@@ -12546,7 +12546,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 30,
         .weight = 610,
         .description = COMPOUND_STRING(
-            "{JPN}おおぞらを とびまわりながら\nあちこちに カミナリを おとして\nやまかじを おこすので きらわれる。"),
+            "おおぞらを とびまわりながら\nあちこちに カミナリを おとして\nやまかじを おこすので きらわれる。"),
         .pokemonScale = 268,
         .pokemonOffset = 2,
         .trainerScale = 271,
@@ -12630,7 +12630,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 32,
         .weight = 3300,
         .description = COMPOUND_STRING(
-            "{JPN}しんわに とうじょうする ポケモン。\nしっぽから ほのおを ふきあげて\nすべての ものを やきつくす。"),
+            "しんわに とうじょうする ポケモン。\nしっぽから ほのおを ふきあげて\nすべての ものを やきつくす。"),
         .pokemonScale = 256,
         .pokemonOffset = 0,
         .trainerScale = 445,
@@ -12698,7 +12698,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 29,
         .weight = 3450,
         .description = COMPOUND_STRING(
-            "{JPN}しっぽで でんきを つくりだす。\nぜんしんを かみなりぐもに かくして\nイッシュちほうの そらを とぶ。"),
+            "しっぽで でんきを つくりだす。\nぜんしんを かみなりぐもに かくして\nイッシュちほうの そらを とぶ。"),
         .pokemonScale = 275,
         .pokemonOffset = 2,
         .trainerScale = 412,
@@ -12766,7 +12766,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 15,
         .weight = 680,
         .description = COMPOUND_STRING(
-            "{JPN}ランドロスが おとずれる とちは\nさくもつが たくさん みのるため\nはたけのかみさま と いわれている。"),
+            "ランドロスが おとずれる とちは\nさくもつが たくさん みのるため\nはたけのかみさま と いわれている。"),
         .pokemonScale = 268,
         .pokemonOffset = 2,
         .trainerScale = 271,
@@ -12854,7 +12854,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 13,
         .weight = 680,
         .description = COMPOUND_STRING(
-            "{JPN}かぜや かみなりを とりこみ かえた\nエネルギーが つちに えいようを\nあたえて だいちを ゆたかに する。"),
+            "かぜや かみなりを とりこみ かえた\nエネルギーが つちに えいようを\nあたえて だいちを ゆたかに する。"),
         .pokemonScale = 268,
         .pokemonOffset = 2,
         .trainerScale = 271,
@@ -12929,7 +12929,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 30,
         .weight = 3250,
         .description = COMPOUND_STRING(
-            "{JPN}きょうりょくな れいとうエネルギーを\nたいないで つくりだすが もれだした\nれいきで からだが こおっている。"),
+            "きょうりょくな れいとうエネルギーを\nたいないで つくりだすが もれだした\nれいきで からだが こおっている。"),
         .pokemonScale = 275,
         .pokemonOffset = 7,
         .trainerScale = 356,
@@ -13000,7 +13000,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 36,
         .weight = 3250,
         .description = COMPOUND_STRING(
-            "{JPN}おなじ いでんしを もつ レシラムを\nきゅうしゅうして ほのおと こおりの\nエネルギーを つかえるようになった。"),
+            "おなじ いでんしを もつ レシラムを\nきゅうしゅうして ほのおと こおりの\nエネルギーを つかえるようになった。"),
         .pokemonScale = 275,
         .pokemonOffset = 7,
         .trainerScale = 356,
@@ -13069,7 +13069,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 33,
         .weight = 3250,
         .description = COMPOUND_STRING(
-            "{JPN}みらいに じつげんする ポケモンと\nにんげんの りそうの せかいを\nまもるため たたかうと いわれる。"),
+            "みらいに じつげんする ポケモンと\nにんげんの りそうの せかいを\nまもるため たたかうと いわれる。"),
         .pokemonScale = 275,
         .pokemonOffset = 7,
         .trainerScale = 356,
@@ -13140,7 +13140,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 14,
         .weight = 485,
         .description = COMPOUND_STRING(
-            "{JPN}ひづめから みずを ふきだすことで\nすいめんを すべるように いどう。\nとくいの あしわざで たたかう。"),
+            "ひづめから みずを ふきだすことで\nすいめんを すべるように いどう。\nとくいの あしわざで たたかう。"),
         .pokemonScale = 265,
         .pokemonOffset = 2,
         .trainerScale = 262,
@@ -13209,7 +13209,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 14,
         .weight = 485,
         .description = COMPOUND_STRING(
-            "{JPN}たたかう かくごを きめたことで\nぜんしんに きりょくが みなぎり\nケルディオの すがたを かえた。"),
+            "たたかう かくごを きめたことで\nぜんしんに きりょくが みなぎり\nケルディオの すがたを かえた。"),
         .pokemonScale = 265,
         .pokemonOffset = 2,
         .trainerScale = 262,
@@ -13285,7 +13285,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 6,
         .weight = 65,
         .description = COMPOUND_STRING(
-            "{JPN}とくしゅな はっせいほうで うたう\nメロディは きいた ものの\nかんじょうを じざいに あやつる。"),
+            "とくしゅな はっせいほうで うたう\nメロディは きいた ものの\nかんじょうを じざいに あやつる。"),
         .pokemonScale = 422,
         .pokemonOffset = 12,
         .trainerScale = 256,
@@ -13364,7 +13364,7 @@ const struct SpeciesInfo gSpeciesInfoGen5[] =
         .height = 6,
         .weight = 65,
         .description = COMPOUND_STRING(
-            "{JPN}メロエッタの かなでる せんりつは\nまわりの ポケモンを よろこばせたり\nかなしませるほどの パワーがある。"),
+            "メロエッタの かなでる せんりつは\nまわりの ポケモンを よろこばせたり\nかなしませるほどの パワーがある。"),
         .pokemonScale = 422,
         .pokemonOffset = 12,
         .trainerScale = 256,

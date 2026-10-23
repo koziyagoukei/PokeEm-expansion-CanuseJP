@@ -19,7 +19,7 @@ MauvilleCity_House1_EventScript_ReceivedRockSmash::
 	end
 
 MauvilleCity_House1_Text_ImRockSmashDudeTakeThis:
-	.string "{JPN}ほっほう!\pぼくのことを いわくだきオヤジ\nなんて よぶひとが いるらしいけど\lしつれい しちゃうね!\pぼくは まだ オヤジ じゃないよ\nせめて いわくだきにいさん と\lよんでほしい ものだね!\pほっほう!\pそれはそれとして きみの ポケモン\nなかなか つよそうだな!\pよし きにいった!\nこの ひでんマシンを あげよう!"
+	.string "ほっほう!\pぼくのことを いわくだきオヤジ\nなんて よぶひとが いるらしいけど\lしつれい しちゃうね!\pぼくは まだ オヤジ じゃないよ\nせめて いわくだきにいさん と\lよんでほしい ものだね!\pほっほう!\pそれはそれとして きみの ポケモン\nなかなか つよそうだな!\pよし きにいった!\nこの ひでんマシンを あげよう!"
 	.string ""
 	.string ""
 	.string ""
@@ -33,7 +33,7 @@ MauvilleCity_House1_Text_ImRockSmashDudeTakeThis:
 	.string "$"
 
 MauvilleCity_House1_Text_ExplainRockSmash:
-	.string "{JPN}それは ひでんマシン「いわくだき」!\pきみの いくてを ふさぐ\nじゃまな おおいわが あっても\pその ひでんを つかうことで\nくだいて しまえるのだ!\pがんばって いわを くだきたまえ!\nほっほう!"
+	.string "それは ひでんマシン「いわくだき」!\pきみの いくてを ふさぐ\nじゃまな おおいわが あっても\pその ひでんを つかうことで\nくだいて しまえるのだ!\pがんばって いわを くだきたまえ!\nほっほう!"
 	.string ""
 	.string ""
 	.string ""
@@ -42,7 +42,7 @@ MauvilleCity_House1_Text_ExplainRockSmash:
 	.string "$"
 
 MauvilleCity_House1_Text_MonCanFlyOutOfSmashedRock:
-	.string "{JPN}そうそう\nいわを くだくと かくれていた\lポケモンが とびでることも あるからね!\pほっほう!"
+	.string "そうそう\nいわを くだくと かくれていた\lポケモンが とびでることも あるからね!\pほっほう!"
 	.string ""
 	.string ""
 	.string "$"

@@ -1356,129 +1356,129 @@ LilycoveCity_ContestLobby_EventScript_DelayForRSPlayer::
 	return
 
 LilycoveCity_ContestLobby_Text_ReceptionDontHavePokeblockCase:
-	.string "{JPN}こんにちは!\pこちらでは ポケモンコンテスト\nうけつけを おこなって……\l……あら?\pおきゃくさまは まだ ポロックケースを\nもっていらっしゃらない ようですね\pでは こちらを さしあげましょう!$"
+	.string "こんにちは!\pこちらでは ポケモンコンテスト\nうけつけを おこなって……\l……あら?\pおきゃくさまは まだ ポロックケースを\nもっていらっしゃらない ようですね\pでは こちらを さしあげましょう!$"
 
 LilycoveCity_ContestLobby_Text_NowThatWeveClearedThatUp:
-	.string "{JPN}というわけで あらためまして……\pこんにちは!\pこちらでは ポケモンコンテスト\nうけつけを おこなって います!$"
+	.string "というわけで あらためまして……\pこんにちは!\pこちらでは ポケモンコンテスト\nうけつけを おこなって います!$"
 
 LilycoveCity_ContestLobby_Text_ContestReception:
-	.string "{JPN}こんにちは!\pこちらでは ポケモンコンテスト\nうけつけを おこなって います!$"
+	.string "こんにちは!\pこちらでは ポケモンコンテスト\nうけつけを おこなって います!$"
 
 @ Unused
 LilycoveCity_ContestLobby_Text_CounterOnlyFor4PlayerContests:
 	.string "{JPN}こんにちは\pこちらは ポケモンコンテストの\n4めいさま せんようの うけつけです!$"
 
 LilycoveCity_ContestLobby_Text_EnterContest1:
-	.string "{JPN}あなたの ポケモンも コンテストに\nさんか させて みませんか?$"
+	.string "あなたの ポケモンも コンテストに\nさんか させて みませんか?$"
 
 LilycoveCity_ContestLobby_Text_WhichTopic1:
-	.string "{JPN}どの せつめいを ききますか?$"
+	.string "どの せつめいを ききますか?$"
 
 LilycoveCity_ContestLobby_Text_ExplainContests:
-	.string "{JPN}ポケモンコンテストは 4にんの トレーナーが\n1ぴきずつ ポケモンを もちよって\l4ひきで おこなわれます!\pコンテスト には 1じ しんさと\n2じ しんさが あります!\p1じ しんさでは かいじょうの\nおきゃくさまが きにいった ポケモンを\lとうひょう します!\p2じ しんさでは ポケモンが じゅんばんに\nとくいな わざで アピールを します!\lしんさいんに ちゅうもくされたり\lおきゃくさまに わざを きにいられたり……\lとにかく たくさん めだって ください!\p1じしんさと 2じしんさの けっかから\nそうごうポイントを だして\lいちばん たかかった ポケモンが\lゆうしょう できます!$"
+	.string "ポケモンコンテストは 4にんの トレーナーが\n1ぴきずつ ポケモンを もちよって\l4ひきで おこなわれます!\pコンテスト には 1じ しんさと\n2じ しんさが あります!\p1じ しんさでは かいじょうの\nおきゃくさまが きにいった ポケモンを\lとうひょう します!\p2じ しんさでは ポケモンが じゅんばんに\nとくいな わざで アピールを します!\lしんさいんに ちゅうもくされたり\lおきゃくさまに わざを きにいられたり……\lとにかく たくさん めだって ください!\p1じしんさと 2じしんさの けっかから\nそうごうポイントを だして\lいちばん たかかった ポケモンが\lゆうしょう できます!$"
 
 LilycoveCity_ContestLobby_Text_ExplainContestTypes:
-	.string "{JPN}コンテストには 5しゅるい あります!\pかっこよさ うつくしさ かわいさ\nかしこさ そして たくましさ\lいじょうの 5しゅるい です!\pエントリー する ポケモンに\nピッタリの コンテストを\lえらんで あげて くださいね!$"
+	.string "コンテストには 5しゅるい あります!\pかっこよさ うつくしさ かわいさ\nかしこさ そして たくましさ\lいじょうの 5しゅるい です!\pエントリー する ポケモンに\nピッタリの コンテストを\lえらんで あげて くださいね!$"
 
 LilycoveCity_ContestLobby_Text_ExplainContestRanks:
-	.string "{JPN}ポケモンコンテスト には\nノーマルランク スーパーランク\lハイパーランク そしてマスターランク\lという 4つの ランクが あります\pノーマルランク には すべての\nポケモンが でることが できます\pノーマルランクで ゆうしょう できた\nポケモンは おなじ しゅるいの\lスーパーランクの コンテストに でられます\pおなじように スーパーで ゆうしょう すれば\nハイパーに ハイパーで ゆうしょう すれば\lマスターランクに でられるのです\pマスターランクで ゆうしょう した\nポケモンは なんどでも マスターランクの\lコンテストに でる ことが できます$"
+	.string "ポケモンコンテスト には\nノーマルランク スーパーランク\lハイパーランク そしてマスターランク\lという 4つの ランクが あります\pノーマルランク には すべての\nポケモンが でることが できます\pノーマルランクで ゆうしょう できた\nポケモンは おなじ しゅるいの\lスーパーランクの コンテストに でられます\pおなじように スーパーで ゆうしょう すれば\nハイパーに ハイパーで ゆうしょう すれば\lマスターランクに でられるのです\pマスターランクで ゆうしょう した\nポケモンは なんどでも マスターランクの\lコンテストに でる ことが できます$"
 
 LilycoveCity_ContestLobby_Text_EnterWhichRank:
-	.string "{JPN}どの ランクに さんか しますか?$"
+	.string "どの ランクに さんか しますか?$"
 
 LilycoveCity_ContestLobby_Text_EnterWhichContest1:
-	.string "{JPN}どの コンテストに さんか しますか?$"
+	.string "どの コンテストに さんか しますか?$"
 
 LilycoveCity_ContestLobby_Text_EnterWhichPokemon1:
-	.string "{JPN}どの ポケモンを さんか させますか?$"
+	.string "どの ポケモンを さんか させますか?$"
 
 LilycoveCity_ContestLobby_Text_MonNotQualifiedForRank:
-	.string "{JPN}もうしわけ ないのですが\nおきゃくさまの ポケモンですと\lこのランクには まだ しゅつじょう\lできないようです…$"
+	.string "もうしわけ ないのですが\nおきゃくさまの ポケモンですと\lこのランクには まだ しゅつじょう\lできないようです…$"
 
 LilycoveCity_ContestLobby_Text_EggCannotTakePart:
-	.string "{JPN}ごめんなさい!\nタマゴは しゅつじょう できないんです……$"
+	.string "ごめんなさい!\nタマゴは しゅつじょう できないんです……$"
 
 LilycoveCity_ContestLobby_Text_MonInNoConditionForContest:
-	.string "{JPN}そちらの ポケモンは げんきがない\nようなので しゅつじょう できないです……$"
+	.string "そちらの ポケモンは げんきがない\nようなので しゅつじょう できないです……$"
 
 LilycoveCity_ContestLobby_Text_AlreadyWonEnterAnyway:
-	.string "{JPN}あら そちらの リボンは……\pおきゃくさまの ポケモンは もう\nこの コンテストで ゆうしょう したことが\lあるのですね… それでも いいですか?$"
+	.string "あら そちらの リボンは……\pおきゃくさまの ポケモンは もう\nこの コンテストで ゆうしょう したことが\lあるのですね… それでも いいですか?$"
 
 LilycoveCity_ContestLobby_Text_ConfirmContestMon:
-	.string "{JPN}そちらの ポケモンで よろしいですか?$"
+	.string "そちらの ポケモンで よろしいですか?$"
 
 LilycoveCity_ContestLobby_Text_YourMonIsEntryNum4:
-	.string "{JPN}それでは おきゃくさまの ポケモンを\nエントリー します!\lおきゃくさまの エントリーナンバーは\l4ばん に なります!\lコンテストは すぐに はじまります!$"
+	.string "それでは おきゃくさまの ポケモンを\nエントリー します!\lおきゃくさまの エントリーナンバーは\l4ばん に なります!\lコンテストは すぐに はじまります!$"
 
 LilycoveCity_ContestLobby_Text_ComeThroughHere:
-	.string "{JPN}それでは こちらへ どうぞ!\nがんばって くださいね!$"
+	.string "それでは こちらへ どうぞ!\nがんばって くださいね!$"
 
 LilycoveCity_ContestLobby_Text_PokemonWonWeHavePrize:
-	.string "{JPN}コンテストでの ゆうしょう\nおめでとう ございます!\pしょうひんは こちらで おあずかり\nして ありますよ! さあ どうぞ!$"
+	.string "コンテストでの ゆうしょう\nおめでとう ございます!\pしょうひんは こちらで おあずかり\nして ありますよ! さあ どうぞ!$"
 
 LilycoveCity_ContestLobby_Text_ComeBackForPrizeLater:
-	.string "{JPN}それでは また あとで\nとりに きて くださいね!$"
+	.string "それでは また あとで\nとりに きて くださいね!$"
 
 ContestHall_Text_GettingStartedParticipantsAsFollows:
-	.string "{JPN}しかい『はい! これより\n{STR_VAR_3} ランクの\lポケモン {STR_VAR_2}コンテストが\lはじまります!\pしゅつじょう される トレーナーと\nポケモンの みなさんは こちら!$"
+	.string "しかい『はい! これより\n{STR_VAR_3} ランクの\lポケモン {STR_VAR_2}コンテストが\lはじまります!\pしゅつじょう される トレーナーと\nポケモンの みなさんは こちら!$"
 
 ContestHall_Text_GettingStartedParticipantsAsFollowsLink:
 	.string "{JPN}しかい『はい! これより\nおともだち 4にん つうしんの\lポケモン {STR_VAR_2}コンテストが\lはじまります!\pしゅつじょう される トレーナーと\nポケモンの みなさんは こちら!$"
 
 ContestHall_Text_EntryXTrainersMon:
-	.string "{JPN}しかい『エントリーナンバー {STR_VAR_2}ばん!\n{STR_VAR_1}さんの {STR_VAR_3} です!$"
+	.string "しかい『エントリーナンバー {STR_VAR_2}ばん!\n{STR_VAR_1}さんの {STR_VAR_3} です!$"
 
 ContestHall_Text_SeenContestantsAudienceWillVote:
-	.string "{JPN}しかい『さあ\nポケモンの しょうかいが おわりました\l1じ しんさに はいりましょう!\pかいじょうの おきゃくさまに よる\nポケモンの にんき とうひょうです!\pでは さっそく はじめましょう!\nとうひょう おねがいします!$"
+	.string "しかい『さあ\nポケモンの しょうかいが おわりました\l1じ しんさに はいりましょう!\pかいじょうの おきゃくさまに よる\nポケモンの にんき とうひょうです!\pでは さっそく はじめましょう!\nとうひょう おねがいします!$"
 
 ContestHall_Text_VotingUnderWay:
 	.string "{JPN}    とうひょう ちゅう…$"
 
 ContestHall_Text_VotingCompleteLetsAppeal:
-	.string "{JPN}さあ!\nいま とうひょうが おわりました!\lしゅうけいを している あいだに\l2じ しんさに うつりましょう!\p2じ しんさは いよいよ\nおまちかねの アピールタイム!\lわざで アピール しまくりましょうー!\pでは はりきって どうぞ!\nレッツ! アピール!$"
+	.string "さあ!\nいま とうひょうが おわりました!\lしゅうけいを している あいだに\l2じ しんさに うつりましょう!\p2じ しんさは いよいよ\nおまちかねの アピールタイム!\lわざで アピール しまくりましょうー!\pでは はりきって どうぞ!\nレッツ! アピール!$"
 
 ContestHall_Text_ThatsItForJudging:
-	.string "{JPN}しかい『はあい そこまでえーー!$"
+	.string "しかい『はあい そこまでえーー!$"
 
 ContestHall_Text_ThankYouForAppeals:
-	.string "{JPN}みなさん すばらしい アピールでした!\nこれで すべて しゅうりょう です!\lおつかれさまでした!$"
+	.string "みなさん すばらしい アピールでした!\nこれで すべて しゅうりょう です!\lおつかれさまでした!$"
 
 ContestHall_Text_JudgeLooksReady:
-	.string "{JPN}さて のこるは\nドキドキの けっかはっぴょう ですね!\lはっぴょうは しんさいんの ほうから\lおこなわれます!$"
+	.string "さて のこるは\nドキドキの けっかはっぴょう ですね!\lはっぴょうは しんさいんの ほうから\lおこなわれます!$"
 
 ContestHall_Text_WeWillNowDeclareWinner:
-	.string "{JPN}しんさいん『では… はっぴょう します!$"
+	.string "しんさいん『では… はっぴょう します!$"
 
 ContestHall_Text_CongratsTrainerXandMon:
-	.string "{JPN}しかい『エントリーナンバー {STR_VAR_2}ばん\n{STR_VAR_3}さん! そして {STR_VAR_1}!\lおめでとう ございます!$"
+	.string "しかい『エントリーナンバー {STR_VAR_2}ばん\n{STR_VAR_3}さん! そして {STR_VAR_1}!\lおめでとう ございます!$"
 
 ContestHall_Text_CongratsPleaseCompeteAgain:
-	.string "{JPN}しかい『おめでとう ございます!\nまた さんか してくださいね!$"
+	.string "しかい『おめでとう ございます!\nまた さんか してくださいね!$"
 
 ContestHall_Text_AcceptYourPrize:
-	.string "{JPN}しかい『さあ!\nしょうひんを おうけとり ください!$"
+	.string "しかい『さあ!\nしょうひんを おうけとり ください!$"
 
 ContestHall_Text_ConferRibbonAsPrize:
-	.string "{JPN}しょうひんと して\nこの リボンを おうけとり ください!$"
+	.string "しょうひんと して\nこの リボンを おうけとり ください!$"
 
 ContestHall_Text_ReceivedRibbon:
-	.string "{JPN}{PLAYER}は リボンを もらった!$"
+	.string "{PLAYER}は リボンを もらった!$"
 
 ContestHall_Text_PutRibbonOnMon:
-	.string "{JPN}{PLAYER}は リボンを\n{STR_VAR_1}に つけて あげた!$"
+	.string "{PLAYER}は リボンを\n{STR_VAR_1}に つけて あげた!$"
 
 ContestHall_Text_PickUpPrizeAtCounterLater:
-	.string "{JPN}それでは しょうひんは あとで\nうけつけで おうけとり ください!\lまたの さんかを おまち してます!$"
+	.string "それでは しょうひんは あとで\nうけつけで おうけとり ください!\lまたの さんかを おまち してます!$"
 
 @ Unused
 ContestHall_Text_OnlyRegister4Players:
 	.string "{JPN}こちらは ポケモンコンテストの\n4めいさま せんようの うけつけです!\pおともだちが あと3めい そろえば\n4にんで おなじ コンテストに でられます!\lさんか しますか?$"
 
 LilycoveCity_ContestLobby_Text_ProgressWillBeSaved:
-	.string "{JPN}コンテストに エントリーする まえに\nレポートを かきます$"
+	.string "コンテストに エントリーする まえに\nレポートを かきます$"
 
 LilycoveCity_ContestLobby_Text_ParticipateAnotherTime:
-	.string "{JPN}またの さんかを おまち してます!$"
+	.string "またの さんかを おまち してます!$"
 
 @ Unused
 LilycoveCity_ContestLobby_Text_EnterContest2:
@@ -1500,16 +1500,16 @@ LilycoveCity_ContestLobby_Text_Transmitting:
 	.string "{JPN}つうしん しています……$"
 
 LilycoveCity_ContestLobby_Text_TransmissionError:
-	.string "{JPN}つうしんに しっぱい しました$"
+	.string "つうしんに しっぱい しました$"
 
 LilycoveCity_ContestLobby_Text_PlayersChoseDifferentContest:
-	.string "{JPN}えらんだ コンテストが\nおともだちと ちがう ようです!$"
+	.string "えらんだ コンテストが\nおともだちと ちがう ようです!$"
 
 LilycoveCity_ContestLobby_Text_PlayersMadeDifferentChoice:
-	.string "{JPN}おたがいの せんたくが ちがっているようです$"
+	.string "おたがいの せんたくが ちがっているようです$"
 
 LilycoveCity_ContestLobby_Text_PleaseWaitBButtonCancel:
-	.string "{JPN}しょうしょう おまち ください\n……Bボタンで キャンセル$"
+	.string "しょうしょう おまち ください\n……Bボタンで キャンセル$"
 
 @ Unused
 LilycoveCity_ContestLobby_Text_ParticipateAnotherTime2:
@@ -1526,46 +1526,46 @@ LilycoveCity_ContestLobby_Text_ContestBeginShortly:
 	.string "{JPN}コンテストは すぐに はじまります!$"
 
 LilycoveCity_ContestLobby_Text_LinkContestReception:
-	.string "{JPN}ポケモン コンテスト\nつうしん うけつけへ ようこそ!\pこちらでは ともだちと\nおなじ コンテストに でられます$"
+	.string "ポケモン コンテスト\nつうしん うけつけへ ようこそ!\pこちらでは ともだちと\nおなじ コンテストに でられます$"
 
 LilycoveCity_ContestLobby_Text_WhichTopic2:
-	.string "{JPN}どの せつめいを ききますか?$"
+	.string "どの せつめいを ききますか?$"
 
 LilycoveCity_ContestLobby_Text_EnterContest3:
-	.string "{JPN}コンテストに\nさんか しますか?$"
+	.string "コンテストに\nさんか しますか?$"
 
 LilycoveCity_ContestLobby_Text_EnterWhichContest3:
-	.string "{JPN}どの コンテストに さんか しますか?$"
+	.string "どの コンテストに さんか しますか?$"
 
 LilycoveCity_ContestLobby_Text_MonInNoCondition2:
-	.string "{JPN}そちらの ポケモンは げんきがない\nようなので しゅつじょう できないです…$"
+	.string "そちらの ポケモンは げんきがない\nようなので しゅつじょう できないです…$"
 
 LilycoveCity_ContestLobby_Text_EggCannotTakePart2:
-	.string "{JPN}ごめんなさい!\nタマゴは コンテストに でられないんです…$"
+	.string "ごめんなさい!\nタマゴは コンテストに でられないんです…$"
 
 LilycoveCity_ContestLobby_Text_EnterWhichPokemon3:
-	.string "{JPN}どの ポケモンを さんか させますか?$"
+	.string "どの ポケモンを さんか させますか?$"
 
 LilycoveCity_ContestLobby_Text_PleaseDecideLinkLeader:
-	.string "{JPN}みんなで はなしあって ひとりが\nグループリーダーに なってください\pほかの ひとは グループにはいる を\nえらんでください$"
+	.string "みんなで はなしあって ひとりが\nグループリーダーに なってください\pほかの ひとは グループにはいる を\nえらんでください$"
 
 LilycoveCity_ContestLobby_Text_PlayerAt4PCounterUseGMode:
-	.string "{JPN}ともだちの なかに\n4にんせんようの うけつけから\lエントリーしている かたが います\pつうしんケーブルを つなげた ともだちを\n4にん あつめて\lグローバルモードを えらんで\lとうろくを やりなおして ください$"
+	.string "ともだちの なかに\n4にんせんようの うけつけから\lエントリーしている かたが います\pつうしんケーブルを つなげた ともだちを\n4にん あつめて\lグローバルモードを えらんで\lとうろくを やりなおして ください$"
 
 LilycoveCity_ContestLobby_Text_ExplainLinkContest:
-	.string "{JPN}ワイヤレスアダプタか つうしんケーブルを\nつないだ ともだちが 2にん いじょう\lあつまると おこなえます!\pさんかする かたには\nまず エントリーする モードを\lえらんで いただきます!\p2にん から 4にん まで じゆうに\nとうろく できる エメラルドモードと\p4にんせんようの うけつけから さんかする\nともだちとも いっしょに とうろく できる\lグローバルモードと\p2しゅるいの モードが ありますので\nともだちと そうだんして\lおなじ モードを えらんで くださいね!\pともだちと おなじ モードで\nおなじ コンテストを えらぶと\lエントリー かんりょうと なります!\pいつもの とおりに コンテストが\nはじまりますので がんばって くださいね!$"
+	.string "ワイヤレスアダプタか つうしんケーブルを\nつないだ ともだちが 2にん いじょう\lあつまると おこなえます!\pさんかする かたには\nまず エントリーする モードを\lえらんで いただきます!\p2にん から 4にん まで じゆうに\nとうろく できる エメラルドモードと\p4にんせんようの うけつけから さんかする\nともだちとも いっしょに とうろく できる\lグローバルモードと\p2しゅるいの モードが ありますので\nともだちと そうだんして\lおなじ モードを えらんで くださいね!\pともだちと おなじ モードで\nおなじ コンテストを えらぶと\lエントリー かんりょうと なります!\pいつもの とおりに コンテストが\nはじまりますので がんばって くださいね!$"
 
 LilycoveCity_ContestLobby_Text_ExplainEMode:
-	.string "{JPN}エメラルドモードでは\nつうしんケーブルか ワイヤレスアダプタを\lつなげた ともだちが\l2にん いじょう あつまれば\lつうしんコンテストが おこなえます!\p4にん いない ときは\nかいじょうに いる トレーナーが\lコンテストに さんかして くれますよ!\pただし モードを えらぶことが できない\n4にんせんようの うけつけから\lさんかする ともだちが いるばあいは\lこちらの モードでは できませんので\lごちゅうい ください!$"
+	.string "エメラルドモードでは\nつうしんケーブルか ワイヤレスアダプタを\lつなげた ともだちが\l2にん いじょう あつまれば\lつうしんコンテストが おこなえます!\p4にん いない ときは\nかいじょうに いる トレーナーが\lコンテストに さんかして くれますよ!\pただし モードを えらぶことが できない\n4にんせんようの うけつけから\lさんかする ともだちが いるばあいは\lこちらの モードでは できませんので\lごちゅうい ください!$"
 
 LilycoveCity_ContestLobby_Text_ExplainGMode:
-	.string "{JPN}グローバルモードでは\nモードを えらぶことが できない\l4にんせんようの うけつけから\lさんかする ともだち とも\lつうしんコンテストが おこなえます!\pこの モードでは\nつうしんケーブルを つないだ\lともだちが 4にん あつまらないと\lコンテストが おこなえません!$"
+	.string "グローバルモードでは\nモードを えらぶことが できない\l4にんせんようの うけつけから\lさんかする ともだち とも\lつうしんコンテストが おこなえます!\pこの モードでは\nつうしんケーブルを つないだ\lともだちが 4にん あつまらないと\lコンテストが おこなえません!$"
 
 LilycoveCity_ContestLobby_Text_NoWirelessAdapterInGMode:
-	.string "{JPN}もうしわけ ありません!\pワイヤレスアダプタでは\nグローバルモードは おこなえません!\pエメラルドモードを えらぶか\nつうしんケーブルを つなげて\lやりなおして ください!$"
+	.string "もうしわけ ありません!\pワイヤレスアダプタでは\nグローバルモードは おこなえません!\pエメラルドモードを えらぶか\nつうしんケーブルを つなげて\lやりなおして ください!$"
 
 LilycoveCity_ContestLobby_Text_WhichContestMode:
-	.string "{JPN}どの モードで\nコンテストに さんかしますか?$"
+	.string "どの モードで\nコンテストに さんかしますか?$"
 
 ContestHall_Text_GettingStartedWireless:
 	.string "{JPN}しかい『はい! これより\nおともだち 4にん つうしんの\lポケモン {STR_VAR_2}コンテストが\lはじまります!$"

@@ -137,16 +137,16 @@ SkyPillar_Outside_EventScript_ClosedDoor::
 	end
 
 SkyPillar_Outside_Text_DoorIsClosed:
-	.string "{JPN}とびらは とざされて いる!$"
+	.string "とびらは とざされて いる!$"
 
 SkyPillar_Outside_Text_OpenedDoorToSkyPillar:
-	.string "{JPN}ミクリ『やっ ごめん ごめん!\pあんまり あわてた ものだから\nきみを おいてきて しまったよ!\pしまっていた そらのはしらの とびらは\nわたしが あけて おいた\p{PLAYER}{KUN} さあ いこう!$"
+	.string "ミクリ『やっ ごめん ごめん!\pあんまり あわてた ものだから\nきみを おいてきて しまったよ!\pしまっていた そらのはしらの とびらは\nわたしが あけて おいた\p{PLAYER}{KUN} さあ いこう!$"
 
 SkyPillar_Outside_Text_EarthquakeNotMomentToWaste:
-	.string "{JPN}ミクリ『じしんだ!\pこうしては いられない\nさきを いそごう!$"
+	.string "ミクリ『じしんだ!\pこうしては いられない\nさきを いそごう!$"
 
 SkyPillar_Outside_Text_SituationGettingWorse:
-	.string "{JPN}ミクリ『うーむ じょうきょうは\nだんだん わるくなって きている……$"
+	.string "ミクリ『うーむ じょうきょうは\nだんだん わるくなって きている……$"
 
 SkyPillar_Outside_Text_GotToGoBackForSootopolis:
-	.string "{JPN}ミクリ『まずいな……\pてんこうの みだれが このあたりまで\nひろがり はじめている……\p{PLAYER}{KUN}\pここを のぼって いけば\nレックウザが いるはずだ\pわたしは まちのことが しんぱい だから\nさきに ルネまで もどっていよう!\pここは きみに まかせるから\nしっかり たのんだよ!$"
+	.string "ミクリ『まずいな……\pてんこうの みだれが このあたりまで\nひろがり はじめている……\p{PLAYER}{KUN}\pここを のぼって いけば\nレックウザが いるはずだ\pわたしは まちのことが しんぱい だから\nさきに ルネまで もどっていよう!\pここは きみに まかせるから\nしっかり たのんだよ!$"

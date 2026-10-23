@@ -490,14 +490,14 @@ extern const u8 gFameCheckerPersonQuote_MrFuji[];
 extern const u8 gFameCheckerPersonQuote_ProfOak[];
 extern const u8 gFameCheckerPersonQuote_Sabrina[];
 
-static const u8 gFameCheckerText_ClearTextbox[] = _("{JPN}");
+static const u8 gFameCheckerText_ClearTextbox[] = _("");
 static const u8 gFameCheckerText_MainScreenUI[] = _("{JPN}みる くわしく やめる");
 static const u8 gFameCheckerText_FlavorTextUI[] = _("{JPN}きく もどる");
 static const u8 gFameCheckerText_PickScreenUI[] = _("{JPN}もどる");
-static const u8 gFameCheckerText_FameCheckerWillBeClosed[] = _("{JPN}ボイスチェッカーを\nとじます");
+static const u8 gFameCheckerText_FameCheckerWillBeClosed[] = _("ボイスチェッカーを\nとじます");
 static const u8 gFameCheckerText_Cancel[] = _("{JPN}もどる");
 static const u8 sText_FameCheckerHelp[] = _("{JPN}ヘルプ");
-static const u8 sText_FameCheckerHelpDesc[] = _("{JPN}フロンティアの\nせつめいを みます");
+static const u8 sText_FameCheckerHelpDesc[] = _("フロンティアの\nせつめいを みます");
 
 static const u8 sText_FameCheckerName_Birch[] = _("{JPN}オダマキ");
 static const u8 sText_FameCheckerName_Rival[] = _("{JPN}ライバル");

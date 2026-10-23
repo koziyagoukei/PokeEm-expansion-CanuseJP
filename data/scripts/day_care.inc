@@ -266,99 +266,99 @@ EventScript_EggHatch::
 	end
 
 Route117_Text_SeeWifeIfYoudLikeMeToRaiseMon:
-	.string "{JPN}わしは そだてや じいさんじゃ\pここで みんなの だいじな ポケモンの\nめんどうを みて おるのじゃよ\pなにか そだてて ほしければ\nばあさんに たのんで おくれ$"
+	.string "わしは そだてや じいさんじゃ\pここで みんなの だいじな ポケモンの\nめんどうを みて おるのじゃよ\pなにか そだてて ほしければ\nばあさんに たのんで おくれ$"
 
 Route117_Text_DoYouWantEgg:
-	.string "{JPN}おお! あんたか\pあずかっていた ポケモンを\nそだてていたら……なんと!\pポケモンが タマゴを\nもっておったんじゃ!\pどこから もってきたか わからんが\nあんたの ポケモンが もってたんじゃ\pやっぱり ほしいじゃろ?$"
+	.string "おお! あんたか\pあずかっていた ポケモンを\nそだてていたら……なんと!\pポケモンが タマゴを\nもっておったんじゃ!\pどこから もってきたか わからんが\nあんたの ポケモンが もってたんじゃ\pやっぱり ほしいじゃろ?$"
 
 Route117_Text_YourMonIsDoingFine:
-	.string "{JPN}おお あんたか! よくきたな\n{STR_VAR_1}は げんきじゃぞ$"
+	.string "おお あんたか! よくきたな\n{STR_VAR_1}は げんきじゃぞ$"
 
 Route117_Text_IllKeepIt:
-	.string "{JPN}それじゃ わしが もらおう\nありがとよ$"
+	.string "それじゃ わしが もらおう\nありがとよ$"
 
 Route117_Text_YouHaveNoRoomForIt:
-	.string "{JPN}てもちが いっぱいの ようじゃな…\nてもちを せいりしてから またきなさい$"
+	.string "てもちが いっぱいの ようじゃな…\nてもちを せいりしてから またきなさい$"
 
 Route117_Text_ReceivedEgg:
-	.string "{JPN}{PLAYER}は そだてや じいさんから\nタマゴを もらった!$"
+	.string "{PLAYER}は そだてや じいさんから\nタマゴを もらった!$"
 
 Route117_Text_TakeGoodCareOfIt:
-	.string "{JPN}だいじにそだてなさいよ!$"
+	.string "だいじにそだてなさいよ!$"
 
 Route117_Text_FriendlyWithOtherTrainersMon:
-	.string "{JPN}ところで あんたの {STR_VAR_1}じゃが\pなんか {STR_VAR_2}とこの {STR_VAR_3}と\nなかよく あそんで おったぞ\pしかも なにやら メールを\nもらっておった ようじゃ$"
+	.string "ところで あんたの {STR_VAR_1}じゃが\pなんか {STR_VAR_2}とこの {STR_VAR_3}と\nなかよく あそんで おったぞ\pしかも なにやら メールを\nもらっておった ようじゃ$"
 
 @ Unused
 Route117_Text_SeeWifeIfYouWantToPickUpMon:
 	.string "{JPN}ポケモンを ひきとりたい ときは\nばさんに いって おくれ$"
 
 Route117_Text_YourMonsAreDoingFine:
-	.string "{JPN}おお あんたか! よくきたな\n{STR_VAR_1}と {STR_VAR_2}は げんきじゃぞ$"
+	.string "おお あんたか! よくきたな\n{STR_VAR_1}と {STR_VAR_2}は げんきじゃぞ$"
 
 Route117_Text_IWillKeepDoYouWantIt:
-	.string "{JPN}わしが もらってしまうぞ\nほんとうは ほしいんじゃろ?$"
+	.string "わしが もらってしまうぞ\nほんとうは ほしいんじゃろ?$"
 
 Route117_PokemonDayCare_Text_WouldYouLikeUsToRaiseAMon:
-	.string "{JPN}わしは そだてや ばあさんじゃ\pおまえさんの かわりに ポケモンを\nそだてて あげるよ\pなにか そだてて ほしいのかい?$"
+	.string "わしは そだてや ばあさんじゃ\pおまえさんの かわりに ポケモンを\nそだてて あげるよ\pなにか そだてて ほしいのかい?$"
 
 Route117_PokemonDayCare_Text_WhichMonShouldWeRaise:
-	.string "{JPN}どのこを そだてて みるかね?$"
+	.string "どのこを そだてて みるかね?$"
 
 Route117_PokemonDayCare_Text_WellRaiseYourMon:
-	.string "{JPN}それでは {STR_VAR_1}を\nしばらく あずかるぞ\pてきとうに じかんが\nたったら またきなさい$"
+	.string "それでは {STR_VAR_1}を\nしばらく あずかるぞ\pてきとうに じかんが\nたったら またきなさい$"
 
 Route117_PokemonDayCare_Text_WeCanRaiseOneMore:
-	.string "{JPN}2ひき までなら あずかれるけど\nもう 1ぴき そだててみるかい?$"
+	.string "2ひき までなら あずかれるけど\nもう 1ぴき そだててみるかい?$"
 
 Route117_PokemonDayCare_Text_HusbandWasLookingForYou:
-	.string "{JPN}じいさんが あんたを さがして おったぞ$"
+	.string "じいさんが あんたを さがして おったぞ$"
 
 Route117_PokemonDayCare_Text_FineThenComeAgain:
-	.string "{JPN}そうかい それじゃ また きておくれ$"
+	.string "そうかい それじゃ また きておくれ$"
 
 Route117_PokemonDayCare_Text_NotEnoughMoney:
-	.string "{JPN}おかねが たりない ようじゃのう…$"
+	.string "おかねが たりない ようじゃのう…$"
 
 Route117_PokemonDayCare_Text_TakeOtherOneBackToo:
-	.string "{JPN}もう 1ぴきも ひきとるかい?$"
+	.string "もう 1ぴきも ひきとるかい?$"
 
 Route117_PokemonDayCare_Text_ComeAgain:
-	.string "{JPN}それじゃ また きておくれ$"
+	.string "それじゃ また きておくれ$"
 
 Route117_PokemonDayCare_Text_GoodToSeeYou:
-	.string "{JPN}おお あんたか! よくきたな\nおまえさんの ポケモンは ゲンキじゃぞ$"
+	.string "おお あんたか! よくきたな\nおまえさんの ポケモンは ゲンキじゃぞ$"
 
 Route117_PokemonDayCare_Text_YourMonHasGrownXLevels:
-	.string "{JPN}{STR_VAR_1}は レベルで いうと\n{STR_VAR_2}くらい そだって おるぞ$"
+	.string "{STR_VAR_1}は レベルで いうと\n{STR_VAR_2}くらい そだって おるぞ$"
 
 Route117_PokemonDayCare_Text_YourTeamIsFull:
-	.string "{JPN}てもちの ポケモンがいっぱいじゃよ!\nポケモンを せいりしてから きなさい$"
+	.string "てもちの ポケモンがいっぱいじゃよ!\nポケモンを せいりしてから きなさい$"
 
 @ Unused
 Route117_PokemonDayCare_Text_TakeBackWhichMon:
 	.string "{JPN}どっちの ポケモンを ひきとるかい?$"
 
 Route117_PokemonDayCare_Text_ItWillCostX:
-	.string "{JPN}{STR_VAR_1}を ひきとるなら\nりょうきんは {STR_VAR_2}円 だよ$"
+	.string "{STR_VAR_1}を ひきとるなら\nりょうきんは {STR_VAR_2}円 だよ$"
 
 Route117_PokemonDayCare_Text_HeresYourMon:
-	.string "{JPN}はいよ たしかに!\nじゃあ ポケモンを つれていきなさい!$"
+	.string "はいよ たしかに!\nじゃあ ポケモンを つれていきなさい!$"
 
 Route117_PokemonDayCare_Text_TookBackMon:
-	.string "{JPN}{PLAYER}は そだてや ばあさんから\n{STR_VAR_1}を ひきとった!$"
+	.string "{PLAYER}は そだてや ばあさんから\n{STR_VAR_1}を ひきとった!$"
 
 Route117_PokemonDayCare_Text_YouHaveJustOneMon:
-	.string "{JPN}おや? ポケモンが\n1ぴき しか いないようだな\pまた きなさいよ$"
+	.string "おや? ポケモンが\n1ぴき しか いないようだな\pまた きなさいよ$"
 
 Route117_PokemonDayCare_Text_TakeYourMonBack:
-	.string "{JPN}ポケモンを ひきとるかい?$"
+	.string "ポケモンを ひきとるかい?$"
 
 Route117_PokemonDayCare_Text_WhatWillYouBattleWith:
-	.string "{JPN}その ポケモンを あずけると\nたたかえなく なるぞ\pまた きなさいよ$"
+	.string "その ポケモンを あずけると\nたたかえなく なるぞ\pまた きなさいよ$"
 
 Text_EggHatchHuh:
-	.string "{JPN}おや…?$"
+	.string "おや…?$"
 
 Route117_PokemonDayCare_Text_YoullBeLeftWithJustOne:
-	.string "{JPN}おや? おまえさん\nその ポケモンを あずけると\lぜんぶで ポケモンが 1ぴき だけに\lなって しまう みたいじゃな\pもうちょっと たくさん つかまえてから\nきてみては どうじゃ?$"
+	.string "おや? おまえさん\nその ポケモンを あずけると\lぜんぶで ポケモンが 1ぴき だけに\lなって しまう みたいじゃな\pもうちょっと たくさん つかまえてから\nきてみては どうじゃ?$"

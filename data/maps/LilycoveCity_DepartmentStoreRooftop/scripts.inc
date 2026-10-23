@@ -185,25 +185,25 @@ LilycoveCity_DepartmentStoreRooftop_EventScript_ExitVendingMachine::
 	end
 
 LilycoveCity_DepartmentStoreRooftop_Text_SetDatesForClearOutSales:
-	.string "{JPN}ほりだしものいち……\nいつ やるのか きまって ないのかな?\pテレビ みてても\nぜんぜん コマーシャル ないんだよね$"
+	.string "ほりだしものいち……\nいつ やるのか きまって ないのかな?\pテレビ みてても\nぜんぜん コマーシャル ないんだよね$"
 
 LilycoveCity_DepartmentStoreRooftop_Text_BeenWaitingForClearOutSale:
-	.string "{JPN}まちに まった ほりだしものいち!\nここでしか かえないもの ばかり!\lよーし たくさん かっちゃうぞお!$"
+	.string "まちに まった ほりだしものいち!\nここでしか かえないもの ばかり!\lよーし たくさん かっちゃうぞお!$"
 
 LilycoveCity_DepartmentStoreRooftop_Text_BoneDryThirsty:
-	.string "{JPN}ああ のどが かわいたなあ$"
+	.string "ああ のどが かわいたなあ$"
 
 LilycoveCity_DepartmentStoreRooftop_Text_WhichDrinkWouldYouLike:
-	.string "{JPN}じどう はんばいき がある!\nほしい のみもの は……$"
+	.string "じどう はんばいき がある!\nほしい のみもの は……$"
 
 LilycoveCity_DepartmentStoreRooftop_Text_CanOfDrinkDroppedDown:
-	.string "{JPN}ガゴン!\p{STR_VAR_1}が でてきた!$"
+	.string "ガゴン!\p{STR_VAR_1}が でてきた!$"
 
 LilycoveCity_DepartmentStoreRooftop_Text_ExtraCanOfDrinkDroppedDown:
-	.string "{JPN}ガゴン!\pあたりだ! もういっぽん\n{STR_VAR_1}が でてきた!$"
+	.string "ガゴン!\pあたりだ! もういっぽん\n{STR_VAR_1}が でてきた!$"
 
 LilycoveCity_DepartmentStoreRooftop_Text_NotEnoughMoney:
-	.string "{JPN}おかねが たりない!$"
+	.string "おかねが たりない!$"
 
 LilycoveCity_DepartmentStoreRooftop_Text_DecidedAgainstBuyingDrink:
-	.string "{JPN}……やっぱり やめた!$"
+	.string "……やっぱり やめた!$"

@@ -74,22 +74,22 @@ Route102_EventScript_Allen::
 	end
 
 Route102_Text_WatchMeCatchPokemon:
-	.string "{JPN}ミツル『{PLAYER}さん……\nポケモンって こういう くさむらに\lいたり するんでしょ……?\pぼくが じょうずに　つかまえられるか\nそこで みてて くださいね……\p……うわっ!!$"
+	.string "ミツル『{PLAYER}さん……\nポケモンって こういう くさむらに\lいたり するんでしょ……?\pぼくが じょうずに　つかまえられるか\nそこで みてて くださいね……\p……うわっ!!$"
 
 Route102_Text_WallyIDidIt:
-	.string "{JPN}ミツル『やった…… ぼくの……\nぼくの ポケモンだ……!!$"
+	.string "ミツル『やった…… ぼくの……\nぼくの ポケモンだ……!!$"
 
 Route102_Text_LetsGoBack:
-	.string "{JPN}{PLAYER}さん ありがとう!\nジムに もどろうよ!$"
+	.string "{PLAYER}さん ありがとう!\nジムに もどろうよ!$"
 
 Route102_Text_ImNotVeryTall:
-	.string "{JPN}ぼく…… せが ひくいから\nくさむらを あるくと もぐっちゃうんだ\pハッパが はなの あなに はいって\nふぁ　ふぁ ふぁ ふぁ……\pぶわっくしょーん!$"
+	.string "ぼく…… せが ひくいから\nくさむらを あるくと もぐっちゃうんだ\pハッパが はなの あなに はいって\nふぁ　ふぁ ふぁ ふぁ……\pぶわっくしょーん!$"
 
 Route102_Text_CatchWholeBunchOfPokemon:
-	.string "{JPN}ポケモン たくさん つかまえよーっと!$"
+	.string "ポケモン たくさん つかまえよーっと!$"
 
 Route102_Text_RouteSignOldale:
-	.string "{JPN}ここは 102ばん どうろ\n{RIGHT_ARROW} コトキタウン$"
+	.string "ここは 102ばん どうろ\n{RIGHT_ARROW} コトキタウン$"
 
 Route102_Text_RouteSignPetalburg:
-	.string "{JPN}ここは 102ばん どうろ\n{LEFT_ARROW} トウカシティ$"
+	.string "ここは 102ばん どうろ\n{LEFT_ARROW} トウカシティ$"

@@ -76,44 +76,44 @@ RustboroCity_Flat1_2F_EventScript_PokeDoll::
 	end
 
 RustboroCity_Flat1_2F_Text_ComingUpWithMealsIsHard:
-	.string "{JPN}もうね たいへん なのよ!\pなにが たいへんって\nそんなの きまってるでしょ!\pまいにちの おこんだて よッ!\pまいにち まいにち かんがえるのって\nほんとうに たいへん なんだからッ!$"
+	.string "もうね たいへん なのよ!\pなにが たいへんって\nそんなの きまってるでしょ!\pまいにちの おこんだて よッ!\pまいにち まいにち かんがえるのって\nほんとうに たいへん なんだからッ!$"
 
 RustboroCity_Flat1_2F_Text_HelloDoYouKnowFunnyPhrase:
-	.string "{JPN}やあ いらっしゃい\nハコガミけ へ ようこそ!\pちょっと しつもんが あるんだけど\nきみ こもり したこと ある?\pおじさん はじめて\nいくじ してるんだけどさ\pうちの アヤノ\nなかなか わらって くれないんだよね\pおもしろーい ことば で\nわらって くれないかなーって\lおもうんだけど\lおもしろーい ことば おしえて くれない?$"
+	.string "やあ いらっしゃい\nハコガミけ へ ようこそ!\pちょっと しつもんが あるんだけど\nきみ こもり したこと ある?\pおじさん はじめて\nいくじ してるんだけどさ\pうちの アヤノ\nなかなか わらって くれないんだよね\pおもしろーい ことば で\nわらって くれないかなーって\lおもうんだけど\lおもしろーい ことば おしえて くれない?$"
 
 RustboroCity_Flat1_2F_Text_BeenSayingXDoYouKnowBetterPhrase:
-	.string "{JPN}いまは {STR_VAR_1} って\nことばを つかってるんだけど\pおもしろそうな ことば\nみつけて きたの?$"
+	.string "いまは {STR_VAR_1} って\nことばを つかってるんだけど\pおもしろそうな ことば\nみつけて きたの?$"
 
 RustboroCity_Flat1_2F_Text_WonderfulLetsHearSuggestion:
-	.string "{JPN}そうか そうか\nじゃあ さっそく おしえて くれよ$"
+	.string "そうか そうか\nじゃあ さっそく おしえて くれよ$"
 
 RustboroCity_Flat1_2F_Text_OhIsThatRight:
-	.string "{JPN}そうか そうか\nなにか おもしろそうな ことばを\lみつけたら おしえて くれよ$"
+	.string "そうか そうか\nなにか おもしろそうな ことばを\lみつけたら おしえて くれよ$"
 
 RustboroCity_Flat1_2F_Text_LetsGiveItATry2:
-	.string "{JPN}なるほどー\nじゃあ ためして みようかな$"
+	.string "なるほどー\nじゃあ ためして みようかな$"
 
 RustboroCity_Flat1_2F_Text_OhShesLaughing:
-	.string "{JPN}{STR_VAR_1}\n{STR_VAR_1}\pわらってる わらってる!\nなんだか うれしいなあ$"
+	.string "{STR_VAR_1}\n{STR_VAR_1}\pわらってる わらってる!\nなんだか うれしいなあ$"
 
 RustboroCity_Flat1_2F_Text_LetsGiveItATry:
-	.string "{JPN}なるほどー\nじゃあ ためして みようかな$"
+	.string "なるほどー\nじゃあ ためして みようかな$"
 
 RustboroCity_Flat1_2F_Text_ShesNotSmilingAtAll:
-	.string "{JPN}{STR_VAR_1}\n{STR_VAR_1}\pうーん わらわないなあ\nこのこ クール なのかな$"
+	.string "{STR_VAR_1}\n{STR_VAR_1}\pうーん わらわないなあ\nこのこ クール なのかな$"
 
 RustboroCity_Flat1_2F_Text_ThinkOfMyOwnPhrase:
-	.string "{JPN}いい ことば しらないかー\nじゃあ じぶんで かんがえるかー\pうーん\n{STR_VAR_1} とか どうかな\lよし! ためしてみよう$"
+	.string "いい ことば しらないかー\nじゃあ じぶんで かんがえるかー\pうーん\n{STR_VAR_1} とか どうかな\lよし! ためしてみよう$"
 
 RustboroCity_Flat1_2F_Text_ShesNotSmilingAtAll2:
-	.string "{JPN}{STR_VAR_1}\n{STR_VAR_1}\pうーん わらわないなあ\nこのこ クール なのかな$"
+	.string "{STR_VAR_1}\n{STR_VAR_1}\pうーん わらわないなあ\nこのこ クール なのかな$"
 
 RustboroCity_Flat1_2F_Text_OhYouDontKnowAny:
-	.string "{JPN}いい ことば しらないかー\nじゃあ まえの ことばで\lがんばって あやすかー\pおもしろそうな ことば みつけたら\nおじさんに おしえてね$"
+	.string "いい ことば しらないかー\nじゃあ まえの ことばで\lがんばって あやすかー\pおもしろそうな ことば みつけたら\nおじさんに おしえてね$"
 
 RustboroCity_Flat1_2F_Text_ThankYouIllGiveYouWallpaper:
-	.string "{JPN}ありがとう!\pきみの おかげで アヤノが\nわらって くれたよ!\pじつは おじさん\nこう みえても\pデボンコーポレーションの\nすごうで けんきゅういん なんだよ\pそうだなー じゃあ おれいに\nきみが ポケモンを あずけている\lボックスの かべがみを\lふやして あげよう!\pかべがみの なかから\n「だいすき」って いうのを えらぶと\lあたらしい かべがみが えらべるよ!$"
+	.string "ありがとう!\pきみの おかげで アヤノが\nわらって くれたよ!\pじつは おじさん\nこう みえても\pデボンコーポレーションの\nすごうで けんきゅういん なんだよ\pそうだなー じゃあ おれいに\nきみが ポケモンを あずけている\lボックスの かべがみを\lふやして あげよう!\pかべがみの なかから\n「だいすき」って いうのを えらぶと\lあたらしい かべがみが えらべるよ!$"
 
 RustboroCity_Flat1_2F_Text_ItsAPokemonPlushDoll:
-	.string "{JPN}ポケモンの ぬいぐるみ だ!$"
+	.string "ポケモンの ぬいぐるみ だ!$"
 

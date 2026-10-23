@@ -52,26 +52,26 @@ FallarborTown_EventScript_MoveTutorSign::
 	end
 
 FallarborTown_Text_ShadyCharactersCozmosHome:
-	.string "{JPN}なんだ なんだ!?\pソライシはかせの いえに\nあやしげな じんぶつが\lではいり しておった ようだが……$"
+	.string "なんだ なんだ!?\pソライシはかせの いえに\nあやしげな じんぶつが\lではいり しておった ようだが……$"
 
 FallarborTown_Text_RegionKnownForMeteors:
-	.string "{JPN}ここいら いったいは\nむかしから いんせきが おおくてな\pりゅうせいのたきも いんせきが おちて\nできたとか そう いわれておる$"
+	.string "ここいら いったいは\nむかしから いんせきが おおくてな\pりゅうせいのたきも いんせきが おちて\nできたとか そう いわれておる$"
 
 FallarborTown_Text_MyPreciousAzurill:
-	.string "{JPN}ほら! みてちょうだい!\nわたしの たいせつな ルリリ!\pツヤツヤの ナデナデの フカフカよ!$"
+	.string "ほら! みてちょうだい!\nわたしの たいせつな ルリリ!\pツヤツヤの ナデナデの フカフカよ!$"
 
 FallarborTown_Text_Azurill:
-	.string "{JPN}ルリリ『るーりーるー$"
+	.string "ルリリ『るーりーるー$"
 
 FallarborTown_Text_HaveYouChallengedFlannery:
-	.string "{JPN}フエンタウンの ジムリーダー\nアスナとは たたかったかね?\pあのこの おじいさんは すごかったよ\nなんでも ポケモンリーグの\lしてんのう だった らしいからね\pきっと アスナも これから\nすばらしい トレーナーに なるだろうね$"
+	.string "フエンタウンの ジムリーダー\nアスナとは たたかったかね?\pあのこの おじいさんは すごかったよ\nなんでも ポケモンリーグの\lしてんのう だった らしいからね\pきっと アスナも これから\nすばらしい トレーナーに なるだろうね$"
 
 FallarborTown_Text_BattleTentSign:
-	.string "{JPN}バトルテント ハジツゲタウン かいじょう\nつどえ! さいきょう チーム$"
+	.string "バトルテント ハジツゲタウン かいじょう\nつどえ! さいきょう チーム$"
 
 FallarborTown_Text_TownSign:
-	.string "{JPN}ここは ハジツゲ タウン\nちいさな はたけが ある のうそん$"
+	.string "ここは ハジツゲ タウン\nちいさな はたけが ある のうそん$"
 
 FallarborTown_Text_MoveTutorSign:
-	.string "{JPN}「わざおしえマニアの いえ」\nポケモンの わざ おしえます!$"
+	.string "「わざおしえマニアの いえ」\nポケモンの わざ おしえます!$"
 

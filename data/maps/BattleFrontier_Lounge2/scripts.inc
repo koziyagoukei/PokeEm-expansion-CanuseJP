@@ -113,20 +113,20 @@ BattleFrontier_Lounge2_EventScript_TriathleteF::
 	end
 
 BattleFrontier_Lounge2_Text_FrontierManiacIntro::
-	.string "{JPN}やあやあ ぼくは バトルフロンティアいちの\nじょうほうつう!\pフロンティアマニアって よんでくれよ!\pきみ トレーナーだろ?\pぼくが あつめた バトルフロンティアの\nホットな じょうほうを おしえて あげるよ!$"
+	.string "やあやあ ぼくは バトルフロンティアいちの\nじょうほうつう!\pフロンティアマニアって よんでくれよ!\pきみ トレーナーだろ?\pぼくが あつめた バトルフロンティアの\nホットな じょうほうを おしえて あげるよ!$"
 
 BattleFrontier_Lounge2_Text_SwingByForTheLatestWord::
-	.string "{JPN}やあやあ また ぼくの じょうほうを\nききに きたんだね! しかたないなー!$"
+	.string "やあやあ また ぼくの じょうほうを\nききに きたんだね! しかたないなー!$"
 
 @ Unused
 BattleFrontier_Lounge2_Text_MyInformationsBeenUsefulRight::
 	.string "{JPN}どう? どう? どう?\pぼくの じょうほうは もちろん\nすごーく さんこうに なってるだろ?$"
 
 BattleFrontier_Lounge2_Text_FacilityIsHottest::
-	.string "{JPN}そうだねぇ……\pいまは {STR_VAR_1}が\nアッつい みたいだね!$"
+	.string "そうだねぇ……\pいまは {STR_VAR_1}が\nアッつい みたいだね!$"
 
 BattleFrontier_Lounge2_Text_BattleTowerIsHottest::
-	.string "{JPN}そうだねぇ……\pいまは バトルタワー{STR_VAR_1}が\nアッつい みたいだね!$"
+	.string "そうだねぇ……\pいまは バトルタワー{STR_VAR_1}が\nアッつい みたいだね!$"
 
 BattleFrontier_Lounge2_Text_SalonMaidenIsThere::
 	.string "{JPN}しってるかい?\pあそこは エニシダが\nフロンティアブレーンって よんでる\lトレーナーの うちの ひとり……\lタワータイクーンって いう\lなぞの トレーナーが おさめてるのさ!$"
@@ -207,14 +207,14 @@ BattleFrontier_Lounge2_Text_LinkMultiBattleAdvice::
 	.string "{JPN}ともだちが あつまったら\nつうしんマルチ バトルルーム!!\pつよい ともだちと いっしょに あそべば\nつよい トレーナーたち との\lたたかいが まってるぜ!$"
 
 BattleFrontier_Lounge2_Text_NewsGatheringPower::
-	.string "{JPN}すっげえ じょうほうりょくー!!\nやっぱ センパイは ちがうっすよー$"
+	.string "すっげえ じょうほうりょくー!!\nやっぱ センパイは ちがうっすよー$"
 
 BattleFrontier_Lounge2_Text_AmazingPowersOfObservation::
-	.string "{JPN}すっげえ かんさつりょくー!!\nやっぱ センパイは ちがうっすわー$"
+	.string "すっげえ かんさつりょくー!!\nやっぱ センパイは ちがうっすわー$"
 
 BattleFrontier_Lounge2_Text_AmazingPowerOfPersuasion::
-	.string "{JPN}すっげえ せっとくりょくー!!\nやっぱ センパイは ちがうっすねー$"
+	.string "すっげえ せっとくりょくー!!\nやっぱ センパイは ちがうっすねー$"
 
 BattleFrontier_Lounge2_Text_ThisPlaceIsScaringMe::
-	.string "{JPN}なによ ここ……\nちょっと こわい……$"
+	.string "なによ ここ……\nちょっと こわい……$"
 

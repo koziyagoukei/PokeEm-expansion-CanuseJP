@@ -40,14 +40,14 @@ LavaridgeTown_HerbShop_EventScript_ExplainCharcoal::
 	end
 
 LavaridgeTown_HerbShop_Text_WelcomeToHerbShop:
-	.string "{JPN}どうも!\nやすくて よく きく かんぽうや です$"
+	.string "どうも!\nやすくて よく きく かんぽうや です$"
 
 LavaridgeTown_HerbShop_Text_YouveComeToLookAtHerbalMedicine:
-	.string "{JPN}フエンの かんぽうやくを\nみにくるとは なかなか しぶいのう\pきにいった! これを もってけ!$"
+	.string "フエンの かんぽうやくを\nみにくるとは なかなか しぶいのう\pきにいった! これを もってけ!$"
 
 LavaridgeTown_HerbShop_Text_ExplainCharcoal:
-	.string "{JPN}おまえさんに あげた もくたんは\nかんぽうやくを つくるのに つかうが\lポケモンに もたせても すごいぞ!\pほのおタイプの わざの いりょくを\nたかめて くれるのじゃよ!$"
+	.string "おまえさんに あげた もくたんは\nかんぽうやくを つくるのに つかうが\lポケモンに もたせても すごいぞ!\pほのおタイプの わざの いりょくを\nたかめて くれるのじゃよ!$"
 
 LavaridgeTown_HerbShop_Text_HerbalMedicineWorksButMonWillDislike:
-	.string "{JPN}かんぽうやくの ききめは すごいが\nポケモンに のませると きらわれるぞよ\lきっと すっごく にがいんじゃろうな!$"
+	.string "かんぽうやくの ききめは すごいが\nポケモンに のませると きらわれるぞよ\lきっと すっごく にがいんじゃろうな!$"
 

@@ -315,59 +315,59 @@ Route110_TrickHousePuzzle7_EventScript_Everett::
 	end
 
 Route110_TrickHousePuzzle7_Text_WroteSecretCodeLockOpened::
-	.string "{JPN}{PLAYER}は あいことばを\nとびらに かきつけた!\p「カラクリだいおう さま だきしめたい」\p…… …… ……\pかぎの はずれる おとがした!$"
+	.string "{PLAYER}は あいことばを\nとびらに かきつけた!\p「カラクリだいおう さま だきしめたい」\p…… …… ……\pかぎの はずれる おとがした!$"
 
 Route110_TrickHousePuzzle7_Text_JoshuaIntro:
-	.string "{JPN}いつも カラクリだいおうは パッと\nきえちゃうけど どう やってるんだろ?$"
+	.string "いつも カラクリだいおうは パッと\nきえちゃうけど どう やってるんだろ?$"
 
 Route110_TrickHousePuzzle7_Text_JoshuaDefeat:
-	.string "{JPN}ひえー\nなんで そんなに つよいの?$"
+	.string "ひえー\nなんで そんなに つよいの?$"
 
 Route110_TrickHousePuzzle7_Text_JoshuaPostBattle:
-	.string "{JPN}ぼくも じゆう じざいに\nきえたり あらわれたり してみたいな$"
+	.string "ぼくも じゆう じざいに\nきえたり あらわれたり してみたいな$"
 
 Route110_TrickHousePuzzle7_Text_PatriciaIntro:
-	.string "{JPN}おなじところを つづけて\nなんども まわると ふきつなのよ……$"
+	.string "おなじところを つづけて\nなんども まわると ふきつなのよ……$"
 
 Route110_TrickHousePuzzle7_Text_PatriciaDefeat:
-	.string "{JPN}まけた……!\nえんぎが わるいわ……!$"
+	.string "まけた……!\nえんぎが わるいわ……!$"
 
 Route110_TrickHousePuzzle7_Text_PatriciaPostBattle:
-	.string "{JPN}わたしは もう 10かい いじょう\nまわってしまった…… ふきつだわ……$"
+	.string "わたしは もう 10かい いじょう\nまわってしまった…… ふきつだわ……$"
 
 Route110_TrickHousePuzzle7_Text_AlexisIntro:
-	.string "{JPN}かった ほうが さきに このしかけを\nぬけられる よかんが するわ!$"
+	.string "かった ほうが さきに このしかけを\nぬけられる よかんが するわ!$"
 
 Route110_TrickHousePuzzle7_Text_AlexisDefeat:
-	.string "{JPN}あら!\nじゃあ おさきに どうぞ!$"
+	.string "あら!\nじゃあ おさきに どうぞ!$"
 
 Route110_TrickHousePuzzle7_Text_AlexisPostBattle:
-	.string "{JPN}あなたは カラクリやしきの しかけを\nすべて とく って よかんが するわ!$"
+	.string "あなたは カラクリやしきの しかけを\nすべて とく って よかんが するわ!$"
 
 Route110_TrickHousePuzzle7_Text_MarielaIntro:
-	.string "{JPN}んっふっふっふ きたわねっ\nさあ しょうぶよ!$"
+	.string "んっふっふっふ きたわねっ\nさあ しょうぶよ!$"
 
 Route110_TrickHousePuzzle7_Text_MarielaDefeat:
-	.string "{JPN}あっさり かってくれちゃって!$"
+	.string "あっさり かってくれちゃって!$"
 
 Route110_TrickHousePuzzle7_Text_MarielaPostBattle:
-	.string "{JPN}ふん べつに くやしく ないから!\nわたし!$"
+	.string "ふん べつに くやしく ないから!\nわたし!$"
 
 Route110_TrickHousePuzzle7_Text_AlvaroIntro:
-	.string "{JPN}きみが どんどん\nちかづいて くるのを みていたぜ!$"
+	.string "きみが どんどん\nちかづいて くるのを みていたぜ!$"
 
 Route110_TrickHousePuzzle7_Text_AlvaroDefeat:
-	.string "{JPN}こんな けっかは\nみえなかった$"
+	.string "こんな けっかは\nみえなかった$"
 
 Route110_TrickHousePuzzle7_Text_AlvaroPostBattle:
-	.string "{JPN}ま こんな ところで あったんだ\nものずき どうし おたがい がんばろうぜ!$"
+	.string "ま こんな ところで あったんだ\nものずき どうし おたがい がんばろうぜ!$"
 
 Route110_TrickHousePuzzle7_Text_EverettIntro:
-	.string "{JPN}せ せまいな……\nここは……$"
+	.string "せ せまいな……\nここは……$"
 
 Route110_TrickHousePuzzle7_Text_EverettDefeat:
-	.string "{JPN}おお つよいつよい$"
+	.string "おお つよいつよい$"
 
 Route110_TrickHousePuzzle7_Text_EverettPostBattle:
-	.string "{JPN}もし かったら いれかわって やれと\nおもって いたんだけどね$"
+	.string "もし かったら いれかわって やれと\nおもって いたんだけどね$"
 

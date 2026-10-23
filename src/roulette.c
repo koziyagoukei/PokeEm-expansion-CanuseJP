@@ -418,16 +418,16 @@ static void SpriteCB_Taillow(struct Sprite *);
 
 static const u8 Roulette_Text_PlayMinimumWagerIsX[] = _("{JPN}ここは レート{STR_VAR_1}の ルーレットだい です\nルーレットで あそびますか?");
 static const u8 Roulette_Text_NotEnoughCoins[] = _("{JPN}コインが たりません");
-static const u8 Roulette_Text_SpecialRateTable[] = _("{JPN}ほんじつ このだいでは\nレート アップ じっしちゅう!");
-static const u8 Roulette_Text_ControlsInstruction[] = _("{JPN}ベットする わくを じゅうじボタンで えらんで\nAボタンで けってい します");
-static const u8 Roulette_Text_ItsAHit[] = _("{JPN}あたりー!");
-static const u8 Roulette_Text_Jackpot[] = _("{JPN}おおあたり!!");
-static const u8 Roulette_Text_NothingDoing[] = _("{JPN}はずれー");
+static const u8 Roulette_Text_SpecialRateTable[] = _("ほんじつ このだいでは\nレート アップ じっしちゅう!");
+static const u8 Roulette_Text_ControlsInstruction[] = _("ベットする わくを じゅうじボタンで えらんで\nAボタンで けってい します");
+static const u8 Roulette_Text_ItsAHit[] = _("あたりー!");
+static const u8 Roulette_Text_Jackpot[] = _("おおあたり!!");
+static const u8 Roulette_Text_NothingDoing[] = _("はずれー");
 static const u8 Roulette_Text_YouveWonXCoins[] = _("{JPN}おめでとう ございます!\nコイン {STR_VAR_1}まい はいります!");
-static const u8 Roulette_Text_NoCoinsLeft[] = _("{JPN}コインが なくなりました");
-static const u8 Roulette_Text_KeepPlaying[] = _("{JPN}つづけて あそびますか?");
-static const u8 Roulette_Text_BoardWillBeCleared[] = _("{JPN}だいの うえの たまを\nクリア します");
-static const u8 Roulette_Text_CoinCaseIsFull[] = _("{JPN}コインが いっぱいです!\nけいひんと こうかん して ください");
+static const u8 Roulette_Text_NoCoinsLeft[] = _("コインが なくなりました");
+static const u8 Roulette_Text_KeepPlaying[] = _("つづけて あそびますか?");
+static const u8 Roulette_Text_BoardWillBeCleared[] = _("だいの うえの たまを\nクリア します");
+static const u8 Roulette_Text_CoinCaseIsFull[] = _("コインが いっぱいです!\nけいひんと こうかん して ください");
 
 static const u16 sWheel_Pal[] = INCGFX_U16("graphics/roulette/wheel.png", ".gbapal"); // also palette for grid
 static const u32 sGrid_Tilemap[] = INCGFX_U32("graphics/roulette/grid.bin", ".smolTM");

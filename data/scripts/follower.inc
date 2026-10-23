@@ -1,5 +1,5 @@
 gText_FollowerLovesYou::
-	.string "{JPN}{STR_VAR_1}は うれしそうに\nこちらを みている!$"
+	.string "{STR_VAR_1}は うれしそうに\nこちらを みている!$"
 
 gText_FollowerLostInThought::
 	.string "{JPN}{STR_VAR_1}は なにか かんがえている$"

@@ -299,112 +299,112 @@ BattleFrontier_OutsideWest_EventScript_PokefanF::
 	end
 
 BattleFrontier_OutsideWest_Text_BattleDomeSign:
-	.string "{JPN}ここは バトルドーム!\nめざせ! むてきの スーパースター!$"
+	.string "ここは バトルドーム!\nめざせ! むてきの スーパースター!$"
 
 BattleFrontier_OutsideWest_Text_BattleFactorySign:
-	.string "{JPN}ここは バトルファクトリー!\nさがせ! さいきょう ポケモン!$"
+	.string "ここは バトルファクトリー!\nさがせ! さいきょう ポケモン!$"
 
 BattleFrontier_OutsideWest_Text_BattlePikeSign:
-	.string "{JPN}ここは バトルチューブ!\nえらべ! 3つの みち!$"
+	.string "ここは バトルチューブ!\nえらべ! 3つの みち!$"
 
 BattleFrontier_OutsideWest_Text_ThisIsBattleTower:
-	.string "{JPN}ここは バトルタワー さ!\pトレーナーは きたえあげた ポケモンで\nひたすら かちぬいて いくのさ!$"
+	.string "ここは バトルタワー さ!\pトレーナーは きたえあげた ポケモンで\nひたすら かちぬいて いくのさ!$"
 
 BattleFrontier_OutsideWest_Text_MayISeeYourTicket:
-	.string "{JPN}れんらくせんを ごりよう ですね!\nチケットは おもち でしょうか?$"
+	.string "れんらくせんを ごりよう ですね!\nチケットは おもち でしょうか?$"
 
 BattleFrontier_OutsideWest_Text_MustHaveTicketToBoard:
-	.string "{JPN}{PLAYER}は\nチケットを もっていない!\p……もうしわけ ありません!\pふねに のれるのは\nチケットの ある かた だけです$"
+	.string "{PLAYER}は\nチケットを もっていない!\p……もうしわけ ありません!\pふねに のれるのは\nチケットの ある かた だけです$"
 
 BattleFrontier_OutsideWest_Text_WhereWouldYouLikeToGo:
-	.string "{JPN}{PLAYER}は\nふねのチケットを みせた!\pはい! けっこう です!\pいきさきは どちら でしょう?$"
+	.string "{PLAYER}は\nふねのチケットを みせた!\pはい! けっこう です!\pいきさきは どちら でしょう?$"
 
 BattleFrontier_OutsideWest_Text_SlateportItIs:
-	.string "{JPN}カイナシティ ですね!$"
+	.string "カイナシティ ですね!$"
 
 BattleFrontier_OutsideWest_Text_LilycoveItIs:
-	.string "{JPN}ミナモシティ ですね!$"
+	.string "ミナモシティ ですね!$"
 
 BattleFrontier_OutsideWest_Text_SailWithUsAnotherTime:
-	.string "{JPN}また ごりよう ください!$"
+	.string "また ごりよう ください!$"
 
 BattleFrontier_OutsideWest_Text_PleaseBoardFerry:
-	.string "{JPN}れんらくせんに のって おまちください$"
+	.string "れんらくせんに のって おまちください$"
 
 BattleFrontier_OutsideWest_Text_ThenWhereWouldYouLikeToGo:
-	.string "{JPN}いきさきは どちら でしょう?$"
+	.string "いきさきは どちら でしょう?$"
 
 BattleFrontier_OutsideWest_Text_BestOutOfAllMyFriends:
-	.string "{JPN}ぼく ともだちの なかでは\nいちばん つよいのに\lここに きてみたら てんで ダメ!$"
+	.string "ぼく ともだちの なかでは\nいちばん つよいのに\lここに きてみたら てんで ダメ!$"
 
 BattleFrontier_OutsideWest_Text_CantFindBattleTower:
-	.string "{JPN}バトルタワーに いきたいのに\nフロンティアパスの マップを みても\lなにが なんだか…… ひろすぎる……$"
+	.string "バトルタワーに いきたいのに\nフロンティアパスの マップを みても\lなにが なんだか…… ひろすぎる……$"
 
 BattleFrontier_OutsideWest_Text_GotSeasickOnWayHere:
-	.string "{JPN}すぐに チャレンジ したいのに\nくる とちゅうで ふなよい して しまった\pうっぷ……$"
+	.string "すぐに チャレンジ したいのに\nくる とちゅうで ふなよい して しまった\pうっぷ……$"
 
 BattleFrontier_OutsideWest_Text_OnlyToughTrainersBroughtHere:
-	.string "{JPN}ここには だれでも\nこられるって わけじゃ ないんだぜ\pつよさを みとめられた トレーナーが\nつれてきて もらえる ところなんだ!\pだから…… バトルフロンティアの ことを\nしらない トレーナーも おおいんだ$"
+	.string "ここには だれでも\nこられるって わけじゃ ないんだぜ\pつよさを みとめられた トレーナーが\nつれてきて もらえる ところなんだ!\pだから…… バトルフロンティアの ことを\nしらない トレーナーも おおいんだ$"
 
 BattleFrontier_OutsideWest_Text_SureWeCanChallengeWithNoMons:
-	.string "{JPN}なぁなぁ にいちゃん……\pほんとに じぶんの ポケモン いなくても\nちょうせん できるの? だいじょうぶ?$"
+	.string "なぁなぁ にいちゃん……\pほんとに じぶんの ポケモン いなくても\nちょうせん できるの? だいじょうぶ?$"
 
 BattleFrontier_OutsideWest_Text_BigGuySaidIllLendYouMons:
-	.string "{JPN}だ だいじょうぶ だよ!\pきっと……\pなんだか おっかない おっさん だったけど\n「ポケモン かして やるぜ!」 って\lいってた じゃん か……$"
+	.string "だ だいじょうぶ だよ!\pきっと……\pなんだか おっかない おっさん だったけど\n「ポケモン かして やるぜ!」 って\lいってた じゃん か……$"
 
 BattleFrontier_OutsideWest_Text_WhosRaisingThoseRentalMons:
-	.string "{JPN}あそこに あるのが バトルファクトリー\nつよいポケモンを レンタル できるんだ!\pでもさ レンタル ポケモンって\nいったい だれが そだてて いるんだろう?$"
+	.string "あそこに あるのが バトルファクトリー\nつよいポケモンを レンタル できるんだ!\pでもさ レンタル ポケモンって\nいったい だれが そだてて いるんだろう?$"
 
 BattleFrontier_OutsideWest_Text_ScaredOfPikeBecauseSeviper:
-	.string "{JPN}ハブネークが こわくて\nバトルチューブに はいれないの……\pで でも せっかく きたんだから\nがんばって せいは するわ……! ブルブル$"
+	.string "ハブネークが こわくて\nバトルチューブに はいれないの……\pで でも せっかく きたんだから\nがんばって せいは するわ……! ブルブル$"
 
 BattleFrontier_OutsideWest_Text_LetsPlayRockPaperScissors:
-	.string "{JPN}ね! わたしと ジャンケンしよ!\nじゃーん けーん ぽん!\p…… …… ……$"
+	.string "ね! わたしと ジャンケンしよ!\nじゃーん けーん ぽん!\p…… …… ……$"
 
 BattleFrontier_OutsideWest_Text_WonIllTakePikeChallenge:
-	.string "{JPN}わーい かっちゃった!\nよし バトルチューブに ちょうせん しよ!$"
+	.string "わーい かっちゃった!\nよし バトルチューブに ちょうせん しよ!$"
 
 BattleFrontier_OutsideWest_Text_LostIllPutOffPikeChallenge:
-	.string "{JPN}あーあ まけちゃったあ……\pいまは うんが わるいみたい\nバトルチューブは また あしたにしよ$"
+	.string "あーあ まけちゃったあ……\pいまは うんが わるいみたい\nバトルチューブは また あしたにしよ$"
 
 BattleFrontier_OutsideWest_Text_ChooseFishingOverBattling:
-	.string "{JPN}この かいわいで なぜか つりを\nたのしもうと して いるのは\lおれ くらいの ものだろうな!\p…… え なんにも つれないの?\nがっ かり$"
+	.string "この かいわいで なぜか つりを\nたのしもうと して いるのは\lおれ くらいの ものだろうな!\p…… え なんにも つれないの?\nがっ かり$"
 
 BattleFrontier_OutsideWest_Text_KeepBattlingUntilIGetSymbol:
-	.string "{JPN}きょうは シンボルを もらえる までは\nぜったいに あきらめないで がんばろっと!$"
+	.string "きょうは シンボルを もらえる までは\nぜったいに あきらめないで がんばろっと!$"
 
 BattleFrontier_OutsideWest_Text_YoureOffToChallengeDome:
-	.string "{JPN}おや…… バトルドームに\nちょうせん されますか?\pでは おたがい かちあがって\nおあい できるように がんばりましょう$"
+	.string "おや…… バトルドームに\nちょうせん されますか?\pでは おたがい かちあがって\nおあい できるように がんばりましょう$"
 
 BattleFrontier_OutsideWest_Text_DomeIsHereGrandpa:
-	.string "{JPN}ほら じいちゃん こっち こっち!\nここが バトルドームよっ! がんばって!$"
+	.string "ほら じいちゃん こっち こっち!\nここが バトルドームよっ! がんばって!$"
 
 BattleFrontier_OutsideWest_Text_WontLetGentlemenBeatMe:
-	.string "{JPN}ほほおぉ ここが バトルドームか……\nよし ジェントルマンには まけんぞ!\p……で いりぐちは どこ なんじゃろ?$"
+	.string "ほほおぉ ここが バトルドームか……\nよし ジェントルマンには まけんぞ!\p……で いりぐちは どこ なんじゃろ?$"
 
 BattleFrontier_OutsideWest_Text_NothingHereNotLongAgo:
-	.string "{JPN}ちょっと まえ までは\nなんも なかった とち なのに……\pすっげー ところに なっちゃったなあ!\nこんど かーちゃんも つれて きてやるか$"
+	.string "ちょっと まえ までは\nなんも なかった とち なのに……\pすっげー ところに なっちゃったなあ!\nこんど かーちゃんも つれて きてやるか$"
 
 BattleFrontier_OutsideWest_Text_FinallyArrivedAtFrontier:
-	.string "{JPN}とうとう バトルフロンティアに きたわ!\pみんな あたしの つよさと うつくしさに\nくぎづけに なるわね!$"
+	.string "とうとう バトルフロンティアに きたわ!\pみんな あたしの つよさと うつくしさに\nくぎづけに なるわね!$"
 
 BattleFrontier_OutsideWest_Text_SquareFilledWithToughPeople:
-	.string "{JPN}もぐ もぐ\pこの ひろば には\nつよいひと いっぱい らしいねえ\lもぐ もぐ$"
+	.string "もぐ もぐ\pこの ひろば には\nつよいひと いっぱい らしいねえ\lもぐ もぐ$"
 
 BattleFrontier_OutsideWest_Text_MetOlderGirlAtPike:
-	.string "{JPN}ぱく ぱく\pこのまえ バトルチューブで\nめつきが わるくて こわそうな\lおねえさんに あったんだよ\lぱく ぱく\pそしたら 「いつまで くってるの!」って\nおこられて ボコボコに やられちったよ\pいやあ こわかったなー\pぱく ぱく$"
+	.string "ぱく ぱく\pこのまえ バトルチューブで\nめつきが わるくて こわそうな\lおねえさんに あったんだよ\lぱく ぱく\pそしたら 「いつまで くってるの!」って\nおこられて ボコボコに やられちったよ\pいやあ こわかったなー\pぱく ぱく$"
 
 BattleFrontier_OutsideWest_Text_LastTimeOurEyesMet:
-	.string "{JPN}はあっ!?\nあなた なに いって くれちゃってるの?\pわたし なんか\nこないだ おうえん してたら\lばーーーっちり めが あったんだからっ!$"
+	.string "はあっ!?\nあなた なに いって くれちゃってるの?\pわたし なんか\nこないだ おうえん してたら\lばーーーっちり めが あったんだからっ!$"
 
 BattleFrontier_OutsideWest_Text_DomeAceLookedBecauseOfMyCheering:
-	.string "{JPN}なんだとぉー!?\pそれは となりに ぼくが\nいたから でしょっ!\pあのひとは ぼくの おうえんを\nきいて ふりむいて くれたんだ っつーの!$"
+	.string "なんだとぉー!?\pそれは となりに ぼくが\nいたから でしょっ!\pあのひとは ぼくの おうえんを\nきいて ふりむいて くれたんだ っつーの!$"
 
 BattleFrontier_OutsideWest_Text_DomeAceIsMine:
-	.string "{JPN}ああ うるさいっ! うるさいわっ!\pおみゃーら みたいな おこさまは\nどこぞの ジムリーダーでも\lおうえん しとけっ!!\pドームスーパースターは わしだけっ!\nわしだけの アイドルなのっ!!$"
+	.string "ああ うるさいっ! うるさいわっ!\pおみゃーら みたいな おこさまは\nどこぞの ジムリーダーでも\lおうえん しとけっ!!\pドームスーパースターは わしだけっ!\nわしだけの アイドルなのっ!!$"
 
 BattleFrontier_OutsideWest_Text_FansOverThereUsedToBeTrainers:
-	.string "{JPN}あそこで けんか してる ひとたち……\pあれでも もともとは すごく つよくて\nゆうめいな トレーナー だったんだよ\pだけど バトルトーナメントで\nあるトレーナーに ボコボコに まけてから\lみんな そのトレーナーの\lだいファンに なっちゃったんだ\pいまじゃ まいにち ちょうせんも しないで\nバトルドームに おうえんに かよってるよ$"
+	.string "あそこで けんか してる ひとたち……\pあれでも もともとは すごく つよくて\nゆうめいな トレーナー だったんだよ\pだけど バトルトーナメントで\nあるトレーナーに ボコボコに まけてから\lみんな そのトレーナーの\lだいファンに なっちゃったんだ\pいまじゃ まいにち ちょうせんも しないで\nバトルドームに おうえんに かよってるよ$"
 
 BattleFrontier_OutsideWest_Text_MonWithLongTailInFrontier:
-	.string "{JPN}バトルフロンティアの どっかで\nえらく しっぽの ながーい ポケモンを\lみたって きいたわー!\pああ かわいい ポケモンに ちがいない……\pもうー ちょうせん よりも\nそのこ さがしに いきたいわぁー$"
+	.string "バトルフロンティアの どっかで\nえらく しっぽの ながーい ポケモンを\lみたって きいたわー!\pああ かわいい ポケモンに ちがいない……\pもうー ちょうせん よりも\nそのこ さがしに いきたいわぁー$"

@@ -22,13 +22,13 @@ MossdeepCity_House1_EventScript_Woman::
 	end
 
 MossdeepCity_House1_Text_HmmYourPokemon:
-	.string "{JPN}ムムムッ!\nきみの {STR_VAR_1}……$"
+	.string "ムムムッ!\nきみの {STR_VAR_1}……$"
 
 MossdeepCity_House1_Text_ItLikesXPokeblocks:
-	.string "{JPN}{STR_VAR_1} が すきだろう!\pいや まちがいなく\n{STR_VAR_1} が すきだ!$"
+	.string "{STR_VAR_1} が すきだろう!\pいや まちがいなく\n{STR_VAR_1} が すきだ!$"
 
 MossdeepCity_House1_Text_DoesntLikeOrDislikePokeblocks:
-	.string "{JPN}ポロックの すききらいは ないみたいだな$"
+	.string "ポロックの すききらいは ないみたいだな$"
 
 MossdeepCity_House1_Text_HusbandCanTellPokeblockMonLikes:
-	.string "{JPN}だんなったら みただけで\nポケモンが すきな ポロック わかるのよ$"
+	.string "だんなったら みただけで\nポケモンが すきな ポロック わかるのよ$"

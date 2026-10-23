@@ -10,8 +10,8 @@ PacifidlogTown_House1_EventScript_Woman::
 	end
 
 PacifidlogTown_House1_Text_RegiStory:
-	.string "{JPN}ホウエンちほう には\nいわ…… こおり…… はがね……\pそれぞれの ちからを つかさどる\n3びきの ポケモンが\lそれぞれ どこかの どうくつに いる……\pおれ ちいさな ころに\nそんな はなしを きいたことが あるよ$"
+	.string "ホウエンちほう には\nいわ…… こおり…… はがね……\pそれぞれの ちからを つかさどる\n3びきの ポケモンが\lそれぞれ どこかの どうくつに いる……\pおれ ちいさな ころに\nそんな はなしを きいたことが あるよ$"
 
 PacifidlogTown_House1_Text_SixDotsOpenThreeDoors:
-	.string "{JPN}「むっつの てんが\n みっつの とびらを あける」\pおじいちゃんが よく いっていたけど\nいまだに なんのことだか わからないわ$"
+	.string "「むっつの てんが\n みっつの とびらを あける」\pおじいちゃんが よく いっていたけど\nいまだに なんのことだか わからないわ$"
 

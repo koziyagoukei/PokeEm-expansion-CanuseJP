@@ -63,20 +63,20 @@ FortreeCity_House4_EventScript_Wingull::
 	end
 
 FortreeCity_House4_Text_BringsWorldCloserTogether:
-	.string "{JPN}ポケモンと いることで\nなかの いい ともだちが ふえていく……\pこうして せかいは つながって いくのね!\nすてきだわ!$"
+	.string "ポケモンと いることで\nなかの いい ともだちが ふえていく……\pこうして せかいは つながって いくのね!\nすてきだわ!$"
 
 FortreeCity_House4_Text_GoBirdPokemon:
-	.string "{JPN}それっ!\nゆけっ とりポケモン$"
+	.string "それっ!\nゆけっ とりポケモン$"
 
 FortreeCity_House4_Text_AskedWingullToRunErrand:
-	.string "{JPN}えへへ キャモメに\nちょっと おつかいを たのんだのさ$"
+	.string "えへへ キャモメに\nちょっと おつかいを たのんだのさ$"
 
 FortreeCity_House4_Text_WelcomeWingullTakeMentalHerb:
-	.string "{JPN}よーし!\nおかえり キャモメ!\pあれえ? なに もってるんだ?\pメンタルハーブ かあ……\nどこかで ひろったんだな\pでも ぼく トレーナーじゃ ないからな\nきみに あげるよ!$"
+	.string "よーし!\nおかえり キャモメ!\pあれえ? なに もってるんだ?\pメンタルハーブ かあ……\nどこかで ひろったんだな\pでも ぼく トレーナーじゃ ないからな\nきみに あげるよ!$"
 
 FortreeCity_House4_Text_FriendsFarAwayThanksToWingull:
-	.string "{JPN}キャモメの おかげで\nとおくの ともだちとも なかよし なのさ!$"
+	.string "キャモメの おかげで\nとおくの ともだちとも なかよし なのさ!$"
 
 FortreeCity_House4_Text_Wingull:
-	.string "{JPN}キャモメ『ぴひょー!$"
+	.string "キャモメ『ぴひょー!$"
 

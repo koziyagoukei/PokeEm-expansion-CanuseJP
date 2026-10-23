@@ -92,37 +92,37 @@ ProfileMan_EventScript_Ret::
 	return
 
 ProfileMan_Text_CollectTrainerProfiles:
-	.string "{JPN}こんにちは\nえがおの すてきな トレーナーさん!\pぼくは ポケモントレーナーさん たちの\nプロフィールを あつめるのが\lしゅみ なんだけど……$"
+	.string "こんにちは\nえがおの すてきな トレーナーさん!\pぼくは ポケモントレーナーさん たちの\nプロフィールを あつめるのが\lしゅみ なんだけど……$"
 
 ProfileMan_Text_MayISeeYourProfile:
-	.string "{JPN}どうかな? きみの プロフィール\nぼくに おしえて もらえないかな?$"
+	.string "どうかな? きみの プロフィール\nぼくに おしえて もらえないかな?$"
 
 ProfileMan_Text_EasyChatExplanation:
-	.string "{JPN}プロフィールは すきな ことばを\n4つ くみあわせて つくるんだよ!\pこれから ぼくが\nてきとうな 4つの ことばで つくった\lプロフィールを みせるから\pきみは その ことばを\nすきなものに いれかえて\lきみだけの プロフィールに してね!\pえらべる ことばは\nすごく たくさん あるから\lグループに わかれて いるんだ\lポケモン とか せいかつ とか しゅみ…\lという ぐあいにね!\pだから まずは\nグループを えらんで……\lそのあとに えらんだ グループの\lことばが いくつも でてくるから\lそこから すきな ことばを\lみつけてね!$"
+	.string "プロフィールは すきな ことばを\n4つ くみあわせて つくるんだよ!\pこれから ぼくが\nてきとうな 4つの ことばで つくった\lプロフィールを みせるから\pきみは その ことばを\nすきなものに いれかえて\lきみだけの プロフィールに してね!\pえらべる ことばは\nすごく たくさん あるから\lグループに わかれて いるんだ\lポケモン とか せいかつ とか しゅみ…\lという ぐあいにね!\pだから まずは\nグループを えらんで……\lそのあとに えらんだ グループの\lことばが いくつも でてくるから\lそこから すきな ことばを\lみつけてね!$"
 
 ProfileMan_Text_LetsSeeItThen:
-	.string "{JPN}やった! ありがとう!\nじゃ さっそく きかせてよ!$"
+	.string "やった! ありがとう!\nじゃ さっそく きかせてよ!$"
 
 ProfileMan_Text_ImagineYouWouldHaveWonderfulProfile:
-	.string "{JPN}そんなあ……\pきみの プロフィールは さぞかし\nすてきだと おもうんだけど なぁ……$"
+	.string "そんなあ……\pきみの プロフィールは さぞかし\nすてきだと おもうんだけど なぁ……$"
 
 ProfileMan_Text_NotIntoItRightNow:
-	.string "{JPN}あれ? いまは きが のらないんだね?\pだったら いつでも いいよ!$"
+	.string "あれ? いまは きが のらないんだね?\pだったら いつでも いいよ!$"
 
 ProfileMan_Text_YouHaveWonderfulSmile:
-	.string "{JPN}こんにちは\nえがおの すてきな トレーナーさん!$"
+	.string "こんにちは\nえがおの すてきな トレーナーさん!$"
 
 ProfileMan_Text_MayISeeYourNewProfile:
-	.string "{JPN}きみの あたらしい プロフィールを\nおしえて くれるのかな?$"
+	.string "きみの あたらしい プロフィールを\nおしえて くれるのかな?$"
 
 ProfileMan_Text_EvenBetterThanLastProfile:
-	.string "{JPN}やった! ありがとう!\pじゃあ まえにも まして\nすてきな やつを きたい してるよ!$"
+	.string "やった! ありがとう!\pじゃあ まえにも まして\nすてきな やつを きたい してるよ!$"
 
 ProfileMan_Text_LikeProfileWayItIs:
-	.string "{JPN}いまの ままが いいんだね?\pそうだよね とても すてきな\nプロフィール だもの!$"
+	.string "いまの ままが いいんだね?\pそうだよね とても すてきな\nプロフィール だもの!$"
 
 ProfileMan_Text_FantasticProfile:
-	.string "{JPN}すっ すばらしい!\pまさに きみ そのもの って かんじの\nすてきな プロフィール!\pこれを きいた ひとは\nだれもが きみの とりこに なるだろうね!\pどうも ありがとう!$"
+	.string "すっ すばらしい!\pまさに きみ そのもの って かんじの\nすてきな プロフィール!\pこれを きいた ひとは\nだれもが きみの とりこに なるだろうね!\pどうも ありがとう!$"
 
 @ Unused
 ProfileMan_Text_YouKnowSecretSaying:

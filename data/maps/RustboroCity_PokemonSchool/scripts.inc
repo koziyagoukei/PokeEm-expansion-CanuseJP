@@ -200,59 +200,59 @@ RustboroCity_PokemonSchool_EventScript_ScottWatchStudents::
 	end
 
 RustboroCity_PokemonSchool_Text_BlackboardListsStatusChanges:
-	.string "{JPN}こくばんに\nポケモンが たたかってるときに おこる\lたいちょうの へんかに ついて かかれてる$"
+	.string "こくばんに\nポケモンが たたかってるときに おこる\lたいちょうの へんかに ついて かかれてる$"
 
 RustboroCity_PokemonSchool_Text_ReadWhichTopic:
-	.string "{JPN}どの こうもくを みますか?$"
+	.string "どの こうもくを みますか?$"
 
 RustboroCity_PokemonSchool_Text_ExplainPoison:
-	.string "{JPN}どくを うけると\nたいりょくが へっていきます\pせんとうのあとも どくは のこるので\nあるくたびに たいりょくが へります\lどくけしで なおしましょう$"
+	.string "どくを うけると\nたいりょくが へっていきます\pせんとうのあとも どくは のこるので\nあるくたびに たいりょくが へります\lどくけしで なおしましょう$"
 
 RustboroCity_PokemonSchool_Text_ExplainParalysis:
-	.string "{JPN}まひすると すばやさが さがり\nときどき わざが だせなくなります\pたたかい おわっても まひした ままです\nまひなおしで なおしましょう$"
+	.string "まひすると すばやさが さがり\nときどき わざが だせなくなります\pたたかい おわっても まひした ままです\nまひなおしで なおしましょう$"
 
 RustboroCity_PokemonSchool_Text_ExplainSleep:
-	.string "{JPN}ねむって しまうと\nその あいだ こうげき できません\pじぶんで めざめることも ありますが\nねむったまま せんとうが おわると\lずっと ねむっています\pねむけざましで おこして あげましょう$"
+	.string "ねむって しまうと\nその あいだ こうげき できません\pじぶんで めざめることも ありますが\nねむったまま せんとうが おわると\lずっと ねむっています\pねむけざましで おこして あげましょう$"
 
 RustboroCity_PokemonSchool_Text_ExplainBurn:
-	.string "{JPN}やけどは こうげきりょくが さがるだけでなく\nたいりょくも どんどん へっていきます\pせんとうが おわっても やけどの ままです\nやけどなおしで なおしましょう$"
+	.string "やけどは こうげきりょくが さがるだけでなく\nたいりょくも どんどん へっていきます\pせんとうが おわっても やけどの ままです\nやけどなおしで なおしましょう$"
 
 RustboroCity_PokemonSchool_Text_ExplainFreeze:
-	.string "{JPN}こおって しまうと なにも できなくなります\pたたかい おわっても こおりついた ままです\nこおりなおしで とかしましょう$"
+	.string "こおって しまうと なにも できなくなります\pたたかい おわっても こおりついた ままです\nこおりなおしで とかしましょう$"
 
 RustboroCity_PokemonSchool_Text_StudentsWhoDontStudyGetQuickClaw:
-	.string "{JPN}べんきょうを しない せいとは\nわたくしの ツメの あかを\lせんじて のませるのです!\pきみが べんきょう する しないは\nこの どうぐを つかいこなせるか どうかで\lわかること でしょう!$"
+	.string "べんきょうを しない せいとは\nわたくしの ツメの あかを\lせんじて のませるのです!\pきみが べんきょう する しないは\nこの どうぐを つかいこなせるか どうかで\lわかること でしょう!$"
 
 RustboroCity_PokemonSchool_Text_ExplainQuickClaw:
-	.string "{JPN}ポケモンに せんせいのツメを もたせると\nときどき ですが すばやくなって\lせんせい こうげきを するのです!\pこのように ポケモンに もたせる\nどうぐの こと だけでも\lべんきょう することは いっぱい なのです!$"
+	.string "ポケモンに せんせいのツメを もたせると\nときどき ですが すばやくなって\lせんせい こうげきを するのです!\pこのように ポケモンに もたせる\nどうぐの こと だけでも\lべんきょう することは いっぱい なのです!$"
 
 RustboroCity_PokemonSchool_Text_TradingRightNow:
-	.string "{JPN}いま ともだちと\nポケモンを こうかん してるんだ!$"
+	.string "いま ともだちと\nポケモンを こうかん してるんだ!$"
 
 RustboroCity_PokemonSchool_Text_AlwaysWantedSeedot:
-	.string "{JPN}ほしかった タネボーちゃん が\nやっと てに はいるよ!$"
+	.string "ほしかった タネボーちゃん が\nやっと てに はいるよ!$"
 
 RustboroCity_PokemonSchool_Text_PokemontCantUseManMadeItems:
-	.string "{JPN}ポケモンも どうぐ もてるけど\nキズぐすりとか どくけしとか\lひとが つくった どうぐは\lつかいかたが わからない みたい$"
+	.string "ポケモンも どうぐ もてるけど\nキズぐすりとか どくけしとか\lひとが つくった どうぐは\lつかいかたが わからない みたい$"
 
 RustboroCity_PokemonSchool_Text_ConfusedPokemonAttacksItself:
-	.string "{JPN}ポケモンの わざで\nこんらん することが あるでしょ?\pこんらん すると たまに まちがえて\nじぶんを こうげき しちゃうの……\pでも いちどでも せんとうから はなれると\nもとに もどるわよ!$"
+	.string "ポケモンの わざで\nこんらん することが あるでしょ?\pこんらん すると たまに まちがえて\nじぶんを こうげき しちゃうの……\pでも いちどでも せんとうから はなれると\nもとに もどるわよ!$"
 
 RustboroCity_PokemonSchool_Text_PokemonHealItselfWithBerry:
-	.string "{JPN}……ポケモンに きのみを もたせると\nじぶんで たいりょくを かいふくする\pポケモンが もてる どうぐは\nほかにも たくさん……\pノートを ちゃんと とるのは\nたいへんだなあ……$"
+	.string "……ポケモンに きのみを もたせると\nじぶんで たいりょくを かいふくする\pポケモンが もてる どうぐは\nほかにも たくさん……\pノートを ちゃんと とるのは\nたいへんだなあ……$"
 
 RustboroCity_PokemonSchool_Text_StudentsNotes:
-	.string "{JPN}このこの ノートだ……\pポケモンは モンスターボールで つかまえて\nどうじに 6ぴき もちあるける\pそうして つかまえた ポケモンを\nそだてて たたかわせる ひとを\lポケモントレーナーと いう\pトレーナーの もくひょうは\nかくちの ポケモンジムに いる\lつよい トレーナーに かつこと!$"
+	.string "このこの ノートだ……\pポケモンは モンスターボールで つかまえて\nどうじに 6ぴき もちあるける\pそうして つかまえた ポケモンを\nそだてて たたかわせる ひとを\lポケモントレーナーと いう\pトレーナーの もくひょうは\nかくちの ポケモンジムに いる\lつよい トレーナーに かつこと!$"
 
 RustboroCity_PokemonSchool_Text_ScottMetAlreadyCut:
-	.string "{JPN}おや? きみとは たしか\nトウカシティで あった きがするね\pわたしの なまえは エニシダ\pポケモンしょうぶの さいのうを もった\nゆうしゅうな じんざいを もとめて\lかくちを たびして いるのさ\pスクールを のぞきにきた ということは\nきみも トレーナー?\pならば まずは いあいぎりを\nポケモンに おぼえさせると いいね!\pいあいぎりは たしか このまちの\nだれかが もっていた はずだよ$"
+	.string "おや? きみとは たしか\nトウカシティで あった きがするね\pわたしの なまえは エニシダ\pポケモンしょうぶの さいのうを もった\nゆうしゅうな じんざいを もとめて\lかくちを たびして いるのさ\pスクールを のぞきにきた ということは\nきみも トレーナー?\pならば まずは いあいぎりを\nポケモンに おぼえさせると いいね!\pいあいぎりは たしか このまちの\nだれかが もっていた はずだよ$"
 
 RustboroCity_PokemonSchool_Text_StudentTalentLevelUnknown:
-	.string "{JPN}エニシダ『うーん ここに いる\nせいとさん たちの さいのうは\lまだまだ みちすう! これから だな!$"
+	.string "エニシダ『うーん ここに いる\nせいとさん たちの さいのうは\lまだまだ みちすう! これから だな!$"
 
 RustboroCity_PokemonSchool_Text_ScottStoneBadge:
-	.string "{JPN}エニシダ『ん それは……\nストーンバッジ だね\lなかなか やるじゃ ないか!\pだけど できれば\nたたかっている ところを みたかったな\lリーグバッジ だけでは きみが\lどんな トレーナー なのかは\lよく わからない からね$"
+	.string "エニシダ『ん それは……\nストーンバッジ だね\lなかなか やるじゃ ないか!\pだけど できれば\nたたかっている ところを みたかったな\lリーグバッジ だけでは きみが\lどんな トレーナー なのかは\lよく わからない からね$"
 
 RustboroCity_PokemonSchool_Text_ScottMetAlreadyStoneBadge:
-	.string "{JPN}おや? きみとは たしか\nトウカシティで あった きがするね\pわたしの なまえは エニシダ\pポケモンしょうぶの さいのうを もった\nゆうしゅうな じんざいを もとめて\lかくちを たびして いるのさ\pきみの それは……\nストーンバッジ だね\lトレーナーに なりたてに しては やるね\pだけど できれば\nたたかっている ところを みたかったな\lリーグバッジ だけでは きみが\lどんな トレーナー なのかは\lよく わからない からね$"
+	.string "おや? きみとは たしか\nトウカシティで あった きがするね\pわたしの なまえは エニシダ\pポケモンしょうぶの さいのうを もった\nゆうしゅうな じんざいを もとめて\lかくちを たびして いるのさ\pきみの それは……\nストーンバッジ だね\lトレーナーに なりたてに しては やるね\pだけど できれば\nたたかっている ところを みたかったな\lリーグバッジ だけでは きみが\lどんな トレーナー なのかは\lよく わからない からね$"
 

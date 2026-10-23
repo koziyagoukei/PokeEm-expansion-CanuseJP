@@ -63,11 +63,11 @@ LilycoveCity_DepartmentStore_2F_Pokemart2:
 	pokemartlistend
 
 LilycoveCity_DepartmentStore_2F_Text_LearnToUseItemsProperly:
-	.string "{JPN}どうぐの きほんは うまく つかいこなすこと\nこれ いちばん だいじ なのヨ$"
+	.string "どうぐの きほんは うまく つかいこなすこと\nこれ いちばん だいじ なのヨ$"
 
 LilycoveCity_DepartmentStore_2F_Text_GoodGiftForHusband:
-	.string "{JPN}いえで まってる ダンナの\nおみやげ なんだけど どれが いいかしら?$"
+	.string "いえで まってる ダンナの\nおみやげ なんだけど どれが いいかしら?$"
 
 LilycoveCity_DepartmentStore_2F_Text_StockUpOnItems:
-	.string "{JPN}これから とおい ところへ\nたびに いくからな\lここで どっさり どうぐを かっておくのさ$"
+	.string "これから とおい ところへ\nたびに いくからな\lここで どっさり どうぐを かっておくのさ$"
 

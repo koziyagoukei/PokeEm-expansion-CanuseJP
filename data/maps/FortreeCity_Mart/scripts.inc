@@ -38,11 +38,11 @@ FortreeCity_Mart_EventScript_Boy::
 	end
 
 FortreeCity_Mart_Text_SuperRepelBetter:
-	.string "{JPN}シルバースプレーは\nききめ ながもち! こうか ばつぐん!\pつまり むしよけスプレー よりも\nすごい ってことね!$"
+	.string "シルバースプレーは\nききめ ながもち! こうか ばつぐん!\pつまり むしよけスプレー よりも\nすごい ってことね!$"
 
 FortreeCity_Mart_Text_StockUpOnItems:
-	.string "{JPN}もしも ってことが あるかも しれないし\nどうぐは おおめに かうように してるのよ$"
+	.string "もしも ってことが あるかも しれないし\nどうぐは おおめに かうように してるのよ$"
 
 FortreeCity_Mart_Text_RareCandyMakesMonGrow:
-	.string "{JPN}ふしぎなアメを あげると\nポケモン いっきに そだって\lレベルが あがっちゃうんだ!$"
+	.string "ふしぎなアメを あげると\nポケモン いっきに そだって\lレベルが あがっちゃうんだ!$"
 

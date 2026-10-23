@@ -10,7 +10,7 @@ SootopolisCity_House7_EventScript_PokefanF::
 	end
 
 SootopolisCity_House7_Text_CityFromEruptedVolcano:
-	.string "{JPN}かいていに あった かざんが ふんかして\nうみの うえまで もりあがる\pそして ふんかこうに あめが たまって\nできたのが この ルネシティ なんだよ$"
+	.string "かいていに あった かざんが ふんかして\nうみの うえまで もりあがる\pそして ふんかこうに あめが たまって\nできたのが この ルネシティ なんだよ$"
 
 SootopolisCity_House7_Text_CaveMadeToKeepSomething:
-	.string "{JPN}ルネと そとのせかいを つなぐ どうくつ\pまるで なにかを ここから ださないように\nつくられた みたい だわ……\p……かんがえすぎ かしら?$"
+	.string "ルネと そとのせかいを つなぐ どうくつ\pまるで なにかを ここから ださないように\nつくられた みたい だわ……\p……かんがえすぎ かしら?$"

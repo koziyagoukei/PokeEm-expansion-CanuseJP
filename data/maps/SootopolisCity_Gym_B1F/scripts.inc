@@ -52,91 +52,91 @@ SootopolisCity_Gym_B1F_EventScript_Daphne::
 	end
 
 SootopolisCity_Gym_B1F_Text_AndreaIntro:
-	.string "{JPN}ジムリーダー アダンさまに おしえてもらった\nかれいな テクニックを みせたげる!$"
+	.string "ジムリーダー アダンさまに おしえてもらった\nかれいな テクニックを みせたげる!$"
 
 SootopolisCity_Gym_B1F_Text_AndreaDefeat:
-	.string "{JPN}アダンさま ごめんね……$"
+	.string "アダンさま ごめんね……$"
 
 SootopolisCity_Gym_B1F_Text_AndreaPostBattle:
-	.string "{JPN}すべての ゆかに ヒビを いれると\nなにかが おこるわよ$"
+	.string "すべての ゆかに ヒビを いれると\nなにかが おこるわよ$"
 
 SootopolisCity_Gym_B1F_Text_CrissyIntro:
-	.string "{JPN}せっかく ここまで これたのに\nあたしに まけるから\lアダンさまに あえないわね!$"
+	.string "せっかく ここまで これたのに\nあたしに まけるから\lアダンさまに あえないわね!$"
 
 SootopolisCity_Gym_B1F_Text_CrissyDefeat:
-	.string "{JPN}つよい じゃない!!\nかわいい みために だまされたわ$"
+	.string "つよい じゃない!!\nかわいい みために だまされたわ$"
 
 SootopolisCity_Gym_B1F_Text_CrissyPostBattle:
-	.string "{JPN}あなたなら アダンさまと たたかっても\nいちげきで やられなくて すむかもね$"
+	.string "あなたなら アダンさまと たたかっても\nいちげきで やられなくて すむかもね$"
 
 SootopolisCity_Gym_B1F_Text_DaphneIntro:
-	.string "{JPN}アダンさまの たたかう すがた……\pその うつくしさに こころ うばわれ\nわたくしも ポケモンを はじめましてよ$"
+	.string "アダンさまの たたかう すがた……\pその うつくしさに こころ うばわれ\nわたくしも ポケモンを はじめましてよ$"
 
 SootopolisCity_Gym_B1F_Text_DaphneDefeat:
-	.string "{JPN}たたかう すがたの\nうつくしさで まけましたわ……$"
+	.string "たたかう すがたの\nうつくしさで まけましたわ……$"
 
 SootopolisCity_Gym_B1F_Text_DaphnePostBattle:
-	.string "{JPN}あなたさまの たたかう すがたも\nすばらしくってよ\pああっ……!\nポケモンに であえて よかったですわ$"
+	.string "あなたさまの たたかう すがたも\nすばらしくってよ\pああっ……!\nポケモンに であえて よかったですわ$"
 
 SootopolisCity_Gym_B1F_Text_ConnieIntro:
-	.string "{JPN}おねえさんが しょうぶの きびしさ\nいろいろと おしえて あげちゃおっかな$"
+	.string "おねえさんが しょうぶの きびしさ\nいろいろと おしえて あげちゃおっかな$"
 
 SootopolisCity_Gym_B1F_Text_ConnieDefeat:
-	.string "{JPN}なんだ\nつよいんだ$"
+	.string "なんだ\nつよいんだ$"
 
 SootopolisCity_Gym_B1F_Text_ConniePostBattle:
-	.string "{JPN}いいこと おしえて あげるね\pアダンさまに あいたいのなら\nすべての ゆかを 1かいずつ\lあるいて いけば いいの$"
+	.string "いいこと おしえて あげるね\pアダンさまに あいたいのなら\nすべての ゆかを 1かいずつ\lあるいて いけば いいの$"
 
 SootopolisCity_Gym_B1F_Text_BridgetIntro:
-	.string "{JPN}ホウエンちほうで いちばん\nレベルの たかい ポケモンジム……\pそれが ここ ルネジムよ!$"
+	.string "ホウエンちほうで いちばん\nレベルの たかい ポケモンジム……\pそれが ここ ルネジムよ!$"
 
 SootopolisCity_Gym_B1F_Text_BridgetDefeat:
-	.string "{JPN}なんて レベルの たかい……$"
+	.string "なんて レベルの たかい……$"
 
 SootopolisCity_Gym_B1F_Text_BridgetPostBattle:
-	.string "{JPN}レベルの たかい ジムに いることに\nまんぞく しないで\lほかにも しゅぎょうに いくほうが\lつよくなれそうだし なにより たのしそうね$"
+	.string "レベルの たかい ジムに いることに\nまんぞく しないで\lほかにも しゅぎょうに いくほうが\lつよくなれそうだし なにより たのしそうね$"
 
 SootopolisCity_Gym_B1F_Text_OliviaIntro:
-	.string "{JPN}アダンさまと いっしょに\nポケモンを きたえて いるの\pかんたんに たおせると おもわないでね$"
+	.string "アダンさまと いっしょに\nポケモンを きたえて いるの\pかんたんに たおせると おもわないでね$"
 
 SootopolisCity_Gym_B1F_Text_OliviaDefeat:
-	.string "{JPN}たおされちゃった……$"
+	.string "たおされちゃった……$"
 
 SootopolisCity_Gym_B1F_Text_OliviaPostBattle:
-	.string "{JPN}あなた みどころ あると おもうの\nいっしょに ここで ポケモン きたえない?$"
+	.string "あなた みどころ あると おもうの\nいっしょに ここで ポケモン きたえない?$"
 
 SootopolisCity_Gym_B1F_Text_TiffanyIntro:
-	.string "{JPN}こおりの うえでの ひとふでがき\pそれが できる トレーナーは\nエレガントに うつくしいのよ!$"
+	.string "こおりの うえでの ひとふでがき\pそれが できる トレーナーは\nエレガントに うつくしいのよ!$"
 
 SootopolisCity_Gym_B1F_Text_TiffanyDefeat:
-	.string "{JPN}ちょっとー!?$"
+	.string "ちょっとー!?$"
 
 SootopolisCity_Gym_B1F_Text_TiffanyPostBattle:
-	.string "{JPN}あたりまえ だけど\nポケモンの つよさに\lおとなも こどもも かんけい ないよ$"
+	.string "あたりまえ だけど\nポケモンの つよさに\lおとなも こどもも かんけい ないよ$"
 
 SootopolisCity_Gym_B1F_Text_BethanyIntro:
-	.string "{JPN}ポケモンと いっしょに いると\nじかんが あっ というまに すぎるのよ!$"
+	.string "ポケモンと いっしょに いると\nじかんが あっ というまに すぎるのよ!$"
 
 SootopolisCity_Gym_B1F_Text_BethanyDefeat:
-	.string "{JPN}あっ!$"
+	.string "あっ!$"
 
 SootopolisCity_Gym_B1F_Text_BethanyPostBattle:
-	.string "{JPN}まけた しょうぶも\nあっ というまに わすれたい……$"
+	.string "まけた しょうぶも\nあっ というまに わすれたい……$"
 
 SootopolisCity_Gym_B1F_Text_AnnikaIntro:
-	.string "{JPN}すっごく めずらしい ポケモンちゃんで\nたたかって あげても いいわよー!$"
+	.string "すっごく めずらしい ポケモンちゃんで\nたたかって あげても いいわよー!$"
 
 SootopolisCity_Gym_B1F_Text_AnnikaDefeat:
-	.string "{JPN}ちょっと!\nポケモンちゃんも ちゃんと みてくれた?$"
+	.string "ちょっと!\nポケモンちゃんも ちゃんと みてくれた?$"
 
 SootopolisCity_Gym_B1F_Text_AnnikaPostBattle:
-	.string "{JPN}わたしが このジムに いるのは\nアダンさんが わたしの ポケモンちゃんを\lほめて くれたから なのよぉ\pあーあ ダンナに であうまえに\nアダンさんに であっていれば いまごろは…$"
+	.string "わたしが このジムに いるのは\nアダンさんが わたしの ポケモンちゃんを\lほめて くれたから なのよぉ\pあーあ ダンナに であうまえに\nアダンさんに であっていれば いまごろは…$"
 
 SootopolisCity_Gym_B1F_Text_BriannaIntro:
-	.string "{JPN}うふふ……\nその ひっしな おかおが ステキよ$"
+	.string "うふふ……\nその ひっしな おかおが ステキよ$"
 
 SootopolisCity_Gym_B1F_Text_BriannaDefeat:
-	.string "{JPN}あら\nてかげん しすぎて しまいましたわ……$"
+	.string "あら\nてかげん しすぎて しまいましたわ……$"
 
 SootopolisCity_Gym_B1F_Text_BriannaPostBattle:
-	.string "{JPN}あなたでは アダンさまには\nきっと はが たちませんわよ うふふ……$"
+	.string "あなたでは アダンさまには\nきっと はが たちませんわよ うふふ……$"

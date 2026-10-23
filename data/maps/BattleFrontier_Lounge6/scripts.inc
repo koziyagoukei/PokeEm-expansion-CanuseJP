@@ -33,10 +33,10 @@ BattleFrontier_Lounge6_Text_PromiseIllBeGoodToIt:
 	.string "{JPN}わー かわいい ですねー……!\nどうも ありがとう\lたいせつに しますよ!\pあっ {STR_VAR_2}も\nよろしく おねがい します!$"
 
 BattleFrontier_Lounge6_Text_DontTradeForAnythingButMon:
-	.string "{JPN}あ ゴメンなさい!\nわたし {STR_VAR_1} いがいとは\lこうかん するつもり ないんでー$"
+	.string "あ ゴメンなさい!\nわたし {STR_VAR_1} いがいとは\lこうかん するつもり ないんでー$"
 
 BattleFrontier_Lounge6_Text_WellThatsFineToo:
-	.string "{JPN}あ やめますか!\nべつに いいですよ\lまた こんど きてくださいー$"
+	.string "あ やめますか!\nべつに いいですよ\lまた こんど きてくださいー$"
 
 BattleFrontier_Lounge6_Text_SkittySoMuchCuterThanImagined:
-	.string "{JPN}うふふ!\nエネコが おもってたより ずっと\lかわいくて ほんと うれしいですー$"
+	.string "うふふ!\nエネコが おもってたより ずっと\lかわいくて ほんと うれしいですー$"

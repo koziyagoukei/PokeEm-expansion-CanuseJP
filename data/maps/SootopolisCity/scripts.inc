@@ -1379,148 +1379,148 @@ SootopolisCity_Movement_DestroyTask::
 	step_end
 
 SootopolisCity_Text_GymSign:
-	.string "{JPN}ルネ シティ ポケモンジム\nリーダー アダン\lみずも したたる ジムリーダー!$"
+	.string "ルネ シティ ポケモンジム\nリーダー アダン\lみずも したたる ジムリーダー!$"
 
 SootopolisCity_Text_CitySign:
-	.string "{JPN}ここは ルネ シティ\nれきしが ねむる しんぴの まち$"
+	.string "ここは ルネ シティ\nれきしが ねむる しんぴの まち$"
 
 SootopolisCity_Text_DoorIsClosed:
-	.string "{JPN}とびらは とざされて いる!$"
+	.string "とびらは とざされて いる!$"
 
 SootopolisCity_Text_PhysicallyFitLivingHere:
-	.string "{JPN}うみに もぐったり\nかいだんを のぼったり おりたり……\pこのまちで くらして いると\nけっこう たくましく なるんだよね$"
+	.string "うみに もぐったり\nかいだんを のぼったり おりたり……\pこのまちで くらして いると\nけっこう たくましく なるんだよね$"
 
 SootopolisCity_Text_GiantPokemonSuddenlyAppeared:
-	.string "{JPN}おっきな ポケモンが とつぜん\nまちの まんなかに あらわれたんだ!\lしかも みたことない やつが 2ひきも!\pあの 2ひき……\nどうして ぶつかり あってるの?\lポケモンどうし なかよく できないの?$"
+	.string "おっきな ポケモンが とつぜん\nまちの まんなかに あらわれたんだ!\lしかも みたことない やつが 2ひきも!\pあの 2ひき……\nどうして ぶつかり あってるの?\lポケモンどうし なかよく できないの?$"
 
 SootopolisCity_Text_WhatIsThatGreenPokemon:
-	.string "{JPN}なに? なに? なに?\nあの みどりの ポケモン なにー!?$"
+	.string "なに? なに? なに?\nあの みどりの ポケモン なにー!?$"
 
 SootopolisCity_Text_WhereDidLegendariesGo:
-	.string "{JPN}グラードンと カイオーガ\nどこ いっちゃったんだろう……\pまた どこかで ひでりに したり\nおおあめ ふらせたり してるのかな?$"
+	.string "グラードンと カイオーガ\nどこ いっちゃったんだろう……\pまた どこかで ひでりに したり\nおおあめ ふらせたり してるのかな?$"
 
 SootopolisCity_Text_TwoPokemonArentAngry:
-	.string "{JPN}なんとなく かんじるよ…… あの2ひき\nおこってる わけじゃ ないみたい\pたぶん…… じぶんの ちからを\nコントロール できなく なってるんだ……$"
+	.string "なんとなく かんじるよ…… あの2ひき\nおこってる わけじゃ ないみたい\pたぶん…… じぶんの ちからを\nコントロール できなく なってるんだ……$"
 
 SootopolisCity_Text_FlyingMonStoppedRampage:
-	.string "{JPN}そらから きた ポケモンが\nあばれていた 2ひきを\lおとなしく させちゃった……$"
+	.string "そらから きた ポケモンが\nあばれていた 2ひきを\lおとなしく させちゃった……$"
 
 SootopolisCity_Text_WonderWhatWorldIsLike:
-	.string "{JPN}ぼく…… まだ いちども このまちから\nそとに でたこと ないんだ\pあの まあるい そらの むこうには\nどんな せかいが あるのかな?$"
+	.string "ぼく…… まだ いちども このまちから\nそとに でたこと ないんだ\pあの まあるい そらの むこうには\nどんな せかいが あるのかな?$"
 
 SootopolisCity_Text_ThisIsWicked:
-	.string "{JPN}すげー だいはくりょく!$"
+	.string "すげー だいはくりょく!$"
 
 SootopolisCity_Text_ThatWasWicked:
-	.string "{JPN}すげー だいはくりょく だった!$"
+	.string "すげー だいはくりょく だった!$"
 
 SootopolisCity_Text_GoRedAndBlueMon:
-	.string "{JPN}それいけ! あかい ポケモン!\nまけるな! あおい ポケモン!$"
+	.string "それいけ! あかい ポケモン!\nまけるな! あおい ポケモン!$"
 
 SootopolisCity_Text_DoYouKnowMonNames:
-	.string "{JPN}…… …… ……\pきみ あそこで たたかってる\nポケモンたちの なまえ しってる?$"
+	.string "…… …… ……\pきみ あそこで たたかってる\nポケモンたちの なまえ しってる?$"
 
 SootopolisCity_Text_GreenOneSettlesThings:
-	.string "{JPN}あかい ポケモンと あおい ポケモン\nどっちが かつのかと おもったら\lみどりの ポケモンかよ!\pこりゃ だいドンデンがえしだ!$"
+	.string "あかい ポケモンと あおい ポケモン\nどっちが かつのかと おもったら\lみどりの ポケモンかよ!\pこりゃ だいドンデンがえしだ!$"
 
 SootopolisCity_Text_SeeingLegendWithOwnEyes:
-	.string "{JPN}ポケモンの たたかいに よって\nりくちと うみが つくられた という\lおおむかし からの いいつたえが\pいま めのまえで さいげん されている!\pうぉぉー! こんな すごいものを\nこの めで みられる なんてー!!$"
+	.string "ポケモンの たたかいに よって\nりくちと うみが つくられた という\lおおむかし からの いいつたえが\pいま めのまえで さいげん されている!\pうぉぉー! こんな すごいものを\nこの めで みられる なんてー!!$"
 
 SootopolisCity_Text_SawLegendWithOwnEyes:
-	.string "{JPN}ポケモンの たたかいに よって\nりくちと うみが つくられた という\lおおむかし からの いいつたえが\pいま このまちで さいげん された!\pうぉぉー! こんな すごいものを\nこの めで みられた なんてー!!$"
+	.string "ポケモンの たたかいに よって\nりくちと うみが つくられた という\lおおむかし からの いいつたえが\pいま このまちで さいげん された!\pうぉぉー! こんな すごいものを\nこの めで みられた なんてー!!$"
 
 SootopolisCity_Text_BigPokemonFighting:
-	.string "{JPN}おっきな ポケモンと ポケモンが\nけんか してるよ!\pだれか とめて あげて!$"
+	.string "おっきな ポケモンと ポケモンが\nけんか してるよ!\pだれか とめて あげて!$"
 
 SootopolisCity_Text_PrettyMonCameFromSky:
-	.string "{JPN}きれいな ポケモン\nおそらから おりて きた……$"
+	.string "きれいな ポケモン\nおそらから おりて きた……$"
 
 SootopolisCity_Text_SootopolisWillBeWrecked:
-	.string "{JPN}ひー ルネシティが こわれちゃうよー!$"
+	.string "ひー ルネシティが こわれちゃうよー!$"
 
 SootopolisCity_Text_SootopolisDidntGetWrecked:
-	.string "{JPN}ルネシティ こわれないで すんだよー!$"
+	.string "ルネシティ こわれないで すんだよー!$"
 
 SootopolisCity_Text_NoOrdinaryTourist:
-	.string "{JPN}ほう!\nわざわざ ルネに やってくるとは\lただの かんこうきゃく じゃ ないな!\pだからといって おかねを はらった\nかんこうきゃく でも ないな……$"
+	.string "ほう!\nわざわざ ルネに やってくるとは\lただの かんこうきゃく じゃ ないな!\pだからといって おかねを はらった\nかんこうきゃく でも ないな……$"
 
 SootopolisCity_Text_CityRegainedCalm:
-	.string "{JPN}まちが また しずかに なった……$"
+	.string "まちが また しずかに なった……$"
 
 SootopolisCity_Text_CaveOfOriginPleaseLeave:
-	.string "{JPN}あなたは なんですかな?\pここは めざめのほこら……\pおくりびやまで しずめられた\nポケモンの たましいが\lよみがえると いわれる ばしょ……\pどうか おひきとり ください$"
+	.string "あなたは なんですかな?\pここは めざめのほこら……\pおくりびやまで しずめられた\nポケモンの たましいが\lよみがえると いわれる ばしょ……\pどうか おひきとり ください$"
 
 SootopolisCity_Text_LeadSuperiorTrainerToCave:
-	.string "{JPN}つよい いしと すぐれた さいのう\pそして たくさんの ポケモンを みてきた\nちしきと けいけん……\pそんな じんぶつが やってきたら\nこの ほこらへ あんない するよう\lミクリから もうしつけられて いたのです$"
+	.string "つよい いしと すぐれた さいのう\pそして たくさんの ポケモンを みてきた\nちしきと けいけん……\pそんな じんぶつが やってきたら\nこの ほこらへ あんない するよう\lミクリから もうしつけられて いたのです$"
 
 SootopolisCity_Text_AwakenedPokemonClash:
-	.string "{JPN}おお……\pめざめた 2ひきの あらそいを\nもう 1ひきの めざめが しずめた……$"
+	.string "おお……\pめざめた 2ひきの あらそいを\nもう 1ひきの めざめが しずめた……$"
 
 SootopolisCity_Text_CaveOfOriginSleepsToo:
-	.string "{JPN}ここは めざめのほこら……\pけれど わざわいが きえさった いま\nほこらも しずかに ねむるのです……$"
+	.string "ここは めざめのほこら……\pけれど わざわいが きえさった いま\nほこらも しずかに ねむるのです……$"
 
 SootopolisCity_Text_SootopolisSkyBeautiful:
-	.string "{JPN}ルネは かざんの\nかこうの なかに できた まち\pうえを みあげると\nかこうも いっしょに みえてしまって\lそらの すべては みえない\pでも だからこそ\nルネから みえる そらが\lいちばん うつくしいの$"
+	.string "ルネは かざんの\nかこうの なかに できた まち\pうえを みあげると\nかこうも いっしょに みえてしまって\lそらの すべては みえない\pでも だからこそ\nルネから みえる そらが\lいちばん うつくしいの$"
 
 SootopolisCity_Text_GiganticPokemonFight:
-	.string "{JPN}あんなに おおきな ポケモンが\n2ひきも あばれている なんて\lとても わたしたちの てに おえないわ!$"
+	.string "あんなに おおきな ポケモンが\n2ひきも あばれている なんて\lとても わたしたちの てに おえないわ!$"
 
 SootopolisCity_Text_FearedWorstWhenPokemonFlewDown:
-	.string "{JPN}3ひきめの おおきな ポケモンが\nそらから おりてきた ときには\lもう どうなることかと おもったわ……$"
+	.string "3ひきめの おおきな ポケモンが\nそらから おりてきた ときには\lもう どうなることかと おもったわ……$"
 
 SootopolisCity_Text_NightSkyFavoriteScenery:
-	.string "{JPN}かざんの かこう という\nわっかに かこまれた まるい よぞら\pその なかでは たくさんの ほしが\nいきている みたいに またたくの……\lわたしが いちばん すきな けしき$"
+	.string "かざんの かこう という\nわっかに かこまれた まるい よぞら\pその なかでは たくさんの ほしが\nいきている みたいに またたくの……\lわたしが いちばん すきな けしき$"
 
 SootopolisCity_Text_WeatherWentWild:
-	.string "{JPN}きょうの あさは いいてんき だったのよ\nそれが……\pとつぜん くもり はじめたと おもったら\nつよい あめが ふりだして\lかみなりも ゴロゴロ なりだして\lてんきが メチャメチャに なっちゃったの\pそれも これも ぜんぶ\nあの ポケモンの せい かしら……?$"
+	.string "きょうの あさは いいてんき だったのよ\nそれが……\pとつぜん くもり はじめたと おもったら\nつよい あめが ふりだして\lかみなりも ゴロゴロ なりだして\lてんきが メチャメチャに なっちゃったの\pそれも これも ぜんぶ\nあの ポケモンの せい かしら……?$"
 
 SootopolisCity_Text_YouBroughtFlyingMon:
-	.string "{JPN}えっ!\pあの そらから おりてきた ポケモンを\nつれてきたの って あなたなの!?\p……へえ やるじゃない!$"
+	.string "えっ!\pあの そらから おりてきた ポケモンを\nつれてきたの って あなたなの!?\p……へえ やるじゃない!$"
 
 SootopolisCity_Text_GroudonPleaseStop:
-	.string "{JPN}マツブサ『グ… グラードン……\nたのむから もう やめてくれ!\pおまえの ちからは もう わかった!\pこのままでは ルネ だけじゃない\nホウエンじゅうが\lめちゃめちゃに なってしまう!$"
+	.string "マツブサ『グ… グラードン……\nたのむから もう やめてくれ!\pおまえの ちからは もう わかった!\pこのままでは ルネ だけじゃない\nホウエンじゅうが\lめちゃめちゃに なってしまう!$"
 
 SootopolisCity_Text_AfterAllOurScheming:
-	.string "{JPN}マツブサ『ちょうこだい ポケモンは\nグラードンと カイオーガ だけじゃ\lなかったと いうのか……\pわれわれは ひっしに なって\nあれこれ うごきまわって きたが\lあの ポケモンの ひとはたらきで\lぜんぶ もとどおり というわけか……\pふ…… ふははは……$"
+	.string "マツブサ『ちょうこだい ポケモンは\nグラードンと カイオーガ だけじゃ\lなかったと いうのか……\pわれわれは ひっしに なって\nあれこれ うごきまわって きたが\lあの ポケモンの ひとはたらきで\lぜんぶ もとどおり というわけか……\pふ…… ふははは……$"
 
 SootopolisCity_Text_KyogreCalmDown:
-	.string "{JPN}アオギリ『カイオーガ! どうした!?\nこれを みろ! べにいろのたま だぞ!\lおとなしくなるんだ! カイオーガ!\p…… …… ……\n…… …… ……\pだめだ! ぜんぜん きかない!$"
+	.string "アオギリ『カイオーガ! どうした!?\nこれを みろ! べにいろのたま だぞ!\lおとなしくなるんだ! カイオーガ!\p…… …… ……\n…… …… ……\pだめだ! ぜんぜん きかない!$"
 
 SootopolisCity_Text_TryingMeaninglessToPokemon:
-	.string "{JPN}アオギリ『カイオーガと グラードンは\nどこかへ とびさって しまった\pそして ホウエンの てんきも\nまた もとどおりに なった……\pはは ははは……\pおれたちの やろうと したことは\nポケモンから みれば\lちっぽけなこと だったの かもな……$"
+	.string "アオギリ『カイオーガと グラードンは\nどこかへ とびさって しまった\pそして ホウエンの てんきも\nまた もとどおりに なった……\pはは ははは……\pおれたちの やろうと したことは\nポケモンから みれば\lちっぽけなこと だったの かもな……$"
 
 SootopolisCity_Text_InvolvedWithCrisisComeWithMe:
-	.string "{JPN}ダイゴ『あそこで たたかって いるのは\nグラードン……\lそして カイオーガ……\pながい ねむりから めざめた\n2ひきの ちょうこだい ポケモンは\pやりばのない エネルギーを\nおたがいに ぶつけあっている……\p……{PLAYER}{KUN}\pここまで きた ということは\nきみは このじけんに かかわる\lかくごが できている ということだね\pよし! それなら\nきみに あわせたい ひとが いるんだ\pちょっと ボクに ついておいで$"
+	.string "ダイゴ『あそこで たたかって いるのは\nグラードン……\lそして カイオーガ……\pながい ねむりから めざめた\n2ひきの ちょうこだい ポケモンは\pやりばのない エネルギーを\nおたがいに ぶつけあっている……\p……{PLAYER}{KUN}\pここまで きた ということは\nきみは このじけんに かかわる\lかくごが できている ということだね\pよし! それなら\nきみに あわせたい ひとが いるんだ\pちょっと ボクに ついておいで$"
 
 SootopolisCity_Text_DoesThisMakeYourFearPokemon:
-	.string "{JPN}ダイゴ『ねえ {PLAYER}{KUN}\nグラードンと カイオーガを みて\lポケモンは こわいものだと おもったかい?\pでも そんなことは ないんだよ\nポケモンって ほんとうは もっと……\p……いや きみなら そんなことは\nもう とっくに きがついて いるよね$"
+	.string "ダイゴ『ねえ {PLAYER}{KUN}\nグラードンと カイオーガを みて\lポケモンは こわいものだと おもったかい?\pでも そんなことは ないんだよ\nポケモンって ほんとうは もっと……\p……いや きみなら そんなことは\nもう とっくに きがついて いるよね$"
 
 SootopolisCity_Text_HereWereAreHelpWallace:
-	.string "{JPN}ダイゴ『さあ ついた!\pこのおくに ミクリさん という\nひとが いるんだ\pきみなら かれの ちからに\nなって あげられると おもうよ……$"
+	.string "ダイゴ『さあ ついた!\pこのおくに ミクリさん という\nひとが いるんだ\pきみなら かれの ちからに\nなって あげられると おもうよ……$"
 
 SootopolisCity_Text_KnowWhatsNeededToHelpHim:
-	.string "{JPN}ダイゴ『きみなら かれの ちからに\nなって あげられると おもうよ……$"
+	.string "ダイゴ『きみなら かれの ちからに\nなって あげられると おもうよ……$"
 
 SootopolisCity_Text_NeverBeenToSkyPillar:
-	.string "{JPN}ダイゴ『そらのはしら……\nボクも まだ いったことが ないけど\lいったい どこに あるんだろうね$"
+	.string "ダイゴ『そらのはしら……\nボクも まだ いったことが ないけど\lいったい どこに あるんだろうね$"
 
 SootopolisCity_Text_SoThatsRayquaza:
-	.string "{JPN}ダイゴ『あれが レックウザか……\pあばれていた 2ひきが おそれをなして\nさっていく なんて すごいや……$"
+	.string "ダイゴ『あれが レックウザか……\pあばれていた 2ひきが おそれをなして\nさっていく なんて すごいや……$"
 
 SootopolisCity_Text_MaxieArchieLeft:
-	.string "{JPN}ダイゴ『マツブサと アオギリの ふたりは\nどこかへ いって しまった ようだね\pもしかすると おくりびやまに\nたまを かえしに いったのかも……$"
+	.string "ダイゴ『マツブサと アオギリの ふたりは\nどこかへ いって しまった ようだね\pもしかすると おくりびやまに\nたまを かえしに いったのかも……$"
 
 SootopolisCity_Text_HaventYouScaledSkyPillar:
-	.string "{JPN}ミクリ『おや? {PLAYER}{KUN}\pあれから そらのはしらを のぼって\nいかなかったのかい?\pきみなら きっと いけるさ\nそらのはしらの おくじょうへ……$"
+	.string "ミクリ『おや? {PLAYER}{KUN}\pあれから そらのはしらを のぼって\nいかなかったのかい?\pきみなら きっと いけるさ\nそらのはしらの おくじょうへ……$"
 
 SootopolisCity_Text_AquaMagmaDidntMeanHarm:
-	.string "{JPN}ミクリ『{PLAYER}{KUN}……\pマグマだんと アクアだんの ふたりも\nきっと わるぎは なかったの だろうね\pちょっと かれらの はなしを\nきいてやって みては どうかな……$"
+	.string "ミクリ『{PLAYER}{KUN}……\pマグマだんと アクアだんの ふたりも\nきっと わるぎは なかったの だろうね\pちょっと かれらの はなしを\nきいてやって みては どうかな……$"
 
 SootopolisCity_Text_ThankYouForHelpAcceptThis:
-	.string "{JPN}ミクリ『{PLAYER}{KUN}……\nやはり わたしの めは ただしかった\pきみが ちからを かしてくれた おかげで\nルネシティは……\lいや ホウエンは すくわれたんだよ\pまちの みんなを だいひょうして\nおれいを いわせて もらうよ\l……ありがとう\pこれは わたしからの プレゼントだ\nうけとって くれたまえ!$"
+	.string "ミクリ『{PLAYER}{KUN}……\nやはり わたしの めは ただしかった\pきみが ちからを かしてくれた おかげで\nルネシティは……\lいや ホウエンは すくわれたんだよ\pまちの みんなを だいひょうして\nおれいを いわせて もらうよ\l……ありがとう\pこれは わたしからの プレゼントだ\nうけとって くれたまえ!$"
 
 SootopolisCity_Text_ExplainWaterfallGoToGym:
-	.string "{JPN}その ひでんマシンは たきのぼり!\pレインバッジを もっていれば\nそのわざを おぼえさせた ポケモンが\lたきを のぼれるように なるのさ!\pそして…… レインバッジは\nどこで もらえるのか というと……\pもう おわかりだね\nそう! ルネの ジムリーダーに かつこと\pさあ じゅんびが できたら\nなかに はいって くれたまえ!$"
+	.string "その ひでんマシンは たきのぼり!\pレインバッジを もっていれば\nそのわざを おぼえさせた ポケモンが\lたきを のぼれるように なるのさ!\pそして…… レインバッジは\nどこで もらえるのか というと……\pもう おわかりだね\nそう! ルネの ジムリーダーに かつこと\pさあ じゅんびが できたら\nなかに はいって くれたまえ!$"
 
 SootopolisCity_Text_DazzledByMentor:
-	.string "{JPN}ミクリ『わたしの ししょうの\nかれい かつ ゆうがな たたかいぶりに\lきっと きみは おどろく だろうよ!$"
+	.string "ミクリ『わたしの ししょうの\nかれい かつ ゆうがな たたかいぶりに\lきっと きみは おどろく だろうよ!$"

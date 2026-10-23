@@ -20,11 +20,11 @@ FortreeCity_House5_EventScript_Zigzagoon::
 	end
 
 FortreeCity_House5_Text_TreeHousesAreGreat:
-	.string "{JPN}ヒワマキの ツリーハウスって さいこう!\nポケモンと いっしょに くらすなら\lいちばんの まちだと おもっているわ!$"
+	.string "ヒワマキの ツリーハウスって さいこう!\nポケモンと いっしょに くらすなら\lいちばんの まちだと おもっているわ!$"
 
 FortreeCity_House5_Text_AdaptedToNature:
-	.string "{JPN}ポケモンも ひとも\nしぜんに あわせて くらしてきたからな\pいまさら じぶんらの つごうに\nしぜんを あわせなくて いいんだよ$"
+	.string "ポケモンも ひとも\nしぜんに あわせて くらしてきたからな\pいまさら じぶんらの つごうに\nしぜんを あわせなくて いいんだよ$"
 
 FortreeCity_House5_Text_Zigzagoon:
-	.string "{JPN}ジグザグマ『ぶふう!!$"
+	.string "ジグザグマ『ぶふう!!$"
 

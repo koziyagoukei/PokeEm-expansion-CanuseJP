@@ -80,7 +80,7 @@ EverGrandeCity_HallOfFame_Movement_WalkIntoHallOfFame2:
 	step_end
 
 EverGrandeCity_HallOfFame_Text_HereWeHonorLeagueChampions:
-	.string "{JPN}ミクリ『ここは……\pはげしい たたかいを かちぬいた\nポケモンを きろくする ばしょ\pリーグ チャンピオンの\nえいこうを たたえる ための へやさ!$"
+	.string "ミクリ『ここは……\pはげしい たたかいを かちぬいた\nポケモンを きろくする ばしょ\pリーグ チャンピオンの\nえいこうを たたえる ための へやさ!$"
 
 EverGrandeCity_HallOfFame_Text_LetsRecordYouAndYourPartnersNames:
-	.string "{JPN}ミクリ『さあ! ポケモン リーグを\nかちぬいた きみの なまえと\pともに たたかった きみの パートナーを\nこの マシンに きろく するのだ!$"
+	.string "ミクリ『さあ! ポケモン リーグを\nかちぬいた きみの なまえと\pともに たたかった きみの パートナーを\nこの マシンに きろく するのだ!$"

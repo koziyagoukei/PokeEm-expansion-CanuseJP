@@ -255,13 +255,13 @@ BerryTree_EventScript_PlantBerry::
 	return
 
 BerryTree_Text_ItsSoftLoamySoil:
-	.string "{JPN}ふかふかの つちだ!$"
+	.string "ふかふかの つちだ!$"
 
 BerryTree_Text_WantToPlant:
-	.string "{JPN}ふかふかの つちだ!\nきのみを うめますか？$"
+	.string "ふかふかの つちだ!\nきのみを うめますか？$"
 
 BerryTree_Text_PlantedOneBerry:
-	.string "{JPN}{PLAYER}は ふかふかの つちに\n{STR_VAR_1}のみを うめた!$"
+	.string "{PLAYER}は ふかふかの つちに\n{STR_VAR_1}のみを うめた!$"
 
 BerryTree_Text_BerryGrowthStage1:
 .if OW_BERRY_SIX_STAGES == TRUE
@@ -285,10 +285,10 @@ BerryTree_Text_BerryGrowthStage3:
 .endif
 
 BerryTree_Text_BerryGrowthStageTrunk:
-	.string "{JPN}{STR_VAR_1}の めが でてきた!$"
+	.string "{STR_VAR_1}の めが でてきた!$"
 
 BerryTree_Text_BerryGrowthStageBudding:
-	.string "{JPN}{STR_VAR_1}に つぼみが ついた!$"
+	.string "{STR_VAR_1}に つぼみが ついた!$"
 
 BerryTree_Text_BerryGrowthStage4:
 .if OW_BERRY_SIX_STAGES == TRUE
@@ -307,31 +307,31 @@ BerryTree_Text_CareAdverbGood:
 	.string "{JPN}きれいに$"
 
 BerryTree_Text_WantToPick:
-	.string "{JPN}{STR_VAR_1}のみが {STR_VAR_2}こ できてる!\p{STR_VAR_1}のみを とりますか？$"
+	.string "{STR_VAR_1}のみが {STR_VAR_2}こ できてる!\p{STR_VAR_1}のみを とりますか？$"
 
 BerryTree_Text_PickedTheBerry:
-	.string "{JPN}{PLAYER}は {STR_VAR_1}のみを {STR_VAR_2}こ とった!$"
+	.string "{PLAYER}は {STR_VAR_1}のみを {STR_VAR_2}こ とった!$"
 
 BerryTree_Text_PutAwayBerry:
-	.string "{JPN}{PLAYER}は {STR_VAR_1}のみを\nきのみポケットに しまった!\pつちは もとの ふかふかに もどった!$"
+	.string "{PLAYER}は {STR_VAR_1}のみを\nきのみポケットに しまった!\pつちは もとの ふかふかに もどった!$"
 
 BerryTree_Text_BerryPocketFull:
-	.string "{JPN}バッグの きのみポケットが いっぱいだった\p{STR_VAR_1}のみを あきらめた$"
+	.string "バッグの きのみポケットが いっぱいだった\p{STR_VAR_1}のみを あきらめた$"
 
 BerryTree_Text_BerryLeftUnpicked:
-	.string "{JPN}{PLAYER}は {STR_VAR_1}のみを\nそのままに しておいた$"
+	.string "{PLAYER}は {STR_VAR_1}のみを\nそのままに しておいた$"
 
 BerryTree_Text_WantToWater:
-	.string "{JPN}もっている ホエルコじょうろ で\n{STR_VAR_1}に みずを あげますか？$"
+	.string "もっている ホエルコじょうろ で\n{STR_VAR_1}に みずを あげますか？$"
 
 BerryTree_Text_WateredTheBerry:
-	.string "{JPN}{PLAYER}は {STR_VAR_1}に みずを あげた!$"
+	.string "{PLAYER}は {STR_VAR_1}に みずを あげた!$"
 
 BerryTree_Text_PlantIsDelighted:
-	.string "{JPN}とっても よろこんでる みたい!$"
+	.string "とっても よろこんでる みたい!$"
 
 BerryTree_Text_ExclamationPoint:
-	.string "{JPN}!$"
+	.string "!$"
 
 .if OW_BERRY_MUTATIONS == TRUE
 BerryTree_EventScript_CheckBerryFullyGrown_Mutation:
@@ -368,25 +368,25 @@ BerryTree_EventScript_PickBerry_Mutation::
 	end
 
 BerryTree_Text_WantToPick_Mutation:
-	.string "{JPN}{STR_VAR_1}のみが {STR_VAR_2}こ\n"
+	.string "{STR_VAR_1}のみが {STR_VAR_2}こ\n"
 	.string "{STR_VAR_3}のみが 1こ できてる!\p"
 	.string "きのみを とりますか?$"
 
 BerryTree_Text_BerryLeftUnpicked_Mutation:
-	.string "{JPN}{PLAYER}は {STR_VAR_1}のみと\n"
+	.string "{PLAYER}は {STR_VAR_1}のみと\n"
 	.string "{STR_VAR_3}のみを そのままに しておいた$"
 
 BerryTree_Text_BerryPocketFull_Mutation:
-	.string "{JPN}バッグの きのみポケットが いっぱいだった\p"
+	.string "バッグの きのみポケットが いっぱいだった\p"
 	.string "{STR_VAR_1}のみと {STR_VAR_3}のみを\n"
 	.string "あきらめた$"
 
 BerryTree_Text_PickedTheBerry_Mutation:
-	.string "{JPN}{PLAYER}は {STR_VAR_1}のみを {STR_VAR_2}こ\n"
+	.string "{PLAYER}は {STR_VAR_1}のみを {STR_VAR_2}こ\n"
 	.string "{STR_VAR_3}のみを 1こ とった!$"
 
 BerryTree_Text_PutAwayBerry_Mutation:
-	.string "{JPN}{PLAYER}は {STR_VAR_1}のみと\n{STR_VAR_3}のみを きのみポケットに しまった!\pつちは もとの ふかふかに もどった!$"
+	.string "{PLAYER}は {STR_VAR_1}のみと\n{STR_VAR_3}のみを きのみポケットに しまった!\pつちは もとの ふかふかに もどった!$"
 .endif
 
 .if OW_BERRY_MULCH_USAGE == TRUE
@@ -398,10 +398,10 @@ BerryTree_EventScript_UseMulch::
 	return
 
 BerryTree_Text_WantToMulch:
-	.string "{JPN}ふかふかの つちだ!\nこやしを つかいますか?$"
+	.string "ふかふかの つちだ!\nこやしを つかいますか?$"
 
 BerryTree_Text_ScatteredMulch:
-	.string "{JPN}{PLAYER}は ふかふかの つちに\n{STR_VAR_1}を まいた!$"
+	.string "{PLAYER}は ふかふかの つちに\n{STR_VAR_1}を まいた!$"
 .endif
 
 .if OW_BERRY_WEEDS == TRUE
@@ -423,11 +423,11 @@ BerryTree_EventScript_PullOutWeed::
 	return
 
 BerryTree_Text_WeedIsGrowing:
-	.string "{JPN}ざっそうが はえている\n"
+	.string "ざっそうが はえている\n"
 	.string "ひきぬきますか?$"
 
 BerryTree_Text_PulledOutTheWeed:
-	.string "{JPN}{PLAYER}は ざっそうを ひきぬいた!$"
+	.string "{PLAYER}は ざっそうを ひきぬいた!$"
 .endif
 
 .if OW_BERRY_PESTS == TRUE
@@ -444,5 +444,5 @@ BerryTree_EventScript_EncounterPests::
 	return
 
 BerryTree_Text_APokemonAppeared:
-	.string "{JPN}ポケモンが とびだしてきた!$"
+	.string "ポケモンが とびだしてきた!$"
 .endif

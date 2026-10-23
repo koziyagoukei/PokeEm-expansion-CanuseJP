@@ -100,32 +100,32 @@ Route110_TrickHousePuzzle2_EventScript_Georgia::
 	end
 
 Route110_TrickHousePuzzle2_Text_WroteSecretCodeLockOpened:
-	.string "{JPN}{PLAYER}は あいことばを\nとびらに かきつけた!\p「カラクリだいおう さま かしこい」\p…… …… ……\pかぎの はずれる おとがした!$"
+	.string "{PLAYER}は あいことばを\nとびらに かきつけた!\p「カラクリだいおう さま かしこい」\p…… …… ……\pかぎの はずれる おとがした!$"
 
 Route110_TrickHousePuzzle2_Text_TedIntro:
-	.string "{JPN}どの スイッチで\nどの あなが ふさがるんだ?$"
+	.string "どの スイッチで\nどの あなが ふさがるんだ?$"
 
 Route110_TrickHousePuzzle2_Text_TedDefeat:
-	.string "{JPN}しょうぶ してたら\nよけい わかんなくなった!$"
+	.string "しょうぶ してたら\nよけい わかんなくなった!$"
 
 Route110_TrickHousePuzzle2_Text_TedPostBattle:
-	.string "{JPN}きみ ぼくの かわりに\nスイッチ ぜんぶ おしてきてよ!$"
+	.string "きみ ぼくの かわりに\nスイッチ ぜんぶ おしてきてよ!$"
 
 Route110_TrickHousePuzzle2_Text_PaulIntro:
-	.string "{JPN}おっ! カラクリやしき\n2どめの チャレンジだね!$"
+	.string "おっ! カラクリやしき\n2どめの チャレンジだね!$"
 
 Route110_TrickHousePuzzle2_Text_PaulDefeat:
-	.string "{JPN}ポケモンしょうぶも\nそんなに つよいの?$"
+	.string "ポケモンしょうぶも\nそんなに つよいの?$"
 
 Route110_TrickHousePuzzle2_Text_PaulPostBattle:
-	.string "{JPN}カラクリだいおうが ひとりで\nこの しかけを つくってるんだって!$"
+	.string "カラクリだいおうが ひとりで\nこの しかけを つくってるんだって!$"
 
 Route110_TrickHousePuzzle2_Text_GeorgiaIntro:
-	.string "{JPN}いつか わたしの ジムを つくりたくて\nしかけを けんきゅうしてるの!$"
+	.string "いつか わたしの ジムを つくりたくて\nしかけを けんきゅうしてるの!$"
 
 Route110_TrickHousePuzzle2_Text_GeorgiaDefeat:
-	.string "{JPN}ポケモンしょうぶは\nけんきゅう ぶそく だったわーっ!$"
+	.string "ポケモンしょうぶは\nけんきゅう ぶそく だったわーっ!$"
 
 Route110_TrickHousePuzzle2_Text_GeorgiaPostBattle:
-	.string "{JPN}あなた つよいのね…\nジムリーダーに なれるんじゃない?$"
+	.string "あなた つよいのね…\nジムリーダーに なれるんじゃない?$"
 

@@ -66,29 +66,29 @@ LilycoveCity_CoveLilyMotel_2F_EventScript_MetScott::
 	end
 
 LilycoveCity_CoveLilyMotel_2F_Text_ShowMeCompletedDex:
-	.string "{JPN}ぼくは ゲーム デザイナー\pへー\nポケモンずかん あつめてるの?\pぜんぶ あつめるの\nたいへん だけど がんばって!\pもし ぜんぶ あつめたら おしえてよ!$"
+	.string "ぼくは ゲーム デザイナー\pへー\nポケモンずかん あつめてるの?\pぜんぶ あつめるの\nたいへん だけど がんばって!\pもし ぜんぶ あつめたら おしえてよ!$"
 
 LilycoveCity_CoveLilyMotel_2F_Text_FilledPokedexGiveYouThis:
-	.string "{JPN}すごいなー!\nいやー すごいよ きみ!!\pこの ポケモンずかん\nぜんぶ あつまって いるんだね!\lそれだけ ポケモンを あいしてるんだね!\pかんどう しました!\nきみを ひょうしょう させてもらいますね!$"
+	.string "すごいなー!\nいやー すごいよ きみ!!\pこの ポケモンずかん\nぜんぶ あつまって いるんだね!\lそれだけ ポケモンを あいしてるんだね!\pかんどう しました!\nきみを ひょうしょう させてもらいますね!$"
 
 LilycoveCity_CoveLilyMotel_2F_Text_ImTheProgrammer:
-	.string "{JPN}おれさま?\pプログラマーだよ! こっちの\nスロットは どんなのか たのしみだな!$"
+	.string "おれさま?\pプログラマーだよ! こっちの\nスロットは どんなのか たのしみだな!$"
 
 LilycoveCity_CoveLilyMotel_2F_Text_ImTheGraphicArtist:
-	.string "{JPN}おれ グラフィッカー!\nホウエンの ポケモンは おもしろいね$"
+	.string "おれ グラフィッカー!\nホウエンの ポケモンは おもしろいね$"
 
 LilycoveCity_CoveLilyMotel_2F_Text_GirlsAreCute:
-	.string "{JPN}うきわガール かわいい でしょ!\nうきわガールと しょうぶ なんて……\pくー! たまらんー!\pふたごちゃん かわいい でしょ!\nふたごちゃんと 2たい2 なんて……\pくー! たまらんー!$"
+	.string "うきわガール かわいい でしょ!\nうきわガールと しょうぶ なんて……\pくー! たまらんー!\pふたごちゃん かわいい でしょ!\nふたごちゃんと 2たい2 なんて……\pくー! たまらんー!$"
 
 LilycoveCity_CoveLilyMotel_2F_Text_SeaBreezeTicklesHeart:
-	.string "{JPN}なんだか しおかぜが こころを くすぐって\nきもち いいですね!$"
+	.string "なんだか しおかぜが こころを くすぐって\nきもち いいですね!$"
 
 LilycoveCity_CoveLilyMotel_2F_Text_NeverLeaveWithoutGameBoy:
-	.string "{JPN}いつ どこで たいせんや しょうぶを\nいどまれるか わからないからな\lゲームボーイ アドバンスは てばなせないよ!$"
+	.string "いつ どこで たいせんや しょうぶを\nいどまれるか わからないからな\lゲームボーイ アドバンスは てばなせないよ!$"
 
 LilycoveCity_CoveLilyMotel_2F_Text_SnoozingPreferBattles:
-	.string "{JPN}エニシダ『…… ……\n…… …… ……ズ\p…… …… ……!\nあ ああ {PLAYER}{KUN}\lごめんごめん ひるね してたんだ\pポケモンコンテスト ってのが\nどんな ものか みに きたんだ\lなかなか おもしろそう だけど……\pまあ わたしは やっぱり\nじゅんすいに たたかって つよい\lトレーナーが すき だけどね\pうん {PLAYER}{KUN}は\nジムに コンテストに バトルテント\lなんでも たのしんで くれよ!$"
+	.string "エニシダ『…… ……\n…… …… ……ズ\p…… …… ……!\nあ ああ {PLAYER}{KUN}\lごめんごめん ひるね してたんだ\pポケモンコンテスト ってのが\nどんな ものか みに きたんだ\lなかなか おもしろそう だけど……\pまあ わたしは やっぱり\nじゅんすいに たたかって つよい\lトレーナーが すき だけどね\pうん {PLAYER}{KUN}は\nジムに コンテストに バトルテント\lなんでも たのしんで くれよ!$"
 
 LilycoveCity_CoveLilyMotel_2F_Text_ContestsDoTakeStrategy:
-	.string "{JPN}エニシダ『コンテストに かつための\nせんりゃくを ねるのも\lつよい トレーナーに なるための\lほうほうの ひとつでは あるね$"
+	.string "エニシダ『コンテストに かつための\nせんりゃくを ねるのも\lつよい トレーナーに なるための\lほうほうの ひとつでは あるね$"
 

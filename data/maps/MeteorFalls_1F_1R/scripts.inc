@@ -232,23 +232,23 @@ MeteorFalls_1F_1R_EventScript_MetCozmo::
 	end
 
 MeteorFalls_1F_1R_Text_WithThisMeteorite:
-	.string "{JPN}ウヒョヒョ……!\pこの いんせきが あれば\nえんとつやまの アイツが……"
+	.string "ウヒョヒョ……!\pこの いんせきが あれば\nえんとつやまの アイツが……"
 	.string ""
 	.string "$"
 
 MeteorFalls_1F_1R_Text_DontExpectMercyFromMagma:
-	.string "{JPN}ウヒョ?\pだれだか しらないが\nマグマだんの ジャマを するきなら\lようしゃ しないぜ!"
+	.string "ウヒョ?\pだれだか しらないが\nマグマだんの ジャマを するきなら\lようしゃ しないぜ!"
 	.string ""
 	.string ""
 	.string "$"
 
 MeteorFalls_1F_1R_Text_HoldItRightThereMagma:
-	.string "{JPN}まてっ! マグマだん!\pせかいを おまえらの おもいどおりに\nできるなんて おおまちがいだ!"
+	.string "まてっ! マグマだん!\pせかいを おまえらの おもいどおりに\nできるなんて おおまちがいだ!"
 	.string ""
 	.string "$"
 
 MeteorFalls_1F_1R_Text_BeSeeingYouTeamAqua:
-	.string "{JPN}ウヒョヒョ……!\nアクアだん まで やってきたのかよ!\pいちいち あいてを してやるのも\nめんどうだな……\pまあ いいや!\nいんせきは てに いれたし\lさっさと えんとつやまに いくか!\pウヒョヒョ!\nあばよ! まぬけな アクアだん!"
+	.string "ウヒョヒョ……!\nアクアだん まで やってきたのかよ!\pいちいち あいてを してやるのも\nめんどうだな……\pまあ いいや!\nいんせきは てに いれたし\lさっさと えんとつやまに いくか!\pウヒョヒョ!\nあばよ! まぬけな アクアだん!"
 	.string ""
 	.string ""
 	.string ""
@@ -259,7 +259,7 @@ MeteorFalls_1F_1R_Text_BeSeeingYouTeamAqua:
 	.string "$"
 
 MeteorFalls_1F_1R_Text_ArchieSeenYouBefore:
-	.string "{JPN}アオギリ『おまえとは たしか……\nカイナの はくぶつかんでも あったが\pそうか {PLAYER}と いうのか\pあのときは マグマだんの したっぱだと\nおもったんだが\lふん……\lおかしな やつだな……\pマグマだん というのは\nりくちをふやす などと いっては\lはかいかつどうを くりかえす\lきけんな しゅうだんだ!\pうみを あいする われわれ アクアだんの\nしゅくてき なのだよ!"
+	.string "アオギリ『おまえとは たしか……\nカイナの はくぶつかんでも あったが\pそうか {PLAYER}と いうのか\pあのときは マグマだんの したっぱだと\nおもったんだが\lふん……\lおかしな やつだな……\pマグマだん というのは\nりくちをふやす などと いっては\lはかいかつどうを くりかえす\lきけんな しゅうだんだ!\pうみを あいする われわれ アクアだんの\nしゅくてき なのだよ!"
 	.string ""
 	.string ""
 	.string ""
@@ -274,22 +274,22 @@ MeteorFalls_1F_1R_Text_ArchieSeenYouBefore:
 	.string "$"
 
 MeteorFalls_1F_1R_Text_BossWeShouldChaseMagma:
-	.string "{JPN}アオギリさま\nマグマだんを おいかけないと……"
+	.string "アオギリさま\nマグマだんを おいかけないと……"
 	.string "$"
 
 MeteorFalls_1F_1R_Text_ArchieYesNoTellingWhatMagmaWillDo:
-	.string "{JPN}アオギリ『そうだな!\pマグマだんの やつら えんとつやまで\nなにを しでかすか わからない!"
+	.string "アオギリ『そうだな!\pマグマだんの やつら えんとつやまで\nなにを しでかすか わからない!"
 	.string ""
 	.string ""
 	.string "$"
 
 MeteorFalls_1F_1R_Text_ArchieFarewell:
-	.string "{JPN}アオギリ『{PLAYER}…… おまえも\nマグマだんには ようじん するんだな\pでは さらばだ!"
+	.string "アオギリ『{PLAYER}…… おまえも\nマグマだんには ようじん するんだな\pでは さらばだ!"
 	.string ""
 	.string "$"
 
 MeteorFalls_1F_1R_Text_MeetProfCozmo:
-	.string "{JPN}ぼく ソライシ……\pマグマだんに たのまれて\nここまで あんない してきたんだけど\lだまされて\lいんせき とられちゃったよ……\pおまけに アクアだん っていう\nにたような れんちゅうまで あらわれて\lもう なにが なんだか……\pそれにしても マグマだんは\nいんせき なんか もっていって\lえんとつやまで\lなにする つもり なんだろう……?"
+	.string "ぼく ソライシ……\pマグマだんに たのまれて\nここまで あんない してきたんだけど\lだまされて\lいんせき とられちゃったよ……\pおまけに アクアだん っていう\nにたような れんちゅうまで あらわれて\lもう なにが なんだか……\pそれにしても マグマだんは\nいんせき なんか もっていって\lえんとつやまで\lなにする つもり なんだろう……?"
 	.string ""
 	.string ""
 	.string ""
@@ -304,6 +304,6 @@ MeteorFalls_1F_1R_Text_MeetProfCozmo:
 	.string "$"
 
 MeteorFalls_1F_1R_Text_WhatsTeamMagmaDoingAtMtChimney:
-	.string "{JPN}ソライシ『それにしても マグマだんは\nいんせき なんか もっていって\lえんとつやまで\lなにする つもり なんだろう……?"
+	.string "ソライシ『それにしても マグマだんは\nいんせき なんか もっていって\lえんとつやまで\lなにする つもり なんだろう……?"
 	.string ""
 	.string "$"

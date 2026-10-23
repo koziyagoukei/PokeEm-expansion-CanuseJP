@@ -54,23 +54,23 @@ AbandonedShip_Corridors_B1F_EventScript_Duncan::
 	end
 
 AbandonedShip_Corridors_B1F_Text_DuncanIntro:
-	.string "{JPN}ふなのりは ふねに のるとき\nかならず ポケモンを もっている!\lちょいと しょうぶ してくれ!$"
+	.string "ふなのりは ふねに のるとき\nかならず ポケモンを もっている!\lちょいと しょうぶ してくれ!$"
 
 AbandonedShip_Corridors_B1F_Text_DuncanDefeat:
-	.string "{JPN}こりゃ まいった$"
+	.string "こりゃ まいった$"
 
 AbandonedShip_Corridors_B1F_Text_DuncanPostBattle:
-	.string "{JPN}ふなぞこが みずの なかに\nしずんで いるんだよ\pポケモンが みずに もぐれる わざを\nつかえたら さきに すすめるんだがな……$"
+	.string "ふなぞこが みずの なかに\nしずんで いるんだよ\pポケモンが みずに もぐれる わざを\nつかえたら さきに すすめるんだがな……$"
 
 AbandonedShip_Corridors_B1F_Text_YayItsAShip:
-	.string "{JPN}わーい!\nふね だぞー!$"
+	.string "わーい!\nふね だぞー!$"
 
 AbandonedShip_Corridors_B1F_Text_DoorIsLocked:
-	.string "{JPN}カギが かかっている\pとびらには そうこ と かかれている$"
+	.string "カギが かかっている\pとびらには そうこ と かかれている$"
 
 AbandonedShip_Corridors_B1F_Text_InsertedStorageKey:
-	.string "{JPN}{PLAYER}は\nそうこのカギを つかった!\pさしこんだ カギは ぬけなくなったが\nとびらは ひらいた!$"
+	.string "{PLAYER}は\nそうこのカギを つかった!\pさしこんだ カギは ぬけなくなったが\nとびらは ひらいた!$"
 
 AbandonedShip_Text_TheDoorIsOpen:
-	.string "{JPN}とびらは あいている!$"
+	.string "とびらは あいている!$"
 

@@ -21,11 +21,11 @@ RustboroCity_House3_EventScript_Pekachu::
 	end
 
 RustboroCity_House3_Text_IGivePerfectlySuitedNicknames:
-	.string "{JPN}じぶんの ポケモンには\nぴったりの ニックネームを つけるんじゃ\lいわゆる おりじなりてぃ じゃ!$"
+	.string "じぶんの ポケモンには\nぴったりの ニックネームを つけるんじゃ\lいわゆる おりじなりてぃ じゃ!$"
 
 RustboroCity_House3_Text_NamingPikachuPekachu:
-	.string "{JPN}だからって ピカチュウに\n「ペカチュウ」って つけても\lほとんど かわって ないでしょうに……\pまあ わかりやすいのも\nニックネームには だいじ ですけどねぇ$"
+	.string "だからって ピカチュウに\n「ペカチュウ」って つけても\lほとんど かわって ないでしょうに……\pまあ わかりやすいのも\nニックネームには だいじ ですけどねぇ$"
 
 RustboroCity_House3_Text_Pekachu:
-	.string "{JPN}ペカチュウ『ぺかー!$"
+	.string "ペカチュウ『ぺかー!$"
 

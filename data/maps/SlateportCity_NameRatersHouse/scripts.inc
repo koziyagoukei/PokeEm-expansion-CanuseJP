@@ -62,29 +62,29 @@ SlateportCity_NameRatersHouse_EventScript_NewNameDifferent::
 	end
 
 SlateportCity_NameRatersHouse_Text_PleasedToRateMonNickname:
-	.string "{JPN}はい はい！\nわたしは せいめい はんだんし\lいうなれば なまえの うらないです\pはい あなたの ポケモンの\nニックネームを うらなって あげるよ$"
+	.string "はい はい！\nわたしは せいめい はんだんし\lいうなれば なまえの うらないです\pはい あなたの ポケモンの\nニックネームを うらなって あげるよ$"
 
 SlateportCity_NameRatersHouse_Text_CritiqueWhichMonNickname:
-	.string "{JPN}どの ポケモンの\nニックネームを うらなうかね？$"
+	.string "どの ポケモンの\nニックネームを うらなうかね？$"
 
 SlateportCity_NameRatersHouse_Text_FineNameSuggestBetterOne:
-	.string "{JPN}うーむ {STR_VAR_1}か……\nなかなか いい ニックネームを つけたね\pでもねー\nもう すこしだけ いい なまえを\lわたしが つけて あげようか？ どうかな？$"
+	.string "うーむ {STR_VAR_1}か……\nなかなか いい ニックネームを つけたね\pでもねー\nもう すこしだけ いい なまえを\lわたしが つけて あげようか？ どうかな？$"
 
 SlateportCity_NameRatersHouse_Text_WhatShallNewNameBe:
-	.string "{JPN}そうか では\nどんな ニックネームに しようかな$"
+	.string "そうか では\nどんな ニックネームに しようかな$"
 
 SlateportCity_NameRatersHouse_Text_MonShallBeKnownAsName:
-	.string "{JPN}よし これから\nこの ポケモンは {STR_VAR_1}だ！\pまえより いい なまえ じゃないか\nよかったな！$"
+	.string "よし これから\nこの ポケモンは {STR_VAR_1}だ！\pまえより いい なまえ じゃないか\nよかったな！$"
 
 SlateportCity_NameRatersHouse_Text_DoVisitAgain:
-	.string "{JPN}そうか\nわかった また きなさいよ$"
+	.string "そうか\nわかった また きなさいよ$"
 
 SlateportCity_NameRatersHouse_Text_NameNoDifferentYetSuperior:
-	.string "{JPN}よし これから\nこの ポケモンは {STR_VAR_1}だ！\pまえと おなじように みえるが\nこっちの ほうが だんぜん いいぞ！\lよかったな！$"
+	.string "よし これから\nこの ポケモンは {STR_VAR_1}だ！\pまえと おなじように みえるが\nこっちの ほうが だんぜん いいぞ！\lよかったな！$"
 
 SlateportCity_NameRatersHouse_Text_MagnificentName:
-	.string "{JPN}うーむ {STR_VAR_1}か！\nこれは すばらしい ニックネームだ！\lけちの つけようもない！\pこれからも {STR_VAR_1}を\nかわいがって あげなさいよ！$"
+	.string "うーむ {STR_VAR_1}か！\nこれは すばらしい ニックネームだ！\lけちの つけようもない！\pこれからも {STR_VAR_1}を\nかわいがって あげなさいよ！$"
 
 SlateportCity_NameRatersHouse_Text_ThatIsMerelyAnEgg:
-	.string "{JPN}おいおい……\nそれは タマゴ じゃないか！$"
+	.string "おいおい……\nそれは タマゴ じゃないか！$"
 

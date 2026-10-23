@@ -28,41 +28,41 @@ MtPyre_6F_EventScript_Cedric::
 	end
 
 MtPyre_6F_Text_ValerieIntro:
-	.string "{JPN}ここに いると……\nなにかの ちからが はいってくるの……"
+	.string "ここに いると……\nなにかの ちからが はいってくるの……"
 	.string "$"
 
 MtPyre_6F_Text_ValerieDefeat:
-	.string "{JPN}ちからが ぬけていく……$"
+	.string "ちからが ぬけていく……$"
 
 MtPyre_6F_Text_ValeriePostBattle:
-	.string "{JPN}ここに ねむっている ポケモンたちの\nちからが はいって くるのかもよ……?"
+	.string "ここに ねむっている ポケモンたちの\nちからが はいって くるのかもよ……?"
 	.string "$"
 
 MtPyre_6F_Text_ValerieRegister:
-	.string "{JPN}ふふふふ しょうぶには まけたけど\nわたし…… こんな ことが できるの……\pあなたの ポケナビに いっさい てを\nふれなくても…… きえーいっ……!"
+	.string "ふふふふ しょうぶには まけたけど\nわたし…… こんな ことが できるの……\pあなたの ポケナビに いっさい てを\nふれなくても…… きえーいっ……!"
 	.string ""
 	.string ""
 	.string "$"
 
 MtPyre_6F_Text_ValerieRematchIntro:
-	.string "{JPN}あなたの うしろ……\nなにが いるの……?"
+	.string "あなたの うしろ……\nなにが いるの……?"
 	.string "$"
 
 MtPyre_6F_Text_ValerieRematchDefeat:
-	.string "{JPN}なにかが きえたわ……$"
+	.string "なにかが きえたわ……$"
 
 MtPyre_6F_Text_ValeriePostRematch:
-	.string "{JPN}ここに ねむっている ポケモンたち……\nときどき あそんでいる みたいなの……"
+	.string "ここに ねむっている ポケモンたち……\nときどき あそんでいる みたいなの……"
 	.string "$"
 
 MtPyre_6F_Text_CedricIntro:
-	.string "{JPN}きみ まいごなのか?\nおれが きた からには あんしんだ!"
+	.string "きみ まいごなのか?\nおれが きた からには あんしんだ!"
 	.string "$"
 
 MtPyre_6F_Text_CedricDefeat:
-	.string "{JPN}まいご じゃ なかったか?$"
+	.string "まいご じゃ なかったか?$"
 
 MtPyre_6F_Text_CedricPostBattle:
-	.string "{JPN}まいごの トレーナーは あわてて いるから\nかてる きが するんだよな\pずるいから もう やめとくよ……"
+	.string "まいごの トレーナーは あわてて いるから\nかてる きが するんだよな\pずるいから もう やめとくよ……"
 	.string ""
 	.string "$"

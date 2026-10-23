@@ -223,71 +223,71 @@ SlateportCity_OceanicMuseum_1F_Movement_FamiliarGruntExitNorth:
 	step_end
 
 SlateportCity_OceanicMuseum_1F_Text_WouldYouLikeToEnter:
-	.string "{JPN}うみの かがく はくぶつかんへ\nようこそ いらっしゃいませ!\pにゅうじょうりょう 50えんに なります\nけんがく して いきますか?"
+	.string "うみの かがく はくぶつかんへ\nようこそ いらっしゃいませ!\pにゅうじょうりょう 50えんに なります\nけんがく して いきますか?"
 	.string ""
 	.string ""
 	.string "$"
 
 SlateportCity_OceanicMuseum_1F_Text_PleaseEnjoyYourself:
-	.string "{JPN}ごゆっくり どうぞ!$"
+	.string "ごゆっくり どうぞ!$"
 
 SlateportCity_OceanicMuseum_1F_Text_NotEnoughMoney:
-	.string "{JPN}……あら おかねが たりませんわ$"
+	.string "……あら おかねが たりませんわ$"
 
 SlateportCity_OceanicMuseum_1F_Text_CatchUpWithYourGroup:
-	.string "{JPN}……あら さっきの だんたいさん?\nあなただけ おくれちゃって しかたないわね\lはやく とおっちゃって!"
+	.string "……あら さっきの だんたいさん?\nあなただけ おくれちゃって しかたないわね\lはやく とおっちゃって!"
 	.string ""
 	.string "$"
 
 SlateportCity_OceanicMuseum_1F_Text_AquaExistForGoodOfAll:
-	.string "{JPN}みんなの ために\nわれわれ アクアだんは いるのよ!"
+	.string "みんなの ために\nわれわれ アクアだんは いるのよ!"
 	.string "$"
 
 SlateportCity_OceanicMuseum_1F_Text_OurBossIsntHere:
-	.string "{JPN}げんちしゅうごう で\nここに あつまったのは いいけど……\pかんじんの リーダーが まだ こないんだ"
+	.string "げんちしゅうごう で\nここに あつまったのは いいけど……\pかんじんの リーダーが まだ こないんだ"
 	.string ""
 	.string "$"
 
 SlateportCity_OceanicMuseum_1F_Text_WouldStuffHereMakeMeRich:
-	.string "{JPN}ここに おいてある もの\nかっぱらうと もうかるかな?"
+	.string "ここに おいてある もの\nかっぱらうと もうかるかな?"
 	.string "$"
 
 SlateportCity_OceanicMuseum_1F_Text_CanLearnForNefariousDeeds:
-	.string "{JPN}この ちしきを いかして\nわるいこと してやるか……"
+	.string "この ちしきを いかして\nわるいこと してやるか……"
 	.string "$"
 
 SlateportCity_OceanicMuseum_1F_Text_RustboroBungled:
-	.string "{JPN}なかまが カナズミで ドジらなければ\nここに こなくて すんだのによ!"
+	.string "なかまが カナズミで ドジらなければ\nここに こなくて すんだのによ!"
 	.string "$"
 
 SlateportCity_OceanicMuseum_1F_Text_DidntHaveMoney:
-	.string "{JPN}さっき 50えんが なくて\nうけつけで すごい じかん かかったよ……"
+	.string "さっき 50えんが なくて\nうけつけで すごい じかん かかったよ……"
 	.string "$"
 
 SlateportCity_OceanicMuseum_1F_Text_LearnAboutSeaForBattling:
-	.string "{JPN}うみのこと べんきょう して\nポケモンしょうぶに やくだてたいの"
+	.string "うみのこと べんきょう して\nポケモンしょうぶに やくだてたいの"
 	.string "$"
 
 SlateportCity_OceanicMuseum_1F_Text_SternIsRoleModel:
-	.string "{JPN}わたくしッ\nうみを みると こうふん するのですッ!\pそんな わたくしに とって\nクスノキかんちょうは\lあこがれの ひと ナンバー1 なのですッ!"
+	.string "わたくしッ\nうみを みると こうふん するのですッ!\pそんな わたくしに とって\nクスノキかんちょうは\lあこがれの ひと ナンバー1 なのですッ!"
 	.string ""
 	.string ""
 	.string ""
 	.string "$"
 
 SlateportCity_OceanicMuseum_1F_Text_MustBePokemonWeDontKnow:
-	.string "{JPN}うみは はてしなく ひろく\nどこまでも ふかい……\pきっと われわれが しらない ポケモンも\nいっぱい いるのだろうね"
+	.string "うみは はてしなく ひろく\nどこまでも ふかい……\pきっと われわれが しらない ポケモンも\nいっぱい いるのだろうね"
 	.string ""
 	.string ""
 	.string "$"
 
 SlateportCity_OceanicMuseum_1F_Text_WantSeaPokemon:
-	.string "{JPN}あたし うみの ポケモンが ほしいの\pだって ひんやりと してて\nだきしめたら きもちよさそう だもの"
+	.string "あたし うみの ポケモンが ほしいの\pだって ひんやりと してて\nだきしめたら きもちよさそう だもの"
 	.string ""
 	.string "$"
 
 SlateportCity_OceanicMuseum_1F_Text_RememberMeTakeThis:
-	.string "{JPN}ひえー!!\nなんで おまえ ここに いるんだよ!?\pおれ? おれは カナシダ トンネルで\nおまえに コテンパンに された\lアクアだん だよ\pこれを やるから ゆるしてくれよ!"
+	.string "ひえー!!\nなんで おまえ ここに いるんだよ!?\pおれ? おれは カナシダ トンネルで\nおまえに コテンパンに された\lアクアだん だよ\pこれを やるから ゆるしてくれよ!"
 	.string ""
 	.string ""
 	.string ""
@@ -295,28 +295,28 @@ SlateportCity_OceanicMuseum_1F_Text_RememberMeTakeThis:
 	.string "$"
 
 SlateportCity_OceanicMuseum_1F_Text_HopeINeverSeeYouAgain:
-	.string "{JPN}その わざマシン\nおれより おまえのほうが にあうぜ!\pじゃあな わはははー!"
+	.string "その わざマシン\nおれより おまえのほうが にあうぜ!\pじゃあな わはははー!"
 	.string ""
 	.string "$"
 
 SlateportCity_OceanicMuseum_1F_Text_YouHaveToTakeThis:
-	.string "{JPN}たのむから\nなんとかして うけとってくれよ!"
+	.string "たのむから\nなんとかして うけとってくれよ!"
 	.string "$"
 
 SlateportCity_OceanicMuseum_1F_Text_WhirlpoolExperiment:
-	.string "{JPN}ガラスの なかで あおい みずが\nくるくると まわって いる!\p「これは かぜの ちからで じんこうてきに\n うずしおを おこす じっけん です」"
+	.string "ガラスの なかで あおい みずが\nくるくると まわって いる!\p「これは かぜの ちからで じんこうてきに\n うずしおを おこす じっけん です」"
 	.string ""
 	.string ""
 	.string "$"
 
 SlateportCity_OceanicMuseum_1F_Text_WaterfallExperiment:
-	.string "{JPN}ガラスの なかで あかい ボールが\nうかんだり しずんだり している!\p「これは ボールの ふりょくを りようした\n たきのぼりの げんりの じっけん です」"
+	.string "ガラスの なかで あかい ボールが\nうかんだり しずんだり している!\p「これは ボールの ふりょくを りようした\n たきのぼりの げんりの じっけん です」"
 	.string ""
 	.string ""
 	.string "$"
 
 SlateportCity_OceanicMuseum_1F_Text_OceanSoilDisplay:
-	.string "{JPN}うみの そこの つちの みほんだ!\p「かいていには ながい ねんげつを かけて\n せいぶつの しがいが ふりつもり\l ちそうが かたち づくられて いきます」\p「これらを ぶんせき することで\n とおい むかしの ことが わかるのです」"
+	.string "うみの そこの つちの みほんだ!\p「かいていには ながい ねんげつを かけて\n せいぶつの しがいが ふりつもり\l ちそうが かたち づくられて いきます」\p「これらを ぶんせき することで\n とおい むかしの ことが わかるのです」"
 	.string ""
 	.string ""
 	.string ""
@@ -324,7 +324,7 @@ SlateportCity_OceanicMuseum_1F_Text_OceanSoilDisplay:
 	.string "$"
 
 SlateportCity_OceanicMuseum_1F_Text_BeachSandDisplay:
-	.string "{JPN}うみべの すなの みほんだ!\p「やまから かわを つたって きた いしは\n みずの なかで ころがる うちに\l くだかれたり けずれたり していきます」\p「それらが ちいさな つぶに なって\n うみべの すなが できて いくのです」"
+	.string "うみべの すなの みほんだ!\p「やまから かわを つたって きた いしは\n みずの なかで ころがる うちに\l くだかれたり けずれたり していきます」\p「それらが ちいさな つぶに なって\n うみべの すなが できて いくのです」"
 	.string ""
 	.string ""
 	.string ""
@@ -332,7 +332,7 @@ SlateportCity_OceanicMuseum_1F_Text_BeachSandDisplay:
 	.string "$"
 
 SlateportCity_OceanicMuseum_1F_Text_OceanicMinifact1:
-	.string "{JPN}「うみの まめちしき その1\n なぜ うみの みずは あおいの?」\p「ひかりには いくつもの いろが あって\n ほとんどの ひかりは みずに はいると\l その いろが なくなって いきます」\p「けれど あおい ひかり だけは\n そのままの いろで のこる ため\l うみは あおく みえるのです」"
+	.string "「うみの まめちしき その1\n なぜ うみの みずは あおいの?」\p「ひかりには いくつもの いろが あって\n ほとんどの ひかりは みずに はいると\l その いろが なくなって いきます」\p「けれど あおい ひかり だけは\n そのままの いろで のこる ため\l うみは あおく みえるのです」"
 	.string ""
 	.string ""
 	.string ""
@@ -342,7 +342,7 @@ SlateportCity_OceanicMuseum_1F_Text_OceanicMinifact1:
 	.string "$"
 
 SlateportCity_OceanicMuseum_1F_Text_OceanicMinifact2:
-	.string "{JPN}「うみの まめちしき その2\n なぜ うみの みずは しょっぱいの?」\p「かいすい には いわから にじみでた\p しおの もとに なる\n ナトリウムイオン と えんそイオン\l という ぶっしつが おおく ふくまれ\l だから なめると しょっぱいのです」"
+	.string "「うみの まめちしき その2\n なぜ うみの みずは しょっぱいの?」\p「かいすい には いわから にじみでた\p しおの もとに なる\n ナトリウムイオン と えんそイオン\l という ぶっしつが おおく ふくまれ\l だから なめると しょっぱいのです」"
 	.string ""
 	.string ""
 	.string ""
@@ -351,7 +351,7 @@ SlateportCity_OceanicMuseum_1F_Text_OceanicMinifact2:
 	.string "$"
 
 SlateportCity_OceanicMuseum_1F_Text_OceanicMinifact3:
-	.string "{JPN}「うみの まめちしき その3\n うみと りくは どちらが ひろいの?」\p「だいたい うみが 70パーセントで\n りくが 30パーセント くらいです\p りくちに くらべて うみは\n その 2ばい いじょうも あるのです」"
+	.string "「うみの まめちしき その3\n うみと りくは どちらが ひろいの?」\p「だいたい うみが 70パーセントで\n りくが 30パーセント くらいです\p りくちに くらべて うみは\n その 2ばい いじょうも あるのです」"
 	.string ""
 	.string ""
 	.string ""
@@ -359,7 +359,7 @@ SlateportCity_OceanicMuseum_1F_Text_OceanicMinifact3:
 	.string "$"
 
 SlateportCity_OceanicMuseum_1F_Text_FossilDisplay:
-	.string "{JPN}デコボコに なみうった かせきが ある!\p「うみの そこに たまった つちには\n かいすいが ながれる えいきょうで\l なみの ような もようが できます」\p「それが そのまま かせきに なったものを\n リップルマークと よんでいます」"
+	.string "デコボコに なみうった かせきが ある!\p「うみの そこに たまった つちには\n かいすいが ながれる えいきょうで\l なみの ような もようが できます」\p「それが そのまま かせきに なったものを\n リップルマークと よんでいます」"
 	.string ""
 	.string ""
 	.string ""
@@ -367,6 +367,6 @@ SlateportCity_OceanicMuseum_1F_Text_FossilDisplay:
 	.string "$"
 
 SlateportCity_OceanicMuseum_1F_Text_DepthMeasuringMachine:
-	.string "{JPN}まるい ドームの なかで なんだか\nよく わからない きかいが まわってる!\pなにかの ふかさを しらべるのかな?"
+	.string "まるい ドームの なかで なんだか\nよく わからない きかいが まわってる!\pなにかの ふかさを しらべるのかな?"
 	.string ""
 	.string "$"

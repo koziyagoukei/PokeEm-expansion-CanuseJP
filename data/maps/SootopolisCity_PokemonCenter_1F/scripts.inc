@@ -44,13 +44,13 @@ SootopolisCity_PokemonCenter_1F_EventScript_WomanNoLegendaries::
 	end
 
 SootopolisCity_PokemonCenter_1F_Text_WallaceToughestInHoenn:
-	.string "{JPN}この まちの ジムリーダーは\nホウエンちほう でも いちばんと\lうわさの じつりょくしゃ ミクリに\pポケモン しょうぶの てほどきを した\nじんぶつが やっているのだ\pしかし そんな ミクリの ししょうよりも\nつよいと いわれる してんのう……\lその つよさは どれほどの ものだろう$"
+	.string "この まちの ジムリーダーは\nホウエンちほう でも いちばんと\lうわさの じつりょくしゃ ミクリに\pポケモン しょうぶの てほどきを した\nじんぶつが やっているのだ\pしかし そんな ミクリの ししょうよりも\nつよいと いわれる してんのう……\lその つよさは どれほどの ものだろう$"
 
 SootopolisCity_PokemonCenter_1F_Text_EveryoneTakenRefuge:
-	.string "{JPN}この まちの みんなが みんな\nいえに とじこもって でてこないんです!\pそう いってる わたしも\nここから でたくないんです……$"
+	.string "この まちの みんなが みんな\nいえに とじこもって でてこないんです!\pそう いってる わたしも\nここから でたくないんです……$"
 
 SootopolisCity_PokemonCenter_1F_Text_AlwaysBeFriendsWithPokemon:
-	.string "{JPN}どんな ときでも\nどんな ことが あっても\lあたし ポケモンと ともだちで いるわ\pだって ポケモンと いっしょだと\nすごく たのしいもの!$"
+	.string "どんな ときでも\nどんな ことが あっても\lあたし ポケモンと ともだちで いるわ\pだって ポケモンと いっしょだと\nすごく たのしいもの!$"
 
 SootopolisCity_PokemonCenter_1F_Text_ArentPokemonOurFriends:
-	.string "{JPN}ポケモンって\nあたしたちの ともだちじゃ…… ないの?\pどうして\nあんなふうに あばれて いるの?$"
+	.string "ポケモンって\nあたしたちの ともだちじゃ…… ないの?\pどうして\nあんなふうに あばれて いるの?$"

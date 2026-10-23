@@ -484,92 +484,92 @@ BattleFrontier_BattleArenaBattleRoom_Movement_GretaWalkBackToCenter:
 	step_end
 
 BattleFrontier_BattleArenaBattleRoom_Text_PlayerStepForward:
-	.string "{JPN}しんぱん『トレーナー {PLAYER}!\nまえへーーー!"
+	.string "しんぱん『トレーナー {PLAYER}!\nまえへーーー!"
 	.string "$"
 
 BattleFrontier_BattleArenaBattleRoom_Text_OpponentStepForward:
-	.string "{JPN}しんぱん『トレーナー {STR_VAR_1}!\nまえへーーー!"
+	.string "しんぱん『トレーナー {STR_VAR_1}!\nまえへーーー!"
 	.string "$"
 
 BattleFrontier_BattleArenaBattleRoom_Text_SetKOTourneyBegin:
-	.string "{JPN}しんぱん『かちぬきチームバトル!\nはじめーーー!!"
+	.string "しんぱん『かちぬきチームバトル!\nはじめーーー!!"
 	.string "$"
 
 BattleFrontier_BattleArenaBattleRoom_Text_WinnerIsPlayer:
-	.string "{JPN}しんぱん『しょうしゃーーー!\n{PLAYER}!!$"
+	.string "しんぱん『しょうしゃーーー!\n{PLAYER}!!$"
 
 BattleFrontier_BattleArenaBattleRoom_Text_WinnerIsOpponent:
-	.string "{JPN}しんぱん『しょうしゃーーー!\n{STR_VAR_1}!!$"
+	.string "しんぱん『しょうしゃーーー!\n{STR_VAR_1}!!$"
 
 BattleFrontier_BattleArenaBattleRoom_Text_MonsWillBeRestored:
-	.string "{JPN}ポケモンの たいりょくを\nかいふく いたしますぞ!"
+	.string "ポケモンの たいりょくを\nかいふく いたしますぞ!"
 	.string "$"
 
 BattleFrontier_BattleArenaBattleRoom_Text_ReadyFor2ndOpponent:
-	.string "{JPN}つぎは 2にんめの あいてですぞ!\nじゅんびは よろしい ですかな?"
+	.string "つぎは 2にんめの あいてですぞ!\nじゅんびは よろしい ですかな?"
 	.string "$"
 
 BattleFrontier_BattleArenaBattleRoom_Text_ReadyFor3rdOpponent:
-	.string "{JPN}つぎは 3にんめの あいてですぞ!\nじゅんびは よろしい ですかな?"
+	.string "つぎは 3にんめの あいてですぞ!\nじゅんびは よろしい ですかな?"
 	.string "$"
 
 BattleFrontier_BattleArenaBattleRoom_Text_ReadyFor4thOpponent:
-	.string "{JPN}つぎは 4にんめの あいてですぞ!\nじゅんびは よろしい ですかな?"
+	.string "つぎは 4にんめの あいてですぞ!\nじゅんびは よろしい ですかな?"
 	.string "$"
 
 BattleFrontier_BattleArenaBattleRoom_Text_ReadyFor5thOpponent:
-	.string "{JPN}つぎは 5にんめの あいてですぞ!\nじゅんびは よろしい ですかな?"
+	.string "つぎは 5にんめの あいてですぞ!\nじゅんびは よろしい ですかな?"
 	.string "$"
 
 BattleFrontier_BattleArenaBattleRoom_Text_ReadyFor6thOpponent:
-	.string "{JPN}つぎは 6にんめの あいてですぞ!\nじゅんびは よろしい ですかな?"
+	.string "つぎは 6にんめの あいてですぞ!\nじゅんびは よろしい ですかな?"
 	.string "$"
 
 BattleFrontier_BattleArenaBattleRoom_Text_ReadyFor7thOpponent:
-	.string "{JPN}つぎは 7にんめの あいてですぞ!\nじゅんびは よろしい ですかな?"
+	.string "つぎは 7にんめの あいてですぞ!\nじゅんびは よろしい ですかな?"
 	.string "$"
 
 BattleFrontier_BattleArenaBattleRoom_Text_SaveAndShutDown:
-	.string "{JPN}レポートを かいて\nしゅうりょう なされますかな?"
+	.string "レポートを かいて\nしゅうりょう なされますかな?"
 	.string "$"
 
 BattleFrontier_BattleArenaBattleRoom_Text_RetireFromChallenge:
-	.string "{JPN}かちぬきチームバトルの ちょうせんを\nちゅうし なされますかな?"
+	.string "かちぬきチームバトルの ちょうせんを\nちゅうし なされますかな?"
 	.string "$"
 
 BattleFrontier_BattleArenaBattleRoom_Text_SavingPleaseWait:
-	.string "{JPN}レポートを かいております!\nしばし おまちくだされ!"
+	.string "レポートを かいております!\nしばし おまちくだされ!"
 	.string "$"
 
 BattleFrontier_BattleArenaBattleRoom_Text_RecordLastBattle:
-	.string "{JPN}さきほどの たたかいを\nフロンティアパスに きろく されますかな?"
+	.string "さきほどの たたかいを\nフロンティアパスに きろく されますかな?"
 	.string "$"
 
 BattleFrontier_BattleArenaBattleRoom_Text_NowFaceTycoon:
-	.string "{JPN}おきゃくじん!\pあなたの じつりょくは\nじつに すさまじいで ございますな!\pそこで ここらで ひとつ\nわれらが たいしょう アリーナキャプテンと\lおてあわせ いただき ましょう!"
+	.string "おきゃくじん!\pあなたの じつりょくは\nじつに すさまじいで ございますな!\pそこで ここらで ひとつ\nわれらが たいしょう アリーナキャプテンと\lおてあわせ いただき ましょう!"
 	.string ""
 	.string ""
 	.string "$"
 
 BattleFrontier_BattleArenaBattleRoom_Text_PreparedForTycoon:
-	.string "{JPN}アリーナキャプテンとの しょうぶ!\nかくごの ほうは よろしい ですかな?"
+	.string "アリーナキャプテンとの しょうぶ!\nかくごの ほうは よろしい ですかな?"
 	.string "$"
 
 BattleFrontier_BattleArenaBattleRoom_Text_MakeWayForGreta:
-	.string "{JPN}しんぱん『アリーナキャプテン! コゴミさま!\nごにゅうじょうーーー!"
+	.string "しんぱん『アリーナキャプテン! コゴミさま!\nごにゅうじょうーーー!"
 	.string "$"
 
 BattleFrontier_BattleArenaBattleRoom_Text_GretaYoureChallenger:
-	.string "{JPN}コゴミ『ウィーッス! よろしくー!!\p…… って あなたが ちょうせんしゃ?"
+	.string "コゴミ『ウィーッス! よろしくー!!\p…… って あなたが ちょうせんしゃ?"
 	.string ""
 	.string "$"
 
 BattleFrontier_BattleArenaBattleRoom_Text_IsThatRight:
-	.string "{JPN}ふーん…… へーえ…… へえぇぇ……"
+	.string "ふーん…… へーえ…… へえぇぇ……"
 	.string "$"
 
 BattleFrontier_BattleArenaBattleRoom_Text_YouLookWeakTakeThingsEasy:
-	.string "{JPN}なんて いうかー しょうじき いって\nかなり よわっちい かんじ なんだけどー\lアタシと たたかっても\lだいじょうぶ なのかなー?\pぅうーん……\pまあ いいかっ!\nまずは かるーく おてなみ はいけんねっ!"
+	.string "なんて いうかー しょうじき いって\nかなり よわっちい かんじ なんだけどー\lアタシと たたかっても\lだいじょうぶ なのかなー?\pぅうーん……\pまあ いいかっ!\nまずは かるーく おてなみ はいけんねっ!"
 	.string ""
 	.string ""
 	.string ""
@@ -577,53 +577,53 @@ BattleFrontier_BattleArenaBattleRoom_Text_YouLookWeakTakeThingsEasy:
 	.string "$"
 
 BattleFrontier_BattleArenaBattleRoom_Text_IgniteMyPassionForBattle:
-	.string "{JPN}さあっ!\nアタシの とうしに ひを つけてねっ!"
+	.string "さあっ!\nアタシの とうしに ひを つけてねっ!"
 	.string "$"
 
 BattleFrontier_BattleArenaBattleRoom_Text_GretaYoureToughAfterAll:
-	.string "{JPN}コゴミ『やだ ちょっとー!\nあなた ぜんぜん つよい じゃんー!\lきにいった! フロンティアパス かしてっ!"
+	.string "コゴミ『やだ ちょっとー!\nあなた ぜんぜん つよい じゃんー!\lきにいった! フロンティアパス かしてっ!"
 	.string ""
 	.string ""
 	.string "$"
 
 BattleFrontier_BattleArenaBattleRoom_Text_ReceivedGutsSymbol:
-	.string "{JPN}フロンティアパスに\nガッツシンボルが きざまれた!"
+	.string "フロンティアパスに\nガッツシンボルが きざまれた!"
 	.string "$"
 
 BattleFrontier_BattleArenaBattleRoom_Text_GoingToBeFunNextTime:
-	.string "{JPN}ぅうーん!\pつぎに あえるときが\nたのしみに なって きたなー!"
+	.string "ぅうーん!\pつぎに あえるときが\nたのしみに なって きたなー!"
 	.string ""
 	.string "$"
 
 BattleFrontier_BattleArenaBattleRoom_Text_GretaLookingForwardToSeeingAgain:
-	.string "{JPN}コゴミ『ウィーッス! ごぶさたー!\nやーっと ここまで かちぬいて きたね!\pおそいから しんぱい しちゃったよーっ!\nあなたと あえるの もの すっごーくっ!\lたのしみに してたん だからねーっ!!"
+	.string "コゴミ『ウィーッス! ごぶさたー!\nやーっと ここまで かちぬいて きたね!\pおそいから しんぱい しちゃったよーっ!\nあなたと あえるの もの すっごーくっ!\lたのしみに してたん だからねーっ!!"
 	.string ""
 	.string ""
 	.string ""
 	.string "$"
 
 BattleFrontier_BattleArenaBattleRoom_Text_SoAreYouReady:
-	.string "{JPN}…… …… …… …… だから いーい?"
+	.string "…… …… …… …… だから いーい?"
 	.string "$"
 
 BattleFrontier_BattleArenaBattleRoom_Text_WontAllowHalfheartedEffort:
-	.string "{JPN}はんぱな たたかいじゃ ゆるさないっ!!\nかくご しといてねっ!!"
+	.string "はんぱな たたかいじゃ ゆるさないっ!!\nかくご しといてねっ!!"
 	.string "$"
 
 BattleFrontier_BattleArenaBattleRoom_Text_LetsGetThisStarted:
-	.string "{JPN}ほらっ しんぱん!\nさっさと はじめなさいっ!!"
+	.string "ほらっ しんぱん!\nさっさと はじめなさいっ!!"
 	.string "$"
 
 BattleFrontier_BattleArenaBattleRoom_Text_GretaBlownAway:
-	.string "{JPN}コゴミ『あーーーっ! もーーーっ!!\nさっさと フロンティアパス かしてよっ!"
+	.string "コゴミ『あーーーっ! もーーーっ!!\nさっさと フロンティアパス かしてよっ!"
 	.string "$"
 
 BattleFrontier_BattleArenaBattleRoom_Text_GutsSymbolTookGoldenShine:
-	.string "{JPN}ガッツシンボルが\nきんいろに かがやいた!"
+	.string "ガッツシンボルが\nきんいろに かがやいた!"
 	.string "$"
 
 BattleFrontier_BattleArenaBattleRoom_Text_IfWeBattleAgainWontLose:
-	.string "{JPN}むきーっ!! くやしーーーっ!!\pこんど たたかう ことが あったら\nぜーったい まけない からっ! バイバイっ!"
+	.string "むきーっ!! くやしーーーっ!!\pこんど たたかう ことが あったら\nぜーったい まけない からっ! バイバイっ!"
 	.string ""
 	.string ""
 	.string "$"

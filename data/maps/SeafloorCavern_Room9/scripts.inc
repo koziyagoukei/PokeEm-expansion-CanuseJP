@@ -216,46 +216,46 @@ SeafloorCavern_Room9_Movement_Delay32:
 	step_end
 
 SeafloorCavern_Room9_Text_ArchieHoldItRightThere:
-	.string "{JPN}アオギリ『……まつんだ!$"
+	.string "アオギリ『……まつんだ!$"
 
 SeafloorCavern_Room9_Text_ArchieSoItWasYou:
-	.string "{JPN}アオギリ『ふふふ……\nやはり おまえ だったか$"
+	.string "アオギリ『ふふふ……\nやはり おまえ だったか$"
 
 SeafloorCavern_Room9_Text_ArchieBeholdKyogre:
-	.string "{JPN}アオギリ『どうだ みてみろ!\pちょう こだいポケモン カイオーガが\nしずかに ねむる うつくしい すがたを!\pおれは この ひが くるのを\nながい あいだ まっていた……$"
+	.string "アオギリ『どうだ みてみろ!\pちょう こだいポケモン カイオーガが\nしずかに ねむる うつくしい すがたを!\pおれは この ひが くるのを\nながい あいだ まっていた……$"
 
 SeafloorCavern_Room9_Text_ArchieYouMustDisappear:
-	.string "{JPN}アオギリ『それにしても まさか\nここまで くいついて くるとはな!\pだが それも もう おわり\nおれの もくてき たっせいの ため\lおまえには ここで きえてもらう!$"
+	.string "アオギリ『それにしても まさか\nここまで くいついて くるとはな!\pだが それも もう おわり\nおれの もくてき たっせいの ため\lおまえには ここで きえてもらう!$"
 
 SeafloorCavern_Room9_Text_ArchieDefeat:
-	.string "{JPN}なにっ!?\nおまえ ごときに おれが……?$"
+	.string "なにっ!?\nおまえ ごときに おれが……?$"
 
 SeafloorCavern_Room9_Text_ArchieWithThisRedOrb:
-	.string "{JPN}アオギリ『フフフ……\pさすが というべきか……\nおまえの その ちからは みとめよう!\pだが……!\nおれには これが ある!\pこの べにいろのたまが あれば\nカイオーガを……$"
+	.string "アオギリ『フフフ……\pさすが というべきか……\nおまえの その ちからは みとめよう!\pだが……!\nおれには これが ある!\pこの べにいろのたまが あれば\nカイオーガを……$"
 
 SeafloorCavern_Room9_Text_RedOrbShinesByItself:
-	.string "{JPN}べにいろのたまが……\nかってに かがやき はじめた……!?$"
+	.string "べにいろのたまが……\nかってに かがやき はじめた……!?$"
 
 SeafloorCavern_Room9_Text_ArchieWhereDidKyogreGo:
-	.string "{JPN}アオギリ『……!?\pおれは なにも していないのに\nなぜ べにいろのたまが……?\pカイオーガは どこへ きえた?$"
+	.string "アオギリ『……!?\pおれは なにも していないのに\nなぜ べにいろのたまが……?\pカイオーガは どこへ きえた?$"
 
 SeafloorCavern_Room9_Text_ArchieAMessageFromOutside:
-	.string "{JPN}アオギリ『そとに いる\nだんいん からの れんらくか$"
+	.string "アオギリ『そとに いる\nだんいん からの れんらくか$"
 
 SeafloorCavern_Room9_Text_ArchieWhatRainingTooHard:
-	.string "{JPN}アオギリ『どうした……?\pふうむ……\nおおあめが ふっている……\pそうだろう…… それこそが\nわれわれ アクアだんの もくてき\lうみを ふやすために カイオーガを\lめざめさせた りゆう なのだからな\pなんだと!\pよそう いじょうの あめで\nこのままでは われわれも キケンだと?\pそんな ばかな……\nとにかく ようすを みているんだ!$"
+	.string "アオギリ『どうした……?\pふうむ……\nおおあめが ふっている……\pそうだろう…… それこそが\nわれわれ アクアだんの もくてき\lうみを ふやすために カイオーガを\lめざめさせた りゆう なのだからな\pなんだと!\pよそう いじょうの あめで\nこのままでは われわれも キケンだと?\pそんな ばかな……\nとにかく ようすを みているんだ!$"
 
 SeafloorCavern_Room9_Text_ArchieWhyDidKyogreDisappear:
-	.string "{JPN}アオギリ『おかしい……\pべにいろのたまで カイオーガが めざめる\nそして コントロール できるはず……\pなのに…… どうして……\nカイオーガは いなくなった!?\pなぜなんだ!?$"
+	.string "アオギリ『おかしい……\pべにいろのたまで カイオーガが めざめる\nそして コントロール できるはず……\pなのに…… どうして……\nカイオーガは いなくなった!?\pなぜなんだ!?$"
 
 SeafloorCavern_Room9_Text_MaxieWhatHaveYouWrought:
-	.string "{JPN}マツブサ『なんてことだ……\pアオギリよ…… おまえらも\nカイオーガを めざめさせて しまったな!\pこのまま えいえんに\nおおあめが ふりつづけたら\lせかいは いったい どうなる!\pすべての だいちは\nみずの そこに しずむぞ……$"
+	.string "マツブサ『なんてことだ……\pアオギリよ…… おまえらも\nカイオーガを めざめさせて しまったな!\pこのまま えいえんに\nおおあめが ふりつづけたら\lせかいは いったい どうなる!\pすべての だいちは\nみずの そこに しずむぞ……$"
 
 SeafloorCavern_Room9_Text_ArchieDontGetAllHighAndMighty:
-	.string "{JPN}アオギリ『な なんだと!?\nかってな ことを いわないでくれ!\pおまえら マグマだんこそ グラードンを\nおこらせて しまった じゃないか!\pおれは この べにいろのたまさえ あれば\nカイオーガを コントロール できるはず……\pできる はず なんだ……$"
+	.string "アオギリ『な なんだと!?\nかってな ことを いわないでくれ!\pおまえら マグマだんこそ グラードンを\nおこらせて しまった じゃないか!\pおれは この べにいろのたまさえ あれば\nカイオーガを コントロール できるはず……\pできる はず なんだ……$"
 
 SeafloorCavern_Room9_Text_MaxieWeDontHaveTimeToArgue:
-	.string "{JPN}マツブサ『とにかく いまは ここで\nいいあらそいを している ひまはない!\pそとに でて たしかめると いい!\nめのまえに ひろがっているのが\lわれわれの のぞんだ せかいか どうか!$"
+	.string "マツブサ『とにかく いまは ここで\nいいあらそいを している ひまはない!\pそとに でて たしかめると いい!\nめのまえに ひろがっているのが\lわれわれの のぞんだ せかいか どうか!$"
 
 SeafloorCavern_Room9_Text_MaxieComeOnPlayer:
-	.string "{JPN}マツブサ『{PLAYER}…… おまえも\nはやく そとに でるんだ!$"
+	.string "マツブサ『{PLAYER}…… おまえも\nはやく そとに でるんだ!$"

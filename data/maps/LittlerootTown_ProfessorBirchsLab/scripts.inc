@@ -657,7 +657,7 @@ LittlerootTown_ProfessorBirchsLab_EventScript_ScottAboardSSTidalCall::
 	end
 
 LittlerootTown_ProfessorBirchsLab_Text_BirchAwayOnFieldwork:
-	.string "{JPN}え? オダマキはかせ?\p"
+	.string "え? オダマキはかせ?\p"
 	.string "{JPN}はかせ なら フィールドワークに\n"
 	.string "{JPN}でかけていて いませんよ\p"
 	.string "{JPN}……あ フィールドワークって いうのは\p"
@@ -668,15 +668,15 @@ LittlerootTown_ProfessorBirchsLab_Text_BirchAwayOnFieldwork:
 	.string "{JPN}たいけんする タイプのひと なんです!$"
 
 LittlerootTown_ProfessorBirchsLab_Text_BirchIsntOneForDeskWork:
-	.string "{JPN}はかせは つくえのうえで けんきゅうを\n"
+	.string "はかせは つくえのうえで けんきゅうを\n"
 	.string "{JPN}するよりも じっさいに そとへ とびだして\l"
 	.string "{JPN}たいけんする タイプのひと なんです!$"
 
 LittlerootTown_ProfessorBirchsLab_Text_BirchEnjoysRivalsHelpToo:
-	.string "{JPN}オダマキはかせは\nポケモンが どこに すんでいるのか\lぶんぷの ちょうさを なさっています\p{RIVAL}さんは すきな おとうさんの\nおてつだいを なさって いるのですよ$"
+	.string "オダマキはかせは\nポケモンが どこに すんでいるのか\lぶんぷの ちょうさを なさっています\p{RIVAL}さんは すきな おとうさんの\nおてつだいを なさって いるのですよ$"
 
 LittlerootTown_ProfessorBirchsLab_Text_LikeYouToHavePokemon:
-	.string "{JPN}オダマキ『……さて {PLAYER}{KUN}!\p"
+	.string "オダマキ『……さて {PLAYER}{KUN}!\p"
 	.string "{JPN}きみのことは おとうさん から\n"
 	.string "{JPN}いつも きかされていたよ!\p"
 	.string "{JPN}きみは まだ じぶんの ポケモンを\n"
@@ -692,11 +692,11 @@ LittlerootTown_ProfessorBirchsLab_Text_LikeYouToHavePokemon:
 	.string "{JPN}{STR_VAR_1}を もらった!$"
 
 LittlerootTown_ProfessorBirchsLab_Text_WhyNotGiveNicknameToMon:
-	.string "{JPN}オダマキ『せっかく だから {STR_VAR_1}に\n"
+	.string "オダマキ『せっかく だから {STR_VAR_1}に\n"
 	.string "{JPN}ニックネームを つけてみては どうだい?$"
 
 LittlerootTown_ProfessorBirchsLab_Text_MightBeGoodIdeaToGoSeeRival:
-	.string "{JPN}オダマキ『これから さらに\n"
+	.string "オダマキ『これから さらに\n"
 	.string "{JPN}けいけんを つんで いけば\l"
 	.string "{JPN}いい トレーナーに なれそうだ!\p"
 	.string "{JPN}ちょうど うちの {RIVAL}も\n"
@@ -706,17 +706,17 @@ LittlerootTown_ProfessorBirchsLab_Text_MightBeGoodIdeaToGoSeeRival:
 	.string "{JPN}あいに いったら どうだろう?$"
 
 LittlerootTown_ProfessorBirchsLab_Text_GetRivalToTeachYou:
-	.string "{JPN}オダマキ『そうか!\n"
+	.string "オダマキ『そうか!\n"
 	.string "{JPN}それは {RIVAL}も よろこぶぞ!\p"
 	.string "{JPN}トレーナーが どんな ものか\n"
 	.string "{JPN}おしえてもらうと いいぞ!$"
 
 LittlerootTown_ProfessorBirchsLab_Text_DontBeThatWay:
-	.string "{JPN}オダマキ『そんなこと いわずに\n"
+	.string "オダマキ『そんなこと いわずに\n"
 	.string "{JPN}あいに いったら どうだろう?$"
 
 LittlerootTown_ProfessorBirchsLab_Text_BirchRivalGoneHome:
-	.string "{JPN}オダマキ『{RIVAL} だったら\n"
+	.string "オダマキ『{RIVAL} だったら\n"
 	.string "{JPN}いえに かえってるんじゃ ないのか?\p"
 	.string "{JPN}それとも また どこかの くさむらに\n"
 	.string "{JPN}もぐりこんで いるのかも……\p"
@@ -724,7 +724,7 @@ LittlerootTown_ProfessorBirchsLab_Text_BirchRivalGoneHome:
 	.string "{JPN}じぶんの いえで やすむと いいぞ!$"
 
 LittlerootTown_ProfessorBirchsLab_Text_HeardYouBeatRivalTakePokedex:
-	.string "{JPN}オダマキ『おっ {PLAYER}{KUN}!\p"
+	.string "オダマキ『おっ {PLAYER}{KUN}!\p"
 	.string "{JPN}はじめてで {RIVAL}に\n"
 	.string "{JPN}かつ だなんて すごいじゃないか!\p"
 	.string "{JPN}{RIVAL}は かなり まえから\n"
@@ -735,11 +735,11 @@ LittlerootTown_ProfessorBirchsLab_Text_HeardYouBeatRivalTakePokedex:
 	.string "{JPN}この ポケモンずかんを あげよう!$"
 
 LittlerootTown_ProfessorBirchsLab_Text_ReceivedPokedex:
-	.string "{JPN}{PLAYER}は\n"
+	.string "{PLAYER}は\n"
 	.string "{JPN}ポケモンずかんを もらった!$"
 
 LittlerootTown_ProfessorBirchsLab_Text_ExplainPokedex:
-	.string "{JPN}オダマキ『その ポケモンずかんは\n"
+	.string "オダマキ『その ポケモンずかんは\n"
 	.string "{JPN}きみが であった ポケモンを\p"
 	.string "{JPN}じどうてきに きろく していってくれる\n"
 	.string "{JPN}ハイテクな どうぐ なんだ!\p"
@@ -751,19 +751,19 @@ LittlerootTown_ProfessorBirchsLab_Text_ExplainPokedex:
 	.string "{JPN}さがしだしては みせて くれるんだよ!$"
 
 LittlerootTown_ProfessorBirchsLab_Text_CountlessPokemonAwait:
-	.string "{JPN}オダマキ『きみの ゆくてには\n"
+	.string "オダマキ『きみの ゆくてには\n"
 	.string "{JPN}たくさんの ポケモンが まっているよ!\p"
 	.string "{JPN}あー はやく フィールドワークに\n"
 	.string "{JPN}いきたく なってきたぞ!$"
 
 LittlerootTown_ProfessorBirchsLab_Text_MayGotPokedexTooTakeThese:
-	.string "{JPN}ハルカ『{PLAYER}{KUN}も\n"
+	.string "ハルカ『{PLAYER}{KUN}も\n"
 	.string "{JPN}ポケモンずかん もらったんだね!\p"
 	.string "{JPN}よかったね! あたしと いっしょだよ!\n"
 	.string "{JPN}じゃあ あたしは これを あげる!$"
 
 LittlerootTown_ProfessorBirchsLab_Text_CatchCutePokemonWithPokeBalls:
-	.string "{JPN}ハルカ『ポケモンが\n"
+	.string "ハルカ『ポケモンが\n"
 	.string "{JPN}たくさん いると たのしいよ!\p"
 	.string "{JPN}あたし いろんな ポケモン さがしたいから\n"
 	.string "{JPN}いろんな ところを さがすわ!\p"
@@ -771,19 +771,19 @@ LittlerootTown_ProfessorBirchsLab_Text_CatchCutePokemonWithPokeBalls:
 	.string "{JPN}モンスターボールで つかまえちゃう!$"
 
 LittlerootTown_ProfessorBirchsLab_Text_OhYourBagsFull:
-	.string "{JPN}あら? バッグ いっぱいだよ$"
+	.string "あら? バッグ いっぱいだよ$"
 
 LittlerootTown_ProfessorBirchsLab_Text_MayWhereShouldIGoNext:
-	.string "{JPN}ハルカ『こんどは どこまで\n"
+	.string "ハルカ『こんどは どこまで\n"
 	.string "{JPN}ポケモンを さがしに いこうかな?$"
 
 LittlerootTown_ProfessorBirchsLab_Text_BrendanGotPokedexTooTakeThese:
-	.string "{JPN}ユウキ『ふうん {PLAYER}も\n"
+	.string "ユウキ『ふうん {PLAYER}も\n"
 	.string "{JPN}ポケモンずかん もらったのか\p"
 	.string "{JPN}じゃあ オレは これ やるよ$"
 
 LittlerootTown_ProfessorBirchsLab_Text_CatchCoolPokemonWithPokeBalls:
-	.string "{JPN}ユウキ『ポケモンが\n"
+	.string "ユウキ『ポケモンが\n"
 	.string "{JPN}たくさん いると たのしいからな\p"
 	.string "{JPN}オレ いろんな ポケモン さがすため\n"
 	.string "{JPN}いろんな ところに いくんだ\p"
@@ -791,29 +791,29 @@ LittlerootTown_ProfessorBirchsLab_Text_CatchCoolPokemonWithPokeBalls:
 	.string "{JPN}モンスターボールで つかまえるんだ$"
 
 LittlerootTown_ProfessorBirchsLab_Text_HeyYourBagsFull:
-	.string "{JPN}おや? バッグ いっぱいだよ$"
+	.string "おや? バッグ いっぱいだよ$"
 
 LittlerootTown_ProfessorBirchsLab_Text_BrendanWhereShouldIGoNext:
-	.string "{JPN}ユウキ『こんどは どこに\n"
+	.string "ユウキ『こんどは どこに\n"
 	.string "{JPN}ポケモン さがしに いこうかな……$"
 
 LittlerootTown_ProfessorBirchsLab_Text_SeriousLookingMachine:
-	.string "{JPN}なんか すごそうな マシンだ!\n"
+	.string "なんか すごそうな マシンだ!\n"
 	.string "{JPN}はかせが けんきゅうに つかうのかな?$"
 
 LittlerootTown_ProfessorBirchsLab_Text_PCUsedForResearch:
-	.string "{JPN}けんきゅうに つかわれている パソコンだ!\n"
+	.string "けんきゅうに つかわれている パソコンだ!\n"
 	.string "{JPN}…… さわるのは やめておこう$"
 
 LittlerootTown_ProfessorBirchsLab_Text_CrammedWithBooksOnPokemon:
-	.string "{JPN}ポケモンに ついて かかれた\n"
+	.string "ポケモンに ついて かかれた\n"
 	.string "{JPN}ほんが いっぱい ある!$"
 
 LittlerootTown_ProfessorBirchsLab_Text_BookTooHardToRead:
-	.string "{JPN}むずかしそうな ほんが おいてある!$"
+	.string "むずかしそうな ほんが おいてある!$"
 
 LittlerootTown_ProfessorBirchsLab_Text_OtherRegionsUpgradeToNational:
-	.string "{JPN}オダマキ『……さて\p"
+	.string "オダマキ『……さて\p"
 	.string "{JPN}{PLAYER}{KUN}と {RIVAL}に ポケモンの\n"
 	.string "{JPN}ちょうさを おねがい していた わけだが\p"
 	.string "{JPN}きみたちの どりょくの おかげで\n"
@@ -830,46 +830,46 @@ LittlerootTown_ProfessorBirchsLab_Text_OtherRegionsUpgradeToNational:
 	.string "{JPN}さあ ずかんを かしておくれ!$"
 
 LittlerootTown_ProfessorBirchsLab_Text_MayUpgradeSoCool:
-	.string "{JPN}ハルカ『えへへー!\p"
+	.string "ハルカ『えへへー!\p"
 	.string "{JPN}あたしの ずかんまで\n"
 	.string "{JPN}ぜんこくばんに してもらえる なんて\p"
 	.string "{JPN}{PLAYER}{KUN}が たくさん ポケモンを\n"
 	.string "{JPN}しらべてくれた おかげだね!$"
 
 LittlerootTown_ProfessorBirchsLab_Text_BrendanYouCanThankMe:
-	.string "{JPN}ユウキ『オレ はりきって ホウエンじゅうの\n"
+	.string "ユウキ『オレ はりきって ホウエンじゅうの\n"
 	.string "{JPN}ポケモンのこと しらべたからな\p"
 	.string "{JPN}{PLAYER}も ずかんを ぜんこくばんに\n"
 	.string "{JPN}してもらえて ラッキーだったな!$"
 
 LittlerootTown_ProfessorBirchsLab_Text_OkayAllDone:
-	.string "{JPN}オダマキ『ホイ できたぞ!$"
+	.string "オダマキ『ホイ できたぞ!$"
 
 LittlerootTown_ProfessorBirchsLab_Text_PokedexUpgradedToNational:
-	.string "{JPN}{PLAYER}の ポケモンずかんが\n"
+	.string "{PLAYER}の ポケモンずかんが\n"
 	.string "{JPN}ぜんこくばんに バージョンアップ した!$"
 
 LittlerootTown_ProfessorBirchsLab_Text_GrassyPatchWaiting2:
-	.string "{JPN}オダマキ『いいかい?\n"
+	.string "オダマキ『いいかい?\n"
 	.string "{JPN}チャンピオンに なったから といって\l"
 	.string "{JPN}ポケモンの みちに おわりは ないんだ\p"
 	.string "{JPN}まだ あしを ふみいれていない くさむらは\n"
 	.string "{JPN}いつまでも きみを まっているよ!$"
 
 LittlerootTown_ProfessorBirchsLab_Text_MayTakeBreakFromFieldwork:
-	.string "{JPN}ハルカ『さーて フィールドワークは\n"
+	.string "ハルカ『さーて フィールドワークは\n"
 	.string "{JPN}ちょっとだけ おやすみして\p"
 	.string "{JPN}しばらくは ここで\n"
 	.string "{JPN}はかせの おてつだいでも しよっかなー$"
 
 LittlerootTown_ProfessorBirchsLab_Text_BrendanTakeBreakFromFieldwork:
-	.string "{JPN}ユウキ『オレは とりあえず\n"
+	.string "ユウキ『オレは とりあえず\n"
 	.string "{JPN}フィールドワークは おやすみだな!\p"
 	.string "{JPN}しばらくは ここで\n"
 	.string "{JPN}はかせの てつだいでも してるよ!$"
 
 LittlerootTown_ProfessorBirchsLab_Text_CompletedDexChoosePokemon:
-	.string "{JPN}オダマキ『おお {PLAYER}{KUN}!\n"
+	.string "オダマキ『おお {PLAYER}{KUN}!\n"
 	.string "{JPN}ちょっと ずかんを みせて もらうよ\p"
 	.string "{JPN}…… …… ……\n"
 	.string "{JPN}…… …… ……\p"
@@ -887,28 +887,28 @@ LittlerootTown_ProfessorBirchsLab_Text_CompletedDexChoosePokemon:
 	.string "{JPN}すきなものを 1ひきだけ あげよう!$"
 
 LittlerootTown_ProfessorBirchsLab_Text_CanHaveAnyOneOfRarePokemon:
-	.string "{JPN}オダマキ『ほかの ちほうでしか\n"
+	.string "オダマキ『ほかの ちほうでしか\n"
 	.string "{JPN}みつからない めずらしい ポケモンだよ!\p"
 	.string "{JPN}3ひきの なかから\n"
 	.string "{JPN}すきなものを 1ひきだけ あげよう!$"
 
 LittlerootTown_ProfessorBirchsLab_Text_YoullTakeCyndaquil:
-	.string "{JPN}オダマキ『ほのおの ポケモン ヒノアラシに\n"
+	.string "オダマキ『ほのおの ポケモン ヒノアラシに\n"
 	.string "{JPN}めを つけるとは やはり するどいな!\p"
 	.string "{JPN}じゃあ ヒノアラシで いいんだね?$"
 
 LittlerootTown_ProfessorBirchsLab_Text_YoullTakeTotodile:
-	.string "{JPN}オダマキ『みずの ポケモン ワニノコか\n"
+	.string "オダマキ『みずの ポケモン ワニノコか\n"
 	.string "{JPN}うーむ いいものを えらぶじゃないか!\p"
 	.string "{JPN}よし ワニノコで いいんだね?$"
 
 LittlerootTown_ProfessorBirchsLab_Text_YoullTakeChikorita:
-	.string "{JPN}オダマキ『くさの ポケモン チコリータか\n"
+	.string "オダマキ『くさの ポケモン チコリータか\n"
 	.string "{JPN}さすがだ わかってるなあ!\p"
 	.string "{JPN}ならば チコリータで けっていだね?$"
 
 LittlerootTown_ProfessorBirchsLab_Text_TakeYourTimeAllInvaluable:
-	.string "{JPN}オダマキ『じっくり かんがえて\n"
+	.string "オダマキ『じっくり かんがえて\n"
 	.string "{JPN}きめると いいよ\l"
 	.string "{JPN}どれも きちょうな ポケモン だからね$"
 
@@ -918,7 +918,7 @@ LittlerootTown_ProfessorBirchsLab_Text_PickedFinePokemon:
 	.string "{JPN}いい ポケモンを えらんだね!$"
 
 LittlerootTown_ProfessorBirchsLab_Text_ReceivedJohtoStarter:
-	.string "{JPN}{PLAYER}は オダマキはかせ から\n"
+	.string "{PLAYER}は オダマキはかせ から\n"
 	.string "{JPN}{STR_VAR_1}を もらった!$"
 
 @ Unused
@@ -927,14 +927,14 @@ LittlerootTown_ProfessorBirchsLab_Text_NicknameJohtoStarter:
 	.string "{JPN}ニックネームを つけますか?$"
 
 LittlerootTown_ProfessorBirchsLab_Text_GrassyPatchWaiting:
-	.string "{JPN}オダマキ『{PLAYER}{KUN} いいかい?\n"
+	.string "オダマキ『{PLAYER}{KUN} いいかい?\n"
 	.string "{JPN}ホウエンの ずかんが かんせい しても\l"
 	.string "{JPN}ポケモンの みちに おわりは ないんだ\p"
 	.string "{JPN}まだ あしを ふみいれていない くさむらは\n"
 	.string "{JPN}いつまでも きみを まっているよ!$"
 
 LittlerootTown_ProfessorBirchsLab_Text_BetterLeaveOthersAlone:
-	.string "{JPN}やくそくの 1ひきは もう もらったから\n"
+	.string "やくそくの 1ひきは もう もらったから\n"
 	.string "{JPN}のこりには さわらないで おこう!$"
 
 @ Unused
@@ -943,7 +943,7 @@ LittlerootTown_ProfessorBirchsLab_Text_DontHaveAnyRoomForPokemon:
 	.string "{JPN}ポケモンを もてない みたいだな$"
 
 LittlerootTown_ProfessorBirchsLab_Text_MayWhatNextImStayingHere:
-	.string "{JPN}ハルカ『{PLAYER}{KUN}は\n"
+	.string "ハルカ『{PLAYER}{KUN}は\n"
 	.string "{JPN}このあと…… どうする つもり?\p"
 	.string "{JPN}ポケモン しょうぶの みちを きわめる?\p"
 	.string "{JPN}それとも ぜんこく ずかんの\n"
@@ -952,17 +952,17 @@ LittlerootTown_ProfessorBirchsLab_Text_MayWhatNextImStayingHere:
 	.string "{JPN}はかせの おてつだいを つづけるわ$"
 
 LittlerootTown_ProfessorBirchsLab_Text_BrendanPreferCollectingSlowly:
-	.string "{JPN}ユウキ『オレは ポケモン あつめるより\n"
+	.string "ユウキ『オレは ポケモン あつめるより\n"
 	.string "{JPN}これは! と おもった 1ひきを\l"
 	.string "{JPN}じっくり そだてるのが すきなのさ!$"
 
 LittlerootTown_ProfessorBirchsLab_Text_MayHaveYouGoneToBattleFrontier:
-	.string "{JPN}ハルカ『あっ {PLAYER}{KUN}!\n"
+	.string "ハルカ『あっ {PLAYER}{KUN}!\n"
 	.string "{JPN}バトルフロンティア っていう ところには\l"
 	.string "{JPN}もう いってみた?$"
 
 LittlerootTown_ProfessorBirchsLab_Text_BrendanHaveYouGoneToBattleFrontier:
-	.string "{JPN}ユウキ『やあ {PLAYER}か!\n"
+	.string "ユウキ『やあ {PLAYER}か!\n"
 	.string "{JPN}バトルフロンティア って ところには\l"
 	.string "{JPN}もう いってみたか?$"
 

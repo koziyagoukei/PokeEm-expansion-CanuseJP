@@ -42,5 +42,5 @@ Route106_EventScript_Ned::
 	end
 
 Route106_Text_TrainerTips:
-	.string "{JPN}おとくな　けいじばん!!\pポケモンを　うまく　つりあげる　コツは\nビックリ　したら　Aボタン!$"
+	.string "おとくな　けいじばん!!\pポケモンを　うまく　つりあげる　コツは\nビックリ　したら　Aボタン!$"
 

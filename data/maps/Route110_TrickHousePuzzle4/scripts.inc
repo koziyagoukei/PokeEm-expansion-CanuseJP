@@ -28,32 +28,32 @@ Route110_TrickHousePuzzle4_EventScript_Paula::
 	end
 
 Route110_TrickHousePuzzle4_Text_WroteSecretCodeLockOpened:
-	.string "{JPN}{PLAYER}は あいことばを\nとびらに かきつけた!\p「カラクリだいおう さま かっこいい」\p…… …… ……\pかぎの はずれる おとがした!$"
+	.string "{PLAYER}は あいことばを\nとびらに かきつけた!\p「カラクリだいおう さま かっこいい」\p…… …… ……\pかぎの はずれる おとがした!$"
 
 Route110_TrickHousePuzzle4_Text_CoraIntro:
-	.string "{JPN}こういうの かんがえるのって めんどう!\nわたしは しょうぶだけ したいのにー!$"
+	.string "こういうの かんがえるのって めんどう!\nわたしは しょうぶだけ したいのにー!$"
 
 Route110_TrickHousePuzzle4_Text_CoraDefeat:
-	.string "{JPN}まけちゃった けど やっぱり\nしょうぶが いちばん たのしい!$"
+	.string "まけちゃった けど やっぱり\nしょうぶが いちばん たのしい!$"
 
 Route110_TrickHousePuzzle4_Text_CoraPostBattle:
-	.string "{JPN}トレーナーが いそうな ところは\nどこにでも いきたく なるわよね!$"
+	.string "トレーナーが いそうな ところは\nどこにでも いきたく なるわよね!$"
 
 Route110_TrickHousePuzzle4_Text_YujiIntro:
-	.string "{JPN}このくらいの いわは\nゆび いっぽんで らくしょう だぜ!$"
+	.string "このくらいの いわは\nゆび いっぽんで らくしょう だぜ!$"
 
 Route110_TrickHousePuzzle4_Text_YujiDefeat:
-	.string "{JPN}いわが おせても\nパズルが とけない……$"
+	.string "いわが おせても\nパズルが とけない……$"
 
 Route110_TrickHousePuzzle4_Text_YujiPostBattle:
-	.string "{JPN}ちからが つよいだけじゃ ダメだね……\nアタマ つかわないと$"
+	.string "ちからが つよいだけじゃ ダメだね……\nアタマ つかわないと$"
 
 Route110_TrickHousePuzzle4_Text_PaulaIntro:
-	.string "{JPN}カラクリやしきも だんだん\nむずかしく なってきたわね!$"
+	.string "カラクリやしきも だんだん\nむずかしく なってきたわね!$"
 
 Route110_TrickHousePuzzle4_Text_PaulaDefeat:
-	.string "{JPN}ああっ!$"
+	.string "ああっ!$"
 
 Route110_TrickHousePuzzle4_Text_PaulaPostBattle:
-	.string "{JPN}さいごまで いった\nひとって いるのかしらね?$"
+	.string "さいごまで いった\nひとって いるのかしらね?$"
 

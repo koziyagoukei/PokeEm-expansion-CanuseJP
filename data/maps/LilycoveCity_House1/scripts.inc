@@ -16,8 +16,8 @@ LilycoveCity_House1_EventScript_Kecleon::
 	end
 
 LilycoveCity_House1_Text_PokemonPartnersNotTools:
-	.string "{JPN}ポケモンは にんげんの パートナーであって\nけっして にんげんの どうぐ じゃないよ\pそこを かんちがい しておる\nにんげんも たまに いるんだよ……$"
+	.string "ポケモンは にんげんの パートナーであって\nけっして にんげんの どうぐ じゃないよ\pそこを かんちがい しておる\nにんげんも たまに いるんだよ……$"
 
 LilycoveCity_House1_Text_Kecleon:
-	.string "{JPN}カクレオン『るろろ……?$"
+	.string "カクレオン『るろろ……?$"
 

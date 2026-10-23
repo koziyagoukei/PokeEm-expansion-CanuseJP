@@ -283,7 +283,7 @@ DewfordTown_Gym_EventScript_GymStatue::
 	end
 
 DewfordTown_Gym_Text_GymGuideAdvice:
-	.string "{JPN}げんき しとぉや!!\n"
+	.string "げんき しとぉや!!\n"
 	.string "{JPN}チャンピオンを めざす {PLAYER}!!\p"
 	.string "{JPN}ムロタウン ジムの リーダー トウキは\n"
 	.string "{JPN}かくとうタイプ ポケモンの つかいてだ!\p"
@@ -297,87 +297,87 @@ DewfordTown_Gym_Text_GymGuideAdvice:
 	.string "{JPN}じゃ きばってこォー!!$"
 
 DewfordTown_Gym_Text_GymGuidePostVictory:
-	.string "{JPN}うおォ! ずいぶん あかるく なったな!\p"
+	.string "うおォ! ずいぶん あかるく なったな!\p"
 	.string "{JPN}きみの みらいも あかるいぞ!$"
 
 DewfordTown_Gym_Text_TakaoIntro:
-	.string "{JPN}ちから こそ せいぎっ!\n"
+	.string "ちから こそ せいぎっ!\n"
 	.string "{JPN}ドリャーッ!!$"
 
 DewfordTown_Gym_Text_TakaoDefeat:
-	.string "{JPN}ちからぶそく だった……!$"
+	.string "ちからぶそく だった……!$"
 
 DewfordTown_Gym_Text_TakaoPostBattle:
-	.string "{JPN}じゅう よく ごうを せいす!\n"
+	.string "じゅう よく ごうを せいす!\n"
 	.string "{JPN}みごとな たたかいぶり だった!$"
 
 DewfordTown_Gym_Text_JocelynIntro:
-	.string "{JPN}トウキさまと たたかうまでも ないわ!\n"
+	.string "トウキさまと たたかうまでも ないわ!\n"
 	.string "{JPN}わたしが たおして あげる!$"
 
 DewfordTown_Gym_Text_JocelynDefeat:
-	.string "{JPN}まさか……\n"
+	.string "まさか……\n"
 	.string "{JPN}こんなに かんたんに やられるなんて$"
 
 DewfordTown_Gym_Text_JocelynPostBattle:
-	.string "{JPN}この まけを むだに しないため\n"
+	.string "この まけを むだに しないため\n"
 	.string "{JPN}もっと とっくん する!\p"
 	.string "{JPN}そして いつかは ジムリーダーに……\p"
 	.string "{JPN}いえ ポケモンリーグの\n"
 	.string "{JPN}チャンピオンに なるわよ!$"
 
 DewfordTown_Gym_Text_LauraIntro:
-	.string "{JPN}あたしを あまく みない ことね!\n"
+	.string "あたしを あまく みない ことね!\n"
 	.string "{JPN}ないても しらないわよ!$"
 
 DewfordTown_Gym_Text_LauraDefeat:
-	.string "{JPN}わぁーーーん!\n"
+	.string "わぁーーーん!\n"
 	.string "{JPN}まけたーーーっ!$"
 
 DewfordTown_Gym_Text_LauraPostBattle:
-	.string "{JPN}くらやみの なかで たたかうことで\n"
+	.string "くらやみの なかで たたかうことで\n"
 	.string "{JPN}こころを きたえるの\p"
 	.string "{JPN}でも まっくら だから\n"
 	.string "{JPN}トウキさまの おかおを みられない……$"
 
 DewfordTown_Gym_Text_LilithIntro:
-	.string "{JPN}うふふ……!\n"
+	.string "うふふ……!\n"
 	.string "{JPN}くらくて まよっているの かな?$"
 
 DewfordTown_Gym_Text_LilithDefeat:
-	.string "{JPN}なによ もう\n"
+	.string "なによ もう\n"
 	.string "{JPN}しらない!$"
 
 DewfordTown_Gym_Text_LilithPostBattle:
-	.string "{JPN}あなた なんて このまま まよって\n"
+	.string "あなた なんて このまま まよって\n"
 	.string "{JPN}いりぐちに もどっちゃえば いーのよ!$"
 
 DewfordTown_Gym_Text_BrendenIntro:
-	.string "{JPN}うみの おとこの いじを\n"
+	.string "うみの おとこの いじを\n"
 	.string "{JPN}みせつけて やるぜぃ!$"
 
 DewfordTown_Gym_Text_BrendenDefeat:
-	.string "{JPN}どうしたぃ!\n"
+	.string "どうしたぃ!\n"
 	.string "{JPN}おれと した ことが……$"
 
 DewfordTown_Gym_Text_BrendenPostBattle:
-	.string "{JPN}おう! あんたなら\n"
+	.string "おう! あんたなら\n"
 	.string "{JPN}ジムリーダーに いどむに ふさわしいぜぃ!$"
 
 DewfordTown_Gym_Text_CristianIntro:
-	.string "{JPN}ここを とおる なら\n"
+	.string "ここを とおる なら\n"
 	.string "{JPN}この わしを たおしてから じゃ!$"
 
 DewfordTown_Gym_Text_CristianDefeat:
-	.string "{JPN}むうーん!\n"
+	.string "むうーん!\n"
 	.string "{JPN}すごく つよい……!$"
 
 DewfordTown_Gym_Text_CristianPostBattle:
-	.string "{JPN}わしの まけじゃ!\n"
+	.string "わしの まけじゃ!\n"
 	.string "{JPN}がんばって バッジ とってこいよ!$"
 
 DewfordTown_Gym_Text_BrawlyIntro:
-	.string "{JPN}ボクは ムロ ポケモンジム\n"
+	.string "ボクは ムロ ポケモンジム\n"
 	.string "{JPN}リーダーの トウキ!\p"
 	.string "{JPN}この あたりの\n"
 	.string "{JPN}はげしい なみに もまれ……\p"
@@ -388,17 +388,17 @@ DewfordTown_Gym_Text_BrawlyIntro:
 	.string "{JPN}どれほどの ものか みせて もらうよ!$"
 
 DewfordTown_Gym_Text_BrawlyDefeat:
-	.string "{JPN}ううーん よそう していたより\n"
+	.string "ううーん よそう していたより\n"
 	.string "{JPN}キミは ビッグウェーブ!\p"
 	.string "{JPN}わかった!\n"
 	.string "{JPN}この バッジを もっていきな!$"
 
 DewfordTown_Gym_Text_ReceivedKnuckleBadge:
-	.string "{JPN}{PLAYER}は トウキから\n"
+	.string "{PLAYER}は トウキから\n"
 	.string "{JPN}ナックルバッジを もらった!$"
 
 DewfordTown_Gym_Text_KnuckleBadgeInfoTakeThis:
-	.string "{JPN}ナックルバッジには\n"
+	.string "ナックルバッジには\n"
 	.string "{JPN}レベル30までの ポケモンなら\l"
 	.string "{JPN}ひとから もらった ポケモンでも\l"
 	.string "{JPN}すなおに する こうかが ある!\p"
@@ -408,32 +408,32 @@ DewfordTown_Gym_Text_KnuckleBadgeInfoTakeThis:
 	.string "{JPN}よかったら つかいな!$"
 
 DewfordTown_Gym_Text_ExplainBulkUp:
-	.string "{JPN}その わざマシン08 には\n"
+	.string "その わざマシン08 には\n"
 	.string "{JPN}ビルドアップが はいっている!\p"
 	.string "{JPN}こうげきりょくと ぼうぎょりょくを\n"
 	.string "{JPN}あげる わざ なのさ!\p"
 	.string "{JPN}…… …… ……$"
 
 DewfordTown_Gym_Text_RegisteredBrawly:
-	.string "{JPN}ジムリーダー トウキを\n"
+	.string "ジムリーダー トウキを\n"
 	.string "{JPN}ポケナビに とうろく した!$"
 
 DewfordTown_Gym_Text_BrawlyPostBattle:
-	.string "{JPN}キミの さいのうは\n"
+	.string "キミの さいのうは\n"
 	.string "{JPN}いつのひか おおきな なみと なって\p"
 	.string "{JPN}ポケモン トレーナーたちの あいだに\n"
 	.string "{JPN}おどろきの あらしを まきおこすだろう!$"
 
 DewfordTown_Gym_Text_GymStatue:
-	.string "{JPN}ムロタウン ポケモンジム$"
+	.string "ムロタウン ポケモンジム$"
 
 DewfordTown_Gym_Text_GymStatueCertified:
-	.string "{JPN}ムロタウン ポケモンジム\p"
+	.string "ムロタウン ポケモンジム\p"
 	.string "{JPN}トウキ にんてい トレーナー!\n"
 	.string "{JPN}{PLAYER}$"
 
 DewfordTown_Gym_Text_BrawlyPreRematch:
-	.string "{JPN}トウキ『なみというのは いちど ひいても\n"
+	.string "トウキ『なみというのは いちど ひいても\n"
 	.string "{JPN}いつか かならず はまべに もどってくる\p"
 	.string "{JPN}キミほどの ビッグウェーブだ\n"
 	.string "{JPN}きっと また くると おもっていたよ!\p"
@@ -441,16 +441,16 @@ DewfordTown_Gym_Text_BrawlyPreRematch:
 	.string "{JPN}ボクに みせてくれ!$"
 
 DewfordTown_Gym_Text_BrawlyRematchDefeat:
-	.string "{JPN}わーおっ!\n"
+	.string "わーおっ!\n"
 	.string "{JPN}キミに のみこまれそうだ!$"
 
 DewfordTown_Gym_Text_BrawlyPostRematch:
-	.string "{JPN}トウキ『やっぱり ポケモン しょうぶは\n"
+	.string "トウキ『やっぱり ポケモン しょうぶは\n"
 	.string "{JPN}そこが みえないほど ふかく ひろい!\l"
 	.string "{JPN}まるで ホウエンの うみの ようだね!$"
 
 DewfordTown_Gym_Text_BrawlyRematchNeedTwoMons:
-	.string "{JPN}トウキ『なみというのは いちど ひいても\n"
+	.string "トウキ『なみというのは いちど ひいても\n"
 	.string "{JPN}いつか かならず はまべに もどってくる\p"
 	.string "{JPN}キミほどの ビッグウェーブだ\n"
 	.string "{JPN}きっと また くると おもっていたよ!\p"

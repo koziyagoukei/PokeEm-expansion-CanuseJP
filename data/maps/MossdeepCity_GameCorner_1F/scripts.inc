@@ -46,7 +46,7 @@ RS_MysteryEventsHouse_Text_OldManGreeting:
 	.string "TRAINERS battle.$"
 
 RS_MysteryEventsHouse_Text_DoorIsLocked:
-	.string "{JPN}とびらには かぎが かかって いるようだ!$"
+	.string "とびらには かぎが かかって いるようだ!$"
 
 RS_MysteryEventsHouse_Text_ChallengeVisitingTrainer:
 	.string "A TRAINER named {STR_VAR_1} is\n"

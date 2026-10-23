@@ -139,22 +139,22 @@ LilycoveCity_DepartmentStore_1F_EventScript_FloorNamesSign::
 	end
 
 LilycoveCity_DepartmentStore_1F_Text_WelcomeToDeptStore:
-	.string "{JPN}いらっしゃいませ！\nミナモ デパート です$"
+	.string "いらっしゃいませ！\nミナモ デパート です$"
 
 LilycoveCity_DepartmentStore_1F_Text_IBuyAllSortsOfThings:
-	.string "{JPN}デパートに くると たのしくなって\nいろんな ものを かっちゃうのよ$"
+	.string "デパートに くると たのしくなって\nいろんな ものを かっちゃうのよ$"
 
 LilycoveCity_DepartmentStore_1F_Text_MomBuyingMeFurniture:
-	.string "{JPN}きょうは すてきな かぐを\nおかあさんに かって もらうの$"
+	.string "きょうは すてきな かぐを\nおかあさんに かって もらうの$"
 
 LilycoveCity_DepartmentStore_1F_Text_BuyingSomethingForAzumarill:
-	.string "{JPN}コンテストで ゆうしょうした ごほうびに\nマリルリに なにか かって あげるんだよ！$"
+	.string "コンテストで ゆうしょうした ごほうびに\nマリルリに なにか かって あげるんだよ！$"
 
 LilycoveCity_DepartmentStore_1F_Text_Azumarill:
-	.string "{JPN}マリルリ『まりりるぅー！$"
+	.string "マリルリ『まりりるぅー！$"
 
 LilycoveCity_DepartmentStore_1F_Text_FloorNamesSign:
-	.string "{JPN}1かい …… サービス カウンター\n       ちゅうせん かいじょう\p2かい …… トレーナーズ ゾーン\p3かい …… バトル コレクション\p4かい …… わざマシン コーナー\p5かい …… ぬいぐるみ フロアー\pおくじょう …… いこいの ひろば$"
+	.string "1かい …… サービス カウンター\n       ちゅうせん かいじょう\p2かい …… トレーナーズ ゾーン\p3かい …… バトル コレクション\p4かい …… わざマシン コーナー\p5かい …… ぬいぐるみ フロアー\pおくじょう …… いこいの ひろば$"
 
 @ Unused
 LilycoveCity_DepartmentStore_1F_Text_WirelessCommIsFun:

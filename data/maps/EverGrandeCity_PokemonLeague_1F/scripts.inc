@@ -120,10 +120,10 @@ EverGrandeCity_PokemonLeague_1F_Movement_RightGuardOutOfWay:
 	step_end
 
 EverGrandeCity_PokemonLeague_1F_Text_MustHaveAllGymBadges:
-	.string "{JPN}これより さきは\nすべての ジムバッジを あつめた\lトレーナーだけが すすめます!\pトレーナーよ! きみの ジムバッジ\nかくにん させてください$"
+	.string "これより さきは\nすべての ジムバッジを あつめた\lトレーナーだけが すすめます!\pトレーナーよ! きみの ジムバッジ\nかくにん させてください$"
 
 EverGrandeCity_PokemonLeague_1F_Text_HaventObtainedAllBadges:
-	.string "{JPN}きみは まだ\nすべての ジムバッジを もっていない!\pポケモン リーグを めざすなら\nでなおして きなさい$"
+	.string "きみは まだ\nすべての ジムバッジを もっていない!\pポケモン リーグを めざすなら\nでなおして きなさい$"
 
 EverGrandeCity_PokemonLeague_1F_Text_GoForth:
-	.string "{JPN}トレーナーよ! おのれと\nポケモンを しんじて すすみたまえ!$"
+	.string "トレーナーよ! おのれと\nポケモンを しんじて すすみたまえ!$"

@@ -214,49 +214,49 @@ BattleFrontier_BattlePyramidTop_Movement_CameraPanUp:
 	step_end
 
 BattleFrontier_BattlePyramidTop_Text_ReachedSummitUpYouGo:
-	.string "{JPN}よくぞ まいられましたぞ!\nここは バトルピラミッドの ちょうじょう!\pこの うえに あるのが\nピラミッドのいただき ですぞ!\pバトルピラミッドを せいはした もののみ\nこの うえに たつことが できるのですぞ!\pさあ! のぼってくだされ!$"
+	.string "よくぞ まいられましたぞ!\nここは バトルピラミッドの ちょうじょう!\pこの うえに あるのが\nピラミッドのいただき ですぞ!\pバトルピラミッドを せいはした もののみ\nこの うえに たつことが できるのですぞ!\pさあ! のぼってくだされ!$"
 
 BattleFrontier_BattlePyramidTop_Text_PlayerConqueredPyramid:
-	.string "{JPN}あらたなる ピラミッド せいはしゃ!\nそのなは {PLAYER}!$"
+	.string "あらたなる ピラミッド せいはしゃ!\nそのなは {PLAYER}!$"
 
 BattleFrontier_BattlePyramidTop_Text_ChiefBeatYouHere:
-	.string "{JPN}よくぞ まいられましたぞ!\p…… …… と いいたい ところ ですが\nわずかに おそかった ですな!!\pすでに われらが たいちょうが\nピラミッドを せいは されましたぞ!!\pしかし ぼうけんしゃよ!\pあなたも トレーナー ならば\nその ちからで たいちょうから\lえいこうの いただきを かちとるのです!\pさあ! じゅんびが できたら\nゆうきの いっぽを ふみだすの ですぞ!$"
+	.string "よくぞ まいられましたぞ!\p…… …… と いいたい ところ ですが\nわずかに おそかった ですな!!\pすでに われらが たいちょうが\nピラミッドを せいは されましたぞ!!\pしかし ぼうけんしゃよ!\pあなたも トレーナー ならば\nその ちからで たいちょうから\lえいこうの いただきを かちとるのです!\pさあ! じゅんびが できたら\nゆうきの いっぽを ふみだすの ですぞ!$"
 
 BattleFrontier_BattlePyramidTop_Text_ExplorationsAreGrandestAdventure:
-	.string "{JPN}わかき ぼうけんしゃよ……\nぼうけんとは いいもの だな……\pおのれの ちえ!\pおのれの ちから!\pおのれの ポケモン!\pそして なにより\nおのれの ゆうきを ふりしぼって\lみちなる せかいへと つきすすむ……$"
+	.string "わかき ぼうけんしゃよ……\nぼうけんとは いいもの だな……\pおのれの ちえ!\pおのれの ちから!\pおのれの ポケモン!\pそして なにより\nおのれの ゆうきを ふりしぼって\lみちなる せかいへと つきすすむ……$"
 
 BattleFrontier_BattlePyramidTop_Text_ImPyramidKingBrandon:
-	.string "{JPN}いやぁー じつに たまらない!\nたまらないじゃ ないか! なあっ!?\pわたしは ジンダイ!\pここの せきにんしゃで ある\nピラミッドキングだが みんなには\lたいちょうと よばれて いるぞ!\pきみも ここまで きたと いうことは\nそれなりの じしんが あるの だろう?\lはっはっは! いやぁー じつに たのしみだ!$"
+	.string "いやぁー じつに たまらない!\nたまらないじゃ ないか! なあっ!?\pわたしは ジンダイ!\pここの せきにんしゃで ある\nピラミッドキングだが みんなには\lたいちょうと よばれて いるぞ!\pきみも ここまで きたと いうことは\nそれなりの じしんが あるの だろう?\lはっはっは! いやぁー じつに たのしみだ!$"
 
 BattleFrontier_BattlePyramidTop_Text_BringCourageToOurBattle:
-	.string "{JPN}さあ! きみの あつい ゆうきを\nぶつけて きたまえ!$"
+	.string "さあ! きみの あつい ゆうきを\nぶつけて きたまえ!$"
 
 BattleFrontier_BattlePyramidTop_Text_BrandonFrontierPassPlease:
-	.string "{JPN}ジンダイ『はっはっは!\nいやぁー じつに すばらしい!\pいいぞ! きみを みとめようじゃ ないか!!\nフロンティアパスを かすんだ!$"
+	.string "ジンダイ『はっはっは!\nいやぁー じつに すばらしい!\pいいぞ! きみを みとめようじゃ ないか!!\nフロンティアパスを かすんだ!$"
 
 BattleFrontier_BattlePyramidTop_Text_ReceivedBraveSymbol:
-	.string "{JPN}フロンティアパスに\nブレイブシンボルが きざまれた!$"
+	.string "フロンティアパスに\nブレイブシンボルが きざまれた!$"
 
 BattleFrontier_BattlePyramidTop_Text_LookForwardToNextMeeting:
-	.string "{JPN}わかき ぼうけんしゃよ!\nまた あえる ときを まっているぞ!!$"
+	.string "わかき ぼうけんしゃよ!\nまた あえる ときを まっているぞ!!$"
 
 BattleFrontier_BattlePyramidTop_Text_BrandonYouveReturned:
-	.string "{JPN}ジンダイ『…… ここまで たどりついたか\nわかき ぼうけんしゃよ……\pきみは ほんとうに こころから\nぼうけんを あいして いるようだな……\pそう…… まるで わかき ひの\nわたし そっくりじゃ ないか……\p…… …… …… おお……\pあつく!!\pきけんで!!\pくるしい!!\pあの いのちがけの ぼうけんの ひびが\nよみがえって きたぞ……$"
+	.string "ジンダイ『…… ここまで たどりついたか\nわかき ぼうけんしゃよ……\pきみは ほんとうに こころから\nぼうけんを あいして いるようだな……\pそう…… まるで わかき ひの\nわたし そっくりじゃ ないか……\p…… …… …… おお……\pあつく!!\pきけんで!!\pくるしい!!\pあの いのちがけの ぼうけんの ひびが\nよみがえって きたぞ……$"
 
 BattleFrontier_BattlePyramidTop_Text_MyCourageIsOffMeter:
-	.string "{JPN}よーーーしっ!!\pわたしの ゆうきセンサーも\nぜっこうちょう!!$"
+	.string "よーーーしっ!!\pわたしの ゆうきセンサーも\nぜっこうちょう!!$"
 
 BattleFrontier_BattlePyramidTop_Text_EverythingYouHave:
-	.string "{JPN}きみの すべて!\nわたしが うけとめよう じゃないか!!$"
+	.string "きみの すべて!\nわたしが うけとめよう じゃないか!!$"
 
 BattleFrontier_BattlePyramidTop_Text_BrandonRemarkableHaveThis:
-	.string "{JPN}ジンダイ『はっはっはっ!\nいやぁー じつに すばらしい!\lまったく さいこうじゃ ないか!!\pわかき ぼうけんしゃよ!!\pきみには かんぱい だよ!\nさあ! こいつを うけとって くれ!!$"
+	.string "ジンダイ『はっはっはっ!\nいやぁー じつに すばらしい!\lまったく さいこうじゃ ないか!!\pわかき ぼうけんしゃよ!!\pきみには かんぱい だよ!\nさあ! こいつを うけとって くれ!!$"
 
 BattleFrontier_BattlePyramidTop_Text_BraveSymbolTookGoldenShine:
-	.string "{JPN}ブレイブシンボルが\nきんいろに かがやいた!$"
+	.string "ブレイブシンボルが\nきんいろに かがやいた!$"
 
 BattleFrontier_BattlePyramidTop_Text_FarewellForNow:
-	.string "{JPN}いやぁー わたしも\nまだまだと いうこと らしいな!!\pえんが あったら また あおう!\nさらばだ! わかき ぼうけんしゃよ!!$"
+	.string "いやぁー わたしも\nまだまだと いうこと らしいな!!\pえんが あったら また あおう!\nさらばだ! わかき ぼうけんしゃよ!!$"
 
 BattleFrontier_BattlePyramidTop_Text_StepForwardWhenReady:
-	.string "{JPN}さあ! じゅんびが できたら\nゆうきの いっぽを ふみだすの ですぞ!$"
+	.string "さあ! じゅんびが できたら\nゆうきの いっぽを ふみだすの ですぞ!$"

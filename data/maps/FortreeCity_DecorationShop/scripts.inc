@@ -54,8 +54,8 @@ FortreeCity_DecorationShop_PokemartDecor_Chairs:
 	pokemartlistend
 
 FortreeCity_DecorationShop_Text_MerchandiseSentToPC:
-	.string "{JPN}ここで かった ものは\nパソコンに とどけられる!\pなんと すばらしい! ついでに わしも\nいえまで とどけて くれないものか$"
+	.string "ここで かった ものは\nパソコンに とどけられる!\pなんと すばらしい! ついでに わしも\nいえまで とどけて くれないものか$"
 
 FortreeCity_DecorationShop_Text_BuyingDeskForDolls:
-	.string "{JPN}すてきな つくえを かって そのうえに\nかわいい ぬいぐるみを ならべるんだ!\pそうしないと ひみつきちに おくとき\nつちで よごれたり トゲが ささって\lぬいぐるみが かわいそう だもん!$"
+	.string "すてきな つくえを かって そのうえに\nかわいい ぬいぐるみを ならべるんだ!\pそうしないと ひみつきちに おくとき\nつちで よごれたり トゲが ささって\lぬいぐるみが かわいそう だもん!$"
 

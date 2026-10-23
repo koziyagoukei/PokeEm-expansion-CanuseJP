@@ -83,10 +83,10 @@ MtChimney_CableCarStation_Movement_ExitCableCar:
 	step_end
 
 MtChimney_CableCarStation_Text_CableCarReadyGetOn:
-	.string "{JPN}くだり ロープウェイ\nまもなく しゅっぱつ です\lごりように なられますか?$"
+	.string "くだり ロープウェイ\nまもなく しゅっぱつ です\lごりように なられますか?$"
 
 MtChimney_CableCarStation_Text_StepThisWay:
-	.string "{JPN}では こちらに どうぞ!$"
+	.string "では こちらに どうぞ!$"
 
 MtChimney_CableCarStation_Text_RideAnotherTime:
-	.string "{JPN}またの ごりようを\nよろしく おねがい しまーす!$"
+	.string "またの ごりようを\nよろしく おねがい しまーす!$"

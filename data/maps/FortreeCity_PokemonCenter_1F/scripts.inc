@@ -28,11 +28,11 @@ FortreeCity_PokemonCenter_1F_EventScript_Boy::
 	end
 
 FortreeCity_PokemonCenter_1F_Text_GoToSafariZone:
-	.string "{JPN}きみぃ\nポケモンずかん つくっておるのか?\pふむぅ 121ばん どうろの\nサファリゾーンに いっては どうかな?$"
+	.string "きみぃ\nポケモンずかん つくっておるのか?\pふむぅ 121ばん どうろの\nサファリゾーンに いっては どうかな?$"
 
 FortreeCity_PokemonCenter_1F_Text_RecordCornerIsNeat:
-	.string "{JPN}レコードコーナー つかってるかい?\pレコードって きろくの ことだろ\nきろくが いろいろ まざるって……\pよく わかんないけど すごいよな!\nワクワク しちゃうよ!$"
+	.string "レコードコーナー つかってるかい?\pレコードって きろくの ことだろ\nきろくが いろいろ まざるって……\pよく わかんないけど すごいよな!\nワクワク しちゃうよ!$"
 
 FortreeCity_PokemonCenter_1F_Text_DoYouKnowAboutPokenav:
-	.string "{JPN}おっ ポケナビ もってるな!\nおれと おんなじ だ\pポケナビの エントリーコール つかうと\nもういちど しょうぶ したがってる\lトレーナーが わかったり\lいつでも はなしが できるってのが\lすぐれもの だよな! さすが デボンだぜ!$"
+	.string "おっ ポケナビ もってるな!\nおれと おんなじ だ\pポケナビの エントリーコール つかうと\nもういちど しょうぶ したがってる\lトレーナーが わかったり\lいつでも はなしが できるってのが\lすぐれもの だよな! さすが デボンだぜ!$"
 

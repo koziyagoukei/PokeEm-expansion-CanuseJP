@@ -453,192 +453,192 @@ BattleFrontier_BattleFactoryPreBattleRoom_Movement_AttendantReturnToPlayer:
 	step_end
 
 BattleFrontier_BattleFactoryPreBattleRoom_Text_HoldMonsChooseFromSelection:
-	.string "{JPN}では まず おきゃくさまの\nポケモンを おあずかりして\lポケモンレンタルを おこないます!\lよーく かんがえて えらんで くださいよ!!"
+	.string "では まず おきゃくさまの\nポケモンを おあずかりして\lポケモンレンタルを おこないます!\lよーく かんがえて えらんで くださいよ!!"
 	.string ""
 	.string ""
 	.string "$"
 
 BattleFrontier_BattleFactoryPreBattleRoom_Text_LetUsRestoreMons:
-	.string "{JPN}おつかれさま です!\nポケモンを かいふく しましょう!"
+	.string "おつかれさま です!\nポケモンを かいふく しましょう!"
 	.string "$"
 
 BattleFrontier_BattleFactoryPreBattleRoom_Text_ReadyFor2ndOpponent:
-	.string "{JPN}つぎは 2せんめ ですよ!\nじゅんびは よろしい ですか?"
+	.string "つぎは 2せんめ ですよ!\nじゅんびは よろしい ですか?"
 	.string "$"
 
 BattleFrontier_BattleFactoryPreBattleRoom_Text_ReadyFor3rdOpponent:
-	.string "{JPN}つぎは 3せんめ ですよ!\nじゅんびは よろしい ですか?"
+	.string "つぎは 3せんめ ですよ!\nじゅんびは よろしい ですか?"
 	.string "$"
 
 BattleFrontier_BattleFactoryPreBattleRoom_Text_ReadyFor4thOpponent:
-	.string "{JPN}つぎは 4せんめ ですよ!\nじゅんびは よろしい ですか?"
+	.string "つぎは 4せんめ ですよ!\nじゅんびは よろしい ですか?"
 	.string "$"
 
 BattleFrontier_BattleFactoryPreBattleRoom_Text_ReadyFor5thOpponent:
-	.string "{JPN}つぎは 5せんめ ですよ!\nじゅんびは よろしい ですか?"
+	.string "つぎは 5せんめ ですよ!\nじゅんびは よろしい ですか?"
 	.string "$"
 
 BattleFrontier_BattleFactoryPreBattleRoom_Text_ReadyFor6thOpponent:
-	.string "{JPN}つぎは 6せんめ ですよ!\nじゅんびは よろしい ですか?"
+	.string "つぎは 6せんめ ですよ!\nじゅんびは よろしい ですか?"
 	.string "$"
 
 BattleFrontier_BattleFactoryPreBattleRoom_Text_ReadyFor7thOpponent:
-	.string "{JPN}いよいよ 7せんめ ですよ!\nじゅんびは よろしい ですか?"
+	.string "いよいよ 7せんめ ですよ!\nじゅんびは よろしい ですか?"
 	.string "$"
 
 BattleFrontier_BattleFactoryPreBattleRoom_Text_SaveAndQuitGame:
-	.string "{JPN}レポートを かいて\nしゅうりょう なさいますか?"
+	.string "レポートを かいて\nしゅうりょう なさいますか?"
 	.string "$"
 
 BattleFrontier_BattleFactoryPreBattleRoom_Text_RetireFromChallenge:
-	.string "{JPN}バトルトレードの ちょうせんを\nちゅうし されますか?"
+	.string "バトルトレードの ちょうせんを\nちゅうし されますか?"
 	.string "$"
 
 BattleFrontier_BattleFactoryPreBattleRoom_Text_InvestigatedUpcomingOpponent:
-	.string "{JPN}さあさあ!\nこんかいの たいせんあいて ですが\lわたしの ちょうさ では……"
+	.string "さあさあ!\nこんかいの たいせんあいて ですが\lわたしの ちょうさ では……"
 	.string "$"
 
 BattleFrontier_BattleFactoryPreBattleRoom_Text_TrainerSkilledInNormalType:
-	.string "{JPN}どうやら ノーマルタイプを\nとくいと して いて……"
+	.string "どうやら ノーマルタイプを\nとくいと して いて……"
 	.string "$"
 
 BattleFrontier_BattleFactoryPreBattleRoom_Text_TrainerSkilledInFireType:
-	.string "{JPN}どうやら ほのおタイプを\nとくいと して いて……"
+	.string "どうやら ほのおタイプを\nとくいと して いて……"
 	.string "$"
 
 BattleFrontier_BattleFactoryPreBattleRoom_Text_TrainerSkilledInWaterType:
-	.string "{JPN}どうやら みずタイプを\nとくいと して いて……"
+	.string "どうやら みずタイプを\nとくいと して いて……"
 	.string "$"
 
 BattleFrontier_BattleFactoryPreBattleRoom_Text_TrainerSkilledInElectricType:
-	.string "{JPN}どうやら でんきタイプを\nとくいと して いて……"
+	.string "どうやら でんきタイプを\nとくいと して いて……"
 	.string "$"
 
 BattleFrontier_BattleFactoryPreBattleRoom_Text_TrainerSkilledInGrassType:
-	.string "{JPN}どうやら くさタイプを\nとくいと して いて……"
+	.string "どうやら くさタイプを\nとくいと して いて……"
 	.string "$"
 
 BattleFrontier_BattleFactoryPreBattleRoom_Text_TrainerSkilledInIceType:
-	.string "{JPN}どうやら こおりタイプを\nとくいと して いて……"
+	.string "どうやら こおりタイプを\nとくいと して いて……"
 	.string "$"
 
 BattleFrontier_BattleFactoryPreBattleRoom_Text_TrainerSkilledInFightingType:
-	.string "{JPN}どうやら かくとうタイプを\nとくいと して いて……"
+	.string "どうやら かくとうタイプを\nとくいと して いて……"
 	.string "$"
 
 BattleFrontier_BattleFactoryPreBattleRoom_Text_TrainerSkilledInPoisonType:
-	.string "{JPN}どうやら どくタイプを\nとくいと して いて……"
+	.string "どうやら どくタイプを\nとくいと して いて……"
 	.string "$"
 
 BattleFrontier_BattleFactoryPreBattleRoom_Text_TrainerSkilledInGroundType:
-	.string "{JPN}どうやら じめんタイプを\nとくいと して いて……"
+	.string "どうやら じめんタイプを\nとくいと して いて……"
 	.string "$"
 
 BattleFrontier_BattleFactoryPreBattleRoom_Text_TrainerSkilledInFlyingType:
-	.string "{JPN}どうやら ひこうタイプを\nとくいと して いて……"
+	.string "どうやら ひこうタイプを\nとくいと して いて……"
 	.string "$"
 
 BattleFrontier_BattleFactoryPreBattleRoom_Text_TrainerSkilledInPsychicType:
-	.string "{JPN}どうやら エスパータイプを\nとくいと して いて……"
+	.string "どうやら エスパータイプを\nとくいと して いて……"
 	.string "$"
 
 BattleFrontier_BattleFactoryPreBattleRoom_Text_TrainerSkilledInBugType:
-	.string "{JPN}どうやら むしタイプを\nとくいと して いて……"
+	.string "どうやら むしタイプを\nとくいと して いて……"
 	.string "$"
 
 BattleFrontier_BattleFactoryPreBattleRoom_Text_TrainerSkilledInRockType:
-	.string "{JPN}どうやら いわタイプを\nとくいと して いて……"
+	.string "どうやら いわタイプを\nとくいと して いて……"
 	.string "$"
 
 BattleFrontier_BattleFactoryPreBattleRoom_Text_TrainerSkilledInGhostType:
-	.string "{JPN}どうやら ゴーストタイプを\nとくいと して いて……"
+	.string "どうやら ゴーストタイプを\nとくいと して いて……"
 	.string "$"
 
 BattleFrontier_BattleFactoryPreBattleRoom_Text_TrainerSkilledInDragonType:
-	.string "{JPN}どうやら ドラゴンタイプを\nとくいと して いて……"
+	.string "どうやら ドラゴンタイプを\nとくいと して いて……"
 	.string "$"
 
 BattleFrontier_BattleFactoryPreBattleRoom_Text_TrainerSkilledInDarkType:
-	.string "{JPN}どうやら あくタイプを\nとくいと して いて……"
+	.string "どうやら あくタイプを\nとくいと して いて……"
 	.string "$"
 
 BattleFrontier_BattleFactoryPreBattleRoom_Text_TrainerSkilledInFairyType:
-	.string "{JPN}どうやら フェアリータイプを\nとくいと して いて……"
+	.string "どうやら フェアリータイプを\nとくいと して いて……"
 	.string "$"
 
 BattleFrontier_BattleFactoryPreBattleRoom_Text_TrainerSkilledInSteelType:
-	.string "{JPN}どうやら はがねタイプを\nとくいと して いて……"
+	.string "どうやら はがねタイプを\nとくいと して いて……"
 	.string "$"
 
 BattleFrontier_BattleFactoryPreBattleRoom_Text_TrainerHasNoClearFavorite:
-	.string "{JPN}どうやら ポケモンの タイプには\nとくに こだわりが ないようで……"
+	.string "どうやら ポケモンの タイプには\nとくに こだわりが ないようで……"
 	.string "$"
 
 BattleFrontier_BattleFactoryPreBattleRoom_Text_StyleSlowAndSteady:
-	.string "{JPN}『じっくり じわじわ』とした バトルを\nこころがけている ようですよ!"
+	.string "『じっくり じわじわ』とした バトルを\nこころがけている ようですよ!"
 	.string "$"
 
 BattleFrontier_BattleFactoryPreBattleRoom_Text_StyleEndurance:
-	.string "{JPN}『まだまだ これから!』な バトルを\nこころがけている ようですよ!"
+	.string "『まだまだ これから!』な バトルを\nこころがけている ようですよ!"
 	.string "$"
 
 BattleFrontier_BattleFactoryPreBattleRoom_Text_StyleHighRisk:
-	.string "{JPN}『けんこん いってき』の バトルを\nこころがけている ようですよ!"
+	.string "『けんこん いってき』の バトルを\nこころがけている ようですよ!"
 	.string "$"
 
 BattleFrontier_BattleFactoryPreBattleRoom_Text_StyleDependsOnFlow:
-	.string "{JPN}『くもゆき しだい』の バトルを\nこころがけている かたの ようですよ!"
+	.string "『くもゆき しだい』の バトルを\nこころがけている かたの ようですよ!"
 	.string "$"
 
 BattleFrontier_BattleFactoryPreBattleRoom_Text_StyleTotalPreparation:
-	.string "{JPN}『じゅんび ばんたん』の バトルを\nこころがけている ようですよ!"
+	.string "『じゅんび ばんたん』の バトルを\nこころがけている ようですよ!"
 	.string "$"
 
 BattleFrontier_BattleFactoryPreBattleRoom_Text_StyleWeakenFoe:
-	.string "{JPN}『まずは よわらせて…』という バトルを\nこころがけている ようですよ!"
+	.string "『まずは よわらせて…』という バトルを\nこころがけている ようですよ!"
 	.string "$"
 
 BattleFrontier_BattleFactoryPreBattleRoom_Text_StyleFlexible:
-	.string "{JPN}『りんきおうへん』な バトルを\nこころがけている ようですよ!"
+	.string "『りんきおうへん』な バトルを\nこころがけている ようですよ!"
 	.string "$"
 
 BattleFrontier_BattleFactoryPreBattleRoom_Text_StyleImpossibleToPredict:
-	.string "{JPN}『よそく ふかのう』な バトルを\nこころがけている ようですよ!"
+	.string "『よそく ふかのう』な バトルを\nこころがけている ようですよ!"
 	.string "$"
 
 BattleFrontier_BattleFactoryPreBattleRoom_Text_StyleUnrestrained:
-	.string "{JPN}『じゆう ほんぽう』な バトルを\nこころがけている ようですよ!"
+	.string "『じゆう ほんぽう』な バトルを\nこころがけている ようですよ!"
 	.string "$"
 
 BattleFrontier_BattleFactoryPreBattleRoom_Text_LikeToSwapMon:
-	.string "{JPN}では バトルを はじめる まえに\nポケモンの こうかんを おこないますか?"
+	.string "では バトルを はじめる まえに\nポケモンの こうかんを おこないますか?"
 	.string "$"
 
 BattleFrontier_BattleFactoryPreBattleRoom_Text_YourSwapIsComplete:
-	.string "{JPN}おつかれさまです!\nポケモンこうかん かんりょう ですね!"
+	.string "おつかれさまです!\nポケモンこうかん かんりょう ですね!"
 	.string "$"
 
 BattleFrontier_BattleFactoryPreBattleRoom_Text_RightThisWay:
-	.string "{JPN}それでは おくに どうぞ!$"
+	.string "それでは おくに どうぞ!$"
 
 BattleFrontier_BattleFactoryPreBattleRoom_Text_SavingDataPleaseWait:
-	.string "{JPN}ただいま レポートを かいて います……\nしょうしょう おまちください"
+	.string "ただいま レポートを かいて います……\nしょうしょう おまちください"
 	.string "$"
 
 BattleFrontier_BattleFactoryPreBattleRoom_Text_RecordLatestBattle:
-	.string "{JPN}さきほどの たたかいを\nフロンティアパスに きろく しますか?"
+	.string "さきほどの たたかいを\nフロンティアパスに きろく しますか?"
 	.string "$"
 
 BattleFrontier_BattleFactoryPreBattleRoom_Text_WaitFewMoments:
-	.string "{JPN}もうしわけ ありません!\nしょうしょう おまちください!"
+	.string "もうしわけ ありません!\nしょうしょう おまちください!"
 	.string "$"
 
 BattleFrontier_BattleFactoryPreBattleRoom_Text_UnderstoodSirWillDo:
-	.string "{JPN}…… えっ …… ? ……ひぃっ!\nわっかりましたっ!! りょうかいです!"
+	.string "…… えっ …… ? ……ひぃっ!\nわっかりましたっ!! りょうかいです!"
 	.string "$"
 
 BattleFrontier_BattleFactoryPreBattleRoom_Text_MessageFromHeadComeRightNow:
-	.string "{JPN}やはは…… おまたせ しました!\pこのしせつの しょちょうで ある\nファクトリーヘッドからの でんごんが\lありますので おつたえ します!\p『やるぞっ! いますぐ こいっ!』\nとの ことです!"
+	.string "やはは…… おまたせ しました!\pこのしせつの しょちょうで ある\nファクトリーヘッドからの でんごんが\lありますので おつたえ します!\p『やるぞっ! いますぐ こいっ!』\nとの ことです!"
 	.string ""
 	.string ""
 	.string ""
@@ -646,9 +646,9 @@ BattleFrontier_BattleFactoryPreBattleRoom_Text_MessageFromHeadComeRightNow:
 	.string "$"
 
 BattleFrontier_BattleFactoryPreBattleRoom_Text_PreparedToFaceHead:
-	.string "{JPN}ファクトリーヘッドが およびです!\nかくごは よろしい ですか?"
+	.string "ファクトリーヘッドが およびです!\nかくごは よろしい ですか?"
 	.string "$"
 
 BattleFrontier_BattleFactoryPreBattleRoom_Text_CantTellAnythingAboutHead:
-	.string "{JPN}もうしわけ ありませんが\nファクトリーヘッドに ついての\lじょうほうは おおしえ できません!"
+	.string "もうしわけ ありませんが\nファクトリーヘッドに ついての\lじょうほうは おおしえ できません!"
 	.string "$"
