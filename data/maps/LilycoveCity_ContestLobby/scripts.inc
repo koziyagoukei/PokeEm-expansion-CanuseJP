@@ -127,9 +127,8 @@ LilycoveCity_ContestLobby_OnFrame:
 	.2byte 0
 
 LilycoveCity_ContestLobby_EventScript_TryDoContestArtist::
-	goto_if_set FLAG_HIDE_LILYCOVE_MUSEUM_CURATOR, LilycoveCity_ContestLobby_EventScript_ContestArtist
-	setvar VAR_LILYCOVE_CONTEST_LOBBY_STATE, 0
-	end
+	@ The bath gallery is available without visiting the museum curator.
+	goto LilycoveCity_ContestLobby_EventScript_ContestArtist
 
 LilycoveCity_ContestLobby_EventScript_ContestArtist::
 	lockall
@@ -297,9 +296,7 @@ LilycoveCity_ContestLobby_Movement_ArtistReturnToPlayer:
 	step_end
 
 LilycoveCity_ContestLobby_EventScript_TryDoLinkContestArtist::
-	goto_if_set FLAG_HIDE_LILYCOVE_MUSEUM_CURATOR, LilycoveCity_ContestLobby_EventScript_LinkContestArtist
-	setvar VAR_LILYCOVE_CONTEST_LOBBY_STATE, 0
-	end
+	goto LilycoveCity_ContestLobby_EventScript_LinkContestArtist
 
 LilycoveCity_ContestLobby_EventScript_LinkContestArtist::
 	lockall

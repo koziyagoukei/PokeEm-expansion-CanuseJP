@@ -330,6 +330,20 @@
 #define METATILE_Lavaridge_NormalGrass          0x206
 #define METATILE_Lavaridge_RockWall             0x274
 
+// gTileset_PartyBath
+#define METATILE_PartyBath_EmptyFrame_Left       0x3C0
+#define METATILE_PartyBath_EmptyFrame_Right      0x3C1
+#define METATILE_PartyBath_CoolPainting_Left     0x3C2
+#define METATILE_PartyBath_CoolPainting_Right    0x3C3
+#define METATILE_PartyBath_BeautyPainting_Left   0x3C4
+#define METATILE_PartyBath_BeautyPainting_Right  0x3C5
+#define METATILE_PartyBath_CutePainting_Left     0x3C6
+#define METATILE_PartyBath_CutePainting_Right    0x3C7
+#define METATILE_PartyBath_SmartPainting_Left    0x3C8
+#define METATILE_PartyBath_SmartPainting_Right   0x3C9
+#define METATILE_PartyBath_ToughPainting_Left    0x3CA
+#define METATILE_PartyBath_ToughPainting_Right   0x3CB
+
 // gTileset_LavenderTown
 #define METATILE_LavenderTown_Door  0x2A2
 

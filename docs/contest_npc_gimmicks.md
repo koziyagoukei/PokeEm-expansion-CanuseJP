@@ -61,9 +61,39 @@ link packet is extended.
   existing rule suppressing that bonus after receiving jam is unchanged.
 
 The original contest AI still supplies combo, repeat, order and effect scores;
-normal-only scoring adjusts those scores for active/planned gimmicks. A preset
+normal-only scoring adjusts those scores for active/planned gimmicks and tactical
+disruption opportunities. A preset
 does not randomly fall back to another gimmick. One gimmick per contest remains
 the rule, with only the existing Ultra Burst -> Z appeal exception.
+
+### Tactical disruption (2026-10-23)
+
+`ContestAI_GetTacticalScore()` supplements the existing scripts for normal NPCs:
+
+- Previous-target jams are valued by reachable targets and expected jam amount.
+  Front-only effects cannot skip a resting or protected immediate predecessor.
+- Disabled contestants, active Dynamax, immunity and single-use protection do
+  not offer jamming or nervousness rewards. Resistance/reduction also reduce jam value.
+- Category-, condition-, judge-attention- and appeal-dependent jams use their
+  own effect rules instead of just the static jam-heart number.
+- Nervousness favors later contestants with valuable appeals, combo attention
+  or a likely maximum-excitement bonus. Multi-target odds and condition resistance
+  are accounted for, including immune targets in the effect's chance denominator.
+- Audience suppression is worth more when following contestants can complete
+  the excitement meter. Completing the meter oneself is still rewarded, including
+  Z appeal's two-step increase and Tera's effective category.
+- Lost base appeal is subtracted from disruption value and the resulting bonus
+  is capped at 35 AI points. Existing combo and repetition scoring remains active.
+- Max appeals and the Ultra Burst-only turn receive no base-effect disruption
+  reward. No opponent's unactivated gimmick plan is inspected.
+
+All contestants choose before the round, so this is a forecast, not perfect
+knowledge of later appeals. It uses public order, the current excitement meter,
+previously revealed effective categories/moves, condition and active gimmicks.
+Before a contestant has revealed a move, it assumes a matching-category,
+three-heart appeal. It never reads an opponent's `currMove`, the player's cursor,
+or pending gimmick selection. No persistent storage, animations, move pools,
+link AI or ordinary battle AI are changed.
 
 ## Isolation
 
@@ -103,6 +133,19 @@ Z/Max/G-Max move IDs. Ordinary battles are not modified.
 - Ultra Burst's consumed turn and subsequent one-time signature Z appeal.
 - Three G-Max appeals, zero jam, shared hearts and no subsequent gimmick.
 - Linked NPC roster/selection remaining unchanged.
+- Tactical jam selection by order/target count; immunity, nerves, excitement,
+  effective categories, combo/repetition preservation and hidden-choice isolation.
+
+### Tactical AI verification (2026-10-23)
+
+- `make -j4 --output-sync=target check TESTS=Contest`: 67 tests passed, including
+  14 new tactical-AI test cases (with additional parameterized cases).
+- `make -j4 --output-sync=target`: passed; rebuilt `pokeemerald.gba`.
+- EWRAM remains 227,532 bytes; no new persistent AI allocation or save fields.
+- Actual move-selection tests cover early/late jam, later-target nervousness,
+  preserving a combo finisher and avoiding a repeated jam.
+- In-game frequency/balance over complete contests still needs playtesting.
+  The player's save is not modified by these tests.
 
 ## Expansion verification (2026-10-22)
 

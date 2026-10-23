@@ -5601,6 +5601,8 @@ static u8 GetNpcContestMoveChoice(u8 contestant)
         if (hasZMove && selected != CONTEST_GIMMICK_Z_APPEAL)
             continue;
         category = GetContestMoveCategoryWithGimmick(contestant, move);
+        score += ContestAI_GetTacticalScore(contestant, move, category,
+                                           Contest_GetMoveExcitementForContestant(contestant, move));
         if (selected != CONTEST_GIMMICK_NONE || gimmick->teraActive
             || gimmick->megaActive || gimmick->ultraActive || gimmick->dynamaxTurns != 0)
         {
@@ -7883,6 +7885,7 @@ bool8 SaveContestWinner(u8 rank)
         // but excludes the temporary save used by the artist
         u8 id = GetContestWinnerSaveIdx(rank, TRUE);
         gSaveBlock1Ptr->contestWinners[id].personality = gContestMons[i].personality;
+        gSaveBlock1Ptr->contestWinners[id].isShiny = gContestMons[i].isShiny;
         gSaveBlock1Ptr->contestWinners[id].species = gContestMons[i].species;
         gSaveBlock1Ptr->contestWinners[id].trainerId = gContestMons[i].otId;
         StringCopyN(gSaveBlock1Ptr->contestWinners[id].monName, gContestMons[i].nickname, VANILLA_POKEMON_NAME_LENGTH);

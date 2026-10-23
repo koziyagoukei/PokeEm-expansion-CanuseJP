@@ -1,7 +1,7 @@
 {
   "id": "MAP_PARTYBATHTIME",
   "name": "Partybathtime",
-  "layout": "LAYOUT_LAVARIDGE_TOWN",
+  "layout": "LAYOUT_PARTYBATHTIME",
   "music": "MUS_RG_MYSTERY_GIFT",
   "region_map_section": "MAPSEC_SPECIAL_AREA",
   "requires_flash": false,
@@ -104,5 +104,86 @@
     }
   ],
   "coord_events": [],
-  "bg_events": []
+  "bg_events": [
+    {
+      "type": "sign",
+      "x": 3,
+      "y": 2,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "LilycoveCity_LilycoveMuseum_2F_EventScript_CoolPainting"
+    },
+    {
+      "type": "sign",
+      "x": 4,
+      "y": 2,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "LilycoveCity_LilycoveMuseum_2F_EventScript_CoolPainting"
+    },
+    {
+      "type": "sign",
+      "x": 6,
+      "y": 2,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "LilycoveCity_LilycoveMuseum_2F_EventScript_BeautyPainting"
+    },
+    {
+      "type": "sign",
+      "x": 7,
+      "y": 2,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "LilycoveCity_LilycoveMuseum_2F_EventScript_BeautyPainting"
+    },
+    {
+      "type": "sign",
+      "x": 9,
+      "y": 2,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "LilycoveCity_LilycoveMuseum_2F_EventScript_CutePainting"
+    },
+    {
+      "type": "sign",
+      "x": 10,
+      "y": 2,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "LilycoveCity_LilycoveMuseum_2F_EventScript_CutePainting"
+    },
+    {
+      "type": "sign",
+      "x": 12,
+      "y": 2,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "LilycoveCity_LilycoveMuseum_2F_EventScript_SmartPainting"
+    },
+    {
+      "type": "sign",
+      "x": 13,
+      "y": 2,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "LilycoveCity_LilycoveMuseum_2F_EventScript_SmartPainting"
+    },
+    {
+      "type": "sign",
+      "x": 15,
+      "y": 2,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "LilycoveCity_LilycoveMuseum_2F_EventScript_ToughPainting"
+    },
+    {
+      "type": "sign",
+      "x": 16,
+      "y": 2,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "LilycoveCity_LilycoveMuseum_2F_EventScript_ToughPainting"
+    }
+  ]
 }

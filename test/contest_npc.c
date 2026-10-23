@@ -4,6 +4,7 @@
 #include "battle_gimmick.h"
 #include "battle_interface.h"
 #include "contest.h"
+#include "contest_ai.h"
 #include "contest_effect.h"
 #include "contest_npc.h"
 #include "contest_util.h"
@@ -59,6 +60,275 @@ static void FreeContest(void)
     FREE_AND_SET_NULL(gContestResources->moveAnim);
     FREE_AND_SET_NULL(gContestResources);
     gLinkContestFlags = 0;
+}
+
+static enum Move FindTacticalTestMove(u8 effect)
+{
+    for (enum Move move = MOVE_POUND; move < MOVES_COUNT; move++)
+        if (GetMoveContestEffect(move) == effect)
+            return move;
+    return MOVE_NONE;
+}
+
+TEST("Contest painting: museum save preserves species and both shiny states")
+{
+    bool32 shiny = FALSE;
+    PARAMETRIZE { shiny = FALSE; }
+    PARAMETRIZE { shiny = TRUE; }
+    InitContest();
+    gSpecialVar_ContestCategory = CONTEST_CATEGORY_COOL;
+    gSpecialVar_ContestRank = CONTEST_RANK_MASTER;
+    for (u32 i = 0; i < CONTESTANT_COUNT; i++)
+        gContestFinalStandings[i] = i == gContestPlayerMonIndex ? 0 : i + 1;
+    gContestMons[gContestPlayerMonIndex].species = SPECIES_RAYQUAZA;
+    gContestMons[gContestPlayerMonIndex].isShiny = shiny;
+    gContestMons[gContestPlayerMonIndex].personality = 12345;
+    gContestMons[gContestPlayerMonIndex].nickname[0] = EOS;
+    gContestMons[gContestPlayerMonIndex].trainerName[0] = EOS;
+    gSaveBlock1Ptr->contestWinners[MUSEUM_CONTEST_WINNERS_START].isShiny = !shiny;
+    EXPECT(SaveContestWinner(CONTEST_SAVE_FOR_MUSEUM));
+    const struct ContestWinner *painting = &gSaveBlock1Ptr->contestWinners[MUSEUM_CONTEST_WINNERS_START];
+    EXPECT_EQ(painting->species, SPECIES_RAYQUAZA);
+    EXPECT_EQ(painting->personality, 12345);
+    EXPECT_EQ((u32)painting->isShiny, shiny);
+    EXPECT_EQ((u32)painting->contestRank, CONTEST_RANK_MASTER);
+    FreeContest();
+}
+
+static void SetTacticalTestOrder(u8 contestant, u8 order)
+{
+    for (u32 i = 0; i < CONTESTANT_COUNT; i++)
+        if (eContestAppealResults.turnOrder[i] == order)
+        {
+            eContestAppealResults.turnOrder[i] = eContestAppealResults.turnOrder[contestant];
+            break;
+        }
+    eContestAppealResults.turnOrder[contestant] = order;
+}
+
+TEST("Contest AI: chooses jamming late and ordinary appeal first")
+{
+    u8 effect = CONTEST_EFFECT_STARTLE_PREV_MONS;
+    PARAMETRIZE { effect = CONTEST_EFFECT_STARTLE_PREV_MON; }
+    PARAMETRIZE { effect = CONTEST_EFFECT_STARTLE_PREV_MONS; }
+    PARAMETRIZE { effect = CONTEST_EFFECT_BADLY_STARTLE_FRONT_MON; }
+    PARAMETRIZE { effect = CONTEST_EFFECT_BADLY_STARTLE_PREV_MONS; }
+    InitContest();
+    gContestMons[0].moves[0] = FindTacticalTestMove(CONTEST_EFFECT_HIGHLY_APPEALING);
+    gContestMons[0].moves[1] = FindTacticalTestMove(effect);
+    EXPECT_NE(gContestMons[0].moves[0], MOVE_NONE);
+    EXPECT_NE(gContestMons[0].moves[1], MOVE_NONE);
+    EXPECT_EQ(Test_ContestChooseNpcMove(0), 0);
+    SetTacticalTestOrder(0, 3);
+    EXPECT_EQ(Test_ContestChooseNpcMove(0), 1);
+    FreeContest();
+}
+
+TEST("Contest AI: multi-target jam scales with reachable opponents, not contestant index")
+{
+    InitContest();
+    enum Move move = FindTacticalTestMove(CONTEST_EFFECT_STARTLE_PREV_MONS);
+    SetTacticalTestOrder(0, 1);
+    s16 one = ContestAI_GetTacticalScore(0, move, CONTEST_CATEGORY_COOL, 0);
+    SetTacticalTestOrder(0, 3);
+    s16 three = ContestAI_GetTacticalScore(0, move, CONTEST_CATEGORY_COOL, 0);
+    EXPECT_GT(three, one);
+    for (u32 i = 1; i < CONTESTANT_COUNT; i++)
+        eContestGimmickStatus[i].dynamaxTurns = 2;
+    EXPECT_LT(ContestAI_GetTacticalScore(0, move, CONTEST_CATEGORY_COOL, 0), 0);
+    FreeContest();
+}
+
+TEST("Contest AI: front-only jam does not skip an immune or resting immediate predecessor")
+{
+    u8 protection = 0;
+    PARAMETRIZE { protection = 0; }
+    PARAMETRIZE { protection = 1; }
+    PARAMETRIZE { protection = 2; }
+    PARAMETRIZE { protection = 3; }
+    InitContest();
+    SetTacticalTestOrder(0, 3);
+    if (protection == 0)
+        eContestantStatus[2].numTurnsSkipped = 1;
+    else if (protection == 1)
+        eContestantStatus[2].immune = TRUE;
+    else if (protection == 2)
+        eContestantStatus[2].jamSafetyCount = 1;
+    else
+        eContestGimmickStatus[2].dynamaxTurns = 1;
+    enum Move front = FindTacticalTestMove(CONTEST_EFFECT_BADLY_STARTLE_FRONT_MON);
+    enum Move all = FindTacticalTestMove(CONTEST_EFFECT_STARTLE_PREV_MONS);
+    EXPECT_LT(ContestAI_GetTacticalScore(0, front, CONTEST_CATEGORY_COOL, 0), 0);
+    EXPECT_GT(ContestAI_GetTacticalScore(0, all, CONTEST_CATEGORY_COOL, 0), 0);
+    FreeContest();
+}
+
+TEST("Contest AI: nerves target later performers and respect their condition")
+{
+    InitContest();
+    enum Move nervous = FindTacticalTestMove(CONTEST_EFFECT_MAKE_FOLLOWING_MONS_NERVOUS);
+    EXPECT_NE(nervous, MOVE_NONE);
+    gContestMons[0].moves[0] = FindTacticalTestMove(CONTEST_EFFECT_HIGHLY_APPEALING);
+    gContestMons[0].moves[1] = nervous;
+    // One strong following contestant makes the 60 percent effect worthwhile.
+    eContestantStatus[3].prevMove = gContestMons[0].moves[0];
+    SetTacticalTestOrder(0, 2);
+    EXPECT_EQ(Test_ContestChooseNpcMove(0), 1);
+    s16 baseline = ContestAI_GetTacticalScore(0, nervous, CONTEST_CATEGORY_COOL, 0);
+    eContestantStatus[3].condition = 30;
+    EXPECT_LT(ContestAI_GetTacticalScore(0, nervous, CONTEST_CATEGORY_COOL, 0), baseline);
+    eContestGimmickStatus[3].dynamaxTurns = 1;
+    EXPECT_LT(ContestAI_GetTacticalScore(0, nervous, CONTEST_CATEGORY_COOL, 0), 0);
+    SetTacticalTestOrder(0, 3);
+    EXPECT_EQ(Test_ContestChooseNpcMove(0), 0);
+    FreeContest();
+}
+
+TEST("Contest AI: audience suppression is valued before opponents can finish the meter")
+{
+    InitContest();
+    enum Move freeze = FindTacticalTestMove(CONTEST_EFFECT_DONT_EXCITE_AUDIENCE);
+    EXPECT_NE(freeze, MOVE_NONE);
+    s16 quiet = ContestAI_GetTacticalScore(0, freeze, CONTEST_CATEGORY_COOL, 1);
+    eContest.applauseLevel = 3;
+    EXPECT_GT(ContestAI_GetTacticalScore(0, freeze, CONTEST_CATEGORY_COOL, 1), quiet);
+    SetTacticalTestOrder(0, 3);
+    eContest.applauseLevel = 0;
+    EXPECT_LT(ContestAI_GetTacticalScore(0, freeze, CONTEST_CATEGORY_COOL, 1), 0);
+    FreeContest();
+}
+
+TEST("Contest AI: excitement forecasts favor high-appeal jam after a likely maximum bonus")
+{
+    InitContest();
+    SetTacticalTestOrder(0, 1);
+    enum Move jam = FindTacticalTestMove(CONTEST_EFFECT_BADLY_STARTLE_MONS_WITH_GOOD_APPEALS);
+    EXPECT_NE(jam, MOVE_NONE);
+    s16 quiet = ContestAI_GetTacticalScore(0, jam, CONTEST_CATEGORY_COOL, 0);
+    eContest.applauseLevel = 4;
+    EXPECT_GT(ContestAI_GetTacticalScore(0, jam, CONTEST_CATEGORY_COOL, 0), quiet);
+    FreeContest();
+}
+
+TEST("Contest AI: completes a combo instead of taking a small jamming gain")
+{
+    InitContest();
+    SetTacticalTestOrder(0, 1);
+    gContestMons[0].aiFlags = CONTEST_AI_CHECK_COMBO | CONTEST_AI_CHECK_BORING;
+    gContestMons[0].moves[0] = MOVE_GRASSY_GLIDE;
+    gContestMons[0].moves[1] = FindTacticalTestMove(CONTEST_EFFECT_STARTLE_PREV_MONS);
+    eContestantStatus[0].prevMove = MOVE_GRASSY_TERRAIN;
+    eContestantStatus[0].hasJudgesAttention = TRUE;
+    EXPECT_EQ(Test_ContestChooseNpcMove(0), 0);
+    FreeContest();
+}
+
+TEST("Contest AI: repeated jam does not eclipse a fresh appeal against one opponent")
+{
+    InitContest();
+    SetTacticalTestOrder(0, 1);
+    gContestMons[0].aiFlags = CONTEST_AI_CHECK_BORING;
+    gContestMons[0].moves[0] = FindTacticalTestMove(CONTEST_EFFECT_HIGHLY_APPEALING);
+    gContestMons[0].moves[1] = FindTacticalTestMove(CONTEST_EFFECT_STARTLE_PREV_MONS);
+    eContestantStatus[0].prevMove = gContestMons[0].moves[1];
+    EXPECT_EQ(Test_ContestChooseNpcMove(0), 0);
+    FreeContest();
+}
+
+TEST("Contest AI: matching Z appeal can finish the meter at three; a normal appeal cannot")
+{
+    InitContest();
+    enum Move appeal = FindTacticalTestMove(CONTEST_EFFECT_HIGHLY_APPEALING);
+    eContest.applauseLevel = 3;
+    EXPECT_GT(ContestAI_GetTacticalScore(0, appeal, CONTEST_CATEGORY_COOL, 2),
+              ContestAI_GetTacticalScore(0, appeal, CONTEST_CATEGORY_COOL, 1));
+    eContestExcitement.frozen = TRUE;
+    EXPECT_EQ(ContestAI_GetTacticalScore(0, appeal, CONTEST_CATEGORY_COOL, 2), 0);
+    FreeContest();
+}
+
+TEST("Contest AI: same-category jam uses the effective category, including Tera")
+{
+    InitContest();
+    SetTacticalTestOrder(0, 1);
+    enum Move jam = FindTacticalTestMove(CONTEST_EFFECT_STARTLE_MONS_SAME_TYPE_APPEAL);
+    EXPECT_NE(jam, MOVE_NONE);
+    eContestantStatus[1].prevMove = MOVE_POUND;
+    eContestantStatus[1].moveCategory = CONTEST_CATEGORY_COOL;
+    EXPECT_GT(ContestAI_GetTacticalScore(0, jam, CONTEST_CATEGORY_COOL, 0),
+              ContestAI_GetTacticalScore(0, jam, CONTEST_CATEGORY_CUTE, 0));
+    FreeContest();
+}
+
+TEST("Contest AI: audience override and repeatable effects stop applying during Dynamax")
+{
+    InitContest();
+    eContest.applauseLevel = 4;
+    enum Move excite = FindTacticalTestMove(CONTEST_EFFECT_EXCITE_AUDIENCE_IN_ANY_CONTEST);
+    enum Move repeat = FindTacticalTestMove(CONTEST_EFFECT_REPETITION_NOT_BORING);
+    EXPECT_NE(excite, MOVE_NONE);
+    EXPECT_NE(repeat, MOVE_NONE);
+    EXPECT_GT(ContestAI_GetTacticalScore(0, excite, CONTEST_CATEGORY_SMART, -1), 0);
+    eContestantStatus[0].prevMove = repeat;
+    EXPECT_GT(ContestAI_GetTacticalScore(0, repeat, CONTEST_CATEGORY_COOL, 1), 0);
+    eContestGimmickStatus[0].dynamaxTurns = 2;
+    EXPECT_EQ(ContestAI_GetTacticalScore(0, excite, CONTEST_CATEGORY_SMART, -1), 0);
+    EXPECT_EQ(ContestAI_GetTacticalScore(0, repeat, CONTEST_CATEGORY_COOL, 1), 0);
+    FreeContest();
+}
+
+TEST("Contest AI: does not reward jam or nerves replaced by Dynamax or Ultra Burst")
+{
+    u8 state = 0;
+    PARAMETRIZE { state = 0; }
+    PARAMETRIZE { state = 1; }
+    PARAMETRIZE { state = 2; }
+    InitContest();
+    if (state == 0)
+        eContestGimmickStatus[0].dynamaxTurns = 2;
+    else if (state == 1)
+        eContestGimmickStatus[0].selected = CONTEST_GIMMICK_DYNAMAX;
+    else
+        eContestGimmickStatus[0].selected = CONTEST_GIMMICK_ULTRA_BURST;
+    enum Move jam = FindTacticalTestMove(CONTEST_EFFECT_BADLY_STARTLE_PREV_MONS);
+    enum Move nerves = FindTacticalTestMove(CONTEST_EFFECT_MAKE_FOLLOWING_MONS_NERVOUS);
+    EXPECT_EQ(ContestAI_GetTacticalScore(0, nerves, CONTEST_CATEGORY_COOL, 0), 0);
+    SetTacticalTestOrder(0, 3);
+    EXPECT_EQ(ContestAI_GetTacticalScore(0, jam, CONTEST_CATEGORY_COOL, 0), 0);
+    FreeContest();
+}
+
+TEST("Contest AI: tactical scoring does not read hidden choices or mutate contest results")
+{
+    InitContest();
+    SetTacticalTestOrder(0, 3);
+    enum Move jam = FindTacticalTestMove(CONTEST_EFFECT_BADLY_STARTLE_PREV_MONS);
+    s16 before = ContestAI_GetTacticalScore(0, jam, CONTEST_CATEGORY_COOL, 1);
+    for (u32 i = 1; i < CONTESTANT_COUNT; i++)
+    {
+        eContestantStatus[i].currMove = MOVE_EXTREME_EVOBOOST;
+        eContestGimmickStatus[i].selected = CONTEST_GIMMICK_DYNAMAX;
+    }
+    struct ContestantStatus statuses[CONTESTANT_COUNT];
+    struct ContestGimmickStatus gimmicks[CONTESTANT_COUNT];
+    memcpy(statuses, eContestantStatus, sizeof(statuses));
+    memcpy(gimmicks, eContestGimmickStatus, sizeof(gimmicks));
+    EXPECT_EQ(ContestAI_GetTacticalScore(0, jam, CONTEST_CATEGORY_COOL, 1), before);
+    EXPECT_EQ(memcmp(statuses, eContestantStatus, sizeof(statuses)), 0);
+    EXPECT_EQ(memcmp(gimmicks, eContestGimmickStatus, sizeof(gimmicks)), 0);
+    EXPECT_EQ(eContest.applauseLevel, 0);
+    FreeContest();
+}
+
+TEST("Contest AI: tactical supplement is disabled in linked contests")
+{
+    InitContest();
+    SetTacticalTestOrder(0, 3);
+    enum Move jam = FindTacticalTestMove(CONTEST_EFFECT_BADLY_STARTLE_PREV_MONS);
+    EXPECT_GT(ContestAI_GetTacticalScore(0, jam, CONTEST_CATEGORY_COOL, 0), 0);
+    gLinkContestFlags = LINK_CONTEST_FLAG_IS_LINK;
+    EXPECT_EQ(ContestAI_GetTacticalScore(0, jam, CONTEST_CATEGORY_COOL, 0), 0);
+    FreeContest();
 }
 
 static bool32 CanLearn(enum Species species, enum Move move)

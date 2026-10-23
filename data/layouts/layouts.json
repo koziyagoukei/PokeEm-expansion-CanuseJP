@@ -4922,6 +4922,17 @@
       "blockdata_filepath": "data/layouts/MiniMiniVilla_LocalRoom/map.bin",
       "border_height": 2,
       "border_width": 2
+    },
+    {
+      "id": "LAYOUT_PARTYBATHTIME",
+      "name": "Partybathtime_Layout",
+      "width": 20,
+      "height": 20,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_PartyBath",
+      "border_filepath": "data/layouts/Partybathtime/border.bin",
+      "blockdata_filepath": "data/layouts/Partybathtime/map.bin",
+      "layout_version": "emerald"
     }
   ]
 }
