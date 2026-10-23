@@ -32,35 +32,35 @@ AbandonedShip_Rooms_1F_EventScript_ThaliaRematch::
 	end
 
 AbandonedShip_Rooms_1F_Text_TakingALookAround:
-	.string "{JPN}こういった ふねは めずらしいので\nけんがく しておるのですよ\pフムフム……\nほかにも へやが ありそうですな$"
+	.string "こういった ふねは めずらしいので\nけんがく しておるのですよ\pフムフム……\nほかにも へやが ありそうですな$"
 
 AbandonedShip_Rooms_1F_Text_ThaliaIntro:
-	.string "{JPN}あら こんな ところまで きて\nキミも ものずきね!$"
+	.string "あら こんな ところまで きて\nキミも ものずきね!$"
 
 AbandonedShip_Rooms_1F_Text_ThaliaDefeat:
-	.string "{JPN}ものずき だけじゃ なくて\nつよいのか……$"
+	.string "ものずき だけじゃ なくて\nつよいのか……$"
 
 AbandonedShip_Rooms_1F_Text_ThaliaPostBattle:
-	.string "{JPN}となりのへやの おじさん\nけんがく だなんて あやしいわ\pわたしに きが あるんじゃない かしら$"
+	.string "となりのへやの おじさん\nけんがく だなんて あやしいわ\pわたしに きが あるんじゃない かしら$"
 
 AbandonedShip_Rooms_1F_Text_ThaliaRegister:
-	.string "{JPN}つよい トレーナーの キミを\nきねんに とうろく させて ちょうだいね!$"
+	.string "つよい トレーナーの キミを\nきねんに とうろく させて ちょうだいね!$"
 
 AbandonedShip_Rooms_1F_Text_ThaliaRematchIntro:
-	.string "{JPN}こんな ところまで なんども きて\nほんとに ものずきね キミって!$"
+	.string "こんな ところまで なんども きて\nほんとに ものずきね キミって!$"
 
 AbandonedShip_Rooms_1F_Text_ThaliaRematchDefeat:
-	.string "{JPN}ちょっと つよすぎない?$"
+	.string "ちょっと つよすぎない?$"
 
 AbandonedShip_Rooms_1F_Text_ThaliaPostRematch:
-	.string "{JPN}あの おじさん ぜったい\nわたしの ことを みているのよ!\lわざとらしすぎるわ!$"
+	.string "あの おじさん ぜったい\nわたしの ことを みているのよ!\lわざとらしすぎるわ!$"
 
 AbandonedShip_Rooms_1F_Text_DemetriusIntro:
-	.string "{JPN}わーっ!\nみつかった…… って あれ?$"
+	.string "わーっ!\nみつかった…… って あれ?$"
 
 AbandonedShip_Rooms_1F_Text_DemetriusDefeat:
-	.string "{JPN}なんだ\nかあちゃん じゃ なかったのか$"
+	.string "なんだ\nかあちゃん じゃ なかったのか$"
 
 AbandonedShip_Rooms_1F_Text_DemetriusPostBattle:
-	.string "{JPN}かあちゃんに しかられて\nここまで にげて きたんだ\lボクが ここに いるのは ないしょだぞ!$"
+	.string "かあちゃんに しかられて\nここまで にげて きたんだ\lボクが ここに いるのは ないしょだぞ!$"
 

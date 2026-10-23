@@ -27,46 +27,46 @@ VictoryRoad_B1F_EventScript_Halle::
 	end
 
 VictoryRoad_B1F_Text_SamuelIntro:
-	.string "{JPN}ポケモンリーグに ちかづいていると おもうと\nなんだか ドキドキ してきたよ……$"
+	.string "ポケモンリーグに ちかづいていると おもうと\nなんだか ドキドキ してきたよ……$"
 
 VictoryRoad_B1F_Text_SamuelDefeat:
-	.string "{JPN}なにも できなかった……$"
+	.string "なにも できなかった……$"
 
 VictoryRoad_B1F_Text_SamuelPostBattle:
-	.string "{JPN}ポケモンリーグが とおのいたよ……\nなんだか がっかり するな……$"
+	.string "ポケモンリーグが とおのいたよ……\nなんだか がっかり するな……$"
 
 VictoryRoad_B1F_Text_ShannonIntro:
-	.string "{JPN}ポケモンリーグで かちぬくには\nポケモンへの しんらいが ひつよう なの$"
+	.string "ポケモンリーグで かちぬくには\nポケモンへの しんらいが ひつよう なの$"
 
 VictoryRoad_B1F_Text_ShannonDefeat:
-	.string "{JPN}しんらい かんけい バッチリね!$"
+	.string "しんらい かんけい バッチリね!$"
 
 VictoryRoad_B1F_Text_ShannonPostBattle:
-	.string "{JPN}いつも いっしょに いることで\nポケモンと トレーナーとの あいだに\lしんらい かんけいが できるの$"
+	.string "いつも いっしょに いることで\nポケモンと トレーナーとの あいだに\lしんらい かんけいが できるの$"
 
 VictoryRoad_B1F_Text_MichelleIntro:
-	.string "{JPN}ここは ゴール じゃないの\nポケモンリーグへの つうかてん よ!$"
+	.string "ここは ゴール じゃないの\nポケモンリーグへの つうかてん よ!$"
 
 VictoryRoad_B1F_Text_MichelleDefeat:
-	.string "{JPN}その ちょうし!$"
+	.string "その ちょうし!$"
 
 VictoryRoad_B1F_Text_MichellePostBattle:
-	.string "{JPN}あなたなら だいじょうぶよ きっと!\nポケモンも やるき まんまん だしね!$"
+	.string "あなたなら だいじょうぶよ きっと!\nポケモンも やるき まんまん だしね!$"
 
 VictoryRoad_B1F_Text_MitchellIntro:
-	.string "{JPN}わたしの ポケモンは すばらしいですよ!$"
+	.string "わたしの ポケモンは すばらしいですよ!$"
 
 VictoryRoad_B1F_Text_MitchellDefeat:
-	.string "{JPN}あなた みたいな かた\nはじめて です$"
+	.string "あなた みたいな かた\nはじめて です$"
 
 VictoryRoad_B1F_Text_MitchellPostBattle:
-	.string "{JPN}あなたと あなたの ポケモンが\nいっしょに いるだけで\lすごい パワーを かんじます$"
+	.string "あなたと あなたの ポケモンが\nいっしょに いるだけで\lすごい パワーを かんじます$"
 
 VictoryRoad_B1F_Text_HalleIntro:
-	.string "{JPN}オーケイ そんなに かまえないで!\nリラックス して いきましょ!$"
+	.string "オーケイ そんなに かまえないで!\nリラックス して いきましょ!$"
 
 VictoryRoad_B1F_Text_HalleDefeat:
-	.string "{JPN}ワンダフル!$"
+	.string "ワンダフル!$"
 
 VictoryRoad_B1F_Text_HallePostBattle:
-	.string "{JPN}チャンピオンロード だって\nいままでの みちのりと かわらないわ\lのこりも エンジョイしてね$"
+	.string "チャンピオンロード だって\nいままでの みちのりと かわらないわ\lのこりも エンジョイしてね$"

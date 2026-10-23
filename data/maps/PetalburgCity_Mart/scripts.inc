@@ -63,11 +63,11 @@ PetalburgCity_Mart_EventScript_Man::
 	end
 
 PetalburgCity_Mart_Text_WeakWillGrowStronger:
-	.string "{JPN}いまは よわい ポケモンでも\nそだててあげれば きっと つよくなる!\pだいじ なのは\nポケモンへの あいじょうよ!$"
+	.string "いまは よわい ポケモンでも\nそだててあげれば きっと つよくなる!\pだいじ なのは\nポケモンへの あいじょうよ!$"
 
 PetalburgCity_Mart_Text_RepelIsUseful:
-	.string "{JPN}むしよけスプレー つかってる?\nつかうと ポケモンが よってこないから\lいそぐとき べんり なんだぜ!$"
+	.string "むしよけスプレー つかってる?\nつかうと ポケモンが よってこないから\lいそぐとき べんり なんだぜ!$"
 
 PetalburgCity_Mart_Text_TakeSomeAntidotesWithYou:
-	.string "{JPN}きみ どくけし もってるかい?\pポケモン どくを くらったまま\nあるいていると たいりょく なくなって\lたおれちゃうから もっておくと いいよ!$"
+	.string "きみ どくけし もってるかい?\pポケモン どくを くらったまま\nあるいていると たいりょく なくなって\lたおれちゃうから もっておくと いいよ!$"
 

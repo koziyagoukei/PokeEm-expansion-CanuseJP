@@ -270,11 +270,11 @@ PlayersHouse_2F_EventScript_GameCube::
 	end
 
 PlayersHouse_2F_Text_ClockIsStopped:
-	.string "{JPN}かべの とけいが とまっている……\p"
+	.string "かべの とけいが とまっている……\p"
 	.string "{JPN}じかんを あわせて おかなくちゃ!$"
 
 PlayersHouse_2F_Text_HowDoYouLikeYourRoom:
-	.string "{JPN}ママ『{PLAYER}\n"
+	.string "ママ『{PLAYER}\n"
 	.string "{JPN}どう あたらしい へやは?\p"
 	.string "{JPN}うん! きれいに かたづいてるわね!\n"
 	.string "{JPN}したも もう かたづいたわ\l"
@@ -283,7 +283,7 @@ PlayersHouse_2F_Text_HowDoYouLikeYourRoom:
 	.string "{JPN}だいじょうぶか みておいてね$"
 
 PlayersHouse_2F_Text_Notebook:
-	.string "{JPN}{PLAYER}は ノートを ひらいた!\p"
+	.string "{PLAYER}は ノートを ひらいた!\p"
 	.string "{JPN}たんけんの こころえ その1\n"
 	.string "{JPN}スタートボタンで メニューが ひらく!\p"
 	.string "{JPN}たんけんの こころえ その2\n"
@@ -291,9 +291,9 @@ PlayersHouse_2F_Text_Notebook:
 	.string "{JPN}あとは まっしろ だ……$"
 
 Common_Text_LookCloserAtMap:
-	.string "{JPN}{PLAYER}は ホウエンちほうの\nタウンマップに かおを ちかづけた!$"
+	.string "{PLAYER}は ホウエンちほうの\nタウンマップに かおを ちかづけた!$"
 
 PlayersHouse_2F_Text_ItsAGameCube:
-	.string "{JPN}ゲームキューブが ある!\p"
+	.string "ゲームキューブが ある!\p"
 	.string "{JPN}コントローラの かわりに\n"
 	.string "{JPN}ゲームボーイ アドバンスが つながってる!$"

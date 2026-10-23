@@ -255,80 +255,80 @@ DewfordTown_Hall_EventScript_ReceivedSludgeBomb::
 	end
 
 DewfordTown_Hall_Text_CantImagineLifeWithoutTrend:
-	.string "{JPN}いまの はやりって いったら やっぱり\n「{STR_VAR_1}」よね!\p「{STR_VAR_1}」の ない\nせいかつ なんか かんがえられない!$"
+	.string "いまの はやりって いったら やっぱり\n「{STR_VAR_1}」よね!\p「{STR_VAR_1}」の ない\nせいかつ なんか かんがえられない!$"
 
 DewfordTown_Hall_Text_GettingBoredOfTrend:
-	.string "{JPN}いまの はやりって いったら やっぱり\n「{STR_VAR_1}」よね!\pでも もう そろそろ\nあきてきたなー\pあたらしい はやりでも さがそっかなー$"
+	.string "いまの はやりって いったら やっぱり\n「{STR_VAR_1}」よね!\pでも もう そろそろ\nあきてきたなー\pあたらしい はやりでも さがそっかなー$"
 
 DewfordTown_Hall_Text_TeachingMonAboutTrend:
-	.string "{JPN}わたしは ポケモンにも\n「{STR_VAR_1}」を\lおしえてるんだけど\pこれが なかなか\nたいへん なのよねー$"
+	.string "わたしは ポケモンにも\n「{STR_VAR_1}」を\lおしえてるんだけど\pこれが なかなか\nたいへん なのよねー$"
 
 DewfordTown_Hall_Text_DeepLinkBetweenXAndY:
-	.string "{JPN}いま はやりの\n「{STR_VAR_1}」のことを\lしらべてるんだけど\p「{STR_VAR_1}」と\n「{STR_VAR_2}」ってのは\pふかい かんけいが あるって いうのは\nほんとうの ことなのかい?$"
+	.string "いま はやりの\n「{STR_VAR_1}」のことを\lしらべてるんだけど\p「{STR_VAR_1}」と\n「{STR_VAR_2}」ってのは\pふかい かんけいが あるって いうのは\nほんとうの ことなのかい?$"
 
 DewfordTown_Hall_Text_MyHunchWasRight:
-	.string "{JPN}お!\nやっぱり そうなのか\pこれで おじさんも またいっぽ\nりゅうこうに ちかづいたぞ!$"
+	.string "お!\nやっぱり そうなのか\pこれで おじさんも またいっぽ\nりゅうこうに ちかづいたぞ!$"
 
 DewfordTown_Hall_Text_NotEasyToKeepUp:
-	.string "{JPN}なに!?\nそうなのか!?\pいやー おじさんが りゅうこうに\nついて いくのは たいへんだ!$"
+	.string "なに!?\nそうなのか!?\pいやー おじさんが りゅうこうに\nついて いくのは たいへんだ!$"
 
 DewfordTown_Hall_Text_TVShowAboutTrend:
-	.string "{JPN}「{STR_VAR_1}」の\nテレビって いうのは\lやってないのかのう……$"
+	.string "「{STR_VAR_1}」の\nテレビって いうのは\lやってないのかのう……$"
 
 DewfordTown_Hall_Text_IsTrendMorePopularAcrossSea:
-	.string "{JPN}うみの むこうでは\pもっと 「{STR_VAR_1}」が\nはやってるのかな?$"
+	.string "うみの むこうでは\pもっと 「{STR_VAR_1}」が\nはやってるのかな?$"
 
 DewfordTown_Hall_Text_CollectTrendMerchandise:
-	.string "{JPN}ぼくは 「{STR_VAR_1}」の\nグッズを いっぱい あつめて いるんだ!\p「{STR_VAR_1}」にんぎょう\nとか\p「{STR_VAR_1}」ようふく\p「{STR_VAR_1}」の えほん\nなんかも もってるよ\pいいだろー!\nほしくても あげないよー$"
+	.string "ぼくは 「{STR_VAR_1}」の\nグッズを いっぱい あつめて いるんだ!\p「{STR_VAR_1}」にんぎょう\nとか\p「{STR_VAR_1}」ようふく\p「{STR_VAR_1}」の えほん\nなんかも もってるよ\pいいだろー!\nほしくても あげないよー$"
 
 DewfordTown_Hall_Text_BooksAboutTrend:
-	.string "{JPN}『よい「{STR_VAR_1}」と\n わるい「{STR_VAR_1}」』\p『「{STR_VAR_1}」と\n ポケモンの かんけい』\p『やくにたつ\n 「{STR_VAR_1}」』\p「{STR_VAR_1}」に\nついての ほんが ずらっと ならんでいる!$"
+	.string "『よい「{STR_VAR_1}」と\n わるい「{STR_VAR_1}」』\p『「{STR_VAR_1}」と\n ポケモンの かんけい』\p『やくにたつ\n 「{STR_VAR_1}」』\p「{STR_VAR_1}」に\nついての ほんが ずらっと ならんでいる!$"
 
 DewfordTown_Hall_Text_TrendsScream:
-	.string "{JPN}『「{STR_VAR_1}」の\n さけび』\pという だいめい だ!$"
+	.string "『「{STR_VAR_1}」の\n さけび』\pという だいめい だ!$"
 
 DewfordTown_Hall_Text_TrendsSmile:
-	.string "{JPN}『「{STR_VAR_1}」の\n ほほえみ』\pという だいめい だ!$"
+	.string "『「{STR_VAR_1}」の\n ほほえみ』\pという だいめい だ!$"
 
 DewfordTown_Hall_Text_LastTrend:
-	.string "{JPN}『さいごの\n 「{STR_VAR_1}」』\pという だいめい だ!$"
+	.string "『さいごの\n 「{STR_VAR_1}」』\pという だいめい だ!$"
 
 DewfordTown_Hall_Text_BirthOfTrend:
-	.string "{JPN}『「{STR_VAR_1}」の\n たんじょう』\pという だいめい だ!$"
+	.string "『「{STR_VAR_1}」の\n たんじょう』\pという だいめい だ!$"
 
 DewfordTown_Hall_Text_SawTrendCoolestThing:
-	.string "{JPN}ぼく さいきん はやりの\p「{STR_VAR_1}」を\nみたんだ いいだろ!\pすごかったよ\nほんもの だぜ!$"
+	.string "ぼく さいきん はやりの\p「{STR_VAR_1}」を\nみたんだ いいだろ!\pすごかったよ\nほんもの だぜ!$"
 
 DewfordTown_Hall_Text_AllegedTrendNotAuthentic:
-	.string "{JPN}いや きみの みた\n「{STR_VAR_1}」は\lほんもの じゃないね!\pほんものは もっと\nキレが あるというか\lうつくしい というか……\pまあ とにかく\nもっと すごいんだよ!$"
+	.string "いや きみの みた\n「{STR_VAR_1}」は\lほんもの じゃないね!\pほんものは もっと\nキレが あるというか\lうつくしい というか……\pまあ とにかく\nもっと すごいんだよ!$"
 
 DewfordTown_Hall_Text_ComposedTrendThemeSong:
-	.string "{JPN}ぼく さいきん はやってる\n「{STR_VAR_1}」の\lテーマ きょくを かんがえたんだ\lきいてくれよ!\p……\pおー!\n{STR_VAR_1} ー!\pすばらしい\n{STR_VAR_1} ーー!!$"
+	.string "ぼく さいきん はやってる\n「{STR_VAR_1}」の\lテーマ きょくを かんがえたんだ\lきいてくれよ!\p……\pおー!\n{STR_VAR_1} ー!\pすばらしい\n{STR_VAR_1} ーー!!$"
 
 DewfordTown_Hall_Text_WorkOnYourSinging:
-	.string "{JPN}……\pきみは\n「{STR_VAR_1}」 よりも\pうたの べんきょうを\nしたほうが いいね$"
+	.string "……\pきみは\n「{STR_VAR_1}」 よりも\pうたの べんきょうを\nしたほうが いいね$"
 
 DewfordTown_Hall_Text_OrganizeTrendParty:
-	.string "{JPN}さっきの はなし\nなんだけどさ\pこんど この しまで\n「{STR_VAR_1}」\lパーティーを ひらこうぜ!$"
+	.string "さっきの はなし\nなんだけどさ\pこんど この しまで\n「{STR_VAR_1}」\lパーティーを ひらこうぜ!$"
 
 DewfordTown_Hall_Text_BrilliantIndeed:
-	.string "{JPN}お いいね!!\pだれが いちばん\n「{STR_VAR_1}」が\lうまいかを きめるんだね!\pじゃあ きょうから\p「{STR_VAR_1}」\nざんまいだ!$"
+	.string "お いいね!!\pだれが いちばん\n「{STR_VAR_1}」が\lうまいかを きめるんだね!\pじゃあ きょうから\p「{STR_VAR_1}」\nざんまいだ!$"
 
 DewfordTown_Hall_Text_TrendHasBecomePartOfLife:
-	.string "{JPN}……そうだなぁ\p「{STR_VAR_1}」は もう\nりゅうこう じゃなくて\pせいかつの いちぶ\nという かんじかなぁ?$"
+	.string "……そうだなぁ\p「{STR_VAR_1}」は もう\nりゅうこう じゃなくて\pせいかつの いちぶ\nという かんじかなぁ?$"
 
 DewfordTown_Hall_Text_TrendWeighsHeavilyOnMind:
-	.string "{JPN}え?\nそんなに!?\pきみは ねても さめても\n「{STR_VAR_1}」 のこと\lばっかり かんがえてる からな\p「{STR_VAR_1} はかせ」\nだね まったく$"
+	.string "え?\nそんなに!?\pきみは ねても さめても\n「{STR_VAR_1}」 のこと\lばっかり かんがえてる からな\p「{STR_VAR_1} はかせ」\nだね まったく$"
 
 DewfordTown_Hall_Text_IfWeTeamUpWellBeInvincible:
-	.string "{JPN}ぼくと きみが\nコンビを くめば\p『{STR_VAR_1}』では\nもう むてきって ことだな!$"
+	.string "ぼくと きみが\nコンビを くめば\p『{STR_VAR_1}』では\nもう むてきって ことだな!$"
 
 DewfordTown_Hall_Text_WellBeTrendDuo:
-	.string "{JPN}そのとおり!\p「{STR_VAR_1} コンビ」\nっていう かんじだね!\pハハハ!!$"
+	.string "そのとおり!\p「{STR_VAR_1} コンビ」\nっていう かんじだね!\pハハハ!!$"
 
 DewfordTown_Hall_Text_GiveYouSludgeBomb:
-	.string "{JPN}さいきん ぼくの なかでは\n「ヘドロばくだん」が だいブーム なのさ!\pえー きみ\n「ヘドロばくだん」 しらないの?\pそれは かわいそうだな\nよし! ぼくが あげるよ!$"
+	.string "さいきん ぼくの なかでは\n「ヘドロばくだん」が だいブーム なのさ!\pえー きみ\n「ヘドロばくだん」 しらないの?\pそれは かわいそうだな\nよし! ぼくが あげるよ!$"
 
 DewfordTown_Hall_Text_LoveSludgeBombButTrendInToo:
-	.string "{JPN}「ヘドロばくだん」も いいけど\n「{STR_VAR_1}」って\lわざを つかえる\lポケモンも いいよね!$"
+	.string "「ヘドロばくだん」も いいけど\n「{STR_VAR_1}」って\lわざを つかえる\lポケモンも いいよね!$"
 

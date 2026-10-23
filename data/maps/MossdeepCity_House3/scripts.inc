@@ -26,16 +26,16 @@ MossdeepCity_House3_EventScript_DeclineSuperRod::
 	end
 
 MossdeepCity_House3_Text_YouWantSuperRod:
-	.string "{JPN}おーい! トレーナーよお!\nすごいつりざおは ほんとうに すごいぞお\pなんたって かいていに いる\nポケモンも つりあげられる からのお!\pどお? ほしく なった?$"
+	.string "おーい! トレーナーよお!\nすごいつりざおは ほんとうに すごいぞお\pなんたって かいていに いる\nポケモンも つりあげられる からのお!\pどお? ほしく なった?$"
 
 MossdeepCity_House3_Text_SuperRodIsSuper:
-	.string "{JPN}そうだろ そうだろ! すごいつりざおは\nほんとうに すごい からのお!$"
+	.string "そうだろ そうだろ! すごいつりざおは\nほんとうに すごい からのお!$"
 
 MossdeepCity_House3_Text_TryDroppingRodInWater:
-	.string "{JPN}みずの ある ところなら\nどこでも つりざお つかうと いいぞお!$"
+	.string "みずの ある ところなら\nどこでも つりざお つかうと いいぞお!$"
 
 MossdeepCity_House3_Text_DontYouLikeToFish:
-	.string "{JPN}あら?\nつりは きらい なのかね?$"
+	.string "あら?\nつりは きらい なのかね?$"
 
 MossdeepCity_House3_Text_GoAfterSeafloorPokemon:
-	.string "{JPN}すごいつりざおで\nかいていの ポケモンも つりあげろお!$"
+	.string "すごいつりざおで\nかいていの ポケモンも つりあげろお!$"

@@ -6,5 +6,5 @@ OldaleTown_House1_EventScript_Woman::
 	end
 
 OldaleTown_House1_Text_LeftPokemonGoesOutFirst:
-	.string "{JPN}ポケモンしょうぶの とき\nポケモンの リストの ひだりに いる\lポケモンが とびだして たたかうの\pだから つれあるく ポケモンが ふえてきたら\nポケモンの じゅんばんを かえると\lしょうぶが ゆうりに なるかも!$"
+	.string "ポケモンしょうぶの とき\nポケモンの リストの ひだりに いる\lポケモンが とびだして たたかうの\pだから つれあるく ポケモンが ふえてきたら\nポケモンの じゅんばんを かえると\lしょうぶが ゆうりに なるかも!$"
 

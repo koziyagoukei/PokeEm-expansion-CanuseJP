@@ -39,11 +39,11 @@ VerdanturfTown_Mart_EventScript_Lass::
 	end
 
 VerdanturfTown_Mart_Text_XSpecialIsCrucial:
-	.string "{JPN}ポケモン しょうぶに\nスペシャルアップは かかせない!\pたたかいの ときだけ とはいえ\nわざの いりょくが あがるんだからな!$"
+	.string "ポケモン しょうぶに\nスペシャルアップは かかせない!\pたたかいの ときだけ とはいえ\nわざの いりょくが あがるんだからな!$"
 
 VerdanturfTown_Mart_Text_NoStrategyGuidesForBattleTent:
-	.string "{JPN}バトルテント ひっしょう\nこうりゃくぼん というのは\lうってない ですねえ……\pやはり じぶんで\nがんばらないと ダメなんですねえ$"
+	.string "バトルテント ひっしょう\nこうりゃくぼん というのは\lうってない ですねえ……\pやはり じぶんで\nがんばらないと ダメなんですねえ$"
 
 VerdanturfTown_Mart_Text_NestBallOnWeakenedPokemon:
-	.string "{JPN}シダケでしか かえない ネストボール\nよわい ポケモンほど つかまえ やすくなるの$"
+	.string "シダケでしか かえない ネストボール\nよわい ポケモンほど つかまえ やすくなるの$"
 

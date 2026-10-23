@@ -340,16 +340,16 @@ OldaleTown_Movement_ReturnToOriginalPosition:
 	step_end
 
 OldaleTown_Text_SavingMyProgress:
-	.string "{JPN}ちょっと ひとやすみ したいから\n"
+	.string "ちょっと ひとやすみ したいから\n"
 	.string "{JPN}レポート かいてるの$"
 
 OldaleTown_Text_IWorkAtPokemonMart:
-	.string "{JPN}おれ フレンドリィショップの てんいん!\p"
+	.string "おれ フレンドリィショップの てんいん!\p"
 	.string "{JPN}きみ! きみ!\n"
 	.string "{JPN}ちょっと ついてきて!$"
 
 OldaleTown_Text_ThisIsAPokemonMart:
-	.string "{JPN}ここが フレンドリィショップ!\n"
+	.string "ここが フレンドリィショップ!\n"
 	.string "{JPN}あおい やねが めじるし なのさ!\p"
 	.string "{JPN}ポケモンを つかまえる ボールとか\n"
 	.string "{JPN}いろんな グッズを うってるよ!\p"
@@ -357,37 +357,37 @@ OldaleTown_Text_ThisIsAPokemonMart:
 	.string "{JPN}これを あげよう!$"
 
 OldaleTown_Text_PotionExplanation:
-	.string "{JPN}どんな ときでも つかえる\n"
+	.string "どんな ときでも つかえる\n"
 	.string "{JPN}キズぐすりは ばあいに よっては\l"
 	.string "{JPN}ポケモンセンターより たよりに なるからね$"
 
 OldaleTown_Text_WaitDontComeInHere:
-	.string "{JPN}あーー!\n"
+	.string "あーー!\n"
 	.string "{JPN}こっちに はいらないで くれよ!\p"
 	.string "{JPN}めずらしい ポケモンの あしあとを\n"
 	.string "{JPN}はっけん したんだ!\l"
 	.string "{JPN}スケッチが おわるまで まっててくれよ$"
 
 OldaleTown_Text_DiscoveredFootprints:
-	.string "{JPN}めずらしい ポケモンの あしあとを\n"
+	.string "めずらしい ポケモンの あしあとを\n"
 	.string "{JPN}はっけん したんだ!\l"
 	.string "{JPN}スケッチが おわるまで まっててくれよ$"
 
 OldaleTown_Text_FinishedSketchingFootprints:
-	.string "{JPN}かんせい させた めずらしい\n"
+	.string "かんせい させた めずらしい\n"
 	.string "{JPN}ポケモンの あしあとの スケッチ\l"
 	.string "{JPN}よくみたら じぶんの あしあと だったよ……$"
 
 OldaleTown_Text_MayLetsGoBack:
-	.string "{JPN}ハルカ『{PLAYER}{KUN}!\n"
+	.string "ハルカ『{PLAYER}{KUN}!\n"
 	.string "{JPN}こっち こっち!\l"
 	.string "{JPN}はやく かえろうよ!$"
 
 OldaleTown_Text_BrendanLetsGoBack:
-	.string "{JPN}ユウキ『オレ さきに\n"
+	.string "ユウキ『オレ さきに\n"
 	.string "{JPN}けんきゅうじょに もどるから\l"
 	.string "{JPN}{PLAYER}も はやく こいよな$"
 
 OldaleTown_Text_TownSign:
-	.string "{JPN}ここは コトキ タウン\n"
+	.string "ここは コトキ タウン\n"
 	.string "{JPN}なにかが かすかに はじまる ところ$"

@@ -54,14 +54,14 @@ Route114_FossilManiacsTunnel_EventScript_PlayerRevivedFossil::
 	end
 
 Route114_FossilManiacsTunnel_Text_LookInDesertForFossils:
-	.string "{JPN}ぼく かせきマニア……\nかせき だいすき ナイスガイ さ……\pきみも カセキが ほしいの……?\pここで みつかる カセキは\nぜんぶ ぼくの ものだから あげないよ……\pどうしても ほしければ\nカセキの みつかりそうな\lいわや すなが おおい さばくでも\lさがして みなよ……$"
+	.string "ぼく かせきマニア……\nかせき だいすき ナイスガイ さ……\pきみも カセキが ほしいの……?\pここで みつかる カセキは\nぜんぶ ぼくの ものだから あげないよ……\pどうしても ほしければ\nカセキの みつかりそうな\lいわや すなが おおい さばくでも\lさがして みなよ……$"
 
 Route114_FossilManiacsTunnel_Text_DevonCorpRevivingFossils:
-	.string "{JPN}きみも カセキを みつけたんだね……\nすてき…… うっとり しちゃうよ……\pきみ その カセキ どうするの……?\pきいた はなしでは デボンでは\nカセキを ポケモンに いきかえらせる\lけんきゅうを している そうだよ……\pぼくは カセキが すきだから\nそんなこと しないけどね……$"
+	.string "きみも カセキを みつけたんだね……\nすてき…… うっとり しちゃうよ……\pきみ その カセキ どうするの……?\pきいた はなしでは デボンでは\nカセキを ポケモンに いきかえらせる\lけんきゅうを している そうだよ……\pぼくは カセキが すきだから\nそんなこと しないけどね……$"
 
 Route114_FossilManiacsTunnel_Text_FossilsAreWonderful:
-	.string "{JPN}カセキって……\nすてき…… うっとり しちゃうよ……$"
+	.string "カセキって……\nすてき…… うっとり しちゃうよ……$"
 
 Route114_FossilManiacsTunnel_Text_NotSafeThatWay:
-	.string "{JPN}あ……\nそっちに いくと あぶないよ……\pほりまくって いたら\nカベが くずれて しまったんだ……\pしたに おおきな くうどうが\nあるみたい だけど……\lカセキも なさそう だから\lそのままに してあるんだ……$"
+	.string "あ……\nそっちに いくと あぶないよ……\pほりまくって いたら\nカベが くずれて しまったんだ……\pしたに おおきな くうどうが\nあるみたい だけど……\lカセキも なさそう だから\lそのままに してあるんだ……$"
 

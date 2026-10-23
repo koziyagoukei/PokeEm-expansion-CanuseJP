@@ -196,7 +196,7 @@ RustboroCity_DevonCorp_3F_EventScript_RareRocksDisplay::
 	end
 
 RustboroCity_DevonCorp_3F_Text_MrStoneIHaveFavor:
-	.string "{JPN}わしが デボン コーポレーション\nしゃちょうの ツワブキ だ!\pきみの ことは さっき きいたよ!\pなんでも うちの けんきゅういんを\n2ども たすけてくれた とか\p……で そんな すごい きみに\nたのみごとを したいのだ!\pきみは にもつを とどけに\nカイナの ぞうせんじょに いくんだろう?\pその とちゅうに\nムロタウンにも よって ほしいのだよ!\pいやー ムロタウンに\nダイゴという おとこが いるはずでね\lちょいと てがみを とどけてほしいのだ!"
+	.string "わしが デボン コーポレーション\nしゃちょうの ツワブキ だ!\pきみの ことは さっき きいたよ!\pなんでも うちの けんきゅういんを\n2ども たすけてくれた とか\p……で そんな すごい きみに\nたのみごとを したいのだ!\pきみは にもつを とどけに\nカイナの ぞうせんじょに いくんだろう?\pその とちゅうに\nムロタウンにも よって ほしいのだよ!\pいやー ムロタウンに\nダイゴという おとこが いるはずでね\lちょいと てがみを とどけてほしいのだ!"
 	.string ""
 	.string ""
 	.string ""
@@ -212,18 +212,18 @@ RustboroCity_DevonCorp_3F_Text_MrStoneIHaveFavor:
 	.string "$"
 
 RustboroCity_DevonCorp_3F_Text_MrStoneWantYouToHaveThis:
-	.string "{JPN}ツワブキ『もちろん わしは\nすごーい しゃちょうで あるからな!\pただで おねがいすると いうような\nケチな まねは しないのだ!\pきみに こいつを プレゼントしよう!"
+	.string "ツワブキ『もちろん わしは\nすごーい しゃちょうで あるからな!\pただで おねがいすると いうような\nケチな まねは しないのだ!\pきみに こいつを プレゼントしよう!"
 	.string ""
 	.string ""
 	.string ""
 	.string "$"
 
 RustboroCity_DevonCorp_3F_Text_ReceivedPokenav:
-	.string "{JPN}{PLAYER}は\nポケナビを てにいれた!"
+	.string "{PLAYER}は\nポケナビを てにいれた!"
 	.string "$"
 
 RustboroCity_DevonCorp_3F_Text_MrStoneExplainPokenavRestUp:
-	.string "{JPN}ツワブキ『そいつは……\pポケモン ナビゲーター!\nりゃくして ポケナビ といってな\pぼうけんを する トレーナーの\nひつじゅひん なのだよ!\pそいつで ホウエンマップを みれば\nムロや カイナの ばしょ だって\lばっちり わかると いうものだ!\p……さいきんは アクアだの マグマだの\nといった あやしげな れんちゅうが\lあちこちで わるさを してるらしい\pまずは ひとやすみ していきなさい!"
+	.string "ツワブキ『そいつは……\pポケモン ナビゲーター!\nりゃくして ポケナビ といってな\pぼうけんを する トレーナーの\nひつじゅひん なのだよ!\pそいつで ホウエンマップを みれば\nムロや カイナの ばしょ だって\lばっちり わかると いうものだ!\p……さいきんは アクアだの マグマだの\nといった あやしげな れんちゅうが\lあちこちで わるさを してるらしい\pまずは ひとやすみ していきなさい!"
 	.string ""
 	.string ""
 	.string ""
@@ -237,34 +237,34 @@ RustboroCity_DevonCorp_3F_Text_MrStoneExplainPokenavRestUp:
 	.string "$"
 
 RustboroCity_DevonCorp_3F_Text_MrStoneGoWithCautionAndCare:
-	.string "{JPN}ツワブキ『それでは {PLAYER}{KUN}\nじゅうぶん きをつけて いくのだよ!"
+	.string "ツワブキ『それでは {PLAYER}{KUN}\nじゅうぶん きをつけて いくのだよ!"
 	.string "$"
 
 RustboroCity_DevonCorp_3F_Text_CountingOnYou:
-	.string "{JPN}ツワブキ『よろしく たのむよ!$"
+	.string "ツワブキ『よろしく たのむよ!$"
 
 RustboroCity_DevonCorp_3F_Text_ThankYouForDeliveringLetter:
-	.string "{JPN}ツワブキ『てがみを とどけて くれたんだね\nいやいや ありがとう!\pこいつは おれい だよ\nトレーナーの きみに やくだつ はずだ!"
+	.string "ツワブキ『てがみを とどけて くれたんだね\nいやいや ありがとう!\pこいつは おれい だよ\nトレーナーの きみに やくだつ はずだ!"
 	.string ""
 	.string ""
 	.string "$"
 
 RustboroCity_DevonCorp_3F_Text_ExplainExpShare:
-	.string "{JPN}ツワブキ『がくしゅうそうちを もたせた\nポケモンは しょうぶを しなくても\lけいけんちを わけて もらえる!\pよわい ポケモンを そだてるのに\nなかなか べんりな どうぐ なのだよ!"
+	.string "ツワブキ『がくしゅうそうちを もたせた\nポケモンは しょうぶを しなくても\lけいけんちを わけて もらえる!\pよわい ポケモンを そだてるのに\nなかなか べんりな どうぐ なのだよ!"
 	.string ""
 	.string ""
 	.string ""
 	.string "$"
 
 RustboroCity_DevonCorp_3F_Text_NotFamiliarWithTrends:
-	.string "{JPN}ツワブキ『わたしは わかいころ から\nしごと ばかり だったから\lいまいち わからんのだが……\pわかものは やはり トレーナーとして\nポケモンリーグを めざす もの なのかね"
+	.string "ツワブキ『わたしは わかいころ から\nしごと ばかり だったから\lいまいち わからんのだが……\pわかものは やはり トレーナーとして\nポケモンリーグを めざす もの なのかね"
 	.string ""
 	.string ""
 	.string ""
 	.string "$"
 
 RustboroCity_DevonCorp_3F_Text_ThisIs3rdFloorWaitHere:
-	.string "{JPN}ここが デボン コーポレーション 3かい\nしゃちょうの おへや なのよね!\pいやー! きみには\nかんしゃ かんげき あめ あられ なのです\pところで…… きみが\nとりもどしてくれた にもつ\pそいつを カイナシティの ぞうせんじょ\nつまり ふねの こうじょうへ\lとどけて ほしいのです!\pまた おかしな やつらに\nうばわれては たまりません からね\pえへへ……\nよろしく おねがい しますよ\pちょっと まっていて くださいね"
+	.string "ここが デボン コーポレーション 3かい\nしゃちょうの おへや なのよね!\pいやー! きみには\nかんしゃ かんげき あめ あられ なのです\pところで…… きみが\nとりもどしてくれた にもつ\pそいつを カイナシティの ぞうせんじょ\nつまり ふねの こうじょうへ\lとどけて ほしいのです!\pまた おかしな やつらに\nうばわれては たまりません からね\pえへへ……\nよろしく おねがい しますよ\pちょっと まっていて くださいね"
 	.string ""
 	.string ""
 	.string ""
@@ -280,25 +280,25 @@ RustboroCity_DevonCorp_3F_Text_ThisIs3rdFloorWaitHere:
 	.string "$"
 
 RustboroCity_DevonCorp_3F_Text_WordWithPresidentComeWithMe:
-	.string "{JPN}しゃちょうが ぜひ\nおはなし したいそうです\pわたしに ついて きてください"
+	.string "しゃちょうが ぜひ\nおはなし したいそうです\pわたしに ついて きてください"
 	.string ""
 	.string "$"
 
 RustboroCity_DevonCorp_3F_Text_PleaseGoAhead:
-	.string "{JPN}ささ どうぞ!$"
+	.string "ささ どうぞ!$"
 
 RustboroCity_DevonCorp_3F_Text_VisitCaptSternShipyard:
-	.string "{JPN}カイナの ぞうせんじょ には\nクスノキさん という ひとが いるから\lかれを たずねていくと いいですよ!"
+	.string "カイナの ぞうせんじょ には\nクスノキさん という ひとが いるから\lかれを たずねていくと いいですよ!"
 	.string ""
 	.string "$"
 
 RustboroCity_DevonCorp_3F_Text_RepeatAndTimerHugelyPopular:
-	.string "{JPN}デボンの しんせいひん\nリピートボールと タイマーボール\lトレーナーに だいにんき なのよね!"
+	.string "デボンの しんせいひん\nリピートボールと タイマーボール\lトレーナーに だいにんき なのよね!"
 	.string ""
 	.string "$"
 
 RustboroCity_DevonCorp_3F_Text_RareRocksDisplay:
-	.string "{JPN}しゃちょうの あつめた\nめずらしい いしが かざってある!"
+	.string "しゃちょうの あつめた\nめずらしい いしが かざってある!"
 	.string "$"
 
 

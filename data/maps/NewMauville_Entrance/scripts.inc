@@ -47,13 +47,13 @@ NewMauville_Entrance_EventScript_DontOpenDoor::
 	end
 
 NewMauville_Entrance_Text_DoorIsLocked:
-	.string "{JPN}とびらは しまっている$"
+	.string "とびらは しまっている$"
 
 NewMauville_Entrance_Text_UseBasementKey:
-	.string "{JPN}ちかのカギを つかいますか？$"
+	.string "ちかのカギを つかいますか？$"
 
 NewMauville_Entrance_Text_UsedBasementKey:
-	.string "{JPN}{PLAYER}は\n"
+	.string "{PLAYER}は\n"
 	.string "ちかのカギを つかった！\p"
 	.string "とびらは ひらいた！$"
 

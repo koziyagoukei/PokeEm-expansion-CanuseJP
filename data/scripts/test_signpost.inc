@@ -1,5 +1,5 @@
 Text_ThisIsATestSignpostMsg::
-	.string "{JPN}これは テストメッセージです\n"
+	.string "これは テストメッセージです\n"
 	.string "ここは かんばんです$"
 
 EventScript_TestSignpostMsg::

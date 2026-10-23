@@ -438,27 +438,27 @@ BattleFrontier_BattleTowerMultiBattleRoom_Movement_WalkInPlaceLeft:
 	step_end
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_ReadyFor2ndOpponentSet:
-	.string "{JPN}つぎは 2くみめの あいてです\n"
+	.string "つぎは 2くみめの あいてです\n"
 	.string "じゅんびは よろしいですか?$"
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_ReadyFor3rdOpponentSet:
-	.string "{JPN}つぎは 3くみめの あいてです\n"
+	.string "つぎは 3くみめの あいてです\n"
 	.string "じゅんびは よろしいですか?$"
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_ReadyFor4thOpponentSet:
-	.string "{JPN}つぎは 4くみめの あいてです\n"
+	.string "つぎは 4くみめの あいてです\n"
 	.string "じゅんびは よろしいですか?$"
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_ReadyFor5thOpponentSet:
-	.string "{JPN}つぎは 5くみめの あいてです\n"
+	.string "つぎは 5くみめの あいてです\n"
 	.string "じゅんびは よろしいですか?$"
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_ReadyFor6thOpponentSet:
-	.string "{JPN}つぎは 6くみめの あいてです\n"
+	.string "つぎは 6くみめの あいてです\n"
 	.string "じゅんびは よろしいですか?$"
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_ReadyFor7thOpponentSet:
-	.string "{JPN}つぎは 7くみめの あいてです\n"
+	.string "つぎは 7くみめの あいてです\n"
 	.string "じゅんびは よろしいですか?$"
 
 @ Unused
@@ -492,7 +492,7 @@ BattleFrontier_BattleTowerMultiBattleRoom_Text_7thOpponentSetNext:
 	.string "がんばってください!$"
 
 gText_LinkStandby3::
-	.string "{JPN}つうしん まちです...$"
+	.string "つうしん まちです...$"
 
 gText_YourPartnerHasRetired::
 	.string "{JPN}パートナーが リタイアしました\p"

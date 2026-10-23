@@ -274,7 +274,7 @@ LavaridgeTown_EventScript_HerbShopSign::
 	end
 
 LavaridgeTown_Text_MayNiceBadgesTakeThis:
-	.string "{JPN}ハルカ『{PLAYER}{KUN}! ひさしぶり!\pあら? あたしが おんせんに\nはいったり してる あいだに\lフエンの ジムバッジ てに いれたんだ!\pかなり ポケモン あつめてる っていうか\nそだてて いるんだね!\pじゃあ これを あげても\nだいじょうぶ だよね"
+	.string "ハルカ『{PLAYER}{KUN}! ひさしぶり!\pあら? あたしが おんせんに\nはいったり してる あいだに\lフエンの ジムバッジ てに いれたんだ!\pかなり ポケモン あつめてる っていうか\nそだてて いるんだね!\pじゃあ これを あげても\nだいじょうぶ だよね"
 	.string ""
 	.string ""
 	.string ""
@@ -284,10 +284,10 @@ LavaridgeTown_Text_MayNiceBadgesTakeThis:
 	.string "$"
 
 LavaridgeTown_Text_MayExplainGoGogglesChallengeDad:
-	.string "{JPN}ハルカ『その ゴーゴーゴーグルが あると\n111ばん どうろの さばくにも\lはいれるように なるんだよ!\pそれにしても {PLAYER}{KUN}\nポケモンジムに ちょうせん だなんて……\pあたしに まけたくない からって\nがんばって いるのね!\pじゃあ あたし トウカで {PLAYER}{KUN}の\nおとうさんに ちょうせん しようかな?\p{PLAYER}{KUN} じゃあ またね!$"
+	.string "ハルカ『その ゴーゴーゴーグルが あると\n111ばん どうろの さばくにも\lはいれるように なるんだよ!\pそれにしても {PLAYER}{KUN}\nポケモンジムに ちょうせん だなんて……\pあたしに まけたくない からって\nがんばって いるのね!\pじゃあ あたし トウカで {PLAYER}{KUN}の\nおとうさんに ちょうせん しようかな?\p{PLAYER}{KUN} じゃあ またね!$"
 
 LavaridgeTown_Text_BrendanNiceBadgesTakeThis:
-	.string "{JPN}ユウキ『{PLAYER} ひさしぶり だな\nちょうしは どう?\pふうん……\nバッジは けっこう あつめてるんだな\pじゃ\nこいつを やろうかな?"
+	.string "ユウキ『{PLAYER} ひさしぶり だな\nちょうしは どう?\pふうん……\nバッジは けっこう あつめてるんだな\pじゃ\nこいつを やろうかな?"
 	.string ""
 	.string ""
 	.string ""
@@ -295,7 +295,7 @@ LavaridgeTown_Text_BrendanNiceBadgesTakeThis:
 	.string "$"
 
 LavaridgeTown_Text_BrendanExplainGoGogglesChallengeDad:
-	.string "{JPN}ユウキ『それを もっていれば\n111ばん どうろの さばくに はいれるよ\pさばくにしか いない\nポケモンも いるはず だから\lよかったら いけば……?\pオレは……\nトウカの ジムリーダー センリさんに\lちょうせん してみようかな……\p{PLAYER}の とうさん\n{PLAYER}と ちがって つよそうだからな\pじゃな!"
+	.string "ユウキ『それを もっていれば\n111ばん どうろの さばくに はいれるよ\pさばくにしか いない\nポケモンも いるはず だから\lよかったら いけば……?\pオレは……\nトウカの ジムリーダー センリさんに\lちょうせん してみようかな……\p{PLAYER}の とうさん\n{PLAYER}と ちがって つよそうだからな\pじゃな!"
 	.string ""
 	.string ""
 	.string ""
@@ -309,7 +309,7 @@ LavaridgeTown_Text_BrendanExplainGoGogglesChallengeDad:
 	.string "$"
 
 LavaridgeTown_Text_HaveEggWillYouTakeIt:
-	.string "{JPN}タマゴを かえそうと おもって\nすなぶろに いれて あたためていたが\lそれだけ じゃあ だめらしいの……\pなんでも げんきな ポケモンと いっしょに\nつれてあるいた ほうが いいそうな……\pおまえさん トレーナー じゃろ?\nしかも げんきな ポケモンを つれておる\pどうかね?\nタマゴを かえして みるかね?"
+	.string "タマゴを かえそうと おもって\nすなぶろに いれて あたためていたが\lそれだけ じゃあ だめらしいの……\pなんでも げんきな ポケモンと いっしょに\nつれてあるいた ほうが いいそうな……\pおまえさん トレーナー じゃろ?\nしかも げんきな ポケモンを つれておる\pどうかね?\nタマゴを かえして みるかね?"
 	.string ""
 	.string ""
 	.string ""
@@ -322,28 +322,28 @@ LavaridgeTown_Text_HaveEggWillYouTakeIt:
 	.string "$"
 
 LavaridgeTown_Text_HopeYoullWalkPlentyWithEgg:
-	.string "{JPN}タマゴと いっしょに\nたーっぷり あるいて おくれ!"
+	.string "タマゴと いっしょに\nたーっぷり あるいて おくれ!"
 	.string "$"
 
 LavaridgeTown_Text_ReceivedTheEgg:
-	.string "{JPN}{PLAYER}は\nタマゴを もらった!$"
+	.string "{PLAYER}は\nタマゴを もらった!$"
 
 LavaridgeTown_Text_NoRoomForThisEgg:
-	.string "{JPN}あれ? ポケモン いっぱいで\nタマゴを つれて あるけないよ……"
+	.string "あれ? ポケモン いっぱいで\nタマゴを つれて あるけないよ……"
 	.string "$"
 
 LavaridgeTown_Text_AsYouWishThen:
-	.string "{JPN}そうかね……\pまあ タマゴを かえしたく なったら\nまた はなしかけて おくれよ"
+	.string "そうかね……\pまあ タマゴを かえしたく なったら\nまた はなしかけて おくれよ"
 	.string ""
 	.string "$"
 
 LavaridgeTown_Text_EverySoOftenEggFoundAtDayCare:
-	.string "{JPN}ポケモンの タマゴは\nときどき そだてやさんで みつかる……\pそんな うわさを きいたよ"
+	.string "ポケモンの タマゴは\nときどき そだてやさんで みつかる……\pそんな うわさを きいたよ"
 	.string ""
 	.string "$"
 
 LavaridgeTown_Text_HotSpringsNeverRunDry:
-	.string "{JPN}くめども くめども おゆが でる\nポットでも ないのに おゆが でる\p……ふしぎ じゃろ?\pかざんが ちかくに あるところ では\nちかすいが ようがんの ねつで\lあたためられて いるのじゃよ!"
+	.string "くめども くめども おゆが でる\nポットでも ないのに おゆが でる\p……ふしぎ じゃろ?\pかざんが ちかくに あるところ では\nちかすいが ようがんの ねつで\lあたためられて いるのじゃよ!"
 	.string ""
 	.string ""
 	.string ""
@@ -352,45 +352,45 @@ LavaridgeTown_Text_HotSpringsNeverRunDry:
 	.string "$"
 
 LavaridgeTown_Text_PokemonNippedBackside:
-	.string "{JPN}こうして すなに うまっていると\nはあぁ……\pあたたかくって イイキモチ……\p……ん? イテテッ!\pしりを ポケモンに かまれた!"
+	.string "こうして すなに うまっていると\nはあぁ……\pあたたかくって イイキモチ……\p……ん? イテテッ!\pしりを ポケモンに かまれた!"
 	.string ""
 	.string ""
 	.string ""
 	.string "$"
 
 LavaridgeTown_Text_OhYouLikeHotSprings:
-	.string "{JPN}おや あんた\nおんせんが すき なのかい?\pまだ わかいのに めずらしいねえ……"
+	.string "おや あんた\nおんせんが すき なのかい?\pまだ わかいのに めずらしいねえ……"
 	.string ""
 	.string "$"
 
 LavaridgeTown_Text_BatheInHotSpringsEveryDay:
-	.string "{JPN}あたし アスナさん みたいに\nすてきで つよい ジムリーダーに なるため\lまいにち おんせんに はいってるの!"
+	.string "あたし アスナさん みたいに\nすてきで つよい ジムリーダーに なるため\lまいにち おんせんに はいってるの!"
 	.string ""
 	.string "$"
 
 LavaridgeTown_Text_IfPokemonInHotSprings:
-	.string "{JPN}おんせんに ポケモン いれると\nでんきぶろや あわぶろ はたまた\lようがんぶろに なって すごそうだわ"
+	.string "おんせんに ポケモン いれると\nでんきぶろや あわぶろ はたまた\lようがんぶろに なって すごそうだわ"
 	.string ""
 	.string ""
 	.string "$"
 
 LavaridgeTown_Text_HotSpringsClaims:
-	.string "{JPN}この おんせんは……\pしんけいつう きんにくつう それから\nれんあいのなやみ おかねもうけ などに\lこうかてき なんだとさ……"
+	.string "この おんせんは……\pしんけいつう きんにくつう それから\nれんあいのなやみ おかねもうけ などに\lこうかてき なんだとさ……"
 	.string ""
 	.string ""
 	.string ""
 	.string "$"
 
 LavaridgeTown_Text_TownSign:
-	.string "{JPN}ここは フエン タウン\nポケセン おんせん よいところ"
+	.string "ここは フエン タウン\nポケセン おんせん よいところ"
 	.string ""
 	.string "$"
 
 LavaridgeTown_Text_GymSign:
-	.string "{JPN}フエン タウン ポケモンジム\nリーダー アスナ\lやけど しそうな じょうねつの ひと"
+	.string "フエン タウン ポケモンジム\nリーダー アスナ\lやけど しそうな じょうねつの ひと"
 	.string ""
 	.string "$"
 
 LavaridgeTown_Text_HerbShopSign:
-	.string "{JPN}「ポケモン かんぽうやく」\nりょうやく くちに にがし!"
+	.string "「ポケモン かんぽうやく」\nりょうやく くちに にがし!"
 	.string "$"

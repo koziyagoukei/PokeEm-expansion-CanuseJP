@@ -112,5 +112,5 @@ AbandonedShip_HiddenFloorRooms_EventScript_Trash::
 	end
 
 AbandonedShip_HiddenFloorRooms_Text_BrightShinyTrash:
-	.string "{JPN}ひかっているだけの\nただの ゴミ だった……$"
+	.string "ひかっているだけの\nただの ゴミ だった……$"
 

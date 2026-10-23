@@ -273,17 +273,17 @@ SlateportCity_BattleTentLobby_EventScript_ExitRules::
 	end
 
 SlateportCity_BattleTentLobby_Text_CouldntFindMonForMe:
-	.string "{JPN}なかなか かりたい ポケモンが\nみつからねぇ からよぉ\lそこの にーさんに もんく いったけどよぉ\pちぃっとも あいて してくれねぇのさ\nくやしいったら ありゃ しねぇぜ！\pおい おまえ！\nだまって これを うけとれよぉ！$"
+	.string "なかなか かりたい ポケモンが\nみつからねぇ からよぉ\lそこの にーさんに もんく いったけどよぉ\pちぃっとも あいて してくれねぇのさ\nくやしいったら ありゃ しねぇぜ！\pおい おまえ！\nだまって これを うけとれよぉ！$"
 
 SlateportCity_BattleTentLobby_Text_ExplainTorment:
-	.string "{JPN}わざマシン41は いちゃもん！\pあいてによぉ おなじ わざを つづけて\nださせねえように する わざ なんだよぉ！\pいっとくけどなぁ\nおれは いちゃもん つけてねぇぞ！$"
+	.string "わざマシン41は いちゃもん！\pあいてによぉ おなじ わざを つづけて\nださせねえように する わざ なんだよぉ！\pいっとくけどなぁ\nおれは いちゃもん つけてねぇぞ！$"
 
 SlateportCity_BattleTentLobby_Text_IllTryUsingBugMons:
-	.string "{JPN}たまには にがてな\nむしタイプの ポケモンでも\lつかって みようかな？\lスキに なるかも しれないし！$"
+	.string "たまには にがてな\nむしタイプの ポケモンでも\lつかって みようかな？\lスキに なるかも しれないし！$"
 
 SlateportCity_BattleTentLobby_Text_BattleEvenWithoutToughMons:
-	.string "{JPN}つよい ポケモン もってなくても\nここでなら いっぱい しょうぶできるね！$"
+	.string "つよい ポケモン もってなくても\nここでなら いっぱい しょうぶできるね！$"
 
 SlateportCity_BattleTentLobby_Text_NiceIfMoreSelection:
-	.string "{JPN}ステキな トレーナーの おにいさんも\nかしだして くれれば いいのにぃ$"
+	.string "ステキな トレーナーの おにいさんも\nかしだして くれれば いいのにぃ$"
 

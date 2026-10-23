@@ -10,8 +10,8 @@ OldaleTown_House2_EventScript_Man::
 	end
 
 OldaleTown_House2_Text_PokemonLevelUp:
-	.string "{JPN}ポケモンって たたかうと\nレベルアップして つよくなるのよ!$"
+	.string "ポケモンって たたかうと\nレベルアップして つよくなるのよ!$"
 
 OldaleTown_House2_Text_YoullGoFurtherWithStrongPokemon:
-	.string "{JPN}つれて あるく ポケモンが つよかったら\nとおくまで いけるように なるね!$"
+	.string "つれて あるく ポケモンが つよかったら\nとおくまで いけるように なるね!$"
 

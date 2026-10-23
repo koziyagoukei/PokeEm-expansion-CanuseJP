@@ -38,14 +38,14 @@ OldaleTown_PokemonCenter_1F_EventScript_WirelessClubAvailable::
 	end
 
 OldaleTown_PokemonCenter_1F_Text_TrainersCanUsePC:
-	.string "{JPN}すみっこに おいてある パソコンは\nポケモントレーナーの ための ものなんだ\pきみも じゆうに つかって いいんだよ!$"
+	.string "すみっこに おいてある パソコンは\nポケモントレーナーの ための ものなんだ\pきみも じゆうに つかって いいんだよ!$"
 
 OldaleTown_PokemonCenter_1F_Text_PokemonCentersAreGreat:
-	.string "{JPN}ポケモンセンターって すごいよな!\pポケモン なんびき あずけても\nおかねが かからないから\lどんな ときでも あんしん だよね!$"
+	.string "ポケモンセンターって すごいよな!\pポケモン なんびき あずけても\nおかねが かからないから\lどんな ときでも あんしん だよね!$"
 
 OldaleTown_PokemonCenter_1F_Text_WirelessClubNotAvailable:
-	.string "{JPN}2かいの ポケモン ワイヤレス クラブは\nつい さいきん できたの\pでも まだ\nちょうせいちゅう ですって$"
+	.string "2かいの ポケモン ワイヤレス クラブは\nつい さいきん できたの\pでも まだ\nちょうせいちゅう ですって$"
 
 OldaleTown_PokemonCenter_1F_Text_TradedInWirelessClub:
-	.string "{JPN}2かいの ポケモン ワイヤレス クラブは\nつい さいきん できたの\pあたし さっそく\nポケモンこうかん しちゃった!$"
+	.string "2かいの ポケモン ワイヤレス クラブは\nつい さいきん できたの\pあたし さっそく\nポケモンこうかん しちゃった!$"
 

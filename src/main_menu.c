@@ -261,20 +261,20 @@ static const u8 gText_SaveFileErased[] = _("{JPN}レポートの ないようが
 static const u8 gJPText_No1MSubCircuit[] = _("{JPN}1Mサブきばんが ささっていません!");
 static const u8 gText_BatteryRunDry[] = _("{JPN}でんちぎれの ために\nとけいが うごかなくなりました\pとけいに かんけいする できごとは おきませんが\nゲームを つづけて あそぶことは できます");
 
-static const u8 gText_MainMenuNewGame[] = _("{JPN}さいしょから はじめる");
-static const u8 gText_MainMenuContinue[] = _("{JPN}つづきから はじめる");
-static const u8 gText_MainMenuOption[] = _("{JPN}せっていを かえる");
-static const u8 gText_MainMenuMysteryGift[] = _("{JPN}ふしぎな おくりもの");
-static const u8 gText_MainMenuMysteryGift2[] = _("{JPN}ふしぎな もらいもの");
-static const u8 gText_MainMenuMysteryEvents[] = _("{JPN}ふしぎな できごと");
+static const u8 gText_MainMenuNewGame[] = _("さいしょから はじめる");
+static const u8 gText_MainMenuContinue[] = _("つづきから はじめる");
+static const u8 gText_MainMenuOption[] = _("せっていを かえる");
+static const u8 gText_MainMenuMysteryGift[] = _("ふしぎな おくりもの");
+static const u8 gText_MainMenuMysteryGift2[] = _("ふしぎな もらいもの");
+static const u8 gText_MainMenuMysteryEvents[] = _("ふしぎな できごと");
 static const u8 gText_WirelessNotConnected[] = _("{JPN}ワイヤレスアダプタ が\nつながっていません");
 static const u8 gText_MysteryGiftCantUse[] = _("{JPN}ワイヤレスアダプタ を さしたまま\nふしぎなもらいもの は できません");
 static const u8 gText_MysteryEventsCantUse[] = _("{JPN}ワイヤレスアダプタ を さしたまま\nふしぎなできごと は できません");
 
-static const u8 gText_ContinueMenuPlayer[] = _("{JPN}しゅじんこう");
-static const u8 gText_ContinueMenuTime[] = _("{JPN}プレイじかん");
-static const u8 gText_ContinueMenuPokedex[] = _("{JPN}ポケモンずかん");
-static const u8 gText_ContinueMenuBadges[] = _("{JPN}もっているバッジ");
+static const u8 gText_ContinueMenuPlayer[] = _("しゅじんこう");
+static const u8 gText_ContinueMenuTime[] = _("プレイじかん");
+static const u8 gText_ContinueMenuPokedex[] = _("ポケモンずかん");
+static const u8 gText_ContinueMenuBadges[] = _("もっているバッジ");
 
 #define MENU_LEFT 2
 #define MENU_TOP_WIN0 1

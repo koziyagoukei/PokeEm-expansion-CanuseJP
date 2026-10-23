@@ -300,17 +300,17 @@ FallarborTown_BattleTentLobby_EventScript_ExitRules::
 	end
 
 FallarborTown_BattleTentLobby_Text_MakeThinkImJustKid:
-	.string "{JPN}ふふふふふふ\pほんの こどもだと おもわせて\nみんなを ゆだん させて\lボクは ゆうしょう するのだ!$"
+	.string "ふふふふふふ\pほんの こどもだと おもわせて\nみんなを ゆだん させて\lボクは ゆうしょう するのだ!$"
 
 FallarborTown_BattleTentLobby_Text_FallarborTentMyFavorite:
-	.string "{JPN}バトルテントって まちに よって\nちょうせん できる ことが ちがうでしょ?\lあたしは だんぜん ハジツゲの\lバトルテントが すきなのよね!\pしんじてる ポケモンたちと かちぬくって\nすごく かっこいいじゃない?$"
+	.string "バトルテントって まちに よって\nちょうせん できる ことが ちがうでしょ?\lあたしは だんぜん ハジツゲの\lバトルテントが すきなのよね!\pしんじてる ポケモンたちと かちぬくって\nすごく かっこいいじゃない?$"
 
 FallarborTown_BattleTentLobby_Text_CameToCampOut:
-	.string "{JPN}テントというから キャンプ しにきたら…\pさいきんの テント というのは\nごうかな もん だなあ\lよし ついでに ちょうせん してみるか?$"
+	.string "テントというから キャンプ しにきたら…\pさいきんの テント というのは\nごうかな もん だなあ\lよし ついでに ちょうせん してみるか?$"
 
 FallarborTown_BattleTentLobby_Text_ScottLookingForSomeone:
-	.string "{JPN}エニシダ『やあ {PLAYER}{KUN}\nきたんだね バトルテントに!\pどうも この ちほうは\nノンビリ した ひとが おおくてね\lもっと こう……\lかちたい パワーの ありまくりな\lひとを わたしは もとめて いるんだよ!\lそういう トレーナーが いれば すぐにでも\p……って いや なんでもないよ\nじゃ がんばってね!$"
+	.string "エニシダ『やあ {PLAYER}{KUN}\nきたんだね バトルテントに!\pどうも この ちほうは\nノンビリ した ひとが おおくてね\lもっと こう……\lかちたい パワーの ありまくりな\lひとを わたしは もとめて いるんだよ!\lそういう トレーナーが いれば すぐにでも\p……って いや なんでもないよ\nじゃ がんばってね!$"
 
 FallarborTown_BattleTentLobby_Text_ScottMakeChallenge:
-	.string "{JPN}エニシダ『わたし なんかに\nいつまでも かまって いないで\lさっそく チャレンジ\lして みたら どうだい?$"
+	.string "エニシダ『わたし なんかに\nいつまでも かまって いないで\lさっそく チャレンジ\lして みたら どうだい?$"
 

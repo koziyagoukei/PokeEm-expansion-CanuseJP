@@ -12,19 +12,19 @@ SeafloorCavern_Room4_EventScript_Grunt4::
 	end
 
 SeafloorCavern_Room4_Text_Grunt3Intro:
-	.string "{JPN}だれだ おまえ?\nどこから はいってきた?$"
+	.string "だれだ おまえ?\nどこから はいってきた?$"
 
 SeafloorCavern_Room4_Text_Grunt3Defeat:
-	.string "{JPN}まけた……!$"
+	.string "まけた……!$"
 
 SeafloorCavern_Room4_Text_Grunt3PostBattle:
-	.string "{JPN}でぐちが わかんねーんだよ\pこわがってる わけじゃ ねーぞ\nかんちがい すんなよ!$"
+	.string "でぐちが わかんねーんだよ\pこわがってる わけじゃ ねーぞ\nかんちがい すんなよ!$"
 
 SeafloorCavern_Room4_Text_Grunt4Intro:
-	.string "{JPN}あなた だれ?\nどこへ いこうってのよ!?$"
+	.string "あなた だれ?\nどこへ いこうってのよ!?$"
 
 SeafloorCavern_Room4_Text_Grunt4Defeat:
-	.string "{JPN}かてなかった……!$"
+	.string "かてなかった……!$"
 
 SeafloorCavern_Room4_Text_Grunt4PostBattle:
-	.string "{JPN}このひとったら せんすいていに\nちずを わすれて きちゃったの!\pまったく たよりに なんないんだから!$"
+	.string "このひとったら せんすいていに\nちずを わすれて きちゃったの!\pまったく たよりに なんないんだから!$"

@@ -37,10 +37,10 @@ MossdeepCity_Mart_EventScript_Sailor::
 	end
 
 MossdeepCity_Mart_Text_ReviveIsFantastic:
-	.string "{JPN}げんきのかけら って すごい!\pこれを あたえると\nひんしの ポケモンも めざめるの!\pでも パワーポイントは\nかいふく しないから きをつけて!$"
+	.string "げんきのかけら って すごい!\pこれを あたえると\nひんしの ポケモンも めざめるの!\pでも パワーポイントは\nかいふく しないから きをつけて!$"
 
 MossdeepCity_Mart_Text_MaxRepelLastsLongest:
-	.string "{JPN}ゴールドスプレーは\nよわい ポケモンを よせつけない\pかずある スプレーの なかで\nいちばん ながもち するんだ!$"
+	.string "ゴールドスプレーは\nよわい ポケモンを よせつけない\pかずある スプレーの なかで\nいちばん ながもち するんだ!$"
 
 MossdeepCity_Mart_Text_NetAndDiveBallsRare:
-	.string "{JPN}ネットボールと ダイブボールは\nここ トクサネでしか つくっていない\lめずらしい モンスターボール!\pネットボールは むしタイプや\nみずタイプの ポケモンに こうかてき!\pダイブボールは かいていに いる\nポケモンを つかまえ やすいんだ!$"
+	.string "ネットボールと ダイブボールは\nここ トクサネでしか つくっていない\lめずらしい モンスターボール!\pネットボールは むしタイプや\nみずタイプの ポケモンに こうかてき!\pダイブボールは かいていに いる\nポケモンを つかまえ やすいんだ!$"

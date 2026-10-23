@@ -26,21 +26,21 @@ MtPyre_1F_EventScript_Man::
 	end
 
 MtPyre_1F_Text_TakeThisForYourOwnGood:
-	.string "{JPN}この おくりびやま には\nいろんな ものが さまよっておる……\pなにが おきるか わからん\nねんのため これを もっていきなされ"
+	.string "この おくりびやま には\nいろんな ものが さまよっておる……\pなにが おきるか わからん\nねんのため これを もっていきなされ"
 	.string ""
 	.string ""
 	.string "$"
 
 MtPyre_1F_Text_ExplainCleanseTag:
-	.string "{JPN}きよめのおふだ をな\nポケモンに もたせて おく\pすると やせいの ポケモンが\nあんまり とびだして こなくなるぞよ"
+	.string "きよめのおふだ をな\nポケモンに もたせて おく\pすると やせいの ポケモンが\nあんまり とびだして こなくなるぞよ"
 	.string ""
 	.string "$"
 
 MtPyre_1F_Text_ComeToPayRespects:
-	.string "{JPN}あなたも おはか まいりに きたの?\nずいぶんと ポケモン おもい なのね"
+	.string "あなたも おはか まいりに きたの?\nずいぶんと ポケモン おもい なのね"
 	.string ""
 	.string "$"
 
 MtPyre_1F_Text_RestingPlaceOfZigzagoon:
-	.string "{JPN}ここには ぼくが たいせつに していた\nジグザグマが やすらかに ねむってる……"
+	.string "ここには ぼくが たいせつに していた\nジグザグマが やすらかに ねむってる……"
 	.string "$"

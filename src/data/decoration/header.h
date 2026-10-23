@@ -9,7 +9,7 @@ const struct Decoration gDecorations[] =
         .category = DECORCAT_DESK,
         .price = 0,
         .description = COMPOUND_STRING(
-            "{JPN}ひとり サイズの\nちいさな つくえ$"),
+            "ひとり サイズの\nちいさな つくえ$"),
         .tiles = DecorGfx_SMALL_DESK,
         .icon = {gItemIcon_QuestionMark, gItemIconPalette_QuestionMark},
     },
@@ -23,7 +23,7 @@ const struct Decoration gDecorations[] =
         .category = DECORCAT_DESK,
         .price = 3000,
         .description = COMPOUND_STRING(
-            "{JPN}ひとり サイズの\nちいさな つくえ$"),
+            "ひとり サイズの\nちいさな つくえ$"),
         .tiles = DecorGfx_SMALL_DESK,
         .icon = {NULL, NULL},
     },
@@ -37,7 +37,7 @@ const struct Decoration gDecorations[] =
         .category = DECORCAT_DESK,
         .price = 3000,
         .description = COMPOUND_STRING(
-            "{JPN}モンスターボールの\nかたちをした\nちいさな つくえ$"),
+            "モンスターボールの\nかたちをした\nちいさな つくえ$"),
         .tiles = DecorGfx_POKEMON_DESK,
         .icon = {NULL, NULL},
     },
@@ -51,7 +51,7 @@ const struct Decoration gDecorations[] =
         .category = DECORCAT_DESK,
         .price = 6000,
         .description = COMPOUND_STRING(
-            "{JPN}てつで つくられた\nおおきな つくえ\nうえに ものを おける$"),
+            "てつで つくられた\nおおきな つくえ\nうえに ものを おける$"),
         .tiles = DecorGfx_HEAVY_DESK,
         .icon = {gDecorIcon_HeavyDesk, gDecorIconPalette_HeavyDesk},
     },
@@ -65,7 +65,7 @@ const struct Decoration gDecorations[] =
         .category = DECORCAT_DESK,
         .price = 6000,
         .description = COMPOUND_STRING(
-            "{JPN}きで つくられた\nおおきな つくえ\nうえに ものを おける$"),
+            "きで つくられた\nおおきな つくえ\nうえに ものを おける$"),
         .tiles = DecorGfx_RAGGED_DESK,
         .icon = {gDecorIcon_RaggedDesk, gDecorIconPalette_RaggedDesk},
     },
@@ -79,7 +79,7 @@ const struct Decoration gDecorations[] =
         .category = DECORCAT_DESK,
         .price = 6000,
         .description = COMPOUND_STRING(
-            "{JPN}はっぱで つくられた\nおおきな つくえ\nうえに ものを おける$"),
+            "はっぱで つくられた\nおおきな つくえ\nうえに ものを おける$"),
         .tiles = DecorGfx_COMFORT_DESK,
         .icon = {gDecorIcon_ComfortDesk, gDecorIconPalette_ComfortDesk},
     },
@@ -93,7 +93,7 @@ const struct Decoration gDecorations[] =
         .category = DECORCAT_DESK,
         .price = 9000,
         .description = COMPOUND_STRING(
-            "{JPN}ガラスで つくられた\nきょだいな つくえ\nたくさん ものを おける$"),
+            "ガラスで つくられた\nきょだいな つくえ\nたくさん ものを おける$"),
         .tiles = DecorGfx_PRETTY_DESK,
         .icon = {gDecorIcon_PrettyDesk, gDecorIconPalette_PrettyDesk},
     },
@@ -107,7 +107,7 @@ const struct Decoration gDecorations[] =
         .category = DECORCAT_DESK,
         .price = 9000,
         .description = COMPOUND_STRING(
-            "{JPN}レンガで つくられた\nきょだいな つくえ\nたくさん ものを おける$"),
+            "レンガで つくられた\nきょだいな つくえ\nたくさん ものを おける$"),
         .tiles = DecorGfx_BRICK_DESK,
         .icon = {gDecorIcon_BrickDesk, gDecorIconPalette_BrickDesk},
     },
@@ -121,7 +121,7 @@ const struct Decoration gDecorations[] =
         .category = DECORCAT_DESK,
         .price = 9000,
         .description = COMPOUND_STRING(
-            "{JPN}まるたで つくられた\nきょだいな つくえ\nたくさん ものを おける$"),
+            "まるたで つくられた\nきょだいな つくえ\nたくさん ものを おける$"),
         .tiles = DecorGfx_CAMP_DESK,
         .icon = {gDecorIcon_CampDesk, gDecorIconPalette_CampDesk},
     },
@@ -135,7 +135,7 @@ const struct Decoration gDecorations[] =
         .category = DECORCAT_DESK,
         .price = 9000,
         .description = COMPOUND_STRING(
-            "{JPN}いしで つくられた\nきょだいな つくえ\nたくさん ものを おける$"),
+            "いしで つくられた\nきょだいな つくえ\nたくさん ものを おける$"),
         .tiles = DecorGfx_HARD_DESK,
         .icon = {gDecorIcon_HardDesk, gDecorIconPalette_HardDesk},
     },
@@ -149,7 +149,7 @@ const struct Decoration gDecorations[] =
         .category = DECORCAT_CHAIR,
         .price = 2000,
         .description = COMPOUND_STRING(
-            "{JPN}ひとりで すわる\nちいさな イス$"),
+            "ひとりで すわる\nちいさな イス$"),
         .tiles = DecorGfx_SMALL_CHAIR,
         .icon = {NULL, NULL},
     },
@@ -163,7 +163,7 @@ const struct Decoration gDecorations[] =
         .category = DECORCAT_CHAIR,
         .price = 2000,
         .description = COMPOUND_STRING(
-            "{JPN}モンスターボールの\nかたちをした\nちいさな イス$"),
+            "モンスターボールの\nかたちをした\nちいさな イス$"),
         .tiles = DecorGfx_POKEMON_CHAIR,
         .icon = {NULL, NULL},
     },
@@ -177,7 +177,7 @@ const struct Decoration gDecorations[] =
         .category = DECORCAT_CHAIR,
         .price = 2000,
         .description = COMPOUND_STRING(
-            "{JPN}てつで つくられた\nちいさな イス$"),
+            "てつで つくられた\nちいさな イス$"),
         .tiles = DecorGfx_HEAVY_CHAIR,
         .icon = {NULL, NULL},
     },
@@ -191,7 +191,7 @@ const struct Decoration gDecorations[] =
         .category = DECORCAT_CHAIR,
         .price = 2000,
         .description = COMPOUND_STRING(
-            "{JPN}ガラスで つくられた\nちいさな イス$"),
+            "ガラスで つくられた\nちいさな イス$"),
         .tiles = DecorGfx_PRETTY_CHAIR,
         .icon = {NULL, NULL},
     },
@@ -205,7 +205,7 @@ const struct Decoration gDecorations[] =
         .category = DECORCAT_CHAIR,
         .price = 2000,
         .description = COMPOUND_STRING(
-            "{JPN}はっぱで つくられた\nちいさな イス$"),
+            "はっぱで つくられた\nちいさな イス$"),
         .tiles = DecorGfx_COMFORT_CHAIR,
         .icon = {NULL, NULL},
     },
@@ -219,7 +219,7 @@ const struct Decoration gDecorations[] =
         .category = DECORCAT_CHAIR,
         .price = 2000,
         .description = COMPOUND_STRING(
-            "{JPN}きで つくられた\nちいさな イス$"),
+            "きで つくられた\nちいさな イス$"),
         .tiles = DecorGfx_RAGGED_CHAIR,
         .icon = {NULL, NULL},
     },
@@ -233,7 +233,7 @@ const struct Decoration gDecorations[] =
         .category = DECORCAT_CHAIR,
         .price = 2000,
         .description = COMPOUND_STRING(
-            "{JPN}レンガで つくられた\nちいさな イス$"),
+            "レンガで つくられた\nちいさな イス$"),
         .tiles = DecorGfx_BRICK_CHAIR,
         .icon = {NULL, NULL},
     },
@@ -247,7 +247,7 @@ const struct Decoration gDecorations[] =
         .category = DECORCAT_CHAIR,
         .price = 2000,
         .description = COMPOUND_STRING(
-            "{JPN}まるたで つくられた\nちいさな イス$"),
+            "まるたで つくられた\nちいさな イス$"),
         .tiles = DecorGfx_CAMP_CHAIR,
         .icon = {NULL, NULL},
     },
@@ -261,7 +261,7 @@ const struct Decoration gDecorations[] =
         .category = DECORCAT_CHAIR,
         .price = 2000,
         .description = COMPOUND_STRING(
-            "{JPN}いしで つくられた\nちいさな イス$"),
+            "いしで つくられた\nちいさな イス$"),
         .tiles = DecorGfx_HARD_CHAIR,
         .icon = {NULL, NULL},
     },
@@ -275,7 +275,7 @@ const struct Decoration gDecorations[] =
         .category = DECORCAT_PLANT,
         .price = 3000,
         .description = COMPOUND_STRING(
-            "{JPN}まっかな はなが\nうえられた うえき$"),
+            "まっかな はなが\nうえられた うえき$"),
         .tiles = DecorGfx_RED_PLANT,
         .icon = {gDecorIcon_RedPlant, gDecorIconPalette_RedPlant},
     },
@@ -289,7 +289,7 @@ const struct Decoration gDecorations[] =
         .category = DECORCAT_PLANT,
         .price = 3000,
         .description = COMPOUND_STRING(
-            "{JPN}なんごくの はなが\nうえられた うえき$"),
+            "なんごくの はなが\nうえられた うえき$"),
         .tiles = DecorGfx_TROPICAL_PLANT,
         .icon = {gDecorIcon_TropicalPlant, gDecorIconPalette_TropicalPlant},
     },
@@ -303,7 +303,7 @@ const struct Decoration gDecorations[] =
         .category = DECORCAT_PLANT,
         .price = 3000,
         .description = COMPOUND_STRING(
-            "{JPN}かわいい はなが\nうえられた うえき$"),
+            "かわいい はなが\nうえられた うえき$"),
         .tiles = DecorGfx_PRETTY_FLOWERS,
         .icon = {gDecorIcon_PrettyFlowers, gDecorIconPalette_PrettyFlowers},
     },
@@ -317,7 +317,7 @@ const struct Decoration gDecorations[] =
         .category = DECORCAT_PLANT,
         .price = 5000,
         .description = COMPOUND_STRING(
-            "{JPN}いろいろな はなが\nうえられた\nおおきな うえき$"),
+            "いろいろな はなが\nうえられた\nおおきな うえき$"),
         .tiles = DecorGfx_COLORFUL_PLANT,
         .icon = {gDecorIcon_ColorfulPlant, gDecorIconPalette_ColorfulPlant},
     },
@@ -331,7 +331,7 @@ const struct Decoration gDecorations[] =
         .category = DECORCAT_PLANT,
         .price = 5000,
         .description = COMPOUND_STRING(
-            "{JPN}カサのような きが\nうえられた\nおおきな うえき$"),
+            "カサのような きが\nうえられた\nおおきな うえき$"),
         .tiles = DecorGfx_BIG_PLANT,
         .icon = {gDecorIcon_BigPlant, gDecorIconPalette_BigPlant},
     },
@@ -345,7 +345,7 @@ const struct Decoration gDecorations[] =
         .category = DECORCAT_PLANT,
         .price = 5000,
         .description = COMPOUND_STRING(
-            "{JPN}りっぱな きが\nうえられた\nおおきな うえき$"),
+            "りっぱな きが\nうえられた\nおおきな うえき$"),
         .tiles = DecorGfx_GORGEOUS_PLANT,
         .icon = {gDecorIcon_GorgeousPlant, gDecorIconPalette_GorgeousPlant},
     },
@@ -359,7 +359,7 @@ const struct Decoration gDecorations[] =
         .category = DECORCAT_ORNAMENT,
         .price = 500,
         .description = COMPOUND_STRING(
-            "{JPN}あかいろの レンガ\nうえに ものを おける$"),
+            "あかいろの レンガ\nうえに ものを おける$"),
         .tiles = DecorGfx_RED_BRICK,
         .icon = {gDecorIcon_RedBrick, gDecorIconPalette_RedBrick},
     },
@@ -373,7 +373,7 @@ const struct Decoration gDecorations[] =
         .category = DECORCAT_ORNAMENT,
         .price = 500,
         .description = COMPOUND_STRING(
-            "{JPN}きいろの レンガ\nうえに ものを おける$"),
+            "きいろの レンガ\nうえに ものを おける$"),
         .tiles = DecorGfx_YELLOW_BRICK,
         .icon = {gDecorIcon_YellowBrick, gDecorIconPalette_YellowBrick},
     },
@@ -387,7 +387,7 @@ const struct Decoration gDecorations[] =
         .category = DECORCAT_ORNAMENT,
         .price = 500,
         .description = COMPOUND_STRING(
-            "{JPN}あおいろの レンガ\nうえに ものを おける$"),
+            "あおいろの レンガ\nうえに ものを おける$"),
         .tiles = DecorGfx_BLUE_BRICK,
         .icon = {gDecorIcon_BlueBrick, gDecorIconPalette_BlueBrick},
     },
@@ -401,7 +401,7 @@ const struct Decoration gDecorations[] =
         .category = DECORCAT_ORNAMENT,
         .price = 500,
         .description = COMPOUND_STRING(
-            "{JPN}みずの はいった\nあかい ふうせん\nふむと われる$"),
+            "みずの はいった\nあかい ふうせん\nふむと われる$"),
         .tiles = DecorGfx_RED_BALLOON,
         .icon = {NULL, NULL},
     },
@@ -415,7 +415,7 @@ const struct Decoration gDecorations[] =
         .category = DECORCAT_ORNAMENT,
         .price = 500,
         .description = COMPOUND_STRING(
-            "{JPN}みずの はいった\nあおい ふうせん\nふむと われる$"),
+            "みずの はいった\nあおい ふうせん\nふむと われる$"),
         .tiles = DecorGfx_BLUE_BALLOON,
         .icon = {NULL, NULL},
     },
@@ -429,7 +429,7 @@ const struct Decoration gDecorations[] =
         .category = DECORCAT_ORNAMENT,
         .price = 500,
         .description = COMPOUND_STRING(
-            "{JPN}みずの はいった\nきいろい ふうせん\nふむと われる$"),
+            "みずの はいった\nきいろい ふうせん\nふむと われる$"),
         .tiles = DecorGfx_YELLOW_BALLOON,
         .icon = {NULL, NULL},
     },
@@ -443,7 +443,7 @@ const struct Decoration gDecorations[] =
         .category = DECORCAT_ORNAMENT,
         .price = 10000,
         .description = COMPOUND_STRING(
-            "{JPN}おおきな あかい テント\nなかに はいれる$"),
+            "おおきな あかい テント\nなかに はいれる$"),
         .tiles = DecorGfx_RED_TENT,
         .icon = {gDecorIcon_RedTent, gDecorIconPalette_RedTent},
     },
@@ -457,7 +457,7 @@ const struct Decoration gDecorations[] =
         .category = DECORCAT_ORNAMENT,
         .price = 10000,
         .description = COMPOUND_STRING(
-            "{JPN}おおきな あおい テント\nなかに はいれる$"),
+            "おおきな あおい テント\nなかに はいれる$"),
         .tiles = DecorGfx_BLUE_TENT,
         .icon = {gDecorIcon_BlueTent, gDecorIconPalette_BlueTent},
     },
@@ -471,7 +471,7 @@ const struct Decoration gDecorations[] =
         .category = DECORCAT_ORNAMENT,
         .price = 3000,
         .description = COMPOUND_STRING(
-            "{JPN}あなの うえに おけば\nむこうへ わたれる$"),
+            "あなの うえに おけば\nむこうへ わたれる$"),
         .tiles = DecorGfx_SOLID_BOARD,
         .icon = {gDecorIcon_SolidBoard, gDecorIconPalette_SolidBoard},
     },
@@ -485,7 +485,7 @@ const struct Decoration gDecorations[] =
         .category = DECORCAT_ORNAMENT,
         .price = 8000,
         .description = COMPOUND_STRING(
-            "{JPN}だいの うえから\nすべって したへ\nいくことが できる$"),
+            "だいの うえから\nすべって したへ\nいくことが できる$"),
         .tiles = DecorGfx_SLIDE,
         .icon = {gDecorIcon_Slide, gDecorIconPalette_Slide},
     },
@@ -499,7 +499,7 @@ const struct Decoration gDecorations[] =
         .category = DECORCAT_ORNAMENT,
         .price = 500,
         .description = COMPOUND_STRING(
-            "{JPN}ちいさい さく\nとおることが できない$"),
+            "ちいさい さく\nとおることが できない$"),
         .tiles = DecorGfx_FENCE_LENGTH,
         .icon = {NULL, NULL},
     },
@@ -513,7 +513,7 @@ const struct Decoration gDecorations[] =
         .category = DECORCAT_ORNAMENT,
         .price = 500,
         .description = COMPOUND_STRING(
-            "{JPN}ちいさい さく\nとおることが できない$"),
+            "ちいさい さく\nとおることが できない$"),
         .tiles = DecorGfx_FENCE_WIDTH,
         .icon = {NULL, NULL},
     },
@@ -527,7 +527,7 @@ const struct Decoration gDecorations[] =
         .category = DECORCAT_ORNAMENT,
         .price = 800,
         .description = COMPOUND_STRING(
-            "{JPN}ふるい おおきな タイヤ\nうえに ものを おける$"),
+            "ふるい おおきな タイヤ\nうえに ものを おける$"),
         .tiles = DecorGfx_TIRE,
         .icon = {gDecorIcon_Tire, gDecorIconPalette_Tire},
     },
@@ -541,7 +541,7 @@ const struct Decoration gDecorations[] =
         .category = DECORCAT_ORNAMENT,
         .price = 7000,
         .description = COMPOUND_STRING(
-            "{JPN}かいだんを のぼって\nだいに あがれる$"),
+            "かいだんを のぼって\nだいに あがれる$"),
         .tiles = DecorGfx_STAND,
         .icon = {gDecorIcon_Stand, gDecorIconPalette_Stand},
     },
@@ -555,7 +555,7 @@ const struct Decoration gDecorations[] =
         .category = DECORCAT_ORNAMENT,
         .price = 200,
         .description = COMPOUND_STRING(
-           "{JPN}まるい どろだんご\nふむと こわれる$"),
+           "まるい どろだんご\nふむと こわれる$"),
         .tiles = DecorGfx_MUD_BALL,
         .icon = {NULL, NULL},
     },
@@ -569,7 +569,7 @@ const struct Decoration gDecorations[] =
         .category = DECORCAT_ORNAMENT,
         .price = 3000,
         .description = COMPOUND_STRING(
-            "{JPN}とおりぬけ できる\nおかしな ドア$"),
+            "とおりぬけ できる\nおかしな ドア$"),
         .tiles = DecorGfx_BREAKABLE_DOOR,
         .icon = {gDecorIcon_BreakableDoor, gDecorIconPalette_BreakableDoor},
     },
@@ -583,7 +583,7 @@ const struct Decoration gDecorations[] =
         .category = DECORCAT_ORNAMENT,
         .price = 3000,
         .description = COMPOUND_STRING(
-            "{JPN}さわると くずれる\nすなの おきもの$"),
+            "さわると くずれる\nすなの おきもの$"),
         .tiles = DecorGfx_SAND_ORNAMENT,
         .icon = {gDecorIcon_SandOrnament, gDecorIconPalette_SandOrnament},
     },
@@ -597,7 +597,7 @@ const struct Decoration gDecorations[] =
         .category = DECORCAT_ORNAMENT,
         .price = 0,
         .description = COMPOUND_STRING(
-            "{JPN}バトルタワーで\n50にん かちぬいた\nきねんの たて$"),
+            "バトルタワーで\n50にん かちぬいた\nきねんの たて$"),
         .tiles = DecorGfx_SILVER_SHIELD,
         .icon = {NULL, NULL},
     },
@@ -611,7 +611,7 @@ const struct Decoration gDecorations[] =
         .category = DECORCAT_ORNAMENT,
         .price = 0,
         .description = COMPOUND_STRING(
-            "{JPN}バトルタワーで\n100にん かちぬいた\nきねんの たて$"),
+            "バトルタワーで\n100にん かちぬいた\nきねんの たて$"),
         .tiles = DecorGfx_GOLD_SHIELD,
         .icon = {NULL, NULL},
     },
@@ -625,7 +625,7 @@ const struct Decoration gDecorations[] =
         .category = DECORCAT_ORNAMENT,
         .price = 0,
         .description = COMPOUND_STRING(
-            "{JPN}びじゅつかんに ある\nゆうめいな ちょうこくを\nガラスで かたどったもの$"),
+            "びじゅつかんに ある\nゆうめいな ちょうこくを\nガラスで かたどったもの$"),
         .tiles = DecorGfx_GLASS_ORNAMENT,
         .icon = {gDecorIcon_GlassOrnament, gDecorIconPalette_GlassOrnament},
     },
@@ -639,7 +639,7 @@ const struct Decoration gDecorations[] =
         .category = DECORCAT_ORNAMENT,
         .price = 3000,
         .description = COMPOUND_STRING(
-            "{JPN}はいいろの ちいさな\nおもちゃの テレビ$"),
+            "はいいろの ちいさな\nおもちゃの テレビ$"),
         .tiles = DecorGfx_TV,
         .icon = {NULL, NULL},
     },
@@ -653,7 +653,7 @@ const struct Decoration gDecorations[] =
         .category = DECORCAT_ORNAMENT,
         .price = 4000,
         .description = COMPOUND_STRING(
-            "{JPN}タネボーの イメージで\nつくられた\nおもちゃの テレビ$"),
+            "タネボーの イメージで\nつくられた\nおもちゃの テレビ$"),
         .tiles = DecorGfx_ROUND_TV,
         .icon = {NULL, NULL},
     },
@@ -667,7 +667,7 @@ const struct Decoration gDecorations[] =
         .category = DECORCAT_ORNAMENT,
         .price = 4000,
         .description = COMPOUND_STRING(
-            "{JPN}エネコの イメージで\nつくられた\nおもちゃの テレビ$"),
+            "エネコの イメージで\nつくられた\nおもちゃの テレビ$"),
         .tiles = DecorGfx_CUTE_TV,
         .icon = {NULL, NULL},
     },
@@ -681,7 +681,7 @@ const struct Decoration gDecorations[] =
         .category = DECORCAT_MAT,
         .price = 2000,
         .description = COMPOUND_STRING(
-            "{JPN}ふむと きらきらする\nふしぎな マット$"),
+            "ふむと きらきらする\nふしぎな マット$"),
         .tiles = DecorGfx_GLITTER_MAT,
         .icon = {NULL, NULL},
     },
@@ -695,7 +695,7 @@ const struct Decoration gDecorations[] =
         .category = DECORCAT_MAT,
         .price = 2000,
         .description = COMPOUND_STRING(
-            "{JPN}ふむと ジャンプする\nいたずら マット$"),
+            "ふむと ジャンプする\nいたずら マット$"),
         .tiles = DecorGfx_JUMP_MAT,
         .icon = {NULL, NULL},
     },
@@ -709,7 +709,7 @@ const struct Decoration gDecorations[] =
         .category = DECORCAT_MAT,
         .price = 2000,
         .description = COMPOUND_STRING(
-            "{JPN}ふむと くるくる まわる\nいたずら マット$"),
+            "ふむと くるくる まわる\nいたずら マット$"),
         .tiles = DecorGfx_SPIN_MAT,
         .icon = {NULL, NULL},
     },
@@ -723,7 +723,7 @@ const struct Decoration gDecorations[] =
         .category = DECORCAT_MAT,
         .price = 500,
         .description = COMPOUND_STRING(
-            "{JPN}ふむと ドの\nおとがなる マット$"),
+            "ふむと ドの\nおとがなる マット$"),
         .tiles = DecorGfx_C_LOW_NOTE_MAT,
         .icon = {NULL, NULL},
     },
@@ -737,7 +737,7 @@ const struct Decoration gDecorations[] =
         .category = DECORCAT_MAT,
         .price = 500,
         .description = COMPOUND_STRING(
-            "{JPN}ふむと レの\nおとがなる マット$"),
+            "ふむと レの\nおとがなる マット$"),
         .tiles = DecorGfx_D_NOTE_MAT,
         .icon = {NULL, NULL},
     },
@@ -751,7 +751,7 @@ const struct Decoration gDecorations[] =
         .category = DECORCAT_MAT,
         .price = 500,
         .description = COMPOUND_STRING(
-            "{JPN}ふむと ミの\nおとがなる マット$"),
+            "ふむと ミの\nおとがなる マット$"),
         .tiles = DecorGfx_E_NOTE_MAT,
         .icon = {NULL, NULL},
     },
@@ -765,7 +765,7 @@ const struct Decoration gDecorations[] =
         .category = DECORCAT_MAT,
         .price = 500,
         .description = COMPOUND_STRING(
-            "{JPN}ふむと ファの\nおとがなる マット$"),
+            "ふむと ファの\nおとがなる マット$"),
         .tiles = DecorGfx_F_NOTE_MAT,
         .icon = {NULL, NULL},
     },
@@ -779,7 +779,7 @@ const struct Decoration gDecorations[] =
         .category = DECORCAT_MAT,
         .price = 500,
         .description = COMPOUND_STRING(
-            "{JPN}ふむと ソの\nおとがなる マット$"),
+            "ふむと ソの\nおとがなる マット$"),
         .tiles = DecorGfx_G_NOTE_MAT,
         .icon = {NULL, NULL},
     },
@@ -793,7 +793,7 @@ const struct Decoration gDecorations[] =
         .category = DECORCAT_MAT,
         .price = 500,
         .description = COMPOUND_STRING(
-           "{JPN}ふむと ラの\nおとがなる マット$"),
+           "ふむと ラの\nおとがなる マット$"),
         .tiles = DecorGfx_A_NOTE_MAT,
         .icon = {NULL, NULL},
     },
@@ -807,7 +807,7 @@ const struct Decoration gDecorations[] =
         .category = DECORCAT_MAT,
         .price = 500,
         .description = COMPOUND_STRING(
-            "{JPN}ふむと シの\nおとがなる マット$"),
+            "ふむと シの\nおとがなる マット$"),
         .tiles = DecorGfx_B_NOTE_MAT,
         .icon = {NULL, NULL},
     },
@@ -821,7 +821,7 @@ const struct Decoration gDecorations[] =
         .category = DECORCAT_MAT,
         .price = 500,
         .description = COMPOUND_STRING(
-            "{JPN}ふむと たかい ドの\nおとがなる マット$"),
+            "ふむと たかい ドの\nおとがなる マット$"),
         .tiles = DecorGfx_C_HIGH_NOTE_MAT,
         .icon = {NULL, NULL},
     },
@@ -835,7 +835,7 @@ const struct Decoration gDecorations[] =
         .category = DECORCAT_MAT,
         .price = 4000,
         .description = COMPOUND_STRING(
-            "{JPN}なみのりの イメージで\nつくられた マット\nうえに ものを おける$"),
+            "なみのりの イメージで\nつくられた マット\nうえに ものを おける$"),
         .tiles = DecorGfx_SURF_MAT,
         .icon = {gDecorIcon_SurfMat, gDecorIconPalette_SurfMat},
     },
@@ -849,7 +849,7 @@ const struct Decoration gDecorations[] =
         .category = DECORCAT_MAT,
         .price = 4000,
         .description = COMPOUND_STRING(
-            "{JPN}かみなりの イメージで\nつくられた マット\nうえに ものを おける$"),
+            "かみなりの イメージで\nつくられた マット\nうえに ものを おける$"),
         .tiles = DecorGfx_THUNDER_MAT,
         .icon = {gDecorIcon_ThunderMat, gDecorIconPalette_ThunderMat},
     },
@@ -863,7 +863,7 @@ const struct Decoration gDecorations[] =
         .category = DECORCAT_MAT,
         .price = 4000,
         .description = COMPOUND_STRING(
-            "{JPN}だいもんじの イメージで\nつくられた マット\nうえに ものを おける$"),
+            "だいもんじの イメージで\nつくられた マット\nうえに ものを おける$"),
         .tiles = DecorGfx_FIRE_BLAST_MAT,
         .icon = {gDecorIcon_FireBlastMat, gDecorIconPalette_FireBlastMat},
     },
@@ -877,7 +877,7 @@ const struct Decoration gDecorations[] =
         .category = DECORCAT_MAT,
         .price = 4000,
         .description = COMPOUND_STRING(
-            "{JPN}こなゆきの イメージで\nつくられた マット\nうえに ものを おける$"),
+            "こなゆきの イメージで\nつくられた マット\nうえに ものを おける$"),
         .tiles = DecorGfx_POWDER_SNOW_MAT,
         .icon = {gDecorIcon_PowderSnowMat, gDecorIconPalette_PowderSnowMat},
     },
@@ -891,7 +891,7 @@ const struct Decoration gDecorations[] =
         .category = DECORCAT_MAT,
         .price = 4000,
         .description = COMPOUND_STRING(
-            "{JPN}メロメロの イメージで\nつくられた マット\nうえに ものを おける$"),
+            "メロメロの イメージで\nつくられた マット\nうえに ものを おける$"),
         .tiles = DecorGfx_ATTRACT_MAT,
         .icon = {gDecorIcon_AttractMat, gDecorIconPalette_AttractMat},
     },
@@ -905,7 +905,7 @@ const struct Decoration gDecorations[] =
         .category = DECORCAT_MAT,
         .price = 4000,
         .description = COMPOUND_STRING(
-            "{JPN}じわれの イメージで\nつくられた マット\nうえに ものを おける$"),
+            "じわれの イメージで\nつくられた マット\nうえに ものを おける$"),
         .tiles = DecorGfx_FISSURE_MAT,
         .icon = {gDecorIcon_FissureMat, gDecorIconPalette_FissureMat},
     },
@@ -919,7 +919,7 @@ const struct Decoration gDecorations[] =
         .category = DECORCAT_MAT,
         .price = 4000,
         .description = COMPOUND_STRING(
-            "{JPN}まきびしの イメージで\nつくられた マット\nうえに ものを おける$"),
+            "まきびしの イメージで\nつくられた マット\nうえに ものを おける$"),
         .tiles = DecorGfx_SPIKES_MAT,
         .icon = {gDecorIcon_SpikesMat, gDecorIconPalette_SpikesMat},
     },
@@ -933,7 +933,7 @@ const struct Decoration gDecorations[] =
         .category = DECORCAT_POSTER,
         .price = 1000,
         .description = COMPOUND_STRING(
-            "{JPN}モンスターボールが\nプリント されている\nちいさいポスター$"),
+            "モンスターボールが\nプリント されている\nちいさいポスター$"),
         .tiles = DecorGfx_BALL_POSTER,
         .icon = {NULL, NULL},
     },
@@ -947,7 +947,7 @@ const struct Decoration gDecorations[] =
         .category = DECORCAT_POSTER,
         .price = 1000,
         .description = COMPOUND_STRING(
-            "{JPN}キモリが\nプリント されている\nちいさいポスター$"),
+            "キモリが\nプリント されている\nちいさいポスター$"),
         .tiles = DecorGfx_GREEN_POSTER,
         .icon = {NULL, NULL},
     },
@@ -961,7 +961,7 @@ const struct Decoration gDecorations[] =
         .category = DECORCAT_POSTER,
         .price = 1000,
         .description = COMPOUND_STRING(
-            "{JPN}アチャモが\nプリント されている\nちいさいポスター$"),
+            "アチャモが\nプリント されている\nちいさいポスター$"),
         .tiles = DecorGfx_RED_POSTER,
         .icon = {NULL, NULL},
     },
@@ -975,7 +975,7 @@ const struct Decoration gDecorations[] =
         .category = DECORCAT_POSTER,
         .price = 1000,
         .description = COMPOUND_STRING(
-            "{JPN}ミズゴロウが\nプリント されている\nちいさいポスター$"),
+            "ミズゴロウが\nプリント されている\nちいさいポスター$"),
         .tiles = DecorGfx_BLUE_POSTER,
         .icon = {NULL, NULL},
     },
@@ -989,7 +989,7 @@ const struct Decoration gDecorations[] =
         .category = DECORCAT_POSTER,
         .price = 1000,
         .description = COMPOUND_STRING(
-            "{JPN}ルリリが\nプリント されている\nちいさいポスター$"),
+            "ルリリが\nプリント されている\nちいさいポスター$"),
         .tiles = DecorGfx_CUTE_POSTER,
         .icon = {NULL, NULL},
     },
@@ -1003,7 +1003,7 @@ const struct Decoration gDecorations[] =
         .category = DECORCAT_POSTER,
         .price = 1500,
         .description = COMPOUND_STRING(
-            "{JPN}ピカチュウと ピチューが\nプリント されている\nおおきなポスター$"),
+            "ピカチュウと ピチューが\nプリント されている\nおおきなポスター$"),
         .tiles = DecorGfx_PIKA_POSTER,
         .icon = {NULL, NULL},
     },
@@ -1017,7 +1017,7 @@ const struct Decoration gDecorations[] =
         .category = DECORCAT_POSTER,
         .price = 1500,
         .description = COMPOUND_STRING(
-            "{JPN}ハブネークが\nプリント されている\nおおきなポスター$"),
+            "ハブネークが\nプリント されている\nおおきなポスター$"),
         .tiles = DecorGfx_LONG_POSTER,
         .icon = {NULL, NULL},
     },
@@ -1031,7 +1031,7 @@ const struct Decoration gDecorations[] =
         .category = DECORCAT_POSTER,
         .price = 1500,
         .description = COMPOUND_STRING(
-            "{JPN}ジーランスが\nプリント されている\nおおきなポスター$"),
+            "ジーランスが\nプリント されている\nおおきなポスター$"),
         .tiles = DecorGfx_SEA_POSTER,
         .icon = {NULL, NULL},
     },
@@ -1045,7 +1045,7 @@ const struct Decoration gDecorations[] =
         .category = DECORCAT_POSTER,
         .price = 1500,
         .description = COMPOUND_STRING(
-            "{JPN}キャモメが\nプリント されている\nおおきなポスター$"),
+            "キャモメが\nプリント されている\nおおきなポスター$"),
         .tiles = DecorGfx_SKY_POSTER,
         .icon = {NULL, NULL},
     },
@@ -1059,7 +1059,7 @@ const struct Decoration gDecorations[] =
         .category = DECORCAT_POSTER,
         .price = 1500,
         .description = COMPOUND_STRING(
-            "{JPN}ムチュールが\nプリント されている\nおおきなポスター$"),
+            "ムチュールが\nプリント されている\nおおきなポスター$"),
         .tiles = DecorGfx_KISS_POSTER,
         .icon = {NULL, NULL},
     },
@@ -1073,7 +1073,7 @@ const struct Decoration gDecorations[] =
         .category = DECORCAT_DOLL,
         .price = 3000,
         .description = COMPOUND_STRING(
-            "{JPN}ピチューの ぬいぐるみ\nマットや つくえの\nうえに おくもの$"),
+            "ピチューの ぬいぐるみ\nマットや つくえの\nうえに おくもの$"),
         .tiles = DecorGfx_PICHU_DOLL,
         .icon = {NULL, NULL},
     },
@@ -1087,7 +1087,7 @@ const struct Decoration gDecorations[] =
         .category = DECORCAT_DOLL,
         .price = 3000,
         .description = COMPOUND_STRING(
-            "{JPN}ピカチュウの ぬいぐるみ\nマットや つくえの\nうえに おくもの$"),
+            "ピカチュウの ぬいぐるみ\nマットや つくえの\nうえに おくもの$"),
         .tiles = DecorGfx_PIKACHU_DOLL,
         .icon = {NULL, NULL},
     },
@@ -1101,7 +1101,7 @@ const struct Decoration gDecorations[] =
         .category = DECORCAT_DOLL,
         .price = 3000,
         .description = COMPOUND_STRING(
-            "{JPN}マリルの ぬいぐるみ\nマットや つくえの\nうえに おくもの$"),
+            "マリルの ぬいぐるみ\nマットや つくえの\nうえに おくもの$"),
         .tiles = DecorGfx_MARILL_DOLL,
         .icon = {NULL, NULL},
     },
@@ -1115,7 +1115,7 @@ const struct Decoration gDecorations[] =
         .category = DECORCAT_DOLL,
         .price = 3000,
         .description = COMPOUND_STRING(
-            "{JPN}トゲピーの ぬいぐるみ\nマットや つくえの\nうえに おくもの$"),
+            "トゲピーの ぬいぐるみ\nマットや つくえの\nうえに おくもの$"),
         .tiles = DecorGfx_TOGEPI_DOLL,
         .icon = {NULL, NULL},
     },
@@ -1129,7 +1129,7 @@ const struct Decoration gDecorations[] =
         .category = DECORCAT_DOLL,
         .price = 3000,
         .description = COMPOUND_STRING(
-            "{JPN}ヒノアラシの ぬいぐるみ\nマットや つくえの\nうえに おくもの$"),
+            "ヒノアラシの ぬいぐるみ\nマットや つくえの\nうえに おくもの$"),
         .tiles = DecorGfx_CYNDAQUIL_DOLL,
         .icon = {NULL, NULL},
     },
@@ -1143,7 +1143,7 @@ const struct Decoration gDecorations[] =
         .category = DECORCAT_DOLL,
         .price = 3000,
         .description = COMPOUND_STRING(
-            "{JPN}チコリータの ぬいぐるみ\nマットや つくえの\nうえに おくもの$"),
+            "チコリータの ぬいぐるみ\nマットや つくえの\nうえに おくもの$"),
         .tiles = DecorGfx_CHIKORITA_DOLL,
         .icon = {NULL, NULL},
     },
@@ -1157,7 +1157,7 @@ const struct Decoration gDecorations[] =
         .category = DECORCAT_DOLL,
         .price = 3000,
         .description = COMPOUND_STRING(
-            "{JPN}ワニノコの ぬいぐるみ\nマットや つくえの\nうえに おくもの$"),
+            "ワニノコの ぬいぐるみ\nマットや つくえの\nうえに おくもの$"),
         .tiles = DecorGfx_TOTODILE_DOLL,
         .icon = {NULL, NULL},
     },
@@ -1171,7 +1171,7 @@ const struct Decoration gDecorations[] =
         .category = DECORCAT_DOLL,
         .price = 3000,
         .description = COMPOUND_STRING(
-            "{JPN}プリンの ぬいぐるみ\nマットや つくえの\nうえに おくもの$"),
+            "プリンの ぬいぐるみ\nマットや つくえの\nうえに おくもの$"),
         .tiles = DecorGfx_JIGGLYPUFF_DOLL,
         .icon = {NULL, NULL},
     },
@@ -1185,7 +1185,7 @@ const struct Decoration gDecorations[] =
         .category = DECORCAT_DOLL,
         .price = 3000,
         .description = COMPOUND_STRING(
-            "{JPN}ニャースの ぬいぐるみ\nマットや つくえの\nうえに おくもの$"),
+            "ニャースの ぬいぐるみ\nマットや つくえの\nうえに おくもの$"),
         .tiles = DecorGfx_MEOWTH_DOLL,
         .icon = {NULL, NULL},
     },
@@ -1199,7 +1199,7 @@ const struct Decoration gDecorations[] =
         .category = DECORCAT_DOLL,
         .price = 3000,
         .description = COMPOUND_STRING(
-            "{JPN}ピッピの ぬいぐるみ\nマットや つくえの\nうえに おくもの$"),
+            "ピッピの ぬいぐるみ\nマットや つくえの\nうえに おくもの$"),
         .tiles = DecorGfx_CLEFAIRY_DOLL,
         .icon = {NULL, NULL},
     },
@@ -1213,7 +1213,7 @@ const struct Decoration gDecorations[] =
         .category = DECORCAT_DOLL,
         .price = 3000,
         .description = COMPOUND_STRING(
-            "{JPN}メタモンの ぬいぐるみ\nマットや つくえの\nうえに おくもの$"),
+            "メタモンの ぬいぐるみ\nマットや つくえの\nうえに おくもの$"),
         .tiles = DecorGfx_DITTO_DOLL,
         .icon = {NULL, NULL},
     },
@@ -1227,7 +1227,7 @@ const struct Decoration gDecorations[] =
         .category = DECORCAT_DOLL,
         .price = 3000,
         .description = COMPOUND_STRING(
-            "{JPN}ムチュールの ぬいぐるみ\nマットや つくえの\nうえに おくもの$"),
+            "ムチュールの ぬいぐるみ\nマットや つくえの\nうえに おくもの$"),
         .tiles = DecorGfx_SMOOCHUM_DOLL,
         .icon = {NULL, NULL},
     },
@@ -1241,7 +1241,7 @@ const struct Decoration gDecorations[] =
         .category = DECORCAT_DOLL,
         .price = 3000,
         .description = COMPOUND_STRING(
-            "{JPN}キモリの ぬいぐるみ\nマットや つくえの\nうえに おくもの$"),
+            "キモリの ぬいぐるみ\nマットや つくえの\nうえに おくもの$"),
         .tiles = DecorGfx_TREECKO_DOLL,
         .icon = {NULL, NULL},
     },
@@ -1255,7 +1255,7 @@ const struct Decoration gDecorations[] =
         .category = DECORCAT_DOLL,
         .price = 3000,
         .description = COMPOUND_STRING(
-            "{JPN}アチャモの ぬいぐるみ\nマットや つくえの\nうえに おくもの$"),
+            "アチャモの ぬいぐるみ\nマットや つくえの\nうえに おくもの$"),
         .tiles = DecorGfx_TORCHIC_DOLL,
         .icon = {NULL, NULL},
     },
@@ -1269,7 +1269,7 @@ const struct Decoration gDecorations[] =
         .category = DECORCAT_DOLL,
         .price = 3000,
         .description = COMPOUND_STRING(
-            "{JPN}ミズゴロウの ぬいぐるみ\nマットや つくえの\nうえに おくもの$"),
+            "ミズゴロウの ぬいぐるみ\nマットや つくえの\nうえに おくもの$"),
         .tiles = DecorGfx_MUDKIP_DOLL,
         .icon = {NULL, NULL},
     },
@@ -1283,7 +1283,7 @@ const struct Decoration gDecorations[] =
         .category = DECORCAT_DOLL,
         .price = 3000,
         .description = COMPOUND_STRING(
-            "{JPN}ヨマワルの ぬいぐるみ\nマットや つくえの\nうえに おくもの$"),
+            "ヨマワルの ぬいぐるみ\nマットや つくえの\nうえに おくもの$"),
         .tiles = DecorGfx_DUSKULL_DOLL,
         .icon = {NULL, NULL},
     },
@@ -1297,7 +1297,7 @@ const struct Decoration gDecorations[] =
         .category = DECORCAT_DOLL,
         .price = 3000,
         .description = COMPOUND_STRING(
-            "{JPN}ソーナノの ぬいぐるみ\nマットや つくえの\nうえに おくもの$"),
+            "ソーナノの ぬいぐるみ\nマットや つくえの\nうえに おくもの$"),
         .tiles = DecorGfx_WYNAUT_DOLL,
         .icon = {NULL, NULL},
     },
@@ -1311,7 +1311,7 @@ const struct Decoration gDecorations[] =
         .category = DECORCAT_DOLL,
         .price = 3000,
         .description = COMPOUND_STRING(
-            "{JPN}ヤジロンの ぬいぐるみ\nマットや つくえの\nうえに おくもの$"),
+            "ヤジロンの ぬいぐるみ\nマットや つくえの\nうえに おくもの$"),
         .tiles = DecorGfx_BALTOY_DOLL,
         .icon = {NULL, NULL},
     },
@@ -1325,7 +1325,7 @@ const struct Decoration gDecorations[] =
         .category = DECORCAT_DOLL,
         .price = 3000,
         .description = COMPOUND_STRING(
-            "{JPN}カクレオンの ぬいぐるみ\nマットや つくえの\nうえに おくもの$"),
+            "カクレオンの ぬいぐるみ\nマットや つくえの\nうえに おくもの$"),
         .tiles = DecorGfx_KECLEON_DOLL,
         .icon = {NULL, NULL},
     },
@@ -1339,7 +1339,7 @@ const struct Decoration gDecorations[] =
         .category = DECORCAT_DOLL,
         .price = 3000,
         .description = COMPOUND_STRING(
-            "{JPN}ルリリの ぬいぐるみ\nマットや つくえの\nうえに おくもの$"),
+            "ルリリの ぬいぐるみ\nマットや つくえの\nうえに おくもの$"),
         .tiles = DecorGfx_AZURILL_DOLL,
         .icon = {NULL, NULL},
     },
@@ -1353,7 +1353,7 @@ const struct Decoration gDecorations[] =
         .category = DECORCAT_DOLL,
         .price = 3000,
         .description = COMPOUND_STRING(
-            "{JPN}エネコの ぬいぐるみ\nマットや つくえの\nうえに おくもの$"),
+            "エネコの ぬいぐるみ\nマットや つくえの\nうえに おくもの$"),
         .tiles = DecorGfx_SKITTY_DOLL,
         .icon = {NULL, NULL},
     },
@@ -1367,7 +1367,7 @@ const struct Decoration gDecorations[] =
         .category = DECORCAT_DOLL,
         .price = 3000,
         .description = COMPOUND_STRING(
-            "{JPN}チルットの ぬいぐるみ\nマットや つくえの\nうえに おくもの$"),
+            "チルットの ぬいぐるみ\nマットや つくえの\nうえに おくもの$"),
         .tiles = DecorGfx_SWABLU_DOLL,
         .icon = {NULL, NULL},
     },
@@ -1381,7 +1381,7 @@ const struct Decoration gDecorations[] =
         .category = DECORCAT_DOLL,
         .price = 3000,
         .description = COMPOUND_STRING(
-            "{JPN}ゴクリンの ぬいぐるみ\nマットや つくえの\nうえに おくもの$"),
+            "ゴクリンの ぬいぐるみ\nマットや つくえの\nうえに おくもの$"),
         .tiles = DecorGfx_GULPIN_DOLL,
         .icon = {NULL, NULL},
     },
@@ -1395,7 +1395,7 @@ const struct Decoration gDecorations[] =
         .category = DECORCAT_DOLL,
         .price = 3000,
         .description = COMPOUND_STRING(
-            "{JPN}ハスボーの ぬいぐるみ\nマットや つくえの\nうえに おくもの$"),
+            "ハスボーの ぬいぐるみ\nマットや つくえの\nうえに おくもの$"),
         .tiles = DecorGfx_LOTAD_DOLL,
         .icon = {NULL, NULL},
     },
@@ -1409,7 +1409,7 @@ const struct Decoration gDecorations[] =
         .category = DECORCAT_DOLL,
         .price = 3000,
         .description = COMPOUND_STRING(
-            "{JPN}タネボーの ぬいぐるみ\nマットや つくえの\nうえに おくもの$"),
+            "タネボーの ぬいぐるみ\nマットや つくえの\nうえに おくもの$"),
         .tiles = DecorGfx_SEEDOT_DOLL,
         .icon = {NULL, NULL},
     },
@@ -1423,7 +1423,7 @@ const struct Decoration gDecorations[] =
         .category = DECORCAT_CUSHION,
         .price = 2000,
         .description = COMPOUND_STRING(
-            "{JPN}ピカチュウの クッション\nマットや つくえの\nうえに おくもの$"),
+            "ピカチュウの クッション\nマットや つくえの\nうえに おくもの$"),
         .tiles = DecorGfx_PIKA_CUSHION,
         .icon = {NULL, NULL},
     },
@@ -1437,7 +1437,7 @@ const struct Decoration gDecorations[] =
         .category = DECORCAT_CUSHION,
         .price = 2000,
         .description = COMPOUND_STRING(
-            "{JPN}マリルリの クッション\nマットや つくえの\nうえに おくもの$"),
+            "マリルリの クッション\nマットや つくえの\nうえに おくもの$"),
         .tiles = DecorGfx_ROUND_CUSHION,
         .icon = {NULL, NULL},
     },
@@ -1451,7 +1451,7 @@ const struct Decoration gDecorations[] =
         .category = DECORCAT_CUSHION,
         .price = 2000,
         .description = COMPOUND_STRING(
-            "{JPN}ムチュールの クッション\nマットや つくえの\nうえに おくもの$"),
+            "ムチュールの クッション\nマットや つくえの\nうえに おくもの$"),
         .tiles = DecorGfx_KISS_CUSHION,
         .icon = {NULL, NULL},
     },
@@ -1465,7 +1465,7 @@ const struct Decoration gDecorations[] =
         .category = DECORCAT_CUSHION,
         .price = 2000,
         .description = COMPOUND_STRING(
-            "{JPN}ジグザグマの クッション\nマットや つくえの\nうえに おくもの$"),
+            "ジグザグマの クッション\nマットや つくえの\nうえに おくもの$"),
         .tiles = DecorGfx_ZIGZAG_CUSHION,
         .icon = {NULL, NULL},
     },
@@ -1479,7 +1479,7 @@ const struct Decoration gDecorations[] =
         .category = DECORCAT_CUSHION,
         .price = 2000,
         .description = COMPOUND_STRING(
-            "{JPN}パッチールの クッション\nマットや つくえの\nうえに おくもの$"),
+            "パッチールの クッション\nマットや つくえの\nうえに おくもの$"),
         .tiles = DecorGfx_SPIN_CUSHION,
         .icon = {NULL, NULL},
     },
@@ -1493,7 +1493,7 @@ const struct Decoration gDecorations[] =
         .category = DECORCAT_CUSHION,
         .price = 2000,
         .description = COMPOUND_STRING(
-            "{JPN}ヤミラミの クッション\nマットや つくえの\nうえに おくもの$"),
+            "ヤミラミの クッション\nマットや つくえの\nうえに おくもの$"),
         .tiles = DecorGfx_DIAMOND_CUSHION,
         .icon = {NULL, NULL},
     },
@@ -1507,7 +1507,7 @@ const struct Decoration gDecorations[] =
         .category = DECORCAT_CUSHION,
         .price = 2000,
         .description = COMPOUND_STRING(
-            "{JPN}ボールの クッション\nマットや つくえの\nうえに おくもの$"),
+            "ボールの クッション\nマットや つくえの\nうえに おくもの$"),
         .tiles = DecorGfx_BALL_CUSHION,
         .icon = {NULL, NULL},
     },
@@ -1521,7 +1521,7 @@ const struct Decoration gDecorations[] =
         .category = DECORCAT_CUSHION,
         .price = 2000,
         .description = COMPOUND_STRING(
-            "{JPN}くさマーク クッション\nマットや つくえの\nうえに おくもの$"),
+            "くさマーク クッション\nマットや つくえの\nうえに おくもの$"),
         .tiles = DecorGfx_GRASS_CUSHION,
         .icon = {NULL, NULL},
     },
@@ -1535,7 +1535,7 @@ const struct Decoration gDecorations[] =
         .category = DECORCAT_CUSHION,
         .price = 2000,
         .description = COMPOUND_STRING(
-            "{JPN}ほのおマーク クッション\nマットや つくえの\nうえに おくもの$"),
+            "ほのおマーク クッション\nマットや つくえの\nうえに おくもの$"),
         .tiles = DecorGfx_FIRE_CUSHION,
         .icon = {NULL, NULL},
     },
@@ -1549,7 +1549,7 @@ const struct Decoration gDecorations[] =
         .category = DECORCAT_CUSHION,
         .price = 2000,
         .description = COMPOUND_STRING(
-            "{JPN}みずマーク クッション\nマットや つくえの\nうえに おくもの$"),
+            "みずマーク クッション\nマットや つくえの\nうえに おくもの$"),
         .tiles = DecorGfx_WATER_CUSHION,
         .icon = {NULL, NULL},
     },
@@ -1563,7 +1563,7 @@ const struct Decoration gDecorations[] =
         .category = DECORCAT_DOLL,
         .price = 10000,
         .description = COMPOUND_STRING(
-            "{JPN}おおきな ぬいぐるみ\nマットや つくえの\nうえに おくもの$"),
+            "おおきな ぬいぐるみ\nマットや つくえの\nうえに おくもの$"),
         .tiles = DecorGfx_SNORLAX_DOLL,
         .icon = {gDecorIcon_SnorlaxDoll, gDecorIconPalette_SnorlaxDoll},
     },
@@ -1577,7 +1577,7 @@ const struct Decoration gDecorations[] =
         .category = DECORCAT_DOLL,
         .price = 10000,
         .description = COMPOUND_STRING(
-            "{JPN}おおきな ぬいぐるみ\nマットや つくえの\nうえに おくもの$"),
+            "おおきな ぬいぐるみ\nマットや つくえの\nうえに おくもの$"),
         .tiles = DecorGfx_RHYDON_DOLL,
         .icon = {gDecorIcon_RhydonDoll, gDecorIconPalette_RhydonDoll},
     },
@@ -1591,7 +1591,7 @@ const struct Decoration gDecorations[] =
         .category = DECORCAT_DOLL,
         .price = 10000,
         .description = COMPOUND_STRING(
-            "{JPN}おおきな ぬいぐるみ\nマットや つくえの\nうえに おくもの$"),
+            "おおきな ぬいぐるみ\nマットや つくえの\nうえに おくもの$"),
         .tiles = DecorGfx_LAPRAS_DOLL,
         .icon = {gDecorIcon_LaprasDoll, gDecorIconPalette_LaprasDoll},
     },
@@ -1605,7 +1605,7 @@ const struct Decoration gDecorations[] =
         .category = DECORCAT_DOLL,
         .price = 10000,
         .description = COMPOUND_STRING(
-            "{JPN}おおきな ぬいぐるみ\nマットや つくえの\nうえに おくもの$"),
+            "おおきな ぬいぐるみ\nマットや つくえの\nうえに おくもの$"),
         .tiles = DecorGfx_VENUSAUR_DOLL,
         .icon = {gDecorIcon_VenusaurDoll, gDecorIconPalette_VenusaurDoll},
     },
@@ -1619,7 +1619,7 @@ const struct Decoration gDecorations[] =
         .category = DECORCAT_DOLL,
         .price = 10000,
         .description = COMPOUND_STRING(
-            "{JPN}おおきな ぬいぐるみ\nマットや つくえの\nうえに おくもの$"),
+            "おおきな ぬいぐるみ\nマットや つくえの\nうえに おくもの$"),
         .tiles = DecorGfx_CHARIZARD_DOLL,
         .icon = {gDecorIcon_CharizardDoll, gDecorIconPalette_CharizardDoll},
     },
@@ -1633,7 +1633,7 @@ const struct Decoration gDecorations[] =
         .category = DECORCAT_DOLL,
         .price = 10000,
         .description = COMPOUND_STRING(
-            "{JPN}おおきな ぬいぐるみ\nマットや つくえの\nうえに おくもの$"),
+            "おおきな ぬいぐるみ\nマットや つくえの\nうえに おくもの$"),
         .tiles = DecorGfx_BLASTOISE_DOLL,
         .icon = {gDecorIcon_BlastoiseDoll, gDecorIconPalette_BlastoiseDoll},
     },
@@ -1647,7 +1647,7 @@ const struct Decoration gDecorations[] =
         .category = DECORCAT_DOLL,
         .price = 10000,
         .description = COMPOUND_STRING(
-            "{JPN}おおきな ぬいぐるみ\nマットや つくえの\nうえに おくもの$"),
+            "おおきな ぬいぐるみ\nマットや つくえの\nうえに おくもの$"),
         .tiles = DecorGfx_WAILMER_DOLL,
         .icon = {gDecorIcon_WailmerDoll, gDecorIconPalette_WailmerDoll},
     },
@@ -1661,7 +1661,7 @@ const struct Decoration gDecorations[] =
         .category = DECORCAT_DOLL,
         .price = 10000,
         .description = COMPOUND_STRING(
-            "{JPN}おおきな ぬいぐるみ\nマットや つくえの\nうえに おくもの$"),
+            "おおきな ぬいぐるみ\nマットや つくえの\nうえに おくもの$"),
         .tiles = DecorGfx_REGIROCK_DOLL,
         .icon = {gDecorIcon_RegirockDoll, gDecorIconPalette_RegirockDoll},
     },
@@ -1675,7 +1675,7 @@ const struct Decoration gDecorations[] =
         .category = DECORCAT_DOLL,
         .price = 10000,
         .description = COMPOUND_STRING(
-            "{JPN}おおきな ぬいぐるみ\nマットや つくえの\nうえに おくもの$"),
+            "おおきな ぬいぐるみ\nマットや つくえの\nうえに おくもの$"),
         .tiles = DecorGfx_REGICE_DOLL,
         .icon = {gDecorIcon_RegiceDoll, gDecorIconPalette_RegiceDoll},
     },
@@ -1689,7 +1689,7 @@ const struct Decoration gDecorations[] =
         .category = DECORCAT_DOLL,
         .price = 10000,
         .description = COMPOUND_STRING(
-            "{JPN}おおきな ぬいぐるみ\nマットや つくえの\nうえに おくもの$"),
+            "おおきな ぬいぐるみ\nマットや つくえの\nうえに おくもの$"),
         .tiles = DecorGfx_REGISTEEL_DOLL,
         .icon = {gDecorIcon_RegisteelDoll, gDecorIconPalette_RegisteelDoll},
     }

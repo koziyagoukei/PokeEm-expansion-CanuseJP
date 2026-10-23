@@ -370,157 +370,157 @@ MossdeepCity_Gym_EventScript_RedFloorSwitch::
 	end
 
 MossdeepCity_Gym_Text_GymGuideAdvice:
-	.string "{JPN}げんき しとぉや!!\nチャンピオンを めざす {PLAYER}!!\pこのジムの ジムリーダーは\nエスパータイプの ポケモンつかい!\pかくとうタイプや どくタイプの\nポケモンで いどむと\lものすごい ダメージを くらうぞ!\pしかも ばつぐんの\nコンビネーションで せめてくる!\pだから きみも かつために ポケモンとの\nきずなを きばって みせて やれ!$"
+	.string "げんき しとぉや!!\nチャンピオンを めざす {PLAYER}!!\pこのジムの ジムリーダーは\nエスパータイプの ポケモンつかい!\pかくとうタイプや どくタイプの\nポケモンで いどむと\lものすごい ダメージを くらうぞ!\pしかも ばつぐんの\nコンビネーションで せめてくる!\pだから きみも かつために ポケモンとの\nきずなを きばって みせて やれ!$"
 
 MossdeepCity_Gym_Text_GymGuidePostVictory:
-	.string "{JPN}こりゃあ たまげた!!\nきみは すごか トレーナーだ!$"
+	.string "こりゃあ たまげた!!\nきみは すごか トレーナーだ!$"
 
 MossdeepCity_Gym_Text_PrestonIntro:
-	.string "{JPN}しょうぶは こころの つよさで きまる\nこころ よわき ものは かてない!$"
+	.string "しょうぶは こころの つよさで きまる\nこころ よわき ものは かてない!$"
 
 MossdeepCity_Gym_Text_PrestonDefeat:
-	.string "{JPN}まけたか!\nオレも きたえ なおさねばっ!$"
+	.string "まけたか!\nオレも きたえ なおさねばっ!$"
 
 MossdeepCity_Gym_Text_PrestonPostBattle:
-	.string "{JPN}まよった ほうが まける\nオレからの ちゅうこくだ!$"
+	.string "まよった ほうが まける\nオレからの ちゅうこくだ!$"
 
 MossdeepCity_Gym_Text_VirgilIntro:
-	.string "{JPN}キミの さいのうを みせて もらおうか!$"
+	.string "キミの さいのうを みせて もらおうか!$"
 
 MossdeepCity_Gym_Text_VirgilDefeat:
-	.string "{JPN}すばらしい さいのうの もちぬしだ!$"
+	.string "すばらしい さいのうの もちぬしだ!$"
 
 MossdeepCity_Gym_Text_VirgilPostBattle:
-	.string "{JPN}よのなかに てんさいが いるならば\nここの ジムリーダーが そうだ……\pだが もしかすると キミの ほうが\nさいのうは うえかも しれない……$"
+	.string "よのなかに てんさいが いるならば\nここの ジムリーダーが そうだ……\pだが もしかすると キミの ほうが\nさいのうは うえかも しれない……$"
 
 MossdeepCity_Gym_Text_BlakeIntro:
-	.string "{JPN}ふふふ……\nねんりきで モンスターボールを\lくうちゅうに うかせて みせよう……\pうおおぉぉぉぉぉ……!\p…… …… ……\n…… …… ……\pちょうしの わるい ときも ある……$"
+	.string "ふふふ……\nねんりきで モンスターボールを\lくうちゅうに うかせて みせよう……\pうおおぉぉぉぉぉ……!\p…… …… ……\n…… …… ……\pちょうしの わるい ときも ある……$"
 
 MossdeepCity_Gym_Text_BlakeDefeat:
-	.string "{JPN}ポケモン しょうぶも\nちょうし わりーっ!$"
+	.string "ポケモン しょうぶも\nちょうし わりーっ!$"
 
 MossdeepCity_Gym_Text_BlakePostBattle:
-	.string "{JPN}モンスターボールは おおきすぎた\nこの わたぼこり なら ぜったいに……\pふううううううっ……!\p…… …… ……\n…… …… ……\pちがうぞ!\nはないきで とばして なんか いないぞ!$"
+	.string "モンスターボールは おおきすぎた\nこの わたぼこり なら ぜったいに……\pふううううううっ……!\p…… …… ……\n…… …… ……\pちがうぞ!\nはないきで とばして なんか いないぞ!$"
 
 MossdeepCity_Gym_Text_HannahIntro:
-	.string "{JPN}あなたが アタシに まけた としても\nおちこまない ことね!\pあなたが よわい わけじゃ なくて\nアタシが つよすぎる からよ!$"
+	.string "あなたが アタシに まけた としても\nおちこまない ことね!\pあなたが よわい わけじゃ なくて\nアタシが つよすぎる からよ!$"
 
 MossdeepCity_Gym_Text_HannahDefeat:
-	.string "{JPN}あなたは さらに つよすぎた!$"
+	.string "あなたは さらに つよすぎた!$"
 
 MossdeepCity_Gym_Text_HannahPostBattle:
-	.string "{JPN}まけたから って クヨクヨ しないわ\nもっと しゅぎょう すれば いいんだもの!\pまえむきな ところが アタシの とりえ!$"
+	.string "まけたから って クヨクヨ しないわ\nもっと しゅぎょう すれば いいんだもの!\pまえむきな ところが アタシの とりえ!$"
 
 MossdeepCity_Gym_Text_SamanthaIntro:
-	.string "{JPN}みえる……\nあなたの みらいが みえる……\pわたくしに かてたら\nあなたの みらいを おしえて あげる!$"
+	.string "みえる……\nあなたの みらいが みえる……\pわたくしに かてたら\nあなたの みらいを おしえて あげる!$"
 
 MossdeepCity_Gym_Text_SamanthaDefeat:
-	.string "{JPN}まいりました……!$"
+	.string "まいりました……!$"
 
 MossdeepCity_Gym_Text_SamanthaPostBattle:
-	.string "{JPN}あなたと ジムリーダーさまの しょうぶ……\nものすごく はげしい てんかい……\pけっかは……\nわたくしの くちからは いえない……!$"
+	.string "あなたと ジムリーダーさまの しょうぶ……\nものすごく はげしい てんかい……\pけっかは……\nわたくしの くちからは いえない……!$"
 
 MossdeepCity_Gym_Text_MauraIntro:
-	.string "{JPN}あなたが これまで あゆんできた みちのり\nあなたが けいけん してきた ことがら\pすべてを ぶつけて きなさい!$"
+	.string "あなたが これまで あゆんできた みちのり\nあなたが けいけん してきた ことがら\pすべてを ぶつけて きなさい!$"
 
 MossdeepCity_Gym_Text_MauraDefeat:
-	.string "{JPN}すばらしい みちのり だわ……!$"
+	.string "すばらしい みちのり だわ……!$"
 
 MossdeepCity_Gym_Text_MauraPostBattle:
-	.string "{JPN}がんばった ものには あかるい みらいが\nなまけた ものには ぜつぼうの あしたが\pいんがおうほう……\nすべては じぶんに はねかえる ものよ……$"
+	.string "がんばった ものには あかるい みらいが\nなまけた ものには ぜつぼうの あしたが\pいんがおうほう……\nすべては じぶんに はねかえる ものよ……$"
 
 MossdeepCity_Gym_Text_SylviaIntro:
-	.string "{JPN}いのちを けずって でも\nこの しょうぶ かってみせるわ……!$"
+	.string "いのちを けずって でも\nこの しょうぶ かってみせるわ……!$"
 
 MossdeepCity_Gym_Text_SylviaDefeat:
-	.string "{JPN}あなたは\nおそろしい ことを……$"
+	.string "あなたは\nおそろしい ことを……$"
 
 MossdeepCity_Gym_Text_SylviaPostBattle:
-	.string "{JPN}あたしに かったわね……\nなにが おきても しらないわよ……!$"
+	.string "あたしに かったわね……\nなにが おきても しらないわよ……!$"
 
 MossdeepCity_Gym_Text_NateIntro:
-	.string "{JPN}ほっほっほ\pエスパータイプの てごわさを\nあなたに おしえて さしあげましょう$"
+	.string "ほっほっほ\pエスパータイプの てごわさを\nあなたに おしえて さしあげましょう$"
 
 MossdeepCity_Gym_Text_NateDefeat:
-	.string "{JPN}こ これは これは!\nすばらしい たたかいかた ですな$"
+	.string "こ これは これは!\nすばらしい たたかいかた ですな$"
 
 MossdeepCity_Gym_Text_NatePostBattle:
-	.string "{JPN}わ わたくしは どんなに まけても\nとりみだしは しませんから$"
+	.string "わ わたくしは どんなに まけても\nとりみだしは しませんから$"
 
 MossdeepCity_Gym_Text_KathleenIntro:
-	.string "{JPN}おそろしいめに あわせて やろうかーっ!$"
+	.string "おそろしいめに あわせて やろうかーっ!$"
 
 MossdeepCity_Gym_Text_KathleenDefeat:
-	.string "{JPN}いやあああーっ!$"
+	.string "いやあああーっ!$"
 
 MossdeepCity_Gym_Text_KathleenPostBattle:
-	.string "{JPN}あなたの げんきが うつるわ\nはやく いっちゃいなさいよ!$"
+	.string "あなたの げんきが うつるわ\nはやく いっちゃいなさいよ!$"
 
 MossdeepCity_Gym_Text_CliffordIntro:
-	.string "{JPN}としより だからと いって\nあまく みて もらっては こまりますよ$"
+	.string "としより だからと いって\nあまく みて もらっては こまりますよ$"
 
 MossdeepCity_Gym_Text_CliffordDefeat:
-	.string "{JPN}あふれる わかさを かんじる!$"
+	.string "あふれる わかさを かんじる!$"
 
 MossdeepCity_Gym_Text_CliffordPostBattle:
-	.string "{JPN}この ジムの リーダーも そりゃもう!\nわかくて げんき はつらつ ですぞ$"
+	.string "この ジムの リーダーも そりゃもう!\nわかくて げんき はつらつ ですぞ$"
 
 MossdeepCity_Gym_Text_MaceyIntro:
-	.string "{JPN}まだよ\nまだ ジムリーダーには あわせないわよ!$"
+	.string "まだよ\nまだ ジムリーダーには あわせないわよ!$"
 
 MossdeepCity_Gym_Text_MaceyDefeat:
-	.string "{JPN}ちょっと! なんなの その つよさ!$"
+	.string "ちょっと! なんなの その つよさ!$"
 
 MossdeepCity_Gym_Text_MaceyPostBattle:
-	.string "{JPN}フン あんたは つよいけど\nエスパーむき では ないわ!\lなんだか たたかいかたが がさつ だもん!$"
+	.string "フン あんたは つよいけど\nエスパーむき では ないわ!\lなんだか たたかいかたが がさつ だもん!$"
 
 MossdeepCity_Gym_Text_NicholasIntro:
-	.string "{JPN}うぉーっし! おれの\nスーパーポケモンしょうぶつよいパワー を\lうけて みろーっ!$"
+	.string "うぉーっし! おれの\nスーパーポケモンしょうぶつよいパワー を\lうけて みろーっ!$"
 
 MossdeepCity_Gym_Text_NicholasDefeat:
-	.string "{JPN}やられたあああ!$"
+	.string "やられたあああ!$"
 
 MossdeepCity_Gym_Text_NicholasPostBattle:
-	.string "{JPN}よし! つぎは\nスペシャルポケモンまけないパワー でも\lかいはつ するかな?$"
+	.string "よし! つぎは\nスペシャルポケモンまけないパワー でも\lかいはつ するかな?$"
 
 MossdeepCity_Gym_Text_TateAndLizaIntro:
-	.string "{JPN}フウ『へへへ…… ジムリーダーが\pラン『ふふふ…… ジムリーダーが\pフウ『ふたりも いるんで おどろいた?\nラン『ふたりも いるんで おどろいた?\pフウ『ぼくたち ふたご!\nラン『あたしたち ふたご!\pフウ『なにも ことばに しなくても\nラン『おたがいの かんがえて いることが\pフウ『あたまの なかに うかぶから\nラン『つうじあうことが できるのヨ!\pフウ『そんな ぼくたちの コンビネーション\nラン『きみに やぶることが できる?$"
+	.string "フウ『へへへ…… ジムリーダーが\pラン『ふふふ…… ジムリーダーが\pフウ『ふたりも いるんで おどろいた?\nラン『ふたりも いるんで おどろいた?\pフウ『ぼくたち ふたご!\nラン『あたしたち ふたご!\pフウ『なにも ことばに しなくても\nラン『おたがいの かんがえて いることが\pフウ『あたまの なかに うかぶから\nラン『つうじあうことが できるのヨ!\pフウ『そんな ぼくたちの コンビネーション\nラン『きみに やぶることが できる?$"
 
 MossdeepCity_Gym_Text_TateAndLizaDefeat:
-	.string "{JPN}フウ『ぼっ ぼくたちの\nラン『コンビネーションが……!\pフウ『やぶれた からには しかたない\nラン『まけを みとめて これを あげるヨ!$"
+	.string "フウ『ぼっ ぼくたちの\nラン『コンビネーションが……!\pフウ『やぶれた からには しかたない\nラン『まけを みとめて これを あげるヨ!$"
 
 MossdeepCity_Gym_Text_ReceivedMindBadge:
-	.string "{JPN}{PLAYER}は フウと ランから\nマインドバッジを もらった!$"
+	.string "{PLAYER}は フウと ランから\nマインドバッジを もらった!$"
 
 MossdeepCity_Gym_Text_ExplainMindBadgeTakeThis:
-	.string "{JPN}フウ『マインドバッジには ポケモンの\nとくこうと とくぼうを たかめる\lこうかが ひめられている!\pラン『それから ダイビング という\nひでんわざも つかえるように なるヨ!\pフウ『あと これも もっていきなよ!$"
+	.string "フウ『マインドバッジには ポケモンの\nとくこうと とくぼうを たかめる\lこうかが ひめられている!\pラン『それから ダイビング という\nひでんわざも つかえるように なるヨ!\pフウ『あと これも もっていきなよ!$"
 
 MossdeepCity_Gym_Text_ExplainCalmMind:
-	.string "{JPN}フウ『その わざマシン04には\nラン『めいそうが はいってるヨ!\pフウ『ポケモンの とくこうと\nラン『ポケモンの とくぼうを\pフウ『たかめてくれる わざ なんだ!\nラン『エスパーポケモンに ぴったりだヨ!\p…… …… ……$"
+	.string "フウ『その わざマシン04には\nラン『めいそうが はいってるヨ!\pフウ『ポケモンの とくこうと\nラン『ポケモンの とくぼうを\pフウ『たかめてくれる わざ なんだ!\nラン『エスパーポケモンに ぴったりだヨ!\p…… …… ……$"
 
 MossdeepCity_Gym_Text_RegisteredTateAndLiza:
-	.string "{JPN}ジムリーダー フウとランを\nポケナビに とうろく した!$"
+	.string "ジムリーダー フウとランを\nポケナビに とうろく した!$"
 
 MossdeepCity_Gym_Text_TateAndLizaPostBattle:
-	.string "{JPN}フウ『きょうだいの きずな より\nきみと ポケモンとの きずなの ほうが\lはるかに つよかった みたいだね……\pラン『あなたなら もっと つよくなれる!\nたたかった あたしたちには わかるわ!$"
+	.string "フウ『きょうだいの きずな より\nきみと ポケモンとの きずなの ほうが\lはるかに つよかった みたいだね……\pラン『あなたなら もっと つよくなれる!\nたたかった あたしたちには わかるわ!$"
 
 MossdeepCity_Gym_Text_TateAndLizaNeedTwoMons:
-	.string "{JPN}フウ『へへへ…… ジムリーダーが\pラン『ふたりも いるんで おどろいた?\pフウ『あら? たたかえる ポケモンが\nラン『いっぴき しか いないヨ!\pフウ『それでは たたかえないね!\nラン『しょうぶを たのしみたいから\lもっと ポケモン つれてきてヨ!$"
+	.string "フウ『へへへ…… ジムリーダーが\pラン『ふたりも いるんで おどろいた?\pフウ『あら? たたかえる ポケモンが\nラン『いっぴき しか いないヨ!\pフウ『それでは たたかえないね!\nラン『しょうぶを たのしみたいから\lもっと ポケモン つれてきてヨ!$"
 
 MossdeepCity_Gym_Text_GymStatue:
-	.string "{JPN}トクサネシティ ポケモンジム$"
+	.string "トクサネシティ ポケモンジム$"
 
 MossdeepCity_Gym_Text_GymStatueCertified:
-	.string "{JPN}トクサネシティ ポケモンジム\pフウ ラン にんてい トレーナー!\n{PLAYER}$"
+	.string "トクサネシティ ポケモンジム\pフウ ラン にんてい トレーナー!\n{PLAYER}$"
 
 MossdeepCity_Gym_Text_TateAndLizaPreRematch:
-	.string "{JPN}フウ『ポケモンは……\nラン『ポケモンは……\pフウ『くみあわせを かえると\nラン『たたかいかたも かわるよね\pフウ『でも ぼくは……\nラン『でも あたしは……\pフウ『いつでも ランと いっしょ!\nラン『いつでも フウと いっしょ!\pフウ『ぼくたちの コンビネーション\nラン『なんどでも みせて あげるわ!$"
+	.string "フウ『ポケモンは……\nラン『ポケモンは……\pフウ『くみあわせを かえると\nラン『たたかいかたも かわるよね\pフウ『でも ぼくは……\nラン『でも あたしは……\pフウ『いつでも ランと いっしょ!\nラン『いつでも フウと いっしょ!\pフウ『ぼくたちの コンビネーション\nラン『なんどでも みせて あげるわ!$"
 
 MossdeepCity_Gym_Text_TateAndLizaRematchDefeat:
-	.string "{JPN}フウ『きみと ポケモンって\nラン『まるで きょうだい みたい!$"
+	.string "フウ『きみと ポケモンって\nラン『まるで きょうだい みたい!$"
 
 MossdeepCity_Gym_Text_TateAndLizaPostRematch:
-	.string "{JPN}フウ『なんど たおされたって\nまた たちなおって みせるからね!\pラン『だって あたしたち ふたり\nちからを あわせて がんばれるもの!$"
+	.string "フウ『なんど たおされたって\nまた たちなおって みせるからね!\pラン『だって あたしたち ふたり\nちからを あわせて がんばれるもの!$"
 
 MossdeepCity_Gym_Text_TateAndLizaRematchNeedTwoMons:
-	.string "{JPN}フウ『また ぼくたちと……\nラン『また あたしたちと……\pフウ『しょうぶを しに きてくれたんだね\nラン『しょうぶを しに きてくれたんだね\pフウ『でも……\nラン『あなた たたかえる ポケモンを\pフウ『1ひきしか もって いないよ!\nラン『1ひきしか もって いないわ!\pフウ『できれば 2ひき いじょうの\nラン『ポケモンを もって また きてね!$"
+	.string "フウ『また ぼくたちと……\nラン『また あたしたちと……\pフウ『しょうぶを しに きてくれたんだね\nラン『しょうぶを しに きてくれたんだね\pフウ『でも……\nラン『あなた たたかえる ポケモンを\pフウ『1ひきしか もって いないよ!\nラン『1ひきしか もって いないわ!\pフウ『できれば 2ひき いじょうの\nラン『ポケモンを もって また きてね!$"

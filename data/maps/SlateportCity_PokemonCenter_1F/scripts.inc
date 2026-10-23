@@ -25,8 +25,8 @@ SlateportCity_PokemonCenter_1F_EventScript_Woman::
 	end
 
 SlateportCity_PokemonCenter_1F_Text_RaiseDifferentTypesOfPokemon:
-	.string "{JPN}しょうぶの コツ……\pいろんな ポケモンを\nバランスよく そだてることじゃ ないか？\pいっぴきだけ つよくても\nにがてな ポケモンに であってしまうと\lても あしも でなくなりそうだぜ$"
+	.string "しょうぶの コツ……\pいろんな ポケモンを\nバランスよく そだてることじゃ ないか？\pいっぴきだけ つよくても\nにがてな ポケモンに であってしまうと\lても あしも でなくなりそうだぜ$"
 
 SlateportCity_PokemonCenter_1F_Text_TradedMonWithFriend:
-	.string "{JPN}ともだちと ポケモンこうかん するでしょ\pポケモンが どうぐを もっていると\n2ばい うれしく なるよねー！！$"
+	.string "ともだちと ポケモンこうかん するでしょ\pポケモンが どうぐを もっていると\n2ばい うれしく なるよねー！！$"
 

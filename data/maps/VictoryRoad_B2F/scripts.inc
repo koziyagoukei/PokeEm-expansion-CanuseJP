@@ -32,55 +32,55 @@ VictoryRoad_B2F_EventScript_Dianne::
 	end
 
 VictoryRoad_B2F_Text_VitoIntro:
-	.string "{JPN}かぞく ぜんいんで\nポケモンの しゅぎょうを してたんだ!\lだれにも まけないぜ!$"
+	.string "かぞく ぜんいんで\nポケモンの しゅぎょうを してたんだ!\lだれにも まけないぜ!$"
 
 VictoryRoad_B2F_Text_VitoDefeat:
-	.string "{JPN}おれの かぞく より つよい!?\nそんなことって あるのか!?$"
+	.string "おれの かぞく より つよい!?\nそんなことって あるのか!?$"
 
 VictoryRoad_B2F_Text_VitoPostBattle:
-	.string "{JPN}かぞくの だれよりも つよかった おれ……\nいままで だれにも まけなかった おれ……\pだけど じしん なくしちゃったよ\nいえに かえろうかなあ$"
+	.string "かぞくの だれよりも つよかった おれ……\nいままで だれにも まけなかった おれ……\pだけど じしん なくしちゃったよ\nいえに かえろうかなあ$"
 
 VictoryRoad_B2F_Text_OwenIntro:
-	.string "{JPN}つよい こどもが いるって ウワサだ!\nそれって きみの ことかい?$"
+	.string "つよい こどもが いるって ウワサだ!\nそれって きみの ことかい?$"
 
 VictoryRoad_B2F_Text_OwenDefeat:
-	.string "{JPN}たしかに つよい!$"
+	.string "たしかに つよい!$"
 
 VictoryRoad_B2F_Text_OwenPostBattle:
-	.string "{JPN}おれが きいた ウワサだと\nその つよい こども ってのは\lトウカ しゅっしん らしいな!$"
+	.string "おれが きいた ウワサだと\nその つよい こども ってのは\lトウカ しゅっしん らしいな!$"
 
 VictoryRoad_B2F_Text_CarolineIntro:
-	.string "{JPN}そろそろ へばって きたかな?$"
+	.string "そろそろ へばって きたかな?$"
 
 VictoryRoad_B2F_Text_CarolineDefeat:
-	.string "{JPN}ぜんぜん へばってないわ!$"
+	.string "ぜんぜん へばってないわ!$"
 
 VictoryRoad_B2F_Text_CarolinePostBattle:
-	.string "{JPN}この チャンピオンロードも\nポケモンリーグも ながちょうば!\lたいりょくには ちゅうい してね!$"
+	.string "この チャンピオンロードも\nポケモンリーグも ながちょうば!\lたいりょくには ちゅうい してね!$"
 
 VictoryRoad_B2F_Text_JulieIntro:
-	.string "{JPN}ジムバッジを たくさん もってるからって\nゆだん しないでよ\lうえには うえが いるんだから!$"
+	.string "ジムバッジを たくさん もってるからって\nゆだん しないでよ\lうえには うえが いるんだから!$"
 
 VictoryRoad_B2F_Text_JulieDefeat:
-	.string "{JPN}あなたの ほうが うえね!$"
+	.string "あなたの ほうが うえね!$"
 
 VictoryRoad_B2F_Text_JuliePostBattle:
-	.string "{JPN}じぶんの あつめた ジムバッジを みて\nいままでの トレーナーを おもいだすのよ$"
+	.string "じぶんの あつめた ジムバッジを みて\nいままでの トレーナーを おもいだすのよ$"
 
 VictoryRoad_B2F_Text_FelixIntro:
-	.string "{JPN}ここまで きて\nきんちょう して おなかが いたいんです!$"
+	.string "ここまで きて\nきんちょう して おなかが いたいんです!$"
 
 VictoryRoad_B2F_Text_FelixDefeat:
-	.string "{JPN}ああ\n……いたい$"
+	.string "ああ\n……いたい$"
 
 VictoryRoad_B2F_Text_FelixPostBattle:
-	.string "{JPN}もうすぐ ポケモンリーグと おもうと\nきんちょう して きんちょう して!\lみため ごまかすのが せいいっぱい です$"
+	.string "もうすぐ ポケモンリーグと おもうと\nきんちょう して きんちょう して!\lみため ごまかすのが せいいっぱい です$"
 
 VictoryRoad_B2F_Text_DianneIntro:
-	.string "{JPN}エリート ちゅうの エリートが あつまる\nこの どうくつは どうかしら?$"
+	.string "エリート ちゅうの エリートが あつまる\nこの どうくつは どうかしら?$"
 
 VictoryRoad_B2F_Text_DianneDefeat:
-	.string "{JPN}ぜんぜん どうじて いないわ……!$"
+	.string "ぜんぜん どうじて いないわ……!$"
 
 VictoryRoad_B2F_Text_DiannePostBattle:
-	.string "{JPN}あなた どきょうが あるのね\nきにいったわ がんばって!$"
+	.string "あなた どきょうが あるのね\nきにいったわ がんばって!$"

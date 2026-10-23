@@ -360,7 +360,7 @@ Route120_EventScript_Callie::
 	end
 
 Route120_Text_StevenGreeting:
-	.string "{JPN}ダイゴ『ん? {PLAYER}{KUN}か\nひさしぶり だね\pここに みえない なにかが いるよね?\pで みえない なにかに むかって\nこの どうぐを つかうと……\pちがうな…… せつめい するよりも\nじっさいに つかった ほうが たのしそうだ\p{PLAYER}{KUN} きみの ポケモン\nたたかう じゅんびは できて いるのかい?"
+	.string "ダイゴ『ん? {PLAYER}{KUN}か\nひさしぶり だね\pここに みえない なにかが いるよね?\pで みえない なにかに むかって\nこの どうぐを つかうと……\pちがうな…… せつめい するよりも\nじっさいに つかった ほうが たのしそうだ\p{PLAYER}{KUN} きみの ポケモン\nたたかう じゅんびは できて いるのかい?"
 	.string ""
 	.string ""
 	.string ""
@@ -373,25 +373,25 @@ Route120_Text_StevenGreeting:
 	.string "$"
 
 Route120_Text_StevenIllWaitHere:
-	.string "{JPN}ダイゴ『そう?\pボクは ここで まっているから\nじゅんびを すると いいよ"
+	.string "ダイゴ『そう?\pボクは ここで まっているから\nじゅんびを すると いいよ"
 	.string "$"
 
 Route120_Text_StevenReadyForBattle:
-	.string "{JPN}ダイゴ『{PLAYER}{KUN} きみの ポケモン\nたたかう じゅんびは できて いるのかい?"
+	.string "ダイゴ『{PLAYER}{KUN} きみの ポケモン\nたたかう じゅんびは できて いるのかい?"
 	.string "$"
 
 Route120_Text_StevenShowMeYourPower:
-	.string "{JPN}ダイゴ『{PLAYER}{KUN}\nきみの トレーナー としての\lじつりょく みせてもらうよ!"
+	.string "ダイゴ『{PLAYER}{KUN}\nきみの トレーナー としての\lじつりょく みせてもらうよ!"
 	.string "$"
 
 Route120_Text_StevenUsedDevonScope:
-	.string "{JPN}ダイゴは\nデボンスコープを つかった!\pとうめいに なっていた\nポケモンの すがたが まるわかりだ!\pポケモンは\nおどろいて おそいかかってきた!"
+	.string "ダイゴは\nデボンスコープを つかった!\pとうめいに なっていた\nポケモンの すがたが まるわかりだ!\pポケモンは\nおどろいて おそいかかってきた!"
 	.string ""
 	.string ""
 	.string "$"
 
 Route120_Text_StevenGiveDevonScope:
-	.string "{JPN}ダイゴ『なるほど\nきみの たたかいかた おもしろいね\pはじめて ムロで であった ときよりも\nポケモンも そだっているし……\pそうだね\nこの デボンスコープは きみに あげよう\pほかにも すがたを かくしている\nポケモンは いるかも しれないから"
+	.string "ダイゴ『なるほど\nきみの たたかいかた おもしろいね\pはじめて ムロで であった ときよりも\nポケモンも そだっているし……\pそうだね\nこの デボンスコープは きみに あげよう\pほかにも すがたを かくしている\nポケモンは いるかも しれないから"
 	.string ""
 	.string ""
 	.string ""
@@ -401,29 +401,29 @@ Route120_Text_StevenGiveDevonScope:
 	.string "$"
 
 Route120_Text_StevenGoodbye:
-	.string "{JPN}ダイゴ『{PLAYER}{KUN}\pボクは がんばっている\nトレーナーと ポケモンが すきだから\pきみのこと いいと おもうよ\pじゃあ\nまた どこかで あおう!"
+	.string "ダイゴ『{PLAYER}{KUN}\pボクは がんばっている\nトレーナーと ポケモンが すきだから\pきみのこと いいと おもうよ\pじゃあ\nまた どこかで あおう!"
 	.string ""
 	.string ""
 	.string ""
 	.string "$"
 
 Kecleon_Text_SomethingUnseeable:
-	.string "{JPN}みえない なにかが いるようだ$"
+	.string "みえない なにかが いるようだ$"
 
 Kecleon_Text_WantToUseDevonScope:
-	.string "{JPN}みえない なにかが いるようだ\pデボンスコープを つかいますか?"
+	.string "みえない なにかが いるようだ\pデボンスコープを つかいますか?"
 	.string "$"
 
 Kecleon_Text_UseDevonScopeMonAttacked:
-	.string "{JPN}{PLAYER}は\nデボンスコープを つかった!\pとうめいに なっていた\nポケモンの すがたが まるわかりだ!\pポケモンは\nおどろいて おそいかかってきた!"
+	.string "{PLAYER}は\nデボンスコープを つかった!\pとうめいに なっていた\nポケモンの すがたが まるわかりだ!\pポケモンは\nおどろいて おそいかかってきた!"
 	.string ""
 	.string ""
 	.string "$"
 
 Route120_Text_RouteSignFortree:
-	.string "{JPN}ここは 120ばん どうろ\n{LEFT_ARROW} ヒワマキシティ"
+	.string "ここは 120ばん どうろ\n{LEFT_ARROW} ヒワマキシティ"
 	.string "$"
 
 Route120_Text_RouteSign121:
-	.string "{JPN}{RIGHT_ARROW} 121ばん どうろ\n{LEFT_ARROW} 120ばん どうろ"
+	.string "{RIGHT_ARROW} 121ばん どうろ\n{LEFT_ARROW} 120ばん どうろ"
 	.string "$"

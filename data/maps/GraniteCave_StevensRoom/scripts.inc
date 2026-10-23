@@ -80,20 +80,20 @@ GraniteCave_StevensRoom_Movement_StevenExitSouth:
 	step_end
 
 GraniteCave_StevensRoom_Text_ImStevenLetterForMe:
-	.string "{JPN}ボクの なまえは ダイゴ\pめずらしい いしに きょうみが あって\nあちこち たび してるんだよ\pえっ?\nボクに てがみ……?$"
+	.string "ボクの なまえは ダイゴ\pめずらしい いしに きょうみが あって\nあちこち たび してるんだよ\pえっ?\nボクに てがみ……?$"
 
 GraniteCave_StevensRoom_Text_ThankYouTakeThis:
-	.string "{JPN}ダイゴ『うん ありがとう\pわざわざ とどけて くれたんだ\nなにか おれいを させてもらうよ\pそうだね\nこの わざマシンを あげよう\pはがねのつばさ といって\nボクの おきにいりの わざ だから$"
+	.string "ダイゴ『うん ありがとう\pわざわざ とどけて くれたんだ\nなにか おれいを させてもらうよ\pそうだね\nこの わざマシンを あげよう\pはがねのつばさ といって\nボクの おきにいりの わざ だから$"
 
 GraniteCave_StevensRoom_Text_CouldBecomeChampionLetsRegister:
-	.string "{JPN}ダイゴ『きみの ポケモン\nなかなか いい かんじ だね\pしゅぎょうを つづければ\nいつかは ポケモンリーグの\lチャンピオンに だって なれる\lボクは そう おもうな\pそうだ!\nせっかく きみと しりあえたんだ\lおたがい ポケナビに\lなまえを とうろく しておこう!\p…… …… ……$"
+	.string "ダイゴ『きみの ポケモン\nなかなか いい かんじ だね\pしゅぎょうを つづければ\nいつかは ポケモンリーグの\lチャンピオンに だって なれる\lボクは そう おもうな\pそうだ!\nせっかく きみと しりあえたんだ\lおたがい ポケナビに\lなまえを とうろく しておこう!\p…… …… ……$"
 
 GraniteCave_StevensRoom_Text_RegisteredSteven:
-	.string "{JPN}ダイゴを\nポケナビに とうろく した!$"
+	.string "ダイゴを\nポケナビに とうろく した!$"
 
 GraniteCave_StevensRoom_Text_IveGotToHurryAlong:
-	.string "{JPN}……じゃあ\nボクは さきを いそぐから$"
+	.string "……じゃあ\nボクは さきを いそぐから$"
 
 GraniteCave_StevensRoom_Text_OhBagIsFull:
-	.string "{JPN}バッグが いっぱい なのか……\nじゃあ しかたないね$"
+	.string "バッグが いっぱい なのか……\nじゃあ しかたないね$"
 

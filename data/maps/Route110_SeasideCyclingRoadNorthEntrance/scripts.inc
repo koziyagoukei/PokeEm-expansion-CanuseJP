@@ -53,12 +53,12 @@ Route110_SeasideCyclingRoadNorthEntrance_EventScript_ClearCyclingRoad::
 	end
 
 Route110_SeasideCyclingRoadNorthEntrance_Text_GoAllOutOnCyclingRoad:
-	.string "{JPN}サイクリング ロードでは\nおもいっきり スピードを だせるんだ!\pだれにも ぶつからずに かけぬけると\nすごく きもち いいよ!"
+	.string "サイクリング ロードでは\nおもいっきり スピードを だせるんだ!\pだれにも ぶつからずに かけぬけると\nすごく きもち いいよ!"
 	.string ""
 	.string ""
 	.string "$"
 
 Route110_SeasideCyclingRoadNorthEntrance_Text_TooDangerousToWalk:
-	.string "{JPN}サイクリング ロードを\nあるいて すすむのは あぶない です!\lじてんしゃに のって きてください"
+	.string "サイクリング ロードを\nあるいて すすむのは あぶない です!\lじてんしゃに のって きてください"
 	.string ""
 	.string "$"

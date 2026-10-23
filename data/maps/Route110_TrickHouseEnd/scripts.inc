@@ -248,53 +248,53 @@ Route110_TrickHouseEnd_Movement_TrickMasterSurprise:
 	step_end
 
 Route110_TrickHouseEnd_Text_YouveMadeItToMe:
-	.string "{JPN}あっ!\nあんた ここまで こられたのか!\lうーむ…… できる!$"
+	.string "あっ!\nあんた ここまで こられたのか!\lうーむ…… できる!$"
 
 Route110_TrickHouseEnd_Text_AllNightToPlantTrees:
-	.string "{JPN}てつやで きを うえたのに……\pわがはいの つぎの つぎの つぎの つぎの\nつぎの つぎ くらいに すごい!$"
+	.string "てつやで きを うえたのに……\pわがはいの つぎの つぎの つぎの つぎの\nつぎの つぎ くらいに すごい!$"
 
 Route110_TrickHouseEnd_Text_AllNightToMakeMaze:
-	.string "{JPN}てつやで めいろを つくったのに……\pわがはいの つぎの つぎの つぎの つぎの\nつぎ くらいに すごい!$"
+	.string "てつやで めいろを つくったのに……\pわがはいの つぎの つぎの つぎの つぎの\nつぎ くらいに すごい!$"
 
 Route110_TrickHouseEnd_Text_AllNightToPreparePanels:
-	.string "{JPN}てつやで ふすまを はりかえたのに……\pわがはいの つぎの つぎの つぎの つぎ\nくらいに すごい!$"
+	.string "てつやで ふすまを はりかえたのに……\pわがはいの つぎの つぎの つぎの つぎ\nくらいに すごい!$"
 
 Route110_TrickHouseEnd_Text_AllNightToShoveBoulders:
-	.string "{JPN}てつやで いわを おして きたのに……\pわがはいの つぎの つぎの つぎ\nくらいに すごい!$"
+	.string "てつやで いわを おして きたのに……\pわがはいの つぎの つぎの つぎ\nくらいに すごい!$"
 
 Route110_TrickHouseEnd_Text_AllNightToMakeMechadolls:
-	.string "{JPN}てつやで にんぎょう つくって\nてつやで クイズも かんがえたのに……\pわがはいの つぎの つぎ\nくらいに すごい!$"
+	.string "てつやで にんぎょう つくって\nてつやで クイズも かんがえたのに……\pわがはいの つぎの つぎ\nくらいに すごい!$"
 
 Route110_TrickHouseEnd_Text_AllNightToInstallDoors:
-	.string "{JPN}てつやで とびらを とりつけたのに……\pわがはいの つぎ\nくらいに すごい!$"
+	.string "てつやで とびらを とりつけたのに……\pわがはいの つぎ\nくらいに すごい!$"
 
 Route110_TrickHouseEnd_Text_AllNightSettingUpArrows:
-	.string "{JPN}てつやで やじるしを ならべたのに……\pわがはいと おなじ くらい すごい!$"
+	.string "てつやで やじるしを ならべたのに……\pわがはいと おなじ くらい すごい!$"
 
 Route110_TrickHouseEnd_Text_AllNightPolishingFloors:
-	.string "{JPN}てつやで ゆかを みがいたのに……\pわがはい より すごい! のかも……$"
+	.string "てつやで ゆかを みがいたのに……\pわがはい より すごい! のかも……$"
 
 Route110_TrickHouseEnd_Text_FountainOfIdeasRunDry:
-	.string "{JPN}ど どうしよう……\nもう カラクリの ネタが\lつきて しまった……\lまた ぜんこく かくちを まわって\lしかけを いろいろ かんがえて くるか……$"
+	.string "ど どうしよう……\nもう カラクリの ネタが\lつきて しまった……\lまた ぜんこく かくちを まわって\lしかけを いろいろ かんがえて くるか……$"
 
 Route110_TrickHouseEnd_Text_DefeatedMePreferWhichTent:
-	.string "{JPN}みとめたくは ないんだが\nあんたには まけた……!\pまあ なんども きてくれた あたり\nよっぽど わがはいに\lみりょくを かんじたの だろうけどな\pそのことと わがはいが まけたこととは\nかんけいなし!\pそうだ! あんたと わがはいの\nゆうじょうを きねんして\lいいものを プレゼント しよう!\p「あかいテント」と「あおいテント」\nふたつ あるんだが どっちが ほしい?$"
+	.string "みとめたくは ないんだが\nあんたには まけた……!\pまあ なんども きてくれた あたり\nよっぽど わがはいに\lみりょくを かんじたの だろうけどな\pそのことと わがはいが まけたこととは\nかんけいなし!\pそうだ! あんたと わがはいの\nゆうじょうを きねんして\lいいものを プレゼント しよう!\p「あかいテント」と「あおいテント」\nふたつ あるんだが どっちが ほしい?$"
 
 Route110_TrickHouseEnd_Text_NoRoomInPC:
-	.string "{JPN}なに パソコンに はいりきらない?\nそんなの わがはいが しるか!\p……と いいたい ところだけど\nわがはいは やさしいので あとで やろう!$"
+	.string "なに パソコンに はいりきらない?\nそんなの わがはいが しるか!\p……と いいたい ところだけど\nわがはいは やさしいので あとで やろう!$"
 
 Route110_TrickHouseEnd_Text_LeavingOnJourney:
-	.string "{JPN}…… …… ……\pわがはいは これから\nあらたな しかけを もとめて\lたびに でる ことに する……\lあんたも いつか ここにきて\lまた あそんで いってくれ!\pそれでは さらば…!$"
+	.string "…… …… ……\pわがはいは これから\nあらたな しかけを もとめて\lたびに でる ことに する……\lあんたも いつか ここにきて\lまた あそんで いってくれ!\pそれでは さらば…!$"
 
 Route110_TrickHouseEnd_Text_YouHaveEarnedThisReward:
-	.string "{JPN}よしっ あんたに\nほうびを やろう!$"
+	.string "よしっ あんたに\nほうびを やろう!$"
 
 Route110_TrickHouseEnd_Text_NoRoomForThis:
-	.string "{JPN}なにっ もちきれない?\nそんなに なにを もちあるいてるんだ?\lまあ せっかく ここまで こられたんだし\lほうびは あとで やろう!$"
+	.string "なにっ もちきれない?\nそんなに なにを もちあるいてるんだ?\lまあ せっかく ここまで こられたんだし\lほうびは あとで やろう!$"
 
 Route110_TrickHouseEnd_Text_MakeNewTricksToStumpYou:
-	.string "{JPN}なんだ とくいそうな かお してからに\nわがはいに かった きに なるのは\lまだ はやいわ!\lこのあとも また しかけを つくるから\lそれが おわってから わがはいを わらえ!\pそれでは じかいを おたのしみに!$"
+	.string "なんだ とくいそうな かお してからに\nわがはいに かった きに なるのは\lまだ はやいわ!\lこのあとも また しかけを つくるから\lそれが おわってから わがはいを わらえ!\pそれでは じかいを おたのしみに!$"
 
 Route110_TrickHouseEnd_Text_YoureIgnoringMe:
-	.string "{JPN}おいおい\nわがはいの ことは むし か!\lずいぶん さみしい じゃないか$"
+	.string "おいおい\nわがはいの ことは むし か!\lずいぶん さみしい じゃないか$"
 

@@ -10,8 +10,8 @@ LilycoveCity_House4_EventScript_Man2::
 	end
 
 LilycoveCity_House4_Text_MysteriesAtBottomOfSea:
-	.string "{JPN}この ほしの さいだいの なぞ\nそれは かいていに あると おもうんだ！\p……というのは\nだれかが いってた ことなんだけど$"
+	.string "この ほしの さいだいの なぞ\nそれは かいていに あると おもうんだ！\p……というのは\nだれかが いってた ことなんだけど$"
 
 LilycoveCity_House4_Text_UnderwaterTrenchMossdeepSootopolis:
-	.string "{JPN}そういや トクサネと ルネの あいだには\nふかい ふかい かいこうが ある\p……そんな はなしも\nだれかが いってた ことなんだけど$"
+	.string "そういや トクサネと ルネの あいだには\nふかい ふかい かいこうが ある\p……そんな はなしも\nだれかが いってた ことなんだけど$"
 

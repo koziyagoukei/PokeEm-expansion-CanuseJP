@@ -419,50 +419,50 @@ RusturfTunnel_EventScript_Mike::
 	end
 
 RusturfTunnel_Text_ComeAndGetSome:
-	.string "{JPN}くるのか?\nくるなら こいよ!$"
+	.string "くるのか?\nくるなら こいよ!$"
 
 RusturfTunnel_Text_Peeko:
-	.string "{JPN}ピーコちゃん『ピ ピひょー!$"
+	.string "ピーコちゃん『ピ ピひょー!$"
 
 RusturfTunnel_Text_GruntIntro:
-	.string "{JPN}えーい くっそー!\pうばった ポケモンは\nなんの やくにも たたないし\pいいところへ にげこめたと おもったのに\nこの トンネル いきどまり じゃねーか!\pやい! おまえ!\nおれと しょうぶ するんだな!?$"
+	.string "えーい くっそー!\pうばった ポケモンは\nなんの やくにも たたないし\pいいところへ にげこめたと おもったのに\nこの トンネル いきどまり じゃねーか!\pやい! おまえ!\nおれと しょうぶ するんだな!?$"
 
 RusturfTunnel_Text_GruntDefeat:
-	.string "{JPN}む むぐぐー!\nおれの あくじも いきどまりかっ!$"
+	.string "む むぐぐー!\nおれの あくじも いきどまりかっ!$"
 
 RusturfTunnel_Text_GruntTakePackage:
-	.string "{JPN}おかしいなあ……\pリーダーの はなしでは なにかの にもつを\nデボンから ぬすんでくる っていう\lらくな しごと だった はずなのに……\pちぇっ!\nこんなもん かえして やらあ!$"
+	.string "おかしいなあ……\pリーダーの はなしでは なにかの にもつを\nデボンから ぬすんでくる っていう\lらくな しごと だった はずなのに……\pちぇっ!\nこんなもん かえして やらあ!$"
 
 RusturfTunnel_Text_PeekoGladToSeeYouSafe:
-	.string "{JPN}ピーコちゃん! ぶじで よかった!$"
+	.string "ピーコちゃん! ぶじで よかった!$"
 
 RusturfTunnel_Text_ThankYouLetsGoHomePeeko:
-	.string "{JPN}あんたは ピーコちゃんの\nいのちの おんじん じゃよ!\pわしは ハギと いうのじゃが\nきみは……?\p…… …… ……\n…… …… ……\pそうか {PLAYER}{KUN}と いうのか!\nほんとうに ありがとうよ!\pこれからさき こまった ことが あったら\nえんりょなく わしに いっとくれ!\pいつもは トウカのもりの ちかくに ある\nはまべの こやに いるからの!\pさあ ピーコちゃん\nわしらの おうちに かえろうな!\pピーコちゃん『ピひょーっ!!$"
+	.string "あんたは ピーコちゃんの\nいのちの おんじん じゃよ!\pわしは ハギと いうのじゃが\nきみは……?\p…… …… ……\n…… …… ……\pそうか {PLAYER}{KUN}と いうのか!\nほんとうに ありがとうよ!\pこれからさき こまった ことが あったら\nえんりょなく わしに いっとくれ!\pいつもは トウカのもりの ちかくに ある\nはまべの こやに いるからの!\pさあ ピーコちゃん\nわしらの おうちに かえろうな!\pピーコちゃん『ピひょーっ!!$"
 
 RusturfTunnel_Text_WhyCantTheyKeepDigging:
-	.string "{JPN}……\pどうして これいじょう ほれない……\nこの いわが かたすぎるのか?\pこのさきの シダケタウンという ところに\nあいする かのじょが いるのに……\pカナズミと シダケを トンネルで むすべば\nまいにち かのじょに あいに いける\pそれなのに……\nおれは どうすれば いいんだ……$"
+	.string "……\pどうして これいじょう ほれない……\nこの いわが かたすぎるのか?\pこのさきの シダケタウンという ところに\nあいする かのじょが いるのに……\pカナズミと シダケを トンネルで むすべば\nまいにち かのじょに あいに いける\pそれなのに……\nおれは どうすれば いいんだ……$"
 
 RusturfTunnel_Text_ToGetToVerdanturf:
-	.string "{JPN}カナズミから シダケに いこうと すると\nムロから カイナと キンセツを とおって\lいかなきゃ ならないんだ……$"
+	.string "カナズミから シダケに いこうと すると\nムロから カイナと キンセツを とおって\lいかなきゃ ならないんだ……$"
 
 RusturfTunnel_Text_YouShatteredBoulderTakeHM:
-	.string "{JPN}なんと! きみが この いわを\nくだいて くれたんだね\pかんしゃの しるし として\nこの ひでんマシンを うけとってくれ$"
+	.string "なんと! きみが この いわを\nくだいて くれたんだね\pかんしゃの しるし として\nこの ひでんマシンを うけとってくれ$"
 
 RusturfTunnel_Text_ExplainStrength:
-	.string "{JPN}そいつには かいりきが はいっている\nちからもちの ポケモンに おぼえさせれば\lおおきな いわを うごかせるよ$"
+	.string "そいつには かいりきが はいっている\nちからもちの ポケモンに おぼえさせれば\lおおきな いわを うごかせるよ$"
 
 RusturfTunnel_Text_WandaReunion:
-	.string "{JPN}ミチルさん!\nこれから いつでも あえます!\pミチル『よかった…… です\pさあ わたしの いえで\nゆっくり やすんで ください$"
+	.string "ミチルさん!\nこれから いつでも あえます!\pミチル『よかった…… です\pさあ わたしの いえで\nゆっくり やすんで ください$"
 
 RusturfTunnel_Text_BoyfriendOnOtherSideOfRock:
-	.string "{JPN}この いわの むこうに……\nわたしの かれが いるの\pかれ…… わたしに あうため だけに\nトンネルを ほってるわけ じゃないわ\pみんなの ために\nてを きずつけながらも がんばってるの$"
+	.string "この いわの むこうに……\nわたしの かれが いるの\pかれ…… わたしに あうため だけに\nトンネルを ほってるわけ じゃないわ\pみんなの ために\nてを きずつけながらも がんばってるの$"
 
 RusturfTunnel_Text_MikeIntro:
-	.string "{JPN}おとこが やまに いるから やまおとこ!\pなのに ポケモンが やまに いても\nやまポケモンと いわないのは なぜだ?$"
+	.string "おとこが やまに いるから やまおとこ!\pなのに ポケモンが やまに いても\nやまポケモンと いわないのは なぜだ?$"
 
 RusturfTunnel_Text_MikeDefeat:
-	.string "{JPN}ポケモン……\nちから つきた……$"
+	.string "ポケモン……\nちから つきた……$"
 
 RusturfTunnel_Text_MikePostBattle:
-	.string "{JPN}ここって ポケモンを まもるため\nかいはつ こうじを やめたんだろ?\lそれって いい はなし だよな$"
+	.string "ここって ポケモンを まもるため\nかいはつ こうじを やめたんだろ?\lそれって いい はなし だよな$"
 

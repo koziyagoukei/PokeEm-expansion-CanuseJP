@@ -87,40 +87,40 @@ AquaHideout_B2F_EventScript_Grunt8::
 	end
 
 AquaHideout_B2F_Text_MattIntro:
-	.string "{JPN}ウヒョヒョ……\pもう ここまで きたのか!\nおもって いたより やるな!\pだが ここまでだ!\nおれは これまでの したっぱども とは\lひとあじ ちがう!\pじかんかせぎ なんか しねえで\nおまえを コテンパンに してやるぜ!$"
+	.string "ウヒョヒョ……\pもう ここまで きたのか!\nおもって いたより やるな!\pだが ここまでだ!\nおれは これまでの したっぱども とは\lひとあじ ちがう!\pじかんかせぎ なんか しねえで\nおまえを コテンパンに してやるぜ!$"
 
 AquaHideout_B2F_Text_MattDefeat:
-	.string "{JPN}ウヒョヒョ……\nまけちまったか……$"
+	.string "ウヒョヒョ……\nまけちまったか……$"
 
 AquaHideout_B2F_Text_OurBossGotThroughHisPreparations:
-	.string "{JPN}ウヒョヒョ……!\pおれが おまえと\nあそんで やっている あいだに\lリーダーの じゅんびが ととのったぜ!$"
+	.string "ウヒョヒョ……!\pおれが おまえと\nあそんで やっている あいだに\lリーダーの じゅんびが ととのったぜ!$"
 
 AquaHideout_B2F_Text_MattPostBattle:
-	.string "{JPN}ウヒョヒョ……!\pリーダーは どこかの かいていにある\nどうくつへ しゅっぱつ したぜ!\pおいかける つもりなら ミナモの さきに\nひろがる でっかい うみを\lさがしまわって みるが いいぜ!\pそれで みつかれば いいけどな……\nウヒョヒョヒョ!$"
+	.string "ウヒョヒョ……!\pリーダーは どこかの かいていにある\nどうくつへ しゅっぱつ したぜ!\pおいかける つもりなら ミナモの さきに\nひろがる でっかい うみを\lさがしまわって みるが いいぜ!\pそれで みつかれば いいけどな……\nウヒョヒョヒョ!$"
 
 AquaHideout_B2F_Text_Grunt4Intro:
-	.string "{JPN}わっはっは まちくたびれたぞ!\nおいらとも しょうぶ してもらおうか!$"
+	.string "わっはっは まちくたびれたぞ!\nおいらとも しょうぶ してもらおうか!$"
 
 AquaHideout_B2F_Text_Grunt4Defeat:
-	.string "{JPN}まちくたびれて\nまけて やぶれて……$"
+	.string "まちくたびれて\nまけて やぶれて……$"
 
 AquaHideout_B2F_Text_Grunt4PostBattle:
-	.string "{JPN}リーダーぁ……\nこんなもんで どうでしょー!$"
+	.string "リーダーぁ……\nこんなもんで どうでしょー!$"
 
 AquaHideout_B2F_Text_Grunt6Intro:
-	.string "{JPN}アジト じまんの ワープパネル!\pいま じぶんが どこに いるのか\nわかって ないでしょ!\pそうやって つかれはてた あいてを\nたおすのが さくせん なのよ!$"
+	.string "アジト じまんの ワープパネル!\pいま じぶんが どこに いるのか\nわかって ないでしょ!\pそうやって つかれはてた あいてを\nたおすのが さくせん なのよ!$"
 
 AquaHideout_B2F_Text_Grunt6Defeat:
-	.string "{JPN}なによっ!\nちっとも つかれてない じゃない!$"
+	.string "なによっ!\nちっとも つかれてない じゃない!$"
 
 AquaHideout_B2F_Text_Grunt6PostBattle:
-	.string "{JPN}そういえば…… マスターボールを\nどこに おいたのか わすれちゃったわ\pあれを まもっていないと\nリーダーに おこられるのよ……$"
+	.string "そういえば…… マスターボールを\nどこに おいたのか わすれちゃったわ\pあれを まもっていないと\nリーダーに おこられるのよ……$"
 
 AquaHideout_B2F_Text_Grunt8Intro:
-	.string "{JPN}オレが アクアだんに はいって\nまっさきに おぼえ させられたのが\lこの ワープパネルの はいれつだ!$"
+	.string "オレが アクアだんに はいって\nまっさきに おぼえ させられたのが\lこの ワープパネルの はいれつだ!$"
 
 AquaHideout_B2F_Text_Grunt8Defeat:
-	.string "{JPN}ワープパネルの ことで\nあたまが いっぱい だったから……$"
+	.string "ワープパネルの ことで\nあたまが いっぱい だったから……$"
 
 AquaHideout_B2F_Text_Grunt8PostBattle:
-	.string "{JPN}これからは ポケモンしょうぶの\nコツも おぼえて おかないと なあ……$"
+	.string "これからは ポケモンしょうぶの\nコツも おぼえて おかないと なあ……$"

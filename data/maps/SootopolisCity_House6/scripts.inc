@@ -32,16 +32,16 @@ SootopolisCity_House6_EventScript_NoRoomForWailmerDoll::
 	end
 
 SootopolisCity_House6_Text_FirstGuestInWhileTakeDoll:
-	.string "{JPN}わー ひさしぶりの おきゃくさん!\pなんだか うれしいから\nホエルコの おおきい ぬいぐるみ あげる!$"
+	.string "わー ひさしぶりの おきゃくさん!\pなんだか うれしいから\nホエルコの おおきい ぬいぐるみ あげる!$"
 
 SootopolisCity_House6_Text_TakeGoodCareOfIt:
-	.string "{JPN}だいじに してね!$"
+	.string "だいじに してね!$"
 
 SootopolisCity_House6_Text_IllHoldItForYou:
-	.string "{JPN}ほしいけど いまは ダメ?\nじゃあ あずかっておいて あげるね$"
+	.string "ほしいけど いまは ダメ?\nじゃあ あずかっておいて あげるね$"
 
 SootopolisCity_House6_Text_DontWantThisDoll:
-	.string "{JPN}そうなの?\nぬいぐるみ ほしくないの?$"
+	.string "そうなの?\nぬいぐるみ ほしくないの?$"
 
 SootopolisCity_House6_Text_LovePlushDolls:
-	.string "{JPN}あたし ぬいぐるみ だいすき!$"
+	.string "あたし ぬいぐるみ だいすき!$"

@@ -37,14 +37,14 @@ PacifidlogTown_House3_Text_ItsSubtlyDifferentThankYou:
 	.string "{JPN}おっ これが {STR_VAR_1} かあー!\nやっぱ {STR_VAR_2} とは\lいろいろ にている ようで\lびみょうに ちがうなあ!\pサンキュ!$"
 
 PacifidlogTown_House3_Text_WontAcceptAnyLessThanRealMon:
-	.string "{JPN}だめだめ! {STR_VAR_1} じゃないと \nひきうけられないね!$"
+	.string "だめだめ! {STR_VAR_1} じゃないと \nひきうけられないね!$"
 
 PacifidlogTown_House3_Text_NotDesperateOrAnything:
-	.string "{JPN}ふーん やめるのか……\pまっ おれのほうも\nどうしても って わけじゃ ないしね$"
+	.string "ふーん やめるのか……\pまっ おれのほうも\nどうしても って わけじゃ ないしね$"
 
 PacifidlogTown_House3_Text_ReallyWantedToGetBagon:
-	.string "{JPN}じぶんで さがしても いいんだけど……\pほかの トレーナーが つかまえた\nタツベイ って いうのが\lどうしても ほしかったんだよね$"
+	.string "じぶんで さがしても いいんだけど……\pほかの トレーナーが つかまえた\nタツベイ って いうのが\lどうしても ほしかったんだよね$"
 
 PacifidlogTown_House3_Text_IsThatAPokedex:
-	.string "{JPN}それって ポケモンずかん?\pそれって あなた たくさんの\nポケモンと であった ってこと?\pそれって すっごい うらやましい!$"
+	.string "それって ポケモンずかん?\pそれって あなた たくさんの\nポケモンと であった ってこと?\pそれって すっごい うらやましい!$"
 

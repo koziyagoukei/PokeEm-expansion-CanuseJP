@@ -521,159 +521,159 @@ LilycoveCity_PokemonCenter_1F_EventScript_Pikachu::
 	end
 
 LilycoveCity_PokemonCenter_1F_Text_ImTheFavorLady:
-	.string "{JPN}わたし おねだり おねえさん……$"
+	.string "わたし おねだり おねえさん……$"
 
 LilycoveCity_PokemonCenter_1F_Text_ObsessedWithThing:
-	.string "{JPN}わたし さいきん\n{STR_VAR_1}した ものに むちゅうなの……$"
+	.string "わたし さいきん\n{STR_VAR_1}した ものに むちゅうなの……$"
 
 LilycoveCity_PokemonCenter_1F_Text_ThankYouForLastTime:
-	.string "{JPN}あら……\nこのまえは どうも……$"
+	.string "あら……\nこのまえは どうも……$"
 
 LilycoveCity_PokemonCenter_1F_Text_PlayerGaveMeBadThing:
-	.string "{JPN}まえにね……\n{STR_VAR_3}さん だった かしら……\p{STR_VAR_1} だからって\n{STR_VAR_2}を くれたのよ\pだけど ちっとも\n{STR_VAR_1}じゃ なかったのよ!$"
+	.string "まえにね……\n{STR_VAR_3}さん だった かしら……\p{STR_VAR_1} だからって\n{STR_VAR_2}を くれたのよ\pだけど ちっとも\n{STR_VAR_1}じゃ なかったのよ!$"
 
 LilycoveCity_PokemonCenter_1F_Text_PlayerGaveMeGreatThing:
-	.string "{JPN}まえにね {STR_VAR_3}さんが\nとても {STR_VAR_1}な {STR_VAR_2}を\lわたしに くれたの\pすごく たいせつに してるのよ$"
+	.string "まえにね {STR_VAR_3}さんが\nとても {STR_VAR_1}な {STR_VAR_2}を\lわたしに くれたの\pすごく たいせつに してるのよ$"
 
 LilycoveCity_PokemonCenter_1F_Text_WillYouShareThing:
-	.string "{JPN}ねえ…… もし よかったら\nあなたの もってる {STR_VAR_1}な もの\lわたしに わけて くれない かしら?$"
+	.string "ねえ…… もし よかったら\nあなたの もってる {STR_VAR_1}な もの\lわたしに わけて くれない かしら?$"
 
 LilycoveCity_PokemonCenter_1F_Text_WhatWillYouGiveMe:
-	.string "{JPN}……ほんと? なにを いただけるの?$"
+	.string "……ほんと? なにを いただけるの?$"
 
 LilycoveCity_PokemonCenter_1F_Text_IsThatSoGoodbye:
-	.string "{JPN}あっ そう……\nじゃあ さよならね……$"
+	.string "あっ そう……\nじゃあ さよならね……$"
 
 LilycoveCity_PokemonCenter_1F_Text_NotWillingToShare:
-	.string "{JPN}あら…… いただけないの?$"
+	.string "あら…… いただけないの?$"
 
 LilycoveCity_PokemonCenter_1F_Text_IllTryToCherishIt:
-	.string "{JPN}えっ……\n{STR_VAR_2}って {STR_VAR_1}?\p……へえぇ そうなの かしらねぇ……\pとりあえず ありがとう……\nきっと たいせつに するわね……$"
+	.string "えっ……\n{STR_VAR_2}って {STR_VAR_1}?\p……へえぇ そうなの かしらねぇ……\pとりあえず ありがとう……\nきっと たいせつに するわね……$"
 
 LilycoveCity_PokemonCenter_1F_Text_IWillCherishThis:
-	.string "{JPN}まぁ……\pなかなか {STR_VAR_1}な {STR_VAR_2}ね\nすてき じゃない…… うっとり するわ……\pありがとう……\nたいせつに するわね……$"
+	.string "まぁ……\pなかなか {STR_VAR_1}な {STR_VAR_2}ね\nすてき じゃない…… うっとり するわ……\pありがとう……\nたいせつに するわね……$"
 
 LilycoveCity_PokemonCenter_1F_Text_IWillTreasureThis:
-	.string "{JPN}……す す すっ\pすっごーいっ!\nなんて {STR_VAR_1}! {STR_VAR_1}なのっ!\pここまで {STR_VAR_1}な {STR_VAR_2}が\nよのなかに あるなんて!\pありがとう!\pいっしょう わたしの\nたからものに するわ!$"
+	.string "……す す すっ\pすっごーいっ!\nなんて {STR_VAR_1}! {STR_VAR_1}なのっ!\pここまで {STR_VAR_1}な {STR_VAR_2}が\nよのなかに あるなんて!\pありがとう!\pいっしょう わたしの\nたからものに するわ!$"
 
 LilycoveCity_PokemonCenter_1F_Text_IllGiveYouThisInReturn:
-	.string "{JPN}すてきな ものを くれた おれいに\nとっておきの プレゼントを あ・げ・る!\lだいじにして ちょうだいね……$"
+	.string "すてきな ものを くれた おれいに\nとっておきの プレゼントを あ・げ・る!\lだいじにして ちょうだいね……$"
 
 LilycoveCity_PokemonCenter_1F_Text_YouDontHaveSpaceForIt:
-	.string "{JPN}あら もちきれない じゃないの……\pどうぐを せいり してから\nまた いらっしゃい……$"
+	.string "あら もちきれない じゃないの……\pどうぐを せいり してから\nまた いらっしゃい……$"
 
 LilycoveCity_PokemonCenter_1F_Text_ImTheQuizLady:
-	.string "{JPN}あたし クイズ おねえさん!\nクイズ だーいすき!$"
+	.string "あたし クイズ おねえさん!\nクイズ だーいすき!$"
 
 LilycoveCity_PokemonCenter_1F_Text_WaitingToTakeYourQuiz:
-	.string "{JPN}あれっ?\pいまは あなたの かんがえた クイズに\nチャレンジする ひとを さがしてるの!\lだから また こんどね!$"
+	.string "あれっ?\pいまは あなたの かんがえた クイズに\nチャレンジする ひとを さがしてるの!\lだから また こんどね!$"
 
 LilycoveCity_PokemonCenter_1F_Text_WaitingForChallenger:
-	.string "{JPN}いま {STR_VAR_1}さんの かんがえた クイズに\nこたえて くれる ひとを さがしてるの!$"
+	.string "いま {STR_VAR_1}さんの かんがえた クイズに\nこたえて くれる ひとを さがしてるの!$"
 
 LilycoveCity_PokemonCenter_1F_Text_TakeQuizChallenge:
-	.string "{JPN}せいかい したら\nしょうひんも あるよー!\lあなた チャレンジ して みない?$"
+	.string "せいかい したら\nしょうひんも あるよー!\lあなた チャレンジ して みない?$"
 
 LilycoveCity_PokemonCenter_1F_Text_WaitForAnswer:
-	.string "{JPN}…… …… …… ……\n…… …… …… ……$"
+	.string "…… …… …… ……\n…… …… …… ……$"
 
 LilycoveCity_PokemonCenter_1F_Text_HowBoringBye:
-	.string "{JPN}つまんないの! バイバイ!$"
+	.string "つまんないの! バイバイ!$"
 
 LilycoveCity_PokemonCenter_1F_Text_YoureGoingToQuit:
-	.string "{JPN}えっー! あきらめちゃうの?$"
+	.string "えっー! あきらめちゃうの?$"
 
 LilycoveCity_PokemonCenter_1F_Text_TakeTheQuizAnotherTime:
-	.string "{JPN}また チャレンジ してねー!$"
+	.string "また チャレンジ してねー!$"
 
 LilycoveCity_PokemonCenter_1F_Text_YouGotItRight:
-	.string "{JPN}すっごい! せいかい!\nきゃー! あなたって センス あるねー!$"
+	.string "すっごい! せいかい!\nきゃー! あなたって センス あるねー!$"
 
 LilycoveCity_PokemonCenter_1F_Text_YouGotItRightYouveWonPersonsPrize:
-	.string "{JPN}クイズ せいかい おめでとー!\n{STR_VAR_1}さん からの\lごほうびが ありまーす!$"
+	.string "クイズ せいかい おめでとー!\n{STR_VAR_1}さん からの\lごほうびが ありまーす!$"
 
 @ Unused
 LilycoveCity_PokemonCenter_1F_Text_XReceivedOneY:
 	.string "{JPN}{STR_VAR_1}は\n{STR_VAR_2}を もらった!$"
 
 LilycoveCity_PokemonCenter_1F_Text_YourBagIsFilledUp:
-	.string "{JPN}あれー? どうぐが いっぱい みたいだよ!\nバッグを せいり してから また きてね!$"
+	.string "あれー? どうぐが いっぱい みたいだよ!\nバッグを せいり してから また きてね!$"
 
 LilycoveCity_PokemonCenter_1F_Text_WrongTheCorrectAnswerIs:
-	.string "{JPN}うーん…… は・ず・れ!\nせいかいは {STR_VAR_3}でした!$"
+	.string "うーん…… は・ず・れ!\nせいかいは {STR_VAR_3}でした!$"
 
 LilycoveCity_PokemonCenter_1F_Text_IGetToKeepPrize:
-	.string "{JPN}ざんねん でしたー!\pクイズ せいかいの しょうひんの\n{STR_VAR_1}は\lおねえさんが もらっちゃいまーす!$"
+	.string "ざんねん でしたー!\pクイズ せいかいの しょうひんの\n{STR_VAR_1}は\lおねえさんが もらっちゃいまーす!$"
 
 LilycoveCity_PokemonCenter_1F_Text_MakeYourOwnQuiz:
-	.string "{JPN}ねえ! ねえ! あなたも\nクイズ つくって みない?$"
+	.string "ねえ! ねえ! あなたも\nクイズ つくって みない?$"
 
 LilycoveCity_PokemonCenter_1F_Text_MaybeNextTime:
-	.string "{JPN}そっか……\nじゃあー また こんどね!$"
+	.string "そっか……\nじゃあー また こんどね!$"
 
 LilycoveCity_PokemonCenter_1F_Text_PickYourPrize:
-	.string "{JPN}じゃあー まず\nクイズに せいかいした ひとに\lあげる しょうひんを きめてね!\pただし クイズに チャレンジした ひとが\nこたえを はずしちゃった ときは\lおねえさんが しょうひん もらっちゃうよ!\lちゅうい してね!$"
+	.string "じゃあー まず\nクイズに せいかいした ひとに\lあげる しょうひんを きめてね!\pただし クイズに チャレンジした ひとが\nこたえを はずしちゃった ときは\lおねえさんが しょうひん もらっちゃうよ!\lちゅうい してね!$"
 
 LilycoveCity_PokemonCenter_1F_Text_QuitChoosingPrize:
-	.string "{JPN}しょうひんを きめないと\nクイズは できないよ!\lつくるの やめちゃうの?$"
+	.string "しょうひんを きめないと\nクイズは できないよ!\lつくるの やめちゃうの?$"
 
 LilycoveCity_PokemonCenter_1F_Text_WriteYourQuiz:
-	.string "{JPN}すてきな しょうひんだね!\pじゃあ つぎに クイズの\nもんだいと こたえを かんがえてね!$"
+	.string "すてきな しょうひんだね!\pじゃあ つぎに クイズの\nもんだいと こたえを かんがえてね!$"
 
 LilycoveCity_PokemonCenter_1F_Text_QuitWritingQuizQuestion:
-	.string "{JPN}クイズの もんだい つくるの やめる?$"
+	.string "クイズの もんだい つくるの やめる?$"
 
 @ Unused
 LilycoveCity_PokemonCenter_1F_Text_QuitWritingQuizAnswer:
 	.string "{JPN}クイズの こたえ きめるの やめる?$"
 
 LilycoveCity_PokemonCenter_1F_Text_IllLookForAChallenger:
-	.string "{JPN}おつかれさまー!\pすてきな クイズが できたね!\pさっそく チャレンジ してくれる ひとを\nさがしに いって くるね!$"
+	.string "おつかれさまー!\pすてきな クイズが できたね!\pさっそく チャレンジ してくれる ひとを\nさがしに いって くるね!$"
 
 LilycoveCity_PokemonCenter_1F_Text_ImTheContestLady:
-	.string "{JPN}あたし コンテスト おねえさん!\nコンテスト だいすきー!$"
+	.string "あたし コンテスト おねえさん!\nコンテスト だいすきー!$"
 
 LilycoveCity_PokemonCenter_1F_Text_ThankForPokeblock:
-	.string "{JPN}このまえは ポロック ありがとー!$"
+	.string "このまえは ポロック ありがとー!$"
 
 LilycoveCity_PokemonCenter_1F_Text_MyFriendDisplaysQuality:
-	.string "{JPN}こっちは おともだちの {STR_VAR_1}だよ!\nとーっても {STR_VAR_2}い のよ!\pでもねー もっと もっと\n{STR_VAR_2}く なると おもうんだー!$"
+	.string "こっちは おともだちの {STR_VAR_1}だよ!\nとーっても {STR_VAR_2}い のよ!\pでもねー もっと もっと\n{STR_VAR_2}く なると おもうんだー!$"
 
 LilycoveCity_PokemonCenter_1F_Text_DontHaveAPokeblockCase:
-	.string "{JPN}だから おねがいー!\pあなたの ポロックー ひとつで いいから\nあたしたちに ちょうだい!\p…… って あれー?\nあなた ポロックケース もってないじゃん?\lしかたないなー じゃあ また こんどねー!$"
+	.string "だから おねがいー!\pあなたの ポロックー ひとつで いいから\nあたしたちに ちょうだい!\p…… って あれー?\nあなた ポロックケース もってないじゃん?\lしかたないなー じゃあ また こんどねー!$"
 
 LilycoveCity_PokemonCenter_1F_Text_AskingForOnePokeblock:
-	.string "{JPN}だから おねがい!\pあなたの ポロック ひとつで いいから\nあたしたちに ちょうだい!$"
+	.string "だから おねがい!\pあなたの ポロック ひとつで いいから\nあたしたちに ちょうだい!$"
 
 LilycoveCity_PokemonCenter_1F_Text_ICantHaveOnePokeblock:
-	.string "{JPN}えー! ポロック くれないの?$"
+	.string "えー! ポロック くれないの?$"
 
 LilycoveCity_PokemonCenter_1F_Text_WhatACheapskate:
-	.string "{JPN}ちぇっ! けちー!$"
+	.string "ちぇっ! けちー!$"
 
 LilycoveCity_PokemonCenter_1F_Text_IllUseYourPokeblock:
-	.string "{JPN}わーい! やったー!\pさっそく たべさせて みよーっと!$"
+	.string "わーい! やったー!\pさっそく たべさせて みよーっと!$"
 
 LilycoveCity_PokemonCenter_1F_Text_NoChangeThanks:
-	.string "{JPN}……なんか ぜんぜん\nかわってない ような……\pうーん……\pまあ いっか!\nどうも ありがとー$"
+	.string "……なんか ぜんぜん\nかわってない ような……\pうーん……\pまあ いっか!\nどうも ありがとー$"
 
 LilycoveCity_PokemonCenter_1F_Text_ReallyImprovedThanks:
-	.string "{JPN}わーっ! すっごく よろこんでるよー!\pそれに {STR_VAR_1}の {STR_VAR_2}さに\nみがきが かかった みたい!\lどうも ありがとー!$"
+	.string "わーっ! すっごく よろこんでるよー!\pそれに {STR_VAR_1}の {STR_VAR_2}さに\nみがきが かかった みたい!\lどうも ありがとー!$"
 
 LilycoveCity_PokemonCenter_1F_Text_ReadyToEnterContests:
-	.string "{JPN}うーん……\pそろそろ コンテストに\nさんかして みようかなー?\pもしも どこかで あたし たちを\nみかけたら ぜったい おうえん してねー!$"
+	.string "うーん……\pそろそろ コンテストに\nさんかして みようかなー?\pもしも どこかで あたし たちを\nみかけたら ぜったい おうえん してねー!$"
 
 LilycoveCity_PokemonCenter_1F_Text_Zigzagoon:
-	.string "{JPN}{STR_VAR_1}『ぐうぐぅ!$"
+	.string "{STR_VAR_1}『ぐうぐぅ!$"
 
 LilycoveCity_PokemonCenter_1F_Text_Kecleon:
-	.string "{JPN}{STR_VAR_1}『いぎぎぎぃ!!$"
+	.string "{STR_VAR_1}『いぎぎぎぃ!!$"
 
 LilycoveCity_PokemonCenter_1F_Text_Poochyena:
-	.string "{JPN}{STR_VAR_1}『バアーゥン　……$"
+	.string "{STR_VAR_1}『バアーゥン　……$"
 
 LilycoveCity_PokemonCenter_1F_Text_Pikachu:
-	.string "{JPN}{STR_VAR_1}『ぴっか!$"
+	.string "{STR_VAR_1}『ぴっか!$"
 
 LilycoveCity_PokemonCenter_1F_Text_Skitty:
-	.string "{JPN}{STR_VAR_1}『うみゅぁぁぁん!!$"
+	.string "{STR_VAR_1}『うみゅぁぁぁん!!$"

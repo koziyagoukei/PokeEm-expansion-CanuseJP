@@ -180,118 +180,118 @@ LavaridgeTown_Gym_1F_EventScript_GymStatue::
 	end
 
 LavaridgeTown_Gym_1F_Text_GymGuideAdvice:
-	.string "{JPN}げんき しとぉや!!\nチャンピオンを めざす {PLAYER}!!\pフエンタウン ジムの リーダー アスナは\nほのおタイプ ポケモンの つかいてだ!\pポケモンに たいする じょうねつは\nかざん よりも はげしく あちィ!\pうっかり ちかづくと やけど するから\nみずで ひやしながら\lきばってこー な!!$"
+	.string "げんき しとぉや!!\nチャンピオンを めざす {PLAYER}!!\pフエンタウン ジムの リーダー アスナは\nほのおタイプ ポケモンの つかいてだ!\pポケモンに たいする じょうねつは\nかざん よりも はげしく あちィ!\pうっかり ちかづくと やけど するから\nみずで ひやしながら\lきばってこー な!!$"
 
 LavaridgeTown_Gym_1F_Text_GymGuidePostVictory:
-	.string "{JPN}いやあー あちィ たたかい だった!$"
+	.string "いやあー あちィ たたかい だった!$"
 
 LavaridgeTown_Gym_1F_Text_ColeIntro:
-	.string "{JPN}あちちちちちっ!\nぷはーっ! あつかったーっ!$"
+	.string "あちちちちちっ!\nぷはーっ! あつかったーっ!$"
 
 LavaridgeTown_Gym_1F_Text_ColeDefeat:
-	.string "{JPN}あせが めに しみるぜ……$"
+	.string "あせが めに しみるぜ……$"
 
 LavaridgeTown_Gym_1F_Text_ColePostBattle:
 	.string "{JPN}すなブロは けっこうが よくなって\nかんせつの いたみに こうかてき だぜ!$"
 
 LavaridgeTown_Gym_1F_Text_AxleIntro:
-	.string "{JPN}ストレスを かいしょう する\nおれの ひとときを ジャマ するなーっ!$"
+	.string "ストレスを かいしょう する\nおれの ひとときを ジャマ するなーっ!$"
 
 LavaridgeTown_Gym_1F_Text_AxleDefeat:
-	.string "{JPN}アスナさんに まけてしまえーっ!$"
+	.string "アスナさんに まけてしまえーっ!$"
 
 LavaridgeTown_Gym_1F_Text_AxlePostBattle:
-	.string "{JPN}はあ ふう……\pすなブロに ながく はいっていると\nけっこう つかれちゃう もんだよ……$"
+	.string "はあ ふう……\pすなブロに ながく はいっていると\nけっこう つかれちゃう もんだよ……$"
 
 LavaridgeTown_Gym_B1F_Text_KeeganIntro:
-	.string "{JPN}さすがに つかれてきた ようだね\nすなブロで ひとやすみ したいだろう?\pだが きりょくを たもつ ことも\nトレーナーに ひつような さいのう だよ$"
+	.string "さすがに つかれてきた ようだね\nすなブロで ひとやすみ したいだろう?\pだが きりょくを たもつ ことも\nトレーナーに ひつような さいのう だよ$"
 
 LavaridgeTown_Gym_B1F_Text_KeeganDefeat:
-	.string "{JPN}ひあそびは けがのもと だったか……$"
+	.string "ひあそびは けがのもと だったか……$"
 
 LavaridgeTown_Gym_B1F_Text_KeeganPostBattle:
-	.string "{JPN}きみの ちからは ほんものだ……\nでも リーダー アスナさんは つよいよ!\pあまく みていると おおやけど するぜ!$"
+	.string "きみの ちからは ほんものだ……\nでも リーダー アスナさんは つよいよ!\pあまく みていると おおやけど するぜ!$"
 
 LavaridgeTown_Gym_1F_Text_GeraldIntro:
-	.string "{JPN}おまえの ポケモン\n200どの あつさに たえられるかよ!?$"
+	.string "おまえの ポケモン\n200どの あつさに たえられるかよ!?$"
 
 LavaridgeTown_Gym_1F_Text_GeraldDefeat:
-	.string "{JPN}もえかたが たりなかったか……$"
+	.string "もえかたが たりなかったか……$"
 
 LavaridgeTown_Gym_1F_Text_GeraldPostBattle:
-	.string "{JPN}200どの あつさ ってのは\nようがんの おんど!\pおまえの ポケモン おれに かてたんだから\nようがんの なかでも へいき だろうな!$"
+	.string "200どの あつさ ってのは\nようがんの おんど!\pおまえの ポケモン おれに かてたんだから\nようがんの なかでも へいき だろうな!$"
 
 LavaridgeTown_Gym_1F_Text_DanielleIntro:
-	.string "{JPN}えーっと!\nじゃあ しょうぶの あいて しますね!$"
+	.string "えーっと!\nじゃあ しょうぶの あいて しますね!$"
 
 LavaridgeTown_Gym_1F_Text_DanielleDefeat:
-	.string "{JPN}なんて つよいの!?$"
+	.string "なんて つよいの!?$"
 
 LavaridgeTown_Gym_1F_Text_DaniellePostBattle:
-	.string "{JPN}あたしも アスナさんと いっしょに\nきれいで つよい トレーナーに なるんだ!$"
+	.string "あたしも アスナさんと いっしょに\nきれいで つよい トレーナーに なるんだ!$"
 
 LavaridgeTown_Gym_B1F_Text_JaceIntro:
-	.string "{JPN}ほら ほらっ!\nきもちが さめない うちに いくぜっ!$"
+	.string "ほら ほらっ!\nきもちが さめない うちに いくぜっ!$"
 
 LavaridgeTown_Gym_B1F_Text_JaceDefeat:
-	.string "{JPN}こんなに あついのに\nおれの こころが さむい……$"
+	.string "こんなに あついのに\nおれの こころが さむい……$"
 
 LavaridgeTown_Gym_B1F_Text_JacePostBattle:
-	.string "{JPN}そのくらい とうしを もやして いれば\nもしかしたら リーダーにも かてるかもな$"
+	.string "そのくらい とうしを もやして いれば\nもしかしたら リーダーにも かてるかもな$"
 
 LavaridgeTown_Gym_B1F_Text_JeffIntro:
-	.string "{JPN}みよ この もえさかる ほのおを!\nオレの しょうりを よげんして いるのだ!$"
+	.string "みよ この もえさかる ほのおを!\nオレの しょうりを よげんして いるのだ!$"
 
 LavaridgeTown_Gym_B1F_Text_JeffDefeat:
-	.string "{JPN}おかしいなあ$"
+	.string "おかしいなあ$"
 
 LavaridgeTown_Gym_B1F_Text_JeffPostBattle:
-	.string "{JPN}いいもんね! オレなんて\nたきびの うえを はだしで はしれるぜ!\p…… おまえは まね するなよ$"
+	.string "いいもんね! オレなんて\nたきびの うえを はだしで はしれるぜ!\p…… おまえは まね するなよ$"
 
 LavaridgeTown_Gym_B1F_Text_EliIntro:
-	.string "{JPN}やまの なかでも とくに\nかざんが だいすき でして……$"
+	.string "やまの なかでも とくに\nかざんが だいすき でして……$"
 
 LavaridgeTown_Gym_B1F_Text_EliDefeat:
-	.string "{JPN}あれよ あれよと いうまに\nまけちまった わけでして$"
+	.string "あれよ あれよと いうまに\nまけちまった わけでして$"
 
 LavaridgeTown_Gym_B1F_Text_EliPostBattle:
-	.string "{JPN}アスナさんの つよさに ほれて\nわしは ここに いるわけ でして……\lへへへへ$"
+	.string "アスナさんの つよさに ほれて\nわしは ここに いるわけ でして……\lへへへへ$"
 
 LavaridgeTown_Gym_1F_Text_FlanneryIntro:
-	.string "{JPN}ようこそ ……じゃなくて\pよくぞ ここまで きた ものだな!\pわたしは ここの ジムリーダーを\nつとめさせて いただく ……じゃなくて\pジムリーダーを まかされた アスナだ!\pくう……\nジムリーダーに なりたて だからって\lゆだん など しないことだ!\pおじいちゃん ゆずりの さいのうと\nこのとちで みがきあげた ホットな わざ\lあなたに みせてやる!$"
+	.string "ようこそ ……じゃなくて\pよくぞ ここまで きた ものだな!\pわたしは ここの ジムリーダーを\nつとめさせて いただく ……じゃなくて\pジムリーダーを まかされた アスナだ!\pくう……\nジムリーダーに なりたて だからって\lゆだん など しないことだ!\pおじいちゃん ゆずりの さいのうと\nこのとちで みがきあげた ホットな わざ\lあなたに みせてやる!$"
 
 LavaridgeTown_Gym_1F_Text_FlanneryDefeat:
-	.string "{JPN}くう……\nかたに ちから はいっちゃって……\pあたし……\nジムリーダーに なりたて だからって\lちょっと むり していたのかな……\pやっぱ じぶんらしく でないと\nいっしょに たたかってくれる\lポケモンも こまっちゃうよね!\pそれを おしえてくれた\nあなたに これ あげる!$"
+	.string "くう……\nかたに ちから はいっちゃって……\pあたし……\nジムリーダーに なりたて だからって\lちょっと むり していたのかな……\pやっぱ じぶんらしく でないと\nいっしょに たたかってくれる\lポケモンも こまっちゃうよね!\pそれを おしえてくれた\nあなたに これ あげる!$"
 
 LavaridgeTown_Gym_1F_Text_ReceivedHeatBadge:
-	.string "{JPN}{PLAYER}は アスナから\nヒートバッジを もらった!$"
+	.string "{PLAYER}は アスナから\nヒートバッジを もらった!$"
 
 LavaridgeTown_Gym_1F_Text_ExplainHeatBadgeTakeThis:
-	.string "{JPN}ヒートバッジが あれば\nレベル50 までなら\lひとから もらった ポケモンでも\lいうことを きいて くれるんだ!\pそれに ひでんわざの かいりき が\nつかえるようにも なるよ!\pこれは かんしゃの きもち\nえんりょ せずに もらって!$"
+	.string "ヒートバッジが あれば\nレベル50 までなら\lひとから もらった ポケモンでも\lいうことを きいて くれるんだ!\pそれに ひでんわざの かいりき が\nつかえるようにも なるよ!\pこれは かんしゃの きもち\nえんりょ せずに もらって!$"
 
 LavaridgeTown_Gym_1F_Text_ExplainOverheat:
-	.string "{JPN}わざマシン50 には\nオーバーヒートが はいってるよ!\pその わざは あいてに\nおおきな ダメージを あたえるんだ!\pだけど とくこうが\nがくっと さがっちゃう から\lながい しょうぶには むかないかも\p…… …… ……$"
+	.string "わざマシン50 には\nオーバーヒートが はいってるよ!\pその わざは あいてに\nおおきな ダメージを あたえるんだ!\pだけど とくこうが\nがくっと さがっちゃう から\lながい しょうぶには むかないかも\p…… …… ……$"
 
 LavaridgeTown_Gym_1F_Text_RegisteredFlannery:
-	.string "{JPN}ジムリーダー アスナを\nポケナビに とうろく した!$"
+	.string "ジムリーダー アスナを\nポケナビに とうろく した!$"
 
 LavaridgeTown_Gym_1F_Text_FlanneryPostBattle:
-	.string "{JPN}あなたの つよさ\nだれかを おもいださせるの よね……\pそうだ! トウカシティの ジムリーダー\nセンリさんに にているんだ!$"
+	.string "あなたの つよさ\nだれかを おもいださせるの よね……\pそうだ! トウカシティの ジムリーダー\nセンリさんに にているんだ!$"
 
 LavaridgeTown_Gym_1F_Text_GymStatue:
-	.string "{JPN}フエンタウン ポケモンジム$"
+	.string "フエンタウン ポケモンジム$"
 
 LavaridgeTown_Gym_1F_Text_GymStatueCertified:
-	.string "{JPN}フエンタウン ポケモンジム\pアスナ にんてい トレーナー!\n{PLAYER}$"
+	.string "フエンタウン ポケモンジム\pアスナ にんてい トレーナー!\n{PLAYER}$"
 
 LavaridgeTown_Gym_1F_Text_FlanneryPreRematch:
-	.string "{JPN}アスナ『しょうぶに まけた ぐらいで\nあたしは へこたれたり しない!\pなぜなら あたしは ポケモンが すきで\nしょうぶを するのが すきで\lそれに…… このジムが すきだから!\pさあ もういちど いっしょに\nホットな わざを ぶつけあいましょう!$"
+	.string "アスナ『しょうぶに まけた ぐらいで\nあたしは へこたれたり しない!\pなぜなら あたしは ポケモンが すきで\nしょうぶを するのが すきで\lそれに…… このジムが すきだから!\pさあ もういちど いっしょに\nホットな わざを ぶつけあいましょう!$"
 
 LavaridgeTown_Gym_1F_Text_FlanneryRematchDefeat:
-	.string "{JPN}ふぅ! ばくはつ すんぜん!$"
+	.string "ふぅ! ばくはつ すんぜん!$"
 
 LavaridgeTown_Gym_1F_Text_FlanneryPostRematch:
-	.string "{JPN}アスナ『しょうぶには まけたけど\nこんなに ヒートする たたかいが できて\lあたしは まんぞくよ!\pそのうち また しょうぶ しましょうね!$"
+	.string "アスナ『しょうぶには まけたけど\nこんなに ヒートする たたかいが できて\lあたしは まんぞくよ!\pそのうち また しょうぶ しましょうね!$"
 
 LavaridgeTown_Gym_1F_Text_FlanneryRematchNeedTwoMons:
-	.string "{JPN}アスナ『しょうぶに まけた ぐらいで\nあたしは へこたれたり しない!\pなぜなら あたしは ポケモンが すきで\nしょうぶを するのが すきで\lそれに…… このジムが すきだから!\pさあ もういちど いっしょに\nホットな わざを ぶつけあいましょう!\p……あら? たたかえる ポケモンを\n1ひきしか もって いないんですね\pすみませんけど 2ひき いじょうの\nポケモンを もって きてください$"
+	.string "アスナ『しょうぶに まけた ぐらいで\nあたしは へこたれたり しない!\pなぜなら あたしは ポケモンが すきで\nしょうぶを するのが すきで\lそれに…… このジムが すきだから!\pさあ もういちど いっしょに\nホットな わざを ぶつけあいましょう!\p……あら? たたかえる ポケモンを\n1ひきしか もって いないんですね\pすみませんけど 2ひき いじょうの\nポケモンを もって きてください$"

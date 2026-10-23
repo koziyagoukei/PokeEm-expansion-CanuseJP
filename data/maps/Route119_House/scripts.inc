@@ -16,11 +16,11 @@ Route119_House_EventScript_Wingull::
 	end
 
 Route119_House_Text_RumorAboutCaveOfOrigin:
-	.string "{JPN}どこかに めざめのほこら とよばれる\nどうくつが あるんですって!\pポケモンの たましいが よみがえる ところ\nという うわさ だけど\lそんなこと ほんとうに あるのかしら?"
+	.string "どこかに めざめのほこら とよばれる\nどうくつが あるんですって!\pポケモンの たましいが よみがえる ところ\nという うわさ だけど\lそんなこと ほんとうに あるのかしら?"
 	.string ""
 	.string ""
 	.string ""
 	.string "$"
 
 Route119_House_Text_Wingull:
-	.string "{JPN}キャモメ『ぴひょ?$"
+	.string "キャモメ『ぴひょ?$"

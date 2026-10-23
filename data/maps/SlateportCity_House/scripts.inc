@@ -10,8 +10,8 @@ SlateportCity_House_EventScript_Girl::
 	end
 
 SlateportCity_House_Text_NatureToDoWithStatGains:
-	.string "{JPN}わたしの ポケモン せっかちでね\nほかの ポケモンと くらべると\lすばやさが たかいんだわ\pせいかくで そだちやすい のうりょくに\nちがいが あるのかもな?$"
+	.string "わたしの ポケモン せっかちでね\nほかの ポケモンと くらべると\lすばやさが たかいんだわ\pせいかくで そだちやすい のうりょくに\nちがいが あるのかもな?$"
 
 SlateportCity_House_Text_MustBeGoingToBattleTent:
-	.string "{JPN}あなた ポケモントレーナーね\nカイナシティに きた っていうことは\lとうぜん バトルテントに いくのね!$"
+	.string "あなた ポケモントレーナーね\nカイナシティに きた っていうことは\lとうぜん バトルテントに いくのね!$"
 

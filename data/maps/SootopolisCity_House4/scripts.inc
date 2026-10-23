@@ -20,10 +20,10 @@ SootopolisCity_House4_EventScript_Azumarill::
 	end
 
 SootopolisCity_House4_Text_AncientTreasuresWaitingInSea:
-	.string "{JPN}いいことを おしえてやろう\pこの あたりの うみの そこには\nこだいの いせきが あるそうだ!\pひょっとしたら むかしの おたからが\nざくざく みつかるかも しれないぜ!$"
+	.string "いいことを おしえてやろう\pこの あたりの うみの そこには\nこだいの いせきが あるそうだ!\pひょっとしたら むかしの おたからが\nざくざく みつかるかも しれないぜ!$"
 
 SootopolisCity_House4_Text_StrollUnderwaterWithPokemon:
-	.string "{JPN}たからもの かぁ……\pあると いいけど\nそうでなくても ポケモンと いっしょに\lかいていを おさんぽ なんて す・て・き!$"
+	.string "たからもの かぁ……\pあると いいけど\nそうでなくても ポケモンと いっしょに\lかいていを おさんぽ なんて す・て・き!$"
 
 SootopolisCity_House4_Text_Azumarill:
-	.string "{JPN}マリルリ『まるりー$"
+	.string "マリルリ『まるりー$"

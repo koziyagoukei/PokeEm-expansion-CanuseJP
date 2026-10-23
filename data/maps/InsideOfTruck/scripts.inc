@@ -52,5 +52,5 @@ InsideOfTruck_EventScript_MovingBox::
 	end
 
 InsideOfTruck_Text_BoxPrintedWithMonLogo:
-	.string "{JPN}はこには ポケモンの えが かいてある\pポケモンマークの ひっこしやさん だ!$"
+	.string "はこには ポケモンの えが かいてある\pポケモンマークの ひっこしやさん だ!$"
 

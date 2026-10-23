@@ -860,8 +860,8 @@ void SetMonFormPSS(struct BoxPokemon *boxMon, enum FormChanges method);
 void SetMonFormPSS_ItemHold(struct BoxPokemon *boxMon);
 void UpdateSpeciesSpritePSS(struct BoxPokemon *boxmon);
 
-static const u8 gText_JustOnePkmn[] = _("{JPN}てもちポケモンが 1ひきしかいません!");
-static const u8 gText_PartyFull[] = _("{JPN}てもちポケモンが いっぱいです!");
+static const u8 gText_JustOnePkmn[] = _("てもちポケモンが 1ひきしかいません!");
+static const u8 gText_PartyFull[] = _("てもちポケモンが いっぱいです!");
 static const u8 gText_Box[] = _("{JPN}ボックス");
 
 struct {

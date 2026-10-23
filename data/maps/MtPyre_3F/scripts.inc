@@ -33,39 +33,39 @@ MtPyre_3F_EventScript_RematchGabrielle::
 	end
 
 MtPyre_3F_Text_WilliamIntro:
-	.string "{JPN}れいげん あらたかな やまの ちからで\nサイコパワーの アップした わたしに\lこどもの おまえが かてるかな!?$"
+	.string "れいげん あらたかな やまの ちからで\nサイコパワーの アップした わたしに\lこどもの おまえが かてるかな!?$"
 
 MtPyre_3F_Text_WilliamDefeat:
-	.string "{JPN}アップ アップ……$"
+	.string "アップ アップ……$"
 
 MtPyre_3F_Text_WilliamPostBattle:
-	.string "{JPN}わたしの サイコパワーは かくじつに\nつよく なっている はずなのに……"
+	.string "わたしの サイコパワーは かくじつに\nつよく なっている はずなのに……"
 	.string "$"
 
 MtPyre_3F_Text_KaylaIntro:
-	.string "{JPN}おほほほほっ!\pここは あなたの ような こどもが\nくる ばしょ では ないのよっ!"
+	.string "おほほほほっ!\pここは あなたの ような こどもが\nくる ばしょ では ないのよっ!"
 	.string ""
 	.string "$"
 
 MtPyre_3F_Text_KaylaDefeat:
-	.string "{JPN}あっさり まけたわっ……!$"
+	.string "あっさり まけたわっ……!$"
 
 MtPyre_3F_Text_KaylaPostBattle:
-	.string "{JPN}まだまだ しゅぎょうが たりないのね……\nさんちょうを めざすわよ……!\pファイト! わたし!"
+	.string "まだまだ しゅぎょうが たりないのね……\nさんちょうを めざすわよ……!\pファイト! わたし!"
 	.string ""
 	.string ""
 	.string ""
 	.string "$"
 
 MtPyre_3F_Text_GabrielleIntro:
-	.string "{JPN}あなたは なぜ ここへ……?$"
+	.string "あなたは なぜ ここへ……?$"
 
 MtPyre_3F_Text_GabrielleDefeat:
-	.string "{JPN}すごいわ!\nあなたは すてきな トレーナーさんね"
+	.string "すごいわ!\nあなたは すてきな トレーナーさんね"
 	.string "$"
 
 MtPyre_3F_Text_GabriellePostBattle:
-	.string "{JPN}いまはもう いない ポケモン\nいま いっしょに いる ポケモン\pそれに\nこれから であう ポケモン……\pすべて たいせつな ポケモン なのよ\nおぼえて おいて くださいね"
+	.string "いまはもう いない ポケモン\nいま いっしょに いる ポケモン\pそれに\nこれから であう ポケモン……\pすべて たいせつな ポケモン なのよ\nおぼえて おいて くださいね"
 	.string ""
 	.string ""
 	.string ""
@@ -73,21 +73,21 @@ MtPyre_3F_Text_GabriellePostBattle:
 	.string "$"
 
 MtPyre_3F_Text_GabrielleRegister:
-	.string "{JPN}あなたの ポケモンが そだったら\nみてみたいわ……\lさあ ポケナビを だして"
+	.string "あなたの ポケモンが そだったら\nみてみたいわ……\lさあ ポケナビを だして"
 	.string ""
 	.string "$"
 
 MtPyre_3F_Text_GabrielleRematchIntro:
-	.string "{JPN}あら あなたは……\nそだてた ポケモン みせてくれるの?"
+	.string "あら あなたは……\nそだてた ポケモン みせてくれるの?"
 	.string ""
 	.string "$"
 
 MtPyre_3F_Text_GabrielleRematchDefeat:
-	.string "{JPN}ほんとうに すごいわ!\nあなたは すてきね"
+	.string "ほんとうに すごいわ!\nあなたは すてきね"
 	.string "$"
 
 MtPyre_3F_Text_GabriellePostRematch:
-	.string "{JPN}いまはもう いない ポケモン\nいま いっしょに いる ポケモン\pそれに\nこれから であう ポケモン……\pすべて たいせつな ポケモン なのよ\nおぼえて くれて いたのね"
+	.string "いまはもう いない ポケモン\nいま いっしょに いる ポケモン\pそれに\nこれから であう ポケモン……\pすべて たいせつな ポケモン なのよ\nおぼえて くれて いたのね"
 	.string ""
 	.string ""
 	.string ""

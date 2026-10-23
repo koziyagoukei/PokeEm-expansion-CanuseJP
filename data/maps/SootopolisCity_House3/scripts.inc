@@ -20,13 +20,13 @@ SootopolisCity_House3_EventScript_Girl::
 	end
 
 SootopolisCity_House3_Text_JuanHasManyFansDoYou:
-	.string "{JPN}あなた ポケモン トレーナーね?\pルネシティの アダンさまは\nおでしさんの ミクリさま より\lさらに たくさんの ファンが いるのよ!\pあなたに ファンは いるのかしら?$"
+	.string "あなた ポケモン トレーナーね?\pルネシティの アダンさまは\nおでしさんの ミクリさま より\lさらに たくさんの ファンが いるのよ!\pあなたに ファンは いるのかしら?$"
 
 SootopolisCity_House3_Text_YouMustBePrettyStrong:
-	.string "{JPN}へえー\nじゃあ けっこう つよいのね!$"
+	.string "へえー\nじゃあ けっこう つよいのね!$"
 
 SootopolisCity_House3_Text_LonesomeTryWorkingHarder:
-	.string "{JPN}あららん……\nそれは ちょっと さみしいわね\pファンが できるよう がんばりなさいよ!$"
+	.string "あららん……\nそれは ちょっと さみしいわね\pファンが できるよう がんばりなさいよ!$"
 
 SootopolisCity_House3_Text_TrainerFanClubWasWild:
-	.string "{JPN}ねっしんな ファンは ホウエン いがいの\nちいきからも やってくるの!\pあたしが ミナモの\nトレーナー ファンクラブに いったときも\lとっても すごかったもの!$"
+	.string "ねっしんな ファンは ホウエン いがいの\nちいきからも やってくるの!\pあたしが ミナモの\nトレーナー ファンクラブに いったときも\lとっても すごかったもの!$"

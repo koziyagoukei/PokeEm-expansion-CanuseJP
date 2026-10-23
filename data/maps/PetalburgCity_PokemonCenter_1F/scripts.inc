@@ -53,20 +53,20 @@ PetalburgCity_PokemonCenter_1F_EventScript_SayMudkipType::
 	return
 
 PetalburgCity_PokemonCenter_1F_Text_PCStorageSystem:
-	.string "{JPN}パソコンで つかえる\nポケモン あずかり システム……\pつくった やつは\nすげー かがくに くわしいんだろうな!$"
+	.string "パソコンで つかえる\nポケモン あずかり システム……\pつくった やつは\nすげー かがくに くわしいんだろうな!$"
 
 PetalburgCity_PokemonCenter_1F_Text_OranBerryRegainedHP:
-	.string "{JPN}ポケモンに オレンのみ を たべさせたら\nたいりょくが かいふく したんだぜ!$"
+	.string "ポケモンに オレンのみ を たべさせたら\nたいりょくが かいふく したんだぜ!$"
 
 PetalburgCity_PokemonCenter_1F_Text_ManyTypesOfPokemon:
-	.string "{JPN}ポケモンには\nいろいろ タイプが あるの!\pで タイプには あいしょうが あるから\nポケモンしょうぶの とき\lゆうり だったり ふり だったりするの$"
+	.string "ポケモンには\nいろいろ タイプが あるの!\pで タイプには あいしょうが あるから\nポケモンしょうぶの とき\lゆうり だったり ふり だったりするの$"
 
 PetalburgCity_PokemonCenter_1F_Text_TreeckoIsGrassType:
-	.string "{JPN}たとえば あなたの キモリは\nくさタイプ でしょ\pみずタイプや じめんタイプに つよくて\nほのおタイプが にがて なのよね!$"
+	.string "たとえば あなたの キモリは\nくさタイプ でしょ\pみずタイプや じめんタイプに つよくて\nほのおタイプが にがて なのよね!$"
 
 PetalburgCity_PokemonCenter_1F_Text_TorchicIsFireType:
-	.string "{JPN}たとえば あなたの\nアチャモは ほのおタイプ でしょ\pくさタイプや むしタイプに つよくて\nみずタイプが にがて なんだ!$"
+	.string "たとえば あなたの\nアチャモは ほのおタイプ でしょ\pくさタイプや むしタイプに つよくて\nみずタイプが にがて なんだ!$"
 
 PetalburgCity_PokemonCenter_1F_Text_MudkipIsWaterType:
-	.string "{JPN}たとえば あなたの\nミズゴロウは みずタイプ だよね\pほのおタイプに つよくて\nくさタイプや でんきタイプが にがて ね!$"
+	.string "たとえば あなたの\nミズゴロウは みずタイプ だよね\pほのおタイプに つよくて\nくさタイプや でんきタイプが にがて ね!$"
 

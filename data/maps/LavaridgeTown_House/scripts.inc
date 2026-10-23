@@ -16,8 +16,8 @@ LavaridgeTown_House_EventScript_Zigzagoon::
 	end
 
 LavaridgeTown_House_Text_WifeWarmingEggInHotSprings:
-	.string "{JPN}おんせんで タマゴを あたためている\nばあさんから きいたんじゃが……\pそだてやに ポケモンを\n2ひき いっしょに あずけたらの\lなんと タマゴが みつかったそうじゃ!!$"
+	.string "おんせんで タマゴを あたためている\nばあさんから きいたんじゃが……\pそだてやに ポケモンを\n2ひき いっしょに あずけたらの\lなんと タマゴが みつかったそうじゃ!!$"
 
 LavaridgeTown_House_Text_Zigzagoon:
-	.string "{JPN}ジグザグマ『ぷしゅー!$"
+	.string "ジグザグマ『ぷしゅー!$"
 

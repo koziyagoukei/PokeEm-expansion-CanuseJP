@@ -59,8 +59,8 @@ static const u8 sText_No0000[] = _("0000");
 static const u8 sText_TenDashes[] = _("？？？？？？？？？？");
 ALIGNED(4) static const u8 sExpandedPlaceholder_PokedexDescription[] = _("");
 
-static const u8 sText_Stats_Buttons[] = _("{JPN}{A_BUTTON}きりかえ   {DPAD_UPDOWN}わざ");
-static const u8 sText_Stats_Buttons_Decapped[] = _("{JPN}{A_BUTTON}きりかえ   {DPAD_UPDOWN}わざ");
+static const u8 sText_Stats_Buttons[] = _("{A_BUTTON}きりかえ   {DPAD_UPDOWN}わざ");
+static const u8 sText_Stats_Buttons_Decapped[] = _("{A_BUTTON}きりかえ   {DPAD_UPDOWN}わざ");
 static const u8 sText_Stats_HP[] = _("HP");
 static const u8 sText_Stats_Attack[] = _("こうげき");
 static const u8 sText_Stats_Defense[] = _("ぼうぎょ");
@@ -130,8 +130,8 @@ static const u8 sText_Dex_OWN[] = _("つかまえた");
 
 static const u8 sText_EVO_Buttons[] = _("{JPN}{DPAD_UPDOWN}しんか {A_BUTTON}みる");
 static const u8 sText_EVO_Buttons_Decapped[] = _("{JPN}{DPAD_UPDOWN}しんか {A_BUTTON}みる");
-static const u8 sText_EVO_Buttons_PE[] = _("{JPN}{DPAD_UPDOWN}しんか {A_BUTTON}みる {START_BUTTON}フォルム");
-static const u8 sText_EVO_Buttons_Decapped_PE[] = _("{JPN}{DPAD_UPDOWN}しんか {A_BUTTON}みる {START_BUTTON}フォルム");
+static const u8 sText_EVO_Buttons_PE[] = _("{DPAD_UPDOWN}しんか {A_BUTTON}みる {START_BUTTON}フォルム");
+static const u8 sText_EVO_Buttons_Decapped_PE[] = _("{DPAD_UPDOWN}しんか {A_BUTTON}みる {START_BUTTON}フォルム");
 static const u8 sText_EVO_Name[] = _("{STR_VAR_3}:");
 static const u8 sText_EVO_PreEvo[] = _("{STR_VAR_2}から しんか");
 static const u8 sText_EVO_PreEvo_PE_Mega[] = _("{STR_VAR_2}で メガシンカ");
@@ -150,10 +150,10 @@ static const u8 sText_EVO_RECOIL_DAMAGE_FEMALE[] = _("{STR_VAR_2}の はんど�
 static const u8 sText_EVO_DEFEAT_THREE_WITH_ITEM[] = _("{STR_VAR_3}を 3ひき たおす\n{STR_VAR_2}もち");
 static const u8 sText_EVO_NONE[] = _("{STR_VAR_1}は しんかしない。");
 
-static const u8 sText_FORMS_Buttons_PE[] = _("{JPN}{A_BUTTON}フォルム {START_BUTTON}しんか");
-static const u8 sText_FORMS_Buttons_Decapped_PE[] = _("{JPN}{A_BUTTON}フォルム {START_BUTTON}しんか");
-static const u8 sText_FORMS_Buttons_Submenu_PE[] = _("{JPN}{DPAD_NONE}フォルム {A_BUTTON}みる {START_BUTTON}しんか");
-static const u8 sText_FORMS_Buttons_Submenu_Decapped_PE[] = _("{JPN}{DPAD_NONE}フォルム {A_BUTTON}みる {START_BUTTON}しんか");
+static const u8 sText_FORMS_Buttons_PE[] = _("{A_BUTTON}フォルム {START_BUTTON}しんか");
+static const u8 sText_FORMS_Buttons_Decapped_PE[] = _("{A_BUTTON}フォルム {START_BUTTON}しんか");
+static const u8 sText_FORMS_Buttons_Submenu_PE[] = _("{DPAD_NONE}フォルム {A_BUTTON}みる {START_BUTTON}しんか");
+static const u8 sText_FORMS_Buttons_Submenu_Decapped_PE[] = _("{DPAD_NONE}フォルム {A_BUTTON}みる {START_BUTTON}しんか");
 static const u8 sText_FORMS_NONE[] = _("{STR_VAR_1}に べつのフォルムは ありません。");
 static const u8 sText_PlusSymbol[] = _("{ENG}+");
 

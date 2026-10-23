@@ -202,13 +202,13 @@ SecretBase_EventScript_SkittyTV::
 	end
 
 SecretBase_Text_SmallIndentInWall::
-	.string "{JPN}かべに ちいさな くぼみが ある$"
+	.string "かべに ちいさな くぼみが ある$"
 
 SecretBase_Text_IndentUseSecretPower::
-	.string "{JPN}かべに ちいさな くぼみが ある\pひみつのちからを つかいますか?$"
+	.string "かべに ちいさな くぼみが ある\pひみつのちからを つかいますか?$"
 
 SecretBase_Text_DiscoveredSmallCavern::
-	.string "{JPN}ちいさな どうくつを はっけん!$"
+	.string "ちいさな どうくつを はっけん!$"
 
 SecretBase_Text_WantToMakeYourSecretBaseHere:
-	.string "{JPN}ここに ひみつきちを つくりますか?$"
+	.string "ここに ひみつきちを つくりますか?$"

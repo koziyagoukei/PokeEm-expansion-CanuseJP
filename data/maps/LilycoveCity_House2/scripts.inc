@@ -19,7 +19,7 @@ LilycoveCity_House2_EventScript_ReceivedRest::
 	end
 
 LilycoveCity_House2_Text_NotAwakeYetHaveThis:
-	.string "{JPN}むにゃむにゃ……\pぼく ねぼけて いるから\nこれを あげる……$"
+	.string "むにゃむにゃ……\pぼく ねぼけて いるから\nこれを あげる……$"
 
 LilycoveCity_House2_Text_SleepIsEssential:
-	.string "{JPN}むにゃむにゃ……\pねる こは そだつ……\nねむって たいりょく かいふく……$"
+	.string "むにゃむにゃ……\pねる こは そだつ……\nねむって たいりょく かいふく……$"

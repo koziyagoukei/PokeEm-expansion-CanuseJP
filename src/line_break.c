@@ -7,7 +7,7 @@ void StripLineBreaks(u8 *src)
 {
     u32 currIndex = 0;
     u32 prevChar = EOS;
-    bool32 isJapanese = StringContainsJapaneseGlyph(src);
+    bool32 isJapanese = IsJapaneseTextMode(src);
 
     while (src[currIndex] != EOS)
     {
@@ -360,7 +360,7 @@ bool32 IsWordSplittingChar(const u8 *src, u32 index)
     switch (src[index])
     {
     case CHAR_ZWS:
-        return !StringContainsJapaneseGlyph(src);
+        return !IsJapaneseTextMode(src);
     case CHAR_SPACE:
         return TRUE;
     default:

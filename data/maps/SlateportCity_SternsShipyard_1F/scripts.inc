@@ -63,13 +63,13 @@ SlateportCity_SternsShipyard_1F_EventScript_Briney::
 	end
 
 SlateportCity_SternsShipyard_1F_Text_CantMakeHeadsOrTails:
-	.string "{JPN}えーと…… これが こーなって\nそいでもって あれが あーなって\lと いうことは それと これは どれ?\pああ もう わけが わからん!"
+	.string "えーと…… これが こーなって\nそいでもって あれが あーなって\lと いうことは それと これは どれ?\pああ もう わけが わからん!"
 	.string ""
 	.string ""
 	.string "$"
 
 SlateportCity_SternsShipyard_1F_Text_MeetDockDeliverToStern:
-	.string "{JPN}……ん?\pぼくは クスノキかんちょう から\nれんらくせんの せっけいを まかされた\lツガという ものだけど……\pあっ!?\nそれは デボンのにもつ!\pうーん……\nこまったな……\pクスノキかんちょう\nほかにも しごとが あるからって\lどこかに いっちゃったんだ\pわるいけど きみ クスノキかんちょう\nさがして にもつを わたしてあげてよ!"
+	.string "……ん?\pぼくは クスノキかんちょう から\nれんらくせんの せっけいを まかされた\lツガという ものだけど……\pあっ!?\nそれは デボンのにもつ!\pうーん……\nこまったな……\pクスノキかんちょう\nほかにも しごとが あるからって\lどこかに いっちゃったんだ\pわるいけど きみ クスノキかんちょう\nさがして にもつを わたしてあげてよ!"
 	.string ""
 	.string ""
 	.string ""
@@ -84,27 +84,27 @@ SlateportCity_SternsShipyard_1F_Text_MeetDockDeliverToStern:
 	.string "$"
 
 SlateportCity_SternsShipyard_1F_Text_CouldYouFindStern:
-	.string "{JPN}ツガ『クスノキかんちょう\nどこに いっちゃったのかな?\pわるいけど きみ クスノキかんちょう\nさがして にもつを わたしてあげてよ!"
+	.string "ツガ『クスノキかんちょう\nどこに いっちゃったのかな?\pわるいけど きみ クスノキかんちょう\nさがして にもつを わたしてあげてよ!"
 	.string ""
 	.string ""
 	.string "$"
 
 SlateportCity_SternsShipyard_1F_Text_CouldUseAdviceFromVeteran:
-	.string "{JPN}ツガ『ふねをつくる っていうのは\nつくえの うえでの けいさん だけでは\lわからないことも おおくてね\pやっぱり うみのことを しりつくした\nベテランの ちえが ほしいところだよ……"
+	.string "ツガ『ふねをつくる っていうのは\nつくえの うえでの けいさん だけでは\lわからないことも おおくてね\pやっぱり うみのことを しりつくした\nベテランの ちえが ほしいところだよ……"
 	.string ""
 	.string ""
 	.string ""
 	.string "$"
 
 SlateportCity_SternsShipyard_1F_Text_BrineyJoinedUs:
-	.string "{JPN}ツガ『やあ! ハギろうじんが ここで\nてつだって くれるように なったよ!\pでんせつの ふなのりに てつだってもらえて\nれんらくせんは ちゃくちゃくと\lかんせいに むかっているよ!"
+	.string "ツガ『やあ! ハギろうじんが ここで\nてつだって くれるように なったよ!\pでんせつの ふなのりに てつだってもらえて\nれんらくせんは ちゃくちゃくと\lかんせいに むかっているよ!"
 	.string ""
 	.string ""
 	.string ""
 	.string "$"
 
 SlateportCity_SternsShipyard_1F_Text_FerryIsReady:
-	.string "{JPN}ツガ『ついに ふねは かんせいしたよ!\pできた れんらくせん タイドリップごうは\nまさに さいこう けっさく!\pだけど もっと いいものが できそうな……\nそんな きも するんだよ\pそう……\nものづくりに おわりは ないのさ!"
+	.string "ツガ『ついに ふねは かんせいしたよ!\pできた れんらくせん タイドリップごうは\nまさに さいこう けっさく!\pだけど もっと いいものが できそうな……\nそんな きも するんだよ\pそう……\nものづくりに おわりは ないのさ!"
 	.string ""
 	.string ""
 	.string ""
@@ -113,7 +113,7 @@ SlateportCity_SternsShipyard_1F_Text_FerryIsReady:
 	.string "$"
 
 SlateportCity_SternsShipyard_1F_Text_DecidedToHelpDock:
-	.string "{JPN}ハギ『おお! {PLAYER}{KUN}!\nひさしぶり じゃのう!\pいやあ きみと であってから\nふなのりの ちが さわいでな……\pツガくんに きょうりょく して\nれんらくせんを つくりたく なったんじゃ!\pれんらくせんが できると おおくの\nひとを はこべるように なるからのう\pしかし…… ふむう……\nツガくんは すごいのう……\pかれの ぎじゅつと わしの けいけんを\nがったい させれば かならずや\lすごい ふねが できるに ちがいない!"
+	.string "ハギ『おお! {PLAYER}{KUN}!\nひさしぶり じゃのう!\pいやあ きみと であってから\nふなのりの ちが さわいでな……\pツガくんに きょうりょく して\nれんらくせんを つくりたく なったんじゃ!\pれんらくせんが できると おおくの\nひとを はこべるように なるからのう\pしかし…… ふむう……\nツガくんは すごいのう……\pかれの ぎじゅつと わしの けいけんを\nがったい させれば かならずや\lすごい ふねが できるに ちがいない!"
 	.string ""
 	.string ""
 	.string ""
@@ -128,12 +128,12 @@ SlateportCity_SternsShipyard_1F_Text_DecidedToHelpDock:
 	.string "$"
 
 SlateportCity_SternsShipyard_1F_Text_SeaIsLikeLivingThing:
-	.string "{JPN}きせつや てんきや つきのいち など\nさまざまな じょうけん によって\lうみは つねに すがたを かえていきます\pそう! うみ というのは\nいきもの のような もの なんですよ!"
+	.string "きせつや てんきや つきのいち など\nさまざまな じょうけん によって\lうみは つねに すがたを かえていきます\pそう! うみ というのは\nいきもの のような もの なんですよ!"
 	.string ""
 	.string ""
 	.string ""
 	.string "$"
 
 SlateportCity_SternsShipyard_1F_Text_GetSeasickEasily:
-	.string "{JPN}ぼくは すぐに ふなよい するのよね\nだから ここで おてつだい してるのよね"
+	.string "ぼくは すぐに ふなよい するのよね\nだから ここで おてつだい してるのよね"
 	.string "$"

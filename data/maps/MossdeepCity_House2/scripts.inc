@@ -52,10 +52,10 @@ MossdeepCity_House2_Movement_WingullExitEast:
 	step_end
 
 MossdeepCity_House2_Text_SisterMailsBoyfriendInFortree:
-	.string "{JPN}おれの いもうとは ヒワマキの\nボーイフレンドと ぶんつう してる\pちっとも うらやましく ないぞ!$"
+	.string "おれの いもうとは ヒワマキの\nボーイフレンドと ぶんつう してる\pちっとも うらやましく ないぞ!$"
 
 MossdeepCity_House2_Text_PokemonCarriesMailBackAndForth:
-	.string "{JPN}ヒワマキの おともだちに あえなくても\nポケモンが おてがみを はこんでくれるの\lはなれていても さみしくないわ!$"
+	.string "ヒワマキの おともだちに あえなくても\nポケモンが おてがみを はこんでくれるの\lはなれていても さみしくないわ!$"
 
 MossdeepCity_House2_Text_Wingull:
-	.string "{JPN}キャモメ『ぴひょー!$"
+	.string "キャモメ『ぴひょー!$"

@@ -183,4 +183,4 @@ FarawayIsland_Interior_EventScript_HideMewWhenGrassCut::
 	end
 
 FarawayIsland_Interior_Text_TheFeelingOfBeingWatchedFaded:
-	.string "{JPN}けはいが きえてしまった……$"
+	.string "けはいが きえてしまった……$"

@@ -53,11 +53,11 @@ OldaleTown_Mart_EventScript_Boy::
 	end
 
 OldaleTown_Mart_Text_PokeBallsAreSoldOut:
-	.string "{JPN}なんでも うりきれ らしくて\nモンスターボール かえないの……$"
+	.string "なんでも うりきれ らしくて\nモンスターボール かえないの……$"
 
 OldaleTown_Mart_Text_ImGoingToBuyPokeBalls:
-	.string "{JPN}どんどん モンスターボール かって\nどんどん ポケモン つかまえちゃうわよ!$"
+	.string "どんどん モンスターボール かって\nどんどん ポケモン つかまえちゃうわよ!$"
 
 OldaleTown_Mart_Text_RestoreHPWithPotion:
-	.string "{JPN}ポケモンは たいりょくが なくなると\nたたかう げんきも なくなる\pそんな ときは キズぐすりを つかって\nたいりょくを かいふく してあげるんだ!$"
+	.string "ポケモンは たいりょくが なくなると\nたたかう げんきも なくなる\pそんな ときは キズぐすりを つかって\nたいりょくを かいふく してあげるんだ!$"
 

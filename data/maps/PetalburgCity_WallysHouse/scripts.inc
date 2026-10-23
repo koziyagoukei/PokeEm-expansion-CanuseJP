@@ -66,28 +66,28 @@ PetalburgCity_WallysHouse_EventScript_ReceivedHMSurf::
 	end
 
 PetalburgCity_WallysHouse_Text_ThanksForPlayingWithWally:
-	.string "{JPN}きみは……\nそうか {PLAYER}{KUN} だね?\pさっきは ミツルの あいてを してくれて\nありがとう……\pあのこは うまれた ときから\nからだが じょうぶでは なくてね\pそれで すこしの あいだ シダケタウンの\nわたしの しんせきの うちで\lあずかってもらう ことに したんだよ\pあそこは ここよりも ずっと\nくうきが きれいな ところ だからね!\p……で ミツルかい? ミツルなら\nもう しゅっぱつ していったよ\pいまごろは どの あたりかなあ……$"
+	.string "きみは……\nそうか {PLAYER}{KUN} だね?\pさっきは ミツルの あいてを してくれて\nありがとう……\pあのこは うまれた ときから\nからだが じょうぶでは なくてね\pそれで すこしの あいだ シダケタウンの\nわたしの しんせきの うちで\lあずかってもらう ことに したんだよ\pあそこは ここよりも ずっと\nくうきが きれいな ところ だからね!\p……で ミツルかい? ミツルなら\nもう しゅっぱつ していったよ\pいまごろは どの あたりかなあ……$"
 
 PetalburgCity_WallysHouse_Text_WonderHowWallyIsDoing:
-	.string "{JPN}ミツルは どうしてるかなあ……$"
+	.string "ミツルは どうしてるかなあ……$"
 
 PetalburgCity_WallysHouse_Text_PleaseExcuseUs:
-	.string "{JPN}{PLAYER}{KUN}!\nむりに よびだして すまなかったね!\pミツルは シダケタウンに いってから\nすっかり げんきを とりもどしたよ!\pそれも みんな きみの おかげさ!\pなにしろ このまちを でるときに\nミツルが ポケモンを つかまえるのを\lてつだって くれただろう?\pあのときの ことが ミツルは とっても\nうれしかった らしいんだ!\pいや ミツル だけじゃない\nちちおやの わたしも うれしいよ!\pあのこに きみの ような\nやさしい ともだちが できたことが ね!\pそのおれい という わけでは ないけど\nこれを うけとって くれないか!$"
+	.string "{PLAYER}{KUN}!\nむりに よびだして すまなかったね!\pミツルは シダケタウンに いってから\nすっかり げんきを とりもどしたよ!\pそれも みんな きみの おかげさ!\pなにしろ このまちを でるときに\nミツルが ポケモンを つかまえるのを\lてつだって くれただろう?\pあのときの ことが ミツルは とっても\nうれしかった らしいんだ!\pいや ミツル だけじゃない\nちちおやの わたしも うれしいよ!\pあのこに きみの ような\nやさしい ともだちが できたことが ね!\pそのおれい という わけでは ないけど\nこれを うけとって くれないか!$"
 
 PetalburgCity_WallysHouse_Text_SurfGoAllSortsOfPlaces:
-	.string "{JPN}なみのりを つかえるように なれば\n"
+	.string "なみのりを つかえるように なれば\n"
 	.string "いろんな ばしょに いけるように なるよ！$"
 
 PetalburgCity_WallysHouse_Text_WallyIsComingHomeSoon:
-	.string "{JPN}もうすぐ ミツルが かえってくるぞ!\nたのしみだなあ……!$"
+	.string "もうすぐ ミツルが かえってくるぞ!\nたのしみだなあ……!$"
 
 PetalburgCity_WallysHouse_Text_YouMetWallyInEverGrandeCity:
-	.string "{JPN}ええっ!? サイユウシティで\nミツルと であった だって……?\pんもう {PLAYER}{KUN}ってばー\pいくら あのこが げんきに なったからって\nそんな とおくの まち まで\lひとりで いけるわけ ないよねえ……$"
+	.string "ええっ!? サイユウシティで\nミツルと であった だって……?\pんもう {PLAYER}{KUN}ってばー\pいくら あのこが げんきに なったからって\nそんな とおくの まち まで\lひとりで いけるわけ ないよねえ……$"
 
 PetalburgCity_WallysHouse_Text_WallyWasReallyHappy:
-	.string "{JPN}ミツルが ポケモンを つかまえた って\n"
+	.string "ミツルが ポケモンを つかまえた って\n"
 	.string "すごく うれしそうに はなしていたの\p"
 	.string "あのこの あんな えがお ひさしぶり$"
 
 PetalburgCity_WallysHouse_Text_WallyLeftWithoutTelling:
-	.string "{JPN}うちの しゅじんには ないしょ だけど\pじつは ミツルったら シダケタウンを\nかってに でて いっちゃった らしいの……\pあのこ からだは よわかったけど\nあんがい しっかりした せいかく だから\lかならず ぶじで かえってくると\lわたしは しんじてるわ!$"
+	.string "うちの しゅじんには ないしょ だけど\pじつは ミツルったら シダケタウンを\nかってに でて いっちゃった らしいの……\pあのこ からだは よわかったけど\nあんがい しっかりした せいかく だから\lかならず ぶじで かえってくると\lわたしは しんじてるわ!$"

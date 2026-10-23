@@ -69,44 +69,44 @@ Route119_WeatherInstitute_1F_EventScript_Grunt4::
 	end
 
 Route119_WeatherInstitute_1F_Text_Grunt1Intro:
-	.string "{JPN}リーダーが ここでの けんきゅうに\nきょうみを もったらしくて\lおれらを よこしたんだ! ジャマするな!"
+	.string "リーダーが ここでの けんきゅうに\nきょうみを もったらしくて\lおれらを よこしたんだ! ジャマするな!"
 	.string ""
 	.string ""
 	.string "$"
 
 Route119_WeatherInstitute_1F_Text_Grunt1Defeat:
-	.string "{JPN}くそー\nこどもに まけた……"
+	.string "くそー\nこどもに まけた……"
 	.string "$"
 
 Route119_WeatherInstitute_1F_Text_Grunt1PostBattle:
-	.string "{JPN}リーダーは なんでも しっている……\pしかし なにを かんがえて いるのか\nしたっぱの おれらには さっぱりだ"
+	.string "リーダーは なんでも しっている……\pしかし なにを かんがえて いるのか\nしたっぱの おれらには さっぱりだ"
 	.string ""
 	.string "$"
 
 Route119_WeatherInstitute_1F_Text_Grunt4Intro:
-	.string "{JPN}あら?\nどうして ここに こどもが いるのかしら?"
+	.string "あら?\nどうして ここに こどもが いるのかしら?"
 	.string "$"
 
 Route119_WeatherInstitute_1F_Text_Grunt4Defeat:
-	.string "{JPN}あらー\nまけちゃったー!?"
+	.string "あらー\nまけちゃったー!?"
 	.string "$"
 
 Route119_WeatherInstitute_1F_Text_Grunt4PostBattle:
-	.string "{JPN}あらら……\nこどもに まけたら おこられちゃう……\pベッドで ねてようかしら?"
+	.string "あらら……\nこどもに まけたら おこられちゃう……\pベッドで ねてようかしら?"
 	.string ""
 	.string "$"
 
 Route119_WeatherInstitute_1F_Text_EveryoneWentUpstairs:
-	.string "{JPN}ぼくが ベッドで ねてる あいだに\nみんな 2かいに いっちゃったよ"
+	.string "ぼくが ベッドで ねてる あいだに\nみんな 2かいに いっちゃったよ"
 	.string "$"
 
 Route119_WeatherInstitute_1F_Text_WowYoureStrong:
-	.string "{JPN}{STR_VAR_1} つよいんだね!\pぼくも {STR_VAR_1} みたいな\nポケモントレーナーに なりたいや!"
+	.string "{STR_VAR_1} つよいんだね!\pぼくも {STR_VAR_1} みたいな\nポケモントレーナーに なりたいや!"
 	.string ""
 	.string "$"
 
 Route119_WeatherInstitute_1F_Text_ProfStudyingRain:
-	.string "{JPN}はかせは あめが だいすき なのです\pですが あめが ふりつづくと\nこまってしまう ひとも いるわけです\pそこで はかせは\nこの あめを なにかに つかえないか\lけんきゅう なさっているのです"
+	.string "はかせは あめが だいすき なのです\pですが あめが ふりつづくと\nこまってしまう ひとも いるわけです\pそこで はかせは\nこの あめを なにかに つかえないか\lけんきゅう なさっているのです"
 	.string ""
 	.string ""
 	.string ""
@@ -114,7 +114,7 @@ Route119_WeatherInstitute_1F_Text_ProfStudyingRain:
 	.string "$"
 
 Route119_WeatherInstitute_1F_Text_NoticingAbnormalWeather:
-	.string "{JPN}この けんきゅうじょの 2かいでは\nホウエンちほうの てんきの\lうつりかわりを しらべています\pさいきん また あちこちで\nいちじてきな ひでりや おおあめが\lかんそく されている ようですが……"
+	.string "この けんきゅうじょの 2かいでは\nホウエンちほうの てんきの\lうつりかわりを しらべています\pさいきん また あちこちで\nいちじてきな ひでりや おおあめが\lかんそく されている ようですが……"
 	.string ""
 	.string ""
 	.string ""
@@ -122,11 +122,11 @@ Route119_WeatherInstitute_1F_Text_NoticingAbnormalWeather:
 	.string "$"
 
 Route119_WeatherInstitute_1F_Text_WhatWereAquasUpTo:
-	.string "{JPN}やあ!\nあなたの おかげで たすかりましたよ!\lそれにしても……\pアクアだんの れんちゅうは\nなにを するつもり だったのでしょう?"
+	.string "やあ!\nあなたの おかげで たすかりましたよ!\lそれにしても……\pアクアだんの れんちゅうは\nなにを するつもり だったのでしょう?"
 	.string ""
 	.string ""
 	.string "$"
 
 Route119_WeatherInstitute_1F_Text_TakeRestInBed:
-	.string "{JPN}ベッドが ある……\nやすんでいこう"
+	.string "ベッドが ある……\nやすんでいこう"
 	.string "$"

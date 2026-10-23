@@ -16,8 +16,8 @@ RustboroCity_Flat2_1F_EventScript_Skitty::
 	end
 
 RustboroCity_Flat2_1F_Text_DevonWorkersLiveHere:
-	.string "{JPN}ここには デボン コーポレーションの\nしゃいんの みなさんが すんでるのですよ$"
+	.string "ここには デボン コーポレーションの\nしゃいんの みなさんが すんでるのですよ$"
 
 RustboroCity_Flat2_1F_Text_Skitty:
-	.string "{JPN}エネコ『ぎゃー!!$"
+	.string "エネコ『ぎゃー!!$"
 

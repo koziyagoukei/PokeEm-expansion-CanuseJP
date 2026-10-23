@@ -148,29 +148,29 @@ MossdeepCity_StevensHouse_EventScript_DiveItemBall::
 	end
 
 MossdeepCity_StevensHouse_Text_YouveEarnedHMDive:
-	.string "{JPN}ダイゴ『{PLAYER}{KUN}……\pみてのとおり なにも ないけど\nここが ボクの いえなんだ\p……そうだ さっきは ありがとう\nこれは ボクからの おれいの きもち\lひでんマシンの ダイビングだ\pえんりょ しないで もっていきなよ$"
+	.string "ダイゴ『{PLAYER}{KUN}……\pみてのとおり なにも ないけど\nここが ボクの いえなんだ\p……そうだ さっきは ありがとう\nこれは ボクからの おれいの きもち\lひでんマシンの ダイビングだ\pえんりょ しないで もっていきなよ$"
 
 MossdeepCity_StevensHouse_Text_ExplainDive:
-	.string "{JPN}ダイゴ『なみのりを していると\nみずの いろが こい ばしょが ある\pそこで ダイビングを つかうと\nうみの そこに もぐれるから\pうかびたい ときは\nもういちど ダイビングを つかうんだ\pばしょに よっては\nうかべない ばあいも あるけど$"
+	.string "ダイゴ『なみのりを していると\nみずの いろが こい ばしょが ある\pそこで ダイビングを つかうと\nうみの そこに もぐれるから\pうかびたい ときは\nもういちど ダイビングを つかうんだ\pばしょに よっては\nうかべない ばあいも あるけど$"
 
 MossdeepCity_StevensHouse_Text_UnderwateCavernBetweenMossdeepSootopolis:
-	.string "{JPN}ダイゴ『トクサネと ルネの あいだには\nかいていどうくつが あるらしい\pほら たしか…… クスノキかんちょうが\nはっけんした という あれだよ$"
+	.string "ダイゴ『トクサネと ルネの あいだには\nかいていどうくつが あるらしい\pほら たしか…… クスノキかんちょうが\nはっけんした という あれだよ$"
 
 MossdeepCity_StevensHouse_Text_TakeBallContainingBeldum:
-	.string "{JPN}{PLAYER}は\nモンスターボールを しらべた!\pなかには ポケモンの\nダンバルが はいっている!\pモンスターボールを もって いきますか?$"
+	.string "{PLAYER}は\nモンスターボールを しらべた!\pなかには ポケモンの\nダンバルが はいっている!\pモンスターボールを もって いきますか?$"
 
 MossdeepCity_StevensHouse_Text_ObtainedBeldum:
-	.string "{JPN}{PLAYER}は\nダンバルを てにいれた!$"
+	.string "{PLAYER}は\nダンバルを てにいれた!$"
 
 @ Unused
 MossdeepCity_StevensHouse_Text_NoSpaceForAnotherMon:
 	.string "{JPN}これいじょう ポケモンを もてない!$"
 
 MossdeepCity_StevensHouse_Text_LeftPokeBallWhereItWas:
-	.string "{JPN}{PLAYER}は モンスターボールを\nそのままに しておいた$"
+	.string "{PLAYER}は モンスターボールを\nそのままに しておいた$"
 
 MossdeepCity_StevensHouse_Text_LetterFromSteven:
-	.string "{JPN}てがみが ある!\p…… …… ……\n…… …… ……\p{PLAYER}{KUN}へ\pボクは おもうことが あって\nしばらく しゅぎょうを つづける\lとうぶん いえに かえらない\pそこで おねがいだ\pつくえの うえにある\nモンスターボールを うけとって ほしい\pなかに いるのは ダンバルといって\nボクの おきにいりの ポケモンだから\pよろしく たのむよ\pでは また いつか あおう!\n      ツワブキ ダイゴより$"
+	.string "てがみが ある!\p…… …… ……\n…… …… ……\p{PLAYER}{KUN}へ\pボクは おもうことが あって\nしばらく しゅぎょうを つづける\lとうぶん いえに かえらない\pそこで おねがいだ\pつくえの うえにある\nモンスターボールを うけとって ほしい\pなかに いるのは ダンバルといって\nボクの おきにいりの ポケモンだから\pよろしく たのむよ\pでは また いつか あおう!\n      ツワブキ ダイゴより$"
 
 MossdeepCity_StevensHouse_Text_CollectionOfRareRocks:
-	.string "{JPN}ダイゴの あつめた\nめずらしい いしが かざってある!$"
+	.string "ダイゴの あつめた\nめずらしい いしが かざってある!$"

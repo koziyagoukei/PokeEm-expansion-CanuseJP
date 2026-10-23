@@ -20,11 +20,11 @@ PacifidlogTown_House5_EventScript_Gentleman::
 	end
 
 PacifidlogTown_House5_Text_CantSeeMirageIslandToday:
-	.string "{JPN}きょうは マボロシじま みえんのう……$"
+	.string "きょうは マボロシじま みえんのう……$"
 
 PacifidlogTown_House5_Text_CanSeeMirageIslandToday:
-	.string "{JPN}なっ なんと!\nきょうは マボロシじま みえるのじゃ!$"
+	.string "なっ なんと!\nきょうは マボロシじま みえるのじゃ!$"
 
 PacifidlogTown_House5_Text_MirageIslandAppearDependingOnWeather:
-	.string "{JPN}マボロシじま……\nおそらく しんきろうの かんけいで\lみえたり みえなかったり するんだろう\pいや ひょっとしたら ほんとうに\nあらわれたり きえたり しているのか……?$"
+	.string "マボロシじま……\nおそらく しんきろうの かんけいで\lみえたり みえなかったり するんだろう\pいや ひょっとしたら ほんとうに\nあらわれたり きえたり しているのか……?$"
 

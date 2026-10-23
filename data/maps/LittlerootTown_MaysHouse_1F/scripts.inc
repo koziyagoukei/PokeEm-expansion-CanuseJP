@@ -317,7 +317,7 @@ LittlerootTown_MaysHouse_1F_Movement_MayGoUpstairs2:
 	step_end
 
 RivalsHouse_1F_Text_OhYoureTheNewNeighbor:
-	.string "{JPN}えーと どなた かしら?\p"
+	.string "えーと どなた かしら?\p"
 	.string "{JPN}…… …… ……\n"
 	.string "{JPN}…… …… ……\p"
 	.string "{JPN}そうか あなたが おとなりに\n"
@@ -329,26 +329,26 @@ RivalsHouse_1F_Text_OhYoureTheNewNeighbor:
 	.string "{JPN}とっても たのしみに してたの!$"
 
 RivalsHouse_1F_Text_LikeChildLikeFather:
-	.string "{JPN}おとうさんも あのこに まけず\n"
+	.string "おとうさんも あのこに まけず\n"
 	.string "{JPN}ポケモンに むちゅう なのよ\p"
 	.string "{JPN}けんきゅうじょに いなければ\n"
 	.string "{JPN}きっと どこかの くさむらにでも\l"
 	.string "{JPN}もぐりに いってるんじゃ ないかしら……$"
 
 RivalsHouse_1F_Text_TooBusyToNoticeVisit:
-	.string "{JPN}{RIVAL}ったら せっかく {PLAYER}{KUN}が\n"
+	.string "{RIVAL}ったら せっかく {PLAYER}{KUN}が\n"
 	.string "{JPN}ごあいさつに きてくれたって いうのに\l"
 	.string "{JPN}ポケモンに むちゅう みたいね$"
 
 RivalsHouse_1F_Text_WentOutToRoute103:
-	.string "{JPN}あら {RIVAL} だったら\n"
+	.string "あら {RIVAL} だったら\n"
 	.string "{JPN}ついさっき 103ばんどうろの ほうへ\l"
 	.string "{JPN}でかけて いったわよ!\p"
 	.string "{JPN}まったく おとうさんに にて\n"
 	.string "{JPN}おうちで じっとして いられないのよね$"
 
 RivalsHouse_1F_Text_ShouldGoHomeEverySoOften:
-	.string "{JPN}ポケモンと いっしょに\n"
+	.string "ポケモンと いっしょに\n"
 	.string "{JPN}ぼうけん するのも いいけど\p"
 	.string "{JPN}たまには おうちに かえって おかあさんに\n"
 	.string "{JPN}げんきな かおを みせてあげてね!\p"
@@ -357,7 +357,7 @@ RivalsHouse_1F_Text_ShouldGoHomeEverySoOften:
 	.string "{JPN}しんぱい してる はずだから……$"
 
 RivalsHouse_1F_Text_MayWhoAreYou:
-	.string "{JPN}あら? あなた……だれ?\p"
+	.string "あら? あなた……だれ?\p"
 	.string "{JPN}…… …… ……\n"
 	.string "{JPN}…… …… ……\p"
 	.string "{JPN}あなたが {PLAYER}{KUN}……\n"
@@ -385,7 +385,7 @@ RivalsHouse_1F_Text_MayWhoAreYou:
 	.string "{JPN}{PLAYER}{KUN} また あとでね!$"
 
 RivalsHouse_1F_Text_BrendanWhoAreYou:
-	.string "{JPN}おまえ……\p"
+	.string "おまえ……\p"
 	.string "{JPN}だれ?\p"
 	.string "{JPN}あっ おまえが となりに\n"
 	.string "{JPN}ひっこして きた {PLAYER}か……\p"
@@ -410,6 +410,6 @@ RivalsHouse_1F_Text_BrendanWhoAreYou:
 	.string "{JPN}{PLAYER} また こんどな!$"
 
 RivalsHouse_1F_Text_DoYouHavePokemon:
-	.string "{JPN}わーい おとなりさんだ!\p"
+	.string "わーい おとなりさんだ!\p"
 	.string "{JPN}{STR_VAR_1}は もう\n"
 	.string "{JPN}じぶんの ポケモン もってるの?$"

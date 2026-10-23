@@ -12,19 +12,19 @@ SeafloorCavern_Room1_EventScript_Grunt2::
 	end
 
 SeafloorCavern_Room1_Text_Grunt1Intro:
-	.string "{JPN}こどもに ようは ねーんだ\nほら さっさと かえれよ!$"
+	.string "こどもに ようは ねーんだ\nほら さっさと かえれよ!$"
 
 SeafloorCavern_Room1_Text_Grunt1Defeat:
-	.string "{JPN}おれが かえりたいよー!$"
+	.string "おれが かえりたいよー!$"
 
 SeafloorCavern_Room1_Text_Grunt1PostBattle:
-	.string "{JPN}はやく かんぶに なって\nしたっぱを しごいて やりたい……$"
+	.string "はやく かんぶに なって\nしたっぱを しごいて やりたい……$"
 
 SeafloorCavern_Room1_Text_Grunt2Intro:
-	.string "{JPN}せんすいてい ちっちゃいからよー\nからだの あちこちが いたい じゃねーか!$"
+	.string "せんすいてい ちっちゃいからよー\nからだの あちこちが いたい じゃねーか!$"
 
 SeafloorCavern_Room1_Text_Grunt2Defeat:
-	.string "{JPN}まけたら\nいたい じゃねーか!$"
+	.string "まけたら\nいたい じゃねーか!$"
 
 SeafloorCavern_Room1_Text_Grunt2PostBattle:
-	.string "{JPN}うばった せんすいていの のりごこち\nありゃ さいあく だな!\lとにかく せますぎ じゃねーか!$"
+	.string "うばった せんすいていの のりごこち\nありゃ さいあく だな!\lとにかく せますぎ じゃねーか!$"

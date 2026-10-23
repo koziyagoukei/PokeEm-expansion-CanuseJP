@@ -3,9 +3,9 @@ const struct ContestEffect gContestEffects[] =
     [CONTEST_EFFECT_HIGHLY_APPEALING] =
     {
         #if C_UPDATED_MOVE_EFFECTS >= GEN_6
-        .description = COMPOUND_STRING("{JPN}たくさん アピール できる"),
+        .description = COMPOUND_STRING("たくさん アピール できる"),
         #else
-        .description = COMPOUND_STRING("{JPN}たくさん アピール できる"),
+        .description = COMPOUND_STRING("たくさん アピール できる"),
         #endif
         .effectType = CONTEST_EFFECT_TYPE_APPEAL,
         .appeal = 40,
@@ -14,7 +14,7 @@ const struct ContestEffect gContestEffects[] =
     },
     [CONTEST_EFFECT_USER_MORE_EASILY_STARTLED] =
     {
-        .description = COMPOUND_STRING("{JPN}この アピールの あと\nびっくり しやすく なってしまう"),
+        .description = COMPOUND_STRING("この アピールの あと\nびっくり しやすく なってしまう"),
         .effectType = CONTEST_EFFECT_TYPE_APPEAL,
         .appeal = 60,
         .jam = 0,
@@ -22,7 +22,7 @@ const struct ContestEffect gContestEffects[] =
     },
     [CONTEST_EFFECT_GREAT_APPEAL_BUT_NO_MORE_MOVES] =
     {
-        .description = COMPOUND_STRING("{JPN}すごいアピールに なるが このあと\nさいごまで なにも できなくなる"),
+        .description = COMPOUND_STRING("すごいアピールに なるが このあと\nさいごまで なにも できなくなる"),
         .effectType = CONTEST_EFFECT_TYPE_APPEAL,
         .appeal = 80,
         .jam = 0,
@@ -30,7 +30,7 @@ const struct ContestEffect gContestEffects[] =
     },
     [CONTEST_EFFECT_REPETITION_NOT_BORING] =
     {
-        .description = COMPOUND_STRING("{JPN}つづけて だしても しんさいんに\nあきられずに アピール できる"),
+        .description = COMPOUND_STRING("つづけて だしても しんさいんに\nあきられずに アピール できる"),
         .effectType = CONTEST_EFFECT_TYPE_APPEAL,
         .appeal = 30,
         .jam = 0,
@@ -38,7 +38,7 @@ const struct ContestEffect gContestEffects[] =
     },
     [CONTEST_EFFECT_AVOID_STARTLE_ONCE] =
     {
-        .description = COMPOUND_STRING("{JPN}ほかの ポケモンに おどかされても\n1ど くらいは がまんできる"),
+        .description = COMPOUND_STRING("ほかの ポケモンに おどかされても\n1ど くらいは がまんできる"),
         .effectType = CONTEST_EFFECT_TYPE_AVOID_STARTLE,
         .appeal = 20,
         .jam = 0,
@@ -46,7 +46,7 @@ const struct ContestEffect gContestEffects[] =
     },
     [CONTEST_EFFECT_AVOID_STARTLE] =
     {
-        .description = COMPOUND_STRING("{JPN}ほかの ポケモンに おどかされても\nがまんできる"),
+        .description = COMPOUND_STRING("ほかの ポケモンに おどかされても\nがまんできる"),
         .effectType = CONTEST_EFFECT_TYPE_AVOID_STARTLE,
         .appeal = 10,
         .jam = 0,
@@ -54,7 +54,7 @@ const struct ContestEffect gContestEffects[] =
     },
     [CONTEST_EFFECT_AVOID_STARTLE_SLIGHTLY] =
     {
-        .description = COMPOUND_STRING("{JPN}ほかの ポケモンに おどかされても\nすこし くらいなら がまんできる"),
+        .description = COMPOUND_STRING("ほかの ポケモンに おどかされても\nすこし くらいなら がまんできる"),
         .effectType = CONTEST_EFFECT_TYPE_AVOID_STARTLE,
         .appeal = 30,
         .jam = 0,
@@ -62,7 +62,7 @@ const struct ContestEffect gContestEffects[] =
     },
     [CONTEST_EFFECT_USER_LESS_EASILY_STARTLED] =
     {
-        .description = COMPOUND_STRING("{JPN}この わざを だした あとは\nあまり びっくり しなくなる"),
+        .description = COMPOUND_STRING("この わざを だした あとは\nあまり びっくり しなくなる"),
         .effectType = CONTEST_EFFECT_TYPE_AVOID_STARTLE,
         .appeal = 30,
         .jam = 0,
@@ -70,7 +70,7 @@ const struct ContestEffect gContestEffects[] =
     },
     [CONTEST_EFFECT_STARTLE_FRONT_MON] =
     {
-        .description = COMPOUND_STRING("{JPN}じぶんの まえに アピールした\nポケモンを ちょっと おどろかす"),
+        .description = COMPOUND_STRING("じぶんの まえに アピールした\nポケモンを ちょっと おどろかす"),
         .effectType = CONTEST_EFFECT_TYPE_STARTLE_MON,
         .appeal = 30,
         .jam = 20,
@@ -78,7 +78,7 @@ const struct ContestEffect gContestEffects[] =
     },
     [CONTEST_EFFECT_SLIGHTLY_STARTLE_PREV_MONS] =
     {
-        .description = COMPOUND_STRING("{JPN}アピールが おわっている ポケモン\nみんなを ちょっと おどろかす"),
+        .description = COMPOUND_STRING("アピールが おわっている ポケモン\nみんなを ちょっと おどろかす"),
         .effectType = CONTEST_EFFECT_TYPE_STARTLE_MONS,
         .appeal = 30,
         .jam = 10,
@@ -87,9 +87,9 @@ const struct ContestEffect gContestEffects[] =
     [CONTEST_EFFECT_STARTLE_PREV_MON] =
     {
         #if C_UPDATED_MOVE_EFFECTS >= GEN_6
-        .description = COMPOUND_STRING("{JPN}じぶんの まえに アピールした\nポケモンを おどろかす"),
+        .description = COMPOUND_STRING("じぶんの まえに アピールした\nポケモンを おどろかす"),
         #else
-        .description = COMPOUND_STRING("{JPN}じぶんの まえに アピールした\nポケモンを おどろかす"),
+        .description = COMPOUND_STRING("じぶんの まえに アピールした\nポケモンを おどろかす"),
         #endif
         .effectType = CONTEST_EFFECT_TYPE_STARTLE_MON,
         .appeal = 20,
@@ -99,9 +99,9 @@ const struct ContestEffect gContestEffects[] =
     [CONTEST_EFFECT_STARTLE_PREV_MONS] =
     {
         #if C_UPDATED_MOVE_EFFECTS >= GEN_6
-        .description = COMPOUND_STRING("{JPN}アピールが おわっている ポケモン\nみんなを おどろかす"),
+        .description = COMPOUND_STRING("アピールが おわっている ポケモン\nみんなを おどろかす"),
         #else
-        .description = COMPOUND_STRING("{JPN}アピールが おわっている ポケモン\nみんなを おどろかす"),
+        .description = COMPOUND_STRING("アピールが おわっている ポケモン\nみんなを おどろかす"),
         #endif
         .effectType = CONTEST_EFFECT_TYPE_STARTLE_MONS,
         .appeal = 20,
@@ -110,7 +110,7 @@ const struct ContestEffect gContestEffects[] =
     },
     [CONTEST_EFFECT_BADLY_STARTLE_FRONT_MON] =
     {
-        .description = COMPOUND_STRING("{JPN}じぶんの まえに アピールした\nポケモンを かなり おどろかす"),
+        .description = COMPOUND_STRING("じぶんの まえに アピールした\nポケモンを かなり おどろかす"),
         .effectType = CONTEST_EFFECT_TYPE_STARTLE_MON,
         .appeal = 10,
         .jam = 40,
@@ -118,7 +118,7 @@ const struct ContestEffect gContestEffects[] =
     },
     [CONTEST_EFFECT_BADLY_STARTLE_PREV_MONS] =
     {
-        .description = COMPOUND_STRING("{JPN}アピールが おわっている ポケモン\nみんなを かなり おどろかす"),
+        .description = COMPOUND_STRING("アピールが おわっている ポケモン\nみんなを かなり おどろかす"),
         .effectType = CONTEST_EFFECT_TYPE_STARTLE_MONS,
         .appeal = 10,
         .jam = 30,
@@ -126,7 +126,7 @@ const struct ContestEffect gContestEffects[] =
     },
     [CONTEST_EFFECT_STARTLE_PREV_MON_2] =
     {
-        .description = COMPOUND_STRING("{JPN}じぶんの まえに アピールした\nポケモンを おどろかす"),
+        .description = COMPOUND_STRING("じぶんの まえに アピールした\nポケモンを おどろかす"),
         .effectType = CONTEST_EFFECT_TYPE_STARTLE_MON,
         .appeal = 30,
         .jam = 20,
@@ -134,7 +134,7 @@ const struct ContestEffect gContestEffects[] =
     },
     [CONTEST_EFFECT_STARTLE_PREV_MONS_2] =
     {
-        .description = COMPOUND_STRING("{JPN}アピールが おわっている ポケモン\nみんなを おどろかす"),
+        .description = COMPOUND_STRING("アピールが おわっている ポケモン\nみんなを おどろかす"),
         .effectType = CONTEST_EFFECT_TYPE_STARTLE_MONS,
         .appeal = 30,
         .jam = 10,
@@ -143,9 +143,9 @@ const struct ContestEffect gContestEffects[] =
     [CONTEST_EFFECT_SHIFT_JUDGE_ATTENTION] =
     {
         #if C_UPDATED_MOVE_EFFECTS >= GEN_6
-        .description = COMPOUND_STRING("{JPN}しんさいんの ほかの ポケモンへの\nちゅうもくを そらすことが できる"),
+        .description = COMPOUND_STRING("しんさいんの ほかの ポケモンへの\nちゅうもくを そらすことが できる"),
         #else
-        .description = COMPOUND_STRING("{JPN}しんさいんの ほかの ポケモンへの\nちゅうもくを そらすことが できる"),
+        .description = COMPOUND_STRING("しんさいんの ほかの ポケモンへの\nちゅうもくを そらすことが できる"),
         #endif
         .effectType = CONTEST_EFFECT_TYPE_WORSEN,
         .appeal = 30,
@@ -154,7 +154,7 @@ const struct ContestEffect gContestEffects[] =
     },
     [CONTEST_EFFECT_STARTLE_MON_WITH_JUDGES_ATTENTION] =
     {
-        .description = COMPOUND_STRING("{JPN}しんさいんに ちゅうもく されている\nポケモンを とくに おどろかす"),
+        .description = COMPOUND_STRING("しんさいんに ちゅうもく されている\nポケモンを とくに おどろかす"),
         .effectType = CONTEST_EFFECT_TYPE_STARTLE_MONS,
         .appeal = 20,
         .jam = 10,
@@ -162,7 +162,7 @@ const struct ContestEffect gContestEffects[] =
     },
     [CONTEST_EFFECT_JAMS_OTHERS_BUT_MISS_ONE_TURN] =
     {
-        .description = COMPOUND_STRING("{JPN}みんなの じゃまを しまくって\nつぎの アピールは さんか しない"),
+        .description = COMPOUND_STRING("みんなの じゃまを しまくって\nつぎの アピールは さんか しない"),
         .effectType = CONTEST_EFFECT_TYPE_STARTLE_MONS,
         .appeal = 40,
         .jam = 40,
@@ -170,7 +170,7 @@ const struct ContestEffect gContestEffects[] =
     },
     [CONTEST_EFFECT_STARTLE_MONS_SAME_TYPE_APPEAL] =
     {
-        .description = COMPOUND_STRING("{JPN}おなじ タイプの アピールを した\nポケモンを とくに おどろかす"),
+        .description = COMPOUND_STRING("おなじ タイプの アピールを した\nポケモンを とくに おどろかす"),
         .effectType = CONTEST_EFFECT_TYPE_STARTLE_MONS,
         .appeal = 20,
         .jam = 10,
@@ -178,7 +178,7 @@ const struct ContestEffect gContestEffects[] =
     },
     [CONTEST_EFFECT_STARTLE_MONS_COOL_APPEAL] =
     {
-        .description = COMPOUND_STRING("{JPN}かっこいい アピールを した\nポケモンを かなり おどろかす"),
+        .description = COMPOUND_STRING("かっこいい アピールを した\nポケモンを かなり おどろかす"),
         .effectType = CONTEST_EFFECT_TYPE_STARTLE_MONS,
         .appeal = 20,
         .jam = 10,
@@ -186,7 +186,7 @@ const struct ContestEffect gContestEffects[] =
     },
     [CONTEST_EFFECT_STARTLE_MONS_BEAUTY_APPEAL] =
     {
-        .description = COMPOUND_STRING("{JPN}うつくしい アピールを した\nポケモンを かなり おどろかす"),
+        .description = COMPOUND_STRING("うつくしい アピールを した\nポケモンを かなり おどろかす"),
         .effectType = CONTEST_EFFECT_TYPE_STARTLE_MONS,
         .appeal = 20,
         .jam = 10,
@@ -194,7 +194,7 @@ const struct ContestEffect gContestEffects[] =
     },
     [CONTEST_EFFECT_STARTLE_MONS_CUTE_APPEAL] =
     {
-        .description = COMPOUND_STRING("{JPN}かわいい アピールを した\nポケモンを かなり おどろかす"),
+        .description = COMPOUND_STRING("かわいい アピールを した\nポケモンを かなり おどろかす"),
         .effectType = CONTEST_EFFECT_TYPE_STARTLE_MONS,
         .appeal = 20,
         .jam = 10,
@@ -202,7 +202,7 @@ const struct ContestEffect gContestEffects[] =
     },
     [CONTEST_EFFECT_STARTLE_MONS_SMART_APPEAL] =
     {
-        .description = COMPOUND_STRING("{JPN}かしこい アピールを した\nポケモンを かなり おどろかす"),
+        .description = COMPOUND_STRING("かしこい アピールを した\nポケモンを かなり おどろかす"),
         .effectType = CONTEST_EFFECT_TYPE_STARTLE_MONS,
         .appeal = 20,
         .jam = 10,
@@ -210,7 +210,7 @@ const struct ContestEffect gContestEffects[] =
     },
     [CONTEST_EFFECT_STARTLE_MONS_TOUGH_APPEAL] =
     {
-        .description = COMPOUND_STRING("{JPN}たくましい アピールを した\nポケモンを かなり おどろかす"),
+        .description = COMPOUND_STRING("たくましい アピールを した\nポケモンを かなり おどろかす"),
         .effectType = CONTEST_EFFECT_TYPE_STARTLE_MONS,
         .appeal = 20,
         .jam = 10,
@@ -218,7 +218,7 @@ const struct ContestEffect gContestEffects[] =
     },
     [CONTEST_EFFECT_MAKE_FOLLOWING_MON_NERVOUS] =
     {
-        .description = COMPOUND_STRING("{JPN}このあと アピールする ポケモン\n1ひきを きんちょう させる"),
+        .description = COMPOUND_STRING("このあと アピールする ポケモン\n1ひきを きんちょう させる"),
         .effectType = CONTEST_EFFECT_TYPE_WORSEN,
         .appeal = 20,
         .jam = 0,
@@ -227,9 +227,9 @@ const struct ContestEffect gContestEffects[] =
     [CONTEST_EFFECT_MAKE_FOLLOWING_MONS_NERVOUS] =
     {
         #if C_UPDATED_MOVE_EFFECTS >= GEN_6
-        .description = COMPOUND_STRING("{JPN}このあと アピールする ポケモン\nみんなを きんちょう させる"),
+        .description = COMPOUND_STRING("このあと アピールする ポケモン\nみんなを きんちょう させる"),
         #else
-        .description = COMPOUND_STRING("{JPN}このあと アピールする ポケモン\nみんなを きんちょう させる"),
+        .description = COMPOUND_STRING("このあと アピールする ポケモン\nみんなを きんちょう させる"),
         #endif
         .effectType = CONTEST_EFFECT_TYPE_WORSEN,
         .appeal = 20,
@@ -238,7 +238,7 @@ const struct ContestEffect gContestEffects[] =
     },
     [CONTEST_EFFECT_WORSEN_CONDITION_OF_PREV_MONS] =
     {
-        .description = COMPOUND_STRING("{JPN}アピールが おわった ポケモンの\nちょうしを さげる"),
+        .description = COMPOUND_STRING("アピールが おわった ポケモンの\nちょうしを さげる"),
         .effectType = CONTEST_EFFECT_TYPE_WORSEN,
         .appeal = 30,
         .jam = 0,
@@ -246,7 +246,7 @@ const struct ContestEffect gContestEffects[] =
     },
     [CONTEST_EFFECT_BADLY_STARTLES_MONS_IN_GOOD_CONDITION] =
     {
-        .description = COMPOUND_STRING("{JPN}ちょうしの いい ポケモン\nみんなを かなり おどろかす"),
+        .description = COMPOUND_STRING("ちょうしの いい ポケモン\nみんなを かなり おどろかす"),
         .effectType = CONTEST_EFFECT_TYPE_STARTLE_MONS,
         .appeal = 30,
         .jam = 10,
@@ -254,7 +254,7 @@ const struct ContestEffect gContestEffects[] =
     },
     [CONTEST_EFFECT_BETTER_IF_FIRST] =
     {
-        .description = COMPOUND_STRING("{JPN}1ばん はじめに アピールすると\nアピールが すごく うまくいく"),
+        .description = COMPOUND_STRING("1ばん はじめに アピールすると\nアピールが すごく うまくいく"),
         .effectType = CONTEST_EFFECT_TYPE_SPECIAL_APPEAL,
         .appeal = 20,
         .jam = 0,
@@ -262,7 +262,7 @@ const struct ContestEffect gContestEffects[] =
     },
     [CONTEST_EFFECT_BETTER_IF_LAST] =
     {
-        .description = COMPOUND_STRING("{JPN}1ばん さいごに アピールすると\nアピールが すごく うまくいく"),
+        .description = COMPOUND_STRING("1ばん さいごに アピールすると\nアピールが すごく うまくいく"),
         .effectType = CONTEST_EFFECT_TYPE_SPECIAL_APPEAL,
         .appeal = 20,
         .jam = 0,
@@ -270,7 +270,7 @@ const struct ContestEffect gContestEffects[] =
     },
     [CONTEST_EFFECT_APPEAL_AS_GOOD_AS_PREV_ONES] =
     {
-        .description = COMPOUND_STRING("{JPN}それまでの ポケモンの アピールと\nおなじくらいの アピールに みせる"),
+        .description = COMPOUND_STRING("それまでの ポケモンの アピールと\nおなじくらいの アピールに みせる"),
         .effectType = CONTEST_EFFECT_TYPE_SPECIAL_APPEAL,
         .appeal = 10,
         .jam = 0,
@@ -278,7 +278,7 @@ const struct ContestEffect gContestEffects[] =
     },
     [CONTEST_EFFECT_APPEAL_AS_GOOD_AS_PREV_ONE] =
     {
-        .description = COMPOUND_STRING("{JPN}1つまえの ポケモンの アピールと\nおなじくらい うまく できる"),
+        .description = COMPOUND_STRING("1つまえの ポケモンの アピールと\nおなじくらい うまく できる"),
         .effectType = CONTEST_EFFECT_TYPE_SPECIAL_APPEAL,
         .appeal = 10,
         .jam = 0,
@@ -286,7 +286,7 @@ const struct ContestEffect gContestEffects[] =
     },
     [CONTEST_EFFECT_BETTER_WHEN_LATER] =
     {
-        .description = COMPOUND_STRING("{JPN}みんなの あとで アピールするほど\nすごい アピールに みせられる"),
+        .description = COMPOUND_STRING("みんなの あとで アピールするほど\nすごい アピールに みせられる"),
         .effectType = CONTEST_EFFECT_TYPE_SPECIAL_APPEAL,
         .appeal = 10,
         .jam = 0,
@@ -295,9 +295,9 @@ const struct ContestEffect gContestEffects[] =
     [CONTEST_EFFECT_QUALITY_DEPENDS_ON_TIMING] =
     {
         #if C_UPDATED_MOVE_EFFECTS >= GEN_6
-        .description = COMPOUND_STRING("{JPN}だすときに よって アピールの\nできぐあいが いろいろと かわる"),
+        .description = COMPOUND_STRING("だすときに よって アピールの\nできぐあいが いろいろと かわる"),
         #else
-        .description = COMPOUND_STRING("{JPN}だすときに よって アピールの\nできぐあいが いろいろと かわる"),
+        .description = COMPOUND_STRING("だすときに よって アピールの\nできぐあいが いろいろと かわる"),
         #endif
         .effectType = CONTEST_EFFECT_TYPE_SPECIAL_APPEAL,
         .appeal = 10,
@@ -306,7 +306,7 @@ const struct ContestEffect gContestEffects[] =
     },
     [CONTEST_EFFECT_BETTER_IF_SAME_TYPE] =
     {
-        .description = COMPOUND_STRING("{JPN}1つまえの ポケモンの アピールと\nタイプが おなじなら きにいられる"),
+        .description = COMPOUND_STRING("1つまえの ポケモンの アピールと\nタイプが おなじなら きにいられる"),
         .effectType = CONTEST_EFFECT_TYPE_SPECIAL_APPEAL,
         .appeal = 20,
         .jam = 0,
@@ -314,7 +314,7 @@ const struct ContestEffect gContestEffects[] =
     },
     [CONTEST_EFFECT_BETTER_IF_DIFF_TYPE] =
     {
-        .description = COMPOUND_STRING("{JPN}1つまえの ポケモンの アピールと\nタイプが ちがうなら きにいられる"),
+        .description = COMPOUND_STRING("1つまえの ポケモンの アピールと\nタイプが ちがうなら きにいられる"),
         .effectType = CONTEST_EFFECT_TYPE_SPECIAL_APPEAL,
         .appeal = 20,
         .jam = 0,
@@ -323,9 +323,9 @@ const struct ContestEffect gContestEffects[] =
     [CONTEST_EFFECT_AFFECTED_BY_PREV_APPEAL] =
     {
         #if C_UPDATED_MOVE_EFFECTS >= GEN_6
-        .description = COMPOUND_STRING("{JPN}1つまえの ポケモンの アピールの\nうまさに えいきょう される"),
+        .description = COMPOUND_STRING("1つまえの ポケモンの アピールの\nうまさに えいきょう される"),
         #else
-        .description = COMPOUND_STRING("{JPN}1つまえの ポケモンの アピールの\nうまさに えいきょう される"),
+        .description = COMPOUND_STRING("1つまえの ポケモンの アピールの\nうまさに えいきょう される"),
         #endif
         .effectType = CONTEST_EFFECT_TYPE_SPECIAL_APPEAL,
         .appeal = 30,
@@ -334,7 +334,7 @@ const struct ContestEffect gContestEffects[] =
     },
     [CONTEST_EFFECT_IMPROVE_CONDITION_PREVENT_NERVOUSNESS] =
     {
-        .description = COMPOUND_STRING("{JPN}アピールの ちょうしが あがる\nきんちょうも しにくくなる"),
+        .description = COMPOUND_STRING("アピールの ちょうしが あがる\nきんちょうも しにくくなる"),
         .effectType = CONTEST_EFFECT_TYPE_SPECIAL_APPEAL,
         .appeal = 10,
         .jam = 0,
@@ -342,7 +342,7 @@ const struct ContestEffect gContestEffects[] =
     },
     [CONTEST_EFFECT_BETTER_WITH_GOOD_CONDITION] =
     {
-        .description = COMPOUND_STRING("{JPN}ちょうしが いいときに だすと\nアピールが とても うまくいく"),
+        .description = COMPOUND_STRING("ちょうしが いいときに だすと\nアピールが とても うまくいく"),
         .effectType = CONTEST_EFFECT_TYPE_SPECIAL_APPEAL,
         .appeal = 10,
         .jam = 0,
@@ -351,9 +351,9 @@ const struct ContestEffect gContestEffects[] =
     [CONTEST_EFFECT_NEXT_APPEAL_EARLIER] =
     {
         #if C_UPDATED_MOVE_EFFECTS >= GEN_6
-        .description = COMPOUND_STRING("{JPN}このつぎの アピールを\nはじめの ほうに だすことが できる"),
+        .description = COMPOUND_STRING("このつぎの アピールを\nはじめの ほうに だすことが できる"),
         #else
-        .description = COMPOUND_STRING("{JPN}このつぎの アピールを\nはじめの ほうに だすことが できる"),
+        .description = COMPOUND_STRING("このつぎの アピールを\nはじめの ほうに だすことが できる"),
         #endif
         .effectType = CONTEST_EFFECT_TYPE_TURN_ORDER,
         .appeal = 30,
@@ -363,9 +363,9 @@ const struct ContestEffect gContestEffects[] =
     [CONTEST_EFFECT_NEXT_APPEAL_LATER] =
     {
         #if C_UPDATED_MOVE_EFFECTS >= GEN_6
-        .description = COMPOUND_STRING("{JPN}このつぎの アピールを\nおわりの ほうに だすことが できる"),
+        .description = COMPOUND_STRING("このつぎの アピールを\nおわりの ほうに だすことが できる"),
         #else
-        .description = COMPOUND_STRING("{JPN}このつぎの アピールを\nおわりの ほうに だすことが できる"),
+        .description = COMPOUND_STRING("このつぎの アピールを\nおわりの ほうに だすことが できる"),
         #endif
         .effectType = CONTEST_EFFECT_TYPE_TURN_ORDER,
         .appeal = 30,
@@ -374,7 +374,7 @@ const struct ContestEffect gContestEffects[] =
     },
     [CONTEST_EFFECT_MAKE_SCRAMBLING_TURN_ORDER_EASIER] =
     {
-        .description = COMPOUND_STRING("{JPN}このつぎの アピールの\nじゅんばんが かわりやすく なる"),
+        .description = COMPOUND_STRING("このつぎの アピールの\nじゅんばんが かわりやすく なる"),
         .effectType = CONTEST_EFFECT_TYPE_TURN_ORDER,
         .appeal = 30,
         .jam = 0,
@@ -382,7 +382,7 @@ const struct ContestEffect gContestEffects[] =
     },
     [CONTEST_EFFECT_SCRAMBLE_NEXT_TURN_ORDER] =
     {
-        .description = COMPOUND_STRING("{JPN}このつぎの アピールの\nじゅんばんを めちゃくちゃに する"),
+        .description = COMPOUND_STRING("このつぎの アピールの\nじゅんばんを めちゃくちゃに する"),
         .effectType = CONTEST_EFFECT_TYPE_TURN_ORDER,
         .appeal = 30,
         .jam = 0,
@@ -390,7 +390,7 @@ const struct ContestEffect gContestEffects[] =
     },
     [CONTEST_EFFECT_EXCITE_AUDIENCE_IN_ANY_CONTEST] =
     {
-        .description = COMPOUND_STRING("{JPN}どの コンテストで みせても\nかならず もりあがる アピール"),
+        .description = COMPOUND_STRING("どの コンテストで みせても\nかならず もりあがる アピール"),
         .effectType = CONTEST_EFFECT_TYPE_SPECIAL_APPEAL,
         .appeal = C_UPDATED_MOVE_EFFECTS >= GEN_6 ? 20 : 10,
         .jam = 0,
@@ -398,7 +398,7 @@ const struct ContestEffect gContestEffects[] =
     },
     [CONTEST_EFFECT_BADLY_STARTLE_MONS_WITH_GOOD_APPEALS] =
     {
-        .description = COMPOUND_STRING("{JPN}アピールが うまくいった ポケモン\nみんなを かなり おどろかす"),
+        .description = COMPOUND_STRING("アピールが うまくいった ポケモン\nみんなを かなり おどろかす"),
         .effectType = CONTEST_EFFECT_TYPE_STARTLE_MONS,
         .appeal = 20,
         .jam = 10,
@@ -406,7 +406,7 @@ const struct ContestEffect gContestEffects[] =
     },
     [CONTEST_EFFECT_BETTER_WHEN_AUDIENCE_EXCITED] =
     {
-        .description = COMPOUND_STRING("{JPN}かいじょうが もりあがっている ほど\nアピールが きにいられる"),
+        .description = COMPOUND_STRING("かいじょうが もりあがっている ほど\nアピールが きにいられる"),
         .effectType = CONTEST_EFFECT_TYPE_SPECIAL_APPEAL,
         .appeal = 10,
         .jam = 0,
@@ -414,7 +414,7 @@ const struct ContestEffect gContestEffects[] =
     },
     [CONTEST_EFFECT_DONT_EXCITE_AUDIENCE] =
     {
-        .description = COMPOUND_STRING("{JPN}このアピールのあと かいじょうが\nしばらく もりあがらなく なる"),
+        .description = COMPOUND_STRING("このアピールのあと かいじょうが\nしばらく もりあがらなく なる"),
         .effectType = CONTEST_EFFECT_TYPE_WORSEN,
         .appeal = 30,
         .jam = 0,

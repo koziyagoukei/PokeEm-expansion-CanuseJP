@@ -27,7 +27,7 @@ MeteorFalls_StevensCave_EventScript_Defeated::
 	end
 
 MeteorFalls_StevensCave_Text_ShouldKnowHowGoodIAmExpectWorst:
-	.string "{JPN}ダイゴ『へぇ {PLAYER}{KUN}\nボクが ここにいるって よく わかったね\pもしかして きみ…… ボクを\nただの いしマニアだと おもってる?\p……いや トクサネの うちゅうセンターで\nいっしょに たたかったから\pボクが どれくらい つよいのか\nきみだって しってるはず だよね\pよし {PLAYER}{KUN}\pほんきで しょうぶ するなら\nかくごして くれよな!"
+	.string "ダイゴ『へぇ {PLAYER}{KUN}\nボクが ここにいるって よく わかったね\pもしかして きみ…… ボクを\nただの いしマニアだと おもってる?\p……いや トクサネの うちゅうセンターで\nいっしょに たたかったから\pボクが どれくらい つよいのか\nきみだって しってるはず だよね\pよし {PLAYER}{KUN}\pほんきで しょうぶ するなら\nかくごして くれよな!"
 	.string ""
 	.string ""
 	.string ""
@@ -40,11 +40,11 @@ MeteorFalls_StevensCave_Text_ShouldKnowHowGoodIAmExpectWorst:
 	.string "$"
 
 MeteorFalls_StevensCave_Text_StevenDefeat:
-	.string "{JPN}きみは……\nこれほどまでに つよくなって いたのか"
+	.string "きみは……\nこれほどまでに つよくなって いたのか"
 	.string "$"
 
 MeteorFalls_StevensCave_Text_MyPredictionCameTrue:
-	.string "{JPN}ダイゴ『そういえば……\nムロ タウンの いしのどうくつで\lはじめて あった ときから\pいずれ きみは チャンピオンに\nなるような きが していた\pボクの よそうは\nだいたい いつも あたるんだよ\pじゃあ……\nつぎに きみが むかうのは……\p…… …… ……\n…… …… ……\pふふふ さすがの ボクも\nそんなこと までは わからないな"
+	.string "ダイゴ『そういえば……\nムロ タウンの いしのどうくつで\lはじめて あった ときから\pいずれ きみは チャンピオンに\nなるような きが していた\pボクの よそうは\nだいたい いつも あたるんだよ\pじゃあ……\nつぎに きみが むかうのは……\p…… …… ……\n…… …… ……\pふふふ さすがの ボクも\nそんなこと までは わからないな"
 	.string ""
 	.string ""
 	.string ""

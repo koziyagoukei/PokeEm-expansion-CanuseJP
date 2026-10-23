@@ -31,16 +31,16 @@ Route114_FossilManiacsHouse_EventScript_Bookshelf::
 	end
 
 Route114_FossilManiacsHouse_Text_HaveThisToDigLikeMyBrother:
-	.string "{JPN}ぼくの にいちゃん かせきマニア……\nかせき だいすき ナイスガイ さ……\pちなみに あなを ほるのも だいすきで……\nこの あなも じぶんで ほったんだ……\pこれを あげるから……\nきみも にいちゃん みたいに\lあなを ほってみなよ……$"
+	.string "ぼくの にいちゃん かせきマニア……\nかせき だいすき ナイスガイ さ……\pちなみに あなを ほるのも だいすきで……\nこの あなも じぶんで ほったんだ……\pこれを あげるから……\nきみも にいちゃん みたいに\lあなを ほってみなよ……$"
 
 Route114_FossilManiacsHouse_Text_DigReturnsYouToEntrance:
-	.string "{JPN}ちなみに ポケモンが あなをほると\nどうくつの いりぐち まで\lいっしゅんで もどれるんだ……$"
+	.string "ちなみに ポケモンが あなをほると\nどうくつの いりぐち まで\lいっしゅんで もどれるんだ……$"
 
 Route114_FossilManiacsHouse_Text_RocksFillDisplayCase:
-	.string "{JPN}ケースのなかに かわった かたちの いしが\nいくつも かざってある……$"
+	.string "ケースのなかに かわった かたちの いしが\nいくつも かざってある……$"
 
 Route114_FossilManiacsHouse_Text_CrammedWithBooks:
-	.string "{JPN}『ちそうが できるまで』\n"
+	.string "『ちそうが できるまで』\n"
 	.string "『あめ ふって じめん かたまる』\l"
 	.string "『いしと つちと がんせきと』\p"
 	.string "たくさんの ほんが ならんでる！$"

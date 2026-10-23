@@ -408,7 +408,7 @@ LilycoveCity_EventScript_DontKnowAboutBerryBlender::
 	return
 
 LilycoveCity_Text_MayShoppingLetsBattle:
-	.string "{JPN}ハルカ『あら!?\n{PLAYER}{KUN}も おかいもの?\pあたし ぬいぐるみとか ポスター\nいっぱい かっちゃった!\pもちろん ポケモン いっぱい つかまえたし\nちゃんと そだてて いるんだから!\pあたし としては {PLAYER}{KUN}が\nポケモン そだててるか しんぱい だな\pしょうぶ してあげるから\n{PLAYER}{KUN}の ポケモン みせてよ!"
+	.string "ハルカ『あら!?\n{PLAYER}{KUN}も おかいもの?\pあたし ぬいぐるみとか ポスター\nいっぱい かっちゃった!\pもちろん ポケモン いっぱい つかまえたし\nちゃんと そだてて いるんだから!\pあたし としては {PLAYER}{KUN}が\nポケモン そだててるか しんぱい だな\pしょうぶ してあげるから\n{PLAYER}{KUN}の ポケモン みせてよ!"
 	.string ""
 	.string ""
 	.string ""
@@ -421,35 +421,35 @@ LilycoveCity_Text_MayShoppingLetsBattle:
 	.string "$"
 
 LilycoveCity_Text_MayNotRaisingPokemon:
-	.string "{JPN}ハルカ『えー なんで?\n{PLAYER}{KUN} ポケモン そだててないの?\pそれじゃあ トレーナーとして\nまだまだ ね!"
+	.string "ハルカ『えー なんで?\n{PLAYER}{KUN} ポケモン そだててないの?\pそれじゃあ トレーナーとして\nまだまだ ね!"
 	.string ""
 	.string ""
 	.string "$"
 
 LilycoveCity_Text_MayBattleMe:
-	.string "{JPN}ハルカ『しょうぶ してあげるから\n{PLAYER}{KUN}の ポケモン みせてよ!"
+	.string "ハルカ『しょうぶ してあげるから\n{PLAYER}{KUN}の ポケモン みせてよ!"
 	.string "$"
 
 LilycoveCity_Text_MayWontBeBeaten:
-	.string "{JPN}ハルカ『あたしの そだてた ポケモンが\n{PLAYER}{KUN}の ポケモンに\lまけるわけ ないんだから!"
+	.string "ハルカ『あたしの そだてた ポケモンが\n{PLAYER}{KUN}の ポケモンに\lまけるわけ ないんだから!"
 	.string "$"
 
 LilycoveCity_Text_MayDefeat:
-	.string "{JPN}…… …… ……\p103ばん どうろで\n{PLAYER}{KUN}と しょうぶ したこと\lおもいだしちゃった!\pあの しょうぶが あったから\n{PLAYER}{KUN} ここまで\lつよく なったんだね!"
+	.string "…… …… ……\p103ばん どうろで\n{PLAYER}{KUN}と しょうぶ したこと\lおもいだしちゃった!\pあの しょうぶが あったから\n{PLAYER}{KUN} ここまで\lつよく なったんだね!"
 	.string ""
 	.string ""
 	.string ""
 	.string "$"
 
 LilycoveCity_Text_MayGoingBackToLittleroot:
-	.string "{JPN}ハルカ『あたし そろそろ\nミシロタウンに かえる つもりなの\pいろいろ ポケモン つかまえて\nずかんも けっこう できてきたから\lおとうさんに みせるんだ!"
+	.string "ハルカ『あたし そろそろ\nミシロタウンに かえる つもりなの\pいろいろ ポケモン つかまえて\nずかんも けっこう できてきたから\lおとうさんに みせるんだ!"
 	.string ""
 	.string ""
 	.string ""
 	.string "$"
 
 LilycoveCity_Text_MayYouGoingToCollectBadges:
-	.string "{JPN}{PLAYER}{KUN}は どうするの?\pあちこちの ジムバッジを あつめて\nポケモンリーグ ちょうせん するの?\pじゃあ あたし {PLAYER}{KUN}が\nバッジを あつめている あいだに\lポケモンずかんを かんせい させちゃお!\pじゃね!"
+	.string "{PLAYER}{KUN}は どうするの?\pあちこちの ジムバッジを あつめて\nポケモンリーグ ちょうせん するの?\pじゃあ あたし {PLAYER}{KUN}が\nバッジを あつめている あいだに\lポケモンずかんを かんせい させちゃお!\pじゃね!"
 	.string ""
 	.string ""
 	.string ""
@@ -458,7 +458,7 @@ LilycoveCity_Text_MayYouGoingToCollectBadges:
 	.string "$"
 
 LilycoveCity_Text_MayYouGoingToPokemonLeague:
-	.string "{JPN}{PLAYER}{KUN}は どうするの?\pポケモンリーグ ちょうせん するの?\pそれとも ポケモンずかん\lかんせい させるの?\pポケモンしょうぶ じゃ まけちゃったけど\nずかんは あたしの ほうが\lさきに かんせい させるんだから!\pじゃね!"
+	.string "{PLAYER}{KUN}は どうするの?\pポケモンリーグ ちょうせん するの?\pそれとも ポケモンずかん\lかんせい させるの?\pポケモンしょうぶ じゃ まけちゃったけど\nずかんは あたしの ほうが\lさきに かんせい させるんだから!\pじゃね!"
 	.string ""
 	.string ""
 	.string ""
@@ -468,7 +468,7 @@ LilycoveCity_Text_MayYouGoingToPokemonLeague:
 	.string "$"
 
 LilycoveCity_Text_MayYouGoingToBattleFrontier:
-	.string "{JPN}{PLAYER}{KUN}は どうするの?\pバトルフロンティアに ちょうせん する?\nそれとも ずかんを かんせい させる?\pポケモンしょうぶ じゃ まけちゃったけど\nずかんは あたしの ほうが\lさきに かんせい させるんだから!\pじゃね!"
+	.string "{PLAYER}{KUN}は どうするの?\pバトルフロンティアに ちょうせん する?\nそれとも ずかんを かんせい させる?\pポケモンしょうぶ じゃ まけちゃったけど\nずかんは あたしの ほうが\lさきに かんせい させるんだから!\pじゃね!"
 	.string ""
 	.string ""
 	.string ""
@@ -478,7 +478,7 @@ LilycoveCity_Text_MayYouGoingToBattleFrontier:
 	.string "$"
 
 LilycoveCity_Text_BrendanShoppingLetsBattle:
-	.string "{JPN}ユウキ『なんだ {PLAYER}か\pオレ とうさんに たのまれた\nかいものを してたんだ\lべつに ぬいぐるみ なんか かってないよ\pそれよりも ひさしぶりに あったんだ\pどっちが うまく\nポケモン そだてているか\lしょうぶ してやろうか?"
+	.string "ユウキ『なんだ {PLAYER}か\pオレ とうさんに たのまれた\nかいものを してたんだ\lべつに ぬいぐるみ なんか かってないよ\pそれよりも ひさしぶりに あったんだ\pどっちが うまく\nポケモン そだてているか\lしょうぶ してやろうか?"
 	.string ""
 	.string ""
 	.string ""
@@ -486,39 +486,39 @@ LilycoveCity_Text_BrendanShoppingLetsBattle:
 	.string "$"
 
 LilycoveCity_Text_BrendanNoConfidence:
-	.string "{JPN}ユウキ『なんだよ\nじしんが ないのかよ"
+	.string "ユウキ『なんだよ\nじしんが ないのかよ"
 	.string "$"
 
 LilycoveCity_Text_BrendanBattleMe:
-	.string "{JPN}ユウキ『どっちが うまく\nポケモン そだてているか\lしょうぶ してやろうか?"
+	.string "ユウキ『どっちが うまく\nポケモン そだてているか\lしょうぶ してやろうか?"
 	.string "$"
 
 LilycoveCity_Text_BrendanWontBeBeaten:
-	.string "{JPN}ユウキ『まあ オレが\n{PLAYER}に まけるわけ ないんだけど"
+	.string "ユウキ『まあ オレが\n{PLAYER}に まけるわけ ないんだけど"
 	.string "$"
 
 LilycoveCity_Text_BrendanDefeat:
-	.string "{JPN}ふうん……\nかなり そだててるんだな\pちょっと くやしいな\nトレーナーとしては オレの ほうが\lセンパイ だったのに……"
+	.string "ふうん……\nかなり そだててるんだな\pちょっと くやしいな\nトレーナーとしては オレの ほうが\lセンパイ だったのに……"
 	.string ""
 	.string ""
 	.string "$"
 
 LilycoveCity_Text_BrendanGoingBackToLittleroot:
-	.string "{JPN}ユウキ『オレ……\nミシロタウンに もどるつもり なんだ\pとうさんの てつだいで つくっている\nポケモンずかんも けっこう できてきたし\lいちど とうさんに みせておかないと"
+	.string "ユウキ『オレ……\nミシロタウンに もどるつもり なんだ\pとうさんの てつだいで つくっている\nポケモンずかんも けっこう できてきたし\lいちど とうさんに みせておかないと"
 	.string ""
 	.string ""
 	.string ""
 	.string "$"
 
 LilycoveCity_Text_BrendanYouGoingToCollectBadges:
-	.string "{JPN}{PLAYER}は どうする?\pやっぱり ぜんぶの ジムバッジ あつめて\nポケモンリーグ ちょうせん するのか?\pオレも そうしようかな\pまあ いいや\nとにかく がんばれよ!"
+	.string "{PLAYER}は どうする?\pやっぱり ぜんぶの ジムバッジ あつめて\nポケモンリーグ ちょうせん するのか?\pオレも そうしようかな\pまあ いいや\nとにかく がんばれよ!"
 	.string ""
 	.string ""
 	.string ""
 	.string "$"
 
 LilycoveCity_Text_BrendanYouGoingToPokemonLeague:
-	.string "{JPN}{PLAYER}は どうする?\pそんなに つよいんだから\nポケモンリーグに ちょうせん するのか?\pオレだって もうちょっと\nポケモン そだてれば {PLAYER}よりも\lつよくなれる はずだからな\pまあ いいや\nとにかく がんばれよ!"
+	.string "{PLAYER}は どうする?\pそんなに つよいんだから\nポケモンリーグに ちょうせん するのか?\pオレだって もうちょっと\nポケモン そだてれば {PLAYER}よりも\lつよくなれる はずだからな\pまあ いいや\nとにかく がんばれよ!"
 	.string ""
 	.string ""
 	.string ""
@@ -527,7 +527,7 @@ LilycoveCity_Text_BrendanYouGoingToPokemonLeague:
 	.string "$"
 
 LilycoveCity_Text_BrendanYouGoingToBattleFrontier:
-	.string "{JPN}{PLAYER}は どうする?\pバトルフロンティアに ちょうせん する?\nそれとも ずかんを かんせい させる?\pそんなに つよいんだから\nバトルフロンティアに ちょうせん するか?\pオレだって もうちょっと\nポケモン そだてれば {PLAYER}よりも\lつよくなれる はずだからな\lバトルフロンティアに いってみようかな?\pまあ いいや\nとにかく がんばれよ!"
+	.string "{PLAYER}は どうする?\pバトルフロンティアに ちょうせん する?\nそれとも ずかんを かんせい させる?\pそんなに つよいんだから\nバトルフロンティアに ちょうせん するか?\pオレだって もうちょっと\nポケモン そだてれば {PLAYER}よりも\lつよくなれる はずだからな\lバトルフロンティアに いってみようかな?\pまあ いいや\nとにかく がんばれよ!"
 	.string ""
 	.string ""
 	.string ""
@@ -541,14 +541,14 @@ LilycoveCity_Text_BrendanYouGoingToBattleFrontier:
 	.string "$"
 
 LilycoveCity_Text_MovedLootIntoHideoutToday:
-	.string "{JPN}ふふふ……\pきょうも うばった ブツを\nアジトに はこびこんだぞ……\pなっ なんだ おまえ!\nいっ いまのは ひとりごと だぞ!"
+	.string "ふふふ……\pきょうも うばった ブツを\nアジトに はこびこんだぞ……\pなっ なんだ おまえ!\nいっ いまのは ひとりごと だぞ!"
 	.string ""
 	.string ""
 	.string ""
 	.string "$"
 
 LilycoveCity_Text_ChanceToDoBigThings:
-	.string "{JPN}リーダーが なに かんがえてるのか\nしたっぱの オレには わからんが\pアクアだんに いると\nすごいこと できそうだぜ!\pなっ なんだ おまえ!\nいっ いまのは ひとりごと だぞ!"
+	.string "リーダーが なに かんがえてるのか\nしたっぱの オレには わからんが\pアクアだんに いると\nすごいこと できそうだぜ!\pなっ なんだ おまえ!\nいっ いまのは ひとりごと だぞ!"
 	.string ""
 	.string ""
 	.string ""
@@ -556,44 +556,44 @@ LilycoveCity_Text_ChanceToDoBigThings:
 	.string "$"
 
 LilycoveCity_Text_DontGoNearCaveInCove:
-	.string "{JPN}おい おまえ!\pいりえに ある\nどうくつには ちかづくなよ!\pなぜって? りゆうは どうでも いいんだ!\nおとなの いうこと きけよな!!"
+	.string "おい おまえ!\pいりえに ある\nどうくつには ちかづくなよ!\pなぜって? りゆうは どうでも いいんだ!\nおとなの いうこと きけよな!!"
 	.string ""
 	.string ""
 	.string "$"
 
 LilycoveCity_Text_IfWorldBecomesOurs:
-	.string "{JPN}この ひろい せかい すべてが\nおれら アクアだんの ものに なったら\lポケモンも しあわせに なれるはずだ!"
+	.string "この ひろい せかい すべてが\nおれら アクアだんの ものに なったら\lポケモンも しあわせに なれるはずだ!"
 	.string ""
 	.string "$"
 
 LilycoveCity_Text_WailmerLeapOutOfWater:
-	.string "{JPN}それっ! ホエルコ!\nそこで すいめんから ジャンプするのだ!"
+	.string "それっ! ホエルコ!\nそこで すいめんから ジャンプするのだ!"
 	.string "$"
 
 LilycoveCity_Text_GetLostMessingUpTraining:
-	.string "{JPN}……ん? なんだ おまえは?\pトレーニングの じゃまに なるから\nあっちに いっててくれ!"
+	.string "……ん? なんだ おまえは?\pトレーニングの じゃまに なるから\nあっちに いっててくれ!"
 	.string ""
 	.string "$"
 
 LilycoveCity_Text_ContestHallInTown:
-	.string "{JPN}この まちに ポケモンコンテストの\nかいじょうが あるんだな!\pということは よく そだった ポケモンが\nいっぱい あつまって いるんだな!\pわしの ハートは わくわく なんだな!"
+	.string "この まちに ポケモンコンテストの\nかいじょうが あるんだな!\pということは よく そだった ポケモンが\nいっぱい あつまって いるんだな!\pわしの ハートは わくわく なんだな!"
 	.string ""
 	.string ""
 	.string ""
 	.string "$"
 
 LilycoveCity_Text_StrangeCaveInCove:
-	.string "{JPN}まちの はずれの いりえに\nおかしな どうくつが あるの みた?"
+	.string "まちの はずれの いりえに\nおかしな どうくつが あるの みた?"
 	.string "$"
 
 LilycoveCity_Text_GoingToMoveDeleterForHMs:
-	.string "{JPN}あたしの ポケモン\nコンテストの ために あたらしい わざを\lおぼえさせる つもりなの!\pだからね わざわすれ じいさんに たのんで\nひでんわざを わすれさせて もらうのよ!"
+	.string "あたしの ポケモン\nコンテストの ために あたらしい わざを\lおぼえさせる つもりなの!\pだからね わざわすれ じいさんに たのんで\nひでんわざを わすれさせて もらうのよ!"
 	.string ""
 	.string ""
 	.string "$"
 
 LilycoveCity_Text_ImFromKanto:
-	.string "{JPN}ぼくは カントーから きました!\pホウエン ちほうは みずと みどりに\nあふれた うつくしい ところ ですね!\p……ん? ということは?\pこの とち だけに せいそくする\nめずらしい ポケモンが いるのかも?"
+	.string "ぼくは カントーから きました!\pホウエン ちほうは みずと みどりに\nあふれた うつくしい ところ ですね!\p……ん? ということは?\pこの とち だけに せいそくする\nめずらしい ポケモンが いるのかも?"
 	.string ""
 	.string ""
 	.string ""
@@ -601,50 +601,50 @@ LilycoveCity_Text_ImFromKanto:
 	.string "$"
 
 LilycoveCity_Text_TeamAquaBeenTrainingWailmer:
-	.string "{JPN}アクアだんの れんちゅうが\nいりえで ホエルコを\lトレーニング してるんだよ!\pおいらたち ふなのり\nこのままじゃ うみに でられないよ!"
+	.string "アクアだんの れんちゅうが\nいりえで ホエルコを\lトレーニング してるんだよ!\pおいらたち ふなのり\nこのままじゃ うみに でられないよ!"
 	.string ""
 	.string ""
 	.string "$"
 
 LilycoveCity_Text_SomeonePuntedTeamAquaOut:
-	.string "{JPN}あんた しってるかい?\pだれかが アクアだんを\nけちらしてくれた らしいんだ!\pおかげで ホエルコ いなくなって\nうみに でられるように なったよ!"
+	.string "あんた しってるかい?\pだれかが アクアだんを\nけちらしてくれた らしいんだ!\pおかげで ホエルコ いなくなって\nうみに でられるように なったよ!"
 	.string ""
 	.string ""
 	.string ""
 	.string "$"
 
 LilycoveCity_Text_SomeoneStoleMyPokemon:
-	.string "{JPN}うみべの やどで なみの おとを\nききながら のんびり おひるね\l……を していたら\pわたしの ポケモン とられちゃった!\pはんにんは だれー!?\nアクアだん? アクアだん なのー!?"
+	.string "うみべの やどで なみの おとを\nききながら のんびり おひるね\l……を していたら\pわたしの ポケモン とられちゃった!\pはんにんは だれー!?\nアクアだん? アクアだん なのー!?"
 	.string ""
 	.string ""
 	.string ""
 	.string "$"
 
 LilycoveCity_Text_MissingPokemonCameBack:
-	.string "{JPN}いなくなってた わたしの ポケモン\nいつのまにか かえってきたの!"
+	.string "いなくなってた わたしの ポケモン\nいつのまにか かえってきたの!"
 	.string "$"
 
 LilycoveCity_Text_ImArtDealer:
-	.string "{JPN}わたしは ガショウ です!\pいや そういう なまえ なのではなく\nかちのある えを かったり うったりする\lしょくぎょうの なまえ なんです!\pこのまちの びじゅつかんに すばらしい\nめいが が あると きいたの ですが……"
+	.string "わたしは ガショウ です!\pいや そういう なまえ なのではなく\nかちのある えを かったり うったりする\lしょくぎょうの なまえ なんです!\pこのまちの びじゅつかんに すばらしい\nめいが が あると きいたの ですが……"
 	.string ""
 	.string ""
 	.string ""
 	.string "$"
 
 LilycoveCity_Text_SeaRemainsForeverYoung:
-	.string "{JPN}わしらが しわくちゃに なっても\nこのうみは いつまでも わかわかしく\lいのちの かがやきに あふれとる\pふほほ ふほほほほ……"
+	.string "わしらが しわくちゃに なっても\nこのうみは いつまでも わかわかしく\lいのちの かがやきに あふれとる\pふほほ ふほほほほ……"
 	.string ""
 	.string ""
 	.string "$"
 
 LilycoveCity_Text_SixtyYearsAgoHusbandProposed:
-	.string "{JPN}60ねんまえ ここで おじいしゃんが\nわしに プロポーズ してくれた ときから\lこのうみは うつくしいまま ですのじゃ\pむふふ むふふふふ……"
+	.string "60ねんまえ ここで おじいしゃんが\nわしに プロポーズ してくれた ときから\lこのうみは うつくしいまま ですのじゃ\pむふふ むふふふふ……"
 	.string ""
 	.string ""
 	.string "$"
 
 LilycoveCity_Text_TeamAquaRenovatedCavern:
-	.string "{JPN}この いりえの ところに おかしな\nどうくつの いりぐちが ある じゃろう?\pいぜんは てんねんの どうくつ だったが\nアクアだん とかいう れんちゅうが\lかいぞうして あんなふうに したんじゃ!\p「しぜんを あいする アクアだん!」\n……と いっておるが\pいうことと やることが ちがっとる!"
+	.string "この いりえの ところに おかしな\nどうくつの いりぐちが ある じゃろう?\pいぜんは てんねんの どうくつ だったが\nアクアだん とかいう れんちゅうが\lかいぞうして あんなふうに したんじゃ!\p「しぜんを あいする アクアだん!」\n……と いっておるが\pいうことと やることが ちがっとる!"
 	.string ""
 	.string ""
 	.string ""
@@ -655,92 +655,92 @@ LilycoveCity_Text_TeamAquaRenovatedCavern:
 	.string "$"
 
 LilycoveCity_Text_TeamAquaLotGoneForGood:
-	.string "{JPN}いりえに あった どうくつ……\nいつのまにやら カラッポに なっておる\pアクアだんの れんちゅう\nどこかへ いって しまったらしい のう"
+	.string "いりえに あった どうくつ……\nいつのまにやら カラッポに なっておる\pアクアだんの れんちゅう\nどこかへ いって しまったらしい のう"
 	.string ""
 	.string ""
 	.string ""
 	.string "$"
 
 LilycoveCity_Text_CitySign:
-	.string "{JPN}ここは ミナモ シティ\nりくちの さいはて うみの はじまり"
+	.string "ここは ミナモ シティ\nりくちの さいはて うみの はじまり"
 	.string ""
 	.string "$"
 
 LilycoveCity_Text_ContestHallSign:
-	.string "{JPN}ポケモンコンテスト かいじょう\nあつまれ! ポケモン トレーナー"
+	.string "ポケモンコンテスト かいじょう\nあつまれ! ポケモン トレーナー"
 	.string "$"
 
 LilycoveCity_Text_MotelSign:
-	.string "{JPN}「みんしゅく モナミ」\nミナモのモナミ と おぼえて ください"
+	.string "「みんしゅく モナミ」\nミナモのモナミ と おぼえて ください"
 	.string ""
 	.string "$"
 
 LilycoveCity_Text_MuseumSign:
-	.string "{JPN}「ミナモ びじゅつかん」\nポケモン めいがてん かいさい ちゅう!"
+	.string "「ミナモ びじゅつかん」\nポケモン めいがてん かいさい ちゅう!"
 	.string ""
 	.string "$"
 
 LilycoveCity_Text_MuseumSignPlayersExhibit:
-	.string "{JPN}「ミナモ びじゅつかん」\p{PLAYER}の ポケモン コレクション\nかいさい ちゅう!"
+	.string "「ミナモ びじゅつかん」\p{PLAYER}の ポケモン コレクション\nかいさい ちゅう!"
 	.string ""
 	.string "$"
 
 LilycoveCity_Text_HarborSignUnderConstruction:
-	.string "{JPN}「ミナモ シティ ふねのりば」\pれんらくせん タイドリップごう は\nカイナシティにて けんぞう ちゅう!\pもう しばらく おまちください!"
+	.string "「ミナモ シティ ふねのりば」\pれんらくせん タイドリップごう は\nカイナシティにて けんぞう ちゅう!\pもう しばらく おまちください!"
 	.string ""
 	.string ""
 	.string ""
 	.string "$"
 
 LilycoveCity_Text_HarborSign:
-	.string "{JPN}「ミナモ シティ ふねのりば」\pれんらくせん タイドリップごうで\nふねの たびを おたのしみ ください!"
+	.string "「ミナモ シティ ふねのりば」\pれんらくせん タイドリップごうで\nふねの たびを おたのしみ ください!"
 	.string ""
 	.string "$"
 
 LilycoveCity_Text_TrainerFanClubSign:
-	.string "{JPN}「ポケモン トレーナー ファンクラブ」\pかんばんに いろんな トレーナーの\nなまえが らくがき されている……"
+	.string "「ポケモン トレーナー ファンクラブ」\pかんばんに いろんな トレーナーの\nなまえが らくがき されている……"
 	.string ""
 	.string "$"
 
 LilycoveCity_Text_DepartmentStoreSign:
-	.string "{JPN}「ミナモ デパート」\pグッズ いっぱい! ドキドキ いっぱい!\nなにかが みつかる すてきな ところ"
+	.string "「ミナモ デパート」\pグッズ いっぱい! ドキドキ いっぱい!\nなにかが みつかる すてきな ところ"
 	.string ""
 	.string ""
 	.string ""
 	.string "$"
 
 LilycoveCity_Text_MoveDeletersHouseSign:
-	.string "{JPN}「わざわすれ じいさんの いえ」\nポケモンの わざ わすれさせます"
+	.string "「わざわすれ じいさんの いえ」\nポケモンの わざ わすれさせます"
 	.string "$"
 
 LilycoveCity_Text_DoYouKnowAboutBerryBlender:
-	.string "{JPN}きのみブレンダー っていう\nマシンを しってるかい?"
+	.string "きのみブレンダー っていう\nマシンを しってるかい?"
 	.string "$"
 
 LilycoveCity_Text_FasterSpinBetterPokeblocks:
-	.string "{JPN}みんなで こうそくで まわし まくるんだ\pすっげー はやいと\nすっげー いいポロックが できるらしいぜ!"
+	.string "みんなで こうそくで まわし まくるんだ\pすっげー はやいと\nすっげー いいポロックが できるらしいぜ!"
 	.string ""
 	.string ""
 	.string "$"
 
 LilycoveCity_Text_ExplainBerryBlender:
-	.string "{JPN}ポロックっていう おかしが できるんだぜ\pいいポロックを つくると ポケモンの\nコンディションも ぐーんと アップさ!"
+	.string "ポロックっていう おかしが できるんだぜ\pいいポロックを つくると ポケモンの\nコンディションも ぐーんと アップさ!"
 	.string ""
 	.string ""
 	.string "$"
 
 LilycoveCity_Text_HeardTowerCalledSkyPillar:
-	.string "{JPN}あのな どこかの すいどうに\nそらのはしら とかいう とうが\lたってる らしいぜ"
+	.string "あのな どこかの すいどうに\nそらのはしら とかいう とうが\lたってる らしいぜ"
 	.string ""
 	.string "$"
 
 LilycoveCity_Text_SawTallTowerOnRoute131:
-	.string "{JPN}オレな 131ばん すいどうの あたりで\nたかーい とうを みたんだけど\lもしかして それって……?"
+	.string "オレな 131ばん すいどうの あたりで\nたかーい とうを みたんだけど\lもしかして それって……?"
 	.string ""
 	.string "$"
 
 LilycoveCity_Text_JustArrivedAndSawRarePokemon:
-	.string "{JPN}ぼくら しんこん りょこうで\nこのまちに きたばかり なんだけど\pドラゴンタイプの ポケモンが\nそらを とんで いくのを みたんだよ!\pホウエン ちほうには\nあんな かっこいい ポケモンが\lせいそく してるのかい?"
+	.string "ぼくら しんこん りょこうで\nこのまちに きたばかり なんだけど\pドラゴンタイプの ポケモンが\nそらを とんで いくのを みたんだよ!\pホウエン ちほうには\nあんな かっこいい ポケモンが\lせいそく してるのかい?"
 	.string ""
 	.string ""
 	.string ""
@@ -748,7 +748,7 @@ LilycoveCity_Text_JustArrivedAndSawRarePokemon:
 	.string "$"
 
 LilycoveCity_Text_HoneymoonVowToSeeRarePokemon:
-	.string "{JPN}わたしたちの しんこん りょこうは\nかくちの めずらしい ポケモンを\lできるだけ たくさん みること なんです\pこの まちに とうちゃく したら\nいきなり めずらしい ポケモンが みられて\lとても ハッピー だわ!"
+	.string "わたしたちの しんこん りょこうは\nかくちの めずらしい ポケモンを\lできるだけ たくさん みること なんです\pこの まちに とうちゃく したら\nいきなり めずらしい ポケモンが みられて\lとても ハッピー だわ!"
 	.string ""
 	.string ""
 	.string ""

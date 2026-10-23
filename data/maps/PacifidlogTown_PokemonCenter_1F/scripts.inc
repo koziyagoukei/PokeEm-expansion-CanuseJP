@@ -28,11 +28,11 @@ PacifidlogTown_PokemonCenter_1F_EventScript_OldMan::
 	end
 
 PacifidlogTown_PokemonCenter_1F_Text_WhatColorTrainerCard:
-	.string "{JPN}きみの トレーナーカードは なにいろ?\nあたしのは カッパー なんだよ!$"
+	.string "きみの トレーナーカードは なにいろ?\nあたしのは カッパー なんだよ!$"
 
 PacifidlogTown_PokemonCenter_1F_Text_OnColonyOfCorsola:
-	.string "{JPN}キナギタウンって サニーゴたちの\nあつまりの うえに うかんでいるの\p……なんて いったら\nあなたは しんじるかしら?$"
+	.string "キナギタウンって サニーゴたちの\nあつまりの うえに うかんでいるの\p……なんて いったら\nあなたは しんじるかしら?$"
 
 PacifidlogTown_PokemonCenter_1F_Text_AncestorsLivedOnBoats:
-	.string "{JPN}キナギで くらす ひとびとの せんぞは\nふねの うえで うまれて\lそして ふねの うえで しんだ という\pなにかを さがすために\nそんな いきかたを していたそうじゃ$"
+	.string "キナギで くらす ひとびとの せんぞは\nふねの うえで うまれて\lそして ふねの うえで しんだ という\pなにかを さがすために\nそんな いきかたを していたそうじゃ$"
 

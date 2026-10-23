@@ -46,17 +46,17 @@ Route114_LanettesHouse_EventScript_PC::
 	end
 
 Route114_LanettesHouse_Text_EverythingClutteredKeepThis:
-	.string "{JPN}マユミ『あっ! {PLAYER}{KUN}\pちらかっていて ごめんなさい……\nけんきゅうに むちゅうに なると\lつい こう なっちゃうんです……\pはずかしいから ヒミツに してくださいね\nこれ あげますから……$"
+	.string "マユミ『あっ! {PLAYER}{KUN}\pちらかっていて ごめんなさい……\nけんきゅうに むちゅうに なると\lつい こう なっちゃうんです……\pはずかしいから ヒミツに してくださいね\nこれ あげますから……$"
 
 Route114_LanettesHouse_Text_OrganizeYourBoxes:
-	.string "{JPN}あずかりシステムを つくった\n"
+	.string "あずかりシステムを つくった\n"
 	.string "あたしからの アドバイス です\p"
 	.string "どの ボックスに どの ポケモンを\n"
 	.string "あずけたか わかるように\l"
 	.string "きちんと せいり したほうが いいですよ！$"
 
 Route114_LanettesHouse_Text_ResearchNotesPage1:
-	.string "{JPN}けんきゅう ようの ノートだ\n"
+	.string "けんきゅう ようの ノートだ\n"
 	.string "ボックスに ついて かかれている！\p"
 	.string "ボックス1つに 30ぴきの\n"
 	.string "ポケモンを あずけられる ようにする\p"
@@ -65,7 +65,7 @@ Route114_LanettesHouse_Text_ResearchNotesPage1:
 	.string "つづきを よみますか？$"
 
 Route114_LanettesHouse_Text_ResearchNotesPage2:
-	.string "{JPN}ポケモンを マーキングすると ボックスが\n"
+	.string "ポケモンを マーキングすると ボックスが\n"
 	.string "せいり しやすくなる ようにする\p"
 	.string "ボックスの なまえ かべがみを\n"
 	.string "かえられる ようにして あずけられた\l"
@@ -73,7 +73,7 @@ Route114_LanettesHouse_Text_ResearchNotesPage2:
 	.string "つづきを よみますか？$"
 
 Route114_LanettesHouse_Text_ResearchNotesPage3:
-	.string "{JPN}ポケモンが てんそう される ボックスは\n"
+	.string "ポケモンが てんそう される ボックスは\n"
 	.string "さいごに みた ボックスにする\p"
 	.string "その ボックスが いっぱいの ときは\n"
 	.string "つぎの ボックスに てんそう する\p"
@@ -82,8 +82,8 @@ Route114_LanettesHouse_Text_ResearchNotesPage3:
 	.string "きりかえられる ようにする$"
 
 Route114_LanettesHouse_Text_ClosedTheNotebook:
-	.string "{JPN}{PLAYER}は ノートを とじた$"
+	.string "{PLAYER}は ノートを とじた$"
 
 Route114_LanettesHouse_Text_EmailFromBill:
-	.string "{JPN}パソコンを みると\nなんと でんしメールが きていた!\p「…… …… ……\pきみの あずかり システム\nなかなか べんり やな\pいろんな ところに\nじょせい らしい きくばりが あって\lつかってて たのしいし\pいっしょに かいはつ した\nなかま として うれしいわ!\pほな これからも あずかりシステムの\nけんきゅう がんばってな\p…… …… ……」$"
+	.string "パソコンを みると\nなんと でんしメールが きていた!\p「…… …… ……\pきみの あずかり システム\nなかなか べんり やな\pいろんな ところに\nじょせい らしい きくばりが あって\lつかってて たのしいし\pいっしょに かいはつ した\nなかま として うれしいわ!\pほな これからも あずかりシステムの\nけんきゅう がんばってな\p…… …… ……」$"
 

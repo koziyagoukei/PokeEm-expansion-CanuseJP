@@ -50,70 +50,70 @@ AbandonedShip_Rooms2_1F_EventScript_Garrison::
 	end
 
 AbandonedShip_Rooms2_1F_Text_DanIntro:
-	.string "{JPN}フミ『おたから さがしていたら\nトレーナー はっけん!$"
+	.string "フミ『おたから さがしていたら\nトレーナー はっけん!$"
 
 AbandonedShip_Rooms2_1F_Text_DanDefeat:
-	.string "{JPN}フミ『ぼくたち ふたりの ちからでも\nかてなかったのか……$"
+	.string "フミ『ぼくたち ふたりの ちからでも\nかてなかったのか……$"
 
 AbandonedShip_Rooms2_1F_Text_DanPostBattle:
-	.string "{JPN}フミ『おたから みつからないんだよね……\nもう だれかが もっていったのかな?$"
+	.string "フミ『おたから みつからないんだよね……\nもう だれかが もっていったのかな?$"
 
 AbandonedShip_Rooms2_1F_Text_DanNotEnoughMons:
-	.string "{JPN}フミ『ポケモン 2ひき いないんだね\nそれだと ぼくたちには かてないよ!$"
+	.string "フミ『ポケモン 2ひき いないんだね\nそれだと ぼくたちには かてないよ!$"
 
 AbandonedShip_Rooms2_1F_Text_KiraIntro:
-	.string "{JPN}ナツ『あら? おたから さがしていたのに\nトレーナー はっけん しちゃった!$"
+	.string "ナツ『あら? おたから さがしていたのに\nトレーナー はっけん しちゃった!$"
 
 AbandonedShip_Rooms2_1F_Text_KiraDefeat:
-	.string "{JPN}ナツ『つよいんだ!$"
+	.string "ナツ『つよいんだ!$"
 
 AbandonedShip_Rooms2_1F_Text_KiraPostBattle:
-	.string "{JPN}ナツ『おたから どこかな?\nみつかったら なに かおうか きめてるのよ!$"
+	.string "ナツ『おたから どこかな?\nみつかったら なに かおうか きめてるのよ!$"
 
 AbandonedShip_Rooms2_1F_Text_KiraNotEnoughMons:
-	.string "{JPN}ナツ『あら ポケモン 2ひき いないの?\nじゃあ しょうぶは おあずけね!$"
+	.string "ナツ『あら ポケモン 2ひき いないの?\nじゃあ しょうぶは おあずけね!$"
 
 AbandonedShip_Rooms2_1F_Text_KiraRegister:
-	.string "{JPN}ナツ『もう くやしいな!\nあなたなんて とうろく しちゃうんだから!$"
+	.string "ナツ『もう くやしいな!\nあなたなんて とうろく しちゃうんだから!$"
 
 AbandonedShip_Rooms2_1F_Text_DanRematchIntro:
-	.string "{JPN}フミ『ずっと おたから さがしていて\nポケモンも つよく なったんだよねー!\lちょっと あいて してみてよ$"
+	.string "フミ『ずっと おたから さがしていて\nポケモンも つよく なったんだよねー!\lちょっと あいて してみてよ$"
 
 AbandonedShip_Rooms2_1F_Text_DanRematchDefeat:
-	.string "{JPN}フミ『あいかわらず つよいな!$"
+	.string "フミ『あいかわらず つよいな!$"
 
 AbandonedShip_Rooms2_1F_Text_DanPostRematch:
-	.string "{JPN}フミ『おたからは みつからないし\nポケモンは まけるし いえに かえりたいよ\pでも そんなこと いうと\nかのじょ おこりだすからな……$"
+	.string "フミ『おたからは みつからないし\nポケモンは まけるし いえに かえりたいよ\pでも そんなこと いうと\nかのじょ おこりだすからな……$"
 
 AbandonedShip_Rooms2_1F_Text_DanRematchNotEnoughMons:
-	.string "{JPN}フミ『ポケモン 2ひき いないんだね\nそれだと ぼくたちには かてないよ!$"
+	.string "フミ『ポケモン 2ひき いないんだね\nそれだと ぼくたちには かてないよ!$"
 
 AbandonedShip_Rooms2_1F_Text_KiraRematchIntro:
-	.string "{JPN}ナツ『あら? また であったわね!\nあたしたちと いっしょで あきらめずに\lおたから さがしているのね!\pしょうぶして まけた ほうは\nあきらめることに しない?$"
+	.string "ナツ『あら? また であったわね!\nあたしたちと いっしょで あきらめずに\lおたから さがしているのね!\pしょうぶして まけた ほうは\nあきらめることに しない?$"
 
 AbandonedShip_Rooms2_1F_Text_KiraRematchDefeat:
-	.string "{JPN}ナツ『また まけちゃった……$"
+	.string "ナツ『また まけちゃった……$"
 
 AbandonedShip_Rooms2_1F_Text_KiraPostRematch:
-	.string "{JPN}ナツ『もっと ポケモン そだてて\nおたから みつけるまで かえらないわよ!$"
+	.string "ナツ『もっと ポケモン そだてて\nおたから みつけるまで かえらないわよ!$"
 
 AbandonedShip_Rooms2_1F_Text_KiraRematchNotEnoughMons:
-	.string "{JPN}ナツ『あら ポケモン 2ひき いないの?\nじゃあ しょうぶは おあずけね!$"
+	.string "ナツ『あら ポケモン 2ひき いないの?\nじゃあ しょうぶは おあずけね!$"
 
 AbandonedShip_Rooms2_1F_Text_JaniIntro:
-	.string "{JPN}およぐの ヘタだけど\nしょうぶは つよいもーん$"
+	.string "およぐの ヘタだけど\nしょうぶは つよいもーん$"
 
 AbandonedShip_Rooms2_1F_Text_JaniDefeat:
-	.string "{JPN}あれ だめだったかあ$"
+	.string "あれ だめだったかあ$"
 
 AbandonedShip_Rooms2_1F_Text_JaniPostBattle:
-	.string "{JPN}ふねの なかを はだしで あるくと\nちょっと きもちわるいなあ$"
+	.string "ふねの なかを はだしで あるくと\nちょっと きもちわるいなあ$"
 
 AbandonedShip_Rooms2_1F_Text_GarrisonIntro:
-	.string "{JPN}つよさも やさしさも\nこれ トレーナーの たから!$"
+	.string "つよさも やさしさも\nこれ トレーナーの たから!$"
 
 AbandonedShip_Rooms2_1F_Text_GarrisonDefeat:
-	.string "{JPN}おお あなたには\nキラリと ひかるものが あるな$"
+	.string "おお あなたには\nキラリと ひかるものが あるな$"
 
 AbandonedShip_Rooms2_1F_Text_GarrisonPostBattle:
-	.string "{JPN}ふねの どこかの へやに\nキラリと ひかるものが あったんだが……$"
+	.string "ふねの どこかの へやに\nキラリと ひかるものが あったんだが……$"

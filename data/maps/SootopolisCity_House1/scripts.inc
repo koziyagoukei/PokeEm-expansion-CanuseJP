@@ -29,10 +29,10 @@ SootopolisCity_House1_EventScript_Kecleon::
 	end
 
 SootopolisCity_House1_Text_DevelopedThisTM:
-	.string "{JPN}うむう……\nルネシティに こもること 30ねん……\pわしが あみだした ひっさつの わざマシン!\nおまえに ゆずろう!$"
+	.string "うむう……\nルネシティに こもること 30ねん……\pわしが あみだした ひっさつの わざマシン!\nおまえに ゆずろう!$"
 
 SootopolisCity_House1_Text_ExplainBrickBreak:
-	.string "{JPN}わざマシン31は かわらわり!\nせつめい するのも おそろしい わざよ……$"
+	.string "わざマシン31は かわらわり!\nせつめい するのも おそろしい わざよ……$"
 
 SootopolisCity_House1_Text_Kecleon:
-	.string "{JPN}カクレオン『ぷー ぷひゃあー$"
+	.string "カクレオン『ぷー ぷひゃあー$"

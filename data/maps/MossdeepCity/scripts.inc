@@ -304,58 +304,58 @@ MossdeepCity_Movement_ScottExitEast:
 	step_end
 
 MossdeepCity_Text_WantKingsRockStevenGaveMe:
-	.string "{JPN}これ…… ダイゴさんに もらったけど\nなんだか よく わかんないや!\pおうじゃのしるし って いうらしいけど\nおまえ ほしい?$"
+	.string "これ…… ダイゴさんに もらったけど\nなんだか よく わかんないや!\pおうじゃのしるし って いうらしいけど\nおまえ ほしい?$"
 
 MossdeepCity_Text_YouCanKeepIt:
-	.string "{JPN}これが ほしいなんて\nおまえも かわってるよな!\pやるけど そのかわり\nダイゴさんには ないしょ だぜ!$"
+	.string "これが ほしいなんて\nおまえも かわってるよな!\pやるけど そのかわり\nダイゴさんには ないしょ だぜ!$"
 
 MossdeepCity_Text_StevensHouseOverThere:
-	.string "{JPN}ダイゴさんの いえなら すぐそこだよ!$"
+	.string "ダイゴさんの いえなら すぐそこだよ!$"
 
 MossdeepCity_Text_WhatToDoWithWeirdRock:
-	.string "{JPN}そうだろ! へんてこな いしを\nもらっても こまっちゃうよな!$"
+	.string "そうだろ! へんてこな いしを\nもらっても こまっちゃうよな!$"
 
 MossdeepCity_Text_WailmerWatching:
-	.string "{JPN}この トクサネの しゅうへん では\nやせいの ホエルコが けんぶつ できるんだ\pそーいうのを えーと……\nなんて いったっけ かな……\pホエ ホエ ホエ……\pホエルコ ウオッチング だ!$"
+	.string "この トクサネの しゅうへん では\nやせいの ホエルコが けんぶつ できるんだ\pそーいうのを えーと……\nなんて いったっけ かな……\pホエ ホエ ホエ……\pホエルコ ウオッチング だ!$"
 
 MossdeepCity_Text_SpaceCenterReceivedLetter:
-	.string "{JPN}しまの うちゅうセンター では\nすんごい ロケット とばしとるけど……\pさいきん あそこに\nおかしなてがみ が とどいた とかで\lちょっとした さわぎに なっとるのよ$"
+	.string "しまの うちゅうセンター では\nすんごい ロケット とばしとるけど……\pさいきん あそこに\nおかしなてがみ が とどいた とかで\lちょっとした さわぎに なっとるのよ$"
 
 MossdeepCity_Text_SpaceCenterLaunchingRockets:
-	.string "{JPN}しまの うちゅうセンター では\nすんごい ロケット とばしとるのよ!$"
+	.string "しまの うちゅうセンター では\nすんごい ロケット とばしとるのよ!$"
 
 MossdeepCity_Text_MossdeepTargetedByMagma:
-	.string "{JPN}ふなのりの なかまから きいたんだけど\nミナモに すみついていた アクアだん\lだれかが やっつけたんだってな!\pでも こっちの トクサネは\nマグマだんに ねらわれてるんだよ……\pあいつらが なにをするき なのかは\nうちゅうセンターに いけば わかるさ$"
+	.string "ふなのりの なかまから きいたんだけど\nミナモに すみついていた アクアだん\lだれかが やっつけたんだってな!\pでも こっちの トクサネは\nマグマだんに ねらわれてるんだよ……\pあいつらが なにをするき なのかは\nうちゅうセンターに いけば わかるさ$"
 
 MossdeepCity_Text_FeelReliefOnLand:
-	.string "{JPN}おれは ふなのり だから\nやっぱり うみのほうが だいじさ!\pでも ひさしぶりに りくに あがると\nやっぱり ホッと するんだよな!$"
+	.string "おれは ふなのり だから\nやっぱり うみのほうが だいじさ!\pでも ひさしぶりに りくに あがると\nやっぱり ホッと するんだよな!$"
 
 MossdeepCity_Text_NiceIfWorldCoveredByFlowers:
-	.string "{JPN}せかいじゅうの すべてが!\pこのしま みたいに くさばなで\nいっぱいに なれば いいのにね!$"
+	.string "せかいじゅうの すべてが!\pこのしま みたいに くさばなで\nいっぱいに なれば いいのにね!$"
 
 MossdeepCity_Text_LifeNeedsSeaToLive:
-	.string "{JPN}いのちの みなもとは うみから うまれて\nりくに あがって きた\pやくめを おえた いのちは\nつち となって だいちに かえって いく\pそして うみと だいちは\nいつでも つながって いる……\pそう この かいがんせんの ようにな$"
+	.string "いのちの みなもとは うみから うまれて\nりくに あがって きた\pやくめを おえた いのちは\nつち となって だいちに かえって いく\pそして うみと だいちは\nいつでも つながって いる……\pそう この かいがんせんの ようにな$"
 
 MossdeepCity_Text_SurfExhilarating:
-	.string "{JPN}ふねのたびも いいけどな\pポケモンと ともに なみのりで\nうみを わたるのは なんとも いえない\lきもちよさが あるよな……\pそう おもわないか? わかものよ$"
+	.string "ふねのたびも いいけどな\pポケモンと ともに なみのりで\nうみを わたるのは なんとも いえない\lきもちよさが あるよな……\pそう おもわないか? わかものよ$"
 
 MossdeepCity_Text_SpecialSpaceCenterRock:
-	.string "{JPN}この いわ って\nうちゅうセンターの みんなに とって\lだいじな いわ なの\pロケットが ぶじに とぶように ねがって\nここに おいたんだって!\pあなたは ねがいごとを かなえたいとき\nどうするの?\lながれぼしに ねがうの?\pあたしなら たんざくに\nおねがいごとを かくかな やっぱ!$"
+	.string "この いわ って\nうちゅうセンターの みんなに とって\lだいじな いわ なの\pロケットが ぶじに とぶように ねがって\nここに おいたんだって!\pあなたは ねがいごとを かなえたいとき\nどうするの?\lながれぼしに ねがうの?\pあたしなら たんざくに\nおねがいごとを かくかな やっぱ!$"
 
 MossdeepCity_Text_ItsAWhiteRock:
-	.string "{JPN}しろい いわ だ!$"
+	.string "しろい いわ だ!$"
 
 MossdeepCity_Text_GymSign:
-	.string "{JPN}トクサネ シティ ポケモンジム\nリーダー フウ ラン\lしんぴの コンビネーション!!$"
+	.string "トクサネ シティ ポケモンジム\nリーダー フウ ラン\lしんぴの コンビネーション!!$"
 
 MossdeepCity_Text_CitySign:
-	.string "{JPN}ここは トクサネ シティ\n「ポケモンを たいせつに!」が あいことば$"
+	.string "ここは トクサネ シティ\n「ポケモンを たいせつに!」が あいことば$"
 
 MossdeepCity_Text_SpaceCenterSign:
-	.string "{JPN}「トクサネ うちゅうセンター」\nうちゅうに いちばん ちかい ばしょ$"
+	.string "「トクサネ うちゅうセンター」\nうちゅうに いちばん ちかい ばしょ$"
 
 MossdeepCity_Text_ScottSomethingWrongWithTown:
-	.string "{JPN}エニシダ『{PLAYER}{KUN} げんき?\nわたしは げんきさ!\pトクサネシティの ジムリーダーが\nかなり つよいって きいてね\lのぞいてみようと きて みたら\lまちの ようすが なんだか ヘンなんだ\pよこくじょうが どうした とか\nうちゅうセンターが どうした とか……\pわたしには かんけい なさそうだなあ$"
+	.string "エニシダ『{PLAYER}{KUN} げんき?\nわたしは げんきさ!\pトクサネシティの ジムリーダーが\nかなり つよいって きいてね\lのぞいてみようと きて みたら\lまちの ようすが なんだか ヘンなんだ\pよこくじょうが どうした とか\nうちゅうセンターが どうした とか……\pわたしには かんけい なさそうだなあ$"
 
 MossdeepCity_Text_SootopolisNewGymLeader:
-	.string "{JPN}あー あしもとが じゃぶじゃぶして\nきもちが いい……\pそうだ! じゃぶじゃぶ といえば\nルネシティ だけど\pあそこの ジム\nリーダーが かわった らしいね\pなんでも ミクリさんの\nおししょうさん だとか……$"
+	.string "あー あしもとが じゃぶじゃぶして\nきもちが いい……\pそうだ! じゃぶじゃぶ といえば\nルネシティ だけど\pあそこの ジム\nリーダーが かわった らしいね\pなんでも ミクリさんの\nおししょうさん だとか……$"

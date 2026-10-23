@@ -61,10 +61,10 @@ static u32 CalculateFishingTimeOfDayBoost(void);
     #define FISHING_SUPER_ROD_ODDS 50
 #endif
 
-static const u8 sText_OhABite[] = _("{JPN}ひいてる！ひいてる！");
-static const u8 sText_PokemonOnHook[] = _("{JPN}ポケモンを つりあげた！{PAUSE_UNTIL_PRESS}");
-static const u8 sText_NotEvenANibble[] = _("{JPN}つれないなあ{ENG}...{PAUSE_UNTIL_PRESS}");
-static const u8 sText_ItGotAway[] = _("{JPN}にげられて しまった{ENG}...{PAUSE_UNTIL_PRESS}");
+static const u8 sText_OhABite[] = _("ひいてる！ひいてる！");
+static const u8 sText_PokemonOnHook[] = _("ポケモンを つりあげた！{PAUSE_UNTIL_PRESS}");
+static const u8 sText_NotEvenANibble[] = _("つれないなあ{ENG}...{PAUSE_UNTIL_PRESS}");
+static const u8 sText_ItGotAway[] = _("にげられて しまった{ENG}...{PAUSE_UNTIL_PRESS}");
 
 struct FriendshipHookChanceBoost
 {

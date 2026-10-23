@@ -43,32 +43,32 @@ Route110_TrickHousePuzzle6_EventScript_Sebastian::
 	end
 
 Route110_TrickHousePuzzle6_Text_WroteSecretCodeLockOpened:
-	.string "{JPN}{PLAYER}は あいことばを\nとびらに かきつけた!\p「カラクリだいおう さま いのち」\p…… …… ……\pかぎの はずれる おとがした!$"
+	.string "{PLAYER}は あいことばを\nとびらに かきつけた!\p「カラクリだいおう さま いのち」\p…… …… ……\pかぎの はずれる おとがした!$"
 
 Route110_TrickHousePuzzle6_Text_SophiaIntro:
-	.string "{JPN}さいきん へんな やしきが あるって\nきいたから しらべに きたのよ!$"
+	.string "さいきん へんな やしきが あるって\nきいたから しらべに きたのよ!$"
 
 Route110_TrickHousePuzzle6_Text_SophiaDefeat:
-	.string "{JPN}つよい トレーナーを はっけん!$"
+	.string "つよい トレーナーを はっけん!$"
 
 Route110_TrickHousePuzzle6_Text_SophiaPostBattle:
-	.string "{JPN}やしきを しらべてたら おもしろくて\nなんかいも チャレンジ してるのよ!$"
+	.string "やしきを しらべてたら おもしろくて\nなんかいも チャレンジ してるのよ!$"
 
 Route110_TrickHousePuzzle6_Text_BennyIntro:
-	.string "{JPN}おいらの とりポケモンで\nかべを とびこえて いっちゃうか……?$"
+	.string "おいらの とりポケモンで\nかべを とびこえて いっちゃうか……?$"
 
 Route110_TrickHousePuzzle6_Text_BennyDefeat:
-	.string "{JPN}わわっ しまった!$"
+	.string "わわっ しまった!$"
 
 Route110_TrickHousePuzzle6_Text_BennyPostBattle:
-	.string "{JPN}てへへ… ズルしようと したから\nまけちゃったの かな……$"
+	.string "てへへ… ズルしようと したから\nまけちゃったの かな……$"
 
 Route110_TrickHousePuzzle6_Text_SebastianIntro:
-	.string "{JPN}かいてん する とびらで\nめが まわってきた……$"
+	.string "かいてん する とびらで\nめが まわってきた……$"
 
 Route110_TrickHousePuzzle6_Text_SebastianDefeat:
-	.string "{JPN}くーるくる くーるくる\nおれは もう ダメだ……$"
+	.string "くーるくる くーるくる\nおれは もう ダメだ……$"
 
 Route110_TrickHousePuzzle6_Text_SebastianPostBattle:
-	.string "{JPN}キミは ぜんぜん へいき みたいだね\nそれとも ポーカーフェイス なの?$"
+	.string "キミは ぜんぜん へいき みたいだね\nそれとも ポーカーフェイス なの?$"
 

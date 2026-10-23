@@ -95,11 +95,11 @@ Route104_MrBrineysHouse_EventScript_Peeko::
 	end
 
 Route104_MrBrineysHouse_Text_WaitUpPeeko:
-	.string "{JPN}ハギ『こらこら!\nまて まて ピーコちゃん!"
+	.string "ハギ『こらこら!\nまて まて ピーコちゃん!"
 	.string "$"
 
 Route104_MrBrineysHouse_Text_ItsYouLetsSailToDewford:
-	.string "{JPN}おや? きみは たしか ピーコちゃんを\nたすけて くれた {PLAYER}{KUN}!\lそのせつは せわに なったのう!\p……なぬ? ふねに のりたい とな?\pふむふむ?\nムロに てがみを とどけて\lカイナへ にもつを とどける……\lなんだか いそがしいのう きみは\pじゃが それくらい おやすい ごようだ!\nわしに まかせて おきなさい!\lでは まず ムロに むかうとするか!"
+	.string "おや? きみは たしか ピーコちゃんを\nたすけて くれた {PLAYER}{KUN}!\lそのせつは せわに なったのう!\p……なぬ? ふねに のりたい とな?\pふむふむ?\nムロに てがみを とどけて\lカイナへ にもつを とどける……\lなんだか いそがしいのう きみは\pじゃが それくらい おやすい ごようだ!\nわしに まかせて おきなさい!\lでは まず ムロに むかうとするか!"
 	.string ""
 	.string ""
 	.string ""
@@ -112,17 +112,17 @@ Route104_MrBrineysHouse_Text_ItsYouLetsSailToDewford:
 	.string "$"
 
 Route104_MrBrineysHouse_Text_SetSailForDewford:
-	.string "{JPN}ハギ『ムロタウン か\pよっしゃ! いくぞ ピーコちゃん!"
+	.string "ハギ『ムロタウン か\pよっしゃ! いくぞ ピーコちゃん!"
 	.string "$"
 
 Route104_MrBrineysHouse_Text_DeclineDeliverySail:
-	.string "{JPN}ハギ『そうかね\nたのまれごとは いいのかね?\pまあ ふねに のる ひつようが あるときは\nいつでも えんりょなく いっておくれ!"
+	.string "ハギ『そうかね\nたのまれごとは いいのかね?\pまあ ふねに のる ひつようが あるときは\nいつでも えんりょなく いっておくれ!"
 	.string ""
 	.string ""
 	.string "$"
 
 Route104_MrBrineysHouse_Text_NeedToMakeDeliveriesSailToDewford:
-	.string "{JPN}ハギ『きみの いいたいことは わかっとる!\pムロに てがみを とどけて\nカイナへ にもつを とどけるんだろう\pそれくらい おやすい ごようだ!\nわしに まかせて おきなさい!\lでは まず ムロに むかうとするか!"
+	.string "ハギ『きみの いいたいことは わかっとる!\pムロに てがみを とどけて\nカイナへ にもつを とどけるんだろう\pそれくらい おやすい ごようだ!\nわしに まかせて おきなさい!\lでは まず ムロに むかうとするか!"
 	.string ""
 	.string ""
 	.string ""
@@ -130,7 +130,7 @@ Route104_MrBrineysHouse_Text_NeedToMakeDeliveriesSailToDewford:
 	.string "$"
 
 Route104_MrBrineysHouse_Text_NeedToDeliverPackageSailToDewford:
-	.string "{JPN}ハギ『きみの いいたいことは わかっとる!\pカイナの クスノキさんに\nにもつを とどけるんだろう\pそれくらい おやすい ごようだ!\nわしに まかせて おきなさい!\lでは まず ムロに むかうとするか!"
+	.string "ハギ『きみの いいたいことは わかっとる!\pカイナの クスノキさんに\nにもつを とどけるんだろう\pそれくらい おやすい ごようだ!\nわしに まかせて おきなさい!\lでは まず ムロに むかうとするか!"
 	.string ""
 	.string ""
 	.string ""
@@ -138,16 +138,16 @@ Route104_MrBrineysHouse_Text_NeedToDeliverPackageSailToDewford:
 	.string "$"
 
 Route104_MrBrineysHouse_Text_WhereAreWeBound:
-	.string "{JPN}ハギ『やあ! きみのため なら\nいつでも ふねを だそう!\pきみが いきたいのは どこ かな?"
+	.string "ハギ『やあ! きみのため なら\nいつでも ふねを だそう!\pきみが いきたいのは どこ かな?"
 	.string ""
 	.string "$"
 
 Route104_MrBrineysHouse_Text_TellMeWheneverYouWantToSail:
-	.string "{JPN}ハギ『そうか…… きみは\nピーコちゃんの いのちの おんじんだ\pふねに のる ひつようが あるときは\nいつでも えんりょなく いっておくれ!"
+	.string "ハギ『そうか…… きみは\nピーコちゃんの いのちの おんじんだ\pふねに のる ひつようが あるときは\nいつでも えんりょなく いっておくれ!"
 	.string ""
 	.string ""
 	.string "$"
 
 Route104_MrBrineysHouse_Text_Peeko:
-	.string "{JPN}ピーコちゃん『ピー ピひょろー!$"
+	.string "ピーコちゃん『ピー ピひょろー!$"
 

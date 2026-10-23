@@ -33,8 +33,8 @@ LavaridgeTown_Mart_EventScript_OldWoman::
 	end
 
 LavaridgeTown_Mart_Text_XSpeedFirstStrike:
-	.string "{JPN}スピーダー つかって\nポケモンの すばやさ あげるんじゃ!\pそうすりゃ せんせいこうげき できて\nたたかいが ゆうりに なるからのう!$"
+	.string "スピーダー つかって\nポケモンの すばやさ あげるんじゃ!\pそうすりゃ せんせいこうげき できて\nたたかいが ゆうりに なるからのう!$"
 
 LavaridgeTown_Mart_Text_LocalSpecialtyOnMtChimney:
-	.string "{JPN}えんとつやまの ちょうじょう だけで\nかうことが できる おみやげは\lポケモンに あげると よろこぶよ!$"
+	.string "えんとつやまの ちょうじょう だけで\nかうことが できる おみやげは\lポケモンに あげると よろこぶよ!$"
 

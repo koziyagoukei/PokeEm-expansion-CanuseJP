@@ -1,12 +1,12 @@
 MoveTutor_Text_ThisMoveCanOnlyBeLearnedOnce:
-	.string "{JPN}この わざを おしえて もらえるのは\n"
+	.string "この わざを おしえて もらえるのは\n"
 	.string "{JPN}いちど だけですが いいですか?$"
 
 MoveTutor_Text_SwaggerTeach:
 	.string "{JPN}ふふーん\nおれの ポケモンは すごいのさ!\lどの ポケモンよりも かっこいいのさ!\p……って いばってたら\nかいちょうに おこられちゃった\pもう いばらない ことに したから\nかわりに おまえの ポケモンに\lいばる わざを おしえて やってもいいぜ$"
 
 MoveTutor_Text_SwaggerDeclined:
-	.string "{JPN}えー\n"
+	.string "えー\n"
 	.string "{JPN}なんだよ つきあい わるいな$"
 
 MoveTutor_Text_SwaggerWhichMon:
@@ -14,7 +14,7 @@ MoveTutor_Text_SwaggerWhichMon:
 	.string "{JPN}どの ポケモンが いばりたいんだ?$"
 
 MoveTutor_Text_SwaggerTaught:
-	.string "{JPN}こんどっから いばる かわりに\n"
+	.string "こんどっから いばる かわりに\n"
 	.string "{JPN}じまん するだけに しておくよ……$"
 
 MoveTutor_Text_RolloutTeach:
@@ -26,7 +26,7 @@ MoveTutor_Text_RolloutTeach:
 	.string "{JPN}ころがる なら おしえて あげられるよ$"
 
 MoveTutor_Text_RolloutDeclined:
-	.string "{JPN}えんりょ いらないのに!\n"
+	.string "えんりょ いらないのに!\n"
 	.string "{JPN}ごろ ごろ$"
 
 MoveTutor_Text_RolloutWhichMon:
@@ -34,7 +34,7 @@ MoveTutor_Text_RolloutWhichMon:
 	.string "{JPN}ぼく そっくりの ポケモンだと いいな$"
 
 MoveTutor_Text_RolloutTaught:
-	.string "{JPN}くさに ねころがると しあわせだなー\n"
+	.string "くさに ねころがると しあわせだなー\n"
 	.string "{JPN}ごろ ごろ$"
 
 MoveTutor_Text_FuryCutterTeach:
@@ -46,14 +46,14 @@ MoveTutor_Text_FuryCutterTeach:
 	.string "{JPN}おぼえて みたい?$"
 
 MoveTutor_Text_FuryCutterDeclined:
-	.string "{JPN}きが あわないねぇ$"
+	.string "きが あわないねぇ$"
 
 MoveTutor_Text_FuryCutterWhichMon:
 	.string "{JPN}わーい!\n"
 	.string "{JPN}じゃ おぼえさせる ポケモンを おしえてね$"
 
 MoveTutor_Text_FuryCutterTaught:
-	.string "{JPN}れんぞくして あたるか どうかの\n"
+	.string "れんぞくして あたるか どうかの\n"
 	.string "{JPN}スリルが たのしいんだよねぇ$"
 
 MoveTutor_MimicTeach:
@@ -66,7 +66,7 @@ MoveTutor_MimicTeach:
 	.string "{JPN}ものまねを おしえて やろうかね?$"
 
 MoveTutor_MimicDeclined:
-	.string "{JPN}ちぇっ なーんだ!\n"
+	.string "ちぇっ なーんだ!\n"
 	.string "{JPN}ボク ものまね おしえたいのにな!$"
 
 MoveTutor_Text_MimicWhichMon:
@@ -74,7 +74,7 @@ MoveTutor_Text_MimicWhichMon:
 	.string "{JPN}おしえさせる ポケモンを みせてみぃ$"
 
 MoveTutor_Text_MimicTaught:
-	.string "{JPN}ものまねは おくの ふかい わざじゃ!\n"
+	.string "ものまねは おくの ふかい わざじゃ!\n"
 	.string "{JPN}ボ… わしの ように\l"
 	.string "{JPN}うまく できるかな?$"
 
@@ -89,7 +89,7 @@ MoveTutor_Text_MetronomeTeach:
 	.string "{JPN}ゆびをふる でも おしえて あげよっか?$"
 
 MoveTutor_Text_MetronomeDeclined:
-	.string "{JPN}そっか\n"
+	.string "そっか\n"
 	.string "{JPN}きが むいたら またおいでよ!$"
 
 MoveTutor_Text_MetronomeWhichMon:
@@ -97,7 +97,7 @@ MoveTutor_Text_MetronomeWhichMon:
 	.string "{JPN}どのコが いいのかな?$"
 
 MoveTutor_Text_MetronomeTaught:
-	.string "{JPN}ゆびをふると ステキな ことが\n"
+	.string "ゆびをふると ステキな ことが\n"
 	.string "{JPN}いっぱい おきるんだよー!\p"
 	.string "{JPN}わたしたちも つかえたら いーのにね!$"
 
@@ -111,7 +111,7 @@ MoveTutor_Text_SleepTalkTeach:
 	.string "{JPN}ねごとを おぼえて つかってみんか?$"
 
 MoveTutor_Text_SleepTalkDeclined:
-	.string "{JPN}そうかい そうかい……\n"
+	.string "そうかい そうかい……\n"
 	.string "{JPN}みんな めざめるパワーが だいすきかい$"
 
 MoveTutor_Text_SleepTalkWhichMon:
@@ -119,7 +119,7 @@ MoveTutor_Text_SleepTalkWhichMon:
 	.string "{JPN}さて ポケモンは どいつが いいかな?$"
 
 MoveTutor_Text_SleepTalkTaught:
-	.string "{JPN}ワシ ばあさんの コイン\n"
+	.string "ワシ ばあさんの コイン\n"
 	.string "{JPN}いちども あてたことが なくてな……\l"
 	.string "{JPN}ねごとでも ええから あたらんかな$"
 
@@ -127,7 +127,7 @@ MoveTutor_Text_SubstituteTeach:
 	.string "{JPN}ふう\nこうやって おくじょうから\lひろい せかいを みていると……\pなんにんもの じぶんが いて\nいくつもの じんせいを たのしめたらなー\lって おもうの!\lムリな はなしだけどね うふふ\pそうだわ あなたの ポケモンちゃん!\nみがわりの わざ おぼえてみない?$"
 
 MoveTutor_Text_SubstituteDeclined:
-	.string "{JPN}あら そう?\n"
+	.string "あら そう?\n"
 	.string "{JPN}ポケモンなら じぶんの ぶんしんを\l"
 	.string "{JPN}つくる ことが できるのに$"
 
@@ -136,7 +136,7 @@ MoveTutor_Text_SubstituteWhichMon:
 	.string "{JPN}どの ポケモンちゃんが いいかしら?$"
 
 MoveTutor_Text_SubstituteTaught:
-	.string "{JPN}わたしたち にんげんは\n"
+	.string "わたしたち にんげんは\n"
 	.string "{JPN}じぶんの じんせいを\l"
 	.string "{JPN}おもいきり たのしまなきゃ ね!\l"
 	.string "{JPN}あなたも そうなるように いのってる!$"
@@ -145,7 +145,7 @@ MoveTutor_Text_DynamicPunchTeach:
 	.string "{JPN}もう できんわ!\pぜったい ムリだわ!\pかくとうタイプの オレは\nトクサネの ジムでは\lぜんぜん かてんわ!\pちきしょーっ! ボカ ボカ!\nボカ ボカ! ボカ ボカ!\pなんだよ\nそんな めで みるなよ!\lじめんを なぐってる だけだろ!\pそれとも おまえの ポケモンに\nばくれつパンチを おしえて ほしいのかよ?$"
 
 MoveTutor_Text_DynamicPunchDeclined:
-	.string "{JPN}ちきしょー おまえまで\n"
+	.string "ちきしょー おまえまで\n"
 	.string "{JPN}オレを ばかに するかっ!?\l"
 	.string "{JPN}ボカ ボカ!$"
 
@@ -154,14 +154,14 @@ MoveTutor_Text_DynamicPunchWhichMon:
 	.string "{JPN}どのポケモンに おしえれば いい?$"
 
 MoveTutor_Text_DynamicPunchTaught:
-	.string "{JPN}なあ ばくれつパンチ つかって\n"
+	.string "なあ ばくれつパンチ つかって\n"
 	.string "{JPN}トクサネジムで かって きてくれよ!$"
 
 MoveTutor_Text_DoubleEdgeTeach:
 	.string "{JPN}あーあ\nルネシティの ジムリーダーって\lすっごく すてきだから\lライバルが いっぱい なのよねー\pこの あたしが すてみで ぶつかっても\nダメだったわ!\pねえ あなた!\nせっかく だから この あたしの\lじきでんの すてみタックル!\lあなたの ポケモンに おしえさせてよ!$"
 
 MoveTutor_Text_DoubleEdgeDeclined:
-	.string "{JPN}うん もう!\n"
+	.string "うん もう!\n"
 	.string "{JPN}あなたに まで ふられちゃったわ$"
 
 MoveTutor_Text_DoubleEdgeWhichMon:
@@ -169,7 +169,7 @@ MoveTutor_Text_DoubleEdgeWhichMon:
 	.string "{JPN}どの ポケモンが いいか きめてよ$"
 
 MoveTutor_Text_DoubleEdgeTaught:
-	.string "{JPN}もう いいわっ!\n"
+	.string "もう いいわっ!\n"
 	.string "{JPN}あたしも こいを すてて\l"
 	.string "{JPN}つよい オンナに なってやるっ!$"
 
@@ -183,7 +183,7 @@ MoveTutor_Text_ExplosionTeach:
 	.string "{JPN}けいきよく だいばくはつを おしえさせろ!$"
 
 MoveTutor_Text_ExplosionDeclined:
-	.string "{JPN}がーっ!\n"
+	.string "がーっ!\n"
 	.string "{JPN}イナカもん だからって ことわるなあ!$"
 
 MoveTutor_Text_ExplosionWhichMon:
@@ -191,7 +191,7 @@ MoveTutor_Text_ExplosionWhichMon:
 	.string "{JPN}どの ポケモンが ぶちかますんか?$"
 
 MoveTutor_Text_ExplosionTaught:
-	.string "{JPN}いつも ポケモンに ばっか\n"
+	.string "いつも ポケモンに ばっか\n"
 	.string "{JPN}だいばくはつを おしえとって\l"
 	.string "{JPN}かんじんの ぼくは いつまでも\l"
 	.string "{JPN}ばくはつ できん……\p"

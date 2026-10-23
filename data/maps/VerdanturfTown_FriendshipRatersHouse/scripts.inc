@@ -63,29 +63,29 @@ VerdanturfTown_FriendshipRatersHouse_EventScript_Pikachu::
 	end
 
 VerdanturfTown_FriendshipRatersHouse_Text_SeeHowMuchPokemonLikesYou:
-	.string "{JPN}あなたの ポケモンが\nどれくらい なついているか みてあげる\pあら……\nあなたの ポケモン$"
+	.string "あなたの ポケモンが\nどれくらい なついているか みてあげる\pあら……\nあなたの ポケモン$"
 
 VerdanturfTown_FriendshipRatersHouse_Text_AdoresYou:
-	.string "{JPN}これいじょうは ない ってぐらい\nあなたに なついているわね\lみている こっちも しあわせに なるわ!$"
+	.string "これいじょうは ない ってぐらい\nあなたに なついているわね\lみている こっちも しあわせに なるわ!$"
 
 VerdanturfTown_FriendshipRatersHouse_Text_VeryHappy:
-	.string "{JPN}なんだか しあわせそう\nすごく あなたに なついているわね$"
+	.string "なんだか しあわせそう\nすごく あなたに なついているわね$"
 
 VerdanturfTown_FriendshipRatersHouse_Text_LikesYouQuiteALot:
-	.string "{JPN}かなり なついているわね\nあなたに あまえたそうに しているわよ$"
+	.string "かなり なついているわね\nあなたに あまえたそうに しているわよ$"
 
 VerdanturfTown_FriendshipRatersHouse_Text_GettingUsedToYou:
-	.string "{JPN}ちょっと なついてきた って かんじ かな\nあなたのこと しんじている みたい$"
+	.string "ちょっと なついてきた って かんじ かな\nあなたのこと しんじている みたい$"
 
 VerdanturfTown_FriendshipRatersHouse_Text_NotUsedToYou:
-	.string "{JPN}まだ あなたに なれていない ようね\nふつうの かんけい って かんじが するわ$"
+	.string "まだ あなたに なれていない ようね\nふつうの かんけい って かんじが するわ$"
 
 VerdanturfTown_FriendshipRatersHouse_Text_VeryWary:
-	.string "{JPN}…… なんだか けいかい しているみたい\nめつきも ちょっと こわいし\lぜんぜん あなたに なついていないわ$"
+	.string "…… なんだか けいかい しているみたい\nめつきも ちょっと こわいし\lぜんぜん あなたに なついていないわ$"
 
 VerdanturfTown_FriendshipRatersHouse_Text_DetestsYou:
-	.string "{JPN}…… ちょっと いいづらいんだけど\pあなた じぶんの ポケモンに\nそんなに きらわれていて だいじょうぶ?$"
+	.string "…… ちょっと いいづらいんだけど\pあなた じぶんの ポケモンに\nそんなに きらわれていて だいじょうぶ?$"
 
 VerdanturfTown_FriendshipRatersHouse_Text_Pikachu:
-	.string "{JPN}ピカチュウ『ピカピカッ!$"
+	.string "ピカチュウ『ピカピカッ!$"
 

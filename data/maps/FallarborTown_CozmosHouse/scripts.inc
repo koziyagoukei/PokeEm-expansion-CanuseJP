@@ -65,29 +65,29 @@ FallarborTown_CozmosHouse_EventScript_CozmoIsHappy::
 	end
 
 FallarborTown_CozmosHouse_Text_MeteoriteWillNeverBeMineNow:
-	.string "{JPN}ソライシ『ああ……\nマグマだんに だまされたからと いって\lいんせきが てに はいる ばしょを\lおしえてしまったら だめ だなあ……\pりゅうせいのたき の いんせき\nもう ぼくの モノには ならないよな……$"
+	.string "ソライシ『ああ……\nマグマだんに だまされたからと いって\lいんせきが てに はいる ばしょを\lおしえてしまったら だめ だなあ……\pりゅうせいのたき の いんせき\nもう ぼくの モノには ならないよな……$"
 
 FallarborTown_CozmosHouse_Text_IsThatMeteoriteMayIHaveIt:
-	.string "{JPN}おお! ええ?\pそれは……\pもしかして もしかすると……\pマグマだんが りゅうせいのたき から\nもっていった いんせき ですか……!?\pよかったら ぼくに ください!\pただで とは いいません\nかわりに この わざマシンを\lあげますから……$"
+	.string "おお! ええ?\pそれは……\pもしかして もしかすると……\pマグマだんが りゅうせいのたき から\nもっていった いんせき ですか……!?\pよかったら ぼくに ください!\pただで とは いいません\nかわりに この わざマシンを\lあげますから……$"
 
 FallarborTown_CozmosHouse_Text_PleaseUseThisTM:
-	.string "{JPN}ソライシ『この わざマシンは\nぼくの きもちです\lぜひ つかってください!$"
+	.string "ソライシ『この わざマシンは\nぼくの きもちです\lぜひ つかってください!$"
 
 FallarborTown_CozmosHouse_Text_ReallyGoingToHelpMyResearch:
-	.string "{JPN}ソライシ『いやー すごく うれしいな\nこれで ぼくの けんきゅうも はかどります!$"
+	.string "ソライシ『いやー すごく うれしいな\nこれで ぼくの けんきゅうも はかどります!$"
 
 FallarborTown_CozmosHouse_Text_CrushedWithDisappointment:
-	.string "{JPN}ソライシ『そんな……\nものすごく がっかりだよ……$"
+	.string "ソライシ『そんな……\nものすごく がっかりだよ……$"
 
 FallarborTown_CozmosHouse_Text_MayIHaveMeteorite:
-	.string "{JPN}ソライシ『その いんせき……\nよかったら ぼくに ください!\pただで とは いいません\nかわりに この わざマシンを\lあげますから……$"
+	.string "ソライシ『その いんせき……\nよかったら ぼくに ください!\pただで とは いいません\nかわりに この わざマシンを\lあげますから……$"
 
 FallarborTown_CozmosHouse_Text_CozmoWentToMeteorFalls:
-	.string "{JPN}ソライシはかせは\nマグマだんの ひとと いっしょに\l114ばん どうろに ある\lりゅうせいのたきに いきましたよ$"
+	.string "ソライシはかせは\nマグマだんの ひとと いっしょに\l114ばん どうろに ある\lりゅうせいのたきに いきましたよ$"
 
 FallarborTown_CozmosHouse_Text_FeelSorryForCozmo:
-	.string "{JPN}ソライシはかせ……\nあんなに おちこんで かわいそう!$"
+	.string "ソライシはかせ……\nあんなに おちこんで かわいそう!$"
 
 FallarborTown_CozmosHouse_Text_CozmoIsSoHappy:
-	.string "{JPN}ソライシはかせ ったら\nあんなに よろこんで かわいい!$"
+	.string "ソライシはかせ ったら\nあんなに よろこんで かわいい!$"
 

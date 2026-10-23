@@ -47,8 +47,8 @@ ShoalCave_LowTideLowerRoom_EventScript_ReceivedFocusBand::
 	end
 
 ShoalCave_LowTideLowerRoom_Text_CanOvercomeColdWithFocus:
-	.string "{JPN}このあたりは からだが ひえきって\nしゅぎょう するのも ままならぬ……\pだが きあいが あれば だいじょうぶッ!\pおぬしも この きあいのハチマキで\nさむさに たえてみせるのだッ!$"
+	.string "このあたりは からだが ひえきって\nしゅぎょう するのも ままならぬ……\pだが きあいが あれば だいじょうぶッ!\pおぬしも この きあいのハチマキで\nさむさに たえてみせるのだッ!$"
 
 ShoalCave_LowTideLowerRoom_Text_EverythingStartsWithFocus:
-	.string "{JPN}なにごとも きあい なのだーッ!!$"
+	.string "なにごとも きあい なのだーッ!!$"
 

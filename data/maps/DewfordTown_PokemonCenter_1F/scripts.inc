@@ -25,11 +25,11 @@ DewfordTown_PokemonCenter_1F_EventScript_Man::
 	end
 
 DewfordTown_PokemonCenter_1F_Text_StoneCavern:
-	.string "{JPN}まちの はずれの いしのどうくつ には\n"
+	.string "まちの はずれの いしのどうくつ には\n"
 	.string "めずらしい いしが あるって きいたわ$"
 
 DewfordTown_PokemonCenter_1F_Text_FaintedMonCanUseHM:
-	.string "{JPN}つかれて たたかうことの できない\n"
+	.string "つかれて たたかうことの できない\n"
 	.string "ポケモンだって ひでんと いわれる\l"
 	.string "わざは つかうことが できるよ！$"
 

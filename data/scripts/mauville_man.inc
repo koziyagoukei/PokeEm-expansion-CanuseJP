@@ -87,46 +87,46 @@ MauvilleCity_PokemonCenter_1F_EventScript_TeachWord::
 
 @ Trader
 MauvilleCity_PokemonCenter_1F_Text_WantToTradeDecor:
-	.string "{JPN}わし グッズこうかんオヤジ\nわしと グッズの こうかん する?$"
+	.string "わし グッズこうかんオヤジ\nわしと グッズの こうかん する?$"
 
 MauvilleCity_PokemonCenter_1F_Text_TraderFeelingTheBlues:
-	.string "{JPN}そう……\nわし ざんねん……$"
+	.string "そう……\nわし ざんねん……$"
 
 MauvilleCity_PokemonCenter_1F_Text_WeveAlreadyTraded:
-	.string "{JPN}でも きみとは このまえ\nグッズの こうかん したよね$"
+	.string "でも きみとは このまえ\nグッズの こうかん したよね$"
 
 MauvilleCity_PokemonCenter_1F_Text_PickADecorItem:
-	.string "{JPN}これ わしが もってる グッズ\nなにか ほしいの あったら いってね$"
+	.string "これ わしが もってる グッズ\nなにか ほしいの あったら いってね$"
 
 MauvilleCity_PokemonCenter_1F_Text_YouDontWantAnything:
-	.string "{JPN}ほしい グッズ ないの?\nわし ざんねん……$"
+	.string "ほしい グッズ ないの?\nわし ざんねん……$"
 
 MauvilleCity_PokemonCenter_1F_Text_OnceBelongedToPlayerDoYouWantIt:
-	.string "{JPN}それは {STR_VAR_1}さんが\nつかってた グッズ だよ\pこれに するかい?$"
+	.string "それは {STR_VAR_1}さんが\nつかってた グッズ だよ\pこれに するかい?$"
 
 MauvilleCity_PokemonCenter_1F_Text_YouDontHaveAnyDecor:
-	.string "{JPN}……って きみ グッズ\nひとつも もってない じゃん!$"
+	.string "……って きみ グッズ\nひとつも もってない じゃん!$"
 
 MauvilleCity_PokemonCenter_1F_Text_PickTheDecorToTrade:
-	.string "{JPN}じゃあ こうかんに だしてくれる\nグッズを えらんで!$"
+	.string "じゃあ こうかんに だしてくれる\nグッズを えらんで!$"
 
 MauvilleCity_PokemonCenter_1F_Text_YouDontWantToTrade:
-	.string "{JPN}こうかん して くれないの?\nわし ざんねん……$"
+	.string "こうかん して くれないの?\nわし ざんねん……$"
 
 MauvilleCity_PokemonCenter_1F_Text_YouveNoRoomForThis:
-	.string "{JPN}きみ {STR_VAR_2}が いっぱいで\nもう もてないよ$"
+	.string "きみ {STR_VAR_2}が いっぱいで\nもう もてないよ$"
 
 MauvilleCity_PokemonCenter_1F_Text_SoWellTradeTheseDecor:
-	.string "{JPN}じゃあ わしの {STR_VAR_3}と\nきみの {STR_VAR_2}を こうかんするよ?$"
+	.string "じゃあ わしの {STR_VAR_3}と\nきみの {STR_VAR_2}を こうかんするよ?$"
 
 MauvilleCity_PokemonCenter_1F_Text_ThatDecorIsInUse:
-	.string "{JPN}きみ いま そのグッズ かざってるね\nかざってる グッズは こうかん できないよ$"
+	.string "きみ いま そのグッズ かざってるね\nかざってる グッズは こうかん できないよ$"
 
 MauvilleCity_PokemonCenter_1F_Text_SendDecorToYourPC:
-	.string "{JPN}じゃあ こうかん!\lきみの パソコンに\nグッズを おくっておくよ$"
+	.string "じゃあ こうかん!\lきみの パソコンに\nグッズを おくっておくよ$"
 
 MauvilleCity_PokemonCenter_1F_Text_CantTradeThatOne:
-	.string "{JPN}ああ! ごめん!\nそれ とっても レアな グッズ だから\lこうかん できないんだ!\pほかに ほしい グッズ ある?$"
+	.string "ああ! ごめん!\nそれ とっても レアな グッズ だから\lこうかん できないんだ!\pほかに ほしい グッズ ある?$"
 
 MauvilleCity_PokemonCenter_1F_EventScript_Trader::
 	lock
@@ -214,35 +214,35 @@ MauvilleCity_PokemonCenter_1F_EventScript_NoRoomForDecor::
 
 @ Storyteller
 MauvilleCity_PokemonCenter_1F_Text_WillYouHearMyTale:
-	.string "{JPN}わし でんせつおやじ\nでんせつの トレーナーの はなし するよ\pわしの ハナシ ききたい?$"
+	.string "わし でんせつおやじ\nでんせつの トレーナーの はなし するよ\pわしの ハナシ ききたい?$"
 
 MauvilleCity_PokemonCenter_1F_Text_StorytellerFeelingTheBlues:
-	.string "{JPN}そう……\nわし ざんねん……$"
+	.string "そう……\nわし ざんねん……$"
 
 MauvilleCity_PokemonCenter_1F_Text_WhichTaleToTell:
-	.string "{JPN}わしが しってる でんせつは これだけ\nどの でんせつが ききたい?$"
+	.string "わしが しってる でんせつは これだけ\nどの でんせつが ききたい?$"
 
 MauvilleCity_PokemonCenter_1F_Text_IKnowNoTales:
-	.string "{JPN}でも わし……\nでんせつの トレーナーの はなし\lなにも しらない\pどこかに でんせつに のこる\nトレーナーは いないかなあ$"
+	.string "でも わし……\nでんせつの トレーナーの はなし\lなにも しらない\pどこかに でんせつに のこる\nトレーナーは いないかなあ$"
 
 MauvilleCity_PokemonCenter_1F_Text_YouDidStatXTimes:
-	.string "{JPN}……え!!!\pきみ {STR_VAR_1}かい も\n{STR_VAR_2} の!?\p……ううむ それは すごい!\nあたらしい でんせつの はじまりだ!$"
+	.string "……え!!!\pきみ {STR_VAR_1}かい も\n{STR_VAR_2} の!?\p……ううむ それは すごい!\nあたらしい でんせつの はじまりだ!$"
 
 MauvilleCity_PokemonCenter_1F_Text_CouldThereBeOtherLegends:
-	.string "{JPN}これより もっとすごい\nでんせつを もってる トレーナー\lどこかに いない かなあ…$"
+	.string "これより もっとすごい\nでんせつを もってる トレーナー\lどこかに いない かなあ…$"
 
 MauvilleCity_PokemonCenter_1F_Text_HaveYouAnyLegendaryTales:
-	.string "{JPN}……きみ トレーナー?\pだったら なにか でんせつっぽい はなし\nきかせてよ$"
+	.string "……きみ トレーナー?\pだったら なにか でんせつっぽい はなし\nきかせてよ$"
 
 @ Unused
 MauvilleCity_PokemonCenter_1F_Text_HearAnotherLegendaryTale:
 	.string "{JPN}ところで…\nまだ でんせつ ききたい?$"
 
 MauvilleCity_PokemonCenter_1F_Text_NotWorthyOfLegend:
-	.string "{JPN}……うーん ものたりない なあ\pもっと すごい はなしを\nきかせて ほしいなあ$"
+	.string "……うーん ものたりない なあ\pもっと すごい はなしを\nきかせて ほしいなあ$"
 
 MauvilleCity_PokemonCenter_1F_Text_IWishMorePeopleWereInterested:
-	.string "{JPN}もっと たくさんの ひとに\nでんせつの トレーナーの はなし\lきいて ほしいなあ$"
+	.string "もっと たくさんの ひとに\nでんせつの トレーナーの はなし\lきいて ほしいなあ$"
 
 MauvilleCity_PokemonCenter_1F_Text_SavedGameTitle::
 	.string "{JPN}レポートを かきまくった トレーナー$"
@@ -635,16 +635,16 @@ MauvilleCity_PokemonCenter_1F_EventScript_StorytellerEnd::
 
 @ Giddy
 MauvilleCity_PokemonCenter_1F_Text_HearMyStory:
-	.string "{JPN}わし メルヘンおやじ\nとても いい はなし するよ\pわしの ハナシ ききたい?$"
+	.string "わし メルヘンおやじ\nとても いい はなし するよ\pわしの ハナシ ききたい?$"
 
 MauvilleCity_PokemonCenter_1F_Text_GiddyFeelingTheBlues:
-	.string "{JPN}そう…\nわし ざんねん…$"
+	.string "そう…\nわし ざんねん…$"
 
 MauvilleCity_PokemonCenter_1F_Text_AlsoIWasThinking:
-	.string "{JPN}あと おもったんだけどさ…$"
+	.string "あと おもったんだけどさ…$"
 
 MauvilleCity_PokemonCenter_1F_Text_WeShouldChatAgain:
-	.string "{JPN}そのぐらい かな・・・\pまた はなし しようね!\nばいばい!$"
+	.string "そのぐらい かな・・・\pまた はなし しようね!\nばいばい!$"
 
 MauvilleCity_PokemonCenter_1F_EventScript_Giddy::
 	lock
@@ -693,37 +693,37 @@ MauvilleCity_PokemonCenter_1F_EventScript_ToldEnoughTales::
 	end
 
 MauvilleCity_PokemonCenter_1F_Text_WouldYouLikeToHearMySong:
-	.string "{JPN}わし シンガーソングおやじ\nわしの うた きいてくれる?$"
+	.string "わし シンガーソングおやじ\nわしの うた きいてくれる?$"
 
 MauvilleCity_PokemonCenter_1F_Text_BardFeelingTheBlues1:
-	.string "{JPN}そう……\nわし ざんねん……$"
+	.string "そう……\nわし ざんねん……$"
 
 MauvilleCity_PokemonCenter_1F_Text_WishICouldPlaySongForOthers:
-	.string "{JPN}あぁ いい うた だなぁ\nほかの ひとにも きかせて みたいなあ$"
+	.string "あぁ いい うた だなぁ\nほかの ひとにも きかせて みたいなあ$"
 
 MauvilleCity_PokemonCenter_1F_Text_WouldYouLikeToWriteSomeLyrics:
-	.string "{JPN}どう? わしの うた?\pでも ちょっと かしが きにいらない\pだから きみ ちょっと かえてくれる?$"
+	.string "どう? わしの うた?\pでも ちょっと かしが きにいらない\pだから きみ ちょっと かえてくれる?$"
 
 MauvilleCity_PokemonCenter_1F_Text_BardFeelingTheBlues2:
-	.string "{JPN}そう……\nわし ざんねん……$"
+	.string "そう……\nわし ざんねん……$"
 
 MauvilleCity_PokemonCenter_1F_Text_LetMeSingItForYou:
-	.string "{JPN}ありがとう!\nじゃあ うたって みるぞ!$"
+	.string "ありがとう!\nじゃあ うたって みるぞ!$"
 
 MauvilleCity_PokemonCenter_1F_Text_ThatHowYouWantedSongToGo:
-	.string "{JPN}こんな かんじで いいの?$"
+	.string "こんな かんじで いいの?$"
 
 MauvilleCity_PokemonCenter_1F_Text_IllSingThisSongForAWhile:
-	.string "{JPN}よし わかった!\nしばらく このうたを うたって みるよ!$"
+	.string "よし わかった!\nしばらく このうたを うたって みるよ!$"
 
 MauvilleCity_PokemonCenter_1F_Text_TeachWhatsHipAndHappening:
-	.string "{JPN}わし ナウイおやじ\nいまどきの ナウイことば おしえるよ$"
+	.string "わし ナウイおやじ\nいまどきの ナウイことば おしえるよ$"
 
 MauvilleCity_PokemonCenter_1F_Text_IAlreadyTaughtYou:
-	.string "{JPN}でも きみには このまえ おしえたよね\pこんどは ほかの ひとに おしえたいなぁ$"
+	.string "でも きみには このまえ おしえたよね\pこんどは ほかの ひとに おしえたいなぁ$"
 
 MauvilleCity_PokemonCenter_1F_Text_IveGotNothingNewToTeach:
-	.string "{JPN}でも きみ ことば たくさん しってるね\nおしえること ぜんぜん ないよ$"
+	.string "でも きみ ことば たくさん しってるね\nおしえること ぜんぜん ないよ$"
 
 MauvilleCity_PokemonCenter_1F_Text_HaveYouHeardOfWord:
-	.string "{JPN}きみ {STR_VAR_1}って\nことば しってる?\pいみ? それはね……\nおとうさんか おかあさんに きいてみて$"
+	.string "きみ {STR_VAR_1}って\nことば しってる?\pいみ? それはね……\nおとうさんか おかあさんに きいてみて$"

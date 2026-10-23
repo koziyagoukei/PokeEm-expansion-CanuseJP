@@ -29,11 +29,11 @@ LavaridgeTown_PokemonCenter_1F_EventScript_Gentleman::
 	end
 
 LavaridgeTown_PokemonCenter_1F_Text_TrainersPokemonSpendTimeTogether:
-	.string "{JPN}ポケモンと いっしょに あるいていると\nなんだか ポケモンが なついてくれるような\lそんな きが するのよね$"
+	.string "ポケモンと いっしょに あるいていると\nなんだか ポケモンが なついてくれるような\lそんな きが するのよね$"
 
 LavaridgeTown_PokemonCenter_1F_Text_HotSpringCanInvigorate:
-	.string "{JPN}おんせんに はいる だけで\nげんきに なるなんて ふしぎだなー!\lポケモンも いれて あげたいなー$"
+	.string "おんせんに はいる だけで\nげんきに なるなんて ふしぎだなー!\lポケモンも いれて あげたいなー$"
 
 LavaridgeTown_PokemonCenter_1F_Text_TrainersShouldRestToo:
-	.string "{JPN}ほっほっほ! おわかいの\nここから おんせんに いけますぞ!\pポケモンが ここで やすむのなら\nひとも おんせんで ゆっくり しませんと!$"
+	.string "ほっほっほ! おわかいの\nここから おんせんに いけますぞ!\pポケモンが ここで やすむのなら\nひとも おんせんで ゆっくり しませんと!$"
 

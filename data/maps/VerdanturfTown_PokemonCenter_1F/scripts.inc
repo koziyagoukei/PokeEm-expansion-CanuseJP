@@ -25,8 +25,8 @@ VerdanturfTown_PokemonCenter_1F_EventScript_ExpertM::
 	end
 
 VerdanturfTown_PokemonCenter_1F_Text_FaithInYourPokemon:
-	.string "{JPN}ポケモンを しんじられない ようでは\nいちにんまえ とは いえないね\pたたかう ポケモンたちを\nさいごまで しんじる ものだけが\lかちぬく ことが できるんだ$"
+	.string "ポケモンを しんじられない ようでは\nいちにんまえ とは いえないね\pたたかう ポケモンたちを\nさいごまで しんじる ものだけが\lかちぬく ことが できるんだ$"
 
 VerdanturfTown_PokemonCenter_1F_Text_VisitForBattleTent:
-	.string "{JPN}シダケにくる りゆうと いえば\nずばり バトルテントじゃろ?\pそれとも だれか あいたい ひとでも\nいるのかね?$"
+	.string "シダケにくる りゆうと いえば\nずばり バトルテントじゃろ?\pそれとも だれか あいたい ひとでも\nいるのかね?$"
 

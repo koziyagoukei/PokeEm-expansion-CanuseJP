@@ -324,7 +324,7 @@ VerdanturfTown_BattleTentLobby_EventScript_ExitRules::
 	end
 
 VerdanturfTown_BattleTentLobby_Text_MonsReluctantToUseDislikedMoves:
-	.string "{JPN}どんなに つよい ポケモンも\n"
+	.string "どんなに つよい ポケモンも\n"
 	.string "きらいな わざは できるだけ\l"
 	.string "つかいたく ない みたい\p"
 	.string "たとえば おとなしい せいかくの\n"
@@ -335,29 +335,29 @@ VerdanturfTown_BattleTentLobby_Text_MonsReluctantToUseDislikedMoves:
 	.string "だそう として しっぱい してるんだよ$"
 
 VerdanturfTown_BattleTentLobby_Text_GentleMonsScaryIfAngry:
-	.string "{JPN}でもでも ぼくの おねえちゃん って\n"
+	.string "でもでも ぼくの おねえちゃん って\n"
 	.string "ふだんは とっても おとなしい けど\l"
 	.string "おこると すっごーーーく こわーーーいよ！\p"
 	.string "だから おとなしい ポケモン だって\n"
 	.string "おこったら きっと こわーーーいよ！！$"
 
 VerdanturfTown_BattleTentLobby_Text_AttractionRunsDeep:
-	.string "{JPN}あたしの ポケモンへの きもち……\nそれは まさに メロメロなのよ……\pあら へんなところ みられちゃった\pまあ いいわ\nあなたの ポケモンに\lこの わざマシンは いかが?$"
+	.string "あたしの ポケモンへの きもち……\nそれは まさに メロメロなのよ……\pあら へんなところ みられちゃった\pまあ いいわ\nあなたの ポケモンに\lこの わざマシンは いかが?$"
 
 VerdanturfTown_BattleTentLobby_Text_AttractionMutual:
-	.string "{JPN}ポケモンの あたしへの きもちも……\nやっぱり メロメロに ちがいないわ!\pだって あたしの おもう とおりに\nたたかって くれるもの!$"
+	.string "ポケモンの あたしへの きもちも……\nやっぱり メロメロに ちがいないわ!\pだって あたしの おもう とおりに\nたたかって くれるもの!$"
 
 VerdanturfTown_BattleTentLobby_Text_TaughtWhatKindsOfMoves:
-	.string "{JPN}きみの ポケモンには\n"
+	.string "きみの ポケモンには\n"
 	.string "どんなわざを もたせて いるんだい？\p"
 	.string "やっぱり じぶんを かいふくしたり\n"
 	.string "ぼうぎょを あげたり するわざが あると\l"
 	.string "ゆうり だと おもうんだよ$"
 
 VerdanturfTown_BattleTentLobby_Text_ScottCanMeetToughTrainers:
-	.string "{JPN}エニシダ『これは これは\n{PLAYER}{KUN} あえると おもってたよ!\pバトルテント って いうのはさ!\nどんな ルール だって\lどんな たたかいかた だって\lかんけいなく つよい トレーナーと\lであえる ばしょだと おもうよ!\p{PLAYER}{KUN}も めいっぱい\nがんばってよ!$"
+	.string "エニシダ『これは これは\n{PLAYER}{KUN} あえると おもってたよ!\pバトルテント って いうのはさ!\nどんな ルール だって\lどんな たたかいかた だって\lかんけいなく つよい トレーナーと\lであえる ばしょだと おもうよ!\p{PLAYER}{KUN}も めいっぱい\nがんばってよ!$"
 
 VerdanturfTown_BattleTentLobby_Text_ScottVisitRegularly:
-	.string "{JPN}エニシダ『どんな ときにも つよい\n"
+	.string "エニシダ『どんな ときにも つよい\n"
 	.string "トレーナーに あいたくって\l"
 	.string "わたしは ここに かよって いるんだよね$"

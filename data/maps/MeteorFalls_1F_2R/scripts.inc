@@ -61,122 +61,122 @@ MeteorFalls_1F_2R_EventScript_RematchJay::
 	end
 
 MeteorFalls_1F_2R_Text_NicolasIntro:
-	.string "{JPN}ここは オレたち\nドラゴンつかいの しゅぎょうの ばしょ!\pチャンピオンも くる ばしょ といったら\nその すごさ わかるだろうか!?"
+	.string "ここは オレたち\nドラゴンつかいの しゅぎょうの ばしょ!\pチャンピオンも くる ばしょ といったら\nその すごさ わかるだろうか!?"
 	.string ""
 	.string ""
 	.string "$"
 
 MeteorFalls_1F_2R_Text_NicolasDefeat:
-	.string "{JPN}くっ!\nこれほど つよいとは……!"
+	.string "くっ!\nこれほど つよいとは……!"
 	.string "$"
 
 MeteorFalls_1F_2R_Text_NicolasPostBattle:
-	.string "{JPN}まだまだ みちは ながく けわしい\pオレと オレの ポケモンが\nいちばんに なれるのは いつだろう……"
+	.string "まだまだ みちは ながく けわしい\pオレと オレの ポケモンが\nいちばんに なれるのは いつだろう……"
 	.string ""
 	.string "$"
 
 MeteorFalls_1F_2R_Text_NicolasRegister:
-	.string "{JPN}きみの つよさを もっと しりたい\nポケナビに とうろく させてくれ!"
+	.string "きみの つよさを もっと しりたい\nポケナビに とうろく させてくれ!"
 	.string "$"
 
 MeteorFalls_1F_2R_Text_NicolasRematchIntro:
-	.string "{JPN}あれから いちばん めざして\nかなり じぶんたちを きたえた……\pどれほど つよくなったか\nきみで たしかめさせて もらおうッ!"
+	.string "あれから いちばん めざして\nかなり じぶんたちを きたえた……\pどれほど つよくなったか\nきみで たしかめさせて もらおうッ!"
 	.string ""
 	.string ""
 	.string "$"
 
 MeteorFalls_1F_2R_Text_NicolasRematchDefeat:
-	.string "{JPN}くっ!\nこれほど つよいとは……!"
+	.string "くっ!\nこれほど つよいとは……!"
 	.string "$"
 
 MeteorFalls_1F_2R_Text_NicolasPostRematch:
-	.string "{JPN}あいかわらず ポケモンを きたえてるな\pきみが その つよさで あるかぎり\nオレも つよくなれるよ!"
+	.string "あいかわらず ポケモンを きたえてるな\pきみが その つよさで あるかぎり\nオレも つよくなれるよ!"
 	.string ""
 	.string ""
 	.string "$"
 
 MeteorFalls_1F_2R_Text_JohnIntro:
-	.string "{JPN}ゲン『わしらは いつも ふうふで\nポケモンを しておるからのう\lしょうぶにも じしんが あるんじゃよ"
+	.string "ゲン『わしらは いつも ふうふで\nポケモンを しておるからのう\lしょうぶにも じしんが あるんじゃよ"
 	.string ""
 	.string "$"
 
 MeteorFalls_1F_2R_Text_JohnDefeat:
-	.string "{JPN}ゲン『おやおや\nまけたよ ばあさん"
+	.string "ゲン『おやおや\nまけたよ ばあさん"
 	.string "$"
 
 MeteorFalls_1F_2R_Text_JohnPostBattle:
-	.string "{JPN}ゲン『けっこんして 50ねん……\nそういや いちども ばあさんに\lポケモンしょうぶで かってないのう"
+	.string "ゲン『けっこんして 50ねん……\nそういや いちども ばあさんに\lポケモンしょうぶで かってないのう"
 	.string ""
 	.string ""
 	.string "$"
 
 MeteorFalls_1F_2R_Text_JohnNotEnoughMons:
-	.string "{JPN}ゲン『おやおや\nわかい トレーナー じゃな!\pわしらと しょうぶ してくれるのなら\nポケモンを もっと つれてきなされ"
+	.string "ゲン『おやおや\nわかい トレーナー じゃな!\pわしらと しょうぶ してくれるのなら\nポケモンを もっと つれてきなされ"
 	.string ""
 	.string "$"
 
 MeteorFalls_1F_2R_Text_JohnRegister:
-	.string "{JPN}ゲン『わかい トレーナーさん……\nまた きかいが あれば\lわしらと たたかって くれんかのう"
+	.string "ゲン『わかい トレーナーさん……\nまた きかいが あれば\lわしらと たたかって くれんかのう"
 	.string "$"
 
 MeteorFalls_1F_2R_Text_JayIntro:
-	.string "{JPN}ハツ『けっこんして 50ねん……\nわたしら ふうふの きずなは\lどんな ものでも きれませんよ"
+	.string "ハツ『けっこんして 50ねん……\nわたしら ふうふの きずなは\lどんな ものでも きれませんよ"
 	.string ""
 	.string ""
 	.string "$"
 
 MeteorFalls_1F_2R_Text_JayDefeat:
-	.string "{JPN}ハツ『おやおや\nまけましたよ じいさん"
+	.string "ハツ『おやおや\nまけましたよ じいさん"
 	.string "$"
 
 MeteorFalls_1F_2R_Text_JayPostBattle:
-	.string "{JPN}ハツ『けっこんして 50ねん……\nふうふげんかに なるたび\lポケモンしょうぶを していましたねえ"
+	.string "ハツ『けっこんして 50ねん……\nふうふげんかに なるたび\lポケモンしょうぶを していましたねえ"
 	.string ""
 	.string "$"
 
 MeteorFalls_1F_2R_Text_JayNotEnoughMons:
-	.string "{JPN}ハツ『おやおや\nわかい トレーナーさん ですねえ\pわしらと しょうぶ してくれるのなら\nポケモンを もっと つれておいで"
+	.string "ハツ『おやおや\nわかい トレーナーさん ですねえ\pわしらと しょうぶ してくれるのなら\nポケモンを もっと つれておいで"
 	.string ""
 	.string ""
 	.string "$"
 
 MeteorFalls_1F_2R_Text_JohnRematchIntro:
-	.string "{JPN}ゲン『わしらは いつも ふうふで\nポケモンを たのしんでおる からのう\lしょうぶにも じしんが あるんじゃよ"
+	.string "ゲン『わしらは いつも ふうふで\nポケモンを たのしんでおる からのう\lしょうぶにも じしんが あるんじゃよ"
 	.string ""
 	.string "$"
 
 MeteorFalls_1F_2R_Text_JohnRematchDefeat:
-	.string "{JPN}ゲン『おやおや\nまけたよ ばあさん"
+	.string "ゲン『おやおや\nまけたよ ばあさん"
 	.string "$"
 
 MeteorFalls_1F_2R_Text_JohnPostRematch:
-	.string "{JPN}ゲン『けっこんして 50ねん……\nそういや まいにち まいにち\lばあさんと しょうぶ していたのう"
+	.string "ゲン『けっこんして 50ねん……\nそういや まいにち まいにち\lばあさんと しょうぶ していたのう"
 	.string ""
 	.string "$"
 
 MeteorFalls_1F_2R_Text_JohnRematchNotEnoughMons:
-	.string "{JPN}ゲン『おやおや\nわかい トレーナー じゃな!\pわしらと しょうぶ してくれるのなら\nポケモンを もっと つれてきなされ"
+	.string "ゲン『おやおや\nわかい トレーナー じゃな!\pわしらと しょうぶ してくれるのなら\nポケモンを もっと つれてきなされ"
 	.string ""
 	.string "$"
 
 MeteorFalls_1F_2R_Text_JayRematchIntro:
-	.string "{JPN}ハツ『けっこんして 50ねん……\nおたがいを ささえあってきた\lわたしら ふうふは つよいですよ"
+	.string "ハツ『けっこんして 50ねん……\nおたがいを ささえあってきた\lわたしら ふうふは つよいですよ"
 	.string ""
 	.string ""
 	.string "$"
 
 MeteorFalls_1F_2R_Text_JayRematchDefeat:
-	.string "{JPN}ハツ『おやおや\nまけましたよ じいさん"
+	.string "ハツ『おやおや\nまけましたよ じいさん"
 	.string "$"
 
 MeteorFalls_1F_2R_Text_JayPostRematch:
-	.string "{JPN}ハツ『けっこんして 50ねん……\nいろんなことが ありましたねえ\pこれからも じいさんと いっしょに\nたのしいことが つづくと いいですわねえ"
+	.string "ハツ『けっこんして 50ねん……\nいろんなことが ありましたねえ\pこれからも じいさんと いっしょに\nたのしいことが つづくと いいですわねえ"
 	.string ""
 	.string ""
 	.string "$"
 
 MeteorFalls_1F_2R_Text_JayRematchNotEnoughMons:
-	.string "{JPN}ハツ『おやおや\nわかい トレーナーさん ですねえ\pわしらと しょうぶ してくれるのなら\nポケモンを もっと つれておいで"
+	.string "ハツ『おやおや\nわかい トレーナーさん ですねえ\pわしらと しょうぶ してくれるのなら\nポケモンを もっと つれておいで"
 	.string ""
 	.string ""
 	.string "$"

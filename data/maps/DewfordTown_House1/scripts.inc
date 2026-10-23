@@ -20,11 +20,11 @@ DewfordTown_House1_EventScript_Zigzagoon::
 	end
 
 DewfordTown_House1_Text_LotToBeSaidForLivingOnIsland:
-	.string "{JPN}こういう ちいさな しまで\nポケモンと かぞく なかよく くらすのも\lなかなか いい もんですよ$"
+	.string "こういう ちいさな しまで\nポケモンと かぞく なかよく くらすのも\lなかなか いい もんですよ$"
 
 DewfordTown_House1_Text_LifeGoesSlowlyOnIsland:
-	.string "{JPN}わたしは カイナシティ という\nおおきな みなとまち から\lおよめさんに きたのよ\pのんびりとした しま だけれど\nきれいな うみに かこまれて いれば\lそれだけで しあわせ なんだね$"
+	.string "わたしは カイナシティ という\nおおきな みなとまち から\lおよめさんに きたのよ\pのんびりとした しま だけれど\nきれいな うみに かこまれて いれば\lそれだけで しあわせ なんだね$"
 
 DewfordTown_House1_Text_Zigzagoon:
-	.string "{JPN}ジグザグマ『ぐぐう!$"
+	.string "ジグザグマ『ぐぐう!$"
 

@@ -65,11 +65,11 @@ RustboroCity_Mart_EventScript_BugCatcher::
 	end
 
 RustboroCity_Mart_Text_BuyingHealsInCaseOfShroomish:
-	.string "{JPN}トウカのもりで キノココが\nとびだして きたときの ため\lまひなおしや どくけしを かっておくの！$"
+	.string "トウカのもりで キノココが\nとびだして きたときの ため\lまひなおしや どくけしを かっておくの！$"
 
 RustboroCity_Mart_Text_ShouldBuySuperPotionsInstead:
-	.string "{JPN}ポケモン しんかして たいりょくが\nふえたから キズぐすり じゃなくて\lいいキズぐすりを かってあげようかな$"
+	.string "ポケモン しんかして たいりょくが\nふえたから キズぐすり じゃなくて\lいいキズぐすりを かってあげようかな$"
 
 RustboroCity_Mart_Text_GettingEscapeRopeJustInCase:
-	.string "{JPN}どうくつで まよった ときのため\nあなぬけのヒモを かっておこう っと！\pつかうと いっしゅんで\nいりぐちに もどれるもんね！$"
+	.string "どうくつで まよった ときのため\nあなぬけのヒモを かっておこう っと！\pつかうと いっしゅんで\nいりぐちに もどれるもんね！$"
 

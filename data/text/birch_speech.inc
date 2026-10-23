@@ -1,5 +1,5 @@
 gText_Birch_Welcome::
-	.string "{JPN}いやー おまたせ おまたせ!\p"
+	.string "いやー おまたせ おまたせ!\p"
 	.string "{JPN}ポケットモンスターの せかいへ\n"
 	.string "{JPN}ようこそ!\p"
 	.string "{JPN}わたしの なまえは オダマキ!\p"
@@ -11,7 +11,7 @@ gText_Birch_Pokemon::
 	.string "$"
 
 gText_Birch_MainSpeech::
-	.string "{JPN}この せかいには\n"
+	.string "この せかいには\n"
 	.string "{JPN}ポケモンと よばれる いきもの たちが\l"
 	.string "{JPN}いたるところに すんでいる!\p"
 	.string "{JPN}われわれ にんげんは\n"
@@ -29,26 +29,26 @@ gText_Birch_MainSpeech::
 	.string "{JPN}という わけなんだ!\p$"
 
 gText_Birch_AndYouAre::
-	.string "{JPN}ところで きみは……?$"
+	.string "ところで きみは……?$"
 
 gText_Birch_BoyOrGirl::
-	.string "{JPN}おとこのこ?\n"
+	.string "おとこのこ?\n"
 	.string "{JPN}それとも おんなのこ?$"
 
 gText_Birch_WhatsYourName::
-	.string "{JPN}なまえも おしえて くれるかい!$"
+	.string "なまえも おしえて くれるかい!$"
 
 gText_Birch_SoItsPlayer::
-	.string "{JPN}{PLAYER}{KUN} だね?$"
+	.string "{PLAYER}{KUN} だね?$"
 
 gText_Birch_YourePlayer::
-	.string "{JPN}……そうか!\p"
+	.string "……そうか!\p"
 	.string "{JPN}きみが こんど わたしの すむ まち\n"
 	.string "{JPN}ミシロタウンに ひっこして くる\l"
 	.string "{JPN}{PLAYER}{KUN} だったのか!\p$"
 
 gText_Birch_AreYouReady::
-	.string "{JPN}よーし じゅんびは いいかい?\p"
+	.string "よーし じゅんびは いいかい?\p"
 	.string "{JPN}これから きみ だけの ものがたりが\n"
 	.string "{JPN}はじまろうと している!\p"
 	.string "{JPN}ゆめと ぼうけんと であいに みちた\n"

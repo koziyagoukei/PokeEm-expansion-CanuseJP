@@ -40,16 +40,16 @@ MossdeepCity_House4_EventScript_Skitty::
 	end
 
 MossdeepCity_House4_Text_BrotherLikesToFindBases:
-	.string "{JPN}おとうと ったら\nひとの ひみつきちを さがすのが\lたのしみ なんだって!$"
+	.string "おとうと ったら\nひとの ひみつきちを さがすのが\lたのしみ なんだって!$"
 
 MossdeepCity_House4_Text_BrotherLikesToVisitBasesAndBattle:
-	.string "{JPN}おとうと ったら\nともだちの ひみつきちに いって\lポケモンしょうぶを するのが\lたのしみ なんだって!$"
+	.string "おとうと ったら\nともだちの ひみつきちに いって\lポケモンしょうぶを するのが\lたのしみ なんだって!$"
 
 MossdeepCity_House4_Text_YouMadeSecretBaseNearX:
-	.string "{JPN}ひょっとして {STR_VAR_1} に\nひみつきち つくったの きみ?$"
+	.string "ひょっとして {STR_VAR_1} に\nひみつきち つくったの きみ?$"
 
 MossdeepCity_House4_Text_MakeSecretBase:
-	.string "{JPN}きみ どこかに ひみつきち つくりなよ!\nぼくが さがしだして みせるからさ$"
+	.string "きみ どこかに ひみつきち つくりなよ!\nぼくが さがしだして みせるからさ$"
 
 MossdeepCity_House4_Text_Skitty:
-	.string "{JPN}エネコ『みゃあん?$"
+	.string "エネコ『みゃあん?$"

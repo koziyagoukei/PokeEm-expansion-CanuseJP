@@ -280,53 +280,53 @@ PartyRoamerPark_EventScript_NoBerries:
 	end
 
 PartyRoamerPark_Text_AlolaFestivalCircle:
-	.string "{JPN}アローラちほう では フェスサークル\n"
+	.string "アローラちほう では フェスサークル\n"
 	.string "っていうサーバーが あるんですって$"
 
 PartyRoamerPark_Text_FestivalCircleSoundsFun:
-	.string "{JPN}きっと いろいろ\n"
+	.string "きっと いろいろ\n"
 	.string "できるのでしょうね！$"
 
 PartyRoamerPark_Text_AskMakePokeblocks:
-	.string "{JPN}ねぇ {PLAYER}\n"
+	.string "ねぇ {PLAYER}\n"
 	.string "ママと パパで ポロックつくらない?$"
 
 PartyRoamerPark_Text_AskPokeblockFlavor:
-	.string "{JPN}どういう ポロックが\n"
+	.string "どういう ポロックが\n"
 	.string "いいかしら？$"
 
 PartyRoamerPark_Text_Okay:
-	.string "{JPN}わかったわ！$"
+	.string "わかったわ！$"
 
 PartyRoamerPark_Text_DeclinePokeblock:
-	.string "{JPN}ちぇっ ざんねん……$"
+	.string "ちぇっ ざんねん……$"
 
 PartyRoamerPark_Text_FinishedPokeblockBlending:
-	.string "{JPN}みんなでつくると\n"
+	.string "みんなでつくると\n"
 	.string "たのしいわね！$"
 
 PartyRoamerPark_Text_NoPokeblockCase:
-	.string "{JPN}ポロックケースが\n"
+	.string "ポロックケースが\n"
 	.string "ないみたいね$"
 
 PartyRoamerPark_Text_PokeblockCaseFull:
-	.string "{JPN}ポロックケースが\n"
+	.string "ポロックケースが\n"
 	.string "いっぱいみたいね$"
 
 PartyRoamerPark_Text_NoBerries:
-	.string "{JPN}きのみが ないと\n"
+	.string "きのみが ないと\n"
 	.string "つくれないわ$"
 
 PartyRoamerPark_Text_NormanDailyCheckIn:
-	.string "{JPN}{PLAYER} ちゃんとたべてるか?\n"
+	.string "{PLAYER} ちゃんとたべてるか?\n"
 	.string "げんきに しているか?$"
 
 PartyRoamerPark_Text_NormanGift:
-	.string "{JPN}ジムで おみやげもらったから\n"
+	.string "ジムで おみやげもらったから\n"
 	.string "たべなさい$"
 
 PartyRoamerPark_Text_NormanGeneric:
-	.string "{JPN}なにかあったら\n"
+	.string "なにかあったら\n"
 	.string "れんらくするんだぞ$"
 
 PartyRoamerPark_Text_NormanInvite:

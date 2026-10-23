@@ -23,5 +23,5 @@ MauvilleCity_PokemonCenter_2F_EventScript_Youngster::
 	end
 
 MauvilleCity_PokemonCenter_2F_Text_Youngster:
-	.string "{JPN}ここの コロシアムで\nつうしんたいせん できるの しってる?\pじぶんの せいせき って\nかべを みると わかるから\lまけてばかりだと はずかしくなっちゃう……$"
+	.string "ここの コロシアムで\nつうしんたいせん できるの しってる?\pじぶんの せいせき って\nかべを みると わかるから\lまけてばかりだと はずかしくなっちゃう……$"
 

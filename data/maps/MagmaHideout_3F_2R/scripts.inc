@@ -7,7 +7,7 @@ MagmaHideout_3F_2R_EventScript_Grunt10::
 	end
 
 MagmaHideout_3F_2R_Text_Grunt10Intro:
-	.string "{JPN}あのな リーダーの いうことは\nオレにも よく わかるんだけど な\pちょうこだいポケモンを ほりだしたり\nひとの いんせきを よこどりしたり\lなんか それって ちょっと やりすぎ\lのような きもするんだよ な\pおまえ どう おもう?"
+	.string "あのな リーダーの いうことは\nオレにも よく わかるんだけど な\pちょうこだいポケモンを ほりだしたり\nひとの いんせきを よこどりしたり\lなんか それって ちょっと やりすぎ\lのような きもするんだよ な\pおまえ どう おもう?"
 	.string ""
 	.string ""
 	.string ""
@@ -16,10 +16,10 @@ MagmaHideout_3F_2R_Text_Grunt10Intro:
 	.string "$"
 
 MagmaHideout_3F_2R_Text_Grunt10Defeat:
-	.string "{JPN}やっぱり なんか まちがってる よなあ?"
+	.string "やっぱり なんか まちがってる よなあ?"
 	.string "$"
 
 MagmaHideout_3F_2R_Text_Grunt10PostBattle:
-	.string "{JPN}しょうぶに まけて スッキリしたよ!\pオレも こんど リーダーに あったら\nじっさい どうなのか きいて みるよ!"
+	.string "しょうぶに まけて スッキリしたよ!\pオレも こんど リーダーに あったら\nじっさい どうなのか きいて みるよ!"
 	.string ""
 	.string "$"

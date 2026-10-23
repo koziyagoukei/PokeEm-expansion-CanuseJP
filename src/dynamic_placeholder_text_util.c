@@ -24,16 +24,28 @@ u8 *DynamicPlaceholderTextUtil_ExpandPlaceholders(u8 *dest, const u8 *src)
 {
     while (*src != EOS)
     {
-        if (*src != CHAR_DYNAMIC)
+        if (*src == EXT_CTRL_CODE_BEGIN)
+        {
+            u32 length = 1 + max(1, GetExtCtrlCodeLength(src[1]));
+            while (length--)
+                *dest++ = *src++;
+        }
+        else if (*src == CHAR_EXTRA_SYMBOL || *src == CHAR_KEYPAD_ICON)
+        {
+            *dest++ = *src++;
+            *dest++ = *src++;
+        }
+        else if (*src != CHAR_DYNAMIC)
         {
             *dest++ = *src++;
         }
         else
         {
             src++;
-            if (sStringPointers[*src] != NULL)
+            const u8 *placeholder = DynamicPlaceholderTextUtil_GetPlaceholderPtr(*src);
+            if (placeholder != NULL)
             {
-                dest = StringCopy(dest, sStringPointers[*src]);
+                dest = StringCopy(dest, placeholder);
             }
             src++;
         }
@@ -44,5 +56,5 @@ u8 *DynamicPlaceholderTextUtil_ExpandPlaceholders(u8 *dest, const u8 *src)
 
 const u8 *DynamicPlaceholderTextUtil_GetPlaceholderPtr(u8 idx)
 {
-    return sStringPointers[idx];
+    return idx < ARRAY_COUNT(sStringPointers) ? sStringPointers[idx] : NULL;
 }

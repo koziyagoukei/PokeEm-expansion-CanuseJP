@@ -302,32 +302,32 @@ Route110_TrickHousePuzzle3_EventScript_Alan::
 	end
 
 Route110_TrickHousePuzzle3_Text_WroteSecretCodeLockOpened:
-	.string "{JPN}{PLAYER}は あいことばを\nとびらに かきつけた!\p「カラクリだいおう さま あこがれ」\p…… …… ……\pかぎの はずれる おとがした!$"
+	.string "{PLAYER}は あいことばを\nとびらに かきつけた!\p「カラクリだいおう さま あこがれ」\p…… …… ……\pかぎの はずれる おとがした!$"
 
 Route110_TrickHousePuzzle3_Text_JustinIntro:
-	.string "{JPN}なんども おなじ ところに\nもどって きちゃうよー!$"
+	.string "なんども おなじ ところに\nもどって きちゃうよー!$"
 
 Route110_TrickHousePuzzle3_Text_JustinDefeat:
-	.string "{JPN}ぼくが こまってるのに\nダメおしで かつなんて ひどいよー!$"
+	.string "ぼくが こまってるのに\nダメおしで かつなんて ひどいよー!$"
 
 Route110_TrickHousePuzzle3_Text_JustinPostBattle:
-	.string "{JPN}とびら だらけで\nせまくて こわいよー!$"
+	.string "とびら だらけで\nせまくて こわいよー!$"
 
 Route110_TrickHousePuzzle3_Text_MarthaIntro:
-	.string "{JPN}なにが なんだか わからなくて\nかなしく なってきたわ……$"
+	.string "なにが なんだか わからなくて\nかなしく なってきたわ……$"
 
 Route110_TrickHousePuzzle3_Text_MarthaDefeat:
-	.string "{JPN}ひっ ひどいわ……$"
+	.string "ひっ ひどいわ……$"
 
 Route110_TrickHousePuzzle3_Text_MarthaPostBattle:
-	.string "{JPN}どうせ あたしは よわいし\nほうこうおんちよー!$"
+	.string "どうせ あたしは よわいし\nほうこうおんちよー!$"
 
 Route110_TrickHousePuzzle3_Text_AlanIntro:
-	.string "{JPN}いったい なんの ために\nこんな やしきが あるんだろう……?$"
+	.string "いったい なんの ために\nこんな やしきが あるんだろう……?$"
 
 Route110_TrickHousePuzzle3_Text_AlanDefeat:
-	.string "{JPN}いったい なぜ\nわしは まけて しまったんだろう……?$"
+	.string "いったい なぜ\nわしは まけて しまったんだろう……?$"
 
 Route110_TrickHousePuzzle3_Text_AlanPostBattle:
-	.string "{JPN}いったい どれくらいの しかけが\nこの やしきに あるんだろう…?\pきみなら わかるかもな$"
+	.string "いったい どれくらいの しかけが\nこの やしきに あるんだろう…?\pきみなら わかるかもな$"
 

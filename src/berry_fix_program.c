@@ -35,9 +35,9 @@ static int BerryFix_TrySetScene(int);
 static void BerryFix_SetScene(int);
 static void BerryFix_HideScene(void);
 
-static const u8 sText_BerryProgramUpdate[] = _("{JPN}きのみ しゅうせいプログラム");
-static const u8 sText_RubySapphire[] = _("{JPN}ルビー/サファイア");
-static const u8 sText_Emerald[] = _("{JPN}エメラルド");
+static const u8 sText_BerryProgramUpdate[] = _("きのみ しゅうせいプログラム");
+static const u8 sText_RubySapphire[] = _("ルビー/サファイア");
+static const u8 sText_Emerald[] = _("エメラルド");
 static const u8 sText_BerryProgramWillBeUpdatedPressA[] = _("{JPN}ルビー・サファイアの カートリッジの\n"
                                                             "きのみプログラムを しゅうせいします\n"
                                                             "{COLOR RED}{SHADOW LIGHT_RED}Aボタンを おしてください");

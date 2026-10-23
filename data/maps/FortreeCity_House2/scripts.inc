@@ -42,23 +42,23 @@ FortreeCity_House2_EventScript_WrongGuess::
 	end
 
 FortreeCity_House2_Text_HiddenPowersArousedByNature:
-	.string "{JPN}ひとも ポケモンも\nしぜんの なかで くらすことで\lもともとの パワーが めざめる……$"
+	.string "ひとも ポケモンも\nしぜんの なかで くらすことで\lもともとの パワーが めざめる……$"
 
 FortreeCity_House2_Text_CoinInWhichHand:
-	.string "{JPN}おぬしの パワーが めざめているか\nたしかめると するかの……\pどれ…… わしの みぎてと ひだりて\nどちらに コインが はいっておるか\lちょっかんで えらんで みなさい$"
+	.string "おぬしの パワーが めざめているか\nたしかめると するかの……\pどれ…… わしの みぎてと ひだりて\nどちらに コインが はいっておるか\lちょっかんで えらんで みなさい$"
 
 FortreeCity_House2_Text_CorrectTryAgainWhichHand:
-	.string "{JPN}おお! せいかい じゃ!\pつぎは みぎてと ひだりて\nどちらに コインが はいっておるか\lちょっかんで えらんで みなさい$"
+	.string "おお! せいかい じゃ!\pつぎは みぎてと ひだりて\nどちらに コインが はいっておるか\lちょっかんで えらんで みなさい$"
 
 FortreeCity_House2_Text_CorrectTryAgainWhichHand2:
-	.string "{JPN}おお! せいかい じゃ!\pつぎは みぎてと ひだりて\nどちらに コインが はいっておるか\lちょっかんで えらんで みなさい$"
+	.string "おお! せいかい じゃ!\pつぎは みぎてと ひだりて\nどちらに コインが はいっておるか\lちょっかんで えらんで みなさい$"
 
 FortreeCity_House2_Text_YourHiddenPowerHasAwoken:
-	.string "{JPN}おお! みごと じゃ!\nおぬしの パワーは めざめているの!\pこれを あげるから\nおぬしの ポケモンも パワーを\lめざめさせて やると ええぞ!$"
+	.string "おお! みごと じゃ!\nおぬしの パワーは めざめているの!\pこれを あげるから\nおぬしの ポケモンも パワーを\lめざめさせて やると ええぞ!$"
 
 FortreeCity_House2_Text_ExplainHiddenPower:
-	.string "{JPN}めざめるパワーは ポケモンによって\nいりょくが かわる わざ なんじゃよ!$"
+	.string "めざめるパワーは ポケモンによって\nいりょくが かわる わざ なんじゃよ!$"
 
 FortreeCity_House2_Text_YouGuessedWrong:
-	.string "{JPN}ざんねん……\nはずれ じゃ……$"
+	.string "ざんねん……\nはずれ じゃ……$"
 

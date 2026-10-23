@@ -24,10 +24,10 @@ EverGrandeCity_EventScript_SetVisitedEverGrande::
 	end
 
 EverGrandeCity_Text_EnteringVictoryRoad:
-	.string "{JPN}これより チャンピオン ロード$"
+	.string "これより チャンピオン ロード$"
 
 EverGrandeCity_Text_EnteringPokemonLeague:
-	.string "{JPN}これより ポケモン リーグ\nしょうめん ゲート$"
+	.string "これより ポケモン リーグ\nしょうめん ゲート$"
 
 EverGrandeCity_Text_CitySign:
-	.string "{JPN}ここは サイユウ シティ\nはなと うみと ポケモンの らくえん$"
+	.string "ここは サイユウ シティ\nはなと うみと ポケモンの らくえん$"

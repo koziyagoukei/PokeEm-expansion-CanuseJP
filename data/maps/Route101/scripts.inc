@@ -257,20 +257,20 @@ Route101_Movement_BirchApproachPlayer:
 	step_end
 
 Route101_Text_HelpMe:
-	.string "{JPN}たっ たすけて くれーっ!!$"
+	.string "たっ たすけて くれーっ!!$"
 
 Route101_Text_PleaseHelp:
-	.string "{JPN}おーい! そこの きみ!\n"
+	.string "おーい! そこの きみ!\n"
 	.string "{JPN}たすけて おくれーっ!!\p"
 	.string "{JPN}そこに ある カバンに\n"
 	.string "{JPN}モンスターボールが はいってる!$"
 
 Route101_Text_DontLeaveMe:
-	.string "{JPN}どっ どこへ いくんだ!?\n"
+	.string "どっ どこへ いくんだ!?\n"
 	.string "{JPN}わたしを みすてないで おくれーっ!$"
 
 Route101_Text_YouSavedMe:
-	.string "{JPN}オダマキ『はあ はあ……\p"
+	.string "オダマキ『はあ はあ……\p"
 	.string "{JPN}やせいの ポケモンを ちょうさ しようと\n"
 	.string "{JPN}くさむらに はいったら\l"
 	.string "{JPN}とつぜん ポケモンに おそわれて……\p"
@@ -281,17 +281,17 @@ Route101_Text_YouSavedMe:
 	.string "{JPN}ちょっと けんきゅうじょ まで きておくれ$"
 
 Route101_Text_TakeTiredPokemonToPokeCenter:
-	.string "{JPN}ポケモンが よわってきたら\n"
+	.string "ポケモンが よわってきたら\n"
 	.string "{JPN}ポケモンセンターに いくと いいよ!\p"
 	.string "{JPN}ポケモンセンターなら すぐ ちかく\n"
 	.string "{JPN}コトキタウンに あるからね$"
 
 Route101_Text_WildPokemonInTallGrass:
-	.string "{JPN}やせいの ポケモンは\n"
+	.string "やせいの ポケモンは\n"
 	.string "{JPN}くさむらから とびだしてくる からな!\p"
 	.string "{JPN}こうして くさむらの なかに はいって\n"
 	.string "{JPN}つかまえたい ポケモンを さがすんだよ!$"
 
 Route101_Text_RouteSign:
-	.string "{JPN}ここは 101ばん どうろ\n"
+	.string "ここは 101ばん どうろ\n"
 	.string "{JPN}{UP_ARROW} コトキタウン$"

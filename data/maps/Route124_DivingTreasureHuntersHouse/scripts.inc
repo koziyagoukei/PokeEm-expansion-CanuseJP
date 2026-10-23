@@ -284,46 +284,46 @@ Route124_DivingTreasureHuntersHouse_EventScript_ShardTradeBoard::
 	end
 
 Route124_DivingTreasureHuntersHouse_Text_Greeting:
-	.string "{JPN}オレは ダイビング トレジャーハンター！\p"
+	.string "オレは ダイビング トレジャーハンター！\p"
 	.string "ふかい うみに もぐっては\n"
 	.string "かいていに ねむる おたからを あつめる\l"
 	.string "すげえ やろう なのさ！$"
 
 Route124_DivingTreasureHuntersHouse_Text_HaveYouSeenAnyShards:
-	.string "{JPN}おおむかしに つくられた という\n"
+	.string "おおむかしに つくられた という\n"
 	.string "いろいろな かけら みつかったかい？$"
 
 Route124_DivingTreasureHuntersHouse_Text_YouHaventGotAnyShards:
-	.string "{JPN}きみ おたから もってないのか……\pあかいかけら とか\nいろいろな かけらを みつけたら\lこうかん してくれよな!$"
+	.string "きみ おたから もってないのか……\pあかいかけら とか\nいろいろな かけらを みつけたら\lこうかん してくれよな!$"
 
 Route124_DivingTreasureHuntersHouse_Text_ThatsAShardIllTradeYou:
-	.string "{JPN}おおっ！ それは！\n"
+	.string "おおっ！ それは！\n"
 	.string "オレが さがしている かけら！！\p"
 	.string "なっ なっ！\n"
 	.string "きみの もってる おたからと\l"
 	.string "オレの おたから こうかん してくれよ！$"
 
 Route124_DivingTreasureHuntersHouse_Text_WhatDoYouWantToTrade:
-	.string "{JPN}どれを こうかん するんだい？$"
+	.string "どれを こうかん するんだい？$"
 
 Route124_DivingTreasureHuntersHouse_Text_YoullTradeShardForStone:
-	.string "{JPN}{STR_VAR_1} を {STR_VAR_2}に\n"
+	.string "{STR_VAR_1} を {STR_VAR_2}に\n"
 	.string "こうかん するんだな？$"
 
 Route124_DivingTreasureHuntersHouse_Text_ItsADeal:
-	.string "{JPN}とりひき せいりつ！\n"
+	.string "とりひき せいりつ！\n"
 	.string "だいじに つかって くれよな！$"
 
 Route124_DivingTreasureHuntersHouse_Text_TradeSomethingElse:
-	.string "{JPN}まだ こうかん するかい？$"
+	.string "まだ こうかん するかい？$"
 
 Route124_DivingTreasureHuntersHouse_Text_BagFull:
-	.string "{JPN}おっと バッグが いっぱい だぜ\n"
+	.string "おっと バッグが いっぱい だぜ\n"
 	.string "どうぐを へらして きなよ$"
 
 Route124_DivingTreasureHuntersHouse_Text_ComeBackIfYouChangeMind:
-	.string "{JPN}そいつは がっかりだ\n"
+	.string "そいつは がっかりだ\n"
 	.string "きが むいたら また きてくれよな！$"
 
 Route124_DivingTreasureHuntersHouse_Text_ShardTradeBoard:
-	.string "{JPN}ほしいモノ       あげるモノ\n あかいかけら   {LEFT_ARROW}{RIGHT_ARROW} ほのおのいし\pほしいモノ       あげるモノ\n きいろいかけら  {LEFT_ARROW}{RIGHT_ARROW} かみなりのいし\pほしいモノ       あげるモノ\n あおいかけら   {LEFT_ARROW}{RIGHT_ARROW} みずのいし\pほしいモノ       あげるモノ\n みどりのかけら  {LEFT_ARROW}{RIGHT_ARROW} リーフのいし$"
+	.string "ほしいモノ       あげるモノ\n あかいかけら   {LEFT_ARROW}{RIGHT_ARROW} ほのおのいし\pほしいモノ       あげるモノ\n きいろいかけら  {LEFT_ARROW}{RIGHT_ARROW} かみなりのいし\pほしいモノ       あげるモノ\n あおいかけら   {LEFT_ARROW}{RIGHT_ARROW} みずのいし\pほしいモノ       あげるモノ\n みどりのかけら  {LEFT_ARROW}{RIGHT_ARROW} リーフのいし$"
