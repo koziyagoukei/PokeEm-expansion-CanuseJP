@@ -184,14 +184,15 @@ void ConvertInternationalContestantName(u8 *str)
     {
         while (*str != EOS)
         {
-            if (str[0] == EXT_CTRL_CODE_BEGIN && str[1] == EXT_CTRL_CODE_ENG)
+            if (str[0] == EXT_CTRL_CODE_BEGIN
+             && (str[1] == EXT_CTRL_CODE_ENG || str[1] == EXT_CTRL_CODE_JPN || str[1] == EXT_CTRL_CODE_AUTO))
                 return;
 
             str++;
         }
 
         *str++ = EXT_CTRL_CODE_BEGIN;
-        *str++ = EXT_CTRL_CODE_ENG;
+        *str++ = TEXT_JAPANESE_BY_DEFAULT ? EXT_CTRL_CODE_JPN : EXT_CTRL_CODE_ENG;
         *str = EOS;
     }
 }

@@ -53,14 +53,14 @@ static u32 GetGlyphWidth_Narrower(u16, bool32);
 static u32 GetGlyphWidth_SmallNarrower(u16, bool32);
 static u32 GetGlyphWidth_ShortNarrow(u16, bool32);
 static u32 GetGlyphWidth_ShortNarrower(u16, bool32);
-static bool32 StringStartsWithJapaneseGlyph(const u8 *str);
 bool32 StringContainsJapaneseGlyph(const u8 *str);
 static struct TextPrinter *AllocateTextPrinter(void);
 static u32 GetNumTextPrinters(void);
 static void FreeFinishedTextPrinters(void);
 static void SpriteCB_TextCursor(struct Sprite *sprite);
-static bool32 StringHasExplicitJapaneseModePrefix(const u8 *str);
 static bool32 TextAutoModeFromNextChar(const u8 *str);
+
+#define MAX_TEXT_PLACEHOLDER_DEPTH 8
 
 
 static EWRAM_DATA struct TextPrinter *sFirstTextPrinter = NULL;
@@ -104,224 +104,79 @@ static bool32 IsJapaneseGlyph(u16 glyphId)
         || glyphId == JAPANESE_CHAR_VU;
 }
 
-static bool32 StringHasExplicitJapaneseModePrefix(const u8 *str)
-{
-    return str != NULL
-        && str[0] == EXT_CTRL_CODE_BEGIN
-        && str[1] == EXT_CTRL_CODE_JPN;
-}
-
-static bool32 TextAutoModeFromNextChar(const u8 *str)
+static bool32 ResolveTextMode(const u8 *str, bool32 automatic)
 {
     const u8 *bufferPointer;
+    const u8 *returnPointers[MAX_TEXT_PLACEHOLDER_DEPTH];
+    u32 depth = 0;
 
-    while (*str != EOS)
+    while (str != NULL)
     {
         switch (*str)
         {
+        case EOS:
+            if (depth == 0)
+                return !automatic && TEXT_JAPANESE_BY_DEFAULT;
+            str = returnPointers[--depth];
+            continue;
+
         case CHAR_SPACE:
         case CHAR_NEWLINE:
             str++;
             continue;
 
         case PLACEHOLDER_BEGIN:
-            bufferPointer = NULL;
-            switch (*++str)
-            {
-            case PLACEHOLDER_ID_STRING_VAR_1:
-                bufferPointer = gStringVar1;
-                break;
-            case PLACEHOLDER_ID_STRING_VAR_2:
-                bufferPointer = gStringVar2;
-                break;
-            case PLACEHOLDER_ID_STRING_VAR_3:
-                bufferPointer = gStringVar3;
-                break;
-            }
-
-            return StringHasExplicitJapaneseModePrefix(bufferPointer);
-
         case CHAR_DYNAMIC:
-            bufferPointer = DynamicPlaceholderTextUtil_GetPlaceholderPtr(*++str);
-            return StringHasExplicitJapaneseModePrefix(bufferPointer);
+            bufferPointer = *str == PLACEHOLDER_BEGIN
+                ? GetExpandedPlaceholder(str[1])
+                : DynamicPlaceholderTextUtil_GetPlaceholderPtr(str[1]);
+            str += 2;
+            if (bufferPointer != NULL)
+            {
+                if (depth == MAX_TEXT_PLACEHOLDER_DEPTH)
+                    return !automatic && TEXT_JAPANESE_BY_DEFAULT;
+                returnPointers[depth++] = str;
+                str = bufferPointer;
+            }
+            continue;
 
         case EXT_CTRL_CODE_BEGIN:
-            str++;
-            switch (*str)
+            switch (str[1])
             {
             case EXT_CTRL_CODE_JPN:
                 return TRUE;
             case EXT_CTRL_CODE_ENG:
                 return FALSE;
             case EXT_CTRL_CODE_AUTO:
-                str++;
-                continue;
-
-            case EXT_CTRL_CODE_COLOR_HIGHLIGHT_SHADOW:
-                str += 4;
-                continue;
-            case EXT_CTRL_CODE_TEXT_COLORS:
-                str += 4;
-                continue;
-            case EXT_CTRL_CODE_PLAY_BGM:
-            case EXT_CTRL_CODE_PLAY_SE:
-                str += 3;
-                continue;
-
-            case EXT_CTRL_CODE_BACKGROUND:
-            case EXT_CTRL_CODE_COLOR:
-            case EXT_CTRL_CODE_SHADOW:
-            case EXT_CTRL_CODE_ACCENT:
-            case EXT_CTRL_CODE_HIGHLIGHT:
-            case EXT_CTRL_CODE_PALETTE:
-            case EXT_CTRL_CODE_FONT:
-            case EXT_CTRL_CODE_PAUSE:
+                automatic = TRUE;
+                break;
             case EXT_CTRL_CODE_ESCAPE:
-            case EXT_CTRL_CODE_SHIFT_RIGHT:
-            case EXT_CTRL_CODE_SHIFT_DOWN:
-            case EXT_CTRL_CODE_CLEAR:
-            case EXT_CTRL_CODE_SKIP:
-            case EXT_CTRL_CODE_CLEAR_TO:
-            case EXT_CTRL_CODE_MIN_LETTER_SPACING:
-                str += 2;
-                continue;
-
-            case EXT_CTRL_CODE_RESET_FONT:
-            case EXT_CTRL_CODE_PAUSE_UNTIL_PRESS:
-            case EXT_CTRL_CODE_WAIT_SE:
-            case EXT_CTRL_CODE_FILL_WINDOW:
-            case EXT_CTRL_CODE_PAUSE_MUSIC:
-            case EXT_CTRL_CODE_RESUME_MUSIC:
-            case EXT_CTRL_CODE_SPEAKER:
-                str += 1;
-                continue;
-
-            default:
-                str++;
-                continue;
+                return !automatic && TEXT_JAPANESE_BY_DEFAULT;
             }
-
-        case CHAR_EXTRA_SYMBOL:
-        case CHAR_KEYPAD_ICON:
-            return FALSE;
-
-        default:
-            return IsJapaneseGlyph(*str);
-        }
-    }
-
-    return FALSE;
-}
-
-static bool32 StringStartsWithJapaneseGlyph(const u8 *str)
-{
-    const u8 *bufferPointer;
-
-    while (*str != EOS)
-    {
-        switch (*str)
-        {
-        case CHAR_SPACE:
-        case CHAR_NEWLINE:
-            str++;
+            // Control payloads can contain bytes equal to a language code or EOS.
+            str += 1 + max(1, GetExtCtrlCodeLength(str[1]));
             continue;
 
-case PLACEHOLDER_BEGIN:
-    bufferPointer = NULL;
-    switch (*++str)
-    {
-    case PLACEHOLDER_ID_STRING_VAR_1:
-        bufferPointer = gStringVar1;
-        break;
-    case PLACEHOLDER_ID_STRING_VAR_2:
-        bufferPointer = gStringVar2;
-        break;
-    case PLACEHOLDER_ID_STRING_VAR_3:
-        bufferPointer = gStringVar3;
-        break;
-    }
-
-    if (StringHasExplicitJapaneseModePrefix(bufferPointer))
-        return TRUE;
-
-    str++;
-    continue;
-
-case CHAR_DYNAMIC:
-    bufferPointer = DynamicPlaceholderTextUtil_GetPlaceholderPtr(*++str);
-
-    if (StringHasExplicitJapaneseModePrefix(bufferPointer))
-        return TRUE;
-
-    str++;
-    continue;
-
-        case EXT_CTRL_CODE_BEGIN:
-            str++;
-            switch (*str)
-            {
-            case EXT_CTRL_CODE_JPN:
-                return TRUE;
-            case EXT_CTRL_CODE_ENG:
-                return FALSE;
-
-            case EXT_CTRL_CODE_COLOR_HIGHLIGHT_SHADOW:
-                str += 4;
-                continue;
-            case EXT_CTRL_CODE_TEXT_COLORS:
-                str += 4;
-                continue;
-            case EXT_CTRL_CODE_PLAY_BGM:
-            case EXT_CTRL_CODE_PLAY_SE:
-                str += 3;
-                continue;
-
-            case EXT_CTRL_CODE_BACKGROUND:
-            case EXT_CTRL_CODE_COLOR:
-            case EXT_CTRL_CODE_SHADOW:
-            case EXT_CTRL_CODE_ACCENT:
-            case EXT_CTRL_CODE_HIGHLIGHT:
-            case EXT_CTRL_CODE_PALETTE:
-            case EXT_CTRL_CODE_FONT:
-            case EXT_CTRL_CODE_PAUSE:
-            case EXT_CTRL_CODE_ESCAPE:
-            case EXT_CTRL_CODE_SHIFT_RIGHT:
-            case EXT_CTRL_CODE_SHIFT_DOWN:
-            case EXT_CTRL_CODE_CLEAR:
-            case EXT_CTRL_CODE_SKIP:
-            case EXT_CTRL_CODE_CLEAR_TO:
-            case EXT_CTRL_CODE_MIN_LETTER_SPACING:
-                str += 2;
-                continue;
-
-            case EXT_CTRL_CODE_RESET_FONT:
-            case EXT_CTRL_CODE_PAUSE_UNTIL_PRESS:
-            case EXT_CTRL_CODE_WAIT_SE:
-            case EXT_CTRL_CODE_FILL_WINDOW:
-            case EXT_CTRL_CODE_PAUSE_MUSIC:
-            case EXT_CTRL_CODE_RESUME_MUSIC:
-            case EXT_CTRL_CODE_SPEAKER:
-                str += 1;
-                continue;
-
-            default:
-                str++;
-                continue;
-            }
-
         case CHAR_EXTRA_SYMBOL:
         case CHAR_KEYPAD_ICON:
-            return FALSE;
+            return !automatic && TEXT_JAPANESE_BY_DEFAULT;
 
         default:
-            // ここが超重要。
-            // 最初の実文字が英字・記号なら即FALSE。
-            // 後ろのéや/まで探しに行かない。
-            return IsJapaneseGlyph(*str);
+            return (!automatic && TEXT_JAPANESE_BY_DEFAULT) || IsJapaneseGlyph(*str);
         }
     }
 
-    return FALSE;
+    return !automatic && TEXT_JAPANESE_BY_DEFAULT;
+}
+
+bool32 IsJapaneseTextMode(const u8 *str)
+{
+    return ResolveTextMode(str, FALSE);
+}
+
+static bool32 TextAutoModeFromNextChar(const u8 *str)
+{
+    return ResolveTextMode(str, TRUE);
 }
 
 bool32 StringContainsJapaneseGlyph(const u8 *str)
@@ -844,7 +699,7 @@ bool32 AddTextPrinter(struct TextPrinterTemplate *printerTemplate, u8 speed, voi
     sTempTextPrinter.printerTemplate = *printerTemplate;
     sTempTextPrinter.callback = callback;
     sTempTextPrinter.textSpeed = speed;
-    sTempTextPrinter.japanese = StringStartsWithJapaneseGlyph(printerTemplate->currentChar);
+    sTempTextPrinter.japanese = IsJapaneseTextMode(printerTemplate->currentChar);
 
     if (printerTemplate->type == SPRITE_TEXT_PRINTER)
     {
@@ -1364,7 +1219,8 @@ static void PrintGlyph(struct TextPrinter *textPrinter)
         if (textPrinter->minLetterSpacing)
         {
             textPrinter->printerTemplate.currentX += glyphAdvance;
-            u32 width = textPrinter->minLetterSpacing - glyphAdvance;
+            u32 width = textPrinter->minLetterSpacing > glyphAdvance
+                ? textPrinter->minLetterSpacing - glyphAdvance : 0;
             if (width > 0)
             {
                 ClearTextSpan(textPrinter, width);
@@ -1955,7 +1811,8 @@ static u16 RenderText(struct TextPrinter *textPrinter)
             return RENDER_FINISH;
         }
 
-        bool32 useJapanese = textPrinter->japanese;
+        // Extended symbols and EMOJI use the Latin sheet even in Japanese text.
+        bool32 useJapanese = textPrinter->japanese && currChar < 0x100;
         sCurGlyphAdvance = 0;
 
         switch (textPrinter->fontId)
@@ -2190,22 +2047,22 @@ s32 GetGlyphWidth(u16 glyphId, bool32 isJapanese, u8 fontId)
     func = GetFontWidthFunc(fontId);
     if (func == NULL)
         return 0;
-    return func(glyphId, isJapanese);
+    return func(glyphId, isJapanese && glyphId < 0x100);
 }
 
 s32 GetStringWidth(u8 fontId, const u8 *str, s16 letterSpacing)
 {
-    bool32 isJapanese;
-    int minGlyphWidth;
+    bool32 isJapanese = IsJapaneseTextMode(str);
+    int minGlyphWidth = 0;
     u32 (*func)(u16 fontId, bool32 isJapanese);
     int localLetterSpacing;
-    u32 lineWidth;
+    u32 lineWidth = 0;
     const u8 *bufferPointer;
+    const u8 *returnPointers[MAX_TEXT_PLACEHOLDER_DEPTH];
+    u32 depth = 0;
+    int pendingSpacing = 0;
     int glyphWidth;
-    s32 width;
-
-    isJapanese = StringContainsJapaneseGlyph(str);
-    minGlyphWidth = 0;
+    s32 width = 0;
 
     func = GetFontWidthFunc(fontId);
     if (func == NULL)
@@ -2216,160 +2073,114 @@ s32 GetStringWidth(u8 fontId, const u8 *str, s16 letterSpacing)
     else
         localLetterSpacing = letterSpacing;
 
-    width = 0;
-    lineWidth = 0;
-    bufferPointer = 0;
-
-    while (*str != EOS)
+    for (;;)
     {
-        switch (*str)
+        u16 currChar = *str++;
+        bool32 useLetterSpacing = isJapanese;
+
+        switch (currChar)
         {
+        case EOS:
+            if (depth != 0)
+            {
+                str = returnPointers[--depth];
+                continue;
+            }
+            return max(width, lineWidth);
+
         case CHAR_NEWLINE:
             if (lineWidth > width)
                 width = lineWidth;
             lineWidth = 0;
-            break;
-        case PLACEHOLDER_BEGIN:
-            switch (*++str)
-            {
-            case PLACEHOLDER_ID_STRING_VAR_1:
-                bufferPointer = gStringVar1;
-                break;
-            case PLACEHOLDER_ID_STRING_VAR_2:
-                bufferPointer = gStringVar2;
-                break;
-            case PLACEHOLDER_ID_STRING_VAR_3:
-                bufferPointer = gStringVar3;
-                break;
-            default:
-                return 0;
-            }
-        case CHAR_DYNAMIC:
-            if (bufferPointer == NULL)
-                bufferPointer = DynamicPlaceholderTextUtil_GetPlaceholderPtr(*++str);
-            while (*bufferPointer != EOS)
-            {
-                glyphWidth = func(*bufferPointer++, isJapanese);
-                if (minGlyphWidth > 0)
-                {
-                    if (glyphWidth < minGlyphWidth)
-                        glyphWidth = minGlyphWidth;
-                    lineWidth += glyphWidth;
-                }
-                else
-                {
-                    lineWidth += glyphWidth;
-                    if (isJapanese && str[1] != EOS)
-                        lineWidth += localLetterSpacing;
-                }
-            }
-            bufferPointer = 0;
-            break;
-        case EXT_CTRL_CODE_BEGIN:
-            switch (*++str)
-            {
-            case EXT_CTRL_CODE_COLOR_HIGHLIGHT_SHADOW:
-            case EXT_CTRL_CODE_TEXT_COLORS:
-                ++str;
-            case EXT_CTRL_CODE_PLAY_BGM:
-            case EXT_CTRL_CODE_PLAY_SE:
-                ++str;
-            case EXT_CTRL_CODE_BACKGROUND:
-            case EXT_CTRL_CODE_COLOR:
-            case EXT_CTRL_CODE_SHADOW:
-            case EXT_CTRL_CODE_ACCENT:
-            case EXT_CTRL_CODE_HIGHLIGHT:
-            case EXT_CTRL_CODE_PALETTE:
-            case EXT_CTRL_CODE_PAUSE:
-            case EXT_CTRL_CODE_ESCAPE:
-            case EXT_CTRL_CODE_SHIFT_RIGHT:
-            case EXT_CTRL_CODE_SHIFT_DOWN:
-            case EXT_CTRL_CODE_SPEAKER:
-                ++str;
-                break;
-            case EXT_CTRL_CODE_FONT:
-                func = GetFontWidthFunc(*++str);
-                if (func == NULL)
-                    return 0;
-                if (letterSpacing == -1)
-                    localLetterSpacing = GetFontAttribute(*str, FONTATTR_LETTER_SPACING);
-                break;
-            case EXT_CTRL_CODE_CLEAR:
-                glyphWidth = *++str;
-                lineWidth += glyphWidth;
-                break;
-            case EXT_CTRL_CODE_SKIP:
-                lineWidth = *++str;
-                break;
-            case EXT_CTRL_CODE_CLEAR_TO:
-                if (*++str > lineWidth)
-                    lineWidth = *str;
-                break;
-            case EXT_CTRL_CODE_MIN_LETTER_SPACING:
-                minGlyphWidth = *++str;
-                break;
-            case EXT_CTRL_CODE_JPN:
-                isJapanese = 1;
-                break;
-            case EXT_CTRL_CODE_ENG:
-                isJapanese = 0;
-                break;
-            case EXT_CTRL_CODE_AUTO:
-                isJapanese = TextAutoModeFromNextChar(str);
-                break;
-            case EXT_CTRL_CODE_RESET_FONT:
-            case EXT_CTRL_CODE_PAUSE_UNTIL_PRESS:
-            case EXT_CTRL_CODE_WAIT_SE:
-            case EXT_CTRL_CODE_FILL_WINDOW:
-            default:
-                break;
-            }
-            break;
-        case CHAR_KEYPAD_ICON:
-        case CHAR_EXTRA_SYMBOL:
-            if (*str == CHAR_EXTRA_SYMBOL)
-                glyphWidth = func(*++str | 0x100, isJapanese);
-            else
-                glyphWidth = GetKeypadIconWidth(*++str);
+            pendingSpacing = 0;
+            continue;
 
-            if (minGlyphWidth > 0)
+        case PLACEHOLDER_BEGIN:
+        case CHAR_DYNAMIC:
+            bufferPointer = currChar == PLACEHOLDER_BEGIN
+                ? GetExpandedPlaceholder(*str++)
+                : DynamicPlaceholderTextUtil_GetPlaceholderPtr(*str++);
+            if (bufferPointer != NULL)
             {
-                if (glyphWidth < minGlyphWidth)
-                    glyphWidth = minGlyphWidth;
-                lineWidth += glyphWidth;
+                if (depth == MAX_TEXT_PLACEHOLDER_DEPTH)
+                    return 0;
+                returnPointers[depth++] = str;
+                str = bufferPointer;
             }
-            else
+            continue;
+
+        case EXT_CTRL_CODE_BEGIN:
             {
-                lineWidth += glyphWidth;
-                if (isJapanese && str[1] != EOS)
-                    lineWidth += localLetterSpacing;
+                u8 code = *str++;
+                const u8 *args = str;
+                str += max(1, GetExtCtrlCodeLength(code)) - 1;
+
+                if (code == EXT_CTRL_CODE_ESCAPE)
+                {
+                    glyphWidth = func(args[0] | 0x100, FALSE);
+                    break;
+                }
+
+                switch (code)
+                {
+                case EXT_CTRL_CODE_FONT:
+                    func = GetFontWidthFunc(args[0]);
+                    if (func == NULL)
+                        return 0;
+                    if (letterSpacing == -1)
+                        localLetterSpacing = GetFontAttribute(args[0], FONTATTR_LETTER_SPACING);
+                    break;
+                case EXT_CTRL_CODE_CLEAR:
+                    lineWidth += pendingSpacing + args[0];
+                    pendingSpacing = 0;
+                    break;
+                case EXT_CTRL_CODE_SKIP:
+                case EXT_CTRL_CODE_SHIFT_RIGHT:
+                    lineWidth = args[0];
+                    pendingSpacing = 0;
+                    break;
+                case EXT_CTRL_CODE_CLEAR_TO:
+                    lineWidth = max(lineWidth + pendingSpacing, args[0]);
+                    pendingSpacing = 0;
+                    break;
+                case EXT_CTRL_CODE_MIN_LETTER_SPACING:
+                    minGlyphWidth = args[0];
+                    break;
+                case EXT_CTRL_CODE_JPN:
+                    isJapanese = TRUE;
+                    break;
+                case EXT_CTRL_CODE_ENG:
+                    isJapanese = FALSE;
+                    break;
+                case EXT_CTRL_CODE_AUTO:
+                    isJapanese = TextAutoModeFromNextChar(str);
+                    break;
+                }
+                continue;
             }
+
+        case CHAR_KEYPAD_ICON:
+            glyphWidth = GetKeypadIconWidth(*str++);
+            useLetterSpacing = TRUE;
+            break;
+        case CHAR_EXTRA_SYMBOL:
+            glyphWidth = func(*str++ | 0x100, FALSE);
             break;
         case CHAR_PROMPT_SCROLL:
         case CHAR_PROMPT_CLEAR:
-            break;
+            continue;
         default:
-            glyphWidth = func(*str, isJapanese);
-            if (minGlyphWidth > 0)
-            {
-                if (glyphWidth < minGlyphWidth)
-                    glyphWidth = minGlyphWidth;
-                lineWidth += glyphWidth;
-            }
-            else
-            {
-                lineWidth += glyphWidth;
-                if (isJapanese && str[1] != EOS)
-                    lineWidth += localLetterSpacing;
-            }
+            if (!isJapanese && currChar == CHAR_ZWS)
+                continue;
+            glyphWidth = func(currChar, isJapanese);
             break;
         }
-        ++str;
-    }
 
-    if (lineWidth > width)
-        return lineWidth;
-    return width;
+        // Defer spacing so trailing mode codes and placeholder boundaries do
+        // not add a phantom character or an extra trailing gap.
+        lineWidth += pendingSpacing + max(glyphWidth, minGlyphWidth);
+        pendingSpacing = minGlyphWidth == 0 && useLetterSpacing ? localLetterSpacing : 0;
+    }
 }
 
 s32 GetStringLineWidth(u8 fontId, const u8 *str, s16 letterSpacing, u32 lineNum, u32 strSize)

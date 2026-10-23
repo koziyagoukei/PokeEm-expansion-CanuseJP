@@ -2,6 +2,7 @@
 #define GUARD_CONFIG_TEXT_H
 
 // テキストの設定。
+#define TEXT_JAPANESE_BY_DEFAULT     TRUE    // 無指定の文字列は日本語表示。FALSEなら従来の文字判定を使う。{ENG}/{JPN}/{AUTO}はどちらでも有効。
 #define AUTO_SCROLL_TEXT             FALSE   // TRUEなら、NUM_FRAMES_AUTO_SCROLL_DELAY経過後に次の行へ自動で送る。A_BUTTON・B_BUTTONによる手動送りも可能。
 #define NUM_FRAMES_AUTO_SCROLL_DELAY 49
 

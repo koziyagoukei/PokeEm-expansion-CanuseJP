@@ -360,27 +360,17 @@ u8 *StringExpandPlaceholders(u8 *dest, const u8 *src)
             break;
         case EXT_CTRL_CODE_BEGIN:
             *dest++ = c;
-            c = *src++;
-            *dest++ = c;
-
-            switch (c)
             {
-            case EXT_CTRL_CODE_RESET_FONT:
-            case EXT_CTRL_CODE_PAUSE_UNTIL_PRESS:
-            case EXT_CTRL_CODE_FILL_WINDOW:
-            case EXT_CTRL_CODE_JPN:
-            case EXT_CTRL_CODE_ENG:
-            case EXT_CTRL_CODE_PAUSE_MUSIC:
-            case EXT_CTRL_CODE_RESUME_MUSIC:
-                break;
-            case EXT_CTRL_CODE_COLOR_HIGHLIGHT_SHADOW:
-            case EXT_CTRL_CODE_TEXT_COLORS:
-                *dest++ = *src++;
-            case EXT_CTRL_CODE_PLAY_BGM:
-                *dest++ = *src++;
-            default:
-                *dest++ = *src++;
+                u32 length = max(1, GetExtCtrlCodeLength(*src));
+                while (length--)
+                    *dest++ = *src++;
             }
+            break;
+        case CHAR_EXTRA_SYMBOL:
+        case CHAR_KEYPAD_ICON:
+            // The symbol index can equal a placeholder or control-code byte.
+            *dest++ = c;
+            *dest++ = *src++;
             break;
         case EOS:
             *dest = EOS;
@@ -717,10 +707,11 @@ u8 GetExtCtrlCodeLength(u8 code)
         [EXT_CTRL_CODE_ENG]                    = 1,
         [EXT_CTRL_CODE_PAUSE_MUSIC]            = 1,
         [EXT_CTRL_CODE_RESUME_MUSIC]           = 1,
-        [EXT_CTRL_CODE_SPEAKER]                = 1,
+        [EXT_CTRL_CODE_SPEAKER]                = 2,
         [EXT_CTRL_CODE_ACCENT]                 = 2,
         [EXT_CTRL_CODE_BACKGROUND]             = 2,
         [EXT_CTRL_CODE_TEXT_COLORS]            = 4,
+        [EXT_CTRL_CODE_AUTO]                   = 1,
     };
 
     u8 length = 0;
@@ -783,7 +774,8 @@ void ConvertInternationalString(u8 *s, enum Language language)
         StripExtCtrlCodes(s);
         i = StringLength(s);
         s[i++] = EXT_CTRL_CODE_BEGIN;
-        s[i++] = EXT_CTRL_CODE_ENG;
+        // Keep the same buffer size and return to the base's default mode.
+        s[i++] = TEXT_JAPANESE_BY_DEFAULT ? EXT_CTRL_CODE_JPN : EXT_CTRL_CODE_ENG;
         s[i++] = EOS;
 
         i--;
