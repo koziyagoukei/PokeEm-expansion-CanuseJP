@@ -76,7 +76,7 @@ PartyRoamerPark_EventScript_Norman::
 	lock
 	faceplayer
 	dotimebasedevents
-	goto_if_set FLAG_DAILY_PARTY_ROAMER_PARK_NORMAN_GIFT, PartyRoamerPark_EventScript_NormanGeneric
+	goto_if_set FLAG_DAILY_PARTY_ROAMER_PARK_NORMAN_GIFT, PartyRoamerPark_EventScript_NormanInvite
 	msgbox PartyRoamerPark_Text_NormanDailyCheckIn, MSGBOX_DEFAULT
 	msgbox PartyRoamerPark_Text_NormanGift, MSGBOX_DEFAULT
 	random 10
@@ -143,6 +143,53 @@ PartyRoamerPark_EventScript_NormanGeneric:
 	msgbox PartyRoamerPark_Text_NormanGeneric, MSGBOX_DEFAULT
 	release
 	end
+
+PartyRoamerPark_EventScript_NormanInvite:
+	msgbox PartyRoamerPark_Text_NormanInvite, MSGBOX_YESNO
+	goto_if_ne VAR_RESULT, YES, PartyRoamerPark_EventScript_NormanDecline
+	msgbox PartyRoamerPark_Text_NormanChooseMon, MSGBOX_DEFAULT
+	special ChooseNonEggPartyMon
+	@ Finish Norman's idle step before starting the scripted warm-up.
+	lock
+	faceplayer
+	goto_if_ge VAR_0x8004, PARTY_SIZE, PartyRoamerPark_EventScript_NormanTrainingCancel
+	special BufferMonNickname
+	msgbox PartyRoamerPark_Text_NormanWarmUp, MSGBOX_DEFAULT
+	closemessage
+	applymovement LOCALID_PARTY_ROAMER_NORMAN, PartyRoamerPark_Movement_NormanWarmUp
+	waitmovement 0
+	playse SE_M_JUMP_KICK
+	applymovement LOCALID_PARTY_ROAMER_NORMAN, PartyRoamerPark_Movement_NormanJump
+	waitmovement 0
+	faceplayer
+	msgbox PartyRoamerPark_Text_NormanTooSerious, MSGBOX_DEFAULT
+	msgbox PartyRoamerPark_Text_NormanTrainingHelp, MSGBOX_DEFAULT
+	closemessage
+	special Special_OpenPartyTraining
+	goto_if_eq VAR_RESULT, FALSE, PartyRoamerPark_EventScript_NormanTrainingCancel
+	msgbox PartyRoamerPark_Text_NormanTrainingDone, MSGBOX_DEFAULT
+	releaseall
+	end
+
+PartyRoamerPark_EventScript_NormanTrainingCancel:
+	msgbox PartyRoamerPark_Text_NormanTrainingCancel, MSGBOX_DEFAULT
+	releaseall
+	end
+
+PartyRoamerPark_EventScript_NormanDecline:
+	msgbox PartyRoamerPark_Text_NormanDecline, MSGBOX_DEFAULT
+	release
+	end
+
+PartyRoamerPark_Movement_NormanWarmUp:
+	emote_exclamation_mark
+	step_end
+
+PartyRoamerPark_Movement_NormanJump:
+	jump_in_place_left_right
+	delay_8
+	jump_in_place_right_left
+	step_end
 
 PartyRoamerPark_EventScript_Mom::
 	lockall
@@ -281,3 +328,41 @@ PartyRoamerPark_Text_NormanGift:
 PartyRoamerPark_Text_NormanGeneric:
 	.string "{JPN}なにかあったら\n"
 	.string "れんらくするんだぞ$"
+
+PartyRoamerPark_Text_NormanInvite:
+	.string "{JPN}{PLAYER} すこし パパと\n"
+	.string "あそぼうじゃないか！$"
+
+PartyRoamerPark_Text_NormanChooseMon:
+	.string "{JPN}いっしょに あそぶ ポケモンを\n"
+	.string "えらんで ごらん。$"
+
+PartyRoamerPark_Text_NormanWarmUp:
+	.string "{JPN}よーし {STR_VAR_1}！\n"
+	.string "まずは パパが おてほんだ！$"
+
+PartyRoamerPark_Text_NormanTooSerious:
+	.string "{JPN}……はっ！ つい ジムの\n"
+	.string "とっくんみたいに なってしまったな。\p"
+	.string "きょうは あそびだった！\n"
+	.string "ははは！$"
+
+PartyRoamerPark_Text_NormanTrainingHelp:
+	.string "{JPN}どんな あそびで きたえるか\n"
+	.string "きそポイントを きめて ごらん。\p"
+	.string "のうりょくを えらんで Aで へんしゅう。\n"
+	.string "さゆうで けた じょうげで すうじだ。\p"
+	.string "ひとつ 252まで ごうけい 510まで。\n"
+	.string "けっていで はんえいするぞ。$"
+
+PartyRoamerPark_Text_NormanTrainingDone:
+	.string "{JPN}よし！ いい あせを かいたな！\n"
+	.string "また パパと あそぼうな。$"
+
+PartyRoamerPark_Text_NormanTrainingCancel:
+	.string "{JPN}むりは しなくて いいんだぞ。\n"
+	.string "きそポイントは かえていないからな。$"
+
+PartyRoamerPark_Text_NormanDecline:
+	.string "{JPN}そうか。 あそびたく なったら\n"
+	.string "いつでも パパを よんでくれ！$"

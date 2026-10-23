@@ -689,3 +689,4 @@ gSpecials::
 	def_special Special_PreparePartyRoamerPark
 	def_special Special_BufferPartyBathAdditive
 	def_special Special_SetPartyBathAdditive
+	def_special Special_OpenPartyTraining, waitstate=1

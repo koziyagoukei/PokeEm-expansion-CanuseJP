@@ -112,6 +112,7 @@
       "flag": "0"
     },
     {
+      "local_id": "LOCALID_PARTY_ROAMER_NORMAN",
       "graphics_id": "OBJ_EVENT_GFX_NORMAN",
       "x": 22,
       "y": 12,

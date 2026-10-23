@@ -37,6 +37,13 @@ static const u8 sInfoText_ResortCamp2[] = _(
     "すきな あじを えらびましょう。\n"
     "センリからは 1にち 1かい\n"
     "ランダムな おみやげを もらえます。");
+static const u8 sInfoText_ResortCamp3[] = _(
+    "{JPN}おみやげを もらった あとに\n"
+    "もういちど パパに はなしかけると\n"
+    "ポケモンと あそんで きたえられます。\n"
+    "きそポイントは ひとつ 252まで\n"
+    "ごうけい 510まで へんこうできます。\n"
+    "けっていするまでは とりけせます。");
 
 static const u8 sInfoText_ResortDiner1[] = _(
     "{JPN}キャンプの きたがわの しょくどうです。\n"
@@ -171,7 +178,7 @@ static const u8 sInfoText_ResortDolls2[] = _(
     "いろちがいドールも 10BPで かえます。");
 
 static const u8 *const sInfoViewerPages_ResortOverview[] = {sInfoText_ResortOverview1, sInfoText_ResortOverview2};
-static const u8 *const sInfoViewerPages_ResortCamp[] = {sInfoText_ResortCamp1, sInfoText_ResortCamp2};
+static const u8 *const sInfoViewerPages_ResortCamp[] = {sInfoText_ResortCamp1, sInfoText_ResortCamp2, sInfoText_ResortCamp3};
 static const u8 *const sInfoViewerPages_ResortDiner[] = {sInfoText_ResortDiner1, sInfoText_ResortDiner2, sInfoText_ResortDiner3, sInfoText_ResortDiner4};
 static const u8 *const sInfoViewerPages_ResortBath[] = {sInfoText_ResortBath1, sInfoText_ResortBath2, sInfoText_ResortBath3};
 static const u8 *const sInfoViewerPages_ResortVilla[] = {sInfoText_ResortVilla1};
