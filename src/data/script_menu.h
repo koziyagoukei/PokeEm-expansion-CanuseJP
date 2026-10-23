@@ -825,6 +825,16 @@ static const struct MenuAction MultichoiceList_PartyRoamerPokeblockFlavor[] =
     {COMPOUND_STRING("{JPN}すっぱい")},
 };
 
+static const struct MenuAction sMultichoiceList_PartyBathAdditive[] =
+{
+    {COMPOUND_STRING("{JPN}スコヴィランのかおり")},
+    {COMPOUND_STRING("{JPN}ゆきみおんせんのもと")},
+    {COMPOUND_STRING("{JPN}カンポーやくゆ")},
+    {COMPOUND_STRING("{JPN}グラシデアエッセンス")},
+    {COMPOUND_STRING("{JPN}ソルティジオヅム")},
+    {COMPOUND_STRING("{JPN}フエンかけながし")},
+};
+
 static const struct MenuAction sMultichoiceList_LocalRoomPC[] =
 {
     {COMPOUND_STRING("{JPN}もようがえ")},
@@ -1392,6 +1402,7 @@ static const struct MultichoiceListStruct sMultichoiceLists[] =
     [MULTI_LOCAL_ROOM_ROAMERS]                       = MULTICHOICE(sMultichoiceList_LocalRoomRoamers),
     [MULTI_CONTEST_BP_SHOP]                          = MULTICHOICE(sMultichoiceList_ContestBpShop),
     [MULTI_CONTEST_BP_SHOP_SCARVES]                  = MULTICHOICE(sMultichoiceList_ContestBpShopScarves),
+    [MULTI_PARTY_BATH_ADDITIVE]                      = MULTICHOICE(sMultichoiceList_PartyBathAdditive),
 };
 
 const u8 *const gStdStrings[] =

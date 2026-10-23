@@ -1,7 +1,25 @@
 PartyRoamerPark_MapScripts::
+	map_script MAP_SCRIPT_ON_LOAD, PartyRoamerPark_OnLoad
 	map_script MAP_SCRIPT_ON_TRANSITION, PartyRoamerPark_OnTransition
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, PartyRoamerPark_OnFrame
 	.byte 0
+
+PartyRoamerPark_OnLoad:
+	special Special_PreparePartyRoamerPark
+	@ Also replace soil restored from an old save's cached map view.
+	setmetatile 1, 7, METATILE_General_Grass, FALSE
+	setmetatile 2, 7, METATILE_General_Grass, FALSE
+	setmetatile 3, 7, METATILE_General_Grass, FALSE
+	setmetatile 4, 7, METATILE_General_Grass, FALSE
+	setmetatile 1, 8, METATILE_General_Grass, FALSE
+	setmetatile 2, 8, METATILE_General_Grass, FALSE
+	setmetatile 3, 8, METATILE_General_Grass, FALSE
+	setmetatile 4, 8, METATILE_General_Grass, FALSE
+	setmetatile 1, 9, METATILE_General_Grass, FALSE
+	setmetatile 2, 9, METATILE_General_Grass, FALSE
+	setmetatile 3, 9, METATILE_General_Grass, FALSE
+	setmetatile 4, 9, METATILE_General_Grass, FALSE
+	end
 
 PartyRoamerPark_OnTransition:
 	setflag FLAG_TEMP_HIDE_FOLLOWER
@@ -25,6 +43,34 @@ PartyRoamerPark_EventScript_Talk::
 	msgbox gStringVar4, MSGBOX_DEFAULT
 	release
 	end
+
+PartyRoamerPark_EventScript_BathAttendant::
+	lock
+	faceplayer
+	special Special_BufferPartyBathAdditive
+	msgbox PartyRoamerPark_Text_BathWelcome, MSGBOX_DEFAULT
+	multichoice 0, 0, MULTI_PARTY_BATH_ADDITIVE, FALSE
+	goto_if_eq VAR_RESULT, MULTI_B_PRESSED, PartyRoamerPark_EventScript_BathCancel
+	copyvar VAR_0x8004, VAR_RESULT
+	specialvar VAR_RESULT, Special_SetPartyBathAdditive
+	goto_if_eq VAR_RESULT, FALSE, PartyRoamerPark_EventScript_BathCancel
+	msgbox PartyRoamerPark_Text_BathChanged, MSGBOX_DEFAULT
+	release
+	end
+
+PartyRoamerPark_EventScript_BathCancel:
+	msgbox PartyRoamerPark_Text_BathCancel, MSGBOX_DEFAULT
+	release
+	end
+
+PartyRoamerPark_Text_BathWelcome:
+	.string "{JPN}おんせんの にゅうよくざいを\nかえてみるかの？\pいまは {STR_VAR_1}じゃ。\nすきな かおりを えらぶと よいぞ。$"
+
+PartyRoamerPark_Text_BathChanged:
+	.string "{JPN}{STR_VAR_1}に\nかえておいたぞい。\pタマゴいがいの てもち みんなの\n{STR_VAR_2}が\l5びょうごとに 1ずつ あがるぞい！$"
+
+PartyRoamerPark_Text_BathCancel:
+	.string "{JPN}ゆっくり あたたまって いくんじゃぞ。$"
 
 PartyRoamerPark_EventScript_Norman::
 	lock

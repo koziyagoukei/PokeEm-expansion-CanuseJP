@@ -125,29 +125,17 @@
       "flag": "0"
     },
     {
-      "graphics_id": "OBJ_EVENT_GFX_BERRY_TREE",
-      "x": 2,
-      "y": 8,
+      "local_id": "LOCALID_PARTY_ROAMER_BATH_ATTENDANT",
+      "graphics_id": "OBJ_EVENT_GFX_OLD_MAN",
+      "x": 21,
+      "y": 5,
       "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_BERRY_TREE_GROWTH",
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 0,
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "BERRY_TREE_PARTY_ROAMER_PARK_SOIL_1",
-      "script": "BerryTreeScript",
-      "flag": "0"
-    },
-    {
-      "graphics_id": "OBJ_EVENT_GFX_BERRY_TREE",
-      "x": 3,
-      "y": 8,
-      "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_BERRY_TREE_GROWTH",
-      "movement_range_x": 0,
-      "movement_range_y": 0,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "BERRY_TREE_PARTY_ROAMER_PARK_SOIL_2",
-      "script": "BerryTreeScript",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "PartyRoamerPark_EventScript_BathAttendant",
       "flag": "0"
     }
   ],

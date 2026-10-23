@@ -8,6 +8,7 @@
 #include "field_weather.h"
 #include "follower_helper.h"
 #include "overworld.h"
+#include "palette.h"
 #include "party_roamer_park.h"
 #include "pokemon.h"
 #include "random.h"
@@ -20,12 +21,12 @@
 #include "constants/maps.h"
 #include "constants/map_groups.h"
 #include "constants/pokemon.h"
+#include "constants/rgb.h"
 #include "constants/trainer_types.h"
 
 #define PARTY_ROAMER_LOCAL_ID_START 1
 #define PARTY_ROAMER_PARK_ENTRY_X 13
 #define PARTY_ROAMER_PARK_ENTRY_Y 19
-#define PARTY_BATH_TIME_FRIENDSHIP_INTERVAL (5 * 60)
 
 static const u16 sPartyRoamerObjectFlags[PARTY_SIZE] =
 {
@@ -39,13 +40,52 @@ static const u16 sPartyRoamerObjectFlags[PARTY_SIZE] =
 
 static const u8 sDefaultPartyRoamerText[] = _("{JPN}{STR_VAR_1}は のんびりしている");
 
+static const u8 *const sPartyBathNames[PARTY_BATH_COUNT] =
+{
+    [PARTY_BATH_FUEN] = COMPOUND_STRING("{JPN}フエンかけながし"),
+    [PARTY_BATH_SCOVILLAIN] = COMPOUND_STRING("{JPN}スコヴィランのかおり"),
+    [PARTY_BATH_SNOW] = COMPOUND_STRING("{JPN}ゆきみおんせんのもと"),
+    [PARTY_BATH_HERBAL] = COMPOUND_STRING("{JPN}カンポーやくゆ"),
+    [PARTY_BATH_GRACIDEA] = COMPOUND_STRING("{JPN}グラシデアエッセンス"),
+    [PARTY_BATH_SALT] = COMPOUND_STRING("{JPN}ソルティジオヅム"),
+};
+
+static const u8 *const sPartyBathEffects[PARTY_BATH_COUNT] =
+{
+    [PARTY_BATH_FUEN] = COMPOUND_STRING("{JPN}なつきど"),
+    [PARTY_BATH_SCOVILLAIN] = COMPOUND_STRING("{JPN}かっこよさと けづや"),
+    [PARTY_BATH_SNOW] = COMPOUND_STRING("{JPN}たくましさと けづや"),
+    [PARTY_BATH_HERBAL] = COMPOUND_STRING("{JPN}かしこさと けづや"),
+    [PARTY_BATH_GRACIDEA] = COMPOUND_STRING("{JPN}かわいさと けづや"),
+    [PARTY_BATH_SALT] = COMPOUND_STRING("{JPN}うつくしさと けづや"),
+};
+
+static const s32 sPartyBathStats[PARTY_BATH_COUNT] =
+{
+    [PARTY_BATH_FUEN] = MON_DATA_FRIENDSHIP,
+    [PARTY_BATH_SCOVILLAIN] = MON_DATA_COOL,
+    [PARTY_BATH_SNOW] = MON_DATA_TOUGH,
+    [PARTY_BATH_HERBAL] = MON_DATA_SMART,
+    [PARTY_BATH_GRACIDEA] = MON_DATA_CUTE,
+    [PARTY_BATH_SALT] = MON_DATA_BEAUTY,
+};
+
+// Bath water uses colors 9 and 10 of bank 8; rocks and painting frames do not.
+static const u16 sPartyBathWaterColors[PARTY_BATH_COUNT][2] =
+{
+    [PARTY_BATH_SCOVILLAIN] = {RGB(29, 13, 13), RGB(26, 10, 10)},
+    [PARTY_BATH_SNOW] = {RGB(30, 27, 13), RGB(27, 24, 10)},
+    [PARTY_BATH_HERBAL] = {RGB(15, 27, 17), RGB(12, 24, 14)},
+    [PARTY_BATH_GRACIDEA] = {RGB(30, 19, 25), RGB(27, 16, 22)},
+    [PARTY_BATH_SALT] = {RGB(13, 19, 30), RGB(10, 16, 27)},
+};
+
 extern const u8 PartyRoamerPark_EventScript_Talk[];
 
 static void FieldCallback_EnterPartyRoamerPark(void);
 static void Task_WaitToEnterPartyRoamerPark(u8 taskId);
-static void Task_PartyBathTimeFriendship(u8 taskId);
+static void Task_PartyBathTimeEffects(u8 taskId);
 static bool8 IsInPartyBathTimeMap(void);
-static void IncreasePartyBathTimeFriendship(void);
 
 static bool8 IsPartyRoamerLocalId(u16 localId)
 {
@@ -182,9 +222,73 @@ static bool8 IsInPartyBathTimeMap(void)
         && gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_PARTYBATHTIME);
 }
 
-static void IncreasePartyBathTimeFriendship(void)
+u16 PartyBath_GetAdditive(void)
+{
+    u16 additive = VarGet(VAR_PARTY_BATH_ADDITIVE);
+    return additive < PARTY_BATH_COUNT ? additive : PARTY_BATH_FUEN;
+}
+
+void Special_BufferPartyBathAdditive(void)
+{
+    u16 additive = PartyBath_GetAdditive();
+    StringCopy(gStringVar1, sPartyBathNames[additive]);
+    StringCopy(gStringVar2, sPartyBathEffects[additive]);
+}
+
+bool8 Special_SetPartyBathAdditive(void)
+{
+    // The menu lists the five additives first, followed by the default bath.
+    if (gSpecialVar_0x8004 >= PARTY_BATH_COUNT)
+        return FALSE;
+    VarSet(VAR_PARTY_BATH_ADDITIVE, (gSpecialVar_0x8004 + 1) % PARTY_BATH_COUNT);
+    Special_BufferPartyBathAdditive();
+    return TRUE;
+}
+
+void PartyBath_ApplyWaterPalette(bool8 skipFaded)
+{
+    const u16 *colors;
+    u16 additive;
+    if (!IsInPartyBathTimeMap())
+        return;
+    additive = PartyBath_GetAdditive();
+    colors = additive == PARTY_BATH_FUEN
+        ? &gMapHeader.mapLayout->secondaryTileset->palettes[8][9]
+        : sPartyBathWaterColors[additive];
+    if (skipFaded)
+        CpuCopy16(colors, &gPlttBufferUnfaded[BG_PLTT_ID(8) + 9], 2 * sizeof(u16));
+    else
+        LoadPalette(colors, BG_PLTT_ID(8) + 9, 2 * sizeof(u16));
+}
+
+void Special_PreparePartyRoamerPark(void)
+{
+    if (gSaveBlock1Ptr->location.mapGroup != MAP_GROUP(MAP_PARTY_ROAMER_PARK)
+        || gSaveBlock1Ptr->location.mapNum != MAP_NUM(MAP_PARTY_ROAMER_PARK))
+        return;
+    // Upgrade cached object templates in saves made before the plots were removed.
+    for (u32 i = 0; i < OBJECT_EVENT_TEMPLATES_COUNT; i++)
+        if (gSaveBlock1Ptr->objectEventTemplates[i].graphicsId == OBJ_EVENT_GFX_BERRY_TREE)
+        {
+            LoadObjEventTemplatesFromHeader();
+            break;
+        }
+}
+
+static void IncreasePartyBathStat(struct Pokemon *mon, s32 field, u8 limit)
+{
+    u8 value = GetMonData(mon, field);
+    if (value < limit)
+    {
+        value++;
+        SetMonData(mon, field, &value);
+    }
+}
+
+static void ApplyPartyBathTimeEffects(void)
 {
     u8 i;
+    u16 additive = PartyBath_GetAdditive();
 
     for (i = 0; i < PARTY_SIZE; i++)
     {
@@ -192,18 +296,15 @@ static void IncreasePartyBathTimeFriendship(void)
 
         if (GetMonData(mon, MON_DATA_SPECIES) != SPECIES_NONE && !GetMonData(mon, MON_DATA_IS_EGG))
         {
-            u32 friendship = GetMonData(mon, MON_DATA_FRIENDSHIP);
-
-            if (friendship < MAX_FRIENDSHIP)
-            {
-                friendship++;
-                SetMonData(mon, MON_DATA_FRIENDSHIP, &friendship);
-            }
+            IncreasePartyBathStat(mon, sPartyBathStats[additive],
+                                 additive == PARTY_BATH_FUEN ? MAX_FRIENDSHIP : MAX_CONDITION);
+            if (additive != PARTY_BATH_FUEN)
+                IncreasePartyBathStat(mon, MON_DATA_SHEEN, MAX_SHEEN);
         }
     }
 }
 
-static void Task_PartyBathTimeFriendship(u8 taskId)
+static void Task_PartyBathTimeEffects(u8 taskId)
 {
     if (!IsInPartyBathTimeMap())
     {
@@ -211,10 +312,10 @@ static void Task_PartyBathTimeFriendship(u8 taskId)
         return;
     }
 
-    if (++gTasks[taskId].data[0] >= PARTY_BATH_TIME_FRIENDSHIP_INTERVAL)
+    if (++gTasks[taskId].data[0] >= PARTY_BATH_INTERVAL)
     {
         gTasks[taskId].data[0] = 0;
-        IncreasePartyBathTimeFriendship();
+        ApplyPartyBathTimeEffects();
     }
 }
 
@@ -223,10 +324,8 @@ void Special_StartPartyBathTimeFriendship(void)
     if (!IsInPartyBathTimeMap())
         return;
 
-    RemoveFollowingPokemon();
-
-    if (FindTaskIdByFunc(Task_PartyBathTimeFriendship) == TASK_NONE)
-        CreateTask(Task_PartyBathTimeFriendship, 8);
+    if (FindTaskIdByFunc(Task_PartyBathTimeEffects) == TASK_NONE)
+        CreateTask(Task_PartyBathTimeEffects, 8);
 }
 
 void Special_SpawnPartyRoamerMons(void)

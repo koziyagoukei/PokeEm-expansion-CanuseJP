@@ -1020,6 +1020,13 @@ static u8 CreateHotSpringsWaterSprite(struct ObjectEvent *objectEvent, s16 xOffs
         sprite->sMapGroup = objectEvent->mapGroup;
         sprite->sWaterXOffset = xOffset;
         sprite->sIsChildSprite = isChildSprite;
+        if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_PARTYBATHTIME)
+            && gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_PARTYBATHTIME))
+        {
+            // General field-effect color 8 is the water covering a submerged mon.
+            LoadPalette(&gPlttBufferUnfaded[BG_PLTT_ID(8) + 9],
+                        OBJ_PLTT_ID(sprite->oam.paletteNum) + 8, sizeof(u16));
+        }
     }
 
     return spriteId;

@@ -686,3 +686,6 @@ gSpecials::
 	def_special FrontierMusic_BufferSelection
 	def_special ContestShop_BufferProduct
 	def_special ContestShop_Purchase
+	def_special Special_PreparePartyRoamerPark
+	def_special Special_BufferPartyBathAdditive
+	def_special Special_SetPartyBathAdditive

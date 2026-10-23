@@ -9,6 +9,7 @@
 #include "mirage_tower.h"
 #include "overworld.h"
 #include "palette.h"
+#include "party_roamer_park.h"
 #include "pokenav.h"
 #include "script.h"
 #include "secret_base.h"
@@ -1029,6 +1030,7 @@ static void LoadPrimaryTilesetPalette(struct MapLayout const *mapLayout)
 void LoadSecondaryTilesetPalette(struct MapLayout const *mapLayout, bool8 skipFaded)
 {
     LoadTilesetPalette(mapLayout->secondaryTileset, GetNumPalsInPrimary(mapLayout) * 16, (NUM_PALS_TOTAL - GetNumPalsInPrimary(mapLayout)) * PLTT_SIZE_4BPP, skipFaded, GetNumPalsInPrimary(mapLayout));
+    PartyBath_ApplyWaterPalette(skipFaded);
 }
 
 void CopyMapTilesetsToVram(struct MapLayout const *mapLayout)

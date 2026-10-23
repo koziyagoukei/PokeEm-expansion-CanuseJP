@@ -28,8 +28,8 @@ static const u8 sInfoText_ResortCamp1[] = _(
     "キャンプを のんびり あるきまわります。\n"
     "はなしかけると なつきどや たいちょうに\n"
     "おうじた ようすを みられます。\n"
-    "ひだりがわの つちでは\n"
-    "きのみを そだてられます。");
+    "おんせんの いりぐちの おじいさんが\n"
+    "にゅうよくざいを かえてくれます。");
 static const u8 sInfoText_ResortCamp2[] = _(
     "{JPN}ポロックケースを もらっていると\n"
     "ママと ポロックを つくれます。\n"
@@ -71,9 +71,23 @@ static const u8 sInfoText_ResortBath1[] = _(
     "{JPN}キャンプの みぎうえから おんせんへ。\n"
     "てもちの ポケモンたちと\n"
     "ゆっくり すごせます。\n"
-    "なかに いるあいだは しばらくごとに\n"
-    "タマゴいがいの てもち みんなの\n"
-    "なつきどが すこしずつ あがります。");
+    "タマゴいがいの てもち みんなに こうか。\n"
+    "フエンかけながしでは 5びょうごとに\n"
+    "なつきどが 1 あがります。");
+static const u8 sInfoText_ResortBath2[] = _(
+    "{JPN}にゅうよくざいを かえると おゆのいろと\n"
+    "あがる コンディションが かわります。\n"
+    "5びょうごとに していの コンディションと\n"
+    "けづやが それぞれ 1ずつ あがります。\n"
+    "このあいだは なつきどは あがりません。\n"
+    "えらんだ にゅうよくざいは セーブされます。");
+static const u8 sInfoText_ResortBath3[] = _(
+    "{JPN}スコヴィランのかおり: かっこよさ\n"
+    "ゆきみおんせんのもと: たくましさ\n"
+    "カンポーやくゆ: かしこさ\n"
+    "グラシデアエッセンス: かわいさ\n"
+    "ソルティジオヅム: うつくしさ\n"
+    "もとの おゆは フエンかけながしです。");
 
 static const u8 sInfoText_ResortVilla1[] = _(
     "{JPN}キャンプから みなみの みちを\n"
@@ -159,7 +173,7 @@ static const u8 sInfoText_ResortDolls2[] = _(
 static const u8 *const sInfoViewerPages_ResortOverview[] = {sInfoText_ResortOverview1, sInfoText_ResortOverview2};
 static const u8 *const sInfoViewerPages_ResortCamp[] = {sInfoText_ResortCamp1, sInfoText_ResortCamp2};
 static const u8 *const sInfoViewerPages_ResortDiner[] = {sInfoText_ResortDiner1, sInfoText_ResortDiner2, sInfoText_ResortDiner3, sInfoText_ResortDiner4};
-static const u8 *const sInfoViewerPages_ResortBath[] = {sInfoText_ResortBath1};
+static const u8 *const sInfoViewerPages_ResortBath[] = {sInfoText_ResortBath1, sInfoText_ResortBath2, sInfoText_ResortBath3};
 static const u8 *const sInfoViewerPages_ResortVilla[] = {sInfoText_ResortVilla1};
 static const u8 *const sInfoViewerPages_ResortShop[] = {sInfoText_ResortShop1, sInfoText_ResortShop2, sInfoText_ResortShop3, sInfoText_ResortShop4};
 static const u8 *const sInfoViewerPages_ResortRoom[] = {sInfoText_ResortRoom1, sInfoText_ResortRoom2, sInfoText_ResortRoom3, sInfoText_ResortRoom4};

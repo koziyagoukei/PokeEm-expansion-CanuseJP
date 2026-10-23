@@ -1,6 +1,7 @@
 Partybathtime_MapScripts::
 	map_script MAP_SCRIPT_ON_LOAD, Partybathtime_OnLoad
 	map_script MAP_SCRIPT_ON_TRANSITION, Partybathtime_OnTransition
+	map_script MAP_SCRIPT_ON_RESUME, Partybathtime_OnResume
 	.byte 0
 
 Partybathtime_OnLoad:
@@ -51,5 +52,8 @@ Partybathtime_EventScript_SetToughPainting:
 Partybathtime_OnTransition:
 	setflag FLAG_TEMP_HIDE_FOLLOWER
 	special Special_SpawnPartyRoamerMons
+	end
+
+Partybathtime_OnResume:
 	special Special_StartPartyBathTimeFriendship
 	end
