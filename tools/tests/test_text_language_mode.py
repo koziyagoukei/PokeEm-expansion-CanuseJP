@@ -54,7 +54,7 @@ def engine_code():
     for name in ("DynamicPlaceholderTextUtil_Reset", "DynamicPlaceholderTextUtil_SetPlaceholderPtr",
                  "DynamicPlaceholderTextUtil_GetPlaceholderPtr", "DynamicPlaceholderTextUtil_ExpandPlaceholders"):
         result.append(function(dynamic, name))
-    for name in ("IsJapaneseGlyph", "ResolveTextMode", "IsJapaneseTextMode",
+    for name in ("IsJapaneseGlyph", "ShouldUseJapaneseGlyph", "ResolveTextMode", "IsJapaneseTextMode",
                  "TextAutoModeFromNextChar", "GetJapaneseGlyphWidth", "DecompressJapaneseSpaceGlyph"):
         result.append(function(text, name))
     suffixes = ("Small", "Normal", "Short", "Narrow", "SmallNarrow", "Narrower",
@@ -122,6 +122,9 @@ class TextLanguageModeTests(unittest.TestCase):
 
     def test_minimum_advance_does_not_underflow(self):
         self.run_case("minimum")
+
+    def test_numeric_glyphs_and_compact_ui_widths(self):
+        self.run_case("numeric")
 
 
 if __name__ == "__main__":

@@ -876,22 +876,23 @@ void InitBattlerHealthboxCoords(enum BattlerId battler)
 static void UpdateLvlInHealthbox(u8 healthboxSpriteId, u8 lvl)
 {
     u8 text[16];
+    u8 *txtPtr = StringCopy(text, COMPOUND_STRING("{ENG}"));
     enum BattlerId battler = gSprites[healthboxSpriteId].hMain_Battler;
     u32 spriteId = gSprites[healthboxSpriteId].oam.affineParam;
 
     // Don't print Lv char if mon has a gimmick with an indicator active.
     if (GetIndicatorPalTag(battler) != TAG_NONE)
     {
-        ConvertIntToDecimalStringN(text, lvl, STR_CONV_MODE_LEFT_ALIGN, 3);
+        ConvertIntToDecimalStringN(txtPtr, lvl, STR_CONV_MODE_LEFT_ALIGN, 3);
         UpdateIndicatorLevelData(healthboxSpriteId, lvl);
         UpdateIndicatorVisibilityAndType(healthboxSpriteId, FALSE);
     }
     else
     {
-        text[0] = CHAR_EXTRA_SYMBOL;
-        text[1] = CHAR_LV_2;
+        *txtPtr++ = CHAR_EXTRA_SYMBOL;
+        *txtPtr++ = CHAR_LV_2;
 
-        ConvertIntToDecimalStringN(text + 2, lvl, STR_CONV_MODE_LEFT_ALIGN, 3);
+        ConvertIntToDecimalStringN(txtPtr, lvl, STR_CONV_MODE_LEFT_ALIGN, 3);
         UpdateIndicatorVisibilityAndType(healthboxSpriteId, TRUE);
     }
 
@@ -916,11 +917,12 @@ static void UpdateLvlInHealthbox(u8 healthboxSpriteId, u8 lvl)
 static void PrintHpOnHealthbox(u32 spriteId, s16 currHp, s16 maxHp, u32 bgColor, s8 xOffset, s8 yOffset)
 {
     u32 width;
-    u8 text[2 * HP_MAX_DIGITS + 2], *txtPtr;
+    u8 text[2 * HP_MAX_DIGITS + 4], *txtPtr;
 
     // To fit 4 digit HP values we need to modify a bit the way hp is printed on Healthbox.
     // HP_RIGHT_SPRITE_CHARS chars can fit on the right healthbox, the rest goes to the left one
-    txtPtr = ConvertIntToDecimalStringN(text, currHp, STR_CONV_MODE_RIGHT_ALIGN, HP_MAX_DIGITS);
+    txtPtr = StringCopy(text, COMPOUND_STRING("{ENG}"));
+    txtPtr = ConvertIntToDecimalStringN(txtPtr, currHp, STR_CONV_MODE_RIGHT_ALIGN, HP_MAX_DIGITS);
     *txtPtr++ = CHAR_SLASH;
     txtPtr = ConvertIntToDecimalStringN(txtPtr, maxHp, STR_CONV_MODE_LEFT_ALIGN, HP_MAX_DIGITS);
 
@@ -950,14 +952,15 @@ static void PrintHpOnHealthbox(u32 spriteId, s16 currHp, s16 maxHp, u32 bgColor,
 static void PrintHPPercentageOnHealthbox(u32 spriteId, s16 currHp, s16 maxHp, u32 bgColor, s8 xOffset, s8 yOffset)
 {
     u32 width;
-    u8 text[HP_MAX_DIGITS + 2], *txtPtr;
+    u8 text[HP_MAX_DIGITS + 4], *txtPtr;
     s32 percent = max((currHp * 100) / maxHp, 1);
     if (currHp == 0)
         percent = 0;
 
     // To fit 4 digit HP values we need to modify a bit the way hp is printed on Healthbox.
     // HP_RIGHT_SPRITE_CHARS chars can fit on the right healthbox, the rest goes to the left one
-    txtPtr = ConvertIntToDecimalStringN(text, percent, STR_CONV_MODE_RIGHT_ALIGN, HP_MAX_DIGITS);
+    txtPtr = StringCopy(text, COMPOUND_STRING("{ENG}"));
+    txtPtr = ConvertIntToDecimalStringN(txtPtr, percent, STR_CONV_MODE_RIGHT_ALIGN, HP_MAX_DIGITS);
     *txtPtr++ = CHAR_PERCENT;
     *txtPtr = EOS;
 

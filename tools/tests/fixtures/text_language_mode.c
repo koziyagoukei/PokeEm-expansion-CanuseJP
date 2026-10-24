@@ -269,7 +269,8 @@ static void names(void)
     StringExpandPlaceholders(expanded, str);
     render(expanded, FONT_NORMAL, 0, WINDOW_TEXT_PRINTER);
     assert(sTraceCount == 5 && sTrace[0].japanese);
-    assert(sTrace[2].japanese == TEXT_JAPANESE_BY_DEFAULT);
+    assert(!sTrace[2].japanese && !sTrace[3].japanese);
+    assert(sTrace[4].japanese == TEXT_JAPANESE_BY_DEFAULT);
     StripExtCtrlCodes(name);
     assert(name[0] == 1 && name[1] == 2 && name[2] == EOS);
 }
@@ -307,6 +308,41 @@ static void minimum(void)
     assert(sClearedWidth == 6 && GetStringWidth(FONT_NORMAL, large, 2) == 20);
 }
 
+static void numeric(void)
+{
+    const u8 fonts[] = {FONT_SMALL, FONT_NORMAL, FONT_SHORT, FONT_NARROW, FONT_NARROWER,
+        FONT_SMALL_NARROW, FONT_SMALL_NARROWER, FONT_SHORT_NARROW, FONT_SHORT_NARROWER};
+    for (u32 f = 0; f < ARRAY_COUNT(fonts); f++)
+    {
+        for (u32 digit = CHAR_0; digit <= CHAR_9; digit++)
+        {
+            const u8 text[] = {JPN, 1, digit, 2, EOS};
+            assert(GetGlyphWidth(digit, TRUE, fonts[f]) == GetGlyphWidth(digit, FALSE, fonts[f]));
+            for (u32 type = WINDOW_TEXT_PRINTER; type <= SPRITE_TEXT_PRINTER; type++)
+            {
+                parity(text, fonts[f], 0, type, 0);
+                assert(sTraceCount == 3 && sTrace[0].japanese && !sTrace[1].japanese && sTrace[2].japanese);
+                assert(sTrace[1].advance == GetGlyphWidth(digit, FALSE, fonts[f]));
+                parity(text, fonts[f], 2, type, 2);
+            }
+        }
+    }
+    const u8 level[] = {ENG, CHAR_EXTRA_SYMBOL, CHAR_LV_2, CHAR_1, CHAR_0, CHAR_0, EOS};
+    const u8 pp[] = {ENG, CHAR_6, CHAR_4, CHAR_SLASH, CHAR_6, CHAR_4, EOS};
+    const u8 power[] = {ENG, CHAR_1, CHAR_0, CHAR_0, EOS};
+    const u8 weight[] = {ENG, CHAR_9, CHAR_9, CHAR_9, CHAR_PERIOD, CHAR_9, CHAR_SPACE, CHAR_k, CHAR_g, CHAR_PERIOD, EOS};
+    const u8 period[] = {JPN, CHAR_PERIOD, EOS};
+    parity(level, FONT_SMALL, 0, SPRITE_TEXT_PRINTER, 0);
+    assert(GetStringWidth(FONT_SMALL, level, 0) <= 24);
+    assert(GetStringWidth(FONT_NORMAL, pp, 0) <= 44);
+    assert(GetStringWidth(FONT_NORMAL, power, 0) <= 19);
+    parity(weight, FONT_NORMAL, 0, WINDOW_TEXT_PRINTER, 0);
+    for (u32 i = 0; i < sTraceCount; i++)
+        assert(!sTrace[i].japanese);
+    parity(period, FONT_NORMAL, 0, WINDOW_TEXT_PRINTER, 0);
+    assert(sTraceCount == 1 && sTrace[0].japanese);
+}
+
 int main(int argc, char **argv)
 {
     assert(argc == 2);
@@ -318,6 +354,7 @@ int main(int argc, char **argv)
     else if (!strcmp(argv[1], "names")) names();
     else if (!strcmp(argv[1], "symbols")) symbols();
     else if (!strcmp(argv[1], "minimum")) minimum();
+    else if (!strcmp(argv[1], "numeric")) numeric();
     else assert(!"unknown test case");
     return 0;
 }

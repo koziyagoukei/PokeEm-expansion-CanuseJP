@@ -1769,7 +1769,7 @@ static void PrintMonInfo(u32 num, u32 value, u32 owned, u32 newEntry)
         name = GetSpeciesName(species);
     else
         name = sText_TenDashes;
-    PrintInfoScreenTextWhite(name, 139 + (6 * digitCount), 17);
+    PrintInfoScreenTextWhite(name, 123 + GetStringWidth(FONT_NORMAL, str, 0) + 4, 17);
     if (owned)
     {
         CopyMonCategoryText(species, str2);
