@@ -331,6 +331,25 @@
 #define METATILE_Lavaridge_RockWall             0x274
 
 // gTileset_PartyBath
+#define METATILE_PartyBath_WoodenDeck           0x3CC
+#define METATILE_PartyBath_IndoorBorder         0x3CD
+#define METATILE_PartyBath_GalleryWallTop       0x3CE
+#define METATILE_PartyBath_GalleryWall          0x3CF
+#define METATILE_PartyBath_GalleryWallFoot      0x3D0
+#define METATILE_PartyBath_ExitTopLeft          0x3D1
+#define METATILE_PartyBath_ExitTop              0x3D2
+#define METATILE_PartyBath_ExitTopRight         0x3D3
+#define METATILE_PartyBath_ExitBottomLeft       0x3D4
+#define METATILE_PartyBath_ExitBottom           0x3D5
+#define METATILE_PartyBath_ExitBottomRight      0x3D6
+#define METATILE_PartyBath_PoolTopLeft          0x3D7
+#define METATILE_PartyBath_PoolTop              0x3D8
+#define METATILE_PartyBath_PoolTopRight         0x3D9
+#define METATILE_PartyBath_PoolLeft             0x3DA
+#define METATILE_PartyBath_PoolRight            0x3DB
+#define METATILE_PartyBath_PoolBottomLeft       0x3DC
+#define METATILE_PartyBath_PoolBottom           0x3DD
+#define METATILE_PartyBath_PoolBottomRight      0x3DE
 #define METATILE_PartyBath_EmptyFrame_Left       0x3C0
 #define METATILE_PartyBath_EmptyFrame_Right      0x3C1
 #define METATILE_PartyBath_CoolPainting_Left     0x3C2

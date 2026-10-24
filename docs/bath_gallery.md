@@ -40,7 +40,14 @@ Regenerate the committed binary/PNG assets with:
 
 ```text
 python tools/build_bath_gallery.py
+python tools/resort_interiors/build_maps.py
 ```
+
+The bath generator now updates the private tileset without replacing the map.
+The interior generator builds the renovated pools, deck and gallery wall. Use
+`--legacy-layout` on the bath generator only to recreate the former full-pool
+layout. See [resort_interiors.md](resort_interiors.md) for the renovation's
+palette allocation, save-cache handling and validation.
 
 ## Validation
 

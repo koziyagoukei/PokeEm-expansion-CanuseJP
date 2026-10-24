@@ -14,6 +14,12 @@ TILESETS = {
     "gTileset_BattleFrontierOutsideWest": "secondary/battle_frontier_outside_west",
     "gTileset_BattleFrontierOutsideEast": "secondary/battle_frontier_outside_east",
     "gTileset_Fortree": "secondary/fortree",
+    "gTileset_Building": "primary/building",
+    "gTileset_BrendansMaysHouse": "secondary/brendans_mays_house",
+    "gTileset_ResortHouse": "secondary/resort_house",
+    "gTileset_SeashoreHouse": "secondary/seashore_house",
+    "gTileset_Shop": "secondary/shop",
+    "gTileset_PartyBath": "secondary/party_bath",
 }
 
 
@@ -79,7 +85,11 @@ def generated_maps():
     copy_building(cells, city, (20, 18, 7, 7), (34, 7))
     copy_building(cells, city, (7, 0, 10, 9), (34, 20))
     for x in (34, 35, 42, 43):
-        cells[20][x] = 0x3001
+        cells[20][x] = cells[21][x] = 0x3001
+    # The original museum stood on a cliff. Its side terrain is not part of
+    # the building and must match the level plaza at the new location.
+    for x in (34, 35, 36, 41, 42, 43):
+        cells[27][x] = cells[28][x] = 0x305E
     for x, y in ((8, 12), (40, 14), (45, 29), (22, 4), (52, 29)):
         cells[y][x] = 0x3403
     for x, y in ((19, 20), (28, 20), (19, 25), (28, 25)):
@@ -112,17 +122,29 @@ def build(check=False):
             path.write_bytes(data)
 
 
-def render(name, output):
+def render(name, output, cells=None):
     from PIL import Image
 
     entry = layout(name)
     directories = [ROOT / "data/tilesets" / TILESETS[entry[key]]
                    for key in ("primary_tileset", "secondary_tileset")]
+    graphic_directories = [directory if directory.name != "resort_house"
+                           else directory.parent / "brendans_mays_house" for directory in directories]
     sheets = [Image.open(directory / "tiles.png") for directory in directories]
     metatiles = [directory.joinpath("metatiles.bin").read_bytes() for directory in directories]
     palettes = []
     for bank in range(16):
-        path = directories[bank >= 6] / f"palettes/{bank:02}.pal"
+        path = graphic_directories[bank >= 6] / f"palettes/{bank:02}.pal"
+        if entry["secondary_tileset"] == "gTileset_ResortHouse" and bank == 12:
+            path = ROOT / "data/tilesets/secondary/shop/palettes/08.pal"
+        if bank >= 6 and entry["secondary_tileset"] == "gTileset_PartyBath":
+            directory = "brendans_mays_house" if bank == 6 else "lilycove_museum" if bank in (7, 12) else "lavaridge"
+            index = 8 if bank == 12 else bank
+            path = ROOT / f"data/tilesets/secondary/{directory}/palettes/{index:02}.pal"
+            if bank == 11:
+                path = ROOT / "data/tilesets/primary/building/palettes/05.pal"
+            if bank == 9:
+                path = ROOT / "data/tilesets/secondary/lilycove_museum/palettes/06.pal"
         colors = [tuple(map(int, line.split())) for line in path.read_text().splitlines()[3:19]]
         palettes.append(colors)
 
@@ -149,7 +171,8 @@ def render(name, output):
                         image.putpixel((i % 2 * 8 + x, i % 4 // 2 * 8 + y), palettes[word >> 12][color])
         return image
 
-    cells = read_map(name)
+    if cells is None:
+        cells = read_map(name)
     result = Image.new("RGB", (len(cells[0]) * 16, len(cells) * 16))
     for y, row in enumerate(cells):
         for x, cell in enumerate(row):

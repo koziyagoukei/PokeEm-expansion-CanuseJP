@@ -1,6 +1,11 @@
 ultra_frontie_hub_MapScripts::
+	map_script MAP_SCRIPT_ON_LOAD, UltraFrontieHub_OnLoad
 	map_script MAP_SCRIPT_ON_TRANSITION, UltraFrontieHub_OnTransition
 	.byte 0
+
+UltraFrontieHub_OnLoad:
+	special Special_RestoreResortInterior
+	end
 
 UltraFrontieHub_OnTransition:
 	setrespawn HEAL_LOCATION_BATTLE_FRONTIER_OUTSIDE_EAST

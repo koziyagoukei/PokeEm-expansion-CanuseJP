@@ -1,7 +1,7 @@
 {
   "id": "MAP_MINI_MINI_VILLA_SHOP",
   "name": "MiniMiniVilla_Shop",
-  "layout": "LAYOUT_MART",
+  "layout": "LAYOUT_MINI_MINI_VILLA_SHOP",
   "music": "MUS_POKE_MART",
   "region_map_section": "MAPSEC_MINI_MINI_VILLA",
   "requires_flash": false,

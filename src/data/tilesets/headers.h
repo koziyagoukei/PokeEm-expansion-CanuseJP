@@ -503,6 +503,17 @@ const struct Tileset gTileset_LilycoveMuseum =
     .callback = NULL,
 };
 
+const struct Tileset gTileset_ResortHouse =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_ResortHouse,
+    .palettes = gTilesetPalettes_ResortHouse,
+    .metatiles = gMetatiles_ResortHouse,
+    .metatileAttributes = gMetatileAttributes_ResortHouse,
+    .callback = NULL,
+};
+
 const struct Tileset gTileset_BrendansMaysHouse =
 {
     .isCompressed = TRUE,

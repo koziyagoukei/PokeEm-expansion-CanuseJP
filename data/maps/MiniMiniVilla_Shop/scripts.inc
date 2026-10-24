@@ -1,6 +1,11 @@
 MiniMiniVilla_Shop_MapScripts::
+	map_script MAP_SCRIPT_ON_LOAD, VillaShop_OnLoad
 	map_script MAP_SCRIPT_ON_TRANSITION, VillaShop_OnTransition
 	.byte 0
+
+VillaShop_OnLoad:
+	special Special_RestoreResortInterior
+	end
 
 VillaShop_OnTransition:
 	setflag FLAG_TEMP_HIDE_FOLLOWER

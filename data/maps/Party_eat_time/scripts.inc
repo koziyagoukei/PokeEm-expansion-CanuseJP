@@ -1,6 +1,11 @@
 Party_eat_time_MapScripts::
+	map_script MAP_SCRIPT_ON_LOAD, Party_eat_time_OnLoad
 	map_script MAP_SCRIPT_ON_TRANSITION, Party_eat_time_OnTransition
 	.byte 0
+
+Party_eat_time_OnLoad:
+	special Special_RestoreResortInterior
+	end
 
 Party_eat_time_OnTransition:
 	setflag FLAG_TEMP_HIDE_FOLLOWER

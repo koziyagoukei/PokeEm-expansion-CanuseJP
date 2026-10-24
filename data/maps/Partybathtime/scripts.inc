@@ -5,6 +5,7 @@ Partybathtime_MapScripts::
 	.byte 0
 
 Partybathtime_OnLoad:
+	special Special_RestoreResortInterior
 	@ Update the shared layout retained by saves made in the bath before the gallery.
 	setmaplayoutindex LAYOUT_PARTYBATHTIME
 	setmetatile 3, 2, METATILE_PartyBath_EmptyFrame_Left, TRUE

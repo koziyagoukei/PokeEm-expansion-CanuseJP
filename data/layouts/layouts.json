@@ -4858,7 +4858,7 @@
       "width": 27,
       "height": 22,
       "primary_tileset": "gTileset_Building",
-      "secondary_tileset": "gTileset_BrendansMaysHouse",
+      "secondary_tileset": "gTileset_ResortHouse",
       "border_filepath": "data/layouts/ultra_frontie_hub/border.bin",
       "blockdata_filepath": "data/layouts/ultra_frontie_hub/map.bin",
       "border_height": 2,
@@ -4882,7 +4882,7 @@
       "width": 15,
       "height": 10,
       "primary_tileset": "gTileset_Building",
-      "secondary_tileset": "gTileset_SeashoreHouse",
+      "secondary_tileset": "gTileset_ResortHouse",
       "border_filepath": "data/layouts/Party_eat_time/border.bin",
       "blockdata_filepath": "data/layouts/Party_eat_time/map.bin",
       "border_height": 2,
@@ -4943,6 +4943,17 @@
       "secondary_tileset": "gTileset_Lilycove",
       "border_filepath": "data/layouts/BattleFrontier_OutsideSouth/border.bin",
       "blockdata_filepath": "data/layouts/BattleFrontier_OutsideSouth/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_MINI_MINI_VILLA_SHOP",
+      "name": "MiniMiniVilla_Shop_Layout",
+      "width": 11,
+      "height": 8,
+      "primary_tileset": "gTileset_Building",
+      "secondary_tileset": "gTileset_Shop",
+      "border_filepath": "data/layouts/MiniMiniVilla_Shop/border.bin",
+      "blockdata_filepath": "data/layouts/MiniMiniVilla_Shop/map.bin",
       "layout_version": "emerald"
     }
   ]

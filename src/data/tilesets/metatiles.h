@@ -118,6 +118,9 @@ const u16 gMetatileAttributes_LilycoveMuseum[] = INCBIN_U16("data/tilesets/secon
 const u16 gMetatiles_BrendansMaysHouse[] = INCBIN_U16("data/tilesets/secondary/brendans_mays_house/metatiles.bin");
 const u16 gMetatileAttributes_BrendansMaysHouse[] = INCBIN_U16("data/tilesets/secondary/brendans_mays_house/metatile_attributes.bin");
 
+const u16 gMetatiles_ResortHouse[] = INCBIN_U16("data/tilesets/secondary/resort_house/metatiles.bin");
+const u16 gMetatileAttributes_ResortHouse[] = INCBIN_U16("data/tilesets/secondary/resort_house/metatile_attributes.bin");
+
 const u16 gMetatiles_Lab[] = INCBIN_U16("data/tilesets/secondary/lab/metatiles.bin");
 const u16 gMetatileAttributes_Lab[] = INCBIN_U16("data/tilesets/secondary/lab/metatile_attributes.bin");
 

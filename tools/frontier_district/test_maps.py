@@ -36,7 +36,8 @@ class FrontierDistrictTest(unittest.TestCase):
         groups = json.loads((ROOT / "data/maps/map_groups.json").read_text())
         self.assertEqual(groups["gMapGroup_TownsAndRoutes"][-2:], ["MiniMiniVilla", SOUTH])
         layouts = json.loads((ROOT / "data/layouts/layouts.json").read_text())["layouts"]
-        self.assertEqual(layouts[-1]["name"], SOUTH + "_Layout")
+        names = [entry["name"] for entry in layouts]
+        self.assertGreater(names.index(SOUTH + "_Layout"), names.index("Partybathtime_Layout"))
         for entry in layouts:
             if entry["name"] in (SOUTH + "_Layout", "BattleFrontier_OutsideWest_Layout", "party_roamer_park_Layout"):
                 with self.subTest(layout=entry["name"]):
