@@ -1,5 +1,6 @@
 #include "global.h"
 #include "battle.h"
+#include "main.h"
 #include "palette.h"
 #include "pokemon.h"
 #include "pokemon_animation.h"
@@ -527,7 +528,7 @@ static void Task_HandleMonAnimation(u8 taskId)
         // Task_HandleMonAnimation handles more than just KO animations,
         // but if the counter is non-zero then only KO animations are running.
         // This assumption is not checked.
-        if (gBattleStruct->battlerKOAnimsRunning > 0)
+        if (gMain.inBattle && gBattleStruct != NULL && gBattleStruct->battlerKOAnimsRunning > 0)
             gBattleStruct->battlerKOAnimsRunning--;
         DestroyTask(taskId);
     }
@@ -539,6 +540,14 @@ void LaunchAnimationTaskForFrontSprite(struct Sprite *sprite, enum AnimFunctionI
     gTasks[taskId].tPtrHi = (u32)(sprite) >> 16;
     gTasks[taskId].tPtrLo = (u32)(sprite);
     gTasks[taskId].tAnimId = frontAnimId;
+}
+
+void CancelMonAnimationTask(struct Sprite *sprite)
+{
+    for (u32 taskId = 0; taskId < NUM_TASKS; taskId++)
+        if (gTasks[taskId].isActive && gTasks[taskId].func == Task_HandleMonAnimation
+            && ANIM_SPRITE(taskId) == sprite)
+            DestroyTask(taskId);
 }
 
 void StartMonSummaryAnimation(struct Sprite *sprite, enum AnimFunctionIDs frontAnimId)

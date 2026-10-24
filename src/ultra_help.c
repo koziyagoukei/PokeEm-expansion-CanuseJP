@@ -21,6 +21,7 @@
 
 #define INFO_VIEWER_ALT_FRAME_PALETTE_NUM 14
 #define INFO_VIEWER_HISTORY_SIZE 8
+#define INFO_VIEWER_VISIBLE_CHOICES 6
 
 enum
 {
@@ -33,28 +34,12 @@ enum
     INFO_VIEWER_MODE_CHOICE,
 };
 
-struct InfoViewerStyle
+struct InfoViewerHistory
 {
-    u8 windowFill;
-    u8 framePaletteNum;
-    const u16 *framePalette;
-    u8 textColors[3];
-};
-
-struct InfoViewerChoice
-{
-    const u8 *text;
-    u16 nextInfoId;
-};
-
-struct InfoViewerEntry
-{
-    const u8 *title;
-    const u8 *const *pages;
-    u8 pageCount;
-    const struct InfoViewerChoice *choices;
-    u8 choiceCount;
-    const struct InfoViewerStyle *style;
+    u16 infoId;
+    u8 page;
+    u8 choice;
+    u8 mode;
 };
 
 #include "data/info_viewer.h"
@@ -72,13 +57,12 @@ static void DrawInfoViewerPageNumber(void);
 static void ResetBgCoordinates(void);
 static void ClearVramOamPlttRegs(void);
 static void ClearTasksAndGraphicalStructs(void);
-static const struct InfoViewerEntry *GetInfoViewerEntry(u16 infoId);
 static const struct InfoViewerStyle *GetInfoViewerStyle(void);
 static void LoadInfoViewerWindowGfx(void);
 static bool32 InfoViewerHasChoices(void);
 static void SwitchInfoViewerEntry(u16 infoId, bool32 saveHistory);
 static void PushInfoViewerHistory(u16 infoId);
-static bool32 PopInfoViewerHistory(u16 *infoId);
+static void ReturnToPreviousInfoViewerEntry(u8 taskId);
 static void SelectInfoViewerChoice(u8 taskId);
 
 EWRAM_DATA static u8 *sInfoViewerTilemapBuffer = NULL;
@@ -87,7 +71,7 @@ EWRAM_DATA static u8 sInfoViewerPage = 0;
 EWRAM_DATA static u8 sInfoViewerMode = INFO_VIEWER_MODE_PAGE;
 EWRAM_DATA static u8 sInfoViewerChoiceCursor = 0;
 EWRAM_DATA static u16 sInfoViewerInfoId = INFO_FRONTIER_RULES;
-EWRAM_DATA static u16 sInfoViewerHistory[INFO_VIEWER_HISTORY_SIZE] = {0};
+EWRAM_DATA static struct InfoViewerHistory sInfoViewerHistory[INFO_VIEWER_HISTORY_SIZE] = {0};
 EWRAM_DATA static u8 sInfoViewerHistoryDepth = 0;
 EWRAM_DATA static MainCallback sInfoViewerExitCallback = NULL;
 
@@ -156,8 +140,10 @@ void StartInfoViewer(u16 infoId, MainCallback exitCallback)
     sInfoViewerChoiceCursor = 0;
     sInfoViewerInfoId = infoId;
     sInfoViewerEntry = GetInfoViewerEntry(infoId);
+    if (sInfoViewerEntry->pageCount == 0)
+        sInfoViewerMode = INFO_VIEWER_MODE_CHOICE;
     sInfoViewerHistoryDepth = 0;
-    sInfoViewerExitCallback = exitCallback;
+    sInfoViewerExitCallback = exitCallback != NULL ? exitCallback : CB2_ReturnToFieldContinueScriptPlayMapMusic;
     SetVBlankCallback(NULL);
     SetMainCallback2(CB2_InitInfoViewer);
 }
@@ -177,6 +163,11 @@ static void CB2_InitInfoViewer(void)
         break;
     case 2:
         sInfoViewerTilemapBuffer = AllocZeroed(BG_SCREEN_SIZE);
+        if (sInfoViewerTilemapBuffer == NULL)
+        {
+            SetMainCallback2(sInfoViewerExitCallback);
+            return;
+        }
         ResetBgsAndClearDma3BusyFlags(0);
         InitBgsFromTemplates(0, sInfoViewerBgTemplates, ARRAY_COUNT(sInfoViewerBgTemplates));
         SetBgTilemapBuffer(0, sInfoViewerTilemapBuffer);
@@ -243,14 +234,19 @@ static void Task_InfoViewerHandleInput(u8 taskId)
         else if (JOY_NEW(B_BUTTON))
         {
             PlaySE(SE_SELECT);
-            sInfoViewerMode = INFO_VIEWER_MODE_PAGE;
-            DrawInfoViewerPage();
+            if (sInfoViewerEntry->pageCount == 0)
+                ReturnToPreviousInfoViewerEntry(taskId);
+            else
+            {
+                sInfoViewerMode = INFO_VIEWER_MODE_PAGE;
+                DrawInfoViewerPage();
+            }
         }
     }
     else if (JOY_NEW(A_BUTTON))
     {
         PlaySE(SE_SELECT);
-        if (sInfoViewerPage + 1 < sInfoViewerEntry->pageCount)
+        if (sInfoViewerPage + 1 < GetInfoViewerPageCount(sInfoViewerInfoId))
         {
             sInfoViewerPage++;
             DrawInfoViewerPage();
@@ -263,12 +259,12 @@ static void Task_InfoViewerHandleInput(u8 taskId)
         }
         else
         {
-            gTasks[taskId].func = Task_InfoViewerBeginFadeOut;
+            ReturnToPreviousInfoViewerEntry(taskId);
         }
     }
-    else if (JOY_NEW(R_BUTTON))
+    else if (JOY_NEW(R_BUTTON | DPAD_RIGHT))
     {
-        if (sInfoViewerPage + 1 < sInfoViewerEntry->pageCount)
+        if (sInfoViewerPage + 1 < GetInfoViewerPageCount(sInfoViewerInfoId))
         {
             PlaySE(SE_SELECT);
             sInfoViewerPage++;
@@ -280,7 +276,7 @@ static void Task_InfoViewerHandleInput(u8 taskId)
         PlaySE(SE_SELECT);
         if (sInfoViewerPage == 0)
         {
-            gTasks[taskId].func = Task_InfoViewerBeginFadeOut;
+            ReturnToPreviousInfoViewerEntry(taskId);
         }
         else
         {
@@ -288,7 +284,7 @@ static void Task_InfoViewerHandleInput(u8 taskId)
             DrawInfoViewerPage();
         }
     }
-    else if (JOY_NEW(L_BUTTON))
+    else if (JOY_NEW(L_BUTTON | DPAD_LEFT))
     {
         if (sInfoViewerPage != 0)
         {
@@ -316,6 +312,7 @@ static void Task_InfoViewerExit(u8 taskId)
 
         ClearStdWindowAndFrame(WIN_INFO_VIEWER, FALSE);
         FreeAllWindowBuffers();
+        UnsetBgTilemapBuffer(0);
         Free(sInfoViewerTilemapBuffer);
         sInfoViewerTilemapBuffer = NULL;
         sInfoViewerEntry = NULL;
@@ -336,13 +333,21 @@ static void DrawInfoViewerPage(void)
     sInfoViewerEntry = GetInfoViewerEntry(sInfoViewerInfoId);
     style = GetInfoViewerStyle();
 
-    if (sInfoViewerPage >= sInfoViewerEntry->pageCount)
+    if (sInfoViewerMode == INFO_VIEWER_MODE_CHOICE)
+    {
+        DrawInfoViewerChoices();
+        return;
+    }
+
+    if (sInfoViewerPage >= GetInfoViewerPageCount(sInfoViewerInfoId))
         sInfoViewerPage = 0;
 
     DrawStdFrameWithCustomTileAndPalette(WIN_INFO_VIEWER, FALSE, STD_WINDOW_BASE_TILE_NUM, style->framePaletteNum);
     FillWindowPixelBuffer(WIN_INFO_VIEWER, style->windowFill);
     AddTextPrinterParameterized4(WIN_INFO_VIEWER, FONT_NORMAL, 8, 6, 0, 0, style->textColors, TEXT_SKIP_DRAW, sInfoViewerEntry->title);
     AddTextPrinterParameterized4(WIN_INFO_VIEWER, FONT_SMALL, 8, 28, 0, 2, style->textColors, TEXT_SKIP_DRAW, sInfoViewerEntry->pages[sInfoViewerPage]);
+    AddTextPrinterParameterized4(WIN_INFO_VIEWER, FONT_SMALL, 8, 132, 0, 0, style->textColors, TEXT_SKIP_DRAW,
+        COMPOUND_STRING("{JPN}A:つぎ B:もどる"));
     DrawInfoViewerPageNumber();
     CopyWindowToVram(WIN_INFO_VIEWER, COPYWIN_FULL);
 }
@@ -351,6 +356,7 @@ static void DrawInfoViewerChoices(void)
 {
     const struct InfoViewerStyle *style = GetInfoViewerStyle();
     u8 i;
+    u8 first;
 
     if (!InfoViewerHasChoices())
     {
@@ -365,17 +371,19 @@ static void DrawInfoViewerChoices(void)
     DrawStdFrameWithCustomTileAndPalette(WIN_INFO_VIEWER, FALSE, STD_WINDOW_BASE_TILE_NUM, style->framePaletteNum);
     FillWindowPixelBuffer(WIN_INFO_VIEWER, style->windowFill);
     AddTextPrinterParameterized4(WIN_INFO_VIEWER, FONT_NORMAL, 8, 6, 0, 0, style->textColors, TEXT_SKIP_DRAW, sInfoViewerEntry->title);
-    AddTextPrinterParameterized4(WIN_INFO_VIEWER, FONT_SMALL, 8, 30, 0, 0, style->textColors, TEXT_SKIP_DRAW, COMPOUND_STRING("{JPN}どうしますか"));
-
-    for (i = 0; i < sInfoViewerEntry->choiceCount; i++)
+    first = sInfoViewerChoiceCursor / INFO_VIEWER_VISIBLE_CHOICES * INFO_VIEWER_VISIBLE_CHOICES;
+    for (i = first; i < min(first + INFO_VIEWER_VISIBLE_CHOICES, sInfoViewerEntry->choiceCount); i++)
     {
-        u8 y = 54 + i * 18;
+        u8 y = 30 + (i - first) * 16;
 
         if (i == sInfoViewerChoiceCursor)
             AddTextPrinterParameterized4(WIN_INFO_VIEWER, FONT_NORMAL, 8, y, 0, 0, style->textColors, TEXT_SKIP_DRAW, gText_SelectorArrow3);
         AddTextPrinterParameterized4(WIN_INFO_VIEWER, FONT_SMALL, 24, y + 1, 0, 0, style->textColors, TEXT_SKIP_DRAW, sInfoViewerEntry->choices[i].text);
     }
 
+    AddTextPrinterParameterized4(WIN_INFO_VIEWER, FONT_SMALL, 8, 132, 0, 0, style->textColors, TEXT_SKIP_DRAW,
+        COMPOUND_STRING("{JPN}A:けってい B:もどる"));
+    DrawInfoViewerPageNumber();
     CopyWindowToVram(WIN_INFO_VIEWER, COPYWIN_FULL);
 }
 
@@ -385,15 +393,18 @@ static void DrawInfoViewerPageNumber(void)
     u8 *txtPtr = gStringVar1;
     s32 x;
 
-    txtPtr = ConvertIntToDecimalStringN(txtPtr, sInfoViewerPage + 1, STR_CONV_MODE_LEFT_ALIGN, 2);
+    u32 current = sInfoViewerMode == INFO_VIEWER_MODE_CHOICE ? sInfoViewerChoiceCursor + 1 : sInfoViewerPage + 1;
+    u32 total = sInfoViewerMode == INFO_VIEWER_MODE_CHOICE ? sInfoViewerEntry->choiceCount : GetInfoViewerPageCount(sInfoViewerInfoId);
+
+    txtPtr = ConvertIntToDecimalStringN(txtPtr, current, STR_CONV_MODE_LEFT_ALIGN, 2);
     txtPtr = StringCopy(txtPtr, COMPOUND_STRING("/"));
-    ConvertIntToDecimalStringN(txtPtr, sInfoViewerEntry->pageCount, STR_CONV_MODE_LEFT_ALIGN, 2);
+    ConvertIntToDecimalStringN(txtPtr, total, STR_CONV_MODE_LEFT_ALIGN, 2);
 
     x = GetStringRightAlignXOffset(FONT_SMALL, gStringVar1, 212);
     AddTextPrinterParameterized4(WIN_INFO_VIEWER, FONT_SMALL, x, 132, 0, 0, style->textColors, TEXT_SKIP_DRAW, gStringVar1);
 }
 
-static const struct InfoViewerEntry *GetInfoViewerEntry(u16 infoId)
+const struct InfoViewerEntry *GetInfoViewerEntry(u16 infoId)
 {
     const struct InfoViewerEntry *entry;
 
@@ -401,10 +412,16 @@ static const struct InfoViewerEntry *GetInfoViewerEntry(u16 infoId)
         infoId = INFO_FRONTIER_RULES;
 
     entry = &sInfoViewerEntries[infoId];
-    if (entry->title == NULL || entry->pages == NULL || entry->pageCount == 0)
+    if (entry->title == NULL || ((entry->pages == NULL || entry->pageCount == 0)
+        && (entry->choices == NULL || entry->choiceCount == 0)))
         entry = &sInfoViewerEntries[INFO_FRONTIER_RULES];
 
     return entry;
+}
+
+u32 GetInfoViewerPageCount(u16 infoId)
+{
+    return GetInfoViewerEntry(infoId)->pageCount;
 }
 
 static const struct InfoViewerStyle *GetInfoViewerStyle(void)
@@ -440,7 +457,7 @@ static void SwitchInfoViewerEntry(u16 infoId, bool32 saveHistory)
     sInfoViewerEntry = GetInfoViewerEntry(infoId);
     sInfoViewerPage = 0;
     sInfoViewerChoiceCursor = 0;
-    sInfoViewerMode = INFO_VIEWER_MODE_PAGE;
+    sInfoViewerMode = sInfoViewerEntry->pageCount == 0 ? INFO_VIEWER_MODE_CHOICE : INFO_VIEWER_MODE_PAGE;
     LoadInfoViewerWindowGfx();
     DrawInfoViewerPage();
 }
@@ -451,23 +468,33 @@ static void PushInfoViewerHistory(u16 infoId)
 
     if (sInfoViewerHistoryDepth < INFO_VIEWER_HISTORY_SIZE)
     {
-        sInfoViewerHistory[sInfoViewerHistoryDepth++] = infoId;
+        sInfoViewerHistoryDepth++;
     }
     else
     {
         for (i = 1; i < INFO_VIEWER_HISTORY_SIZE; i++)
             sInfoViewerHistory[i - 1] = sInfoViewerHistory[i];
-        sInfoViewerHistory[INFO_VIEWER_HISTORY_SIZE - 1] = infoId;
     }
+    sInfoViewerHistory[sInfoViewerHistoryDepth - 1] = (struct InfoViewerHistory){
+        .infoId = infoId, .page = sInfoViewerPage, .choice = sInfoViewerChoiceCursor, .mode = sInfoViewerMode,
+    };
 }
 
-static bool32 PopInfoViewerHistory(u16 *infoId)
+static void ReturnToPreviousInfoViewerEntry(u8 taskId)
 {
     if (sInfoViewerHistoryDepth == 0)
-        return FALSE;
-
-    *infoId = sInfoViewerHistory[--sInfoViewerHistoryDepth];
-    return TRUE;
+    {
+        gTasks[taskId].func = Task_InfoViewerBeginFadeOut;
+    }
+    else
+    {
+        struct InfoViewerHistory history = sInfoViewerHistory[--sInfoViewerHistoryDepth];
+        SwitchInfoViewerEntry(history.infoId, FALSE);
+        sInfoViewerPage = history.page;
+        sInfoViewerChoiceCursor = history.choice;
+        sInfoViewerMode = history.mode;
+        DrawInfoViewerPage();
+    }
 }
 
 static void SelectInfoViewerChoice(u8 taskId)
@@ -484,10 +511,7 @@ static void SelectInfoViewerChoice(u8 taskId)
     }
     else if (nextInfoId == INFO_VIEWER_BACK)
     {
-        if (PopInfoViewerHistory(&nextInfoId))
-            SwitchInfoViewerEntry(nextInfoId, FALSE);
-        else
-            gTasks[taskId].func = Task_InfoViewerBeginFadeOut;
+        ReturnToPreviousInfoViewerEntry(taskId);
     }
     else
     {

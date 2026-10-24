@@ -81,6 +81,8 @@ extern u8 gAnimCustomPanning;
 extern u16 gAnimMoveIndex;
 
 void ClearBattleAnimationVars(void);
+bool32 BattleAnim_IsContestCutawayActive(void);
+bool32 BattleAnim_UseContestBgLayout(void);
 void DoMoveAnim(enum Move move);
 void LaunchBattleAnimation(u32 animType, u32 animId);
 void DestroyAnimSprite(struct Sprite *sprite);

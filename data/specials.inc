@@ -645,3 +645,5 @@ gSpecials::
 	def_special Special_BufferPartyRoamerMessage
 	def_special Special_OpenInfoViewer, waitstate=1
 	def_special ultra_help, waitstate=1
+	def_special ContestShop_BufferProduct
+	def_special ContestShop_Purchase

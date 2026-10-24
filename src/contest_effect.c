@@ -315,8 +315,7 @@ static void ContestEffect_JamsOthersButMissOneTurn(void)
 // Startles POK�MON that made a same-type appeal.
 static void ContestEffect_StartleMonsSameTypeAppeal(void)
 {
-    enum Move move = eContestantStatus[eContestAppealResults.contestant].currMove;
-    JamByMoveCategory(GetMoveContestCategory(move));
+    JamByMoveCategory(eContestantStatus[eContestAppealResults.contestant].moveCategory);
     SetContestantEffectStringID(eContestAppealResults.contestant, CONTEST_STRING_ATTEMPT_STARTLE);
 }
 
@@ -673,7 +672,7 @@ static void ContestEffect_BetterIfSameType(void)
     }
 
     move = eContestantStatus[eContestAppealResults.contestant].currMove;
-    if (GetMoveContestCategory(move) == GetMoveContestCategory(eContestantStatus[j].currMove))
+    if (eContestantStatus[eContestAppealResults.contestant].moveCategory == eContestantStatus[j].moveCategory)
     {
         eContestantStatus[eContestAppealResults.contestant].appeal += gContestEffects[GetMoveContestEffect(move)].appeal * 2;
         SetContestantEffectStringID(eContestAppealResults.contestant, CONTEST_STRING_SAME_TYPE_GOOD);
@@ -691,7 +690,7 @@ static void ContestEffect_BetterIfDiffType(void)
         for (i = 0; i < CONTESTANT_COUNT; i++)
         {
             if (eContestAppealResults.turnOrder[eContestAppealResults.contestant] - 1 == eContestAppealResults.turnOrder[i] &&
-                GetMoveContestCategory(move) != GetMoveContestCategory(eContestantStatus[i].currMove))
+                eContestantStatus[eContestAppealResults.contestant].moveCategory != eContestantStatus[i].moveCategory)
             {
                 eContestantStatus[eContestAppealResults.contestant].appeal += gContestEffects[GetMoveContestEffect(move)].appeal * 2;
                 SetContestantEffectStringID(eContestAppealResults.contestant, CONTEST_STRING_DIFF_TYPE_GOOD);
@@ -893,7 +892,7 @@ static void ContestEffect_ScrambleNextTurnOrder(void)
 // An appeal that excites the audience in any CONTEST.
 static void ContestEffect_ExciteAudienceInAnyContest(void)
 {
-    if (GetMoveContestCategory(eContestantStatus[eContestAppealResults.contestant].currMove) != gSpecialVar_ContestCategory)
+    if (eContestantStatus[eContestAppealResults.contestant].moveCategory != gSpecialVar_ContestCategory)
     {
         eContestantStatus[eContestAppealResults.contestant].overrideCategoryExcitementMod = TRUE;
     }
@@ -982,7 +981,7 @@ static void JamByMoveCategory(enum ContestCategories category)
     {
         if (eContestAppealResults.turnOrder[eContestAppealResults.contestant] > eContestAppealResults.turnOrder[i])
         {
-            if (category == GetMoveContestCategory(eContestantStatus[i].currMove))
+            if (category == eContestantStatus[i].moveCategory)
                 eContestAppealResults.jam = 40;
             else
                 eContestAppealResults.jam = 10;
@@ -1000,7 +999,7 @@ static void JamByMoveCategory(enum ContestCategories category)
 static bool8 CanUnnerveContestant(u8 i)
 {
     eContestAppealResults.unnervedPokes[i] = 1;
-    if (eContestantStatus[i].immune)
+    if (eContestantStatus[i].immune || ContestGimmick_IsDynamaxed(i))
     {
         SetContestantEffectStringID(i, CONTEST_STRING_AVOID_SEEING);
         return FALSE;
@@ -1035,24 +1034,23 @@ static bool8 WasAtLeastOneOpponentJammed(void)
             if (eContestantStatus[contestant].moreEasilyStartled)
                 eContestAppealResults.jam2 *= 2;
             if (eContestantStatus[contestant].resistant)
-            {
                 eContestAppealResults.jam2 = 10;
-                SetContestantEffectStringID(contestant, CONTEST_STRING_LITTLE_DISTRACTED);
+            else
+                eContestAppealResults.jam2 -= eContestantStatus[contestant].jamReduction;
+
+            if (eContestAppealResults.jam2 <= 0)
+            {
+                eContestAppealResults.jam2 = 0;
+                SetContestantEffectStringID(contestant, CONTEST_STRING_NOT_FAZED);
             }
             else
             {
-                eContestAppealResults.jam2 -= eContestantStatus[contestant].jamReduction;
-                if (eContestAppealResults.jam2 <= 0)
-                {
-                    eContestAppealResults.jam2 = 0;
-                    SetContestantEffectStringID(contestant, CONTEST_STRING_NOT_FAZED);
-                }
+                JamContestant(contestant, eContestAppealResults.jam2);
+                if (eContestantStatus[contestant].resistant)
+                    SetContestantEffectStringID(contestant, CONTEST_STRING_LITTLE_DISTRACTED);
                 else
-                {
-                    JamContestant(contestant, eContestAppealResults.jam2);
                     SetStartledString(contestant, eContestAppealResults.jam2);
-                    jamBuffer[contestant] = eContestAppealResults.jam2;
-                }
+                jamBuffer[contestant] = eContestAppealResults.jam2;
             }
         }
     }

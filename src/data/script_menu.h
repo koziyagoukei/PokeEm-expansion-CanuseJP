@@ -1136,6 +1136,24 @@ static const struct MenuAction MultichoiceList_Exit[] =
     {gText_Exit},
 };
 
+static const struct MenuAction sMultichoiceList_ContestBpShop[] =
+{
+    {COMPOUND_STRING("{JPN}にじいろポロック")},
+    {COMPOUND_STRING("{JPN}コンテストの スカーフ")},
+    {COMPOUND_STRING("{JPN}コンテストの ヘルプ")},
+    {gText_Exit},
+};
+
+static const struct MenuAction sMultichoiceList_ContestBpShopScarves[] =
+{
+    {COMPOUND_STRING("{JPN}あかいバンダナ")},
+    {COMPOUND_STRING("{JPN}あおいバンダナ")},
+    {COMPOUND_STRING("{JPN}ピンクのバンダナ")},
+    {COMPOUND_STRING("{JPN}みどりのバンダナ")},
+    {COMPOUND_STRING("{JPN}きいろのバンダナ")},
+    {gText_Exit},
+};
+
 struct MultichoiceListStruct
 {
     const struct MenuAction *list;
@@ -1304,6 +1322,8 @@ static const struct MultichoiceListStruct sMultichoiceLists[] =
     [MULTI_EGGS_VICTORIES_QUIT]                        = MULTICHOICE(sMultichoiceList_Eggs_Victories_Quit),
     [MULTI_HOF_EGGS_VICTORIES_QUIT]                    = MULTICHOICE(sMultichoiceList_HOF_Eggs_Victories_Quit),
     [MULTI_PARTY_ROAMER_POKEBLOCK_FLAVOR]              = MULTICHOICE(MultichoiceList_PartyRoamerPokeblockFlavor),
+    [MULTI_CONTEST_BP_SHOP]                          = MULTICHOICE(sMultichoiceList_ContestBpShop),
+    [MULTI_CONTEST_BP_SHOP_SCARVES]                  = MULTICHOICE(sMultichoiceList_ContestBpShopScarves),
 };
 
 const u8 *const gStdStrings[] =

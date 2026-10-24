@@ -129,7 +129,6 @@ static void LoadAllContestMonIconPalettes(void);
 static void LoadContestResultsTitleBarTilemaps(void);
 static u8 GetNumPreliminaryPoints(u8, bool8);
 static s8 GetNumRound2Points(u8, bool8);
-static void AddContestTextPrinter(int, u8 *, int);
 static void AddContestTextPrinterFitWidth(int, u8 *, int, int);
 static void AllocContestResults(void);
 static void FreeContestResults(void);
@@ -490,14 +489,20 @@ static void LoadContestMonName(u8 monIndex)
 {
     struct ContestPokemon *mon = &gContestMons[monIndex];
     u8 *str = gDisplayedStringBattle;
+    u8 trainerName[3 * PLAYER_NAME_LENGTH + 4];
+    u32 trainerFont;
+    s32 trainerX;
+
+    Contest_CopyDisplayName(StringCopy(trainerName, gText_Slash), mon->trainerName);
+    trainerFont = GetFontIdToFit(trainerName, FONT_NARROW, 0, 46);
+    trainerX = min(50, 95 - GetStringWidth(trainerFont, trainerName, 0));
     if (monIndex == gContestPlayerMonIndex)
         str = StringCopy(gDisplayedStringBattle, gText_ColorDarkGray);
 
-    StringCopy(str, mon->nickname);
-    AddContestTextPrinterFitWidth(monIndex, gDisplayedStringBattle, 0, 49);
-    StringCopy(str, gText_Slash);
-    StringAppend(str, mon->trainerName);
-    AddContestTextPrinter(monIndex, gDisplayedStringBattle, 50);
+    Contest_CopyDisplayName(str, mon->nickname);
+    AddContestTextPrinterFitWidth(monIndex, gDisplayedStringBattle, 0, trainerX - 1);
+    StringCopy(str, trainerName);
+    AddContestTextPrinterFitWidth(monIndex, gDisplayedStringBattle, trainerX, 95 - trainerX);
 }
 
 static void LoadAllContestMonNames(void)
@@ -848,9 +853,8 @@ static void Task_AnnounceWinner(u8 taskId)
             s16 x;
             gTasks[taskId].tTimer = 0;
             GET_CONTEST_WINNER_ID(i);
-            StringCopy(gStringVar1, gContestMons[i].trainerName);
-            ConvertInternationalContestantName(gStringVar1);
-            StringCopy(gStringVar2, gContestMons[i].nickname);
+            Contest_CopyDisplayName(gStringVar1, gContestMons[i].trainerName);
+            Contest_CopyDisplayName(gStringVar2, gContestMons[i].nickname);
             StringExpandPlaceholders(winnerTextBuffer, gText_ContestantsMonWon);
             x = DrawResultsTextWindow(winnerTextBuffer, sContestResults->data->slidingTextBoxSpriteId);
             StartTextBoxSlideIn(x, TEXT_BOX_Y, -1, 1088);
@@ -1902,17 +1906,11 @@ static void AddContestTextPrinterFitWidth(int windowId, u8 *str, int x, int widt
     PutWindowTilemap(windowId);
 }
 
-static void AddContestTextPrinter(int windowId, u8 *str, int x)
-{
-    AddContestTextPrinterFitWidth(windowId, str, x, DISPLAY_WIDTH);
-}
-
 void TryEnterContestMon(void)
 {
     u8 eligibility = GetContestEntryEligibility(&gParties[B_TRAINER_PLAYER][gContestMonPartyIndex]);
 
-    // Nonzero eligibility can still be non-eligibile, if mon is fainted or egg
-    if (eligibility)
+    if (eligibility == CAN_ENTER_CONTEST_EQUAL_RANK || eligibility == CAN_ENTER_CONTEST_HIGH_RANK)
     {
         SetContestants(gSpecialVar_ContestCategory, gSpecialVar_ContestRank);
         CalculateRound1Points(gSpecialVar_ContestCategory);
@@ -1951,13 +1949,12 @@ void GiveMonContestRibbon(void)
 
 void BufferContestantTrainerName(void)
 {
-    StringCopy(gStringVar1, gContestMons[gSpecialVar_0x8006].trainerName);
-    ConvertInternationalContestantName(gStringVar1);
+    Contest_CopyDisplayName(gStringVar1, gContestMons[gSpecialVar_0x8006].trainerName);
 }
 
 void BufferContestantMonNickname(void)
 {
-    StringCopy(gStringVar3, gContestMons[gSpecialVar_0x8006].nickname);
+    Contest_CopyDisplayName(gStringVar3, gContestMons[gSpecialVar_0x8006].nickname);
 }
 
 // Unused script special
@@ -1990,15 +1987,14 @@ void BufferContestWinnerTrainerName(void)
 {
     u8 i;
     GET_CONTEST_WINNER_ID(i);
-    StringCopy(gStringVar3, gContestMons[i].trainerName);
-    ConvertInternationalContestantName(gStringVar3);
+    Contest_CopyDisplayName(gStringVar3, gContestMons[i].trainerName);
 }
 
 void BufferContestWinnerMonName(void)
 {
     u8 i;
     GET_CONTEST_WINNER_ID(i);
-    StringCopy(gStringVar1, gContestMons[i].nickname);
+    Contest_CopyDisplayName(gStringVar1, gContestMons[i].nickname);
 }
 
 void CB2_SetStartContestCallback(void)
@@ -2344,9 +2340,8 @@ void GetContestantNamesAtRank(void)
     }
 
     // Use contestant id to get names
-    StringCopy(gStringVar1, gContestMons[i].nickname);
-    StringCopy(gStringVar2, gContestMons[i].trainerName);
-    ConvertInternationalContestantName(gStringVar2);
+    Contest_CopyDisplayName(gStringVar1, gContestMons[i].nickname);
+    Contest_CopyDisplayName(gStringVar2, gContestMons[i].trainerName);
 
     // Return adjusted rank
     if (numAtCondition == 1)
@@ -2470,7 +2465,7 @@ void ShowContestEntryMonPic(void)
     u8 left, top;
     bool32 isShiny;
 
-    if (FindTaskIdByFunc(Task_ShowContestEntryMonPic) == TASK_NONE)
+    if (gSpecialVar_0x8006 < CONTESTANT_COUNT && FindTaskIdByFunc(Task_ShowContestEntryMonPic) == TASK_NONE)
     {
         AllocateMonSpritesGfx();
         left = 10;
@@ -2481,12 +2476,22 @@ void ShowContestEntryMonPic(void)
         taskId = CreateTask(Task_ShowContestEntryMonPic, 0x50);
         gTasks[taskId].data[0] = 0;
         gTasks[taskId].data[1] = species;
+        gTasks[taskId].data[2] = SPRITE_NONE;
+        gTasks[taskId].data[5] = WINDOW_NONE;
         HandleLoadSpecialPokePic(TRUE, gMonSpritesGfxPtr->spritesGfx[B_POSITION_OPPONENT_LEFT], species, personality);
 
         LoadSpritePaletteWithTag(GetMonSpritePalFromSpeciesAndPersonality(species, isShiny, personality), species);
         SetMultiuseSpriteTemplateToPokemon(species, B_POSITION_OPPONENT_LEFT);
         gMultiuseSpriteTemplate.paletteTag = species;
         spriteId = CreateSprite(&gMultiuseSpriteTemplate, (left + 1) * 8 + 32, (top * 8) + 40, 0);
+        if (spriteId == SPRITE_NONE)
+        {
+            FreeSpritePaletteByTag(species);
+            FreeMonSpritesGfx();
+            DestroyTask(taskId);
+            return;
+        }
+        gSprites[spriteId].callback = SpriteCallbackDummy;
 
         if (gLinkContestFlags & LINK_CONTEST_FLAG_IS_LINK)
         {
@@ -2501,7 +2506,6 @@ void ShowContestEntryMonPic(void)
         gTasks[taskId].data[2] = spriteId;
         gTasks[taskId].data[3] = left;
         gTasks[taskId].data[4] = top;
-        gSprites[spriteId].callback = SpriteCallbackDummy;
         gSprites[spriteId].oam.priority = 0;
     }
 }
@@ -2511,8 +2515,10 @@ void HideContestEntryMonPic(void)
     u8 taskId = FindTaskIdByFunc(Task_ShowContestEntryMonPic);
     if (taskId != TASK_NONE)
     {
-        gTasks[taskId].data[0]++;
-        FreeMonSpritesGfx();
+        u8 spriteId = gTasks[taskId].data[2];
+        if (spriteId < MAX_SPRITES && gSprites[spriteId].inUse)
+            StopMonFrontSpriteAnimation(&gSprites[spriteId]);
+        gTasks[taskId].data[0] = 3;
     }
 }
 
@@ -2534,17 +2540,22 @@ static void Task_ShowContestEntryMonPic(u8 taskId)
     case 2:
         break;
     case 3:
-        sprite = &gSprites[task->data[2]];
-        FreeSpritePaletteByTag(GetSpritePaletteTagByPaletteNum(sprite->oam.paletteNum));
-
-        if (sprite->oam.affineMode)
-            FreeOamMatrix(sprite->oam.matrixNum);
-
-        DestroySprite(sprite);
+        if (task->data[2] < MAX_SPRITES && gSprites[task->data[2]].inUse)
+        {
+            sprite = &gSprites[task->data[2]];
+            StopMonFrontSpriteAnimation(sprite);
+            FreeSpritePaletteByTag(GetSpritePaletteTagByPaletteNum(sprite->oam.paletteNum));
+            FreeSpriteOamMatrix(sprite);
+            // DestroySprite reads sprite->images, owned by gMonSpritesGfxPtr.
+            DestroySprite(sprite);
+        }
+        task->data[2] = SPRITE_NONE;
+        FreeMonSpritesGfx();
         task->data[0]++;
         break;
     case 4:
-        ClearToTransparentAndRemoveWindow(gTasks[taskId].data[5]);
+        if (task->data[5] != WINDOW_NONE)
+            ClearToTransparentAndRemoveWindow(task->data[5]);
         DestroyTask(taskId);
         break;
     }

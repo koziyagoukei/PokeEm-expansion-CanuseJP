@@ -186,8 +186,26 @@ static const struct InfoViewerChoice sInfoViewerChoices_ChoiceTest[] =
     },
 };
 
+#include "contest_tips.h"
+
+#define CONTEST_TIPS_ENTRY(name) { .title = sInfoText_Title##name, \
+    .pages = sInfoViewerPages_##name, .pageCount = ARRAY_COUNT(sInfoViewerPages_##name) }
+
 static const struct InfoViewerEntry sInfoViewerEntries[INFO_COUNT] =
 {
+    [INFO_TIPS_CONTEST] = {
+        .title = sInfoText_TitleContest,
+        .choices = sInfoViewerChoices_Contest,
+        .choiceCount = ARRAY_COUNT(sInfoViewerChoices_Contest),
+    },
+    [INFO_TIPS_CONTEST_BASICS] = CONTEST_TIPS_ENTRY(ContestBasics),
+    [INFO_TIPS_CONTEST_PREPARATION] = CONTEST_TIPS_ENTRY(ContestPreparation),
+    [INFO_TIPS_CONTEST_SELECTION] = CONTEST_TIPS_ENTRY(ContestSelection),
+    [INFO_TIPS_CONTEST_MEGA] = CONTEST_TIPS_ENTRY(ContestMega),
+    [INFO_TIPS_CONTEST_Z] = CONTEST_TIPS_ENTRY(ContestZ),
+    [INFO_TIPS_CONTEST_TERA] = CONTEST_TIPS_ENTRY(ContestTera),
+    [INFO_TIPS_CONTEST_DYNAMAX] = CONTEST_TIPS_ENTRY(ContestDynamax),
+    [INFO_TIPS_CONTEST_REWARDS] = CONTEST_TIPS_ENTRY(ContestRewards),
     [INFO_FRONTIER_RULES] =
     {
         .title = sInfoText_TitleFrontierRules,
@@ -243,3 +261,5 @@ static const struct InfoViewerEntry sInfoViewerEntries[INFO_COUNT] =
         .style = &sInfoViewerStyle_BlueFrame,
     },
 };
+
+#undef CONTEST_TIPS_ENTRY

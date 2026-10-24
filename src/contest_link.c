@@ -2,14 +2,30 @@
 #include "contest.h"
 #include "decompress.h"
 #include "event_data.h"
+#include "event_object_lock.h"
 #include "link.h"
 #include "pokemon.h"
 #include "random.h"
 #include "task.h"
+#include "script.h"
 #include "contest_link.h"
+#include "constants/cable_club.h"
 
 static void Task_LinkContest_StartInitFlags(u8);
 static void Task_LinkContest_InitFlags(u8);
+static void Task_LinkContest_WaitIncompatibleDisconnect(u8);
+
+struct LinkContestMoveSelection
+{
+    u16 move;
+    u8 gimmick;
+    u8 reserved;
+};
+
+STATIC_ASSERT(CONTESTANT_COUNT * sizeof(struct LinkContestGimmickState) <= BLOCK_BUFFER_SIZE, ContestGimmickStateFitsLinkBlock);
+// Bump CONTEST_LINK_VERSION when these transmitted layouts change.
+STATIC_ASSERT(sizeof(struct ContestPokemon) == 64, ContestPokemonLinkLayout);
+STATIC_ASSERT(sizeof(struct LinkContestMoveSelection) == 4, ContestMoveSelectionLinkLayout);
 
 #define tState         data[0]
 #define tDelayTimer    data[1]
@@ -25,6 +41,42 @@ bool32 LinkContest_SendBlock(void *src, u16 size)
         return TRUE;
     else
         return FALSE;
+}
+
+bool32 LinkContest_AreAllPlayersCompatible(void)
+{
+    u32 count = GetLinkPlayerCount();
+
+    if (!gReceivedRemoteLinkPlayers || count < 2 || count > CONTESTANT_COUNT)
+        return FALSE;
+    for (u32 i = 0; i < count; i++)
+        if (gLinkPlayers[i].lp_field_2 != CONTEST_LINK_PROJECT_ID
+            || gLinkPlayers[i].neverRead != CONTEST_LINK_VERSION)
+            return FALSE;
+    return TRUE;
+}
+
+bool32 LinkContest_AbortIfIncompatible(u8 taskId)
+{
+    if (LinkContest_AreAllPlayersCompatible())
+        return FALSE;
+
+    gSpecialVar_0x8004 = LINKUP_INCOMPATIBLE;
+    // No extended contestant packet may be sent to an older ROM. Do not wait
+    // for the incompatible peer to acknowledge our newer protocol.
+    CloseLink();
+    gTasks[taskId].func = Task_LinkContest_WaitIncompatibleDisconnect;
+    return TRUE;
+}
+
+static void Task_LinkContest_WaitIncompatibleDisconnect(u8 taskId)
+{
+    if (!gReceivedRemoteLinkPlayers)
+    {
+        DestroyTask(taskId);
+        UnlockPlayerFieldControls();
+        ScriptContext_Enable();
+    }
 }
 
 bool8 LinkContest_GetBlockReceived(u8 flag)
@@ -76,6 +128,8 @@ static void Task_LinkContest_InitFlags(u8 taskId)
 
     if (!gReceivedRemoteLinkPlayers)
         return;
+    if (LinkContest_AbortIfIncompatible(taskId))
+        return;
 
     gContestPlayerMonIndex = GetMultiplayerId();
     gNumLinkContestPlayers = GetLinkPlayerCount();
@@ -122,6 +176,9 @@ bool32 LinkContest_TryLinkStandby(s16 *state)
 void Task_LinkContest_CommunicateMonsRS(u8 taskId)
 {
     int i;
+
+    if (LinkContest_AbortIfIncompatible(taskId))
+        return;
 
     if (!LinkContest_TryLinkStandby(&gTasks[taskId].tStandbyState))
         return;
@@ -281,8 +338,14 @@ void Task_LinkContest_CommunicateMoveSelections(u8 taskId)
     case 0:
         if (IsLinkTaskFinished())
         {
+            struct LinkContestMoveSelection selection =
+            {
+                .move = eContestantStatus[gContestPlayerMonIndex].currMove,
+                .gimmick = eContestGimmickStatus[gContestPlayerMonIndex].selected,
+            };
+
             // Send player's move selection
-            if (LinkContest_SendBlock(&eContestantStatus[gContestPlayerMonIndex].currMove, sizeof(eContestantStatus[gContestPlayerMonIndex].currMove)) == TRUE)
+            if (LinkContest_SendBlock(&selection, sizeof(selection)) == TRUE)
                 gTasks[taskId].tState++;
         }
         break;
@@ -291,7 +354,15 @@ void Task_LinkContest_CommunicateMoveSelections(u8 taskId)
         {
             // Receive partners' move selections
             for (i = 0; i < gNumLinkContestPlayers; i++)
-                eContestantStatus[i].currMove = gBlockRecvBuffer[i][0];
+            {
+                const struct LinkContestMoveSelection *selection = (const void *)gBlockRecvBuffer[i];
+
+                eContestantStatus[i].currMove = selection->move;
+                if (selection->gimmick < CONTEST_GIMMICK_COUNT)
+                    eContestGimmickStatus[i].selected = selection->gimmick;
+                else
+                    eContestGimmickStatus[i].selected = CONTEST_GIMMICK_NONE;
+            }
 
             gTasks[taskId].tState++;
         }
@@ -382,6 +453,8 @@ void Task_LinkContest_CommunicateFinalStandings(u8 taskId)
 
 void Task_LinkContest_CommunicateAppealsState(u8 taskId)
 {
+    u32 i;
+
     switch (gTasks[taskId].tState)
     {
     case 0:
@@ -447,6 +520,27 @@ void Task_LinkContest_CommunicateAppealsState(u8 taskId)
         if (LinkContest_GetBlockReceivedFromAllPlayers())
         {
             memcpy(gContestantTurnOrder, gBlockRecvBuffer[gContestLinkLeaderIndex], sizeof(gContestantTurnOrder));
+            gTasks[taskId].tState++;
+        }
+        break;
+    case 12:
+        if (IsLinkTaskFinished())
+        {
+            struct LinkContestGimmickState states[CONTESTANT_COUNT];
+
+            for (i = 0; i < CONTESTANT_COUNT; i++)
+                Contest_GetLinkGimmickState(i, &states[i]);
+            if (LinkContest_SendBlock(states, sizeof(states)))
+                gTasks[taskId].tState++;
+        }
+        break;
+    case 13:
+        if (LinkContest_GetBlockReceivedFromAllPlayers())
+        {
+            const struct LinkContestGimmickState *states = (const void *)gBlockRecvBuffer[gContestLinkLeaderIndex];
+
+            for (i = 0; i < CONTESTANT_COUNT; i++)
+                Contest_SetLinkGimmickState(i, &states[i]);
             gTasks[taskId].tState++;
         }
         break;

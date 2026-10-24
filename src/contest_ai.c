@@ -4,6 +4,7 @@
 #include "random.h"
 #include "contest_ai.h"
 #include "contest_effect.h"
+#include "event_data.h"
 #include "constants/moves.h"
 
 #define AI_ACTION_DONE (1 << 0)
@@ -390,6 +391,203 @@ static u8 GetContestantIdByTurn(u8 turn)
             break;
 
     return i;
+}
+
+static bool32 CanDisruptContestant(u8 contestant)
+{
+    return !Contest_IsMonsTurnDisabled(contestant)
+        && !ContestGimmick_IsDynamaxed(contestant)
+        && !eContestantStatus[contestant].immune
+        && eContestantStatus[contestant].jamSafetyCount == 0;
+}
+
+// Everyone chooses before the round starts. Forecast from revealed categories,
+// never from currMove, the player's cursor, or an opponent's selected gimmick.
+static u8 PredictContestCategory(u8 contestant)
+{
+    if (eContestantStatus[contestant].prevMove == MOVE_NONE)
+        return gSpecialVar_ContestCategory;
+    return eContestantStatus[contestant].moveCategory;
+}
+
+static s16 PredictContestAppeal(u8 contestant, s8 applause)
+{
+    enum Move previous = eContestantStatus[contestant].prevMove;
+    s16 appeal = previous == MOVE_NONE ? 30 : gContestEffects[GetMoveContestEffect(previous)].appeal;
+
+    if (appeal == 0xFF || ContestGimmick_IsDynamaxed(contestant))
+        appeal = 30;
+    appeal += eContestantStatus[contestant].condition;
+    if (eContestantStatus[contestant].hasJudgesAttention)
+        appeal += 20;
+    if (PredictContestCategory(contestant) == gSpecialVar_ContestCategory)
+    {
+        if (eContestGimmickStatus[contestant].megaActive || eContestGimmickStatus[contestant].ultraActive)
+            appeal += 20;
+        if (applause == APPLAUSE_METER_SIZE - 1 && !eContestExcitement.frozen)
+            appeal += 60;
+    }
+    return appeal;
+}
+
+static s16 PredictContestJam(u8 target, u8 effect, u8 category, s16 appeal)
+{
+    s16 jam = gContestEffects[effect].jam;
+    switch (effect)
+    {
+    case CONTEST_EFFECT_STARTLE_PREV_MON_2:
+        jam = 40;
+        break;
+    case CONTEST_EFFECT_STARTLE_PREV_MONS_2:
+        jam = 26;
+        break;
+    case CONTEST_EFFECT_STARTLE_MON_WITH_JUDGES_ATTENTION:
+        jam = eContestantStatus[target].hasJudgesAttention ? 50 : 10;
+        break;
+    case CONTEST_EFFECT_BADLY_STARTLES_MONS_IN_GOOD_CONDITION:
+        jam = eContestantStatus[target].condition > 0 ? 40 : 10;
+        break;
+    case CONTEST_EFFECT_BADLY_STARTLE_MONS_WITH_GOOD_APPEALS:
+        jam = appeal > 0 ? ((appeal + 19) / 20) * 10 : 10;
+        break;
+    case CONTEST_EFFECT_STARTLE_MONS_SAME_TYPE_APPEAL:
+        jam = PredictContestCategory(target) == category ? 40 : 10;
+        break;
+    case CONTEST_EFFECT_STARTLE_MONS_COOL_APPEAL:
+    case CONTEST_EFFECT_STARTLE_MONS_BEAUTY_APPEAL:
+    case CONTEST_EFFECT_STARTLE_MONS_CUTE_APPEAL:
+    case CONTEST_EFFECT_STARTLE_MONS_SMART_APPEAL:
+    case CONTEST_EFFECT_STARTLE_MONS_TOUGH_APPEAL:
+        jam = PredictContestCategory(target) == effect - CONTEST_EFFECT_STARTLE_MONS_COOL_APPEAL ? 40 : 10;
+        break;
+    }
+    if (eContestantStatus[target].moreEasilyStartled)
+        jam *= 2;
+    if (eContestantStatus[target].resistant)
+        jam = 10;
+    else
+        jam -= eContestantStatus[target].jamReduction;
+    return max(0, jam);
+}
+
+s16 ContestAI_GetTacticalScore(u8 contestant, enum Move move, u8 category, s8 excitement)
+{
+    const struct ContestGimmickStatus *gimmick;
+    u8 effect, order, following = 0;
+    s8 applause, meterBefore[CONTESTANT_COUNT];
+    s16 score = 0, disruption = 0;
+    bool32 singlePrevious, singleFollowing, nervous, jams, effectsDisabled;
+
+    if (gLinkContestFlags & LINK_CONTEST_FLAG_IS_LINK || move == MOVE_NONE)
+        return 0;
+    gimmick = &eContestGimmickStatus[contestant];
+    if (gimmick->selected == CONTEST_GIMMICK_ULTRA_BURST)
+        return 0;
+    effect = GetMoveContestEffect(move);
+    order = eContestAppealResults.turnOrder[contestant];
+    effectsDisabled = gimmick->selected == CONTEST_GIMMICK_DYNAMAX || gimmick->dynamaxTurns != 0;
+    if (!effectsDisabled && effect == CONTEST_EFFECT_EXCITE_AUDIENCE_IN_ANY_CONTEST)
+        excitement = 1;
+    if (move == eContestantStatus[contestant].prevMove && excitement > 0
+        && (effectsDisabled || effect != CONTEST_EFFECT_REPETITION_NOT_BORING))
+        excitement = 0;
+    singlePrevious = effect == CONTEST_EFFECT_STARTLE_FRONT_MON
+        || effect == CONTEST_EFFECT_STARTLE_PREV_MON
+        || effect == CONTEST_EFFECT_BADLY_STARTLE_FRONT_MON
+        || effect == CONTEST_EFFECT_STARTLE_PREV_MON_2;
+    singleFollowing = effect == CONTEST_EFFECT_MAKE_FOLLOWING_MON_NERVOUS;
+    nervous = singleFollowing || effect == CONTEST_EFFECT_MAKE_FOLLOWING_MONS_NERVOUS;
+    jams = gContestEffects[effect].jam != 0;
+
+    applause = eContest.applauseLevel;
+    for (u32 turn = 0; turn < CONTESTANT_COUNT; turn++)
+    {
+        u8 target = GetContestantIdByTurn(turn);
+        meterBefore[turn] = applause;
+        if (target >= CONTESTANT_COUNT || Contest_IsMonsTurnDisabled(target) || eContestantStatus[target].nervous)
+            continue;
+        if (turn > order)
+            following++;
+        if (eContestExcitement.frozen)
+            continue;
+        if (turn == order)
+        {
+            applause = max(0, applause + excitement);
+        }
+        else if (PredictContestCategory(target) == gSpecialVar_ContestCategory)
+            applause++;
+        if (applause >= APPLAUSE_METER_SIZE)
+            applause = 0;
+    }
+
+    // Finishing the meter yourself remains preferable to blindly suppressing it.
+    if (!eContestExcitement.frozen && excitement > 0)
+    {
+        if (meterBefore[order] + excitement >= APPLAUSE_METER_SIZE)
+            score += 25;
+        else if (meterBefore[order] + excitement == APPLAUSE_METER_SIZE - 1 && following != 0)
+            score -= 10;
+    }
+    if (effectsDisabled)
+        return score;
+
+    for (u32 target = 0; target < CONTESTANT_COUNT; target++)
+    {
+        u8 targetOrder = eContestAppealResults.turnOrder[target];
+        if (target == contestant || !CanDisruptContestant(target))
+            continue;
+        if (nervous)
+        {
+            s16 chance;
+            if (targetOrder <= order || eContestantStatus[target].nervous
+                || (singleFollowing && targetOrder != order + 1))
+                continue;
+            // Match the effect's odds, including immune contestants in the denominator.
+            chance = singleFollowing ? 100 : 60 / max(1, following);
+            if (!singleFollowing)
+            {
+                if (eContestantStatus[target].hasJudgesAttention && IsContestantAllowedToCombo(target)
+                    && GetMoveContestComboStarter(eContestantStatus[target].prevMove) != 0)
+                    chance += 10;
+                chance = max(0, chance - eContestantStatus[target].condition);
+            }
+            disruption += PredictContestAppeal(target, meterBefore[targetOrder]) * chance / 100;
+        }
+        else if (targetOrder < order && (!singlePrevious || targetOrder + 1 == order))
+        {
+            if (jams)
+                disruption += PredictContestJam(target, effect, category,
+                                               PredictContestAppeal(target, meterBefore[targetOrder]));
+            else if (effect == CONTEST_EFFECT_SHIFT_JUDGE_ATTENTION && eContestantStatus[target].hasJudgesAttention)
+                disruption += 20;
+            else if (effect == CONTEST_EFFECT_WORSEN_CONDITION_OF_PREV_MONS)
+                disruption += eContestantStatus[target].condition * (CONTEST_LAST_APPEAL - eContest.appealNumber);
+        }
+    }
+    if (jams || nervous || effect == CONTEST_EFFECT_SHIFT_JUDGE_ATTENTION
+        || effect == CONTEST_EFFECT_WORSEN_CONDITION_OF_PREV_MONS)
+    {
+        // Trade off lost appeal against useful disruption; preserve combo/repetition scores.
+        if (disruption == 0)
+            score -= 15;
+        else
+            score += min(35, (disruption - max(0, 40 - gContestEffects[effect].appeal)) / 2);
+    }
+    if (effect == CONTEST_EFFECT_DONT_EXCITE_AUDIENCE)
+    {
+        if (following == 0 || eContestExcitement.frozen)
+            score -= 15;
+        else
+        {
+            s8 after = max(0, meterBefore[order] + excitement);
+            if (after >= APPLAUSE_METER_SIZE)
+                after = 0;
+            score += 3 * following;
+            if (after + following >= APPLAUSE_METER_SIZE)
+                score += 18;
+        }
+    }
+    return score;
 }
 
 static void ContestAICmd_score(void)

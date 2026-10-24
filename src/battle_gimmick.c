@@ -346,6 +346,64 @@ u32 GetIndicatorPalTag(enum BattlerId battler)
 
 #define INDICATOR_SIZE (8 * 16 / 2)
 
+static u16 GetTeraIndicatorTileTag(enum Type type)
+{
+    if (type > TYPE_NONE && type <= TYPE_STELLAR)
+        return TAG_NORMAL_INDICATOR_TILE + type - TYPE_NORMAL;
+    return TAG_NORMAL_INDICATOR_TILE;
+}
+
+u8 CreateGimmickIndicatorSpriteAt(enum Gimmick gimmick, enum Type teraType, s16 x, s16 y, u8 subpriority)
+{
+    const u8 *src = NULL;
+    u16 tileTag = TAG_NONE;
+    u16 paletteTag = TAG_NONE;
+    struct SpriteSheet sheet;
+    struct SpriteTemplate template;
+
+    switch (gimmick)
+    {
+    case GIMMICK_MEGA:
+        src = sMegaIndicatorGfx;
+        tileTag = TAG_MEGA_INDICATOR_TILE;
+        paletteTag = TAG_MEGA_INDICATOR_PAL;
+        LoadSpritePalette(&sSpritePalette_MegaIndicator);
+        break;
+    case GIMMICK_DYNAMAX:
+        src = sDynamaxIndicatorGfx;
+        tileTag = TAG_DYNAMAX_INDICATOR_TILE;
+        paletteTag = TAG_MISC_INDICATOR_PAL;
+        LoadSpritePalette(&sSpritePalette_MiscIndicator);
+        break;
+    case GIMMICK_TERA:
+        if (teraType <= TYPE_NONE || teraType > TYPE_STELLAR)
+            teraType = TYPE_NORMAL;
+        src = sTeraIndicatorDataPtrs[teraType];
+        tileTag = GetTeraIndicatorTileTag(teraType);
+        paletteTag = TAG_TERA_INDICATOR_PAL;
+        LoadSpritePalette(&sSpritePalette_TeraIndicator);
+        break;
+    default:
+        return SPRITE_NONE;
+    }
+
+    sheet = (struct SpriteSheet){src, INDICATOR_SIZE, tileTag};
+    if (GetSpriteTileStartByTag(tileTag) == 0xFFFF)
+        LoadSpriteSheet(&sheet);
+
+    template = (struct SpriteTemplate)
+    {
+        .tileTag = tileTag,
+        .paletteTag = paletteTag,
+        .oam = &sOamData_GimmickIndicator,
+        .anims = gDummySpriteAnimTable,
+        .affineAnims = gDummySpriteAffineAnimTable,
+        .callback = SpriteCallbackDummy,
+    };
+
+    return CreateSprite(&template, x, y, subpriority);
+}
+
 void UpdateIndicatorVisibilityAndType(u32 healthboxId, bool32 invisible)
 {
     enum BattlerId battler = gSprites[healthboxId].hMain_Battler;

@@ -112,6 +112,10 @@ struct ContestPokemon
     u32 personality;
     u32 otId;
     u8 filter;
+    u16 heldItem;
+    u8 teraType;
+    u8 dynamaxLevel;
+    bool8 gmaxFactor;
 };
 
 struct ContestTempSave
@@ -302,9 +306,38 @@ struct ContestGimmickStatus
     enum ContestGimmick moveGimmick;
     enum ContestGimmick usedGimmick;
     enum Species originalSpecies;
+    enum Move baseMove;
+    enum Move effectMove;
+    enum Move animMove;
     u16 heldItem;
     s16 extraAppeal;
     enum Type teraType;
+    u8 dynamaxLevel;
+    u8 dynamaxTurns;
+    u8 tabIconSpriteId;
+    bool8 gmaxFactor:1;
+    bool8 megaActive:1;
+    bool8 ultraActive:1;
+    bool8 teraActive:1;
+    bool8 gigantamaxActive:1;
+    bool8 zUsed:1;
+    bool8 stellarBoostUsed:1;
+    bool8 jammedSinceLastAppeal:1;
+    bool8 showGimmickIntro:1;
+};
+
+// Link state contains gameplay data only, never local sprite IDs or anim caches.
+struct LinkContestGimmickState
+{
+    u16 species;
+    u16 originalSpecies;
+    u16 pendingSpecies;
+    u16 heldItem;
+    s16 extraAppeal;
+    u8 selected;
+    u8 moveGimmick;
+    u8 usedGimmick;
+    u8 teraType;
     u8 dynamaxLevel;
     u8 dynamaxTurns;
     bool8 gmaxFactor:1;
@@ -315,6 +348,7 @@ struct ContestGimmickStatus
     bool8 zUsed:1;
     bool8 stellarBoostUsed:1;
     bool8 jammedSinceLastAppeal:1;
+    bool8 showGimmickIntro:1;
 };
 
 struct ContestResources
@@ -333,6 +367,7 @@ struct ContestResources
     void *boxBlinkTiles1;
     void *boxBlinkTiles2;
     void *animBgTileBuffer;
+    u8 *cutawayBgTilemap;
 };
 
 struct ContestCategory
@@ -374,6 +409,7 @@ extern s16 gContestMonTotalPoints[CONTESTANT_COUNT];
 extern s16 gContestMonAppealPointTotals[CONTESTANT_COUNT];
 extern s16 gContestMonRound2Points[CONTESTANT_COUNT];
 extern u8 gContestFinalStandings[CONTESTANT_COUNT];
+extern bool8 gContestMoveAnimInCutaway;
 extern u8 gContestMonPartyIndex;
 extern u8 gContestPlayerMonIndex;
 extern u8 gContestantTurnOrder[CONTESTANT_COUNT];
@@ -390,10 +426,13 @@ extern u8 gCurContestWinnerSaveIdx;
 extern rng_value_t gContestRngValue;
 
 // contest.c
+void Contest_GetLinkGimmickState(u8 contestant, struct LinkContestGimmickState *state);
+void Contest_SetLinkGimmickState(u8 contestant, const struct LinkContestGimmickState *state);
 void ResetLinkContestBoolean(void);
 void LoadContestBgAfterMoveAnim(void);
 void CB2_StartContest(void);
 void CreateContestMonFromParty(u8 partyIndex);
+u8 *Contest_CopyDisplayName(u8 *dest, const u8 *name);
 void SetContestants(enum ContestCategories contestType, u8 rank);
 void SetLinkAIContestants(enum ContestCategories contestType, u8 rank, bool32 isPostgame);
 u8 GetContestEntryEligibility(struct Pokemon *pkmn);
@@ -407,7 +446,9 @@ void SetContestantEffectStringID2(u8 contestant, u8 effectStringId);
 void SetStartledString(u8 contestant, u8 jam);
 void MakeContestantNervous(u8 p);
 s8 Contest_GetMoveExcitement(enum Move move);
+bool32 ContestGimmick_IsDynamaxed(u8 contestant);
 void ContestGimmick_RecordJammed(u8 contestant, u8 jam);
+void ContestCutawayApplyPendingFormForAnim(void);
 bool8 IsContestantAllowedToCombo(u8 contestant);
 void Contest_PrintTextToBg0WindowAt(u32 windowId, u8 *currChar, s32 x, s32 y, s32 fontId);
 void ResetContestLinkResults(void);

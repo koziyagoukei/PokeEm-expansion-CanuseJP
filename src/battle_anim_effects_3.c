@@ -2338,6 +2338,37 @@ void AnimTask_HideSwapSprite(u8 taskId)
 
     u8 spriteId = gBattlerSpriteIds[gBattleAnimAttacker];
 
+    if (BattleAnim_IsContestCutawayActive())
+    {
+        switch (gTasks[taskId].data[0])
+        {
+        case 0:
+            if (spriteId < MAX_SPRITES && gSprites[spriteId].inUse)
+            {
+                gTasks[taskId].data[11] = gSprites[spriteId].x;
+                gSprites[spriteId].x = -64;
+            }
+            gTasks[taskId].data[0]++;
+            break;
+        case 1:
+        {
+            u8 oldSpriteId = spriteId;
+
+            ContestCutawayApplyPendingFormForAnim();
+            spriteId = gBattlerSpriteIds[gBattleAnimAttacker];
+            if (spriteId < MAX_SPRITES && gSprites[spriteId].inUse)
+            {
+                if (spriteId == oldSpriteId)
+                    gSprites[spriteId].x = gTasks[taskId].data[11];
+                gSprites[spriteId].invisible = FALSE;
+            }
+            DestroyAnimVisualTask(taskId);
+            break;
+        }
+        }
+        return;
+    }
+
     switch (gTasks[taskId].data[0])
     {
     case 0:
@@ -2403,13 +2434,18 @@ void AnimTask_HideSwapSprite(u8 taskId)
 void AnimTask_HideOpponentShadows(u8 taskId)
 {
     enum BattlerId battlerLeft = GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
-    gSprites[gBattleSpritesDataPtr->healthBoxesData[battlerLeft].shadowSpriteIdPrimary].callback = SpriteCB_SetInvisible;
-    gSprites[gBattleSpritesDataPtr->healthBoxesData[battlerLeft].shadowSpriteIdSecondary].callback = SpriteCB_SetInvisible;
+
+    if (IsContest())
+    {
+        DestroyAnimVisualTask(taskId);
+        return;
+    }
+
+    HideBattlerShadowSprite(battlerLeft);
     if (IsDoubleBattle())
     {
         enum BattlerId battlerRight = GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT);
-        gSprites[gBattleSpritesDataPtr->healthBoxesData[battlerRight].shadowSpriteIdPrimary].callback = SpriteCB_SetInvisible;
-        gSprites[gBattleSpritesDataPtr->healthBoxesData[battlerRight].shadowSpriteIdSecondary].callback = SpriteCB_SetInvisible;
+        HideBattlerShadowSprite(battlerRight);
     }
     DestroyAnimVisualTask(taskId);
 }
@@ -2417,6 +2453,13 @@ void AnimTask_HideOpponentShadows(u8 taskId)
 void AnimTask_SetOpponentShadowCallbacks(u8 taskId)
 {
     enum BattlerId battlerLeft = GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
+
+    if (IsContest())
+    {
+        DestroyAnimVisualTask(taskId);
+        return;
+    }
+
     SetBattlerShadowSpriteCallback(battlerLeft, gBattleMons[battlerLeft].species);
     if (IsDoubleBattle())
     {
@@ -2435,6 +2478,13 @@ void AnimTask_TransformMon(u8 taskId)
     u8 *src;
     u16 *bgTilemap;
     u16 stretch;
+
+    if (BattleAnim_IsContestCutawayActive())
+    {
+        SetGpuReg(REG_OFFSET_MOSAIC, 0);
+        DestroyAnimVisualTask(taskId);
+        return;
+    }
 
     switch (gTasks[taskId].data[0])
     {

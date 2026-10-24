@@ -44,6 +44,14 @@
 #include "party_menu.h"
 #include "list_menu.h"
 
+// Shared classification for the normal-contest guest roster. Existing facility
+// eligibility checks keep their original behavior in this selective port.
+bool8 IsFrontierSpeciesBannedByCurrentRules(enum Species species)
+{
+    return gSpeciesInfo[species].isFrontierBanned
+        && !FlagGet(FLAG_FRONTIER_ALLOW_BANNED_SPECIES);
+}
+
 struct FrontierBrainMon
 {
     enum Species species;

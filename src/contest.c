@@ -4,7 +4,13 @@
 #include "malloc.h"
 #include "battle.h"
 #include "battle_anim.h"
+#include "battle_bg.h"
+#include "battle_gimmick.h"
+#include "battle_interface.h"
+#include "battle_main.h"
 #include "contest.h"
+#include "contest_npc.h"
+#include "frontier_util.h"
 #include "contest_link.h"
 #include "data.h"
 #include "decompress.h"
@@ -39,6 +45,7 @@
 #include "international_string_util.h"
 #include "item.h"
 #include "pokemon.h"
+#include "pokemon_icon.h"
 #include "data.h"
 #include "contest_ai.h"
 #include "constants/form_change_types.h"
@@ -46,8 +53,13 @@
 #include "constants/items.h"
 #include "constants/moves.h"
 #include "constants/rgb.h"
+#include "constants/battle.h"
+#include "constants/battle_anim.h"
 #include "constants/script_menu.h"
 #include "constants/songs.h"
+#if TESTING
+#include "test/link.h"
+#endif
 
 // This file's functions.
 static void LoadContestPalettes(void);
@@ -57,6 +69,9 @@ static void Task_CommunicateMonIdxs(u8 taskId);
 static void Task_EndCommunicateMonIdxs(u8 taskId);
 static void Task_ReadyStartLinkContest(u8 taskId);
 static bool8 SetupContestGraphics(u8 *stateVar);
+static void InitContestInfoBgs(void);
+static void InitContestWindows(void);
+static void SetupContestGpuRegs(void);
 static void Task_WaitToRaiseCurtainAtStart(u8 taskId);
 static void Task_RaiseCurtainAtStart(u8 taskId);
 static void VBlankCB_Contest(void);
@@ -67,6 +82,7 @@ static void Task_ShowMoveSelectScreen(u8 taskId);
 static void Task_HandleMoveSelectInput(u8 taskId);
 static void DrawMoveSelectArrow(s8);
 static void EraseMoveSelectArrow(s8);
+static void PrintContestMoveNames(void);
 static void PrintContestGimmickMessageHolder(enum Move move);
 static void ClearContestGimmickMessageHolder(void);
 static void Task_SelectedMove(u8 taskId);
@@ -77,8 +93,8 @@ static void Task_WaitHideApplauseMeterForAppealStart(u8 taskId);
 static void Task_AppealSetup(u8 taskId);
 static void Task_DoAppeals(u8 taskId);
 static void Task_EndWaitForLink(u8);
-static void SpriteCB_MonSlideIn(struct Sprite *);
-static void SpriteCB_MonSlideOut(struct Sprite *);
+static void UNUSED SpriteCB_MonSlideIn(struct Sprite *);
+static void UNUSED SpriteCB_MonSlideOut(struct Sprite *);
 static void Task_FinishRoundOfAppeals(u8);
 static void Task_ReadyUpdateHeartSliders(u8);
 static void Task_UpdateHeartSliders(u8);
@@ -106,7 +122,7 @@ static void PrintContestantMonName(u8);
 static void PrintContestantMonNameWithColor(u8, u8);
 static u8 CreateJudgeSprite(void);
 static u8 CreateJudgeSpeechBubbleSprite(void);
-static u8 CreateContestantSprite(enum Species, bool8, u32, u32);
+static u8 UNUSED CreateContestantSprite(enum Species, bool8, u32, u32);
 static void PrintContestMoveDescription(enum Move move);
 static enum Species SanitizeSpecies(enum Species);
 static void ContestClearGeneralTextWindow(void);
@@ -136,22 +152,69 @@ static bool32 Contest_RunTextPrinters(void);
 static void Contest_SetBgCopyFlags(u32 flagIndex);
 static void CalculateFinalScores(void);
 static void CalculateAppealMoveImpact(u8);
+static void SetContestantStatusesForNextRound(void);
 static bool32 IsContestGimmickEnabled(void);
+static enum Move GetContestSafeEffectMove(u8 contestant, enum Move move);
+static enum Move GetContestAnimMove(u8 contestant, enum Move move);
+static enum Move GetContestTurnEffectMove(u8 contestant);
+static enum Move GetContestTurnAnimMove(u8 contestant);
 static void InitPlayerContestGimmickStatus(u8 partyIndex, u16 heldItem);
+static void InitLinkContestGimmickStatus(u8 contestant);
+static void InitNpcContestGimmickStatus(u8 contestant);
+static void TrySelectNpcContestGimmick(u8 contestant, enum Move move);
+static u8 GetNpcContestMoveChoice(u8 contestant);
 static enum ContestCategories GetContestMoveCategoryWithGimmick(u8 contestant, enum Move move);
 static s8 Contest_GetMoveExcitementForContestant(u8 contestant, enum Move move);
 static void CycleContestGimmickSelection(void);
 static void ActivateSelectedContestGimmick(u8 contestant);
 static void ApplyContestGimmickMoveImpact(u8 contestant);
+static void ApplyContestGimmickAppealBonus(u8 contestant);
 static void FinishContestGimmickMoveImpact(u8 contestant);
 static bool32 ContestGimmickSkipsMoveAnim(u8 contestant);
+static bool32 ContestGimmickShouldPlayIntro(u8 contestant);
+static u8 GetContestGimmickIntroAnimCount(u8 contestant);
+static u16 GetContestGimmickIntroAnimId(u8 contestant, u8 step);
+static void LaunchContestGimmickIntroAnim(u8 contestant, u8 step);
+static void ApplyContestCutawayPendingFormInternal(u8 contestant, bool8 targetSelf);
+static void ApplyContestCutawayPendingForm(u8 contestant);
+static void SetupContestCutawayAnimContext(u8 contestant, enum Move effectMove, bool8 targetSelf);
+static void ContestCutawaySyncAnimState(u8 contestant, bool8 targetSelf);
+void BattleAnim_CleanupContestCutawayMonBg(void);
+bool32 BattleAnim_IsContestCutawayBusy(void);
+static bool8 ContestCutawayAttackerSpriteNeedsRecreate(void);
+static void NormalizeContestCutawayAttackerSprite(u8 contestant, enum Species species);
+static u8 CreateContestCutawayTargetSprite(void);
+static u8 CreateContestCutawayAttackerSprite(u8 contestant, enum Species species);
+static void RecreateContestCutawayAttackerSprite(u8 contestant, enum Species species);
+static void ResetContestCutawayAnimSandbox(void);
+static void ClearContestMoveAnimTargetData(void);
+static bool8 ContestBattleAnimFinished(void);
+static void SetContestCutawayPendingAttackerSpecies(enum Species species);
+static bool8 ContestCutawayHasPendingAttackerSpecies(void);
+static void SetMoveAnimAttackerDataForSpecies(u8 contestant, enum Species species);
 static bool32 IsContestSignatureZMove(u8 contestant, enum Move move);
 static bool32 IsContestGMaxMove(u8 contestant, enum Move move);
 static void SetMoveAnimAttackerData(u8);
+static void InitContestNormalViewState(void);
+static void CreateContestNormalViewSprites(void);
+static void DestroyContestNormalViewSprites(void);
+static void CreateContestGimmickIcons(void);
+static void DestroyContestGimmickIcons(void);
+static void SpriteCB_ContestGimmickIcon(struct Sprite *sprite);
+static void StartContestNormalMonBounce(u8 contestant);
+static bool8 ContestNormalMonBounceDone(u8 contestant);
+static void SpriteCB_ContestNormalMon(struct Sprite *sprite);
+static bool8 BeginContestMoveAnimCutaway(u8 contestant, enum Move effectMove);
+static void EndContestMoveAnimCutaway(u8 contestant);
+static bool8 AllocContestCutawayScratch(void);
+static void FreeContestCutawayScratch(void);
+static void RestoreContestObjectPalettesAfterCutaway(void);
+static void SetContestNormalViewBattlers(void);
+static void SetContestCutawayBattlers(void);
 static void BlinkContestantBox(u8, u8);
 static u8 CreateContestantBoxBlinkSprites(u8);
 static u16 SanitizeMove(enum Move);
-static void SetMoveSpecificAnimData(u8);
+static void SetMoveSpecificAnimData(u8 contestant, enum Move effectMove);
 static void SetMoveTargetPosition(enum Move move);
 static void ClearMoveAnimData(u8);
 static void StopFlashJudgeAttentionEye(u8);
@@ -298,8 +361,18 @@ enum {
     APPEALSTATE_WAIT_SLIDE_MON,
     APPEALSTATE_PRINT_USED_MOVE_MSG,
     APPEALSTATE_WAIT_USED_MOVE_MSG,
+    APPEALSTATE_CUTAWAY_FADE_OUT,
+    APPEALSTATE_CUTAWAY_PREPARE,
+    APPEALSTATE_CUTAWAY_FADE_IN,
+    APPEALSTATE_CUTAWAY_PRE_WAIT,
+    APPEALSTATE_GIMMICK_ANIM,
+    APPEALSTATE_WAIT_GIMMICK_ANIM,
     APPEALSTATE_MOVE_ANIM,
     APPEALSTATE_WAIT_MOVE_ANIM,
+    APPEALSTATE_CUTAWAY_END_WAIT,
+    APPEALSTATE_CUTAWAY_FADE_OUT_RETURN,
+    APPEALSTATE_CUTAWAY_RESTORE,
+    APPEALSTATE_CUTAWAY_FADE_IN_RETURN,
     APPEALSTATE_MOVE_ANIM_MULTITURN,
     APPEALSTATE_SLIDE_MON_OUT,
     APPEALSTATE_FREE_MON_SPRITE,
@@ -372,7 +445,41 @@ EWRAM_DATA u16 gSpecialVar_ContestRank = 0;
 EWRAM_DATA u8 gNumLinkContestPlayers = 0;
 EWRAM_DATA u8 gHighestRibbonRank = 0;
 EWRAM_DATA struct ContestResources *gContestResources = NULL;
+EWRAM_DATA bool8 gContestMoveAnimInCutaway = FALSE;
 static EWRAM_DATA u8 sContestBgCopyFlags = 0;
+static EWRAM_DATA u8 sContestNormalMonSpriteIds[CONTESTANT_COUNT] = {0};
+static EWRAM_DATA enum Species sContestPendingGimmickSpecies[CONTESTANT_COUNT] = {0};
+static EWRAM_DATA bool8 sContestPendingGimmickSpeciesValid[CONTESTANT_COUNT] = {0};
+static EWRAM_DATA u8 sContestNpcPresetIds[CONTESTANT_COUNT] = {0};
+static EWRAM_DATA struct
+{
+    enum Species attackerSpecies;
+    enum Species pendingAttackerSpecies;
+    bool8 hasPendingAttackerSpecies;
+    u8 attackerSpriteId;
+    u8 targetSpriteId;
+    enum Move effectMove;
+    enum Move animMove;
+} sContestCutawayAnimSandbox = {0};
+static EWRAM_DATA struct {
+    u16 dispcnt;
+    u16 bgcnt[4];
+    u16 bghofs[4];
+    u16 bgvofs[4];
+    u16 bldcnt;
+    u16 bldalpha;
+    u16 bldy;
+    u16 winin;
+    u16 winout;
+    u16 winh[2];
+    u16 winv[2];
+    u16 mosaic;
+    bool8 valid;
+} sContestCutawayGpuState = {0};
+static EWRAM_DATA bool8 sContestCutawaySpriteWasInUse[MAX_SPRITES] = {0};
+static EWRAM_DATA bool8 sContestCutawaySpriteWasInvisible[MAX_SPRITES] = {0};
+static EWRAM_DATA u8 sContestCutawayAttackerSpriteId;
+static EWRAM_DATA u8 sContestCutawayTargetSpriteId;
 EWRAM_DATA struct ContestWinner gCurContestWinner = {0};
 EWRAM_DATA bool8 gCurContestWinnerIsForArtist = 0;
 EWRAM_DATA u8 gCurContestWinnerSaveIdx = 0;
@@ -858,6 +965,46 @@ static const struct BgTemplate sContestBgTemplates[] =
     }
 };
 
+static const struct BgTemplate sContestCutawayBattleBgTemplates[] =
+{
+    {
+        .bg = 0,
+        .charBaseIndex = 0,
+        .mapBaseIndex = 24,
+        .screenSize = 2,
+        .paletteMode = 0,
+        .priority = 0,
+        .baseTile = 0
+    },
+    {
+        .bg = 1,
+        .charBaseIndex = 1,
+        .mapBaseIndex = 28,
+        .screenSize = 2,
+        .paletteMode = 0,
+        .priority = 1,
+        .baseTile = 0
+    },
+    {
+        .bg = 2,
+        .charBaseIndex = 1,
+        .mapBaseIndex = 30,
+        .screenSize = 1,
+        .paletteMode = 0,
+        .priority = 2,
+        .baseTile = 0
+    },
+    {
+        .bg = 3,
+        .charBaseIndex = 2,
+        .mapBaseIndex = 26,
+        .screenSize = 1,
+        .paletteMode = 0,
+        .priority = 3,
+        .baseTile = 0
+    },
+};
+
 static const struct WindowTemplate sContestWindowTemplates[] =
 {
     [WIN_CONTESTANT0_NAME] = {
@@ -972,6 +1119,7 @@ static const struct WindowTemplate sContestWindowTemplates[] =
 };
 
 #include "data/contest_opponents.h"
+#include "data/contest_npc_presets.h"
 
 static const struct CompressedSpriteSheet sSpriteSheets_ContestantsTurnBlinkEffect[CONTESTANT_COUNT] =
 {
@@ -1124,44 +1272,45 @@ struct ContestGMaxMove
 {
     enum Species species;
     enum Type moveType;
+    enum Move gmaxMove;
 };
 
 static const struct ContestGMaxMove sContestGMaxMoveTable[] =
 {
-    {SPECIES_VENUSAUR_GMAX,                   TYPE_GRASS},
-    {SPECIES_BLASTOISE_GMAX,                  TYPE_WATER},
-    {SPECIES_CHARIZARD_GMAX,                  TYPE_FIRE},
-    {SPECIES_BUTTERFREE_GMAX,                 TYPE_BUG},
-    {SPECIES_PIKACHU_GMAX,                    TYPE_ELECTRIC},
-    {SPECIES_MEOWTH_GMAX,                     TYPE_NORMAL},
-    {SPECIES_MACHAMP_GMAX,                    TYPE_FIGHTING},
-    {SPECIES_GENGAR_GMAX,                     TYPE_GHOST},
-    {SPECIES_KINGLER_GMAX,                    TYPE_WATER},
-    {SPECIES_LAPRAS_GMAX,                     TYPE_ICE},
-    {SPECIES_EEVEE_GMAX,                      TYPE_NORMAL},
-    {SPECIES_SNORLAX_GMAX,                    TYPE_NORMAL},
-    {SPECIES_GARBODOR_GMAX,                   TYPE_POISON},
-    {SPECIES_MELMETAL_GMAX,                   TYPE_STEEL},
-    {SPECIES_RILLABOOM_GMAX,                  TYPE_GRASS},
-    {SPECIES_CINDERACE_GMAX,                  TYPE_FIRE},
-    {SPECIES_INTELEON_GMAX,                   TYPE_WATER},
-    {SPECIES_CORVIKNIGHT_GMAX,                TYPE_FLYING},
-    {SPECIES_ORBEETLE_GMAX,                   TYPE_PSYCHIC},
-    {SPECIES_DREDNAW_GMAX,                    TYPE_WATER},
-    {SPECIES_COALOSSAL_GMAX,                  TYPE_ROCK},
-    {SPECIES_FLAPPLE_GMAX,                    TYPE_GRASS},
-    {SPECIES_APPLETUN_GMAX,                   TYPE_GRASS},
-    {SPECIES_SANDACONDA_GMAX,                 TYPE_GROUND},
-    {SPECIES_TOXTRICITY_AMPED_GMAX,           TYPE_ELECTRIC},
-    {SPECIES_TOXTRICITY_LOW_KEY_GMAX,         TYPE_ELECTRIC},
-    {SPECIES_CENTISKORCH_GMAX,                TYPE_FIRE},
-    {SPECIES_HATTERENE_GMAX,                  TYPE_FAIRY},
-    {SPECIES_GRIMMSNARL_GMAX,                 TYPE_DARK},
-    {SPECIES_ALCREMIE_GMAX,                   TYPE_FAIRY},
-    {SPECIES_COPPERAJAH_GMAX,                 TYPE_STEEL},
-    {SPECIES_DURALUDON_GMAX,                  TYPE_DRAGON},
-    {SPECIES_URSHIFU_SINGLE_STRIKE_GMAX,      TYPE_DARK},
-    {SPECIES_URSHIFU_RAPID_STRIKE_GMAX,       TYPE_WATER},
+    {SPECIES_VENUSAUR_GMAX,                   TYPE_GRASS,      MOVE_G_MAX_VINE_LASH},
+    {SPECIES_BLASTOISE_GMAX,                  TYPE_WATER,      MOVE_G_MAX_CANNONADE},
+    {SPECIES_CHARIZARD_GMAX,                  TYPE_FIRE,       MOVE_G_MAX_WILDFIRE},
+    {SPECIES_BUTTERFREE_GMAX,                 TYPE_BUG,        MOVE_G_MAX_BEFUDDLE},
+    {SPECIES_PIKACHU_GMAX,                    TYPE_ELECTRIC,   MOVE_G_MAX_VOLT_CRASH},
+    {SPECIES_MEOWTH_GMAX,                     TYPE_NORMAL,     MOVE_G_MAX_GOLD_RUSH},
+    {SPECIES_MACHAMP_GMAX,                    TYPE_FIGHTING,   MOVE_G_MAX_CHI_STRIKE},
+    {SPECIES_GENGAR_GMAX,                     TYPE_GHOST,      MOVE_G_MAX_TERROR},
+    {SPECIES_KINGLER_GMAX,                    TYPE_WATER,      MOVE_G_MAX_FOAM_BURST},
+    {SPECIES_LAPRAS_GMAX,                     TYPE_ICE,        MOVE_G_MAX_RESONANCE},
+    {SPECIES_EEVEE_GMAX,                      TYPE_NORMAL,     MOVE_G_MAX_CUDDLE},
+    {SPECIES_SNORLAX_GMAX,                    TYPE_NORMAL,     MOVE_G_MAX_REPLENISH},
+    {SPECIES_GARBODOR_GMAX,                   TYPE_POISON,     MOVE_G_MAX_MALODOR},
+    {SPECIES_MELMETAL_GMAX,                   TYPE_STEEL,      MOVE_G_MAX_MELTDOWN},
+    {SPECIES_RILLABOOM_GMAX,                  TYPE_GRASS,      MOVE_G_MAX_DRUM_SOLO},
+    {SPECIES_CINDERACE_GMAX,                  TYPE_FIRE,       MOVE_G_MAX_FIREBALL},
+    {SPECIES_INTELEON_GMAX,                   TYPE_WATER,      MOVE_G_MAX_HYDROSNIPE},
+    {SPECIES_CORVIKNIGHT_GMAX,                TYPE_FLYING,     MOVE_G_MAX_WIND_RAGE},
+    {SPECIES_ORBEETLE_GMAX,                   TYPE_PSYCHIC,    MOVE_G_MAX_GRAVITAS},
+    {SPECIES_DREDNAW_GMAX,                    TYPE_WATER,      MOVE_G_MAX_STONESURGE},
+    {SPECIES_COALOSSAL_GMAX,                  TYPE_ROCK,       MOVE_G_MAX_VOLCALITH},
+    {SPECIES_FLAPPLE_GMAX,                    TYPE_GRASS,      MOVE_G_MAX_TARTNESS},
+    {SPECIES_APPLETUN_GMAX,                   TYPE_GRASS,      MOVE_G_MAX_SWEETNESS},
+    {SPECIES_SANDACONDA_GMAX,                 TYPE_GROUND,     MOVE_G_MAX_SANDBLAST},
+    {SPECIES_TOXTRICITY_AMPED_GMAX,           TYPE_ELECTRIC,   MOVE_G_MAX_STUN_SHOCK},
+    {SPECIES_TOXTRICITY_LOW_KEY_GMAX,         TYPE_ELECTRIC,   MOVE_G_MAX_STUN_SHOCK},
+    {SPECIES_CENTISKORCH_GMAX,                TYPE_FIRE,       MOVE_G_MAX_CENTIFERNO},
+    {SPECIES_HATTERENE_GMAX,                  TYPE_FAIRY,      MOVE_G_MAX_SMITE},
+    {SPECIES_GRIMMSNARL_GMAX,                 TYPE_DARK,       MOVE_G_MAX_SNOOZE},
+    {SPECIES_ALCREMIE_GMAX,                   TYPE_FAIRY,      MOVE_G_MAX_FINALE},
+    {SPECIES_COPPERAJAH_GMAX,                 TYPE_STEEL,      MOVE_G_MAX_STEELSURGE},
+    {SPECIES_DURALUDON_GMAX,                  TYPE_DRAGON,     MOVE_G_MAX_DEPLETION},
+    {SPECIES_URSHIFU_SINGLE_STRIKE_GMAX,      TYPE_DARK,       MOVE_G_MAX_ONE_BLOW},
+    {SPECIES_URSHIFU_RAPID_STRIKE_GMAX,       TYPE_WATER,      MOVE_G_MAX_RAPID_FLOW},
 };
 
 static const u8 sText_ContestGimmickNone[] = _("{JPN}{SELECT_BUTTON}:なし");
@@ -1183,7 +1332,7 @@ static const u8 *const sContestGimmickNames[CONTEST_GIMMICK_COUNT] =
 
 static bool32 IsContestGimmickEnabled(void)
 {
-    return !(gLinkContestFlags & LINK_CONTEST_FLAG_IS_LINK);
+    return TRUE;
 }
 
 static bool32 IsContestHeldItemMegaStone(enum Item item)
@@ -1243,6 +1392,7 @@ static enum Species GetContestGimmickFormTarget(u8 contestant, enum FormChanges 
         .currentSpecies = gContestMons[contestant].species,
         .heldItem = gimmick->heldItem,
         .gmaxFactor = gimmick->gmaxFactor,
+        .teraType = gimmick->teraType,
     };
 
     for (i = 0; i < MAX_MON_MOVES; i++)
@@ -1251,21 +1401,136 @@ static enum Species GetContestGimmickFormTarget(u8 contestant, enum FormChanges 
     return GetFormChangeTargetSpecies_Internal(ctx);
 }
 
+static enum Move GetContestTypeBasedZMove(enum Move move)
+{
+    enum Type moveType = GetMoveType(move);
+
+    if (moveType >= NUMBER_OF_MON_TYPES)
+        moveType = TYPE_MYSTERY;
+    if (gTypesInfo[moveType].zMove == MOVE_NONE)
+        return gTypesInfo[TYPE_NONE].zMove;
+    return gTypesInfo[moveType].zMove;
+}
+
+static enum Move GetContestZMove(u8 contestant, enum Move move)
+{
+    struct ContestGimmickStatus *gimmick = &eContestGimmickStatus[contestant];
+    enum Move zMove;
+
+    if (move == MOVE_NONE || move >= MOVES_COUNT || !IsContestHeldItemZCrystal(gimmick->heldItem))
+        return MOVE_NONE;
+
+    zMove = GetSignatureZMove(move, gContestMons[contestant].species, gimmick->heldItem);
+    if (zMove != MOVE_NONE)
+        return zMove;
+
+    if (GetMoveType(move) == GetItemSecondaryId(gimmick->heldItem))
+        return GetContestTypeBasedZMove(move);
+
+    return MOVE_NONE;
+}
+
+static enum Move GetContestTypeBasedMaxMove(u8 contestant, enum Type type)
+{
+    u32 i;
+    enum Species species = gContestMons[contestant].species;
+
+    if (type >= NUMBER_OF_MON_TYPES)
+        type = TYPE_MYSTERY;
+
+    if (!gSpeciesInfo[species].isGigantamax)
+        species = GetContestGimmickFormTarget(contestant, FORM_CHANGE_BATTLE_GIGANTAMAX);
+
+    if (gSpeciesInfo[species].isGigantamax)
+    {
+        for (i = 0; i < ARRAY_COUNT(sContestGMaxMoveTable); i++)
+        {
+            if (sContestGMaxMoveTable[i].species == species && sContestGMaxMoveTable[i].moveType == type)
+                return sContestGMaxMoveTable[i].gmaxMove;
+        }
+    }
+
+    if (gTypesInfo[type].maxMove == MOVE_NONE)
+        return gTypesInfo[TYPE_NONE].maxMove;
+    return gTypesInfo[type].maxMove;
+}
+
+static enum Move GetContestMaxMove(u8 contestant, enum Move move)
+{
+    if (move == MOVE_NONE)
+        return MOVE_NONE;
+    if (move == MOVE_STRUGGLE)
+        return MOVE_STRUGGLE;
+    if (GetMoveCategory(move) == DAMAGE_CATEGORY_STATUS)
+        return MOVE_MAX_GUARD;
+    return GetContestTypeBasedMaxMove(contestant, GetMoveType(move));
+}
+
+static enum Move GetContestGimmickMove(u8 contestant, enum Move move, enum ContestGimmick selected)
+{
+    if (!IsContestGimmickEnabled())
+        return move;
+
+    switch (selected)
+    {
+    case CONTEST_GIMMICK_Z_APPEAL:
+    {
+        enum Move zMove = GetContestZMove(contestant, move);
+        return zMove != MOVE_NONE ? zMove : move;
+    }
+    case CONTEST_GIMMICK_DYNAMAX:
+        return GetContestMaxMove(contestant, move);
+    default:
+        return move;
+    }
+}
+
+static enum Move GetContestSafeEffectMove(u8 contestant, enum Move move)
+{
+    (void)contestant;
+
+    if (move == MOVE_NONE || move >= MOVES_COUNT)
+        return MOVE_POUND;
+    return move;
+}
+
+static enum Move GetContestAnimMove(u8 contestant, enum Move move)
+{
+    struct ContestGimmickStatus *gimmick = &eContestGimmickStatus[contestant];
+    enum ContestGimmick selected = gimmick->moveGimmick;
+
+    if (selected == CONTEST_GIMMICK_NONE && gimmick->dynamaxTurns != 0)
+        selected = CONTEST_GIMMICK_DYNAMAX;
+
+    return GetContestGimmickMove(contestant, move, selected);
+}
+
+static enum Move GetContestTurnEffectMove(u8 contestant)
+{
+    return GetContestSafeEffectMove(contestant, eContestantStatus[contestant].currMove);
+}
+
+static enum Move GetContestTurnAnimMove(u8 contestant)
+{
+    return GetContestAnimMove(contestant, GetContestTurnEffectMove(contestant));
+}
+
 static bool32 ContestGimmickCanSelect(u8 contestant, enum ContestGimmick selected, enum Move move)
 {
     struct ContestGimmickStatus *gimmick = &eContestGimmickStatus[contestant];
 
     if (selected == CONTEST_GIMMICK_NONE)
         return TRUE;
-    if (!IsContestGimmickEnabled() || contestant != gContestPlayerMonIndex || move == MOVE_NONE)
+    if (!IsContestGimmickEnabled() || move == MOVE_NONE)
         return FALSE;
     if (gimmick->usedGimmick != CONTEST_GIMMICK_NONE)
     {
-        return selected == CONTEST_GIMMICK_Z_APPEAL
+        return (!(gLinkContestFlags & LINK_CONTEST_FLAG_IS_LINK) || contestant < gNumLinkContestPlayers)
+            && selected == CONTEST_GIMMICK_Z_APPEAL
             && gimmick->usedGimmick == CONTEST_GIMMICK_ULTRA_BURST
             && gimmick->ultraActive
             && !gimmick->zUsed
-            && IsContestHeldItemZCrystal(gimmick->heldItem);
+            && GetContestZMove(contestant, move) != MOVE_NONE;
     }
 
     switch (selected)
@@ -1278,7 +1543,7 @@ static bool32 ContestGimmickCanSelect(u8 contestant, enum ContestGimmick selecte
     case CONTEST_GIMMICK_ULTRA_BURST:
         return GetContestGimmickFormTarget(contestant, FORM_CHANGE_BATTLE_ULTRA_BURST) != gContestMons[contestant].species;
     case CONTEST_GIMMICK_Z_APPEAL:
-        return !gimmick->zUsed && IsContestHeldItemZCrystal(gimmick->heldItem);
+        return !gimmick->zUsed && GetContestZMove(contestant, move) != MOVE_NONE;
     case CONTEST_GIMMICK_TERA:
         return !gimmick->teraActive && IsContestTeraTypeValid(gimmick->teraType);
     case CONTEST_GIMMICK_DYNAMAX:
@@ -1311,6 +1576,7 @@ static void CycleContestGimmickSelection(void)
         if (ContestGimmickCanSelect(gContestPlayerMonIndex, selected, move))
         {
             eContestGimmickStatus[gContestPlayerMonIndex].selected = selected;
+            PrintContestMoveNames();
             PrintContestMoveDescription(move);
             PrintContestGimmickMessageHolder(move);
             PlaySE(SE_SELECT);
@@ -1329,6 +1595,159 @@ static void InitPlayerContestGimmickStatus(u8 partyIndex, u16 heldItem)
     gimmick->dynamaxLevel = GetMonData(&gParties[B_TRAINER_PLAYER][partyIndex], MON_DATA_DYNAMAX_LEVEL);
     gimmick->gmaxFactor = GetMonData(&gParties[B_TRAINER_PLAYER][partyIndex], MON_DATA_GIGANTAMAX_FACTOR);
     gimmick->originalSpecies = gContestMons[gContestPlayerMonIndex].species;
+    sContestPendingGimmickSpecies[gContestPlayerMonIndex] = SPECIES_NONE;
+    sContestPendingGimmickSpeciesValid[gContestPlayerMonIndex] = FALSE;
+    SetContestCutawayPendingAttackerSpecies(SPECIES_NONE);
+}
+
+static void InitLinkContestGimmickStatus(u8 contestant)
+{
+    struct ContestGimmickStatus *gimmick = &eContestGimmickStatus[contestant];
+
+    *gimmick = (struct ContestGimmickStatus){};
+    gimmick->heldItem = gContestMons[contestant].heldItem;
+    gimmick->teraType = gContestMons[contestant].teraType;
+    gimmick->dynamaxLevel = gContestMons[contestant].dynamaxLevel;
+    gimmick->gmaxFactor = gContestMons[contestant].gmaxFactor;
+    gimmick->originalSpecies = gContestMons[contestant].species;
+    sContestPendingGimmickSpecies[contestant] = SPECIES_NONE;
+    sContestPendingGimmickSpeciesValid[contestant] = FALSE;
+}
+
+void Contest_GetLinkGimmickState(u8 contestant, struct LinkContestGimmickState *state)
+{
+    const struct ContestGimmickStatus *gimmick = &eContestGimmickStatus[contestant];
+
+    *state = (struct LinkContestGimmickState)
+    {
+        .species = gContestMons[contestant].species,
+        .originalSpecies = gimmick->originalSpecies,
+        .pendingSpecies = sContestPendingGimmickSpeciesValid[contestant] ? sContestPendingGimmickSpecies[contestant] : SPECIES_NONE,
+        .heldItem = gimmick->heldItem,
+        .extraAppeal = gimmick->extraAppeal,
+        .selected = gimmick->selected,
+        .moveGimmick = gimmick->moveGimmick,
+        .usedGimmick = gimmick->usedGimmick,
+        .teraType = gimmick->teraType,
+        .dynamaxLevel = gimmick->dynamaxLevel,
+        .dynamaxTurns = gimmick->dynamaxTurns,
+        .gmaxFactor = gimmick->gmaxFactor,
+        .megaActive = gimmick->megaActive,
+        .ultraActive = gimmick->ultraActive,
+        .teraActive = gimmick->teraActive,
+        .gigantamaxActive = gimmick->gigantamaxActive,
+        .zUsed = gimmick->zUsed,
+        .stellarBoostUsed = gimmick->stellarBoostUsed,
+        .jammedSinceLastAppeal = gimmick->jammedSinceLastAppeal,
+        .showGimmickIntro = gimmick->showGimmickIntro,
+    };
+}
+
+void Contest_SetLinkGimmickState(u8 contestant, const struct LinkContestGimmickState *state)
+{
+    struct ContestGimmickStatus *gimmick = &eContestGimmickStatus[contestant];
+
+    gContestMons[contestant].species = state->species;
+    gimmick->originalSpecies = state->originalSpecies;
+    sContestPendingGimmickSpecies[contestant] = state->pendingSpecies;
+    sContestPendingGimmickSpeciesValid[contestant] = state->pendingSpecies != SPECIES_NONE;
+    gimmick->heldItem = state->heldItem;
+    gimmick->extraAppeal = state->extraAppeal;
+    gimmick->selected = state->selected;
+    gimmick->moveGimmick = state->moveGimmick;
+    gimmick->usedGimmick = state->usedGimmick;
+    gimmick->teraType = state->teraType;
+    gimmick->dynamaxLevel = state->dynamaxLevel;
+    gimmick->dynamaxTurns = state->dynamaxTurns;
+    gimmick->gmaxFactor = state->gmaxFactor;
+    gimmick->megaActive = state->megaActive;
+    gimmick->ultraActive = state->ultraActive;
+    gimmick->teraActive = state->teraActive;
+    gimmick->gigantamaxActive = state->gigantamaxActive;
+    gimmick->zUsed = state->zUsed;
+    gimmick->stellarBoostUsed = state->stellarBoostUsed;
+    gimmick->jammedSinceLastAppeal = state->jammedSinceLastAppeal;
+    gimmick->showGimmickIntro = state->showGimmickIntro;
+}
+
+#if TESTING
+bool32 Test_ContestGimmickCanSelect(u8 contestant, enum ContestGimmick selected, enum Move move)
+{
+    return ContestGimmickCanSelect(contestant, selected, move);
+}
+
+void Test_CalculateAppealMoveImpact(u8 contestant)
+{
+    CalculateAppealMoveImpact(contestant);
+}
+
+enum Move Test_ContestGetAnimMove(u8 contestant)
+{
+    return GetContestTurnAnimMove(contestant);
+}
+
+void Test_ContestAdvanceRound(void)
+{
+    SetContestantStatusesForNextRound();
+}
+
+void Test_ContestPrepareMoveAnimData(u8 contestant, enum Move effectMove)
+{
+    SetMoveSpecificAnimData(contestant, effectMove);
+}
+#endif
+
+static void InitNpcContestGimmickStatus(u8 contestant)
+{
+    struct ContestGimmickStatus *gimmick = &eContestGimmickStatus[contestant];
+    enum Species species = SanitizeSpecies(gContestMons[contestant].species);
+
+    *gimmick = (struct ContestGimmickStatus){};
+    if (gLinkContestFlags & LINK_CONTEST_FLAG_IS_LINK)
+    {
+        // Linked NPCs retain their legacy data and do not select gimmicks.
+        gimmick->teraType = GetSpeciesType(species, 0);
+        gimmick->dynamaxLevel = MAX_DYNAMAX_LEVEL;
+        gimmick->gmaxFactor = TRUE;
+    }
+    else
+    {
+        gimmick->heldItem = gContestMons[contestant].heldItem;
+        gimmick->teraType = gContestMons[contestant].teraType;
+        gimmick->dynamaxLevel = gContestMons[contestant].dynamaxLevel;
+        gimmick->gmaxFactor = gContestMons[contestant].gmaxFactor;
+    }
+    gimmick->originalSpecies = species;
+    sContestPendingGimmickSpecies[contestant] = SPECIES_NONE;
+    sContestPendingGimmickSpeciesValid[contestant] = FALSE;
+}
+
+static void TrySelectNpcContestGimmick(u8 contestant, enum Move move)
+{
+    struct ContestGimmickStatus *gimmick = &eContestGimmickStatus[contestant];
+    const struct ContestNpcPreset *preset = Contest_GetNpcPreset(sContestNpcPresetIds[contestant]);
+    enum ContestGimmick candidate;
+
+    gimmick->selected = CONTEST_GIMMICK_NONE;
+    if (!IsContestGimmickEnabled()
+        || (gLinkContestFlags & LINK_CONTEST_FLAG_IS_LINK)
+        || contestant == gContestPlayerMonIndex
+        || preset == NULL
+        || move == MOVE_NONE)
+        return;
+
+    candidate = preset->gimmick;
+    if (gimmick->usedGimmick == CONTEST_GIMMICK_ULTRA_BURST && gimmick->ultraActive)
+    {
+        candidate = CONTEST_GIMMICK_Z_APPEAL;
+        if (eContest.appealNumber + 1 < max(3, preset->activationTurn + 1))
+            return;
+    }
+    else if (eContest.appealNumber + 1 < preset->activationTurn)
+        return;
+
+    if (ContestGimmickCanSelect(contestant, candidate, move))
+        gimmick->selected = candidate;
 }
 
 static enum ContestCategories GetContestMoveCategoryWithGimmick(u8 contestant, enum Move move)
@@ -1349,24 +1768,25 @@ static enum ContestCategories GetContestMoveCategoryWithGimmick(u8 contestant, e
 static void GetContestMoveDisplayValues(enum Move move, enum ContestCategories *category, u8 *appeal, u8 *jam)
 {
     u8 contestant = gContestPlayerMonIndex;
-    enum ContestGimmick selected = GetSelectedContestGimmick(contestant, move);
+    enum Move effectMove = SanitizeMove(GetContestSafeEffectMove(contestant, move));
+    enum ContestGimmick selected = GetSelectedContestGimmick(contestant, effectMove);
     struct ContestGimmickStatus *gimmick = &eContestGimmickStatus[contestant];
-    struct ContestEffect contestEffect = gContestEffects[GetMoveContestEffect(move)];
+    struct ContestEffect contestEffect = gContestEffects[GetMoveContestEffect(effectMove)];
 
-    *category = GetContestMoveCategoryWithGimmick(contestant, move);
+    *category = GetContestMoveCategoryWithGimmick(contestant, effectMove);
     *appeal = contestEffect.appeal == 0xFF ? 0 : contestEffect.appeal;
     *jam = contestEffect.jam == 0xFF ? 0 : contestEffect.jam;
 
     if (selected == CONTEST_GIMMICK_Z_APPEAL)
     {
         *appeal += 30;
-        if (IsContestSignatureZMove(contestant, move))
+        if (IsContestSignatureZMove(contestant, effectMove))
             *appeal += 10;
     }
     else if (selected == CONTEST_GIMMICK_DYNAMAX || gimmick->dynamaxTurns != 0)
     {
         *appeal = (*category == gSpecialVar_ContestCategory) ? 30 : 20;
-        if (IsContestGMaxMove(contestant, move))
+        if (IsContestGMaxMove(contestant, effectMove))
             *appeal += 10;
         *jam = 0;
     }
@@ -1405,6 +1825,15 @@ static void ActivateSelectedContestGimmick(u8 contestant)
     enum ContestGimmick selected = GetSelectedContestGimmick(contestant, eContestantStatus[contestant].currMove);
 
     gimmick->moveGimmick = selected;
+    gimmick->showGimmickIntro = selected != CONTEST_GIMMICK_NONE;
+    if (selected == CONTEST_GIMMICK_NONE && gimmick->dynamaxTurns != 0
+        && eContestantStatus[contestant].currMove != MOVE_NONE
+        && !eContestantStatus[contestant].nervous)
+        gimmick->moveGimmick = CONTEST_GIMMICK_DYNAMAX;
+    sContestPendingGimmickSpecies[contestant] = SPECIES_NONE;
+    sContestPendingGimmickSpeciesValid[contestant] = FALSE;
+    SetContestCutawayPendingAttackerSpecies(SPECIES_NONE);
+
     switch (selected)
     {
     case CONTEST_GIMMICK_MEGA:
@@ -1412,7 +1841,11 @@ static void ActivateSelectedContestGimmick(u8 contestant)
         if (targetSpecies == gContestMons[contestant].species)
             targetSpecies = GetContestGimmickFormTarget(contestant, FORM_CHANGE_BATTLE_MEGA_EVOLUTION_MOVE);
         if (targetSpecies != gContestMons[contestant].species)
-            gContestMons[contestant].species = targetSpecies;
+        {
+            sContestPendingGimmickSpecies[contestant] = targetSpecies;
+            sContestPendingGimmickSpeciesValid[contestant] = TRUE;
+            SetContestCutawayPendingAttackerSpecies(targetSpecies);
+        }
         gimmick->megaActive = TRUE;
         gimmick->usedGimmick = CONTEST_GIMMICK_MEGA;
         gimmick->selected = CONTEST_GIMMICK_NONE;
@@ -1420,7 +1853,11 @@ static void ActivateSelectedContestGimmick(u8 contestant)
     case CONTEST_GIMMICK_ULTRA_BURST:
         targetSpecies = GetContestGimmickFormTarget(contestant, FORM_CHANGE_BATTLE_ULTRA_BURST);
         if (targetSpecies != gContestMons[contestant].species)
-            gContestMons[contestant].species = targetSpecies;
+        {
+            sContestPendingGimmickSpecies[contestant] = targetSpecies;
+            sContestPendingGimmickSpeciesValid[contestant] = TRUE;
+            SetContestCutawayPendingAttackerSpecies(targetSpecies);
+        }
         gimmick->ultraActive = TRUE;
         gimmick->usedGimmick = CONTEST_GIMMICK_ULTRA_BURST;
         gimmick->selected = CONTEST_GIMMICK_NONE;
@@ -1436,6 +1873,13 @@ static void ActivateSelectedContestGimmick(u8 contestant)
         gimmick->teraActive = TRUE;
         gimmick->usedGimmick = CONTEST_GIMMICK_TERA;
         gimmick->selected = CONTEST_GIMMICK_NONE;
+        targetSpecies = GetContestGimmickFormTarget(contestant, FORM_CHANGE_BATTLE_TERASTALLIZATION);
+        if (targetSpecies != gContestMons[contestant].species)
+        {
+            sContestPendingGimmickSpecies[contestant] = targetSpecies;
+            sContestPendingGimmickSpeciesValid[contestant] = TRUE;
+            SetContestCutawayPendingAttackerSpecies(targetSpecies);
+        }
         break;
     case CONTEST_GIMMICK_DYNAMAX:
         gimmick->dynamaxTurns = 3;
@@ -1444,7 +1888,9 @@ static void ActivateSelectedContestGimmick(u8 contestant)
         targetSpecies = GetContestGimmickFormTarget(contestant, FORM_CHANGE_BATTLE_GIGANTAMAX);
         if (targetSpecies != gContestMons[contestant].species)
         {
-            gContestMons[contestant].species = targetSpecies;
+            sContestPendingGimmickSpecies[contestant] = targetSpecies;
+            sContestPendingGimmickSpeciesValid[contestant] = TRUE;
+            SetContestCutawayPendingAttackerSpecies(targetSpecies);
             gimmick->gigantamaxActive = TRUE;
         }
         break;
@@ -1466,9 +1912,6 @@ static void ApplyContestGimmickMoveImpact(u8 contestant)
     if (selected == CONTEST_GIMMICK_Z_APPEAL)
     {
         eContestantStatus[contestant].baseAppeal += 30;
-        eContestantStatus[contestant].appeal += 30;
-        if (IsContestSignatureZMove(contestant, move))
-            eContestantStatus[contestant].appeal += 10;
     }
     else if (gimmick->dynamaxTurns != 0)
     {
@@ -1478,20 +1921,41 @@ static void ApplyContestGimmickMoveImpact(u8 contestant)
         eContestantStatus[contestant].appeal = eContestantStatus[contestant].baseAppeal;
         eContestAppealResults.jam = 0;
         eContestAppealResults.jam2 = 0;
-        eContestantStatus[contestant].immune = TRUE;
     }
     else
     {
-        if ((gimmick->megaActive || gimmick->ultraActive)
-            && eContestantStatus[contestant].moveCategory == gSpecialVar_ContestCategory
-            && !gimmick->jammedSinceLastAppeal)
-            eContestantStatus[contestant].appeal += 20;
         if (gimmick->teraActive && gimmick->teraType == TYPE_STELLAR && !gimmick->stellarBoostUsed)
         {
-            eContestantStatus[contestant].appeal += 10;
             eContestAppealResults.jam += 10;
             eContestAppealResults.jam2 = eContestAppealResults.jam;
-            gimmick->stellarBoostUsed = TRUE;
+        }
+    }
+}
+
+static void ApplyContestGimmickAppealBonus(u8 contestant)
+{
+    struct ContestGimmickStatus *gimmick = &eContestGimmickStatus[contestant];
+
+    // Variable-appeal effects may replace appeal, so add gimmick hearts afterward.
+    if (!eContestantStatus[contestant].nervous)
+    {
+        if (gimmick->moveGimmick == CONTEST_GIMMICK_Z_APPEAL)
+        {
+            eContestantStatus[contestant].appeal += 30;
+            if (IsContestSignatureZMove(contestant, eContestantStatus[contestant].currMove))
+                eContestantStatus[contestant].appeal += 10;
+        }
+        else if (gimmick->dynamaxTurns == 0)
+        {
+            if ((gimmick->megaActive || gimmick->ultraActive)
+                && eContestantStatus[contestant].moveCategory == gSpecialVar_ContestCategory
+                && !gimmick->jammedSinceLastAppeal)
+                eContestantStatus[contestant].appeal += 20;
+            if (gimmick->teraActive && gimmick->teraType == TYPE_STELLAR && !gimmick->stellarBoostUsed)
+            {
+                eContestantStatus[contestant].appeal += 10;
+                gimmick->stellarBoostUsed = TRUE;
+            }
         }
     }
     gimmick->jammedSinceLastAppeal = FALSE;
@@ -1505,18 +1969,14 @@ static void FinishContestGimmickMoveImpact(u8 contestant)
     if (!IsContestGimmickEnabled())
         return;
 
-    if (gimmick->dynamaxTurns != 0)
+    if (gimmick->moveGimmick == CONTEST_GIMMICK_DYNAMAX
+        && eContestantStatus[contestant].currMove != MOVE_NONE
+        && !eContestantStatus[contestant].nervous)
     {
         for (i = 0; i < CONTESTANT_COUNT; i++)
         {
             if (i != contestant)
                 eContestGimmickStatus[i].extraAppeal += 10;
-        }
-        gimmick->dynamaxTurns--;
-        if (gimmick->dynamaxTurns == 0 && gimmick->gigantamaxActive)
-        {
-            gContestMons[contestant].species = gimmick->originalSpecies;
-            gimmick->gigantamaxActive = FALSE;
         }
     }
 }
@@ -1526,6 +1986,98 @@ static bool32 ContestGimmickSkipsMoveAnim(u8 contestant)
     return IsContestGimmickEnabled()
         && eContestGimmickStatus[contestant].moveGimmick == CONTEST_GIMMICK_ULTRA_BURST
         && eContestantStatus[contestant].currMove == MOVE_NONE;
+}
+
+static bool32 ContestGimmickShouldPlayIntro(u8 contestant)
+{
+    struct ContestGimmickStatus *gimmick = &eContestGimmickStatus[contestant];
+
+    if (!IsContestGimmickEnabled() || !gimmick->showGimmickIntro)
+        return FALSE;
+    if (eContestantStatus[contestant].nervous)
+        return FALSE;
+    return TRUE;
+}
+
+static u8 GetContestGimmickIntroAnimCount(u8 contestant)
+{
+    if (!ContestGimmickShouldPlayIntro(contestant))
+        return 0;
+    if (eContestGimmickStatus[contestant].moveGimmick == CONTEST_GIMMICK_TERA)
+        return 2;
+    return 1;
+}
+
+
+static void ResetContestCutawayAnimSandbox(void)
+{
+    sContestCutawayAnimSandbox.attackerSpecies = SPECIES_NONE;
+    sContestCutawayAnimSandbox.pendingAttackerSpecies = SPECIES_NONE;
+    sContestCutawayAnimSandbox.hasPendingAttackerSpecies = FALSE;
+    sContestCutawayAnimSandbox.attackerSpriteId = SPRITE_NONE;
+    sContestCutawayAnimSandbox.targetSpriteId = SPRITE_NONE;
+    sContestCutawayAnimSandbox.effectMove = MOVE_NONE;
+    sContestCutawayAnimSandbox.animMove = MOVE_NONE;
+}
+
+static void ClearContestMoveAnimTargetData(void)
+{
+    if (gContestResources == NULL || gContestResources->moveAnim == NULL)
+        return;
+
+    gContestResources->moveAnim->targetSpecies = SPECIES_NONE;
+    gContestResources->moveAnim->targetPersonality = 0;
+    gContestResources->moveAnim->targetIsShiny = FALSE;
+    gContestResources->moveAnim->hasTargetAnim = FALSE;
+}
+
+static bool8 ContestBattleAnimFinished(void)
+{
+    return !BattleAnim_IsContestCutawayBusy();
+}
+
+static void SetContestCutawayPendingAttackerSpecies(enum Species species)
+{
+    species = SanitizeSpecies(species);
+    sContestCutawayAnimSandbox.pendingAttackerSpecies = species;
+    sContestCutawayAnimSandbox.hasPendingAttackerSpecies = species != SPECIES_NONE;
+}
+
+static bool8 ContestCutawayHasPendingAttackerSpecies(void)
+{
+    return sContestCutawayAnimSandbox.hasPendingAttackerSpecies;
+}
+
+static u16 GetContestGimmickIntroAnimId(u8 contestant, u8 step)
+{
+    switch (eContestGimmickStatus[contestant].moveGimmick)
+    {
+    case CONTEST_GIMMICK_MEGA:
+        return B_ANIM_MEGA_EVOLUTION;
+    case CONTEST_GIMMICK_ULTRA_BURST:
+        return B_ANIM_ULTRA_BURST;
+    case CONTEST_GIMMICK_Z_APPEAL:
+        return B_ANIM_ZMOVE_ACTIVATE;
+    case CONTEST_GIMMICK_TERA:
+        return step == 0 ? B_ANIM_TERA_CHARGE : B_ANIM_TERA_ACTIVATE;
+    case CONTEST_GIMMICK_DYNAMAX:
+        return B_ANIM_DYNAMAX_GROWTH;
+    default:
+        return B_ANIM_STATS_CHANGE;
+    }
+}
+
+static void LaunchContestGimmickIntroAnim(u8 contestant, u8 step)
+{
+    enum Move effectMove = SanitizeMove(GetContestTurnEffectMove(contestant));
+
+    // General gimmick animations run on the attacker itself. Do not use targetSpecies
+    // for pending form changes here; targetSpecies is only for moves that truly need
+    // another Pokemon's appearance, such as Transform or Role Play.
+    SetupContestCutawayAnimContext(contestant, effectMove, TRUE);
+    ClearContestMoveAnimTargetData();
+    ContestCutawaySyncAnimState(contestant, TRUE);
+    LaunchBattleAnimation(ANIM_TYPE_GENERAL, GetContestGimmickIntroAnimId(contestant, step));
 }
 
 static bool32 IsContestSignatureZMove(u8 contestant, enum Move move)
@@ -1561,10 +2113,210 @@ static bool32 IsContestGMaxMove(u8 contestant, enum Move move)
     return FALSE;
 }
 
+bool32 ContestGimmick_IsDynamaxed(u8 contestant)
+{
+    if (!IsContestGimmickEnabled() || contestant >= CONTESTANT_COUNT)
+        return FALSE;
+    return eContestGimmickStatus[contestant].dynamaxTurns != 0;
+}
+
 void ContestGimmick_RecordJammed(u8 contestant, u8 jam)
 {
     if (jam != 0 && IsContestGimmickEnabled())
         eContestGimmickStatus[contestant].jammedSinceLastAppeal = TRUE;
+}
+
+static void InitContestNormalViewState(void)
+{
+    u8 i;
+
+    for (i = 0; i < CONTESTANT_COUNT; i++)
+    {
+        sContestNormalMonSpriteIds[i] = SPRITE_NONE;
+        eContestGimmickStatus[i].tabIconSpriteId = SPRITE_NONE;
+    }
+}
+
+static void SpriteCB_ContestGimmickIcon(struct Sprite *sprite)
+{
+    u8 row = gContestantTurnOrder[sprite->data[0]];
+
+    sprite->x = 148;
+    sprite->y = 24 + row * 40;
+    sprite->invisible = gBattle_BG0_Y == DISPLAY_HEIGHT && row >= 2;
+    sprite->oam.priority = GetGpuReg(REG_OFFSET_BG0CNT) & 3;
+}
+
+static void DestroyContestGimmickIcons(void)
+{
+    u16 tileTags[CONTESTANT_COUNT];
+    u16 paletteTags[CONTESTANT_COUNT];
+    u8 i, count = 0;
+
+    for (i = 0; i < CONTESTANT_COUNT; i++)
+    {
+        u8 spriteId = eContestGimmickStatus[i].tabIconSpriteId;
+
+        if (spriteId < MAX_SPRITES && gSprites[spriteId].inUse
+            && gSprites[spriteId].callback == SpriteCB_ContestGimmickIcon)
+        {
+            tileTags[count] = GetSpriteTileTagByTileStart(gSprites[spriteId].oam.tileNum);
+            paletteTags[count++] = GetSpritePaletteTagByPaletteNum(gSprites[spriteId].oam.paletteNum);
+            DestroySprite(&gSprites[spriteId]);
+        }
+        eContestGimmickStatus[i].tabIconSpriteId = SPRITE_NONE;
+    }
+    // Multiple entrants can share indicator tiles and palettes. Release them only
+    // after every icon is gone, without dereferencing the factory's local template.
+    for (i = 0; i < count; i++)
+    {
+        if (tileTags[i] != TAG_NONE)
+            FreeSpriteTilesByTag(tileTags[i]);
+        if (paletteTags[i] != TAG_NONE)
+            FreeSpritePaletteByTag(paletteTags[i]);
+    }
+}
+
+static void CreateContestGimmickIcons(void)
+{
+    u8 i;
+
+    if (gLinkContestFlags & LINK_CONTEST_FLAG_IS_LINK)
+        return;
+
+    for (i = 0; i < CONTESTANT_COUNT; i++)
+    {
+        struct ContestGimmickStatus *status = &eContestGimmickStatus[i];
+        enum Gimmick gimmick = GIMMICK_NONE;
+        u8 spriteId;
+
+        if (status->megaActive)
+            gimmick = GIMMICK_MEGA;
+        else if (status->teraActive)
+            gimmick = GIMMICK_TERA;
+        else if (status->dynamaxTurns != 0)
+            gimmick = GIMMICK_DYNAMAX;
+        if (gimmick == GIMMICK_NONE)
+            continue;
+
+        // Do not load graphics when no OBJ slot is available.
+        for (spriteId = 0; spriteId < MAX_SPRITES; spriteId++)
+            if (!gSprites[spriteId].inUse)
+                break;
+        if (spriteId == MAX_SPRITES)
+            break;
+
+        spriteId = CreateGimmickIndicatorSpriteAt(gimmick, status->teraType, 148, 24, 0);
+        if (spriteId >= MAX_SPRITES)
+            continue;
+        status->tabIconSpriteId = spriteId;
+        gSprites[spriteId].data[0] = i;
+        gSprites[spriteId].callback = SpriteCB_ContestGimmickIcon;
+        SpriteCB_ContestGimmickIcon(&gSprites[spriteId]);
+    }
+}
+
+#if TESTING
+void Test_ContestRefreshGimmickIcons(void)
+{
+    DestroyContestGimmickIcons();
+    CreateContestGimmickIcons();
+}
+
+void Test_ContestDestroyGimmickIcons(void)
+{
+    DestroyContestGimmickIcons();
+}
+#endif
+
+static u8 CreateContestNormalMonSprite(u8 contestant)
+{
+    enum Species species = SanitizeSpecies(gContestMons[contestant].species);
+    u32 personality = gContestMons[contestant].personality;
+    u8 spriteId;
+    static const s16 sNormalMonX[CONTESTANT_COUNT] = {22, 56, 90, 124};
+    static const s16 sNormalMonY[CONTESTANT_COUNT] = {100, 100, 100, 100};
+
+    LoadMonIconPalettePersonality(species, personality);
+    spriteId = CreateMonIcon(species, SpriteCB_ContestNormalMon, sNormalMonX[contestant], sNormalMonY[contestant], 8, personality);
+    if (spriteId == MAX_SPRITES)
+        return SPRITE_NONE;
+
+    gSprites[spriteId].oam.priority = 2;
+    gSprites[spriteId].data[0] = contestant;
+    gSprites[spriteId].data[1] = sNormalMonY[contestant];
+    gSprites[spriteId].data[2] = 0;
+    gSprites[spriteId].data[3] = 0;
+    return spriteId;
+}
+
+static void CreateContestNormalViewSprites(void)
+{
+    u8 i;
+
+    if (gLinkContestFlags & LINK_CONTEST_FLAG_IS_LINK)
+        return;
+
+    DestroyContestNormalViewSprites();
+    for (i = 0; i < CONTESTANT_COUNT; i++)
+        sContestNormalMonSpriteIds[i] = CreateContestNormalMonSprite(i);
+    CreateContestGimmickIcons();
+}
+
+static void DestroyContestNormalViewSprites(void)
+{
+    u8 i;
+
+    DestroyContestGimmickIcons();
+    for (i = 0; i < CONTESTANT_COUNT; i++)
+    {
+        if (sContestNormalMonSpriteIds[i] < MAX_SPRITES)
+        {
+            if (gSprites[sContestNormalMonSpriteIds[i]].inUse)
+                FreeAndDestroyMonIconSprite(&gSprites[sContestNormalMonSpriteIds[i]]);
+            sContestNormalMonSpriteIds[i] = SPRITE_NONE;
+        }
+    }
+    FreeMonIconPalettes();
+}
+
+static void SpriteCB_ContestNormalMon(struct Sprite *sprite)
+{
+    static const s8 sBounceY[] = {0, -4, -7, -4, 0, 2, 0};
+
+    UpdateMonIconFrame(sprite);
+    if (sprite->data[3] == 0)
+        return;
+    if (sprite->data[2] < (s16)ARRAY_COUNT(sBounceY))
+    {
+        sprite->y2 = sBounceY[sprite->data[2]];
+        sprite->data[2]++;
+    }
+    else
+    {
+        sprite->y2 = 0;
+        sprite->data[2] = 0;
+        sprite->data[3] = 0;
+    }
+}
+
+static void StartContestNormalMonBounce(u8 contestant)
+{
+    u8 spriteId = sContestNormalMonSpriteIds[contestant];
+
+    if (spriteId == SPRITE_NONE || !gSprites[spriteId].inUse)
+        return;
+    gSprites[spriteId].data[2] = 0;
+    gSprites[spriteId].data[3] = 1;
+}
+
+static bool8 ContestNormalMonBounceDone(u8 contestant)
+{
+    u8 spriteId = sContestNormalMonSpriteIds[contestant];
+
+    if (spriteId == SPRITE_NONE || !gSprites[spriteId].inUse)
+        return TRUE;
+    return gSprites[spriteId].data[3] == 0;
 }
 
 static void CopyNicknameToFit(u8 *dest, u32 contestant)
@@ -1630,6 +2382,588 @@ void LoadContestBgAfterMoveAnim(void)
     }
 }
 
+static void SaveContestCutawayGpuState(void)
+{
+    sContestCutawayGpuState.dispcnt = GetGpuReg(REG_OFFSET_DISPCNT);
+    sContestCutawayGpuState.bgcnt[0] = GetGpuReg(REG_OFFSET_BG0CNT);
+    sContestCutawayGpuState.bgcnt[1] = GetGpuReg(REG_OFFSET_BG1CNT);
+    sContestCutawayGpuState.bgcnt[2] = GetGpuReg(REG_OFFSET_BG2CNT);
+    sContestCutawayGpuState.bgcnt[3] = GetGpuReg(REG_OFFSET_BG3CNT);
+    sContestCutawayGpuState.bghofs[0] = GetGpuReg(REG_OFFSET_BG0HOFS);
+    sContestCutawayGpuState.bgvofs[0] = GetGpuReg(REG_OFFSET_BG0VOFS);
+    sContestCutawayGpuState.bghofs[1] = GetGpuReg(REG_OFFSET_BG1HOFS);
+    sContestCutawayGpuState.bgvofs[1] = GetGpuReg(REG_OFFSET_BG1VOFS);
+    sContestCutawayGpuState.bghofs[2] = GetGpuReg(REG_OFFSET_BG2HOFS);
+    sContestCutawayGpuState.bgvofs[2] = GetGpuReg(REG_OFFSET_BG2VOFS);
+    sContestCutawayGpuState.bghofs[3] = GetGpuReg(REG_OFFSET_BG3HOFS);
+    sContestCutawayGpuState.bgvofs[3] = GetGpuReg(REG_OFFSET_BG3VOFS);
+    sContestCutawayGpuState.bldcnt = GetGpuReg(REG_OFFSET_BLDCNT);
+    sContestCutawayGpuState.bldalpha = GetGpuReg(REG_OFFSET_BLDALPHA);
+    sContestCutawayGpuState.bldy = GetGpuReg(REG_OFFSET_BLDY);
+    sContestCutawayGpuState.winin = GetGpuReg(REG_OFFSET_WININ);
+    sContestCutawayGpuState.winout = GetGpuReg(REG_OFFSET_WINOUT);
+    sContestCutawayGpuState.winh[0] = GetGpuReg(REG_OFFSET_WIN0H);
+    sContestCutawayGpuState.winv[0] = GetGpuReg(REG_OFFSET_WIN0V);
+    sContestCutawayGpuState.winh[1] = GetGpuReg(REG_OFFSET_WIN1H);
+    sContestCutawayGpuState.winv[1] = GetGpuReg(REG_OFFSET_WIN1V);
+    sContestCutawayGpuState.mosaic = GetGpuReg(REG_OFFSET_MOSAIC);
+    sContestCutawayGpuState.valid = TRUE;
+}
+
+static void RestoreContestCutawayGpuState(void)
+{
+    if (!sContestCutawayGpuState.valid)
+    {
+        SetupContestGpuRegs();
+        return;
+    }
+
+    SetGpuReg(REG_OFFSET_DISPCNT, sContestCutawayGpuState.dispcnt);
+    SetGpuReg(REG_OFFSET_BG0CNT, sContestCutawayGpuState.bgcnt[0]);
+    SetGpuReg(REG_OFFSET_BG1CNT, sContestCutawayGpuState.bgcnt[1]);
+    SetGpuReg(REG_OFFSET_BG2CNT, sContestCutawayGpuState.bgcnt[2]);
+    SetGpuReg(REG_OFFSET_BG3CNT, sContestCutawayGpuState.bgcnt[3]);
+    SetGpuReg(REG_OFFSET_BG0HOFS, sContestCutawayGpuState.bghofs[0]);
+    SetGpuReg(REG_OFFSET_BG0VOFS, sContestCutawayGpuState.bgvofs[0]);
+    SetGpuReg(REG_OFFSET_BG1HOFS, sContestCutawayGpuState.bghofs[1]);
+    SetGpuReg(REG_OFFSET_BG1VOFS, sContestCutawayGpuState.bgvofs[1]);
+    SetGpuReg(REG_OFFSET_BG2HOFS, sContestCutawayGpuState.bghofs[2]);
+    SetGpuReg(REG_OFFSET_BG2VOFS, sContestCutawayGpuState.bgvofs[2]);
+    SetGpuReg(REG_OFFSET_BG3HOFS, sContestCutawayGpuState.bghofs[3]);
+    SetGpuReg(REG_OFFSET_BG3VOFS, sContestCutawayGpuState.bgvofs[3]);
+    SetGpuReg(REG_OFFSET_BLDCNT, sContestCutawayGpuState.bldcnt);
+    SetGpuReg(REG_OFFSET_BLDALPHA, sContestCutawayGpuState.bldalpha);
+    SetGpuReg(REG_OFFSET_BLDY, sContestCutawayGpuState.bldy);
+    SetGpuReg(REG_OFFSET_WININ, sContestCutawayGpuState.winin);
+    SetGpuReg(REG_OFFSET_WINOUT, sContestCutawayGpuState.winout);
+    SetGpuReg(REG_OFFSET_WIN0H, sContestCutawayGpuState.winh[0]);
+    SetGpuReg(REG_OFFSET_WIN0V, sContestCutawayGpuState.winv[0]);
+    SetGpuReg(REG_OFFSET_WIN1H, sContestCutawayGpuState.winh[1]);
+    SetGpuReg(REG_OFFSET_WIN1V, sContestCutawayGpuState.winv[1]);
+    SetGpuReg(REG_OFFSET_MOSAIC, sContestCutawayGpuState.mosaic);
+}
+
+static void HideContestSpritesForCutaway(void)
+{
+    u8 i;
+
+    for (i = 0; i < MAX_SPRITES; i++)
+    {
+        sContestCutawaySpriteWasInUse[i] = gSprites[i].inUse;
+        sContestCutawaySpriteWasInvisible[i] = gSprites[i].invisible;
+        if (gSprites[i].inUse)
+            gSprites[i].invisible = TRUE;
+    }
+}
+
+static void RestoreContestSpritesAfterCutaway(void)
+{
+    u8 i;
+
+    for (i = 0; i < MAX_SPRITES; i++)
+    {
+        if (sContestCutawaySpriteWasInUse[i] && gSprites[i].inUse)
+            gSprites[i].invisible = sContestCutawaySpriteWasInvisible[i];
+        sContestCutawaySpriteWasInUse[i] = FALSE;
+        sContestCutawaySpriteWasInvisible[i] = FALSE;
+    }
+}
+
+static void SetContestNormalViewBattlers(void)
+{
+    gBattlerPositions[B_BATTLER_0] = B_POSITION_PLAYER_LEFT;
+    gBattlerPositions[B_BATTLER_1] = B_POSITION_OPPONENT_LEFT;
+    gBattlerPositions[B_BATTLER_2] = B_POSITION_OPPONENT_RIGHT;
+    gBattlerPositions[B_BATTLER_3] = B_POSITION_PLAYER_RIGHT;
+    gBattleTypeFlags = 0;
+    gBattlersCount = MAX_BATTLERS_COUNT;
+    gBattlerAttacker = B_BATTLER_2;
+    gBattlerTarget = B_BATTLER_3;
+    gBattleAnimAttacker = gBattlerAttacker;
+    gBattleAnimTarget = gBattlerTarget;
+}
+
+static void SetContestCutawayBattlers(void)
+{
+    gBattlerPositions[B_BATTLER_0] = B_POSITION_PLAYER_LEFT;
+    gBattlerPositions[B_BATTLER_1] = B_POSITION_OPPONENT_LEFT;
+    gBattlerPositions[B_BATTLER_2] = B_POSITION_ABSENT;
+    gBattlerPositions[B_BATTLER_3] = B_POSITION_ABSENT;
+    gBattleTypeFlags = 0;
+    gBattlersCount = 2;
+    gBattlerAttacker = B_BATTLER_1;
+    gBattlerTarget = B_BATTLER_0;
+    gBattleAnimAttacker = gBattlerAttacker;
+    gBattleAnimTarget = gBattlerTarget;
+}
+
+static bool8 AllocContestCutawayScratch(void)
+{
+    if (gContestResources->animBgTileBuffer == NULL)
+        gContestResources->animBgTileBuffer = AllocZeroedUnchecked(0x2000);
+    if (gContestResources->cutawayBgTilemap == NULL)
+        gContestResources->cutawayBgTilemap = AllocZeroedUnchecked(0x1000);
+
+    if (gContestResources->animBgTileBuffer == NULL || gContestResources->cutawayBgTilemap == NULL)
+    {
+        FreeContestCutawayScratch();
+        return FALSE;
+    }
+
+    return TRUE;
+}
+
+static void FreeContestCutawayScratch(void)
+{
+    TRY_FREE_AND_SET_NULL(gContestResources->animBgTileBuffer);
+    TRY_FREE_AND_SET_NULL(gContestResources->cutawayBgTilemap);
+
+    gBattleAnimBgTileBuffer = NULL;
+    gBattleAnimBgTilemapBuffer = gContestResources->contestBgTilemaps[1];
+}
+
+static void RestoreContestObjectPalettesAfterCutaway(void)
+{
+    LoadPalette(gContest2Pal, OBJ_PLTT_ID(1), PLTT_SIZE_4BPP);
+}
+
+static void SetContestCutawayBgBuffers(void)
+{
+    s32 i;
+    void *tilemap = gContestResources->cutawayBgTilemap;
+
+    gBattleAnimBgTileBuffer = gContestResources->animBgTileBuffer;
+    gBattleAnimBgTilemapBuffer = tilemap;
+    if (gBattleAnimBgTileBuffer != NULL)
+        CpuFill32(0, gBattleAnimBgTileBuffer, 0x2000);
+    if (gBattleAnimBgTilemapBuffer != NULL)
+        CpuFill32(0, gBattleAnimBgTilemapBuffer, 0x1000);
+
+    ResetBgsAndClearDma3BusyFlags(0);
+    InitBgsFromTemplates(0, sContestCutawayBattleBgTemplates, ARRAY_COUNT(sContestCutawayBattleBgTemplates));
+    for (i = 0; i < CONTESTANT_COUNT; i++)
+        SetBgTilemapBuffer(i, tilemap);
+}
+
+static void LoadContestCutawayBattleView(void)
+{
+    SetContestCutawayBgBuffers();
+    ResetPaletteFade();
+    gPaletteFade.bufferTransferDisabled = FALSE;
+    ScanlineEffect_Clear();
+
+    SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_1D_MAP);
+    SetGpuReg(REG_OFFSET_BG0HOFS, 0);
+    SetGpuReg(REG_OFFSET_BG0VOFS, 0);
+    SetGpuReg(REG_OFFSET_BG1HOFS, 0);
+    SetGpuReg(REG_OFFSET_BG1VOFS, 0);
+    SetGpuReg(REG_OFFSET_BG2HOFS, 0);
+    SetGpuReg(REG_OFFSET_BG2VOFS, 0);
+    SetGpuReg(REG_OFFSET_BG3HOFS, 0);
+    SetGpuReg(REG_OFFSET_BG3VOFS, 0);
+    SetGpuReg(REG_OFFSET_WIN0H, 0);
+    SetGpuReg(REG_OFFSET_WIN0V, 0);
+    SetGpuReg(REG_OFFSET_WIN1H, 0);
+    SetGpuReg(REG_OFFSET_WIN1V, 0);
+    SetGpuReg(REG_OFFSET_MOSAIC, 0);
+    SetGpuReg(REG_OFFSET_BLDCNT, 0);
+    SetGpuReg(REG_OFFSET_BLDALPHA, 0);
+    SetGpuReg(REG_OFFSET_BLDY, 0);
+
+    gBattle_BG0_X = 0;
+    gBattle_BG0_Y = 0;
+    gBattle_BG1_X = 0;
+    gBattle_BG1_Y = 0;
+    gBattle_BG2_X = 0;
+    gBattle_BG2_Y = 0;
+    gBattle_BG3_X = 0;
+    gBattle_BG3_Y = 0;
+    gBattle_WIN0H = 0;
+    gBattle_WIN0V = 0;
+    gBattle_WIN1H = 0;
+    gBattle_WIN1V = 0;
+
+    FillPalette(RGB_BLACK, BG_PLTT_OFFSET, BG_PLTT_SIZE);
+    CpuFill32(0, (void *)BG_CHAR_ADDR(0), BG_CHAR_SIZE);
+    CpuFill32(0, (void *)BG_CHAR_ADDR(1), BG_CHAR_SIZE);
+    CpuFill32(0, (void *)BG_CHAR_ADDR(2), BG_CHAR_SIZE);
+    CpuFill32(0, (void *)BG_SCREEN_ADDR(24), BG_SCREEN_SIZE * 8);
+    DrawMainBattleBackground();
+
+    ShowBg(0);
+    ShowBg(1);
+    ShowBg(2);
+    ShowBg(3);
+    SetGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_BG0_ON | DISPCNT_BG1_ON | DISPCNT_BG2_ON | DISPCNT_BG3_ON | DISPCNT_OBJ_ON);
+    Contest_SetBgCopyFlags(0);
+}
+
+
+static bool8 ContestCutawayAttackerSpriteNeedsRecreate(void)
+{
+    u8 spriteId = sContestCutawayAttackerSpriteId;
+
+    if (spriteId == SPRITE_NONE || spriteId >= MAX_SPRITES)
+        return TRUE;
+    if (!gSprites[spriteId].inUse)
+        return TRUE;
+    if (gBattlerSpriteIds[gBattlerAttacker] != spriteId)
+        return TRUE;
+    if (gSprites[spriteId].invisible)
+        return TRUE;
+    return FALSE;
+}
+
+static void NormalizeContestCutawayAttackerSprite(u8 contestant, enum Species species)
+{
+    u8 spriteId = sContestCutawayAttackerSpriteId;
+    bool8 isShiny = gContestMons[contestant].isShiny;
+    u32 personality = gContestMons[contestant].personality;
+
+    if (spriteId == SPRITE_NONE || spriteId >= MAX_SPRITES || !gSprites[spriteId].inUse)
+        return;
+
+    species = SanitizeSpecies(species);
+    HandleLoadSpecialPokePic(TRUE, gMonSpritesGfxPtr->spritesGfx[B_POSITION_OPPONENT_LEFT], species, personality);
+    DmaCopy32(3,
+              gMonSpritesGfxPtr->spritesGfx[B_POSITION_OPPONENT_LEFT],
+              (void *)(OBJ_VRAM0 + gSprites[spriteId].oam.tileNum * TILE_SIZE_4BPP),
+              MON_PIC_SIZE);
+    LoadPalette(GetMonSpritePalFromSpeciesAndPersonality(species, isShiny, personality), OBJ_PLTT_ID(gBattlerAttacker), PLTT_SIZE_4BPP);
+    gSprites[spriteId].x = GetBattlerSpriteCoord(gBattlerAttacker, BATTLER_COORD_X);
+    gSprites[spriteId].y = GetBattlerSpriteFinal_Y(gBattlerAttacker, species, TRUE);
+    gSprites[spriteId].x2 = 0;
+    gSprites[spriteId].y2 = 0;
+    gSprites[spriteId].invisible = FALSE;
+    gSprites[spriteId].animPaused = FALSE;
+    gSprites[spriteId].affineAnimPaused = FALSE;
+    gSprites[spriteId].oam.objMode = ST_OAM_OBJ_NORMAL;
+    gSprites[spriteId].oam.affineMode = ST_OAM_AFFINE_NORMAL;
+    gSprites[spriteId].oam.mosaic = FALSE;
+    gSprites[spriteId].oam.paletteNum = gBattlerAttacker;
+    gSprites[spriteId].oam.priority = 2;
+    gSprites[spriteId].subpriority = GetBattlerSpriteSubpriority(gBattlerAttacker);
+    gSprites[spriteId].affineAnims = gAffineAnims_BattleSpriteOpponentSide;
+    StartSpriteAffineAnim(&gSprites[spriteId], BATTLER_AFFINE_NORMAL);
+    gSprites[spriteId].callback = SpriteCallbackDummy;
+    gSprites[spriteId].data[0] = gBattlerAttacker;
+    gSprites[spriteId].data[1] = 0;
+    gSprites[spriteId].data[2] = species;
+    gSprites[spriteId].data[3] = 0;
+    gSprites[spriteId].data[4] = 0;
+    gSprites[spriteId].data[5] = 0;
+    gSprites[spriteId].data[6] = 0;
+    gSprites[spriteId].data[7] = 0;
+    gBattlerSpriteIds[gBattlerAttacker] = spriteId;
+    gAnimBattlerSpecies[gBattlerAttacker] = species;
+    gContestResources->moveAnim->species = species;
+    gContestResources->moveAnim->personality = gContestMons[contestant].personality;
+    gContestResources->moveAnim->otId = gContestMons[contestant].otId;
+    gContestResources->moveAnim->isShiny = gContestMons[contestant].isShiny;
+    sContestCutawayAnimSandbox.attackerSpriteId = spriteId;
+    sContestCutawayAnimSandbox.attackerSpecies = species;
+}
+
+static void ContestCutawaySyncAnimState(u8 contestant, bool8 targetSelf)
+{
+    enum Species species = sContestCutawayAnimSandbox.attackerSpecies;
+
+    targetSelf |= gBattlerTarget == gBattlerAttacker;
+    SetContestCutawayBattlers();
+    if (species == SPECIES_NONE)
+        species = gContestResources->moveAnim->species;
+    if (species == SPECIES_NONE)
+        species = gContestMons[contestant].species;
+    species = SanitizeSpecies(species);
+
+    if (ContestCutawayAttackerSpriteNeedsRecreate())
+        RecreateContestCutawayAttackerSprite(contestant, species);
+    NormalizeContestCutawayAttackerSprite(contestant, species);
+
+    if (!targetSelf)
+    {
+        if (sContestCutawayTargetSpriteId == SPRITE_NONE
+            || sContestCutawayTargetSpriteId >= MAX_SPRITES
+            || !gSprites[sContestCutawayTargetSpriteId].inUse)
+            CreateContestCutawayTargetSprite();
+        gBattlerTarget = B_BATTLER_0;
+        gBattleAnimTarget = gBattlerTarget;
+        if (sContestCutawayTargetSpriteId < MAX_SPRITES)
+            gBattlerSpriteIds[gBattlerTarget] = sContestCutawayTargetSpriteId;
+    }
+    else
+    {
+        gBattlerTarget = gBattlerAttacker;
+        gBattleAnimTarget = gBattlerAttacker;
+        ClearContestMoveAnimTargetData();
+    }
+
+    gBattleAnimAttacker = gBattlerAttacker;
+    gBattlerSpriteIds[gBattlerAttacker] = sContestCutawayAttackerSpriteId;
+    gAnimBattlerSpecies[gBattlerAttacker] = species;
+    gAnimBattlerSpecies[B_BATTLER_0] = species;
+    gContestResources->moveAnim->species = species;
+    gContestResources->moveAnim->personality = gContestMons[contestant].personality;
+    gContestResources->moveAnim->otId = gContestMons[contestant].otId;
+    gContestResources->moveAnim->isShiny = gContestMons[contestant].isShiny;
+    sContestCutawayAnimSandbox.attackerSpecies = species;
+}
+
+static u8 CreateContestCutawayTargetSprite(void)
+{
+    u8 spriteId = CreateInvisibleSpriteWithCallback(SpriteCallbackDummy);
+
+    if (spriteId == MAX_SPRITES)
+        return SPRITE_NONE;
+    gSprites[spriteId].x = GetBattlerSpriteCoord(gBattlerTarget, BATTLER_COORD_X);
+    gSprites[spriteId].y = GetBattlerSpriteCoord(gBattlerTarget, BATTLER_COORD_Y);
+    gSprites[spriteId].x2 = 0;
+    gSprites[spriteId].y2 = 0;
+    gSprites[spriteId].invisible = TRUE;
+    gSprites[spriteId].callback = SpriteCallbackDummy;
+    gSprites[spriteId].data[0] = gBattlerTarget;
+    gBattlerSpriteIds[gBattlerTarget] = spriteId;
+    sContestCutawayTargetSpriteId = spriteId;
+    sContestCutawayAnimSandbox.targetSpriteId = spriteId;
+    return spriteId;
+}
+
+static u8 CreateContestCutawayAttackerSprite(u8 contestant, enum Species species)
+{
+    bool8 isShiny = gContestMons[contestant].isShiny;
+    u32 personality = gContestMons[contestant].personality;
+    u8 spriteId;
+
+    species = SanitizeSpecies(species);
+    ClearContestMoveAnimTargetData();
+    sContestCutawayAnimSandbox.attackerSpecies = species;
+
+    HandleLoadSpecialPokePic(TRUE, gMonSpritesGfxPtr->spritesGfx[B_POSITION_OPPONENT_LEFT], species, personality);
+    LoadPalette(GetMonSpritePalFromSpeciesAndPersonality(species, isShiny, personality), OBJ_PLTT_ID(gBattlerAttacker), PLTT_SIZE_4BPP);
+    SetMultiuseSpriteTemplateToPokemon(species, B_POSITION_OPPONENT_LEFT);
+    spriteId = CreateSprite(&gMultiuseSpriteTemplate,
+                            GetBattlerSpriteCoord(gBattlerAttacker, BATTLER_COORD_X),
+                            GetBattlerSpriteFinal_Y(gBattlerAttacker, species, TRUE),
+                            30);
+    if (spriteId == MAX_SPRITES)
+        return SPRITE_NONE;
+
+    DmaCopy32(3,
+              gMonSpritesGfxPtr->spritesGfx[B_POSITION_OPPONENT_LEFT],
+              (void *)(OBJ_VRAM0 + gSprites[spriteId].oam.tileNum * TILE_SIZE_4BPP),
+              MON_PIC_SIZE);
+    gSprites[spriteId].oam.paletteNum = gBattlerAttacker;
+    gSprites[spriteId].oam.priority = 2;
+    gSprites[spriteId].subpriority = GetBattlerSpriteSubpriority(gBattlerAttacker);
+    gSprites[spriteId].callback = SpriteCallbackDummy;
+    gSprites[spriteId].data[0] = gBattlerAttacker;
+    gSprites[spriteId].data[2] = species;
+    gSprites[spriteId].affineAnims = gAffineAnims_BattleSpriteOpponentSide;
+    StartSpriteAffineAnim(&gSprites[spriteId], BATTLER_AFFINE_NORMAL);
+    gBattlerSpriteIds[gBattlerAttacker] = spriteId;
+    sContestCutawayAttackerSpriteId = spriteId;
+    sContestCutawayAnimSandbox.attackerSpriteId = spriteId;
+    gAnimBattlerSpecies[gBattlerAttacker] = species;
+    NormalizeContestCutawayAttackerSprite(contestant, species);
+    return spriteId;
+}
+
+static void PrepareContestCutawayAnimBattlers(u8 contestant, enum Move effectMove)
+{
+    SetContestCutawayBattlers();
+    gBattlerSpriteIds[B_BATTLER_0] = SPRITE_NONE;
+    gBattlerSpriteIds[B_BATTLER_1] = SPRITE_NONE;
+    gBattlerSpriteIds[B_BATTLER_2] = SPRITE_NONE;
+    gBattlerSpriteIds[B_BATTLER_3] = SPRITE_NONE;
+
+    CreateContestCutawayAttackerSprite(contestant, gContestMons[contestant].species);
+    CreateContestCutawayTargetSprite();
+    SetMoveTargetPosition(effectMove);
+    gBattleAnimAttacker = gBattlerAttacker;
+    gBattleAnimTarget = gBattlerTarget;
+    ContestCutawaySyncAnimState(contestant, FALSE);
+}
+
+static void RecreateContestCutawayAttackerSprite(u8 contestant, enum Species species)
+{
+    if (sContestCutawayAttackerSpriteId < MAX_SPRITES && gSprites[sContestCutawayAttackerSpriteId].inUse)
+        DestroySprite(&gSprites[sContestCutawayAttackerSpriteId]);
+    sContestCutawayAttackerSpriteId = SPRITE_NONE;
+    CreateContestCutawayAttackerSprite(contestant, species);
+}
+
+static void ApplyContestCutawayPendingFormInternal(u8 contestant, bool8 targetSelf)
+{
+    enum Species species;
+
+    if (ContestCutawayHasPendingAttackerSpecies())
+        species = sContestCutawayAnimSandbox.pendingAttackerSpecies;
+    else if (sContestPendingGimmickSpeciesValid[contestant])
+        species = sContestPendingGimmickSpecies[contestant];
+    else
+        return;
+
+    species = SanitizeSpecies(species);
+    if (species != SPECIES_NONE)
+    {
+        ClearContestMoveAnimTargetData();
+        gContestMons[contestant].species = species;
+        SetMoveAnimAttackerDataForSpecies(contestant, species);
+        sContestCutawayAnimSandbox.attackerSpecies = species;
+        if (gContestMoveAnimInCutaway)
+        {
+            RecreateContestCutawayAttackerSprite(contestant, species);
+            gBattleAnimAttacker = gBattlerAttacker;
+            gBattleAnimTarget = gBattlerTarget;
+            gAnimBattlerSpecies[gBattlerAttacker] = species;
+            ContestCutawaySyncAnimState(contestant, targetSelf);
+        }
+    }
+
+    sContestPendingGimmickSpecies[contestant] = SPECIES_NONE;
+    sContestPendingGimmickSpeciesValid[contestant] = FALSE;
+    SetContestCutawayPendingAttackerSpecies(SPECIES_NONE);
+}
+
+static void ApplyContestCutawayPendingForm(u8 contestant)
+{
+    ApplyContestCutawayPendingFormInternal(contestant, FALSE);
+}
+
+void ContestCutawayApplyPendingFormForAnim(void)
+{
+    u8 contestant;
+
+    if (!gContestMoveAnimInCutaway || gContestResources == NULL || gContestResources->moveAnim == NULL)
+        return;
+
+    contestant = gContestResources->moveAnim->contestant;
+    if (contestant >= CONTESTANT_COUNT)
+        return;
+
+    ApplyContestCutawayPendingFormInternal(contestant, TRUE);
+}
+
+static void SetupContestCutawayAnimContext(u8 contestant, enum Move effectMove, bool8 targetSelf)
+{
+    SetContestCutawayBattlers();
+    sContestCutawayAnimSandbox.effectMove = effectMove;
+    sContestCutawayAnimSandbox.animMove = GetContestAnimMove(contestant, effectMove);
+
+    memset(gContestResources->moveAnim, 0, sizeof(*gContestResources->moveAnim));
+    if (targetSelf)
+        ClearBattleAnimationVars();
+    else
+        SetMoveSpecificAnimData(contestant, effectMove);
+    SetMoveAnimAttackerData(contestant);
+
+    if (targetSelf)
+    {
+        // Form/Z/Tera/Dynamax general animations are self-contained. Keep targetSpecies
+        // empty so battle_anim_mons never tries to resolve a pending form as a target mon.
+        ClearContestMoveAnimTargetData();
+    }
+    else
+    {
+        SetMoveTargetPosition(effectMove);
+    }
+
+    sContestCutawayAnimSandbox.attackerSpecies = gContestResources->moveAnim->species;
+    ContestCutawaySyncAnimState(contestant, targetSelf);
+}
+
+
+static bool8 BeginContestMoveAnimCutaway(u8 contestant, enum Move effectMove)
+{
+    enum Species pendingSpecies = sContestCutawayAnimSandbox.pendingAttackerSpecies;
+    bool8 hasPendingSpecies = sContestCutawayAnimSandbox.hasPendingAttackerSpecies;
+
+    if (!AllocContestCutawayScratch())
+        return FALSE;
+
+    ResetContestCutawayAnimSandbox();
+    sContestCutawayAnimSandbox.pendingAttackerSpecies = pendingSpecies;
+    sContestCutawayAnimSandbox.hasPendingAttackerSpecies = hasPendingSpecies;
+    SaveContestCutawayGpuState();
+    sContestCutawayAttackerSpriteId = SPRITE_NONE;
+    sContestCutawayTargetSpriteId = SPRITE_NONE;
+    SetVBlankCallback(NULL);
+    DestroyContestNormalViewSprites();
+    HideContestSpritesForCutaway();
+    gContestMoveAnimInCutaway = TRUE;
+    SetContestCutawayBattlers();
+    LoadContestCutawayBattleView();
+    memset(gContestResources->moveAnim, 0, sizeof(*gContestResources->moveAnim));
+    ClearContestMoveAnimTargetData();
+    SetMoveAnimAttackerData(contestant);
+    sContestCutawayAnimSandbox.effectMove = effectMove;
+    sContestCutawayAnimSandbox.animMove = GetContestAnimMove(contestant, effectMove);
+    PrepareContestCutawayAnimBattlers(contestant, effectMove);
+    SetVBlankCallback(VBlankCB_Contest);
+    return TRUE;
+}
+
+static void RestoreContestBgAfterCutaway(void)
+{
+    s32 i;
+
+    ResetPaletteFade();
+    gPaletteFade.bufferTransferDisabled = FALSE;
+    ScanlineEffect_Clear();
+
+    SetupContestGpuRegs();
+    InitContestInfoBgs();
+    LoadContestBgAfterMoveAnim();
+    for (i = 0; i < CONTESTANT_COUNT; i++)
+        CopyBgTilemapBufferToVram(i);
+    RestoreContestObjectPalettesAfterCutaway();
+
+    CopyWindowToVram(WIN_CONTESTANT0_NAME, COPYWIN_GFX);
+    CopyWindowToVram(WIN_CONTESTANT1_NAME, COPYWIN_GFX);
+    CopyWindowToVram(WIN_CONTESTANT2_NAME, COPYWIN_GFX);
+    CopyWindowToVram(WIN_CONTESTANT3_NAME, COPYWIN_GFX);
+    CopyWindowToVram(WIN_GENERAL_TEXT, COPYWIN_GFX);
+    CopyWindowToVram(WIN_MOVE0, COPYWIN_GFX);
+    CopyWindowToVram(WIN_MOVE1, COPYWIN_GFX);
+    CopyWindowToVram(WIN_MOVE2, COPYWIN_GFX);
+    CopyWindowToVram(WIN_MOVE3, COPYWIN_GFX);
+    CopyWindowToVram(WIN_SLASH, COPYWIN_GFX);
+    CopyWindowToVram(WIN_MOVE_DESCRIPTION, COPYWIN_GFX);
+    CopyWindowToVram(WIN_GIMMICK_MESSAGE, COPYWIN_GFX);
+
+    ShowBg(3);
+    ShowBg(2);
+    ShowBg(0);
+    ShowBg(1);
+}
+
+static void EndContestMoveAnimCutaway(u8 contestant)
+{
+    (void)contestant;
+
+    SetVBlankCallback(NULL);
+    BattleAnim_CleanupContestCutawayMonBg();
+    if (sContestCutawayAttackerSpriteId < MAX_SPRITES && gSprites[sContestCutawayAttackerSpriteId].inUse)
+        DestroySprite(&gSprites[sContestCutawayAttackerSpriteId]);
+    if (sContestCutawayTargetSpriteId < MAX_SPRITES && gSprites[sContestCutawayTargetSpriteId].inUse)
+        DestroySprite(&gSprites[sContestCutawayTargetSpriteId]);
+    sContestCutawayAttackerSpriteId = SPRITE_NONE;
+    sContestCutawayTargetSpriteId = SPRITE_NONE;
+
+    gContestMoveAnimInCutaway = FALSE;
+    RestoreContestCutawayGpuState();
+    RestoreContestBgAfterCutaway();
+    RestoreContestSpritesAfterCutaway();
+    CreateContestNormalViewSprites();
+    SetContestNormalViewBattlers();
+    FreeContestCutawayScratch();
+    SetGpuRegBits(REG_OFFSET_DISPCNT, DISPCNT_OBJ_ON | DISPCNT_WIN0_ON | DISPCNT_WIN1_ON);
+    SetVBlankCallback(VBlankCB_Contest);
+    Contest_SetBgCopyFlags(0);
+    sContestCutawayGpuState.valid = FALSE;
+    ResetContestCutawayAnimSandbox();
+}
+
 static void InitContestInfoBgs(void)
 {
     s32 i;
@@ -1691,12 +3025,29 @@ static void InitContestResources(void)
     eContestAI = (struct ContestAIInfo){};
     *gContestResources->excitement = (struct ContestExcitement){};
     memset(eContestGimmickStatus, 0, CONTESTANT_COUNT * sizeof(struct ContestGimmickStatus));
-    if (!(gLinkContestFlags & LINK_CONTEST_FLAG_IS_LINK))
+    if (gLinkContestFlags & LINK_CONTEST_FLAG_IS_LINK)
+    {
+        for (i = 0; i < CONTESTANT_COUNT; i++)
+        {
+            if (i < gNumLinkContestPlayers)
+                InitLinkContestGimmickStatus(i);
+            else
+                InitNpcContestGimmickStatus(i);
+        }
+    }
+    else
     {
         u16 heldItem = GetMonData(&gParties[B_TRAINER_PLAYER][gContestMonPartyIndex], MON_DATA_HELD_ITEM);
+
+        for (i = 0; i < CONTESTANT_COUNT; i++)
+        {
+            if (i != gContestPlayerMonIndex)
+                InitNpcContestGimmickStatus(i);
+        }
         InitPlayerContestGimmickStatus(gContestMonPartyIndex, heldItem);
     }
     memset(eContestGfxState, 0, CONTESTANT_COUNT * sizeof(struct ContestGraphicsState));
+    InitContestNormalViewState();
 
     if (!(gLinkContestFlags & LINK_CONTEST_FLAG_IS_LINK))
         SortContestants(FALSE);
@@ -1731,13 +3082,13 @@ static void AllocContestResources(void)
     gContestResources->contestBgTilemaps[3] = AllocZeroed(0x1000);
     gContestResources->boxBlinkTiles1 = AllocZeroed(0x800);
     gContestResources->boxBlinkTiles2 = AllocZeroed(0x800);
-    gContestResources->animBgTileBuffer = AllocZeroed(0x2000);
-    gBattleAnimBgTileBuffer = gContestResources->animBgTileBuffer;
+    gBattleAnimBgTileBuffer = NULL;
     gBattleAnimBgTilemapBuffer = gContestResources->contestBgTilemaps[1];
 }
 
 static void FreeContestResources(void)
 {
+    DestroyContestNormalViewSprites();
     FREE_AND_SET_NULL(gContestResources->contest);
     FREE_AND_SET_NULL(gContestResources->status);
     FREE_AND_SET_NULL(gContestResources->appealResults);
@@ -1754,7 +3105,7 @@ static void FreeContestResources(void)
     FREE_AND_SET_NULL(gContestResources->contestBgTilemaps[3]);
     FREE_AND_SET_NULL(gContestResources->boxBlinkTiles1);
     FREE_AND_SET_NULL(gContestResources->boxBlinkTiles2);
-    FREE_AND_SET_NULL(gContestResources->animBgTileBuffer);
+    FreeContestCutawayScratch();
     FREE_AND_SET_NULL(gContestResources);
     gBattleAnimBgTileBuffer = NULL;
     gBattleAnimBgTilemapBuffer = NULL;
@@ -1940,17 +3291,12 @@ static bool8 SetupContestGraphics(u8 *stateVar)
         CreateApplauseMeterSprite();
         CreateJudgeAttentionEyeTask();
         CreateUnusedBlendTask();
-        gBattlerPositions[B_BATTLER_0] = B_POSITION_PLAYER_LEFT;
-        gBattlerPositions[B_BATTLER_1] = B_POSITION_OPPONENT_LEFT;
-        gBattlerPositions[B_BATTLER_2] = B_POSITION_OPPONENT_RIGHT;
-        gBattlerPositions[B_BATTLER_3] = B_POSITION_PLAYER_RIGHT;
-        gBattleTypeFlags = 0;
-        gBattlerAttacker = B_BATTLER_2;
-        gBattlerTarget = B_BATTLER_3;
+        SetContestNormalViewBattlers();
         // Unclear why judge sprite is assigned here
         // Overwritten in APPEALSTATE_SLIDE_MON_IN with the attacking contest mon
         gBattlerSpriteIds[gBattlerAttacker] = CreateJudgeSprite();
         CreateInvisibleBattleTargetSprite();
+        CreateContestNormalViewSprites();
         CopyBgTilemapBufferToVram(3);
         CopyBgTilemapBufferToVram(2);
         CopyBgTilemapBufferToVram(1);
@@ -2109,18 +3455,34 @@ static void Task_TryShowMoveSelectScreen(u8 taskId)
 
 static void Task_ShowMoveSelectScreen(u8 taskId)
 {
-    u8 i;
-    u8 moveName[32];
-
     gBattle_BG0_Y = DISPLAY_HEIGHT;
     gBattle_BG2_Y = DISPLAY_HEIGHT;
+
+    PrintContestMoveNames();
+
+    DrawMoveSelectArrow(eContest.playerMoveChoice);
+    PrintContestMoveDescription(gContestMons[gContestPlayerMonIndex].moves[eContest.playerMoveChoice]);
+    PrintContestGimmickMessageHolder(gContestMons[gContestPlayerMonIndex].moves[eContest.playerMoveChoice]);
+    gTasks[taskId].func = Task_HandleMoveSelectInput;
+}
+
+static void PrintContestMoveNames(void)
+{
+    u8 i;
+    u8 moveName[32];
 
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
         enum Move move = gContestMons[gContestPlayerMonIndex].moves[i];
         u8 *moveNameBuffer = moveName;
 
-        if (eContestantStatus[gContestPlayerMonIndex].prevMove != MOVE_NONE
+        if (i == eContest.playerMoveChoice
+            && GetSelectedContestGimmick(gContestPlayerMonIndex, move) == CONTEST_GIMMICK_Z_APPEAL)
+        {
+            // Make the base move selected for Z-Power unambiguous.
+            moveNameBuffer = StringCopy(moveName, COMPOUND_STRING("{COLOR RED}{SHADOW LIGHT_RED}"));
+        }
+        else if (eContestantStatus[gContestPlayerMonIndex].prevMove != MOVE_NONE
             && IsContestantAllowedToCombo(gContestPlayerMonIndex)
             && AreMovesContestCombo(eContestantStatus[gContestPlayerMonIndex].prevMove, move)
             && eContestantStatus[gContestPlayerMonIndex].hasJudgesAttention)
@@ -2140,11 +3502,6 @@ static void Task_ShowMoveSelectScreen(u8 taskId)
         FillWindowPixelBuffer(i + MOVE_WINDOWS_START, PIXEL_FILL(0));
         Contest_PrintTextToBg0WindowAt(i + MOVE_WINDOWS_START, moveName, 5, 1, GetFontIdToFit(moveName, FONT_NARROW, 0, WindowWidthPx(i + MOVE_WINDOWS_START) - 11));
     }
-
-    DrawMoveSelectArrow(eContest.playerMoveChoice);
-    PrintContestMoveDescription(gContestMons[gContestPlayerMonIndex].moves[eContest.playerMoveChoice]);
-    PrintContestGimmickMessageHolder(gContestMons[gContestPlayerMonIndex].moves[eContest.playerMoveChoice]);
-    gTasks[taskId].func = Task_HandleMoveSelectInput;
 }
 
 static void Task_HandleMoveSelectInput(u8 taskId)
@@ -2197,6 +3554,7 @@ static void Task_HandleMoveSelectInput(u8 taskId)
                 eContest.playerMoveChoice = numMoves - 1;
             else
                 eContest.playerMoveChoice--;
+            PrintContestMoveNames();
             DrawMoveSelectArrow(eContest.playerMoveChoice);
             PrintContestMoveDescription(gContestMons[gContestPlayerMonIndex].moves[eContest.playerMoveChoice]);
             PrintContestGimmickMessageHolder(gContestMons[gContestPlayerMonIndex].moves[eContest.playerMoveChoice]);
@@ -2209,6 +3567,7 @@ static void Task_HandleMoveSelectInput(u8 taskId)
                 eContest.playerMoveChoice = 0;
             else
                 eContest.playerMoveChoice++;
+            PrintContestMoveNames();
             DrawMoveSelectArrow(eContest.playerMoveChoice);
             PrintContestMoveDescription(gContestMons[gContestPlayerMonIndex].moves[eContest.playerMoveChoice]);
             PrintContestGimmickMessageHolder(gContestMons[gContestPlayerMonIndex].moves[eContest.playerMoveChoice]);
@@ -2330,6 +3689,7 @@ static void Task_WaitHideApplauseMeterForAppealStart(u8 taskId)
 }
 
 #define tState data[0]
+#define tGimmickAnimStep data[1]
 #define tMonSpriteId data[2]
 #define tCounter data[10]
 
@@ -2408,23 +3768,16 @@ static void Task_DoAppeals(u8 taskId)
     case APPEALSTATE_SLIDE_MON_IN:
         memset(gContestResources->moveAnim, 0, sizeof(*gContestResources->moveAnim));
         SetMoveAnimAttackerData(eContest.currentContestant);
-        spriteId = CreateContestantSprite(
-            gContestMons[eContest.currentContestant].species,
-            gContestMons[eContest.currentContestant].isShiny,
-            gContestMons[eContest.currentContestant].personality,
-            eContest.currentContestant);
-        gSprites[spriteId].x2 = 120;
-        gSprites[spriteId].callback = SpriteCB_MonSlideIn;
-        gTasks[taskId].tMonSpriteId = spriteId;
-        gBattlerSpriteIds[gBattlerAttacker] = spriteId;
+        CreateContestNormalViewSprites();
+        StartContestNormalMonBounce(eContest.currentContestant);
+        gTasks[taskId].tMonSpriteId = SPRITE_NONE;
         BlinkContestantBox(CreateContestantBoxBlinkSprites(eContest.currentContestant), FALSE);
         gTasks[taskId].tState = APPEALSTATE_WAIT_SLIDE_MON;
         return;
     case APPEALSTATE_WAIT_SLIDE_MON:
-        spriteId = gTasks[taskId].tMonSpriteId;
-        if (gSprites[spriteId].callback == SpriteCallbackDummy)
+        if (ContestNormalMonBounceDone(contestant))
         {
-            // Once mon has slid in, also wait for box to finish blinking
+            // Once mon has bounced, also wait for box to finish blinking
             if (!eContestGfxState[contestant].boxBlinking)
                 gTasks[taskId].tState = APPEALSTATE_PRINT_USED_MOVE_MSG;
         }
@@ -2441,7 +3794,7 @@ static void Task_DoAppeals(u8 taskId)
             if (ContestGimmickSkipsMoveAnim(contestant))
                 StringCopy(gStringVar2, sContestGimmickNames[CONTEST_GIMMICK_ULTRA_BURST]);
             else if (eContestantStatus[contestant].currMove < MOVES_COUNT)
-                StringCopy(gStringVar2, GetMoveName(eContestantStatus[contestant].currMove));
+                StringCopy(gStringVar2, GetMoveName(GetContestTurnAnimMove(contestant)));
             else
                 StringCopy(gStringVar2, gContestCategoryInfo[eContestantStatus[contestant].moveCategory].generic);
             StringExpandPlaceholders(gStringVar4, gText_MonAppealedWithMove);
@@ -2453,27 +3806,142 @@ static void Task_DoAppeals(u8 taskId)
         if (!Contest_RunTextPrinters())
         {
             eContest.moveAnimTurnCount = 0;
-            if (ContestGimmickSkipsMoveAnim(contestant))
+            if (ContestGimmickSkipsMoveAnim(contestant) && GetContestGimmickIntroAnimCount(contestant) == 0)
+            {
                 gTasks[taskId].tState = APPEALSTATE_TRY_PRINT_MOVE_RESULT;
+            }
+            else
+            {
+                gTasks[taskId].tCounter = 0;
+                gTasks[taskId].tGimmickAnimStep = 0;
+                gTasks[taskId].tState = APPEALSTATE_CUTAWAY_FADE_OUT;
+            }
+        }
+        return;
+    case APPEALSTATE_CUTAWAY_FADE_OUT:
+        if (gTasks[taskId].tCounter == 0)
+        {
+            BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
+            gTasks[taskId].tCounter = 1;
+        }
+        if (!gPaletteFade.active)
+        {
+            gTasks[taskId].tCounter = 0;
+            gTasks[taskId].tState = APPEALSTATE_CUTAWAY_PREPARE;
+        }
+        return;
+    case APPEALSTATE_CUTAWAY_PREPARE:
+        {
+            enum Move effectMove = SanitizeMove(GetContestTurnEffectMove(eContest.currentContestant));
+
+            if (!BeginContestMoveAnimCutaway(eContest.currentContestant, effectMove))
+            {
+                eContest.moveAnimTurnCount = 0;
+                ClearMoveAnimData(eContest.currentContestant);
+                BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
+                gTasks[taskId].tCounter = 0;
+                gTasks[taskId].tState = APPEALSTATE_CUTAWAY_FADE_IN_RETURN;
+                return;
+            }
+            BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
+            gTasks[taskId].tCounter = 0;
+            gTasks[taskId].tState = APPEALSTATE_CUTAWAY_FADE_IN;
+        }
+        return;
+    case APPEALSTATE_CUTAWAY_FADE_IN:
+        if (!gPaletteFade.active)
+        {
+            gTasks[taskId].tCounter = 0;
+            gTasks[taskId].tState = APPEALSTATE_CUTAWAY_PRE_WAIT;
+        }
+        return;
+    case APPEALSTATE_CUTAWAY_PRE_WAIT:
+        if (gTasks[taskId].tCounter++ > 8)
+        {
+            gTasks[taskId].tCounter = 0;
+            if (gTasks[taskId].tGimmickAnimStep < GetContestGimmickIntroAnimCount(contestant))
+                gTasks[taskId].tState = APPEALSTATE_GIMMICK_ANIM;
             else
                 gTasks[taskId].tState = APPEALSTATE_MOVE_ANIM;
         }
         return;
+    case APPEALSTATE_GIMMICK_ANIM:
+        LaunchContestGimmickIntroAnim(contestant, gTasks[taskId].tGimmickAnimStep);
+        gTasks[taskId].tState = APPEALSTATE_WAIT_GIMMICK_ANIM;
+        return;
+    case APPEALSTATE_WAIT_GIMMICK_ANIM:
+        gAnimScriptCallback();
+        if (ContestBattleAnimFinished())
+        {
+            gTasks[taskId].tGimmickAnimStep++;
+            if (gTasks[taskId].tGimmickAnimStep < GetContestGimmickIntroAnimCount(contestant))
+            {
+                gTasks[taskId].tCounter = 0;
+                gTasks[taskId].tState = APPEALSTATE_CUTAWAY_PRE_WAIT;
+            }
+            else if (ContestGimmickSkipsMoveAnim(contestant))
+            {
+                ApplyContestCutawayPendingForm(contestant);
+                eContest.moveAnimTurnCount = 0;
+                gTasks[taskId].tCounter = 0;
+                gTasks[taskId].tState = APPEALSTATE_CUTAWAY_END_WAIT;
+            }
+            else
+            {
+                ApplyContestCutawayPendingForm(contestant);
+                gTasks[taskId].tCounter = 0;
+                gTasks[taskId].tState = APPEALSTATE_CUTAWAY_PRE_WAIT;
+            }
+        }
+        return;
     case APPEALSTATE_MOVE_ANIM:
         {
-            enum Move move = SanitizeMove(eContestantStatus[eContest.currentContestant].currMove);
-            SetMoveSpecificAnimData(eContest.currentContestant);
-            SetMoveAnimAttackerData(eContest.currentContestant);
-            SetMoveTargetPosition(move);
-            DoMoveAnim(move);
+            enum Move effectMove = SanitizeMove(GetContestTurnEffectMove(eContest.currentContestant));
+            enum Move animMove = GetContestTurnAnimMove(eContest.currentContestant);
+
+            SetupContestCutawayAnimContext(eContest.currentContestant, effectMove, FALSE);
+            ContestCutawaySyncAnimState(eContest.currentContestant, FALSE);
+            DoMoveAnim(animMove);
             gTasks[taskId].tState = APPEALSTATE_WAIT_MOVE_ANIM;
         }
         return;
     case APPEALSTATE_WAIT_MOVE_ANIM:
         gAnimScriptCallback();
-        if (!gAnimScriptActive)
+        if (ContestBattleAnimFinished())
         {
-            ClearMoveAnimData(contestant);
+            gTasks[taskId].tCounter = 0;
+            gTasks[taskId].tState = APPEALSTATE_CUTAWAY_END_WAIT;
+        }
+        return;
+    case APPEALSTATE_CUTAWAY_END_WAIT:
+        if (gTasks[taskId].tCounter++ > 12)
+        {
+            gTasks[taskId].tCounter = 0;
+            gTasks[taskId].tState = APPEALSTATE_CUTAWAY_FADE_OUT_RETURN;
+        }
+        return;
+    case APPEALSTATE_CUTAWAY_FADE_OUT_RETURN:
+        if (gTasks[taskId].tCounter == 0)
+        {
+            BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
+            gTasks[taskId].tCounter = 1;
+        }
+        if (!gPaletteFade.active)
+        {
+            gTasks[taskId].tCounter = 0;
+            gTasks[taskId].tState = APPEALSTATE_CUTAWAY_RESTORE;
+        }
+        return;
+    case APPEALSTATE_CUTAWAY_RESTORE:
+        EndContestMoveAnimCutaway(contestant);
+        ClearMoveAnimData(contestant);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
+        gTasks[taskId].tCounter = 0;
+        gTasks[taskId].tState = APPEALSTATE_CUTAWAY_FADE_IN_RETURN;
+        return;
+    case APPEALSTATE_CUTAWAY_FADE_IN_RETURN:
+        if (!gPaletteFade.active)
+        {
             if (eContest.moveAnimTurnCount != 0)
             {
                 gTasks[taskId].tCounter = 0;
@@ -2492,7 +3960,8 @@ static void Task_DoAppeals(u8 taskId)
         if (gTasks[taskId].tCounter++ > 30)
         {
             gTasks[taskId].tCounter = 0;
-            gTasks[taskId].tState = APPEALSTATE_MOVE_ANIM;
+            gTasks[taskId].tGimmickAnimStep = GetContestGimmickIntroAnimCount(contestant);
+            gTasks[taskId].tState = APPEALSTATE_CUTAWAY_FADE_OUT;
         }
         return;
     case APPEALSTATE_TRY_PRINT_MOVE_RESULT:
@@ -2842,7 +4311,7 @@ static void Task_DoAppeals(u8 taskId)
             }
             else
             {
-                StringCopy(gStringVar3, gContestCategoryInfo[GetMoveContestCategory(eContestantStatus[contestant].currMove)].condition);
+                StringCopy(gStringVar3, gContestCategoryInfo[eContestantStatus[contestant].moveCategory].condition);
             }
 
             if (r3 > 0 && eContestantStatus[contestant].repeatedMove)
@@ -3024,13 +4493,15 @@ static void Task_DoAppeals(u8 taskId)
         }
         return;
     case APPEALSTATE_SLIDE_MON_OUT:
-        spriteId = gTasks[taskId].tMonSpriteId;
-        gSprites[spriteId].callback = SpriteCB_MonSlideOut;
-        gTasks[taskId].tState = APPEALSTATE_FREE_MON_SPRITE;
+        gTasks[taskId].tState = APPEALSTATE_START_TURN_END_DELAY;
         return;
     case APPEALSTATE_FREE_MON_SPRITE:
         spriteId = gTasks[taskId].tMonSpriteId;
-        if (gSprites[spriteId].invisible)
+        if (spriteId == SPRITE_NONE || !gSprites[spriteId].inUse)
+        {
+            gTasks[taskId].tState = APPEALSTATE_START_TURN_END_DELAY;
+        }
+        else if (gSprites[spriteId].invisible)
         {
             FreeSpriteOamMatrix(&gSprites[spriteId]);
             DestroySprite(&gSprites[spriteId]);
@@ -3081,7 +4552,7 @@ static void Task_EndWaitForLink(u8 taskId)
     DestroyTask(taskId);
 }
 
-static void SpriteCB_MonSlideIn(struct Sprite *sprite)
+static void UNUSED SpriteCB_MonSlideIn(struct Sprite *sprite)
 {
     if (sprite->x2 != 0)
     {
@@ -3097,7 +4568,7 @@ static void SpriteCB_MonSlideIn(struct Sprite *sprite)
     }
 }
 
-static void SpriteCB_MonSlideOut(struct Sprite *sprite)
+static void UNUSED SpriteCB_MonSlideOut(struct Sprite *sprite)
 {
     sprite->x2 -= 6;
     if (sprite->x + sprite->x2 < -32)
@@ -3450,7 +4921,10 @@ void CreateContestMonFromParty(u8 partyIndex)
     gContestMons[gContestPlayerMonIndex].isShiny = GetMonData(&gParties[B_TRAINER_PLAYER][partyIndex], MON_DATA_IS_SHINY);
 
     heldItem = GetMonData(&gParties[B_TRAINER_PLAYER][partyIndex], MON_DATA_HELD_ITEM);
-    InitPlayerContestGimmickStatus(partyIndex, heldItem);
+    gContestMons[gContestPlayerMonIndex].heldItem = heldItem;
+    gContestMons[gContestPlayerMonIndex].teraType = GetMonData(&gParties[B_TRAINER_PLAYER][partyIndex], MON_DATA_TERA_TYPE);
+    gContestMons[gContestPlayerMonIndex].dynamaxLevel = GetMonData(&gParties[B_TRAINER_PLAYER][partyIndex], MON_DATA_DYNAMAX_LEVEL);
+    gContestMons[gContestPlayerMonIndex].gmaxFactor = GetMonData(&gParties[B_TRAINER_PLAYER][partyIndex], MON_DATA_GIGANTAMAX_FACTOR);
     cool   = gContestMons[gContestPlayerMonIndex].cool;
     beauty = gContestMons[gContestPlayerMonIndex].beauty;
     cute   = gContestMons[gContestPlayerMonIndex].cute;
@@ -3483,42 +4957,96 @@ void CreateContestMonFromParty(u8 partyIndex)
     gContestMons[gContestPlayerMonIndex].tough = tough;
 }
 
+const struct ContestNpcPreset *Contest_GetNpcPreset(u32 opponent)
+{
+    if (opponent >= ARRAY_COUNT(sContestNpcPresets))
+        return NULL;
+    return &sContestNpcPresets[opponent];
+}
+
+u32 Contest_GetNpcPresetCount(void)
+{
+    return ARRAY_COUNT(sContestNpcPresets);
+}
+
+const struct ContestPokemon *Contest_GetNpcTemplate(u32 opponent)
+{
+    if (opponent < ARRAY_COUNT(gContestOpponents))
+        return &gContestOpponents[opponent];
+    opponent -= ARRAY_COUNT(gContestOpponents);
+    if (opponent < ARRAY_COUNT(sContestExtraOpponents))
+        return &sContestExtraOpponents[opponent];
+    return NULL;
+}
+
+static void LoadContestNpcPreset(u8 contestant, u16 opponent, enum ContestCategories category)
+{
+    static const enum Type sCategoryTeraTypes[CONTEST_CATEGORIES_COUNT] =
+    {
+        TYPE_FIRE, TYPE_WATER, TYPE_NORMAL, TYPE_POISON, TYPE_FIGHTING,
+    };
+    const struct ContestNpcPreset *preset = Contest_GetNpcPreset(opponent);
+    struct ContestPokemon *mon = &gContestMons[contestant];
+
+    *mon = *Contest_GetNpcTemplate(opponent);
+    mon->species = preset->species;
+    if (opponent < ARRAY_COUNT(sContestNpcNicknameOverrides) && sContestNpcNicknameOverrides[opponent][0] != 0)
+        StringCopy(mon->nickname, sContestNpcNicknameOverrides[opponent]);
+    memcpy(mon->moves, preset->moves, sizeof(mon->moves));
+    mon->heldItem = preset->heldItem;
+    mon->teraType = preset->teraType;
+    if (preset->gimmick == CONTEST_GIMMICK_TERA && mon->teraType != TYPE_STELLAR
+        && GetContestCategoryFromTeraType(mon->teraType) != category)
+        mon->teraType = sCategoryTeraTypes[category];
+    mon->dynamaxLevel = MAX_DYNAMAX_LEVEL;
+    mon->gmaxFactor = preset->gmaxFactor;
+    mon->aiPool_Cool = !!(preset->categories & (1 << CONTEST_CATEGORY_COOL));
+    mon->aiPool_Beauty = !!(preset->categories & (1 << CONTEST_CATEGORY_BEAUTY));
+    mon->aiPool_Cute = !!(preset->categories & (1 << CONTEST_CATEGORY_CUTE));
+    mon->aiPool_Smart = !!(preset->categories & (1 << CONTEST_CATEGORY_SMART));
+    mon->aiPool_Tough = !!(preset->categories & (1 << CONTEST_CATEGORY_TOUGH));
+    mon->cool = mon->aiPool_Cool ? preset->condition : preset->condition / 2;
+    mon->beauty = mon->aiPool_Beauty ? preset->condition : preset->condition / 2;
+    mon->cute = mon->aiPool_Cute ? preset->condition : preset->condition / 2;
+    mon->smart = mon->aiPool_Smart ? preset->condition : preset->condition / 2;
+    mon->tough = mon->aiPool_Tough ? preset->condition : preset->condition / 2;
+    mon->sheen = min(255, preset->condition + 40);
+    sContestNpcPresetIds[contestant] = opponent;
+}
+
 void SetContestants(enum ContestCategories contestType, u8 rank)
 {
     s32 i;
     u8 opponentsCount = 0;
-    u8 opponents[100];
+    u8 opponents[ARRAY_COUNT(sContestNpcPresets) + 1];
     bool8 allowPostgameContestants = FALSE;
 
     TryPutPlayerLast();
+    memset(sContestNpcPresetIds, CONTESTANT_NONE, sizeof(sContestNpcPresetIds));
 
     if (FlagGet(FLAG_SYS_GAME_CLEAR) && !(gLinkContestFlags & LINK_CONTEST_FLAG_IS_LINK))
         allowPostgameContestants = TRUE;
 
     // Find all suitable opponents
-    for (i = 0; i < ARRAY_COUNT(gContestOpponents); i++)
+    for (i = 0; i < ARRAY_COUNT(sContestNpcPresets); i++)
     {
-        if (rank == gContestOpponents[i].whichRank)
+        const struct ContestPokemon *opponent = Contest_GetNpcTemplate(i);
+
+        if (IsFrontierSpeciesBannedByCurrentRules(sContestNpcPresets[i].species))
+            continue;
+        if (rank == opponent->whichRank)
         {
             if (allowPostgameContestants == TRUE)
             {
-                if (gContestOpponents[i].filter == CONTEST_FILTER_NO_POSTGAME)
+                if (opponent->filter == CONTEST_FILTER_NO_POSTGAME)
                     continue;
             }
             else
             {
-                if (gContestOpponents[i].filter == CONTEST_FILTER_ONLY_POSTGAME)
+                if (opponent->filter == CONTEST_FILTER_ONLY_POSTGAME)
                     continue;
             }
-            if      (contestType == CONTEST_CATEGORY_COOL && gContestOpponents[i].aiPool_Cool)
-                opponents[opponentsCount++] = i;
-            else if (contestType == CONTEST_CATEGORY_BEAUTY && gContestOpponents[i].aiPool_Beauty)
-                opponents[opponentsCount++] = i;
-            else if (contestType == CONTEST_CATEGORY_CUTE && gContestOpponents[i].aiPool_Cute)
-                opponents[opponentsCount++] = i;
-            else if (contestType == CONTEST_CATEGORY_SMART && gContestOpponents[i].aiPool_Smart)
-                opponents[opponentsCount++] = i;
-            else if (contestType == CONTEST_CATEGORY_TOUGH && gContestOpponents[i].aiPool_Tough)
+            if (sContestNpcPresets[i].categories & (1 << contestType))
                 opponents[opponentsCount++] = i;
         }
     }
@@ -3530,7 +5058,7 @@ void SetContestants(enum ContestCategories contestType, u8 rank)
         u16 rnd = Random() % opponentsCount;
         s32 j;
 
-        gContestMons[i] = gContestOpponents[opponents[rnd]];
+        LoadContestNpcPreset(i, opponents[rnd], contestType);
         for (j = rnd; opponents[j] != CONTESTANT_NONE; j++)
             opponents[j] = opponents[j + 1];
         opponentsCount--;
@@ -3623,6 +5151,34 @@ static void DrawContestantWindowText(void)
     }
 }
 
+u8 *Contest_CopyDisplayName(u8 *dest, const u8 *name)
+{
+    bool32 explicitMode = FALSE;
+
+    // Stored names have no room for font controls. Add them only for rendering.
+    while (*name != EOS)
+    {
+        if (*name == EXT_CTRL_CODE_BEGIN)
+        {
+            u32 length = name[1] == EXT_CTRL_CODE_AUTO ? 2 : GetExtCtrlCodeLength(name[1]) + 1;
+            if (name[1] == EXT_CTRL_CODE_JPN || name[1] == EXT_CTRL_CODE_ENG)
+                explicitMode = TRUE;
+            while (length--)
+                *dest++ = *name++;
+        }
+        else
+        {
+            if (!explicitMode)
+                dest = StringCopy(dest, COMPOUND_STRING("{AUTO}"));
+            u8 chr = *name++;
+            *dest++ = chr;
+            if (chr == CHAR_EXTRA_SYMBOL || chr == CHAR_KEYPAD_ICON)
+                *dest++ = *name++;
+        }
+    }
+    return StringCopy(dest, COMPOUND_STRING("{AUTO}"));
+}
+
 static u8 *Contest_CopyStringWithColor(const u8 *string, u8 color)
 {
     u8 *ptr = StringCopy(gDisplayedStringBattle, COMPOUND_STRING("{BACKGROUND TRANSPARENT}{ACCENT TRANSPARENT}{COLOR TRANSPARENT}"));
@@ -3639,16 +5195,17 @@ static void PrintContestantTrainerName(u8 contestant)
 
 static void PrintContestantTrainerNameWithColor(u8 contestant, u8 color)
 {
-    u8 buffer[32];
+    u8 buffer[3 * PLAYER_NAME_LENGTH + 4];
     s32 offset;
+    u32 fontId;
 
-    StringCopy(buffer, gText_Slash);
-    StringAppend(buffer, gContestMons[contestant].trainerName);
+    Contest_CopyDisplayName(StringCopy(buffer, gText_Slash), gContestMons[contestant].trainerName);
     Contest_CopyStringWithColor(buffer, color);
-    offset = GetStringRightAlignXOffset(FONT_NARROW, gDisplayedStringBattle, 0x60);
+    fontId = GetFontIdToFit(gDisplayedStringBattle, FONT_NARROW, 0, 0x60 - 55);
+    offset = GetStringRightAlignXOffset(fontId, gDisplayedStringBattle, 0x60);
     if (offset > 55)
         offset = 55;
-    Contest_PrintTextToBg0WindowAt(gContestantTurnOrder[contestant], gDisplayedStringBattle, offset, 1, FONT_NARROW);
+    Contest_PrintTextToBg0WindowAt(gContestantTurnOrder[contestant], gDisplayedStringBattle, offset, 1, fontId);
 }
 
 static void PrintContestantMonName(u8 contestant)
@@ -3658,8 +5215,10 @@ static void PrintContestantMonName(u8 contestant)
 
 static void PrintContestantMonNameWithColor(u8 contestant, u8 color)
 {
-    Contest_CopyStringWithColor(gContestMons[contestant].nickname, color);
-    Contest_PrintTextToBg0WindowAt(gContestantTurnOrder[contestant], gDisplayedStringBattle, 5, 1, GetFontIdToFit(gContestMons[contestant].nickname, FONT_NARROW, 0, 50));
+    u8 buffer[3 * POKEMON_NAME_LENGTH + 3];
+    Contest_CopyDisplayName(buffer, gContestMons[contestant].nickname);
+    Contest_CopyStringWithColor(buffer, color);
+    Contest_PrintTextToBg0WindowAt(gContestantTurnOrder[contestant], gDisplayedStringBattle, 5, 1, GetFontIdToFit(buffer, FONT_NARROW, 0, 50));
 }
 
 static u16 CalculateContestantRound1Points(u8 who, enum ContestCategories contestCategory)
@@ -3732,7 +5291,7 @@ static u8 CreateJudgeSpeechBubbleSprite(void)
     return spriteId;
 }
 
-static u8 CreateContestantSprite(enum Species species, bool8 isShiny, u32 personality, u32 index)
+static u8 UNUSED CreateContestantSprite(enum Species species, bool8 isShiny, u32 personality, u32 index)
 {
     u8 spriteId;
     species = SanitizeSpecies(species);
@@ -3804,14 +5363,16 @@ static u16 GetMoveEffectSymbolTileOffset(enum Move move, u8 contestant)
 
 static void PrintContestMoveDescription(enum Move move)
 {
+    u8 contestant = gContestPlayerMonIndex;
+    enum Move effectMove = SanitizeMove(GetContestSafeEffectMove(contestant, move));
     u16 categoryTile;
     u8 numHearts;
     u8 appeal;
     u8 jam;
     enum ContestCategories category;
-    struct ContestEffect contestEffect = gContestEffects[GetMoveContestEffect(move)];
+    struct ContestEffect contestEffect = gContestEffects[GetMoveContestEffect(effectMove)];
 
-    GetContestMoveDisplayValues(move, &category, &appeal, &jam);
+    GetContestMoveDisplayValues(effectMove, &category, &appeal, &jam);
 
     // The contest category icon is implemented as a 5x2 group of tiles.
     categoryTile = gContestCategoryInfo[category].tile;
@@ -3949,7 +5510,8 @@ static bool8 DrawStatusSymbol(u8 contestant)
     if (eContestantStatus[contestant].resistant
      || eContestantStatus[contestant].immune
      || eContestantStatus[contestant].jamSafetyCount != 0
-     || eContestantStatus[contestant].jamReduction != 0)
+     || eContestantStatus[contestant].jamReduction != 0
+     || ContestGimmick_IsDynamaxed(contestant))
         symbolOffset = GetStatusSymbolTileOffset(STAT_SYMBOL_CIRCLE);
     else if (eContestantStatus[contestant].nervous)
         symbolOffset = GetStatusSymbolTileOffset(STAT_SYMBOL_WAVE);
@@ -3996,12 +5558,111 @@ static enum Move GetChosenMove(u8 contestant)
     else
     {
         u8 moveChoice;
+        enum Move move;
 
-        ContestAI_ResetAI(contestant);
-        moveChoice = ContestAI_GetActionToUse();
-        return gContestMons[contestant].moves[moveChoice];
+        moveChoice = GetNpcContestMoveChoice(contestant);
+        move = gContestMons[contestant].moves[moveChoice];
+        TrySelectNpcContestGimmick(contestant, move);
+        return move;
     }
 }
+
+static u8 GetNpcContestMoveChoice(u8 contestant)
+{
+    struct ContestGimmickStatus *gimmick = &eContestGimmickStatus[contestant];
+    u8 choice, count = 0;
+    s16 bestScore = -32768;
+    bool32 hasZMove = FALSE;
+
+    ContestAI_ResetAI(contestant);
+    choice = ContestAI_GetActionToUse();
+    if (gLinkContestFlags & LINK_CONTEST_FLAG_IS_LINK)
+        return choice;
+
+    // A planned Z turn must select a compatible base move, not just any high AI score.
+    for (u32 i = 0; i < MAX_MON_MOVES; i++)
+    {
+        TrySelectNpcContestGimmick(contestant, gContestMons[contestant].moves[i]);
+        if (gimmick->selected == CONTEST_GIMMICK_Z_APPEAL)
+            hasZMove = TRUE;
+    }
+
+    for (u32 i = 0; i < MAX_MON_MOVES; i++)
+    {
+        enum Move move = gContestMons[contestant].moves[i];
+        enum ContestGimmick selected;
+        enum ContestCategories category;
+        s16 score = eContestAI.moveScores[i];
+
+        if (move == MOVE_NONE)
+            continue;
+        TrySelectNpcContestGimmick(contestant, move);
+        selected = gimmick->selected;
+        if (hasZMove && selected != CONTEST_GIMMICK_Z_APPEAL)
+            continue;
+        category = GetContestMoveCategoryWithGimmick(contestant, move);
+        score += ContestAI_GetTacticalScore(contestant, move, category,
+                                           Contest_GetMoveExcitementForContestant(contestant, move));
+        if (selected != CONTEST_GIMMICK_NONE || gimmick->teraActive
+            || gimmick->megaActive || gimmick->ultraActive || gimmick->dynamaxTurns != 0)
+        {
+            if (category == gSpecialVar_ContestCategory)
+                score += 12;
+            if (gimmick->teraActive || selected == CONTEST_GIMMICK_TERA)
+            {
+                // Remove the old category's excitement bias after category replacement.
+                score += 10 * (sContestExcitementTable[gSpecialVar_ContestCategory][category]
+                            - sContestExcitementTable[gSpecialVar_ContestCategory][GetMoveContestCategory(move)]);
+            }
+            if (selected == CONTEST_GIMMICK_Z_APPEAL)
+            {
+                score += gContestEffects[GetMoveContestEffect(move)].appeal / 2;
+                if (IsContestSignatureZMove(contestant, move))
+                    score += 15;
+            }
+            else if (selected == CONTEST_GIMMICK_DYNAMAX || gimmick->dynamaxTurns != 0)
+            {
+                const struct ContestEffect *effect = &gContestEffects[GetMoveContestEffect(move)];
+                // Max appeals replace the original appeal and cannot jam.
+                score -= (effect->appeal == 0xFF ? 0 : effect->appeal / 2)
+                       + (effect->jam == 0xFF ? 0 : effect->jam / 4);
+                if (IsContestGMaxMove(contestant, move))
+                    score += 15;
+            }
+            else if ((selected == CONTEST_GIMMICK_MEGA || gimmick->megaActive || gimmick->ultraActive)
+                     && category == gSpecialVar_ContestCategory && !gimmick->jammedSinceLastAppeal)
+                score += 10;
+        }
+        if (score > bestScore)
+        {
+            bestScore = score;
+            choice = i;
+            count = 1;
+        }
+        else if (score == bestScore && Random() % ++count == 0)
+            choice = i;
+    }
+    TrySelectNpcContestGimmick(contestant, gContestMons[contestant].moves[choice]);
+    return choice;
+}
+
+#if TESTING
+void Test_ContestLoadNpc(u8 contestant, u16 opponent, enum ContestCategories category)
+{
+    LoadContestNpcPreset(contestant, opponent, category);
+    InitNpcContestGimmickStatus(contestant);
+}
+
+u8 Test_ContestChooseNpcMove(u8 contestant)
+{
+    return GetNpcContestMoveChoice(contestant);
+}
+
+void Test_ContestActivateGimmick(u8 contestant)
+{
+    ActivateSelectedContestGimmick(contestant);
+}
+#endif
 
 static void GetAllChosenMoves(void)
 {
@@ -4100,6 +5761,19 @@ static void SetContestantStatusesForNextRound(void)
 
     for (i = 0; i < CONTESTANT_COUNT; i++)
     {
+        struct ContestGimmickStatus *gimmick = &eContestGimmickStatus[i];
+
+        // Keep the last Max appeal and its protection alive until every entrant has acted.
+        if (gimmick->dynamaxTurns != 0 && gimmick->moveGimmick == CONTEST_GIMMICK_DYNAMAX
+            && eContestantStatus[i].currMove != MOVE_NONE && !eContestantStatus[i].nervous)
+        {
+            gimmick->dynamaxTurns--;
+            if (gimmick->dynamaxTurns == 0 && gimmick->gigantamaxActive)
+            {
+                gContestMons[i].species = gimmick->originalSpecies;
+                gimmick->gigantamaxActive = FALSE;
+            }
+        }
         eContestantStatus[i].appeal = 0;
         eContestantStatus[i].baseAppeal = 0;
         eContestGimmickStatus[i].extraAppeal = 0;
@@ -4139,6 +5813,10 @@ static void SetContestantStatusesForNextRound(void)
         eContest.excitementHistory[eContest.appealNumber][i] = Contest_GetMoveExcitementForContestant(i, eContestantStatus[i].currMove);
         eContestantStatus[i].currMove = MOVE_NONE;
         eContestGimmickStatus[i].moveGimmick = CONTEST_GIMMICK_NONE;
+        eContestGimmickStatus[i].showGimmickIntro = FALSE;
+        eContestGimmickStatus[i].baseMove = MOVE_NONE;
+        eContestGimmickStatus[i].effectMove = MOVE_NONE;
+        eContestGimmickStatus[i].animMove = MOVE_NONE;
     }
     eContestExcitement.frozen = FALSE;
 }
@@ -5039,10 +6717,10 @@ static void CalculateAppealMoveImpact(u8 contestant)
 
     eContestGimmickStatus[contestant].moveGimmick = CONTEST_GIMMICK_NONE;
     ActivateSelectedContestGimmick(contestant);
-    move = eContestantStatus[contestant].currMove;
+    move = SanitizeMove(GetContestTurnEffectMove(contestant));
     effect = GetMoveContestEffect(move);
 
-    eContestantStatus[contestant].moveCategory = GetContestMoveCategoryWithGimmick(contestant, eContestantStatus[contestant].currMove);
+    eContestantStatus[contestant].moveCategory = GetContestMoveCategoryWithGimmick(contestant, move);
     if (eContestantStatus[contestant].currMove == eContestantStatus[contestant].prevMove && eContestantStatus[contestant].currMove != MOVE_NONE)
     {
         eContestantStatus[contestant].repeatedMove = TRUE;
@@ -5086,6 +6764,8 @@ static void CalculateAppealMoveImpact(u8 contestant)
     if (eContestGimmickStatus[contestant].dynamaxTurns == 0
         && eContestGimmickStatus[contestant].moveGimmick != CONTEST_GIMMICK_ULTRA_BURST)
         gContestEffects[effect].function();
+
+    ApplyContestGimmickAppealBonus(contestant);
 
     if (eContestantStatus[contestant].conditionMod == CONDITION_GAIN)
         eContestantStatus[contestant].appeal += eContestantStatus[contestant].condition - 10;
@@ -5191,7 +6871,7 @@ static void PrintAppealMoveResultText(u8 contestant, u8 stringId)
 {
     StringCopy(gStringVar1, gContestMons[contestant].nickname);
     StringCopy(gStringVar2, GetMoveName(eContestantStatus[contestant].currMove));
-    StringCopy(gStringVar3, gContestCategoryInfo[GetMoveContestCategory(eContestantStatus[eContestAppealResults.contestant].currMove)].negativeTrait);
+    StringCopy(gStringVar3, gContestCategoryInfo[eContestantStatus[eContestAppealResults.contestant].moveCategory].negativeTrait);
     StringExpandPlaceholders(gStringVar4, sAppealResultTexts[stringId]);
     ContestClearGeneralTextWindow();
     Contest_StartTextPrinter(gStringVar4, TRUE);
@@ -5802,6 +7482,7 @@ static void Task_ResetForNextRound(u8 taskId)
             gTasks[taskId].data[0] = 3;
         break;
     case 3:
+        CreateContestNormalViewSprites();
         DrawStatusSymbols();
         SwapMoveDescAndContestTilemaps();
         gTasks[taskId].data[0] = 0;
@@ -5924,13 +7605,13 @@ static enum Species SanitizeSpecies(enum Species species)
     return species;
 }
 
-static void SetMoveSpecificAnimData(u8 contestant)
+static void SetMoveSpecificAnimData(u8 contestant, enum Move effectMove)
 {
-    enum Move move = SanitizeMove(eContestantStatus[contestant].currMove);
+    enum Move move = SanitizeMove(effectMove);
     enum Species species = SanitizeSpecies(gContestMons[contestant].species);
     u8 targetContestant;
 
-    memset(&gContestResources->moveAnim->species, 0, 20);
+    ClearContestMoveAnimTargetData();
     ClearBattleAnimationVars();
     switch (move)
     {
@@ -5957,6 +7638,8 @@ static void SetMoveSpecificAnimData(u8 contestant)
     case MOVE_RAZOR_WIND:
     case MOVE_SKULL_BASH:
     case MOVE_SKY_ATTACK:
+        if (GetContestTurnAnimMove(contestant) != move)
+            break;
         if (eContest.moveAnimTurnCount == 0)
         {
             eContest.moveAnimTurnCount = 2;
@@ -5980,51 +7663,85 @@ static void ClearMoveAnimData(u8 contestant)
         eContest.moveAnimTurnCount--;
 }
 
-static void SetMoveAnimAttackerData(u8 contestant)
+static void SetMoveAnimAttackerDataForSpecies(u8 contestant, enum Species species)
 {
     gContestResources->moveAnim->contestant = contestant;
-    gContestResources->moveAnim->species = SanitizeSpecies(gContestMons[contestant].species);
+    gContestResources->moveAnim->species = SanitizeSpecies(species);
     gContestResources->moveAnim->personality = gContestMons[contestant].personality;
     gContestResources->moveAnim->otId = gContestMons[contestant].otId;
     gContestResources->moveAnim->isShiny = gContestMons[contestant].isShiny;
 }
 
+static void SetMoveAnimAttackerData(u8 contestant)
+{
+    SetMoveAnimAttackerDataForSpecies(contestant, gContestMons[contestant].species);
+}
+
 static void CreateInvisibleBattleTargetSprite(void)
 {
-    gBattlerSpriteIds[B_POSITION_OPPONENT_RIGHT] = CreateInvisibleSpriteWithCallback(SpriteCallbackDummy);
-    InitSpriteAffineAnim(&gSprites[gBattlerSpriteIds[gBattlerTarget]]);
+    gBattlerSpriteIds[B_BATTLER_3] = CreateInvisibleSpriteWithCallback(SpriteCallbackDummy);
+    InitSpriteAffineAnim(&gSprites[gBattlerSpriteIds[B_BATTLER_3]]);
     SetBattleTargetSpritePosition();
 }
 
 static void SetBattleTargetSpritePosition(void)
 {
-    struct Sprite *sprite = &gSprites[gBattlerSpriteIds[B_BATTLER_3]];
+    enum BattlerId battler = gContestMoveAnimInCutaway ? gBattlerTarget : B_BATTLER_3;
+    u8 spriteId = gBattlerSpriteIds[battler];
+    struct Sprite *sprite;
 
+    if (spriteId >= MAX_SPRITES)
+        return;
+
+    sprite = &gSprites[spriteId];
     sprite->x2 = 0;
     sprite->y2 = 0;
-    sprite->x = GetBattlerSpriteCoord(B_BATTLER_3, BATTLER_COORD_X);
-    sprite->y = GetBattlerSpriteCoord(B_BATTLER_3, BATTLER_COORD_Y);
+    sprite->x = GetBattlerSpriteCoord(battler, BATTLER_COORD_X);
+    sprite->y = GetBattlerSpriteCoord(battler, BATTLER_COORD_Y);
     sprite->invisible = TRUE;
 }
 
 static void SetMoveTargetPosition(enum Move move)
 {
-    switch (GetBattlerMoveTargetType(gBattlerAttacker, move))
+    if (gContestMoveAnimInCutaway)
     {
-    case TARGET_USER:
-        gBattlerTarget = GetBattlerAtPosition(B_POSITION_PLAYER_RIGHT);
-        break;
-    case TARGET_OPPONENT:
-    case TARGET_SELECTED:
-    case TARGET_SMART:
-    case TARGET_RANDOM:
-    case TARGET_BOTH:
-    case TARGET_FOES_AND_ALLY:
-    case TARGET_USER_AND_ALLY:
-    default:
-        gBattlerTarget = GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT);
-        break;
+        switch (GetBattlerMoveTargetType(gBattlerAttacker, move))
+        {
+        case TARGET_USER:
+            gBattlerTarget = gBattlerAttacker;
+            break;
+        case TARGET_OPPONENT:
+        case TARGET_SELECTED:
+        case TARGET_SMART:
+        case TARGET_RANDOM:
+        case TARGET_BOTH:
+        case TARGET_FOES_AND_ALLY:
+        case TARGET_USER_AND_ALLY:
+        default:
+            gBattlerTarget = B_BATTLER_0;
+            break;
+        }
     }
+    else
+    {
+        switch (GetBattlerMoveTargetType(gBattlerAttacker, move))
+        {
+        case TARGET_USER:
+            gBattlerTarget = GetBattlerAtPosition(B_POSITION_PLAYER_RIGHT);
+            break;
+        case TARGET_OPPONENT:
+        case TARGET_SELECTED:
+        case TARGET_SMART:
+        case TARGET_RANDOM:
+        case TARGET_BOTH:
+        case TARGET_FOES_AND_ALLY:
+        case TARGET_USER_AND_ALLY:
+        default:
+            gBattlerTarget = GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT);
+            break;
+        }
+    }
+    gBattleAnimTarget = gBattlerTarget;
 }
 
 static void Contest_PrintTextToBg0WindowStd(u32 windowId, const u8 *b)
@@ -6168,6 +7885,7 @@ bool8 SaveContestWinner(u8 rank)
         // but excludes the temporary save used by the artist
         u8 id = GetContestWinnerSaveIdx(rank, TRUE);
         gSaveBlock1Ptr->contestWinners[id].personality = gContestMons[i].personality;
+        gSaveBlock1Ptr->contestWinners[id].isShiny = gContestMons[i].isShiny;
         gSaveBlock1Ptr->contestWinners[id].species = gContestMons[i].species;
         gSaveBlock1Ptr->contestWinners[id].trainerId = gContestMons[i].otId;
         StringCopyN(gSaveBlock1Ptr->contestWinners[id].monName, gContestMons[i].nickname, VANILLA_POKEMON_NAME_LENGTH);

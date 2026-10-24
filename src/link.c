@@ -20,11 +20,13 @@
 #include "text.h"
 #include "strings.h"
 #include "constants/songs.h"
+#include "constants/contest.h"
 #include "sound.h"
 #include "trade.h"
 #include "battle.h"
 #include "link.h"
 #include "link_rfu.h"
+#include "union_room.h"
 #include "constants/rgb.h"
 #include "constants/trade.h"
 
@@ -317,6 +319,14 @@ static void InitLocalLinkPlayer(void)
     gLocalLinkPlayer.language = gGameLanguage;
     gLocalLinkPlayer.version = gGameVersion + 0x4000;
     gLocalLinkPlayer.lp_field_2 = 0x8000;
+    gLocalLinkPlayer.neverRead = 0;
+    if ((!gWirelessCommType && (gLinkType == LINKTYPE_CONTEST_GMODE || gLinkType == LINKTYPE_CONTEST_EMODE))
+        || (gWirelessCommType && gPlayerCurrActivity >= ACTIVITY_CONTEST_COOL
+            && gPlayerCurrActivity <= ACTIVITY_CONTEST_TOUGH))
+    {
+        gLocalLinkPlayer.lp_field_2 = CONTEST_LINK_PROJECT_ID;
+        gLocalLinkPlayer.neverRead = CONTEST_LINK_VERSION;
+    }
     gLocalLinkPlayer.progressFlags = IsNationalPokedexEnabled();
     if (FlagGet(FLAG_IS_CHAMPION))
     {

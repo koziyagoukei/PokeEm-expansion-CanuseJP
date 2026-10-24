@@ -51,6 +51,7 @@ void UpdateIndicatorVisibilityAndType(u32 healthboxId, bool32 invisible);
 void UpdateIndicatorOamPriority(u32 healthboxId, u32 oamPriority);
 void UpdateIndicatorLevelData(u32 healthboxId, u32 level);
 void CreateIndicatorSprite(enum BattlerId battler);
+u8 CreateGimmickIndicatorSpriteAt(enum Gimmick gimmick, enum Type teraType, s16 x, s16 y, u8 subpriority);
 
 extern const struct GimmickInfo gGimmicksInfo[];
 

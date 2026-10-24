@@ -399,6 +399,11 @@ static const struct WindowTemplate sWindowTemplates[] =
 };
 
 // - 1 excludes PBLOCK_CLR_NONE
+static const u16 sRainbowPokeblockPalette[16] =
+{
+    RGB_BLACK, RGB(30, 9, 12), RGB(11, 27, 15), RGB(13, 19, 31),
+};
+
 static const u16 *const sPokeblocksPals[] =
 {
     [PBLOCK_CLR_RED - 1]       = gPokeblockRed_Pal,
@@ -414,7 +419,8 @@ static const u16 *const sPokeblocksPals[] =
     [PBLOCK_CLR_GRAY - 1]      = gPokeblockGray_Pal,
     [PBLOCK_CLR_BLACK - 1]     = gPokeblockBlack_Pal,
     [PBLOCK_CLR_WHITE - 1]     = gPokeblockWhite_Pal,
-    [PBLOCK_CLR_GOLD - 1]      = gPokeblockGold_Pal
+    [PBLOCK_CLR_GOLD - 1]      = gPokeblockGold_Pal,
+    [PBLOCK_CLR_RAINBOW - 1]   = sRainbowPokeblockPalette,
 };
 
 static const union AffineAnimCmd sAffineAnim_Still[] =

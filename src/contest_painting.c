@@ -249,15 +249,14 @@ static void PrintContestPaintingCaption(u8 contestType, bool8 isForArtist)
         BufferContestName(gStringVar1, category);
         StringAppend(gStringVar1, gText_Space);
         StringAppend(gStringVar1, sContestRankNames[gContestPaintingWinner->contestRank]);
-        StringCopy(gStringVar2, gContestPaintingWinner->trainerName);
-        ConvertInternationalContestantName(gStringVar2);
-        StringCopy(gStringVar3, gContestPaintingWinner->monName);
+        Contest_CopyDisplayName(gStringVar2, gContestPaintingWinner->trainerName);
+        Contest_CopyDisplayName(gStringVar3, gContestPaintingWinner->monName);
         StringExpandPlaceholders(gStringVar4, gContestHallPaintingCaption);
     }
     else
     {
         // Museum caption
-        StringCopy(gStringVar1, gContestPaintingWinner->monName);
+        Contest_CopyDisplayName(gStringVar1, gContestPaintingWinner->monName);
         StringExpandPlaceholders(gStringVar4, sMuseumCaptions[category]);
     }
 
