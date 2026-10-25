@@ -34,6 +34,8 @@ void MarkFacilityMonGimmicksForOpponent(const struct TrainerMon *fmon, struct Po
 u8 Test_GetFrontierOpponentIVPenalty(u32 facility, u32 streak);
 void Test_ApplyFrontierOpponentIVPenalty(void);
 void Test_RestoreFactoryOpponentIVs(void);
+void Test_ApplyFrontierOpponentHandicaps(void);
+void Test_RestoreFactoryOpponentStats(void);
 #endif
 
 #endif // GUARD_BATTLE_FRONTIER_H

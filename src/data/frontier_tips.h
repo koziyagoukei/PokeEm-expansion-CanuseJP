@@ -159,8 +159,8 @@ static const u8 sInfoText_HubMusic2[] = _(
 static const u8 sInfoText_HubDifficulty1[] = _(
     "{JPN}ひだりがわの ピカチュウから\n"
     "あいての AIを えらべます。\n"
-    "いつもの / むずかしい / さいきょう\n"
-    "の 3だんかいです。\n"
+    "かんたん / いつもの / むずかしい /\n"
+    "さいきょう の 4だんかいです。\n"
     "むずかしいほど わざや こうたいを\n"
     "より くわしく はんだんします。");
 static const u8 sInfoText_HubDifficulty2[] = _(
@@ -177,6 +177,20 @@ static const u8 sInfoText_HubDifficulty3[] = _(
     "3・4しゅうめは -20\n"
     "5・6しゅうめは -10\n"
     "7しゅうめからは ほせい なしです。");
+static const u8 sInfoText_HubDifficulty4[] = _(
+    "{JPN}かんたんでは あいての ポケモンの\n"
+    "どりょくちが 0に なり AIも\n"
+    "むだな わざを さけるだけに なります。\n"
+    "ファクトリーで かりた ポケモンは\n"
+    "どりょくちが そのままです。\n"
+    "コンテストの あいても やさしく なります。");
+static const u8 sInfoText_HubDifficulty5[] = _(
+    "{JPN}さいきょうは ギミックの つかいどき\n"
+    "かいふくや みがわりも よみあいます。\n"
+    "どの せっていでも かちめが なくなると\n"
+    "あいては こうさん することが あります。\n"
+    "フロンティアブレーンと 7せんめの\n"
+    "あいては さいごまで たたかいます。");
 static const u8 sInfoText_HubBanned1[] = _(
     "{JPN}みぎうえの レッドから\n"
     "きんしポケモンの ルールを かえられます。\n"
@@ -209,7 +223,7 @@ static const u8 sInfoText_HubSupport2[] = _(
 static const u8 *const sInfoViewerPages_HubPokemon[] = {sInfoText_HubPokemon1, sInfoText_HubPokemon2, sInfoText_HubPokemon3};
 static const u8 *const sInfoViewerPages_HubItems[] = {sInfoText_HubItems1, sInfoText_HubItems2};
 static const u8 *const sInfoViewerPages_HubMusic[] = {sInfoText_HubMusic1, sInfoText_HubMusic2};
-static const u8 *const sInfoViewerPages_HubDifficulty[] = {sInfoText_HubDifficulty1, sInfoText_HubDifficulty2, sInfoText_HubDifficulty3};
+static const u8 *const sInfoViewerPages_HubDifficulty[] = {sInfoText_HubDifficulty1, sInfoText_HubDifficulty2, sInfoText_HubDifficulty3, sInfoText_HubDifficulty4, sInfoText_HubDifficulty5};
 static const u8 *const sInfoViewerPages_HubBanned[] = {sInfoText_HubBanned1, sInfoText_HubBanned2};
 static const u8 *const sInfoViewerPages_HubSupport[] = {sInfoText_HubSupport1, sInfoText_HubSupport2};
 

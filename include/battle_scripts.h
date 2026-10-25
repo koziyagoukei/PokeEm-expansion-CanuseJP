@@ -40,6 +40,7 @@ extern const u8 BattleScript_RanAwayUsingMonAbility[];
 extern const u8 BattleScript_GotAwaySafely[];
 extern const u8 BattleScript_WildMonFled[];
 extern const u8 BattleScript_PrintCantRunFromTrainer[];
+extern const u8 BattleScript_FrontierOpponentForfeited[];
 extern const u8 BattleScript_PrintFailedToRunString[];
 extern const u8 BattleScript_PrintCantEscapeFromBattle[];
 extern const u8 BattleScript_PrintFullBox[];

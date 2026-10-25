@@ -21,6 +21,7 @@
 #include "text.h"
 #include "trainer_pokemon_sprites.h"
 #include "constants/abilities.h"
+#include "constants/battle_frontier.h"
 #include "constants/flags.h"
 #include "constants/items.h"
 #include "constants/pokemon.h"
@@ -3508,19 +3509,24 @@ static void Task_FrontierItemGiver_SelectQuantity(u8 taskId)
     }
 }
 
+void Special_SetFrontierAiEasy(void)
+{
+    VarSet(VAR_FRONTIER_AI_LEVEL, FRONTIER_AI_LEVEL_EASY);
+}
+
 void Special_SetFrontierAiNormal(void)
 {
-    VarSet(VAR_FRONTIER_AI_LEVEL, 0);
+    VarSet(VAR_FRONTIER_AI_LEVEL, FRONTIER_AI_LEVEL_NORMAL);
 }
 
 void Special_SetFrontierAiHard(void)
 {
-    VarSet(VAR_FRONTIER_AI_LEVEL, 1);
+    VarSet(VAR_FRONTIER_AI_LEVEL, FRONTIER_AI_LEVEL_HARD);
 }
 
 void Special_SetFrontierAiStrongest(void)
 {
-    VarSet(VAR_FRONTIER_AI_LEVEL, 2);
+    VarSet(VAR_FRONTIER_AI_LEVEL, FRONTIER_AI_LEVEL_STRONGEST);
 }
 
 void Special_SetFrontierAllowBannedSpecies(void)

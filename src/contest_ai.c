@@ -5,6 +5,7 @@
 #include "contest_ai.h"
 #include "contest_effect.h"
 #include "event_data.h"
+#include "constants/battle_frontier.h"
 #include "constants/moves.h"
 
 #define AI_ACTION_DONE (1 << 0)
@@ -307,6 +308,10 @@ void ContestAI_ResetAI(u8 contestantAI)
     eContestAI.contestantId = contestantAI;
     eContestAI.stackSize = 0;
     eContestAI.aiFlags = gContestMons[eContestAI.contestantId].aiFlags;
+    // The hub's かんたん setting: NPCs only avoid bad moves and skip combos and
+    // excitement tactics. Link contests keep the shared AI so every player agrees.
+    if (VarGet(VAR_FRONTIER_AI_LEVEL) == FRONTIER_AI_LEVEL_EASY && !(gLinkContestFlags & LINK_CONTEST_FLAG_IS_LINK))
+        eContestAI.aiFlags &= CONTEST_AI_CHECK_BAD_MOVE;
 }
 
 u8 ContestAI_GetActionToUse(void)

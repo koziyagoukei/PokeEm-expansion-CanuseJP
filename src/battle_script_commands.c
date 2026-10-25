@@ -9213,6 +9213,14 @@ void BS_SaveTarget(void)
     gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
+// The forfeiting Frontier opponent loses; the usual victory sequence follows.
+void BS_SetFrontierOpponentForfeited(void)
+{
+    NATIVE_ARGS();
+    gBattleOutcome = B_OUTCOME_WON;
+    gBattlescriptCurrInstr = cmd->nextInstr;
+}
+
 void BS_RestoreTarget(void)
 {
     NATIVE_ARGS();

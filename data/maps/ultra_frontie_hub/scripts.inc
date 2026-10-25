@@ -188,10 +188,17 @@ UltraFrontieHub_EventScript_SetFrontierAi::
 	msgbox UltraFrontieHub_Text_SetFrontierAi, MSGBOX_DEFAULT
 	multichoice 0, 0, MULTI_FRONTIER_AI_LEVEL, FALSE
 	switch VAR_RESULT
-	case 0, UltraFrontieHub_EventScript_SetFrontierAi_Normal
-	case 1, UltraFrontieHub_EventScript_SetFrontierAi_Hard
-	case 2, UltraFrontieHub_EventScript_SetFrontierAi_Strongest
+	case 0, UltraFrontieHub_EventScript_SetFrontierAi_Easy
+	case 1, UltraFrontieHub_EventScript_SetFrontierAi_Normal
+	case 2, UltraFrontieHub_EventScript_SetFrontierAi_Hard
+	case 3, UltraFrontieHub_EventScript_SetFrontierAi_Strongest
 	msgbox UltraFrontieHub_Text_Cancel, MSGBOX_DEFAULT
+	release
+	end
+
+UltraFrontieHub_EventScript_SetFrontierAi_Easy::
+	special Special_SetFrontierAiEasy
+	msgbox UltraFrontieHub_Text_SetFrontierAi_EasyDone, MSGBOX_DEFAULT
 	release
 	end
 
@@ -239,6 +246,9 @@ UltraFrontieHub_EventScript_BanFrontierBannedSpecies::
 
 UltraFrontieHub_Text_SetFrontierAi::
 	.string "{JPN}ピカチュウの まえに せっていきが ある。\nフロンティアの つよさを えらぼう。$"
+
+UltraFrontieHub_Text_SetFrontierAi_EasyDone::
+	.string "AIを かんたんに\nしました。\pあいての ポケモンの どりょくちが\n0に なります。\pコンテストの あいても\nてかげん してくれます。$"
 
 UltraFrontieHub_Text_SetFrontierAi_NormalDone::
 	.string "AIを いつものに\nしました。$"

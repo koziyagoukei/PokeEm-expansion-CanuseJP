@@ -779,6 +779,12 @@ void HandleAction_Run(void)
                 gCurrentActionFuncId = B_ACTION_EXEC_SCRIPT;
             }
         }
+        else if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
+        {
+            // Only a Frontier opponent that has certainly lost chooses this: it forfeits.
+            gBattlescriptCurrInstr = BattleScript_FrontierOpponentForfeited;
+            gCurrentActionFuncId = B_ACTION_EXEC_SCRIPT;
+        }
         else
         {
             if (GetBattlerHoldEffect(gBattlerAttacker) != HOLD_EFFECT_CAN_ALWAYS_RUN

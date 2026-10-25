@@ -4231,7 +4231,15 @@ static void HandleTurnActionSelectionState(void)
                     break;
                 }
 
-                if (gBattleTypeFlags & BATTLE_TYPE_TRAINER
+                if (!IsOnPlayerSide(battler)
+                    && gBattleTypeFlags & BATTLE_TYPE_TRAINER
+                    && !(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED_LINK))
+                    && gBattleResources->bufferB[battler][1] == B_ACTION_RUN)
+                {
+                    // A Frontier opponent forfeits (see ShouldAiForfeitFrontierBattle).
+                    gBattleCommunication[battler]++;
+                }
+                else if (gBattleTypeFlags & BATTLE_TYPE_TRAINER
                     && gBattleTypeFlags & (BATTLE_TYPE_FRONTIER | BATTLE_TYPE_TRAINER_HILL)
                     && gBattleResources->bufferB[battler][1] == B_ACTION_RUN)
                 {
@@ -4869,6 +4877,12 @@ static void SetActionsAndBattlersTurnOrder(void)
             if (gChosenActionByBattler[2] == B_ACTION_RUN)
             {
                 battler = B_BATTLER_2;
+                turnOrderId = 5;
+            }
+            // A forfeiting trainer gives up before anyone moves.
+            if ((gBattleTypeFlags & BATTLE_TYPE_TRAINER) && gChosenActionByBattler[B_BATTLER_1] == B_ACTION_RUN)
+            {
+                battler = B_BATTLER_1;
                 turnOrderId = 5;
             }
         }

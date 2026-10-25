@@ -908,6 +908,7 @@ const u8 *const gBattleStringsTable[STRINGID_COUNT] =
     [STRINGID_S]                                    = gText_EmptyString3,
     [STRINGID_LOSTSOMEOFITSHP]                      = COMPOUND_STRING("{JPN}{B_ATK_NAME_WITH_PREFIX}は\nたいりょくを すこし うしなった！"),
     [STRINGID_BELCHCANTUSE]                         = COMPOUND_STRING("{JPN}{B_ATK_NAME_WITH_PREFIX}は ゲップが でない！\p"),
+    [STRINGID_FRONTIEROPPONENTFORFEITED]            = COMPOUND_STRING("{JPN}{B_TRAINER1_NAME_WITH_CLASS}は\nこうさん した！\p"),
 
 };
 

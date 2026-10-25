@@ -30,6 +30,8 @@
 #include "constants/moves.h"
 #include "constants/items.h"
 #include "constants/trainers.h"
+#include "battle_ai_frontier.h"
+#include "constants/battle_frontier.h"
 #include "constants/vars.h"
 
 #if TESTING
@@ -121,7 +123,7 @@ static s32 (*const sBattleAiFuncTable[])(enum BattlerId, enum BattlerId, enum Mo
     [34] = NULL,                     // AI_FLAG_ABILITY_OMNISCIENCE
     [35] = NULL,                     // AI_FLAG_ITEM_OMNISCIENCE
     [36] = NULL,                     // AI_FLAG_MOVE_OMNISCIENCE
-    [37] = NULL,                     // Unused
+    [37] = AI_FrontierExpert,        // AI_FLAG_FRONTIER_EXPERT
     [38] = NULL,                     // Unused
     [39] = NULL,                     // Unused
     [40] = NULL,                     // Unused
@@ -257,11 +259,21 @@ static bool32 IsSmartBattle(void)
     return gBattleTypeFlags & BATTLE_TYPE_HAS_AI || IsWildMonSmart();
 }
 
+// かんたん: only the opponents get a simple AI that avoids useless moves.
+// The player's partner and link battles keep their usual AI.
+static bool32 UseFrontierEasyAi(enum BattlerId battler)
+{
+    return (gBattleTypeFlags & BATTLE_TYPE_FRONTIER)
+        && !(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED_LINK))
+        && (battler == B_BATTLER_1 || battler == B_BATTLER_3)
+        && VarGet(VAR_FRONTIER_AI_LEVEL) == FRONTIER_AI_LEVEL_EASY;
+}
+
 static u64 GetFrontierHackAiFlags(u64 flags)
 {
     switch (VarGet(VAR_FRONTIER_AI_LEVEL))
     {
-    case 2: // さいきょう
+    case FRONTIER_AI_LEVEL_STRONGEST: // さいきょう
         flags |= AI_FLAG_CHECK_BAD_MOVE;
         flags |= AI_FLAG_CHECK_VIABILITY;
         flags |= AI_FLAG_TRY_TO_FAINT;
@@ -279,9 +291,10 @@ static u64 GetFrontierHackAiFlags(u64 flags)
         flags |= AI_FLAG_PREFER_HIGHEST_DAMAGE_MOVE;
         flags |= AI_FLAG_ASSUME_STAB;
         flags |= AI_FLAG_WEIGH_ABILITY_PREDICTION;
+        flags |= AI_FLAG_FRONTIER_EXPERT;
         break;
 
-    case 1: // むずかしい
+    case FRONTIER_AI_LEVEL_HARD: // むずかしい
         flags |= AI_FLAG_CHECK_BAD_MOVE;
         flags |= AI_FLAG_CHECK_VIABILITY;
         flags |= AI_FLAG_TRY_TO_FAINT;
@@ -292,8 +305,8 @@ static u64 GetFrontierHackAiFlags(u64 flags)
         flags |= AI_FLAG_PP_STALL_PREVENTION;
         break;
 
-    case 0:
-    default: // いつもの
+    case FRONTIER_AI_LEVEL_NORMAL:
+    default: // いつもの (かんたん is handled by UseFrontierEasyAi)
         break;
     }
 
@@ -322,6 +335,8 @@ static u64 GetAiFlags(u16 trainerId, enum BattlerId battler)
             flags = AI_FLAG_ROAMING;
         else if (gBattleTypeFlags & BATTLE_TYPE_FIRST_BATTLE)
             flags = AI_FLAG_FIRST_BATTLE;
+        else if (UseFrontierEasyAi(battler))
+            flags = AI_FLAG_CHECK_BAD_MOVE;
         else if (gBattleTypeFlags & BATTLE_TYPE_PALACE)
             flags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT;
         else if (gBattleTypeFlags & BATTLE_TYPE_FACTORY)
@@ -498,6 +513,9 @@ void ReconsiderGimmick(enum BattlerId battlerAtk, enum BattlerId battlerDef, enu
 
     if (gBattleStruct->gimmick.usableGimmick[battlerAtk] == GIMMICK_TERA && GetMoveEffect(move) == EFFECT_PROTECT)
         SetAIUsingGimmick(battlerAtk, NO_GIMMICK);
+
+    if (gAiThinkingStruct->aiFlags[battlerAtk] & AI_FLAG_FRONTIER_EXPERT)
+        FrontierExpert_ReconsiderGimmick(battlerAtk, battlerDef, move);
 }
 
 static bool32 IsThinkingBeforePartner(enum BattlerId battler, enum BattlerId battlerPartner)
@@ -561,6 +579,13 @@ void AI_TrySwitchOrUseItem(enum BattlerId battler)
 
     if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
     {
+        if (ShouldAiForfeitFrontierBattle(battler))
+        {
+            // HandleAction_Run treats a Frontier opponent's run as a forfeit.
+            BtlController_EmitTwoReturnValues(battler, B_COMM_TO_ENGINE, B_ACTION_RUN, 0);
+            SetAIUsingGimmick(battler, NO_GIMMICK);
+            return;
+        }
         if (gAiLogicData->shouldSwitch & (1u << battler) && IsSwitchinValid(battler))
         {
             BtlController_EmitTwoReturnValues(battler, B_COMM_TO_ENGINE, B_ACTION_SWITCH, 0);
@@ -1490,6 +1515,9 @@ static s32 AI_CheckBadMove(enum BattlerId battlerAtk, enum BattlerId battlerDef,
             }
             break;
         case ABILITY_WONDER_GUARD:
+            // さいきょう knows Wonder Guard only blocks attacks (see ScoreAgainstWonderGuard).
+            if (IsBattleMoveStatus(move) && (gAiThinkingStruct->aiFlags[battlerAtk] & AI_FLAG_FRONTIER_EXPERT))
+                break;
             if (effectiveness < UQ_4_12(2.0))
                 RETURN_SCORE_MINUS(20);
             break;
@@ -6835,3 +6863,10 @@ void ResetDynamicAiFunctions(void)
     sDynamicAiFunc = NULL;
     gDynamicAiSwitchFunc = NULL;
 }
+
+#if TESTING
+u64 Test_GetAiFlags(u16 trainerId, enum BattlerId battler)
+{
+    return GetAiFlags(trainerId, battler);
+}
+#endif

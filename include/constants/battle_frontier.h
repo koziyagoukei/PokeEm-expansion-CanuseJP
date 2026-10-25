@@ -130,4 +130,10 @@
 // CreateFacilityMonFlags
 #define FLAG_FRONTIER_MON_FACTORY       (1 << 0)
 
+// Values of VAR_FRONTIER_AI_LEVEL, chosen at the hub's difficulty machine.
+#define FRONTIER_AI_LEVEL_NORMAL        0
+#define FRONTIER_AI_LEVEL_HARD          1
+#define FRONTIER_AI_LEVEL_STRONGEST     2
+#define FRONTIER_AI_LEVEL_EASY          3 // Opponents have no EVs and a simple AI; contests are easier too.
+
 #endif // GUARD_CONSTANTS_BATTLE_FRONTIER_H

@@ -1196,6 +1196,7 @@ static const struct MenuAction MultichoiceList_Exit[] =
 
 static const struct MenuAction MultichoiceList_FrontierAiLevel[] =
 {
+    { COMPOUND_STRING("かんたん") },
     { COMPOUND_STRING("いつもの") },
     { COMPOUND_STRING("むずかしい") },
     { COMPOUND_STRING("さいきょう") },

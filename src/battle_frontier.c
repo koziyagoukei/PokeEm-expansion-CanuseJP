@@ -44,6 +44,8 @@ COMMON_DATA u16 gFrontierTempParty[MAX_FRONTIER_PARTY_SIZE] = {0};
 EWRAM_DATA static const struct TrainerMon *sFacilityOpponentMonSources[MAX_BATTLE_TRAINERS][PARTY_SIZE] = {0};
 static EWRAM_DATA u32 sFactoryOpponentOriginalIVs[FRONTIER_PARTY_SIZE] = {0};
 static EWRAM_DATA bool8 sRestoreFactoryOpponentIVs = FALSE;
+static EWRAM_DATA u8 sFactoryOpponentOriginalEVs[FRONTIER_PARTY_SIZE][NUM_STATS] = {0};
+static EWRAM_DATA bool8 sRestoreFactoryOpponentEVs = FALSE;
 
 static u8 GetFrontierOpponentIVPenalty(u32 facility, u32 streak)
 {
@@ -67,21 +69,29 @@ static u8 GetFrontierOpponentIVPenalty(u32 facility, u32 streak)
     return 0;
 }
 
+static const enum BattleTrainer sFrontierOpponents[] = {B_TRAINER_OPPONENT_A, B_TRAINER_OPPONENT_B};
+
+// Opponent handicaps only apply to local Frontier trainer battles.
+static bool32 CanHandicapFrontierOpponents(u32 facility, u32 mode)
+{
+    return (gBattleTypeFlags & BATTLE_TYPE_FRONTIER)
+        && (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
+        && !(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED | BATTLE_TYPE_RECORDED_LINK))
+        && facility < NUM_FRONTIER_FACILITIES
+        && mode < FRONTIER_MODE_LINK_MULTIS
+        && (facility == FRONTIER_FACILITY_TOWER || mode <= FRONTIER_MODE_DOUBLES)
+        && gSaveBlock2Ptr->frontier.lvlMode < FRONTIER_LVL_MODE_COUNT;
+}
+
 static void ApplyFrontierOpponentIVPenalty(void)
 {
-    static const enum BattleTrainer trainers[] = {B_TRAINER_OPPONENT_A, B_TRAINER_OPPONENT_B};
+    const enum BattleTrainer *trainers = sFrontierOpponents;
     u32 facility = VarGet(VAR_FRONTIER_FACILITY);
     u32 mode = VarGet(VAR_FRONTIER_BATTLE_MODE);
     u32 penalty, trainer, slot, stat;
 
     sRestoreFactoryOpponentIVs = FALSE;
-    if (!(gBattleTypeFlags & BATTLE_TYPE_FRONTIER)
-        || !(gBattleTypeFlags & BATTLE_TYPE_TRAINER)
-        || (gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED | BATTLE_TYPE_RECORDED_LINK))
-        || facility >= NUM_FRONTIER_FACILITIES
-        || mode >= FRONTIER_MODE_LINK_MULTIS
-        || (facility != FRONTIER_FACILITY_TOWER && mode > FRONTIER_MODE_DOUBLES)
-        || gSaveBlock2Ptr->frontier.lvlMode >= FRONTIER_LVL_MODE_COUNT)
+    if (!CanHandicapFrontierOpponents(facility, mode))
         return;
 
     penalty = GetFrontierOpponentIVPenalty(facility, GetCurrentFacilityWinStreak());
@@ -89,7 +99,7 @@ static void ApplyFrontierOpponentIVPenalty(void)
         return;
 
     // Apply once, after all set-specific IV overrides and party reconstruction.
-    for (trainer = 0; trainer < ARRAY_COUNT(trainers); trainer++)
+    for (trainer = 0; trainer < ARRAY_COUNT(sFrontierOpponents); trainer++)
     {
         for (slot = 0; slot < PARTY_SIZE; slot++)
         {
@@ -130,6 +140,71 @@ static void RestoreFactoryOpponentIVs(void)
     memset(sFactoryOpponentOriginalIVs, 0, sizeof(sFactoryOpponentOriginalIVs));
 }
 
+// かんたん: Frontier opponents battle without EVs. The player's own Pokemon,
+// including Factory rentals, keep theirs.
+static void ApplyFrontierEasyOpponentEVs(void)
+{
+    u32 facility = VarGet(VAR_FRONTIER_FACILITY);
+    u32 mode = VarGet(VAR_FRONTIER_BATTLE_MODE);
+    u32 trainer, slot, stat;
+    u8 zero = 0;
+
+    sRestoreFactoryOpponentEVs = FALSE;
+    if (VarGet(VAR_FRONTIER_AI_LEVEL) != FRONTIER_AI_LEVEL_EASY || !CanHandicapFrontierOpponents(facility, mode))
+        return;
+
+    for (trainer = 0; trainer < ARRAY_COUNT(sFrontierOpponents); trainer++)
+    {
+        for (slot = 0; slot < PARTY_SIZE; slot++)
+        {
+            struct Pokemon *mon = &gParties[sFrontierOpponents[trainer]][slot];
+            if (GetMonData(mon, MON_DATA_SPECIES_OR_EGG) == SPECIES_NONE
+                || GetMonData(mon, MON_DATA_IS_EGG))
+                continue;
+
+            for (stat = 0; stat < NUM_STATS; stat++)
+            {
+                if (facility == FRONTIER_FACILITY_FACTORY && sFrontierOpponents[trainer] == B_TRAINER_OPPONENT_A && slot < FRONTIER_PARTY_SIZE)
+                    sFactoryOpponentOriginalEVs[slot][stat] = GetMonData(mon, MON_DATA_HP_EV + stat);
+                SetMonData(mon, MON_DATA_HP_EV + stat, &zero);
+            }
+            CalculateMonStats(mon);
+        }
+    }
+    sRestoreFactoryOpponentEVs = facility == FRONTIER_FACILITY_FACTORY;
+}
+
+// Factory opponents can be swapped into the player's rentals after the battle.
+static void RestoreFactoryOpponentEVs(void)
+{
+    u32 slot, stat;
+    if (!sRestoreFactoryOpponentEVs)
+        return;
+    sRestoreFactoryOpponentEVs = FALSE;
+    for (slot = 0; slot < FRONTIER_PARTY_SIZE; slot++)
+    {
+        struct Pokemon *mon = &gParties[B_TRAINER_OPPONENT_A][slot];
+        if (GetMonData(mon, MON_DATA_SPECIES_OR_EGG) == SPECIES_NONE)
+            continue;
+        for (stat = 0; stat < NUM_STATS; stat++)
+            SetMonData(mon, MON_DATA_HP_EV + stat, &sFactoryOpponentOriginalEVs[slot][stat]);
+        CalculateMonStats(mon);
+    }
+    memset(sFactoryOpponentOriginalEVs, 0, sizeof(sFactoryOpponentOriginalEVs));
+}
+
+static void ApplyFrontierOpponentHandicaps(void)
+{
+    ApplyFrontierOpponentIVPenalty();
+    ApplyFrontierEasyOpponentEVs();
+}
+
+static void RestoreFactoryOpponentStats(void)
+{
+    RestoreFactoryOpponentIVs();
+    RestoreFactoryOpponentEVs();
+}
+
 #if TESTING
 u8 Test_GetFrontierOpponentIVPenalty(u32 facility, u32 streak)
 {
@@ -145,13 +220,23 @@ void Test_RestoreFactoryOpponentIVs(void)
 {
     RestoreFactoryOpponentIVs();
 }
+
+void Test_ApplyFrontierOpponentHandicaps(void)
+{
+    ApplyFrontierOpponentHandicaps();
+}
+
+void Test_RestoreFactoryOpponentStats(void)
+{
+    RestoreFactoryOpponentStats();
+}
 #endif
 
 static void HandleFacilityTrainerBattleEnd(void)
 {
     u8 facility = gBattleScripting.specialTrainerBattleType;
     if (facility == FACILITY_BATTLE_FACTORY)
-        RestoreFactoryOpponentIVs();
+        RestoreFactoryOpponentStats();
     switch (facility)
     {
     case FACILITY_BATTLE_TOWER:
@@ -293,7 +378,7 @@ static void DoFacilityTrainerBattleInternal(u8 facility)
     if (facility == FACILITY_BATTLE_PYRAMID)
         PreparePyramidTrainerBattle();
     else if (facility <= FACILITY_BATTLE_PYRAMID)
-        ApplyFrontierOpponentIVPenalty();
+        ApplyFrontierOpponentHandicaps();
 }
 
 void PreparePyramidTrainerBattle(void)
@@ -301,7 +386,7 @@ void PreparePyramidTrainerBattle(void)
     if (!(gBattleTypeFlags & BATTLE_TYPE_PYRAMID))
         return;
     BalancePyramidOpponentParties();
-    ApplyFrontierOpponentIVPenalty();
+    ApplyFrontierOpponentHandicaps();
 }
 
 void DoFacilityTrainerBattle(struct ScriptContext *ctx)

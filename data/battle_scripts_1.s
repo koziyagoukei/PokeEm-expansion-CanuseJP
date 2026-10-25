@@ -3052,6 +3052,12 @@ BattleScript_PrintCantRunFromTrainer::
 	printstring STRINGID_NORUNNINGFROMTRAINERS
 	end
 
+BattleScript_FrontierOpponentForfeited::
+	printstring STRINGID_FRONTIEROPPONENTFORFEITED
+	waitmessage B_WAIT_TIME_LONG
+	callnative BS_SetFrontierOpponentForfeited
+	end
+
 BattleScript_PrintFailedToRunString::
 	printfromtable gNoEscapeStringIds
 	waitmessage B_WAIT_TIME_LONG
