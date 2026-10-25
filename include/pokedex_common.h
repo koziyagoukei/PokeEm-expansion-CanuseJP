@@ -152,6 +152,9 @@ struct EvoScreenData
     u8 arrowSpriteId;
 };
 
+#define FORMS_SCREEN_COLUMNS      7
+#define FORMS_SCREEN_VISIBLE_ROWS 2
+
 struct FromScreenData
 {
     u16 formIds[30];
@@ -159,6 +162,8 @@ struct FromScreenData
     u8 numForms;
     u8 menuPos;
     u8 arrowSpriteId;
+    u8 scrollRow;
+    u8 iconSpriteIds[FORMS_SCREEN_COLUMNS * FORMS_SCREEN_VISIBLE_ROWS];
 };
 
 struct PokedexView
