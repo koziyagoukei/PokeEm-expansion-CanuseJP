@@ -198,7 +198,7 @@ BattleFrontier_Lounge3_EventScript_FaceOriginalDirection::
 	end
 
 BattleFrontier_Lounge3_Text_CantYouSeeWereBusyHere::
-	.string "…… なんだぁ?\pおれたちゃ いま いそがしいの!\nまた こんどに してくれや!$"
+	.string "{JPN}いまは みんなの しょうぶを\nおうえんしてる ところなんだ。\pぎんの シンボルを 3つ あつめたら\nあんたにも はなしを もちかけたいねえ。$"
 
 BattleFrontier_Lounge3_Text_YouLookToughExplainGambling::
 	.string "…… ん?\nあんた つよそうだねぇ……\pへっへ…… ……\nちょっと ィイはなしが\lあるから きいてけよ!\pじつは おれたち グループはな\nバトルフロンティアの なかで\lちょっとした ゲームを してんのよ……\pルールは かんたん だぜー\nまずは まいかい どこかの しせつを\lひとつ えらぶ!\pつぎに そこに ちょうせん してる\nトレーナーの だれか ひとりを えらんで\lじぶんの バトルポイントを かけるのよ!\pんで いちばん いい せいせきを\nだした トレーナーに かけてた やつが\lバトルポイントを ひとりじめ すんの!\pなあっ? かんたん だろ?\nんで……$"
@@ -309,13 +309,13 @@ BattleFrontier_Lounge3_Text_Oh::
 	.string "おっ……$"
 
 BattleFrontier_Lounge3_Text_BackedWrongTrainer::
-	.string "まーたー はーずーれー?\pあたし ふつうに\nたたかった ほうが いいの かなぁー$"
+	.string "{JPN}また はずれちゃった！\nでも あのこが がんばったのは みてたよ。\pつぎは あたしも\nじぶんで ちょうせんしようかな！$"
 
 BattleFrontier_Lounge3_Text_TrainerGoodButRattled::
-	.string "あの トレーナー…… つよいけど\nバトルドームだと すごく きんちょう\lしちゃうん だよなぁ……$"
+	.string "{JPN}あの トレーナーは つよいのに\nドームだと きんちょうしちゃうんだ。\pこっちまで てに あせを かくよ。$"
 
 BattleFrontier_Lounge3_Text_KnowWinnerWhenISeeOne::
-	.string "うふふっ!\nボロもうけ! ボロもうけなのよ!$"
+	.string "{JPN}やった！ おうえんした ひとが かった！\nBPまで ふえちゃったわ！$"
 
 BattleFrontier_Lounge3_Text_ShouldBeTakingChallenges::
-	.string "あいつら トレーナーの くせに\nちょうせんも しないで\lなに してるん だろうな?$"
+	.string "{JPN}ここで しあいの はなしを きくのも\nけっこう おもしろいんだな。\pそろそろ おれも いってくるか！$"

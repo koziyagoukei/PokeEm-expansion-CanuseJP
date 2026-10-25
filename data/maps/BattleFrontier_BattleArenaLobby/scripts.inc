@@ -473,31 +473,16 @@ BattleFrontier_BattleArenaLobby_Text_RecordLastMatch:
 	.string "$"
 
 BattleFrontier_BattleArenaLobby_Text_BadIdeaToNotAttack:
-	.string "はんていで まけちゃった……\pまもる ばっかりで\nせめなかったのが よくなかった みたい……"
-	.string ""
-	.string "$"
+	.string "{JPN}はんていで まけちゃった。\nまもっているだけじゃ だめなんだね。\pつぎは 3ターンで\nどこまで せめられるか やってみる！$"
 
 BattleFrontier_BattleArenaLobby_Text_LandingHitsWorked:
-	.string "はんていで かったぜ!\pあいての ポケモンに\nわざを かくじつに あてたのが よかったぜ!"
-	.string ""
-	.string "$"
+	.string "{JPN}わざを しっかり あてたら\nはんていで かったぜ！\pみんなで よろこんでいたら\nおれまで もういちど うれしくなった！$"
 
 BattleFrontier_BattleArenaLobby_Text_MatchWasDeclaredDraw:
-	.string "はんていで ひきわけ だったよ\pじかんぎれに なったときに\nあいて ポケモンと のこりの HPが\lおなじ くらい だったからねぇ……"
-	.string ""
-	.string ""
-	.string "$"
+	.string "{JPN}3ターンで ひきわけだったよ。\nあいても ぼくも ぜんりょくだった。\pこうたい できないから\nさいしょの じゅんびが だいじだね。$"
 
 BattleFrontier_BattleArenaLobby_Text_OrderOfMonsImportant:
-	.string "バトルアリーナでは ポケモンの じゅんばんが\nとっても だいじ なのよ!\pたとえば 1ばんめの ポケモンの\nじゃくてん となる タイプに たいして\pこうかばつぐんの わざを もっている\nポケモンを 2ばんめに いれておけば\lいいチームに なると おもうわ!"
-	.string ""
-	.string ""
-	.string ""
-	.string ""
-	.string ""
-	.string ""
-	.string ""
-	.string "$"
+	.string "{JPN}ここでは ポケモンの じゅんばんが\nとっても だいじなの。\pメガシンカと テラスタルは おやすみ。\nZワザと ダイマックスを いかしたいわ。$"
 
 BattleFrontier_BattleArenaLobby_Text_RulesAreListed:
 	.string "かちぬきチームバトルの\nルールが かかれている!$"

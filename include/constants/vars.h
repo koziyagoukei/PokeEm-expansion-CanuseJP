@@ -298,6 +298,12 @@
 #define VAR_UNUSED_0x40F8                                0x40F8 // Unused Var
 #define VAR_PARTY_BATH_ADDITIVE                          VAR_UNUSED_0x40F8
 #define VAR_UNUSED_0x40F9                                0x40F9 // Unused Var
+#define VAR_FRONTIER_INTRO_STATE                        VAR_UNUSED_0x40F9
+// Zero is deliberately inert for saves created before the story opening.
+#define FRONTIER_INTRO_LEGACY                           0
+#define FRONTIER_INTRO_ARRIVAL                          1
+#define FRONTIER_INTRO_FAMILY                           2
+#define FRONTIER_INTRO_COMPLETE                         3
 #define VAR_UNUSED_0x40FA                                0x40FA // Unused Var
 #define VAR_UNUSED_0x40FB                                0x40FB // Unused Var
 #define VAR_UNUSED_0x40FC                                0x40FC // Unused Var

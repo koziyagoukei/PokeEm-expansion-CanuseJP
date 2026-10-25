@@ -5,6 +5,8 @@ PartyRoamerPark_MapScripts::
 	.byte 0
 
 PartyRoamerPark_OnLoad:
+	setflag FLAG_TEMP_10
+	call_if_eq VAR_FRONTIER_INTRO_STATE, FRONTIER_INTRO_FAMILY, PartyRoamerPark_ShowIntroCook
 	special Special_PreparePartyRoamerPark
 	@ Also replace soil restored from an old save's cached map view.
 	setmetatile 1, 7, METATILE_General_Grass, FALSE
@@ -28,8 +30,13 @@ PartyRoamerPark_OnTransition:
 	end
 
 PartyRoamerPark_OnFrame:
+	map_script_2 VAR_FRONTIER_INTRO_STATE, FRONTIER_INTRO_FAMILY, FrontierIntro_EventScript_Family
 	map_script_2 VAR_TEMP_0, 0, PartyRoamerPark_EventScript_RefreshMons
 	.2byte 0
+
+PartyRoamerPark_ShowIntroCook:
+	clearflag FLAG_TEMP_10
+	return
 
 PartyRoamerPark_EventScript_RefreshMons::
 	setvar VAR_TEMP_0, 1
@@ -280,12 +287,12 @@ PartyRoamerPark_EventScript_NoBerries:
 	end
 
 PartyRoamerPark_Text_AlolaFestivalCircle:
-	.string "アローラちほう では フェスサークル\n"
-	.string "っていうサーバーが あるんですって$"
+	.string "{JPN}ママ『ポケモンも ここなら\n"
+	.string "のびのび あそべそうね！$"
 
 PartyRoamerPark_Text_FestivalCircleSoundsFun:
-	.string "きっと いろいろ\n"
-	.string "できるのでしょうね！$"
+	.string "{JPN}ポロックケースを てにいれたら\n"
+	.string "いっしょに ポロックを つくりましょ！$"
 
 PartyRoamerPark_Text_AskMakePokeblocks:
 	.string "ねぇ {PLAYER}\n"
@@ -322,8 +329,8 @@ PartyRoamerPark_Text_NormanDailyCheckIn:
 	.string "げんきに しているか?$"
 
 PartyRoamerPark_Text_NormanGift:
-	.string "ジムで おみやげもらったから\n"
-	.string "たべなさい$"
+	.string "{JPN}きょうの おやつを よういしたぞ。\n"
+	.string "ポケモンと いっしょに たべなさい。$"
 
 PartyRoamerPark_Text_NormanGeneric:
 	.string "なにかあったら\n"

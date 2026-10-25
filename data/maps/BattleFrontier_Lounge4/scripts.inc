@@ -14,11 +14,11 @@ BattleFrontier_Lounge4_EventScript_Man::
 	end
 
 BattleFrontier_Lounge4_Text_WonderIfInterviewsAiring:
-	.string "つよい トレーナーの インタビュー\nきょうは やって いるかなー?$"
+	.string "{JPN}テレビの インタビューが すきなの。\nあのときの ドキドキが よみがえるから。\pなんど みても あきないわ。$"
 
 BattleFrontier_Lounge4_Text_IfIOpenedRestaurantHere:
-	.string "ここで おいしい レストランでも\nやったら もうかりそうやな$"
+	.string "{JPN}ひがしの リゾートに\nめしやが できたんやて。\pどんな あじやろなあ。\nこんど おしえてもらお！$"
 
 BattleFrontier_Lounge4_Text_NeedBreatherAfterBattles:
-	.string "ふう\pたたかいの あいまに\nちょっと ひとやすみ……\pと いっても\nおれの あたまの なかでは\lやすみなく せんりゃくが ねられているぜ!$"
+	.string "{JPN}ふう。 ここで ひとやすみ。\nポケモンも のんびり してるだろ。\pつぎの さくせんは\nおちゃを のんでからだ！$"
 

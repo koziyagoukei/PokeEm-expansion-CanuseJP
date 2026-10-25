@@ -697,10 +697,10 @@ BattleFrontier_BattlePyramidLobby_Text_BelieveMyFortunesOrNot:
 	.string "うらないを しんじるも しんじないも\nあなた しだい……\pみらいは いつでも かえられます……\nどうぞ ごぶじで……$"
 
 BattleFrontier_BattlePyramidLobby_Text_TrainersNoticeRunning:
-	.string "あなた しってた?\pはやく はしると\nトレーナーが あしおとに きづいて\lしょうぶを しかけて くるの!\pだから トレーナーと\nめを あわせたくない ときは\lトレーナーの ようすを みながら\lゆっくり あるいた ほうが いいのよ!$"
+	.string "{JPN}くらいところでは あしおとも\nトレーナーに きづかれる てがかりよ。\pゆっくり あるいて\nまわりを よく みてみてね。$"
 
 BattleFrontier_BattlePyramidLobby_Text_LostLotOfItems:
-	.string "うおおおおーーーーーーん!\pどうぐを いっぱい もってたのに\nまけたら ぜんぶ なくなっちゃった……\pうおおおおーーーーーーん!$"
+	.string "{JPN}せっかく あつめた どうぐが……！\nああ でも どこで ひろったかは\lおぼえているぞ。\pつぎの たんけんでも\nうまく みつけられると いいな。$"
 
 BattleFrontier_BattlePyramidLobby_Text_YouveDefeatedPyramidKing:
 	.string "おかえりなさいませ!\pピラミッドキングを たおし\nみごと バトルピラミッドを\lせいは されましたな!$"

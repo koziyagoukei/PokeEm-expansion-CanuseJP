@@ -45,11 +45,11 @@ BattleFrontier_Mart_EventScript_Boy::
 	end
 
 BattleFrontier_Mart_Text_ChaperonGrandson:
-	.string "わたしらは マゴの つきそいで\nここに きたんだが\lせっかく だから きねんに\lなにか おみやげをと おもってな$"
+	.string "{JPN}まごを まちながら\nおみやげを えらんで おるんじゃ。\pきょうも あしたも この じかんが\nつづけば いいのう。$"
 
 BattleFrontier_Mart_Text_ProteinMakeNiceGift:
-	.string "ネエ じいさん\nこれなんか いいんじゃ ないかねえ?\lた… う… タウリ……ソ って いうやつ\pなんだか おいしそうよ$"
+	.string "{JPN}この おみやげは どうかねえ？\nポケモンが つよくなる どうぐだって。\pまごの よろこぶ かおが\nもう うかんできちゃうよ。$"
 
 BattleFrontier_Mart_Text_FacilitiesDontAllowItems:
-	.string "バトルフロンティアの しせつでは\nせんとうちゅうに どうぐが つかえない\lルールの ところが おおいんだよね\lきびしいなー$"
+	.string "{JPN}しせつでは バッグの どうぐを\nつかえないことが おおいんだ。\pもちものは うけつけに\nいくまえに たしかめようっと。$"
 

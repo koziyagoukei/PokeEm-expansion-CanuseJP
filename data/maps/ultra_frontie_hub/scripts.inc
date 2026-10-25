@@ -1,11 +1,20 @@
 ultra_frontie_hub_MapScripts::
 	map_script MAP_SCRIPT_ON_LOAD, UltraFrontieHub_OnLoad
 	map_script MAP_SCRIPT_ON_TRANSITION, UltraFrontieHub_OnTransition
+	map_script MAP_SCRIPT_ON_FRAME_TABLE, UltraFrontieHub_OnFrame
 	.byte 0
 
 UltraFrontieHub_OnLoad:
 	special Special_RestoreResortInterior
+	setflag FLAG_TEMP_10
+	goto_if_ne VAR_FRONTIER_INTRO_STATE, FRONTIER_INTRO_ARRIVAL, UltraFrontieHub_OnLoad_Done
+	clearflag FLAG_TEMP_10
+UltraFrontieHub_OnLoad_Done:
 	end
+
+UltraFrontieHub_OnFrame:
+	map_script_2 VAR_FRONTIER_INTRO_STATE, FRONTIER_INTRO_ARRIVAL, FrontierIntro_EventScript_Arrival
+	.2byte 0
 
 UltraFrontieHub_OnTransition:
 	setrespawn HEAL_LOCATION_BATTLE_FRONTIER_OUTSIDE_EAST
@@ -86,7 +95,7 @@ UltraFrontieHub_EventScript_FacilityWarpCancel::
 	end
 
 UltraFrontieHub_Text_WhereGo::
-	.string "どこへ　いきますか？$"
+	.string "{JPN}こちらは しせつへの あんないです。\nちょくせつ むかうなら どちらへ？\pそとを あるいて むかうことも できます。\nおすきな ほうほうで どうぞ！$"
 
 UltraFrontieHub_Text_BattleTower::
 	.string "バトルタワー$"
@@ -131,7 +140,7 @@ UltraFrontieHub_EventScript_StartFrontierMoveTutor::
 	end
 
 UltraFrontieHub_Text_FrontierMoveTutor::
-	.string "わざを\nおもいだしますか？$"
+	.string "{JPN}わざの そうだんは まかせて！\nきみの ポケモンに あう わざを さがそう。\pわざを おもいだしますか？$"
 
 UltraFrontieHub_EventScript_FrontierPokemonCreator::
 	lock
@@ -151,7 +160,7 @@ UltraFrontieHub_EventScript_OpenFrontierPokemonCreator::
 	end
 
 UltraFrontieHub_Text_FrontierPokemonCreator::
-	.string "フロンティアようの\nポケモンを つくりますか？$"
+	.string "{JPN}あたらしい なかまを さがすなら\nぼくに こえを かけてね！\pフロンティアようの\nポケモンを つくりますか？$"
 
 UltraFrontieHub_EventScript_FrontierItemGiver::
 	lock
@@ -171,7 +180,7 @@ UltraFrontieHub_EventScript_OpenFrontierItemGiver::
 	end
 
 UltraFrontieHub_Text_FrontierItemGiver::
-	.string "フロンティアようの\nどうぐを もらいますか？$"
+	.string "{JPN}キルリアは どうぐを ならべている。\nほしいものを えらんでみよう！$"
 
 UltraFrontieHub_EventScript_SetFrontierAi::
 	lock
@@ -229,7 +238,7 @@ UltraFrontieHub_EventScript_BanFrontierBannedSpecies::
 	end
 
 UltraFrontieHub_Text_SetFrontierAi::
-	.string "フロンティアの AIを\nえらんでください。$"
+	.string "{JPN}ピカチュウの まえに せっていきが ある。\nフロンティアの つよさを えらぼう。$"
 
 UltraFrontieHub_Text_SetFrontierAi_NormalDone::
 	.string "AIを いつものに\nしました。$"
@@ -238,13 +247,13 @@ UltraFrontieHub_Text_SetFrontierAi_HardDone::
 	.string "AIを むずかしいに\nしました。$"
 
 UltraFrontieHub_Text_SetFrontierBannedSpecies::
-	.string "BANNED POKEMON RULE$"
+	.string "{JPN}……。 つよい ポケモンとの\nしょうぶも のぞんでいるのか？\pきんしポケモンの せっていを\nえらんでくれ。$"
 
 UltraFrontieHub_Text_SetFrontierBannedSpeciesAllowDone::
-	.string "BANNED POKEMON ALLOWED.$"
+	.string "{JPN}きんしポケモンの さんかを\nみとめる せっていに した。$"
 
 UltraFrontieHub_Text_SetFrontierBannedSpeciesBanDone::
-	.string "BANNED POKEMON BANNED.$"
+	.string "{JPN}きんしポケモンの さんかを\nみとめない せっていに した。$"
 
 UltraFrontieHub_Text_SetFrontierAi_StrongestDone::
 	.string "AIを さいきょうに\nしました。$"

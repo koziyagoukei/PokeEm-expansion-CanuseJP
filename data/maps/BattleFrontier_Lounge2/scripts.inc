@@ -113,10 +113,10 @@ BattleFrontier_Lounge2_EventScript_TriathleteF::
 	end
 
 BattleFrontier_Lounge2_Text_FrontierManiacIntro::
-	.string "やあやあ ぼくは バトルフロンティアいちの\nじょうほうつう!\pフロンティアマニアって よんでくれよ!\pきみ トレーナーだろ?\pぼくが あつめた バトルフロンティアの\nホットな じょうほうを おしえて あげるよ!$"
+	.string "{JPN}やあ！ フロンティアマニアだよ！\nみんなの はなしを あつめてるんだ。\pきみの しらない じょうほうも\nあるかもしれないね！$"
 
 BattleFrontier_Lounge2_Text_SwingByForTheLatestWord::
-	.string "やあやあ また ぼくの じょうほうを\nききに きたんだね! しかたないなー!$"
+	.string "{JPN}また きてくれたね！\nこんどは どんな はなしを しようか。$"
 
 @ Unused
 BattleFrontier_Lounge2_Text_MyInformationsBeenUsefulRight::
@@ -132,19 +132,19 @@ BattleFrontier_Lounge2_Text_SalonMaidenIsThere::
 	.string "{JPN}しってるかい?\pあそこは エニシダが\nフロンティアブレーンって よんでる\lトレーナーの うちの ひとり……\lタワータイクーンって いう\lなぞの トレーナーが おさめてるのさ!$"
 
 BattleFrontier_Lounge2_Text_SalonMaidenSilverMons::
-	.string "{JPN}きみは タワータイクーンと\nたたかったこと あるかい?\pやつは あいての ちからを はかるとき\nエスパーの ねんりきポケモン!\lほのおの かざんポケモン!\lノーマルの いねむりポケモンの\l3ひきを つかってくる らしいぜ!$"
+	.string "{JPN}タワータイクーンと たたかうなら\nどんな あいてにも そなえて おこう！\pてもちが いつも おなじとは\nかぎらないんだ。 そこが おもしろいね！$"
 
 BattleFrontier_Lounge2_Text_SalonMaidenGoldMons::
-	.string "{JPN}きみは ほんきの タワータイクーンと\nたたかったこと あるかい?\pやつは ほんとの ちからで たたかうとき\nドラゴンと エスパーの むげんポケモン!\lでんきの いかづちポケモン!\lノーマルの いねむりポケモンの\l3ひきを つかってくる らしいぜ!$"
+	.string "{JPN}ほんきの タワータイクーンは\nでてくる ポケモンも てごわいぞ！\pひとつの タイプだけじゃなく\nチームぜんたいで たいさくしよう！$"
 
 BattleFrontier_Lounge2_Text_DomeAceIsThere::
 	.string "{JPN}しってるかい?\pあそこは エニシダが\nフロンティアブレーンって よんでる\lトレーナーの うちの ひとり……\lドームスーパースターって いう\lどハデな トレーナーが おさめてるのさ!$"
 
 BattleFrontier_Lounge2_Text_DomeAceSilverMons::
-	.string "{JPN}きみは ドームスーパースターと\nたたかったこと あるかい?\pやつは あいての ちからを なめてるとき\nドラゴンと ひこうの ドラゴンポケモン!\lみずと じめんの ぬまうおポケモン!\lほのおと ひこうの かえんポケモンの\l3ひきを つかってくる らしいぜ!$"
+	.string "{JPN}ドームスーパースターと たたかうなら\nしあいまえの じょうほうが だいじさ！\pつよそうな なまえに おどろかず\n2ひきの くみあわせを みておこう！$"
 
 BattleFrontier_Lounge2_Text_DomeAceGoldMons::
-	.string "{JPN}きみは ほんきの ドームスーパースターと\nたたかったこと あるかい?\pやつは じぶんの せんりゃくを みせるとき\nドラゴンと エスパーの むげんポケモン!\lみずと じめんの ぬまうおポケモン!\lはがねと エスパーの てつあしポケモンの\l3ひきを つかってくる らしいぜ!$"
+	.string "{JPN}ほんきの ドームスーパースターだって\nいつも おなじ てもちとは かぎらない！\pその ときの あいてを みて\nきみの さくせんを きめるんだ！$"
 
 BattleFrontier_Lounge2_Text_FactoryHeadIsThere::
 	.string "{JPN}しってるかい?\pあそこは エニシダが\nフロンティアブレーンって よんでる\lトレーナーの うちの ひとり……\lファクトリーヘッドって いう\lやばい トレーナーが おさめてるのさ!$"
@@ -159,37 +159,37 @@ BattleFrontier_Lounge2_Text_PikeQueenIsThere::
 	.string "{JPN}しってるかい?\pあそこには エニシダが\nフロンティアブレーンって よんでる\lトレーナーの うちの ひとり……\lチューブクイーンって いう\lこわーい トレーナーが おさめてるのさ!$"
 
 BattleFrontier_Lounge2_Text_PikeQueenSilverMons::
-	.string "{JPN}きみは チューブクイーンと\nたたかったこと あるかい?\pやつは きげんの いいとき\nどくの キバへびポケモン!\lむしと いわの はっこうポケモン!\lみずの いつくしみポケモンの\l3ひきを つかってくる らしいぜ!$"
+	.string "{JPN}チューブクイーンに あうまえに\nのこりの HPを たしかめよう！\pどんな ポケモンが でてきても\nうごけることが たいせつだよ。$"
 
 BattleFrontier_Lounge2_Text_PikeQueenGoldMons::
-	.string "{JPN}きみは ほんきの チューブクイーンと\nたたかったこと あるかい?\pやつは ほんきで おこったとき\nどくの キバへびポケモン!\lはがねと じめんの てつへびポケモン!\lみずと ひこうの きょうあくポケモンの\l3ひきを つかってくる らしいぜ!$"
+	.string "{JPN}ほんきの チューブクイーンに\nあえたら それだけでも すごいことさ！\pのこしてきた ちからを\nそこで ぜんぶ ぶつけてみよう！$"
 
 BattleFrontier_Lounge2_Text_ArenaTycoonIsThere::
 	.string "{JPN}しってるかい?\pあそこには エニシダが\nフロンティアブレーンって よんでる\lトレーナーの うちの ひとり……\lアリーナキャプテンって いう\lかわいい トレーナーが おさめてるのさ!$"
 
 BattleFrontier_Lounge2_Text_ArenaTycoonSilverMons::
-	.string "{JPN}きみは もう アリーナキャプテンと\nたたかったこと あるかい?\pあのこは あいての ちからを うかがうとき\nむしと かくとうの 1ぽんヅノポケモン!\lあくの げっこうポケモン!\lむしと ゴーストの ぬけがらポケモンの\l3ひきを つかってくる らしいぜ!$"
+	.string "{JPN}アリーナキャプテンとの しょうぶは\nポケモンの じゅんばんが たいせつ！\pこうたいで にげられないぶん\nつぎの 1ひきまで かんがえておこう。$"
 
 BattleFrontier_Lounge2_Text_ArenaTycoonGoldMons::
-	.string "{JPN}きみは ほんきの アリーナキャプテンと\nたたかったこと あるかい?\pあのこは マジで たたかう とき\nあくの げっこうポケモン!\lゴーストと どくの シャドーポケモン!\lくさと かくとうの きのこポケモンの\l3ひきを つかってくる らしいぜ!$"
+	.string "{JPN}ほんきの アリーナキャプテンには\n3ターンの つかいかたで いどもう！\pわざを あてることも\nのこりの HPも だいじだからね。$"
 
 BattleFrontier_Lounge2_Text_PalaceMavenIsThere::
 	.string "{JPN}あそこには エニシダが\nフロンティアブレーンって よんでる\lトレーナーの うちの ひとり……\lパレスガーディアンって いう\lあやしい トレーナーが おさめてるのさ!$"
 
 BattleFrontier_Lounge2_Text_PalaceMavenSilverMons::
-	.string "{JPN}きみは パレスガーディアンと\nたたかったこと あるかい?\pやつは あいての こころを ためすとき\nどくと ひこうの こうもりポケモン!\lノーマルの ものぐさポケモン\lみずと こおりの のりものポケモンの\l3ひきを つかってくる らしいぜ!$"
+	.string "{JPN}パレスガーディアンに いどむなら\nせいかくと わざを たしかめよう！\pてもちを あてるより\nきみの ポケモンを しることさ。$"
 
 BattleFrontier_Lounge2_Text_PalaceMavenGoldMons::
-	.string "{JPN}きみは ほんきの パレスガーディアンと\nたたかったこと あるかい?\pやつが てかげんぬきで たたかうときは\nほのおの でんせつポケモン!\lノーマルの ものぐさポケモン\lみずの オーロラポケモンの\l3ひきを つかってくる らしいぜ!$"
+	.string "{JPN}ほんきの パレスガーディアンの まえでも\nポケモンの きもちは だいじだよ。\pメガシンカや テラスタルの じゅんびも\nちょうせんの まえに しておこう！$"
 
 BattleFrontier_Lounge2_Text_PyramidKingIsThere::
 	.string "{JPN}しってるかい?\pあそこには エニシダが\nフロンティアブレーンって よんでる\lトレーナーの うちの ひとり……\lピラミッドキングって いう\lアツーい トレーナーが おさめてるのさ!$"
 
 BattleFrontier_Lounge2_Text_PyramidKingSilverMons::
-	.string "{JPN}きみは もう ピラミッドキングと\nたたかったこと あるかい?\pかれは あいての ちからを ためすとき\nいわの いわやまポケモン!\lこおりの ひょうざんポケモン!\lはがねの くろがねポケモンの\l3ひきを つかってくる らしいぜ!$"
+	.string "{JPN}ピラミッドキングを めざすなら\nまずは たんけんの じゅんびさ！\pもちこめる どうぐと\nチームの いきの ながさを かんがえよう。$"
 
 BattleFrontier_Lounge2_Text_PyramidKingGoldMons::
-	.string "{JPN}きみは ほんきの ピラミッドキングと\nたたかったこと あるかい?\pかれに あつい ちからが みなぎるときは\nこおりと ひこうの れいとうポケモン!\lでんきと ひこうの でんげきポケモン!\lほのおと ひこうの かえんポケモンの\l3ひきを つかってくる らしいぜ!$"
+	.string "{JPN}ほんきの ピラミッドキングまで\nたどりついたら むねを はっていい！\pどんな あいてが でてきても\nきみの たんけんの しめくくりだ！$"
 
 BattleFrontier_Lounge2_Text_DoubleBattleAdvice1::
 	.string "{JPN}ダブルバトルが できる ばしょは\nいくつか あるけど やっぱり きほんは\lバトルタワーの ダブル バトルルーム!\pまずは ここから バトルフロンティアでの\nダブルバトルを まなんで いくと いいぜ!$"
@@ -207,14 +207,14 @@ BattleFrontier_Lounge2_Text_LinkMultiBattleAdvice::
 	.string "{JPN}ともだちが あつまったら\nつうしんマルチ バトルルーム!!\pつよい ともだちと いっしょに あそべば\nつよい トレーナーたち との\lたたかいが まってるぜ!$"
 
 BattleFrontier_Lounge2_Text_NewsGatheringPower::
-	.string "すっげえ じょうほうりょくー!!\nやっぱ センパイは ちがうっすよー$"
+	.string "{JPN}センパイの はなしを きくと\nみてない しあいまで うかぶッス！$"
 
 BattleFrontier_Lounge2_Text_AmazingPowersOfObservation::
-	.string "すっげえ かんさつりょくー!!\nやっぱ センパイは ちがうっすわー$"
+	.string "{JPN}きみも おなじ しあいを おぼえてる？\nやっぱり あの ばめんは よかったよなあ！$"
 
 BattleFrontier_Lounge2_Text_AmazingPowerOfPersuasion::
-	.string "すっげえ せっとくりょくー!!\nやっぱ センパイは ちがうっすねー$"
+	.string "{JPN}みんなで かんそうを いいあうと\nじょうほうも ふえるんスよね！$"
 
 BattleFrontier_Lounge2_Text_ThisPlaceIsScaringMe::
-	.string "なによ ここ……\nちょっと こわい……$"
+	.string "{JPN}あのひとたち はなしが ぴったりね。\nわたしが しらないことも みんな しってる。\pわたしも まぜてもらおうかしら！$"
 

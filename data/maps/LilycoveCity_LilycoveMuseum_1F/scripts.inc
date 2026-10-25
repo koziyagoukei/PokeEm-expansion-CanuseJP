@@ -159,7 +159,7 @@ LilycoveCity_LilycoveMuseum_1F_EventScript_FatMan::
 	end
 
 LilycoveCity_LilycoveMuseum_1F_Text_WelcomeToLilycoveMuseum:
-	.string "ミナモ びじゅつかん へ ようこそ!\pポケモンたちを えがいた\nすばらしい めいがの かずかずを\lゆっくり ごらんに なって くださいね!$"
+	.string "{JPN}ポケモンの びじゅつかんへ ようこそ！\nミナモゆかりの さくひんも ございます。\pしょうぶの あいまに\nごゆっくり ごらんくださいね。$"
 
 LilycoveCity_LilycoveMuseum_1F_Text_ImCuratorHaveYouViewedOurPaintings:
 	.string "わたしは この びじゅつかんの\nかんちょう です!\pあなたは おわかいのに びじゅつかんに\nいらっしゃる とは かんしん ですね!\pもう えは ごらんに なりましたか?$"
@@ -207,10 +207,10 @@ LilycoveCity_LilycoveMuseum_1F_Text_WorksOfMagnificence:
 	.string "{JPN}うーん すばらしい さくひんだ……$"
 
 LilycoveCity_LilycoveMuseum_1F_Text_MustntForgetLoveForFineArts:
-	.string "ポケモン しょうぶも いいけど\pげいじゅつを あいする きもちも\nわすれずに いないとね!$"
+	.string "{JPN}つよさも うつくしさも\nポケモンの すてきな ところだね！\pバトルの あとに えを みると\nまた ちがう ひょうじょうに きづくよ。$"
 
 LilycoveCity_LilycoveMuseum_1F_Text_ThisMuseumIsInspiration:
-	.string "この びじゅつかんは\nすごい えが たくさん みられるし\lかんちょうも すばらしい ひとだし\lぼくたち がかの あいだ でも\lあこがれの ばしょ なんだよ$"
+	.string "{JPN}えを みていると かいたひとの\nきもちまで うかんでくるんだ。\pぼくも こんな すてきな えを\nかいてみたいなあ！$"
 
 LilycoveCity_LilycoveMuseum_1F_Text_ThisLadyIsPretty:
 	.string "この おんなの ひと きれーい!\nママみたーい!$"
@@ -219,14 +219,14 @@ LilycoveCity_LilycoveMuseum_1F_Text_ThisPokemonIsAdorable:
 	.string "この ポケモン かわいいわ!\nうちの ぼうや みたい!$"
 
 LilycoveCity_LilycoveMuseum_1F_Text_HeardMuseumGotNewPaintings:
-	.string "この びじゅつかんに あたらしい えが\nはいったって きいたから\lさっそく みにきて みたの!\pあたらしい えは 2かい かな?$"
+	.string "{JPN}2かいには コンテストの ポケモンを\nかざれる てんじしつが あるのね。\pあたしも あの がくぶちに\nぴったりの えを みてみたいわ！$"
 
 LilycoveCity_LilycoveMuseum_1F_Text_CuratorHasBeenCheerful:
-	.string "さいきん かんちょうの ごきげんが\nとても いいみたい\pいいこと あったんだね きっと$"
+	.string "{JPN}かんちょうの うれしい きもちが\nここまで つたわってくるよ。\pどんな えが ふえるのか\nぼくも たのしみに なっちゃうな。$"
 
 LilycoveCity_LilycoveMuseum_1F_Text_AimToSeeGreatPaintings:
 	.string "ここで いい えを たくさん みて\nべんきょう しないとな!\pここに いつか じぶんの さくひんを\nかざって もらうのが ゆめ なんだ!$"
 
 LilycoveCity_LilycoveMuseum_1F_Text_MuseumTouristDestination:
-	.string "この びじゅつかんも すっかり ミナモの\n……いや ホウエンちほうの\lかんこう めいしょに なったねえ!\pきいた はなしだと\nひとりの トレーナーが 2かいの えを\lそろえて くれた らしいよ!$"
+	.string "{JPN}あるいて こられる ところに\nこんな びじゅつかんが あるなんてねえ。\pポケモンを みていたら\nまた しせつへ いきたくなったよ。$"
 

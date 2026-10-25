@@ -993,10 +993,10 @@ BattleFrontier_BattleTowerLobby_Text_ThatsHowYouFeel:
 	.string "へえ そんな きぶんに なるんだ!\nなかなか こせいてき だね……\pどうも ありがと!$"
 
 BattleFrontier_BattleTowerLobby_Text_WinsInRowRecorded:
-	.string "かちぬいた トレーナーの にんずうは\nきろく されて いるのよ!\pはずかしく ない たたかいを\nしなきゃ……!$"
+	.string "{JPN}かちぬいた きろくを\nのこして もらえるの。\pだれかと いっしょに よろこべると\n1しょうでも うれしいわね！$"
 
 BattleFrontier_BattleTowerLobby_Text_CanLeaveUntilLossOrSevenWins:
-	.string "いちど バトルタワーに はいれば\nとちゅうで まけちゃうか\l7にん かちぬくまでは\lでられなく なっちゃうんだ!\pかくごして チャレンジ しないとね!$"
+	.string "{JPN}タワーは 1しゅう 7せんだよ。\nもちものも わざも じゅんびしてからね！\pひとりでも ふたりでも\nすきな うけつけで ちょうせんできるよ。$"
 
 @ Unused
 BattleFrontier_BattleTowerLobby_Text_DoubleBattleRoomConstruction:

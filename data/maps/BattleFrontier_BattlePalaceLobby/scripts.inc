@@ -441,16 +441,16 @@ BattleFrontier_BattlePalaceLobby_Text_ReceivedPrize:
 	.string "{JPN}{PLAYER}は\n{STR_VAR_1}を もらった!$"
 
 BattleFrontier_BattlePalaceLobby_Text_LadyCanTellWhatMonsThink:
-	.string "ウス! ウス! がんばりやの わしには\nがんばりやの ポケモンが ぴったりっス!\pこうげき こそ さいだいの ぼうぎょ!\nガンガン せめまくって さいこうっス!\pところで きいて くださいッスよー\pときどき ここに とっても\nかわいい おじょうちゃんが\lあそびに くるッスけど\lそのこったら ポケモンの きもちが\lわかるとか いうんスよー\pいやー ほんと かわいいッスよねー……\p…… ん なんスか? そのめは?$"
+	.string "{JPN}ウス！ ここでは ポケモンの\nきもちに まかせるッス！\pいえなくても つたわるって\nなんだか うれしいッスよね！$"
 
 BattleFrontier_BattlePalaceLobby_Text_NatureAndMovesKeyHere:
-	.string "うーん……\pどうやら ここでは ポケモンの せいかくと\nおぼえさせている わざとの あいしょうが\lたたかいの カギを にぎってる ようだ\pそう…… もし きみの ポケモンが\nじぶんの ちからが はっき できなくて\lこまっている ようす だったら\lおぼえさせている わざから\lかんがえ なおす ひつようが あるかもな$"
+	.string "{JPN}ポケモンの せいかくと\nおぼえている わざを みなおしてるんだ。\pしじが なくても ちからを だせるように\nちょうせんの まえに じゅんびしよう。$"
 
 BattleFrontier_BattlePalaceLobby_Text_MonDocileButTransforms:
-	.string "あたしの ポケモン\nふだんは とーっても おとなしいのよ\pだけど バトルホールで たたかってると\nときどき めつきが\lガラッと かわっちゃうの!\pすっごい はくりょくで びっくりしちゃう!$"
+	.string "{JPN}おとなしいこでも いざというときは\nびっくりするほど たのもしいの！\pここで つかえるのは\nメガシンカと テラスタルなのね。$"
 
 BattleFrontier_BattlePalaceLobby_Text_WhatNatureFavorsChippingAway:
-	.string "あいてを よわらせたり……\nじわじわ せめて くれるのは\lどんな せいかくかな……\p…… いがいに のうてんき とか?\p…… まさかねぇ……$"
+	.string "{JPN}すぐに せめるこも\nじっくり たたかうこも いるんだね。\pみんな おなじ きもちでも\nせいかくは ちがう……おもしろいな。$"
 
 BattleFrontier_BattlePalaceLobby_Text_WelcomeForDoubleBattle:
 	.string "トレーナーの こころを ためす ばしょ\nバトルパレスへ ようこそ\pここでは ダブル バトルホールへの\nちょうせんを うけつけておる……$"

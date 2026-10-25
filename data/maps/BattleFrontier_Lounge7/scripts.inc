@@ -332,10 +332,10 @@ BattleFrontier_Lounge7_Text_RightTutorWelcomeBack:
 	.string "いひひひっ!\pあたしゃの\nはーど かつ ぷりてぃな わざを\lおそわりに きたんかー!?$"
 
 BattleFrontier_Lounge7_Text_ThinkLadiesDontGetAlong:
-	.string "あの ふたりって おたがいの\nわるぐち いい あってる から\lなかが わるいとか おもって ないか?\pでも ほんとに そう だったら いっしょに\nこんなところに いたり しないよな$"
+	.string "{JPN}あの ふたりは いいあいを しても\nいつも となりに いるだろ？\pことばが なくても わかるけど\nはなすのも すきなんだろうな。$"
 
 BattleFrontier_Lounge7_Text_LadiesWereStrongAndBeautiful:
-	.string "わたしが まだ たんぱんこぞう だったころ\nつよく うつくしい かのじょ たちは\lトレーナー みんなの アイドル でした\pいまも その わざの キレは\nおとろえる どころか\lますます みがきが かかっている ようです\pだが…… なぜか こう おもうのです……\pじかんと いうものは\nざんこくな もの ですね……$"
+	.string "{JPN}あのかたたちの わざの キレは\nいまも おとろえて いませんな。\pたんぱんこぞうだったころの わたしも\nここで みとれている きぶんです。$"
 
 BattleFrontier_Lounge7_Text_SoftboiledDesc::
 	.string "{JPN}キズついた からだを\nたいりょくの\nはんぶん かいふく$"

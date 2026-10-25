@@ -27,7 +27,7 @@ BattleFrontier_Lounge6_EventScript_TradeCompleted::
 	end
 
 BattleFrontier_Lounge6_Text_WouldYouLikeToTrade:
-	.string "{JPN}わたしの この ポケモン\n{STR_VAR_2}って いうんですよ しってます?\lなかなか かわいくて イイかんじ ですよー\pこのコ だったら わたし\nむねをはって こうかんに だせます!\pどうです?\nわたしの この {STR_VAR_2}\l{STR_VAR_1}と こうかん しません?$"
+	.string "{JPN}わたしの {STR_VAR_2}\nかわいいでしょう？\p{STR_VAR_1}と こうかんして\nあたらしい であいを つくりませんか？$"
 
 BattleFrontier_Lounge6_Text_PromiseIllBeGoodToIt:
 	.string "{JPN}わー かわいい ですねー……!\nどうも ありがとう\lたいせつに しますよ!\pあっ {STR_VAR_2}も\nよろしく おねがい します!$"
@@ -39,4 +39,4 @@ BattleFrontier_Lounge6_Text_WellThatsFineToo:
 	.string "あ やめますか!\nべつに いいですよ\lまた こんど きてくださいー$"
 
 BattleFrontier_Lounge6_Text_SkittySoMuchCuterThanImagined:
-	.string "うふふ!\nエネコが おもってたより ずっと\lかわいくて ほんと うれしいですー$"
+	.string "{JPN}この エネコと いると\nまえの トレーナーの たのしさまで\lつたわってくる きがします！$"

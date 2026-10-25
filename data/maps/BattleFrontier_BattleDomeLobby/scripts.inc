@@ -586,12 +586,7 @@ BattleFrontier_BattleDomeLobby_Text_PrevTourneyResultsDoublesLvOpen:
 	.string "$"
 
 BattleFrontier_BattleDomeLobby_Text_LastWinnerWasTough:
-	.string "きみは みた?\nぜんかいの バトルトーナメント!\pゆうしょう した\n{STR_VAR_1}は ほんと つよかったんだよ\pパソコンの よこに ある モニターで\nけっかを みてみると いいよ"
-	.string ""
-	.string ""
-	.string ""
-	.string ""
-	.string "$"
+	.string "{JPN}ぜんかいの ゆうしょうは\n{STR_VAR_1}だったんだ。\pモニターの きろくを みると\nそのときの はくしゅまで きこえるよ。$"
 
 BattleFrontier_OutsideWest_Text_LongDreamedAboutBattleFrontier:
 	.string "バトルフロンティア……\nわたしの ゆめ だった……"
@@ -608,25 +603,13 @@ BattleFrontier_OutsideWest_Text_QuestionMarkUnderConstruction:
 	.string "$"
 
 BattleFrontier_BattleDomeLobby_Text_WinnersGainReputation:
-	.string "バトルドームで れんぱを つづけていくと\nその うわさを ききつけて\lつよい トレーナーが あつまって くるの\pれんぱを つづけてこそ\nしんの スーパースター ね!"
-	.string ""
-	.string ""
-	.string ""
-	.string ""
-	.string ""
-	.string "$"
+	.string "{JPN}だれが かちあがってくるかな。\nトーナメントひょうを みるのが すき！\pきみの なまえも\nおぼえて おこうっと。$"
 
 BattleFrontier_BattleDomeLobby_Text_TrashedInFirstRound:
-	.string "1かいせんで いきなり\nゆうしょうこうほと あたっちゃって\lもう ボコボコに やられたよ……"
-	.string ""
-	.string "$"
+	.string "{JPN}1かいせんから つよい あいてだった！\nつぎこそ……って なんどめだろう。\pでも はじめの ドキドキは\nなんど あっても いいよね。$"
 
 BattleFrontier_BattleDomeLobby_Text_NeedToCheckOpponentCarefully:
-	.string "この ポケモンを ひかえに していれば\nかてたんだよなー\pしあいに だす ポケモン えらびは\nあいての ポケモンを よく みることが\lほんとうに たいせつだよ!"
-	.string ""
-	.string ""
-	.string ""
-	.string "$"
+	.string "{JPN}あいての ポケモンを みて\nこっちの 2ひきを きめるんだ。\pみんなの おすすめが うかんでも\nさいごは じぶんで えらびたいな。$"
 
 BattleFrontier_BattleDomeLobby_Text_CongratsDefeatedTucker:
 	.string "おめでとう ございます!\pみごと ドームスーパースターを たおし\nバトルトーナメントに\lゆうしょう されましたね!"

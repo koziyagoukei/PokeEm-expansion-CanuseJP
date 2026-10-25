@@ -210,13 +210,13 @@ BattleFrontier_ScottsHouse_EventScript_ScottFaceAwayWest::
 	return
 
 BattleFrontier_ScottsHouse_Text_WelcomeToBattleFrontier:
-	.string "エニシダ『ああ いらっしゃい\nへへ…… せまい ところで ごめんよ\pでは あらためて {PLAYER}{KUN}\nようこそ バトルフロンティアへ!\pここは わたしの ゆめの けっしょう!\nなんねんも かかって やっと\lかたちに することが できたんだ!$"
+	.string "{JPN}エニシダ『やあ いらっしゃい！\nすこし はなして いかないかい？\pここは みんなの ゆめが あつまった\nバトルフロンティアなんだ。$"
 
 BattleFrontier_ScottsHouse_Text_HowMuchEffortItTookToMakeReal:
-	.string "おもえば ながい みちのりだった……\nつよい トレーナーを もとめて\lただひとり たびだち……\lここまで くるのに どれだけの\lどりょくと じかんが ひつようだったか……$"
+	.string "{JPN}どんな しょうぶを したいか\nどんな ポケモンと あいたいか……\pみんなの ゆめを きいていると\nわたしも わくわくしてくるよ。$"
 
 BattleFrontier_ScottsHouse_Text_HaveThisAsMementoOfOurPathsCrossing:
-	.string "いや こんな むかしばなしを\nしていても はじまらないな!\pとにかく こころ ゆくまで\nポケモンしょうぶを たのしんで くれ!\pこれは わたしと {PLAYER}{KUN}が\nなんども たびさきで であった\lきねんだよ!$"
+	.string "{JPN}きみの はなしも きいてみたいな。\nどんな たびを してきたんだい？\p……おっと ひきとめて しまったね。\nこれは きょうの であいの きねんだよ！$"
 
 BattleFrontier_ScottsHouse_Text_ObtainedXBattlePoints:
 	.string "{PLAYER}は バトルポイントを\n{STR_VAR_1} BP もらった!$"
@@ -228,13 +228,13 @@ BattleFrontier_ScottsHouse_Text_ExpectingGreatThings:
 	.string "きみの かつやく\nおおいに きたい しているからね!$"
 
 BattleFrontier_ScottsHouse_Text_WhyIGoSeekingTrainers:
-	.string "エニシダ『どの トレーナーにも\nそれぞれの じんせいが あるだろ?\pでも たたかう ときは\nそんなこと ぜんぜん かんけいない\lみんな いっしょ なんだよね!\pわたしは そういう\nたたかいの じゅんすいさ ってのが\lとても すきなんだよ\pだから いろんな ところに でかけて\nしんけんに たたかってる トレーナーを\lいっぱい しょうたい してくるのさ!$"
+	.string "{JPN}エニシダ『みんなの たたかいたい\nきもちが ここに あつまっているんだ。\pきみは どんな しょうぶが すきかな？\nきみじしんの はなしを きかせてくれよ。$"
 
 BattleFrontier_ScottsHouse_Text_HaveYouMetFrontierBrain:
 	.string "エニシダ『わが ブレーンたち から\nフロンティアパスの シンボルは\lもう もらったかな?\pわたしが みいだした\nさいきょうの フロンティアブレーンも\lきみの つよさを みたら\lおそらく おどろく だろうね!$"
 
 BattleFrontier_ScottsHouse_Text_MayFindWildMonsInFrontier:
-	.string "エニシダ『きみは たしか\nしょうぶ だけでは なくて\lポケモンずかんも つくって いたね!\pもしかしたら バトルフロンティア にも\nポケモンと であえる ばしょが\lあるかも しれないよ? うふふ……$"
+	.string "{JPN}エニシダ『しょうぶの あいまには\nのんびり あるいてみると いいよ。\pみなみの まちには コンテストも\nびじゅつかんも あるからね！$"
 
 BattleFrontier_ScottsHouse_Text_YouveCollectedAllSilverSymbols:
 	.string "エニシダ『バトルフロンティアを\nたのしんで くれて いるかな?\p……って おおっっ!\pきみの フロンティアパスっ!\nぎんのシンボルが すべて\lそろって いるじゃ ないか!\pすごいなあ きみは おもったとおり\nつよい トレーナー だったんだなあ!\pふつうは こんな ことは しないんだが\nぜひ きねんに これを もらってくれ!\lきみなら つかいこなせる はずだよ……!$"
@@ -243,7 +243,7 @@ BattleFrontier_ScottsHouse_Text_YouveCollectedAllGoldSymbols:
 	.string "エニシダ『バトルフロンティアは\nまんきつ してるかな?\p……って うひょおおっっ!\pきみの フロンティアパスーっ!\nきんのシンボルが すべて\lそろって いるじゃ ないか!\pこれはすごいっ!\nやっぱり きみは おもったとおり\lすごい トレーナー だったんだなあ!\p…… …… ……\p{PLAYER}{KUN}! ぜひ きみに\nこれを プレゼント させて くれ!\pきみならば これの かちを\nわかって くれると おもうんだ!$"
 
 BattleFrontier_ScottsHouse_Text_SoGladIBroughtYouHere:
-	.string "いやー われながら\nトレーナーを みるめが さえてるなー\lきみを つれてきて ほんと よかった!\lほく ほく$"
+	.string "{JPN}きみが ここで たのしんでくれると\nわたしも うれしいよ！$"
 
 BattleFrontier_ScottsHouse_Text_BerryPocketStuffed:
 	.string "きのみポケットが いっぱい みたいね$"

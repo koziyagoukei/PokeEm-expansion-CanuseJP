@@ -375,21 +375,13 @@ BattleFrontier_BattlePikeLobby_Text_AwardYouTheseBattlePoints:
 	.string "$"
 
 BattleFrontier_BattlePikeLobby_Text_OneRoomAwayFromGoal:
-	.string "んんー! ちくしょー!!\nあと 1へやで ゴールだったのによー!\pおまえ! ここでは どくや こおりには\nちゅうい したほうが いいぞ!"
-	.string ""
-	.string ""
-	.string "$"
+	.string "{JPN}あと 1へやだったんだ！\nどくに そなえて おくべきだったな。\pまようのも ぼうけんの うちだ。\nつぎは どのみちに しようか！$"
 
 BattleFrontier_BattlePikeLobby_Text_NeverHadToBattleTrainer:
-	.string "あたし 10かいは クリアしたけど\nいっかいも トレーナーと\lたたかった こと ないんだよぅ!"
-	.string ""
-	.string "$"
+	.string "{JPN}こっちは へいきだったよ！\n……あれ？ それは だれの はなしだっけ。\pま いっか！\nこんどは みぎへ いってみる！$"
 
 BattleFrontier_BattlePikeLobby_Text_ThinkAbilitiesUsefulHere:
-	.string "ねえ! ねえ!\pここって ポケモンの とくせいが\nかつやく すると おもわない?"
-	.string ""
-	.string ""
-	.string "$"
+	.string "{JPN}どくや ねむりに つよい とくせいって\nここだと とっても たよりになるわ！\pどんな へやでも だいじょうぶな\nチームを つくりたいな。$"
 
 @ Unused
 BattleFrontier_BattlePikeLobby_Text_TrainersWhicheverPathIChoose:

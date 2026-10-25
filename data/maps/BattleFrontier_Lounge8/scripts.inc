@@ -14,11 +14,11 @@ BattleFrontier_Lounge8_EventScript_NinjaBoy::
 	end
 
 BattleFrontier_Lounge8_Text_WhatATrainerNeeds:
-	.string "トレーナーに ひつような もの……\pちしき…\nせんりゃく…\lうん…\lとうし…\lこころ…\lゆうき…\lそして さいのう か……\pぼく ぜんぶ バッチリ じゃん!\nどこの しせつでも らくしょー だね\pえっ? ポケモン? なんのことだい?$"
+	.string "{JPN}ちしきも せんりゃくも ゆうきも！\nみんなの ぶんまで あるきがするぞ！\p……ポケモンの じゅんび？\nあっ それを わすれてた！$"
 
 BattleFrontier_Lounge8_Text_KnowAboutFrontierBrains:
-	.string "フロンティアブレーンって しってる?\pバトルフロンティアに ある\n7つの しせつを かんりする\lとくべつな トレーナーたちの ことを\lエニシダは そうよんでる らしいわ$"
+	.string "{JPN}7つの しせつには それぞれ\nフロンティアブレーンが いるの。\pつよいだけじゃなくて\nみんな ちがう かがやきが……\p……あったのよ。 きっと いまも！$"
 
 BattleFrontier_Lounge8_Text_ToldMeIHaveTalentForBattling:
-	.string "ぼく バトルタワーで おねえちゃんに\nたたかいの さいのうが あるねって\lすごく ほめられたのー!\pでも ぼく ポケモン コンテストの\nほーが すき なの!\pでも ポケモン コンテストは\nぜんぜん だめだよ!\pさいのうって すきとは ちがうの?$"
+	.string "{JPN}バトルを ほめられたけど\nぼくは コンテストも すき！\pみなみに かいじょうが あるから\nどっちも いけるんだ！$"
 

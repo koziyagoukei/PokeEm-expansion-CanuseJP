@@ -5,7 +5,12 @@ BattleFrontier_ReceptionGate_MapScripts::
 
 BattleFrontier_ReceptionGate_OnTransition:
 	setflag FLAG_LANDMARK_BATTLE_FRONTIER
+	call_if_set FLAG_SYS_FRONTIER_PASS, BattleFrontier_ReceptionGate_AlreadyRegistered
 	end
+
+BattleFrontier_ReceptionGate_AlreadyRegistered:
+	setvar VAR_HAS_ENTERED_BATTLE_FRONTIER, 1
+	return
 
 BattleFrontier_ReceptionGate_OnFrame:
 	map_script_2 VAR_HAS_ENTERED_BATTLE_FRONTIER, 0, BattleFrontier_ReceptionGate_EventScript_FirstTimeEntering
@@ -303,8 +308,7 @@ BattleFrontier_ReceptionGate_Text_FirstTimeHereThisWay:
 	.string "はじめての おきゃくさまですね!\nこちらへ どうぞ!$"
 
 BattleFrontier_ReceptionGate_Text_WelcomeToBattleFrontier:
-	.string "ポケモンバトルの さいぜんせん！\n"
-	.string "バトルフロンティアへ ようこそ！$"
+	.string "{JPN}ポケモンしょうぶの さいぜんせん！\nバトルフロンティアへ ようこそ！$"
 
 BattleFrontier_ReceptionGate_Text_IssueFrontierPass:
 	.string "はじめての おきゃくさまには\nバトルフロンティアの なかで\lごりよう いただける フロンティアパスを\lはっこうして おります!\pどうぞ おうけとり ください!$"
@@ -316,7 +320,7 @@ BattleFrontier_ReceptionGate_Text_PlacedTrainerCardInFrontierPass:
 	.string "{PLAYER}は トレーナーカードを\nフロンティアパスに いれかえた!$"
 
 BattleFrontier_ReceptionGate_Text_EnjoyBattleFrontier:
-	.string "それでは バトルフロンティアを\nぞんぶんに おたのしみ ください!$"
+	.string "{JPN}どの しせつからでも おたのしみください。\nみなみの まちには じゅんびの ハブも\lコンテストかいじょうも ございます！$"
 
 BattleFrontier_ReceptionGate_Text_IfItIsntPlayerYouCame:
 	.string "???『やあ きて くれたんだね\n{PLAYER}{KUN}!$"
@@ -328,7 +332,7 @@ BattleFrontier_ReceptionGate_Text_ScottGreatToSeeYouHere:
 	.string "エニシダ『きみが きてくれて\nとっても うれしいよ!\pぜひ ゆっくりと そして じっくりと\nポケモンしょうぶの しんずいを\lあじわって いって くれ!\pわたしの へやも あるから\nひまが あるときに たずねて きてくれよ!$"
 
 BattleFrontier_ReceptionGate_Text_YourGuideToFacilities:
-	.string "こちらでは バトルフロンティアに ある\nさまざまな しせつの\lごあんないを いたします!$"
+	.string "{JPN}7つの しせつと せつびを ごあんないします。\nみなみの まちへは とほで どうぞ！$"
 
 BattleFrontier_ReceptionGate_Text_LearnAboutWhich2:
 	.string "どの せつめいが ききたいですか?$"
@@ -370,7 +374,7 @@ BattleFrontier_ReceptionGate_Text_LevelModeInfo:
 	.string "バトルフロンティアに ある\nすべての しせつの ちょうせんは\lおおきく レベル50の コースと\lオープンレベルの コースに わかれています$"
 
 BattleFrontier_ReceptionGate_Text_Level50Info:
-	.string "レベル50の コースでは なまえの とおり\nレベル50までの ポケモンを\lちょうせん させることが できます\pただし レベル50より ひくい レベルの\nポケモンを つれた トレーナーが\lとうじょう することは ありません\lくれぐれも ごちゅうい ください\pなお このコースが バトルフロンティアの\nたたかいの きほんと なって いますので\lぜひ チャレンジして みてください$"
+	.string "{JPN}レベル50の コースでは\nたかい レベルの ポケモンも\lレベル50に あわせて ちょうせんできます。\pちょうせんが おわれば\nもとの レベルに もどります。$"
 
 BattleFrontier_ReceptionGate_Text_OpenLevelInfo:
 	.string "オープンレベルの コースでは\nちょうせんに さんかする ポケモンの\lレベルに せいげんが ありません\pあなたの ポケモンの レベルに あわせて\nたいせんする トレーナーの ポケモンの\lレベルが かわります\pただし レベル60より ひくい レベルの\nポケモンを つれた トレーナーが\lとうじょう することは ありません$"
@@ -391,7 +395,7 @@ BattleFrontier_ReceptionGate_Text_SymbolsInfo:
 	.string "バトルフロンティアの 7つの しせつで\nつよさを みとめられた トレーナーが\lそれぞれの しせつの シンボルを\lもらえることが あります\pシンボルを もらう ためには\nなんにんも トレーナーを かちぬいたり\lなんども せいは したり……\pなかなか たいへんな みちのりですが\nぜひ がんばって くださいね!$"
 
 BattleFrontier_ReceptionGate_Text_RecordedBattleInfo:
-	.string "あなたの たいせんを ひとつだけ\nパスに きろくする ことが できます\pおともだち との たいせんか\nバトルチューブ バトルピラミッド いがいの\lバトルフロンティアでの\lたいせんが きろくできます\pたいせんが おわった ときに\nきろく するか どうかを きめられます$"
+	.string "{JPN}たいせんの あとで バトルビデオを\n1つ きろくすることが できます。\pしせつへ ちょうせんしている あいだは\nビデオを さいせいできません。$"
 
 BattleFrontier_ReceptionGate_Text_BattlePointsInfo:
-	.string "バトルポイントは\nバトルフロンティアで すばらしい\lたたかいを した トレーナーに\lあたえられる ごほうびです\pためた ポイントは ひきかえサービスで\nしょうひんと ひきかえることが できます$"
+	.string "{JPN}バトルポイントは しせつでの かつやくや\nコンテストの ゆうしょうで えられます。\pけいひんや べっそうの ショップなど\nすきなことに おつかいください！$"

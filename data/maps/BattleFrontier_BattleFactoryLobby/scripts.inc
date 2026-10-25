@@ -469,21 +469,10 @@ BattleFrontier_BattleFactoryLobby_Text_RecordLastMatch:
 	.string "$"
 
 BattleFrontier_BattleFactoryLobby_Text_NeedKnowledgeOfMonsMoves:
-	.string "ちょっと! キミ!\pポケモンを そだてなくても\nちょうせん できる から らくしょうー!\pとか おもってない?\pここは ポケモンと そのわざに\nかんする ちしきが ないと\lかちぬけない ひじょうに きびしー\lところ なのよ!!"
-	.string ""
-	.string ""
-	.string ""
-	.string ""
-	.string ""
-	.string ""
-	.string ""
-	.string ""
-	.string "$"
+	.string "{JPN}レンタルの ポケモンにも\nいろんな わざや とくせいが あるわ。\pつよそうな すがた だけじゃなくて\nそのこの とくいなことを みてあげて！$"
 
 BattleFrontier_BattleFactoryLobby_Text_SwappedForWeakMon:
-	.string "しゅるいに だまされて よわいポケモンと\nこうかん しちゃった……\pボロまけ……"
-	.string ""
-	.string "$"
+	.string "{JPN}こうかんしたら チームの\nくみあわせが くずれちゃった。\pよわいこ だったんじゃ ないね。\nぼくが うまく あわせられなかったんだ。$"
 
 BattleFrontier_BattleFactoryLobby_Text_NeedToCheckOpponentsMons:
 	.string "ダメダメねー!\pトレーナーが いいポケモン もってたら\nたたかいの あいだに\lチェック しとかなきゃ!"
@@ -493,10 +482,7 @@ BattleFrontier_BattleFactoryLobby_Text_NeedToCheckOpponentsMons:
 	.string "$"
 
 BattleFrontier_BattleFactoryLobby_Text_CantFigureOutStaffHints:
-	.string "ここの スタッフさぁ たたかいの まえに\nつぎに たたかう トレーナーのこと\lちょっとだけ おしえて くれるだろー?\pでも オレ いい おとな なのに\nあいつらの せつめいの いみが\lぜんぜん わからないんだ よう"
-	.string ""
-	.string ""
-	.string "$"
+	.string "{JPN}つぎの あいての ヒントを\nスタッフが おしえてくれるんだ。\pわからない ことは もちかえって\nハブで じゅんびしなおすのも いいな。$"
 
 @ Unused
 BattleFrontier_BattleFactoryLobby_Text_RentalMonsAreVaried:

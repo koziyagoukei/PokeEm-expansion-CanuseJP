@@ -101,7 +101,7 @@ BattleFrontier_RankingHall_EventScript_Boy::
 	end
 
 BattleFrontier_RankingHall_Text_ExplainRankingHall:
-	.string "ここは ランキングホール\pバトルフロンティアに ちょうせん した\nトレーナーたちの いだいな きろくを\lたたえる ばしょ です$"
+	.string "{JPN}ここは ランキングホール。\nトレーナーたちの きろくを\lたたえる ばしょです。\pあなたの あゆみも\nここに きざまれると いいですね。$"
 
 BattleFrontier_RankingHall_Text_DomePikeFactoryRecords:
 	.string "バトルドーム バトルチューブ\nバトルファクトリー の きろくは こちら$"
@@ -119,4 +119,4 @@ BattleFrontier_RankingHall_Text_WorkHarderIfYouSawFriendsName:
 	.string "そうなんだ…\pでも ともだちの なまえを ここで みると\nがんばろうって きもちに なるよね!$"
 
 BattleFrontier_RankingHall_Text_MyNamesNotUpThere:
-	.string "うーん ぼくの なまえ\nのって ないなあ……\pまだ どこにも ちょうせん してないから\nあたりまえか……$"
+	.string "{JPN}みんなの きろくは あるけど\nぼくの なまえは まだ ないね。\pまず 1かい ちょうせんしてみよう。\nぼくの きろくを つくるんだ！$"

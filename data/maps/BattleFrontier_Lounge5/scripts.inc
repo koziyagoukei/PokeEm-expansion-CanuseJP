@@ -42,10 +42,10 @@ BattleFrontier_Lounge5_EventScript_LittleBoy::
 	end
 
 BattleFrontier_Lounge5_Text_NatureGirlGreeting::
-	.string "へへ! あたち ポケモンの\nきもち わかるの!\pね! ポケモン みちて! みちて!$"
+	.string "{JPN}ねえ ポケモン みせて！\nあたち このこの きもち きいてみたい！$"
 
 BattleFrontier_Lounge5_Text_NatureGirlNoneShown::
-	.string "ぷー! けち!!$"
+	.string "{JPN}そっかあ。 また こんどね！$"
 
 BattleFrontier_Lounge5_Text_NatureGirlAttackHighAttackLow::
 	.string "{JPN}ふんふん……\pこのこ たたかうの ちゅき! って!\nいっぱい いたいいたい でも\lたたかうよ! って!$"
@@ -78,11 +78,11 @@ BattleFrontier_Lounge5_Text_NatureGirlEgg::
 	.string "たまごは ねんね してる から\nおはなち できない よぉ!$"
 
 BattleFrontier_Lounge5_Text_LadyClaimsSheUnderstandsPokemon::
-	.string "ポケモンの きもちが わかるとは\nあの おじょうちゃん なかなか\lシャレた ことを もうしますな!$"
+	.string "{JPN}あのこは ポケモンの きもちを\nそのまま ことばに できるそうですな。\pどんな ふうに きこえるのでしょうね。$"
 
 BattleFrontier_Lounge5_Text_GirlSayingSomethingProfound::
-	.string "じぶん あのこが すごく だいじなことを\nいっている きが するで あります!$"
+	.string "{JPN}じぶんも ポケモンの きもちを\nよく ききたいで あります！\pわかった つもりでも\nあらためて きくのは たいせつです！$"
 
 BattleFrontier_Lounge5_Text_GirlPlaysAtRedHouseALot::
-	.string "ぼく ちってるぜ!\pあのこ あかい おうちで\nよく あそんでる!$"
+	.string "{JPN}あのこ パレスにも あそびに いくんだ！\nぼくも いっしょに ついていこうかな。$"
 

@@ -384,19 +384,19 @@ BattleFrontier_ExchangeServiceCorner_Text_ThankYouVisitWithPoints:
 	.string "また おこしください$"
 
 BattleFrontier_ExchangeServiceCorner_Text_WishIHadAllDolls:
-	.string "いいなぁー ほしいなぁー\nかわいい クッションー\lおおきい ぬいぐるみー\lちいさい ぬいぐるみー\lみんな みんな ほっしい なぁー$"
+	.string "{JPN}ドールも クッションも ほしいなあ。\nならべる じゅんばんまで かんがえちゃう！\pあら？ この へやの おもいでは\nとなりの この へや だったかしら。$"
 
 BattleFrontier_ExchangeServiceCorner_Text_GetYouAnythingYouWant:
 	.string "まかせといてって!\pあんたの ほしいもん だったら\nなんでも とって きたるよ!!$"
 
 BattleFrontier_ExchangeServiceCorner_Text_ItemsWillGetMonTougher:
-	.string "ここの どうぐが あれば\nおれの ポケモンも\lもっと つよくなる! ん! まちがいない!$"
+	.string "{JPN}つぎの もちものを えらんでるんだ。\nわざとの あいしょうが だいじだからな。\pあれも これも ためしたくなる！$"
 
 BattleFrontier_ExchangeServiceCorner_Text_GoGetYourOwnDoll:
-	.string "あーっ!? なんだぁーっ?\pなーに おれの ぬいぐるみ みてんだっ!\nほしければ じぶんで てにいれろよっ!\pねっ ねっ ムチュール ちゃん!$"
+	.string "{JPN}この ムチュールの ぬいぐるみ\nかわいいだろう！\pべっそうにも かぐの みせが あるって？\nううっ BPが いくらあっても たりない！$"
 
 BattleFrontier_ExchangeServiceCorner_Text_MoreBattlePointsForRecord:
-	.string "しってる?\pどこの しせつでも そうだけど\nきろくを のばしていくと\lもらえる バトルポイントって\lだんだん ふえて いくんだよ!$"
+	.string "{JPN}バトルで ためた BPで\nじゅんびを ととのえるんだ！\pみなみの コンテストでも\nゆうしょうすると BPが もらえるよ。$"
 
 BattleFrontier_ExchangeServiceCorner_Text_KissPosterDesc::
 	.string "{JPN}ムチュールが プリント されている\nおおきなポスター$"

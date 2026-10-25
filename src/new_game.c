@@ -51,6 +51,7 @@
 #include "union_room_chat.h"
 #include "constants/map_groups.h"
 #include "constants/items.h"
+#include "constants/vars.h"
 #include "difficulty.h"
 #include "follower_npc.h"
 
@@ -139,7 +140,7 @@ static void WarpToTruck(void)
     if (IS_FRLG)
         SetWarpDestination(MAP_GROUP(MAP_PALLET_TOWN_PLAYERS_HOUSE_2F), MAP_NUM(MAP_PALLET_TOWN_PLAYERS_HOUSE_2F), WARP_ID_NONE, 6, 6);
     else
-        SetWarpDestination(MAP_GROUP(MAP_INSIDE_OF_TRUCK), MAP_NUM(MAP_INSIDE_OF_TRUCK), WARP_ID_NONE, -1, -1);
+        SetWarpDestination(MAP_GROUP(MAP_ULTRA_FRONTIE_HUB), MAP_NUM(MAP_ULTRA_FRONTIE_HUB), WARP_ID_NONE, 13, 19);
     WarpIntoMap();
 }
 
@@ -251,6 +252,11 @@ void NewGameInitData(void)
     ResetDexNav();
     ClearFollowerNPCData();
     SetExpansionTestFlags();
+    if (!IS_FRLG)
+    {
+        VarSet(VAR_FRONTIER_INTRO_STATE, FRONTIER_INTRO_ARRIVAL);
+        VarSet(VAR_HAS_ENTERED_BATTLE_FRONTIER, 1);
+    }
 }
 
 static void ResetMiniGamesRecords(void)

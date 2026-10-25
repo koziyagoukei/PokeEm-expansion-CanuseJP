@@ -40,6 +40,7 @@
 #include "title_screen.h"
 #include "window.h"
 #include "mystery_gift_menu.h"
+#include "frontier_intro.h"
 
 /*
  * Main menu state machine
@@ -1298,6 +1299,13 @@ static void HighlightSelectedMainMenuItem(enum PartyMenuType menuType, u8 select
 
 static void Task_NewGameBirchSpeech_Init(u8 taskId)
 {
+    if (!IS_FRLG)
+    {
+        DestroyTask(taskId);
+        FreeAllWindowBuffers();
+        SetMainCallback2(CB2_FrontierIntro);
+        return;
+    }
     SetGpuReg(REG_OFFSET_DISPCNT, 0);
     SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_OBJ_ON | DISPCNT_OBJ_1D_MAP);
     InitBgFromTemplate(&sBirchBgTemplate);

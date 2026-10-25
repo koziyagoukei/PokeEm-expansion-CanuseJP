@@ -209,8 +209,8 @@ BattleFrontier_Lounge1_Text_EvenICantTell:
 	.string "さすがの わしも まだ うまれても いない\nポケモンの ことは わからんぞっ!\pポケモンを みせんか! ポケモンを!$"
 
 BattleFrontier_Lounge1_Text_SaidMyMonIsOutstanding:
-	.string "ぼくの ポケモン すばらしいって!\nだいじに そだてて きてよかった!$"
+	.string "{JPN}ポケモンを ほめてもらったよ！\nこのこと いっしょに あるいた みちまで\lなんだか ほめられた きぶんだ！$"
 
 BattleFrontier_Lounge1_Text_DidntDoAnythingSpecialRaisingIt:
-	.string "ぼくの ポケモン すばらしいって!\nべつに ふつうに そだてたん だけどな……$"
+	.string "{JPN}ぼくの ポケモンも ほめられた！\nとなりの こが うれしいと\lぼくも うれしくなるんだ。$"
 

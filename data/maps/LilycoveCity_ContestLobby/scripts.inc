@@ -1105,19 +1105,19 @@ LilycoveCity_ContestLobby_Text_FineThatsTheWayItIs:
 	.string "そっか しかたないね\nそれじゃ これは ぼくの\lいえに かざります\pつぎ がんばると するか……\nじゃあな$"
 
 LilycoveCity_ContestLobby_Text_MasterRankHereICome:
-	.string "いっ いよいよ\nマスターランクに でるぞ……\pおれの ポケモンちゃんが\nこのよで いちばん\lかわいいって ことを\lしょうめいする ときが きたんだ……\lうへへへへ$"
+	.string "{JPN}いよいよ マスターランクだ……！\nおれの ポケモンちゃんの かわいさを\lみんなに みてもらうんだ！\pわくわくも ドキドキも\nみんなに つたわると いいな！$"
 
 LilycoveCity_ContestLobby_Text_WholeVarietyOfPokemonHere:
-	.string "ここに くれば\nポケモンを たくさん みられるから\lさんぽコースに してるの!$"
+	.string "{JPN}コンテストを みて びじゅつかんへ。\nそれから リゾートで ひとやすみ。\pまいにちの おさんぽコースなの！$"
 
 LilycoveCity_ContestLobby_Text_ContestFeastForEyes:
-	.string "いやあ コンテストかいじょうに くると\nかきがいの ある ポケモンが\lいっぱい だね!$"
+	.string "{JPN}ここの ポケモンは みんな\nかいてみたくなる ひょうじょうを するよ。\pおなじ ステージでも\nおなじ えには ならないんだ！$"
 
 LilycoveCity_ContestLobby_Text_ToughContestIsExtreme:
-	.string "たくましさコンテストって\nさいこう だよな!\pちからづよい アピール……\nほとばしる あせ…… たまらん!$"
+	.string "{JPN}たくましさコンテストは さいこうだ！\nへんしんの はくりょくも みどころだぜ！\pでも ギミックは ここぞというとき。\nわざの つながりも だいじだからな！$"
 
 LilycoveCity_ContestLobby_Text_LavishedCareOnMon:
 	.string "まいにち だいじに だいじに\nそだてあげた わしの ポケモン\lコンディションは カンペキ!\lきょうは かつぞおおおおおうう!$"
 
 LilycoveCity_ContestLobby_Text_MadePokeblocksWithFamily:
-	.string "ママと パパと おねえちゃんと\n4にんで ポロックを つくったら\lすごく いいやつが できたんだ!\pきっと おおぜいで つくれば つくるほど\nなめらかで いい ポロックが できるんだよ!$"
+	.string "{JPN}かぞく みんなで ポロックを つくったよ！\nみんなの すきな あじを いれたんだ。\pぼくの すきな あじも いっしょ。\nだって みんな すきなんだもん！$"

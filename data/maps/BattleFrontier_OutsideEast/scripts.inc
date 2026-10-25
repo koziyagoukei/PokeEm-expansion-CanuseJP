@@ -249,79 +249,79 @@ BattleFrontier_OutsideEast_Text_ExchangeCornerSign:
 	.string "バトルポイント ひきかえサービス コーナー\nひきかえろ! キミの バトルポイント!$"
 
 BattleFrontier_OutsideEast_Text_BattleTowerFeelsSpecial:
-	.string "うっひゃー でかい!\pやはり バトルタワーは\nとくべつ って かんじが するな$"
+	.string "{JPN}うっひゃー でかい！\nこの タワー なんど みても ドキドキする！$"
 
 BattleFrontier_OutsideEast_Text_ConquerLeagueAndFrontier:
-	.string "わたしの やぼうは\nバトルフロンティア そして ポケモンリーグ\lすべての ちょうてんに たつ ことだ!\pそして もし それが かなったら!\pとっ となりの いえの ミミちゃんに\nおともだちに なって くださいって いうぞ!$"
+	.string "{JPN}わたしの やぼうは\nフロンティアの ちょうてんに たつことだ！\pそれから ミミちゃんと ともだちに……\n……そうだ もう ともだちだったな！$"
 
 BattleFrontier_OutsideEast_Text_PyramidTooHarsh:
-	.string "バトルピラミッドは むずかし すぎて\nどうしても ちょうじょうに まで いけん!\pしかたが ないから いっそのこと\nそとがわを のぼって やろうかしら$"
+	.string "{JPN}ピラミッドで まいごに なったんだ！\nでも もどってくると また のぼりたくなる。\pまわりから のぼるのは やめとくか。\nちゃんと なかを たんけんしたいもんな！$"
 
 BattleFrontier_OutsideEast_Text_ThriveInDarkness:
-	.string "くらやみが だいすきな わたし……\nそう…… わたしに ふさわしい のは……\lやはり この バトルピラミッド……\pネ…… あなたも くらやみの なかを\nひっしに さまよって みない……?$"
+	.string "{JPN}くらいところにも\nひかる どうぐや でぐちが あるの。\pだれかの みつけた ひかりを\nわたしも おぼえているのよ。$"
 
 BattleFrontier_OutsideEast_Text_PutTogetherUltimateTeam:
-	.string "いっしゅうかん ねないで かんがえた\nオレの さいきょう チーム……\lまけるきが しねえぜ!\pぃよーし アリーナに なぐりこみだー!$"
+	.string "{JPN}さいきょうの チームを かんがえたぜ！\nあれ？ となりの やつも おなじ かおだ！\pよーし どっちが つよいか\nアリーナで ためそうぜ！$"
 
 BattleFrontier_OutsideEast_Text_DidScottBringYouHere:
-	.string "あんたも エニシダさんに\nつれて こられたの?\lあのひと なんなんだろうね\pつよい トレーナーを みぬく めは\nたしからしい けど……\lほんにんが たたかって いる ところは\lいちども みたことが ないんだよなあ$"
+	.string "{JPN}きみ ここは はじめて？\nそれなら まだ しらない はなしを\lたくさん きかせてくれそうだ！$"
 
 BattleFrontier_OutsideEast_Text_BelieveInYouBuddy:
-	.string "ジグちゃん! しんじてるからね!\pかったら ジグちゃんの すきな おやつ\nなーんでも つくって あげるからね!$"
+	.string "{JPN}ジグちゃん！ しょうぶの あとは\nいっしょに おやつに しようね！$"
 
 BattleFrontier_OutsideEast_Text_ZigzagoonLooksVacant:
-	.string "ジグザグマは ぼんやり してる……$"
+	.string "{JPN}ジグザグマは のんびりしている。\nだれかの おやつの じかんを\lまっているようだ。$"
 
 BattleFrontier_OutsideEast_Text_PeopleCallMeBusybody:
-	.string "お おれは でしゃばり だ!\nオイあんた! ぼうしが ずれてるぜ!\lおっと じめんに ゴミが おちてる!\lああっと! もうすぐ ごはんだぜ!\p…… ……バトルパレスで\nしょうぶを ただ みまもる だけなんて\lおれに できるだろーか……?$"
+	.string "{JPN}ぼうし よし！ もちもの よし！\n……あっ それ きみの じゅんびだった！\pパレスでは ポケモンに まかせるんだよな。\nおれも おちついて みまもるぞ！$"
 
 BattleFrontier_OutsideEast_Text_OnceBeatGymLeader:
-	.string "こう みえても むかしは\nジムリーダーに かった ことも あるのよ\pもう ひとはな さかせて みようかしらねぇ$"
+	.string "{JPN}むかしの しょうぶの きもちが\nいまでも はっきり うかぶのよ。\pまた ひとはな さかせてみようかしら。\nあなたも がんばってね！$"
 
 BattleFrontier_OutsideEast_Text_FastOnBikeAndBattles:
-	.string "じてんしゃも はやいけど\nポケモン だって じしんあるわ!\lめにも とまらぬ はやさで かっちゃうわよ!$"
+	.string "{JPN}はやさには じしんが あるわ！\nじてんしゃも ポケモンもね。\pでも ときどき はなの まえで\nとまってみるのも いいものよ。$"
 
 BattleFrontier_OutsideEast_Text_BetterThanDaddyAtPokemon:
-	.string "わたしのほうがねえー パパより\nポケモン つよいんだよ!$"
+	.string "{JPN}パパより わたしのほうが つよいよ！\nパパの さくせんも わかっちゃうもん！$"
 
 BattleFrontier_OutsideEast_Text_GoRackUpSomeWinsForDaddy:
-	.string "むすめよ!\nがんばって かちぬいて こい!\lおまえは ママ そっくり だから つよいぞ!$"
+	.string "{JPN}ははは！ パパの さくせんが\nつたわってたら そりゃ てごわいな！\pいっしょに たのしんで おいで！$"
 
 BattleFrontier_OutsideEast_Text_HeardPrettyGirlAtBattleArena:
-	.string "バトルアリーナに めちゃくちゃ\nぷりてぃーな こが いるって きいたから\lここまで がんばって きたのにーっ!\pあせくさーくて あつくるしーい\nかくとうか ばっかり だったよ!$"
+	.string "{JPN}アリーナは おうえんまで あついんだ！\nつい こっちも こえが でちゃう！\pきみは どんな チームで いくの？$"
 
 BattleFrontier_OutsideEast_Text_SometimesImportantOldManInThere:
-	.string "ときどきねー ここの たてものに\nすっごく つよそーな ポケモン つれて\lすっごく えらそー だけど\lけっこー やさしそーな\lじーちゃんが はいってくのよ!$"
+	.string "{JPN}パレスの おじいさんは\nポケモンと ゆっくり はなしてるの。\pなにを いってるか わからなくても\nたのしいって きもちは わかるわ！$"
 
 BattleFrontier_OutsideEast_Text_LegendOfBattlePyramid:
-	.string "きみは しって いるか!?\nバトルピラミッドの でんせつを!!\pみなぎる ゆうきを もつ トレーナー\nきんじとうの いただきを めざすとき\lおとこの なかの おとこ あらわれる\p……どうだ? しらないだろー!\nだって これ さっき おれが\lかんがえたんだ もんな!\pなに? どういう いみ かって?\nチッチッ!! それは おしえられないな!$"
+	.string "{JPN}きいたか！ ピラミッドの でんせつを！\nゆうきある ものが いただきへ……\p……その さきは まだ かんがえてない！\nきみが のぼったら きかせてくれよ！$"
 
 BattleFrontier_OutsideEast_Text_GotWipedOut:
-	.string "くそーっ!\pいままで だれにも いちども\nまけたこと なかった この ぼくが\lても あしも でない うえに\lさいのうが ない だと!?\pくそーっ! くそーっ! くそーっ!$"
+	.string "{JPN}あんなに つよい あいてが いたなんて！\nまだ あたまの なかが いっぱいだ！\pどう たたかったのか みんなで\nなんども おもいかえしてるんだよ。$"
 
 BattleFrontier_OutsideEast_Text_ToughTrainerInBattleTower:
-	.string "このひと バトルタワーに\nちょうせん している ときに\lおそろしく つよい トレーナーと\lたたかった みたい なの……\pあなたも バトルタワーに\nちょうせんする ときは ちゅういして……$"
+	.string "{JPN}このひと つよい トレーナーに\nあってから ずっと この ちょうしなの。\pとなりに いると わたしまで\nその しあいを みたような きぶんよ。$"
 
 BattleFrontier_OutsideEast_Text_EnoughBattlePointsForDoll:
-	.string "さて! バトルポイントも たまったし!\nまた おおきな ぬいぐるみ でも\lもらいに いこーっと!$"
+	.string "{JPN}BPが たまったわ！\nこんどは べっそうの みせで\lドールを えらんでみようかしら！$"
 
 BattleFrontier_OutsideEast_Text_LikeToHaveNameRecordedHere:
-	.string "おほほほーいっ!\nここが ランキングホール っスねー!\pわしも ここに なを のこす ような\nえいこうの スーパー チャンプに\lはやく なりたい っスよ!$"
+	.string "{JPN}ここが ランキングホールっスね！\nじぶんの なまえが のると いいなあ！$"
 
 BattleFrontier_OutsideEast_Text_CanDoAnythingWithYou:
-	.string "もし きみが そばに いてくれたら\nぼくは なんだって できるのさ……$"
+	.string "{JPN}きみの たのしい きもちが\nそのまま ぼくの たのしさに なるんだ。\pいっしょに マルチへ いこうよ。$"
 
 BattleFrontier_OutsideEast_Text_PowerOfOurLoveWillOvercome:
-	.string "ぁあん やっぱ ダーリンは ス テ キ!\p…… ……あー!\nもー! わたし たまんないっ!!\pいますぐ ふたりで マルチ バトルルームに\nとつげき しましょうよーっ!!\pバトルサロンで いっしょに なったら\nふたりの ラブパワーで\lどいつも こいつも ギタギタよ!\lねぇー ダーリン!!$"
+	.string "{JPN}そうね！ おなじ きもちで\nいっしょに たたかいましょ！\pきょうも あしたも\nふたりで ここに いたいわね！$"
 
 BattleFrontier_OutsideEast_Text_FrontierNotExclusivelyForToughTrainers:
-	.string "バトルフロンティアには\nつよい トレーナーだけでは なく\lかわった ちからを もった ひとたちも\lまねかれて いるな……\p……エニシダと いう おとこ……\pじつは なにか おおきな もくてきが\nあって ここを つくったのかも しれないぞ$"
+	.string "{JPN}つよさを ためすのも\nただ はなしに くるのも よいものだ。\pみなみには えや コンテストも ある。\nすきな ばしょを さがして ごらん。$"
 
 BattleFrontier_OutsideEast_Text_OddTreeHereSeemsToWiggle:
-	.string "もしもし あんたさんは\nめは いいほう ですかい?\pあたしには このさきの きが ときどき\nぷるぷる してる ように みえるんですわ…$"
+	.string "{JPN}あの きが ゆれるのを みると\nなんだか わしまで むずむずするんじゃ。\pおまえさんも ちょいと\nみていって おくれ。$"
 
 BattleFrontier_OutsideEast_Text_OnceAnOddTreePastHere:
-	.string "もしもし あんたさんは\nものおぼえは いいほう ですかい?\pあたしには このさきに へんな きが\nあった ような きが するんですわ…$"
+	.string "{JPN}あそこに へんな きが あったじゃろ。\nいまも そこに いる きぶんになるのう。\pおや きみも おぼえているかい？$"
 
 BattleFrontier_OutsideEast_Text_StickyMonWithLongTail:
-	.string "ぼぼぼ ぼく みちゃったんだっ!!\pこのさきの いわ から しっぽが ながくって\nなんか ベタベタした ポケモンが\lぼくの こと じーっと のぞいてたんだっ!\pきっと こわい ポケモン だよーっ!!$"
+	.string "{JPN}いわの ほうから しっぽの ながい\nポケモンが のぞいていたんだ！\pぼくを みてたのかな？\nあいさつして おけば よかった！$"
