@@ -817,6 +817,10 @@ EventScript_PalletTown_PlayersHouse_2F_TurnOnPC::
 	.include "data/maps/MiniMiniVilla_LocalRoom/scripts.inc"
 	.include "data/maps/MiniMiniVilla_Shop/scripts.inc"
 	.include "data/maps/PartyResortGate/scripts.inc"
+	.include "data/maps/RestorationInn_Outside/scripts.inc"
+	.include "data/maps/RestorationInn_Lobby/scripts.inc"
+	.include "data/maps/RestorationInn_EastWing/scripts.inc"
+	.include "data/maps/RestorationInn_WestWing/scripts.inc"
 
 	.include "data/maps/Partybathtime/scripts.inc"
 

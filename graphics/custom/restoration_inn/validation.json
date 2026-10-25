@@ -1,0 +1,20 @@
+{
+  "exterior": {
+    "metatiles": 67,
+    "uniqueTiles": 255,
+    "tileCapacity": 512,
+    "paletteBank": 6,
+    "bitDepth": 4,
+    "colors": 16,
+    "sha256": "f7128651850f845df4025dc1dcbc33c33c26d97123a22eb3a34e5a647a48f3a1"
+  },
+  "interior": {
+    "metatiles": 67,
+    "uniqueTiles": 249,
+    "tileCapacity": 512,
+    "paletteBank": 6,
+    "bitDepth": 4,
+    "colors": 16,
+    "sha256": "331a6cd7b7c6b181b5c19a74aa3c6eab06bcdf7bcb794200a596fcd376a49cab"
+  }
+}

@@ -3,6 +3,28 @@
 // Whether a palette has a night version, located at ((x + 9) % 16).pal
 #define SWAP_PAL(x) ((x) < NUM_PALS_IN_PRIMARY ? 1 << (x) : 1 << ((x) - NUM_PALS_IN_PRIMARY))
 
+const struct Tileset gTileset_RestorationInnExterior =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_RestorationInnExterior,
+    .palettes = gTilesetPalettes_RestorationInnExterior,
+    .metatiles = gMetatiles_RestorationInnExterior,
+    .metatileAttributes = gMetatileAttributes_RestorationInnExterior,
+    .callback = NULL,
+};
+
+const struct Tileset gTileset_RestorationInnInterior =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_RestorationInnInterior,
+    .palettes = gTilesetPalettes_RestorationInnInterior,
+    .metatiles = gMetatiles_RestorationInnInterior,
+    .metatileAttributes = gMetatileAttributes_RestorationInnInterior,
+    .callback = NULL,
+};
+
 const struct Tileset gTileset_SecretBase =
 {
     .isCompressed = FALSE,

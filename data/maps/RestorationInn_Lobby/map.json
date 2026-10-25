@@ -1,0 +1,52 @@
+{
+  "id": "MAP_RESTORATION_INN_LOBBY",
+  "name": "RestorationInn_Lobby",
+  "layout": "LAYOUT_RESTORATION_INN_LOBBY",
+  "music": "MUS_VERDANTURF",
+  "region_map_section": "MAPSEC_SPECIAL_AREA",
+  "requires_flash": false,
+  "weather": "WEATHER_NONE",
+  "map_type": "MAP_TYPE_INDOOR",
+  "allow_cycling": false,
+  "allow_escaping": false,
+  "allow_running": true,
+  "show_map_name": false,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": null,
+  "object_events": [],
+  "warp_events": [
+    {
+      "warp_id": "WARP_ID_INN_LOBBY_EXIT",
+      "x": 15,
+      "y": 20,
+      "elevation": 0,
+      "dest_map": "MAP_RESTORATION_INN_OUTSIDE",
+      "dest_warp_id": "WARP_ID_INN_OUTSIDE_ENTRY"
+    },
+    {
+      "x": 16,
+      "y": 20,
+      "elevation": 0,
+      "dest_map": "MAP_RESTORATION_INN_OUTSIDE",
+      "dest_warp_id": "WARP_ID_INN_OUTSIDE_ENTRY"
+    },
+    {
+      "warp_id": "WARP_ID_INN_LOBBY_EAST",
+      "x": 25,
+      "y": 2,
+      "elevation": 0,
+      "dest_map": "MAP_RESTORATION_INN_EAST_WING",
+      "dest_warp_id": "WARP_ID_INN_EAST_EXIT"
+    },
+    {
+      "warp_id": "WARP_ID_INN_LOBBY_WEST",
+      "x": 6,
+      "y": 2,
+      "elevation": 0,
+      "dest_map": "MAP_RESTORATION_INN_WEST_WING",
+      "dest_warp_id": "WARP_ID_INN_WEST_EXIT"
+    }
+  ],
+  "coord_events": [],
+  "bg_events": []
+}

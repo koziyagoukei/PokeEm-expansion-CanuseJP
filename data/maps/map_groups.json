@@ -6,7 +6,8 @@
     "gMapGroup_Dungeons",
     "gMapGroup_IndoorDynamic",
     "gMapGroup_SpecialArea",
-    "gMapGroup_IndoorMiniMiniVilla"
+    "gMapGroup_IndoorMiniMiniVilla",
+    "gMapGroup_RestorationInn"
   ],
   "gMapGroup_TownsAndRoutes": [
     "ultra_frontie_hub",
@@ -135,5 +136,11 @@
     "MiniMiniVilla_LocalRoom",
     "MiniMiniVilla_Shop",
     "PartyResortGate"
+  ],
+  "gMapGroup_RestorationInn": [
+    "RestorationInn_Outside",
+    "RestorationInn_Lobby",
+    "RestorationInn_EastWing",
+    "RestorationInn_WestWing"
   ]
 }
