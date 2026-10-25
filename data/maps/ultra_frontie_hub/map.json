@@ -107,7 +107,7 @@
     },
     {
       "local_id": "LOCALID_FRONTIER_HUB_INTRO_COOK",
-      "graphics_id": "OBJ_EVENT_GFX_RICH_BOY",
+      "graphics_id": "OBJ_EVENT_GFX_ROCKET_COOK",
       "x": 13,
       "y": 17,
       "elevation": 3,

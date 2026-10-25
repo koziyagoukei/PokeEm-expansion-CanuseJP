@@ -147,7 +147,7 @@
     },
     {
       "local_id": "LOCALID_PARTY_ROAMER_INTRO_COOK",
-      "graphics_id": "OBJ_EVENT_GFX_RICH_BOY",
+      "graphics_id": "OBJ_EVENT_GFX_ROCKET_COOK",
       "x": 11,
       "y": 8,
       "elevation": 3,

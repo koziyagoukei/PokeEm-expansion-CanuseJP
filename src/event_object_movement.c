@@ -590,6 +590,8 @@ static const struct SpritePalette sObjectEventSpritePalettes[] = {
     {gObjectEventPaletteLight2,             OBJ_EVENT_PAL_TAG_LIGHT_2},
     {gObjectEventPaletteEmotes,             OBJ_EVENT_PAL_TAG_EMOTES},
     {gObjectEventPaletteNeonLight,          OBJ_EVENT_PAL_TAG_NEON_LIGHT},
+    {gObjectEventPal_RocketCook,            OBJ_EVENT_PAL_TAG_ROCKET_COOK},
+    {gObjectEventPal_Pokevirus,             OBJ_EVENT_PAL_TAG_POKEVIRUS},
 #define SPECIAL_DOLL(_id, symbol, label, path, frameSize) \
     {gSpecialDollPalette_##symbol, SPECIAL_DOLL_PAL_FIRST + SPECIAL_DOLL_##_id - 1}, \
     {gSpecialDollShinyPalette_##symbol, SPECIAL_DOLL_PAL_FIRST + SPECIAL_DOLL_##_id##_SHINY - 1},

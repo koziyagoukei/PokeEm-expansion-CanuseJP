@@ -77,6 +77,11 @@ const u32 gObjectEventPic_LittleGirl[] = INCGFX_U32("graphics/object_events/pics
 const u32 gObjectEventPic_Boy3[] = INCGFX_U32("graphics/object_events/pics/people/boy_3.png", ".4bpp", "-mwidth 2 -mheight 4");
 const u32 gObjectEventPic_Girl3[] = INCGFX_U32("graphics/object_events/pics/people/girl_3.png", ".4bpp", "-mwidth 2 -mheight 4");
 const u32 gObjectEventPic_RichBoy[] = INCGFX_U32("graphics/object_events/pics/people/rich_boy.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u32 gObjectEventPic_RocketCook[] = INCGFX_U32("graphics/custom/rocket_cook/overworld.png", ".4bpp", "-mwidth 2 -mheight 4");
+const u16 gObjectEventPal_RocketCook[] = INCGFX_U16("graphics/custom/rocket_cook/overworld.png", ".gbapal");
+const u32 gObjectEventPic_Pokevirus[] = INCGFX_U32("graphics/custom/pokevirus/overworld.png", ".4bpp", "-mwidth 8 -mheight 8");
+const u16 gObjectEventPal_Pokevirus[] = INCGFX_U16("graphics/custom/pokevirus/overworld.png", ".gbapal");
+STATIC_ASSERT(sizeof(gObjectEventPic_Pokevirus) == 6 * 64 * 64 / 2, PokevirusMustHaveSixOverworldFrames)
 const u32 gObjectEventPic_Woman1[] = INCGFX_U32("graphics/object_events/pics/people/woman_1.png", ".4bpp", "-mwidth 2 -mheight 4");
 const u32 gObjectEventPic_FatMan[] = INCGFX_U32("graphics/object_events/pics/people/fat_man.png", ".4bpp", "-mwidth 2 -mheight 4");
 const u32 gObjectEventPic_PokefanF[] = INCGFX_U32("graphics/object_events/pics/people/pokefan_f.png", ".4bpp", "-mwidth 2 -mheight 4");

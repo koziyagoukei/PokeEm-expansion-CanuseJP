@@ -1,0 +1,64 @@
+{
+  "assets": [
+    {
+      "file": "front.png",
+      "width": 64,
+      "height": 64,
+      "bitDepth": 4,
+      "colorType": 3,
+      "colors": 16,
+      "alpha": [
+        0,
+        255
+      ]
+    },
+    {
+      "file": "overworld.png",
+      "width": 144,
+      "height": 32,
+      "bitDepth": 4,
+      "colorType": 3,
+      "colors": 16,
+      "alpha": [
+        0,
+        255
+      ]
+    },
+    {
+      "file": "overworld_front.png",
+      "width": 16,
+      "height": 32,
+      "bitDepth": 4,
+      "colorType": 3,
+      "colors": 13,
+      "alpha": [
+        0,
+        255
+      ]
+    },
+    {
+      "file": "back.png",
+      "width": 64,
+      "height": 256,
+      "bitDepth": 4,
+      "colorType": 3,
+      "colors": 16,
+      "alpha": [
+        0,
+        255
+      ]
+    }
+  ],
+  "backFrameHashes": [
+    "0f03573a8c9621acbd9c2c2220a4e492b4dbc2d1a9091d61f6c00e8ab8683669",
+    "329c5f5ef3f40cbd31e3be1bdd1b9b4600198107ad26b123760d77c44e8d7aa7",
+    "0d9479846f0d27d285da992008d09a040ef67acbda181825f211f46fd873ae3b",
+    "99c451437152ee6ebbcbfcec864a5841f64b90d0d3aa9d43586ee14dacbe5ccd"
+  ],
+  "generatedWith": "built-in image_gen",
+  "integration": {
+    "overworld": true,
+    "trainerFront": true,
+    "trainerBack": true
+  }
+}

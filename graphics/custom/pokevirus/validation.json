@@ -1,0 +1,72 @@
+{
+  "assets": [
+    {
+      "name": "front.png",
+      "width": 64,
+      "height": 64,
+      "bitDepth": 4,
+      "colorType": 3,
+      "colors": 16,
+      "alpha": [
+        0,
+        255
+      ],
+      "sha256": "29bd21d7b1d01ebc2892f548131f292f6f5e332900461372b3344ce02d6b4ebd"
+    },
+    {
+      "name": "overworld.png",
+      "width": 384,
+      "height": 64,
+      "bitDepth": 4,
+      "colorType": 3,
+      "colors": 16,
+      "alpha": [
+        0,
+        255
+      ],
+      "sha256": "ee70cb3a256b160719a6f55a024dbbf21045ba8911d6dc8a27f0431ff95b3f2c"
+    },
+    {
+      "name": "overworld_idle.png",
+      "width": 64,
+      "height": 64,
+      "bitDepth": 4,
+      "colorType": 3,
+      "colors": 16,
+      "alpha": [
+        0,
+        255
+      ],
+      "sha256": "7311d326d33d15e9065f91c1ec72746715772a6d942a6f4171ba93ff907eb0ff"
+    }
+  ],
+  "frameOrder": [
+    "south_idle",
+    "south_pulse",
+    "north_idle",
+    "north_pulse",
+    "west_idle",
+    "west_pulse"
+  ],
+  "frameHashes": [
+    "464a2b5df3b6fbe2da47c7a35d52fa053e40a690e37274d0e130acd27e1ea8b6",
+    "ccefa8fd7b5963d4ad4f2940e3ce88eb799ff5d82b96d39b2ca6b0be643d4d21",
+    "2caad71f8ea6483286b9dbb66c910b9085332f1c5fbbe2ec646bd9dd2685bd7b",
+    "3e184a4b1d8c4284c36382fc919596d029a008a52665620bd6f35f83e6c5fb33",
+    "373c09c3cd3facb88c1abbbbe4937e550d73b610732bc902682ba056b7c2b5b4",
+    "212bd695699db9cd3f3a0da39958cca33db4727f4650d98d892e6fefd84dfc49"
+  ],
+  "generatedWith": "built-in image_gen",
+  "integration": {
+    "mapGraphicsId": "OBJ_EVENT_GFX_POKEVIRUS",
+    "trainerPicId": "TRAINER_PIC_POKEVIRUS",
+    "placedOnMap": false
+  },
+  "gbaConversion": {
+    "status": "PASS",
+    "pixelsChecked": 28672,
+    "frontBytes": 2048,
+    "overworldBytes": 12288,
+    "paletteBytes": 32
+  }
+}

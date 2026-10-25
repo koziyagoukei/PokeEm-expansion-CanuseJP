@@ -76,6 +76,12 @@ const u16 gTrainerPalette_Beauty[] = INCGFX_U16("graphics/trainers/front_pics/be
 const u32 gTrainerFrontPic_RichBoy[] = INCGFX_U32("graphics/trainers/front_pics/rich_boy.png", ".4bpp.smol");
 const u16 gTrainerPalette_RichBoy[] = INCGFX_U16("graphics/trainers/front_pics/rich_boy.png", ".gbapal");
 
+const u32 gTrainerFrontPic_RocketCook[] = INCGFX_U32("graphics/custom/rocket_cook/front.png", ".4bpp.smol");
+const u16 gTrainerPalette_RocketCook[] = INCGFX_U16("graphics/custom/rocket_cook/front.png", ".gbapal");
+
+const u32 gTrainerFrontPic_Pokevirus[] = INCGFX_U32("graphics/custom/pokevirus/front.png", ".4bpp.smol");
+const u16 gTrainerPalette_Pokevirus[] = INCGFX_U16("graphics/custom/pokevirus/front.png", ".gbapal");
+
 const u32 gTrainerFrontPic_ExpertF[] = INCGFX_U32("graphics/trainers/front_pics/expert_f.png", ".4bpp.smol");
 const u16 gTrainerPalette_ExpertF[] = INCGFX_U16("graphics/trainers/front_pics/expert_f.png", ".gbapal");
 
@@ -478,6 +484,8 @@ const u8 gTrainerBackPic_RubySapphireBrendan[] = INCGFX_U8("graphics/trainers/ba
 const u8 gTrainerBackPic_RubySapphireMay[] = INCGFX_U8("graphics/trainers/back_pics/may_rs.png", ".4bpp");
 const u8 gTrainerBackPic_Wally[] = INCGFX_U8("graphics/trainers/back_pics/wally.png", ".4bpp");
 const u8 gTrainerBackPic_Steven[] = INCGFX_U8("graphics/trainers/back_pics/steven.png", ".4bpp");
+const u8 gTrainerBackPic_RocketCook[] = INCGFX_U8("graphics/custom/rocket_cook/back.png", ".4bpp");
+STATIC_ASSERT(sizeof(gTrainerBackPic_RocketCook) == TRAINER_PIC_SIZE * 4, RocketCookBackPicMustHaveFourFrames)
 const u8 gTrainerBackPic_Pokedude[] = INCGFX_U8("graphics/trainers/back_pics/pokedude.png", ".4bpp");
 const u8 gTrainerBackPic_OldMan[] = INCGFX_U8("graphics/trainers/back_pics/old_man.png", ".4bpp");
 
@@ -585,6 +593,15 @@ const union AnimCmd *const sBackAnims_OldManPokedude[] = {
 
 const struct TrainerPicInfo gTrainerPicInfo[TRAINER_PIC_COUNT] =
 {
+    [TRAINER_PIC_POKEVIRUS] =
+    {
+        .frontPic = TRAINER_FRONT_PIC(gTrainerFrontPic_Pokevirus, gTrainerPalette_Pokevirus),
+    },
+    [TRAINER_PIC_ROCKET_COOK] =
+    {
+        .frontPic = TRAINER_FRONT_PIC(gTrainerFrontPic_RocketCook, gTrainerPalette_RocketCook),
+        .backPic = TRAINER_BACK_PIC(4, gTrainerBackPic_RocketCook, gTrainerPalette_RocketCook, sBackAnims_Hoenn),
+    },
     [TRAINER_PIC_NONE] =
     {
         .frontPic = TRAINER_FRONT_PIC(gTrainerFrontPic_None, gTrainerPalette_None),
