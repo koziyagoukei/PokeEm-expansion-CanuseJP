@@ -305,7 +305,7 @@ static void DebugAction_PCBag_Fill_PCBoxes_Generation(u8 taskId, const void *par
 static void DebugAction_PCBag_Fill_PCItemStorage(u8 taskId);
 static void DebugAction_PCBag_Fill_PocketItems(u8 taskId);
 static void DebugAction_PCBag_Fill_PocketPokeBalls(u8 taskId);
-static void DebugAction_PCBag_Fill_PocketTMHM(u8 taskId);
+static void DebugAction_PCBag_Fill_PocketStones(u8 taskId);
 static void DebugAction_PCBag_Fill_PocketBerries(u8 taskId);
 static void DebugAction_PCBag_Fill_PocketKeyItems(u8 taskId);
 static void DebugAction_PCBag_ClearBag(u8 taskId);
@@ -634,7 +634,7 @@ static const struct DebugMenuOption sDebugMenu_Actions_PCBag_Fill[] =
     { COMPOUND_STRING("{JPN}パソコンどうぐを うめる") ,            DebugAction_PCBag_Fill_PCItemStorage },
     { COMPOUND_STRING("{JPN}どうぐポケットを うめる"),         DebugAction_PCBag_Fill_PocketItems },
     { COMPOUND_STRING("{JPN}ボールポケットを うめる"),    DebugAction_PCBag_Fill_PocketPokeBalls },
-    { COMPOUND_STRING("{JPN}わざマシンポケットを うめる"),          DebugAction_PCBag_Fill_PocketTMHM },
+    { COMPOUND_STRING("{JPN}ストーンポケットを うめる"),          DebugAction_PCBag_Fill_PocketStones },
     { COMPOUND_STRING("{JPN}きのみポケットを うめる"),       DebugAction_PCBag_Fill_PocketBerries },
     { COMPOUND_STRING("{JPN}たいせつなものを うめる"),     DebugAction_PCBag_Fill_PocketKeyItems },
     { NULL }
@@ -3854,14 +3854,11 @@ static void DebugAction_PCBag_Fill_PocketPokeBalls(u8 taskId)
     }
 }
 
-static void DebugAction_PCBag_Fill_PocketTMHM(u8 taskId)
+static void DebugAction_PCBag_Fill_PocketStones(u8 taskId)
 {
-    u16 index, itemId;
-
-    for (index = 0; index < NUM_ALL_MACHINES; index++)
+    for (enum Item itemId = ITEM_NONE + 1; itemId < ITEMS_COUNT; itemId++)
     {
-        itemId = GetTMHMItemId(index + 1);
-        if (CheckBagHasSpace(itemId, 1) && ItemIdToBattleMoveId(itemId) != MOVE_NONE)
+        if (GetItemPocket(itemId) == POCKET_STONES && CheckBagHasSpace(itemId, 1))
             AddBagItem(itemId, 1);
     }
 }

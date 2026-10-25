@@ -2098,7 +2098,7 @@ static void EndLinkBattleInSteps(void)
 
             for (i = 0; i < battlerCount && (gLinkPlayers[i].version & 0xFF) == VERSION_EMERALD; i++);
 
-            if (!gSaveBlock2Ptr->frontier.disableRecordBattle && i == battlerCount)
+            if (!FREE_SPECIAL_SAVE_SECTORS && !gSaveBlock2Ptr->frontier.disableRecordBattle && i == battlerCount)
             {
                 if (FlagGet(FLAG_SYS_FRONTIER_PASS))
                 {

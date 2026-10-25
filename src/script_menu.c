@@ -3,6 +3,7 @@
 #include "event_data.h"
 #include "field_effect.h"
 #include "field_specials.h"
+#include "hall_of_fame.h"
 #include "item.h"
 #include "menu.h"
 #include "palette.h"
@@ -744,7 +745,7 @@ static void CreatePCMultichoice(void)
         pixelWidth = DisplayTextAndGetWidth(sPCNameStrings[i], pixelWidth);
     }
 
-    if (FlagGet(FLAG_SYS_GAME_CLEAR))
+    if (IsHallOfFamePCAvailable())
     {
         pixelWidth = DisplayTextAndGetWidth(gText_HallOfFame, pixelWidth);
     }
@@ -752,7 +753,7 @@ static void CreatePCMultichoice(void)
     width = ConvertPixelWidthToTileWidth(pixelWidth);
 
     // Include Hall of Fame option if player is champion
-    if (FlagGet(FLAG_SYS_GAME_CLEAR))
+    if (IsHallOfFamePCAvailable())
     {
         numChoices = 4;
         windowId = CreateWindowFromRect(0, 0, width, 8);

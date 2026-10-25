@@ -369,6 +369,11 @@ RULES_NO_SCAN += extract-bpej-contest check-bpej-contest-outputs clean-bpej-cont
 RULES_NO_SCAN += extract-bpej-intro check-bpej-intro-outputs clean-bpej-intro-assets FORCE_BPEJ_INTRO_ASSETS
 RULES_NO_SCAN += extract-bpej-pokenav check-bpej-pokenav-outputs clean-bpej-pokenav-assets FORCE_BPEJ_POKENAV_ASSETS
 .PHONY: all rom agbcc modern compare check debug release
+.PHONY: check-bag-catalog
+check-bag-catalog:
+	@python3 tools/generate_bag_catalog.py --check
+
+check-tools: check-bag-catalog
 .PHONY: $(RULES_NO_SCAN)
 
 infoshell = $(foreach line, $(shell $1 | sed "s/ /__SPACE__/g"), $(info $(subst __SPACE__, ,$(line))))

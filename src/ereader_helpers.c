@@ -467,8 +467,13 @@ static bool32 TryWriteTrainerHill_Internal(struct EReaderTrainerHillSet *hillSet
 
 bool32 TryWriteTrainerHill(struct EReaderTrainerHillSet *hillSet)
 {
-    void *buffer = AllocZeroed(SECTOR_SIZE);
-    bool32 result = TryWriteTrainerHill_Internal(hillSet, buffer);
+    void *buffer;
+    bool32 result;
+
+    if (!ENABLE_E_READER)
+        return FALSE;
+    buffer = AllocZeroed(SECTOR_SIZE);
+    result = TryWriteTrainerHill_Internal(hillSet, buffer);
     Free(buffer);
     return result;
 }
@@ -495,8 +500,13 @@ static bool32 TryReadTrainerHill(struct EReaderTrainerHillSet *hillSet)
 
 bool32 ReadTrainerHillAndValidate(void)
 {
-    struct EReaderTrainerHillSet *hillSet = AllocZeroed(SECTOR_SIZE);
-    bool32 result = TryReadTrainerHill(hillSet);
+    struct EReaderTrainerHillSet *hillSet;
+    bool32 result;
+
+    if (!ENABLE_E_READER)
+        return FALSE;
+    hillSet = AllocZeroed(SECTOR_SIZE);
+    result = TryReadTrainerHill(hillSet);
     Free(hillSet);
     return result;
 }
@@ -539,6 +549,8 @@ static void OpenSerial32(void)
 
 int EReaderHandleTransfer(u8 mode, size_t size, const void *data, void *recvBuffer)
 {
+    if (!ENABLE_E_READER)
+        return EREADER_CANCEL_KEY_MASK;
     switch (sSendRecvMgr.state)
     {
     case EREADER_XFR_STATE_INIT:

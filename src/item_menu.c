@@ -57,8 +57,7 @@
 // The buffer for the bag item list needs to be large enough to hold the maximum
 // number of item slots that could fit in a single pocket, + 1 for Cancel.
 // This constant picks the max of the existing pocket sizes.
-// By default, the largest pocket is BAG_TMHM_COUNT at 64.
-#define MAX_POCKET_ITEMS  ((max(BAG_TMHM_COUNT,              \
+#define MAX_POCKET_ITEMS  ((max(BAG_STONES_COUNT,            \
                             max(BAG_BERRIES_COUNT,           \
                             max(BAG_ITEMS_COUNT,             \
                             max(BAG_KEYITEMS_COUNT,          \
@@ -943,22 +942,6 @@ static void GetItemNameFromPocket(u8 *dest, enum Item itemId)
     u8 *end;
     switch (gBagPosition.pocket)
     {
-    case POCKET_TM_HM:
-        end = StringCopy(gStringVar2, GetMoveName(ItemIdToBattleMoveId(itemId)));
-        PrependFontIdToFit(gStringVar2, end, FONT_NARROW, NUM_TECHNICAL_MACHINES >= 100 ? 60 : 65);
-        if (GetItemTMHMIndex(itemId) > NUM_TECHNICAL_MACHINES)
-        {
-            // Get HM number
-            ConvertIntToDecimalStringN(gStringVar1, GetItemTMHMIndex(itemId) - NUM_TECHNICAL_MACHINES, STR_CONV_MODE_LEADING_ZEROS, 1);
-            StringExpandPlaceholders(dest, gText_NumberItem_HM);
-        }
-        else
-        {
-            // Get TM number
-            ConvertIntToDecimalStringN(gStringVar1, GetItemTMHMIndex(itemId), STR_CONV_MODE_LEADING_ZEROS, NUM_TECHNICAL_MACHINES >= 100 ? 3 : 2);
-            StringExpandPlaceholders(dest, gText_NumberItem_TMBerry);
-        }
-        break;
     case POCKET_BERRIES:
         ConvertIntToDecimalStringN(gStringVar1, ItemIdToBerryType(itemId), STR_CONV_MODE_LEADING_ZEROS, 2);
         end = CopyItemName(itemId, gStringVar2);
@@ -1008,10 +991,6 @@ static void BagMenu_ItemPrintCallback(u8 windowId, u32 itemIndex, u8 y)
         }
 
         struct ItemSlot itemSlot = GetBagItemIdAndQuantity(gBagPosition.pocket, itemIndex);
-
-        // Draw HM icon
-        if (gBagPosition.pocket == POCKET_TM_HM && GetItemTMHMIndex(itemSlot.itemId) > NUM_TECHNICAL_MACHINES)
-            BlitBitmapToWindow(windowId, gBagMenuHMIcon_Gfx, 8, y - 1, 16, 16);
 
         if (gBagPosition.pocket != POCKET_KEY_ITEMS && GetItemImportance(itemSlot.itemId) == FALSE)
         {
@@ -1162,7 +1141,6 @@ void UpdatePocketItemList(enum Pocket pocketId)
     struct BagPocket *pocket = &gBagPockets[pocketId];
     switch (pocketId)
     {
-    case POCKET_TM_HM:
     case POCKET_BERRIES:
         SortItemsInBag(pocket, SORT_BY_INDEX);
         break;
@@ -1509,9 +1487,8 @@ static bool8 CanSwapItems(void)
     if (gBagPosition.location == ITEMMENULOCATION_FIELD
      || gBagPosition.location == ITEMMENULOCATION_BATTLE)
     {
-        // TMHMs and berries are numbered, and so may not be swapped
-        if (gBagPosition.pocket != POCKET_TM_HM
-         && gBagPosition.pocket != POCKET_BERRIES)
+        // Berries are numbered and keep their fixed ordering.
+        if (gBagPosition.pocket != POCKET_BERRIES)
             return TRUE;
     }
     return FALSE;
@@ -1698,6 +1675,13 @@ static void OpenContextMenu(u8 taskId)
             switch (gBagPosition.pocket)
             {
             case POCKET_ITEMS:
+            case POCKET_STONES:
+                if (GetItemTMHMIndex(gSpecialVar_ItemId) != 0)
+                {
+                    gBagMenu->contextMenuItemsPtr = sContextMenuItems_TmHmPocket;
+                    gBagMenu->contextMenuNumItems = ARRAY_COUNT(sContextMenuItems_TmHmPocket);
+                    break;
+                }
                 gBagMenu->contextMenuItemsPtr = gBagMenu->contextMenuItemsBuffer;
                 gBagMenu->contextMenuNumItems = ARRAY_COUNT(sContextMenuItems_ItemsPocket);
                 memcpy(&gBagMenu->contextMenuItemsBuffer, &sContextMenuItems_ItemsPocket, sizeof(sContextMenuItems_ItemsPocket));
@@ -1720,10 +1704,6 @@ static void OpenContextMenu(u8 taskId)
                 gBagMenu->contextMenuItemsPtr = sContextMenuItems_BallsPocket;
                 gBagMenu->contextMenuNumItems = ARRAY_COUNT(sContextMenuItems_BallsPocket);
                 break;
-            case POCKET_TM_HM:
-                gBagMenu->contextMenuItemsPtr = sContextMenuItems_TmHmPocket;
-                gBagMenu->contextMenuNumItems = ARRAY_COUNT(sContextMenuItems_TmHmPocket);
-                break;
             case POCKET_BERRIES:
                 gBagMenu->contextMenuItemsPtr = sContextMenuItems_BerriesPocket;
                 gBagMenu->contextMenuNumItems = ARRAY_COUNT(sContextMenuItems_BerriesPocket);
@@ -1731,7 +1711,7 @@ static void OpenContextMenu(u8 taskId)
             }
         }
     }
-    if (gBagPosition.pocket == POCKET_TM_HM)
+    if (GetItemTMHMIndex(gSpecialVar_ItemId) != 0)
     {
         ClearWindowTilemap(WIN_DESCRIPTION);
         PrintTMHMMoveData(gSpecialVar_ItemId);
@@ -2770,7 +2750,7 @@ static const u8 sBagMenuSortPokeBalls[] =
     ACTION_CANCEL,
 };
 
-static const u8 sBagMenuSortBerriesTMsHMs[] =
+static const u8 sBagMenuSortBerriesStones[] =
 {
     ACTION_BY_NAME,
     ACTION_BY_AMOUNT,
@@ -2793,10 +2773,10 @@ static void AddBagSortSubMenu(void)
         gBagMenu->contextMenuNumItems = NELEMS(sBagMenuSortPokeBalls);
         break;
     case POCKET_BERRIES:
-    case POCKET_TM_HM:
-        gBagMenu->contextMenuItemsPtr = sBagMenuSortBerriesTMsHMs;
-        memcpy(&gBagMenu->contextMenuItemsBuffer, &sBagMenuSortBerriesTMsHMs, NELEMS(sBagMenuSortBerriesTMsHMs));
-        gBagMenu->contextMenuNumItems = NELEMS(sBagMenuSortBerriesTMsHMs);
+    case POCKET_STONES:
+        gBagMenu->contextMenuItemsPtr = sBagMenuSortBerriesStones;
+        memcpy(&gBagMenu->contextMenuItemsBuffer, &sBagMenuSortBerriesStones, NELEMS(sBagMenuSortBerriesStones));
+        gBagMenu->contextMenuNumItems = NELEMS(sBagMenuSortBerriesStones);
         break;
     default:
         gBagMenu->contextMenuItemsPtr = sBagMenuSortItems;
@@ -2959,16 +2939,8 @@ static s32 CompareItemsAlphabetically(enum Pocket pocketId, struct ItemSlot item
     else if (item2.itemId == ITEM_NONE)
         return -1;
 
-    if (pocketId == POCKET_TM_HM)
-    {
-        name1 = GetMoveName(GetTMHMMoveId(GetItemTMHMIndex(item1.itemId)));
-        name2 = GetMoveName(GetTMHMMoveId(GetItemTMHMIndex(item2.itemId)));
-    }
-    else
-    {
-        name1 = GetItemName(item1.itemId);
-        name2 = GetItemName(item2.itemId);
-    }
+    name1 = GetItemName(item1.itemId);
+    name2 = GetItemName(item2.itemId);
 
     return StringCompare(name1, name2);
 }
@@ -3022,9 +2994,9 @@ static s32 CompareItemsByIndex(enum Pocket pocketId, struct ItemSlot item1, stru
 
     switch (pocketId)
     {
-    case POCKET_TM_HM:
-        index1 = GetItemTMHMIndex(item1.itemId);
-        index2 = GetItemTMHMIndex(item2.itemId);
+    case POCKET_STONES:
+        index1 = item1.itemId;
+        index2 = item2.itemId;
         break;
     case POCKET_BERRIES: // To do - requires #7305
         index1 = item1.itemId;

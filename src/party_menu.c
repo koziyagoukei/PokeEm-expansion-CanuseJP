@@ -4863,7 +4863,7 @@ void CB2_ShowPartyMenuForItemUse(void)
     }
     else
     {
-        if (GetItemPocket(gSpecialVar_ItemId) == POCKET_TM_HM)
+        if (GetItemTMHMIndex(gSpecialVar_ItemId) != 0)
             msgId = PARTY_MSG_TEACH_WHICH_MON;
         else
             msgId = PARTY_MSG_USE_ON_WHICH_MON;
@@ -5666,7 +5666,7 @@ void ItemUseCB_PPUp(u8 taskId, TaskFunc task)
 
 enum Move ItemIdToBattleMoveId(enum Item item)
 {
-    return (GetItemPocket(item) == POCKET_TM_HM) ? GetItemTMHMMoveId(item) : MOVE_NONE;
+    return GetItemTMHMMoveId(item);
 }
 
 bool8 MonKnowsMove(struct Pokemon *mon, enum Move move)
@@ -6652,14 +6652,14 @@ static void Task_TryItemUseFusionChange(u8 taskId)
         if (gTasks[taskId].fusionType == FUSE_MON)
         {
             mon2 = &gParties[B_TRAINER_PLAYER][gTasks[taskId].secondFusionSlot];
-            CopyMon(&gPokemonStoragePtr->fusions[gTasks[taskId].storageIndex], mon2, sizeof(*mon2));
+            CopyMon(&gSaveBlock3Ptr->fusions[gTasks[taskId].storageIndex], mon2, sizeof(*mon2));
             ZeroMonData(&gParties[B_TRAINER_PLAYER][gTasks[taskId].secondFusionSlot]);
         }
         else
         {
-            mon2 = &gPokemonStoragePtr->fusions[gTasks[taskId].storageIndex];
+            mon2 = &gSaveBlock3Ptr->fusions[gTasks[taskId].storageIndex];
             RestoreFusionMon(mon2);
-            ZeroMonData(&gPokemonStoragePtr->fusions[gTasks[taskId].storageIndex]);
+            ZeroMonData(&gSaveBlock3Ptr->fusions[gTasks[taskId].storageIndex]);
         }
         targetSpecies = gTasks[taskId].tTargetSpecies;
         SetMonData(mon, MON_DATA_SPECIES, &targetSpecies);
@@ -6803,9 +6803,9 @@ void ItemUseCB_Fusion(u8 taskId, TaskFunc taskFunc)
         }
         for (i = 0; itemFusion[i].fusionStorageIndex != FUSION_TERMINATOR; i++) // Loops through fusion table and checks if the mon can be unfused
         {
-            if (gPokemonStoragePtr->fusions[itemFusion[i].fusionStorageIndex].level == 0)
+            if (gSaveBlock3Ptr->fusions[itemFusion[i].fusionStorageIndex].level == 0)
                 continue;
-            if (itemFusion[i].itemId == gSpecialVar_ItemId && GetMonData(&gPokemonStoragePtr->fusions[itemFusion[i].fusionStorageIndex], MON_DATA_SPECIES) == itemFusion[i].targetSpecies2)
+            if (itemFusion[i].itemId == gSpecialVar_ItemId && GetMonData(&gSaveBlock3Ptr->fusions[itemFusion[i].fusionStorageIndex], MON_DATA_SPECIES) == itemFusion[i].targetSpecies2)
             {
                 task->fusionType = UNFUSE_MON;
                 task->firstFusion = species;
@@ -6845,7 +6845,7 @@ void ItemUseCB_Fusion(u8 taskId, TaskFunc taskFunc)
                 break;
             for (i = 0; itemFusion[i].fusionStorageIndex != FUSION_TERMINATOR; i++) // run through fusion table and check if the fusion works
             {
-                if (gPokemonStoragePtr->fusions[itemFusion[i].fusionStorageIndex].level != 0)
+                if (gSaveBlock3Ptr->fusions[itemFusion[i].fusionStorageIndex].level != 0)
                     continue;
                 if (itemFusion[i].itemId == gSpecialVar_ItemId && itemFusion[i].targetSpecies1 == task->firstFusion && itemFusion[i].targetSpecies2 == species)
                 {

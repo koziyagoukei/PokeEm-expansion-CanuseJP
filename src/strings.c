@@ -207,7 +207,7 @@ const u8 *const gPocketNamesStringsTable[] =
 {
     [POCKET_ITEMS]      = COMPOUND_STRING("{JPN} ど う ぐ  "),
     [POCKET_POKE_BALLS] = COMPOUND_STRING("{JPN}モンスターボール"),
-    [POCKET_TM_HM]      = COMPOUND_STRING("{JPN} わざマシン  "),
+    [POCKET_STONES]     = COMPOUND_STRING("{JPN} ストーン    "),
     [POCKET_BERRIES]    = COMPOUND_STRING("{JPN} き の み  "),
     [POCKET_KEY_ITEMS]  = COMPOUND_STRING("{JPN}たいせつなもの ")
 };

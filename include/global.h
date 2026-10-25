@@ -293,30 +293,7 @@ struct FrontierMusicSave
     u16 reserved;
 };
 
-struct SaveBlock3
-{
-#if OW_USE_FAKE_RTC
-    struct SiiRtcInfo fakeRTC;
-#endif
-#if FNPC_ENABLE_NPC_FOLLOWERS
-    struct NPCFollower NPCfollower;
-#endif
-#if OW_SHOW_ITEM_DESCRIPTIONS == OW_ITEM_DESCRIPTIONS_FIRST_TIME
-    u8 itemFlags[ITEM_FLAGS_COUNT];
-#endif
-#if USE_DEXNAV_SEARCH_LEVELS == TRUE
-    u8 dexNavSearchLevels[NUM_SPECIES];
-#endif
-    u8 dexNavChain;
-#if APRICORN_TREE_COUNT > 0
-    u8 apricornTrees[NUM_APRICORN_TREE_BYTES];
-#endif
-    // Append-only, local data. Not part of any link or record-mixing payload.
-    struct LocalRoomSave localRoom;
-    struct SpecialDollSave specialDolls;
-    struct FrontierMusicSave frontierMusic;
-}; /* max size 1624 bytes */
-
+struct SaveBlock3; // Defined after struct Pokemon below
 extern struct SaveBlock3 *gSaveBlock3Ptr;
 
 struct Pokedex
@@ -1131,7 +1108,7 @@ struct Bag
     struct ItemSlot items[BAG_ITEMS_COUNT];
     struct ItemSlot keyItems[BAG_KEYITEMS_COUNT];
     struct ItemSlot pokeBalls[BAG_POKEBALLS_COUNT];
-    struct ItemSlot TMsHMs[BAG_TMHM_COUNT];
+    struct ItemSlot stones[BAG_STONES_COUNT];
     struct ItemSlot berries[BAG_BERRIES_COUNT];
 };
 
@@ -1141,6 +1118,31 @@ struct FameCheckerSaveData
     u8 flavorTextFlags;
     u8 unk_0_E;
 };
+
+struct SaveBlock3
+{
+#if OW_USE_FAKE_RTC
+    struct SiiRtcInfo fakeRTC;
+#endif
+#if FNPC_ENABLE_NPC_FOLLOWERS
+    struct NPCFollower NPCfollower;
+#endif
+#if OW_SHOW_ITEM_DESCRIPTIONS == OW_ITEM_DESCRIPTIONS_FIRST_TIME
+    u8 itemFlags[ITEM_FLAGS_COUNT];
+#endif
+#if USE_DEXNAV_SEARCH_LEVELS == TRUE
+    u8 dexNavSearchLevels[NUM_SPECIES];
+#endif
+    u8 dexNavChain;
+#if APRICORN_TREE_COUNT > 0
+    u8 apricornTrees[NUM_APRICORN_TREE_BYTES];
+#endif
+    // Append-only, local data. Not part of any link or record-mixing payload.
+    struct LocalRoomSave localRoom;
+    struct SpecialDollSave specialDolls;
+    struct FrontierMusicSave frontierMusic;
+    struct Pokemon fusions[MAX_FUSION_STORAGE]; // Partners stored while fused (Kyurem, Necrozma, etc.)
+}; /* max size: SAVE_BLOCK_3_CHUNK_SIZE * NUM_SECTORS_PER_SLOT bytes */
 
 struct SaveBlock1
 {

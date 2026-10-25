@@ -41,7 +41,7 @@ TEST("Local room: append-only extension preserves its pre-existing prefix")
     EXPECT_EQ(sizeof(struct LocalRoomSave), 44);
     EXPECT_EQ(offsetof(struct SaveBlock3, specialDolls), 72);
     EXPECT_EQ(offsetof(struct SaveBlock3, frontierMusic), 152);
-    EXPECT_EQ(sizeof(struct SaveBlock3), 168);
+    EXPECT_EQ(offsetof(struct SaveBlock3, fusions), 168);
 }
 
 TEST("Local room: new save starts empty and roaming disabled")

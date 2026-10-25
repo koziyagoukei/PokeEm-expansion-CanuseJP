@@ -163,7 +163,7 @@ __attribute__((section(".text.header_gf"))) USED static const struct GFRomHeader
     .bagCountItems = BAG_ITEMS_COUNT,
     .bagCountKeyItems = BAG_KEYITEMS_COUNT,
     .bagCountPokeballs = BAG_POKEBALLS_COUNT,
-    .bagCountTMHMs = BAG_TMHM_COUNT,
+    .bagCountTMHMs = BAG_STONES_COUNT,
     .bagCountBerries = BAG_BERRIES_COUNT,
     .pcItemsCount = PC_ITEMS_COUNT,
     .pcItemsOffset = offsetof(struct SaveBlock1, pcItems),

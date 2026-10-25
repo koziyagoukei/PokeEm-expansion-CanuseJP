@@ -128,7 +128,7 @@ TEST("Item names fit on Bag Screen (list)")
         PARAMETRIZE_LABEL("%S", gItemsInfo[i].name) { item = i; }
     }
     //DebugPrintf("Item %d: %S", GetStringWidth(fontId, gItemsInfo[item].name, 0), gItemsInfo[item].name);
-    if (gItemsInfo[item].pocket == POCKET_TM_HM || gItemsInfo[item].pocket == POCKET_BERRIES)
+    if (gItemsInfo[item].pocket == POCKET_BERRIES)
         EXPECT_LE(GetStringWidth(fontId, gItemsInfo[item].name, 0), tmHmBerryWidthPx);
     else
         EXPECT_LE(GetStringWidth(fontId, gItemsInfo[item].name, 0), restWidthPx);

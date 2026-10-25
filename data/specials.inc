@@ -691,3 +691,4 @@ gSpecials::
 	def_special Special_SetPartyBathAdditive
 	def_special Special_OpenPartyTraining, waitstate=1
 	def_special Special_RestoreResortInterior
+	def_special IsHallOfFamePCAvailable

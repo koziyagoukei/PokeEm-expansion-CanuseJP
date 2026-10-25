@@ -5681,7 +5681,7 @@ const struct ItemInfo gItemsInfo[] =
             "フシギバナに もたせると\n"
             "{JPN}せんとうちゅうに\n"
             "{JPN}メガシンカ できる"),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_STONES,
         .sortType = ITEM_TYPE_MEGA_STONE,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -5698,7 +5698,7 @@ const struct ItemInfo gItemsInfo[] =
         .description = COMPOUND_STRING("リザードンに もたせると\n"
                                           "{JPN}せんとうちゅうに\n"
                                           "{JPN}メガシンカ できる"),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_STONES,
         .sortType = ITEM_TYPE_MEGA_STONE,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -5715,7 +5715,7 @@ const struct ItemInfo gItemsInfo[] =
         .description = COMPOUND_STRING("リザードンに もたせると\n"
                                           "{JPN}せんとうちゅうに\n"
                                           "{JPN}メガシンカ できる"),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_STONES,
         .sortType = ITEM_TYPE_MEGA_STONE,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -5733,7 +5733,7 @@ const struct ItemInfo gItemsInfo[] =
             "カメックスに もたせると\n"
             "{JPN}せんとうちゅうに\n"
             "{JPN}メガシンカ できる"),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_STONES,
         .sortType = ITEM_TYPE_MEGA_STONE,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -5751,7 +5751,7 @@ const struct ItemInfo gItemsInfo[] =
             "スピアーに もたせると\n"
             "{JPN}せんとうちゅうに\n"
             "{JPN}メガシンカ できる"),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_STONES,
         .sortType = ITEM_TYPE_MEGA_STONE,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -5769,7 +5769,7 @@ const struct ItemInfo gItemsInfo[] =
             "ピジョットに もたせると\n"
             "{JPN}せんとうちゅうに\n"
             "{JPN}メガシンカ できる"),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_STONES,
         .sortType = ITEM_TYPE_MEGA_STONE,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -5787,7 +5787,7 @@ const struct ItemInfo gItemsInfo[] =
             "フーディンに もたせると\n"
             "{JPN}せんとうちゅうに\n"
             "{JPN}メガシンカ できる"),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_STONES,
         .sortType = ITEM_TYPE_MEGA_STONE,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -5805,7 +5805,7 @@ const struct ItemInfo gItemsInfo[] =
             "ヤドランに もたせると\n"
             "{JPN}せんとうちゅうに\n"
             "{JPN}メガシンカ できる"),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_STONES,
         .sortType = ITEM_TYPE_MEGA_STONE,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -5823,7 +5823,7 @@ const struct ItemInfo gItemsInfo[] =
             "ゲンガーに もたせると\n"
             "{JPN}せんとうちゅうに\n"
             "{JPN}メガシンカ できる"),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_STONES,
         .sortType = ITEM_TYPE_MEGA_STONE,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -5841,7 +5841,7 @@ const struct ItemInfo gItemsInfo[] =
             "ガルーラに もたせると\n"
             "{JPN}せんとうちゅうに\n"
             "{JPN}メガシンカ できる"),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_STONES,
         .sortType = ITEM_TYPE_MEGA_STONE,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -5859,7 +5859,7 @@ const struct ItemInfo gItemsInfo[] =
             "カイロスに もたせると\n"
             "{JPN}せんとうちゅうに\n"
             "{JPN}メガシンカ できる"),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_STONES,
         .sortType = ITEM_TYPE_MEGA_STONE,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -5877,7 +5877,7 @@ const struct ItemInfo gItemsInfo[] =
             "ギャラドスに もたせると\n"
             "{JPN}せんとうちゅうに\n"
             "{JPN}メガシンカ できる"),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_STONES,
         .sortType = ITEM_TYPE_MEGA_STONE,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -5895,7 +5895,7 @@ const struct ItemInfo gItemsInfo[] =
             "プテラに もたせると\n"
             "{JPN}せんとうちゅうに\n"
             "{JPN}メガシンカ できる"),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_STONES,
         .sortType = ITEM_TYPE_MEGA_STONE,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -5912,7 +5912,7 @@ const struct ItemInfo gItemsInfo[] =
         .description = COMPOUND_STRING("ミュウツーに もたせると\n"
                                           "{JPN}せんとうちゅうに\n"
                                           "{JPN}メガシンカ できる"),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_STONES,
         .sortType = ITEM_TYPE_MEGA_STONE,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -5929,7 +5929,7 @@ const struct ItemInfo gItemsInfo[] =
         .description = COMPOUND_STRING("ミュウツーに もたせると\n"
                                           "{JPN}せんとうちゅうに\n"
                                           "{JPN}メガシンカ できる"),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_STONES,
         .sortType = ITEM_TYPE_MEGA_STONE,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -5947,7 +5947,7 @@ const struct ItemInfo gItemsInfo[] =
             "デンリュウに もたせると\n"
             "{JPN}せんとうちゅうに\n"
             "{JPN}メガシンカ できる"),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_STONES,
         .sortType = ITEM_TYPE_MEGA_STONE,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -5965,7 +5965,7 @@ const struct ItemInfo gItemsInfo[] =
             "ハガネールに もたせると\n"
             "{JPN}せんとうちゅうに\n"
             "{JPN}メガシンカ できる"),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_STONES,
         .sortType = ITEM_TYPE_MEGA_STONE,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -5983,7 +5983,7 @@ const struct ItemInfo gItemsInfo[] =
             "ハッサムに もたせると\n"
             "{JPN}せんとうちゅうに\n"
             "{JPN}メガシンカ できる"),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_STONES,
         .sortType = ITEM_TYPE_MEGA_STONE,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -6001,7 +6001,7 @@ const struct ItemInfo gItemsInfo[] =
             "ヘラクロスに もたせると\n"
             "{JPN}せんとうちゅうに\n"
             "{JPN}メガシンカ できる"),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_STONES,
         .sortType = ITEM_TYPE_MEGA_STONE,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -6019,7 +6019,7 @@ const struct ItemInfo gItemsInfo[] =
             "ヘルガーに もたせると\n"
             "{JPN}せんとうちゅうに\n"
             "{JPN}メガシンカ できる"),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_STONES,
         .sortType = ITEM_TYPE_MEGA_STONE,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -6037,7 +6037,7 @@ const struct ItemInfo gItemsInfo[] =
             "バンギラスに もたせると\n"
             "{JPN}せんとうちゅうに\n"
             "{JPN}メガシンカ できる"),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_STONES,
         .sortType = ITEM_TYPE_MEGA_STONE,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -6055,7 +6055,7 @@ const struct ItemInfo gItemsInfo[] =
             "ジュカインに もたせると\n"
             "{JPN}せんとうちゅうに\n"
             "{JPN}メガシンカ できる"),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_STONES,
         .sortType = ITEM_TYPE_MEGA_STONE,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -6073,7 +6073,7 @@ const struct ItemInfo gItemsInfo[] =
             "バシャーモに もたせると\n"
             "{JPN}せんとうちゅうに\n"
             "{JPN}メガシンカ できる"),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_STONES,
         .sortType = ITEM_TYPE_MEGA_STONE,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -6091,7 +6091,7 @@ const struct ItemInfo gItemsInfo[] =
             "ラグラージに もたせると\n"
             "{JPN}せんとうちゅうに\n"
             "{JPN}メガシンカ できる"),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_STONES,
         .sortType = ITEM_TYPE_MEGA_STONE,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -6109,7 +6109,7 @@ const struct ItemInfo gItemsInfo[] =
             "サーナイトに もたせると\n"
             "{JPN}せんとうちゅうに\n"
             "{JPN}メガシンカ できる"),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_STONES,
         .sortType = ITEM_TYPE_MEGA_STONE,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -6127,7 +6127,7 @@ const struct ItemInfo gItemsInfo[] =
             "ヤミラミに もたせると\n"
             "{JPN}せんとうちゅうに\n"
             "{JPN}メガシンカ できる"),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_STONES,
         .sortType = ITEM_TYPE_MEGA_STONE,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -6145,7 +6145,7 @@ const struct ItemInfo gItemsInfo[] =
             "クチートに もたせると\n"
             "{JPN}せんとうちゅうに\n"
             "{JPN}メガシンカ できる"),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_STONES,
         .sortType = ITEM_TYPE_MEGA_STONE,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -6163,7 +6163,7 @@ const struct ItemInfo gItemsInfo[] =
             "ボスゴドラに もたせると\n"
             "{JPN}せんとうちゅうに\n"
             "{JPN}メガシンカ できる"),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_STONES,
         .sortType = ITEM_TYPE_MEGA_STONE,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -6181,7 +6181,7 @@ const struct ItemInfo gItemsInfo[] =
             "チャーレムに もたせると\n"
             "{JPN}せんとうちゅうに\n"
             "{JPN}メガシンカ できる"),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_STONES,
         .sortType = ITEM_TYPE_MEGA_STONE,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -6199,7 +6199,7 @@ const struct ItemInfo gItemsInfo[] =
             "ライボルトに もたせると\n"
             "{JPN}せんとうちゅうに\n"
             "{JPN}メガシンカ できる"),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_STONES,
         .sortType = ITEM_TYPE_MEGA_STONE,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -6217,7 +6217,7 @@ const struct ItemInfo gItemsInfo[] =
             "サメハダーに もたせると\n"
             "{JPN}せんとうちゅうに\n"
             "{JPN}メガシンカ できる"),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_STONES,
         .sortType = ITEM_TYPE_MEGA_STONE,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -6235,7 +6235,7 @@ const struct ItemInfo gItemsInfo[] =
             "バクーダに もたせると\n"
             "{JPN}せんとうちゅうに\n"
             "{JPN}メガシンカ できる"),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_STONES,
         .sortType = ITEM_TYPE_MEGA_STONE,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -6253,7 +6253,7 @@ const struct ItemInfo gItemsInfo[] =
             "チルタリスに もたせると\n"
             "{JPN}せんとうちゅうに\n"
             "{JPN}メガシンカ できる"),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_STONES,
         .sortType = ITEM_TYPE_MEGA_STONE,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -6271,7 +6271,7 @@ const struct ItemInfo gItemsInfo[] =
             "ジュペッタに もたせると\n"
             "{JPN}せんとうちゅうに\n"
             "{JPN}メガシンカ できる"),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_STONES,
         .sortType = ITEM_TYPE_MEGA_STONE,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -6288,7 +6288,7 @@ const struct ItemInfo gItemsInfo[] =
         .description = COMPOUND_STRING("アブソルに もたせると\n"
                                           "{JPN}せんとうちゅうに\n"
                                           "{JPN}メガシンカ できる"),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_STONES,
         .sortType = ITEM_TYPE_MEGA_STONE,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -6306,7 +6306,7 @@ const struct ItemInfo gItemsInfo[] =
             "オニゴーリに もたせると\n"
             "{JPN}せんとうちゅうに\n"
             "{JPN}メガシンカ できる"),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_STONES,
         .sortType = ITEM_TYPE_MEGA_STONE,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -6324,7 +6324,7 @@ const struct ItemInfo gItemsInfo[] =
             "ボーマンダに もたせると\n"
             "{JPN}せんとうちゅうに\n"
             "{JPN}メガシンカ できる"),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_STONES,
         .sortType = ITEM_TYPE_MEGA_STONE,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -6342,7 +6342,7 @@ const struct ItemInfo gItemsInfo[] =
             "メタグロスに もたせると\n"
             "{JPN}せんとうちゅうに\n"
             "{JPN}メガシンカ できる"),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_STONES,
         .sortType = ITEM_TYPE_MEGA_STONE,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -6360,7 +6360,7 @@ const struct ItemInfo gItemsInfo[] =
             "ラティアスに もたせると\n"
             "{JPN}せんとうちゅうに\n"
             "{JPN}メガシンカ できる"),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_STONES,
         .sortType = ITEM_TYPE_MEGA_STONE,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -6378,7 +6378,7 @@ const struct ItemInfo gItemsInfo[] =
             "ラティオスに もたせると\n"
             "{JPN}せんとうちゅうに\n"
             "{JPN}メガシンカ できる"),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_STONES,
         .sortType = ITEM_TYPE_MEGA_STONE,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -6396,7 +6396,7 @@ const struct ItemInfo gItemsInfo[] =
             "ミミロップに もたせると\n"
             "{JPN}せんとうちゅうに\n"
             "{JPN}メガシンカ できる"),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_STONES,
         .sortType = ITEM_TYPE_MEGA_STONE,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -6413,7 +6413,7 @@ const struct ItemInfo gItemsInfo[] =
         .description = COMPOUND_STRING("ガブリアスに もたせると\n"
                                           "{JPN}せんとうちゅうに\n"
                                           "{JPN}メガシンカ できる"),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_STONES,
         .sortType = ITEM_TYPE_MEGA_STONE,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -6430,7 +6430,7 @@ const struct ItemInfo gItemsInfo[] =
         .description = COMPOUND_STRING("ルカリオに もたせると\n"
                                           "{JPN}せんとうちゅうに\n"
                                           "{JPN}メガシンカ できる"),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_STONES,
         .sortType = ITEM_TYPE_MEGA_STONE,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -6448,7 +6448,7 @@ const struct ItemInfo gItemsInfo[] =
             "ユキノオーに もたせると\n"
             "{JPN}せんとうちゅうに\n"
             "{JPN}メガシンカ できる"),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_STONES,
         .sortType = ITEM_TYPE_MEGA_STONE,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -6466,7 +6466,7 @@ const struct ItemInfo gItemsInfo[] =
             "エルレイドに もたせると\n"
             "{JPN}せんとうちゅうに\n"
             "{JPN}メガシンカ できる"),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_STONES,
         .sortType = ITEM_TYPE_MEGA_STONE,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -6484,7 +6484,7 @@ const struct ItemInfo gItemsInfo[] =
             "タブンネに もたせると\n"
             "{JPN}せんとうちゅうに\n"
             "{JPN}メガシンカ できる"),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_STONES,
         .sortType = ITEM_TYPE_MEGA_STONE,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -6502,7 +6502,7 @@ const struct ItemInfo gItemsInfo[] =
             "ディアンシーに もたせると\n"
             "{JPN}せんとうちゅうに\n"
             "{JPN}メガシンカ できる"),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_STONES,
         .sortType = ITEM_TYPE_MEGA_STONE,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -6520,7 +6520,7 @@ const struct ItemInfo gItemsInfo[] =
             "ピクシーに もたせると\n"
             "{JPN}せんとうちゅうに\n"
             "{JPN}メガシンカ できる"),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_STONES,
         .sortType = ITEM_TYPE_MEGA_STONE,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -6538,7 +6538,7 @@ const struct ItemInfo gItemsInfo[] =
             "ウツボットに もたせると\n"
             "{JPN}せんとうちゅうに\n"
             "{JPN}メガシンカ できる"),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_STONES,
         .sortType = ITEM_TYPE_MEGA_STONE,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -6556,7 +6556,7 @@ const struct ItemInfo gItemsInfo[] =
             "スターミーに もたせると\n"
             "{JPN}せんとうちゅうに\n"
             "{JPN}メガシンカ できる"),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_STONES,
         .sortType = ITEM_TYPE_MEGA_STONE,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -6574,7 +6574,7 @@ const struct ItemInfo gItemsInfo[] =
             "カイリューに もたせると\n"
             "{JPN}せんとうちゅうに\n"
             "{JPN}メガシンカ できる"),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_STONES,
         .sortType = ITEM_TYPE_MEGA_STONE,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -6592,7 +6592,7 @@ const struct ItemInfo gItemsInfo[] =
             "メガニウムに もたせると\n"
             "{JPN}せんとうちゅうに\n"
             "{JPN}メガシンカ できる"),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_STONES,
         .sortType = ITEM_TYPE_MEGA_STONE,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -6610,7 +6610,7 @@ const struct ItemInfo gItemsInfo[] =
             "オーダイルに もたせると\n"
             "{JPN}せんとうちゅうに\n"
             "{JPN}メガシンカ できる"),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_STONES,
         .sortType = ITEM_TYPE_MEGA_STONE,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -6628,7 +6628,7 @@ const struct ItemInfo gItemsInfo[] =
             "エアームドに もたせると\n"
             "{JPN}せんとうちゅうに\n"
             "{JPN}メガシンカ できる"),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_STONES,
         .sortType = ITEM_TYPE_MEGA_STONE,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -6646,7 +6646,7 @@ const struct ItemInfo gItemsInfo[] =
             "ユキメノコに もたせると\n"
             "{JPN}せんとうちゅうに\n"
             "{JPN}メガシンカ できる"),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_STONES,
         .sortType = ITEM_TYPE_MEGA_STONE,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -6664,7 +6664,7 @@ const struct ItemInfo gItemsInfo[] =
             "エンブオーに もたせると\n"
             "{JPN}せんとうちゅうに\n"
             "{JPN}メガシンカ できる"),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_STONES,
         .sortType = ITEM_TYPE_MEGA_STONE,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -6682,7 +6682,7 @@ const struct ItemInfo gItemsInfo[] =
             "ドリュウズに もたせると\n"
             "{JPN}せんとうちゅうに\n"
             "{JPN}メガシンカ できる"),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_STONES,
         .sortType = ITEM_TYPE_MEGA_STONE,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -6700,7 +6700,7 @@ const struct ItemInfo gItemsInfo[] =
             "ペンドラーに もたせると\n"
             "{JPN}せんとうちゅうに\n"
             "{JPN}メガシンカ できる"),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_STONES,
         .sortType = ITEM_TYPE_MEGA_STONE,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -6718,7 +6718,7 @@ const struct ItemInfo gItemsInfo[] =
             "ズルズキンに もたせると\n"
             "{JPN}せんとうちゅうに\n"
             "{JPN}メガシンカ できる"),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_STONES,
         .sortType = ITEM_TYPE_MEGA_STONE,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -6736,7 +6736,7 @@ const struct ItemInfo gItemsInfo[] =
             "シビルドンに もたせると\n"
             "{JPN}せんとうちゅうに\n"
             "{JPN}メガシンカ できる"),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_STONES,
         .sortType = ITEM_TYPE_MEGA_STONE,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -6754,7 +6754,7 @@ const struct ItemInfo gItemsInfo[] =
             "シャンデラに もたせると\n"
             "{JPN}せんとうちゅうに\n"
             "{JPN}メガシンカ できる"),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_STONES,
         .sortType = ITEM_TYPE_MEGA_STONE,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -6772,7 +6772,7 @@ const struct ItemInfo gItemsInfo[] =
             "ブリガロンに もたせると\n"
             "{JPN}せんとうちゅうに\n"
             "{JPN}メガシンカ できる"),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_STONES,
         .sortType = ITEM_TYPE_MEGA_STONE,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -6790,7 +6790,7 @@ const struct ItemInfo gItemsInfo[] =
             "マフォクシーに もたせると\n"
             "{JPN}せんとうちゅうに\n"
             "{JPN}メガシンカ できる"),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_STONES,
         .sortType = ITEM_TYPE_MEGA_STONE,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -6808,7 +6808,7 @@ const struct ItemInfo gItemsInfo[] =
             "ゲッコウガに もたせると\n"
             "{JPN}せんとうちゅうに\n"
             "{JPN}メガシンカ できる"),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_STONES,
         .sortType = ITEM_TYPE_MEGA_STONE,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -6826,7 +6826,7 @@ const struct ItemInfo gItemsInfo[] =
             "カエンジシに もたせると\n"
             "{JPN}せんとうちゅうに\n"
             "{JPN}メガシンカ できる"),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_STONES,
         .sortType = ITEM_TYPE_MEGA_STONE,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -6844,7 +6844,7 @@ const struct ItemInfo gItemsInfo[] =
             "フラエッテに もたせると\n"
             "{JPN}せんとうちゅうに\n"
             "{JPN}メガシンカ できる"),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_STONES,
         .sortType = ITEM_TYPE_MEGA_STONE,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -6862,7 +6862,7 @@ const struct ItemInfo gItemsInfo[] =
             "カラマネロに もたせると\n"
             "{JPN}せんとうちゅうに\n"
             "{JPN}メガシンカ できる"),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_STONES,
         .sortType = ITEM_TYPE_MEGA_STONE,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -6880,7 +6880,7 @@ const struct ItemInfo gItemsInfo[] =
             "ガメノデスに もたせると\n"
             "{JPN}せんとうちゅうに\n"
             "{JPN}メガシンカ できる"),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_STONES,
         .sortType = ITEM_TYPE_MEGA_STONE,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -6898,7 +6898,7 @@ const struct ItemInfo gItemsInfo[] =
             "ドラミドロに もたせると\n"
             "{JPN}せんとうちゅうに\n"
             "{JPN}メガシンカ できる"),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_STONES,
         .sortType = ITEM_TYPE_MEGA_STONE,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -6916,7 +6916,7 @@ const struct ItemInfo gItemsInfo[] =
             "ルチャブルに もたせると\n"
             "{JPN}せんとうちゅうに\n"
             "{JPN}メガシンカ できる"),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_STONES,
         .sortType = ITEM_TYPE_MEGA_STONE,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -6934,7 +6934,7 @@ const struct ItemInfo gItemsInfo[] =
             "ジガルデに もたせると\n"
             "{JPN}せんとうちゅうに\n"
             "{JPN}メガシンカ できる"),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_STONES,
         .sortType = ITEM_TYPE_MEGA_STONE,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -6952,7 +6952,7 @@ const struct ItemInfo gItemsInfo[] =
             "ジジーロンに もたせると\n"
             "{JPN}せんとうちゅうに\n"
             "{JPN}メガシンカ できる"),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_STONES,
         .sortType = ITEM_TYPE_MEGA_STONE,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -6970,7 +6970,7 @@ const struct ItemInfo gItemsInfo[] =
             "タイレーツに もたせると\n"
             "{JPN}せんとうちゅうに\n"
             "{JPN}メガシンカ できる"),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_STONES,
         .sortType = ITEM_TYPE_MEGA_STONE,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -6988,7 +6988,7 @@ const struct ItemInfo gItemsInfo[] =
             "ヒードランに もたせると\n"
             "{JPN}せんとうちゅうに\n"
             "{JPN}メガシンカ できる"),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_STONES,
         .sortType = ITEM_TYPE_MEGA_STONE,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -7006,7 +7006,7 @@ const struct ItemInfo gItemsInfo[] =
             "ダークライに もたせると\n"
             "{JPN}せんとうちゅうに\n"
             "{JPN}メガシンカ できる"),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_STONES,
         .sortType = ITEM_TYPE_MEGA_STONE,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -7024,7 +7024,7 @@ const struct ItemInfo gItemsInfo[] =
             "ゼラオラに もたせると\n"
             "{JPN}せんとうちゅうに\n"
             "{JPN}メガシンカ できる"),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_STONES,
         .sortType = ITEM_TYPE_MEGA_STONE,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -7041,7 +7041,7 @@ const struct ItemInfo gItemsInfo[] =
         .description = COMPOUND_STRING("ライチュウに もたせると\n"
                                           "{JPN}せんとうちゅうに\n"
                                           "{JPN}メガシンカ できる"),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_STONES,
         .sortType = ITEM_TYPE_MEGA_STONE,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -7058,7 +7058,7 @@ const struct ItemInfo gItemsInfo[] =
         .description = COMPOUND_STRING("ライチュウに もたせると\n"
                                           "{JPN}せんとうちゅうに\n"
                                           "{JPN}メガシンカ できる"),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_STONES,
         .sortType = ITEM_TYPE_MEGA_STONE,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -7076,7 +7076,7 @@ const struct ItemInfo gItemsInfo[] =
             "チリーンに もたせると\n"
             "{JPN}せんとうちゅうに\n"
             "{JPN}メガシンカ できる"),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_STONES,
         .sortType = ITEM_TYPE_MEGA_STONE,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -7093,7 +7093,7 @@ const struct ItemInfo gItemsInfo[] =
         .description = COMPOUND_STRING("アブソルに もたせると\n"
                                           "{JPN}せんとうちゅうに\n"
                                           "{JPN}メガシンカ できる"),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_STONES,
         .sortType = ITEM_TYPE_MEGA_STONE,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -7111,7 +7111,7 @@ const struct ItemInfo gItemsInfo[] =
             "ムクホークに もたせると\n"
             "{JPN}せんとうちゅうに\n"
             "{JPN}メガシンカ できる"),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_STONES,
         .sortType = ITEM_TYPE_MEGA_STONE,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -7128,7 +7128,7 @@ const struct ItemInfo gItemsInfo[] =
         .description = COMPOUND_STRING("ガブリアスに もたせると\n"
                                           "{JPN}せんとうちゅうに\n"
                                           "{JPN}メガシンカ できる"),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_STONES,
         .sortType = ITEM_TYPE_MEGA_STONE,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -7145,7 +7145,7 @@ const struct ItemInfo gItemsInfo[] =
         .description = COMPOUND_STRING("ルカリオに もたせると\n"
                                           "{JPN}せんとうちゅうに\n"
                                           "{JPN}メガシンカ できる"),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_STONES,
         .sortType = ITEM_TYPE_MEGA_STONE,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -7163,7 +7163,7 @@ const struct ItemInfo gItemsInfo[] =
             "ゴルーグに もたせると\n"
             "{JPN}せんとうちゅうに\n"
             "{JPN}メガシンカ できる"),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_STONES,
         .sortType = ITEM_TYPE_MEGA_STONE,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -7181,7 +7181,7 @@ const struct ItemInfo gItemsInfo[] =
             "ニャオニクスに もたせると\n"
             "{JPN}せんとうちゅうに\n"
             "{JPN}メガシンカ できる"),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_STONES,
         .sortType = ITEM_TYPE_MEGA_STONE,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -7199,7 +7199,7 @@ const struct ItemInfo gItemsInfo[] =
             "ケケンカニに もたせると\n"
             "{JPN}せんとうちゅうに\n"
             "{JPN}メガシンカ できる"),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_STONES,
         .sortType = ITEM_TYPE_MEGA_STONE,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -7217,7 +7217,7 @@ const struct ItemInfo gItemsInfo[] =
             "グソクムシャに もたせると\n"
             "{JPN}せんとうちゅうに\n"
             "{JPN}メガシンカ できる"),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_STONES,
         .sortType = ITEM_TYPE_MEGA_STONE,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -7235,7 +7235,7 @@ const struct ItemInfo gItemsInfo[] =
             "マギアナに もたせると\n"
             "{JPN}せんとうちゅうに\n"
             "{JPN}メガシンカ できる"),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_STONES,
         .sortType = ITEM_TYPE_MEGA_STONE,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -7253,7 +7253,7 @@ const struct ItemInfo gItemsInfo[] =
             "スコヴィランに もたせると\n"
             "{JPN}せんとうちゅうに\n"
             "{JPN}メガシンカ できる"),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_STONES,
         .sortType = ITEM_TYPE_MEGA_STONE,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -7271,7 +7271,7 @@ const struct ItemInfo gItemsInfo[] =
             "セグレイブに もたせると\n"
             "{JPN}せんとうちゅうに\n"
             "{JPN}メガシンカ できる"),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_STONES,
         .sortType = ITEM_TYPE_MEGA_STONE,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -7289,7 +7289,7 @@ const struct ItemInfo gItemsInfo[] =
             "シャリタツに もたせると\n"
             "{JPN}せんとうちゅうに\n"
             "{JPN}メガシンカ できる"),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_STONES,
         .sortType = ITEM_TYPE_MEGA_STONE,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -7307,7 +7307,7 @@ const struct ItemInfo gItemsInfo[] =
             "キラフロルに もたせると\n"
             "{JPN}せんとうちゅうに\n"
             "{JPN}メガシンカ できる"),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_STONES,
         .sortType = ITEM_TYPE_MEGA_STONE,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -7678,7 +7678,7 @@ const struct ItemInfo gItemsInfo[] =
             "ノーマルタイプの\n"
             "{JPN}わざを Zワザに\n"
             "{JPN}グレードアップする"),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_STONES,
         .sortType = ITEM_TYPE_Z_CRYSTAL,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -7696,7 +7696,7 @@ const struct ItemInfo gItemsInfo[] =
             "ほのおタイプの\n"
             "{JPN}わざを Zワザに\n"
             "{JPN}グレードアップする"),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_STONES,
         .sortType = ITEM_TYPE_Z_CRYSTAL,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -7714,7 +7714,7 @@ const struct ItemInfo gItemsInfo[] =
             "みずタイプの\n"
             "{JPN}わざを Zワザに\n"
             "{JPN}グレードアップする"),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_STONES,
         .sortType = ITEM_TYPE_Z_CRYSTAL,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -7732,7 +7732,7 @@ const struct ItemInfo gItemsInfo[] =
             "でんきタイプの\n"
             "{JPN}わざを Zワザに\n"
             "{JPN}グレードアップする"),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_STONES,
         .sortType = ITEM_TYPE_Z_CRYSTAL,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -7750,7 +7750,7 @@ const struct ItemInfo gItemsInfo[] =
             "くさタイプの\n"
             "{JPN}わざを Zワザに\n"
             "{JPN}グレードアップする"),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_STONES,
         .sortType = ITEM_TYPE_Z_CRYSTAL,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -7768,7 +7768,7 @@ const struct ItemInfo gItemsInfo[] =
             "こおりタイプの\n"
             "{JPN}わざを Zワザに\n"
             "{JPN}グレードアップする"),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_STONES,
         .sortType = ITEM_TYPE_Z_CRYSTAL,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -7786,7 +7786,7 @@ const struct ItemInfo gItemsInfo[] =
             "かくとうタイプの\n"
             "{JPN}わざを Zワザに\n"
             "{JPN}グレードアップする"),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_STONES,
         .sortType = ITEM_TYPE_Z_CRYSTAL,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -7804,7 +7804,7 @@ const struct ItemInfo gItemsInfo[] =
             "どくタイプの\n"
             "{JPN}わざを Zワザに\n"
             "{JPN}グレードアップする"),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_STONES,
         .sortType = ITEM_TYPE_Z_CRYSTAL,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -7822,7 +7822,7 @@ const struct ItemInfo gItemsInfo[] =
             "じめんタイプの\n"
             "{JPN}わざを Zワザに\n"
             "{JPN}グレードアップする"),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_STONES,
         .sortType = ITEM_TYPE_Z_CRYSTAL,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -7840,7 +7840,7 @@ const struct ItemInfo gItemsInfo[] =
             "ひこうタイプの\n"
             "{JPN}わざを Zワザに\n"
             "{JPN}グレードアップする"),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_STONES,
         .sortType = ITEM_TYPE_Z_CRYSTAL,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -7858,7 +7858,7 @@ const struct ItemInfo gItemsInfo[] =
             "エスパータイプの\n"
             "{JPN}わざを Zワザに\n"
             "{JPN}グレードアップする"),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_STONES,
         .sortType = ITEM_TYPE_Z_CRYSTAL,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -7876,7 +7876,7 @@ const struct ItemInfo gItemsInfo[] =
             "むしタイプの\n"
             "{JPN}わざを Zワザに\n"
             "{JPN}グレードアップする"),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_STONES,
         .sortType = ITEM_TYPE_Z_CRYSTAL,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -7894,7 +7894,7 @@ const struct ItemInfo gItemsInfo[] =
             "いわタイプの\n"
             "{JPN}わざを Zワザに\n"
             "{JPN}グレードアップする"),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_STONES,
         .sortType = ITEM_TYPE_Z_CRYSTAL,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -7912,7 +7912,7 @@ const struct ItemInfo gItemsInfo[] =
             "ゴーストタイプの\n"
             "{JPN}わざを Zワザに\n"
             "{JPN}グレードアップする"),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_STONES,
         .sortType = ITEM_TYPE_Z_CRYSTAL,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -7930,7 +7930,7 @@ const struct ItemInfo gItemsInfo[] =
             "ドラゴンタイプの\n"
             "{JPN}わざを Zワザに\n"
             "{JPN}グレードアップする"),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_STONES,
         .sortType = ITEM_TYPE_Z_CRYSTAL,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -7948,7 +7948,7 @@ const struct ItemInfo gItemsInfo[] =
             "あくタイプの\n"
             "{JPN}わざを Zワザに\n"
             "{JPN}グレードアップする"),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_STONES,
         .sortType = ITEM_TYPE_Z_CRYSTAL,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -7966,7 +7966,7 @@ const struct ItemInfo gItemsInfo[] =
             "はがねタイプの\n"
             "{JPN}わざを Zワザに\n"
             "{JPN}グレードアップする"),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_STONES,
         .sortType = ITEM_TYPE_Z_CRYSTAL,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -7984,7 +7984,7 @@ const struct ItemInfo gItemsInfo[] =
             "フェアリータイプの\n"
             "{JPN}わざを Zワザに\n"
             "{JPN}グレードアップする"),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_STONES,
         .sortType = ITEM_TYPE_Z_CRYSTAL,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -8002,7 +8002,7 @@ const struct ItemInfo gItemsInfo[] =
             "ピカチュウの\n"
             "{JPN}ボルテッカーを\n"
             "{JPN}Zワザに する"),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_STONES,
         .sortType = ITEM_TYPE_Z_CRYSTAL,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -8020,7 +8020,7 @@ const struct ItemInfo gItemsInfo[] =
             "イーブイの\n"
             "{JPN}とっておきを\n"
             "{JPN}Zワザに する"),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_STONES,
         .sortType = ITEM_TYPE_Z_CRYSTAL,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -8038,7 +8038,7 @@ const struct ItemInfo gItemsInfo[] =
             "カビゴンの\n"
             "{JPN}ギガインパクトを\n"
             "{JPN}Zワザに する"),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_STONES,
         .sortType = ITEM_TYPE_Z_CRYSTAL,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -8056,7 +8056,7 @@ const struct ItemInfo gItemsInfo[] =
             "ミュウの\n"
             "{JPN}サイコキネシスを\n"
             "{JPN}Zワザに する"),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_STONES,
         .sortType = ITEM_TYPE_Z_CRYSTAL,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -8074,7 +8074,7 @@ const struct ItemInfo gItemsInfo[] =
             "ジュナイパーの\n"
             "{JPN}かげぬいを\n"
             "{JPN}Zワザに する"),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_STONES,
         .sortType = ITEM_TYPE_Z_CRYSTAL,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -8092,7 +8092,7 @@ const struct ItemInfo gItemsInfo[] =
             "ガオガエンの\n"
             "{JPN}DDラリアットを\n"
             "{JPN}Zワザに する"),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_STONES,
         .sortType = ITEM_TYPE_Z_CRYSTAL,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -8110,7 +8110,7 @@ const struct ItemInfo gItemsInfo[] =
             "アシレーヌの\n"
             "{JPN}うたかたのアリアを\n"
             "{JPN}Zワザに する"),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_STONES,
         .sortType = ITEM_TYPE_Z_CRYSTAL,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -8128,7 +8128,7 @@ const struct ItemInfo gItemsInfo[] =
             "ルガルガンの\n"
             "{JPN}ストーンエッジを\n"
             "{JPN}Zワザに する"),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_STONES,
         .sortType = ITEM_TYPE_Z_CRYSTAL,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -8146,7 +8146,7 @@ const struct ItemInfo gItemsInfo[] =
             "ミミッキュの\n"
             "{JPN}じゃれつくを\n"
             "{JPN}Zワザに する"),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_STONES,
         .sortType = ITEM_TYPE_Z_CRYSTAL,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -8164,7 +8164,7 @@ const struct ItemInfo gItemsInfo[] =
             "ジャラランガの\n"
             "{JPN}スケイルノイズを\n"
             "{JPN}Zワザに する"),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_STONES,
         .sortType = ITEM_TYPE_Z_CRYSTAL,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -8182,7 +8182,7 @@ const struct ItemInfo gItemsInfo[] =
             "カプたちの\n"
             "{JPN}しぜんのいかりを\n"
             "{JPN}Zワザに する"),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_STONES,
         .sortType = ITEM_TYPE_Z_CRYSTAL,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -8200,7 +8200,7 @@ const struct ItemInfo gItemsInfo[] =
             "ソルガレオの\n"
             "{JPN}メテオドライブを\n"
             "{JPN}Zワザに する"),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_STONES,
         .sortType = ITEM_TYPE_Z_CRYSTAL,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -8218,7 +8218,7 @@ const struct ItemInfo gItemsInfo[] =
             "ルナアーラの\n"
             "{JPN}シャドーレイを\n"
             "{JPN}Zワザに する"),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_STONES,
         .sortType = ITEM_TYPE_Z_CRYSTAL,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -8236,7 +8236,7 @@ const struct ItemInfo gItemsInfo[] =
             "マーシャドーの\n"
             "{JPN}シャドースチールを\n"
             "{JPN}Zワザに する"),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_STONES,
         .sortType = ITEM_TYPE_Z_CRYSTAL,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -8254,7 +8254,7 @@ const struct ItemInfo gItemsInfo[] =
             "アローラ ライチュウの\n"
             "{JPN}10まんボルトを\n"
             "{JPN}Zワザに する"),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_STONES,
         .sortType = ITEM_TYPE_Z_CRYSTAL,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -8272,7 +8272,7 @@ const struct ItemInfo gItemsInfo[] =
             "サトシの ピカチュウの\n"
             "{JPN}10まんボルトを\n"
             "{JPN}Zワザに する"),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_STONES,
         .sortType = ITEM_TYPE_Z_CRYSTAL,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -8290,7 +8290,7 @@ const struct ItemInfo gItemsInfo[] =
             "がったいした\n"
             "{JPN}ネクロズマを あらたな\n"
             "{JPN}すがたにする けっしょう"),
-        .pocket = POCKET_ITEMS,
+        .pocket = POCKET_STONES,
         .sortType = ITEM_TYPE_Z_CRYSTAL,
         .type = ITEM_USE_BAG_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_CannotUse,
@@ -12299,7 +12299,7 @@ const struct ItemInfo gItemsInfo[] =
             "{JPN}あたえるが こうげきを\n"
             "{JPN}うけると ひるんでしまう"),
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_HM,
+        .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
@@ -12313,7 +12313,7 @@ const struct ItemInfo gItemsInfo[] =
             "{JPN}てきを ひっかけて\n"
             "{JPN}こうげきする"),
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_HM,
+        .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
@@ -12327,7 +12327,7 @@ const struct ItemInfo gItemsInfo[] =
             "{JPN}てきを こんらんさせる\n"
             "{JPN}ことがある"),
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_HM,
+        .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
@@ -12341,7 +12341,7 @@ const struct ItemInfo gItemsInfo[] =
             "{JPN}させて とくこうと\n"
             "{JPN}とくぼうを あげる"),
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_HM,
+        .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
@@ -12355,7 +12355,7 @@ const struct ItemInfo gItemsInfo[] =
             "{JPN}てきが にげると\n"
             "{JPN}せんとうは おわる"),
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_HM,
+        .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
@@ -12369,7 +12369,7 @@ const struct ItemInfo gItemsInfo[] =
             "{JPN}ふえる もうどくを\n"
             "{JPN}てきに あたえる"),
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_HM,
+        .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
@@ -12389,7 +12389,7 @@ const struct ItemInfo gItemsInfo[] =
             "{JPN}ダメージを あたえる"),
         #endif
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_HM,
+        .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
@@ -12403,7 +12403,7 @@ const struct ItemInfo gItemsInfo[] =
             "{JPN}こうげきと ぼうぎょの\n"
             "{JPN}ちからを あげる"),
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_HM,
+        .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
@@ -12417,7 +12417,7 @@ const struct ItemInfo gItemsInfo[] =
             "{JPN}れんぞくで はっしゃして\n"
             "{JPN}てきを こうげきする"),
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_HM,
+        .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
@@ -12431,7 +12431,7 @@ const struct ItemInfo gItemsInfo[] =
             "{JPN}あたえる ダメージの\n"
             "{JPN}りょうが へんかする"),
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_HM,
+        .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
@@ -12445,7 +12445,7 @@ const struct ItemInfo gItemsInfo[] =
             "{JPN}ほのおタイプの\n"
             "{JPN}わざのいりょくが あがる"),
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_HM,
+        .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
@@ -12459,7 +12459,7 @@ const struct ItemInfo gItemsInfo[] =
             "{JPN}こうげきわざ しか\n"
             "{JPN}だせない ように する"),
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_HM,
+        .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
@@ -12477,7 +12477,7 @@ const struct ItemInfo gItemsInfo[] =
             "{JPN}こおらせる ことがある"),
         #endif
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_HM,
+        .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
@@ -12497,7 +12497,7 @@ const struct ItemInfo gItemsInfo[] =
             "{JPN}こおらせる ことがある"),
         #endif
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_HM,
+        .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
@@ -12511,7 +12511,7 @@ const struct ItemInfo gItemsInfo[] =
             "{JPN}つかうと つぎのターン\n"
             "{JPN}うごけなく なってしまう"),
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_HM,
+        .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
@@ -12525,7 +12525,7 @@ const struct ItemInfo gItemsInfo[] =
             "{JPN}とくこうの ダメージを\n"
             "{JPN}よわめる"),
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_HM,
+        .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
@@ -12539,7 +12539,7 @@ const struct ItemInfo gItemsInfo[] =
             "{JPN}うけないが れんぞくして\n"
             "{JPN}だすと しっぱいしやすい"),
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_HM,
+        .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
@@ -12553,7 +12553,7 @@ const struct ItemInfo gItemsInfo[] =
             "{JPN}みずタイプの\n"
             "{JPN}わざのいりょくが あがる"),
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_HM,
+        .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
@@ -12567,7 +12567,7 @@ const struct ItemInfo gItemsInfo[] =
             "{JPN}はんぶんの たいりょくを\n"
             "{JPN}かいふく できる"),
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_HM,
+        .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
@@ -12581,7 +12581,7 @@ const struct ItemInfo gItemsInfo[] =
             "{JPN}まもられて とくしゅ\n"
             "{JPN}じょうたいに ならない"),
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_HM,
+        .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
@@ -12595,7 +12595,7 @@ const struct ItemInfo gItemsInfo[] =
             "{JPN}いないほど あたえる\n"
             "{JPN}ダメージが あがる"),
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_HM,
+        .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
@@ -12609,7 +12609,7 @@ const struct ItemInfo gItemsInfo[] =
             "{JPN}きゅうしゅうして つぎの\n"
             "{JPN}ターンに こうげきする"),
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_HM,
+        .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
@@ -12623,7 +12623,7 @@ const struct ItemInfo gItemsInfo[] =
             "{JPN}てきの ぼうぎょを\n"
             "{JPN}さげる ことがある"),
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_HM,
+        .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
@@ -12637,7 +12637,7 @@ const struct ItemInfo gItemsInfo[] =
             "{JPN}あたった てきを\n"
             "{JPN}まひさせる ことがある"),
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_HM,
+        .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
@@ -12651,7 +12651,7 @@ const struct ItemInfo gItemsInfo[] =
             "{JPN}あたった てきを\n"
             "{JPN}まひさせる ことがある"),
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_HM,
+        .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
@@ -12665,7 +12665,7 @@ const struct ItemInfo gItemsInfo[] =
             "{JPN}とんでいる てきいがいに\n"
             "{JPN}だいダメージを あたえる"),
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_HM,
+        .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
@@ -12679,7 +12679,7 @@ const struct ItemInfo gItemsInfo[] =
             "{JPN}いるほど あたえる\n"
             "{JPN}ダメージが あがる"),
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_HM,
+        .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
@@ -12693,7 +12693,7 @@ const struct ItemInfo gItemsInfo[] =
             "{JPN}もぐり つぎのターンに\n"
             "{JPN}てきを こうげきする"),
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_HM,
+        .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
@@ -12707,7 +12707,7 @@ const struct ItemInfo gItemsInfo[] =
             "{JPN}てきの とくぼうを\n"
             "{JPN}さげる ことがある"),
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_HM,
+        .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
@@ -12721,7 +12721,7 @@ const struct ItemInfo gItemsInfo[] =
             "{JPN}てきの とくぼうを\n"
             "{JPN}さげる ことがある"),
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_HM,
+        .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
@@ -12735,7 +12735,7 @@ const struct ItemInfo gItemsInfo[] =
             "{JPN}こわして てきに\n"
             "{JPN}ダメージを あたえられる"),
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_HM,
+        .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
@@ -12749,7 +12749,7 @@ const struct ItemInfo gItemsInfo[] =
             "{JPN}てきを まどわせて\n"
             "{JPN}かいひりつを あげる"),
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_HM,
+        .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
@@ -12763,7 +12763,7 @@ const struct ItemInfo gItemsInfo[] =
             "{JPN}ぶつり こうげきの\n"
             "{JPN}ダメージを よわめる"),
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_HM,
+        .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
@@ -12777,7 +12777,7 @@ const struct ItemInfo gItemsInfo[] =
             "{JPN}すばやさで てきに\n"
             "{JPN}でんげきを あびせる."),
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_HM,
+        .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
@@ -12791,7 +12791,7 @@ const struct ItemInfo gItemsInfo[] =
             "{JPN}あたった てきを\n"
             "{JPN}やけどさせる ことがある"),
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_HM,
+        .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
@@ -12805,7 +12805,7 @@ const struct ItemInfo gItemsInfo[] =
             "{JPN}あたった てきに どくを\n"
             "{JPN}あたえることが ある"),
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_HM,
+        .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
@@ -12819,7 +12819,7 @@ const struct ItemInfo gItemsInfo[] =
             "{JPN}まいターン てきに\n"
             "{JPN}ダメージを あたえる"),
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_HM,
+        .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
@@ -12833,7 +12833,7 @@ const struct ItemInfo gItemsInfo[] =
             "{JPN}やきつくす こうげき\n"
             "{JPN}やけどさせる ことがある"),
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_HM,
+        .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
@@ -12847,7 +12847,7 @@ const struct ItemInfo gItemsInfo[] =
             "{JPN}ふうじて こうげき\n"
             "{JPN}すばやさを さげられる"),
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_HM,
+        .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
@@ -12861,7 +12861,7 @@ const struct ItemInfo gItemsInfo[] =
             "{JPN}ぜったいに よけられない\n"
             "{JPN}こうげきを する"),
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_HM,
+        .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
@@ -12875,7 +12875,7 @@ const struct ItemInfo gItemsInfo[] =
             "{JPN}れんぞくで だせない\n"
             "{JPN}ようにする"),
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_HM,
+        .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
@@ -12889,7 +12889,7 @@ const struct ItemInfo gItemsInfo[] =
             "{JPN}こうげきの ちからを\n"
             "{JPN}あげる ことが できる"),
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_HM,
+        .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
@@ -12903,7 +12903,7 @@ const struct ItemInfo gItemsInfo[] =
             "{JPN}てきに あたえる\n"
             "{JPN}ついか こうかが かわる"),
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_HM,
+        .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
@@ -12917,7 +12917,7 @@ const struct ItemInfo gItemsInfo[] =
             "{JPN}いじょうと たいりょくを\n"
             "{JPN}ぜんかいふく する"),
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_HM,
+        .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
@@ -12931,7 +12931,7 @@ const struct ItemInfo gItemsInfo[] =
             "{JPN}メスなら オスに\n"
             "{JPN}わざが だしにくくなる"),
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_HM,
+        .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
@@ -12945,7 +12945,7 @@ const struct ItemInfo gItemsInfo[] =
             "{JPN}みて てきが もっている\n"
             "{JPN}どうぐを ぬすむ"),
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_HM,
+        .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
@@ -12959,7 +12959,7 @@ const struct ItemInfo gItemsInfo[] =
             "{JPN}ひろげて そのまま\n"
             "{JPN}てきに たいあたりする"),
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_HM,
+        .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
@@ -12973,7 +12973,7 @@ const struct ItemInfo gItemsInfo[] =
             "{JPN}じぶんと てきの\n"
             "{JPN}とくせいを いれかえる"),
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_HM,
+        .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
@@ -12987,7 +12987,7 @@ const struct ItemInfo gItemsInfo[] =
             "{JPN}わざを うばって\n"
             "{JPN}じぶんに つかう"),
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_HM,
+        .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
@@ -13001,7 +13001,7 @@ const struct ItemInfo gItemsInfo[] =
             "{JPN}できるが とくこうが\n"
             "{JPN}ガクッと さがってしまう"),
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_HM,
+        .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
@@ -13012,7 +13012,7 @@ const struct ItemInfo gItemsInfo[] =
         .price = 3000,
         .description = COMPOUND_STRING("?????"), // Todo
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_HM,
+        .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
@@ -13023,7 +13023,7 @@ const struct ItemInfo gItemsInfo[] =
         .price = 3000,
         .description = COMPOUND_STRING("?????"), // Todo
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_HM,
+        .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
@@ -13034,7 +13034,7 @@ const struct ItemInfo gItemsInfo[] =
         .price = 3000,
         .description = COMPOUND_STRING("?????"), // Todo
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_HM,
+        .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
@@ -13045,7 +13045,7 @@ const struct ItemInfo gItemsInfo[] =
         .price = 3000,
         .description = COMPOUND_STRING("?????"), // Todo
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_HM,
+        .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
@@ -13056,7 +13056,7 @@ const struct ItemInfo gItemsInfo[] =
         .price = 3000,
         .description = COMPOUND_STRING("?????"), // Todo
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_HM,
+        .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
@@ -13067,7 +13067,7 @@ const struct ItemInfo gItemsInfo[] =
         .price = 3000,
         .description = COMPOUND_STRING("?????"), // Todo
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_HM,
+        .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
@@ -13078,7 +13078,7 @@ const struct ItemInfo gItemsInfo[] =
         .price = 3000,
         .description = COMPOUND_STRING("?????"), // Todo
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_HM,
+        .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
@@ -13089,7 +13089,7 @@ const struct ItemInfo gItemsInfo[] =
         .price = 3000,
         .description = COMPOUND_STRING("?????"), // Todo
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_HM,
+        .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
@@ -13100,7 +13100,7 @@ const struct ItemInfo gItemsInfo[] =
         .price = 3000,
         .description = COMPOUND_STRING("?????"), // Todo
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_HM,
+        .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
@@ -13111,7 +13111,7 @@ const struct ItemInfo gItemsInfo[] =
         .price = 3000,
         .description = COMPOUND_STRING("?????"), // Todo
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_HM,
+        .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
@@ -13122,7 +13122,7 @@ const struct ItemInfo gItemsInfo[] =
         .price = 3000,
         .description = COMPOUND_STRING("?????"), // Todo
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_HM,
+        .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
@@ -13133,7 +13133,7 @@ const struct ItemInfo gItemsInfo[] =
         .price = 3000,
         .description = COMPOUND_STRING("?????"), // Todo
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_HM,
+        .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
@@ -13144,7 +13144,7 @@ const struct ItemInfo gItemsInfo[] =
         .price = 3000,
         .description = COMPOUND_STRING("?????"), // Todo
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_HM,
+        .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
@@ -13155,7 +13155,7 @@ const struct ItemInfo gItemsInfo[] =
         .price = 3000,
         .description = COMPOUND_STRING("?????"), // Todo
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_HM,
+        .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
@@ -13166,7 +13166,7 @@ const struct ItemInfo gItemsInfo[] =
         .price = 3000,
         .description = COMPOUND_STRING("?????"), // Todo
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_HM,
+        .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
@@ -13177,7 +13177,7 @@ const struct ItemInfo gItemsInfo[] =
         .price = 3000,
         .description = COMPOUND_STRING("?????"), // Todo
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_HM,
+        .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
@@ -13188,7 +13188,7 @@ const struct ItemInfo gItemsInfo[] =
         .price = 3000,
         .description = COMPOUND_STRING("?????"), // Todo
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_HM,
+        .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
@@ -13199,7 +13199,7 @@ const struct ItemInfo gItemsInfo[] =
         .price = 3000,
         .description = COMPOUND_STRING("?????"), // Todo
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_HM,
+        .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
@@ -13210,7 +13210,7 @@ const struct ItemInfo gItemsInfo[] =
         .price = 3000,
         .description = COMPOUND_STRING("?????"), // Todo
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_HM,
+        .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
@@ -13221,7 +13221,7 @@ const struct ItemInfo gItemsInfo[] =
         .price = 3000,
         .description = COMPOUND_STRING("?????"), // Todo
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_HM,
+        .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
@@ -13232,7 +13232,7 @@ const struct ItemInfo gItemsInfo[] =
         .price = 3000,
         .description = COMPOUND_STRING("?????"), // Todo
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_HM,
+        .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
@@ -13243,7 +13243,7 @@ const struct ItemInfo gItemsInfo[] =
         .price = 3000,
         .description = COMPOUND_STRING("?????"), // Todo
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_HM,
+        .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
@@ -13254,7 +13254,7 @@ const struct ItemInfo gItemsInfo[] =
         .price = 3000,
         .description = COMPOUND_STRING("?????"), // Todo
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_HM,
+        .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
@@ -13265,7 +13265,7 @@ const struct ItemInfo gItemsInfo[] =
         .price = 3000,
         .description = COMPOUND_STRING("?????"), // Todo
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_HM,
+        .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
@@ -13276,7 +13276,7 @@ const struct ItemInfo gItemsInfo[] =
         .price = 3000,
         .description = COMPOUND_STRING("?????"), // Todo
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_HM,
+        .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
@@ -13287,7 +13287,7 @@ const struct ItemInfo gItemsInfo[] =
         .price = 3000,
         .description = COMPOUND_STRING("?????"), // Todo
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_HM,
+        .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
@@ -13298,7 +13298,7 @@ const struct ItemInfo gItemsInfo[] =
         .price = 3000,
         .description = COMPOUND_STRING("?????"), // Todo
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_HM,
+        .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
@@ -13309,7 +13309,7 @@ const struct ItemInfo gItemsInfo[] =
         .price = 3000,
         .description = COMPOUND_STRING("?????"), // Todo
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_HM,
+        .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
@@ -13320,7 +13320,7 @@ const struct ItemInfo gItemsInfo[] =
         .price = 3000,
         .description = COMPOUND_STRING("?????"), // Todo
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_HM,
+        .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
@@ -13331,7 +13331,7 @@ const struct ItemInfo gItemsInfo[] =
         .price = 3000,
         .description = COMPOUND_STRING("?????"), // Todo
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_HM,
+        .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
@@ -13342,7 +13342,7 @@ const struct ItemInfo gItemsInfo[] =
         .price = 3000,
         .description = COMPOUND_STRING("?????"), // Todo
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_HM,
+        .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
@@ -13353,7 +13353,7 @@ const struct ItemInfo gItemsInfo[] =
         .price = 3000,
         .description = COMPOUND_STRING("?????"), // Todo
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_HM,
+        .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
@@ -13364,7 +13364,7 @@ const struct ItemInfo gItemsInfo[] =
         .price = 3000,
         .description = COMPOUND_STRING("?????"), // Todo
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_HM,
+        .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
@@ -13375,7 +13375,7 @@ const struct ItemInfo gItemsInfo[] =
         .price = 3000,
         .description = COMPOUND_STRING("?????"), // Todo
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_HM,
+        .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
@@ -13386,7 +13386,7 @@ const struct ItemInfo gItemsInfo[] =
         .price = 3000,
         .description = COMPOUND_STRING("?????"), // Todo
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_HM,
+        .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
@@ -13397,7 +13397,7 @@ const struct ItemInfo gItemsInfo[] =
         .price = 3000,
         .description = COMPOUND_STRING("?????"), // Todo
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_HM,
+        .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
@@ -13408,7 +13408,7 @@ const struct ItemInfo gItemsInfo[] =
         .price = 3000,
         .description = COMPOUND_STRING("?????"), // Todo
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_HM,
+        .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
@@ -13419,7 +13419,7 @@ const struct ItemInfo gItemsInfo[] =
         .price = 3000,
         .description = COMPOUND_STRING("?????"), // Todo
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_HM,
+        .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
@@ -13430,7 +13430,7 @@ const struct ItemInfo gItemsInfo[] =
         .price = 3000,
         .description = COMPOUND_STRING("?????"), // Todo
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_HM,
+        .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
@@ -13441,7 +13441,7 @@ const struct ItemInfo gItemsInfo[] =
         .price = 3000,
         .description = COMPOUND_STRING("?????"), // Todo
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_HM,
+        .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
@@ -13452,7 +13452,7 @@ const struct ItemInfo gItemsInfo[] =
         .price = 3000,
         .description = COMPOUND_STRING("?????"), // Todo
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_HM,
+        .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
@@ -13463,7 +13463,7 @@ const struct ItemInfo gItemsInfo[] =
         .price = 3000,
         .description = COMPOUND_STRING("?????"), // Todo
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_HM,
+        .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
@@ -13474,7 +13474,7 @@ const struct ItemInfo gItemsInfo[] =
         .price = 3000,
         .description = COMPOUND_STRING("?????"), // Todo
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_HM,
+        .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
@@ -13485,7 +13485,7 @@ const struct ItemInfo gItemsInfo[] =
         .price = 3000,
         .description = COMPOUND_STRING("?????"), // Todo
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_HM,
+        .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
@@ -13496,7 +13496,7 @@ const struct ItemInfo gItemsInfo[] =
         .price = 3000,
         .description = COMPOUND_STRING("?????"), // Todo
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_HM,
+        .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
@@ -13507,7 +13507,7 @@ const struct ItemInfo gItemsInfo[] =
         .price = 3000,
         .description = COMPOUND_STRING("?????"), // Todo
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_HM,
+        .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
@@ -13518,7 +13518,7 @@ const struct ItemInfo gItemsInfo[] =
         .price = 3000,
         .description = COMPOUND_STRING("?????"), // Todo
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_HM,
+        .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
@@ -13529,7 +13529,7 @@ const struct ItemInfo gItemsInfo[] =
         .price = 3000,
         .description = COMPOUND_STRING("?????"), // Todo
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_HM,
+        .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
@@ -13540,7 +13540,7 @@ const struct ItemInfo gItemsInfo[] =
         .price = 3000,
         .description = COMPOUND_STRING("?????"), // Todo
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_HM,
+        .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
@@ -13551,7 +13551,7 @@ const struct ItemInfo gItemsInfo[] =
         .price = 3000,
         .description = COMPOUND_STRING("?????"), // Todo
         .importance = I_REUSABLE_TMS,
-        .pocket = POCKET_TM_HM,
+        .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
@@ -13565,7 +13565,7 @@ const struct ItemInfo gItemsInfo[] =
             "{JPN}するどいもので てきを\n"
             "{JPN}きりつけて こうげきする"),
         .importance = 1,
-        .pocket = POCKET_TM_HM,
+        .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
@@ -13579,7 +13579,7 @@ const struct ItemInfo gItemsInfo[] =
             "{JPN}つぎの ターンに てきを\n"
             "{JPN}こうげきする"),
         .importance = 1,
-        .pocket = POCKET_TM_HM,
+        .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
@@ -13593,7 +13593,7 @@ const struct ItemInfo gItemsInfo[] =
             "{JPN}それを ものすごい\n"
             "{JPN}ちからで たたきつける"),
         .importance = 1,
-        .pocket = POCKET_TM_HM,
+        .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
@@ -13607,7 +13607,7 @@ const struct ItemInfo gItemsInfo[] =
             "{JPN}ちからを ためこみ\n"
             "{JPN}てきを こうげきする"),
         .importance = 1,
-        .pocket = POCKET_TM_HM,
+        .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
@@ -13621,7 +13621,7 @@ const struct ItemInfo gItemsInfo[] =
             "{JPN}くらませて てきの\n"
             "{JPN}めいちゅうりつを さげる"),
         .importance = 1,
-        .pocket = POCKET_TM_HM,
+        .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
@@ -13635,7 +13635,7 @@ const struct ItemInfo gItemsInfo[] =
             "{JPN}てきの ぼうぎょを\n"
             "{JPN}さげる ことがある"),
         .importance = 1,
-        .pocket = POCKET_TM_HM,
+        .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
@@ -13649,7 +13649,7 @@ const struct ItemInfo gItemsInfo[] =
             "{JPN}いきおいで てきに\n"
             "{JPN}とっしんする"),
         .importance = 1,
-        .pocket = POCKET_TM_HM,
+        .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },
@@ -13663,7 +13663,7 @@ const struct ItemInfo gItemsInfo[] =
             "{JPN}もぐり つぎのターンで\n"
             "{JPN}てきを こうげきする"),
         .importance = 1,
-        .pocket = POCKET_TM_HM,
+        .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_TMHM,
     },

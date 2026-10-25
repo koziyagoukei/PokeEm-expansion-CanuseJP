@@ -8,7 +8,7 @@
 #define LINK_COMPAT_VERSION      13
 
 // Bump for transmitted Pokemon, battle, or contest data layout changes.
-#define LINK_DATA_LAYOUT_VERSION 6
+#define LINK_DATA_LAYOUT_VERSION 7
 
 #define LINK_VARIANT_FRONTIER_HACK 1
 #define LINK_BUILD_VARIANT         LINK_VARIANT_FRONTIER_HACK

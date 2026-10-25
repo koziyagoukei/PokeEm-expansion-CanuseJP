@@ -452,6 +452,11 @@ static bool32 HandleMysteryGiftOrEReaderSetup(s32 isEReader)
 
 void CB2_InitMysteryGift(void)
 {
+    if (FREE_MYSTERY_GIFT)
+    {
+        SetMainCallback2(CB2_InitTitleScreen);
+        return;
+    }
     if (HandleMysteryGiftOrEReaderSetup(FALSE))
     {
         SetMainCallback2(CB2_MysteryGiftEReader);
@@ -463,6 +468,11 @@ void CB2_InitMysteryGift(void)
 
 void CB2_InitEReader(void)
 {
+    if (!ENABLE_E_READER)
+    {
+        SetMainCallback2(CB2_InitTitleScreen);
+        return;
+    }
     if (HandleMysteryGiftOrEReaderSetup(TRUE))
     {
         SetMainCallback2(CB2_MysteryGiftEReader);

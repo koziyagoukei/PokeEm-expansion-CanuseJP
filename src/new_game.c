@@ -1,4 +1,5 @@
 #include "global.h"
+#include "frontier_inventory.h"
 #include "clock.h"
 #include "new_game.h"
 #include "random.h"
@@ -217,7 +218,7 @@ void NewGameInitData(void)
     DeactivateAllRoamers();
     gSaveBlock1Ptr->registeredItem = ITEM_NONE;
     ClearBag();
-    AddBagItem(ITEM_MEGA_RING, 1);
+    GiveFrontierStarterInventory();
     AddBagItem(ITEM_BERSERK_GENE, 999);
     NewGameInitPCItems();
     ClearPokeblocks();

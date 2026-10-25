@@ -259,6 +259,7 @@ static const u16 sBirchSpeechBgGradientPal[] = INCGFX_U16("graphics/birch_speech
 
 static const u8 gText_SaveFileCorrupted[] = _("{JPN}レポートが せいかくに かかれていないので\nそのまえのレポートを よみます!");
 static const u8 gText_SaveFileErased[] = _("{JPN}レポートの ないようが きえてしまった!");
+static const u8 sText_SaveFileIncompatible[] = _("{JPN}このバージョンでは\nまえのレポートは つかえません\pレポートは けしていません\nさいしょから はじめてください");
 static const u8 gJPText_No1MSubCircuit[] = _("{JPN}1Mサブきばんが ささっていません!");
 static const u8 gText_BatteryRunDry[] = _("{JPN}でんちぎれの ために\nとけいが うごかなくなりました\pとけいに かんけいする できごとは おきませんが\nゲームを つづけて あそぶことは できます");
 
@@ -665,7 +666,7 @@ static void Task_MainMenuCheckSaveFile(u8 taskId)
         {
         case SAVE_STATUS_OK:
             tMenuType = HAS_SAVED_GAME;
-            if (IsMysteryGiftEnabled())
+            if (!FREE_MYSTERY_GIFT && IsMysteryGiftEnabled())
                 tMenuType++;
             gTasks[taskId].func = Task_MainMenuCheckBattery;
             break;
@@ -674,11 +675,16 @@ static void Task_MainMenuCheckSaveFile(u8 taskId)
             tMenuType = HAS_NO_SAVED_GAME;
             gTasks[taskId].func = Task_WaitForSaveFileErrorWindow;
             break;
+        case SAVE_STATUS_INCOMPATIBLE:
+            CreateMainMenuErrorWindow(sText_SaveFileIncompatible);
+            tMenuType = HAS_NO_SAVED_GAME;
+            gTasks[taskId].func = Task_WaitForSaveFileErrorWindow;
+            break;
         case SAVE_STATUS_ERROR:
             CreateMainMenuErrorWindow(gText_SaveFileCorrupted);
             gTasks[taskId].func = Task_WaitForSaveFileErrorWindow;
             tMenuType = HAS_SAVED_GAME;
-            if (IsMysteryGiftEnabled() == TRUE)
+            if (!FREE_MYSTERY_GIFT && IsMysteryGiftEnabled() == TRUE)
                 tMenuType++;
             break;
         case SAVE_STATUS_EMPTY:

@@ -1,4 +1,5 @@
 #include "global.h"
+#include "frontier_inventory.h"
 #include "event_data.h"
 #include "event_object_movement.h"
 #include "field_message_box.h"
@@ -136,7 +137,6 @@ static const enum Item *FrontierItemGiver_GetItemList(u16 listId);
 static u16 FrontierItemGiver_GetItemCount(u16 listId);
 static void FrontierItemGiver_Open(u16 listId);
 static void FrontierItemGiver_DestroyAndReturn(u8 taskId);
-static void FrontierHub_GiveGimmickKeyItems(void);
 static void FrontierHub_GiveAutoItems(void);
 static void FrontierHub_TryGiveInitialParty(void);
 static void FrontierHub_CreateInitialGiftMon(const struct FrontierHubInitialGiftMon *gift, struct Pokemon *mon);
@@ -362,7 +362,7 @@ static const struct FrontierHubAutoItem sFrontierHubAutoItems[] =
     { ITEM_TANGA_BERRY, 999 }, // タンガのみ
     { ITEM_LIECHI_BERRY, 999 }, // チイラのみ
     { ITEM_LUM_BERRY, 999 }, // ラムのみ
-    { ITEM_ENIGMA_BERRY_E_READER, 999 }, // ナゾのみ
+    { ITEM_ENIGMA_BERRY, 999 }, // ナゾのみ
     { ITEM_COLBUR_BERRY, 999 }, // ナモのみ
     { ITEM_COBA_BERRY, 999 }, // バコウのみ
     { ITEM_HABAN_BERRY, 999 }, // ハバンのみ
@@ -3245,26 +3245,6 @@ static void Task_FrontierCreator_SelectEVs(u8 taskId)
     }
 }
 
-static void FrontierHub_TryAddItem(enum Item itemId)
-{
-    if (itemId == ITEM_NONE)
-        return;
-
-    if (!CheckBagHasItem(itemId, 1) && CheckBagHasSpace(itemId, 1))
-        AddBagItem(itemId, 1);
-}
-
-static void FrontierHub_GiveAllKeyItems(void)
-{
-    enum Item itemId;
-
-    for (itemId = ITEM_NONE + 1; itemId < ITEMS_COUNT; itemId++)
-    {
-        if (GetItemPocket(itemId) == POCKET_KEY_ITEMS)
-            FrontierHub_TryAddItem(itemId);
-    }
-}
-
 static void FrontierHub_GiveAutoItems(void)
 {
     u32 i;
@@ -3275,14 +3255,6 @@ static void FrontierHub_GiveAutoItems(void)
          && CheckBagHasSpace(sFrontierHubAutoItems[i].itemId, sFrontierHubAutoItems[i].quantity))
             AddBagItem(sFrontierHubAutoItems[i].itemId, sFrontierHubAutoItems[i].quantity);
     }
-}
-
-static void FrontierHub_GiveGimmickKeyItems(void)
-{
-    FrontierHub_TryAddItem(ITEM_MEGA_RING);
-    FrontierHub_TryAddItem(ITEM_Z_POWER_RING);
-    FrontierHub_TryAddItem(ITEM_DYNAMAX_BAND);
-    FrontierHub_TryAddItem(ITEM_TERA_ORB);
 }
 
 static void FrontierItemGiver_DrawScreen(u8 taskId)
@@ -3594,8 +3566,7 @@ void Special_SetupFrontierHubState(void)
     for (i = 0; i < ARRAY_COUNT(gBadgeFlags); i++)
         FlagSet(gBadgeFlags[i]);
 
-    FrontierHub_GiveGimmickKeyItems();
-    FrontierHub_GiveAllKeyItems();
+    GiveFrontierStarterInventory();
     FrontierHub_GiveAutoItems();
     FrontierHub_TryGiveInitialParty();
 }

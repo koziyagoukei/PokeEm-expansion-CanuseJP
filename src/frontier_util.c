@@ -948,7 +948,8 @@ static void GetFrontierData(void)
         gBattleOutcome = 0;
         break;
     case FRONTIER_DATA_RECORD_DISABLED:
-        gSpecialVar_Result = gSaveBlock2Ptr->frontier.disableRecordBattle;
+        // Battle videos have no save sector when the special sectors are freed.
+        gSpecialVar_Result = FREE_SPECIAL_SAVE_SECTORS || gSaveBlock2Ptr->frontier.disableRecordBattle;
         break;
     case FRONTIER_DATA_HEARD_BRAIN_SPEECH:
         gSpecialVar_Result = gSaveBlock2Ptr->frontier.battledBrainFlags & gFrontierBrainInfo[facility].battledBit[hasSymbol];

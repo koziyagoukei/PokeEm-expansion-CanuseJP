@@ -1098,7 +1098,7 @@ static void BagAction_UseOnField(u8 taskId)
 
     if (pocketId == POCKET_KEY_ITEMS
         || pocketId == POCKET_POKE_BALLS
-        || pocketId == POCKET_TM_HM
+        || GetItemTMHMIndex(gSpecialVar_ItemId) != 0
         || ItemIsMail(gSpecialVar_ItemId) == TRUE)
     {
         CloseMenuActionWindow();

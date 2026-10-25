@@ -46,7 +46,9 @@
 #include "constants/songs.h"
 #include "constants/pokemon_icon.h"
 #include "chooseboxmon.h"
+#include "list_menu.h"
 #include "party_menu.h"
+#include "pokemon_storage_sort.h"
 
 /*
     NOTE: This file is large. Some general groups of functions have
@@ -111,6 +113,13 @@ enum {
     MSG_ITEM_IS_HELD,
     MSG_CHANGED_TO_ITEM,
     MSG_CANT_STORE_MAIL,
+    MSG_SORT_WHICH_BOXES,
+    MSG_SORT_BY_WHAT,
+    MSG_SORT_PICK_TYPE,
+    MSG_SORT_PICK_MOVE,
+    MSG_SORT_PICK_ABILITY,
+    MSG_SORT_DONE,
+    MSG_SORT_NO_MONS,
 };
 
 // IDs for how to resolve variables in the above messages
@@ -167,6 +176,13 @@ enum {
     MENU_MACHINE,
     MENU_SIMPLE,
     MENU_SELECT,
+    MENU_SORT,
+    MENU_SORT_THIS_BOX,
+    MENU_SORT_ALL_BOXES,
+    MENU_SORT_BY_DEX,
+    MENU_SORT_BY_TYPE,
+    MENU_SORT_BY_MOVE,
+    MENU_SORT_BY_ABILITY,
 };
 #define MENU_WALLPAPER_SETS_START MENU_SCENERY_1
 #define MENU_WALLPAPERS_START MENU_FOREST
@@ -588,6 +604,9 @@ static void Task_ReleaseMon(u8);
 static void Task_ReshowPokeStorage(u8);
 static void Task_PokeStorageMain(u8);
 static void Task_JumpBox(u8);
+static void Task_SortBoxes(u8);
+static void CreateBoxMonIconAtPos(u8);
+static void DestroyBoxMonIconAtPosition(u8);
 static void Task_HandleWallpapers(u8);
 static void Task_NameBox(u8);
 static void Task_PrintCantStoreMail(u8);
@@ -1082,6 +1101,13 @@ static const struct StorageMessage sMessages[] =
     [MSG_ITEM_IS_HELD]         = {COMPOUND_STRING("{JPN}{DYNAMIC 0} を もたせた!"),   MSG_VAR_ITEM_NAME},
     [MSG_CHANGED_TO_ITEM]      = {COMPOUND_STRING("{JPN}{DYNAMIC 0} と とりかえた!"),    MSG_VAR_ITEM_NAME},
     [MSG_CANT_STORE_MAIL]      = {COMPOUND_STRING("{JPN}メールを あずかることは できません!"),      MSG_VAR_NONE},
+    [MSG_SORT_WHICH_BOXES]     = {COMPOUND_STRING("{JPN}どこを ならびかえますか?"),      MSG_VAR_NONE},
+    [MSG_SORT_BY_WHAT]         = {COMPOUND_STRING("{JPN}なにで ならびかえますか?"),      MSG_VAR_NONE},
+    [MSG_SORT_PICK_TYPE]       = {COMPOUND_STRING("{JPN}どの タイプを あつめますか?"),    MSG_VAR_NONE},
+    [MSG_SORT_PICK_MOVE]       = {COMPOUND_STRING("{JPN}どの わざを あつめますか?"),      MSG_VAR_NONE},
+    [MSG_SORT_PICK_ABILITY]    = {COMPOUND_STRING("{JPN}どの とくせいを あつめますか?"),  MSG_VAR_NONE},
+    [MSG_SORT_DONE]            = {COMPOUND_STRING("{JPN}ならびかえました!"),             MSG_VAR_NONE},
+    [MSG_SORT_NO_MONS]         = {COMPOUND_STRING("{JPN}ポケモンが いません!"),          MSG_VAR_NONE},
 };
 
 static const struct WindowTemplate sYesNoWindowTemplate =
@@ -3421,6 +3447,10 @@ static void Task_HandleBoxOptions(u8 taskId)
             ClearBottomWindow();
             SetPokeStorageTask(Task_JumpBox);
             break;
+        case MENU_SORT:
+            PlaySE(SE_SELECT);
+            SetPokeStorageTask(Task_SortBoxes);
+            break;
         }
         break;
     }
@@ -3553,6 +3583,235 @@ static void Task_JumpBox(u8 taskId)
             SetCurrentBox(sStorage->newCurrBoxId);
             SetPokeStorageTask(Task_PokeStorageMain);
         }
+        break;
+    }
+}
+
+#define SORT_LIST_MAX_SHOWN 7
+
+struct StorageSortMenu
+{
+    u8 firstBox;
+    u8 numBoxes;
+    u8 key;
+    u8 listTaskId;
+    u8 windowId;
+    u16 *candidates;
+    struct ListMenuItem *items;
+};
+
+static EWRAM_DATA struct StorageSortMenu *sSortMenu = NULL;
+
+static const struct ListMenuTemplate sSortListTemplate =
+{
+    .moveCursorFunc = ListMenuDefaultCursorMoveFunc,
+    .item_X = 8,
+    .upText_Y = 1,
+    .cursorPal = 2,
+    .fillValue = 1,
+    .cursorShadowPal = 3,
+    .scrollMultiple = LIST_MULTIPLE_SCROLL_DPAD,
+    .fontId = FONT_NORMAL,
+    .cursorKind = CURSOR_BLACK_ARROW,
+};
+
+static void RefreshCurrentBoxMonIcons(void)
+{
+    u32 i;
+
+    for (i = 0; i < IN_BOX_COUNT; i++)
+        DestroyBoxMonIconAtPosition(i);
+    for (i = 0; i < IN_BOX_COUNT; i++)
+        CreateBoxMonIconAtPos(i);
+}
+
+// Lists the types, moves or abilities found in the chosen boxes. Returns FALSE if there are none.
+static bool32 CreateSortCandidateList(void)
+{
+    struct ListMenuTemplate template = sSortListTemplate;
+    struct WindowTemplate window = {
+        .bg = 0,
+        .paletteNum = 15,
+        .baseBlock = 0x5C,
+    };
+    u32 i, count, limit = GetStorageSortCandidateLimit(sSortMenu->key);
+
+    sSortMenu->candidates = Alloc(limit * sizeof(*sSortMenu->candidates));
+    if (sSortMenu->candidates == NULL)
+        return FALSE;
+    count = GetStorageSortCandidates(sSortMenu->firstBox, sSortMenu->numBoxes, sSortMenu->key, sSortMenu->candidates, limit);
+    if (count == 0)
+        return FALSE;
+
+    sSortMenu->items = Alloc((count + 1) * sizeof(*sSortMenu->items));
+    if (sSortMenu->items == NULL)
+        return FALSE;
+    for (i = 0; i < count; i++)
+    {
+        sSortMenu->items[i].name = GetStorageSortCandidateName(sSortMenu->key, sSortMenu->candidates[i]);
+        sSortMenu->items[i].id = sSortMenu->candidates[i];
+    }
+    sSortMenu->items[count].name = COMPOUND_STRING("{JPN}やめる");
+    sSortMenu->items[count].id = LIST_CANCEL;
+
+    template.items = sSortMenu->items;
+    template.totalItems = count + 1;
+    template.maxShowed = min(count + 1, SORT_LIST_MAX_SHOWN);
+
+    window.width = 12;
+    window.height = template.maxShowed * 2;
+    window.tilemapLeft = 29 - window.width;
+    window.tilemapTop = 15 - window.height;
+    sSortMenu->windowId = AddWindow(&window);
+    template.windowId = sSortMenu->windowId;
+    DrawStdFrameWithCustomTileAndPalette(sSortMenu->windowId, FALSE, 11, 14);
+    sSortMenu->listTaskId = ListMenuInit(&template, 0, 0);
+    CopyWindowToVram(sSortMenu->windowId, COPYWIN_FULL);
+    ScheduleBgCopyTilemapToVram(0);
+    return TRUE;
+}
+
+static void DestroySortCandidateList(void)
+{
+    DestroyListMenuTask(sSortMenu->listTaskId, NULL, NULL);
+    ClearStdWindowAndFrameToTransparent(sSortMenu->windowId, TRUE);
+    RemoveWindow(sSortMenu->windowId);
+}
+
+static void FreeSortMenu(void)
+{
+    if (sSortMenu != NULL)
+    {
+        TRY_FREE_AND_SET_NULL(sSortMenu->candidates);
+        TRY_FREE_AND_SET_NULL(sSortMenu->items);
+        TRY_FREE_AND_SET_NULL(sSortMenu);
+    }
+}
+
+static void EndSortBoxes(void)
+{
+    FreeSortMenu();
+    AnimateBoxScrollArrows(TRUE);
+    ClearBottomWindow();
+    SetPokeStorageTask(Task_PokeStorageMain);
+}
+
+enum {
+    SORT_STATE_INIT,
+    SORT_STATE_PICK_BOXES,
+    SORT_STATE_SHOW_KEYS,
+    SORT_STATE_PICK_KEY,
+    SORT_STATE_PICK_VALUE,
+    SORT_STATE_NO_MONS,
+    SORT_STATE_DONE,
+};
+
+static void ApplyStorageSort(u32 value)
+{
+    if (SortStorageBoxes(sSortMenu->firstBox, sSortMenu->numBoxes, sSortMenu->key, value))
+        RefreshCurrentBoxMonIcons();
+    PlaySE(SE_PC_LOGIN);
+    PrintMessage(MSG_SORT_DONE);
+    sStorage->state = SORT_STATE_DONE;
+}
+
+static void Task_SortBoxes(u8 taskId)
+{
+    s32 input;
+
+    switch (sStorage->state)
+    {
+    case SORT_STATE_INIT:
+        sSortMenu = AllocZeroed(sizeof(*sSortMenu));
+        if (sSortMenu == NULL)
+        {
+            EndSortBoxes();
+            break;
+        }
+        PrintMessage(MSG_SORT_WHICH_BOXES);
+        InitMenu();
+        SetMenuText(MENU_SORT_THIS_BOX);
+        SetMenuText(MENU_SORT_ALL_BOXES);
+        SetMenuText(MENU_CANCEL);
+        AddMenu();
+        sStorage->state = SORT_STATE_PICK_BOXES;
+        break;
+    case SORT_STATE_PICK_BOXES:
+        switch (HandleMenuInput())
+        {
+        case MENU_B_PRESSED:
+        case MENU_CANCEL:
+            EndSortBoxes();
+            break;
+        case MENU_SORT_THIS_BOX:
+            PlaySE(SE_SELECT);
+            sSortMenu->firstBox = StorageGetCurrentBox();
+            sSortMenu->numBoxes = 1;
+            sStorage->state = SORT_STATE_SHOW_KEYS;
+            break;
+        case MENU_SORT_ALL_BOXES:
+            PlaySE(SE_SELECT);
+            sSortMenu->firstBox = 0;
+            sSortMenu->numBoxes = TOTAL_BOXES_COUNT;
+            sStorage->state = SORT_STATE_SHOW_KEYS;
+            break;
+        }
+        break;
+    case SORT_STATE_SHOW_KEYS:
+        PrintMessage(MSG_SORT_BY_WHAT);
+        InitMenu();
+        SetMenuText(MENU_SORT_BY_DEX);
+        SetMenuText(MENU_SORT_BY_TYPE);
+        SetMenuText(MENU_SORT_BY_MOVE);
+        SetMenuText(MENU_SORT_BY_ABILITY);
+        SetMenuText(MENU_CANCEL);
+        AddMenu();
+        sStorage->state = SORT_STATE_PICK_KEY;
+        break;
+    case SORT_STATE_PICK_KEY:
+        input = HandleMenuInput();
+        switch (input)
+        {
+        case MENU_B_PRESSED:
+        case MENU_CANCEL:
+            EndSortBoxes();
+            break;
+        case MENU_SORT_BY_DEX:
+            PlaySE(SE_SELECT);
+            sSortMenu->key = STORAGE_SORT_DEX;
+            ApplyStorageSort(0);
+            break;
+        case MENU_SORT_BY_TYPE:
+        case MENU_SORT_BY_MOVE:
+        case MENU_SORT_BY_ABILITY:
+            PlaySE(SE_SELECT);
+            sSortMenu->key = STORAGE_SORT_TYPE + (input - MENU_SORT_BY_TYPE);
+            if (!CreateSortCandidateList())
+            {
+                PrintMessage(MSG_SORT_NO_MONS);
+                sStorage->state = SORT_STATE_NO_MONS;
+                break;
+            }
+            PrintMessage(MSG_SORT_PICK_TYPE + (input - MENU_SORT_BY_TYPE));
+            sStorage->state = SORT_STATE_PICK_VALUE;
+            break;
+        }
+        break;
+    case SORT_STATE_PICK_VALUE:
+        input = ListMenu_ProcessInput(sSortMenu->listTaskId);
+        if (input == LIST_NOTHING_CHOSEN)
+            break;
+        PlaySE(SE_SELECT);
+        DestroySortCandidateList();
+        if (input == LIST_CANCEL)
+            EndSortBoxes();
+        else
+            ApplyStorageSort(input);
+        break;
+    case SORT_STATE_NO_MONS:
+    case SORT_STATE_DONE:
+        if (JOY_NEW(A_BUTTON | B_BUTTON | DPAD_ANY))
+            EndSortBoxes();
         break;
     }
 }
@@ -7758,6 +8017,9 @@ static void AddBoxOptionsMenu(void)
     SetMenuText(MENU_JUMP);
     SetMenuText(MENU_WALLPAPER);
     SetMenuText(MENU_NAME);
+    // Sorting would move the slot a held Pokémon returns to.
+    if (!sIsMonBeingMoved && sStorage->inBoxMovingMode == MOVE_MODE_NORMAL)
+        SetMenuText(MENU_SORT);
     SetMenuText(MENU_CANCEL);
 }
 
@@ -8122,6 +8384,13 @@ static const u8 *const sMenuTexts[] =
     [MENU_MACHINE]    = COMPOUND_STRING("{JPN}きかい"),
     [MENU_SIMPLE]     = COMPOUND_STRING("{JPN}シンプル"),
     [MENU_SELECT]     = COMPOUND_STRING("{JPN}なにを しますか?"),
+    [MENU_SORT]            = COMPOUND_STRING("{JPN}ならびかえ"),
+    [MENU_SORT_THIS_BOX]   = COMPOUND_STRING("{JPN}このボックス"),
+    [MENU_SORT_ALL_BOXES]  = COMPOUND_STRING("{JPN}すべてのボックス"),
+    [MENU_SORT_BY_DEX]     = COMPOUND_STRING("{JPN}ずかんばんごう"),
+    [MENU_SORT_BY_TYPE]    = COMPOUND_STRING("{JPN}タイプ"),
+    [MENU_SORT_BY_MOVE]    = COMPOUND_STRING("{JPN}わざ"),
+    [MENU_SORT_BY_ABILITY] = COMPOUND_STRING("{JPN}とくせい"),
 };
 
 static void SetMenuText(u8 textId)

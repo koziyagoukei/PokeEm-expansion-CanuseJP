@@ -21,7 +21,7 @@ EventScript_BufferPocketNameAndTryFanfare::
 	case POCKET_ITEMS,      EventScript_BufferItemsPocket
 	case POCKET_KEY_ITEMS,  EventScript_BufferKeyItemsPocket
 	case POCKET_POKE_BALLS, EventScript_BufferPokeballsPocket
-	case POCKET_TM_HM,      EventScript_BufferTMHMsPocket
+	case POCKET_STONES,     EventScript_BufferStonesPocket
 	case POCKET_BERRIES,    EventScript_BufferBerriesPocket
 	end
 
@@ -40,9 +40,9 @@ EventScript_BufferPokeballsPocket::
 	call_if_eq VAR_0x8007, TRUE, EventScript_PlayFanfareObtainedItem
 	return
 
-EventScript_BufferTMHMsPocket::
-	bufferstdstring STR_VAR_3, STDSTRING_TMHMS
-	call_if_eq VAR_0x8007, TRUE, EventScript_PlayFanfareObtainedTMHM
+EventScript_BufferStonesPocket::
+	bufferstdstring STR_VAR_3, STDSTRING_STONES
+	call_if_eq VAR_0x8007, TRUE, EventScript_PlayFanfareObtainedItem
 	return
 
 EventScript_BufferBerriesPocket::
@@ -150,7 +150,7 @@ EventScript_FoundTMHM::
 	goto_if_lt EventScript_FoundTMHMMessage
 	buffernumberstring STR_VAR_3, VAR_0x8005
 	message gText_PlayerFoundTMHMs
-	goto EventScript_BufferTMHMsPocket
+	goto EventScript_BufferItemsPocket
 	return
 EventScript_FoundTMHMMessage::
 	message gText_PlayerFoundOneTMHM
@@ -254,7 +254,7 @@ EventScript_BufferPutAwayPocketName::
 	case POCKET_ITEMS,       EventScript_BufferPutAwayPocketItems
 	case POCKET_KEY_ITEMS,   EventScript_BufferPutAwayPocketKeyItems
 	case POCKET_POKE_BALLS,  EventScript_BufferPutAwayPocketPokeBalls
-	case POCKET_TM_HM,     EventScript_BufferPutAwayPocketTMCase
+	case POCKET_STONES,    EventScript_BufferPutAwayPocketStones
 	case POCKET_BERRIES, EventScript_BufferPutAwayPocketBerryPouch
 	end
 
@@ -270,8 +270,8 @@ EventScript_BufferPutAwayPocketPokeBalls::
 	bufferstdstring STR_VAR_3, STDSTRING_POKEBALLS
 	return
 
-EventScript_BufferPutAwayPocketTMCase::
-	bufferstdstring STR_VAR_3, STDSTRING_TMHMS
+EventScript_BufferPutAwayPocketStones::
+	bufferstdstring STR_VAR_3, STDSTRING_STONES
 	return
 
 EventScript_BufferPutAwayPocketBerryPouch::

@@ -33,7 +33,7 @@ TEST("Frontier music: extension is append-only and old-save garbage initializes 
     u8 prefix[152];
     EXPECT_EQ(offsetof(struct SaveBlock3, frontierMusic), sizeof(prefix));
     EXPECT_EQ(sizeof(struct FrontierMusicSave), 16);
-    EXPECT_EQ(sizeof(struct SaveBlock3), 168);
+    EXPECT_EQ(offsetof(struct SaveBlock3, fusions), 168);
     memcpy(prefix, gSaveBlock3Ptr, sizeof(prefix));
     memset(&gSaveBlock3Ptr->frontierMusic, 0xFF, sizeof(struct FrontierMusicSave));
     FrontierMusic_EnsureSaveData();

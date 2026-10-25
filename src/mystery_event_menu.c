@@ -19,6 +19,7 @@
 #include "text_window.h"
 #include "decompress.h"
 #include "constants/rgb.h"
+#include "title_screen.h"
 
 enum {
     WIN_MSG,
@@ -79,6 +80,11 @@ static bool8 CheckLanguageMatch(void)
 
 void CB2_InitMysteryEventMenu(void)
 {
+    if (FREE_MYSTERY_EVENT_BUFFERS)
+    {
+        SetMainCallback2(CB2_InitTitleScreen);
+        return;
+    }
     ResetSpriteData();
     FreeAllSpritePalettes();
     ResetTasks();

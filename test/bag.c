@@ -6,46 +6,26 @@
 #include "test/overworld_script.h"
 #include "test/test.h"
 
-TEST("TMs and HMs are sorted correctly in the bag")
+TEST("Bag redesign: stones have their own pocket and sort by item ID")
 {
-    struct BagPocket *pocket = &gBagPockets[POCKET_TM_HM];
-
-    ASSUME(GetItemPocket(ITEM_HM07) == POCKET_TM_HM);
-    ASSUME(GetItemPocket(ITEM_TM25) == POCKET_TM_HM);
-    ASSUME(GetItemPocket(ITEM_TM14) == POCKET_TM_HM);
-    ASSUME(GetItemPocket(ITEM_TM42) == POCKET_TM_HM);
-    ASSUME(GetItemPocket(ITEM_HM05) == POCKET_TM_HM);
-    ASSUME(GetItemPocket(ITEM_TM05) == POCKET_TM_HM);
-    ASSUME(GetItemPocket(ITEM_TM01) == POCKET_TM_HM);
-    ASSUME(GetItemPocket(ITEM_HM02) == POCKET_TM_HM);
-
-    /*
-     * Note: I would add a test to make sure that TMs are sorted correctly by move name,
-     * but downstream users are likely to rearrange TMs so this would just be a nuisance.
-     */
+    struct BagPocket *pocket = &gBagPockets[POCKET_STONES];
 
     RUN_OVERWORLD_SCRIPT(
-        additem ITEM_HM07;
-        additem ITEM_TM25;
-        additem ITEM_TM14;
-        additem ITEM_TM42;
-        additem ITEM_HM05;
-        additem ITEM_TM05;
-        additem ITEM_TM01;
-        additem ITEM_HM02;
+        additem ITEM_ULTRANECROZIUM_Z;
+        additem ITEM_GENGARITE;
+        additem ITEM_GRASSIUM_Z;
+        additem ITEM_VENUSAURITE;
     );
 
-    SortItemsInBag(&gBagPockets[POCKET_TM_HM], SORT_BY_INDEX);
-
-    EXPECT_EQ(pocket->itemSlots[0].itemId, ITEM_TM01);
-    EXPECT_EQ(pocket->itemSlots[1].itemId, ITEM_TM05);
-    EXPECT_EQ(pocket->itemSlots[2].itemId, ITEM_TM14);
-    EXPECT_EQ(pocket->itemSlots[3].itemId, ITEM_TM25);
-    EXPECT_EQ(pocket->itemSlots[4].itemId, ITEM_TM42);
-    EXPECT_EQ(pocket->itemSlots[5].itemId, ITEM_HM02);
-    EXPECT_EQ(pocket->itemSlots[6].itemId, ITEM_HM05);
-    EXPECT_EQ(pocket->itemSlots[7].itemId, ITEM_HM07);
-    EXPECT_EQ(pocket->itemSlots[8].itemId, ITEM_NONE);
+    SortItemsInBag(pocket, SORT_BY_INDEX);
+    for (u32 i = 0; i < 4; i++)
+    {
+        EXPECT_EQ(GetItemPocket(GetBagItemId(POCKET_STONES, i)), POCKET_STONES);
+        EXPECT_EQ(GetBagItemQuantity(POCKET_STONES, i), 1);
+        if (i != 0)
+            EXPECT(GetBagItemId(POCKET_STONES, i - 1) < GetBagItemId(POCKET_STONES, i));
+    }
+    EXPECT_EQ(GetBagItemId(POCKET_STONES, 4), ITEM_NONE);
 }
 
 TEST("Berries are sorted correctly in the bag")

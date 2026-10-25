@@ -239,7 +239,11 @@ static u32 TryReceiveCard(u8 *state, u16 *timer)
 void CreateEReaderTask(void)
 {
     struct EReaderTaskData *data;
-    u8 taskId = CreateTask(Task_EReader, 0);
+    u8 taskId;
+
+    if (!ENABLE_E_READER)
+        return;
+    taskId = CreateTask(Task_EReader, 0);
     data = (struct EReaderTaskData *)gTasks[taskId].data;
     data->state = 0;
     data->textState = 0;

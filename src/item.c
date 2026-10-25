@@ -96,7 +96,7 @@ struct ItemSlot NONNULL BagPocket_GetSlotData(struct BagPocket *pocket, u32 pock
     case POCKET_ITEMS:
     case POCKET_KEY_ITEMS:
     case POCKET_POKE_BALLS:
-    case POCKET_TM_HM:
+    case POCKET_STONES:
     case POCKET_BERRIES:
         return BagPocket_GetSlotDataGeneric(pocket, pocketPos);
     case POCKET_DUMMY:
@@ -119,7 +119,7 @@ void NONNULL BagPocket_SetSlotData(struct BagPocket *pocket, u32 pocketPos, stru
     case POCKET_ITEMS:
     case POCKET_KEY_ITEMS:
     case POCKET_POKE_BALLS:
-    case POCKET_TM_HM:
+    case POCKET_STONES:
     case POCKET_BERRIES:
         BagPocket_SetSlotDataGeneric(pocket, pocketPos, newSlot);
         break;
@@ -154,9 +154,9 @@ void SetBagItemsPointers(void)
     gBagPockets[POCKET_POKE_BALLS].capacity = BAG_POKEBALLS_COUNT;
     gBagPockets[POCKET_POKE_BALLS].id = POCKET_POKE_BALLS;
 
-    gBagPockets[POCKET_TM_HM].itemSlots = gSaveBlock1Ptr->bag.TMsHMs;
-    gBagPockets[POCKET_TM_HM].capacity = BAG_TMHM_COUNT;
-    gBagPockets[POCKET_TM_HM].id = POCKET_TM_HM;
+    gBagPockets[POCKET_STONES].itemSlots = gSaveBlock1Ptr->bag.stones;
+    gBagPockets[POCKET_STONES].capacity = BAG_STONES_COUNT;
+    gBagPockets[POCKET_STONES].id = POCKET_STONES;
 
     gBagPockets[POCKET_BERRIES].itemSlots = gSaveBlock1Ptr->bag.berries;
     gBagPockets[POCKET_BERRIES].capacity = BAG_BERRIES_COUNT;
@@ -248,15 +248,20 @@ static u32 NONNULL BagPocket_GetFreeSpaceForItem(struct BagPocket *pocket, enum 
 {
     u32 spaceForItem = 0;
     struct ItemSlot tempItem;
+    bool32 singleStack = pocket->id == POCKET_STONES || pocket->id == POCKET_BERRIES;
 
     // Check space in any existing item slots that already contain this item
     for (u32 i = 0; i < pocket->capacity; i++)
     {
         tempItem = BagPocket_GetSlotData(pocket, i);
+        if (singleStack && tempItem.itemId == itemId)
+            return MAX_BAG_ITEM_CAPACITY - tempItem.quantity;
         if (tempItem.itemId == ITEM_NONE || tempItem.itemId == itemId)
             spaceForItem += (tempItem.itemId ? (MAX_BAG_ITEM_CAPACITY - tempItem.quantity) : MAX_BAG_ITEM_CAPACITY);
     }
 
+    if (singleStack)
+        return min(spaceForItem, MAX_BAG_ITEM_CAPACITY);
     return spaceForItem;
 }
 
@@ -300,7 +305,7 @@ static bool32 NONNULL BagPocket_AddItem(struct BagPocket *pocket, enum Item item
 
     switch (pocket->id)
     {
-    case POCKET_TM_HM:
+    case POCKET_STONES:
     case POCKET_BERRIES:
         for (itemLookupIndex = 0; itemLookupIndex < pocket->capacity && count > 0; itemLookupIndex++)
         {

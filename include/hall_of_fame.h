@@ -23,6 +23,7 @@ void CB2_DoHallOfFameScreenDontSaveData(void);
 void CB2_DoHallOfFamePC(void);
 
 // hof_pc.c
+bool8 IsHallOfFamePCAvailable(void);
 void ReturnFromHallOfFamePC(void);
 
 #endif // GUARD_HALL_OF_FAME_H

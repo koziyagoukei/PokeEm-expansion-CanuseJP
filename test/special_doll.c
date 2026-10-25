@@ -57,7 +57,7 @@ TEST("Special dolls: save extension preserves all pre-existing save offsets")
     EXPECT_EQ(offsetof(struct SaveBlock3, specialDolls), 72);
     EXPECT_EQ(sizeof(struct SpecialDollSave), 80);
     EXPECT_EQ(offsetof(struct SaveBlock3, frontierMusic), 152);
-    EXPECT_EQ(sizeof(struct SaveBlock3), 168);
+    EXPECT_EQ(offsetof(struct SaveBlock3, fusions), 168);
 }
 
 TEST("Special dolls: old save bytes initialize without clearing any existing furniture")

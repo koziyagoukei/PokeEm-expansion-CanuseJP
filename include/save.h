@@ -2,6 +2,7 @@
 #define GUARD_SAVE_H
 
 #include "main.h"
+#include "config/save.h"
 
 // Each 4 KiB flash sector contains 3968 bytes of actual data followed by 116 bytes of SaveBlock3 and then 12 bytes of footer.
 #define SECTOR_DATA_SIZE 3968
@@ -12,7 +13,8 @@
 #define NUM_SAVE_SLOTS 2
 
 // If the sector's signature field is not this value then the sector is either invalid or empty.
-#define SECTOR_SIGNATURE 0x8012025
+#define SECTOR_SIGNATURE SAVE_FORMAT_SIGNATURE
+#define LEGACY_SECTOR_SIGNATURE 0x08012025
 
 #define SPECIAL_SECTOR_SENTINEL 0xB39D
 
@@ -20,20 +22,33 @@
 #define SECTOR_ID_SAVEBLOCK1_START    1
 #define SECTOR_ID_SAVEBLOCK1_END      4
 #define SECTOR_ID_PKMN_STORAGE_START  5
+#if FREE_SPECIAL_SAVE_SECTORS
+#define SECTOR_ID_PKMN_STORAGE_END   15
+#define NUM_SECTORS_PER_SLOT         16
+// Save Slot 1: 0-15;  Save Slot 2: 16-31. There are no special sectors.
+#else
 #define SECTOR_ID_PKMN_STORAGE_END   13
 #define NUM_SECTORS_PER_SLOT         14
 // Save Slot 1: 0-13;  Save Slot 2: 14-27
 #define SECTOR_ID_HOF_1              28
 #define SECTOR_ID_HOF_2              29
+#endif
+#define SECTORS_COUNT                32
+#if FREE_SPECIAL_SAVE_SECTORS
+// These sectors are part of save slot 2; special sector reads and writes always fail.
+#define SECTOR_ID_TRAINER_HILL       SECTORS_COUNT
+#define SECTOR_ID_RECORDED_BATTLE    SECTORS_COUNT
+#else
 #define SECTOR_ID_TRAINER_HILL       30
 #define SECTOR_ID_RECORDED_BATTLE    31
-#define SECTORS_COUNT                32
+#endif
 
 #define NUM_HOF_SECTORS 2
 
 #define SAVE_STATUS_EMPTY    0
 #define SAVE_STATUS_OK       1
 #define SAVE_STATUS_CORRUPT  2
+#define SAVE_STATUS_INCOMPATIBLE 3
 #define SAVE_STATUS_NO_FLASH 4
 #define SAVE_STATUS_ERROR    0xFF
 
@@ -109,6 +124,11 @@ u16 GetSaveBlocksPointersBaseOffset(void);
 u32 TryReadSpecialSaveSector(u8 sector, u8 *dst);
 u32 TryWriteSpecialSaveSector(u8 sector, u8 *src);
 void Task_LinkFullSave(u8 taskId);
+
+#if TESTING
+void Save_TestSetReadFlashSector(void (*reader)(u8, struct SaveSector *));
+u8 Save_TestLoadSlot(struct SaveSectorLocation *locations);
+#endif
 
 // save_failed_screen.c
 void DoSaveFailedScreen(u8 saveType);

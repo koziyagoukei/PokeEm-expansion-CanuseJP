@@ -1,0 +1,1271 @@
+{
+  "items": [
+    {
+      "item": "ITEM_ADAMANT_CRYSTAL",
+      "sources": [
+        "src/frontier_creator.c:sFrontierHubGiveItems"
+      ]
+    },
+    {
+      "item": "ITEM_ADAMANT_MINT",
+      "sources": [
+        "src/frontier_creator.c:sFrontierMintGiveItems"
+      ]
+    },
+    {
+      "item": "ITEM_ADAMANT_ORB",
+      "sources": [
+        "src/frontier_creator.c:sFrontierHubGiveItems"
+      ]
+    },
+    {
+      "item": "ITEM_AIR_BALLOON",
+      "sources": [
+        "src/frontier_creator.c:sFrontierHubAutoItems"
+      ]
+    },
+    {
+      "item": "ITEM_ASSAULT_VEST",
+      "sources": [
+        "src/frontier_creator.c:sFrontierHubAutoItems"
+      ]
+    },
+    {
+      "item": "ITEM_BALM_MUSHROOM",
+      "sources": [
+        "src/battle_script_commands.c:sPickupTable"
+      ]
+    },
+    {
+      "item": "ITEM_BERSERK_GENE",
+      "sources": [
+        "src/frontier_creator.c:sFrontierHubAutoItems"
+      ]
+    },
+    {
+      "item": "ITEM_BIG_MALASADA",
+      "sources": [
+        "data/maps/PartyRoamerPark/scripts.inc"
+      ]
+    },
+    {
+      "item": "ITEM_BIG_MUSHROOM",
+      "sources": [
+        "src/battle_script_commands.c:sPickupTable"
+      ]
+    },
+    {
+      "item": "ITEM_BIG_NUGGET",
+      "sources": [
+        "src/battle_script_commands.c:sPickupTable"
+      ]
+    },
+    {
+      "item": "ITEM_BIG_ROOT",
+      "sources": [
+        "src/frontier_creator.c:sFrontierHubAutoItems"
+      ]
+    },
+    {
+      "item": "ITEM_BLACK_AUGURITE",
+      "sources": [
+        "src/frontier_creator.c:sFrontierHubGiveItems"
+      ]
+    },
+    {
+      "item": "ITEM_BLACK_SLUDGE",
+      "sources": [
+        "src/frontier_creator.c:sFrontierHubAutoItems"
+      ]
+    },
+    {
+      "item": "ITEM_BLUE_ORB",
+      "sources": [
+        "src/frontier_creator.c:sFrontierHubGiveItems"
+      ]
+    },
+    {
+      "item": "ITEM_BLUE_SCARF",
+      "sources": [
+        "src/contest_shop.c:sScarfItems"
+      ]
+    },
+    {
+      "item": "ITEM_BLUNDER_POLICY",
+      "sources": [
+        "src/frontier_creator.c:sFrontierHubAutoItems"
+      ]
+    },
+    {
+      "item": "ITEM_BOLD_MINT",
+      "sources": [
+        "src/frontier_creator.c:sFrontierMintGiveItems"
+      ]
+    },
+    {
+      "item": "ITEM_BOOSTER_ENERGY",
+      "sources": [
+        "src/frontier_creator.c:sFrontierHubAutoItems"
+      ]
+    },
+    {
+      "item": "ITEM_BOTTLE_CAP",
+      "sources": [
+        "src/battle_script_commands.c:sPickupTable"
+      ]
+    },
+    {
+      "item": "ITEM_BRAVE_MINT",
+      "sources": [
+        "src/frontier_creator.c:sFrontierMintGiveItems"
+      ]
+    },
+    {
+      "item": "ITEM_BRIGHT_POWDER",
+      "sources": [
+        "data/maps/BattleFrontier_ExchangeServiceCorner/scripts.inc",
+        "src/frontier_creator.c:sFrontierHubAutoItems"
+      ]
+    },
+    {
+      "item": "ITEM_BUG_GEM",
+      "sources": [
+        "src/frontier_creator.c:sFrontierHubGiveItems"
+      ]
+    },
+    {
+      "item": "ITEM_BUG_MEMORY",
+      "sources": [
+        "src/frontier_creator.c:sFrontierHubGiveItems"
+      ]
+    },
+    {
+      "item": "ITEM_BURN_DRIVE",
+      "sources": [
+        "src/frontier_creator.c:sFrontierHubGiveItems"
+      ]
+    },
+    {
+      "item": "ITEM_CALCIUM",
+      "sources": [
+        "data/maps/BattleFrontier_ExchangeServiceCorner/scripts.inc",
+        "data/maps/BattleFrontier_Mart/scripts.inc"
+      ]
+    },
+    {
+      "item": "ITEM_CALM_MINT",
+      "sources": [
+        "src/frontier_creator.c:sFrontierMintGiveItems"
+      ]
+    },
+    {
+      "item": "ITEM_CARBOS",
+      "sources": [
+        "data/maps/BattleFrontier_ExchangeServiceCorner/scripts.inc",
+        "data/maps/BattleFrontier_Mart/scripts.inc"
+      ]
+    },
+    {
+      "item": "ITEM_CAREFUL_MINT",
+      "sources": [
+        "src/frontier_creator.c:sFrontierMintGiveItems"
+      ]
+    },
+    {
+      "item": "ITEM_CASTELIACONE",
+      "sources": [
+        "data/maps/PartyRoamerPark/scripts.inc"
+      ]
+    },
+    {
+      "item": "ITEM_CHILL_DRIVE",
+      "sources": [
+        "src/frontier_creator.c:sFrontierHubGiveItems"
+      ]
+    },
+    {
+      "item": "ITEM_CHOICE_BAND",
+      "sources": [
+        "data/maps/BattleFrontier_ExchangeServiceCorner/scripts.inc",
+        "src/frontier_creator.c:sFrontierHubAutoItems"
+      ]
+    },
+    {
+      "item": "ITEM_CHOICE_SCARF",
+      "sources": [
+        "src/frontier_creator.c:sFrontierHubAutoItems"
+      ]
+    },
+    {
+      "item": "ITEM_CHOICE_SPECS",
+      "sources": [
+        "src/frontier_creator.c:sFrontierHubAutoItems"
+      ]
+    },
+    {
+      "item": "ITEM_CLEAR_AMULET",
+      "sources": [
+        "src/frontier_creator.c:sFrontierHubAutoItems"
+      ]
+    },
+    {
+      "item": "ITEM_CORNERSTONE_MASK",
+      "sources": [
+        "src/frontier_creator.c:sFrontierHubGiveItems"
+      ]
+    },
+    {
+      "item": "ITEM_COVERT_CLOAK",
+      "sources": [
+        "src/frontier_creator.c:sFrontierHubAutoItems"
+      ]
+    },
+    {
+      "item": "ITEM_DAMP_ROCK",
+      "sources": [
+        "src/frontier_creator.c:sFrontierHubAutoItems"
+      ]
+    },
+    {
+      "item": "ITEM_DARK_GEM",
+      "sources": [
+        "src/frontier_creator.c:sFrontierHubGiveItems"
+      ]
+    },
+    {
+      "item": "ITEM_DARK_MEMORY",
+      "sources": [
+        "src/frontier_creator.c:sFrontierHubGiveItems"
+      ]
+    },
+    {
+      "item": "ITEM_DEEP_SEA_SCALE",
+      "sources": [
+        "src/frontier_creator.c:sFrontierHubGiveItems"
+      ]
+    },
+    {
+      "item": "ITEM_DEEP_SEA_TOOTH",
+      "sources": [
+        "src/frontier_creator.c:sFrontierHubGiveItems"
+      ]
+    },
+    {
+      "item": "ITEM_DESTINY_KNOT",
+      "sources": [
+        "src/battle_script_commands.c:sPickupTable"
+      ]
+    },
+    {
+      "item": "ITEM_DOUSE_DRIVE",
+      "sources": [
+        "src/frontier_creator.c:sFrontierHubGiveItems"
+      ]
+    },
+    {
+      "item": "ITEM_DRACO_PLATE",
+      "sources": [
+        "src/frontier_creator.c:sFrontierHubGiveItems"
+      ]
+    },
+    {
+      "item": "ITEM_DRAGON_GEM",
+      "sources": [
+        "src/frontier_creator.c:sFrontierHubGiveItems"
+      ]
+    },
+    {
+      "item": "ITEM_DRAGON_MEMORY",
+      "sources": [
+        "src/frontier_creator.c:sFrontierHubGiveItems"
+      ]
+    },
+    {
+      "item": "ITEM_DREAD_PLATE",
+      "sources": [
+        "src/frontier_creator.c:sFrontierHubGiveItems"
+      ]
+    },
+    {
+      "item": "ITEM_EARTH_PLATE",
+      "sources": [
+        "src/frontier_creator.c:sFrontierHubGiveItems"
+      ]
+    },
+    {
+      "item": "ITEM_EJECT_BUTTON",
+      "sources": [
+        "src/frontier_creator.c:sFrontierHubAutoItems"
+      ]
+    },
+    {
+      "item": "ITEM_EJECT_PACK",
+      "sources": [
+        "src/frontier_creator.c:sFrontierHubAutoItems"
+      ]
+    },
+    {
+      "item": "ITEM_ELECTRIC_GEM",
+      "sources": [
+        "src/frontier_creator.c:sFrontierHubGiveItems"
+      ]
+    },
+    {
+      "item": "ITEM_ELECTRIC_MEMORY",
+      "sources": [
+        "src/frontier_creator.c:sFrontierHubGiveItems"
+      ]
+    },
+    {
+      "item": "ITEM_ELECTRIC_SEED",
+      "sources": [
+        "src/frontier_creator.c:sFrontierHubAutoItems"
+      ]
+    },
+    {
+      "item": "ITEM_ELIXIR",
+      "sources": [
+        "src/battle_script_commands.c:sPickupTable"
+      ]
+    },
+    {
+      "item": "ITEM_ETHER",
+      "sources": [
+        "src/battle_script_commands.c:sPickupTable"
+      ]
+    },
+    {
+      "item": "ITEM_EVIOLITE",
+      "sources": [
+        "src/frontier_creator.c:sFrontierHubAutoItems",
+        "src/frontier_creator.c:sFrontierHubGiveItems"
+      ]
+    },
+    {
+      "item": "ITEM_EXPERT_BELT",
+      "sources": [
+        "src/frontier_creator.c:sFrontierHubAutoItems"
+      ]
+    },
+    {
+      "item": "ITEM_FAIRY_GEM",
+      "sources": [
+        "src/frontier_creator.c:sFrontierHubGiveItems"
+      ]
+    },
+    {
+      "item": "ITEM_FAIRY_MEMORY",
+      "sources": [
+        "src/frontier_creator.c:sFrontierHubGiveItems"
+      ]
+    },
+    {
+      "item": "ITEM_FIGHTING_GEM",
+      "sources": [
+        "src/frontier_creator.c:sFrontierHubGiveItems"
+      ]
+    },
+    {
+      "item": "ITEM_FIGHTING_MEMORY",
+      "sources": [
+        "src/frontier_creator.c:sFrontierHubGiveItems"
+      ]
+    },
+    {
+      "item": "ITEM_FIRE_GEM",
+      "sources": [
+        "src/frontier_creator.c:sFrontierHubGiveItems"
+      ]
+    },
+    {
+      "item": "ITEM_FIRE_MEMORY",
+      "sources": [
+        "src/frontier_creator.c:sFrontierHubGiveItems"
+      ]
+    },
+    {
+      "item": "ITEM_FIST_PLATE",
+      "sources": [
+        "src/frontier_creator.c:sFrontierHubGiveItems"
+      ]
+    },
+    {
+      "item": "ITEM_FLAME_ORB",
+      "sources": [
+        "src/frontier_creator.c:sFrontierHubAutoItems"
+      ]
+    },
+    {
+      "item": "ITEM_FLAME_PLATE",
+      "sources": [
+        "src/frontier_creator.c:sFrontierHubGiveItems"
+      ]
+    },
+    {
+      "item": "ITEM_FLYING_GEM",
+      "sources": [
+        "src/frontier_creator.c:sFrontierHubGiveItems"
+      ]
+    },
+    {
+      "item": "ITEM_FLYING_MEMORY",
+      "sources": [
+        "src/frontier_creator.c:sFrontierHubGiveItems"
+      ]
+    },
+    {
+      "item": "ITEM_FOCUS_BAND",
+      "sources": [
+        "data/maps/BattleFrontier_ExchangeServiceCorner/scripts.inc",
+        "src/frontier_creator.c:sFrontierHubAutoItems"
+      ]
+    },
+    {
+      "item": "ITEM_FOCUS_SASH",
+      "sources": [
+        "src/frontier_creator.c:sFrontierHubAutoItems"
+      ]
+    },
+    {
+      "item": "ITEM_FULL_HEAL",
+      "sources": [
+        "data/maps/BattleFrontier_Mart/scripts.inc",
+        "src/battle_script_commands.c:sPickupTable"
+      ]
+    },
+    {
+      "item": "ITEM_FULL_RESTORE",
+      "sources": [
+        "data/maps/BattleFrontier_Mart/scripts.inc"
+      ]
+    },
+    {
+      "item": "ITEM_GENTLE_MINT",
+      "sources": [
+        "src/frontier_creator.c:sFrontierMintGiveItems"
+      ]
+    },
+    {
+      "item": "ITEM_GHOST_GEM",
+      "sources": [
+        "src/frontier_creator.c:sFrontierHubGiveItems"
+      ]
+    },
+    {
+      "item": "ITEM_GHOST_MEMORY",
+      "sources": [
+        "src/frontier_creator.c:sFrontierHubGiveItems"
+      ]
+    },
+    {
+      "item": "ITEM_GRASSY_SEED",
+      "sources": [
+        "src/frontier_creator.c:sFrontierHubAutoItems"
+      ]
+    },
+    {
+      "item": "ITEM_GRASS_GEM",
+      "sources": [
+        "src/frontier_creator.c:sFrontierHubGiveItems"
+      ]
+    },
+    {
+      "item": "ITEM_GRASS_MEMORY",
+      "sources": [
+        "src/frontier_creator.c:sFrontierHubGiveItems"
+      ]
+    },
+    {
+      "item": "ITEM_GREEN_SCARF",
+      "sources": [
+        "src/contest_shop.c:sScarfItems"
+      ]
+    },
+    {
+      "item": "ITEM_GRISEOUS_CORE",
+      "sources": [
+        "src/frontier_creator.c:sFrontierHubGiveItems"
+      ]
+    },
+    {
+      "item": "ITEM_GRISEOUS_ORB",
+      "sources": [
+        "src/frontier_creator.c:sFrontierHubGiveItems"
+      ]
+    },
+    {
+      "item": "ITEM_GROUND_GEM",
+      "sources": [
+        "src/frontier_creator.c:sFrontierHubGiveItems"
+      ]
+    },
+    {
+      "item": "ITEM_GROUND_MEMORY",
+      "sources": [
+        "src/frontier_creator.c:sFrontierHubGiveItems"
+      ]
+    },
+    {
+      "item": "ITEM_HASTY_MINT",
+      "sources": [
+        "src/frontier_creator.c:sFrontierMintGiveItems"
+      ]
+    },
+    {
+      "item": "ITEM_HEARTHFLAME_MASK",
+      "sources": [
+        "src/frontier_creator.c:sFrontierHubGiveItems"
+      ]
+    },
+    {
+      "item": "ITEM_HEAT_ROCK",
+      "sources": [
+        "src/frontier_creator.c:sFrontierHubAutoItems"
+      ]
+    },
+    {
+      "item": "ITEM_HEAVY_DUTY_BOOTS",
+      "sources": [
+        "src/frontier_creator.c:sFrontierHubAutoItems"
+      ]
+    },
+    {
+      "item": "ITEM_HONEY",
+      "sources": [
+        "src/battle_script_commands.c:Honey Gather"
+      ]
+    },
+    {
+      "item": "ITEM_HP_UP",
+      "sources": [
+        "data/maps/BattleFrontier_ExchangeServiceCorner/scripts.inc",
+        "data/maps/BattleFrontier_Mart/scripts.inc"
+      ]
+    },
+    {
+      "item": "ITEM_HYPER_POTION",
+      "sources": [
+        "data/maps/BattleFrontier_Mart/scripts.inc",
+        "src/battle_script_commands.c:sPickupTable"
+      ]
+    },
+    {
+      "item": "ITEM_ICE_GEM",
+      "sources": [
+        "src/frontier_creator.c:sFrontierHubGiveItems"
+      ]
+    },
+    {
+      "item": "ITEM_ICE_MEMORY",
+      "sources": [
+        "src/frontier_creator.c:sFrontierHubGiveItems"
+      ]
+    },
+    {
+      "item": "ITEM_ICICLE_PLATE",
+      "sources": [
+        "src/frontier_creator.c:sFrontierHubGiveItems"
+      ]
+    },
+    {
+      "item": "ITEM_ICY_ROCK",
+      "sources": [
+        "src/frontier_creator.c:sFrontierHubAutoItems"
+      ]
+    },
+    {
+      "item": "ITEM_IMPISH_MINT",
+      "sources": [
+        "src/frontier_creator.c:sFrontierMintGiveItems"
+      ]
+    },
+    {
+      "item": "ITEM_INSECT_PLATE",
+      "sources": [
+        "src/frontier_creator.c:sFrontierHubGiveItems"
+      ]
+    },
+    {
+      "item": "ITEM_IRON",
+      "sources": [
+        "data/maps/BattleFrontier_ExchangeServiceCorner/scripts.inc",
+        "data/maps/BattleFrontier_Mart/scripts.inc"
+      ]
+    },
+    {
+      "item": "ITEM_IRON_BALL",
+      "sources": [
+        "src/frontier_creator.c:sFrontierHubAutoItems"
+      ]
+    },
+    {
+      "item": "ITEM_IRON_PLATE",
+      "sources": [
+        "src/frontier_creator.c:sFrontierHubGiveItems"
+      ]
+    },
+    {
+      "item": "ITEM_JOLLY_MINT",
+      "sources": [
+        "src/frontier_creator.c:sFrontierMintGiveItems"
+      ]
+    },
+    {
+      "item": "ITEM_KINGS_ROCK",
+      "sources": [
+        "data/maps/BattleFrontier_ExchangeServiceCorner/scripts.inc",
+        "src/frontier_creator.c:sFrontierHubAutoItems"
+      ]
+    },
+    {
+      "item": "ITEM_LAVA_COOKIE",
+      "sources": [
+        "data/maps/PartyRoamerPark/scripts.inc"
+      ]
+    },
+    {
+      "item": "ITEM_LAX_INCENSE",
+      "sources": [
+        "src/frontier_creator.c:sFrontierHubAutoItems"
+      ]
+    },
+    {
+      "item": "ITEM_LAX_MINT",
+      "sources": [
+        "src/frontier_creator.c:sFrontierMintGiveItems"
+      ]
+    },
+    {
+      "item": "ITEM_LEEK",
+      "sources": [
+        "src/frontier_creator.c:sFrontierHubAutoItems",
+        "src/frontier_creator.c:sFrontierHubGiveItems"
+      ]
+    },
+    {
+      "item": "ITEM_LEFTOVERS",
+      "sources": [
+        "data/maps/BattleFrontier_ExchangeServiceCorner/scripts.inc",
+        "src/battle_script_commands.c:sPickupTable",
+        "src/frontier_creator.c:sFrontierHubAutoItems"
+      ]
+    },
+    {
+      "item": "ITEM_LIFE_ORB",
+      "sources": [
+        "src/frontier_creator.c:sFrontierHubAutoItems"
+      ]
+    },
+    {
+      "item": "ITEM_LIGHT_BALL",
+      "sources": [
+        "src/frontier_creator.c:sFrontierHubAutoItems",
+        "src/frontier_creator.c:sFrontierHubGiveItems"
+      ]
+    },
+    {
+      "item": "ITEM_LIGHT_CLAY",
+      "sources": [
+        "src/frontier_creator.c:sFrontierHubAutoItems"
+      ]
+    },
+    {
+      "item": "ITEM_LOADED_DICE",
+      "sources": [
+        "src/frontier_creator.c:sFrontierHubAutoItems"
+      ]
+    },
+    {
+      "item": "ITEM_LONELY_MINT",
+      "sources": [
+        "src/frontier_creator.c:sFrontierMintGiveItems"
+      ]
+    },
+    {
+      "item": "ITEM_LUCKY_PUNCH",
+      "sources": [
+        "src/frontier_creator.c:sFrontierHubGiveItems"
+      ]
+    },
+    {
+      "item": "ITEM_LUMIOSE_GALETTE",
+      "sources": [
+        "data/maps/PartyRoamerPark/scripts.inc"
+      ]
+    },
+    {
+      "item": "ITEM_LUSTROUS_GLOBE",
+      "sources": [
+        "src/frontier_creator.c:sFrontierHubGiveItems"
+      ]
+    },
+    {
+      "item": "ITEM_LUSTROUS_ORB",
+      "sources": [
+        "src/frontier_creator.c:sFrontierHubGiveItems"
+      ]
+    },
+    {
+      "item": "ITEM_MAX_ELIXIR",
+      "sources": [
+        "src/battle_script_commands.c:sPickupTable"
+      ]
+    },
+    {
+      "item": "ITEM_MAX_ETHER",
+      "sources": [
+        "src/battle_script_commands.c:sPickupTable"
+      ]
+    },
+    {
+      "item": "ITEM_MAX_HONEY",
+      "sources": [
+        "data/maps/PartyRoamerPark/scripts.inc"
+      ]
+    },
+    {
+      "item": "ITEM_MAX_POTION",
+      "sources": [
+        "data/maps/BattleFrontier_Mart/scripts.inc",
+        "src/battle_script_commands.c:sPickupTable"
+      ]
+    },
+    {
+      "item": "ITEM_MAX_REPEL",
+      "sources": [
+        "data/maps/BattleFrontier_Mart/scripts.inc",
+        "src/battle_script_commands.c:sPickupTable"
+      ]
+    },
+    {
+      "item": "ITEM_MAX_REVIVE",
+      "sources": [
+        "src/battle_script_commands.c:sPickupTable"
+      ]
+    },
+    {
+      "item": "ITEM_MEADOW_PLATE",
+      "sources": [
+        "src/frontier_creator.c:sFrontierHubGiveItems"
+      ]
+    },
+    {
+      "item": "ITEM_MENTAL_HERB",
+      "sources": [
+        "data/maps/BattleFrontier_ExchangeServiceCorner/scripts.inc",
+        "src/battle_script_commands.c:sPickupTable",
+        "src/frontier_creator.c:sFrontierHubAutoItems"
+      ]
+    },
+    {
+      "item": "ITEM_METAL_POWDER",
+      "sources": [
+        "src/frontier_creator.c:sFrontierHubGiveItems"
+      ]
+    },
+    {
+      "item": "ITEM_METRONOME",
+      "sources": [
+        "src/frontier_creator.c:sFrontierHubAutoItems"
+      ]
+    },
+    {
+      "item": "ITEM_MILD_MINT",
+      "sources": [
+        "src/frontier_creator.c:sFrontierMintGiveItems"
+      ]
+    },
+    {
+      "item": "ITEM_MIND_PLATE",
+      "sources": [
+        "src/frontier_creator.c:sFrontierHubGiveItems"
+      ]
+    },
+    {
+      "item": "ITEM_MISTY_SEED",
+      "sources": [
+        "src/frontier_creator.c:sFrontierHubAutoItems"
+      ]
+    },
+    {
+      "item": "ITEM_MODEST_MINT",
+      "sources": [
+        "src/frontier_creator.c:sFrontierMintGiveItems"
+      ]
+    },
+    {
+      "item": "ITEM_MOON_STONE",
+      "sources": [
+        "src/battle_script_commands.c:sPickupTable"
+      ]
+    },
+    {
+      "item": "ITEM_MUSCLE_BAND",
+      "sources": [
+        "src/frontier_creator.c:sFrontierHubAutoItems"
+      ]
+    },
+    {
+      "item": "ITEM_NAIVE_MINT",
+      "sources": [
+        "src/frontier_creator.c:sFrontierMintGiveItems"
+      ]
+    },
+    {
+      "item": "ITEM_NAUGHTY_MINT",
+      "sources": [
+        "src/frontier_creator.c:sFrontierMintGiveItems"
+      ]
+    },
+    {
+      "item": "ITEM_NORMAL_GEM",
+      "sources": [
+        "src/frontier_creator.c:sFrontierHubGiveItems"
+      ]
+    },
+    {
+      "item": "ITEM_NUGGET",
+      "sources": [
+        "src/battle_script_commands.c:sPickupTable"
+      ]
+    },
+    {
+      "item": "ITEM_OLD_GATEAU",
+      "sources": [
+        "data/maps/PartyRoamerPark/scripts.inc"
+      ]
+    },
+    {
+      "item": "ITEM_PEWTER_CRUNCHIES",
+      "sources": [
+        "data/maps/PartyRoamerPark/scripts.inc"
+      ]
+    },
+    {
+      "item": "ITEM_PINK_SCARF",
+      "sources": [
+        "src/contest_shop.c:sScarfItems"
+      ]
+    },
+    {
+      "item": "ITEM_PIXIE_PLATE",
+      "sources": [
+        "src/frontier_creator.c:sFrontierHubGiveItems"
+      ]
+    },
+    {
+      "item": "ITEM_POISON_GEM",
+      "sources": [
+        "src/frontier_creator.c:sFrontierHubGiveItems"
+      ]
+    },
+    {
+      "item": "ITEM_POISON_MEMORY",
+      "sources": [
+        "src/frontier_creator.c:sFrontierHubGiveItems"
+      ]
+    },
+    {
+      "item": "ITEM_POKE_DOLL",
+      "sources": [
+        "src/battle_script_commands.c:sPickupTable"
+      ]
+    },
+    {
+      "item": "ITEM_POTION",
+      "sources": [
+        "src/battle_script_commands.c:sPickupTable",
+        "src/player_pc.c:sNewGamePCItems"
+      ]
+    },
+    {
+      "item": "ITEM_POWER_HERB",
+      "sources": [
+        "src/battle_script_commands.c:sPickupTable",
+        "src/frontier_creator.c:sFrontierHubAutoItems"
+      ]
+    },
+    {
+      "item": "ITEM_PP_UP",
+      "sources": [
+        "src/battle_script_commands.c:sPickupTable"
+      ]
+    },
+    {
+      "item": "ITEM_PROTECTIVE_PADS",
+      "sources": [
+        "src/frontier_creator.c:sFrontierHubAutoItems"
+      ]
+    },
+    {
+      "item": "ITEM_PROTEIN",
+      "sources": [
+        "data/maps/BattleFrontier_ExchangeServiceCorner/scripts.inc",
+        "data/maps/BattleFrontier_Mart/scripts.inc"
+      ]
+    },
+    {
+      "item": "ITEM_PSYCHIC_GEM",
+      "sources": [
+        "src/frontier_creator.c:sFrontierHubGiveItems"
+      ]
+    },
+    {
+      "item": "ITEM_PSYCHIC_MEMORY",
+      "sources": [
+        "src/frontier_creator.c:sFrontierHubGiveItems"
+      ]
+    },
+    {
+      "item": "ITEM_PSYCHIC_SEED",
+      "sources": [
+        "src/frontier_creator.c:sFrontierHubAutoItems"
+      ]
+    },
+    {
+      "item": "ITEM_PUNCHING_GLOVE",
+      "sources": [
+        "src/frontier_creator.c:sFrontierHubAutoItems"
+      ]
+    },
+    {
+      "item": "ITEM_QUICK_CLAW",
+      "sources": [
+        "data/maps/BattleFrontier_ExchangeServiceCorner/scripts.inc",
+        "src/frontier_creator.c:sFrontierHubAutoItems"
+      ]
+    },
+    {
+      "item": "ITEM_QUICK_POWDER",
+      "sources": [
+        "src/frontier_creator.c:sFrontierHubAutoItems",
+        "src/frontier_creator.c:sFrontierHubGiveItems"
+      ]
+    },
+    {
+      "item": "ITEM_QUIET_MINT",
+      "sources": [
+        "src/frontier_creator.c:sFrontierMintGiveItems"
+      ]
+    },
+    {
+      "item": "ITEM_RAGE_CANDY_BAR",
+      "sources": [
+        "data/maps/PartyRoamerPark/scripts.inc"
+      ]
+    },
+    {
+      "item": "ITEM_RARE_CANDY",
+      "sources": [
+        "src/battle_script_commands.c:sPickupTable"
+      ]
+    },
+    {
+      "item": "ITEM_RASH_MINT",
+      "sources": [
+        "src/frontier_creator.c:sFrontierMintGiveItems"
+      ]
+    },
+    {
+      "item": "ITEM_RED_CARD",
+      "sources": [
+        "src/frontier_creator.c:sFrontierHubAutoItems"
+      ]
+    },
+    {
+      "item": "ITEM_RED_ORB",
+      "sources": [
+        "src/frontier_creator.c:sFrontierHubGiveItems"
+      ]
+    },
+    {
+      "item": "ITEM_RED_SCARF",
+      "sources": [
+        "src/contest_shop.c:sScarfItems"
+      ]
+    },
+    {
+      "item": "ITEM_RELAXED_MINT",
+      "sources": [
+        "src/frontier_creator.c:sFrontierMintGiveItems"
+      ]
+    },
+    {
+      "item": "ITEM_REPEL",
+      "sources": [
+        "src/battle_script_commands.c:sPickupTable"
+      ]
+    },
+    {
+      "item": "ITEM_REVIVE",
+      "sources": [
+        "data/maps/BattleFrontier_Mart/scripts.inc",
+        "src/battle_script_commands.c:sPickupTable"
+      ]
+    },
+    {
+      "item": "ITEM_ROCKY_HELMET",
+      "sources": [
+        "src/frontier_creator.c:sFrontierHubAutoItems"
+      ]
+    },
+    {
+      "item": "ITEM_ROCK_GEM",
+      "sources": [
+        "src/frontier_creator.c:sFrontierHubGiveItems"
+      ]
+    },
+    {
+      "item": "ITEM_ROCK_MEMORY",
+      "sources": [
+        "src/frontier_creator.c:sFrontierHubGiveItems"
+      ]
+    },
+    {
+      "item": "ITEM_ROOM_SERVICE",
+      "sources": [
+        "src/frontier_creator.c:sFrontierHubAutoItems"
+      ]
+    },
+    {
+      "item": "ITEM_RUSTED_SHIELD",
+      "sources": [
+        "src/frontier_creator.c:sFrontierHubGiveItems"
+      ]
+    },
+    {
+      "item": "ITEM_RUSTED_SWORD",
+      "sources": [
+        "src/frontier_creator.c:sFrontierHubGiveItems"
+      ]
+    },
+    {
+      "item": "ITEM_SAFETY_GOGGLES",
+      "sources": [
+        "src/frontier_creator.c:sFrontierHubAutoItems"
+      ]
+    },
+    {
+      "item": "ITEM_SASSY_MINT",
+      "sources": [
+        "src/frontier_creator.c:sFrontierMintGiveItems"
+      ]
+    },
+    {
+      "item": "ITEM_SCOPE_LENS",
+      "sources": [
+        "data/maps/BattleFrontier_ExchangeServiceCorner/scripts.inc",
+        "src/frontier_creator.c:sFrontierHubAutoItems"
+      ]
+    },
+    {
+      "item": "ITEM_SERIOUS_MINT",
+      "sources": [
+        "src/frontier_creator.c:sFrontierMintGiveItems"
+      ]
+    },
+    {
+      "item": "ITEM_SHALOUR_SABLE",
+      "sources": [
+        "data/maps/PartyRoamerPark/scripts.inc"
+      ]
+    },
+    {
+      "item": "ITEM_SHELL_BELL",
+      "sources": [
+        "src/frontier_creator.c:sFrontierHubAutoItems"
+      ]
+    },
+    {
+      "item": "ITEM_SHOCK_DRIVE",
+      "sources": [
+        "src/frontier_creator.c:sFrontierHubGiveItems"
+      ]
+    },
+    {
+      "item": "ITEM_SKY_PLATE",
+      "sources": [
+        "src/frontier_creator.c:sFrontierHubGiveItems"
+      ]
+    },
+    {
+      "item": "ITEM_SMOOTH_ROCK",
+      "sources": [
+        "src/frontier_creator.c:sFrontierHubAutoItems"
+      ]
+    },
+    {
+      "item": "ITEM_SOUL_DEW",
+      "sources": [
+        "src/frontier_creator.c:sFrontierHubGiveItems"
+      ]
+    },
+    {
+      "item": "ITEM_SPLASH_PLATE",
+      "sources": [
+        "src/frontier_creator.c:sFrontierHubGiveItems"
+      ]
+    },
+    {
+      "item": "ITEM_SPOOKY_PLATE",
+      "sources": [
+        "src/frontier_creator.c:sFrontierHubGiveItems"
+      ]
+    },
+    {
+      "item": "ITEM_STEEL_GEM",
+      "sources": [
+        "src/frontier_creator.c:sFrontierHubGiveItems"
+      ]
+    },
+    {
+      "item": "ITEM_STEEL_MEMORY",
+      "sources": [
+        "src/frontier_creator.c:sFrontierHubGiveItems"
+      ]
+    },
+    {
+      "item": "ITEM_STONE_PLATE",
+      "sources": [
+        "src/frontier_creator.c:sFrontierHubGiveItems"
+      ]
+    },
+    {
+      "item": "ITEM_SUN_STONE",
+      "sources": [
+        "src/battle_script_commands.c:sPickupTable"
+      ]
+    },
+    {
+      "item": "ITEM_SUPER_POTION",
+      "sources": [
+        "src/battle_script_commands.c:sPickupTable"
+      ]
+    },
+    {
+      "item": "ITEM_SUPER_REPEL",
+      "sources": [
+        "src/battle_script_commands.c:sPickupTable"
+      ]
+    },
+    {
+      "item": "ITEM_SWEET_HEART",
+      "sources": [
+        "data/maps/PartyRoamerPark/scripts.inc"
+      ]
+    },
+    {
+      "item": "ITEM_TERRAIN_EXTENDER",
+      "sources": [
+        "src/frontier_creator.c:sFrontierHubAutoItems"
+      ]
+    },
+    {
+      "item": "ITEM_THICK_CLUB",
+      "sources": [
+        "src/frontier_creator.c:sFrontierHubAutoItems",
+        "src/frontier_creator.c:sFrontierHubGiveItems"
+      ]
+    },
+    {
+      "item": "ITEM_THROAT_SPRAY",
+      "sources": [
+        "src/frontier_creator.c:sFrontierHubAutoItems"
+      ]
+    },
+    {
+      "item": "ITEM_TIMID_MINT",
+      "sources": [
+        "src/frontier_creator.c:sFrontierMintGiveItems"
+      ]
+    },
+    {
+      "item": "ITEM_TINY_MUSHROOM",
+      "sources": [
+        "src/battle_script_commands.c:sPickupTable"
+      ]
+    },
+    {
+      "item": "ITEM_TOXIC_ORB",
+      "sources": [
+        "src/frontier_creator.c:sFrontierHubAutoItems"
+      ]
+    },
+    {
+      "item": "ITEM_TOXIC_PLATE",
+      "sources": [
+        "src/frontier_creator.c:sFrontierHubGiveItems"
+      ]
+    },
+    {
+      "item": "ITEM_WATER_GEM",
+      "sources": [
+        "src/frontier_creator.c:sFrontierHubGiveItems"
+      ]
+    },
+    {
+      "item": "ITEM_WATER_MEMORY",
+      "sources": [
+        "src/frontier_creator.c:sFrontierHubGiveItems"
+      ]
+    },
+    {
+      "item": "ITEM_WEAKNESS_POLICY",
+      "sources": [
+        "src/frontier_creator.c:sFrontierHubAutoItems"
+      ]
+    },
+    {
+      "item": "ITEM_WELLSPRING_MASK",
+      "sources": [
+        "src/frontier_creator.c:sFrontierHubGiveItems"
+      ]
+    },
+    {
+      "item": "ITEM_WHITE_HERB",
+      "sources": [
+        "data/maps/BattleFrontier_ExchangeServiceCorner/scripts.inc",
+        "src/battle_script_commands.c:sPickupTable",
+        "src/frontier_creator.c:sFrontierHubAutoItems"
+      ]
+    },
+    {
+      "item": "ITEM_WIDE_LENS",
+      "sources": [
+        "src/frontier_creator.c:sFrontierHubAutoItems"
+      ]
+    },
+    {
+      "item": "ITEM_WISE_GLASSES",
+      "sources": [
+        "src/frontier_creator.c:sFrontierHubAutoItems"
+      ]
+    },
+    {
+      "item": "ITEM_YELLOW_SCARF",
+      "sources": [
+        "src/contest_shop.c:sScarfItems"
+      ]
+    },
+    {
+      "item": "ITEM_ZAP_PLATE",
+      "sources": [
+        "src/frontier_creator.c:sFrontierHubGiveItems"
+      ]
+    },
+    {
+      "item": "ITEM_ZINC",
+      "sources": [
+        "data/maps/BattleFrontier_ExchangeServiceCorner/scripts.inc",
+        "data/maps/BattleFrontier_Mart/scripts.inc"
+      ]
+    },
+    {
+      "item": "ITEM_ZOOM_LENS",
+      "sources": [
+        "src/frontier_creator.c:sFrontierHubAutoItems"
+      ]
+    }
+  ],
+  "ordinary_item_count": 206
+}

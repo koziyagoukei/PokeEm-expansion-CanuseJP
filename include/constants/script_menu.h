@@ -210,7 +210,7 @@ enum
 #define STDSTRING_ITEMS            14
 #define STDSTRING_KEYITEMS         15
 #define STDSTRING_POKEBALLS        16
-#define STDSTRING_TMHMS            17
+#define STDSTRING_STONES           17
 #define STDSTRING_BERRIES          18
 #define STDSTRING_SINGLE           19
 #define STDSTRING_DOUBLE           20

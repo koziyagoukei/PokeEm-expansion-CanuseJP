@@ -1,4 +1,5 @@
 #include "global.h"
+#include "event_data.h"
 #include "hall_of_fame.h"
 #include "main.h"
 #include "palette.h"
@@ -10,6 +11,12 @@
 
 static void ReshowPCMenuAfterHallOfFamePC(void);
 static void Task_WaitForPaletteFade(u8);
+
+// Hall of Fame records are only kept when their flash sectors exist.
+bool8 IsHallOfFamePCAvailable(void)
+{
+    return !FREE_SPECIAL_SAVE_SECTORS && FlagGet(FLAG_SYS_GAME_CLEAR);
+}
 
 void AccessHallOfFamePC(void)
 {
