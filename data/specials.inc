@@ -692,3 +692,14 @@ gSpecials::
 	def_special Special_RestoreResortInterior
 	def_special IsHallOfFamePCAvailable
 	def_special Special_SetFrontierAiEasy
+	def_special FrontierStory_PrepareReleaseBattle
+	def_special FrontierStory_PrepareMatchedBattle
+	def_special FrontierStory_EndStoryBattle
+	def_special FrontierStory_BufferBrainIntro
+	def_special FrontierStory_CountRescued
+	def_special FrontierStory_CanDarkraiJoin
+	def_special FrontierStory_PickCampVisitor
+	def_special FrontierStory_BufferVisitorText
+	def_special FrontierStory_RescueVisitor
+	def_special FrontierStory_ArrangeReleaseScene
+	def_special FrontierStory_PlaceBesidePlayer

@@ -523,6 +523,7 @@ enum TrainerClassID
     TRAINER_CLASS_RUIN_MANIAC_FRLG,
     TRAINER_CLASS_LADY_FRLG,
     TRAINER_CLASS_PAINTER_FRLG,
+    TRAINER_CLASS_NO_TITLE, // Shown by name alone; for the Frontier story.
 
     TRAINER_CLASS_COUNT,
 };

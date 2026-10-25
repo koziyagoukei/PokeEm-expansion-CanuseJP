@@ -1,5 +1,6 @@
 #include "global.h"
 #include "frontier_guest.h"
+#include "frontier_story.h"
 #include "event_data.h"
 #include "frontier_util.h"
 #include "random.h"
@@ -115,6 +116,8 @@ u8 GetFrontierGuestMonFilter(u16 trainerId, u8 slot)
 void CopyFrontierGuestText(u8 whichText, u16 trainerId)
 {
     // Use a local string, not record-mixing/apprentice Easy Chat storage.
+    if (FrontierStory_TryCopyGuestText(whichText, trainerId))
+        return;
     if (whichText == FRONTIER_BEFORE_TEXT)
     {
         if (trainerId == TRAINER_FRONTIER_TATE_AND_LIZA

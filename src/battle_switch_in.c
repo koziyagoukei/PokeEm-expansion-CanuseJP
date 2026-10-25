@@ -7,6 +7,7 @@
 #include "battle_switch_in.h"
 #include "battle_controllers.h"
 #include "config_changes.h"
+#include "frontier_story.h"
 #include "constants/battle.h"
 #include "constants/moves.h"
 
@@ -125,6 +126,16 @@ bool32 DoSwitchInEvents(void)
 
             gBattleStruct->switchInBattlerCounter++;
             gBattleStruct->eventState.battlerSwitchIn = 0;
+        }
+        gBattleStruct->switchInBattlerCounter = 0;
+        gBattleStruct->eventState.switchIn++;
+        break;
+    case SWITCH_IN_EVENTS_RELEASE_BOOST:
+        while (gBattleStruct->switchInBattlerCounter < gBattlersCount)
+        {
+            battler = gBattlersByRawSpeed[gBattleStruct->switchInBattlerCounter++];
+            if (FrontierStory_TryReleaseBoost(battler))
+                return TRUE;
         }
         gBattleStruct->switchInBattlerCounter = 0;
         gBattleStruct->eventState.switchIn++;

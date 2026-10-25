@@ -909,6 +909,7 @@ const u8 *const gBattleStringsTable[STRINGID_COUNT] =
     [STRINGID_LOSTSOMEOFITSHP]                      = COMPOUND_STRING("{JPN}{B_ATK_NAME_WITH_PREFIX}は\nたいりょくを すこし うしなった！"),
     [STRINGID_BELCHCANTUSE]                         = COMPOUND_STRING("{JPN}{B_ATK_NAME_WITH_PREFIX}は ゲップが でない！\p"),
     [STRINGID_FRONTIEROPPONENTFORFEITED]            = COMPOUND_STRING("{JPN}{B_TRAINER1_NAME_WITH_CLASS}は\nこうさん した！\p"),
+    [STRINGID_FRONTIERRELEASEBOOST]                 = COMPOUND_STRING("{JPN}{B_EFF_NAME_WITH_PREFIX}に\nみんなの ちからが ながれこむ！"),
 
 };
 
@@ -3307,8 +3308,10 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst, u32 dstSize)
                     textStart[classLength] = classString[classLength];
                     classLength++;
                 }
-                textStart[classLength] = CHAR_SPACE;
-                textStart += classLength + 1;
+                // A blank class (the story's cook and Pokevirus) shows the name alone.
+                if (classLength != 0)
+                    textStart[classLength++] = CHAR_SPACE;
+                textStart += classLength;
                 nameString = BattleStringGetOpponentNameByTrainerId(TRAINER_BATTLE_PARAM.opponentA, textStart, multiplayerId, GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT));
                 if (nameString != textStart)
                 {
@@ -3454,8 +3457,9 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst, u32 dstSize)
                     textStart[classLength] = classString[classLength];
                     classLength++;
                 }
-                textStart[classLength] = CHAR_SPACE;
-                textStart += classLength + 1;
+                if (classLength != 0)
+                    textStart[classLength++] = CHAR_SPACE;
+                textStart += classLength;
                 nameString = BattleStringGetOpponentNameByTrainerId(TRAINER_BATTLE_PARAM.opponentB, textStart, multiplayerId, GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT));
                 if (nameString != textStart)
                 {
@@ -3519,8 +3523,9 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst, u32 dstSize)
                     textStart[classLength] = classString[classLength];
                     classLength++;
                 }
-                textStart[classLength] = CHAR_SPACE;
-                textStart += classLength + 1;
+                if (classLength != 0)
+                    textStart[classLength++] = CHAR_SPACE;
+                textStart += classLength;
                 nameString = BattleStringGetPlayerName(textStart, GetBattlerAtPosition(B_POSITION_PLAYER_RIGHT));
                 if (nameString != textStart)
                 {
@@ -3596,8 +3601,9 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst, u32 dstSize)
                         textStart[classLength] = classString[classLength];
                         classLength++;
                     }
-                    textStart[classLength] = CHAR_SPACE;
-                    textStart += 1 + classLength;
+                    if (classLength != 0)
+                        textStart[classLength++] = CHAR_SPACE;
+                    textStart += classLength;
                     nameString = BattleStringGetTrainerName(textStart, multiplayerId, gBattlerAttacker);
                     if (nameString != textStart)
                     {

@@ -1292,6 +1292,12 @@ void Script_TrainerBattlePokevirus(struct ScriptContext *ctx)
     sPokevirusReleaseBattle = TRUE;
 }
 
+// For battles set up some other way, such as the story's multi battles; call after the setup.
+void SetPokevirusReleaseTransition(void)
+{
+    sPokevirusReleaseBattle = TRUE;
+}
+
 void ConfigureApproachingTrainerBattle(struct ApproachingTrainer *approachingTrainer)
 {
     InitTrainerBattleParameter();

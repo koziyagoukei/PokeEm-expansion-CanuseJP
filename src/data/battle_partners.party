@@ -42,3 +42,41 @@ EVs: 252 Atk / 252 SpA / 6 SpD
 - Protect
 - Solar Beam
 - Dragon Claw
+
+=== PARTNER_ROCKET_COOK ===
+Name: {JPN}てんしゅ
+Class: No Title
+Pic: Rocket Cook
+Gender: Male
+Music: Male
+AI: Basic Trainer
+
+SPECIES_ZYGARDE_50_POWER_CONSTRUCT @ Leftovers
+Ability: Power Construct
+Level: 50
+Nature: Adamant
+EVs: 252 HP / 252 Atk / 4 Def
+- Thousand Arrows
+- Dragon Dance
+- Extreme Speed
+- Stone Edge
+
+Darkrai @ Life Orb
+Ability: Bad Dreams
+Level: 50
+Nature: Timid
+EVs: 4 HP / 252 SpA / 252 Spe
+- Dark Void
+- Dark Pulse
+- Sludge Bomb
+- Nasty Plot
+
+Togekiss @ Sitrus Berry
+Ability: Serene Grace
+Level: 50
+Nature: Calm
+EVs: 252 HP / 4 SpA / 252 SpD
+- Air Slash
+- Dazzling Gleam
+- Follow Me
+- Protect

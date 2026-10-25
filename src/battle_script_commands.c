@@ -37,6 +37,7 @@
 #include "m4a.h"
 #include "mail.h"
 #include "event_data.h"
+#include "frontier_story.h"
 #include "pokemon_storage_system.h"
 #include "task.h"
 #include "naming_screen.h"
@@ -3748,6 +3749,7 @@ static void Cmd_switchhandleorder(void)
 static void UpdateSentMonFlags(enum BattlerId battler)
 {
     UpdateSentPokesToOpponentValue(battler);
+    FrontierStory_RecordSendOut(battler, (gHitMarker & HITMARKER_FAINTED(battler)) != 0);
     gHitMarker &= ~HITMARKER_FAINTED(battler);
     gSpecialStatuses[battler].faintedHasReplacement = FALSE;
     gBattleStruct->battlerState[battler].switchIn = TRUE;

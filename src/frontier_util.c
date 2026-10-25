@@ -1,6 +1,7 @@
 #include "global.h"
 #include "frontier_util.h"
 #include "frontier_guest.h"
+#include "frontier_story.h"
 #include "easy_chat.h"
 #include "event_data.h"
 #include "battle_setup.h"
@@ -2851,6 +2852,9 @@ static void CopyFrontierBrainText(bool8 playerWonText)
         facility = VarGet(VAR_FRONTIER_FACILITY);
         symbol = GetFronterBrainSymbol();
     }
+
+    if (FrontierStory_TryCopyBrainBattleText(facility, playerWonText))
+        return;
 
     switch (playerWonText)
     {

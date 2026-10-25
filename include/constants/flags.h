@@ -61,6 +61,20 @@
 #define FLAG_UNUSED_0x02D    0x2D // Unused Flag
 #define FLAG_UNUSED_0x02E    0x2E // Unused Flag
 #define FLAG_UNUSED_0x02F    0x2F // Unused Flag
+
+// Frontier story progress shared by every scenario (see constants/frontier_story.h).
+#define FLAG_STORY_DARKRAI_JOINED      FLAG_UNUSED_0x020
+#define FLAG_STORY_CURE_FOUND          FLAG_UNUSED_0x021 // The first rescue showed the kibidango cures, and Pecharunt was fed.
+#define FLAG_STORY_POKEVIRUS_REVEALED  FLAG_UNUSED_0x022
+// One per scenario, in FRONTIER_FACILITY_* order with the Contest last.
+#define FLAG_STORY_RESCUED_TOWER       FLAG_UNUSED_0x023
+#define FLAG_STORY_RESCUED_DOME        FLAG_UNUSED_0x024
+#define FLAG_STORY_RESCUED_PALACE      FLAG_UNUSED_0x025
+#define FLAG_STORY_RESCUED_ARENA       FLAG_UNUSED_0x026
+#define FLAG_STORY_RESCUED_FACTORY     FLAG_UNUSED_0x027
+#define FLAG_STORY_RESCUED_PIKE        FLAG_UNUSED_0x028
+#define FLAG_STORY_RESCUED_PYRAMID     FLAG_UNUSED_0x029
+#define FLAG_STORY_RESCUED_CONTEST     FLAG_UNUSED_0x02A
 #define FLAG_UNUSED_0x030    0x30 // Unused Flag
 #define FLAG_UNUSED_0x031    0x31 // Unused Flag
 #define FLAG_UNUSED_0x032    0x32 // Unused Flag
@@ -1345,6 +1359,10 @@
 #define FLAG_UNUSED_0x4ED                                           0x4ED // Unused Flag
 #define FLAG_UNUSED_0x4EE                                           0x4EE // Unused Flag
 #define FLAG_UNUSED_0x4EF                                           0x4EF // Unused Flag
+
+// Two flags per Frontier Brain or seventh-battle guest hold their NAMED_STORY_* memory state.
+#define FLAG_STORY_NAMED_STATES_START                               FLAG_UNUSED_0x493
+#define FLAG_STORY_NAMED_STATES_END                                 FLAG_UNUSED_0x4D4
 
 #define FLAG_DEFEATED_RUSTBORO_GYM                                  0x4F0
 #define FLAG_DEFEATED_DEWFORD_GYM                                   0x4F1

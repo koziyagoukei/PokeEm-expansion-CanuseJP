@@ -78,9 +78,13 @@ class ResortInteriorTest(unittest.TestCase):
                         self.assertLess(index % 512, limits[index >= 512])
 
     def test_all_npc_spawns_remain_walkable(self):
+        # Pecharunt sleeps on the hub's bed on purpose.
+        on_furniture = {"LOCALID_HUB_PECHARUNT"}
         for name in interiors.NAMES:
             grid = cells(name)
             for npc in map_data(name)["object_events"]:
+                if npc.get("local_id") in on_furniture:
+                    continue
                 with self.subTest(map=name, npc=npc["graphics_id"]):
                     self.assertTrue(walkable(grid[npc["y"]][npc["x"]]))
 

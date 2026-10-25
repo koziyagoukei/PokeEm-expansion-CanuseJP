@@ -17,15 +17,15 @@
   "warp_events": [
     {
       "warp_id": "WARP_ID_INN_WEST_EXIT",
-      "x": 16,
-      "y": 22,
+      "x": 14,
+      "y": 21,
       "elevation": 0,
       "dest_map": "MAP_RESTORATION_INN_LOBBY",
       "dest_warp_id": "WARP_ID_INN_LOBBY_WEST"
     },
     {
-      "x": 17,
-      "y": 22,
+      "x": 15,
+      "y": 21,
       "elevation": 0,
       "dest_map": "MAP_RESTORATION_INN_LOBBY",
       "dest_warp_id": "WARP_ID_INN_LOBBY_WEST"

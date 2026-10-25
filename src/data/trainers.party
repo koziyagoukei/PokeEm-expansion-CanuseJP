@@ -16876,3 +16876,119 @@ Double Battle: No
 Kyogre
 Level: 5
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+
+=== TRAINER_KAZUKI_RELEASE ===
+Name: カズキ
+Class: Youngster
+Pic: Youngster
+Gender: Male
+Music: Male
+Double Battle: No
+AI: Basic Trainer
+Multi Party: Half
+
+Mightyena @ Sitrus Berry
+Ability: Intimidate
+Level: 50
+Nature: Adamant
+EVs: 252 HP / 252 Atk / 4 Spe
+- Crunch
+- Play Rough
+- Sucker Punch
+- Ice Fang
+
+Swellow @ Flame Orb
+Ability: Guts
+Level: 50
+Nature: Jolly
+EVs: 4 HP / 252 Atk / 252 Spe
+- Facade
+- Brave Bird
+- Quick Attack
+- Protect
+
+Linoone @ Silk Scarf
+Ability: Quick Feet
+Level: 50
+Nature: Jolly
+EVs: 4 HP / 252 Atk / 252 Spe
+- Extreme Speed
+- Belly Drum
+- Seed Bomb
+- Protect
+
+=== TRAINER_POKEVIRUS ===
+Name: ヒトポケルス
+Class: No Title
+Pic: Pokevirus
+Gender: Male
+Music: Suspicious
+Double Battle: No
+AI: Basic Trainer
+Multi Party: Half
+
+Uxie @ Leftovers
+Level: 50
+Nature: Bold
+EVs: 252 HP / 252 Def / 4 SpD
+- Psychic
+- Yawn
+- Reflect
+- Light Screen
+
+Mesprit @ Sitrus Berry
+Level: 50
+Nature: Modest
+EVs: 252 HP / 252 SpA / 4 Spe
+- Psychic
+- Dazzling Gleam
+- Ice Beam
+- Calm Mind
+
+Azelf @ Life Orb
+Level: 50
+Nature: Timid
+EVs: 4 HP / 252 SpA / 252 Spe
+- Psychic
+- Flamethrower
+- Shadow Ball
+- Nasty Plot
+
+=== TRAINER_KAZUKI_RESORT ===
+Name: カズキ
+Class: Youngster
+Pic: Youngster
+Gender: Male
+Music: Male
+Double Battle: No
+AI: Basic Trainer
+
+Mightyena @ Sitrus Berry
+Ability: Intimidate
+Level: 50
+Nature: Adamant
+EVs: 252 HP / 252 Atk / 4 Spe
+- Crunch
+- Play Rough
+- Sucker Punch
+- Ice Fang
+
+Swellow @ Flame Orb
+Ability: Guts
+Level: 50
+Nature: Jolly
+EVs: 4 HP / 252 Atk / 252 Spe
+- Facade
+- Brave Bird
+- Quick Attack
+- Protect
+
+Linoone @ Silk Scarf
+Ability: Quick Feet
+Level: 50
+Nature: Jolly
+EVs: 4 HP / 252 Atk / 252 Spe
+- Extreme Speed
+- Belly Drum
+- Seed Bomb
+- Protect

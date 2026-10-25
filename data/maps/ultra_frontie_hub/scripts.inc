@@ -7,6 +7,7 @@ ultra_frontie_hub_MapScripts::
 UltraFrontieHub_OnLoad:
 	special Special_RestoreResortInterior
 	setflag FLAG_TEMP_10
+	call FrontierStory_EventScript_SetupHub
 	goto_if_ne VAR_FRONTIER_INTRO_STATE, FRONTIER_INTRO_ARRIVAL, UltraFrontieHub_OnLoad_Done
 	clearflag FLAG_TEMP_10
 UltraFrontieHub_OnLoad_Done:
@@ -14,6 +15,8 @@ UltraFrontieHub_OnLoad_Done:
 
 UltraFrontieHub_OnFrame:
 	map_script_2 VAR_FRONTIER_INTRO_STATE, FRONTIER_INTRO_ARRIVAL, FrontierIntro_EventScript_Arrival
+	map_script_2 VAR_TOWER_STORY_STATE, TOWER_STORY_RETURNED, TowerStory_EventScript_HubCare
+	map_script_2 VAR_TEMP_2, 0, FrontierStory_EventScript_HubArrival
 	.2byte 0
 
 UltraFrontieHub_OnTransition:

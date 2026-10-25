@@ -305,6 +305,7 @@
 #define FRONTIER_INTRO_FAMILY                           2
 #define FRONTIER_INTRO_COMPLETE                         3
 #define VAR_UNUSED_0x40FA                                0x40FA // Unused Var
+#define VAR_TOWER_STORY_STATE                            VAR_UNUSED_0x40FA // TOWER_STORY_*
 #define VAR_UNUSED_0x40FB                                0x40FB // Unused Var
 #define VAR_UNUSED_0x40FC                                0x40FC // Unused Var
 #define VAR_UNUSED_0x40FD                                0x40FD // Unused Var

@@ -28,6 +28,7 @@
 #include "dma3.h"
 #include "event_data.h"
 #include "evolution_scene.h"
+#include "frontier_story.h"
 #include "frontier_util.h"
 #include "field_weather.h"
 #include "follower_npc.h"
@@ -420,6 +421,7 @@ const struct TrainerClass gTrainerClasses[TRAINER_CLASS_COUNT] =
     [TRAINER_CLASS_RUIN_MANIAC_FRLG] =     { _("いせきマニア"), 12 },
     [TRAINER_CLASS_LADY_FRLG] =            { _("おじょうさま"), 50 },
     [TRAINER_CLASS_PAINTER_FRLG] =         { _("えかき"), 4 },
+    [TRAINER_CLASS_NO_TITLE] =             { _(""), 0 },
 };
 
 static void (*const sTurnActionsFuncsTable[])(void) =
@@ -5505,6 +5507,7 @@ static void HandleEndTurn_FinishBattle(void)
             TryPutBreakingNewsOnAir();
         }
 
+        FrontierStory_OnBattleFinished();
         BeginFastPaletteFade(3);
         FadeOutMapMusic(5);
         TryRestoreHeldItems();

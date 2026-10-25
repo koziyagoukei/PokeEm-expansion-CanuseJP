@@ -118,6 +118,48 @@
       "trainer_sight_or_berry_tree_id": "0",
       "script": "FrontierIntro_EventScript_Cook",
       "flag": "FLAG_TEMP_10"
+    },
+    {
+      "local_id": "LOCALID_HUB_PECHARUNT",
+      "graphics_id": "OBJ_EVENT_GFX_SPECIES(PECHARUNT)",
+      "x": 22,
+      "y": 15,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "FrontierStory_EventScript_Pecharunt",
+      "flag": "0"
+    },
+    {
+      "local_id": "LOCALID_HUB_DARKRAI",
+      "graphics_id": "OBJ_EVENT_GFX_SPECIES(DARKRAI)",
+      "x": 23,
+      "y": 14,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_LEFT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "FrontierStory_EventScript_Darkrai",
+      "flag": "FLAG_TEMP_11"
+    },
+    {
+      "local_id": "LOCALID_HUB_KAZUKI",
+      "graphics_id": "OBJ_EVENT_GFX_YOUNGSTER",
+      "x": 4,
+      "y": 5,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_RIGHT",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "0",
+      "flag": "FLAG_TEMP_12"
     }
   ],
   "warp_events": [

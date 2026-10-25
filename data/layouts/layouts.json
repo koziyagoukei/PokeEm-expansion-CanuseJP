@@ -1186,8 +1186,8 @@
     {
       "id": "LAYOUT_RESTORATION_INN_OUTSIDE",
       "name": "RestorationInn_Outside_Layout",
-      "width": 40,
-      "height": 36,
+      "width": 32,
+      "height": 33,
       "primary_tileset": "gTileset_General",
       "secondary_tileset": "gTileset_RestorationInnExterior",
       "border_filepath": "data/layouts/RestorationInn_Outside/border.bin",
@@ -1208,8 +1208,8 @@
     {
       "id": "LAYOUT_RESTORATION_INN_EAST_WING",
       "name": "RestorationInn_EastWing_Layout",
-      "width": 34,
-      "height": 24,
+      "width": 30,
+      "height": 22,
       "primary_tileset": "gTileset_Building",
       "secondary_tileset": "gTileset_RestorationInnInterior",
       "border_filepath": "data/layouts/RestorationInn_EastWing/border.bin",
@@ -1219,8 +1219,8 @@
     {
       "id": "LAYOUT_RESTORATION_INN_WEST_WING",
       "name": "RestorationInn_WestWing_Layout",
-      "width": 34,
-      "height": 24,
+      "width": 30,
+      "height": 22,
       "primary_tileset": "gTileset_Building",
       "secondary_tileset": "gTileset_RestorationInnInterior",
       "border_filepath": "data/layouts/RestorationInn_WestWing/border.bin",

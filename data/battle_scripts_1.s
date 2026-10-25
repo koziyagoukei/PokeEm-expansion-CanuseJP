@@ -3058,6 +3058,13 @@ BattleScript_FrontierOpponentForfeited::
 	callnative BS_SetFrontierOpponentForfeited
 	end
 
+BattleScript_FrontierReleaseBoost::
+	playanimation BS_EFFECT_BATTLER, B_ANIM_TOTEM_FLARE
+	printstring STRINGID_FRONTIERRELEASEBOOST
+	waitmessage B_WAIT_TIME_LONG
+	trystatchanges BS_EFFECT_BATTLER, STAT_CHANGE_IGNORE_SELF
+	return
+
 BattleScript_PrintFailedToRunString::
 	printfromtable gNoEscapeStringIds
 	waitmessage B_WAIT_TIME_LONG

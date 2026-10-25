@@ -117,7 +117,7 @@ static const u8 sInfoText_HubPokemon1[] = _(
 static const u8 sInfoText_HubPokemon2[] = _(
     "{JPN}せいべつが 2つある しゅるいは\n"
     "せいべつを えらべます。\n"
-    "レベルは 50か 100から えらび\n"
+    "つくる ポケモンは みんな レベル100。\n"
     "せいかく・とくせい・テラタイプも\n"
     "じゆうに せっていできます。\n"
     "たいおうする しゅるいは キョダイも。");

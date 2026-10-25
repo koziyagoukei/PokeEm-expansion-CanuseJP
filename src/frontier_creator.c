@@ -34,8 +34,8 @@
 
 #define FRONTIER_CREATOR_FONT FONT_NORMAL
 
-#define FRONTIER_CREATOR_LEVEL_50  50
-#define FRONTIER_CREATOR_LEVEL_100 100
+// Every created Pokémon is level 100, so a party never mixes levels.
+#define FRONTIER_CREATOR_LEVEL 100
 #define FRONTIER_CREATOR_DYNAMAX_LEVEL 10
 #define FRONTIER_CREATOR_MAX_TOTAL_EVS 510
 #define FRONTIER_CREATOR_MAX_PER_STAT_EVS 252
@@ -62,7 +62,6 @@
 struct FrontierCreatorData
 {
     enum Species species;
-    u8 level;
     u8 gender;
     u8 nature;
     u8 abilityNum;
@@ -116,8 +115,8 @@ enum FrontierCreatorSpeciesSortMode
 
 static void Task_FrontierCreator_SelectSpecies(u8 taskId);
 static void Task_FrontierCreator_SelectGender(u8 taskId);
-static void Task_FrontierCreator_SelectLevel(u8 taskId);
 static void Task_FrontierCreator_SelectNature(u8 taskId);
+static void FrontierCreator_StartNatureStep(u8 taskId);
 static void Task_FrontierCreator_SelectAbility(u8 taskId);
 static void Task_FrontierCreator_SelectTeraType(u8 taskId);
 static void Task_FrontierCreator_SelectGmax(u8 taskId);
@@ -2211,7 +2210,6 @@ static void FrontierCreator_InitDefaultData(void)
     u32 i;
 
     sFrontierCreatorData->species = SPECIES_BULBASAUR;
-    sFrontierCreatorData->level = 50;
     sFrontierCreatorData->gender = FrontierCreator_GetDefaultGender(sFrontierCreatorData->species);
     sFrontierCreatorData->abilityNum = 0;
     sFrontierCreatorData->nature = NATURE_HARDY;
@@ -2527,25 +2525,6 @@ static void FrontierCreator_DrawGenderScreen(u8 taskId)
     FrontierCreator_PrintWindow(windowId);
 }
 
-static void FrontierCreator_DrawLevelScreen(u8 taskId)
-{
-    u8 windowId = gTasks[taskId].tWindowId;
-
-    FrontierCreator_ClearWindow(windowId);
-
-    StringCopy(gStringVar4, COMPOUND_STRING("レベルを えらぶ{CLEAR_TO 90}\n"));
-    StringAppend(gStringVar4, COMPOUND_STRING("レベル: "));
-
-    ConvertIntToDecimalStringN(gStringVar1, sFrontierCreatorData->level, STR_CONV_MODE_LEADING_ZEROS, 3);
-    StringAppend(gStringVar4, gStringVar1);
-    StringAppend(gStringVar4, COMPOUND_STRING("{CLEAR_TO 90}\n"));
-
-    StringAppend(gStringVar4, COMPOUND_STRING("{UP_ARROW}{DOWN_ARROW} 50/100"));
-    StringAppend(gStringVar4, sFrontierCreatorText_Controls);
-
-    FrontierCreator_PrintWindow(windowId);
-}
-
 static void FrontierCreator_DrawAbilityScreen(u8 taskId)
 {
     u8 windowId = gTasks[taskId].tWindowId;
@@ -2851,7 +2830,7 @@ static void FrontierCreator_CreateMonAndGive(void)
     CreateMon(
         &mon,
         sFrontierCreatorData->species,
-        sFrontierCreatorData->level,
+        FRONTIER_CREATOR_LEVEL,
         personality,
         OTID_STRUCT_PLAYER_ID
     );
@@ -2952,8 +2931,7 @@ static void Task_FrontierCreator_SelectSpecies(u8 taskId)
         }
         else
         {
-            FrontierCreator_DrawLevelScreen(taskId);
-            gTasks[taskId].func = Task_FrontierCreator_SelectLevel;
+            FrontierCreator_StartNatureStep(taskId);
         }
     }
     else if (JOY_NEW(B_BUTTON))
@@ -2962,6 +2940,14 @@ static void Task_FrontierCreator_SelectSpecies(u8 taskId)
         gSpecialVar_Result = FALSE;
         FrontierCreator_DestroyAndReturn(taskId);
     }
+}
+
+static void FrontierCreator_StartNatureStep(u8 taskId)
+{
+    gTasks[taskId].tInput = NUM_NATURES;
+    gTasks[taskId].tDigit = 0;
+    FrontierCreator_DrawNatureScreen(taskId);
+    gTasks[taskId].func = Task_FrontierCreator_SelectNature;
 }
 
 static void Task_FrontierCreator_SelectGender(u8 taskId)
@@ -2980,39 +2966,7 @@ static void Task_FrontierCreator_SelectGender(u8 taskId)
     if (JOY_NEW(A_BUTTON))
     {
         PlaySE(SE_SELECT);
-        FrontierCreator_DrawLevelScreen(taskId);
-        gTasks[taskId].func = Task_FrontierCreator_SelectLevel;
-    }
-    else if (JOY_NEW(B_BUTTON))
-    {
-        PlaySE(SE_SELECT);
-        gSpecialVar_Result = FALSE;
-        FrontierCreator_DestroyAndReturn(taskId);
-    }
-}
-
-static void Task_FrontierCreator_SelectLevel(u8 taskId)
-{
-    if (JOY_NEW(DPAD_ANY))
-    {
-        PlaySE(SE_SELECT);
-
-        if (sFrontierCreatorData->level == FRONTIER_CREATOR_LEVEL_50)
-            sFrontierCreatorData->level = FRONTIER_CREATOR_LEVEL_100;
-        else
-            sFrontierCreatorData->level = FRONTIER_CREATOR_LEVEL_50;
-
-        FrontierCreator_DrawLevelScreen(taskId);
-    }
-
-    if (JOY_NEW(A_BUTTON))
-    {
-        PlaySE(SE_SELECT);
-        gTasks[taskId].tInput = NUM_NATURES;
-        gTasks[taskId].tDigit = 0;
-
-        FrontierCreator_DrawNatureScreen(taskId);
-        gTasks[taskId].func = Task_FrontierCreator_SelectNature;
+        FrontierCreator_StartNatureStep(taskId);
     }
     else if (JOY_NEW(B_BUTTON))
     {
