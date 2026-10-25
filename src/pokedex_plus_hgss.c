@@ -251,6 +251,8 @@ static void SpriteCB_StatBarsBg(struct Sprite *sprite);
 static void Task_LoadFormsScreen(u8 taskId);
 static void Task_HandleFormsScreenInput(u8 taskId);
 static void PrintForms(u8 taskId, enum Species species);
+static void CreateFormIcons(u8 taskId);
+static void DestroyFormIcons(void);
 static void Task_SwitchScreensFromFormsScreen(u8 taskId);
 static void Task_ExitFormsScreen(u8 taskId);
 
@@ -4024,11 +4026,11 @@ static void Task_LoadFormsScreen(u8 taskId)
         }
         EvoFormsPage_PrintNavigationButtons(); // Navigation buttons
         sPokedexView->sFormScreenData.menuPos = 1;
+        sPokedexView->sFormScreenData.scrollRow = 0;
         gMain.state++;
         break;
     case 4:
         //Print form icons
-        gTasks[taskId].data[3] = 0;
         PrintForms(taskId, NationalPokedexNumToSpeciesForm(sPokedexListItem->dexNum));
         LoadSpritePalette(&gSpritePalette_Arrow);
         TryLoadDarkModeArrowPalette();
@@ -4115,17 +4117,18 @@ static void Task_HandleFormsScreenInput(u8 taskId)
         u8 row = 0;
         u8 column = 0;
         u8 menuPos = sPokedexView->sFormScreenData.menuPos;
+        u8 scrollRow = sPokedexView->sFormScreenData.scrollRow;
         //Grid navigation
         if (JOY_NEW(DPAD_RIGHT))
             menuPos += 1;
         else if (JOY_NEW(DPAD_LEFT))
             menuPos -= 1;
         else if (JOY_NEW(DPAD_DOWN))
-            menuPos += 7;
+            menuPos += FORMS_SCREEN_COLUMNS;
         else if (JOY_NEW(DPAD_UP))
         {
-            if (menuPos > 7)
-                menuPos -= 7;
+            if (menuPos > FORMS_SCREEN_COLUMNS)
+                menuPos -= FORMS_SCREEN_COLUMNS;
             else
                 menuPos = 1;
         }
@@ -4135,10 +4138,22 @@ static void Task_HandleFormsScreenInput(u8 taskId)
         else if (menuPos >= sPokedexView->sFormScreenData.numForms)
             menuPos = sPokedexView->sFormScreenData.numForms;
 
-        row = menuPos / 7;
-        column = menuPos % 7;
+        row = menuPos / FORMS_SCREEN_COLUMNS;
+        column = menuPos % FORMS_SCREEN_COLUMNS;
+
+        //Scroll the icon grid so the selected row stays visible
+        if (row < scrollRow)
+            scrollRow = row;
+        else if (row >= scrollRow + FORMS_SCREEN_VISIBLE_ROWS)
+            scrollRow = row - FORMS_SCREEN_VISIBLE_ROWS + 1;
+        if (scrollRow != sPokedexView->sFormScreenData.scrollRow)
+        {
+            sPokedexView->sFormScreenData.scrollRow = scrollRow;
+            CreateFormIcons(taskId);
+        }
+
         gSprites[sPokedexView->sFormScreenData.arrowSpriteId].x = base_x + offset_x * column;
-        gSprites[sPokedexView->sFormScreenData.arrowSpriteId].y = base_y + offset_y * row;
+        gSprites[sPokedexView->sFormScreenData.arrowSpriteId].y = base_y + offset_y * (row - scrollRow);
 
         sPokedexView->sFormScreenData.menuPos = menuPos;
 
@@ -4173,6 +4188,61 @@ static void Task_HandleFormsScreenInput(u8 taskId)
 
 #define FORM_SPECIES_END (0xffff)
 
+static void DestroyFormIcons(void)
+{
+    u32 i;
+
+    for (i = 0; i < ARRAY_COUNT(sPokedexView->sFormScreenData.iconSpriteIds); i++)
+    {
+        if (sPokedexView->sFormScreenData.iconSpriteIds[i] != SPRITE_NONE)
+        {
+            FreeAndDestroyMonIconSprite(&gSprites[sPokedexView->sFormScreenData.iconSpriteIds[i]]); //Destroy Pokemon icon sprite
+            sPokedexView->sFormScreenData.iconSpriteIds[i] = SPRITE_NONE;
+        }
+    }
+}
+
+//Creates the icons of the form rows currently scrolled into view
+static void CreateFormIcons(u8 taskId)
+{
+    u32 i;
+    enum Species species = NationalPokedexNumToSpeciesForm(sPokedexListItem->dexNum);
+    u32 firstSlot = sPokedexView->sFormScreenData.scrollRow * FORMS_SCREEN_COLUMNS;
+    u8 y_offset_icons = 0; //For unown only
+
+    if (GetFormSpeciesId(species, 0) == SPECIES_UNOWN)
+        y_offset_icons = 8;
+
+    DestroyFormIcons();
+
+    //Slot 0 is the current species' icon, which only exists on the first row
+    gSprites[gTasks[taskId].data[4]].invisible = (firstSlot != 0);
+
+    for (i = 0; i < ARRAY_COUNT(sPokedexView->sFormScreenData.iconSpriteIds); i++)
+    {
+        u32 slot = firstSlot + i;
+        u32 row = i / FORMS_SCREEN_COLUMNS;
+        u32 column = i % FORMS_SCREEN_COLUMNS;
+        enum Species speciesForm;
+        u32 personality;
+        u8 spriteId;
+
+        if (slot == 0)
+            continue;
+        if (slot > sPokedexView->sFormScreenData.numForms)
+            break;
+
+        speciesForm = GetFormSpeciesId(species, sPokedexView->sFormScreenData.formIds[slot]);
+        personality = GetPokedexMonPersonality(speciesForm);
+        LoadMonIconPalettePersonality(speciesForm, personality); //Loads pallete for current mon
+        spriteId = CreateMonIcon(speciesForm, SpriteCB_MonIcon, 18 + 34 * column, 31 + 39 * row - (row != 0 ? y_offset_icons : 0), 4, personality); //Create Pokemon sprite
+        if (spriteId == MAX_SPRITES)
+            continue;
+        gSprites[spriteId].oam.priority = 0;
+        sPokedexView->sFormScreenData.iconSpriteIds[i] = spriteId;
+    }
+}
+
 static void PrintForms(u8 taskId, enum Species species)
 {
     u8 i;
@@ -4183,13 +4253,6 @@ static void PrintForms(u8 taskId, enum Species species)
     u8 base_y = 52;
     u8 base_y_offset = 9;
     u8 times = 0;
-    u8 y_offset_icons = 0; //For unown only
-
-    if (species == SPECIES_UNOWN)
-        y_offset_icons = 8;
-
-    if (GetFormSpeciesId(species, 0) == SPECIES_UNOWN)
-        y_offset_icons = 8;
 
     StringCopy(gStringVar1, GetSpeciesName(species));
 
@@ -4200,21 +4263,19 @@ static void PrintForms(u8 taskId, enum Species species)
             break;
         else if (speciesForm == species)
             continue;
+        else if (j >= ARRAY_COUNT(sPokedexView->sFormScreenData.formIds))
+            break;
         else
         {
-            u32 personality = GetPokedexMonPersonality(speciesForm);
             sPokedexView->sFormScreenData.formIds[j++] = i;
             times += 1;
-            LoadMonIconPalettePersonality(speciesForm, personality); //Loads pallete for current mon
-            if (times < 7)
-                gTasks[taskId].data[4+times] = CreateMonIcon(speciesForm, SpriteCB_MonIcon, 52 + 34*(times-1), 31, 4, personality); //Create Pokemon sprite
-            else if (times < 14)
-                gTasks[taskId].data[4+times] = CreateMonIcon(speciesForm, SpriteCB_MonIcon, 18 + 34*(times-7), 70 - y_offset_icons, 4, personality); //Create Pokemon sprite
-            gSprites[gTasks[taskId].data[4+times]].oam.priority = 0;
         }
     }
-    gTasks[taskId].data[3] = times;
     sPokedexView->sFormScreenData.numForms = times;
+
+    for (i = 0; i < ARRAY_COUNT(sPokedexView->sFormScreenData.iconSpriteIds); i++)
+        sPokedexView->sFormScreenData.iconSpriteIds[i] = SPRITE_NONE;
+    CreateFormIcons(taskId);
 
     //If there are no forms print text
     if (times == 0)
@@ -4226,15 +4287,11 @@ static void PrintForms(u8 taskId, enum Species species)
 
 static void Task_SwitchScreensFromFormsScreen(u8 taskId)
 {
-    u8 i;
     if (!gPaletteFade.active)
     {
         FreeMonIconPalettes();                                          //Destroy Pokemon icon sprite
         FreeAndDestroyMonIconSprite(&gSprites[gTasks[taskId].data[4]]); //Destroy Pokemon icon sprite
-        for (i = 1; i <= gTasks[taskId].data[3]; i++)
-        {
-            FreeAndDestroyMonIconSprite(&gSprites[gTasks[taskId].data[4+i]]); //Destroy Pokemon icon sprite
-        }
+        DestroyFormIcons();
         FreeAndDestroyMonPicSprite(gTasks[taskId].tMonSpriteId);
 
         switch (sPokedexView->screenSwitchState)
@@ -4251,15 +4308,11 @@ static void Task_SwitchScreensFromFormsScreen(u8 taskId)
 
 static void Task_ExitFormsScreen(u8 taskId)
 {
-    u8 i;
     if (!gPaletteFade.active)
     {
         FreeMonIconPalettes();                                          //Destroy Pokemon icon sprite
         FreeAndDestroyMonIconSprite(&gSprites[gTasks[taskId].data[4]]); //Destroy Pokemon icon sprite
-        for (i = 1; i <= gTasks[taskId].data[3]; i++)
-        {
-            FreeAndDestroyMonIconSprite(&gSprites[gTasks[taskId].data[4+i]]); //Destroy Pokemon icon sprite
-        }
+        DestroyFormIcons();
         FreeAndDestroyMonPicSprite(gTasks[taskId].tMonSpriteId);
 
         FreeInfoScreenWindowAndBgBuffers();
