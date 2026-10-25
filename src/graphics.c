@@ -1911,8 +1911,6 @@ const u16 gPokenavMessageBox_Pal[] = INCBIN_U16("build/extracted_pokenav/message
 const u32 gPokenavMessageBox_Gfx[] = INCBIN_U32("build/extracted_pokenav/message.4bpp.lz");
 const u32 gPokenavMessageBox_Tilemap[] = INCBIN_U32("build/extracted_pokenav/message.bin.lz");
 
-const u16 gRegionMapCityZoomTiles_Pal[] = INCBIN_U16("build/extracted_pokenav/region_map/zoom_tiles.gbapal");
-const u32 gRegionMapCityZoomText_Gfx[] = INCBIN_U32("build/extracted_pokenav/region_map/city_zoom_text.4bpp.lz");
 
 const u16 gPokenavConditionCancel_Pal[] = INCBIN_U16("build/extracted_contest/pokenav/condition/cancel.gbapal");
 const u8 gPokenavConditionCancel_Gfx[] = INCBIN_U8("build/extracted_contest/pokenav/condition/cancel.4bpp");

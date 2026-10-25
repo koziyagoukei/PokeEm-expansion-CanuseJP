@@ -3,8 +3,22 @@
 #include "event_data.h"
 #include "item_menu.h"
 #include "pokemon.h"
+#include "string_util.h"
 #include "test/overworld_script.h"
 #include "test/test.h"
+
+static void ExpectBagNameOrder(enum Pocket pocketId, u32 count)
+{
+    for (u32 i = 0; i < count; i++)
+    {
+        EXPECT(GetBagItemId(pocketId, i) != ITEM_NONE);
+        EXPECT_EQ(GetBagItemQuantity(pocketId, i), 1);
+        if (i != 0)
+            EXPECT(StringCompare(GetItemName(GetBagItemId(pocketId, i - 1)),
+                                 GetItemName(GetBagItemId(pocketId, i))) <= 0);
+    }
+    EXPECT_EQ(GetBagItemId(pocketId, count), ITEM_NONE);
+}
 
 TEST("Bag redesign: stones have their own pocket and sort by item ID")
 {
@@ -66,15 +80,8 @@ TEST("Berries are sorted correctly in the bag")
 
     SortItemsInBag(&gBagPockets[POCKET_BERRIES], SORT_ALPHABETICALLY);
 
-    EXPECT_EQ(pocket->itemSlots[0].itemId, ITEM_CHARTI_BERRY);
-    EXPECT_EQ(pocket->itemSlots[1].itemId, ITEM_CHERI_BERRY);
-    EXPECT_EQ(pocket->itemSlots[2].itemId, ITEM_GANLON_BERRY);
-    EXPECT_EQ(pocket->itemSlots[3].itemId, ITEM_KELPSY_BERRY);
-    EXPECT_EQ(pocket->itemSlots[4].itemId, ITEM_MAGOST_BERRY);
-    EXPECT_EQ(pocket->itemSlots[5].itemId, ITEM_MICLE_BERRY);
-    EXPECT_EQ(pocket->itemSlots[6].itemId, ITEM_ORAN_BERRY);
-    EXPECT_EQ(pocket->itemSlots[7].itemId, ITEM_POMEG_BERRY);
-    EXPECT_EQ(pocket->itemSlots[8].itemId, ITEM_NONE);
+    // Item names are localized, so an English-only expected order is invalid.
+    ExpectBagNameOrder(POCKET_BERRIES, 8);
 }
 
 TEST("Items are correctly sorted and compacted in the bag")
@@ -114,13 +121,7 @@ TEST("Items are correctly sorted and compacted in the bag")
 
     SortItemsInBag(&gBagPockets[POCKET_ITEMS], SORT_ALPHABETICALLY);
 
-    EXPECT_EQ(pocket->itemSlots[0].itemId, ITEM_BIG_MUSHROOM);
-    EXPECT_EQ(pocket->itemSlots[1].itemId, ITEM_BIG_NUGGET);
-    EXPECT_EQ(pocket->itemSlots[2].itemId, ITEM_BIG_PEARL);
-    EXPECT_EQ(pocket->itemSlots[3].itemId, ITEM_NUGGET);
-    EXPECT_EQ(pocket->itemSlots[4].itemId, ITEM_PEARL);
-    EXPECT_EQ(pocket->itemSlots[5].itemId, ITEM_TINY_MUSHROOM);
-    EXPECT_EQ(pocket->itemSlots[6].itemId, ITEM_NONE);
+    ExpectBagNameOrder(POCKET_ITEMS, 6);
 
     // Try removing the big items, check that everything is compacted correctly
 
@@ -132,12 +133,10 @@ TEST("Items are correctly sorted and compacted in the bag")
 
     CompactItemsInBagPocket(POCKET_ITEMS);
 
-    EXPECT_EQ(pocket->itemSlots[0].itemId, ITEM_NUGGET);
-    EXPECT_EQ(pocket->itemSlots[0].quantity, 1);
-    EXPECT_EQ(pocket->itemSlots[1].itemId, ITEM_PEARL);
-    EXPECT_EQ(pocket->itemSlots[1].quantity, 1);
-    EXPECT_EQ(pocket->itemSlots[2].itemId, ITEM_TINY_MUSHROOM);
-    EXPECT_EQ(pocket->itemSlots[2].quantity, 1);
+    ExpectBagNameOrder(POCKET_ITEMS, 3);
+    EXPECT(CheckBagHasItem(ITEM_NUGGET, 1));
+    EXPECT(CheckBagHasItem(ITEM_PEARL, 1));
+    EXPECT(CheckBagHasItem(ITEM_TINY_MUSHROOM, 1));
     EXPECT_EQ(pocket->itemSlots[3].itemId, ITEM_NONE);
     EXPECT_EQ(pocket->itemSlots[4].itemId, ITEM_NONE);
     EXPECT_EQ(pocket->itemSlots[5].itemId, ITEM_NONE);

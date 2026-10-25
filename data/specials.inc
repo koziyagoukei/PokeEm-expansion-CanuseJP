@@ -271,7 +271,6 @@ gSpecials::
 	def_special ReducePlayerPartyToSelectedMons
 	def_special BedroomPC, waitstate=1
 	def_special PlayerPC, waitstate=1
-	def_special FieldShowRegionMap, waitstate=1
 	def_special GetInGameTradeSpeciesInfo
 	def_special CreateInGameTradePokemon
 	def_special DoInGameTradeScene, waitstate=1

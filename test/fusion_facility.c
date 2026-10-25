@@ -39,12 +39,6 @@ static const u16 sChallengeMaps[] = {
     MAP_BATTLE_FRONTIER_BATTLE_PIKE_ROOM_FINAL,
     MAP_BATTLE_FRONTIER_BATTLE_PYRAMID_FLOOR,
     MAP_BATTLE_FRONTIER_BATTLE_PYRAMID_TOP,
-    MAP_SLATEPORT_CITY_BATTLE_TENT_CORRIDOR,
-    MAP_SLATEPORT_CITY_BATTLE_TENT_BATTLE_ROOM,
-    MAP_VERDANTURF_TOWN_BATTLE_TENT_CORRIDOR,
-    MAP_VERDANTURF_TOWN_BATTLE_TENT_BATTLE_ROOM,
-    MAP_FALLARBOR_TOWN_BATTLE_TENT_CORRIDOR,
-    MAP_FALLARBOR_TOWN_BATTLE_TENT_BATTLE_ROOM,
 };
 
 static const u16 sAllowedMaps[] = {
@@ -55,12 +49,9 @@ static const u16 sAllowedMaps[] = {
     MAP_BATTLE_FRONTIER_BATTLE_FACTORY_LOBBY,
     MAP_BATTLE_FRONTIER_BATTLE_PIKE_LOBBY,
     MAP_BATTLE_FRONTIER_BATTLE_PYRAMID_LOBBY,
-    MAP_SLATEPORT_CITY_BATTLE_TENT_LOBBY,
-    MAP_VERDANTURF_TOWN_BATTLE_TENT_LOBBY,
-    MAP_FALLARBOR_TOWN_BATTLE_TENT_LOBBY,
     MAP_BATTLE_FRONTIER_OUTSIDE_EAST,
     MAP_BATTLE_FRONTIER_OUTSIDE_WEST,
-    MAP_LITTLEROOT_TOWN,
+    MAP_BATTLE_FRONTIER_OUTSIDE_SOUTH,
 };
 
 static void SetMap(u16 map)
@@ -70,7 +61,7 @@ static void SetMap(u16 map)
     gMapHeader = *Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(map), MAP_NUM(map));
 }
 
-TEST("Fusion facility restriction: all Frontier and Tent challenge rooms disallow separation")
+TEST("Fusion facility restriction: all Frontier challenge rooms disallow separation")
 {
     u32 index = 0;
     for (u32 i = 0; i < ARRAY_COUNT(sChallengeMaps); i++)
@@ -197,7 +188,7 @@ static void SetFieldPartyMenu(void)
     };
 }
 
-TEST("Party resort warp: all Frontier and Tent challenge rooms block SELECT entry")
+TEST("Party resort warp: all Frontier challenge rooms block SELECT entry")
 {
     u32 index = 0;
     for (u32 i = 0; i < ARRAY_COUNT(sChallengeMaps); i++)

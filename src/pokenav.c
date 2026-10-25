@@ -111,16 +111,6 @@ const struct PokenavCallbacks PokenavMenuCallbacks[15] =
         .free1 = FreeMenuHandlerSubstruct1,
         .free2 = FreeMenuHandlerSubstruct2,
     },
-    [POKENAV_REGION_MAP - POKENAV_MENU_IDS_START] =
-    {
-        .init = PokenavCallback_Init_RegionMap,
-        .callback = GetRegionMapCallback,
-        .open = OpenPokenavRegionMap,
-        .createLoopTask = CreateRegionMapLoopedTask,
-        .isLoopTaskActive = IsRegionMapLoopedTaskActive,
-        .free1 = FreeRegionMapSubstruct1,
-        .free2 = FreeRegionMapSubstruct2,
-    },
     [POKENAV_CONDITION_GRAPH_PARTY - POKENAV_MENU_IDS_START] =
     {
         .init = PokenavCallback_Init_ConditionGraph_Party,

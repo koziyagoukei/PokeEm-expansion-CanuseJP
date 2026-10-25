@@ -17,61 +17,6 @@ BattleFrontier_OutsideWest_EventScript_FerryAttendant::
 BattleFrontier_OutsideWest_Text_FerrySuspended:
 	.string "ただいま ふねは おやすみちゅうです\nみなみの ひろばへは あるいて どうぞ！$"
 
-BattleFrontier_OutsideWest_EventScript_ChooseFerryDestination::
-	multichoicedefault 18, 6, MULTI_SSTIDAL_BATTLE_FRONTIER, 2, FALSE
-	switch VAR_RESULT
-	case 0, BattleFrontier_OutsideWest_EventScript_FerryToSlateport
-	case 1, BattleFrontier_OutsideWest_EventScript_FerryToLilycove
-	case 2, BattleFrontier_OutsideWest_EventScript_CancelFerrySelect
-	case MULTI_B_PRESSED, BattleFrontier_OutsideWest_EventScript_CancelFerrySelect
-	end
-
-BattleFrontier_OutsideWest_EventScript_NoSSTicket::
-	msgbox BattleFrontier_OutsideWest_Text_MustHaveTicketToBoard, MSGBOX_DEFAULT
-	release
-	end
-
-BattleFrontier_OutsideWest_EventScript_FerryToSlateport::
-	msgbox BattleFrontier_OutsideWest_Text_SlateportItIs, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, NO, BattleFrontier_OutsideWest_EventScript_ChooseNewFerryDestination
-	msgbox BattleFrontier_OutsideWest_Text_PleaseBoardFerry, MSGBOX_DEFAULT
-	call BattleFrontier_OutsideWest_EventScript_BoardFerry
-	warp MAP_SLATEPORT_CITY_HARBOR, 8, 11
-	waitstate
-	release
-	end
-
-BattleFrontier_OutsideWest_EventScript_FerryToLilycove::
-	msgbox BattleFrontier_OutsideWest_Text_LilycoveItIs, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, NO, BattleFrontier_OutsideWest_EventScript_ChooseNewFerryDestination
-	msgbox BattleFrontier_OutsideWest_Text_PleaseBoardFerry, MSGBOX_DEFAULT
-	call BattleFrontier_OutsideWest_EventScript_BoardFerry
-	warp MAP_LILYCOVE_CITY_HARBOR, 8, 11
-	waitstate
-	release
-	end
-
-BattleFrontier_OutsideWest_EventScript_ChooseNewFerryDestination::
-	message BattleFrontier_OutsideWest_Text_ThenWhereWouldYouLikeToGo
-	waitmessage
-	goto BattleFrontier_OutsideWest_EventScript_ChooseFerryDestination
-	end
-
-BattleFrontier_OutsideWest_EventScript_BoardFerry::
-	closemessage
-	applymovement VAR_LAST_TALKED, Common_Movement_WalkInPlaceFasterDown
-	waitmovement 0
-	delay 30
-	hideobjectat LOCALID_FRONTIER_FERRY_ATTENDANT, MAP_BATTLE_FRONTIER_OUTSIDE_WEST
-	setvar VAR_0x8004, LOCALID_FRONTIER_SS_TIDAL
-	call Common_EventScript_FerryDepartIsland
-	return
-
-BattleFrontier_OutsideWest_EventScript_CancelFerrySelect::
-	msgbox BattleFrontier_OutsideWest_Text_SailWithUsAnotherTime, MSGBOX_DEFAULT
-	release
-	end
-
 BattleFrontier_OutsideWest_EventScript_BattleDomeSign::
 	msgbox BattleFrontier_OutsideWest_Text_BattleDomeSign, MSGBOX_SIGN
 	end
@@ -308,30 +253,6 @@ BattleFrontier_OutsideWest_Text_BattlePikeSign:
 
 BattleFrontier_OutsideWest_Text_ThisIsBattleTower:
 	.string "ここは バトルタワー さ!\pトレーナーは きたえあげた ポケモンで\nひたすら かちぬいて いくのさ!$"
-
-BattleFrontier_OutsideWest_Text_MayISeeYourTicket:
-	.string "れんらくせんを ごりよう ですね!\nチケットは おもち でしょうか?$"
-
-BattleFrontier_OutsideWest_Text_MustHaveTicketToBoard:
-	.string "{PLAYER}は\nチケットを もっていない!\p……もうしわけ ありません!\pふねに のれるのは\nチケットの ある かた だけです$"
-
-BattleFrontier_OutsideWest_Text_WhereWouldYouLikeToGo:
-	.string "{PLAYER}は\nふねのチケットを みせた!\pはい! けっこう です!\pいきさきは どちら でしょう?$"
-
-BattleFrontier_OutsideWest_Text_SlateportItIs:
-	.string "カイナシティ ですね!$"
-
-BattleFrontier_OutsideWest_Text_LilycoveItIs:
-	.string "ミナモシティ ですね!$"
-
-BattleFrontier_OutsideWest_Text_SailWithUsAnotherTime:
-	.string "また ごりよう ください!$"
-
-BattleFrontier_OutsideWest_Text_PleaseBoardFerry:
-	.string "れんらくせんに のって おまちください$"
-
-BattleFrontier_OutsideWest_Text_ThenWhereWouldYouLikeToGo:
-	.string "いきさきは どちら でしょう?$"
 
 BattleFrontier_OutsideWest_Text_BestOutOfAllMyFriends:
 	.string "{JPN}ともだちの なかじゃ いちばんだったのに\nここだと ぜんぜん かなわないや！\pでも みんなの とくいなことが\nつぎつぎ わかって おもしろいよ。$"

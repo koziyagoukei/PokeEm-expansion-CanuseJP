@@ -56,20 +56,6 @@
       "flag": "0"
     },
     {
-      "local_id": "LOCALID_FRONTIER_RECEPTION_SCOTT",
-      "graphics_id": "OBJ_EVENT_GFX_SCOTT",
-      "x": 4,
-      "y": 5,
-      "elevation": 3,
-      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
-      "movement_range_x": 1,
-      "movement_range_y": 1,
-      "trainer_type": "TRAINER_TYPE_NONE",
-      "trainer_sight_or_berry_tree_id": "0",
-      "script": "0x0",
-      "flag": "FLAG_HIDE_BATTLE_FRONTIER_RECEPTION_GATE_SCOTT"
-    },
-    {
       "graphics_id": "OBJ_EVENT_GFX_MAN_2",
       "x": 0,
       "y": 4,

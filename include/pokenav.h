@@ -122,7 +122,6 @@ enum
     POKENAV_CONDITION_SEARCH_MENU,              // The Condition search menu where the player selects a search parameter
     POKENAV_MAIN_MENU_CURSOR_ON_MATCH_CALL,
     POKENAV_MAIN_MENU_CURSOR_ON_RIBBONS,
-    POKENAV_REGION_MAP,
     POKENAV_CONDITION_GRAPH_PARTY,              // The Condition graph screen when Party has been selected
     POKENAV_CONDITION_SEARCH_RESULTS,           // The list of results from a Condition search
     POKENAV_CONDITION_GRAPH_SEARCH,             // The Condition graph screen when a search result has been selected
@@ -376,7 +375,6 @@ void PokenavCopyPalette(const u16 *src, const u16 *dest, int size, int a3, int a
 void FadeToBlackExceptPrimary(void);
 struct Sprite *GetSpinningPokenavSprite(void);
 void HideSpinningPokenavSprite(void);
-void UpdateRegionMapRightHeaderTiles(u32 menuGfxId);
 void HideMainOrSubMenuLeftHeader(u32 id, bool32 onRightSide);
 void SlideMenuHeaderUp(void);
 void PokenavFillPalette(u32 palIndex, u16 fillValue);
@@ -432,16 +430,6 @@ bool32 OpenMatchCall(void);
 void CreateMatchCallLoopedTask(s32 index);
 bool32 IsMatchCallLoopedTaskActive(void);
 void FreeMatchCallSubstruct2(void);
-
-// pokenav_region_map.c
-u32 PokenavCallback_Init_RegionMap(void);
-u32 GetRegionMapCallback(void);
-bool32 OpenPokenavRegionMap(void);
-void CreateRegionMapLoopedTask(s32 index);
-bool32 IsRegionMapLoopedTaskActive(void);
-void FreeRegionMapSubstruct1(void);
-void FreeRegionMapSubstruct2(void);
-void UpdateRegionMapHelpBarText(void);
 
 // pokenav_conditions.c
 bool32 PokenavCallback_Init_ConditionGraph_Party(void);

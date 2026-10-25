@@ -178,7 +178,6 @@ static const struct SpritePalette sPokenavOptionsSpritePalettes[] =
 };
 
 // Tile number, palette tag offset
-static const u16 sOptionsLabelGfx_RegionMap[] = {0x000, PALTAG_OPTIONS_DEFAULT - PALTAG_OPTIONS_START};
 static const u16 sOptionsLabelGfx_Condition[] = {0x020, PALTAG_OPTIONS_BLUE - PALTAG_OPTIONS_START};
 static const u16 sOptionsLabelGfx_MatchCall[] = {0x040, PALTAG_OPTIONS_RED - PALTAG_OPTIONS_START};
 static const u16 sOptionsLabelGfx_Ribbons[]   = {0x060, PALTAG_OPTIONS_PINK - PALTAG_OPTIONS_START};
@@ -204,7 +203,6 @@ struct
         .yStart = 42,
         .deltaY = 20,
         .gfx = {
-            sOptionsLabelGfx_RegionMap,
             sOptionsLabelGfx_Condition,
             sOptionsLabelGfx_SwitchOff
         }
@@ -214,7 +212,6 @@ struct
         .yStart = 42,
         .deltaY = 20,
         .gfx = {
-            sOptionsLabelGfx_RegionMap,
             sOptionsLabelGfx_Condition,
             sOptionsLabelGfx_MatchCall,
             sOptionsLabelGfx_SwitchOff
@@ -225,7 +222,6 @@ struct
         .yStart = 42,
         .deltaY = 20,
         .gfx = {
-            sOptionsLabelGfx_RegionMap,
             sOptionsLabelGfx_Condition,
             sOptionsLabelGfx_MatchCall,
             sOptionsLabelGfx_Ribbons,

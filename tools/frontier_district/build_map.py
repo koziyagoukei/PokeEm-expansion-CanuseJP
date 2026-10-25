@@ -24,8 +24,11 @@ TILESETS = {
 
 
 def layout(name):
-    layouts = json.loads((ROOT / "data/layouts/layouts.json").read_text())["layouts"]
-    return next(entry for entry in layouts if entry["name"] == name + "_Layout")
+    # Source layouts of maps removed from the game (e.g. Lilycove) stay in layouts_unused.
+    layouts = []
+    for path in ("data/layouts/layouts.json", "data/layouts_unused/layouts.json"):
+        layouts += json.loads((ROOT / path).read_text())["layouts"]
+    return next(entry for entry in layouts if entry and entry["name"] == name + "_Layout")
 
 
 def read_map(name, old_height=None):

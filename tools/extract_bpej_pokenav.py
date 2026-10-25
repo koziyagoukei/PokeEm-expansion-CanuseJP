@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Extract verified BPEJ Pokenav, Hoenn map, Match Call and ribbon UI assets."""
+"""Extract verified BPEJ Pokenav, Match Call and ribbon UI assets."""
 
 from pathlib import Path, PurePosixPath
 
@@ -11,9 +11,7 @@ CUSTOM_ROOT = PurePosixPath("graphics/custom/bpej/pokenav")
 CONSUMERS = {
     "src/graphics.c", "src/pokenav_list.c", "src/pokenav_main_menu.c",
     "src/pokenav_match_call_gfx.c", "src/pokenav_menu_handler_gfx.c",
-    "src/pokenav_region_map.c", "src/pokenav_ribbons_list.c",
-    "src/pokenav_ribbons_summary.c", "src/region_map.c", "src/match_call.c",
-    "src/data/region_map/city_map_tilemaps.h",
+    "src/pokenav_ribbons_list.c", "src/pokenav_ribbons_summary.c", "src/match_call.c",
 }
 
 

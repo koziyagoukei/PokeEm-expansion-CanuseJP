@@ -32,11 +32,12 @@ static u32 (*GetMainMenuInputHandler(void))(struct Pokenav_Menu *);
 static void SetMenuInputHandler(struct Pokenav_Menu *);
 
 // Number of entries - 1 for that menu type
+// The Hoenn Map option was removed with the region map.
 static const u8 sLastCursorPositions[] =
 {
-    [POKENAV_MENU_TYPE_DEFAULT]           = 2,
-    [POKENAV_MENU_TYPE_UNLOCK_MC]         = 3,
-    [POKENAV_MENU_TYPE_UNLOCK_MC_RIBBONS] = 4,
+    [POKENAV_MENU_TYPE_DEFAULT]           = 1,
+    [POKENAV_MENU_TYPE_UNLOCK_MC]         = 2,
+    [POKENAV_MENU_TYPE_UNLOCK_MC_RIBBONS] = 3,
     [POKENAV_MENU_TYPE_CONDITION]         = 2,
     [POKENAV_MENU_TYPE_CONDITION_SEARCH]  = 5
 };
@@ -45,24 +46,21 @@ static const u8 sMenuItems[][MAX_POKENAV_MENUITEMS] =
 {
     [POKENAV_MENU_TYPE_DEFAULT] =
     {
-        POKENAV_MENUITEM_MAP,
         POKENAV_MENUITEM_CONDITION,
-        [2 ... MAX_POKENAV_MENUITEMS - 1] = POKENAV_MENUITEM_SWITCH_OFF
+        [1 ... MAX_POKENAV_MENUITEMS - 1] = POKENAV_MENUITEM_SWITCH_OFF
     },
     [POKENAV_MENU_TYPE_UNLOCK_MC] =
     {
-        POKENAV_MENUITEM_MAP,
         POKENAV_MENUITEM_CONDITION,
         POKENAV_MENUITEM_MATCH_CALL,
-        [3 ... MAX_POKENAV_MENUITEMS - 1] = POKENAV_MENUITEM_SWITCH_OFF
+        [2 ... MAX_POKENAV_MENUITEMS - 1] = POKENAV_MENUITEM_SWITCH_OFF
     },
     [POKENAV_MENU_TYPE_UNLOCK_MC_RIBBONS] =
     {
-        POKENAV_MENUITEM_MAP,
         POKENAV_MENUITEM_CONDITION,
         POKENAV_MENUITEM_MATCH_CALL,
         POKENAV_MENUITEM_RIBBONS,
-        [4 ... MAX_POKENAV_MENUITEMS - 1] = POKENAV_MENUITEM_SWITCH_OFF
+        [3 ... MAX_POKENAV_MENUITEMS - 1] = POKENAV_MENUITEM_SWITCH_OFF
     },
     [POKENAV_MENU_TYPE_CONDITION] =
     {
@@ -104,8 +102,8 @@ bool32 PokenavCallback_Init_MainMenuCursorOnMap(void)
         return FALSE;
 
     menu->menuType = GetPokenavMainMenuType();
-    menu->cursorPos = POKENAV_MENUITEM_MAP;
-    menu->currMenuItem = POKENAV_MENUITEM_MAP;
+    menu->cursorPos = 0;
+    menu->currMenuItem = POKENAV_MENUITEM_CONDITION;
     menu->helpBarIndex = HELPBAR_NONE;
     SetMenuInputHandler(menu);
     return TRUE;
@@ -118,7 +116,7 @@ bool32 PokenavCallback_Init_MainMenuCursorOnMatchCall(void)
         return FALSE;
 
     menu->menuType = GetPokenavMainMenuType();
-    menu->cursorPos = POKENAV_MENUITEM_MATCH_CALL;
+    menu->cursorPos = 1;
     menu->currMenuItem = POKENAV_MENUITEM_MATCH_CALL;
     menu->helpBarIndex = HELPBAR_NONE;
     SetMenuInputHandler(menu);
@@ -132,7 +130,7 @@ bool32 PokenavCallback_Init_MainMenuCursorOnRibbons(void)
         return FALSE;
 
     menu->menuType = GetPokenavMainMenuType();
-    menu->cursorPos = POKENAV_MENUITEM_RIBBONS;
+    menu->cursorPos = 2;
     menu->currMenuItem = POKENAV_MENUITEM_RIBBONS;
     SetMenuInputHandler(menu);
     return TRUE;
@@ -220,10 +218,6 @@ static u32 HandleMainMenuInput(struct Pokenav_Menu *menu)
     {
         switch (sMenuItems[menu->menuType][menu->cursorPos])
         {
-        case POKENAV_MENUITEM_MAP:
-            menu->helpBarIndex = gSaveBlock2Ptr->regionMapZoom ? HELPBAR_MAP_ZOOMED_IN : HELPBAR_MAP_ZOOMED_OUT;
-            SetMenuIdAndCB(menu, POKENAV_REGION_MAP);
-            return POKENAV_MENU_FUNC_OPEN_FEATURE;
         case POKENAV_MENUITEM_CONDITION:
             menu->menuType = POKENAV_MENU_TYPE_CONDITION;
             menu->cursorPos = 0;
@@ -448,7 +442,7 @@ static u32 GetMenuId(struct Pokenav_Menu *menu)
 static void ReturnToMainMenu(struct Pokenav_Menu *menu)
 {
     menu->menuType = GetPokenavMainMenuType();
-    menu->cursorPos = 1;
+    menu->cursorPos = 0; // Condition
     menu->currMenuItem = sMenuItems[menu->menuType][menu->cursorPos];
     menu->callback = HandleMainMenuInput;
 }

@@ -4282,10 +4282,7 @@ static void CursorCb_FieldMove(u8 taskId)
             DisplayFieldMoveExitAreaMessage(taskId);
             sPartyMenuInternal->data[0] = fieldMove;
             break;
-        case FIELD_MOVE_FLY:
-            gPartyMenu.exitCallback = CB2_OpenFlyMap;
-            Task_ClosePartyMenu(taskId);
-            break;
+        // Fly can't be used in the field, and its map was removed with the region map.
         default:
             gPartyMenu.exitCallback = CB2_ReturnToField;
             Task_ClosePartyMenu(taskId);

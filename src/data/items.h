@@ -14063,7 +14063,7 @@ const struct ItemInfo gItemsInfo[] =
         .importance = 1,
         .pocket = POCKET_KEY_ITEMS,
         .type = ITEM_USE_BAG_MENU,
-        .fieldUseFunc = ItemUseOutOfBattle_TownMap,
+        .fieldUseFunc = ItemUseOutOfBattle_CannotUse, // The region map was removed.
         .iconPic = gItemIcon_TownMap,
         .iconPalette = gItemIconPalette_TownMap,
     },

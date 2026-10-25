@@ -610,7 +610,7 @@ $(C_BUILDDIR)/pokedex.o: | check-bpej-pokedex-outputs
 $(C_BUILDDIR)/graphics.o: | check-bpej-battle-background-outputs
 $(addprefix $(C_BUILDDIR)/,graphics.o contest.o contest_util.o menu_specialized.o pokenav_conditions_gfx.o pokenav_conditions_search_results.o use_pokeblock.o): | check-bpej-contest-outputs
 $(addprefix $(C_BUILDDIR)/,graphics.o title_screen.o intro.o intro_credits_graphics.o): | check-bpej-intro-outputs
-$(addprefix $(C_BUILDDIR)/,graphics.o pokenav_list.o pokenav_main_menu.o pokenav_match_call_gfx.o pokenav_menu_handler_gfx.o pokenav_region_map.o pokenav_ribbons_list.o pokenav_ribbons_summary.o region_map.o match_call.o): | check-bpej-pokenav-outputs
+$(addprefix $(C_BUILDDIR)/,graphics.o pokenav_list.o pokenav_main_menu.o pokenav_match_call_gfx.o pokenav_menu_handler_gfx.o pokenav_ribbons_list.o pokenav_ribbons_summary.o match_call.o): | check-bpej-pokenav-outputs
 $(C_BUILDDIR)/pokedex_plus_hgss.o: CFLAGS := -mthumb -mthumb-interwork -O2 -mabi=apcs-gnu -mtune=arm7tdmi -march=armv4t -Wno-pointer-to-int-cast -std=gnu17 -Werror -Wall -Wno-strict-aliasing -Wno-attribute-alias -Woverride-init
 # Annoyingly we can't turn this on just for src/data/trainers.h
 $(C_BUILDDIR)/data.o: CFLAGS += -fno-show-column -fno-diagnostics-show-caret

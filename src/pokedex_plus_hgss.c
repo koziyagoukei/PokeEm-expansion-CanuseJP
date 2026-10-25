@@ -25,7 +25,6 @@
 #include "pokedex.h"
 #include "pokedex_common.h"
 #include "pokedex_plus_hgss.h"
-#include "pokedex_area_screen.h"
 #include "pokedex_cry_screen.h"
 #include "pokemon_icon.h"
 #include "pokemon_summary_screen.h"
@@ -1413,7 +1412,12 @@ bool32 TryHandleInfoScreenInput_HGSS(u8 taskId)
 
     if (POKEDEX_PLUS_HGSS && ((JOY_NEW(DPAD_RIGHT) || (JOY_NEW(R_BUTTON) && gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_LR))))
     {
-        sPokedexView->selectedScreen = AREA_SCREEN;
+        // The area page was removed with the region map, so the stats page is next.
+        if (!sPokedexListItem->owned)
+        {
+            PlaySE(SE_FAILURE);
+            return TRUE;
+        }
         BeginNormalPaletteFade(0xFFFFFFEB, 0, 0, 0x10, RGB_BLACK);
         sPokedexView->screenSwitchState = 1;
         gTasks[taskId].func = Task_SwitchScreensFromInfoScreen;
@@ -1425,73 +1429,14 @@ bool32 TryHandleInfoScreenInput_HGSS(u8 taskId)
 
 #undef tMonSpriteId
 
-//************************************
-//*                                  *
-//*        Area screen               *
-//*                                  *
-//************************************
-bool32 TryLoadAreaScreen_HGSS(u8 taskId)
+bool32 TryLoadStatsScreenFromInfoScreen_HGSS(u8 taskId)
 {
     if (!POKEDEX_PLUS_HGSS)
         return FALSE;
 
-    switch (gMain.state)
-    {
-    case 0:
-    default:
-        if (!gPaletteFade.active)
-        {
-            sPokedexView->currentPage = PAGE_AREA;
-            gPokedexVBlankCB = gMain.vblankCallback;
-            SetVBlankCallback(NULL);
-            ResetOtherVideoRegisters(DISPCNT_BG1_ON);
-            sPokedexView->selectedScreen = AREA_SCREEN;
-            gMain.state = 1;
-        }
-        break;
-    case 1:
-        LoadPokedexBgPalette(sPokedexView->isSearchResults);
-        SetGpuReg(REG_OFFSET_BG1CNT, BGCNT_PRIORITY(0) | BGCNT_CHARBASE(0) | BGCNT_SCREENBASE(13) | BGCNT_16COLOR | BGCNT_TXT256x256);
-        gMain.state++;
-        break;
-    case 2:
-        DisplayPokedexAreaScreen(NationalPokedexNumToSpeciesForm(sPokedexListItem->dexNum), &sPokedexView->screenSwitchState, gAreaTimeOfDay, DEX_SHOW_AREA_SCREEN);
-        SetVBlankCallback(gPokedexVBlankCB);
-        sPokedexView->screenSwitchState = 0;
-        gMain.state = 0;
-        gTasks[taskId].func = Task_WaitForAreaScreenInput;
-        break;
-    }
-
+    gTasks[taskId].func = Task_LoadStatsScreen;
     return TRUE;
 }
-
-bool32 TrySwitchScreensFromAreaScreen_HGSS(u8 taskId)
-{
-    if (!POKEDEX_PLUS_HGSS)
-        return FALSE;
-
-    switch (sPokedexView->screenSwitchState)
-    {
-    case 1:
-    default:
-        gTasks[taskId].func = Task_LoadInfoScreen;
-        break;
-    case 2:
-        if (sPokedexListItem->owned)
-            gTasks[taskId].func = Task_LoadStatsScreen;
-        else
-            PlaySE(SE_FAILURE);
-        break;
-    case 3:
-        gTasks[taskId].func = Task_ReloadAreaScreen;
-        break;
-    }
-
-    return TRUE;
-}
-
-
 
 //************************************
 //*                                  *
@@ -2992,9 +2937,10 @@ static void Task_SwitchScreensFromStatsScreen(u8 taskId)
         switch (sPokedexView->screenSwitchState)
         {
         case 1:
+            // The area page was removed, so the info page comes before the stats page.
             FreeAllWindowBuffers();
             InitWindows(sInfoScreen_WindowTemplates);
-            gTasks[taskId].func = Task_LoadAreaScreen;
+            gTasks[taskId].func = Task_LoadInfoScreen;
             break;
         case 2:
             gTasks[taskId].func = Task_LoadCryScreen;

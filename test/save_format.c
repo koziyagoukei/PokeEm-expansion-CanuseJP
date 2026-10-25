@@ -26,6 +26,8 @@ static struct
     u32 counter;
     u16 missing;
     u16 badChecksums;
+    u16 badExtraData;
+    u16 wrongCounters;
     u16 firstId;
     u8 rotation;
 } sSlots[NUM_SAVE_SLOTS];
@@ -58,6 +60,10 @@ static void ReadTestSector(u8 sectorId, struct SaveSector *sector)
         sector->signature = 0xFFFFFFFF;
     if (sSlots[slot].badChecksums & (1 << physicalId))
         sector->checksum ^= 1;
+    if (sSlots[slot].badExtraData & (1 << physicalId))
+        sector->saveBlock3Chunk[0] ^= 1;
+    if (sSlots[slot].wrongCounters & (1 << physicalId))
+        sector->counter += NUM_SAVE_SLOTS;
     if (sChangeIdDuringCopy && sReadCount > NUM_SECTORS_PER_SLOT * NUM_SAVE_SLOTS && physicalId == 5)
         sector->id = 0xFFFF;
 }
@@ -114,6 +120,7 @@ TEST("Save format: legacy and different format versions reject without copying")
     u16 id;
     PARAMETRIZE { signature = LEGACY_SECTOR_SIGNATURE; id = 0; }
     PARAMETRIZE { signature = LEGACY_SECTOR_SIGNATURE; id = 0xFFFF; }
+    PARAMETRIZE { signature = 0x46520002; id = 0; }
     PARAMETRIZE { signature = SECTOR_SIGNATURE ^ 1; id = 0; }
 
     ResetFixture();
@@ -196,6 +203,38 @@ TEST("Save format: bad checksums recover the valid current backup")
     sSlots[1].badChecksums = 1 << 5;
     EXPECT_EQ(LoadFixture(), SAVE_STATUS_ERROR);
     ExpectLoadedWords(1);
+}
+
+TEST("Save format: SaveBlock3 corruption recovers the valid backup")
+{
+    ResetFixture();
+    sSlots[0].signature = SECTOR_SIGNATURE;
+    sSlots[1].signature = SECTOR_SIGNATURE;
+    sSlots[1].badExtraData = 1 << 5;
+    EXPECT_EQ(LoadFixture(), SAVE_STATUS_ERROR);
+    ExpectLoadedWords(1);
+    EXPECT_EQ(gSaveCounter, 0);
+}
+
+TEST("Save format: mixed generations and wrong physical slots reject")
+{
+    bool32 validBackup, wrongSlot;
+    PARAMETRIZE { validBackup = FALSE; wrongSlot = FALSE; }
+    PARAMETRIZE { validBackup = TRUE; wrongSlot = FALSE; }
+    PARAMETRIZE { validBackup = FALSE; wrongSlot = TRUE; }
+    PARAMETRIZE { validBackup = TRUE; wrongSlot = TRUE; }
+
+    ResetFixture();
+    sSlots[0].signature = SECTOR_SIGNATURE;
+    if (wrongSlot)
+        sSlots[0].counter = 1;
+    else
+        sSlots[0].wrongCounters = 1 << (NUM_SECTORS_PER_SLOT - 1);
+    if (validBackup)
+        sSlots[1].signature = SECTOR_SIGNATURE;
+    EXPECT_EQ(LoadFixture(), validBackup ? SAVE_STATUS_ERROR : SAVE_STATUS_CORRUPT);
+    ExpectLoadedWords(validBackup ? 2 : UNCHANGED_WORD);
+    EXPECT_EQ(gSaveCounter, validBackup ? 1 : 0);
 }
 
 TEST("Save format: newest counters, wraparound and sector rotation are preserved")

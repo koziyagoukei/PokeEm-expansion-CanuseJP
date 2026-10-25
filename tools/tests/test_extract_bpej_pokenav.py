@@ -27,11 +27,11 @@ class ManifestTests(unittest.TestCase):
 
     def test_verified_scope_and_existing_condition_assets_are_separate(self):
         assets = self.manifest["assets"]
-        self.assertEqual(len(assets), 91)
-        self.assertEqual(sum(a["verification"]["byte_match"] for a in assets), 84)
+        self.assertEqual(len(assets), 50)
+        self.assertEqual(sum(a["verification"]["byte_match"] for a in assets), 44)
         self.assertEqual({a["label"] for a in assets if not a["verification"]["byte_match"]}, {
             "gPokenavHeader_Gfx", "gPokenavLeftHeaderMatchCall_Gfx", "gPokenavLeftHeaderHoennMap_Gfx",
-            "gPokenavLeftHeaderRibbons_Gfx", "gPokenavMessageBox_Tilemap", "gRegionMapCityZoomText_Gfx",
+            "gPokenavLeftHeaderRibbons_Gfx", "gPokenavMessageBox_Tilemap",
             "gPokenavRibbonsSummaryBg_Tilemap",
         })
         contest = graphics.load_manifest(TOOLS / "data/bpej_contest_manifest.json")
@@ -127,11 +127,7 @@ class RomTests(unittest.TestCase):
             ("sPokenavDeviceBgTilemap", "sPokenavDeviceBgTiles", 0, {2}),
             ("sMatchCallUI_Tilemap", "sMatchCallUI_Gfx", 128, {0, 2}),
             ("sMonRibbonListFrameTilemap", "sMonRibbonListFrameTiles", 0, {0, 1}),
-            ("sRegionMapFrameTilemapLZ", "sRegionMapFrameGfxLZ", 0, {1}),
         ]
-        pairs += [(label, "sRegionMapCityZoomTiles_Gfx", 0, {3})
-                  for label in self.assets if label.startswith("gPokenavCityMap_")]
-        self.assertEqual(len(pairs), 8 + 22)
         for map_label, gfx_label, base, banks in pairs:
             count = len(self.decoded(gfx_label)) // 32
             for (word,) in struct.iter_unpack("<H", self.decoded(map_label)):
@@ -140,20 +136,6 @@ class RomTests(unittest.TestCase):
                     continue
                 self.assertTrue(base <= index < base + count, (map_label, index, count))
                 self.assertIn(word >> 12, banks, map_label)
-
-    def test_affine_hoenn_map_and_palette_copy_size_are_compatible(self):
-        gfx, tilemap = self.decoded("sRegionMapBg_GfxLZ"), self.decoded("sRegionMapBg_TilemapLZ")
-        palette = self.decoded("sRegionMapBg_Pal")
-        self.assertEqual(len(tilemap), 64 * 64)
-        self.assertLess(max(tilemap), len(gfx) // 64)
-        self.assertEqual(len(palette), 64)
-        self.assertGreaterEqual(min(gfx), 7 * 16)
-        self.assertLess(max(gfx), 7 * 16 + len(palette) // 2)
-        source = (ROOT / "src/region_map.c").read_text(encoding="utf-8")
-        for label in ("sRegionMapBg_Pal", "sRegionMapKanto_Pal", "sRegionMapSevii123_Pal",
-                      "sRegionMapSevii45_Pal", "sRegionMapSevii67_Pal"):
-            self.assertIn(f".regionMapPaletteSize = sizeof({label})", source)
-        self.assertIn("BG_PLTT_ID(7), gRegionMapInfos[regionMapType].regionMapPaletteSize)", source)
 
     def test_text_windows_match_bpej_templates_and_do_not_replace_frame_edges(self):
         cases = [
@@ -190,58 +172,13 @@ class RomTests(unittest.TestCase):
         pointer, size, tag = struct.unpack_from("<IHH", self.rom, 0x5F4D1C)
         self.assertEqual((pointer, size, tag), (0x085F4A98, 0x800, 6))
 
-    def test_actual_city_zoom_sprite_callback_never_reads_past_64_tiles(self):
-        compiler = shutil.which("cc") or shutil.which("gcc")
-        if compiler is None:
-            self.skipTest("a host C compiler is needed for the sprite callback execution test")
-        source = (ROOT / "src/pokenav_region_map.c").read_text(encoding="utf-8")
-        callback = re.search(r"^static void SpriteCB_CityZoomText\([^;]*?\)\n\{.*?^\}", source, re.M | re.S)
-        self.assertIsNotNone(callback)
-        self.assertIn(".shape = SPRITE_SHAPE(32x8)", source)
-        self.assertIn("{gRegionMapCityZoomText_Gfx, 0x800, GFXTAG_CITY_ZOOM}", source)
-        self.assertEqual(len(self.decoded("gRegionMapCityZoomText_Gfx")), 64 * 32)
-        program = r"""
-#include <assert.h>
-#include <stdint.h>
-struct Sprite { int16_t data[8]; struct { uint16_t tileNum; } oam; };
-""" + callback[0] + r"""
-int main(void)
-{
-    unsigned seen[61] = {0};
-    for (int i = 0; i < 3; i++)
-    {
-        struct Sprite sprite = { .data = {0, i * 4, 100, 150, i * 4} };
-        sprite.oam.tileNum = 100 + i * 4;
-        for (int frame = 0; frame < 20000; frame++)
-        {
-            SpriteCB_CityZoomText(&sprite);
-            int tile = sprite.oam.tileNum - 100;
-            assert(tile >= 0 && tile + 4 <= 64);
-            seen[tile]++;
-        }
-    }
-    for (int tile = 0; tile <= 60; tile++)
-        assert(seen[tile] > 0);
-    return 0;
-}
-"""
-        with tempfile.TemporaryDirectory() as directory:
-            path = Path(directory)
-            cfile, binary = path / "callback.c", path / ("callback.exe" if sys.platform == "win32" else "callback")
-            cfile.write_text(program, encoding="utf-8")
-            subprocess.run([compiler, "-std=gnu17", "-Wall", "-Werror", str(cfile), "-o", str(binary)], check=True)
-            subprocess.run([str(binary)], check=True)
-
     def test_sprite_frames_fit_original_allocations(self):
         frames = [("sSpinningPokenav_Gfx", 16, range(0, 128, 16)),
-                  ("sRegionMapCursorSmallGfxLZ", 4, (0, 4)),
-                  ("sRegionMapCursorLargeGfxLZ", 16, (0, 16, 32)),
                   ("sRibbonIconsBig_Gfx", 16, range(0, 192, 16))]
         for label, frame_tiles, starts in frames:
             count = len(self.decoded(label)) // 32
             self.assertTrue(all(start + frame_tiles <= count for start in starts), label)
         self.assertEqual(len(self.decoded("sRibbonIconsSmall_Gfx")), 12 * 2 * 32)
-        self.assertEqual(len(self.decoded("sFlyTargetIcons_Gfx")), 14 * 32)
 
     def test_cli_count_dry_run_check_and_missing_or_corrupt_output_recovery(self):
         with tempfile.TemporaryDirectory() as directory:
@@ -249,13 +186,13 @@ int main(void)
             args = ("--out", str(out), "--stamp", str(stamp))
             code, stdout, _ = self.invoke(*args, "--print-outputs")
             self.assertEqual(code, 0)
-            self.assertEqual(len(stdout.splitlines()), 91)
+            self.assertEqual(len(stdout.splitlines()), 50)
             self.assertEqual(self.invoke(*args, "--dry-run")[0], 0)
             self.assertFalse(out.exists())
             self.assertEqual(self.invoke(*args)[0], 0)
             self.assertEqual(self.invoke(*args, "--check")[0], 0)
             times = {p: p.stat().st_mtime_ns for p in out.rglob("*") if p.is_file()}
-            self.assertEqual(len(times), 91)
+            self.assertEqual(len(times), 50)
             self.assertEqual(self.invoke(*args)[0], 0)
             self.assertTrue(all(p.stat().st_mtime_ns == before for p, before in times.items()))
             victim = next(iter(times))
@@ -316,7 +253,7 @@ int main(void)
             self.assertEqual(built[offset:offset + len(expected)], expected, label)
             checked.add(label)
         self.assertTrue({"gPokenavHeader_Gfx", "gPokenavLeftHeaderHoennMap_Gfx",
-                         "gPokenavLeftHeaderMatchCall_Gfx", "gRegionMapCityZoomText_Gfx",
+                         "gPokenavLeftHeaderMatchCall_Gfx",
                          "gPokenavRibbonsSummaryBg_Tilemap"} <= checked)
 
 

@@ -1,4 +1,6 @@
 #include "global.h"
+#include "bg.h"
+#include "dma3.h"
 #include "event_data.h"
 #include "field_screen_effect.h"
 #include "field_weather.h"

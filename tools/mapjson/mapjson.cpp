@@ -703,21 +703,21 @@ void clean_heal_locations(vector<string> &valid_map_ids)
 
     std::regex map_regex("\"respawn_map\"\\s*:\\s*\"(MAP_\\w+)\"");
     std::regex npc_regex("LOCALID_\\w+");
+    std::regex npc_field_regex("\"respawn_npc\"\\s*:");
     std::smatch map_match;
     string line;
     while (std::getline(infile, line))
     {
-        if (std::regex_search(line, map_match, map_regex) && !deleted_flag) {
+        if (std::regex_search(line, map_match, map_regex)) {
             auto it = find(valid_map_ids.begin(), valid_map_ids.end(), map_match[1]);
-            if (it == valid_map_ids.end())
-                deleted_flag = true;
+            deleted_flag = it == valid_map_ids.end();
         }
-        if (deleted_flag && std::regex_search(line, npc_regex)) {
+        if (std::regex_search(line, npc_field_regex)) {
+            if (deleted_flag)
+                line = std::regex_replace(line, npc_regex, "0");
             deleted_flag = false;
-            new_json << std::regex_replace(line, npc_regex, "0") << "\n";
-        } else {
-            new_json << line << "\n";
         }
+        new_json << line << "\n";
     }
 
     write_text_file("src/data/heal_locations.json", new_json.str());

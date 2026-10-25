@@ -76,6 +76,7 @@
 // 全般設定
 #define EXPANSION_INTRO              TRUE    // TRUEなら、原作の著作権表示後にRHH独自のイントロを再生する。
 #define PHONEMES_SHARED              FALSE   // TRUEなら、吟遊詩人の音素をすべて同じ音声（sound/direct_sound_samples/phonemes/shared.bin）にしてROM容量を節約する。
+#define GAMECUBE_MULTIBOOT           FALSE   // TRUEなら、著作権表示中にゲームキューブ（コロシアム・XD）との連携を待ち受け、転送用プログラム（160KB）をROMに含める。
 
 // UNITSに指定する単位系の定数。
 #define UNITS_IMPERIAL               0       // インチ・フィート・ポンド。

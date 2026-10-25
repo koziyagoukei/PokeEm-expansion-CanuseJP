@@ -258,9 +258,7 @@ bool8 InBattleFacilityChallenge(void)
     case LAYOUT_BATTLE_FRONTIER_BATTLE_PIKE_ROOM_UNUSED:
     case LAYOUT_BATTLE_FRONTIER_BATTLE_PYRAMID_FLOOR:
     case LAYOUT_BATTLE_FRONTIER_BATTLE_PYRAMID_TOP:
-    case LAYOUT_BATTLE_TENT_CORRIDOR:
-    case LAYOUT_BATTLE_TENT_BATTLE_ROOM:
-    case LAYOUT_VERDANTURF_TOWN_BATTLE_TENT_BATTLE_ROOM:
+    // The Battle Tent maps were removed with the Hoenn mainland.
         return TRUE;
     default:
         return InTrainerHillChallenge();

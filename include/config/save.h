@@ -1,8 +1,8 @@
 #ifndef GUARD_CONFIG_SAVE_H
 #define GUARD_CONFIG_SAVE_H
 
-// Increment the format signature whenever the saved data layout changes.
-#define SAVE_FORMAT_SIGNATURE               0x46520002
+// Increment for saved data layout changes, including map/layout ID changes.
+#define SAVE_FORMAT_SIGNATURE               0x46520003
 
 // Reassign the Hall of Fame, Trainer Hill and battle video sectors to the two
 // save slots (16 sectors each), which lets the PC hold 18 boxes. Hall of Fame

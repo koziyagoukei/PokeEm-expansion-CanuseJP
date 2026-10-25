@@ -1013,16 +1013,6 @@ u8 GetLeadMonFriendshipScore(void)
     return GetMonFriendshipScore(&gParties[B_TRAINER_PLAYER][GetLeadMonIndex()]);
 }
 
-static void CB2_FieldShowRegionMap(void)
-{
-    FieldInitRegionMap(CB2_ReturnToFieldContinueScriptPlayMapMusic);
-}
-
-void FieldShowRegionMap(void)
-{
-    SetMainCallback2(CB2_FieldShowRegionMap);
-}
-
 static bool32 IsBuildingPCTile(u32 tileId)
 {
     if (IS_FRLG)
@@ -1041,14 +1031,8 @@ static bool32 IsBuildingPCTileFrlg(u32 tileId)
 
 static bool32 IsPlayerHousePCTile(u32 tileId)
 {
-    if (IS_FRLG)
-        return FALSE;
-
-    return gMapHeader.mapLayout->secondaryTileset == &gTileset_BrendansMaysHouse
-        && (tileId == METATILE_BrendansMaysHouse_BrendanPC_On
-            || tileId == METATILE_BrendansMaysHouse_BrendanPC_Off
-            || tileId == METATILE_BrendansMaysHouse_MayPC_On
-            || tileId == METATILE_BrendansMaysHouse_MayPC_Off);
+    // The player's house (gTileset_BrendansMaysHouse) was removed with Littleroot.
+    return FALSE;
 }
 
 static bool32 IsPlayerHousePCTileFrlg(u32 tileId)

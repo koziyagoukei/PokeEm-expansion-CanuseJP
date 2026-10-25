@@ -288,7 +288,6 @@ static void DebugTask_HandleMenuInput_General(u8 taskId);
 static void DebugAction_Selection_StepUpdate(u8 taskId);
 static void DebugAction_Selection_NextStep(u8 taskId);
 
-static void DebugAction_Util_Fly(u8 taskId);
 static void DebugAction_Util_WatchCredits(u8 taskId);
 static void DebugAction_Util_CheatStart(u8 taskId);
 
@@ -396,8 +395,6 @@ extern const u8 DebugScript_ZeroDaycareMons[];
 extern const u8 Debug_ShowFieldMessageStringVar4[];
 extern const u8 Debug_CheatStart[];
 extern const u8 Debug_HatchAnEgg[];
-extern const u8 PlayersHouse_2F_EventScript_SetWallClock[];
-extern const u8 PlayersHouse_2F_EventScript_CheckWallClock[];
 extern const u8 Debug_CheckSaveBlock[];
 extern const u8 Debug_CheckROMSpace[];
 extern const u8 Debug_BoxFilledMessage[];
@@ -406,7 +403,6 @@ extern const u8 Debug_ShowLinkCompatibility[];
 extern const u8 Debug_EventScript_EWRAMCounters[];
 extern const u8 Debug_Follower_NPC_Event_Script[];
 extern const u8 Debug_Follower_NPC_Not_Enabled[];
-extern const u8 Debug_EventScript_Steven_Multi[];
 extern const u8 Debug_EventScript_WallyTutorial[];
 extern const u8 Debug_EventScript_PrintTimeOfDay[];
 extern const u8 Debug_EventScript_TellTheTime[];
@@ -577,8 +573,6 @@ static const struct DebugMenuOption sDebugMenu_Actions_TimeMenu[] =
     { COMPOUND_STRING("{JPN}じかんたいを かえる{ENG}..."),  DebugAction_OpenSubMenuFakeRTC, sDebugMenu_Actions_TimeMenu_TimesOfDay },
     { COMPOUND_STRING("{JPN}ようびを かえる{ENG}..."),      DebugAction_OpenSubMenuFakeRTC, sDebugMenu_Actions_TimeMenu_Weekdays },
     { COMPOUND_STRING("{JPN}ひがわりを やりなおす"), DebugAction_TimeMenu_RedoDailyEvents },
-    { COMPOUND_STRING("{JPN}かべどけいを みる{ENG}..."), DebugAction_ExecuteScript, PlayersHouse_2F_EventScript_CheckWallClock },
-    { COMPOUND_STRING("{JPN}かべどけいを あわせる{ENG}..."),   DebugAction_ExecuteScript, PlayersHouse_2F_EventScript_SetWallClock },
     { NULL }
 };
 
@@ -601,7 +595,6 @@ static const struct DebugMenuOption sDebugMenu_Actions_FollowerNPCMenu[] =
 
 static const struct DebugMenuOption sDebugMenu_Actions_Utilities[] =
 {
-    { COMPOUND_STRING("{JPN}マップへ そらをとぶ{ENG}..."),       DebugAction_Util_Fly },
     { COMPOUND_STRING("{JPN}マップワープへ とぶ{ENG}..."), DebugAction_Selection_Init, &sWarpSelection },
     { COMPOUND_STRING("{JPN}てんきを かえる{ENG}..."),      DebugAction_Selection_Init, &sSetWeatherSelection },
     { COMPOUND_STRING("{JPN}フォントテスト{ENG}..."),        DebugAction_ExecuteScript, Debug_EventScript_FontTest },
@@ -614,7 +607,6 @@ static const struct DebugMenuOption sDebugMenu_Actions_Utilities[] =
     { COMPOUND_STRING("{JPN}しゅぞくランダムを ためす"), DebugAction_Selection_Init, &sSpeciesGeneratorSelection },
     { COMPOUND_STRING("{JPN}どうぐランダムを ためす"), DebugAction_Selection_Init, &sItemGeneratorSelection },
     { COMPOUND_STRING("{JPN}ミツルチュートリアル"),    DebugAction_ExecuteScript, Debug_EventScript_WallyTutorial },
-    { COMPOUND_STRING("{JPN}ダイゴマルチ"),      DebugAction_ExecuteScript, Debug_EventScript_Steven_Multi },
     { NULL }
 };
 
@@ -1777,12 +1769,6 @@ static void DebugAction_OpenSubMenuCreateFollowerNPC(u8 taskId, const struct Deb
 
 // *******************************
 // Actions Utilities
-
-static void DebugAction_Util_Fly(u8 taskId)
-{
-    Debug_DestroyMenu(taskId);
-    SetMainCallback2(CB2_OpenFlyMap);
-}
 
 static void DebugSelectionStep_UpdateMapGroup(u8 taskId, u8 digits, u32 min, u32 max)
 {

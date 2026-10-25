@@ -14,6 +14,7 @@
 #include "constants/game_stat.h"
 
 static u16 CalculateChecksum(void *, u16);
+static u16 CalculateSaveSectorChecksum(struct SaveSector *);
 static bool8 ReadFlashSector(u8, struct SaveSector *);
 static u8 GetSaveValidStatus(const struct SaveSectorLocation *);
 static u8 GetSaveSlotStatus(u8, const struct SaveSectorLocation *, u32 *);
@@ -227,7 +228,7 @@ static u8 HandleWriteSector(u16 sectorId, const struct SaveSectorLocation *locat
 
     CopyFromSaveBlock3(sectorId, gReadWriteSector);
 
-    gReadWriteSector->checksum = CalculateChecksum(data, size);
+    gReadWriteSector->checksum = CalculateSaveSectorChecksum(gReadWriteSector);
 
     return TryWriteSector(sector, gReadWriteSector->data);
 }
@@ -364,7 +365,7 @@ static u8 HandleReplaceSector(u16 sectorId, const struct SaveSectorLocation *loc
 
     CopyFromSaveBlock3(sectorId, gReadWriteSector);
 
-    gReadWriteSector->checksum = CalculateChecksum(data, size);
+    gReadWriteSector->checksum = CalculateSaveSectorChecksum(gReadWriteSector);
 
     // Erase old save data
     EraseFlashSector(sector);
@@ -523,10 +524,11 @@ static u8 CopySaveSlotData(u16 sectorId, struct SaveSectorLocation *locations)
         ReadFlashSector(i + slotOffset, gReadWriteSector);
 
         id = gReadWriteSector->id;
-        if (gReadWriteSector->signature != SECTOR_SIGNATURE || id >= NUM_SECTORS_PER_SLOT)
+        if (gReadWriteSector->signature != SECTOR_SIGNATURE || id >= NUM_SECTORS_PER_SLOT
+         || gReadWriteSector->counter != gSaveCounter)
             continue;
 
-        checksum = CalculateChecksum(gReadWriteSector->data, locations[id].size);
+        checksum = CalculateSaveSectorChecksum(gReadWriteSector);
 
         // Only copy data for sectors whose signature and checksum fields are correct
         if (gReadWriteSector->checksum == checksum)
@@ -571,8 +573,12 @@ static u8 GetSaveSlotStatus(u8 slot, const struct SaveSectorLocation *locations,
             // Untrusted footer IDs must never index locations or shift the bitmask.
             if (id >= NUM_SECTORS_PER_SLOT)
                 continue;
-            if (gReadWriteSector->checksum == CalculateChecksum(gReadWriteSector->data, locations[id].size))
+            if (gReadWriteSector->checksum == CalculateSaveSectorChecksum(gReadWriteSector))
             {
+                // A slot is one committed generation, not a mix of old/new sectors.
+                if (gReadWriteSector->counter % NUM_SAVE_SLOTS != slot
+                 || (validSectorFlags != 0 && *counter != gReadWriteSector->counter))
+                    continue;
                 *counter = gReadWriteSector->counter;
                 validSectorFlags |= 1 << id;
             }
@@ -711,6 +717,12 @@ static u16 CalculateChecksum(void *data, u16 size)
     }
 
     return ((checksum >> 16) + checksum);
+}
+
+static u16 CalculateSaveSectorChecksum(struct SaveSector *sector)
+{
+    // Include SaveBlock3 (including fused Pokemon) and zero-filled padding.
+    return CalculateChecksum(sector, offsetof(struct SaveSector, id));
 }
 
 static void UpdateSaveAddresses(void)
@@ -968,7 +980,8 @@ u16 GetSaveBlocksPointersBaseOffset(void)
         // Base offset for SaveBlock2 is calculated using the trainer id
         if (sector->signature == SECTOR_SIGNATURE
          && sector->id == SECTOR_ID_SAVEBLOCK2
-         && sector->checksum == CalculateChecksum(sector->data, gRamSaveSectorLocations[SECTOR_ID_SAVEBLOCK2].size))
+         && sector->counter == gSaveCounter
+         && sector->checksum == CalculateSaveSectorChecksum(sector))
             return sector->data[offsetof(struct SaveBlock2, playerTrainerId[0])] +
                    sector->data[offsetof(struct SaveBlock2, playerTrainerId[1])] +
                    sector->data[offsetof(struct SaveBlock2, playerTrainerId[2])] +

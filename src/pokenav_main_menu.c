@@ -653,16 +653,6 @@ void LoadLeftHeaderGfxForIndex(u32 menuGfxId)
         LoadLeftHeaderGfxForSubMenu(menuGfxId - POKENAV_GFX_SUBMENUS_START);
 }
 
-void UpdateRegionMapRightHeaderTiles(u32 menuGfxId)
-{
-    struct Pokenav_MainMenu *menu = GetSubstructPtr(POKENAV_SUBSTRUCT_MAIN_MENU);
-
-    if (menuGfxId == POKENAV_GFX_MAP_MENU_ZOOMED_OUT)
-        menu->leftHeaderSprites[1]->oam.tileNum = GetSpriteTileStartByTag(2) + 32;
-    else
-        menu->leftHeaderSprites[1]->oam.tileNum = GetSpriteTileStartByTag(2) + 64;
-}
-
 static void LoadLeftHeaderGfxForMenu(u32 menuGfxId)
 {
     struct Pokenav_MainMenu *menu;

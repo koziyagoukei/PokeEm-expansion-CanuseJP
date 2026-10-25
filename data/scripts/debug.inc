@@ -363,11 +363,6 @@ Debug_Follower_NPC_Event_Script::
 Debug_Follower_NPC_Test_Message:
 	.string "これは つれあるきテストです.$"
 
-Debug_EventScript_Steven_Multi::
-	call MossdeepCity_SpaceCenter_2F_EventScript_ChoosePartyForMultiBattle
-	release
-	end
-
 Debug_EventScript_WallyTutorial::
 	special SavePlayerParty
 	special LoadWallyZigzagoon
@@ -770,7 +765,6 @@ Debug_EventScript_FontTest_Text_8::
 	.string "sayyid. Zloty zloty zodiac for the gizmo\l"
 	.string "ozone of the franz laissez and buzzing.$"
 
-
 Debug_EventScript_FontTest_Text_9::                 @ Special thanks to Nintendo for this nice pangram to test other glyphs
 	.string "{FONT_SMALL_NARROWER}"                 @ Edit this to test your font
 	.string "42 × 138 = 5796.\n"
@@ -830,7 +824,6 @@ Debug_EventScript_FakeRTCNotEnabled::
 
 Debug_EventScript_FakeRTCNotEnabled_Text_0:
 	.string "Fake RTCが\nオンではありません.コンフィグで\lオンに してください$"
-
 
 Debug_EventScript_TellTheTime_Text_0:
 	.string "ひづけと じこく:\n"

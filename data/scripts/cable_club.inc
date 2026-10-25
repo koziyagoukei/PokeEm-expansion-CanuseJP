@@ -3,12 +3,17 @@ CableClub_OnTransition:
 	end
 
 CableClub_EventScript_HideOrShowMysteryGiftMan::
+.if FREE_MYSTERY_GIFT || FREE_MYSTERY_EVENT_BUFFERS
+	setflag FLAG_HIDE_POKEMON_CENTER_2F_MYSTERY_GIFT_MAN
+	return
+.else
 	specialvar VAR_RESULT, ShouldDistributeEonTicket
 	goto_if_eq VAR_RESULT, TRUE, CableClub_EventScript_ShowMysteryGiftMan
 	specialvar VAR_RESULT, ValidateSavedWonderCard
 	goto_if_eq VAR_RESULT, FALSE, CableClub_EventScript_HideMysteryGiftMan
 	goto CableClub_EventScript_ShowMysteryGiftMan
 	end
+.endif
 
 CableClub_EventScript_ShowMysteryGiftMan::
 	clearflag FLAG_HIDE_POKEMON_CENTER_2F_MYSTERY_GIFT_MAN

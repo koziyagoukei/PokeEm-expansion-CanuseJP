@@ -8,7 +8,8 @@ SafariZone_EventScript_OutOfBallsMidBattle::
 #if IS_FRLG
 	setwarp MAP_FUCHSIA_CITY_SAFARI_ZONE_ENTRANCE, 4, 1
 #else
-	setwarp MAP_ROUTE121_SAFARI_ZONE_ENTRANCE, 2, 5
+	@ The Safari Zone maps were removed; return to the Frontier hub instead.
+	setwarp MAP_ULTRA_FRONTIE_HUB, 13, 19
 #endif
 	end
 
@@ -22,7 +23,8 @@ SafariZone_EventScript_Exit::
 #if IS_FRLG
 	warp MAP_FUCHSIA_CITY_SAFARI_ZONE_ENTRANCE, 4, 1
 #else
-	warp MAP_ROUTE121_SAFARI_ZONE_ENTRANCE, 2, 5
+	@ The Safari Zone maps were removed; return to the Frontier hub instead.
+	warp MAP_ULTRA_FRONTIE_HUB, 13, 19
 #endif
 	waitstate
 	end
