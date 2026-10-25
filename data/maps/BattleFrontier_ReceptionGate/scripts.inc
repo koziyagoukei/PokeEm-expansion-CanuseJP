@@ -28,10 +28,10 @@ BattleFrontier_ReceptionGate_EventScript_FirstTimeEntering::
 	closemessage
 	applymovement LOCALID_PLAYER, BattleFrontier_ReceptionGate_Movement_PlayerApproachCounter
 	waitmovement 0
-	goto BattleFrontier_ReceptionGate_EventScript_ScottScene
+	goto BattleFrontier_ReceptionGate_EventScript_IssueFrontierPass
 	end
 
-BattleFrontier_ReceptionGate_EventScript_ScottScene::
+BattleFrontier_ReceptionGate_EventScript_IssueFrontierPass::
 	msgbox BattleFrontier_ReceptionGate_Text_WelcomeToBattleFrontier, MSGBOX_DEFAULT
 	msgbox BattleFrontier_ReceptionGate_Text_IssueFrontierPass, MSGBOX_DEFAULT
 	playfanfare MUS_OBTAIN_ITEM
@@ -49,56 +49,6 @@ BattleFrontier_ReceptionGate_Movement_PlayerApproachCounter:
 	walk_up
 	walk_left
 	walk_left
-	step_end
-
-BattleFrontier_ReceptionGate_Movement_PlayerFaceScott:
-	delay_16
-	delay_16
-	delay_16
-	delay_8
-	walk_in_place_faster_right
-	step_end
-
-@ Unused
-BattleFrontier_ReceptionGate_Movement_WalkDown:
-	walk_down
-	walk_down
-	step_end
-
-BattleFrontier_ReceptionGate_Movement_ScottEnter:
-	walk_down
-	walk_down
-	walk_down
-	walk_down
-	walk_down
-	walk_down
-	walk_left
-	step_end
-
-BattleFrontier_ReceptionGate_Movement_ScottExit:
-	walk_right
-	walk_up
-	walk_up
-	walk_up
-	walk_up
-	walk_up
-	walk_up
-	step_end
-
-BattleFrontier_ReceptionGate_Movement_GreeterFaceScott:
-	delay_16
-	delay_16
-	delay_16
-	delay_8
-	walk_in_place_faster_right
-	step_end
-
-BattleFrontier_ReceptionGate_Movement_FacilityGuideFaceScott:
-	delay_16
-	delay_16
-	delay_16
-	delay_8
-	walk_in_place_faster_left
 	step_end
 
 BattleFrontier_ReceptionGate_EventScript_Greeter::
@@ -298,15 +248,6 @@ BattleFrontier_ReceptionGate_Text_PlacedTrainerCardInFrontierPass:
 
 BattleFrontier_ReceptionGate_Text_EnjoyBattleFrontier:
 	.string "{JPN}どの しせつからでも おたのしみください。\nみなみの まちには じゅんびの ハブも\lコンテストかいじょうも ございます！$"
-
-BattleFrontier_ReceptionGate_Text_IfItIsntPlayerYouCame:
-	.string "???『やあ きて くれたんだね\n{PLAYER}{KUN}!$"
-
-BattleFrontier_ReceptionGate_Text_OhMrScottGoodDay:
-	.string "うけつけ『あっ エニシダさま!\nおつかれさまです!$"
-
-BattleFrontier_ReceptionGate_Text_ScottGreatToSeeYouHere:
-	.string "エニシダ『きみが きてくれて\nとっても うれしいよ!\pぜひ ゆっくりと そして じっくりと\nポケモンしょうぶの しんずいを\lあじわって いって くれ!\pわたしの へやも あるから\nひまが あるときに たずねて きてくれよ!$"
 
 BattleFrontier_ReceptionGate_Text_YourGuideToFacilities:
 	.string "{JPN}7つの しせつと せつびを ごあんないします。\nみなみの まちへは とほで どうぞ！$"

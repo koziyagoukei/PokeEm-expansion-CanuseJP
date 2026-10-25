@@ -1171,6 +1171,17 @@
       "border_filepath": "data/layouts/MiniMiniVilla_Shop/border.bin",
       "blockdata_filepath": "data/layouts/MiniMiniVilla_Shop/map.bin",
       "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_PARTY_RESORT_GATE",
+      "name": "PartyResortGate_Layout",
+      "width": 16,
+      "height": 11,
+      "primary_tileset": "gTileset_Building",
+      "secondary_tileset": "gTileset_ResortHouse",
+      "border_filepath": "data/layouts/PartyResortGate/border.bin",
+      "blockdata_filepath": "data/layouts/PartyResortGate/map.bin",
+      "layout_version": "emerald"
     }
   ]
 }

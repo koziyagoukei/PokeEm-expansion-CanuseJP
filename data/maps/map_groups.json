@@ -133,6 +133,7 @@
   ],
   "gMapGroup_IndoorMiniMiniVilla": [
     "MiniMiniVilla_LocalRoom",
-    "MiniMiniVilla_Shop"
+    "MiniMiniVilla_Shop",
+    "PartyResortGate"
   ]
 }

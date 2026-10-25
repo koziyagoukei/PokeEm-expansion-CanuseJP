@@ -5,8 +5,8 @@ PartyRoamerPark_MapScripts::
 	.byte 0
 
 PartyRoamerPark_OnLoad:
+	@ The opening adds the cook itself once he steps out of the gate.
 	setflag FLAG_TEMP_10
-	call_if_eq VAR_FRONTIER_INTRO_STATE, FRONTIER_INTRO_FAMILY, PartyRoamerPark_ShowIntroCook
 	special Special_PreparePartyRoamerPark
 	@ Also replace soil restored from an old save's cached map view.
 	setmetatile 1, 7, METATILE_General_Grass, FALSE
@@ -25,18 +25,23 @@ PartyRoamerPark_OnLoad:
 
 PartyRoamerPark_OnTransition:
 	setflag FLAG_TEMP_HIDE_FOLLOWER
+	call_if_eq VAR_FRONTIER_INTRO_STATE, FRONTIER_INTRO_FAMILY, PartyRoamerPark_EventScript_PlaceIntroParents
 	setvar VAR_TEMP_0, 0
 	special Special_SpawnPartyRoamerMons
 	end
+
+@ Only for this visit: the parents chat south of the gate until the player arrives.
+PartyRoamerPark_EventScript_PlaceIntroParents:
+	setobjectxyperm LOCALID_PARTY_ROAMER_MOM, 12, 9
+	setobjectmovementtype LOCALID_PARTY_ROAMER_MOM, MOVEMENT_TYPE_FACE_RIGHT
+	setobjectxyperm LOCALID_PARTY_ROAMER_NORMAN, 13, 9
+	setobjectmovementtype LOCALID_PARTY_ROAMER_NORMAN, MOVEMENT_TYPE_FACE_LEFT
+	return
 
 PartyRoamerPark_OnFrame:
 	map_script_2 VAR_FRONTIER_INTRO_STATE, FRONTIER_INTRO_FAMILY, FrontierIntro_EventScript_Family
 	map_script_2 VAR_TEMP_0, 0, PartyRoamerPark_EventScript_RefreshMons
 	.2byte 0
-
-PartyRoamerPark_ShowIntroCook:
-	clearflag FLAG_TEMP_10
-	return
 
 PartyRoamerPark_EventScript_RefreshMons::
 	setvar VAR_TEMP_0, 1

@@ -8,6 +8,7 @@ import build_map
 
 ROOT = build_map.ROOT
 SOUTH = "BattleFrontier_OutsideSouth"
+GATE = "PartyResortGate"
 
 
 def map_data(name):
@@ -35,11 +36,14 @@ class FrontierDistrictTest(unittest.TestCase):
     def test_appended_ids_and_dimensions(self):
         groups = json.loads((ROOT / "data/maps/map_groups.json").read_text())
         self.assertEqual(groups["gMapGroup_TownsAndRoutes"][-2:], ["MiniMiniVilla", SOUTH])
+        self.assertEqual(groups["gMapGroup_IndoorMiniMiniVilla"][-1], GATE)
         layouts = json.loads((ROOT / "data/layouts/layouts.json").read_text())["layouts"]
         names = [entry["name"] for entry in layouts]
         self.assertGreater(names.index(SOUTH + "_Layout"), names.index("Partybathtime_Layout"))
+        self.assertEqual(names[-1], GATE + "_Layout")
         for entry in layouts:
-            if entry["name"] in (SOUTH + "_Layout", "BattleFrontier_OutsideWest_Layout", "party_roamer_park_Layout"):
+            if entry["name"] in (SOUTH + "_Layout", "BattleFrontier_OutsideWest_Layout",
+                                 "party_roamer_park_Layout", GATE + "_Layout"):
                 with self.subTest(layout=entry["name"]):
                     self.assertEqual((ROOT / entry["blockdata_filepath"]).stat().st_size,
                                      entry["width"] * entry["height"] * 2)
@@ -59,15 +63,48 @@ class FrontierDistrictTest(unittest.TestCase):
     def test_connection_previews_use_shared_tiles(self):
         south = build_map.read_map(SOUTH)
         west = build_map.read_map("BattleFrontier_OutsideWest")
-        park = build_map.read_map("party_roamer_park")
-        strips = (south[:7], west[-7:], [row[-7:] for row in south], [row[:7] for row in park])
+        strips = (south[:7], west[-7:])
         for index, strip in enumerate(strips):
             with self.subTest(strip=index):
                 self.assertTrue(all(cell & 1023 < 512 for row in strip for cell in row))
         for x in range(24, 30):
             self.assertTrue(walkable(west[-1][x]) and walkable(south[0][x]))
-        for y in range(30, 34):
-            self.assertTrue(walkable(south[y][-1]) and walkable(park[y - 13][0]))
+
+    def test_resort_is_entered_through_the_gate(self):
+        # Walking straight in kept the follower out beside the roaming party.
+        south = build_map.read_map(SOUTH)
+        park = build_map.read_map("party_roamer_park")
+        self.assertNotIn("MAP_PARTY_ROAMER_PARK", [c["map"] for c in map_data(SOUTH)["connections"]])
+        self.assertNotIn(map_data(SOUTH)["id"], [c["map"] for c in map_data("PartyRoamerPark")["connections"]])
+        # The rows of the former road are closed on both sides.
+        self.assertFalse(any(walkable(row[-1]) for row in south[30:34]))
+        self.assertFalse(any(walkable(row[0]) for row in park[17:21]))
+
+    def test_resort_gate_round_trips(self):
+        south, gate, park = map_data(SOUTH), map_data(GATE), map_data("PartyRoamerPark")
+        entrance = south["warp_events"][warp_index(south, south_warp("RESORT_GATE"))]
+        self.assertEqual(entrance["dest_map"], gate["id"])
+        frontier_side = warp_index(gate, entrance["dest_warp_id"])
+        exits = [warp for warp in gate["warp_events"] if warp["dest_map"] == south["id"]]
+        self.assertEqual(len(exits), 2)
+        self.assertIn(gate["warp_events"][frontier_side], exits)
+        self.assertTrue(all(warp["dest_warp_id"] == south_warp("RESORT_GATE") for warp in exits))
+        camp_side = gate["warp_events"][warp_index(gate, "WARP_ID_RESORT_GATE_CAMP")]
+        self.assertEqual(camp_side["dest_map"], park["id"])
+        park_door = park["warp_events"][warp_index(park, camp_side["dest_warp_id"])]
+        self.assertEqual((park_door["dest_map"], park_door["dest_warp_id"]), (gate["id"], "WARP_ID_RESORT_GATE_CAMP"))
+
+    def test_resort_gate_interior_tiles(self):
+        cells = build_map.resort_gate()
+        gate = map_data(GATE)
+        self.assertEqual((len(cells[0]), len(cells)), (16, 11))
+        doors = {(warp["x"], warp["y"]): cells[warp["y"]][warp["x"]] & 1023 for warp in gate["warp_events"]}
+        self.assertEqual(doors, {(7, 10): 0x202, (8, 10): 0x203, (7, 1): 0x214})
+        # The receptionist stands beside the aisle, which runs unblocked between the doors.
+        receptionist = gate["object_events"][0]
+        self.assertTrue(walkable(cells[receptionist["y"]][receptionist["x"]]))
+        for y in range(1, 11):
+            self.assertTrue(walkable(cells[y][7]))
 
     def test_plaza_reaches_each_entrance(self):
         cells = build_map.read_map(SOUTH)
@@ -80,15 +117,15 @@ class FrontierDistrictTest(unittest.TestCase):
                         and (nx, ny) not in seen and walkable(cells[ny][nx])):
                     seen.add((nx, ny))
                     queue.append((nx, ny))
-        for point in ((9, 12), (37, 14), (38, 26), (39, 26), (52, 31), (55, 31)):
+        for point in ((9, 12), (37, 14), (38, 26), (39, 26), (50, 30), (50, 29)):
             with self.subTest(point=point):
                 self.assertIn(point, seen)
 
     def test_building_warps_match_original_door_tiles(self):
         cells = build_map.read_map(SOUTH)
         original = build_map.read_map("LilycoveCity")
-        for (x, y), (sx, sy) in zip(((9, 11), (37, 13), (38, 25), (39, 25)),
-                                  ((37, 24), (23, 24), (11, 5), (12, 5))):
+        for (x, y), (sx, sy) in zip(((9, 11), (37, 13), (38, 25), (39, 25), (50, 29)),
+                                  ((37, 24), (23, 24), (11, 5), (12, 5), (12, 32))):
             with self.subTest(door=(x, y)):
                 self.assertEqual(cells[y][x] & 0xFFF, original[sy][sx] & 0xFFF)
         # The wooden entrance needs the existing Lilycove door animation table.
@@ -125,8 +162,8 @@ class FrontierDistrictTest(unittest.TestCase):
 
     def test_resort_exit_is_fixed_not_dynamic(self):
         exit_warp = map_data("PartyRoamerPark")["warp_events"][0]
-        self.assertEqual(exit_warp["dest_map"], map_data(SOUTH)["id"])
-        self.assertEqual(exit_warp["dest_warp_id"], south_warp("RESORT_RETURN"))
+        self.assertEqual(exit_warp["dest_map"], map_data(GATE)["id"])
+        self.assertEqual(exit_warp["dest_warp_id"], "WARP_ID_RESORT_GATE_CAMP")
         source = (ROOT / "src/party_roamer_park.c").read_text(encoding="utf-8")
         start = source.index("static void FieldCallback_EnterPartyRoamerPark(void)\n{")
         body = source[start:source.index("\n}", start)]

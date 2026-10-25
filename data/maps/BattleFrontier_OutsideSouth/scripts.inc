@@ -39,4 +39,4 @@ BattleFrontier_OutsideSouth_Text_Facilities:
 	.string "このさき バトルフロンティア\n7つの バトルしせつ$"
 
 BattleFrontier_OutsideSouth_Text_Resort:
-	.string "このさき ミニミニリゾート\nみなみへ すすむと ミニミニべっそう$"
+	.string "ミニミニリゾート ゲート\pこのさき ミニミニキャンプ\nさらに みなみに ミニミニべっそう$"

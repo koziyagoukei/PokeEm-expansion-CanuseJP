@@ -83,17 +83,19 @@ def generated_maps():
     fill(cells, 27, 14, 11, 3, 0x305E)
     fill(cells, 17, 18, 14, 10, 0x305E)
     fill(cells, 27, 29, 13, 3, 0x305E)
-    fill(cells, 18, 30, WIDTH - 18, 4, 0x305E)
+    # The road ends at the resort gate; the east edge keeps its tree line.
+    fill(cells, 18, 30, WIDTH - 20, 4, 0x305E)
     copy_building(cells, city, (36, 20, 7, 5), (8, 7))
     copy_building(cells, city, (20, 18, 7, 7), (34, 7))
     copy_building(cells, city, (7, 0, 10, 9), (34, 20))
+    copy_building(cells, city, (9, 27, 7, 6), (47, 24))
     for x in (34, 35, 42, 43):
         cells[20][x] = cells[21][x] = 0x3001
     # The original museum stood on a cliff. Its side terrain is not part of
     # the building and must match the level plaza at the new location.
     for x in (34, 35, 36, 41, 42, 43):
         cells[27][x] = cells[28][x] = 0x305E
-    for x, y in ((8, 12), (40, 14), (45, 29), (22, 4), (52, 29)):
+    for x, y in ((8, 12), (40, 14), (44, 28), (22, 4)):
         cells[y][x] = 0x3403
     for x, y in ((19, 20), (28, 20), (19, 25), (28, 25)):
         cells[y][x] = 0x3004
@@ -103,15 +105,36 @@ def generated_maps():
     west = read_map("BattleFrontier_OutsideWest", old_height=72)
     west.extend([[0x0170] * 56 for _ in range(80 - len(west))])
     fill(west, 24, 68, 6, 12, 0x005E)
-    park = read_map("party_roamer_park")
-    fill(park, 0, 17, 5, 4, 0x305E)
-    park[12][3] = park[13][3] = 0x3001
     return {
         "data/layouts/BattleFrontier_OutsideSouth/map.bin": pack_map(cells),
         "data/layouts/BattleFrontier_OutsideSouth/border.bin": struct.pack("<4H", 0x35D4, 0x35D5, 0x35DC, 0x35DD),
         "data/layouts/BattleFrontier_OutsideWest/map.bin": pack_map(west),
-        "data/layouts/PartyRoamerPark/map.bin": pack_map(park),
+        "data/layouts/PartyResortGate/map.bin": pack_map(resort_gate()),
+        "data/layouts/PartyResortGate/border.bin": struct.pack("<4H", 1, 1, 1, 1),
     }
+
+
+# Resort gate interior, drawn with the hub's ResortHouse metatiles.
+# "*" marks a blocked cell. The north door leads to the camp and the
+# south mat back to the plaza.
+RESORT_GATE = (
+    "26E* 26E* 21E* 21E* 26E* 26E* 20B* 20C* 20D* 26E* 26E* 21E* 21E* 26E* 26E* 26E*",
+    "276* 276* 226* 226* 276* 276* 213* 214  215* 276* 276* 226* 226* 276* 276* 276*",
+    "001* 204  2DE* 201  201  201  201  201  201  201  201  201  201  201  201  001*",
+    "001* 204  2DF* 201  201  201  201  201  201  298  299  299  299  299  29A  001*",
+    "001* 204  201  201  201  201  201  201  201  2A0  2D1  2D2* 2D3* 2D4  2A2  001*",
+    "001* 204  201  201  201  201  201  201  201  2A0  2D5  2D6* 2D7* 2D8  2A2  001*",
+    "001* 204  201  201  201  201  201  201  201  2A8  2A9  2A9  2A9  2A9  2AA  001*",
+    "001* 204  2DE* 201  201  201  201  201  201  201  201  201  201  201  201  001*",
+    "001* 204  2DF* 201  201  201  298  299  299  29A  201  201  201  201  2DE* 001*",
+    "001* 204  201  201  201  201  2A8  2A9  2A9  2AA  201  201  201  201  2DF* 001*",
+    "001* 001* 001* 001* 001* 001* 001* 202  203  001* 001* 001* 001* 001* 001* 001*",
+)
+
+
+def resort_gate():
+    return [[0x3000 | (0x400 if cell.endswith("*") else 0) | int(cell.rstrip("*"), 16)
+             for cell in row.split()] for row in RESORT_GATE]
 
 
 def build(check=False):

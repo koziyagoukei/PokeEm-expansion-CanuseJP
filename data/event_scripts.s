@@ -816,6 +816,7 @@ EventScript_PalletTown_PlayersHouse_2F_TurnOnPC::
 	.include "data/maps/MiniMiniVilla/scripts.inc"
 	.include "data/maps/MiniMiniVilla_LocalRoom/scripts.inc"
 	.include "data/maps/MiniMiniVilla_Shop/scripts.inc"
+	.include "data/maps/PartyResortGate/scripts.inc"
 
 	.include "data/maps/Partybathtime/scripts.inc"
 

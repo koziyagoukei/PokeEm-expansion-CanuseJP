@@ -17,6 +17,7 @@
 #include "task.h"
 #include "text.h"
 #include "text_window.h"
+#include "trig.h"
 #include "window.h"
 #include "constants/event_object_movement.h"
 #include "constants/event_objects.h"
@@ -26,15 +27,25 @@
 
 enum
 {
+    INTRO_VOID_FADE_IN,
+    INTRO_VOID_WAIT,
     INTRO_GENDER_TEXT,
     INTRO_GENDER_INPUT,
     INTRO_NAME_TEXT,
     INTRO_NAME_FADE,
     INTRO_CONFIRM_TEXT,
     INTRO_CONFIRM_INPUT,
-    INTRO_SCENE_FADE_OUT,
-    INTRO_SCENE_FADE_IN,
+    INTRO_ACCEPT_TEXT,
+    INTRO_SCENE_SETUP,
+    INTRO_LOOK_AROUND,
+    INTRO_ARCEUS_DESCEND,
+    INTRO_ARCEUS_COLOR,
+    INTRO_ARCEUS_CRY,
     INTRO_SPEECH,
+    INTRO_QUESTION_TEXT,
+    INTRO_QUESTION_INPUT,
+    INTRO_FAREWELL,
+    INTRO_DEPART_SPIN,
     INTRO_DEPART,
 };
 
@@ -42,6 +53,19 @@ enum
 #define tSpeech data[1]
 #define tArceusSprite data[2]
 #define tPlayerSprite data[3]
+#define tTimer data[4]
+#define tSpinDelay data[5]
+
+#define sFloatTimer data[7]
+
+#define ARCEUS_X 120
+#define ARCEUS_Y 36
+#define ARCEUS_DESCENT 24
+#define ARCEUS_DESCENT_FRAMES (ARCEUS_DESCENT * 2)
+#define ARCEUS_PALE_COEFF 10
+#define PLAYER_X 120
+#define PLAYER_Y 92
+#define DEPART_LIFT 6
 
 static const struct BgTemplate sBgTemplate = {
     .bg = 0,
@@ -63,8 +87,30 @@ static const struct MenuAction sGenderChoices[] = {
 static const u8 *const sSpeech[] = {
     sFrontierIntroWelcome,
     sFrontierIntroRequest,
+};
+
+static const u8 *const sFarewell[] = {
+    sFrontierIntroThanks,
     sFrontierIntroSend,
     sFrontierIntroDepart,
+};
+
+// The player looks around the empty space before Arceus answers.
+static const struct {
+    u8 frame;
+    u8 anim;
+} sLookAround[] = {
+    {40, ANIM_STD_FACE_WEST},
+    {70, ANIM_STD_FACE_EAST},
+    {100, ANIM_STD_FACE_SOUTH},
+    {135, ANIM_STD_FACE_NORTH},
+};
+
+static const u8 sSpinAnims[] = {
+    ANIM_STD_FACE_SOUTH,
+    ANIM_STD_FACE_WEST,
+    ANIM_STD_FACE_NORTH,
+    ANIM_STD_FACE_EAST,
 };
 
 static void Task_FrontierIntro(u8 taskId);
@@ -128,13 +174,22 @@ static void InitIntroScreen(bool32 afterNaming)
     SetGpuReg(REG_OFFSET_WINOUT, 0);
     SetGpuReg(REG_OFFSET_MOSAIC, 0);
     taskId = CreateTask(Task_FrontierIntro, 0);
-    gTasks[taskId].tState = afterNaming ? INTRO_CONFIRM_TEXT : INTRO_GENDER_TEXT;
     gTasks[taskId].tArceusSprite = SPRITE_NONE;
     gTasks[taskId].tPlayerSprite = SPRITE_NONE;
-    PrintIntroText(afterNaming ? sFrontierIntroConfirm : sFrontierIntroGender, FALSE);
+    if (afterNaming)
+    {
+        gTasks[taskId].tState = INTRO_CONFIRM_TEXT;
+        PrintIntroText(sFrontierIntroConfirm, FALSE);
+        BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
+    }
+    else
+    {
+        // A slow fade from the menu's black into the empty white space.
+        gTasks[taskId].tState = INTRO_VOID_FADE_IN;
+        BeginNormalPaletteFade(PALETTES_ALL, 4, 16, 0, RGB_BLACK);
+    }
     ShowBg(0);
     SetGpuReg(REG_OFFSET_DISPCNT, DISPCNT_BG0_ON | DISPCNT_OBJ_ON | DISPCNT_OBJ_1D_MAP);
-    BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_BLACK);
     SetVBlankCallback(VBlankCB_FrontierIntro);
     SetMainCallback2(CB2_RunFrontierIntro);
 }
@@ -149,40 +204,70 @@ static void CB2_FrontierIntroAfterNaming(void)
     InitIntroScreen(TRUE);
 }
 
-static void CreateIntroScene(u8 taskId)
+static void SpriteCB_ArceusFloat(struct Sprite *sprite)
+{
+    sprite->y2 = Sin(sprite->sFloatTimer, 3);
+    sprite->sFloatTimer = (sprite->sFloatTimer + 2) & 0xFF;
+}
+
+static u32 GetSpritePaletteMask(u8 spriteId)
+{
+    return 1u << (16 + gSprites[spriteId].oam.paletteNum);
+}
+
+static void CreateIntroPlayer(u8 taskId)
 {
     u8 spriteId;
     u16 playerGfx = gSaveBlock2Ptr->playerGender == MALE ? PLAYER_AVATAR_GFX_MALE_NORMAL : PLAYER_AVATAR_GFX_FEMALE_NORMAL;
 
     // These are ordinary overworld graphics, not battle pictures or object events.
-    spriteId = CreateObjectGraphicsSprite(OBJ_EVENT_GFX_SPECIES(ARCEUS), SpriteCallbackDummy, 120, 42, 1);
+    spriteId = CreateObjectGraphicsSprite(playerGfx, SpriteCallbackDummy, PLAYER_X, PLAYER_Y, 0);
     if (spriteId < MAX_SPRITES)
     {
         StartSpriteAnim(&gSprites[spriteId], ANIM_STD_FACE_SOUTH);
-        gTasks[taskId].tArceusSprite = spriteId;
-    }
-    spriteId = CreateObjectGraphicsSprite(playerGfx, SpriteCallbackDummy, 120, 88, 0);
-    if (spriteId < MAX_SPRITES)
-    {
-        StartSpriteAnim(&gSprites[spriteId], ANIM_STD_FACE_NORTH);
         gTasks[taskId].tPlayerSprite = spriteId;
     }
-    FillWindowPixelBuffer(0, PIXEL_FILL(1));
-    ClearWindowTilemap(0);
-    CopyWindowToVram(0, COPYWIN_FULL);
-    PlayBGM(MUS_ROUTE122);
+}
+
+static void CreateIntroArceus(u8 taskId)
+{
+    u8 spriteId = CreateObjectGraphicsSprite(OBJ_EVENT_GFX_SPECIES(ARCEUS), SpriteCB_ArceusFloat, ARCEUS_X, ARCEUS_Y - ARCEUS_DESCENT, 1);
+
+    if (spriteId >= MAX_SPRITES)
+        return;
+    StartSpriteAnim(&gSprites[spriteId], ANIM_STD_FACE_SOUTH);
+    // Arceus materializes out of the white as a pale shape, then takes on its colors.
+    gSprites[spriteId].oam.objMode = ST_OAM_OBJ_BLEND;
+    SetGpuReg(REG_OFFSET_BLDCNT, BLDCNT_TGT2_BG0 | BLDCNT_TGT2_BD);
+    SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(0, 16));
+    BlendPalettes(GetSpritePaletteMask(spriteId), ARCEUS_PALE_COEFF, RGB_WHITE);
+    gTasks[taskId].tArceusSprite = spriteId;
 }
 
 static void Task_FrontierIntro(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
     s8 input;
+    u32 i;
 
-    if (gPaletteFade.active)
+    // The departure keeps spinning while the screen fades to white.
+    if (gPaletteFade.active && tState != INTRO_DEPART_SPIN)
         return;
 
     switch (tState)
     {
+    case INTRO_VOID_FADE_IN:
+        tTimer = 0;
+        tState = INTRO_VOID_WAIT;
+        break;
+    case INTRO_VOID_WAIT:
+        if (++tTimer >= 45)
+        {
+            FadeInNewBGM(MUS_ROUTE122, 6);
+            PrintIntroText(sFrontierIntroGender, FALSE);
+            tState = INTRO_GENDER_TEXT;
+        }
+        break;
     case INTRO_GENDER_TEXT:
         if (!RunTextPrintersAndIsPrinter0Active())
         {
@@ -231,25 +316,78 @@ static void Task_FrontierIntro(u8 taskId)
         if (input == 0)
         {
             PlaySE(SE_SELECT);
-            BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_WHITE);
-            tState = INTRO_SCENE_FADE_OUT;
+            PrintIntroText(sFrontierIntroAccept, FALSE);
+            tState = INTRO_ACCEPT_TEXT;
         }
         else if (input == 1 || input == MENU_B_PRESSED)
         {
             PlaySE(SE_SELECT);
-            PrintIntroText(sFrontierIntroGender, FALSE);
+            PrintIntroText(sFrontierIntroGenderRetry, FALSE);
             tState = INTRO_GENDER_TEXT;
         }
         break;
-    case INTRO_SCENE_FADE_OUT:
-        CreateIntroScene(taskId);
-        BeginNormalPaletteFade(PALETTES_ALL, 0, 16, 0, RGB_WHITE);
-        tState = INTRO_SCENE_FADE_IN;
+    case INTRO_ACCEPT_TEXT:
+        if (!RunTextPrintersAndIsPrinter0Active() && JOY_NEW(A_BUTTON | B_BUTTON))
+        {
+            BeginNormalPaletteFade(PALETTES_ALL, 2, 0, 16, RGB_WHITE);
+            FadeOutBGM(4);
+            tState = INTRO_SCENE_SETUP;
+        }
         break;
-    case INTRO_SCENE_FADE_IN:
-        PrintIntroText(sSpeech[0], TRUE);
-        tSpeech = 0;
-        tState = INTRO_SPEECH;
+    case INTRO_SCENE_SETUP:
+        FillWindowPixelBuffer(0, PIXEL_FILL(1));
+        ClearWindowTilemap(0);
+        CopyWindowToVram(0, COPYWIN_FULL);
+        CreateIntroPlayer(taskId);
+        BeginNormalPaletteFade(PALETTES_ALL, 3, 16, 0, RGB_WHITE);
+        tTimer = 0;
+        tState = INTRO_LOOK_AROUND;
+        break;
+    case INTRO_LOOK_AROUND:
+        tTimer++;
+        for (i = 0; i < ARRAY_COUNT(sLookAround); i++)
+        {
+            if (tTimer == sLookAround[i].frame && tPlayerSprite != SPRITE_NONE)
+                StartSpriteAnim(&gSprites[tPlayerSprite], sLookAround[i].anim);
+        }
+        if (tTimer == 120)
+            PlaySE(SE_M_MORNING_SUN);
+        if (tTimer >= 150)
+        {
+            CreateIntroArceus(taskId);
+            tTimer = 0;
+            tState = INTRO_ARCEUS_DESCEND;
+        }
+        break;
+    case INTRO_ARCEUS_DESCEND:
+        tTimer++;
+        if (tArceusSprite != SPRITE_NONE)
+            gSprites[tArceusSprite].y = ARCEUS_Y - ARCEUS_DESCENT + tTimer / 2;
+        SetGpuReg(REG_OFFSET_BLDALPHA, BLDALPHA_BLEND(tTimer * 16 / ARCEUS_DESCENT_FRAMES, 16 - tTimer * 16 / ARCEUS_DESCENT_FRAMES));
+        if (tTimer >= ARCEUS_DESCENT_FRAMES)
+        {
+            if (tArceusSprite != SPRITE_NONE)
+            {
+                gSprites[tArceusSprite].oam.objMode = ST_OAM_OBJ_NORMAL;
+                BeginNormalPaletteFade(GetSpritePaletteMask(tArceusSprite), 2, ARCEUS_PALE_COEFF, 0, RGB_WHITE);
+            }
+            SetGpuReg(REG_OFFSET_BLDCNT, 0);
+            SetGpuReg(REG_OFFSET_BLDALPHA, 0);
+            tState = INTRO_ARCEUS_COLOR;
+        }
+        break;
+    case INTRO_ARCEUS_COLOR:
+        PlayCry_Normal(SPECIES_ARCEUS, 0);
+        tState = INTRO_ARCEUS_CRY;
+        break;
+    case INTRO_ARCEUS_CRY:
+        if (IsCryFinished())
+        {
+            FadeInNewBGM(MUS_SOOTOPOLIS, 4);
+            PrintIntroText(sSpeech[0], TRUE);
+            tSpeech = 0;
+            tState = INTRO_SPEECH;
+        }
         break;
     case INTRO_SPEECH:
         if (!RunTextPrintersAndIsPrinter0Active() && JOY_NEW(A_BUTTON | B_BUTTON))
@@ -258,13 +396,76 @@ static void Task_FrontierIntro(u8 taskId)
                 PrintIntroText(sSpeech[tSpeech], TRUE);
             else
             {
-                BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_WHITE);
-                FadeOutBGM(4);
-                tState = INTRO_DEPART;
+                PrintIntroText(sFrontierIntroQuestion, TRUE);
+                tState = INTRO_QUESTION_TEXT;
             }
         }
         break;
+    case INTRO_QUESTION_TEXT:
+        if (!RunTextPrintersAndIsPrinter0Active())
+        {
+            CreateYesNoMenuParameterized(23, 8, 0xE0, 0xC0, 14, 15);
+            tState = INTRO_QUESTION_INPUT;
+        }
+        break;
+    case INTRO_QUESTION_INPUT:
+        input = Menu_ProcessInputNoWrapClearOnChoose();
+        if (input == 0)
+        {
+            PlaySE(SE_SELECT);
+            PrintIntroText(sFarewell[0], TRUE);
+            tSpeech = 0;
+            tState = INTRO_FAREWELL;
+        }
+        else if (input == 1 || input == MENU_B_PRESSED)
+        {
+            // Arceus does not take no for an answer.
+            PlaySE(SE_SELECT);
+            PrintIntroText(sFrontierIntroRefuse, TRUE);
+            tState = INTRO_QUESTION_TEXT;
+        }
+        break;
+    case INTRO_FAREWELL:
+        if (!RunTextPrintersAndIsPrinter0Active() && JOY_NEW(A_BUTTON | B_BUTTON))
+        {
+            if (++tSpeech < ARRAY_COUNT(sFarewell))
+                PrintIntroText(sFarewell[tSpeech], TRUE);
+            else
+            {
+                ClearDialogWindowAndFrame(0, TRUE);
+                PlaySE(SE_WARP_OUT);
+                FadeOutBGM(4);
+                tTimer = 0;
+                tSpinDelay = 4;
+                tState = INTRO_DEPART_SPIN;
+            }
+        }
+        break;
+    case INTRO_DEPART_SPIN:
+        // Mirrors the Teleport spin, so the arrival on the field picks it up.
+        // Arceus floats right above, so the player only lifts slightly.
+        tTimer++;
+        if (tPlayerSprite != SPRITE_NONE)
+        {
+            if (tTimer % tSpinDelay == 0)
+                StartSpriteAnim(&gSprites[tPlayerSprite], sSpinAnims[(tTimer / tSpinDelay) % ARRAY_COUNT(sSpinAnims)]);
+            if (tTimer == 16)
+                tSpinDelay = 2;
+            if (tTimer > 16 && tTimer % 2 == 0 && gSprites[tPlayerSprite].y2 > -DEPART_LIFT)
+                gSprites[tPlayerSprite].y2--;
+        }
+        if (tTimer == 24)
+            BeginNormalPaletteFade(PALETTES_ALL, 1, 0, 16, RGB_WHITE);
+        if (tTimer > 24 && !gPaletteFade.active)
+        {
+            tTimer = 0;
+            tState = INTRO_DEPART;
+        }
+        break;
     case INTRO_DEPART:
+        // A short hold in the white lets the music finish fading.
+        if (++tTimer < 30)
+            break;
         if (tArceusSprite != SPRITE_NONE)
             DestroySpriteAndFreeResources(&gSprites[tArceusSprite]);
         if (tPlayerSprite != SPRITE_NONE)

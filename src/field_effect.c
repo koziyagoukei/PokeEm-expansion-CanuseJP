@@ -2786,16 +2786,29 @@ static void TeleportWarpOutFieldEffect_End(struct Task *task)
     }
 }
 
-static void FieldCallback_TeleportWarpIn(void)
+static void StartTeleportWarpIn(void)
 {
-    Overworld_PlaySpecialMapMusic();
-    WarpFadeInScreen();
     LockPlayerFieldControls();
     FreezeObjectEvents();
     gFieldCallback = NULL;
     gObjectEvents[gPlayerAvatar.objectEventId].invisible = TRUE;
     CameraObjectFreeze();
     CreateTask(Task_TeleportWarpIn, 0);
+}
+
+static void FieldCallback_TeleportWarpIn(void)
+{
+    Overworld_PlaySpecialMapMusic();
+    WarpFadeInScreen();
+    StartTeleportWarpIn();
+}
+
+// The new game opening sends the player down out of a white screen.
+void FieldCB_TeleportWarpInFromWhite(void)
+{
+    Overworld_PlaySpecialMapMusic();
+    FadeInFromWhite();
+    StartTeleportWarpIn();
 }
 
 static void (*const sTeleportWarpInFieldEffectFuncs[])(struct Task *) = {

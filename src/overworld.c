@@ -1943,7 +1943,17 @@ void CB2_NewGame(void)
     PlayTimeCounter_Start();
     ScriptContext_Init();
     UnlockPlayerFieldControls();
-    gFieldCallback = FieldCB_WarpExitFadeFromBlack;
+    if (VarGet(VAR_FRONTIER_INTRO_STATE) == FRONTIER_INTRO_ARRIVAL)
+    {
+        // The hub shares the camp's map section, so its banner would mislead on arrival.
+        // The arrival script clears this before leading the player to the camp.
+        FlagSet(FLAG_HIDE_MAP_NAME_POPUP);
+        gFieldCallback = FieldCB_TeleportWarpInFromWhite;
+    }
+    else
+    {
+        gFieldCallback = FieldCB_WarpExitFadeFromBlack;
+    }
     gFieldCallback2 = NULL;
     DoMapLoadLoop(&gMain.state);
     SetFieldVBlankCallback();
