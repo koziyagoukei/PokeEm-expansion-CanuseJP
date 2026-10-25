@@ -35,6 +35,14 @@ The original images were created with the built-in image generation tool;
 samples those images, quantizes to fixed palettes, deduplicates 8x8 tiles and
 builds the metatiles. This is not an extraction of commercial game tiles.
 
+The exterior now uses `source/exterior_seamless_generated.png`. The first
+`exterior_generated.png` is retained for comparison only. Repeat materials are
+sampled inside their swatches, excluding atlas dividers, wall frames and roof
+endcaps. Do not restore full-cell sampling for these materials: it introduces
+dark straight lines at every 16-pixel boundary. The regression test checks the
+edge luminance of these repeats. Geometry, collision and warp data are unchanged
+by this artwork correction.
+
 ### Local Metatile IDs
 
 Exterior rows of eight: 0-7 ground/water; 8-15 roof; 16-23 eaves/gable;

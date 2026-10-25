@@ -38,7 +38,8 @@ export function prepareAssets(PNG, root) {
     const reports={};
     for(const kind of ['exterior','interior']) {
         const palette=palettes[kind];
-        const source=PNG.sync.read(fs.readFileSync(path.join(root,'graphics/custom/restoration_inn/source',kind+'_generated.png')));
+        const sourceName=kind==='exterior'?'exterior_seamless_generated.png':'interior_generated.png';
+        const source=PNG.sync.read(fs.readFileSync(path.join(root,'graphics/custom/restoration_inn/source',sourceName)));
         function sample(rect,w=16,h=16,trim=false) {
             let [x,y,rw,rh]=rect;
             if(trim) {
@@ -73,6 +74,18 @@ export function prepareAssets(PNG, root) {
                 for(let y=0;y<16;y++) cell.set(image.subarray((row*16+y)*w+col*16,(row*16+y)*w+col*16+16),y*16);
                 cells[ids[row*(w/16)+col]]=cell;
             }
+        }
+        if(kind==='exterior') {
+            // Repeating materials exclude atlas dividers and architectural endcaps.
+            const repeats={
+                0:[12,12,128,128], 1:[186,16,120,124],
+                2:[328,8,132,136], 3:[488,12,124,128],
+                4:[646,12,128,128], 6:[954,16,128,128],
+                7:[1108,16,128,128], 14:[958,174,128,124],
+                15:[1118,174,124,124], 24:[14,490,128,92],
+                28:[644,536,128,64], 30:[954,494,128,112],
+            };
+            for(const [id,rect] of Object.entries(repeats)) cells[Number(id)]=sample(rect);
         }
         if(kind==='interior') {
             cells[0]=sample([36,36,112,112]);

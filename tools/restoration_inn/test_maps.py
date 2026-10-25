@@ -3,10 +3,35 @@ import json
 from pathlib import Path
 import struct
 import unittest
+import zlib
 
 import build_maps as inn
 
 ROOT = inn.ROOT
+
+
+def read_material_atlas():
+    """Read the indexed, unfiltered PNG produced by assets.mjs (not a general PNG decoder)."""
+    raw = (ROOT/'graphics/custom/restoration_inn/exterior_metatiles.png').read_bytes()
+    width, height = struct.unpack('>II', raw[16:24])
+    palette = []
+    compressed = bytearray()
+    position = 8
+    while position < len(raw):
+        size = struct.unpack_from('>I', raw, position)[0]
+        kind = raw[position+4:position+8]
+        payload = raw[position+8:position+8+size]
+        if kind == b'PLTE':
+            palette = list(zip(*[iter(payload)]*3))
+        elif kind == b'IDAT':
+            compressed.extend(payload)
+        position += size + 12
+    pixels = zlib.decompress(compressed)
+    stride = width//2 + 1
+    assert len(pixels) == stride*height
+    assert all(pixels[y*stride] == 0 for y in range(height))
+    return [[palette[(pixels[y*stride+1+x//2] >> (0 if x%2 else 4)) & 15]
+             for x in range(width)] for y in range(height)]
 
 
 class InnMapTest(unittest.TestCase):
@@ -69,6 +94,17 @@ class InnMapTest(unittest.TestCase):
                 matches = [v for i,v in enumerate(target['warp_events'])
                            if v.get('warp_id',str(i))==w['dest_warp_id']]
                 self.assertEqual(len(matches),1,w)
+
+    def test_repeating_exterior_materials_have_no_dark_atlas_border(self):
+        atlas = read_material_atlas()
+        for tile in (0, 2, 3, 4, 6, 14, 24, 28):
+            x, y = tile%8*16, tile//8*16
+            material = [[sum(c*w for c,w in zip(atlas[y+dy][x+dx],(0.3,0.6,0.1)))
+                         for dx in range(16)] for dy in range(16)]
+            center = sum(material[j][i] for j in range(2,14) for i in range(2,14))/144
+            edges = [material[0], material[-1], [r[0] for r in material], [r[-1] for r in material]]
+            for edge in edges:
+                self.assertGreaterEqual(sum(edge)/16, center-24, f'Framed repeat tile {tile}')
 
     def test_every_walkable_tile_is_reachable_from_an_entrance(self):
         for n, g in self.grid.items():
