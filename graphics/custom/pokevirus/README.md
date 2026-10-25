@@ -26,6 +26,8 @@
 
 ## 使用方法
 
+感染者解放戦の上下7本の鎖演出と専用戦闘コマンドは [release_transition/README.md](release_transition/README.md) を参照。
+
 マップのobject eventの `graphics_id` に `OBJ_EVENT_GFX_POKEVIRUS` を指定する。`OBJ_EVENT_PAL_TAG_POKEVIRUS` の専用パレットを持ち、人物や店主の色を置換しない。64x64のOAMとサブスプライト構成、6コマ用の `sAnimTable_Following` を使用する。静止した位置で脈動させる場合、`movement_type` は `MOVEMENT_TYPE_WALK_IN_PLACE_DOWN` 等の足踏み系を指定できる。浮遊するデザインのため足跡は生成しない。
 
 画像変換は `INCGFX_U32("graphics/custom/pokevirus/overworld.png", ".4bpp", "-mwidth 8 -mheight 8")` とし、1コマを8x8タイルとして扱っている。9コマ用の通常人物アニメーションへ接続しないこと。画像が大型でも、通行判定は通常object eventのアンカー座標が基準であり、絵の範囲すべてを塞ぐ仕組みは追加していない。

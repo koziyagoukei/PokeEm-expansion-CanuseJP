@@ -100,6 +100,7 @@ void ChooseStarter(void);
 void SetMapVarsToTrainerA(void);
 void SetMapVarsToTrainerB(void);
 void ConfigureTrainerBattle(struct ScriptContext *ctx);
+void Script_TrainerBattlePokevirus(struct ScriptContext *ctx);
 void ConfigureFacilityTrainerBattle(u8 facility, const u8 *scriptEndPtr);
 void ConfigureApproachingTrainerBattle(struct ApproachingTrainer *approachingTrainer);
 void ConfigureApproachingFacilityTrainerBattle(struct ApproachingTrainer *ApproachingTrainer);

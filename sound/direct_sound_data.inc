@@ -1,4 +1,8 @@
 	.align 2
+DirectSoundWaveData_pokevirus_heartbeat::
+	.incbin "sound/direct_sound_samples/custom/pokevirus_heartbeat.bin"
+
+	.align 2
 DirectSoundWaveData_sc88pro_glockenspiel::
 	.incbin "build/extracted_sound/sound/direct_sound_samples/sc88pro_glockenspiel.bin"
 

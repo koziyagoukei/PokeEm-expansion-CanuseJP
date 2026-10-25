@@ -2,6 +2,7 @@
 #include "battle.h"
 #include "battle_transition.h"
 #include "battle_transition_frontier.h"
+#include "battle_transition_pokevirus.h"
 #include "bg.h"
 #include "decompress.h"
 #include "event_object_movement.h"
@@ -386,6 +387,7 @@ static const TaskFunc sTasks_Main[B_TRANSITION_COUNT] =
     [B_TRANSITION_FRONTIER_CIRCLES_CROSS_IN_SEQ] = Task_FrontierCirclesCrossInSeq,
     [B_TRANSITION_FRONTIER_CIRCLES_ASYMMETRIC_SPIRAL_IN_SEQ] = Task_FrontierCirclesAsymmetricSpiralInSeq,
     [B_TRANSITION_FRONTIER_CIRCLES_SYMMETRIC_SPIRAL_IN_SEQ] = Task_FrontierCirclesSymmetricSpiralInSeq,
+    [B_TRANSITION_POKEVIRUS_RELEASE] = Task_PokevirusRelease,
 };
 
 static const TransitionStateFunc sTaskHandlers[] =

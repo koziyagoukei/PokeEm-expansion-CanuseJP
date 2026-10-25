@@ -1,0 +1,80 @@
+{
+  "name": "The Heart Remembers",
+  "symbol": "mus_pokevirus_release",
+  "tracks": 8,
+  "ppqn": 24,
+  "introTicks": 192,
+  "loopTicks": 3072,
+  "loopBpm": 144,
+  "loopSeconds": 53.333333333333336,
+  "tempos": [
+    [
+      0,
+      80
+    ],
+    [
+      96,
+      108
+    ],
+    [
+      144,
+      132
+    ],
+    [
+      192,
+      144
+    ]
+  ],
+  "memoryBars": [
+    8,
+    9,
+    18,
+    19,
+    28,
+    29
+  ],
+  "reference": "sound/songs/midi/mus_vs_trainer.mid, track 1, bars 000 and 010-011 (mid2agb numbering)",
+  "midiSha256": "278b9c56662c2a138d34afd5eacf684f979fbe4d5fe5a2c9ecad75091396307c",
+  "parts": [
+    {
+      "name": "01 Restarting heart",
+      "voice": 0,
+      "notes": 136
+    },
+    {
+      "name": "02 Pulse bass",
+      "voice": 1,
+      "notes": 192
+    },
+    {
+      "name": "03 Liberation lead",
+      "voice": 7,
+      "notes": 200
+    },
+    {
+      "name": "04 Unravelling strings",
+      "voice": 2,
+      "notes": 64
+    },
+    {
+      "name": "05 Fractured arpeggio",
+      "voice": 5,
+      "notes": 256
+    },
+    {
+      "name": "06 Trainer memories",
+      "voice": 4,
+      "notes": 33
+    },
+    {
+      "name": "07 Battle percussion",
+      "voice": 6,
+      "notes": 336
+    },
+    {
+      "name": "08 Distant echoes",
+      "voice": 8,
+      "notes": 43
+    }
+  ]
+}

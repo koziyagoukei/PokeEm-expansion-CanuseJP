@@ -100,6 +100,7 @@ EWRAM_DATA u16 gPartnerTrainerId = 0;
 EWRAM_DATA static u8 *sTrainerBattleEndScript = NULL;
 EWRAM_DATA static bool8 sShouldCheckTrainerBScript = FALSE;
 EWRAM_DATA static u8 sNoOfPossibleTrainerRetScripts = 0;
+EWRAM_DATA static bool8 sPokevirusReleaseBattle = FALSE;
 
 // The first transition is used if the enemy Pokemon are lower level than our Pokemon.
 // Otherwise, the second transition is used.
@@ -489,10 +490,13 @@ static void DoBattlePikeWildBattle(void)
 
 static void DoTrainerBattle(void)
 {
+    enum BattleTransition transition;
+
     CreateNPCTrainerParty(&gParties[B_TRAINER_OPPONENT_A][0], TRAINER_BATTLE_PARAM.opponentA);
     if (gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS && !BATTLE_TWO_VS_ONE_OPPONENT)
         CreateNPCTrainerParty(&gParties[B_TRAINER_OPPONENT_B][0], TRAINER_BATTLE_PARAM.opponentB);
-    CreateBattleStartTask(GetTrainerBattleTransition(), 0);
+    transition = GetTrainerBattleTransition();
+    CreateBattleStartTask(transition, transition == B_TRANSITION_POKEVIRUS_RELEASE ? MUS_POKEVIRUS_RELEASE : 0);
     IncrementGameStat(GAME_STAT_TOTAL_BATTLES);
     IncrementGameStat(GAME_STAT_TRAINER_BATTLES);
     TryUpdateGymLeaderRematchFromTrainer();
@@ -913,6 +917,12 @@ enum BattleTransition GetTrainerBattleTransition(void)
     u32 trainerId = SanitizeTrainerId(TRAINER_BATTLE_PARAM.opponentA);
     enum TrainerClassID trainerClass = GetTrainerClassFromId(TRAINER_BATTLE_PARAM.opponentA);
 
+    if (sPokevirusReleaseBattle)
+    {
+        sPokevirusReleaseBattle = FALSE;
+        return B_TRANSITION_POKEVIRUS_RELEASE;
+    }
+
     if (DoesTrainerHaveMugshot(trainerId))
         return B_TRANSITION_MUGSHOT;
 
@@ -1089,6 +1099,7 @@ void InitTrainerBattleParameter(void)
 {
     memset(gTrainerBattleParameter.data, 0, sizeof(TrainerBattleParameter));
     sTrainerBattleEndScript = NULL;
+    sPokevirusReleaseBattle = FALSE;
 }
 
 void TrainerBattleLoadArgs(const u8 *data)
@@ -1272,6 +1283,13 @@ void ConfigureTrainerBattle(struct ScriptContext *ctx)
     BattleSetup_ConfigureTrainerBattle(&gTrainerBattleParameter, &trainerBattleScriptStack);
     ScriptContext_SetupContextFromStack(&trainerBattleScriptStack, ctx);
     ScriptContext_Enable();
+}
+
+void Script_TrainerBattlePokevirus(struct ScriptContext *ctx)
+{
+    Script_RequestEffects(SCREFF_V1 | SCREFF_TRAINERBATTLE);
+    ConfigureTrainerBattle(ctx);
+    sPokevirusReleaseBattle = TRUE;
 }
 
 void ConfigureApproachingTrainerBattle(struct ApproachingTrainer *approachingTrainer)

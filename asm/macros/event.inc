@@ -755,8 +755,12 @@
 	OBJ_ID_NONE = 0
 
 	@ Configures the arguments for a trainer battle, then jumps to the appropriate script in scripts/trainer_battle.inc
-	.macro trainerbattle localIdA:req, trainer_a:req, intro_text_a:req, lose_text_a:req, event_script_a:req, localIdB:req, trainer_b:req, intro_text_b:req, lose_text_b:req, event_script_b:req, victory_text:req, cannot_battle:req, isDouble:req, playMusicA:req, playMusicB:req, isRematch:req, continueScript:req, facePlayer: req, earlyRival: req, skipFlagCheck:req, rival_battle_flags=0
+	.macro trainerbattle localIdA:req, trainer_a:req, intro_text_a:req, lose_text_a:req, event_script_a:req, localIdB:req, trainer_b:req, intro_text_b:req, lose_text_b:req, event_script_b:req, victory_text:req, cannot_battle:req, isDouble:req, playMusicA:req, playMusicB:req, isRematch:req, continueScript:req, facePlayer: req, earlyRival: req, skipFlagCheck:req, rival_battle_flags=0, pokevirusRelease=FALSE
+	.if \pokevirusRelease
+	callnative Script_TrainerBattlePokevirus, requests_effects=1
+	.else
 	.byte SCR_OP_TRAINERBATTLE
+	.endif
 	.set trainerbattle_flags, 0
 	.ifgt \isDouble; .set trainerbattle_flags, trainerbattle_flags | (1 << 0); .endif
 	.ifgt \isRematch; .set trainerbattle_flags, trainerbattle_flags | (1 << 1); .endif
@@ -788,6 +792,11 @@
 	@ When used with an event script, you can also pass in an optional flag to disable music
 	.macro trainerbattle_single trainer:req, intro_text:req, lose_text:req, event_script=NULL, music=TRUE
 	trainerbattle LOCALID_NONE, \trainer, \intro_text, \lose_text, \event_script, LOCALID_NONE, TRAINER_NONE, NULL, NULL, NULL, NULL, NULL, FALSE, \music, FALSE, FALSE, FALSE, TRUE, FALSE, FALSE
+	.endm
+
+	@ Infected-person liberation battle; only this battle uses the seven-chain transition.
+	.macro trainerbattle_pokevirus trainer:req, intro_text:req, lose_text:req, event_script=NULL, music=TRUE
+	trainerbattle LOCALID_NONE, \trainer, \intro_text, \lose_text, \event_script, LOCALID_NONE, TRAINER_NONE, NULL, NULL, NULL, NULL, NULL, FALSE, \music, FALSE, FALSE, FALSE, TRUE, FALSE, FALSE, pokevirusRelease=TRUE
 	.endm
 
 	@ Starts a double trainer battle. Takes a trainer, intro text, loss text, text for when you have too few pokemon

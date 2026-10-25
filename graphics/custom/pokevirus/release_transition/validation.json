@@ -1,0 +1,14 @@
+{
+  "width": 32,
+  "height": 64,
+  "bitDepth": 4,
+  "colorType": 3,
+  "colors": 15,
+  "alpha": [
+    0,
+    255
+  ],
+  "gbaBytes": 1024,
+  "sha256": "9b71f0aeee1e9f7e4b35435ca3cf0ae200d1f933ea5311ce21251d2935f3f8a1",
+  "generatedWith": "built-in image_gen"
+}
