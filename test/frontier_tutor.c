@@ -51,10 +51,36 @@ TEST("Frontier Move includes web-sourced event distribution moves")
         GetFrontierEventLearnset(SPECIES_ALCREMIE));
 }
 
+TEST("Frontier Move includes moves first learnable in Pokemon Champions")
+{
+    EXPECT(LearnsetContains(GetFrontierChampionsLearnset(SPECIES_SWAMPERT), MOVE_WAVE_CRASH));
+    EXPECT(LearnsetContains(GetFrontierChampionsLearnset(SPECIES_SCEPTILE), MOVE_EARTH_POWER));
+    EXPECT(LearnsetContains(GetFrontierChampionsLearnset(SPECIES_AEGISLASH), MOVE_POLTERGEIST));
+    EXPECT(LearnsetContains(GetFrontierChampionsLearnset(SPECIES_TAUROS_PALDEA_AQUA), MOVE_MEGAHORN));
+    // Only the species Champions teaches it to, not the rest of its line.
+    EXPECT(!LearnsetContains(GetFrontierChampionsLearnset(SPECIES_MARSHTOMP), MOVE_WAVE_CRASH));
+    // Moves an earlier game already teaches stay in the other tables.
+    EXPECT(!LearnsetContains(GetFrontierChampionsLearnset(SPECIES_SWAMPERT), MOVE_EARTHQUAKE));
+}
+
+TEST("Frontier Move offers the Champions additions")
+{
+    struct Pokemon mon;
+    u16 moves[MAX_RELEARNER_MOVES];
+    u32 count, i, found = 0;
+
+    CreateMon(&mon, SPECIES_SWAMPERT, 50, 0, OTID_STRUCT_PRESET(0));
+    count = Test_GetRelearnerFrontierFullMoves(&mon.box, moves);
+    for (i = 0; i < count; i++)
+        found += moves[i] == MOVE_WAVE_CRASH;
+    EXPECT_EQ(found, 1);
+}
+
 TEST("Frontier Move rejects an invalid species")
 {
     EXPECT_EQ(GetFrontierFullLearnset(NUM_SPECIES), NULL);
     EXPECT_EQ(GetFrontierEventLearnset(NUM_SPECIES), NULL);
+    EXPECT_EQ(GetFrontierChampionsLearnset(NUM_SPECIES), NULL);
 }
 
 static u32 CountMoveInList(const u16 *moves, u32 count, enum Move move)

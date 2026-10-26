@@ -337,6 +337,7 @@ static bool32 CanLearn(enum Species species, enum Move move)
         GetFrontierFullLearnset(species),
         GetFrontierEventLearnset(species),
         GetFrontierZaDlcLearnset(species),
+        GetFrontierChampionsLearnset(species),
         GetSpeciesTeachableLearnset(species),
         GetSpeciesEggMoves(species),
     };

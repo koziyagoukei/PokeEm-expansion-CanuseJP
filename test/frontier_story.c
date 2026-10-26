@@ -523,10 +523,20 @@ TEST("Frontier story: the contest's scenes follow the second to fifth Master Ran
     ZeroPlayerPartyMons();
 }
 
+// Tells lines apart without keeping copies of them; IWRAM has no room for those.
+static u32 HashText(const u8 *text)
+{
+    u32 hash = 2166136261u;
+
+    for (; *text != EOS; text++)
+        hash = (hash ^ *text) * 16777619u;
+    return hash;
+}
+
 TEST("Frontier story: the contest's scenes change with every count of rescues")
 {
     static const u8 sKazuki[] = _("カズキ");
-    static u8 previous[2][sizeof(gStringVar4)];
+    u32 previous[2] = {0};
 
     ResetStory();
     for (u32 scene = 0; scene < CONTEST_STORY_SCENE_COUNT; scene++)
@@ -545,8 +555,8 @@ TEST("Frontier story: the contest's scenes change with every count of rescues")
                 EXPECT_NE(gStringVar4[0], EOS);
                 // A new line for none to four rescued; past that, the four-or-more one stays.
                 if (rescued > 0)
-                    EXPECT_EQ(StringCompare(gStringVar4, previous[speaker]) == 0, rescued >= STORY_RESCUE_STAGE_COUNT);
-                StringCopy(previous[speaker], gStringVar4);
+                    EXPECT_EQ(HashText(gStringVar4) == previous[speaker], rescued >= STORY_RESCUE_STAGE_COUNT);
+                previous[speaker] = HashText(gStringVar4);
             }
             if (rescued == 1)
                 EXPECT_EQ(StringCompare(gStringVar2, sKazuki), 0);

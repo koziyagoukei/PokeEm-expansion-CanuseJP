@@ -4,5 +4,6 @@
 const u16 *GetFrontierFullLearnset(u16 species);
 const u16 *GetFrontierEventLearnset(u16 species);
 const u16 *GetFrontierZaDlcLearnset(u16 species);
+const u16 *GetFrontierChampionsLearnset(u16 species);
 
 #endif // GUARD_FRONTIER_TUTOR_H

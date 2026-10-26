@@ -1,0 +1,318 @@
+{
+  "metadata": {
+    "description": "Pokemon Champions move additions for Frontier Move",
+    "source": "https://github.com/smogon/pokemon-showdown/blob/d3de52a17868aa22e6f5af251a68b86f573b75b1/data/mods/champions/learnsets.ts",
+    "source_commit": "d3de52a17868aa22e6f5af251a68b86f573b75b1",
+    "source_commit_date": "2026-09-10T20:10:03Z",
+    "champions_species": 257,
+    "propagate_through_evolution": false,
+    "included_species": 80,
+    "included_pairs": 139,
+    "ignored_unmapped_source_species": [],
+    "verification_sources": [
+      "https://game8.co/games/Pokemon-Champions/archives/593893",
+      "https://bulbapedia.bulbagarden.net/wiki/Swampert_(Pok%C3%A9mon)/Champions_learnset"
+    ]
+  },
+  "species": {
+    "SPECIES_ABSOL": [
+      "MOVE_TRAILBLAZE"
+    ],
+    "SPECIES_AEGISLASH": [
+      "MOVE_POLTERGEIST"
+    ],
+    "SPECIES_AMPHAROS": [
+      "MOVE_PARABOLIC_CHARGE",
+      "MOVE_RISING_VOLTAGE"
+    ],
+    "SPECIES_ARCANINE_HISUI": [
+      "MOVE_BURN_UP",
+      "MOVE_ROUND",
+      "MOVE_SNORE"
+    ],
+    "SPECIES_ARIADOS": [
+      "MOVE_ASSURANCE"
+    ],
+    "SPECIES_ARMAROUGE": [
+      "MOVE_BURN_UP"
+    ],
+    "SPECIES_AROMATISSE": [
+      "MOVE_ALLURING_VOICE"
+    ],
+    "SPECIES_AUDINO": [
+      "MOVE_CHILLING_WATER"
+    ],
+    "SPECIES_AURORUS": [
+      "MOVE_ICE_SPINNER",
+      "MOVE_SNOWSCAPE"
+    ],
+    "SPECIES_AVALUGG_HISUI": [
+      "MOVE_ANCIENT_POWER"
+    ],
+    "SPECIES_BARBARACLE": [
+      "MOVE_AQUA_CUTTER",
+      "MOVE_CHILLING_WATER"
+    ],
+    "SPECIES_BASTIODON": [
+      "MOVE_STEEL_ROLLER"
+    ],
+    "SPECIES_BEEDRILL": [
+      "MOVE_CROSS_POISON",
+      "MOVE_POLLEN_PUFF",
+      "MOVE_POUNCE",
+      "MOVE_SCREECH",
+      "MOVE_SKITTER_SMACK"
+    ],
+    "SPECIES_CAMERUPT": [
+      "MOVE_BURNING_JEALOUSY"
+    ],
+    "SPECIES_CASTFORM": [
+      "MOVE_CHILLING_WATER",
+      "MOVE_SNOWSCAPE"
+    ],
+    "SPECIES_CERULEDGE": [
+      "MOVE_BURN_UP"
+    ],
+    "SPECIES_CHESNAUGHT": [
+      "MOVE_STEEL_ROLLER"
+    ],
+    "SPECIES_CINDERACE": [
+      "MOVE_HIGH_JUMP_KICK"
+    ],
+    "SPECIES_CRABOMINABLE": [
+      "MOVE_CRABHAMMER"
+    ],
+    "SPECIES_DECIDUEYE_HISUI": [
+      "MOVE_ROUND",
+      "MOVE_SNORE",
+      "MOVE_STEEL_WING"
+    ],
+    "SPECIES_DIGGERSBY": [
+      "MOVE_TRAILBLAZE"
+    ],
+    "SPECIES_DRAMPA": [
+      "MOVE_DRAGON_CHEER"
+    ],
+    "SPECIES_EELEKTROSS": [
+      "MOVE_RISING_VOLTAGE"
+    ],
+    "SPECIES_EMBOAR": [
+      "MOVE_SCORCHING_SANDS"
+    ],
+    "SPECIES_EMOLGA": [
+      "MOVE_POUNCE"
+    ],
+    "SPECIES_FARFETCHD": [
+      "MOVE_TRAILBLAZE"
+    ],
+    "SPECIES_FERALIGATR": [
+      "MOVE_BRUTAL_SWING",
+      "MOVE_MUD_SHOT"
+    ],
+    "SPECIES_FLORGES": [
+      "MOVE_GRASSY_GLIDE"
+    ],
+    "SPECIES_FORRETRESS": [
+      "MOVE_STEEL_ROLLER"
+    ],
+    "SPECIES_FURFROU": [
+      "MOVE_TRAILBLAZE"
+    ],
+    "SPECIES_GLISCOR": [
+      "MOVE_ASSURANCE",
+      "MOVE_POWER_WHIP"
+    ],
+    "SPECIES_GOLISOPOD": [
+      "MOVE_CHILLING_WATER",
+      "MOVE_POUNCE"
+    ],
+    "SPECIES_GOLURK": [
+      "MOVE_HEADLONG_RUSH"
+    ],
+    "SPECIES_GOODRA_HISUI": [
+      "MOVE_ANCIENT_POWER"
+    ],
+    "SPECIES_GRENINJA": [
+      "MOVE_SKITTER_SMACK"
+    ],
+    "SPECIES_HELIOLISK": [
+      "MOVE_POUNCE",
+      "MOVE_TRAILBLAZE"
+    ],
+    "SPECIES_HOUNDOOM": [
+      "MOVE_SCORCHING_SANDS"
+    ],
+    "SPECIES_INDEEDEE_F": [
+      "MOVE_SING",
+      "MOVE_WISH"
+    ],
+    "SPECIES_LIEPARD": [
+      "MOVE_TRAILBLAZE"
+    ],
+    "SPECIES_LOPUNNY": [
+      "MOVE_POUNCE",
+      "MOVE_TRAILBLAZE"
+    ],
+    "SPECIES_MANECTRIC": [
+      "MOVE_POUNCE",
+      "MOVE_SUPERCELL_SLAM"
+    ],
+    "SPECIES_MEDICHAM": [
+      "MOVE_COACHING"
+    ],
+    "SPECIES_MEGANIUM": [
+      "MOVE_POLLEN_PUFF"
+    ],
+    "SPECIES_MR_MIME": [
+      "MOVE_EXPANDING_FORCE"
+    ],
+    "SPECIES_MR_RIME": [
+      "MOVE_ICE_SPINNER",
+      "MOVE_SNOWSCAPE"
+    ],
+    "SPECIES_PANGORO": [
+      "MOVE_COMEUPPANCE",
+      "MOVE_HEADLONG_RUSH"
+    ],
+    "SPECIES_PINSIR": [
+      "MOVE_HARD_PRESS",
+      "MOVE_POUNCE"
+    ],
+    "SPECIES_PYROAR": [
+      "MOVE_SCORCHING_SANDS"
+    ],
+    "SPECIES_RAICHU": [
+      "MOVE_RISING_VOLTAGE"
+    ],
+    "SPECIES_RAICHU_ALOLA": [
+      "MOVE_DAZZLING_GLEAM",
+      "MOVE_RISING_VOLTAGE",
+      "MOVE_ZAP_CANNON"
+    ],
+    "SPECIES_RAMPARDOS": [
+      "MOVE_METEOR_BEAM"
+    ],
+    "SPECIES_ROSERADE": [
+      "MOVE_TRAILBLAZE"
+    ],
+    "SPECIES_ROTOM_FAN": [
+      "MOVE_AIR_SLASH"
+    ],
+    "SPECIES_ROTOM_FROST": [
+      "MOVE_BLIZZARD"
+    ],
+    "SPECIES_ROTOM_HEAT": [
+      "MOVE_OVERHEAT"
+    ],
+    "SPECIES_ROTOM_MOW": [
+      "MOVE_LEAF_STORM"
+    ],
+    "SPECIES_ROTOM_WASH": [
+      "MOVE_HYDRO_PUMP"
+    ],
+    "SPECIES_SALAMENCE": [
+      "MOVE_SLASH"
+    ],
+    "SPECIES_SAMUROTT_HISUI": [
+      "MOVE_ASSURANCE",
+      "MOVE_DIVE",
+      "MOVE_ROUND",
+      "MOVE_SNORE",
+      "MOVE_SOAK",
+      "MOVE_SUPERPOWER"
+    ],
+    "SPECIES_SCEPTILE": [
+      "MOVE_EARTH_POWER"
+    ],
+    "SPECIES_SCOLIPEDE": [
+      "MOVE_LEECH_LIFE",
+      "MOVE_POUNCE"
+    ],
+    "SPECIES_SHARPEDO": [
+      "MOVE_CHILLING_WATER"
+    ],
+    "SPECIES_SIMIPOUR": [
+      "MOVE_BELCH",
+      "MOVE_STUFF_CHEEKS"
+    ],
+    "SPECIES_SIMISAGE": [
+      "MOVE_BELCH",
+      "MOVE_GRASSY_GLIDE",
+      "MOVE_STUFF_CHEEKS"
+    ],
+    "SPECIES_SIMISEAR": [
+      "MOVE_BURNING_JEALOUSY",
+      "MOVE_STUFF_CHEEKS",
+      "MOVE_TEMPER_FLARE",
+      "MOVE_YAWN"
+    ],
+    "SPECIES_SKELEDIRGE": [
+      "MOVE_BURN_UP"
+    ],
+    "SPECIES_STARMIE": [
+      "MOVE_ICE_SPINNER"
+    ],
+    "SPECIES_STUNFISK": [
+      "MOVE_LASH_OUT"
+    ],
+    "SPECIES_SWALOT": [
+      "MOVE_CORROSIVE_GAS",
+      "MOVE_SKITTER_SMACK"
+    ],
+    "SPECIES_SWAMPERT": [
+      "MOVE_WAVE_CRASH"
+    ],
+    "SPECIES_TAUROS_PALDEA_AQUA": [
+      "MOVE_IRON_TAIL",
+      "MOVE_MEGAHORN",
+      "MOVE_ROUND",
+      "MOVE_SNORE",
+      "MOVE_UPROAR"
+    ],
+    "SPECIES_TAUROS_PALDEA_BLAZE": [
+      "MOVE_IRON_TAIL",
+      "MOVE_MEGAHORN",
+      "MOVE_ROUND",
+      "MOVE_SNORE",
+      "MOVE_UPROAR"
+    ],
+    "SPECIES_TAUROS_PALDEA_COMBAT": [
+      "MOVE_IRON_TAIL",
+      "MOVE_MEGAHORN",
+      "MOVE_ROUND",
+      "MOVE_SNORE",
+      "MOVE_UPROAR"
+    ],
+    "SPECIES_TOXTRICITY_AMPED": [
+      "MOVE_ZAP_CANNON"
+    ],
+    "SPECIES_TOXTRICITY_LOW_KEY": [
+      "MOVE_PARABOLIC_CHARGE"
+    ],
+    "SPECIES_TYPHLOSION_HISUI": [
+      "MOVE_BURN_UP",
+      "MOVE_MEGA_KICK",
+      "MOVE_ROUND",
+      "MOVE_SNORE"
+    ],
+    "SPECIES_TYRANTRUM": [
+      "MOVE_DRAGON_CHEER"
+    ],
+    "SPECIES_VANILLUXE": [
+      "MOVE_ICE_SPINNER",
+      "MOVE_SNOWSCAPE"
+    ],
+    "SPECIES_WATCHOG": [
+      "MOVE_TRAILBLAZE"
+    ],
+    "SPECIES_ZOROARK_HISUI": [
+      "MOVE_ASSURANCE",
+      "MOVE_BOUNCE",
+      "MOVE_MEGA_KICK",
+      "MOVE_PAYBACK",
+      "MOVE_ROUND",
+      "MOVE_SNORE",
+      "MOVE_UPROAR"
+    ]
+  }
+}

@@ -1692,7 +1692,7 @@ def species_blocks() -> dict[str, str]:
 def read_learnsets() -> dict[str, set[str]]:
     generator = get_generator()
     learnsets = {species: set(moves) for species, moves in generator.parse_full_learnsets().items()}
-    # Match the runtime form fallback for the event and Z-A additions as well.
+    # Match the runtime form fallback for the event, Z-A and Champions additions as well.
     family_forms = {}
     blocks = species_blocks()
     for species, body in blocks.items():
@@ -1734,7 +1734,7 @@ def read_learnsets() -> dict[str, set[str]]:
         text = generator.read_text(generator.ROOT / "src/data/pokemon" / filename)
         for match in re.finditer(r"static const u16\s+(s[A-Za-z0-9_]+)\[\]\s*=\s*\{(.*?)\};", text, re.S):
             tables.setdefault(match.group(1), set()).update(re.findall(r"MOVE_[A-Z0-9_]+", match.group(2)))
-    for filename in ("frontier_event_learnsets.h", "frontier_za_dlc_learnsets.h"):
+    for filename in ("frontier_event_learnsets.h", "frontier_za_dlc_learnsets.h", "frontier_champions_learnsets.h"):
         text = generator.read_text(generator.ROOT / "src/data/pokemon" / filename)
         arrays = {
             match.group(1): set(re.findall(r"MOVE_[A-Z0-9_]+", match.group(2)))

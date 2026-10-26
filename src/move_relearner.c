@@ -1224,6 +1224,7 @@ static u32 GetRelearnerFrontierFullMoves(struct BoxPokemon *mon, u16 *moves)
         GetFrontierFullLearnset(species),
         GetFrontierEventLearnset(species),
         GetFrontierZaDlcLearnset(species),
+        GetFrontierChampionsLearnset(species),
     };
     u32 count = 0;
 
@@ -1393,6 +1394,7 @@ static bool32 HasRelearnerFrontierFullMoves(struct BoxPokemon *boxMon)
         GetFrontierFullLearnset(species),
         GetFrontierEventLearnset(species),
         GetFrontierZaDlcLearnset(species),
+        GetFrontierChampionsLearnset(species),
     };
 
     if (species == SPECIES_NONE || species >= NUM_SPECIES)
