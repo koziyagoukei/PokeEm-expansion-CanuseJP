@@ -128,6 +128,7 @@ LilycoveCity_ContestLobby_OnFrame:
 	map_script_2 VAR_LILYCOVE_CONTEST_LOBBY_STATE, 2, LilycoveCity_ContestLobby_EventScript_TryDoLinkContestArtist
 	map_script_2 VAR_TEMP_E, 0, ContestStory_EventScript_LobbyArrival
 	map_script_2 VAR_TEMP_E, 1, FrontierStory_EventScript_LobbyDarkraiCall
+	map_script_2 VAR_TEMP_E, 2, ContestStory_EventScript_LobbyScene
 	.2byte 0
 
 LilycoveCity_ContestLobby_EventScript_TryDoContestArtist::

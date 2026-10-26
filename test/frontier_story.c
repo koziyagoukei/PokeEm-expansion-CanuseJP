@@ -50,6 +50,7 @@ static void ResetStory(void)
     VarSet(VAR_TOWER_STORY_STATE, TOWER_STORY_NOT_MET);
     VarSet(VAR_STORY_TARGET_STATES, 0);
     VarSet(VAR_STORY_TARGET_STATES_2, 0);
+    VarSet(VAR_CONTEST_STORY_SCENES, 0);
     for (u32 i = FLAG_STORY_RESCUED_TOWER; i <= FLAG_STORY_RESCUED_CONTEST; i++)
         FlagClear(i);
     VarSet(VAR_FRONTIER_FACILITY, FRONTIER_FACILITY_TOWER);
@@ -474,4 +475,85 @@ TEST("Frontier story: people leave their lobby once the network lets them go")
     gSpecialVar_0x8004 = STORY_TARGET_IKUE;
     FrontierStory_IsTargetHere();
     EXPECT(!gSpecialVar_Result);
+}
+
+static bool32 ContestSceneDue(void)
+{
+    FrontierStory_CheckContestScene();
+    return gSpecialVar_Result;
+}
+
+// Gives the first party Pokémon a Master Rank win in the first `count` categories.
+static void WinMasterRanks(u32 count)
+{
+    u8 rank = 4;
+
+    for (u32 i = 0; i < count; i++)
+        SetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_COOL_RIBBON + i, &rank);
+}
+
+TEST("Frontier story: the contest's scenes follow the second to fifth Master Rank categories")
+{
+    ResetStory();
+    ZeroPlayerPartyMons();
+    CreateMon(&gParties[B_TRAINER_PLAYER][0], SPECIES_SEVIPER, 50, 0, OTID_STRUCT_PLAYER_ID);
+    FlagSet(FLAG_STORY_DARKRAI_JOINED);
+    WinMasterRanks(1);
+    while (TalkToTarget(STORY_TARGET_YORIKO))
+        ;
+    EXPECT_EQ(TargetState(STORY_TARGET_YORIKO), TARGET_STORY_WISH);
+    EXPECT(!ContestSceneDue());
+
+    for (u32 scene = 0; scene < CONTEST_STORY_SCENE_COUNT; scene++)
+    {
+        WinMasterRanks(scene + 2);
+        EXPECT(ContestSceneDue());
+        VarSet(VAR_CONTEST_STORY_SCENES, scene + 1);
+        EXPECT(!ContestSceneDue());
+    }
+
+    // Each waits for Darkrai, and none comes once Yoriko is back.
+    VarSet(VAR_CONTEST_STORY_SCENES, 0);
+    FlagClear(FLAG_STORY_DARKRAI_JOINED);
+    EXPECT(!ContestSceneDue());
+    FlagSet(FLAG_STORY_DARKRAI_JOINED);
+    EXPECT(ContestSceneDue());
+    VarSet(VAR_STORY_TARGET_STATES_2, TARGET_STORY_RETURNED << 8);
+    EXPECT(!ContestSceneDue());
+    ZeroPlayerPartyMons();
+}
+
+TEST("Frontier story: the contest's scenes change with every count of rescues")
+{
+    static const u8 sKazuki[] = _("カズキ");
+    static u8 previous[2][sizeof(gStringVar4)];
+
+    ResetStory();
+    for (u32 scene = 0; scene < CONTEST_STORY_SCENE_COUNT; scene++)
+    {
+        VarSet(VAR_CONTEST_STORY_SCENES, scene);
+        for (u32 rescued = 0; rescued <= STORY_TARGET_COUNT - 1; rescued++)
+        {
+            for (u32 i = 0; i < STORY_TARGET_COUNT; i++)
+            {
+                if (i < rescued) FlagSet(FLAG_STORY_RESCUED_TOWER + i); else FlagClear(FLAG_STORY_RESCUED_TOWER + i);
+            }
+            for (u32 speaker = CONTEST_SCENE_YORIKO; speaker <= CONTEST_SCENE_DARKRAI; speaker++)
+            {
+                gSpecialVar_0x8004 = speaker;
+                FrontierStory_BufferContestSceneBranch();
+                EXPECT_NE(gStringVar4[0], EOS);
+                // A new line for none to four rescued; past that, the four-or-more one stays.
+                if (rescued > 0)
+                    EXPECT_EQ(StringCompare(gStringVar4, previous[speaker]) == 0, rescued >= STORY_RESCUE_STAGE_COUNT);
+                StringCopy(previous[speaker], gStringVar4);
+            }
+            if (rescued == 1)
+                EXPECT_EQ(StringCompare(gStringVar2, sKazuki), 0);
+        }
+    }
+    VarSet(VAR_CONTEST_STORY_SCENES, CONTEST_STORY_SCENE_COUNT);
+    gSpecialVar_0x8004 = CONTEST_SCENE_DARKRAI;
+    FrontierStory_BufferContestSceneBranch();
+    EXPECT_EQ(gStringVar4[0], EOS);
 }

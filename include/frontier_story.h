@@ -26,6 +26,8 @@ void FrontierStory_CheckTargetApproach(void);
 void FrontierStory_TargetComesOver(void);
 void FrontierStory_BufferTargetTalk(void);
 void FrontierStory_BufferTargetBranch(void);
+void FrontierStory_CheckContestScene(void);
+void FrontierStory_BufferContestSceneBranch(void);
 
 // Shared progress and the camp visitors.
 void FrontierStory_CountRescued(void);

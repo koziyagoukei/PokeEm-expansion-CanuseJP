@@ -28,6 +28,7 @@
 
 #include "data/frontier_story_named.h"
 #include "data/frontier_story_targets.h"
+#include "data/frontier_story_contest.h"
 
 // The Frontier never asks for less than level 50, so story battles don't either.
 #define STORY_BATTLE_MIN_LEVEL 50
@@ -344,39 +345,41 @@ void FrontierStory_ShouldSuggestInn(void)
                       && !FlagGet(FLAG_STORY_INN_OPEN) && CountCuredPeople() >= 2;
 }
 
-static bool32 HasRankRibbon(struct BoxPokemon *boxMon, u32 rank)
+// One bit per contest category this Pokémon has won at the rank or above.
+static u32 GetRankRibbonCategories(struct BoxPokemon *boxMon, u32 rank)
 {
-    u32 field;
+    u32 field, categories = 0;
 
     if (!GetBoxMonData(boxMon, MON_DATA_SANITY_HAS_SPECIES))
-        return FALSE;
+        return 0;
     for (field = MON_DATA_COOL_RIBBON; field <= MON_DATA_TOUGH_RIBBON; field++)
     {
         if (GetBoxMonData(boxMon, field) >= rank)
-            return TRUE;
+            categories |= 1u << (field - MON_DATA_COOL_RIBBON);
     }
-    return FALSE;
+    return categories;
+}
+
+// The categories won at this rank, by any of the player's Pokémon. Stops looking once it has
+// `enough` of them.
+static u32 CountWonContestCategories(u32 rank, u32 enough)
+{
+    u32 i, j, categories = 0;
+
+    for (i = 0; i < PARTY_SIZE && (u32)__builtin_popcount(categories) < enough; i++)
+        categories |= GetRankRibbonCategories(&gParties[B_TRAINER_PLAYER][i].box, rank);
+    for (i = 0; i < TOTAL_BOXES_COUNT; i++)
+    {
+        for (j = 0; j < IN_BOX_COUNT && (u32)__builtin_popcount(categories) < enough; j++)
+            categories |= GetRankRibbonCategories(GetBoxedMonPtr(i, j), rank);
+    }
+    return __builtin_popcount(categories);
 }
 
 // A contest win at this rank in any category, by any of the player's Pokémon.
 static bool32 HasWonContestRank(u32 rank)
 {
-    u32 i, j;
-
-    for (i = 0; i < PARTY_SIZE; i++)
-    {
-        if (HasRankRibbon(&gParties[B_TRAINER_PLAYER][i].box, rank))
-            return TRUE;
-    }
-    for (i = 0; i < TOTAL_BOXES_COUNT; i++)
-    {
-        for (j = 0; j < IN_BOX_COUNT; j++)
-        {
-            if (HasRankRibbon(GetBoxedMonPtr(i, j), rank))
-                return TRUE;
-        }
-    }
-    return FALSE;
+    return CountWonContestCategories(rank, 1) != 0;
 }
 
 // Darkrai joins after the first Silver Symbol or the first Hyper Rank win in any category.
@@ -541,6 +544,40 @@ void FrontierStory_BufferTargetBranch(void)
     StringCopy(gStringVar2, gone == 1 ? sStoryTargetTexts[goneTarget].name : sText_SeveralPeople);
     StringExpandPlaceholders(gStringVar4, text);
     gSpecialVar_Result = TRUE;
+}
+
+// On entering the contest lobby: whether the next of its scenes about the world is due. One
+// follows each category won at Master Rank after the first, while Yoriko wavers and once Darkrai
+// is there to explain.
+void FrontierStory_CheckContestScene(void)
+{
+    u32 seen = VarGet(VAR_CONTEST_STORY_SCENES);
+
+    gSpecialVar_Result = IsStoryActive() && FlagGet(FLAG_STORY_DARKRAI_JOINED)
+                      && seen < CONTEST_STORY_SCENE_COUNT
+                      && GetTargetState(STORY_TARGET_YORIKO) == TARGET_STORY_WISH
+                      && CountWonContestCategories(RANK_RIBBON_MASTER, seen + 2) >= seen + 2;
+}
+
+// VAR_0x8004: CONTEST_SCENE_*. Puts in gStringVar4 that speaker's lines in the current contest
+// scene that change with the rescues so far.
+void FrontierStory_BufferContestSceneBranch(void)
+{
+    u32 scene = VarGet(VAR_CONTEST_STORY_SCENES), stage = 0, i;
+
+    gStringVar4[0] = EOS;
+    if (scene >= CONTEST_STORY_SCENE_COUNT || gSpecialVar_0x8004 > CONTEST_SCENE_DARKRAI)
+        return;
+    for (i = 0; i < STORY_TARGET_COUNT; i++)
+    {
+        if (!FlagGet(sRescuedFlags[i]))
+            continue;
+        if (stage++ == 0)
+            StringCopy(gStringVar2, sStoryTargetTexts[i].name);
+    }
+    if (stage >= STORY_RESCUE_STAGE_COUNT)
+        stage = STORY_RESCUE_STAGE_COUNT - 1;
+    StringExpandPlaceholders(gStringVar4, sContestSceneBranches[scene][gSpecialVar_0x8004][stage]);
 }
 
 // Once the cure is known, someone who remembered themself may come to the camp.

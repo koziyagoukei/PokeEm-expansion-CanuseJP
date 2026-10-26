@@ -31,6 +31,15 @@
 #define TARGET_TALK_HAPPY       0
 #define TARGET_TALK_WISH        1
 
+// The contest's scenes about the world, one after each category won at Master Rank past the
+// first (VAR_CONTEST_STORY_SCENES counts those seen). VAR_0x8004 for
+// FrontierStory_BufferContestSceneBranch is whose words: CONTEST_SCENE_YORIKO or _DARKRAI.
+#define CONTEST_STORY_SCENE_COUNT 4
+#define CONTEST_SCENE_YORIKO      0
+#define CONTEST_SCENE_DARKRAI     1
+// Lines that change with the rescues so far: none, one, two, three, then four or more.
+#define STORY_RESCUE_STAGE_COUNT  5
+
 // Memory of a Frontier Brain or seventh-battle guest, stored in two flags per person.
 #define NAMED_STORY_INFECTED    0
 #define NAMED_STORY_UNEASY      1 // Lost to the player once and questioned their own words.

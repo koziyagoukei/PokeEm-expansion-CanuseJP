@@ -600,6 +600,80 @@ ContestStory_EventScript_LobbyArrival::
 	setvar VAR_0x8004, STORY_TARGET_YORIKO
 	goto FrontierStory_EventScript_TargetArrival
 
+@ Then (VAR_TEMP_E 2 -> 3): after each category won at Master Rank past the first, Yoriko comes
+@ over with something of the network on her mind, and Darkrai tells the player what it is.
+@ Their lines that change with the rescues so far are in src/data/frontier_story_contest.h.
+ContestStory_EventScript_LobbyScene::
+	setvar VAR_TEMP_E, 3
+	special FrontierStory_CheckContestScene
+	goto_if_eq VAR_RESULT, FALSE, FrontierStory_EventScript_ArrivalEnd
+	lockall
+	playse SE_PIN
+	setvar VAR_0x8004, STORY_TARGET_YORIKO
+	special FrontierStory_TargetComesOver
+	waitmovement VAR_0x8005
+	goto_if_eq VAR_RESULT, FALSE, ContestStory_EventScript_SceneTalk
+	waitmovement LOCALID_PLAYER
+	setvar VAR_TEMP_F, 1
+ContestStory_EventScript_SceneTalk::
+	switch VAR_CONTEST_STORY_SCENES
+	case 0, ContestStory_EventScript_SceneApplause
+	case 1, ContestStory_EventScript_SceneHandshake
+	case 2, ContestStory_EventScript_ScenePartners
+	case 3, ContestStory_EventScript_SceneSameDay
+	releaseall
+	end
+
+ContestStory_EventScript_SceneApplause::
+	msgbox ContestStory_Text_YorikoApplause, MSGBOX_DEFAULT
+	call ContestStory_EventScript_DarkraiTakesOver
+	msgbox ContestStory_Text_DarkraiApplause, MSGBOX_DEFAULT
+	goto ContestStory_EventScript_SceneEnd
+
+ContestStory_EventScript_SceneHandshake::
+	msgbox ContestStory_Text_YorikoHandshake, MSGBOX_DEFAULT
+	call ContestStory_EventScript_DarkraiTakesOver
+	msgbox ContestStory_Text_DarkraiHandshake, MSGBOX_DEFAULT
+	goto ContestStory_EventScript_SceneEnd
+
+ContestStory_EventScript_ScenePartners::
+	msgbox ContestStory_Text_YorikoPartners, MSGBOX_DEFAULT
+	call ContestStory_EventScript_DarkraiTakesOver
+	msgbox ContestStory_Text_DarkraiPartners, MSGBOX_DEFAULT
+	goto ContestStory_EventScript_SceneEnd
+
+ContestStory_EventScript_SceneSameDay::
+	msgbox ContestStory_Text_YorikoSameDay, MSGBOX_DEFAULT
+	call ContestStory_EventScript_DarkraiTakesOver
+	msgbox ContestStory_Text_DarkraiSameDay, MSGBOX_DEFAULT
+	goto ContestStory_EventScript_SceneEnd
+
+@ Yoriko's lines for the rescues so far; she goes back to her place, and Darkrai's voice comes.
+ContestStory_EventScript_DarkraiTakesOver::
+	setvar VAR_0x8004, CONTEST_SCENE_YORIKO
+	special FrontierStory_BufferContestSceneBranch
+	msgbox gStringVar4, MSGBOX_DEFAULT
+	closemessage
+	call_if_eq VAR_TEMP_F, 1, ContestStory_EventScript_YorikoGoesBack
+	playse SE_M_NIGHTMARE
+	waitse
+	msgbox FrontierStory_Text_DarkraiReachesOut, MSGBOX_DEFAULT
+	return
+
+ContestStory_EventScript_YorikoGoesBack::
+	setvar VAR_TEMP_F, 0
+	special FrontierStory_ReturnFromApproach
+	waitmovement VAR_0x8005
+	return
+
+ContestStory_EventScript_SceneEnd::
+	setvar VAR_0x8004, CONTEST_SCENE_DARKRAI
+	special FrontierStory_BufferContestSceneBranch
+	msgbox gStringVar4, MSGBOX_DEFAULT
+	addvar VAR_CONTEST_STORY_SCENES, 1
+	releaseall
+	end
+
 @ ---------------------------------------------------------------------------
 @ The camp: Kazuki after his rescue, and visitors who remembered themselves
 
@@ -1192,3 +1266,142 @@ TowerStory_Text_ResortKazukiWon:
 TowerStory_Text_ResortKazukiLater:
 	.string "{JPN}カズキ『そっか！\n"
 	.string "また こんど しようね！』$"
+
+@ ---------------------------------------------------------------------------
+@ Text: the contest's scenes about the world
+
+ContestStory_Text_YorikoApplause:
+	.string "{JPN}ヨリコ『{PLAYER}さん！\n"
+	.string "2つめの ぶもんも ゆうしょうね。\p"
+	.string "さっきの はくしゅ きこえた？\n"
+	.string "みんな おなじ ところで\l"
+	.string "おなじ だけ てを たたくの。\p"
+	.string "まるで ひとつの おおきな\n"
+	.string "おとに つつまれる みたい。\p"
+	.string "……でも あなたが ほめてくれた\n"
+	.string "しっぽの こと まだ かんがえるの。』$"
+
+ContestStory_Text_DarkraiApplause:
+	.string "{JPN}ダークライ『さっきの はくしゅを\n"
+	.string "きいて どう かんじた。\p"
+	.string "この かいじょうは げんじつの\n"
+	.string "たてものと こころの せかいが\l"
+	.string "かさなっている。\p"
+	.string "ここで ひびく はくしゅには\n"
+	.string "この ばに いない ものの\l"
+	.string "こころも まじっている。\p"
+	.string "だから ひとつの おとの ように\n"
+	.string "ぴたりと そろうのだ。\p"
+	.string "つながった ものたちは\n"
+	.string "きもちも きおくも ながれこみ\l"
+	.string "じぶんと たにんの さかいが\l"
+	.string "あいまいに なっている。\p"
+	.string "だが みなが ひとつの こころに\n"
+	.string "なった わけでは ない。\l"
+	.string "ヨリコは ヨリコの ままだ。\p"
+	.string "えがおの うらで くるしんでいる\n"
+	.string "わけでも ない。\l"
+	.string "ヨリコは ほんとうに しあわせなのだ。\p"
+	.string "あなたの かんそうが ちがったのは\n"
+	.string "あなたが つながっていないからだ。\p"
+	.string "ヨリコは はじめて\n"
+	.string "つながりの そとから とどいた\l"
+	.string "ことばを きいたのだ。』$"
+
+ContestStory_Text_YorikoHandshake:
+	.string "{JPN}ヨリコ『3つめの ぶもんも\n"
+	.string "ゆうしょうね。 おめでとう。\p"
+	.string "……ねえ あくしゅ しましょう。\n"
+	.string "てを つなぐと きもちが\l"
+	.string "もっと つたわる きが するの。』\p"
+	.string "{PLAYER}は ヨリコと\n"
+	.string "あくしゅした。\p"
+	.string "ヨリコ『……ふしぎ。\n"
+	.string "あなたの きもちは\l"
+	.string "ながれこんで こないのね。\p"
+	.string "てを つないで いるのに。』$"
+
+ContestStory_Text_DarkraiHandshake:
+	.string "{JPN}ダークライ『……しんぱい いらない。\n"
+	.string "あなたには うつらない。\p"
+	.string "かたちを かえた ポケルスは\n"
+	.string "ドクモチ という もちや\l"
+	.string "ふれあい みずを とおして\l"
+	.string "ひとと ポケモンに ひろがった。\p"
+	.string "だが あなたや てんしゅ\n"
+	.string "あなたの りょうしんの ように\l"
+	.string "とおい せかいから きた ひとには\l"
+	.string "うつらないのだ。\p"
+	.string "……ひとつだけ きを つけてほしい。\n"
+	.string "ドクモチ だけは べつだ。\p"
+	.string "うつらない ものでも あれを たべれば\n"
+	.string "こころを しばられて しまう。\p"
+	.string "どこかで みかけても\n"
+	.string "けっして くちに しては いけない。』$"
+
+ContestStory_Text_YorikoPartners:
+	.string "{JPN}ヨリコ『4つめの ぶもんも ゆうしょう！\n"
+	.string "すごいわ。\p"
+	.string "……ねえ ひとつ きづいたの。\n"
+	.string "あなたの ポケモン\l"
+	.string "えんぎの あいだ ときどき\l"
+	.string "あなたの ほうを うかがって いたわ。\p"
+	.string "まだ すこし えんりょ してる みたい。\n"
+	.string "それなのに あんなに\l"
+	.string "すてきな えんぎが できるのね。』$"
+
+ContestStory_Text_DarkraiPartners:
+	.string "{JPN}ダークライ『ヨリコの いう とおりだ。\p"
+	.string "あなたの てもちの おおくは\n"
+	.string "じぶんの いしで この せかいへ\l"
+	.string "きたのでは ない。\p"
+	.string "とつぜん つれて こられたのだ。\n"
+	.string "なついて いないのは その ためだ。\l"
+	.string "あなたの せいでは ない。\p"
+	.string "そして あの こたちは みな\n"
+	.string "ふつうの ポケルスに\l"
+	.string "かかった ことが ある。\p"
+	.string "ふつうの ポケルスに かかった\n"
+	.string "ポケモンには かたちを かえた\l"
+	.string "ポケルスは うつらない。\l"
+	.string "かかっている さいちゅうでも だ。\p"
+	.string "……だから あの こたちが\n"
+	.string "えらばれたのだろう。\p"
+	.string "この せかいで\n"
+	.string "あなたと たたかう ために。』$"
+
+ContestStory_Text_YorikoSameDay:
+	.string "{JPN}ヨリコ『5つ ぜんぶの ぶもんで\n"
+	.string "ゆうしょう…… おめでとう。\p"
+	.string "……ねえ うけつけの はりがみ みた？\n"
+	.string "「つぎの コンテストは あした」って\l"
+	.string "かいて あるの。\p"
+	.string "でも あの はりがみ\n"
+	.string "ずっと まえから おなじ なのよ。\p"
+	.string "だれも こまらないわ。\n"
+	.string "きょうと おなじ あしたが\l"
+	.string "くるだけ だもの。\p"
+	.string "……そう おもって いたのに。』$"
+
+ContestStory_Text_DarkraiSameDay:
+	.string "{JPN}ダークライ『この せかいの ひとびとは\n"
+	.string "ゆめを みた まま くらしている。\p"
+	.string "わらい はたらき はくしゅを する。\n"
+	.string "だが すすむ ことも\l"
+	.string "もどる ことも なく\l"
+	.string "ただ きょうを くりかえしている。\p"
+	.string "もし そとから わざわいが きても\n"
+	.string "それを とめようと する ちからは\l"
+	.string "もう はたらかない。\p"
+	.string "この せかいは そうして\n"
+	.string "しずかに おわりを むかえて しまう。\p"
+	.string "しあわせが にせものだから\n"
+	.string "よびもどすのでは ない。\p"
+	.string "かわっていく げんじつに\n"
+	.string "むきあう ちからを\l"
+	.string "とりもどして ほしいのだ。\p"
+	.string "ここは げんじつと こころの せかいが\n"
+	.string "かさなる ばしょ。\p"
+	.string "ここで ぶつける きもちは\n"
+	.string "きっと ヨリコの こころの\l"
+	.string "おくまで とどく。』$"

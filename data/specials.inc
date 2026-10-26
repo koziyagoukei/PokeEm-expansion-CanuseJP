@@ -720,3 +720,5 @@ gSpecials::
 	def_special FrontierStory_TargetComesOver
 	def_special FrontierStory_BufferTargetTalk
 	def_special FrontierStory_BufferTargetBranch
+	def_special FrontierStory_CheckContestScene
+	def_special FrontierStory_BufferContestSceneBranch
