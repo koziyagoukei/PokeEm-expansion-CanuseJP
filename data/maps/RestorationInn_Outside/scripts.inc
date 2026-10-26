@@ -4,4 +4,5 @@ RestorationInn_Outside_MapScripts::
 
 RestorationInn_Outside_OnTransition:
 	setflag FLAG_STORY_INN_VISITED
+	call InnStory_EventScript_SetupOutside
 	end

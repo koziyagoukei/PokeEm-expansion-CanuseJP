@@ -17032,3 +17032,43 @@ EVs: 252 HP / 252 SpA / 4 SpD
 - Ice Beam
 - Dragon Pulse
 - Recover
+
+=== TRAINER_EISUKE_RELEASE ===
+Name: エイスケ
+Class: Triathlete
+Pic: Swimming Triathlete M
+Gender: Male
+Music: Swimmer
+Double Battle: No
+AI: Basic Trainer
+Multi Party: Half
+
+Starmie @ Life Orb
+Ability: Analytic
+Level: 50
+Nature: Timid
+EVs: 4 HP / 252 SpA / 252 Spe
+- Hydro Pump
+- Psychic
+- Ice Beam
+- Thunderbolt
+
+Manectric @ Magnet
+Ability: Lightning Rod
+Level: 50
+Nature: Timid
+EVs: 4 HP / 252 SpA / 252 Spe
+- Thunderbolt
+- Flamethrower
+- Volt Switch
+- Protect
+
+Gyarados @ Leftovers
+Ability: Intimidate
+Level: 50
+Nature: Adamant
+EVs: 252 HP / 252 Atk / 4 Spe
+- Waterfall
+- Dragon Dance
+- Earthquake
+- Ice Fang

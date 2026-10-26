@@ -16,7 +16,7 @@ UltraFrontieHub_OnLoad_Done:
 UltraFrontieHub_OnFrame:
 	map_script_2 VAR_FRONTIER_INTRO_STATE, FRONTIER_INTRO_ARRIVAL, FrontierIntro_EventScript_Arrival
 	map_script_2 VAR_TOWER_STORY_STATE, TOWER_STORY_RETURNED, TowerStory_EventScript_HubCare
-	map_script_2 VAR_TEMP_5, 1, ContestStory_EventScript_HubCare
+	map_script_2 VAR_TEMP_5, 1, FrontierStory_EventScript_HubRescue
 	map_script_2 VAR_TEMP_2, 0, FrontierStory_EventScript_HubArrival
 	.2byte 0
 

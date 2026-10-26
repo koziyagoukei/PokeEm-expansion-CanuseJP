@@ -64,6 +64,19 @@ static const u16 sRescuedFlags[] =
     FLAG_STORY_RESCUED_CONTEST,
 };
 
+// Where each person stands in their lobby.
+static const u8 sStoryTargetLocalIds[STORY_TARGET_COUNT] =
+{
+    [STORY_TARGET_KAZUKI] = LOCALID_TOWER_LOBBY_KAZUKI,
+    [STORY_TARGET_REIKA]  = LOCALID_DOME_LOBBY_REIKA,
+    [STORY_TARGET_IKUE]   = LOCALID_PALACE_LOBBY_IKUE,
+    [STORY_TARGET_EISUKE] = LOCALID_ARENA_LOBBY_EISUKE,
+    [STORY_TARGET_TOSHIO] = LOCALID_FACTORY_LOBBY_TOSHIO,
+    [STORY_TARGET_YAYOI]  = LOCALID_PIKE_LOBBY_YAYOI,
+    [STORY_TARGET_NOBUO]  = LOCALID_PYRAMID_LOBBY_NOBUO,
+    [STORY_TARGET_YORIKO] = LOCALID_CONTEST_LOBBY_YORIKO,
+};
+
 static bool32 IsStoryActive(void)
 {
     // Saves from before the opening keep the old Frontier as it was.
@@ -442,9 +455,47 @@ static bool32 HasReachedWish(u32 target)
     return FlagGet(gFrontierBrainInfo[target].silverSymbolFlag);
 }
 
+// Their Gold Symbol step; at the contest, the last of its scenes after all five Master Rank wins.
+static bool32 HasReachedRescue(u32 target)
+{
+    if (target == STORY_TARGET_YORIKO)
+        return VarGet(VAR_CONTEST_STORY_SCENES) >= CONTEST_STORY_SCENE_COUNT;
+    return FlagGet(gFrontierBrainInfo[target].goldSymbolFlag);
+}
+
 static bool32 HasLeftNetwork(u32 target)
 {
     return FlagGet(sRescuedFlags[target]) || GetTargetState(target) >= TARGET_STORY_RETURNED;
+}
+
+// TARGET_FEVER_*: the fever that talking to them reaches now, after any steps they have yet to show.
+static u32 GetFeverAhead(u32 target)
+{
+    if (!IsStoryActive() || target == STORY_TARGET_KAZUKI || target >= STORY_TARGET_COUNT
+     || sStoryTargetRescueTexts[target][RESCUE_TEXT_FEVER] == NULL
+     || GetTargetState(target) > TARGET_STORY_WISH || !HasReachedRescue(target))
+        return TARGET_FEVER_NONE;
+    return FlagGet(FLAG_STORY_DARKRAI_JOINED) ? TARGET_FEVER_RELEASE : TARGET_FEVER_ALONE;
+}
+
+// TARGET_FEVER_*: whether their fever comes as soon as the player talks to them.
+static u32 GetTargetFever(u32 target)
+{
+    u32 fever = GetFeverAhead(target);
+
+    return fever != TARGET_FEVER_NONE && GetTargetState(target) == TARGET_STORY_WISH ? fever : TARGET_FEVER_NONE;
+}
+
+// Each kind of fever brings them over to the player once (VAR_STORY_TARGET_FEVERS).
+static bool32 TryMarkFeverShown(u32 target, u32 fever)
+{
+    u32 bit = 1u << (target * 2 + (fever == TARGET_FEVER_RELEASE));
+    u32 shown = VarGet(VAR_STORY_TARGET_FEVERS);
+
+    if (fever == TARGET_FEVER_NONE || (shown & bit))
+        return FALSE;
+    VarSet(VAR_STORY_TARGET_FEVERS, shown | bit);
+    return TRUE;
 }
 
 // VAR_0x8004: STORY_TARGET_*. Whether they are in their lobby: until the network lets them go.
@@ -456,22 +507,35 @@ void FrontierStory_IsTargetHere(void)
 }
 
 // VAR_0x8004: STORY_TARGET_* other than Kazuki. Whether they come over to the player on entering
-// the lobby: the first time, and the first time after the Silver Symbol (Master Rank) step.
+// the lobby: the first time, the first time after the Silver Symbol (Master Rank) step, and the
+// first time their fever comes, alone and then with Darkrai there for the release battle.
 void FrontierStory_CheckTargetApproach(void)
 {
     u32 target = gSpecialVar_0x8004, state;
+    bool32 feverNew;
 
     gSpecialVar_Result = FALSE;
     if (!IsStoryActive() || target == STORY_TARGET_KAZUKI || target >= STORY_TARGET_COUNT)
         return;
     state = GetTargetState(target);
-    gSpecialVar_Result = state == TARGET_STORY_NOT_MET || (state == TARGET_STORY_MET && HasReachedWish(target));
+    // The talk goes on to the fever after any earlier steps, so that counts as shown too.
+    feverNew = TryMarkFeverShown(target, GetFeverAhead(target));
+    gSpecialVar_Result = feverNew || state == TARGET_STORY_NOT_MET
+                      || (state == TARGET_STORY_MET && HasReachedWish(target));
+}
+
+// VAR_0x8004: STORY_TARGET_*. VAR_RESULT: TARGET_FEVER_*, whether talking to them now brings on
+// their fever.
+void FrontierStory_CheckTargetFever(void)
+{
+    gSpecialVar_Result = GetTargetFever(gSpecialVar_0x8004);
 }
 
 // VAR_0x8004: STORY_TARGET_* other than Kazuki. Puts what they say now in gStringVar4 and moves
 // their story on: the first meeting, then the change after the Silver Symbol (Master Rank) step.
 // VAR_0x8005 becomes the TARGET_TALK_* for FrontierStory_BufferTargetBranch; VAR_RESULT is TRUE
-// if they go straight on to their next step (the player already had the symbol when they met).
+// if they go straight on to their next step (the player already reached it when they met), up to
+// their fever.
 void FrontierStory_BufferTargetTalk(void)
 {
     u32 target = gSpecialVar_0x8004;
@@ -498,6 +562,7 @@ void FrontierStory_BufferTargetTalk(void)
             text = texts->wish;
             SetTargetState(target, TARGET_STORY_WISH);
             gSpecialVar_0x8005 = TARGET_TALK_WISH;
+            gSpecialVar_Result = GetTargetFever(target) != TARGET_FEVER_NONE;
         }
         break;
     default:
@@ -546,12 +611,24 @@ void FrontierStory_BufferTargetBranch(void)
     gSpecialVar_Result = TRUE;
 }
 
-// VAR_0x8004: STORY_TARGET_* other than Kazuki, VAR_0x8005: their TARGET_STORY_*.
-void FrontierStory_SetTargetStep(void)
+// For each person's release battle and cure: the cook and Pokevirus in their lobby, how they look
+// in the hub, and their Pokénav entry.
+struct StoryTargetRescue
 {
-    if (gSpecialVar_0x8004 != STORY_TARGET_KAZUKI && gSpecialVar_0x8004 < STORY_TARGET_COUNT)
-        SetTargetState(gSpecialVar_0x8004, gSpecialVar_0x8005);
-}
+    u8 cookLocalId;
+    u8 pokevirusLocalId;
+    u16 graphicsId;
+    u16 matchCallTrainer;
+};
+
+static const struct StoryTargetRescue sStoryTargetRescues[STORY_TARGET_COUNT] =
+{
+    [STORY_TARGET_EISUKE] = {LOCALID_ARENA_LOBBY_COOK, LOCALID_ARENA_LOBBY_POKEVIRUS, OBJ_EVENT_GFX_RUNNING_TRIATHLETE_M, TRAINER_ISAIAH_1},
+    [STORY_TARGET_YORIKO] = {LOCALID_CONTEST_LOBBY_COOK, LOCALID_CONTEST_LOBBY_POKEVIRUS, OBJ_EVENT_GFX_BEAUTY, TRAINER_JESSICA_1},
+};
+
+// The person whose release battle or cure is playing; kept across the battle. Not saved.
+EWRAM_DATA static u8 sRescueTarget = 0;
 
 // VAR_RESULT: someone other than Kazuki whose mind is back but who is not cured yet, on their way
 // to the hub after their release battle; STORY_TARGET_COUNT if nobody is.
@@ -572,13 +649,73 @@ void FrontierStory_FindReturnedTarget(void)
     }
 }
 
-// Yoriko's release battle opens after the last of the contest's scenes, which follows the fifth
-// category won at Master Rank.
-void FrontierStory_IsContestReleaseReady(void)
+// VAR_0x8004: STORY_TARGET_* other than Kazuki. Starts their fever, release battle or cure scene;
+// their name goes in gStringVar1.
+void FrontierStory_StartRescueScene(void)
 {
-    gSpecialVar_Result = IsStoryActive() && FlagGet(FLAG_STORY_DARKRAI_JOINED)
-                      && GetTargetState(STORY_TARGET_YORIKO) == TARGET_STORY_WISH
-                      && VarGet(VAR_CONTEST_STORY_SCENES) >= CONTEST_STORY_SCENE_COUNT;
+    if (gSpecialVar_0x8004 == STORY_TARGET_KAZUKI || gSpecialVar_0x8004 >= STORY_TARGET_COUNT)
+        return;
+    sRescueTarget = gSpecialVar_0x8004;
+    TryMarkFeverShown(sRescueTarget, GetTargetFever(sRescueTarget));
+    StringCopy(gStringVar1, sStoryTargetTexts[sRescueTarget].name);
+}
+
+// For the current scene: VAR_0x8004, 0x8005 and 0x8006 become the local IDs of the person, the
+// cook and Pokevirus in their lobby, and VAR_RESULT the person (STORY_TARGET_*). Their name goes
+// in gStringVar1 again, in case a battle overwrote it.
+void FrontierStory_GetRescueScene(void)
+{
+    gSpecialVar_0x8004 = sStoryTargetLocalIds[sRescueTarget];
+    gSpecialVar_0x8005 = sStoryTargetRescues[sRescueTarget].cookLocalId;
+    gSpecialVar_0x8006 = sStoryTargetRescues[sRescueTarget].pokevirusLocalId;
+    gSpecialVar_Result = sRescueTarget;
+    StringCopy(gStringVar1, sStoryTargetTexts[sRescueTarget].name);
+}
+
+// VAR_0x8004: RESCUE_TEXT_*. That part of the current scene goes in gStringVar4; VAR_RESULT is FALSE
+// if the person has none.
+void FrontierStory_BufferRescueText(void)
+{
+    const u8 *text = NULL;
+
+    if (gSpecialVar_0x8004 < RESCUE_TEXT_COUNT)
+        text = sStoryTargetRescueTexts[sRescueTarget][gSpecialVar_0x8004];
+    gStringVar4[0] = EOS;
+    gSpecialVar_Result = text != NULL;
+    if (text != NULL)
+        StringExpandPlaceholders(gStringVar4, text);
+}
+
+// Won the release battle: the person is on their way to the hub.
+void FrontierStory_ReturnRescueTarget(void)
+{
+    if (sRescueTarget != STORY_TARGET_KAZUKI)
+        SetTargetState(sRescueTarget, TARGET_STORY_RETURNED);
+}
+
+// On entering the hub with someone to cure: they become the current scene, shown as themselves.
+void FrontierStory_PrepareHubRescue(void)
+{
+    FrontierStory_FindReturnedTarget();
+    if (gSpecialVar_Result >= STORY_TARGET_COUNT)
+        return;
+    sRescueTarget = gSpecialVar_Result;
+    VarSet(VAR_HUB_RESCUED_GFX, sStoryTargetRescues[sRescueTarget].graphicsId);
+}
+
+// For register_matchcall's steps: VAR_0x8004 and VAR_0x8000 become the person's Pokénav entry.
+void FrontierStory_GetRescueMatchCall(void)
+{
+    gSpecialVar_0x8004 = gSpecialVar_0x8000 = sStoryTargetRescues[sRescueTarget].matchCallTrainer;
+}
+
+// Cured: the person is rescued.
+void FrontierStory_FinishRescue(void)
+{
+    if (sRescueTarget == STORY_TARGET_KAZUKI)
+        return;
+    SetTargetState(sRescueTarget, TARGET_STORY_RESCUED);
+    FlagSet(sRescuedFlags[sRescueTarget]);
 }
 
 // On entering the contest lobby: whether the next of its scenes about the world is due. One
@@ -972,18 +1109,6 @@ void FrontierStory_ApproachPlayer(void)
     gSpecialVar_Result = StartApproach(gSpecialVar_0x8004, FALSE);
 }
 
-// Where each person stands in their lobby.
-static const u8 sStoryTargetLocalIds[STORY_TARGET_COUNT] =
-{
-    [STORY_TARGET_KAZUKI] = LOCALID_TOWER_LOBBY_KAZUKI,
-    [STORY_TARGET_REIKA]  = LOCALID_DOME_LOBBY_REIKA,
-    [STORY_TARGET_IKUE]   = LOCALID_PALACE_LOBBY_IKUE,
-    [STORY_TARGET_EISUKE] = LOCALID_ARENA_LOBBY_EISUKE,
-    [STORY_TARGET_TOSHIO] = LOCALID_FACTORY_LOBBY_TOSHIO,
-    [STORY_TARGET_YAYOI]  = LOCALID_PIKE_LOBBY_YAYOI,
-    [STORY_TARGET_NOBUO]  = LOCALID_PYRAMID_LOBBY_NOBUO,
-    [STORY_TARGET_YORIKO] = LOCALID_CONTEST_LOBBY_YORIKO,
-};
 
 // VAR_0x8004: STORY_TARGET_*. They notice the player and walk over. VAR_0x8005 becomes their local
 // ID for waitmovement; VAR_RESULT is FALSE if they could only call out from where they stand.

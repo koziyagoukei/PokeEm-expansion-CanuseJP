@@ -104,3 +104,35 @@ static const struct StoryTargetText sStoryTargetTexts[STORY_TARGET_COUNT] =
         .wishShared = COMPOUND_STRING("{JPN}ヨリコ『みんなの なかにも\nわたしと おなじように\lざわざわしている ひとが いるわ。』"),
     },
 };
+
+// Their release battle and cure (everyone but Kazuki, whose scenes are scripted on their own), by
+// RESCUE_TEXT_*. Someone without a RESCUE_TEXT_FEVER does not have these scenes yet.
+static const u8 *const sStoryTargetRescueTexts[STORY_TARGET_COUNT][RESCUE_TEXT_COUNT] =
+{
+    [STORY_TARGET_EISUKE] =
+    {
+        [RESCUE_TEXT_FEVER_STARTING] = COMPOUND_STRING("{JPN}エイスケ『……あれ？\nなんだか あたまが ぼーっと する……\pきんいろの シンボル……\nあと 1ターン……』"),
+        [RESCUE_TEXT_FEVER] = COMPOUND_STRING("{JPN}エイスケ『……あと 1ターン……\nあと 1ターン あれば……\pはんていでも みんなの かち。\nくやしく なんか ない…… はず……\pでも おれは…… おれが……\nたおしたかった……\pちがう。 おれたちは。\nおれ は。 おれ……\pあつい。 ゴールが みえない。\pどうして。 どうして はなれるの？\nどうして ひとりで\lはしりたがるの？』"),
+        [RESCUE_TEXT_VOICES_FADE] = COMPOUND_STRING("{JPN}エイスケ『……みんなの こえが\nとおく なっていく……\pゴールの さきで\nまっててくれたのにな。\pみんなと いっしょなら\nまけても へいき だったのに。』"),
+        [RESCUE_TEXT_CHOOSES] = COMPOUND_STRING("{JPN}エイスケ『でも…… いまの しょうぶ\nくやしかった。\pあの 1ターンも\nずっと くやしかった。\pけど もう いいんだ。\nあの しあいは あの しあいで\lおわったんだ。\pくやしい まま\nつぎの スタートを きる。\lそれが おれの レースだ。\p……わるいな みんな。\nおれ いくぜ。』"),
+        [RESCUE_TEXT_DELIRIOUS] = COMPOUND_STRING("{JPN}エイスケ『……ゴール…… みんな……\nあと…… 1ターン……』"),
+        [RESCUE_TEXT_EATS] = COMPOUND_STRING("{JPN}てんしゅは エイスケの くちに\nめしを どんどん はこんだ！\pエイスケ『むぐっ…… もぐ……』"),
+        [RESCUE_TEXT_WAKES_UP] = COMPOUND_STRING("{JPN}エイスケ『……ん？\nここ どこだ？\pあたまが すっきりしてる……\nみんなの こえが…… きこえない。』"),
+        [RESCUE_TEXT_REMEMBERS] = COMPOUND_STRING("{JPN}エイスケ『……ぜんぶ おぼえてるぜ。\pみんなと いっしょだと\nどんな けっかでも へいき だった。\pでも あの はんていの くやしさも\nおれの もの なんだよな。\pもう あの 1ターンは\nふりかえらない。\pつぎの レースに むけて\nはしりだすぜ。\p……たすけて くれて ありがとな！』"),
+        [RESCUE_TEXT_ASKS_POKENAV] = COMPOUND_STRING("{JPN}エイスケ『そうだ ポケナビ もってるか？\nれんらくさき こうかん しようぜ！』"),
+        [RESCUE_TEXT_GOES_TO_INN] = COMPOUND_STRING("{JPN}エイスケ『おれ りょかんで\nからだを なおしてくる！\pまえの うみで およぎこみ だ！』"),
+    },
+    [STORY_TARGET_YORIKO] =
+    {
+        [RESCUE_TEXT_FEVER] = COMPOUND_STRING("{JPN}ヨリコ『……はくしゅ……\nみんなの はくしゅが きこえる……\pみんな おなじ ところで\nおなじ だけ…… それで いいの。\pでも わたしは…… わたしが\nみせたいのは…… みせ……\pちがう。 わたしたちは。\nわたし は。 わたし……\pあつい。 ライトが あつい。\pどうして。 どうして はなれるの？\nどうして ちがう はくしゅを\lほしがるの？』"),
+        [RESCUE_TEXT_VOICES_FADE] = COMPOUND_STRING("{JPN}ヨリコ『……みんなの はくしゅが\nとおく なっていく……\pいやね……\nみんなと いっしょなら\lだれにも ごかい されなかったのに。』"),
+        [RESCUE_TEXT_CHOOSES] = COMPOUND_STRING("{JPN}ヨリコ『でも まえに あなたは\nハブネークの しっぽを ほめてくれた。\pわたしの みせたかった ところとは\nちがったけれど……\p……うれしかったの。\nあなたが じぶんの めで みて\lそう おもって くれたから。\pみる ひとに よって\nちがって みえても いい。\pわたしと ハブネークが\nみせたい えんぎを したいの。\p……ごめんね みんな。\nわたし いくわ。』"),
+        [RESCUE_TEXT_DELIRIOUS] = COMPOUND_STRING("{JPN}ヨリコ『……はくしゅ……\nみんな おなじ……\lわたしの…… えんぎ……』"),
+        [RESCUE_TEXT_EATS] = COMPOUND_STRING("{JPN}てんしゅは ヨリコの くちに\nめしを どんどん はこんだ！\pヨリコ『んっ…… もぐ……』"),
+        [RESCUE_TEXT_WAKES_UP] = COMPOUND_STRING("{JPN}ヨリコ『……あら？\nここは どこかしら。\pあたまが すっきりしてる……\nみんなの はくしゅが…… きこえない。』"),
+        [RESCUE_TEXT_REMEMBERS] = COMPOUND_STRING("{JPN}ヨリコ『……ぜんぶ おぼえているわ。\pみんなが おなじように わかってくれて\nおなじだけ はくしゅを くれて……\pだれにも ごかい されない ぶたいは\nほんとうに あんしん だった。\pでも これからは\nみる ひとに よって ちがう はくしゅを\lもらいに いくわ。\pハブネークと いっしょに\nわたしたちの えんぎで。\p……たすけて くれて ありがとう。』"),
+        [RESCUE_TEXT_AFTER_CURE] = COMPOUND_STRING("{JPN}ヨリコ『……さっきの おだんご\nしかくかったわね。\pシンオウちほうの コンテストを\nまわっていた ころ よく たべたの。\pシンオウでは きびだんごって\nしかくい ものなのよ。\p……なつかしい かたちだったわ。』\pてんしゅ『へえ…… シンオウじゃ\nしかくいのが ふつう なのか。\pうちのも むかしから この かたちでな。\nよそも そうだとは しらなかったぜ。』"),
+        [RESCUE_TEXT_ASKS_POKENAV] = COMPOUND_STRING("{JPN}ヨリコ『ねえ ポケナビは もってる？\nつぎの ぶたいが きまったら\lしらせたいの。\pれんらくさき こうかん しましょう。』"),
+        [RESCUE_TEXT_GOES_TO_INN] = COMPOUND_STRING("{JPN}ヨリコ『わたし りょかんで\nすこし やすむわね。\pハブネークと つぎの えんぎを\nかんがえておくわ。 みにきてね。』"),
+    },
+};

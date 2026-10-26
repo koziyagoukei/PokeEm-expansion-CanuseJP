@@ -175,8 +175,8 @@
       "flag": "0"
     },
     {
-      "local_id": "LOCALID_HUB_YORIKO",
-      "graphics_id": "OBJ_EVENT_GFX_BEAUTY",
+      "local_id": "LOCALID_HUB_RESCUED",
+      "graphics_id": "OBJ_EVENT_GFX_VAR_A",
       "x": 4,
       "y": 5,
       "elevation": 3,

@@ -43,7 +43,7 @@ FrontierStory_EventScript_SetupHub::
 	call_if_set FLAG_STORY_DARKRAI_JOINED, FrontierStory_EventScript_ShowHubDarkrai
 	call_if_eq VAR_TOWER_STORY_STATE, TOWER_STORY_RETURNED, TowerStory_EventScript_SetupHubCare
 	special FrontierStory_FindReturnedTarget
-	call_if_eq VAR_RESULT, STORY_TARGET_YORIKO, ContestStory_EventScript_SetupHubCare
+	call_if_ne VAR_RESULT, STORY_TARGET_COUNT, FrontierStory_EventScript_SetupHubRescue
 	return
 
 FrontierStory_EventScript_ShowHubDarkrai::
@@ -556,6 +556,9 @@ FrontierStory_EventScript_Target::
 	lock
 	faceplayer
 FrontierStory_EventScript_TargetTalk::
+	special FrontierStory_CheckTargetFever
+	goto_if_eq VAR_RESULT, TARGET_FEVER_RELEASE, FrontierStory_EventScript_TargetFever
+	goto_if_eq VAR_RESULT, TARGET_FEVER_ALONE, FrontierStory_EventScript_TargetFeverAlone
 	special FrontierStory_BufferTargetTalk
 	copyvar VAR_0x8006, VAR_RESULT
 	msgbox gStringVar4, MSGBOX_DEFAULT
@@ -563,6 +566,7 @@ FrontierStory_EventScript_TargetTalk::
 	call_if_eq VAR_RESULT, TRUE, FrontierStory_EventScript_ShowBufferedText
 	@ Met for the first time with the symbol already won: their next step follows at once.
 	goto_if_eq VAR_0x8006, TRUE, FrontierStory_EventScript_TargetTalk
+FrontierStory_EventScript_TargetDone::
 	goto_if_ne VAR_TEMP_F, 1, FrontierStory_EventScript_TargetRelease
 	setvar VAR_TEMP_F, 0
 	closemessage
@@ -624,14 +628,9 @@ PyramidStory_EventScript_LobbyArrival::
 	setvar VAR_0x8004, STORY_TARGET_NOBUO
 	goto FrontierStory_EventScript_TargetArrival
 
-@ After the last of the contest's scenes, talking to her brings on the fever and the release battle.
 ContestStory_EventScript_Yoriko::
-	lock
-	faceplayer
-	special FrontierStory_IsContestReleaseReady
-	goto_if_eq VAR_RESULT, TRUE, ContestStory_EventScript_YorikoFever
 	setvar VAR_0x8004, STORY_TARGET_YORIKO
-	goto FrontierStory_EventScript_TargetTalk
+	goto FrontierStory_EventScript_Target
 
 ContestStory_EventScript_LobbyArrival::
 	setvar VAR_0x8004, STORY_TARGET_YORIKO
@@ -711,78 +710,123 @@ ContestStory_EventScript_SceneEnd::
 	special FrontierStory_BufferContestSceneBranch
 	msgbox gStringVar4, MSGBOX_DEFAULT
 	addvar VAR_CONTEST_STORY_SCENES, 1
-	special FrontierStory_IsContestReleaseReady
-	goto_if_eq VAR_RESULT, TRUE, ContestStory_EventScript_YorikoFever
+	@ After the last scene comes her fever and the release battle.
+	setvar VAR_0x8004, STORY_TARGET_YORIKO
+	special FrontierStory_CheckTargetFever
+	goto_if_eq VAR_RESULT, TARGET_FEVER_RELEASE, FrontierStory_EventScript_TargetFever
 	releaseall
 	end
 
 @ ---------------------------------------------------------------------------
-@ Contest: Yoriko's release battle, her cure in the hub, and the inn
+@ Release battles and cures of the people the network holds at the facilities and the contest
+@ (Kazuki's are his own, above). Their lines are in src/data/frontier_story_targets.h.
 
-ContestStory_EventScript_YorikoFever::
-	lockall
-	msgbox ContestStory_Text_YorikoFever, MSGBOX_DEFAULT
+FrontierStory_EventScript_ShowRescueText::
+	special FrontierStory_BufferRescueText
+	goto_if_eq VAR_RESULT, FALSE, FrontierStory_EventScript_Return
+	msgbox gStringVar4, MSGBOX_DEFAULT
+	return
+
+@ VAR_0x8004: STORY_TARGET_*. Their fever before Darkrai has joined: Darkrai stops the player and
+@ asks them to the hub.
+FrontierStory_EventScript_TargetFeverAlone::
+	special FrontierStory_StartRescueScene
+	setvar VAR_0x8004, RESCUE_TEXT_FEVER_STARTING
+	call FrontierStory_EventScript_ShowRescueText
 	closemessage
-	applymovement LOCALID_CONTEST_LOBBY_YORIKO, TowerStory_Movement_Tremble
+	playse SE_M_NIGHTMARE
+	waitse
+	msgbox FrontierStory_Text_DarkraiWarnsAlone, MSGBOX_DEFAULT
+	@ Darkrai has just asked the player to the hub; no second call on this visit.
+	setvar VAR_TEMP_E, 2
+	goto FrontierStory_EventScript_TargetDone
+
+@ VAR_0x8004: STORY_TARGET_*. Their fever; the cook and Pokevirus appear in a flash of white, and
+@ the release battle. In every lobby FLAG_TEMP_1D hides the cook and FLAG_TEMP_1E Pokevirus.
+FrontierStory_EventScript_TargetFever::
+	lockall
+	special FrontierStory_StartRescueScene
+	setvar VAR_0x8004, RESCUE_TEXT_FEVER
+	call FrontierStory_EventScript_ShowRescueText
+	closemessage
+	special FrontierStory_GetRescueScene
+	applymovement VAR_0x8004, TowerStory_Movement_Tremble
 	waitmovement 0
 	playse SE_M_CONFUSE_RAY
 	fadescreen FADE_TO_WHITE
 	clearflag FLAG_TEMP_1D
-	addobject LOCALID_CONTEST_LOBBY_COOK
 	clearflag FLAG_TEMP_1E
-	addobject LOCALID_CONTEST_LOBBY_POKEVIRUS
-	setvar VAR_0x8004, LOCALID_CONTEST_LOBBY_YORIKO
-	setvar VAR_0x8005, LOCALID_CONTEST_LOBBY_COOK
-	setvar VAR_0x8006, LOCALID_CONTEST_LOBBY_POKEVIRUS
+	special FrontierStory_GetRescueScene
+	addobject VAR_0x8005
+	addobject VAR_0x8006
 	special FrontierStory_ArrangeReleaseScene
 	waitse
 	fadescreen FADE_FROM_WHITE
 	call FrontierStory_EventScript_PokevirusAppears
 	msgbox FrontierStory_Text_CookAsksReady, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, NO, ContestStory_EventScript_ReleaseRetreat
+	goto_if_eq VAR_RESULT, NO, FrontierStory_EventScript_TargetRetreat
 	call FrontierStory_EventScript_ChooseReleaseParty
-	goto_if_eq VAR_RESULT, FALSE, ContestStory_EventScript_ReleaseRetreat
-	setmultitrainerbattle TRAINER_YORIKO_RELEASE, ContestStory_Text_YorikoReleaseDefeat, TRAINER_POKEVIRUS, FrontierStory_Text_PokevirusDefeat, PARTNER_ROCKET_COOK
-	call FrontierStory_EventScript_StartReleaseBattle
-	goto_if_eq VAR_RESULT, B_OUTCOME_WON, ContestStory_EventScript_YorikoReleased
-	msgbox FrontierStory_Text_CookLostRelease, MSGBOX_DEFAULT
-	goto ContestStory_EventScript_ClearReleaseScene
-
-ContestStory_EventScript_ReleaseRetreat::
+	goto_if_eq VAR_RESULT, FALSE, FrontierStory_EventScript_TargetRetreat
+	special FrontierStory_GetRescueScene
+	switch VAR_RESULT
+	case STORY_TARGET_EISUKE, ArenaStory_EventScript_ReleaseBattle
+	case STORY_TARGET_YORIKO, ContestStory_EventScript_ReleaseBattle
+	special LoadPlayerParty
+FrontierStory_EventScript_TargetRetreat::
 	msgbox FrontierStory_Text_CookRetreats, MSGBOX_DEFAULT
-ContestStory_EventScript_ClearReleaseScene::
+FrontierStory_EventScript_ClearTargetScene::
 	closemessage
 	fadescreen FADE_TO_BLACK
 	setflag FLAG_TEMP_1D
-	removeobject LOCALID_CONTEST_LOBBY_COOK
 	setflag FLAG_TEMP_1E
-	removeobject LOCALID_CONTEST_LOBBY_POKEVIRUS
+	special FrontierStory_GetRescueScene
+	removeobject VAR_0x8005
+	removeobject VAR_0x8006
 	fadescreen FADE_FROM_BLACK
 	releaseall
 	end
 
-ContestStory_EventScript_YorikoReleased::
-	msgbox ContestStory_Text_YorikoVoicesFade, MSGBOX_DEFAULT
-	msgbox ContestStory_Text_YorikoChooses, MSGBOX_DEFAULT
+@ After each person's own release battle; VAR_RESULT is the B_OUTCOME_*.
+FrontierStory_EventScript_TargetBattleDone::
+	goto_if_eq VAR_RESULT, B_OUTCOME_WON, FrontierStory_EventScript_TargetReleased
+	msgbox FrontierStory_Text_CookLostRelease, MSGBOX_DEFAULT
+	goto FrontierStory_EventScript_ClearTargetScene
+
+FrontierStory_EventScript_TargetReleased::
+	setvar VAR_0x8004, RESCUE_TEXT_VOICES_FADE
+	call FrontierStory_EventScript_ShowRescueText
+	setvar VAR_0x8004, RESCUE_TEXT_CHOOSES
+	call FrontierStory_EventScript_ShowRescueText
 	closemessage
 	playse SE_M_HAZE
-	applymovement LOCALID_CONTEST_LOBBY_POKEVIRUS, TowerStory_Movement_PokevirusFades
+	special FrontierStory_GetRescueScene
+	applymovement VAR_0x8006, TowerStory_Movement_PokevirusFades
 	waitmovement 0
-	removeobject LOCALID_CONTEST_LOBBY_POKEVIRUS
+	removeobject VAR_0x8006
 	setflag FLAG_TEMP_1E
 	waitse
-	msgbox ContestStory_Text_YorikoCollapses, MSGBOX_DEFAULT
+	msgbox FrontierStory_Text_TargetCollapses, MSGBOX_DEFAULT
 	msgbox FrontierStory_Text_CookCarriesToHub, MSGBOX_DEFAULT
 	closemessage
-	setvar VAR_0x8004, STORY_TARGET_YORIKO
-	setvar VAR_0x8005, TARGET_STORY_RETURNED
-	special FrontierStory_SetTargetStep
+	special FrontierStory_ReturnRescueTarget
 	warp MAP_ULTRA_FRONTIE_HUB, 7, 5
 	waitstate
 	end
 
-@ In the hub straight after the release battle (VAR_TEMP_5 0 -> 1 -> 0).
-ContestStory_EventScript_SetupHubCare::
+ArenaStory_EventScript_ReleaseBattle::
+	setmultitrainerbattle TRAINER_EISUKE_RELEASE, ArenaStory_Text_EisukeReleaseDefeat, TRAINER_POKEVIRUS, FrontierStory_Text_PokevirusDefeat, PARTNER_ROCKET_COOK
+	call FrontierStory_EventScript_StartReleaseBattle
+	goto FrontierStory_EventScript_TargetBattleDone
+
+ContestStory_EventScript_ReleaseBattle::
+	setmultitrainerbattle TRAINER_YORIKO_RELEASE, ContestStory_Text_YorikoReleaseDefeat, TRAINER_POKEVIRUS, FrontierStory_Text_PokevirusDefeat, PARTNER_ROCKET_COOK
+	call FrontierStory_EventScript_StartReleaseBattle
+	goto FrontierStory_EventScript_TargetBattleDone
+
+@ In the hub straight after their release battle (VAR_TEMP_5 0 -> 1 -> 0), at the table on the
+@ left, shown as themselves (VAR_HUB_RESCUED_GFX).
+FrontierStory_EventScript_SetupHubRescue::
+	special FrontierStory_PrepareHubRescue
 	clearflag FLAG_TEMP_13
 	clearflag FLAG_TEMP_10
 	setobjectxyperm LOCALID_FRONTIER_HUB_INTRO_COOK, 4, 6
@@ -790,46 +834,54 @@ ContestStory_EventScript_SetupHubCare::
 	setvar VAR_TEMP_5, 1
 	return
 
-ContestStory_EventScript_HubCare::
+FrontierStory_EventScript_HubRescue::
 	lockall
 	setvar VAR_TEMP_5, 0
+	special FrontierStory_PrepareHubRescue
 	applymovement LOCALID_PLAYER, Common_Movement_WalkInPlaceFasterLeft
 	waitmovement 0
-	msgbox ContestStory_Text_YorikoDelirious, MSGBOX_DEFAULT
+	setvar VAR_0x8004, RESCUE_TEXT_DELIRIOUS
+	call FrontierStory_EventScript_ShowRescueText
 	msgbox FrontierStory_Text_CookForcesMeal, MSGBOX_DEFAULT
 	closemessage
 	applymovement LOCALID_FRONTIER_HUB_INTRO_COOK, Common_Movement_WalkInPlaceFasterUp
 	waitmovement 0
-	msgbox ContestStory_Text_YorikoEats, MSGBOX_DEFAULT
-	goto_if_set FLAG_STORY_CURE_FOUND, ContestStory_EventScript_GiveKnownCure
+	setvar VAR_0x8004, RESCUE_TEXT_EATS
+	call FrontierStory_EventScript_ShowRescueText
+	goto_if_set FLAG_STORY_CURE_FOUND, FrontierStory_EventScript_HubRescueKnownCure
 	call FrontierStory_EventScript_ServeFirstDessert
-	msgbox ContestStory_Text_YorikoWakesUp, MSGBOX_DEFAULT
+	setvar VAR_0x8004, RESCUE_TEXT_WAKES_UP
+	call FrontierStory_EventScript_ShowRescueText
 	call FrontierStory_EventScript_CureFound
-	goto ContestStory_EventScript_YorikoCured
+	goto FrontierStory_EventScript_HubRescueCured
 
-ContestStory_EventScript_GiveKnownCure::
+FrontierStory_EventScript_HubRescueKnownCure::
 	call FrontierStory_EventScript_GiveKnownCure
-	msgbox ContestStory_Text_YorikoWakesUp, MSGBOX_DEFAULT
-ContestStory_EventScript_YorikoCured::
-	msgbox ContestStory_Text_YorikoRemembersAll, MSGBOX_DEFAULT
-	msgbox ContestStory_Text_YorikoSquareKibidango, MSGBOX_DEFAULT
-	msgbox ContestStory_Text_CookSinnohKibidango, MSGBOX_DEFAULT
-	msgbox ContestStory_Text_YorikoAsksPokenav, MSGBOX_DEFAULT
+	setvar VAR_0x8004, RESCUE_TEXT_WAKES_UP
+	call FrontierStory_EventScript_ShowRescueText
+FrontierStory_EventScript_HubRescueCured::
+	setvar VAR_0x8004, RESCUE_TEXT_REMEMBERS
+	call FrontierStory_EventScript_ShowRescueText
+	setvar VAR_0x8004, RESCUE_TEXT_AFTER_CURE
+	call FrontierStory_EventScript_ShowRescueText
+	setvar VAR_0x8004, RESCUE_TEXT_ASKS_POKENAV
+	call FrontierStory_EventScript_ShowRescueText
 	setflag FLAG_ADDED_MATCH_CALL_TO_POKENAV
-	register_matchcall TRAINER_JESSICA_1
+	@ register_matchcall, for whoever this is.
+	special FrontierStory_GetRescueMatchCall
+	special SetMatchCallRegisteredFlag
+	callstd STD_REGISTER_MATCH_CALL
 	call FrontierStory_EventScript_OpenInnIfNeeded
-	msgbox ContestStory_Text_YorikoGoesToInn, MSGBOX_DEFAULT
+	setvar VAR_0x8004, RESCUE_TEXT_GOES_TO_INN
+	call FrontierStory_EventScript_ShowRescueText
 	msgbox FrontierStory_Text_CookSendsToInn, MSGBOX_DEFAULT
 	closemessage
 	fadescreen FADE_TO_BLACK
 	setflag FLAG_TEMP_13
-	removeobject LOCALID_HUB_YORIKO
+	removeobject LOCALID_HUB_RESCUED
 	setflag FLAG_TEMP_10
 	removeobject LOCALID_FRONTIER_HUB_INTRO_COOK
-	setvar VAR_0x8004, STORY_TARGET_YORIKO
-	setvar VAR_0x8005, TARGET_STORY_RESCUED
-	special FrontierStory_SetTargetStep
-	setflag FLAG_STORY_RESCUED_CONTEST
+	special FrontierStory_FinishRescue
 	fadescreen FADE_FROM_BLACK
 	releaseall
 	end
@@ -875,7 +927,8 @@ FrontierStory_EventScript_VisitorNotYet::
 
 @ ---------------------------------------------------------------------------
 @ The inn: everyone cured rests here. Kazuki in the lobby, Yoriko and Seviper in the west wing,
-@ and in each part a few of the cured Brains and guests, picked on every visit.
+@ Eisuke and Starmie on the beach outside, and in each part of the building a few of the cured
+@ Brains and guests, picked on every visit.
 
 InnStory_EventScript_SetupLobby::
 	setflag FLAG_TEMP_11
@@ -995,6 +1048,45 @@ InnStory_EventScript_Seviper::
 	release
 	end
 
+@ Outside, on the beach: Eisuke and Starmie.
+InnStory_EventScript_SetupOutside::
+	setflag FLAG_TEMP_11
+	call_if_set FLAG_STORY_RESCUED_ARENA, InnStory_EventScript_ShowEisuke
+	return
+
+InnStory_EventScript_ShowEisuke::
+	clearflag FLAG_TEMP_11
+	return
+
+@ He has put the lost three turns behind him: instead of fighting that match again, he and Starmie
+@ dive in and swim off to train for the next race. They are back on the next visit.
+InnStory_EventScript_Eisuke::
+	lock
+	faceplayer
+	msgbox ArenaStory_Text_InnEisuke, MSGBOX_DEFAULT
+	closemessage
+	applymovement LOCALID_INN_EISUKE, InnStory_Movement_DiveIn
+	applymovement LOCALID_INN_STARMIE, InnStory_Movement_DiveIn
+	waitmovement LOCALID_INN_EISUKE
+	waitmovement LOCALID_INN_STARMIE
+	playse SE_M_SURF
+	removeobject LOCALID_INN_EISUKE
+	removeobject LOCALID_INN_STARMIE
+	setflag FLAG_TEMP_11
+	waitse
+	msgbox ArenaStory_Text_InnEisukeSwimsOff, MSGBOX_DEFAULT
+	release
+	end
+
+InnStory_EventScript_Starmie::
+	lock
+	faceplayer
+	playmoncry SPECIES_STARMIE, CRY_MODE_NORMAL
+	msgbox ArenaStory_Text_InnStarmie, MSGBOX_DEFAULT
+	waitmoncry
+	release
+	end
+
 @ ---------------------------------------------------------------------------
 @ Movements
 
@@ -1004,6 +1096,13 @@ TowerStory_Movement_Tremble:
 	walk_in_place_faster_left
 	walk_in_place_faster_right
 	delay_16
+	step_end
+
+InnStory_Movement_DiveIn:
+	face_down
+	delay_16
+	jump_down
+	set_invisible
 	step_end
 
 InnStory_Movement_SeviperPerforms:
@@ -1665,109 +1764,22 @@ ContestStory_Text_DarkraiSameDay:
 	.string "おくまで とどく。』$"
 
 @ ---------------------------------------------------------------------------
-@ Text: Yoriko's release battle and cure
+@ Text: release battles at the facilities and the contest (the rest is in
+@ src/data/frontier_story_targets.h)
 
-ContestStory_Text_YorikoFever:
-	.string "{JPN}ヨリコ『……はくしゅ……\n"
-	.string "みんなの はくしゅが きこえる……\p"
-	.string "みんな おなじ ところで\n"
-	.string "おなじ だけ…… それで いいの。\p"
-	.string "でも わたしは…… わたしが\n"
-	.string "みせたいのは…… みせ……\p"
-	.string "ちがう。 わたしたちは。\n"
-	.string "わたし は。 わたし……\p"
-	.string "あつい。 ライトが あつい。\p"
-	.string "どうして。 どうして はなれるの？\n"
-	.string "どうして ちがう はくしゅを\l"
-	.string "ほしがるの？』$"
+FrontierStory_Text_TargetCollapses:
+	.string "{JPN}ヒトポケルスの すがたが\n"
+	.string "かききえた！\p"
+	.string "{STR_VAR_1}は その ばに\n"
+	.string "くずれおちた！$"
+
+ArenaStory_Text_EisukeReleaseDefeat:
+	.string "{JPN}……おれ…… まけた……\n"
+	.string "おれが まけたんだ……$"
 
 ContestStory_Text_YorikoReleaseDefeat:
 	.string "{JPN}……わたし…… まけた……\n"
 	.string "わたしの えんぎが……$"
-
-ContestStory_Text_YorikoVoicesFade:
-	.string "{JPN}ヨリコ『……みんなの はくしゅが\n"
-	.string "とおく なっていく……\p"
-	.string "いやね……\n"
-	.string "みんなと いっしょなら\l"
-	.string "だれにも ごかい されなかったのに。』$"
-
-ContestStory_Text_YorikoChooses:
-	.string "{JPN}ヨリコ『でも まえに あなたは\n"
-	.string "ハブネークの しっぽを ほめてくれた。\p"
-	.string "わたしの みせたかった ところとは\n"
-	.string "ちがったけれど……\p"
-	.string "……うれしかったの。\n"
-	.string "あなたが じぶんの めで みて\l"
-	.string "そう おもって くれたから。\p"
-	.string "みる ひとに よって\n"
-	.string "ちがって みえても いい。\p"
-	.string "わたしと ハブネークが\n"
-	.string "みせたい えんぎを したいの。\p"
-	.string "……ごめんね みんな。\n"
-	.string "わたし いくわ。』$"
-
-ContestStory_Text_YorikoCollapses:
-	.string "{JPN}ヒトポケルスの すがたが\n"
-	.string "かききえた！\p"
-	.string "ヨリコは その ばに\n"
-	.string "くずれおちた！$"
-
-ContestStory_Text_YorikoDelirious:
-	.string "{JPN}ヨリコ『……はくしゅ……\n"
-	.string "みんな おなじ……\l"
-	.string "わたしの…… えんぎ……』$"
-
-ContestStory_Text_YorikoEats:
-	.string "{JPN}てんしゅは ヨリコの くちに\n"
-	.string "めしを どんどん はこんだ！\p"
-	.string "ヨリコ『んっ…… もぐ……』$"
-
-ContestStory_Text_YorikoWakesUp:
-	.string "{JPN}ヨリコ『……あら？\n"
-	.string "ここは どこかしら。\p"
-	.string "あたまが すっきりしてる……\n"
-	.string "みんなの はくしゅが…… きこえない。』$"
-
-ContestStory_Text_YorikoRemembersAll:
-	.string "{JPN}ヨリコ『……ぜんぶ おぼえているわ。\p"
-	.string "みんなが おなじように わかってくれて\n"
-	.string "おなじだけ はくしゅを くれて……\p"
-	.string "だれにも ごかい されない ぶたいは\n"
-	.string "ほんとうに あんしん だった。\p"
-	.string "でも これからは\n"
-	.string "みる ひとに よって ちがう はくしゅを\l"
-	.string "もらいに いくわ。\p"
-	.string "ハブネークと いっしょに\n"
-	.string "わたしたちの えんぎで。\p"
-	.string "……たすけて くれて ありがとう。』$"
-
-ContestStory_Text_YorikoSquareKibidango:
-	.string "{JPN}ヨリコ『……さっきの おだんご\n"
-	.string "しかくかったわね。\p"
-	.string "シンオウちほうの コンテストを\n"
-	.string "まわっていた ころ よく たべたの。\p"
-	.string "シンオウでは きびだんごって\n"
-	.string "しかくい ものなのよ。\p"
-	.string "……なつかしい かたちだったわ。』$"
-
-ContestStory_Text_CookSinnohKibidango:
-	.string "{JPN}てんしゅ『へえ…… シンオウじゃ\n"
-	.string "しかくいのが ふつう なのか。\p"
-	.string "うちのも むかしから この かたちでな。\n"
-	.string "よそも そうだとは しらなかったぜ。』$"
-
-ContestStory_Text_YorikoAsksPokenav:
-	.string "{JPN}ヨリコ『ねえ ポケナビは もってる？\n"
-	.string "つぎの ぶたいが きまったら\l"
-	.string "しらせたいの。\p"
-	.string "れんらくさき こうかん しましょう。』$"
-
-ContestStory_Text_YorikoGoesToInn:
-	.string "{JPN}ヨリコ『わたし りょかんで\n"
-	.string "すこし やすむわね。\p"
-	.string "ハブネークと つぎの えんぎを\n"
-	.string "かんがえておくわ。 みにきてね。』$"
 
 @ ---------------------------------------------------------------------------
 @ Text: Yoriko at the inn
@@ -1836,3 +1848,27 @@ ContestStory_Text_InnYorikoOthers:
 
 ContestStory_Text_InnSeviper:
 	.string "{JPN}ハブネーク『シャーッ！』$"
+
+@ ---------------------------------------------------------------------------
+@ Text: Eisuke at the inn
+
+ArenaStory_Text_InnEisuke:
+	.string "{JPN}エイスケ『よう {PLAYER}！\n"
+	.string "いい うみだろ？\p"
+	.string "あの 1ターンの こと\n"
+	.string "もう ふりかえらないって きめたんだ。\p"
+	.string "くやしいのは ほんとう だけどな。\n"
+	.string "あの しあいは あれで おわり。\p"
+	.string "つぎの レースに むけて\n"
+	.string "スターミーと およいでくる！\p"
+	.string "みてろよ！』$"
+
+ArenaStory_Text_InnEisukeSwimsOff:
+	.string "{JPN}エイスケと スターミーは\n"
+	.string "うみへ とびこんだ！\p"
+	.string "ふたりの すがたが\n"
+	.string "なみの むこうへ とおざかっていく……$"
+
+ArenaStory_Text_InnStarmie:
+	.string "{JPN}スターミーの コアが\n"
+	.string "きらりと ひかった！$"

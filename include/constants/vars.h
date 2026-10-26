@@ -313,6 +313,7 @@
 #define VAR_UNUSED_0x40FD                                0x40FD // Unused Var
 #define VAR_CONTEST_STORY_SCENES                         VAR_UNUSED_0x40FD // How many of the contest's scenes about the world were seen
 #define VAR_UNUSED_0x40FE                                0x40FE // Unused Var
+#define VAR_STORY_TARGET_FEVERS                          VAR_UNUSED_0x40FE // Per STORY_TARGET_*, two bits: their fever came alone, and with the release battle
 #define VAR_UNUSED_0x40FF                                0x40FF // Unused Var
 
 #define VARS_END                                         0x40FF

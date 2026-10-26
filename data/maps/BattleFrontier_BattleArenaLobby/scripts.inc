@@ -5,6 +5,9 @@ BattleFrontier_BattleArenaLobby_MapScripts::
 	.byte 0
 
 BattleFrontier_BattleArenaLobby_OnTransition:
+	@ The cook and Pokevirus only appear for Eisuke's release battle.
+	setflag FLAG_TEMP_1D
+	setflag FLAG_TEMP_1E
 	setvar VAR_0x8004, STORY_TARGET_EISUKE
 	call FrontierStory_EventScript_SetupTarget
 	end

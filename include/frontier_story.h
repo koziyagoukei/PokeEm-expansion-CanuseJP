@@ -26,9 +26,15 @@ void FrontierStory_CheckTargetApproach(void);
 void FrontierStory_TargetComesOver(void);
 void FrontierStory_BufferTargetTalk(void);
 void FrontierStory_BufferTargetBranch(void);
-void FrontierStory_SetTargetStep(void);
+void FrontierStory_CheckTargetFever(void);
 void FrontierStory_FindReturnedTarget(void);
-void FrontierStory_IsContestReleaseReady(void);
+void FrontierStory_StartRescueScene(void);
+void FrontierStory_GetRescueScene(void);
+void FrontierStory_BufferRescueText(void);
+void FrontierStory_ReturnRescueTarget(void);
+void FrontierStory_PrepareHubRescue(void);
+void FrontierStory_GetRescueMatchCall(void);
+void FrontierStory_FinishRescue(void);
 void FrontierStory_CheckContestScene(void);
 void FrontierStory_BufferContestSceneBranch(void);
 

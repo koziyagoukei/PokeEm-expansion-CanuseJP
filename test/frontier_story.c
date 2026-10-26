@@ -11,8 +11,10 @@
 #include "test/test.h"
 #include "constants/battle_frontier.h"
 #include "constants/characters.h"
+#include "constants/event_objects.h"
 #include "constants/frontier_story.h"
 #include "constants/frontier_util.h"
+#include "constants/opponents.h"
 #include "constants/trainers.h"
 
 #define BRAIN(facility) (NAMED_STORY_BRAIN_FIRST + (facility))
@@ -51,6 +53,7 @@ static void ResetStory(void)
     VarSet(VAR_STORY_TARGET_STATES, 0);
     VarSet(VAR_STORY_TARGET_STATES_2, 0);
     VarSet(VAR_CONTEST_STORY_SCENES, 0);
+    VarSet(VAR_STORY_TARGET_FEVERS, 0);
     for (u32 i = FLAG_STORY_RESCUED_TOWER; i <= FLAG_STORY_RESCUED_CONTEST; i++)
         FlagClear(i);
     VarSet(VAR_FRONTIER_FACILITY, FRONTIER_FACILITY_TOWER);
@@ -568,17 +571,19 @@ TEST("Frontier story: the contest's scenes change with every count of rescues")
     EXPECT_EQ(gStringVar4[0], EOS);
 }
 
-static bool32 ContestReleaseReady(void)
-{
-    FrontierStory_IsContestReleaseReady();
-    return gSpecialVar_Result;
-}
-
 static void SetTargetStep(u32 target, u32 state)
 {
+    u16 var = target <= STORY_TARGET_TOSHIO ? VAR_STORY_TARGET_STATES : VAR_STORY_TARGET_STATES_2;
+    u32 shift = (target - STORY_TARGET_REIKA) % 4 * 4;
+
+    VarSet(var, (VarGet(var) & ~(0xF << shift)) | (state << shift));
+}
+
+static u32 TargetFever(u32 target)
+{
     gSpecialVar_0x8004 = target;
-    gSpecialVar_0x8005 = state;
-    FrontierStory_SetTargetStep();
+    FrontierStory_CheckTargetFever();
+    return gSpecialVar_Result;
 }
 
 static u32 ReturnedTarget(void)
@@ -587,40 +592,128 @@ static u32 ReturnedTarget(void)
     return gSpecialVar_Result;
 }
 
-TEST("Frontier story: Yoriko's release battle follows the last contest scene")
+TEST("Frontier story: Eisuke's fever comes at the Gold Symbol, alone until Darkrai joins")
+{
+    ResetStory();
+    FlagSet(gFrontierBrainInfo[FRONTIER_FACILITY_ARENA].silverSymbolFlag);
+    while (TalkToTarget(STORY_TARGET_EISUKE))
+        ;
+    EXPECT_EQ(TargetState(STORY_TARGET_EISUKE), TARGET_STORY_WISH);
+    EXPECT_EQ(TargetFever(STORY_TARGET_EISUKE), TARGET_FEVER_NONE);
+    EXPECT(!TargetComesOver(STORY_TARGET_EISUKE));
+
+    // He comes over once for each kind of fever.
+    FlagSet(gFrontierBrainInfo[FRONTIER_FACILITY_ARENA].goldSymbolFlag);
+    EXPECT_EQ(TargetFever(STORY_TARGET_EISUKE), TARGET_FEVER_ALONE);
+    EXPECT(TargetComesOver(STORY_TARGET_EISUKE));
+    EXPECT(!TargetComesOver(STORY_TARGET_EISUKE));
+    FlagSet(FLAG_STORY_DARKRAI_JOINED);
+    EXPECT_EQ(TargetFever(STORY_TARGET_EISUKE), TARGET_FEVER_RELEASE);
+    EXPECT(TargetComesOver(STORY_TARGET_EISUKE));
+    EXPECT(!TargetComesOver(STORY_TARGET_EISUKE));
+
+    // Someone whose release battle is not written yet stays at their wish.
+    FlagSet(gFrontierBrainInfo[FRONTIER_FACILITY_DOME].silverSymbolFlag);
+    FlagSet(gFrontierBrainInfo[FRONTIER_FACILITY_DOME].goldSymbolFlag);
+    while (TalkToTarget(STORY_TARGET_REIKA))
+        ;
+    EXPECT_EQ(TargetFever(STORY_TARGET_REIKA), TARGET_FEVER_NONE);
+    EXPECT(!TargetComesOver(STORY_TARGET_REIKA));
+}
+
+TEST("Frontier story: met with the Gold Symbol already won, the talk goes on to the fever")
+{
+    ResetStory();
+    FlagSet(FLAG_STORY_DARKRAI_JOINED);
+    FlagSet(gFrontierBrainInfo[FRONTIER_FACILITY_ARENA].silverSymbolFlag);
+    FlagSet(gFrontierBrainInfo[FRONTIER_FACILITY_ARENA].goldSymbolFlag);
+    EXPECT(TargetComesOver(STORY_TARGET_EISUKE));
+    EXPECT(TalkToTarget(STORY_TARGET_EISUKE));
+    EXPECT(TalkToTarget(STORY_TARGET_EISUKE));
+    EXPECT_EQ(TargetFever(STORY_TARGET_EISUKE), TARGET_FEVER_RELEASE);
+    // That visit already showed the fever.
+    EXPECT(!TargetComesOver(STORY_TARGET_EISUKE));
+}
+
+TEST("Frontier story: Yoriko's fever follows the last contest scene")
 {
     ResetStory();
     FlagSet(FLAG_STORY_DARKRAI_JOINED);
     SetTargetStep(STORY_TARGET_YORIKO, TARGET_STORY_WISH);
     VarSet(VAR_CONTEST_STORY_SCENES, CONTEST_STORY_SCENE_COUNT - 1);
-    EXPECT(!ContestReleaseReady());
+    EXPECT_EQ(TargetFever(STORY_TARGET_YORIKO), TARGET_FEVER_NONE);
     VarSet(VAR_CONTEST_STORY_SCENES, CONTEST_STORY_SCENE_COUNT);
-    EXPECT(ContestReleaseReady());
-    FlagClear(FLAG_STORY_DARKRAI_JOINED);
-    EXPECT(!ContestReleaseReady());
-    FlagSet(FLAG_STORY_DARKRAI_JOINED);
-    EXPECT_EQ(ReturnedTarget(), STORY_TARGET_COUNT);
+    EXPECT_EQ(TargetFever(STORY_TARGET_YORIKO), TARGET_FEVER_RELEASE);
+    VarSet(VAR_FRONTIER_INTRO_STATE, 0);
+    EXPECT_EQ(TargetFever(STORY_TARGET_YORIKO), TARGET_FEVER_NONE);
+}
 
-    // Won: on her way to the hub and gone from the lobby, then cured.
-    SetTargetStep(STORY_TARGET_YORIKO, TARGET_STORY_RETURNED);
-    EXPECT_EQ(TargetState(STORY_TARGET_YORIKO), TARGET_STORY_RETURNED);
-    EXPECT(!ContestReleaseReady());
-    EXPECT_EQ(ReturnedTarget(), STORY_TARGET_YORIKO);
-    gSpecialVar_0x8004 = STORY_TARGET_YORIKO;
+TEST("Frontier story: the release battle and cure take the person from their lobby to the inn")
+{
+    static const u8 sEisuke[] = _("エイスケ");
+
+    ResetStory();
+    FlagSet(FLAG_STORY_DARKRAI_JOINED);
+    FlagSet(gFrontierBrainInfo[FRONTIER_FACILITY_ARENA].goldSymbolFlag);
+    SetTargetStep(STORY_TARGET_EISUKE, TARGET_STORY_WISH);
+    gSpecialVar_0x8004 = STORY_TARGET_EISUKE;
+    FrontierStory_StartRescueScene();
+    EXPECT_EQ(StringCompare(gStringVar1, sEisuke), 0);
+    FrontierStory_GetRescueScene();
+    EXPECT_EQ(gSpecialVar_Result, STORY_TARGET_EISUKE);
+    EXPECT_NE(gSpecialVar_0x8004, gSpecialVar_0x8005);
+    EXPECT_NE(gSpecialVar_0x8005, gSpecialVar_0x8006);
+    EXPECT_NE(gSpecialVar_0x8004, gSpecialVar_0x8006);
+    for (u32 part = 0; part < RESCUE_TEXT_COUNT; part++)
+    {
+        gSpecialVar_0x8004 = part;
+        FrontierStory_BufferRescueText();
+        EXPECT_EQ(gSpecialVar_Result, part != RESCUE_TEXT_AFTER_CURE);
+        EXPECT_EQ(gStringVar4[0] != EOS, part != RESCUE_TEXT_AFTER_CURE);
+    }
+
+    // Won: on his way to the hub and gone from the lobby.
+    EXPECT_EQ(ReturnedTarget(), STORY_TARGET_COUNT);
+    FrontierStory_ReturnRescueTarget();
+    EXPECT_EQ(TargetState(STORY_TARGET_EISUKE), TARGET_STORY_RETURNED);
+    EXPECT_EQ(TargetFever(STORY_TARGET_EISUKE), TARGET_FEVER_NONE);
+    gSpecialVar_0x8004 = STORY_TARGET_EISUKE;
     FrontierStory_IsTargetHere();
     EXPECT(!gSpecialVar_Result);
-    SetTargetStep(STORY_TARGET_YORIKO, TARGET_STORY_RESCUED);
-    EXPECT_EQ(ReturnedTarget(), STORY_TARGET_COUNT);
+    EXPECT_EQ(ReturnedTarget(), STORY_TARGET_EISUKE);
 
-    // Nobody else's step moved; Kazuki keeps his own variable.
-    for (u32 other = STORY_TARGET_KAZUKI; other < STORY_TARGET_YORIKO; other++)
-        EXPECT_EQ(TargetState(other), TARGET_STORY_NOT_MET);
-    SetTargetStep(STORY_TARGET_KAZUKI, TARGET_STORY_RESCUED);
-    EXPECT_EQ(VarGet(VAR_TOWER_STORY_STATE), TOWER_STORY_NOT_MET);
-
-    VarSet(VAR_FRONTIER_INTRO_STATE, 0);
-    SetTargetStep(STORY_TARGET_YORIKO, TARGET_STORY_RETURNED);
+    // The hub shows him, he joins the Pokénav, and he is rescued.
+    VarSet(VAR_HUB_RESCUED_GFX, 0);
+    FrontierStory_PrepareHubRescue();
+    EXPECT_EQ(VarGet(VAR_HUB_RESCUED_GFX), OBJ_EVENT_GFX_RUNNING_TRIATHLETE_M);
+    FrontierStory_GetRescueMatchCall();
+    EXPECT_EQ(gSpecialVar_0x8004, TRAINER_ISAIAH_1);
+    EXPECT_EQ(gSpecialVar_0x8000, TRAINER_ISAIAH_1);
+    FrontierStory_FinishRescue();
+    EXPECT_EQ(TargetState(STORY_TARGET_EISUKE), TARGET_STORY_RESCUED);
+    EXPECT(FlagGet(FLAG_STORY_RESCUED_ARENA));
     EXPECT_EQ(ReturnedTarget(), STORY_TARGET_COUNT);
+    for (u32 other = STORY_TARGET_KAZUKI; other < STORY_TARGET_COUNT; other++)
+    {
+        if (other != STORY_TARGET_EISUKE)
+            EXPECT_EQ(TargetState(other), TARGET_STORY_NOT_MET);
+    }
+
+    // Kazuki's scenes are his own.
+    gSpecialVar_0x8004 = STORY_TARGET_KAZUKI;
+    FrontierStory_StartRescueScene();
+    FrontierStory_GetRescueScene();
+    EXPECT_EQ(gSpecialVar_Result, STORY_TARGET_EISUKE);
+
+    // Yoriko has more to say once cured, and no fever without Darkrai.
+    gSpecialVar_0x8004 = STORY_TARGET_YORIKO;
+    FrontierStory_StartRescueScene();
+    gSpecialVar_0x8004 = RESCUE_TEXT_AFTER_CURE;
+    FrontierStory_BufferRescueText();
+    EXPECT(gSpecialVar_Result);
+    gSpecialVar_0x8004 = RESCUE_TEXT_FEVER_STARTING;
+    FrontierStory_BufferRescueText();
+    EXPECT(!gSpecialVar_Result);
 }
 
 static u32 PickInnGuests(u32 area)

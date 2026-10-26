@@ -31,6 +31,29 @@
 #define TARGET_TALK_HAPPY       0
 #define TARGET_TALK_WISH        1
 
+// Their Gold Symbol step (at the contest, after its last scene), from FrontierStory_CheckTargetFever:
+// the fever begins but Darkrai, not yet with the player, stops them; or the release battle.
+#define TARGET_FEVER_NONE       0
+#define TARGET_FEVER_ALONE      1
+#define TARGET_FEVER_RELEASE    2
+
+// VAR_0x8004 for FrontierStory_BufferRescueText: a part of their release battle and cure.
+#define RESCUE_TEXT_FEVER_STARTING 0 // Darkrai has not joined yet.
+#define RESCUE_TEXT_FEVER          1
+#define RESCUE_TEXT_VOICES_FADE    2 // Won: the network fades...
+#define RESCUE_TEXT_CHOOSES        3 // ...and they choose to leave it.
+#define RESCUE_TEXT_DELIRIOUS      4 // In the hub, their mind back but not cured.
+#define RESCUE_TEXT_EATS           5
+#define RESCUE_TEXT_WAKES_UP       6
+#define RESCUE_TEXT_REMEMBERS      7
+#define RESCUE_TEXT_AFTER_CURE     8 // Optional.
+#define RESCUE_TEXT_ASKS_POKENAV   9
+#define RESCUE_TEXT_GOES_TO_INN    10
+#define RESCUE_TEXT_COUNT          11
+
+// How the person cured in the hub looks (FrontierStory_PrepareHubRescue).
+#define VAR_HUB_RESCUED_GFX     VAR_OBJ_GFX_ID_A
+
 // The contest's scenes about the world, one after each category won at Master Rank past the
 // first (VAR_CONTEST_STORY_SCENES counts those seen). VAR_0x8004 for
 // FrontierStory_BufferContestSceneBranch is whose words: CONTEST_SCENE_YORIKO or _DARKRAI.
