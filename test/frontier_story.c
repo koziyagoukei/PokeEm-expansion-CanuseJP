@@ -249,15 +249,14 @@ TEST("Frontier story: Darkrai joins after any Silver Symbol")
     EXPECT_EQ(gSpecialVar_Result, FALSE);
 }
 
-TEST("Frontier story: Darkrai suggests the inn once a second person is cured")
+TEST("Frontier story: Darkrai suggests the inn once anyone is cured")
 {
     ResetStory();
-    FlagSet(FLAG_STORY_RESCUED_TOWER);
     FrontierStory_ShouldSuggestInn();
     EXPECT_EQ(gSpecialVar_Result, FALSE);
 
-    // Two cured people are not enough until the cure is known.
-    SetNamed(BRAIN(FRONTIER_FACILITY_ARENA), NAMED_STORY_RESCUED);
+    // Not until the cure is known.
+    FlagSet(FLAG_STORY_RESCUED_TOWER);
     FrontierStory_ShouldSuggestInn();
     EXPECT_EQ(gSpecialVar_Result, FALSE);
 
@@ -265,12 +264,13 @@ TEST("Frontier story: Darkrai suggests the inn once a second person is cured")
     FrontierStory_ShouldSuggestInn();
     EXPECT_EQ(gSpecialVar_Result, TRUE);
 
-    // Recovered but not yet cured does not count.
+    // A cured Brain counts too; recovered but not yet cured does not.
+    FlagClear(FLAG_STORY_RESCUED_TOWER);
     SetNamed(BRAIN(FRONTIER_FACILITY_ARENA), NAMED_STORY_RECOVERED);
     FrontierStory_ShouldSuggestInn();
     EXPECT_EQ(gSpecialVar_Result, FALSE);
 
-    SetNamed(GUEST(TRAINER_FRONTIER_GUEST_FIRST), NAMED_STORY_RESCUED);
+    SetNamed(BRAIN(FRONTIER_FACILITY_ARENA), NAMED_STORY_RESCUED);
     FrontierStory_ShouldSuggestInn();
     EXPECT_EQ(gSpecialVar_Result, TRUE);
 
@@ -566,4 +566,124 @@ TEST("Frontier story: the contest's scenes change with every count of rescues")
     gSpecialVar_0x8004 = CONTEST_SCENE_DARKRAI;
     FrontierStory_BufferContestSceneBranch();
     EXPECT_EQ(gStringVar4[0], EOS);
+}
+
+static bool32 ContestReleaseReady(void)
+{
+    FrontierStory_IsContestReleaseReady();
+    return gSpecialVar_Result;
+}
+
+static void SetTargetStep(u32 target, u32 state)
+{
+    gSpecialVar_0x8004 = target;
+    gSpecialVar_0x8005 = state;
+    FrontierStory_SetTargetStep();
+}
+
+static u32 ReturnedTarget(void)
+{
+    FrontierStory_FindReturnedTarget();
+    return gSpecialVar_Result;
+}
+
+TEST("Frontier story: Yoriko's release battle follows the last contest scene")
+{
+    ResetStory();
+    FlagSet(FLAG_STORY_DARKRAI_JOINED);
+    SetTargetStep(STORY_TARGET_YORIKO, TARGET_STORY_WISH);
+    VarSet(VAR_CONTEST_STORY_SCENES, CONTEST_STORY_SCENE_COUNT - 1);
+    EXPECT(!ContestReleaseReady());
+    VarSet(VAR_CONTEST_STORY_SCENES, CONTEST_STORY_SCENE_COUNT);
+    EXPECT(ContestReleaseReady());
+    FlagClear(FLAG_STORY_DARKRAI_JOINED);
+    EXPECT(!ContestReleaseReady());
+    FlagSet(FLAG_STORY_DARKRAI_JOINED);
+    EXPECT_EQ(ReturnedTarget(), STORY_TARGET_COUNT);
+
+    // Won: on her way to the hub and gone from the lobby, then cured.
+    SetTargetStep(STORY_TARGET_YORIKO, TARGET_STORY_RETURNED);
+    EXPECT_EQ(TargetState(STORY_TARGET_YORIKO), TARGET_STORY_RETURNED);
+    EXPECT(!ContestReleaseReady());
+    EXPECT_EQ(ReturnedTarget(), STORY_TARGET_YORIKO);
+    gSpecialVar_0x8004 = STORY_TARGET_YORIKO;
+    FrontierStory_IsTargetHere();
+    EXPECT(!gSpecialVar_Result);
+    SetTargetStep(STORY_TARGET_YORIKO, TARGET_STORY_RESCUED);
+    EXPECT_EQ(ReturnedTarget(), STORY_TARGET_COUNT);
+
+    // Nobody else's step moved; Kazuki keeps his own variable.
+    for (u32 other = STORY_TARGET_KAZUKI; other < STORY_TARGET_YORIKO; other++)
+        EXPECT_EQ(TargetState(other), TARGET_STORY_NOT_MET);
+    SetTargetStep(STORY_TARGET_KAZUKI, TARGET_STORY_RESCUED);
+    EXPECT_EQ(VarGet(VAR_TOWER_STORY_STATE), TOWER_STORY_NOT_MET);
+
+    VarSet(VAR_FRONTIER_INTRO_STATE, 0);
+    SetTargetStep(STORY_TARGET_YORIKO, TARGET_STORY_RETURNED);
+    EXPECT_EQ(ReturnedTarget(), STORY_TARGET_COUNT);
+}
+
+static u32 PickInnGuests(u32 area)
+{
+    u32 shown = 0;
+
+    gSpecialVar_0x8004 = area;
+    FrontierStory_PickInnGuests();
+    for (u32 slot = 0; slot < INN_GUEST_SLOTS; slot++)
+    {
+        if (!FlagGet(FLAG_INN_GUEST_HIDDEN + slot))
+            shown++;
+    }
+    return shown;
+}
+
+TEST("Frontier story: the inn shows a few of the cured Brains and guests where they rest")
+{
+    ResetStory();
+    EXPECT_EQ(PickInnGuests(INN_AREA_LOBBY), 0);
+    EXPECT_EQ(VarGet(VAR_INN_GUEST), NAMED_STORY_NONE);
+
+    // 0, 3 and 6 rest in the lobby and 1 in the east wing; 6 is not cured yet.
+    SetNamed(0, NAMED_STORY_RESCUED);
+    SetNamed(3, NAMED_STORY_RESCUED);
+    SetNamed(6, NAMED_STORY_RECOVERED);
+    SetNamed(1, NAMED_STORY_RESCUED);
+    for (u32 round = 0; round < 8; round++)
+    {
+        u32 first, second;
+
+        EXPECT_EQ(PickInnGuests(INN_AREA_LOBBY), 2);
+        first = VarGet(VAR_INN_GUEST);
+        second = VarGet(VAR_INN_GUEST + 1);
+        EXPECT(first == 0 || first == 3);
+        EXPECT(second == 0 || second == 3);
+        EXPECT_NE(first, second);
+        EXPECT_NE(VarGet(VAR_INN_GUEST_GFX), 0);
+    }
+    EXPECT_EQ(PickInnGuests(INN_AREA_EAST_WING), 1);
+    EXPECT_EQ(VarGet(VAR_INN_GUEST), 1);
+    EXPECT_EQ(VarGet(VAR_INN_GUEST + 1), NAMED_STORY_NONE);
+    gSpecialVar_0x8004 = 0;
+    FrontierStory_BufferInnGuestText();
+    EXPECT_NE(gStringVar4[0], EOS);
+    gSpecialVar_0x8004 = 1;
+    FrontierStory_BufferInnGuestText();
+    EXPECT_EQ(gStringVar4[0], EOS);
+    EXPECT_EQ(PickInnGuests(INN_AREA_WEST_WING), 0);
+
+    VarSet(VAR_FRONTIER_INTRO_STATE, 0);
+    EXPECT_EQ(PickInnGuests(INN_AREA_LOBBY), 0);
+}
+
+TEST("Frontier story: every Brain and guest has words for the inn")
+{
+    ResetStory();
+    for (u32 id = 0; id < NAMED_STORY_COUNT; id++)
+    {
+        SetNamed(id, NAMED_STORY_RESCUED);
+        VarSet(VAR_INN_GUEST, id);
+        gSpecialVar_0x8004 = 0;
+        FrontierStory_BufferInnGuestText();
+        EXPECT_NE(gStringVar4[0], EOS);
+    }
 }

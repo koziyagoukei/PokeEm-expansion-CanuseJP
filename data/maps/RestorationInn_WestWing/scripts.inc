@@ -1,2 +1,7 @@
 RestorationInn_WestWing_MapScripts::
+	map_script MAP_SCRIPT_ON_TRANSITION, RestorationInn_WestWing_OnTransition
 	.byte 0
+
+RestorationInn_WestWing_OnTransition:
+	call InnStory_EventScript_SetupWestWing
+	end

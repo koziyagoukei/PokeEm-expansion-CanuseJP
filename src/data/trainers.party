@@ -16992,3 +16992,43 @@ EVs: 4 HP / 252 Atk / 252 Spe
 - Belly Drum
 - Seed Bomb
 - Protect
+
+=== TRAINER_YORIKO_RELEASE ===
+Name: ヨリコ
+Class: Beauty
+Pic: Beauty
+Gender: Female
+Music: Female
+Double Battle: No
+AI: Basic Trainer
+Multi Party: Half
+
+Seviper @ Life Orb
+Ability: Infiltrator
+Level: 50
+Nature: Naive
+EVs: 4 HP / 252 Atk / 252 Spe
+- Gunk Shot
+- Crunch
+- Glare
+- Sucker Punch
+
+Kecleon @ Leftovers
+Ability: Protean
+Level: 50
+Nature: Adamant
+EVs: 252 HP / 252 Atk / 4 SpD
+- Fake Out
+- Shadow Sneak
+- Drain Punch
+- Knock Off
+
+Milotic @ Sitrus Berry
+Ability: Competitive
+Level: 50
+Nature: Modest
+EVs: 252 HP / 252 SpA / 4 SpD
+- Scald
+- Ice Beam
+- Dragon Pulse
+- Recover

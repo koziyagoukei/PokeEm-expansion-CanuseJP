@@ -722,3 +722,8 @@ gSpecials::
 	def_special FrontierStory_BufferTargetBranch
 	def_special FrontierStory_CheckContestScene
 	def_special FrontierStory_BufferContestSceneBranch
+	def_special FrontierStory_SetTargetStep
+	def_special FrontierStory_FindReturnedTarget
+	def_special FrontierStory_IsContestReleaseReady
+	def_special FrontierStory_PickInnGuests
+	def_special FrontierStory_BufferInnGuestText

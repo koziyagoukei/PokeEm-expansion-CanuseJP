@@ -1,2 +1,7 @@
 RestorationInn_EastWing_MapScripts::
+	map_script MAP_SCRIPT_ON_TRANSITION, RestorationInn_EastWing_OnTransition
 	.byte 0
+
+RestorationInn_EastWing_OnTransition:
+	call InnStory_EventScript_SetupEastWing
+	end

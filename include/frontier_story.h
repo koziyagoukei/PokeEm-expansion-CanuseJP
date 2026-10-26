@@ -26,6 +26,9 @@ void FrontierStory_CheckTargetApproach(void);
 void FrontierStory_TargetComesOver(void);
 void FrontierStory_BufferTargetTalk(void);
 void FrontierStory_BufferTargetBranch(void);
+void FrontierStory_SetTargetStep(void);
+void FrontierStory_FindReturnedTarget(void);
+void FrontierStory_IsContestReleaseReady(void);
 void FrontierStory_CheckContestScene(void);
 void FrontierStory_BufferContestSceneBranch(void);
 
@@ -36,6 +39,8 @@ void FrontierStory_CanDarkraiJoin(void);
 void FrontierStory_PickCampVisitor(void);
 void FrontierStory_BufferVisitorText(void);
 void FrontierStory_RescueVisitor(void);
+void FrontierStory_PickInnGuests(void);
+void FrontierStory_BufferInnGuestText(void);
 
 // Placing people for story scenes.
 void FrontierStory_ArrangeReleaseScene(void);

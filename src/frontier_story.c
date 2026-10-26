@@ -338,11 +338,11 @@ static u32 CountCuredPeople(void)
     return count;
 }
 
-// Once more than one person is cured, Darkrai suggests the inn across the sea.
+// The cured rest at the inn across the sea, so Darkrai suggests it once anyone is cured.
 void FrontierStory_ShouldSuggestInn(void)
 {
     gSpecialVar_Result = IsStoryActive() && FlagGet(FLAG_STORY_CURE_FOUND)
-                      && !FlagGet(FLAG_STORY_INN_OPEN) && CountCuredPeople() >= 2;
+                      && !FlagGet(FLAG_STORY_INN_OPEN) && CountCuredPeople() != 0;
 }
 
 // One bit per contest category this Pokémon has won at the rank or above.
@@ -546,6 +546,41 @@ void FrontierStory_BufferTargetBranch(void)
     gSpecialVar_Result = TRUE;
 }
 
+// VAR_0x8004: STORY_TARGET_* other than Kazuki, VAR_0x8005: their TARGET_STORY_*.
+void FrontierStory_SetTargetStep(void)
+{
+    if (gSpecialVar_0x8004 != STORY_TARGET_KAZUKI && gSpecialVar_0x8004 < STORY_TARGET_COUNT)
+        SetTargetState(gSpecialVar_0x8004, gSpecialVar_0x8005);
+}
+
+// VAR_RESULT: someone other than Kazuki whose mind is back but who is not cured yet, on their way
+// to the hub after their release battle; STORY_TARGET_COUNT if nobody is.
+void FrontierStory_FindReturnedTarget(void)
+{
+    u32 target;
+
+    gSpecialVar_Result = STORY_TARGET_COUNT;
+    if (!IsStoryActive())
+        return;
+    for (target = STORY_TARGET_REIKA; target < STORY_TARGET_COUNT; target++)
+    {
+        if (GetTargetState(target) == TARGET_STORY_RETURNED)
+        {
+            gSpecialVar_Result = target;
+            return;
+        }
+    }
+}
+
+// Yoriko's release battle opens after the last of the contest's scenes, which follows the fifth
+// category won at Master Rank.
+void FrontierStory_IsContestReleaseReady(void)
+{
+    gSpecialVar_Result = IsStoryActive() && FlagGet(FLAG_STORY_DARKRAI_JOINED)
+                      && GetTargetState(STORY_TARGET_YORIKO) == TARGET_STORY_WISH
+                      && VarGet(VAR_CONTEST_STORY_SCENES) >= CONTEST_STORY_SCENE_COUNT;
+}
+
 // On entering the contest lobby: whether the next of its scenes about the world is due. One
 // follows each category won at Master Rank after the first, while Yoriko wavers and once Darkrai
 // is there to explain.
@@ -631,6 +666,49 @@ void FrontierStory_RescueVisitor(void)
 
     if (id < NAMED_STORY_COUNT && GetNamedState(id) == NAMED_STORY_RECOVERED)
         SetNamedState(id, NAMED_STORY_RESCUED);
+}
+
+// VAR_0x8004: INN_AREA_*. On entering that part of the inn: shows a few of the Brains and guests
+// cured so far who rest there, picked at random each visit.
+void FrontierStory_PickInnGuests(void)
+{
+    u8 candidates[NAMED_STORY_COUNT];
+    u32 i, slot, pick, count = 0;
+
+    for (slot = 0; slot < INN_GUEST_SLOTS; slot++)
+    {
+        FlagSet(FLAG_INN_GUEST_HIDDEN + slot);
+        VarSet(VAR_INN_GUEST + slot, NAMED_STORY_NONE);
+    }
+    if (!IsStoryActive() || gSpecialVar_0x8004 >= INN_AREA_COUNT)
+        return;
+
+    for (i = gSpecialVar_0x8004; i < NAMED_STORY_COUNT; i += INN_AREA_COUNT)
+    {
+        if (GetNamedState(i) == NAMED_STORY_RESCUED)
+            candidates[count++] = i;
+    }
+    for (slot = 0; slot < INN_GUEST_SLOTS && count != 0; slot++)
+    {
+        pick = Random() % count;
+        i = candidates[pick];
+        candidates[pick] = candidates[--count];
+        VarSet(VAR_INN_GUEST + slot, i);
+        VarSet(VAR_INN_GUEST_GFX + slot, GetNamedObjectGfx(i));
+        FlagClear(FLAG_INN_GUEST_HIDDEN + slot);
+    }
+}
+
+// VAR_0x8004: the inn guest slot talked to. What they say goes in gStringVar4.
+void FrontierStory_BufferInnGuestText(void)
+{
+    u32 id = NAMED_STORY_NONE;
+
+    gStringVar4[0] = EOS;
+    if (gSpecialVar_0x8004 < INN_GUEST_SLOTS)
+        id = VarGet(VAR_INN_GUEST + gSpecialVar_0x8004);
+    if (id < NAMED_STORY_COUNT)
+        StringExpandPlaceholders(gStringVar4, sNamedStoryTexts[id].inn);
 }
 
 static bool32 TryGetLocalObject(u16 localId, struct ObjectEvent **object)

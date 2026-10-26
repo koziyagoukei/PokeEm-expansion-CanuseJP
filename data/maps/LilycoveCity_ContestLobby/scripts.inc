@@ -105,6 +105,9 @@ ContestShop_Text_Goodbye:
 	.string "{JPN}また きてね！$"
 
 LilycoveCity_ContestLobby_OnTransition:
+	@ The cook and Pokevirus only appear for Yoriko's release battle.
+	setflag FLAG_TEMP_1D
+	setflag FLAG_TEMP_1E
 	setvar VAR_0x8004, STORY_TARGET_YORIKO
 	call FrontierStory_EventScript_SetupTarget
 	call LilycoveCity_ContestLobby_EventScript_TryShowContestReporter

@@ -60,4 +60,16 @@
 #define CAMP_VISITOR_TEXT_GREETING 0
 #define CAMP_VISITOR_TEXT_CURED    1
 
+// The parts of the inn (VAR_0x8004 for FrontierStory_PickInnGuests). Each cured Brain or guest
+// rests in one of them; a visit there shows up to INN_GUEST_SLOTS of them, picked at random.
+#define INN_AREA_LOBBY          0
+#define INN_AREA_EAST_WING      1
+#define INN_AREA_WEST_WING      2
+#define INN_AREA_COUNT          3
+#define INN_GUEST_SLOTS         2
+// Per slot, consecutive: whether it is hidden, who is in it (NAMED_STORY_*), and how they look.
+#define FLAG_INN_GUEST_HIDDEN   FLAG_TEMP_13
+#define VAR_INN_GUEST           VAR_TEMP_8
+#define VAR_INN_GUEST_GFX       VAR_OBJ_GFX_ID_B
+
 #endif // GUARD_CONSTANTS_FRONTIER_STORY_H
