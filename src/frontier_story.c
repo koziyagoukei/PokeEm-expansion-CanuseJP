@@ -313,6 +313,25 @@ void FrontierStory_CountRescued(void)
     gSpecialVar_Result = count;
 }
 
+// Everyone cured so far: the scenario rescues and the Brains and guests cured at the camp.
+static u32 CountCuredPeople(void)
+{
+    u32 i, count;
+
+    FrontierStory_CountRescued();
+    count = gSpecialVar_Result;
+    for (i = 0; i < NAMED_STORY_COUNT; i++)
+        count += GetNamedState(i) == NAMED_STORY_RESCUED;
+    return count;
+}
+
+// Once more than one person is cured, Darkrai suggests the inn across the sea.
+void FrontierStory_ShouldSuggestInn(void)
+{
+    gSpecialVar_Result = IsStoryActive() && FlagGet(FLAG_STORY_CURE_FOUND)
+                      && !FlagGet(FLAG_STORY_INN_OPEN) && CountCuredPeople() >= 2;
+}
+
 static bool32 HasHyperRankRibbon(struct BoxPokemon *boxMon)
 {
     u32 field;

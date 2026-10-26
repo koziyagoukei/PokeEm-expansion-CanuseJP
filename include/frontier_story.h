@@ -22,6 +22,7 @@ void FrontierStory_BufferBrainIntro(void);
 
 // Shared progress and the camp visitors.
 void FrontierStory_CountRescued(void);
+void FrontierStory_ShouldSuggestInn(void);
 void FrontierStory_CanDarkraiJoin(void);
 void FrontierStory_PickCampVisitor(void);
 void FrontierStory_BufferVisitorText(void);

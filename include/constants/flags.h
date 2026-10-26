@@ -75,6 +75,9 @@
 #define FLAG_STORY_RESCUED_PIKE        FLAG_UNUSED_0x028
 #define FLAG_STORY_RESCUED_PYRAMID     FLAG_UNUSED_0x029
 #define FLAG_STORY_RESCUED_CONTEST     FLAG_UNUSED_0x02A
+// Darkrai suggested the inn across the sea; the Frontier harbor ferry sails there.
+#define FLAG_STORY_INN_OPEN            FLAG_UNUSED_0x02B
+#define FLAG_STORY_INN_VISITED         FLAG_UNUSED_0x02C
 #define FLAG_UNUSED_0x030    0x30 // Unused Flag
 #define FLAG_UNUSED_0x031    0x31 // Unused Flag
 #define FLAG_UNUSED_0x032    0x32 // Unused Flag

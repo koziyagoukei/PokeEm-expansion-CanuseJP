@@ -1,2 +1,7 @@
 RestorationInn_Outside_MapScripts::
+	map_script MAP_SCRIPT_ON_TRANSITION, RestorationInn_Outside_OnTransition
 	.byte 0
+
+RestorationInn_Outside_OnTransition:
+	setflag FLAG_STORY_INN_VISITED
+	end

@@ -1,22 +1,30 @@
 # Restoration Inn
 
-Original Gen III-style coastal ryokan assets and four isolated maps for future
-restored-person events. No ferry, NPC, story flag, encounter or existing-map warp
-is added. Existing map groups and layout IDs retain their order; the new entries
-are appended. There is no new save-data field.
+Original Gen III-style coastal ryokan assets and four maps for restored-person
+events. The only way in is the ferry: once `FLAG_STORY_INN_OPEN` is set, the
+ferry attendant at the Frontier's west harbor sails to the outside pier, and the
+crew member moored there sails back (`data/scripts/frontier_story.inc`). No
+connection, encounter or other existing-map warp is added. Existing map groups and
+layout IDs retain their order; the new entries are appended.
 
 ## Maps
 
 | Map | Size | Purpose |
 | --- | --- | --- |
-| `RestorationInn_Outside` | 40 x 36 | Two-storey inn, garden and future arrival pier |
+| `RestorationInn_Outside` | 32 x 33 | Two-storey inn, garden and the ferry pier |
 | `RestorationInn_Lobby` | 32 x 22 | Reception and shared tatami lounge |
-| `RestorationInn_EastWing` | 34 x 24 | Four rooms, twelve futons |
-| `RestorationInn_WestWing` | 34 x 24 | Four rooms, twelve futons |
+| `RestorationInn_EastWing` | 30 x 22 | Guest rooms |
+| `RestorationInn_WestWing` | 30 x 22 | Guest rooms |
 
-Outside connects only to the lobby. The lobby connects to both wings. There is
-deliberately no way to enter from the existing world until a later event adds
-one. Open these map names in Porymap, or use the existing debug warp facility.
+Outside connects only to the lobby. The lobby connects to both wings. The ferry
+(`OBJ_EVENT_GFX_SS_TIDAL`) is moored east of the pier with its crew member at the
+pier's end; arrivals stand at (18, 29). Open these map names in Porymap, or use
+the existing debug warp facility.
+
+The four maps have since been edited by hand in Porymap (smaller outside and
+wings, General-tileset grass and water). `build_maps.py` would overwrite those
+edits, so `test_generated_files_match` and the secondary-only metatile check in
+`test_dimensions_and_all_metatiles_are_valid` no longer describe the maps.
 
 ## Assets
 

@@ -43,6 +43,8 @@ static void ResetStory(void)
     }
     FlagClear(FLAG_STORY_CURE_FOUND);
     FlagClear(FLAG_STORY_DARKRAI_JOINED);
+    FlagClear(FLAG_STORY_INN_OPEN);
+    FlagClear(FLAG_STORY_INN_VISITED);
     for (u32 i = FLAG_STORY_RESCUED_TOWER; i <= FLAG_STORY_RESCUED_CONTEST; i++)
         FlagClear(i);
     VarSet(VAR_FRONTIER_FACILITY, FRONTIER_FACILITY_TOWER);
@@ -238,5 +240,40 @@ TEST("Frontier story: Darkrai joins after any Silver Symbol")
     EXPECT_EQ(gSpecialVar_Result, TRUE);
     FlagSet(FLAG_STORY_DARKRAI_JOINED);
     FrontierStory_CanDarkraiJoin();
+    EXPECT_EQ(gSpecialVar_Result, FALSE);
+}
+
+TEST("Frontier story: Darkrai suggests the inn once a second person is cured")
+{
+    ResetStory();
+    FlagSet(FLAG_STORY_RESCUED_TOWER);
+    FrontierStory_ShouldSuggestInn();
+    EXPECT_EQ(gSpecialVar_Result, FALSE);
+
+    // Two cured people are not enough until the cure is known.
+    SetNamed(BRAIN(FRONTIER_FACILITY_ARENA), NAMED_STORY_RESCUED);
+    FrontierStory_ShouldSuggestInn();
+    EXPECT_EQ(gSpecialVar_Result, FALSE);
+
+    FlagSet(FLAG_STORY_CURE_FOUND);
+    FrontierStory_ShouldSuggestInn();
+    EXPECT_EQ(gSpecialVar_Result, TRUE);
+
+    // Recovered but not yet cured does not count.
+    SetNamed(BRAIN(FRONTIER_FACILITY_ARENA), NAMED_STORY_RECOVERED);
+    FrontierStory_ShouldSuggestInn();
+    EXPECT_EQ(gSpecialVar_Result, FALSE);
+
+    SetNamed(GUEST(TRAINER_FRONTIER_GUEST_FIRST), NAMED_STORY_RESCUED);
+    FrontierStory_ShouldSuggestInn();
+    EXPECT_EQ(gSpecialVar_Result, TRUE);
+
+    FlagSet(FLAG_STORY_INN_OPEN);
+    FrontierStory_ShouldSuggestInn();
+    EXPECT_EQ(gSpecialVar_Result, FALSE);
+
+    FlagClear(FLAG_STORY_INN_OPEN);
+    VarSet(VAR_FRONTIER_INTRO_STATE, 0);
+    FrontierStory_ShouldSuggestInn();
     EXPECT_EQ(gSpecialVar_Result, FALSE);
 }

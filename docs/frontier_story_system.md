@@ -11,6 +11,7 @@
 | `VAR_TOWER_STORY_STATE` | `VAR_UNUSED_0x40FA` | タワー編の段階（`TOWER_STORY_*`） |
 | `FLAG_STORY_DARKRAI_JOINED` ほか2つ | `FLAG_UNUSED_0x020`〜`0x022` | 全シナリオ共通の進行 |
 | `FLAG_STORY_RESCUED_TOWER`〜`CONTEST` | `FLAG_UNUSED_0x023`〜`0x02A` | 8シナリオの完了 |
+| `FLAG_STORY_INN_OPEN`、`FLAG_STORY_INN_VISITED` | `FLAG_UNUSED_0x02B`、`0x02C` | 旅館への船の開通、初回の到着 |
 | `FLAG_STORY_NAMED_STATES_START`〜`END` | `FLAG_UNUSED_0x493`〜`0x4D4` | ブレーン7人・7戦目ゲスト26組の状態。1人2フラグ（`NAMED_STORY_*`） |
 
 `VAR_FRONTIER_INTRO_STATE` が `FRONTIER_INTRO_COMPLETE` でないセーブでは、ブレーン・ゲストの台詞と状態は従来のまま。
@@ -33,8 +34,10 @@
 - 7施設のブレーン戦の部屋: `FrontierStory_BufferBrainIntro` で戦闘前の場面を差し替え、既存の戦闘処理へ合流する。
 - `battle_setup.c` の `SetPokevirusReleaseTransition`: マルチバトルから解放戦の画面切り替えを使う。
 - ポケモン生成（`frontier_creator.c`）は常にLv100。
+- `FrontierStory_ShouldSuggestInn`: 治療法の判明後、治った人数（8シナリオの完了＋救出済みのブレーン・ゲスト）が2人以上で、旅館が未開通なら真。キャンプでの治療の直後と、ハブのダークライとの会話で使う。
+- 旅館への船: 西エリアの港の係員（`BattleFrontier_OutsideWest`）が `FLAG_STORY_INN_OPEN` で行き先を出し、`RestorationInn_Outside` の桟橋へ移動する。帰りは桟橋の船員から西エリアの港（19,67）へ戻る。港の南の桟橋が船の東側にあるため、フロンティアからの出港は西向き。乗船前に連れ歩きのポケモンをボールへ戻す。
 
-スクリプトは `data/scripts/frontier_story.inc`。タワーのロビー・ハブ・キャンプの `scripts.inc` から呼ぶ。
+スクリプトは `data/scripts/frontier_story.inc`。タワーのロビー・ハブ・キャンプ・西エリアの港の `scripts.inc` と、旅館の桟橋の船員から呼ぶ。
 
 ## 検査
 

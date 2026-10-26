@@ -107,9 +107,111 @@ FrontierStory_EventScript_Darkrai::
 	end
 
 FrontierStory_EventScript_DarkraiAfterCure::
+	special FrontierStory_ShouldSuggestInn
+	goto_if_eq VAR_RESULT, TRUE, FrontierStory_EventScript_DarkraiSuggestsInnInHub
 	msgbox FrontierStory_Text_DarkraiSearching, MSGBOX_DEFAULT
 	release
 	end
+
+FrontierStory_EventScript_DarkraiSuggestsInnInHub::
+	call FrontierStory_EventScript_DarkraiSuggestsInn
+	release
+	end
+
+@ ---------------------------------------------------------------------------
+@ The inn across the sea, and the ferry from the Frontier harbor
+
+@ After a cure at the camp: Darkrai calls from the hub once more than one person is cured.
+FrontierStory_EventScript_TrySuggestInn::
+	special FrontierStory_ShouldSuggestInn
+	goto_if_eq VAR_RESULT, FALSE, FrontierStory_EventScript_Return
+	playse SE_M_NIGHTMARE
+	waitse
+	msgbox FrontierStory_Text_DarkraiReachesOut, MSGBOX_DEFAULT
+	call FrontierStory_EventScript_DarkraiSuggestsInn
+	return
+
+FrontierStory_EventScript_DarkraiSuggestsInn::
+	msgbox FrontierStory_Text_DarkraiSuggestsInn, MSGBOX_DEFAULT
+	setflag FLAG_STORY_INN_OPEN
+	playfanfare MUS_OBTAIN_ITEM
+	message FrontierStory_Text_InnOpened
+	waitmessage
+	waitfanfare
+	waitbuttonpress
+	closemessage
+	return
+
+FrontierStory_EventScript_HarborFerry::
+	goto_if_set FLAG_STORY_INN_VISITED, FrontierStory_EventScript_HarborFerryAgain
+	msgbox FrontierStory_Text_HarborHeardVoice, MSGBOX_DEFAULT
+FrontierStory_EventScript_HarborFerryAgain::
+	msgbox FrontierStory_Text_HarborToInn, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, FrontierStory_EventScript_HarborFerryLater
+	msgbox FrontierStory_Text_HarborDeparting, MSGBOX_DEFAULT
+	closemessage
+	applymovement LOCALID_FRONTIER_FERRY_ATTENDANT, Common_Movement_WalkInPlaceFasterDown
+	waitmovement 0
+	delay 30
+	hideobjectat LOCALID_FRONTIER_FERRY_ATTENDANT, MAP_BATTLE_FRONTIER_OUTSIDE_WEST
+	call FrontierStory_EventScript_BoardFerry
+	@ The harbor's south pier lies east of the berth, so the ship turns and leaves westward.
+	applymovement LOCALID_FRONTIER_SS_TIDAL, FrontierStory_Movement_FerrySailWest
+	waitmovement 0
+	warp MAP_RESTORATION_INN_OUTSIDE, 18, 29
+	waitstate
+	release
+	end
+
+FrontierStory_EventScript_HarborFerryLater::
+	msgbox FrontierStory_Text_HarborLater, MSGBOX_DEFAULT
+	release
+	end
+
+FrontierStory_EventScript_InnSailor::
+	lock
+	faceplayer
+	msgbox FrontierStory_Text_InnSailorAsks, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, FrontierStory_EventScript_InnSailorStay
+	msgbox FrontierStory_Text_InnSailorDeparting, MSGBOX_DEFAULT
+	closemessage
+	applymovement LOCALID_INN_SAILOR, Common_Movement_WalkInPlaceFasterRight
+	waitmovement 0
+	delay 30
+	hideobjectat LOCALID_INN_SAILOR, MAP_RESTORATION_INN_OUTSIDE
+	call FrontierStory_EventScript_BoardFerry
+	applymovement LOCALID_INN_SS_TIDAL, FrontierStory_Movement_FerrySailEast
+	waitmovement 0
+	warp MAP_BATTLE_FRONTIER_OUTSIDE_WEST, 19, 67
+	waitstate
+	release
+	end
+
+FrontierStory_EventScript_InnSailorStay::
+	msgbox FrontierStory_Text_InnSailorStay, MSGBOX_DEFAULT
+	release
+	end
+
+@ The player steps onto the crew member's spot and goes aboard; a following Pokémon returns
+@ to its Poké Ball first, or it would stay on the pier.
+FrontierStory_EventScript_BoardFerry::
+	hidefollower
+	call_if_eq VAR_FACING, DIR_SOUTH, FrontierStory_EventScript_BoardSouth
+	call_if_eq VAR_FACING, DIR_EAST, FrontierStory_EventScript_BoardEast
+	delay 30
+	hideplayer
+	delay 60
+	return
+
+FrontierStory_EventScript_BoardSouth::
+	applymovement LOCALID_PLAYER, Common_Movement_WalkDown
+	waitmovement 0
+	return
+
+FrontierStory_EventScript_BoardEast::
+	applymovement LOCALID_PLAYER, Common_Movement_WalkRight
+	waitmovement 0
+	return
 
 @ ---------------------------------------------------------------------------
 @ Battle Tower: Kazuki
@@ -392,6 +494,7 @@ FrontierStory_EventScript_CampVisitor::
 	removeobject LOCALID_PARTY_ROAMER_VISITOR
 	setvar VAR_CAMP_VISITOR, NAMED_STORY_NONE
 	fadescreen FADE_FROM_BLACK
+	call FrontierStory_EventScript_TrySuggestInn
 	release
 	end
 
@@ -421,6 +524,28 @@ TowerStory_Movement_PokevirusFades:
 	set_visible
 	delay_8
 	set_invisible
+	step_end
+
+FrontierStory_Movement_FerrySailWest:
+	face_left
+	delay_16
+	walk_slow_left
+	walk_slow_left
+	walk_slow_left
+	walk_left
+	walk_left
+	walk_left
+	walk_left
+	step_end
+
+FrontierStory_Movement_FerrySailEast:
+	walk_slow_right
+	walk_slow_right
+	walk_slow_right
+	walk_right
+	walk_right
+	walk_right
+	walk_right
 	step_end
 
 @ ---------------------------------------------------------------------------
@@ -662,6 +787,58 @@ FrontierStory_Text_VisitorWillWait:
 	.string "{JPN}……そうか。\n"
 	.string "わたしも まだ まよって いるのかも。\p"
 	.string "また くるよ。$"
+
+FrontierStory_Text_DarkraiReachesOut:
+	.string "{JPN}ダークライ『……{PLAYER}。\n"
+	.string "きこえるか。』$"
+
+FrontierStory_Text_DarkraiSuggestsInn:
+	.string "{JPN}ダークライ『なおった ものが\n"
+	.string "ふえてきたな。\p"
+	.string "だが みなを あつめるには\n"
+	.string "リゾートでは せますぎるだろう。\p"
+	.string "うみの むこうに ふるい りょかんが\n"
+	.string "ある。 いまは だれも つかっていない。\p"
+	.string "ひろい へやが いくつも ある。\n"
+	.string "こころを やすめるには ちょうど いい。\p"
+	.string "みなとの ふねの ものには\n"
+	.string "わたしから こえを とどけておこう。\p"
+	.string "にしの みなとから わたるといい。』$"
+
+FrontierStory_Text_InnOpened:
+	.string "{JPN}うみの むこうの りょかんへ\n"
+	.string "ふねで わたれるように なった！$"
+
+FrontierStory_Text_HarborHeardVoice:
+	.string "{JPN}あっ ちょうど よかった！\p"
+	.string "さっき あたまの なかに\n"
+	.string "ふしぎな こえが ひびいたんです。\p"
+	.string "うみの むこうの りょかんまで\n"
+	.string "ふねを だしてほしいって……。\p"
+	.string "なんだか ほうっておけなくて\n"
+	.string "ふねを だせるように しておきました！$"
+
+FrontierStory_Text_HarborToInn:
+	.string "{JPN}うみの むこうの りょかんへ\n"
+	.string "むかいますか？$"
+
+FrontierStory_Text_HarborDeparting:
+	.string "{JPN}では しゅっこう します！\n"
+	.string "どうぞ おのりください！$"
+
+FrontierStory_Text_HarborLater:
+	.string "{JPN}また いつでも どうぞ！$"
+
+FrontierStory_Text_InnSailorAsks:
+	.string "{JPN}フロンティアへ もどるかい？$"
+
+FrontierStory_Text_InnSailorDeparting:
+	.string "{JPN}よし しゅっこうだ！\n"
+	.string "のってくれ！$"
+
+FrontierStory_Text_InnSailorStay:
+	.string "{JPN}そうかい。\n"
+	.string "もどるときは こえを かけてくれ。$"
 
 @ ---------------------------------------------------------------------------
 @ Text: Kazuki

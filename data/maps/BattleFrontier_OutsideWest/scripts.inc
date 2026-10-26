@@ -10,6 +10,7 @@ BattleFrontier_OutsideWest_OnTransition:
 BattleFrontier_OutsideWest_EventScript_FerryAttendant::
 	lock
 	faceplayer
+	goto_if_set FLAG_STORY_INN_OPEN, FrontierStory_EventScript_HarborFerry
 	msgbox BattleFrontier_OutsideWest_Text_FerrySuspended, MSGBOX_DEFAULT
 	release
 	end

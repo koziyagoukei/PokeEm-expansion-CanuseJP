@@ -703,3 +703,4 @@ gSpecials::
 	def_special FrontierStory_RescueVisitor
 	def_special FrontierStory_ArrangeReleaseScene
 	def_special FrontierStory_PlaceBesidePlayer
+	def_special FrontierStory_ShouldSuggestInn

@@ -119,17 +119,25 @@ class InnMapTest(unittest.TestCase):
             walkable={(x,y) for y,row in enumerate(g) for x,c in enumerate(row) if not c&0xC00}
             self.assertEqual(seen,walkable, n+' contains an inaccessible floor pocket')
 
-    def test_no_ferry_npcs_or_outside_world_connection(self):
+    def test_only_the_ferry_links_the_inn_to_the_world(self):
         for name,m in self.maps.items():
-            self.assertEqual(m['object_events'],[])
             self.assertEqual(m['coord_events'],[])
             self.assertIsNone(m['connections'])
             self.assertFalse(m['allow_escaping'])
             for w in m['warp_events']:
                 self.assertIn(w['dest_map'],[t['id'] for t in self.maps.values()])
-            grid=self.grid[name]
-            for x in range(len(grid[0])): self.assertTrue(grid[0][x]&0xC00); self.assertTrue(grid[-1][x]&0xC00)
-            for row in grid: self.assertTrue(row[0]&0xC00); self.assertTrue(row[-1]&0xC00)
+            # The pier runs to the south edge, so the solid border keeps the player on the map.
+            border = struct.unpack('<4H',(ROOT/f'data/layouts/{name}/border.bin').read_bytes())
+            self.assertTrue(all(b&0xC00 for b in border), name)
+            ferry = ['OBJ_EVENT_GFX_SS_TIDAL','OBJ_EVENT_GFX_SAILOR'] if name=='RestorationInn_Outside' else []
+            self.assertEqual([o['graphics_id'] for o in m['object_events']], ferry)
+        script = (ROOT/'data/scripts/frontier_story.inc').read_text(encoding='utf-8')
+        x, y = map(int, script.split('warp MAP_RESTORATION_INN_OUTSIDE, ')[1].split('\n')[0].split(', '))
+        outside = self.maps['RestorationInn_Outside']
+        sailor = next(o for o in outside['object_events'] if o['graphics_id']=='OBJ_EVENT_GFX_SAILOR')
+        self.assertFalse(self.grid['RestorationInn_Outside'][y][x]&0xC00)
+        self.assertEqual(abs(sailor['x']-x)+abs(sailor['y']-y), 1)
+        self.assertIn('FLAG_STORY_INN_OPEN', (ROOT/'data/maps/BattleFrontier_OutsideWest/scripts.inc').read_text(encoding='utf-8'))
 
 
 if __name__=='__main__': unittest.main()
