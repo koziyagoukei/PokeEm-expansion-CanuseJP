@@ -1,5 +1,6 @@
 .include "sound/voicegroups/dummy.inc"
 .include "sound/voicegroups/pokevirus_release.inc"
+.include "sound/voicegroups/frontier_opening.inc"
 
 @ drumsets
 .include "sound/voicegroups/drumsets/rs.inc"

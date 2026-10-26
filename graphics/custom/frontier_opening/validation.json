@@ -1,0 +1,30 @@
+{
+  "forest": {
+    "width": 240,
+    "height": 160,
+    "colors": 64,
+    "bytes": 38400,
+    "sha256": "f43c3691cc37a00c40254819ba0a95410586fa06d7895b34450e78e8f37c9086"
+  },
+  "meeting_hands": {
+    "width": 240,
+    "height": 160,
+    "colors": 64,
+    "bytes": 38400,
+    "sha256": "be4a999e47ab0bdd52d03ed2e6d402ccd7db846aecfa7f8bd1488b917e399ebb"
+  },
+  "network": {
+    "width": 240,
+    "height": 160,
+    "colors": 64,
+    "bytes": 38400,
+    "sha256": "c2adb3b5374de4b23ffe5325051c24373cf870b3ffaac8a3b37212f61ce37d1c"
+  },
+  "ridge": {
+    "width": 240,
+    "height": 160,
+    "colors": 64,
+    "bytes": 38400,
+    "sha256": "192361af3f06c6a98e82dcde4ebac71c2a52b01de3db1478f49b014b33b721b3"
+  }
+}

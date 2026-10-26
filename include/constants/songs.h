@@ -549,6 +549,7 @@
 
 // Custom music is appended without renumbering the original music or phonemes.
 #define MUS_POKEVIRUS_RELEASE       610
+#define MUS_FRONTIER_OPENING        611
 
 #define MUS_ROUTE118                0x7FFF  // Map is split into 2 music sections. controlled by GetCurrLocationDefaultMusic().
 

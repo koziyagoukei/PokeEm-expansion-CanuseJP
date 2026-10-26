@@ -28,13 +28,14 @@
 #include "constants/rgb.h"
 #include "constants/battle_anim.h"
 #include "pokemon.h"
+#include "frontier_opening.h"
 
 /*
     The intro is grouped into the following scenes
     Scene 0. Copyright screen
     Scene 1. GF Logo, pan up over plants, Flygon silhouette goes by
-    Scene 2. Player biking on path, joined by Pokemon
-    Scene 3. A fight between Groudon/Kyogre ends with Rayquaza
+    After Scene 1, frontier_opening.c runs the Frontier opening movie.
+    The legacy biking and legendary scenes below are retained but not entered.
 
     After this it progresses to the title screen
 */
@@ -64,7 +65,7 @@ static void SpriteCB_GameFreakLogo(struct Sprite *sprite);
 static void SpriteCB_FlygonSilhouette(struct Sprite *sprite);
 
 // Scene 2 main tasks
-static void Task_Scene2_Load(u8);
+static void UNUSED Task_Scene2_Load(u8);
 static void Task_Scene2_CreateSprites(u8);
 static void Task_Scene2_BikeRide(u8);
 static void Task_Scene2_End(u8);
@@ -1033,7 +1034,10 @@ void MainCB2_Intro(void)
 static void MainCB2_EndIntro(void)
 {
     if (!UpdatePaletteFade())
+    {
+        FrontierOpening_Stop();
         SetMainCallback2(CB2_InitTitleScreen);
+    }
 }
 
 static void LoadCopyrightGraphics(u16 tilesetAddress, u16 tilemapAddress, u16 paletteOffset)
@@ -1341,8 +1345,9 @@ static void Task_Scene1_PanUp(u8 taskId)
     {
         if (gIntroFrameCounter > TIMER_END_SCENE_1)
         {
-            // Fade to white
+            // Fade to white; MUS_INTRO fades with it before the Frontier opening's own song.
             BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_WHITEALPHA);
+            FadeOutBGM(1);
             gTasks[taskId].func = Task_Scene1_End;
         }
     }
@@ -1351,7 +1356,7 @@ static void Task_Scene1_PanUp(u8 taskId)
 static void Task_Scene1_End(u8 taskId)
 {
     if (gIntroFrameCounter > TIMER_START_SCENE_2)
-        gTasks[taskId].func = Task_Scene2_Load;
+        gTasks[taskId].func = Task_FrontierOpeningStart;
 }
 
 static void Task_Scene2_Load(u8 taskId)
