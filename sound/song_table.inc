@@ -618,6 +618,7 @@ gSongTable::
 	song ph_nurse_solo, MUSIC_PLAYER_SE2, 2
 	song mus_pokevirus_release, MUSIC_PLAYER_BGM, 0
 	song mus_frontier_opening, MUSIC_PLAYER_BGM, 0
+	song mus_frontier_title, MUSIC_PLAYER_BGM, 0
 
 	.align 2
 dummy_song_header:

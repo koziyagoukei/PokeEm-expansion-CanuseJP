@@ -263,8 +263,9 @@ class RomTests(unittest.TestCase):
             offset = addresses[label] - 0x08000000
             self.assertEqual(built[offset:offset + len(expected)], expected, label)
             checked.add(label)
+        # The Frontier title no longer displays the original clouds/Rayquaza.
         self.assertTrue({"gIntroCopyright_Gfx", "gIntro3Bg_Pal", "gIntroMay_Gfx",
-                         "gTitleScreenPressStartGfx", "sTitleScreenCloudsGfx"} <= checked)
+                         "gTitleScreenPressStartGfx"} <= checked)
 
 
 if __name__ == "__main__":

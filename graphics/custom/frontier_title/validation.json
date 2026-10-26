@@ -1,0 +1,10 @@
+{
+  "width": 240,
+  "height": 160,
+  "colors": 16,
+  "tileCount": 148,
+  "paletteBank": 15,
+  "gfxBytes": 4736,
+  "mapBytes": 2048,
+  "sha256": "4ab176b3eb7f729d1844c71ce4d880c873ed2705d92533fbeacca2b72842fe12"
+}
