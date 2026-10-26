@@ -2,6 +2,7 @@
 .include "sound/voicegroups/pokevirus_release.inc"
 .include "sound/voicegroups/frontier_opening.inc"
 .include "sound/voicegroups/frontier_title.inc"
+.include "sound/voicegroups/pokevirus_final.inc"
 
 @ drumsets
 .include "sound/voicegroups/drumsets/rs.inc"

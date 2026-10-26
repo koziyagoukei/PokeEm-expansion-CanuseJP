@@ -599,6 +599,18 @@ static const struct SpriteTemplate sTrainerBackSpriteTemplate =
     .callback = SpriteCB_BattleSpriteStartSlideLeft,
 };
 
+// The cook's source frames face left, opposite to the battle-facing direction.
+static const union AffineAnimCmd sTrainerBackAffineAnim_RocketCook[] =
+{
+    AFFINEANIMCMD_FRAME(-0x100, 0x100, 0, 0),
+    AFFINEANIMCMD_END,
+};
+
+static const union AffineAnimCmd *const sTrainerBackAffineAnims_RocketCook[] =
+{
+    sTrainerBackAffineAnim_RocketCook,
+};
+
 #define NUM_SECRET_BASE_CLASSES 5
 static const u8 sSecretBaseFacilityClasses[GENDER_COUNT][NUM_SECRET_BASE_CLASSES] =
 {
@@ -1872,6 +1884,8 @@ void SetMultiuseSpriteTemplateToTrainerBack(enum TrainerPicID trainerPicId, enum
         gMultiuseSpriteTemplate = sTrainerBackSpriteTemplate;
         gMultiuseSpriteTemplate.images = GetTrainerBackPicImage(trainerPicId);
         gMultiuseSpriteTemplate.anims = GetTrainerBackPicAnims(trainerPicId);
+        if (trainerPicId == TRAINER_PIC_ROCKET_COOK)
+            gMultiuseSpriteTemplate.affineAnims = sTrainerBackAffineAnims_RocketCook;
     }
     else
     {

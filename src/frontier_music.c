@@ -165,7 +165,7 @@ u16 FrontierMusic_ChooseBattleBGM(u16 defaultSong)
     u32 i, count = 0, selected;
     struct FrontierMusicSave *save = &gSaveBlock3Ptr->frontierMusic;
 
-    if (defaultSong == MUS_POKEVIRUS_RELEASE)
+    if (defaultSong == MUS_POKEVIRUS_RELEASE || defaultSong == MUS_POKEVIRUS_FINAL)
         return defaultSong;
 
     if (!(gBattleTypeFlags & BATTLE_TYPE_TRAINER) || !(gBattleTypeFlags & BATTLE_TYPE_FRONTIER)
