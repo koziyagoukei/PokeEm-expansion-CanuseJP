@@ -5084,18 +5084,15 @@ static u16 GetWinningMove(int winnerTournamentId, int loserTournamentId, u8 roun
 
             for (k = 0; k < FRONTIER_PARTY_SIZE; k++)
             {
-                u32 personality = 0;
                 enum Species targetSpecies = SPECIES_NONE;
                 enum Ability targetAbility = ABILITY_NONE;
                 uq4_12_t typeMultiplier = 0;
-                do
-                {
-                    personality = Random32();
-                } while (gFacilityTrainerMons[DOME_MONS[loserTournamentId][k]].nature != GetNatureFromPersonality(personality));
 
                 targetSpecies = gFacilityTrainerMons[DOME_MONS[loserTournamentId][k]].species;
 
-                if (personality & 1)
+                // Vanilla rolled a personality until its nature matched, only to read its low bit
+                // for the ability slot: the same even odds, at a fraction of the cost.
+                if (Random() & 1)
                     targetAbility = GetSpeciesAbility(targetSpecies, 1);
                 else
                     targetAbility = GetSpeciesAbility(targetSpecies, 0);

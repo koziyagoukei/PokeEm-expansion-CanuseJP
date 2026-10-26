@@ -3586,11 +3586,26 @@ static u16 GetRandomFrontierMonIgnoringSoftPartyClauses(const u16 *selectedMonId
     return 0;
 }
 
+// Draws from the whole pool and keeps the first selectable entry. That is the same uniform choice
+// among selectable entries as counting them first, without testing all of them for every pick:
+// the full pool made the Dome lobby's random results tree take seconds. A narrow filter may miss
+// every draw; the exact count below decides then.
+#define FRONTIER_MON_RANDOM_DRAWS 64
+
 u16 GetRandomFrontierMonFromFullPoolWithFilter(const u16 *selectedMonIds, u8 selectedCount, const u16 *excludedMonIds, u8 excludedMonIdCount, const enum Species *excludedSpecies, u8 excludedSpeciesCount, u8 filter)
 {
     u16 monId;
     u16 count;
     u16 target;
+    u32 draw;
+
+    for (draw = 0; draw < FRONTIER_MON_RANDOM_DRAWS; draw++)
+    {
+        monId = Random() % NUM_FRONTIER_MONS;
+        if (FrontierMonMatchesPoolFilter(monId, filter)
+            && IsFrontierMonSelectableForParty(monId, selectedMonIds, selectedCount, excludedMonIds, excludedMonIdCount, excludedSpecies, excludedSpeciesCount))
+            return monId;
+    }
 
     count = CountSelectableFrontierMons(selectedMonIds, selectedCount, excludedMonIds, excludedMonIdCount, excludedSpecies, excludedSpeciesCount, filter);
     if (count == 0)
