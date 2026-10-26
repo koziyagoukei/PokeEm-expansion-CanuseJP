@@ -1628,3 +1628,31 @@ build/generated/bpej_intro_extracted.ok
 /graphics/pokenav/ribbons/mon_info.pal
 /graphics/pokenav/ribbons/summary_bg.bin
 /graphics/pokenav/ribbons/summary_bg.png
+
+# Local design notes and asset-authoring tools are not release/build inputs.
+/.private/
+/AGENTS.md
+/CLAUDE.md
+# Existing tracked upstream documentation is unaffected by this rule.
+*.md
+!LICENSE.md
+!COPYING.md
+!NOTICE.md
+!THIRD_PARTY_NOTICES.md
+!/README.md
+!/INSTALL.md
+!/FEATURES.md
+!/CONTRIBUTING.md
+!/CREDITS.md
+/tools/frontier_title/
+/tools/frontier_opening/
+/tools/pokevirus_music/
+/tools/restoration_inn/
+/tools/frontier_district/
+/tools/resort_interiors/
+/tools/local_room/
+/tools/build_bath_gallery.py
+/tools/clrx_to_jasc.py
+/graphics/custom/**/prepare_assets.mjs
+# Use the verified BPEJ title banner rather than recreating the 2005 override.
+/graphics/custom/bpej/intro/title_screen/press_start.*

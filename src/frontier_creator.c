@@ -12,6 +12,7 @@
 #include "overworld.h"
 #include "pokemon.h"
 #include "pokemon_storage_system.h"
+#include "random.h"
 #include "script.h"
 #include "script_pokemon_util.h"
 #include "sound.h"
@@ -139,6 +140,7 @@ static void FrontierItemGiver_Open(u16 listId);
 static void FrontierItemGiver_DestroyAndReturn(u8 taskId);
 static void FrontierHub_GiveAutoItems(void);
 static void FrontierHub_TryGiveInitialParty(void);
+static bool32 FrontierHub_HasSpaceForInitialParty(void);
 static void FrontierHub_CreateInitialGiftMon(const struct FrontierHubInitialGiftMon *gift, struct Pokemon *mon);
 static u8 FrontierHub_GetAbilityNum(enum Species species, enum Ability ability);
 
@@ -205,46 +207,103 @@ static const u8 *const sFrontierCreatorTypeNames[NUMBER_OF_MON_TYPES] =
     [TYPE_STELLAR] = COMPOUND_STRING("ステラ"),
 };
 
-static const struct FrontierHubInitialGiftMon sFrontierHubInitialGiftMons[] =
+static const struct FrontierHubInitialGiftMon sFrontierHubInitialGiftMonPairs[][2] =
 {
     {
-        .species = SPECIES_PIKACHU_ORIGINAL,
-        .itemId = ITEM_PIKASHUNIUM_Z,
-        .ability = ABILITY_STATIC,
-        .nature = NATURE_HARDY,
-        .teraType = TYPE_ELECTRIC,
-        .evs = { [STAT_SPEED] = 252, [STAT_SPATK] = 252 },
-        .moves = { MOVE_THUNDERBOLT, MOVE_QUICK_ATTACK, MOVE_IRON_TAIL, MOVE_ELECTROWEB },
+        {
+            .species = SPECIES_SWAMPERT,
+            .itemId = ITEM_SWAMPERTITE,
+            .ability = ABILITY_TORRENT,
+            .nature = NATURE_ADAMANT,
+            .teraType = TYPE_WATER,
+            .evs = { [STAT_HP] = 4, [STAT_ATK] = 252, [STAT_SPEED] = 252 },
+            .moves = { MOVE_WATERFALL, MOVE_EARTHQUAKE, MOVE_ICE_PUNCH, MOVE_PROTECT },
+        },
+        {
+            .species = SPECIES_URSHIFU_RAPID_STRIKE,
+            .itemId = ITEM_FOCUS_SASH,
+            .ability = ABILITY_UNSEEN_FIST,
+            .nature = NATURE_JOLLY,
+            .teraType = TYPE_WATER,
+            .gmaxFactor = TRUE,
+            .evs = { [STAT_HP] = 4, [STAT_ATK] = 252, [STAT_SPEED] = 252 },
+            .moves = { MOVE_SURGING_STRIKES, MOVE_CLOSE_COMBAT, MOVE_AQUA_JET, MOVE_U_TURN },
+        },
     },
     {
-        .species = SPECIES_GENGAR,
-        .itemId = ITEM_NONE,
-        .ability = ABILITY_CURSED_BODY,
-        .nature = NATURE_TIMID,
-        .teraType = TYPE_FLYING,
-        .gmaxFactor = TRUE,
-        .evs = { [STAT_SPEED] = 252, [STAT_SPATK] = 252 },
-        .moves = { MOVE_SHADOW_BALL, MOVE_DAZZLING_GLEAM, MOVE_SLUDGE_BOMB, MOVE_WILL_O_WISP },
+        {
+            .species = SPECIES_BLAZIKEN,
+            .itemId = ITEM_BLAZIKENITE,
+            .ability = ABILITY_SPEED_BOOST,
+            .nature = NATURE_ADAMANT,
+            .teraType = TYPE_FIRE,
+            .evs = { [STAT_HP] = 4, [STAT_ATK] = 252, [STAT_SPEED] = 252 },
+            .moves = { MOVE_FLARE_BLITZ, MOVE_CLOSE_COMBAT, MOVE_STONE_EDGE, MOVE_PROTECT },
+        },
+        {
+            .species = SPECIES_TALONFLAME,
+            .itemId = ITEM_HEAVY_DUTY_BOOTS,
+            .ability = ABILITY_GALE_WINGS,
+            .nature = NATURE_JOLLY,
+            .teraType = TYPE_FLYING,
+            .evs = { [STAT_HP] = 4, [STAT_ATK] = 252, [STAT_SPEED] = 252 },
+            .moves = { MOVE_BRAVE_BIRD, MOVE_FLARE_BLITZ, MOVE_ROOST, MOVE_TAILWIND },
+        },
     },
     {
-        .species = SPECIES_SCEPTILE,
-        .itemId = ITEM_SCEPTILITE,
-        .ability = ABILITY_UNBURDEN,
-        .nature = NATURE_ADAMANT,
-        .teraType = TYPE_STEEL,
-        .evs = { [STAT_ATK] = 252, [STAT_SPEED] = 252 },
-        .moves = { MOVE_LEAF_BLADE, MOVE_AERIAL_ACE, MOVE_DRAGON_CLAW, MOVE_BRICK_BREAK },
+        {
+            .species = SPECIES_SCEPTILE,
+            .itemId = ITEM_SCEPTILITE,
+            .ability = ABILITY_UNBURDEN,
+            .nature = NATURE_TIMID,
+            .teraType = TYPE_DRAGON,
+            .evs = { [STAT_HP] = 4, [STAT_SPEED] = 252, [STAT_SPATK] = 252 },
+            .moves = { MOVE_LEAF_STORM, MOVE_DRAGON_PULSE, MOVE_FOCUS_BLAST, MOVE_PROTECT },
+        },
+        {
+            .species = SPECIES_SINISTCHA,
+            .itemId = ITEM_LEFTOVERS,
+            .ability = ABILITY_HOSPITALITY,
+            .nature = NATURE_BOLD,
+            .teraType = TYPE_WATER,
+            .evs = { [STAT_HP] = 252, [STAT_DEF] = 252, [STAT_SPDEF] = 4 },
+            .moves = { MOVE_MATCHA_GOTCHA, MOVE_SHADOW_BALL, MOVE_CALM_MIND, MOVE_STRENGTH_SAP },
+        },
     },
     {
-        .species = SPECIES_LYCANROC_DUSK,
-        .itemId = ITEM_NONE,
-        .ability = ABILITY_TOUGH_CLAWS,
-        .nature = NATURE_JOLLY,
-        .teraType = TYPE_FIRE,
-        .evs = { [STAT_ATK] = 252, [STAT_SPEED] = 252 },
-        .moves = { MOVE_STONE_EDGE, MOVE_TERA_BLAST, MOVE_ACCELEROCK, MOVE_PSYCHIC_FANGS },
+        {
+            .species = SPECIES_GARDEVOIR,
+            .itemId = ITEM_GARDEVOIRITE,
+            .ability = ABILITY_TRACE,
+            .nature = NATURE_TIMID,
+            .teraType = TYPE_FAIRY,
+            .evs = { [STAT_HP] = 4, [STAT_SPEED] = 252, [STAT_SPATK] = 252 },
+            .moves = { MOVE_HYPER_VOICE, MOVE_PSYSHOCK, MOVE_MYSTICAL_FIRE, MOVE_PROTECT },
+        },
+        {
+            .species = SPECIES_MIMIKYU,
+            .itemId = ITEM_MIMIKIUM_Z,
+            .ability = ABILITY_DISGUISE,
+            .nature = NATURE_ADAMANT,
+            .teraType = TYPE_GHOST,
+            .evs = { [STAT_HP] = 4, [STAT_ATK] = 252, [STAT_SPEED] = 252 },
+            .moves = { MOVE_PLAY_ROUGH, MOVE_SHADOW_CLAW, MOVE_SHADOW_SNEAK, MOVE_SWORDS_DANCE },
+        },
     },
 };
+
+static const struct FrontierHubInitialGiftMon sFrontierHubInitialRayquaza =
+{
+    .species = SPECIES_RAYQUAZA,
+    .itemId = ITEM_LIFE_ORB,
+    .ability = ABILITY_AIR_LOCK,
+    .nature = NATURE_JOLLY,
+    .teraType = TYPE_NORMAL,
+    .evs = { [STAT_HP] = 4, [STAT_ATK] = 252, [STAT_SPEED] = 252 },
+    .moves = { MOVE_DRAGON_ASCENT, MOVE_EXTREME_SPEED, MOVE_EARTHQUAKE, MOVE_DRAGON_DANCE },
+};
+
+STATIC_ASSERT(ARRAY_COUNT(sFrontierHubInitialGiftMonPairs) + 1 <= PARTY_SIZE, FrontierInitialPartyFits);
 
 static const u8 *const sFrontierCreatorNatureNames[NUM_NATURES + 1] =
 {
@@ -3534,18 +3593,24 @@ void Special_SetupFrontierHubState(void)
 static void FrontierHub_TryGiveInitialParty(void)
 {
     u32 i;
+    u32 choices;
     bool8 allGiven = TRUE;
     struct Pokemon mon;
 
-    if (FlagGet(FLAG_RECEIVED_ULTRA_FRONTIE_HUB_INITIAL_PARTY))
+    if (FlagGet(FLAG_RECEIVED_ULTRA_FRONTIE_HUB_INITIAL_PARTY) || !FrontierHub_HasSpaceForInitialParty())
     {
         gSpecialVar_Result = FALSE;
         return;
     }
 
-    for (i = 0; i < ARRAY_COUNT(sFrontierHubInitialGiftMons); i++)
+    // Each bit independently selects one of the two partners with equal odds.
+    choices = RandomUniform(RNG_NONE, 0, (1 << ARRAY_COUNT(sFrontierHubInitialGiftMonPairs)) - 1);
+    for (i = 0; i <= ARRAY_COUNT(sFrontierHubInitialGiftMonPairs); i++)
     {
-        FrontierHub_CreateInitialGiftMon(&sFrontierHubInitialGiftMons[i], &mon);
+        const struct FrontierHubInitialGiftMon *gift = &sFrontierHubInitialRayquaza;
+        if (i < ARRAY_COUNT(sFrontierHubInitialGiftMonPairs))
+            gift = &sFrontierHubInitialGiftMonPairs[i][(choices >> i) & 1];
+        FrontierHub_CreateInitialGiftMon(gift, &mon);
         if (GiveScriptedMonToPlayer(&mon, PARTY_SIZE) == MON_CANT_GIVE)
             allGiven = FALSE;
     }
@@ -3557,6 +3622,19 @@ static void FrontierHub_TryGiveInitialParty(void)
     }
 
     gSpecialVar_Result = allGiven;
+}
+
+static bool32 FrontierHub_HasSpaceForInitialParty(void)
+{
+    u32 freeSlots = PARTY_SIZE - CalculatePlayerPartyCount();
+    u32 required = ARRAY_COUNT(sFrontierHubInitialGiftMonPairs) + 1;
+
+    // Reserve room for the whole gift so a full PC cannot cause partial retries.
+    for (u32 box = 0; box < TOTAL_BOXES_COUNT && freeSlots < required; box++)
+        for (u32 slot = 0; slot < IN_BOX_COUNT && freeSlots < required; slot++)
+            if (GetBoxMonDataAt(box, slot, MON_DATA_SPECIES) == SPECIES_NONE)
+                freeSlots++;
+    return freeSlots >= required;
 }
 
 static void FrontierHub_CreateInitialGiftMon(const struct FrontierHubInitialGiftMon *gift, struct Pokemon *mon)
@@ -3574,6 +3652,13 @@ static void FrontierHub_CreateInitialGiftMon(const struct FrontierHubInitialGift
 
     for (i = 0; i < MAX_MON_MOVES; i++)
         SetMonMoveSlot(mon, gift->moves[i], i);
+
+    data = 0xFF;
+    SetMonData(mon, MON_DATA_PP_BONUSES, &data);
+    MonRestorePP(mon);
+
+    data = MAX_FRIENDSHIP;
+    SetMonData(mon, MON_DATA_FRIENDSHIP, &data);
 
     for (i = 0; i < NUM_STATS; i++)
         SetMonData(mon, MON_DATA_HP_EV + i, &gift->evs[i]);

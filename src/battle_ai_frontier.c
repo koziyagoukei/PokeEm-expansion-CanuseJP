@@ -1,4 +1,5 @@
 #include "global.h"
+#include "frontier_practice.h"
 #include "battle.h"
 #include "battle_ai_frontier.h"
 #include "battle_ai_main.h"
@@ -356,7 +357,8 @@ bool32 IsAiCheckmated(enum BattlerId battler)
 // Recorded battles are allowed: the AI decides again on playback and forfeits the same way.
 bool32 ShouldAiForfeitFrontierBattle(enum BattlerId battler)
 {
-    if (IsOnPlayerSide(battler)
+    if (FrontierPractice_IsBattle()
+     || IsOnPlayerSide(battler)
      || !(gBattleTypeFlags & BATTLE_TYPE_FRONTIER)
      || !(gBattleTypeFlags & BATTLE_TYPE_TRAINER)
      || (gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED_LINK | BATTLE_TYPE_DOUBLE)))

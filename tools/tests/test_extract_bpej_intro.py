@@ -77,23 +77,11 @@ class ManifestTests(unittest.TestCase):
         for path in re.findall(r'INCGFX_U\d+\("([^"]+)"', expansion):
             self.assertTrue((ROOT / path).is_file(), path)
 
-    def test_frontier_press_start_overrides_match_the_preserved_png(self):
-        converter = TOOLS / "gbagfx/gbagfx"
-        if not converter.is_file() or not os.access(converter, os.X_OK):
-            self.skipTest("build gbagfx before checking the custom title conversion")
+    def test_title_uses_the_verified_bpej_2004_banner_without_an_override(self):
         assets = {a["label"]: a for a in self.manifest["assets"]}
-        gfx = assets["gTitleScreenPressStartGfx"]
-        palette = assets["gTitleScreenPressStartPal"]
-        png = ROOT / "graphics/custom/bpej/intro/title_screen/press_start.png"
-        with tempfile.TemporaryDirectory() as directory:
-            raw = Path(directory) / "press_start.4bpp"
-            pal = Path(directory) / "press_start.gbapal"
-            subprocess.run([str(converter), str(png), str(raw), "-mwidth", "4",
-                            "-mheight", "1", "-num_tiles", "48", "-Wnum_tiles"], check=True)
-            subprocess.run([str(converter), str(png), str(pal)], check=True)
-            self.assertEqual(graphics.decode_lz77((ROOT / gfx["custom_path"]).read_bytes(), gfx),
-                             raw.read_bytes())
-            self.assertEqual((ROOT / palette["custom_path"]).read_bytes(), pal.read_bytes())
+        for label in ("gTitleScreenPressStartGfx", "gTitleScreenPressStartPal"):
+            self.assertFalse((ROOT / assets[label]["custom_path"]).exists(), label)
+        self.assertFalse((ROOT / "graphics/custom/bpej/intro/title_screen/press_start.png").exists())
 
     def test_unverified_or_out_of_scope_assets_are_rejected(self):
         for field, value, message in (("status", "partial", "verified"),
@@ -127,12 +115,16 @@ class ManifestTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
             custom = root / "graphics/custom/bpej/intro/test.4bpp"
+            private = root / ".private/frontier_dev/archive.4bpp"
             generated = root / "graphics/example.4bpp"
             custom.parent.mkdir(parents=True)
+            private.parent.mkdir(parents=True)
             custom.write_bytes(b"custom")
+            private.write_bytes(b"private")
             generated.write_bytes(b"generated")
             subprocess.run([shell, "-c", command], cwd=root, check=True)
             self.assertEqual(custom.read_bytes(), b"custom")
+            self.assertEqual(private.read_bytes(), b"private")
             self.assertFalse(generated.exists())
 
 
@@ -166,6 +158,11 @@ class RomTests(unittest.TestCase):
                 if asset["verification"]["byte_match"]:
                     self.assertEqual(graphics.sha1(decoded), asset["verification"]["comparison_sha1"])
                     self.assertEqual(len(decoded), asset["verification"]["comparison_size"])
+
+    def test_title_banner_selection_is_byte_identical_to_the_verified_japanese_rom(self):
+        for label in ("gTitleScreenPressStartGfx", "gTitleScreenPressStartPal"):
+            asset = self.assets[label]
+            self.assertEqual(graphics.desired_output(self.rom, asset), graphics.rom_output(self.rom, asset))
 
     def test_copyright_image_and_scene1_tilemaps_do_not_reference_missing_tiles(self):
         pairs = [("gIntroCopyright_Tilemap", "gIntroCopyright_Gfx")]

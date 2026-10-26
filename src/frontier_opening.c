@@ -14,7 +14,7 @@
 #include "constants/songs.h"
 #include "constants/species.h"
 
-// The movie is cut to MUS_FRONTIER_OPENING (tools/frontier_opening/music.py):
+// The movie is cut to MUS_FRONTIER_OPENING (sound/songs/midi/mus_frontier_opening.mid):
 // at 100 BPM a beat is exactly 36 frames and a bar 144.
 #define BEAT 36
 #define BAR (4 * BEAT)

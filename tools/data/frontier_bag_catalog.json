@@ -423,7 +423,8 @@
     {
       "item": "ITEM_FOCUS_SASH",
       "sources": [
-        "src/frontier_creator.c:sFrontierHubAutoItems"
+        "src/frontier_creator.c:sFrontierHubAutoItems",
+        "src/frontier_creator.c:sFrontierHubInitialGiftMonPairs"
       ]
     },
     {
@@ -526,7 +527,8 @@
     {
       "item": "ITEM_HEAVY_DUTY_BOOTS",
       "sources": [
-        "src/frontier_creator.c:sFrontierHubAutoItems"
+        "src/frontier_creator.c:sFrontierHubAutoItems",
+        "src/frontier_creator.c:sFrontierHubInitialGiftMonPairs"
       ]
     },
     {
@@ -647,13 +649,15 @@
       "sources": [
         "data/maps/BattleFrontier_ExchangeServiceCorner/scripts.inc",
         "src/battle_script_commands.c:sPickupTable",
-        "src/frontier_creator.c:sFrontierHubAutoItems"
+        "src/frontier_creator.c:sFrontierHubAutoItems",
+        "src/frontier_creator.c:sFrontierHubInitialGiftMonPairs"
       ]
     },
     {
       "item": "ITEM_LIFE_ORB",
       "sources": [
-        "src/frontier_creator.c:sFrontierHubAutoItems"
+        "src/frontier_creator.c:sFrontierHubAutoItems",
+        "src/frontier_creator.c:sFrontierHubInitialRayquaza"
       ]
     },
     {

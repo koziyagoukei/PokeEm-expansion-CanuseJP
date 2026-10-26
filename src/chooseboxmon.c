@@ -3,6 +3,7 @@
 #include "daycare.h"
 #include "event_data.h"
 #include "event_scripts.h"
+#include "frontier_practice.h"
 #include "field_weather.h"
 #include "malloc.h"
 #include "menu.h"
@@ -49,6 +50,7 @@ static u32 ChooseBoxMon_CanMonDeleteMove(struct BoxPokemon *boxmon);
 static u32 ChooseBoxMon_CanMonLearnSpecialVarMove(struct BoxPokemon *boxmon);
 static u32 ChooseBoxMon_CanRelearnMoves(struct BoxPokemon *boxmon);
 static u32 ChooseBoxMon_CanEvolve(struct BoxPokemon *boxmon);
+static u32 ChooseBoxMon_Practice(struct BoxPokemon *boxmon);
 
 static const struct PcMonSelection sPcMonSelectionTypes[] =
 {
@@ -59,11 +61,17 @@ static const struct PcMonSelection sPcMonSelectionTypes[] =
     [SELECT_PC_MON_MOVE_DELETER] = {ChoosePartyMon, ChooseBoxMon_CanMonDeleteMove, NULL, FALSE},
     [SELECT_PC_MON_MOVE_RELEARNER] = {ChooseMonForMoveRelearner, ChooseBoxMon_CanRelearnMoves, NULL, FALSE},
     [SELECT_PC_MON_EVOLUTION] = {ChoosePartyMon, ChooseBoxMon_CanEvolve, NULL, FALSE},
+    [SELECT_PC_MON_FRONTIER_PRACTICE] = {ChoosePartyMon, ChooseBoxMon_Practice, NULL, TRUE},
 };
 
 static u32 ChooseBoxMon_NoFilter(struct BoxPokemon *boxmon)
 {
     return VALID_MON;
+}
+
+static u32 ChooseBoxMon_Practice(struct BoxPokemon *boxmon)
+{
+    return FrontierPractice_CanSelectBoxMon(boxmon) ? VALID_MON : INVALID_MON;
 }
 
 static u32 ChooseBoxMon_IsNotEgg(struct BoxPokemon *boxmon)
@@ -164,7 +172,7 @@ static void Task_ChooseBoxMon(u8 taskId)
 void ChooseBoxMon(struct ScriptContext *ctx)
 {
     sSelectionType = ScriptReadByte(ctx);
-    if (!OW_CHOOSE_FROM_PC_AND_PARTY)
+    if (!OW_CHOOSE_FROM_PC_AND_PARTY && sSelectionType != SELECT_PC_MON_FRONTIER_PRACTICE)
     {
         sPcMonSelectionTypes[sSelectionType].partyMonBackup();
         return;

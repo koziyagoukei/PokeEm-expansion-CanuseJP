@@ -51,7 +51,7 @@ const u8 gText_EnglishExample[] = _("{ENG}HELLO");
 
 `{ENG}` / `{JPN}` の切り替えは、同じ文字列の後続部分にも有効です。英語と日本語が混在する文章や変数で挿入される文字列では、意図したモードで表示されるかを確認してください。英語フォント固有の記号やアクセント文字にも `{ENG}` が必要です。既存のラベル名・内部定数・制御コード・プレースホルダーは、翻訳時にも保持します。
 
-デフォルトは [include/config/text.h](include/config/text.h) の `TEXT_JAPANESE_BY_DEFAULT` で切り替えられます。詳細と移行時の注意は [テキストの表示言語](docs/text_language.md) を参照してください。
+デフォルトは [include/config/text.h](include/config/text.h) の `TEXT_JAPANESE_BY_DEFAULT` で切り替えられます。
 
 ## 導入とビルド
 
@@ -126,14 +126,6 @@ make -j4 --output-sync=target
 | --- | --- |
 | 環境構築・ビルド手順 | [INSTALL.md](INSTALL.md) |
 | Expansionの機能 | [FEATURES.md](FEATURES.md) |
-| BPEJサウンド抽出 | [bpej_sound_extraction.md](docs/bpej_sound_extraction.md) |
-| 図鑑UI抽出 | [bpej_pokedex_extraction.md](docs/bpej_pokedex_extraction.md) |
-| 戦闘背景アセットの調査・抽出 | [bpej_battle_background_asset_research.md](docs/bpej_battle_background_asset_research.md) |
-| コンテスト・コンディションUI抽出 | [bpej_contest_extraction.md](docs/bpej_contest_extraction.md) |
-| タイトル・オープニング関連の抽出 | [bpej_intro_extraction.md](docs/bpej_intro_extraction.md) |
-| ポケナビ関連の抽出 | [bpej_pokenav_extraction.md](docs/bpej_pokenav_extraction.md) |
-| 日本版ROMのテキストを参考にした日本語化 | [bpej_text_localization.md](docs/bpej_text_localization.md) |
-| ヘルプ・日記・モノローグ・選択肢分岐の情報ビューア | [info_viewer.md](docs/info_viewer.md) |
 | 本流の開発者・貢献者 | [CREDITS.md](CREDITS.md) |
 
 作業の進捗や補足情報は、[プロジェクトのDiscord](https://discord.gg/eYtXJDuYjX) と [Scrapbox](https://scrapbox.io/EmEX-JP/) でも案内しています。

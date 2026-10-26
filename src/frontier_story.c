@@ -1,4 +1,5 @@
 #include "global.h"
+#include "frontier_practice.h"
 #include "battle.h"
 #include "battle_scripts.h"
 #include "battle_setup.h"
@@ -216,6 +217,8 @@ void FrontierStory_OnBattleFinished(void)
 {
     u32 guestA, guestB;
 
+    if (FrontierPractice_IsBattle())
+        return;
     memset(&sStoryBattle, 0, sizeof(sStoryBattle));
     if (gBattleOutcome != B_OUTCOME_WON || !IsStoryActive()
      || !(gBattleTypeFlags & BATTLE_TYPE_FRONTIER)

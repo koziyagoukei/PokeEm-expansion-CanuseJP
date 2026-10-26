@@ -707,6 +707,14 @@ gSpecials::
 	def_special FrontierStory_ApproachPlayer
 	def_special FrontierStory_ReturnFromApproach
 	def_special TowerStory_CheckKazukiApproach
+	def_special Special_FrontierPracticeInit
+	def_special Special_FrontierPracticeAddSelection
+	def_special Special_FrontierPracticeRemove
+	def_special Special_FrontierPracticeClear
+	def_special Special_FrontierPracticeBufferSettings
+	def_special Special_FrontierPracticeBufferTeam
+	def_special Special_FrontierPracticeSetOption
+	def_special Special_FrontierPracticeStart, waitstate=1
 	def_special FrontierStory_IsTargetHere
 	def_special FrontierStory_CheckTargetApproach
 	def_special FrontierStory_TargetComesOver

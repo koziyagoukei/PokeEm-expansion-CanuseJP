@@ -7,6 +7,7 @@
 #include "battle_ai_items.h"
 #include "battle_ai_switch.h"
 #include "battle_ai_main.h"
+#include "frontier_practice.h"
 #include "battle_ai_record.h"
 #include "battle_stat_change.h"
 #include "battle_controllers.h"
@@ -266,12 +267,12 @@ static bool32 UseFrontierEasyAi(enum BattlerId battler)
     return (gBattleTypeFlags & BATTLE_TYPE_FRONTIER)
         && !(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED_LINK))
         && (battler == B_BATTLER_1 || battler == B_BATTLER_3)
-        && VarGet(VAR_FRONTIER_AI_LEVEL) == FRONTIER_AI_LEVEL_EASY;
+        && FrontierPractice_GetAiLevel() == FRONTIER_AI_LEVEL_EASY;
 }
 
 static u64 GetFrontierHackAiFlags(u64 flags)
 {
-    switch (VarGet(VAR_FRONTIER_AI_LEVEL))
+    switch (FrontierPractice_GetAiLevel())
     {
     case FRONTIER_AI_LEVEL_STRONGEST: // さいきょう
         flags |= AI_FLAG_CHECK_BAD_MOVE;

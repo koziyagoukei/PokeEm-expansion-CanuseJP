@@ -97,7 +97,7 @@
     {
       "warp_id": "bathtime",
       "x": 18,
-      "y": 1,
+      "y": 2,
       "elevation": 0,
       "dest_map": "MAP_PARTY_ROAMER_PARK",
       "dest_warp_id": "Gotohuro"

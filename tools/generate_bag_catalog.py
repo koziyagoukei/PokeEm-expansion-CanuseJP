@@ -11,7 +11,7 @@ ITEM_RE = re.compile(r"\bITEM_[A-Z0-9_]+\b")
 ARRAYS = {
     "src/frontier_creator.c": (
         "sFrontierHubAutoItems", "sFrontierHubGiveItems", "sFrontierMintGiveItems",
-        "sFrontierHubInitialGiftMons",
+        "sFrontierHubInitialGiftMonPairs", "sFrontierHubInitialRayquaza",
     ),
     "src/battle_script_commands.c": ("sPickupTable",),
     "src/contest_shop.c": ("sScarfItems",),
@@ -32,7 +32,7 @@ def without_comments(text):
 
 
 def array_body(text, name):
-    match = re.search(r"\b" + re.escape(name) + r"\s*\[[^;]*?=\s*\{", text)
+    match = re.search(r"\b" + re.escape(name) + r"\s*(?:\[[^;]*?)?=\s*\{", text)
     if match is None:
         raise ValueError("missing acquisition array: " + name)
     start = match.end()
