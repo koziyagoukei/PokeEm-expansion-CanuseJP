@@ -335,7 +335,11 @@ const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Pokevirus = {
     .compressed = FALSE,
     .tracks = TRACKS_NONE,
     .oam = &gObjectEventBaseOam_64x64,
+#if OW_LARGE_OW_SUPPORT
+    .subspriteTables = sOamTables_64x64_Tall,
+#else
     .subspriteTables = sOamTables_64x64,
+#endif
     .anims = sAnimTable_Following,
     .images = sPicTable_Pokevirus,
     .affineAnims = gDummySpriteAffineAnimTable,

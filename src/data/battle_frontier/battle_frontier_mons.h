@@ -3349,6 +3349,7 @@ const struct TrainerMon gBattleFrontierMons[NUM_FRONTIER_MONS] =
     },
     [FRONTIER_MON_AMPHAROS_1] = {
         .species = SPECIES_AMPHAROS,
+        .nickname = J_COMPOUND_STRING("モコまる"),
         .moves = {MOVE_POWER_GEM, MOVE_THUNDER_WAVE, MOVE_DAZZLING_GLEAM, MOVE_DISCHARGE},
         .heldItem = ITEM_AMPHAROSITE,
         .ev = TRAINER_PARTY_EVS(0, 0, 0, 252, 252, 0),
@@ -3363,6 +3364,7 @@ const struct TrainerMon gBattleFrontierMons[NUM_FRONTIER_MONS] =
     },
     [FRONTIER_MON_AMPHAROS_2] = {
         .species = SPECIES_AMPHAROS,
+        .nickname = J_COMPOUND_STRING("モコまる"),
         .moves = {MOVE_COTTON_SPORE, MOVE_DAZZLING_GLEAM, MOVE_DISCHARGE, MOVE_COTTON_GUARD},
         .heldItem = ITEM_AMPHAROSITE,
         .ev = TRAINER_PARTY_EVS(0, 0, 0, 252, 252, 0),
@@ -3377,6 +3379,7 @@ const struct TrainerMon gBattleFrontierMons[NUM_FRONTIER_MONS] =
     },
     [FRONTIER_MON_AMPHAROS_3] = {
         .species = SPECIES_AMPHAROS,
+        .nickname = J_COMPOUND_STRING("モコまる"),
         .moves = {MOVE_MAGNETIC_FLUX, MOVE_THUNDER_WAVE, MOVE_BREAKING_SWIPE, MOVE_POWER_UP_PUNCH},
         .heldItem = ITEM_COVERT_CLOAK,
         .ev = TRAINER_PARTY_EVS(252, 0, 252, 0, 0, 4),
@@ -6418,6 +6421,7 @@ const struct TrainerMon gBattleFrontierMons[NUM_FRONTIER_MONS] =
     },
     [FRONTIER_MON_FLYGON_1] = {
         .species = SPECIES_FLYGON,
+        .nickname = J_COMPOUND_STRING("トビスケ"),
         .moves = {MOVE_EARTHQUAKE, MOVE_OUTRAGE, MOVE_U_TURN, MOVE_FIRE_PUNCH},
         .heldItem = ITEM_CHOICE_SCARF,
         .ev = TRAINER_PARTY_EVS(4, 252, 0, 252, 0, 0),
@@ -6432,6 +6436,7 @@ const struct TrainerMon gBattleFrontierMons[NUM_FRONTIER_MONS] =
     },
     [FRONTIER_MON_FLYGON_2] = {
         .species = SPECIES_FLYGON,
+        .nickname = J_COMPOUND_STRING("トビスケ"),
         .moves = {MOVE_DRAGON_DANCE, MOVE_OUTRAGE, MOVE_EARTHQUAKE, MOVE_STONE_EDGE},
         .heldItem = ITEM_DRAGONIUM_Z,
         .ev = TRAINER_PARTY_EVS(4, 252, 0, 252, 0, 0),
@@ -6446,6 +6451,7 @@ const struct TrainerMon gBattleFrontierMons[NUM_FRONTIER_MONS] =
     },
     [FRONTIER_MON_FLYGON_3] = {
         .species = SPECIES_FLYGON,
+        .nickname = J_COMPOUND_STRING("トビスケ"),
         .moves = {MOVE_EARTH_POWER, MOVE_DRACO_METEOR, MOVE_FIRE_BLAST, MOVE_ROOST},
         .heldItem = ITEM_LIFE_ORB,
         .ev = TRAINER_PARTY_EVS(4, 0, 0, 252, 252, 0),
@@ -8182,6 +8188,7 @@ const struct TrainerMon gBattleFrontierMons[NUM_FRONTIER_MONS] =
     },
     [FRONTIER_MON_BASTIODON_1] = {
         .species = SPECIES_BASTIODON,
+        .nickname = J_COMPOUND_STRING("ゲンさん"),
         .moves = {MOVE_IRON_DEFENSE, MOVE_BODY_PRESS, MOVE_REST, MOVE_METAL_BURST},
         .heldItem = ITEM_LEFTOVERS,
         .ev = TRAINER_PARTY_EVS(252, 0, 252, 0, 0, 4),
@@ -8196,6 +8203,7 @@ const struct TrainerMon gBattleFrontierMons[NUM_FRONTIER_MONS] =
     },
     [FRONTIER_MON_BASTIODON_2] = {
         .species = SPECIES_BASTIODON,
+        .nickname = J_COMPOUND_STRING("ゲンさん"),
         .moves = {MOVE_METAL_BURST, MOVE_STEALTH_ROCK, MOVE_TOXIC, MOVE_ROAR},
         .heldItem = ITEM_CUSTAP_BERRY,
         .ev = TRAINER_PARTY_EVS(252, 0, 252, 0, 0, 4),
@@ -8210,6 +8218,7 @@ const struct TrainerMon gBattleFrontierMons[NUM_FRONTIER_MONS] =
     },
     [FRONTIER_MON_BASTIODON_3] = {
         .species = SPECIES_BASTIODON,
+        .nickname = J_COMPOUND_STRING("ゲンさん"),
         .moves = {MOVE_BODY_PRESS, MOVE_TOXIC, MOVE_STEALTH_ROCK, MOVE_REST},
         .heldItem = ITEM_ROCKY_HELMET,
         .ev = TRAINER_PARTY_EVS(252, 0, 4, 0, 0, 252),
@@ -11878,6 +11887,7 @@ const struct TrainerMon gBattleFrontierMons[NUM_FRONTIER_MONS] =
     },
     [FRONTIER_MON_REUNICLUS_1] = {
         .species = SPECIES_REUNICLUS,
+        .nickname = J_COMPOUND_STRING("ぷるもち"),
         .moves = {MOVE_CALM_MIND, MOVE_PSYSHOCK, MOVE_FOCUS_BLAST, MOVE_RECOVER},
         .heldItem = ITEM_LEFTOVERS,
         .ev = TRAINER_PARTY_EVS(252, 0, 252, 0, 0, 4),
@@ -11892,6 +11902,7 @@ const struct TrainerMon gBattleFrontierMons[NUM_FRONTIER_MONS] =
     },
     [FRONTIER_MON_REUNICLUS_2] = {
         .species = SPECIES_REUNICLUS,
+        .nickname = J_COMPOUND_STRING("ぷるもち"),
         .moves = {MOVE_TRICK_ROOM, MOVE_PSYCHIC, MOVE_FOCUS_BLAST, MOVE_SHADOW_BALL},
         .heldItem = ITEM_LIFE_ORB,
         .ev = TRAINER_PARTY_EVS(252, 0, 0, 0, 252, 4),
@@ -11906,6 +11917,7 @@ const struct TrainerMon gBattleFrontierMons[NUM_FRONTIER_MONS] =
     },
     [FRONTIER_MON_REUNICLUS_3] = {
         .species = SPECIES_REUNICLUS,
+        .nickname = J_COMPOUND_STRING("ぷるもち"),
         .moves = {MOVE_PSYCHIC, MOVE_FOCUS_BLAST, MOVE_SHADOW_BALL, MOVE_FUTURE_SIGHT},
         .heldItem = ITEM_ASSAULT_VEST,
         .ev = TRAINER_PARTY_EVS(252, 0, 0, 0, 252, 4),
@@ -16036,6 +16048,7 @@ const struct TrainerMon gBattleFrontierMons[NUM_FRONTIER_MONS] =
     },
     [FRONTIER_MON_MIMIKYU_DISGUISED_1] = {
         .species = SPECIES_MIMIKYU_DISGUISED,
+        .nickname = J_COMPOUND_STRING("つぎはぎ"),
         .moves = {MOVE_SWORDS_DANCE, MOVE_PLAY_ROUGH, MOVE_SHADOW_CLAW, MOVE_SHADOW_SNEAK},
         .heldItem = ITEM_LIFE_ORB,
         .ev = TRAINER_PARTY_EVS(4, 252, 0, 252, 0, 0),
@@ -16050,6 +16063,7 @@ const struct TrainerMon gBattleFrontierMons[NUM_FRONTIER_MONS] =
     },
     [FRONTIER_MON_MIMIKYU_DISGUISED_2] = {
         .species = SPECIES_MIMIKYU_DISGUISED,
+        .nickname = J_COMPOUND_STRING("つぎはぎ"),
         .moves = {MOVE_SWORDS_DANCE, MOVE_PLAY_ROUGH, MOVE_SHADOW_SNEAK, MOVE_WOOD_HAMMER},
         .heldItem = ITEM_MIMIKIUM_Z,
         .ev = TRAINER_PARTY_EVS(4, 252, 0, 252, 0, 0),
@@ -16064,6 +16078,7 @@ const struct TrainerMon gBattleFrontierMons[NUM_FRONTIER_MONS] =
     },
     [FRONTIER_MON_MIMIKYU_DISGUISED_3] = {
         .species = SPECIES_MIMIKYU_DISGUISED,
+        .nickname = J_COMPOUND_STRING("つぎはぎ"),
         .moves = {MOVE_PLAY_ROUGH, MOVE_WILL_O_WISP, MOVE_SUBSTITUTE, MOVE_PAIN_SPLIT},
         .heldItem = ITEM_LEFTOVERS,
         .ev = TRAINER_PARTY_EVS(252, 0, 252, 0, 0, 4),
@@ -23808,6 +23823,7 @@ const struct TrainerMon gBattleFrontierMons[NUM_FRONTIER_MONS] =
     },
     [FRONTIER_MON_CLODSIRE_1] = {
         .species = SPECIES_CLODSIRE,
+        .nickname = J_COMPOUND_STRING("おはぎ"),
         .moves = {MOVE_EARTHQUAKE, MOVE_TOXIC, MOVE_RECOVER, MOVE_STEALTH_ROCK},
         .heldItem = ITEM_LEFTOVERS,
         .ev = TRAINER_PARTY_EVS(252, 0, 4, 0, 0, 252),
@@ -23822,6 +23838,7 @@ const struct TrainerMon gBattleFrontierMons[NUM_FRONTIER_MONS] =
     },
     [FRONTIER_MON_CLODSIRE_2] = {
         .species = SPECIES_CLODSIRE,
+        .nickname = J_COMPOUND_STRING("おはぎ"),
         .moves = {MOVE_EARTHQUAKE, MOVE_TOXIC, MOVE_RECOVER, MOVE_HAZE},
         .heldItem = ITEM_ROCKY_HELMET,
         .ev = TRAINER_PARTY_EVS(252, 0, 252, 0, 0, 4),
@@ -23836,6 +23853,7 @@ const struct TrainerMon gBattleFrontierMons[NUM_FRONTIER_MONS] =
     },
     [FRONTIER_MON_CLODSIRE_3] = {
         .species = SPECIES_CLODSIRE,
+        .nickname = J_COMPOUND_STRING("おはぎ"),
         .moves = {MOVE_EARTHQUAKE, MOVE_TOXIC_SPIKES, MOVE_RECOVER, MOVE_AMNESIA},
         .heldItem = ITEM_BLACK_SLUDGE,
         .ev = TRAINER_PARTY_EVS(252, 0, 4, 0, 0, 252),

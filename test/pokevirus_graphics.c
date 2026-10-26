@@ -48,6 +48,29 @@ TEST("Pokevirus: all six map frames contain distinct pixel data")
             EXPECT_NE(memcmp(data + i * 2048, data + j * 2048, 2048), 0);
 }
 
+TEST("Pokevirus: large overworld sprite keeps its upper half above counters and walls")
+{
+#if OW_LARGE_OW_SUPPORT
+    const struct ObjectEventGraphicsInfo *info = GetObjectEventGraphicsInfo(OBJ_EVENT_GFX_POKEVIRUS);
+    const struct SubspriteTable *tables = info->subspriteTables;
+    EXPECT_EQ(tables[1].subspriteCount, 2);
+    EXPECT_EQ(tables[1].subsprites[0].x, -32);
+    EXPECT_EQ(tables[1].subsprites[0].y, -32);
+    EXPECT_EQ((u32)tables[1].subsprites[0].tileOffset, 0);
+    EXPECT_EQ((u32)tables[1].subsprites[0].shape, SPRITE_SHAPE(64x32));
+    EXPECT_EQ((u32)tables[1].subsprites[0].size, SPRITE_SIZE(64x32));
+    EXPECT_EQ((u32)tables[1].subsprites[0].priority, 1);
+    EXPECT_EQ(tables[1].subsprites[1].x, -32);
+    EXPECT_EQ(tables[1].subsprites[1].y, 0);
+    EXPECT_EQ((u32)tables[1].subsprites[1].tileOffset, 32);
+    EXPECT_EQ((u32)tables[1].subsprites[1].shape, SPRITE_SHAPE(64x32));
+    EXPECT_EQ((u32)tables[1].subsprites[1].size, SPRITE_SIZE(64x32));
+    EXPECT_EQ((u32)tables[1].subsprites[1].priority, 2);
+    EXPECT_EQ(tables[2].subspriteCount, 1);
+    EXPECT_EQ((u32)tables[2].subsprites[0].priority, 1);
+#endif
+}
+
 TEST("Pokevirus: opponent trainer picture decompresses into one frame without overflow")
 {
     const struct TrainerFrontPicInfo *info = gTrainerPicInfo[TRAINER_PIC_POKEVIRUS].frontPic;
