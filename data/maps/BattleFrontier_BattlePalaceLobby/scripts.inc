@@ -1,7 +1,13 @@
 BattleFrontier_BattlePalaceLobby_MapScripts::
+	map_script MAP_SCRIPT_ON_TRANSITION, BattleFrontier_BattlePalaceLobby_OnTransition
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, BattleFrontier_BattlePalaceLobby_OnFrame
 	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, BattleFrontier_BattlePalaceLobby_OnWarp
 	.byte 0
+
+BattleFrontier_BattlePalaceLobby_OnTransition:
+	setvar VAR_0x8004, STORY_TARGET_IKUE
+	call FrontierStory_EventScript_SetupTarget
+	end
 
 BattleFrontier_BattlePalaceLobby_OnWarp:
 	map_script_2 VAR_TEMP_1, 0, BattleFrontier_BattlePalaceLobby_EventScript_TurnPlayerNorth
@@ -18,6 +24,8 @@ BattleFrontier_BattlePalaceLobby_OnFrame:
 	map_script_2 VAR_TEMP_CHALLENGE_STATUS, CHALLENGE_STATUS_PAUSED, BattleFrontier_BattlePalaceLobby_EventScript_ResumeChallenge
 	map_script_2 VAR_TEMP_CHALLENGE_STATUS, CHALLENGE_STATUS_WON, BattleFrontier_BattlePalaceLobby_EventScript_WonChallenge
 	map_script_2 VAR_TEMP_CHALLENGE_STATUS, CHALLENGE_STATUS_LOST, BattleFrontier_BattlePalaceLobby_EventScript_LostChallenge
+	map_script_2 VAR_TEMP_E, 0, PalaceStory_EventScript_LobbyArrival
+	map_script_2 VAR_TEMP_E, 1, FrontierStory_EventScript_LobbyDarkraiCall
 	.2byte 0
 
 BattleFrontier_BattlePalaceLobby_EventScript_GetChallengeStatus::

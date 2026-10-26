@@ -48,6 +48,8 @@ static void ResetStory(void)
     FlagClear(FLAG_STORY_TOWER_FEVER_SHOWN);
     FlagClear(FLAG_STORY_TOWER_RELEASE_SHOWN);
     VarSet(VAR_TOWER_STORY_STATE, TOWER_STORY_NOT_MET);
+    VarSet(VAR_STORY_TARGET_STATES, 0);
+    VarSet(VAR_STORY_TARGET_STATES_2, 0);
     for (u32 i = FLAG_STORY_RESCUED_TOWER; i <= FLAG_STORY_RESCUED_CONTEST; i++)
         FlagClear(i);
     VarSet(VAR_FRONTIER_FACILITY, FRONTIER_FACILITY_TOWER);
@@ -327,4 +329,149 @@ TEST("Tower story: one visit covers every step Kazuki missed, and old saves are 
     ResetStory();
     VarSet(VAR_FRONTIER_INTRO_STATE, 0);
     EXPECT(!KazukiComesOver());
+}
+
+static u32 TargetState(u32 target)
+{
+    if (target == STORY_TARGET_KAZUKI)
+        return VarGet(VAR_TOWER_STORY_STATE);
+    if (target <= STORY_TARGET_TOSHIO)
+        return (VarGet(VAR_STORY_TARGET_STATES) >> ((target - STORY_TARGET_REIKA) * 4)) & 0xF;
+    return (VarGet(VAR_STORY_TARGET_STATES_2) >> ((target - STORY_TARGET_YAYOI) * 4)) & 0xF;
+}
+
+static bool32 TargetComesOver(u32 target)
+{
+    gSpecialVar_0x8004 = target;
+    FrontierStory_CheckTargetApproach();
+    return gSpecialVar_Result;
+}
+
+// Talks to them; returns whether their next step follows at once.
+static bool32 TalkToTarget(u32 target)
+{
+    gSpecialVar_0x8004 = target;
+    FrontierStory_BufferTargetTalk();
+    EXPECT_NE(gStringVar4[0], EOS);
+    return gSpecialVar_Result;
+}
+
+static bool32 TargetBranch(u32 target, u32 talk)
+{
+    gSpecialVar_0x8004 = target;
+    gSpecialVar_0x8005 = talk;
+    FrontierStory_BufferTargetBranch();
+    return gSpecialVar_Result;
+}
+
+TEST("Frontier story: each facility's person is met, then wavers after its Silver Symbol")
+{
+    for (u32 target = STORY_TARGET_REIKA; target <= STORY_TARGET_NOBUO; target++)
+    {
+        ResetStory();
+        EXPECT(TargetComesOver(target));
+        EXPECT(!TalkToTarget(target));
+        EXPECT_EQ(TargetState(target), TARGET_STORY_MET);
+        EXPECT_EQ(gSpecialVar_0x8005, TARGET_TALK_HAPPY);
+        EXPECT(!TargetComesOver(target));
+        TalkToTarget(target);
+        EXPECT_EQ(TargetState(target), TARGET_STORY_MET);
+
+        // Another facility's symbol does not count.
+        FlagSet(gFrontierBrainInfo[target == STORY_TARGET_REIKA ? FRONTIER_FACILITY_TOWER : FRONTIER_FACILITY_DOME].silverSymbolFlag);
+        EXPECT(!TargetComesOver(target));
+        FlagSet(gFrontierBrainInfo[target].silverSymbolFlag);
+        EXPECT(TargetComesOver(target));
+        EXPECT(!TalkToTarget(target));
+        EXPECT_EQ(TargetState(target), TARGET_STORY_WISH);
+        EXPECT_EQ(gSpecialVar_0x8005, TARGET_TALK_WISH);
+        EXPECT(!TargetComesOver(target));
+        TalkToTarget(target);
+        EXPECT_EQ(TargetState(target), TARGET_STORY_WISH);
+        // Nobody else's step moved.
+        for (u32 other = STORY_TARGET_KAZUKI; other < STORY_TARGET_COUNT; other++)
+            if (other != target) EXPECT_EQ(TargetState(other), TARGET_STORY_NOT_MET);
+    }
+}
+
+TEST("Frontier story: met with the symbol already won, the person's change follows at once")
+{
+    ResetStory();
+    FlagSet(gFrontierBrainInfo[FRONTIER_FACILITY_PIKE].silverSymbolFlag);
+    EXPECT(TalkToTarget(STORY_TARGET_YAYOI));
+    EXPECT_EQ(TargetState(STORY_TARGET_YAYOI), TARGET_STORY_MET);
+    EXPECT(!TalkToTarget(STORY_TARGET_YAYOI));
+    EXPECT_EQ(TargetState(STORY_TARGET_YAYOI), TARGET_STORY_WISH);
+}
+
+TEST("Frontier story: the contest's person changes after the first Master Rank win, not Hyper")
+{
+    u8 rank = 3;
+
+    ResetStory();
+    ZeroPlayerPartyMons();
+    CreateMon(&gParties[B_TRAINER_PLAYER][0], SPECIES_PIKACHU, 50, 0, OTID_STRUCT_PLAYER_ID);
+    SetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_SMART_RIBBON, &rank);
+    TalkToTarget(STORY_TARGET_YORIKO);
+    EXPECT(!TargetComesOver(STORY_TARGET_YORIKO));
+    rank = 4;
+    SetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_SMART_RIBBON, &rank);
+    EXPECT(TargetComesOver(STORY_TARGET_YORIKO));
+    TalkToTarget(STORY_TARGET_YORIKO);
+    EXPECT_EQ(TargetState(STORY_TARGET_YORIKO), TARGET_STORY_WISH);
+    ZeroPlayerPartyMons();
+}
+
+TEST("Frontier story: people talk about whoever has left the network and whoever wavers")
+{
+    static const u8 sKazuki[] = _("カズキ");
+
+    ResetStory();
+    EXPECT(!TargetBranch(STORY_TARGET_REIKA, TARGET_TALK_HAPPY));
+    EXPECT(!TargetBranch(STORY_TARGET_REIKA, TARGET_TALK_WISH));
+
+    // Someone else wavering only matters once they waver themselves.
+    FlagSet(gFrontierBrainInfo[FRONTIER_FACILITY_ARENA].silverSymbolFlag);
+    while (TalkToTarget(STORY_TARGET_EISUKE))
+        ;
+    EXPECT_EQ(TargetState(STORY_TARGET_EISUKE), TARGET_STORY_WISH);
+    EXPECT(!TargetBranch(STORY_TARGET_REIKA, TARGET_TALK_HAPPY));
+    EXPECT(TargetBranch(STORY_TARGET_REIKA, TARGET_TALK_WISH));
+    EXPECT(!TargetBranch(STORY_TARGET_EISUKE, TARGET_TALK_WISH)); // not about themself
+
+    // Kazuki leaving is noticed by name, and comes before the wavering.
+    VarSet(VAR_TOWER_STORY_STATE, TOWER_STORY_RESCUED);
+    FlagSet(FLAG_STORY_RESCUED_TOWER);
+    EXPECT(TargetBranch(STORY_TARGET_REIKA, TARGET_TALK_HAPPY));
+    EXPECT_EQ(StringCompare(gStringVar2, sKazuki), 0);
+    EXPECT(TargetBranch(STORY_TARGET_REIKA, TARGET_TALK_WISH));
+    EXPECT_EQ(StringCompare(gStringVar2, sKazuki), 0);
+    EXPECT(!TargetBranch(STORY_TARGET_KAZUKI, TARGET_TALK_HAPPY));
+
+    // Kazuki hears about the others the same way.
+    FlagSet(FLAG_STORY_RESCUED_CONTEST);
+    EXPECT(TargetBranch(STORY_TARGET_KAZUKI, TARGET_TALK_HAPPY));
+    EXPECT_NE(StringCompare(gStringVar2, sKazuki), 0);
+    // Two gone: "several".
+    EXPECT(TargetBranch(STORY_TARGET_REIKA, TARGET_TALK_HAPPY));
+    EXPECT_NE(StringCompare(gStringVar2, sKazuki), 0);
+}
+
+TEST("Frontier story: people leave their lobby once the network lets them go")
+{
+    ResetStory();
+    for (u32 target = STORY_TARGET_KAZUKI; target < STORY_TARGET_COUNT; target++)
+    {
+        gSpecialVar_0x8004 = target;
+        FrontierStory_IsTargetHere();
+        EXPECT(gSpecialVar_Result);
+    }
+    FlagSet(FLAG_STORY_RESCUED_DOME);
+    gSpecialVar_0x8004 = STORY_TARGET_REIKA;
+    FrontierStory_IsTargetHere();
+    EXPECT(!gSpecialVar_Result);
+    VarSet(VAR_FRONTIER_INTRO_STATE, 0);
+    gSpecialVar_0x8004 = STORY_TARGET_IKUE;
+    FrontierStory_IsTargetHere();
+    EXPECT(!gSpecialVar_Result);
 }

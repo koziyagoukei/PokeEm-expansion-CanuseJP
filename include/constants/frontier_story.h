@@ -8,6 +8,29 @@
 #define TOWER_STORY_RETURNED    3 // Won the release battle; his mind is back but he is not cured yet.
 #define TOWER_STORY_RESCUED     4
 
+// The person the network holds at each scenario, in FLAG_STORY_RESCUED_* order.
+#define STORY_TARGET_KAZUKI     0 // Battle Tower
+#define STORY_TARGET_REIKA      1 // Battle Dome
+#define STORY_TARGET_IKUE       2 // Battle Palace
+#define STORY_TARGET_EISUKE     3 // Battle Arena
+#define STORY_TARGET_TOSHIO     4 // Battle Factory
+#define STORY_TARGET_YAYOI      5 // Battle Pike
+#define STORY_TARGET_NOBUO      6 // Battle Pyramid
+#define STORY_TARGET_YORIKO     7 // Contest
+#define STORY_TARGET_COUNT      8
+
+// Each person's step of their story. Kazuki's is VAR_TOWER_STORY_STATE (TOWER_STORY_*, the same
+// values); the others share VAR_STORY_TARGET_STATES and VAR_STORY_TARGET_STATES_2, four bits each.
+#define TARGET_STORY_NOT_MET    0
+#define TARGET_STORY_MET        1
+#define TARGET_STORY_WISH       2 // After the Silver Symbol; at the contest, the first Master Rank win.
+#define TARGET_STORY_RETURNED   3
+#define TARGET_STORY_RESCUED    4
+
+// VAR_0x8005 for FrontierStory_BufferTargetBranch: which part of their story the person is in.
+#define TARGET_TALK_HAPPY       0
+#define TARGET_TALK_WISH        1
+
 // Memory of a Frontier Brain or seventh-battle guest, stored in two flags per person.
 #define NAMED_STORY_INFECTED    0
 #define NAMED_STORY_UNEASY      1 // Lost to the player once and questioned their own words.

@@ -707,3 +707,8 @@ gSpecials::
 	def_special FrontierStory_ApproachPlayer
 	def_special FrontierStory_ReturnFromApproach
 	def_special TowerStory_CheckKazukiApproach
+	def_special FrontierStory_IsTargetHere
+	def_special FrontierStory_CheckTargetApproach
+	def_special FrontierStory_TargetComesOver
+	def_special FrontierStory_BufferTargetTalk
+	def_special FrontierStory_BufferTargetBranch

@@ -26,10 +26,12 @@
 #include "constants/vars.h"
 
 #include "data/frontier_story_named.h"
+#include "data/frontier_story_targets.h"
 
 // The Frontier never asks for less than level 50, so story battles don't either.
 #define STORY_BATTLE_MIN_LEVEL 50
 #define RANK_RIBBON_HYPER 3
+#define RANK_RIBBON_MASTER 4
 // How far someone walks over to the player before a story talk; the start cell of that path.
 #define APPROACH_MAX_STEPS 40
 #define PATH_START 0xFF
@@ -339,7 +341,7 @@ void FrontierStory_ShouldSuggestInn(void)
                       && !FlagGet(FLAG_STORY_INN_OPEN) && CountCuredPeople() >= 2;
 }
 
-static bool32 HasHyperRankRibbon(struct BoxPokemon *boxMon)
+static bool32 HasRankRibbon(struct BoxPokemon *boxMon, u32 rank)
 {
     u32 field;
 
@@ -347,8 +349,29 @@ static bool32 HasHyperRankRibbon(struct BoxPokemon *boxMon)
         return FALSE;
     for (field = MON_DATA_COOL_RIBBON; field <= MON_DATA_TOUGH_RIBBON; field++)
     {
-        if (GetBoxMonData(boxMon, field) >= RANK_RIBBON_HYPER)
+        if (GetBoxMonData(boxMon, field) >= rank)
             return TRUE;
+    }
+    return FALSE;
+}
+
+// A contest win at this rank in any category, by any of the player's Pokémon.
+static bool32 HasWonContestRank(u32 rank)
+{
+    u32 i, j;
+
+    for (i = 0; i < PARTY_SIZE; i++)
+    {
+        if (HasRankRibbon(&gParties[B_TRAINER_PLAYER][i].box, rank))
+            return TRUE;
+    }
+    for (i = 0; i < TOTAL_BOXES_COUNT; i++)
+    {
+        for (j = 0; j < IN_BOX_COUNT; j++)
+        {
+            if (HasRankRibbon(GetBoxedMonPtr(i, j), rank))
+                return TRUE;
+        }
     }
     return FALSE;
 }
@@ -356,7 +379,7 @@ static bool32 HasHyperRankRibbon(struct BoxPokemon *boxMon)
 // Darkrai joins after the first Silver Symbol or the first Hyper Rank win in any category.
 void FrontierStory_CanDarkraiJoin(void)
 {
-    u32 i, j;
+    u32 i;
 
     gSpecialVar_Result = FALSE;
     if (!IsStoryActive() || FlagGet(FLAG_STORY_DARKRAI_JOINED))
@@ -370,25 +393,151 @@ void FrontierStory_CanDarkraiJoin(void)
             return;
         }
     }
-    for (i = 0; i < PARTY_SIZE; i++)
+    gSpecialVar_Result = HasWonContestRank(RANK_RIBBON_HYPER);
+}
+
+// Everyone after Kazuki has four bits: Reika to Toshio in one var, Yayoi to Yoriko in the next.
+static u16 GetTargetStateVar(u32 target, u32 *shift)
+{
+    *shift = (target - STORY_TARGET_REIKA) % 4 * 4;
+    return target <= STORY_TARGET_TOSHIO ? VAR_STORY_TARGET_STATES : VAR_STORY_TARGET_STATES_2;
+}
+
+static u32 GetTargetState(u32 target)
+{
+    u32 shift;
+    u16 var;
+
+    if (target == STORY_TARGET_KAZUKI)
+        return VarGet(VAR_TOWER_STORY_STATE);
+    var = GetTargetStateVar(target, &shift);
+    return (VarGet(var) >> shift) & 0xF;
+}
+
+static void SetTargetState(u32 target, u32 state)
+{
+    u32 shift;
+    u16 var;
+
+    if (target == STORY_TARGET_KAZUKI)
     {
-        if (HasHyperRankRibbon(&gParties[B_TRAINER_PLAYER][i].box))
+        VarSet(VAR_TOWER_STORY_STATE, state);
+        return;
+    }
+    var = GetTargetStateVar(target, &shift);
+    VarSet(var, (VarGet(var) & ~(0xF << shift)) | (state << shift));
+}
+
+// Their Silver Symbol step; at the contest, the first Master Rank win in any category.
+static bool32 HasReachedWish(u32 target)
+{
+    if (target == STORY_TARGET_YORIKO)
+        return HasWonContestRank(RANK_RIBBON_MASTER);
+    return FlagGet(gFrontierBrainInfo[target].silverSymbolFlag);
+}
+
+static bool32 HasLeftNetwork(u32 target)
+{
+    return FlagGet(sRescuedFlags[target]) || GetTargetState(target) >= TARGET_STORY_RETURNED;
+}
+
+// VAR_0x8004: STORY_TARGET_*. Whether they are in their lobby: until the network lets them go.
+void FrontierStory_IsTargetHere(void)
+{
+    u32 target = gSpecialVar_0x8004;
+
+    gSpecialVar_Result = IsStoryActive() && target < STORY_TARGET_COUNT && !HasLeftNetwork(target);
+}
+
+// VAR_0x8004: STORY_TARGET_* other than Kazuki. Whether they come over to the player on entering
+// the lobby: the first time, and the first time after the Silver Symbol (Master Rank) step.
+void FrontierStory_CheckTargetApproach(void)
+{
+    u32 target = gSpecialVar_0x8004, state;
+
+    gSpecialVar_Result = FALSE;
+    if (!IsStoryActive() || target == STORY_TARGET_KAZUKI || target >= STORY_TARGET_COUNT)
+        return;
+    state = GetTargetState(target);
+    gSpecialVar_Result = state == TARGET_STORY_NOT_MET || (state == TARGET_STORY_MET && HasReachedWish(target));
+}
+
+// VAR_0x8004: STORY_TARGET_* other than Kazuki. Puts what they say now in gStringVar4 and moves
+// their story on: the first meeting, then the change after the Silver Symbol (Master Rank) step.
+// VAR_0x8005 becomes the TARGET_TALK_* for FrontierStory_BufferTargetBranch; VAR_RESULT is TRUE
+// if they go straight on to their next step (the player already had the symbol when they met).
+void FrontierStory_BufferTargetTalk(void)
+{
+    u32 target = gSpecialVar_0x8004;
+    const struct StoryTargetText *texts;
+    const u8 *text;
+
+    gSpecialVar_Result = FALSE;
+    gSpecialVar_0x8005 = TARGET_TALK_HAPPY;
+    gStringVar4[0] = EOS;
+    if (target == STORY_TARGET_KAZUKI || target >= STORY_TARGET_COUNT)
+        return;
+    texts = &sStoryTargetTexts[target];
+    switch (GetTargetState(target))
+    {
+    case TARGET_STORY_NOT_MET:
+        text = texts->meet;
+        SetTargetState(target, TARGET_STORY_MET);
+        gSpecialVar_Result = HasReachedWish(target);
+        break;
+    case TARGET_STORY_MET:
+        text = texts->happy;
+        if (HasReachedWish(target))
         {
-            gSpecialVar_Result = TRUE;
-            return;
+            text = texts->wish;
+            SetTargetState(target, TARGET_STORY_WISH);
+            gSpecialVar_0x8005 = TARGET_TALK_WISH;
+        }
+        break;
+    default:
+        text = texts->wishAgain;
+        gSpecialVar_0x8005 = TARGET_TALK_WISH;
+        break;
+    }
+    StringExpandPlaceholders(gStringVar4, text);
+}
+
+// VAR_0x8004: STORY_TARGET_*, VAR_0x8005: TARGET_TALK_*. What they feel about the others in the
+// network: someone who has left it, or, once they waver themselves, someone else wavering too.
+// The line goes in gStringVar4; VAR_RESULT is FALSE if there is none.
+void FrontierStory_BufferTargetBranch(void)
+{
+    u32 target = gSpecialVar_0x8004, i, gone = 0, wavering = 0, goneTarget = 0;
+    const struct StoryTargetText *texts;
+    const u8 *text;
+
+    gSpecialVar_Result = FALSE;
+    if (!IsStoryActive() || target >= STORY_TARGET_COUNT)
+        return;
+    for (i = 0; i < STORY_TARGET_COUNT; i++)
+    {
+        if (i == target)
+            continue;
+        if (HasLeftNetwork(i))
+        {
+            gone++;
+            goneTarget = i;
+        }
+        else if (GetTargetState(i) == TARGET_STORY_WISH)
+        {
+            wavering++;
         }
     }
-    for (i = 0; i < TOTAL_BOXES_COUNT; i++)
-    {
-        for (j = 0; j < IN_BOX_COUNT; j++)
-        {
-            if (HasHyperRankRibbon(GetBoxedMonPtr(i, j)))
-            {
-                gSpecialVar_Result = TRUE;
-                return;
-            }
-        }
-    }
+    texts = &sStoryTargetTexts[target];
+    if (gSpecialVar_0x8005 == TARGET_TALK_WISH)
+        text = gone != 0 ? texts->wishGone : wavering != 0 ? texts->wishShared : NULL;
+    else
+        text = gone != 0 ? texts->othersGone : NULL;
+    if (text == NULL)
+        return;
+    StringCopy(gStringVar2, gone == 1 ? sStoryTargetTexts[goneTarget].name : sText_SeveralPeople);
+    StringExpandPlaceholders(gStringVar4, text);
+    gSpecialVar_Result = TRUE;
 }
 
 // Once the cure is known, someone who remembered themself may come to the camp.
@@ -585,8 +734,9 @@ struct Approach
 };
 
 EWRAM_DATA static struct Approach sApproach = {0};
-EWRAM_DATA static u8 sApproachMovement[APPROACH_MAX_STEPS + 2] = {0};
-EWRAM_DATA static u8 sPlayerTurnMovement[APPROACH_MAX_STEPS + 2] = {0};
+// Room for an exclamation mark and a pause, the walk, a turn and the end.
+EWRAM_DATA static u8 sApproachMovement[APPROACH_MAX_STEPS + 5] = {0};
+EWRAM_DATA static u8 sPlayerTurnMovement[APPROACH_MAX_STEPS + 5] = {0};
 
 // Breadth-first search over the loaded map from the object to any open side of the player.
 // Returns the number of steps written to sApproach.directions, or -1 if there is no short path.
@@ -639,54 +789,96 @@ static s32 FindPathToPlayer(struct ObjectEvent *object, s16 px, s16 py)
     return steps;
 }
 
-// VAR_0x8004: someone who walks by the shortest open path to the player's side and faces them;
-// the player turns to meet them as they arrive. Wait for both with waitmovement.
-// VAR_RESULT is FALSE (and nobody moves) if there is no path.
-void FrontierStory_ApproachPlayer(void)
+// Walks someone by the shortest open path to the player's side to face them; the player turns to
+// meet them as they arrive. With `exclaim`, they first show an exclamation mark and pause (also
+// when there is no path). FALSE if they do not walk.
+static bool32 StartApproach(u8 localId, bool32 exclaim)
 {
     struct ObjectEvent *object;
     s16 px, py, x, y;
-    s32 steps, i;
+    s32 steps, lead = 0, i;
 
-    gSpecialVar_Result = FALSE;
     sApproach.steps = 0;
     // Someone across a wide room may not be loaded yet; they walk in from out of view.
-    TrySpawnObjectEvent(gSpecialVar_0x8004, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
-    if (!TryGetLocalObject(gSpecialVar_0x8004, &object))
-        return;
+    TrySpawnObjectEvent(localId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
+    if (!TryGetLocalObject(localId, &object))
+        return FALSE;
+    if (exclaim)
+    {
+        sApproachMovement[lead++] = MOVEMENT_ACTION_EMOTE_EXCLAMATION_MARK;
+        sApproachMovement[lead++] = MOVEMENT_ACTION_DELAY_16;
+        sApproachMovement[lead++] = MOVEMENT_ACTION_DELAY_16;
+    }
     PlayerGetDestCoords(&px, &py);
     steps = FindPathToPlayer(object, px, py);
     if (steps < 0)
-        return;
+    {
+        sApproachMovement[lead] = MOVEMENT_ACTION_STEP_END;
+        if (exclaim)
+            ScriptMovement_StartObjectMovementScript(localId, gSaveBlock1Ptr->location.mapNum,
+                                                     gSaveBlock1Ptr->location.mapGroup, sApproachMovement);
+        return FALSE;
+    }
 
-    sApproach.localId = gSpecialVar_0x8004;
+    sApproach.localId = localId;
     sApproach.steps = steps;
     sApproach.facing = object->facingDirection;
     x = object->currentCoords.x;
     y = object->currentCoords.y;
+    // The player waits through the pause and the walk, then turns on the last step.
+    for (i = 0; i < steps + lead - 1; i++)
+        sPlayerTurnMovement[i] = MOVEMENT_ACTION_DELAY_16;
     for (i = 0; i < steps; i++)
     {
-        sApproachMovement[i] = GetWalkNormalMovementAction(sApproach.directions[i]);
+        sApproachMovement[lead + i] = GetWalkNormalMovementAction(sApproach.directions[i]);
         x += sDirectionSteps[sApproach.directions[i]][0];
         y += sDirectionSteps[sApproach.directions[i]][1];
-        sPlayerTurnMovement[i] = MOVEMENT_ACTION_DELAY_16;
     }
-    sApproachMovement[steps] = GetFaceDirectionMovementAction(GetDirectionToFace(x, y, px, py));
-    sApproachMovement[steps + 1] = MOVEMENT_ACTION_STEP_END;
-    // The player turns on the last step.
-    i = steps > 0 ? steps - 1 : 0;
+    sApproachMovement[lead + steps] = GetFaceDirectionMovementAction(GetDirectionToFace(x, y, px, py));
+    sApproachMovement[lead + steps + 1] = MOVEMENT_ACTION_STEP_END;
+    i = steps + lead > 0 ? steps + lead - 1 : 0;
     sPlayerTurnMovement[i] = GetFaceDirectionMovementAction(GetDirectionToFace(px, py, x, y));
     sPlayerTurnMovement[i + 1] = MOVEMENT_ACTION_STEP_END;
 
-    ScriptMovement_StartObjectMovementScript(sApproach.localId, gSaveBlock1Ptr->location.mapNum,
+    ScriptMovement_StartObjectMovementScript(localId, gSaveBlock1Ptr->location.mapNum,
                                              gSaveBlock1Ptr->location.mapGroup, sApproachMovement);
     ScriptMovement_StartObjectMovementScript(LOCALID_PLAYER, gSaveBlock1Ptr->location.mapNum,
                                              gSaveBlock1Ptr->location.mapGroup, sPlayerTurnMovement);
-    gSpecialVar_Result = TRUE;
+    return TRUE;
 }
 
-// Sends the person from the last FrontierStory_ApproachPlayer back to their place; wait with
-// waitmovement on them.
+// VAR_0x8004: someone who walks over to the player (see StartApproach). Wait for both with
+// waitmovement. VAR_RESULT is FALSE (and nobody moves) if there is no path.
+void FrontierStory_ApproachPlayer(void)
+{
+    gSpecialVar_Result = StartApproach(gSpecialVar_0x8004, FALSE);
+}
+
+// Where each person stands in their lobby.
+static const u8 sStoryTargetLocalIds[STORY_TARGET_COUNT] =
+{
+    [STORY_TARGET_KAZUKI] = LOCALID_TOWER_LOBBY_KAZUKI,
+    [STORY_TARGET_REIKA]  = LOCALID_DOME_LOBBY_REIKA,
+    [STORY_TARGET_IKUE]   = LOCALID_PALACE_LOBBY_IKUE,
+    [STORY_TARGET_EISUKE] = LOCALID_ARENA_LOBBY_EISUKE,
+    [STORY_TARGET_TOSHIO] = LOCALID_FACTORY_LOBBY_TOSHIO,
+    [STORY_TARGET_YAYOI]  = LOCALID_PIKE_LOBBY_YAYOI,
+    [STORY_TARGET_NOBUO]  = LOCALID_PYRAMID_LOBBY_NOBUO,
+    [STORY_TARGET_YORIKO] = LOCALID_CONTEST_LOBBY_YORIKO,
+};
+
+// VAR_0x8004: STORY_TARGET_*. They notice the player and walk over. VAR_0x8005 becomes their local
+// ID for waitmovement; VAR_RESULT is FALSE if they could only call out from where they stand.
+void FrontierStory_TargetComesOver(void)
+{
+    u8 localId = sStoryTargetLocalIds[gSpecialVar_0x8004];
+
+    gSpecialVar_0x8005 = localId;
+    gSpecialVar_Result = StartApproach(localId, TRUE);
+}
+
+// Sends the person from the last walk over back to their place. VAR_0x8005 becomes their local
+// ID for waitmovement.
 void FrontierStory_ReturnFromApproach(void)
 {
     u32 i;
@@ -697,6 +889,7 @@ void FrontierStory_ReturnFromApproach(void)
     sApproachMovement[i + 1] = MOVEMENT_ACTION_STEP_END;
     ScriptMovement_StartObjectMovementScript(sApproach.localId, gSaveBlock1Ptr->location.mapNum,
                                              gSaveBlock1Ptr->location.mapGroup, sApproachMovement);
+    gSpecialVar_0x8005 = sApproach.localId;
     sApproach.steps = 0;
 }
 

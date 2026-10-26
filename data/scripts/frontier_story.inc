@@ -274,6 +274,19 @@ TowerStory_EventScript_KazukiRelease::
 	release
 	end
 
+@ What Kazuki feels about the others in the network (FrontierStory_BufferTargetBranch).
+TowerStory_EventScript_KazukiHappyBranch::
+	setvar VAR_0x8005, TARGET_TALK_HAPPY
+	goto TowerStory_EventScript_KazukiBranch
+
+TowerStory_EventScript_KazukiWishBranch::
+	setvar VAR_0x8005, TARGET_TALK_WISH
+TowerStory_EventScript_KazukiBranch::
+	setvar VAR_0x8004, STORY_TARGET_KAZUKI
+	special FrontierStory_BufferTargetBranch
+	call_if_eq VAR_RESULT, TRUE, FrontierStory_EventScript_ShowBufferedText
+	return
+
 TowerStory_EventScript_Kazuki::
 	lock
 	faceplayer
@@ -294,6 +307,7 @@ TowerStory_EventScript_KazukiFirstMeeting::
 	msgbox TowerStory_Text_KazukiNoticesDifference, MSGBOX_DEFAULT
 	msgbox TowerStory_Text_PlayerExplains, MSGBOX_DEFAULT
 	msgbox TowerStory_Text_KazukiUnderstands, MSGBOX_DEFAULT
+	call TowerStory_EventScript_KazukiHappyBranch
 	setvar VAR_TOWER_STORY_STATE, TOWER_STORY_MET
 	goto_if_set FLAG_SYS_TOWER_SILVER, TowerStory_EventScript_KazukiWishSurfaces
 	goto TowerStory_EventScript_KazukiDone
@@ -301,10 +315,12 @@ TowerStory_EventScript_KazukiFirstMeeting::
 TowerStory_EventScript_KazukiMet::
 	goto_if_set FLAG_SYS_TOWER_SILVER, TowerStory_EventScript_KazukiWishSurfaces
 	msgbox TowerStory_Text_KazukiHappyTogether, MSGBOX_DEFAULT
+	call TowerStory_EventScript_KazukiHappyBranch
 	goto TowerStory_EventScript_KazukiDone
 
 TowerStory_EventScript_KazukiWishSurfaces::
 	msgbox TowerStory_Text_KazukiSawSilverBattle, MSGBOX_DEFAULT
+	call TowerStory_EventScript_KazukiWishBranch
 	setvar VAR_TOWER_STORY_STATE, TOWER_STORY_WISH
 	goto_if_set FLAG_SYS_TOWER_GOLD, TowerStory_EventScript_KazukiFever
 	goto TowerStory_EventScript_KazukiDone
@@ -312,6 +328,7 @@ TowerStory_EventScript_KazukiWishSurfaces::
 TowerStory_EventScript_KazukiWish::
 	goto_if_set FLAG_SYS_TOWER_GOLD, TowerStory_EventScript_KazukiFever
 	msgbox TowerStory_Text_KazukiWantsRematch, MSGBOX_DEFAULT
+	call TowerStory_EventScript_KazukiWishBranch
 	goto TowerStory_EventScript_KazukiDone
 
 TowerStory_EventScript_KazukiFever::
@@ -461,6 +478,127 @@ FrontierStory_EventScript_CureFlash::
 	waitse
 	fadescreen FADE_FROM_WHITE
 	return
+
+@ ---------------------------------------------------------------------------
+@ The other lobbies: the person the network holds at each facility and the contest.
+@ Their lines are in src/data/frontier_story_targets.h. VAR_0x8004 is STORY_TARGET_*.
+
+@ On the map's transition. FLAG_TEMP_1F hides them once the network has let them go.
+FrontierStory_EventScript_SetupTarget::
+	setflag FLAG_TEMP_1F
+	special FrontierStory_IsTargetHere
+	goto_if_eq VAR_RESULT, FALSE, FrontierStory_EventScript_Return
+	clearflag FLAG_TEMP_1F
+	return
+
+@ On entering the lobby (VAR_TEMP_E 0 -> 1): they come over to the player the first time, and
+@ the first time after the Silver Symbol (Master Rank) step.
+FrontierStory_EventScript_TargetArrival::
+	setvar VAR_TEMP_E, 1
+	special FrontierStory_CheckTargetApproach
+	goto_if_eq VAR_RESULT, FALSE, FrontierStory_EventScript_ArrivalEnd
+	lockall
+	playse SE_PIN
+	special FrontierStory_TargetComesOver
+	waitmovement VAR_0x8005
+	goto_if_eq VAR_RESULT, FALSE, FrontierStory_EventScript_TargetTalk
+	waitmovement LOCALID_PLAYER
+	@ They walk back to their place afterwards.
+	setvar VAR_TEMP_F, 1
+	goto FrontierStory_EventScript_TargetTalk
+
+@ Then (VAR_TEMP_E 1 -> 2): Darkrai calls the player to the hub, as in the Tower.
+FrontierStory_EventScript_LobbyDarkraiCall::
+	setvar VAR_TEMP_E, 2
+	special FrontierStory_CanDarkraiJoin
+	goto_if_eq VAR_RESULT, FALSE, FrontierStory_EventScript_ArrivalEnd
+	lockall
+	playse SE_M_NIGHTMARE
+	waitse
+	msgbox FrontierStory_Text_DarkraiCallsFromAfar, MSGBOX_DEFAULT
+	releaseall
+FrontierStory_EventScript_ArrivalEnd::
+	end
+
+FrontierStory_EventScript_Target::
+	lock
+	faceplayer
+FrontierStory_EventScript_TargetTalk::
+	special FrontierStory_BufferTargetTalk
+	copyvar VAR_0x8006, VAR_RESULT
+	msgbox gStringVar4, MSGBOX_DEFAULT
+	special FrontierStory_BufferTargetBranch
+	call_if_eq VAR_RESULT, TRUE, FrontierStory_EventScript_ShowBufferedText
+	@ Met for the first time with the symbol already won: their next step follows at once.
+	goto_if_eq VAR_0x8006, TRUE, FrontierStory_EventScript_TargetTalk
+	goto_if_ne VAR_TEMP_F, 1, FrontierStory_EventScript_TargetRelease
+	setvar VAR_TEMP_F, 0
+	closemessage
+	special FrontierStory_ReturnFromApproach
+	waitmovement VAR_0x8005
+FrontierStory_EventScript_TargetRelease::
+	release
+	end
+
+FrontierStory_EventScript_ShowBufferedText::
+	msgbox gStringVar4, MSGBOX_DEFAULT
+	return
+
+DomeStory_EventScript_Reika::
+	setvar VAR_0x8004, STORY_TARGET_REIKA
+	goto FrontierStory_EventScript_Target
+
+DomeStory_EventScript_LobbyArrival::
+	setvar VAR_0x8004, STORY_TARGET_REIKA
+	goto FrontierStory_EventScript_TargetArrival
+
+PalaceStory_EventScript_Ikue::
+	setvar VAR_0x8004, STORY_TARGET_IKUE
+	goto FrontierStory_EventScript_Target
+
+PalaceStory_EventScript_LobbyArrival::
+	setvar VAR_0x8004, STORY_TARGET_IKUE
+	goto FrontierStory_EventScript_TargetArrival
+
+ArenaStory_EventScript_Eisuke::
+	setvar VAR_0x8004, STORY_TARGET_EISUKE
+	goto FrontierStory_EventScript_Target
+
+ArenaStory_EventScript_LobbyArrival::
+	setvar VAR_0x8004, STORY_TARGET_EISUKE
+	goto FrontierStory_EventScript_TargetArrival
+
+FactoryStory_EventScript_Toshio::
+	setvar VAR_0x8004, STORY_TARGET_TOSHIO
+	goto FrontierStory_EventScript_Target
+
+FactoryStory_EventScript_LobbyArrival::
+	setvar VAR_0x8004, STORY_TARGET_TOSHIO
+	goto FrontierStory_EventScript_TargetArrival
+
+PikeStory_EventScript_Yayoi::
+	setvar VAR_0x8004, STORY_TARGET_YAYOI
+	goto FrontierStory_EventScript_Target
+
+PikeStory_EventScript_LobbyArrival::
+	setvar VAR_0x8004, STORY_TARGET_YAYOI
+	goto FrontierStory_EventScript_TargetArrival
+
+PyramidStory_EventScript_Nobuo::
+	setvar VAR_0x8004, STORY_TARGET_NOBUO
+	goto FrontierStory_EventScript_Target
+
+PyramidStory_EventScript_LobbyArrival::
+	setvar VAR_0x8004, STORY_TARGET_NOBUO
+	goto FrontierStory_EventScript_TargetArrival
+
+ContestStory_EventScript_Yoriko::
+	setvar VAR_0x8004, STORY_TARGET_YORIKO
+	goto FrontierStory_EventScript_Target
+
+ContestStory_EventScript_LobbyArrival::
+	setvar VAR_0x8004, STORY_TARGET_YORIKO
+	goto FrontierStory_EventScript_TargetArrival
 
 @ ---------------------------------------------------------------------------
 @ The camp: Kazuki after his rescue, and visitors who remembered themselves

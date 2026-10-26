@@ -1,7 +1,13 @@
 BattleFrontier_BattlePyramidLobby_MapScripts::
+	map_script MAP_SCRIPT_ON_TRANSITION, BattleFrontier_BattlePyramidLobby_OnTransition
 	map_script MAP_SCRIPT_ON_FRAME_TABLE, BattleFrontier_BattlePyramidLobby_OnFrame
 	map_script MAP_SCRIPT_ON_WARP_INTO_MAP_TABLE, BattleFrontier_BattleDomeLobby_OnWarp
 	.byte 0
+
+BattleFrontier_BattlePyramidLobby_OnTransition:
+	setvar VAR_0x8004, STORY_TARGET_NOBUO
+	call FrontierStory_EventScript_SetupTarget
+	end
 
 @ Unused. Pyramid uses Dome's OnWarp (presumably by mistake). Their effects are identical
 BattleFrontier_BattlePyramidLobby_OnWarp:
@@ -19,6 +25,8 @@ BattleFrontier_BattlePyramidLobby_OnFrame:
 	map_script_2 VAR_TEMP_CHALLENGE_STATUS, CHALLENGE_STATUS_PAUSED, BattleFrontier_BattlePyramidLobby_EventScript_ResumeChallenge
 	map_script_2 VAR_TEMP_CHALLENGE_STATUS, CHALLENGE_STATUS_WON, BattleFrontier_BattlePyramidLobby_EventScript_WonChallenge
 	map_script_2 VAR_TEMP_CHALLENGE_STATUS, CHALLENGE_STATUS_LOST, BattleFrontier_BattlePyramidLobby_EventScript_LostChallenge
+	map_script_2 VAR_TEMP_E, 0, PyramidStory_EventScript_LobbyArrival
+	map_script_2 VAR_TEMP_E, 1, FrontierStory_EventScript_LobbyDarkraiCall
 	.2byte 0
 
 BattleFrontier_BattlePyramidLobby_EventScript_GetChallengeStatus::

@@ -20,6 +20,13 @@ bool32 FrontierStory_TryCopyBrainBattleText(u32 facility, bool32 playerWon);
 bool32 FrontierStory_TryCopyGuestText(u8 whichText, u16 trainerId);
 void FrontierStory_BufferBrainIntro(void);
 
+// The people the network holds at each scenario (STORY_TARGET_*).
+void FrontierStory_IsTargetHere(void);
+void FrontierStory_CheckTargetApproach(void);
+void FrontierStory_TargetComesOver(void);
+void FrontierStory_BufferTargetTalk(void);
+void FrontierStory_BufferTargetBranch(void);
+
 // Shared progress and the camp visitors.
 void FrontierStory_CountRescued(void);
 void FrontierStory_ShouldSuggestInn(void);
