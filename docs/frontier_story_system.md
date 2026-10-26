@@ -12,6 +12,7 @@
 | `FLAG_STORY_DARKRAI_JOINED` ほか2つ | `FLAG_UNUSED_0x020`〜`0x022` | 全シナリオ共通の進行 |
 | `FLAG_STORY_RESCUED_TOWER`〜`CONTEST` | `FLAG_UNUSED_0x023`〜`0x02A` | 8シナリオの完了 |
 | `FLAG_STORY_INN_OPEN`、`FLAG_STORY_INN_VISITED` | `FLAG_UNUSED_0x02B`、`0x02C` | 旅館への船の開通、初回の到着 |
+| `FLAG_STORY_TOWER_FEVER_SHOWN`、`FLAG_STORY_TOWER_RELEASE_SHOWN` | `FLAG_UNUSED_0x02D`、`0x02E` | タワーのロビーで、金シンボル後の場面を自動で見せたか（ダークライ合流前・後） |
 | `FLAG_STORY_NAMED_STATES_START`〜`END` | `FLAG_UNUSED_0x493`〜`0x4D4` | ブレーン7人・7戦目ゲスト26組の状態。1人2フラグ（`NAMED_STORY_*`） |
 
 `VAR_FRONTIER_INTRO_STATE` が `FRONTIER_INTRO_COMPLETE` でないセーブでは、ブレーン・ゲストの台詞と状態は従来のまま。
@@ -34,6 +35,9 @@
 - 7施設のブレーン戦の部屋: `FrontierStory_BufferBrainIntro` で戦闘前の場面を差し替え、既存の戦闘処理へ合流する。
 - `battle_setup.c` の `SetPokevirusReleaseTransition`: マルチバトルから解放戦の画面切り替えを使う。
 - ポケモン生成（`frontier_creator.c`）は常にLv100。
+- `TowerStory_CheckKazukiApproach`: タワーのロビーに入ったとき、カズキの段階（初対面・銀シンボル後・金シンボル後）にまだ見ていない場面があれば真を返し、見たことを記録する。真なら `FrontierStory_ApproachPlayer` でカズキが主人公の隣まで歩き、会話が自動で始まる。会話の後は `FrontierStory_ReturnFromApproach` で同じ道を戻る（解放戦の場面に進んだときは戻らない）。
+- `FrontierStory_ApproachPlayer`（VAR_0x8004 の人物）: 読み込み中のマップの通行可能マスと他の人物を避けて、主人公の空いている隣のマスまで幅優先探索で最短経路を作り、歩かせる。主人公は到着に合わせて振り向く。40歩を超える、または経路がないときは動かさず VAR_RESULT を偽にする。他の施設の救出対象者にも使える。
+- `FrontierStory_ArrangeReleaseScene`: 相手がどの向きから来ても、店主は主人公の横の空いている側、ヒトポケルスは相手の後ろの空いているマスに立つ。
 - `FrontierStory_ShouldSuggestInn`: 治療法の判明後、治った人数（8シナリオの完了＋救出済みのブレーン・ゲスト）が2人以上で、旅館が未開通なら真。キャンプでの治療の直後と、ハブのダークライとの会話で使う。
 - 旅館への船: 西エリアの港の係員（`BattleFrontier_OutsideWest`）が `FLAG_STORY_INN_OPEN` で行き先を出し、`RestorationInn_Outside` の桟橋へ移動する。帰りは桟橋の船員から西エリアの港（19,67）へ戻る。港の南の桟橋が船の東側にあるため、フロンティアからの出港は西向き。乗船前に連れ歩きのポケモンをボールへ戻す。
 

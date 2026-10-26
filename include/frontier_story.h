@@ -31,5 +31,8 @@ void FrontierStory_RescueVisitor(void);
 // Placing people for story scenes.
 void FrontierStory_ArrangeReleaseScene(void);
 void FrontierStory_PlaceBesidePlayer(void);
+void FrontierStory_ApproachPlayer(void);
+void FrontierStory_ReturnFromApproach(void);
+void TowerStory_CheckKazukiApproach(void);
 
 #endif // GUARD_FRONTIER_STORY_H

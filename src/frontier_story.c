@@ -11,13 +11,17 @@
 #include "frontier_guest.h"
 #include "frontier_story.h"
 #include "frontier_util.h"
+#include "malloc.h"
 #include "overworld.h"
 #include "pokemon.h"
 #include "pokemon_storage_system.h"
 #include "random.h"
+#include "script_movement.h"
 #include "string_util.h"
 #include "constants/battle_frontier.h"
 #include "constants/characters.h"
+#include "constants/event_object_movement.h"
+#include "constants/event_objects.h"
 #include "constants/frontier_util.h"
 #include "constants/vars.h"
 
@@ -26,6 +30,9 @@
 // The Frontier never asks for less than level 50, so story battles don't either.
 #define STORY_BATTLE_MIN_LEVEL 50
 #define RANK_RIBBON_HYPER 3
+// How far someone walks over to the player before a story talk; the start cell of that path.
+#define APPROACH_MAX_STEPS 40
+#define PATH_START 0xFF
 
 STATIC_ASSERT(NAMED_STORY_GUEST_COUNT == FRONTIER_GUEST_RANDOM_COUNT, NamedStoryGuestsMatchGuestTable);
 STATIC_ASSERT(NAMED_STORY_COUNT == NAMED_STORY_GUEST_COUNT + NUM_FRONTIER_FACILITIES, NamedStoryBrainsMatchFacilities);
@@ -455,6 +462,43 @@ static const u8 sFaceMovementTypes[] =
     [DIR_EAST]  = MOVEMENT_TYPE_FACE_RIGHT,
 };
 
+static const s8 sDirectionSteps[][2] =
+{
+    [DIR_SOUTH] = { 0,  1},
+    [DIR_NORTH] = { 0, -1},
+    [DIR_WEST]  = {-1,  0},
+    [DIR_EAST]  = { 1,  0},
+};
+
+static const u8 sOppositeDirections[] =
+{
+    [DIR_SOUTH] = DIR_NORTH,
+    [DIR_NORTH] = DIR_SOUTH,
+    [DIR_WEST]  = DIR_EAST,
+    [DIR_EAST]  = DIR_WEST,
+};
+
+// Open floor that no other shown object stands on or is stepping off; `self` doesn't count.
+static bool32 IsSpotFree(s32 x, s32 y, struct ObjectEvent *self)
+{
+    u32 i;
+
+    if (x < 0 || y < 0 || x >= gBackupMapLayout.width || y >= gBackupMapLayout.height
+     || MapGridGetCollisionAt(x, y) != 0)
+        return FALSE;
+    for (i = 0; i < OBJECT_EVENTS_COUNT; i++)
+    {
+        struct ObjectEvent *object = &gObjectEvents[i];
+
+        if (object == self || !object->active || object->invisible)
+            continue;
+        if ((object->currentCoords.x == x && object->currentCoords.y == y)
+         || (object->previousCoords.x == x && object->previousCoords.y == y))
+            return FALSE;
+    }
+    return TRUE;
+}
+
 // Also updates the map's template for this visit, so the scene looks the same after a battle.
 static void MoveAndTurnObject(struct ObjectEvent *object, s16 x, s16 y, enum Direction direction)
 {
@@ -471,7 +515,8 @@ static void MoveAndTurnObject(struct ObjectEvent *object, s16 x, s16 y, enum Dir
 void FrontierStory_ArrangeReleaseScene(void)
 {
     struct ObjectEvent *infected, *cook, *pokevirus;
-    s16 px, py, ix, iy, dx, dy;
+    s16 px, py, ix, iy, dx, dy, x, y;
+    u32 i;
 
     if (!TryGetLocalObject(gSpecialVar_0x8004, &infected)
      || !TryGetLocalObject(gSpecialVar_0x8005, &cook)
@@ -487,8 +532,24 @@ void FrontierStory_ArrangeReleaseScene(void)
         dy = 0;
 
     MoveAndTurnObject(infected, ix, iy, GetDirectionToFace(ix, iy, px, py));
-    MoveAndTurnObject(cook, px + (dx == 0), py + (dy == 0), GetDirectionToFace(px, py, ix, iy));
-    MoveAndTurnObject(pokevirus, ix - 2 * dx, iy - 2 * dy, GetDirectionToFace(ix, iy, px, py));
+    // People can come up to the player from any side, so take the first open spot for the
+    // cook beside the player and for Pokevirus behind the infected person.
+    for (i = 0; i < 2; i++)
+    {
+        x = px + (i == 0 ? 1 : -1) * (dx == 0);
+        y = py + (i == 0 ? 1 : -1) * (dy == 0);
+        if (IsSpotFree(x, y, cook) || i == 1)
+            break;
+    }
+    MoveAndTurnObject(cook, x, y, GetDirectionToFace(px, py, ix, iy));
+    x = ix - 2 * dx;
+    y = iy - 2 * dy;
+    if (!IsSpotFree(x, y, pokevirus))
+    {
+        x = ix - dx;
+        y = iy - dy;
+    }
+    MoveAndTurnObject(pokevirus, x, y, GetDirectionToFace(ix, iy, px, py));
 }
 
 // VAR_0x8004: an object to stand on the first free side of the player, facing them.
@@ -511,5 +572,154 @@ void FrontierStory_PlaceBesidePlayer(void)
             MoveAndTurnObject(object, x, y, GetDirectionToFace(x, y, px, py));
             return;
         }
+    }
+}
+
+// The last walk to the player, so the person can go back the way they came. Not saved.
+struct Approach
+{
+    u8 localId;
+    u8 steps;
+    u8 facing; // before they set off
+    u8 directions[APPROACH_MAX_STEPS];
+};
+
+EWRAM_DATA static struct Approach sApproach = {0};
+EWRAM_DATA static u8 sApproachMovement[APPROACH_MAX_STEPS + 2] = {0};
+EWRAM_DATA static u8 sPlayerTurnMovement[APPROACH_MAX_STEPS + 2] = {0};
+
+// Breadth-first search over the loaded map from the object to any open side of the player.
+// Returns the number of steps written to sApproach.directions, or -1 if there is no short path.
+static s32 FindPathToPlayer(struct ObjectEvent *object, s16 px, s16 py)
+{
+    s32 width = gBackupMapLayout.width, height = gBackupMapLayout.height;
+    s32 head = 0, tail = 0, goal = -1, cell, steps = 0, x, y, i;
+    u8 *cameFrom = AllocZeroed(width * height); // the direction each cell was entered by
+    u16 *queue = Alloc(width * height * sizeof(u16));
+    u32 dir;
+
+    if (cameFrom != NULL && queue != NULL)
+    {
+        cell = object->currentCoords.y * width + object->currentCoords.x;
+        cameFrom[cell] = PATH_START;
+        queue[tail++] = cell;
+        while (head < tail)
+        {
+            cell = queue[head++];
+            x = cell % width;
+            y = cell / width;
+            if (abs(x - px) + abs(y - py) == 1)
+            {
+                goal = cell;
+                break;
+            }
+            for (dir = DIR_SOUTH; dir <= DIR_EAST; dir++)
+            {
+                s32 nextX = x + sDirectionSteps[dir][0], nextY = y + sDirectionSteps[dir][1];
+
+                if (!IsSpotFree(nextX, nextY, object) || cameFrom[nextY * width + nextX] != 0)
+                    continue;
+                cameFrom[nextY * width + nextX] = dir;
+                queue[tail++] = nextY * width + nextX;
+            }
+        }
+    }
+    // Count the steps back from the goal, then write them out in walking order.
+    for (cell = goal; cell >= 0 && cameFrom[cell] != PATH_START; steps++)
+        cell -= sDirectionSteps[cameFrom[cell]][1] * width + sDirectionSteps[cameFrom[cell]][0];
+    if (goal < 0 || steps > APPROACH_MAX_STEPS)
+        steps = -1;
+    for (cell = goal, i = steps - 1; i >= 0; i--)
+    {
+        sApproach.directions[i] = cameFrom[cell];
+        cell -= sDirectionSteps[cameFrom[cell]][1] * width + sDirectionSteps[cameFrom[cell]][0];
+    }
+    Free(cameFrom);
+    Free(queue);
+    return steps;
+}
+
+// VAR_0x8004: someone who walks by the shortest open path to the player's side and faces them;
+// the player turns to meet them as they arrive. Wait for both with waitmovement.
+// VAR_RESULT is FALSE (and nobody moves) if there is no path.
+void FrontierStory_ApproachPlayer(void)
+{
+    struct ObjectEvent *object;
+    s16 px, py, x, y;
+    s32 steps, i;
+
+    gSpecialVar_Result = FALSE;
+    sApproach.steps = 0;
+    // Someone across a wide room may not be loaded yet; they walk in from out of view.
+    TrySpawnObjectEvent(gSpecialVar_0x8004, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
+    if (!TryGetLocalObject(gSpecialVar_0x8004, &object))
+        return;
+    PlayerGetDestCoords(&px, &py);
+    steps = FindPathToPlayer(object, px, py);
+    if (steps < 0)
+        return;
+
+    sApproach.localId = gSpecialVar_0x8004;
+    sApproach.steps = steps;
+    sApproach.facing = object->facingDirection;
+    x = object->currentCoords.x;
+    y = object->currentCoords.y;
+    for (i = 0; i < steps; i++)
+    {
+        sApproachMovement[i] = GetWalkNormalMovementAction(sApproach.directions[i]);
+        x += sDirectionSteps[sApproach.directions[i]][0];
+        y += sDirectionSteps[sApproach.directions[i]][1];
+        sPlayerTurnMovement[i] = MOVEMENT_ACTION_DELAY_16;
+    }
+    sApproachMovement[steps] = GetFaceDirectionMovementAction(GetDirectionToFace(x, y, px, py));
+    sApproachMovement[steps + 1] = MOVEMENT_ACTION_STEP_END;
+    // The player turns on the last step.
+    i = steps > 0 ? steps - 1 : 0;
+    sPlayerTurnMovement[i] = GetFaceDirectionMovementAction(GetDirectionToFace(px, py, x, y));
+    sPlayerTurnMovement[i + 1] = MOVEMENT_ACTION_STEP_END;
+
+    ScriptMovement_StartObjectMovementScript(sApproach.localId, gSaveBlock1Ptr->location.mapNum,
+                                             gSaveBlock1Ptr->location.mapGroup, sApproachMovement);
+    ScriptMovement_StartObjectMovementScript(LOCALID_PLAYER, gSaveBlock1Ptr->location.mapNum,
+                                             gSaveBlock1Ptr->location.mapGroup, sPlayerTurnMovement);
+    gSpecialVar_Result = TRUE;
+}
+
+// Sends the person from the last FrontierStory_ApproachPlayer back to their place; wait with
+// waitmovement on them.
+void FrontierStory_ReturnFromApproach(void)
+{
+    u32 i;
+
+    for (i = 0; i < sApproach.steps; i++)
+        sApproachMovement[i] = GetWalkNormalMovementAction(sOppositeDirections[sApproach.directions[sApproach.steps - 1 - i]]);
+    sApproachMovement[i] = GetFaceDirectionMovementAction(sApproach.facing);
+    sApproachMovement[i + 1] = MOVEMENT_ACTION_STEP_END;
+    ScriptMovement_StartObjectMovementScript(sApproach.localId, gSaveBlock1Ptr->location.mapNum,
+                                             gSaveBlock1Ptr->location.mapGroup, sApproachMovement);
+    sApproach.steps = 0;
+}
+
+// On entering the Tower lobby: does Kazuki have something new to tell the player? He comes over
+// the first time at each step of his story; the fever comes once alone and once more when Darkrai
+// can step in. Records that he came, so it happens once.
+void TowerStory_CheckKazukiApproach(void)
+{
+    u32 state = VarGet(VAR_TOWER_STORY_STATE), flag;
+
+    gSpecialVar_Result = FALSE;
+    if (!IsStoryActive() || state >= TOWER_STORY_RETURNED)
+        return;
+    if (FlagGet(FLAG_SYS_TOWER_GOLD))
+    {
+        flag = FlagGet(FLAG_STORY_DARKRAI_JOINED) ? FLAG_STORY_TOWER_RELEASE_SHOWN : FLAG_STORY_TOWER_FEVER_SHOWN;
+        gSpecialVar_Result = !FlagGet(flag);
+        FlagSet(FLAG_STORY_TOWER_FEVER_SHOWN);
+        FlagSet(flag);
+    }
+    else
+    {
+        gSpecialVar_Result = state == TOWER_STORY_NOT_MET
+                          || (state == TOWER_STORY_MET && FlagGet(FLAG_SYS_TOWER_SILVER));
     }
 }

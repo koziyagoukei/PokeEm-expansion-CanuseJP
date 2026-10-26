@@ -45,6 +45,9 @@ static void ResetStory(void)
     FlagClear(FLAG_STORY_DARKRAI_JOINED);
     FlagClear(FLAG_STORY_INN_OPEN);
     FlagClear(FLAG_STORY_INN_VISITED);
+    FlagClear(FLAG_STORY_TOWER_FEVER_SHOWN);
+    FlagClear(FLAG_STORY_TOWER_RELEASE_SHOWN);
+    VarSet(VAR_TOWER_STORY_STATE, TOWER_STORY_NOT_MET);
     for (u32 i = FLAG_STORY_RESCUED_TOWER; i <= FLAG_STORY_RESCUED_CONTEST; i++)
         FlagClear(i);
     VarSet(VAR_FRONTIER_FACILITY, FRONTIER_FACILITY_TOWER);
@@ -276,4 +279,52 @@ TEST("Frontier story: Darkrai suggests the inn once a second person is cured")
     VarSet(VAR_FRONTIER_INTRO_STATE, 0);
     FrontierStory_ShouldSuggestInn();
     EXPECT_EQ(gSpecialVar_Result, FALSE);
+}
+
+static bool32 KazukiComesOver(void)
+{
+    TowerStory_CheckKazukiApproach();
+    return gSpecialVar_Result;
+}
+
+TEST("Tower story: Kazuki comes over once at each step of his story")
+{
+    ResetStory();
+    EXPECT(KazukiComesOver());
+    VarSet(VAR_TOWER_STORY_STATE, TOWER_STORY_MET);
+    EXPECT(!KazukiComesOver());
+
+    FlagSet(FLAG_SYS_TOWER_SILVER);
+    EXPECT(KazukiComesOver());
+    VarSet(VAR_TOWER_STORY_STATE, TOWER_STORY_WISH);
+    EXPECT(!KazukiComesOver());
+
+    // The fever: once alone, then once more after Darkrai joins.
+    FlagSet(FLAG_SYS_TOWER_GOLD);
+    EXPECT(KazukiComesOver());
+    EXPECT(!KazukiComesOver());
+    FlagSet(FLAG_STORY_DARKRAI_JOINED);
+    EXPECT(KazukiComesOver());
+    EXPECT(!KazukiComesOver());
+
+    VarSet(VAR_TOWER_STORY_STATE, TOWER_STORY_RETURNED);
+    FlagClear(FLAG_STORY_TOWER_FEVER_SHOWN);
+    FlagClear(FLAG_STORY_TOWER_RELEASE_SHOWN);
+    EXPECT(!KazukiComesOver());
+}
+
+TEST("Tower story: one visit covers every step Kazuki missed, and old saves are left alone")
+{
+    ResetStory();
+    FlagSet(FLAG_SYS_TOWER_SILVER);
+    FlagSet(FLAG_SYS_TOWER_GOLD);
+    FlagSet(FLAG_STORY_DARKRAI_JOINED);
+    // Meeting, wish and fever run on from one another in a single talk.
+    EXPECT(KazukiComesOver());
+    VarSet(VAR_TOWER_STORY_STATE, TOWER_STORY_WISH);
+    EXPECT(!KazukiComesOver());
+
+    ResetStory();
+    VarSet(VAR_FRONTIER_INTRO_STATE, 0);
+    EXPECT(!KazukiComesOver());
 }

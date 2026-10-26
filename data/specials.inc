@@ -704,3 +704,6 @@ gSpecials::
 	def_special FrontierStory_ArrangeReleaseScene
 	def_special FrontierStory_PlaceBesidePlayer
 	def_special FrontierStory_ShouldSuggestInn
+	def_special FrontierStory_ApproachPlayer
+	def_special FrontierStory_ReturnFromApproach
+	def_special TowerStory_CheckKazukiApproach

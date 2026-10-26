@@ -78,6 +78,9 @@
 // Darkrai suggested the inn across the sea; the Frontier harbor ferry sails there.
 #define FLAG_STORY_INN_OPEN            FLAG_UNUSED_0x02B
 #define FLAG_STORY_INN_VISITED         FLAG_UNUSED_0x02C
+// Kazuki came to the player in the Tower lobby with his fever: alone, then once Darkrai could help.
+#define FLAG_STORY_TOWER_FEVER_SHOWN   FLAG_UNUSED_0x02D
+#define FLAG_STORY_TOWER_RELEASE_SHOWN FLAG_UNUSED_0x02E
 #define FLAG_UNUSED_0x030    0x30 // Unused Flag
 #define FLAG_UNUSED_0x031    0x31 // Unused Flag
 #define FLAG_UNUSED_0x032    0x32 // Unused Flag

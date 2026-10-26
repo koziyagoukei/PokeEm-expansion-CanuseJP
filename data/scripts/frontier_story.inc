@@ -225,9 +225,28 @@ TowerStory_EventScript_SetupLobby::
 	clearflag FLAG_TEMP_11
 	return
 
-@ Once per visit, after any challenge result: Darkrai calls the player to the hub.
+@ Once per visit, after any challenge result (VAR_TEMP_2 0 -> 1). The first time the lobby is
+@ entered at each step of his story, Kazuki comes over to the player and talks at once.
 TowerStory_EventScript_LobbyArrival::
 	setvar VAR_TEMP_2, 1
+	special TowerStory_CheckKazukiApproach
+	goto_if_eq VAR_RESULT, FALSE, TowerStory_EventScript_LobbyArrivalEnd
+	lockall
+	@ Loads him if the player came in on the far side of the lobby.
+	addobject LOCALID_TOWER_LOBBY_KAZUKI
+	call TowerStory_EventScript_KazukiExclaims
+	setvar VAR_0x8004, LOCALID_TOWER_LOBBY_KAZUKI
+	special FrontierStory_ApproachPlayer
+	goto_if_eq VAR_RESULT, FALSE, TowerStory_EventScript_KazukiTalk
+	waitmovement LOCALID_TOWER_LOBBY_KAZUKI
+	waitmovement LOCALID_PLAYER
+	@ He walks back to his place afterwards.
+	setvar VAR_TEMP_3, 1
+	goto TowerStory_EventScript_KazukiTalk
+
+@ Then (VAR_TEMP_2 1 -> 2): Darkrai calls the player to the hub.
+TowerStory_EventScript_DarkraiCall::
+	setvar VAR_TEMP_2, 2
 	special FrontierStory_CanDarkraiJoin
 	goto_if_eq VAR_RESULT, FALSE, TowerStory_EventScript_LobbyArrivalEnd
 	lockall
@@ -238,9 +257,27 @@ TowerStory_EventScript_LobbyArrival::
 TowerStory_EventScript_LobbyArrivalEnd::
 	end
 
+TowerStory_EventScript_KazukiExclaims::
+	playse SE_PIN
+	applymovement LOCALID_TOWER_LOBBY_KAZUKI, Common_Movement_ExclamationMark
+	waitmovement 0
+	return
+
+@ If Kazuki came over on his own, he goes back to his place.
+TowerStory_EventScript_KazukiDone::
+	goto_if_ne VAR_TEMP_3, 1, TowerStory_EventScript_KazukiRelease
+	setvar VAR_TEMP_3, 0
+	closemessage
+	special FrontierStory_ReturnFromApproach
+	waitmovement LOCALID_TOWER_LOBBY_KAZUKI
+TowerStory_EventScript_KazukiRelease::
+	release
+	end
+
 TowerStory_EventScript_Kazuki::
 	lock
 	faceplayer
+TowerStory_EventScript_KazukiTalk::
 	switch VAR_TOWER_STORY_STATE
 	case TOWER_STORY_NOT_MET, TowerStory_EventScript_KazukiFirstMeeting
 	case TOWER_STORY_MET, TowerStory_EventScript_KazukiMet
@@ -249,9 +286,8 @@ TowerStory_EventScript_Kazuki::
 	end
 
 TowerStory_EventScript_KazukiFirstMeeting::
-	playse SE_PIN
-	applymovement LOCALID_TOWER_LOBBY_KAZUKI, Common_Movement_ExclamationMark
-	waitmovement 0
+	@ Coming over, he already showed his surprise.
+	call_if_ne VAR_TEMP_3, 1, TowerStory_EventScript_KazukiExclaims
 	msgbox TowerStory_Text_KazukiMistakesPlayer, MSGBOX_DEFAULT
 	applymovement LOCALID_TOWER_LOBBY_KAZUKI, Common_Movement_QuestionMark
 	waitmovement 0
@@ -260,27 +296,23 @@ TowerStory_EventScript_KazukiFirstMeeting::
 	msgbox TowerStory_Text_KazukiUnderstands, MSGBOX_DEFAULT
 	setvar VAR_TOWER_STORY_STATE, TOWER_STORY_MET
 	goto_if_set FLAG_SYS_TOWER_SILVER, TowerStory_EventScript_KazukiWishSurfaces
-	release
-	end
+	goto TowerStory_EventScript_KazukiDone
 
 TowerStory_EventScript_KazukiMet::
 	goto_if_set FLAG_SYS_TOWER_SILVER, TowerStory_EventScript_KazukiWishSurfaces
 	msgbox TowerStory_Text_KazukiHappyTogether, MSGBOX_DEFAULT
-	release
-	end
+	goto TowerStory_EventScript_KazukiDone
 
 TowerStory_EventScript_KazukiWishSurfaces::
 	msgbox TowerStory_Text_KazukiSawSilverBattle, MSGBOX_DEFAULT
 	setvar VAR_TOWER_STORY_STATE, TOWER_STORY_WISH
 	goto_if_set FLAG_SYS_TOWER_GOLD, TowerStory_EventScript_KazukiFever
-	release
-	end
+	goto TowerStory_EventScript_KazukiDone
 
 TowerStory_EventScript_KazukiWish::
 	goto_if_set FLAG_SYS_TOWER_GOLD, TowerStory_EventScript_KazukiFever
 	msgbox TowerStory_Text_KazukiWantsRematch, MSGBOX_DEFAULT
-	release
-	end
+	goto TowerStory_EventScript_KazukiDone
 
 TowerStory_EventScript_KazukiFever::
 	goto_if_unset FLAG_STORY_DARKRAI_JOINED, TowerStory_EventScript_KazukiFeverAlone
@@ -341,8 +373,9 @@ TowerStory_EventScript_KazukiFeverAlone::
 	playse SE_M_NIGHTMARE
 	waitse
 	msgbox FrontierStory_Text_DarkraiWarnsAlone, MSGBOX_DEFAULT
-	release
-	end
+	@ Darkrai has just asked the player to the hub; no second call on this visit.
+	setvar VAR_TEMP_2, 2
+	goto TowerStory_EventScript_KazukiDone
 
 TowerStory_EventScript_KazukiReleased::
 	msgbox TowerStory_Text_KazukiVoicesFade, MSGBOX_DEFAULT
