@@ -49,8 +49,9 @@ def engine_code():
     result.append("const struct FontInfo *gFonts = sFontInfos;")
     result.append(re.search(r"^struct\n\{\n    u16 tileOffset;.*?^\};",
                             text, re.M | re.S)[0])
-    for name in ("GetExtCtrlCodeLength", "StringCopy", "StringLength",
-                 "StripExtCtrlCodes", "StringExpandPlaceholders", "ConvertInternationalString"):
+    for name in ("GetExtCtrlCodeLength", "StringCopy", "StringLength", "StringCopyN",
+                 "StringCopyN_Multibyte", "StringLength_Multibyte", "SkipExtCtrlCode",
+                 "StringCompareWithoutExtCtrlCodes", "StripExtCtrlCodes", "StringExpandPlaceholders", "ConvertInternationalString"):
         result.append(function(strings, name))
     result.append(function(international, "ConvertInternationalContestantName"))
     for name in ("DynamicPlaceholderTextUtil_Reset", "DynamicPlaceholderTextUtil_SetPlaceholderPtr",
@@ -112,6 +113,9 @@ class TextLanguageModeTests(unittest.TestCase):
 
     def test_kanji_render_and_width(self):
         self.run_case("kanji")
+
+    def test_kanji_text_utilities(self):
+        self.run_case("kanji_utilities")
 
     def test_control_payloads_are_not_language_markers(self):
         self.run_case("controls")

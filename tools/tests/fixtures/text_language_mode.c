@@ -226,6 +226,27 @@ static void kanji(void)
     parity(fontSwitch, FONT_NORMAL, 0, WINDOW_TEXT_PRINTER, 0);
 }
 
+static void kanji_utilities(void)
+{
+    const u8 attack[] = {CTRL, EXT_CTRL_CODE_KANJI_GLYPH, 1, EOS};
+    const u8 defense[] = {CTRL, EXT_CTRL_CODE_KANJI_GLYPH, 3, EOS};
+    const u8 decorated[] = {JPN, CTRL, EXT_CTRL_CODE_KANJI_GLYPH, 1, EOS};
+    u8 copied[16];
+    assert(StringLength(attack) == 3);
+    StringCopy(copied, decorated);
+    StripExtCtrlCodes(copied);
+    assert(memcmp(copied, attack, sizeof(attack)) == 0);
+    assert(StringCompareWithoutExtCtrlCodes(attack, decorated) == 0);
+    assert(StringCompareWithoutExtCtrlCodes(attack, defense) != 0);
+    // Existing multibyte helpers are for saved/link strings and are not yet
+    // suitable for kanji. Keep this limitation visible until callers are audited.
+    assert(StringLength_Multibyte(attack) == 3);
+    StringCopyN_Multibyte(copied, (u8 *)attack, 1);
+    assert(copied[0] == EXT_CTRL_CODE_BEGIN && copied[1] == EOS);
+    StringCopyN(copied, attack, 2);
+    assert(copied[0] == CTRL && copied[1] == EXT_CTRL_CODE_KANJI_GLYPH);
+}
+
 static void controls(void)
 {
     const u8 str[] = {CTRL, EXT_CTRL_CODE_COLOR, EXT_CTRL_CODE_ENG,
@@ -376,6 +397,7 @@ int main(int argc, char **argv)
     else if (!strcmp(argv[1], "metrics")) metrics();
     else if (!strcmp(argv[1], "switches")) switches();
     else if (!strcmp(argv[1], "kanji")) kanji();
+    else if (!strcmp(argv[1], "kanji_utilities")) kanji_utilities();
     else if (!strcmp(argv[1], "controls")) controls();
     else if (!strcmp(argv[1], "placeholders")) placeholders();
     else if (!strcmp(argv[1], "names")) names();
