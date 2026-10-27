@@ -6,6 +6,9 @@ BattleFrontier_BattleDomeLobby_MapScripts::
 	.byte 0
 
 BattleFrontier_BattleDomeLobby_OnTransition:
+	@ The cook and Pokevirus only appear for Reika's release battle.
+	setflag FLAG_TEMP_1D
+	setflag FLAG_TEMP_1E
 	setvar VAR_0x8004, STORY_TARGET_REIKA
 	call FrontierStory_EventScript_SetupTarget
 	end

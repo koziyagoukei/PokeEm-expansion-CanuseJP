@@ -109,6 +109,19 @@ static const struct StoryTargetText sStoryTargetTexts[STORY_TARGET_COUNT] =
 // RESCUE_TEXT_*. Someone without a RESCUE_TEXT_FEVER does not have these scenes yet.
 static const u8 *const sStoryTargetRescueTexts[STORY_TARGET_COUNT][RESCUE_TEXT_COUNT] =
 {
+    [STORY_TARGET_REIKA] =
+    {
+        [RESCUE_TEXT_FEVER_STARTING] = COMPOUND_STRING("{JPN}レイカ『……あら？\nなんだか あたまが ぼんやりしますわ……\pきんいろの シンボル……\nひかえの……』"),
+        [RESCUE_TEXT_FEVER] = COMPOUND_STRING("{JPN}レイカ『……マッスグマ……\nひかえ…… えらばなかった……\pみなさんと つながっていれば\nぜんぶ わかる はず……\pわかる はず ですのに……\pでも わたくしは…… わたくしが\nしりたいのは……\pちがいますわ。 わたくしたちは。\nわたくし は。 わたくし……\pあつい。 あたまが あつい。\pどうして。 どうして はなれるの？\nどうして わからない ものを\lしんじるの？』"),
+        [RESCUE_TEXT_VOICES_FADE] = COMPOUND_STRING("{JPN}レイカ『……みなさんの こえが\nとおく なっていきますわ……\pマッスグマの きもちも\nだれの きもちも\lぜんぶ わかったのに……』"),
+        [RESCUE_TEXT_CHOOSES] = COMPOUND_STRING("{JPN}レイカ『でも…… いまの しょうぶで\nわかりましたの。\pわたくし あの ひ ひかえに した\nマッスグマを\lずっと だいじに おもっていた。\pあの こが なにを おもって いたのか\nわたくしには わからない。\pそれでも いいの。\nわからなくても\lあの こを しんじたい。\p……ごめんなさい みなさん。\nわたくし いきますわ。』"),
+        [RESCUE_TEXT_DELIRIOUS] = COMPOUND_STRING("{JPN}レイカ『……マッスグマ……\nみなさんの きもち…… ぜんぶ……』"),
+        [RESCUE_TEXT_EATS] = COMPOUND_STRING("{JPN}てんしゅは レイカの くちに\nめしを どんどん はこんだ！\pレイカ『んむっ…… もぐ……』"),
+        [RESCUE_TEXT_WAKES_UP] = COMPOUND_STRING("{JPN}レイカ『……まあ。\nここは どちらかしら。\pあたまが すっきりしていますわ……\nみなさんの こえが…… きこえない。』"),
+        [RESCUE_TEXT_REMEMBERS] = COMPOUND_STRING("{JPN}レイカ『……ぜんぶ おぼえていますわ。\pマッスグマの きもちも\nみなさんの きもちも\lぜんぶ わかって……\pほんとうに おだやか でしたの。\pでも これからは わからない ままでも\nあの こと いっしょに\lあるいて いきますわ。\p……たすけて くださって\nありがとうございます。』"),
+        [RESCUE_TEXT_ASKS_POKENAV] = COMPOUND_STRING("{JPN}レイカ『そうですわ。\nポケナビを おもちかしら？\pれんらくさきを こうかん しましょう。』"),
+        [RESCUE_TEXT_GOES_TO_INN] = COMPOUND_STRING("{JPN}レイカ『わたくし りょかんで\nやすませて いただきますわ。\pマッスグマと おさんぽ するのが\nたのしみ ですの。』"),
+    },
     [STORY_TARGET_EISUKE] =
     {
         [RESCUE_TEXT_FEVER_STARTING] = COMPOUND_STRING("{JPN}エイスケ『……あれ？\nなんだか あたまが ぼーっと する……\pきんいろの シンボル……\nあと 1ターン……』"),

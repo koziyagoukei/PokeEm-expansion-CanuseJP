@@ -769,6 +769,7 @@ FrontierStory_EventScript_TargetFever::
 	goto_if_eq VAR_RESULT, FALSE, FrontierStory_EventScript_TargetRetreat
 	special FrontierStory_GetRescueScene
 	switch VAR_RESULT
+	case STORY_TARGET_REIKA, DomeStory_EventScript_ReleaseBattle
 	case STORY_TARGET_EISUKE, ArenaStory_EventScript_ReleaseBattle
 	case STORY_TARGET_YORIKO, ContestStory_EventScript_ReleaseBattle
 	special LoadPlayerParty
@@ -812,6 +813,11 @@ FrontierStory_EventScript_TargetReleased::
 	warp MAP_ULTRA_FRONTIE_HUB, 7, 5
 	waitstate
 	end
+
+DomeStory_EventScript_ReleaseBattle::
+	setmultitrainerbattle TRAINER_REIKA_RELEASE, DomeStory_Text_ReikaReleaseDefeat, TRAINER_POKEVIRUS, FrontierStory_Text_PokevirusDefeat, PARTNER_ROCKET_COOK
+	call FrontierStory_EventScript_StartReleaseBattle
+	goto FrontierStory_EventScript_TargetBattleDone
 
 ArenaStory_EventScript_ReleaseBattle::
 	setmultitrainerbattle TRAINER_EISUKE_RELEASE, ArenaStory_Text_EisukeReleaseDefeat, TRAINER_POKEVIRUS, FrontierStory_Text_PokevirusDefeat, PARTNER_ROCKET_COOK
@@ -927,8 +933,8 @@ FrontierStory_EventScript_VisitorNotYet::
 
 @ ---------------------------------------------------------------------------
 @ The inn: everyone cured rests here. Kazuki in the lobby, Yoriko and Seviper in the west wing,
-@ Eisuke and Starmie on the beach outside, and in each part of the building a few of the cured
-@ Brains and guests, picked on every visit.
+@ Eisuke and Starmie on the beach outside and Reika walking Linoone there, and in each part of the
+@ building a few of the cured Brains and guests, picked on every visit.
 
 InnStory_EventScript_SetupLobby::
 	setflag FLAG_TEMP_11
@@ -1048,15 +1054,51 @@ InnStory_EventScript_Seviper::
 	release
 	end
 
-@ Outside, on the beach: Eisuke and Starmie.
+@ Outside: Eisuke and Starmie on the beach, Reika walking Linoone.
 InnStory_EventScript_SetupOutside::
 	setflag FLAG_TEMP_11
+	setflag FLAG_TEMP_12
 	call_if_set FLAG_STORY_RESCUED_ARENA, InnStory_EventScript_ShowEisuke
+	call_if_set FLAG_STORY_RESCUED_DOME, InnStory_EventScript_ShowReika
 	return
 
 InnStory_EventScript_ShowEisuke::
 	clearflag FLAG_TEMP_11
 	return
+
+InnStory_EventScript_ShowReika::
+	clearflag FLAG_TEMP_12
+	return
+
+@ Linoone trots off after something; Reika doesn't need to know what, and waits with a smile.
+InnStory_EventScript_Reika::
+	lock
+	faceplayer
+	msgbox DomeStory_Text_InnReika, MSGBOX_DEFAULT
+	closemessage
+	applymovement LOCALID_INN_LINOONE, InnStory_Movement_LinooneWanders
+	waitmovement 0
+	applymovement LOCALID_INN_REIKA, Common_Movement_FaceRight
+	waitmovement 0
+	msgbox DomeStory_Text_InnReikaWaits, MSGBOX_DEFAULT
+	closemessage
+	applymovement LOCALID_INN_LINOONE, InnStory_Movement_LinooneReturns
+	waitmovement 0
+	playmoncry SPECIES_LINOONE, CRY_MODE_NORMAL
+	faceplayer
+	msgbox DomeStory_Text_InnReikaWelcomesBack, MSGBOX_DEFAULT
+	waitmoncry
+	release
+	end
+
+InnStory_EventScript_Linoone::
+	lock
+	faceplayer
+	playmoncry SPECIES_LINOONE, CRY_MODE_NORMAL
+	msgbox DomeStory_Text_InnLinoone, MSGBOX_DEFAULT
+	waitmoncry
+	release
+	end
 
 @ He has put the lost three turns behind him: instead of fighting that match again, he and Starmie
 @ dive in and swim off to train for the next race. They are back on the next visit.
@@ -1096,6 +1138,25 @@ TowerStory_Movement_Tremble:
 	walk_in_place_faster_left
 	walk_in_place_faster_right
 	delay_16
+	step_end
+
+InnStory_Movement_LinooneWanders:
+	walk_right
+	walk_right
+	walk_right
+	face_up
+	delay_16
+	face_right
+	delay_16
+	face_down
+	delay_16
+	step_end
+
+InnStory_Movement_LinooneReturns:
+	walk_left
+	walk_left
+	walk_left
+	face_down
 	step_end
 
 InnStory_Movement_DiveIn:
@@ -1773,6 +1834,10 @@ FrontierStory_Text_TargetCollapses:
 	.string "{STR_VAR_1}は その ばに\n"
 	.string "くずれおちた！$"
 
+DomeStory_Text_ReikaReleaseDefeat:
+	.string "{JPN}……わたくし…… まけましたの……\n"
+	.string "わたくしの しょうぶで……$"
+
 ArenaStory_Text_EisukeReleaseDefeat:
 	.string "{JPN}……おれ…… まけた……\n"
 	.string "おれが まけたんだ……$"
@@ -1872,3 +1937,27 @@ ArenaStory_Text_InnEisukeSwimsOff:
 ArenaStory_Text_InnStarmie:
 	.string "{JPN}スターミーの コアが\n"
 	.string "きらりと ひかった！$"
+
+@ ---------------------------------------------------------------------------
+@ Text: Reika at the inn
+
+DomeStory_Text_InnReika:
+	.string "{JPN}レイカ『あら {PLAYER}さん。\n"
+	.string "ごきげんよう。\p"
+	.string "マッスグマと おさんぽ ちゅうですの。』$"
+
+DomeStory_Text_InnReikaWaits:
+	.string "{JPN}レイカ『あら また なにか\n"
+	.string "みつけたのね。\p"
+	.string "なにが あの こを ひきつけたのか\n"
+	.string "わたくしには わかりませんけれど……\p"
+	.string "それで いいんですの。\n"
+	.string "ここで まっていますわ。』$"
+
+DomeStory_Text_InnReikaWelcomesBack:
+	.string "{JPN}レイカ『ふふ。 おかえりなさい。\p"
+	.string "つぎは どちらへ いきましょうか。』$"
+
+DomeStory_Text_InnLinoone:
+	.string "{JPN}マッスグマは くんくんと\n"
+	.string "じめんの においを かいでいる。$"

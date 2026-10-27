@@ -613,12 +613,12 @@ TEST("Frontier story: Eisuke's fever comes at the Gold Symbol, alone until Darkr
     EXPECT(!TargetComesOver(STORY_TARGET_EISUKE));
 
     // Someone whose release battle is not written yet stays at their wish.
-    FlagSet(gFrontierBrainInfo[FRONTIER_FACILITY_DOME].silverSymbolFlag);
-    FlagSet(gFrontierBrainInfo[FRONTIER_FACILITY_DOME].goldSymbolFlag);
-    while (TalkToTarget(STORY_TARGET_REIKA))
+    FlagSet(gFrontierBrainInfo[FRONTIER_FACILITY_PALACE].silverSymbolFlag);
+    FlagSet(gFrontierBrainInfo[FRONTIER_FACILITY_PALACE].goldSymbolFlag);
+    while (TalkToTarget(STORY_TARGET_IKUE))
         ;
-    EXPECT_EQ(TargetFever(STORY_TARGET_REIKA), TARGET_FEVER_NONE);
-    EXPECT(!TargetComesOver(STORY_TARGET_REIKA));
+    EXPECT_EQ(TargetFever(STORY_TARGET_IKUE), TARGET_FEVER_NONE);
+    EXPECT(!TargetComesOver(STORY_TARGET_IKUE));
 }
 
 TEST("Frontier story: met with the Gold Symbol already won, the talk goes on to the fever")
@@ -779,4 +779,48 @@ TEST("Frontier story: every Brain and guest has words for the inn")
         FrontierStory_BufferInnGuestText();
         EXPECT_NE(gStringVar4[0], EOS);
     }
+}
+
+TEST("Frontier story: everyone with a release battle has all of its lines and places")
+{
+    u32 withScenes = 0;
+
+    for (u32 target = STORY_TARGET_REIKA; target < STORY_TARGET_COUNT; target++)
+    {
+        ResetStory();
+        gSpecialVar_0x8004 = target;
+        FrontierStory_StartRescueScene();
+        gSpecialVar_0x8004 = RESCUE_TEXT_FEVER;
+        FrontierStory_BufferRescueText();
+        if (!gSpecialVar_Result)
+            continue;
+        withScenes++;
+        for (u32 part = RESCUE_TEXT_FEVER; part < RESCUE_TEXT_COUNT; part++)
+        {
+            if (part == RESCUE_TEXT_AFTER_CURE)
+                continue;
+            gSpecialVar_0x8004 = part;
+            FrontierStory_BufferRescueText();
+            EXPECT(gSpecialVar_Result);
+        }
+        // Only the contest's fever comes when Darkrai is always there already.
+        gSpecialVar_0x8004 = RESCUE_TEXT_FEVER_STARTING;
+        FrontierStory_BufferRescueText();
+        EXPECT_EQ(gSpecialVar_Result, target != STORY_TARGET_YORIKO);
+
+        FrontierStory_GetRescueScene();
+        EXPECT_EQ(gSpecialVar_Result, target);
+        EXPECT_NE(gSpecialVar_0x8005, 0);
+        EXPECT_NE(gSpecialVar_0x8006, 0);
+        EXPECT_NE(gSpecialVar_0x8004, gSpecialVar_0x8005);
+        EXPECT_NE(gSpecialVar_0x8005, gSpecialVar_0x8006);
+        EXPECT_NE(gSpecialVar_0x8004, gSpecialVar_0x8006);
+        FrontierStory_GetRescueMatchCall();
+        EXPECT_NE(gSpecialVar_0x8004, 0);
+        FrontierStory_ReturnRescueTarget();
+        VarSet(VAR_HUB_RESCUED_GFX, 0);
+        FrontierStory_PrepareHubRescue();
+        EXPECT_NE(VarGet(VAR_HUB_RESCUED_GFX), 0);
+    }
+    EXPECT_GE(withScenes, 3);
 }

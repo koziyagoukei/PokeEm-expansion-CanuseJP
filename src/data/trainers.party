@@ -17072,3 +17072,43 @@ EVs: 252 HP / 252 Atk / 4 Spe
 - Dragon Dance
 - Earthquake
 - Ice Fang
+
+=== TRAINER_REIKA_RELEASE ===
+Name: レイカ
+Class: Lady
+Pic: Lady
+Gender: Female
+Music: Female
+Double Battle: No
+AI: Basic Trainer
+Multi Party: Half
+
+Linoone @ Sitrus Berry
+Ability: Quick Feet
+Level: 50
+Nature: Adamant
+EVs: 4 HP / 252 Atk / 252 Spe
+- Extreme Speed
+- Shadow Claw
+- Stomping Tantrum
+- Protect
+
+Gardevoir @ Choice Specs
+Ability: Trace
+Level: 50
+Nature: Modest
+EVs: 4 HP / 252 SpA / 252 Spe
+- Moonblast
+- Psychic
+- Shadow Ball
+- Thunderbolt
+
+Delcatty @ Leftovers
+Ability: Wonder Skin
+Level: 50
+Nature: Calm
+EVs: 252 HP / 4 Def / 252 SpD
+- Fake Out
+- Body Slam
+- Thunder Wave
+- Wish
