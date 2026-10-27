@@ -240,6 +240,10 @@
 #define EXT_CTRL_CODE_AUTO                   0x1D
 #define EXT_CTRL_CODE_KANJI                  0x1E
 #define EXT_CTRL_CODE_KANJI_GLYPH            0x1F
+// Kanji are FC <bank> <xx>: banks 1F..27, xx 01..F6. Codes come from charmap_kanji.txt.
+#define EXT_CTRL_CODE_KANJI_GLYPH_LAST       0x27
+#define KANJI_GLYPHS_PER_BANK                0xF6
+#define IS_KANJI_GLYPH_CODE(code) ((code) >= EXT_CTRL_CODE_KANJI_GLYPH && (code) <= EXT_CTRL_CODE_KANJI_GLYPH_LAST)
 
 #define TEXT_COLOR_TRANSPARENT  0x0
 #define TEXT_COLOR_WHITE        0x1

@@ -31,6 +31,7 @@ enum LhsType
     Char,
     Escape,
     Constant,
+    Include,
     None
 };
 
@@ -190,6 +191,35 @@ Lhs CharmapReader::ReadLhs()
     {
         lhs.type = LhsType::Constant;
         lhs.name = ReadConstant();
+    }
+    else if (m_buffer[m_pos] == '.')
+    {
+        // .include "file" reads another charmap, relative to this one.
+        m_pos++;
+
+        if (ReadConstant() != "include")
+            RaiseError("unknown directive");
+
+        SkipWhitespace();
+
+        if (m_buffer[m_pos] != '"')
+            RaiseError("expected quoted file name after .include");
+
+        long startPos = ++m_pos;
+
+        while (m_buffer[m_pos] != '"')
+        {
+            if (m_buffer[m_pos] == '\n' || m_buffer[m_pos] == 0)
+                RaiseError("unterminated file name");
+            m_pos++;
+        }
+
+        std::string name(&m_buffer[startPos], m_pos - startPos);
+        m_pos++;
+
+        std::size_t slash = m_filename.find_last_of("/\\");
+        lhs.type = LhsType::Include;
+        lhs.name = (slash == std::string::npos) ? name : m_filename.substr(0, slash + 1) + name;
     }
     else if (m_buffer[m_pos] == '\r')
     {
@@ -371,6 +401,11 @@ void CharmapReader::SkipWhitespace()
 
 Charmap::Charmap(std::string filename)
 {
+    Load(filename, 0);
+}
+
+void Charmap::Load(std::string filename, int depth)
+{
     CharmapReader reader(filename);
 
     for (;;)
@@ -379,6 +414,15 @@ Charmap::Charmap(std::string filename)
 
         if (lhs.type == LhsType::None)
             return;
+
+        if (lhs.type == LhsType::Include)
+        {
+            if (depth >= 8)
+                reader.RaiseError("charmap includes nested too deeply");
+            Load(lhs.name, depth + 1);
+            reader.ExpectEmptyRestOfLine();
+            continue;
+        }
 
         reader.ExpectEqualsSign();
 

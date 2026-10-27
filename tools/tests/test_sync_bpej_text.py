@@ -75,7 +75,8 @@ class TextSyncTests(unittest.TestCase):
     def test_hash_staleness_atomicity_and_crlf(self):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
-            (root / "charmap.txt").write_bytes((TOOLS.parent / "charmap.txt").read_bytes())
+            for name in ("charmap.txt", "charmap_kanji.txt"):
+                (root / name).write_bytes((TOOLS.parent / name).read_bytes())
             original = b'Text::\r\n\t.string "English$"\r\n\r\nScript::\r\n\tend\r\n'
             (root / "text.inc").write_bytes(original)
             rom = b"\x01\xFF"
