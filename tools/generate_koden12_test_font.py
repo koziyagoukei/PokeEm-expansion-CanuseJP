@@ -1,6 +1,9 @@
 #!/usr/bin/env python3
 """Rasterize KH Dot Kodenmachou 12 test glyphs at 12px, without rescaling.
 
+Legacy comparison tool only. Normal builds use tools/kanji/kanji_gen.py;
+tools/kanji/build_kanji_atlas.py maintains its atlas. See docs/kanji.md.
+
 Requires Pillow and fontTools. Pass the original TTF, or converted TTF subsets
 that together cover GLYPHS. The font itself is not included in this repository.
 """

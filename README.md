@@ -35,7 +35,7 @@
 
 フォントは `graphics/fonts/` 以下のPNGから生成します。日本語フォントには `japanese_normal`、`japanese_small`、`japanese_short`、`japanese_bold` を使用します。使える文字・記号はcharmapとフォント側の対応範囲に限られ、任意の漢字や全角記号がそのまま使えるわけではありません。
 
-漢字は現在、影付きの25字を表示確認できる段階です。プレイヤー名・ニックネーム、セーブや通信に使う文字列には対応していません。使い方と制約は [漢字表示の試作](docs/kanji_font_poc.md) を参照してください。
+漢字は表示文字列へ記述すると、ビルド時に使用字の検出・ID登録・影付きフォント生成を行います。既存25字のIDを維持し、最大2,214字に対応します。プレイヤー名・ニックネーム、セーブや通信に入る文字列への漢字は非対応で、既知の経路は漢字禁止・バイト長のビルド時検査で保護します。導入方法と検査の限界は [漢字の自動検出とフォント生成](docs/kanji.md) を参照してください。
 
 ### 表示モードの指定
 
@@ -138,6 +138,7 @@ make -j4 --output-sync=target
 | ポケナビ関連の抽出 | [bpej_pokenav_extraction.md](docs/bpej_pokenav_extraction.md) |
 | 日本版ROMのテキストを参考にした日本語化 | [bpej_text_localization.md](docs/bpej_text_localization.md) |
 | 漢字表示の試作・表示確認と制約 | [kanji_font_poc.md](docs/kanji_font_poc.md) |
+| 漢字の自動検出・生成と保存/通信データ検査 | [kanji.md](docs/kanji.md) |
 | フォントのROM容量と表示方式の調査 | [font_engine_audit.md](docs/font_engine_audit.md) |
 | ヘルプ・日記・モノローグ・選択肢分岐の情報ビューア | [info_viewer.md](docs/info_viewer.md) |
 | 本流の開発者・貢献者 | [CREDITS.md](CREDITS.md) |

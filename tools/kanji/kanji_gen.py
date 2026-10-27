@@ -18,10 +18,12 @@ under build/generated/kanji is a build product.
 from __future__ import annotations
 
 import argparse
+from contextlib import contextmanager
 import os
 import re
 import struct
 import sys
+import tempfile
 import zlib
 from pathlib import Path
 
@@ -34,6 +36,7 @@ OUT_DIR = "build/generated/kanji"
 GLYPHS_BIN = "kanji_glyphs.fwjpnfont"
 SLOTS_BIN = "kanji_slots.bin"
 REPORT = "kanji_report.txt"
+BUILD_CHARMAP = "charmap.txt"
 
 # Must match include/constants/characters.h.
 EXT_CTRL_CODE_BEGIN = 0xFC
@@ -41,6 +44,7 @@ FIRST_BANK_CODE = 0x1F  # EXT_CTRL_CODE_KANJI_GLYPH
 BANK_COUNT = 9          # FC 1F .. FC 27
 GLYPHS_PER_BANK = 0xF6  # payload 01..F6; F7..FF are text control bytes
 MAX_KANJI = BANK_COUNT * GLYPHS_PER_BANK
+LEGACY_GLYPHS = "攻撃防御特性技力速命中状態異常回復対戦相手物理変化"
 
 CELL = 12
 SCAN_DIRS = ("src", "include", "data")
@@ -49,7 +53,8 @@ C_SUFFIXES = {".c", ".h"}
 ASM_SUFFIXES = {".inc", ".s"}
 BASE_WRAPPERS = {"_", "__", "J_", "J__", "COMPOUND_STRING", "J_COMPOUND_STRING"}
 
-KANJI_RANGES = ((0x3005, 0x3007), (0x3400, 0x4DBF), (0x4E00, 0x9FFF), (0xF900, 0xFAFF))
+KANJI_RANGES = ((0x3005, 0x3007), (0x3400, 0x4DBF), (0x4E00, 0x9FFF), (0xF900, 0xFAFF),
+                (0x20000, 0x2EBEF), (0x2F800, 0x2FA1F), (0x30000, 0x323AF))
 
 
 class KanjiError(Exception):
@@ -88,8 +93,12 @@ def read_png(path: Path):
         raise KanjiError(f"{path}: not a PNG")
     pos, idat, header = 8, bytearray(), None
     while pos < len(data):
+        if pos + 12 > len(data):
+            raise KanjiError(f"{path}: truncated PNG chunk")
         length, kind = struct.unpack(">I4s", data[pos:pos + 8])
         body = data[pos + 8:pos + 8 + length]
+        if pos + 12 + length > len(data) or zlib.crc32(kind + body) != struct.unpack(">I", data[pos + 8 + length:pos + 12 + length])[0]:
+            raise KanjiError(f"{path}: invalid PNG chunk/CRC")
         pos += 12 + length
         if kind == b"IHDR":
             header = struct.unpack(">IIBBBBB", body)
@@ -97,14 +106,20 @@ def read_png(path: Path):
             idat += body
         elif kind == b"IEND":
             break
-    width, height, depth, color, _, _, interlace = header
-    if color not in (0, 3) or interlace or depth not in (1, 2, 4, 8):
+    if header is None:
+        raise KanjiError(f"{path}: missing PNG header")
+    width, height, depth, color, compression, filtering, interlace = header
+    if not width or not height or color not in (0, 3) or compression or filtering or interlace or depth not in (1, 2, 4, 8):
         raise KanjiError(f"{path}: unsupported PNG format")
     raw = zlib.decompress(bytes(idat))
     stride = (width * depth + 7) // 8
+    if len(raw) != height * (stride + 1):
+        raise KanjiError(f"{path}: invalid PNG pixel data length")
     rows, prev, pos = [], bytearray(stride), 0
     for _ in range(height):
         kind, line = raw[pos], bytearray(raw[pos + 1:pos + 1 + stride])
+        if kind > 4:
+            raise KanjiError(f"{path}: invalid PNG filter {kind}")
         pos += 1 + stride
         for i in range(stride):
             left = line[i - 1] if i else 0
@@ -132,13 +147,19 @@ class Atlas:
     def __init__(self, root: Path):
         self.chars = "".join((root / ATLAS_TXT).read_text(encoding="utf-8").split())
         self.index = {char: i for i, char in enumerate(self.chars)}
-        width, _, self.rows = read_png(root / ATLAS_PNG)
+        width, height, self.rows = read_png(root / ATLAS_PNG)
+        if (not self.chars or len(self.index) != len(self.chars) or width % CELL or height % CELL
+                or len(self.chars) > (width // CELL) * (height // CELL)):
+            raise KanjiError("kanji atlas dimensions or character index are invalid")
         self.columns = width // CELL
 
     def body(self, char: str):
         index = self.index[char]
         x0, y0 = (index % self.columns) * CELL, (index // self.columns) * CELL
-        return [[self.rows[y0 + y][x0 + x] != 0 for x in range(CELL)] for y in range(CELL)]
+        body = [[self.rows[y0 + y][x0 + x] != 0 for x in range(CELL)] for y in range(CELL)]
+        if not any(any(row) for row in body):
+            raise KanjiError(f"kanji atlas has an empty glyph for {char!r}")
+        return body
 
 
 def glyph_cell(body):
@@ -209,7 +230,8 @@ LEDGER_HEADER = """\
 @
 @ `make` appends kanji found in display strings via tools/kanji/kanji_gen.py.
 @ Codes are permanent: never edit, reorder or delete these lines, and never
-@ reuse a code, even if a kanji is no longer used. Unused kanji cost no ROM.
+@ reuse a code, even if a kanji is no longer used. Unused glyphs are omitted;
+@ their 2-byte slot entries remain to preserve IDs.
 @ Code = FC <bank 1F..27> <01..F6>. See docs/kanji.md.
 """
 
@@ -217,7 +239,7 @@ LEDGER_HEADER = """\
 def read_ledger(path: Path):
     entries = []
     if not path.exists():
-        return entries
+        raise KanjiError(f"{path}: missing persistent ID ledger; restore it from version control")
     for number, line in enumerate(path.read_text(encoding="utf-8").splitlines(), 1):
         stripped = strip_charmap_comment(line).strip()
         if not stripped:
@@ -248,6 +270,10 @@ def validate_ledger(entries, base_chars, base_constants):
         seen_chars.setdefault(char, line)
         seen_numbers.setdefault(n, line)
     kanji_codes = range(FIRST_BANK_CODE, FIRST_BANK_CODE + BANK_COUNT)
+    by_char = {char: n for char, n, _ in entries}
+    for n, char in enumerate(LEGACY_GLYPHS, 1):
+        if by_char.get(char) != n:
+            errors.append(f"{LEDGER}: legacy glyph {char!r} must retain ID {n}")
     for name, (sequence, line) in list(base_chars.items()) + list(base_constants.items()):
         if len(sequence) >= 2 and sequence[0] == EXT_CTRL_CODE_BEGIN and sequence[1] in kanji_codes:
             errors.append(f"{CHARMAP}:{line}: {name} uses a kanji code (FC {sequence[1]:02X}); kanji belong in {LEDGER}")
@@ -257,7 +283,7 @@ def validate_ledger(entries, base_chars, base_constants):
 # --- scanning ------------------------------------------------------------------
 
 C_TOKENS = re.compile(r'"(?:\\.|[^"\\\n])*"|\'(?:\\.|[^\'\\\n])*\'|//[^\n]*|/\*.*?(?:\*/|\Z)', re.S)
-KANJI_CHAR = re.compile("[" + "".join(f"\\u{low:04x}-\\u{high:04x}" for low, high in KANJI_RANGES) + "]")
+KANJI_CHAR = re.compile("[" + "".join(chr(low) + "-" + chr(high) for low, high in KANJI_RANGES) + "]")
 
 
 def strip_c_comments(text: str) -> str:
@@ -266,6 +292,16 @@ def strip_c_comments(text: str) -> str:
         token = match[0]
         return token if token[0] in "\"'" else re.sub(r"[^\n]", " ", token)
     return C_TOKENS.sub(blank, text)
+
+
+def code_mask(text: str) -> str:
+    """Hide literals as well as comments when looking for executable tokens."""
+    return C_TOKENS.sub(lambda m: re.sub(r"[^\n]", " ", m[0]), text)
+
+
+def strip_asm_comments(text: str) -> str:
+    tokens = re.compile(C_TOKENS.pattern + r"|@[^\n]*", re.S)
+    return tokens.sub(lambda m: m[0] if m[0][0] in "\"'" else re.sub(r"[^\n]", " ", m[0]), text)
 
 
 LITERAL = re.compile(r'"((?:\\.|[^"\\\n])*)"')
@@ -277,22 +313,35 @@ def literal_kanji(literal_body: str):
     return [char for char in visible if is_kanji(char)]
 
 
-def find_wrappers(c_texts) -> set[str]:
+def find_wrappers(c_texts) -> dict[str, set[int]]:
     """Macros that pass one of their parameters on to a string-encoding wrapper."""
     defines = []
     for text in c_texts:
         for match in DEFINE.finditer(text):
             params = [p.strip() for p in match[2].split(",") if p.strip()]
             defines.append((match[1], params, match[3]))
-    wrappers = set(BASE_WRAPPERS)
+    wrappers = {name: {0} for name in BASE_WRAPPERS}
     while True:
         names = "|".join(sorted(map(re.escape, wrappers), key=len, reverse=True))
-        call = re.compile(r"(?<![\w])(?:" + names + r")\s*\(([^()]*)")
-        added = {name for name, params, body in defines if name not in wrappers
-                 and any(re.search(r"\b" + re.escape(p) + r"\b", m[1]) for m in call.finditer(body) for p in params)}
-        if not added:
+        call = re.compile(r"(?<![\w])(" + names + r")\s*\(")
+        changed = False
+        for name, params, body in defines:
+            forwarded = set()
+            for match in call.finditer(code_mask(body)):
+                args = call_arguments(body, match.end() - 1)
+                if args is None:
+                    continue
+                parts = split_arguments(args)
+                for argument in wrappers[match[1]]:
+                    if argument < len(parts):
+                        expression = code_mask(parts[argument])
+                        forwarded.update(i for i, p in enumerate(params)
+                                         if re.search(r"\b" + re.escape(p) + r"\b", expression))
+            if forwarded - wrappers.get(name, set()):
+                wrappers.setdefault(name, set()).update(forwarded)
+                changed = True
+        if not changed:
             return wrappers
-        wrappers |= added
 
 
 def call_arguments(text: str, open_paren: int):
@@ -300,8 +349,8 @@ def call_arguments(text: str, open_paren: int):
     depth, i = 0, open_paren
     while i < len(text):
         ch = text[i]
-        if ch == '"':
-            match = LITERAL.match(text, i)
+        if ch in "\"'":
+            match = C_TOKENS.match(text, i)
             i = match.end() if match else i + 1
             continue
         if ch == "(":
@@ -314,24 +363,45 @@ def call_arguments(text: str, open_paren: int):
     return None
 
 
+def split_arguments(text: str):
+    parts, start, depth, i = [], 0, 0, 0
+    while i < len(text):
+        if text[i] in "\"'":
+            match = C_TOKENS.match(text, i)
+            if match:
+                i = match.end()
+                continue
+        if text[i] in "({[":
+            depth += 1
+        elif text[i] in ")}]":
+            depth -= 1
+        elif text[i] == "," and depth == 0:
+            parts.append(text[start:i])
+            start = i + 1
+        i += 1
+    parts.append(text[start:])
+    return parts
+
+
 def scan_c(text: str, wrappers, found, label):
     pattern = re.compile(r"(?<![\w])(" + "|".join(sorted(map(re.escape, wrappers), key=len, reverse=True)) + r")\s*\(")
-    for match in pattern.finditer(text):
-        line_start = text.rfind("\n", 0, match.start()) + 1
-        if re.match(r"[ \t]*#[ \t]*define\b", text[line_start:match.start()]):
-            continue
+    for match in pattern.finditer(code_mask(text)):
         args = call_arguments(text, match.end() - 1)
         if args is None:
             continue
-        for literal in LITERAL.finditer(args):
-            for char in literal_kanji(literal[1]):
-                found.setdefault(char, f"{label}:{text.count(chr(10), 0, match.start()) + 1}")
+        parts = split_arguments(args)
+        for argument in wrappers[match[1]]:
+            if argument < len(parts):
+                for literal in LITERAL.finditer(parts[argument]):
+                    for char in literal_kanji(literal[1]):
+                        found.setdefault(char, f"{label}:{text.count(chr(10), 0, match.start()) + 1}")
 
 
 ASM_STRING = re.compile(r'^[ \t]*(?:\w+:+[ \t]*)?\.(?:string|braille)\b(.*)$', re.M)
 
 
 def scan_asm(text: str, found, label):
+    text = strip_asm_comments(text)
     for match in ASM_STRING.finditer(text):
         for literal in LITERAL.finditer(match[1]):
             for char in literal_kanji(literal[1]):
@@ -383,17 +453,61 @@ def write_if_changed(path: Path, data: bytes) -> bool:
     if path.exists() and path.read_bytes() == data:
         return False
     path.parent.mkdir(parents=True, exist_ok=True)
-    temp = path.with_name(path.name + ".tmp")
-    temp.write_bytes(data)
-    os.replace(temp, path)
+    temp = None
+    try:
+        with tempfile.NamedTemporaryFile(dir=path.parent, prefix=path.name + ".", delete=False) as handle:
+            temp = Path(handle.name)
+            handle.write(data)
+            handle.flush()
+            os.fsync(handle.fileno())
+        os.replace(temp, path)
+    finally:
+        if temp is not None and temp.exists():
+            temp.unlink()
     return True
+
+
+@contextmanager
+def ledger_lock(root: Path):
+    path = root / OUT_DIR / ".lock"
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with path.open("a+b") as handle:
+        if os.name == "nt":
+            import msvcrt
+            if handle.tell() == 0:
+                handle.write(b"\0")
+                handle.flush()
+            handle.seek(0)
+            msvcrt.locking(handle.fileno(), msvcrt.LK_LOCK, 1)
+        else:
+            import fcntl
+            fcntl.flock(handle.fileno(), fcntl.LOCK_EX)
+        try:
+            yield
+        finally:
+            if os.name == "nt":
+                handle.seek(0)
+                msvcrt.locking(handle.fileno(), msvcrt.LK_UNLCK, 1)
+            else:
+                fcntl.flock(handle.fileno(), fcntl.LOCK_UN)
 
 
 def update(root: Path, stamp: Path | None = None, checks=None) -> list[str]:
     """Run the whole build step; returns human-readable report lines."""
+    with ledger_lock(root):
+        return _update(root, stamp, checks)
+
+
+def _update(root: Path, stamp: Path | None, checks) -> list[str]:
     base_chars, base_constants = load_base_charmap(root)
     entries = read_ledger(root / LEDGER)
     errors = validate_ledger(entries, base_chars, base_constants)
+    header = root / "include/constants/characters.h"
+    if header.exists():
+        for match in re.finditer(r"^#define\s+(EXT_CTRL_CODE_\w+)\s+(0x[0-9A-Fa-f]+)\b", header.read_text(encoding="utf-8"), re.M):
+            if (FIRST_BANK_CODE <= int(match[2], 16) < FIRST_BANK_CODE + BANK_COUNT
+                    and match[1] not in ("EXT_CTRL_CODE_KANJI_GLYPH", "EXT_CTRL_CODE_KANJI_GLYPH_LAST")):
+                errors.append(f"{header}: {match[1]} collides with the kanji bank range")
     if errors:
         raise KanjiError("\n".join(errors))
 
@@ -413,9 +527,6 @@ def update(root: Path, stamp: Path | None = None, checks=None) -> list[str]:
     for char in added:
         entries.append((char, next_number, None))
         next_number += 1
-    if added or not (root / LEDGER).exists():
-        write_if_changed(root / LEDGER, ledger_text(entries).encode("utf-8"))
-
     if checks:
         problems = checks(root, entries)
         if problems:
@@ -433,6 +544,20 @@ def update(root: Path, stamp: Path | None = None, checks=None) -> list[str]:
     glyph_data = fwjpnfont(cells)
     slot_data = struct.pack("<%dH" % len(slots), *slots)
 
+    # An assigned but no longer scanned character must fail at preproc rather
+    # than silently reference the blank glyph. Build with only active entries.
+    base_text = (root / CHARMAP).read_text(encoding="utf-8")
+    include_pattern = re.compile(r'^\s*\.include\s+"([^"]+)"[^\n]*$', re.M)
+    includes = list(include_pattern.finditer(base_text))
+    if len(includes) != 1 or includes[0][1] != LEDGER:
+        raise KanjiError(f"{CHARMAP}: expected exactly one include of {LEDGER} for the build charmap")
+    active_lines = "\n".join(f"'{c}' = {encode(n).hex(' ').upper()}" for c, n, _ in by_number if c in used)
+    build_charmap = (base_text[:includes[0].start()] + active_lines + base_text[includes[0].end():]).encode("utf-8")
+
+    # Validation and rendering must succeed before any persistent ID is added.
+    if added or not (root / LEDGER).exists():
+        write_if_changed(root / LEDGER, ledger_text(entries).encode("utf-8"))
+
     out = root / OUT_DIR
     report = [
         f"ledger entries: {len(entries)} (added this run: {len(added)})",
@@ -445,6 +570,7 @@ def update(root: Path, stamp: Path | None = None, checks=None) -> list[str]:
         report.append("added: " + "".join(added))
     write_if_changed(out / GLYPHS_BIN, glyph_data)
     write_if_changed(out / SLOTS_BIN, slot_data)
+    write_if_changed(out / BUILD_CHARMAP, build_charmap)
     write_if_changed(out / REPORT, ("\n".join(report) + "\n").encode("utf-8"))
     if stamp:
         stamp.parent.mkdir(parents=True, exist_ok=True)

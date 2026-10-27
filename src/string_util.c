@@ -825,6 +825,16 @@ u8 *StringCopyUppercase(u8 *dest, const u8 *src)
 {
     while (*src != EOS)
     {
+        // Kanji payloads can overlap the Latin lowercase range.
+        if (*src == EXT_CTRL_CODE_BEGIN && IS_KANJI_GLYPH_CODE(src[1]))
+        {
+            if (src[2] == EOS)
+                break;
+            *dest++ = *src++;
+            *dest++ = *src++;
+            *dest++ = *src++;
+            continue;
+        }
         if (*src >= CHAR_a && *src <= CHAR_z)
             *dest = gCaseToggleTable[*src];
         else

@@ -35,7 +35,8 @@ def engine_code():
     result.extend(f"static const u16 {name}[32768] = {{0}};" for name in glyphs)
     result.append("#define KANJI_NORMAL_WIDTH 12\n#define KANJI_SMALL_WIDTH 12\n"
                   "static const u16 sKanjiGlyphs[1024] = {0};\n"
-                  "static const u16 sKanjiGlyphSlots[KANJI_GLYPHS_PER_BANK + 2] = {0};")
+                  "static const u16 sKanjiGlyphSlots[KANJI_GLYPHS_PER_BANK * 9 + 1] = {"
+                  "[1] = 1, [2] = 2, [KANJI_GLYPHS_PER_BANK + 1] = 3, [KANJI_GLYPHS_PER_BANK * 9] = 4};")
     result.append("void DecompressGlyphTile(const void *src, void *dest) {\n"
                   "    uintptr_t address = (uintptr_t)src;\n"
                   "    sLoadedJapanese = FALSE;\n")
@@ -52,7 +53,7 @@ def engine_code():
                             text, re.M | re.S)[0])
     for name in ("GetExtCtrlCodeLength", "StringCopy", "StringLength", "StringCopyN",
                  "StringCopyN_Multibyte", "StringLength_Multibyte", "SkipExtCtrlCode",
-                 "StringCompareWithoutExtCtrlCodes", "StripExtCtrlCodes", "StringExpandPlaceholders", "ConvertInternationalString"):
+                 "StringCompareWithoutExtCtrlCodes", "StripExtCtrlCodes", "StringCopyUppercase", "StringExpandPlaceholders", "ConvertInternationalString"):
         result.append(function(strings, name))
     result.append(function(international, "ConvertInternationalContestantName"))
     for name in ("DynamicPlaceholderTextUtil_Reset", "DynamicPlaceholderTextUtil_SetPlaceholderPtr",

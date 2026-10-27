@@ -2,7 +2,8 @@
 @
 @ `make` appends kanji found in display strings via tools/kanji/kanji_gen.py.
 @ Codes are permanent: never edit, reorder or delete these lines, and never
-@ reuse a code, even if a kanji is no longer used. Unused kanji cost no ROM.
+@ reuse a code, even if a kanji is no longer used. Unused glyphs are omitted;
+@ their 2-byte slot entries remain to preserve IDs.
 @ Code = FC <bank 1F..27> <01..F6>. See docs/kanji.md.
 
 '攻' = FC 1F 01

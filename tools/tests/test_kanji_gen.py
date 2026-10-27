@@ -8,6 +8,7 @@ import subprocess
 import sys
 import tempfile
 import unittest
+from unittest import mock
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "tools/kanji"))
@@ -127,6 +128,8 @@ class Generator(unittest.TestCase):
         slots = self.slots()
         self.assertEqual(slots[26], 0)
         self.assertNotEqual(slots[27], 0)
+        self.assertNotIn("'天' =", self.output(gen.BUILD_CHARMAP).decode("utf-8"))
+        self.assertIn("'気' =", self.output(gen.BUILD_CHARMAP).decode("utf-8"))
         self.assertEqual(len(self.output(gen.GLYPHS_BIN)), size)
         self.assertEqual(len(set(s for s in slots if s)), 27)
 
@@ -137,6 +140,44 @@ class Generator(unittest.TestCase):
         self.run_update()
         self.assertEqual(len(self.ledger()), 25)
 
+    def test_fake_calls_inside_strings_and_asm_comments_are_ignored(self):
+        self.source("src/fake.c", 'const char *a = "_(\\\"海\\\")";\n'
+                    '#define FAKE(x) "COMPOUND_STRING(x)"\nconst char *b = FAKE("山");\n')
+        self.source("data/fake.inc", '/*\n.string "川"\n*/\n'
+                    '.string "攻$" @ .string "空"\n')
+        self.run_update()
+        self.assertEqual(len(self.ledger()), 25)
+
+    def test_safety_failure_does_not_change_ledger_or_outputs(self):
+        self.run_update()
+        before = (self.root / gen.LEDGER).read_bytes()
+        output = self.output(gen.GLYPHS_BIN)
+        self.source("src/new.c", 'const u8 a[] = _("天");\n')
+        with self.assertRaisesRegex(gen.KanjiError, "unsafe"):
+            gen.update(self.root, checks=lambda *_: ["unsafe save/link text"])
+        self.assertEqual((self.root / gen.LEDGER).read_bytes(), before)
+        self.assertEqual(self.output(gen.GLYPHS_BIN), output)
+
+    def test_missing_or_changed_legacy_ledger_is_rejected(self):
+        path = self.root / gen.LEDGER
+        path.unlink()
+        with self.assertRaisesRegex(gen.KanjiError, "persistent ID ledger"):
+            self.run_update()
+        shutil.copy(ROOT / gen.LEDGER, path)
+        path.write_text(path.read_text(encoding="utf-8").replace("FC 1F 01", "FC 20 01"), encoding="utf-8")
+        with self.assertRaisesRegex(gen.KanjiError, "legacy glyph"):
+            self.run_update()
+
+    def test_deleted_source_and_missing_output_are_repaired(self):
+        self.source("src/new.c", 'const u8 a[] = _("天");\n')
+        self.run_update()
+        code = dict(self.ledger())["天"]
+        (self.root / "src/new.c").unlink()
+        (self.root / gen.OUT_DIR / gen.SLOTS_BIN).unlink()
+        self.run_update()
+        self.assertEqual(self.slots()[code], 0)
+        self.assertEqual(dict(self.ledger())["天"], code)
+
     def test_forwarding_macros_and_braille(self):
         self.source("include/m.h", "#define LIMITED(str, n) COMPOUND_STRING(str)\n"
                     "#define MY_TEXT(str) LIMITED(str, 10)\n")
@@ -145,6 +186,19 @@ class Generator(unittest.TestCase):
         self.source("data/b.inc", 'Label: .braille "空"\n')
         self.run_update()
         self.assertEqual({c for c, _ in self.ledger()[25:]}, set("海山川空"))
+
+    def test_object_macro_with_encoded_literal_is_detected(self):
+        self.source("include/texts.h", '#define MY_MESSAGE _("天気")\n')
+        self.source("src/use.c", 'const u8 text[] = MY_MESSAGE;\n')
+        self.run_update()
+        self.assertEqual({c for c, _ in self.ledger()[25:]}, set("天気"))
+
+    def test_only_forwarded_macro_parameters_are_display_text(self):
+        self.source("include/m.h", '#define LABEL(file, text) _(text)\n'
+                    '#define ANOTHER(text, file) LABEL(file, text)\n')
+        self.source("src/use.c", 'const u8 a[] = ANOTHER("天", "data/山.png");\n')
+        self.run_update()
+        self.assertEqual({c for c, _ in self.ledger()[25:]}, {"天"})
 
     def test_test_only_kanji_get_a_code_but_no_glyph(self):
         self.source("test/t.c", 'static const u8 sText[] = _("試験");\n')
@@ -162,6 +216,11 @@ class Generator(unittest.TestCase):
         self.assertIn("src/a.c:2", str(error.exception))
         self.assertEqual(len(self.ledger()), 25)
 
+    def test_supplementary_kanji_reports_missing_glyph(self):
+        self.source("src/extra.c", 'const u8 a[] = _("𠮷");\n')
+        with self.assertRaisesRegex(gen.KanjiError, "U\\+20BB7"):
+            self.run_update()
+
     def test_ledger_collisions_are_errors(self):
         with open(self.root / gen.LEDGER, "a", encoding="utf-8") as f:
             f.write("'海' = FC 1F 01\n")
@@ -175,15 +234,65 @@ class Generator(unittest.TestCase):
             self.run_update()
         self.assertIn("also defined in charmap.txt", str(error.exception))
 
+    def test_upstream_control_code_collision_is_rejected(self):
+        self.source("include/constants/characters.h", "#define EXT_CTRL_CODE_OTHER 0x20\n")
+        with self.assertRaisesRegex(gen.KanjiError, "collides with the kanji bank range"):
+            self.run_update()
+
+    def test_capacity_failure_does_not_reassign_ids(self):
+        base_chars, _ = gen.load_base_charmap(self.root)
+        extra = sorted(set(gen.Atlas(self.root).chars) - set(PROTOTYPE) - set(base_chars), key=ord)
+        entries = [(c, i, None) for i, c in enumerate(PROTOTYPE, 1)]
+        entries += [(c, i, None) for i, c in enumerate(extra[:gen.MAX_KANJI - 25], 26)]
+        path = self.root / gen.LEDGER
+        path.write_text(gen.ledger_text(entries), encoding="utf-8")
+        before = path.read_bytes()
+        self.source("src/new.c", 'const u8 a[] = _("' + extra[gen.MAX_KANJI - 25] + '");\n')
+        with self.assertRaisesRegex(gen.KanjiError, "capacity exceeded"):
+            self.run_update()
+        self.assertEqual(path.read_bytes(), before)
+
     def test_unchanged_outputs_are_not_rewritten(self):
         self.run_update()
-        paths = [self.root / gen.OUT_DIR / n for n in (gen.GLYPHS_BIN, gen.SLOTS_BIN)]
+        paths = [self.root / gen.OUT_DIR / n for n in (gen.GLYPHS_BIN, gen.SLOTS_BIN, gen.BUILD_CHARMAP)]
         paths.append(self.root / gen.LEDGER)
         stamps = [p.stat().st_mtime_ns for p in paths]
         contents = [p.read_bytes() for p in paths]
         self.run_update()
         self.assertEqual([p.stat().st_mtime_ns for p in paths], stamps)
         self.assertEqual([p.read_bytes() for p in paths], contents)
+
+    def test_parallel_updates_keep_one_ledger_assignment(self):
+        self.source("src/new.c", 'const u8 a[] = _("天気");\n')
+        code = ("import sys; from pathlib import Path; "
+                f"sys.path.insert(0, {str(ROOT / 'tools/kanji')!r}); "
+                "import kanji_gen; kanji_gen.update(Path(sys.argv[1]))")
+        jobs = [subprocess.Popen([sys.executable, "-c", code, str(self.root)],
+                                 stdout=subprocess.PIPE, stderr=subprocess.PIPE) for _ in range(2)]
+        for job in jobs:
+            _, stderr = job.communicate(timeout=30)
+            self.assertEqual(job.returncode, 0, stderr.decode())
+        self.assertEqual(len(self.ledger()), 27)
+        self.assertEqual(len({n for _, n in self.ledger()}), 27)
+
+    def test_failed_atomic_replace_preserves_old_file(self):
+        path = self.root / "old.dat"
+        path.write_bytes(b"old")
+        with mock.patch.object(gen.os, "replace", side_effect=OSError("test write failure")):
+            with self.assertRaises(OSError):
+                gen.write_if_changed(path, b"new")
+        self.assertEqual(path.read_bytes(), b"old")
+        self.assertEqual(list(path.parent.glob("old.dat.*")), [])
+
+    @unittest.skipUnless((ROOT / "tools/preproc/preproc").exists(), "preproc is not built")
+    def test_registered_but_unscanned_kanji_fails_encoding(self):
+        self.source("src/new.c", 'const u8 a[] = _("天");\n')
+        self.run_update()
+        (self.root / "src/new.c").unlink()
+        self.run_update()
+        result = subprocess.run([str(ROOT / "tools/preproc/preproc"), "-i", "probe.c", gen.OUT_DIR + "/" + gen.BUILD_CHARMAP],
+                                cwd=self.root, input='const u8 a[] = _("天");\n', text=True, capture_output=True)
+        self.assertNotEqual(result.returncode, 0)
 
 
 class SaveLinkChecks(unittest.TestCase):
@@ -235,6 +344,22 @@ class SaveLinkChecks(unittest.TestCase):
         self.assertIn("is 8 bytes, limit 7", found[0])
         rule = self.checks.Rule(("src/none.h",), 7, "gone", fields=("trainerName",))
         self.assertIn("found no strings", self.problems("src/other.h", "", rule)[0])
+
+    def test_dynamic_or_unresolved_saved_text_is_rejected(self):
+        rule = self.species_rule()
+        for value in ('_("{PLAYER}")', '_("{STR_VAR_1}")', '_("{NOT_A_TOKEN}")', 'NAME_FROM_OTHER_FILE', '_("a" UNKNOWN_NAME)'):
+            with self.subTest(value=value):
+                found = self.problems("src/species.h", '.speciesName = ' + value + ',', rule)
+                self.assertTrue(found)
+                self.assertIn("error:", found[0])
+        rule = self.checks.Rule(("src/name.c",), "PLAYER_NAME_LENGTH", "name", fields=("trainerName",))
+        found = self.problems("src/name.c", '.trainerName = J_("あいうえおか"),', rule)
+        self.assertIn("is 8 bytes, limit 7", found[0])
+
+    def test_name_like_text_inside_literals_is_not_an_initializer(self):
+        rule = self.species_rule()
+        text = 'const char *debug = ".speciesName = \\\"天\\\"";\n.speciesName = _("ピカチュウ"),'
+        self.assertEqual(self.problems("src/species.h", text, rule), [])
 
 
 @unittest.skipUnless((ROOT / "tools/preproc/preproc").exists(), "preproc is not built")

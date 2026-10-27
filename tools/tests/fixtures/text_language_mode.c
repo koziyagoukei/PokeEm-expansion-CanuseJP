@@ -53,6 +53,7 @@ static const u8 sKeypadIconTiles[4096];
 static u8 sCurGlyphAdvance;
 static const u8 *sStringPointers[8], *sPlaceholders[8];
 static const u8 sEmpty[] = {EOS};
+static const u8 gCaseToggleTable[256] = {[CHAR_a] = CHAR_A};
 static bool32 sLoadedJapanese;
 static struct { bool32 japanese; u8 width, advance, x; } sTrace[128];
 static u32 sTraceCount, sClearedWidth;
@@ -223,6 +224,9 @@ static void kanji(void)
     assert(GetKanjiGlyphSlot(EXT_CTRL_CODE_KANJI_GLYPH, 0) == 0);
     assert(GetKanjiGlyphSlot(EXT_CTRL_CODE_KANJI_GLYPH, KANJI_GLYPHS_PER_BANK + 1) == 0);
     assert(GetKanjiGlyphSlot(EXT_CTRL_CODE_KANJI_GLYPH_LAST, 1) == 0);
+    assert(GetKanjiGlyphSlot(EXT_CTRL_CODE_KANJI_GLYPH, 1) == 1);
+    assert(GetKanjiGlyphSlot(EXT_CTRL_CODE_KANJI_GLYPH + 1, 1) == 3);
+    assert(GetKanjiGlyphSlot(EXT_CTRL_CODE_KANJI_GLYPH_LAST, KANJI_GLYPHS_PER_BANK) == 4);
     StringCopy(stripped, banked);
     StripExtCtrlCodes(stripped);
     assert(StringCompareWithoutExtCtrlCodes(stripped, banked) == 0 && StringLength(stripped) == 7);
@@ -233,6 +237,8 @@ static void kanji(void)
             parity(text, fonts[i], 0, type, 0);
             assert(sTraceCount == 5 && sTrace[0].width == 12);
             assert(sTrace[1].width == sTrace[0].width);
+            parity(banked, fonts[i], 0, type, 0);
+            assert(sTraceCount == 3 && sTrace[0].width == 12 && sTrace[1].width == 12);
         }
         parity(automatic, fonts[i], 0, WINDOW_TEXT_PRINTER, 0);
     }
@@ -244,6 +250,7 @@ static void kanji_utilities(void)
     const u8 attack[] = {CTRL, EXT_CTRL_CODE_KANJI_GLYPH, 1, EOS};
     const u8 defense[] = {CTRL, EXT_CTRL_CODE_KANJI_GLYPH, 3, EOS};
     const u8 decorated[] = {JPN, CTRL, EXT_CTRL_CODE_KANJI_GLYPH, 1, EOS};
+    const u8 lowercasePayload[] = {CHAR_a, CTRL, EXT_CTRL_CODE_KANJI_GLYPH + 1, CHAR_a, EOS};
     u8 copied[16];
     assert(StringLength(attack) == 3);
     StringCopy(copied, decorated);
@@ -258,6 +265,8 @@ static void kanji_utilities(void)
     assert(copied[0] == EXT_CTRL_CODE_BEGIN && copied[1] == EOS);
     StringCopyN(copied, attack, 2);
     assert(copied[0] == CTRL && copied[1] == EXT_CTRL_CODE_KANJI_GLYPH);
+    StringCopyUppercase(copied, lowercasePayload);
+    assert(copied[0] == CHAR_A && copied[3] == CHAR_a && copied[4] == EOS);
 }
 
 static void controls(void)

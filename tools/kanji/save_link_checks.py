@@ -12,10 +12,10 @@ import re
 from dataclasses import dataclass, field
 from pathlib import Path
 
-from kanji_gen import (CHARMAP, CONSTANT_LINE, CHARMAP_LINE, LITERAL, call_arguments,
-                       encode, is_kanji, strip_c_comments, strip_charmap_comment)
+from kanji_gen import (CHARMAP, CONSTANT_LINE, CHARMAP_LINE, DEFINE, LITERAL, call_arguments,
+                       code_mask, encode, is_kanji, split_arguments, strip_c_comments, strip_charmap_comment)
 
-WRAPPER_CALL = re.compile(r"(?<![\w])(?:J__|J_|__|_|J_COMPOUND_STRING|COMPOUND_STRING)\s*\(")
+WRAPPER_CALL = re.compile(r"(?<![\w])(J__|J_|__|_|J_COMPOUND_STRING|COMPOUND_STRING)\s*\(")
 LIMIT_HEADERS = ("include/constants/global.h", "include/pokemon_storage_system.h")
 
 
@@ -117,7 +117,7 @@ class Encoder:
                 self.chars[match[1].replace("\\'", "'")] = len(bytes.fromhex(match[2]))
             elif CONSTANT_LINE.match(line):
                 name, data = CONSTANT_LINE.match(line).groups()
-                self.constants[name] = len(bytes.fromhex(data))
+                self.constants[name] = bytes.fromhex(data)
         # Characters of the base charmap (such as 円) are ordinary 1-byte glyphs.
         self.base = set(self.chars)
         for char, number, *_ in ledger_entries:
@@ -131,25 +131,41 @@ class Encoder:
             if ch == "{":
                 end = text.index("}", i)
                 for token in text[i + 1:end].split():
-                    length += self.constants.get(token, 1)
+                    sequence = self.constants.get(token)
+                    if sequence is None:
+                        raise ValueError(f"unresolved control argument {{{token}}}")
+                    if sequence[0] in (0xFD, 0xF7):
+                        raise ValueError(f"dynamic placeholder {{{token}}} is not allowed in saved/link text")
+                    length += len(sequence)
                 i = end + 1
             elif ch == "\\":
-                length += self.chars.get(text[i:i + 2], 1)
+                escaped = text[i:i + 2]
+                if escaped == r'\"':
+                    escaped = '"'
+                if escaped not in self.chars:
+                    raise ValueError(f"unresolved escape {escaped!r}")
+                length += self.chars[escaped]
                 i += 2
             else:
                 if is_kanji(ch) and ch not in self.base:
                     kanji.append(ch)
-                length += self.chars.get(ch, 3 if is_kanji(ch) else 1)
+                if ch not in self.chars:
+                    raise ValueError(f"undefined character {ch!r}")
+                length += self.chars[ch]
                 i += 1
         return length, kanji
 
 
 def wrapped_strings(text: str):
     """(offset, contents) of every encoded string in a C fragment."""
-    for match in WRAPPER_CALL.finditer(text):
+    for match in WRAPPER_CALL.finditer(code_mask(text)):
         args = call_arguments(text, match.end() - 1)
         if args is not None:
-            yield match.start(), "".join(m[1] for m in LITERAL.finditer(args))
+            if LITERAL.sub("", args).strip():
+                yield match.start(), None
+            else:
+                prefix = "{JPN}" if match[1].startswith("J_") else ""
+                yield match.start(), prefix + "".join(m[1] for m in LITERAL.finditer(args))
 
 
 def initializer(text: str, start: int):
@@ -176,12 +192,16 @@ def initializer(text: str, start: int):
 def find_strings(rule: Rule, text: str):
     if rule.fields:
         pattern = re.compile(r"\.(?:%s)\s*=" % "|".join(rule.fields))
-        for match in pattern.finditer(text):
-            for offset, value in wrapped_strings(initializer(text, match.end())):
+        for match in pattern.finditer(code_mask(text)):
+            body = initializer(text, match.end())
+            values = list(wrapped_strings(body))
+            if not values and rule.limit is not None and body.strip() not in ("0", "NULL", "{0}", "{ 0 }"):
+                yield match.end(), None
+            for offset, value in values:
                 yield match.end() + offset, value
     if rule.symbols:
         pattern = re.compile(r"\b(?:%s)\b\s*(?:\[[^\]=;]*\]\s*)*=" % rule.symbols)
-        for match in pattern.finditer(text):
+        for match in pattern.finditer(code_mask(text)):
             body = text[match.end():text.find(";", match.end())]
             for offset, value in wrapped_strings(body):
                 yield match.end() + offset, value
@@ -189,10 +209,12 @@ def find_strings(rule: Rule, text: str):
         name, index, prefix = rule.macro
         for match in re.finditer(r"^\s*%s\s*\(" % name, text, re.M):
             args = call_arguments(text, match.end() - 1) or ""
-            parts = [p.strip() for p in re.split(r",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)", args)]
+            parts = [p.strip() for p in split_arguments(args)]
             literal = LITERAL.fullmatch(parts[index]) if index < len(parts) else None
             if literal:
                 yield match.start(), prefix + literal[1]
+            else:
+                yield match.start(), None
 
 
 def check_save_link_strings(root: Path, ledger_entries, rules=RULES):
@@ -204,11 +226,21 @@ def check_save_link_strings(root: Path, ledger_entries, rules=RULES):
         count = 0
         for path in files:
             text = strip_c_comments(path.read_bytes().decode("utf-8", errors="replace"))
+            # Function-like macro definitions are templates, not initialized
+            # save fields. Their instantiated EXTRA_NPC names have own rules.
+            text = DEFINE.sub(lambda m: re.sub(r"[^\n]", " ", m[0]), text)
             label = path.relative_to(root).as_posix()
             for offset, value in find_strings(rule, text):
                 count += 1
-                length, kanji = encoder.measure(value)
                 where = f"{label}:{text.count(chr(10), 0, offset) + 1}"
+                if value is None:
+                    problems.append(f"{where}: error: unresolved saved/link text initializer: {rule.reason}")
+                    continue
+                try:
+                    length, kanji = encoder.measure(value)
+                except ValueError as error:
+                    problems.append(f"{where}: error: {error}: {rule.reason}")
+                    continue
                 if kanji:
                     problems.append(f"{where}: error: kanji {''.join(kanji)!r} in \"{value}\": {rule.reason}; "
                                     "kanji must not reach save or link data")
