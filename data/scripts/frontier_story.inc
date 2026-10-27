@@ -773,6 +773,7 @@ FrontierStory_EventScript_TargetFever::
 	case STORY_TARGET_IKUE, PalaceStory_EventScript_ReleaseBattle
 	case STORY_TARGET_TOSHIO, FactoryStory_EventScript_ReleaseBattle
 	case STORY_TARGET_EISUKE, ArenaStory_EventScript_ReleaseBattle
+	case STORY_TARGET_YAYOI, PikeStory_EventScript_ReleaseBattle
 	case STORY_TARGET_YORIKO, ContestStory_EventScript_ReleaseBattle
 	special LoadPlayerParty
 FrontierStory_EventScript_TargetRetreat::
@@ -833,6 +834,11 @@ FactoryStory_EventScript_ReleaseBattle::
 
 ArenaStory_EventScript_ReleaseBattle::
 	setmultitrainerbattle TRAINER_EISUKE_RELEASE, ArenaStory_Text_EisukeReleaseDefeat, TRAINER_POKEVIRUS, FrontierStory_Text_PokevirusDefeat, PARTNER_ROCKET_COOK
+	call FrontierStory_EventScript_StartReleaseBattle
+	goto FrontierStory_EventScript_TargetBattleDone
+
+PikeStory_EventScript_ReleaseBattle::
+	setmultitrainerbattle TRAINER_YAYOI_RELEASE, PikeStory_Text_YayoiReleaseDefeat, TRAINER_POKEVIRUS, FrontierStory_Text_PokevirusDefeat, PARTNER_ROCKET_COOK
 	call FrontierStory_EventScript_StartReleaseBattle
 	goto FrontierStory_EventScript_TargetBattleDone
 
@@ -944,16 +950,18 @@ FrontierStory_EventScript_VisitorNotYet::
 	end
 
 @ ---------------------------------------------------------------------------
-@ The inn: everyone cured rests here. Kazuki, and Toshio with his Aggron, in the lobby; Ikue and
-@ Delcatty in the east wing; Yoriko and Seviper in the west wing; Eisuke and Starmie on the beach
-@ outside and Reika walking Linoone there; and in each part of the building a few of the cured
-@ Brains and guests, picked on every visit.
+@ The inn: everyone cured rests here. Kazuki, Toshio with his Aggron, and Yayoi with Roserade at a
+@ low table, in the lobby; Ikue and Delcatty in the east wing; Yoriko and Seviper in the west wing;
+@ Eisuke and Starmie on the beach outside and Reika walking Linoone there; and in each part of the
+@ building a few of the cured Brains and guests, picked on every visit.
 
 InnStory_EventScript_SetupLobby::
 	setflag FLAG_TEMP_11
 	setflag FLAG_TEMP_12
+	setflag FLAG_TEMP_15
 	call_if_set FLAG_STORY_RESCUED_TOWER, InnStory_EventScript_ShowKazuki
 	call_if_set FLAG_STORY_RESCUED_FACTORY, InnStory_EventScript_ShowToshio
+	call_if_set FLAG_STORY_RESCUED_PIKE, InnStory_EventScript_ShowYayoi
 	setvar VAR_0x8004, INN_AREA_LOBBY
 	special FrontierStory_PickInnGuests
 	return
@@ -989,6 +997,86 @@ InnStory_EventScript_Aggron::
 	faceplayer
 	playmoncry SPECIES_AGGRON, CRY_MODE_NORMAL
 	msgbox FactoryStory_Text_InnAggron, MSGBOX_DEFAULT
+	waitmoncry
+	release
+	end
+
+InnStory_EventScript_ShowYayoi::
+	clearflag FLAG_TEMP_15
+	return
+
+@ Yayoi pours tea at a low table. The player sits on the cushion across from her, and each of them
+@ drinks a tea of the scent they like.
+InnStory_EventScript_Yayoi::
+	lock
+	faceplayer
+	msgbox PikeStory_Text_InnYayoiInvites, MSGBOX_DEFAULT
+	closemessage
+	specialvar VAR_RESULT, GetPlayerFacingDirection
+	call_if_eq VAR_RESULT, DIR_EAST, InnStory_EventScript_SitFromYayoisSide
+	call_if_eq VAR_RESULT, DIR_SOUTH, InnStory_EventScript_SitFromBehindYayoi
+	call InnStory_EventScript_YayoiTea
+	release
+	end
+
+InnStory_EventScript_SitFromYayoisSide:
+	applymovement LOCALID_PLAYER, InnStory_Movement_FromYayoisSide
+	waitmovement 0
+	return
+
+InnStory_EventScript_SitFromBehindYayoi:
+	applymovement LOCALID_PLAYER, InnStory_Movement_FromBehindYayoi
+	waitmovement 0
+	return
+
+@ The table between them, from the cushion across from her.
+InnStory_EventScript_YayoiTable::
+	goto_if_set FLAG_STORY_RESCUED_PIKE, InnStory_EventScript_YayoiTableTea
+	end
+
+InnStory_EventScript_YayoiTableTea:
+	lockall
+	call InnStory_EventScript_YayoiTea
+	releaseall
+	end
+
+InnStory_EventScript_YayoiTea:
+	turnobject LOCALID_INN_YAYOI, DIR_SOUTH
+	message PikeStory_Text_InnYayoiAsksTea
+	waitmessage
+	multichoice 0, 0, MULTI_INN_TEA, TRUE
+	switch VAR_RESULT
+	case 0, InnStory_EventScript_TeaMint
+	case 1, InnStory_EventScript_TeaLemon
+	case 2, InnStory_EventScript_TeaChamomile
+	msgbox PikeStory_Text_InnTeaJasmine, MSGBOX_DEFAULT
+	goto InnStory_EventScript_YayoiPoursTea
+
+InnStory_EventScript_TeaMint:
+	msgbox PikeStory_Text_InnTeaMint, MSGBOX_DEFAULT
+	goto InnStory_EventScript_YayoiPoursTea
+
+InnStory_EventScript_TeaLemon:
+	msgbox PikeStory_Text_InnTeaLemon, MSGBOX_DEFAULT
+	goto InnStory_EventScript_YayoiPoursTea
+
+InnStory_EventScript_TeaChamomile:
+	msgbox PikeStory_Text_InnTeaChamomile, MSGBOX_DEFAULT
+InnStory_EventScript_YayoiPoursTea:
+	msgbox PikeStory_Text_InnYayoiTea, MSGBOX_DEFAULT
+	closemessage
+	playmoncry SPECIES_ROSERADE, CRY_MODE_NORMAL
+	applymovement LOCALID_INN_ROSERADE, InnStory_Movement_Hop
+	waitmovement 0
+	waitmoncry
+	msgbox PikeStory_Text_InnRoseradeHops, MSGBOX_DEFAULT
+	return
+
+InnStory_EventScript_Roserade::
+	lock
+	faceplayer
+	playmoncry SPECIES_ROSERADE, CRY_MODE_NORMAL
+	msgbox PikeStory_Text_InnRoserade, MSGBOX_DEFAULT
 	waitmoncry
 	release
 	end
@@ -1220,6 +1308,27 @@ TowerStory_Movement_Tremble:
 
 InnStory_Movement_Nod:
 	jump_in_place_left
+	step_end
+
+InnStory_Movement_Hop:
+	jump_in_place_down
+	step_end
+
+@ To the cushion across the low table from Yayoi, from beside her or from behind her.
+InnStory_Movement_FromYayoisSide:
+	walk_down
+	walk_down
+	walk_right
+	face_up
+	step_end
+
+InnStory_Movement_FromBehindYayoi:
+	walk_left
+	walk_down
+	walk_down
+	walk_down
+	walk_right
+	face_up
 	step_end
 
 InnStory_Movement_ChaseTail:
@@ -1952,6 +2061,10 @@ ArenaStory_Text_EisukeReleaseDefeat:
 	.string "{JPN}……おれ…… まけた……\n"
 	.string "おれが まけたんだ……$"
 
+PikeStory_Text_YayoiReleaseDefeat:
+	.string "{JPN}……どうして……\n"
+	.string "おなじ みちを えらんだのに……$"
+
 ContestStory_Text_YorikoReleaseDefeat:
 	.string "{JPN}……わたし…… まけた……\n"
 	.string "わたしの えんぎが……$"
@@ -2122,3 +2235,67 @@ FactoryStory_Text_InnAggronNods:
 FactoryStory_Text_InnAggron:
 	.string "{JPN}ボスゴドラは トシオの はなしを\n"
 	.string "じっと きいている。$"
+
+@ ---------------------------------------------------------------------------
+@ Text: Yayoi at the inn
+
+PikeStory_Text_InnYayoiInvites:
+	.string "{JPN}ヤヨイ『いらっしゃい {PLAYER}。\n"
+	.string "ちょうど おちゃを いれる ところなの。\p"
+	.string "むかいに すわって。』$"
+
+PikeStory_Text_InnYayoiAsksTea:
+	.string "{JPN}ヤヨイ『わたしは ローズティー。\n"
+	.string "ロズレイドと おなじ かおりなの。\p"
+	.string "みんなが すきだから じゃなくて\n"
+	.string "わたしが すきだから えらぶの。\p"
+	.string "{PLAYER}は どれに する？』$"
+
+PikeStory_Text_InnTeaMint:
+	.string "{JPN}ヤヨイ『ミントね。\n"
+	.string "すっと する かおり。\l"
+	.string "あたまが すっきり しそう。』$"
+
+PikeStory_Text_InnTeaLemon:
+	.string "{JPN}ヤヨイ『レモンね。\n"
+	.string "さわやかで すっぱい かおり。\l"
+	.string "げんきが でそうね。』$"
+
+PikeStory_Text_InnTeaChamomile:
+	.string "{JPN}ヤヨイ『カモミールね。\n"
+	.string "りんごみたいな あまい かおり。\l"
+	.string "ほっと するわね。』$"
+
+PikeStory_Text_InnTeaJasmine:
+	.string "{JPN}ヤヨイ『ジャスミンね。\n"
+	.string "はなやかで あまい かおり。\p"
+	.string "おなじ はなの おちゃでも\n"
+	.string "ローズとは ぜんぜん ちがうのね。』$"
+
+PikeStory_Text_InnYayoiTea:
+	.string "{JPN}ヤヨイは ふたりぶんの おちゃを\n"
+	.string "いれて テーブルに ならべた。\p"
+	.string "…… …… ……\p"
+	.string "ヤヨイ『……ねえ ひとくち\n"
+	.string "もらっても いい？』\p"
+	.string "{PLAYER}は おちゃを\n"
+	.string "ヤヨイに すこし わけた。\p"
+	.string "ヤヨイ『……ふふ。\n"
+	.string "やっぱり わたしは ローズが すき。\p"
+	.string "でも あなたが この かおりを\n"
+	.string "すきな わけ すこしだけ\l"
+	.string "わかった きが するわ。\p"
+	.string "まえは みんなと おなじ かおりで\n"
+	.string "おなじ みちを えらんで いたけれど……\p"
+	.string "ちがう おちゃを ならべて\n"
+	.string "おしゃべり するのも たのしいわね。\p"
+	.string "おなじ ものが すきじゃ なくても\n"
+	.string "いっしょに いられるのね。』$"
+
+PikeStory_Text_InnRoseradeHops:
+	.string "{JPN}ロズレイドは うれしそうに\n"
+	.string "りょうての はなたばを ゆらした！$"
+
+PikeStory_Text_InnRoserade:
+	.string "{JPN}ロズレイドの はなたばから\n"
+	.string "やさしい ローズの かおりが する。$"

@@ -5,6 +5,9 @@ BattleFrontier_BattlePikeLobby_MapScripts::
 	.byte 0
 
 BattleFrontier_BattlePikeLobby_OnTransition:
+	@ The cook and Pokevirus only appear for Yayoi's release battle.
+	setflag FLAG_TEMP_1D
+	setflag FLAG_TEMP_1E
 	setvar VAR_0x8004, STORY_TARGET_YAYOI
 	call FrontierStory_EventScript_SetupTarget
 	end

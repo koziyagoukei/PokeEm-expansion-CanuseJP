@@ -163,6 +163,20 @@ static const u8 *const sStoryTargetRescueTexts[STORY_TARGET_COUNT][RESCUE_TEXT_C
         [RESCUE_TEXT_ASKS_POKENAV] = COMPOUND_STRING("{JPN}エイスケ『そうだ ポケナビ もってるか？\nれんらくさき こうかん しようぜ！』"),
         [RESCUE_TEXT_GOES_TO_INN] = COMPOUND_STRING("{JPN}エイスケ『おれ りょかんで\nからだを なおしてくる！\pまえの うみで およぎこみ だ！』"),
     },
+    [STORY_TARGET_YAYOI] =
+    {
+        [RESCUE_TEXT_FEVER_STARTING] = COMPOUND_STRING("{JPN}ヤヨイ『……あら？\nなんだか あたまが くらくらする……\pきんいろの シンボル……\nみっつの みち……』"),
+        [RESCUE_TEXT_FEVER] = COMPOUND_STRING("{JPN}ヤヨイ『……みっつの みち……\nみんなと おなじ みちを……\pおなじ かおりが すきなら\nけんかも しない…… はず……\pでも わたしは…… わたしが\nえらびたいのは……\pちがう。 わたしたちは。\nわたし は。 わたし……\pあつい。 かおりで むせかえりそう。\pどうして。 どうして はなれるの？\nどうして ちがう みちを\lえらびたがるの？』"),
+        [RESCUE_TEXT_VOICES_FADE] = COMPOUND_STRING("{JPN}ヤヨイ『……みんなの こえが\nとおく なっていく……\pみんな おなじ かおりが すきで\nおなじ みちを えらんで……\pだれとも ぶつからずに\nいられたのに……』"),
+        [RESCUE_TEXT_CHOOSES] = COMPOUND_STRING("{JPN}ヤヨイ『でも…… あなたは\nわたしと すきな かおりが ちがった。\pそれでも あなたと はなすのは\nいやじゃ なかった。\lむしろ…… たのしかったの。\pおなじ みちを えらばなくても\nなかよく していられる。\pわたし そう しんじたい。\nわたしが えらびたい みちを\lあるいて いきたいの。\p……ごめんね みんな。\nわたし いくわ。』"),
+        [RESCUE_TEXT_DELIRIOUS] = COMPOUND_STRING("{JPN}ヤヨイ『……おなじ かおり……\nみんなと おなじ…… みち……』"),
+        [RESCUE_TEXT_EATS] = COMPOUND_STRING("{JPN}てんしゅは ヤヨイの くちに\nめしを どんどん はこんだ！\pヤヨイ『んむっ…… もぐ……』"),
+        [RESCUE_TEXT_WAKES_UP] = COMPOUND_STRING("{JPN}ヤヨイ『……あら？\nここは どこかしら。\pあたまが すっきりしてる……\nみんなの こえが…… きこえない。』"),
+        [RESCUE_TEXT_REMEMBERS] = COMPOUND_STRING("{JPN}ヤヨイ『……ぜんぶ おぼえているわ。\pみんな おなじ かおりが すきで\nおなじ みちを えらんで……\pだれとも ぶつからない まいにちは\nほんとうに おだやか だった。\pでも これからは わたしが\nえらびたい みちを えらぶわ。\pだれかと ちがっても\nなかよく していられるって\lしんじて みたいの。\p……たすけて くれて ありがとう。』"),
+        [RESCUE_TEXT_AFTER_CURE] = COMPOUND_STRING("{JPN}ヤヨイ『……そういえば さっきの\nおだんご きびの やさしい\lかおりが したわ。』\pてんしゅ『かおり？\nうまいか どうかしか\lきに した ことが なかったぜ。』\pヤヨイ『ふふ。 おなじ ものを たべても\nきに なる ところは\lひとそれぞれ なのね。』"),
+        [RESCUE_TEXT_ASKS_POKENAV] = COMPOUND_STRING("{JPN}ヤヨイ『ねえ ポケナビは もってる？\nれんらくさき こうかん しましょう。\pすてきな かおりを みつけたら\nおしえるわね。』"),
+        [RESCUE_TEXT_GOES_TO_INN] = COMPOUND_STRING("{JPN}ヤヨイ『わたし りょかんで\nおちゃを いれて まってるわ。\p{PLAYER}の すきな かおりの\nおちゃも よういして おくわね。』"),
+    },
     [STORY_TARGET_YORIKO] =
     {
         [RESCUE_TEXT_FEVER] = COMPOUND_STRING("{JPN}ヨリコ『……はくしゅ……\nみんなの はくしゅが きこえる……\pみんな おなじ ところで\nおなじ だけ…… それで いいの。\pでも わたしは…… わたしが\nみせたいのは…… みせ……\pちがう。 わたしたちは。\nわたし は。 わたし……\pあつい。 ライトが あつい。\pどうして。 どうして はなれるの？\nどうして ちがう はくしゅを\lほしがるの？』"),

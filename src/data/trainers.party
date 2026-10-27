@@ -17192,3 +17192,43 @@ EVs: 252 HP / 252 Atk / 4 SpD
 - High Horsepower
 - Megahorn
 - Protect
+
+=== TRAINER_YAYOI_RELEASE ===
+Name: ヤヨイ
+Class: Aroma Lady
+Pic: Aroma Lady
+Gender: Female
+Music: Female
+Double Battle: No
+AI: Basic Trainer
+Multi Party: Half
+
+Roserade @ Black Sludge
+Ability: Natural Cure
+Level: 50
+Nature: Timid
+EVs: 4 HP / 252 SpA / 252 Spe
+- Giga Drain
+- Sludge Bomb
+- Shadow Ball
+- Synthesis
+
+Breloom @ Toxic Orb
+Ability: Poison Heal
+Level: 50
+Nature: Adamant
+EVs: 252 HP / 252 Atk / 4 SpD
+- Drain Punch
+- Seed Bomb
+- Mach Punch
+- Protect
+
+Bellossom @ Sitrus Berry
+Ability: Healer
+Level: 50
+Nature: Modest
+EVs: 252 HP / 252 SpA / 4 SpD
+- Quiver Dance
+- Moonblast
+- Energy Ball
+- Strength Sap

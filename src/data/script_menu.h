@@ -835,6 +835,15 @@ static const struct MenuAction sMultichoiceList_PartyBathAdditive[] =
     {COMPOUND_STRING("{JPN}フエンかけながし")},
 };
 
+// Yayoi's own is rose; the player picks one of the others.
+static const struct MenuAction sMultichoiceList_InnTea[] =
+{
+    {COMPOUND_STRING("{JPN}ミントティー")},
+    {COMPOUND_STRING("{JPN}レモンティー")},
+    {COMPOUND_STRING("{JPN}カモミールティー")},
+    {COMPOUND_STRING("{JPN}ジャスミンティー")},
+};
+
 static const struct MenuAction sMultichoiceList_LocalRoomPC[] =
 {
     {COMPOUND_STRING("{JPN}もようがえ")},
@@ -1404,6 +1413,7 @@ static const struct MultichoiceListStruct sMultichoiceLists[] =
     [MULTI_CONTEST_BP_SHOP]                          = MULTICHOICE(sMultichoiceList_ContestBpShop),
     [MULTI_CONTEST_BP_SHOP_SCARVES]                  = MULTICHOICE(sMultichoiceList_ContestBpShopScarves),
     [MULTI_PARTY_BATH_ADDITIVE]                      = MULTICHOICE(sMultichoiceList_PartyBathAdditive),
+    [MULTI_INN_TEA]                                  = MULTICHOICE(sMultichoiceList_InnTea),
 };
 
 const u8 *const gStdStrings[] =
