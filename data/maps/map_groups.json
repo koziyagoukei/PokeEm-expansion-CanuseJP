@@ -7,7 +7,8 @@
     "gMapGroup_IndoorDynamic",
     "gMapGroup_SpecialArea",
     "gMapGroup_IndoorMiniMiniVilla",
-    "gMapGroup_RestorationInn"
+    "gMapGroup_RestorationInn",
+    "gMapGroup_PokevirusDepths"
   ],
   "gMapGroup_TownsAndRoutes": [
     "ultra_frontie_hub",
@@ -142,5 +143,10 @@
     "RestorationInn_Lobby",
     "RestorationInn_EastWing",
     "RestorationInn_WestWing"
+  ],
+  "gMapGroup_PokevirusDepths": [
+    "PokevirusDepths_Approach",
+    "PokevirusDepths_Helix",
+    "PokevirusDepths_Core"
   ]
 }

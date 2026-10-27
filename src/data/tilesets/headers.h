@@ -3,6 +3,28 @@
 // Whether a palette has a night version, located at ((x + 9) % 16).pal
 #define SWAP_PAL(x) ((x) < NUM_PALS_IN_PRIMARY ? 1 << (x) : 1 << ((x) - NUM_PALS_IN_PRIMARY))
 
+const struct Tileset gTileset_PokevirusDepths =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PokevirusDepths,
+    .palettes = gTilesetPalettes_PokevirusDepths,
+    .metatiles = gMetatiles_PokevirusDepths,
+    .metatileAttributes = gMetatileAttributes_PokevirusDepths,
+    .callback = InitTilesetAnim_PokevirusDepths,
+};
+
+const struct Tileset gTileset_PokevirusCore =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PokevirusDepths,
+    .palettes = gTilesetPalettes_PokevirusCore,
+    .metatiles = gMetatiles_PokevirusDepths,
+    .metatileAttributes = gMetatileAttributes_PokevirusDepths,
+    .callback = InitTilesetAnim_PokevirusDepths,
+};
+
 const struct Tileset gTileset_RestorationInnExterior =
 {
     .isCompressed = TRUE,

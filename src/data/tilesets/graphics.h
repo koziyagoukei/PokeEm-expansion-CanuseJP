@@ -1,3 +1,44 @@
+const u32 gTilesetTiles_PokevirusDepths[] = INCGFX_U32("data/tilesets/secondary/pokevirus_depths/tiles.png", ".4bpp.fastSmol");
+const u16 gTilesetPalettes_PokevirusDepths[][16] =
+{
+    INCGFX_U16("data/tilesets/secondary/pokevirus_depths/palettes/00.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/pokevirus_depths/palettes/01.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/pokevirus_depths/palettes/02.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/pokevirus_depths/palettes/03.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/pokevirus_depths/palettes/04.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/pokevirus_depths/palettes/05.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/pokevirus_depths/palettes/06.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/pokevirus_depths/palettes/07.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/pokevirus_depths/palettes/08.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/pokevirus_depths/palettes/09.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/pokevirus_depths/palettes/10.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/pokevirus_depths/palettes/11.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/pokevirus_depths/palettes/12.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/pokevirus_depths/palettes/13.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/pokevirus_depths/palettes/14.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/pokevirus_depths/palettes/15.pal", ".gbapal"),
+};
+
+const u16 gTilesetPalettes_PokevirusCore[][16] =
+{
+    INCGFX_U16("data/tilesets/secondary/pokevirus_depths/palettes/00.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/pokevirus_depths/palettes/01.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/pokevirus_depths/palettes/02.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/pokevirus_depths/palettes/03.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/pokevirus_depths/palettes/04.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/pokevirus_depths/palettes/05.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/pokevirus_depths/palettes/06_core.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/pokevirus_depths/palettes/07.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/pokevirus_depths/palettes/08.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/pokevirus_depths/palettes/09.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/pokevirus_depths/palettes/10.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/pokevirus_depths/palettes/11.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/pokevirus_depths/palettes/12.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/pokevirus_depths/palettes/13.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/pokevirus_depths/palettes/14.pal", ".gbapal"),
+    INCGFX_U16("data/tilesets/secondary/pokevirus_depths/palettes/15.pal", ".gbapal"),
+};
+
 const u32 gTilesetTiles_RestorationInnExterior[] = INCGFX_U32("data/tilesets/secondary/restoration_inn_exterior/tiles.png", ".4bpp.fastSmol");
 const u16 gTilesetPalettes_RestorationInnExterior[][16] =
 {

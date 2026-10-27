@@ -1,4 +1,6 @@
 const u16 gMetatiles_SecretBasePrimary[] = INCBIN_U16("data/tilesets/primary/secret_base/metatiles.bin");
+const u16 gMetatiles_PokevirusDepths[] = INCBIN_U16("data/tilesets/secondary/pokevirus_depths/metatiles.bin");
+const u16 gMetatileAttributes_PokevirusDepths[] = INCBIN_U16("data/tilesets/secondary/pokevirus_depths/metatile_attributes.bin");
 const u16 gMetatiles_RestorationInnExterior[] = INCBIN_U16("data/tilesets/secondary/restoration_inn_exterior/metatiles.bin");
 const u16 gMetatileAttributes_RestorationInnExterior[] = INCBIN_U16("data/tilesets/secondary/restoration_inn_exterior/metatile_attributes.bin");
 const u16 gMetatiles_RestorationInnInterior[] = INCBIN_U16("data/tilesets/secondary/restoration_inn_interior/metatiles.bin");

@@ -1,6 +1,39 @@
 #ifndef GUARD_METATILE_LABELS_H
 #define GUARD_METATILE_LABELS_H
 
+// gTileset_PokevirusDepths / gTileset_PokevirusCore
+#define METATILE_PokevirusDepths_Floor                 0x200
+#define METATILE_PokevirusDepths_RockMass              0x203
+#define METATILE_PokevirusDepths_LadderDown            0x20E
+#define METATILE_PokevirusDepths_LadderUp              0x20F
+#define METATILE_PokevirusDepths_Chain_TopLeft         0x21D
+#define METATILE_PokevirusDepths_Chain_BaseLeft        0x223
+#define METATILE_PokevirusDepths_Chain_BaseRight       0x224
+#define METATILE_PokevirusDepths_Mosaic_First          0x225
+#define METATILE_PokevirusDepths_Mosaic_Last           0x23C
+#define METATILE_PokevirusDepths_BioWall_TopLeft       0x23D
+#define METATILE_PokevirusDepths_BioWall_TopRight      0x23E
+#define METATILE_PokevirusDepths_BioWall_BottomLeft    0x23F
+#define METATILE_PokevirusDepths_BioWall_BottomRight   0x240
+#define METATILE_PokevirusDepths_BioWall_Last          0x24C
+#define METATILE_PokevirusDepths_BioCliff_TopLeft      0x24D
+#define METATILE_PokevirusDepths_BioCliff_North1       0x24E
+#define METATILE_PokevirusDepths_BioCliff_North2       0x24F
+#define METATILE_PokevirusDepths_BioCliff_TopRight     0x250
+#define METATILE_PokevirusDepths_BioCliff_West1        0x251
+#define METATILE_PokevirusDepths_BioCliff_Floor1       0x252
+#define METATILE_PokevirusDepths_BioCliff_Floor2       0x253
+#define METATILE_PokevirusDepths_BioCliff_East1        0x254
+#define METATILE_PokevirusDepths_BioCliff_West2        0x255
+#define METATILE_PokevirusDepths_BioCliff_Floor3       0x256
+#define METATILE_PokevirusDepths_BioCliff_Floor4       0x257
+#define METATILE_PokevirusDepths_BioCliff_East2        0x258
+#define METATILE_PokevirusDepths_BioCliff_BottomLeft   0x259
+#define METATILE_PokevirusDepths_BioCliff_South1       0x25A
+#define METATILE_PokevirusDepths_BioCliff_South2       0x25B
+#define METATILE_PokevirusDepths_BioCliff_BottomRight  0x25C
+#define METATILE_PokevirusDepths_BioCliff_Last         0x25C
+
 // gTileset_BattleArena
 #define METATILE_BattleArena_Door  0x21B
 

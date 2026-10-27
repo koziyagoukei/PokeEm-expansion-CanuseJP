@@ -825,6 +825,9 @@ EventScript_PalletTown_PlayersHouse_2F_TurnOnPC::
 	.include "data/maps/RestorationInn_Lobby/scripts.inc"
 	.include "data/maps/RestorationInn_EastWing/scripts.inc"
 	.include "data/maps/RestorationInn_WestWing/scripts.inc"
+	.include "data/maps/PokevirusDepths_Approach/scripts.inc"
+	.include "data/maps/PokevirusDepths_Helix/scripts.inc"
+	.include "data/maps/PokevirusDepths_Core/scripts.inc"
 
 	.include "data/maps/Partybathtime/scripts.inc"
 

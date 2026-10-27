@@ -6,6 +6,7 @@
 #include "task.h"
 #include "battle_transition.h"
 #include "fieldmap.h"
+#include "constants/pokevirus_depths.h"
 
 static EWRAM_DATA struct {
     const u16 *src;
@@ -38,6 +39,7 @@ static void TilesetAnim_BattleFrontierOutsideEast(u16);
 static void TilesetAnim_Underwater(u16);
 static void TilesetAnim_SootopolisGym(u16);
 static void TilesetAnim_Cave(u16);
+static void TilesetAnim_PokevirusDepths(u16);
 static void TilesetAnim_EliteFour(u16);
 static void TilesetAnim_MauvilleGym(u16);
 static void TilesetAnim_BikeShop(u16);
@@ -73,6 +75,24 @@ static void QueueAnimTiles_MauvilleGym_ElectricGates(u16);
 static void QueueAnimTiles_SootopolisGym_Waterfalls(u16);
 static void QueueAnimTiles_EliteFour_GroundLights(u16);
 static void QueueAnimTiles_EliteFour_WallLights(u16);
+
+const u16 gTilesetAnims_PokevirusMembrane_Frame0[] = INCGFX_U16("data/tilesets/secondary/pokevirus_depths/anim/membrane/0.png", ".4bpp");
+const u16 gTilesetAnims_PokevirusMembrane_Frame1[] = INCGFX_U16("data/tilesets/secondary/pokevirus_depths/anim/membrane/1.png", ".4bpp");
+const u16 gTilesetAnims_PokevirusMembrane_Frame2[] = INCGFX_U16("data/tilesets/secondary/pokevirus_depths/anim/membrane/2.png", ".4bpp");
+const u16 gTilesetAnims_PokevirusMembrane_Frame3[] = INCGFX_U16("data/tilesets/secondary/pokevirus_depths/anim/membrane/3.png", ".4bpp");
+
+static const u16 *const sPokevirusMembraneFrames[] =
+{
+    gTilesetAnims_PokevirusMembrane_Frame0,
+    gTilesetAnims_PokevirusMembrane_Frame1,
+    gTilesetAnims_PokevirusMembrane_Frame2,
+    gTilesetAnims_PokevirusMembrane_Frame3,
+    gTilesetAnims_PokevirusMembrane_Frame2,
+    gTilesetAnims_PokevirusMembrane_Frame1,
+};
+
+STATIC_ASSERT(POKEVIRUS_MEMBRANE_TILE_OFFSET + POKEVIRUS_MEMBRANE_TILE_COUNT <= NUM_TILES_TOTAL - NUM_TILES_IN_PRIMARY, PokevirusMembraneFitsSecondaryBank);
+STATIC_ASSERT(ARRAY_COUNT(sPokevirusMembraneFrames) == POKEVIRUS_MEMBRANE_LOOP_STEPS, PokevirusMembraneLoopSteps);
 
 const u16 gTilesetAnims_General_Flower_Frame1[] = INCGFX_U16("data/tilesets/primary/general/anim/flower/1.png", ".4bpp");
 const u16 gTilesetAnims_General_Flower_Frame0[] = INCGFX_U16("data/tilesets/primary/general/anim/flower/0.png", ".4bpp");
@@ -799,6 +819,13 @@ void InitTilesetAnim_Cave(void)
     sSecondaryTilesetAnimCallback = TilesetAnim_Cave;
 }
 
+void InitTilesetAnim_PokevirusDepths(void)
+{
+    sSecondaryTilesetAnimCounter = 0;
+    sSecondaryTilesetAnimCounterMax = POKEVIRUS_MEMBRANE_FRAME_TICKS * ARRAY_COUNT(sPokevirusMembraneFrames);
+    sSecondaryTilesetAnimCallback = TilesetAnim_PokevirusDepths;
+}
+
 void InitTilesetAnim_EliteFour(void)
 {
     sSecondaryTilesetAnimCounter = 0;
@@ -941,6 +968,17 @@ static void TilesetAnim_Cave(u16 timer)
 {
     if (timer % 16 == 1)
         QueueAnimTiles_Cave_Lava(timer / 16);
+}
+
+static void TilesetAnim_PokevirusDepths(u16 timer)
+{
+    if (timer % POKEVIRUS_MEMBRANE_FRAME_TICKS == 0)
+    {
+        u32 frame = timer / POKEVIRUS_MEMBRANE_FRAME_TICKS;
+        AppendTilesetAnimToBuffer(sPokevirusMembraneFrames[frame],
+            (u16 *)(BG_VRAM + TILE_OFFSET_4BPP(NUM_TILES_IN_PRIMARY + POKEVIRUS_MEMBRANE_TILE_OFFSET)),
+            POKEVIRUS_MEMBRANE_TILE_COUNT * TILE_SIZE_4BPP);
+    }
 }
 
 static void TilesetAnim_BattleFrontierOutsideWest(u16 timer)

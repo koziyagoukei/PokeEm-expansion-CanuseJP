@@ -1226,6 +1226,39 @@
       "border_filepath": "data/layouts/RestorationInn_WestWing/border.bin",
       "blockdata_filepath": "data/layouts/RestorationInn_WestWing/map.bin",
       "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_POKEVIRUS_DEPTHS_APPROACH",
+      "name": "PokevirusDepths_Approach_Layout",
+      "width": 39,
+      "height": 33,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_PokevirusDepths",
+      "border_filepath": "data/layouts/PokevirusDepths_Approach/border.bin",
+      "blockdata_filepath": "data/layouts/PokevirusDepths_Approach/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_POKEVIRUS_DEPTHS_HELIX",
+      "name": "PokevirusDepths_Helix_Layout",
+      "width": 43,
+      "height": 39,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_PokevirusDepths",
+      "border_filepath": "data/layouts/PokevirusDepths_Helix/border.bin",
+      "blockdata_filepath": "data/layouts/PokevirusDepths_Helix/map.bin",
+      "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_POKEVIRUS_DEPTHS_CORE",
+      "name": "PokevirusDepths_Core_Layout",
+      "width": 31,
+      "height": 31,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_PokevirusCore",
+      "border_filepath": "data/layouts/PokevirusDepths_Core/border.bin",
+      "blockdata_filepath": "data/layouts/PokevirusDepths_Core/map.bin",
+      "layout_version": "emerald"
     }
   ]
 }
