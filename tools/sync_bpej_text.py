@@ -62,11 +62,23 @@ def load_rom(path: Path) -> bytes:
     return data
 
 
+def charmap_lines(path: Path, depth: int = 0):
+    """Lines of a charmap, with `.include "file"` expanded like preproc does."""
+    for line in path.read_text(encoding="utf-8").splitlines():
+        m = re.match(r'^\.include\s+"([^"]+)"', line)
+        if m:
+            if depth >= 8:
+                raise ValueError(f"{path}: charmap includes nested too deeply")
+            yield from charmap_lines(path.parent / m[1], depth + 1)
+        else:
+            yield line
+
+
 class Charmap:
     def __init__(self, path: Path):
         self.characters = {}
         self.tokens = {}
-        for line in path.read_text(encoding="utf-8").splitlines():
+        for line in charmap_lines(path):
             m = re.match(r"^'((?:\\.|[^'\\])*)'\s*=\s*([0-9A-F ]+)", line)
             if m:
                 char = m[1].replace(r"\'", "'").replace(r"\\", "\\")

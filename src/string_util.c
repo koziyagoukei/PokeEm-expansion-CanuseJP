@@ -713,7 +713,7 @@ u8 GetExtCtrlCodeLength(u8 code)
         [EXT_CTRL_CODE_TEXT_COLORS]            = 4,
         [EXT_CTRL_CODE_AUTO]                   = 1,
         [EXT_CTRL_CODE_KANJI]                  = 1,
-        [EXT_CTRL_CODE_KANJI_GLYPH]            = 2,
+        [EXT_CTRL_CODE_KANJI_GLYPH ... EXT_CTRL_CODE_KANJI_GLYPH_LAST] = 2,
     };
 
     u8 length = 0;
@@ -724,7 +724,7 @@ u8 GetExtCtrlCodeLength(u8 code)
 
 static const u8 *SkipExtCtrlCode(const u8 *s)
 {
-    while (*s == EXT_CTRL_CODE_BEGIN && s[1] != EXT_CTRL_CODE_KANJI_GLYPH)
+    while (*s == EXT_CTRL_CODE_BEGIN && !IS_KANJI_GLYPH_CODE(s[1]))
     {
         s++;
         s += GetExtCtrlCodeLength(*s);
@@ -799,7 +799,7 @@ void StripExtCtrlCodes(u8 *str)
     u16 destIndex = 0;
     while (str[srcIndex] != EOS)
     {
-        if (str[srcIndex] == EXT_CTRL_CODE_BEGIN && str[srcIndex + 1] == EXT_CTRL_CODE_KANJI_GLYPH)
+        if (str[srcIndex] == EXT_CTRL_CODE_BEGIN && IS_KANJI_GLYPH_CODE(str[srcIndex + 1]))
         {
             // A kanji glyph is visible text, not a removable formatting code.
             if (str[srcIndex + 2] == EOS)

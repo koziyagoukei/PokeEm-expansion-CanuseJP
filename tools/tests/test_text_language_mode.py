@@ -33,8 +33,9 @@ def engine_code():
     result.extend(arrays)
     glyphs = sorted(set(re.findall(r"\bgFont\w+Glyphs\b", text)))
     result.extend(f"static const u16 {name}[32768] = {{0}};" for name in glyphs)
-    result.append("#define KANJI_GLYPH_COUNT 25\n#define KANJI_NORMAL_WIDTH 12\n#define KANJI_SMALL_WIDTH 12\n"
-                  "static const u16 sKanjiGlyphs[1024] = {0};")
+    result.append("#define KANJI_NORMAL_WIDTH 12\n#define KANJI_SMALL_WIDTH 12\n"
+                  "static const u16 sKanjiGlyphs[1024] = {0};\n"
+                  "static const u16 sKanjiGlyphSlots[KANJI_GLYPHS_PER_BANK + 2] = {0};")
     result.append("void DecompressGlyphTile(const void *src, void *dest) {\n"
                   "    uintptr_t address = (uintptr_t)src;\n"
                   "    sLoadedJapanese = FALSE;\n")
@@ -58,7 +59,7 @@ def engine_code():
                  "DynamicPlaceholderTextUtil_GetPlaceholderPtr", "DynamicPlaceholderTextUtil_ExpandPlaceholders"):
         result.append(function(dynamic, name))
     for name in ("IsJapaneseGlyph", "ShouldUseJapaneseGlyph", "ResolveTextMode", "IsJapaneseTextMode",
-                 "TextAutoModeFromNextChar", "IsSmallKanjiFont", "DecompressKanjiGlyph", "GetJapaneseGlyphWidth", "DecompressJapaneseSpaceGlyph"):
+                 "TextAutoModeFromNextChar", "IsSmallKanjiFont", "GetKanjiGlyphSlot", "DecompressKanjiGlyph", "GetJapaneseGlyphWidth", "DecompressJapaneseSpaceGlyph"):
         result.append(function(text, name))
     suffixes = ("Small", "Normal", "Short", "Narrow", "SmallNarrow", "Narrower",
                 "SmallNarrower", "ShortNarrow", "ShortNarrower")

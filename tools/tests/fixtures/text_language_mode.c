@@ -209,10 +209,23 @@ static void kanji(void)
         CTRL, EXT_CTRL_CODE_FONT, FONT_SMALL, CTRL, EXT_CTRL_CODE_KANJI_GLYPH, 2, EOS};
     const u8 fonts[] = {FONT_NORMAL, FONT_SMALL, FONT_NARROW, FONT_NARROWER,
         FONT_SHORT, FONT_SMALL_NARROW, FONT_SMALL_NARROWER, FONT_SHORT_NARROW, FONT_SHORT_NARROWER};
+    // Codes past the first 246 kanji use the following banks, FC 20..27 xx.
+    const u8 banked[] = {CTRL, EXT_CTRL_CODE_KANJI_GLYPH + 1, 1, CTRL, EXT_CTRL_CODE_KANJI_GLYPH_LAST,
+        KANJI_GLYPHS_PER_BANK, CHAR_A, EOS};
+    u8 stripped[ARRAY_COUNT(banked)];
     assert(IsJapaneseTextMode(text));
     assert(IsJapaneseTextMode(automatic));
+    assert(IsJapaneseTextMode(banked));
     assert(GetExtCtrlCodeLength(EXT_CTRL_CODE_KANJI_GLYPH) == 2);
+    assert(GetExtCtrlCodeLength(EXT_CTRL_CODE_KANJI_GLYPH_LAST) == 2);
     assert(GetStringWidth(FONT_NORMAL, fontSwitch, 0) == 24);
+    assert(GetStringWidth(FONT_NORMAL, banked, 0) == 24 + 7);
+    assert(GetKanjiGlyphSlot(EXT_CTRL_CODE_KANJI_GLYPH, 0) == 0);
+    assert(GetKanjiGlyphSlot(EXT_CTRL_CODE_KANJI_GLYPH, KANJI_GLYPHS_PER_BANK + 1) == 0);
+    assert(GetKanjiGlyphSlot(EXT_CTRL_CODE_KANJI_GLYPH_LAST, 1) == 0);
+    StringCopy(stripped, banked);
+    StripExtCtrlCodes(stripped);
+    assert(StringCompareWithoutExtCtrlCodes(stripped, banked) == 0 && StringLength(stripped) == 7);
     for (u32 i = 0; i < ARRAY_COUNT(fonts); i++)
     {
         for (u32 type = WINDOW_TEXT_PRINTER; type <= SPRITE_TEXT_PRINTER; type++)

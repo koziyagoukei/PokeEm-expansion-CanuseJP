@@ -56,6 +56,8 @@ public:
         return it->second;
     }
 private:
+    void Load(std::string filename, int depth);
+
     std::map<std::int32_t, std::string> m_chars;
     std::string m_escapes[128];
     std::map<std::string, std::string> m_constants;

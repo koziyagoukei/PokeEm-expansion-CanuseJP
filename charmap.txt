@@ -485,31 +485,8 @@ TEXT_COLORS = FC 1C @ takes 3 colors: text base color, shadow and accent
 AUTO = FC 1D
 @ KANJI selects Japanese text mode; each kanji has its own escaped glyph code.
 KANJI = FC 1E
-'攻' = FC 1F 01
-'撃' = FC 1F 02
-'防' = FC 1F 03
-'御' = FC 1F 04
-'特' = FC 1F 05
-'性' = FC 1F 06
-'技' = FC 1F 07
-'力' = FC 1F 08
-'速' = FC 1F 09
-'命' = FC 1F 0A
-'中' = FC 1F 0B
-'状' = FC 1F 0C
-'態' = FC 1F 0D
-'異' = FC 1F 0E
-'常' = FC 1F 0F
-'回' = FC 1F 10
-'復' = FC 1F 11
-'対' = FC 1F 12
-'戦' = FC 1F 13
-'相' = FC 1F 14
-'手' = FC 1F 15
-'物' = FC 1F 16
-'理' = FC 1F 17
-'変' = FC 1F 18
-'化' = FC 1F 19
+@ Kanji codes (FC 1F..27 xx) are assigned automatically and kept in this ledger.
+.include "charmap_kanji.txt"
 
 @ Speaker names, the order must be matching with include/constants/speaker_names.h
 NAME_NONE = 00

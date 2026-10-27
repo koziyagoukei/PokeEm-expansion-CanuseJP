@@ -62,19 +62,34 @@ def decode_charmap_char(raw: str) -> str:
     return raw
 
 
+def charmap_lines(path: Path, depth: int = 0):
+    """Lines of a charmap, with `.include "file"` expanded like preproc does."""
+    for line in path.read_text(encoding="utf-8", errors="replace").splitlines():
+        match = re.match(r'^\.include\s+"([^"]+)"', line.strip())
+        if match and depth < 8 and (path.parent / match.group(1)).exists():
+            yield from charmap_lines(path.parent / match.group(1), depth + 1)
+        else:
+            yield line
+
+
 def load_charmap_chars(root: Path) -> set[str]:
     chars: set[str] = set()
     charmap = root / "charmap.txt"
     if not charmap.exists():
         return chars
 
-    for line in charmap.read_text(encoding="utf-8", errors="replace").splitlines():
+    for line in charmap_lines(charmap):
         match = CHARMAP_CHAR_RE.match(line.strip())
         if not match:
             continue
         decoded = decode_charmap_char(match.group(1))
         if len(decoded) == 1:
             chars.add(decoded)
+
+    # `make` gives any kanji of the font atlas a code (tools/kanji/kanji_gen.py).
+    atlas = root / "graphics/fonts/kanji/koden12_atlas.txt"
+    if atlas.exists():
+        chars.update("".join(atlas.read_text(encoding="utf-8").split()))
     return chars
 
 

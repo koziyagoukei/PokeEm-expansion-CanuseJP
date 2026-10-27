@@ -268,6 +268,14 @@ AUTO_GEN_TARGETS += $(BPEJ_CONTEST_EXTRACTED_OK)
 AUTO_GEN_TARGETS += $(BPEJ_INTRO_EXTRACTED_OK)
 AUTO_GEN_TARGETS += $(BPEJ_POKENAV_EXTRACTED_OK)
 
+# Kanji used by display strings get a code in charmap_kanji.txt and their
+# glyphs are generated before anything is encoded. See docs/kanji.md.
+KANJI_TOOL_DIR := $(TOOLS_DIR)/kanji
+KANJI_GEN_DIR := $(BUILD_GENERATED_DIR)/kanji
+KANJI_STAMP := $(KANJI_GEN_DIR)/kanji.ok
+KANJI_SCAN_SRCS := $(shell find src include data test -type f \( -name '*.c' -o -name '*.h' -o -name '*.inc' -o -name '*.s' \) 2>/dev/null)
+AUTO_GEN_TARGETS += $(KANJI_STAMP)
+
 $(DATA_SRC_SUBDIR)/wild_encounters.h: $(DATA_SRC_SUBDIR)/wild_encounters.json $(WILD_ENCOUNTERS_TOOL_DIR)/wild_encounters_to_header.py $(INCLUDE_DIRS)/config/overworld.h $(INCLUDE_DIRS)/config/dexnav.h
 	python3 $(WILD_ENCOUNTERS_TOOL_DIR)/wild_encounters_to_header.py
 
@@ -490,6 +498,11 @@ include spritesheet_rules.mk
 include json_data_rules.mk
 include audio_rules.mk
 include trainer_rules.mk
+
+# Other generated sources (trainers.h, region map names...) contain text too,
+# so the kanji scan runs after them.
+$(KANJI_STAMP): $(filter-out $(KANJI_STAMP),$(AUTO_GEN_TARGETS)) $(KANJI_SCAN_SRCS) charmap.txt charmap_kanji.txt $(wildcard $(KANJI_TOOL_DIR)/*.py) $(wildcard graphics/fonts/kanji/koden12_atlas.*)
+	python3 $(KANJI_TOOL_DIR)/kanji_gen.py update --stamp $@
 
 # NOTE: Tools must have been built prior (FIXME)
 # so you can't really call this rule directly
