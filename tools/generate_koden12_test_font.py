@@ -8,7 +8,7 @@ import argparse
 from pathlib import Path
 
 from fontTools.ttLib import TTFont
-from PIL import Image, ImageDraw, ImageFont
+from PIL import Image, ImageChops, ImageDraw, ImageFont
 
 GLYPHS = "攻撃防御特性技力速命中状態異常回復対戦相手物理変化"
 ROOT = Path(__file__).resolve().parents[1]
@@ -48,7 +48,13 @@ def main():
         if bounds is None or bounds[0] < 0 or bounds[1] < 1 or bounds[2] > 12 or bounds[3] > 13:
             raise ValueError("Glyph does not fit 12x12 without clipping: %s %s" % (char, bounds))
         mask = mask.crop((0, 1, 12, 13))
-        sheet.paste(1, ((index % 16) * 16, (index // 16) * 16), mask)
+        # Keep the shadow inside the existing 12px advance and small-font height.
+        shadow = ImageChops.offset(mask, 1, 1)
+        ImageDraw.Draw(shadow).line((0, 0, 11, 0), fill=0)
+        ImageDraw.Draw(shadow).line((0, 0, 0, 11), fill=0)
+        position = ((index % 16) * 16, (index // 16) * 16)
+        sheet.paste(2, position, shadow)
+        sheet.paste(1, position, mask)
     sheet.save(ROOT / "graphics/fonts/kanji_koden12.png", bits=2)
 
 
