@@ -489,7 +489,9 @@ static void GenerateInitialRentalMons(void)
         else
             monId = GetFactoryMonId(factoryLvlMode, challengeNum, FALSE);
 
-        if (!IsFrontierMonPoolEntryEnabled(monId) || gFacilityTrainerMons[monId].species == SPECIES_UNOWN)
+        if (!IsFrontierMonPoolEntryEnabled(monId)
+         || gFacilityTrainerMons[monId].species == SPECIES_UNOWN
+         || IsFrontierSpeciesBannedByCurrentRules(gFacilityTrainerMons[monId].species))
             continue;
 
         // Cannot have two Pokemon of the same species.

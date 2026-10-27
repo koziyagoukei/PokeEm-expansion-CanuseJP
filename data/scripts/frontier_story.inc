@@ -456,9 +456,9 @@ TowerStory_EventScript_KazukiCured::
 FrontierStory_EventScript_CureFlash::
 	closemessage
 	playse SE_M_HEAL_BELL
-	fadescreen FADE_TO_WHITE
+	fadescreenswapbuffers FADE_TO_WHITE
 	waitse
-	fadescreen FADE_FROM_WHITE
+	fadescreenswapbuffers FADE_FROM_WHITE
 	return
 
 @ ---------------------------------------------------------------------------
@@ -935,11 +935,13 @@ FrontierStory_EventScript_CampVisitor::
 	special FrontierStory_BufferVisitorText
 	msgbox gStringVar4, MSGBOX_DEFAULT
 	closemessage
-	fadescreen FADE_TO_BLACK
+FrontierStory_EventScript_CampVisitorFadeOut::
+	fadescreenswapbuffers FADE_TO_BLACK
 	setflag FLAG_TEMP_18
 	removeobject LOCALID_PARTY_ROAMER_VISITOR
 	setvar VAR_CAMP_VISITOR, NAMED_STORY_NONE
-	fadescreen FADE_FROM_BLACK
+FrontierStory_EventScript_CampVisitorFadeIn::
+	fadescreenswapbuffers FADE_FROM_BLACK
 	call FrontierStory_EventScript_TrySuggestInn
 	release
 	end
