@@ -14,6 +14,8 @@
 
 翻訳や画面調整は継続中です。全テキストの翻訳完了や、全画面での正常表示を保証する状態ではありません。未翻訳、文字のはみ出し、表示位置のずれなどが残っている場合があります。
 
+このフォークの開発では、調査・実装・テスト・文書作成などの一部に生成AIを補助的に使用しています。AIの出力にも誤りがあり得るため、変更内容や動作の確認を行っています。
+
 ## 日本語対応
 
 ### 対応を進めている範囲
@@ -32,6 +34,8 @@
 文字コードには通常文字と制御コード、`EMOJI_XXXX` などの定義が混在しています。EMOJI定義は通常のASCII記号とは別のものです。また、同じ文字コードでも表示モードによって参照するフォントが異なるため、単に日本語を追加しただけですべての英語表示と互換になるわけではありません。
 
 フォントは `graphics/fonts/` 以下のPNGから生成します。日本語フォントには `japanese_normal`、`japanese_small`、`japanese_short`、`japanese_bold` を使用します。使える文字・記号はcharmapとフォント側の対応範囲に限られ、任意の漢字や全角記号がそのまま使えるわけではありません。
+
+漢字は現在、影付きの25字を表示確認できる段階です。プレイヤー名・ニックネーム、セーブや通信に使う文字列には対応していません。使い方と制約は [漢字表示の試作](docs/kanji_font_poc.md) を参照してください。
 
 ### 表示モードの指定
 
@@ -133,6 +137,8 @@ make -j4 --output-sync=target
 | タイトル・オープニング関連の抽出 | [bpej_intro_extraction.md](docs/bpej_intro_extraction.md) |
 | ポケナビ関連の抽出 | [bpej_pokenav_extraction.md](docs/bpej_pokenav_extraction.md) |
 | 日本版ROMのテキストを参考にした日本語化 | [bpej_text_localization.md](docs/bpej_text_localization.md) |
+| 漢字表示の試作・表示確認と制約 | [kanji_font_poc.md](docs/kanji_font_poc.md) |
+| フォントのROM容量と表示方式の調査 | [font_engine_audit.md](docs/font_engine_audit.md) |
 | ヘルプ・日記・モノローグ・選択肢分岐の情報ビューア | [info_viewer.md](docs/info_viewer.md) |
 | 本流の開発者・貢献者 | [CREDITS.md](CREDITS.md) |
 
