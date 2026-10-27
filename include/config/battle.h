@@ -35,8 +35,8 @@
 #define B_ROUGH_SKIN_DMG            GEN_LATEST // 第4世代以降では、さめはだの接触ダメージが最大HPの1/16から1/8になる。てつのトゲにも適用する。
 #define B_KNOCK_OFF_DMG             GEN_LATEST // 第6世代以降では、対象が取り除ける持ち物を持っていると、はたきおとすのダメージが50%増える。
 #define B_SPORT_DMG_REDUCTION       GEN_LATEST // 第5世代以降では、みずあそび・どろあそびによるほのお・でんき技のダメージ軽減が50%から67%になる。
-#define B_EXPLOSION_DEFENSE         GEN_LATEST // 第5世代以降では、じばく・だいばくはつで対象の防御を半分として計算しない。
-#define B_PARENTAL_BOND_DMG         GEN_LATEST // 第7世代以降では、おやこあいの2撃目のダメージが初撃の50%から25%になる。
+#define B_EXPLOSION_DEFENSE         GEN_4 // 第5世代以降では、じばく・だいばくはつで対象の防御を半分として計算しない。
+#define B_PARENTAL_BOND_DMG         GEN_6 // 第7世代以降では、おやこあいの2撃目のダメージが初撃の50%から25%になる。
 #define B_MULTIPLE_TARGETS_DMG      GEN_LATEST // 第4世代以降では、複数対象技のダメージが75%になる。以前は50%で、場全体を攻撃する技は軽減しない。
 #define B_STRUGGLE_RECOIL           GEN_LATEST // 第4世代以降では、わるあがきの反動は使用者の最大HPの1/4。第2～3世代では与ダメージの1/4、第1世代では与ダメージの1/2。
 #define B_RETURN_FRUSTRATION_DMG    GEN_LATEST // 第3世代以降では、おんがえし・やつあたりは最低1ダメージを与える。第2世代では威力0になるなつき度だとダメージを与えない。
@@ -430,7 +430,7 @@
 #define SHOW_TYPES_ALWAYS   1                    // 戦闘中にタイプを常に表示する。
 #define SHOW_TYPES_CAUGHT   2                    // その種族を捕獲済みの場合だけ表示する。
 #define SHOW_TYPES_SEEN     3                    // その種族を見たことがある場合だけ表示する。
-#define B_SHOW_TYPES        SHOW_TYPES_NEVER     // 対象を選んで技を選択するとき、HPバーの隣にタイプを表示する条件を指定する。
+#define B_SHOW_TYPES        SHOW_TYPES_ALWAYS     // 対象を選んで技を選択するとき、HPバーの隣にタイプを表示する条件を指定する。
 
 #define SHOW_EFFECTIVENESS_NEVER    0           // 技選択時に相性を表示しない。
 #define SHOW_EFFECTIVENESS_ALWAYS   1           // 技選択時に相性を常に表示する。

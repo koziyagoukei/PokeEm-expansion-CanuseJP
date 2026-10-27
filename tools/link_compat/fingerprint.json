@@ -34,7 +34,7 @@
       "battle_controller_requests": "e96abd3b5da6767581339bf8f3a569132350091d0a8e19167827c5a68d8a4fe5",
       "battle_controller_returns": "9b30245020fa805c391df70ee6976e53fe60887b903df3cb174dd7e52cd4d304",
       "battle_gimmicks": "afb4a9c8cbfdf770f372d8a2a3281e08fb496bcd60383f6a4e4a28b8a0e6e770",
-      "battle_sync_config": "8e662f73b224a57a7e183c497ad5f7c0a9cebf3cb15c3c801c07a49673b0a3f2",
+      "battle_sync_config": "f1b8262adedc685c4b4ff287904bee504bbf01dd8faaeac99e6458da90f742d5",
       "battle_type_flags": "ff98d28d17414754d12b9a0be3509b63bb33233738d16c0a0e4e32edd3ddf935",
       "contest_gimmicks": "d037568d4ca0ccb419b59d31866e1cbe98fcf02754c33a64ff6f924ac03d38ab",
       "gimmick_feature_flags": "6a903cc36f1f683fc5c7fb81f98384b74425269708272a156d0cb07fcf01cc51",
@@ -44,11 +44,11 @@
   },
   "data_layout_version": 7,
   "fingerprints": {
-    "combined": "8586acda5180850f9b37639205100d24d47f487644b85d5d2b2c52d10b753d38",
+    "combined": "6d0cb7d74bcb0ef894c071794954ea97459a33be9f9693c91ada7d7fb823fb7b",
     "data_layout": "fc47029bea51ca82e4e014544ab37782714128af8456c1d210ba2f581a4cbc2b",
-    "protocol": "e6e82d6841e40c54ca85b31a4f42c0d520aaacf418e5604451699e27b9ae19cb"
+    "protocol": "aa4635a0875a0ea7823211376eb1477e28a508cc125efbc2111c41d1fccc46ee"
   },
-  "link_compat_version": 13,
+  "link_compat_version": 14,
   "schema_version": 1,
   "summary": {
     "buffer_sizes": {
