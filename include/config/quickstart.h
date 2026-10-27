@@ -6,7 +6,7 @@
 #define GENDER_RANDOM            2
 
 // クイックスタートの設定
-#define ENABLE_QUICKSTART            TRUE  // TRUEなら、タイトル画面でSELECTを押して新しいゲームをすぐ開始できる（リリースビルドでは無効）。
+#define ENABLE_QUICKSTART            FALSE // TRUEなら、タイトル画面でSELECTを押して新しいゲームをすぐ開始できる（リリースビルドでは無効）。
 #define QUICKSTART_HUD               TRUE  // クイックスタート有効時に、タイトル画面へ小さな表示を追加する。
 #define QUICKSTART_GENDER            GENDER_RANDOM
 

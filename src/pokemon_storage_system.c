@@ -4286,19 +4286,29 @@ static void LoadDisplayMonGfx(enum Species species, u32 pid, bool32 isEgg)
 
 static void PrintDisplayMonInfo(void)
 {
+    const u8 *itemText = sStorage->displayMonItemName;
+    bool8 useNarrowItem = FALSE;
+
+    if (sStorage->displayMonSpecies != SPECIES_NONE && !sStorage->displayMonIsEgg
+     && sStorage->displayMonItemId != ITEM_NONE)
+    {
+        itemText = GetItemName(sStorage->displayMonItemId);
+        useNarrowItem = GetStringWidth(FONT_SMALL_NARROWER, itemText, 0) > WindowWidthPx(WIN_DISPLAY_INFO) - 6;
+    }
+
     FillWindowPixelBuffer(WIN_DISPLAY_INFO, PIXEL_FILL(1));
     if (sStorage->boxOption != OPTION_MOVE_ITEMS)
     {
         AddTextPrinterParameterized(WIN_DISPLAY_INFO, GetFontIdToFit(sStorage->displayMonNameText, FONT_NORMAL, 0, WindowWidthPx(WIN_DISPLAY_INFO) - 6), sStorage->displayMonNameText, 6, 0, TEXT_SKIP_DRAW, NULL);
-        AddTextPrinterParameterized(WIN_DISPLAY_INFO, GetFontIdToFit(sStorage->displayMonSpeciesName, FONT_NORMAL, 0, WindowWidthPx(WIN_DISPLAY_INFO) - 12), sStorage->displayMonSpeciesName, 6, 15, TEXT_SKIP_DRAW, NULL);
-        AddTextPrinterParameterized(WIN_DISPLAY_INFO, FONT_SHORT, sStorage->displayMonGenderLvlText, 10, 30, TEXT_SKIP_DRAW, NULL);
-        AddTextPrinterParameterized(WIN_DISPLAY_INFO, GetFontIdToFit(sStorage->displayMonItemName, FONT_SMALL, 0, WindowWidthPx(WIN_DISPLAY_INFO) - 6), sStorage->displayMonItemName, 6, 44, TEXT_SKIP_DRAW, NULL);
+        AddTextPrinterParameterized(WIN_DISPLAY_INFO, useNarrowItem ? FONT_SMALL : GetFontIdToFit(sStorage->displayMonSpeciesName, FONT_NORMAL, 0, WindowWidthPx(WIN_DISPLAY_INFO) - 12), sStorage->displayMonSpeciesName + (useNarrowItem ? 1 : 0), useNarrowItem ? 0 : 6, 15, TEXT_SKIP_DRAW, NULL);
+        AddTextPrinterParameterized(WIN_DISPLAY_INFO, FONT_SHORT, sStorage->displayMonGenderLvlText, 10, useNarrowItem ? 27 : 30, TEXT_SKIP_DRAW, NULL);
+        AddTextPrinterParameterized(WIN_DISPLAY_INFO, GetFontIdToFit(itemText, useNarrowItem ? FONT_NORMAL : FONT_SMALL, 0, WindowWidthPx(WIN_DISPLAY_INFO) - (useNarrowItem ? 0 : 6)), itemText, useNarrowItem ? 0 : 6, useNarrowItem ? 41 : 44, TEXT_SKIP_DRAW, NULL);
     }
     else
     {
-        AddTextPrinterParameterized(WIN_DISPLAY_INFO, GetFontIdToFit(sStorage->displayMonItemName, FONT_SMALL, 0, WindowWidthPx(WIN_DISPLAY_INFO) - 6), sStorage->displayMonItemName, 6, 0, TEXT_SKIP_DRAW, NULL);
-        AddTextPrinterParameterized(WIN_DISPLAY_INFO, GetFontIdToFit(sStorage->displayMonNameText, FONT_NORMAL, 0, WindowWidthPx(WIN_DISPLAY_INFO) - 6), sStorage->displayMonNameText, 6, 12, TEXT_SKIP_DRAW, NULL);
-        AddTextPrinterParameterized(WIN_DISPLAY_INFO, GetFontIdToFit(sStorage->displayMonSpeciesName, FONT_NORMAL, 0, WindowWidthPx(WIN_DISPLAY_INFO) - 12), sStorage->displayMonSpeciesName, 6, 27, TEXT_SKIP_DRAW, NULL);
+        AddTextPrinterParameterized(WIN_DISPLAY_INFO, GetFontIdToFit(itemText, useNarrowItem ? FONT_NORMAL : FONT_SMALL, 0, WindowWidthPx(WIN_DISPLAY_INFO) - (useNarrowItem ? 0 : 6)), itemText, useNarrowItem ? 0 : 6, 0, TEXT_SKIP_DRAW, NULL);
+        AddTextPrinterParameterized(WIN_DISPLAY_INFO, useNarrowItem ? FONT_SMALL : GetFontIdToFit(sStorage->displayMonNameText, FONT_NORMAL, 0, WindowWidthPx(WIN_DISPLAY_INFO) - 6), sStorage->displayMonNameText, useNarrowItem ? 0 : 6, useNarrowItem ? 16 : 12, TEXT_SKIP_DRAW, NULL);
+        AddTextPrinterParameterized(WIN_DISPLAY_INFO, useNarrowItem ? FONT_SMALL : GetFontIdToFit(sStorage->displayMonSpeciesName, FONT_NORMAL, 0, WindowWidthPx(WIN_DISPLAY_INFO) - 12), sStorage->displayMonSpeciesName + (useNarrowItem ? 1 : 0), useNarrowItem ? 0 : 6, useNarrowItem ? 28 : 27, TEXT_SKIP_DRAW, NULL);
         AddTextPrinterParameterized(WIN_DISPLAY_INFO, FONT_SHORT, sStorage->displayMonGenderLvlText, 10, 42, TEXT_SKIP_DRAW, NULL);
     }
 

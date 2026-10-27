@@ -2397,7 +2397,7 @@ const struct AbilityInfo gAbilitiesInfo[ABILITIES_COUNT] =
     [ABILITY_TERA_SHELL] =
     {
         .name = _("{JPN}テラスシェル"),
-        .description = COMPOUND_STRING("HPが まんたんの とき ダメージが へる"),
+        .description = COMPOUND_STRING("HPまんたんで わざが いまひとつ"),
         .aiRating = 10,
         .cantBeCopied = TRUE,
         .cantBeSwapped = TRUE,

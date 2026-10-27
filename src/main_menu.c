@@ -480,7 +480,7 @@ static const struct MenuAction sMenuActions_Gender[] = {
 };
 
 static const u8 *const sMalePresetNames[] = {
-    COMPOUND_STRING("{JPN}イツオ"),
+    COMPOUND_STRING("{JPN}ルビー"),
     COMPOUND_STRING("{JPN}ギョク"),
     COMPOUND_STRING("{JPN}ケイ"),
     COMPOUND_STRING("{JPN}シュウサク"),
@@ -503,7 +503,7 @@ static const u8 *const sMalePresetNames[] = {
 };
 
 static const u8 *const sFemalePresetNames[] = {
-    COMPOUND_STRING("{JPN}アイコ"),
+    COMPOUND_STRING("{JPN}サファイア"),
     COMPOUND_STRING("{JPN}アヤナ"),
     COMPOUND_STRING("{JPN}アン"),
     COMPOUND_STRING("{JPN}エミィ"),
@@ -2157,15 +2157,13 @@ static s8 NewGameBirchSpeech_ProcessGenderMenuInput(void)
 void NewGameBirchSpeech_SetDefaultPlayerName(u8 nameId)
 {
     const u8 *name;
-    u8 i;
 
     if (gSaveBlock2Ptr->playerGender == MALE)
         name = sMalePresetNames[nameId];
     else
         name = sFemalePresetNames[nameId];
-    for (i = 0; i < PLAYER_NAME_LENGTH; i++)
-        gSaveBlock2Ptr->playerName[i] = name[i];
-    gSaveBlock2Ptr->playerName[PLAYER_NAME_LENGTH] = EOS;
+    memset(gSaveBlock2Ptr->playerName, EOS, sizeof(gSaveBlock2Ptr->playerName));
+    StringCopy_PlayerName(gSaveBlock2Ptr->playerName, name);
 }
 
 static void CreateMainMenuErrorWindow(const u8 *str)

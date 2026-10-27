@@ -4,7 +4,9 @@
 #include "frontier_util.h"
 #include "item.h"
 #include "line_break.h"
+#include "move.h"
 #include "overworld.h"
+#include "pokemon.h"
 #include "string_util.h"
 #include "strings.h"
 #include "text.h"
@@ -12,7 +14,37 @@
 #include "constants/battle_frontier.h"
 #include "constants/battle_frontier_trainers.h"
 #include "constants/items.h"
+#include "constants/abilities.h"
+#include "constants/moves.h"
 #include "constants/frontier_util.h"
+
+TEST("Frontier text: Japanese and Latin mode switches preserve glyph widths")
+{
+    static const u8 japanese[] = _("{JPN}あ");
+    static const u8 latin[] = _("{ENG}1");
+    static const u8 mixed[] = _("{JPN}あ{ENG}1{JPN}い");
+    static const u8 secondJapanese[] = _("{JPN}い");
+    EXPECT(IsJapaneseTextMode(japanese));
+    EXPECT(!IsJapaneseTextMode(latin));
+    EXPECT(IsJapaneseTextMode(mixed));
+    EXPECT_EQ(GetStringWidth(FONT_NORMAL, mixed, 0),
+              GetStringWidth(FONT_NORMAL, japanese, 0)
+            + GetStringWidth(FONT_NORMAL, latin, 0)
+            + GetStringWidth(FONT_NORMAL, secondJapanese, 0));
+}
+
+TEST("Frontier text: Japanese move and ability descriptions use Japanese mode and fit")
+{
+    enum Move moves[] = {MOVE_SHADOW_FORCE, MOVE_PHANTOM_FORCE, MOVE_SPICY_EXTRACT};
+    for (u32 i = 0; i < ARRAY_COUNT(moves); i++)
+    {
+        const u8 *description = GetMoveDescription(moves[i]);
+        EXPECT(IsJapaneseTextMode(description));
+        EXPECT_LE(GetStringWidth(FONT_NARROWER, description, 0), 144);
+    }
+    EXPECT(IsJapaneseTextMode(gAbilitiesInfo[ABILITY_TERA_SHELL].description));
+    EXPECT_LE(GetStringWidth(FONT_NARROWER, gAbilitiesInfo[ABILITY_TERA_SHELL].description, 0), 144);
+}
 
 TEST("Frontier text: item header retains deliberate Japanese line breaks")
 {

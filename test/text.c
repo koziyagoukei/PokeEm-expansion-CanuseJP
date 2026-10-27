@@ -54,18 +54,7 @@ TEST("Move names fit on Contest Screen")
     {
         PARAMETRIZE_LABEL("%S", GetMoveName(i)) { move = i; }
     }
-    // All moves explicitly listed here are too big to fit.
-    switch (move)
-    {
-    case MOVE_STOMPING_TANTRUM:
-    case MOVE_NATURES_MADNESS:
-    case MOVE_DOUBLE_IRON_BASH:
-        EXPECT_GT(GetStringWidth(fontId, GetMoveName(move), 0), widthPx);
-        break;
-    default:
-        EXPECT_LE(GetStringWidth(fontId, GetMoveName(move), 0), widthPx);
-        break;
-    }
+    EXPECT_LE(GetStringWidth(fontId, GetMoveName(move), 0), widthPx);
 }
 
 TEST("Move names fit on TMs & HMs Bag Screen")
@@ -186,21 +175,10 @@ TEST("Item names fit on Pokemon Storage System")
         if (gItemsInfo[i].importance) continue;
         PARAMETRIZE_LABEL("%S", gItemsInfo[i].name) { item = i; }
     }
-    // All items explicitly listed here are too big to fit.
-    switch (item)
-    {
-    case ITEM_ELECTRIC_TERA_SHARD:
-    case ITEM_FIGHTING_TERA_SHARD:
-    case ITEM_PSYCHIC_TERA_SHARD:
-    case ITEM_UNREMARKABLE_TEACUP:
-    case ITEM_MASTERPIECE_TEACUP:
-    case ITEM_TWICE_SPICED_RADISH:
-        EXPECT_GT(GetStringWidth(fontId, gItemsInfo[item].name, 0), widthPx);
-        break;
-    default:
+    if (GetStringWidth(fontId, gItemsInfo[item].name, 0) > widthPx)
+        EXPECT_LE(GetStringWidth(FONT_NARROWER, gItemsInfo[item].name, 0), 72);
+    else
         EXPECT_LE(GetStringWidth(fontId, gItemsInfo[item].name, 0), widthPx);
-        break;
-    }
 }
 
 TEST("Item names fit on Pokemon Summary Screen")
@@ -213,16 +191,7 @@ TEST("Item names fit on Pokemon Summary Screen")
         if (gItemsInfo[i].importance) continue;
         PARAMETRIZE_LABEL("%S", gItemsInfo[i].name) { item = i; }
     }
-    // All items explicitly listed here are too big to fit.
-    switch (item)
-    {
-    case ITEM_UNREMARKABLE_TEACUP:
-        EXPECT_GT(GetStringWidth(fontId, gItemsInfo[item].name, 0), widthPx);
-        break;
-    default:
-        EXPECT_LE(GetStringWidth(fontId, gItemsInfo[item].name, 0), widthPx);
-        break;
-    }
+    EXPECT_LE(GetStringWidth(fontId, gItemsInfo[item].name, 0), widthPx);
 }
 
 TEST("Item names fit on Shop Screen")
@@ -342,6 +311,7 @@ TEST("Species names fit on Pokemon Storage System")
     }
     EXPECT_LE(GetStringWidth(FONT_NARROWER, gSpeciesInfo[species].speciesName, 0), 66);
     EXPECT_LE(GetStringWidth(FONT_SHORT_NARROWER, gSpeciesInfo[species].speciesName, 0), 60);
+    EXPECT_LE(GetStringWidth(FONT_SMALL, gSpeciesInfo[species].speciesName, 0), 72);
 }
 
 TEST("Species names fit on Contest Screen")
@@ -541,7 +511,7 @@ TEST("Ability names fit on Ability Pop-Up")
 TEST("Ability descriptions fit on Pokemon Summary Screen")
 {
     u32 i;
-    const u32 fontId = FONT_NARROWER, widthPx = 146;
+    const u32 fontId = FONT_NARROWER, widthPx = 144;
     enum Ability ability = ABILITY_NONE;
     for (i = 1; i < ABILITIES_COUNT; i++)
     {

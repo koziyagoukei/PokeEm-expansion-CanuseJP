@@ -87,3 +87,18 @@ TEST("Frontier title: A and Start still fade into the original main menu")
     }
     Cleanup(callback, vblank);
 }
+
+TEST("Frontier title: Select cannot start a quick game")
+{
+    MainCallback callback = gMain.callback2;
+    IntrCallback vblank = gMain.vblankCallback;
+    StartTitle();
+    MainCallback titleCallback = gMain.callback2;
+    gMain.newKeys = SELECT_BUTTON;
+    Frame();
+    gMain.newKeys = 0;
+    EXPECT_EQ(gMain.callback2, titleCallback);
+    for (u32 i = 0; i < 30; i++) Frame();
+    EXPECT_EQ(gMain.callback2, titleCallback);
+    Cleanup(callback, vblank);
+}
