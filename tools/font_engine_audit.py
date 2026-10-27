@@ -30,7 +30,6 @@ FONTS = [
     ("JapaneseNormal", "gFontNormalJapaneseGlyphs", "japanese_normal", "hwjpnfont", 8),
     ("JapaneseShort", "gFontShortJapaneseGlyphs", "japanese_short", "fwjpnfont", 16),
     ("JapaneseBold", "sFontBoldJapaneseGlyphs", "japanese_bold", "hwjpnfont", 8),
-    ("KanjiKoden12", "sKanjiGlyphs", "kanji_koden12", "fwjpnfont", 16),
     ("FRLGMaleJapanese", "gFontFRLGMaleJapaneseGlyphs", "japanese_normal", "hwjpnfont", 8),
     ("FRLGFemaleJapanese", "gFontFRLGFemaleJapaneseGlyphs", "japanese_normal", "hwjpnfont", 8),
 ]

@@ -268,6 +268,15 @@ AUTO_GEN_TARGETS += $(BPEJ_CONTEST_EXTRACTED_OK)
 AUTO_GEN_TARGETS += $(BPEJ_INTRO_EXTRACTED_OK)
 AUTO_GEN_TARGETS += $(BPEJ_POKENAV_EXTRACTED_OK)
 
+# Kanji used by display strings get a code in charmap_kanji.txt and their
+# glyphs are generated before anything is encoded. See docs/kanji.md.
+KANJI_TOOL_DIR := $(TOOLS_DIR)/kanji
+KANJI_GEN_DIR := $(BUILD_GENERATED_DIR)/kanji
+KANJI_STAMP := $(KANJI_GEN_DIR)/kanji.ok
+KANJI_BUILD_CHARMAP := $(KANJI_GEN_DIR)/charmap.txt
+KANJI_SCAN_SRCS := $(shell find src include data test -type f \( -name '*.c' -o -name '*.h' -o -name '*.inc' -o -name '*.s' \) 2>/dev/null)
+AUTO_GEN_TARGETS += $(KANJI_STAMP)
+
 $(DATA_SRC_SUBDIR)/wild_encounters.h: $(DATA_SRC_SUBDIR)/wild_encounters.json $(WILD_ENCOUNTERS_TOOL_DIR)/wild_encounters_to_header.py $(INCLUDE_DIRS)/config/overworld.h $(INCLUDE_DIRS)/config/dexnav.h
 	python3 $(WILD_ENCOUNTERS_TOOL_DIR)/wild_encounters_to_header.py
 
@@ -491,6 +500,18 @@ include json_data_rules.mk
 include audio_rules.mk
 include trainer_rules.mk
 
+# Other generated sources (trainers.h, region map names...) contain text too,
+# so the kanji scan runs after them.
+.PHONY: FORCE_KANJI_SCAN
+FORCE_KANJI_SCAN:
+
+# A rescan also detects deleted sources and repairs missing generated files.
+# The tool preserves glyph/table mtimes when their contents are unchanged.
+$(KANJI_STAMP): FORCE_KANJI_SCAN $(filter-out $(KANJI_STAMP),$(AUTO_GEN_TARGETS)) $(KANJI_SCAN_SRCS) charmap.txt charmap_kanji.txt $(wildcard $(KANJI_TOOL_DIR)/*.py) $(wildcard graphics/fonts/kanji/koden12_atlas.*)
+	python3 $(KANJI_TOOL_DIR)/kanji_gen.py update --stamp $@
+
+$(C_OBJS) $(C_ASM_OBJS) $(DATA_ASM_OBJS) $(MID_OBJS) $(TEST_OBJS): charmap.txt charmap_kanji.txt $(KANJI_BUILD_CHARMAP)
+
 # NOTE: Tools must have been built prior (FIXME)
 # so you can't really call this rule directly
 generated: $(AUTO_GEN_TARGETS)
@@ -595,10 +616,10 @@ $(C_BUILDDIR)/pokemon.o: $(C_SUBDIR)/pokemon.c $(DATA_SRC_SUBDIR)/pokemon/teacha
 $(C_BUILDDIR)/%.o: $(C_SUBDIR)/%.c
 ifneq ($(KEEP_TEMPS),1)
 	@echo "$(CC1) <flags> -o $@ $<"
-	@$(CPP) $(CPPFLAGS) $< | $(PREPROC) -i -g $(ASSETS_DIR_NAME) $< charmap.txt | $(CC1) $(CFLAGS) -o - - | cat - <(echo -e ".text\n\t.align\t2, 0") | $(AS) $(ASFLAGS) -o $@ -
+	@$(CPP) $(CPPFLAGS) $< | $(PREPROC) -i -g $(ASSETS_DIR_NAME) $< $(KANJI_BUILD_CHARMAP) | $(CC1) $(CFLAGS) -o - - | cat - <(echo -e ".text\n\t.align\t2, 0") | $(AS) $(ASFLAGS) -o $@ -
 else
 	@$(CPP) $(CPPFLAGS) $< -o $(C_BUILDDIR)/$*.i
-	@$(PREPROC) -g $(ASSETS_DIR_NAME) $(C_BUILDDIR)/$*.i charmap.txt | $(CC1) $(CFLAGS) -o $(C_BUILDDIR)/$*.s
+	@$(PREPROC) -g $(ASSETS_DIR_NAME) $(C_BUILDDIR)/$*.i $(KANJI_BUILD_CHARMAP) | $(CC1) $(CFLAGS) -o $(C_BUILDDIR)/$*.s
 	@echo -e ".text\n\t.align\t2, 0\n" >> $(C_BUILDDIR)/$*.s
 	$(AS) $(ASFLAGS) -o $@ $(C_BUILDDIR)/$*.s
 endif
@@ -614,7 +635,7 @@ endif
 ifeq ($(TEST),1)
 $(TEST_BUILDDIR)/%.o: $(TEST_SUBDIR)/%.c
 	@echo "$(CC1) <flags> -o $@ $<"
-	@$(CPP) $(CPPFLAGS) $< | $(PREPROC) -i -g $(ASSETS_DIR_NAME) $< charmap.txt | $(CC1) $(CFLAGS) -o - - | cat - <(echo -e ".text\n\t.align\t2, 0") | $(AS) $(ASFLAGS) -o $@ -
+	@$(CPP) $(CPPFLAGS) $< | $(PREPROC) -i -g $(ASSETS_DIR_NAME) $< $(KANJI_BUILD_CHARMAP) | $(CC1) $(CFLAGS) -o - - | cat - <(echo -e ".text\n\t.align\t2, 0") | $(AS) $(ASFLAGS) -o $@ -
 
 $(TEST_BUILDDIR)/%.d: $(TEST_SUBDIR)/%.c
 	$(SCANINC) -M $@ -g $(ASSETS_DIR_NAME) $(INCLUDE_SCANINC_ARGS) -I tools/agbcc/include $<
@@ -628,7 +649,7 @@ $(ASM_BUILDDIR)/%.o: $(ASM_SUBDIR)/%.s
 	$(AS) $(ASFLAGS) -o $@ $<
 
 $(MID_BUILDDIR)/%.o: $(BPEJ_EXTRACTED_SOUND_DIR)/$(MID_SUBDIR)/%.s $(BPEJ_SOUND_EXTRACTED_OK)
-	$(PREPROC) -s $< charmap.txt | $(CPP) $(CPPFLAGS) $(INCLUDE_SCANINC_ARGS) - | $(PREPROC) -ie $< charmap.txt | $(AS) $(ASFLAGS) -o $@
+	$(PREPROC) -s $< $(KANJI_BUILD_CHARMAP) | $(CPP) $(CPPFLAGS) $(INCLUDE_SCANINC_ARGS) - | $(PREPROC) -ie $< $(KANJI_BUILD_CHARMAP) | $(AS) $(ASFLAGS) -o $@
 
 $(ASM_BUILDDIR)/%.d: $(ASM_SUBDIR)/%.s
 	$(SCANINC) -M $@ -g $(ASSETS_DIR_NAME) $(INCLUDE_SCANINC_ARGS) -I "" $<
@@ -638,7 +659,7 @@ ifneq ($(NODEP),1)
 endif
 
 $(C_BUILDDIR)/%.o: $(C_SUBDIR)/%.s
-	$(PREPROC) $< charmap.txt | $(CPP) $(CPPFLAGS) $(INCLUDE_SCANINC_ARGS) - | $(PREPROC) -ie $< charmap.txt | $(AS) $(ASFLAGS) -o $@
+	$(PREPROC) $< $(KANJI_BUILD_CHARMAP) | $(CPP) $(CPPFLAGS) $(INCLUDE_SCANINC_ARGS) - | $(PREPROC) -ie $< $(KANJI_BUILD_CHARMAP) | $(AS) $(ASFLAGS) -o $@
 
 $(C_BUILDDIR)/%.d: $(C_SUBDIR)/%.s
 	$(SCANINC) -M $@ -g $(ASSETS_DIR_NAME) $(INCLUDE_SCANINC_ARGS) -I "" $<
@@ -648,7 +669,7 @@ ifneq ($(NODEP),1)
 endif
 
 $(DATA_ASM_BUILDDIR)/%.o: $(DATA_ASM_SUBDIR)/%.s
-	$(PREPROC) -s $< charmap.txt | $(CPP) $(CPPFLAGS) $(INCLUDE_SCANINC_ARGS) - | $(PREPROC) -ie $< charmap.txt | $(AS) $(ASFLAGS) -o $@
+	$(PREPROC) -s $< $(KANJI_BUILD_CHARMAP) | $(CPP) $(CPPFLAGS) $(INCLUDE_SCANINC_ARGS) - | $(PREPROC) -ie $< $(KANJI_BUILD_CHARMAP) | $(AS) $(ASFLAGS) -o $@
 
 $(DATA_ASM_BUILDDIR)/%.d: $(DATA_ASM_SUBDIR)/%.s
 	$(SCANINC) -M $@ -g $(ASSETS_DIR_NAME) $(INCLUDE_SCANINC_ARGS) -I "" $<
