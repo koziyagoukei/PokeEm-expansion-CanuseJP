@@ -62,10 +62,10 @@ static const struct StoryTargetText sStoryTargetTexts[STORY_TARGET_COUNT] =
     [STORY_TARGET_TOSHIO] =
     {
         .name = COMPOUND_STRING("トシオ"),
-        .meet = COMPOUND_STRING("{JPN}トシオ『やあ！ ぼく トシオ。\nかいじゅうみたいな ポケモンが\lだいすきなんだ！\pぼくの あいぼうは ボスゴドラ。\nココドラの ころから いっしょなんだ。\pファクトリーでは ポケモンを\nかりて たたかうんだよ。\pこの まえ かりた トリデプスと\nいっしょに なんども かったんだ！\pみんなで かりて みんなで たたかう。\nだれと くんでも みんな なかまさ！』"),
-        .happy = COMPOUND_STRING("{JPN}トシオ『トリデプスの かたい あたま\nかっこいいんだ！\pみんなも そう おもってる。\nだから ぼくも うれしいんだよ。』"),
-        .wish = COMPOUND_STRING("{JPN}トシオ『きみの シンボルの しょうぶ\nみてたよ！\p……あのね。 みんなが いうんだ。\nもっと つよそうな ポケモンに\lこうかん したほうが いいって。\pみんなが そう いうなら\nそれが いちばんの はず なんだけど……\pなんでだろう。\nトリデプスを かえしたく ないんだ。\pつよいから じゃないんだ。\nいっしょに たたかった あの こだから\l……なのかな。』"),
-        .wishAgain = COMPOUND_STRING("{JPN}トシオ『こうかん したほうが いいって\nみんなは いうんだけど……\pぼく まだ トリデプスと\nいっしょに いたいんだ。』"),
+        .meet = COMPOUND_STRING("{JPN}トシオ『やあ！ ぼく トシオ。\nかいじゅうみたいな ポケモンが\lだいすきなんだ！\pぼくの あいぼうは ボスゴドラ。\nココドラの ころから いっしょなんだ。\pファクトリーでは ポケモンを\nかりて たたかうんだよ。\pこの まえ かりた トリデプス\nゲンさんって いうんだけど\lいっしょに なんども かったんだ！\pみんなで かりて みんなで たたかう。\nだれと くんでも みんな なかまさ！』"),
+        .happy = COMPOUND_STRING("{JPN}トシオ『ゲンさんの かたい あたま\nかっこいいんだ！\pみんなも そう おもってる。\nだから ぼくも うれしいんだよ。』"),
+        .wish = COMPOUND_STRING("{JPN}トシオ『きみの シンボルの しょうぶ\nみてたよ！\p……あのね。 みんなが いうんだ。\nもっと つよそうな ポケモンに\lこうかん したほうが いいって。\pみんなが そう いうなら\nそれが いちばんの はず なんだけど……\pなんでだろう。\nゲンさんを かえしたく ないんだ。\pつよいから じゃないんだ。\nいっしょに たたかった あの こだから\l……なのかな。』"),
+        .wishAgain = COMPOUND_STRING("{JPN}トシオ『こうかん したほうが いいって\nみんなは いうんだけど……\pぼく まだ ゲンさんと\nいっしょに いたいんだ。』"),
         .othersGone = COMPOUND_STRING("{JPN}トシオ『そういえば {STR_VAR_2}の こえ\nさいきん きこえないなあ。\pでも へいき！\nみんなが いるからね！』"),
         .wishGone = COMPOUND_STRING("{JPN}トシオ『{STR_VAR_2}も こんな きもちで\nみんなから はなれたのかなあ。』"),
         .wishShared = COMPOUND_STRING("{JPN}トシオ『みんなの なかにも\nぼくみたいに まよってる ひとが\lいるみたい。』"),
@@ -135,6 +135,20 @@ static const u8 *const sStoryTargetRescueTexts[STORY_TARGET_COUNT][RESCUE_TEXT_C
         [RESCUE_TEXT_AFTER_CURE] = COMPOUND_STRING("{JPN}イクエの モンスターボールから\nエネコロロが とびだした！\pエネコロロは イクエの まえに\nすわりこむと ボールから\lふいっと かおを そむけた。\pイクエ『……エネコロロ？\pもしかして…… もう\nたたかいたく ないの？』\pエネコロロは イクエの てに\nあたまを すりよせた。\pイクエ『……そう。\nそれが あなたの きもち なのね。\pわかったわ。 わたし\nあなたが えらんだ ことを\lだいじに したい。』"),
         [RESCUE_TEXT_ASKS_POKENAV] = COMPOUND_STRING("{JPN}イクエ『ねえ ポケナビ もってる？\nれんらくさき こうかん しましょう。』"),
         [RESCUE_TEXT_GOES_TO_INN] = COMPOUND_STRING("{JPN}イクエ『わたし りょかんで\nエネコロロと ゆっくり するわ。\pこの こが なにを して\nあそびたいか みつけたいの。』"),
+    },
+    [STORY_TARGET_TOSHIO] =
+    {
+        [RESCUE_TEXT_FEVER_STARTING] = COMPOUND_STRING("{JPN}トシオ『……あれ？\nなんだか あたまが ぐるぐる する……\pきんいろの シンボル……\nゲンさん……』"),
+        [RESCUE_TEXT_FEVER] = COMPOUND_STRING("{JPN}トシオ『……ゲンさん……\nかえさなきゃ…… こうかん しなきゃ……\pみんなが そう いうなら\nそれが いちばん…… なのに……\pでも ぼくは…… ぼくが……\nいっしょに いたいのは……\pちがう。 ぼくたちは。\nぼく は。 ぼく……\pあつい。 あたまが あつい。\pどうして。 どうして はなれるの？\nどうして いつか わかれる こを\lだいじに するの？』"),
+        [RESCUE_TEXT_VOICES_FADE] = COMPOUND_STRING("{JPN}トシオ『……みんなの こえが\nとおく なっていく……\pみんなで かりて みんなで たたかう。\nだれと くんでも\lみんな なかま だったのに……』"),
+        [RESCUE_TEXT_CHOOSES] = COMPOUND_STRING("{JPN}トシオ『でも…… いまの しょうぶ\nゲンさんと いっしょに たたかえて\lうれしかった。\pつよいから じゃない。\nいっしょに たたかってきた\lゲンさん だから。\pいつかは ファクトリーに\nかえす ひが くる。\pそれでも いっしょに すごした\nじかんは なくならないよね。\p……ごめんね みんな。\nぼく いくよ。』"),
+        [RESCUE_TEXT_DELIRIOUS] = COMPOUND_STRING("{JPN}トシオ『……ゲンさん…… みんなの……\nこうかん…… しなきゃ……』"),
+        [RESCUE_TEXT_EATS] = COMPOUND_STRING("{JPN}てんしゅは トシオの くちに\nめしを どんどん はこんだ！\pトシオ『もがっ…… もぐ……』"),
+        [RESCUE_TEXT_WAKES_UP] = COMPOUND_STRING("{JPN}トシオ『……あれ？\nここ どこ？\pあたまが すっきりしてる……\nみんなの こえが…… きこえない。』"),
+        [RESCUE_TEXT_REMEMBERS] = COMPOUND_STRING("{JPN}トシオ『……ぜんぶ おぼえてるよ。\pみんなが すすめる ポケモンに\nかえれば いいんだって\lずっと おもってた。\pでも ぼく ゲンさんと たたかうのが\nいちばん たのしかったんだ。\p……たすけて くれて ありがとう！』"),
+        [RESCUE_TEXT_AFTER_CURE] = COMPOUND_STRING("{JPN}トシオ『そうだ…… ゲンさんを\nファクトリーに かえさなくちゃ。\pかりた こ だもんね。\nほんとうは もっと いっしょに\lいたいけど……\pさいごに ありがとうって\nいって くるよ。』"),
+        [RESCUE_TEXT_ASKS_POKENAV] = COMPOUND_STRING("{JPN}トシオ『ねえ ポケナビ もってる？\nれんらくさき こうかん しようよ！』"),
+        [RESCUE_TEXT_GOES_TO_INN] = COMPOUND_STRING("{JPN}トシオ『ゲンさんを かえしたら\nりょかんに いくね。\pボスゴドラに きょうの しょうぶの\nはなしを してあげるんだ！』"),
     },
     [STORY_TARGET_EISUKE] =
     {

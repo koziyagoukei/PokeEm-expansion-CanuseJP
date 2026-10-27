@@ -17152,3 +17152,43 @@ EVs: 4 HP / 252 Atk / 252 Spe
 - Dragon Claw
 - Earthquake
 - Roost
+
+=== TRAINER_TOSHIO_RELEASE ===
+Name: トシオ
+Class: Pokemaniac
+Pic: Pokemaniac
+Gender: Male
+Music: Suspicious
+Double Battle: No
+AI: Basic Trainer
+Multi Party: Half
+
+Aggron @ Leftovers
+Ability: Rock Head
+Level: 50
+Nature: Adamant
+EVs: 252 HP / 252 Atk / 4 Def
+- Heavy Slam
+- Head Smash
+- Earthquake
+- Dragon Tail
+
+ゲンさん (Bastiodon) @ Leftovers
+Ability: Sturdy
+Level: 50
+Nature: Relaxed
+EVs: 252 HP / 252 Def / 4 SpD
+- Iron Defense
+- Body Press
+- Rest
+- Metal Burst
+
+Rhyperior @ Weakness Policy
+Ability: Solid Rock
+Level: 50
+Nature: Adamant
+EVs: 252 HP / 252 Atk / 4 SpD
+- Rock Wrecker
+- High Horsepower
+- Megahorn
+- Protect

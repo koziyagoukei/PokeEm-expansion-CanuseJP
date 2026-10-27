@@ -771,6 +771,7 @@ FrontierStory_EventScript_TargetFever::
 	switch VAR_RESULT
 	case STORY_TARGET_REIKA, DomeStory_EventScript_ReleaseBattle
 	case STORY_TARGET_IKUE, PalaceStory_EventScript_ReleaseBattle
+	case STORY_TARGET_TOSHIO, FactoryStory_EventScript_ReleaseBattle
 	case STORY_TARGET_EISUKE, ArenaStory_EventScript_ReleaseBattle
 	case STORY_TARGET_YORIKO, ContestStory_EventScript_ReleaseBattle
 	special LoadPlayerParty
@@ -822,6 +823,11 @@ DomeStory_EventScript_ReleaseBattle::
 
 PalaceStory_EventScript_ReleaseBattle::
 	setmultitrainerbattle TRAINER_IKUE_RELEASE, PalaceStory_Text_IkueReleaseDefeat, TRAINER_POKEVIRUS, FrontierStory_Text_PokevirusDefeat, PARTNER_ROCKET_COOK
+	call FrontierStory_EventScript_StartReleaseBattle
+	goto FrontierStory_EventScript_TargetBattleDone
+
+FactoryStory_EventScript_ReleaseBattle::
+	setmultitrainerbattle TRAINER_TOSHIO_RELEASE, FactoryStory_Text_ToshioReleaseDefeat, TRAINER_POKEVIRUS, FrontierStory_Text_PokevirusDefeat, PARTNER_ROCKET_COOK
 	call FrontierStory_EventScript_StartReleaseBattle
 	goto FrontierStory_EventScript_TargetBattleDone
 
@@ -938,14 +944,16 @@ FrontierStory_EventScript_VisitorNotYet::
 	end
 
 @ ---------------------------------------------------------------------------
-@ The inn: everyone cured rests here. Kazuki in the lobby, Ikue and Delcatty in the east wing,
-@ Yoriko and Seviper in the west wing, Eisuke and Starmie on the beach outside and Reika walking
-@ Linoone there, and in each part of the building a few of the cured Brains and guests, picked on
-@ every visit.
+@ The inn: everyone cured rests here. Kazuki, and Toshio with his Aggron, in the lobby; Ikue and
+@ Delcatty in the east wing; Yoriko and Seviper in the west wing; Eisuke and Starmie on the beach
+@ outside and Reika walking Linoone there; and in each part of the building a few of the cured
+@ Brains and guests, picked on every visit.
 
 InnStory_EventScript_SetupLobby::
 	setflag FLAG_TEMP_11
+	setflag FLAG_TEMP_12
 	call_if_set FLAG_STORY_RESCUED_TOWER, InnStory_EventScript_ShowKazuki
+	call_if_set FLAG_STORY_RESCUED_FACTORY, InnStory_EventScript_ShowToshio
 	setvar VAR_0x8004, INN_AREA_LOBBY
 	special FrontierStory_PickInnGuests
 	return
@@ -953,6 +961,37 @@ InnStory_EventScript_SetupLobby::
 InnStory_EventScript_ShowKazuki::
 	clearflag FLAG_TEMP_11
 	return
+
+InnStory_EventScript_ShowToshio::
+	clearflag FLAG_TEMP_12
+	return
+
+@ He has returned Gen-san, the Bastiodon he rented, and tells his own Aggron about their battles.
+InnStory_EventScript_Toshio::
+	lock
+	faceplayer
+	msgbox FactoryStory_Text_InnToshio, MSGBOX_DEFAULT
+	closemessage
+	applymovement LOCALID_INN_TOSHIO, Common_Movement_FaceRight
+	waitmovement 0
+	msgbox FactoryStory_Text_InnToshioTellsAggron, MSGBOX_DEFAULT
+	closemessage
+	playmoncry SPECIES_AGGRON, CRY_MODE_NORMAL
+	applymovement LOCALID_INN_AGGRON, InnStory_Movement_Nod
+	waitmovement 0
+	waitmoncry
+	msgbox FactoryStory_Text_InnAggronNods, MSGBOX_DEFAULT
+	release
+	end
+
+InnStory_EventScript_Aggron::
+	lock
+	faceplayer
+	playmoncry SPECIES_AGGRON, CRY_MODE_NORMAL
+	msgbox FactoryStory_Text_InnAggron, MSGBOX_DEFAULT
+	waitmoncry
+	release
+	end
 
 InnStory_EventScript_SetupEastWing::
 	setflag FLAG_TEMP_11
@@ -1177,6 +1216,10 @@ TowerStory_Movement_Tremble:
 	walk_in_place_faster_left
 	walk_in_place_faster_right
 	delay_16
+	step_end
+
+InnStory_Movement_Nod:
+	jump_in_place_left
 	step_end
 
 InnStory_Movement_ChaseTail:
@@ -1901,6 +1944,10 @@ PalaceStory_Text_IkueReleaseDefeat:
 	.string "{JPN}……わたし…… まけたのね……\n"
 	.string "わたしと エネコロロが……$"
 
+FactoryStory_Text_ToshioReleaseDefeat:
+	.string "{JPN}……ぼく…… まけちゃった……\n"
+	.string "ぼくと ゲンさんが……$"
+
 ArenaStory_Text_EisukeReleaseDefeat:
 	.string "{JPN}……おれ…… まけた……\n"
 	.string "おれが まけたんだ……$"
@@ -2045,3 +2092,33 @@ PalaceStory_Text_InnIkueJoins:
 PalaceStory_Text_InnDelcatty:
 	.string "{JPN}エネコロロは ごろごろと\n"
 	.string "のどを ならしている。$"
+
+@ ---------------------------------------------------------------------------
+@ Text: Toshio at the inn
+
+FactoryStory_Text_InnToshio:
+	.string "{JPN}トシオ『あ {PLAYER}！\p"
+	.string "ゲンさん ちゃんと\n"
+	.string "ファクトリーに かえしてきたよ。\p"
+	.string "さいごに あたまを なでたら\n"
+	.string "かたい あたまで ごつんって\l"
+	.string "してくれたんだ。 えへへ。\p"
+	.string "もう いっしょには いないけど\n"
+	.string "いっしょに かった ことは\l"
+	.string "ぜんぶ おぼえてる。』$"
+
+FactoryStory_Text_InnToshioTellsAggron:
+	.string "{JPN}トシオ『それでね ボスゴドラ。\n"
+	.string "きょうの しょうぶ すごかったんだ！\p"
+	.string "ゲンさんが あいての わざを\n"
+	.string "ぜんぶ うけとめて……\p"
+	.string "こんどは きみと\n"
+	.string "あんな しょうぶを しような！』$"
+
+FactoryStory_Text_InnAggronNods:
+	.string "{JPN}ボスゴドラは\n"
+	.string "おおきく うなずいた！$"
+
+FactoryStory_Text_InnAggron:
+	.string "{JPN}ボスゴドラは トシオの はなしを\n"
+	.string "じっと きいている。$"

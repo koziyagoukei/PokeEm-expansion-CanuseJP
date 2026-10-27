@@ -5,6 +5,9 @@ BattleFrontier_BattleFactoryLobby_MapScripts::
 	.byte 0
 
 BattleFrontier_BattleFactoryLobby_OnTransition:
+	@ The cook and Pokevirus only appear for Toshio's release battle.
+	setflag FLAG_TEMP_1D
+	setflag FLAG_TEMP_1E
 	setvar VAR_0x8004, STORY_TARGET_TOSHIO
 	call FrontierStory_EventScript_SetupTarget
 	end
