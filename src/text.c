@@ -152,6 +152,8 @@ static bool32 ResolveTextMode(const u8 *str, bool32 automatic)
             switch (str[1])
             {
             case EXT_CTRL_CODE_JPN:
+            case EXT_CTRL_CODE_KANJI:
+            case EXT_CTRL_CODE_KANJI_GLYPH:
                 return TRUE;
             case EXT_CTRL_CODE_ENG:
                 return FALSE;
@@ -221,6 +223,8 @@ bool32 StringContainsJapaneseGlyph(const u8 *str)
             switch (*++str)
             {
             case EXT_CTRL_CODE_JPN:
+            case EXT_CTRL_CODE_KANJI:
+            case EXT_CTRL_CODE_KANJI_GLYPH:
                 return TRUE;
             case EXT_CTRL_CODE_COLOR_HIGHLIGHT_SHADOW:
             case EXT_CTRL_CODE_TEXT_COLORS:
@@ -310,6 +314,38 @@ struct
 static const u8 sKeypadIconTiles[] = INCGFX_U8("graphics/fonts/keypad_icons.png", ".4bpp");
 
 static u8 sCurGlyphAdvance;
+
+#define KANJI_GLYPH_COUNT 25
+#define KANJI_NORMAL_WIDTH 12
+#define KANJI_SMALL_WIDTH 12
+
+static const u16 sKanjiGlyphs[] = INCGFX_U16("graphics/fonts/kanji_koden12.png", ".fwjpnfont");
+
+static bool32 IsSmallKanjiFont(u8 fontId)
+{
+    return fontId == FONT_SMALL || fontId == FONT_SMALL_NARROW
+        || fontId == FONT_SMALL_NARROWER || fontId == FONT_SHORT
+        || fontId == FONT_SHORT_COPY_1 || fontId == FONT_SHORT_COPY_2
+        || fontId == FONT_SHORT_COPY_3 || fontId == FONT_SHORT_NARROW
+        || fontId == FONT_SHORT_NARROWER;
+}
+
+static void DecompressKanjiGlyph(u8 glyphId, u8 fontId)
+{
+    const u16 *glyphs;
+    bool32 small = IsSmallKanjiFont(fontId);
+
+    if (glyphId > KANJI_GLYPH_COUNT)
+        glyphId = 0;
+    glyphs = sKanjiGlyphs + 0x100 * (glyphId >> 3) + 0x10 * (glyphId & 7);
+    DecompressGlyphTile(glyphs, gCurGlyph.gfxBufferTop);
+    DecompressGlyphTile(glyphs + 8, gCurGlyph.gfxBufferTop + 8);
+    DecompressGlyphTile(glyphs + 0x80, gCurGlyph.gfxBufferBottom);
+    DecompressGlyphTile(glyphs + 0x88, gCurGlyph.gfxBufferBottom + 8);
+    gCurGlyph.width = small ? KANJI_SMALL_WIDTH : KANJI_NORMAL_WIDTH;
+    gCurGlyph.height = small ? 12 : 15;
+    sCurGlyphAdvance = gCurGlyph.width;
+}
 
 #define CHAR_JP_VU 0xF1
 
@@ -1757,8 +1793,13 @@ static u16 RenderText(struct TextPrinter *textPrinter)
                 textPrinter->minLetterSpacing = *textPrinter->printerTemplate.currentChar++;
                 return RENDER_REPEAT;
             case EXT_CTRL_CODE_JPN:
+            case EXT_CTRL_CODE_KANJI:
                 textPrinter->japanese = TRUE;
                 return RENDER_REPEAT;
+            case EXT_CTRL_CODE_KANJI_GLYPH:
+                DecompressKanjiGlyph(*textPrinter->printerTemplate.currentChar++, textPrinter->fontId);
+                PrintGlyph(textPrinter);
+                return RENDER_PRINT;
             case EXT_CTRL_CODE_ENG:
                 textPrinter->japanese = FALSE;
                 return RENDER_REPEAT;
@@ -1995,6 +2036,7 @@ static u32 UNUSED GetStringWidthFixedWidthFont(const u8 *str, u8 fontId, u8 lett
             case EXT_CTRL_CODE_CLEAR_TO:
             case EXT_CTRL_CODE_MIN_LETTER_SPACING:
             case EXT_CTRL_CODE_SPEAKER:
+            case EXT_CTRL_CODE_KANJI_GLYPH:
                 ++strPos;
                 break;
             case EXT_CTRL_CODE_RESET_FONT:
@@ -2061,6 +2103,7 @@ s32 GetGlyphWidth(u16 glyphId, bool32 isJapanese, u8 fontId)
 s32 GetStringWidth(u8 fontId, const u8 *str, s16 letterSpacing)
 {
     bool32 isJapanese = IsJapaneseTextMode(str);
+    u8 currentFontId = fontId;
     int minGlyphWidth = 0;
     u32 (*func)(u16 fontId, bool32 isJapanese);
     int localLetterSpacing;
@@ -2128,10 +2171,16 @@ s32 GetStringWidth(u8 fontId, const u8 *str, s16 letterSpacing)
                     glyphWidth = func(args[0] | 0x100, FALSE);
                     break;
                 }
+                if (code == EXT_CTRL_CODE_KANJI_GLYPH)
+                {
+                    glyphWidth = IsSmallKanjiFont(currentFontId) ? KANJI_SMALL_WIDTH : KANJI_NORMAL_WIDTH;
+                    break;
+                }
 
                 switch (code)
                 {
                 case EXT_CTRL_CODE_FONT:
+                    currentFontId = args[0];
                     func = GetFontWidthFunc(args[0]);
                     if (func == NULL)
                         return 0;
@@ -2155,6 +2204,7 @@ s32 GetStringWidth(u8 fontId, const u8 *str, s16 letterSpacing)
                     minGlyphWidth = args[0];
                     break;
                 case EXT_CTRL_CODE_JPN:
+                case EXT_CTRL_CODE_KANJI:
                     isJapanese = TRUE;
                     break;
                 case EXT_CTRL_CODE_ENG:
@@ -2290,6 +2340,7 @@ u8 RenderTextHandleBold(u8 *pixels, u8 fontId, u8 *str)
             case EXT_CTRL_CODE_CLEAR_TO:
             case EXT_CTRL_CODE_MIN_LETTER_SPACING:
             case EXT_CTRL_CODE_SPEAKER:
+            case EXT_CTRL_CODE_KANJI_GLYPH:
                 ++strPos;
                 break;
             case EXT_CTRL_CODE_RESET_FONT:

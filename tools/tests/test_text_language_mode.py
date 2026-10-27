@@ -33,6 +33,8 @@ def engine_code():
     result.extend(arrays)
     glyphs = sorted(set(re.findall(r"\bgFont\w+Glyphs\b", text)))
     result.extend(f"static const u16 {name}[32768] = {{0}};" for name in glyphs)
+    result.append("#define KANJI_GLYPH_COUNT 25\n#define KANJI_NORMAL_WIDTH 12\n#define KANJI_SMALL_WIDTH 12\n"
+                  "static const u16 sKanjiGlyphs[1024] = {0};")
     result.append("void DecompressGlyphTile(const void *src, void *dest) {\n"
                   "    uintptr_t address = (uintptr_t)src;\n"
                   "    sLoadedJapanese = FALSE;\n")
@@ -47,15 +49,16 @@ def engine_code():
     result.append("const struct FontInfo *gFonts = sFontInfos;")
     result.append(re.search(r"^struct\n\{\n    u16 tileOffset;.*?^\};",
                             text, re.M | re.S)[0])
-    for name in ("GetExtCtrlCodeLength", "StringCopy", "StringLength",
-                 "StripExtCtrlCodes", "StringExpandPlaceholders", "ConvertInternationalString"):
+    for name in ("GetExtCtrlCodeLength", "StringCopy", "StringLength", "StringCopyN",
+                 "StringCopyN_Multibyte", "StringLength_Multibyte", "SkipExtCtrlCode",
+                 "StringCompareWithoutExtCtrlCodes", "StripExtCtrlCodes", "StringExpandPlaceholders", "ConvertInternationalString"):
         result.append(function(strings, name))
     result.append(function(international, "ConvertInternationalContestantName"))
     for name in ("DynamicPlaceholderTextUtil_Reset", "DynamicPlaceholderTextUtil_SetPlaceholderPtr",
                  "DynamicPlaceholderTextUtil_GetPlaceholderPtr", "DynamicPlaceholderTextUtil_ExpandPlaceholders"):
         result.append(function(dynamic, name))
     for name in ("IsJapaneseGlyph", "ShouldUseJapaneseGlyph", "ResolveTextMode", "IsJapaneseTextMode",
-                 "TextAutoModeFromNextChar", "GetJapaneseGlyphWidth", "DecompressJapaneseSpaceGlyph"):
+                 "TextAutoModeFromNextChar", "IsSmallKanjiFont", "DecompressKanjiGlyph", "GetJapaneseGlyphWidth", "DecompressJapaneseSpaceGlyph"):
         result.append(function(text, name))
     suffixes = ("Small", "Normal", "Short", "Narrow", "SmallNarrow", "Narrower",
                 "SmallNarrower", "ShortNarrow", "ShortNarrower")
@@ -107,6 +110,12 @@ class TextLanguageModeTests(unittest.TestCase):
 
     def test_inline_switches_auto_and_spacing(self):
         self.run_case("switches")
+
+    def test_kanji_render_and_width(self):
+        self.run_case("kanji")
+
+    def test_kanji_text_utilities(self):
+        self.run_case("kanji_utilities")
 
     def test_control_payloads_are_not_language_markers(self):
         self.run_case("controls")

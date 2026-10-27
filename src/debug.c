@@ -372,6 +372,7 @@ extern const u8 Debug_FlagsNotSetBattleConfigMessage[];
 extern const u8 Debug_VarsNotSetBattleConfigMessage[];
 extern const u8 Debug_FlagsAndVarNotSetBattleConfigMessage[];
 extern const u8 Debug_EventScript_FontTest[];
+extern const u8 Debug_EventScript_KanjiFontTest[];
 extern const u8 Debug_EventScript_CheckEVs[];
 extern const u8 Debug_EventScript_CheckIVs[];
 extern const u8 Debug_EventScript_GivePokerus[];
@@ -598,6 +599,7 @@ static const struct DebugMenuOption sDebugMenu_Actions_Utilities[] =
     { COMPOUND_STRING("{JPN}マップワープへ とぶ{ENG}..."), DebugAction_Selection_Init, &sWarpSelection },
     { COMPOUND_STRING("{JPN}てんきを かえる{ENG}..."),      DebugAction_Selection_Init, &sSetWeatherSelection },
     { COMPOUND_STRING("{JPN}フォントテスト{ENG}..."),        DebugAction_ExecuteScript, Debug_EventScript_FontTest },
+    { COMPOUND_STRING("{JPN}かんじフォントテスト"), DebugAction_ExecuteScript, Debug_EventScript_KanjiFontTest },
     { COMPOUND_STRING("{JPN}じかんきのう{ENG}..."),   DebugAction_OpenSubMenu, sDebugMenu_Actions_TimeMenu, },
     { COMPOUND_STRING("{JPN}スタッフロールを みる{ENG}..."),    DebugAction_Util_WatchCredits },
     { COMPOUND_STRING("{JPN}チートスタート"),       DebugAction_Util_CheatStart },
