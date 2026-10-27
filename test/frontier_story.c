@@ -612,13 +612,11 @@ TEST("Frontier story: Eisuke's fever comes at the Gold Symbol, alone until Darkr
     EXPECT(TargetComesOver(STORY_TARGET_EISUKE));
     EXPECT(!TargetComesOver(STORY_TARGET_EISUKE));
 
-    // Someone whose release battle is not written yet stays at their wish.
-    FlagSet(gFrontierBrainInfo[FRONTIER_FACILITY_PALACE].silverSymbolFlag);
-    FlagSet(gFrontierBrainInfo[FRONTIER_FACILITY_PALACE].goldSymbolFlag);
-    while (TalkToTarget(STORY_TARGET_IKUE))
-        ;
-    EXPECT_EQ(TargetFever(STORY_TARGET_IKUE), TARGET_FEVER_NONE);
-    EXPECT(!TargetComesOver(STORY_TARGET_IKUE));
+    // Kazuki's fever is scripted on its own.
+    FlagSet(FLAG_SYS_TOWER_GOLD);
+    VarSet(VAR_TOWER_STORY_STATE, TOWER_STORY_WISH);
+    EXPECT_EQ(TargetFever(STORY_TARGET_KAZUKI), TARGET_FEVER_NONE);
+    EXPECT(!TargetComesOver(STORY_TARGET_KAZUKI));
 }
 
 TEST("Frontier story: met with the Gold Symbol already won, the talk goes on to the fever")

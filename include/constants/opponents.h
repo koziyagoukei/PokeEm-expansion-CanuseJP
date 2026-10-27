@@ -864,12 +864,13 @@
 #define TRAINER_YORIKO_RELEASE              858
 #define TRAINER_EISUKE_RELEASE              859
 #define TRAINER_REIKA_RELEASE               860
+#define TRAINER_IKUE_RELEASE                861
 
-// NOTE: Because each Trainer uses a flag to determine when they are defeated, there is only space for 3 additional trainers before trainer flag space overflows
+// NOTE: Because each Trainer uses a flag to determine when they are defeated, there is only space for 2 additional trainers before trainer flag space overflows
 //       More space can be made by shifting flags around in constants/flags.h or changing how trainer flags are handled
 //       MAX_TRAINERS_COUNT can be increased but will take up additional saveblock space
 
-#define TRAINERS_COUNT_EMERALD     861
+#define TRAINERS_COUNT_EMERALD     862
 #define MAX_TRAINERS_COUNT_EMERALD 864
 
 #if IS_FRLG

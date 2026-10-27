@@ -770,6 +770,7 @@ FrontierStory_EventScript_TargetFever::
 	special FrontierStory_GetRescueScene
 	switch VAR_RESULT
 	case STORY_TARGET_REIKA, DomeStory_EventScript_ReleaseBattle
+	case STORY_TARGET_IKUE, PalaceStory_EventScript_ReleaseBattle
 	case STORY_TARGET_EISUKE, ArenaStory_EventScript_ReleaseBattle
 	case STORY_TARGET_YORIKO, ContestStory_EventScript_ReleaseBattle
 	special LoadPlayerParty
@@ -816,6 +817,11 @@ FrontierStory_EventScript_TargetReleased::
 
 DomeStory_EventScript_ReleaseBattle::
 	setmultitrainerbattle TRAINER_REIKA_RELEASE, DomeStory_Text_ReikaReleaseDefeat, TRAINER_POKEVIRUS, FrontierStory_Text_PokevirusDefeat, PARTNER_ROCKET_COOK
+	call FrontierStory_EventScript_StartReleaseBattle
+	goto FrontierStory_EventScript_TargetBattleDone
+
+PalaceStory_EventScript_ReleaseBattle::
+	setmultitrainerbattle TRAINER_IKUE_RELEASE, PalaceStory_Text_IkueReleaseDefeat, TRAINER_POKEVIRUS, FrontierStory_Text_PokevirusDefeat, PARTNER_ROCKET_COOK
 	call FrontierStory_EventScript_StartReleaseBattle
 	goto FrontierStory_EventScript_TargetBattleDone
 
@@ -932,9 +938,10 @@ FrontierStory_EventScript_VisitorNotYet::
 	end
 
 @ ---------------------------------------------------------------------------
-@ The inn: everyone cured rests here. Kazuki in the lobby, Yoriko and Seviper in the west wing,
-@ Eisuke and Starmie on the beach outside and Reika walking Linoone there, and in each part of the
-@ building a few of the cured Brains and guests, picked on every visit.
+@ The inn: everyone cured rests here. Kazuki in the lobby, Ikue and Delcatty in the east wing,
+@ Yoriko and Seviper in the west wing, Eisuke and Starmie on the beach outside and Reika walking
+@ Linoone there, and in each part of the building a few of the cured Brains and guests, picked on
+@ every visit.
 
 InnStory_EventScript_SetupLobby::
 	setflag FLAG_TEMP_11
@@ -948,9 +955,41 @@ InnStory_EventScript_ShowKazuki::
 	return
 
 InnStory_EventScript_SetupEastWing::
+	setflag FLAG_TEMP_11
+	call_if_set FLAG_STORY_RESCUED_PALACE, InnStory_EventScript_ShowIkue
 	setvar VAR_0x8004, INN_AREA_EAST_WING
 	special FrontierStory_PickInnGuests
 	return
+
+InnStory_EventScript_ShowIkue::
+	clearflag FLAG_TEMP_11
+	return
+
+@ Delcatty picks the game today: chasing its own tail. Ikue doesn't choose for it; she joins in.
+InnStory_EventScript_Ikue::
+	lock
+	faceplayer
+	msgbox PalaceStory_Text_InnIkue, MSGBOX_DEFAULT
+	closemessage
+	applymovement LOCALID_INN_DELCATTY, InnStory_Movement_ChaseTail
+	waitmovement 0
+	playmoncry SPECIES_DELCATTY, CRY_MODE_NORMAL
+	applymovement LOCALID_INN_IKUE, InnStory_Movement_ChaseTail
+	waitmovement 0
+	waitmoncry
+	faceplayer
+	msgbox PalaceStory_Text_InnIkueJoins, MSGBOX_DEFAULT
+	release
+	end
+
+InnStory_EventScript_Delcatty::
+	lock
+	faceplayer
+	playmoncry SPECIES_DELCATTY, CRY_MODE_NORMAL
+	msgbox PalaceStory_Text_InnDelcatty, MSGBOX_DEFAULT
+	waitmoncry
+	release
+	end
 
 InnStory_EventScript_SetupWestWing::
 	setflag FLAG_TEMP_12
@@ -1138,6 +1177,26 @@ TowerStory_Movement_Tremble:
 	walk_in_place_faster_left
 	walk_in_place_faster_right
 	delay_16
+	step_end
+
+InnStory_Movement_ChaseTail:
+	face_left
+	delay_4
+	face_up
+	delay_4
+	face_right
+	delay_4
+	face_down
+	delay_4
+	face_left
+	delay_4
+	face_up
+	delay_4
+	face_right
+	delay_4
+	face_down
+	delay_8
+	jump_in_place_down
 	step_end
 
 InnStory_Movement_LinooneWanders:
@@ -1838,6 +1897,10 @@ DomeStory_Text_ReikaReleaseDefeat:
 	.string "{JPN}……わたくし…… まけましたの……\n"
 	.string "わたくしの しょうぶで……$"
 
+PalaceStory_Text_IkueReleaseDefeat:
+	.string "{JPN}……わたし…… まけたのね……\n"
+	.string "わたしと エネコロロが……$"
+
 ArenaStory_Text_EisukeReleaseDefeat:
 	.string "{JPN}……おれ…… まけた……\n"
 	.string "おれが まけたんだ……$"
@@ -1961,3 +2024,24 @@ DomeStory_Text_InnReikaWelcomesBack:
 DomeStory_Text_InnLinoone:
 	.string "{JPN}マッスグマは くんくんと\n"
 	.string "じめんの においを かいでいる。$"
+
+@ ---------------------------------------------------------------------------
+@ Text: Ikue at the inn
+
+PalaceStory_Text_InnIkue:
+	.string "{JPN}イクエ『あら {PLAYER}さん。\p"
+	.string "いま エネコロロの あそびに\n"
+	.string "つきあってるの。\p"
+	.string "きょうは なにを えらぶかしら。』$"
+
+PalaceStory_Text_InnIkueJoins:
+	.string "{JPN}イクエ『ふふ…… しっぽを おいかける\n"
+	.string "あそびね。 わたしも まねしちゃった。\p"
+	.string "わたしが きめた あそびじゃ なくて\n"
+	.string "この こが えらんだ あそび。\p"
+	.string "いっしょに すごしてると\n"
+	.string "すこしずつ わかって くるのね。』$"
+
+PalaceStory_Text_InnDelcatty:
+	.string "{JPN}エネコロロは ごろごろと\n"
+	.string "のどを ならしている。$"

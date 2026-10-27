@@ -122,6 +122,20 @@ static const u8 *const sStoryTargetRescueTexts[STORY_TARGET_COUNT][RESCUE_TEXT_C
         [RESCUE_TEXT_ASKS_POKENAV] = COMPOUND_STRING("{JPN}レイカ『そうですわ。\nポケナビを おもちかしら？\pれんらくさきを こうかん しましょう。』"),
         [RESCUE_TEXT_GOES_TO_INN] = COMPOUND_STRING("{JPN}レイカ『わたくし りょかんで\nやすませて いただきますわ。\pマッスグマと おさんぽ するのが\nたのしみ ですの。』"),
     },
+    [STORY_TARGET_IKUE] =
+    {
+        [RESCUE_TEXT_FEVER_STARTING] = COMPOUND_STRING("{JPN}イクエ『……あれ？\nなんだか あたまが ふわふわする……\pきんいろの シンボル……\nエネコロロの…… きもち……』"),
+        [RESCUE_TEXT_FEVER] = COMPOUND_STRING("{JPN}イクエ『……エネコロロ……\nいま なにを したいの……\pみんなと つながってれば\nぜんぶ わかる…… わかるのに……\pでも わたしは…… わたしが\nしりたいのは……\pちがう。 わたしたちは。\nわたし は。 わたし……\pあつい。 あたまが あつい。\pどうして。 どうして はなれるの？\nどうして わからない あいてを\lそだてたがるの？』"),
+        [RESCUE_TEXT_VOICES_FADE] = COMPOUND_STRING("{JPN}イクエ『……みんなの こえが\nとおく なっていく……\pエネコロロの きもちも\nみんなの きもちも\lながれこんで きてたのに……』"),
+        [RESCUE_TEXT_CHOOSES] = COMPOUND_STRING("{JPN}イクエ『でも…… いまの しょうぶで\nわかったの。\pあなたの ポケモンは\nあなたの いうとおりじゃ なくても\lあなたと いっしょに たたかってた。\pエネコロロも きっと\nわたしとは ちがう ことを\lかんがえてる。\pそれで いいの。\nわたしは その こを しりたい。\lそだてて いきたい。\p……ごめんね みんな。\nわたし いくわ。』"),
+        [RESCUE_TEXT_DELIRIOUS] = COMPOUND_STRING("{JPN}イクエ『……エネコロロ……\nみんなの…… ぜんぶ…… わかる……』"),
+        [RESCUE_TEXT_EATS] = COMPOUND_STRING("{JPN}てんしゅは イクエの くちに\nめしを どんどん はこんだ！\pイクエ『んぐっ…… もぐ……』"),
+        [RESCUE_TEXT_WAKES_UP] = COMPOUND_STRING("{JPN}イクエ『……あれ？\nここ どこかしら。\pあたまが すっきりしてる……\nみんなの こえが…… きこえない。』"),
+        [RESCUE_TEXT_REMEMBERS] = COMPOUND_STRING("{JPN}イクエ『……ぜんぶ おぼえてる。\pエネコロロの したいことが\nいつでも わかって……\lそだてるのも かんたん だった。\pでも あれは わかった きに\nなっていた だけ なのかも。\pこれからは いっしょに すごして\nすこしずつ しっていくわ。\p……たすけて くれて ありがとう。』"),
+        [RESCUE_TEXT_AFTER_CURE] = COMPOUND_STRING("{JPN}イクエの モンスターボールから\nエネコロロが とびだした！\pエネコロロは イクエの まえに\nすわりこむと ボールから\lふいっと かおを そむけた。\pイクエ『……エネコロロ？\pもしかして…… もう\nたたかいたく ないの？』\pエネコロロは イクエの てに\nあたまを すりよせた。\pイクエ『……そう。\nそれが あなたの きもち なのね。\pわかったわ。 わたし\nあなたが えらんだ ことを\lだいじに したい。』"),
+        [RESCUE_TEXT_ASKS_POKENAV] = COMPOUND_STRING("{JPN}イクエ『ねえ ポケナビ もってる？\nれんらくさき こうかん しましょう。』"),
+        [RESCUE_TEXT_GOES_TO_INN] = COMPOUND_STRING("{JPN}イクエ『わたし りょかんで\nエネコロロと ゆっくり するわ。\pこの こが なにを して\nあそびたいか みつけたいの。』"),
+    },
     [STORY_TARGET_EISUKE] =
     {
         [RESCUE_TEXT_FEVER_STARTING] = COMPOUND_STRING("{JPN}エイスケ『……あれ？\nなんだか あたまが ぼーっと する……\pきんいろの シンボル……\nあと 1ターン……』"),

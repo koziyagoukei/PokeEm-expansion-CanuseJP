@@ -17103,12 +17103,52 @@ EVs: 4 HP / 252 SpA / 252 Spe
 - Shadow Ball
 - Thunderbolt
 
+Ninetales @ Leftovers
+Ability: Flash Fire
+Level: 50
+Nature: Timid
+EVs: 4 HP / 252 SpA / 252 Spe
+- Flamethrower
+- Extrasensory
+- Will-O-Wisp
+- Nasty Plot
+
+=== TRAINER_IKUE_RELEASE ===
+Name: イクエ
+Class: Pkmn Breeder
+Pic: Pokemon Breeder F
+Gender: Female
+Music: Female
+Double Battle: No
+AI: Basic Trainer
+Multi Party: Half
+
 Delcatty @ Leftovers
 Ability: Wonder Skin
 Level: 50
-Nature: Calm
-EVs: 252 HP / 4 Def / 252 SpD
-- Fake Out
+Nature: Bold
+EVs: 252 HP / 252 Def / 4 SpD
 - Body Slam
-- Thunder Wave
 - Wish
+- Protect
+- Thunder Wave
+
+Pelipper @ Damp Rock
+Ability: Drizzle
+Level: 50
+Nature: Modest
+EVs: 252 HP / 252 SpA / 4 SpD
+- Scald
+- Hurricane
+- U-turn
+- Roost
+
+Altaria @ Sitrus Berry
+Ability: Natural Cure
+Level: 50
+Nature: Adamant
+EVs: 4 HP / 252 Atk / 252 Spe
+- Dragon Dance
+- Dragon Claw
+- Earthquake
+- Roost

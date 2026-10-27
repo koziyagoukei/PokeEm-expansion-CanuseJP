@@ -5,6 +5,9 @@ BattleFrontier_BattlePalaceLobby_MapScripts::
 	.byte 0
 
 BattleFrontier_BattlePalaceLobby_OnTransition:
+	@ The cook and Pokevirus only appear for Ikue's release battle.
+	setflag FLAG_TEMP_1D
+	setflag FLAG_TEMP_1E
 	setvar VAR_0x8004, STORY_TARGET_IKUE
 	call FrontierStory_EventScript_SetupTarget
 	end
