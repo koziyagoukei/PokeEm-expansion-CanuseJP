@@ -789,6 +789,18 @@ Debug_PrintFontTest::
 Debug_EventScript_FontTest::
 	lockall
 	goto Debug_PrintFontTest
+
+Debug_EventScript_KanjiFontTest::
+	lockall
+	msgbox Debug_Text_KanjiFontTest, MSGBOX_DEFAULT
+	setvar VAR_0x8004, INFO_KANJI_FONT_TEST
+	special Special_OpenInfoViewer
+	releaseall
+	end
+
+Debug_Text_KanjiFontTest:
+	.string "{KANJI}{PLAYER}の 攻撃と 防御\n"
+	.string "特性と 状態異常を みる$"
 @	goto_if_eq VAR_RESULT, 0, Debug_NoPokemon
 @	dynmultipush Debug_EventScript_InflictStatus1_Text_Single, 0
 @	dynmultipush Debug_EventScript_InflictStatus1_Text_PartyWide, 1

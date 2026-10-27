@@ -712,6 +712,8 @@ u8 GetExtCtrlCodeLength(u8 code)
         [EXT_CTRL_CODE_BACKGROUND]             = 2,
         [EXT_CTRL_CODE_TEXT_COLORS]            = 4,
         [EXT_CTRL_CODE_AUTO]                   = 1,
+        [EXT_CTRL_CODE_KANJI]                  = 1,
+        [EXT_CTRL_CODE_KANJI_GLYPH]            = 2,
     };
 
     u8 length = 0;

@@ -200,6 +200,32 @@ static void switches(void)
     parity(automatic, FONT_NORMAL, 2, WINDOW_TEXT_PRINTER, 2);
 }
 
+static void kanji(void)
+{
+    const u8 text[] = {CTRL, EXT_CTRL_CODE_KANJI, CTRL, EXT_CTRL_CODE_KANJI_GLYPH, 1,
+        CTRL, EXT_CTRL_CODE_KANJI_GLYPH, 2, 1, ENG, CHAR_A, CHAR_1, EOS};
+    const u8 automatic[] = {AUTO, CTRL, EXT_CTRL_CODE_KANJI_GLYPH, 1, 1, EOS};
+    const u8 fontSwitch[] = {JPN, CTRL, EXT_CTRL_CODE_KANJI_GLYPH, 1,
+        CTRL, EXT_CTRL_CODE_FONT, FONT_SMALL, CTRL, EXT_CTRL_CODE_KANJI_GLYPH, 2, EOS};
+    const u8 fonts[] = {FONT_NORMAL, FONT_SMALL, FONT_NARROW, FONT_NARROWER,
+        FONT_SHORT, FONT_SMALL_NARROW, FONT_SMALL_NARROWER, FONT_SHORT_NARROW, FONT_SHORT_NARROWER};
+    assert(IsJapaneseTextMode(text));
+    assert(IsJapaneseTextMode(automatic));
+    assert(GetExtCtrlCodeLength(EXT_CTRL_CODE_KANJI_GLYPH) == 2);
+    assert(GetStringWidth(FONT_NORMAL, fontSwitch, 0) == 24);
+    for (u32 i = 0; i < ARRAY_COUNT(fonts); i++)
+    {
+        for (u32 type = WINDOW_TEXT_PRINTER; type <= SPRITE_TEXT_PRINTER; type++)
+        {
+            parity(text, fonts[i], 0, type, 0);
+            assert(sTraceCount == 5 && sTrace[0].width == 12);
+            assert(sTrace[1].width == sTrace[0].width);
+        }
+        parity(automatic, fonts[i], 0, WINDOW_TEXT_PRINTER, 0);
+    }
+    parity(fontSwitch, FONT_NORMAL, 0, WINDOW_TEXT_PRINTER, 0);
+}
+
 static void controls(void)
 {
     const u8 str[] = {CTRL, EXT_CTRL_CODE_COLOR, EXT_CTRL_CODE_ENG,
@@ -349,6 +375,7 @@ int main(int argc, char **argv)
     if (!strcmp(argv[1], "modes")) modes();
     else if (!strcmp(argv[1], "metrics")) metrics();
     else if (!strcmp(argv[1], "switches")) switches();
+    else if (!strcmp(argv[1], "kanji")) kanji();
     else if (!strcmp(argv[1], "controls")) controls();
     else if (!strcmp(argv[1], "placeholders")) placeholders();
     else if (!strcmp(argv[1], "names")) names();

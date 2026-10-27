@@ -27,6 +27,7 @@ static const u8 sInfoText_TitleBannedMons[] = _("さんかできない ポケモ
 static const u8 sInfoText_TitleBannedItems[] = _("つかえない もちもの");
 static const u8 sInfoText_TitleGimmickHelp[] = _("ギミック");
 static const u8 sInfoText_TitleDiaryTest[] = _("にっき");
+static const u8 sInfoText_TitleKanjiTest[] = _("{KANJI}対戦 フォント");
 static const u8 sInfoText_TitleMonologueTest[] = _("ひとりごと");
 static const u8 sInfoText_TitleChoiceTest[] = _("ぶんきテスト");
 
@@ -91,6 +92,14 @@ static const u8 sInfoText_DiaryTestPage2[] = _(
     "つれてこよう\n\n"
     "メモとして のこしておく");
 
+static const u8 sInfoText_DiaryTestKanji[] = _(
+    "{KANJI}攻撃 防御 特性\n"
+    "技の力と 速さ\n"
+    "命中 状態異常\n"
+    "回復 対戦 相手\n"
+    "物理と 変化\n"
+    "{ENG}ABC 123{JPN} かな");
+
 static const u8 sInfoText_MonologueTestPage1[] = _(
     "ここまで きたんだ\n"
     "もうすこし だけ\n"
@@ -144,6 +153,11 @@ static const u8 *const sInfoViewerPages_DiaryTest[] =
 {
     sInfoText_DiaryTestPage1,
     sInfoText_DiaryTestPage2,
+};
+
+static const u8 *const sInfoViewerPages_KanjiTest[] =
+{
+    sInfoText_DiaryTestKanji,
 };
 
 static const u8 *const sInfoViewerPages_MonologueTest[] =
@@ -206,6 +220,13 @@ static const struct InfoViewerEntry sInfoViewerEntries[INFO_COUNT] =
     [INFO_TIPS_CONTEST_TERA] = CONTEST_TIPS_ENTRY(ContestTera),
     [INFO_TIPS_CONTEST_DYNAMAX] = CONTEST_TIPS_ENTRY(ContestDynamax),
     [INFO_TIPS_CONTEST_REWARDS] = CONTEST_TIPS_ENTRY(ContestRewards),
+    [INFO_KANJI_FONT_TEST] =
+    {
+        .title = sInfoText_TitleKanjiTest,
+        .pages = sInfoViewerPages_KanjiTest,
+        .pageCount = ARRAY_COUNT(sInfoViewerPages_KanjiTest),
+        .style = &sInfoViewerStyle_Default,
+    },
     [INFO_FRONTIER_RULES] =
     {
         .title = sInfoText_TitleFrontierRules,
