@@ -81,6 +81,8 @@
 // Kazuki came to the player in the Tower lobby with his fever: alone, then once Darkrai could help.
 #define FLAG_STORY_TOWER_FEVER_SHOWN   FLAG_UNUSED_0x02D
 #define FLAG_STORY_TOWER_RELEASE_SHOWN FLAG_UNUSED_0x02E
+// The final battle is won and Pokevirus has faded (set by the ending, once it exists).
+#define FLAG_STORY_POKEVIRUS_FADED     FLAG_UNUSED_0x02F
 #define FLAG_HIDE_BATTLE_TYPE_ICONS 0x30 // Clear by default; local display option only.
 #define FLAG_UNUSED_0x031    0x31 // Unused Flag
 #define FLAG_UNUSED_0x032    0x32 // Unused Flag

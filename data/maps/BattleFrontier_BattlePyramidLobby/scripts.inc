@@ -486,14 +486,6 @@ BattleFrontier_BattlePyramidLobby_EventScript_PartyStillHasHeldItems::
 	goto BattleFrontier_BattlePyramidLobby_EventScript_PickItemsToKeep
 	end
 
-BattleFrontier_BattlePyramidLobby_EventScript_Woman::
-	msgbox BattleFrontier_BattlePyramidLobby_Text_TrainersNoticeRunning, MSGBOX_NPC
-	end
-
-BattleFrontier_BattlePyramidLobby_EventScript_FatMan::
-	msgbox BattleFrontier_BattlePyramidLobby_Text_LostLotOfItems, MSGBOX_NPC
-	end
-
 BattleFrontier_BattlePyramidLobby_EventScript_RulesBoard::
 	lockall
 	msgbox BattleFrontier_BattlePyramidLobby_Text_RulesAreListed, MSGBOX_DEFAULT
@@ -706,12 +698,6 @@ BattleFrontier_BattlePyramidLobby_Text_HintNormal:
 
 BattleFrontier_BattlePyramidLobby_Text_BelieveMyFortunesOrNot:
 	.string "うらないを しんじるも しんじないも\nあなた しだい……\pみらいは いつでも かえられます……\nどうぞ ごぶじで……$"
-
-BattleFrontier_BattlePyramidLobby_Text_TrainersNoticeRunning:
-	.string "{JPN}くらいところでは あしおとも\nトレーナーに きづかれる てがかりよ。\pゆっくり あるいて\nまわりを よく みてみてね。$"
-
-BattleFrontier_BattlePyramidLobby_Text_LostLotOfItems:
-	.string "{JPN}せっかく あつめた どうぐが……！\nああ でも どこで ひろったかは\lおぼえているぞ。\pつぎの たんけんでも\nうまく みつけられると いいな。$"
 
 BattleFrontier_BattlePyramidLobby_Text_YouveDefeatedPyramidKing:
 	.string "おかえりなさいませ!\pピラミッドキングを たおし\nみごと バトルピラミッドを\lせいは されましたな!$"

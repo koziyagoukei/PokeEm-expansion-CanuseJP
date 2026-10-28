@@ -24,7 +24,7 @@
       "movement_range_y": 4,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "LilycoveCity_ContestHall_EventScript_Boy1",
+      "script": "FrontierStory_EventScript_CrowdTalk",
       "flag": "0"
     },
     {
@@ -37,7 +37,7 @@
       "movement_range_y": 3,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "LilycoveCity_ContestHall_EventScript_Boy2",
+      "script": "FrontierStory_EventScript_CrowdTalk",
       "flag": "0"
     },
     {
@@ -50,7 +50,7 @@
       "movement_range_y": 2,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "LilycoveCity_ContestHall_EventScript_Girl",
+      "script": "FrontierStory_EventScript_CrowdTalk",
       "flag": "0"
     },
     {
@@ -454,7 +454,7 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "LilycoveCity_ContestHall_EventScript_Sailor",
+      "script": "FrontierStory_EventScript_CrowdTalk",
       "flag": "0"
     }
   ],

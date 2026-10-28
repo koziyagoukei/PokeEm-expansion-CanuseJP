@@ -95,4 +95,19 @@
 #define VAR_INN_GUEST           VAR_TEMP_8
 #define VAR_INN_GUEST_GFX       VAR_OBJ_GFX_ID_B
 
+// Passers-by at the Frontier talk about how far the rescues have come, in a voice for how they
+// look (FrontierStory_BufferCrowdTalk).
+#define CROWD_STAGE_NONE_RESCUED 0
+#define CROWD_STAGE_FIRST_RESCUE 1
+#define CROWD_STAGE_FEW_RESCUED  2 // two or three
+#define CROWD_STAGE_PATH_OPEN    3 // four or more: the way to the final area is open
+#define CROWD_STAGE_AFTER_ENDING 4
+#define CROWD_STAGE_COUNT        5
+
+#define CROWD_VOICE_CHILD 0
+#define CROWD_VOICE_MAN   1
+#define CROWD_VOICE_WOMAN 2
+#define CROWD_VOICE_ELDER 3
+#define CROWD_VOICE_COUNT 4
+
 #endif // GUARD_CONSTANTS_FRONTIER_STORY_H

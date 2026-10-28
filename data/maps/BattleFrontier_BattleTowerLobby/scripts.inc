@@ -492,14 +492,6 @@ BattleFrontier_BattleTowerLobby_EventScript_SubmittedFeelings::
 	release
 	end
 
-BattleFrontier_BattleTowerLobby_EventScript_Woman::
-	msgbox BattleFrontier_BattleTowerLobby_Text_WinsInRowRecorded, MSGBOX_NPC
-	end
-
-BattleFrontier_BattleTowerLobby_EventScript_Boy::
-	msgbox BattleFrontier_BattleTowerLobby_Text_CanLeaveUntilLossOrSevenWins, MSGBOX_NPC
-	end
-
 BattleFrontier_BattleTowerLobby_EventScript_ShowSinglesResults::
 	lockall
 	frontier_results FRONTIER_FACILITY_TOWER, FRONTIER_MODE_SINGLES
@@ -994,12 +986,6 @@ BattleFrontier_BattleTowerLobby_Text_ChangedYourMind:
 
 BattleFrontier_BattleTowerLobby_Text_ThatsHowYouFeel:
 	.string "へえ そんな きぶんに なるんだ!\nなかなか こせいてき だね……\pどうも ありがと!$"
-
-BattleFrontier_BattleTowerLobby_Text_WinsInRowRecorded:
-	.string "{JPN}かちぬいた きろくを\nのこして もらえるの。\pだれかと いっしょに よろこべると\n1しょうでも うれしいわね！$"
-
-BattleFrontier_BattleTowerLobby_Text_CanLeaveUntilLossOrSevenWins:
-	.string "{JPN}タワーは 1しゅう 7せんだよ。\nもちものも わざも じゅんびしてからね！\pひとりでも ふたりでも\nすきな うけつけで ちょうせんできるよ。$"
 
 @ Unused
 BattleFrontier_BattleTowerLobby_Text_DoubleBattleRoomConstruction:

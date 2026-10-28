@@ -48,6 +48,12 @@ void FrontierStory_RescueVisitor(void);
 void FrontierStory_PickInnGuests(void);
 void FrontierStory_BufferInnGuestText(void);
 
+// Passers-by.
+u32 FrontierStory_GetCrowdStage(void);
+u32 FrontierStory_GetCrowdVoice(u16 graphicsId);
+bool32 FrontierStory_BufferCrowdLine(u32 stage, u32 voice);
+void FrontierStory_BufferCrowdTalk(void);
+
 // Placing people for story scenes.
 void FrontierStory_ArrangeReleaseScene(void);
 void FrontierStory_PlaceBesidePlayer(void);

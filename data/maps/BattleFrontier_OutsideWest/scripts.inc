@@ -40,10 +40,6 @@ BattleFrontier_OutsideWest_EventScript_UnusedNPC2::
 	msgbox BattleFrontier_OutsideWest_Text_CantFindBattleTower, MSGBOX_NPC
 	end
 
-BattleFrontier_OutsideWest_EventScript_Boy1::
-	msgbox BattleFrontier_OutsideWest_Text_BestOutOfAllMyFriends, MSGBOX_NPC
-	end
-
 BattleFrontier_OutsideWest_EventScript_Fisherman2::
 	lock
 	faceplayer
@@ -53,10 +49,6 @@ BattleFrontier_OutsideWest_EventScript_Fisherman2::
 	waitmovement 0
 	waitbuttonpress
 	release
-	end
-
-BattleFrontier_OutsideWest_EventScript_Man1::
-	msgbox BattleFrontier_OutsideWest_Text_OnlyToughTrainersBroughtHere, MSGBOX_NPC
 	end
 
 BattleFrontier_OutsideWest_EventScript_Maniac1::
@@ -176,41 +168,9 @@ BattleFrontier_OutsideWest_EventScript_WomanLostRockPaperScissors::
 	release
 	end
 
-BattleFrontier_OutsideWest_EventScript_Fisherman1::
-	msgbox BattleFrontier_OutsideWest_Text_ChooseFishingOverBattling, MSGBOX_NPC
-	end
-
 @ Unused
 BattleFrontier_OutsideWest_EventScript_UnusedNPC3::
 	msgbox BattleFrontier_OutsideWest_Text_DomeIsHereGrandpa, MSGBOX_NPC
-	end
-
-BattleFrontier_OutsideWest_EventScript_Gentleman::
-	msgbox BattleFrontier_OutsideWest_Text_YoureOffToChallengeDome, MSGBOX_NPC
-	end
-
-BattleFrontier_OutsideWest_EventScript_Lass::
-	msgbox BattleFrontier_OutsideWest_Text_KeepBattlingUntilIGetSymbol, MSGBOX_NPC
-	end
-
-BattleFrontier_OutsideWest_EventScript_ExpertM::
-	msgbox BattleFrontier_OutsideWest_Text_WontLetGentlemenBeatMe, MSGBOX_NPC
-	end
-
-BattleFrontier_OutsideWest_EventScript_Man2::
-	msgbox BattleFrontier_OutsideWest_Text_NothingHereNotLongAgo, MSGBOX_NPC
-	end
-
-BattleFrontier_OutsideWest_EventScript_Woman1::
-	msgbox BattleFrontier_OutsideWest_Text_FinallyArrivedAtFrontier, MSGBOX_NPC
-	end
-
-BattleFrontier_OutsideWest_EventScript_FatMan1::
-	msgbox BattleFrontier_OutsideWest_Text_SquareFilledWithToughPeople, MSGBOX_NPC
-	end
-
-BattleFrontier_OutsideWest_EventScript_FatMan2::
-	msgbox BattleFrontier_OutsideWest_Text_MetOlderGirlAtPike, MSGBOX_NPC
 	end
 
 BattleFrontier_OutsideWest_EventScript_Woman3::
@@ -239,10 +199,6 @@ BattleFrontier_OutsideWest_EventScript_Man4::
 	release
 	end
 
-BattleFrontier_OutsideWest_EventScript_PokefanF::
-	msgbox BattleFrontier_OutsideWest_Text_MonWithLongTailInFrontier, MSGBOX_NPC
-	end
-
 BattleFrontier_OutsideWest_Text_BattleDomeSign:
 	.string "ここは バトルドーム!\nめざせ! むてきの スーパースター!$"
 
@@ -255,17 +211,11 @@ BattleFrontier_OutsideWest_Text_BattlePikeSign:
 BattleFrontier_OutsideWest_Text_ThisIsBattleTower:
 	.string "ここは バトルタワー さ!\pトレーナーは きたえあげた ポケモンで\nひたすら かちぬいて いくのさ!$"
 
-BattleFrontier_OutsideWest_Text_BestOutOfAllMyFriends:
-	.string "{JPN}ともだちの なかじゃ いちばんだったのに\nここだと ぜんぜん かなわないや！\pでも みんなの とくいなことが\nつぎつぎ わかって おもしろいよ。$"
-
 BattleFrontier_OutsideWest_Text_CantFindBattleTower:
 	.string "バトルタワーに いきたいのに\nフロンティアパスの マップを みても\lなにが なんだか…… ひろすぎる……$"
 
 BattleFrontier_OutsideWest_Text_GotSeasickOnWayHere:
 	.string "{JPN}うっぷ…… ふねに よった きがする。\pもう ここに ついているんだから\nうみかぜに あたって おこうっと。$"
-
-BattleFrontier_OutsideWest_Text_OnlyToughTrainersBroughtHere:
-	.string "{JPN}きみは みなみから きたのかい？\nハブで じゅんびしてきたんだな。\pどの しせつから まわるんだ？\nおれは ここで かんがえるのが すきでね。$"
 
 BattleFrontier_OutsideWest_Text_SureWeCanChallengeWithNoMons:
 	.string "{JPN}なあなあ にいちゃん。\nぼくらの ポケモンが いなくても\lファクトリーなら だいじょうぶなんだね？$"
@@ -288,32 +238,8 @@ BattleFrontier_OutsideWest_Text_WonIllTakePikeChallenge:
 BattleFrontier_OutsideWest_Text_LostIllPutOffPikeChallenge:
 	.string "{JPN}あっ まけちゃった！\nじゃあ ひだりの みちに してみよう！$"
 
-BattleFrontier_OutsideWest_Text_ChooseFishingOverBattling:
-	.string "{JPN}うみを ながめて いるだけでも\nあっというまに じかんが すぎるな。\pつりの ぶゆうでんを はなしてたら\nどれが おれの はなしか わすれちまった！$"
-
-BattleFrontier_OutsideWest_Text_KeepBattlingUntilIGetSymbol:
-	.string "{JPN}きょうこそ シンボルを もらうんだ！\nそう いってから ずっと たのしいの。\pあしたも また ここで\nおなじことを いってるかもね！$"
-
-BattleFrontier_OutsideWest_Text_YoureOffToChallengeDome:
-	.string "{JPN}バトルドームへ むかわれますか？\nでは ぜひ かちあがって\lおあいしましょう！$"
-
 BattleFrontier_OutsideWest_Text_DomeIsHereGrandpa:
 	.string "{JPN}じいちゃん ここが バトルドーム！\nわたし おうえん してるからね！$"
-
-BattleFrontier_OutsideWest_Text_WontLetGentlemenBeatMe:
-	.string "{JPN}おうえんが あると ちからが わくのう！\nわしの ばんが まちどおしいわい。$"
-
-BattleFrontier_OutsideWest_Text_NothingHereNotLongAgo:
-	.string "{JPN}みなみに まちが ふえて\nあるく たのしみも ふえたなあ！\pつぎは えを みに いこうか。\nそれとも コンテストかな。$"
-
-BattleFrontier_OutsideWest_Text_FinallyArrivedAtFrontier:
-	.string "{JPN}あたしの つよさも うつくしさも\nどっちも みてもらいたいわ！\pバトルと コンテストが ちかくて\nよかったあ！$"
-
-BattleFrontier_OutsideWest_Text_SquareFilledWithToughPeople:
-	.string "{JPN}もぐもぐ。 ちょうせんの まえにも\nちょうせんの あとにも ごはんは うまい。\pみんなの すきな あじまで\nすきに なっちゃうんだよなあ。$"
-
-BattleFrontier_OutsideWest_Text_MetOlderGirlAtPike:
-	.string "{JPN}バトルチューブで つよい\nおねえさんに あったんだ。\pあの ひとを みると なんだか\nみんな おなじことを いいたく なるんだ。\p……なんだったっけ。\nま たべてから おもいだそう！$"
 
 BattleFrontier_OutsideWest_Text_LastTimeOurEyesMet:
 	.string "{JPN}あのひと こっちを みたわ！\nわたしの おうえんが きこえたのね！$"
@@ -327,5 +253,3 @@ BattleFrontier_OutsideWest_Text_DomeAceIsMine:
 BattleFrontier_OutsideWest_Text_FansOverThereUsedToBeTrainers:
 	.string "{JPN}あのひとたち しょうぶも つよいけど\nいまは おうえんが たのしいんだって。\pまいにち ここで まちあわせ。\nずっと いっしょで いいかお してるよ。$"
 
-BattleFrontier_OutsideWest_Text_MonWithLongTailInFrontier:
-	.string "{JPN}きみ しっぽの ながい ポケモンを\nみなかった？ あたし あのこが すき！\pあれっ まだ みてないのに\nなんで そう おもったのかしら。$"

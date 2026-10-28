@@ -322,14 +322,6 @@ BattleFrontier_ExchangeServiceCorner_EventScript_ScopeLens::
 	setitemandprice ITEM_SCOPE_LENS, 64
 	goto BattleFrontier_ExchangeServiceCorner_EventScript_PurchaseHoldItem
 
-BattleFrontier_ExchangeServiceCorner_EventScript_Man::
-	msgbox BattleFrontier_ExchangeServiceCorner_Text_GoGetYourOwnDoll, MSGBOX_NPC
-	end
-
-BattleFrontier_ExchangeServiceCorner_EventScript_Sailor::
-	msgbox BattleFrontier_ExchangeServiceCorner_Text_ItemsWillGetMonTougher, MSGBOX_NPC
-	end
-
 BattleFrontier_ExchangeServiceCorner_EventScript_PokefanF::
 	lock
 	msgbox BattleFrontier_ExchangeServiceCorner_Text_GetYouAnythingYouWant, MSGBOX_DEFAULT
@@ -338,10 +330,6 @@ BattleFrontier_ExchangeServiceCorner_EventScript_PokefanF::
 
 BattleFrontier_ExchangeServiceCorner_EventScript_RichBoy::
 	msgbox BattleFrontier_ExchangeServiceCorner_Text_WishIHadAllDolls, MSGBOX_NPC
-	end
-
-BattleFrontier_ExchangeServiceCorner_EventScript_Girl::
-	msgbox BattleFrontier_ExchangeServiceCorner_Text_MoreBattlePointsForRecord, MSGBOX_NPC
 	end
 
 BattleFrontier_ExchangeServiceCorner_Text_WelcomePleaseChoosePrize:
@@ -388,15 +376,6 @@ BattleFrontier_ExchangeServiceCorner_Text_WishIHadAllDolls:
 
 BattleFrontier_ExchangeServiceCorner_Text_GetYouAnythingYouWant:
 	.string "まかせといてって!\pあんたの ほしいもん だったら\nなんでも とって きたるよ!!$"
-
-BattleFrontier_ExchangeServiceCorner_Text_ItemsWillGetMonTougher:
-	.string "{JPN}つぎの もちものを えらんでるんだ。\nわざとの あいしょうが だいじだからな。\pあれも これも ためしたくなる！$"
-
-BattleFrontier_ExchangeServiceCorner_Text_GoGetYourOwnDoll:
-	.string "{JPN}この ムチュールの ぬいぐるみ\nかわいいだろう！\pべっそうにも かぐの みせが あるって？\nううっ BPが いくらあっても たりない！$"
-
-BattleFrontier_ExchangeServiceCorner_Text_MoreBattlePointsForRecord:
-	.string "{JPN}バトルで ためた BPで\nじゅんびを ととのえるんだ！\pみなみの コンテストでも\nゆうしょうすると BPが もらえるよ。$"
 
 BattleFrontier_ExchangeServiceCorner_Text_KissPosterDesc::
 	.string "{JPN}ムチュールが プリント されている\nおおきなポスター$"

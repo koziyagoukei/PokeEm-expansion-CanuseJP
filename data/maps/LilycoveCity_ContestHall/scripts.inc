@@ -5,22 +5,6 @@
 LilycoveCity_ContestHall_MapScripts::
 	.byte 0
 
-LilycoveCity_ContestHall_EventScript_Boy1::
-	msgbox LilycoveCity_ContestHall_Text_TodayWonSmartnessContest, MSGBOX_NPC
-	end
-
-LilycoveCity_ContestHall_EventScript_Boy2::
-	msgbox LilycoveCity_ContestHall_Text_EnteredBunchOfContests, MSGBOX_NPC
-	end
-
-LilycoveCity_ContestHall_EventScript_Girl::
-	msgbox LilycoveCity_ContestHall_Text_ManWhoWonEarlierHadPokeblocks, MSGBOX_NPC
-	end
-
-LilycoveCity_ContestHall_EventScript_Sailor::
-	msgbox LilycoveCity_ContestHall_Text_IsntThisPlaceHumongous, MSGBOX_NPC
-	end
-
 LilycoveCity_ContestHall_EventScript_SmartContestMC::
 	lock
 	faceplayer
@@ -309,18 +293,6 @@ LilycoveCity_ContestHall_EventScript_CuteStageSign::
 LilycoveCity_ContestHall_EventScript_SmartStageSign::
 	msgbox LilycoveCity_ContestHall_Text_SmartContestStage, MSGBOX_SIGN
 	end
-
-LilycoveCity_ContestHall_Text_TodayWonSmartnessContest:
-	.string "{JPN}うつくしさ コンテストで\n優勝した この ポケモンを\lきょうは かしこさ コンテストで\l優勝 させたんだぜ！\pああ 自分の さいのうが こわい……$"
-
-LilycoveCity_ContestHall_Text_EnteredBunchOfContests:
-	.string "{JPN}なんども コンテストに でていて\nなんとなく 分かって きたんだけど\pたとえば かっこいいコンテストで\nかっこいいわざを だすと うけるけど\lかしこいアピールや かわいいアピールは\lなぜか うけが わるいんだよな……$"
-
-LilycoveCity_ContestHall_Text_ManWhoWonEarlierHadPokeblocks:
-	.string "{JPN}さっき 優勝 した おにいさん\nすっごい たくさんの 種類の\lポロックを もってた！\pあれだけ もってれば\n優勝 できるのかな?$"
-
-LilycoveCity_ContestHall_Text_IsntThisPlaceHumongous:
-	.string "{JPN}かーっ ひろいね ここは！\nいなかの コンテスト 会場 とは\lきんちょうかんが 違うね！$"
 
 LilycoveCity_ContestHall_Text_GiveItBestSmartAppeal:
 	.string "{JPN}司会『はあい かしこい ポケモンと\nそして トレーナーの みなさーん！\l頑張ってくださーーい！\lレッツ！ アピール！！$"

@@ -171,14 +171,6 @@ LilycoveCity_LilycoveMuseum_2F_EventScript_SmartPainting::
 	msgbox LilycoveCity_LilycoveMuseum_2F_Text_ItsGreenPictureFrame, MSGBOX_SIGN
 	end
 
-LilycoveCity_LilycoveMuseum_2F_EventScript_Girl::
-	msgbox LilycoveCity_LilycoveMuseum_2F_Text_NewPaintingsSurprisedMe, MSGBOX_NPC
-	end
-
-LilycoveCity_LilycoveMuseum_2F_EventScript_ExpertM::
-	msgbox LilycoveCity_LilycoveMuseum_2F_Text_NewPaintingsRatherAmusing, MSGBOX_NPC
-	end
-
 LilycoveCity_LilycoveMuseum_2F_EventScript_RichBoy::
 	msgbox LilycoveCity_LilycoveMuseum_2F_Text_ThesePaintingsOfYourPokemon, MSGBOX_NPC
 	end
@@ -265,12 +257,6 @@ LilycoveCity_LilycoveMuseum_2F_Text_ItsGreenPictureFrame:
 
 LilycoveCity_LilycoveMuseum_2F_Text_ItsPaintingOfPokemon:
 	.string "ポケモンの えが かざってある!$"
-
-LilycoveCity_LilycoveMuseum_2F_Text_NewPaintingsSurprisedMe:
-	.string "ひさしぶりに きて みたら 2かいにも\nえが かざって あって びっくり!\pいいなあ あたしの ポケモンも\nこんなふうに すてきに かいて ほしいな$"
-
-LilycoveCity_LilycoveMuseum_2F_Text_NewPaintingsRatherAmusing:
-	.string "ほう…… ここが さいきん わだいの\nポケモンの えが ある ところか……\pなるほど あたらしい えが いっぱいで\nなかなか おもしろい のう……$"
 
 LilycoveCity_LilycoveMuseum_2F_Text_ThesePaintingsOfYourPokemon:
 	.string "へえー! これって\nきみの ポケモンの えなんだ!\pそれって トレーナー として\nさいこうの しあわせ だよな!$"

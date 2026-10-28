@@ -29,6 +29,7 @@
 #include "data/frontier_story_named.h"
 #include "data/frontier_story_targets.h"
 #include "data/frontier_story_contest.h"
+#include "data/frontier_crowd_talk.h"
 
 // The Frontier never asks for less than level 50, so story battles don't either.
 #define STORY_BATTLE_MIN_LEVEL 50
@@ -851,6 +852,124 @@ void FrontierStory_BufferInnGuestText(void)
         id = VarGet(VAR_INN_GUEST + gSpecialVar_0x8004);
     if (id < NAMED_STORY_COUNT)
         StringExpandPlaceholders(gStringVar4, sNamedStoryTexts[id].inn);
+}
+
+// What passers-by talk about: how many scenarios are rescued, or the ending.
+u32 FrontierStory_GetCrowdStage(void)
+{
+    u32 rescued;
+
+    if (FlagGet(FLAG_STORY_POKEVIRUS_FADED))
+        return CROWD_STAGE_AFTER_ENDING;
+    FrontierStory_CountRescued();
+    rescued = gSpecialVar_Result;
+    if (rescued >= 4)
+        return CROWD_STAGE_PATH_OPEN;
+    if (rescued >= 2)
+        return CROWD_STAGE_FEW_RESCUED;
+    return rescued == 1 ? CROWD_STAGE_FIRST_RESCUE : CROWD_STAGE_NONE_RESCUED;
+}
+
+// How a passer-by talks, by how they look; CROWD_VOICE_COUNT for anyone else.
+u32 FrontierStory_GetCrowdVoice(u16 graphicsId)
+{
+    switch (graphicsId)
+    {
+    case OBJ_EVENT_GFX_BOY_1:
+    case OBJ_EVENT_GFX_BOY_2:
+    case OBJ_EVENT_GFX_BOY_3:
+    case OBJ_EVENT_GFX_GIRL_1:
+    case OBJ_EVENT_GFX_GIRL_2:
+    case OBJ_EVENT_GFX_GIRL_3:
+    case OBJ_EVENT_GFX_TWIN:
+    case OBJ_EVENT_GFX_NINJA_BOY:
+    case OBJ_EVENT_GFX_LITTLE_BOY:
+    case OBJ_EVENT_GFX_LITTLE_GIRL:
+    case OBJ_EVENT_GFX_SCHOOL_KID_M:
+    case OBJ_EVENT_GFX_RICH_BOY:
+    case OBJ_EVENT_GFX_YOUNGSTER:
+    case OBJ_EVENT_GFX_CAMPER:
+    case OBJ_EVENT_GFX_BUG_CATCHER:
+        return CROWD_VOICE_CHILD;
+    case OBJ_EVENT_GFX_MAN_1:
+    case OBJ_EVENT_GFX_MAN_2:
+    case OBJ_EVENT_GFX_MAN_3:
+    case OBJ_EVENT_GFX_MAN_4:
+    case OBJ_EVENT_GFX_MAN_5:
+    case OBJ_EVENT_GFX_FAT_MAN:
+    case OBJ_EVENT_GFX_HIKER:
+    case OBJ_EVENT_GFX_BLACK_BELT:
+    case OBJ_EVENT_GFX_MANIAC:
+    case OBJ_EVENT_GFX_GENTLEMAN:
+    case OBJ_EVENT_GFX_FISHERMAN:
+    case OBJ_EVENT_GFX_SAILOR:
+    case OBJ_EVENT_GFX_PSYCHIC_M:
+    case OBJ_EVENT_GFX_COOK:
+    case OBJ_EVENT_GFX_RUNNING_TRIATHLETE_M:
+    case OBJ_EVENT_GFX_CYCLING_TRIATHLETE_M:
+    case OBJ_EVENT_GFX_SWIMMER_M:
+    case OBJ_EVENT_GFX_ARTIST:
+    case OBJ_EVENT_GFX_POKEFAN_M:
+    case OBJ_EVENT_GFX_SCIENTIST_1:
+        return CROWD_VOICE_MAN;
+    case OBJ_EVENT_GFX_PICNICKER:
+    case OBJ_EVENT_GFX_LASS:
+    case OBJ_EVENT_GFX_WOMAN_1:
+    case OBJ_EVENT_GFX_WOMAN_2:
+    case OBJ_EVENT_GFX_WOMAN_3:
+    case OBJ_EVENT_GFX_WOMAN_4:
+    case OBJ_EVENT_GFX_WOMAN_5:
+    case OBJ_EVENT_GFX_BEAUTY:
+    case OBJ_EVENT_GFX_POKEFAN_F:
+    case OBJ_EVENT_GFX_HEX_MANIAC:
+    case OBJ_EVENT_GFX_CYCLING_TRIATHLETE_F:
+    case OBJ_EVENT_GFX_RUNNING_TRIATHLETE_F:
+    case OBJ_EVENT_GFX_SWIMMER_F:
+    case OBJ_EVENT_GFX_REPORTER_F:
+        return CROWD_VOICE_WOMAN;
+    case OBJ_EVENT_GFX_OLD_MAN:
+    case OBJ_EVENT_GFX_OLD_WOMAN:
+    case OBJ_EVENT_GFX_EXPERT_M:
+    case OBJ_EVENT_GFX_EXPERT_F:
+        return CROWD_VOICE_ELDER;
+    }
+    return CROWD_VOICE_COUNT;
+}
+
+EWRAM_DATA static u8 sLastCrowdLine = 0;
+
+// One of the stage's lines in the voice at random, in gStringVar4: not the one heard last if
+// there is another. FALSE if there are none.
+bool32 FrontierStory_BufferCrowdLine(u32 stage, u32 voice)
+{
+    const struct CrowdLines *lines;
+    u32 i;
+
+    gStringVar4[0] = EOS;
+    if (stage >= CROWD_STAGE_COUNT || voice >= CROWD_VOICE_COUNT)
+        return FALSE;
+    lines = &sCrowdLines[stage][voice];
+    if (lines->count == 0)
+        return FALSE;
+    i = Random() % lines->count;
+    if (i == sLastCrowdLine && lines->count > 1)
+        i = (i + 1) % lines->count;
+    sLastCrowdLine = i;
+    StringExpandPlaceholders(gStringVar4, lines->lines[i]);
+    return TRUE;
+}
+
+// The passer-by just talked to (VAR_LAST_TALKED).
+void FrontierStory_BufferCrowdTalk(void)
+{
+    u32 voice = CROWD_VOICE_COUNT;
+    u8 objectEventId;
+
+    if (!TryGetObjectEventIdByLocalIdAndMap(gSpecialVar_LastTalked, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, &objectEventId))
+        voice = FrontierStory_GetCrowdVoice(gObjectEvents[objectEventId].graphicsId);
+    if (voice >= CROWD_VOICE_COUNT)
+        voice = CROWD_VOICE_MAN;
+    FrontierStory_BufferCrowdLine(FrontierStory_GetCrowdStage(), voice);
 }
 
 static bool32 TryGetLocalObject(u16 localId, struct ObjectEvent **object)

@@ -733,3 +733,4 @@ gSpecials::
 	def_special FrontierStory_FinishRescue
 	def_special FrontierStory_PickInnGuests
 	def_special FrontierStory_BufferInnGuestText
+	def_special FrontierStory_BufferCrowdTalk

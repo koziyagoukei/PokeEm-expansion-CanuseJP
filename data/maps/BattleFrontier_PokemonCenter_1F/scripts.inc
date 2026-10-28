@@ -15,18 +15,6 @@ BattleFrontier_PokemonCenter_1F_EventScript_Nurse::
 	release
 	end
 
-BattleFrontier_PokemonCenter_1F_EventScript_SchoolKid::
-	msgbox BattleFrontier_PokemonCenter_1F_Text_NeverSeenPokemon, MSGBOX_NPC
-	end
-
-BattleFrontier_PokemonCenter_1F_EventScript_Man::
-	msgbox BattleFrontier_PokemonCenter_1F_Text_NextStopBattleArena, MSGBOX_NPC
-	end
-
-BattleFrontier_PokemonCenter_1F_EventScript_Picnicker::
-	msgbox BattleFrontier_PokemonCenter_1F_Text_GoingThroughEveryChallenge, MSGBOX_NPC
-	end
-
 BattleFrontier_PokemonCenter_1F_EventScript_Skitty::
 	lock
 	faceplayer
@@ -36,15 +24,6 @@ BattleFrontier_PokemonCenter_1F_EventScript_Skitty::
 	waitmoncry
 	release
 	end
-
-BattleFrontier_PokemonCenter_1F_Text_NeverSeenPokemon:
-	.string "{JPN}みたことのない ポケモンが\nたくさん きてるんだ！\pしらないことを きくのって\nこんなに たのしかったんだね！$"
-
-BattleFrontier_PokemonCenter_1F_Text_NextStopBattleArena:
-	.string "{JPN}よしっ つぎは アリーナだ！\nこうたい できないから\lじゅんばんも かんがえよう。$"
-
-BattleFrontier_PokemonCenter_1F_Text_GoingThroughEveryChallenge:
-	.string "{JPN}このこと いっしょなら\nどの しせつでも たのしいの！\pときどき びじゅつかんを\nみてあるくのも いいわね。$"
 
 BattleFrontier_PokemonCenter_1F_Text_Skitty:
 	.string "エネコ『みゃ みゃーっ!$"

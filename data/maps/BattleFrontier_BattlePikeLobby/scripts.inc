@@ -227,18 +227,6 @@ BattleFrontier_BattlePikeLobby_Movement_AttendantWalkToCorridor:
 	set_invisible
 	step_end
 
-BattleFrontier_BattlePikeLobby_EventScript_Hiker::
-	msgbox BattleFrontier_BattlePikeLobby_Text_OneRoomAwayFromGoal, MSGBOX_NPC
-	end
-
-BattleFrontier_BattlePikeLobby_EventScript_Twin::
-	msgbox BattleFrontier_BattlePikeLobby_Text_NeverHadToBattleTrainer, MSGBOX_NPC
-	end
-
-BattleFrontier_BattlePikeLobby_EventScript_Beauty::
-	msgbox BattleFrontier_BattlePikeLobby_Text_ThinkAbilitiesUsefulHere, MSGBOX_NPC
-	end
-
 BattleFrontier_BattlePikeLobby_EventScript_RulesBoard::
 	lockall
 	msgbox BattleFrontier_BattlePikeLobby_Text_RulesAreListed, MSGBOX_DEFAULT
@@ -384,15 +372,6 @@ BattleFrontier_BattlePikeLobby_Text_SnatchedVictoryFromQueen:
 BattleFrontier_BattlePikeLobby_Text_AwardYouTheseBattlePoints:
 	.string "おきゃくさまの つよき うんを たたえ\nバトルポイントを さしあげます……"
 	.string "$"
-
-BattleFrontier_BattlePikeLobby_Text_OneRoomAwayFromGoal:
-	.string "{JPN}あと 1へやだったんだ！\nどくに そなえて おくべきだったな。\pまようのも ぼうけんの うちだ。\nつぎは どのみちに しようか！$"
-
-BattleFrontier_BattlePikeLobby_Text_NeverHadToBattleTrainer:
-	.string "{JPN}こっちは へいきだったよ！\n……あれ？ それは だれの はなしだっけ。\pま いっか！\nこんどは みぎへ いってみる！$"
-
-BattleFrontier_BattlePikeLobby_Text_ThinkAbilitiesUsefulHere:
-	.string "{JPN}どくや ねむりに つよい とくせいって\nここだと とっても たよりになるわ！\pどんな へやでも だいじょうぶな\nチームを つくりたいな。$"
 
 @ Unused
 BattleFrontier_BattlePikeLobby_Text_TrainersWhicheverPathIChoose:

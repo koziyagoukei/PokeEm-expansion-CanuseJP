@@ -120,28 +120,12 @@ LilycoveCity_LilycoveMuseum_1F_EventScript_StoneTablet::
 	msgbox LilycoveCity_LilycoveMuseum_1F_Text_StoneTabletWithAncientText, MSGBOX_SIGN
 	end
 
-LilycoveCity_LilycoveMuseum_1F_EventScript_SchoolKidM::
-	msgbox LilycoveCity_LilycoveMuseum_1F_Text_MustntForgetLoveForFineArts, MSGBOX_NPC
-	end
-
-LilycoveCity_LilycoveMuseum_1F_EventScript_Artist1::
-	msgbox LilycoveCity_LilycoveMuseum_1F_Text_ThisMuseumIsInspiration, MSGBOX_NPC
-	end
-
 LilycoveCity_LilycoveMuseum_1F_EventScript_NinjaBoy::
 	msgbox LilycoveCity_LilycoveMuseum_1F_Text_ThisLadyIsPretty, MSGBOX_SIGN
 	end
 
 LilycoveCity_LilycoveMuseum_1F_EventScript_Woman1::
 	msgbox LilycoveCity_LilycoveMuseum_1F_Text_ThisPokemonIsAdorable, MSGBOX_SIGN
-	end
-
-LilycoveCity_LilycoveMuseum_1F_EventScript_Woman2::
-	msgbox LilycoveCity_LilycoveMuseum_1F_Text_HeardMuseumGotNewPaintings, MSGBOX_NPC
-	end
-
-LilycoveCity_LilycoveMuseum_1F_EventScript_PsychicM::
-	msgbox LilycoveCity_LilycoveMuseum_1F_Text_CuratorHasBeenCheerful, MSGBOX_NPC
 	end
 
 LilycoveCity_LilycoveMuseum_1F_EventScript_Artist2::
@@ -152,10 +136,6 @@ LilycoveCity_LilycoveMuseum_1F_EventScript_Artist2::
 	applymovement LOCALID_MUSEUM_1F_ARTIST_2, Common_Movement_FaceOriginalDirection
 	waitmovement 0
 	release
-	end
-
-LilycoveCity_LilycoveMuseum_1F_EventScript_FatMan::
-	msgbox LilycoveCity_LilycoveMuseum_1F_Text_MuseumTouristDestination, MSGBOX_NPC
 	end
 
 LilycoveCity_LilycoveMuseum_1F_Text_WelcomeToLilycoveMuseum:
@@ -206,27 +186,12 @@ LilycoveCity_LilycoveMuseum_1F_Text_StoneTabletWithAncientText:
 LilycoveCity_LilycoveMuseum_1F_Text_WorksOfMagnificence:
 	.string "{JPN}うーん すばらしい さくひんだ……$"
 
-LilycoveCity_LilycoveMuseum_1F_Text_MustntForgetLoveForFineArts:
-	.string "{JPN}つよさも うつくしさも\nポケモンの すてきな ところだね！\pバトルの あとに えを みると\nまた ちがう ひょうじょうに きづくよ。$"
-
-LilycoveCity_LilycoveMuseum_1F_Text_ThisMuseumIsInspiration:
-	.string "{JPN}えを みていると かいたひとの\nきもちまで うかんでくるんだ。\pぼくも こんな すてきな えを\nかいてみたいなあ！$"
-
 LilycoveCity_LilycoveMuseum_1F_Text_ThisLadyIsPretty:
 	.string "この おんなの ひと きれーい!\nママみたーい!$"
 
 LilycoveCity_LilycoveMuseum_1F_Text_ThisPokemonIsAdorable:
 	.string "この ポケモン かわいいわ!\nうちの ぼうや みたい!$"
 
-LilycoveCity_LilycoveMuseum_1F_Text_HeardMuseumGotNewPaintings:
-	.string "{JPN}2かいには コンテストの ポケモンを\nかざれる てんじしつが あるのね。\pあたしも あの がくぶちに\nぴったりの えを みてみたいわ！$"
-
-LilycoveCity_LilycoveMuseum_1F_Text_CuratorHasBeenCheerful:
-	.string "{JPN}かんちょうの うれしい きもちが\nここまで つたわってくるよ。\pどんな えが ふえるのか\nぼくも たのしみに なっちゃうな。$"
-
 LilycoveCity_LilycoveMuseum_1F_Text_AimToSeeGreatPaintings:
 	.string "ここで いい えを たくさん みて\nべんきょう しないとな!\pここに いつか じぶんの さくひんを\nかざって もらうのが ゆめ なんだ!$"
-
-LilycoveCity_LilycoveMuseum_1F_Text_MuseumTouristDestination:
-	.string "{JPN}あるいて こられる ところに\nこんな びじゅつかんが あるなんてねえ。\pポケモンを みていたら\nまた しせつへ いきたくなったよ。$"
 

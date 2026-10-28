@@ -323,22 +323,6 @@ BattleFrontier_BattlePalaceLobby_EventScript_ShowDoublesResults::
 	releaseall
 	end
 
-BattleFrontier_BattlePalaceLobby_EventScript_BlackBelt::
-	msgbox BattleFrontier_BattlePalaceLobby_Text_LadyCanTellWhatMonsThink, MSGBOX_NPC
-	end
-
-BattleFrontier_BattlePalaceLobby_EventScript_Man::
-	msgbox BattleFrontier_BattlePalaceLobby_Text_NatureAndMovesKeyHere, MSGBOX_NPC
-	end
-
-BattleFrontier_BattlePalaceLobby_EventScript_Beauty::
-	msgbox BattleFrontier_BattlePalaceLobby_Text_MonDocileButTransforms, MSGBOX_NPC
-	end
-
-BattleFrontier_BattlePalaceLobby_EventScript_Maniac::
-	msgbox BattleFrontier_BattlePalaceLobby_Text_WhatNatureFavorsChippingAway, MSGBOX_NPC
-	end
-
 BattleFrontier_BattlePalaceLobby_EventScript_RulesBoard::
 	lockall
 	msgbox BattleFrontier_BattlePalaceLobby_Text_RulesAreListed, MSGBOX_DEFAULT
@@ -450,18 +434,6 @@ BattleFrontier_BattlePalaceLobby_Text_FailedToSaveBeforeEndingChallenge:
 @ Unused
 BattleFrontier_BattlePalaceLobby_Text_ReceivedPrize:
 	.string "{JPN}{PLAYER}は\n{STR_VAR_1}を もらった!$"
-
-BattleFrontier_BattlePalaceLobby_Text_LadyCanTellWhatMonsThink:
-	.string "{JPN}ウス！ ここでは ポケモンの\nきもちに まかせるッス！\pいえなくても つたわるって\nなんだか うれしいッスよね！$"
-
-BattleFrontier_BattlePalaceLobby_Text_NatureAndMovesKeyHere:
-	.string "{JPN}ポケモンの せいかくと\nおぼえている わざを みなおしてるんだ。\pしじが なくても ちからを だせるように\nちょうせんの まえに じゅんびしよう。$"
-
-BattleFrontier_BattlePalaceLobby_Text_MonDocileButTransforms:
-	.string "{JPN}おとなしいこでも いざというときは\nびっくりするほど たのもしいの！\pここで つかえるのは\nメガシンカと テラスタルなのね。$"
-
-BattleFrontier_BattlePalaceLobby_Text_WhatNatureFavorsChippingAway:
-	.string "{JPN}すぐに せめるこも\nじっくり たたかうこも いるんだね。\pみんな おなじ きもちでも\nせいかくは ちがう……おもしろいな。$"
 
 BattleFrontier_BattlePalaceLobby_Text_WelcomeForDoubleBattle:
 	.string "トレーナーの こころを ためす ばしょ\nバトルパレスへ ようこそ\pここでは ダブル バトルホールへの\nちょうせんを うけつけておる……$"

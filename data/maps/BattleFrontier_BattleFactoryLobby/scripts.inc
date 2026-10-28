@@ -266,24 +266,6 @@ BattleFrontier_BattleFactoryLobby_EventScript_ShowDoublesResults::
 	releaseall
 	end
 
-BattleFrontier_BattleFactoryLobby_EventScript_Woman::
-	msgbox BattleFrontier_BattleFactoryLobby_Text_NeedKnowledgeOfMonsMoves, MSGBOX_NPC
-	end
-
-BattleFrontier_BattleFactoryLobby_EventScript_Camper::
-	msgbox BattleFrontier_BattleFactoryLobby_Text_SwappedForWeakMon, MSGBOX_NPC
-	end
-
-BattleFrontier_BattleFactoryLobby_EventScript_Picnicker::
-	lock
-	msgbox BattleFrontier_BattleFactoryLobby_Text_NeedToCheckOpponentsMons, MSGBOX_DEFAULT
-	release
-	end
-
-BattleFrontier_BattleFactoryLobby_EventScript_FatMan::
-	msgbox BattleFrontier_BattleFactoryLobby_Text_CantFigureOutStaffHints, MSGBOX_NPC
-	end
-
 BattleFrontier_BattleFactoryLobby_EventScript_RulesBoard::
 	lockall
 	msgbox BattleFrontier_BattleFactoryLobby_Text_RulesAreListed, MSGBOX_DEFAULT
@@ -478,22 +460,6 @@ BattleFrontier_BattleFactoryLobby_Text_RecordLastMatch:
 	.string "バトルファクトリーで\nさいごに おこなった たたかいを\lフロンティアパスに きろく いたしますか?"
 	.string ""
 	.string "$"
-
-BattleFrontier_BattleFactoryLobby_Text_NeedKnowledgeOfMonsMoves:
-	.string "{JPN}レンタルの ポケモンにも\nいろんな わざや とくせいが あるわ。\pつよそうな すがた だけじゃなくて\nそのこの とくいなことを みてあげて！$"
-
-BattleFrontier_BattleFactoryLobby_Text_SwappedForWeakMon:
-	.string "{JPN}こうかんしたら チームの\nくみあわせが くずれちゃった。\pよわいこ だったんじゃ ないね。\nぼくが うまく あわせられなかったんだ。$"
-
-BattleFrontier_BattleFactoryLobby_Text_NeedToCheckOpponentsMons:
-	.string "ダメダメねー!\pトレーナーが いいポケモン もってたら\nたたかいの あいだに\lチェック しとかなきゃ!"
-	.string ""
-	.string ""
-	.string ""
-	.string "$"
-
-BattleFrontier_BattleFactoryLobby_Text_CantFigureOutStaffHints:
-	.string "{JPN}つぎの あいての ヒントを\nスタッフが おしえてくれるんだ。\pわからない ことは もちかえって\nハブで じゅんびしなおすのも いいな。$"
 
 @ Unused
 BattleFrontier_BattleFactoryLobby_Text_RentalMonsAreVaried:

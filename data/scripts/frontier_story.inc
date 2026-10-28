@@ -959,6 +959,15 @@ FrontierStory_EventScript_VisitorNotYet::
 	end
 
 @ ---------------------------------------------------------------------------
+@ Passers-by around the Frontier: each talk, a line at random for how far the rescues have come,
+@ in a voice for how they look.
+
+FrontierStory_EventScript_CrowdTalk::
+	special FrontierStory_BufferCrowdTalk
+	msgbox gStringVar4, MSGBOX_NPC
+	end
+
+@ ---------------------------------------------------------------------------
 @ The inn: everyone cured rests here. Kazuki, Toshio with his Aggron, and Yayoi with Roserade at a
 @ low table, in the lobby; Ikue and Delcatty in the east wing; Yoriko and Seviper, Nobuo and
 @ Sandslash in the west wing;

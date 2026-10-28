@@ -308,22 +308,6 @@ BattleFrontier_BattleArenaLobby_EventScript_ShowResults::
 	releaseall
 	end
 
-BattleFrontier_BattleArenaLobby_EventScript_Youngster::
-	msgbox BattleFrontier_BattleArenaLobby_Text_BadIdeaToNotAttack, MSGBOX_NPC
-	end
-
-BattleFrontier_BattleArenaLobby_EventScript_Man::
-	msgbox BattleFrontier_BattleArenaLobby_Text_LandingHitsWorked, MSGBOX_NPC
-	end
-
-BattleFrontier_BattleArenaLobby_EventScript_Camper::
-	msgbox BattleFrontier_BattleArenaLobby_Text_MatchWasDeclaredDraw, MSGBOX_NPC
-	end
-
-BattleFrontier_BattleArenaLobby_EventScript_Woman::
-	msgbox BattleFrontier_BattleArenaLobby_Text_OrderOfMonsImportant, MSGBOX_NPC
-	end
-
 BattleFrontier_BattleArenaLobby_EventScript_RulesBoard::
 	lockall
 	msgbox BattleFrontier_BattleArenaLobby_Text_RulesAreListed, MSGBOX_DEFAULT
@@ -482,18 +466,6 @@ BattleFrontier_BattleArenaLobby_Text_LookingForwardToArrivalSaveGame:
 BattleFrontier_BattleArenaLobby_Text_RecordLastMatch:
 	.string "バトルアリーナで\nさいごに おこなった たたかいを\lフロンティアパスに きろく されますかな?"
 	.string "$"
-
-BattleFrontier_BattleArenaLobby_Text_BadIdeaToNotAttack:
-	.string "{JPN}はんていで まけちゃった。\nまもっているだけじゃ だめなんだね。\pつぎは 3ターンで\nどこまで せめられるか やってみる！$"
-
-BattleFrontier_BattleArenaLobby_Text_LandingHitsWorked:
-	.string "{JPN}わざを しっかり あてたら\nはんていで かったぜ！\pみんなで よろこんでいたら\nおれまで もういちど うれしくなった！$"
-
-BattleFrontier_BattleArenaLobby_Text_MatchWasDeclaredDraw:
-	.string "{JPN}3ターンで ひきわけだったよ。\nあいても ぼくも ぜんりょくだった。\pこうたい できないから\nさいしょの じゅんびが だいじだね。$"
-
-BattleFrontier_BattleArenaLobby_Text_OrderOfMonsImportant:
-	.string "{JPN}ここでは ポケモンの じゅんばんが\nとっても だいじなの。\pメガシンカと テラスタルは おやすみ。\nZワザと ダイマックスを いかしたいわ。$"
 
 BattleFrontier_BattleArenaLobby_Text_RulesAreListed:
 	.string "かちぬきチームバトルの\nルールが かかれている!$"

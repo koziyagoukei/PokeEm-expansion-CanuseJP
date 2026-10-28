@@ -38,7 +38,7 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "LilycoveCity_LilycoveMuseum_2F_EventScript_Girl",
+      "script": "FrontierStory_EventScript_CrowdTalk",
       "flag": "FLAG_HIDE_LILYCOVE_MUSEUM_PATRON_2"
     },
     {
@@ -51,7 +51,7 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "LilycoveCity_LilycoveMuseum_2F_EventScript_ExpertM",
+      "script": "FrontierStory_EventScript_CrowdTalk",
       "flag": "FLAG_HIDE_LILYCOVE_MUSEUM_TOURISTS"
     },
     {

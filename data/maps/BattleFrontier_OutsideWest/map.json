@@ -35,7 +35,7 @@
       "movement_range_y": 2,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "BattleFrontier_OutsideWest_EventScript_Boy1",
+      "script": "FrontierStory_EventScript_CrowdTalk",
       "flag": "0"
     },
     {
@@ -76,7 +76,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "BattleFrontier_OutsideWest_EventScript_ExpertM",
+      "script": "FrontierStory_EventScript_CrowdTalk",
       "flag": "0"
     },
     {
@@ -89,7 +89,7 @@
       "movement_range_y": 3,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "BattleFrontier_OutsideWest_EventScript_Man1",
+      "script": "FrontierStory_EventScript_CrowdTalk",
       "flag": "0"
     },
     {
@@ -102,7 +102,7 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "BattleFrontier_OutsideWest_EventScript_Woman1",
+      "script": "FrontierStory_EventScript_CrowdTalk",
       "flag": "0"
     },
     {
@@ -115,7 +115,7 @@
       "movement_range_y": 3,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "BattleFrontier_OutsideWest_EventScript_FatMan1",
+      "script": "FrontierStory_EventScript_CrowdTalk",
       "flag": "0"
     },
     {
@@ -128,7 +128,7 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "BattleFrontier_OutsideWest_EventScript_Gentleman",
+      "script": "FrontierStory_EventScript_CrowdTalk",
       "flag": "0"
     },
     {
@@ -169,7 +169,7 @@
       "movement_range_y": 2,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "BattleFrontier_OutsideWest_EventScript_Man2",
+      "script": "FrontierStory_EventScript_CrowdTalk",
       "flag": "0"
     },
     {
@@ -223,7 +223,7 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "BattleFrontier_OutsideWest_EventScript_Lass",
+      "script": "FrontierStory_EventScript_CrowdTalk",
       "flag": "0"
     },
     {
@@ -236,7 +236,7 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "BattleFrontier_OutsideWest_EventScript_Man3",
+      "script": "FrontierStory_EventScript_CrowdTalk",
       "flag": "0"
     },
     {
@@ -249,7 +249,7 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "BattleFrontier_OutsideWest_EventScript_Fisherman1",
+      "script": "FrontierStory_EventScript_CrowdTalk",
       "flag": "0"
     },
     {
@@ -276,7 +276,7 @@
       "movement_range_y": 3,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "BattleFrontier_OutsideWest_EventScript_FatMan2",
+      "script": "FrontierStory_EventScript_CrowdTalk",
       "flag": "0"
     },
     {
@@ -342,7 +342,7 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "BattleFrontier_OutsideWest_EventScript_PokefanF",
+      "script": "FrontierStory_EventScript_CrowdTalk",
       "flag": "0"
     }
   ],

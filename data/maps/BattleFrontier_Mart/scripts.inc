@@ -28,10 +28,6 @@ BattleFrontier_Mart_Pokemart:
 	.2byte ITEM_HP_UP
 	pokemartlistend
 
-BattleFrontier_Mart_EventScript_OldMan::
-	msgbox BattleFrontier_Mart_Text_ChaperonGrandson, MSGBOX_NPC
-	end
-
 BattleFrontier_Mart_EventScript_OldWoman::
 	lock
 	applymovement LOCALID_FRONTIER_MART_OLD_WOMAN, Common_Movement_FaceDown
@@ -40,16 +36,6 @@ BattleFrontier_Mart_EventScript_OldWoman::
 	release
 	end
 
-BattleFrontier_Mart_EventScript_Boy::
-	msgbox BattleFrontier_Mart_Text_FacilitiesDontAllowItems, MSGBOX_NPC
-	end
-
-BattleFrontier_Mart_Text_ChaperonGrandson:
-	.string "{JPN}まごを まちながら\nおみやげを えらんで おるんじゃ。\pきょうも あしたも この じかんが\nつづけば いいのう。$"
-
 BattleFrontier_Mart_Text_ProteinMakeNiceGift:
 	.string "{JPN}この おみやげは どうかねえ？\nポケモンが つよくなる どうぐだって。\pまごの よろこぶ かおが\nもう うかんできちゃうよ。$"
-
-BattleFrontier_Mart_Text_FacilitiesDontAllowItems:
-	.string "{JPN}しせつでは バッグの どうぐを\nつかえないことが おおいんだ。\pもちものは うけつけに\nいくまえに たしかめようっと。$"
 

@@ -383,23 +383,7 @@ BattleFrontier_BattleDomeLobby_EventScript_Maniac::
 	msgbox BattleFrontier_BattleDomeLobby_Text_LastWinnerWasTough, MSGBOX_NPC
 	end
 
-BattleFrontier_BattleDomeLobby_EventScript_Lass::
-	msgbox BattleFrontier_BattleDomeLobby_Text_WinnersGainReputation, MSGBOX_NPC
-	end
-
-BattleFrontier_BattleDomeLobby_EventScript_FatMan::
-	msgbox BattleFrontier_BattleDomeLobby_Text_TrashedInFirstRound, MSGBOX_NPC
-	end
-
-BattleFrontier_BattleDomeLobby_EventScript_Man::
-	msgbox BattleFrontier_BattleDomeLobby_Text_NeedToCheckOpponentCarefully, MSGBOX_NPC
-	end
-
 @ A few OutsideWest event scripts are inserted here instead, two of which are unused
-BattleFrontier_OutsideWest_EventScript_Man3::
-	msgbox BattleFrontier_OutsideWest_Text_LongDreamedAboutBattleFrontier, MSGBOX_NPC
-	end
-
 @ Unused
 BattleFrontier_OutsideWest_EventScript_BattleDomeSign2::
 	msgbox BattleFrontier_OutsideWest_Text_BattleDomeSign2, MSGBOX_NPC
@@ -599,10 +583,6 @@ BattleFrontier_BattleDomeLobby_Text_PrevTourneyResultsDoublesLvOpen:
 BattleFrontier_BattleDomeLobby_Text_LastWinnerWasTough:
 	.string "{JPN}ぜんかいの ゆうしょうは\n{STR_VAR_1}だったんだ。\pモニターの きろくを みると\nそのときの はくしゅまで きこえるよ。$"
 
-BattleFrontier_OutsideWest_Text_LongDreamedAboutBattleFrontier:
-	.string "バトルフロンティア……\nわたしの ゆめ だった……"
-	.string "$"
-
 @ Functionally unused
 BattleFrontier_OutsideWest_Text_BattleDomeSign2:
 	.string "ここは バトルドーム\nめざせ むてきの スーパースター!"
@@ -612,15 +592,6 @@ BattleFrontier_OutsideWest_Text_BattleDomeSign2:
 BattleFrontier_OutsideWest_Text_QuestionMarkUnderConstruction:
 	.string "ここは ??????\nただいま けんせつちゅう!"
 	.string "$"
-
-BattleFrontier_BattleDomeLobby_Text_WinnersGainReputation:
-	.string "{JPN}だれが かちあがってくるかな。\nトーナメントひょうを みるのが すき！\pきみの なまえも\nおぼえて おこうっと。$"
-
-BattleFrontier_BattleDomeLobby_Text_TrashedInFirstRound:
-	.string "{JPN}1かいせんから つよい あいてだった！\nつぎこそ……って なんどめだろう。\pでも はじめの ドキドキは\nなんど あっても いいよね。$"
-
-BattleFrontier_BattleDomeLobby_Text_NeedToCheckOpponentCarefully:
-	.string "{JPN}あいての ポケモンを みて\nこっちの 2ひきを きめるんだ。\pみんなの おすすめが うかんでも\nさいごは じぶんで えらびたいな。$"
 
 BattleFrontier_BattleDomeLobby_Text_CongratsDefeatedTucker:
 	.string "おめでとう ございます!\pみごと ドームスーパースターを たおし\nバトルトーナメントに\lゆうしょう されましたね!"

@@ -96,10 +96,6 @@ BattleFrontier_RankingHall_EventScript_NinjaBoyNameOnList::
 	release
 	end
 
-BattleFrontier_RankingHall_EventScript_Boy::
-	msgbox BattleFrontier_RankingHall_Text_MyNamesNotUpThere, MSGBOX_NPC
-	end
-
 BattleFrontier_RankingHall_Text_ExplainRankingHall:
 	.string "{JPN}ここは ランキングホール。\nトレーナーたちの きろくを\lたたえる ばしょです。\pあなたの あゆみも\nここに きざまれると いいですね。$"
 
@@ -118,5 +114,3 @@ BattleFrontier_RankingHall_Text_WowThatsSuper:
 BattleFrontier_RankingHall_Text_WorkHarderIfYouSawFriendsName:
 	.string "そうなんだ…\pでも ともだちの なまえを ここで みると\nがんばろうって きもちに なるよね!$"
 
-BattleFrontier_RankingHall_Text_MyNamesNotUpThere:
-	.string "{JPN}みんなの きろくは あるけど\nぼくの なまえは まだ ないね。\pまず 1かい ちょうせんしてみよう。\nぼくの きろくを つくるんだ！$"

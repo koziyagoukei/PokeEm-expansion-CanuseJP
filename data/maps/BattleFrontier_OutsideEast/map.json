@@ -30,7 +30,7 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "BattleFrontier_OutsideEast_EventScript_NinjaBoy",
+      "script": "FrontierStory_EventScript_CrowdTalk",
       "flag": "0"
     },
     {
@@ -43,7 +43,7 @@
       "movement_range_y": 3,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "BattleFrontier_OutsideEast_EventScript_Man1",
+      "script": "FrontierStory_EventScript_CrowdTalk",
       "flag": "0"
     },
     {
@@ -56,7 +56,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "BattleFrontier_OutsideEast_EventScript_Hiker",
+      "script": "FrontierStory_EventScript_CrowdTalk",
       "flag": "0"
     },
     {
@@ -69,7 +69,7 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "BattleFrontier_OutsideEast_EventScript_HexManiac",
+      "script": "FrontierStory_EventScript_CrowdTalk",
       "flag": "0"
     },
     {
@@ -82,7 +82,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "BattleFrontier_OutsideEast_EventScript_BlackBelt1",
+      "script": "FrontierStory_EventScript_CrowdTalk",
       "flag": "0"
     },
     {
@@ -108,7 +108,7 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "BattleFrontier_OutsideEast_EventScript_ExpertF",
+      "script": "FrontierStory_EventScript_CrowdTalk",
       "flag": "0"
     },
     {
@@ -121,7 +121,7 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "BattleFrontier_OutsideEast_EventScript_TriathleteM",
+      "script": "FrontierStory_EventScript_CrowdTalk",
       "flag": "0"
     },
     {
@@ -134,7 +134,7 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "BattleFrontier_OutsideEast_EventScript_RichBoy",
+      "script": "FrontierStory_EventScript_CrowdTalk",
       "flag": "0"
     },
     {
@@ -147,7 +147,7 @@
       "movement_range_y": 6,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "BattleFrontier_OutsideEast_EventScript_TriathleteF",
+      "script": "FrontierStory_EventScript_CrowdTalk",
       "flag": "0"
     },
     {
@@ -213,7 +213,7 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "BattleFrontier_OutsideEast_EventScript_Maniac1",
+      "script": "FrontierStory_EventScript_CrowdTalk",
       "flag": "0"
     },
     {
@@ -226,7 +226,7 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "BattleFrontier_OutsideEast_EventScript_Girl",
+      "script": "FrontierStory_EventScript_CrowdTalk",
       "flag": "0"
     },
     {
@@ -239,7 +239,7 @@
       "movement_range_y": 6,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "BattleFrontier_OutsideEast_EventScript_PsychicM",
+      "script": "FrontierStory_EventScript_CrowdTalk",
       "flag": "0"
     },
     {
@@ -278,7 +278,7 @@
       "movement_range_y": 2,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "BattleFrontier_OutsideEast_EventScript_Woman2",
+      "script": "FrontierStory_EventScript_CrowdTalk",
       "flag": "0"
     },
     {
@@ -291,7 +291,7 @@
       "movement_range_y": 0,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "BattleFrontier_OutsideEast_EventScript_BlackBelt2",
+      "script": "FrontierStory_EventScript_CrowdTalk",
       "flag": "0"
     },
     {
@@ -343,7 +343,7 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "BattleFrontier_OutsideEast_EventScript_Gentleman",
+      "script": "FrontierStory_EventScript_CrowdTalk",
       "flag": "0"
     },
     {
@@ -356,7 +356,7 @@
       "movement_range_y": 1,
       "trainer_type": "TRAINER_TYPE_NONE",
       "trainer_sight_or_berry_tree_id": "0",
-      "script": "BattleFrontier_OutsideEast_EventScript_Camper",
+      "script": "FrontierStory_EventScript_CrowdTalk",
       "flag": "0"
     }
   ],
