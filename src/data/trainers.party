@@ -16896,17 +16896,71 @@ IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
 - Reflect
 - Light Screen
 
-=== TRAINER_MAY_PLACEHOLDER ===
-Name: ハルカ
-Class: RS Protag
-Pic: RS May
-Gender: Female
-Music: Male
-Double Battle: No
+=== TRAINER_POKEVIRUS_FINAL ===
+Name: ヒトポケルス
+Class: No Title
+Pic: Pokevirus
+Gender: Male
+Music: Suspicious
+Double Battle: Yes
+AI: Basic Trainer
 
-Kyogre
-Level: 5
-IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+Uxie @ Leftovers
+Level: 50
+Nature: Bold
+EVs: 252 HP / 252 Def / 4 SpD
+- Psychic
+- Yawn
+- Reflect
+- Light Screen
+
+Mesprit @ Sitrus Berry
+Level: 50
+Nature: Modest
+EVs: 252 HP / 252 SpA / 4 Spe
+- Psychic
+- Dazzling Gleam
+- Ice Beam
+- Calm Mind
+
+Azelf @ Life Orb
+Level: 50
+Nature: Timid
+EVs: 4 HP / 252 SpA / 252 Spe
+- Psychic
+- Flamethrower
+- Shadow Ball
+- Nasty Plot
+
+Necrozma-Dusk-Mane @ Ultranecrozium Z
+Ability: Prism Armor
+Level: 50
+Nature: Adamant
+EVs: 4 HP / 252 Atk / 252 Spe
+- Iron Head
+- Psycho Cut
+- Earthquake
+- Dragon Dance
+
+Eternatus-Eternamax
+Ability: Pressure
+Level: 50
+Nature: Modest
+EVs: 252 HP / 252 SpA / 4 SpD
+- Dragon Pulse
+- Sludge Bomb
+- Flamethrower
+- Flash Cannon
+
+Pecharunt @ Black Sludge
+Ability: Poison Puppeteer
+Level: 50
+Nature: Bold
+EVs: 252 HP / 252 Def / 4 SpD
+- Malignant Chain
+- Shadow Ball
+- Parting Shot
+- Recover
 
 === TRAINER_KAZUKI_RELEASE ===
 Name: カズキ

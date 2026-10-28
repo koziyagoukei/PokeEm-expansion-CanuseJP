@@ -16,6 +16,7 @@ extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Girl3;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RichBoy;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_RocketCook;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Pokevirus;
+extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_PokevirusRift;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_Woman1;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_FatMan;
 extern const struct ObjectEventGraphicsInfo gObjectEventGraphicsInfo_PokefanF;
@@ -422,6 +423,7 @@ const struct ObjectEventGraphicsInfo *const gObjectEventGraphicsInfoPointers[NUM
     [OBJ_EVENT_GFX_RICH_BOY] =                 &gObjectEventGraphicsInfo_RichBoy,
     [OBJ_EVENT_GFX_ROCKET_COOK] =              &gObjectEventGraphicsInfo_RocketCook,
     [OBJ_EVENT_GFX_POKEVIRUS] =                &gObjectEventGraphicsInfo_Pokevirus,
+    [OBJ_EVENT_GFX_POKEVIRUS_RIFT] =           &gObjectEventGraphicsInfo_PokevirusRift,
     [OBJ_EVENT_GFX_WOMAN_1] =                  &gObjectEventGraphicsInfo_Woman1,
     [OBJ_EVENT_GFX_FAT_MAN] =                  &gObjectEventGraphicsInfo_FatMan,
     [OBJ_EVENT_GFX_POKEFAN_F] =                &gObjectEventGraphicsInfo_PokefanF,

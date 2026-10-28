@@ -97,6 +97,10 @@ static const struct SpriteFrameImage sPicTable_Pokevirus[] = {
     overworld_ascending_frames(gObjectEventPic_Pokevirus, 8, 8),
 };
 
+static const struct SpriteFrameImage sPicTable_PokevirusRift[] = {
+    overworld_frame(gObjectEventPic_PokevirusRift, 4, 4, 0),
+};
+
 static const struct SpriteFrameImage sPicTable_Woman1[] = {
     overworld_ascending_frames(gObjectEventPic_Woman1, 2, 4),
 };

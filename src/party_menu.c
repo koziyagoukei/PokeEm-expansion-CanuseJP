@@ -1554,7 +1554,9 @@ static bool8 CanEnterPartyRoamerParkFromPartyMenu(void)
         && (gSaveBlock1Ptr->location.mapGroup != MAP_GROUP(MAP_MINI_MINI_VILLA_LOCAL_ROOM)
          || gSaveBlock1Ptr->location.mapNum != MAP_NUM(MAP_MINI_MINI_VILLA_LOCAL_ROOM))
         && (gSaveBlock1Ptr->location.mapGroup != MAP_GROUP(MAP_PARTY_RESORT_GATE)
-         || gSaveBlock1Ptr->location.mapNum != MAP_NUM(MAP_PARTY_RESORT_GATE));
+         || gSaveBlock1Ptr->location.mapNum != MAP_NUM(MAP_PARTY_RESORT_GATE))
+        // The way out of the depths is the rift the player came in by.
+        && gSaveBlock1Ptr->location.mapGroup != MAP_GROUP(MAP_POKEVIRUS_DEPTHS_APPROACH);
 }
 
 static void PromptEnterPartyRoamerPark(u8 taskId)

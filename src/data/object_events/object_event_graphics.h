@@ -82,6 +82,8 @@ const u16 gObjectEventPal_RocketCook[] = INCGFX_U16("graphics/custom/rocket_cook
 const u32 gObjectEventPic_Pokevirus[] = INCGFX_U32("graphics/custom/pokevirus/overworld.png", ".4bpp", "-mwidth 8 -mheight 8");
 const u16 gObjectEventPal_Pokevirus[] = INCGFX_U16("graphics/custom/pokevirus/overworld.png", ".gbapal");
 STATIC_ASSERT(sizeof(gObjectEventPic_Pokevirus) == 6 * 64 * 64 / 2, PokevirusMustHaveSixOverworldFrames)
+// The tear in the air that leads into the depths; it shares Pokevirus's palette.
+const u32 gObjectEventPic_PokevirusRift[] = INCGFX_U32("graphics/custom/pokevirus/rift.png", ".4bpp", "-mwidth 4 -mheight 4");
 const u32 gObjectEventPic_Woman1[] = INCGFX_U32("graphics/object_events/pics/people/woman_1.png", ".4bpp", "-mwidth 2 -mheight 4");
 const u32 gObjectEventPic_FatMan[] = INCGFX_U32("graphics/object_events/pics/people/fat_man.png", ".4bpp", "-mwidth 2 -mheight 4");
 const u32 gObjectEventPic_PokefanF[] = INCGFX_U32("graphics/object_events/pics/people/pokefan_f.png", ".4bpp", "-mwidth 2 -mheight 4");

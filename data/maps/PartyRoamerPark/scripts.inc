@@ -27,6 +27,7 @@ PartyRoamerPark_OnTransition:
 	setflag FLAG_TEMP_HIDE_FOLLOWER
 	call_if_eq VAR_FRONTIER_INTRO_STATE, FRONTIER_INTRO_FAMILY, PartyRoamerPark_EventScript_PlaceIntroParents
 	call FrontierStory_EventScript_SetupCamp
+	call FinalStory_EventScript_SetupEndingResort
 	setvar VAR_TEMP_0, 0
 	special Special_SpawnPartyRoamerMons
 	end
@@ -40,6 +41,7 @@ PartyRoamerPark_EventScript_PlaceIntroParents:
 	return
 
 PartyRoamerPark_OnFrame:
+	map_script_2 VAR_STORY_ENDING_STATE, ENDING_STATE_RESORT, FinalStory_EventScript_EndingResort
 	map_script_2 VAR_FRONTIER_INTRO_STATE, FRONTIER_INTRO_FAMILY, FrontierIntro_EventScript_Family
 	map_script_2 VAR_TEMP_0, 0, PartyRoamerPark_EventScript_RefreshMons
 	.2byte 0

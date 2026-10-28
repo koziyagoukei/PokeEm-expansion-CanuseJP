@@ -897,6 +897,29 @@ TEST("Frontier story: Nobuo and Pokevirus each occupy half an enemy party")
     EXPECT_EQ((u32)trainer->multiTeamSize, MULTI_TEAM_SIZE_HALF);
 }
 
+TEST("Frontier story: in the last battle Pokevirus alone sends out all six of its own")
+{
+    static const u16 sFinalSpecies[] =
+    {
+        SPECIES_UXIE, SPECIES_MESPRIT, SPECIES_AZELF,
+        SPECIES_NECROZMA_DUSK_MANE, SPECIES_ETERNATUS_ETERNAMAX, SPECIES_PECHARUNT,
+    };
+    const struct Trainer *trainer = &sStoryTestTrainers[DIFFICULTY_NORMAL][TRAINER_POKEVIRUS_FINAL];
+
+    EXPECT_EQ((u32)trainer->partySize, ARRAY_COUNT(sFinalSpecies));
+    EXPECT_NE((u32)trainer->multiTeamSize, MULTI_TEAM_SIZE_HALF);
+    EXPECT_EQ(trainer->trainerPic, sStoryTestTrainers[DIFFICULTY_NORMAL][TRAINER_POKEVIRUS].trainerPic);
+    // Necrozma Ultra Bursts in the battle: begun in that form, it would have nothing to change back to.
+    EXPECT_EQ(trainer->party[3].heldItem, ITEM_ULTRANECROZIUM_Z);
+    for (u32 i = 0; i < ARRAY_COUNT(sFinalSpecies); i++)
+    {
+        EXPECT_EQ(trainer->party[i].species, sFinalSpecies[i]);
+        EXPECT_EQ(trainer->party[i].lvl, 50);
+        for (u32 move = 0; move < MAX_MON_MOVES; move++)
+            EXPECT_NE(trainer->party[i].moves[move], MOVE_NONE);
+    }
+}
+
 TEST("Frontier story: all eight rescue targets can finish without losing another target's state")
 {
     ResetStory();

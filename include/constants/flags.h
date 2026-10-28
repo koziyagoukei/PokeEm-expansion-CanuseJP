@@ -87,6 +87,11 @@
 #define FLAG_UNUSED_0x031    0x31 // Unused Flag
 #define FLAG_UNUSED_0x032    0x32 // Unused Flag
 #define FLAG_UNUSED_0x033    0x33 // Unused Flag
+// The final chapter: after the fourth rescue the rescued spoke on the inn's beach and a rift opened
+// there into the depths; what the cook and Darkrai said on the way down.
+#define FLAG_STORY_PATH_OPEN           FLAG_UNUSED_0x031
+#define FLAG_STORY_DEPTHS_ENTERED      FLAG_UNUSED_0x032
+#define FLAG_STORY_DEPTHS_HELIX_TALK   FLAG_UNUSED_0x033
 #define FLAG_UNUSED_0x034    0x34 // Unused Flag
 #define FLAG_UNUSED_0x035    0x35 // Unused Flag
 #define FLAG_UNUSED_0x036    0x36 // Unused Flag

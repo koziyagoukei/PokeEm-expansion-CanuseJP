@@ -28,8 +28,9 @@ TEST("Restoration inn: four maps use dedicated secondary graphics and no unrelat
         EXPECT(map->mapLayout->secondaryTileset->isSecondary);
         EXPECT(map->mapLayout->secondaryTileset->isCompressed);
         EXPECT_EQ(map->mapLayout->secondaryTileset->callback,NULL);
-        // The ferry and its crew at the outside pier; elsewhere, the cured who rest here.
-        EXPECT_EQ(map->events->objectEventCount, ((const u32[]){6, 7, 4, 6})[i]);
+        // The ferry and its crew at the outside pier, and the gathering and the rift on the beach;
+        // elsewhere, the cured who rest here.
+        EXPECT_EQ(map->events->objectEventCount, ((const u32[]){17, 7, 4, 6})[i]);
         EXPECT_EQ(map->events->coordEventCount,0);
     }
 }

@@ -101,6 +101,7 @@ EWRAM_DATA static u8 *sTrainerBattleEndScript = NULL;
 EWRAM_DATA static bool8 sShouldCheckTrainerBScript = FALSE;
 EWRAM_DATA static u8 sNoOfPossibleTrainerRetScripts = 0;
 EWRAM_DATA static bool8 sPokevirusReleaseBattle = FALSE;
+EWRAM_DATA static bool8 sPokevirusFinalBattle = FALSE; // with the release transition, the final score
 
 // The first transition is used if the enemy Pokemon are lower level than our Pokemon.
 // Otherwise, the second transition is used.
@@ -491,12 +492,16 @@ static void DoBattlePikeWildBattle(void)
 static void DoTrainerBattle(void)
 {
     enum BattleTransition transition;
+    u16 song = 0;
 
     CreateNPCTrainerParty(&gParties[B_TRAINER_OPPONENT_A][0], TRAINER_BATTLE_PARAM.opponentA);
     if (gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS && !BATTLE_TWO_VS_ONE_OPPONENT)
         CreateNPCTrainerParty(&gParties[B_TRAINER_OPPONENT_B][0], TRAINER_BATTLE_PARAM.opponentB);
     transition = GetTrainerBattleTransition();
-    CreateBattleStartTask(transition, transition == B_TRANSITION_POKEVIRUS_RELEASE ? MUS_POKEVIRUS_RELEASE : 0);
+    if (transition == B_TRANSITION_POKEVIRUS_RELEASE)
+        song = sPokevirusFinalBattle ? MUS_POKEVIRUS_FINAL : MUS_POKEVIRUS_RELEASE;
+    sPokevirusFinalBattle = FALSE;
+    CreateBattleStartTask(transition, song);
     IncrementGameStat(GAME_STAT_TOTAL_BATTLES);
     IncrementGameStat(GAME_STAT_TRAINER_BATTLES);
     TryUpdateGymLeaderRematchFromTrainer();
@@ -1100,6 +1105,7 @@ void InitTrainerBattleParameter(void)
     memset(gTrainerBattleParameter.data, 0, sizeof(TrainerBattleParameter));
     sTrainerBattleEndScript = NULL;
     sPokevirusReleaseBattle = FALSE;
+    sPokevirusFinalBattle = FALSE;
 }
 
 void TrainerBattleLoadArgs(const u8 *data)
@@ -1296,6 +1302,13 @@ void Script_TrainerBattlePokevirus(struct ScriptContext *ctx)
 void SetPokevirusReleaseTransition(void)
 {
     sPokevirusReleaseBattle = TRUE;
+}
+
+// The last battle against Pokevirus: the same transition, with its own music.
+void SetPokevirusFinalBattle(void)
+{
+    sPokevirusReleaseBattle = TRUE;
+    sPokevirusFinalBattle = TRUE;
 }
 
 void ConfigureApproachingTrainerBattle(struct ApproachingTrainer *approachingTrainer)

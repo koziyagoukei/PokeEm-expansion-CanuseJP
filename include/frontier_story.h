@@ -6,6 +6,7 @@
 // Story battles (scripts call these as specials).
 void FrontierStory_PrepareReleaseBattle(void);
 void FrontierStory_PrepareMatchedBattle(void);
+void FrontierStory_PrepareFinalBattle(void);
 void FrontierStory_EndStoryBattle(void);
 
 // Battle engine hooks.
@@ -40,6 +41,7 @@ void FrontierStory_BufferContestSceneBranch(void);
 
 // Shared progress and the camp visitors.
 void FrontierStory_CountRescued(void);
+void FrontierStory_ShouldGather(void);
 void FrontierStory_ShouldSuggestInn(void);
 void FrontierStory_CanDarkraiJoin(void);
 void FrontierStory_PickCampVisitor(void);
@@ -57,6 +59,9 @@ void FrontierStory_BufferStaffAside(void);
 u32 FrontierStory_GetRegularPhase(void);
 bool32 FrontierStory_BufferRegularLine(u32 regular, u32 phase);
 void FrontierStory_BufferRegularTalk(void);
+
+// The end of the story (frontier_ending.c).
+void FrontierStory_ShowEnding(void);
 
 // Placing people for story scenes.
 void FrontierStory_ArrangeReleaseScene(void);

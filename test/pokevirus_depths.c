@@ -31,8 +31,12 @@ static const struct MapHeader *GetDungeonMap(u32 index)
     return Overworld_GetMapHeaderByGroupAndId(MAP_GROUP(sMaps[index]), MAP_NUM(sMaps[index]));
 }
 
-TEST("Pokevirus depths: three dedicated maps have no NPCs or active scenario triggers")
+TEST("Pokevirus depths: three dedicated maps hold only the final chapter's own people and scenes")
 {
+    // The way back out with the cook and Darkrai at the entrance, and Pokevirus with them at the
+    // core. Each map's scenes start from its own map scripts; no step triggers or signs.
+    static const u8 sObjectCounts[] = {3, 0, 3};
+
     for (u32 i = 0; i < ARRAY_COUNT(sMaps); i++)
     {
         const struct MapHeader *map = GetDungeonMap(i);
@@ -42,10 +46,10 @@ TEST("Pokevirus depths: three dedicated maps have no NPCs or active scenario tri
         EXPECT(tileset->isCompressed);
         EXPECT(tileset->isSecondary);
         EXPECT(tileset->callback == InitTilesetAnim_PokevirusDepths);
-        EXPECT_EQ(map->events->objectEventCount, 0);
+        EXPECT_EQ(map->events->objectEventCount, sObjectCounts[i]);
         EXPECT_EQ(map->events->coordEventCount, 0);
         EXPECT_EQ(map->events->bgEventCount, 0);
-        EXPECT_EQ(map->mapScripts[0], 0);
+        EXPECT_NE(map->mapScripts[0], 0);
         EXPECT(!map->mapLayout->isFrlg);
         for (u32 j = 0; j < 4; j++)
         {

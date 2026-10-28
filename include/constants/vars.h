@@ -315,6 +315,12 @@
 #define VAR_UNUSED_0x40FE                                0x40FE // Unused Var
 #define VAR_STORY_TARGET_FEVERS                          VAR_UNUSED_0x40FE // Per STORY_TARGET_*, two bits: their fever came alone, and with the release battle
 #define VAR_UNUSED_0x40FF                                0x40FF // Unused Var
+#define VAR_STORY_ENDING_STATE                           VAR_UNUSED_0x40FF // ENDING_STATE_*
+// After the final battle: Pecharunt wakes in the hub, then the family at the resort, then the end.
+#define ENDING_STATE_NONE                                0
+#define ENDING_STATE_HUB                                 1
+#define ENDING_STATE_RESORT                              2
+#define ENDING_STATE_DONE                                3
 
 #define VARS_END                                         0x40FF
 #define VARS_COUNT                                       (VARS_END - VARS_START + 1)

@@ -153,6 +153,13 @@ void FrontierStory_PrepareReleaseBattle(void)
     SetPokevirusReleaseTransition();
 }
 
+// The last battle, against Pokevirus alone: like a release battle, with the final music.
+void FrontierStory_PrepareFinalBattle(void)
+{
+    FrontierStory_PrepareReleaseBattle();
+    SetPokevirusFinalBattle();
+}
+
 void FrontierStory_PrepareMatchedBattle(void)
 {
     sStoryBattle.level = GetPlayerPartyMaxLevel();
@@ -344,6 +351,12 @@ static u32 CountRescued(void)
 void FrontierStory_CountRescued(void)
 {
     gSpecialVar_Result = CountRescued();
+}
+
+// The fourth rescue opens the way to the depths: the rescued gather on the inn's beach once.
+void FrontierStory_ShouldGather(void)
+{
+    gSpecialVar_Result = IsStoryActive() && CountRescued() >= 4 && !FlagGet(FLAG_STORY_PATH_OPEN);
 }
 
 // Everyone cured so far: the scenario rescues and the Brains and guests cured at the camp.

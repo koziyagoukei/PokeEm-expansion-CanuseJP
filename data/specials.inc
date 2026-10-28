@@ -736,3 +736,6 @@ gSpecials::
 	def_special FrontierStory_BufferCrowdTalk
 	def_special FrontierStory_BufferStaffAside
 	def_special FrontierStory_BufferRegularTalk
+	def_special FrontierStory_PrepareFinalBattle
+	def_special FrontierStory_ShouldGather
+	def_special FrontierStory_ShowEnding

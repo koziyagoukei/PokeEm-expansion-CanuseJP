@@ -91,6 +91,7 @@ FrontierStory_EventScript_DarkraiJoins::
 
 FrontierStory_EventScript_Pecharunt::
 	lock
+	goto_if_set FLAG_STORY_POKEVIRUS_FADED, FinalStory_EventScript_PecharuntAwake
 	goto_if_set FLAG_STORY_CURE_FOUND, FrontierStory_EventScript_PecharuntCured
 	msgbox FrontierStory_Text_PecharuntSleeping, MSGBOX_DEFAULT
 	release
@@ -104,12 +105,16 @@ FrontierStory_EventScript_PecharuntCured::
 FrontierStory_EventScript_Darkrai::
 	lock
 	faceplayer
+	goto_if_set FLAG_STORY_POKEVIRUS_FADED, FinalStory_EventScript_DarkraiAfterEnding
+	goto_if_set FLAG_STORY_PATH_OPEN, FinalStory_EventScript_DarkraiPathOpen
 	goto_if_set FLAG_STORY_CURE_FOUND, FrontierStory_EventScript_DarkraiAfterCure
 	msgbox FrontierStory_Text_DarkraiWatching, MSGBOX_DEFAULT
 	release
 	end
 
 FrontierStory_EventScript_DarkraiAfterCure::
+	special FrontierStory_ShouldGather
+	goto_if_eq VAR_RESULT, TRUE, FinalStory_EventScript_DarkraiGatherHint
 	special FrontierStory_ShouldSuggestInn
 	goto_if_eq VAR_RESULT, TRUE, FrontierStory_EventScript_DarkraiSuggestsInnInHub
 	msgbox FrontierStory_Text_DarkraiSearching, MSGBOX_DEFAULT
@@ -475,6 +480,7 @@ FrontierStory_EventScript_PokevirusAppears::
 	return
 
 FrontierStory_EventScript_PokevirusAgain::
+	goto_if_set FLAG_STORY_POKEVIRUS_FADED, FinalStory_EventScript_PokevirusEcho
 	msgbox FrontierStory_Text_CookPokevirusAgain, MSGBOX_DEFAULT
 	return
 
@@ -1310,6 +1316,7 @@ InnStory_EventScript_SetupOutside::
 	setflag FLAG_TEMP_12
 	call_if_set FLAG_STORY_RESCUED_ARENA, InnStory_EventScript_ShowEisuke
 	call_if_set FLAG_STORY_RESCUED_DOME, InnStory_EventScript_ShowReika
+	call FinalStory_EventScript_SetupBeach
 	return
 
 InnStory_EventScript_ShowEisuke::

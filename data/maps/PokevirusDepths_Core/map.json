@@ -14,7 +14,50 @@
   "show_map_name": false,
   "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
   "connections": null,
-  "object_events": [],
+  "object_events": [
+    {
+      "local_id": "LOCALID_CORE_POKEVIRUS",
+      "graphics_id": "OBJ_EVENT_GFX_POKEVIRUS",
+      "x": 15,
+      "y": 14,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "FinalStory_EventScript_Pokevirus",
+      "flag": "FLAG_TEMP_1E"
+    },
+    {
+      "local_id": "LOCALID_CORE_COOK",
+      "graphics_id": "OBJ_EVENT_GFX_ROCKET_COOK",
+      "x": 14,
+      "y": 16,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "0",
+      "flag": "FLAG_TEMP_1D"
+    },
+    {
+      "local_id": "LOCALID_CORE_DARKRAI",
+      "graphics_id": "OBJ_EVENT_GFX_SPECIES(DARKRAI)",
+      "x": 16,
+      "y": 16,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_UP",
+      "movement_range_x": 0,
+      "movement_range_y": 0,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "0",
+      "flag": "FLAG_TEMP_1D"
+    }
+  ],
   "warp_events": [
     {
       "warp_id": "WARP_ID_PV_CORE_ENTRY",
