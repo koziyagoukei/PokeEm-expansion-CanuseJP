@@ -1429,300 +1429,298 @@ FrontierStory_Movement_FerrySailEast:
 @ Text: shared
 
 FrontierStory_Text_DarkraiCallsFromAfar:
-	.string "{JPN}？？？『……きこえるか。\p"
-	.string "シンボルを えた トレーナー。\n"
-	.string "あなたに たのみたい ことが ある。\p"
-	.string "ハブで まっている。』$"
+	.string "{JPN}？？？『……聞こえるか。\p"
+	.string "シンボルを得た トレーナー。\n"
+	.string "あなたに 頼みたいことがある。\p"
+	.string "ハブで 待っている。』$"
 
 FrontierStory_Text_DarkraiWarnsAlone:
 	.string "{JPN}？？？『……いけない。\n"
-	.string "ひとりで ちかづいては だめだ。\p"
-	.string "まずは ハブへ きてほしい。』$"
+	.string "一人で 近づいては駄目だ。\p"
+	.string "まずは ハブへ来てほしい。』$"
 
 FrontierStory_Text_DarkraiCallsInHub:
-	.string "{JPN}？？？『……きてくれたか。\n"
-	.string "わたしは ここだ。』$"
+	.string "{JPN}？？？『……来てくれたか。\n"
+	.string "私は ここだ。』$"
 
 FrontierStory_Text_CookHeardVoice:
-	.string "{JPN}てんしゅ『{PLAYER}！\n"
-	.string "いまの こえ…… きこえたか！？\p"
-	.string "あたまの なかに ちょくせつ\n"
-	.string "ひびいて きやがった……！』$"
+	.string "{JPN}店主『{PLAYER}！\n"
+	.string "今の 声…… 聞こえたか！？\p"
+	.string "頭の中に 直接 \n"
+	.string "響いてきやがった……！』$"
 
 FrontierStory_Text_DarkraiIntroduces:
-	.string "{JPN}？？？『おどろかせて すまない。\p"
-	.string "わたしは ダークライ。\n"
-	.string "こころに ことばを とどけている。\p"
-	.string "そこで ねむっている モモワロウを\n"
-	.string "ずっと そばで みまもってきた。』$"
+	.string "{JPN}？？？『驚かせて すまない。\p"
+	.string "私は ダークライ。\n"
+	.string "あなたの心に 直接語りかけている。\p"
+	.string "そこで 眠っている モモワロウを\n"
+	.string "ずっと そばで 見守ってきた。』$"
 
 FrontierStory_Text_CookAboutPecharunt:
-	.string "{JPN}てんしゅ『モモワロウ……\n"
-	.string "ハブの すみで ねむってる あいつか。\p"
-	.string "なにを しても めを さまさねえから\n"
-	.string "そっと しておいたんだが……。』$"
+	.string "{JPN}店主『モモワロウ……\n"
+	.string "ハブの隅で 眠ってるあいつか。\p"
+	.string "何をしても 目を覚まさねえから \n"
+	.string "そっとしておいたんだが……。』$"
 
 FrontierStory_Text_DarkraiAboutPecharunt:
-	.string "{JPN}ダークライ『あの こは とおい せかいから\n"
-	.string "ひとりで まよいこんできた。\p"
-	.string "わたしは あの こと しばらく\n"
-	.string "いっしょに くらしていた。\p"
-	.string "……その あの こに ポケルスが うつり\n"
-	.string "かたちを かえて ひろがった。\p"
-	.string "ひとと ポケモンの こころを\n"
-	.string "まぜあわせる ものとして。』$"
+	.string "{JPN}ダークライ『あの子は 遠い世界から\n"
+	.string "一人で 迷い込んできた。\p"
+	.string "私は しばらく あの子と\n"
+	.string "共に暮らしていた。\p"
+	.string "……そのあの子に ポケルスが感染した。\n"
+	.string "そして 形を変えて 広がったのだ。\p"
+	.string "人と ポケモンの心を \n"
+	.string "混ぜ合わせるものとして。』$"
 
 FrontierStory_Text_DarkraiWantsToHelp:
 	.string "{JPN}ダークライ『{PLAYER}。\n"
-	.string "あなたが シンボルを えたとき\l"
-	.string "つながりの なかで だれかの こころが\l"
-	.string "ゆれるのを かんじた。\p"
-	.string "わたしも ちからを かしたい。\n"
-	.string "……あの こを たすけたいのだ。』$"
+	.string "あなたが シンボルを得た時 \l"
+	.string "繋がりの中で 誰かの心が\l"
+	.string "揺れるのを 感じた。\p"
+	.string "私も 力を貸したい。\n"
+	.string "……あの子を 助けたいのだ。』$"
 
 FrontierStory_Text_CookWelcomesDarkrai:
-	.string "{JPN}てんしゅ『……ジガルデの やつも\n"
-	.string "だまって うなずいてやがる。\p"
-	.string "わかった。 ダークライ。\n"
-	.string "おまえも おれたちの なかまだ。』$"
+	.string "{JPN}店主『……ジガルデの やつも\n"
+	.string "黙って 頷いてやがる。\p"
+	.string "分かった。 ダークライ。\n"
+	.string "おまえも おれたちの 仲間だ。』$"
 
 FrontierStory_Text_DarkraiFavoriteFood:
-	.string "{JPN}ダークライ『ひとつ おもいだした\n"
-	.string "ことが ある。\p"
-	.string "モモワロウは よく はなしていた。\n"
-	.string "しかくくて あまい だんごが すきだと。\p"
-	.string "むかし あの こを ひろってくれた\n"
-	.string "いえで たべていた……\p"
-	.string "きびだんご と よんでいた。』$"
+	.string "{JPN}ダークライ『……ひとつ 思い出した。\p"
+	.string "モモワロウは よく話していた。\n"
+	.string "四角くて 甘い団子が好きだと。\p"
+	.string "昔 あの子を 拾ってくれた家で\n"
+	.string "食べていたものだそうだ。\p"
+	.string "……きびだんご と 呼んでいた。』$"
 
 FrontierStory_Text_CookKnowsRecipe:
-	.string "{JPN}てんしゅ『しかくい きびだんご……？\p"
-	.string "そりゃ うちに むかしから\n"
-	.string "つたわってる きびだんごと おなじだ。\p"
-	.string "……そういや ばあちゃんが いってたな。\n"
-	.string "ずっと むかし ごせんぞさまが\l"
-	.string "ふしぎな ポケモンを\l"
-	.string "あずかってた ことが あるって。\p"
-	.string "……ま むかしばなしだ。\n"
-	.string "だが レシピなら おぼえてる。\p"
-	.string "つくって おいてやる。 あいつが\n"
-	.string "めを さましたら くわせてやろうぜ。』$"
+	.string "{JPN}店主『四角い きびだんご……？\p"
+	.string "そりゃ うちに昔から\n"
+	.string "伝わってるのと 同じだ。\p"
+	.string "……そういや ばあちゃんが言ってたな。\n"
+	.string "ずっと昔 ご先祖様が\l"
+	.string "不思議なポケモンを 預かってたって。\p"
+	.string "……ま 昔話だ。\n"
+	.string "だが レシピなら 覚えてる。\p"
+	.string "作っておいてやる。あいつが\n"
+	.string "目を覚ましたら 食わせてやろうぜ。』$"
 
 FrontierStory_Text_DarkraiThanks:
 	.string "{JPN}ダークライ『……ありがとう。』$"
 
 FrontierStory_Text_CookExplainsReleaseBattles:
-	.string "{JPN}てんしゅ『{PLAYER}。\n"
-	.string "きんいろの シンボルを とった しせつで\l"
-	.string "ようすの おかしい やつが いたら\l"
-	.string "そいつに はなしかけてみろ。\p"
-	.string "なにか おきたら おれと ダークライが\n"
-	.string "すぐに かけつける。\p"
-	.string "そのときは ふたりで くんで\n"
-	.string "たたかうぞ！』$"
+	.string "{JPN}店主『{PLAYER}。\n"
+	.string "金色のシンボルを 取った施設で \l"
+	.string "様子のおかしいやつが いたら\l"
+	.string "そいつに 話しかけてみろ。\p"
+	.string "何かあったら おれとダークライが\n"
+	.string "すぐに 駆けつける。\p"
+	.string "その時は 二人で組んで\n"
+	.string "戦うぞ！』$"
 
 FrontierStory_Text_PecharuntSleeping:
-	.string "{JPN}モモワロウが ねむっている。\p"
-	.string "ゆすっても よびかけても\n"
-	.string "まったく はんのうが ない……。$"
+	.string "{JPN}モモワロウが 眠っている。\p"
+	.string "ゆすっても 呼びかけても\n"
+	.string "まったく 反応がない……。$"
 
 FrontierStory_Text_PecharuntStillSleeping:
-	.string "{JPN}モモワロウが しずかに ねむっている。\p"
-	.string "かおいろは よくなったが\n"
-	.string "めを さます けはいは ない……。$"
+	.string "{JPN}モモワロウが 静かに 眠っている。\p"
+	.string "顔色は よくなったが\n"
+	.string "目を覚ます気配は ない……。$"
 
 FrontierStory_Text_DarkraiWatching:
-	.string "{JPN}ダークライ『わたしは ここで\n"
-	.string "あの こを みまもっている。\p"
-	.string "なにか あれば あなたの こころに\n"
-	.string "よびかけよう。』$"
+	.string "{JPN}ダークライ『私は ここで\n"
+	.string "あの子を 見守っている。\p"
+	.string "なにか あれば あなたの 心に\n"
+	.string "呼びかけよう。』$"
 
 FrontierStory_Text_DarkraiSearching:
-	.string "{JPN}ダークライ『からだは なおった。\n"
-	.string "だが こころが もどってこない。\p"
-	.string "あの こは きっと まだ どこかで\n"
-	.string "ゆめを みている……。』$"
+	.string "{JPN}ダークライ『身体は 治った。\n"
+	.string "だが 心が 戻ってこない。\p"
+	.string "あの子は きっと まだどこかで\n"
+	.string "夢を見ている……。』$"
 
 FrontierStory_Text_CookArrives:
-	.string "{JPN}てんしゅ『{PLAYER}！ まにあったか！』$"
+	.string "{JPN}店主『{PLAYER}！ 間に合ったか！』$"
 
 FrontierStory_Text_CookSeesPokevirus:
-	.string "{JPN}てんしゅ『……なんだ ありゃあ……！？』$"
+	.string "{JPN}店主『……なんだ ありゃあ……！？』$"
 
 FrontierStory_Text_DarkraiNamesPokevirus:
 	.string "{JPN}ダークライ『……あれが ヒトポケルスだ。\p"
-	.string "みんなの こころを つないでいる ものが\n"
-	.string "はじめて かたちを もって あらわれた。\p"
-	.string "はなれようと する こころを\n"
-	.string "ひきとめようと しているのだ。』$"
+	.string "皆の心を 繋いでいるものが \n"
+	.string "初めて 形を持って現れた。\p"
+	.string "離れようとする心を\n"
+	.string "引き止めようと しているのだ。』$"
 
 FrontierStory_Text_CookResolves:
-	.string "{JPN}てんしゅ『ジガルデが いってた やつか……！\p"
-	.string "わるぎが あるのか ないのか\n"
-	.string "しらねえが……\p"
-	.string "はなれたいって やつを\n"
-	.string "ひきとめる すじあいは ねえ！』$"
+	.string "{JPN}店主『ジガルデが 言ってたやつか……！\p"
+	.string "悪気があるか どうかなんざ\n"
+	.string "知らねえが……。\p"
+	.string "離れたいってやつを\n"
+	.string "引き止める筋合いは ねえ！』$"
 
 FrontierStory_Text_CookPokevirusAgain:
-	.string "{JPN}てんしゅ『また でやがったな……！\n"
+	.string "{JPN}店主『また でやがったな……！\n"
 	.string "{PLAYER}！ いくぞ！』$"
 
 FrontierStory_Text_CookAsksReady:
-	.string "{JPN}てんしゅ『おれと くんで たたかうぞ。\n"
-	.string "ポケモンを 3びき えらんでくれ。\p"
-	.string "じゅんびは いいか？』$"
+	.string "{JPN}店主『おれと組んで 戦うぞ。\n"
+	.string "ポケモンを 3匹選んでくれ。\p"
+	.string "準備は いいか？』$"
 
 FrontierStory_Text_CookRetreats:
-	.string "{JPN}てんしゅ『……いったん さがるぞ。\p"
-	.string "じゅんびが できたら\n"
-	.string "もういちど はなしかけてやれ。』$"
+	.string "{JPN}店主『……一旦 下がるぞ。\p"
+	.string "準備が できたら\n"
+	.string "もう一度 話しかけてやれ。』$"
 
 FrontierStory_Text_CookLostRelease:
-	.string "{JPN}てんしゅ『くっ……！ たてなおすぞ！\p"
-	.string "なんどでも いい。\n"
-	.string "かならず ひきはがしてやる！』$"
+	.string "{JPN}店主『くっ……！ 立て直すぞ！\p"
+	.string "何度でも いい。\n"
+	.string "必ず 引き剥がしてやる！』$"
 
 FrontierStory_Text_PokevirusDefeat:
 	.string "{JPN}…… ……………… ……$"
 
 FrontierStory_Text_CookForcesMeal:
-	.string "{JPN}てんしゅ『ほら くえ！\n"
-	.string "くわなきゃ もたねえぞ！』$"
+	.string "{JPN}店主『ほら 食え！\n"
+	.string "食わなきゃ もたねえぞ！』$"
 
 FrontierStory_Text_CookServesDessert:
-	.string "{JPN}てんしゅ『……よし ぜんぶ くったな。\n"
-	.string "しあげに デザートだ。\p"
-	.string "ダークライの はなしで\n"
-	.string "つくっておいた きびだんごだ。\p"
-	.string "あまいもんは こころに きくぜ。』\p"
-	.string "てんしゅは しかくい きびだんごを\n"
-	.string "ひとつ たべさせた。$"
+	.string "{JPN}店主『……よし 全部 食ったな。\n"
+	.string "仕上げに デザートだ。\p"
+	.string "ダークライの 話で\n"
+	.string "作っておいた きびだんごだ。\p"
+	.string "甘いもんは 心に効くぜ。』\p"
+	.string "店主は 四角い きびだんごを\n"
+	.string "ひとつ 食べさせた。$"
 
 FrontierStory_Text_CookWhatHappened:
-	.string "{JPN}てんしゅ『……おい。\n"
-	.string "いま なにが おきた？』$"
+	.string "{JPN}店主『……おい。\n"
+	.string "今 何が起きた？』$"
 
 FrontierStory_Text_DarkraiSensesCure:
-	.string "{JPN}ダークライ『……わかる。\n"
-	.string "その こから ウイルスの けはいが\l"
-	.string "きえた。\p"
-	.string "きびだんごが…… なおしたのだ。』$"
+	.string "{JPN}ダークライ『……分かる。\n"
+	.string "その子から ウイルスの気配が\l"
+	.string "消えた。\p"
+	.string "きびだんごが…… 治したのだ。』$"
 
 FrontierStory_Text_CookAmazed:
-	.string "{JPN}てんしゅ『まじかよ……！\n"
-	.string "うちの きびだんごが くすりに？\p"
+	.string "{JPN}店主『まじかよ……！\n"
+	.string "うちの きびだんごが 薬に？\p"
 	.string "……だったら モモワロウにも\n"
-	.string "くわせてみる！』$"
+	.string "食わせてみる！』$"
 
 FrontierStory_Text_FeedPecharunt:
-	.string "{JPN}てんしゅは ねむっている モモワロウの\n"
-	.string "くちもとへ きびだんごを はこんだ。\p"
-	.string "モモワロウは めを とじた まま\n"
-	.string "ちいさく くちを うごかした……。$"
+	.string "{JPN}店主は 眠っている モモワロウの\n"
+	.string "口元へ きびだんごを運んだ。\p"
+	.string "モモワロウは 目を閉じたまま \n"
+	.string "小さく 口を動かした……。$"
 
 FrontierStory_Text_DarkraiPecharuntStillAsleep:
-	.string "{JPN}ダークライ『……モモワロウの からだからも\n"
-	.string "ウイルスが きえた。\p"
-	.string "……だが めを さまさない。\n"
-	.string "こころが まだ もどっていないようだ。』$"
+	.string "{JPN}ダークライ『……モモワロウの身体からも\n"
+	.string "ウイルスが 消えた。\p"
+	.string "……だが 目を覚まさない。\n"
+	.string "心が まだ 戻っていないようだ。』$"
 
 FrontierStory_Text_CookWillSearch:
-	.string "{JPN}てんしゅ『なおったのに おきねえ……？\p"
-	.string "……わけを さがすしか ねえな。\n"
-	.string "なにか きづいたら おしえてくれ。』$"
+	.string "{JPN}店主『治ったのに 起きねえ……？\p"
+	.string "……理由を探すしか ねえな。\n"
+	.string "何か気づいたら 教えてくれ。』$"
 
 FrontierStory_Text_CookHandsKibidango:
-	.string "{JPN}てんしゅ『きびだんごは おれが\n"
-	.string "つくりおきして おく。\p"
+	.string "{JPN}店主『きびだんごは おれが\n"
+	.string "作り置きしておく。\p"
 	.string "{PLAYER}。 これからは おまえも\n"
-	.string "もっていけ。\p"
-	.string "まけて じぶんを おもいだした やつが\n"
-	.string "いたら わたしてやってくれ。\p"
+	.string "持っていけ。\p"
+	.string "負けて 自分を 思い出した やつが\n"
+	.string "いたら 渡してやってくれ。\p"
 	.string "そういう やつは きっと\n"
-	.string "リゾートに たずねてくるだろうよ。』$"
+	.string "リゾートに 訪ねてくるだろうよ。』$"
 
 FrontierStory_Text_CookKnownCure:
-	.string "{JPN}てんしゅ『しあげは こいつだ。』\p"
-	.string "てんしゅは きびだんごを\n"
-	.string "ひとつ たべさせた。$"
+	.string "{JPN}店主『仕上げは こいつだ。』\p"
+	.string "店主は きびだんごを\n"
+	.string "ひとつ 食べさせた。$"
 
 FrontierStory_Text_CookSendsToInn:
-	.string "{JPN}てんしゅ『りょかんなら\n"
-	.string "めしも ふろも ある。 ゆっくり やすめよ。』$"
+	.string "{JPN}店主『旅館なら\n"
+	.string "飯も 風呂も ある。 ゆっくり 休めよ。』$"
 
 FrontierStory_Text_CookCarriesToHub:
-	.string "{JPN}てんしゅ『おい しっかりしろ！\n"
-	.string "……いきは ある。\p"
-	.string "……だが うわごとを いってやがる。\n"
-	.string "まだ なおっちゃ いねえんだ。\p"
-	.string "ハブに はこぶぞ！\n"
-	.string "めしを くわせりゃ ちからも もどる！』$"
+	.string "{JPN}店主『おい しっかりしろ！\n"
+	.string "……息はある。\p"
+	.string "……だが うわ言を 言ってやがる。\n"
+	.string "まだ 治っちゃ いねえんだ。\p"
+	.string "ハブに 運ぶぞ！\n"
+	.string "飯を 食わせりゃ 力も 戻る！』$"
 
 FrontierStory_Text_OfferKibidango:
 	.string "{JPN}{STR_VAR_1}に\n"
-	.string "おもいでの きびだんごを わたしますか？$"
+	.string "おもいでのきびだんごを 渡しますか？$"
 
 FrontierStory_Text_VisitorEats:
 	.string "{JPN}{PLAYER}は {STR_VAR_1}に\n"
-	.string "きびだんごを わたした。\p"
-	.string "{STR_VAR_1}は しずかに\n"
-	.string "きびだんごを たべた……。$"
+	.string "きびだんごを 渡した。\p"
+	.string "{STR_VAR_1}は 静かに\n"
+	.string "きびだんごを 食べた……。$"
 
 FrontierStory_Text_VisitorWillWait:
 	.string "{JPN}……そうか。\n"
-	.string "わたしも まだ まよって いるのかも。\p"
-	.string "また くるよ。$"
+	.string "私も まだ 迷っているのかも。\p"
+	.string "また 来るよ。$"
 
 FrontierStory_Text_DarkraiReachesOut:
 	.string "{JPN}ダークライ『……{PLAYER}。\n"
-	.string "きこえるか。』$"
+	.string "聞こえるか。』$"
 
 FrontierStory_Text_DarkraiSuggestsInn:
-	.string "{JPN}ダークライ『なおった ものには\n"
-	.string "こころを やすめる ばしょが いる。\p"
-	.string "うみの むこうに ふるい りょかんが\n"
-	.string "ある。 いまは だれも つかっていない。\p"
-	.string "ひろい へやが いくつも ある。\n"
-	.string "これから もどる ものたちも\l"
-	.string "そこで やすめるだろう。\p"
-	.string "みなとの ふねの ものには\n"
-	.string "わたしから こえを とどけておこう。\p"
-	.string "にしの みなとから わたるといい。』$"
+	.string "{JPN}ダークライ『治った者には\n"
+	.string "心を休める場所が 必要だ。\p"
+	.string "海の向こうに 古い旅館がある。\n"
+	.string "今は 誰も使っていない。\p"
+	.string "広い部屋が いくつもある。\n"
+	.string "これから 戻ってくる者達も\l"
+	.string "そこで休めるだろう。\p"
+	.string "港の船乗りには \n"
+	.string "私から 声を届けておこう。\p"
+	.string "西の港から 渡るといい。』$"
 
 FrontierStory_Text_InnOpened:
-	.string "{JPN}うみの むこうの りょかんへ\n"
-	.string "ふねで わたれるように なった！$"
+	.string "{JPN}海の むこうの 旅館へ\n"
+	.string "船で わたれるように なった！$"
 
 FrontierStory_Text_HarborHeardVoice:
 	.string "{JPN}あっ ちょうど よかった！\p"
-	.string "さっき あたまの なかに\n"
-	.string "ふしぎな こえが ひびいたんです。\p"
-	.string "うみの むこうの りょかんまで\n"
-	.string "ふねを だしてほしいって……。\p"
+	.string "さっき 頭の 中に\n"
+	.string "不思議な 声が ひびいたんです。\p"
+	.string "海の むこうの 旅館まで\n"
+	.string "船を だしてほしいって……。\p"
 	.string "なんだか ほうっておけなくて\n"
-	.string "ふねを だせるように しておきました！$"
+	.string "船を だせるように しておきました！$"
 
 FrontierStory_Text_HarborToInn:
-	.string "{JPN}うみの むこうの りょかんへ\n"
+	.string "{JPN}海の むこうの 旅館へ\n"
 	.string "むかいますか？$"
 
 FrontierStory_Text_HarborDeparting:
-	.string "{JPN}では しゅっこう します！\n"
+	.string "{JPN}では 出航 します！\n"
 	.string "どうぞ おのりください！$"
 
 FrontierStory_Text_HarborLater:
 	.string "{JPN}また いつでも どうぞ！$"
 
 FrontierStory_Text_InnSailorAsks:
-	.string "{JPN}フロンティアへ もどるかい？$"
+	.string "{JPN}フロンティアへ 戻るかい？$"
 
 FrontierStory_Text_InnSailorDeparting:
-	.string "{JPN}よし しゅっこうだ！\n"
+	.string "{JPN}よし 出航だ！\n"
 	.string "のってくれ！$"
 
 FrontierStory_Text_InnSailorStay:
 	.string "{JPN}そうかい。\n"
-	.string "もどるときは こえを かけてくれ。$"
+	.string "戻るときは 声を かけてくれ。$"
 
 @ ---------------------------------------------------------------------------
 @ Text: Kazuki
@@ -1730,346 +1728,324 @@ FrontierStory_Text_InnSailorStay:
 TowerStory_Text_KazukiMistakesPlayer:
 	.string "{JPN}カズキ『あっ！ きみ……！\n"
 	.string "やっと あえた！\p"
-	.string "おぼえてる？ ぼく カズキ！\n"
+	.string "覚えてる？ ぼく カズキ！\n"
 	.string "102ばんどうろで しょうぶした！\p"
-	.string "あのとき ぼく まけちゃったけど\n"
-	.string "また しょうぶ しようねって……』$"
+	.string "あのとき ぼく 負けちゃったけど\n"
+	.string "また 勝負 しようねって……』$"
 
 TowerStory_Text_KazukiNoticesDifference:
 	.string "{JPN}カズキ『……あれ？\p"
 	.string "きみの ポケモン\n"
 	.string "みたことない こばっかり。\p"
-	.string "それに なんだか はじめて\n"
-	.string "あったみたいな かお してる……。』$"
+	.string "それに なんだか 初めて\n"
+	.string "あったみたいな 顔 してる……。』$"
 
 TowerStory_Text_PlayerExplains:
-	.string "{JPN}{PLAYER}は べつの せかいから\n"
-	.string "ここへ きたことを はなした。$"
+	.string "{JPN}{PLAYER}は べつの 世界から\n"
+	.string "ここへ きたことを 話した。$"
 
 TowerStory_Text_KazukiUnderstands:
-	.string "{JPN}カズキ『べつの せかいの……\n"
+	.string "{JPN}カズキ『べつの 世界の……\n"
 	.string "そっくりさん？\p"
 	.string "そっか！ だから そっくりなんだ！\n"
 	.string "びっくりしたあ！\p"
 	.string "でも いいんだ。\n"
-	.string "ここでは みんな いっしょ だから。\p"
-	.string "だれが かっても みんなの かち。\n"
-	.string "きみが タワーで かったら\l"
-	.string "ぼくたちも うれしいよ！』$"
+	.string "ここでは みんな 一緒 だから。\p"
+	.string "誰が 勝っても みんなの 勝ち。\n"
+	.string "きみが タワーで 勝ったら\l"
+	.string "ぼくたちも 嬉しいよ！』$"
 
 TowerStory_Text_KazukiHappyTogether:
-	.string "{JPN}カズキ『ここでは みんな いっしょ。\n"
-	.string "かっても まけても みんなの きもち。\p"
+	.string "{JPN}カズキ『ここでは みんな 一緒。\n"
+	.string "勝っても 負けても みんなの 気持ち。\p"
 	.string "だから ぼく ぜんぜん\n"
-	.string "くやしくないんだ！ えへへ。』$"
+	.string "悔しくないんだ！ えへへ。』$"
 
 TowerStory_Text_KazukiSawSilverBattle:
-	.string "{JPN}カズキ『みてたよ！ シンボルを\n"
-	.string "かけた しょうぶ！\p"
+	.string "{JPN}カズキ『見てたよ！ シンボルを\n"
+	.string "かけた 勝負！\p"
 	.string "すごかったなあ……\n"
-	.string "みんなも よろこんでた。\p"
+	.string "みんなも 喜んでた。\p"
 	.string "……でも なんでだろう。\n"
-	.string "むねの おくが ざわざわするんだ。\p"
-	.string "ぼく あの ひとに……\n"
-	.string "この せかいの きみに\l"
-	.string "もういちど いどみたい。\p"
+	.string "胸の 奥が ざわざわするんだ。\p"
+	.string "ぼく あの 人に……\n"
+	.string "この 世界の きみに\l"
+	.string "もういちど 挑みたい。\p"
 	.string "みんなで かてれば いいはずなのに\n"
-	.string "ぼくが いどみたいって\l"
+	.string "ぼくが 挑みたいって\l"
 	.string "おもっちゃうんだ。\p"
 	.string "……へんだよね。 えへへ。』$"
 
 TowerStory_Text_KazukiWantsRematch:
-	.string "{JPN}カズキ『あの ひと いまごろ\n"
+	.string "{JPN}カズキ『あの 人 いまごろ\n"
 	.string "どうしてるかな。\p"
-	.string "ぼく まけた ままじゃ いやなんだ。\n"
+	.string "ぼく 負けた ままじゃ いやなんだ。\n"
 	.string "……みんなは そう おもわないのにね。』$"
 
 TowerStory_Text_KazukiFeverStarting:
 	.string "{JPN}カズキ『……あれ？\n"
-	.string "なんだか あたまが ぼーっと する……\p"
-	.string "きんいろの シンボル……\n"
+	.string "なんだか 頭が ぼーっと する……\p"
+	.string "金色の シンボル……\n"
 	.string "みんなの…… ぼくの……』$"
 
 TowerStory_Text_KazukiFever:
 	.string "{JPN}カズキ『……あ……\n"
-	.string "きんいろの シンボル……\p"
-	.string "みんなで かてば みんなで うれしい。\n"
-	.string "みんなで まけても みんなで へいき。\p"
-	.string "でも ぼくは…… ぼくが…… いどみ……\p"
-	.string "ちがう。 ぼくたちは。 ぼく は。\n"
+	.string "金色の シンボル……\p"
+	.string "みんなで かてば みんなで 嬉しい。\n"
+	.string "みんなで 負けても みんなで 平気。\p"
+	.string "でも ぼくは…… ぼくが…… 挑み……\p"
+	.string "違う。 ぼくたちは。 ぼく は。\n"
 	.string "ぼく……\p"
-	.string "あつい。 あたまが あつい。\p"
-	.string "どうして。 どうして はなれるの？\n"
-	.string "どうして ひとりに なろうと するの？』$"
+	.string "熱い。 頭が 熱い。\p"
+	.string "どうして。 どうして 離れるの？\n"
+	.string "どうして 一人に なろうと するの？』$"
 
 TowerStory_Text_KazukiReleaseDefeat:
-	.string "{JPN}……ぼく…… まけた……\n"
-	.string "ぼくが まけたんだ……$"
+	.string "{JPN}……ぼく…… 負けた……\n"
+	.string "ぼくが 負けたんだ……$"
 
 TowerStory_Text_KazukiVoicesFade:
-	.string "{JPN}カズキ『……みんなの こえが\n"
-	.string "とおく なっていく……\p"
+	.string "{JPN}カズキ『……みんなの 声が\n"
+	.string "遠く なっていく……\p"
 	.string "やだな……\n"
-	.string "みんなと いっしょだと\l"
-	.string "なんにも こわくなかったのに。』$"
+	.string "みんなと 一緒だと\l"
+	.string "なんにも 怖くなかったのに。』$"
 
 TowerStory_Text_KazukiChooses:
-	.string "{JPN}カズキ『でも ぼく いま まけたんだ。\n"
-	.string "ぼく じしんが。\p"
-	.string "くやしい。\n"
-	.string "……くやしいって おもえた。\p"
-	.string "ぼく もういちど あの ひとに\n"
-	.string "じぶんの きもちで いどみたい。\p"
+	.string "{JPN}カズキ『でも ぼく 今 負けたんだ。\n"
+	.string "ぼく 自身が。\p"
+	.string "悔しい。\n"
+	.string "……悔しいって 思えた。\p"
+	.string "ぼく もういちど あの 人に\n"
+	.string "自分の 気持ちで 挑みたい。\p"
 	.string "……ごめんね みんな。\n"
 	.string "ぼく いくよ。』$"
 
 TowerStory_Text_KazukiCollapses:
-	.string "{JPN}ヒトポケルスの すがたが\n"
+	.string "{JPN}ヒトポケルスの 姿が\n"
 	.string "かききえた！\p"
 	.string "カズキは その ばに\n"
 	.string "ぐったりと たおれこんだ！$"
 
 TowerStory_Text_KazukiDelirious:
 	.string "{JPN}カズキ『……みんな…… どこ……\n"
-	.string "かつのも…… まけるのも……\l"
+	.string "勝つのも…… 負けるのも……\l"
 	.string "みんなの……』$"
 
 TowerStory_Text_KazukiEats:
-	.string "{JPN}てんしゅは カズキの くちに\n"
-	.string "めしを どんどん はこんだ！\p"
+	.string "{JPN}店主は カズキの 口に\n"
+	.string "飯を どんどん はこんだ！\p"
 	.string "カズキ『もが…… もぐ……』$"
 
 TowerStory_Text_KazukiWakesUp:
 	.string "{JPN}カズキ『……あれ？\n"
 	.string "ここ どこ？\p"
-	.string "あたまが すっきりしてる……\n"
-	.string "みんなの こえが…… きこえない。』$"
+	.string "頭が すっきりしてる……\n"
+	.string "みんなの 声が…… 聞こえない。』$"
 
 TowerStory_Text_KazukiRemembersAll:
-	.string "{JPN}カズキ『……ぜんぶ おぼえてるよ。\p"
-	.string "みんなと つながってるの\n"
-	.string "すごく あんしん だったんだ。\p"
-	.string "だれが かっても ぼくの かちで\n"
-	.string "だれも くやしく なくて……\p"
-	.string "でも まけて くやしいのも\n"
+	.string "{JPN}カズキ『……全部 覚えてるよ。\p"
+	.string "みんなと 繋がってるの\n"
+	.string "すごく 安心 だったんだ。\p"
+	.string "誰が 勝っても ぼくの 勝ちで\n"
+	.string "誰も 悔しく なくて……\p"
+	.string "でも 負けて 悔しいのも\n"
 	.string "ぼくだけの ものなんだね。\p"
-	.string "いつか この せかいの あの ひとに\n"
-	.string "もういちど いどむよ。\l"
-	.string "ぼくの ちからで。\p"
-	.string "……たすけて くれて ありがとう！』$"
+	.string "いつか この 世界の あの 人に\n"
+	.string "もういちど 挑むよ。\l"
+	.string "ぼくの 力で。\p"
+	.string "……助けて くれて ありがとう！』$"
 
 TowerStory_Text_KazukiAsksPokenav:
 	.string "{JPN}カズキ『ねえ ポケナビ もってる？\n"
-	.string "れんらくさき こうかんしようよ！』$"
+	.string "連絡先 こうかんしようよ！』$"
 
 TowerStory_Text_KazukiGoesToInn:
-	.string "{JPN}カズキ『ぼく りょかんで まってるね！\n"
-	.string "こんどは ぼくと しょうぶしてよ！』$"
+	.string "{JPN}カズキ『ぼく 旅館で 待ってるね！\n"
+	.string "今度は ぼくと しょうぶしてよ！』$"
 
 TowerStory_Text_InnKazukiChallenge:
 	.string "{JPN}カズキ『あ！ {PLAYER}！\p"
-	.string "ぼくね いつか この せかいの\n"
-	.string "あの ひとに もういちど いどむって\l"
-	.string "きめたんだ。\p"
-	.string "そのために いまは\n"
-	.string "きみと しょうぶ したい！\p"
-	.string "しょうぶ してくれる？』$"
+	.string "ぼくね いつか この 世界の\n"
+	.string "あの 人に もういちど 挑むって\l"
+	.string "決めたんだ。\p"
+	.string "そのために 今は\n"
+	.string "きみと 勝負 したい！\p"
+	.string "勝負 してくれる？』$"
 
 TowerStory_Text_InnKazukiHere:
 	.string "{JPN}カズキ『やった！\n"
 	.string "グラエナ！ いくよ！』$"
 
 TowerStory_Text_InnKazukiDefeat:
-	.string "{JPN}くやしい！ でも この くやしさは\n"
+	.string "{JPN}悔しい！ でも この 悔しさは\n"
 	.string "ぼくの ものだ！$"
 
 TowerStory_Text_InnKazukiAfterLoss:
-	.string "{JPN}カズキ『また まけちゃった！\n"
-	.string "でも ちゃんと くやしいんだ。\p"
-	.string "つぎは もっと つよく なって\n"
-	.string "いどむからね！』$"
+	.string "{JPN}カズキ『また 負けちゃった！\n"
+	.string "でも ちゃんと 悔しいんだ。\p"
+	.string "次は もっと 強く なって\n"
+	.string "挑むからね！』$"
 
 TowerStory_Text_InnKazukiWon:
-	.string "{JPN}カズキ『かった……！ ぼくが かった！\p"
-	.string "……あの ひとにも\n"
-	.string "とどくかな。 えへへ。』$"
+	.string "{JPN}カズキ『勝った……！ ぼくが 勝った！\p"
+	.string "……あの 人にも\n"
+	.string "届くかな。 えへへ。』$"
 
 TowerStory_Text_InnKazukiLater:
 	.string "{JPN}カズキ『そっか！\n"
-	.string "また こんど しようね！』$"
+	.string "また 今度 しようね！』$"
 
 @ ---------------------------------------------------------------------------
 @ Text: the contest's scenes about the world
 
 ContestStory_Text_YorikoApplause:
 	.string "{JPN}ヨリコ『{PLAYER}さん！\n"
-	.string "2つめの ぶもんも ゆうしょうね。\p"
-	.string "さっきの はくしゅ きこえた？\n"
-	.string "みんな おなじ ところで\l"
-	.string "おなじ だけ てを たたくの。\p"
+	.string "2つめの 部門も 優勝ね。\p"
+	.string "さっきの 拍手 聞こえた？\n"
+	.string "みんな 同じ ところで\l"
+	.string "同じ だけ 手を たたくの。\p"
 	.string "まるで ひとつの おおきな\n"
-	.string "おとに つつまれる みたい。\p"
-	.string "……でも あなたが ほめてくれた\n"
-	.string "しっぽの こと まだ かんがえるの。』$"
+	.string "音に つつまれる みたい。\p"
+	.string "……でも あなたが 褒めてくれた\n"
+	.string "しっぽの こと まだ 考えるの。』$"
 
 ContestStory_Text_DarkraiApplause:
-	.string "{JPN}ダークライ『さっきの はくしゅを\n"
-	.string "きいて どう かんじた。\p"
-	.string "この かいじょうは げんじつの\n"
-	.string "たてものと こころの せかいが\l"
-	.string "かさなっている。\p"
-	.string "ここで ひびく はくしゅには\n"
-	.string "この ばに いない ものの\l"
-	.string "こころも まじっている。\p"
-	.string "だから ひとつの おとの ように\n"
-	.string "ぴたりと そろうのだ。\p"
-	.string "つながった ものたちは\n"
-	.string "きもちも きおくも ながれこみ\l"
-	.string "じぶんと たにんの さかいが\l"
-	.string "あいまいに なっている。\p"
-	.string "だが みなが ひとつの こころに\n"
-	.string "なった わけでは ない。\l"
-	.string "ヨリコは ヨリコの ままだ。\p"
-	.string "えがおの うらで くるしんでいる\n"
-	.string "わけでも ない。\l"
-	.string "ヨリコは ほんとうに しあわせなのだ。\p"
-	.string "あなたの かんそうが ちがったのは\n"
-	.string "あなたが つながっていないからだ。\p"
-	.string "ヨリコは はじめて\n"
-	.string "つながりの そとから とどいた\l"
-	.string "ことばを きいたのだ。』$"
+	.string "{JPN}ダークライ『さっきの 拍手を\n"
+	.string "聞いて どう感じた。\p"
+	.string "この会場は 現実の建物と\n"
+	.string "心象世界が 重なっている。\p"
+	.string "ここにいない者の心さえ\n"
+	.string "あの拍手には 混じっていた。\p"
+	.string "気持ちも 記憶も流れ込み \n"
+	.string "自他の境は 曖昧になる。\p"
+	.string "……だが 皆が 同じ一人になった\n"
+	.string "訳ではない。ヨリコは ヨリコのままだ。\p"
+	.string "笑顔の裏で 苦しんでいるのでもない。\n"
+	.string "彼女は 本当に 幸福なのだ。\p"
+	.string "あなたの感想が 違ったのは \n"
+	.string "その繋がりの 外にいるからだ。\p"
+	.string "ヨリコは 初めて 外から届いた\n"
+	.string "言葉に 耳を傾けたのだ。』$"
 
 ContestStory_Text_YorikoHandshake:
-	.string "{JPN}ヨリコ『3つめの ぶもんも\n"
-	.string "ゆうしょうね。 おめでとう。\p"
-	.string "……ねえ あくしゅ しましょう。\n"
-	.string "てを つなぐと きもちが\l"
-	.string "もっと つたわる きが するの。』\p"
+	.string "{JPN}ヨリコ『3つめの 部門も\n"
+	.string "優勝ね。 おめでとう。\p"
+	.string "……ねえ 握手しましょう。\n"
+	.string "手を繋ぐと 気持ちが\l"
+	.string "もっと 伝わる気がするの。』\p"
 	.string "{PLAYER}は ヨリコと\n"
-	.string "あくしゅした。\p"
-	.string "ヨリコ『……ふしぎ。\n"
-	.string "あなたの きもちは\l"
-	.string "ながれこんで こないのね。\p"
-	.string "てを つないで いるのに。』$"
+	.string "握手した。\p"
+	.string "ヨリコ『……不思議。\n"
+	.string "あなたの 気持ちは\l"
+	.string "流れ込んで こないのね。\p"
+	.string "手を繋いでいるのに。』$"
 
 ContestStory_Text_DarkraiHandshake:
-	.string "{JPN}ダークライ『……しんぱい いらない。\n"
-	.string "あなたには うつらない。\p"
-	.string "かたちを かえた ポケルスは\n"
-	.string "ドクモチ という もちや\l"
-	.string "ふれあい みずを とおして\l"
-	.string "ひとと ポケモンに ひろがった。\p"
-	.string "だが あなたや てんしゅ\n"
-	.string "あなたの りょうしんの ように\l"
-	.string "とおい せかいから きた ひとには\l"
-	.string "うつらないのだ。\p"
-	.string "……ひとつだけ きを つけてほしい。\n"
-	.string "ドクモチ だけは べつだ。\p"
-	.string "うつらない ものでも あれを たべれば\n"
-	.string "こころを しばられて しまう。\p"
-	.string "どこかで みかけても\n"
-	.string "けっして くちに しては いけない。』$"
+	.string "{JPN}ダークライ『……心配はいらない。\n"
+	.string "あなたには 感染しない。\p"
+	.string "変質したポケルスは ドクモチや\n"
+	.string "水 人との接触を通して 広がった。\p"
+	.string "だが あなたや 店主 あなたの両親の\n"
+	.string "ように 遠い世界から来た人には\l"
+	.string "感染しないのだ。\p"
+	.string "……ただ ひとつだけ。\n"
+	.string "ドクモチだけは 別だ。\p"
+	.string "感染しない者でも あれを食べれば\n"
+	.string "心を 縛られてしまう。\p"
+	.string "どこかで見かけても \n"
+	.string "決して 口にしてはいけない。』$"
 
 ContestStory_Text_YorikoPartners:
-	.string "{JPN}ヨリコ『4つめの ぶもんも ゆうしょう！\n"
+	.string "{JPN}ヨリコ『4つめの 部門も 優勝！\n"
 	.string "すごいわ。\p"
-	.string "……ねえ ひとつ きづいたの。\n"
+	.string "……ねえ ひとつ 気づいたの。\n"
 	.string "あなたの ポケモン\l"
-	.string "えんぎの あいだ ときどき\l"
+	.string "演技の 間 ときどき\l"
 	.string "あなたの ほうを うかがって いたわ。\p"
-	.string "まだ すこし えんりょ してる みたい。\n"
+	.string "まだ 少し 遠慮 してる みたい。\n"
 	.string "それなのに あんなに\l"
-	.string "すてきな えんぎが できるのね。』$"
+	.string "すてきな 演技が できるのね。』$"
 
 ContestStory_Text_DarkraiPartners:
-	.string "{JPN}ダークライ『ヨリコの いう とおりだ。\p"
-	.string "あなたの てもちの おおくは\n"
-	.string "じぶんの いしで この せかいへ\l"
-	.string "きたのでは ない。\p"
-	.string "とつぜん つれて こられたのだ。\n"
-	.string "なついて いないのは その ためだ。\l"
-	.string "あなたの せいでは ない。\p"
-	.string "そして あの こたちは みな\n"
-	.string "ふつうの ポケルスに\l"
-	.string "かかった ことが ある。\p"
-	.string "ふつうの ポケルスに かかった\n"
-	.string "ポケモンには かたちを かえた\l"
-	.string "ポケルスは うつらない。\l"
-	.string "かかっている さいちゅうでも だ。\p"
-	.string "……だから あの こたちが\n"
-	.string "えらばれたのだろう。\p"
-	.string "この せかいで\n"
-	.string "あなたと たたかう ために。』$"
+	.string "{JPN}ダークライ『ヨリコの言う通りだ。\p"
+	.string "あなたの手持ちの多くは 自らの意志で\n"
+	.string "この世界へ 来たのではない。\p"
+	.string "突然 連れてこられたのだ。\n"
+	.string "まだ懐いていないのも 無理はない。\l"
+	.string "あなたのせいでは ないのだ。\p"
+	.string "そして あの子達は皆\n"
+	.string "普通のポケルスに 感染した経験がある。\p"
+	.string "一度でも 普通のポケルスに感染した\n"
+	.string "ポケモンには ヒトポケルスは感染しない。\l"
+	.string "今も 感染している最中であってもだ。\p"
+	.string "……だからこそ 選ばれたのだろう。\n"
+	.string "この世界で あなたと戦うために。』$"
 
 ContestStory_Text_YorikoSameDay:
-	.string "{JPN}ヨリコ『5つ ぜんぶの ぶもんで\n"
-	.string "ゆうしょう…… おめでとう。\p"
-	.string "……ねえ うけつけの はりがみ みた？\n"
-	.string "「つぎの コンテストは あした」って\l"
+	.string "{JPN}ヨリコ『5つ 全部の 部門で\n"
+	.string "優勝…… おめでとう。\p"
+	.string "……ねえ 受付の 貼り紙 見た？\n"
+	.string "「次の コンテストは 明日」って\l"
 	.string "かいて あるの。\p"
-	.string "でも あの はりがみ\n"
-	.string "ずっと まえから おなじ なのよ。\p"
-	.string "だれも こまらないわ。\n"
-	.string "きょうと おなじ あしたが\l"
+	.string "でも あの 貼り紙\n"
+	.string "ずっと 前から 同じ なのよ。\p"
+	.string "誰も こまらないわ。\n"
+	.string "今日と 同じ 明日が\l"
 	.string "くるだけ だもの。\p"
-	.string "……そう おもって いたのに。』$"
+	.string "……そう 思って いたのに。』$"
 
 ContestStory_Text_DarkraiSameDay:
-	.string "{JPN}ダークライ『この せかいの ひとびとは\n"
-	.string "ゆめを みた まま くらしている。\p"
-	.string "わらい はたらき はくしゅを する。\n"
-	.string "だが すすむ ことも\l"
-	.string "もどる ことも なく\l"
-	.string "ただ きょうを くりかえしている。\p"
-	.string "もし そとから わざわいが きても\n"
-	.string "それを とめようと する ちからは\l"
-	.string "もう はたらかない。\p"
-	.string "この せかいは そうして\n"
-	.string "しずかに おわりを むかえて しまう。\p"
-	.string "しあわせが にせものだから\n"
-	.string "よびもどすのでは ない。\p"
-	.string "かわっていく げんじつに\n"
-	.string "むきあう ちからを\l"
-	.string "とりもどして ほしいのだ。\p"
-	.string "ここは げんじつと こころの せかいが\n"
-	.string "かさなる ばしょ。\p"
-	.string "ここで ぶつける きもちは\n"
-	.string "きっと ヨリコの こころの\l"
-	.string "おくまで とどく。』$"
+	.string "{JPN}ダークライ『この世界の人々は \n"
+	.string "夢を見たまま 暮らしている。\p"
+	.string "笑い 働き 拍手をする。\n"
+	.string "だが 先へ進むことも 戻ることもなく \l"
+	.string "ただ 今日を繰り返している。\p"
+	.string "外から災いが来ても \n"
+	.string "それに抗おうとする力は もう働かない。\p"
+	.string "……そうして この世界は\n"
+	.string "静かに 終わりを迎えてしまう。\p"
+	.string "幸福が 偽物だから\n"
+	.string "呼び戻すのではない。\p"
+	.string "変わりゆく現実に 向き合う力を \n"
+	.string "取り戻してほしいのだ。\p"
+	.string "ここは 現実と心象世界の重なる場所。\n"
+	.string "あなたの言葉も ここなら\l"
+	.string "ヨリコの心の奥まで 届くはずだ。』$"
 
 @ ---------------------------------------------------------------------------
 @ Text: release battles at the facilities and the contest (the rest is in
 @ src/data/frontier_story_targets.h)
 
 FrontierStory_Text_TargetCollapses:
-	.string "{JPN}ヒトポケルスの すがたが\n"
+	.string "{JPN}ヒトポケルスの 姿が\n"
 	.string "かききえた！\p"
 	.string "{STR_VAR_1}は その ばに\n"
 	.string "くずれおちた！$"
 
 DomeStory_Text_ReikaReleaseDefeat:
-	.string "{JPN}……わたくし…… まけましたの……\n"
-	.string "わたくしの しょうぶで……$"
+	.string "{JPN}……わたくし…… 負けましたの……\n"
+	.string "わたくしの 勝負で……$"
 
 PalaceStory_Text_IkueReleaseDefeat:
-	.string "{JPN}……わたし…… まけたのね……\n"
-	.string "わたしと エネコロロが……$"
+	.string "{JPN}……私…… 負けたのね……\n"
+	.string "私と エネコロロが……$"
 
 FactoryStory_Text_ToshioReleaseDefeat:
-	.string "{JPN}……ぼく…… まけちゃった……\n"
+	.string "{JPN}……ぼく…… 負けちゃった……\n"
 	.string "ぼくと ゲンさんが……$"
 
 ArenaStory_Text_EisukeReleaseDefeat:
-	.string "{JPN}……おれ…… まけた……\n"
-	.string "おれが まけたんだ……$"
+	.string "{JPN}……おれ…… 負けた……\n"
+	.string "おれが 負けたんだ……$"
 
 PikeStory_Text_YayoiReleaseDefeat:
 	.string "{JPN}……どうして……\n"
-	.string "おなじ みちを えらんだのに……$"
+	.string "同じ 道を 選んだのに……$"
 
 ContestStory_Text_YorikoReleaseDefeat:
-	.string "{JPN}……わたし…… まけた……\n"
-	.string "わたしの えんぎが……$"
+	.string "{JPN}……私…… 負けた……\n"
+	.string "私の 演技が……$"
 
 @ ---------------------------------------------------------------------------
 @ Text: Yoriko at the inn
@@ -2077,16 +2053,16 @@ ContestStory_Text_YorikoReleaseDefeat:
 ContestStory_Text_InnYorikoWelcome:
 	.string "{JPN}ヨリコ『あら {PLAYER}さん！\n"
 	.string "ちょうど よかった。\p"
-	.string "ハブネークと あたらしい えんぎを\n"
-	.string "れんしゅう していたの。\p"
-	.string "みていって！』$"
+	.string "ハブネークと あたらしい 演技を\n"
+	.string "練習 していたの。\p"
+	.string "見ていって！』$"
 
 ContestStory_Text_InnYorikoAsks:
 	.string "{JPN}ヨリコ『……どう？\n"
 	.string "どこが よかったかしら？』$"
 
 ContestStory_Text_InnChoiceGlare:
-	.string "{JPN}するどい まなざし$"
+	.string "{JPN}鋭い まなざし$"
 
 ContestStory_Text_InnChoiceTail:
 	.string "{JPN}しっぽの うごき$"
@@ -2095,45 +2071,45 @@ ContestStory_Text_InnChoiceScales:
 	.string "{JPN}つやつやの うろこ$"
 
 ContestStory_Text_InnChoiceTogether:
-	.string "{JPN}ふたりの いきの あいかた$"
+	.string "{JPN}二人の いきの あいかた$"
 
 ContestStory_Text_InnYorikoGlare:
-	.string "{JPN}ヨリコ『まなざしに きづいてくれたのね！\p"
-	.string "わたしが いちばん\n"
-	.string "みせたかった ところよ。\p"
-	.string "……ふふ。 とどくと\n"
-	.string "やっぱり うれしいわ。』$"
+	.string "{JPN}ヨリコ『眼差しに 気づいてくれたのね！\p"
+	.string "私が 一番\n"
+	.string "見せたかった ところよ。\p"
+	.string "……ふふ。 届くと\n"
+	.string "やっぱり 嬉しいわ。』$"
 
 ContestStory_Text_InnYorikoTail:
 	.string "{JPN}ヨリコ『また しっぽね！\n"
 	.string "ふふっ あなたらしいわ。\p"
-	.string "じゃあ つぎは しっぽが\n"
-	.string "もっと いきる えんぎを\l"
-	.string "かんがえようかしら。』$"
+	.string "じゃあ 次は しっぽが\n"
+	.string "もっと いきる 演技を\l"
+	.string "考えようかしら。』$"
 
 ContestStory_Text_InnYorikoScales:
-	.string "{JPN}ヨリコ『うろこ！\n"
-	.string "そこは かんがえて いなかったわ。\p"
-	.string "ひかりの あてかたで\n"
-	.string "もっと かがやくかも。\p"
+	.string "{JPN}ヨリコ『鱗！\n"
+	.string "そこは 考えて いなかったわ。\p"
+	.string "光の あてかたで\n"
+	.string "もっと 輝くかも。\p"
 	.string "おもしろいわね。』$"
 
 ContestStory_Text_InnYorikoTogether:
-	.string "{JPN}ヨリコ『わたしたち ふたりを\n"
-	.string "みてくれたのね。\p"
-	.string "……うれしい。\n"
+	.string "{JPN}ヨリコ『私達 二人を\n"
+	.string "見てくれたのね。\p"
+	.string "……嬉しい。\n"
 	.string "ハブネークも ほこらしそうよ。』$"
 
 ContestStory_Text_InnYorikoOthers:
 	.string "{JPN}ヨリコ『ここの みんなにも\n"
-	.string "みてもらったの。\p"
-	.string "こわい かおが いいって ひとも\n"
-	.string "かわいいって ひとも いたわ。\p"
-	.string "みる ひとに よって\n"
-	.string "ぜんぜん ちがうのね。\p"
-	.string "それが こんなに たのしいなんて\n"
-	.string "しらなかった。\p"
-	.string "つぎは どんな えんぎに\n"
+	.string "見てもらったの。\p"
+	.string "怖い 顔が いいって 人も\n"
+	.string "かわいいって 人も いたわ。\p"
+	.string "見る 人に よって\n"
+	.string "ぜんぜん 違うのね。\p"
+	.string "それが こんなに 楽しいなんて\n"
+	.string "知らなかった。\p"
+	.string "次は どんな 演技に\n"
 	.string "しようかしら。 ね ハブネーク。』$"
 
 ContestStory_Text_InnSeviper:
@@ -2146,18 +2122,18 @@ ArenaStory_Text_InnEisuke:
 	.string "{JPN}エイスケ『よう {PLAYER}！\n"
 	.string "いい うみだろ？\p"
 	.string "あの 1ターンの こと\n"
-	.string "もう ふりかえらないって きめたんだ。\p"
-	.string "くやしいのは ほんとう だけどな。\n"
-	.string "あの しあいは あれで おわり。\p"
-	.string "つぎの レースに むけて\n"
-	.string "スターミーと およいでくる！\p"
-	.string "みてろよ！』$"
+	.string "もう 振り返らないって 決めたんだ。\p"
+	.string "悔しいのは 本当 だけどな。\n"
+	.string "あの 試合は あれで おわり。\p"
+	.string "次の レースに むけて\n"
+	.string "スターミーと 泳いでくる！\p"
+	.string "見てろよ！』$"
 
 ArenaStory_Text_InnEisukeSwimsOff:
 	.string "{JPN}エイスケと スターミーは\n"
-	.string "うみへ とびこんだ！\p"
-	.string "ふたりの すがたが\n"
-	.string "なみの むこうへ とおざかっていく……$"
+	.string "海へ 飛び込んだ！\p"
+	.string "二人の 姿が\n"
+	.string "波の むこうへ とおざかっていく……$"
 
 ArenaStory_Text_InnStarmie:
 	.string "{JPN}スターミーの コアが\n"
@@ -2174,14 +2150,14 @@ DomeStory_Text_InnReika:
 DomeStory_Text_InnReikaWaits:
 	.string "{JPN}レイカ『あら また なにか\n"
 	.string "みつけたのね。\p"
-	.string "なにが あの こを ひきつけたのか\n"
-	.string "わたくしには わかりませんけれど……\p"
+	.string "なにが あの子を ひきつけたのか\n"
+	.string "わたくしには 分かりませんけれど……\p"
 	.string "それで いいんですの。\n"
-	.string "ここで まっていますわ。』$"
+	.string "ここで 待っていますわ。』$"
 
 DomeStory_Text_InnReikaWelcomesBack:
 	.string "{JPN}レイカ『ふふ。 おかえりなさい。\p"
-	.string "つぎは どちらへ いきましょうか。』$"
+	.string "次は どちらへ いきましょうか。』$"
 
 DomeStory_Text_InnLinoone:
 	.string "{JPN}マッスグマは くんくんと\n"
@@ -2192,17 +2168,17 @@ DomeStory_Text_InnLinoone:
 
 PalaceStory_Text_InnIkue:
 	.string "{JPN}イクエ『あら {PLAYER}さん。\p"
-	.string "いま エネコロロの あそびに\n"
+	.string "今 エネコロロの 遊びに\n"
 	.string "つきあってるの。\p"
-	.string "きょうは なにを えらぶかしら。』$"
+	.string "今日は なにを えらぶかしら。』$"
 
 PalaceStory_Text_InnIkueJoins:
 	.string "{JPN}イクエ『ふふ…… しっぽを おいかける\n"
-	.string "あそびね。 わたしも まねしちゃった。\p"
-	.string "わたしが きめた あそびじゃ なくて\n"
-	.string "この こが えらんだ あそび。\p"
-	.string "いっしょに すごしてると\n"
-	.string "すこしずつ わかって くるのね。』$"
+	.string "遊びね。 私も まねしちゃった。\p"
+	.string "私が 決めた あそびじゃ なくて\n"
+	.string "この子が 選んだ 遊び。\p"
+	.string "一緒に 過ごしてると\n"
+	.string "少しずつ 分かって くるのね。』$"
 
 PalaceStory_Text_InnDelcatty:
 	.string "{JPN}エネコロロは ごろごろと\n"
@@ -2215,89 +2191,89 @@ FactoryStory_Text_InnToshio:
 	.string "{JPN}トシオ『あ {PLAYER}！\p"
 	.string "ゲンさん ちゃんと\n"
 	.string "ファクトリーに かえしてきたよ。\p"
-	.string "さいごに あたまを なでたら\n"
-	.string "かたい あたまで ごつんって\l"
+	.string "最後に 頭を なでたら\n"
+	.string "硬い 頭で ごつんって\l"
 	.string "してくれたんだ。 えへへ。\p"
-	.string "もう いっしょには いないけど\n"
-	.string "いっしょに かった ことは\l"
-	.string "ぜんぶ おぼえてる。』$"
+	.string "もう 一緒には いないけど\n"
+	.string "一緒に 勝った ことは\l"
+	.string "全部 覚えてる。』$"
 
 FactoryStory_Text_InnToshioTellsAggron:
 	.string "{JPN}トシオ『それでね ボスゴドラ。\n"
-	.string "きょうの しょうぶ すごかったんだ！\p"
-	.string "ゲンさんが あいての わざを\n"
-	.string "ぜんぶ うけとめて……\p"
-	.string "こんどは きみと\n"
-	.string "あんな しょうぶを しような！』$"
+	.string "今日の 勝負 すごかったんだ！\p"
+	.string "ゲンさんが 相手の わざを\n"
+	.string "全部 うけとめて……\p"
+	.string "今度は きみと\n"
+	.string "あんな 勝負を しような！』$"
 
 FactoryStory_Text_InnAggronNods:
 	.string "{JPN}ボスゴドラは\n"
-	.string "おおきく うなずいた！$"
+	.string "おおきく 頷いた！$"
 
 FactoryStory_Text_InnAggron:
-	.string "{JPN}ボスゴドラは トシオの はなしを\n"
-	.string "じっと きいている。$"
+	.string "{JPN}ボスゴドラは トシオの 話を\n"
+	.string "じっと 聞いている。$"
 
 @ ---------------------------------------------------------------------------
 @ Text: Yayoi at the inn
 
 PikeStory_Text_InnYayoiInvites:
 	.string "{JPN}ヤヨイ『いらっしゃい {PLAYER}。\n"
-	.string "ちょうど おちゃを いれる ところなの。\p"
+	.string "ちょうど お茶を いれる ところなの。\p"
 	.string "むかいに すわって。』$"
 
 PikeStory_Text_InnYayoiAsksTea:
-	.string "{JPN}ヤヨイ『わたしは ローズティー。\n"
-	.string "ロズレイドと おなじ かおりなの。\p"
-	.string "みんなが すきだから じゃなくて\n"
-	.string "わたしが すきだから えらぶの。\p"
+	.string "{JPN}ヤヨイ『私は ローズティー。\n"
+	.string "ロズレイドと 同じ 香りなの。\p"
+	.string "みんなが 好きだから じゃなくて\n"
+	.string "私が 好きだから えらぶの。\p"
 	.string "{PLAYER}は どれに する？』$"
 
 PikeStory_Text_InnTeaMint:
 	.string "{JPN}ヤヨイ『ミントね。\n"
-	.string "すっと する かおり。\l"
-	.string "あたまが すっきり しそう。』$"
+	.string "すっと する 香り。\l"
+	.string "頭が すっきり しそう。』$"
 
 PikeStory_Text_InnTeaLemon:
 	.string "{JPN}ヤヨイ『レモンね。\n"
-	.string "さわやかで すっぱい かおり。\l"
-	.string "げんきが でそうね。』$"
+	.string "さわやかで すっぱい 香り。\l"
+	.string "元気が でそうね。』$"
 
 PikeStory_Text_InnTeaChamomile:
 	.string "{JPN}ヤヨイ『カモミールね。\n"
-	.string "りんごみたいな あまい かおり。\l"
+	.string "りんごみたいな 甘い 香り。\l"
 	.string "ほっと するわね。』$"
 
 PikeStory_Text_InnTeaJasmine:
 	.string "{JPN}ヤヨイ『ジャスミンね。\n"
-	.string "はなやかで あまい かおり。\p"
-	.string "おなじ はなの おちゃでも\n"
-	.string "ローズとは ぜんぜん ちがうのね。』$"
+	.string "はなやかで 甘い 香り。\p"
+	.string "同じ はなの お茶でも\n"
+	.string "ローズとは ぜんぜん 違うのね。』$"
 
 PikeStory_Text_InnYayoiTea:
-	.string "{JPN}ヤヨイは ふたりぶんの おちゃを\n"
+	.string "{JPN}ヤヨイは ふたりぶんの お茶を\n"
 	.string "いれて テーブルに ならべた。\p"
 	.string "…… …… ……\p"
 	.string "ヤヨイ『……ねえ ひとくち\n"
 	.string "もらっても いい？』\p"
-	.string "{PLAYER}は おちゃを\n"
-	.string "ヤヨイに すこし わけた。\p"
+	.string "{PLAYER}は お茶を\n"
+	.string "ヤヨイに 少し わけた。\p"
 	.string "ヤヨイ『……ふふ。\n"
-	.string "やっぱり わたしは ローズが すき。\p"
-	.string "でも あなたが この かおりを\n"
-	.string "すきな わけ すこしだけ\l"
-	.string "わかった きが するわ。\p"
-	.string "まえは みんなと おなじ かおりで\n"
-	.string "おなじ みちを えらんで いたけれど……\p"
-	.string "ちがう おちゃを ならべて\n"
-	.string "おしゃべり するのも たのしいわね。\p"
-	.string "おなじ ものが すきじゃ なくても\n"
-	.string "いっしょに いられるのね。』$"
+	.string "やっぱり 私は ローズが 好き。\p"
+	.string "でも あなたが この 香りを\n"
+	.string "好きな 訳 少しだけ\l"
+	.string "分かった 気がするわ。\p"
+	.string "前は みんなと 同じ 香りで\n"
+	.string "同じ 道を 選んで いたけれど……\p"
+	.string "違う お茶を ならべて\n"
+	.string "おしゃべり するのも 楽しいわね。\p"
+	.string "同じ ものが すきじゃ なくても\n"
+	.string "一緒に いられるのね。』$"
 
 PikeStory_Text_InnRoseradeHops:
-	.string "{JPN}ロズレイドは うれしそうに\n"
-	.string "りょうての はなたばを ゆらした！$"
+	.string "{JPN}ロズレイドは 嬉しそうに\n"
+	.string "りょうての 花束を ゆらした！$"
 
 PikeStory_Text_InnRoserade:
-	.string "{JPN}ロズレイドの はなたばから\n"
-	.string "やさしい ローズの かおりが する。$"
+	.string "{JPN}ロズレイドの 花束から\n"
+	.string "優しい ローズの 香りが する。$"
