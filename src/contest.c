@@ -17,6 +17,7 @@
 #include "graphics.h"
 #include "image_processing_effects.h"
 #include "link.h"
+#include "line_break.h"
 #include "m4a.h"
 #include "main.h"
 #include "menu.h"
@@ -488,29 +489,29 @@ EWRAM_DATA u8 gCurContestWinnerSaveIdx = 0;
 COMMON_DATA rng_value_t gContestRngValue = {0};
 
 //Text
-const u8 gText_LinkStandby4[] = _("{JPN}つうしん たいきちゅう!");
+const u8 gText_LinkStandby4[] = _("{JPN}通信 待機中!");
 
-const u8 gText_AppealNumWhichMoveWillBePlayed[] = _("{JPN}{STR_VAR_1}かいめの アピール!\nどの わざを だす?");
-const u8 gText_AppealNumButItCantParticipate[] = _("{JPN}{STR_VAR_1}かいめの アピール!\nしかし さんか できない!");
+const u8 gText_AppealNumWhichMoveWillBePlayed[] = _("{JPN}{STR_VAR_1}回目の アピール!\nどの わざを だす?");
+const u8 gText_AppealNumButItCantParticipate[] = _("{JPN}{STR_VAR_1}回目の アピール!\nしかし 参加 できない!");
 const u8 gText_MonAppealedWithMove[] = _("{JPN}{STR_VAR_1}は\n{STR_VAR_2}で アピール!");
 const u8 gText_MonWasWatchingOthers[] = _("{JPN}{STR_VAR_1}は\nみんなを みていた!{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}");
-const u8 gText_AllOutOfAppealTime[] = _("{JPN}アピールタイム しゅうりょう!{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}");
-const u8 gText_JudgeLookedAtMonExpectantly[] = _("{JPN}しんさいんが きたいして\n{STR_VAR_1}を みつめた!{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}");
-const u8 gText_AppealComboWentOverWell[] = _("{JPN}アピールの くみあわせが\nきに いって もらえた!{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}");
-const u8 gText_AppealComboWentOverVeryWell[] = _("{JPN}アピールの くみあわせが\nかなり きに いられた!{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}");
-const u8 gText_AppealComboWentOverExcellently[] = _("{JPN}アピールの くみあわせが\nものすごく きに いられた!{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}");
-const u8 gText_MonWasTooNervousToMove[] = _("{JPN}{STR_VAR_1}は きんちょうして\nアピールが できなかった!{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}");
-const u8 gText_CouldntImproveItsCondition[] = _("{JPN}でも ちょうしは\nあがらなかった…{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}");
-const u8 gText_BadConditionResultedInWeakAppeal[] = _("{JPN}ちょうしが よく なくて\nあまり うまく できなかった…{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}");
-const u8 gText_MonWasUnaffected[] = _("{JPN}{STR_VAR_1}は\nへいき だった!{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}");
-const u8 gText_RepeatedAppeal[] = _("{JPN}{STR_VAR_1}は おなじアピールを\nつづけて がっかり された!{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}");
-const u8 gText_MonsXWentOverGreat[] = _("{JPN}{STR_VAR_1}の {STR_VAR_3}が\nまわりに とても うけた!{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}");
+const u8 gText_AllOutOfAppealTime[] = _("{JPN}アピールタイム 終了!{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}");
+const u8 gText_JudgeLookedAtMonExpectantly[] = _("{JPN}審査員が 期待して\n{STR_VAR_1}を 見つめた!{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}");
+const u8 gText_AppealComboWentOverWell[] = _("{JPN}アピールの 組み合わせが\n気に 入って もらえた!{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}");
+const u8 gText_AppealComboWentOverVeryWell[] = _("{JPN}アピールの 組み合わせが\nかなり 気に 入られた!{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}");
+const u8 gText_AppealComboWentOverExcellently[] = _("{JPN}アピールの 組み合わせが\nものすごく 気に 入られた!{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}");
+const u8 gText_MonWasTooNervousToMove[] = _("{JPN}{STR_VAR_1}は 緊張して\nアピールが できなかった!{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}");
+const u8 gText_CouldntImproveItsCondition[] = _("{JPN}でも 調子は\nあがらなかった…{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}");
+const u8 gText_BadConditionResultedInWeakAppeal[] = _("{JPN}調子が よく なくて\nあまり 上手く できなかった…{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}");
+const u8 gText_MonWasUnaffected[] = _("{JPN}{STR_VAR_1}は\n平気 だった!{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}");
+const u8 gText_RepeatedAppeal[] = _("{JPN}{STR_VAR_1}は 同じアピールを\n続けて がっかり された!{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}");
+const u8 gText_MonsXWentOverGreat[] = _("{JPN}{STR_VAR_1}の {STR_VAR_3}が\n周りに とても うけた!{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}");
 const u8 gText_MonsXDidntGoOverWell[] = _("{JPN}{STR_VAR_1}の {STR_VAR_3}は\nここでは うけなかった…{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}");
-const u8 gText_MonsXGotTheCrowdGoing[] = _("{JPN}{STR_VAR_1}の {STR_VAR_3}に\nまわりが もりあがった!{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}");
-const u8 gText_MonCantAppealNextTurn[] = _("{JPN}{STR_VAR_1}は つぎの アピールに\nさんか できなくなった!{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}");
-const u8 gText_AttractedCrowdsAttention[] = _("{JPN}かんきゃくの\nちゅうもくを あつめた!{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}");
-const u8 gText_CrowdContinuesToWatchMon[] = _("{JPN}かんきゃくは\n{STR_VAR_3}を みつづけている!{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}");
-const u8 gText_MonsMoveIsIgnored[] = _("{JPN}{STR_VAR_1}の {STR_VAR_2}は\nめを むけられなかった…{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}");
+const u8 gText_MonsXGotTheCrowdGoing[] = _("{JPN}{STR_VAR_1}の {STR_VAR_3}に\n周りが 盛り上がった!{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}");
+const u8 gText_MonCantAppealNextTurn[] = _("{JPN}{STR_VAR_1}は 次の アピールに\n参加 できなくなった!{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}");
+const u8 gText_AttractedCrowdsAttention[] = _("{JPN}観客の\n注目を あつめた!{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}");
+const u8 gText_CrowdContinuesToWatchMon[] = _("{JPN}観客は\n{STR_VAR_3}を 見続けている!{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}");
+const u8 gText_MonsMoveIsIgnored[] = _("{JPN}{STR_VAR_1}の {STR_VAR_2}は\n目を むけられなかった…{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}{PAUSE 0x0F}");
 
 static const u32 sPictureFrameTiles_Cool[]     = INCGFX_U32("graphics/picture_frame/cool.png", ".4bpp.smol");
 static const u32 sPictureFrameTiles_Beauty[]   = INCGFX_U32("graphics/picture_frame/beauty.png", ".4bpp.smol");
@@ -917,11 +918,11 @@ const struct ContestCategory gContestCategoryInfo[CONTEST_CATEGORIES_COUNT + 1] 
 // Takes the .attentionLevel of a contestant as an index.
 static const u8 *const sRoundResultTexts[] =
 {
-    COMPOUND_STRING("{JPN}{STR_VAR_1}は\nぜんぜん めだたなかった…{PAUSE_UNTIL_PRESS}"),
-    COMPOUND_STRING("{JPN}{STR_VAR_1}は\nあんまり めだたなかった…{PAUSE_UNTIL_PRESS}"),
-    COMPOUND_STRING("{JPN}{STR_VAR_1}は\nまあまあ めだった!{PAUSE_UNTIL_PRESS}"),
-    COMPOUND_STRING("{JPN}{STR_VAR_1}は\nかなり めだった!{PAUSE_UNTIL_PRESS}"),
-    COMPOUND_STRING("{JPN}{STR_VAR_1}は\nものすごく めだった!{PAUSE_UNTIL_PRESS}"),
+    COMPOUND_STRING("{JPN}{STR_VAR_1}は\nぜんぜん 目立たなかった…{PAUSE_UNTIL_PRESS}"),
+    COMPOUND_STRING("{JPN}{STR_VAR_1}は\nあんまり 目立たなかった…{PAUSE_UNTIL_PRESS}"),
+    COMPOUND_STRING("{JPN}{STR_VAR_1}は\nまあまあ 目立った!{PAUSE_UNTIL_PRESS}"),
+    COMPOUND_STRING("{JPN}{STR_VAR_1}は\nかなり 目立った!{PAUSE_UNTIL_PRESS}"),
+    COMPOUND_STRING("{JPN}{STR_VAR_1}は\nものすごく 目立った!{PAUSE_UNTIL_PRESS}"),
     COMPOUND_STRING("{JPN}{STR_VAR_1}は\nアピール していない!{PAUSE_UNTIL_PRESS}"),
 };
 
@@ -2321,7 +2322,7 @@ static bool8 ContestNormalMonBounceDone(u8 contestant)
 
 static void CopyNicknameToFit(u8 *dest, u32 contestant)
 {
-    u8 *end = StringCopy(dest, gContestMons[contestant].nickname);
+    u8 *end = Contest_CopyDisplayName(dest, gContestMons[contestant].nickname);
     WrapFontIdToFit(dest, end, FONT_NORMAL, 60);
 }
 
@@ -4686,7 +4687,7 @@ static void Task_PrintRoundResultText(u8 taskId)
         u8 attention = eContestantStatus[gContestPlayerMonIndex].attentionLevel;
 
         ContestClearGeneralTextWindow();
-        StringCopy(gStringVar1, gContestMons[gContestPlayerMonIndex].nickname);
+        Contest_CopyDisplayName(gStringVar1, gContestMons[gContestPlayerMonIndex].nickname);
         StringExpandPlaceholders(gStringVar4, sRoundResultTexts[attention]);
         Contest_StartTextPrinter(gStringVar4, TRUE);
         gTasks[taskId].data[0]++;
@@ -6869,7 +6870,7 @@ void SetStartledString(u8 contestant, u8 jam)
 
 static void PrintAppealMoveResultText(u8 contestant, u8 stringId)
 {
-    StringCopy(gStringVar1, gContestMons[contestant].nickname);
+    Contest_CopyDisplayName(gStringVar1, gContestMons[contestant].nickname);
     StringCopy(gStringVar2, GetMoveName(eContestantStatus[contestant].currMove));
     StringCopy(gStringVar3, gContestCategoryInfo[eContestantStatus[eContestAppealResults.contestant].moveCategory].negativeTrait);
     StringExpandPlaceholders(gStringVar4, sAppealResultTexts[stringId]);
@@ -7751,7 +7752,7 @@ static void Contest_PrintTextToBg0WindowStd(u32 windowId, const u8 *b)
     printerTemplate.currentChar = b;
     printerTemplate.type = WINDOW_TEXT_PRINTER;
     printerTemplate.windowId = windowId;
-    printerTemplate.fontId = FONT_NORMAL;
+    printerTemplate.fontId = GetFontIdToFit(b, FONT_NORMAL, 0, GetWindowAttribute(windowId, WINDOW_WIDTH) * 8);
     printerTemplate.x = 0;
     printerTemplate.y = 1;
     printerTemplate.currentX = 0;
@@ -7792,15 +7793,29 @@ void Contest_PrintTextToBg0WindowAt(u32 windowId, u8 *currChar, s32 x, s32 y, s3
     Contest_SetBgCopyFlags(0);
 }
 
+u32 Contest_PrepareDisplayMessage(const u8 *text, u32 width)
+{
+    if (text != gStringVar4)
+        StringCopy(gStringVar4, text);
+    u32 font = GetFontIdToFit(gStringVar4, FONT_NORMAL, 0, width);
+    if (GetStringWidth(font, gStringVar4, 0) > width)
+    {
+        // Reflow only an overflowing display copy, after name/move substitution.
+        StripLineBreaks(gStringVar4);
+        BreakStringAutomatic(gStringVar4, width, 2, font, SHOW_SCROLL_PROMPT);
+    }
+    return font;
+}
+
 static void Contest_StartTextPrinter(const u8 *currChar, bool32 b)
 {
     struct TextPrinterTemplate printerTemplate;
     u8 speed;
 
-    printerTemplate.currentChar = currChar;
+    printerTemplate.fontId = Contest_PrepareDisplayMessage(currChar, GetWindowAttribute(WIN_GENERAL_TEXT, WINDOW_WIDTH) * 8);
+    printerTemplate.currentChar = gStringVar4;
     printerTemplate.type = WINDOW_TEXT_PRINTER;
     printerTemplate.windowId = WIN_GENERAL_TEXT;
-    printerTemplate.fontId = FONT_NORMAL;
     printerTemplate.x = 0;
     printerTemplate.y = 1;
     printerTemplate.currentX = 0;

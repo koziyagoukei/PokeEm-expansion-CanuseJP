@@ -75,7 +75,7 @@ ContestShop_EventScript_Goodbye:
 	end
 
 ContestShop_Text_Welcome:
-	.string "{JPN}コンテストの おともに いかが？\nどれも 1つ 10BPで こうかんするよ！$"
+	.string "{JPN}コンテストの おともに いかが？\nどれも 1つ 10BPで 交換するよ！$"
 
 ContestShop_Text_ChooseScarf:
 	.string "{JPN}どの バンダナに する？\n1まい 10BPだよ。$"
@@ -84,7 +84,7 @@ ContestShop_Text_RainbowEffect:
 	.string "{JPN}5つの コンディションが\nそれぞれ 50 あがる ポロックだよ。\pなめらかさは 20。\nポロックケースに いれてあげるね。$"
 
 ContestShop_Text_Confirm:
-	.string "{JPN}{STR_VAR_1}を\n1つ 10BPで こうかんする？$"
+	.string "{JPN}{STR_VAR_1}を\n1つ 10BPで 交換する？$"
 
 ContestShop_Text_Received:
 	.string "{JPN}{PLAYER}は\n{STR_VAR_1}を てにいれた！$"
@@ -93,7 +93,7 @@ ContestShop_Text_NotEnoughBP:
 	.string "{JPN}BPが たりない みたいだね。$"
 
 ContestShop_Text_NoCase:
-	.string "{JPN}ポロックケースが ひつようだよ。\nコンテストの うけつけで もらってね。$"
+	.string "{JPN}ポロックケースが 必要だよ。\nコンテストの 受付で もらってね。$"
 
 ContestShop_Text_CaseFull:
 	.string "{JPN}ポロックケースが いっぱいだよ。\nあきを つくってから また きてね。$"
@@ -1080,37 +1080,37 @@ LilycoveCity_ContestLobby_EventScript_LittleGirlHaveCase::
 	end
 
 LilycoveCity_ContestLobby_Text_LadyGaveMePokeblockCase:
-	.string "うわーい!\pうけつけの おねえちゃんから\nポロック いれる ケース もらった!$"
+	.string "{JPN}うわーい!\p受付の おねえちゃんから\nポロック いれる ケース もらった!$"
 
 LilycoveCity_ContestLobby_Text_MakePokeblocksDifferentBerries:
-	.string "ポロック つくって いれて!\pでね ポロック つくる ときは\nみんなが ちがう きのみで\lつくらないと ダメ なんだよ!$"
+	.string "{JPN}ポロック つくって いれて!\pでね ポロック つくる ときは\nみんなが 違う きのみで\lつくらないと ダメ なんだよ!$"
 
 LilycoveCity_ContestLobby_Text_YourPokemonSpurredMeToPaint:
-	.string "ゆうしょう おめでとう!\pさっそく きねんに\nきみの ポケモンの えを\lかきあげたんだけど……\pなんだか きみの ポケモンの アピールが\nあまり にも すばらしくて\lいつもより うまく かけたんだ!\lほらっ これ!$"
+	.string "{JPN}優勝 おめでとう!\pさっそく 記念に\nきみの ポケモンの えを\lかきあげたんだけど……\pなんだか きみの ポケモンの アピールが\nあまり にも すばらしくて\lいつもより 上手く かけたんだ!\lほらっ これ!$"
 
 LilycoveCity_ContestLobby_Text_ShouldITakePaintingToMuseum:
-	.string "どうかな? じしんさく なんだけど\nきにいったろ?\pこれくらいの でき なら\nびじゅつかんに かざられて いても\lふしぎじゃ ないね!\p……え ほんとに びじゅつかんで\nえを さがして いるって?\lじゃあ これ もっていって みようかな?$"
+	.string "{JPN}どうかな? じしんさく なんだけど\n気に入ったろ?\pこれくらいの でき なら\nびじゅつかんに かざられて いても\lふしぎじゃ ないね!\p……え ほんとに びじゅつかんで\nえを さがして いるって?\lじゃあ これ もっていって みようかな?$"
 
 LilycoveCity_ContestLobby_Text_IllTakePaintingToMuseum:
-	.string "そ そうか!\nじゃ いますぐ もっていって みるよ\lタイトルも つけて おくからね!\pこれが きにいられて\nかざって もらえて いるか どうか\lきみも こんど みに いってね!\lじゃ ありがとう!$"
+	.string "{JPN}そ そうか!\nじゃ いますぐ もっていって みるよ\lタイトルも つけて おくからね!\pこれが 気に入られて\nかざって もらえて いるか どうか\lきみも こんど みに いってね!\lじゃ ありがとう!$"
 
 LilycoveCity_ContestLobby_Text_TakeMementoOfPainting:
-	.string "……あ そうだ\pポケモンを かかせて もらった きねんに\nこれを うけとってよ!$"
+	.string "{JPN}……あ そうだ\pポケモンを かかせて もらった 記念に\nこれを うけとってよ!$"
 
 LilycoveCity_ContestLobby_Text_ReceivedARibbon:
-	.string "{PLAYER}は リボンを もらった!$"
+	.string "{JPN}{PLAYER}は リボンを もらった!$"
 
 LilycoveCity_ContestLobby_Text_PutTheRibbonOnMon:
-	.string "{PLAYER}は リボンを\n{STR_VAR_1}に つけて あげた!$"
+	.string "{JPN}{PLAYER}は リボンを\n{STR_VAR_1}に つけて あげた!$"
 
 LilycoveCity_ContestLobby_Text_OkaySeeYou:
-	.string "それじゃね!$"
+	.string "{JPN}それじゃね!$"
 
 LilycoveCity_ContestLobby_Text_TakeHomeButIdLikeToTakeToMuseum:
-	.string "うーん…… じゃあ これは\nぼくが もってかえると するか……\pでも やっぱり もっていきたいな……\nいいだろ?$"
+	.string "{JPN}うーん…… じゃあ これは\nぼくが もってかえると するか……\pでも やっぱり もってい期待な……\nいいだろ?$"
 
 LilycoveCity_ContestLobby_Text_FineThatsTheWayItIs:
-	.string "そっか しかたないね\nそれじゃ これは ぼくの\lいえに かざります\pつぎ がんばると するか……\nじゃあな$"
+	.string "{JPN}そっか しかたないね\nそれじゃ これは ぼくの\lいえに かざります\pつぎ 頑張ると するか……\nじゃあな$"
 
 LilycoveCity_ContestLobby_Text_MasterRankHereICome:
 	.string "{JPN}いよいよ マスターランクだ……！\nおれの ポケモンちゃんの かわいさを\lみんなに みてもらうんだ！\pわくわくも ドキドキも\nみんなに つたわると いいな！$"
@@ -1119,13 +1119,13 @@ LilycoveCity_ContestLobby_Text_WholeVarietyOfPokemonHere:
 	.string "{JPN}コンテストを みて びじゅつかんへ。\nそれから リゾートで ひとやすみ。\pまいにちの おさんぽコースなの！$"
 
 LilycoveCity_ContestLobby_Text_ContestFeastForEyes:
-	.string "{JPN}ここの ポケモンは みんな\nかいてみたくなる ひょうじょうを するよ。\pおなじ ステージでも\nおなじ えには ならないんだ！$"
+	.string "{JPN}ここの ポケモンは みんな\nかいてみたくなる ひょうじょうを するよ。\p同じ ステージでも\n同じ えには ならないんだ！$"
 
 LilycoveCity_ContestLobby_Text_ToughContestIsExtreme:
-	.string "{JPN}たくましさコンテストは さいこうだ！\nへんしんの はくりょくも みどころだぜ！\pでも ギミックは ここぞというとき。\nわざの つながりも だいじだからな！$"
+	.string "{JPN}たくましさコンテストは さ以降だ！\nへんしんの はくりょくも みどころだぜ！\pでも ギミックは ここぞというとき。\nわざの つながりも だいじだからな！$"
 
 LilycoveCity_ContestLobby_Text_LavishedCareOnMon:
-	.string "まいにち だいじに だいじに\nそだてあげた わしの ポケモン\lコンディションは カンペキ!\lきょうは かつぞおおおおおうう!$"
+	.string "{JPN}まいにち だいじに だいじに\nそだてあげた わしの ポケモン\lコンディションは カンペキ!\lきょうは かつぞおおおおおうう!$"
 
 LilycoveCity_ContestLobby_Text_MadePokeblocksWithFamily:
 	.string "{JPN}かぞく みんなで ポロックを つくったよ！\nみんなの すきな あじを いれたんだ。\pぼくの すきな あじも いっしょ。\nだって みんな すきなんだもん！$"

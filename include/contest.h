@@ -433,6 +433,7 @@ void LoadContestBgAfterMoveAnim(void);
 void CB2_StartContest(void);
 void CreateContestMonFromParty(u8 partyIndex);
 u8 *Contest_CopyDisplayName(u8 *dest, const u8 *name);
+u32 Contest_PrepareDisplayMessage(const u8 *text, u32 width);
 void SetContestants(enum ContestCategories contestType, u8 rank);
 void SetLinkAIContestants(enum ContestCategories contestType, u8 rank, bool32 isPostgame);
 u8 GetContestEntryEligibility(struct Pokemon *pkmn);
