@@ -294,12 +294,12 @@ BattleFrontier_Lounge7_EventScript_ChooseNewMove::
 	end
 
 BattleFrontier_Lounge7_EventScript_Sailor::
-	msgbox BattleFrontier_Lounge7_Text_ThinkLadiesDontGetAlong, MSGBOX_NPC
-	end
+	setvar VAR_0x8004, REGULAR_LOUNGE7_SAILOR
+	goto FrontierStory_EventScript_RegularTalk
 
 BattleFrontier_Lounge7_EventScript_Gentleman::
-	msgbox BattleFrontier_Lounge7_Text_LadiesWereStrongAndBeautiful, MSGBOX_NPC
-	end
+	setvar VAR_0x8004, REGULAR_LOUNGE7_GENTLEMAN
+	goto FrontierStory_EventScript_RegularTalk
 
 BattleFrontier_Lounge7_Text_LeftTutorIntro:
 	.string "ぶはははっ!\pあたしゃ こうみえても わかいころは\nそりゃー つよい トレーナーでよー\pさいきょうの おとなの おねえさんと して\nもー バリバリ いわしとったわ!\p…… … ……ん?\pなんじゃ あんた しんじとらんのかっ!?\pあたしゃ むこうの くちだけ ばあさんとは\nさいのうが ちがうんじゃっ!\pしょうこに あんたの ポケモンに\nすぺしゃる かつ きゅーとな わざの\lかずかずを おしえたろうかいなっ!!\pまあ じゅぎょうりょう ちゅう ことで\nちいと ばかし バトルポイントを\lいただくがのう!$"
@@ -330,12 +330,6 @@ BattleFrontier_Lounge7_Text_RightTutorIntro:
 
 BattleFrontier_Lounge7_Text_RightTutorWelcomeBack:
 	.string "いひひひっ!\pあたしゃの\nはーど かつ ぷりてぃな わざを\lおそわりに きたんかー!?$"
-
-BattleFrontier_Lounge7_Text_ThinkLadiesDontGetAlong:
-	.string "{JPN}あの ふたりは いいあいを しても\nいつも となりに いるだろ？\pことばが なくても わかるけど\nはなすのも すきなんだろうな。$"
-
-BattleFrontier_Lounge7_Text_LadiesWereStrongAndBeautiful:
-	.string "{JPN}あのかたたちの わざの キレは\nいまも おとろえて いませんな。\pたんぱんこぞうだったころの わたしも\nここで みとれている きぶんです。$"
 
 BattleFrontier_Lounge7_Text_SoftboiledDesc::
 	.string "{JPN}キズついた からだを\nたいりょくの\nはんぶん かいふく$"

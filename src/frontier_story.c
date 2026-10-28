@@ -30,6 +30,7 @@
 #include "data/frontier_story_targets.h"
 #include "data/frontier_story_contest.h"
 #include "data/frontier_crowd_talk.h"
+#include "data/frontier_regulars.h"
 
 // The Frontier never asks for less than level 50, so story battles don't either.
 #define STORY_BATTLE_MIN_LEVEL 50
@@ -331,22 +332,25 @@ void FrontierStory_BufferBrainIntro(void)
     gSpecialVar_Result = TRUE;
 }
 
-void FrontierStory_CountRescued(void)
+static u32 CountRescued(void)
 {
     u32 i, count = 0;
 
     for (i = 0; i < ARRAY_COUNT(sRescuedFlags); i++)
         count += FlagGet(sRescuedFlags[i]);
-    gSpecialVar_Result = count;
+    return count;
+}
+
+void FrontierStory_CountRescued(void)
+{
+    gSpecialVar_Result = CountRescued();
 }
 
 // Everyone cured so far: the scenario rescues and the Brains and guests cured at the camp.
 static u32 CountCuredPeople(void)
 {
-    u32 i, count;
+    u32 i, count = CountRescued();
 
-    FrontierStory_CountRescued();
-    count = gSpecialVar_Result;
     for (i = 0; i < NAMED_STORY_COUNT; i++)
         count += GetNamedState(i) == NAMED_STORY_RESCUED;
     return count;
@@ -857,12 +861,10 @@ void FrontierStory_BufferInnGuestText(void)
 // What passers-by talk about: how many scenarios are rescued, or the ending.
 u32 FrontierStory_GetCrowdStage(void)
 {
-    u32 rescued;
+    u32 rescued = CountRescued();
 
     if (FlagGet(FLAG_STORY_POKEVIRUS_FADED))
         return CROWD_STAGE_AFTER_ENDING;
-    FrontierStory_CountRescued();
-    rescued = gSpecialVar_Result;
     if (rescued >= 4)
         return CROWD_STAGE_PATH_OPEN;
     if (rescued >= 2)
@@ -970,6 +972,44 @@ void FrontierStory_BufferCrowdTalk(void)
     if (voice >= CROWD_VOICE_COUNT)
         voice = CROWD_VOICE_MAN;
     FrontierStory_BufferCrowdLine(FrontierStory_GetCrowdStage(), voice);
+}
+
+// A facility attendant's word after their welcome, in gStringVar4. VAR_RESULT is FALSE on saves
+// from before the opening, where they only welcome the player.
+void FrontierStory_BufferStaffAside(void)
+{
+    gStringVar4[0] = EOS;
+    gSpecialVar_Result = IsStoryActive();
+    if (gSpecialVar_Result)
+        StringExpandPlaceholders(gStringVar4, sStaffAsideLines[FrontierStory_GetCrowdStage()][Random() % STAFF_ASIDE_LINES]);
+}
+
+u32 FrontierStory_GetRegularPhase(void)
+{
+    switch (FrontierStory_GetCrowdStage())
+    {
+    case CROWD_STAGE_NONE_RESCUED:
+        return REGULAR_PHASE_BEFORE_RESCUES;
+    case CROWD_STAGE_AFTER_ENDING:
+        return REGULAR_PHASE_AFTER_ENDING;
+    }
+    return REGULAR_PHASE_RESCUING;
+}
+
+// What a regular (REGULAR_*) says in the phase, in gStringVar4; FALSE if there is no such line.
+bool32 FrontierStory_BufferRegularLine(u32 regular, u32 phase)
+{
+    gStringVar4[0] = EOS;
+    if (regular >= REGULAR_COUNT || phase >= REGULAR_PHASE_COUNT || sRegularLines[regular][phase] == NULL)
+        return FALSE;
+    StringExpandPlaceholders(gStringVar4, sRegularLines[regular][phase]);
+    return TRUE;
+}
+
+// VAR_0x8004: the regular talked to.
+void FrontierStory_BufferRegularTalk(void)
+{
+    FrontierStory_BufferRegularLine(gSpecialVar_0x8004, FrontierStory_GetRegularPhase());
 }
 
 static bool32 TryGetLocalObject(u16 localId, struct ObjectEvent **object)

@@ -734,3 +734,5 @@ gSpecials::
 	def_special FrontierStory_PickInnGuests
 	def_special FrontierStory_BufferInnGuestText
 	def_special FrontierStory_BufferCrowdTalk
+	def_special FrontierStory_BufferStaffAside
+	def_special FrontierStory_BufferRegularTalk

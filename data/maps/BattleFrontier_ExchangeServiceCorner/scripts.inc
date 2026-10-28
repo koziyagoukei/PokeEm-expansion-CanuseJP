@@ -323,14 +323,12 @@ BattleFrontier_ExchangeServiceCorner_EventScript_ScopeLens::
 	goto BattleFrontier_ExchangeServiceCorner_EventScript_PurchaseHoldItem
 
 BattleFrontier_ExchangeServiceCorner_EventScript_PokefanF::
-	lock
-	msgbox BattleFrontier_ExchangeServiceCorner_Text_GetYouAnythingYouWant, MSGBOX_DEFAULT
-	release
-	end
+	setvar VAR_0x8004, REGULAR_EXCHANGE_MOM
+	goto FrontierStory_EventScript_RegularAside
 
 BattleFrontier_ExchangeServiceCorner_EventScript_RichBoy::
-	msgbox BattleFrontier_ExchangeServiceCorner_Text_WishIHadAllDolls, MSGBOX_NPC
-	end
+	setvar VAR_0x8004, REGULAR_EXCHANGE_RICH_BOY
+	goto FrontierStory_EventScript_RegularTalk
 
 BattleFrontier_ExchangeServiceCorner_Text_WelcomePleaseChoosePrize:
 	.string "こんにちは こちらは\n"
@@ -370,12 +368,6 @@ BattleFrontier_ExchangeServiceCorner_Text_ThankYouVisitWithPoints:
 	.string "ありがとうございました\p"
 	.string "バトルポイントを ためたら\n"
 	.string "また おこしください$"
-
-BattleFrontier_ExchangeServiceCorner_Text_WishIHadAllDolls:
-	.string "{JPN}ドールも クッションも ほしいなあ。\nならべる じゅんばんまで かんがえちゃう！\pあら？ この へやの おもいでは\nとなりの この へや だったかしら。$"
-
-BattleFrontier_ExchangeServiceCorner_Text_GetYouAnythingYouWant:
-	.string "まかせといてって!\pあんたの ほしいもん だったら\nなんでも とって きたるよ!!$"
 
 BattleFrontier_ExchangeServiceCorner_Text_KissPosterDesc::
 	.string "{JPN}ムチュールが プリント されている\nおおきなポスター$"

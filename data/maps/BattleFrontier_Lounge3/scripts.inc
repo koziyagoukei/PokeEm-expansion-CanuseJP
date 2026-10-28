@@ -166,8 +166,8 @@ BattleFrontier_Lounge3_EventScript_CancelBet::
 	end
 
 BattleFrontier_Lounge3_EventScript_Man::
-	msgbox BattleFrontier_Lounge3_Text_ShouldBeTakingChallenges, MSGBOX_NPC
-	end
+	setvar VAR_0x8004, REGULAR_LOUNGE3_MAN
+	goto FrontierStory_EventScript_RegularTalk
 
 BattleFrontier_Lounge3_EventScript_Woman::
 	lock
@@ -317,5 +317,3 @@ BattleFrontier_Lounge3_Text_TrainerGoodButRattled::
 BattleFrontier_Lounge3_Text_KnowWinnerWhenISeeOne::
 	.string "{JPN}やった！ おうえんした ひとが かった！\nBPまで ふえちゃったわ！$"
 
-BattleFrontier_Lounge3_Text_ShouldBeTakingChallenges::
-	.string "{JPN}ここで しあいの はなしを きくのも\nけっこう おもしろいんだな。\pそろそろ おれも いってくるか！$"

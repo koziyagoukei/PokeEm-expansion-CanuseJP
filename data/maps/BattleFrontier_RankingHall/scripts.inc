@@ -71,8 +71,8 @@ BattleFrontier_RankingHall_EventScript_ShowRecords::
 	end
 
 BattleFrontier_RankingHall_EventScript_Attendant::
-	msgbox BattleFrontier_RankingHall_Text_ExplainRankingHall, MSGBOX_NPC
-	end
+	setvar VAR_0x8004, REGULAR_RANKING_HALL_GUIDE
+	goto FrontierStory_EventScript_RegularTalk
 
 BattleFrontier_RankingHall_EventScript_DomePikeFactoryRecordsSign::
 	msgbox BattleFrontier_RankingHall_Text_DomePikeFactoryRecords, MSGBOX_SIGN
@@ -95,9 +95,6 @@ BattleFrontier_RankingHall_EventScript_NinjaBoyNameOnList::
 	msgbox BattleFrontier_RankingHall_Text_WowThatsSuper, MSGBOX_DEFAULT
 	release
 	end
-
-BattleFrontier_RankingHall_Text_ExplainRankingHall:
-	.string "{JPN}ここは ランキングホール。\nトレーナーたちの きろくを\lたたえる ばしょです。\pあなたの あゆみも\nここに きざまれると いいですね。$"
 
 BattleFrontier_RankingHall_Text_DomePikeFactoryRecords:
 	.string "バトルドーム バトルチューブ\nバトルファクトリー の きろくは こちら$"

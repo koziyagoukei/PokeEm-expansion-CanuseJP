@@ -7,6 +7,7 @@
 #include "constants/characters.h"
 #include "constants/frontier_story.h"
 #include "constants/maps.h"
+#include "constants/vars.h"
 #include "constants/map_groups.h"
 
 extern const u8 FrontierStory_EventScript_CrowdTalk[];
@@ -122,4 +123,55 @@ TEST("Frontier crowd: the same line is not heard twice in a row")
         FrontierStory_BufferCrowdLine(CROWD_STAGE_NONE_RESCUED, CROWD_VOICE_CHILD);
         EXPECT_NE(StringCompare(last, gStringVar4), 0);
     }
+}
+
+TEST("Frontier regulars: everyone has their own line for each phase")
+{
+    for (u32 regular = 0; regular < REGULAR_COUNT; regular++)
+    {
+        for (u32 phase = 0; phase < REGULAR_PHASE_COUNT; phase++)
+        {
+            EXPECT(FrontierStory_BufferRegularLine(regular, phase));
+            EXPECT_NE(gStringVar4[0], EOS);
+        }
+    }
+    EXPECT(!FrontierStory_BufferRegularLine(REGULAR_COUNT, REGULAR_PHASE_BEFORE_RESCUES));
+}
+
+TEST("Frontier regulars: their lines change once the rescues begin, then after the ending")
+{
+    FlagClear(FLAG_STORY_POKEVIRUS_FADED);
+    SetRescued(0);
+    EXPECT_EQ(FrontierStory_GetRegularPhase(), REGULAR_PHASE_BEFORE_RESCUES);
+    SetRescued(1);
+    EXPECT_EQ(FrontierStory_GetRegularPhase(), REGULAR_PHASE_RESCUING);
+    SetRescued(8);
+    EXPECT_EQ(FrontierStory_GetRegularPhase(), REGULAR_PHASE_RESCUING);
+    FlagSet(FLAG_STORY_POKEVIRUS_FADED);
+    EXPECT_EQ(FrontierStory_GetRegularPhase(), REGULAR_PHASE_AFTER_ENDING);
+    FlagClear(FLAG_STORY_POKEVIRUS_FADED);
+    SetRescued(0);
+}
+
+TEST("Frontier attendants: a word after their welcome only once the story has begun")
+{
+    u32 intro = VarGet(VAR_FRONTIER_INTRO_STATE);
+
+    VarSet(VAR_FRONTIER_INTRO_STATE, 0);
+    FrontierStory_BufferStaffAside();
+    EXPECT_EQ(gSpecialVar_Result, FALSE);
+    VarSet(VAR_FRONTIER_INTRO_STATE, FRONTIER_INTRO_COMPLETE);
+    for (u32 rescued = 0; rescued <= 4; rescued++)
+    {
+        SetRescued(rescued);
+        FrontierStory_BufferStaffAside();
+        EXPECT_EQ(gSpecialVar_Result, TRUE);
+        EXPECT_NE(gStringVar4[0], EOS);
+    }
+    FlagSet(FLAG_STORY_POKEVIRUS_FADED);
+    FrontierStory_BufferStaffAside();
+    EXPECT_NE(gStringVar4[0], EOS);
+    FlagClear(FLAG_STORY_POKEVIRUS_FADED);
+    SetRescued(0);
+    VarSet(VAR_FRONTIER_INTRO_STATE, intro);
 }

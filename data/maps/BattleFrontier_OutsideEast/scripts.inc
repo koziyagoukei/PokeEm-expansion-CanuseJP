@@ -41,7 +41,9 @@ BattleFrontier_OutsideEast_EventScript_BattlePyramidSign::
 
 BattleFrontier_OutsideEast_EventScript_Cook::
 	lock
-	msgbox BattleFrontier_OutsideEast_Text_BelieveInYouBuddy, MSGBOX_DEFAULT
+	setvar VAR_0x8004, REGULAR_EAST_COOK
+	special FrontierStory_BufferRegularTalk
+	msgbox gStringVar4, MSGBOX_DEFAULT
 	release
 	end
 
@@ -56,14 +58,12 @@ BattleFrontier_OutsideEast_EventScript_Zigzagoon::
 	end
 
 BattleFrontier_OutsideEast_EventScript_Twin::
-	msgbox BattleFrontier_OutsideEast_Text_BetterThanDaddyAtPokemon, MSGBOX_NPC
-	end
+	setvar VAR_0x8004, REGULAR_EAST_TWIN
+	goto FrontierStory_EventScript_RegularTalk
 
 BattleFrontier_OutsideEast_EventScript_Man2::
-	lock
-	msgbox BattleFrontier_OutsideEast_Text_GoRackUpSomeWinsForDaddy, MSGBOX_DEFAULT
-	release
-	end
+	setvar VAR_0x8004, REGULAR_EAST_TWIN_DAD
+	goto FrontierStory_EventScript_RegularAside
 
 BattleFrontier_OutsideEast_EventScript_Sudowoodo::
 	lock
@@ -126,24 +126,20 @@ BattleFrontier_OutsideEast_Movement_SudowoodoShake:
 	step_end
 
 BattleFrontier_OutsideEast_EventScript_Man3::
-	msgbox BattleFrontier_OutsideEast_Text_GotWipedOut, MSGBOX_NPC
-	end
+	setvar VAR_0x8004, REGULAR_EAST_FAN
+	goto FrontierStory_EventScript_RegularTalk
 
 BattleFrontier_OutsideEast_EventScript_Woman1::
-	msgbox BattleFrontier_OutsideEast_Text_ToughTrainerInBattleTower, MSGBOX_NPC
-	end
+	setvar VAR_0x8004, REGULAR_EAST_FAN_PARTNER
+	goto FrontierStory_EventScript_RegularTalk
 
 BattleFrontier_OutsideEast_EventScript_Maniac2::
-	lock
-	msgbox BattleFrontier_OutsideEast_Text_CanDoAnythingWithYou, MSGBOX_DEFAULT
-	release
-	end
+	setvar VAR_0x8004, REGULAR_EAST_MULTI_MANIAC
+	goto FrontierStory_EventScript_RegularAside
 
 BattleFrontier_OutsideEast_EventScript_Woman3::
-	lock
-	msgbox BattleFrontier_OutsideEast_Text_PowerOfOurLoveWillOvercome, MSGBOX_DEFAULT
-	release
-	end
+	setvar VAR_0x8004, REGULAR_EAST_MULTI_WOMAN
+	goto FrontierStory_EventScript_RegularAside
 
 BattleFrontier_OutsideEast_EventScript_RankingHallSign::
 	msgbox BattleFrontier_OutsideEast_Text_RankingHallSign, MSGBOX_SIGN
@@ -184,29 +180,8 @@ BattleFrontier_OutsideEast_Text_RankingHallSign:
 BattleFrontier_OutsideEast_Text_ExchangeCornerSign:
 	.string "バトルポイント ひきかえサービス コーナー\nひきかえろ! キミの バトルポイント!$"
 
-BattleFrontier_OutsideEast_Text_BelieveInYouBuddy:
-	.string "{JPN}ジグちゃん！ しょうぶの あとは\nいっしょに おやつに しようね！$"
-
 BattleFrontier_OutsideEast_Text_ZigzagoonLooksVacant:
 	.string "{JPN}ジグザグマは のんびりしている。\nだれかの おやつの じかんを\lまっているようだ。$"
-
-BattleFrontier_OutsideEast_Text_BetterThanDaddyAtPokemon:
-	.string "{JPN}パパより わたしのほうが つよいよ！\nパパの さくせんも わかっちゃうもん！$"
-
-BattleFrontier_OutsideEast_Text_GoRackUpSomeWinsForDaddy:
-	.string "{JPN}ははは！ パパの さくせんが\nつたわってたら そりゃ てごわいな！\pいっしょに たのしんで おいで！$"
-
-BattleFrontier_OutsideEast_Text_GotWipedOut:
-	.string "{JPN}あんなに つよい あいてが いたなんて！\nまだ あたまの なかが いっぱいだ！\pどう たたかったのか みんなで\nなんども おもいかえしてるんだよ。$"
-
-BattleFrontier_OutsideEast_Text_ToughTrainerInBattleTower:
-	.string "{JPN}このひと つよい トレーナーに\nあってから ずっと この ちょうしなの。\pとなりに いると わたしまで\nその しあいを みたような きぶんよ。$"
-
-BattleFrontier_OutsideEast_Text_CanDoAnythingWithYou:
-	.string "{JPN}きみの たのしい きもちが\nそのまま ぼくの たのしさに なるんだ。\pいっしょに マルチへ いこうよ。$"
-
-BattleFrontier_OutsideEast_Text_PowerOfOurLoveWillOvercome:
-	.string "{JPN}そうね！ おなじ きもちで\nいっしょに たたかいましょ！\pきょうも あしたも\nふたりで ここに いたいわね！$"
 
 BattleFrontier_OutsideEast_Text_OddTreeHereSeemsToWiggle:
 	.string "{JPN}あの きが ゆれるのを みると\nなんだか わしまで むずむずするんじゃ。\pおまえさんも ちょいと\nみていって おくれ。$"

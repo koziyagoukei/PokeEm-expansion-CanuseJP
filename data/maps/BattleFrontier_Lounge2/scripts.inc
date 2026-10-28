@@ -91,26 +91,20 @@ BattleFrontier_Lounge2_EventScript_BufferBattlePyramid::
 	return
 
 BattleFrontier_Lounge2_EventScript_Maniac1::
-	lock
-	msgbox BattleFrontier_Lounge2_Text_NewsGatheringPower, MSGBOX_DEFAULT
-	release
-	end
+	setvar VAR_0x8004, REGULAR_LOUNGE2_MANIAC_1
+	goto FrontierStory_EventScript_RegularAside
 
 BattleFrontier_Lounge2_EventScript_Maniac2::
-	lock
-	msgbox BattleFrontier_Lounge2_Text_AmazingPowersOfObservation, MSGBOX_DEFAULT
-	release
-	end
+	setvar VAR_0x8004, REGULAR_LOUNGE2_MANIAC_2
+	goto FrontierStory_EventScript_RegularAside
 
 BattleFrontier_Lounge2_EventScript_Maniac3::
-	lock
-	msgbox BattleFrontier_Lounge2_Text_AmazingPowerOfPersuasion, MSGBOX_DEFAULT
-	release
-	end
+	setvar VAR_0x8004, REGULAR_LOUNGE2_MANIAC_3
+	goto FrontierStory_EventScript_RegularAside
 
 BattleFrontier_Lounge2_EventScript_TriathleteF::
-	msgbox BattleFrontier_Lounge2_Text_ThisPlaceIsScaringMe, MSGBOX_NPC
-	end
+	setvar VAR_0x8004, REGULAR_LOUNGE2_TRIATHLETE
+	goto FrontierStory_EventScript_RegularTalk
 
 BattleFrontier_Lounge2_Text_FrontierManiacIntro::
 	.string "{JPN}やあ！ フロンティアマニアだよ！\nみんなの はなしを あつめてるんだ。\pきみの しらない じょうほうも\nあるかもしれないね！$"
@@ -205,16 +199,4 @@ BattleFrontier_Lounge2_Text_MultiBattleAdvice::
 
 BattleFrontier_Lounge2_Text_LinkMultiBattleAdvice::
 	.string "{JPN}ともだちが あつまったら\nつうしんマルチ バトルルーム!!\pつよい ともだちと いっしょに あそべば\nつよい トレーナーたち との\lたたかいが まってるぜ!$"
-
-BattleFrontier_Lounge2_Text_NewsGatheringPower::
-	.string "{JPN}センパイの はなしを きくと\nみてない しあいまで うかぶッス！$"
-
-BattleFrontier_Lounge2_Text_AmazingPowersOfObservation::
-	.string "{JPN}きみも おなじ しあいを おぼえてる？\nやっぱり あの ばめんは よかったよなあ！$"
-
-BattleFrontier_Lounge2_Text_AmazingPowerOfPersuasion::
-	.string "{JPN}みんなで かんそうを いいあうと\nじょうほうも ふえるんスよね！$"
-
-BattleFrontier_Lounge2_Text_ThisPlaceIsScaringMe::
-	.string "{JPN}あのひとたち はなしが ぴったりね。\nわたしが しらないことも みんな しってる。\pわたしも まぜてもらおうかしら！$"
 

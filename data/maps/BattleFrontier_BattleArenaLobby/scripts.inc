@@ -121,6 +121,7 @@ BattleFrontier_BattleArenaLobby_EventScript_Attendant::
 	setvar VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_SINGLES
 	special SavePlayerParty
 	msgbox BattleFrontier_BattleArenaLobby_Text_WelcomeToBattleArena, MSGBOX_DEFAULT
+	call FrontierStory_EventScript_StaffAside
 BattleFrontier_BattleArenaLobby_EventScript_AskTakeChallenge::
 	message BattleFrontier_BattleArenaLobby_Text_WishToTakeChallenge
 	waitmessage

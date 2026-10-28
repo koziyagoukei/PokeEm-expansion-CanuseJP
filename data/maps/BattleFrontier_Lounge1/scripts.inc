@@ -143,12 +143,12 @@ BattleFrontier_Lounge1_EventScript_CancelMonSelect::
 	end
 
 BattleFrontier_Lounge1_EventScript_Boy1::
-	msgbox BattleFrontier_Lounge1_Text_SaidMyMonIsOutstanding, MSGBOX_NPC
-	end
+	setvar VAR_0x8004, REGULAR_LOUNGE1_BOY_1
+	goto FrontierStory_EventScript_RegularTalk
 
 BattleFrontier_Lounge1_EventScript_Boy2::
-	msgbox BattleFrontier_Lounge1_Text_DidntDoAnythingSpecialRaisingIt, MSGBOX_NPC
-	end
+	setvar VAR_0x8004, REGULAR_LOUNGE1_BOY_2
+	goto FrontierStory_EventScript_RegularTalk
 
 BattleFrontier_Lounge1_Text_PokemonBreederIntro:
 	.string "わしは ポケモン そだてて 70ねん!\nでんせつの ポケモントップブリーダーと\lあがめられる おとこ じゃ!\pわしくらいに なると ポケモンの\nのうりょくが ひとめで わかるんじゃぞっ!\pおまえさんも トレーナーなら\nじぶんの ポケモンの のうりょくが\lきになる じゃろ?\pほれ! わしに ポケモンを みせて みいっ!$"
@@ -207,10 +207,4 @@ BattleFrontier_Lounge1_Text_LetsLookAtYourPokemon:
 
 BattleFrontier_Lounge1_Text_EvenICantTell:
 	.string "さすがの わしも まだ うまれても いない\nポケモンの ことは わからんぞっ!\pポケモンを みせんか! ポケモンを!$"
-
-BattleFrontier_Lounge1_Text_SaidMyMonIsOutstanding:
-	.string "{JPN}ポケモンを ほめてもらったよ！\nこのこと いっしょに あるいた みちまで\lなんだか ほめられた きぶんだ！$"
-
-BattleFrontier_Lounge1_Text_DidntDoAnythingSpecialRaisingIt:
-	.string "{JPN}ぼくの ポケモンも ほめられた！\nとなりの こが うれしいと\lぼくも うれしくなるんだ。$"
 

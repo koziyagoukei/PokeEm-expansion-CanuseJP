@@ -108,6 +108,7 @@ BattleFrontier_BattlePikeLobby_EventScript_Attendant::
 	setvar VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_SINGLES
 	special SavePlayerParty
 	msgbox BattleFrontier_BattlePikeLobby_Text_WelcomeToBattlePike, MSGBOX_DEFAULT
+	call FrontierStory_EventScript_StaffAside
 BattleFrontier_BattlePikeLobby_EventScript_AskTakeChallenge::
 	message BattleFrontier_BattlePikeLobby_Text_TakeChallenge
 	waitmessage

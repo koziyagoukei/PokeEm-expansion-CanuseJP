@@ -30,16 +30,16 @@ BattleFrontier_Lounge5_EventScript_NatureGirlNoneShown::
 	end
 
 BattleFrontier_Lounge5_EventScript_Gentleman::
-	msgbox BattleFrontier_Lounge5_Text_LadyClaimsSheUnderstandsPokemon, MSGBOX_NPC
-	end
+	setvar VAR_0x8004, REGULAR_LOUNGE5_GENTLEMAN
+	goto FrontierStory_EventScript_RegularTalk
 
 BattleFrontier_Lounge5_EventScript_BlackBelt::
-	msgbox BattleFrontier_Lounge5_Text_GirlSayingSomethingProfound, MSGBOX_NPC
-	end
+	setvar VAR_0x8004, REGULAR_LOUNGE5_BLACK_BELT
+	goto FrontierStory_EventScript_RegularTalk
 
 BattleFrontier_Lounge5_EventScript_LittleBoy::
-	msgbox BattleFrontier_Lounge5_Text_GirlPlaysAtRedHouseALot, MSGBOX_NPC
-	end
+	setvar VAR_0x8004, REGULAR_LOUNGE5_LITTLE_BOY
+	goto FrontierStory_EventScript_RegularTalk
 
 BattleFrontier_Lounge5_Text_NatureGirlGreeting::
 	.string "{JPN}ねえ ポケモン みせて！\nあたち このこの きもち きいてみたい！$"
@@ -76,13 +76,4 @@ BattleFrontier_Lounge5_Text_NatureGirlSupportHighSupportLow::
 
 BattleFrontier_Lounge5_Text_NatureGirlEgg::
 	.string "たまごは ねんね してる から\nおはなち できない よぉ!$"
-
-BattleFrontier_Lounge5_Text_LadyClaimsSheUnderstandsPokemon::
-	.string "{JPN}あのこは ポケモンの きもちを\nそのまま ことばに できるそうですな。\pどんな ふうに きこえるのでしょうね。$"
-
-BattleFrontier_Lounge5_Text_GirlSayingSomethingProfound::
-	.string "{JPN}じぶんも ポケモンの きもちを\nよく ききたいで あります！\pわかった つもりでも\nあらためて きくのは たいせつです！$"
-
-BattleFrontier_Lounge5_Text_GirlPlaysAtRedHouseALot::
-	.string "{JPN}あのこ パレスにも あそびに いくんだ！\nぼくも いっしょに ついていこうかな。$"
 

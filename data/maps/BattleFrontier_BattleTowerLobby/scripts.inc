@@ -175,6 +175,7 @@ BattleFrontier_BattleTowerLobby_EventScript_SinglesAttendant::
 	setvar VAR_FRONTIER_FACILITY, FRONTIER_FACILITY_TOWER
 	special SavePlayerParty
 	msgbox BattleFrontier_BattleTowerLobby_Text_WelcomSingleBattle, MSGBOX_DEFAULT
+	call FrontierStory_EventScript_StaffAside
 BattleFrontier_BattleTowerLobby_EventScript_AskEnterSinglesChallenge::
 	message BattleFrontier_BattleTowerLobby_Text_TakeSinglesChallenge
 	waitmessage
@@ -238,6 +239,7 @@ BattleFrontier_BattleTowerLobby_EventScript_DoublesAttendant::
 	setvar VAR_FRONTIER_FACILITY, FRONTIER_FACILITY_TOWER
 	special SavePlayerParty
 	msgbox BattleFrontier_BattleTowerLobby_Text_WelcomeDoubleBattle, MSGBOX_DEFAULT
+	call FrontierStory_EventScript_StaffAside
 BattleFrontier_BattleTowerLobby_EventScript_AskEnterDoublesChallenge::
 	message BattleFrontier_BattleTowerLobby_Text_TakeDoublesChallenge
 	waitmessage
@@ -302,6 +304,7 @@ BattleFrontier_BattleTowerLobby_EventScript_MultisAttendant::
 	clearflag FLAG_CHOSEN_MULTI_BATTLE_NPC_PARTNER
 	special SavePlayerParty
 	msgbox BattleFrontier_BattleTowerLobby_Text_WelcomeMultiBattle, MSGBOX_DEFAULT
+	call FrontierStory_EventScript_StaffAside
 BattleFrontier_BattleTowerLobby_EventScript_AskEnterMultisChallenge::
 	message BattleFrontier_BattleTowerLobby_Text_TakeMultisChallenge
 	waitmessage
@@ -365,6 +368,7 @@ BattleFrontier_BattleTowerLobby_EventScript_LinkMultisAttendant::
 	setvar VAR_FRONTIER_FACILITY, FRONTIER_FACILITY_TOWER
 	special SavePlayerParty
 	msgbox BattleFrontier_BattleTowerLobby_Text_WelcomeLinkMultiBattle, MSGBOX_DEFAULT
+	call FrontierStory_EventScript_StaffAside
 BattleFrontier_BattleTowerLobby_EventScript_AskEnterLinkMultisChallenge::
 	message BattleFrontier_BattleTowerLobby_Text_TakeLinkMultisChallenge
 	waitmessage

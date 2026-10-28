@@ -48,11 +48,15 @@ void FrontierStory_RescueVisitor(void);
 void FrontierStory_PickInnGuests(void);
 void FrontierStory_BufferInnGuestText(void);
 
-// Passers-by.
+// Passers-by, facility attendants and the Frontier's regulars.
 u32 FrontierStory_GetCrowdStage(void);
 u32 FrontierStory_GetCrowdVoice(u16 graphicsId);
 bool32 FrontierStory_BufferCrowdLine(u32 stage, u32 voice);
 void FrontierStory_BufferCrowdTalk(void);
+void FrontierStory_BufferStaffAside(void);
+u32 FrontierStory_GetRegularPhase(void);
+bool32 FrontierStory_BufferRegularLine(u32 regular, u32 phase);
+void FrontierStory_BufferRegularTalk(void);
 
 // Placing people for story scenes.
 void FrontierStory_ArrangeReleaseScene(void);

@@ -174,20 +174,16 @@ BattleFrontier_OutsideWest_EventScript_UnusedNPC3::
 	end
 
 BattleFrontier_OutsideWest_EventScript_Woman3::
-	lock
-	msgbox BattleFrontier_OutsideWest_Text_LastTimeOurEyesMet, MSGBOX_DEFAULT
-	release
-	end
+	setvar VAR_0x8004, REGULAR_WEST_CHEER_WOMAN
+	goto FrontierStory_EventScript_RegularAside
 
 BattleFrontier_OutsideWest_EventScript_Boy2::
-	lock
-	msgbox BattleFrontier_OutsideWest_Text_DomeAceLookedBecauseOfMyCheering, MSGBOX_DEFAULT
-	release
-	end
+	setvar VAR_0x8004, REGULAR_WEST_CHEER_BOY
+	goto FrontierStory_EventScript_RegularAside
 
 BattleFrontier_OutsideWest_EventScript_OldMan::
-	msgbox BattleFrontier_OutsideWest_Text_DomeAceIsMine, MSGBOX_NPC
-	end
+	setvar VAR_0x8004, REGULAR_WEST_CHEER_OLD_MAN
+	goto FrontierStory_EventScript_RegularTalk
 
 BattleFrontier_OutsideWest_EventScript_Man4::
 	lock
@@ -240,15 +236,6 @@ BattleFrontier_OutsideWest_Text_LostIllPutOffPikeChallenge:
 
 BattleFrontier_OutsideWest_Text_DomeIsHereGrandpa:
 	.string "{JPN}じいちゃん ここが バトルドーム！\nわたし おうえん してるからね！$"
-
-BattleFrontier_OutsideWest_Text_LastTimeOurEyesMet:
-	.string "{JPN}あのひと こっちを みたわ！\nわたしの おうえんが きこえたのね！$"
-
-BattleFrontier_OutsideWest_Text_DomeAceLookedBecauseOfMyCheering:
-	.string "{JPN}ぼくも おなじこと おもった！\nねえ つぎは いっしょに おうえんしよう！$"
-
-BattleFrontier_OutsideWest_Text_DomeAceIsMine:
-	.string "{JPN}だったら わしも まぜなさい！\nみんなの こえなら よく とおるぞ！$"
 
 BattleFrontier_OutsideWest_Text_FansOverThereUsedToBeTrainers:
 	.string "{JPN}あのひとたち しょうぶも つよいけど\nいまは おうえんが たのしいんだって。\pまいにち ここで まちあわせ。\nずっと いっしょで いいかお してるよ。$"

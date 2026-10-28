@@ -967,6 +967,32 @@ FrontierStory_EventScript_CrowdTalk::
 	msgbox gStringVar4, MSGBOX_NPC
 	end
 
+@ The facility attendants, after their usual welcome: once a visit, a word for how far the rescues
+@ have come.
+FrontierStory_EventScript_StaffAside::
+	goto_if_set FLAG_STAFF_ASIDE_SHOWN, FrontierStory_EventScript_StaffAsideDone
+	special FrontierStory_BufferStaffAside
+	goto_if_eq VAR_RESULT, FALSE, FrontierStory_EventScript_StaffAsideDone
+	setflag FLAG_STAFF_ASIDE_SHOWN
+	msgbox gStringVar4, MSGBOX_DEFAULT
+FrontierStory_EventScript_StaffAsideDone:
+	return
+
+@ VAR_0x8004: REGULAR_*. Their own line for before the rescues, while they go on, or after the
+@ ending.
+FrontierStory_EventScript_RegularTalk::
+	special FrontierStory_BufferRegularTalk
+	msgbox gStringVar4, MSGBOX_NPC
+	end
+
+@ The same, for someone who keeps facing whoever they are with.
+FrontierStory_EventScript_RegularAside::
+	lock
+	special FrontierStory_BufferRegularTalk
+	msgbox gStringVar4, MSGBOX_DEFAULT
+	release
+	end
+
 @ ---------------------------------------------------------------------------
 @ The inn: everyone cured rests here. Kazuki, Toshio with his Aggron, and Yayoi with Roserade at a
 @ low table, in the lobby; Ikue and Delcatty in the east wing; Yoriko and Seviper, Nobuo and

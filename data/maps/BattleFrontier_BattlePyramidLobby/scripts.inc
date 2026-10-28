@@ -120,6 +120,7 @@ BattleFrontier_BattlePyramidLobby_EventScript_Attendant::
 	setvar VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_SINGLES
 	special SavePlayerParty
 	msgbox BattleFrontier_BattlePyramidLobby_Text_WelcomeToBattlePyramid, MSGBOX_DEFAULT
+	call FrontierStory_EventScript_StaffAside
 BattleFrontier_BattlePyramidLobby_EventScript_AskTakeChallenge::
 	message BattleFrontier_BattlePyramidLobby_Text_EmbarkOnChallenge
 	waitmessage
