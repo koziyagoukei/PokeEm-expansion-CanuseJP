@@ -84,13 +84,13 @@ static const struct StoryTargetText sStoryTargetTexts[STORY_TARGET_COUNT] =
     [STORY_TARGET_NOBUO] =
     {
         .name = COMPOUND_STRING("ノブオ"),
-        .meet = COMPOUND_STRING("{JPN}ノブオ『おう。 おれは ノブオ。\n遺跡を 調べるのが すきでな。\pこいつは 相棒の サンドパン。\n一緒に 穴を ほってきた。\pピラミッドは まっくらで\nまよいやすいって いうだろう？\pだが おれは 迷わないのさ。\nみんなが 道を 知ってるからな。\p一人で 全部 分かるってのは\nいい もんだぞ。』"),
-        .happy = COMPOUND_STRING("{JPN}ノブオ『くらい 道でも\nみんなの 記憶が てらしてくれる。\p助けを たのむ 必要も\nないってわけさ。』"),
-        .wish = COMPOUND_STRING("{JPN}ノブオ『おう きみか。\nシンボルの 勝負 見たぞ。\p……ところで ちょっと いいか。\nピラミッドで 上の かいへ\lのぼる 道を なにか 知らないか？\p……ん？ 今 おれ\n迷ってるって いったのか。\pみんなには いわなくても\n伝わってる はず なんだが……\pきみには 聞いて 初めて\n伝わったんだな。\p……言葉に しないと\n伝わらない 相手も いるのか。』"),
-        .wishAgain = COMPOUND_STRING("{JPN}ノブオ『聞いて 初めて 伝わる……。\p一人で 全部 分かる ほうが\nらく だったんだがな。』"),
-        .othersGone = COMPOUND_STRING("{JPN}ノブオ『そういや {STR_VAR_2}の 声が\n聞こえなく なったな。\p……まあ いい。\nみんなが いれば まよわんさ。』"),
-        .wishGone = COMPOUND_STRING("{JPN}ノブオ『{STR_VAR_2}も 誰かに\n言葉で 伝えたのかもな。』"),
-        .wishShared = COMPOUND_STRING("{JPN}ノブオ『みんなの 中にも\n道に 迷ってる やつが\lいるみたいだな。』"),
+        .meet = COMPOUND_STRING("{JPN}ノブオ『おう。おれは ノブオ。\n遺跡を調べるのが 好きでな。\pこいつは 相棒のサンドパン。\n一緒に あちこち掘ってきたんだ。\pピラミッドは 真っ暗だろう？\n……だが 今は迷わんのさ。\p誰かの歩いた道が 分かる。\n誰かが見つけた階段も 分かる。\p助けてくれって 言うまでもない。\n……便利なもんだよなあ。』"),
+        .happy = COMPOUND_STRING("{JPN}ノブオ『暗くたって 平気さ。\n皆の記憶が 道を教えてくれる。\p……サンドパンも 分かってる。\nおれ達は 迷わないんだ。』"),
+        .wish = COMPOUND_STRING("{JPN}ノブオ『おう きみか。\nシンボルの勝負 見てたぞ。\p……なあ。\n上の階への道を 知らないか。\pさっきから どうにも分からなくてな。\n……え？ おれが迷ってるって？\p……そうか。きみには\n言わなきゃ 分からなかったのか。\p皆には 黙っていたって伝わる。\nだが きみは違う。\p今 おれが聞いたから\nきみは 足を止めてくれたんだな。』"),
+        .wishAgain = COMPOUND_STRING("{JPN}ノブオ『……教えてくれって\n言うだけなんだよな。\p黙って分かる方が 楽だ。\nそりゃ 楽なんだが……。』"),
+        .othersGone = COMPOUND_STRING("{JPN}ノブオ『そういや {STR_VAR_2}の声が\n聞こえなくなったな。\p……まあ 皆がいれば\n道には 迷わんさ。』"),
+        .wishGone = COMPOUND_STRING("{JPN}ノブオ『{STR_VAR_2}も\n誰かに 道を聞いたのかね。\p……今は そうしなきゃ\n分からないんだもんな。』"),
+        .wishShared = COMPOUND_STRING("{JPN}ノブオ『皆の中にも\n道に迷ってるやつが いるらしい。\p……知ってるはずなのに\n分からないんだな。お互いに。』"),
     },
     [STORY_TARGET_YORIKO] =
     {
@@ -176,6 +176,20 @@ static const u8 *const sStoryTargetRescueTexts[STORY_TARGET_COUNT][RESCUE_TEXT_C
         [RESCUE_TEXT_AFTER_CURE] = COMPOUND_STRING("{JPN}ヤヨイ『……そういえば さっきの\nおだんご きびの 優しい\l香りが したわ。』\p店主『香り？\nうまいか どうかしか\l気に した ことが なかったぜ。』\pヤヨイ『ふふ。 同じ ものを 食べても\n気に なる ところは\lひとそれぞれ なのね。』"),
         [RESCUE_TEXT_ASKS_POKENAV] = COMPOUND_STRING("{JPN}ヤヨイ『ねえ ポケナビは もってる？\n連絡先 交換 しましょう。\pすてきな 香りを みつけたら\nおしえるわね。』"),
         [RESCUE_TEXT_GOES_TO_INN] = COMPOUND_STRING("{JPN}ヤヨイ『私 旅館で\nお茶を いれて 待ってるわ。\p{PLAYER}の 好きな 香りの\nお茶も よういして おくわね。』"),
+    },
+    [STORY_TARGET_NOBUO] =
+    {
+        [RESCUE_TEXT_FEVER_STARTING] = COMPOUND_STRING("{JPN}ノブオ『……あれ。\n階段は どっちだったか……。\p金色のシンボル……\n皆は 知ってるはずだろ……？』"),
+        [RESCUE_TEXT_FEVER] = COMPOUND_STRING("{JPN}ノブオ『……右だ。\nいや 左だった……。\p皆が 歩いた道だ。\nおれ達は 知ってる。迷わない。\p……なのに どうして\nおれは 道を聞こうとしてる？\p違う。おれ達は。\nおれ は。……おれ……。\p熱い。暗くて 何も見えない。\pどうして 離れるの？\nどうして 道も知らないまま\l一人で行こうとするの？』"),
+        [RESCUE_TEXT_VOICES_FADE] = COMPOUND_STRING("{JPN}ノブオ『……静かになったな。\nどっちへ行けば いいのか……。\p皆といた時は\nこんなこと 考えなくてよかった。\p……怖いもんだな。\n知らないってのは。』"),
+        [RESCUE_TEXT_CHOOSES] = COMPOUND_STRING("{JPN}ノブオ『……けど きみは\nおれの声を 聞いてくれた。\p助けてくれって 言えばいい。\n道を教えてくれって。\p……昔は そうしてたんだよな。\nこいつと二人で 迷っちゃあ\l誰かに 声をかけてさ。\pああ。分からなくても いいんだ。\n黙ってなくたって いい。\p……悪いな 皆。\nおれは そっちへ行くよ。』"),
+        [RESCUE_TEXT_DELIRIOUS] = COMPOUND_STRING("{JPN}ノブオ『……おい……\n誰か 道を……。\p……聞こえてるか……？』"),
+        [RESCUE_TEXT_EATS] = COMPOUND_STRING("{JPN}店主は ノブオの口に\n飯を どんどん運んだ！\pノブオ『むぐっ……！\n……もぐ……。』"),
+        [RESCUE_TEXT_WAKES_UP] = COMPOUND_STRING("{JPN}ノブオ『……ああ。\nここは……飯屋か。\pずいぶん 静かだな。\n……皆の声が しない。』"),
+        [RESCUE_TEXT_REMEMBERS] = COMPOUND_STRING("{JPN}ノブオ『……覚えてるよ。\n皆と繋がってた時のこと。\p歩いたことのない道まで 知ってた。\n迷うのも 怖がるのも忘れてた。\p……だが 今は分からん。\nここから先 どこへ行けばいいのか。\pだから 聞くんだ。\nきみにも 他の誰かにも。\p……ああ 助かった。\nありがとうな。』"),
+        [RESCUE_TEXT_AFTER_CURE] = COMPOUND_STRING("{JPN}ノブオ『……水を もらえないか。』\p店主『おう。』\p店主は ノブオに水を渡した。\pノブオ『……冷たいな。\pおれが言って あんたが渡してくれた。\n……それだけのことだったんだな。』"),
+        [RESCUE_TEXT_ASKS_POKENAV] = COMPOUND_STRING("{JPN}ノブオ『ポケナビ 持ってるか？\n連絡先を 交換しようぜ。\p迷った時に 頼れる相手は\n多い方が いいからな。』"),
+        [RESCUE_TEXT_GOES_TO_INN] = COMPOUND_STRING("{JPN}ノブオ『サンドパンと一緒に\n旅館で 休ませてもらうよ。\p……そっちへ行く船は\n港で聞けば いいんだよな。』"),
     },
     [STORY_TARGET_YORIKO] =
     {

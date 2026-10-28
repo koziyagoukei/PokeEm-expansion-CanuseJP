@@ -1,6 +1,7 @@
 #include "global.h"
 #include "battle.h"
 #include "battle_setup.h"
+#include "data.h"
 #include "event_data.h"
 #include "frontier_guest.h"
 #include "frontier_story.h"
@@ -9,16 +10,26 @@
 #include "random.h"
 #include "string_util.h"
 #include "test/test.h"
+#include "trainer_pools.h"
+#include "constants/abilities.h"
+#include "constants/battle_ai.h"
 #include "constants/battle_frontier.h"
 #include "constants/characters.h"
 #include "constants/event_objects.h"
 #include "constants/frontier_story.h"
 #include "constants/frontier_util.h"
+#include "constants/map_event_ids.h"
 #include "constants/opponents.h"
 #include "constants/trainers.h"
 
 #define BRAIN(facility) (NAMED_STORY_BRAIN_FIRST + (facility))
 #define GUEST(trainerId) ((trainerId) - TRAINER_FRONTIER_GUEST_FIRST)
+
+// The battle test harness replaces gTrainers with dummies. Check the real generated data here.
+static const struct Trainer sStoryTestTrainers[DIFFICULTY_COUNT][TRAINERS_COUNT] =
+{
+#include "../src/data/trainers.h"
+};
 
 static u32 NamedState(u32 id)
 {
@@ -820,5 +831,92 @@ TEST("Frontier story: everyone with a release battle has all of its lines and pl
         FrontierStory_PrepareHubRescue();
         EXPECT_NE(VarGet(VAR_HUB_RESCUED_GFX), 0);
     }
-    EXPECT_GE(withScenes, 3);
+    EXPECT_EQ(withScenes, STORY_TARGET_COUNT - 1);
+}
+
+TEST("Frontier story: Nobuo reaches his release battle and cure without moving saved flags")
+{
+    static const u8 name[] = _("ノブオ");
+    ResetStory();
+    EXPECT(!TalkToTarget(STORY_TARGET_NOBUO));
+    FlagSet(FLAG_SYS_PYRAMID_SILVER);
+    EXPECT(!TalkToTarget(STORY_TARGET_NOBUO));
+    EXPECT_EQ(TargetState(STORY_TARGET_NOBUO), TARGET_STORY_WISH);
+    EXPECT_EQ(TargetFever(STORY_TARGET_NOBUO), TARGET_FEVER_NONE);
+    FlagSet(FLAG_SYS_PYRAMID_GOLD);
+    EXPECT_EQ(TargetFever(STORY_TARGET_NOBUO), TARGET_FEVER_ALONE);
+    FlagSet(FLAG_STORY_DARKRAI_JOINED);
+    EXPECT_EQ(TargetFever(STORY_TARGET_NOBUO), TARGET_FEVER_RELEASE);
+    gSpecialVar_0x8004 = STORY_TARGET_NOBUO;
+    FrontierStory_StartRescueScene();
+    FrontierStory_GetRescueScene();
+    EXPECT_EQ(StringCompare(gStringVar1, name), 0);
+    EXPECT_EQ(gSpecialVar_0x8004, LOCALID_PYRAMID_LOBBY_NOBUO);
+    EXPECT_EQ(gSpecialVar_0x8005, LOCALID_PYRAMID_LOBBY_COOK);
+    EXPECT_EQ(gSpecialVar_0x8006, LOCALID_PYRAMID_LOBBY_POKEVIRUS);
+    for (u32 part = 0; part < RESCUE_TEXT_COUNT; part++)
+    {
+        gSpecialVar_0x8004 = part;
+        FrontierStory_BufferRescueText();
+        EXPECT(gSpecialVar_Result);
+        EXPECT_NE(gStringVar4[0], EOS);
+    }
+    FrontierStory_ReturnRescueTarget();
+    EXPECT_EQ(ReturnedTarget(), STORY_TARGET_NOBUO);
+    FrontierStory_PrepareHubRescue();
+    EXPECT_EQ(VarGet(VAR_HUB_RESCUED_GFX), OBJ_EVENT_GFX_HIKER);
+    FrontierStory_GetRescueMatchCall();
+    EXPECT_EQ(gSpecialVar_0x8004, TRAINER_DUSTY_1);
+    EXPECT_EQ(gSpecialVar_0x8000, TRAINER_DUSTY_1);
+    FrontierStory_FinishRescue();
+    EXPECT(FlagGet(FLAG_STORY_RESCUED_PYRAMID));
+    EXPECT_EQ(TargetState(STORY_TARGET_NOBUO), TARGET_STORY_RESCUED);
+    EXPECT_EQ(TargetFever(STORY_TARGET_NOBUO), TARGET_FEVER_NONE);
+    EXPECT_EQ(ReturnedTarget(), STORY_TARGET_COUNT);
+    EXPECT_EQ(SYSTEM_FLAGS, 0x860);
+    EXPECT_EQ(MAX_TRAINERS_COUNT_EMERALD, 864);
+}
+
+TEST("Frontier story: Nobuo and Pokevirus each occupy half an enemy party")
+{
+    const struct Trainer *trainer = &sStoryTestTrainers[DIFFICULTY_NORMAL][TRAINER_NOBUO_RELEASE];
+    EXPECT_EQ((u32)trainer->partySize, 3);
+    EXPECT_EQ((u32)trainer->multiTeamSize, MULTI_TEAM_SIZE_HALF);
+    EXPECT_EQ(trainer->trainerClass, TRAINER_CLASS_RUIN_MANIAC);
+    EXPECT_EQ(trainer->party[0].species, SPECIES_SANDSLASH);
+    EXPECT_EQ(trainer->party[0].heldItem, ITEM_GROUNDIUM_Z);
+    for (u32 i = 0; i < 3; i++)
+    {
+        EXPECT_EQ(trainer->party[i].lvl, 50);
+        EXPECT_NE(trainer->party[i].species, SPECIES_NONE);
+        for (u32 move = 0; move < MAX_MON_MOVES; move++)
+            EXPECT_NE(trainer->party[i].moves[move], MOVE_NONE);
+    }
+    trainer = &sStoryTestTrainers[DIFFICULTY_NORMAL][TRAINER_POKEVIRUS];
+    EXPECT_EQ((u32)trainer->partySize, 3);
+    EXPECT_EQ((u32)trainer->multiTeamSize, MULTI_TEAM_SIZE_HALF);
+}
+
+TEST("Frontier story: all eight rescue targets can finish without losing another target's state")
+{
+    ResetStory();
+    FlagSet(FLAG_STORY_DARKRAI_JOINED);
+    FlagSet(FLAG_STORY_CURE_FOUND);
+    VarSet(VAR_TOWER_STORY_STATE, TOWER_STORY_RESCUED);
+    FlagSet(FLAG_STORY_RESCUED_TOWER);
+    for (u32 target = STORY_TARGET_REIKA; target < STORY_TARGET_COUNT; target++)
+    {
+        SetTargetStep(target, TARGET_STORY_WISH);
+        gSpecialVar_0x8004 = target;
+        FrontierStory_StartRescueScene();
+        FrontierStory_ReturnRescueTarget();
+        EXPECT_EQ(ReturnedTarget(), target);
+        FrontierStory_PrepareHubRescue();
+        FrontierStory_FinishRescue();
+        EXPECT_EQ(ReturnedTarget(), STORY_TARGET_COUNT);
+        for (u32 finished = STORY_TARGET_KAZUKI; finished <= target; finished++)
+            EXPECT_EQ(TargetState(finished), TARGET_STORY_RESCUED);
+    }
+    FrontierStory_CountRescued();
+    EXPECT_EQ(gSpecialVar_Result, STORY_TARGET_COUNT);
 }

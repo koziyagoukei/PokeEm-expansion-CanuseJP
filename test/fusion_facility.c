@@ -148,13 +148,13 @@ TEST("Facility media restriction: challenge rooms reject playback without changi
     gMain.state = mainState;
 }
 
-TEST("Facility media restriction: lobbies and ordinary maps allow battle video playback")
+TEST("Facility media restriction: lobbies allow playback only if video storage is enabled")
 {
     u32 index = 0;
     for (u32 i = 0; i < ARRAY_COUNT(sAllowedMaps); i++)
         PARAMETRIZE { index = i; }
     SetMap(sAllowedMaps[index]);
-    EXPECT(IsRecordedBattlePlaybackAllowed());
+    EXPECT_EQ(IsRecordedBattlePlaybackAllowed(), !FREE_SPECIAL_SAVE_SECTORS);
 }
 
 TEST("Facility media restriction: stale challenge status does not block battle videos in the hub")
@@ -166,7 +166,7 @@ TEST("Facility media restriction: stale challenge status does not block battle v
     SetMap(MAP_ULTRA_FRONTIE_HUB);
     VarSet(VAR_FRONTIER_FACILITY, facility);
     gSaveBlock2Ptr->frontier.challengeStatus = status;
-    EXPECT(IsRecordedBattlePlaybackAllowed());
+    EXPECT_EQ(IsRecordedBattlePlaybackAllowed(), !FREE_SPECIAL_SAVE_SECTORS);
 }
 
 TEST("Facility media restriction: Teachy TV remains unusable in every challenge room")

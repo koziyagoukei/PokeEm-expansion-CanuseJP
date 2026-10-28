@@ -30,6 +30,8 @@ using json11::Json;
 #include <regex>
 
 #include "mapjson.h"
+#include "../../include/constants/map_buffers.h"
+#include "../../include/constants/battle_pyramid.h"
 
 #include <filesystem>
 
@@ -698,7 +700,8 @@ string generate_map_constants_text(string groups_filepath, Json groups_data, vec
 void clean_heal_locations(vector<string> &valid_map_ids)
 {
     std::stringstream new_json;
-    std::ifstream infile("src/data/heal_locations.json");
+    const string original = read_text_file("src/data/heal_locations.json");
+    std::istringstream infile(original);
     bool deleted_flag = false;
 
     std::regex map_regex("\"respawn_map\"\\s*:\\s*\"(MAP_\\w+)\"");
@@ -720,7 +723,9 @@ void clean_heal_locations(vector<string> &valid_map_ids)
         new_json << line << "\n";
     }
 
-    write_text_file("src/data/heal_locations.json", new_json.str());
+    // Map generation must not truncate a source another generated target is reading.
+    if (new_json.str() != original)
+        write_text_file("src/data/heal_locations.json", new_json.str());
 }
 
 // Output paths are directories with trailing path separators
@@ -773,6 +778,22 @@ void process_groups(string groups_filepath, vector<string> &map_filepaths, strin
     write_text_file(output_c + sep + "map_groups.h", map_header_text);
 }
 
+static bool layout_fits_map_buffer(const Json &layout)
+{
+    double width = layout["width"].number_value();
+    double height = layout["height"].number_value();
+    if (width < 1 || height < 1 || width > MAX_MAP_DATA_SIZE || height > MAX_MAP_DATA_SIZE
+     || width != static_cast<unsigned>(width) || height != static_cast<unsigned>(height))
+        return false;
+    string id = layout["id"].string_value();
+    if (id == "LAYOUT_BATTLE_FRONTIER_BATTLE_PYRAMID_FLOOR" || id.find("LAYOUT_BATTLE_PYRAMID_SQUARE") == 0)
+    {
+        width *= PYRAMID_FLOOR_SQUARES_WIDE;
+        height *= PYRAMID_FLOOR_SQUARES_HIGH;
+    }
+    return (width + MAP_OFFSET_W) * (height + MAP_OFFSET_H) <= MAX_MAP_DATA_SIZE;
+}
+
 string generate_layout_headers_text(Json layouts_data) {
     ostringstream text;
 
@@ -793,6 +814,9 @@ string generate_layout_headers_text(Json layouts_data) {
         if ((version == "emerald" && layout_version != "emerald")
          || (version == "firered" && layout_version != "frlg"))
             continue;
+        if (!layout_fits_map_buffer(layout))
+            FATAL_ERROR("Layout %s exceeds the %u-metatile map buffer (including borders/generated floors).\n",
+                        json_to_string(layout, "id").c_str(), MAX_MAP_DATA_SIZE);
         string layoutName = json_to_string(layout, "name");
         string border_label = layoutName + "_Border";
         string blockdata_label = layoutName + "_Blockdata";

@@ -739,6 +739,7 @@ void GenerateTrainerHillFloorLayout(u16 *mapArg)
 
     mapId = GetFloorId();
     src = gMapHeader.mapLayout->map;
+    fatal_assertf(MapLayoutFitsBuffer(HILL_FLOOR_WIDTH, HILL_FLOOR_HEIGHT), "trainer hill map too large");
     gBackupMapLayout.map = mapArg;
     // Dimensions include border area loaded beyond map
     gBackupMapLayout.width = HILL_FLOOR_WIDTH + 15;

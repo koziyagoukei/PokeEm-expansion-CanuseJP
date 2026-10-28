@@ -16853,17 +16853,48 @@ Bulbasaur
 Level: 5
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
-=== TRAINER_BRENDAN_PLACEHOLDER ===
-Name: ユウキ
-Class: RS Protag
-Pic: RS Brendan
+=== TRAINER_NOBUO_RELEASE ===
+Name: ノブオ
+Class: Ruin Maniac
+Pic: Ruin Maniac
 Gender: Male
-Music: Male
+Music: Hiker
 Double Battle: No
+AI: Basic Trainer
+Multi Party: Half
 
-Groudon
-Level: 5
-IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+Sandslash @ Groundium Z
+Ability: Sand Rush
+Level: 50
+Nature: Adamant
+EVs: 4 HP / 252 Atk / 252 Spe
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Earthquake
+- Rock Slide
+- Knock Off
+- Protect
+
+Hippowdon @ Sitrus Berry
+Ability: Sand Stream
+Level: 50
+Nature: Impish
+EVs: 252 HP / 252 Def / 4 SpD
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- High Horsepower
+- Rock Slide
+- Yawn
+- Slack Off
+
+Claydol @ Light Clay
+Ability: Levitate
+Level: 50
+Nature: Calm
+EVs: 252 HP / 4 Def / 252 SpD
+IVs: 31 HP / 31 Atk / 31 Def / 31 SpA / 31 SpD / 31 Spe
+- Earth Power
+- Psychic
+- Reflect
+- Light Screen
 
 === TRAINER_MAY_PLACEHOLDER ===
 Name: ハルカ

@@ -5,6 +5,9 @@ BattleFrontier_BattlePyramidLobby_MapScripts::
 	.byte 0
 
 BattleFrontier_BattlePyramidLobby_OnTransition:
+	@ The cook and Pokevirus only appear for Nobuo's release battle.
+	setflag FLAG_TEMP_1D
+	setflag FLAG_TEMP_1E
 	setvar VAR_0x8004, STORY_TARGET_NOBUO
 	call FrontierStory_EventScript_SetupTarget
 	end

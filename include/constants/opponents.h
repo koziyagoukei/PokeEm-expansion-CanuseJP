@@ -858,6 +858,8 @@
 #define TRAINER_LEAF                        852
 #define TRAINER_BRENDAN_PLACEHOLDER         853
 #define TRAINER_MAY_PLACEHOLDER             854
+// Story-only use of the unreferenced placeholder slot. Do not move the saved flag boundary.
+#define TRAINER_NOBUO_RELEASE               TRAINER_BRENDAN_PLACEHOLDER
 #define TRAINER_KAZUKI_RELEASE              855
 #define TRAINER_POKEVIRUS                   856
 #define TRAINER_KAZUKI_RESORT               857

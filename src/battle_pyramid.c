@@ -1782,6 +1782,10 @@ void GenerateBattlePyramidFloorLayout(u16 *backupMapData, bool8 setPlayerPositio
         const struct MapLayout *mapLayout = gMapLayouts[floorLayoutOffsets[i] + LAYOUT_BATTLE_FRONTIER_BATTLE_PYRAMID_FLOOR];
         const u16 *layoutMap = mapLayout->map;
 
+        fatal_assertf(mapLayout->width <= MAX_MAP_DATA_SIZE / PYRAMID_FLOOR_SQUARES_WIDE
+                   && mapLayout->height <= MAX_MAP_DATA_SIZE / PYRAMID_FLOOR_SQUARES_HIGH
+                   && MapLayoutFitsBuffer(mapLayout->width * PYRAMID_FLOOR_SQUARES_WIDE,
+                                          mapLayout->height * PYRAMID_FLOOR_SQUARES_HIGH), "pyramid map too large");
         gBackupMapLayout.map = backupMapData;
         gBackupMapLayout.width = mapLayout->width * PYRAMID_FLOOR_SQUARES_WIDE + MAP_OFFSET_W;
         gBackupMapLayout.height = mapLayout->height * PYRAMID_FLOOR_SQUARES_HIGH + MAP_OFFSET_H;

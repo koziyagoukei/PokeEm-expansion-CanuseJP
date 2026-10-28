@@ -2,6 +2,7 @@
 #include "mapjson.cpp"
 #undef main
 #include <cassert>
+#include <chrono>
 
 int main()
 {
@@ -42,6 +43,11 @@ int main()
         assert(locations[2]["respawn_npc"].string_value() == "LOCALID_FRONTIER_NURSE");
         assert(locations[3]["respawn_npc"].string_value() == "0");
     }
-    cout << "PASS: removed/zero/retained respawns and repeated generation" << endl;
+    const auto path = std::filesystem::path("src/data/heal_locations.json");
+    std::filesystem::last_write_time(path, std::filesystem::file_time_type::clock::now() - std::chrono::hours(1));
+    const auto before = std::filesystem::last_write_time(path);
+    clean_heal_locations(valid_maps);
+    assert(std::filesystem::last_write_time(path) == before);
+    cout << "PASS: removed/zero/retained respawns and unchanged-file preservation" << endl;
     return 0;
 }

@@ -119,7 +119,6 @@ EWRAM_DATA static u8 sCurDecorationCategory = DECORCAT_DESK;
 EWRAM_DATA static struct DecorationPCContext sDecorationContext = {};
 EWRAM_DATA static u8 sDecorMenuWindowIds[WINDOW_COUNT] = {};
 EWRAM_DATA static struct DecorationItemsMenu *sDecorationItemsMenu = NULL;
-EWRAM_DATA static struct PlaceDecorationGraphicsDataBuffer sPlaceDecorationGraphicsDataBuffer = {};
 EWRAM_DATA static u16 sCurDecorMapX = 0;
 EWRAM_DATA static u16 sCurDecorMapY = 0;
 EWRAM_DATA static u8 sDecor_CameraSpriteObjectIdx1 = 0;
@@ -164,8 +163,8 @@ static void DontTossDecoration(u8 taskId);
 static void DecorationItemsMenuAction_Cancel(u8 taskId);
 static void DecorationItemsMenuAction_AttemptPlace(u8 taskId);
 static void Task_PlaceDecoration(u8 taskId);
-static void ConfigureCameraObjectForPlacingDecoration(struct PlaceDecorationGraphicsDataBuffer *data, u8 decor);
-static void SetUpPlacingDecorationPlayerAvatar(u8 taskId, struct PlaceDecorationGraphicsDataBuffer *data);
+static bool8 ConfigureCameraObjectForPlacingDecoration(u8 decor);
+static bool8 SetUpPlacingDecorationPlayerAvatar(u8 taskId, const struct Decoration *decoration);
 static void SetUpDecorationShape(u8 taskId);
 static void AttemptPlaceDecoration(u8 taskId);
 static void AttemptCancelPlaceDecoration(u8 taskId);
@@ -183,7 +182,8 @@ static void ContinueDecorating(u8 taskId);
 static void CantPlaceDecorationPrompt(u8 taskId);
 static void InitializePuttingAwayCursorSprite(struct Sprite *sprite);
 static void InitializePuttingAwayCursorSprite2(struct Sprite *sprite);
-static u8 gpu_pal_decompress_alloc_tag_and_upload(struct PlaceDecorationGraphicsDataBuffer *data, u8 decor);
+static u8 gpu_pal_decompress_alloc_tag_and_upload(u8 decor);
+static bool8 LoadDecorationGraphics(const struct Decoration *decoration, u16 tilesTag, u16 paletteTag);
 static const u32 *GetDecorationIconPic(u16 decor);
 static const u16 *GetDecorationIconPalette(u16 decor);
 static bool8 HasDecorationsInUse(u8 taskId);
@@ -489,19 +489,13 @@ static const union AnimCmd sDecorSelectorAnimCmd0[] =
 
 static const union AnimCmd *const sDecorSelectorAnimCmds[] = { sDecorSelectorAnimCmd0 };
 
-static const struct SpriteFrameImage sDecorSelectorSpriteFrameImages =
-{
-    .data = (const u8 *)&sPlaceDecorationGraphicsDataBuffer.image,
-    .size = 0x800,
-};
-
 static const struct SpriteTemplate sDecorationSelectorSpriteTemplate =
 {
-    TAG_NONE,
+    PLACE_DECORATION_SELECTOR_TAG,
     PLACE_DECORATION_SELECTOR_TAG,
     &sDecorSelectorOam,
     sDecorSelectorAnimCmds,
-    &sDecorSelectorSpriteFrameImages,
+    NULL,
     gDummySpriteAffineAnimTable,
     SpriteCallbackDummy
 };
@@ -515,12 +509,6 @@ static const struct SpriteTemplate sDecorWhilePlacingSpriteTemplate =
     NULL,
     gDummySpriteAffineAnimTable,
     SpriteCallbackDummy
-};
-
-static const struct SpritePalette sSpritePal_PlaceDecoration =
-{
-    .data = (const u16 *)&sPlaceDecorationGraphicsDataBuffer.palette,
-    .tag = PLACE_DECORATION_SELECTOR_TAG,
 };
 
 static const struct YesNoFuncTable sPlaceDecorationYesNoFunctions =
@@ -1521,7 +1509,7 @@ void SetDecoration(void)
 
             VarSet(
                 VAR_OBJ_GFX_ID_0 + (gMapHeader.events->objectEvents[j].graphicsId - OBJ_EVENT_GFX_VAR_0),
-                sPlaceDecorationGraphicsDataBuffer.decoration->tiles[0]);
+                GetContextDecoration(gCurDecorationItems[gCurDecorationIndex])->tiles[0]);
 
             gSpecialVar_0x8005 = gMapHeader.events->objectEvents[j].localId;
             gSpecialVar_0x8006 = sCurDecorMapX;
@@ -1605,15 +1593,30 @@ static void Task_PlaceDecoration(u8 taskId)
         }
         break;
     case 1:
+    {
+        u8 cameraSpriteId = gFieldCamera.spriteId;
         RemoveFollowingPokemon();
         gPaletteFade.bufferTransferDisabled = TRUE;
-        ConfigureCameraObjectForPlacingDecoration(&sPlaceDecorationGraphicsDataBuffer, gCurDecorationItems[gCurDecorationIndex]);
+        if (!ConfigureCameraObjectForPlacingDecoration(gCurDecorationItems[gCurDecorationIndex]))
+        {
+            gPaletteFade.bufferTransferDisabled = FALSE;
+            CancelDecorating_(taskId);
+            break;
+        }
         SetUpDecorationShape(taskId);
-        SetUpPlacingDecorationPlayerAvatar(taskId, &sPlaceDecorationGraphicsDataBuffer);
+        if (!SetUpPlacingDecorationPlayerAvatar(taskId, GetContextDecoration(gCurDecorationItems[gCurDecorationIndex])))
+        {
+            DestroySprite(&gSprites[gFieldCamera.spriteId]);
+            gFieldCamera.spriteId = cameraSpriteId;
+            gPaletteFade.bufferTransferDisabled = FALSE;
+            CancelDecorating_(taskId);
+            break;
+        }
         FadeInFromBlack();
         gPaletteFade.bufferTransferDisabled = FALSE;
         gTasks[taskId].tState = 2;
         break;
+    }
     case 2:
         if (IsWeatherNotFadingIn() == TRUE)
         {
@@ -1624,22 +1627,33 @@ static void Task_PlaceDecoration(u8 taskId)
     }
 }
 
-static void ConfigureCameraObjectForPlacingDecoration(struct PlaceDecorationGraphicsDataBuffer *data, u8 decor)
+static bool8 ConfigureCameraObjectForPlacingDecoration(u8 decor)
 {
+    const struct Decoration *decoration = GetContextDecoration(decor);
+    u8 spriteId;
+    u32 freeSprites = 0;
+    for (u32 i = 0; i < MAX_SPRITES; i++)
+        freeSprites += !gSprites[i].inUse;
+    if (freeSprites < 2)
+        return FALSE;
+    spriteId = gpu_pal_decompress_alloc_tag_and_upload(decor);
+    if (spriteId == MAX_SPRITES)
+        return FALSE;
     sDecor_CameraSpriteObjectIdx1 = gSprites[gFieldCamera.spriteId].data[0];
-    gFieldCamera.spriteId = gpu_pal_decompress_alloc_tag_and_upload(data, decor);
+    gFieldCamera.spriteId = spriteId;
     gSprites[gFieldCamera.spriteId].oam.priority = 1;
     gSprites[gFieldCamera.spriteId].callback = InitializePuttingAwayCursorSprite;
-    gSprites[gFieldCamera.spriteId].x = sDecorShapes[data->decoration->shape].cameraX;
-    gSprites[gFieldCamera.spriteId].y = sDecorShapes[data->decoration->shape].cameraY;
+    gSprites[gFieldCamera.spriteId].x = sDecorShapes[decoration->shape].cameraX;
+    gSprites[gFieldCamera.spriteId].y = sDecorShapes[decoration->shape].cameraY;
+    return TRUE;
 }
 
-static void SetUpPlacingDecorationPlayerAvatar(u8 taskId, struct PlaceDecorationGraphicsDataBuffer *data)
+static bool8 SetUpPlacingDecorationPlayerAvatar(u8 taskId, const struct Decoration *decoration)
 {
     u8 x;
 
-    x = 16 * (u8)gTasks[taskId].tDecorWidth + sDecorShapes[data->decoration->shape].cameraX - 8 * ((u8)gTasks[taskId].tDecorWidth - 1);
-    if (data->decoration->shape == DECORSHAPE_3x1 || data->decoration->shape == DECORSHAPE_3x3 || data->decoration->shape == DECORSHAPE_3x2)
+    x = 16 * (u8)gTasks[taskId].tDecorWidth + sDecorShapes[decoration->shape].cameraX - 8 * ((u8)gTasks[taskId].tDecorWidth - 1);
+    if (decoration->shape == DECORSHAPE_3x1 || decoration->shape == DECORSHAPE_3x3 || decoration->shape == DECORSHAPE_3x2)
         x -= 8;
 
     if (gSaveBlock2Ptr->playerGender == MALE)
@@ -1647,9 +1661,12 @@ static void SetUpPlacingDecorationPlayerAvatar(u8 taskId, struct PlaceDecoration
     else
         sDecor_CameraSpriteObjectIdx2 = CreateObjectGraphicsSprite(OBJ_EVENT_GFX_MAY_DECORATING, SpriteCallbackDummy, x, 72, 0);
 
+    if (sDecor_CameraSpriteObjectIdx2 == MAX_SPRITES)
+        return FALSE;
     gSprites[sDecor_CameraSpriteObjectIdx2].oam.priority = 1;
     DestroySprite(&gSprites[sDecor_CameraSpriteObjectIdx1]);
     sDecor_CameraSpriteObjectIdx1 = gFieldCamera.spriteId;
+    return TRUE;
 }
 
 static void SetUpDecorationShape(u8 taskId)
@@ -2022,6 +2039,7 @@ static void c1_overworld_prev_quest(u8 taskId)
         break;
     case 1:
         FreePlayerSpritePalette();
+        FreeSpriteTilesByTag(PLACE_DECORATION_SELECTOR_TAG);
         FreeSpritePaletteByTag(PLACE_DECORATION_SELECTOR_TAG);
         gFieldCallback = FieldCB_InitDecorationItemsWindow;
         SetMainCallback2(CB2_ReturnToField);
@@ -2194,11 +2212,6 @@ static void CantPlaceDecorationPrompt(u8 taskId)
         ContinueDecorating(taskId);
 }
 
-static void ClearPlaceDecorationGraphicsDataBuffer(struct PlaceDecorationGraphicsDataBuffer *data)
-{
-    CpuFill16(0, data, sizeof(*data));
-}
-
 static void CopyPalette(u16 *dest, u16 pal)
 {
     CpuFastCopy(&gTilesetPointer_SecretBase->palettes[pal], dest, PLTT_SIZE_4BPP);
@@ -2316,25 +2329,84 @@ static void InitializePuttingAwayCursorSprite2(struct Sprite *sprite)
     }
 }
 
-static u8 gpu_pal_decompress_alloc_tag_and_upload(struct PlaceDecorationGraphicsDataBuffer *data, u8 decor)
+static bool8 LoadDecorationGraphics(const struct Decoration *decoration, u16 tilesTag, u16 paletteTag)
 {
-    ClearPlaceDecorationGraphicsDataBuffer(data);
-    data->decoration = GetContextDecoration(decor);
-    if (data->decoration->permission == DECORPERM_SPRITE)
+    struct PlaceDecorationGraphicsDataBuffer *data = AllocZeroedUnchecked(sizeof(*data));
+    struct SpriteSheet sheet;
+    struct SpritePalette palette;
+    bool8 success = FALSE;
+    if (data == NULL)
+        return FALSE;
+    data->decoration = decoration;
+
+    SetDecorSelectionMetatiles(data);
+    SetDecorSelectionBoxOamAttributes(decoration->shape);
+    SetDecorSelectionBoxTiles(data);
+    CopyPalette(data->palette, gTilesetPointer_SecretBaseRedCave->metatiles[(decoration->tiles[0] * NUM_TILES_PER_METATILE) + 7] >> 12);
+    sheet.data = data->image;
+    sheet.size = sDecorShapes[decoration->shape].size * TILE_SIZE_4BPP;
+    sheet.tag = tilesTag;
+    palette.data = data->palette;
+    palette.tag = paletteTag;
+    if (GetSpriteTileStartByTag(tilesTag) != TAG_NONE || IndexOfSpritePaletteTag(paletteTag) != 0xFF)
+        goto cleanup;
+    if (!CanAllocSpriteTiles(sheet.size / TILE_SIZE_4BPP))
+        goto cleanup;
+    if (LoadSpritePalette(&palette) == 0xFF)
+        goto cleanup;
+    LoadSpriteSheet(&sheet);
+    if (GetSpriteTileStartByTag(tilesTag) == TAG_NONE)
+    {
+        FreeSpritePaletteByTag(paletteTag);
+        goto cleanup;
+    }
+    success = TRUE;
+
+cleanup:
+    // Both uploads copy synchronously. No sprite retains this temporary RAM image.
+    Free(data);
+    return success;
+}
+
+static u8 gpu_pal_decompress_alloc_tag_and_upload(u8 decor)
+{
+    const struct Decoration *decoration = GetContextDecoration(decor);
+    u8 spriteId;
+    if (decoration->permission == DECORPERM_SPRITE)
     {
         if (sDecorationContext.type == DECOR_CONTEXT_SPECIAL_DOLL)
-            return CreateObjectGraphicsSpriteWithTag(data->decoration->tiles[0], SpriteCallbackDummy, 0, 0, 1, PLACE_DECORATION_SELECTOR_TAG);
-        return CreateObjectGraphicsSprite(data->decoration->tiles[0], SpriteCallbackDummy, 0, 0, 1);
+            return CreateObjectGraphicsSpriteWithTag(decoration->tiles[0], SpriteCallbackDummy, 0, 0, 1, PLACE_DECORATION_SELECTOR_TAG);
+        return CreateObjectGraphicsSprite(decoration->tiles[0], SpriteCallbackDummy, 0, 0, 1);
     }
 
     FreeSpritePaletteByTag(PLACE_DECORATION_SELECTOR_TAG);
-    SetDecorSelectionMetatiles(data);
-    SetDecorSelectionBoxOamAttributes(data->decoration->shape);
-    SetDecorSelectionBoxTiles(data);
-    CopyPalette(data->palette, gTilesetPointer_SecretBaseRedCave->metatiles[(data->decoration->tiles[0] * NUM_TILES_PER_METATILE) + 7] >> 12);
-    LoadSpritePalette(&sSpritePal_PlaceDecoration);
-    return CreateSprite(&sDecorationSelectorSpriteTemplate, 0, 0, 0);
+    FreeSpriteTilesByTag(PLACE_DECORATION_SELECTOR_TAG);
+    if (!LoadDecorationGraphics(decoration, PLACE_DECORATION_SELECTOR_TAG, PLACE_DECORATION_SELECTOR_TAG))
+        return MAX_SPRITES;
+    spriteId = CreateSpriteUnchecked(&sDecorationSelectorSpriteTemplate, 0, 0, 0);
+    if (spriteId == MAX_SPRITES)
+    {
+        FreeSpriteTilesByTag(PLACE_DECORATION_SELECTOR_TAG);
+        FreeSpritePaletteByTag(PLACE_DECORATION_SELECTOR_TAG);
+    }
+    return spriteId;
 }
+
+#if TESTING
+u8 Test_CreateDecorationSelector(u8 decor)
+{
+    struct DecorationPCContext context = sDecorationContext;
+    sDecorationContext.type = DECOR_CONTEXT_SECRET_BASE;
+    u8 spriteId = gpu_pal_decompress_alloc_tag_and_upload(decor);
+    sDecorationContext = context;
+    return spriteId;
+}
+
+bool8 Test_LoadDecorationGraphics(u8 decor, u16 tilesTag, u16 paletteTag)
+{
+    return LoadDecorationGraphics(&gDecorations[decor], tilesTag, paletteTag);
+}
+#endif
 
 static u8 AddDecorationIconObjectFromIconTable(u16 tilesTag, u16 paletteTag, u8 decor)
 {
@@ -2384,35 +2456,33 @@ static const u16 *GetDecorationIconPalette(u16 decor)
 static u8 AddDecorationIconObjectFromObjectEvent(u16 tilesTag, u16 paletteTag, u8 decor)
 {
     u8 spriteId;
-    struct SpriteSheet sheet;
-    struct SpritePalette palette;
     struct SpriteTemplate *template;
 
-    ClearPlaceDecorationGraphicsDataBuffer(&sPlaceDecorationGraphicsDataBuffer);
-    sPlaceDecorationGraphicsDataBuffer.decoration = &gDecorations[decor];
-    if (sPlaceDecorationGraphicsDataBuffer.decoration->permission != DECORPERM_SPRITE)
+    if (gDecorations[decor].permission != DECORPERM_SPRITE)
     {
-        SetDecorSelectionMetatiles(&sPlaceDecorationGraphicsDataBuffer);
-        SetDecorSelectionBoxOamAttributes(sPlaceDecorationGraphicsDataBuffer.decoration->shape);
-        SetDecorSelectionBoxTiles(&sPlaceDecorationGraphicsDataBuffer);
-        CopyPalette(sPlaceDecorationGraphicsDataBuffer.palette, gTilesetPointer_SecretBaseRedCave->metatiles[(sPlaceDecorationGraphicsDataBuffer.decoration->tiles[0] * NUM_TILES_PER_METATILE) + 7] >> 12);
-        sheet.data = sPlaceDecorationGraphicsDataBuffer.image;
-        sheet.size = sDecorShapes[sPlaceDecorationGraphicsDataBuffer.decoration->shape].size * TILE_SIZE_4BPP;
-        sheet.tag = tilesTag;
-        LoadSpriteSheet(&sheet);
-        palette.data = sPlaceDecorationGraphicsDataBuffer.palette;
-        palette.tag = paletteTag;
-        LoadSpritePalette(&palette);
-        template = Alloc(sizeof(struct SpriteTemplate));
+        if (!LoadDecorationGraphics(&gDecorations[decor], tilesTag, paletteTag))
+            return MAX_SPRITES;
+        template = AllocUnchecked(sizeof(struct SpriteTemplate));
+        if (template == NULL)
+        {
+            FreeSpriteTilesByTag(tilesTag);
+            FreeSpritePaletteByTag(paletteTag);
+            return MAX_SPRITES;
+        }
         *template = sDecorWhilePlacingSpriteTemplate;
         template->tileTag = tilesTag;
         template->paletteTag = paletteTag;
         spriteId = CreateSpriteUnchecked(template, 0, 0, 0);
         Free(template);
+        if (spriteId == MAX_SPRITES)
+        {
+            FreeSpriteTilesByTag(tilesTag);
+            FreeSpritePaletteByTag(paletteTag);
+        }
     }
     else
     {
-        spriteId = CreateObjectGraphicsSpriteWithTag(sPlaceDecorationGraphicsDataBuffer.decoration->tiles[0], SpriteCallbackDummy, 0, 0, 1, paletteTag);
+        spriteId = CreateObjectGraphicsSpriteWithTag(gDecorations[decor].tiles[0], SpriteCallbackDummy, 0, 0, 1, paletteTag);
     }
     return spriteId;
 }

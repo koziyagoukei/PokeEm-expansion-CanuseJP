@@ -7,6 +7,7 @@
 #include "test/test.h"
 #include "constants/maps.h"
 #include "constants/map_groups.h"
+#include "constants/map_event_ids.h"
 #include "constants/metatile_behaviors.h"
 
 static const u32 sMaps[][2] =
@@ -28,9 +29,33 @@ TEST("Restoration inn: four maps use dedicated secondary graphics and no unrelat
         EXPECT(map->mapLayout->secondaryTileset->isCompressed);
         EXPECT_EQ(map->mapLayout->secondaryTileset->callback,NULL);
         // The ferry and its crew at the outside pier; elsewhere, the cured who rest here.
-        EXPECT_EQ(map->events->objectEventCount, ((const u32[]){6, 7, 4, 4})[i]);
+        EXPECT_EQ(map->events->objectEventCount, ((const u32[]){6, 7, 4, 6})[i]);
         EXPECT_EQ(map->events->coordEventCount,0);
     }
+}
+
+TEST("Restoration inn: Nobuo and Sandslash have reachable positions without changing the layout")
+{
+    extern const u8 InnStory_EventScript_Nobuo[];
+    extern const u8 InnStory_EventScript_Sandslash[];
+    const struct MapHeader *map = Overworld_GetMapHeaderByGroupAndId(
+        MAP_GROUP(MAP_RESTORATION_INN_WEST_WING), MAP_NUM(MAP_RESTORATION_INN_WEST_WING));
+    u32 found = 0;
+    for (u32 i = 0; i < map->events->objectEventCount; i++)
+    {
+        const struct ObjectEventTemplate *object = &map->events->objectEvents[i];
+        if (object->localId != LOCALID_INN_NOBUO && object->localId != LOCALID_INN_SANDSLASH)
+            continue;
+        found++;
+        EXPECT_EQ(object->flagId, FLAG_TEMP_11);
+        EXPECT_EQ(object->script, object->localId == LOCALID_INN_NOBUO
+            ? InnStory_EventScript_Nobuo : InnStory_EventScript_Sandslash);
+        EXPECT_EQ(map->mapLayout->map[object->y * map->mapLayout->width + object->x] & MAPGRID_COLLISION_MASK, 0);
+        s32 approachX = object->x + (object->localId == LOCALID_INN_SANDSLASH);
+        s32 approachY = object->y + (object->localId == LOCALID_INN_NOBUO);
+        EXPECT_EQ(map->mapLayout->map[approachY * map->mapLayout->width + approachX] & MAPGRID_COLLISION_MASK, 0);
+    }
+    EXPECT_EQ(found, 2);
 }
 
 TEST("Restoration inn: room doors and exit mats have appropriate warp behavior")

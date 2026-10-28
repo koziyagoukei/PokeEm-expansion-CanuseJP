@@ -164,18 +164,31 @@ void InitTrainerHillMap(void)
 static void InitMapLayoutData(const struct MapHeader *mapHeader)
 {
     const struct MapLayout *mapLayout = mapHeader->mapLayout;
+
+    fatal_assertf(MapLayoutFitsBuffer(mapLayout->width, mapLayout->height), "map too large: %u x %u", mapLayout->width, mapLayout->height);
     CpuFastFill16(MAPGRID_UNDEFINED, sBackupMapData, sizeof(sBackupMapData));
 
     gBackupMapLayout.map = sBackupMapData;
     gBackupMapLayout.width = mapLayout->width + MAP_OFFSET_W;
     gBackupMapLayout.height = mapLayout->height + MAP_OFFSET_H;
 
-    if (gBackupMapLayout.width * gBackupMapLayout.height > MAX_MAP_DATA_SIZE)
-        return;
-
     InitBackupMapLayoutData(mapLayout->map, mapLayout->width, mapLayout->height);
     InitBackupMapLayoutConnections(mapHeader);
 }
+
+bool32 MapLayoutFitsBuffer(u32 width, u32 height)
+{
+    if (width == 0 || height == 0 || width > MAX_MAP_DATA_SIZE || height > MAX_MAP_DATA_SIZE)
+        return FALSE;
+    return width + MAP_OFFSET_W <= MAX_MAP_DATA_SIZE / (height + MAP_OFFSET_H);
+}
+
+#if TESTING
+void Test_InitMapLayoutData(const struct MapHeader *mapHeader)
+{
+    InitMapLayoutData(mapHeader);
+}
+#endif
 
 static void InitBackupMapLayoutData(const u16 *map, u16 width, u16 height)
 {

@@ -768,12 +768,14 @@ FrontierStory_EventScript_TargetFever::
 	call FrontierStory_EventScript_ChooseReleaseParty
 	goto_if_eq VAR_RESULT, FALSE, FrontierStory_EventScript_TargetRetreat
 	special FrontierStory_GetRescueScene
+FrontierStory_EventScript_TargetReleaseDispatch::
 	switch VAR_RESULT
 	case STORY_TARGET_REIKA, DomeStory_EventScript_ReleaseBattle
 	case STORY_TARGET_IKUE, PalaceStory_EventScript_ReleaseBattle
 	case STORY_TARGET_TOSHIO, FactoryStory_EventScript_ReleaseBattle
 	case STORY_TARGET_EISUKE, ArenaStory_EventScript_ReleaseBattle
 	case STORY_TARGET_YAYOI, PikeStory_EventScript_ReleaseBattle
+	case STORY_TARGET_NOBUO, PyramidStory_EventScript_ReleaseBattle
 	case STORY_TARGET_YORIKO, ContestStory_EventScript_ReleaseBattle
 	special LoadPlayerParty
 FrontierStory_EventScript_TargetRetreat::
@@ -839,6 +841,11 @@ ArenaStory_EventScript_ReleaseBattle::
 
 PikeStory_EventScript_ReleaseBattle::
 	setmultitrainerbattle TRAINER_YAYOI_RELEASE, PikeStory_Text_YayoiReleaseDefeat, TRAINER_POKEVIRUS, FrontierStory_Text_PokevirusDefeat, PARTNER_ROCKET_COOK
+	call FrontierStory_EventScript_StartReleaseBattle
+	goto FrontierStory_EventScript_TargetBattleDone
+
+PyramidStory_EventScript_ReleaseBattle::
+	setmultitrainerbattle TRAINER_NOBUO_RELEASE, PyramidStory_Text_NobuoReleaseDefeat, TRAINER_POKEVIRUS, FrontierStory_Text_PokevirusDefeat, PARTNER_ROCKET_COOK
 	call FrontierStory_EventScript_StartReleaseBattle
 	goto FrontierStory_EventScript_TargetBattleDone
 
@@ -953,7 +960,8 @@ FrontierStory_EventScript_VisitorNotYet::
 
 @ ---------------------------------------------------------------------------
 @ The inn: everyone cured rests here. Kazuki, Toshio with his Aggron, and Yayoi with Roserade at a
-@ low table, in the lobby; Ikue and Delcatty in the east wing; Yoriko and Seviper in the west wing;
+@ low table, in the lobby; Ikue and Delcatty in the east wing; Yoriko and Seviper, Nobuo and
+@ Sandslash in the west wing;
 @ Eisuke and Starmie on the beach outside and Reika walking Linoone there; and in each part of the
 @ building a few of the cured Brains and guests, picked on every visit.
 
@@ -1121,11 +1129,50 @@ InnStory_EventScript_Delcatty::
 	end
 
 InnStory_EventScript_SetupWestWing::
+	setflag FLAG_TEMP_11
 	setflag FLAG_TEMP_12
+	call_if_set FLAG_STORY_RESCUED_PYRAMID, InnStory_EventScript_ShowNobuo
 	call_if_set FLAG_STORY_RESCUED_CONTEST, InnStory_EventScript_ShowYoriko
 	setvar VAR_0x8004, INN_AREA_WEST_WING
 	special FrontierStory_PickInnGuests
 	return
+
+InnStory_EventScript_ShowNobuo::
+	clearflag FLAG_TEMP_11
+	return
+
+@ Nobuo asks for directions aloud. Neither answer moves the player or blocks the corridor.
+InnStory_EventScript_Nobuo::
+	lock
+	faceplayer
+	msgbox PyramidStory_Text_InnNobuoAsks, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, InnStory_EventScript_NobuoLater
+	msgbox PyramidStory_Text_InnNobuoDirections, MSGBOX_DEFAULT
+	closemessage
+	applymovement LOCALID_INN_NOBUO, Common_Movement_FaceRight
+	waitmovement 0
+	playmoncry SPECIES_SANDSLASH, CRY_MODE_NORMAL
+	applymovement LOCALID_INN_SANDSLASH, InnStory_Movement_Nod
+	waitmovement 0
+	waitmoncry
+	faceplayer
+	msgbox PyramidStory_Text_InnNobuoThanks, MSGBOX_DEFAULT
+	release
+	end
+
+InnStory_EventScript_NobuoLater::
+	msgbox PyramidStory_Text_InnNobuoLater, MSGBOX_DEFAULT
+	release
+	end
+
+InnStory_EventScript_Sandslash::
+	lock
+	faceplayer
+	playmoncry SPECIES_SANDSLASH, CRY_MODE_NORMAL
+	msgbox PyramidStory_Text_InnSandslash, MSGBOX_DEFAULT
+	waitmoncry
+	release
+	end
 
 InnStory_EventScript_ShowYoriko::
 	clearflag FLAG_TEMP_12
@@ -2043,6 +2090,10 @@ PikeStory_Text_YayoiReleaseDefeat:
 	.string "{JPN}……どうして……\n"
 	.string "同じ 道を 選んだのに……$"
 
+PyramidStory_Text_NobuoReleaseDefeat:
+	.string "{JPN}……ああ 負けたな。\n"
+	.string "……おれが。$"
+
 ContestStory_Text_YorikoReleaseDefeat:
 	.string "{JPN}……私…… 負けた……\n"
 	.string "私の 演技が……$"
@@ -2277,3 +2328,46 @@ PikeStory_Text_InnRoseradeHops:
 PikeStory_Text_InnRoserade:
 	.string "{JPN}ロズレイドの 花束から\n"
 	.string "優しい ローズの 香りが する。$"
+
+@ ---------------------------------------------------------------------------
+@ Nobuo and Sandslash: asking someone is part of finding the way.
+
+PyramidStory_Text_InnNobuoAsks:
+	.string "{JPN}ノブオ『おう {PLAYER}。\n"
+	.string "いいところに来た。\p"
+	.string "……実は 船着き場までの道が\n"
+	.string "分からなくなっちまってな。\p"
+	.string "来た時は 覚えたつもりだったんだが\n"
+	.string "どの廊下も 同じに見えてさ。\p"
+	.string "教えてくれないか？』$"
+
+PyramidStory_Text_InnNobuoDirections:
+	.string "{JPN}{PLAYER}は 広間から外へ出て\n"
+	.string "海の方へ進む道を 教えた。\p"
+	.string "ノブオ『……ああ そうだった。\n"
+	.string "ありがとうな。\p"
+	.string "聞いてみりゃ すぐ分かった。\n"
+	.string "おれの頭に 道が流れてこなくても。\p"
+	.string "……行けそうか サンドパン。』$"
+
+PyramidStory_Text_InnNobuoThanks:
+	.string "{JPN}ノブオ『……おれ達だけでも\n"
+	.string "歩いてみるさ。\p"
+	.string "また 分からなくなったら\n"
+	.string "誰かに聞く。\p"
+	.string "何度も聞かれちゃ 面倒だろうが……\n"
+	.string "その時は また教えてくれよ。\p"
+	.string "……助かった。ありがとうな。』$"
+
+PyramidStory_Text_InnNobuoLater:
+	.string "{JPN}ノブオ『ああ 忙しいか。\n"
+	.string "引き止めて 悪かったな。\p"
+	.string "もう少し 自分達で歩いてみるよ。\n"
+	.string "迷ったら また誰かに聞くさ。』$"
+
+PyramidStory_Text_InnSandslash:
+	.string "{JPN}サンドパンは ノブオの方を向くと\n"
+	.string "小さく 鼻を鳴らした。\p"
+	.string "ノブオが 名前を呼ぶ。\n"
+	.string "サンドパンは その声を聞いて\l"
+	.string "ゆっくりと 振り返った。$"

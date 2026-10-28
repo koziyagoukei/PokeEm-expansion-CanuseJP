@@ -247,6 +247,8 @@ static u8 GetNextRecordedDataByte(u8 *data, u8 *idx, u8 *size)
 
 bool32 CanCopyRecordedBattleSaveData(void)
 {
+    if (FREE_SPECIAL_SAVE_SECTORS)
+        return FALSE;
     struct RecordedBattleSave *dst = AllocZeroed(sizeof(struct RecordedBattleSave));
     bool32 ret = CopyRecordedBattleFromSave(dst);
     Free(dst);
@@ -285,6 +287,8 @@ bool32 MoveRecordedBattleToSaveData(void)
     struct RecordedBattleSave *battleSave, *savSection;
     u8 saveAttempts;
 
+    if (FREE_SPECIAL_SAVE_SECTORS || sSavedParties == NULL)
+        return FALSE;
     saveAttempts = 0;
     battleSave = AllocZeroed(sizeof(struct RecordedBattleSave));
     savSection = AllocZeroed(SECTOR_SIZE);
@@ -549,7 +553,7 @@ void SetVariablesForRecordedBattle(struct RecordedBattleSave *src)
 
 bool32 IsRecordedBattlePlaybackAllowed(void)
 {
-    return !InBattleFacilityChallenge();
+    return !FREE_SPECIAL_SAVE_SECTORS && !InBattleFacilityChallenge();
 }
 
 void PlayRecordedBattle(void (*CB2_After)(void))
@@ -602,6 +606,12 @@ u8 GetRecordedBattleFronterBrainSymbol(void)
 
 void RecordedBattle_SaveParties(void)
 {
+    // Action recording is also used by link controllers; only skip the video snapshot.
+    if (FREE_SPECIAL_SAVE_SECTORS)
+    {
+        sSavedParties = NULL;
+        return;
+    }
     sSavedParties = AllocZeroed(sizeof(struct Pokemon[MAX_BATTLE_TRAINERS][PARTY_SIZE]));
 
     memcpy(sSavedParties, gParties, sizeof(struct Pokemon[MAX_BATTLE_TRAINERS][PARTY_SIZE]));
