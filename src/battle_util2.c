@@ -1,4 +1,5 @@
 #include "global.h"
+#include "battle_info.h"
 #include "battle.h"
 #include "battle_anim.h"
 #include "battle_controllers.h"
@@ -34,6 +35,8 @@ void CloseMainBattleScreen(void)
 
 void AllocateBattleResources(void)
 {
+    BattleInfo_Reset();
+
     if (gBattleTypeFlags & BATTLE_TYPE_TRAINER_TOWER && gMapHeader.regionMapSectionId == MAPSEC_TRAINER_TOWER_2)
         InitTrainerTowerBattleStruct();
     else if (gBattleTypeFlags & BATTLE_TYPE_TRAINER_HILL)
@@ -70,6 +73,8 @@ void AllocateBattleResources(void)
 
 void FreeBattleResources(void)
 {
+    BattleInfo_Free();
+
     if (gBattleTypeFlags & BATTLE_TYPE_TRAINER_TOWER && gMapHeader.regionMapSectionId == MAPSEC_TRAINER_TOWER_2)
         FreeTrainerTowerBattleStruct();
     else if (gBattleTypeFlags & BATTLE_TYPE_TRAINER_HILL)

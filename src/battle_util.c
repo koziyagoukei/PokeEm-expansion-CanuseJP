@@ -1,4 +1,5 @@
 #include "global.h"
+#include "battle_info.h"
 #include "battle.h"
 #include "battle_anim.h"
 #include "battle_anim_scripts.h"
@@ -2098,6 +2099,7 @@ enum WeatherFailure TryChangeBattleWeather(enum BattlerId battler, u32 battleWea
             gBattleStruct->weatherDuration = 5;
     }
 
+    BattleInfo_RecordDuration(BINFO_WEATHER, B_SIDE_PLAYER, gBattleStruct->weatherDuration);
     if (ability != ABILITY_NONE) // Weather started by Ability
     {
         gBattleCommunication[MULTISTRING_CHOOSER] = gBattleWeatherInfo[battleWeatherId].abilityStartMessage;
@@ -2139,6 +2141,7 @@ bool32 TryChangeBattleTerrain(enum BattlerId battler, enum BattleTerrain terrain
             gFieldTimers.terrainTimer = 8;
         else
             gFieldTimers.terrainTimer = 5;
+        BattleInfo_RecordDuration(BINFO_TERRAIN, B_SIDE_PLAYER, gFieldTimers.terrainTimer);
         gBattleScripting.battler = battler;
         return TRUE;
     }
@@ -2471,6 +2474,7 @@ static inline bool32 SetStartingFieldTerrain(enum BattleTerrain terrain, u8 *tim
         *timer = time;
 
         BattleScriptPushCursorAndCallback(BattleScript_OverworldTerrain);
+        BattleInfo_RecordDuration(BINFO_TERRAIN, B_SIDE_PLAYER, time);
 
         return TRUE;
     }
@@ -2505,6 +2509,12 @@ static inline bool32 SetStartingSideStatus(u32 flag, enum BattleSide side, u32 m
         gBattleScripting.animArg1 = anim;
         *timer = time;
         BattleScriptPushCursorAndCallback(BattleScript_OverworldStatusStarts);
+        if (flag == SIDE_STATUS_REFLECT)
+            BattleInfo_RecordDuration(BINFO_REFLECT, side, time);
+        else if (flag == SIDE_STATUS_LIGHTSCREEN)
+            BattleInfo_RecordDuration(BINFO_LIGHT_SCREEN, side, time);
+        else if (flag == SIDE_STATUS_AURORA_VEIL)
+            BattleInfo_RecordDuration(BINFO_AURORA_VEIL, side, time);
 
         return TRUE;
     }
@@ -2593,6 +2603,7 @@ static bool32 SetStartingWeatherStatus(enum BattleWeather weather, bool32 isPerm
     else
         gBattleStruct->weatherDuration = 5;
 
+    BattleInfo_RecordDuration(BINFO_WEATHER, B_SIDE_PLAYER, gBattleStruct->weatherDuration);
     BattleScriptPushCursorAndCallback(BattleScript_OverworldSSWeatherStarts);
     return TRUE;
 }

@@ -1,4 +1,5 @@
 #include "global.h"
+#include "battle_info.h"
 #include "battle.h"
 #include "battle_set_effect.h"
 #include "battle_util.h"
@@ -1059,6 +1060,7 @@ static void HandleSetEffectAuroraVeil(struct BattleCalcValues *cv, struct SetEff
             gSideTimers[side].auroraVeilTimer = 8;
         else
             gSideTimers[side].auroraVeilTimer = 5;
+        BattleInfo_RecordDuration(BINFO_AURORA_VEIL, side, gSideTimers[side].auroraVeilTimer);
         gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_SET_AURORA_VEIL;
         BattleScriptPush(se->script);
         gBattlescriptCurrInstr = BattleScript_MoveEffectScreens;

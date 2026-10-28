@@ -1,4 +1,5 @@
 #include "global.h"
+#include "battle_info.h"
 #include "battle.h"
 #include "battle_anim.h"
 #include "battle_ai_main.h"
@@ -1829,6 +1830,7 @@ static void CB2_HandleStartMultiBattle(void)
 void BattleMainCB2(void)
 {
     AnimateSprites();
+    BattleInfo_HideSprites();
     BuildOamBuffer();
     RunTextPrinters();
     UpdatePaletteFade();
