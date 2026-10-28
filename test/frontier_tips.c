@@ -28,6 +28,25 @@ TEST("Frontier TIPS: all pages and choices fit the explanation window")
     }
 }
 
+static void CheckExplicitMode(const u8 *text)
+{
+    EXPECT_EQ(text[0], EXT_CTRL_CODE_BEGIN);
+    EXPECT(text[1] == EXT_CTRL_CODE_JPN || text[1] == EXT_CTRL_CODE_ENG || text[1] == EXT_CTRL_CODE_KANJI);
+}
+
+TEST("Frontier TIPS: every topic page and choice explicitly selects its display language")
+{
+    for (u32 info = 0; info < INFO_COUNT; info++)
+    {
+        const struct InfoViewerEntry *entry = GetInfoViewerEntry(info);
+        CheckExplicitMode(entry->title);
+        for (u32 page = 0; page < entry->pageCount; page++)
+            CheckExplicitMode(entry->pages[page]);
+        for (u32 choice = 0; choice < entry->choiceCount; choice++)
+            CheckExplicitMode(entry->choices[choice].text);
+    }
+}
+
 TEST("Frontier TIPS: facilities, hub, resort, contest and rule topics are reachable from TIPS")
 {
     bool8 seen[INFO_COUNT] = {0};

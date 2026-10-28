@@ -22,81 +22,81 @@ static const struct InfoViewerStyle sInfoViewerStyle_BlueFrame =
     .textColors = { TEXT_COLOR_TRANSPARENT, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_LIGHT_GRAY },
 };
 
-static const u8 sInfoText_TitleFrontierRules[] = _("バトルフロンティア");
-static const u8 sInfoText_TitleBannedMons[] = _("きんしポケモン いちらん");
-static const u8 sInfoText_TitleGimmickHelp[] = _("ギミック");
-static const u8 sInfoText_TitleDiaryTest[] = _("にっき");
+static const u8 sInfoText_TitleFrontierRules[] = _("{JPN}バトルフロンティア");
+static const u8 sInfoText_TitleBannedMons[] = _("{JPN}禁止ポケモン 一覧");
+static const u8 sInfoText_TitleGimmickHelp[] = _("{JPN}ギミック");
+static const u8 sInfoText_TitleDiaryTest[] = _("{JPN}日記");
 static const u8 sInfoText_TitleKanjiTest[] = _("{KANJI}対戦 フォント");
-static const u8 sInfoText_TitleMonologueTest[] = _("ひとりごと");
-static const u8 sInfoText_TitleChoiceTest[] = _("ぶんきテスト");
+static const u8 sInfoText_TitleMonologueTest[] = _("{JPN}独り言");
+static const u8 sInfoText_TitleChoiceTest[] = _("{JPN}分岐テスト");
 
 static const u8 sInfoText_FrontierRulesPage1[] = _(
-    "タマゴは さんかできません。\n"
-    "おなじ しゅるいの ポケモンや\n"
-    "おなじ もちものは えらべません。\n"
-    "きんしポケモンの あつかいは\n"
-    "ハブで せっていした ルールに\n"
+    "{JPN}タマゴは 参加できません。\n"
+    "同じ 種類の ポケモンや\n"
+    "同じ 持ち物は 選べません。\n"
+    "禁止ポケモンの 扱いは\n"
+    "ハブで 設定した ルールに\n"
     "したがいます。");
 
 static const u8 sInfoText_FrontierRulesPage2[] = _(
-    "レベル50では レベル51いじょうも\n"
-    "さんかでき ちょうせんちゅうだけ\n"
+    "{JPN}レベル50では レベル51以上も\n"
+    "参加でき 挑戦中だけ\n"
     "レベル50に なります。\n"
-    "オープンでは あいての レベルが\n"
-    "こちらに あわせて きまります。\n"
-    "あいては さいてい レベル60です。");
+    "オープンでは 相手の レベルが\n"
+    "こちらに 合わせて 決まります。\n"
+    "相手は 最低 レベル60です。");
 
 static const u8 sInfoText_BannedMonsPage1[] = _(
-    "せつめいの あとに たいしょうの\n"
-    "ポケモンを すべて ひょうじします。\n"
+    "{JPN}説明の あとに 対象の\n"
+    "ポケモンを すべて 表示します。\n"
     "フォルムちがいは まとめています。\n"
-    "きんしルールでは さんかできません。\n"
-    "かいきんルールでは おたがいに\n"
-    "たいしょうを 1ぴきまで つかえます。");
+    "禁止ルールでは 参加できません。\n"
+    "解禁ルールでは おたがいに\n"
+    "対象を 1匹まで 使えます。");
 
 static const u8 sInfoText_FrontierRulesPage3[] = _(
-    "とちゅうで まけるか リタイアすると\n"
-    "れんしょうは おわります。\n"
-    "ちょうせんちゅうは わざの へんこうや\n"
+    "{JPN}途中で まけるか リタイアすると\n"
+    "連勝は おわります。\n"
+    "挑戦中は 技の 変更や\n"
     "リゾートへの ワープは できません。\n"
-    "ちゅうだんは しせつの あんないか\n"
-    "メニューの やすむを つかいます。");
+    "中断は 施設の 案内か\n"
+    "メニューの やすむを 使います。");
 
 static const u8 sInfoText_GimmickHelpPage1[] = _(
-    "つかえる ギミックは しせつごとに\n"
-    "きまっており おたがいに おなじです。\n"
-    "メガには たいおうする メガストーン\n"
-    "Zワザには わざに あう Zクリスタルが\n"
-    "ひつようです。 せんようZワザには\n"
-    "しゅるいと わざの じょうけんも あります。");
+    "{JPN}使える ギミックは 施設ごとに\n"
+    "きまっており おたがいに 同じです。\n"
+    "メガには 対応する メガストーン\n"
+    "Zワザには 技に あう Zクリスタルが\n"
+    "必要です。 専用Zワザには\n"
+    "種類と 技の 条件も あります。");
 
 static const u8 sInfoText_GimmickHelpPage2[] = _(
-    "ダイマックスは 3ターン つづきます。\n"
+    "{JPN}ダイマックスは 3ターン 続きます。\n"
     "テラスタルは テラタイプに かわります。\n"
-    "しゅるいや もちものに よっては\n"
-    "えらべない ギミックも あります。\n"
-    "いちど ギミックを つかった こたいは\n"
-    "べつの ギミックを かさねられません。");
+    "種類や 持ち物に よっては\n"
+    "選べない ギミックも あります。\n"
+    "一度 ギミックを 使った 個体は\n"
+    "別の ギミックを 重ねられません。");
 
 static const u8 sInfoText_GimmickHelpPage3[] = _(
-    "ウルトラバーストは にっしょくか\n"
+    "{JPN}ウルトラバーストは にっしょくか\n"
     "げっしょくの ネクロズマに\n"
-    "ウルトラネクロZを もたせて つかいます。\n"
+    "ウルトラネクロZを 持たせて 使います。\n"
     "ギミックの かいすうは バトルごとです。\n"
-    "しせつで きんしされた ギミックは\n"
-    "もちものを そろえても つかえません。");
+    "施設で 禁止された ギミックは\n"
+    "持ち物を 揃えても 使えません。");
 
 static const u8 sInfoText_DiaryTestPage1[] = _(
-    "きょうは フロンティアで\n"
-    "あたらしい ルールを よんだ\n\n"
-    "むずかしいけれど\n"
+    "{JPN}今日は フロンティアで\n"
+    "新しい ルールを 読んだ\n\n"
+    "難しいけれど\n"
     "おもしろい しくみだった");
 
 static const u8 sInfoText_DiaryTestPage2[] = _(
-    "つぎに くるときは\n"
-    "すばやい ポケモンを\n"
+    "{JPN}次に 来るときは\n"
+    "素早い ポケモンを\n"
     "つれてこよう\n\n"
-    "メモとして のこしておく");
+    "メモとして 残しておく");
 
 static const u8 sInfoText_DiaryTestKanji[] = _(
     "{KANJI}攻撃 防御 特性\n"
@@ -107,32 +107,32 @@ static const u8 sInfoText_DiaryTestKanji[] = _(
     "{ENG}ABC 123{JPN} かな");
 
 static const u8 sInfoText_MonologueTestPage1[] = _(
-    "ここまで きたんだ\n"
+    "{JPN}ここまで 来たんだ\n"
     "もうすこし だけ\n"
-    "まえに すすんでみよう");
+    "前に 進んでみよう");
 
 static const u8 sInfoText_MonologueTestPage2[] = _(
-    "まよっても いい\n"
-    "でも たちどまったままでは\n"
+    "{JPN}迷っても いい\n"
+    "でも 立ち止まったままでは\n"
     "なにも かわらない");
 
 static const u8 sInfoText_ChoiceTestPage1[] = _(
-    "これは ぶんきテストです\n"
-    "さいごまで よむと\n"
-    "えらべる こうもくが でます\n\n"
-    "えらんだ ないようで\n"
-    "べつの ページへ すすみます");
+    "{JPN}これは 分岐テストです\n"
+    "最後まで 読むと\n"
+    "選べる 項目が でます\n\n"
+    "選んだ 内容で\n"
+    "別の ページへ 進みます");
 
 static const u8 sInfoText_ChoiceTestPage2[] = _(
-    "Aで えらぶ\n"
-    "Bで まえの がめんへ もどる\n\n"
-    "とじるを えらぶと\n"
-    "スクリプトへ もどります");
+    "{JPN}Aで 選ぶ\n"
+    "Bで 前の 画面へ 戻る\n\n"
+    "閉じるを 選ぶと\n"
+    "スクリプトへ 戻ります");
 
-static const u8 sInfoText_ChoiceReadDiary[] = _("にっきを よむ");
-static const u8 sInfoText_ChoiceReadMonologue[] = _("ひとりごとを よむ");
-static const u8 sInfoText_ChoiceBack[] = _("もどる");
-static const u8 sInfoText_ChoiceClose[] = _("とじる");
+static const u8 sInfoText_ChoiceReadDiary[] = _("{JPN}日記を 読む");
+static const u8 sInfoText_ChoiceReadMonologue[] = _("{JPN}独り言を 読む");
+static const u8 sInfoText_ChoiceBack[] = _("{JPN}戻る");
+static const u8 sInfoText_ChoiceClose[] = _("{JPN}閉じる");
 
 static const u8 *const sInfoViewerPages_FrontierRules[] =
 {

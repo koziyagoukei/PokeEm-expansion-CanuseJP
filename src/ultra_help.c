@@ -353,7 +353,7 @@ static void DrawInfoViewerPage(void)
     else
         AddTextPrinterParameterized4(WIN_INFO_VIEWER, FONT_SMALL, 8, 28, 0, 2, style->textColors, TEXT_SKIP_DRAW, sInfoViewerEntry->pages[sInfoViewerPage]);
     AddTextPrinterParameterized4(WIN_INFO_VIEWER, FONT_SMALL, 8, 132, 0, 0, style->textColors, TEXT_SKIP_DRAW,
-        COMPOUND_STRING("{JPN}A:つぎ B:もどる"));
+        COMPOUND_STRING("{JPN}A:次 B:戻る"));
     DrawInfoViewerPageNumber();
     CopyWindowToVram(WIN_INFO_VIEWER, COPYWIN_FULL);
 }
@@ -388,7 +388,7 @@ static void DrawInfoViewerChoices(void)
     }
 
     AddTextPrinterParameterized4(WIN_INFO_VIEWER, FONT_SMALL, 8, 132, 0, 0, style->textColors, TEXT_SKIP_DRAW,
-        COMPOUND_STRING("{JPN}A:けってい B:もどる"));
+        COMPOUND_STRING("{JPN}A:決定 B:戻る"));
     DrawInfoViewerPageNumber();
     CopyWindowToVram(WIN_INFO_VIEWER, COPYWIN_FULL);
 }
@@ -462,8 +462,8 @@ static void DrawInfoViewerBannedSpecies(void)
 {
     const struct InfoViewerStyle *style = GetInfoViewerStyle();
     const u8 *status = FlagGet(FLAG_FRONTIER_ALLOW_BANNED_SPECIES)
-        ? COMPOUND_STRING("{JPN}げんざい: 1ぴきまで さんかできます")
-        : COMPOUND_STRING("{JPN}げんざい: さんかできません");
+        ? COMPOUND_STRING("{JPN}現在: 1匹まで 参加できます")
+        : COMPOUND_STRING("{JPN}現在: 参加できません");
     u32 first = (sInfoViewerPage - sInfoViewerEntry->pageCount) * INFO_VIEWER_SPECIES_PER_PAGE;
 
     AddTextPrinterParameterized4(WIN_INFO_VIEWER, FONT_SMALL, 8, 28, 0, 0, style->textColors, TEXT_SKIP_DRAW, status);
