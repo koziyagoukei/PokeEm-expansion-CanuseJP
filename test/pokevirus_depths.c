@@ -196,7 +196,7 @@ TEST("Pokevirus depths: final arena reserves a clear thirteen by nine floor for 
 {
     const struct MapLayout *layout = GetDungeonMap(2)->mapLayout;
     for (u32 y = 10; y <= 18; y++)
-        for (u32 x = 9; x <= 21; x++)
+        for (u32 x = 8; x <= 20; x++)
         {
             u16 cell = layout->map[y * layout->width + x];
             EXPECT_EQ(UNPACK_COLLISION(cell), 0);
