@@ -81,7 +81,7 @@
 // Kazuki came to the player in the Tower lobby with his fever: alone, then once Darkrai could help.
 #define FLAG_STORY_TOWER_FEVER_SHOWN   FLAG_UNUSED_0x02D
 #define FLAG_STORY_TOWER_RELEASE_SHOWN FLAG_UNUSED_0x02E
-#define FLAG_UNUSED_0x030    0x30 // Unused Flag
+#define FLAG_HIDE_BATTLE_TYPE_ICONS 0x30 // Clear by default; local display option only.
 #define FLAG_UNUSED_0x031    0x31 // Unused Flag
 #define FLAG_UNUSED_0x032    0x32 // Unused Flag
 #define FLAG_UNUSED_0x033    0x33 // Unused Flag

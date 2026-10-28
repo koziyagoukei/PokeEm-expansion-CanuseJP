@@ -430,7 +430,7 @@
 #define SHOW_TYPES_ALWAYS   1                    // 戦闘中にタイプを常に表示する。
 #define SHOW_TYPES_CAUGHT   2                    // その種族を捕獲済みの場合だけ表示する。
 #define SHOW_TYPES_SEEN     3                    // その種族を見たことがある場合だけ表示する。
-#define B_SHOW_TYPES        SHOW_TYPES_ALWAYS     // 対象を選んで技を選択するとき、HPバーの隣にタイプを表示する条件を指定する。
+#define B_SHOW_TYPES        SHOW_TYPES_ALWAYS     // 技の選択中 相手の頭上にタイプを表示する条件。設定画面で非表示にもできる。
 
 #define SHOW_EFFECTIVENESS_NEVER    0           // 技選択時に相性を表示しない。
 #define SHOW_EFFECTIVENESS_ALWAYS   1           // 技選択時に相性を常に表示する。

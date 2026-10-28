@@ -1,43 +1,120 @@
 #include "global.h"
 #include "battle.h"
+#include "battle_controllers.h"
 #include "battle_interface.h"
+#include "event_data.h"
+#include "main.h"
 #include "pokemon.h"
 #include "sprite.h"
-#include "test/test.h"
+#include "task.h"
+#include "test/battle.h"
 #include "type_icons.h"
 
 bool32 Test_LoadTypeLabels(void);
 bool32 Test_LoadTypeIconResources(void);
 u32 Test_CreateTypeIcon(enum Type type);
 void Test_FreeTypeLabels(void);
-s32 Test_GetTypeIconFinalX(u32 position, bool32 doubles, u32 typeNum, bool32 useLabels);
+void Test_GetTypeIconXY(s32 *x, s32 *y, s32 monX, s32 monTop, s32 partnerX, u32 typeNum, u32 typeCount, bool32 useLabels);
+bool32 Test_ShouldShowBattlerTypeIcons(enum BattlerId battler, enum BattlerId target);
+void Test_OptionMenuSaveTypeIcons(u8 taskId, bool32 off);
+u32 Test_OptionMenuLastRowBottom(void);
 
-TEST("Frontier type labels: player labels do not cover either gimmick trigger")
+TEST("Frontier type labels: only living opposing battlers are eligible including link perspective")
 {
-    u32 oldFlags = gBattleTypeFlags;
-    u8 oldPartyCount = gPartiesCount[B_TRAINER_PLAYER];
-    u8 oldPositions[MAX_BATTLERS_COUNT];
-    memcpy(oldPositions, gBattlerPositions, sizeof(oldPositions));
-    gBattlerPositions[0] = B_POSITION_PLAYER_LEFT;
-    gBattlerPositions[2] = B_POSITION_PLAYER_RIGHT;
-    gPartiesCount[B_TRAINER_PLAYER] = 2;
-    for (u32 doubles = FALSE; doubles <= TRUE; doubles++)
+    u32 oldAbsent = gAbsentBattlerFlags;
+    u32 oldCount = gBattlersCount;
+    gBattlersCount = MAX_BATTLERS_COUNT;
+    gAbsentBattlerFlags = 0;
+    for (u32 i = 0; i < MAX_BATTLERS_COUNT; i++)
     {
-        gBattleTypeFlags = doubles ? BATTLE_TYPE_DOUBLE : 0;
-        for (u32 battler = 0; battler <= (doubles ? 2 : 0); battler += 2)
+        gBattlerPositions[i] = i;
+        gBattleMons[i].hp = 1;
+    }
+    for (u32 swapped = FALSE; swapped <= TRUE; swapped++)
+    {
+        // Link player IDs do not necessarily match on-screen battler positions.
+        for (u32 i = 0; i < MAX_BATTLERS_COUNT; i++)
+            gBattlerPositions[i] = i ^ swapped;
+        for (u32 local = 0; local < MAX_BATTLERS_COUNT; local++)
         {
-            s16 healthX, healthY;
-            GetBattlerHealthboxCoords(battler, &healthX, &healthY);
-            for (u32 labelBattler = 0; labelBattler <= (doubles ? 2 : 0); labelBattler += 2)
-                for (u32 type = 0; type < 2; type++)
-                    for (u32 useLabels = FALSE; useLabels <= TRUE; useLabels++)
-                        EXPECT_LE(Test_GetTypeIconFinalX(gBattlerPositions[labelBattler], doubles, type, useLabels)
-                                  + (useLabels ? 16 : 4), healthX - 30 - 16);
+            for (u32 target = 0; target < MAX_BATTLERS_COUNT; target++)
+                EXPECT_EQ(Test_ShouldShowBattlerTypeIcons(local, target), GetBattlerSide(local) != GetBattlerSide(target));
         }
     }
-    memcpy(gBattlerPositions, oldPositions, sizeof(oldPositions));
-    gBattleTypeFlags = oldFlags;
-    gPartiesCount[B_TRAINER_PLAYER] = oldPartyCount;
+    gBattleMons[1].hp = 0;
+    EXPECT(!Test_ShouldShowBattlerTypeIcons(0, 1));
+    gBattleMons[1].hp = 1;
+    gAbsentBattlerFlags = 1 << 1;
+    EXPECT(!Test_ShouldShowBattlerTypeIcons(0, 1));
+    gAbsentBattlerFlags = oldAbsent;
+    gBattlersCount = oldCount;
+}
+
+TEST("Frontier type labels: names are centered above the head and stay within the screen")
+{
+    s32 x, y;
+    Test_GetTypeIconXY(&x, &y, 176, 30, -1, 0, 1, TRUE);
+    EXPECT_EQ(x, 176);
+    EXPECT_EQ(y, 20);
+    EXPECT_LT(y + 8, 30);
+    for (s32 monX = 0; monX <= 240; monX += 8)
+        for (s32 top = -32; top <= 128; top += 8)
+            for (u32 type = 0; type < 2; type++)
+            {
+                Test_GetTypeIconXY(&x, &y, monX, top, -1, type, 2, TRUE);
+                EXPECT_GE(x - 16, 0);
+                EXPECT_LE(x + 16, DISPLAY_WIDTH);
+                EXPECT_GE(y - 8, 0);
+                EXPECT_LE(y + 8, 112);
+            }
+}
+
+TEST("Frontier type labels: dual type opponents occupy separate columns in doubles")
+{
+    s32 nearX, farX, y;
+    for (u32 labels = FALSE; labels <= TRUE; labels++)
+    {
+        s32 halfWidth = labels ? 16 : 4;
+        Test_GetTypeIconXY(&nearX, &y, 200, 8, 152, 0, 2, labels);
+        Test_GetTypeIconXY(&farX, &y, 152, 0, 200, 1, 2, labels);
+        EXPECT_GT(nearX - halfWidth, farX + halfWidth);
+        Test_GetTypeIconXY(&nearX, &y, 200, 8, 152, 1, 2, labels);
+        EXPECT_LE(nearX + halfWidth, DISPLAY_WIDTH);
+    }
+}
+
+TEST("Frontier type labels: disabled setting allocates no sprite resources")
+{
+    bool32 oldOff = FlagGet(FLAG_HIDE_BATTLE_TYPE_ICONS);
+    ResetSpriteData();
+    FreeAllSpritePalettes();
+    FlagSet(FLAG_HIDE_BATTLE_TYPE_ICONS);
+    LoadTypeIcons(0);
+    EXPECT_EQ(GetSpriteTileStartByTag(TYPE_ICON_TAG), TAG_NONE);
+    EXPECT_EQ(IndexOfSpritePaletteTag(TYPE_ICON_TAG), 0xFF);
+    for (u32 i = 0; i < MAX_SPRITES; i++)
+        EXPECT(!gSprites[i].inUse);
+    if (!oldOff)
+        FlagClear(FLAG_HIDE_BATTLE_TYPE_ICONS);
+}
+
+TEST("Frontier type labels: menu saves both display choices without changing neighboring flags")
+{
+    bool32 oldOff = FlagGet(FLAG_HIDE_BATTLE_TYPE_ICONS);
+    bool32 oldNext = FlagGet(FLAG_UNUSED_0x031);
+    ResetTasks();
+    FlagSet(FLAG_UNUSED_0x031);
+    Test_OptionMenuSaveTypeIcons(0, TRUE);
+    EXPECT(FlagGet(FLAG_HIDE_BATTLE_TYPE_ICONS));
+    EXPECT(FlagGet(FLAG_UNUSED_0x031));
+    Test_OptionMenuSaveTypeIcons(0, FALSE);
+    EXPECT(!FlagGet(FLAG_HIDE_BATTLE_TYPE_ICONS));
+    EXPECT(FlagGet(FLAG_UNUSED_0x031));
+    EXPECT_LE(Test_OptionMenuLastRowBottom(), 14 * 8);
+    if (oldOff)
+        FlagSet(FLAG_HIDE_BATTLE_TYPE_ICONS);
+    if (!oldNext)
+        FlagClear(FLAG_UNUSED_0x031);
 }
 
 TEST("Frontier type labels: graphics leave room for the gimmick palette and tiles")
@@ -112,4 +189,76 @@ TEST("Frontier type labels: insufficient palette space leaves the gimmick slot f
     EXPECT_EQ(IndexOfSpritePaletteTag(TYPE_ICON_TAG_3), 0xFF);
     EXPECT_EQ(CountFreePaletteSlots(), 1);
     FreeAllSpritePalettes();
+}
+
+static u32 CountTypeLabels(void)
+{
+    u32 count = 0;
+    for (u32 i = 0; i < MAX_SPRITES; i++)
+        if (gSprites[i].inUse && gSprites[i].template->tileTag == TYPE_ICON_TAG)
+            count++;
+    return count;
+}
+
+DOUBLE_BATTLE_TEST("Frontier type labels: battle display follows opponents updates types and releases resources")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET);
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_CHARIZARD);
+        OPPONENT(SPECIES_SWAMPERT);
+    } WHEN {
+        TURN {
+            MOVE(playerLeft, MOVE_CELEBRATE);
+            MOVE(playerRight, MOVE_CELEBRATE);
+            MOVE(opponentLeft, MOVE_CELEBRATE);
+            MOVE(opponentRight, MOVE_CELEBRATE);
+        }
+    } THEN {
+        bool32 oldOff = FlagGet(FLAG_HIDE_BATTLE_TYPE_ICONS);
+        enum BattlerId local = GetBattlerAtPosition(B_POSITION_PLAYER_LEFT);
+        enum BattlerId target = GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
+        ResetSpriteData();
+        FreeAllSpritePalettes();
+        FlagClear(FLAG_HIDE_BATTLE_TYPE_ICONS);
+        for (u32 i = 0; i < gBattlersCount; i++)
+            gBattlerSpriteIds[i] = CreateSprite(&gDummySpriteTemplate, i == target ? 200 : 152, 80, 1);
+        gBattlerControllerFuncs[local] = HandleInputChooseMove;
+        LoadTypeIcons(local);
+        EXPECT_EQ(CountTypeLabels(), 4);
+        LoadTypeIcons(local);
+        EXPECT_EQ(CountTypeLabels(), 4);
+        gBattleMons[target].types[0] = TYPE_ICE;
+        gBattleMons[target].types[1] = TYPE_ICE;
+        LoadTypeIcons(local);
+        EXPECT_EQ(CountTypeLabels(), 3);
+        for (u32 i = 0; i < MAX_SPRITES; i++)
+        {
+            struct Sprite *label = &gSprites[i];
+            if (!label->inUse || label->template->tileTag != TYPE_ICON_TAG)
+                continue;
+            EXPECT_NE(GetBattlerSide(label->tTargetBattler), GetBattlerSide(local));
+            if (label->tTargetBattler == target)
+            {
+                s32 oldY = label->y;
+                EXPECT_EQ((u32)label->animNum, TYPE_ICE);
+                gSprites[gBattlerSpriteIds[target]].y2 = -3;
+                label->callback(label);
+                EXPECT_EQ(label->y, oldY - 3);
+                gSprites[gBattlerSpriteIds[target]].invisible = TRUE;
+                label->callback(label);
+                EXPECT(label->invisible);
+            }
+        }
+        gBattlerControllerFuncs[local] = NULL;
+        for (u32 i = 0; i < MAX_SPRITES; i++)
+            if (gSprites[i].inUse && gSprites[i].template->tileTag == TYPE_ICON_TAG)
+                gSprites[i].callback(&gSprites[i]);
+        EXPECT_EQ(CountTypeLabels(), 0);
+        EXPECT_EQ(GetSpriteTileStartByTag(TYPE_ICON_TAG), TAG_NONE);
+        EXPECT_EQ(IndexOfSpritePaletteTag(TYPE_ICON_TAG), 0xFF);
+        ResetSpriteData();
+        if (oldOff)
+            FlagSet(FLAG_HIDE_BATTLE_TYPE_ICONS);
+    }
 }
