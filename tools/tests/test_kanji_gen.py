@@ -47,6 +47,9 @@ class Generator(unittest.TestCase):
         for name in ("charmap.txt", "charmap_kanji.txt", gen.ATLAS_PNG, gen.ATLAS_TXT):
             (self.root / name).parent.mkdir(parents=True, exist_ok=True)
             shutil.copy(ROOT / name, self.root / name)
+        # Start with the historical prototype, not the evolving game's ledger.
+        entries = gen.read_ledger(self.root / gen.LEDGER)[:len(PROTOTYPE)]
+        (self.root / gen.LEDGER).write_text(gen.ledger_text(entries), encoding="utf-8")
         self.source("src/prototype.c", "static const u8 sText[] = _(\"{KANJI}%s\");\n" % PROTOTYPE)
 
     def tearDown(self):
@@ -104,7 +107,8 @@ class Generator(unittest.TestCase):
         self.run_update()
         first = self.ledger()
         shutil.rmtree(self.root / gen.OUT_DIR)
-        shutil.copy(ROOT / gen.LEDGER, self.root / gen.LEDGER)
+        (self.root / gen.LEDGER).write_text(
+            gen.ledger_text([(c, i, None) for i, c in enumerate(PROTOTYPE, 1)]), encoding="utf-8")
         os.rename(self.root / "src/z.c", self.root / "src/0.c")
         os.rename(self.root / "src/a.c", self.root / "src/zz.c")
         self.run_update()
@@ -304,7 +308,7 @@ class SaveLinkChecks(unittest.TestCase):
         for name in ("charmap.txt", "charmap_kanji.txt") + save_link_checks.LIMIT_HEADERS:
             (self.root / name).parent.mkdir(parents=True, exist_ok=True)
             shutil.copy(ROOT / name, self.root / name)
-        self.entries = gen.read_ledger(self.root / gen.LEDGER) + [("天", 26, None)]
+        self.entries = gen.read_ledger(self.root / gen.LEDGER)[:len(PROTOTYPE)] + [("天", 26, None)]
 
     def tearDown(self):
         self.tmp.cleanup()

@@ -2,6 +2,7 @@
 #include "line_break.h"
 #include "text.h"
 #include "malloc.h"
+#include "string_util.h"
 
 void StripLineBreaks(u8 *src)
 {
@@ -76,6 +77,26 @@ void BreakStringNaive(u8 *src, u32 maxWidth, u32 screenLines, u8 fontId, enum To
 }
 
 #define SCROLL_PROMPT_WIDTH 8
+
+static void MeasureStringWords(u8 *src, struct StringWord *words, u32 count, u8 fontId)
+{
+    // Measure prefixes so language/font controls also apply to later words.
+    for (u32 i = 0; i < count; i++)
+    {
+        u32 start = words[i].startIndex;
+        u32 end = start + words[i].length;
+        u8 saved = src[start];
+        src[start] = EOS;
+        u32 before = GetStringWidth(fontId, src, 0);
+        src[start] = saved;
+        saved = src[end];
+        src[end] = EOS;
+        u32 after = GetStringWidth(fontId, src, 0);
+        src[end] = saved;
+        words[i].width = after >= before ? after - before : 0;
+    }
+}
+
 void BreakSubStringNaive(u8 *src, u32 maxWidth, u32 screenLines, u8 fontId, enum ToggleScrollPrompt toggleScrollPrompt)
 {
     //  If the string already has line breaks, don't interfere with them
@@ -130,15 +151,11 @@ void BreakSubStringNaive(u8 *src, u32 maxWidth, u32 screenLines, u8 fontId, enum
     allWords[currWordIndex].length = currWordLength;
 
     //  Fill in individual word widths
-    for (u32 i = 0; i < numWords; i++)
-    {
-        for (u32 j = 0; j < allWords[i].length; j++)
-            allWords[i].width += GetGlyphWidth(src[allWords[i].startIndex + j], FALSE, fontId);
-    }
+    MeasureStringWords(src, allWords, numWords, fontId);
 
     //  Step 1: Does it all fit one one line? Then no break
     //  Step 2: Try to split across minimum number of lines
-    u32 spaceWidth = GetGlyphWidth(CHAR_SPACE, FALSE, fontId);
+    u32 spaceWidth = GetGlyphWidth(CHAR_SPACE, IsJapaneseTextMode(src), fontId);
     u32 totalWidth = allWords[0].width;
     //  Calculate total widths without any line breaks
     for (u32 i = 1; i < numWords; i++)
@@ -158,7 +175,7 @@ void BreakSubStringNaive(u8 *src, u32 maxWidth, u32 screenLines, u8 fontId, enum
                 if (SCROLL_PROMPT_WIDTH + currWidth + (currWords - 1) * spaceWidth > maxWidth)
                 {
                     src[allWords[wordIndex].startIndex - 1] = CHAR_PROMPT_SCROLL;
-                    currWidth = allWords[wordIndex].length;
+                    currWidth = allWords[wordIndex].width;
                     currWords = 1;
                 }
                 else
@@ -240,15 +257,11 @@ void BreakSubStringAutomatic(u8 *src, u32 maxWidth, u32 screenLines, u8 fontId, 
     allWords[currWordIndex].length = currWordLength;
 
     //  Fill in individual word widths
-    for (u32 i = 0; i < numWords; i++)
-    {
-        for (u32 j = 0; j < allWords[i].length; j++)
-            allWords[i].width += GetGlyphWidth(src[allWords[i].startIndex + j], FALSE, fontId);
-    }
+    MeasureStringWords(src, allWords, numWords, fontId);
 
     //  Step 1: Does it all fit one one line? Then no break
     //  Step 2: Try to split across minimum number of lines
-    u32 spaceWidth = GetGlyphWidth(CHAR_SPACE, FALSE, fontId);
+    u32 spaceWidth = GetGlyphWidth(CHAR_SPACE, IsJapaneseTextMode(src), fontId);
     u32 totalWidth = allWords[0].width;
     //  Calculate total widths without any line breaks
     for (u32 i = 1; i < numWords; i++)
@@ -269,7 +282,7 @@ void BreakSubStringAutomatic(u8 *src, u32 maxWidth, u32 screenLines, u8 fontId, 
         {
             if (toggleScrollPrompt == SHOW_SCROLL_PROMPT && currWordIndex + 1 == numWords)
                 currLineWidth += SCROLL_PROMPT_WIDTH;
-            if (currLineWidth + allWords[currWordIndex].length > maxWidth)
+            if (currLineWidth + allWords[currWordIndex].width > maxWidth)
             {
                 totalLines++;
                 currLineWidth = allWords[currWordIndex].width;
@@ -357,6 +370,21 @@ void BreakSubStringAutomatic(u8 *src, u32 maxWidth, u32 screenLines, u8 fontId, 
 //  Only allow word splitting on allowed chars
 bool32 IsWordSplittingChar(const u8 *src, u32 index)
 {
+    if (src[index] == CHAR_SPACE || src[index] == CHAR_ZWS)
+    {
+        // Control parameters and multi-byte glyph payloads are not separators.
+        for (u32 i = 0; i < index;)
+        {
+            u32 size = 1;
+            if (src[i] == EXT_CTRL_CODE_BEGIN)
+                size += GetExtCtrlCodeLength(src[i + 1]);
+            else if (src[i] == CHAR_EXTRA_SYMBOL)
+                size++;
+            i += size;
+            if (i > index)
+                return FALSE;
+        }
+    }
     switch (src[index])
     {
     case CHAR_ZWS:
