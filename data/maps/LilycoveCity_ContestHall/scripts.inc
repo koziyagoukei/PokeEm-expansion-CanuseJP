@@ -314,7 +314,7 @@ LilycoveCity_ContestHall_Text_TodayWonSmartnessContest:
 	.string "{JPN}うつくしさ コンテストで\n優勝した この ポケモンを\lきょうは かしこさ コンテストで\l優勝 させたんだぜ！\pああ 自分の さいのうが こわい……$"
 
 LilycoveCity_ContestHall_Text_EnteredBunchOfContests:
-	.string "{JPN}なんども コンテストに でていて\nなんとなく わ勝って きたんだけど\pたとえば かっこいいコンテストで\nかっこいいわざを だすと うけるけど\lかしこいアピールや かわいいアピールは\lなぜか うけが わるいんだよな……$"
+	.string "{JPN}なんども コンテストに でていて\nなんとなく 分かって きたんだけど\pたとえば かっこいいコンテストで\nかっこいいわざを だすと うけるけど\lかしこいアピールや かわいいアピールは\lなぜか うけが わるいんだよな……$"
 
 LilycoveCity_ContestHall_Text_ManWhoWonEarlierHadPokeblocks:
 	.string "{JPN}さっき 優勝 した おにいさん\nすっごい たくさんの 種類の\lポロックを もってた！\pあれだけ もってれば\n優勝 できるのかな?$"
@@ -344,7 +344,7 @@ LilycoveCity_ContestHall_Text_YoureBeautifulGrandpa:
 	.string "{JPN}キャー！ おじいさん すてきー！$"
 
 LilycoveCity_ContestHall_Text_AllSeemToUseDifferentMoves:
-	.string "{JPN}同じ ポケモンを つ勝っていても\nトレーナーに よって\lぜんぜん 違う わざで\lアピールして くるんだよね\pそれは しょうぶと いっしょだね！$"
+	.string "{JPN}同じ ポケモンを 使っていても\nトレーナーに よって\lぜんぜん 違う わざで\lアピールして くるんだよね\pそれは しょうぶと いっしょだね！$"
 
 LilycoveCity_ContestHall_Text_PokemonSmarterThanTrainers:
 	.string "{JPN}トレーナーより ポケモンの ほうが\nあたま よさそうに みえるなあ$"

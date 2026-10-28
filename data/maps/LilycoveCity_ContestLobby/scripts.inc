@@ -1107,7 +1107,7 @@ LilycoveCity_ContestLobby_Text_OkaySeeYou:
 	.string "{JPN}それじゃね!$"
 
 LilycoveCity_ContestLobby_Text_TakeHomeButIdLikeToTakeToMuseum:
-	.string "{JPN}うーん…… じゃあ これは\nぼくが もってかえると するか……\pでも やっぱり もってい期待な……\nいいだろ?$"
+	.string "{JPN}うーん…… じゃあ これは\nぼくが 持ってかえると するか……\pでも やっぱり 持っていきたいな……\nいいだろ?$"
 
 LilycoveCity_ContestLobby_Text_FineThatsTheWayItIs:
 	.string "{JPN}そっか しかたないね\nそれじゃ これは ぼくの\lいえに かざります\pつぎ 頑張ると するか……\nじゃあな$"
@@ -1122,7 +1122,7 @@ LilycoveCity_ContestLobby_Text_ContestFeastForEyes:
 	.string "{JPN}ここの ポケモンは みんな\nかいてみたくなる ひょうじょうを するよ。\p同じ ステージでも\n同じ えには ならないんだ！$"
 
 LilycoveCity_ContestLobby_Text_ToughContestIsExtreme:
-	.string "{JPN}たくましさコンテストは さ以降だ！\nへんしんの はくりょくも みどころだぜ！\pでも ギミックは ここぞというとき。\nわざの つながりも だいじだからな！$"
+	.string "{JPN}たくましさコンテストは 最高だ！\nへんしんの はくりょくも みどころだぜ！\pでも ギミックは ここぞというとき。\nわざの つながりも だいじだからな！$"
 
 LilycoveCity_ContestLobby_Text_LavishedCareOnMon:
 	.string "{JPN}まいにち だいじに だいじに\nそだてあげた わしの ポケモン\lコンディションは カンペキ!\lきょうは かつぞおおおおおうう!$"
