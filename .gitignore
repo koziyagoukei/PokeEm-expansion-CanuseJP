@@ -1,4 +1,5 @@
 agbcc
+/src/data/pokemon/pokedex_text_selected.h
 *.exe
 *.o
 *.i

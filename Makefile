@@ -141,6 +141,9 @@ else
 O_LEVEL ?= 2
 endif
 CPPFLAGS := $(INCLUDE_CPP_ARGS) -Wno-trigraphs -DMODERN=1 -DTESTING=$(TEST) -D$(GAME_VERSION) -std=gnu17
+ifneq ($(POKEDEX_TEXT_STYLE),)
+CPPFLAGS += -DP_POKEDEX_TEXT_STYLE=$(POKEDEX_TEXT_STYLE)
+endif
 ifeq ($(RELEASE),1)
 	override CPPFLAGS += -DRELEASE
 	ifeq ($(USE_LTO_ON_RELEASE),1)
@@ -267,6 +270,12 @@ AUTO_GEN_TARGETS += $(BPEJ_BATTLE_BACKGROUND_EXTRACTED_OK)
 AUTO_GEN_TARGETS += $(BPEJ_CONTEST_EXTRACTED_OK)
 AUTO_GEN_TARGETS += $(BPEJ_INTRO_EXTRACTED_OK)
 AUTO_GEN_TARGETS += $(BPEJ_POKENAV_EXTRACTED_OK)
+
+POKEDEX_TEXT_TOOL := $(TOOLS_DIR)/pokedex_kanji.py
+POKEDEX_TEXT_MANIFEST := $(TOOLS_DIR)/data/pokedex_kanji_manifest.json
+POKEDEX_TEXT_HEADER := $(DATA_SRC_SUBDIR)/pokemon/pokedex_text_selected.h
+POKEDEX_TEXT_STAMP := $(BUILD_GENERATED_DIR)/pokedex_text/selected.ok
+AUTO_GEN_TARGETS += $(POKEDEX_TEXT_STAMP)
 
 # Kanji used by display strings get a code in charmap_kanji.txt and their
 # glyphs are generated before anything is encoded. See docs/kanji.md.
@@ -502,6 +511,13 @@ include trainer_rules.mk
 
 # Other generated sources (trainers.h, region map names...) contain text too,
 # so the kanji scan runs after them.
+.PHONY: FORCE_POKEDEX_TEXT
+FORCE_POKEDEX_TEXT:
+
+# Select text before the font scan. Kana mode does not read corpus downloads.
+$(POKEDEX_TEXT_STAMP): FORCE_POKEDEX_TEXT $(POKEDEX_TEXT_TOOL) $(POKEDEX_TEXT_MANIFEST) $(wildcard include/config/*.h) $(wildcard graphics/fonts/kanji/koden12_atlas.*) charmap.txt charmap_kanji.txt
+	python3 $(POKEDEX_TEXT_TOOL) generate --cpp "$(CPP) $(CPPFLAGS) -P -x c -" --stamp $@
+
 .PHONY: FORCE_KANJI_SCAN
 FORCE_KANJI_SCAN:
 
@@ -575,6 +591,7 @@ clean-teachables_intermediates:
 
 clean-generated: clean-teachables_intermediates clean-bpej-contest-assets clean-bpej-intro-assets
 clean-generated: clean-bpej-pokenav-assets
+	@rm -f $(POKEDEX_TEXT_HEADER)
 	@rm -f $(AUTO_GEN_TARGETS)
 	@echo "rm -f <AUTO_GEN_TARGETS>"
 	@rm -rf $(BUILD_GENERATED_DIR)
