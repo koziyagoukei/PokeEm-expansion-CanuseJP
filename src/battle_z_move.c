@@ -131,8 +131,8 @@ bool32 CanUseZMove(enum BattlerId battler)
     if (HasTrainerUsedGimmick(battler, GIMMICK_Z_MOVE))
         return FALSE;
 
-    // Check if this Pokemon has already used another gimmick.
-    if (HasBattlerUsedAnyGimmick(battler))
+    // Ultra Burst is the exception: Ultra Necrozma may still use its Z-Move.
+    if (HasBattlerUsedAnyGimmick(battler) && GetActiveGimmick(battler) != GIMMICK_ULTRA_BURST)
         return FALSE;
 
     // Check if battler has another gimmick active.
