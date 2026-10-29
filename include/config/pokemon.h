@@ -81,6 +81,15 @@
 #define P_MODIFIED_MEGA_CRY_MODE         CRY_MODE_HIGH_PITCH
 
 // ポケモン図鑑
+#define POKEDEX_TEXT_KANA                 0
+#define POKEDEX_TEXT_KANJI                1
+#ifndef P_POKEDEX_TEXT_STYLE
+#define P_POKEDEX_TEXT_STYLE              POKEDEX_TEXT_KANJI // 既存の漢字描画で公式コーパスの説明文を表示する。
+#endif
+#if P_POKEDEX_TEXT_STYLE != POKEDEX_TEXT_KANA && P_POKEDEX_TEXT_STYLE != POKEDEX_TEXT_KANJI
+#error "Invalid P_POKEDEX_TEXT_STYLE"
+#endif
+
 #define DONT_SKIP_GAPS                   0              // 図鑑の未発見の空欄を省略しない。
 #define SKIP_GAPS_EXCEPT_ONE             1              // 発見済みの項目の間に空欄を1つだけ残し、ほかの空欄を省略する。
 #define SKIP_GAPS_EXCEPT_BEFORE_AFTER    2              // 発見済みの項目の前後に空欄を1つずつ残し、ほかを省略する。SVに最も近い表示。
