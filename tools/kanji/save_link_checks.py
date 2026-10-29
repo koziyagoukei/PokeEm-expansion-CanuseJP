@@ -33,6 +33,8 @@ class Rule:
 
 
 RULES = (
+    Rule(("src/frontier_pokevirus.c",), "POKEMON_NAME_LENGTH",
+         "default local epilogue species name (saved; display mode added only when rendering)", symbols=r"sDefaultName"),
     Rule(("src/data/pokemon/species_info/*.h",), "POKEMON_NAME_LENGTH",
          "default nickname of every Pokémon (saved, traded, record-mixed)", fields=("speciesName",)),
     Rule(("src/daycare.c", "src/evolution_scene.c"), "POKEMON_NAME_LENGTH",

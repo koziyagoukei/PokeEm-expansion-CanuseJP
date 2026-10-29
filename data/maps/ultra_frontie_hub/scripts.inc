@@ -9,12 +9,15 @@ UltraFrontieHub_OnLoad:
 	setflag FLAG_TEMP_10
 	call FrontierStory_EventScript_SetupHub
 	call FinalStory_EventScript_SetupEndingHub
+	special FrontierPokevirus_CheckEpilogue
+	copyvar VAR_TEMP_6, VAR_RESULT
 	goto_if_ne VAR_FRONTIER_INTRO_STATE, FRONTIER_INTRO_ARRIVAL, UltraFrontieHub_OnLoad_Done
 	clearflag FLAG_TEMP_10
 UltraFrontieHub_OnLoad_Done:
 	end
 
 UltraFrontieHub_OnFrame:
+	map_script_2 VAR_TEMP_6, 1, FinalStory_EventScript_PokevirusEpilogue
 	map_script_2 VAR_STORY_ENDING_STATE, ENDING_STATE_HUB, FinalStory_EventScript_EndingHub
 	map_script_2 VAR_FRONTIER_INTRO_STATE, FRONTIER_INTRO_ARRIVAL, FrontierIntro_EventScript_Arrival
 	map_script_2 VAR_TOWER_STORY_STATE, TOWER_STORY_RETURNED, TowerStory_EventScript_HubCare

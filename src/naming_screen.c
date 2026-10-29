@@ -1916,7 +1916,8 @@ static void (*const sDrawTextEntryBoxFuncs[])(void) =
     [NAMING_SCREEN_NICKNAME]   = DrawMonTextEntryBox,
     [NAMING_SCREEN_WALDA]      = DrawNormalTextEntryBox,
     [NAMING_SCREEN_CODE]       = DrawNormalTextEntryBox,
-    [NAMING_SCREEN_RIVAL]      = DrawNormalTextEntryBox
+    [NAMING_SCREEN_RIVAL]      = DrawNormalTextEntryBox,
+    [NAMING_SCREEN_POKEVIRUS]  = DrawNormalTextEntryBox,
 };
 
 static void DrawTextEntryBox(void)
@@ -2661,6 +2662,16 @@ static const struct NamingScreenTemplate sRivalNamingScreenTemplate =
     .title = sText_RivalsName,
 };
 
+static const struct NamingScreenTemplate sPokevirusNamingTemplate =
+{
+    .copyExistingString = TRUE,
+    .maxChars = POKEMON_NAME_LENGTH,
+    .iconFunction = 0,
+    .addGenderIcon = FALSE,
+    .initialPage = KBPAGE_JAPANESE,
+    .title = COMPOUND_STRING("{JPN}あの ポケモンの 種族名は？"),
+};
+
 static const struct NamingScreenTemplate *const sNamingScreenTemplates[] =
 {
     [NAMING_SCREEN_PLAYER]     = &sPlayerNamingScreenTemplate,
@@ -2670,6 +2681,7 @@ static const struct NamingScreenTemplate *const sNamingScreenTemplates[] =
     [NAMING_SCREEN_WALDA]      = &sWaldaWordsScreenTemplate,
     [NAMING_SCREEN_CODE]       = &sCodeScreenTemplate,
     [NAMING_SCREEN_RIVAL]      = &sRivalNamingScreenTemplate,
+    [NAMING_SCREEN_POKEVIRUS]  = &sPokevirusNamingTemplate,
 };
 
 static const struct OamData sOam_8x8 =

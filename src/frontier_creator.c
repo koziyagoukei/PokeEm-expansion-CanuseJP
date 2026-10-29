@@ -3579,8 +3579,11 @@ void Special_SetupFrontierHubState(void)
     FlagSet(FLAG_EXPANSION_TERA_ORB_NO_COST);
     EnableNationalPokedex();
 
-    GetSetPokedexFlag(SpeciesToNationalPokedexNum(SPECIES_BULBASAUR), FLAG_SET_SEEN);
-    GetSetPokedexFlag(SpeciesToNationalPokedexNum(SPECIES_BULBASAUR), FLAG_SET_CAUGHT);
+    for (i = 1; i <= NATIONAL_DEX_COUNT; i++)
+    {
+        GetSetPokedexFlag(i, FLAG_SET_SEEN);
+        GetSetPokedexFlag(i, FLAG_SET_CAUGHT);
+    }
 
     for (i = 0; i < ARRAY_COUNT(gBadgeFlags); i++)
         FlagSet(gBadgeFlags[i]);

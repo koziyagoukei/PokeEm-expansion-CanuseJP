@@ -9,6 +9,14 @@
 #include "../src/data/frontier_story_targets.h"
 #include "../src/data/frontier_story_contest.h"
 
+extern const u8 FinalStory_Text_EveryoneAwake[];
+extern const u8 FinalStory_Text_WantedToBePokemon[];
+extern const u8 FinalStory_Text_CannotBePokemon[];
+extern const u8 FinalStory_Text_NameDoesNotForgive[];
+extern const u8 FinalStory_Text_Nevertheless[];
+extern const u8 FinalStory_Text_GiveSpeciesName[];
+extern const u8 FinalStory_Text_NameRemains[];
+
 static void CheckStoryText(const u8 *text)
 {
     static const u8 wideGlyph[] = _("ア");
@@ -62,6 +70,17 @@ static void CheckStoryText(const u8 *text)
             line[used++] = ch;
         }
     }
+}
+
+TEST("Frontier story text: the final naming dialogue fits the Japanese field window")
+{
+    CheckStoryText(FinalStory_Text_EveryoneAwake);
+    CheckStoryText(FinalStory_Text_WantedToBePokemon);
+    CheckStoryText(FinalStory_Text_CannotBePokemon);
+    CheckStoryText(FinalStory_Text_NameDoesNotForgive);
+    CheckStoryText(FinalStory_Text_Nevertheless);
+    CheckStoryText(FinalStory_Text_GiveSpeciesName);
+    CheckStoryText(FinalStory_Text_NameRemains);
 }
 
 TEST("Frontier story text: named character dialogue fits the Japanese field window")

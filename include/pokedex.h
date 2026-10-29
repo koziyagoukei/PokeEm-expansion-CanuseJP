@@ -21,6 +21,7 @@ bool16 HasAllKantoMons(void);
 void ResetPokedexScrollPositions(void);
 bool16 HasAllMons(void);
 void CB2_OpenPokedex(void);
+void Pokedex_OpenFromScript(void);
 void PrintMonMeasurements(enum Species species, u32 owned);
 u8* ConvertMonHeightToString(u32 height);
 u8* ConvertMonWeightToString(u32 weight);

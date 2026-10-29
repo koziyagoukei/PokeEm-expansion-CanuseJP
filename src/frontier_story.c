@@ -361,6 +361,16 @@ void FrontierStory_ShouldGather(void)
     gSpecialVar_Result = IsStoryActive() && CountRescued() >= 4 && !FlagGet(FLAG_STORY_PATH_OPEN);
 }
 
+bool32 FrontierStory_AreAllRescued(void)
+{
+    if (!IsStoryActive() || CountRescued() != ARRAY_COUNT(sRescuedFlags))
+        return FALSE;
+    for (u32 i = 0; i < NAMED_STORY_COUNT; i++)
+        if (GetNamedState(i) != NAMED_STORY_RESCUED)
+            return FALSE;
+    return TRUE;
+}
+
 // Everyone cured so far: the scenario rescues and the Brains and guests cured at the camp.
 static u32 CountCuredPeople(void)
 {

@@ -166,9 +166,11 @@ struct FromScreenData
     u8 iconSpriteIds[FORMS_SCREEN_COLUMNS * FORMS_SCREEN_VISIBLE_ROWS];
 };
 
+#define POKEDEX_LIST_CAPACITY (NATIONAL_DEX_COUNT + 1)
+
 struct PokedexView
 {
-    struct PokedexListItem pokedexList[NATIONAL_DEX_COUNT + 1];
+    struct PokedexListItem pokedexList[POKEDEX_LIST_CAPACITY + 1];
     u16 pokemonListCount;
     u16 selectedPokemon;
     u16 selectedPokemonBackup;

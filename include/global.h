@@ -1119,6 +1119,13 @@ struct FameCheckerSaveData
     u8 unk_0_E;
 };
 
+struct FrontierPokevirusSave
+{
+    u32 magic;
+    u8 name[POKEMON_NAME_LENGTH + 1];
+    u16 checksum;
+};
+
 struct SaveBlock3
 {
 #if OW_USE_FAKE_RTC
@@ -1142,6 +1149,7 @@ struct SaveBlock3
     struct SpecialDollSave specialDolls;
     struct FrontierMusicSave frontierMusic;
     struct Pokemon fusions[MAX_FUSION_STORAGE]; // Partners stored while fused (Kyurem, Necrozma, etc.)
+    struct FrontierPokevirusSave pokevirus; // Append-only local epilogue record; never sent over link.
 }; /* max size: SAVE_BLOCK_3_CHUNK_SIZE * NUM_SECTORS_PER_SLOT bytes */
 
 struct SaveBlock1

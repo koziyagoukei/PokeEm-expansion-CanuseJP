@@ -1,4 +1,5 @@
 #include "global.h"
+#include "frontier_pokevirus.h"
 #include "battle_main.h"
 #include "battle_util.h"
 #include "bg.h"
@@ -752,7 +753,7 @@ bool32 TryCreateMonListEntry_HGSS(u8 position, u16 b, u16 ignored)
         entryNum = b - 5;
         for (i = 0; i <= 10; i++)
         {
-            if (entryNum < 0 || entryNum >= NATIONAL_DEX_COUNT || sPokedexView->pokedexList[entryNum].dexNum == 0xFFFF)
+            if (entryNum < 0 || entryNum >= sPokedexView->pokemonListCount || sPokedexView->pokedexList[entryNum].dexNum == 0xFFFF)
             {
                 ClearMonListEntry(MON_LIST_X, i * 2, ignored);
             }
@@ -777,7 +778,7 @@ bool32 TryCreateMonListEntry_HGSS(u8 position, u16 b, u16 ignored)
         break;
     case 1: // Up
         entryNum = b - 5;
-        if (entryNum < 0 || entryNum >= NATIONAL_DEX_COUNT || sPokedexView->pokedexList[entryNum].dexNum == 0xFFFF)
+        if (entryNum < 0 || entryNum >= sPokedexView->pokemonListCount || sPokedexView->pokedexList[entryNum].dexNum == 0xFFFF)
         {
             ClearMonListEntry(MON_LIST_X, sPokedexView->listVOffset * 2, ignored);
         }
@@ -803,7 +804,7 @@ bool32 TryCreateMonListEntry_HGSS(u8 position, u16 b, u16 ignored)
         vOffset = sPokedexView->listVOffset + 10;
         if (vOffset >= LIST_SCROLL_STEP)
             vOffset -= LIST_SCROLL_STEP;
-        if (entryNum < 0 || entryNum >= NATIONAL_DEX_COUNT || sPokedexView->pokedexList[entryNum].dexNum == 0xFFFF)
+        if (entryNum < 0 || entryNum >= sPokedexView->pokemonListCount || sPokedexView->pokedexList[entryNum].dexNum == 0xFFFF)
             ClearMonListEntry(MON_LIST_X, vOffset * 2, ignored);
         else
         {
@@ -1261,8 +1262,8 @@ static bool32 IsMonInfoBeingLoaded(void)
 }
 static void SpriteCB_StatBars(struct Sprite *sprite)
 {
-    if (IsMonInfoBeingLoaded())
-        sprite->invisible = TRUE;
+    sprite->invisible = IsMonInfoBeingLoaded()
+        || FrontierPokevirus_IsDexRecord(sPokedexView->pokedexList[sPokedexView->selectedPokemon].dexNum);
     if (sPokedexView->currentPage != PAGE_MAIN && sPokedexView->currentPage != PAGE_SEARCH_RESULTS)
     {
         FreeSpriteTilesByTag(TAG_STAT_BAR);
@@ -1273,8 +1274,8 @@ static void SpriteCB_StatBars(struct Sprite *sprite)
 }
 static void SpriteCB_StatBarsBg(struct Sprite *sprite)
 {
-    if (IsMonInfoBeingLoaded())
-        sprite->invisible = TRUE;
+    sprite->invisible = IsMonInfoBeingLoaded()
+        || FrontierPokevirus_IsDexRecord(sPokedexView->pokedexList[sPokedexView->selectedPokemon].dexNum);
     if (sPokedexView->currentPage != PAGE_MAIN && sPokedexView->currentPage != PAGE_SEARCH_RESULTS)
     {
         FreeSpriteTilesByTag(TAG_STAT_BAR_BG);
@@ -1328,7 +1329,9 @@ bool32 Task_TryLoadInfoScreen_HGSS(u8 taskId)
         FillWindowPixelBuffer(WIN_INFO, PIXEL_FILL(0));
         PutWindowTilemap(WIN_INFO);
         PutWindowTilemap(WIN_FOOTPRINT);
-        DrawFootprint(WIN_FOOTPRINT, NationalPokedexNumToSpeciesForm(sPokedexListItem->dexNum));
+        FillWindowPixelBuffer(WIN_FOOTPRINT, PIXEL_FILL(0));
+        if (!FrontierPokevirus_IsDexRecord(sPokedexListItem->dexNum))
+            DrawFootprint(WIN_FOOTPRINT, NationalPokedexNumToSpeciesForm(sPokedexListItem->dexNum));
         CopyWindowToVram(WIN_FOOTPRINT, COPYWIN_GFX);
         gMain.state++;
         break;
@@ -1704,6 +1707,20 @@ static void PrintMonInfo(u32 num, u32 value, u32 owned, u32 newEntry)
     const u8 *category;
     const u8 *description;
     u8 digitCount = (NATIONAL_DEX_COUNT > 999 && value != 0) ? 4 : 3;
+
+    if (FrontierPokevirus_IsDexRecord(num))
+    {
+        u8 recordName[POKEMON_NAME_LENGTH + 3];
+        FrontierPokevirus_CopyName(recordName);
+        // This record has no footprint, type or physical measurements.
+        PutWindowTilemap(WIN_INFO);
+        FillWindowPixelRect(WIN_INFO, PIXEL_FILL(TEXT_COLOR_WHITE), 118, 48, 122, 43);
+        PrintInfoScreenTextWhite(COMPOUND_STRING("{JPN}番号 {ENG}-"), 123, 17);
+        PrintInfoScreenTextSmall(recordName, GetFontIdToFit(recordName, FONT_NORMAL, 0, 108), 123, 33);
+        PrintInfoScreenText(gPokevirusDexCategory, 123, 56);
+        PrintInfoScreenText(gPokevirusDexDescription, 8, 93);
+        return;
+    }
 
     if (value == 0)
         value = NationalToRegionalOrder(num);

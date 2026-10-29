@@ -741,3 +741,7 @@ gSpecials::
 	def_special FrontierStory_ShowEnding
 	def_special FrontierStory_SetupNamedTalks
 	def_special FrontierStory_FinishNamedTalk
+	def_special FrontierPokevirus_CheckEpilogue
+	def_special FrontierPokevirus_Name
+	def_special FrontierPokevirus_Register
+	def_special FrontierPokevirus_ShowRecord

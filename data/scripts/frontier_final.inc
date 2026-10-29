@@ -503,8 +503,88 @@ FinalStory_EventScript_EndingResort::
 	setflag FLAG_TEMP_10
 	special FrontierStory_ShowEnding
 	waitstate
+	call FinalStory_EventScript_TryNamePokevirus
 	releaseall
 	end
+
+@ After every scenario rescue and every Brain/guest cure. The saved name is the
+@ completion marker; returning from the naming screen or Pokedex cannot replay it.
+FinalStory_EventScript_PokevirusEpilogue::
+	setvar VAR_TEMP_6, 0
+	lockall
+	call FinalStory_EventScript_TryNamePokevirus
+	releaseall
+	end
+
+FinalStory_EventScript_TryNamePokevirus::
+	special FrontierPokevirus_CheckEpilogue
+	goto_if_eq VAR_RESULT, FALSE, FrontierStory_EventScript_Return
+	msgbox FinalStory_Text_EveryoneAwake, MSGBOX_DEFAULT
+	msgbox FinalStory_Text_WantedToBePokemon, MSGBOX_DEFAULT
+	msgbox FinalStory_Text_CannotBePokemon, MSGBOX_DEFAULT
+	msgbox FinalStory_Text_NameDoesNotForgive, MSGBOX_DEFAULT
+	closemessage
+	delay 60
+	msgbox FinalStory_Text_Nevertheless, MSGBOX_DEFAULT
+	closemessage
+	delay 60
+	msgbox FinalStory_Text_GiveSpeciesName, MSGBOX_DEFAULT
+FinalStory_EventScript_EnterPokevirusName:
+	closemessage
+	special FrontierPokevirus_Name
+	waitstate
+	special FrontierPokevirus_Register
+	goto_if_eq VAR_RESULT, FALSE, FinalStory_EventScript_EnterPokevirusName
+	msgbox FinalStory_Text_NameRemains, MSGBOX_DEFAULT
+	closemessage
+	special FrontierPokevirus_ShowRecord
+	waitstate
+	return
+
+FinalStory_Text_EveryoneAwake::
+	.string "{JPN}店主『……最後の ひとりだ。\n"
+	.string "これで 皆 目を覚ました。』\p"
+	.string "ダークライの 声が届いた。$"
+
+FinalStory_Text_WantedToBePokemon::
+	.string "{JPN}ダークライ『あれは ポケモンに\n"
+	.string "なろうとしていたのだ。\p"
+	.string "誰かに 呼ばれ 誰かと 生きる。\n"
+	.string "そんな 生き物に。』$"
+
+FinalStory_Text_CannotBePokemon::
+	.string "{JPN}ダークライ『だが あれが\n"
+	.string "ポケモンとして 成り立つには\l"
+	.string "他の全てを 犠牲にするしかない。\p"
+	.string "他の命も 心も 奪って\n"
+	.string "自分の一部に してしまう。\p"
+	.string "その存在を ポケモンだと\n"
+	.string "認めることは できない。』$"
+
+FinalStory_Text_NameDoesNotForgive::
+	.string "{JPN}店主『……人の人生を 奪った。\n"
+	.string "取り返せねえものも ある。\p"
+	.string "名前を 付けたって\n"
+	.string "それが 消えるわけじゃねえ。』$"
+
+FinalStory_Text_Nevertheless::
+	.string "{JPN}ダークライ『……それでも。』$"
+
+FinalStory_Text_GiveSpeciesName::
+	.string "{JPN}ダークライ『「はじめまして」と\n"
+	.string "答えたものを\l"
+	.string "なかったことには したくない。\p"
+	.string "ヒトポケルスは わたしたちが\n"
+	.string "災いに 付けた呼び名だ。\p"
+	.string "{PLAYER}。\n"
+	.string "あの生き物に 名前を。\p"
+	.string "ポケモンとしての 種族名を\n"
+	.string "あなたの図鑑に 残してほしい。』$"
+
+FinalStory_Text_NameRemains::
+	.string "{JPN}{STR_VAR_1}。\p"
+	.string "図鑑に 番号は付かなかった。\n"
+	.string "けれど 名前は残った。$"
 
 @ ---------------------------------------------------------------------------
 @ Movements

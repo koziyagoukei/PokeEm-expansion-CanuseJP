@@ -1,4 +1,5 @@
 #include "global.h"
+#include "frontier_pokevirus.h"
 #include "battle_main.h"
 #include "battle_script_commands.h"
 #include "bg.h"
@@ -51,6 +52,7 @@
 EWRAM_DATA struct PokedexView *sPokedexView = NULL;
 static EWRAM_DATA u16 sLastSelectedPokemon = 0;
 static EWRAM_DATA u8 sPokeBallRotation = 0;
+static EWRAM_DATA bool8 sPokedexFromScript = FALSE;
 EWRAM_DATA struct PokedexListItem *sPokedexListItem = NULL;
 
 COMMON_DATA void (*gPokedexVBlankCB)(void) = NULL;
@@ -1410,15 +1412,12 @@ void ResetPokedexView(struct PokedexView *pokedexView)
 {
     u16 i;
 
-    for (i = 0; i < NATIONAL_DEX_COUNT; i++)
+    for (i = 0; i < ARRAY_COUNT(pokedexView->pokedexList); i++)
     {
         pokedexView->pokedexList[i].dexNum = 0xFFFF;
         pokedexView->pokedexList[i].seen = FALSE;
         pokedexView->pokedexList[i].owned = FALSE;
     }
-    pokedexView->pokedexList[NATIONAL_DEX_COUNT].dexNum = 0;
-    pokedexView->pokedexList[NATIONAL_DEX_COUNT].seen = FALSE;
-    pokedexView->pokedexList[NATIONAL_DEX_COUNT].owned = FALSE;
     pokedexView->pokemonListCount = 0;
     pokedexView->selectedPokemon = 0;
     pokedexView->selectedPokemonBackup = 0;
@@ -1458,6 +1457,12 @@ void ResetPokedexView(struct PokedexView *pokedexView)
     pokedexView->originalSearchSelectionNum = 0;
 }
 
+void Pokedex_OpenFromScript(void)
+{
+    sPokedexFromScript = TRUE;
+    SetMainCallback2(CB2_OpenPokedex);
+}
+
 void CB2_OpenPokedex(void)
 {
     switch (gMain.state)
@@ -1490,6 +1495,11 @@ void CB2_OpenPokedex(void)
             sPokedexView->dexMode = DEX_MODE_HOENN;
         sPokedexView->dexOrder = gSaveBlock2Ptr->pokedex.order;
         sPokedexView->selectedPokemon = sLastSelectedPokemon;
+        if (sPokedexFromScript)
+        {
+            sPokedexView->dexOrder = ORDER_NUMERICAL;
+            sPokedexView->selectedPokemon = 0;
+        }
         sPokedexView->pokeBallRotation = sPokeBallRotation;
         sPokedexView->selectedScreen = AREA_SCREEN;
         if (!IsNationalPokedexEnabled())
@@ -1730,14 +1740,18 @@ static void Task_ClosePokedex(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
-        gSaveBlock2Ptr->pokedex.mode = sPokedexView->dexMode;
-        if (!IsNationalPokedexEnabled())
-            gSaveBlock2Ptr->pokedex.mode = DEX_MODE_HOENN;
-        gSaveBlock2Ptr->pokedex.order = sPokedexView->dexOrder;
+        if (!sPokedexFromScript)
+        {
+            gSaveBlock2Ptr->pokedex.mode = sPokedexView->dexMode;
+            if (!IsNationalPokedexEnabled())
+                gSaveBlock2Ptr->pokedex.mode = DEX_MODE_HOENN;
+            gSaveBlock2Ptr->pokedex.order = sPokedexView->dexOrder;
+        }
         ClearMonSprites();
         FreeWindowAndBgBuffers();
         DestroyTask(taskId);
-        SetMainCallback2(CB2_ReturnToFieldWithOpenMenu);
+        SetMainCallback2(sPokedexFromScript ? CB2_ReturnToFieldContinueScript : CB2_ReturnToFieldWithOpenMenu);
+        sPokedexFromScript = FALSE;
         m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 0x100);
         Free(sPokedexView);
     }
@@ -2228,7 +2242,14 @@ void CreatePokedexList(u8 dexMode, u8 order)
         break;
     }
 
-    for (i = sPokedexView->pokemonListCount; i < NATIONAL_DEX_COUNT; i++)
+    if (POKEDEX_PLUS_HGSS && FrontierPokevirus_IsRegistered())
+    {
+        for (i = sPokedexView->pokemonListCount; i > 0; i--)
+            sPokedexView->pokedexList[i] = sPokedexView->pokedexList[i - 1];
+        sPokedexView->pokedexList[0] = (struct PokedexListItem){.dexNum = POKEVIRUS_DEX_RECORD, .seen = TRUE};
+        sPokedexView->pokemonListCount++;
+    }
+    for (i = sPokedexView->pokemonListCount; i < POKEDEX_LIST_CAPACITY; i++)
     {
         sPokedexView->pokedexList[i].dexNum = 0xFFFF;
         sPokedexView->pokedexList[i].seen = FALSE;
@@ -2358,6 +2379,11 @@ void CreateMonDexNum(u16 entryNum, u8 left, u8 top, u16 unused)
         offset = 0;
 
     dexNum = sPokedexView->pokedexList[entryNum].dexNum;
+    if (FrontierPokevirus_IsDexRecord(dexNum))
+    {
+        PrintMonDexNum(0, FONT_NARROW, COMPOUND_STRING("-"), left, top);
+        return;
+    }
     if (sPokedexView->dexMode == DEX_MODE_HOENN)
         dexNum = NationalToRegionalOrder(dexNum);
     memcpy(text, sText_No0000, ARRAY_COUNT(sText_No0000));
@@ -2395,6 +2421,14 @@ void CreateCaughtBall(bool16 owned, u8 x, u8 y, u16 unused)
 u8 CreateMonName(u16 num, u8 left, u8 top)
 {
     const u8 *str;
+
+    if (FrontierPokevirus_IsDexRecord(num))
+    {
+        u8 name[POKEMON_NAME_LENGTH + 3];
+        FrontierPokevirus_CopyName(name);
+        PrintMonName(0, FONT_NARROW, name, left, top);
+        return StringLength(name);
+    }
 
     num = NationalPokedexNumToSpeciesForm(num);
     if (num)
@@ -2708,7 +2742,7 @@ static u8 ClearMonSprites(void)
 
 static u16 GetPokemonSpriteToDisplay(u16 index)
 {
-    if (index >= NATIONAL_DEX_COUNT || sPokedexView->pokedexList[index].dexNum == 0xFFFF)
+    if (index >= sPokedexView->pokemonListCount || sPokedexView->pokedexList[index].dexNum == 0xFFFF)
         return 0xFFFF;
     else if (sPokedexView->pokedexList[index].seen)
         return sPokedexView->pokedexList[index].dexNum;
@@ -4461,6 +4495,10 @@ s8 GetSetPokedexFlag(enum NationalDexOrder nationalDexNo, u8 caseID)
     u32 index, bit, mask;
     s8 retVal = 0;
 
+    // This local memorial has no bit in the real species' seen/caught arrays.
+    if (nationalDexNo == POKEVIRUS_DEX_RECORD)
+        return caseID == FLAG_GET_SEEN && FrontierPokevirus_IsRegistered();
+
     nationalDexNo--;
     index = nationalDexNo / 8;
     bit = nationalDexNo % 8;
@@ -4850,6 +4888,8 @@ static u32 GetPokedexMonPersonality(enum Species species)
 
 u16 CreateMonSpriteFromNationalDexNumber(enum NationalDexOrder nationalNum, s16 x, s16 y, u16 paletteSlot)
 {
+    if (FrontierPokevirus_IsDexRecord(nationalNum))
+        return CreateTrainerPicSprite(TRAINER_PIC_POKEVIRUS, TRUE, x, y, paletteSlot, TAG_NONE);
     enum Species species = NationalPokedexNumToSpeciesForm(nationalNum);
     return CreateMonPicSprite(species, FALSE, GetPokedexMonPersonality(species), TRUE, x, y, paletteSlot, TAG_NONE);
 }
@@ -4892,9 +4932,9 @@ static int DoPokedexSearch(u8 dexMode, u8 order, u8 abcGroup, enum BodyColor bod
 
     CreatePokedexList(dexMode, order);
 
-    for (i = 0, resultsCount = 0; i < NATIONAL_DEX_COUNT; i++)
+    for (i = 0, resultsCount = 0; i < sPokedexView->pokemonListCount; i++)
     {
-        if (sPokedexView->pokedexList[i].seen)
+        if (sPokedexView->pokedexList[i].seen && !FrontierPokevirus_IsDexRecord(sPokedexView->pokedexList[i].dexNum))
         {
             sPokedexView->pokedexList[resultsCount] = sPokedexView->pokedexList[i];
             resultsCount++;
@@ -5874,6 +5914,8 @@ static void ClearSearchParameterBoxText(void)
 
 enum Species NationalPokedexNumToSpeciesForm(enum NationalDexOrder nationalNum)
 {
+    if (FrontierPokevirus_IsDexRecord(nationalNum))
+        return SPECIES_NONE;
     if (POKEDEX_PLUS_HGSS && nationalNum && sPokedexView && sPokedexView->formSpecies)
         return sPokedexView->formSpecies;
 

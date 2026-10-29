@@ -455,6 +455,7 @@ TowerStory_EventScript_KazukiCured::
 	setvar VAR_TOWER_STORY_STATE, TOWER_STORY_RESCUED
 	setflag FLAG_STORY_RESCUED_TOWER
 	fadescreen FADE_FROM_BLACK
+	call FinalStory_EventScript_TryNamePokevirus
 	releaseall
 	end
 
@@ -920,6 +921,7 @@ FrontierStory_EventScript_HubRescueCured::
 	removeobject LOCALID_FRONTIER_HUB_INTRO_COOK
 	special FrontierStory_FinishRescue
 	fadescreen FADE_FROM_BLACK
+	call FinalStory_EventScript_TryNamePokevirus
 	releaseall
 	end
 
@@ -956,6 +958,7 @@ FrontierStory_EventScript_CampVisitorFadeOut::
 FrontierStory_EventScript_CampVisitorFadeIn::
 	fadescreenswapbuffers FADE_FROM_BLACK
 	call FrontierStory_EventScript_TrySuggestInn
+	call FinalStory_EventScript_TryNamePokevirus
 	release
 	end
 

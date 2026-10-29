@@ -1,7 +1,9 @@
 #include "global.h"
 #include "event_data.h"
+#include "frontier_pokevirus.h"
 #include "frontier_tutor.h"
 #include "item.h"
+#include "pokedex.h"
 #include "pokemon.h"
 #include "pokemon_storage_system.h"
 #include "test/test.h"
@@ -55,6 +57,45 @@ static bool32 IsLearnable(enum Species species, enum Move move)
             if (frontierMoves[i] == move)
                 return TRUE;
     return CanLearnTeachableMove(species, move);
+}
+
+TEST("Frontier hub: every national dex entry is seen and caught from the first visit")
+{
+    PrepareInitialParty();
+    ResetPokedex();
+    memset(&gSaveBlock3Ptr->pokevirus, 0, sizeof(gSaveBlock3Ptr->pokevirus));
+    SET_RNG(RNG_NONE, 0);
+    Special_SetupFrontierHubState();
+    EXPECT(FlagGet(FLAG_SYS_POKEDEX_GET));
+    EXPECT(IsNationalPokedexEnabled());
+    EXPECT_EQ(GetNationalPokedexCount(FLAG_GET_SEEN), NATIONAL_DEX_COUNT);
+    EXPECT_EQ(GetNationalPokedexCount(FLAG_GET_CAUGHT), NATIONAL_DEX_COUNT);
+    for (u32 number = 1; number <= NATIONAL_DEX_COUNT; number++)
+    {
+        EXPECT(GetSetPokedexFlag(number, FLAG_GET_SEEN));
+        EXPECT(GetSetPokedexFlag(number, FLAG_GET_CAUGHT));
+    }
+    EXPECT(!FrontierPokevirus_IsRegistered());
+    EXPECT(!GetSetPokedexFlag(POKEVIRUS_DEX_RECORD, FLAG_GET_SEEN));
+    EXPECT(!GetSetPokedexFlag(POKEVIRUS_DEX_RECORD, FLAG_GET_CAUGHT));
+}
+
+TEST("Frontier hub: revisiting completes an old dex without changing the epilogue record")
+{
+    PrepareInitialParty();
+    ResetPokedex();
+    GetSetPokedexFlag(NATIONAL_DEX_PIKACHU, FLAG_SET_SEEN);
+    GetSetPokedexFlag(NATIONAL_DEX_PIKACHU, FLAG_SET_CAUGHT);
+    memset(&gSaveBlock3Ptr->pokevirus, 0xA5, sizeof(gSaveBlock3Ptr->pokevirus));
+    struct FrontierPokevirusSave saved = gSaveBlock3Ptr->pokevirus;
+    SET_RNG(RNG_NONE, 0);
+    Special_SetupFrontierHubState();
+    EXPECT_EQ(GetNationalPokedexCount(FLAG_GET_SEEN), NATIONAL_DEX_COUNT);
+    EXPECT_EQ(GetNationalPokedexCount(FLAG_GET_CAUGHT), NATIONAL_DEX_COUNT);
+    EXPECT_EQ(memcmp(&saved, &gSaveBlock3Ptr->pokevirus, sizeof(saved)), 0);
+    Special_SetupFrontierHubState();
+    EXPECT_EQ(GetNationalPokedexCount(FLAG_GET_CAUGHT), NATIONAL_DEX_COUNT);
+    EXPECT_EQ(memcmp(&saved, &gSaveBlock3Ptr->pokevirus, sizeof(saved)), 0);
 }
 
 TEST("Frontier initial party: all sixteen combinations contain four partners and Rayquaza")

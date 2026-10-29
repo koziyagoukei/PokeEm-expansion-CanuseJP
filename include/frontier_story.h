@@ -42,6 +42,7 @@ void FrontierStory_BufferContestSceneBranch(void);
 // Shared progress and the camp visitors.
 void FrontierStory_CountRescued(void);
 void FrontierStory_ShouldGather(void);
+bool32 FrontierStory_AreAllRescued(void);
 void FrontierStory_ShouldSuggestInn(void);
 void FrontierStory_CanDarkraiJoin(void);
 void FrontierStory_PickCampVisitor(void);
