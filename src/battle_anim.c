@@ -1102,6 +1102,7 @@ static void Cmd_end(void)
 
     // Keep waiting as long as there are animations to be done.
     if (gAnimVisualTaskCount != 0 || gAnimSoundTaskCount != 0
+     || sAnimBackgroundFadeState != 0
      || sMonAnimTaskIdArray[0] != TASK_NONE || sMonAnimTaskIdArray[1] != TASK_NONE)
     {
         sSoundAnimFramesToWait = 0;
@@ -1896,21 +1897,34 @@ static void Task_FadeToBg(u8 taskId)
 
 void LoadMoveBg(u16 bgId)
 {
+    u32 size;
+    u16 *tilemap;
+    assertf(bgId < BG_COUNT, "invalid move background %d", bgId)
+        return;
+    size = GetDecompressedDataSize(gBattleAnimBackgroundTable[bgId].tilemap);
+    assertf(size <= 2 * BG_SCREEN_SIZE && size % sizeof(u16) == 0, "invalid move background size %d", size)
+        return;
+    // Some backgrounds contain only 14 or 20 rows. Pad the reserved screens
+    // before relocating palettes or copying, rather than overrunning that data.
+    tilemap = AllocZeroed(2 * BG_SCREEN_SIZE);
+    if (tilemap == NULL)
+        return;
+    DecompressDataWithHeaderWram(gBattleAnimBackgroundTable[bgId].tilemap, tilemap);
+    SetAnimBgAttribute(3, BG_ANIM_SCREEN_SIZE, size > BG_SCREEN_SIZE);
     if (BattleAnim_UseContestBgLayout())
     {
-        void *decompressionBuffer = malloc_and_decompress(gBattleAnimBackgroundTable[bgId].tilemap, NULL);
-        RelocateBattleBgPal(GetBattleBgPaletteNum(), decompressionBuffer, 0x100, FALSE);
-        DmaCopy32(3, decompressionBuffer, (void *)BG_SCREEN_ADDR(26), 0x800);
-        Free(decompressionBuffer);
+        RelocateBattleBgPal(GetBattleBgPaletteNum(), tilemap, 0x100, TRUE);
+        DmaCopy32(3, tilemap, (void *)BG_SCREEN_ADDR(26), 2 * BG_SCREEN_SIZE);
         DecompressDataWithHeaderVram(gBattleAnimBackgroundTable[bgId].image, (void *)BG_SCREEN_ADDR(4));
         LoadPalette(gBattleAnimBackgroundTable[bgId].palette, BG_PLTT_ID(GetBattleBgPaletteNum()), PLTT_SIZE_4BPP);
     }
     else
     {
-        DecompressDataWithHeaderVram(gBattleAnimBackgroundTable[bgId].tilemap, (void *)BG_SCREEN_ADDR(26));
+        DmaCopy32(3, tilemap, (void *)BG_SCREEN_ADDR(26), 2 * BG_SCREEN_SIZE);
         DecompressDataWithHeaderVram(gBattleAnimBackgroundTable[bgId].image, (void *)BG_CHAR_ADDR(2));
         LoadPalette(gBattleAnimBackgroundTable[bgId].palette, BG_PLTT_ID(2), PLTT_SIZE_4BPP);
     }
+    Free(tilemap);
 }
 
 static void LoadDefaultBg(void)

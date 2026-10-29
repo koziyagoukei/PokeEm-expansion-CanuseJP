@@ -965,6 +965,8 @@ static const struct BgTemplate sContestBgTemplates[] =
     }
 };
 
+// Cutaways skip the battle intro, which normally resets the BG1/BG2 software
+// character bases to zero. Animation tile offsets already include those bases.
 static const struct BgTemplate sContestCutawayBattleBgTemplates[] =
 {
     {
@@ -978,7 +980,7 @@ static const struct BgTemplate sContestCutawayBattleBgTemplates[] =
     },
     {
         .bg = 1,
-        .charBaseIndex = 1,
+        .charBaseIndex = 0,
         .mapBaseIndex = 28,
         .screenSize = 2,
         .paletteMode = 0,
@@ -987,7 +989,7 @@ static const struct BgTemplate sContestCutawayBattleBgTemplates[] =
     },
     {
         .bg = 2,
-        .charBaseIndex = 1,
+        .charBaseIndex = 0,
         .mapBaseIndex = 30,
         .screenSize = 1,
         .paletteMode = 0,

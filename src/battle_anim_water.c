@@ -1004,7 +1004,7 @@ void AnimTask_CreateSurfWave(u8 taskId)
     SetAnimBgAttribute(1, BG_ANIM_PRIORITY, 1);
     SetAnimBgAttribute(1, BG_ANIM_SCREEN_SIZE, 1);
     GetBattleAnimBg1Data(&animBg);
-    if (!IsContest())
+    if (!BattleAnim_UseContestBgLayout())
     {
         SetAnimBgAttribute(1, BG_ANIM_CHAR_BASE_BLOCK, 1);
         if (!IsOnPlayerSide(gBattleAnimAttacker))
@@ -1032,7 +1032,7 @@ void AnimTask_CreateSurfWave(u8 taskId)
     gTasks[taskId2].data[0] = 0;
     gTasks[taskId2].data[1] = 0x1000;
     gTasks[taskId2].data[2] = 0x1000;
-    if (IsContest())
+    if (BattleAnim_UseContestBgLayout())
     {
         *x = -80;
         *y = -48;
@@ -1127,7 +1127,7 @@ static void AnimTask_CreateSurfWave_Step2(u8 taskId)
     }
     else
     {
-        if (!IsContest())
+        if (!BattleAnim_UseContestBgLayout())
             SetAnimBgAttribute(1, BG_ANIM_CHAR_BASE_BLOCK, 0);
         *BGptrX = 0;
         *BGptrY = 0;
