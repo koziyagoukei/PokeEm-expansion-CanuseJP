@@ -37,6 +37,8 @@
 
 漢字は表示文字列へ記述すると、ビルド時に使用字の検出・ID登録・影付きフォント生成を行います。既存25字のIDを維持し、最大2,214字に対応します。プレイヤー名・ニックネーム、セーブや通信に入る文字列への漢字は非対応で、既知の経路は漢字禁止・バイト長のビルド時検査で保護します。導入方法と検査の限界は [漢字の自動検出とフォント生成](docs/kanji.md) を参照してください。
 
+図鑑説明文は、既存のかな版と、新しい作品を優先した漢字版をコンパイル時に選択できます。初期設定は漢字版です。初回ビルド前に必要な参照データの取得・設定方法は [図鑑説明文のかな／漢字切り替え](docs/pokedex_kanji.md) を参照してください。
+
 ### 表示モードの指定
 
 | 指定 | 用途 |
@@ -130,6 +132,8 @@ make -j4 --output-sync=target
 | --- | --- |
 | 環境構築・ビルド手順 | [INSTALL.md](INSTALL.md) |
 | Expansionの機能 | [FEATURES.md](FEATURES.md) |
+| Poké Corpusを使った誤訳・未翻訳の点検 | [poke_corpus_localization.md](docs/poke_corpus_localization.md) |
+| 図鑑説明文のかな／漢字切り替え | [pokedex_kanji.md](docs/pokedex_kanji.md) |
 | 漢字表示の試作・表示確認と制約 | [kanji_font_poc.md](docs/kanji_font_poc.md) |
 | 漢字の自動検出・生成と保存/通信データ検査 | [kanji.md](docs/kanji.md) |
 | フォントのROM容量と表示方式の調査 | [font_engine_audit.md](docs/font_engine_audit.md) |

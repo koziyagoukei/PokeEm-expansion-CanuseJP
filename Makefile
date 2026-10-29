@@ -548,6 +548,7 @@ include trainer_rules.mk
 .PHONY: FORCE_POKEDEX_TEXT
 FORCE_POKEDEX_TEXT:
 
+# Select text before the font scan. Kana mode does not read corpus downloads.
 $(POKEDEX_TEXT_STAMP): FORCE_POKEDEX_TEXT $(POKEDEX_TEXT_TOOL) $(POKEDEX_TEXT_MANIFEST) $(wildcard include/config/*.h) $(wildcard graphics/fonts/kanji/koden12_atlas.*) charmap.txt charmap_kanji.txt
 	python3 $(POKEDEX_TEXT_TOOL) generate --cpp "$(CPP) $(CPPFLAGS) -P -x c -" --stamp $@
 

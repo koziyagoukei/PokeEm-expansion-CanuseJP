@@ -1,0 +1,687 @@
+{
+  "schema": "bpej-reviewed-text-v1",
+  "rom_sha1": "d7cf8f156ba9c455d164e1ea780a6bf1945465c2",
+  "source_revision": "0f5541b278e6bad6aacc9df81297701b821976ec",
+  "corpus": {
+    "revision": "a022d41cc0e62858bc875a62eb1ba51b1d465826",
+    "duplicate_qids_skipped": 2,
+    "files": {
+      "qid_msg.txt": "d5709dc683466670909a65c7580bd17a3dd671da409ab29853bdbfddbc65d521",
+      "en_msg.txt": "5df6faf2521336394f543e3844681f2fa557819a1dfab3a748fe331dc07b0376",
+      "ja-Hrkt_msg.txt": "530ba8ae39058daf25706d9234f75646f30710f0136a4fef677d483df535793b"
+    }
+  },
+  "entries": [
+    {
+      "file": "data/maps_unused/MossdeepCity_GameCorner_1F/scripts.inc",
+      "target": {
+        "kind": "asm",
+        "label": "RS_MysteryEventsHouse_Text_OldManGreeting"
+      },
+      "rom_offset": "0x20e05d",
+      "size": 93,
+      "sha256": "8e228ae83f1f69e2726acd422df470901741cc0e2ddffb0aa6a221e05cc9dd35",
+      "source_sha256": "9f230e95e5886655d021888d04c444076d747c7f859db959cffc637232cd5681",
+      "context": "field",
+      "adaptations": [],
+      "provenance": "poke-corpus a022d41cc0e62858bc875a62eb1ba51b1d465826, e.script.MossdeepCity_GameCorner_1F.RS_MysteryEventsHouse_Text_OldManGreeting line 1876; Untranslated visiting-trainer dialogue; the aligned corpus text is present in BPEJ.",
+      "corpus_qid": "e.script.MossdeepCity_GameCorner_1F.RS_MysteryEventsHouse_Text_OldManGreeting",
+      "corpus_line": 1876
+    },
+    {
+      "file": "data/maps_unused/MossdeepCity_GameCorner_1F/scripts.inc",
+      "target": {
+        "kind": "asm",
+        "label": "RS_MysteryEventsHouse_Text_ChallengeVisitingTrainer"
+      },
+      "rom_offset": "0x20e0d0",
+      "size": 52,
+      "sha256": "231d5946ec2ce40b1aa47abe81868e97256e120641f880bb624620bef05258fa",
+      "source_sha256": "d79569aa9208e6d685cc1d4ee1ce9e2f5b81d53a18f83ce6406c6220df6fe0e9",
+      "context": "field",
+      "adaptations": [],
+      "provenance": "poke-corpus a022d41cc0e62858bc875a62eb1ba51b1d465826, e.script.MossdeepCity_GameCorner_1F.RS_MysteryEventsHouse_Text_ChallengeVisitingTrainer line 1878; Untranslated visiting-trainer dialogue; the aligned corpus text is present in BPEJ.",
+      "corpus_qid": "e.script.MossdeepCity_GameCorner_1F.RS_MysteryEventsHouse_Text_ChallengeVisitingTrainer",
+      "corpus_line": 1878
+    },
+    {
+      "file": "data/maps_unused/MossdeepCity_GameCorner_1F/scripts.inc",
+      "target": {
+        "kind": "asm",
+        "label": "RS_MysteryEventsHouse_Text_YouWontBattle"
+      },
+      "rom_offset": "0x20e104",
+      "size": 32,
+      "sha256": "ed58d40c60e18124d356c6906c9ceda6cc8959f447c850af3a5cdf368e15dc8c",
+      "source_sha256": "db7daccf49bf8fb375668ca187e8ff08acae1ec4ff9a03a2cecfe9c959a85f05",
+      "context": "field",
+      "adaptations": [],
+      "provenance": "poke-corpus a022d41cc0e62858bc875a62eb1ba51b1d465826, e.script.MossdeepCity_GameCorner_1F.RS_MysteryEventsHouse_Text_YouWontBattle line 1879; Untranslated visiting-trainer dialogue; the aligned corpus text is present in BPEJ.",
+      "corpus_qid": "e.script.MossdeepCity_GameCorner_1F.RS_MysteryEventsHouse_Text_YouWontBattle",
+      "corpus_line": 1879
+    },
+    {
+      "file": "data/maps_unused/MossdeepCity_GameCorner_1F/scripts.inc",
+      "target": {
+        "kind": "asm",
+        "label": "RS_MysteryEventsHouse_Text_KeepItToA3On3"
+      },
+      "rom_offset": "0x20e124",
+      "size": 68,
+      "sha256": "604e4a4556208e58a8eea899eeb9d4b6b13a7608336f07ebb38115cf62cc846c",
+      "source_sha256": "5efd72fe56d980b3d3d72be0b269e24eb7aa0b800df7c415f6c65335d94d42d0",
+      "context": "field",
+      "adaptations": [],
+      "provenance": "poke-corpus a022d41cc0e62858bc875a62eb1ba51b1d465826, e.script.MossdeepCity_GameCorner_1F.RS_MysteryEventsHouse_Text_KeepItToA3On3 line 1880; Untranslated visiting-trainer dialogue; the aligned corpus text is present in BPEJ.",
+      "corpus_qid": "e.script.MossdeepCity_GameCorner_1F.RS_MysteryEventsHouse_Text_KeepItToA3On3",
+      "corpus_line": 1880
+    },
+    {
+      "file": "data/maps_unused/MossdeepCity_GameCorner_1F/scripts.inc",
+      "target": {
+        "kind": "asm",
+        "label": "RS_MysteryEventsHouse_Text_SaveYourProgress"
+      },
+      "rom_offset": "0x20e168",
+      "size": 35,
+      "sha256": "9bbc9ac3c7663e237c9f6b960e32f69580a48cb27a55b0d8445db8c0cf926e42",
+      "source_sha256": "7709017e356fa21f9dc3c3966bc9f1772c1d1e1e3f811c49e59bd891d73ef4f9",
+      "context": "field",
+      "adaptations": [],
+      "provenance": "poke-corpus a022d41cc0e62858bc875a62eb1ba51b1d465826, e.script.MossdeepCity_GameCorner_1F.RS_MysteryEventsHouse_Text_SaveYourProgress line 1881; Untranslated visiting-trainer dialogue; the aligned corpus text is present in BPEJ.",
+      "corpus_qid": "e.script.MossdeepCity_GameCorner_1F.RS_MysteryEventsHouse_Text_SaveYourProgress",
+      "corpus_line": 1881
+    },
+    {
+      "file": "data/maps_unused/MossdeepCity_GameCorner_1F/scripts.inc",
+      "target": {
+        "kind": "asm",
+        "label": "RS_MysteryEventsHouse_Text_HopeToSeeAGoodMatch"
+      },
+      "rom_offset": "0x20e18b",
+      "size": 20,
+      "sha256": "e5480b729fd82c98b0dc8f8122c77709f6efb9588af7e786f2ed36a0d52e08bd",
+      "source_sha256": "e64851ae3e5ab60706c4abac4c6d1e1a827251fc0a7ae130433ae9c6a5e8e48f",
+      "context": "field",
+      "adaptations": [],
+      "provenance": "poke-corpus a022d41cc0e62858bc875a62eb1ba51b1d465826, e.script.MossdeepCity_GameCorner_1F.RS_MysteryEventsHouse_Text_HopeToSeeAGoodMatch line 1882; Untranslated visiting-trainer dialogue; the aligned corpus text is present in BPEJ.",
+      "corpus_qid": "e.script.MossdeepCity_GameCorner_1F.RS_MysteryEventsHouse_Text_HopeToSeeAGoodMatch",
+      "corpus_line": 1882
+    },
+    {
+      "file": "data/maps_unused/MossdeepCity_GameCorner_1F/scripts.inc",
+      "target": {
+        "kind": "asm",
+        "label": "RS_MysteryEventsHouse_Text_BattleTie"
+      },
+      "rom_offset": "0x20e19f",
+      "size": 45,
+      "sha256": "bed69af530b16c7b5906b3a6a0ce44b5392cf1aaf0f588cce259623306b2678a",
+      "source_sha256": "0670557e5ddfd0cb53b2a82824372991ed8624039e466d2e88fa317689818339",
+      "context": "field",
+      "adaptations": [],
+      "provenance": "poke-corpus a022d41cc0e62858bc875a62eb1ba51b1d465826, e.script.MossdeepCity_GameCorner_1F.RS_MysteryEventsHouse_Text_BattleTie line 1883; Untranslated visiting-trainer dialogue; the aligned corpus text is present in BPEJ.",
+      "corpus_qid": "e.script.MossdeepCity_GameCorner_1F.RS_MysteryEventsHouse_Text_BattleTie",
+      "corpus_line": 1883
+    },
+    {
+      "file": "data/maps_unused/MossdeepCity_GameCorner_1F/scripts.inc",
+      "target": {
+        "kind": "asm",
+        "label": "RS_MysteryEventsHouse_Text_BattleWon"
+      },
+      "rom_offset": "0x20e1cc",
+      "size": 40,
+      "sha256": "c249c83b9a96b5e9db1605854674c9b483c77cd60bbb5ed0811e753ae8a369b3",
+      "source_sha256": "ab11b6606e16613db444506943d30a989c4a739b88ca862b5fa8127b050c63b3",
+      "context": "field",
+      "adaptations": [],
+      "provenance": "poke-corpus a022d41cc0e62858bc875a62eb1ba51b1d465826, e.script.MossdeepCity_GameCorner_1F.RS_MysteryEventsHouse_Text_BattleWon line 1884; Untranslated visiting-trainer dialogue; the aligned corpus text is present in BPEJ.",
+      "corpus_qid": "e.script.MossdeepCity_GameCorner_1F.RS_MysteryEventsHouse_Text_BattleWon",
+      "corpus_line": 1884
+    },
+    {
+      "file": "data/maps_unused/MossdeepCity_GameCorner_1F/scripts.inc",
+      "target": {
+        "kind": "asm",
+        "label": "RS_MysteryEventsHouse_Text_BattleLost"
+      },
+      "rom_offset": "0x20e1f4",
+      "size": 47,
+      "sha256": "be935084cccfaf5670eedc50a747981ecb22fb93c531f541dc613e3f74471aad",
+      "source_sha256": "d609f6d0fa638226c0313069a1ee08a71012d077d3f32103d346d942a520333d",
+      "context": "field",
+      "adaptations": [],
+      "provenance": "poke-corpus a022d41cc0e62858bc875a62eb1ba51b1d465826, e.script.MossdeepCity_GameCorner_1F.RS_MysteryEventsHouse_Text_BattleLost line 1885; Untranslated visiting-trainer dialogue; the aligned corpus text is present in BPEJ.",
+      "corpus_qid": "e.script.MossdeepCity_GameCorner_1F.RS_MysteryEventsHouse_Text_BattleLost",
+      "corpus_line": 1885
+    },
+    {
+      "file": "data/maps/BattleFrontier_ExchangeServiceCorner/scripts.inc",
+      "target": {
+        "kind": "asm",
+        "label": "BattleFrontier_ExchangeServiceCorner_Text_WelcomePleaseChoosePrize"
+      },
+      "rom_offset": "0x236288",
+      "size": 91,
+      "sha256": "fa95c87f62ebca1577bb66fa2c897a00bbf119016dffd08e21d27fe50b6aa7a1",
+      "source_sha256": "1dc9b61a162a16b167c895fdbf29da20a662fa33abb21e7dae8432d20f7db2a3",
+      "context": "field",
+      "adaptations": [],
+      "provenance": "poke-corpus a022d41cc0e62858bc875a62eb1ba51b1d465826, e.script.BattleFrontier_ExchangeServiceCorner.BattleFrontier_ExchangeServiceCorner_Text_WelcomePleaseChoosePrize line 3837; Restore the original prize-exchange guidance; item transfer logic and variables are unchanged.",
+      "corpus_qid": "e.script.BattleFrontier_ExchangeServiceCorner.BattleFrontier_ExchangeServiceCorner_Text_WelcomePleaseChoosePrize",
+      "corpus_line": 3837
+    },
+    {
+      "file": "data/maps/BattleFrontier_ExchangeServiceCorner/scripts.inc",
+      "target": {
+        "kind": "asm",
+        "label": "BattleFrontier_ExchangeServiceCorner_Text_PleaseChoosePrize"
+      },
+      "rom_offset": "0x2362e3",
+      "size": 19,
+      "sha256": "942405e2c1145065dbbf3101e067d672b1d1e2d9c5a11cafdfe8fc1127942572",
+      "source_sha256": "c1690cd6a9b526a04245021a7ed1d34b7d201d40d516fca251e1c24cd2077e6b",
+      "context": "field",
+      "adaptations": [],
+      "provenance": "poke-corpus a022d41cc0e62858bc875a62eb1ba51b1d465826, e.script.BattleFrontier_ExchangeServiceCorner.BattleFrontier_ExchangeServiceCorner_Text_PleaseChoosePrize line 3838; Restore the original prize-exchange guidance; item transfer logic and variables are unchanged.",
+      "corpus_qid": "e.script.BattleFrontier_ExchangeServiceCorner.BattleFrontier_ExchangeServiceCorner_Text_PleaseChoosePrize",
+      "corpus_line": 3838
+    },
+    {
+      "file": "data/maps/BattleFrontier_ExchangeServiceCorner/scripts.inc",
+      "target": {
+        "kind": "asm",
+        "label": "BattleFrontier_ExchangeServiceCorner_Text_WellSendItToPC"
+      },
+      "rom_offset": "0x23652c",
+      "size": 38,
+      "sha256": "e51afd893568bb81fe8552553330ed6cd97028c7754da1fa21465d8626ef3f08",
+      "source_sha256": "731dadef697590bdb0ca89b9150b710f4a90cc624a8b41ac8918198ab7260a22",
+      "context": "field",
+      "adaptations": [],
+      "provenance": "poke-corpus a022d41cc0e62858bc875a62eb1ba51b1d465826, e.script.BattleFrontier_ExchangeServiceCorner.BattleFrontier_ExchangeServiceCorner_Text_WellSendItToPC line 3869; Restore the original prize-exchange guidance; item transfer logic and variables are unchanged.",
+      "corpus_qid": "e.script.BattleFrontier_ExchangeServiceCorner.BattleFrontier_ExchangeServiceCorner_Text_WellSendItToPC",
+      "corpus_line": 3869
+    },
+    {
+      "file": "data/maps/BattleFrontier_ExchangeServiceCorner/scripts.inc",
+      "target": {
+        "kind": "asm",
+        "label": "BattleFrontier_ExchangeServiceCorner_Text_HereIsYourPrize"
+      },
+      "rom_offset": "0x236552",
+      "size": 15,
+      "sha256": "afa8acc5bc546fe4b7d3c630edd747f02643aee828561a3915198de5516c2cd5",
+      "source_sha256": "4b407b55311ddf086a2f2fc677efadc15bf68b935ec5a00fddef58b10b836f38",
+      "context": "field",
+      "adaptations": [],
+      "provenance": "poke-corpus a022d41cc0e62858bc875a62eb1ba51b1d465826, e.script.BattleFrontier_ExchangeServiceCorner.BattleFrontier_ExchangeServiceCorner_Text_HereIsYourPrize line 3870; Restore the original prize-exchange guidance; item transfer logic and variables are unchanged.",
+      "corpus_qid": "e.script.BattleFrontier_ExchangeServiceCorner.BattleFrontier_ExchangeServiceCorner_Text_HereIsYourPrize",
+      "corpus_line": 3870
+    },
+    {
+      "file": "data/maps/BattleFrontier_ExchangeServiceCorner/scripts.inc",
+      "target": {
+        "kind": "asm",
+        "label": "BattleFrontier_ExchangeServiceCorner_Text_DontHaveEnoughPoints"
+      },
+      "rom_offset": "0x236561",
+      "size": 26,
+      "sha256": "f62e2d0e91503b8169e6f47da82ce3f5a4a2b3e665e836043609a27c5db30403",
+      "source_sha256": "ecc5d3bdbb882668f54cfb6cd2d55805c807ec47e6b26bda91e4e8c5370b3f8c",
+      "context": "field",
+      "adaptations": [],
+      "provenance": "poke-corpus a022d41cc0e62858bc875a62eb1ba51b1d465826, e.script.BattleFrontier_ExchangeServiceCorner.BattleFrontier_ExchangeServiceCorner_Text_DontHaveEnoughPoints line 3871; Restore the original prize-exchange guidance; item transfer logic and variables are unchanged.",
+      "corpus_qid": "e.script.BattleFrontier_ExchangeServiceCorner.BattleFrontier_ExchangeServiceCorner_Text_DontHaveEnoughPoints",
+      "corpus_line": 3871
+    },
+    {
+      "file": "data/maps/BattleFrontier_ExchangeServiceCorner/scripts.inc",
+      "target": {
+        "kind": "asm",
+        "label": "BattleFrontier_ExchangeServiceCorner_Text_PCIsFull"
+      },
+      "rom_offset": "0x23657b",
+      "size": 28,
+      "sha256": "f8ca1123ecb3734db1894caaa559a6eb08c35aa0be32a0da4c0798344675927a",
+      "source_sha256": "ffb740f8bf5984338cff4be8db3ec8087296f8efd49e4d7dd9092a1dcc5bbfda",
+      "context": "field",
+      "adaptations": [],
+      "provenance": "poke-corpus a022d41cc0e62858bc875a62eb1ba51b1d465826, e.script.BattleFrontier_ExchangeServiceCorner.BattleFrontier_ExchangeServiceCorner_Text_PCIsFull line 3872; Restore the original prize-exchange guidance; item transfer logic and variables are unchanged.",
+      "corpus_qid": "e.script.BattleFrontier_ExchangeServiceCorner.BattleFrontier_ExchangeServiceCorner_Text_PCIsFull",
+      "corpus_line": 3872
+    },
+    {
+      "file": "data/maps/BattleFrontier_ExchangeServiceCorner/scripts.inc",
+      "target": {
+        "kind": "asm",
+        "label": "BattleFrontier_ExchangeServiceCorner_Text_DontHaveSpaceToHoldIt"
+      },
+      "rom_offset": "0x236597",
+      "size": 30,
+      "sha256": "32e6dcd2be3a1fc1199c6bc54b21860ab6a2ee30c6d5e0cceda30e203348fcb2",
+      "source_sha256": "6238ac4f5e329940034d3cad99cd892625033f6b0a0ced6a27aecf4f01953144",
+      "context": "field",
+      "adaptations": [],
+      "provenance": "poke-corpus a022d41cc0e62858bc875a62eb1ba51b1d465826, e.script.BattleFrontier_ExchangeServiceCorner.BattleFrontier_ExchangeServiceCorner_Text_DontHaveSpaceToHoldIt line 3873; Restore the original prize-exchange guidance; item transfer logic and variables are unchanged.",
+      "corpus_qid": "e.script.BattleFrontier_ExchangeServiceCorner.BattleFrontier_ExchangeServiceCorner_Text_DontHaveSpaceToHoldIt",
+      "corpus_line": 3873
+    },
+    {
+      "file": "data/maps/BattleFrontier_ExchangeServiceCorner/scripts.inc",
+      "target": {
+        "kind": "asm",
+        "label": "BattleFrontier_ExchangeServiceCorner_Text_ThankYouVisitWithPoints"
+      },
+      "rom_offset": "0x2365b5",
+      "size": 41,
+      "sha256": "99104e5dd7878e0bff99f0214f459ca45cf1b2175ec41d732587fcd4d0bd2eab",
+      "source_sha256": "c61aabcb2bf4765feb1ffc0dc893c4e9914fdffbcec5d7cf9f627fb3822ea1b2",
+      "context": "field",
+      "adaptations": [],
+      "provenance": "poke-corpus a022d41cc0e62858bc875a62eb1ba51b1d465826, e.script.BattleFrontier_ExchangeServiceCorner.BattleFrontier_ExchangeServiceCorner_Text_ThankYouVisitWithPoints line 3874; Restore the original prize-exchange guidance; item transfer logic and variables are unchanged.",
+      "corpus_qid": "e.script.BattleFrontier_ExchangeServiceCorner.BattleFrontier_ExchangeServiceCorner_Text_ThankYouVisitWithPoints",
+      "corpus_line": 3874
+    },
+    {
+      "file": "data/maps/BattleFrontier_BattlePyramidFloor/scripts.inc",
+      "target": {
+        "kind": "asm",
+        "label": "BattlePyramid_Text_OneTrainersRemaining1"
+      },
+      "rom_offset": "0x22e387",
+      "size": 44,
+      "sha256": "28e1a7eff7f8a58d82cb4cc40889e5dfd40f4e21b35bd4b50daa5c416cb26963",
+      "source_sha256": "eb9d3978c138c32677fa1345d77121638ff644f85391554e8e7455bfd850258e",
+      "context": "field",
+      "adaptations": [],
+      "provenance": "poke-corpus a022d41cc0e62858bc875a62eb1ba51b1d465826, e.script.BattleFrontier_BattlePyramidFloor.BattlePyramid_Text_OneTrainersRemaining1 line 3493; The remaining-trainer branch is one, not two.",
+      "corpus_qid": "e.script.BattleFrontier_BattlePyramidFloor.BattlePyramid_Text_OneTrainersRemaining1",
+      "corpus_line": 3493
+    },
+    {
+      "file": "data/text/cable_club.inc",
+      "target": {
+        "kind": "asm",
+        "label": "CableClub_Text_WhichBattleMode"
+      },
+      "rom_offset": "0x2480a2",
+      "size": 17,
+      "sha256": "45e026a2f4987e02e70516fc8063ebacde91f2d62073aaa8e2869f9aa6df6f78",
+      "source_sha256": "aca6940f1ba3feb7c9fdc8f77a83fd199da9259738c6c2b6e2a0792d470bf08f",
+      "context": "field",
+      "adaptations": [],
+      "provenance": "poke-corpus a022d41cc0e62858bc875a62eb1ba51b1d465826, e.script.cable_club.CableClub_Text_WhichBattleMode line 4594; Battle-mode and back-navigation messages were assigned unrelated translations.",
+      "corpus_qid": "e.script.cable_club.CableClub_Text_WhichBattleMode",
+      "corpus_line": 4594
+    },
+    {
+      "file": "data/text/cable_club.inc",
+      "target": {
+        "kind": "asm",
+        "label": "CableClub_Text_ReturnsToPreviousStep"
+      },
+      "rom_offset": "0x2480b3",
+      "size": 14,
+      "sha256": "fff66b70ae9b61132372eaa0f1aafd65cab65626298c6f24ee0514576b07f6bc",
+      "source_sha256": "904c8baaf3afce927eb54d440632f252f93f53629e031472f47f196bc0287845",
+      "context": "field",
+      "adaptations": [],
+      "provenance": "poke-corpus a022d41cc0e62858bc875a62eb1ba51b1d465826, e.script.cable_club.CableClub_Text_ReturnsToPreviousStep line 4595; Battle-mode and back-navigation messages were assigned unrelated translations.",
+      "corpus_qid": "e.script.cable_club.CableClub_Text_ReturnsToPreviousStep",
+      "corpus_line": 4595
+    },
+    {
+      "file": "data/maps_unused/SSTidalLowerDeck/scripts.inc",
+      "target": {
+        "kind": "asm",
+        "label": "SSTidalLowerDeck_Text_LeonardPostBattle"
+      },
+      "rom_offset": "0x21e44c",
+      "size": 51,
+      "sha256": "4c1d1fe995bd5fa37abbea3ec8d432f9b7a71ee99ed5a7e84483de29cf67716e",
+      "source_sha256": "d5dfab306570213e34af6bf3ecf0380a69ac25205edf4433226db6a253bb2a18",
+      "context": "field",
+      "adaptations": [],
+      "provenance": "poke-corpus a022d41cc0e62858bc875a62eb1ba51b1d465826, e.script.SSTidalLowerDeck.SSTidalLowerDeck_Text_LeonardPostBattle line 2610; Correct detergent (せんざい), not sweet soup (ぜんざい).",
+      "corpus_qid": "e.script.SSTidalLowerDeck.SSTidalLowerDeck_Text_LeonardPostBattle",
+      "corpus_line": 2610
+    },
+    {
+      "file": "data/scripts/field_move_scripts.inc",
+      "target": {
+        "kind": "asm",
+        "label": "Text_WantToCut"
+      },
+      "rom_offset": "0x25663b",
+      "size": 33,
+      "sha256": "a921f559438cf46fa6d9c05f38bad7207dfb0ce886d5afe52cfee9c3e907f86c",
+      "source_sha256": "7bbac4b8fded681d5fc18d70c15fe6ebb12b800055fc2ff183263385d69c7180",
+      "context": "field",
+      "adaptations": [],
+      "provenance": "poke-corpus a022d41cc0e62858bc875a62eb1ba51b1d465826, e.script.field_move_scripts.Text_WantToCut line 5554; Use the original ellipsis rather than four middle dots.",
+      "corpus_qid": "e.script.field_move_scripts.Text_WantToCut",
+      "corpus_line": 5554
+    },
+    {
+      "file": "data/scripts/field_move_scripts.inc",
+      "target": {
+        "kind": "asm",
+        "label": "Text_CantSmash"
+      },
+      "rom_offset": "0x256733",
+      "size": 33,
+      "sha256": "5bffc32031b2cc8caa77f6d921e14cb7dff285e52ca287d204583e3dd65a1835",
+      "source_sha256": "ca108197e58e7b51831b0d38703b91875363a0ab180cd8d15aabbd94d3e5b175",
+      "context": "field",
+      "adaptations": [],
+      "provenance": "poke-corpus a022d41cc0e62858bc875a62eb1ba51b1d465826, e.script.field_move_scripts.Text_CantSmash line 5558; Use the original ellipsis rather than four middle dots.",
+      "corpus_qid": "e.script.field_move_scripts.Text_CantSmash",
+      "corpus_line": 5558
+    },
+    {
+      "file": "src/strings.c",
+      "target": {
+        "kind": "variable",
+        "label": "gText_ExpandedPlaceholder_Aqua"
+      },
+      "rom_offset": "0x5c8c3c",
+      "size": 4,
+      "sha256": "366de29f8289a2812f6ac852a683910fc4fdcf8346a7be6ac76765e1b834eb07",
+      "source_sha256": "0e1de257dd7b57da89f51fad802a6b17131607cd7d97372aadf6a84acf7ec1d2",
+      "context": "field",
+      "adaptations": [],
+      "provenance": "poke-corpus a022d41cc0e62858bc875a62eb1ba51b1d465826, e.common.strings.gText_ExpandedPlaceholder_Aqua line 15110; Restore original wording and line breaks. Team placeholders are fragments; recipient text describes incoming trade. The relearner's longer modern prompts and stat-change buffer contracts are not replaced.",
+      "corpus_qid": "e.common.strings.gText_ExpandedPlaceholder_Aqua",
+      "corpus_line": 15110
+    },
+    {
+      "file": "src/strings.c",
+      "target": {
+        "kind": "variable",
+        "label": "gText_ExpandedPlaceholder_Magma"
+      },
+      "rom_offset": "0x5c8c40",
+      "size": 4,
+      "sha256": "5aff76391a9e8eaa09c435737a229c2f1e132891275a48155e2fae679c513c47",
+      "source_sha256": "8adb443cd61559e11d0dbb9ccb02ad615cb0e2ae02cd4ce5571d686b8a97ad58",
+      "context": "field",
+      "adaptations": [],
+      "provenance": "poke-corpus a022d41cc0e62858bc875a62eb1ba51b1d465826, e.common.strings.gText_ExpandedPlaceholder_Magma line 15111; Restore original wording and line breaks. Team placeholders are fragments; recipient text describes incoming trade. The relearner's longer modern prompts and stat-change buffer contracts are not replaced.",
+      "corpus_qid": "e.common.strings.gText_ExpandedPlaceholder_Magma",
+      "corpus_line": 15111
+    },
+    {
+      "file": "src/strings.c",
+      "target": {
+        "kind": "variable",
+        "label": "gText_HOFDexRating"
+      },
+      "rom_offset": "0x5c92ab",
+      "size": 63,
+      "sha256": "023dad171a861d2b92a6dd565bcdca6ed550ede38e6ce347f0747a4cdac9ce2f",
+      "source_sha256": "e52bb3b01c011128cd5172548931c2a43fefe61951b1c167be80efd9f773905f",
+      "context": "field",
+      "adaptations": [],
+      "provenance": "poke-corpus a022d41cc0e62858bc875a62eb1ba51b1d465826, e.common.strings.gText_HOFDexRating line 15264; Restore original wording and line breaks. Team placeholders are fragments; recipient text describes incoming trade. The relearner's longer modern prompts and stat-change buffer contracts are not replaced.",
+      "corpus_qid": "e.common.strings.gText_HOFDexRating",
+      "corpus_line": 15264
+    },
+    {
+      "file": "src/strings.c",
+      "target": {
+        "kind": "variable",
+        "label": "gText_HOFNumber"
+      },
+      "rom_offset": "0x5c9328",
+      "size": 15,
+      "sha256": "c6d293e9ccb9a06d4937e873ed7f6927875be9a6516a19eaa78c1b2e9d9b1669",
+      "source_sha256": "20d0256fb3c9e9bff507070d5cbfcd04aafc5d73ec2597f229c88bcf4aaee073",
+      "context": "field",
+      "adaptations": [],
+      "provenance": "poke-corpus a022d41cc0e62858bc875a62eb1ba51b1d465826, e.common.strings.gText_HOFNumber line 15267; Restore original wording and line breaks. Team placeholders are fragments; recipient text describes incoming trade. The relearner's longer modern prompts and stat-change buffer contracts are not replaced.",
+      "corpus_qid": "e.common.strings.gText_HOFNumber",
+      "corpus_line": 15267
+    },
+    {
+      "file": "src/strings.c",
+      "target": {
+        "kind": "variable",
+        "label": "gText_Plant"
+      },
+      "rom_offset": "0x5ca720",
+      "size": 5,
+      "sha256": "de09264b9038a3022ba75290aec2c7489c64a8fcad414bc7af619cc160d843a4",
+      "source_sha256": "29a25d14b8a0f48eeb390d3450543f1a49788a9a15ca8f91a21ccdf2fded4f87",
+      "context": "field",
+      "adaptations": [],
+      "provenance": "poke-corpus a022d41cc0e62858bc875a62eb1ba51b1d465826, e.common.strings.gText_Plant line 15606; Restore original wording and line breaks. Team placeholders are fragments; recipient text describes incoming trade. The relearner's longer modern prompts and stat-change buffer contracts are not replaced.",
+      "corpus_qid": "e.common.strings.gText_Plant",
+      "corpus_line": 15606
+    },
+    {
+      "file": "src/strings.c",
+      "target": {
+        "kind": "variable",
+        "label": "gText_NumPokeblocks"
+      },
+      "rom_offset": "0x5cc3cf",
+      "size": 10,
+      "sha256": "49d0507babf131f1a4e95652679ed192aceafc6db28fc05e7ee7cf1d4075f594",
+      "source_sha256": "486be1643bfd840bb9a3bba535858a48803f47dbbb2c22d36ec4015375606e18",
+      "context": "field",
+      "adaptations": [
+        ["{COLOR 2}", "{COLOR DARK_GRAY}"],
+        ["{SHADOW 3}", "{SHADOW LIGHT_GRAY}"],
+        ["{SHADOW LIGHT_GRAY}こ", "{SHADOW LIGHT_GRAY}"]
+      ],
+      "provenance": "poke-corpus a022d41cc0e62858bc875a62eb1ba51b1d465826, e.common.strings.gText_NumPokeblocks line 16271; Preserve frontier-hack's existing count-only trainer-card layout without the trailing counter; keep its color restoration.",
+      "corpus_qid": "e.common.strings.gText_NumPokeblocks",
+      "corpus_line": 16271
+    },
+    {
+      "file": "src/strings.c",
+      "target": {
+        "kind": "variable",
+        "label": "gText_EndedWithXUnitsPowder"
+      },
+      "rom_offset": "0x5cc8e4",
+      "size": 51,
+      "sha256": "59734ff4e7017aa29935867cceab6c05820c577af457d0232e891f1057e64915",
+      "source_sha256": "ed7867c531f999edc4ec534f0302df777a0e437761d321c97312a802a6c0715b",
+      "context": "field",
+      "adaptations": [
+        [
+          "{PLAY_BGM 367}",
+          "{PLAY_BGM MUS_LEVEL_UP}"
+        ]
+      ],
+      "provenance": "poke-corpus a022d41cc0e62858bc875a62eb1ba51b1d465826, e.common.strings.gText_EndedWithXUnitsPowder line 16357; Restore original wording and line breaks. Team placeholders are fragments; recipient text describes incoming trade. The relearner's longer modern prompts and stat-change buffer contracts are not replaced.",
+      "corpus_qid": "e.common.strings.gText_EndedWithXUnitsPowder",
+      "corpus_line": 16357
+    },
+    {
+      "file": "src/strings.c",
+      "target": {
+        "kind": "variable",
+        "label": "gText_XSentOverY"
+      },
+      "rom_offset": "0x30d258",
+      "size": 18,
+      "sha256": "5b76fe14e21e393f2066f7ce92f220895ea4f2f643860714049c9b4fcf6a7927",
+      "source_sha256": "aeec876f5589b19f8fdc38638d8764652be49d0f89ba02fdaccd2cf375dd665f",
+      "context": "field",
+      "adaptations": [],
+      "provenance": "poke-corpus a022d41cc0e62858bc875a62eb1ba51b1d465826, e.common.strings.gText_XSentOverY line 16625; Restore original wording and line breaks. Team placeholders are fragments; recipient text describes incoming trade. The relearner's longer modern prompts and stat-change buffer contracts are not replaced.",
+      "corpus_qid": "e.common.strings.gText_XSentOverY",
+      "corpus_line": 16625
+    },
+    {
+      "file": "src/strings.c",
+      "target": {
+        "kind": "variable",
+        "label": "gText_MoveRelearnerTeachMoveConfirm"
+      },
+      "rom_offset": "0x5ad9b2",
+      "size": 14,
+      "sha256": "17820557a14f7f85c9263d67a04e7260739aeaec541e1871ee3529283e5d6555",
+      "source_sha256": "a64b68d46767ec8d7b053bbbf86677f0dd7cc8d4b02c16301d6f20ee0701e368",
+      "context": "field",
+      "adaptations": [],
+      "provenance": "poke-corpus a022d41cc0e62858bc875a62eb1ba51b1d465826, e.common.strings.gText_MoveRelearnerTeachMoveConfirm line 16810; Restore original wording and line breaks. Team placeholders are fragments; recipient text describes incoming trade. The relearner's longer modern prompts and stat-change buffer contracts are not replaced.",
+      "corpus_qid": "e.common.strings.gText_MoveRelearnerTeachMoveConfirm",
+      "corpus_line": 16810
+    },
+    {
+      "file": "src/strings.c",
+      "target": {
+        "kind": "variable",
+        "label": "gText_MoveRelearnerPkmnLearnedMove"
+      },
+      "rom_offset": "0x5ad9c0",
+      "size": 20,
+      "sha256": "98ab5c63a9d1199af9bb844fdf7d9f2ec8d50aeec2b5448a5e8f48149e9a08c2",
+      "source_sha256": "483a77650400fee9a76caf54942bdd6eaf4708a7c8c7e617e18dbef1235af404",
+      "context": "field",
+      "adaptations": [],
+      "provenance": "poke-corpus a022d41cc0e62858bc875a62eb1ba51b1d465826, e.common.strings.gText_MoveRelearnerPkmnLearnedMove line 16811; Restore original wording and line breaks. Team placeholders are fragments; recipient text describes incoming trade. The relearner's longer modern prompts and stat-change buffer contracts are not replaced.",
+      "corpus_qid": "e.common.strings.gText_MoveRelearnerPkmnLearnedMove",
+      "corpus_line": 16811
+    },
+    {
+      "file": "src/strings.c",
+      "target": {
+        "kind": "variable",
+        "label": "gText_MoveRelearnerPkmnTryingToLearnMove"
+      },
+      "rom_offset": "0x5ad9d4",
+      "size": 83,
+      "sha256": "5ede965cc2d7c809c45b43c6ef6d9ff15aa4b9088fc0f45056ca08cd0edc2c42",
+      "source_sha256": "7662525bb5025c5d216657fb8a0f45fbbc2ece539c57c9aeb98e4a486326e252",
+      "context": "field",
+      "adaptations": [
+        ["{STR_VAR_2}の かわりに ほかの わざを\\nわすれさせますか?", "{STR_VAR_2}の かわりに\\nほかの わざを わすれさせますか?"]
+      ],
+      "provenance": "poke-corpus a022d41cc0e62858bc875a62eb1ba51b1d465826, e.common.strings.gText_MoveRelearnerPkmnTryingToLearnMove line 16812; Restore original wording and line breaks. Team placeholders are fragments; recipient text describes incoming trade. The relearner's longer modern prompts and stat-change buffer contracts are not replaced.",
+      "corpus_qid": "e.common.strings.gText_MoveRelearnerPkmnTryingToLearnMove",
+      "corpus_line": 16812
+    },
+    {
+      "file": "src/strings.c",
+      "target": {
+        "kind": "variable",
+        "label": "gText_MoveRelearnerStopTryingToTeachMove"
+      },
+      "rom_offset": "0x5ada27",
+      "size": 27,
+      "sha256": "7f946823a0425fd97eda580dbac2b8ba0067d80e7f81017edb1fd9231ba88fe7",
+      "source_sha256": "e3003a964ac0a722df851c8d05afaf30c4738a03dd627975effc15942a8b76f9",
+      "context": "field",
+      "adaptations": [],
+      "provenance": "poke-corpus a022d41cc0e62858bc875a62eb1ba51b1d465826, e.common.strings.gText_MoveRelearnerStopTryingToTeachMove line 16813; Restore original wording and line breaks. Team placeholders are fragments; recipient text describes incoming trade. The relearner's longer modern prompts and stat-change buffer contracts are not replaced.",
+      "corpus_qid": "e.common.strings.gText_MoveRelearnerStopTryingToTeachMove",
+      "corpus_line": 16813
+    },
+    {
+      "file": "src/strings.c",
+      "target": {
+        "kind": "variable",
+        "label": "gText_MoveRelearnerPkmnForgotMoveAndLearnedNew"
+      },
+      "rom_offset": "0x5ada67",
+      "size": 52,
+      "sha256": "9dab885e8bb802bfe4fd088259802ae766351ebf81995fab45b50a5bdafe4ceb",
+      "source_sha256": "7acf8b6564471066d63b55d80cf7d774ee8f401419426e49d1b1d94ee0a0675b",
+      "context": "field",
+      "adaptations": [
+        ["{STR_VAR_1}は {STR_VAR_3}の つかいかたを\\nきれいに わすれた!", "{STR_VAR_1}は\\n{STR_VAR_3}の つかいかたを\\lきれいに わすれた!"]
+      ],
+      "provenance": "poke-corpus a022d41cc0e62858bc875a62eb1ba51b1d465826, e.common.strings.gText_MoveRelearnerPkmnForgotMoveAndLearnedNew line 16815; Restore original wording and line breaks. Team placeholders are fragments; recipient text describes incoming trade. The relearner's longer modern prompts and stat-change buffer contracts are not replaced.",
+      "corpus_qid": "e.common.strings.gText_MoveRelearnerPkmnForgotMoveAndLearnedNew",
+      "corpus_line": 16815
+    },
+    {
+      "file": "src/strings.c",
+      "target": {
+        "kind": "variable",
+        "label": "gText_MoveRelearnedPkmnDidNotLearnMove"
+      },
+      "rom_offset": "0x5ada9b",
+      "size": 20,
+      "sha256": "85af41c81c89f943566df9752d9d644385a99a2521f73d1882f4b0f90b872902",
+      "source_sha256": "1e5bb611ccf255d96197377d54b2a847d6a513c333a6378642b2ec72c29c7668",
+      "context": "field",
+      "adaptations": [
+        ["{STR_VAR_1}は {STR_VAR_2}を おぼえずに おわった!", "{STR_VAR_1}は\\n{STR_VAR_2}を おぼえずに\\lおわった!"]
+      ],
+      "provenance": "poke-corpus a022d41cc0e62858bc875a62eb1ba51b1d465826, e.common.strings.gText_MoveRelearnedPkmnDidNotLearnMove line 16816; Restore original wording and line breaks. Team placeholders are fragments; recipient text describes incoming trade. The relearner's longer modern prompts and stat-change buffer contracts are not replaced.",
+      "corpus_qid": "e.common.strings.gText_MoveRelearnedPkmnDidNotLearnMove",
+      "corpus_line": 16816
+    },
+    {
+      "file": "src/strings.c",
+      "target": {
+        "kind": "variable",
+        "label": "gText_MoveRelearnerGiveUp"
+      },
+      "rom_offset": "0x5adaaf",
+      "size": 26,
+      "sha256": "f600a601904ab13cea72731d3de7639786d2ff8a5b8b11922879be13546bc0cc",
+      "source_sha256": "d3daf3b2a7fb66eb77c8e25f49fe3f15f553e5168031d6461230bfe51dd0f86a",
+      "context": "field",
+      "adaptations": [],
+      "provenance": "poke-corpus a022d41cc0e62858bc875a62eb1ba51b1d465826, e.common.strings.gText_MoveRelearnerGiveUp line 16817; Restore original wording and line breaks. Team placeholders are fragments; recipient text describes incoming trade. The relearner's longer modern prompts and stat-change buffer contracts are not replaced.",
+      "corpus_qid": "e.common.strings.gText_MoveRelearnerGiveUp",
+      "corpus_line": 16817
+    },
+    {
+      "file": "src/data/text/gift_ribbon_descriptions.h",
+      "target": {
+        "kind": "variable",
+        "label": "gGiftRibbonDescriptionPart1_SpringHolidays"
+      },
+      "rom_offset": "0x5f6200",
+      "size": 13,
+      "sha256": "33bf4609a46e46b139db5a02f4c03f01ccbe2f49ab1a281a930a8e36095bb3d7",
+      "source_sha256": "c25e6fcb175456ed9b3e6afd4bbcc3afaf93c33c61ed80612308ad9084113329",
+      "context": "field",
+      "adaptations": [],
+      "provenance": "poke-corpus a022d41cc0e62858bc875a62eb1ba51b1d465826, e.common.gift_ribbon_descriptions.gGiftRibbonDescriptionPart1_SpringHolidays line 17757; Spring holiday ribbon was translated as winter.",
+      "corpus_qid": "e.common.gift_ribbon_descriptions.gGiftRibbonDescriptionPart1_SpringHolidays",
+      "corpus_line": 17757
+    },
+    {
+      "file": "src/contest_painting.c",
+      "target": {
+        "kind": "variable",
+        "label": "gContestHallPaintingCaption"
+      },
+      "rom_offset": "0x24c1f5",
+      "size": 11,
+      "sha256": "88b72d2ae48a327e3bb7eee046b9e4abeb1812a3937460ff1a0067767542f86f",
+      "source_sha256": "85a7834b1f20fd3e5213cb992946650185f6a100c257a36a4b769ded096032dd",
+      "context": "field",
+      "adaptations": [["{STR_VAR_2} の ", "{STR_VAR_2}の "]],
+      "provenance": "poke-corpus a022d41cc0e62858bc875a62eb1ba51b1d465826, e.script.contest_painting.gContestHallPaintingCaption line 4921; Keep Japanese possession の and frontier-hack's existing compact caption spacing.",
+      "corpus_qid": "e.script.contest_painting.gContestHallPaintingCaption",
+      "corpus_line": 4921
+    },
+    {
+      "file": "src/battle_message.c",
+      "target": {
+        "kind": "variable",
+        "label": "gText_EllipsisQuestionMark"
+      },
+      "rom_offset": "0x5abb3e",
+      "size": 5,
+      "sha256": "0e56bb6c5aa910bf2736a53696f6d19b3d2f669076a6d7392619829fa384110d",
+      "source_sha256": "bd3c273cbb77f8543acc60008f01745800810cb39475b86b32c6f75e087fa6f4",
+      "context": "battle",
+      "adaptations": [],
+      "provenance": "poke-corpus a022d41cc0e62858bc875a62eb1ba51b1d465826, e.common.battle_message.gText_EllipsisQuestionMark line 14428; Six periods are not the Japanese ellipsis glyph.",
+      "corpus_qid": "e.common.battle_message.gText_EllipsisQuestionMark",
+      "corpus_line": 14428
+    }
+  ]
+}

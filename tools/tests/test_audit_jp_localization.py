@@ -33,6 +33,11 @@ class LocalizationAuditTests(unittest.TestCase):
             self.assertEqual(next(row for row in rows if row["label"] == "gText_Example")["text"], "Hello world")
             self.assertEqual(next(row for row in rows if row["label"] == "Text")["status"], "japanese")
 
+    def test_english_possessive_after_a_placeholder_is_not_missed(self):
+        self.assertEqual(audit.classify("{STR_VAR_1}'s {STR_VAR_2}")[0], "english")
+        self.assertEqual(audit.classify("{STR_VAR_1}'s ポケモン")[0], "mixed")
+        self.assertEqual(audit.classify("{STR_VAR_1}の ポケモン")[0], "japanese")
+
     def test_scope_is_a_review_hint_not_a_translation(self):
         self.assertEqual(audit.review_scope({"file":"src/debug.c"}), "developer")
         self.assertEqual(audit.review_scope({"file":"src/data/battle_frontier/apprentice.h"}), "international_names")
