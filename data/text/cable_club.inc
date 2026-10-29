@@ -163,11 +163,11 @@ CableClub_Text_CancelSelectedItem::
 
 @ Unused
 CableClub_Text_WhichBattleMode:
-	.string "{JPN}きのみを もって いないと\nきのみクラッシュは できません$"
+	.string "{JPN}どちらの しょうぶに しますか?$"
 
 @ Unused
 CableClub_Text_ReturnsToPreviousStep:
-	.string "{JPN}どちらの しょうぶに しますか?$"
+	.string "{JPN}ひとつ まえに もどります$"
 
 CableClub_Text_NeedBerryForBerryCrush:
 	.string "きのみを もって いないと\nきのみクラッシュは できません$"

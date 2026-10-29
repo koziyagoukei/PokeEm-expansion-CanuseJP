@@ -386,7 +386,7 @@ BattlePyramid_Text_TwoTrainersRemaining1::
 	.string "{JPN}とっても つよかったよー!!\pでも つよい トレーナーは\nまだ 2にん いるからねー!$"
 
 BattlePyramid_Text_OneTrainersRemaining1::
-	.string "{JPN}とっても つよかったよー!!\pでも つよい トレーナーは\nまだ 2にん いるからねー!$"
+	.string "{JPN}とっても つよかったよー!!\pでも つよい トレーナーは\nまだ 1にん いるからねー!$"
 
 BattlePyramid_Text_ZeroTrainersRemaining1::
 	.string "{JPN}とっても つよかったよー!!\pもう だれも\nかてる ひとは いないよー!!$"
