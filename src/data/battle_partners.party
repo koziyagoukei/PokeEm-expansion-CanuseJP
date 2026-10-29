@@ -49,7 +49,7 @@ Class: No Title
 Pic: Rocket Cook
 Gender: Male
 Music: Male
-AI: Basic Trainer
+AI: Basic Trainer / Try To 2HKO / HP Aware / Smart Switching / Smart Mon Choices / PP Stall Prevention / Smart Tera
 
 SPECIES_ZYGARDE_50_POWER_CONSTRUCT @ Leftovers
 Ability: Power Construct
@@ -59,9 +59,9 @@ EVs: 252 HP / 252 Atk / 4 Def
 - Thousand Arrows
 - Dragon Dance
 - Extreme Speed
-- Stone Edge
+- Protect
 
-Darkrai @ Life Orb
+Darkrai @ Focus Sash
 Ability: Bad Dreams
 Level: 50
 Nature: Timid
@@ -69,7 +69,7 @@ EVs: 4 HP / 252 SpA / 252 Spe
 - Dark Void
 - Dark Pulse
 - Sludge Bomb
-- Nasty Plot
+- Protect
 
 Togekiss @ Sitrus Berry
 Ability: Serene Grace

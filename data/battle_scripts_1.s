@@ -5643,14 +5643,16 @@ BattleScript_ArenaJudgmentDraw:
 	erasearenareftextbox
 	printstring STRINGID_TIEDOPPONENTBYREFEREE
 	waitmessage B_WAIT_TIME_LONG
-	arenabothmonslost
 	undodynamax BS_PLAYER1
+	undodynamax BS_OPPONENT1
+@ UndoDynamax reloads HP from the party. Both must be back to zero before either
+@ faint animation can try to animate the supposed survivor.
+	arenabothmonslost
 	playfaintcry BS_PLAYER1
 	waitcry
 	dofaintanimation BS_PLAYER1
 	cleareffectsonfaint BS_PLAYER1
 	waitanimation
-	undodynamax BS_OPPONENT1
 	playfaintcry BS_OPPONENT1
 	waitcry
 	dofaintanimation BS_OPPONENT1

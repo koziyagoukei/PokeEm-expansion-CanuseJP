@@ -3156,6 +3156,8 @@ void SwitchInClearSetData(enum BattlerId battler, struct Volatiles *volatilesCop
 
 void FaintClearSetData(enum BattlerId battler)
 {
+    bool32 preserveArenaFaint = (gBattleTypeFlags & BATTLE_TYPE_ARENA) && gBattleMons[battler].hp == 0;
+
     // Data cleared both on switch and faint
     ClearSetDataOnLeave(battler);
 
@@ -3194,6 +3196,11 @@ void FaintClearSetData(enum BattlerId battler)
 
     Ai_UpdateFaintData(battler);
     TryBattleFormChange(battler, FORM_CHANGE_FAINT, GetBattlerAbility(battler));
+
+    // Judgment losses leave party HP intact. Reverting a form must not copy it
+    // back into the fainted battler and start a KO animation on a removed sprite.
+    if (preserveArenaFaint)
+        gBattleMons[battler].hp = 0;
 }
 
 static void DoBattleIntro(void)

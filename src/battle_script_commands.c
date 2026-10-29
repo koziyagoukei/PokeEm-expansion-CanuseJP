@@ -3403,7 +3403,8 @@ static void Cmd_switchinanim(void)
 
     gBattlescriptCurrInstr = cmd->nextInstr;
 
-    if (gBattleTypeFlags & BATTLE_TYPE_ARENA)
+    // Dynamax reuses the send-out animation without replacing either Pokemon.
+    if (gBattleTypeFlags & BATTLE_TYPE_ARENA && !cmd->dontClearTransform)
         BattleArena_InitPoints();
 }
 
