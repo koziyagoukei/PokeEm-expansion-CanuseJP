@@ -19,6 +19,8 @@
 #include "constants/speaker_names.h"
 
 static bool32 IsJapaneseGlyph(u16 glyphId);
+static bool32 IsLatinLetter(u16 glyphId);
+static bool32 TextAutoModeFromNextChar(const u8 *str);
 static u16 RenderText(struct TextPrinter *);
 static u32 RenderFont(struct TextPrinter *);
 static u16 FontFunc_Small(struct TextPrinter *);
@@ -172,11 +174,102 @@ static bool32 ResolveTextMode(const u8 *str, bool32 automatic)
             return !automatic && TEXT_JAPANESE_BY_DEFAULT;
 
         default:
-            return (!automatic && TEXT_JAPANESE_BY_DEFAULT) || IsJapaneseGlyph(*str);
+            if (IsJapaneseGlyph(*str))
+                return TRUE;
+            if (!automatic || IsLatinLetter(*str))
+                return !automatic && TEXT_JAPANESE_BY_DEFAULT;
+            // {AUTO} looks past digits and punctuation, which both fonts have, to the next letter.
+            // Otherwise "{STR_VAR_1}!\nおめでとう" after a name would stay in the English font.
+            str++;
+            continue;
         }
     }
 
     return !automatic && TEXT_JAPANESE_BY_DEFAULT;
+}
+
+static bool32 IsLatinLetter(u16 glyphId)
+{
+    return (glyphId >= CHAR_A && glyphId <= CHAR_Z) || (glyphId >= CHAR_a && glyphId <= CHAR_z);
+}
+
+// English symbols that share their codes with kana. In English text they are meant, not garbled kana.
+static bool32 IsEnglishSymbol(u8 c)
+{
+    switch (c)
+    {
+    case CHAR_MASCULINE_ORDINAL:
+    case CHAR_FEMININE_ORDINAL:
+    case CHAR_SUPER_ER:
+    case CHAR_AMPERSAND:
+    case CHAR_PLUS:
+    case CHAR_LV:
+    case CHAR_EQUALS:
+    case CHAR_SEMICOLON:
+    case CHAR_BARD_WORD_DELIMIT:
+    case CHAR_V_D_ARROW:
+    case 0x39: // '~'
+    case CHAR_ZWS:
+    case CHAR_INV_QUESTION_MARK:
+    case CHAR_INV_EXCL_MARK:
+    case CHAR_PK:
+    case CHAR_MN:
+    case CHAR_PERCENT:
+    case CHAR_LEFT_PAREN:
+    case CHAR_RIGHT_PAREN:
+    case CHAR_SUPER_E:
+    case CHAR_LESS_THAN:
+    case CHAR_GREATER_THAN:
+    case CHAR_SUPER_RE:
+        return TRUE;
+    }
+    return FALSE;
+}
+
+// The offset + 1 of the first kana the printer would draw with the English font (where it shows
+// as Latin accents), or 0 if there is none. Follows the printer's starting mode and {JPN}/{ENG}/{AUTO}.
+// The text must already have its placeholders expanded.
+u32 FindTextModeMismatch(const u8 *str)
+{
+    const u8 *start = str;
+    bool32 japanese = IsJapaneseTextMode(str);
+
+    while (*str != EOS)
+    {
+        u8 c = *str++;
+
+        switch (c)
+        {
+        case EXT_CTRL_CODE_BEGIN:
+            switch (*str)
+            {
+            case EXT_CTRL_CODE_JPN:
+            case EXT_CTRL_CODE_KANJI:
+                japanese = TRUE;
+                break;
+            case EXT_CTRL_CODE_ENG:
+                japanese = FALSE;
+                break;
+            case EXT_CTRL_CODE_AUTO:
+                japanese = TextAutoModeFromNextChar(str + 1);
+                break;
+            }
+            str += max(1, GetExtCtrlCodeLength(*str));
+            break;
+        case PLACEHOLDER_BEGIN:
+        case CHAR_DYNAMIC:
+        case CHAR_EXTRA_SYMBOL:
+        case CHAR_KEYPAD_ICON:
+            if (*str != EOS)
+                str++;
+            break;
+        default:
+            if (!japanese && IsJapaneseGlyph(c) && !IsEnglishSymbol(c))
+                return str - start;
+            break;
+        }
+    }
+    return 0;
 }
 
 bool32 IsJapaneseTextMode(const u8 *str)

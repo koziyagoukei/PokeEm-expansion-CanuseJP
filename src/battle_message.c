@@ -3114,6 +3114,7 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst, u32 dstSize)
     u8 *textStart = &text[0];
     u8 multiplayerId;
     u8 fontId = FONT_NORMAL;
+    u8 mode = 0; // the language mode of the message's own text
 
     if (dstSize == 0)
         return 0;
@@ -3692,7 +3693,11 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst, u32 dstSize)
 
             if (toCpy != NULL)
             {
+                u8 restore[3] = {EXT_CTRL_CODE_BEGIN, GetTextModeToRestore(mode, GetTextModeCode(toCpy, NULL)), EOS};
+
                 if (!AppendBattleString(dst, &dstID, dstSize, toCpy, TRUE))
+                    goto finish;
+                if (restore[1] != 0 && !AppendBattleString(dst, &dstID, dstSize, restore, FALSE))
                     goto finish;
             }
 
@@ -3708,6 +3713,8 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst, u32 dstSize)
             u32 size = AppendBattleStringToken(dst, &dstID, dstSize, src, FALSE);
             if (size == 0)
                 goto finish;
+            if (*src == EXT_CTRL_CODE_BEGIN)
+                mode = UpdateTextModeCode(mode, src[1]);
             src += size;
             continue;
         }

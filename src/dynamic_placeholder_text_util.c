@@ -22,11 +22,14 @@ void DynamicPlaceholderTextUtil_SetPlaceholderPtr(u8 idx, const u8 *ptr)
 
 u8 *DynamicPlaceholderTextUtil_ExpandPlaceholders(u8 *dest, const u8 *src)
 {
+    u8 mode = 0;
+
     while (*src != EOS)
     {
         if (*src == EXT_CTRL_CODE_BEGIN)
         {
             u32 length = 1 + max(1, GetExtCtrlCodeLength(src[1]));
+            mode = UpdateTextModeCode(mode, src[1]);
             while (length--)
                 *dest++ = *src++;
         }
@@ -45,7 +48,13 @@ u8 *DynamicPlaceholderTextUtil_ExpandPlaceholders(u8 *dest, const u8 *src)
             const u8 *placeholder = DynamicPlaceholderTextUtil_GetPlaceholderPtr(*src);
             if (placeholder != NULL)
             {
+                u8 restore = GetTextModeToRestore(mode, GetTextModeCode(placeholder, NULL));
                 dest = StringCopy(dest, placeholder);
+                if (restore != 0)
+                {
+                    *dest++ = EXT_CTRL_CODE_BEGIN;
+                    *dest++ = restore;
+                }
             }
             src++;
         }

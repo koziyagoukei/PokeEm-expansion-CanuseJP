@@ -809,10 +809,11 @@ TEST("Contest names: first judging expands trainer and Rayquaza names without re
     Contest_CopyDisplayName(gStringVar3, COMPOUND_STRING("{JPN}レックウザ"));
     u8 expected[160];
     u8 actual[160];
+    // Contest names end in {AUTO}, so the expansion gives the text after each one back to Japanese.
     u8 *end = StringCopy(expected, gStringVar1);
-    end = StringCopy(end, COMPOUND_STRING("さんの "));
+    end = StringCopy(end, COMPOUND_STRING("{JPN}さんの "));
     end = StringCopy(end, gStringVar3);
-    end = StringCopy(end, COMPOUND_STRING(" です!"));
+    end = StringCopy(end, COMPOUND_STRING("{JPN} です!"));
     memset(actual, 0xCC, sizeof(actual));
     u8 *actualEnd = StringExpandPlaceholders(actual, COMPOUND_STRING("{STR_VAR_1}さんの {STR_VAR_3} です!"));
     EXPECT_EQ(actualEnd - actual, end - expected);

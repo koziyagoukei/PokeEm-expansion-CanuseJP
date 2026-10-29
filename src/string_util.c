@@ -343,23 +343,82 @@ u8 *ConvertIntToHexStringN(u8 *dest, s32 value, enum StringConvertMode mode, u8 
     return dest;
 }
 
+// The language mode a control code leaves the text in. KANJI switches to Japanese like JPN.
+u8 UpdateTextModeCode(u8 mode, u8 code)
+{
+    if (code == EXT_CTRL_CODE_JPN || code == EXT_CTRL_CODE_KANJI)
+        return EXT_CTRL_CODE_JPN;
+    if (code == EXT_CTRL_CODE_ENG || code == EXT_CTRL_CODE_AUTO)
+        return code;
+    return mode;
+}
+
+// The last language mode a text sets (JPN, ENG or AUTO), or 0 if it sets none.
+// Stops at EOS, or at end when it is not NULL.
+u8 GetTextModeCode(const u8 *str, const u8 *end)
+{
+    u8 mode = 0;
+
+    while (str != end && *str != EOS)
+    {
+        if (*str == EXT_CTRL_CODE_BEGIN)
+        {
+            mode = UpdateTextModeCode(mode, str[1]);
+            str += 1 + max(1, GetExtCtrlCodeLength(str[1]));
+        }
+        else if (*str == CHAR_EXTRA_SYMBOL || *str == CHAR_KEYPAD_ICON)
+        {
+            str += 2;
+        }
+        else
+        {
+            str++;
+        }
+    }
+    return mode;
+}
+
+// Inserted text (an {ENG} number, a contest name read with {AUTO}) can leave the printer in another
+// language mode. Returns the code that gives the following text back its own mode, or 0 if none is needed.
+u8 GetTextModeToRestore(u8 outerMode, u8 insertedMode)
+{
+    if (outerMode == 0)
+        outerMode = TEXT_JAPANESE_BY_DEFAULT ? EXT_CTRL_CODE_JPN : EXT_CTRL_CODE_ENG;
+    if (insertedMode == 0 || insertedMode == outerMode)
+        return 0;
+    return outerMode;
+}
+
 u8 *StringExpandPlaceholders(u8 *dest, const u8 *src)
 {
+    u8 mode = 0;
+
     for (;;)
     {
         u8 c = *src++;
         u8 placeholderId;
         const u8 *expandedString;
+        u8 *inserted;
+        u8 restore;
 
         switch (c)
         {
         case PLACEHOLDER_BEGIN:
             placeholderId = *src++;
             expandedString = GetExpandedPlaceholder(placeholderId);
+            inserted = dest;
             dest = StringExpandPlaceholders(dest, expandedString);
+            restore = GetTextModeToRestore(mode, GetTextModeCode(inserted, dest));
+            if (restore != 0)
+            {
+                *dest++ = EXT_CTRL_CODE_BEGIN;
+                *dest++ = restore;
+                *dest = EOS;
+            }
             break;
         case EXT_CTRL_CODE_BEGIN:
             *dest++ = c;
+            mode = UpdateTextModeCode(mode, *src);
             {
                 u32 length = max(1, GetExtCtrlCodeLength(*src));
                 while (length--)

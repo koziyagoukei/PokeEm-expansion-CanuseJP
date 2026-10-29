@@ -50,6 +50,9 @@ u8 *WriteColorChangeControlCode(u8 *dest, enum TextColorType colorType, u8 color
 bool32 IsStringJapanese(u8 *str);
 bool32 IsStringNJapanese(u8 *str, s32 n);
 u8 GetExtCtrlCodeLength(u8 code);
+u8 UpdateTextModeCode(u8 mode, u8 code);
+u8 GetTextModeCode(const u8 *str, const u8 *end);
+u8 GetTextModeToRestore(u8 outerMode, u8 insertedMode);
 s32 StringCompareWithoutExtCtrlCodes(const u8 *str1, const u8 *str2);
 void ConvertInternationalString(u8 *s, enum Language language);
 void StripExtCtrlCodes(u8 *str);
