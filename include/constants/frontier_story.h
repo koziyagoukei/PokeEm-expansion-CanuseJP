@@ -155,4 +155,22 @@
 #define REGULAR_RANKING_HALL_GUIDE    30
 #define REGULAR_COUNT                 31
 
+// Groups of cured Brains and guests who meet on the Frontier's squares once all of them are
+// cured: talked to, they talk among themselves once and go on their way (VAR_0x8004 for
+// FrontierStory_FinishNamedTalk).
+#define NAMED_TALK_MAGMA_AQUA_LEADERS 0
+#define NAMED_TALK_MAGMA_ADMINS       1
+#define NAMED_TALK_AQUA_ADMINS        2
+#define NAMED_TALK_STEVEN_WALLACE     3
+#define NAMED_TALK_JUAN_WALLACE       4
+#define NAMED_TALK_NORMAN_WALLY       5
+#define NAMED_TALK_WINSTRATES         6
+#define NAMED_TALK_ELITE_FOUR         7
+#define NAMED_TALK_BRANDON_STEVEN     8
+#define NAMED_TALK_ANABEL_TUCKER      9
+#define NAMED_TALK_SPENSER_GRETA      10
+#define NAMED_TALK_LUCY_NOLAND        11
+#define NAMED_TALK_COUNT              12
+#define NAMED_TALK_MAX_MEMBERS        5
+
 #endif // GUARD_CONSTANTS_FRONTIER_STORY_H

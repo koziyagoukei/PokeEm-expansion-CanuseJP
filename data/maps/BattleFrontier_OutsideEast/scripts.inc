@@ -16,6 +16,7 @@ BattleFrontier_OutsideEast_EventScript_TryRemoveSudowoodo::
 BattleFrontier_OutsideEast_OnTransition:
 	setvar VAR_BRAVO_TRAINER_BATTLE_TOWER_ON, 0
 	setflag FLAG_HIDE_BATTLE_TOWER_REPORTER
+	special FrontierStory_SetupNamedTalks
 	call_if_unset FLAG_DEFEATED_SUDOWOODO, BattleFrontier_OutsideEast_EventScript_ShowSudowoodo
 	end
 

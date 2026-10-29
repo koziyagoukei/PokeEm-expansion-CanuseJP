@@ -24,6 +24,7 @@
 #include "constants/event_object_movement.h"
 #include "constants/event_objects.h"
 #include "constants/frontier_util.h"
+#include "constants/maps.h"
 #include "constants/vars.h"
 
 #include "data/frontier_story_named.h"
@@ -31,6 +32,7 @@
 #include "data/frontier_story_contest.h"
 #include "data/frontier_crowd_talk.h"
 #include "data/frontier_regulars.h"
+#include "data/frontier_named_talks.h"
 
 // The Frontier never asks for less than level 50, so story battles don't either.
 #define STORY_BATTLE_MIN_LEVEL 50
@@ -1023,6 +1025,75 @@ bool32 FrontierStory_BufferRegularLine(u32 regular, u32 phase)
 void FrontierStory_BufferRegularTalk(void)
 {
     FrontierStory_BufferRegularLine(gSpecialVar_0x8004, FrontierStory_GetRegularPhase());
+}
+
+// All of the group are cured and they have not talked yet.
+static bool32 IsNamedTalkWaiting(u32 talk)
+{
+    u32 i;
+
+    if (!IsStoryActive() || FlagGet(FLAG_STORY_NAMED_TALKS_START + talk))
+        return FALSE;
+    for (i = 0; i < sNamedTalks[talk].count; i++)
+    {
+        if (GetNamedState(sNamedTalks[talk].members[i]) != NAMED_STORY_RESCUED)
+            return FALSE;
+    }
+    return TRUE;
+}
+
+static bool32 DoNamedTalksShareSomeone(u32 a, u32 b)
+{
+    u32 i, j;
+
+    for (i = 0; i < sNamedTalks[a].count; i++)
+    {
+        for (j = 0; j < sNamedTalks[b].count; j++)
+        {
+            if (sNamedTalks[a].members[i] == sNamedTalks[b].members[j])
+                return TRUE;
+        }
+    }
+    return FALSE;
+}
+
+// Waiting, and nobody in it is waiting for an earlier talk first: one person is in one place.
+bool32 FrontierStory_IsNamedTalkShown(u32 talk)
+{
+    u32 earlier;
+
+    if (talk >= NAMED_TALK_COUNT || !IsNamedTalkWaiting(talk))
+        return FALSE;
+    for (earlier = 0; earlier < talk; earlier++)
+    {
+        if (IsNamedTalkWaiting(earlier) && DoNamedTalksShareSomeone(earlier, talk))
+            return FALSE;
+    }
+    return TRUE;
+}
+
+// While a square loads: the groups that meet there stand there if they are to be shown.
+void FrontierStory_SetupNamedTalks(void)
+{
+    u32 talk;
+
+    for (talk = 0; talk < NAMED_TALK_COUNT; talk++)
+    {
+        if (MAP_GROUP(sNamedTalks[talk].map) != gSaveBlock1Ptr->location.mapGroup
+         || MAP_NUM(sNamedTalks[talk].map) != gSaveBlock1Ptr->location.mapNum)
+            continue;
+        if (FrontierStory_IsNamedTalkShown(talk))
+            FlagClear(sNamedTalks[talk].hideFlag);
+        else
+            FlagSet(sNamedTalks[talk].hideFlag);
+    }
+}
+
+// VAR_0x8004: the talk just seen.
+void FrontierStory_FinishNamedTalk(void)
+{
+    if (gSpecialVar_0x8004 < NAMED_TALK_COUNT)
+        FlagSet(FLAG_STORY_NAMED_TALKS_START + gSpecialVar_0x8004);
 }
 
 static bool32 TryGetLocalObject(u16 localId, struct ObjectEvent **object)

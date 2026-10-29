@@ -739,3 +739,5 @@ gSpecials::
 	def_special FrontierStory_PrepareFinalBattle
 	def_special FrontierStory_ShouldGather
 	def_special FrontierStory_ShowEnding
+	def_special FrontierStory_SetupNamedTalks
+	def_special FrontierStory_FinishNamedTalk

@@ -150,6 +150,7 @@ gStdScripts_End::
 	.include "data/scripts/frontier_intro.inc"
 	.include "data/scripts/frontier_story.inc"
 	.include "data/scripts/frontier_final.inc"
+	.include "data/scripts/frontier_named_talks.inc"
 	.include "data/scripts/frontier_practice.inc"
 	.include "data/maps/BattleColosseum_2P/scripts.inc"
 	.include "data/maps/TradeCenter/scripts.inc"

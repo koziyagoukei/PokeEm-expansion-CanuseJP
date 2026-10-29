@@ -92,6 +92,9 @@
 #define FLAG_STORY_PATH_OPEN           FLAG_UNUSED_0x031
 #define FLAG_STORY_DEPTHS_ENTERED      FLAG_UNUSED_0x032
 #define FLAG_STORY_DEPTHS_HELIX_TALK   FLAG_UNUSED_0x033
+// One per NAMED_TALK_*, consecutive: the talk was seen and its people went on their way.
+#define FLAG_STORY_NAMED_TALKS_START   FLAG_UNUSED_0x034
+#define FLAG_STORY_NAMED_TALKS_END     FLAG_UNUSED_0x03F
 #define FLAG_UNUSED_0x034    0x34 // Unused Flag
 #define FLAG_UNUSED_0x035    0x35 // Unused Flag
 #define FLAG_UNUSED_0x036    0x36 // Unused Flag
