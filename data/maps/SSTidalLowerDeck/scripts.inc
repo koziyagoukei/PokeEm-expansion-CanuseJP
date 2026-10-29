@@ -31,7 +31,5 @@ SSTidalLowerDeck_Text_LeonardDefeat:
 	.string "あにき まけちまったよ！$"
 
 SSTidalLowerDeck_Text_LeonardPostBattle:
-	.string "おれたち おそうじ ブラザーズ！\p"
-	.string "あにきが ぜんざい ぶちまけてー\n"
-	.string "おとうと せっせと みがくのさー$"
+	.string "{JPN}おれたち おそうじ ブラザーズ!\pあにきが せんざい ぶちまけてー\nおとうと せっせと みがくのさー$"
 

@@ -44,9 +44,7 @@ EventScript_CancelCut::
 	end
 
 Text_WantToCut:
-	.string "・・・・このきは なんだか\n"
-	.string "きれそうだ！\p"
-	.string "いあいぎりで きりますか？$"
+	.string "{JPN}……このきは なんだか\nきれそうだ!\pいあいぎりで きりますか?$"
 
 Text_MonUsedFieldMove:
 	.string "{STR_VAR_1} は\n{STR_VAR_2}を つかった！$"
@@ -217,8 +215,7 @@ Text_WantToSmash:
 	.string "{JPN}ポケモンの わざで こわせそうだ！\n"
 	.string "{0xB0}{0xB0}いわくだきを つかいますか？$"
 Text_CantSmash:
-	.string "かたそうな いわ だけど・・・・\n"
-	.string "ポケモンの わざで こわせるかも？$"
+	.string "{JPN}かたそうな いわ だけど……\nポケモンの わざで こわせるかも?$"
 
 EventScript_StrengthBoulder::
 	lockall

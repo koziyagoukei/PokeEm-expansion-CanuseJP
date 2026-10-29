@@ -63,6 +63,8 @@ def classify(text: str):
     visible = re.sub(r"\{[^}]+\}|\\[nlpr]|\$", " ", text)
     visible = re.sub(r"\s+", " ", visible).strip()
     words = [word for word in WORDS.findall(visible) if word not in ABBREVIATIONS]
+    if re.search(r"(?:\}|[A-Za-z])['’]s\b", text):
+        words.append("'s")
     japanese = bool(JAPANESE.search(visible))
     if words:
         status = "mixed" if japanese else "english"
