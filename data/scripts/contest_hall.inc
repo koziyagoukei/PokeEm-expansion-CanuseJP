@@ -1467,10 +1467,10 @@ LilycoveCity_ContestLobby_Text_ComeBackForPrizeLater:
 	.string "{JPN}それでは また あとで\nとりに きて くださいね!$"
 
 ContestHall_Text_GettingStartedParticipantsAsFollows:
-	.string "{JPN}司会『はい! これより\n{STR_VAR_3} ランクの\lポケモン {STR_VAR_2}コンテストが\lはじまります!\p出場 される トレーナーと\nポケモンの みなさんは こちら!$"
+	.string "{JPN}司会『はい! これより\n{STR_VAR_3} ランクの\lポケモン {STR_VAR_2}が\lはじまります!\p出場 される トレーナーと\nポケモンの みなさんは こちら!$"
 
 ContestHall_Text_GettingStartedParticipantsAsFollowsLink:
-	.string "{JPN}司会『はい! これより\nおともだち 4にん 通信の\lポケモン {STR_VAR_2}コンテストが\lはじまります!\p出場 される トレーナーと\nポケモンの みなさんは こちら!$"
+	.string "{JPN}司会『はい! これより\nおともだち 4にん 通信の\lポケモン {STR_VAR_2}が\lはじまります!\p出場 される トレーナーと\nポケモンの みなさんは こちら!$"
 
 ContestHall_Text_EntryXTrainersMon:
 	.string "{JPN}司会『エントリーナンバー {STR_VAR_2}ばん!\n{STR_VAR_1}さんの {STR_VAR_3} です!$"
@@ -1615,7 +1615,7 @@ LilycoveCity_ContestLobby_Text_WhichContestMode:
 	.string "{JPN}どの モードで\nコンテストに 参加しますか?$"
 
 ContestHall_Text_GettingStartedWireless:
-	.string "{JPN}司会『はい! これより\nおともだち 4にん 通信の\lポケモン {STR_VAR_2}コンテストが\lはじまります!$"
+	.string "{JPN}司会『はい! これより\nおともだち 4にん 通信の\lポケモン {STR_VAR_2}が\lはじまります!$"
 
 ContestHall_Text_ParticipantsAsFollows:
 	.string "{JPN}出場 される トレーナーと\nポケモンの みなさんは こちら!$"
