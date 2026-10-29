@@ -331,43 +331,33 @@ BattleFrontier_ExchangeServiceCorner_EventScript_RichBoy::
 	goto FrontierStory_EventScript_RegularTalk
 
 BattleFrontier_ExchangeServiceCorner_Text_WelcomePleaseChoosePrize:
-	.string "こんにちは こちらは\n"
-	.string "こうかんサービスコーナーです\p"
-	.string "あつめた バトルポイントを\n"
-	.string "すてきな しょうひんと こうかんします\p"
-	.string "リストから しょうひんを えらんでください$"
+	.string "{JPN}ひきかえサービス コーナーへ\nようこそ!\pこちらでは おきゃくさまの ためた\nバトルポイントと すてきな けいひんを\lこうかん いたします!\pでは けいひんを おえらび ください!$"
 
 @ Unused
 BattleFrontier_ExchangeServiceCorner_Text_PleaseChoosePrize:
-	.string "{JPN}リストから しょうひんを えらんでください$"
+	.string "{JPN}では けいひんを おえらび ください$"
 
 BattleFrontier_ExchangeServiceCorner_Text_ConfirmPurchase:
 	.string "{STR_VAR_1}を えらびました\n"
 	.string "よろしいですか？$"
 
 BattleFrontier_ExchangeServiceCorner_Text_WellSendItToPC:
-	.string "ありがとうございます！\n"
-	.string "じたくの パソコンに おくります$"
+	.string "{JPN}ありがとう ございます!\pごじたくの パソコンに\nおおくりして おきますね$"
 
 BattleFrontier_ExchangeServiceCorner_Text_HereIsYourPrize:
-	.string "しょうひんを どうぞ！$"
+	.string "{JPN}どうぞ おうけとりください!$"
 
 BattleFrontier_ExchangeServiceCorner_Text_DontHaveEnoughPoints:
-	.string "もうしわけ ありません……\n"
-	.string "バトルポイントが たりません……$"
+	.string "{JPN}おきゃくさま……\nバトルポイントが たりません……$"
 
 BattleFrontier_ExchangeServiceCorner_Text_PCIsFull:
-	.string "もうしわけ ありません……\n"
-	.string "パソコンが いっぱいのようです……$"
+	.string "{JPN}おきゃくさま……\nパソコンが いっぱいの ようです……$"
 
 BattleFrontier_ExchangeServiceCorner_Text_DontHaveSpaceToHoldIt:
-	.string "もうしわけ ありません……\n"
-	.string "もちものが いっぱいのようです……$"
+	.string "{JPN}おきゃくさま……\nそれいじょう もつことは できません……$"
 
 BattleFrontier_ExchangeServiceCorner_Text_ThankYouVisitWithPoints:
-	.string "ありがとうございました\p"
-	.string "バトルポイントを ためたら\n"
-	.string "また おこしください$"
+	.string "{JPN}ありがとう ございました\pバトルポイントが たまりましたら\nまた おこしください$"
 
 BattleFrontier_ExchangeServiceCorner_Text_KissPosterDesc::
 	.string "{JPN}ムチュールが プリント されている\nおおきなポスター$"

@@ -51,7 +51,8 @@ def engine_code():
     result.append("const struct FontInfo *gFonts = sFontInfos;")
     result.append(re.search(r"^struct\n\{\n    u16 tileOffset;.*?^\};",
                             text, re.M | re.S)[0])
-    for name in ("GetExtCtrlCodeLength", "StringCopy", "StringLength", "StringCopyN",
+    for name in ("GetExtCtrlCodeLength", "UpdateTextModeCode", "GetTextModeCode", "GetTextModeToRestore",
+                 "StringCopy", "StringLength", "StringCopyN",
                  "StringCopyN_Multibyte", "StringLength_Multibyte", "SkipExtCtrlCode",
                  "StringCompareWithoutExtCtrlCodes", "StripExtCtrlCodes", "StringCopyUppercase", "StringExpandPlaceholders", "ConvertInternationalString"):
         result.append(function(strings, name))
@@ -59,7 +60,7 @@ def engine_code():
     for name in ("DynamicPlaceholderTextUtil_Reset", "DynamicPlaceholderTextUtil_SetPlaceholderPtr",
                  "DynamicPlaceholderTextUtil_GetPlaceholderPtr", "DynamicPlaceholderTextUtil_ExpandPlaceholders"):
         result.append(function(dynamic, name))
-    for name in ("IsJapaneseGlyph", "ShouldUseJapaneseGlyph", "ResolveTextMode", "IsJapaneseTextMode",
+    for name in ("IsJapaneseGlyph", "ShouldUseJapaneseGlyph", "IsLatinLetter", "ResolveTextMode", "IsJapaneseTextMode",
                  "TextAutoModeFromNextChar", "IsSmallKanjiFont", "GetKanjiGlyphSlot", "DecompressKanjiGlyph", "GetJapaneseGlyphWidth", "DecompressJapaneseSpaceGlyph"):
         result.append(function(text, name))
     suffixes = ("Small", "Normal", "Short", "Narrow", "SmallNarrow", "Narrower",

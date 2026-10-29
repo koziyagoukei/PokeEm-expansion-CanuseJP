@@ -493,6 +493,7 @@ const struct NatureInfo gNaturesInfo[NUM_NATURES] =
 #include "data/object_events/object_event_pic_tables_followers.h"
 
 #include "data/pokemon/species_info.h"
+#include "data/pokemon/pokedex_text_selected.h"
 
 #define PP_UP_SHIFTS(val)           val,        (val) << 2,        (val) << 4,        (val) << 6
 #define PP_UP_SHIFTS_INV(val) (u8)~(val), (u8)~((val) << 2), (u8)~((val) << 4), (u8)~((val) << 6)
@@ -3244,6 +3245,10 @@ const u8 *GetSpeciesPokedexDescription(enum Species species)
     species = SanitizeSpeciesId(species);
     if (gSpeciesInfo[species].description == NULL)
         return gSpeciesInfo[SPECIES_NONE].description;
+#if P_POKEDEX_TEXT_STYLE == POKEDEX_TEXT_KANJI
+    if (sPokedexKanjiDescriptions[species] != NULL)
+        return sPokedexKanjiDescriptions[species];
+#endif
     return gSpeciesInfo[species].description;
 }
 

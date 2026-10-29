@@ -44,12 +44,12 @@ class Generator(unittest.TestCase):
     def setUp(self):
         self.tmp = tempfile.TemporaryDirectory()
         self.root = Path(self.tmp.name)
-        for name in ("charmap.txt", "charmap_kanji.txt", gen.ATLAS_PNG, gen.ATLAS_TXT):
+        for name in ("charmap.txt", gen.ATLAS_PNG, gen.ATLAS_TXT):
             (self.root / name).parent.mkdir(parents=True, exist_ok=True)
             shutil.copy(ROOT / name, self.root / name)
         # Start with the historical prototype, not the evolving game's ledger.
-        entries = gen.read_ledger(self.root / gen.LEDGER)[:len(PROTOTYPE)]
-        (self.root / gen.LEDGER).write_text(gen.ledger_text(entries), encoding="utf-8")
+        self.seed_ledger = gen.ledger_text([(c, i, None) for i, c in enumerate(PROTOTYPE, 1)])
+        (self.root / gen.LEDGER).write_text(self.seed_ledger, encoding="utf-8")
         self.source("src/prototype.c", "static const u8 sText[] = _(\"{KANJI}%s\");\n" % PROTOTYPE)
 
     def tearDown(self):
@@ -107,8 +107,7 @@ class Generator(unittest.TestCase):
         self.run_update()
         first = self.ledger()
         shutil.rmtree(self.root / gen.OUT_DIR)
-        (self.root / gen.LEDGER).write_text(
-            gen.ledger_text([(c, i, None) for i, c in enumerate(PROTOTYPE, 1)]), encoding="utf-8")
+        (self.root / gen.LEDGER).write_text(self.seed_ledger, encoding="utf-8")
         os.rename(self.root / "src/z.c", self.root / "src/0.c")
         os.rename(self.root / "src/a.c", self.root / "src/zz.c")
         self.run_update()
@@ -167,7 +166,7 @@ class Generator(unittest.TestCase):
         path.unlink()
         with self.assertRaisesRegex(gen.KanjiError, "persistent ID ledger"):
             self.run_update()
-        shutil.copy(ROOT / gen.LEDGER, path)
+        path.write_text(self.seed_ledger, encoding="utf-8")
         path.write_text(path.read_text(encoding="utf-8").replace("FC 1F 01", "FC 20 01"), encoding="utf-8")
         with self.assertRaisesRegex(gen.KanjiError, "legacy glyph"):
             self.run_update()
@@ -231,7 +230,7 @@ class Generator(unittest.TestCase):
         with self.assertRaises(gen.KanjiError) as error:
             self.run_update()
         self.assertIn("collides", str(error.exception))
-        shutil.copy(ROOT / gen.LEDGER, self.root / gen.LEDGER)
+        (self.root / gen.LEDGER).write_text(self.seed_ledger, encoding="utf-8")
         with open(self.root / gen.LEDGER, "a", encoding="utf-8") as f:
             f.write("'円' = FC 1F 1A\n")
         with self.assertRaises(gen.KanjiError) as error:
@@ -305,10 +304,11 @@ class SaveLinkChecks(unittest.TestCase):
         self.checks = save_link_checks
         self.tmp = tempfile.TemporaryDirectory()
         self.root = Path(self.tmp.name)
-        for name in ("charmap.txt", "charmap_kanji.txt") + save_link_checks.LIMIT_HEADERS:
+        for name in ("charmap.txt",) + save_link_checks.LIMIT_HEADERS:
             (self.root / name).parent.mkdir(parents=True, exist_ok=True)
             shutil.copy(ROOT / name, self.root / name)
-        self.entries = gen.read_ledger(self.root / gen.LEDGER)[:len(PROTOTYPE)] + [("天", 26, None)]
+        self.entries = [(c, i, None) for i, c in enumerate(PROTOTYPE, 1)] + [("天", 26, None)]
+        (self.root / gen.LEDGER).write_text(gen.ledger_text(self.entries), encoding="utf-8")
 
     def tearDown(self):
         self.tmp.cleanup()
