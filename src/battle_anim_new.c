@@ -1,5 +1,6 @@
 #include "global.h"
 #include "battle_anim.h"
+#include "contest.h"
 #include "item_menu_icons.h"
 #include "sprite.h"
 #include "random.h"
@@ -8063,10 +8064,12 @@ void AnimTask_GetTimeOfDay(u8 taskId)
 
 void AnimTask_GetLycanrocForm(u8 taskId)
 {
+    enum Species species = IsContest() ? gContestResources->moveAnim->species : gBattleMons[gBattleAnimAttacker].species;
+
     gBattleAnimArgs[0] = 0;
-    if (gBattleMons[gBattleAnimAttacker].species == SPECIES_LYCANROC_MIDNIGHT)
+    if (species == SPECIES_LYCANROC_MIDNIGHT)
         gBattleAnimArgs[0] = 1;
-    else if (gBattleMons[gBattleAnimAttacker].species == SPECIES_LYCANROC_DUSK)
+    else if (species == SPECIES_LYCANROC_DUSK)
         gBattleAnimArgs[0] = 2;
 
     DestroyAnimVisualTask(taskId);

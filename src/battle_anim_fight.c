@@ -938,7 +938,12 @@ void AnimSuperpowerFireball(struct Sprite *sprite)
         sprite->oam.priority = GetBattlerSpriteBGPriority(gBattleAnimTarget);
     }
 
-    if (IsContest())
+    // Affine sprites use these OAM bits as a matrix index, not flip flags.
+    if (sprite->oam.affineMode & ST_OAM_AFFINE_ON_MASK)
+        TrySetSpriteRotScale(sprite, FALSE,
+                            IsContest() || IsOnPlayerSide(battler) ? -0x100 : 0x100,
+                            !IsContest() && IsOnPlayerSide(battler) ? -0x100 : 0x100, 0);
+    else if (IsContest())
         sprite->oam.matrixNum |= ST_OAM_HFLIP;
     else if (IsOnPlayerSide(battler))
         sprite->oam.matrixNum |= (ST_OAM_HFLIP | ST_OAM_VFLIP);
