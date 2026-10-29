@@ -117,6 +117,12 @@ static u32 GetGuestNamedId(u16 trainerId)
     return trainerId - TRAINER_FRONTIER_GUEST_FIRST;
 }
 
+bool32 FrontierStory_IsGuestRescued(u16 trainerId)
+{
+    u32 id = GetGuestNamedId(trainerId);
+    return IsStoryActive() && id != NAMED_STORY_NONE && GetNamedState(id) == NAMED_STORY_RESCUED;
+}
+
 static const u8 *GetNamedName(u32 id)
 {
     if (id < NAMED_STORY_GUEST_COUNT)

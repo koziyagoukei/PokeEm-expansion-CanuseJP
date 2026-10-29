@@ -1,5 +1,6 @@
 #include "global.h"
 #include "battle.h"
+#include "battle_main.h"
 #include "party_menu.h"
 #include "pokemon.h"
 #include "test/test.h"
@@ -17,6 +18,50 @@ static void SetTestPartySize(enum BattleTrainer trainer, u8 partySize)
         CreateMon(&gParties[trainer][i], SPECIES_WOBBUFFET, 50, 0, OTID_STRUCT_PRESET(0));
 
     gPartiesCount[trainer] = partySize;
+}
+
+TEST("Multi party preview uses one page for three allies each even against a six-Pokemon opponent")
+{
+    struct MultiPartnerMenuPokemon partner[PARTY_SIZE] = {0};
+    struct MultiPartnerMenuPokemon *savedPartner = gMultiPartnerParty;
+    gMultiPartnerParty = partner;
+    SetTestPartySize(B_TRAINER_PLAYER, MULTI_PARTY_SIZE);
+    SetTestPartySize(B_TRAINER_OPPONENT_A, PARTY_SIZE);
+    for (u32 slot = 0; slot < MULTI_PARTY_SIZE; slot++)
+        partner[slot].species = SPECIES_WOBBUFFET;
+
+    EXPECT(!Test_MultiPartyPreviewNeedsFullLayout());
+    gMultiPartnerParty = savedPartner;
+}
+
+TEST("Multi party preview preserves additional player or partner Pokemon")
+{
+    u32 playerSize = 3;
+    u32 partnerSize = 3;
+    PARAMETRIZE { playerSize = 4; partnerSize = 3; }
+    PARAMETRIZE { playerSize = 3; partnerSize = 4; }
+    PARAMETRIZE { playerSize = 6; partnerSize = 6; }
+    struct MultiPartnerMenuPokemon partner[PARTY_SIZE] = {0};
+    struct MultiPartnerMenuPokemon *savedPartner = gMultiPartnerParty;
+    gMultiPartnerParty = partner;
+    SetTestPartySize(B_TRAINER_PLAYER, playerSize);
+    for (u32 slot = 0; slot < partnerSize; slot++)
+        partner[slot].species = SPECIES_WOBBUFFET;
+
+    EXPECT(Test_MultiPartyPreviewNeedsFullLayout());
+    gMultiPartnerParty = savedPartner;
+}
+
+TEST("Multi party preview also detects a nonempty last slot after a gap")
+{
+    struct MultiPartnerMenuPokemon partner[PARTY_SIZE] = {0};
+    struct MultiPartnerMenuPokemon *savedPartner = gMultiPartnerParty;
+    gMultiPartnerParty = partner;
+    SetTestPartySize(B_TRAINER_PLAYER, MULTI_PARTY_SIZE);
+    partner[PARTY_SIZE - 1].species = SPECIES_WOBBUFFET;
+
+    EXPECT(Test_MultiPartyPreviewNeedsFullLayout());
+    gMultiPartnerParty = savedPartner;
 }
 
 TEST("Full multi partner party menu stops down navigation at partner party count")

@@ -1,4 +1,5 @@
 #include "global.h"
+#include "party_bath_expansion.h"
 #include "malloc.h"
 #include "battle.h"
 #include "battle_setup.h"
@@ -1157,6 +1158,8 @@ static u32 GetActiveMatchCallTrainerId(u32 activeMatchCallId)
 */
 bool32 TryStartMatchCall(void)
 {
+    if (PartyBath_TryStartExpansionCall())
+        return TRUE;
     if (FlagGet(FLAG_HAS_MATCH_CALL)
         && UpdateMatchCallStepCounter()
         && UpdateMatchCallMinutesCounter()

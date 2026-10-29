@@ -8,7 +8,8 @@
     "gMapGroup_SpecialArea",
     "gMapGroup_IndoorMiniMiniVilla",
     "gMapGroup_RestorationInn",
-    "gMapGroup_PokevirusDepths"
+    "gMapGroup_PokevirusDepths",
+    "gMapGroup_PartyBathExpansion"
   ],
   "gMapGroup_TownsAndRoutes": [
     "ultra_frontie_hub",
@@ -148,5 +149,12 @@
     "PokevirusDepths_Approach",
     "PokevirusDepths_Helix",
     "PokevirusDepths_Core"
+  ],
+  "gMapGroup_PartyBathExpansion": [
+    "PartyBath_Rock",
+    "PartyBath_Waterfall",
+    "PartyBath_Sauna",
+    "PartyBath_Deep",
+    "PartyBath_Underwater"
   ]
 }

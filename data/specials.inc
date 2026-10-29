@@ -745,3 +745,6 @@ gSpecials::
 	def_special FrontierPokevirus_Name
 	def_special FrontierPokevirus_Register
 	def_special FrontierPokevirus_ShowRecord
+	def_special PartyBath_GetPendingCall
+	def_special PartyBath_CompleteCall
+	def_special PartyBath_CheckExpansion

@@ -1,4 +1,5 @@
 #include "global.h"
+#include "party_bath_expansion.h"
 #include "malloc.h"
 #include "battle.h"
 #include "battle_anim.h"
@@ -1541,6 +1542,7 @@ static bool8 CanEnterPartyRoamerParkFromPartyMenu(void)
         && gPartyMenu.layout == PARTY_LAYOUT_SINGLE
         && gPartyMenu.action == PARTY_ACTION_CHOOSE_MON
         && !InBattleFacilityChallenge()
+        && !PartyBath_IsMap()
         && (gSaveBlock1Ptr->location.mapGroup != MAP_GROUP(MAP_PARTY_ROAMER_PARK)
          || gSaveBlock1Ptr->location.mapNum != MAP_NUM(MAP_PARTY_ROAMER_PARK))
         && (gSaveBlock1Ptr->location.mapGroup != MAP_GROUP(MAP_PARTY_EAT_TIME)
@@ -8092,9 +8094,21 @@ static void CB2_SetUpExitToBattleScreen(void)
     SetMainCallback2(CB2_SetUpReshowBattleScreenAfterMenu);
 }
 
+static bool32 MultiPartyPreviewNeedsFullLayout(void)
+{
+    // A single six-Pokemon opponent does not require two six-slot ally pages.
+    for (u32 slot = MULTI_PARTY_SIZE; slot < PARTY_SIZE; slot++)
+    {
+        if (GetMonData(&gParties[B_TRAINER_PLAYER][slot], MON_DATA_SPECIES) != SPECIES_NONE
+         || gMultiPartnerParty[slot].species != SPECIES_NONE)
+            return TRUE;
+    }
+    return FALSE;
+}
+
 void ShowPartyMenuToShowcaseMultiBattleParty(void)
 {
-    if (AreMultiPartiesFullTeams())
+    if (AreMultiPartiesFullTeams() && MultiPartyPreviewNeedsFullLayout())
         InitPartyMenu(PARTY_MENU_TYPE_MULTI_FULL_SHOWCASE, PARTY_LAYOUT_MULTI_FULL_SHOWCASE, PARTY_ACTION_CHOOSE_MON, FALSE, PARTY_MSG_NONE, Task_WaitBeforeMultiPartnerFullParty, gMain.savedCallback);
     else
         InitPartyMenu(PARTY_MENU_TYPE_MULTI_SHOWCASE, PARTY_LAYOUT_MULTI_SHOWCASE, PARTY_ACTION_CHOOSE_MON, FALSE, PARTY_MSG_NONE, Task_InitMultiPartnerPartySlideIn, gMain.savedCallback);
@@ -8790,6 +8804,11 @@ static u8 IndividualToCombinedPartyId(u8 index, enum BattlerId battler)
 }
 
 #if TESTING
+bool32 Test_MultiPartyPreviewNeedsFullLayout(void)
+{
+    return MultiPartyPreviewNeedsFullLayout();
+}
+
 bool8 Test_CanEnterPartyRoamerParkFromPartyMenu(void)
 {
     return CanEnterPartyRoamerParkFromPartyMenu();

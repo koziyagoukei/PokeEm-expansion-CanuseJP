@@ -10,6 +10,7 @@
 #include "overworld.h"
 #include "palette.h"
 #include "party_roamer_park.h"
+#include "party_bath_expansion.h"
 #include "pokemon.h"
 #include "random.h"
 #include "string_util.h"
@@ -211,8 +212,7 @@ static void FieldCallback_EnterPartyRoamerPark(void)
 
 static bool8 IsInPartyBathTimeMap(void)
 {
-    return gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_PARTYBATHTIME)
-        && gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_PARTYBATHTIME);
+    return PartyBath_IsMap();
 }
 
 u16 PartyBath_GetAdditive(void)
@@ -242,7 +242,7 @@ void PartyBath_ApplyWaterPalette(bool8 skipFaded)
 {
     const u16 *colors;
     u16 additive;
-    if (!IsInPartyBathTimeMap())
+    if (!PartyBath_UsesWaterPalette())
         return;
     additive = PartyBath_GetAdditive();
     colors = additive == PARTY_BATH_FUEN
@@ -268,12 +268,12 @@ void Special_PreparePartyRoamerPark(void)
         }
 }
 
-static void IncreasePartyBathStat(struct Pokemon *mon, s32 field, u8 limit)
+static void IncreasePartyBathStat(struct Pokemon *mon, s32 field, u8 limit, u32 amount)
 {
-    u8 value = GetMonData(mon, field);
+    u32 value = GetMonData(mon, field);
     if (value < limit)
     {
-        value++;
+        value = min(value + amount, limit);
         SetMonData(mon, field, &value);
     }
 }
@@ -290,9 +290,9 @@ static void ApplyPartyBathTimeEffects(void)
         if (GetMonData(mon, MON_DATA_SPECIES) != SPECIES_NONE && !GetMonData(mon, MON_DATA_IS_EGG))
         {
             IncreasePartyBathStat(mon, sPartyBathStats[additive],
-                                 additive == PARTY_BATH_FUEN ? MAX_FRIENDSHIP : MAX_CONDITION);
+                                 additive == PARTY_BATH_FUEN ? MAX_FRIENDSHIP : MAX_CONDITION, PartyBath_GetGain());
             if (additive != PARTY_BATH_FUEN)
-                IncreasePartyBathStat(mon, MON_DATA_SHEEN, MAX_SHEEN);
+                IncreasePartyBathStat(mon, MON_DATA_SHEEN, MAX_SHEEN, 1);
         }
     }
 }

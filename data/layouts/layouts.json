@@ -1259,6 +1259,56 @@
       "border_filepath": "data/layouts/PokevirusDepths_Core/border.bin",
       "blockdata_filepath": "data/layouts/PokevirusDepths_Core/map.bin",
       "layout_version": "emerald"
+    },
+    {
+      "id": "LAYOUT_PARTY_BATH_ROCK",
+      "name": "PartyBath_Rock_Layout",
+      "width": 24,
+      "height": 20,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_PartyBathAnnex",
+      "border_filepath": "data/layouts/PartyBath_Rock/border.bin",
+      "blockdata_filepath": "data/layouts/PartyBath_Rock/map.bin"
+    },
+    {
+      "id": "LAYOUT_PARTY_BATH_WATERFALL",
+      "name": "PartyBath_Waterfall_Layout",
+      "width": 24,
+      "height": 20,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_PartyBathAnnex",
+      "border_filepath": "data/layouts/PartyBath_Waterfall/border.bin",
+      "blockdata_filepath": "data/layouts/PartyBath_Waterfall/map.bin"
+    },
+    {
+      "id": "LAYOUT_PARTY_BATH_SAUNA",
+      "name": "PartyBath_Sauna_Layout",
+      "width": 24,
+      "height": 20,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_PartyBathAnnex",
+      "border_filepath": "data/layouts/PartyBath_Sauna/border.bin",
+      "blockdata_filepath": "data/layouts/PartyBath_Sauna/map.bin"
+    },
+    {
+      "id": "LAYOUT_PARTY_BATH_DEEP",
+      "name": "PartyBath_Deep_Layout",
+      "width": 24,
+      "height": 20,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_PartyBathAnnex",
+      "border_filepath": "data/layouts/PartyBath_Deep/border.bin",
+      "blockdata_filepath": "data/layouts/PartyBath_Deep/map.bin"
+    },
+    {
+      "id": "LAYOUT_PARTY_BATH_UNDERWATER",
+      "name": "PartyBath_Underwater_Layout",
+      "width": 24,
+      "height": 20,
+      "primary_tileset": "gTileset_General",
+      "secondary_tileset": "gTileset_Underwater",
+      "border_filepath": "data/layouts/PartyBath_Underwater/border.bin",
+      "blockdata_filepath": "data/layouts/PartyBath_Underwater/map.bin"
     }
   ]
 }

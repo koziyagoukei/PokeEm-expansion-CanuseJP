@@ -1,0 +1,4 @@
+PartyBath_Underwater_MapScripts::
+	map_script MAP_SCRIPT_ON_TRANSITION, PartyBathExpansion_OnTransition
+	map_script MAP_SCRIPT_ON_RESUME, PartyBathExpansion_OnResume
+	.byte 0

@@ -36,6 +36,8 @@ const u16 gMetatileAttributes_Lavaridge[] = INCBIN_U16("data/tilesets/secondary/
 
 const u16 gMetatiles_PartyBath[] = INCBIN_U16("data/tilesets/secondary/party_bath/metatiles.bin");
 const u16 gMetatileAttributes_PartyBath[] = INCBIN_U16("data/tilesets/secondary/party_bath/metatile_attributes.bin");
+const u16 gMetatiles_PartyBathAnnex[] = INCBIN_U16("data/tilesets/secondary/party_bath_annex/metatiles.bin");
+const u16 gMetatileAttributes_PartyBathAnnex[] = INCBIN_U16("data/tilesets/secondary/party_bath_annex/metatile_attributes.bin");
 
 const u16 gMetatiles_Fallarbor[] = INCBIN_U16("data/tilesets/secondary/fallarbor/metatiles.bin");
 const u16 gMetatileAttributes_Fallarbor[] = INCBIN_U16("data/tilesets/secondary/fallarbor/metatile_attributes.bin");

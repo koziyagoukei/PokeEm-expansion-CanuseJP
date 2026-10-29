@@ -173,6 +173,17 @@ const struct Tileset gTileset_PartyBath =
     .callback = InitTilesetAnim_Lavaridge,
 };
 
+const struct Tileset gTileset_PartyBathAnnex =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_PartyBathAnnex,
+    .palettes = gTilesetPalettes_PartyBath,
+    .metatiles = gMetatiles_PartyBathAnnex,
+    .metatileAttributes = gMetatileAttributes_PartyBathAnnex,
+    .callback = InitTilesetAnim_Lavaridge,
+};
+
 const struct Tileset gTileset_Fallarbor =
 {
     .isCompressed = TRUE,

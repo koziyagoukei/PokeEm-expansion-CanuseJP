@@ -5,6 +5,7 @@
 #include "overworld.h"
 #include "palette.h"
 #include "party_roamer_park.h"
+#include "party_bath_expansion.h"
 #include "pokemon.h"
 #include "task.h"
 #include "test/test.h"
@@ -16,6 +17,8 @@ static const s32 sConditionFields[] = {MON_DATA_COOL, MON_DATA_TOUGH, MON_DATA_S
 
 static void EnterBath(u16 additive)
 {
+    for (u32 flag = FLAG_BATH_ROCK_BUILT; flag <= FLAG_BATH_DEEP_BUILT; flag++)
+        FlagClear(flag);
     ResetTasks();
     gSaveBlock1Ptr->location.mapGroup = MAP_GROUP(MAP_PARTYBATHTIME);
     gSaveBlock1Ptr->location.mapNum = MAP_NUM(MAP_PARTYBATHTIME);
@@ -63,6 +66,67 @@ TEST("Party bath: each additive changes only its condition and sheen every 300 f
             EXPECT_EQ(GetMonData(mon, sConditionFields[field]), 10 + (slot != 2 && additive == field + 1));
     }
     EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][3], MON_DATA_SPECIES), SPECIES_NONE);
+    ResetTasks();
+}
+
+TEST("Party bath: each completed expansion adds one to the five-second stat gain")
+{
+    u32 count = 0, additive = 0;
+    for (u32 n = 0; n <= PARTY_BATH_EXPANSION_COUNT; n++)
+        for (u32 a = 0; a < PARTY_BATH_COUNT; a++)
+            PARAMETRIZE { count = n; additive = a; }
+    EnterBath(additive);
+    for (u32 i = 0; i < count; i++)
+        FlagSet(FLAG_BATH_ROCK_BUILT + i);
+    EXPECT_EQ(PartyBath_GetGain(), count + 1);
+    WaitBath(PARTY_BATH_INTERVAL);
+    for (u32 slot = 0; slot < 3; slot++)
+    {
+        struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][slot];
+        u32 gain = slot == 2 ? 0 : count + 1;
+        EXPECT_EQ(GetMonData(mon, MON_DATA_FRIENDSHIP), 80 + (additive == PARTY_BATH_FUEN ? gain : 0));
+        for (u32 field = 0; field < ARRAY_COUNT(sConditionFields); field++)
+            EXPECT_EQ(GetMonData(mon, sConditionFields[field]), 10 + (additive == field + 1 ? gain : 0));
+        EXPECT_EQ(GetMonData(mon, MON_DATA_SHEEN), 10 + (slot != 2 && additive != PARTY_BATH_FUEN));
+    }
+    ResetTasks();
+}
+
+TEST("Party bath: five-point gains saturate instead of wrapping past 255")
+{
+    u32 additive = PARTY_BATH_FUEN;
+    PARAMETRIZE { additive = PARTY_BATH_FUEN; }
+    PARAMETRIZE { additive = PARTY_BATH_SCOVILLAIN; }
+    EnterBath(additive);
+    for (u32 i = 0; i < PARTY_BATH_EXPANSION_COUNT; i++)
+        FlagSet(FLAG_BATH_ROCK_BUILT + i);
+    u8 value = 253;
+    s32 field = additive == PARTY_BATH_FUEN ? MON_DATA_FRIENDSHIP : MON_DATA_COOL;
+    SetMonData(&gParties[B_TRAINER_PLAYER][0], field, &value);
+    WaitBath(2 * PARTY_BATH_INTERVAL);
+    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], field), 255);
+    ResetTasks();
+}
+
+TEST("Party bath: all expansion floors share the timer and leaving stops it")
+{
+    u32 map = MAP_PARTY_BATH_ROCK;
+    PARAMETRIZE { map = MAP_PARTY_BATH_ROCK; }
+    PARAMETRIZE { map = MAP_PARTY_BATH_WATERFALL; }
+    PARAMETRIZE { map = MAP_PARTY_BATH_SAUNA; }
+    PARAMETRIZE { map = MAP_PARTY_BATH_DEEP; }
+    PARAMETRIZE { map = MAP_PARTY_BATH_UNDERWATER; }
+    EnterBath(PARTY_BATH_FUEN);
+    gSaveBlock1Ptr->location.mapGroup = MAP_GROUP(map);
+    gSaveBlock1Ptr->location.mapNum = MAP_NUM(map);
+    EXPECT(PartyBath_IsMap());
+    Special_StartPartyBathTimeFriendship();
+    WaitBath(PARTY_BATH_INTERVAL);
+    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_FRIENDSHIP), 81);
+    gSaveBlock1Ptr->location.mapGroup = MAP_GROUP(MAP_ULTRA_FRONTIE_HUB);
+    gSaveBlock1Ptr->location.mapNum = MAP_NUM(MAP_ULTRA_FRONTIE_HUB);
+    WaitBath(PARTY_BATH_INTERVAL);
+    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_FRIENDSHIP), 81);
     ResetTasks();
 }
 

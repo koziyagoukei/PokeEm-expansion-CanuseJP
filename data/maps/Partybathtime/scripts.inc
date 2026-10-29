@@ -8,6 +8,7 @@ Partybathtime_OnLoad:
 	special Special_RestoreResortInterior
 	@ Update the shared layout retained by saves made in the bath before the gallery.
 	setmaplayoutindex LAYOUT_PARTYBATHTIME
+	setmetatile 19, 4, 0x01B, TRUE @ General standing sign
 	setmetatile 3, 2, METATILE_PartyBath_EmptyFrame_Left, TRUE
 	setmetatile 4, 2, METATILE_PartyBath_EmptyFrame_Right, TRUE
 	setmetatile 6, 2, METATILE_PartyBath_EmptyFrame_Left, TRUE

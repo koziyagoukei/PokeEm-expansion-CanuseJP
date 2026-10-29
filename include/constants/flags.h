@@ -115,6 +115,10 @@
 #define FLAG_UNUSED_0x045    0x45 // Unused Flag
 #define FLAG_UNUSED_0x046    0x46 // Unused Flag
 #define FLAG_UNUSED_0x047    0x47 // Unused Flag
+#define FLAG_BATH_ROCK_BUILT         FLAG_UNUSED_0x040
+#define FLAG_BATH_WATERFALL_BUILT    FLAG_UNUSED_0x041
+#define FLAG_BATH_SAUNA_BUILT        FLAG_UNUSED_0x042
+#define FLAG_BATH_DEEP_BUILT         FLAG_UNUSED_0x043
 #define FLAG_UNUSED_0x048    0x48 // Unused Flag
 #define FLAG_UNUSED_0x049    0x49 // Unused Flag
 #define FLAG_UNUSED_0x04A    0x4A // Unused Flag

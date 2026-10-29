@@ -107,6 +107,14 @@
   "bg_events": [
     {
       "type": "sign",
+      "x": 19,
+      "y": 4,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "PartyBathExpansion_EventScript_Menu"
+    },
+    {
+      "type": "sign",
       "x": 3,
       "y": 2,
       "elevation": 0,

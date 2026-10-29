@@ -1,0 +1,11 @@
+PartyBath_Rock_MapScripts::
+	map_script MAP_SCRIPT_ON_TRANSITION, PartyBathExpansion_OnTransition
+	map_script MAP_SCRIPT_ON_RESUME, PartyBathExpansion_OnResume
+	.byte 0
+
+PartyBathExpansion_OnTransition:
+	setflag FLAG_TEMP_HIDE_FOLLOWER
+	end
+PartyBathExpansion_OnResume:
+	special Special_StartPartyBathTimeFriendship
+	end

@@ -56,6 +56,7 @@
 #include "constants/moves.h"
 #include "constants/mystery_gift.h"
 #include "constants/party_menu.h"
+#include "constants/party_bath_expansion.h"
 #include "constants/pokeball.h"
 #include "constants/pokedex.h"
 #include "constants/pokemon.h"
@@ -832,6 +833,12 @@ EventScript_PalletTown_PlayersHouse_2F_TurnOnPC::
 	.include "data/maps/PokevirusDepths_Core/scripts.inc"
 
 	.include "data/maps/Partybathtime/scripts.inc"
+	.include "data/scripts/party_bath_expansion.inc"
+	.include "data/maps/PartyBath_Rock/scripts.inc"
+	.include "data/maps/PartyBath_Waterfall/scripts.inc"
+	.include "data/maps/PartyBath_Sauna/scripts.inc"
+	.include "data/maps/PartyBath_Deep/scripts.inc"
+	.include "data/maps/PartyBath_Underwater/scripts.inc"
 
 	.include "data/maps/Party_eat_time/scripts.inc"
 

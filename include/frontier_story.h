@@ -43,6 +43,7 @@ void FrontierStory_BufferContestSceneBranch(void);
 void FrontierStory_CountRescued(void);
 void FrontierStory_ShouldGather(void);
 bool32 FrontierStory_AreAllRescued(void);
+bool32 FrontierStory_IsGuestRescued(u16 trainerId);
 void FrontierStory_ShouldSuggestInn(void);
 void FrontierStory_CanDarkraiJoin(void);
 void FrontierStory_PickCampVisitor(void);

@@ -1,4 +1,5 @@
 #include "global.h"
+#include "party_bath_expansion.h"
 #include "event_object_movement.h"
 #include "field_camera.h"
 #include "field_effect.h"
@@ -1001,8 +1002,7 @@ u32 FldEff_Ripple(void)
 static bool8 IsPartyBathTimePlayerHotSpringsWater(const struct ObjectEvent *objectEvent)
 {
     return objectEvent->isPlayer
-        && gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_PARTYBATHTIME)
-        && gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_PARTYBATHTIME);
+        && PartyBath_UsesWaterPalette();
 }
 
 static u8 CreateHotSpringsWaterSprite(struct ObjectEvent *objectEvent, s16 xOffset, bool8 isChildSprite)
@@ -1020,8 +1020,7 @@ static u8 CreateHotSpringsWaterSprite(struct ObjectEvent *objectEvent, s16 xOffs
         sprite->sMapGroup = objectEvent->mapGroup;
         sprite->sWaterXOffset = xOffset;
         sprite->sIsChildSprite = isChildSprite;
-        if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_PARTYBATHTIME)
-            && gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_PARTYBATHTIME))
+        if (PartyBath_UsesWaterPalette())
         {
             // General field-effect color 8 is the water covering a submerged mon.
             LoadPalette(&gPlttBufferUnfaded[BG_PLTT_ID(8) + 9],

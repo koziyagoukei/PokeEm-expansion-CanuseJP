@@ -1,0 +1,59 @@
+{
+  "id": "MAP_PARTY_BATH_DEEP",
+  "name": "PartyBath_Deep",
+  "layout": "LAYOUT_PARTY_BATH_DEEP",
+  "music": "MUS_RG_MYSTERY_GIFT",
+  "region_map_section": "MAPSEC_SPECIAL_AREA",
+  "requires_flash": false,
+  "weather": "WEATHER_FOG",
+  "map_type": "MAP_TYPE_INDOOR",
+  "allow_cycling": false,
+  "allow_escaping": false,
+  "allow_running": false,
+  "show_map_name": false,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": [
+    {
+      "map": "MAP_PARTY_BATH_UNDERWATER",
+      "offset": 0,
+      "direction": "dive"
+    }
+  ],
+  "object_events": [],
+  "warp_events": [
+    {
+      "x": 12,
+      "y": 2,
+      "elevation": 0,
+      "dest_map": "MAP_PARTYBATHTIME",
+      "dest_warp_id": "bathtime"
+    }
+  ],
+  "coord_events": [],
+  "bg_events": [
+    {
+      "type": "sign",
+      "x": 12,
+      "y": 6,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "PartyBathExpansion_EventScript_Dive"
+    },
+    {
+      "type": "sign",
+      "x": 11,
+      "y": 6,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "PartyBathExpansion_EventScript_Dive"
+    },
+    {
+      "type": "sign",
+      "x": 13,
+      "y": 6,
+      "elevation": 0,
+      "player_facing_dir": "BG_EVENT_PLAYER_FACING_ANY",
+      "script": "PartyBathExpansion_EventScript_Dive"
+    }
+  ]
+}
