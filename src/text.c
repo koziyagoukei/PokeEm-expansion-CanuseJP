@@ -101,15 +101,18 @@ static bool32 IsJapaneseGlyph(u16 glyphId)
 
     return (glyphId >= JAPANESE_HIRAGANA_START && glyphId <= JAPANESE_HIRAGANA_END)
         || (glyphId >= JAPANESE_KATAKANA_START && glyphId <= JAPANESE_KATAKANA_END)
-        || glyphId == JAPANESE_CHAR_VU;
+        || glyphId == JAPANESE_CHAR_VU
+        || glyphId == GLYPH_JPN_PERIOD;
 }
 
 static bool32 ShouldUseJapaneseGlyph(u16 glyphId, bool32 isJapanese)
 {
-    // UI numbers keep their Latin glyphs/metrics without changing the mode
-    // used by the surrounding kana and Japanese punctuation.
+    // UI numbers and "." ("1.5", "Lv.", "1. パパ") keep their Latin glyphs/metrics
+    // without changing the mode used by the surrounding kana and Japanese punctuation.
+    // "。" has its own code, CHAR_JPN_PERIOD.
     return isJapanese && glyphId < 0x100
-        && !(glyphId >= CHAR_0 && glyphId <= CHAR_9);
+        && !(glyphId >= CHAR_0 && glyphId <= CHAR_9)
+        && glyphId != CHAR_PERIOD;
 }
 
 static bool32 ResolveTextMode(const u8 *str, bool32 automatic)
@@ -168,6 +171,9 @@ static bool32 ResolveTextMode(const u8 *str, bool32 automatic)
             continue;
 
         case CHAR_EXTRA_SYMBOL:
+            if (IsJapaneseGlyph(str[1] | 0x100))
+                return TRUE;
+            // fallthrough
         case CHAR_KEYPAD_ICON:
             return !automatic && TEXT_JAPANESE_BY_DEFAULT;
 
@@ -1873,8 +1879,14 @@ static u16 RenderText(struct TextPrinter *textPrinter)
             return RENDER_FINISH;
         }
 
-        // Extended symbols and EMOJI use the Latin sheet even in Japanese text.
+        // Extended symbols and EMOJI use the Latin sheet even in Japanese text,
+        // except "。", which is the Japanese sheet's CHAR_PERIOD in any mode.
         bool32 useJapanese = ShouldUseJapaneseGlyph(currChar, textPrinter->japanese);
+        if (currChar == GLYPH_JPN_PERIOD)
+        {
+            currChar = CHAR_PERIOD;
+            useJapanese = TRUE;
+        }
         sCurGlyphAdvance = 0;
 
         switch (textPrinter->fontId)
@@ -2110,6 +2122,8 @@ s32 GetGlyphWidth(u16 glyphId, bool32 isJapanese, u8 fontId)
     func = GetFontWidthFunc(fontId);
     if (func == NULL)
         return 0;
+    if (glyphId == GLYPH_JPN_PERIOD)
+        return func(CHAR_PERIOD, TRUE);
     return func(glyphId, ShouldUseJapaneseGlyph(glyphId, isJapanese));
 }
 
@@ -2235,7 +2249,8 @@ s32 GetStringWidth(u8 fontId, const u8 *str, s16 letterSpacing)
             useLetterSpacing = TRUE;
             break;
         case CHAR_EXTRA_SYMBOL:
-            glyphWidth = func(*str++ | 0x100, FALSE);
+            currChar = *str++ | 0x100;
+            glyphWidth = currChar == GLYPH_JPN_PERIOD ? func(CHAR_PERIOD, TRUE) : func(currChar, FALSE);
             break;
         case CHAR_PROMPT_SCROLL:
         case CHAR_PROMPT_CLEAR:

@@ -201,8 +201,37 @@ static void switches(void)
     parity(automatic, FONT_NORMAL, 2, WINDOW_TEXT_PRINTER, 2);
 }
 
+static void periods(void)
+{
+    // "." keeps its Latin glyph in Japanese text ("1.5", "1. パパ"); "。" is its own symbol
+    // that draws the Japanese glyph in either mode.
+    const u8 japanese[] = {JPN, CHAR_1, CHAR_PERIOD, CHAR_5, EOS};
+    const u8 english[] = {ENG, CHAR_1, CHAR_PERIOD, CHAR_5, EOS};
+    const u8 rank[] = {JPN, CHAR_1, CHAR_PERIOD, CHAR_SPACE, 0x51, EOS};
+    const u8 latinRank[] = {ENG, CHAR_1, CHAR_PERIOD, EOS};
+    const u8 latinOne[] = {ENG, CHAR_1, EOS};
+    const u8 sentence[] = {JPN, 1, CHAR_EXTRA_SYMBOL, CHAR_JPN_PERIOD, EOS};
+    const u8 latinSentence[] = {ENG, CHAR_A, CHAR_EXTRA_SYMBOL, CHAR_JPN_PERIOD, EOS};
+    const u8 automatic[] = {AUTO, CHAR_EXTRA_SYMBOL, CHAR_JPN_PERIOD, EOS};
+    assert(GetStringWidth(FONT_NORMAL, japanese, 0) == GetStringWidth(FONT_NORMAL, english, 0));
+    parity(rank, FONT_NORMAL, 0, WINDOW_TEXT_PRINTER, 0);
+    assert(sTraceCount == 4 && !sTrace[0].japanese && !sTrace[1].japanese && sTrace[3].japanese);
+    assert(sTrace[1].advance == GetStringWidth(FONT_NORMAL, latinRank, 0) - GetStringWidth(FONT_NORMAL, latinOne, 0));
+    for (u32 type = WINDOW_TEXT_PRINTER; type <= SPRITE_TEXT_PRINTER; type++)
+    {
+        parity(sentence, FONT_NORMAL, 0, type, 0);
+        assert(sTraceCount == 2 && sTrace[1].japanese);
+        assert(sTrace[1].advance == GetGlyphWidth(GLYPH_JPN_PERIOD, FALSE, FONT_NORMAL));
+        assert(sTrace[1].advance != GetGlyphWidth(CHAR_PERIOD, TRUE, FONT_NORMAL));
+        parity(latinSentence, FONT_SMALL, 2, type, 0);
+        assert(sTraceCount == 2 && !sTrace[0].japanese && sTrace[1].japanese);
+    }
+    assert(IsJapaneseTextMode(automatic));
+}
+
 static void kanji(void)
 {
+    periods();
     const u8 text[] = {CTRL, EXT_CTRL_CODE_KANJI, CTRL, EXT_CTRL_CODE_KANJI_GLYPH, 1,
         CTRL, EXT_CTRL_CODE_KANJI_GLYPH, 2, 1, ENG, CHAR_A, CHAR_1, EOS};
     const u8 automatic[] = {AUTO, CTRL, EXT_CTRL_CODE_KANJI_GLYPH, 1, 1, EOS};
@@ -409,7 +438,7 @@ static void numeric(void)
     for (u32 i = 0; i < sTraceCount; i++)
         assert(!sTrace[i].japanese);
     parity(period, FONT_NORMAL, 0, WINDOW_TEXT_PRINTER, 0);
-    assert(sTraceCount == 1 && sTrace[0].japanese);
+    assert(sTraceCount == 1 && !sTrace[0].japanese);
 }
 
 int main(int argc, char **argv)
