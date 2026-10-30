@@ -1829,9 +1829,11 @@ static void Script_GetFrontierBrainStatus(void)
 u8 GetFrontierBrainStatus(void)
 {
     u32 facility = VarGet(VAR_FRONTIER_FACILITY);
+    u32 mode = VarGet(VAR_FRONTIER_BATTLE_MODE);
 
+    // Brains fight alone, so they take on singles and doubles but not multi battles.
     if (facility >= NUM_FRONTIER_FACILITIES
-        || VarGet(VAR_FRONTIER_BATTLE_MODE) != FRONTIER_MODE_SINGLES
+        || (mode != FRONTIER_MODE_SINGLES && mode != FRONTIER_MODE_DOUBLES)
         || gSaveBlock2Ptr->frontier.lvlMode >= FRONTIER_LVL_TENT)
         return FRONTIER_BRAIN_NOT_READY;
 
@@ -2707,7 +2709,8 @@ void SetFrontierBrainObjEventGfx_2(void)
     VarSet(VAR_OBJ_GFX_ID_0, gFrontierBrainInfo[facility].objEventGfx);
 }
 
-void CreateFrontierBrainPokemon(void)
+// monCount is the facility's usual party size (4 in Battle Tower doubles); the Dome uses Tucker's tournament card.
+void CreateFrontierBrainPokemon(u8 monCount)
 {
     u32 i;
     u32 selectedMonBits;
@@ -2715,7 +2718,7 @@ void CreateFrontierBrainPokemon(void)
     u8 level = SetFacilityPtrsGetLevel();
     u8 facility = VarGet(VAR_FRONTIER_FACILITY);
     u8 symbol = GetFronterBrainSymbol();
-    u16 monIds[FRONTIER_PARTY_SIZE];
+    u16 monIds[MAX_FRONTIER_PARTY_SIZE];
     u32 otId = Random32();
 
     if (facility == FRONTIER_FACILITY_DOME)
@@ -2723,25 +2726,28 @@ void CreateFrontierBrainPokemon(void)
         u32 tournamentId = TrainerIdToDomeTournamentId(TRAINER_FRONTIER_BRAIN);
 
         // Use the same random sets shown on Tucker's tournament card.
-        for (i = 0; i < FRONTIER_PARTY_SIZE; i++)
+        monCount = FRONTIER_PARTY_SIZE;
+        for (i = 0; i < monCount; i++)
             monIds[i] = gSaveBlock2Ptr->frontier.domeMonIds[tournamentId][i];
         selectedMonBits = GetDomeTrainerSelectedMons(tournamentId);
     }
     else
     {
-        for (i = 0; i < FRONTIER_PARTY_SIZE; i++)
+        monCount = min(max(monCount, FRONTIER_PARTY_SIZE), MAX_FRONTIER_PARTY_SIZE);
+        for (i = 0; i < monCount; i++)
             monIds[i] = GetRandomFrontierMonFromFullPool(monIds, i, NULL, 0, NULL, 0);
-        selectedMonBits = (1 << FRONTIER_PARTY_SIZE) - 1;
+        selectedMonBits = (1 << monCount) - 1;
     }
 
     ZeroEnemyPartyMons();
-    for (i = 0; i < FRONTIER_PARTY_SIZE; selectedMonBits >>= 1, i++)
+    for (i = 0; i < monCount; selectedMonBits >>= 1, i++)
     {
         if (!(selectedMonBits & 1))
             continue;
 
+        // The IV table has three entries; an extra doubles member shares the last one.
         CreateFacilityMon(&gFacilityTrainerMons[monIds[i]], level,
-            sFrontierBrainsMons[facility][symbol][i].fixedIV, otId, 0,
+            sFrontierBrainsMons[facility][symbol][min(i, FRONTIER_PARTY_SIZE - 1)].fixedIV, otId, 0,
             &gParties[B_TRAINER_OPPONENT_A][monPartyId]);
         monPartyId++;
     }

@@ -132,11 +132,32 @@ TEST("Frontier Brain rematches retain the original schedule after both symbols")
     EXPECT_EQ(GetFronterBrainSymbol(), 1);
 }
 
-TEST("Frontier Brain does not appear in doubles, multi battles, or Battle Tents")
+TEST("Frontier Brain appears at the same milestones in doubles")
 {
-    u32 mode = FRONTIER_MODE_DOUBLES;
+    static const u8 doublesFacilities[] =
+    {
+        FRONTIER_FACILITY_TOWER, FRONTIER_FACILITY_DOME, FRONTIER_FACILITY_PALACE, FRONTIER_FACILITY_FACTORY,
+    };
+    u32 facility = 0, symbols = 0, level = 0;
 
-    for (u32 m = FRONTIER_MODE_DOUBLES; m < FRONTIER_MODE_COUNT; m++)
+    for (u32 f = 0; f < ARRAY_COUNT(doublesFacilities); f++)
+        for (u32 s = 0; s < 2; s++)
+            for (u32 l = 0; l < FRONTIER_LVL_TENT; l++)
+                PARAMETRIZE { facility = doublesFacilities[f]; symbols = s; level = l; }
+
+    SetUpBrainChallenge(facility, symbols, level);
+    VarSet(VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_DOUBLES);
+    SetChallengeStreak(facility, sOriginalBrainStreaks[facility][symbols] - 1);
+    EXPECT_EQ(GetFrontierBrainStatus(), FRONTIER_BRAIN_NOT_READY);
+    SetChallengeStreak(facility, sOriginalBrainStreaks[facility][symbols]);
+    EXPECT_EQ(GetFrontierBrainStatus(), symbols + 1);
+}
+
+TEST("Frontier Brain does not appear in multi battles or Battle Tents")
+{
+    u32 mode = FRONTIER_MODE_MULTIS;
+
+    for (u32 m = FRONTIER_MODE_MULTIS; m < FRONTIER_MODE_COUNT; m++)
         PARAMETRIZE { mode = m; }
 
     SetUpBrainChallenge(FRONTIER_FACILITY_TOWER, 0, FRONTIER_LVL_50);
@@ -210,6 +231,26 @@ TEST("Frontier Brain Tower status changes before battle 35 and keeps Anabel's tr
             EXPECT_NE(GetMonData(mon, MON_DATA_SPECIES), GetMonData(&gParties[B_TRAINER_OPPONENT_A][j], MON_DATA_SPECIES));
     }
     EXPECT_EQ(GetMonData(&gParties[B_TRAINER_OPPONENT_A][3], MON_DATA_SPECIES), SPECIES_NONE);
+}
+
+TEST("Frontier Brain brings four different Pokemon to Battle Tower doubles")
+{
+    SetUpBrainChallenge(FRONTIER_FACILITY_TOWER, 0, FRONTIER_LVL_50);
+    VarSet(VAR_FRONTIER_BATTLE_MODE, FRONTIER_MODE_DOUBLES);
+    SetChallengeStreak(FRONTIER_FACILITY_TOWER, 34);
+    EXPECT_EQ(GetFrontierBrainStatus(), FRONTIER_BRAIN_SILVER);
+    SetFrontierBrainObjEventGfx(FRONTIER_FACILITY_TOWER);
+    SetFacilityPtrsGetLevel();
+    FillFrontierTrainerParty(FRONTIER_DOUBLES_PARTY_SIZE);
+    for (u32 i = 0; i < FRONTIER_DOUBLES_PARTY_SIZE; i++)
+    {
+        enum Species species = GetMonData(&gParties[B_TRAINER_OPPONENT_A][i], MON_DATA_SPECIES);
+
+        EXPECT_NE(species, SPECIES_NONE);
+        for (u32 j = 0; j < i; j++)
+            EXPECT_NE(species, GetMonData(&gParties[B_TRAINER_OPPONENT_A][j], MON_DATA_SPECIES));
+    }
+    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_OPPONENT_A][FRONTIER_DOUBLES_PARTY_SIZE], MON_DATA_SPECIES), SPECIES_NONE);
 }
 
 TEST("Frontier Brain Dome preview and battle use the same saved random sets")

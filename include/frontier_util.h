@@ -30,7 +30,7 @@ enum TrainerClassID GetFrontierBrainTrainerClass(void);
 void CopyFrontierBrainTrainerName(u8 *dst);
 bool8 IsFrontierBrainFemale(void);
 void SetFrontierBrainObjEventGfx_2(void);
-void CreateFrontierBrainPokemon(void);
+void CreateFrontierBrainPokemon(u8 monCount);
 enum Species GetFrontierBrainMonSpecies(u8 monId);
 void SetFrontierBrainObjEventGfx(u8 facility);
 u16 GetFrontierBrainMonMove(u8 monId, u8 moveSlotId);
