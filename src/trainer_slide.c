@@ -356,7 +356,6 @@ enum TrainerSlideTargets ShouldDoTrainerSlide(enum BattlerId battler, enum Train
         return TRAINER_SLIDE_TARGET_NONE;
 
     enum DifficultyLevel difficulty = GetCurrentDifficultyLevel();
-    gBattleScripting.battler = battler;
 
     if (IsTrainerSlidePlayed(battler, slideId))
         return TRAINER_SLIDE_TARGET_NONE;
@@ -422,6 +421,9 @@ enum TrainerSlideTargets ShouldDoTrainerSlide(enum BattlerId battler, enum Train
 
     MarkTrainerSlideAsPlayed(battler, slideId);
     SetTrainerSlideMessage(difficulty,trainerId,slideId);
+    // Only when a slide plays: this is checked every frame during a Z-Move turn,
+    // and a script running for another battler (e.g. Illusion breaking) must keep its battler.
+    gBattleScripting.battler = battler;
     return retValue;
 }
 
