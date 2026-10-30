@@ -246,6 +246,9 @@ BPEJ_INTRO_EXTRACTED_OK := $(BUILD_GENERATED_DIR)/bpej_intro_extracted.ok
 BPEJ_POKENAV_MANIFEST := $(TOOLS_DIR)/data/bpej_pokenav_manifest.json
 BPEJ_EXTRACTED_POKENAV_DIR := $(BUILD_DIR)/extracted_pokenav
 BPEJ_POKENAV_EXTRACTED_OK := $(BUILD_GENERATED_DIR)/bpej_pokenav_extracted.ok
+BPEJ_BERRY_MANIFEST := $(TOOLS_DIR)/data/bpej_berry_manifest.json
+BPEJ_EXTRACTED_BERRY_DIR := $(BUILD_DIR)/extracted_berry
+BPEJ_BERRY_EXTRACTED_OK := $(BUILD_GENERATED_DIR)/bpej_berry_extracted.ok
 BPEJ_EXTRACTED_MID_NAMES := mus_dummy mus_level_up se_use_item se_pc_login se_pc_off se_pc_on se_select se_win_open se_wall_hit se_door se_exit se_bike_bell se_flee se_not_effective se_effective se_super_effective se_ball_open se_faint se_sliding_door se_ship se_bang se_pin se_boo se_ball se_a se_i se_u se_e se_o se_n se_success se_failure se_bike_hop se_switch se_click se_fu_zaku se_contest_condition_lose se_lavaridge_fall_warp se_ice_stairs se_ice_break se_ice_crack se_fall se_unlock se_warp_in se_warp_out se_rotating_gate se_truck_stop se_truck_unload se_truck_door se_save se_ball_bounce_1 se_ball_bounce_2 se_ball_bounce_3 se_ball_bounce_4 se_ball_trade se_ball_throw se_note_c se_note_d se_note_e se_note_f se_note_g se_note_a se_note_b se_note_c_high se_puddle se_bridge_walk se_itemfinder se_ding_dong se_balloon_red se_balloon_blue se_balloon_yellow se_breakable_door se_mud_ball se_field_poison se_escalator se_thunderstorm_stop se_downpour_stop se_rain_stop se_thunder se_thunder2 se_elevator se_roulette_ball se_roulette_ball2 se_shop se_contest_heart se_contest_curtain_rise se_contest_curtain_fall se_contest_icon_change se_contest_icon_clear se_contest_mons_turn se_shiny se_intro_blast se_mugshot se_vend se_orb se_dex_scroll se_dex_page se_pokenav_on se_pokenav_off se_dex_search se_egg_hatch se_ball_tray_enter se_ball_tray_ball se_ball_tray_exit se_glass_flute se_m_thunderbolt se_m_thunderbolt2 se_m_harden se_m_nightmare se_m_vital_throw se_m_vital_throw2 se_m_bubble se_m_bubble2 se_m_bubble3 se_m_rain_dance se_m_cut se_m_string_shot se_m_rock_throw se_m_gust2 se_m_double_slap se_m_double_team se_m_razor_wind se_m_thunder_wave se_m_comet_punch se_m_mega_kick se_m_mega_kick2 se_m_crabhammer se_m_jump_kick se_m_flame_wheel2 se_m_fire_punch se_m_toxic se_m_sacred_fire se_m_sacred_fire2 se_m_ember se_m_take_down se_m_blizzard2 se_m_scratch se_m_vicegrip se_m_wing_attack se_m_fly se_m_sand_attack se_m_razor_wind2 se_m_bite se_m_headbutt se_m_surf se_m_hydro_pump se_m_whirlpool se_m_horn_attack se_m_tail_whip se_m_mist se_m_poison_powder se_m_bind se_m_dragon_rage se_m_pay_day se_m_dig se_m_dizzy_punch se_m_self_destruct se_m_explosion se_m_absorb_2 se_m_absorb se_m_screech se_m_bubble_beam2 se_m_supersonic se_m_belly_drum se_m_metronome se_m_bonemerang se_m_lick se_m_psybeam se_m_faint_attack se_m_swords_dance se_m_leer se_m_swagger se_m_swagger2 se_m_heal_bell se_m_confuse_ray se_m_snore se_m_brick_break se_m_giga_drain se_m_psybeam2 se_m_solar_beam se_m_petal_dance se_m_teleport se_m_minimize se_m_sketch se_m_swift se_m_detect se_m_lock_on se_m_charm se_m_charge se_m_strength se_m_reversal se_m_acid_armor se_m_tri_attack se_m_tri_attack2 se_m_encore se_m_baton_pass se_m_milk_drink se_m_attract se_m_attract2 se_m_morning_sun se_m_flatter se_m_sand_tomb se_m_grasswhistle se_m_spit_up se_m_dive se_m_twister se_m_sweet_scent se_m_yawn se_m_sky_uppercut se_m_stat_increase se_m_heat_wave se_m_uproar se_m_hail se_m_cosmic_power se_m_teeter_dance se_m_stat_decrease se_m_haze se_pokenav_call se_rg_door se_rg_card_flip se_rg_card_flipping se_rg_card_open se_rg_bag_cursor se_rg_bag_pocket se_rg_ball_click se_rg_shop se_rg_ss_anne_horn se_rg_help_open se_rg_help_close se_rg_help_error se_rg_deoxys_move se_rg_poke_jump_success se_rg_poke_jump_failure se_pokenav_hang_up se_arena_timeup1 se_arena_timeup2 se_pike_curtain_close se_pike_curtain_open mus_heal mus_obtain_badge mus_obtain_item mus_evolved mus_obtain_tmhm mus_evolution_intro mus_move_deleted mus_obtain_berry mus_slots_jackpot mus_slots_win mus_too_bad mus_intro mus_obtain_b_points mus_register_match_call mus_obtain_symbol mus_rg_jigglypuff mus_rg_heal mus_rg_dex_rating mus_rg_obtain_key_item mus_rg_caught_intro mus_rg_photo mus_rg_new_game_exit mus_rg_poke_flute
 # Tool executables
 SMOLTM       := $(TOOLS_DIR)/compresSmol/compresSmolTilemap$(EXE)
@@ -296,6 +299,7 @@ AUTO_GEN_TARGETS += $(BPEJ_BATTLE_BACKGROUND_EXTRACTED_OK)
 AUTO_GEN_TARGETS += $(BPEJ_CONTEST_EXTRACTED_OK)
 AUTO_GEN_TARGETS += $(BPEJ_INTRO_EXTRACTED_OK)
 AUTO_GEN_TARGETS += $(BPEJ_POKENAV_EXTRACTED_OK)
+AUTO_GEN_TARGETS += $(BPEJ_BERRY_EXTRACTED_OK)
 
 POKEDEX_TEXT_TOOL := $(TOOLS_DIR)/pokedex_kanji.py
 POKEDEX_TEXT_MANIFEST := $(TOOLS_DIR)/data/pokedex_kanji_manifest.json
@@ -371,6 +375,14 @@ $(BPEJ_POKENAV_EXTRACTED_OK): FORCE_BPEJ_POKENAV_ASSETS baserom.gba $(BPEJ_VERIF
 $(BPEJ_EXTRACTED_POKENAV_DIR)/%: $(BPEJ_POKENAV_EXTRACTED_OK) FORCE_BPEJ_POKENAV_ASSETS
 	@test -f "$@" || { echo "error: missing extracted Pokenav asset: $@; place Japanese Emerald ROM at baserom.gba"; exit 1; }
 
+FORCE_BPEJ_BERRY_ASSETS:
+
+$(BPEJ_BERRY_EXTRACTED_OK): FORCE_BPEJ_BERRY_ASSETS baserom.gba $(BPEJ_VERIFIED_OK) $(BPEJ_BERRY_MANIFEST) $(TOOLS_DIR)/extract_bpej_berry.py $(TOOLS_DIR)/extract_bpej_contest.py $(TOOLS_DIR)/check_baserom_jp.py $(TOOLS_DIR)/extract_bpej_pokedex.py $(TOOLS_DIR)/extract_bpej_battle_backgrounds.py | $(BUILD_GENERATED_DIR)
+	python3 $(TOOLS_DIR)/extract_bpej_berry.py --baserom baserom.gba --manifest $(BPEJ_BERRY_MANIFEST) --stamp $@
+
+$(BPEJ_EXTRACTED_BERRY_DIR)/%: $(BPEJ_BERRY_EXTRACTED_OK) FORCE_BPEJ_BERRY_ASSETS
+	@test -f "$@" || { echo "error: missing extracted berry asset: $@; 日本版エメラルドROMをプロジェクトルートに baserom.gba として配置してください"; exit 1; }
+
 PERL := perl
 SHA1 := $(shell { command -v sha1sum || command -v shasum; } 2>/dev/null) -c
 
@@ -387,6 +399,7 @@ RULES_NO_SCAN += libagbsyscall clean clean-assets tidy tidymodern tidycheck tidy
 RULES_NO_SCAN += extract-bpej-contest check-bpej-contest-outputs clean-bpej-contest-assets FORCE_BPEJ_CONTEST_ASSETS
 RULES_NO_SCAN += extract-bpej-intro check-bpej-intro-outputs clean-bpej-intro-assets FORCE_BPEJ_INTRO_ASSETS
 RULES_NO_SCAN += extract-bpej-pokenav check-bpej-pokenav-outputs clean-bpej-pokenav-assets FORCE_BPEJ_POKENAV_ASSETS
+RULES_NO_SCAN += extract-bpej-berry check-bpej-berry-outputs clean-bpej-berry-assets FORCE_BPEJ_BERRY_ASSETS
 RULES_NO_SCAN += fetch-pokedex-text
 .PHONY: all rom agbcc modern compare check debug release
 .PHONY: check-bag-catalog
@@ -607,6 +620,17 @@ clean-bpej-pokenav-assets:
 	rm -rf $(BPEJ_EXTRACTED_POKENAV_DIR)
 	rm -f $(BPEJ_POKENAV_EXTRACTED_OK)
 
+extract-bpej-berry: $(BPEJ_BERRY_EXTRACTED_OK)
+
+check-bpej-berry-outputs: $(BPEJ_BERRY_EXTRACTED_OK)
+	python3 $(TOOLS_DIR)/extract_bpej_berry.py --manifest $(BPEJ_BERRY_MANIFEST) --stamp $(BPEJ_BERRY_EXTRACTED_OK) --check
+
+clean-bpej-berry-assets:
+	rm -rf $(BPEJ_EXTRACTED_BERRY_DIR)
+	rm -f $(BPEJ_BERRY_EXTRACTED_OK)
+
+$(C_BUILDDIR)/graphics.o $(C_BUILDDIR)/berry_tag_screen.o $(C_BUILDDIR)/berry_blender.o $(C_BUILDDIR)/berry_crush.o $(C_BUILDDIR)/event_object_movement.o: | check-bpej-berry-outputs
+
 
 %.s:   ;
 %.png: ;
@@ -632,6 +656,7 @@ clean-teachables_intermediates:
 
 clean-generated: clean-teachables_intermediates clean-bpej-contest-assets clean-bpej-intro-assets
 clean-generated: clean-bpej-pokenav-assets
+clean-generated: clean-bpej-berry-assets
 	@rm -f $(POKEDEX_TEXT_HEADER)
 	@rm -f $(AUTO_GEN_TARGETS)
 	@echo "rm -f <AUTO_GEN_TARGETS>"

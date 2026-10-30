@@ -254,11 +254,11 @@ static s16 sDebug_GameTimeStage;
 
 COMMON_DATA u8 gInGameOpponentsNo = 0;
 
-static const u16 sBlenderCenter_Pal[] = INCGFX_U16("graphics/berry_blender/center.png", ".gbapal");
-static const u8 sBlenderCenter_Tilemap[] = INCBIN_U8("graphics/berry_blender/center_map.bin");
-static const u16 sBlenderOuter_Pal[] = INCGFX_U16("graphics/berry_blender/outer.png", ".gbapal");
+static const u16 sBlenderCenter_Pal[] = INCBIN_U16("build/extracted_berry/blender/sBlenderCenter_Pal.gbapal");
+static const u8 sBlenderCenter_Tilemap[] = INCBIN_U8("build/extracted_berry/blender/sBlenderCenter_Tilemap.bin");
+static const u16 sBlenderOuter_Pal[] = INCBIN_U16("build/extracted_berry/blender/sBlenderOuter_Pal.gbapal");
 
-static const u16 sUnused_Pal[] = INCGFX_U16("graphics/berry_blender/unused.pal", ".gbapal");
+static const u16 sUnused_Pal[] = INCBIN_U16("build/extracted_berry/blender/sUnused_Pal.gbapal");
 static const u16 sEmpty_Pal[16 * 14] = {0};
 
 static const u8 sText_BerryBlenderStart[] = _("{JPN}きのみブレンダーを きどうします\pバッグから きのみブレンダーに いれる\nきのみを えらんでください\p");
@@ -964,7 +964,8 @@ static bool8 LoadBerryBlenderGfx(void)
     case 1:
         CopyToBgTilemapBuffer(2, sBlenderCenter_Tilemap, 0x400, 0);
         CopyBgTilemapBufferToVram(2);
-        LoadPalette(sBlenderCenter_Pal, BG_PLTT_ID(0), 8 * PLTT_SIZE_4BPP);
+        // The 8bpp tiles use only indices 0..15; the source palette is one bank.
+        LoadPalette(sBlenderCenter_Pal, BG_PLTT_ID(0), sizeof(sBlenderCenter_Pal));
         sBerryBlender->loadGfxState++;
         break;
     case 2:
