@@ -208,6 +208,8 @@
 #define CHAR_ID            0x07
 #define CHAR_NO            0x08
 #define CHAR_UNDERSCORE    0x09
+#define CHAR_JPN_PERIOD    0x1B // "。", drawn with the Japanese sheet's CHAR_PERIOD glyph in any text mode
+#define GLYPH_JPN_PERIOD   (0x100 | CHAR_JPN_PERIOD)
 
 #define EXT_CTRL_CODE_COLOR                  0x01
 #define EXT_CTRL_CODE_HIGHLIGHT              0x02

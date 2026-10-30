@@ -60,7 +60,7 @@ def engine_code():
     for name in ("DynamicPlaceholderTextUtil_Reset", "DynamicPlaceholderTextUtil_SetPlaceholderPtr",
                  "DynamicPlaceholderTextUtil_GetPlaceholderPtr", "DynamicPlaceholderTextUtil_ExpandPlaceholders"):
         result.append(function(dynamic, name))
-    for name in ("IsLatinLetter", "IsJapaneseGlyph", "IsDecimalPoint", "ShouldUseJapaneseGlyph", "ResolveTextMode", "IsJapaneseTextMode",
+    for name in ("IsLatinLetter", "IsJapaneseGlyph", "ShouldUseJapaneseGlyph", "ResolveTextMode", "IsJapaneseTextMode",
                  "TextAutoModeFromNextChar", "IsSmallKanjiFont", "GetKanjiGlyphSlot", "DecompressKanjiGlyph", "GetJapaneseGlyphWidth", "DecompressJapaneseSpaceGlyph"):
         result.append(function(text, name))
     suffixes = ("Small", "Normal", "Short", "Narrow", "SmallNarrow", "Narrower",
