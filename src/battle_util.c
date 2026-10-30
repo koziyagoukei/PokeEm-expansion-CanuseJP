@@ -1389,6 +1389,15 @@ bool32 IsGravityPreventingMove(enum Move move)
     return IsMoveGravityBanned(move);
 }
 
+// The Battle Arena sends its three Pokémon out in a fixed order, so a fainted one can't be revived.
+bool32 IsFacilityPreventingMove(enum Move move)
+{
+    if (!(gBattleTypeFlags & BATTLE_TYPE_ARENA))
+        return FALSE;
+
+    return GetMoveEffect(move) == EFFECT_REVIVAL_BLESSING;
+}
+
 bool32 IsHealBlockPreventingMove(enum BattlerId battler, enum Move move)
 {
     if (!gBattleMons[battler].volatiles.healBlockTimer)
@@ -1498,6 +1507,13 @@ u32 TrySetCantSelectMoveBattleScript(enum BattlerId battler)
     if (dynamaxBypassCheck && zMoveBypassCheck && IsGravityPreventingMove(move))
     {
         if (SetCantSelectScript(battler, gCurrentMove, BattleScript_SelectingNotAllowedMoveGravityInPalace, BattleScript_SelectingNotAllowedMoveGravity))
+            limitations++;
+    }
+
+    // A Z-Move still carries the revival, so only Dynamax gets past this.
+    if (dynamaxBypassCheck && IsFacilityPreventingMove(move))
+    {
+        if (SetCantSelectScript(battler, gCurrentMove, BattleScript_SelectingCantUseMoveInPalace, BattleScript_SelectingCantUseMove))
             limitations++;
     }
 
@@ -1670,6 +1686,9 @@ u32 CheckMoveLimitations(enum BattlerId battler, u8 unusableMoves, u32 check)
             unusableMoves |= 1u << i;
         // Gravity
         else if (check & MOVE_LIMITATION_GRAVITY && IsGravityPreventingMove(move))
+            unusableMoves |= 1u << i;
+        // Battle Arena
+        else if (check & MOVE_LIMITATION_FACILITY && IsFacilityPreventingMove(move))
             unusableMoves |= 1u << i;
         // Heal Block
         else if (check & MOVE_LIMITATION_HEAL_BLOCK && IsHealBlockPreventingMove(battler, move))

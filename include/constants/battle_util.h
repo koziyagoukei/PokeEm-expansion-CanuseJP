@@ -19,7 +19,8 @@
 #define MOVE_LIMITATION_UNUSABLE                (1 << 15)
 
 #define MOVE_LIMITATION_PLACEHOLDER             (1 << 16)
-#define MOVE_LIMITATIONS_ALL                    0xFFFF
+#define MOVE_LIMITATION_FACILITY                (1 << 17)
+#define MOVE_LIMITATIONS_ALL                    (0xFFFF | MOVE_LIMITATION_FACILITY)
 
 #define IS_WHOLE_SIDE_ALIVE(battler)    ((IsBattlerAlive(battler) && IsBattlerAlive(GetPartnerBattler(battler))))
 #define IS_ALIVE_AND_PRESENT(battler)   (IsBattlerAlive(battler) && IsBattlerSpritePresent(battler))

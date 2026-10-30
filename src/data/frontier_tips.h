@@ -67,9 +67,10 @@ static const u8 sInfoText_ArenaJudging[] = _(
 static const u8 sInfoText_ArenaGimmicks[] = _(
     "{JPN}使える ギミック\n"
     "ダイマックス / Zワザ\n"
-    "ウルトラバースト\n\n"
-    "メガシンカと テラスタルは\n"
-    "おたがいに 使えません。");
+    "ウルトラバースト\n"
+    "メガシンカ・テラスタルは 不可。\n"
+    "ひんしを 回復する 技\n"
+    "「さいきのいのり」も 使えません。");
 static const u8 sInfoText_Factory[] = _(
     "{JPN}レンタルポケモンで 1周 7戦。\n"
     "最初に 6匹から 3匹を 選び\n"

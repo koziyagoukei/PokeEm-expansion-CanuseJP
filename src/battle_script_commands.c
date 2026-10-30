@@ -10040,8 +10040,8 @@ void BS_TryRevivalBlessing(void)
     NATIVE_ARGS(const u8 *failInstr);
     u8 index = GetFirstFaintedPartyIndex(gBattlerAttacker);
 
-    // Move fails if there are no battlers to revive.
-    if (index == PARTY_SIZE)
+    // Move fails if there are no battlers to revive, or in the Battle Arena.
+    if (index == PARTY_SIZE || (gBattleTypeFlags & BATTLE_TYPE_ARENA))
     {
         gBattlescriptCurrInstr = cmd->failInstr;
         return;
