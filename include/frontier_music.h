@@ -6,6 +6,8 @@
 void FrontierMusic_EnsureSaveData(void);
 u16 FrontierMusic_GetSong(u32 index);
 bool8 FrontierMusic_IsUnlocked(u16 song);
+bool8 FrontierMusic_IsAvailable(u16 song);
+void FrontierMusic_Earn(bool32 finalBattle);
 u16 FrontierMusic_Unlock(u16 song);
 u16 FrontierMusic_SetMode(u8 mode, u16 song);
 u16 FrontierMusic_ChooseBattleBGM(u16 defaultSong);

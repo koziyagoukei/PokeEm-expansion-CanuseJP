@@ -16,6 +16,7 @@
 #include "strings.h"
 #include "task.h"
 #include "util.h"
+#include "constants/flags.h"
 #include "constants/songs.h"
 #include "constants/trainers.h"
 
@@ -52,6 +53,14 @@ static const struct FrontierMusicTrack sTracks[] =
     {MUS_RG_VS_MEWTWO, _("{JPN}ミュウツー")},
     {MUS_RG_VS_DEOXYS, _("{JPN}デオキシス")},
     {MUS_C_VS_LEGEND_BEAST, _("{JPN}スイクンたち")},
+    {MUS_POKEVIRUS_RELEASE, _("{JPN}かいほうせん")},
+    {MUS_POKEVIRUS_FINAL, _("{JPN}ヒトポケルス")},
+};
+
+static const u16 sRescuedFlags[] =
+{
+    FLAG_STORY_RESCUED_TOWER, FLAG_STORY_RESCUED_DOME, FLAG_STORY_RESCUED_PALACE, FLAG_STORY_RESCUED_ARENA,
+    FLAG_STORY_RESCUED_FACTORY, FLAG_STORY_RESCUED_PIKE, FLAG_STORY_RESCUED_PYRAMID, FLAG_STORY_RESCUED_CONTEST,
 };
 
 static const u8 sText_Cancel[] = _("{JPN}やめる");
@@ -107,6 +116,7 @@ void FrontierMusic_EnsureSaveData(void)
         save->version = FRONTIER_MUSIC_VERSION;
     }
     save->unlocked &= (1u << FRONTIER_MUSIC_TRACK_COUNT) - 1;
+    save->earned &= FRONTIER_MUSIC_EARNED_RELEASE | FRONTIER_MUSIC_EARNED_FINAL;
     if (save->mode > FRONTIER_MUSIC_RANDOM
      || (save->mode == FRONTIER_MUSIC_FIXED
       && (index >= ARRAY_COUNT(sTracks) || !(save->unlocked & (1u << index))))
@@ -115,6 +125,38 @@ void FrontierMusic_EnsureSaveData(void)
     if (save->mode != FRONTIER_MUSIC_FIXED)
         save->selectedSong = MUS_DUMMY;
     UpdateChecksum();
+}
+
+// The story tracks are offered only after their battle is won. Saves from before the
+// earned bits fall back on the story flags those wins lead to.
+bool8 FrontierMusic_IsAvailable(u16 song)
+{
+    u32 i;
+    u16 earned = gSaveBlock3Ptr->frontierMusic.earned;
+
+    switch (song)
+    {
+    case MUS_POKEVIRUS_RELEASE:
+        if ((earned & FRONTIER_MUSIC_EARNED_RELEASE) || FlagGet(FLAG_STORY_CURE_FOUND))
+            return TRUE;
+        for (i = 0; i < ARRAY_COUNT(sRescuedFlags); i++)
+            if (FlagGet(sRescuedFlags[i]))
+                return TRUE;
+        return FALSE;
+    case MUS_POKEVIRUS_FINAL:
+        return (earned & FRONTIER_MUSIC_EARNED_FINAL) || FlagGet(FLAG_STORY_POKEVIRUS_FADED);
+    default:
+        return GetTrackIndex(song) < ARRAY_COUNT(sTracks);
+    }
+}
+
+// Called when a release battle (or the final battle) is won.
+void FrontierMusic_Earn(bool32 finalBattle)
+{
+    FrontierMusic_EnsureSaveData();
+    gSaveBlock3Ptr->frontierMusic.earned |= FRONTIER_MUSIC_EARNED_RELEASE;
+    if (finalBattle)
+        gSaveBlock3Ptr->frontierMusic.earned |= FRONTIER_MUSIC_EARNED_FINAL;
 }
 
 u16 FrontierMusic_GetSong(u32 index)
@@ -132,7 +174,7 @@ bool8 FrontierMusic_IsUnlocked(u16 song)
 u16 FrontierMusic_Unlock(u16 song)
 {
     u32 index = GetTrackIndex(song);
-    if (index >= ARRAY_COUNT(sTracks))
+    if (index >= ARRAY_COUNT(sTracks) || !FrontierMusic_IsAvailable(song))
         return FRONTIER_MUSIC_INVALID;
     if (FrontierMusic_IsUnlocked(song))
         return FRONTIER_MUSIC_ALREADY_UNLOCKED;
@@ -265,7 +307,7 @@ void FrontierMusic_OpenCatalog(void)
     const struct WindowTemplate window = {0, 2, 4, 26, 12, 15, 64};
     struct ListMenuTemplate list = {0};
     u8 taskId = CreateTask(Task_ResumeScript, 8);
-    u32 i;
+    u32 i, count = 0;
 
     gSpecialVar_Result = FALSE;
     if (sCatalog != NULL)
@@ -284,14 +326,15 @@ void FrontierMusic_OpenCatalog(void)
         return;
     }
     for (i = 0; i < ARRAY_COUNT(sTracks); i++)
-        sCatalog->items[i] = (struct ListMenuItem){sTracks[i].name, i};
-    sCatalog->items[i] = (struct ListMenuItem){sText_Cancel, LIST_CANCEL};
+        if (FrontierMusic_IsAvailable(sTracks[i].song))
+            sCatalog->items[count++] = (struct ListMenuItem){sTracks[i].name, i};
+    sCatalog->items[count++] = (struct ListMenuItem){sText_Cancel, LIST_CANCEL};
     FillWindowPixelBuffer(sCatalog->windowId, PIXEL_FILL(1));
     SetStandardWindowBorderStyle(sCatalog->windowId, FALSE);
     list.items = sCatalog->items;
     list.moveCursorFunc = CatalogMoveCursor;
     list.itemPrintFunc = PrintTrackStatus;
-    list.totalItems = ARRAY_COUNT(sCatalog->items);
+    list.totalItems = count;
     list.maxShowed = 6;
     list.windowId = sCatalog->windowId;
     list.item_X = 8;

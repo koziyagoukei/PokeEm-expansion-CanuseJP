@@ -290,7 +290,7 @@ struct FrontierMusicSave
     u8 mode;
     u8 version;
     u16 checksum;
-    u16 reserved;
+    u16 earned; // FRONTIER_MUSIC_EARNED_* bits; outside the checksum, which predates them
 };
 
 struct SaveBlock3; // Defined after struct Pokemon below

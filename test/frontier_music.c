@@ -10,6 +10,7 @@
 #include "task.h"
 #include "util.h"
 #include "test/test.h"
+#include "constants/flags.h"
 #include "constants/songs.h"
 #include "constants/trainers.h"
 
@@ -43,15 +44,16 @@ TEST("Frontier music: extension is append-only and old-save garbage initializes 
     EXPECT_EQ(gSaveBlock3Ptr->frontierMusic.selectedSong, MUS_DUMMY);
 }
 
-TEST("Frontier music: all 21 distinct battle songs cost five BP each")
+TEST("Frontier music: all 23 distinct battle songs cost five BP each")
 {
     ResetMusic();
+    gSaveBlock3Ptr->frontierMusic.earned = FRONTIER_MUSIC_EARNED_RELEASE | FRONTIER_MUSIC_EARNED_FINAL;
     for (u32 i = 0; i < FRONTIER_MUSIC_TRACK_COUNT; i++)
     {
         u16 song = FrontierMusic_GetSong(i);
         for (u32 j = 0; j < i; j++)
             EXPECT_NE(song, FrontierMusic_GetSong(j));
-        EXPECT(song >= START_MUS && song <= END_MUS);
+        EXPECT((song >= START_MUS && song <= END_MUS) || song == MUS_POKEVIRUS_RELEASE || song == MUS_POKEVIRUS_FINAL);
         EXPECT(!FrontierMusic_IsUnlocked(song));
         gSaveBlock2Ptr->frontier.battlePoints = 5;
         EXPECT_EQ(FrontierMusic_Unlock(song), FRONTIER_MUSIC_OK);
@@ -311,4 +313,55 @@ TEST("Frontier music: Dome task chooses once at entry and does not reroll during
     CreateTask_PlayMapChosenOrBattleBGM(MUS_RG_VS_WILD);
     gTasks[taskId].func(taskId);
     EXPECT_EQ(GetCurrentMapMusic(), MUS_VS_FRONTIER_BRAIN);
+}
+
+static void ClearStoryProgress(void)
+{
+    static const u16 flags[] =
+    {
+        FLAG_STORY_CURE_FOUND, FLAG_STORY_POKEVIRUS_FADED,
+        FLAG_STORY_RESCUED_TOWER, FLAG_STORY_RESCUED_DOME, FLAG_STORY_RESCUED_PALACE, FLAG_STORY_RESCUED_ARENA,
+        FLAG_STORY_RESCUED_FACTORY, FLAG_STORY_RESCUED_PIKE, FLAG_STORY_RESCUED_PYRAMID, FLAG_STORY_RESCUED_CONTEST,
+    };
+    for (u32 i = 0; i < ARRAY_COUNT(flags); i++)
+        FlagClear(flags[i]);
+}
+
+TEST("Frontier music: the release and Pokevirus themes are offered only after those battles are won")
+{
+    ResetMusic();
+    ClearStoryProgress();
+    EXPECT(!FrontierMusic_IsAvailable(MUS_POKEVIRUS_RELEASE));
+    EXPECT(!FrontierMusic_IsAvailable(MUS_POKEVIRUS_FINAL));
+    EXPECT_EQ(FrontierMusic_Unlock(MUS_POKEVIRUS_RELEASE), FRONTIER_MUSIC_INVALID);
+    EXPECT_EQ(gSaveBlock2Ptr->frontier.battlePoints, 100);
+
+    FrontierMusic_Earn(FALSE);
+    EXPECT(FrontierMusic_IsAvailable(MUS_POKEVIRUS_RELEASE));
+    EXPECT(!FrontierMusic_IsAvailable(MUS_POKEVIRUS_FINAL));
+    EXPECT_EQ(FrontierMusic_Unlock(MUS_POKEVIRUS_RELEASE), FRONTIER_MUSIC_OK);
+    EXPECT_EQ(FrontierMusic_SetMode(FRONTIER_MUSIC_FIXED, MUS_POKEVIRUS_RELEASE), FRONTIER_MUSIC_OK);
+    gBattleTypeFlags = BATTLE_TYPE_TRAINER | BATTLE_TYPE_BATTLE_TOWER;
+    EXPECT_EQ(FrontierMusic_ChooseBattleBGM(MUS_VS_TRAINER), MUS_POKEVIRUS_RELEASE);
+    EXPECT_EQ(FrontierMusic_Unlock(MUS_POKEVIRUS_FINAL), FRONTIER_MUSIC_INVALID);
+
+    FrontierMusic_Earn(TRUE);
+    EXPECT(FrontierMusic_IsAvailable(MUS_POKEVIRUS_FINAL));
+    EXPECT_EQ(FrontierMusic_Unlock(MUS_POKEVIRUS_FINAL), FRONTIER_MUSIC_OK);
+    // The earned bits survive reloading the extension.
+    FrontierMusic_EnsureSaveData();
+    EXPECT(FrontierMusic_IsUnlocked(MUS_POKEVIRUS_FINAL));
+    EXPECT(FrontierMusic_IsAvailable(MUS_POKEVIRUS_RELEASE));
+}
+
+TEST("Frontier music: saves that already won those battles get the story themes from their flags")
+{
+    ResetMusic();
+    ClearStoryProgress();
+    FlagSet(FLAG_STORY_RESCUED_PIKE);
+    EXPECT(FrontierMusic_IsAvailable(MUS_POKEVIRUS_RELEASE));
+    EXPECT(!FrontierMusic_IsAvailable(MUS_POKEVIRUS_FINAL));
+    FlagSet(FLAG_STORY_POKEVIRUS_FADED);
+    EXPECT(FrontierMusic_IsAvailable(MUS_POKEVIRUS_FINAL));
+    ClearStoryProgress();
 }

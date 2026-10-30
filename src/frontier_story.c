@@ -10,6 +10,7 @@
 #include "field_player_avatar.h"
 #include "fieldmap.h"
 #include "frontier_guest.h"
+#include "frontier_music.h"
 #include "frontier_story.h"
 #include "frontier_util.h"
 #include "malloc.h"
@@ -51,6 +52,7 @@ struct StoryBattle
 {
     u8 level;
     bool8 releaseBattle;
+    bool8 finalBattle;
     u8 faintReplacements; // battler bits
 };
 
@@ -157,6 +159,7 @@ void FrontierStory_PrepareReleaseBattle(void)
 {
     sStoryBattle.level = GetPlayerPartyMaxLevel();
     sStoryBattle.releaseBattle = TRUE;
+    sStoryBattle.finalBattle = FALSE;
     sStoryBattle.faintReplacements = 0;
     SetPokevirusReleaseTransition();
 }
@@ -165,6 +168,7 @@ void FrontierStory_PrepareReleaseBattle(void)
 void FrontierStory_PrepareFinalBattle(void)
 {
     FrontierStory_PrepareReleaseBattle();
+    sStoryBattle.finalBattle = TRUE;
     SetPokevirusFinalBattle();
 }
 
@@ -172,12 +176,16 @@ void FrontierStory_PrepareMatchedBattle(void)
 {
     sStoryBattle.level = GetPlayerPartyMaxLevel();
     sStoryBattle.releaseBattle = FALSE;
+    sStoryBattle.finalBattle = FALSE;
     sStoryBattle.faintReplacements = 0;
 }
 
 void FrontierStory_EndStoryBattle(void)
 {
     gSpecialVar_Result = gBattleOutcome;
+    // The hub's music man offers the release (and final) battle music once it has been won.
+    if (sStoryBattle.releaseBattle && gBattleOutcome == B_OUTCOME_WON)
+        FrontierMusic_Earn(sStoryBattle.finalBattle);
     memset(&sStoryBattle, 0, sizeof(sStoryBattle));
 }
 
