@@ -385,6 +385,14 @@ ROMファイルそのものは配布しないでください。
 
 ## 10. ビルドする
 
+本プロジェクトは図鑑の漢字説明を初期設定にしています。初回ビルド前に、リポジトリのルートで参照データを取得してください。この取得時だけインターネット接続が必要です。
+
+```bash
+make fetch-pokedex-text
+```
+
+これは `python3 tools/pokedex_kanji.py fetch` と同じ処理です。取得したデータは `build/reference/poke-corpus/` に保存され、固定リビジョンとSHA256で検証されます。Gitには含まれないため、別PCや新しいcloneでは取得し直してください。通常の `make` はネットワークへ接続しません。
+
 リポジトリのルートで、以下を実行します。
 
 ```bash
@@ -402,6 +410,17 @@ make -j8
 ビルドに成功すると、`.gba` ファイルが生成されます。
 
 ## 11. よくあるエラー
+
+### `missing .../build/reference/poke-corpus/...; run python3 tools/pokedex_kanji.py fetch`
+
+漢字図鑑用の参照データが未取得です。マップやセーブデータの破損ではありません。リポジトリのルートで取得してから再ビルドしてください。
+
+```bash
+make fetch-pokedex-text
+make -j8
+```
+
+ネットワークが使えない場合は、取得済みの `build/reference/poke-corpus/` を同じリビジョンの作業環境から移してください。かな版で一時的にビルドする場合は `make -j8 POKEDEX_TEXT_STYLE=0` を使用できます。設定を省略した次のビルドは漢字版へ戻ります。
 
 ### `arm-none-eabi-gcc` が見つからない
 

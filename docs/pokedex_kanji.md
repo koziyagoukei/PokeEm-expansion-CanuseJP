@@ -9,8 +9,10 @@
 漢字版を使う場合、最初にプロジェクトルートで次を実行してください。ここだけインターネット接続が必要です。
 
 ```sh
-python3 tools/pokedex_kanji.py fetch
+make fetch-pokedex-text
 ```
+
+`python3 tools/pokedex_kanji.py fetch` を直接実行しても同じです。取得用のmakeターゲットは通常の生成処理より先に単独で実行でき、参照データがない状態でも呼び出せます。別PCや新しいcloneにはGit管理外のキャッシュがないため、それぞれで取得してください。
 
 取得先は `build/reference/poke-corpus/` です。固定リビジョンのファイルを取得し、manifestのSHA256と照合します。通常の `make` はネットワークへアクセスしません。キャッシュがない・破損している場合、必要なファイル名と取得コマンドを表示して停止します。
 

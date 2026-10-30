@@ -386,6 +386,7 @@ RULES_NO_SCAN += libagbsyscall clean clean-assets tidy tidymodern tidycheck tidy
 RULES_NO_SCAN += extract-bpej-contest check-bpej-contest-outputs clean-bpej-contest-assets FORCE_BPEJ_CONTEST_ASSETS
 RULES_NO_SCAN += extract-bpej-intro check-bpej-intro-outputs clean-bpej-intro-assets FORCE_BPEJ_INTRO_ASSETS
 RULES_NO_SCAN += extract-bpej-pokenav check-bpej-pokenav-outputs clean-bpej-pokenav-assets FORCE_BPEJ_POKENAV_ASSETS
+RULES_NO_SCAN += fetch-pokedex-text
 .PHONY: all rom agbcc modern compare check debug release
 .PHONY: check-bag-catalog
 check-bag-catalog:
@@ -420,7 +421,7 @@ ifeq ($(SETUP_PREREQS),1)
   # Oh and also generate mapjson sources before we use `SCANINC`.
   $(foreach line, $(shell $(MAKE) MAP_VERSION=$(MAP_VERSION) generated | sed "s/ /__SPACE__/g"), $(info $(subst __SPACE__, ,$(line))))
   ifneq ($(.SHELLSTATUS),0)
-    $(error Errors occurred while generating map-related sources. See error messages above for more details)
+    $(error Errors occurred while generating build prerequisites (maps, assets, or text). See error messages above for more details)
   endif
 endif
 
@@ -547,6 +548,9 @@ include trainer_rules.mk
 # so the kanji scan runs after them.
 .PHONY: FORCE_POKEDEX_TEXT
 FORCE_POKEDEX_TEXT:
+
+fetch-pokedex-text: $(POKEDEX_TEXT_TOOL) $(POKEDEX_TEXT_MANIFEST)
+	python3 $(POKEDEX_TEXT_TOOL) fetch
 
 # Select text before the font scan. Kana mode does not read corpus downloads.
 $(POKEDEX_TEXT_STAMP): FORCE_POKEDEX_TEXT $(POKEDEX_TEXT_TOOL) $(POKEDEX_TEXT_MANIFEST) $(wildcard include/config/*.h) $(wildcard graphics/fonts/kanji/koden12_atlas.*) charmap.txt charmap_kanji.txt
