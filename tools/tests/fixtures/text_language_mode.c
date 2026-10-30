@@ -201,8 +201,20 @@ static void switches(void)
     parity(automatic, FONT_NORMAL, 2, WINDOW_TEXT_PRINTER, 2);
 }
 
+static void decimalPoint(void)
+{
+    // "1.5" keeps a Latin decimal point in Japanese text; a sentence-final "。" does not.
+    const u8 japanese[] = {JPN, CHAR_1, CHAR_PERIOD, CHAR_5, EOS};
+    const u8 english[] = {ENG, CHAR_1, CHAR_PERIOD, CHAR_5, EOS};
+    const u8 sentence[] = {JPN, CHAR_1, CHAR_PERIOD, EOS};
+    const u8 latinSentence[] = {ENG, CHAR_1, CHAR_PERIOD, EOS};
+    assert(GetStringWidth(FONT_NORMAL, japanese, 0) == GetStringWidth(FONT_NORMAL, english, 0));
+    assert(GetStringWidth(FONT_NORMAL, sentence, 0) != GetStringWidth(FONT_NORMAL, latinSentence, 0));
+}
+
 static void kanji(void)
 {
+    decimalPoint();
     const u8 text[] = {CTRL, EXT_CTRL_CODE_KANJI, CTRL, EXT_CTRL_CODE_KANJI_GLYPH, 1,
         CTRL, EXT_CTRL_CODE_KANJI_GLYPH, 2, 1, ENG, CHAR_A, CHAR_1, EOS};
     const u8 automatic[] = {AUTO, CTRL, EXT_CTRL_CODE_KANJI_GLYPH, 1, 1, EOS};

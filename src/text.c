@@ -106,6 +106,15 @@ static bool32 IsJapaneseGlyph(u16 glyphId)
         || glyphId == JAPANESE_CHAR_VU;
 }
 
+// "." and "。" share one code. Between two digits it is a decimal point ("1.5"),
+// which keeps its Latin glyph in Japanese text like the digits themselves.
+static bool32 IsDecimalPoint(const u8 *period)
+{
+    return *period == CHAR_PERIOD
+        && period[-1] >= CHAR_0 && period[-1] <= CHAR_9
+        && period[1] >= CHAR_0 && period[1] <= CHAR_9;
+}
+
 static bool32 ShouldUseJapaneseGlyph(u16 glyphId, bool32 isJapanese)
 {
     // UI numbers keep their Latin glyphs/metrics without changing the mode
@@ -1967,7 +1976,8 @@ static u16 RenderText(struct TextPrinter *textPrinter)
         }
 
         // Extended symbols and EMOJI use the Latin sheet even in Japanese text.
-        bool32 useJapanese = ShouldUseJapaneseGlyph(currChar, textPrinter->japanese);
+        bool32 useJapanese = ShouldUseJapaneseGlyph(currChar, textPrinter->japanese)
+                          && !IsDecimalPoint(textPrinter->printerTemplate.currentChar - 1);
         sCurGlyphAdvance = 0;
 
         switch (textPrinter->fontId)
@@ -2336,7 +2346,7 @@ s32 GetStringWidth(u8 fontId, const u8 *str, s16 letterSpacing)
         default:
             if (!isJapanese && currChar == CHAR_ZWS)
                 continue;
-            glyphWidth = func(currChar, ShouldUseJapaneseGlyph(currChar, isJapanese));
+            glyphWidth = func(currChar, ShouldUseJapaneseGlyph(currChar, isJapanese) && !IsDecimalPoint(str - 1));
             break;
         }
 
