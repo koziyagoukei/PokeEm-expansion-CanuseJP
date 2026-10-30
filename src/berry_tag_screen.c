@@ -107,7 +107,7 @@ static const struct WindowTemplate sWindowTemplates[] =
         .bg = 1,
         .tilemapLeft = 11,
         .tilemapTop = 4,
-        .width = 8,
+        .width = 15,
         .height = 2,
         .paletteNum = 15,
         .baseBlock = 69,
@@ -116,28 +116,28 @@ static const struct WindowTemplate sWindowTemplates[] =
         .bg = 1,
         .tilemapLeft = 11,
         .tilemapTop = 7,
-        .width = 18,
+        .width = 15,
         .height = 4,
         .paletteNum = 15,
-        .baseBlock = 85,
+        .baseBlock = 99,
     },
     [WIN_DESC] = {
         .bg = 1,
         .tilemapLeft = 4,
         .tilemapTop = 14,
-        .width = 25,
+        .width = 22,
         .height = 4,
         .paletteNum = 15,
-        .baseBlock = 157,
+        .baseBlock = 159,
     },
     [WIN_BERRY_TAG] = {
         .bg = 0,
-        .tilemapLeft = 2,
+        .tilemapLeft = 3,
         .tilemapTop = 0,
-        .width = 8,
+        .width = 6,
         .height = 2,
         .paletteNum = 15,
-        .baseBlock = 257,
+        .baseBlock = 247,
     },
     DUMMY_WIN_TEMPLATE
 };
@@ -180,6 +180,9 @@ static const u8 sText_Var1DotVar2Cm[] = _("{ENG}{STR_VAR_1}.{STR_VAR_2} cm");
 static const u8 sText_NumberVar1Var2[] = _("{NO}{STR_VAR_1} {STR_VAR_2}");
 static const u8 sText_BerryTag[] = _("きのみのタグ");
 static const u8 sText_ThreeMarks[] = _("???");
+
+#define BERRY_TAG_TEXT_X 1
+#define BERRY_TAG_VALUE_X 34
 
 // code
 void DoBerryTagScreen(void)
@@ -395,7 +398,7 @@ static void AddBerryTagTextToBg0(void)
 {
     memcpy(GetBgTilemapBuffer(0), sBerryTag->tilemapBuffers[2], sizeof(sBerryTag->tilemapBuffers[2]));
     FillWindowPixelBuffer(WIN_BERRY_TAG, PIXEL_FILL(15));
-    PrintTextInBerryTagScreen(WIN_BERRY_TAG, sText_BerryTag, GetStringCenterAlignXOffset(FONT_NORMAL, sText_BerryTag, 0x40), 1, 0, 1);
+    PrintTextInBerryTagScreen(WIN_BERRY_TAG, sText_BerryTag, GetStringCenterAlignXOffset(FONT_NORMAL, sText_BerryTag, WindowWidthPx(WIN_BERRY_TAG)), 1, 0, 1);
     PutWindowTilemap(WIN_BERRY_TAG);
     ScheduleBgCopyTilemapToVram(0);
 }
@@ -415,13 +418,13 @@ static void PrintBerryNumberAndName(void)
     ConvertIntToDecimalStringN(gStringVar1, sBerryTag->berryId, STR_CONV_MODE_LEADING_ZEROS, 2);
     StringCopy(gStringVar2, berryInfo->name);
     StringExpandPlaceholders(gStringVar4, sText_NumberVar1Var2);
-    PrintTextInBerryTagScreen(WIN_BERRY_NAME, gStringVar4, 0, 1, 0, 0);
+    PrintTextInBerryTagScreen(WIN_BERRY_NAME, gStringVar4, BERRY_TAG_TEXT_X, 1, 0, 0);
 }
 
 static void PrintBerrySize(void)
 {
     const struct BerryInfo *berryInfo = GetBerryInfo(sBerryTag->berryId);
-    AddTextPrinterParameterized(WIN_SIZE_FIRM, FONT_NORMAL, sText_SizeSlash, 0, 1, TEXT_SKIP_DRAW, NULL);
+    AddTextPrinterParameterized(WIN_SIZE_FIRM, FONT_NORMAL, sText_SizeSlash, BERRY_TAG_TEXT_X, 1, TEXT_SKIP_DRAW, NULL);
     if (berryInfo->size != 0)
     {
         u32 centimeters = berryInfo->size / 10;
@@ -430,34 +433,34 @@ static void PrintBerrySize(void)
         ConvertIntToDecimalStringN(gStringVar1, centimeters, STR_CONV_MODE_LEFT_ALIGN, 2);
         ConvertIntToDecimalStringN(gStringVar2, fraction, STR_CONV_MODE_LEFT_ALIGN, 2);
         StringExpandPlaceholders(gStringVar4, sText_Var1DotVar2Cm);
-        AddTextPrinterParameterized(WIN_SIZE_FIRM, FONT_NORMAL, gStringVar4, 0x28, 1, 0, NULL);
+        AddTextPrinterParameterized(WIN_SIZE_FIRM, FONT_NORMAL, gStringVar4, BERRY_TAG_VALUE_X, 1, 0, NULL);
     }
     else
     {
-        AddTextPrinterParameterized(WIN_SIZE_FIRM, FONT_NORMAL, sText_ThreeMarks, 0x28, 1, 0, NULL);
+        AddTextPrinterParameterized(WIN_SIZE_FIRM, FONT_NORMAL, sText_ThreeMarks, BERRY_TAG_VALUE_X, 1, 0, NULL);
     }
 }
 
 static void PrintBerryFirmness(void)
 {
     const struct BerryInfo *berryInfo = GetBerryInfo(sBerryTag->berryId);
-    AddTextPrinterParameterized(WIN_SIZE_FIRM, FONT_NORMAL, sText_FirmSlash, 0, 0x11, TEXT_SKIP_DRAW, NULL);
+    AddTextPrinterParameterized(WIN_SIZE_FIRM, FONT_NORMAL, sText_FirmSlash, BERRY_TAG_TEXT_X, 0x11, TEXT_SKIP_DRAW, NULL);
     if (berryInfo->firmness != BERRY_FIRMNESS_UNKNOWN)
-        AddTextPrinterParameterized(WIN_SIZE_FIRM, FONT_NORMAL, sBerryFirmnessStrings[berryInfo->firmness], 0x28, 0x11, 0, NULL);
+        AddTextPrinterParameterized(WIN_SIZE_FIRM, FONT_NORMAL, sBerryFirmnessStrings[berryInfo->firmness], BERRY_TAG_VALUE_X, 0x11, 0, NULL);
     else
-        AddTextPrinterParameterized(WIN_SIZE_FIRM, FONT_NORMAL, sText_ThreeMarks, 0x28, 0x11, 0, NULL);
+        AddTextPrinterParameterized(WIN_SIZE_FIRM, FONT_NORMAL, sText_ThreeMarks, BERRY_TAG_VALUE_X, 0x11, 0, NULL);
 }
 
 static void PrintBerryDescription1(void)
 {
     const struct BerryInfo *berryInfo = GetBerryInfo(sBerryTag->berryId);
-    AddTextPrinterParameterized(WIN_DESC, FONT_NORMAL, berryInfo->description1, 0, 1, 0, NULL);
+    AddTextPrinterParameterized(WIN_DESC, FONT_NORMAL, berryInfo->description1, BERRY_TAG_TEXT_X, 1, 0, NULL);
 }
 
 static void PrintBerryDescription2(void)
 {
     const struct BerryInfo *berryInfo = GetBerryInfo(sBerryTag->berryId);
-    AddTextPrinterParameterized(WIN_DESC, FONT_NORMAL, berryInfo->description2, 0, 0x11, 0, NULL);
+    AddTextPrinterParameterized(WIN_DESC, FONT_NORMAL, berryInfo->description2, BERRY_TAG_TEXT_X, 0x11, 0, NULL);
 }
 
 static void CreateBerrySprite(void)
