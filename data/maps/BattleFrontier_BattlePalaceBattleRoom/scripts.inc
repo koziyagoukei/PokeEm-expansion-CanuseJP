@@ -452,56 +452,56 @@ BattleFrontier_BattlePalaceBattleRoom_Movement_SpenserEnter:
 	step_end
 
 BattleFrontier_BattlePalaceBattleRoom_Text_LetMeRestoreYourMons:
-	.string "おみごと……\nポケモンを かいふくして やろう……"
+	.string "おみごと……\nポケモンを 回復して やろう……"
 	.string "$"
 
 BattleFrontier_BattlePalaceBattleRoom_Text_PreparedFor2ndOpponent:
-	.string "つぎは 2にんめの あいて だが\nじゅんびは よろしいか?"
+	.string "次は 2人めの 相手 だが\n準備は よろしいか?"
 	.string "$"
 
 BattleFrontier_BattlePalaceBattleRoom_Text_PreparedFor3rdOpponent:
-	.string "つぎは 3にんめの あいて だが\nじゅんびは よろしいか?"
+	.string "次は 3人めの 相手 だが\n準備は よろしいか?"
 	.string "$"
 
 BattleFrontier_BattlePalaceBattleRoom_Text_PreparedFor4thOpponent:
-	.string "つぎは 4にんめの あいて だが\nじゅんびは よろしいか?"
+	.string "次は 4人めの 相手 だが\n準備は よろしいか?"
 	.string "$"
 
 BattleFrontier_BattlePalaceBattleRoom_Text_PreparedFor5thOpponent:
-	.string "つぎは 5にんめの あいて だが\nじゅんびは よろしいか?"
+	.string "次は 5人めの 相手 だが\n準備は よろしいか?"
 	.string "$"
 
 BattleFrontier_BattlePalaceBattleRoom_Text_PreparedFor6thOpponent:
-	.string "つぎは 6にんめの あいて だが\nじゅんびは よろしいか?"
+	.string "次は 6人めの 相手 だが\n準備は よろしいか?"
 	.string "$"
 
 BattleFrontier_BattlePalaceBattleRoom_Text_PreparedFor7thOpponent:
-	.string "つぎは 7にんめの あいて だが\nじゅんびは よろしいか?"
+	.string "次は 7人めの 相手 だが\n準備は よろしいか?"
 	.string "$"
 
 BattleFrontier_BattlePalaceBattleRoom_Text_SaveAndQuitGame:
-	.string "レポートを かいて しゅうりょう するか?"
+	.string "レポートを 書いて 終了 するか?"
 	.string "$"
 
 BattleFrontier_BattlePalaceBattleRoom_Text_WishToQuitChallenge:
-	.string "ちょうせんを ちゅうし するのか?$"
+	.string "挑戦を 中止 するのか?$"
 
 BattleFrontier_BattlePalaceBattleRoom_Text_SavingData:
-	.string "レポートを かいておる……\nしばし またれよ……"
+	.string "レポートを 書いておる……\nしばし またれよ……"
 	.string "$"
 
 BattleFrontier_BattlePalaceBattleRoom_Text_RecordLastMatch:
-	.string "さきほどの たたかいを\nフロンティアパスに きろく するか?"
+	.string "先ほどの 戦いを\nフロンティアパスに 記録 するか?"
 	.string "$"
 
 BattleFrontier_BattlePalaceBattleRoom_Text_ChallengingPalaceMaven:
-	.string "さて……\pここまで かちぬいた おぬしは\nわれらが あるじ パレスガーディアンに\lちょうせんする しかくを てにした……"
+	.string "さて……\pここまで 勝ちぬいた おぬしは\nわれらが あるじ パレスガーディアンに\l挑戦する しかくを てにした……"
 	.string ""
 	.string ""
 	.string "$"
 
 BattleFrontier_BattlePalaceBattleRoom_Text_ReadyForPalaceMaven:
-	.string "パレスガーディアンを およびする\n……かくごは よいか?"
+	.string "パレスガーディアンを およびする\n……覚悟は よいか?"
 	.string "$"
 
 BattleFrontier_BattlePalaceBattleRoom_Text_AnnounceArrivalOfSpenser:
@@ -509,7 +509,7 @@ BattleFrontier_BattlePalaceBattleRoom_Text_AnnounceArrivalOfSpenser:
 	.string "$"
 
 BattleFrontier_BattlePalaceBattleRoom_Text_SpenserFirstIntro:
-	.string "ウコン『わが み\nつねに ポケモンと ありっ!\pわが こころ\nつねに ポケモンと ありっ!\pわかき トレーナーよ!!\nきさまは ポケモンを\lしんじて おるか?\pきさまは ポケモンを\nしんじぬく ことが できるかっ!\pもろき しんらいの きずな では\nわが きょうだい には かてん!!"
+	.string "ウコン『わが み\nつねに ポケモンと ありっ!\pわが 心\nつねに ポケモンと ありっ!\p若き トレーナーよ!!\nきさまは ポケモンを\l信じて おるか?\pきさまは ポケモンを\n信じぬく ことが できるかっ!\pもろき しんらいの きずな では\nわが 兄弟 には かてん!!"
 	.string ""
 	.string ""
 	.string ""
@@ -521,34 +521,32 @@ BattleFrontier_BattlePalaceBattleRoom_Text_SpenserFirstIntro:
 	.string "$"
 
 BattleFrontier_BattlePalaceBattleRoom_Text_ProveYourBondWithMons:
-	.string "ポケモンとの きずな!!\nここに しめせぇい!!"
-	.string "$"
+	.string "ポケモンとの 絆!!\n"
+	.string "ここに 示せぇい!!$"
 
 BattleFrontier_BattlePalaceBattleRoom_Text_SpenserPostSilverBattle:
-	.string "ウコン『ぐわはっはっ!\pやはり ハッタリ なんぞ きかんか!!\nおどしたり して わるかったのぅ!!\pおーい! あれを!"
-	.string ""
-	.string ""
-	.string ""
-	.string "$"
+	.string "ウコン『ぐわはっはっ!\p"
+	.string "やはり ハッタリ なんぞ きかんか!!\n"
+	.string "脅したり して 悪かったのぅ!!\p"
+	.string "おーい! あれを!$"
 
 BattleFrontier_BattlePalaceBattleRoom_Text_LetsSeeFrontierPass:
-	.string "やれやれ あのまま いげんを たもって\nおいて くだされば よい ものを……\pおい! フロンティアパスを かさんか!"
-	.string ""
-	.string ""
-	.string "$"
+	.string "やれやれ あのまま 威厳を 保って\n"
+	.string "おいて くだされば よい ものを……\p"
+	.string "おい! フロンティアパスを 貸さんか!$"
 
 BattleFrontier_BattlePalaceBattleRoom_Text_ReceivedSpiritsSymbol:
 	.string "フロンティアパスに\nスピリットシンボルが きざまれた!"
 	.string "$"
 
 BattleFrontier_BattlePalaceBattleRoom_Text_SpenserAwaitNextTime:
-	.string "ウコン『おまえの ポケモンたちは\nまことに すんだ ひとみを しとる!\pつぎの きかいを たのしみに しとるぞ!"
+	.string "ウコン『おまえの ポケモンたちは\nまことに すんだ ひとみを しとる!\p次の きかいを 楽しみに しとるぞ!"
 	.string ""
 	.string ""
 	.string "$"
 
 BattleFrontier_BattlePalaceBattleRoom_Text_SpenserThisTimeWontHoldBack:
-	.string "ウコン『ぐわはっはっ!\nここまで かちぬいて きおったか!\pおまえは ポケモン たちと\nまことに ええ かんけいを\lきずいて おるよう だな!\pうむ!\pほいじゃあ こんどは わしらも\nハッタリや てかげんは\lいっさい ぬきで いくと しよう!\pええか? かくご せい!!"
+	.string "ウコン『ぐわはっはっ!\nここまで 勝ちぬいて きおったか!\pおまえは ポケモン たちと\nまことに ええ かんけいを\lきずいて おるよう だな!\pうむ!\pほいじゃあ 今度は わしらも\nハッタリや てかげんは\lいっさい ぬきで いくと しよう!\pええか? 覚悟 せい!!"
 	.string ""
 	.string ""
 	.string ""
@@ -562,7 +560,7 @@ BattleFrontier_BattlePalaceBattleRoom_Text_Kaaah:
 	.string "…… …… …… かーっ!!!$"
 
 BattleFrontier_BattlePalaceBattleRoom_Text_SpenserYourTeamIsAdmirable:
-	.string "ウコン『いやはや よう やったわ!!\nぜんりょくの わが きょうだいが\lはが たたん とは なぁ!\pいやー おまえらは まことに すんばらしい!\nおーいっ! はやく あれを!!"
+	.string "ウコン『いやはや よう やったわ!!\n全力の わが 兄弟が\lはが たたん とは なぁ!\pいやー おまえらは まことに すんばらしい!\nおーいっ! 早く あれを!!"
 	.string ""
 	.string ""
 	.string ""
@@ -570,16 +568,16 @@ BattleFrontier_BattlePalaceBattleRoom_Text_SpenserYourTeamIsAdmirable:
 	.string "$"
 
 BattleFrontier_BattlePalaceBattleRoom_Text_HurryWithFrontierPass:
-	.string "ったく ここの イメージと いうのを\nかんがえて くれない おかた だ……\pええい! おまえ!!\nさっさと フロンティアパスを かさんか!"
+	.string "ったく ここの イメージと 言うのを\n考えて くれない おかた だ……\pええい! おまえ!!\nさっさと フロンティアパスを かさんか!"
 	.string ""
 	.string ""
 	.string "$"
 
 BattleFrontier_BattlePalaceBattleRoom_Text_SpiritsSymbolTookGoldenShine:
-	.string "スピリットシンボルが\nきんいろに かがやいた!"
+	.string "スピリットシンボルが\n金色に 輝いた!"
 	.string "$"
 
 BattleFrontier_BattlePalaceBattleRoom_Text_SpenserComeSeeMeAgain:
-	.string "ウコン『ぐわはっはっ!\pこれからも ときどき あそびに こいよ!\nわしも きょうだいも まっとる からな!!"
+	.string "ウコン『ぐわはっはっ!\pこれからも ときどき 遊びに こいよ!\nわしも 兄弟も まっとる からな!!"
 	.string ""
 	.string "$"

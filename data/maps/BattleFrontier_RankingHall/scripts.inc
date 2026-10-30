@@ -97,17 +97,18 @@ BattleFrontier_RankingHall_EventScript_NinjaBoyNameOnList::
 	end
 
 BattleFrontier_RankingHall_Text_DomePikeFactoryRecords:
-	.string "バトルドーム バトルチューブ\nバトルファクトリー の きろくは こちら$"
+	.string "バトルドーム バトルチューブ\nバトルファクトリー の 記録は こちら$"
 
 BattleFrontier_RankingHall_Text_PalaceArenaPyramidRecords:
-	.string "バトルパレス バトルアリーナ\nバトルピラミッド の きろくは こちら$"
+	.string "バトルパレス バトルアリーナ\nバトルピラミッド の 記録は こちら$"
 
 BattleFrontier_RankingHall_Text_IsYourNameOnThisList:
-	.string "ねえ きみの なまえ\nここに のってるの?$"
+	.string "ねえ きみの 名前\nここに 乗ってるの?$"
 
 BattleFrontier_RankingHall_Text_WowThatsSuper:
-	.string "へー すごいね!\nぼくも がんばらなきゃ!$"
+	.string "へー すごいね!\n"
+	.string "ぼくも がんばらなきゃ!$"
 
 BattleFrontier_RankingHall_Text_WorkHarderIfYouSawFriendsName:
-	.string "そうなんだ…\pでも ともだちの なまえを ここで みると\nがんばろうって きもちに なるよね!$"
+	.string "そうなんだ…\pでも 友だちの 名前を ここで 見ると\nがんばろうって 気持ちに なるよね!$"
 

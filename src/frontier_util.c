@@ -132,8 +132,8 @@ const struct FrontierBrain gFrontierBrainInfo[NUM_FRONTIER_FACILITIES] =
             COMPOUND_STRING("{JPN}アッハッハッ!! ステキっ!!") //Gold
         },
         .wonTexts = {
-            COMPOUND_STRING("{JPN}アッハッハッ!! はずかしく ないのっ!?\nみんなが みてるよっ!!"), //Silver
-            COMPOUND_STRING("{JPN}ドームスーパースターの\nなまえは かざりじゃ ないっ!!") //Gold
+            COMPOUND_STRING("{JPN}アッハッハッ!! はずかしく ないのっ!?\nみんなが 見てるよっ!!"), //Silver
+            COMPOUND_STRING("{JPN}ドームスーパースターの\n名前は かざりじゃ ないっ!!") //Gold
         },
         .battledBit = {1 << 2, 1 << 3},
         .streakAppearances = {4, 9, 5, 0},
@@ -151,7 +151,7 @@ const struct FrontierBrain gFrontierBrainInfo[NUM_FRONTIER_FACILITIES] =
         },
         .wonTexts = {
             COMPOUND_STRING("{JPN}ポケモンが なんじゃく なのは\nトレーナーが なんじゃく だからだ!!"), //Silver
-            COMPOUND_STRING("{JPN}ぐわはっはっは!!\nわが きょうだいの まえに てき なし!!") //Gold
+            COMPOUND_STRING("{JPN}ぐわはっはっは!!\nわが 兄弟の 前に 敵 なし!!") //Gold
         },
         .battledBit = {1 << 4, 1 << 5},
         .streakAppearances = {21, 42, 21, 1},
@@ -1884,6 +1884,43 @@ u8 GetFrontierBrainStatusForStreak(u8 facility, u32 streak)
     return status;
 }
 
+struct FrontierTrainerTexts
+{
+    const u8 *before;
+    const u8 *trainerWon;
+    const u8 *trainerLost;
+};
+
+#include "data/battle_frontier/battle_frontier_trainer_texts.h"
+
+// The Frontier's own trainers speak their written lines; Battle Tent, record-mixing,
+// Apprentice and e-Reader trainers keep their Easy Chat words. FALSE when not handled.
+bool32 CopyFrontierTrainerOwnText(u8 whichText, u16 trainerId)
+{
+    const u8 *text;
+
+    if (trainerId >= FRONTIER_TRAINERS_COUNT || gFacilityTrainers != gBattleFrontierTrainers)
+        return FALSE;
+    switch (whichText)
+    {
+    case FRONTIER_BEFORE_TEXT:
+        text = sFrontierTrainerTexts[trainerId].before;
+        break;
+    case FRONTIER_PLAYER_LOST_TEXT:
+        text = sFrontierTrainerTexts[trainerId].trainerWon;
+        break;
+    case FRONTIER_PLAYER_WON_TEXT:
+        text = sFrontierTrainerTexts[trainerId].trainerLost;
+        break;
+    default:
+        return FALSE;
+    }
+    if (text == NULL)
+        return FALSE;
+    StringCopy(gStringVar4, text);
+    return TRUE;
+}
+
 void CopyFrontierTrainerText(u8 whichText, u16 trainerId)
 {
     if (GetFrontierGuestTrainer(trainerId) != NULL)
@@ -1891,6 +1928,8 @@ void CopyFrontierTrainerText(u8 whichText, u16 trainerId)
         CopyFrontierGuestText(whichText, trainerId);
         return;
     }
+    if (CopyFrontierTrainerOwnText(whichText, trainerId))
+        return;
     switch (whichText)
     {
     case FRONTIER_BEFORE_TEXT:

@@ -440,63 +440,63 @@ BattleFrontier_BattleTowerMultiBattleRoom_Movement_WalkInPlaceLeft:
 	step_end
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_ReadyFor2ndOpponentSet:
-	.string "つぎは 2くみめの あいてです\n"
-	.string "じゅんびは よろしいですか?$"
+	.string "次は 2くみめの 相手です\n"
+	.string "準備は よろしいですか?$"
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_ReadyFor3rdOpponentSet:
-	.string "つぎは 3くみめの あいてです\n"
-	.string "じゅんびは よろしいですか?$"
+	.string "次は 3くみめの 相手です\n"
+	.string "準備は よろしいですか?$"
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_ReadyFor4thOpponentSet:
-	.string "つぎは 4くみめの あいてです\n"
-	.string "じゅんびは よろしいですか?$"
+	.string "次は 4くみめの 相手です\n"
+	.string "準備は よろしいですか?$"
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_ReadyFor5thOpponentSet:
-	.string "つぎは 5くみめの あいてです\n"
-	.string "じゅんびは よろしいですか?$"
+	.string "次は 5くみめの 相手です\n"
+	.string "準備は よろしいですか?$"
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_ReadyFor6thOpponentSet:
-	.string "つぎは 6くみめの あいてです\n"
-	.string "じゅんびは よろしいですか?$"
+	.string "次は 6くみめの 相手です\n"
+	.string "準備は よろしいですか?$"
 
 BattleFrontier_BattleTowerMultiBattleRoom_Text_ReadyFor7thOpponentSet:
-	.string "つぎは 7くみめの あいてです\n"
-	.string "じゅんびは よろしいですか?$"
+	.string "次は 7くみめの 相手です\n"
+	.string "準備は よろしいですか?$"
 
 @ Unused
 BattleFrontier_BattleTowerMultiBattleRoom_Text_2ndOpponentSetNext:
-	.string "{JPN}つぎは 2くみめの あいてです\n"
+	.string "{JPN}次は 2くみめの 相手です\n"
 	.string "がんばってください!$"
 
 @ Unused
 BattleFrontier_BattleTowerMultiBattleRoom_Text_3rdOpponentSetNext:
-	.string "{JPN}つぎは 3くみめの あいてです\n"
+	.string "{JPN}次は 3くみめの 相手です\n"
 	.string "がんばってください!$"
 
 @ Unused
 BattleFrontier_BattleTowerMultiBattleRoom_Text_4thOpponentSetNext:
-	.string "{JPN}つぎは 4くみめの あいてです\n"
+	.string "{JPN}次は 4くみめの 相手です\n"
 	.string "がんばってください!$"
 
 @ Unused
 BattleFrontier_BattleTowerMultiBattleRoom_Text_5thOpponentSetNext:
-	.string "{JPN}つぎは 5くみめの あいてです\n"
+	.string "{JPN}次は 5くみめの 相手です\n"
 	.string "がんばってください!$"
 
 @ Unused
 BattleFrontier_BattleTowerMultiBattleRoom_Text_6thOpponentSetNext:
-	.string "{JPN}つぎは 6くみめの あいてです\n"
+	.string "{JPN}次は 6くみめの 相手です\n"
 	.string "がんばってください!$"
 
 @ Unused
 BattleFrontier_BattleTowerMultiBattleRoom_Text_7thOpponentSetNext:
-	.string "{JPN}つぎは 7くみめの あいてです\n"
+	.string "{JPN}次は 7くみめの 相手です\n"
 	.string "がんばってください!$"
 
 gText_LinkStandby3::
-	.string "つうしん まちです...$"
+	.string "通信 まちです...$"
 
 gText_YourPartnerHasRetired::
 	.string "{JPN}パートナーが リタイアしました\p"
-	.string "バトルルームの ちょうせんは\n"
-	.string "ちゅうしと なります$"
+	.string "バトルルームの 挑戦は\n"
+	.string "中止と なります$"

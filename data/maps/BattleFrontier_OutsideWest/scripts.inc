@@ -17,7 +17,7 @@ BattleFrontier_OutsideWest_EventScript_FerryAttendant::
 	end
 
 BattleFrontier_OutsideWest_Text_FerrySuspended:
-	.string "ただいま ふねは おやすみちゅうです\nみなみの ひろばへは あるいて どうぞ！$"
+	.string "ただいま ふねは おやすみちゅうです\nみなみの ひろばへは 歩いて どうぞ！$"
 
 BattleFrontier_OutsideWest_EventScript_BattleDomeSign::
 	msgbox BattleFrontier_OutsideWest_Text_BattleDomeSign, MSGBOX_SIGN
@@ -197,47 +197,48 @@ BattleFrontier_OutsideWest_EventScript_Man4::
 	end
 
 BattleFrontier_OutsideWest_Text_BattleDomeSign:
-	.string "ここは バトルドーム!\nめざせ! むてきの スーパースター!$"
+	.string "ここは バトルドーム!\n"
+	.string "目指せ! 無敵の スーパースター!$"
 
 BattleFrontier_OutsideWest_Text_BattleFactorySign:
-	.string "ここは バトルファクトリー!\nさがせ! さいきょう ポケモン!$"
+	.string "ここは バトルファクトリー!\nさがせ! 最強 ポケモン!$"
 
 BattleFrontier_OutsideWest_Text_BattlePikeSign:
-	.string "ここは バトルチューブ!\nえらべ! 3つの みち!$"
+	.string "ここは バトルチューブ!\n選べ! 3つの 道!$"
 
 BattleFrontier_OutsideWest_Text_ThisIsBattleTower:
-	.string "ここは バトルタワー さ!\pトレーナーは きたえあげた ポケモンで\nひたすら かちぬいて いくのさ!$"
+	.string "ここは バトルタワー さ!\pトレーナーは 鍛えあげた ポケモンで\nひたすら 勝ちぬいて いくのさ!$"
 
 BattleFrontier_OutsideWest_Text_CantFindBattleTower:
-	.string "バトルタワーに いきたいのに\nフロンティアパスの マップを みても\lなにが なんだか…… ひろすぎる……$"
+	.string "バトルタワーに いきたいのに\nフロンティアパスの マップを 見ても\lなにが なんだか…… ひろすぎる……$"
 
 BattleFrontier_OutsideWest_Text_GotSeasickOnWayHere:
-	.string "{JPN}うっぷ…… ふねに よった きがする。\pもう ここに ついているんだから\nうみかぜに あたって おこうっと。$"
+	.string "{JPN}うっぷ…… ふねに よった きがする。\pもう ここに ついているんだから\n海かぜに あたって おこうっと。$"
 
 BattleFrontier_OutsideWest_Text_SureWeCanChallengeWithNoMons:
-	.string "{JPN}なあなあ にいちゃん。\nぼくらの ポケモンが いなくても\lファクトリーなら だいじょうぶなんだね？$"
+	.string "{JPN}なあなあ にいちゃん。\nぼくらの ポケモンが いなくても\lファクトリーなら 大丈夫なんだね？$"
 
 BattleFrontier_OutsideWest_Text_BigGuySaidIllLendYouMons:
-	.string "{JPN}だいじょうぶ！ かしてもらうこにも\nちゃんと あいさつするんだよ。\p……って ぼくも いま\nおしえて もらった きがする！$"
+	.string "{JPN}大丈夫！ かしてもらうこにも\nちゃんと あいさつするんだよ。\p……って ぼくも いま\n教えて もらった きがする！$"
 
 BattleFrontier_OutsideWest_Text_WhosRaisingThoseRentalMons:
-	.string "{JPN}ファクトリーで かりた ポケモンと\nわかれるとき ちょっと さみしいんだ。\pまた あえたら さいしょから\nおたがい わかりあえそうな きがするよ。$"
+	.string "{JPN}ファクトリーで 借りた ポケモンと\nわかれるとき ちょっと さみしいんだ。\pまた あえたら 最初から\nおたがい わかりあえそうな きがするよ。$"
 
 BattleFrontier_OutsideWest_Text_ScaredOfPikeBecauseSeviper:
-	.string "{JPN}ハブネークの いりぐちって\nちかくで みると はくりょく あるわね。\pこわいけど はいってみたい！\nこの きもちまで みんなと おそろいよ。$"
+	.string "{JPN}ハブネークの 入口って\n近くで 見ると はくりょく あるわね。\p怖いけど 入ってみたい！\nこの 気持ちまで みんなと おそろいよ。$"
 
 BattleFrontier_OutsideWest_Text_LetsPlayRockPaperScissors:
-	.string "{JPN}ジャンケンで さいしょの みちを\nきめるのも たのしいよね！\pじゃーん けーん ぽん！$"
+	.string "{JPN}ジャンケンで 最初の 道を\n決めるのも 楽しいよね！\pじゃーん けーん ぽん！$"
 
 BattleFrontier_OutsideWest_Text_WonIllTakePikeChallenge:
-	.string "{JPN}やったあ！ かっちゃった！\nきょうは まんなかの みちに しよう！$"
+	.string "{JPN}やったあ！ かっちゃった！\n今日は まんなかの 道に しよう！$"
 
 BattleFrontier_OutsideWest_Text_LostIllPutOffPikeChallenge:
-	.string "{JPN}あっ まけちゃった！\nじゃあ ひだりの みちに してみよう！$"
+	.string "{JPN}あっ 負けちゃった！\nじゃあ 左の 道に してみよう！$"
 
 BattleFrontier_OutsideWest_Text_DomeIsHereGrandpa:
-	.string "{JPN}じいちゃん ここが バトルドーム！\nわたし おうえん してるからね！$"
+	.string "{JPN}じいちゃん ここが バトルドーム！\nわたし 応援 してるからね！$"
 
 BattleFrontier_OutsideWest_Text_FansOverThereUsedToBeTrainers:
-	.string "{JPN}あのひとたち しょうぶも つよいけど\nいまは おうえんが たのしいんだって。\pまいにち ここで まちあわせ。\nずっと いっしょで いいかお してるよ。$"
+	.string "{JPN}あのひとたち 勝負も 強いけど\n今は 応援が 楽しいんだって。\p毎日 ここで まちあわせ。\nずっと 一緒で いいかお してるよ。$"
 

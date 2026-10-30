@@ -1464,7 +1464,7 @@ LilycoveCity_ContestLobby_Text_PokemonWonWeHavePrize:
 	.string "{JPN}コンテストでの 優勝\nおめでとう ございます!\pしょうひんは こちらで おあずかり\nして ありますよ! さあ どうぞ!$"
 
 LilycoveCity_ContestLobby_Text_ComeBackForPrizeLater:
-	.string "{JPN}それでは また あとで\nとりに きて くださいね!$"
+	.string "{JPN}それでは また あとで\nとりに 来て くださいね!$"
 
 ContestHall_Text_GettingStartedParticipantsAsFollows:
 	.string "{JPN}司会『はい! これより\n{STR_VAR_3} ランクの\lポケモン {STR_VAR_2}が\lはじまります!\p出場 される トレーナーと\nポケモンの みなさんは こちら!$"
@@ -1506,7 +1506,7 @@ ContestHall_Text_AcceptYourPrize:
 	.string "{JPN}司会『さあ!\nしょうひんを おうけとり ください!$"
 
 ContestHall_Text_ConferRibbonAsPrize:
-	.string "{JPN}しょうひんと して\nこの リボンを おうけとり ください!$"
+	.string "{JPN}賞品と して\nこの リボンを お受け取り ください!$"
 
 ContestHall_Text_ReceivedRibbon:
 	.string "{JPN}{PLAYER}は リボンを もらった!$"
@@ -1522,7 +1522,7 @@ ContestHall_Text_OnlyRegister4Players:
 	.string "{JPN}こちらは ポケモンコンテストの\n4めいさま 専用の 受付です!\pおともだちが あと3めい そろえば\n4にんで 同じ コンテストに でられます!\l参加 しますか?$"
 
 LilycoveCity_ContestLobby_Text_ProgressWillBeSaved:
-	.string "{JPN}コンテストに エントリーする まえに\nレポートを かきます$"
+	.string "{JPN}コンテストに エントリーする 前に\nレポートを 書きます$"
 
 LilycoveCity_ContestLobby_Text_ParticipateAnotherTime:
 	.string "{JPN}またの 参加を おまち してます!$"
@@ -1556,7 +1556,7 @@ LilycoveCity_ContestLobby_Text_PlayersMadeDifferentChoice:
 	.string "{JPN}おたがいの 選択が ちがっているようです$"
 
 LilycoveCity_ContestLobby_Text_PleaseWaitBButtonCancel:
-	.string "{JPN}しょうしょう おまち ください\n……Bボタンで キャンセル$"
+	.string "{JPN}少々 お待ち ください\n……Bボタンで キャンセル$"
 
 @ Unused
 LilycoveCity_ContestLobby_Text_ParticipateAnotherTime2:
@@ -1570,7 +1570,7 @@ LilycoveCity_ContestLobby_Text_YourMonIsEntryNumX:
 	.string "{JPN}それでは お客さまの ポケモンを\nエントリー します!\pお客さまの エントリーナンバーは\n{STR_VAR_2}ばん に なります!$"
 
 LilycoveCity_ContestLobby_Text_ContestBeginShortly:
-	.string "{JPN}コンテストは すぐに はじまります!$"
+	.string "{JPN}コンテストは すぐに 始まります!$"
 
 LilycoveCity_ContestLobby_Text_LinkContestReception:
 	.string "{JPN}ポケモン コンテスト\n通信 受付へ ようこそ!\pこちらでは ともだちと\n同じ コンテストに でられます$"
@@ -1588,7 +1588,8 @@ LilycoveCity_ContestLobby_Text_MonInNoCondition2:
 	.string "{JPN}そちらの ポケモンは げんきがない\nようなので 出場 できないです…$"
 
 LilycoveCity_ContestLobby_Text_EggCannotTakePart2:
-	.string "{JPN}ごめんなさい!\nタマゴは コンテストに でられないんです…$"
+	.string "{JPN}ごめんなさい!\n"
+	.string "タマゴは コンテストに 出られないんです…$"
 
 LilycoveCity_ContestLobby_Text_EnterWhichPokemon3:
 	.string "{JPN}どの ポケモンを 参加 させますか?$"
@@ -1636,4 +1637,5 @@ ContestHall_Text_SecondStageOfJudging:
 	.string "{JPN}2次 審査は いよいよ\nおまちかねの アピールタイム!\lわざで アピール しまくりましょうー!$"
 
 ContestHall_Text_LetsAppeal:
-	.string "{JPN}では はりきって どうぞ!\nレッツ! アピール!$"
+	.string "{JPN}では はりきって どうぞ!\n"
+	.string "レッツ! アピール!$"

@@ -27,7 +27,7 @@ BattleFrontier_OutsideSouth_EventScript_ResortSign::
 	end
 
 BattleFrontier_OutsideSouth_Text_Hub:
-	.string "フロンティア ハブ\nちょうせんの じゅんびは こちらで！$"
+	.string "フロンティア ハブ\n挑戦の 準備は こちらで！$"
 
 BattleFrontier_OutsideSouth_Text_Contest:
 	.string "ポケモン コンテストかいじょう$"
@@ -36,7 +36,10 @@ BattleFrontier_OutsideSouth_Text_Museum:
 	.string "フロンティア びじゅつかん$"
 
 BattleFrontier_OutsideSouth_Text_Facilities:
-	.string "このさき バトルフロンティア\n7つの バトルしせつ$"
+	.string "この先 バトルフロンティア\n"
+	.string "7つの バトル施設$"
 
 BattleFrontier_OutsideSouth_Text_Resort:
-	.string "ミニミニリゾート ゲート\pこのさき ミニミニキャンプ\nさらに みなみに ミニミニべっそう$"
+	.string "ミニミニリゾート ゲート\p"
+	.string "この先 ミニミニキャンプ\n"
+	.string "さらに 南に ミニミニ別荘$"

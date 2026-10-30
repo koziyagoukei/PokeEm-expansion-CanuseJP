@@ -145,23 +145,23 @@ FrontierPractice_Invalid:
 	goto FrontierPractice_Menu
 
 FrontierPractice_Text_Welcome:
-	.string "{JPN}ボックスの ポケモンを かりて\nきみの れんしゅうあいてに なるよ！\pあいては 6ぴきまで えらべるよ。\nもとの ポケモンは かわらないよ。$"
+	.string "{JPN}ボックスの ポケモンを 借りて\nきみの れんしゅうあいてに なるよ！\p相手は 6ぴきまで 選べるよ。\nもとの ポケモンは かわらないよ。$"
 FrontierPractice_Text_Settings:
-	.string "{JPN}あいて {STR_VAR_1}ひき  AI {STR_VAR_2}\n{STR_VAR_3}$"
+	.string "{JPN}相手 {STR_VAR_1}匹  AI {STR_VAR_2}\n{STR_VAR_3}$"
 FrontierPractice_Text_Add:
-	.string "{JPN}あいてを えらぶ$"
+	.string "{JPN}相手を 選ぶ$"
 FrontierPractice_Text_Remove:
-	.string "{JPN}あいてを はずす$"
+	.string "{JPN}相手を はずす$"
 FrontierPractice_Text_Team:
-	.string "{JPN}あいてを かくにん$"
+	.string "{JPN}相手を 確認$"
 FrontierPractice_Text_AI:
-	.string "{JPN}AIの つよさ$"
+	.string "{JPN}AIの 強さ$"
 FrontierPractice_Text_Format:
-	.string "{JPN}たいせん けいしき$"
+	.string "{JPN}対戦 けいしき$"
 FrontierPractice_Text_Level:
-	.string "{JPN}レベルの せってい$"
+	.string "{JPN}レベルの 設定$"
 FrontierPractice_Text_Battle:
-	.string "{JPN}たいせんする$"
+	.string "{JPN}対戦する$"
 FrontierPractice_Text_Exit:
 	.string "{JPN}もどる$"
 FrontierPractice_Text_Slot1:
@@ -177,7 +177,7 @@ FrontierPractice_Text_Slot5:
 FrontierPractice_Text_Slot6:
 	.string "{JPN}6ばんを はずす$"
 FrontierPractice_Text_Clear:
-	.string "{JPN}ぜんぶ はずす$"
+	.string "{JPN}全部 はずす$"
 FrontierPractice_Text_Single:
 	.string "{JPN}シングル$"
 FrontierPractice_Text_Double:
@@ -185,20 +185,20 @@ FrontierPractice_Text_Double:
 FrontierPractice_Text_LevelOriginal:
 	.string "{JPN}そのまま$"
 FrontierPractice_Text_Level50:
-	.string "{JPN}ぜんいん Lv50$"
+	.string "{JPN}全員 Lv50$"
 FrontierPractice_Text_Confirm:
-	.string "{JPN}この せっていで たいせんする？\nしょうはいで おかねは かわらないよ。\pてもちの じょうたいは\nたいせんまえに もどすからね！$"
+	.string "{JPN}この 設定で 対戦する？\nしょうはいで お金は かわらないよ。\pてもちの 状態は\n対戦まえに もどすからね！$"
 FrontierPractice_Text_Added:
-	.string "{JPN}れんしゅうあいてに くわえたよ！$"
+	.string "{JPN}練習相手に 加えたよ！$"
 FrontierPractice_Text_Finished:
-	.string "{JPN}おつかれさま！\nまた くみあわせを ためしてみよう！$"
+	.string "{JPN}お疲れさま！\nまた 組みあわせを 試してみよう！$"
 FrontierPractice_Text_NoTeam:
-	.string "{JPN}まずは ボックスから\nれんしゅうあいてを えらんでね。$"
+	.string "{JPN}まずは ボックスから\nれんしゅうあいてを 選んでね。$"
 FrontierPractice_Text_TooFew:
-	.string "{JPN}シングルは おたがい 1ぴきいじょう\nダブルは 2ひきいじょう ひつようだよ。$"
+	.string "{JPN}シングルは おたがい 1ぴきいじょう\nダブルは 2匹いじょう 必要だよ。$"
 FrontierPractice_Text_Full:
-	.string "{JPN}あいては 6ぴきまでだよ。\nいれかえるなら さきに はずしてね。$"
+	.string "{JPN}相手は 6ぴきまでだよ。\n入れかえるなら 先に はずしてね。$"
 FrontierPractice_Text_Changed:
-	.string "{JPN}えらんだ ボックスの なかみが\nかわったみたい。 えらびなおしてね。$"
+	.string "{JPN}選んだ ボックスの なかみが\n変わったみたい。 選びなおしてね。$"
 FrontierPractice_Text_Invalid:
-	.string "{JPN}じゅんびが できなかったよ。\nポケモンを かくにんしてみてね。$"
+	.string "{JPN}準備が できなかったよ。\nポケモンを 確認してみてね。$"

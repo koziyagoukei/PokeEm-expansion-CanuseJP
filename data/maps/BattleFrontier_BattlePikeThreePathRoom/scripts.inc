@@ -262,106 +262,107 @@ BattleFrontier_BattlePikeThreePathRoom_Movement_HintGiverReturnToPos:
 	step_end
 
 BattleFrontier_BattlePikeThreePathRoom_Text_CurrentlyInRoom1:
-	.string "げんざい おきゃくさまは\n1へやめに いらっしゃいます……"
+	.string "現在 お客様は\n1へやめに いらっしゃいます……"
 	.string "$"
 
 BattleFrontier_BattlePikeThreePathRoom_Text_CurrentlyInRoom3:
-	.string "げんざい おきゃくさまは\n3へやめに いらっしゃいます……"
+	.string "現在 お客様は\n3へやめに いらっしゃいます……"
 	.string "$"
 
 BattleFrontier_BattlePikeThreePathRoom_Text_CurrentlyInRoom5:
-	.string "げんざい おきゃくさまは\n5へやめに いらっしゃいます……"
+	.string "現在 お客様は\n5へやめに いらっしゃいます……"
 	.string "$"
 
 BattleFrontier_BattlePikeThreePathRoom_Text_CurrentlyInRoom7:
-	.string "げんざい おきゃくさまは\n7へやめに いらっしゃいます……"
+	.string "現在 お客様は\n7へやめに いらっしゃいます……"
 	.string "$"
 
 BattleFrontier_BattlePikeThreePathRoom_Text_CurrentlyInRoom9:
-	.string "げんざい おきゃくさまは\n9へやめに いらっしゃいます……"
+	.string "現在 お客様は\n9へやめに いらっしゃいます……"
 	.string "$"
 
 BattleFrontier_BattlePikeThreePathRoom_Text_CurrentlyInRoom11:
-	.string "げんざい おきゃくさまは\n11へやめに いらっしゃいます……"
+	.string "現在 お客様は\n11へやめに いらっしゃいます……"
 	.string "$"
 
 BattleFrontier_BattlePikeThreePathRoom_Text_CurrentlyInRoom13:
-	.string "げんざい おきゃくさまは\n13へやめに いらっしゃいます……"
+	.string "現在 お客様は\n13へやめに いらっしゃいます……"
 	.string "$"
 
 BattleFrontier_BattlePikeThreePathRoom_Text_ContinueWithChallenge:
-	.string "このまま ちょうせんを つづけられますか?"
+	.string "このまま 挑戦を 続けられますか?"
 	.string "$"
 
 BattleFrontier_BattlePikeThreePathRoom_Text_SaveChallengeAndQuit:
-	.string "レポートを かいて\nしゅうりょう なさいますか……?"
+	.string "レポートを 書いて\n終了 なさいますか……?"
 	.string "$"
 
 BattleFrontier_BattlePikeThreePathRoom_Text_RetireFromChallenge:
-	.string "バトルゲームの ちょうせんを\nちゅうし なさいますか……?"
+	.string "バトルゲームの 挑戦を\n中止 なさいますか……?"
 	.string "$"
 
 BattleFrontier_BattlePikeThreePathRoom_Text_AwaitingReturnSaveBeforeResume:
-	.string "おまちして おりました……\pバトルゲームを さいかいする まえに\nレポートを かきましょう……"
+	.string "お待ちして おりました……\pバトルゲームを 再開する 前に\nレポートを かきましょう……"
 	.string ""
 	.string "$"
 
 BattleFrontier_BattlePikeThreePathRoom_Text_PleaseEnjoyChallenge:
-	.string "それでは ひきつづき\nゲームを おたのしみ ください……"
-	.string "$"
+	.string "それでは 引き続き\n"
+	.string "ゲームを お楽しみ ください……$"
 
 BattleFrontier_BattlePikeThreePathRoom_Text_SavingYourData:
-	.string "レポートを かいています……\nしょうしょう おまち ください……"
+	.string "レポートを 書いています……\n少々 お待ち ください……"
 	.string "$"
 
 BattleFrontier_BattlePike_Text_PathBlockedNoTurningBack:
-	.string "みちが とざされている!\nひきかえすことは できない……"
+	.string "道が とざされている!\nひきかえすことは できない……"
 	.string "$"
 
 BattleFrontier_BattlePikeThreePathRoom_Text_FindingItDifficultToChoose:
-	.string "…… おきゃくさま……\pしつれいですが どのみちに すすむか\nまよって いらっしゃるの ですか……?"
+	.string "…… お客様……\p失礼ですが どのみちに 進むか\nまよって いらっしゃるの ですか……?"
 	.string ""
 	.string "$"
 
 BattleFrontier_BattlePikeThreePathRoom_Text_ApologizeForImpertinence:
-	.string "さようで ございますか……\nこれは しつれいを しました……"
+	.string "さようで ございますか……\nこれは 失礼を しました……"
 	.string "$"
 
 BattleFrontier_BattlePikeThreePathRoom_Text_SomethingAboutRightPath:
-	.string "そうですね……\n…… わたくしは みぎがわの みちから……"
+	.string "そうですね……\n…… わたくしは 右がわの 道から……"
 	.string "$"
 
 BattleFrontier_BattlePikeThreePathRoom_Text_SomethingAboutCenterPath:
-	.string "そうですね……\n…… わたくしは まんなかの みちから……"
+	.string "そうですね……\n…… わたくしは まんなかの 道から……"
 	.string "$"
 
 BattleFrontier_BattlePikeThreePathRoom_Text_SomethingAboutLeftPath:
-	.string "そうですね……\n…… わたくしは ひだりがわの みちから……"
+	.string "そうですね……\n…… わたくしは 左がわの 道から……"
 	.string "$"
 
 BattleFrontier_BattlePikeThreePathRoom_Text_AromaOfPokemon:
-	.string "ポケモンの においが\nただよってくる ような\lきが するの ですが……"
-	.string "$"
+	.string "ポケモンの においが\n"
+	.string "漂ってくる ような\l"
+	.string "気が するの ですが……$"
 
 BattleFrontier_BattlePikeThreePathRoom_Text_PresenceOfPeople:
-	.string "トレーナー…… でしょうか……?\nひとの けはいを かんじるの ですが……"
+	.string "トレーナー…… でしょうか……?\nひとの けはいを 感じるの ですが……"
 	.string "$"
 
 BattleFrontier_BattlePikeThreePathRoom_Text_HeardWhispering:
-	.string "なにかが ささやく ような ものおとが\nきこえたの ですが……"
+	.string "なにかが ささやく ような ものおとが\n聞こえたの ですが……"
 	.string "$"
 
 BattleFrontier_BattlePikeThreePathRoom_Text_WaveOfNostaliga:
-	.string "なぜだか すこし だけ なつかしい\nふんいきを かんじるの ですが……"
+	.string "なぜだか 少し だけ なつかしい\nふんいきを 感じるの ですが……"
 	.string "$"
 
 BattleFrontier_BattlePikeThreePathRoom_Text_TerrifyingEvent:
-	.string "おきゃくさま……\pこのさき たいへんに\nおそろしい できごとが おきゃくさまを\lまちうけている でしょう……\pかくごして おいて ください……"
+	.string "お客様……\pこのさき 大変に\nおそろしい できごとが お客様を\lまちうけている でしょう……\p覚悟して おいて ください……"
 	.string ""
 	.string ""
 	.string ""
 	.string "$"
 
 BattleFrontier_BattlePikeThreePathRoom_Text_DreadfulPresence:
-	.string "…… どの みちの さきからも\nおそろしい けはいを かんじます……"
+	.string "…… どの 道の 先からも\nおそろしい けはいを 感じます……"
 	.string "$"

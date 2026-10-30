@@ -128,18 +128,19 @@ LocalRoom_EventScript_SandOrnament::
 	end
 
 LocalRoom_Text_BootPC:
-	.string "{JPN}マイルームの パソコンを ひらいた！$"
+	.string "{JPN}マイルームの パソコンを 開いた！$"
 LocalRoom_Text_Choose:
 	.string "{JPN}なにを しますか？$"
 LocalRoom_Text_Floor:
-	.string "{JPN}ゆかを えらんでください。$"
+	.string "{JPN}ゆかを 選んでください。$"
 LocalRoom_Text_Wall:
-	.string "{JPN}かべを えらんでください。$"
+	.string "{JPN}かべを 選んでください。$"
 LocalRoom_Text_Roamers:
-	.string "{JPN}てもちの ポケモンを\nなんびき はなしますか？$"
+	.string "{JPN}てもちの ポケモンを\nなんびき 話しますか？$"
 LocalRoom_Text_Clear:
-	.string "{JPN}へやの かざりを ぜんぶ\nパソコンに もどしますか？$"
+	.string "{JPN}部屋の かざりを 全部\nパソコンに 戻しますか？$"
 LocalRoom_Text_Mon:
-	.string "{JPN}{STR_VAR_1}は\nのんびり すごしている。$"
+	.string "{JPN}{STR_VAR_1}は\n"
+	.string "のんびり 過ごしている。$"
 LocalRoom_Text_Ornament:
-	.string "{JPN}じぶんの おきにいりの かざりだ。$"
+	.string "{JPN}自分の おきにいりの かざりだ。$"

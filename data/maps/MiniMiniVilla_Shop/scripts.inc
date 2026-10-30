@@ -85,34 +85,38 @@ VillaShop_EventScript_Goodbye:
 	end
 
 VillaShop_Text_Decorations:
-	.string "{JPN}いらっしゃいませ！\nかざりは すべて 10BPです。\pとくしゅドールは べっそうの\nへやに 3たいまで かざれます。$"
+	.string "{JPN}いらっしゃいませ！\nかざりは すべて 10BPです。\pとくしゅドールは べっそうの\n部屋に 3たいまで かざれます。$"
 
 VillaShop_Text_ChooseMon:
-	.string "{JPN}ボールを かえたい ポケモンを\nえらんでください。$"
+	.string "{JPN}ボールを かえたい ポケモンを\n選んでください。$"
 
 VillaShop_Text_ConfirmDecoration:
-	.string "{JPN}{STR_VAR_1}を\n{STR_VAR_2}BPで こうにゅうしますか？$"
+	.string "{JPN}{STR_VAR_1}を\n"
+	.string "{STR_VAR_2}BPで 購入しますか？$"
 
 VillaShop_Text_ConfirmBall:
-	.string "{JPN}{STR_VAR_3}の ボールを\n{STR_VAR_1}に {STR_VAR_2}BPで かえますか？$"
+	.string "{JPN}{STR_VAR_3}の ボールを\n"
+	.string "{STR_VAR_1}に {STR_VAR_2}BPで 変えますか？$"
 
 VillaShop_Text_DecorationDone:
-	.string "{JPN}{STR_VAR_1}を\nかざりの パソコンに おくりました！$"
+	.string "{JPN}{STR_VAR_1}を\n"
+	.string "飾りの パソコンに 送りました！$"
 
 VillaShop_Text_BallDone:
-	.string "{JPN}{STR_VAR_3}の ボールを\n{STR_VAR_1}に かえました！$"
+	.string "{JPN}{STR_VAR_3}の ボールを\n"
+	.string "{STR_VAR_1}に 変えました！$"
 
 VillaShop_Text_NotEnoughBP:
 	.string "{JPN}BPが たりません。$"
 
 VillaShop_Text_StorageFull:
-	.string "{JPN}この しゅるいの かざりは\nこれいじょう もてません。$"
+	.string "{JPN}この 種類の かざりは\nこれいじょう もてません。$"
 
 VillaShop_Text_SameBall:
-	.string "{JPN}すでに おなじ ボールです。\nBPは つかいません。$"
+	.string "{JPN}すでに 同じ ボールです。\nBPは 使いません。$"
 
 VillaShop_Text_Invalid:
-	.string "{JPN}この ポケモンの ボールは\nへんこうできません。$"
+	.string "{JPN}この ポケモンの ボールは\n変更できません。$"
 
 VillaShop_Text_Goodbye:
-	.string "{JPN}また おこしください！$"
+	.string "{JPN}また お越しください！$"

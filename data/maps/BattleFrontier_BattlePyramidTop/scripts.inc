@@ -229,49 +229,49 @@ BattleFrontier_BattlePyramidTop_Movement_CameraPanUp:
 	step_end
 
 BattleFrontier_BattlePyramidTop_Text_ReachedSummitUpYouGo:
-	.string "よくぞ まいられましたぞ!\nここは バトルピラミッドの ちょうじょう!\pこの うえに あるのが\nピラミッドのいただき ですぞ!\pバトルピラミッドを せいはした もののみ\nこの うえに たつことが できるのですぞ!\pさあ! のぼってくだされ!$"
+	.string "よくぞ まいられましたぞ!\nここは バトルピラミッドの ちょうじょう!\pこの 上に あるのが\nピラミッドのいただき ですぞ!\pバトルピラミッドを 制覇した もののみ\nこの 上に たつことが できるのですぞ!\pさあ! 登ってくだされ!$"
 
 BattleFrontier_BattlePyramidTop_Text_PlayerConqueredPyramid:
-	.string "あらたなる ピラミッド せいはしゃ!\nそのなは {PLAYER}!$"
+	.string "あらたなる ピラミッド 制覇しゃ!\nそのなは {PLAYER}!$"
 
 BattleFrontier_BattlePyramidTop_Text_ChiefBeatYouHere:
-	.string "よくぞ まいられましたぞ!\p…… …… と いいたい ところ ですが\nわずかに おそかった ですな!!\pすでに われらが たいちょうが\nピラミッドを せいは されましたぞ!!\pしかし ぼうけんしゃよ!\pあなたも トレーナー ならば\nその ちからで たいちょうから\lえいこうの いただきを かちとるのです!\pさあ! じゅんびが できたら\nゆうきの いっぽを ふみだすの ですぞ!$"
+	.string "よくぞ まいられましたぞ!\p…… …… と いいたい ところ ですが\nわずかに おそかった ですな!!\pすでに われらが たいちょうが\nピラミッドを 制覇 されましたぞ!!\pしかし ぼうけんしゃよ!\pあなたも トレーナー ならば\nその 力で たいちょうから\lえいこうの いただきを 勝ちとるのです!\pさあ! 準備が できたら\n勇気の いっぽを ふみだすの ですぞ!$"
 
 BattleFrontier_BattlePyramidTop_Text_ExplorationsAreGrandestAdventure:
-	.string "わかき ぼうけんしゃよ……\nぼうけんとは いいもの だな……\pおのれの ちえ!\pおのれの ちから!\pおのれの ポケモン!\pそして なにより\nおのれの ゆうきを ふりしぼって\lみちなる せかいへと つきすすむ……$"
+	.string "若き ぼうけんしゃよ……\nぼうけんとは いいもの だな……\p己の 知恵!\p己の 力!\p己の ポケモン!\pそして なにより\n己の 勇気を ふりしぼって\l未知なる 世界へと つきすすむ……$"
 
 BattleFrontier_BattlePyramidTop_Text_ImPyramidKingBrandon:
-	.string "いやぁー じつに たまらない!\nたまらないじゃ ないか! なあっ!?\pわたしは ジンダイ!\pここの せきにんしゃで ある\nピラミッドキングだが みんなには\lたいちょうと よばれて いるぞ!\pきみも ここまで きたと いうことは\nそれなりの じしんが あるの だろう?\lはっはっは! いやぁー じつに たのしみだ!$"
+	.string "いやぁー じつに たまらない!\nたまらないじゃ ないか! なあっ!?\pわたしは ジンダイ!\pここの せきにんしゃで ある\nピラミッドキングだが みんなには\lたいちょうと 呼ばれて いるぞ!\pきみも ここまで きたと 言うことは\nそれなりの 自信が あるの だろう?\lはっはっは! いやぁー じつに 楽しみだ!$"
 
 BattleFrontier_BattlePyramidTop_Text_BringCourageToOurBattle:
-	.string "さあ! きみの あつい ゆうきを\nぶつけて きたまえ!$"
+	.string "さあ! きみの 熱い 勇気を\nぶつけて きたまえ!$"
 
 BattleFrontier_BattlePyramidTop_Text_BrandonFrontierPassPlease:
-	.string "ジンダイ『はっはっは!\nいやぁー じつに すばらしい!\pいいぞ! きみを みとめようじゃ ないか!!\nフロンティアパスを かすんだ!$"
+	.string "ジンダイ『はっはっは!\nいやぁー じつに すばらしい!\pいいぞ! きみを 認めようじゃ ないか!!\nフロンティアパスを かすんだ!$"
 
 BattleFrontier_BattlePyramidTop_Text_ReceivedBraveSymbol:
 	.string "フロンティアパスに\nブレイブシンボルが きざまれた!$"
 
 BattleFrontier_BattlePyramidTop_Text_LookForwardToNextMeeting:
-	.string "わかき ぼうけんしゃよ!\nまた あえる ときを まっているぞ!!$"
+	.string "若き ぼうけんしゃよ!\nまた あえる ときを 待っているぞ!!$"
 
 BattleFrontier_BattlePyramidTop_Text_BrandonYouveReturned:
-	.string "ジンダイ『…… ここまで たどりついたか\nわかき ぼうけんしゃよ……\pきみは ほんとうに こころから\nぼうけんを あいして いるようだな……\pそう…… まるで わかき ひの\nわたし そっくりじゃ ないか……\p…… …… …… おお……\pあつく!!\pきけんで!!\pくるしい!!\pあの いのちがけの ぼうけんの ひびが\nよみがえって きたぞ……$"
+	.string "ジンダイ『…… ここまで たどりついたか\n若き ぼうけんしゃよ……\pきみは 本当に 心から\nぼうけんを あいして いるようだな……\pそう…… まるで 若き ひの\nわたし そっくりじゃ ないか……\p…… …… …… おお……\pあつく!!\p危険で!!\p苦しい!!\pあの 命がけの ぼうけんの ひびが\nよみがえって きたぞ……$"
 
 BattleFrontier_BattlePyramidTop_Text_MyCourageIsOffMeter:
-	.string "よーーーしっ!!\pわたしの ゆうきセンサーも\nぜっこうちょう!!$"
+	.string "よーーーしっ!!\pわたしの 勇気センサーも\nぜっこうちょう!!$"
 
 BattleFrontier_BattlePyramidTop_Text_EverythingYouHave:
-	.string "きみの すべて!\nわたしが うけとめよう じゃないか!!$"
+	.string "きみの すべて!\nわたしが 受けとめよう じゃないか!!$"
 
 BattleFrontier_BattlePyramidTop_Text_BrandonRemarkableHaveThis:
-	.string "ジンダイ『はっはっはっ!\nいやぁー じつに すばらしい!\lまったく さいこうじゃ ないか!!\pわかき ぼうけんしゃよ!!\pきみには かんぱい だよ!\nさあ! こいつを うけとって くれ!!$"
+	.string "ジンダイ『はっはっはっ!\nいやぁー じつに すばらしい!\lまったく 最高じゃ ないか!!\p若き ぼうけんしゃよ!!\pきみには かんぱい だよ!\nさあ! こいつを 受け取って くれ!!$"
 
 BattleFrontier_BattlePyramidTop_Text_BraveSymbolTookGoldenShine:
-	.string "ブレイブシンボルが\nきんいろに かがやいた!$"
+	.string "ブレイブシンボルが\n金色に 輝いた!$"
 
 BattleFrontier_BattlePyramidTop_Text_FarewellForNow:
-	.string "いやぁー わたしも\nまだまだと いうこと らしいな!!\pえんが あったら また あおう!\nさらばだ! わかき ぼうけんしゃよ!!$"
+	.string "いやぁー わたしも\nまだまだと 言うこと らしいな!!\pえんが あったら また あおう!\nさらばだ! 若き ぼうけんしゃよ!!$"
 
 BattleFrontier_BattlePyramidTop_Text_StepForwardWhenReady:
-	.string "さあ! じゅんびが できたら\nゆうきの いっぽを ふみだすの ですぞ!$"
+	.string "さあ! 準備が できたら\n勇気の いっぽを ふみだすの ですぞ!$"

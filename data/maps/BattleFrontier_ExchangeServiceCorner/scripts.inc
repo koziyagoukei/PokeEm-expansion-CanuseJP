@@ -331,108 +331,108 @@ BattleFrontier_ExchangeServiceCorner_EventScript_RichBoy::
 	goto FrontierStory_EventScript_RegularTalk
 
 BattleFrontier_ExchangeServiceCorner_Text_WelcomePleaseChoosePrize:
-	.string "{JPN}ひきかえサービス コーナーへ\nようこそ!\pこちらでは おきゃくさまの ためた\nバトルポイントと すてきな けいひんを\lこうかん いたします!\pでは けいひんを おえらび ください!$"
+	.string "{JPN}匹かえサービス コーナーへ\nようこそ!\pこちらでは お客様の ためた\nバトルポイントと すてきな けいひんを\l交換 いたします!\pでは けいひんを お選び ください!$"
 
 @ Unused
 BattleFrontier_ExchangeServiceCorner_Text_PleaseChoosePrize:
-	.string "{JPN}では けいひんを おえらび ください$"
+	.string "{JPN}では けいひんを お選び ください$"
 
 BattleFrontier_ExchangeServiceCorner_Text_ConfirmPurchase:
-	.string "{STR_VAR_1}を えらびました\n"
+	.string "{STR_VAR_1}を 選びました\n"
 	.string "よろしいですか？$"
 
 BattleFrontier_ExchangeServiceCorner_Text_WellSendItToPC:
-	.string "{JPN}ありがとう ございます!\pごじたくの パソコンに\nおおくりして おきますね$"
+	.string "{JPN}ありがとう ございます!\pごじたくの パソコンに\nお送りして おきますね$"
 
 BattleFrontier_ExchangeServiceCorner_Text_HereIsYourPrize:
-	.string "{JPN}どうぞ おうけとりください!$"
+	.string "{JPN}どうぞ お受け取りください!$"
 
 BattleFrontier_ExchangeServiceCorner_Text_DontHaveEnoughPoints:
-	.string "{JPN}おきゃくさま……\nバトルポイントが たりません……$"
+	.string "{JPN}お客様……\nバトルポイントが たりません……$"
 
 BattleFrontier_ExchangeServiceCorner_Text_PCIsFull:
-	.string "{JPN}おきゃくさま……\nパソコンが いっぱいの ようです……$"
+	.string "{JPN}お客様……\nパソコンが いっぱいの ようです……$"
 
 BattleFrontier_ExchangeServiceCorner_Text_DontHaveSpaceToHoldIt:
-	.string "{JPN}おきゃくさま……\nそれいじょう もつことは できません……$"
+	.string "{JPN}お客様……\nそれいじょう 持つことは できません……$"
 
 BattleFrontier_ExchangeServiceCorner_Text_ThankYouVisitWithPoints:
-	.string "{JPN}ありがとう ございました\pバトルポイントが たまりましたら\nまた おこしください$"
+	.string "{JPN}ありがとう ございました\pバトルポイントが たまりましたら\nまた お越しください$"
 
 BattleFrontier_ExchangeServiceCorner_Text_KissPosterDesc::
-	.string "{JPN}ムチュールが プリント されている\nおおきなポスター$"
+	.string "{JPN}ムチュールが プリント されている\n大きなポスター$"
 
 BattleFrontier_ExchangeServiceCorner_Text_KissCushionDesc::
-	.string "{JPN}ムチュールの クッション\nマットや つくえの うえに おくもの$"
+	.string "{JPN}ムチュールの クッション\nマットや 机の 上に おくもの$"
 
 BattleFrontier_ExchangeServiceCorner_Text_SmoochumDollDesc::
-	.string "{JPN}ムチュールの ぬいぐるみ\nマットや つくえの うえに おくもの$"
+	.string "{JPN}ムチュールの ぬいぐるみ\nマットや 机の 上に おくもの$"
 
 BattleFrontier_ExchangeServiceCorner_Text_TogepiDollDesc::
-	.string "{JPN}トゲピーの ぬいぐるみ\nマットや つくえの うえに おくもの$"
+	.string "{JPN}トゲピーの ぬいぐるみ\nマットや 机の 上に おくもの$"
 
 BattleFrontier_ExchangeServiceCorner_Text_MeowthDollDesc::
-	.string "{JPN}ニャースの ぬいぐるみ\nマットや つくえの うえに おくもの$"
+	.string "{JPN}ニャースの ぬいぐるみ\nマットや 机の 上に おくもの$"
 
 BattleFrontier_ExchangeServiceCorner_Text_ClefairyDollDesc::
-	.string "{JPN}ピッピの ぬいぐるみ\nマットや つくえの うえに おくもの$"
+	.string "{JPN}ピッピの ぬいぐるみ\nマットや 机の 上に おくもの$"
 
 BattleFrontier_ExchangeServiceCorner_Text_DittoDollDesc::
-	.string "{JPN}メタモンの ぬいぐるみ\nマットや つくえの うえに おくもの$"
+	.string "{JPN}メタモンの ぬいぐるみ\nマットや 机の 上に おくもの$"
 
 BattleFrontier_ExchangeServiceCorner_Text_CyndaquilDollDesc::
-	.string "{JPN}ヒノアラシの ぬいぐるみ\nマットや つくえの うえに おくもの$"
+	.string "{JPN}ヒノアラシの ぬいぐるみ\nマットや 机の 上に おくもの$"
 
 BattleFrontier_ExchangeServiceCorner_Text_ChikoritaDollDesc::
-	.string "{JPN}チコリータの ぬいぐるみ\nマットや つくえの うえに おくもの$"
+	.string "{JPN}チコリータの ぬいぐるみ\nマットや 机の 上に おくもの$"
 
 BattleFrontier_ExchangeServiceCorner_Text_TotodileDollDesc::
-	.string "{JPN}ワニノコの ぬいぐるみ\nマットや つくえの うえに おくもの$"
+	.string "{JPN}ワニノコの ぬいぐるみ\nマットや 机の 上に おくもの$"
 
 BattleFrontier_ExchangeServiceCorner_Text_LargeDollDesc::
-	.string "{JPN}おおきな ぬいぐるみ\nマットや つくえの うえに おくもの$"
+	.string "{JPN}大きな ぬいぐるみ\nマットや 机の 上に おくもの$"
 
 BattleFrontier_ExchangeServiceCorner_Text_ProteinDesc::
-	.string "{JPN}こうげきの きそポイントを あげる$"
+	.string "{JPN}攻撃の 基礎ポイントを あげる$"
 
 BattleFrontier_ExchangeServiceCorner_Text_CalciumDesc::
-	.string "{JPN}とくこうの きそポイントを あげる$"
+	.string "{JPN}とくこうの 基礎ポイントを あげる$"
 
 BattleFrontier_ExchangeServiceCorner_Text_IronDesc::
-	.string "{JPN}ぼうぎょの きそポイントを あげる$"
+	.string "{JPN}防御の 基礎ポイントを あげる$"
 
 BattleFrontier_ExchangeServiceCorner_Text_ZincDesc::
-	.string "{JPN}とくぼうの きそポイントを あげる$"
+	.string "{JPN}とくぼうの 基礎ポイントを あげる$"
 
 BattleFrontier_ExchangeServiceCorner_Text_CarbosDesc::
-	.string "{JPN}すばやさの きそポイントを あげる$"
+	.string "{JPN}素早さの 基礎ポイントを あげる$"
 
 BattleFrontier_ExchangeServiceCorner_Text_HPUpDesc::
-	.string "{JPN}たいりょくの きそポイントを あげる$"
+	.string "{JPN}体力の 基礎ポイントを あげる$"
 
 BattleFrontier_ExchangeServiceCorner_Text_LeftoversDesc::
-	.string "{JPN}もたせると たいりょくが せんとうの あいだ\nすこしずつ かいふくする$"
+	.string "{JPN}持たせると 体力が せんとうの あいだ\n少しずつ 回復する$"
 
 BattleFrontier_ExchangeServiceCorner_Text_WhiteHerbDesc::
-	.string "{JPN}ポケモンに もたせると さがった\nのうりょくを もとにもどす$"
+	.string "{JPN}ポケモンに 持たせると さがった\n能力を もとにもどす$"
 
 BattleFrontier_ExchangeServiceCorner_Text_QuickClawDesc::
-	.string "{JPN}ポケモンに もたせると せんせい こうげきが\nたまに できる$"
+	.string "{JPN}ポケモンに 持たせると 先生 攻撃が\nたまに できる$"
 
 BattleFrontier_ExchangeServiceCorner_Text_MentalHerbDesc::
-	.string "{JPN}もたせた ポケモンが メロメロに\nなったとき なおして くれる$"
+	.string "{JPN}持たせた ポケモンが メロメロに\nなったとき なおして くれる$"
 
 BattleFrontier_ExchangeServiceCorner_Text_BrightpowderDesc::
-	.string "{JPN}もたせると ひかりが あいてを まどわして\nめいちゅうりつを さげる$"
+	.string "{JPN}持たせると 光が 相手を まどわして\nめいちゅうりつを さげる$"
 
 BattleFrontier_ExchangeServiceCorner_Text_ChoiceBandDesc::
-	.string "{JPN}こうげきの いりょくが あがるが\nおなじ わざしか だせなくなる$"
+	.string "{JPN}攻撃の いりょくが 上がるが\n同じ 技しか 出せなくなる$"
 
 BattleFrontier_ExchangeServiceCorner_Text_KingsRockDesc::
-	.string "{JPN}ポケモンに もたせると ダメージを うけた\nあいてが たまに ひるむ$"
+	.string "{JPN}ポケモンに 持たせると ダメージを 受けた\n相手が たまに ひるむ$"
 
 BattleFrontier_ExchangeServiceCorner_Text_FocusBandDesc::
-	.string "{JPN}ポケモンに もたせると たまに\nひんしを ふせぐことが できる$"
+	.string "{JPN}ポケモンに 持たせると たまに\nひんしを ふせぐことが できる$"
 
 BattleFrontier_ExchangeServiceCorner_Text_ScopeLensDesc::
-	.string "{JPN}ポケモンに もたせると\nきゅうしょに あたりやすくなる$"
+	.string "{JPN}ポケモンに 持たせると\nきゅうしょに あたりやすくなる$"

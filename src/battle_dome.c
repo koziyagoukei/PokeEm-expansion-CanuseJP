@@ -858,56 +858,56 @@ static const u8 sTournamentIdToPairedTrainerIds[DOME_TOURNAMENT_TRAINERS_COUNT] 
 // Dome Ace Tucker has their own separate potential text.
 static const u8 *const sBattleDomePotentialTexts[DOME_TOURNAMENT_TRAINERS_COUNT + 1] =
 {
-    COMPOUND_STRING("{JPN}こんたいかいの ゆうしょうこうほ ナンバー1!"), // Highest potential
-    COMPOUND_STRING("{JPN}けっしょうまでは かくじつと いわれる チーム。"),
-    COMPOUND_STRING("{JPN}ベスト3に はいる ちからを もった チーム。"),
-    COMPOUND_STRING("{JPN}こんたいかい ゆうしょうこうほの 1チーム。"),
-    COMPOUND_STRING("{JPN}トップクラスの ちからを そなえた チーム。"),
+    COMPOUND_STRING("{JPN}こんたいかいの 優勝こうほ ナンバー1!"), // Highest potential
+    COMPOUND_STRING("{JPN}決勝までは 確実と いわれる チーム。"),
+    COMPOUND_STRING("{JPN}ベスト3に 入る 力を 持った チーム。"),
+    COMPOUND_STRING("{JPN}こんたいかい 優勝こうほの 1チーム。"),
+    COMPOUND_STRING("{JPN}トップクラスの 力を そなえた チーム。"),
     COMPOUND_STRING("{JPN}こんたいかい ちゅうもくの ダークホース!"),
-    COMPOUND_STRING("{JPN}へいきんより すこし ちからが うえの チーム。"),
+    COMPOUND_STRING("{JPN}へいきんより 少し 力が 上の チーム。"),
     COMPOUND_STRING("{JPN}こんたいかいの へいきんてきな チーム。"),
-    COMPOUND_STRING("{JPN}へいきん レベルの ちからを もった チーム。"),
-    COMPOUND_STRING("{JPN}へいきんより やや ちからが おちる チーム。"),
-    COMPOUND_STRING("{JPN}まず 1しょうが もくひょうと なる チーム。"),
+    COMPOUND_STRING("{JPN}へいきん レベルの 力を 持った チーム。"),
+    COMPOUND_STRING("{JPN}へいきんより やや 力が 落ちる チーム。"),
+    COMPOUND_STRING("{JPN}まず 1しょうが 目標と なる チーム。"),
     COMPOUND_STRING("{JPN}1しょう できれば じょうじょうの チーム。"),
     COMPOUND_STRING("{JPN}ぜんたいの なかで したの レベルの チーム。"),
-    COMPOUND_STRING("{JPN}じつりょくは かなり したの レベルの チーム。"),
-    COMPOUND_STRING("{JPN}ゆうしょうは かなり むずかしい チーム。"),
-    COMPOUND_STRING("{JPN}ゆうしょうから もっとも とおい チーム。"), // Lowest potential
+    COMPOUND_STRING("{JPN}実力は かなり したの レベルの チーム。"),
+    COMPOUND_STRING("{JPN}優勝は かなり 難しい チーム。"),
+    COMPOUND_STRING("{JPN}優勝から もっとも とおい チーム。"), // Lowest potential
     COMPOUND_STRING("{JPN}かんぜん むてきの スーパースター!!"), // Dome Ace Tucker
 };
 
 // The second line of text on a trainers info card. It gives information about their battle style (dependent on their party's moves).
 static const u8 *const sBattleDomeOpponentStyleTexts[NUM_BATTLE_STYLES] =
 {
-    [DOME_BATTLE_STYLE_RISKY]           = COMPOUND_STRING("{JPN}ときには はめつ かくごで たたかいを いどむ。"),
-    [DOME_BATTLE_STYLE_STALL]           = COMPOUND_STRING("{JPN}ちょうきせんでの ねばりが とても とくい。"),
-    [DOME_BATTLE_STYLE_VARIED]          = COMPOUND_STRING("{JPN}あいてに おうじて たさいな わざで たたかう。"),
-    [DOME_BATTLE_STYLE_COMBO_HIGH]      = COMPOUND_STRING("{JPN}かちパターンを もっていて はまると つよい。"),
-    [DOME_BATTLE_STYLE_RARE_MOVES]      = COMPOUND_STRING("{JPN}とても めずらしい わざを ときどき つかう。"),  // Seems like the text for these two was swapped
-    [DOME_BATTLE_STYLE_RARE_MOVE]       = COMPOUND_STRING("{JPN}いひょうを つく わざで たたかいを みだす。"), //
-    [DOME_BATTLE_STYLE_HP]              = COMPOUND_STRING("{JPN}つねに たいりょくに きを くばって たたかう。"),
-    [DOME_BATTLE_STYLE_STORE_POWER]     = COMPOUND_STRING("{JPN}ちからを ためて いっきに せめるのが とくい。"),
-    [DOME_BATTLE_STYLE_ENFEEBLE_LOW]    = COMPOUND_STRING("{JPN}あいての ちからを おとすのが とくい。"),
-    [DOME_BATTLE_STYLE_LUCK]            = COMPOUND_STRING("{JPN}うんに まかせた たたかいかたを このむ。"),
-    [DOME_BATTLE_STYLE_REGAL]           = COMPOUND_STRING("{JPN}おうじゃの ふうかく ただよう せめを する。"),
-    [DOME_BATTLE_STYLE_LOW_PP]          = COMPOUND_STRING("{JPN}PPの すくない おおわざで しょうぶする。"),
-    [DOME_BATTLE_STYLE_STATUS_ATK]      = COMPOUND_STRING("{JPN}よわらせてから こうげきを するのが とくい。"),
-    [DOME_BATTLE_STYLE_ENDURE]          = COMPOUND_STRING("{JPN}あらゆる こうげきに たえながら たたかう。"),
-    [DOME_BATTLE_STYLE_STATUS]          = COMPOUND_STRING("{JPN}あいての こころを かきみだすのが とくい。"),
-    [DOME_BATTLE_STYLE_STRAIGHTFORWARD] = COMPOUND_STRING("{JPN}つよくて あつかいやすい わざを つかう。"),
-    [DOME_BATTLE_STYLE_AGGRESSIVE]      = COMPOUND_STRING("{JPN}きょうりょくな わざで どんどん おしまくる。"),
-    [DOME_BATTLE_STYLE_DEF]             = COMPOUND_STRING("{JPN}こうげきを うまく かわしながら たたかう。"),
-    [DOME_BATTLE_STYLE_ENFEEBLE_HIGH]   = COMPOUND_STRING("{JPN}あいてが いやがる たたかいが とくい。"),
-    [DOME_BATTLE_STYLE_POPULAR_POWER]   = COMPOUND_STRING("{JPN}にんきの ある わざを たくさん つかう。"),
-    [DOME_BATTLE_STYLE_COMBO_LOW]       = COMPOUND_STRING("{JPN}きょうりょくな コンボになる わざを もつ。"),
-    [DOME_BATTLE_STYLE_ACCURATE]        = COMPOUND_STRING("{JPN}てがたい わざで きっちりと こうげきする。"),
-    [DOME_BATTLE_STYLE_POWERFUL]        = COMPOUND_STRING("{JPN}はでな わざを つかって どんどん せめる。"),
-    [DOME_BATTLE_STYLE_ATK_OVER_DEF]    = COMPOUND_STRING("{JPN}まもりより とにかく せめを だいじに する。"),
-    [DOME_BATTLE_STYLE_DEF_OVER_ATK]    = COMPOUND_STRING("{JPN}せめるより まもりを だいじに する。"),
-    [DOME_BATTLE_STYLE_POPULAR_STRONG]  = COMPOUND_STRING("{JPN}つよいわざで しょうぶの しかけが はやい。"),
-    [DOME_BATTLE_STYLE_EFFECTS]         = COMPOUND_STRING("{JPN}ついかこうかが ある わざを よく つかう。"),
-    [DOME_BATTLE_STYLE_BALANCED]        = COMPOUND_STRING("{JPN}バランスよく いろいろな わざで たちむかう。"),
+    [DOME_BATTLE_STYLE_RISKY]           = COMPOUND_STRING("{JPN}ときには はめつ 覚悟で 戦いを 挑む。"),
+    [DOME_BATTLE_STYLE_STALL]           = COMPOUND_STRING("{JPN}ちょうきせんでの ねばりが とても 得意。"),
+    [DOME_BATTLE_STYLE_VARIED]          = COMPOUND_STRING("{JPN}相手に 応じて たさいな 技で 戦う。"),
+    [DOME_BATTLE_STYLE_COMBO_HIGH]      = COMPOUND_STRING("{JPN}勝ちパターンを 持っていて はまると 強い。"),
+    [DOME_BATTLE_STYLE_RARE_MOVES]      = COMPOUND_STRING("{JPN}とても 珍しい 技を ときどき 使う。"),  // Seems like the text for these two was swapped
+    [DOME_BATTLE_STYLE_RARE_MOVE]       = COMPOUND_STRING("{JPN}いひょうを つく 技で 戦いを みだす。"), //
+    [DOME_BATTLE_STYLE_HP]              = COMPOUND_STRING("{JPN}つねに 体力に きを くばって 戦う。"),
+    [DOME_BATTLE_STYLE_STORE_POWER]     = COMPOUND_STRING("{JPN}力を ためて いっきに せめるのが 得意。"),
+    [DOME_BATTLE_STYLE_ENFEEBLE_LOW]    = COMPOUND_STRING("{JPN}相手の 力を おとすのが 得意。"),
+    [DOME_BATTLE_STYLE_LUCK]            = COMPOUND_STRING("{JPN}うんに まかせた 戦いかたを このむ。"),
+    [DOME_BATTLE_STYLE_REGAL]           = COMPOUND_STRING("{JPN}王者の ふうかく ただよう せめを する。"),
+    [DOME_BATTLE_STYLE_LOW_PP]          = COMPOUND_STRING("{JPN}PPの 少ない おおわざで 勝負する。"),
+    [DOME_BATTLE_STYLE_STATUS_ATK]      = COMPOUND_STRING("{JPN}よわらせてから 攻撃を するのが 得意。"),
+    [DOME_BATTLE_STYLE_ENDURE]          = COMPOUND_STRING("{JPN}あらゆる 攻撃に たえながら 戦う。"),
+    [DOME_BATTLE_STYLE_STATUS]          = COMPOUND_STRING("{JPN}相手の 心を かきみだすのが 得意。"),
+    [DOME_BATTLE_STYLE_STRAIGHTFORWARD] = COMPOUND_STRING("{JPN}強くて 扱いやすい 技を 使う。"),
+    [DOME_BATTLE_STYLE_AGGRESSIVE]      = COMPOUND_STRING("{JPN}強力な 技で どんどん おしまくる。"),
+    [DOME_BATTLE_STYLE_DEF]             = COMPOUND_STRING("{JPN}攻撃を うまく かわしながら 戦う。"),
+    [DOME_BATTLE_STYLE_ENFEEBLE_HIGH]   = COMPOUND_STRING("{JPN}相手が いやがる 戦いが 得意。"),
+    [DOME_BATTLE_STYLE_POPULAR_POWER]   = COMPOUND_STRING("{JPN}人きの ある 技を たくさん 使う。"),
+    [DOME_BATTLE_STYLE_COMBO_LOW]       = COMPOUND_STRING("{JPN}強力な コンボになる 技を 持つ。"),
+    [DOME_BATTLE_STYLE_ACCURATE]        = COMPOUND_STRING("{JPN}てがたい 技で きっちりと 攻撃する。"),
+    [DOME_BATTLE_STYLE_POWERFUL]        = COMPOUND_STRING("{JPN}はでな 技を 使って どんどん せめる。"),
+    [DOME_BATTLE_STYLE_ATK_OVER_DEF]    = COMPOUND_STRING("{JPN}まもりより とにかく せめを 大事に する。"),
+    [DOME_BATTLE_STYLE_DEF_OVER_ATK]    = COMPOUND_STRING("{JPN}せめるより まもりを 大事に する。"),
+    [DOME_BATTLE_STYLE_POPULAR_STRONG]  = COMPOUND_STRING("{JPN}強いわざで 勝負の しかけが 速い。"),
+    [DOME_BATTLE_STYLE_EFFECTS]         = COMPOUND_STRING("{JPN}ついかこうかが ある 技を よく 使う。"),
+    [DOME_BATTLE_STYLE_BALANCED]        = COMPOUND_STRING("{JPN}バランスよく いろいろな 技で たちむかう。"),
     [DOME_BATTLE_STYLE_UNUSED1]         = COMPOUND_STRING("{JPN}ダミーメッセージ1です。"),
     [DOME_BATTLE_STYLE_UNUSED2]         = COMPOUND_STRING("{JPN}ダミーメッセージ2です。"),
     [DOME_BATTLE_STYLE_UNUSED3]         = COMPOUND_STRING("{JPN}ダミーメッセージ3です。"),
@@ -917,49 +917,49 @@ static const u8 *const sBattleDomeOpponentStyleTexts[NUM_BATTLE_STYLES] =
 // The third line of text on a trainers info card. It that gives information about their party's stat spread (based on their Pokemon's effort values and Nature).
 static const u8 *const sBattleDomeOpponentStatsTexts[] =
 {
-    COMPOUND_STRING("{JPN}HPと こうげきに ちからを いれている。"),              // DOME_TEXT_TWO_GOOD_STATS and DOME_TEXT_HP start here
-    COMPOUND_STRING("{JPN}HPと ぼうぎょに ちからを いれている。"),
-    COMPOUND_STRING("{JPN}HPと すばやさに ちからを いれている。"),
-    COMPOUND_STRING("{JPN}HPと とくこうに ちからを いれている。"),
-    COMPOUND_STRING("{JPN}HPと とくぼうに ちからを いれている。"),
-    COMPOUND_STRING("{JPN}こうげきと ぼうぎょに ちからを いれている。"),         // DOME_TEXT_ATK starts here
-    COMPOUND_STRING("{JPN}こうげきと すばやさに ちからを いれている。"),
-    COMPOUND_STRING("{JPN}こうげきと とくこうに ちからを いれている。"),
-    COMPOUND_STRING("{JPN}こうげきと とくぼうに ちからを いれている。"),
-    COMPOUND_STRING("{JPN}ぼうぎょと すばやさに ちからを いれている。"),          // DOME_TEXT_DEF starts here
-    COMPOUND_STRING("{JPN}ぼうぎょと とくこうに ちからを いれている。"),
-    COMPOUND_STRING("{JPN}ぼうぎょと とくぼうに ちからを いれている。"),
-    COMPOUND_STRING("{JPN}すばやさと とくこうに ちからを いれている。"),       // DOME_TEXT_SPEED starts here
-    COMPOUND_STRING("{JPN}すばやさと とくぼうに ちからを いれている。"),
-    COMPOUND_STRING("{JPN}とくこうと とくぼうに ちからを いれている。"), // DOME_TEXT_SPATK starts here
-    COMPOUND_STRING("{JPN}HPに ちからを いれている。"),                         // DOME_TEXT_ONE_GOOD_STAT starts here
-    COMPOUND_STRING("{JPN}こうげきに ちからを いれている。"),
-    COMPOUND_STRING("{JPN}ぼうぎょに ちからを いれている。"),
-    COMPOUND_STRING("{JPN}すばやさに ちからを いれている。"),
-    COMPOUND_STRING("{JPN}とくこうに ちからを いれている。"),
-    COMPOUND_STRING("{JPN}とくぼうに ちからを いれている。"),
-    COMPOUND_STRING("{JPN}HPと こうげきに ちからを いれていない!"),                // DOME_TEXT_TWO_BAD_STATS starts here
-    COMPOUND_STRING("{JPN}HPと ぼうぎょに ちからを いれていない!"),
-    COMPOUND_STRING("{JPN}HPと すばやさに ちからを いれていない!"),
-    COMPOUND_STRING("{JPN}HPと とくこうに ちからを いれていない!"),
-    COMPOUND_STRING("{JPN}HPと とくぼうに ちからを いれていない!"),
-    COMPOUND_STRING("{JPN}こうげきと ぼうぎょに ちからを いれていない!"),
-    COMPOUND_STRING("{JPN}こうげきと すばやさに ちからを いれていない!"),
-    COMPOUND_STRING("{JPN}こうげきと とくこうに ちからを いれていない!"),
-    COMPOUND_STRING("{JPN}こうげきと とくぼうに ちからを いれていない!"),
-    COMPOUND_STRING("{JPN}ぼうぎょと すばやさに ちからを いれていない!"),
-    COMPOUND_STRING("{JPN}ぼうぎょと とくこうに ちからを いれていない!"),
-    COMPOUND_STRING("{JPN}ぼうぎょと とくぼうに ちからを いれていない!"),
-    COMPOUND_STRING("{JPN}すばやさと とくこうに ちからを いれていない!"),
-    COMPOUND_STRING("{JPN}すばやさと とくぼうに ちからを いれていない!"),
-    COMPOUND_STRING("{JPN}とくこうと とくぼうに ちからを いれていない!"),
-    COMPOUND_STRING("{JPN}HPには ちからを いれていない!"),                           // DOME_TEXT_ONE_BAD_STAT starts here
-    COMPOUND_STRING("{JPN}こうげきには ちからを いれていない!"),
-    COMPOUND_STRING("{JPN}ぼうぎょには ちからを いれていない!"),
-    COMPOUND_STRING("{JPN}すばやさには ちからを いれていない!"),
-    COMPOUND_STRING("{JPN}とくこうには ちからを いれていない!"),
-    COMPOUND_STRING("{JPN}とくぼうには ちからを いれていない!"),
-    [DOME_TEXT_WELL_BALANCED] = COMPOUND_STRING("{JPN}バランスよく ポケモンを そだてている。"),
+    COMPOUND_STRING("{JPN}HPと 攻撃に 力を 入れている。"),              // DOME_TEXT_TWO_GOOD_STATS and DOME_TEXT_HP start here
+    COMPOUND_STRING("{JPN}HPと 防御に 力を 入れている。"),
+    COMPOUND_STRING("{JPN}HPと 素早さに 力を 入れている。"),
+    COMPOUND_STRING("{JPN}HPと とくこうに 力を 入れている。"),
+    COMPOUND_STRING("{JPN}HPと とくぼうに 力を 入れている。"),
+    COMPOUND_STRING("{JPN}攻撃と 防御に 力を 入れている。"),         // DOME_TEXT_ATK starts here
+    COMPOUND_STRING("{JPN}攻撃と 素早さに 力を 入れている。"),
+    COMPOUND_STRING("{JPN}攻撃と とくこうに 力を 入れている。"),
+    COMPOUND_STRING("{JPN}攻撃と とくぼうに 力を 入れている。"),
+    COMPOUND_STRING("{JPN}防御と 素早さに 力を 入れている。"),          // DOME_TEXT_DEF starts here
+    COMPOUND_STRING("{JPN}防御と とくこうに 力を 入れている。"),
+    COMPOUND_STRING("{JPN}防御と とくぼうに 力を 入れている。"),
+    COMPOUND_STRING("{JPN}素早さと とくこうに 力を 入れている。"),       // DOME_TEXT_SPEED starts here
+    COMPOUND_STRING("{JPN}素早さと とくぼうに 力を 入れている。"),
+    COMPOUND_STRING("{JPN}とくこうと とくぼうに 力を 入れている。"), // DOME_TEXT_SPATK starts here
+    COMPOUND_STRING("{JPN}HPに 力を 入れている。"),                         // DOME_TEXT_ONE_GOOD_STAT starts here
+    COMPOUND_STRING("{JPN}攻撃に 力を 入れている。"),
+    COMPOUND_STRING("{JPN}防御に 力を 入れている。"),
+    COMPOUND_STRING("{JPN}素早さに 力を 入れている。"),
+    COMPOUND_STRING("{JPN}とくこうに 力を 入れている。"),
+    COMPOUND_STRING("{JPN}とくぼうに 力を 入れている。"),
+    COMPOUND_STRING("{JPN}HPと 攻撃に 力を 入れていない!"),                // DOME_TEXT_TWO_BAD_STATS starts here
+    COMPOUND_STRING("{JPN}HPと 防御に 力を 入れていない!"),
+    COMPOUND_STRING("{JPN}HPと 素早さに 力を 入れていない!"),
+    COMPOUND_STRING("{JPN}HPと とくこうに 力を 入れていない!"),
+    COMPOUND_STRING("{JPN}HPと とくぼうに 力を 入れていない!"),
+    COMPOUND_STRING("{JPN}攻撃と 防御に 力を 入れていない!"),
+    COMPOUND_STRING("{JPN}攻撃と 素早さに 力を 入れていない!"),
+    COMPOUND_STRING("{JPN}攻撃と とくこうに 力を 入れていない!"),
+    COMPOUND_STRING("{JPN}攻撃と とくぼうに 力を 入れていない!"),
+    COMPOUND_STRING("{JPN}防御と 素早さに 力を 入れていない!"),
+    COMPOUND_STRING("{JPN}防御と とくこうに 力を 入れていない!"),
+    COMPOUND_STRING("{JPN}防御と とくぼうに 力を 入れていない!"),
+    COMPOUND_STRING("{JPN}素早さと とくこうに 力を 入れていない!"),
+    COMPOUND_STRING("{JPN}素早さと とくぼうに 力を 入れていない!"),
+    COMPOUND_STRING("{JPN}とくこうと とくぼうに 力を 入れていない!"),
+    COMPOUND_STRING("{JPN}HPには 力を 入れていない!"),                           // DOME_TEXT_ONE_BAD_STAT starts here
+    COMPOUND_STRING("{JPN}攻撃には 力を 入れていない!"),
+    COMPOUND_STRING("{JPN}防御には 力を 入れていない!"),
+    COMPOUND_STRING("{JPN}素早さには 力を 入れていない!"),
+    COMPOUND_STRING("{JPN}とくこうには 力を 入れていない!"),
+    COMPOUND_STRING("{JPN}とくぼうには 力を 入れていない!"),
+    [DOME_TEXT_WELL_BALANCED] = COMPOUND_STRING("{JPN}バランスよく ポケモンを 育てている。"),
 };
 
 static const u8 sInfoTrainerMonX[FRONTIER_PARTY_SIZE] = {104, 136, 104};
@@ -991,20 +991,20 @@ static const u8 *const sBattleDomeMatchNumberTexts[DOME_TOURNAMENT_MATCHES_COUNT
     COMPOUND_STRING("{JPN} 2かいせん だい2しあい"),
     COMPOUND_STRING("{JPN} 2かいせん だい3しあい"),
     COMPOUND_STRING("{JPN} 2かいせん だい4しあい"),
-    COMPOUND_STRING("{JPN}じゅんけっしょう だい1しあい"),
-    COMPOUND_STRING("{JPN}じゅんけっしょう だい2しあい"),
-    COMPOUND_STRING("{JPN}    けっしょうせん"),
+    COMPOUND_STRING("{JPN}準決勝 だい1しあい"),
+    COMPOUND_STRING("{JPN}準決勝 だい2しあい"),
+    COMPOUND_STRING("{JPN}    決勝戦"),
 };
 
 static const u8 *const sBattleDomeWinTexts[] =
 {
     [DOME_TEXT_NO_WINNER_YET]    = COMPOUND_STRING("{JPN}これより たいけつ!"),
-    [DOME_TEXT_WON_USING_MOVE]   = COMPOUND_STRING("{JPN}{STR_VAR_2} などで {STR_VAR_1}が しょうり!"),
-    [DOME_TEXT_CHAMP_USING_MOVE] = COMPOUND_STRING("{JPN}{STR_VAR_2} などで {STR_VAR_1} ゆうしょう!"),
-    [DOME_TEXT_WON_ON_FORFEIT]   = COMPOUND_STRING("{JPN}あいての リタイアで {STR_VAR_1}が しょうり!"),
-    [DOME_TEXT_CHAMP_ON_FORFEIT] = COMPOUND_STRING("{JPN}あいての リタイアで {STR_VAR_1} ゆうしょう!"),
-    [DOME_TEXT_WON_NO_MOVES]     = COMPOUND_STRING("{JPN}わざを つかわずに {STR_VAR_1}が しょうり!"),
-    [DOME_TEXT_CHAMP_NO_MOVES]   = COMPOUND_STRING("{JPN}わざを つかわずに {STR_VAR_1} ゆうしょう!"),
+    [DOME_TEXT_WON_USING_MOVE]   = COMPOUND_STRING("{JPN}{STR_VAR_2} などで {STR_VAR_1}が 勝利!"),
+    [DOME_TEXT_CHAMP_USING_MOVE] = COMPOUND_STRING("{JPN}{STR_VAR_2} などで {STR_VAR_1} 優勝!"),
+    [DOME_TEXT_WON_ON_FORFEIT]   = COMPOUND_STRING("{JPN}相手の リタイアで {STR_VAR_1}が 勝利!"),
+    [DOME_TEXT_CHAMP_ON_FORFEIT] = COMPOUND_STRING("{JPN}相手の リタイアで {STR_VAR_1} 優勝!"),
+    [DOME_TEXT_WON_NO_MOVES]     = COMPOUND_STRING("{JPN}技を 使わずに {STR_VAR_1}が 勝利!"),
+    [DOME_TEXT_CHAMP_NO_MOVES]   = COMPOUND_STRING("{JPN}技を 使わずに {STR_VAR_1} 優勝!"),
 };
 
 static const u8 sLeftTrainerMonX[FRONTIER_PARTY_SIZE]  = { 96,  96,  96};

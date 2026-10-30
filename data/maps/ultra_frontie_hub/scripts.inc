@@ -104,7 +104,7 @@ UltraFrontieHub_EventScript_FacilityWarpCancel::
 	end
 
 UltraFrontieHub_Text_WhereGo::
-	.string "{JPN}こちらは しせつへの あんないです。\nちょくせつ むかうなら どちらへ？\pそとを あるいて むかうことも できます。\nおすきな ほうほうで どうぞ！$"
+	.string "{JPN}こちらは 施設への 案内です。\nちょくせつ むかうなら どちらへ？\p外を 歩いて むかうことも できます。\nおすきな 方法で どうぞ！$"
 
 UltraFrontieHub_Text_BattleTower::
 	.string "バトルタワー$"
@@ -149,7 +149,7 @@ UltraFrontieHub_EventScript_StartFrontierMoveTutor::
 	end
 
 UltraFrontieHub_Text_FrontierMoveTutor::
-	.string "{JPN}わざの そうだんは まかせて！\nきみの ポケモンに あう わざを さがそう。\pわざを おもいだしますか？$"
+	.string "{JPN}技の そうだんは まかせて！\nきみの ポケモンに あう 技を さがそう。\p技を 思いだしますか？$"
 
 UltraFrontieHub_EventScript_FrontierPokemonCreator::
 	lock
@@ -169,7 +169,7 @@ UltraFrontieHub_EventScript_OpenFrontierPokemonCreator::
 	end
 
 UltraFrontieHub_Text_FrontierPokemonCreator::
-	.string "{JPN}あたらしい なかまを さがすなら\nぼくに こえを かけてね！\pフロンティアようの\nポケモンを つくりますか？$"
+	.string "{JPN}新しい 仲間を 探すなら\nぼくに こえを かけてね！\pフロンティアようの\nポケモンを 作りますか？$"
 
 UltraFrontieHub_EventScript_FrontierItemGiver::
 	lock
@@ -189,7 +189,7 @@ UltraFrontieHub_EventScript_OpenFrontierItemGiver::
 	end
 
 UltraFrontieHub_Text_FrontierItemGiver::
-	.string "{JPN}キルリアは どうぐを ならべている。\nほしいものを えらんでみよう！$"
+	.string "{JPN}キルリアは 道具を 並べている。\nほしいものを 選んでみよう！$"
 
 UltraFrontieHub_EventScript_SetFrontierAi::
 	lock
@@ -254,28 +254,28 @@ UltraFrontieHub_EventScript_BanFrontierBannedSpecies::
 	end
 
 UltraFrontieHub_Text_SetFrontierAi::
-	.string "{JPN}ピカチュウの まえに せっていきが ある。\nフロンティアの つよさを えらぼう。$"
+	.string "{JPN}ピカチュウの 前に 設定きが ある。\nフロンティアの 強さを えらぼう。$"
 
 UltraFrontieHub_Text_SetFrontierAi_EasyDone::
-	.string "AIを かんたんに\nしました。\pあいての ポケモンの どりょくちが\n0に なります。\pコンテストの あいても\nてかげん してくれます。$"
+	.string "AIを かんたんに\nしました。\p相手の ポケモンの どりょくちが\n0に なります。\pコンテストの 相手も\nてかげん してくれます。$"
 
 UltraFrontieHub_Text_SetFrontierAi_NormalDone::
 	.string "AIを いつものに\nしました。$"
 
 UltraFrontieHub_Text_SetFrontierAi_HardDone::
-	.string "AIを むずかしいに\nしました。$"
+	.string "AIを 難しいに\nしました。$"
 
 UltraFrontieHub_Text_SetFrontierBannedSpecies::
-	.string "{JPN}……。 つよい ポケモンとの\nしょうぶも のぞんでいるのか？\pきんしポケモンの せっていを\nえらんでくれ。$"
+	.string "{JPN}……。 強い ポケモンとの\n勝負も のぞんでいるのか？\pきんしポケモンの 設定を\n選んでくれ。$"
 
 UltraFrontieHub_Text_SetFrontierBannedSpeciesAllowDone::
-	.string "{JPN}きんしポケモンの さんかを\nみとめる せっていに した。$"
+	.string "{JPN}きんしポケモンの 参加を\n認める 設定に した。$"
 
 UltraFrontieHub_Text_SetFrontierBannedSpeciesBanDone::
-	.string "{JPN}きんしポケモンの さんかを\nみとめない せっていに した。$"
+	.string "{JPN}きんしポケモンの 参加を\n認めない 設定に した。$"
 
 UltraFrontieHub_Text_SetFrontierAi_StrongestDone::
-	.string "AIを さいきょうに\nしました。$"
+	.string "AIを 最強に\nしました。$"
 
 ultra_frontie_hub_VisualEvent1::
 	lockall
@@ -351,13 +351,13 @@ UltraFrontieHub_EventScript_MusicGoodbye:
 	end
 
 UltraFrontieHub_Text_MusicIntro:
-	.string "{JPN}ぼくは とおりすがりの\nおんがく オタク。\p1きょく 5BPで かいほうすると\nしせつの バトルで ながせるよ！\pブレーンせんは いつもどおり\nとくべつな BGMに なるよ。$"
+	.string "{JPN}ぼくは とおりすがりの\nおんがく オタク。\p1きょく 5BPで かいほうすると\n施設の バトルで ながせるよ！\pブレーンせんは いつもどおり\n特別な BGMに なるよ。$"
 
 UltraFrontieHub_Text_MusicCurrent:
-	.string "{JPN}いまの せっていは\n{STR_VAR_1} だよ。$"
+	.string "{JPN}今の 設定は\n{STR_VAR_1} だよ。$"
 
 UltraFrontieHub_Text_MusicChoose:
-	.string "{JPN}きょくを えらぶ$"
+	.string "{JPN}きょくを 選ぶ$"
 
 UltraFrontieHub_Text_MusicRandom:
 	.string "{JPN}まいせん ランダム$"
@@ -366,25 +366,27 @@ UltraFrontieHub_Text_MusicDefault:
 	.string "{JPN}もとの BGMに もどす$"
 
 UltraFrontieHub_Text_MusicConfirm:
-	.string "{JPN}{STR_VAR_1}を\n5BPで かいほうして せっていする？$"
+	.string "{JPN}{STR_VAR_1}を\n5BPで かいほうして 設定する？$"
 
 UltraFrontieHub_Text_MusicUnlockDone:
-	.string "{JPN}かいほうしたよ！\n{STR_VAR_1}に せっていしたよ。$"
+	.string "{JPN}かいほうしたよ！\n{STR_VAR_1}に 設定したよ。$"
 
 UltraFrontieHub_Text_MusicFixedDone:
-	.string "{JPN}{STR_VAR_1}に\nせっていしたよ。BPは つかわないよ。$"
+	.string "{JPN}{STR_VAR_1}に\n設定したよ。BPは 使わないよ。$"
 
 UltraFrontieHub_Text_MusicRandomDone:
-	.string "{JPN}かいほうずみの きょくから\n1せんごとに ランダムで ながすよ！$"
+	.string "{JPN}解放済みの 曲から\n"
+	.string "1戦ごとに ランダムで 流すよ！$"
 
 UltraFrontieHub_Text_MusicDefaultDone:
-	.string "{JPN}もとの BGMに もどしたよ。\nかいほうした きょくは のこるよ！$"
+	.string "{JPN}もとの BGMに 戻したよ。\nかいほうした きょくは 残るよ！$"
 
 UltraFrontieHub_Text_MusicNotEnough:
-	.string "{JPN}BPが たりないよ。\n1きょくの かいほうには 5BPだよ。$"
+	.string "{JPN}BPが 足りないよ。\n"
+	.string "1曲の 解放には 5BPだよ。$"
 
 UltraFrontieHub_Text_MusicEmpty:
-	.string "{JPN}まだ きょくを かいほうしてないよ。\nまずは すきな きょくを えらんでね！$"
+	.string "{JPN}まだ きょくを かいほうしてないよ。\nまずは 好きな きょくを 選んでね！$"
 
 UltraFrontieHub_Text_MusicGoodbye:
-	.string "{JPN}おんがくと いっしょに\nバトルを たのしんでね！$"
+	.string "{JPN}おんがくと 一緒に\nバトルを 楽しんでね！$"

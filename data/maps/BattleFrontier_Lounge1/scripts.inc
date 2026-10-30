@@ -151,60 +151,60 @@ BattleFrontier_Lounge1_EventScript_Boy2::
 	goto FrontierStory_EventScript_RegularTalk
 
 BattleFrontier_Lounge1_Text_PokemonBreederIntro:
-	.string "わしは ポケモン そだてて 70ねん!\nでんせつの ポケモントップブリーダーと\lあがめられる おとこ じゃ!\pわしくらいに なると ポケモンの\nのうりょくが ひとめで わかるんじゃぞっ!\pおまえさんも トレーナーなら\nじぶんの ポケモンの のうりょくが\lきになる じゃろ?\pほれ! わしに ポケモンを みせて みいっ!$"
+	.string "わしは ポケモン 育てて 70ねん!\n伝説の ポケモントップブリーダーと\lあがめられる おとこ じゃ!\pわしくらいに なると ポケモンの\n能力が ひとめで わかるんじゃぞっ!\pおまえさんも トレーナーなら\n自分の ポケモンの 能力が\lきになる じゃろ?\pほれ! わしに ポケモンを 見せて みいっ!$"
 
 BattleFrontier_Lounge1_Text_AverageAbility:
-	.string "…… んー\pこいつは ぜんたいてきに いうと\nまずまずの のうりょくと\lいう ところかの……$"
+	.string "…… んー\pこいつは ぜんたいてきに 言うと\nまずまずの 能力と\l言う ところかの……$"
 
 BattleFrontier_Lounge1_Text_BetterThanAverageAbility:
-	.string "…… んー\pこいつは ぜんたいてきに いうと\nへいきん いじょうの\lのうりょくを もっとるな……$"
+	.string "…… んー\pこいつは ぜんたいてきに 言うと\nへいきん 以上の\l能力を もっとるな……$"
 
 BattleFrontier_Lounge1_Text_ImpressiveAbility:
-	.string "…… んー\pこいつは ぜんたいてきに いうと\nそうとう ゆうしゅうな\lのうりょくを もっとるぞ!$"
+	.string "…… んー\pこいつは ぜんたいてきに 言うと\nそうとう ゆうしゅうな\l能力を もっとるぞ!$"
 
 BattleFrontier_Lounge1_Text_OutstandingAbility:
-	.string "…… んー\pこいつは ぜんたいてきに いうと\nすばらしい のうりょく じゃな!$"
+	.string "…… んー\pこいつは ぜんたいてきに 言うと\nすばらしい 能力 じゃな!$"
 
 BattleFrontier_Lounge1_Text_BestAspectHP:
-	.string "ちなみに いちばん いいかんじ なのは\nHP かの……$"
+	.string "ちなみに 一番 いいかんじ なのは\nHP かの……$"
 
 BattleFrontier_Lounge1_Text_BestAspectAtk:
-	.string "ちなみに いちばん いいかんじ なのは\nこうげき かの……$"
+	.string "ちなみに 一番 いいかんじ なのは\n攻撃 かの……$"
 
 BattleFrontier_Lounge1_Text_BestAspectDef:
-	.string "ちなみに いちばん いいかんじ なのは\nぼうぎょ かの……$"
+	.string "ちなみに 一番 いいかんじ なのは\n防御 かの……$"
 
 BattleFrontier_Lounge1_Text_BestAspectSpAtk:
-	.string "ちなみに いちばん いいかんじ なのは\nとくこう かの……$"
+	.string "ちなみに 一番 いいかんじ なのは\nとくこう かの……$"
 
 BattleFrontier_Lounge1_Text_BestAspectSpDef:
-	.string "ちなみに いちばん いいかんじ なのは\nとくぼう かの……$"
+	.string "ちなみに 一番 いいかんじ なのは\nとくぼう かの……$"
 
 BattleFrontier_Lounge1_Text_BestAspectSpeed:
-	.string "ちなみに いちばん いいかんじ なのは\nすばやさ かの……$"
+	.string "ちなみに 一番 いいかんじ なのは\n素早さ かの……$"
 
 BattleFrontier_Lounge1_Text_StatRelativelyGood:
-	.string "まあまあの のうりょくを もっとるぞ……\n……ふむ…… そんな かんじ かのう!$"
+	.string "まあまあの 能力を もっとるぞ……\n……ふむ…… そんな 感じ かのう!$"
 
 BattleFrontier_Lounge1_Text_StatImpressive:
-	.string "かなりの ちからを もっとるな!\n……ふむ…… そんな かんじ かのう!$"
+	.string "かなりの 力を もっとるな!\n……ふむ…… そんな 感じ かのう!$"
 
 BattleFrontier_Lounge1_Text_StatOutstanding:
-	.string "すばらしい ちからを もっとる!\n……ふむ…… そんな かんじ かのう!$"
+	.string "すばらしい 力を もっとる!\n……ふむ…… そんな 感じ かのう!$"
 
 BattleFrontier_Lounge1_Text_StatFlawless:
-	.string "ばっちりっ! ぱーふぇくと じゃ!\n……ふむ…… そんな かんじ かのう!$"
+	.string "ばっちりっ! ぱーふぇくと じゃ!\n……ふむ…… そんな 感じ かのう!$"
 
 BattleFrontier_Lounge1_Text_NoTimeForMyAdvice:
-	.string "なんじゃい!\nわしの あどばいすは いらんと いうのか!\pじんせいの せんぱいの おしえは\nだまって きく もんじゃぞ!!$"
+	.string "なんじゃい!\nわしの あどばいすは いらんと 言うのか!\pじんせいの 先輩の 教えは\nだまって 聞く もんじゃぞ!!$"
 
 @ Unused
 BattleFrontier_Lounge1_Text_HaveBusinessNeedsTending:
-	.string "{JPN}なんじゃー?\pわしも いろいろ いそがしい からのう!\nまた こんどに せい!$"
+	.string "{JPN}なんじゃー?\pわしも いろいろ いそがしい からのう!\nまた 今度に せい!$"
 
 BattleFrontier_Lounge1_Text_LetsLookAtYourPokemon:
-	.string "おお! わかいの!\nポケモンの のうりょくが きになるんか?\pほれほれ!\nわしに ポケモンを みせて みい!$"
+	.string "おお! わかいの!\nポケモンの 能力が きになるんか?\pほれほれ!\nわしに ポケモンを 見せて みい!$"
 
 BattleFrontier_Lounge1_Text_EvenICantTell:
-	.string "さすがの わしも まだ うまれても いない\nポケモンの ことは わからんぞっ!\pポケモンを みせんか! ポケモンを!$"
+	.string "さすがの わしも まだ 生まれても いない\nポケモンの ことは わからんぞっ!\pポケモンを みせんか! ポケモンを!$"
 

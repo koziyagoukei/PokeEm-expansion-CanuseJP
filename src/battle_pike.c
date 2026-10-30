@@ -1,4 +1,5 @@
 #include "global.h"
+#include "frontier_util.h"
 #include "battle_pike.h"
 #include "event_data.h"
 #include "frontier_util.h"
@@ -1451,12 +1452,14 @@ static void BufferTrainerIntro(void)
 {
     if (gSpecialVar_0x8005 == 0)
     {
-        if (TRAINER_BATTLE_PARAM.opponentA < FRONTIER_TRAINERS_COUNT)
+        if (!CopyFrontierTrainerOwnText(FRONTIER_BEFORE_TEXT, TRAINER_BATTLE_PARAM.opponentA)
+         && TRAINER_BATTLE_PARAM.opponentA < FRONTIER_TRAINERS_COUNT)
             FrontierSpeechToString(gFacilityTrainers[TRAINER_BATTLE_PARAM.opponentA].speechBefore);
     }
     else if (gSpecialVar_0x8005 == 1)
     {
-        if (TRAINER_BATTLE_PARAM.opponentB < FRONTIER_TRAINERS_COUNT)
+        if (!CopyFrontierTrainerOwnText(FRONTIER_BEFORE_TEXT, TRAINER_BATTLE_PARAM.opponentB)
+         && TRAINER_BATTLE_PARAM.opponentB < FRONTIER_TRAINERS_COUNT)
             FrontierSpeechToString(gFacilityTrainers[TRAINER_BATTLE_PARAM.opponentB].speechBefore);
     }
 }

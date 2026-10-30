@@ -46,10 +46,10 @@ static const struct FrontierGuestTrainer sGuests[FRONTIER_GUEST_COUNT] =
 
 #undef GUEST
 
-static const u8 sTextChallenge[] = _("ここで あえるとはね！\nさあ しょうぶを はじめよう！");
-static const u8 sTextTwinsChallenge[] = _("フウとランの コンビネーション！\nキミに みせてあげる！");
-static const u8 sTextDefeated[] = _("みごとな しょうぶだった！\nまた ここで あおう！");
-static const u8 sTextWon[] = _("いい しょうぶだった！\nまたの ちょうせんを まっている！");
+static const u8 sTextChallenge[] = _("ここで あえるとはね！\nさあ 勝負を 始めよう！");
+static const u8 sTextTwinsChallenge[] = _("フウとランの コンビネーション！\nキミに 見せてあげる！");
+static const u8 sTextDefeated[] = _("見事な 勝負だった！\nまた ここで あおう！");
+static const u8 sTextWon[] = _("いい 勝負だった！\nまたの 挑戦を 待っている！");
 
 STATIC_ASSERT(TRAINER_FRONTIER_GUEST_END < TRAINER_PARTNER(PARTNER_NONE), FrontierGuestIdsDoNotOverlapPartners);
 

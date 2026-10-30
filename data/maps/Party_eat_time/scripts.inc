@@ -178,7 +178,9 @@ PartyEatTime_EventScript_Cancel::
 	end
 
 PartyEatTime_Text_RocketCookGreeting:
-	.string "{JPN}サカキさまー おれは いつになったら\nめしやの しごと やめれるんですか\pなんで もうかっちまうんだよー$"
+	.string "{JPN}サカキさまー おれは いつになったら\n"
+	.string "飯屋の 仕事 やめれるんですか\p"
+	.string "なんで もうかっちまうんだよー$"
 
 PartyEatTime_Text_Order:
 	.string "{JPN}ちゅうもんする$"
@@ -202,13 +204,14 @@ PartyEatTime_Text_NotEnoughBP:
 	.string "{JPN}BPが たりねえぞ$"
 
 PartyEatTime_Text_AlreadyShiny:
-	.string "{JPN}そいつは もう いろちがいだぞ$"
+	.string "{JPN}そいつは もう 色違いだぞ$"
 
 PartyEatTime_Text_ShinyMealFailed:
-	.string "{JPN}すまん いまは つくれねえ\nBPは とってねえぞ$"
+	.string "{JPN}すまん 今は つくれねえ\nBPは とってねえぞ$"
 
 PartyEatTime_Text_ShinyMealDone:
-	.string "{JPN}{STR_VAR_1}は\nいろちがいに なった!$"
+	.string "{JPN}{STR_VAR_1}は\n"
+	.string "色違いに なった!$"
 
 PartyEatTime_Text_Cancel:
 	.string "{JPN}やめる$"
@@ -220,22 +223,22 @@ PartyEatTime_Text_ChooseMenu:
 	.string "{JPN}オラ メニューだ なにをくう?$"
 
 PartyEatTime_Text_Satisfied:
-	.string "{JPN}{STR_VAR_1}たちは まんぞくしたようだ!$"
+	.string "{JPN}{STR_VAR_1}たちは 満足したようだ!$"
 
 PartyEatTime_Text_CantChooseEgg:
-	.string "{JPN}タマゴに くわせる メシは ねえぞ$"
+	.string "{JPN}タマゴに 食わせる メシは ねえぞ$"
 
 PartyEatTime_Text_ComeAgain:
-	.string "{JPN}……また くいに こいや$"
+	.string "{JPN}……また 食いに 来いや$"
 
 PartyEatTime_Text_TypeNormal:
-	.string "{JPN}いつものすうどん$"
+	.string "{JPN}いつもの素うどん$"
 
 PartyEatTime_Text_TypeFire:
 	.string "{JPN}ろうそくプリン$"
 
 PartyEatTime_Text_TypeGrass:
-	.string "{JPN}くさごとかしわもち$"
+	.string "{JPN}草ごと柏もち$"
 
 PartyEatTime_Text_TypeWater:
 	.string "{JPN}みずみずしいギョーザ$"
@@ -244,7 +247,7 @@ PartyEatTime_Text_TypeElectric:
 	.string "{JPN}しおみビリビリがゆ$"
 
 PartyEatTime_Text_TypeIce:
-	.string "{JPN}こなゆきかきごおり$"
+	.string "{JPN}粉雪かき氷$"
 
 PartyEatTime_Text_TypeFighting:
 	.string "{JPN}ボンボンプロテイン$"
@@ -271,10 +274,10 @@ PartyEatTime_Text_TypeGhost:
 	.string "{JPN}ばけのかおチップス$"
 
 PartyEatTime_Text_TypeDragon:
-	.string "{JPN}たつのこていしょく$"
+	.string "{JPN}竜の子定食$"
 
 PartyEatTime_Text_TypeDark:
-	.string "{JPN}あくぬきさんさいそば$"
+	.string "{JPN}あく抜き山菜そば$"
 
 PartyEatTime_Text_TypeSteel:
 	.string "{JPN}ハガネのビスケット$"
@@ -283,7 +286,7 @@ PartyEatTime_Text_TypeFairy:
 	.string "{JPN}フェアリーばえケーキ$"
 
 PartyEatTime_Text_TypeStellar:
-	.string "{JPN}にじいろまかない$"
+	.string "{JPN}虹色まかない$"
 
 PartyEatTime_Text_Gigantamax:
 	.string "{JPN}マックスやくぜんなべ$"

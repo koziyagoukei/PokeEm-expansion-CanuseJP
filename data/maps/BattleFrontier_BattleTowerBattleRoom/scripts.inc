@@ -446,74 +446,74 @@ BattleFrontier_BattleTowerBattleRoom_EventScript_RetireChallenge::
 	end
 
 BattleFrontier_BattleTowerBattleRoom_Text_RestoreMonsToFullHealth:
-	.string "ポケモンの たいりょくを\nかいふくして さしあげます"
+	.string "ポケモンの 体力を\n回復して 差し上げます"
 	.string "$"
 
 @ Unused
 BattleFrontier_BattleTowerBattleRoom_Text_ReadyForOpponent:
-	.string "{JPN}つぎは {STR_VAR_1}にんめの あいてです\nじゅんびは いいですか?"
+	.string "{JPN}次は {STR_VAR_1}人めの 相手です\n準備は いいですか?"
 	.string "$"
 
 BattleFrontier_BattleTowerBattleRoom_Text_ReadyFor2ndOpponent:
-	.string "つぎは 2にんめの あいてです\nじゅんびは いいですか?"
+	.string "次は 2人めの 相手です\n準備は いいですか?"
 	.string "$"
 
 BattleFrontier_BattleTowerBattleRoom_Text_ReadyFor3rdOpponent:
-	.string "つぎは 3にんめの あいてです\nじゅんびは いいですか?"
+	.string "次は 3人めの 相手です\n準備は いいですか?"
 	.string "$"
 
 BattleFrontier_BattleTowerBattleRoom_Text_ReadyFor4thOpponent:
-	.string "つぎは 4にんめの あいてです\nじゅんびは いいですか?"
+	.string "次は 4人めの 相手です\n準備は いいですか?"
 	.string "$"
 
 BattleFrontier_BattleTowerBattleRoom_Text_ReadyFor5thOpponent:
-	.string "つぎは 5にんめの あいてです\nじゅんびは いいですか?"
+	.string "次は 5人めの 相手です\n準備は いいですか?"
 	.string "$"
 
 BattleFrontier_BattleTowerBattleRoom_Text_ReadyFor6thOpponent:
-	.string "つぎは 6にんめの あいてです\nじゅんびは いいですか?"
+	.string "次は 6人めの 相手です\n準備は いいですか?"
 	.string "$"
 
 BattleFrontier_BattleTowerBattleRoom_Text_ReadyFor7thOpponent:
-	.string "つぎは 7にんめの あいてです\nじゅんびは いいですか?"
+	.string "次は 7人めの 相手です\n準備は いいですか?"
 	.string "$"
 
 BattleFrontier_BattleTowerBattleRoom_Text_RecordYourBattle:
-	.string "さきほどの たたかいを\nフロンティアパスに きろく しますか?"
+	.string "先ほどの 戦いを\nフロンティアパスに 記録 しますか?"
 	.string "$"
 
 BattleFrontier_BattleTowerLobby_Text_BattleRecordedOnPass:
-	.string "{PLAYER}の たたかいが\nフロンティアパスに きろく された!"
+	.string "{PLAYER}の 戦いが\nフロンティアパスに 記録 された!"
 	.string "$"
 
 BattleFrontier_BattleTowerBattleRoom_Text_SaveAndQuitGame:
-	.string "レポートを かいて しゅうりょう しますか?"
+	.string "レポートを 書いて 終了 しますか?"
 	.string "$"
 
 BattleFrontier_BattleTowerBattleRoom_Text_SavingPleaseWait:
-	.string "レポートを かいています!\nしばらく おまちくださいませ!"
+	.string "レポートを 書いています!\nしばらく お待ちくださいませ!"
 	.string "$"
 
 BattleFrontier_BattleTowerBattleRoom_Text_CancelYourChallenge:
-	.string "バトルルームの ちょうせんを\nちゅうし しますか?"
+	.string "バトルルームの 挑戦を\n中止 しますか?"
 	.string "$"
 
 BattleFrontier_BattleTowerBattleRoom_Text_RecordCouldntBeSaved::
-	.string "ふぐあいに より\nきろく できませんでした!"
+	.string "ふぐあいに より\n記録 できませんでした!"
 	.string "$"
 
 BattleFrontier_BattleTowerBattleRoom_Text_SalonMaidenOnHerWay:
-	.string "…… おきゃくさま\pじつは わたくしどもの しゅじんで ある\nタワータイクーンが\lあなたと たたかう ために まもなく\lバトルルームに いらっしゃる そうです"
+	.string "…… お客様\pじつは わたくしどもの しゅじんで ある\nタワータイクーンが\lあなたと 戦う ために まもなく\lバトルルームに いらっしゃる そうです"
 	.string ""
 	.string ""
 	.string "$"
 
 BattleFrontier_BattleTowerBattleRoom_Text_ReadyForSalonMaiden:
-	.string "タワータイクーンとの たたかい です!\nかくごは よろしい ですか?"
+	.string "タワータイクーンとの 戦い です!\n覚悟は よろしい ですか?"
 	.string "$"
 
 BattleFrontier_BattleTowerBattleRoom_Text_GreetingsImAnabel:
-	.string "はじめまして……\pぼくの なまえは リラ\nバトルタワーを かんりする もの……\lタワータイクーンだ……\pあなたの うわさは\nいろいろと きいて いるよ\pしょうじき ぼくには みりょくを\nかんじない こと ばかり だけどね……\pぼくが あなたに あいに きた りゆう……\nそれは ただ ひとつ……"
+	.string "はじめまして……\pぼくの 名前は リラ\nバトルタワーを かんりする もの……\lタワータイクーンだ……\pあなたの うわさは\nいろいろと 聞いて いるよ\pしょうじき ぼくには 魅力を\n感じない こと ばかり だけどね……\pぼくが あなたに あいに きた 理由……\nそれは ただ ひとつ……"
 	.string ""
 	.string ""
 	.string ""
@@ -525,11 +525,11 @@ BattleFrontier_BattleTowerBattleRoom_Text_GreetingsImAnabel:
 	.string "$"
 
 BattleFrontier_BattleTowerBattleRoom_Text_LetMeSeeYourTalent:
-	.string "あなたの さいのうを\nここに しめしなさい……"
+	.string "あなたの 才能を\nここに しめしなさい……"
 	.string "$"
 
 BattleFrontier_BattleTowerBattleRoom_Text_AnabelTalentShallBeRecognized:
-	.string "リラ『ふふふ いいね……\pでは フロンティアパスを……\nあなたの さいのうの あかしを きざもう"
+	.string "リラ『ふふふ いいね……\pでは フロンティアパスを……\nあなたの 才能の 証を きざもう"
 	.string ""
 	.string "$"
 
@@ -538,7 +538,7 @@ BattleFrontier_BattleTowerBattleRoom_Text_ReceivedAbilitySymbol:
 	.string "$"
 
 BattleFrontier_BattleTowerBattleRoom_Text_UntilNextTime:
-	.string "…… …… ……\pあなたは ポケモンバトルに\nじしんが あるのだろ?\pだったら もっと もっと たたかって\nもっと もっと かちぬいて おいでよ\pまた あえる そのときを\nぼくは まってる から……"
+	.string "…… …… ……\pあなたは ポケモンバトルに\n自信が あるのだろ?\pだったら もっと もっと 戦って\nもっと もっと 勝ちぬいて おいでよ\pまた あえる そのときを\nぼくは 待ってる から……"
 	.string ""
 	.string ""
 	.string ""
@@ -547,7 +547,7 @@ BattleFrontier_BattleTowerBattleRoom_Text_UntilNextTime:
 	.string "$"
 
 BattleFrontier_BattleTowerBattleRoom_Text_AnabelYouCameBack:
-	.string "リラ『ほんとに きて くれたんだね……\p…… …… …… ……\pここまで かちぬいた あなた……\n…… あなたが あいて だったら\lぼくも てかげん せずに たたかえる……\pひさしぶり……\pなんにも かんがえずに\nたたかう ことが できる なんて……"
+	.string "リラ『ほんとに 来て くれたんだね……\p…… …… …… ……\pここまで 勝ちぬいた あなた……\n…… あなたが 相手 だったら\lぼくも てかげん せずに 戦える……\pひさしぶり……\pなんにも 考えずに\n戦う ことが できる なんて……"
 	.string ""
 	.string ""
 	.string ""
@@ -557,18 +557,18 @@ BattleFrontier_BattleTowerBattleRoom_Text_AnabelYouCameBack:
 	.string "$"
 
 BattleFrontier_BattleTowerBattleRoom_Text_LetsBeginShallWe:
-	.string "さあ はじめようよ!$"
+	.string "さあ 始めようよ!$"
 
 BattleFrontier_BattleTowerBattleRoom_Text_AnabelCongratsYourPassPlease:
-	.string "リラ『ふふっ おめでとう……\nさあ あなたの フロンティアパスを……"
-	.string "$"
+	.string "リラ『ふふっ おめでとう……\n"
+	.string "さあ あなたの フロンティアパスを……$"
 
 BattleFrontier_BattleTowerBattleRoom_Text_AbilitySymbolTookGoldenShine:
-	.string "アビリティシンボルが\nきんいろに かがやいた!"
+	.string "アビリティシンボルが\n金色に 輝いた!"
 	.string "$"
 
 BattleFrontier_BattleTowerBattleRoom_Text_WishICouldBattleYouAgain:
-	.string "たのしかった……\pこんなに ポケモンバトルが\nたのしい なんて はじめて……\pまた あなたと たたかえると いいな……"
+	.string "たのしかった……\pこんなに ポケモンバトルが\n楽しい なんて 初めて……\pまた あなたと 戦えると いいな……"
 	.string ""
 	.string ""
 	.string "$"

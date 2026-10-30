@@ -1,53 +1,53 @@
 gText_WouldYouLikeToRestYourPkmn::
-	.string "おつかれさまです!\n"
+	.string "お疲れさまです!\n"
 	.string "{JPN}ポケモン センター です\p"
 	.string "{JPN}ここでは ポケモンの\n"
-	.string "{JPN}たいりょく かいふくを します\p"
+	.string "{JPN}体力 回復を します\p"
 	.string "{JPN}あなたの ポケモンを\n"
 	.string "{JPN}やすませて あげますか?$"
 
 gText_IllTakeYourPkmn::
 	.string "それでは\n"
-	.string "{JPN}おあずかり いたします!$"
+	.string "{JPN}お預かり いたします!$"
 
 gText_RestoredPkmnToFullHealth::
-	.string "おまちどおさま!\p"
-	.string "{JPN}おあずかり した ポケモンは\n"
-	.string "{JPN}みんな げんきに なりましたよ!$"
+	.string "お待ちどおさま!\p"
+	.string "{JPN}お預かり した ポケモンは\n"
+	.string "{JPN}みんな 元気に なりましたよ!$"
 
 gText_WeHopeToSeeYouAgain::
 	.string "またの\n"
-	.string "{JPN}ごりようを おまち してます!$"
+	.string "{JPN}ごりようを お待ち してます!$"
 
 gText_WelcomeCutShort::
-	.string "おつかれさまです!\n"
+	.string "お疲れさまです!\n"
 	.string "{JPN}ポケモン センター です\p"
 	.string "{JPN}ここでは ポケモンの\n"
-	.string "{JPN}たいりょく かいふくを します\p"
+	.string "{JPN}体力 回復を します\p"
 	.string "{JPN}あなたの ポケモンを……$"
 
 gText_NoticesGoldCard::
 	.string "そ それは……\n"
 	.string "{JPN}ひょっとして ゴールドカード!?\p"
-	.string "{JPN}ああ…… きんいろが まぶしい!\n"
+	.string "{JPN}ああ…… 金色が まぶしい!\n"
 	.string "{JPN}4つの ほしが かがやかしい!\p"
 	.string "{JPN}わたしも これまでに\n"
 	.string "{JPN}シルバーカードの トレーナーさんなら\l"
-	.string "{JPN}なんにんか みてきましたが\l"
+	.string "{JPN}なんにんか 見てきましたが\l"
 	.string "{JPN}ゴールドカードを おもちの かたは\l"
-	.string "{JPN}{PLAYER}さんが はじめて ですよ!\p"
+	.string "{JPN}{PLAYER}さんが 初めて ですよ!\p"
 	.string "{JPN}さあ {PLAYER}さんの\n"
 	.string "{JPN}ポケモンを やすませて あげましょう!$"
 
 gText_YouWantTheUsual::
-	.string "{PLAYER}さん おつかれさまです!\n"
+	.string "{PLAYER}さん お疲れさまです!\n"
 	.string "{JPN}いつもので よろしい ですね!$"
 
 gText_IllTakeYourPkmn2::
-	.string "では おあずかりさせて いただきます!$"
+	.string "では お預かりさせて いただきます!$"
 
 gText_ThankYouForWaiting::
-	.string "たいへん おまたせ いたしました!$"
+	.string "大変 おまたせ いたしました!$"
 
 gText_WeHopeToSeeYouAgain2::
-	.string "また いつでも おこしください!$"
+	.string "また いつでも お越しください!$"

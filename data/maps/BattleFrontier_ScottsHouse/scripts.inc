@@ -210,52 +210,53 @@ BattleFrontier_ScottsHouse_EventScript_ScottFaceAwayWest::
 	return
 
 BattleFrontier_ScottsHouse_Text_WelcomeToBattleFrontier:
-	.string "{JPN}エニシダ『やあ いらっしゃい！\nすこし はなして いかないかい？\pここは みんなの ゆめが あつまった\nバトルフロンティアなんだ。$"
+	.string "{JPN}エニシダ『やあ いらっしゃい！\n少し 話して いかないかい？\pここは みんなの 夢が あつまった\nバトルフロンティアなんだ。$"
 
 BattleFrontier_ScottsHouse_Text_HowMuchEffortItTookToMakeReal:
-	.string "{JPN}どんな しょうぶを したいか\nどんな ポケモンと あいたいか……\pみんなの ゆめを きいていると\nわたしも わくわくしてくるよ。$"
+	.string "{JPN}どんな 勝負を したいか\nどんな ポケモンと あいたいか……\pみんなの 夢を 聞いていると\nわたしも わくわくしてくるよ。$"
 
 BattleFrontier_ScottsHouse_Text_HaveThisAsMementoOfOurPathsCrossing:
-	.string "{JPN}きみの はなしも きいてみたいな。\nどんな たびを してきたんだい？\p……おっと ひきとめて しまったね。\nこれは きょうの であいの きねんだよ！$"
+	.string "{JPN}きみの 話しも 聞いてみたいな。\nどんな たびを してきたんだい？\p……おっと ひきとめて しまったね。\nこれは 今日の であいの 記念だよ！$"
 
 BattleFrontier_ScottsHouse_Text_ObtainedXBattlePoints:
 	.string "{PLAYER}は バトルポイントを\n{STR_VAR_1} BP もらった!$"
 
 BattleFrontier_ScottsHouse_Text_ExplainBattlePoints:
-	.string "エニシダ『バトルポイントは\nフロンティアパスで みられるからね!\lポイントは この フロンティアで\lかつやく すれば するほど\lたまっていく ものなんだ!\pほしい ものと ひきかえたり\nすきなように かつようして くれ!$"
+	.string "エニシダ『バトルポイントは\nフロンティアパスで みられるからね!\lポイントは この フロンティアで\lかつやく すれば するほど\lたまっていく ものなんだ!\pほしい ものと ひきかえたり\n好きなように かつようして くれ!$"
 
 BattleFrontier_ScottsHouse_Text_ExpectingGreatThings:
-	.string "きみの かつやく\nおおいに きたい しているからね!$"
+	.string "きみの かつやく\n大いに 期待 しているからね!$"
 
 BattleFrontier_ScottsHouse_Text_WhyIGoSeekingTrainers:
-	.string "{JPN}エニシダ『みんなの たたかいたい\nきもちが ここに あつまっているんだ。\pきみは どんな しょうぶが すきかな？\nきみじしんの はなしを きかせてくれよ。$"
+	.string "{JPN}エニシダ『みんなの 戦いたい\n気持ちが ここに あつまっているんだ。\pきみは どんな 勝負が 好きかな？\nきみじしんの 話しを 聞かせてくれよ。$"
 
 BattleFrontier_ScottsHouse_Text_HaveYouMetFrontierBrain:
-	.string "エニシダ『わが ブレーンたち から\nフロンティアパスの シンボルは\lもう もらったかな?\pわたしが みいだした\nさいきょうの フロンティアブレーンも\lきみの つよさを みたら\lおそらく おどろく だろうね!$"
+	.string "エニシダ『わが ブレーンたち から\nフロンティアパスの シンボルは\lもう もらったかな?\pわたしが みいだした\n最強の フロンティアブレーンも\lきみの 強さを みたら\lおそらく 驚く だろうね!$"
 
 BattleFrontier_ScottsHouse_Text_MayFindWildMonsInFrontier:
-	.string "{JPN}エニシダ『しょうぶの あいまには\nのんびり あるいてみると いいよ。\pみなみの まちには コンテストも\nびじゅつかんも あるからね！$"
+	.string "{JPN}エニシダ『勝負の あいまには\nのんびり 歩いてみると いいよ。\pみなみの まちには コンテストも\nびじゅつかんも あるからね！$"
 
 BattleFrontier_ScottsHouse_Text_YouveCollectedAllSilverSymbols:
-	.string "エニシダ『バトルフロンティアを\nたのしんで くれて いるかな?\p……って おおっっ!\pきみの フロンティアパスっ!\nぎんのシンボルが すべて\lそろって いるじゃ ないか!\pすごいなあ きみは おもったとおり\nつよい トレーナー だったんだなあ!\pふつうは こんな ことは しないんだが\nぜひ きねんに これを もらってくれ!\lきみなら つかいこなせる はずだよ……!$"
+	.string "エニシダ『バトルフロンティアを\n楽しんで くれて いるかな?\p……って おおっっ!\pきみの フロンティアパスっ!\nぎんのシンボルが すべて\lそろって いるじゃ ないか!\pすごいなあ きみは 思ったとおり\n強い トレーナー だったんだなあ!\pふつうは こんな ことは しないんだが\nぜひ 記念に これを もらってくれ!\lきみなら 使いこなせる はずだよ……!$"
 
 BattleFrontier_ScottsHouse_Text_YouveCollectedAllGoldSymbols:
-	.string "エニシダ『バトルフロンティアは\nまんきつ してるかな?\p……って うひょおおっっ!\pきみの フロンティアパスーっ!\nきんのシンボルが すべて\lそろって いるじゃ ないか!\pこれはすごいっ!\nやっぱり きみは おもったとおり\lすごい トレーナー だったんだなあ!\p…… …… ……\p{PLAYER}{KUN}! ぜひ きみに\nこれを プレゼント させて くれ!\pきみならば これの かちを\nわかって くれると おもうんだ!$"
+	.string "エニシダ『バトルフロンティアは\nまんきつ してるかな?\p……って うひょおおっっ!\pきみの フロンティアパスーっ!\nきんのシンボルが すべて\lそろって いるじゃ ないか!\pこれはすごいっ!\nやっぱり きみは 思ったとおり\lすごい トレーナー だったんだなあ!\p…… …… ……\p{PLAYER}{KUN}! ぜひ きみに\nこれを プレゼント させて くれ!\pきみならば これの 勝ちを\nわかって くれると 思うんだ!$"
 
 BattleFrontier_ScottsHouse_Text_SoGladIBroughtYouHere:
-	.string "{JPN}きみが ここで たのしんでくれると\nわたしも うれしいよ！$"
+	.string "{JPN}きみが ここで 楽しんでくれると\nわたしも うれしいよ！$"
 
 BattleFrontier_ScottsHouse_Text_BerryPocketStuffed:
 	.string "きのみポケットが いっぱい みたいね$"
 
 BattleFrontier_ScottsHouse_Text_Beat50TrainersInARow:
-	.string "エニシダ『おっ きいたよ!\nバトルタワーでの かつやく!\l50にん いじょう かちぬいたって?\pすごいなあ きねんに\nこれを うけとって くれよ!$"
+	.string "エニシダ『おっ 聞いたよ!\nバトルタワーでの かつやく!\l50人 以上 勝ちぬいたって?\pすごいなあ 記念に\nこれを 受け取って くれよ!$"
 
 BattleFrontier_ScottsHouse_Text_Beat100TrainersInARow:
-	.string "エニシダ『おおうっ きいたよ!\nバトルタワーでの だいかつやく!\l100にん いじょう かちぬいたって?\pすごすぎるなー!\nぜひ これを きねんに うけとってくれ!$"
+	.string "エニシダ『おおうっ 聞いたよ!\nバトルタワーでの だいかつやく!\l100人 以上 勝ちぬいたって?\pすごすぎるなー!\nぜひ これを 記念に 受け取ってくれ!$"
 
 BattleFrontier_ScottsHouse_Text_ExpectingToHearEvenGreaterThings:
-	.string "これからも ますます\nきたい しているよ!$"
+	.string "これからも ますます\n期待 しているよ!$"
 
 BattleFrontier_ScottsHouse_Text_ComeBackForThisLater:
-	.string "……って にもつが いっぱいなら\nとって おくから またおいで!$"
+	.string "……って 荷物が いっぱいなら\n"
+	.string "とって おくから また おいで!$"

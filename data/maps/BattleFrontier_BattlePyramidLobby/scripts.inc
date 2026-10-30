@@ -531,87 +531,89 @@ BattleFrontier_BattlePyramidLobby_EventScript_ExitRules::
 	end
 
 BattleFrontier_BattlePyramidLobby_Text_WelcomeToBattlePyramid:
-	.string "トレーナーの ゆうきを ためす ばしょ!\nバトルピラミッドへ ようこそ!\pこちらでは バトルアドベンチャーの\nごあんないを しておりますぞ!$"
+	.string "トレーナーの 勇気を 試す 場所!\nバトルピラミッドへ ようこそ!\pこちらでは バトルアドベンチャーの\nご案内を しておりますぞ!$"
 
 BattleFrontier_BattlePyramidLobby_Text_EmbarkOnChallenge:
-	.string "バトルアドベンチャーに\nちょうせん されますかな?$"
+	.string "バトルアドベンチャーに\n挑戦 されますかな?$"
 
 BattleFrontier_BattlePyramidLobby_Text_AwaitFutureChallenge:
-	.string "またの ちょうせんを\nおまちして おりますぞ!$"
+	.string "またの 挑戦を\nお待ちして おりますぞ!$"
 
 BattleFrontier_BattlePyramidLobby_Text_ExplainBattlePyramid:
-	.string "バトルアドベンチャーは\nピラミッドの なかへ はいり\lちょうじょう せいはを めざす\lぼうけん イベント ですぞ!\pピラミッドの なかは\n7だんの めいろで わかれていて\lうでに おぼえの ある トレーナーと\lやせい ポケモンが まって いますぞ!\pどうぐを もたせて いない\n3ひきの ポケモンと\lおわたしする バトルバッグを もって\lちょうじょうを めざして いただきますぞ!\pこの バトルバッグに いれた どうぐは\nぼうけんに しっぱいすると\lなくなって しまいますので\lおきをつけ くだされ!\pまた ぼうけんを ちゅうだん するときは\n「やすむ」を えらんで おわらせないと\lぼうけんは ちゅうしと なってしまいます!\lじゅうぶん おきをつけ くだされ!$"
+	.string "バトルアドベンチャーは\nピラミッドの なかへ 入り\lちょうじょう 制覇を めざす\lぼうけん イベント ですぞ!\pピラミッドの なかは\n7だんの めいろで わかれていて\lうでに 覚えの ある トレーナーと\lやせい ポケモンが 待って いますぞ!\p道具を 持たせて いない\n3匹の ポケモンと\lおわたしする バトルバッグを 持って\lちょうじょうを めざして いただきますぞ!\pこの バトルバッグに 入れた 道具は\nぼうけんに 失敗すると\lなくなって しまいますので\lおきをつけ くだされ!\pまた ぼうけんを 中断 するときは\n「休む」を 選んで 終わらせないと\lぼうけんは 中止と なってしまいます!\l十分 おきをつけ くだされ!$"
 
 BattleFrontier_BattlePyramidLobby_Text_WhichLevelMode:
-	.string "ピラミッドには\nレベル50と オープンレベルと ありますが\lどちらに はいられますかな?$"
+	.string "ピラミッドには\n"
+	.string "レベル50と オープンレベルと ありますが\l"
+	.string "どちらに 入られますかな?$"
 
 BattleFrontier_BattlePyramidLobby_Text_SelectThreeMons:
-	.string "では つれていく ポケモンを\n3ひき おえらび くだされ!$"
+	.string "では つれていく ポケモンを\n3匹 お選び くだされ!$"
 
 BattleFrontier_BattlePyramidLobby_Text_NotEnoughValidMonsLvOpen:
-	.string "ぼうけんしゃよ!!\pつれていける ポケモンが\n3ひき いないようですぞ!\pまた ポケモンに もたせている どうぐは\nすべて はずしてくだされ!\pなお タマゴ{STR_VAR_1}さんか させる ことは できませんぞ!\pじゅんびが できましたら\nまた おこし くだされ!$"
+	.string "ぼうけんしゃよ!!\pつれていける ポケモンが\n3匹 いないようですぞ!\pまた ポケモンに 持たせている 道具は\nすべて はずしてくだされ!\pなお タマゴ{STR_VAR_1}参加 させる ことは できませんぞ!\p準備が できましたら\nまた お越し くだされ!$"
 
 BattleFrontier_BattlePyramidLobby_Text_NotEnoughValidMonsLv50:
-	.string "ぼうけんしゃよ!!\pつれていける ポケモンが\n3ひき いないようですぞ!\pつれていく ためには レベルが 50いかで\nすべて ちがう しゅるいの ポケモンを\l3ひき よういして くだされ!\pまた ポケモンに もたせている どうぐは\nすべて はずしてくだされ!\pなお タマゴ{STR_VAR_1}さんか させる ことは できませんぞ!\pじゅんびが できましたら\nまた おこし くだされ!$"
+	.string "ぼうけんしゃよ!!\pつれていける ポケモンが\n3匹 いないようですぞ!\pつれていく ためには レベルが 50いかで\nすべて 違う 種類の ポケモンを\l3匹 用意して くだされ!\pまた ポケモンに 持たせている 道具は\nすべて はずしてくだされ!\pなお タマゴ{STR_VAR_1}参加 させる ことは できませんぞ!\p準備が できましたら\nまた お越し くだされ!$"
 
 BattleFrontier_BattlePyramidLobby_Text_NotEnoughValidMonsEnd:
-	.string "じゅんびが できましたら\nまた おこし くだされ!$"
+	.string "準備が できましたら\nまた お越し くだされ!$"
 
 BattleFrontier_BattlePyramidLobby_Text_OkayToSaveBeforeChallenge:
-	.string "バトルピラミッドへ はいる まえに\nレポートを かきますが よろしいですかな?$"
+	.string "バトルピラミッドへ 入る 前に\nレポートを 書きますが よろしいですかな?$"
 
 BattleFrontier_BattlePyramidLobby_Text_ShowYouIntoPyramid:
-	.string "では バトルピラミッドの なかへ\nおつれいたしますぞ!$"
+	.string "では バトルピラミッドの なかへ\nお連れいたしますぞ!$"
 
 BattleFrontier_BattlePyramidLobby_Text_WeWillHoldBagForSafekeeping:
-	.string "{PLAYER}さんの もっている バッグは\nこちらで あずからせて いただきますぞ!$"
+	.string "{PLAYER}さんの 持っている バッグは\nこちらで 預からせて いただきますぞ!$"
 
 BattleFrontier_BattlePyramidLobby_Text_PleaseTakePreviousBattleBag:
-	.string "かわりに ぜんかい おつかいになった\nこの バトルバッグを おもちくだされ!$"
+	.string "代わりに 前回 おつかいになった\nこの バトルバッグを おもちくだされ!$"
 
 BattleFrontier_BattlePyramidLobby_Text_PleaseTakeThisBattleBag:
-	.string "かわりに こちらの\nバトルバッグを おもちくだされ!$"
+	.string "代わりに こちらの\nバトルバッグを おもちくだされ!$"
 
 BattleFrontier_BattlePyramidLobby_Text_ExchangedBagForBattleBag:
-	.string "{PLAYER}は バッグを あずけて\nバトルバッグを うけとった!$"
+	.string "{PLAYER}は バッグを 預けて\nバトルバッグを 受け取った!$"
 
 BattleFrontier_BattlePyramidLobby_Text_StepOnFloorPanel:
-	.string "こちらにある ゆかを ふんで いただくと\nピラミッドの うえの だんへと\lすすむことが できますぞ!\pぶじ ぼうけんが すすむことを\nいのって おりますぞ!$"
+	.string "こちらにある ゆかを ふんで いただくと\nピラミッドの 上の だんへと\l進むことが できますぞ!\pぶじ ぼうけんが 進むことを\nいのって おりますぞ!$"
 
 BattleFrontier_BattlePyramidLobby_Text_DidntSaveBeforeQuittingTakeBag:
-	.string "ぼうけんしゃよ!\pぜんかい レポートを かいて\nしゅうりょう しませんでしたな?\pざんねんですが この ばあい\nちょうせんは むこうと なりますぞ!\pおあずかり していた\nバッグは おかえし いたしますぞ!\p{PLAYER}は\nバッグを うけとった!$"
+	.string "ぼうけんしゃよ!\p前回 レポートを 書いて\n終了 しませんでしたな?\pざんねんですが この 場合\n挑戦は 無効と なりますぞ!\pお預かり していた\nバッグは おかえし いたしますぞ!\p{PLAYER}は\nバッグを 受け取った!$"
 
 BattleFrontier_BattlePyramidLobby_Text_YouveConqueredPyramid:
-	.string "おかえりなさいませ!\pみごとに バトルピラミッドを\nせいは されましたな!$"
+	.string "おかえりなさいませ!\p見事に バトルピラミッドを\n制覇 されましたな!$"
 
 BattleFrontier_BattlePyramidLobby_Text_MonHoldingItemCannotTake:
-	.string "おおっ!\pポケモンに\nどうぐを もたせていますな……\pもうしわけ ありませんが\nピラミッドで てにいれた どうぐは\lもっていくことが できませんぞ!$"
+	.string "おおっ!\pポケモンに\n道具を 持たせていますな……\p申し訳 ありませんが\nピラミッドで てにいれた 道具は\l持っていくことが できませんぞ!$"
 
 BattleFrontier_BattlePyramidLobby_Text_HeldItemsMovedToBag:
-	.string "もたせている どうぐは\nすべて {PLAYER}さんの バトルバッグに\lいれておきますぞ!$"
+	.string "持たせている 道具は\nすべて {PLAYER}さんの バトルバッグに\l入れておきますぞ!$"
 
 BattleFrontier_BattlePyramidLobby_Text_BagCannotHoldPickItemsToKeep:
-	.string "バトルバッグには\nすべて はいらない ようなので\lバトルバッグと もたせたどうぐを\lせいりして くだされ!$"
+	.string "バトルバッグには\nすべて はいらない ようなので\lバトルバッグと 持たせたどうぐを\l整理して くだされ!$"
 
 BattleFrontier_BattlePyramidLobby_Text_LeastOneMonHoldingItem:
-	.string "ポケモンに\nまだ どうぐを もたせていますぞ!$"
+	.string "ポケモンに\nまだ 道具を 持たせていますぞ!$"
 
 BattleFrontier_BattlePyramidLobby_Text_PickItemsToKeep:
-	.string "バトルバッグと もたせたどうぐを\nせいりして くだされ!$"
+	.string "バトルバッグと 持たせたどうぐを\n整理して くだされ!$"
 
 @ Unused
 BattleFrontier_BattlePyramidLobby_Text_ReturnedEverythingMonsHeld:
-	.string "{JPN}{PLAYER}は ポケモンに もたせている\nどうぐを かえした!$"
+	.string "{JPN}{PLAYER}は ポケモンに 持たせている\n道具を 返した!$"
 
 BattleFrontier_BattlePyramidLobby_Text_UsedBattleBagWillBeKept:
-	.string "おつかいになられた バトルバッグは\nじかいの ちょうせんまで\lおあずかり いたしますぞ!\p{PLAYER}は バトルバッグを あずけて\nバッグを うけとった!$"
+	.string "おつかいになられた バトルバッグは\n次回の 挑戦まで\lお預かり いたしますぞ!\p{PLAYER}は バトルバッグを 預けて\nバッグを 受け取った!$"
 
 BattleFrontier_BattlePyramidLobby_Text_RecordResultsWait:
-	.string "せいせきを レポートに かきますので\nおまちくだされ!$"
+	.string "成績を レポートに 書きますので\nお待ちくだされ!$"
 
 @ Unused
 BattleFrontier_BattlePyramidLobby_Text_ForConqueringPyramidTakeThis:
-	.string "{JPN}バトルピラミッド せいはの きねんとして\nこの しょうひんを おうけとり くだされ!$"
+	.string "{JPN}バトルピラミッド 制覇の 記念として\nこの 賞品を お受け取り くだされ!$"
 
 @ Unused
 BattleFrontier_BattlePyramidLobby_Text_ReceivedPrizeItem:
@@ -619,107 +621,107 @@ BattleFrontier_BattlePyramidLobby_Text_ReceivedPrizeItem:
 
 @ Unused
 BattleFrontier_BattlePyramidLobby_Text_BagIsFull:
-	.string "{JPN}……ほう!\nどうぐが いっぱいの ようですな\pどうぐを せいりしてから\nまた おこしくだされ!$"
+	.string "{JPN}……ほう!\n道具が いっぱいの ようですな\p道具を 整理してから\nまた お越しくだされ!$"
 
 BattleFrontier_BattlePyramidLobby_Text_DisappointingHereIsBag:
-	.string "ざんねんでしたな……\pおあずかりしていた\nバッグは おかえし いたしますぞ!\p{PLAYER}は\nバッグを うけとった!$"
+	.string "ざんねんでしたな……\pお預かりしていた\nバッグは おかえし いたしますぞ!\p{PLAYER}は\nバッグを 受け取った!$"
 
 BattleFrontier_BattlePyramidLobby_Text_LookForwardToNextChallenge:
-	.string "またの ちょうせんを\nおまちして おりますぞ!$"
+	.string "またの 挑戦を\nお待ちして おりますぞ!$"
 
 @ Unused
 BattleFrontier_BattlePyramidLobby_Text_HereIsPrize:
-	.string "{JPN}おまちしておりましたぞ!\pバトルピラミッド せいはの きねんとして\nこの しょうひんを おうけとり くだされ!$"
+	.string "{JPN}お待ちしておりましたぞ!\pバトルピラミッド 制覇の 記念として\nこの 賞品を お受け取り くだされ!$"
 
 BattleFrontier_BattlePyramidLobby_Text_TellYouWhatMisfortunesAwait:
-	.string "ようこそ……\pピラミッドで おこる わざわいを\nうらなって さしあげましょう……$"
+	.string "ようこそ……\pピラミッドで おこる 災いを\nうらなって 差し上げましょう……$"
 
 BattleFrontier_BattlePyramidLobby_Text_Aah:
 	.string "………………………………………………………\n………………………………………………………\p……っああっ!$"
 
 BattleFrontier_BattlePyramidLobby_Text_HintParalysis:
-	.string "でんきが とびちっています……\p……そして\nまひにより おもうように うごけない\lあなたの ポケモンの すがたも……$"
+	.string "でんきが とびちっています……\p……そして\nまひにより 思うように 動けない\lあなたの ポケモンの 姿も……$"
 
 BattleFrontier_BattlePyramidLobby_Text_HintPoison:
-	.string "どくが みえます……\p……そして\nどくに おかされ くるしむ\lあなたの ポケモンの すがたも……$"
+	.string "どくが 見えます……\p……そして\nどくに おかされ 苦しむ\lあなたの ポケモンの 姿も……$"
 
 BattleFrontier_BattlePyramidLobby_Text_HintBurn:
-	.string "まっかな ほのおが みえます……\p……そして\nやけどを おって くるしむ\lあなたの ポケモンの すがたも……$"
+	.string "まっかな 炎が 見えます……\p……そして\nやけどを おって 苦しむ\lあなたの ポケモンの 姿も……$"
 
 BattleFrontier_BattlePyramidLobby_Text_HintPPWaste:
-	.string "すさまじい プレッシャーと おんねん……\nうらみの ちからが みえます……\pそして……\nパワーポイントが なくなり\lわるあがきを する\lあなたの ポケモンの すがたも……$"
+	.string "すさまじい プレッシャーと おんねん……\nうらみの 力が 見えます……\pそして……\nパワーポイントが なくなり\lわるあがきを する\lあなたの ポケモンの 姿も……$"
 
 BattleFrontier_BattlePyramidLobby_Text_HintLevitate:
-	.string "ゆるやかに ふゆうする\nポケモンたちが みえます……\p……そして\nじめんの わざを つかえずに くるしむ\lあなたの ポケモンの すがたも……$"
+	.string "ゆるやかに ふゆうする\nポケモンたちが 見えます……\p……そして\nじめんの 技を 使えずに 苦しむ\lあなたの ポケモンの 姿も……$"
 
 BattleFrontier_BattlePyramidLobby_Text_HintTrapAbility:
-	.string "あしもとから わきおこる\nつよい ちからが みえます……\p……そして\nにげようとしても にげられない\lあなたの ポケモンの すがたも……$"
+	.string "あしもとから わきおこる\n強い 力が 見えます……\p……そして\nにげようとしても にげられない\lあなたの ポケモンの 姿も……$"
 
 BattleFrontier_BattlePyramidLobby_Text_HintIce:
-	.string "こおりタイプの\nポケモンたちが みえます……\p……そして\nこおりの わざに くるしむ\lあなたの ポケモンの すがたも……$"
+	.string "氷タイプの\nポケモンたちが 見えます……\p……そして\n氷の 技に 苦しむ\lあなたの ポケモンの 姿も……$"
 
 BattleFrontier_BattlePyramidLobby_Text_HintExplosion:
-	.string "いのちを かけて\nくりだされる わざが みえます……\p……そして\nわざを うけて たおれていく\lあなたの ポケモンの すがたも……$"
+	.string "命を かけて\nくりだされる 技が 見えます……\p……そして\n技を 受けて 倒れていく\lあなたの ポケモンの 姿も……$"
 
 BattleFrontier_BattlePyramidLobby_Text_HintPsychic:
-	.string "エスパータイプの\nポケモンたちが みえます……\p……そして\nエスパーの わざに くるしむ\lあなたの ポケモンの すがたも……$"
+	.string "エスパータイプの\nポケモンたちが 見えます……\p……そして\nエスパーの 技に 苦しむ\lあなたの ポケモンの 姿も……$"
 
 BattleFrontier_BattlePyramidLobby_Text_HintRock:
-	.string "いわタイプの\nポケモンたちが みえます……\p……そして\nいわの わざに くるしむ\lあなたの ポケモンの すがたも……$"
+	.string "いわタイプの\nポケモンたちが 見えます……\p……そして\nいわの 技に 苦しむ\lあなたの ポケモンの 姿も……$"
 
 BattleFrontier_BattlePyramidLobby_Text_HintFighting:
-	.string "かくとうタイプの\nポケモンたちが みえます……\p……そして\nかくとうの わざに くるしむ\lあなたの ポケモンの すがたも……$"
+	.string "かくとうタイプの\nポケモンたちが 見えます……\p……そして\nかくとうの 技に 苦しむ\lあなたの ポケモンの 姿も……$"
 
 BattleFrontier_BattlePyramidLobby_Text_HintWeather:
-	.string "あまごい…… にほんばれ……\nすなあらし…… あられ……\pてんこうの へんかで つよくなる\nポケモンたちが みえます\p……そして\nさまざまな タイプに くるしむ\lあなたの ポケモンの すがたも……$"
+	.string "あまごい…… にほんばれ……\nすなあらし…… あられ……\pてんこうの へんかで 強くなる\nポケモンたちが 見えます\p……そして\nさまざまな タイプに 苦しむ\lあなたの ポケモンの 姿も……$"
 
 BattleFrontier_BattlePyramidLobby_Text_HintBug:
-	.string "むしタイプの\nポケモンたちが みえます……\p……そして\nさまざまな こうげきで くるしむ\lあなたの ポケモンの すがたも……$"
+	.string "むしタイプの\nポケモンたちが 見えます……\p……そして\nさまざまな 攻撃で 苦しむ\lあなたの ポケモンの 姿も……$"
 
 BattleFrontier_BattlePyramidLobby_Text_HintDark:
-	.string "あく タイプの\nポケモンたちが みえます……\p……そして\nあくの わざに くるしむ\lあなたの ポケモンの すがたも……$"
+	.string "あく タイプの\nポケモンたちが 見えます……\p……そして\nあくの 技に 苦しむ\lあなたの ポケモンの 姿も……$"
 
 BattleFrontier_BattlePyramidLobby_Text_HintWater:
-	.string "みずタイプの\nポケモンたちが みえます……\p……そして\nみずの わざに くるしむ\lあなたの ポケモンの すがたも……$"
+	.string "みずタイプの\nポケモンたちが 見えます……\p……そして\nみずの 技に 苦しむ\lあなたの ポケモンの 姿も……$"
 
 BattleFrontier_BattlePyramidLobby_Text_HintGhost:
-	.string "ゴーストタイプの\nポケモンたちが みえます……\p……そして\nゴーストの わざに くるしむ\lあなたの ポケモンの すがたも……$"
+	.string "ゴーストタイプの\nポケモンたちが 見えます……\p……そして\nゴーストの 技に 苦しむ\lあなたの ポケモンの 姿も……$"
 
 BattleFrontier_BattlePyramidLobby_Text_HintSteel:
-	.string "はがねタイプの\nポケモンたちが みえます……\p……そして\nきょうだいな わざに くるしむ\lあなたの ポケモンの すがたも……$"
+	.string "はがねタイプの\nポケモンたちが 見えます……\p……そして\n強大な 技に 苦しむ\lあなたの ポケモンの 姿も……$"
 
 BattleFrontier_BattlePyramidLobby_Text_HintFlyingDragon:
-	.string "そらをとぶ\nポケモンたちが みえます……\p……そして\nきょうだいな わざに くるしむ\lあなたの ポケモンの すがたも……$"
+	.string "そらをとぶ\nポケモンたちが 見えます……\p……そして\n強大な 技に 苦しむ\lあなたの ポケモンの 姿も……$"
 
 BattleFrontier_BattlePyramidLobby_Text_HintStoneEvolve:
-	.string "いしの ちからにより\nしんかした ものたちが みえます……\p……そして\nほのお…… みず…… でんき……\p3つの ちからに くるしむ\nあなたの ポケモンの すがたも……$"
+	.string "いしの 力により\n進化した ものたちが 見えます……\p……そして\n炎…… みず…… でんき……\p3つの 力に 苦しむ\nあなたの ポケモンの 姿も……$"
 
 BattleFrontier_BattlePyramidLobby_Text_HintNormal:
-	.string "ノーマルタイプの\nポケモンたちが みえます……\p……そして\nきょうだいな わざに くるしむ\lあなたの ポケモンの すがたも……$"
+	.string "ノーマルタイプの\nポケモンたちが 見えます……\p……そして\n強大な 技に 苦しむ\lあなたの ポケモンの 姿も……$"
 
 BattleFrontier_BattlePyramidLobby_Text_BelieveMyFortunesOrNot:
-	.string "うらないを しんじるも しんじないも\nあなた しだい……\pみらいは いつでも かえられます……\nどうぞ ごぶじで……$"
+	.string "うらないを 信じるも 信じないも\nあなた しだい……\p未来は いつでも かえられます……\nどうぞ ごぶじで……$"
 
 BattleFrontier_BattlePyramidLobby_Text_YouveDefeatedPyramidKing:
-	.string "おかえりなさいませ!\pピラミッドキングを たおし\nみごと バトルピラミッドを\lせいは されましたな!$"
+	.string "おかえりなさいませ!\pピラミッドキングを 倒し\n見事 バトルピラミッドを\l制覇 されましたな!$"
 
 BattleFrontier_BattlePyramidLobby_Text_GiveYouTheseBattlePoints:
-	.string "ぼうけんしゃよ!\nあなたの あつい ゆうきを たたえ\lバトルポイントを おおくり しましょう!$"
+	.string "ぼうけんしゃよ!\nあなたの 熱い 勇気を 称え\lバトルポイントを お送り しましょう!$"
 
 BattleFrontier_BattlePyramidLobby_Text_RulesAreListed:
-	.string "バトルアドベンチャーの\nルールが かかれている!$"
+	.string "バトルアドベンチャーの\nルールが 書かれている!$"
 
 BattleFrontier_BattlePyramidLobby_Text_ReadWhichHeading:
-	.string "どの せつめいを よみますか?$"
+	.string "どの 説明を 読みますか?$"
 
 BattleFrontier_BattlePyramidLobby_Text_ExplainMonRules:
-	.string "ピラミッドの なかで でてくる\nやせい ポケモンは\lピラミッドを せいはすると かわります\pどんな ポケモンが でてくるのかは\nじっさいに ぼうけんして おぼえましょう$"
+	.string "ピラミッドの なかで 出てくる\nやせい ポケモンは\lピラミッドを 制覇すると 代わります\pどんな ポケモンが 出てくるのかは\nじっさいに ぼうけんして 覚えましょう$"
 
 BattleFrontier_BattlePyramidLobby_Text_ExplainTrainerRules:
-	.string "ピラミッドの なかには\nトレーナーが まちかまえて います\p1つの だんには さいこうで\n8にんの トレーナーが います\pまた トレーナーに かつと\nちょっと ぼうけんに やくだつ\lヒントが もらえます$"
+	.string "ピラミッドの なかには\nトレーナーが まちかまえて います\p1つの だんには 最高で\n8人の トレーナーが います\pまた トレーナーに かつと\nちょっと ぼうけんに やくだつ\lヒントが もらえます$"
 
 BattleFrontier_BattlePyramidLobby_Text_ExplainMazeRules:
-	.string "ピラミッドの めいろは\nはいる たびに かわります\pなかは とても くらく なっているので\nしんちょうに すすみましょう\pまた やせいポケモンや トレーナーとの\nたたかいに かつと\lちょっとだけ まわりが あかるくなります$"
+	.string "ピラミッドの めいろは\n入る たびに 代わります\pなかは とても くらく なっているので\nしんちょうに 進みましょう\pまた やせいポケモンや トレーナーとの\n戦いに かつと\lちょっとだけ 回りが あかるくなります$"
 
 BattleFrontier_BattlePyramidLobby_Text_ExplainBagRules:
-	.string "バトルバッグは ピラミッドに いる あいだ\nつかうことが できます\pレベル50と オープンレベルの\nバッグが それぞれ ようい されていて\l10しゅるいの どうぐを\l99こ まで いれることが できます\pまた バッグの なかみは ぼうけんに\nしっぱい すると なくなって しまいます$"
+	.string "バトルバッグは ピラミッドに いる あいだ\n使うことが できます\pレベル50と オープンレベルの\nバッグが それぞれ 用意 されていて\l10しゅるいの 道具を\l99こ まで 入れることが できます\pまた バッグの なかみは ぼうけんに\n失敗 すると なくなって しまいます$"

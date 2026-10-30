@@ -251,11 +251,11 @@ BattleFrontier_BattleFactoryBattleRoom_EventScript_ScientistsFaceBattle::
 	return
 
 BattleFrontier_BattleFactoryBattleRoom_Text_GetAMoveOn:
-	.string "ほらほら! はやく きなっ!"
+	.string "ほらほら! 早く きなっ!"
 	.string "$"
 
 BattleFrontier_BattleFactoryBattleRoom_Text_NolandImFactoryHead:
-	.string "おれの なまえは ダツラ!\nいちおう ここの せきにんしゃで\lファクトリーヘッド ってのを やってる!\pおめえの バトルトレードの\nデータは みせて もらったぜ!\pまあまあ いいスジ してる みてぇ だが\nまだまだ あたまが カッテぇ なぁ!\pイイかー? ちしき っつうのは\nただ ほんを よんだり\lつくえに むかってる だけじゃ\lなーんにも みには ならねぇんだぜ!\pじぶんの こころと からだで じっさいに\nたいけん して みねぇと なあ……\pおれも おめえと おんなじ じょうけん!\nレンタルポケモンで たたかう!!"
+	.string "おれの 名前は ダツラ!\nいちおう ここの せきにんしゃで\lファクトリーヘッド ってのを やってる!\pおめえの バトルトレードの\nデータは 見せて もらったぜ!\pまあまあ いいスジ してる 見てぇ だが\nまだまだ あたまが カッテぇ なぁ!\pイイかー? ちしき っつうのは\nただ ほんを よんだり\l机に むかってる だけじゃ\lなーんにも みには ならねぇんだぜ!\p自分の 心と 体で じっさいに\nたいけん して みねぇと なあ……\pおれも おめえと おんなじ 条件!\nレンタルポケモンで 戦う!!"
 	.string ""
 	.string ""
 	.string ""
@@ -272,8 +272,8 @@ BattleFrontier_BattleFactoryBattleRoom_Text_NolandImFactoryHead:
 	.string "$"
 
 BattleFrontier_BattleFactoryBattleRoom_Text_ShakeOutKnowledgeBringItOn:
-	.string "ありったけの ちしき ふりしぼって\nかかって こいやっ!"
-	.string "$"
+	.string "ありったけの 知識 ふりしぼって\n"
+	.string "かかって こいやっ!$"
 
 BattleFrontier_BattleFactoryBattleRoom_Text_NolandLetsSeeFrontierPass:
 	.string "ダツラ『イイぜ!\nフロンティアパス かしな!"
@@ -284,14 +284,14 @@ BattleFrontier_BattleFactoryBattleRoom_Text_ReceivedKnowledgeSymbol:
 	.string "$"
 
 BattleFrontier_BattleFactoryBattleRoom_Text_NextTimeNoHoldsBarred:
-	.string "へっ…… おもしれぇじゃ ねえか……\pつぎに あうときゃー\nおれも マジで いく からな!\pしっかり べんきょう しとけよ!!"
+	.string "へっ…… おもしれぇじゃ ねえか……\p次に あうときゃー\nおれも マジで いく からな!\pしっかり べんきょう しとけよ!!"
 	.string ""
 	.string ""
 	.string ""
 	.string "$"
 
 BattleFrontier_BattleFactoryBattleRoom_Text_HarderLookThanLastTime:
-	.string "ダツラ『オース! どうよー? ちょうしはー?\nしっかり べんきょう してるか?\p…… お?\pおめえ まえに あった ときより\nちょっと イイ ツラしてるじゃ ねえか!\pこりゃ たのしみ だねー!\nワクワクして きたぜ! おい!"
+	.string "ダツラ『オース! どうよー? 調子はー?\nしっかり べんきょう してるか?\p…… お?\pおめえ 前に あった ときより\nちょっと イイ ツラしてるじゃ ねえか!\pこりゃ 楽しみ だねー!\nワクワクして きたぜ! おい!"
 	.string ""
 	.string ""
 	.string ""
@@ -310,11 +310,11 @@ BattleFrontier_BattleFactoryBattleRoom_Text_OutOfMyLeagueLetsSeePass:
 	.string "$"
 
 BattleFrontier_BattleFactoryBattleRoom_Text_KnowledgeSymbolTookGoldenShine:
-	.string "ノウレッジシンボルが\nきんいろに かがやいた!"
+	.string "ノウレッジシンボルが\n金色に 輝いた!"
 	.string "$"
 
 BattleFrontier_BattleFactoryBattleRoom_Text_LastTimeILoseToYou:
-	.string "ちっくしょー!!\pつぎは ぜってぇに まけねぇ からな!\nまた やろうぜっ!!"
+	.string "ちっくしょー!!\p次は ぜってぇに 負けねぇ からな!\nまた やろうぜっ!!"
 	.string ""
 	.string ""
 	.string "$"

@@ -27,16 +27,16 @@ BattleFrontier_Lounge6_EventScript_TradeCompleted::
 	end
 
 BattleFrontier_Lounge6_Text_WouldYouLikeToTrade:
-	.string "{JPN}わたしの {STR_VAR_2}\nかわいいでしょう？\p{STR_VAR_1}と こうかんして\nあたらしい であいを つくりませんか？$"
+	.string "{JPN}わたしの {STR_VAR_2}\nかわいいでしょう？\p{STR_VAR_1}と 交換して\n新しい であいを 作りませんか？$"
 
 BattleFrontier_Lounge6_Text_PromiseIllBeGoodToIt:
-	.string "{JPN}わー かわいい ですねー……!\nどうも ありがとう\lたいせつに しますよ!\pあっ {STR_VAR_2}も\nよろしく おねがい します!$"
+	.string "{JPN}わー かわいい ですねー……!\nどうも ありがとう\l大切に しますよ!\pあっ {STR_VAR_2}も\nよろしく おねがい します!$"
 
 BattleFrontier_Lounge6_Text_DontTradeForAnythingButMon:
-	.string "あ ゴメンなさい!\nわたし {STR_VAR_1} いがいとは\lこうかん するつもり ないんでー$"
+	.string "あ ゴメンなさい!\nわたし {STR_VAR_1} 以外とは\l交換 するつもり ないんでー$"
 
 BattleFrontier_Lounge6_Text_WellThatsFineToo:
-	.string "あ やめますか!\nべつに いいですよ\lまた こんど きてくださいー$"
+	.string "あ やめますか!\n別に いいですよ\lまた 今度 来てくださいー$"
 
 BattleFrontier_Lounge6_Text_SkittySoMuchCuterThanImagined:
-	.string "{JPN}この エネコと いると\nまえの トレーナーの たのしさまで\lつたわってくる きがします！$"
+	.string "{JPN}この エネコと いると\n前の トレーナーの たのしさまで\lつたわってくる きがします！$"

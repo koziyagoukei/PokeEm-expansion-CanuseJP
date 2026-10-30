@@ -232,88 +232,92 @@ BattleFrontier_ReceptionGate_EventScript_ExitFrontierPassGuide::
 	end
 
 BattleFrontier_ReceptionGate_Text_FirstTimeHereThisWay:
-	.string "はじめての おきゃくさまですね!\nこちらへ どうぞ!$"
+	.string "初めての お客様ですね!\nこちらへ どうぞ!$"
 
 BattleFrontier_ReceptionGate_Text_WelcomeToBattleFrontier:
-	.string "{JPN}ポケモンしょうぶの さいぜんせん！\nバトルフロンティアへ ようこそ！$"
+	.string "{JPN}ポケモン勝負の 最前線！\n"
+	.string "バトルフロンティアへ ようこそ！$"
 
 BattleFrontier_ReceptionGate_Text_IssueFrontierPass:
-	.string "はじめての おきゃくさまには\nバトルフロンティアの なかで\lごりよう いただける フロンティアパスを\lはっこうして おります!\pどうぞ おうけとり ください!$"
+	.string "初めての お客様には\nバトルフロンティアの なかで\lごりよう いただける フロンティアパスを\lはっこうして おります!\pどうぞ お受け取り ください!$"
 
 BattleFrontier_ReceptionGate_Text_ObtainedFrontierPass:
 	.string "{PLAYER}は\nフロンティアパスを もらった!$"
 
 BattleFrontier_ReceptionGate_Text_PlacedTrainerCardInFrontierPass:
-	.string "{PLAYER}は トレーナーカードを\nフロンティアパスに いれかえた!$"
+	.string "{PLAYER}は トレーナーカードを\nフロンティアパスに 入れかえた!$"
 
 BattleFrontier_ReceptionGate_Text_EnjoyBattleFrontier:
-	.string "{JPN}どの しせつからでも おたのしみください。\nみなみの まちには じゅんびの ハブも\lコンテストかいじょうも ございます！$"
+	.string "{JPN}どの 施設からでも おたのしみください。\nみなみの まちには 準備の ハブも\lコンテストかいじょうも ございます！$"
 
 BattleFrontier_ReceptionGate_Text_YourGuideToFacilities:
-	.string "{JPN}7つの しせつと せつびを ごあんないします。\nみなみの まちへは とほで どうぞ！$"
+	.string "{JPN}7つの 施設と せつびを ご案内します。\nみなみの まちへは とほで どうぞ！$"
 
 BattleFrontier_ReceptionGate_Text_LearnAboutWhich2:
-	.string "どの せつめいが ききたいですか?$"
+	.string "どの 説明が ききたいですか?$"
 
 BattleFrontier_ReceptionGate_Text_BattleTowerInfo:
-	.string "バトルフロンティアの シンボル とも\nいえる きょだいな とう です\pこちらの たてもの では シングル\nダブル マルチ つうしんマルチの\l4つの バトルルームで たたかいを\lたのしむことが できます!$"
+	.string "バトルフロンティアの シンボル とも\nいえる きょだいな とう です\pこちらの たてもの では シングル\nダブル マルチ 通信マルチの\l4つの バトルルームで 戦いを\lたのしむことが できます!$"
 
 BattleFrontier_ReceptionGate_Text_BattleDomeInfo:
-	.string "バトルドームは たまごの ような\nかたちをした おおきな たてものです\pこちらでは バトルトーナメント という\nイベントが かいさいされて います\pなお バトルトーナメントには\nシングルバトルよう ダブルバトルようの\l2つの コースが あります!$"
+	.string "バトルドームは たまごの ような\nかたちをした 大きな たてものです\pこちらでは バトルトーナメント という\nイベントが かいさいされて います\pなお バトルトーナメントには\nシングルバトルよう ダブルバトルようの\l2つの コースが あります!$"
 
 BattleFrontier_ReceptionGate_Text_BattlePalaceInfo:
-	.string "バトルパレスは バトルフロンティアの\nみぎはじに ある あかい たてものです\pこちらの たてもの では\nシングル ダブルの 2つの\lバトルホールへの ちょうせんが できます$"
+	.string "バトルパレスは バトルフロンティアの\n右はじに ある あかい たてものです\pこちらの たてもの では\nシングル ダブルの 2つの\lバトルホールへの 挑戦が できます$"
 
 BattleFrontier_ReceptionGate_Text_BattleArenaInfo:
-	.string "バトルアリーナは バトルフロンティアの\nちゅうおう みぎに いちする\lどうじょうの ような たてものです\pこちらでは かちぬきチームバトル という\nイベントを かいさい しております!$"
+	.string "バトルアリーナは バトルフロンティアの\nちゅうおう 右に いちする\lどうじょうの ような たてものです\pこちらでは 勝ちぬきチームバトル という\nイベントを かいさい しております!$"
 
 BattleFrontier_ReceptionGate_Text_BattleFactoryInfo:
-	.string "バトルファクトリーは ここをでて いちばん\nちかくにある おおきな ビルに なります\pこちらでは バトルトレード という\nイベントを かいさいして おります\pなお バトルトレードには\nシングルバトルよう ダブルバトルようの\l2つの コースが ようい されています!$"
+	.string "バトルファクトリーは ここをでて 一番\n近くにある 大きな ビルに なります\pこちらでは バトルトレード という\nイベントを かいさいして おります\pなお バトルトレードには\nシングルバトルよう ダブルバトルようの\l2つの コースが 用意 されています!$"
 
 BattleFrontier_ReceptionGate_Text_BattlePikeInfo:
-	.string "バトルチューブは バトルフロンティアの\nちゅうおう ひだりに いちする\lポケモンの かたちを した たてものです\pこちらでは バトルゲーム という\nイベントを かいさい しております!$"
+	.string "バトルチューブは バトルフロンティアの\nちゅうおう 左に いちする\lポケモンの かたちを した たてものです\pこちらでは バトルゲーム という\nイベントを かいさい しております!$"
 
 BattleFrontier_ReceptionGate_Text_BattlePyramidInfo:
-	.string "バトルピラミッドは きょだいな\nピラミッドの かたちをした たてものです\pこちらでは バトルアドベンチャー という\nイベントを かいさい しております!$"
+	.string "バトルピラミッドは 巨大な\n"
+	.string "ピラミッドの 形をした 建物です\p"
+	.string "こちらでは バトルアドベンチャー という\n"
+	.string "イベントを 開催 しております!$"
 
 BattleFrontier_ReceptionGate_Text_RankingHallInfo:
-	.string "ランキングホールは\nバトルタワーの ちかくに あります\pこちらは バトルフロンティアで\nたたかった トレーナーたちの\lもっとも すばらしい きろくを\lみることが できます$"
+	.string "ランキングホールは\nバトルタワーの 近くに あります\pこちらは バトルフロンティアで\n戦った トレーナーたちの\lもっとも すばらしい 記録を\l見ることが できます$"
 
 BattleFrontier_ReceptionGate_Text_ExchangeCornerInfo:
-	.string "ひきかえサービス コーナーは\nバトルタワーの ちかくに あります\pこちらでは バトルフロンティアの\nなかで ためた バトルポイントを\lすてきな けいひんと\lこうかんする ことが できます!$"
+	.string "ひきかえサービス コーナーは\nバトルタワーの 近くに あります\pこちらでは バトルフロンティアの\nなかで ためた バトルポイントを\lすてきな けいひんと\l交換する ことが できます!$"
 
 BattleFrontier_ReceptionGate_Text_YourGuideToRules:
-	.string "こちらでは バトルフロンティアに ある\nすべての しせつに きょうつう した\lちょうせんの ための きほんてきな\lルールを せつめい いたします!$"
+	.string "こちらでは バトルフロンティアに ある\nすべての 施設に きょうつう した\l挑戦の ための きほんてきな\lルールを 説明 いたします!$"
 
 BattleFrontier_ReceptionGate_Text_LearnAboutWhat:
-	.string "どの せつめいが ききたいですか?$"
+	.string "どの 説明が ききたいですか?$"
 
 BattleFrontier_ReceptionGate_Text_LevelModeInfo:
-	.string "バトルフロンティアに ある\nすべての しせつの ちょうせんは\lおおきく レベル50の コースと\lオープンレベルの コースに わかれています$"
+	.string "バトルフロンティアに ある\nすべての 施設の 挑戦は\lおおきく レベル50の コースと\lオープンレベルの コースに わかれています$"
 
 BattleFrontier_ReceptionGate_Text_Level50Info:
-	.string "{JPN}レベル50の コースでは\nたかい レベルの ポケモンも\lレベル50に あわせて ちょうせんできます。\pちょうせんが おわれば\nもとの レベルに もどります。$"
+	.string "{JPN}レベル50の コースでは\n高い レベルの ポケモンも\lレベル50に あわせて 挑戦できます。\p挑戦が おわれば\nもとの レベルに 戻ります。$"
 
 BattleFrontier_ReceptionGate_Text_OpenLevelInfo:
-	.string "オープンレベルの コースでは\nちょうせんに さんかする ポケモンの\lレベルに せいげんが ありません\pあなたの ポケモンの レベルに あわせて\nたいせんする トレーナーの ポケモンの\lレベルが かわります\pただし レベル60より ひくい レベルの\nポケモンを つれた トレーナーが\lとうじょう することは ありません$"
+	.string "オープンレベルの コースでは\n挑戦に 参加する ポケモンの\lレベルに 制限が ありません\pあなたの ポケモンの レベルに あわせて\n対戦する トレーナーの ポケモンの\lレベルが 代わります\pただし レベル60より 低い レベルの\nポケモンを つれた トレーナーが\lとうじょう することは ありません$"
 
 BattleFrontier_ReceptionGate_Text_MonEntryInfo:
-	.string "タマゴや いちぶの れいがいを\nのぞいて ほとんどの ポケモンが\lすべての しせつに ちょうせん できます\pちょうせんの ために\nひつような ポケモンの かずは\lしせつに よって ちがいます\pただし どの しせつでも\nおなじ しゅるいの ポケモンを\l2ひき いじょう さんか させることは\lできませんので ごちゅうい ください$"
+	.string "タマゴや 一部の れいがいを\nのぞいて ほとんどの ポケモンが\lすべての 施設に 挑戦 できます\p挑戦の ために\n必要な ポケモンの かずは\l施設に よって 違います\pただし どの 施設でも\n同じ 種類の ポケモンを\l2匹 以上 参加 させることは\lできませんので ごちゅうい ください$"
 
 BattleFrontier_ReceptionGate_Text_HoldItemsInfo:
-	.string "バトルフロンティアの しせつに\nポケモンを ちょうせん させるとき\pそれぞれの ポケモンが\nおなじ どうぐを もつことは できません\pちょうせん させる ポケモンには\nすべて ちがう どうぐを\lもたせて おくように してください$"
+	.string "バトルフロンティアの 施設に\nポケモンを 挑戦 させるとき\pそれぞれの ポケモンが\n同じ 道具を 持つことは できません\p挑戦 させる ポケモンには\nすべて 違う 道具を\l持たせて おくように してください$"
 
 BattleFrontier_ReceptionGate_Text_YourGuideToFrontierPass:
-	.string "こちらでは フロンティアパスの\nせつめいを いたします!$"
+	.string "こちらでは フロンティアパスの\n説明を いたします!$"
 
 BattleFrontier_ReceptionGate_Text_LearnAboutWhich1:
-	.string "どの せつめいが ききたいですか?$"
+	.string "どの 説明が ききたいですか?$"
 
 BattleFrontier_ReceptionGate_Text_SymbolsInfo:
-	.string "バトルフロンティアの 7つの しせつで\nつよさを みとめられた トレーナーが\lそれぞれの しせつの シンボルを\lもらえることが あります\pシンボルを もらう ためには\nなんにんも トレーナーを かちぬいたり\lなんども せいは したり……\pなかなか たいへんな みちのりですが\nぜひ がんばって くださいね!$"
+	.string "バトルフロンティアの 7つの 施設で\n強さを 認められた トレーナーが\lそれぞれの 施設の シンボルを\lもらえることが あります\pシンボルを もらう ためには\nなんにんも トレーナーを 勝ちぬいたり\l何度も 制覇 したり……\pなかなか 大変な 道のりですが\nぜひ がんばって くださいね!$"
 
 BattleFrontier_ReceptionGate_Text_RecordedBattleInfo:
-	.string "{JPN}たいせんの あとで バトルビデオを\n1つ きろくすることが できます。\pしせつへ ちょうせんしている あいだは\nビデオを さいせいできません。$"
+	.string "{JPN}対戦の あとで バトルビデオを\n1つ 記録することが できます。\p施設へ 挑戦している あいだは\nビデオを さいせいできません。$"
 
 BattleFrontier_ReceptionGate_Text_BattlePointsInfo:
-	.string "{JPN}バトルポイントは しせつでの かつやくや\nコンテストの ゆうしょうで えられます。\pけいひんや べっそうの ショップなど\nすきなことに おつかいください！$"
+	.string "{JPN}バトルポイントは 施設での かつやくや\nコンテストの 優勝で えられます。\pけいひんや べっそうの ショップなど\n好きなことに おつかいください！$"

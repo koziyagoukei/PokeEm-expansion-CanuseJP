@@ -374,103 +374,105 @@ BattleFrontier_BattlePalaceLobby_EventScript_ExitRules::
 	end
 
 BattleFrontier_BattlePalaceLobby_Text_WelcomeForSingleBattle:
-	.string "トレーナーの こころを ためす ばしょ\nバトルパレスへ ようこそ\pここでは シングル バトルホールへの\nちょうせんを うけつけて おる……$"
+	.string "トレーナーの 心を 試す 場所\nバトルパレスへ ようこそ\pここでは シングル バトルホールへの\n挑戦を 受け付けて おる……$"
 
 BattleFrontier_BattlePalaceLobby_Text_TakeSingleBattleChallenge:
-	.string "シングル バトルホールに\nちょうせん するか?$"
+	.string "シングル バトルホールに\n挑戦 するか?$"
 
 BattleFrontier_BattlePalaceLobby_Text_ExplainSingleBattleChallenge:
-	.string "ここには シングル バトルホールと\nよばれる シングルバトルの ための\lひろまを いくつか ようい しておる\pここでの たたかいには\nまもらなければ ならない\lひとつの おきてが ある\pここでは ポケモンは\nいれかえ しか できない!\pそれいがいの めいれいは\nいっさい きんし して おるのだ!\pポケモンには せいかくの ままに\nかんがえ こうどう して もらう!\pおぬしは じぶんの\nポケモンたちを しんじて\lたたかいを みまもって やれ\pみごと 7にんの トレーナーを\nうちやぶることが できれば\lバトルポイントを さしあげよう\pまた とちゅうで ちょうせんを\nちゅうだん したい ときは\lきちんと レポートを かかないと\lつづけて ちょうせん できんからな\lきを つけてくれ……$"
+	.string "ここには シングル バトルホールと\n呼ばれる シングルバトルの ための\lひろまを いくつか 用意 しておる\pここでの 戦いには\nまもらなければ ならない\lひとつの おきてが ある\pここでは ポケモンは\n入れかえ しか できない!\pそれいがいの めいれいは\nいっさい きんし して おるのだ!\pポケモンには 性格の ままに\n考え こうどう して もらう!\pおぬしは 自分の\nポケモンたちを 信じて\l戦いを みまもって やれ\p見事 7人の トレーナーを\nうちやぶることが できれば\lバトルポイントを 差し上げよう\pまた 途中で 挑戦を\n中断 したい ときは\lきちんと レポートを かかないと\l続けて 挑戦 できんからな\lきを つけてくれ……$"
 
 BattleFrontier_BattlePalaceLobby_Text_ReturnWhenFortified:
-	.string "おのれの こころと ポケモンを きたえたら\nまた くるがよい……$"
+	.string "己の 心と ポケモンを 鍛えたら\nまた くるがよい……$"
 
 BattleFrontier_BattlePalaceLobby_Text_WhichChallenge:
-	.string "レベル50のへや オープンレベルのへやが\nあるが どちらに ちょうせん するのだ?$"
+	.string "レベル50のへや オープンレベルのへやが\nあるが どちらに 挑戦 するのだ?$"
 
 BattleFrontier_BattlePalaceLobby_Text_NotEnoughValidMonsLv50:
-	.string "おぬし……\pちょうせん できる ポケモンが\n3ひき おらんぞ!\pちょうせん するには レベルが 50いかで\nすべて ちがう しゅるいの ポケモンを\p3ひき ようい してくれ\pまた もたせる どうぐも\nすべて ちがう もので なければ いかん\pそして タマゴ{STR_VAR_1}ちょうせん させる ことは できん!\pじゅんびを ととのえてから また きなさい$"
+	.string "おぬし……\p挑戦 できる ポケモンが\n3匹 おらんぞ!\p挑戦 するには レベルが 50いかで\nすべて 違う 種類の ポケモンを\p3匹 用意 してくれ\pまた 持たせる 道具も\nすべて 違う もので なければ いかん\pそして タマゴ{STR_VAR_1}挑戦 させる ことは できん!\p準備を ととのえてから また きなさい$"
 
 BattleFrontier_BattlePalaceLobby_Text_NotEnoughValidMonsEnd:
-	.string "じゅんびが できましたら\n"
-	.string "また おこしください$"
+	.string "準備が できましたら\n"
+	.string "また お越しください$"
 
 BattleFrontier_BattlePalaceLobby_Text_NotEnoughValidMonsLvOpen:
-	.string "おぬし……\pちょうせん できる ポケモンが\n3ひき おらんぞ!\pちょうせん するには\nすべて ちがう しゅるいの ポケモンを\p3ひき ようい してくれ\pまた もたせる どうぐも\nすべて ちがう もので なければ いかん\pそして タマゴ{STR_VAR_1}ちょうせん させる ことは できん!\pじゅんびを ととのえてから また きなさい$"
+	.string "おぬし……\p挑戦 できる ポケモンが\n3匹 おらんぞ!\p挑戦 するには\nすべて 違う 種類の ポケモンを\p3匹 用意 してくれ\pまた 持たせる 道具も\nすべて 違う もので なければ いかん\pそして タマゴ{STR_VAR_1}挑戦 させる ことは できん!\p準備を ととのえてから また きなさい$"
 
 BattleFrontier_BattlePalaceLobby_Text_NowSelectThreeMons:
-	.string "では ちょうせんする ポケモンを\n3ひき えらんでくれ$"
+	.string "では 挑戦する ポケモンを\n3匹 選んでくれ$"
 
 BattleFrontier_BattlePalaceLobby_Text_MustSaveBeforeChallenge2:
-	.string "バトルホールへ むかうまえに\nレポートを かくが よろしいか?$"
+	.string "バトルホールへ 向かう前に\n"
+	.string "レポートを 書くが よろしいか?$"
 
 BattleFrontier_BattlePalaceLobby_Text_FollowMe:
 	.string "それでは\nわしに ついてこい……$"
 
 BattleFrontier_BattlePalaceLobby_Text_ResultsWillBeRecorded:
-	.string "よいものを みせて もらった\pそれでは せいせきを レポートに かくぞ\nしばし またれよ……$"
+	.string "よいものを 見せて もらった\pそれでは 成績を レポートに かくぞ\nしばし またれよ……$"
 
 BattleFrontier_BattlePalaceLobby_Text_FirmTrueBondsFor7WinStreak:
-	.string "7にんぬき たっせい とは……\pおぬしと ポケモンの こころの きずなは\nまことの ようじゃな……$"
+	.string "7人ぬき 達成 とは……\pおぬしと ポケモンの 心の きずなは\nまことの ようじゃな……$"
 
 BattleFrontier_BattlePalaceLobby_Text_FeatWillBeRecorded:
-	.string "せいせきを レポートに かくぞ\nしばし またれよ……$"
+	.string "成績を レポートに かくぞ\nしばし またれよ……$"
 
 @ Unused
 BattleFrontier_BattlePalaceLobby_Text_BattlePointsFor7WinStreak:
-	.string "{JPN}7にんぬきの あかしに\nバトルポイントを さしあげよう……$"
+	.string "{JPN}7人ぬきの 証に\nバトルポイントを 差し上げよう……$"
 
 BattleFrontier_BattlePalaceLobby_Text_NoSpaceForPrize:
-	.string "どうぐが いっぱいの ようだな……\pどうぐを せいりしてから\nまた くるがよい……$"
+	.string "道具が いっぱいの ようだな……\p道具を 整理してから\nまた くるがよい……$"
 
 BattleFrontier_BattlePalaceLobby_Text_WeHaveBeenWaiting:
-	.string "まっておったぞ……$"
+	.string "待っておったぞ……$"
 
 BattleFrontier_BattlePalaceLobby_Text_MustSaveBeforeChallenge:
-	.string "バトルホールへ むかうまえに\nレポートを かくぞ……$"
+	.string "バトルホールへ 向かう前に\n"
+	.string "レポートを 書くぞ……$"
 
 BattleFrontier_BattlePalaceLobby_Text_FailedToSaveBeforeEndingChallenge:
-	.string "おぬし……\pぜんかい ちゃんと レポートを かいて\nしゅうりょう しなかったな?\pざんねんだが そのばあい\nちょうせんは むこうと なる……$"
+	.string "おぬし……\p前回 ちゃんと レポートを 書いて\n終了 しなかったな?\pざんねんだが そのばあい\n挑戦は 無効と なる……$"
 
 @ Unused
 BattleFrontier_BattlePalaceLobby_Text_ReceivedPrize:
 	.string "{JPN}{PLAYER}は\n{STR_VAR_1}を もらった!$"
 
 BattleFrontier_BattlePalaceLobby_Text_WelcomeForDoubleBattle:
-	.string "トレーナーの こころを ためす ばしょ\nバトルパレスへ ようこそ\pここでは ダブル バトルホールへの\nちょうせんを うけつけておる……$"
+	.string "トレーナーの 心を 試す 場所\nバトルパレスへ ようこそ\pここでは ダブル バトルホールへの\n挑戦を 受け付けておる……$"
 
 BattleFrontier_BattlePalaceLobby_Text_TakeDoubleBattleChallenge:
-	.string "ダブル バトルホールに\nちょうせん するか?$"
+	.string "ダブル バトルホールに\n挑戦 するか?$"
 
 BattleFrontier_BattlePalaceLobby_Text_ExplainDoubleBattleChallenge:
-	.string "ここには ダブル バトルホールと\nよばれる ダブルバトルの ための\lひろまを いくつか ようい しておる\pここでの たたかいには\nまもらなければ ならない\lひとつの おきてが ある\pここでは ポケモンは\nいれかえ しか できない!\pそれいがいの めいれいは\nいっさい きんし して おるのだ!\pポケモンには せいかくの ままに\nかんがえ こうどう して もらう!\pおぬしは じぶんの\nポケモンたちを しんじて\lたたかいを みまもって やれ\pみごと 7にんの トレーナーを\nうちやぶることが できれば\lバトルポイントを さしあげよう\pまた とちゅうで ちょうせんを\nちゅうだん したい ときは\lきちんと レポートを かかないと\lつづけて ちょうせん できんからな\lきを つけてくれ……$"
+	.string "ここには ダブル バトルホールと\n呼ばれる ダブルバトルの ための\lひろまを いくつか 用意 しておる\pここでの 戦いには\nまもらなければ ならない\lひとつの おきてが ある\pここでは ポケモンは\n入れかえ しか できない!\pそれいがいの めいれいは\nいっさい きんし して おるのだ!\pポケモンには 性格の ままに\n考え こうどう して もらう!\pおぬしは 自分の\nポケモンたちを 信じて\l戦いを みまもって やれ\p見事 7人の トレーナーを\nうちやぶることが できれば\lバトルポイントを 差し上げよう\pまた 途中で 挑戦を\n中断 したい ときは\lきちんと レポートを かかないと\l続けて 挑戦 できんからな\lきを つけてくれ……$"
 
 BattleFrontier_BattlePalaceLobby_Text_ToDefeatMavenAnd7Trainers:
-	.string "パレスガーディアンを たおし\n7にんぬきを たっせいするとは……$"
+	.string "パレスガーディアンを 倒し\n7人ぬきを 達成するとは……$"
 
 BattleFrontier_BattlePalaceLobby_Text_PresentYouWithBattlePoints:
-	.string "おぬしと ポケモンの きずなを たたえ\nバトルポイントを おくろう……$"
+	.string "おぬしと ポケモンの きずなを 称え\nバトルポイントを おくろう……$"
 
 BattleFrontier_BattlePalaceLobby_Text_LikeToRecordMatch:
-	.string "バトルパレスで\nさいごに おこなった たたかいを\lフロンティアパスに きろく するか?$"
+	.string "バトルパレスで\n最後に 行った 戦いを\lフロンティアパスに 記録 するか?$"
 
 BattleFrontier_BattlePalaceLobby_Text_RulesAreListed:
-	.string "バトルホールの ルールが かかれている!$"
+	.string "バトルホールの ルールが 書かれている!$"
 
 BattleFrontier_BattlePalaceLobby_Text_ReadWhichHeading:
-	.string "どの せつめいを よみますか?$"
+	.string "どの 説明を 読みますか?$"
 
 BattleFrontier_BattlePalaceLobby_Text_ExplainRulesBasics:
-	.string "ここでは ポケモンたちが\nじぶんで かんがえ たたかいます\pじゅんすいな やせいの ときとは ちがって\nひとと くらしている ポケモンは\lせいかくに よって どんな こうどうを\lするかが かわるのです$"
+	.string "ここでは ポケモンたちが\n自分で 考え 戦います\pじゅんすいな やせいの ときとは ちがって\nひとと くらしている ポケモンは\l性格に よって どんな こうどうを\lするかが 変わるのです$"
 
 BattleFrontier_BattlePalaceLobby_Text_ExplainRulesNature:
-	.string "とにかく こうげきが\nすきな せいかく\pじぶんの からだを まもる ことが\nすきな せいかく\pあいてを こまらせたり かわった ことを\nするのが すきな せいかく\pポケモンは せいかくに よって\nすきで とくいな わざと\lきらいで にがてな わざが ちがいます$"
+	.string "とにかく 攻撃が\n好きな 性格\p自分の 体を 守る ことが\n好きな 性格\p相手を こまらせたり 変わった ことを\nするのが 好きな 性格\pポケモンは 性格に よって\n好きで 得意な わざと\l嫌いで 苦手な 技が 違います$"
 
 BattleFrontier_BattlePalaceLobby_Text_ExplainRulesMoves:
-	.string "あいてに むかって じぶんから\nちょくせつ ダメージを あたえる\lこうげきの わざ\pたたかいの じゅんびや キズついた からだの\nかいふくを する ぼうぎょの わざ\pあいての のうりょくを さげたり\nどくや まひに したり などの\lすこし かわった ことを する わざ\pポケモンは すべての わざを\nおおきく 3つの しゅるいに わけて\lどんな わざを だすか かんがえて います$"
+	.string "相手に むかって 自分から\nちょくせつ ダメージを あたえる\l攻撃の 技\p戦いの 準備や キズついた 体の\n回復を する 防御の 技\p相手の 能力を さげたり\nどくや まひに したり などの\l少し 変わった ことを する 技\pポケモンは すべての 技を\nおおきく 3つの 種類に わけて\lどんな 技を 出すか 考えて います$"
 
 BattleFrontier_BattlePalaceLobby_Text_ExplainRulesUnderpowered:
-	.string "トレーナーの めいれいを うけて いない\nポケモンは うまく わざを\lだせない ことが あります\pポケモンは きらいな わざを\nつかうのは とくいでは ありません\pせいかくに あわない わざ ばかりを\nおぼえさせて いると たたかいで\lポケモンが じぶんの ちからを はっき\lできない ことが おおく なります$"
+	.string "トレーナーの めいれいを 受けて いない\nポケモンは うまく 技を\l出せない ことが あります\pポケモンは 嫌いな 技を\n使うのは 得意では ありません\p性格に あわない 技 ばかりを\n覚えさせて いると 戦いで\lポケモンが 自分の 力を はっき\lできない ことが 多く なります$"
 
 BattleFrontier_BattlePalaceLobby_Text_ExplainRulesWhenInDanger:
-	.string "ポケモンの せいかくの なかには\nピンチに なることで もともとの\lせいかくとは ちがう タイプの\lわざを つかう ように\lなるものが あります\pピンチに なって すこし かわった\nこうどうを はじめた ポケモンには\lじゅうぶん ちゅうい しましょう$"
+	.string "ポケモンの 性格の なかには\nピンチに なることで もともとの\l性格とは 違う タイプの\l技を 使う ように\lなるものが あります\pピンチに なって 少し 変わった\nこうどうを 始めた ポケモンには\l十分 注意 しましょう$"

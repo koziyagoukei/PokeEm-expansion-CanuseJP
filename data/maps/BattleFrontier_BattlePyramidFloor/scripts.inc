@@ -137,385 +137,385 @@ BattleFacility_TrainerBattle_PlaceholderText:
 	.string "{JPN}これは テストメッセージです$"
 
 gText_BattlePyramidConfirmRest::
-	.string "{JPN}バトルピラミッドの できごとを\nレポートに かいて ちゅうだん します\lよろしいですか?$"
+	.string "{JPN}バトルピラミッドの できごとを\nレポートに 書いて 中断 します\lよろしいですか?$"
 
 gText_BattlePyramidConfirmRetire::
-	.string "{JPN}バトルピラミッドの ちょうせんを\nやめて ほんとうに よろしいですか?$"
+	.string "{JPN}バトルピラミッドの 挑戦を\nやめて 本当に よろしいですか?$"
 
 BattlePyramid_Text_ExitHintUp1::
-	.string "{JPN}この だんの でぐちは\n{UP_ARROW}の ほうこうに あるんだよ$"
+	.string "{JPN}この だんの 出口は\n{UP_ARROW}の 方向に あるんだよ$"
 
 BattlePyramid_Text_ExitHintLeft1::
-	.string "{JPN}この だんの でぐちは\n{LEFT_ARROW}の ほうこうに あるんだよ$"
+	.string "{JPN}この だんの 出口は\n{LEFT_ARROW}の 方向に あるんだよ$"
 
 BattlePyramid_Text_ExitHintRight1::
-	.string "{JPN}この だんの でぐちは\n{RIGHT_ARROW}の ほうこうに あるんだよ$"
+	.string "{JPN}この だんの 出口は\n{RIGHT_ARROW}の 方向に あるんだよ$"
 
 BattlePyramid_Text_ExitHintDown1::
-	.string "{JPN}この だんの でぐちは\n{DOWN_ARROW}の ほうこうに あるんだよ$"
+	.string "{JPN}この だんの 出口は\n{DOWN_ARROW}の 方向に あるんだよ$"
 
 BattlePyramid_Text_ExitHintUp2::
-	.string "{JPN}この だんの でぐちは\n{UP_ARROW}の ほうこうに あるの$"
+	.string "{JPN}この だんの 出口は\n{UP_ARROW}の 方向に あるの$"
 
 BattlePyramid_Text_ExitHintLeft2::
-	.string "{JPN}この だんの でぐちは\n{LEFT_ARROW}の ほうこうに あるの$"
+	.string "{JPN}この だんの 出口は\n{LEFT_ARROW}の 方向に あるの$"
 
 BattlePyramid_Text_ExitHintRight2::
-	.string "{JPN}この だんの でぐちは\n{RIGHT_ARROW}の ほうこうに あるの$"
+	.string "{JPN}この だんの 出口は\n{RIGHT_ARROW}の 方向に あるの$"
 
 BattlePyramid_Text_ExitHintDown2::
-	.string "{JPN}この だんの でぐちは\n{DOWN_ARROW}の ほうこうに あるの$"
+	.string "{JPN}この だんの 出口は\n{DOWN_ARROW}の 方向に あるの$"
 
 BattlePyramid_Text_ExitHintUp3::
-	.string "{JPN}でぐちは\n{UP_ARROW}の ほうこうに あるよ$"
+	.string "{JPN}出口は\n{UP_ARROW}の 方向に あるよ$"
 
 BattlePyramid_Text_ExitHintLeft3::
-	.string "{JPN}でぐちは\n{LEFT_ARROW}の ほうこうに あるよ$"
+	.string "{JPN}出口は\n{LEFT_ARROW}の 方向に あるよ$"
 
 BattlePyramid_Text_ExitHintRight3::
-	.string "{JPN}でぐちは\n{RIGHT_ARROW}の ほうこうに あるよ$"
+	.string "{JPN}出口は\n{RIGHT_ARROW}の 方向に あるよ$"
 
 BattlePyramid_Text_ExitHintDown3::
-	.string "{JPN}でぐちは\n{DOWN_ARROW}の ほうこうに あるよ$"
+	.string "{JPN}出口は\n{DOWN_ARROW}の 方向に あるよ$"
 
 BattlePyramid_Text_ExitHintUp4::
-	.string "{JPN}この だんの でぐちは\n{UP_ARROW}の ほうこうの どこかに あるわ$"
+	.string "{JPN}この だんの 出口は\n{UP_ARROW}の 方向の どこかに あるわ$"
 
 BattlePyramid_Text_ExitHintLeft4::
-	.string "{JPN}この だんの でぐちは\n{LEFT_ARROW}の ほうこうの どこかに あるわ$"
+	.string "{JPN}この だんの 出口は\n{LEFT_ARROW}の 方向の どこかに あるわ$"
 
 BattlePyramid_Text_ExitHintRight4::
-	.string "{JPN}この だんの でぐちは\n{RIGHT_ARROW}の ほうこうの どこかに あるわ$"
+	.string "{JPN}この だんの 出口は\n{RIGHT_ARROW}の 方向の どこかに あるわ$"
 
 BattlePyramid_Text_ExitHintDown4::
-	.string "{JPN}この だんの でぐちは\n{DOWN_ARROW}の ほうこうの どこかに あるわ$"
+	.string "{JPN}この だんの 出口は\n{DOWN_ARROW}の 方向の どこかに あるわ$"
 
 BattlePyramid_Text_ExitHintUp5::
-	.string "{JPN}でぐちは\n{UP_ARROW}の ほうこうに あるぞ$"
+	.string "{JPN}出口は\n{UP_ARROW}の 方向に あるぞ$"
 
 BattlePyramid_Text_ExitHintLeft5::
-	.string "{JPN}でぐちは\n{LEFT_ARROW}の ほうこうに あるぞ$"
+	.string "{JPN}出口は\n{LEFT_ARROW}の 方向に あるぞ$"
 
 BattlePyramid_Text_ExitHintRight5::
-	.string "{JPN}でぐちは\n{RIGHT_ARROW}の ほうこうに あるぞ$"
+	.string "{JPN}出口は\n{RIGHT_ARROW}の 方向に あるぞ$"
 
 BattlePyramid_Text_ExitHintDown5::
-	.string "{JPN}でぐちは\n{DOWN_ARROW}の ほうこうに あるぞ$"
+	.string "{JPN}出口は\n{DOWN_ARROW}の 方向に あるぞ$"
 
 BattlePyramid_Text_ExitHintUp6::
-	.string "{JPN}でぐちは\n{UP_ARROW}の ほうこうに あるわね$"
+	.string "{JPN}出口は\n{UP_ARROW}の 方向に あるわね$"
 
 BattlePyramid_Text_ExitHintLeft6::
-	.string "{JPN}でぐちは\n{LEFT_ARROW}の ほうこうに あるわね$"
+	.string "{JPN}出口は\n{LEFT_ARROW}の 方向に あるわね$"
 
 BattlePyramid_Text_ExitHintRight6::
-	.string "{JPN}でぐちは\n{RIGHT_ARROW}の ほうこうに あるわね$"
+	.string "{JPN}出口は\n{RIGHT_ARROW}の 方向に あるわね$"
 
 BattlePyramid_Text_ExitHintDown6::
-	.string "{JPN}でぐちは\n{DOWN_ARROW}の ほうこうに あるわね$"
+	.string "{JPN}出口は\n{DOWN_ARROW}の 方向に あるわね$"
 
 BattlePyramid_Text_EightItemsRemaining1::
-	.string "{JPN}どうぐを さがしているの?\pどうぐは\nあと 8つ おちているんだよ!$"
+	.string "{JPN}道具を 探しているの?\p道具は\nあと 8つ 落ちているんだよ!$"
 
 BattlePyramid_Text_SevenItemsRemaining1::
-	.string "{JPN}どうぐを さがしているの?\pどうぐは\nあと 7つ おちているんだよ!$"
+	.string "{JPN}道具を 探しているの?\p道具は\nあと 7つ 落ちているんだよ!$"
 
 BattlePyramid_Text_SixItemsRemaining1::
-	.string "{JPN}どうぐを さがしているの?\pどうぐは\nあと 6つ おちているんだよ!$"
+	.string "{JPN}道具を 探しているの?\p道具は\nあと 6つ 落ちているんだよ!$"
 
 BattlePyramid_Text_FiveItemsRemaining1::
-	.string "{JPN}どうぐを さがしているの?\pどうぐは\nあと 5つ おちているんだよ!$"
+	.string "{JPN}道具を 探しているの?\p道具は\nあと 5つ 落ちているんだよ!$"
 
 BattlePyramid_Text_FourItemsRemaining1::
-	.string "{JPN}どうぐを さがしているの?\pどうぐは\nあと 4つ おちているんだよ!$"
+	.string "{JPN}道具を 探しているの?\p道具は\nあと 4つ 落ちているんだよ!$"
 
 BattlePyramid_Text_ThreeItemsRemaining1::
-	.string "{JPN}どうぐを さがしているの?\pどうぐは\nあと 3つ おちているんだよ!$"
+	.string "{JPN}道具を 探しているの?\p道具は\nあと 3つ 落ちているんだよ!$"
 
 BattlePyramid_Text_TwoItemsRemaining1::
-	.string "{JPN}どうぐを さがしているの?\pどうぐは\nあと 2つ おちているんだよ!$"
+	.string "{JPN}道具を 探しているの?\p道具は\nあと 2つ 落ちているんだよ!$"
 
 BattlePyramid_Text_OneItemRemaining1::
-	.string "{JPN}どうぐを さがしているの?\pどうぐは\nあと 1つ おちているんだよ!$"
+	.string "{JPN}道具を 探しているの?\p道具は\nあと 1つ 落ちているんだよ!$"
 
 BattlePyramid_Text_ZeroItemsRemaining1::
-	.string "{JPN}どうぐを さがしているの?\pどうぐは\nもう おちていないんだよ!$"
+	.string "{JPN}道具を 探しているの?\p道具は\nもう 落ちていないんだよ!$"
 
 BattlePyramid_Text_EightItemsRemaining2::
-	.string "{JPN}かった ごほうびに\nヒミツを おしえて あげちゃう!\pここには どうぐが\nあと 8つ おちているの$"
+	.string "{JPN}勝った ご褒美に\nヒミツを 教えて あげちゃう!\pここには 道具が\nあと 8つ 落ちているの$"
 
 BattlePyramid_Text_SevenItemsRemaining2::
-	.string "{JPN}かった ごほうびに\nヒミツを おしえて あげちゃう!\pここには どうぐが\nあと 7つ おちているの$"
+	.string "{JPN}勝った ご褒美に\nヒミツを 教えて あげちゃう!\pここには 道具が\nあと 7つ 落ちているの$"
 
 BattlePyramid_Text_SixItemsRemaining2::
-	.string "{JPN}かった ごほうびに\nヒミツを おしえて あげちゃう!\pここには どうぐが\nあと 6つ おちているの$"
+	.string "{JPN}勝った ご褒美に\nヒミツを 教えて あげちゃう!\pここには 道具が\nあと 6つ 落ちているの$"
 
 BattlePyramid_Text_FiveItemsRemaining2::
-	.string "{JPN}かった ごほうびに\nヒミツを おしえて あげちゃう!\pここには どうぐが\nあと 5つ おちているの$"
+	.string "{JPN}勝った ご褒美に\nヒミツを 教えて あげちゃう!\pここには 道具が\nあと 5つ 落ちているの$"
 
 BattlePyramid_Text_FourItemsRemaining2::
-	.string "{JPN}かった ごほうびに\nヒミツを おしえて あげちゃう!\pここには どうぐが\nあと 4つ おちているの$"
+	.string "{JPN}勝った ご褒美に\nヒミツを 教えて あげちゃう!\pここには 道具が\nあと 4つ 落ちているの$"
 
 BattlePyramid_Text_ThreeItemsRemaining2::
-	.string "{JPN}かった ごほうびに\nヒミツを おしえて あげちゃう!\pここには どうぐが\nあと 3つ おちているの$"
+	.string "{JPN}勝った ご褒美に\nヒミツを 教えて あげちゃう!\pここには 道具が\nあと 3つ 落ちているの$"
 
 BattlePyramid_Text_TwoItemsRemaining2::
-	.string "{JPN}かった ごほうびに\nヒミツを おしえて あげちゃう!\pここには どうぐが\nあと 2つ おちているの$"
+	.string "{JPN}勝った ご褒美に\nヒミツを 教えて あげちゃう!\pここには 道具が\nあと 2つ 落ちているの$"
 
 BattlePyramid_Text_OneItemRemaining2::
-	.string "{JPN}かった ごほうびに\nヒミツを おしえて あげちゃう!\pここには どうぐが\nあと 1つ おちているの$"
+	.string "{JPN}勝った ご褒美に\nヒミツを 教えて あげちゃう!\pここには 道具が\nあと 1つ 落ちているの$"
 
 BattlePyramid_Text_ZeroItemsRemaining2::
-	.string "{JPN}かった ごほうびに\nヒミツを おしえて あげちゃう!\pここには どうぐが\nもう おちていないの$"
+	.string "{JPN}勝った ご褒美に\nヒミツを 教えて あげちゃう!\pここには 道具が\nもう 落ちていないの$"
 
 BattlePyramid_Text_EightItemsRemaining3::
-	.string "{JPN}どうぐは たりている?\pこの だんには\nどうぐが あと 8つほど あるそうだよ!$"
+	.string "{JPN}道具は たりている?\pこの だんには\n道具が あと 8つほど あるそうだよ!$"
 
 BattlePyramid_Text_SevenItemsRemaining3::
-	.string "{JPN}どうぐは たりている?\pこの だんには\nどうぐが あと 7つほど あるそうだよ!$"
+	.string "{JPN}道具は たりている?\pこの だんには\n道具が あと 7つほど あるそうだよ!$"
 
 BattlePyramid_Text_SixItemsRemaining3::
-	.string "{JPN}どうぐは たりている?\pこの だんには\nどうぐが あと 6つほど あるそうだよ!$"
+	.string "{JPN}道具は たりている?\pこの だんには\n道具が あと 6つほど あるそうだよ!$"
 
 BattlePyramid_Text_FiveItemsRemaining3::
-	.string "{JPN}どうぐは たりている?\pこの だんには\nどうぐが あと 5つほど あるそうだよ!$"
+	.string "{JPN}道具は たりている?\pこの だんには\n道具が あと 5つほど あるそうだよ!$"
 
 BattlePyramid_Text_FourItemsRemaining3::
-	.string "{JPN}どうぐは たりている?\pこの だんには\nどうぐが あと 4つほど あるそうだよ!$"
+	.string "{JPN}道具は たりている?\pこの だんには\n道具が あと 4つほど あるそうだよ!$"
 
 BattlePyramid_Text_ThreeItemsRemaining3::
-	.string "{JPN}どうぐは たりている?\pこの だんには\nどうぐが あと 3つほど あるそうだよ!$"
+	.string "{JPN}道具は たりている?\pこの だんには\n道具が あと 3つほど あるそうだよ!$"
 
 BattlePyramid_Text_TwoItemsRemaining3::
-	.string "{JPN}どうぐは たりている?\pこの だんには\nどうぐが あと 2つほど あるそうだよ!$"
+	.string "{JPN}道具は たりている?\pこの だんには\n道具が あと 2つほど あるそうだよ!$"
 
 BattlePyramid_Text_OneItemRemaining3::
-	.string "{JPN}どうぐは たりている?\pこの だんには\nどうぐが あと 1つだけ あるそうだよ!$"
+	.string "{JPN}道具は たりている?\pこの だんには\n道具が あと 1つだけ あるそうだよ!$"
 
 BattlePyramid_Text_ZeroItemsRemaining3::
-	.string "{JPN}どうぐは たりている?\pこの だんには\nもう どうぐが ないらしいから\lきを つけてね!$"
+	.string "{JPN}道具は たりている?\pこの だんには\nもう 道具が ないらしいから\lきを つけてね!$"
 
 BattlePyramid_Text_EightItemsRemaining4::
-	.string "{JPN}つよい あなたに ヒントを あげる!\pどうぐは\nあと 8つ おちているらしいわ!$"
+	.string "{JPN}強い あなたに ヒントを あげる!\p道具は\nあと 8つ 落ちているらしいわ!$"
 
 BattlePyramid_Text_SevenItemsRemaining4::
-	.string "{JPN}つよい あなたに ヒントを あげる!\pどうぐは\nあと 7つ おちているらしいわ!$"
+	.string "{JPN}強い あなたに ヒントを あげる!\p道具は\nあと 7つ 落ちているらしいわ!$"
 
 BattlePyramid_Text_SixItemsRemaining4::
-	.string "{JPN}つよい あなたに ヒントを あげる!\pどうぐは\nあと 6つ おちているらしいわ!$"
+	.string "{JPN}強い あなたに ヒントを あげる!\p道具は\nあと 6つ 落ちているらしいわ!$"
 
 BattlePyramid_Text_FiveItemsRemaining4::
-	.string "{JPN}つよい あなたに ヒントを あげる!\pどうぐは\nあと 5つ おちているらしいわ!$"
+	.string "{JPN}強い あなたに ヒントを あげる!\p道具は\nあと 5つ 落ちているらしいわ!$"
 
 BattlePyramid_Text_FourItemsRemaining4::
-	.string "{JPN}つよい あなたに ヒントを あげる!\pどうぐは\nあと 4つ おちているらしいわ!$"
+	.string "{JPN}強い あなたに ヒントを あげる!\p道具は\nあと 4つ 落ちているらしいわ!$"
 
 BattlePyramid_Text_ThreeItemsRemaining4::
-	.string "{JPN}つよい あなたに ヒントを あげる!\pどうぐは\nあと 3つ おちているらしいわ!$"
+	.string "{JPN}強い あなたに ヒントを あげる!\p道具は\nあと 3つ 落ちているらしいわ!$"
 
 BattlePyramid_Text_TwoItemsRemaining4::
-	.string "{JPN}つよい あなたに ヒントを あげる!\pどうぐは\nあと 2つ おちているらしいわ!$"
+	.string "{JPN}強い あなたに ヒントを あげる!\p道具は\nあと 2つ 落ちているらしいわ!$"
 
 BattlePyramid_Text_OneItemRemaining4::
-	.string "{JPN}つよい あなたに ヒントを あげる!\pどうぐは\nあと 1つ おちているらしいわ!$"
+	.string "{JPN}強い あなたに ヒントを あげる!\p道具は\nあと 1つ 落ちているらしいわ!$"
 
 BattlePyramid_Text_ZeroItemsRemaining4::
-	.string "{JPN}つよい あなたに ヒントを あげる!\pどうぐは\nもう 1つも おちてないらしいわ!$"
+	.string "{JPN}強い あなたに ヒントを あげる!\p道具は\nもう 1つも 落ちてないらしいわ!$"
 
 BattlePyramid_Text_EightItemsRemaining5::
-	.string "{JPN}ピラミッドの この だんには\nどうぐが 8つは あるそうだ……$"
+	.string "{JPN}ピラミッドの この だんには\n道具が 8つは あるそうだ……$"
 
 BattlePyramid_Text_SevenItemsRemaining5::
-	.string "{JPN}ピラミッドの この だんには\nどうぐが 7つは あるそうだ……$"
+	.string "{JPN}ピラミッドの この だんには\n道具が 7つは あるそうだ……$"
 
 BattlePyramid_Text_SixItemsRemaining5::
-	.string "{JPN}ピラミッドの この だんには\nどうぐが 6つは あるそうだ……$"
+	.string "{JPN}ピラミッドの この だんには\n道具が 6つは あるそうだ……$"
 
 BattlePyramid_Text_FiveItemsRemaining5::
-	.string "{JPN}ピラミッドの この だんには\nどうぐが 5つは あるそうだ……$"
+	.string "{JPN}ピラミッドの この だんには\n道具が 5つは あるそうだ……$"
 
 BattlePyramid_Text_FourItemsRemaining5::
-	.string "{JPN}ピラミッドの この だんには\nどうぐが 4つは あるそうだ……$"
+	.string "{JPN}ピラミッドの この だんには\n道具が 4つは あるそうだ……$"
 
 BattlePyramid_Text_ThreeItemsRemaining5::
-	.string "{JPN}ピラミッドの この だんには\nどうぐが 3つは あるそうだ……$"
+	.string "{JPN}ピラミッドの この だんには\n道具が 3つは あるそうだ……$"
 
 BattlePyramid_Text_TwoItemsRemaining5::
-	.string "{JPN}ピラミッドの この だんには\nどうぐが 2つは あるそうだ……$"
+	.string "{JPN}ピラミッドの この だんには\n道具が 2つは あるそうだ……$"
 
 BattlePyramid_Text_OneItemRemaining5::
-	.string "{JPN}ピラミッドの この だんには\nどうぐが 1つは あるそうだ……$"
+	.string "{JPN}ピラミッドの この だんには\n道具が 1つは あるそうだ……$"
 
 BattlePyramid_Text_ZeroItemsRemaining5::
-	.string "{JPN}ピラミッドの この だんには\nどうぐは ないそうだ……$"
+	.string "{JPN}ピラミッドの この だんには\n道具は ないそうだ……$"
 
 BattlePyramid_Text_EightItemsRemaining6::
-	.string "{JPN}どうぐは もっているかい?\pこの だんには\nどうぐが あと 8つは あるそうだよ$"
+	.string "{JPN}道具は 持っているかい?\pこの だんには\n道具が あと 8つは あるそうだよ$"
 
 BattlePyramid_Text_SevenItemsRemaining6::
-	.string "{JPN}どうぐは もっているかい?\pこの だんには\nどうぐが あと 7つは あるそうだよ$"
+	.string "{JPN}道具は 持っているかい?\pこの だんには\n道具が あと 7つは あるそうだよ$"
 
 BattlePyramid_Text_SixItemsRemaining6::
-	.string "{JPN}どうぐは もっているかい?\pこの だんには\nどうぐが あと 6つは あるそうだよ$"
+	.string "{JPN}道具は 持っているかい?\pこの だんには\n道具が あと 6つは あるそうだよ$"
 
 BattlePyramid_Text_FiveItemsRemaining6::
-	.string "{JPN}どうぐは もっているかい?\pこの だんには\nどうぐが あと 5つは あるそうだよ$"
+	.string "{JPN}道具は 持っているかい?\pこの だんには\n道具が あと 5つは あるそうだよ$"
 
 BattlePyramid_Text_FourItemsRemaining6::
-	.string "{JPN}どうぐは もっているかい?\pこの だんには\nどうぐが あと 4つは あるそうだよ$"
+	.string "{JPN}道具は 持っているかい?\pこの だんには\n道具が あと 4つは あるそうだよ$"
 
 BattlePyramid_Text_ThreeItemsRemaining6::
-	.string "{JPN}どうぐは もっているかい?\pこの だんには\nどうぐが あと 3つは あるそうだよ$"
+	.string "{JPN}道具は 持っているかい?\pこの だんには\n道具が あと 3つは あるそうだよ$"
 
 BattlePyramid_Text_TwoItemsRemaining6::
-	.string "{JPN}どうぐは もっているかい?\pこの だんには\nどうぐが あと 2つは あるそうだよ$"
+	.string "{JPN}道具は 持っているかい?\pこの だんには\n道具が あと 2つは あるそうだよ$"
 
 BattlePyramid_Text_OneItemRemaining6::
-	.string "{JPN}どうぐは もっているかい?\pこの だんには\nどうぐが あと 1つは あるそうだよ$"
+	.string "{JPN}道具は 持っているかい?\pこの だんには\n道具が あと 1つは あるそうだよ$"
 
 BattlePyramid_Text_ZeroItemsRemaining6::
-	.string "{JPN}どうぐは もっているかい?\pこの だんには\nどうぐが もう ないそうだよ$"
+	.string "{JPN}道具は 持っているかい?\pこの だんには\n道具が もう ないそうだよ$"
 
 BattlePyramid_Text_SevenTrainersRemaining1::
-	.string "{JPN}とっても つよかったよー!!\pでも つよい トレーナーは\nまだまだ 7にんも いるからねー!$"
+	.string "{JPN}とっても 強かったよー!!\pでも 強い トレーナーは\nまだまだ 7人も いるからねー!$"
 
 BattlePyramid_Text_SixTrainersRemaining1::
-	.string "{JPN}とっても つよかったよー!!\pでも つよい トレーナーは\nまだまだ 6にんも いるからねー!$"
+	.string "{JPN}とっても 強かったよー!!\pでも 強い トレーナーは\nまだまだ 6人も いるからねー!$"
 
 BattlePyramid_Text_FiveTrainersRemaining1::
-	.string "{JPN}とっても つよかったよー!!\pでも つよい トレーナーは\nまだまだ 5にんも いるからねー!$"
+	.string "{JPN}とっても 強かったよー!!\pでも 強い トレーナーは\nまだまだ 5人も いるからねー!$"
 
 BattlePyramid_Text_FourTrainersRemaining1::
-	.string "{JPN}とっても つよかったよー!!\pでも つよい トレーナーは\nまだまだ 4にんも いるからねー!$"
+	.string "{JPN}とっても 強かったよー!!\pでも 強い トレーナーは\nまだまだ 4人も いるからねー!$"
 
 BattlePyramid_Text_ThreeTrainersRemaining1::
-	.string "{JPN}とっても つよかったよー!!\pでも つよい トレーナーは\nまだまだ 3にんも いるからねー!$"
+	.string "{JPN}とっても 強かったよー!!\pでも 強い トレーナーは\nまだまだ 3人も いるからねー!$"
 
 BattlePyramid_Text_TwoTrainersRemaining1::
-	.string "{JPN}とっても つよかったよー!!\pでも つよい トレーナーは\nまだ 2にん いるからねー!$"
+	.string "{JPN}とっても 強かったよー!!\pでも 強い トレーナーは\nまだ 2人 いるからねー!$"
 
 BattlePyramid_Text_OneTrainersRemaining1::
-	.string "{JPN}とっても つよかったよー!!\pでも つよい トレーナーは\nまだ 1にん いるからねー!$"
+	.string "{JPN}とっても 強かったよー!!\pでも 強い トレーナーは\nまだ 1人 いるからねー!$"
 
 BattlePyramid_Text_ZeroTrainersRemaining1::
-	.string "{JPN}とっても つよかったよー!!\pもう だれも\nかてる ひとは いないよー!!$"
+	.string "{JPN}とっても 強かったよー!!\pもう だれも\n勝てる ひとは いないよー!!$"
 
 BattlePyramid_Text_SevenTrainersRemaining2::
-	.string "{JPN}くやしいー!\pでも あと 7にん いる トレーナーが\nきっと たおしてくれるわ$"
+	.string "{JPN}悔しいー!\pでも あと 7人 いる トレーナーが\nきっと 倒してくれるわ$"
 
 BattlePyramid_Text_SixTrainersRemaining2::
-	.string "{JPN}くやしいー!\pでも あと 6にん いる トレーナーが\nきっと たおしてくれるわ$"
+	.string "{JPN}悔しいー!\pでも あと 6人 いる トレーナーが\nきっと 倒してくれるわ$"
 
 BattlePyramid_Text_FiveTrainersRemaining2::
-	.string "{JPN}くやしいー!\pでも あと 5にん いる トレーナーが\nきっと たおしてくれるわ$"
+	.string "{JPN}悔しいー!\pでも あと 5人 いる トレーナーが\nきっと 倒してくれるわ$"
 
 BattlePyramid_Text_FourTrainersRemaining2::
-	.string "{JPN}くやしいー!\pでも あと 4にん いる トレーナーが\nきっと たおしてくれるわ$"
+	.string "{JPN}悔しいー!\pでも あと 4人 いる トレーナーが\nきっと 倒してくれるわ$"
 
 BattlePyramid_Text_ThreeTrainersRemaining2::
-	.string "{JPN}くやしいー!\pでも あと 3にん いる トレーナーが\nきっと たおしてくれるわ$"
+	.string "{JPN}悔しいー!\pでも あと 3人 いる トレーナーが\nきっと 倒してくれるわ$"
 
 BattlePyramid_Text_TwoTrainersRemaining2::
-	.string "{JPN}くやしいー!\pでも あと 2にん いる トレーナーが\nきっと たおしてくれるわ$"
+	.string "{JPN}悔しいー!\pでも あと 2人 いる トレーナーが\nきっと 倒してくれるわ$"
 
 BattlePyramid_Text_OneTrainersRemaining2::
-	.string "{JPN}くやしいー!\pでも あと 1にん いる トレーナーが\nきっと たおしてくれるわ$"
+	.string "{JPN}悔しいー!\pでも あと 1人 いる トレーナーが\nきっと 倒してくれるわ$"
 
 BattlePyramid_Text_ZeroTrainersRemaining2::
-	.string "{JPN}くやしいー!\pでも もう たたかえる\nトレーナーが いないのー$"
+	.string "{JPN}悔しいー!\pでも もう 戦える\nトレーナーが いないのー$"
 
 BattlePyramid_Text_SevenTrainersRemaining3::
-	.string "{JPN}やるねー!\pでも この だんに あと 7にんも いる\nトレーナーを たおせるかな?$"
+	.string "{JPN}やるねー!\pでも この だんに あと 7人も いる\nトレーナーを 倒せるかな?$"
 
 BattlePyramid_Text_SixTrainersRemaining3::
-	.string "{JPN}やるねー!\pでも この だんに あと 6にんも いる\nトレーナーを たおせるかな?$"
+	.string "{JPN}やるねー!\pでも この だんに あと 6人も いる\nトレーナーを 倒せるかな?$"
 
 BattlePyramid_Text_FiveTrainersRemaining3::
-	.string "{JPN}やるねー!\pでも この だんに あと 5にんも いる\nトレーナーを たおせるかな?$"
+	.string "{JPN}やるねー!\pでも この だんに あと 5人も いる\nトレーナーを 倒せるかな?$"
 
 BattlePyramid_Text_FourTrainersRemaining3::
-	.string "{JPN}やるねー!\pでも この だんに あと 4にん いる\nトレーナーを たおせるかな?$"
+	.string "{JPN}やるねー!\pでも この だんに あと 4人 いる\nトレーナーを 倒せるかな?$"
 
 BattlePyramid_Text_ThreeTrainersRemaining3::
-	.string "{JPN}やるねー!\pでも この だんに あと 3にん いる\nトレーナーを たおせるかな?$"
+	.string "{JPN}やるねー!\pでも この だんに あと 3人 いる\nトレーナーを 倒せるかな?$"
 
 BattlePyramid_Text_TwoTrainersRemaining3::
-	.string "{JPN}やるねー!\pでも この だんに あと 2にん いる\nトレーナーを たおせるかな?$"
+	.string "{JPN}やるねー!\pでも この だんに あと 2人 いる\nトレーナーを 倒せるかな?$"
 
 BattlePyramid_Text_OneTrainersRemaining3::
-	.string "{JPN}やるねー!\pでも この だんに あと 1にん いる\nトレーナーを たおせるかな?$"
+	.string "{JPN}やるねー!\pでも この だんに あと 1人 いる\nトレーナーを 倒せるかな?$"
 
 BattlePyramid_Text_ZeroTrainersRemaining3::
-	.string "{JPN}やるねー!\pこの だんには たたかえる トレーナーは\nもう だれも いないよ$"
+	.string "{JPN}やるねー!\pこの だんには 戦える トレーナーは\nもう だれも いないよ$"
 
 BattlePyramid_Text_SevenTrainersRemaining4::
-	.string "{JPN}あなたなら まだ たたかっていない\n7にんの トレーナーを たおせるかも……$"
+	.string "{JPN}あなたなら まだ 戦っていない\n7人の トレーナーを 倒せるかも……$"
 
 BattlePyramid_Text_SixTrainersRemaining4::
-	.string "{JPN}あなたなら まだ たたかっていない\n6にんの トレーナーを たおせるかも……$"
+	.string "{JPN}あなたなら まだ 戦っていない\n6人の トレーナーを 倒せるかも……$"
 
 BattlePyramid_Text_FiveTrainersRemaining4::
-	.string "{JPN}あなたなら まだ たたかっていない\n5にんの トレーナーを たおせるかも……$"
+	.string "{JPN}あなたなら まだ 戦っていない\n5人の トレーナーを 倒せるかも……$"
 
 BattlePyramid_Text_FourTrainersRemaining4::
-	.string "{JPN}あなたなら まだ たたかっていない\n4にんの トレーナーを たおせるかも……$"
+	.string "{JPN}あなたなら まだ 戦っていない\n4人の トレーナーを 倒せるかも……$"
 
 BattlePyramid_Text_ThreeTrainersRemaining4::
-	.string "{JPN}あなたなら まだ たたかっていない\n3にんの トレーナーを たおせるかも……$"
+	.string "{JPN}あなたなら まだ 戦っていない\n3人の トレーナーを 倒せるかも……$"
 
 BattlePyramid_Text_TwoTrainersRemaining4::
-	.string "{JPN}あなたなら まだ たたかっていない\n2にんの トレーナーを たおせるかも……$"
+	.string "{JPN}あなたなら まだ 戦っていない\n2人の トレーナーを 倒せるかも……$"
 
 BattlePyramid_Text_OneTrainersRemaining4::
-	.string "{JPN}あなたなら まだ たたかっていない\n1にんの トレーナーを たおせるかも……$"
+	.string "{JPN}あなたなら まだ 戦っていない\n1人の トレーナーを 倒せるかも……$"
 
 BattlePyramid_Text_ZeroTrainersRemaining4::
-	.string "{JPN}あなたを たおせる トレーナーは\nもう だれも いないわ……$"
+	.string "{JPN}あなたを 倒せる トレーナーは\nもう だれも いないわ……$"
 
 BattlePyramid_Text_SevenTrainersRemaining5::
-	.string "{JPN}きみならば\nあと 7にん いる すごうで トレーナーを\lたおせるかも しれないな$"
+	.string "{JPN}きみならば\nあと 7人 いる 凄腕 トレーナーを\l倒せるかも しれないな$"
 
 BattlePyramid_Text_SixTrainersRemaining5::
-	.string "{JPN}きみならば\nあと 6にん いる すごうで トレーナーを\lたおせるかも しれないな$"
+	.string "{JPN}きみならば\nあと 6人 いる 凄腕 トレーナーを\l倒せるかも しれないな$"
 
 BattlePyramid_Text_FiveTrainersRemaining5::
-	.string "{JPN}きみならば\nあと 5にん いる すごうで トレーナーを\lたおせるかも しれないな$"
+	.string "{JPN}きみならば\nあと 5人 いる 凄腕 トレーナーを\l倒せるかも しれないな$"
 
 BattlePyramid_Text_FourTrainersRemaining5::
-	.string "{JPN}きみならば\nあと 4にん いる すごうで トレーナーを\lたおせるかも しれないな$"
+	.string "{JPN}きみならば\nあと 4人 いる 凄腕 トレーナーを\l倒せるかも しれないな$"
 
 BattlePyramid_Text_ThreeTrainersRemaining5::
-	.string "{JPN}きみならば\nあと 3にん いる すごうで トレーナーを\lたおせるかも しれないな$"
+	.string "{JPN}きみならば\nあと 3人 いる 凄腕 トレーナーを\l倒せるかも しれないな$"
 
 BattlePyramid_Text_TwoTrainersRemaining5::
-	.string "{JPN}きみならば\nあと 2にん いる すごうで トレーナーを\lたおせるかも しれないな$"
+	.string "{JPN}きみならば\nあと 2人 いる 凄腕 トレーナーを\l倒せるかも しれないな$"
 
 BattlePyramid_Text_OneTrainersRemaining5::
-	.string "{JPN}きみならば\nあと 1にん いる すごうで トレーナーを\lたおせるかも しれないな$"
+	.string "{JPN}きみならば\nあと 1人 いる 凄腕 トレーナーを\l倒せるかも しれないな$"
 
 BattlePyramid_Text_ZeroTrainersRemaining5::
-	.string "{JPN}きみは ほんとうに つよい\pもう ここには どこにも\nきみを たおせる トレーナーは おらんよ$"
+	.string "{JPN}きみは 本当に 強い\pもう ここには どこにも\nきみを 倒せる トレーナーは おらんよ$"
 
 BattlePyramid_Text_SevenTrainersRemaining6::
-	.string "{JPN}のこり 7にんの\nトレーナーを たおせるかい?$"
+	.string "{JPN}残り 7人の\nトレーナーを 倒せるかい?$"
 
 BattlePyramid_Text_SixTrainersRemaining6::
-	.string "{JPN}のこり 6にんの\nトレーナーを たおせるかい?$"
+	.string "{JPN}残り 6人の\nトレーナーを 倒せるかい?$"
 
 BattlePyramid_Text_FiveTrainersRemaining6::
-	.string "{JPN}のこり 5にんの\nトレーナーを たおせるかい?$"
+	.string "{JPN}残り 5人の\nトレーナーを 倒せるかい?$"
 
 BattlePyramid_Text_FourTrainersRemaining6::
-	.string "{JPN}のこり 4にんの\nトレーナーを たおせるかい?$"
+	.string "{JPN}残り 4人の\nトレーナーを 倒せるかい?$"
 
 BattlePyramid_Text_ThreeTrainersRemaining6::
-	.string "{JPN}のこり 3にんの\nトレーナーを たおせるかい?$"
+	.string "{JPN}残り 3人の\nトレーナーを 倒せるかい?$"
 
 BattlePyramid_Text_TwoTrainersRemaining6::
-	.string "{JPN}のこり 2にんの\nトレーナーを たおせるかい?$"
+	.string "{JPN}残り 2人の\nトレーナーを 倒せるかい?$"
 
 BattlePyramid_Text_OneTrainersRemaining6::
-	.string "{JPN}のこり 1にんの\nトレーナーを たおせるかい?$"
+	.string "{JPN}残り 1人の\nトレーナーを 倒せるかい?$"
 
 BattlePyramid_Text_ZeroTrainersRemaining6::
-	.string "{JPN}ここには あんたと たたかえる\nトレーナーは もう いないよ……$"
+	.string "{JPN}ここには あんたと 戦える\nトレーナーは もう いないよ……$"

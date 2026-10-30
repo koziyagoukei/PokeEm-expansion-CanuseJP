@@ -37,5 +37,5 @@ BattleFrontier_Mart_EventScript_OldWoman::
 	end
 
 BattleFrontier_Mart_Text_ProteinMakeNiceGift:
-	.string "{JPN}この おみやげは どうかねえ？\nポケモンが つよくなる どうぐだって。\pまごの よろこぶ かおが\nもう うかんできちゃうよ。$"
+	.string "{JPN}この おみやげは どうかねえ？\nポケモンが 強くなる 道具だって。\pまごの 喜ぶ かおが\nもう うかんできちゃうよ。$"
 

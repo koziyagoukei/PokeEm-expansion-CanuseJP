@@ -302,91 +302,99 @@ BattleFrontier_Lounge7_EventScript_Gentleman::
 	goto FrontierStory_EventScript_RegularTalk
 
 BattleFrontier_Lounge7_Text_LeftTutorIntro:
-	.string "ぶはははっ!\pあたしゃ こうみえても わかいころは\nそりゃー つよい トレーナーでよー\pさいきょうの おとなの おねえさんと して\nもー バリバリ いわしとったわ!\p…… … ……ん?\pなんじゃ あんた しんじとらんのかっ!?\pあたしゃ むこうの くちだけ ばあさんとは\nさいのうが ちがうんじゃっ!\pしょうこに あんたの ポケモンに\nすぺしゃる かつ きゅーとな わざの\lかずかずを おしえたろうかいなっ!!\pまあ じゅぎょうりょう ちゅう ことで\nちいと ばかし バトルポイントを\lいただくがのう!$"
+	.string "ぶはははっ!\pあたしゃ こうみえても わかいころは\nそりゃー 強い トレーナーでよー\p最強の 大人の お姉さんと して\nもー バリバリ いわしとったわ!\p…… … ……ん?\pなんじゃ あんた 信じとらんのかっ!?\pあたしゃ むこうの くちだけ ばあさんとは\n才能が 違うんじゃっ!\pしょうこに あんたの ポケモンに\nすぺしゃる かつ きゅーとな 技の\lかずかずを 教えたろうかいなっ!!\pまあ じゅぎょうりょう ちゅう ことで\nちいと ばかし バトルポイントを\lいただくがのう!$"
 
 BattleFrontier_Lounge7_Text_LeftTutorWelcomeBack:
-	.string "ぶはははっ!\pあたしゃの\nすぺしゃる かつ きゅーとな わざを\lおそわりに きたんかー!?$"
+	.string "ぶはははっ!\pあたしゃの\nすぺしゃる かつ きゅーとな 技を\lおそわりに きたんかー!?$"
 
 BattleFrontier_Lounge7_Text_TeachWhichMove:
-	.string "ほれほれー どのわざを おぼえたいんじゃ?$"
+	.string "ほれほれー どのわざを 覚えたいんじゃ?$"
 
 BattleFrontier_Lounge7_Text_MoveWillBeXBattlePoints:
 	.string "{STR_VAR_1} が ええのんか!\n{STR_VAR_2} BP じゃが ええんじゃの!?$"
 
 BattleFrontier_Lounge7_Text_TeachMoveToWhichMon:
-	.string "ほいじゃあ わざを おぼえさせる\nポケモンを きめて おくれ!$"
+	.string "ほいじゃあ 技を 覚えさせる\nポケモンを 決めて 遅れ!$"
 
 BattleFrontier_Lounge7_Text_HaventGotEnoughPoints:
-	.string "なんじゃ……\nあんた バトルポイントが たりんぞ!$"
+	.string "なんじゃ……\n"
+	.string "あんた バトルポイントが 足りんぞ!$"
 
 BattleFrontier_Lounge7_Text_IllTakeBattlePoints:
-	.string "あたしゃの すごさが わかったかいっ!!\nじゃあ バトルポイントは いただくぞぃ!$"
+	.string "あたしゃの すごさが わかったかいっ!!\n"
+	.string "じゃあ バトルポイントは いただくぞぃ!$"
 
 BattleFrontier_Lounge7_Text_YouDontWantTo:
-	.string "なんじゃ? やめるんか……\pあたしゃの すごさを しりたかったら\nいつでも くるが ええぞぃ!$"
+	.string "なんじゃ? やめるんか……\p"
+	.string "あたしゃの すごさを 知りたかったら\n"
+	.string "いつでも 来るが ええぞぃ!$"
 
 BattleFrontier_Lounge7_Text_RightTutorIntro:
-	.string "いひひひっ!\pあたしゃ こうみえても わかいころは\nそりゃー つよい トレーナーでよー\pむてきの ビキニの おねえさんと して\nもー ブイブイ いわしとったわ!\p…… …… ……ん?\pなんじゃ あんた しんじとらんのかっ!?\pあたしゃ むこうの くちだけ ばあさんと\nちがって じつりょくが あるんじゃっ!\pしょうこに あんたの ポケモンに\nはーど かつ ぷりてぃな わざの\lかずかずを おしえたろうかいなっ!\pまあ じゅぎょうりょう ちゅう ことで\nちいと ばかし バトルポイントを\lいただくがのう!$"
+	.string "いひひひっ!\pあたしゃ こうみえても わかいころは\nそりゃー 強い トレーナーでよー\pむてきの ビキニの お姉さんと して\nもー ブイブイ いわしとったわ!\p…… …… ……ん?\pなんじゃ あんた 信じとらんのかっ!?\pあたしゃ むこうの くちだけ ばあさんと\nちがって 実力が あるんじゃっ!\pしょうこに あんたの ポケモンに\nはーど かつ ぷりてぃな 技の\lかずかずを 教えたろうかいなっ!\pまあ じゅぎょうりょう ちゅう ことで\nちいと ばかし バトルポイントを\lいただくがのう!$"
 
 BattleFrontier_Lounge7_Text_RightTutorWelcomeBack:
-	.string "いひひひっ!\pあたしゃの\nはーど かつ ぷりてぃな わざを\lおそわりに きたんかー!?$"
+	.string "いひひひっ!\pあたしゃの\nはーど かつ ぷりてぃな 技を\lおそわりに きたんかー!?$"
 
 BattleFrontier_Lounge7_Text_SoftboiledDesc::
-	.string "{JPN}キズついた からだを\nたいりょくの\nはんぶん かいふく$"
+	.string "{JPN}キズついた 体を\n体力の\n半分 回復$"
 
 BattleFrontier_Lounge7_Text_SeismicTossDesc::
-	.string "{JPN}いんりょくを りよう\nレベル ぶんの\nダメージを あたえる$"
+	.string "{JPN}引力を 利用\n"
+	.string "レベル 分の\n"
+	.string "ダメージを 与える$"
 
 BattleFrontier_Lounge7_Text_DreamEaterDesc::
-	.string "{JPN}ねている てきに\nあたえた ダメージの\nはんぶんを かいふく$"
+	.string "{JPN}ねている 敵に\nあたえた ダメージの\n半分を 回復$"
 
 BattleFrontier_Lounge7_Text_MegaPunchDesc::
-	.string "{JPN}ものすごい ちからを\nこめた パンチで\nてきを こうげき$"
+	.string "{JPN}ものすごい 力を\nこめた パンチで\n敵を 攻撃$"
 
 BattleFrontier_Lounge7_Text_MegaKickDesc::
-	.string "{JPN}ものすごい ちからを\nこめた キックで\nてきを こうげき$"
+	.string "{JPN}ものすごい 力を\nこめた キックで\n敵を 攻撃$"
 
 BattleFrontier_Lounge7_Text_BodySlamDesc::
-	.string "{JPN}たおれこみ こうげき\nてきを まひ させる\nことが ある$"
+	.string "{JPN}倒れこみ 攻撃\n敵を まひ させる\nことが ある$"
 
 BattleFrontier_Lounge7_Text_RockSlideDesc::
-	.string "{JPN}いわで こうげき\nてきを ひるませる\nことが ある$"
+	.string "{JPN}いわで 攻撃\n敵を ひるませる\nことが ある$"
 
 BattleFrontier_Lounge7_Text_CounterDesc::
-	.string "{JPN}ぶつりこうげきの\nダメージを\nばいにして かえす$"
+	.string "{JPN}ぶつりこうげきの\nダメージを\nばいにして 返す$"
 
 BattleFrontier_Lounge7_Text_ThunderWaveDesc::
-	.string "{JPN}よわい でんげきを\nぶつけて あいてを\nまひ させる$"
+	.string "{JPN}弱い でんげきを\nぶつけて 相手を\nまひ させる$"
 
 BattleFrontier_Lounge7_Text_SwordsDanceDesc::
-	.string "{JPN}たたかいの おどりで\nこうげきを グーンと\nあげる$"
+	.string "{JPN}戦いの おどりで\n攻撃を グーンと\nあげる$"
 
 BattleFrontier_Lounge7_Text_DefenseCurlDesc::
-	.string "{JPN}からだを まるめて\nぼうぎょを あげる$"
+	.string "{JPN}体を まるめて\n防御を あげる$"
 
 BattleFrontier_Lounge7_Text_SnoreDesc::
-	.string "{JPN}ねている とき だけ\nつかえる わざ\nいびきで こうげき$"
+	.string "{JPN}ねている とき だけ\n使える 技\nいびきで 攻撃$"
 
 BattleFrontier_Lounge7_Text_MudSlapDesc::
-	.string "{JPN}ドロを かけて\nめいちゅうりつを\nさげる$"
+	.string "{JPN}ドロを かけて\n"
+	.string "命中率を\n"
+	.string "下げる$"
 
 BattleFrontier_Lounge7_Text_SwiftDesc::
-	.string "{JPN}だれも よけることの\nできない ほしがたの\nこうせんで こうげき$"
+	.string "{JPN}だれも よけることの\nできない ほしがたの\nこうせんで 攻撃$"
 
 BattleFrontier_Lounge7_Text_IcyWindDesc::
-	.string "{JPN}すごい れいきで\nこうげき\nすばやさを さげる$"
+	.string "{JPN}すごい れいきで\n攻撃\n素早さを さげる$"
 
 BattleFrontier_Lounge7_Text_EndureDesc::
-	.string "{JPN}そのターンで\nこうげき されても\nたいりょくが1のこる$"
+	.string "{JPN}そのターンで\n攻撃 されても\n体力が1のこる$"
 
 BattleFrontier_Lounge7_Text_PsychUpDesc::
-	.string "{JPN}あいての\nほじょこうかを\nじぶんに コピーする$"
+	.string "{JPN}相手の\nほじょこうかを\n自分に コピーする$"
 
 BattleFrontier_Lounge7_Text_IcePunchDesc::
-	.string "{JPN}つめたい パンチで\nてきを こおらせる\nことが ある$"
+	.string "{JPN}つめたい パンチで\n敵を こおらせる\nことが ある$"
 
 BattleFrontier_Lounge7_Text_ThunderPunchDesc::
-	.string "{JPN}でんげき パンチで\nてきを まひさせる\nことが ある$"
+	.string "{JPN}でんげき パンチで\n敵を まひさせる\nことが ある$"
 
 BattleFrontier_Lounge7_Text_FirePunchDesc::
-	.string "{JPN}ほのおの パンチで\nてきを やけどさせる\nことが ある$"
+	.string "{JPN}炎の パンチで\n敵を やけどさせる\nことが ある$"

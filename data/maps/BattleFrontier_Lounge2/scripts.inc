@@ -107,96 +107,96 @@ BattleFrontier_Lounge2_EventScript_TriathleteF::
 	goto FrontierStory_EventScript_RegularTalk
 
 BattleFrontier_Lounge2_Text_FrontierManiacIntro::
-	.string "{JPN}やあ！ フロンティアマニアだよ！\nみんなの はなしを あつめてるんだ。\pきみの しらない じょうほうも\nあるかもしれないね！$"
+	.string "{JPN}やあ！ フロンティアマニアだよ！\nみんなの 話しを 集めてるんだ。\pきみの 知らない 情報も\nあるかもしれないね！$"
 
 BattleFrontier_Lounge2_Text_SwingByForTheLatestWord::
-	.string "{JPN}また きてくれたね！\nこんどは どんな はなしを しようか。$"
+	.string "{JPN}また 来てくれたね！\n今度は どんな 話しを しようか。$"
 
 @ Unused
 BattleFrontier_Lounge2_Text_MyInformationsBeenUsefulRight::
-	.string "{JPN}どう? どう? どう?\pぼくの じょうほうは もちろん\nすごーく さんこうに なってるだろ?$"
+	.string "{JPN}どう? どう? どう?\pぼくの 情報は もちろん\nすごーく さんこうに なってるだろ?$"
 
 BattleFrontier_Lounge2_Text_FacilityIsHottest::
-	.string "そうだねぇ……\pいまは {STR_VAR_1}が\nアッつい みたいだね!$"
+	.string "そうだねぇ……\p今は {STR_VAR_1}が\nアッつい みたいだね!$"
 
 BattleFrontier_Lounge2_Text_BattleTowerIsHottest::
-	.string "そうだねぇ……\pいまは バトルタワー{STR_VAR_1}が\nアッつい みたいだね!$"
+	.string "そうだねぇ……\p今は バトルタワー{STR_VAR_1}が\nアッつい みたいだね!$"
 
 BattleFrontier_Lounge2_Text_SalonMaidenIsThere::
-	.string "{JPN}しってるかい?\pあそこは エニシダが\nフロンティアブレーンって よんでる\lトレーナーの うちの ひとり……\lタワータイクーンって いう\lなぞの トレーナーが おさめてるのさ!$"
+	.string "{JPN}知ってるかい?\pあそこは エニシダが\nフロンティアブレーンって 呼んでる\lトレーナーの うちの 一人……\lタワータイクーンって 言う\l謎の トレーナーが 収めてるのさ!$"
 
 BattleFrontier_Lounge2_Text_SalonMaidenSilverMons::
-	.string "{JPN}タワータイクーンと たたかうなら\nどんな あいてにも そなえて おこう！\pてもちが いつも おなじとは\nかぎらないんだ。 そこが おもしろいね！$"
+	.string "{JPN}タワータイクーンと 戦うなら\nどんな 相手にも そなえて おこう！\pてもちが いつも 同じとは\nかぎらないんだ。 そこが おもしろいね！$"
 
 BattleFrontier_Lounge2_Text_SalonMaidenGoldMons::
-	.string "{JPN}ほんきの タワータイクーンは\nでてくる ポケモンも てごわいぞ！\pひとつの タイプだけじゃなく\nチームぜんたいで たいさくしよう！$"
+	.string "{JPN}本気の タワータイクーンは\n出てくる ポケモンも てごわいぞ！\pひとつの タイプだけじゃなく\nチームぜんたいで たいさくしよう！$"
 
 BattleFrontier_Lounge2_Text_DomeAceIsThere::
-	.string "{JPN}しってるかい?\pあそこは エニシダが\nフロンティアブレーンって よんでる\lトレーナーの うちの ひとり……\lドームスーパースターって いう\lどハデな トレーナーが おさめてるのさ!$"
+	.string "{JPN}知ってるかい?\pあそこは エニシダが\nフロンティアブレーンって 呼んでる\lトレーナーの うちの 一人……\lドームスーパースターって 言う\lどハデな トレーナーが 収めてるのさ!$"
 
 BattleFrontier_Lounge2_Text_DomeAceSilverMons::
-	.string "{JPN}ドームスーパースターと たたかうなら\nしあいまえの じょうほうが だいじさ！\pつよそうな なまえに おどろかず\n2ひきの くみあわせを みておこう！$"
+	.string "{JPN}ドームスーパースターと 戦うなら\n試合まえの 情報が 大事さ！\p強そうな 名前に 驚かず\n2匹の 組みあわせを 見ておこう！$"
 
 BattleFrontier_Lounge2_Text_DomeAceGoldMons::
-	.string "{JPN}ほんきの ドームスーパースターだって\nいつも おなじ てもちとは かぎらない！\pその ときの あいてを みて\nきみの さくせんを きめるんだ！$"
+	.string "{JPN}本気の ドームスーパースターだって\nいつも 同じ てもちとは かぎらない！\pその ときの 相手を 見て\nきみの さくせんを 決めるんだ！$"
 
 BattleFrontier_Lounge2_Text_FactoryHeadIsThere::
-	.string "{JPN}しってるかい?\pあそこは エニシダが\nフロンティアブレーンって よんでる\lトレーナーの うちの ひとり……\lファクトリーヘッドって いう\lやばい トレーナーが おさめてるのさ!$"
+	.string "{JPN}知ってるかい?\pあそこは エニシダが\nフロンティアブレーンって 呼んでる\lトレーナーの うちの 一人……\lファクトリーヘッドって 言う\lやばい トレーナーが 収めてるのさ!$"
 
 BattleFrontier_Lounge2_Text_FactoryHeadSilverMons::
-	.string "{JPN}きみは もう ファクトリーヘッドと\nたたかったこと あるかい?\pあいつが つかう ポケモンは\nレンタルポケモンの\lなかから どれか 3ひき!\lきみと ほぼ おなじ じょうけん らしいぜ!$"
+	.string "{JPN}きみは もう ファクトリーヘッドと\n戦ったこと あるかい?\pあいつが 使う ポケモンは\nレンタルポケモンの\lなかから どれか 3匹!\lきみと ほぼ 同じ 条件 らしいぜ!$"
 
 BattleFrontier_Lounge2_Text_FactoryHeadGoldMons::
-	.string "{JPN}きみは ほんきの ファクトリーヘッドと\nたたかったこと あるかい?\pあいつは ほんきで たたかう ときでも\nレンタルポケモンの\lなかから どれか 3ひき!\lきみと ほとんど おなじ じょうけんで\lたたかう らしいぜ!$"
+	.string "{JPN}きみは 本気の ファクトリーヘッドと\n戦ったこと あるかい?\pあいつは 本気で 戦う ときでも\nレンタルポケモンの\lなかから どれか 3匹!\lきみと ほとんど 同じ 条件で\l戦う らしいぜ!$"
 
 BattleFrontier_Lounge2_Text_PikeQueenIsThere::
-	.string "{JPN}しってるかい?\pあそこには エニシダが\nフロンティアブレーンって よんでる\lトレーナーの うちの ひとり……\lチューブクイーンって いう\lこわーい トレーナーが おさめてるのさ!$"
+	.string "{JPN}知ってるかい?\pあそこには エニシダが\nフロンティアブレーンって 呼んでる\lトレーナーの うちの 一人……\lチューブクイーンって 言う\lこわーい トレーナーが 収めてるのさ!$"
 
 BattleFrontier_Lounge2_Text_PikeQueenSilverMons::
-	.string "{JPN}チューブクイーンに あうまえに\nのこりの HPを たしかめよう！\pどんな ポケモンが でてきても\nうごけることが たいせつだよ。$"
+	.string "{JPN}チューブクイーンに あうまえに\n残りの HPを 確かめよう！\pどんな ポケモンが 出てきても\n動けることが 大切だよ。$"
 
 BattleFrontier_Lounge2_Text_PikeQueenGoldMons::
-	.string "{JPN}ほんきの チューブクイーンに\nあえたら それだけでも すごいことさ！\pのこしてきた ちからを\nそこで ぜんぶ ぶつけてみよう！$"
+	.string "{JPN}本気の チューブクイーンに\nあえたら それだけでも すごいことさ！\p残してきた 力を\nそこで 全部 ぶつけてみよう！$"
 
 BattleFrontier_Lounge2_Text_ArenaTycoonIsThere::
-	.string "{JPN}しってるかい?\pあそこには エニシダが\nフロンティアブレーンって よんでる\lトレーナーの うちの ひとり……\lアリーナキャプテンって いう\lかわいい トレーナーが おさめてるのさ!$"
+	.string "{JPN}知ってるかい?\pあそこには エニシダが\nフロンティアブレーンって 呼んでる\lトレーナーの うちの 一人……\lアリーナキャプテンって 言う\lかわいい トレーナーが 収めてるのさ!$"
 
 BattleFrontier_Lounge2_Text_ArenaTycoonSilverMons::
-	.string "{JPN}アリーナキャプテンとの しょうぶは\nポケモンの じゅんばんが たいせつ！\pこうたいで にげられないぶん\nつぎの 1ひきまで かんがえておこう。$"
+	.string "{JPN}アリーナキャプテンとの 勝負は\nポケモンの じゅんばんが 大切！\p交代で にげられないぶん\n次の 1匹まで 考えておこう。$"
 
 BattleFrontier_Lounge2_Text_ArenaTycoonGoldMons::
-	.string "{JPN}ほんきの アリーナキャプテンには\n3ターンの つかいかたで いどもう！\pわざを あてることも\nのこりの HPも だいじだからね。$"
+	.string "{JPN}本気の アリーナキャプテンには\n3ターンの 使いかたで いどもう！\p技を あてることも\n残りの HPも 大事だからね。$"
 
 BattleFrontier_Lounge2_Text_PalaceMavenIsThere::
-	.string "{JPN}あそこには エニシダが\nフロンティアブレーンって よんでる\lトレーナーの うちの ひとり……\lパレスガーディアンって いう\lあやしい トレーナーが おさめてるのさ!$"
+	.string "{JPN}あそこには エニシダが\nフロンティアブレーンって 呼んでる\lトレーナーの うちの 一人……\lパレスガーディアンって 言う\lあやしい トレーナーが 収めてるのさ!$"
 
 BattleFrontier_Lounge2_Text_PalaceMavenSilverMons::
-	.string "{JPN}パレスガーディアンに いどむなら\nせいかくと わざを たしかめよう！\pてもちを あてるより\nきみの ポケモンを しることさ。$"
+	.string "{JPN}パレスガーディアンに 挑むなら\n性格と 技を 確かめよう！\pてもちを あてるより\nきみの ポケモンを しることさ。$"
 
 BattleFrontier_Lounge2_Text_PalaceMavenGoldMons::
-	.string "{JPN}ほんきの パレスガーディアンの まえでも\nポケモンの きもちは だいじだよ。\pメガシンカや テラスタルの じゅんびも\nちょうせんの まえに しておこう！$"
+	.string "{JPN}本気の パレスガーディアンの 前でも\nポケモンの 気持ちは 大事だよ。\pメガシンカや テラスタルの 準備も\n挑戦の 前に しておこう！$"
 
 BattleFrontier_Lounge2_Text_PyramidKingIsThere::
-	.string "{JPN}しってるかい?\pあそこには エニシダが\nフロンティアブレーンって よんでる\lトレーナーの うちの ひとり……\lピラミッドキングって いう\lアツーい トレーナーが おさめてるのさ!$"
+	.string "{JPN}知ってるかい?\pあそこには エニシダが\nフロンティアブレーンって 呼んでる\lトレーナーの うちの 一人……\lピラミッドキングって 言う\lアツーい トレーナーが 収めてるのさ!$"
 
 BattleFrontier_Lounge2_Text_PyramidKingSilverMons::
-	.string "{JPN}ピラミッドキングを めざすなら\nまずは たんけんの じゅんびさ！\pもちこめる どうぐと\nチームの いきの ながさを かんがえよう。$"
+	.string "{JPN}ピラミッドキングを めざすなら\nまずは たんけんの 準備さ！\p持ちこめる 道具と\nチームの いきの ながさを 考えよう。$"
 
 BattleFrontier_Lounge2_Text_PyramidKingGoldMons::
-	.string "{JPN}ほんきの ピラミッドキングまで\nたどりついたら むねを はっていい！\pどんな あいてが でてきても\nきみの たんけんの しめくくりだ！$"
+	.string "{JPN}本気の ピラミッドキングまで\nたどりついたら むねを はっていい！\pどんな 相手が 出てきても\nきみの たんけんの しめくくりだ！$"
 
 BattleFrontier_Lounge2_Text_DoubleBattleAdvice1::
-	.string "{JPN}ダブルバトルが できる ばしょは\nいくつか あるけど やっぱり きほんは\lバトルタワーの ダブル バトルルーム!\pまずは ここから バトルフロンティアでの\nダブルバトルを まなんで いくと いいぜ!$"
+	.string "{JPN}ダブルバトルが できる 場所は\nいくつか あるけど やっぱり きほんは\lバトルタワーの ダブル バトルルーム!\pまずは ここから バトルフロンティアでの\nダブルバトルを 学んで いくと いいぜ!$"
 
 BattleFrontier_Lounge2_Text_DoubleBattleAdvice2::
-	.string "{JPN}ここでの たたかいには\nちゅうい しなよ!\pダブルバトル ならではの せんぽうで\nたたかう トレーナーも いるみたいだぜ!$"
+	.string "{JPN}ここでの 戦いには\n注意 しなよ!\pダブルバトル ならではの せんぽうで\n戦う トレーナーも いるみたいだぜ!$"
 
 BattleFrontier_Lounge2_Text_DoubleBattleAdvice3::
-	.string "{JPN}ここの たたかいで\nダブルバトルに じしんが ついたら\lほかの ダブルバトルが できる ばしょに\lチャレンジ してみると いいかもな!$"
+	.string "{JPN}ここの 戦いで\nダブルバトルに 自信が ついたら\lほかの ダブルバトルが できる 場所に\lチャレンジ してみると いいかもな!$"
 
 BattleFrontier_Lounge2_Text_MultiBattleAdvice::
-	.string "{JPN}バトルサロンには\nいろんな トレーナーが あつまるんだぜ!\pもしかしたら きみの ともだちや\nでしにも あえるかも しれないな!\lよーく さがして みると いいぜ!$"
+	.string "{JPN}バトルサロンには\nいろんな トレーナーが 集まるんだぜ!\pもしかしたら きみの 友だちや\n弟子にも あえるかも しれないな!\lよーく 探して 見ると いいぜ!$"
 
 BattleFrontier_Lounge2_Text_LinkMultiBattleAdvice::
-	.string "{JPN}ともだちが あつまったら\nつうしんマルチ バトルルーム!!\pつよい ともだちと いっしょに あそべば\nつよい トレーナーたち との\lたたかいが まってるぜ!$"
+	.string "{JPN}友だちが あつまったら\n通信マルチ バトルルーム!!\p強い 友だちと 一緒に あそべば\n強い トレーナーたち との\l戦いが 待ってるぜ!$"
 

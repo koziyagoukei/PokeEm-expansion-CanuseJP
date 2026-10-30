@@ -17,6 +17,7 @@ bool8 InBattleFacilityChallenge(void);
 u8 GetFrontierBrainStatus(void);
 u8 GetFrontierBrainStatusForStreak(u8 facility, u32 streak);
 void CopyFrontierTrainerText(u8 whichText, u16 trainerId);
+bool32 CopyFrontierTrainerOwnText(u8 whichText, u16 trainerId);
 void ResetWinStreaks(void);
 u32 GetCurrentFacilityWinStreak(void);
 u16 GetFrontierWinStreak(u32 facility, u32 mode, u32 lvlMode);

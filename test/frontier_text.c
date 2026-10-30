@@ -67,18 +67,18 @@ TEST("Frontier text: all item descriptions fit the header width and stay above t
         + GetFontAttribute(FONT_SMALL, FONTATTR_LINE_SPACING)) <= 96);
 }
 
-TEST("Frontier text: trainer Tokihito uses the Japanese original challenge")
+TEST("Frontier text: trainer Tokihito uses his written challenge")
 {
-    static const u8 expected[] = _("ボクは ぜったい まけ\nません {JPN}…！ ");
+    static const u8 expected[] = _("{JPN}ぼく 負ける気が しないんだ！\n今日は 絶好調だからね！");
     gFacilityTrainers = gBattleFrontierTrainers;
     CopyFrontierTrainerText(FRONTIER_BEFORE_TEXT, FRONTIER_TRAINER_BRADY);
     EXPECT_EQ(StringCompare(gStringVar4, expected), 0);
 }
 
-TEST("Frontier text: trainer Hiromichi uses the original win and loss phrases")
+TEST("Frontier text: trainer Hiromichi uses his written win and loss lines")
 {
-    static const u8 win[] = _("わーい かって \nたのしい なあ ");
-    static const u8 lose[] = _("わーん！！ \nやっぱり くやしい なあ");
+    static const u8 win[] = _("{JPN}やった！ 勝つと もっと\n楽しいね！");
+    static const u8 lose[] = _("{JPN}ちぇっ……！ でも 楽しかったから\n怒ったりは しないよ！");
     gFacilityTrainers = gBattleFrontierTrainers;
     CopyFrontierTrainerText(FRONTIER_PLAYER_LOST_TEXT, FRONTIER_TRAINER_CONNER);
     EXPECT_EQ(StringCompare(gStringVar4, win), 0);

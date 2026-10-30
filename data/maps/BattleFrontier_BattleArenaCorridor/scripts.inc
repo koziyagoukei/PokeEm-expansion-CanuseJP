@@ -85,5 +85,5 @@ BattleFrontier_BattleArenaCorridor_Movement_AttendantMoveOutOfWay:
 	step_end
 
 BattleFrontier_BattleArenaCorridor_Text_PleaseStepIn:
-	.string "このさきが たいせんの へやと なりますぞ!\nどうぞ おはいり くだされ!"
+	.string "このさきが 対戦の 部屋と なりますぞ!\nどうぞ おはいり くだされ!"
 	.string "$"

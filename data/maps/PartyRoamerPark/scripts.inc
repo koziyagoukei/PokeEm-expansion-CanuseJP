@@ -79,13 +79,13 @@ PartyRoamerPark_EventScript_BathCancel:
 	end
 
 PartyRoamerPark_Text_BathWelcome:
-	.string "{JPN}おんせんの にゅうよくざいを\nかえてみるかの？\pいまは {STR_VAR_1}じゃ。\nすきな かおりを えらぶと よいぞ。$"
+	.string "{JPN}おんせんの にゅうよくざいを\n変えてみるかの？\p今は {STR_VAR_1}じゃ。\n好きな かおりを 選ぶと よいぞ。$"
 
 PartyRoamerPark_Text_BathChanged:
-	.string "{JPN}{STR_VAR_1}に\nかえておいたぞい。\pタマゴいがいの てもち みんなの\n{STR_VAR_2}が\l5びょうごとに 1ずつ あがるぞい！$"
+	.string "{JPN}{STR_VAR_1}に\n変えておいたぞい。\pタマゴいがいの てもち みんなの\n{STR_VAR_2}が\l5びょうごとに 1ずつ 上がるぞい！$"
 
 PartyRoamerPark_Text_BathCancel:
-	.string "{JPN}ゆっくり あたたまって いくんじゃぞ。$"
+	.string "{JPN}ゆっくり 温まって いくんじゃぞ。$"
 
 PartyRoamerPark_EventScript_Norman::
 	lock
@@ -296,15 +296,15 @@ PartyRoamerPark_EventScript_NoBerries:
 
 PartyRoamerPark_Text_AlolaFestivalCircle:
 	.string "{JPN}ママ『ポケモンも ここなら\n"
-	.string "のびのび あそべそうね！$"
+	.string "のびのび 遊べそうね！$"
 
 PartyRoamerPark_Text_FestivalCircleSoundsFun:
 	.string "{JPN}ポロックケースを てにいれたら\n"
-	.string "いっしょに ポロックを つくりましょ！$"
+	.string "一緒に ポロックを 作りましょ！$"
 
 PartyRoamerPark_Text_AskMakePokeblocks:
 	.string "ねぇ {PLAYER}\n"
-	.string "ママと パパで ポロックつくらない?$"
+	.string "ママと パパで ポロック作らない?$"
 
 PartyRoamerPark_Text_AskPokeblockFlavor:
 	.string "どういう ポロックが\n"
@@ -318,7 +318,7 @@ PartyRoamerPark_Text_DeclinePokeblock:
 
 PartyRoamerPark_Text_FinishedPokeblockBlending:
 	.string "みんなでつくると\n"
-	.string "たのしいわね！$"
+	.string "楽しいわね！$"
 
 PartyRoamerPark_Text_NoPokeblockCase:
 	.string "ポロックケースが\n"
@@ -330,54 +330,54 @@ PartyRoamerPark_Text_PokeblockCaseFull:
 
 PartyRoamerPark_Text_NoBerries:
 	.string "きのみが ないと\n"
-	.string "つくれないわ$"
+	.string "作れないわ$"
 
 PartyRoamerPark_Text_NormanDailyCheckIn:
 	.string "{PLAYER} ちゃんとたべてるか?\n"
-	.string "げんきに しているか?$"
+	.string "元気に しているか?$"
 
 PartyRoamerPark_Text_NormanGift:
-	.string "{JPN}きょうの おやつを よういしたぞ。\n"
-	.string "ポケモンと いっしょに たべなさい。$"
+	.string "{JPN}今日の おやつを 用意したぞ。\n"
+	.string "ポケモンと 一緒に 食べなさい。$"
 
 PartyRoamerPark_Text_NormanGeneric:
 	.string "なにかあったら\n"
-	.string "れんらくするんだぞ$"
+	.string "連絡するんだぞ$"
 
 PartyRoamerPark_Text_NormanInvite:
-	.string "{JPN}{PLAYER} すこし パパと\n"
+	.string "{JPN}{PLAYER} 少し パパと\n"
 	.string "あそぼうじゃないか！$"
 
 PartyRoamerPark_Text_NormanChooseMon:
-	.string "{JPN}いっしょに あそぶ ポケモンを\n"
-	.string "えらんで ごらん。$"
+	.string "{JPN}一緒に 遊ぶ ポケモンを\n"
+	.string "選んで ごらん。$"
 
 PartyRoamerPark_Text_NormanWarmUp:
 	.string "{JPN}よーし {STR_VAR_1}！\n"
-	.string "まずは パパが おてほんだ！$"
+	.string "まずは パパが お手本だ！$"
 
 PartyRoamerPark_Text_NormanTooSerious:
 	.string "{JPN}……はっ！ つい ジムの\n"
-	.string "とっくんみたいに なってしまったな。\p"
-	.string "きょうは あそびだった！\n"
+	.string "特訓みたいに なってしまったな。\p"
+	.string "今日は 遊びだった！\n"
 	.string "ははは！$"
 
 PartyRoamerPark_Text_NormanTrainingHelp:
-	.string "{JPN}どんな あそびで きたえるか\n"
-	.string "きそポイントを きめて ごらん。\p"
-	.string "のうりょくを えらんで Aで へんしゅう。\n"
-	.string "さゆうで けた じょうげで すうじだ。\p"
+	.string "{JPN}どんな 遊びで 鍛えるか\n"
+	.string "基礎ポイントを 決めて ごらん。\p"
+	.string "能力を 選んで Aで へんしゅう。\n"
+	.string "さゆうで けた じょうげで 数字だ。\p"
 	.string "ひとつ 252まで ごうけい 510まで。\n"
-	.string "けっていで はんえいするぞ。$"
+	.string "決定で はんえいするぞ。$"
 
 PartyRoamerPark_Text_NormanTrainingDone:
-	.string "{JPN}よし！ いい あせを かいたな！\n"
+	.string "{JPN}よし！ いい あせを 書いたな！\n"
 	.string "また パパと あそぼうな。$"
 
 PartyRoamerPark_Text_NormanTrainingCancel:
 	.string "{JPN}むりは しなくて いいんだぞ。\n"
-	.string "きそポイントは かえていないからな。$"
+	.string "基礎ポイントは 変えていないからな。$"
 
 PartyRoamerPark_Text_NormanDecline:
-	.string "{JPN}そうか。 あそびたく なったら\n"
-	.string "いつでも パパを よんでくれ！$"
+	.string "{JPN}そうか。 遊びたく なったら\n"
+	.string "いつでも パパを 呼んでくれ！$"

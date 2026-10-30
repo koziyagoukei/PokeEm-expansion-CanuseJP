@@ -930,224 +930,227 @@ BattleFrontier_BattleTowerLobby_EventScript_ExitRules::
 
 @ Unused
 BattleFrontier_BattleTowerLobby_Text_DirectYouToBattleRoom:
-	.string "{JPN}それでは バトルルームへ\nごあんない します!$"
+	.string "{JPN}それでは バトルルームへ\nご案内 します!$"
 
 BattleFrontier_BattleTowerLobby_Text_DidntSaveBeforeQuitting:
-	.string "おきゃくさま!\pぜんかい ちゃんと レポートを かいて\nしゅうりょう しませんでしたね?\pもうしわけ ありませんが そのばあい\nちょうせんは むこうと なります$"
+	.string "お客様!\p前回 ちゃんと レポートを 書いて\n終了 しませんでしたね?\p申し訳 ありませんが そのばあい\n挑戦は 無効と なります$"
 
 BattleFrontier_BattleTowerLobby_Text_CongratsBeatenSeven:
-	.string "おめでとう ございます!\nみごと 7にんぬき されましたね!\p$"
+	.string "おめでとう ございます!\n見事 7人ぬき されましたね!\p$"
 
 @ Unused
 BattleFrontier_BattleTowerLobby_Text_EarnedFabulousPrize:
-	.string "{JPN}7にんぬきを たっせい されましたので\nこの しょうひんを さしあげます!\p$"
+	.string "{JPN}7人ぬきを 達成 されましたので\nこの 賞品を 差し上げます!\p$"
 
 BattleFrontier_BattleTowerLobby_Text_ReceivedPrize:
 	.string "{PLAYER}は\n{STR_VAR_1}を もらった!$"
 
 @ Unused
 BattleFrontier_BattleTowerLobby_Text_BagFullMakeRoom:
-	.string "{JPN}…あら どうぐが いっぱいですね\pどうぐを せいりしてから\nまたおこしください$"
+	.string "{JPN}…あら 道具が いっぱいですね\p道具を 整理してから\nまたおこしください$"
 
 BattleFrontier_BattleTowerLobby_Text_ThankYouForPlaying:
-	.string "おつかれさまでした!\p$"
+	.string "お疲れさまでした!\p$"
 
 BattleFrontier_BattleTowerLobby_Text_RecordWillBeSaved:
-	.string "せいせきを レポートに かきますので\nおまちください$"
+	.string "成績を レポートに 書きますので\nお待ちください$"
 
 BattleFrontier_BattleTowerLobby_Text_WeveBeenWaitingForYou:
-	.string "おまちしておりました!\p$"
+	.string "お待ちしておりました!\p$"
 
 BattleFrontier_BattleTowerLobby_Text_ProgressWillBeSaved:
-	.string "バトルルームに ごあんないする まえに\nレポートを かきますので おまちください$"
+	.string "バトルルームに ご案内する 前に\nレポートを 書きますので お待ちください$"
 
 BattleFrontier_BattleTowerLobby_Text_AboutToFace50thTrainer:
-	.string "いよいよ つぎは 50にんめの\nトレーナー ですね!\pこれからは 7にんを かちぬく たびに\nあなたの ポケモンに きねんリボンが\lおくられますので がんばって くださいね!$"
+	.string "いよいよ 次は 50人めの\nトレーナー ですね!\pこれからは 7人を 勝ちぬく たびに\nあなたの ポケモンに 記念リボンが\l贈られますので がんばって くださいね!$"
 
 BattleFrontier_BattleTowerLobby_Text_HereAreSomeRibbons:
-	.string "つよい トレーナー 7にんを\nかちぬいた きねんの リボンを どうぞ!\p{PLAYER}は リボンを もらった!$"
+	.string "強い トレーナー 7人を\n勝ちぬいた 記念の リボンを どうぞ!\p{PLAYER}は リボンを もらった!$"
 
 BattleFrontier_BattleTowerLobby_Text_PutRibbonOnMons:
 	.string "{PLAYER}は ポケモンに\nリボンを つけて あげた!$"
 
 BattleFrontier_BattleTowerLobby_Text_DescribeFeelingsAboutBattleTower:
-	.string "ねえねえ!\pバトルタワーで これから しょうぶだ!\n……ってとき とか\pかったり まけたり したときって\nどんな きもち なのか おしえてよ!$"
+	.string "ねえねえ!\pバトルタワーで これから 勝負だ!\n……ってとき とか\p勝ったり 負けたり したときって\nどんな 気持ち なのか 教えてよ!$"
 
 BattleFrontier_BattleTowerLobby_Text_FeelWhatWhenYouBegin:
-	.string "じゃあ さっそく\nしょうぶに いどむときの きもちを……$"
+	.string "じゃあ さっそく\n勝負に 挑むときの 気持ちを……$"
 
 BattleFrontier_BattleTowerLobby_Text_FeelWhatWhenYouveWon:
-	.string "じゃあ しょうぶに かったときの\nきもちを きかせて もらおうかなー$"
+	.string "じゃあ 勝負に 勝ったときの\n気持ちを 聞かせて もらおうかなー$"
 
 BattleFrontier_BattleTowerLobby_Text_FeelWhatWhenYouveLost:
-	.string "しょうぶに まけちゃったとき\nどんな きもちを なるか きかせて!$"
+	.string "勝負に 負けちゃったとき\nどんな 気持ちを なるか 聞かせて!$"
 
 BattleFrontier_BattleTowerLobby_Text_DontThinkMuchAboutIt:
-	.string "とくに なにも おもわないって こと?\nきみって クールなんだね$"
+	.string "とくに なにも 思わないって こと?\nきみって クールなんだね$"
 
 BattleFrontier_BattleTowerLobby_Text_ChangedYourMind:
-	.string "あれ? やっぱり やめたの?\nきみって きまぐれ なんだね$"
+	.string "あれ? やっぱり やめたの?\n"
+	.string "きみって 気まぐれ なんだね$"
 
 BattleFrontier_BattleTowerLobby_Text_ThatsHowYouFeel:
-	.string "へえ そんな きぶんに なるんだ!\nなかなか こせいてき だね……\pどうも ありがと!$"
+	.string "へえ そんな 気分に なるんだ!\n"
+	.string "なかなか 個性的 だね……\p"
+	.string "どうも ありがと!$"
 
 @ Unused
 BattleFrontier_BattleTowerLobby_Text_DoubleBattleRoomConstruction:
-	.string "{JPN}バトルタワー ダブルバトルコーナーへ\nようこそ!\pげんざい バトルルームは こうじちゅうです\nかんせいまで しばらく おまちください$"
+	.string "{JPN}バトルタワー ダブルバトルコーナーへ\nようこそ!\p現在 バトルルームは 工事中です\n完成まで しばらく お待ちください$"
 
 @ Unused
 BattleFrontier_BattleTowerLobby_Text_MultiBattleRoomConstruction:
-	.string "{JPN}バトルタワー マルチバトルコーナーへ\nようこそ!\pげんざい バトルルームは こうじちゅうです\nかんせいまで しばらく おまちください$"
+	.string "{JPN}バトルタワー マルチバトルコーナーへ\nようこそ!\p現在 バトルルームは 工事中です\n完成まで しばらく お待ちください$"
 
 BattleFrontier_BattleTowerLobby_Text_LookForwardToAnotherChallenge:
-	.string "またの ちょうせんを\nおまちして おります!$"
+	.string "またの 挑戦を\nお待ちして おります!$"
 
 BattleFrontier_BattleTowerLobby_Text_WhichLevelMode:
-	.string "バトルルームには\nレベル50と オープンレベルと ありますが\lどちらに はいりますか?$"
+	.string "バトルルームには\nレベル50と オープンレベルと ありますが\lどちらに 入りますか?$"
 
 @ Unused
 BattleFrontier_BattleTowerLobby_Text_PleaseSelectMons:
-	.string "{JPN}では さんかする ポケモンを\nおえらび ください!$"
+	.string "{JPN}では 参加する ポケモンを\nお選び ください!$"
 
 BattleFrontier_BattleTowerLobby_Text_OkayToSaveBeforeEntering:
-	.string "ごあんないする まえに\nレポートを かきますが よろしいですか?$"
+	.string "ご案内する 前に\nレポートを 書きますが よろしいですか?$"
 
 BattleFrontier_BattleTowerLobby_Text_ShowYouToBattleRoom:
-	.string "それでは {STR_VAR_1} バトルルームに\nごあんない いたします!$"
+	.string "それでは {STR_VAR_1} バトルルームに\nご案内 いたします!$"
 
 BattleFrontier_BattleTowerLobby_Text_RecordLastMatch:
-	.string "バトルタワーで\nさいごに おこなった たたかいを\lフロンティアパスに きろく しますか?$"
+	.string "バトルタワーで\n最後に 行った 戦いを\lフロンティアパスに 記録 しますか?$"
 
 @ Unused
 BattleFrontier_BattleTowerLobby_Text_NotEnoughValidMonsLv50:
-	.string "{JPN}おきゃくさま!\pさんかできる ポケモンが {STR_VAR_2}ひき いません!\pさんかする ためには レベルが 50いかで\nすべて ちがうしゅるいの ポケモンを\l{STR_VAR_2}ひき よういして ください\pまた もたせる どうぐも\nすべて ちがう どうぐに してください!\pなお タマゴ{STR_VAR_1}さんか させることは できません!$"
+	.string "{JPN}お客様!\p参加できる ポケモンが {STR_VAR_2}匹 いません!\p参加する ためには レベルが 50いかで\nすべて 違うしゅるいの ポケモンを\l{STR_VAR_2}匹 用意して ください\pまた 持たせる 道具も\nすべて 違う 道具に してください!\pなお タマゴ{STR_VAR_1}参加 させることは できません!$"
 
 BattleFrontier_BattleTowerLobby_Text_NotEnoughValidMonsEnd:
-	.string "じゅんびが できましたら\nまた おこし ください$"
+	.string "準備が できましたら\nまた お越し ください$"
 
 @ Unused
 BattleFrontier_BattleTowerLobby_Text_NotEnoughValidMonsLvOpen:
-	.string "{JPN}おきゃくさま!\pさんかできる ポケモンが {STR_VAR_2}ひき いません!\pさんかする ためには\nすべて ちがうしゅるいの ポケモンを\l{STR_VAR_2}ひき よういして ください\pまた もたせる どうぐも\nすべて ちがう どうぐに してください!\pなお タマゴ{STR_VAR_1}さんか させることは できません!$"
+	.string "{JPN}お客様!\p参加できる ポケモンが {STR_VAR_2}匹 いません!\p参加する ためには\nすべて 違うしゅるいの ポケモンを\l{STR_VAR_2}匹 用意して ください\pまた 持たせる 道具も\nすべて 違う 道具に してください!\pなお タマゴ{STR_VAR_1}参加 させることは できません!$"
 
 BattleFrontier_BattleTowerLobby_Text_NotEnoughValidMonsLv50Singles:
-	.string "おきゃくさま!\pさんかできる ポケモンが 3ひき いません!\pさんかする ためには レベルが 50いかで\nすべて ちがうしゅるいの ポケモンを\l3ひき よういして ください\pまた もたせる どうぐも\nすべて ちがう どうぐに してください!\pなお タマゴ{STR_VAR_1}さんか させることは できません!\pじゅんびが できましたら\nまた おこし ください$"
+	.string "お客様!\p参加できる ポケモンが 3匹 いません!\p参加する ためには レベルが 50いかで\nすべて 違うしゅるいの ポケモンを\l3匹 用意して ください\pまた 持たせる 道具も\nすべて 違う 道具に してください!\pなお タマゴ{STR_VAR_1}参加 させることは できません!\p準備が できましたら\nまた お越し ください$"
 
 BattleFrontier_BattleTowerLobby_Text_NotEnoughValidMonsLvOpenSingles:
-	.string "おきゃくさま!\pさんかできる ポケモンが 3ひき いません!\pさんかする ためには\nすべて ちがうしゅるいの ポケモンを\l3ひき よういして ください\pまた もたせる どうぐも\nすべて ちがう どうぐに してください!\pなお タマゴ{STR_VAR_1}さんか させることは できません!\pじゅんびが できましたら\nまた おこし ください$"
+	.string "お客様!\p参加できる ポケモンが 3匹 いません!\p参加する ためには\nすべて 違うしゅるいの ポケモンを\l3匹 用意して ください\pまた 持たせる 道具も\nすべて 違う 道具に してください!\pなお タマゴ{STR_VAR_1}参加 させることは できません!\p準備が できましたら\nまた お越し ください$"
 
 BattleFrontier_BattleTowerLobby_Text_NotEnoughValidMonsLv50Doubles:
-	.string "おきゃくさま!\pさんかできる ポケモンが 4ひき いません!\pさんかする ためには レベルが 50いかで\nすべて ちがうしゅるいの ポケモンを\l4ひき よういして ください\pまた もたせる どうぐも\nすべて ちがう どうぐに してください!\pなお タマゴ{STR_VAR_1}さんか させることは できません!\pじゅんびが できましたら\nまた おこし ください$"
+	.string "お客様!\p参加できる ポケモンが 4匹 いません!\p参加する ためには レベルが 50いかで\nすべて 違うしゅるいの ポケモンを\l4匹 用意して ください\pまた 持たせる 道具も\nすべて 違う 道具に してください!\pなお タマゴ{STR_VAR_1}参加 させることは できません!\p準備が できましたら\nまた お越し ください$"
 
 BattleFrontier_BattleTowerLobby_Text_NotEnoughValidMonsLvOpenDoubles:
-	.string "おきゃくさま!\pさんかできる ポケモンが 4ひき いません!\pさんかする ためには\nすべて ちがうしゅるいの ポケモンを\l4ひき よういして ください\pまた もたせる どうぐも\nすべて ちがう どうぐに してください!\pなお タマゴ{STR_VAR_1}さんか させることは できません!\pじゅんびが できましたら\nまた おこし ください$"
+	.string "お客様!\p参加できる ポケモンが 4匹 いません!\p参加する ためには\nすべて 違うしゅるいの ポケモンを\l4匹 用意して ください\pまた 持たせる 道具も\nすべて 違う 道具に してください!\pなお タマゴ{STR_VAR_1}参加 させることは できません!\p準備が できましたら\nまた お越し ください$"
 
 BattleFrontier_BattleTowerLobby_Text_NotEnoughValidMonsLv50Multis:
-	.string "おきゃくさま!\pさんかできる ポケモンが 2ひき いません!\pさんかする ためには レベルが 50いかで\nすべて ちがうしゅるいの ポケモンを\l2ひき よういして ください\pまた もたせる どうぐも\nすべて ちがう どうぐに してください!\pなお タマゴ{STR_VAR_1}さんか させることは できません!\pじゅんびが できましたら\nまた おこし ください$"
+	.string "お客様!\p参加できる ポケモンが 2匹 いません!\p参加する ためには レベルが 50いかで\nすべて 違うしゅるいの ポケモンを\l2匹 用意して ください\pまた 持たせる 道具も\nすべて 違う 道具に してください!\pなお タマゴ{STR_VAR_1}参加 させることは できません!\p準備が できましたら\nまた お越し ください$"
 
 BattleFrontier_BattleTowerLobby_Text_NotEnoughValidMonsLvOpenMultis:
-	.string "おきゃくさま!\pさんかできる ポケモンが 2ひき いません!\pさんかする ためには\nすべて ちがうしゅるいの ポケモンを\l2ひき よういして ください\pまた もたせる どうぐも\nすべて ちがう どうぐに してください!\pなお タマゴ{STR_VAR_1}さんか させることは できません!\pじゅんびが できましたら\nまた おこし ください$"
+	.string "お客様!\p参加できる ポケモンが 2匹 いません!\p参加する ためには\nすべて 違うしゅるいの ポケモンを\l2匹 用意して ください\pまた 持たせる 道具も\nすべて 違う 道具に してください!\pなお タマゴ{STR_VAR_1}参加 させることは できません!\p準備が できましたら\nまた お越し ください$"
 
 BattleFrontier_BattleTowerLobby_Text_WelcomSingleBattle:
-	.string "トレーナーの さいのうを はかる ばしょ!\nバトルタワーへ ようこそ!\pこちらでは シングル バトルルームの\nごあんないを しております!$"
+	.string "トレーナーの 才能を はかる 場所!\nバトルタワーへ ようこそ!\pこちらでは シングル バトルルームの\nご案内を しております!$"
 
 BattleFrontier_BattleTowerLobby_Text_TakeSinglesChallenge:
-	.string "シングル バトルルームに\nちょうせん されますか?$"
+	.string "シングル バトルルームに\n挑戦 されますか?$"
 
 BattleFrontier_BattleTowerLobby_Text_ExplainSinglesChallenge:
-	.string "バトルタワー シングル バトルルームは\n3ひきの ポケモンで\lシングルバトルを おこなう しせつです!\pタワーには シングル バトルルーム という\nたいせんの ための へやが\lたくさん ようい されています!\pそれぞれの シングル バトルルームには\n7にんの トレーナーが いて\lあなたの チャレンジを まっています!\pみごと その 7にんを たおせたら\nバトルポイントを しんてい いたします!\pまた とちゅうで ちょうせんを\nちゅうだん したい ばあいは しっかりと\lレポートに かいて おわらせないと\lちょうせんは むこうに なってしまうので\lじゅうぶん ちゅうい してください!$"
+	.string "バトルタワー シングル バトルルームは\n3匹の ポケモンで\lシングルバトルを 行う 施設です!\pタワーには シングル バトルルーム という\n対戦の ための 部屋が\lたくさん 用意 されています!\pそれぞれの シングル バトルルームには\n7人の トレーナーが いて\lあなたの チャレンジを 待っています!\p見事 その 7人を 倒せたら\nバトルポイントを 進呈 いたします!\pまた 途中で 挑戦を\n中断 したい 場合は しっかりと\lレポートに 書いて 終わらせないと\l挑戦は むこうに なってしまうので\l十分 注意 してください!$"
 
 BattleFrontier_BattleTowerLobby_Text_SelectThreeMons:
-	.string "では さんかする ポケモンを\n3ひき おえらび ください!$"
+	.string "では 参加する ポケモンを\n3匹 お選び ください!$"
 
 BattleFrontier_BattleTowerLobby_Text_WelcomeDoubleBattle:
-	.string "トレーナーの さいのうを はかる ばしょ!\nバトルタワーへ ようこそ!\pこちらでは ダブル バトルルームの\nごあんないを しております!$"
+	.string "トレーナーの 才能を はかる 場所!\nバトルタワーへ ようこそ!\pこちらでは ダブル バトルルームの\nご案内を しております!$"
 
 BattleFrontier_BattleTowerLobby_Text_TakeDoublesChallenge:
-	.string "ダブル バトルルームに\nちょうせん されますか?$"
+	.string "ダブル バトルルームに\n挑戦 されますか?$"
 
 BattleFrontier_BattleTowerLobby_Text_ExplainDoublesChallenge:
-	.string "バトルタワー ダブル バトルルームは\n4ひきの ポケモンで\lダブルバトルを おこなう しせつです!\pタワーには ダブル バトルルーム という\nたいせんの ための へやが\lたくさん ようい されています!\pそれぞれの ダブル バトルルームには\n7にんの トレーナーが いて\lあなたの チャレンジを まっています!\pみごと その 7にんを たおせたら\nバトルポイントを しんてい いたします!\pまた とちゅうで ちょうせんを\nちゅうだん したい ばあいは しっかりと\lレポートに かいて おわらせないと\lちょうせんは むこうに なってしまうので\lじゅうぶん ちゅうい してください!$"
+	.string "バトルタワー ダブル バトルルームは\n4匹の ポケモンで\lダブルバトルを 行う 施設です!\pタワーには ダブル バトルルーム という\n対戦の ための 部屋が\lたくさん 用意 されています!\pそれぞれの ダブル バトルルームには\n7人の トレーナーが いて\lあなたの チャレンジを 待っています!\p見事 その 7人を 倒せたら\nバトルポイントを 進呈 いたします!\pまた 途中で 挑戦を\n中断 したい 場合は しっかりと\lレポートに 書いて 終わらせないと\l挑戦は むこうに なってしまうので\l十分 注意 してください!$"
 
 BattleFrontier_BattleTowerLobby_Text_PleaseSelectFourMons:
-	.string "では さんかする ポケモンを\n4ひき おえらび ください!$"
+	.string "では 参加する ポケモンを\n4匹 お選び ください!$"
 
 BattleFrontier_BattleTowerLobby_Text_WelcomeMultiBattle:
-	.string "トレーナーの さいのうを はかる ばしょ!\nバトルタワーへ ようこそ!\pこちらでは マルチ バトルルームの\nごあんないを しております!$"
+	.string "トレーナーの 才能を はかる 場所!\nバトルタワーへ ようこそ!\pこちらでは マルチ バトルルームの\nご案内を しております!$"
 
 BattleFrontier_BattleTowerLobby_Text_TakeMultisChallenge:
-	.string "マルチ バトルルームに\nちょうせん されますか?$"
+	.string "マルチ バトルルームに\n挑戦 されますか?$"
 
 BattleFrontier_BattleTowerLobby_Text_ExplainMultisChallenge:
-	.string "マルチ バトルルームは タワーに いる\nトレーナーと きょうりょくして\lポケモンを 2ひきずつ もちより\lマルチバトルで たたかう しせつです!\pタワーないには バトルサロン という\nトレーナーの あつまる へやが\lようい されています!\pここで いっしょに タッグを くみたい\nトレーナーを みつけて ください!\pタッグが くめたところで\nマルチ バトルルームへ おつれします!\pこの マルチ バトルルームには\n7くみの タッグ トレーナーが いて\lあなたの チャレンジを まっています!\pみごと その 7くみを たおせたら\nバトルポイントを しんてい いたします!\pまた とちゅうで ちょうせんを\nちゅうだん したい ばあいは しっかりと\lレポートに かいて おわらせないと\lちょうせんは むこうに なってしまうので\lじゅうぶん ちゅうい してください!$"
+	.string "マルチ バトルルームは タワーに いる\nトレーナーと 協力して\lポケモンを 2匹ずつ 持ちより\lマルチバトルで 戦う 施設です!\pタワーないには バトルサロン という\nトレーナーの 集まる 部屋が\l用意 されています!\pここで 一緒に タッグを 組みたい\nトレーナーを 見つけて ください!\pタッグが 組めたところで\nマルチ バトルルームへ お連れします!\pこの マルチ バトルルームには\n7くみの タッグ トレーナーが いて\lあなたの チャレンジを 待っています!\p見事 その 7くみを 倒せたら\nバトルポイントを 進呈 いたします!\pまた 途中で 挑戦を\n中断 したい 場合は しっかりと\lレポートに 書いて 終わらせないと\l挑戦は むこうに なってしまうので\l十分 注意 してください!$"
 
 BattleFrontier_BattleTowerLobby_Text_PleaseSelectTwoMons:
-	.string "では さんかする ポケモンを\n2ひき おえらび ください!$"
+	.string "では 参加する ポケモンを\n2匹 お選び ください!$"
 
 BattleFrontier_BattleTowerLobby_Text_WelcomeLinkMultiBattle:
-	.string "トレーナーの さいのうを はかる ばしょ!\nバトルタワーへ ようこそ!\pこちらでは\nつうしんマルチ バトルルームの\lごあんないを しております!$"
+	.string "トレーナーの 才能を はかる 場所!\nバトルタワーへ ようこそ!\pこちらでは\n通信マルチ バトルルームの\lご案内を しております!$"
 
 BattleFrontier_BattleTowerLobby_Text_TakeLinkMultisChallenge:
-	.string "つうしんマルチ バトルルームに\nちょうせん されますか?$"
+	.string "通信マルチ バトルルームに\n挑戦 されますか?$"
 
 BattleFrontier_BattleTowerLobby_Text_ExplainLinkMultisChallenge:
-	.string "つうしんマルチ バトルルームは\nワイヤレスアダプタや つうしんケーブルを\lつないだ ともだちと ふたりで\lちがう しゅるいの ポケモンを\l2ひきずつ もちより\lマルチバトルで たたかう しせつです!\pタワーないには マルチ バトルルームという\nたいせんの ための へやが\lたくさん ようい されています!\pそれぞれ マルチ バトルルームには\n7くみの タッグ トレーナーが いて\lあなたと ともだちの タッグでの\lチャレンジを まっています!\pみごと その 7くみを たおせたら\nバトルポイントを しんてい いたします!\pまた ほかの しせつと ちがって\nここでは とちゅうで ちょうせんを\lちゅうだん できません!\p7かい れんぞくで たたかうことに なるので\nじゅうぶん ちゅうい してください!$"
+	.string "通信マルチ バトルルームは\nワイヤレスアダプタや 通信ケーブルを\lつないだ 友だちと 二人で\l違う 種類の ポケモンを\l2匹ずつ 持ちより\lマルチバトルで 戦う 施設です!\pタワーないには マルチ バトルルームという\n対戦の ための 部屋が\lたくさん 用意 されています!\pそれぞれ マルチ バトルルームには\n7くみの タッグ トレーナーが いて\lあなたと 友だちの タッグでの\lチャレンジを 待っています!\p見事 その 7くみを 倒せたら\nバトルポイントを 進呈 いたします!\pまた ほかの 施設と ちがって\nここでは 途中で 挑戦を\l中断 できません!\p7かい 連続で 戦うことに なるので\n十分 注意 してください!$"
 
 BattleFrontier_BattleTowerLobby_Text_PleaseSelectTwoMons2:
-	.string "では さんかする ポケモンを\n2ひき おえらび ください!$"
+	.string "では 参加する ポケモンを\n2匹 お選び ください!$"
 
 @ Unused
 BattleFrontier_BattleTowerLobby_Text_ChoseSameMonAsFriend:
-	.string "{JPN}ともだちと\nおなじ ポケモンを えらんでいます!\pともだちの ポケモンと\nちがう しゅるいの ポケモンを\l2ひき えらび\lさんかする レベルを あわせて\lとうろくを やりなおして ください!$"
+	.string "{JPN}友だちと\n同じ ポケモンを 選んでいます!\p友だちの ポケモンと\n違う 種類の ポケモンを\l2匹 選び\l参加する レベルを あわせて\l登録を やりなおして ください!$"
 
 BattleFrontier_BattleTowerLobby_Text_LinkMultiOnlyForTwoPlayers:
-	.string "つうしんマルチ バトルルームは\n{STR_VAR_1}にん では ちょうせん できません!$"
+	.string "通信マルチ バトルルームは\n{STR_VAR_1}人 では 挑戦 できません!$"
 
 BattleFrontier_BattleTowerLobby_Text_FriendAlsoSelectedMon:
-	.string "ともだちも\n{STR_VAR_1}を えらんでいます!$"
+	.string "友だちも\n{STR_VAR_1}を 選んでいます!$"
 
 BattleFrontier_BattleTowerLobby_Text_FriendAlsoSelectedMons:
-	.string "ともだちも\n{STR_VAR_1}と {STR_VAR_2}を\lえらんでいます!$"
+	.string "友だちも\n{STR_VAR_1}と {STR_VAR_2}を\l選んでいます!$"
 
 BattleFrontier_BattleTowerLobby_Text_FriendChoseDifferentLvlMode:
-	.string "ともだちと\nえらんだ レベルが ちがいます!$"
+	.string "友だちと\n選んだ レベルが 違います!$"
 
 @ Unused
 BattleFrontier_BattleTowerLobby_Text_FriendChoseDifferentLvlModeSameMon:
-	.string "{JPN}ともだちと\nえらんだ レベルが ちがいます!\pともだちも\n{STR_VAR_1}を えらんでいます!$"
+	.string "{JPN}友だちと\n選んだ レベルが 違います!\p友だちも\n{STR_VAR_1}を 選んでいます!$"
 
 @ Unused
 BattleFrontier_BattleTowerLobby_Text_FriendChoseDifferentLvlModeSameMons:
-	.string "{JPN}ともだちと\nえらんだ レベルが ちがいます!\pともだちも\n{STR_VAR_1}と {STR_VAR_2}を\lえらんでいます$"
+	.string "{JPN}友だちと\n選んだ レベルが 違います!\p友だちも\n{STR_VAR_1}と {STR_VAR_2}を\l選んでいます$"
 
 BattleFrontier_BattleTowerLobby_Text_ChooseDifferentMonsMatchLvlMode:
-	.string "ともだちの ポケモンと\nちがう しゅるいの ポケモンを\l2ひき えらび\lさんかする レベルを あわせて\lとうろくを やりなおして ください!$"
+	.string "友だちの ポケモンと\n違う 種類の ポケモンを\l2匹 選び\l参加する レベルを あわせて\l登録を やりなおして ください!$"
 
 BattleFrontier_BattleTowerLobby_Text_SaveGameBeforeShowingIn:
-	.string "ごあんないする まえに レポートを かきます\nしばらく おまちください!$"
+	.string "ご案内する 前に レポートを 書きます\nしばらく お待ちください!$"
 
 BattleFrontier_BattleTowerLobby_Text_CongratsDefeatedMaiden:
-	.string "おめでとう ございます!\nタワータイクーンを たおし\lみごと 7にんぬき されましたね!$"
+	.string "おめでとう ございます!\nタワータイクーンを 倒し\l見事 7人ぬき されましたね!$"
 
 BattleFrontier_BattleTowerLobby_Text_AwardYouTheseBattlePoints:
-	.string "おきゃくさまの\nかぎりない さいのうを たたえ\lバトルポイントを しんてい します!$"
+	.string "お客様の\nかぎりない 才能を 称え\lバトルポイントを 進呈 します!$"
 
 BattleFrontier_Text_ObtainedXBattlePoints:
 	.string "{PLAYER}は バトルポイントを\n{STR_VAR_1} BP てにいれた!$"
 
 BattleFrontier_BattleTowerLobby_Text_RulesAreListed:
-	.string "バトルタワーの\nルールが かかれている!$"
+	.string "バトルタワーの\nルールが 書かれている!$"
 
 BattleFrontier_BattleTowerLobby_Text_ReadWhichHeading:
-	.string "どの せつめいを よみますか?$"
+	.string "どの 説明を 読みますか?$"
 
 BattleFrontier_BattleTowerLobby_Text_ExplainTowerRules:
-	.string "バトルタワーは\nシングルバトル ダブルバトル マルチバトル\lつうしんマルチバトル というように\l4つの たたかいが\lおこなわれる しせつです\pそれぞれの たたかい ごとに\nバトルルームと よばれる\lたいせんの へやが ようい されています\pちょうせん したい たたかいの うけつけに\nはなしかけて いどみましょう$"
+	.string "バトルタワーは\nシングルバトル ダブルバトル マルチバトル\l通信マルチバトル というように\l4つの 戦いが\l行われる 施設です\pそれぞれの 戦い ごとに\nバトルルームと 呼ばれる\l対戦の 部屋が 用意 されています\p挑戦 したい 戦いの 受付に\n話しかけて 挑みましょう$"
 
 BattleFrontier_BattleTowerLobby_Text_ExplainMonRules:
-	.string "ちょうせんする バトルルーム ごとに\nつれていく ポケモンの かずが かわります\pシングルでは 3ひき\nダブルでは 4ひき\lマルチでは 2ひき と なっています$"
+	.string "挑戦する バトルルーム ごとに\nつれていく ポケモンの かずが 代わります\pシングルでは 3匹\nダブルでは 4匹\lマルチでは 2匹 と なっています$"
 
 BattleFrontier_BattleTowerLobby_Text_ExplainSalonRules:
-	.string "バトルサロンは マルチバトルで\nタッグを くむ あいてを さがす へやです\pトレーナーの ポケモンや わざなどを みて\nベストな あいてを えらびましょう\pまた タッグを くむ あいては\n7れんしょう ごとに えらび なおします$"
+	.string "バトルサロンは マルチバトルで\nタッグを 組む 相手を 探す 部屋です\pトレーナーの ポケモンや 技などを 見て\nベストな 相手を 選びましょう\pまた タッグを 組む 相手は\n7れんしょう ごとに 選び なおします$"
 
 BattleFrontier_BattleTowerLobby_Text_ExplainMultiLinkRules:
-	.string "つうしんマルチ では\nワイヤレスアダプタや つうしんケーブルを\lつないだ ともだちと ふたりで\lちょうせん することが できます\pうけつけで 2ひきを えらびますが\nともだちと おなじ ポケモンでは\lさんかする ことが できません\pまた ここでは たたかいの とちゅうで\nやすむ ことは できません$"
+	.string "通信マルチ では\nワイヤレスアダプタや 通信ケーブルを\lつないだ 友だちと 二人で\l挑戦 することが できます\p受付で 2匹を 選びますが\n友だちと 同じ ポケモンでは\l参加する ことが できません\pまた ここでは 戦いの 途中で\n休む ことは できません$"

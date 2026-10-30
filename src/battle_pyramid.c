@@ -1,4 +1,5 @@
 #include "global.h"
+#include "frontier_util.h"
 #include "battle_pyramid.h"
 #include "battle_pyramid_bag.h"
 #include "event_data.h"
@@ -1712,7 +1713,8 @@ void SoftResetInBattlePyramid(void)
 
 void CopyPyramidTrainerSpeechBefore(u16 trainerId)
 {
-    FrontierSpeechToString(gFacilityTrainers[trainerId].speechBefore);
+    if (!CopyFrontierTrainerOwnText(FRONTIER_BEFORE_TEXT, trainerId))
+        FrontierSpeechToString(gFacilityTrainers[trainerId].speechBefore);
 }
 
 u8 GetTrainerEncounterMusicIdInBattlePyramid(u16 trainerId)

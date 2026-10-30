@@ -164,29 +164,30 @@ BattleFrontier_OutsideEast_EventScript_OldWomanSudowoodoGone::
 	end
 
 BattleFrontier_OutsideEast_Text_BattleTowerSign:
-	.string "ここは バトルタワー!\nかちぬけ! さいきょう トレーナー!$"
+	.string "ここは バトルタワー!\n勝ちぬけ! 最強 トレーナー!$"
 
 BattleFrontier_OutsideEast_Text_BattlePalaceSign:
 	.string "ここは バトルパレス!\nみまもれ! ポケモンバトル!$"
 
 BattleFrontier_OutsideEast_Text_BattleArenaSign:
-	.string "ここは バトルアリーナ!\nつどえ! さいきょう チーム!$"
+	.string "ここは バトルアリーナ!\nつどえ! 最強 チーム!$"
 
 BattleFrontier_OutsideEast_Text_BattlePyramidSign:
-	.string "ここは バトルピラミッド!\nすすめ! バトルアドベンチャー!$"
+	.string "ここは バトルピラミッド!\n進め! バトルアドベンチャー!$"
 
 BattleFrontier_OutsideEast_Text_RankingHallSign:
-	.string "バトルフロンティア ランキングホール\nきざめ! さいこうの きろく!$"
+	.string "バトルフロンティア ランキングホール\nきざめ! 最高の 記録!$"
 
 BattleFrontier_OutsideEast_Text_ExchangeCornerSign:
-	.string "バトルポイント ひきかえサービス コーナー\nひきかえろ! キミの バトルポイント!$"
+	.string "バトルポイント 引き換えサービス コーナー\n"
+	.string "引き換えろ! キミの バトルポイント!$"
 
 BattleFrontier_OutsideEast_Text_ZigzagoonLooksVacant:
-	.string "{JPN}ジグザグマは のんびりしている。\nだれかの おやつの じかんを\lまっているようだ。$"
+	.string "{JPN}ジグザグマは のんびりしている。\nだれかの おやつの 時間を\l待っているようだ。$"
 
 BattleFrontier_OutsideEast_Text_OddTreeHereSeemsToWiggle:
-	.string "{JPN}あの きが ゆれるのを みると\nなんだか わしまで むずむずするんじゃ。\pおまえさんも ちょいと\nみていって おくれ。$"
+	.string "{JPN}あの きが ゆれるのを 見ると\nなんだか わしまで むずむずするんじゃ。\pおまえさんも ちょいと\n見ていって 遅れ。$"
 
 BattleFrontier_OutsideEast_Text_OnceAnOddTreePastHere:
-	.string "{JPN}あそこに へんな きが あったじゃろ。\nいまも そこに いる きぶんになるのう。\pおや きみも おぼえているかい？$"
+	.string "{JPN}あそこに へんな きが あったじゃろ。\n今も そこに いる きぶんになるのう。\pおや きみも 覚えているかい？$"
 

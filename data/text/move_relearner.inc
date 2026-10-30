@@ -1,6 +1,6 @@
 MoveRelearner_Text_WouldLearnNewMoves:
-	.string "ぼく わざマニア\n"
-	.string "どの しゅるいの わざに するんだい?$"
+	.string "ぼく 技マニア\n"
+	.string "どの 種類の 技に するんだい?$"
 
 MoveRelearner_Text_LevelUpMoves:
 	.string "{JPN}レベルアップ$"
@@ -12,28 +12,28 @@ MoveRelearner_Text_TMMoves:
 	.string "{JPN}わざマシン$"
 
 MoveRelearner_Text_TutormoveMoves:
-	.string "{JPN}おしえわざ$"
+	.string "{JPN}教えわざ$"
 
 MoveRelearner_Text_ForgetMoves:
-	.string "{JPN}わざを わすれる$"
+	.string "{JPN}技を 忘れる$"
 
 MoveRelearner_Text_ChooseMoveToForget:
-	.string "{JPN}どの わざを\nわすれさせるんだい？$"
+	.string "{JPN}どの 技を\n忘れさせるんだい？$"
 
 MoveRelearner_Text_ConfirmForgetMove:
-	.string "{JPN}{STR_VAR_1}の {STR_VAR_2}を\nわすれさせても いいかい？$"
+	.string "{JPN}{STR_VAR_1}の {STR_VAR_2}を\n忘れさせても いいかい？$"
 
 MoveRelearner_Text_ForgotMove:
-	.string "{JPN}{STR_VAR_1}は {STR_VAR_2}を\nきれいに わすれた！$"
+	.string "{JPN}{STR_VAR_1}は {STR_VAR_2}を\nきれいに 忘れた！$"
 
 MoveRelearner_Text_CantForgetMove:
-	.string "{JPN}ごめんね……\nわざを わすれさせられないよ$"
+	.string "{JPN}ごめんね……\n技を 忘れさせられないよ$"
 
 MoveRelearner_Text_SeeYa:
 	.string "{JPN}やめる$"
 
 MoveRelearner_Text_AnythingElse:
-	.string "どの しゅるいの わざに するんだい？$"
+	.string "どの 種類の 技に するんだい？$"
 
 MoveRelearner_Text_ChoosePkmn:
 	.string "どの ポケモンに するんだい?$"
@@ -42,10 +42,10 @@ MoveRelearner_Text_HaveNoPkmn:
 	.string "ポケモンが いないよ$"
 
 MoveRelearner_Text_CantTeachMoveToEgg:
-	.string "えっ?\nタマゴに おしえられる わざは ないよ$"
+	.string "えっ?\nタマゴに 教えられる 技は ないよ$"
 
 MoveRelearner_Text_CantTeachMoveToPkmn:
-	.string "ごめんね……\pぼくが その ポケモンに\nおしえられる わざは ないみたいだよ$"
+	.string "ごめんね……\pぼくが その ポケモンに\n教えられる 技は ないみたいだよ$"
 
 MoveRelearner_Text_LevelUpMoveLWR::
 	.string "{JPN}レベルアップわざ$"
@@ -57,7 +57,7 @@ MoveRelearner_Text_TMMoveLWR::
 	.string "{JPN}わざマシン$"
 
 MoveRelearner_Text_TutorMoveLWR::
-	.string "{JPN}おしえわざ$"
+	.string "{JPN}教えわざ$"
 
 MoveRelearner_Text_MoveLWR::
 	.string "{JPN}わざ$"

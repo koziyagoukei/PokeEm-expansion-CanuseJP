@@ -211,53 +211,58 @@ LilycoveCity_LilycoveMuseum_2F_EventScript_ShowToughPainting::
 	end
 
 LilycoveCity_LilycoveMuseum_2F_Text_ThisIsExhibitHall:
-	.string "ここは とくべつ てんじしつ です$"
+	.string "ここは 特別 てんじしつ です$"
 
 LilycoveCity_LilycoveMuseum_2F_Text_ExplainExhibitHall:
-	.string "ごらんの とおり まだ\nえが かざられて おりません\pここには 1かいに あるような\nいわゆる めいが といった ものとは\lちがう えを かざりたいの ですよ!\pふるい めいが ばかりが\nげいじゅつ なのでは ありません!\pこの てんじしつ には……\pいまにも ポケモンが とびだして きそうな\nモダンで いきいきとした さくひんを\lかざって みたいのです!$"
+	.string "ごらんの とおり まだ\nえが かざられて おりません\pここには 1かいに あるような\nいわゆる めいが といった ものとは\l違う えを かざりたいの ですよ!\p古い めいが ばかりが\nげいじゅつ なのでは ありません!\pこの てんじしつ には……\pいまにも ポケモンが とびだして きそうな\nモダンで いきいきとした さくひんを\lかざって みたいのです!$"
 
 LilycoveCity_LilycoveMuseum_2F_Text_PleaseObtainPaintingsForExhibit:
-	.string "つい ながながと しつれい しました\pあなたは まだ おわかいし\nたびを なさって いる ようだから\pいきいきとした ポケモンや\nそれを えがいた すてきな さくひんに\lであわれる かも しれません!\pもし そんな さくひんに であったら\nそのえを ここに かざれる ように\lあなたから おねがい して くださると\lたいへん うれしいです$"
+	.string "つい ながながと 失礼 しました\pあなたは まだ おわかいし\nたびを なさって いる ようだから\pいきいきとした ポケモンや\nそれを えがいた すてきな さくひんに\lであわれる かも しれません!\pもし そんな さくひんに であったら\nそのえを ここに かざれる ように\lあなたから おねがい して くださると\l大変 うれしいです$"
 
 LilycoveCity_LilycoveMuseum_2F_Text_WishToFillExhibit:
-	.string "この てんじしつ には\nげんだいの いきいき とした ポケモンの\lえを かざりたい ものです$"
+	.string "この 展示室 には\n"
+	.string "現代の 生き生き とした ポケモンの\l"
+	.string "絵を 飾りたい ものです$"
 
 LilycoveCity_LilycoveMuseum_2F_Text_ThanksAddedNewPainting:
-	.string "おかげさまで えを\nかざる ことが できましたよ!\pあなたの ポケモン なんですって ね!\nほんとうに すばらしい です!\pどうも ありがとう……!$"
+	.string "おかげさまで えを\nかざる ことが できましたよ!\pあなたの ポケモン なんですって ね!\n本当に すばらしい です!\pどうも ありがとう……!$"
 
 LilycoveCity_LilycoveMuseum_2F_Text_ItsYouPlayer:
 	.string "あ あなた! {PLAYER}さん!$"
 
 LilycoveCity_LilycoveMuseum_2F_Text_PaintingsAttractedMoreGuests:
-	.string "どうです みて ください!\nこの すばらしい さくひん たちを!\pどれも おたがいに\nひけをとらない すばらしさ!\pこの えの おかげで びじゅつかんに\nこられる かたも ふえたんです!\pほんとうに ありがとう {PLAYER}さん!\nわたしの ゆめが かないました!$"
+	.string "どうです 見て ください!\nこの すばらしい さくひん たちを!\pどれも おたがいに\nひけをとらない すばらしさ!\pこの えの おかげで びじゅつかんに\nこられる かたも 増えたんです!\p本当に ありがとう {PLAYER}さん!\nわたしの 夢が かないました!$"
 
 LilycoveCity_LilycoveMuseum_2F_Text_TokenOfGratitude:
-	.string "……これは わたしからの\nおれいの きもち です!$"
+	.string "……これは わたしからの\nおれいの 気持ち です!$"
 
 LilycoveCity_LilycoveMuseum_2F_Text_KeepThisForYou:
-	.string "それでは また いらした ときに\nさしあげましょう$"
+	.string "それでは また いらした ときに\n差し上げましょう$"
 
 LilycoveCity_LilycoveMuseum_2F_Text_HonorToHaveYouVisit:
-	.string "やあ これは {PLAYER}さん!\pおいそがしい たびの あいまに\nおたちより くださって こうえいです!\pどうぞ ごゆっくり おすごしくださいね$"
+	.string "やあ これは {PLAYER}さん!\p"
+	.string "お忙しい 旅の 合間に\n"
+	.string "お立ち寄り くださって 光栄です!\p"
+	.string "どうぞ ごゆっくり お過ごしくださいね$"
 
 LilycoveCity_LilycoveMuseum_2F_Text_ItsPinkPictureFrame:
-	.string "ももいろの かざりが ついた がくぶちだ!$"
+	.string "桃色の 飾りが ついた 額縁だ!$"
 
 LilycoveCity_LilycoveMuseum_2F_Text_ItsYellowPictureFrame:
-	.string "きいろの かざりが ついた がくぶちだ!$"
+	.string "黄色の 飾りが ついた 額縁だ!$"
 
 LilycoveCity_LilycoveMuseum_2F_Text_ItsBluePictureFrame:
-	.string "あおい かざりが ついた がくぶちだ!$"
+	.string "青い 飾りが ついた 額縁だ!$"
 
 LilycoveCity_LilycoveMuseum_2F_Text_ItsRedPictureFrame:
-	.string "あかい かざりが ついた がくぶちだ!$"
+	.string "赤い 飾りが ついた 額縁だ!$"
 
 LilycoveCity_LilycoveMuseum_2F_Text_ItsGreenPictureFrame:
-	.string "みどりいろの かざりが ついた がくぶちだ!$"
+	.string "緑色の 飾りが ついた 額縁だ!$"
 
 LilycoveCity_LilycoveMuseum_2F_Text_ItsPaintingOfPokemon:
-	.string "ポケモンの えが かざってある!$"
+	.string "ポケモンの 絵が 飾ってある!$"
 
 LilycoveCity_LilycoveMuseum_2F_Text_ThesePaintingsOfYourPokemon:
-	.string "へえー! これって\nきみの ポケモンの えなんだ!\pそれって トレーナー として\nさいこうの しあわせ だよな!$"
+	.string "へえー! これって\nきみの ポケモンの えなんだ!\pそれって トレーナー として\n最高の しあわせ だよな!$"
 

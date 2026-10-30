@@ -120,29 +120,29 @@ BattleFrontier_BattlePalaceCorridor_Movement_AttendantEnterBattleRoom:
 	step_end
 
 BattleFrontier_BattlePalaceCorridor_Text_PeopleAndMonAreSame:
-	.string "ひとも ポケモンも みな おなじ……\pそれぞれの せいかくに よって\nとくいなこと にがてなことが ある……"
+	.string "ひとも ポケモンも みな 同じ……\pそれぞれの 性格に よって\n得意なこと 苦手なことが ある……"
 	.string ""
 	.string ""
 	.string ""
 	.string "$"
 
 BattleFrontier_BattlePalaceCorridor_Text_LetMonDoWhatItLikes:
-	.string "にがてなこと よりも とくいな こと……\pポケモンの きもちに なって\nおぼえさせる わざを かんがえて みろ"
+	.string "苦手なこと よりも 得意な こと……\pポケモンの 気持ちに なって\n覚えさせる 技を 考えて みろ"
 	.string ""
 	.string ""
 	.string ""
 	.string "$"
 
 BattleFrontier_BattlePalaceCorridor_Text_MonDifferentWhenCornered:
-	.string "せいかくとは ふしぎな ものだ……\pおいつめられる ことで ガラッと\nこうどうが かわる ものも おる……"
+	.string "性格とは 不思議な ものだ……\pおいつめられる ことで ガラッと\nこうどうが 変わる ものも おる……"
 	.string ""
 	.string ""
 	.string "$"
 
 BattleFrontier_BattlePalaceCorridor_Text_BeginningToUnderstandNature:
-	.string "…… そろそろ ポケモンの せいかくを\nみきわめられる ように なってきたか?"
+	.string "…… そろそろ ポケモンの 性格を\nみきわめられる ように なってきたか?"
 	.string "$"
 
 BattleFrontier_BattlePalaceCorridor_Text_HeartfeltBondBetweenYouAndMons:
-	.string "おお…… おぬしと ポケモンの あいだに\nつよい こころの きずなが みえる……"
+	.string "おお…… おぬしと ポケモンの あいだに\n強い 心の きずなが 見える……"
 	.string "$"
