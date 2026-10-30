@@ -3605,6 +3605,11 @@ u16 GetRandomFrontierMonFromFullPoolWithFilter(const u16 *selectedMonIds, u8 sel
     u16 target;
     u32 draw;
 
+    // The pool checks read species and items through gFacilityTrainerMons. Callers such as the
+    // Dome's tournament setup draw before setting the facility pointers, and a stale pointer
+    // let banned species through the restricted-legendary rule.
+    gFacilityTrainerMons = gBattleFrontierMons;
+
     for (draw = 0; draw < FRONTIER_MON_RANDOM_DRAWS; draw++)
     {
         monId = Random() % NUM_FRONTIER_MONS;

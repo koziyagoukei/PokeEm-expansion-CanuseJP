@@ -1922,6 +1922,8 @@ static void InitDomeTrainers(void)
     rankingScores = AllocZeroed(sizeof(u16) * DOME_TOURNAMENT_TRAINERS_COUNT);
     statValues = AllocZeroed(sizeof(int) * NUM_STATS);
 
+    // The trainer and party picks below read the facility tables.
+    SetFacilityPtrsGetLevel();
     gSaveBlock2Ptr->frontier.domeLvlMode = gSaveBlock2Ptr->frontier.lvlMode + 1;
     gSaveBlock2Ptr->frontier.domeBattleMode = VarGet(VAR_FRONTIER_BATTLE_MODE) + 1;
     DOME_TRAINERS[0].trainerId = TRAINER_PLAYER;
