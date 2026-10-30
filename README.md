@@ -139,6 +139,7 @@ make -j4 --output-sync=target
 | タイトル・オープニング関連の抽出 | [bpej_intro_extraction.md](docs/bpej_intro_extraction.md) |
 | ポケナビ関連の抽出 | [bpej_pokenav_extraction.md](docs/bpej_pokenav_extraction.md) |
 | 日本版ROMのテキストを参考にした日本語化 | [bpej_text_localization.md](docs/bpej_text_localization.md) |
+| きのみ・タグ・ブレンダー・クラッシュ画像の抽出 | [bpej_berry_extraction.md](docs/bpej_berry_extraction.md) |
 | Poké Corpusを使った誤訳・未翻訳の点検 | [poke_corpus_localization.md](docs/poke_corpus_localization.md) |
 | 漢字表示の試作・表示確認と制約 | [kanji_font_poc.md](docs/kanji_font_poc.md) |
 | 漢字の自動検出・生成と保存/通信データ検査 | [kanji.md](docs/kanji.md) |

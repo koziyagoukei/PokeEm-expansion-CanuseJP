@@ -579,16 +579,16 @@ static const u32 sPressingSpeedConversionTable[] =
       390625  //  0.390625
 };
 
-static const u16 sCrusherBase_Pal[]     = INCGFX_U16("graphics/berry_crush/crusher_base.png", ".gbapal");
-static const u16 sEffects_Pal[]         = INCGFX_U16("graphics/berry_crush/effects.pal", ".gbapal");
-static const u16 sTimerDigits_Pal[]     = INCGFX_U16("graphics/berry_crush/timer_digits.png", ".gbapal");
-static const u32 sCrusherBase_Gfx[]     = INCGFX_U32("graphics/berry_crush/crusher_base.png", ".4bpp.smol");
-static const u32 sImpact_Gfx[]          = INCGFX_U32("graphics/berry_crush/impact.png", ".4bpp.smol");
-static const u32 sSparkle_Gfx[]         = INCGFX_U32("graphics/berry_crush/sparkle.png", ".4bpp.smol");
-static const u32 sTimerDigits_Gfx[]     = INCGFX_U32("graphics/berry_crush/timer_digits.png", ".4bpp.smol");
-static const u8 sCrusherTop_Tilemap[]   = INCBIN_U8("graphics/berry_crush/crusher_top.bin.smolTM");
-static const u8 sContainerCap_Tilemap[] = INCBIN_U8("graphics/berry_crush/container_cap.bin.smolTM");
-static const u8 sBg_Tilemap[]           = INCBIN_U8("graphics/berry_crush/bg.bin.smolTM");
+static const u16 sCrusherBase_Pal[]     = INCBIN_U16("build/extracted_berry/crush/sCrusherBase_Pal.gbapal");
+static const u16 sEffects_Pal[]         = INCBIN_U16("build/extracted_berry/crush/sEffects_Pal.gbapal");
+static const u16 sTimerDigits_Pal[]     = INCBIN_U16("build/extracted_berry/crush/sTimerDigits_Pal.gbapal");
+static const u32 sCrusherBase_Gfx[]     = INCBIN_U32("build/extracted_berry/crush/sCrusherBase_Gfx.bin.lz");
+static const u32 sImpact_Gfx[]          = INCBIN_U32("build/extracted_berry/crush/sImpact_Gfx.bin.lz");
+static const u32 sSparkle_Gfx[]         = INCBIN_U32("build/extracted_berry/crush/sSparkle_Gfx.bin.lz");
+static const u32 sTimerDigits_Gfx[]     = INCBIN_U32("build/extracted_berry/crush/sTimerDigits_Gfx.bin.lz");
+static const u8 sCrusherTop_Tilemap[]   = INCBIN_U8("build/extracted_berry/crush/sCrusherTop_Tilemap.bin.lz");
+static const u8 sContainerCap_Tilemap[] = INCBIN_U8("build/extracted_berry/crush/sContainerCap_Tilemap.bin.lz");
+static const u8 sBg_Tilemap[]           = INCBIN_U8("build/extracted_berry/crush/sBg_Tilemap.bin.lz");
 
 // Takes the number of players - 2 and a player id and returns the
 // index into sPlayerCoords where that player should be seated
@@ -1217,7 +1217,12 @@ static s32 ShowGameDisplay(void)
         gPaletteFade.bufferTransferDisabled = TRUE;
         break;
     case 7:
-        LoadPalette(gBerryCrush_Crusher_Pal, BG_PLTT_ID(0), 12 * PLTT_SIZE_4BPP);
+        // BPEJ's 12 banks span four adjacent arrays. Do not read 96 bytes past
+        // the nine-bank background palette when the linker separates them.
+        LoadPalette(gBerryCrush_Crusher_Pal, BG_PLTT_ID(0), 9 * PLTT_SIZE_4BPP);
+        LoadPalette(sCrusherBase_Pal, BG_PLTT_ID(9), sizeof(sCrusherBase_Pal));
+        LoadPalette(sEffects_Pal, BG_PLTT_ID(10), sizeof(sEffects_Pal));
+        LoadPalette(sTimerDigits_Pal, BG_PLTT_ID(11), sizeof(sTimerDigits_Pal));
         CopyToBgTilemapBuffer(1, sCrusherTop_Tilemap, 0, 0);
         CopyToBgTilemapBuffer(2, sContainerCap_Tilemap, 0, 0);
         CopyToBgTilemapBuffer(3, sBg_Tilemap, 0, 0);

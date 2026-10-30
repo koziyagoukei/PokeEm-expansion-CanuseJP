@@ -1627,9 +1627,9 @@ const u32 gBattleAnimBgTilemap_ZMoveMountain[] = INCGFX_U32("graphics/battle_ani
 const u16 gBattleAnimBgPalette_SteelBeam[] = INCGFX_U16("graphics/battle_anims/backgrounds/steel_beam.pal", ".gbapal");
 
 // misc
-const u32 gBerryBlenderCenter_Gfx[] = INCGFX_U32("graphics/berry_blender/center.png", ".8bpp.smol");
-const u32 gBerryBlenderOuter_Gfx[] = INCGFX_U32("graphics/berry_blender/outer.png", ".4bpp.smol");
-const u32 gBerryBlenderOuter_Tilemap[] = INCGFX_U32("graphics/berry_blender/outer_map.bin", ".smolTM");
+const u32 gBerryBlenderCenter_Gfx[] = INCBIN_U32("build/extracted_berry/blender/gBerryBlenderCenter_Gfx.bin.lz");
+const u32 gBerryBlenderOuter_Gfx[] = INCBIN_U32("build/extracted_berry/blender/gBerryBlenderOuter_Gfx.bin.lz");
+const u32 gBerryBlenderOuter_Tilemap[] = INCBIN_U32("build/extracted_berry/blender/gBerryBlenderOuter_Tilemap.bin.lz");
 
 const u16 gBattleAnimBgPalette_Cosmic[] = INCGFX_U16("graphics/battle_anims/backgrounds/cosmic.png", ".gbapal");
 const u32 gBattleAnimBgImage_Cosmic[] = INCGFX_U32("graphics/battle_anims/backgrounds/cosmic.png", ".4bpp.smol");
@@ -1920,16 +1920,16 @@ const u8 gPokenavConditionCancel_Gfx[] = INCBIN_U8("build/extracted_contest/poke
 const u16 gMonMarkingsMenu_Pal[] = INCGFX_U16("graphics/interface/mon_markings_menu.png", ".gbapal");
 const u8 gMonMarkingsMenu_Gfx[] = INCGFX_U8("graphics/interface/mon_markings_menu.png", ".4bpp");
 
-const u16 gBerryBlenderMiscPalette[] = INCGFX_U16("graphics/berry_blender/misc.pal", ".gbapal");
-const u16 gBerryBlenderArrowPalette[] = INCGFX_U16("graphics/berry_blender/arrow.png", ".gbapal");
-const u8 gBerryBlenderBetaArrow_Gfx[] = INCGFX_U8("graphics/berry_blender/arrow_old.png", ".4bpp"); //unused
-const u8 gBerryBlenderScoreSymbols_Gfx[] = INCGFX_U8("graphics/berry_blender/score_symbols.png", ".4bpp");
-const u8 gBerryBlenderParticles_Gfx[] = INCGFX_U8("graphics/berry_blender/particles.png", ".4bpp");
+const u16 gBerryBlenderMiscPalette[] = INCBIN_U16("build/extracted_berry/blender/gBerryBlenderMiscPalette.gbapal");
+const u16 gBerryBlenderArrowPalette[] = INCBIN_U16("build/extracted_berry/blender/gBerryBlenderArrowPalette.gbapal");
+const u8 gBerryBlenderBetaArrow_Gfx[] = INCBIN_U8("build/extracted_berry/blender/gBerryBlenderBetaArrow_Gfx.bin"); //unused
+const u8 gBerryBlenderScoreSymbols_Gfx[] = INCBIN_U8("build/extracted_berry/blender/gBerryBlenderScoreSymbols_Gfx.bin");
+const u8 gBerryBlenderParticles_Gfx[] = INCBIN_U8("build/extracted_berry/blender/gBerryBlenderParticles_Gfx.bin");
 static const u8 sEmpty0[0x120] = {0};
-const u8 gBerryBlenderCountdownNumbers_Gfx[] = INCGFX_U8("graphics/berry_blender/countdown_numbers.png", ".4bpp");
-const u8 gBerryBlenderStart_Gfx[] = INCGFX_U8("graphics/berry_blender/start.png", ".4bpp");
+const u8 gBerryBlenderCountdownNumbers_Gfx[] = INCBIN_U8("build/extracted_berry/blender/gBerryBlenderCountdownNumbers_Gfx.bin");
+const u8 gBerryBlenderStart_Gfx[] = INCBIN_U8("build/extracted_berry/blender/gBerryBlenderStart_Gfx.bin");
 static const u8 sEmpty1[0x200] = {0};
-const u8 gBerryBlenderPlayerArrow_Gfx[] = INCGFX_U8("graphics/berry_blender/arrow.png", ".4bpp");
+const u8 gBerryBlenderPlayerArrow_Gfx[] = INCBIN_U8("build/extracted_berry/blender/gBerryBlenderPlayerArrow_Gfx.bin");
 static const u8 sEmpty2[0x2C0] = {0};
 
 const u16 gEasyChatRectangleCursor_Pal[] = INCGFX_U16("graphics/easy_chat/rectangle_cursor.png", ".gbapal");
@@ -2124,9 +2124,9 @@ const u32 gFrontierPassCancelButton_Tilemap[]            = INCBIN_U32("graphics/
 const u32 gFrontierPassCancelButtonHighlighted_Tilemap[] = INCBIN_U32("graphics/frontier_pass/cancel_highlighted.bin");
 
 // Berry Crush
-const u16 gBerryCrush_Crusher_Pal[] = INCGFX_U16("graphics/berry_crush/crusher.png", ".gbapal");
-const u32 gBerryCrush_Crusher_Gfx[] = INCGFX_U32("graphics/berry_crush/crusher.png", ".4bpp.smol");
-const u32 gBerryCrush_TextWindows_Tilemap[] = INCGFX_U32("graphics/berry_crush/text_windows.bin", ".smolTM");
+const u16 gBerryCrush_Crusher_Pal[] = INCBIN_U16("build/extracted_berry/crush/gBerryCrush_Crusher_Pal.gbapal");
+const u32 gBerryCrush_Crusher_Gfx[] = INCBIN_U32("build/extracted_berry/crush/gBerryCrush_Crusher_Gfx.bin.lz");
+const u32 gBerryCrush_TextWindows_Tilemap[] = INCBIN_U32("build/extracted_berry/crush/gBerryCrush_TextWindows_Tilemap.bin.lz");
 
 const u32 gBattleIcons_Gfx1[] = INCGFX_U32("graphics/types/battle_icons1.png", ".4bpp.smol");
 const u32 gBattleIcons_Gfx2[] = INCGFX_U32("graphics/types/battle_icons2.png", ".4bpp.smol");
