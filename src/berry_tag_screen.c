@@ -93,7 +93,7 @@ static const struct BgTemplate sBackgroundTemplates[] =
   }
 };
 
-static const u16 sFontPalette[] = INCGFX_U16("graphics/bag/berry_tag_screen.pal", ".gbapal");
+static const u16 sFontPalette[] = INCBIN_U16("build/extracted_berry/tag/sFontPalette.gbapal");
 
 static const u8 sTextColors[2][3] =
 {
@@ -473,11 +473,12 @@ static void DestroyBerrySprite(void)
 
 static void CreateFlavorCircleSprites(void)
 {
-    sBerryTag->flavorCircleIds[FLAVOR_SPICY] = CreateBerryFlavorCircleSprite(64);
-    sBerryTag->flavorCircleIds[FLAVOR_DRY] = CreateBerryFlavorCircleSprite(104);
-    sBerryTag->flavorCircleIds[FLAVOR_SWEET] = CreateBerryFlavorCircleSprite(144);
-    sBerryTag->flavorCircleIds[FLAVOR_BITTER] = CreateBerryFlavorCircleSprite(184);
-    sBerryTag->flavorCircleIds[FLAVOR_SOUR] = CreateBerryFlavorCircleSprite(224);
+    // Match the complete Japanese tilemap instead of the English label grid.
+    sBerryTag->flavorCircleIds[FLAVOR_SPICY] = CreateBerryFlavorCircleSprite(60);
+    sBerryTag->flavorCircleIds[FLAVOR_DRY] = CreateBerryFlavorCircleSprite(92);
+    sBerryTag->flavorCircleIds[FLAVOR_SWEET] = CreateBerryFlavorCircleSprite(124);
+    sBerryTag->flavorCircleIds[FLAVOR_BITTER] = CreateBerryFlavorCircleSprite(156);
+    sBerryTag->flavorCircleIds[FLAVOR_SOUR] = CreateBerryFlavorCircleSprite(188);
 }
 
 static void SetFlavorCirclesVisiblity(void)

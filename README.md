@@ -132,6 +132,7 @@ make -j4 --output-sync=target
 | --- | --- |
 | 環境構築・ビルド手順 | [INSTALL.md](INSTALL.md) |
 | Expansionの機能 | [FEATURES.md](FEATURES.md) |
+| きのみ・タグ・ブレンダー・クラッシュ画像の抽出 | [bpej_berry_extraction.md](docs/bpej_berry_extraction.md) |
 | Poké Corpusを使った誤訳・未翻訳の点検 | [poke_corpus_localization.md](docs/poke_corpus_localization.md) |
 | 図鑑説明文のかな／漢字切り替え | [pokedex_kanji.md](docs/pokedex_kanji.md) |
 | 漢字表示の試作・表示確認と制約 | [kanji_font_poc.md](docs/kanji_font_poc.md) |

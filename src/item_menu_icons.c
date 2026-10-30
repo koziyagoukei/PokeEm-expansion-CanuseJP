@@ -325,10 +325,10 @@ static const struct OamData sBerryCheckCircleOamData =
     .objMode = ST_OAM_OBJ_NORMAL,
     .mosaic = FALSE,
     .bpp = ST_OAM_4BPP,
-    .shape = SPRITE_SHAPE(64x64),
+    .shape = SPRITE_SHAPE(32x32),
     .x = 0,
     .matrixNum = 0,
-    .size = SPRITE_SIZE(64x64),
+    .size = SPRITE_SIZE(32x32),
     .tileNum = 0,
     .priority = 1,
     .paletteNum = 0,
@@ -628,5 +628,6 @@ void FreeBerryIconSpritePalette(u32 berryId)
 
 u8 CreateBerryFlavorCircleSprite(s16 x)
 {
-    return CreateSprite(&sBerryCheckCircleSpriteTemplate, x, 116, 0);
+    // BPEJ uses a 32x32 frame centred on the Japanese flavor labels.
+    return CreateSprite(&sBerryCheckCircleSpriteTemplate, x, 99, 0);
 }
