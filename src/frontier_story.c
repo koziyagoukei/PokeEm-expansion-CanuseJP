@@ -132,6 +132,23 @@ static const u8 *GetNamedName(u32 id)
     return sNamedStoryTexts[id].name;
 }
 
+// For the debug menu: id is NAMED_STORY_* order (guests, then Brains), state NAMED_STORY_INFECTED..RESCUED.
+const u8 *FrontierStory_GetNamedName(u32 id)
+{
+    return id < NAMED_STORY_COUNT ? GetNamedName(id) : COMPOUND_STRING("");
+}
+
+u32 FrontierStory_GetNamedState(u32 id)
+{
+    return id < NAMED_STORY_COUNT ? GetNamedState(id) : NAMED_STORY_INFECTED;
+}
+
+void FrontierStory_SetNamedState(u32 id, u32 state)
+{
+    if (id < NAMED_STORY_COUNT && state <= NAMED_STORY_RESCUED)
+        SetNamedState(id, state);
+}
+
 static u16 GetNamedObjectGfx(u32 id)
 {
     if (id < NAMED_STORY_GUEST_COUNT)

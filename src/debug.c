@@ -8,6 +8,7 @@
 #include "data.h"
 #include "daycare.h"
 #include "debug.h"
+#include "frontier_story.h"
 #include "frontier_util.h"
 #include "decoration.h"
 #include "decoration_inventory.h"
@@ -57,6 +58,7 @@
 #include "constants/abilities.h"
 #include "constants/battle_ai.h"
 #include "constants/battle_frontier.h"
+#include "constants/frontier_story.h"
 #include "constants/coins.h"
 #include "constants/decorations.h"
 #include "constants/event_objects.h"
@@ -417,6 +419,7 @@ extern const u8 Common_EventScript_MoveRelearner[];
 
 static const struct DebugSelection sWarpSelection;
 static const struct DebugSelection sFrontierStreakSelection;
+static const struct DebugSelection sNamedStateSelection;
 static const struct DebugSelection sSetWeatherSelection;
 static const struct DebugSelection sSpeciesGeneratorSelection;
 static const struct DebugSelection sItemGeneratorSelection;
@@ -600,6 +603,7 @@ static const struct DebugMenuOption sDebugMenu_Actions_Utilities[] =
 {
     { COMPOUND_STRING("{JPN}マップワープへ とぶ{ENG}..."), DebugAction_Selection_Init, &sWarpSelection },
     { COMPOUND_STRING("{JPN}しせつの れんしょうを かえる{ENG}..."), DebugAction_Selection_Init, &sFrontierStreakSelection },
+    { COMPOUND_STRING("{JPN}ネームドの じょうたいを かえる{ENG}..."), DebugAction_Selection_Init, &sNamedStateSelection },
     { COMPOUND_STRING("{JPN}てんきを かえる{ENG}..."),      DebugAction_Selection_Init, &sSetWeatherSelection },
     { COMPOUND_STRING("{JPN}フォントテスト{ENG}..."),        DebugAction_ExecuteScript, Debug_EventScript_FontTest },
     { COMPOUND_STRING("{JPN}かんじフォントテスト"), DebugAction_ExecuteScript, Debug_EventScript_KanjiFontTest },
@@ -1978,6 +1982,75 @@ static const struct DebugSelection sFrontierStreakSelection = {
     .onComplete = DebugSelection_SetFrontierStreak_Complete,
     .steps = {&sFrontierChallengeSelectionStep, &sFrontierLevelSelectionStep, &sFrontierStreakSelectionStep},
     .maxSteps = 3,
+};
+
+// Story state of the seventh-battle guests and the Frontier Brains (NAMED_STORY_* order).
+static const u8 *const sNamedStateNames[] =
+{
+    [NAMED_STORY_INFECTED] = COMPOUND_STRING("{JPN}0 かんせん"),
+    [NAMED_STORY_UNEASY] = COMPOUND_STRING("{JPN}1 ゆらぎ"),
+    [NAMED_STORY_RECOVERED] = COMPOUND_STRING("{JPN}2 きおくもどり"),
+    [NAMED_STORY_RESCUED] = COMPOUND_STRING("{JPN}3 たすけた"),
+};
+
+static void DebugSelectionStep_PrintNamed(u32 id)
+{
+    u8 *end = ConvertIntToDecimalStringN(gStringVar1, id, STR_CONV_MODE_LEADING_ZEROS, 2);
+    end = StringCopy(end, id < NAMED_STORY_BRAIN_FIRST ? COMPOUND_STRING("{JPN} ゲスト ") : COMPOUND_STRING("{JPN} ブレーン "));
+    StringCopy(end, FrontierStory_GetNamedName(id));
+    StringCopy(gStringVar2, sNamedStateNames[FrontierStory_GetNamedState(id)]);
+}
+
+static void DebugSelectionStep_UpdateNamedId(u8 taskId, u8 digits, u32 min, u32 max)
+{
+    DebugSelectionStep_PrintNamed(gTasks[taskId].tInput);
+    StringCopy(gStringVar3, COMPOUND_STRING("{JPN}じゅうじキーで えらぶ"));
+    DebugNativeStep_PrintWindowSelection(taskId);
+    // Start the state entry from the current state.
+    DebugSelection_SetData(taskId, 1, FrontierStory_GetNamedState(gTasks[taskId].tInput));
+}
+
+static void DebugSelectionStep_UpdateNamedState(u8 taskId, u8 digits, u32 min, u32 max)
+{
+    u8 *end;
+    DebugSelectionStep_PrintNamed(DebugSelection_GetData(taskId, 0));
+    end = StringCopy(gStringVar3, COMPOUND_STRING("{RIGHT_ARROW} "));
+    StringCopy(end, sNamedStateNames[gTasks[taskId].tInput]);
+    DebugNativeStep_PrintWindowSelection(taskId);
+}
+
+static bool32 DebugSelection_SetNamedState_Complete(u8 taskId)
+{
+    FrontierStory_SetNamedState(DebugSelection_GetData(taskId, 0), DebugSelection_GetData(taskId, 1));
+    PlaySE(SE_SAVE);
+    // Back to the person choice, so several states can be set in a row.
+    gTasks[taskId].tStep = 0;
+    gTasks[taskId].tStepsDataIndex = 0;
+    return FALSE;
+}
+
+static const struct DebugSelectionStep sNamedIdSelectionStep = {
+    .stepUpdate = DebugSelectionStep_UpdateNamedId,
+    .stepConfirm = DebugSelectionStep_GenericInputConfirm,
+    .minValue = 0,
+    .maxValue = NAMED_STORY_COUNT - 1,
+    .digits = 2
+};
+
+static const struct DebugSelectionStep sNamedStateSelectionStep = {
+    .stepUpdate = DebugSelectionStep_UpdateNamedState,
+    .stepConfirm = DebugSelectionStep_GenericInputConfirm,
+    .minValue = NAMED_STORY_INFECTED,
+    .maxValue = NAMED_STORY_RESCUED,
+    .digits = 1
+};
+
+static const struct DebugSelection sNamedStateSelection = {
+    .onInit = Debug_CreateInputDisplayWindow,
+    .onCancel = DebugSelectionStep_ReturnToUtilMenu,
+    .onComplete = DebugSelection_SetNamedState_Complete,
+    .steps = {&sNamedIdSelectionStep, &sNamedStateSelectionStep},
+    .maxSteps = 2,
 };
 
 void CheckSaveBlock1Size(struct ScriptContext *ctx)
