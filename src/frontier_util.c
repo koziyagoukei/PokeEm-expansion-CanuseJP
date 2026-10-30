@@ -2035,6 +2035,93 @@ u32 GetCurrentFacilityWinStreak(void)
     }
 }
 
+// Current and record streaks of one challenge; NULL for a mode the facility does not have.
+static u16 *GetFrontierStreakSlot(u32 facility, u32 mode, u32 lvlMode, bool32 record)
+{
+    struct BattleFrontier *frontier = &gSaveBlock2Ptr->frontier;
+
+    if (lvlMode >= FRONTIER_LVL_TENT)
+        return NULL;
+    switch (facility)
+    {
+    case FRONTIER_FACILITY_TOWER:
+        if (mode >= FRONTIER_MODE_COUNT)
+            return NULL;
+        return record ? &frontier->towerRecordWinStreaks[mode][lvlMode] : &frontier->towerWinStreaks[mode][lvlMode];
+    case FRONTIER_FACILITY_DOME:
+        if (mode > FRONTIER_MODE_DOUBLES)
+            return NULL;
+        return record ? &frontier->domeRecordWinStreaks[mode][lvlMode] : &frontier->domeWinStreaks[mode][lvlMode];
+    case FRONTIER_FACILITY_PALACE:
+        if (mode > FRONTIER_MODE_DOUBLES)
+            return NULL;
+        return record ? &frontier->palaceRecordWinStreaks[mode][lvlMode] : &frontier->palaceWinStreaks[mode][lvlMode];
+    case FRONTIER_FACILITY_FACTORY:
+        if (mode > FRONTIER_MODE_DOUBLES)
+            return NULL;
+        return record ? &frontier->factoryRecordWinStreaks[mode][lvlMode] : &frontier->factoryWinStreaks[mode][lvlMode];
+    case FRONTIER_FACILITY_ARENA:
+        if (mode != FRONTIER_MODE_SINGLES)
+            return NULL;
+        return record ? &frontier->arenaRecordStreaks[lvlMode] : &frontier->arenaWinStreaks[lvlMode];
+    case FRONTIER_FACILITY_PIKE:
+        if (mode != FRONTIER_MODE_SINGLES)
+            return NULL;
+        return record ? &frontier->pikeRecordStreaks[lvlMode] : &frontier->pikeWinStreaks[lvlMode];
+    case FRONTIER_FACILITY_PYRAMID:
+        if (mode != FRONTIER_MODE_SINGLES)
+            return NULL;
+        return record ? &frontier->pyramidRecordStreaks[lvlMode] : &frontier->pyramidWinStreaks[lvlMode];
+    default:
+        return NULL;
+    }
+}
+
+static u32 GetFrontierStreakActiveFlag(u32 facility, u32 mode, u32 lvlMode)
+{
+    static const u32 sFlags[NUM_FRONTIER_FACILITIES][FRONTIER_MODE_COUNT] =
+    {
+        [FRONTIER_FACILITY_TOWER] = {STREAK_TOWER_SINGLES_50, STREAK_TOWER_DOUBLES_50, STREAK_TOWER_MULTIS_50, STREAK_TOWER_LINK_MULTIS_50},
+        [FRONTIER_FACILITY_DOME] = {STREAK_DOME_SINGLES_50, STREAK_DOME_DOUBLES_50},
+        [FRONTIER_FACILITY_PALACE] = {STREAK_PALACE_SINGLES_50, STREAK_PALACE_DOUBLES_50},
+        [FRONTIER_FACILITY_ARENA] = {STREAK_ARENA_50},
+        [FRONTIER_FACILITY_FACTORY] = {STREAK_FACTORY_SINGLES_50, STREAK_FACTORY_DOUBLES_50},
+        [FRONTIER_FACILITY_PIKE] = {STREAK_PIKE_50},
+        [FRONTIER_FACILITY_PYRAMID] = {STREAK_PYRAMID_50},
+    };
+
+    if (GetFrontierStreakSlot(facility, mode, lvlMode, FALSE) == NULL)
+        return 0;
+    // Each Open Level flag is the bit right after its Lv. 50 flag.
+    return sFlags[facility][mode] << (lvlMode == FRONTIER_LVL_OPEN);
+}
+
+u16 GetFrontierWinStreak(u32 facility, u32 mode, u32 lvlMode)
+{
+    u16 *streak = GetFrontierStreakSlot(facility, mode, lvlMode, FALSE);
+    return streak != NULL ? *streak : 0;
+}
+
+// For the debug menu: the next challenge continues from this streak.
+bool32 SetFrontierWinStreak(u32 facility, u32 mode, u32 lvlMode, u16 value)
+{
+    u16 *streak = GetFrontierStreakSlot(facility, mode, lvlMode, FALSE);
+    u16 *record = GetFrontierStreakSlot(facility, mode, lvlMode, TRUE);
+    u32 flag = GetFrontierStreakActiveFlag(facility, mode, lvlMode);
+
+    if (streak == NULL)
+        return FALSE;
+    value = min(value, MAX_STREAK);
+    *streak = value;
+    if (*record < value)
+        *record = value;
+    if (value != 0)
+        gSaveBlock2Ptr->frontier.winStreakActiveFlags |= flag;
+    else
+        gSaveBlock2Ptr->frontier.winStreakActiveFlags &= ~flag;
+    return TRUE;
+}
+
 void ResetFrontierTrainerIds(void)
 {
     s32 i;

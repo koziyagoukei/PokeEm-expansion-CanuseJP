@@ -19,6 +19,8 @@ u8 GetFrontierBrainStatusForStreak(u8 facility, u32 streak);
 void CopyFrontierTrainerText(u8 whichText, u16 trainerId);
 void ResetWinStreaks(void);
 u32 GetCurrentFacilityWinStreak(void);
+u16 GetFrontierWinStreak(u32 facility, u32 mode, u32 lvlMode);
+bool32 SetFrontierWinStreak(u32 facility, u32 mode, u32 lvlMode, u16 value);
 void ResetFrontierTrainerIds(void);
 u8 GetPlayerSymbolCountForFacility(u8 facility);
 void ShowRankingHallRecordsWindow(void);

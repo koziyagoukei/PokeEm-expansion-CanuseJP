@@ -8,6 +8,7 @@
 #include "data.h"
 #include "daycare.h"
 #include "debug.h"
+#include "frontier_util.h"
 #include "decoration.h"
 #include "decoration_inventory.h"
 #include "event_data.h"
@@ -415,6 +416,7 @@ extern const u8 Debug_BerryWeedsDisabled[];
 extern const u8 Common_EventScript_MoveRelearner[];
 
 static const struct DebugSelection sWarpSelection;
+static const struct DebugSelection sFrontierStreakSelection;
 static const struct DebugSelection sSetWeatherSelection;
 static const struct DebugSelection sSpeciesGeneratorSelection;
 static const struct DebugSelection sItemGeneratorSelection;
@@ -597,6 +599,7 @@ static const struct DebugMenuOption sDebugMenu_Actions_FollowerNPCMenu[] =
 static const struct DebugMenuOption sDebugMenu_Actions_Utilities[] =
 {
     { COMPOUND_STRING("{JPN}マップワープへ とぶ{ENG}..."), DebugAction_Selection_Init, &sWarpSelection },
+    { COMPOUND_STRING("{JPN}しせつの れんしょうを かえる{ENG}..."), DebugAction_Selection_Init, &sFrontierStreakSelection },
     { COMPOUND_STRING("{JPN}てんきを かえる{ENG}..."),      DebugAction_Selection_Init, &sSetWeatherSelection },
     { COMPOUND_STRING("{JPN}フォントテスト{ENG}..."),        DebugAction_ExecuteScript, Debug_EventScript_FontTest },
     { COMPOUND_STRING("{JPN}かんじフォントテスト"), DebugAction_ExecuteScript, Debug_EventScript_KanjiFontTest },
@@ -1861,6 +1864,119 @@ static const struct DebugSelection sWarpSelection = {
     .onCancel = DebugSelectionStep_ReturnToUtilMenu,
     .onComplete = DebugSelection_SetWarp_OnComplete,
     .steps = {&sMapGroupSelectionStep, &sMapNumSelectionStep, &sWarpSelectionStep},
+    .maxSteps = 3,
+};
+
+// Frontier win streaks: choose a challenge, then the level, then the new streak.
+static const struct
+{
+    u8 facility;
+    u8 mode;
+    const u8 *name;
+} sFrontierStreakChallenges[] =
+{
+    {FRONTIER_FACILITY_TOWER,   FRONTIER_MODE_SINGLES,     COMPOUND_STRING("{JPN}タワー シングル")},
+    {FRONTIER_FACILITY_TOWER,   FRONTIER_MODE_DOUBLES,     COMPOUND_STRING("{JPN}タワー ダブル")},
+    {FRONTIER_FACILITY_TOWER,   FRONTIER_MODE_MULTIS,      COMPOUND_STRING("{JPN}タワー マルチ")},
+    {FRONTIER_FACILITY_TOWER,   FRONTIER_MODE_LINK_MULTIS, COMPOUND_STRING("{JPN}タワー つうしんマルチ")},
+    {FRONTIER_FACILITY_DOME,    FRONTIER_MODE_SINGLES,     COMPOUND_STRING("{JPN}ドーム シングル")},
+    {FRONTIER_FACILITY_DOME,    FRONTIER_MODE_DOUBLES,     COMPOUND_STRING("{JPN}ドーム ダブル")},
+    {FRONTIER_FACILITY_PALACE,  FRONTIER_MODE_SINGLES,     COMPOUND_STRING("{JPN}パレス シングル")},
+    {FRONTIER_FACILITY_PALACE,  FRONTIER_MODE_DOUBLES,     COMPOUND_STRING("{JPN}パレス ダブル")},
+    {FRONTIER_FACILITY_ARENA,   FRONTIER_MODE_SINGLES,     COMPOUND_STRING("{JPN}アリーナ")},
+    {FRONTIER_FACILITY_FACTORY, FRONTIER_MODE_SINGLES,     COMPOUND_STRING("{JPN}ファクトリー シングル")},
+    {FRONTIER_FACILITY_FACTORY, FRONTIER_MODE_DOUBLES,     COMPOUND_STRING("{JPN}ファクトリー ダブル")},
+    {FRONTIER_FACILITY_PIKE,    FRONTIER_MODE_SINGLES,     COMPOUND_STRING("{JPN}チューブ")},
+    {FRONTIER_FACILITY_PYRAMID, FRONTIER_MODE_SINGLES,     COMPOUND_STRING("{JPN}ピラミッド")},
+};
+
+static const u8 *const sFrontierStreakLevelNames[] =
+{
+    [FRONTIER_LVL_50] = COMPOUND_STRING("{ENG}Lv.50"),
+    [FRONTIER_LVL_OPEN] = COMPOUND_STRING("{JPN}オープンレベル"),
+};
+
+static void DebugSelectionStep_PrintFrontierStreaks(u32 challenge)
+{
+    u8 *end;
+    u32 facility = sFrontierStreakChallenges[challenge].facility, mode = sFrontierStreakChallenges[challenge].mode;
+
+    StringCopy(gStringVar1, sFrontierStreakChallenges[challenge].name);
+    end = StringCopy(gStringVar2, COMPOUND_STRING("{ENG}50: "));
+    end = ConvertIntToDecimalStringN(end, GetFrontierWinStreak(facility, mode, FRONTIER_LVL_50), STR_CONV_MODE_LEFT_ALIGN, 4);
+    end = StringCopy(end, COMPOUND_STRING("{ENG} OPEN: "));
+    ConvertIntToDecimalStringN(end, GetFrontierWinStreak(facility, mode, FRONTIER_LVL_OPEN), STR_CONV_MODE_LEFT_ALIGN, 4);
+}
+
+static void DebugSelectionStep_UpdateFrontierChallenge(u8 taskId, u8 digits, u32 min, u32 max)
+{
+    DebugSelectionStep_PrintFrontierStreaks(gTasks[taskId].tInput);
+    StringCopy(gStringVar3, COMPOUND_STRING("{JPN}じゅうじキーで えらぶ"));
+    DebugNativeStep_PrintWindowSelection(taskId);
+}
+
+static void DebugSelectionStep_UpdateFrontierLevel(u8 taskId, u8 digits, u32 min, u32 max)
+{
+    u32 challenge = DebugSelection_GetData(taskId, 0);
+    DebugSelectionStep_PrintFrontierStreaks(challenge);
+    StringCopy(gStringVar3, sFrontierStreakLevelNames[gTasks[taskId].tInput]);
+    DebugNativeStep_PrintWindowSelection(taskId);
+    // Start the streak entry from the current value.
+    DebugSelection_SetData(taskId, 2, GetFrontierWinStreak(sFrontierStreakChallenges[challenge].facility,
+        sFrontierStreakChallenges[challenge].mode, gTasks[taskId].tInput));
+}
+
+static void DebugSelectionStep_UpdateFrontierStreak(u8 taskId, u8 digits, u32 min, u32 max)
+{
+    u8 *end;
+    DebugSelectionStep_PrintFrontierStreaks(DebugSelection_GetData(taskId, 0));
+    end = StringCopy(gStringVar3, sFrontierStreakLevelNames[DebugSelection_GetData(taskId, 1)]);
+    end = StringCopy(end, COMPOUND_STRING("{ENG} {RIGHT_ARROW} "));
+    ConvertIntToDecimalStringN(end, gTasks[taskId].tInput, STR_CONV_MODE_LEADING_ZEROS, digits);
+    DebugNativeStep_PrintWindowSelection(taskId);
+}
+
+static bool32 DebugSelection_SetFrontierStreak_Complete(u8 taskId)
+{
+    u32 challenge = DebugSelection_GetData(taskId, 0);
+    SetFrontierWinStreak(sFrontierStreakChallenges[challenge].facility, sFrontierStreakChallenges[challenge].mode,
+        DebugSelection_GetData(taskId, 1), DebugSelection_GetData(taskId, 2));
+    PlaySE(SE_SAVE);
+    // Back to the challenge choice, so several streaks can be set in a row.
+    gTasks[taskId].tStep = 0;
+    gTasks[taskId].tStepsDataIndex = 0;
+    return FALSE;
+}
+
+static const struct DebugSelectionStep sFrontierChallengeSelectionStep = {
+    .stepUpdate = DebugSelectionStep_UpdateFrontierChallenge,
+    .stepConfirm = DebugSelectionStep_GenericInputConfirm,
+    .minValue = 0,
+    .maxValue = ARRAY_COUNT(sFrontierStreakChallenges) - 1,
+    .digits = 2
+};
+
+static const struct DebugSelectionStep sFrontierLevelSelectionStep = {
+    .stepUpdate = DebugSelectionStep_UpdateFrontierLevel,
+    .stepConfirm = DebugSelectionStep_GenericInputConfirm,
+    .minValue = FRONTIER_LVL_50,
+    .maxValue = FRONTIER_LVL_OPEN,
+    .digits = 1
+};
+
+static const struct DebugSelectionStep sFrontierStreakSelectionStep = {
+    .stepUpdate = DebugSelectionStep_UpdateFrontierStreak,
+    .stepConfirm = DebugSelectionStep_GenericInputConfirm,
+    .minValue = 0,
+    .maxValue = MAX_STREAK,
+    .digits = 4
+};
+
+static const struct DebugSelection sFrontierStreakSelection = {
+    .onInit = Debug_CreateInputDisplayWindow,
+    .onCancel = DebugSelectionStep_ReturnToUtilMenu,
+    .onComplete = DebugSelection_SetFrontierStreak_Complete,
+    .steps = {&sFrontierChallengeSelectionStep, &sFrontierLevelSelectionStep, &sFrontierStreakSelectionStep},
     .maxSteps = 3,
 };
 
