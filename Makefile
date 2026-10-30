@@ -283,7 +283,8 @@ KANJI_TOOL_DIR := $(TOOLS_DIR)/kanji
 KANJI_GEN_DIR := $(BUILD_GENERATED_DIR)/kanji
 KANJI_STAMP := $(KANJI_GEN_DIR)/kanji.ok
 KANJI_BUILD_CHARMAP := $(KANJI_GEN_DIR)/charmap.txt
-KANJI_SCAN_SRCS := $(shell find src include data test -type f \( -name '*.c' -o -name '*.h' -o -name '*.inc' -o -name '*.s' \) 2>/dev/null)
+# make cannot depend on paths with spaces (e.g. "items - コピー.h"); the scan still reads them.
+KANJI_SCAN_SRCS := $(shell find src include data test -type f \( -name '*.c' -o -name '*.h' -o -name '*.inc' -o -name '*.s' \) ! -name '* *' 2>/dev/null)
 AUTO_GEN_TARGETS += $(KANJI_STAMP)
 
 $(DATA_SRC_SUBDIR)/wild_encounters.h: $(DATA_SRC_SUBDIR)/wild_encounters.json $(WILD_ENCOUNTERS_TOOL_DIR)/wild_encounters_to_header.py $(INCLUDE_DIRS)/config/overworld.h $(INCLUDE_DIRS)/config/dexnav.h
@@ -515,6 +516,8 @@ include trainer_rules.mk
 FORCE_POKEDEX_TEXT:
 
 # Select text before the font scan. Kana mode does not read corpus downloads.
+# It preprocesses include/global.h, which needs generated headers such as map_groups.h.
+$(POKEDEX_TEXT_STAMP): $(filter-out $(POKEDEX_TEXT_STAMP) $(KANJI_STAMP),$(AUTO_GEN_TARGETS))
 $(POKEDEX_TEXT_STAMP): FORCE_POKEDEX_TEXT $(POKEDEX_TEXT_TOOL) $(POKEDEX_TEXT_MANIFEST) $(wildcard include/config/*.h) $(wildcard graphics/fonts/kanji/koden12_atlas.*) charmap.txt charmap_kanji.txt
 	python3 $(POKEDEX_TEXT_TOOL) generate --cpp "$(CPP) $(CPPFLAGS) -P -x c -" --stamp $@
 
