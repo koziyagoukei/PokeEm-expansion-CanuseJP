@@ -225,8 +225,21 @@ void StartWeather(void)
     }
 }
 
+// Weather that has no callbacks would call through past the end of sWeatherFuncs.
+// WEATHER_FOG is the aggregate a map header may use (and saves made in such a map
+// still hold it); it shows as diagonal fog, like the random Frontier fog.
+static u8 GetDisplayableWeather(u8 weather)
+{
+    if (weather == WEATHER_FOG)
+        return WEATHER_FOG_DIAGONAL;
+    if (weather >= ARRAY_COUNT(sWeatherFuncs))
+        return WEATHER_NONE;
+    return weather;
+}
+
 void SetNextWeather(u8 weather)
 {
+    weather = GetDisplayableWeather(weather);
     if (weather != WEATHER_RAIN && weather != WEATHER_RAIN_THUNDERSTORM && weather != WEATHER_DOWNPOUR)
     {
         PlayRainStoppingSoundEffect();
@@ -260,6 +273,7 @@ static void UpdateWeatherForms(void)
 
 void SetCurrentAndNextWeather(u8 weather)
 {
+    weather = GetDisplayableWeather(weather);
     PlayRainStoppingSoundEffect();
     gWeatherPtr->currWeather = weather;
     gWeatherPtr->nextWeather = weather;
@@ -268,6 +282,7 @@ void SetCurrentAndNextWeather(u8 weather)
 
 void SetCurrentAndNextWeatherNoDelay(u8 weather)
 {
+    weather = GetDisplayableWeather(weather);
     PlayRainStoppingSoundEffect();
     gWeatherPtr->currWeather = weather;
     gWeatherPtr->nextWeather = weather;

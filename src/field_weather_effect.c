@@ -2814,7 +2814,7 @@ static enum OverworldWeather TranslateWeatherNum(enum OverworldWeather weather)
     case WEATHER_RAIN:               return WEATHER_RAIN;
     case WEATHER_SNOW:               return WEATHER_SNOW;
     case WEATHER_RAIN_THUNDERSTORM:  return WEATHER_RAIN_THUNDERSTORM;
-    case WEATHER_FOG:                return WEATHER_FOG;
+    case WEATHER_FOG:                return WEATHER_FOG_DIAGONAL; // No callbacks of its own.
     case WEATHER_FOG_HORIZONTAL:     return WEATHER_FOG_HORIZONTAL;
     case WEATHER_VOLCANIC_ASH:       return WEATHER_VOLCANIC_ASH;
     case WEATHER_SANDSTORM:          return WEATHER_SANDSTORM;
