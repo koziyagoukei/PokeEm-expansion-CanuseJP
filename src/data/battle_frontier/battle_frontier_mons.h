@@ -1122,6 +1122,7 @@ const struct TrainerMon gBattleFrontierMons[NUM_FRONTIER_MONS] =
         .dynamaxLevel = 10,
         .ball = BALL_POKE,
         .gender = TRAINER_MON_RANDOM_GENDER,
+        .nickname = J_COMPOUND_STRING("スプーン"),
     },
     [FRONTIER_MON_ALAKAZAM_2] = {
         .species = SPECIES_ALAKAZAM,
@@ -1136,6 +1137,7 @@ const struct TrainerMon gBattleFrontierMons[NUM_FRONTIER_MONS] =
         .dynamaxLevel = 10,
         .ball = BALL_POKE,
         .gender = TRAINER_MON_RANDOM_GENDER,
+        .nickname = J_COMPOUND_STRING("スプーン"),
     },
     [FRONTIER_MON_ALAKAZAM_3] = {
         .species = SPECIES_ALAKAZAM,
@@ -1150,6 +1152,7 @@ const struct TrainerMon gBattleFrontierMons[NUM_FRONTIER_MONS] =
         .dynamaxLevel = 10,
         .ball = BALL_POKE,
         .gender = TRAINER_MON_RANDOM_GENDER,
+        .nickname = J_COMPOUND_STRING("スプーン"),
     },
     [FRONTIER_MON_MACHAMP_1] = {
         .species = SPECIES_MACHAMP,
@@ -1630,6 +1633,7 @@ const struct TrainerMon gBattleFrontierMons[NUM_FRONTIER_MONS] =
         .dynamaxLevel = 10,
         .ball = BALL_POKE,
         .gender = TRAINER_MON_RANDOM_GENDER,
+        .nickname = J_COMPOUND_STRING("ケタケタ"),
     },
     [FRONTIER_MON_GENGAR_2] = {
         .species = SPECIES_GENGAR,
@@ -1644,6 +1648,7 @@ const struct TrainerMon gBattleFrontierMons[NUM_FRONTIER_MONS] =
         .dynamaxLevel = 10,
         .ball = BALL_POKE,
         .gender = TRAINER_MON_RANDOM_GENDER,
+        .nickname = J_COMPOUND_STRING("ケタケタ"),
     },
     [FRONTIER_MON_GENGAR_3] = {
         .species = SPECIES_GENGAR,
@@ -1658,6 +1663,7 @@ const struct TrainerMon gBattleFrontierMons[NUM_FRONTIER_MONS] =
         .dynamaxLevel = 10,
         .ball = BALL_POKE,
         .gender = TRAINER_MON_RANDOM_GENDER,
+        .nickname = J_COMPOUND_STRING("ケタケタ"),
     },
     [FRONTIER_MON_HYPNO_1] = {
         .species = SPECIES_HYPNO,
@@ -2346,6 +2352,7 @@ const struct TrainerMon gBattleFrontierMons[NUM_FRONTIER_MONS] =
         .dynamaxLevel = 10,
         .ball = BALL_POKE,
         .gender = TRAINER_MON_RANDOM_GENDER,
+        .nickname = J_COMPOUND_STRING("あばれんぼ"),
     },
     [FRONTIER_MON_GYARADOS_2] = {
         .species = SPECIES_GYARADOS,
@@ -2360,6 +2367,7 @@ const struct TrainerMon gBattleFrontierMons[NUM_FRONTIER_MONS] =
         .dynamaxLevel = 10,
         .ball = BALL_POKE,
         .gender = TRAINER_MON_RANDOM_GENDER,
+        .nickname = J_COMPOUND_STRING("あばれんぼ"),
     },
     [FRONTIER_MON_GYARADOS_3] = {
         .species = SPECIES_GYARADOS,
@@ -2374,6 +2382,7 @@ const struct TrainerMon gBattleFrontierMons[NUM_FRONTIER_MONS] =
         .dynamaxLevel = 10,
         .ball = BALL_POKE,
         .gender = TRAINER_MON_RANDOM_GENDER,
+        .nickname = J_COMPOUND_STRING("あばれんぼ"),
     },
     [FRONTIER_MON_LAPRAS_1] = {
         .species = SPECIES_LAPRAS,
@@ -2389,6 +2398,7 @@ const struct TrainerMon gBattleFrontierMons[NUM_FRONTIER_MONS] =
         .ball = BALL_POKE,
         .gender = TRAINER_MON_RANDOM_GENDER,
         .gigantamaxFactor = TRUE,
+        .nickname = J_COMPOUND_STRING("ノア"),
     },
     [FRONTIER_MON_LAPRAS_2] = {
         .species = SPECIES_LAPRAS,
@@ -2404,6 +2414,7 @@ const struct TrainerMon gBattleFrontierMons[NUM_FRONTIER_MONS] =
         .ball = BALL_POKE,
         .gender = TRAINER_MON_RANDOM_GENDER,
         .gigantamaxFactor = TRUE,
+        .nickname = J_COMPOUND_STRING("ノア"),
     },
     [FRONTIER_MON_LAPRAS_3] = {
         .species = SPECIES_LAPRAS,
@@ -2419,6 +2430,7 @@ const struct TrainerMon gBattleFrontierMons[NUM_FRONTIER_MONS] =
         .ball = BALL_POKE,
         .gender = TRAINER_MON_RANDOM_GENDER,
         .isShiny = TRUE,
+        .nickname = J_COMPOUND_STRING("ノア"),
     },
     [FRONTIER_MON_DITTO_1] = {
         .species = SPECIES_DITTO,
@@ -2771,6 +2783,7 @@ const struct TrainerMon gBattleFrontierMons[NUM_FRONTIER_MONS] =
         .dynamaxLevel = 10,
         .ball = BALL_POKE,
         .gender = TRAINER_MON_RANDOM_GENDER,
+        .nickname = J_COMPOUND_STRING("ぐうたら"),
     },
     [FRONTIER_MON_SNORLAX_2] = {
         .species = SPECIES_SNORLAX,
@@ -2786,6 +2799,7 @@ const struct TrainerMon gBattleFrontierMons[NUM_FRONTIER_MONS] =
         .ball = BALL_POKE,
         .gender = TRAINER_MON_RANDOM_GENDER,
         .gigantamaxFactor = TRUE,
+        .nickname = J_COMPOUND_STRING("ぐうたら"),
     },
     [FRONTIER_MON_SNORLAX_3] = {
         .species = SPECIES_SNORLAX,
@@ -2800,6 +2814,7 @@ const struct TrainerMon gBattleFrontierMons[NUM_FRONTIER_MONS] =
         .dynamaxLevel = 10,
         .ball = BALL_POKE,
         .gender = TRAINER_MON_RANDOM_GENDER,
+        .nickname = J_COMPOUND_STRING("ぐうたら"),
     },
     [FRONTIER_MON_ARTICUNO_1] = {
         .species = SPECIES_ARTICUNO,
@@ -2940,6 +2955,7 @@ const struct TrainerMon gBattleFrontierMons[NUM_FRONTIER_MONS] =
         .dynamaxLevel = 10,
         .ball = BALL_POKE,
         .gender = TRAINER_MON_RANDOM_GENDER,
+        .nickname = J_COMPOUND_STRING("おやかた"),
     },
     [FRONTIER_MON_DRAGONITE_2] = {
         .species = SPECIES_DRAGONITE,
@@ -2954,6 +2970,7 @@ const struct TrainerMon gBattleFrontierMons[NUM_FRONTIER_MONS] =
         .dynamaxLevel = 10,
         .ball = BALL_POKE,
         .gender = TRAINER_MON_RANDOM_GENDER,
+        .nickname = J_COMPOUND_STRING("おやかた"),
     },
     [FRONTIER_MON_DRAGONITE_3] = {
         .species = SPECIES_DRAGONITE,
@@ -2968,6 +2985,7 @@ const struct TrainerMon gBattleFrontierMons[NUM_FRONTIER_MONS] =
         .dynamaxLevel = 10,
         .ball = BALL_POKE,
         .gender = TRAINER_MON_RANDOM_GENDER,
+        .nickname = J_COMPOUND_STRING("おやかた"),
     },
     [FRONTIER_MON_TYPHLOSION_1] = {
         .species = SPECIES_TYPHLOSION,
@@ -3825,6 +3843,7 @@ const struct TrainerMon gBattleFrontierMons[NUM_FRONTIER_MONS] =
         .dynamaxLevel = 10,
         .ball = BALL_POKE,
         .gender = TRAINER_MON_RANDOM_GENDER,
+        .nickname = J_COMPOUND_STRING("ガマン"),
     },
     [FRONTIER_MON_WOBBUFFET_2] = {
         .species = SPECIES_WOBBUFFET,
@@ -3839,6 +3858,7 @@ const struct TrainerMon gBattleFrontierMons[NUM_FRONTIER_MONS] =
         .dynamaxLevel = 10,
         .ball = BALL_POKE,
         .gender = TRAINER_MON_RANDOM_GENDER,
+        .nickname = J_COMPOUND_STRING("ガマン"),
     },
     [FRONTIER_MON_WOBBUFFET_3] = {
         .species = SPECIES_WOBBUFFET,
@@ -3853,6 +3873,7 @@ const struct TrainerMon gBattleFrontierMons[NUM_FRONTIER_MONS] =
         .dynamaxLevel = 10,
         .ball = BALL_POKE,
         .gender = TRAINER_MON_RANDOM_GENDER,
+        .nickname = J_COMPOUND_STRING("ガマン"),
     },
     [FRONTIER_MON_FORRETRESS_1] = {
         .species = SPECIES_FORRETRESS,
@@ -4035,6 +4056,7 @@ const struct TrainerMon gBattleFrontierMons[NUM_FRONTIER_MONS] =
         .dynamaxLevel = 10,
         .ball = BALL_POKE,
         .gender = TRAINER_MON_RANDOM_GENDER,
+        .nickname = J_COMPOUND_STRING("ハサミン"),
     },
     [FRONTIER_MON_SCIZOR_2] = {
         .species = SPECIES_SCIZOR,
@@ -4049,6 +4071,7 @@ const struct TrainerMon gBattleFrontierMons[NUM_FRONTIER_MONS] =
         .dynamaxLevel = 10,
         .ball = BALL_POKE,
         .gender = TRAINER_MON_RANDOM_GENDER,
+        .nickname = J_COMPOUND_STRING("ハサミン"),
     },
     [FRONTIER_MON_SCIZOR_3] = {
         .species = SPECIES_SCIZOR,
@@ -4063,6 +4086,7 @@ const struct TrainerMon gBattleFrontierMons[NUM_FRONTIER_MONS] =
         .dynamaxLevel = 10,
         .ball = BALL_POKE,
         .gender = TRAINER_MON_RANDOM_GENDER,
+        .nickname = J_COMPOUND_STRING("ハサミン"),
     },
     [FRONTIER_MON_SHUCKLE_1] = {
         .species = SPECIES_SHUCKLE,
@@ -4875,6 +4899,7 @@ const struct TrainerMon gBattleFrontierMons[NUM_FRONTIER_MONS] =
         .dynamaxLevel = 10,
         .ball = BALL_POKE,
         .gender = TRAINER_MON_RANDOM_GENDER,
+        .nickname = J_COMPOUND_STRING("ガンテツ"),
     },
     [FRONTIER_MON_TYRANITAR_2] = {
         .species = SPECIES_TYRANITAR,
@@ -4889,6 +4914,7 @@ const struct TrainerMon gBattleFrontierMons[NUM_FRONTIER_MONS] =
         .dynamaxLevel = 10,
         .ball = BALL_POKE,
         .gender = TRAINER_MON_RANDOM_GENDER,
+        .nickname = J_COMPOUND_STRING("ガンテツ"),
     },
     [FRONTIER_MON_TYRANITAR_3] = {
         .species = SPECIES_TYRANITAR,
@@ -4903,6 +4929,7 @@ const struct TrainerMon gBattleFrontierMons[NUM_FRONTIER_MONS] =
         .dynamaxLevel = 10,
         .ball = BALL_POKE,
         .gender = TRAINER_MON_RANDOM_GENDER,
+        .nickname = J_COMPOUND_STRING("ガンテツ"),
     },
     [FRONTIER_MON_SCEPTILE_1] = {
         .species = SPECIES_SCEPTILE,
@@ -6939,6 +6966,7 @@ const struct TrainerMon gBattleFrontierMons[NUM_FRONTIER_MONS] =
         .dynamaxLevel = 10,
         .ball = BALL_POKE,
         .gender = TRAINER_MON_RANDOM_GENDER,
+        .nickname = J_COMPOUND_STRING("ミナモ"),
     },
     [FRONTIER_MON_MILOTIC_2] = {
         .species = SPECIES_MILOTIC,
@@ -6953,6 +6981,7 @@ const struct TrainerMon gBattleFrontierMons[NUM_FRONTIER_MONS] =
         .dynamaxLevel = 10,
         .ball = BALL_POKE,
         .gender = TRAINER_MON_RANDOM_GENDER,
+        .nickname = J_COMPOUND_STRING("ミナモ"),
     },
     [FRONTIER_MON_MILOTIC_3] = {
         .species = SPECIES_MILOTIC,
@@ -6967,6 +6996,7 @@ const struct TrainerMon gBattleFrontierMons[NUM_FRONTIER_MONS] =
         .dynamaxLevel = 10,
         .ball = BALL_POKE,
         .gender = TRAINER_MON_RANDOM_GENDER,
+        .nickname = J_COMPOUND_STRING("ミナモ"),
     },
     [FRONTIER_MON_CASTFORM_NORMAL_1] = {
         .species = SPECIES_CASTFORM_NORMAL,
@@ -7233,6 +7263,7 @@ const struct TrainerMon gBattleFrontierMons[NUM_FRONTIER_MONS] =
         .dynamaxLevel = 10,
         .ball = BALL_POKE,
         .gender = TRAINER_MON_RANDOM_GENDER,
+        .nickname = J_COMPOUND_STRING("ヨゲン"),
     },
     [FRONTIER_MON_ABSOL_2] = {
         .species = SPECIES_ABSOL,
@@ -7247,6 +7278,7 @@ const struct TrainerMon gBattleFrontierMons[NUM_FRONTIER_MONS] =
         .dynamaxLevel = 10,
         .ball = BALL_POKE,
         .gender = TRAINER_MON_RANDOM_GENDER,
+        .nickname = J_COMPOUND_STRING("ヨゲン"),
     },
     [FRONTIER_MON_ABSOL_3] = {
         .species = SPECIES_ABSOL,
@@ -7261,6 +7293,7 @@ const struct TrainerMon gBattleFrontierMons[NUM_FRONTIER_MONS] =
         .dynamaxLevel = 10,
         .ball = BALL_POKE,
         .gender = TRAINER_MON_RANDOM_GENDER,
+        .nickname = J_COMPOUND_STRING("ヨゲン"),
     },
     [FRONTIER_MON_GLALIE_1] = {
         .species = SPECIES_GLALIE,
@@ -7527,6 +7560,7 @@ const struct TrainerMon gBattleFrontierMons[NUM_FRONTIER_MONS] =
         .dynamaxLevel = 10,
         .ball = BALL_POKE,
         .gender = TRAINER_MON_RANDOM_GENDER,
+        .nickname = J_COMPOUND_STRING("ソラノユメ"),
     },
     [FRONTIER_MON_SALAMENCE_2] = {
         .species = SPECIES_SALAMENCE,
@@ -7541,6 +7575,7 @@ const struct TrainerMon gBattleFrontierMons[NUM_FRONTIER_MONS] =
         .dynamaxLevel = 10,
         .ball = BALL_POKE,
         .gender = TRAINER_MON_RANDOM_GENDER,
+        .nickname = J_COMPOUND_STRING("ソラノユメ"),
     },
     [FRONTIER_MON_SALAMENCE_3] = {
         .species = SPECIES_SALAMENCE,
@@ -7555,6 +7590,7 @@ const struct TrainerMon gBattleFrontierMons[NUM_FRONTIER_MONS] =
         .dynamaxLevel = 10,
         .ball = BALL_POKE,
         .gender = TRAINER_MON_RANDOM_GENDER,
+        .nickname = J_COMPOUND_STRING("ソラノユメ"),
     },
     [FRONTIER_MON_METAGROSS_1] = {
         .species = SPECIES_METAGROSS,
@@ -7569,6 +7605,7 @@ const struct TrainerMon gBattleFrontierMons[NUM_FRONTIER_MONS] =
         .dynamaxLevel = 10,
         .ball = BALL_POKE,
         .gender = TRAINER_MON_RANDOM_GENDER,
+        .nickname = J_COMPOUND_STRING("テツジン"),
     },
     [FRONTIER_MON_METAGROSS_2] = {
         .species = SPECIES_METAGROSS,
@@ -7583,6 +7620,7 @@ const struct TrainerMon gBattleFrontierMons[NUM_FRONTIER_MONS] =
         .dynamaxLevel = 10,
         .ball = BALL_POKE,
         .gender = TRAINER_MON_RANDOM_GENDER,
+        .nickname = J_COMPOUND_STRING("テツジン"),
     },
     [FRONTIER_MON_METAGROSS_3] = {
         .species = SPECIES_METAGROSS,
@@ -7597,6 +7635,7 @@ const struct TrainerMon gBattleFrontierMons[NUM_FRONTIER_MONS] =
         .dynamaxLevel = 10,
         .ball = BALL_POKE,
         .gender = TRAINER_MON_RANDOM_GENDER,
+        .nickname = J_COMPOUND_STRING("テツジン"),
     },
     [FRONTIER_MON_REGIROCK_1] = {
         .species = SPECIES_REGIROCK,
@@ -8916,6 +8955,7 @@ const struct TrainerMon gBattleFrontierMons[NUM_FRONTIER_MONS] =
         .dynamaxLevel = 10,
         .ball = BALL_POKE,
         .gender = TRAINER_MON_RANDOM_GENDER,
+        .nickname = J_COMPOUND_STRING("ジェット"),
     },
     [FRONTIER_MON_GARCHOMP_2] = {
         .species = SPECIES_GARCHOMP,
@@ -8930,6 +8970,7 @@ const struct TrainerMon gBattleFrontierMons[NUM_FRONTIER_MONS] =
         .dynamaxLevel = 10,
         .ball = BALL_POKE,
         .gender = TRAINER_MON_RANDOM_GENDER,
+        .nickname = J_COMPOUND_STRING("ジェット"),
     },
     [FRONTIER_MON_GARCHOMP_3] = {
         .species = SPECIES_GARCHOMP,
@@ -8944,6 +8985,7 @@ const struct TrainerMon gBattleFrontierMons[NUM_FRONTIER_MONS] =
         .dynamaxLevel = 10,
         .ball = BALL_POKE,
         .gender = TRAINER_MON_RANDOM_GENDER,
+        .nickname = J_COMPOUND_STRING("ジェット"),
     },
     [FRONTIER_MON_LUCARIO_1] = {
         .species = SPECIES_LUCARIO,
@@ -8958,6 +9000,7 @@ const struct TrainerMon gBattleFrontierMons[NUM_FRONTIER_MONS] =
         .dynamaxLevel = 10,
         .ball = BALL_POKE,
         .gender = TRAINER_MON_RANDOM_GENDER,
+        .nickname = J_COMPOUND_STRING("ハドウ"),
     },
     [FRONTIER_MON_LUCARIO_2] = {
         .species = SPECIES_LUCARIO,
@@ -8972,6 +9015,7 @@ const struct TrainerMon gBattleFrontierMons[NUM_FRONTIER_MONS] =
         .dynamaxLevel = 10,
         .ball = BALL_POKE,
         .gender = TRAINER_MON_RANDOM_GENDER,
+        .nickname = J_COMPOUND_STRING("ハドウ"),
     },
     [FRONTIER_MON_LUCARIO_3] = {
         .species = SPECIES_LUCARIO,
@@ -8986,6 +9030,7 @@ const struct TrainerMon gBattleFrontierMons[NUM_FRONTIER_MONS] =
         .dynamaxLevel = 10,
         .ball = BALL_POKE,
         .gender = TRAINER_MON_RANDOM_GENDER,
+        .nickname = J_COMPOUND_STRING("ハドウ"),
     },
     [FRONTIER_MON_HIPPOWDON_1] = {
         .species = SPECIES_HIPPOWDON,
@@ -9546,6 +9591,7 @@ const struct TrainerMon gBattleFrontierMons[NUM_FRONTIER_MONS] =
         .dynamaxLevel = 10,
         .ball = BALL_POKE,
         .gender = TRAINER_MON_RANDOM_GENDER,
+        .nickname = J_COMPOUND_STRING("しあわせ"),
     },
     [FRONTIER_MON_TOGEKISS_2] = {
         .species = SPECIES_TOGEKISS,
@@ -9560,6 +9606,7 @@ const struct TrainerMon gBattleFrontierMons[NUM_FRONTIER_MONS] =
         .dynamaxLevel = 10,
         .ball = BALL_POKE,
         .gender = TRAINER_MON_RANDOM_GENDER,
+        .nickname = J_COMPOUND_STRING("しあわせ"),
     },
     [FRONTIER_MON_TOGEKISS_3] = {
         .species = SPECIES_TOGEKISS,
@@ -9574,6 +9621,7 @@ const struct TrainerMon gBattleFrontierMons[NUM_FRONTIER_MONS] =
         .dynamaxLevel = 10,
         .ball = BALL_POKE,
         .gender = TRAINER_MON_RANDOM_GENDER,
+        .nickname = J_COMPOUND_STRING("しあわせ"),
     },
     [FRONTIER_MON_YANMEGA_1] = {
         .species = SPECIES_YANMEGA,
@@ -10008,6 +10056,7 @@ const struct TrainerMon gBattleFrontierMons[NUM_FRONTIER_MONS] =
         .dynamaxLevel = 10,
         .ball = BALL_POKE,
         .gender = TRAINER_MON_RANDOM_GENDER,
+        .nickname = J_COMPOUND_STRING("ビリビリ"),
     },
     [FRONTIER_MON_ROTOM_2] = {
         .species = SPECIES_ROTOM,
@@ -10022,6 +10071,7 @@ const struct TrainerMon gBattleFrontierMons[NUM_FRONTIER_MONS] =
         .dynamaxLevel = 10,
         .ball = BALL_POKE,
         .gender = TRAINER_MON_RANDOM_GENDER,
+        .nickname = J_COMPOUND_STRING("ビリビリ"),
     },
     [FRONTIER_MON_ROTOM_3] = {
         .species = SPECIES_ROTOM,
@@ -10036,6 +10086,7 @@ const struct TrainerMon gBattleFrontierMons[NUM_FRONTIER_MONS] =
         .dynamaxLevel = 10,
         .ball = BALL_POKE,
         .gender = TRAINER_MON_RANDOM_GENDER,
+        .nickname = J_COMPOUND_STRING("ビリビリ"),
     },
     [FRONTIER_MON_UXIE_1] = {
         .species = SPECIES_UXIE,
@@ -12489,6 +12540,7 @@ const struct TrainerMon gBattleFrontierMons[NUM_FRONTIER_MONS] =
         .dynamaxLevel = 10,
         .ball = BALL_POKE,
         .gender = TRAINER_MON_RANDOM_GENDER,
+        .nickname = J_COMPOUND_STRING("ともしび"),
     },
     [FRONTIER_MON_CHANDELURE_2] = {
         .species = SPECIES_CHANDELURE,
@@ -12503,6 +12555,7 @@ const struct TrainerMon gBattleFrontierMons[NUM_FRONTIER_MONS] =
         .dynamaxLevel = 10,
         .ball = BALL_POKE,
         .gender = TRAINER_MON_RANDOM_GENDER,
+        .nickname = J_COMPOUND_STRING("ともしび"),
     },
     [FRONTIER_MON_CHANDELURE_3] = {
         .species = SPECIES_CHANDELURE,
@@ -12517,6 +12570,7 @@ const struct TrainerMon gBattleFrontierMons[NUM_FRONTIER_MONS] =
         .dynamaxLevel = 10,
         .ball = BALL_POKE,
         .gender = TRAINER_MON_RANDOM_GENDER,
+        .nickname = J_COMPOUND_STRING("ともしび"),
     },
     [FRONTIER_MON_HAXORUS_1] = {
         .species = SPECIES_HAXORUS,
@@ -12531,6 +12585,7 @@ const struct TrainerMon gBattleFrontierMons[NUM_FRONTIER_MONS] =
         .dynamaxLevel = 10,
         .ball = BALL_POKE,
         .gender = TRAINER_MON_RANDOM_GENDER,
+        .nickname = J_COMPOUND_STRING("キバオ"),
     },
     [FRONTIER_MON_HAXORUS_2] = {
         .species = SPECIES_HAXORUS,
@@ -12545,6 +12600,7 @@ const struct TrainerMon gBattleFrontierMons[NUM_FRONTIER_MONS] =
         .dynamaxLevel = 10,
         .ball = BALL_POKE,
         .gender = TRAINER_MON_RANDOM_GENDER,
+        .nickname = J_COMPOUND_STRING("キバオ"),
     },
     [FRONTIER_MON_HAXORUS_3] = {
         .species = SPECIES_HAXORUS,
@@ -12559,6 +12615,7 @@ const struct TrainerMon gBattleFrontierMons[NUM_FRONTIER_MONS] =
         .dynamaxLevel = 10,
         .ball = BALL_POKE,
         .gender = TRAINER_MON_RANDOM_GENDER,
+        .nickname = J_COMPOUND_STRING("キバオ"),
     },
     [FRONTIER_MON_BEARTIC_1] = {
         .species = SPECIES_BEARTIC,
@@ -13077,6 +13134,7 @@ const struct TrainerMon gBattleFrontierMons[NUM_FRONTIER_MONS] =
         .dynamaxLevel = 10,
         .ball = BALL_POKE,
         .gender = TRAINER_MON_RANDOM_GENDER,
+        .nickname = J_COMPOUND_STRING("サンコ"),
     },
     [FRONTIER_MON_HYDREIGON_2] = {
         .species = SPECIES_HYDREIGON,
@@ -13091,6 +13149,7 @@ const struct TrainerMon gBattleFrontierMons[NUM_FRONTIER_MONS] =
         .dynamaxLevel = 10,
         .ball = BALL_POKE,
         .gender = TRAINER_MON_RANDOM_GENDER,
+        .nickname = J_COMPOUND_STRING("サンコ"),
     },
     [FRONTIER_MON_HYDREIGON_3] = {
         .species = SPECIES_HYDREIGON,
@@ -13105,6 +13164,7 @@ const struct TrainerMon gBattleFrontierMons[NUM_FRONTIER_MONS] =
         .dynamaxLevel = 10,
         .ball = BALL_POKE,
         .gender = TRAINER_MON_RANDOM_GENDER,
+        .nickname = J_COMPOUND_STRING("サンコ"),
     },
     [FRONTIER_MON_VOLCARONA_1] = {
         .species = SPECIES_VOLCARONA,
@@ -13119,6 +13179,7 @@ const struct TrainerMon gBattleFrontierMons[NUM_FRONTIER_MONS] =
         .dynamaxLevel = 10,
         .ball = BALL_POKE,
         .gender = TRAINER_MON_RANDOM_GENDER,
+        .nickname = J_COMPOUND_STRING("たいよう"),
     },
     [FRONTIER_MON_VOLCARONA_2] = {
         .species = SPECIES_VOLCARONA,
@@ -13133,6 +13194,7 @@ const struct TrainerMon gBattleFrontierMons[NUM_FRONTIER_MONS] =
         .dynamaxLevel = 10,
         .ball = BALL_POKE,
         .gender = TRAINER_MON_RANDOM_GENDER,
+        .nickname = J_COMPOUND_STRING("たいよう"),
     },
     [FRONTIER_MON_VOLCARONA_3] = {
         .species = SPECIES_VOLCARONA,
@@ -13147,6 +13209,7 @@ const struct TrainerMon gBattleFrontierMons[NUM_FRONTIER_MONS] =
         .dynamaxLevel = 10,
         .ball = BALL_POKE,
         .gender = TRAINER_MON_RANDOM_GENDER,
+        .nickname = J_COMPOUND_STRING("たいよう"),
     },
     [FRONTIER_MON_COBALION_1] = {
         .species = SPECIES_COBALION,
@@ -14001,6 +14064,7 @@ const struct TrainerMon gBattleFrontierMons[NUM_FRONTIER_MONS] =
         .dynamaxLevel = 10,
         .ball = BALL_POKE,
         .gender = TRAINER_MON_RANDOM_GENDER,
+        .nickname = J_COMPOUND_STRING("ツルギ"),
     },
     [FRONTIER_MON_AEGISLASH_SHIELD_2] = {
         .species = SPECIES_AEGISLASH_SHIELD,
@@ -14015,6 +14079,7 @@ const struct TrainerMon gBattleFrontierMons[NUM_FRONTIER_MONS] =
         .dynamaxLevel = 10,
         .ball = BALL_POKE,
         .gender = TRAINER_MON_RANDOM_GENDER,
+        .nickname = J_COMPOUND_STRING("ツルギ"),
     },
     [FRONTIER_MON_AEGISLASH_SHIELD_3] = {
         .species = SPECIES_AEGISLASH_SHIELD,
@@ -14029,6 +14094,7 @@ const struct TrainerMon gBattleFrontierMons[NUM_FRONTIER_MONS] =
         .dynamaxLevel = 10,
         .ball = BALL_POKE,
         .gender = TRAINER_MON_RANDOM_GENDER,
+        .nickname = J_COMPOUND_STRING("ツルギ"),
     },
     [FRONTIER_MON_AROMATISSE_1] = {
         .species = SPECIES_AROMATISSE,
@@ -14421,6 +14487,7 @@ const struct TrainerMon gBattleFrontierMons[NUM_FRONTIER_MONS] =
         .dynamaxLevel = 10,
         .ball = BALL_POKE,
         .gender = TRAINER_MON_RANDOM_GENDER,
+        .nickname = J_COMPOUND_STRING("リボン"),
     },
     [FRONTIER_MON_SYLVEON_2] = {
         .species = SPECIES_SYLVEON,
@@ -14435,6 +14502,7 @@ const struct TrainerMon gBattleFrontierMons[NUM_FRONTIER_MONS] =
         .dynamaxLevel = 10,
         .ball = BALL_POKE,
         .gender = TRAINER_MON_RANDOM_GENDER,
+        .nickname = J_COMPOUND_STRING("リボン"),
     },
     [FRONTIER_MON_SYLVEON_3] = {
         .species = SPECIES_SYLVEON,
@@ -14449,6 +14517,7 @@ const struct TrainerMon gBattleFrontierMons[NUM_FRONTIER_MONS] =
         .dynamaxLevel = 10,
         .ball = BALL_POKE,
         .gender = TRAINER_MON_RANDOM_GENDER,
+        .nickname = J_COMPOUND_STRING("リボン"),
     },
     [FRONTIER_MON_HAWLUCHA_1] = {
         .species = SPECIES_HAWLUCHA,
@@ -14589,6 +14658,7 @@ const struct TrainerMon gBattleFrontierMons[NUM_FRONTIER_MONS] =
         .dynamaxLevel = 10,
         .ball = BALL_POKE,
         .gender = TRAINER_MON_RANDOM_GENDER,
+        .nickname = J_COMPOUND_STRING("ぬめこ"),
     },
     [FRONTIER_MON_GOODRA_2] = {
         .species = SPECIES_GOODRA,
@@ -14603,6 +14673,7 @@ const struct TrainerMon gBattleFrontierMons[NUM_FRONTIER_MONS] =
         .dynamaxLevel = 10,
         .ball = BALL_POKE,
         .gender = TRAINER_MON_RANDOM_GENDER,
+        .nickname = J_COMPOUND_STRING("ぬめこ"),
     },
     [FRONTIER_MON_GOODRA_3] = {
         .species = SPECIES_GOODRA,
@@ -14617,6 +14688,7 @@ const struct TrainerMon gBattleFrontierMons[NUM_FRONTIER_MONS] =
         .dynamaxLevel = 10,
         .ball = BALL_POKE,
         .gender = TRAINER_MON_RANDOM_GENDER,
+        .nickname = J_COMPOUND_STRING("ぬめこ"),
     },
     [FRONTIER_MON_KLEFKI_1] = {
         .species = SPECIES_KLEFKI,
@@ -14841,6 +14913,7 @@ const struct TrainerMon gBattleFrontierMons[NUM_FRONTIER_MONS] =
         .dynamaxLevel = 10,
         .ball = BALL_POKE,
         .gender = TRAINER_MON_RANDOM_GENDER,
+        .nickname = J_COMPOUND_STRING("ハネゾウ"),
     },
     [FRONTIER_MON_DECIDUEYE_2] = {
         .species = SPECIES_DECIDUEYE,
@@ -14855,6 +14928,7 @@ const struct TrainerMon gBattleFrontierMons[NUM_FRONTIER_MONS] =
         .dynamaxLevel = 10,
         .ball = BALL_POKE,
         .gender = TRAINER_MON_RANDOM_GENDER,
+        .nickname = J_COMPOUND_STRING("ハネゾウ"),
     },
     [FRONTIER_MON_DECIDUEYE_3] = {
         .species = SPECIES_DECIDUEYE,
@@ -14869,6 +14943,7 @@ const struct TrainerMon gBattleFrontierMons[NUM_FRONTIER_MONS] =
         .dynamaxLevel = 10,
         .ball = BALL_POKE,
         .gender = TRAINER_MON_RANDOM_GENDER,
+        .nickname = J_COMPOUND_STRING("ハネゾウ"),
     },
     [FRONTIER_MON_INCINEROAR_1] = {
         .species = SPECIES_INCINEROAR,
@@ -17028,6 +17103,7 @@ const struct TrainerMon gBattleFrontierMons[NUM_FRONTIER_MONS] =
         .dynamaxLevel = 10,
         .ball = BALL_POKE,
         .gender = TRAINER_MON_RANDOM_GENDER,
+        .nickname = J_COMPOUND_STRING("クロガネ"),
     },
     [FRONTIER_MON_CORVIKNIGHT_2] = {
         .species = SPECIES_CORVIKNIGHT,
@@ -17042,6 +17118,7 @@ const struct TrainerMon gBattleFrontierMons[NUM_FRONTIER_MONS] =
         .dynamaxLevel = 10,
         .ball = BALL_POKE,
         .gender = TRAINER_MON_RANDOM_GENDER,
+        .nickname = J_COMPOUND_STRING("クロガネ"),
     },
     [FRONTIER_MON_CORVIKNIGHT_3] = {
         .species = SPECIES_CORVIKNIGHT,
@@ -17056,6 +17133,7 @@ const struct TrainerMon gBattleFrontierMons[NUM_FRONTIER_MONS] =
         .dynamaxLevel = 10,
         .ball = BALL_POKE,
         .gender = TRAINER_MON_RANDOM_GENDER,
+        .nickname = J_COMPOUND_STRING("クロガネ"),
     },
     [FRONTIER_MON_ORBEETLE_1] = {
         .species = SPECIES_ORBEETLE,
@@ -18626,6 +18704,7 @@ const struct TrainerMon gBattleFrontierMons[NUM_FRONTIER_MONS] =
         .dynamaxLevel = 10,
         .ball = BALL_POKE,
         .gender = TRAINER_MON_RANDOM_GENDER,
+        .nickname = J_COMPOUND_STRING("ミサイル"),
     },
     [FRONTIER_MON_DRAGAPULT_2] = {
         .species = SPECIES_DRAGAPULT,
@@ -18640,6 +18719,7 @@ const struct TrainerMon gBattleFrontierMons[NUM_FRONTIER_MONS] =
         .dynamaxLevel = 10,
         .ball = BALL_POKE,
         .gender = TRAINER_MON_RANDOM_GENDER,
+        .nickname = J_COMPOUND_STRING("ミサイル"),
     },
     [FRONTIER_MON_DRAGAPULT_3] = {
         .species = SPECIES_DRAGAPULT,
@@ -18654,6 +18734,7 @@ const struct TrainerMon gBattleFrontierMons[NUM_FRONTIER_MONS] =
         .dynamaxLevel = 10,
         .ball = BALL_POKE,
         .gender = TRAINER_MON_RANDOM_GENDER,
+        .nickname = J_COMPOUND_STRING("ミサイル"),
     },
     [FRONTIER_MON_KUBFU_1] = {
         .species = SPECIES_KUBFU,
@@ -23162,6 +23243,7 @@ const struct TrainerMon gBattleFrontierMons[NUM_FRONTIER_MONS] =
         .dynamaxLevel = 10,
         .ball = BALL_POKE,
         .gender = TRAINER_MON_RANDOM_GENDER,
+        .nickname = J_COMPOUND_STRING("トンカチ"),
     },
     [FRONTIER_MON_TINKATON_2] = {
         .species = SPECIES_TINKATON,
@@ -23176,6 +23258,7 @@ const struct TrainerMon gBattleFrontierMons[NUM_FRONTIER_MONS] =
         .dynamaxLevel = 10,
         .ball = BALL_POKE,
         .gender = TRAINER_MON_RANDOM_GENDER,
+        .nickname = J_COMPOUND_STRING("トンカチ"),
     },
     [FRONTIER_MON_TINKATON_3] = {
         .species = SPECIES_TINKATON,
@@ -23190,6 +23273,7 @@ const struct TrainerMon gBattleFrontierMons[NUM_FRONTIER_MONS] =
         .dynamaxLevel = 10,
         .ball = BALL_POKE,
         .gender = TRAINER_MON_RANDOM_GENDER,
+        .nickname = J_COMPOUND_STRING("トンカチ"),
     },
     [FRONTIER_MON_WUGTRIO_1] = {
         .species = SPECIES_WUGTRIO,
@@ -24005,6 +24089,7 @@ const struct TrainerMon gBattleFrontierMons[NUM_FRONTIER_MONS] =
         .dynamaxLevel = 10,
         .ball = BALL_POKE,
         .gender = TRAINER_MON_RANDOM_GENDER,
+        .nickname = J_COMPOUND_STRING("ドンさん"),
     },
     [FRONTIER_MON_KINGAMBIT_2] = {
         .species = SPECIES_KINGAMBIT,
@@ -24019,6 +24104,7 @@ const struct TrainerMon gBattleFrontierMons[NUM_FRONTIER_MONS] =
         .dynamaxLevel = 10,
         .ball = BALL_POKE,
         .gender = TRAINER_MON_RANDOM_GENDER,
+        .nickname = J_COMPOUND_STRING("ドンさん"),
     },
     [FRONTIER_MON_KINGAMBIT_3] = {
         .species = SPECIES_KINGAMBIT,
@@ -24033,6 +24119,7 @@ const struct TrainerMon gBattleFrontierMons[NUM_FRONTIER_MONS] =
         .dynamaxLevel = 10,
         .ball = BALL_POKE,
         .gender = TRAINER_MON_RANDOM_GENDER,
+        .nickname = J_COMPOUND_STRING("ドンさん"),
     },
     [FRONTIER_MON_GREAT_TUSK_1] = {
         .species = SPECIES_GREAT_TUSK,
@@ -24593,6 +24680,7 @@ const struct TrainerMon gBattleFrontierMons[NUM_FRONTIER_MONS] =
         .dynamaxLevel = 10,
         .ball = BALL_POKE,
         .gender = TRAINER_MON_RANDOM_GENDER,
+        .nickname = J_COMPOUND_STRING("コバン"),
     },
     [FRONTIER_MON_GHOLDENGO_2] = {
         .species = SPECIES_GHOLDENGO,
@@ -24607,6 +24695,7 @@ const struct TrainerMon gBattleFrontierMons[NUM_FRONTIER_MONS] =
         .dynamaxLevel = 10,
         .ball = BALL_POKE,
         .gender = TRAINER_MON_RANDOM_GENDER,
+        .nickname = J_COMPOUND_STRING("コバン"),
     },
     [FRONTIER_MON_GHOLDENGO_3] = {
         .species = SPECIES_GHOLDENGO,
@@ -24621,6 +24710,7 @@ const struct TrainerMon gBattleFrontierMons[NUM_FRONTIER_MONS] =
         .dynamaxLevel = 10,
         .ball = BALL_POKE,
         .gender = TRAINER_MON_RANDOM_GENDER,
+        .nickname = J_COMPOUND_STRING("コバン"),
     },
     [FRONTIER_MON_WO_CHIEN_1] = {
         .species = SPECIES_WO_CHIEN,
