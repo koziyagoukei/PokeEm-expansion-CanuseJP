@@ -42,6 +42,7 @@
 #include "constants/abilities.h"
 #include "constants/songs.h"
 #include "constants/battle_frontier.h"
+#include "constants/battle_frontier_mons.h"
 #include "constants/rgb.h"
 
 #define TAG_BUTTONS 0
@@ -3994,27 +3995,39 @@ static bool32 IsDomeStatusMove(enum Move move)
     return FALSE;
 }
 
-static bool32 IsDomeRareMove(enum Move move)
+// A move is rare when at most 1 in 1000 of the Frontier pool's sets use it (2 sets or fewer
+// in a pool of about 2000), so a signature or offbeat move stands out and a common TM move doesn't.
+#define DOME_RARE_MOVE_PER_MILLE 1
+
+// How many sets in the Frontier pool use each move. Counting the pool once is far quicker
+// than searching every species' learnset for each move. NULL if there is no memory for it.
+static u16 *CountFrontierPoolMoveUsers(u32 *poolSize)
 {
-    u16 i, j;
-    enum Species species = SPECIES_NONE;
-    for (i = 0; i < NUM_SPECIES; i++)
+    u16 *users = AllocZeroed(MOVES_COUNT * sizeof(*users));
+
+    *poolSize = 0;
+    if (users == NULL)
+        return NULL;
+    for (u32 monId = 0; monId < NUM_FRONTIER_MONS; monId++)
     {
-        if (!IsSpeciesEnabled(i))
+        if (!IsFrontierMonPoolEntryEnabled(monId))
             continue;
-        const struct LevelUpMove *learnset = GetSpeciesLevelUpLearnset(i);
-        for (j = 0; learnset[j].move != LEVEL_UP_MOVE_END; j++)
+        (*poolSize)++;
+        for (u32 i = 0; i < MAX_MON_MOVES; i++)
         {
-            if (learnset[j].move == move)
-            {
-                species++;
-                break;
-            }
+            enum Move move = gBattleFrontierMons[monId].moves[i];
+            if (move < MOVES_COUNT)
+                users[move]++;
         }
-        if (species >= NUM_SPECIES / 20) // At least 5% of all mons can learn this move
-            return FALSE;
     }
-    return TRUE;
+    return users;
+}
+
+static bool32 IsDomeRareMove(enum Move move, const u16 *poolMoveUsers, u32 poolSize)
+{
+    if (poolMoveUsers == NULL)
+        return FALSE;
+    return poolMoveUsers[move] * 1000 <= poolSize * DOME_RARE_MOVE_PER_MILLE;
 }
 
 static bool32 IsDomeComboMove(enum Move move)
@@ -4086,6 +4099,71 @@ static bool32 IsDomeComboMove(enum Move move)
     return IsStatChangeStatusMove(move, IsAtkSpAtkStatUpMove);
 }
 
+// The battle style shown on a trainer's card, from the qualities of all its moves
+// (FRONTIER_PARTY_SIZE * MAX_MON_MOVES of them).
+static u32 GetDomeBattleStyle(const enum Move *moves)
+{
+    s16 points[NUM_MOVE_POINT_TYPES] = {0};
+    u32 poolSize;
+    u16 *poolMoveUsers = CountFrontierPoolMoveUsers(&poolSize);
+    u32 i, j, style;
+
+    // Every move adds its qualities to the totals, as in Emerald.
+    for (i = 0; i < FRONTIER_PARTY_SIZE * MAX_MON_MOVES; i++)
+    {
+        enum Move move = moves[i];
+        u32 accuracy;
+
+        if (move == MOVE_NONE)
+            continue; // An empty slot has no qualities.
+        accuracy = GetMoveAccuracy(move);
+        points[MOVE_POINTS_COMBO] += IsDomeComboMove(move);
+        points[MOVE_POINTS_STAT_RAISE] += IsStatRaisingMove(move);
+        points[MOVE_POINTS_STAT_LOWER] += IsStatLoweringMove(move);
+        points[MOVE_POINTS_RARE] += IsDomeRareMove(move, poolMoveUsers, poolSize);
+        points[MOVE_POINTS_HEAL] += IsDomeHealingMove(move);
+        points[MOVE_POINTS_RISKY] += IsDomeRiskyMove(move);
+        points[MOVE_POINTS_STATUS] += IsDomeStatusMove(move);
+        points[MOVE_POINTS_DMG] += !IsBattleMoveStatus(move);
+        points[MOVE_POINTS_DEF] += IsDomeDefensiveMove(move);
+        points[MOVE_POINTS_ACCURATE] += (accuracy == 0 || accuracy == 100);
+        points[MOVE_POINTS_POWERFUL] += (GetMovePower(move) >= 100);
+        points[MOVE_POINTS_POPULAR] += IsDomePopularMove(move);
+        points[MOVE_POINTS_LUCK] += IsDomeLuckyMove(move);
+        points[MOVE_POINTS_STRONG] += (GetMovePower(move) >= 90);
+        points[MOVE_POINTS_LOW_PP] += (GetMovePP(move) <= 5);
+        points[MOVE_POINTS_EFFECT] += MoveIsAffectedBySheerForce(move);
+    }
+    Free(poolMoveUsers);
+
+    // Each element of sBattleStyleThresholds is an array of point thresholds for particular move qualities
+    // If all the point thresholds in the array are satisfied, the trainer is considered to be using that battle style
+    for (style = 0; style < ARRAY_COUNT(sBattleStyleThresholds); style++)
+    {
+        u32 thresholdStatCount = 0, met = 0;
+
+        for (j = 0; j < NUM_MOVE_POINT_TYPES; j++)
+        {
+            if (sBattleStyleThresholds[style][j] != 0)
+            {
+                thresholdStatCount++;
+                if (points[j] != 0 && points[j] >= sBattleStyleThresholds[style][j])
+                    met++;
+            }
+        }
+        if (thresholdStatCount == met)
+            break;
+    }
+    return style;
+}
+
+#if TESTING
+u32 Test_GetDomeBattleStyle(const enum Move *moves)
+{
+    return GetDomeBattleStyle(moves);
+}
+#endif
+
 // allocatedArray below needs to be large enough to hold stat totals for each mon, or totals of each type of move points
 #define ALLOC_ARRAY_SIZE max(NUM_STATS * FRONTIER_PARTY_SIZE, NUM_MOVE_POINT_TYPES)
 
@@ -4099,6 +4177,7 @@ static void DisplayTrainerInfoOnCard(u8 flags, u8 trainerTourneyId)
     int windowId = WIN_TRAINER_NAME;
     int x = 0, y = 0;
     u8 palSlot = 0;
+    enum Move moves[FRONTIER_PARTY_SIZE * MAX_MON_MOVES];
     s16 *allocatedArray = AllocZeroed(sizeof(s16) * ALLOC_ARRAY_SIZE);
     trainerId = DOME_TRAINERS[trainerTourneyId].trainerId;
 
@@ -4251,99 +4330,20 @@ static void DisplayTrainerInfoOnCard(u8 flags, u8 trainerTourneyId)
     textPrinter.currentY = 4;
     AddTextPrinter(&textPrinter, 0, NULL);
 
-    // Calculate move scores to determine the trainers battle style
+    // Print the trainers battle style
     for (i = 0; i < FRONTIER_PARTY_SIZE; i++)
     {
         for (j = 0; j < MAX_MON_MOVES; j++)
         {
-            for (k = 0; k < NUM_MOVE_POINT_TYPES; k++)
-            {
-                enum Move move;
-                if (trainerId == TRAINER_FRONTIER_BRAIN)
-                    move = GetFrontierBrainMonMove(i, j);
-                else if (trainerId == TRAINER_PLAYER)
-                    move = gSaveBlock2Ptr->frontier.domePlayerPartyData[i].moves[j];
-                else
-                    move = gFacilityTrainerMons[DOME_MONS[trainerTourneyId][i]].moves[j];
-                u32 accuracy = GetMoveAccuracy(move);
-
-                switch (k)
-                {
-                case MOVE_POINTS_COMBO:
-                    allocatedArray[k] = IsDomeComboMove(move) ? 1 : 0;
-                    break;
-                case MOVE_POINTS_STAT_RAISE:
-                    allocatedArray[k] = IsStatRaisingMove(move) ? 1 : 0;
-                    break;
-                case MOVE_POINTS_STAT_LOWER:
-                    allocatedArray[k] = IsStatLoweringMove(move) ? 1 : 0;
-                    break;
-                case MOVE_POINTS_RARE:
-                    allocatedArray[k] = IsDomeRareMove(move) ? 1 : 0;
-                    break;
-                case MOVE_POINTS_HEAL:
-                    allocatedArray[k] = IsDomeHealingMove(move) ? 1 : 0;
-                    break;
-                case MOVE_POINTS_RISKY:
-                    allocatedArray[k] = IsDomeRiskyMove(move) ? 1 : 0;
-                    break;
-                case MOVE_POINTS_STATUS:
-                    allocatedArray[k] = IsDomeStatusMove(move);
-                    break;
-                case MOVE_POINTS_DMG:
-                    allocatedArray[k] = (!IsBattleMoveStatus(move)) ? 1 : 0;
-                    break;
-                case MOVE_POINTS_DEF:
-                    allocatedArray[k] = IsDomeDefensiveMove(move) ? 1 : 0;
-                    break;
-                case MOVE_POINTS_ACCURATE:
-                    allocatedArray[k] = (accuracy == 0 || accuracy == 100) ? 1 : 0;
-                    break;
-                case MOVE_POINTS_POWERFUL:
-                    allocatedArray[k] = (GetMovePower(move) >= 100) ? 1 : 0;
-                    break;
-                case MOVE_POINTS_POPULAR:
-                    allocatedArray[k] = IsDomePopularMove(move) ? 1 : 0;
-                    break;
-                case MOVE_POINTS_LUCK:
-                    allocatedArray[k] = IsDomeLuckyMove(move) ? 1 : 0;
-                    break;
-                case MOVE_POINTS_STRONG:
-                    allocatedArray[k] = (GetMovePower(move) >= 90) ? 1 : 0;
-                    break;
-                case MOVE_POINTS_LOW_PP:
-                    allocatedArray[k] = (GetMovePP(move) <= 5) ? 1 : 0;
-                    break;
-                case MOVE_POINTS_EFFECT:
-                    allocatedArray[k] = MoveIsAffectedBySheerForce(move);
-                    break;
-                }
-            }
+            if (trainerId == TRAINER_FRONTIER_BRAIN)
+                moves[i * MAX_MON_MOVES + j] = GetFrontierBrainMonMove(i, j);
+            else if (trainerId == TRAINER_PLAYER)
+                moves[i * MAX_MON_MOVES + j] = gSaveBlock2Ptr->frontier.domePlayerPartyData[i].moves[j];
+            else
+                moves[i * MAX_MON_MOVES + j] = gFacilityTrainerMons[DOME_MONS[trainerTourneyId][i]].moves[j];
         }
     }
-
-    // Get the battle style the trainer uses
-    // Each element of sBattleStyleThresholds is an array of point thresholds for particular move qualities
-    // If all the point thresholds in the array are satisfied, the player is considered to be using that battle style
-    for (i = 0; i < ARRAY_COUNT(sBattleStyleThresholds); i++)
-    {
-        int thresholdStatCount = 0;
-
-        for (k = 0, j = 0; j < NUM_MOVE_POINT_TYPES; j++)
-        {
-            if (sBattleStyleThresholds[i][j] != 0)
-            {
-                thresholdStatCount++;
-                if (allocatedArray[j] != 0 && allocatedArray[j] >= sBattleStyleThresholds[i][j])
-                    k++; // number of point thresholds met/exceeded
-            }
-        }
-        if (thresholdStatCount == k)
-            break; // All thresholds for battle style met/exceeded, player uses this battle style
-    }
-
-    // Print the trainers battle style
-    textPrinter.currentChar = sBattleDomeOpponentStyleTexts[i];
+    textPrinter.currentChar = sBattleDomeOpponentStyleTexts[GetDomeBattleStyle(moves)];
     textPrinter.y = 20;
     textPrinter.currentY = 20;
     AddTextPrinter(&textPrinter, 0, NULL);

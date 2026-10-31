@@ -1,4 +1,5 @@
 #include "global.h"
+#include "malloc.h"
 #include "pokemon.h"
 #include "pokemon_storage_system.h"
 #include "pokemon_storage_sort.h"
@@ -219,4 +220,43 @@ TEST("Box sort: kana names compare in gojuon order")
     // Shorter names come first, and equal names compare equal.
     EXPECT_LT(CompareKanaStrings(COMPOUND_STRING("{JPN}かみ"), COMPOUND_STRING("{JPN}かみなり")), 0);
     EXPECT_EQ(CompareKanaStrings(COMPOUND_STRING("{JPN}じしん"), COMPOUND_STRING("{JPN}ジシン")), 0);
+}
+
+TEST("Box sort: hundreds of different moves are listed once each in gojuon order")
+{
+    u16 *candidates = Alloc(MOVES_COUNT * sizeof(*candidates));
+    u8 *listed = AllocZeroed(MOVES_COUNT);
+    u32 count;
+
+    // Every move in some slot of the full boxes.
+    for (u32 i = 0; i < TOTAL_BOXES_COUNT * IN_BOX_COUNT; i++)
+    {
+        struct BoxPokemon boxMon;
+
+        CreateBoxMon(&boxMon, SPECIES_PIKACHU, 50, i, OTID_STRUCT_PLAYER_ID);
+        for (u32 j = 0; j < MAX_MON_MOVES; j++)
+        {
+            enum Move move = 1 + (i * MAX_MON_MOVES + j) % (MOVES_COUNT - 1);
+            SetBoxMonData(&boxMon, MON_DATA_MOVE1 + j, &move);
+        }
+        SetBoxMonAt(i / IN_BOX_COUNT, i % IN_BOX_COUNT, &boxMon);
+    }
+
+    count = GetStorageSortCandidates(0, TOTAL_BOXES_COUNT, STORAGE_SORT_MOVE, candidates, MOVES_COUNT);
+
+    EXPECT_EQ(count, MOVES_COUNT - 1);
+    for (u32 i = 0; i < count; i++)
+    {
+        EXPECT(!listed[candidates[i]]);
+        listed[candidates[i]] = TRUE;
+        if (i > 0)
+        {
+            s32 order = CompareKanaStrings(GetStorageSortCandidateName(STORAGE_SORT_MOVE, candidates[i - 1]),
+                                           GetStorageSortCandidateName(STORAGE_SORT_MOVE, candidates[i]));
+            // Moves with the same name keep ID order.
+            EXPECT(order < 0 || (order == 0 && candidates[i - 1] < candidates[i]));
+        }
+    }
+    Free(listed);
+    Free(candidates);
 }

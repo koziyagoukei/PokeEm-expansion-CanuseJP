@@ -172,6 +172,88 @@ static void MarkCandidate(u8 *seen, u32 limit, u32 value)
         seen[value / 8] |= 1 << (value % 8);
 }
 
+// Each candidate is sorted as one number: the collation of its name's first two characters
+// above its ID. Most names already differ there, so few comparisons read the whole names.
+#define SORT_ID_BITS        14
+#define SORT_ID_MASK        ((1 << SORT_ID_BITS) - 1)
+#define SORT_PREFIX_CHARS   2
+#define SORT_PREFIX_BITS    9 // Collation bases are below 0x130.
+
+STATIC_ASSERT(MOVES_COUNT <= SORT_ID_MASK && ABILITIES_COUNT <= SORT_ID_MASK, StorageSortIdBits)
+STATIC_ASSERT(SORT_ID_BITS + SORT_PREFIX_CHARS * SORT_PREFIX_BITS <= 32, StorageSortEntryBits)
+
+static u32 GetKanaCollationBase(u8 c, u32 *variant);
+static const u8 *SkipExtCtrlCodes(const u8 *str);
+
+static u32 MakeCandidateSortEntry(enum StorageSortKey key, u32 value)
+{
+    const u8 *str = GetStorageSortCandidateName(key, value);
+    u32 prefix = 0;
+
+    for (u32 i = 0; i < SORT_PREFIX_CHARS; i++)
+    {
+        u32 variant;
+
+        // Like CompareKanaStrings: an ended name (0) sorts before any character.
+        str = SkipExtCtrlCodes(str);
+        prefix <<= SORT_PREFIX_BITS;
+        if (*str != EOS)
+            prefix |= GetKanaCollationBase(*str++, &variant) + 1;
+    }
+    return (prefix << SORT_ID_BITS) | value;
+}
+
+static bool32 SortsBefore(enum StorageSortKey key, u32 entry1, u32 entry2)
+{
+    s32 order;
+
+    if ((entry1 >> SORT_ID_BITS) != (entry2 >> SORT_ID_BITS))
+        return entry1 < entry2;
+    order = CompareKanaStrings(GetStorageSortCandidateName(key, entry1 & SORT_ID_MASK),
+                               GetStorageSortCandidateName(key, entry2 & SORT_ID_MASK));
+    if (order != 0)
+        return order < 0;
+    return entry1 < entry2; // The same name: ascending ID.
+}
+
+// A merge sort: full boxes can hold hundreds of different moves, and sorting their names by
+// insertion stalled the menu for seconds. entries holds 2 * count numbers, the second half scratch.
+static void SortCandidatesByName(enum StorageSortKey key, u16 *values, u32 *entries, u32 count)
+{
+    u32 *src = entries, *dst = entries + count, *swap;
+
+    for (u32 i = 0; i < count; i++)
+        src[i] = MakeCandidateSortEntry(key, values[i]);
+
+    for (u32 width = 1; width < count; width *= 2)
+    {
+        for (u32 left = 0; left < count; left += 2 * width)
+        {
+            u32 mid = min(left + width, count);
+            u32 right = min(left + 2 * width, count);
+            u32 a = left, b = mid, out = left;
+
+            while (a < mid && b < right)
+            {
+                if (SortsBefore(key, src[b], src[a]))
+                    dst[out++] = src[b++];
+                else
+                    dst[out++] = src[a++];
+            }
+            while (a < mid)
+                dst[out++] = src[a++];
+            while (b < right)
+                dst[out++] = src[b++];
+        }
+        swap = src;
+        src = dst;
+        dst = swap;
+    }
+
+    for (u32 i = 0; i < count; i++)
+        values[i] = src[i] & SORT_ID_MASK;
+}
+
 u32 GetStorageSortCandidates(u32 firstBox, u32 numBoxes, enum StorageSortKey key, u16 *dst, u32 maxCount)
 {
     u32 i, j, count = 0;
@@ -219,16 +301,13 @@ u32 GetStorageSortCandidates(u32 firstBox, u32 numBoxes, enum StorageSortKey key
     Free(seen);
 
     // Types keep their usual order; move and ability names are listed in gojūon order.
-    if (key != STORAGE_SORT_TYPE)
+    if (key != STORAGE_SORT_TYPE && count > 1)
     {
-        for (i = 1; i < count; i++)
-        {
-            u16 value = dst[i];
-
-            for (j = i; j > 0 && CompareKanaStrings(GetStorageSortCandidateName(key, dst[j - 1]), GetStorageSortCandidateName(key, value)) > 0; j--)
-                dst[j] = dst[j - 1];
-            dst[j] = value;
-        }
+        u32 *entries = Alloc(2 * count * sizeof(*entries));
+        if (entries == NULL)
+            return 0;
+        SortCandidatesByName(key, dst, entries, count);
+        Free(entries);
     }
 
     return count;
