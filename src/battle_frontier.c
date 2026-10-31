@@ -565,6 +565,48 @@ void MarkFrontierOpponentPartyGimmicks(void)
     MarkFrontierOpponentPartyGimmicksForTrainer(B_TRAINER_OPPONENT_B);
 }
 
+static void AllowTrainerPartyGimmicks(enum BattleTrainer trainer, bool32 dynamax)
+{
+    u32 teraType = TYPE_NONE, dynamaxLevel = MAX_DYNAMAX_LEVEL;
+
+    for (u32 i = 0; i < PARTY_SIZE; i++)
+    {
+        struct Pokemon *mon = &gParties[trainer][i];
+
+        if (GetMonData(mon, MON_DATA_SPECIES_OR_EGG) == SPECIES_NONE)
+            continue;
+        // TYPE_NONE is the Pokémon's own Tera type, chosen by its personality.
+        if (GetMonData(mon, MON_DATA_TERA_TYPE) == TYPE_MYSTERY)
+            SetMonData(mon, MON_DATA_TERA_TYPE, &teraType);
+        if (dynamax && GetMonData(mon, MON_DATA_DYNAMAX_LEVEL) == BLOCK_AI_DYNAMAX)
+            SetMonData(mon, MON_DATA_DYNAMAX_LEVEL, &dynamaxLevel);
+    }
+}
+
+// Outside the facilities (release battles, Pokevirus and the other story battles) every trainer
+// may Terastallize and Dynamax, like the player. Party data without a Tera type or Dynamax level
+// blocks the AI from them, so those Pokémon get their own Tera type and a full Dynamax level.
+// Mega Evolution and Z-Moves already follow the held item. The in-game partner keeps its own
+// Dynamax setting: its side has only one Dynamax, which stays the player's.
+void AllowTrainerBattleGimmicks(void)
+{
+#if !TESTING
+    // Dynamax is always on in this hack; a whiteout clears the flag.
+    if (B_FLAG_DYNAMAX_BATTLE != 0)
+        FlagSet(B_FLAG_DYNAMAX_BATTLE);
+
+    if (!(gBattleTypeFlags & BATTLE_TYPE_TRAINER)
+     || (gBattleTypeFlags & (BATTLE_TYPE_FRONTIER | BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED | BATTLE_TYPE_RECORDED_LINK)))
+        return;
+
+    AllowTrainerPartyGimmicks(B_TRAINER_OPPONENT_A, TRUE);
+    if (gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS)
+        AllowTrainerPartyGimmicks(B_TRAINER_OPPONENT_B, TRUE);
+    if (gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER)
+        AllowTrainerPartyGimmicks(B_TRAINER_PARTNER, FALSE);
+#endif
+}
+
 static void SetFacilityMonGimmickAvailability(const struct TrainerMon *fmon, struct Pokemon *mon)
 {
     u32 dynamaxLevel = (fmon->dynamaxLevel > 0 && fmon->shouldUseDynamax) ? fmon->dynamaxLevel : BLOCK_AI_DYNAMAX;

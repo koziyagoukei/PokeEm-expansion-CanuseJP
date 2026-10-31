@@ -484,6 +484,7 @@ void CB2_InitBattle(void)
         MoveSaveBlocks_ResetHeap();
     AllocateBattleResources();
     MarkFrontierOpponentPartyGimmicks();
+    AllowTrainerBattleGimmicks();
     AllocateBattleSpritesData();
     AllocateMonSpritesGfx();
     RecordedBattle_ClearFrontierPassFlag();
