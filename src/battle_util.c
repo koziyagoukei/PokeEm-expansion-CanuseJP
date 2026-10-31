@@ -5950,17 +5950,14 @@ bool32 IsBattlerProtected(struct BattleCalcValues *cv)
     if (GetMoveEffect(cv->move) == EFFECT_CURSE && !IS_BATTLER_OF_TYPE(cv->battlerAtk, TYPE_GHOST))
         return FALSE;
 
+    bool32 breaksThrough = FALSE;
     if (gProtectStructs[cv->battlerDef].protected != PROTECT_MAX_GUARD && !MoveIgnoresProtect(cv->move))
     {
         if (IsZMove(cv->move) || IsMaxMove(cv->move))
             return FALSE; // Z-Moves and Max Moves bypass protection (except Max Guard).
 
-        if ((cv->abilities[cv->battlerAtk] == ABILITY_UNSEEN_FIST || cv->abilities[cv->battlerAtk] == ABILITY_PIERCING_DRILL)
-         && IsMoveMakingContact(cv->battlerAtk, cv->battlerDef, cv->abilities[cv->battlerAtk], cv->holdEffects[cv->battlerAtk], cv->move))
-        {
-            gSpecialStatuses[cv->battlerDef].breaksThroughProtectFully = TRUE;
-            return FALSE;
-        }
+        breaksThrough = (cv->abilities[cv->battlerAtk] == ABILITY_UNSEEN_FIST || cv->abilities[cv->battlerAtk] == ABILITY_PIERCING_DRILL)
+            && IsMoveMakingContact(cv->battlerAtk, cv->battlerDef, cv->abilities[cv->battlerAtk], cv->holdEffects[cv->battlerAtk], cv->move);
     }
 
     enum MoveTarget moveTarget = GetBattlerMoveTargetType(cv->battlerAtk, cv->move);
@@ -5999,6 +5996,13 @@ bool32 IsBattlerProtected(struct BattleCalcValues *cv)
     else
         isProtected = FALSE;
 
+    // Unseen Fist and Piercing Drill only show their message against a target that is
+    // really protected, not when it is the target's partner that used Protect.
+    if (isProtected && breaksThrough)
+    {
+        gSpecialStatuses[cv->battlerDef].breaksThroughProtectFully = TRUE;
+        return FALSE;
+    }
     return isProtected;
 }
 
