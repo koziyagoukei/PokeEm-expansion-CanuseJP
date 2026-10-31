@@ -150,6 +150,9 @@ const u16 gTrainerPalette_LeaderWinona[] = INCGFX_U16("graphics/trainers/front_p
 
 const u32 gTrainerFrontPic_LeaderTateAndLiza[] = INCGFX_U32("graphics/trainers/front_pics/leader_tate_and_liza.png", ".4bpp.smol");
 const u16 gTrainerPalette_LeaderTateAndLiza[] = INCGFX_U16("graphics/trainers/front_pics/leader_tate_and_liza.png", ".gbapal");
+// Each twin cut out of the pair's picture, for battles where they stand as two trainers.
+const u32 gTrainerFrontPic_LeaderTate[] = INCGFX_U32("graphics/trainers/front_pics/leader_tate.png", ".4bpp.smol");
+const u32 gTrainerFrontPic_LeaderLiza[] = INCGFX_U32("graphics/trainers/front_pics/leader_liza.png", ".4bpp.smol");
 
 const u32 gTrainerFrontPic_LeaderJuan[] = INCGFX_U32("graphics/trainers/front_pics/leader_juan.png", ".4bpp.smol");
 const u16 gTrainerPalette_LeaderJuan[] = INCGFX_U16("graphics/trainers/front_pics/leader_juan.png", ".gbapal");
@@ -842,6 +845,14 @@ const struct TrainerPicInfo gTrainerPicInfo[TRAINER_PIC_COUNT] =
     [TRAINER_PIC_LEADER_TATE_AND_LIZA] =
     {
         .frontPic = TRAINER_FRONT_PIC(gTrainerFrontPic_LeaderTateAndLiza, gTrainerPalette_LeaderTateAndLiza),
+    },
+    [TRAINER_PIC_LEADER_TATE] =
+    {
+        .frontPic = TRAINER_FRONT_PIC(gTrainerFrontPic_LeaderTate, gTrainerPalette_LeaderTateAndLiza),
+    },
+    [TRAINER_PIC_LEADER_LIZA] =
+    {
+        .frontPic = TRAINER_FRONT_PIC(gTrainerFrontPic_LeaderLiza, gTrainerPalette_LeaderTateAndLiza),
     },
     [TRAINER_PIC_LEADER_JUAN] =
     {

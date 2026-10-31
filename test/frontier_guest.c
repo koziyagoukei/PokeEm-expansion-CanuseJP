@@ -346,3 +346,10 @@ TEST("Frontier guest: Factory generation applies types before hints and excludes
     CallBattlePalaceFunction();
     EXPECT(StringLength(gStringVar4) > 0);
 }
+
+TEST("Frontier guests: Tate and Liza as two trainers each show one twin, not the pair picture")
+{
+    EXPECT_EQ(GetFrontierGuestTrainer(TRAINER_FRONTIER_TATE)->portrait, TRAINER_PIC_LEADER_TATE);
+    EXPECT_EQ(GetFrontierGuestTrainer(TRAINER_FRONTIER_LIZA)->portrait, TRAINER_PIC_LEADER_LIZA);
+    EXPECT_EQ(GetFrontierGuestTrainer(TRAINER_FRONTIER_TATE_AND_LIZA)->portrait, TRAINER_PIC_LEADER_TATE_AND_LIZA);
+}

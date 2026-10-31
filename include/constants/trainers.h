@@ -179,6 +179,8 @@ enum __attribute__((packed)) TrainerPicID
     TRAINER_PIC_PAINTER_FRLG,
     TRAINER_PIC_ROCKET_COOK,
     TRAINER_PIC_POKEVIRUS,
+    TRAINER_PIC_LEADER_TATE, // One twin each, for a multi battle against Tate and Liza
+    TRAINER_PIC_LEADER_LIZA,
     TRAINER_PIC_COUNT,
 };
 
