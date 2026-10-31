@@ -2,6 +2,7 @@
 #include "malloc.h"
 #include "battle.h"
 #include "pokemon.h"
+#include "battle_ai_record.h"
 #include "battle_controllers.h"
 #include "battle_interface.h"
 #include "battle_z_move.h"
@@ -2674,6 +2675,7 @@ void CreateAbilityPopUp(enum BattlerId battler, enum Ability ability, bool32 isD
 
     if (gBattleScripting.abilityPopupOverwrite)
         ability = gBattleScripting.abilityPopupOverwrite;
+    RevealAbilityToPlayer(battler, ability);
 
     if (gTestRunnerEnabled)
     {

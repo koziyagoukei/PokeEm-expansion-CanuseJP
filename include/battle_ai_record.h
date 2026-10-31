@@ -9,5 +9,8 @@ void RecordItemEffectBattle(enum BattlerId battlerId, enum HoldEffect itemEffect
 void ClearBattlerMoveHistory(enum BattlerId battlerId);
 void ClearBattlerAbilityHistory(enum BattlerId battlerId);
 void ClearBattlerItemEffectHistory(enum BattlerId battlerId);
+void ClearAbilitiesRevealedToPlayer(void);
+void RevealAbilityToPlayer(enum BattlerId battler, enum Ability ability);
+enum Ability GetAbilityKnownToPlayer(enum BattlerId battler);
 
 #endif // GUARD_BATTLE_AI_COMPUTE_H
