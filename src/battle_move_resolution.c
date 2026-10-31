@@ -2702,15 +2702,18 @@ static enum CancelerResult CancelerPreAnimActivations(struct BattleCalcValues *c
     switch (gBattleStruct->eventState.moveEndBlock)
     {
     case PRE_ANIM_STRONG_WINDS:
-        if (GetWeather() & B_WEATHER_STRONG_WINDS)
+        if (GetWeather() & B_WEATHER_STRONG_WINDS && !IsBattleMoveStatus(cv->move))
         {
             for (enum BattlerId battlerDef = 0; battlerDef < gBattlersCount; battlerDef++)
             {
                 if (ShouldSkipBattlerForDamage(cv->battlerAtk, battlerDef))
                     continue;
 
-                if (gBattleStruct->moveResultFlags[battlerDef] & MOVE_RESULT_HIGH_EFFECTIVENESS
-                 && IS_BATTLER_OF_TYPE(battlerDef, TYPE_FLYING))
+                // Only when the winds take away the Flying type's weakness, whatever the other
+                // type does: not for a hit that is super effective through the other type alone.
+                if (!(gBattleStruct->moveResultFlags[battlerDef] & (MOVE_RESULT_MISSED | MOVE_RESULT_DOESNT_AFFECT_FOE | MOVE_RESULT_FAILED | MOVE_RESULT_PROTECTED))
+                 && IS_BATTLER_OF_TYPE(battlerDef, TYPE_FLYING)
+                 && GetTypeModifier(GetBattleMoveType(cv->move), TYPE_FLYING) >= UQ_4_12(2.0))
                 {
                     BattleScriptCall(BattleScript_AttackWeakenedByStrongWinds);
                     gBattleStruct->eventState.moveEndBlock++;
