@@ -3,7 +3,7 @@
     "data_layout": {
       "ability_ids": "ae50d55506459341897886c7605b53f28d17e6dcbb354fd8256744dcf473feb2",
       "battle_pokemon": "87c9493c08660a4918e2c7860272d2fdec6be099d4de6db9dffd00b7ab2eb89a",
-      "battle_volatile_layout": "25c29620f4c38db72bf8b96dc89ca66a732eb3b55a276b99f97af76ccd8243e0",
+      "battle_volatile_layout": "97a2e9f8b784ee61ec2bd24bcf40a59b847b8337ca355fc32b32a13febeedfe2",
       "battle_volatiles": "49f07bad9c2522920b83565e5e722d6d59ee9fad6ed46071c408c03ee0862742",
       "box_pokemon": "7269b31bf963339c61fb6c4110c2bfd16099150dd668ac95a35229bdcce7e7f0",
       "choose_move_packet": "480358c2cf5f949539066a6dee068ca69fb65fe1eed43e1771bf46cf1409d664",
@@ -42,10 +42,10 @@
       "union_room_activities": "9024f4f9a004353a2222be88d9d6768d42d00f21df05a589394ff353895686cf"
     }
   },
-  "data_layout_version": 7,
+  "data_layout_version": 8,
   "fingerprints": {
-    "combined": "6d0cb7d74bcb0ef894c071794954ea97459a33be9f9693c91ada7d7fb823fb7b",
-    "data_layout": "fc47029bea51ca82e4e014544ab37782714128af8456c1d210ba2f581a4cbc2b",
+    "combined": "901fbf9139c37f36381f73ffb407ecc1251690c8eb8b6fe7b28e5a599a73600a",
+    "data_layout": "9aaa6663fe03c54cb0d6c6b1ead893275baa3eab7449b5b5165e97e736b1db77",
     "protocol": "aa4635a0875a0ea7823211376eb1477e28a508cc125efbc2111c41d1fccc46ee"
   },
   "link_compat_version": 15,

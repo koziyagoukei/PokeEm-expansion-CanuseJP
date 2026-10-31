@@ -1753,7 +1753,7 @@ static void Task_ClosePokedex(u8 taskId)
         SetMainCallback2(sPokedexFromScript ? CB2_ReturnToFieldContinueScript : CB2_ReturnToFieldWithOpenMenu);
         sPokedexFromScript = FALSE;
         m4aMPlayVolumeControl(&gMPlayInfo_BGM, TRACKS_ALL, 0x100);
-        Free(sPokedexView);
+        FREE_AND_SET_NULL(sPokedexView);
     }
 }
 
@@ -4085,10 +4085,9 @@ static void Task_ExitCaughtMonPage(u8 taskId)
         isShiny = (bool8)gTasks[taskId].tIsShiny;
         LoadDexMonPalette(taskId, isShiny);
 
-        if (sPokedexView)
+        if (POKEDEX_PLUS_HGSS)
         {
-            Free(sPokedexView);
-            sPokedexView = NULL;
+            FREE_AND_SET_NULL(sPokedexView);
         }
 
         DestroyTask(taskId);
