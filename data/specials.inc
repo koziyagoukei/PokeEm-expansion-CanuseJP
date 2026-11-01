@@ -750,3 +750,5 @@ gSpecials::
 	def_special PartyBath_CheckExpansion
 	def_special PartyBath_PickVisitors
 	def_special PartyBath_BufferVisitorText
+	def_special PartyEat_PickVisitors
+	def_special PartyEat_BufferVisitorText

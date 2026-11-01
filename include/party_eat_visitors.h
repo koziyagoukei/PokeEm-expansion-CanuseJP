@@ -1,0 +1,14 @@
+#ifndef GUARD_PARTY_EAT_VISITORS_H
+#define GUARD_PARTY_EAT_VISITORS_H
+
+#define EAT_VISITOR_SLOTS 2
+#define EAT_VISITOR_LOCAL_ID 8
+#define VAR_EAT_VISITOR VAR_TEMP_8
+#define VAR_EAT_VISITOR_GFX VAR_OBJ_GFX_ID_B
+#define FLAG_EAT_VISITOR_HIDDEN FLAG_TEMP_1A
+#define EAT_VISITOR_NONE 0xFFFF
+
+void PartyEat_PickVisitors(void);
+void PartyEat_BufferVisitorText(void);
+
+#endif

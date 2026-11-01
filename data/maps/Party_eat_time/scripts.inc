@@ -10,6 +10,16 @@ Party_eat_time_OnLoad:
 Party_eat_time_OnTransition:
 	setflag FLAG_TEMP_HIDE_FOLLOWER
 	special Special_SpawnPartyRoamerMons
+	special PartyEat_PickVisitors
+	end
+
+PartyEatTime_EventScript_Visitor::
+	lockall
+	special PartyEat_BufferVisitorText
+	goto_if_eq VAR_RESULT, FALSE, PartyEatTime_EventScript_VisitorEnd
+	msgbox gStringVar4, MSGBOX_DEFAULT
+PartyEatTime_EventScript_VisitorEnd:
+	releaseall
 	end
 
 #define TEISHOKUYA_MENU_GIGANTAMAX 21
