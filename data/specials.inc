@@ -748,3 +748,5 @@ gSpecials::
 	def_special PartyBath_GetPendingCall
 	def_special PartyBath_CompleteCall
 	def_special PartyBath_CheckExpansion
+	def_special PartyBath_PickVisitors
+	def_special PartyBath_BufferVisitorText

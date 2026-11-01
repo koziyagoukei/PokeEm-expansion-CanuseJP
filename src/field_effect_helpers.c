@@ -1043,6 +1043,12 @@ u32 FldEff_HotSpringsWater(void)
     if (objectEventId == OBJECT_EVENTS_COUNT)
         return 0;
 
+    if (TrySetBathHotSpringsSubsprites(objectEvent, &gSprites[objectEvent->spriteId]))
+    {
+        FieldEffectActiveListRemove(FLDEFF_HOT_SPRINGS_WATER);
+        return 0;
+    }
+
     graphicsInfo = GetObjectEventGraphicsInfo(objectEvent->graphicsId);
     if (IsPartyBathTimePlayerHotSpringsWater(objectEvent))
         waterSpriteCount = 1;

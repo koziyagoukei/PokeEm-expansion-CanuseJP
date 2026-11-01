@@ -5,6 +5,7 @@ PartyBath_Rock_MapScripts::
 
 PartyBathExpansion_OnTransition:
 	setflag FLAG_TEMP_HIDE_FOLLOWER
+	special PartyBath_PickVisitors
 	end
 PartyBathExpansion_OnResume:
 	special Special_StartPartyBathTimeFriendship

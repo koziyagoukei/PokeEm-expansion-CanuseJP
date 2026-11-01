@@ -894,7 +894,7 @@ static const struct FrontierTrainerTexts sFrontierTrainerTexts[FRONTIER_TRAINERS
         COMPOUND_STRING("{JPN}お父さーん！\n負けちゃったよー！"),
     },
     [FRONTIER_TRAINER_REGINA] = { // おじょうちゃんたち ヤヤ
-        COMPOUND_STRING("{JPN}ヤヤね ポケモン\nだいすき なの！"),
+        COMPOUND_STRING("{JPN}ヤヤね ポケモン\n大好き なの！"),
         COMPOUND_STRING("{JPN}ポケモンも ヤヤのこと\nだいすき なんだよ！"),
         COMPOUND_STRING("{JPN}ポケモン\nごめんね……。"),
     },
@@ -1399,7 +1399,7 @@ static const struct FrontierTrainerTexts sFrontierTrainerTexts[FRONTIER_TRAINERS
         COMPOUND_STRING("{JPN}次の 釣り場へ\n向かうと するか……。"),
     },
     [FRONTIER_TRAINER_BAILEY] = { // つりびと ノンキ
-        COMPOUND_STRING("{JPN}まあ そう あせらず\nのんびり いこうや。"),
+        COMPOUND_STRING("{JPN}まあ そう 焦らず\nのんびり いこうや。"),
         COMPOUND_STRING("{JPN}のんびりでも\n勝てるもんだ。"),
         COMPOUND_STRING("{JPN}のんびり しすぎたか。\nまあ いいさ。"),
     },

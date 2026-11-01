@@ -1028,6 +1028,9 @@ static void GetOpponentIntroSpeech(void)
         return;
     }
 
+    if (CopyFrontierTrainerOwnText(FRONTIER_BEFORE_TEXT, trainerId))
+        return;
+
 #if FREE_BATTLE_TOWER_E_READER == FALSE
     if (trainerId == TRAINER_EREADER)
         FrontierSpeechToString(gSaveBlock2Ptr->frontier.ereaderTrainer.greeting);

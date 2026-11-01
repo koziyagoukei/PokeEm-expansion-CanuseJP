@@ -149,8 +149,10 @@ void FrontierStory_SetNamedState(u32 id, u32 state)
         SetNamedState(id, state);
 }
 
-static u16 GetNamedObjectGfx(u32 id)
+u16 FrontierStory_GetNamedObjectGfx(u32 id)
 {
+    if (id >= NAMED_STORY_COUNT)
+        return OBJ_EVENT_GFX_NINJA_BOY;
     if (id < NAMED_STORY_GUEST_COUNT)
         return GetFrontierGuestTrainer(TRAINER_FRONTIER_GUEST_FIRST + id)->objectGfx;
     return gFrontierBrainInfo[id - NAMED_STORY_BRAIN_FIRST].objEventGfx;
@@ -693,6 +695,25 @@ static const struct StoryTargetRescue sStoryTargetRescues[STORY_TARGET_COUNT] =
     [STORY_TARGET_YORIKO] = {LOCALID_CONTEST_LOBBY_COOK, LOCALID_CONTEST_LOBBY_POKEVIRUS, OBJ_EVENT_GFX_BEAUTY, TRAINER_JESSICA_1},
 };
 
+bool32 FrontierStory_IsTargetRescued(u32 target)
+{
+    return IsStoryActive() && target < STORY_TARGET_COUNT && FlagGet(sRescuedFlags[target]);
+}
+
+const u8 *FrontierStory_GetTargetName(u32 target)
+{
+    return target < STORY_TARGET_COUNT ? sStoryTargetTexts[target].name : COMPOUND_STRING("");
+}
+
+u16 FrontierStory_GetTargetObjectGfx(u32 target)
+{
+    if (target >= STORY_TARGET_COUNT)
+        return OBJ_EVENT_GFX_NINJA_BOY;
+    if (target == STORY_TARGET_KAZUKI)
+        return OBJ_EVENT_GFX_YOUNGSTER;
+    return sStoryTargetRescues[target].graphicsId;
+}
+
 // The person whose release battle or cure is playing; kept across the battle. Not saved.
 EWRAM_DATA static u8 sRescueTarget = 0;
 
@@ -840,7 +861,7 @@ void FrontierStory_PickCampVisitor(void)
 
     i = candidates[Random() % count];
     VarSet(VAR_CAMP_VISITOR, i);
-    VarSet(VAR_CAMP_VISITOR_GFX, GetNamedObjectGfx(i));
+    VarSet(VAR_CAMP_VISITOR_GFX, FrontierStory_GetNamedObjectGfx(i));
     gSpecialVar_Result = TRUE;
 }
 
@@ -897,7 +918,7 @@ void FrontierStory_PickInnGuests(void)
         i = candidates[pick];
         candidates[pick] = candidates[--count];
         VarSet(VAR_INN_GUEST + slot, i);
-        VarSet(VAR_INN_GUEST_GFX + slot, GetNamedObjectGfx(i));
+        VarSet(VAR_INN_GUEST_GFX + slot, FrontierStory_GetNamedObjectGfx(i));
         FlagClear(FLAG_INN_GUEST_HIDDEN + slot);
     }
 }

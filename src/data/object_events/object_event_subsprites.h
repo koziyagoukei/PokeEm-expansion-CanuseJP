@@ -86,7 +86,8 @@ static const struct SubspriteTable sOamTables_16x16[] = {
     {ARRAY_COUNT(sOamTable_16x16_1), sOamTable_16x16_1},
     {ARRAY_COUNT(sOamTable_16x16_2), sOamTable_16x16_2},
     {ARRAY_COUNT(sOamTable_16x16_3), sOamTable_16x16_3},
-    {ARRAY_COUNT(sOamTable_16x16_4), sOamTable_16x16_4}
+    {ARRAY_COUNT(sOamTable_16x16_4), sOamTable_16x16_4},
+    {1, sOamTable_16x16_2} // bath: omit the submerged bottom 8 pixels
 };
 
 static const struct Subsprite sOamTable_16x32_0[] = {
@@ -182,7 +183,8 @@ static const struct SubspriteTable sOamTables_16x32[] = {
     {ARRAY_COUNT(sOamTable_16x32_1), sOamTable_16x32_1},
     {ARRAY_COUNT(sOamTable_16x32_2), sOamTable_16x32_2},
     {ARRAY_COUNT(sOamTable_16x32_3), sOamTable_16x32_3},
-    {ARRAY_COUNT(sOamTable_16x32_4), sOamTable_16x32_4}
+    {ARRAY_COUNT(sOamTable_16x32_4), sOamTable_16x32_4},
+    {2, sOamTable_16x32_2} // bath
 };
 
 static const struct Subsprite sOamTable_32x32_0[] = {
@@ -278,7 +280,8 @@ const struct SubspriteTable sOamTables_32x32[] = {
     {ARRAY_COUNT(sOamTable_32x32_1), sOamTable_32x32_1},
     {ARRAY_COUNT(sOamTable_32x32_2), sOamTable_32x32_2},
     {ARRAY_COUNT(sOamTable_32x32_3), sOamTable_32x32_3},
-    {ARRAY_COUNT(sOamTable_32x32_4), sOamTable_32x32_4}
+    {ARRAY_COUNT(sOamTable_32x32_4), sOamTable_32x32_4},
+    {2, sOamTable_32x32_2} // bath
 };
 
 static const struct Subsprite sOamTable_64x32_0[] = {
@@ -371,13 +374,24 @@ static const struct Subsprite sOamTable_64x64_3[] = {
     }
 };
 
+static const struct Subsprite sOamTable_64x64_Bath[] = {
+    {.x = -32, .y = -32, SUBSPRITE_SHAPE(64, 32), .tileOffset = 0, .priority = 2},
+    {.x = -32, .y = 0, SUBSPRITE_SHAPE(32, 8), .tileOffset = 32, .priority = 2},
+    {.x = 0, .y = 0, SUBSPRITE_SHAPE(32, 8), .tileOffset = 36, .priority = 2},
+    {.x = -32, .y = 8, SUBSPRITE_SHAPE(32, 8), .tileOffset = 40, .priority = 2},
+    {.x = 0, .y = 8, SUBSPRITE_SHAPE(32, 8), .tileOffset = 44, .priority = 2},
+    {.x = -32, .y = 16, SUBSPRITE_SHAPE(32, 8), .tileOffset = 48, .priority = 2},
+    {.x = 0, .y = 16, SUBSPRITE_SHAPE(32, 8), .tileOffset = 52, .priority = 2},
+};
+
 const struct SubspriteTable sOamTables_64x64[] = {
     {},
     {ARRAY_COUNT(sOamTable_64x64_0), sOamTable_64x64_0},
     {ARRAY_COUNT(sOamTable_64x64_1), sOamTable_64x64_1},
     {ARRAY_COUNT(sOamTable_64x64_2), sOamTable_64x64_2},
     {ARRAY_COUNT(sOamTable_64x64_3), sOamTable_64x64_3},
-    {ARRAY_COUNT(sOamTable_64x64_3), sOamTable_64x64_3}
+    {ARRAY_COUNT(sOamTable_64x64_3), sOamTable_64x64_3},
+    SUBSPRITE_TABLE_ENTRY(sOamTable_64x64_Bath)
 };
 
 static const struct Subsprite sOamTable_96x40_0[] = {
@@ -2499,6 +2513,7 @@ static const struct SubspriteTable sOamTables_16x24[] = {
     SUBSPRITE_TABLE_ENTRY(sOamTable_16x24_2),
     SUBSPRITE_TABLE_ENTRY(sOamTable_16x24_3),
     SUBSPRITE_TABLE_ENTRY(sOamTable_16x24_4),
+    {1, sOamTable_16x24_2}, // bath
 };
 
 
@@ -2509,6 +2524,7 @@ static const struct SubspriteTable sOamTables_24x16[] = {
     SUBSPRITE_TABLE_ENTRY(sOamTable_24x16_2),
     SUBSPRITE_TABLE_ENTRY(sOamTable_24x16_3),
     SUBSPRITE_TABLE_ENTRY(sOamTable_24x16_3),
+    {2, sOamTable_24x16_2}, // bath
 };
 
 static const struct SubspriteTable sOamTables_24x24[] = {
@@ -2518,6 +2534,7 @@ static const struct SubspriteTable sOamTables_24x24[] = {
     SUBSPRITE_TABLE_ENTRY(sOamTable_24x24_2), // bottom 8 3
     SUBSPRITE_TABLE_ENTRY(sOamTable_24x24_3), // bottom 16 3
     SUBSPRITE_TABLE_ENTRY(sOamTable_24x24_4), // top 1, bottom 16 3
+    {4, sOamTable_24x24_2}, // bath
 };
 
 static const struct SubspriteTable sOamTables_24x32[] = {
@@ -2527,6 +2544,7 @@ static const struct SubspriteTable sOamTables_24x32[] = {
     SUBSPRITE_TABLE_ENTRY(sOamTable_24x32_2),
     SUBSPRITE_TABLE_ENTRY(sOamTable_24x32_3),
     SUBSPRITE_TABLE_ENTRY(sOamTable_24x32_4),
+    {6, sOamTable_24x32_2}, // bath
 };
 
 
@@ -2537,6 +2555,7 @@ static const struct SubspriteTable sOamTables_32x24[] = {
     SUBSPRITE_TABLE_ENTRY(sOamTable_32x24_2),
     SUBSPRITE_TABLE_ENTRY(sOamTable_32x24_3),
     SUBSPRITE_TABLE_ENTRY(sOamTable_32x24_4),
+    {1, sOamTable_32x24_2}, // bath
 };
 
 
@@ -2550,7 +2569,8 @@ static const struct SubspriteTable sOamTables_64x64_Tall[] = {
     SUBSPRITE_TABLE_ENTRY(sOamTable_64x64_1), // elevation 4
     SUBSPRITE_TABLE_ENTRY(sOamTable_64x64_HotSprings), // hot springs
     SUBSPRITE_TABLE_ENTRY(sOamTable_64x64_Grass2), // long grass
-    SUBSPRITE_TABLE_ENTRY(sOamTable_64x64_Grass1) // long grass priority 1
+    SUBSPRITE_TABLE_ENTRY(sOamTable_64x64_Grass1), // long grass priority 1
+    SUBSPRITE_TABLE_ENTRY(sOamTable_64x64_Bath)
 };
 
 // Like sOamTables_64x64_Tall, but fewer pixels visible in long grass
@@ -2561,7 +2581,8 @@ static const struct SubspriteTable sOamTables_64x64_Long[] = {
     SUBSPRITE_TABLE_ENTRY(sOamTable_64x64_1), // elevation 4
     SUBSPRITE_TABLE_ENTRY(sOamTable_64x64_HotSprings), // hot springs
     SUBSPRITE_TABLE_ENTRY(sOamTable_64x64_Grass3), // long grass
-    SUBSPRITE_TABLE_ENTRY(sOamTable_64x64_Grass4) // long grass priority 1
+    SUBSPRITE_TABLE_ENTRY(sOamTable_64x64_Grass4), // long grass priority 1
+    SUBSPRITE_TABLE_ENTRY(sOamTable_64x64_Bath)
 };
 #endif
 
@@ -3007,5 +3028,6 @@ static const struct SubspriteTable sOamTables_48x48[] = {
     SUBSPRITE_TABLE_ENTRY(sOamTable_48x48_4), // elevation 4
     SUBSPRITE_TABLE_ENTRY(sOamTable_48x48_HotSprings), // hot springs
     SUBSPRITE_TABLE_ENTRY(sOamTable_48x48_Grass2), // long grass
-    SUBSPRITE_TABLE_ENTRY(sOamTable_48x48_Grass1) // long grass priority 1
+    SUBSPRITE_TABLE_ENTRY(sOamTable_48x48_Grass1), // long grass priority 1
+    {10, sOamTable_48x48_HotSprings} // bath
 };

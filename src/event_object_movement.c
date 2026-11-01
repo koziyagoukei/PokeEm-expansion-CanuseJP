@@ -28,6 +28,7 @@
 #include "overworld.h"
 #include "palette.h"
 #include "party_menu.h"
+#include "party_bath_expansion.h"
 #include "pokemon.h"
 #include "pokeball.h"
 #include "random.h"
@@ -10026,6 +10027,33 @@ static const u8 sElevationToSubspriteTableNum[] = {
     1, 1, 1, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 0, 0, 1,
 };
 
+bool32 TrySetBathHotSpringsSubsprites(struct ObjectEvent *objectEvent, struct Sprite *sprite)
+{
+    const u32 bathTable = 6;
+    const struct SubspriteTable *tables = sprite->subspriteTables;
+
+    if (sprite->subspriteTableNum == bathTable)
+        sprite->subspriteTableNum = sElevationToSubspriteTableNum[objectEvent->previousElevation];
+    if (!objectEvent->inHotSprings || objectEvent->disableCoveringGroundEffects
+     || sprite->oam.affineMode || !PartyBath_UsesWaterPalette())
+        return FALSE;
+
+    if (tables != sOamTables_16x16 && tables != sOamTables_16x32 && tables != sOamTables_32x32
+     && tables != sOamTables_48x48 && tables != sOamTables_64x64
+#if OW_LARGE_OW_SUPPORT
+     && tables != sOamTables_16x24 && tables != sOamTables_24x16 && tables != sOamTables_24x24
+     && tables != sOamTables_24x32 && tables != sOamTables_32x24
+     && tables != sOamTables_64x64_Tall && tables != sOamTables_64x64_Long
+#endif
+    )
+        return FALSE;
+
+    // Reveal the actual water and its moving fog instead of covering the feet with an OBJ.
+    sprite->subspriteTableNum = bathTable;
+    sprite->subspriteMode = SUBSPRITES_ON;
+    return TRUE;
+}
+
 static void UpdateObjectEventElevationAndPriority(struct ObjectEvent *objEvent, struct Sprite *sprite)
 {
     if (objEvent->fixedPriority)
@@ -10504,6 +10532,7 @@ static void DoGroundEffects_OnSpawn(struct ObjectEvent *objEvent, struct Sprite 
         UpdateObjectEventElevationAndPriority(objEvent, sprite);
         GetAllGroundEffectFlags_OnSpawn(objEvent, &flags);
         SetObjectEventSpriteOamTableForLongGrass(objEvent, sprite);
+        TrySetBathHotSpringsSubsprites(objEvent, sprite);
         DoFlaggedGroundEffects(objEvent, sprite, flags);
         objEvent->triggerGroundEffectsOnMove = FALSE;
         objEvent->disableCoveringGroundEffects = 0;
@@ -10527,6 +10556,7 @@ static void DoGroundEffects_OnBeginStep(struct ObjectEvent *objEvent, struct Spr
         GetAllGroundEffectFlags_OnBeginStep(objEvent, &flags);
         SetObjectEventSpriteOamTableForLongGrass(objEvent, sprite);
         filters_out_some_ground_effects(objEvent, &flags);
+        TrySetBathHotSpringsSubsprites(objEvent, sprite);
         DoFlaggedGroundEffects(objEvent, sprite, flags);
         objEvent->triggerGroundEffectsOnMove = FALSE;
         objEvent->disableCoveringGroundEffects = 0;
@@ -10548,6 +10578,7 @@ static void DoGroundEffects_OnFinishStep(struct ObjectEvent *objEvent, struct Sp
         GetAllGroundEffectFlags_OnFinishStep(objEvent, &flags);
         SetObjectEventSpriteOamTableForLongGrass(objEvent, sprite);
         FilterOutStepOnPuddleGroundEffectIfJumping(objEvent, &flags);
+        TrySetBathHotSpringsSubsprites(objEvent, sprite);
         DoFlaggedGroundEffects(objEvent, sprite, flags);
         objEvent->triggerGroundEffectsOnStop = 0;
         objEvent->landingJump = 0;
