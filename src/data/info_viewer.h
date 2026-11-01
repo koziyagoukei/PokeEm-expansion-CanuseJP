@@ -63,28 +63,111 @@ static const u8 sInfoText_FrontierRulesPage3[] = _(
     "メニューの やすむを 使います。");
 
 static const u8 sInfoText_GimmickHelpPage1[] = _(
-    "{JPN}使える ギミックは 施設ごとに\n"
-    "きまっており おたがいに 同じです。\n"
-    "メガには 対応する メガストーン\n"
-    "Zワザには 技に あう Zクリスタルが\n"
-    "必要です。 専用Zワザには\n"
-    "種類と 技の 条件も あります。");
+    "{JPN}「戦闘中の 操作」\n"
+    "たたかうで 技を 選ぶ画面を 開きます。\n"
+    "R:メガシンカ / Zワザ / バースト\n"
+    "START:ダイマックス\n"
+    "SELECT:テラスタル\n"
+    "使いたいものを 選んでから 技を 決定。");
 
 static const u8 sInfoText_GimmickHelpPage2[] = _(
-    "{JPN}ダイマックスは 3ターン 続きます。\n"
-    "テラスタルは テラタイプに かわります。\n"
-    "種類や 持ち物に よっては\n"
-    "選べない ギミックも あります。\n"
-    "一度 ギミックを 使った 個体は\n"
-    "別の ギミックを 重ねられません。");
+    "{JPN}「回数と 組み合わせ」\n"
+    "各種ギミックは 1人につき 1戦で 1回。\n"
+    "別の仲間に 別の種類を 使わせられます。\n"
+    "ただし 同じ個体には 重ねられません。\n"
+    "バースト後の Zワザは 例外です。\n"
+    "ダイマックスは マルチバトルでも\n"
+    "味方全体で 1回を 分け合います。");
 
 static const u8 sInfoText_GimmickHelpPage3[] = _(
-    "{JPN}ウルトラバーストは にっしょくか\n"
-    "げっしょくの ネクロズマに\n"
-    "ウルトラネクロZを 持たせて 使います。\n"
-    "ギミックの かいすうは バトルごとです。\n"
-    "施設で 禁止された ギミックは\n"
-    "持ち物を 揃えても 使えません。");
+    "{JPN}「メガシンカ」\n"
+    "対応する メガストーンを 持たせます。\n"
+    "Rで 選ぶと 技を 出す前に 変身。\n"
+    "能力や 特性などが 変わります。\n"
+    "交代しても メガシンカは 続きます。\n"
+    "レックウザは ガリョウテンセイを\n"
+    "覚えていると 石なしでも 使えます。");
+
+static const u8 sInfoText_GimmickHelpPage4[] = _(
+    "{JPN}「Zワザ / 攻撃技」\n"
+    "元の技と タイプが あう\n"
+    "Zクリスタルを 持たせます。\n"
+    "対象の技に カーソルを あわせて R。\n"
+    "強力な Zワザに 変えて 攻撃します。\n"
+    "専用Zワザは ポケモンの 種類と\n"
+    "元の技にも 条件が あります。");
+
+static const u8 sInfoText_GimmickHelpPage5[] = _(
+    "{JPN}「Zワザ / 使いどころ」\n"
+    "変化技にも 能力上昇や 回復などの\n"
+    "追加効果が つくものが あります。\n"
+    "攻撃Zワザは まもるを 使われても\n"
+    "一部の ダメージを 与えられます。\n"
+    "ここぞという 場面で 使いましょう。\n"
+    "使うと 自分の 他の仲間も 使えません。");
+
+static const u8 sInfoText_GimmickHelpPage6[] = _(
+    "{JPN}「ダイマックス」\n"
+    "STARTで 選ぶと 巨大化します。\n"
+    "HPが 増え 技が ダイマックスわざに。\n"
+    "天候や 能力を 変える技も あります。\n"
+    "変化技は ダイウォールに なります。\n"
+    "3ターンで 終わり 交代でも 解除。\n"
+    "解除後は もう一度 使えません。");
+
+static const u8 sInfoText_GimmickHelpPage7[] = _(
+    "{JPN}「キョダイマックス」\n"
+    "対応する 種類で キョダイマックスの\n"
+    "素質が あると 特別な 姿に なります。\n"
+    "一部の 攻撃技が 専用技に 変わり\n"
+    "通常の ダイマックスと 効果が 違います。\n"
+    "操作と 3ターンの 制限は 同じです。\n"
+    "素質は 定食屋で 切り替えられます。");
+
+static const u8 sInfoText_GimmickHelpPage8[] = _(
+    "{JPN}「テラスタル」\n"
+    "SELECTで 選ぶと テラタイプに 変化。\n"
+    "攻撃を 受けるときの 相性が 変わります。\n"
+    "元のタイプの 技の 強化は 残り\n"
+    "テラタイプと 同じ技も 強化されます。\n"
+    "元と 同じタイプなら さらに 強化。\n"
+    "交代しても 効果は 続きます。");
+
+static const u8 sInfoText_GimmickHelpPage9[] = _(
+    "{JPN}「ステラ / 相性を 保つ」\n"
+    "ステラは 特別な テラタイプです。\n"
+    "受ける技の 相性は 元のままで\n"
+    "攻撃技を タイプごとに 1回 強化。\n"
+    "一部の ポケモンには 例外も あります。\n"
+    "テラタイプの 変更は 定食屋から。\n"
+    "弱点を 変えるか 火力を 上げるかで 選択。");
+
+static const u8 sInfoText_GimmickHelpPage10[] = _(
+    "{JPN}「ウルトラバースト」\n"
+    "にっしょくか げっしょくの ネクロズマに\n"
+    "ウルトラネクロZを 持たせて Rで 変身。\n"
+    "能力と タイプが 変わります。\n"
+    "変身後は フォトンゲイザーを 選び\n"
+    "次のターン以降 Rで 専用Zワザも 使用可。\n"
+    "Zワザが 未使用であることが 条件です。");
+
+static const u8 sInfoText_GimmickHelpPage11[] = _(
+    "{JPN}「施設ごとの 制限」\n"
+    "パレスは メガシンカと テラスタルのみ。\n"
+    "使うかどうかは 自動で 決まります。\n"
+    "アリーナは Zワザ / ダイマックス /\n"
+    "ウルトラバーストのみ。\n"
+    "ピラミッドは Zワザと テラスタルのみ。\n"
+    "制限は おたがいに 同じです。");
+
+static const u8 sInfoText_GimmickHelpPage12[] = _(
+    "{JPN}「選べないときは」\n"
+    "種類と 持ち物と 施設の ルールを 確認。\n"
+    "メガストーンや Zクリスタルを 持つと\n"
+    "ダイマックスや テラスタルが できません。\n"
+    "必要な 大切なものは ハブで そろいます。\n"
+    "同じボタンで 予約を 取り消せます。\n"
+    "別のボタンなら 予約する 種類を 変更。");
 
 static const u8 sInfoText_DiaryTestPage1[] = _(
     "{JPN}今日は フロンティアで\n"
@@ -151,6 +234,15 @@ static const u8 *const sInfoViewerPages_GimmickHelp[] =
     sInfoText_GimmickHelpPage1,
     sInfoText_GimmickHelpPage2,
     sInfoText_GimmickHelpPage3,
+    sInfoText_GimmickHelpPage4,
+    sInfoText_GimmickHelpPage5,
+    sInfoText_GimmickHelpPage6,
+    sInfoText_GimmickHelpPage7,
+    sInfoText_GimmickHelpPage8,
+    sInfoText_GimmickHelpPage9,
+    sInfoText_GimmickHelpPage10,
+    sInfoText_GimmickHelpPage11,
+    sInfoText_GimmickHelpPage12,
 };
 
 static const u8 *const sInfoViewerPages_DiaryTest[] =

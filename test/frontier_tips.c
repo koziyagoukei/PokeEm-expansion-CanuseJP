@@ -3,6 +3,7 @@
 #include "frontier_util.h"
 #include "line_break.h"
 #include "pokemon.h"
+#include "string_util.h"
 #include "text.h"
 #include "ultra_help.h"
 #include "test/test.h"
@@ -92,6 +93,60 @@ TEST("Frontier TIPS: contest has eight topics and twenty-one pages without chang
     }
     EXPECT_EQ(total, 21);
     EXPECT_EQ(contest->choices[ARRAY_COUNT(pages)].nextInfoId, INFO_VIEWER_BACK);
+}
+
+TEST("Frontier TIPS: beginner guides cover battle controls, every gimmick and all four AI levels")
+{
+    static const u8 *const gimmickHeadings[] = {
+        COMPOUND_STRING("{JPN}「戦闘中の 操作」"),
+        COMPOUND_STRING("{JPN}「回数と 組み合わせ」"),
+        COMPOUND_STRING("{JPN}「メガシンカ」"),
+        COMPOUND_STRING("{JPN}「Zワザ / 攻撃技」"),
+        COMPOUND_STRING("{JPN}「Zワザ / 使いどころ」"),
+        COMPOUND_STRING("{JPN}「ダイマックス」"),
+        COMPOUND_STRING("{JPN}「キョダイマックス」"),
+        COMPOUND_STRING("{JPN}「テラスタル」"),
+        COMPOUND_STRING("{JPN}「ステラ / 相性を 保つ」"),
+        COMPOUND_STRING("{JPN}「ウルトラバースト」"),
+        COMPOUND_STRING("{JPN}「施設ごとの 制限」"),
+        COMPOUND_STRING("{JPN}「選べないときは」"),
+    };
+    static const u8 *const aiHeadings[] = {
+        COMPOUND_STRING("{JPN}「難しさの 選び方」"),
+        COMPOUND_STRING("{JPN}「簡単 / まずは 練習」"),
+        COMPOUND_STRING("{JPN}「いつもの / 基本の 駆け引き」"),
+        COMPOUND_STRING("{JPN}「難しい / 先の 展開を 考える」"),
+        COMPOUND_STRING("{JPN}「最強 / 読み合いに 挑戦」"),
+        COMPOUND_STRING("{JPN}「施設による 違い」"),
+        COMPOUND_STRING("{JPN}「連勝による 強さの 変化」"),
+        COMPOUND_STRING("{JPN}「困ったときの 考え方」"),
+        COMPOUND_STRING("{JPN}「相手の 降参」"),
+    };
+    const struct InfoViewerEntry *gimmicks = GetInfoViewerEntry(INFO_GIMMICK_HELP);
+    const struct InfoViewerEntry *ai = GetInfoViewerEntry(INFO_TIPS_HUB_DIFFICULTY);
+    EXPECT_EQ(gimmicks->pageCount, ARRAY_COUNT(gimmickHeadings));
+    EXPECT_EQ(ai->pageCount, ARRAY_COUNT(aiHeadings));
+    for (u32 i = 0; i < ARRAY_COUNT(gimmickHeadings); i++)
+        EXPECT_EQ(StringCompareN(gimmicks->pages[i], gimmickHeadings[i], StringLength(gimmickHeadings[i])), 0);
+    for (u32 i = 0; i < ARRAY_COUNT(aiHeadings); i++)
+        EXPECT_EQ(StringCompareN(ai->pages[i], aiHeadings[i], StringLength(aiHeadings[i])), 0);
+}
+
+TEST("Frontier TIPS: AI guide is directly accessible from both TIPS and hub services")
+{
+    static const u16 menus[] = {INFO_TIPS, INFO_TIPS_HUB};
+    for (u32 i = 0; i < ARRAY_COUNT(menus); i++)
+    {
+        const struct InfoViewerEntry *menu = GetInfoViewerEntry(menus[i]);
+        u32 links = 0;
+        for (u32 j = 0; j < menu->choiceCount; j++)
+            if (menu->choices[j].nextInfoId == INFO_TIPS_HUB_DIFFICULTY)
+                links++;
+        EXPECT_EQ(links, 1);
+    }
+    EXPECT_EQ(INFO_GIMMICK_HELP, 2);
+    EXPECT_EQ(INFO_TIPS_HUB_DIFFICULTY, 19);
+    EXPECT_EQ(INFO_COUNT, 41);
 }
 
 TEST("Frontier TIPS: banned list covers actual admission rules including all forms")

@@ -158,40 +158,77 @@ static const u8 sInfoText_HubMusic2[] = _(
     "フロンティアブレーンせんは\n"
     "いつも ブレーン戦の BGMです。");
 static const u8 sInfoText_HubDifficulty1[] = _(
-    "{JPN}左側の ピカチュウから\n"
+    "{JPN}「難しさの 選び方」\n"
+    "ハブの 左側の ピカチュウから\n"
     "相手の AIを 選べます。\n"
     "簡単 / いつもの / 難しい /\n"
     "最強 の 4段階です。\n"
-    "難しいほど 技や 交代を\n"
-    "より 詳しく 判断します。");
+    "AIは 技や 交代を 選ぶ しくみ。\n"
+    "まず 簡単か いつものが おすすめです。");
 static const u8 sInfoText_HubDifficulty2[] = _(
-    "{JPN}最強は こちらの 技なども\n"
-    "把握して 予測します。\n"
-    "パレスの 性格による 技選びと\n"
-    "ファクトリーの AIは 施設独自です。\n"
-    "この 設定で 使える ギミックや\n"
-    "禁止ポケモンは かわりません。");
+    "{JPN}「簡単 / まずは 練習」\n"
+    "相手は 効果のない 技などを 避ける\n"
+    "基本的な 判断だけで 技を 選びます。\n"
+    "相手の ポケモンの 努力値も 0に。\n"
+    "自分の仲間と レンタル個体は そのまま。\n"
+    "これらの 補助は 通信戦には ありません。\n"
+    "コンテストの 相手も やさしく なります。");
 static const u8 sInfoText_HubDifficulty3[] = _(
-    "{JPN}AIとは べつに 連勝の しゅうで\n"
-    "相手の 個体値に 補正が あります。\n"
+    "{JPN}「いつもの / 基本の 駆け引き」\n"
+    "効果の 薄い技を 避けながら\n"
+    "技の効果や 倒せるかどうかを 判断。\n"
+    "タイプ相性と 残りHPを 意識して\n"
+    "戦い方を 覚えるのに 向いています。\n"
+    "こちらの 選択を 必ず 読んだり\n"
+    "毎回 最適な技を 選ぶわけでは ありません。");
+static const u8 sInfoText_HubDifficulty4[] = _(
+    "{JPN}「難しい / 先の 展開を 考える」\n"
+    "残りHPと あと何回で 倒せるかを 考え\n"
+    "交代先や テラスタルも 詳しく 判断。\n"
+    "不利な相手に 居座らず\n"
+    "有利な仲間へ 交代しやすく なります。\n"
+    "こちらも 交代先を 用意して\n"
+    "攻撃を 受ける役を 分けてみましょう。");
+static const u8 sInfoText_HubDifficulty5[] = _(
+    "{JPN}「最強 / 読み合いに 挑戦」\n"
+    "こちらの 技や 特性や 持ち物も 把握。\n"
+    "技や 交代を 予測して 行動します。\n"
+    "回復と 攻撃の 競争や みがわり\n"
+    "ギミックを 使う場面も 検討します。\n"
+    "予測が 毎回 当たるわけでは ありません。\n"
+    "一つの 戦い方に 頼らず 対策を。");
+static const u8 sInfoText_HubDifficulty6[] = _(
+    "{JPN}「施設による 違い」\n"
+    "パレスの 技選びは 性格に 従います。\n"
+    "ファクトリーは 簡単を 除き 独自のAI。\n"
+    "序盤は 単純で 連勝すると 賢くなります。\n"
+    "設定を 最強にしても この仕組みは 同じ。\n"
+    "難易度を 変えても ギミックの 制限と\n"
+    "禁止ポケモンの 設定は 変わりません。");
+static const u8 sInfoText_HubDifficulty7[] = _(
+    "{JPN}「連勝による 強さの 変化」\n"
+    "通信ではない 施設戦では AIとは 別に\n"
+    "連勝の 周回で 相手の 個体値を 補正。\n"
     "1・2周目は -30\n"
     "3・4周目は -20\n"
     "5・6周目は -10\n"
-    "7周目からは 補正 なしです。");
-static const u8 sInfoText_HubDifficulty4[] = _(
-    "{JPN}簡単では 相手の ポケモンの\n"
-    "努力値が 0に なり AIも\n"
-    "無駄な 技を さけるだけに なります。\n"
-    "ファクトリーで かりた ポケモンは\n"
-    "努力値が そのままです。\n"
-    "コンテストの 相手も やさしく なります。");
-static const u8 sInfoText_HubDifficulty5[] = _(
-    "{JPN}最強は ギミックの 使い時\n"
-    "回復や みがわりも 読み合います。\n"
-    "どの 設定でも 勝ち目が なくなると\n"
-    "相手は 降参 することが あります。\n"
+    "7周目からは 補正なしです。");
+static const u8 sInfoText_HubDifficulty8[] = _(
+    "{JPN}「困ったときの 考え方」\n"
+    "弱点だけでなく 相手の 反撃も 確認。\n"
+    "素早さで 負けるなら 交代や 防御も 大切。\n"
+    "ギミックは 不利な場面を 変える 切り札。\n"
+    "一度に 全員を 攻撃役にするより\n"
+    "味方の 弱点を 補う 仲間を 選びましょう。\n"
+    "ハブの 練習試合でも 組み合わせを 試せます。");
+static const u8 sInfoText_HubDifficulty9[] = _(
+    "{JPN}「相手の 降参」\n"
+    "通信ではない 通常の シングル戦では\n"
+    "勝ち目を 失った 相手が\n"
+    "降参することも あります。\n"
     "フロンティアブレーンと 7戦目の\n"
-    "相手は 最後まで 戦います。");
+    "特別な相手は 最後まで 戦います。\n"
+    "練習試合では 相手は 降参しません。");
 static const u8 sInfoText_HubBanned1[] = _(
     "{JPN}右上の レッドから\n"
     "禁止ポケモンの ルールを 変えられます。\n"
@@ -224,7 +261,11 @@ static const u8 sInfoText_HubSupport2[] = _(
 static const u8 *const sInfoViewerPages_HubPokemon[] = {sInfoText_HubPokemon1, sInfoText_HubPokemon2, sInfoText_HubPokemon3};
 static const u8 *const sInfoViewerPages_HubItems[] = {sInfoText_HubItems1, sInfoText_HubItems2};
 static const u8 *const sInfoViewerPages_HubMusic[] = {sInfoText_HubMusic1, sInfoText_HubMusic2};
-static const u8 *const sInfoViewerPages_HubDifficulty[] = {sInfoText_HubDifficulty1, sInfoText_HubDifficulty2, sInfoText_HubDifficulty3, sInfoText_HubDifficulty4, sInfoText_HubDifficulty5};
+static const u8 *const sInfoViewerPages_HubDifficulty[] = {
+    sInfoText_HubDifficulty1, sInfoText_HubDifficulty2, sInfoText_HubDifficulty3,
+    sInfoText_HubDifficulty4, sInfoText_HubDifficulty5, sInfoText_HubDifficulty6,
+    sInfoText_HubDifficulty7, sInfoText_HubDifficulty8, sInfoText_HubDifficulty9,
+};
 static const u8 *const sInfoViewerPages_HubBanned[] = {sInfoText_HubBanned1, sInfoText_HubBanned2};
 static const u8 *const sInfoViewerPages_HubSupport[] = {sInfoText_HubSupport1, sInfoText_HubSupport2};
 
@@ -232,6 +273,7 @@ static const struct InfoViewerChoice sInfoViewerChoices_Tips[] = {
     {COMPOUND_STRING("{JPN}バトルの 基本ルール"), INFO_FRONTIER_RULES},
     {sInfoText_TitleFacilities, INFO_TIPS_FACILITIES},
     {COMPOUND_STRING("{JPN}ギミックの 基本"), INFO_GIMMICK_HELP},
+    {COMPOUND_STRING("{JPN}AIの 難しさと 傾向"), INFO_TIPS_HUB_DIFFICULTY},
     {sInfoText_TitleBannedMons, INFO_BANNED_MONS},
     {sInfoText_TitleHub, INFO_TIPS_HUB},
     {sInfoText_TitleResort, INFO_TIPS_RESORT},
