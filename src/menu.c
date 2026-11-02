@@ -402,6 +402,14 @@ u8 GetStartMenuWindowId(void)
     return sStartMenuWindowId;
 }
 
+u8 AddFullscreenStartMenuWindow(void)
+{
+    // 600 tiles starting at 1 stay below the overworld screenblocks (28..31).
+    if (sStartMenuWindowId == WINDOW_NONE)
+        sStartMenuWindowId = AddWindowParameterized(0, 0, 0, 30, 20, 15, 1);
+    return sStartMenuWindowId;
+}
+
 void RemoveStartMenuWindow(void)
 {
     if (sStartMenuWindowId != WINDOW_NONE)
