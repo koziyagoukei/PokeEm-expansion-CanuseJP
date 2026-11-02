@@ -9761,13 +9761,21 @@ static void ObjectEventUpdateMetatileBehaviors(struct ObjectEvent *objEvent)
     objEvent->currentMetatileBehavior = MapGridGetMetatileBehaviorAt(objEvent->currentCoords.x, objEvent->currentCoords.y);
 }
 
+// The Restoration Inn's ground sits beside water but is not meant to mirror anyone.
+static bool32 IsMapWithoutReflections(void)
+{
+    u32 map = (gSaveBlock1Ptr->location.mapGroup << 8) | gSaveBlock1Ptr->location.mapNum;
+    return map == MAP_RESTORATION_INN_OUTSIDE || map == MAP_RESTORATION_INN_LOBBY
+        || map == MAP_RESTORATION_INN_EAST_WING || map == MAP_RESTORATION_INN_WEST_WING;
+}
+
 static void GetGroundEffectFlags_Reflection(struct ObjectEvent *objEvent, u32 *flags)
 {
     u32 reflectionFlags[NUM_REFLECTION_TYPES - 1] = {
         [REFL_TYPE_ICE   - 1] = GROUND_EFFECT_FLAG_ICE_REFLECTION,
         [REFL_TYPE_WATER - 1] = GROUND_EFFECT_FLAG_WATER_REFLECTION
     };
-    u8 reflType = ObjectEventGetNearbyReflectionType(objEvent);
+    u8 reflType = IsMapWithoutReflections() ? REFL_TYPE_NONE : ObjectEventGetNearbyReflectionType(objEvent);
 
     if (reflType)
     {
