@@ -588,6 +588,8 @@ static bool8 ShouldAnimBeDoneRegardlessOfSubstitute(u8 animId)
     case B_ANIM_FOG_CONTINUES:
     case B_ANIM_SNATCH_MOVE:
     case B_ANIM_STATS_CHANGE:
+    case B_ANIM_DYNAMAX_FAINT:
+    case B_ANIM_TERA_FAINT:
         return TRUE;
     default:
         return FALSE;

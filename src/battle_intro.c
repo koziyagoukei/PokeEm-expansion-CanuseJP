@@ -126,7 +126,6 @@ static void BattleIntroNoSlide(u8 taskId)
 
 void BattleIntroSlide1(u8 taskId)
 {
-    int i;
     if (B_FAST_INTRO_NO_SLIDE || gTestRunnerHeadless)
         return BattleIntroNoSlide(taskId);
 
@@ -187,12 +186,8 @@ void BattleIntroSlide1(u8 taskId)
         if (gTasks[taskId].data[2])
             gTasks[taskId].data[2] -= 2;
 
-        // Scanline settings have already been set in CB2_InitBattleInternal()
-        for (i = 0; i < DISPLAY_HEIGHT / 2; i++)
-            gScanlineEffectRegBuffers[gScanlineEffect.srcBuffer][i] = gTasks[taskId].data[2];
-
-        for (; i < DISPLAY_HEIGHT; i++)
-            gScanlineEffectRegBuffers[gScanlineEffect.srcBuffer][i] = -gTasks[taskId].data[2];
+        // The battlefield stays in place (see CB2_InitBattleInternal); only the
+        // trainers and Pokemon slide in, timed by data[2].
 
         if (gTasks[taskId].data[2] == 0)
         {
@@ -213,7 +208,6 @@ void BattleIntroSlide1(u8 taskId)
 
 void BattleIntroSlide2(u8 taskId)
 {
-    int i;
     if (B_FAST_INTRO_NO_SLIDE || gTestRunnerHeadless)
         return BattleIntroNoSlide(taskId);
 
@@ -299,12 +293,8 @@ void BattleIntroSlide2(u8 taskId)
         if (gTasks[taskId].data[2])
             gTasks[taskId].data[2] -= 2;
 
-        // Scanline settings have already been set in CB2_InitBattleInternal()
-        for (i = 0; i < DISPLAY_HEIGHT / 2; i++)
-            gScanlineEffectRegBuffers[gScanlineEffect.srcBuffer][i] = gTasks[taskId].data[2];
-
-        for (; i < DISPLAY_HEIGHT; i++)
-            gScanlineEffectRegBuffers[gScanlineEffect.srcBuffer][i] = -gTasks[taskId].data[2];
+        // The battlefield stays in place (see CB2_InitBattleInternal); only the
+        // trainers and Pokemon slide in, timed by data[2].
 
         if (gTasks[taskId].data[2] == 0)
         {
@@ -328,7 +318,6 @@ void BattleIntroSlide2(u8 taskId)
 
 void BattleIntroSlide3(u8 taskId)
 {
-    int i;
     if (B_FAST_INTRO_NO_SLIDE || gTestRunnerHeadless)
         return BattleIntroNoSlide(taskId);
 
@@ -389,12 +378,8 @@ void BattleIntroSlide3(u8 taskId)
         if (gTasks[taskId].data[2])
             gTasks[taskId].data[2] -= 2;
 
-        // Scanline settings have already been set in CB2_InitBattleInternal()
-        for (i = 0; i < DISPLAY_HEIGHT / 2; i++)
-            gScanlineEffectRegBuffers[gScanlineEffect.srcBuffer][i] = gTasks[taskId].data[2];
-
-        for (; i < DISPLAY_HEIGHT; i++)
-            gScanlineEffectRegBuffers[gScanlineEffect.srcBuffer][i] = -gTasks[taskId].data[2];
+        // The battlefield stays in place (see CB2_InitBattleInternal); only the
+        // trainers and Pokemon slide in, timed by data[2].
 
         if (gTasks[taskId].data[2] == 0)
         {
@@ -418,7 +403,6 @@ void BattleIntroSlide3(u8 taskId)
 
 static void BattleIntroSlideLink(u8 taskId)
 {
-    int i;
 
     if (gTasks[taskId].tState > 1 && !gTasks[taskId].data[4])
     {
@@ -471,12 +455,8 @@ static void BattleIntroSlideLink(u8 taskId)
         if (gTasks[taskId].data[2])
             gTasks[taskId].data[2] -= 2;
 
-        // Scanline settings have already been set in CB2_InitBattleInternal()
-        for (i = 0; i < DISPLAY_HEIGHT / 2; i++)
-            gScanlineEffectRegBuffers[gScanlineEffect.srcBuffer][i] = gTasks[taskId].data[2];
-
-        for (; i < DISPLAY_HEIGHT; i++)
-            gScanlineEffectRegBuffers[gScanlineEffect.srcBuffer][i] = -gTasks[taskId].data[2];
+        // The battlefield stays in place (see CB2_InitBattleInternal); only the
+        // trainers and Pokemon slide in, timed by data[2].
 
         if (gTasks[taskId].data[2] == 0)
         {

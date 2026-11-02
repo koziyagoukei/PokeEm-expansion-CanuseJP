@@ -27,8 +27,10 @@ struct StartMenuUiEntry
     u8 icon;
 };
 
-bool32 StartMenuUi_Open(void);
+bool32 StartMenuUi_Open(bool32 animate);
 void StartMenuUi_Draw(const struct StartMenuUiEntry *entries, u32 count, u32 selected, const u8 *status);
+bool32 StartMenuUi_Animate(void);
+void StartMenuUi_BeginClose(void);
 void StartMenuUi_Close(void);
 
 #endif

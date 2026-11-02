@@ -546,16 +546,12 @@ static void CB2_InitBattleInternal(void)
         ScanlineEffect_Clear();
         if (B_FAST_INTRO_NO_SLIDE == FALSE && !gTestRunnerHeadless)
         {
-            for (i = 0; i < DISPLAY_HEIGHT / 2; i++)
+            // The battlefield no longer slides in from the sides with the trainers:
+            // every line starts in place, and the intro tasks leave it there.
+            for (i = 0; i < DISPLAY_HEIGHT; i++)
             {
-                gScanlineEffectRegBuffers[0][i] = 0xF0;
-                gScanlineEffectRegBuffers[1][i] = 0xF0;
-            }
-
-            for (; i < DISPLAY_HEIGHT; i++)
-            {
-                gScanlineEffectRegBuffers[0][i] = 0xFF10;
-                gScanlineEffectRegBuffers[1][i] = 0xFF10;
+                gScanlineEffectRegBuffers[0][i] = 0;
+                gScanlineEffectRegBuffers[1][i] = 0;
             }
 
             ScanlineEffect_SetParams(sIntroScanlineParams16Bit);
@@ -2011,19 +2007,11 @@ void CB2_InitEndLinkBattle(void)
         gBattle_WIN0V = WIN_RANGE(DISPLAY_HEIGHT / 2, DISPLAY_HEIGHT / 2 + 1);
         ScanlineEffect_Clear();
 
-        i = 0;
-        while (i < 80)
+        // The battlefield starts in place, as in CB2_InitBattleInternal.
+        for (i = 0; i < DISPLAY_HEIGHT; i++)
         {
-            gScanlineEffectRegBuffers[0][i] = 0xF0;
-            gScanlineEffectRegBuffers[1][i] = 0xF0;
-            i++;
-        }
-
-        while (i < 160)
-        {
-            gScanlineEffectRegBuffers[0][i] = 0xFF10;
-            gScanlineEffectRegBuffers[1][i] = 0xFF10;
-            i++;
+            gScanlineEffectRegBuffers[0][i] = 0;
+            gScanlineEffectRegBuffers[1][i] = 0;
         }
 
         ResetPaletteFade();

@@ -1024,5 +1024,7 @@ extern const u8 gBattleAnimSpecial_SubstituteToMon[];
 extern const u8 gBattleAnimSpecial_MonToSubstitute[];
 extern const u8 gBattleAnimSpecial_CriticalCaptureBallThrow[];
 extern const u8 gBattleAnimGeneral_ProtectedItself[];
+extern const u8 gBattleAnimGeneral_DynamaxFaint[];
+extern const u8 gBattleAnimGeneral_TeraFaint[];
 
 #endif // GUARD_BATTLE_ANIM_SCRIPTS_H

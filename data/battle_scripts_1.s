@@ -2714,6 +2714,7 @@ BattleScript_EffectCamouflage::
 
 BattleScript_FaintBattler::
 	tryillusionoff BS_FAINTED
+	callnative BS_TryGimmickFaintAnimation
 	undodynamax BS_FAINTED
 	playfaintcry BS_FAINTED
 	pause B_WAIT_TIME_LONG
@@ -2729,6 +2730,16 @@ BattleScript_FaintBattler::
 	tryactivatereceiver BS_FAINTED
 	tryactivatesoulheart
 	trytrainerslidemsgfirstoff BS_FAINTED
+	return
+
+BattleScript_DynamaxFaintEffect::
+	playanimation BS_FAINTED, B_ANIM_DYNAMAX_FAINT
+	waitanimation
+	return
+
+BattleScript_TeraFaintEffect::
+	playanimation BS_FAINTED, B_ANIM_TERA_FAINT
+	waitanimation
 	return
 
 BattleScript_GiveExp::

@@ -609,7 +609,9 @@ enum AnimBattler
 #define B_ANIM_FORM_CHANGE_DISGUISE     62
 #define B_ANIM_HELD_ITEM_BERRY          63
 #define B_ANIM_PROTECTED_ITSELF         64
-#define NUM_B_ANIMS_GENERAL             65
+#define B_ANIM_DYNAMAX_FAINT            65
+#define B_ANIM_TERA_FAINT               66
+#define NUM_B_ANIMS_GENERAL             67
 
 // special animations table (sBattleAnims_Special)
 #define B_ANIM_LVL_UP                   0

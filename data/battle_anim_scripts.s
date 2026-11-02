@@ -35040,6 +35040,30 @@ gBattleAnimGeneral_DynamaxGrowth:: @ PORTED FROM CFRU
 	waitforvisualfinish
 	end
 
+gBattleAnimGeneral_DynamaxFaint::
+	blend_color_cycle selector=F_PAL_ATTACKER, delay=0, num_blends=2, initial_blend_y=0, target_blend_y=10, color=RGB_WHITE
+	playsewithpan SE_M_SELF_DESTRUCT, SOUND_PAN_ATTACKER
+	createsprite gExplosionSpriteTemplate, ANIM_ATTACKER, 2, 0, 0, ANIM_ATTACKER, 1
+	delay 5
+	createsprite gExplosionSpriteTemplate, ANIM_ATTACKER, 2, -24, -16, ANIM_ATTACKER, 1
+	createsprite gExplosionSpriteTemplate, ANIM_ATTACKER, 2, 24, 12, ANIM_ATTACKER, 1
+	delay 5
+	playsewithpan SE_M_SELF_DESTRUCT, SOUND_PAN_ATTACKER
+	createsprite gExplosionSpriteTemplate, ANIM_ATTACKER, 2, 24, -20, ANIM_ATTACKER, 1
+	createsprite gExplosionSpriteTemplate, ANIM_ATTACKER, 2, -24, 16, ANIM_ATTACKER, 1
+	delay 5
+	createsprite gExplosionSpriteTemplate, ANIM_ATTACKER, 2, 0, -24, ANIM_ATTACKER, 1
+	createsprite gExplosionSpriteTemplate, ANIM_ATTACKER, 2, 0, 12, ANIM_ATTACKER, 1
+	waitforvisualfinish
+	end
+
+gBattleAnimGeneral_TeraFaint::
+	blend_color_cycle selector=F_PAL_ATTACKER, delay=0, num_blends=2, initial_blend_y=0, target_blend_y=8, color=RGB_WHITE
+	playsewithpan SE_M_BRICK_BREAK, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_TeraFaintCrystals, 2
+	waitforvisualfinish
+	end
+
 gBattleAnimGeneral_ProtectedItself::
 	monbg ANIM_ATTACKER
 	splitbgprio ANIM_TARGET

@@ -12173,6 +12173,25 @@ void BS_JumpIfDynamaxed(void)
         gBattlescriptCurrInstr = cmd->nextInstr;
 }
 
+void BS_TryGimmickFaintAnimation(void)
+{
+    NATIVE_ARGS();
+
+    // Continue after this command on return; the visual does not clear the gimmick.
+    gBattlescriptCurrInstr = cmd->nextInstr;
+    switch (GetActiveGimmick(gBattlerFainted))
+    {
+    case GIMMICK_DYNAMAX:
+        BattleScriptCall(BattleScript_DynamaxFaintEffect);
+        break;
+    case GIMMICK_TERA:
+        BattleScriptCall(BattleScript_TeraFaintEffect);
+        break;
+    default:
+        break;
+    }
+}
+
 void BS_UndoDynamax(void)
 {
     NATIVE_ARGS(u8 battler);

@@ -92,6 +92,7 @@ EWRAM_DATA static u8 sStartMenuCursorPos = 0;
 EWRAM_DATA static u8 sNumStartMenuActions = 0;
 EWRAM_DATA static u8 sCurrentStartMenuActions[MENU_ACTION_COUNT] = {0};
 EWRAM_DATA static s8 sInitStartMenuData[2] = {0};
+EWRAM_DATA static bool8 sAnimateStartMenuOpen = FALSE;
 
 EWRAM_DATA static u8 (*sSaveDialogCallback)(void) = NULL;
 EWRAM_DATA static u8 sSaveDialogTimer = 0;
@@ -122,6 +123,7 @@ static bool8 BattlePyramidRetireStartCallback(void);
 static bool8 BattlePyramidRetireReturnCallback(void);
 static bool8 BattlePyramidRetireCallback(void);
 static bool8 HandleStartMenuInput(void);
+static bool8 StartMenuCloseCallback(void);
 
 // Save dialog callbacks
 static u8 SaveConfirmSaveCallback(void);
@@ -498,7 +500,8 @@ static bool32 InitStartMenuStep(void)
         break;
     case 2:
         LoadMessageBoxAndBorderGfx();
-        StartMenuUi_Open();
+        StartMenuUi_Open(sAnimateStartMenuOpen);
+        sAnimateStartMenuOpen = FALSE;
         sInitStartMenuData[1] = 0;
         sInitStartMenuData[0]++;
         break;
@@ -586,6 +589,8 @@ void ShowStartMenu(void)
         PlayerFreeze();
         StopPlayerAvatar();
     }
+    // Only opening from the field animates; returning from a submenu shows it at once.
+    sAnimateStartMenuOpen = TRUE;
     CreateStartMenuTask(Task_ShowStartMenu);
     LockPlayerFieldControls();
 }
@@ -620,6 +625,8 @@ static bool8 HandleStartMenuInput(void)
         HideStartMenu();
         return TRUE;
     }
+    if (StartMenuUi_Animate())
+        return FALSE;
     if (JOY_NEW(DPAD_UP))
     {
         PlaySE(SE_SELECT);
@@ -671,12 +678,22 @@ static bool8 HandleStartMenuInput(void)
 
     if (JOY_NEW(START_BUTTON | B_BUTTON))
     {
-        RemoveExtraStartMenuWindows();
-        HideStartMenu();
-        return TRUE;
+        PlaySE(SE_SELECT);
+        StartMenuUi_BeginClose();
+        gMenuCallback = StartMenuCloseCallback;
+        return FALSE;
     }
 
     return FALSE;
+}
+
+// The player can move again once the menu has faded away.
+static bool8 StartMenuCloseCallback(void)
+{
+    if (StartMenuUi_Animate())
+        return FALSE;
+    HideStartMenuWindow();
+    return TRUE;
 }
 
 static bool8 StartMenuTipsCallback(void)
@@ -801,10 +818,10 @@ static bool8 StartMenuOptionCallback(void)
 
 static bool8 StartMenuExitCallback(void)
 {
-    RemoveExtraStartMenuWindows();
-    HideStartMenu(); // Hide start menu
+    StartMenuUi_BeginClose();
+    gMenuCallback = StartMenuCloseCallback;
 
-    return TRUE;
+    return FALSE;
 }
 
 static bool8 StartMenuDebugCallback(void)
