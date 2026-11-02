@@ -33,6 +33,7 @@
 #include "graphics.h"
 #include "international_string_util.h"
 #include "item.h"
+#include "item_icon.h"
 #include "item_menu.h"
 #include "item_use.h"
 #include "caps.h"
@@ -192,6 +193,8 @@ struct PartyMenuInternal
     u8 windowId[3];
     u8 actions[MAX_MON_MOVES + 5];
     u8 numActions;
+    u8 gridButtons[2];
+    u16 gridMessage;
     // In vanilla Emerald, only the first 0xB0 hwords (0x160 bytes) are actually used.
     // However, a full 0x100 hwords (0x200 bytes) are allocated.
     // It is likely that the 0x160 value used below is a constant defined by
@@ -466,6 +469,7 @@ static void Task_BattlePyramidChooseMonHeldItems(u8);
 static void ShiftMoveSlot(struct BoxPokemon *, u8, u8);
 static void BlitBitmapToPartyWindow_LeftColumn(u8, u8, u8, u8, u8, bool8);
 static void BlitBitmapToPartyWindow_RightColumn(u8, u8, u8, u8, u8, bool8);
+static void BlitBitmapToPartyWindow_Grid(u8, u8, u8, u8, u8, bool8);
 static void CursorCb_Summary(u8);
 static void CursorCb_Switch(u8);
 static void CursorCb_Cancel1(u8);
@@ -532,6 +536,7 @@ static const u8 sText_EnterPartyRoamerParkPrompt[] = _("{JPN}「{PLAYER}」の �
 
 // static const data
 #include "data/party_menu.h"
+#include "data/party_menu_grid.h"
 
 // code
 static void InitPartyMenu(enum PartyMenuType menuType, enum PartyMenuLayout layout, u8 partyAction, bool8 keepCursorPos, u8 messageId, TaskFunc task, MainCallback callback)
@@ -711,7 +716,8 @@ static bool8 ShowPartyMenu(void)
         gMain.state++;
         break;
     case 11:
-        LoadHeldItemIcons();
+        if (!UsePartyGrid())
+            LoadHeldItemIcons();
         gMain.state++;
         break;
     case 12:
@@ -817,7 +823,8 @@ static bool8 ReloadPartyMenu(void)
         gMain.state++;
         break;
     case 9:
-        LoadHeldItemIcons();
+        if (!UsePartyGrid())
+            LoadHeldItemIcons();
         gMain.state++;
         break;
     case 10:
@@ -905,7 +912,14 @@ static bool8 AllocPartyMenuBg(void)
 
     memset(sPartyBgTilemapBuffer, 0, 0x800);
     ResetBgsAndClearDma3BusyFlags(0);
-    InitBgsFromTemplates(0, sPartyMenuBgTemplates, ARRAY_COUNT(sPartyMenuBgTemplates));
+    struct BgTemplate templates[ARRAY_COUNT(sPartyMenuBgTemplates)];
+    memcpy(templates, sPartyMenuBgTemplates, sizeof(templates));
+    if (UsePartyGrid())
+    {
+        templates[0].charBaseIndex = 1;
+        templates[2].charBaseIndex = 1;
+    }
+    InitBgsFromTemplates(0, templates, ARRAY_COUNT(templates));
     SetBgTilemapBuffer(1, sPartyBgTilemapBuffer);
     ResetAllBgsCoordinates();
     ScheduleBgCopyTilemapToVram(1);
@@ -961,6 +975,8 @@ static bool8 AllocPartyMenuBgGfx(void)
         sPartyMenuInternal->data[0]++;
         break;
     default:
+        if (UsePartyGrid())
+            LoadPartyGridBackground();
         return TRUE;
     }
     return FALSE;
@@ -1005,6 +1021,16 @@ static void LoadPartyMenuBoxes(enum PartyMenuLayout layout)
         sPartyMenuBoxes[i].itemSpriteId = SPRITE_NONE;
         sPartyMenuBoxes[i].pokeballSpriteId = SPRITE_NONE;
         sPartyMenuBoxes[i].statusSpriteId = SPRITE_NONE;
+    }
+
+    if (UsePartyGrid())
+    {
+        for (i = 0; i < PARTY_SIZE; i++)
+        {
+            sPartyMenuBoxes[i].infoRects = &sGridInfo;
+            sPartyMenuBoxes[i].spriteCoords = layout == PARTY_LAYOUT_MULTI_SHOWCASE ? sGridShowcaseSpriteCoords[i] : sGridSpriteCoords[i];
+        }
+        return;
     }
 
     // The first party mon goes in the left column
@@ -1243,7 +1269,7 @@ static void DisplayPartyPokemonDataForMultiBattle(u8 slot)
         StringCopy(gStringVar1, gMultiPartnerParty[actualSlot].nickname);
         StringGet_Nickname(gStringVar1);
         ConvertInternationalPlayerName(gStringVar1);
-        DisplayPartyPokemonBarDetailToFit(menuBox->windowId, gStringVar1, 0, menuBox->infoRects->dimensions, 50);
+        DisplayPartyPokemonBarDetailToFit(menuBox->windowId, gStringVar1, 0, menuBox->infoRects->dimensions, UsePartyGrid() ? 62 : 50);
         DisplayPartyPokemonLevel(gMultiPartnerParty[actualSlot].level, menuBox);
         DisplayPartyPokemonGender(gMultiPartnerParty[actualSlot].gender, gMultiPartnerParty[actualSlot].species, gMultiPartnerParty[actualSlot].nickname, menuBox);
         DisplayPartyPokemonHP(gMultiPartnerParty[actualSlot].hp, gMultiPartnerParty[actualSlot].maxhp, menuBox);
@@ -1324,6 +1350,17 @@ static bool8 CreatePartyMonSpritesLoop(void)
 
 static void CreateCancelConfirmPokeballSprites(void)
 {
+    if (UsePartyGrid())
+    {
+        if (gPartyMenu.menuType == PARTY_MENU_TYPE_MULTI_SHOWCASE || gPartyMenu.menuType == PARTY_MENU_TYPE_MULTI_FULL_SHOWCASE)
+            return;
+        sPartyMenuInternal->spriteIdCancelPokeball = CreatePokeballButtonSprite(224, 152);
+        sPartyMenuInternal->spriteIdConfirmPokeball = CreatePokeballButtonSprite(180, 152);
+        gSprites[sPartyMenuInternal->spriteIdCancelPokeball].invisible = TRUE;
+        gSprites[sPartyMenuInternal->spriteIdConfirmPokeball].invisible = TRUE;
+        AnimatePartySlot(gPartyMenu.slotId, 1);
+        return;
+    }
     if (gPartyMenu.menuType == PARTY_MENU_TYPE_MULTI_SHOWCASE
      || gPartyMenu.menuType == PARTY_MENU_TYPE_MULTI_FULL_SHOWCASE)
     {
@@ -1350,6 +1387,14 @@ void AnimatePartySlot(u8 slot, u8 animNum)
 {
     u8 spriteId;
 
+    if (UsePartyGrid() && slot >= PARTY_SIZE)
+    {
+        u8 button = sPartyMenuInternal->gridButtons[slot - PARTY_SIZE];
+        if (button != WINDOW_NONE && GetWindowAttribute(button, WINDOW_BG) != 0xFF)
+            DrawPartyGridButton(button, slot == PARTY_SIZE ? gMenuText_Confirm : gText_Cancel, animNum != 0);
+        return;
+    }
+
     switch (slot)
     {
     default:
@@ -1358,6 +1403,8 @@ void AnimatePartySlot(u8 slot, u8 animNum)
             LoadPartyBoxPalette(&sPartyMenuBoxes[slot], GetPartyBoxPaletteFlags(slot, animNum));
             AnimateSelectedPartyIcon(sPartyMenuBoxes[slot].monSpriteId, animNum);
             PartyMenuStartSpriteAnim(sPartyMenuBoxes[slot].pokeballSpriteId, animNum);
+            if (UsePartyGrid() && animNum)
+                DrawPartyGridFooter();
         }
         return;
     case PARTY_SIZE: // Confirm
@@ -1910,7 +1957,11 @@ static void UpdateCurrentPartySelection(s8 *slotPtr, s8 movementDir)
     s8 newSlotId = *slotPtr;
     enum PartyMenuLayout layout = gPartyMenu.layout;
 
-    if (layout == PARTY_LAYOUT_SINGLE
+    if (UsePartyGrid())
+    {
+        UpdatePartySelectionGrid(slotPtr, movementDir);
+    }
+    else if (layout == PARTY_LAYOUT_SINGLE
      || layout == PARTY_LAYOUT_MULTI_FULL
      || layout == PARTY_LAYOUT_MULTI_FULL_PARTNER)
     {
@@ -2464,6 +2515,15 @@ static enum CanMoveBeLearned CanTeachMove(struct Pokemon *mon, enum Move move)
 
 static void InitPartyMenuWindows(enum PartyMenuLayout layout)
 {
+    if (UsePartyGrid())
+    {
+        if (layout == PARTY_LAYOUT_MULTI_SHOWCASE)
+            InitWindows(sGridShowcaseWindows);
+        else
+            InitWindows(sGridWindows);
+        LoadPartyMenuWindows();
+        return;
+    }
     switch (layout)
     {
     case PARTY_LAYOUT_MULTI_SHOWCASE:
@@ -2488,9 +2548,17 @@ static void LoadPartyMenuWindows(void)
     DeactivateAllTextPrinters();
     for (i = 0; i < PARTY_SIZE; i++)
         FillWindowPixelBuffer(i, PIXEL_FILL(0));
-    LoadUserWindowBorderGfx(0, 0x4F, BG_PLTT_ID(13));
+    LoadUserWindowBorderGfx(0, PartyFrameTile(), BG_PLTT_ID(13));
     LoadPalette(GetOverworldTextboxPalettePtr(), BG_PLTT_ID(14), PLTT_SIZE_4BPP);
     LoadPalette(gStandardMenuPalette, BG_PLTT_ID(15), PLTT_SIZE_4BPP);
+    if (UsePartyGrid())
+    {
+        LoadPartyGridBackground();
+        DrawPartyGridHeader();
+        sPartyMenuInternal->gridButtons[0] = WINDOW_NONE;
+        sPartyMenuInternal->gridButtons[1] = WINDOW_NONE;
+        sPartyMenuInternal->gridMessage = PARTY_MSG_NONE;
+    }
 }
 
 static void CreateCancelConfirmWindows(bool8 chooseHalf)
@@ -2499,6 +2567,13 @@ static void CreateCancelConfirmWindows(bool8 chooseHalf)
     u8 cancelWindowId;
     u8 offset;
     u8 mainOffset;
+
+    if (UsePartyGrid())
+    {
+        if (gPartyMenu.menuType != PARTY_MENU_TYPE_MULTI_SHOWCASE && gPartyMenu.menuType != PARTY_MENU_TYPE_MULTI_FULL_SHOWCASE)
+            CreatePartyGridButtons(chooseHalf);
+        return;
+    }
 
     if (gPartyMenu.menuType != PARTY_MENU_TYPE_MULTI_SHOWCASE
      && gPartyMenu.menuType != PARTY_MENU_TYPE_MULTI_FULL_SHOWCASE)
@@ -2586,8 +2661,35 @@ static void BlitBitmapToPartyWindow_RightColumn(u8 windowId, u8 x, u8 y, u8 widt
         BlitBitmapToPartyWindow(windowId, sSlotTilemap_WideNoHP, 18, x, y, width, height);
 }
 
+static void BlitBitmapToPartyWindow_Grid(u8 windowId, u8 x, u8 y, u8 width, u8 height, bool8 hideHP)
+{
+    if (width == 0 && height == 0)
+    {
+        FillWindowPixelBuffer(windowId, PIXEL_FILL(0));
+        FillWindowPixelRect(windowId, PIXEL_FILL(4), 3, 1, 114, 38);
+        FillWindowPixelRect(windowId, PIXEL_FILL(1), 4, 2, 112, 36);
+        FillWindowPixelRect(windowId, PIXEL_FILL(8), 5, 37, 110, 1);
+        FillWindowPixelRect(windowId, PIXEL_FILL(6), 5, 2, 110, 1);
+        FillWindowPixelRect(windowId, PIXEL_FILL(5), 6, 4, 28, 30);
+        FillWindowPixelRect(windowId, PIXEL_FILL(4), 4, 5, 2, 30);
+        FillWindowPixelRect(windowId, PIXEL_FILL(4), 0, 18, 3, 3);
+    }
+    else
+    {
+        u32 left = max(4, x * 8), top = max(2, y * 8);
+        u32 right = min(116, (x + width) * 8), bottom = min(38, (y + height) * 8);
+        if (right > left && bottom > top)
+            FillWindowPixelRect(windowId, PIXEL_FILL(1), left, top, right - left, bottom - top);
+    }
+}
+
 static void DrawEmptySlot(u8 windowId)
 {
+    if (UsePartyGrid())
+    {
+        BlitBitmapToPartyWindow_Grid(windowId, 0, 0, 0, 0, TRUE);
+        return;
+    }
     BlitBitmapToPartyWindow(windowId, sSlotTilemap_WideEmpty, 18, 0, 0, 18, 3);
 }
 
@@ -2601,6 +2703,21 @@ static void DrawEmptySlot(u8 windowId)
 static void LoadPartyBoxPalette(struct PartyMenuBox *menuBox, u8 palFlags)
 {
     u8 palOffset = BG_PLTT_ID(GetWindowAttribute(menuBox->windowId, WINDOW_PALETTE_NUM));
+
+    if (UsePartyGrid())
+    {
+        u16 border = sGridSlotPalette[palFlags & PARTY_PAL_SELECTED ? 7 : 4];
+        if (palFlags & (PARTY_PAL_TO_SWITCH | PARTY_PAL_TO_SOFTBOIL | PARTY_PAL_SWITCHING))
+            border = RGB(31, 14, 4);
+        if (palFlags & PARTY_PAL_NO_MON)
+        {
+            u16 empty = sGridBackgroundPalette[1];
+            LoadPalette(&empty, palOffset + 1, sizeof(empty));
+            border = RGB(10, 17, 15);
+        }
+        LoadPalette(&border, palOffset + 4, sizeof(border));
+        return;
+    }
 
     if (palFlags & PARTY_PAL_NO_MON)
     {
@@ -2682,6 +2799,11 @@ static void DisplayPartyPokemonBarDetail(u8 windowId, const u8 *str, u8 color, c
 
 static void DisplayPartyPokemonBarDetailToFit(u8 windowId, const u8 *str, u8 color, const u8 *align, u32 width)
 {
+    if (UsePartyGrid())
+    {
+        DrawPartyGridName(windowId, str, align, width);
+        return;
+    }
     AddTextPrinterParameterized3(windowId, GetFontIdToFit(str, FONT_SMALL, 0, width), align[0], align[1], sFontColorTable[color], 0, str);
 }
 
@@ -2694,7 +2816,9 @@ static void DisplayPartyPokemonNickname(struct Pokemon *mon, struct PartyMenuBox
         if (c == 1)
             menuBox->infoRects->blitFunc(menuBox->windowId, menuBox->infoRects->dimensions[0] >> 3, menuBox->infoRects->dimensions[1] >> 3, menuBox->infoRects->dimensions[2] >> 3, menuBox->infoRects->dimensions[3] >> 3, FALSE);
         GetMonNickname(mon, nickname);
-        DisplayPartyPokemonBarDetailToFit(menuBox->windowId, nickname, 0, menuBox->infoRects->dimensions, 50);
+        if (UsePartyGrid())
+            FillWindowPixelRect(menuBox->windowId, PIXEL_FILL(1), 36, 2, 78, 12);
+        DisplayPartyPokemonBarDetailToFit(menuBox->windowId, nickname, 0, menuBox->infoRects->dimensions, UsePartyGrid() ? 62 : 50);
     }
 }
 
@@ -2703,10 +2827,15 @@ static void DisplayPartyPokemonLevelCheck(struct Pokemon *mon, struct PartyMenuB
     if (GetMonData(mon, MON_DATA_SPECIES) != SPECIES_NONE)
     {
         u8 ailment = GetMonAilment(mon);
-        if (ailment == AILMENT_NONE || ailment == AILMENT_PKRS)
+        if (UsePartyGrid() || ailment == AILMENT_NONE || ailment == AILMENT_PKRS)
         {
             if (c != 0)
+            {
+                if (UsePartyGrid())
+                    FillWindowPixelRect(menuBox->windowId, PIXEL_FILL(1), 36, 14, 32, 12);
+                else
                 menuBox->infoRects->blitFunc(menuBox->windowId, menuBox->infoRects->dimensions[4] >> 3, (menuBox->infoRects->dimensions[5] >> 3) + 1, menuBox->infoRects->dimensions[6] >> 3, menuBox->infoRects->dimensions[7] >> 3, FALSE);
+            }
             if (c != 2)
                 DisplayPartyPokemonLevel(GetMonData(mon, MON_DATA_LEVEL), menuBox);
         }
@@ -2728,6 +2857,8 @@ static void DisplayPartyPokemonGenderNidoranCheck(struct Pokemon *mon, struct Pa
     if (c == 1)
         menuBox->infoRects->blitFunc(menuBox->windowId, menuBox->infoRects->dimensions[8] >> 3, (menuBox->infoRects->dimensions[9] >> 3) + 1, menuBox->infoRects->dimensions[10] >> 3, menuBox->infoRects->dimensions[11] >> 3, FALSE);
     GetMonNickname(mon, nickname);
+    if (UsePartyGrid() && c == 1)
+        FillWindowPixelRect(menuBox->windowId, PIXEL_FILL(1), 72, 14, 8, 12);
     DisplayPartyPokemonGender(GetMonGender(mon), GetMonData(mon, MON_DATA_SPECIES), nickname, menuBox);
 }
 
@@ -2739,6 +2870,15 @@ static void DisplayPartyPokemonGender(u8 gender, enum Species species, u8 *nickn
         return;
     if ((species == SPECIES_NIDORAN_M || species == SPECIES_NIDORAN_F) && StringCompare(nickname, GetSpeciesName(species)) == 0)
         return;
+    if (UsePartyGrid())
+    {
+        u16 color = gender == MON_FEMALE ? RGB(26, 5, 7) : RGB(4, 14, 25);
+        LoadPalette(&color, palOffset + 11, sizeof(color));
+        LoadPalette(&color, palOffset + 12, sizeof(color));
+        if (gender != MON_GENDERLESS)
+            DisplayPartyPokemonBarDetail(menuBox->windowId, gender == MON_FEMALE ? gText_FemaleSymbol : gText_MaleSymbol, 2, &menuBox->infoRects->dimensions[8]);
+        return;
+    }
     switch (gender)
     {
     case MON_MALE:
@@ -2759,7 +2899,12 @@ static void DisplayPartyPokemonHPCheck(struct Pokemon *mon, struct PartyMenuBox 
     if (GetMonData(mon, MON_DATA_SPECIES) != SPECIES_NONE)
     {
         if (c != 0)
+        {
+            if (UsePartyGrid())
+                FillWindowPixelRect(menuBox->windowId, PIXEL_FILL(1), 69, 26, 45, 12);
+            else
             menuBox->infoRects->blitFunc(menuBox->windowId, menuBox->infoRects->dimensions[12] >> 3, (menuBox->infoRects->dimensions[13] >> 3) + 1, menuBox->infoRects->dimensions[14] >> 3, menuBox->infoRects->dimensions[15] >> 3, FALSE);
+        }
         if (c != 2)
             DisplayPartyPokemonHP(GetMonData(mon, MON_DATA_HP), GetMonData(mon, MON_DATA_MAX_HP), menuBox);
     }
@@ -2778,6 +2923,19 @@ static void DisplayPartyPokemonHP(u16 hp, u16 maxhp, struct PartyMenuBox *menuBo
 {
     bool32 fourDigits = (maxhp >= 1000);
 
+    if (UsePartyGrid())
+    {
+        u8 number[24];
+        u8 *end = StringCopy(number, COMPOUND_STRING("{ENG}"));
+        end = ConvertIntToDecimalStringN(end, hp, STR_CONV_MODE_LEFT_ALIGN, 4);
+        end = StringCopy(end, gText_Slash);
+        ConvertIntToDecimalStringN(end, maxhp, STR_CONV_MODE_LEFT_ALIGN, 4);
+        u8 font = GetFontIdToFit(number, FONT_SMALL, 0, 45);
+        FillWindowPixelRect(menuBox->windowId, PIXEL_FILL(1), 69, 26, 45, 12);
+        AddTextPrinterParameterized3(menuBox->windowId, font, 114 - GetStringWidth(font, number, 0), 26, sFontColorTable[0], 0, number);
+        return;
+    }
+
     ConvertIntToDecimalStringN(StringCopy(gStringVar1, COMPOUND_STRING("{ENG}")), hp, STR_CONV_MODE_RIGHT_ALIGN, fourDigits ? 4 : 3);
 
     if (fourDigits)
@@ -2788,6 +2946,8 @@ static void DisplayPartyPokemonHP(u16 hp, u16 maxhp, struct PartyMenuBox *menuBo
 
 static void DisplayPartyPokemonMaxHPCheck(struct Pokemon *mon, struct PartyMenuBox *menuBox, u8 c)
 {
+    if (UsePartyGrid())
+        return;
     if (GetMonData(mon, MON_DATA_SPECIES) != SPECIES_NONE)
     {
         if (c != 0)
@@ -2800,6 +2960,8 @@ static void DisplayPartyPokemonMaxHPCheck(struct Pokemon *mon, struct PartyMenuB
 static void DisplayPartyPokemonMaxHP(u16 maxhp, struct PartyMenuBox *menuBox)
 {
     bool32 fourDigits = (maxhp >= 1000);
+    if (UsePartyGrid())
+        return;
 
     ConvertIntToDecimalStringN(gStringVar2, maxhp, STR_CONV_MODE_RIGHT_ALIGN, fourDigits ? 4 : 3);
     StringCopy(StringCopy(gStringVar1, COMPOUND_STRING("{ENG}")), gText_Slash);
@@ -2821,6 +2983,16 @@ static void DisplayPartyPokemonHPBar(u16 hp, u16 maxhp, struct PartyMenuBox *men
 {
     u8 palOffset = BG_PLTT_ID(GetWindowAttribute(menuBox->windowId, WINDOW_PALETTE_NUM));
     u8 hpFraction;
+
+    if (UsePartyGrid())
+    {
+        u8 level = GetHPBarLevel(hp, maxhp);
+        u16 color = level == HP_BAR_RED ? RGB(29, 5, 7)
+            : level == HP_BAR_YELLOW ? RGB(30, 22, 3) : RGB(3, 17, 30);
+        LoadPalette(&color, palOffset + 9, sizeof(color));
+        LoadPalette(&color, palOffset + 10, sizeof(color));
+    }
+    else
 
     switch (GetHPBarLevel(hp, maxhp))
     {
@@ -2853,6 +3025,14 @@ static void DisplayPartyPokemonHPBar(u16 hp, u16 maxhp, struct PartyMenuBox *men
 
 static void DisplayPartyPokemonDescriptionText(u8 stringID, struct PartyMenuBox *menuBox, u8 c)
 {
+    if (UsePartyGrid())
+    {
+        if (c != 0)
+            FillWindowPixelRect(menuBox->windowId, PIXEL_FILL(1), 36, 26, 78, 12);
+        if (c != 2)
+            AddTextPrinterParameterized3(menuBox->windowId, GetFontIdToFit(sDescriptionStringTable[stringID], FONT_SMALL, 0, 78), 36, 26, sFontColorTable[0], 0, sDescriptionStringTable[stringID]);
+        return;
+    }
     if (c)
     {
         int width = ((menuBox->infoRects->descTextLeft % 8) + menuBox->infoRects->descTextWidth + 7) / 8;
@@ -2860,7 +3040,7 @@ static void DisplayPartyPokemonDescriptionText(u8 stringID, struct PartyMenuBox 
         menuBox->infoRects->blitFunc(menuBox->windowId, menuBox->infoRects->descTextLeft >> 3, menuBox->infoRects->descTextTop >> 3, width, height, TRUE);
     }
     if (c != 2)
-        AddTextPrinterParameterized3(menuBox->windowId, FONT_NORMAL, menuBox->infoRects->descTextLeft, menuBox->infoRects->descTextTop, sFontColorTable[0], 0, sDescriptionStringTable[stringID]);
+        AddTextPrinterParameterized3(menuBox->windowId, UsePartyGrid() ? GetFontIdToFit(sDescriptionStringTable[stringID], FONT_SMALL, 0, 78) : FONT_NORMAL, menuBox->infoRects->descTextLeft, menuBox->infoRects->descTextTop, sFontColorTable[0], 0, sDescriptionStringTable[stringID]);
 }
 
 static void PartyMenuRemoveWindow(u8 *ptr)
@@ -2878,11 +3058,22 @@ void DisplayPartyMenuStdMessage(u32 stringId)
 {
     u8 *windowPtr = &sPartyMenuInternal->windowId[1];
 
+    sPartyMenuInternal->gridMessage = stringId;
+
     if (*windowPtr != WINDOW_NONE)
         PartyMenuRemoveWindow(windowPtr);
 
     if (stringId != PARTY_MSG_NONE)
     {
+        if (UsePartyGrid() && stringId == PARTY_MSG_CHOOSE_MON)
+        {
+            struct WindowTemplate footer = sGridFooterWindow;
+            if (sPartyMenuInternal->chooseHalf)
+                footer.width = 18;
+            *windowPtr = AddWindow(&footer);
+            DrawPartyGridFooter();
+            return;
+        }
         switch (stringId)
         {
         case PARTY_MSG_DO_WHAT_WITH_MON:
@@ -2919,7 +3110,7 @@ void DisplayPartyMenuStdMessage(u32 stringId)
             if (gPartiesCount[B_TRAINER_PLAYER] == 0)
                 stringId = PARTY_MSG_NO_POKEMON;
         }
-        DrawStdFrameWithCustomTileAndPalette(*windowPtr, FALSE, 0x4F, 13);
+        DrawStdFrameWithCustomTileAndPalette(*windowPtr, FALSE, PartyFrameTile(), 13);
         StringExpandPlaceholders(gStringVar4, sActionStringTable[stringId]);
         AddTextPrinterParameterized(*windowPtr, FONT_NORMAL, gStringVar4, 0, 1, 0, 0);
         ScheduleBgCopyTilemapToVram(2);
@@ -2975,7 +3166,7 @@ static u8 DisplaySelectionWindow(u8 windowType)
     }
 
     sPartyMenuInternal->windowId[0] = AddWindow(&window);
-    DrawStdFrameWithCustomTileAndPalette(sPartyMenuInternal->windowId[0], FALSE, 0x4F, 13);
+    DrawStdFrameWithCustomTileAndPalette(sPartyMenuInternal->windowId[0], FALSE, PartyFrameTile(), 13);
     if (windowType == SELECTWINDOW_MOVES)
         return sPartyMenuInternal->windowId[0];
     cursorDimension = GetMenuCursorDimensionByFont(FONT_NORMAL, 0);
@@ -3005,20 +3196,20 @@ static u8 DisplaySelectionWindow(u8 windowType)
 
 static void PrintMessage(const u8 *text)
 {
-    DrawStdFrameWithCustomTileAndPalette(WIN_MSG, FALSE, 0x4F, 13);
+    DrawStdFrameWithCustomTileAndPalette(WIN_MSG, FALSE, PartyFrameTile(), 13);
     gTextFlags.canABSpeedUpPrint = TRUE;
     AddTextPrinterParameterized2(WIN_MSG, FONT_NORMAL, text, GetPlayerTextSpeedDelay(), 0, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
 }
 
 static void PartyMenuDisplayYesNoMenu(void)
 {
-    CreateYesNoMenu(&sPartyMenuYesNoWindowTemplate, 0x4F, 13, 0);
+    CreateYesNoMenu(&sPartyMenuYesNoWindowTemplate, PartyFrameTile(), 13, 0);
 }
 
 static u8 CreateLevelUpStatsWindow(void)
 {
     sPartyMenuInternal->windowId[0] = AddWindow(&sLevelUpStatsWindowTemplate);
-    DrawStdFrameWithCustomTileAndPalette(sPartyMenuInternal->windowId[0], FALSE, 0x4F, 13);
+    DrawStdFrameWithCustomTileAndPalette(sPartyMenuInternal->windowId[0], FALSE, PartyFrameTile(), 13);
     return sPartyMenuInternal->windowId[0];
 }
 
@@ -3372,7 +3563,7 @@ static void SwitchSelectedMons(u8 taskId)
         tSlot1Width = GetWindowAttribute(windowIds[0], WINDOW_WIDTH);
         tSlot1Height = GetWindowAttribute(windowIds[0], WINDOW_HEIGHT);
         tSlot1Offset = 0;
-        if (tSlot1Width == 10)
+        if (UsePartyGrid() ? tSlot1Left < 15 : tSlot1Width == 10)
             tSlot1SlideDir = -1;
         else
             tSlot1SlideDir = 1;
@@ -3382,7 +3573,7 @@ static void SwitchSelectedMons(u8 taskId)
         tSlot2Width = GetWindowAttribute(windowIds[1], WINDOW_WIDTH);
         tSlot2Height = GetWindowAttribute(windowIds[1], WINDOW_HEIGHT);
         tSlot2Offset = 0;
-        if (tSlot2Width == 10)
+        if (UsePartyGrid() ? tSlot2Left < 15 : tSlot2Width == 10)
             tSlot2SlideDir = -1;
         else
             tSlot2SlideDir = 1;
@@ -4578,7 +4769,12 @@ static void AnimateSelectedPartyIcon(u8 spriteId, u8 animNum)
     gSprites[spriteId].data[0] = 0;
     if (animNum == 0)
     {
-        if (gSprites[spriteId].x == 16)
+        if (UsePartyGrid())
+        {
+            gSprites[spriteId].x2 = 0;
+            gSprites[spriteId].y2 = 0;
+        }
+        else if (gSprites[spriteId].x == 16)
         {
             gSprites[spriteId].x2 = 0;
             gSprites[spriteId].y2 = -4;
@@ -4620,6 +4816,11 @@ static void CreatePartyMonHeldItemSprite(struct Pokemon *mon, struct PartyMenuBo
 {
     if (GetMonData(mon, MON_DATA_SPECIES) != SPECIES_NONE)
     {
+        if (UsePartyGrid())
+        {
+            UpdatePartyMonHeldItemSprite(mon, menuBox);
+            return;
+        }
         menuBox->itemSpriteId = CreateSprite(&sSpriteTemplate_HeldItem, menuBox->spriteCoords[2], menuBox->spriteCoords[3], 0);
         UpdatePartyMonHeldItemSprite(mon, menuBox);
     }
@@ -4629,6 +4830,11 @@ static void CreatePartyMonHeldItemSpriteParameterized(enum Species species, enum
 {
     if (species != SPECIES_NONE)
     {
+        if (UsePartyGrid())
+        {
+            ShowOrHideHeldItemSprite(item, menuBox);
+            return;
+        }
         menuBox->itemSpriteId = CreateSprite(&sSpriteTemplate_HeldItem, menuBox->spriteCoords[2], menuBox->spriteCoords[3], 0);
         gSprites[menuBox->itemSpriteId].oam.priority = 0;
         ShowOrHideHeldItemSprite(item, menuBox);
@@ -4642,6 +4848,11 @@ static void UpdatePartyMonHeldItemSprite(struct Pokemon *mon, struct PartyMenuBo
 
 static void ShowOrHideHeldItemSprite(enum Item item, struct PartyMenuBox *menuBox)
 {
+    if (UsePartyGrid())
+    {
+        UpdatePartyGridItemIcon(item, menuBox);
+        return;
+    }
     if (item == ITEM_NONE)
     {
         gSprites[menuBox->itemSpriteId].invisible = TRUE;
@@ -4720,7 +4931,11 @@ static void SpriteCB_HeldItem(struct Sprite *sprite)
 static void CreatePartyMonPokeballSprite(struct Pokemon *mon, struct PartyMenuBox *menuBox)
 {
     if (GetMonData(mon, MON_DATA_SPECIES) != SPECIES_NONE)
+    {
         menuBox->pokeballSpriteId = CreateSprite(&sSpriteTemplate_MenuPokeball, menuBox->spriteCoords[6], menuBox->spriteCoords[7], 8);
+        if (UsePartyGrid())
+            gSprites[menuBox->pokeballSpriteId].invisible = TRUE;
+    }
 }
 
 static void CreatePartyMonPokeballSpriteParameterized(enum Species species, struct PartyMenuBox *menuBox)
@@ -4729,6 +4944,8 @@ static void CreatePartyMonPokeballSpriteParameterized(enum Species species, stru
     {
         menuBox->pokeballSpriteId = CreateSprite(&sSpriteTemplate_MenuPokeball, menuBox->spriteCoords[6], menuBox->spriteCoords[7], 8);
         gSprites[menuBox->pokeballSpriteId].oam.priority = 0;
+        if (UsePartyGrid())
+            gSprites[menuBox->pokeballSpriteId].invisible = TRUE;
     }
 }
 
@@ -4785,6 +5002,8 @@ static void CreatePartyMonStatusSprite(struct Pokemon *mon, struct PartyMenuBox 
     {
         menuBox->statusSpriteId = CreateSprite(&gSpriteTemplate_StatusIcons, menuBox->spriteCoords[4], menuBox->spriteCoords[5], 0);
         SetPartyMonAilmentGfx(mon, menuBox);
+        if (UsePartyGrid())
+            gSprites[menuBox->statusSpriteId].oam.priority = GetWindowAttribute(menuBox->windowId, WINDOW_BG) == 2 ? 0 : 1;
     }
 }
 
@@ -4794,7 +5013,7 @@ static void CreatePartyMonStatusSpriteParameterized(enum Species species, u8 sta
     {
         menuBox->statusSpriteId = CreateSprite(&gSpriteTemplate_StatusIcons, menuBox->spriteCoords[4], menuBox->spriteCoords[5], 0);
         UpdatePartyMonAilmentGfx(status, menuBox);
-        gSprites[menuBox->statusSpriteId].oam.priority = 0;
+        gSprites[menuBox->statusSpriteId].oam.priority = UsePartyGrid() && GetWindowAttribute(menuBox->windowId, WINDOW_BG) != 2 ? 1 : 0;
     }
 }
 
@@ -8691,8 +8910,8 @@ static bool8 FirstBattleEnterParty_CreateWindowAndMsg1Printer(void)
 {
     u8 windowId = AddWindow(&sWindowTemplate_FirstBattleOakVoiceover);
 
-    LoadMessageBoxGfx(windowId, 0x4F, BG_PLTT_ID(14));
-    DrawDialogFrameWithCustomTileAndPalette(windowId, 1, 0x4F, 0xE);
+    LoadMessageBoxGfx(windowId, PartyFrameTile(), BG_PLTT_ID(14));
+    DrawDialogFrameWithCustomTileAndPalette(windowId, 1, PartyFrameTile(), 0xE);
     PartyMenu_Oak_PrintText(windowId, gText_OakImportantToGetToKnowPokemonThroughly);
     return windowId;
 }
@@ -8778,7 +8997,7 @@ static void Task_FirstBattleEnterParty_WaitFadeNormal(u8 taskId)
 {
     if (!gPaletteFade.active)
     {
-        LoadUserWindowBorderGfx(0, 0x4F, BG_PLTT_ID(13));
+        LoadUserWindowBorderGfx(0, PartyFrameTile(), BG_PLTT_ID(13));
         LoadUserWindowBorderGfx_(0, 0x58, BG_PLTT_ID(13));
         if (gPartyMenu.action == PARTY_ACTION_USE_ITEM)
             DisplayPartyMenuStdMessage(PARTY_MSG_USE_ON_WHICH_MON);

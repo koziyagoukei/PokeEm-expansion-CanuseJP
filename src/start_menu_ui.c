@@ -65,7 +65,7 @@ static void DrawIconCircle(u8 window, u32 x, u32 y, bool32 selected)
     for (u32 row = 0; row < 32; row++)
     {
         u32 width = widths[row < 16 ? row : 31 - row];
-        FillWindowPixelRect(window, PIXEL_FILL(selected ? 14 : 8), x + (32 - width) / 2, y + row, width, 1);
+        FillWindowPixelRect(window, PIXEL_FILL(selected ? 13 : 8), x + (32 - width) / 2, y + row, width, 1);
         if (width > 4 && row > 1 && row < 30)
             FillWindowPixelRect(window, PIXEL_FILL(selected ? 3 : 2), x + (32 - width) / 2 + 1, y + row, width - 2, 1);
     }
@@ -86,7 +86,11 @@ void StartMenuUi_Draw(const struct StartMenuUiEntry *entries, u32 count, u32 sel
     if (full)
     {
         FillWindowPixelBuffer(window, PIXEL_FILL(1));
-        FillWindowPixelRect(window, PIXEL_FILL(8), 8, 18, 224, 1);
+        for (u32 y = 22; y < 122; y += 8)
+            for (u32 x = (y & 8) ? 4 : 8; x < 240; x += 8)
+                FillWindowPixelRect(window, PIXEL_FILL(7), x, y, 1, 1);
+        FillWindowPixelRect(window, PIXEL_FILL(8), 0, 18, 240, 2);
+        FillWindowPixelRect(window, PIXEL_FILL(13), 4, 4, 2, 9);
         AddTextPrinterParameterized4(window, FONT_SMALL, 10, 3, 0, 0, sLabelColors, TEXT_SKIP_DRAW, sText_Menu);
         if (status != NULL)
         {
@@ -122,6 +126,9 @@ void StartMenuUi_Draw(const struct StartMenuUiEntry *entries, u32 count, u32 sel
     }
     FillWindowPixelRect(window, PIXEL_FILL(8), 0, 123, 240, 1);
     FillWindowPixelRect(window, PIXEL_FILL(6), 0, 124, 240, 36);
+    FillWindowPixelRect(window, PIXEL_FILL(15), 0, 124, 3, 36);
+    FillWindowPixelRect(window, PIXEL_FILL(8), 237, 124, 3, 36);
+    FillWindowPixelRect(window, PIXEL_FILL(13), 0, 124, 3, 12);
     AddTextPrinterParameterized4(window, FONT_SMALL, 12, 128, 0, 1, sDescriptionColors, TEXT_SKIP_DRAW, entries[selected].description);
     sDisplay->selected = selected;
     sDisplay->count = count;
