@@ -71,6 +71,82 @@ TEST("Pokevirus: large overworld sprite keeps its upper half above counters and 
 #endif
 }
 
+TEST("Pokevirus: full body stays above map tiles regardless of elevation or ground clipping")
+{
+    const struct ObjectEventGraphicsInfo *info = GetObjectEventGraphicsInfo(OBJ_EVENT_GFX_POKEVIRUS);
+    for (u32 elevation = 0; elevation < 16; elevation++)
+    {
+        struct ObjectEvent object = {0};
+        struct Sprite sprite = {0};
+        object.graphicsId = OBJ_EVENT_GFX_POKEVIRUS;
+        object.frozen = TRUE;
+        object.fixedPriority = TRUE;
+        object.currentElevation = object.previousElevation = elevation;
+        sprite.oam = *info->oam;
+        sprite.oam.priority = 3;
+        sprite.subpriority = 255;
+        sprite.subspriteTables = info->subspriteTables;
+        sprite.subspriteTableNum = 6;
+        sprite.subspriteMode = SUBSPRITES_IGNORE_PRIORITY;
+        UpdateObjectEventCurrentMovement(&object, &sprite, NULL);
+        EXPECT_EQ((u32)sprite.oam.priority, 1);
+        EXPECT_EQ(sprite.subpriority, 0);
+        EXPECT_EQ((u32)sprite.subspriteMode, SUBSPRITES_ON);
+        const struct SubspriteTable *table = &sprite.subspriteTables[sprite.subspriteTableNum];
+        EXPECT_EQ(table->subspriteCount, 1);
+        EXPECT_EQ(table->subsprites[0].x, -32);
+        EXPECT_EQ(table->subsprites[0].y, -32);
+        EXPECT_EQ((u32)table->subsprites[0].shape, SPRITE_SHAPE(64x64));
+        EXPECT_EQ((u32)table->subsprites[0].size, SPRITE_SIZE(64x64));
+        EXPECT_EQ((u32)table->subsprites[0].tileOffset, 0);
+        EXPECT_EQ((u32)table->subsprites[0].priority, 1);
+        EXPECT(!object.disableCoveringGroundEffects);
+        EXPECT_EQ((u32)object.previousElevation, elevation);
+    }
+}
+
+TEST("Pokevirus: foreground policy does not change people, Pokemon or the rift graphic")
+{
+    static const u16 graphics[] = {OBJ_EVENT_GFX_ROCKET_COOK, OBJ_EVENT_MON | SPECIES_PIKACHU, OBJ_EVENT_GFX_POKEVIRUS_RIFT};
+    for (u32 i = 0; i < ARRAY_COUNT(graphics); i++)
+    {
+        struct ObjectEvent object = {0};
+        struct Sprite sprite = {0};
+        object.graphicsId = graphics[i];
+        object.frozen = TRUE;
+        object.fixedPriority = TRUE;
+        sprite.oam.priority = 3;
+        sprite.subpriority = 50;
+        sprite.subspriteTableNum = 1;
+        sprite.subspriteMode = SUBSPRITES_ON;
+        UpdateObjectEventCurrentMovement(&object, &sprite, NULL);
+        EXPECT_EQ((u32)sprite.oam.priority, 3);
+        EXPECT_EQ(sprite.subpriority, 50);
+        EXPECT_EQ((u32)sprite.subspriteTableNum, 1);
+    }
+}
+
+TEST("Pokevirus: switching an object back to another graphic restores ordinary draw order")
+{
+    const struct ObjectEventGraphicsInfo *virus = GetObjectEventGraphicsInfo(OBJ_EVENT_GFX_POKEVIRUS);
+    const struct ObjectEventGraphicsInfo *rift = GetObjectEventGraphicsInfo(OBJ_EVENT_GFX_POKEVIRUS_RIFT);
+    struct ObjectEvent object = {0};
+    struct Sprite *sprite = &gSprites[0];
+    memset(sprite, 0, sizeof(*sprite));
+    object.graphicsId = OBJ_EVENT_GFX_POKEVIRUS;
+    object.previousElevation = 3;
+    object.frozen = TRUE;
+    sprite->images = virus->images;
+    sprite->subspriteTables = virus->subspriteTables;
+    UpdateObjectEventCurrentMovement(&object, sprite, NULL);
+    EXPECT_EQ((u32)sprite->oam.priority, 1);
+    ObjectEventSetGraphicsId(&object, OBJ_EVENT_GFX_POKEVIRUS_RIFT);
+    EXPECT_EQ(sprite->subspriteTables, rift->subspriteTables);
+    EXPECT_EQ((u32)sprite->oam.priority, ElevationToPriority(3));
+    EXPECT_EQ((u32)sprite->subspriteTableNum, 1);
+    EXPECT_GT(sprite->subpriority, 0);
+}
+
 TEST("Pokevirus: opponent trainer picture decompresses into one frame without overflow")
 {
     const struct TrainerFrontPicInfo *info = gTrainerPicInfo[TRAINER_PIC_POKEVIRUS].frontPic;

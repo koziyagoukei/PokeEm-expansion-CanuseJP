@@ -1228,6 +1228,7 @@ static void MoveAndTurnObject(struct ObjectEvent *object, s16 x, s16 y, enum Dir
 // Pokevirus floats two steps behind the infected person, so the two pairs face each other.
 void FrontierStory_ArrangeReleaseScene(void)
 {
+    static const s8 sCookOffsets[][2] = {{1, 0}, {-1, 0}, {0, 1}, {0, 2}};
     struct ObjectEvent *infected, *cook, *pokevirus;
     s16 px, py, ix, iy, dx, dy, x, y;
     u32 i;
@@ -1246,16 +1247,8 @@ void FrontierStory_ArrangeReleaseScene(void)
         dy = 0;
 
     MoveAndTurnObject(infected, ix, iy, GetDirectionToFace(ix, iy, px, py));
-    // People can come up to the player from any side, so take the first open spot for the
-    // cook beside the player and for Pokevirus behind the infected person.
-    for (i = 0; i < 2; i++)
-    {
-        x = px + (i == 0 ? 1 : -1) * (dx == 0);
-        y = py + (i == 0 ? 1 : -1) * (dy == 0);
-        if (IsSpotFree(x, y, cook) || i == 1)
-            break;
-    }
-    MoveAndTurnObject(cook, x, y, GetDirectionToFace(px, py, ix, iy));
+    // Free Pokevirus's spawn tile before choosing the cook's place: in the Dome
+    // it can be the only free side of the player opposite the doubles attendant.
     x = ix - 2 * dx;
     y = iy - 2 * dy;
     if (!IsSpotFree(x, y, pokevirus))
@@ -1263,7 +1256,21 @@ void FrontierStory_ArrangeReleaseScene(void)
         x = ix - dx;
         y = iy - dy;
     }
-    MoveAndTurnObject(pokevirus, x, y, GetDirectionToFace(ix, iy, px, py));
+    if (IsSpotFree(x, y, pokevirus))
+        MoveAndTurnObject(pokevirus, x, y, GetDirectionToFace(ix, iy, px, py));
+
+    // Prefer either side, then the floor behind the player. Never force an
+    // occupied tile if both sides are blocked; leave other NPCs where they are.
+    for (i = 0; i < ARRAY_COUNT(sCookOffsets); i++)
+    {
+        x = px + sCookOffsets[i][0] * (dx == 0) + sCookOffsets[i][1] * dx;
+        y = py + sCookOffsets[i][0] * (dy == 0) + sCookOffsets[i][1] * dy;
+        if (IsSpotFree(x, y, cook))
+        {
+            MoveAndTurnObject(cook, x, y, GetDirectionToFace(x, y, ix, iy));
+            break;
+        }
+    }
 }
 
 // VAR_0x8004: an object to stand on the first free side of the player, facing them.

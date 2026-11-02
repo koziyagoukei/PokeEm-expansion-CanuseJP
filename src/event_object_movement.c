@@ -3176,6 +3176,7 @@ u8 UpdateSpritePaletteByTemplate(const struct SpriteTemplate *template, struct S
 static void ObjectEventSetGraphics(struct ObjectEvent *objectEvent, const struct ObjectEventGraphicsInfo *graphicsInfo)
 {
     struct Sprite *sprite = &gSprites[objectEvent->spriteId];
+    bool32 wasPokevirus = sprite->images == gObjectEventGraphicsInfoPointers[OBJ_EVENT_GFX_POKEVIRUS]->images;
     u32 i = FindObjectEventPaletteIndexByTag(graphicsInfo->paletteTag);
     if (i != 0xFF)
         UpdateSpritePalette(&sObjectEventSpritePalettes[i], sprite);
@@ -3193,6 +3194,11 @@ static void ObjectEventSetGraphics(struct ObjectEvent *objectEvent, const struct
     sprite->images = graphicsInfo->images;
     sprite->anims = graphicsInfo->anims;
     sprite->subspriteTables = graphicsInfo->subspriteTables;
+    if (wasPokevirus && graphicsInfo != gObjectEventGraphicsInfoPointers[OBJ_EVENT_GFX_POKEVIRUS])
+    {
+        InitObjectPriorityByElevation(sprite, objectEvent->previousElevation);
+        SetObjectSubpriorityByElevation(objectEvent->previousElevation, sprite, 1);
+    }
     if (OW_GFX_COMPRESS && sprite->usingSheet)
         SetSpriteSheetFrameTileNum(sprite);
     objectEvent->inanimate = graphicsInfo->inanimate;
@@ -10165,6 +10171,17 @@ void SetObjectSubpriorityByElevation(u8 elevation, struct Sprite *sprite, u8 sub
 
 static void ObjectEventUpdateSubpriority(struct ObjectEvent *objEvent, struct Sprite *sprite)
 {
+    if (objEvent->graphicsId == OBJ_EVENT_GFX_POKEVIRUS)
+    {
+        // The whole apparition floats above map BG1-3 and ordinary objects,
+        // but below the message/menu windows on BG0. Reapply after ground effects.
+        sprite->oam.priority = 1;
+        sprite->subpriority = 0;
+        sprite->subspriteMode = SUBSPRITES_ON;
+        sprite->subspriteTableNum = 2; // Full 64x64 frame at priority 1, without grass/water clipping.
+        return;
+    }
+
     if (objEvent->fixedPriority)
         return;
 
