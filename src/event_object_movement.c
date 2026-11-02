@@ -191,6 +191,7 @@ static void SetPlayerAvatarObjectEventIdAndObjectId(u8, u8);
 static u8 UpdateSpritePalette(const struct SpritePalette *spritePalette, struct Sprite *sprite);
 static void ResetObjectEventFldEffData(struct ObjectEvent *);
 static u8 LoadSpritePaletteIfTagExists(const struct SpritePalette *);
+static void TintObjectEventPaletteUnderwater(u32 paletteNum);
 static u8 FindObjectEventPaletteIndexByTag(u16);
 static bool8 ObjectEventDoesElevationMatch(struct ObjectEvent *, u8);
 static void SpriteCB_CameraObject(struct Sprite *);
@@ -2283,6 +2284,7 @@ static u32 LoadDynamicFollowerPalette(enum Species species, bool32 shiny, bool32
         paletteNum = IndexOfSpritePaletteTag(species); // Tag is always present
     }
 
+    TintObjectEventPaletteUnderwater(paletteNum);
     if (gWeatherPtr->currWeather != WEATHER_FOG_HORIZONTAL) // don't want to weather blend in fog
         UpdateSpritePaletteWithWeather(paletteNum, FALSE);
     return paletteNum;
@@ -3150,6 +3152,7 @@ static u8 UpdateSpritePalette(const struct SpritePalette *spritePalette, struct 
     if (IndexOfSpritePaletteTag(spritePalette->tag) == 0xFF)
     {
         sprite->oam.paletteNum = LoadSpritePalette(spritePalette);
+        TintObjectEventPaletteUnderwater(sprite->oam.paletteNum);
         UpdateSpritePaletteWithWeather(sprite->oam.paletteNum, FALSE);
     }
     else
@@ -3421,8 +3424,45 @@ static u8 LoadSpritePaletteIfTagExists(const struct SpritePalette *spritePalette
         return paletteNum;
     paletteNum = LoadSpritePalette(spritePalette);
     if (paletteNum != 0xFF)
+    {
+        TintObjectEventPaletteUnderwater(paletteNum);
         UpdateSpritePaletteWithWeather(paletteNum, FALSE);
+    }
     return paletteNum;
+}
+
+static bool32 IsPlayerAvatarPaletteTag(u16 tag)
+{
+    for (enum Gender gender = MALE; gender <= FEMALE; gender++)
+    {
+        if (GetObjectEventGraphicsInfo(GetFRLGAvatarGraphicsIdByGender(gender))->paletteTag == tag
+         || GetObjectEventGraphicsInfo(GetRSAvatarGraphicsIdByGender(gender))->paletteTag == tag)
+            return TRUE;
+        for (u32 state = PLAYER_AVATAR_STATE_NORMAL; state <= PLAYER_AVATAR_STATE_VSSEEKER; state++)
+        {
+            if (GetObjectEventGraphicsInfo(GetPlayerAvatarGraphicsIdByStateIdAndGender(state, gender))->paletteTag == tag)
+                return TRUE;
+        }
+    }
+    return FALSE;
+}
+
+// Under the deep bath's water, the people and Pokémon around the player take on the
+// water's purple tone. Only a freshly loaded palette is tinted, so it is never tinted twice;
+// the next map loads its palettes again. The player keeps their own colors.
+#define UNDERWATER_TINT_COLOR RGB(16, 11, 28)
+#define UNDERWATER_TINT_COEFF 6 // out of 16
+
+static void TintObjectEventPaletteUnderwater(u32 paletteNum)
+{
+    u16 *palette;
+
+    if (paletteNum >= 16 || !PartyBath_IsUnderwaterMap()
+     || IsPlayerAvatarPaletteTag(GetSpritePaletteTagByPaletteNum(paletteNum)))
+        return;
+    palette = &gPlttBufferUnfaded[OBJ_PLTT_ID(paletteNum)];
+    BlendPalettesFine(1, palette, palette, UNDERWATER_TINT_COEFF, UNDERWATER_TINT_COLOR);
+    CpuCopy16(palette, &gPlttBufferFaded[OBJ_PLTT_ID(paletteNum)], PLTT_SIZE_4BPP);
 }
 
 void PatchObjectPalette(u16 paletteTag, u8 paletteSlot)

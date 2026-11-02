@@ -4,6 +4,7 @@
 #include "constants/party_bath_expansion.h"
 
 bool32 PartyBath_IsMap(void);
+bool32 PartyBath_IsUnderwaterMap(void);
 bool32 PartyBath_UsesWaterPalette(void);
 u32 PartyBath_GetGain(void);
 u32 PartyBath_GetPendingExpansionCall(void);

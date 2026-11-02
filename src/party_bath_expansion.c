@@ -32,6 +32,12 @@ bool32 PartyBath_IsMap(void)
         || map == MAP_PARTY_BATH_DEEP || map == MAP_PARTY_BATH_UNDERWATER;
 }
 
+bool32 PartyBath_IsUnderwaterMap(void)
+{
+    return gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_PARTY_BATH_UNDERWATER)
+        && gSaveBlock1Ptr->location.mapNum == MAP_NUM(MAP_PARTY_BATH_UNDERWATER);
+}
+
 bool32 PartyBath_UsesWaterPalette(void)
 {
     u32 map = (gSaveBlock1Ptr->location.mapGroup << 8) | gSaveBlock1Ptr->location.mapNum;

@@ -2,6 +2,8 @@
 #include "event_object_movement.h"
 #include "field_effect.h"
 #include "field_effect_helpers.h"
+#include "field_player_avatar.h"
+#include "palette.h"
 #include "sprite.h"
 #include "test/test.h"
 #include "constants/event_objects.h"
@@ -166,4 +168,29 @@ TEST("Bath rendering: vanilla hot springs keep their original water cover")
     EXPECT_EQ(SpriteCount(), 2);
     EXPECT(FieldEffectActiveListContains(FLDEFF_HOT_SPRINGS_WATER));
     EXPECT_EQ((u32)gSprites[0].subspriteTableNum, 1);
+}
+
+static void LoadPaletteColors(u16 map, u16 tag, u16 *colors)
+{
+    u32 paletteNum;
+
+    SetMap(map);
+    FreeAllSpritePalettes();
+    paletteNum = LoadObjectEventPalette(tag);
+    memcpy(colors, &gPlttBufferUnfaded[OBJ_PLTT_ID(paletteNum)], PLTT_SIZE_4BPP);
+}
+
+TEST("Bath rendering: underwater, NPCs take on the water's tone and the player keeps their colors")
+{
+    u16 above[16], below[16];
+    u16 playerTag = GetObjectEventGraphicsInfo(GetPlayerAvatarGraphicsIdByStateIdAndGender(PLAYER_AVATAR_STATE_UNDERWATER, MALE))->paletteTag;
+
+    LoadPaletteColors(MAP_PARTY_BATH_DEEP, OBJ_EVENT_PAL_TAG_NPC_1, above);
+    LoadPaletteColors(MAP_PARTY_BATH_UNDERWATER, OBJ_EVENT_PAL_TAG_NPC_1, below);
+    EXPECT_NE(memcmp(above, below, sizeof(above)), 0);
+
+    LoadPaletteColors(MAP_PARTY_BATH_DEEP, playerTag, above);
+    LoadPaletteColors(MAP_PARTY_BATH_UNDERWATER, playerTag, below);
+    EXPECT_EQ(memcmp(above, below, sizeof(above)), 0);
+    FreeAllSpritePalettes();
 }
