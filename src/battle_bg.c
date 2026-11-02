@@ -6,6 +6,7 @@
 #include "battle_message.h"
 #include "battle_setup.h"
 #include "battle_environment.h"
+#include "battle_pike.h"
 #include "bg.h"
 #include "data.h"
 #include "decompress.h"
@@ -16,6 +17,7 @@
 #include "menu.h"
 #include "overworld.h"
 #include "palette.h"
+#include "recorded_battle.h"
 #include "sound.h"
 #include "sprite.h"
 #include "task.h"
@@ -28,7 +30,17 @@
 #include "constants/trainers.h"
 #include "constants/battle_anim.h"
 #include "constants/battle_partner.h"
+#include "constants/battle_frontier.h"
 #include "data/battle_environment.h"
+
+struct BattleBackgroundGraphics
+{
+    const void *tileset;
+    const void *tilemap;
+    const void *palette;
+};
+
+#include "data/battle_frontier_backgrounds.h"
 
 // .rodata
 
@@ -870,15 +882,50 @@ static u8 GetBattleEnvironmentByMapScene(u8 mapBattleScene)
     return BATTLE_ENVIRONMENT_PLAIN;
 }
 
+static struct BattleBackgroundGraphics GetBattleBackgroundGraphics(u16 environment)
+{
+    u32 battleType = gBattleTypeFlags;
+    u32 i;
+
+    if (environment >= ARRAY_COUNT(gBattleEnvironmentInfo))
+        environment = BATTLE_ENVIRONMENT_PLAIN;
+
+    if (environment == BATTLE_ENVIRONMENT_FRONTIER
+     && !TestRunner_Battle_GetForcedEnvironment()
+     && (!(battleType & (BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED_LINK)) || (battleType & BATTLE_TYPE_TOWER_LINK_MULTI))
+     && (gSaveBlock2Ptr == NULL || gSaveBlock2Ptr->frontier.lvlMode != FRONTIER_LVL_TENT))
+    {
+        // Pike trainer battles intentionally share Tower flags. Replays must use
+        // the recorded facility, not the map where the video is being watched.
+        if ((battleType & BATTLE_TYPE_BATTLE_TOWER)
+         && ((battleType & BATTLE_TYPE_RECORDED)
+            ? GetRecordedBattleFrontierFacility() == FRONTIER_FACILITY_PIKE
+            : InBattlePike()))
+            battleType = (battleType & ~BATTLE_TYPE_BATTLE_TOWER) | BATTLE_TYPE_PIKE;
+
+        for (i = 0; i < ARRAY_COUNT(sFrontierBattleBackgrounds); i++)
+        {
+            if (battleType & sFrontierBattleBackgrounds[i].battleType)
+                return sFrontierBattleBackgrounds[i].graphics;
+        }
+    }
+
+    return (struct BattleBackgroundGraphics)
+    {
+        .tileset = gBattleEnvironmentInfo[environment].background.tileset,
+        .tilemap = gBattleEnvironmentInfo[environment].background.tilemap,
+        .palette = gBattleEnvironmentInfo[environment].palette,
+    };
+}
+
 // Loads the initial battle environment.
 static void LoadBattleEnvironmentGfx(u16 environment)
 {
-    if (environment >= NELEMS(gBattleEnvironmentInfo))
-        environment = BATTLE_ENVIRONMENT_PLAIN;  // If higher than the number of entries in gBattleEnvironmentInfo, use the default.
+    struct BattleBackgroundGraphics graphics = GetBattleBackgroundGraphics(environment);
     // Copy to bg3
-    DecompressDataWithHeaderVram(gBattleEnvironmentInfo[environment].background.tileset, (void *)(BG_CHAR_ADDR(2)));
-    DecompressDataWithHeaderVram(gBattleEnvironmentInfo[environment].background.tilemap, (void *)(BG_SCREEN_ADDR(26)));
-    LoadPalette(gBattleEnvironmentInfo[environment].palette, BG_PLTT_ID(2), 3 * PLTT_SIZE_4BPP);
+    DecompressDataWithHeaderVram(graphics.tileset, (void *)(BG_CHAR_ADDR(2)));
+    DecompressDataWithHeaderVram(graphics.tilemap, (void *)(BG_SCREEN_ADDR(26)));
+    LoadPalette(graphics.palette, BG_PLTT_ID(2), 3 * PLTT_SIZE_4BPP);
 }
 
 // Loads the entry associated with the battle environment.
@@ -1293,6 +1340,13 @@ void DrawBattleEntryBackground(void)
         {
             // Set up bg for the multi battle intro where both teams slide in facing the screen.
             // Note Steven's multi battle (which has a dedicated back pic) is excluded above.
+            // These tilemaps reference the original building tiles. Restore the
+            // facility artwork after the partner intro finishes instead.
+            if (gBattleTypeFlags & BATTLE_TYPE_FRONTIER)
+            {
+                LoadBattleEnvironmentGfx(BATTLE_ENVIRONMENT_BUILDING);
+                LoadPalette(gBattleEnvironmentPalette_Frontier, BG_PLTT_ID(2), 3 * PLTT_SIZE_4BPP);
+            }
             SetBgAttribute(1, BG_ATTR_CHARBASEINDEX, 2);
             SetBgAttribute(2, BG_ATTR_CHARBASEINDEX, 2);
             CopyToBgTilemapBuffer(1, gMultiBattleIntroBg_Opponent_Tilemap, 0, 0);
@@ -1324,6 +1378,10 @@ void DrawBattleEntryBackground(void)
 bool8 LoadChosenBattleElement(u8 caseId)
 {
     bool8 ret = FALSE;
+    struct BattleBackgroundGraphics graphics = {0};
+
+    if (caseId >= 3 && caseId <= 5)
+        graphics = GetBattleBackgroundGraphics(GetBattleEnvironmentOverride());
 
     switch (caseId)
     {
@@ -1338,13 +1396,13 @@ bool8 LoadChosenBattleElement(u8 caseId)
         LoadPalette(gBattleTextboxPalette, BG_PLTT_ID(0), 2 * PLTT_SIZE_4BPP);
         break;
     case 3:
-        DecompressDataWithHeaderVram(gBattleEnvironmentInfo[GetBattleEnvironmentOverride()].background.tileset, (void *)(BG_CHAR_ADDR(2)));
+        DecompressDataWithHeaderVram(graphics.tileset, (void *)(BG_CHAR_ADDR(2)));
         break;
     case 4:
-        DecompressDataWithHeaderVram(gBattleEnvironmentInfo[GetBattleEnvironmentOverride()].background.tilemap, (void *)(BG_SCREEN_ADDR(26)));
+        DecompressDataWithHeaderVram(graphics.tilemap, (void *)(BG_SCREEN_ADDR(26)));
         break;
     case 5:
-        LoadPalette(gBattleEnvironmentInfo[GetBattleEnvironmentOverride()].palette, BG_PLTT_ID(2), 3 * PLTT_SIZE_4BPP);
+        LoadPalette(graphics.palette, BG_PLTT_ID(2), 3 * PLTT_SIZE_4BPP);
         break;
     case 6:
         LoadBattleMenuWindowGfx();

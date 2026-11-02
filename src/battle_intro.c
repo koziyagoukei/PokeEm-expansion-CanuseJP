@@ -1,5 +1,6 @@
 #include "global.h"
 #include "battle.h"
+#include "battle_bg.h"
 #include "battle_anim.h"
 #include "battle_environment.h"
 #include "battle_main.h"
@@ -69,6 +70,10 @@ static void BattleIntroSlideEnd(u8 taskId)
     SetGpuReg(REG_OFFSET_BLDY, 0);
     SetGpuReg(REG_OFFSET_WININ, WININ_WIN0_BG_ALL | WININ_WIN0_OBJ | WININ_WIN0_CLR | WININ_WIN1_BG_ALL | WININ_WIN1_OBJ | WININ_WIN1_CLR);
     SetGpuReg(REG_OFFSET_WINOUT, WINOUT_WIN01_BG_ALL | WINOUT_WIN01_OBJ | WINOUT_WIN01_CLR | WINOUT_WINOBJ_BG_ALL | WINOUT_WINOBJ_OBJ | WINOUT_WINOBJ_CLR);
+    if ((gBattleTypeFlags & BATTLE_TYPE_FRONTIER)
+     && (gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER)
+     && gPartnerTrainerId < TRAINER_PARTNER(PARTNER_NONE))
+        DrawMainBattleBackground();
 }
 
 static void BattleIntroNoSlide(u8 taskId)
