@@ -45,6 +45,7 @@
 #define AI_FLAG_ITEM_OMNISCIENCE            AI_FLAG(35)  // AI knows the player's item
 #define AI_FLAG_MOVE_OMNISCIENCE            AI_FLAG(36)  // AI knows the player's moves
 #define AI_FLAG_FRONTIER_EXPERT             AI_FLAG(37)  // Frontier さいきょう: recovery races, stalling Dynamax, Wonder Guard plans and gimmick timing (battle_ai_frontier.c).
+#define AI_FLAG_SMART_DYNAMAX                AI_FLAG(38)  // Save Dynamax for an attacking turn unless needed on the last Pokemon.
 
 // The following options are enough to have a basic/smart trainer. Any other addtion could make the trainer worse/better depending on the flag
 #define AI_FLAG_BASIC_TRAINER         (AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_TRY_TO_FAINT | AI_FLAG_CHECK_VIABILITY)

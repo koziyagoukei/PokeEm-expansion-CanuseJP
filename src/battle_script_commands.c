@@ -3398,7 +3398,11 @@ static void Cmd_switchinanim(void)
 
     gAbsentBattlerFlags &= ~(1u << battler);
 
-    BtlController_EmitSwitchInAnim(battler, B_COMM_TO_CONTROLLER, gBattlerPartyIndexes[battler], cmd->dontClearTransform, cmd->dontClearSubstitute);
+    // Keep the substitute doll only for a Pokemon that really comes in behind one (Baton Pass,
+    // Shed Tail). U-turn, Eject Button and the other queued switches also ask to keep it, which
+    // left the previous Pokemon's doll standing in for its replacement.
+    BtlController_EmitSwitchInAnim(battler, B_COMM_TO_CONTROLLER, gBattlerPartyIndexes[battler], cmd->dontClearTransform,
+                                   cmd->dontClearSubstitute && gBattleMons[battler].volatiles.substitute);
     MarkBattlerForControllerExec(battler);
 
     gBattlescriptCurrInstr = cmd->nextInstr;

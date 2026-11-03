@@ -4,6 +4,7 @@
 #include "battle_ai_frontier.h"
 #include "battle_ai_main.h"
 #include "battle_ai_util.h"
+#include "battle_dynamax.h"
 #include "battle_gimmick.h"
 #include "battle_setup.h"
 #include "battle_util.h"
@@ -227,7 +228,40 @@ s32 AI_FrontierExpert(enum BattlerId battlerAtk, enum BattlerId battlerDef, enum
     return score;
 }
 
-void FrontierExpert_ReconsiderGimmick(enum BattlerId battlerAtk, enum BattlerId battlerDef, enum Move move)
+static bool32 ShouldSaveDynamaxOnAttack(enum BattlerId battlerAtk, enum BattlerId battlerDef, enum Move move)
+{
+    if (!IsBattle1v1() || !IsBattlerAlive(battlerDef) || IsBattlerAlly(battlerAtk, battlerDef))
+        return FALSE;
+
+    // A Max Move cannot help against a type immunity. Check the converted move,
+    // since its type interactions can differ from the original attack's.
+    if (AI_GetMoveEffectiveness(GetMaxMove(battlerAtk, move), battlerAtk, battlerDef) == 0)
+        return TRUE;
+
+    // Take a safe KO without spending Dynamax. Leave special attacks and
+    // situations in which the extra HP could matter to the usual decision.
+    if (GetMoveEffect(move) != EFFECT_HIT
+     || MoveHasAdditionalEffect(move, MOVE_EFFECT_RECHARGE)
+     || gBattleMons[battlerDef].volatiles.substitute
+     || CanEndureHit(battlerAtk, battlerDef, move)
+     || !IsAiFasterWith(battlerAtk, battlerDef, move)
+     || CanTargetFaintAi(battlerDef, battlerAtk))
+        return FALSE;
+
+    for (u32 i = 0; i < MAX_MON_MOVES; i++)
+    {
+        if (gBattleMons[battlerAtk].moves[i] == move
+         && gAiLogicData->moveAccuracy[battlerAtk][battlerDef][i] >= 100)
+        {
+            uq4_12_t effectiveness;
+            struct SimulatedDamage damage = AI_CalcDamageSaveBattlers(move, battlerAtk, battlerDef, &effectiveness, GIMMICK_NONE, GIMMICK_NONE);
+            return damage.minimum >= gBattleMons[battlerDef].hp;
+        }
+    }
+    return FALSE;
+}
+
+void FrontierAI_ReconsiderGimmick(enum BattlerId battlerAtk, enum BattlerId battlerDef, enum Move move)
 {
     enum Gimmick gimmick = gBattleStruct->gimmick.usableGimmick[battlerAtk];
     bool32 threatened;
@@ -235,7 +269,13 @@ void FrontierExpert_ReconsiderGimmick(enum BattlerId battlerAtk, enum BattlerId 
     if (gimmick != GIMMICK_DYNAMAX && gimmick != GIMMICK_TERA)
         return;
     if (!IsBattleMoveStatus(move))
-        return; // Attacking turns keep the usual decision.
+    {
+        if (gimmick == GIMMICK_DYNAMAX
+         && (gAiThinkingStruct->aiFlags[battlerAtk] & AI_FLAG_SMART_DYNAMAX)
+         && ShouldSaveDynamaxOnAttack(battlerAtk, battlerDef, move))
+            SetAIUsingGimmick(battlerAtk, NO_GIMMICK);
+        return;
+    }
 
     threatened = CanTargetFaintAi(battlerDef, battlerAtk);
     // While Dynamaxed, status moves become Max Guard, and a Tera type does nothing for

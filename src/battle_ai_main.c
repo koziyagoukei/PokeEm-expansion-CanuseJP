@@ -125,7 +125,7 @@ static s32 (*const sBattleAiFuncTable[])(enum BattlerId, enum BattlerId, enum Mo
     [35] = NULL,                     // AI_FLAG_ITEM_OMNISCIENCE
     [36] = NULL,                     // AI_FLAG_MOVE_OMNISCIENCE
     [37] = AI_FrontierExpert,        // AI_FLAG_FRONTIER_EXPERT
-    [38] = NULL,                     // Unused
+    [38] = NULL,                     // AI_FLAG_SMART_DYNAMAX
     [39] = NULL,                     // Unused
     [40] = NULL,                     // Unused
     [41] = NULL,                     // Unused
@@ -353,7 +353,17 @@ static u64 GetAiFlags(u16 trainerId, enum BattlerId battler)
             flags = GetTrainerAIFlagsFromId(trainerId);
     }
 
-    // Early Factory rounds have no other AI flags, but still need ally scoring.
+    // Add timing separately so Factory retains its round-specific scoring flags.
+    if (trainerId != 0xFFFF
+     && (battler & BIT_SIDE) == B_SIDE_OPPONENT
+     && (gBattleTypeFlags & BATTLE_TYPE_FRONTIER)
+     && !(gBattleTypeFlags & (BATTLE_TYPE_PALACE | BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED | BATTLE_TYPE_RECORDED_LINK))
+     && FrontierPractice_GetAiLevel() == FRONTIER_AI_LEVEL_NORMAL)
+    {
+        flags |= AI_FLAG_SMART_DYNAMAX;
+    }
+
+    // Early Factory rounds have no move scoring flags, but still need ally scoring.
     if (IsDoubleBattle() && (flags != 0 || (gBattleTypeFlags & BATTLE_TYPE_FACTORY)))
     {
         flags |= AI_FLAG_DOUBLE_BATTLE;
@@ -510,14 +520,17 @@ void ReconsiderGimmick(enum BattlerId battlerAtk, enum BattlerId battlerDef, enu
 {
     // After choosing a move for battlerAtk assuming that a gimmick will be used, reconsider whether the gimmick is necessary.
 
-    if (gBattleStruct->gimmick.usableGimmick[battlerAtk] == GIMMICK_Z_MOVE && !ShouldUseZMove(battlerAtk, battlerDef, move))
+    enum Gimmick gimmick = gBattleStruct->gimmick.usableGimmick[battlerAtk];
+    u64 flags = gAiThinkingStruct->aiFlags[battlerAtk];
+
+    if (gimmick == GIMMICK_Z_MOVE && !ShouldUseZMove(battlerAtk, battlerDef, move))
         SetAIUsingGimmick(battlerAtk, NO_GIMMICK);
 
-    if (gBattleStruct->gimmick.usableGimmick[battlerAtk] == GIMMICK_TERA && GetMoveEffect(move) == EFFECT_PROTECT)
+    if (gimmick == GIMMICK_TERA && GetMoveEffect(move) == EFFECT_PROTECT)
         SetAIUsingGimmick(battlerAtk, NO_GIMMICK);
 
-    if (gAiThinkingStruct->aiFlags[battlerAtk] & AI_FLAG_FRONTIER_EXPERT)
-        FrontierExpert_ReconsiderGimmick(battlerAtk, battlerDef, move);
+    if ((flags & AI_FLAG_FRONTIER_EXPERT) || (gimmick == GIMMICK_DYNAMAX && (flags & AI_FLAG_SMART_DYNAMAX)))
+        FrontierAI_ReconsiderGimmick(battlerAtk, battlerDef, move);
 }
 
 static bool32 IsThinkingBeforePartner(enum BattlerId battler, enum BattlerId battlerPartner)
