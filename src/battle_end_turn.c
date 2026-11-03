@@ -232,16 +232,16 @@ static bool32 HandleEndTurnAffection(enum BattlerId battler)
     return effect;
 }
 
-static bool32 IsFutureSightAttackerInParty(enum BattlerId battlerAtk, enum BattlerId battlerDef)
+static enum BattlerId GetFutureSightAttackerOnField(const struct FutureSight *attack)
 {
-    struct Pokemon *party = GetBattlerParty(battlerAtk);
-    if (IsDoubleBattle())
+    for (enum BattlerId battler = 0; battler < gBattlersCount; battler++)
     {
-        return &party[gBattleStruct->futureSight[battlerDef].partyIndex] != &party[gBattlerPartyIndexes[battlerAtk]]
-            && &party[gBattleStruct->futureSight[battlerDef].partyIndex] != &party[gBattlerPartyIndexes[GetPartnerBattler(battlerAtk)]];
+        if (IsBattlerPresent(battler)
+         && BattlersShareParty(attack->battlerIndex, battler)
+         && gBattlerPartyIndexes[battler] == attack->partyIndex)
+            return battler;
     }
-
-    return &party[gBattleStruct->futureSight[battlerDef].partyIndex] != &party[gBattlerPartyIndexes[battlerAtk]];
+    return gBattlersCount;
 }
 
 // Note: Technically Future Sight, Doom Desire and Wish need a queue but
@@ -258,21 +258,26 @@ static bool32 HandleEndTurnFutureSight(enum BattlerId battler)
         if (!IsBattlerPresent(battler)) // Looks like a bug in doubles?
             return effect;
 
-        if (gBattleStruct->futureSight[battler].move == MOVE_FUTURE_SIGHT)
+        const struct FutureSight *attack = &gBattleStruct->futureSight[battler];
+        enum BattlerId caster = GetFutureSightAttackerOnField(attack);
+        bool32 casterIsBenched = caster == gBattlersCount;
+
+        if (attack->move == MOVE_FUTURE_SIGHT)
             gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_FUTURE_SIGHT;
         else
             gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_DOOM_DESIRE;
 
-        PREPARE_MOVE_BUFFER(gBattleTextBuff1, gBattleStruct->futureSight[battler].move);
+        PREPARE_MOVE_BUFFER(gBattleTextBuff1, attack->move);
 
         gBattlerTarget = battler;
-        gBattlerAttacker = gBattleStruct->futureSight[battler].battlerIndex;
-        gCurrentMove = gBattleStruct->futureSight[battler].move;
+        gBattlerAttacker = casterIsBenched ? attack->battlerIndex : caster;
+        gCurrentMove = gChosenMove = gBattleStruct->baseMove = attack->move;
         gBattleStruct->eventState.atkCanceler = CANCELER_TARGET_FAILURE;
 
-        if (IsFutureSightAttackerInParty(gBattlerAttacker, gBattlerTarget))
-            gSpecialStatuses[gBattlerAttacker].attackerInParty = TRUE;
-        else
+        gSpecialStatuses[gBattlerAttacker].attackerInParty = casterIsBenched;
+        gBattleStruct->dynamicMoveType = TYPE_NONE;
+        gBattleStruct->dynamicMoveCategory = DAMAGE_CATEGORY_NONE;
+        if (!casterIsBenched)
             SetTypeBeforeUsingMove(gCurrentMove, gBattlerAttacker, GetBattlerAbility(gBattlerAttacker), GetBattlerHoldEffect(gBattlerAttacker));
 
         gBattleScripting.animTurn = 1; // to play correct anim

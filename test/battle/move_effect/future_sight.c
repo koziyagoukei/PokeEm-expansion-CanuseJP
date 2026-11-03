@@ -500,3 +500,88 @@ SINGLE_BATTLE_TEST("Toxic Chain does not trigger from Future Sight if the user i
         EXPECT(opponent->status1 == 0);
     }
 }
+
+MULTI_BATTLE_TEST("Delayed attack caster: a different trainer's matching party index does not replace the caster", s16 damage)
+{
+    bool32 switched;
+    PARAMETRIZE { switched = FALSE; }
+    PARAMETRIZE { switched = TRUE; }
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET) { SpAttack(200); }
+        PLAYER(SPECIES_WOBBUFFET) { SpAttack(20); }
+        PARTNER(SPECIES_WOBBUFFET);
+        OPPONENT_A(SPECIES_WOBBUFFET) { MaxHP(400); HP(400); SpDefense(100); }
+        OPPONENT_B(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(playerLeft, MOVE_FUTURE_SIGHT, target: opponentLeft); }
+        TURN { if (switched) SWITCH(playerLeft, 1); }
+        TURN {}
+    } SCENE {
+        HP_BAR(opponentLeft, captureDamage: &results[i].damage);
+    } FINALLY {
+        EXPECT_EQ(results[0].damage, results[1].damage);
+    }
+}
+
+SINGLE_BATTLE_TEST("Delayed attack caster: the replacement's gimmick does not change Future Sight or Doom Desire damage", s16 damage)
+{
+    enum Move move;
+    enum Gimmick gimmick;
+    PARAMETRIZE { move = MOVE_FUTURE_SIGHT; gimmick = GIMMICK_NONE; }
+    PARAMETRIZE { move = MOVE_FUTURE_SIGHT; gimmick = GIMMICK_DYNAMAX; }
+    PARAMETRIZE { move = MOVE_FUTURE_SIGHT; gimmick = GIMMICK_TERA; }
+    PARAMETRIZE { move = MOVE_DOOM_DESIRE; gimmick = GIMMICK_NONE; }
+    PARAMETRIZE { move = MOVE_DOOM_DESIRE; gimmick = GIMMICK_DYNAMAX; }
+    PARAMETRIZE { move = MOVE_DOOM_DESIRE; gimmick = GIMMICK_TERA; }
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET) { SpAttack(200); Speed(100); }
+        PLAYER(SPECIES_WOBBUFFET) {
+            Speed(100);
+            if (gimmick == GIMMICK_DYNAMAX)
+                DynamaxLevel(10);
+            if (gimmick == GIMMICK_TERA)
+                TeraType(move == MOVE_FUTURE_SIGHT ? TYPE_PSYCHIC : TYPE_STEEL);
+        }
+        OPPONENT(SPECIES_WOBBUFFET) { MaxHP(400); HP(400); Speed(10); SpDefense(100); }
+    } WHEN {
+        TURN { MOVE(player, move); }
+        TURN { SWITCH(player, 1); }
+        TURN { MOVE(player, MOVE_SPLASH, gimmick: gimmick); MOVE(opponent, MOVE_TACKLE); }
+    } SCENE {
+        HP_BAR(opponent, captureDamage: &results[i].damage);
+    } FINALLY {
+        EXPECT_EQ(results[0].damage, results[1].damage);
+        EXPECT_EQ(results[0].damage, results[2].damage);
+        EXPECT_EQ(results[3].damage, results[4].damage);
+        EXPECT_EQ(results[3].damage, results[5].damage);
+    }
+}
+
+DOUBLE_BATTLE_TEST("Delayed attack caster: Ally Switch preserves the original caster, including after a switch out", s16 damage)
+{
+    bool32 allySwitch, benched;
+    PARAMETRIZE { allySwitch = FALSE; benched = FALSE; }
+    PARAMETRIZE { allySwitch = TRUE; benched = FALSE; }
+    PARAMETRIZE { allySwitch = TRUE; benched = TRUE; }
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET) { SpAttack(200); }
+        PLAYER(SPECIES_WOBBUFFET) { SpAttack(20); }
+        PLAYER(SPECIES_WOBBUFFET) { SpAttack(20); }
+        OPPONENT(SPECIES_WOBBUFFET) { MaxHP(400); HP(400); SpDefense(100); }
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(playerLeft, MOVE_FUTURE_SIGHT, target: opponentLeft); }
+        TURN {
+            if (benched) SWITCH(playerLeft, 2);
+            if (allySwitch) MOVE(playerRight, MOVE_ALLY_SWITCH);
+        }
+        TURN {}
+    } SCENE {
+        if (allySwitch)
+            ANIMATION(ANIM_TYPE_MOVE, MOVE_ALLY_SWITCH, playerRight);
+        HP_BAR(opponentLeft, captureDamage: &results[i].damage);
+    } FINALLY {
+        EXPECT_EQ(results[0].damage, results[1].damage);
+        EXPECT_EQ(results[0].damage, results[2].damage);
+    }
+}

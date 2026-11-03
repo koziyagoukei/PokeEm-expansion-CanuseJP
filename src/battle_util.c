@@ -6327,6 +6327,10 @@ static inline u32 CalcMoveBasePower(struct DamageContext *ctx)
     u32 moveEffect = GetMoveEffect(move);
     u32 weight, hpFraction, speed;
 
+    // A delayed hit is never converted into a Max or Z Move at impact.
+    if (moveEffect == EFFECT_FUTURE_SIGHT && !ctx->aiCalc)
+        return basePower;
+
     switch (GetActiveGimmick(battlerAtk))
     {
     case GIMMICK_Z_MOVE:
@@ -6910,7 +6914,8 @@ static inline u32 CalcMoveBasePowerAfterModifiers(struct DamageContext *ctx)
     }
 
     // Terastallization boosts weak, non-priority, non-multi hit moves after modifiers to 60 BP.
-    if (GetActiveGimmick(battlerAtk) == GIMMICK_TERA
+    if (!gSpecialStatuses[battlerAtk].attackerInParty
+        && GetActiveGimmick(battlerAtk) == GIMMICK_TERA
         && (moveType == GetBattlerTeraType(battlerAtk)
         || (GetBattlerTeraType(battlerAtk) == TYPE_STELLAR && IsTypeStellarBoosted(battlerAtk, moveType)))
         && uq4_12_multiply_by_int_half_down(modifier, basePower) < 60
@@ -7467,7 +7472,11 @@ static inline uq4_12_t GetSameTypeAttackBonusModifier(struct DamageContext *ctx)
 {
     if (ctx->moveType != TYPE_MYSTERY)
     {
-        if ((IS_BATTLER_OF_TYPE(ctx->battlerAtk, ctx->moveType) && ctx->move != MOVE_STRUGGLE)
+        // The active slot's Tera Type belongs to the replacement, not the benched caster.
+        bool32 matchesType = gSpecialStatuses[ctx->battlerAtk].attackerInParty
+                           ? IS_BATTLER_OF_BASE_TYPE(ctx->battlerAtk, ctx->moveType)
+                           : IS_BATTLER_OF_TYPE(ctx->battlerAtk, ctx->moveType);
+        if ((matchesType && ctx->move != MOVE_STRUGGLE)
          || (gBattleStruct->pledgeState == PLEDGE_COMBO_ATTACK && IS_BATTLER_OF_TYPE(GetPartnerBattler(ctx->battlerAtk), ctx->moveType)))
         {
             return ctx->abilities[ctx->battlerAtk] == ABILITY_ADAPTABILITY ? UQ_4_12(2.0) : UQ_4_12(1.5);
@@ -7859,7 +7868,7 @@ static inline s32 DoMoveDamageCalcVars(struct DamageContext *ctx)
 
 s32 ApplyModifiersAfterDmgRoll(struct DamageContext *ctx, s32 dmg)
 {
-    if (GetActiveGimmick(ctx->battlerAtk) == GIMMICK_TERA)
+    if (!gSpecialStatuses[ctx->battlerAtk].attackerInParty && GetActiveGimmick(ctx->battlerAtk) == GIMMICK_TERA)
         DAMAGE_APPLY_MODIFIER(GetTeraMultiplier(ctx));
     else
         DAMAGE_APPLY_MODIFIER(GetSameTypeAttackBonusModifier(ctx));
