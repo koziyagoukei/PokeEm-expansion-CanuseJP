@@ -7,6 +7,7 @@
 #include "battle_setup.h"
 #include "battle_environment.h"
 #include "battle_pike.h"
+#include "frontier_story.h"
 #include "bg.h"
 #include "data.h"
 #include "decompress.h"
@@ -882,10 +883,62 @@ static u8 GetBattleEnvironmentByMapScene(u8 mapBattleScene)
     return BATTLE_ENVIRONMENT_PLAIN;
 }
 
+static const struct BattleBackgroundGraphics *GetStoryBattleBackgroundGraphics(void)
+{
+    u32 battleType;
+
+    if (!FrontierStory_IsReleaseBattle()
+     || !(gBattleTypeFlags & BATTLE_TYPE_TRAINER)
+     || TestRunner_Battle_GetForcedEnvironment())
+        return NULL;
+
+    // These are ordinary multi battles. Select only their artwork, not facility rules.
+    switch (TRAINER_BATTLE_PARAM.opponentA)
+    {
+    case TRAINER_POKEVIRUS_FINAL:
+        return &sStoryBackground_Pokevirus;
+    case TRAINER_YORIKO_RELEASE:
+        return &sStoryBackground_Contest;
+    case TRAINER_KAZUKI_RELEASE:
+        battleType = BATTLE_TYPE_BATTLE_TOWER;
+        break;
+    case TRAINER_REIKA_RELEASE:
+        battleType = BATTLE_TYPE_DOME;
+        break;
+    case TRAINER_IKUE_RELEASE:
+        battleType = BATTLE_TYPE_PALACE;
+        break;
+    case TRAINER_EISUKE_RELEASE:
+        battleType = BATTLE_TYPE_ARENA;
+        break;
+    case TRAINER_TOSHIO_RELEASE:
+        battleType = BATTLE_TYPE_FACTORY;
+        break;
+    case TRAINER_YAYOI_RELEASE:
+        battleType = BATTLE_TYPE_PIKE;
+        break;
+    case TRAINER_NOBUO_RELEASE:
+        battleType = BATTLE_TYPE_PYRAMID;
+        break;
+    default:
+        return NULL;
+    }
+    for (u32 i = 0; i < ARRAY_COUNT(sFrontierBattleBackgrounds); i++)
+    {
+        if (sFrontierBattleBackgrounds[i].battleType == battleType)
+            return &sFrontierBattleBackgrounds[i].graphics;
+    }
+    return NULL;
+}
+
 static struct BattleBackgroundGraphics GetBattleBackgroundGraphics(u16 environment)
 {
     u32 battleType = gBattleTypeFlags;
     u32 i;
+    const struct BattleBackgroundGraphics *storyGraphics = GetStoryBattleBackgroundGraphics();
+
+    if (storyGraphics != NULL)
+        return *storyGraphics;
 
     if (environment >= ARRAY_COUNT(gBattleEnvironmentInfo))
         environment = BATTLE_ENVIRONMENT_PLAIN;

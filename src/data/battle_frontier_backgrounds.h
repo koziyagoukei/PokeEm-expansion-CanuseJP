@@ -27,6 +27,24 @@ static const u32 sFrontierBackgroundTiles_Pyramid[] = INCGFX_U32("graphics/battl
 static const u32 sFrontierBackgroundMap_Pyramid[] = INCGFX_U32("graphics/battle_environment/frontier/pyramid/map.bin", ".smolTM");
 static const u16 sFrontierBackgroundPalette_Pyramid[] = INCGFX_U16("graphics/battle_environment/frontier/pyramid/palette.pal", ".gbapal");
 
+static const u32 sStoryBackgroundTiles_Pokevirus[] = INCGFX_U32("graphics/battle_environment/frontier/pokevirus/tiles.png", ".4bpp.smol");
+static const u32 sStoryBackgroundMap_Pokevirus[] = INCGFX_U32("graphics/battle_environment/frontier/pokevirus/map.bin", ".smolTM");
+static const u16 sStoryBackgroundPalette_Pokevirus[] = INCGFX_U16("graphics/battle_environment/frontier/pokevirus/palette.pal", ".gbapal");
+
+static const u32 sStoryBackgroundTiles_Contest[] = INCGFX_U32("graphics/battle_environment/frontier/contest/tiles.png", ".4bpp.smol");
+static const u32 sStoryBackgroundMap_Contest[] = INCGFX_U32("graphics/battle_environment/frontier/contest/map.bin", ".smolTM");
+static const u16 sStoryBackgroundPalette_Contest[] = INCGFX_U16("graphics/battle_environment/frontier/contest/palette.pal", ".gbapal");
+
+static const struct BattleBackgroundGraphics sStoryBackground_Pokevirus =
+{
+    sStoryBackgroundTiles_Pokevirus, sStoryBackgroundMap_Pokevirus, sStoryBackgroundPalette_Pokevirus,
+};
+
+static const struct BattleBackgroundGraphics sStoryBackground_Contest =
+{
+    sStoryBackgroundTiles_Contest, sStoryBackgroundMap_Contest, sStoryBackgroundPalette_Contest,
+};
+
 static const struct
 {
     u32 battleType;
