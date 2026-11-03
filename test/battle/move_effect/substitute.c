@@ -6,6 +6,56 @@ ASSUMPTIONS
     ASSUME(GetMoveEffect(MOVE_SUBSTITUTE) == EFFECT_SUBSTITUTE);
 }
 
+SINGLE_BATTLE_TEST("Substitute damage message: an attack from behind a substitute hits the actual target")
+{
+    GIVEN {
+        PLAYER(SPECIES_SINISTCHA) { MaxHP(400); HP(400); }
+        OPPONENT(SPECIES_BRELOOM) { MaxHP(400); HP(400); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_SPLASH); MOVE(opponent, MOVE_SUBSTITUTE); }
+        TURN { MOVE(player, MOVE_SPLASH); MOVE(opponent, MOVE_SEED_BOMB); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SEED_BOMB, opponent);
+        NOT MESSAGE("{JPN}{JPN}ヤバソチャに かわって 分身が 攻撃を うけた!");
+        HP_BAR(player);
+    } THEN {
+        EXPECT_LT(player->hp, player->maxHP);
+        EXPECT_EQ((u32)opponent->volatiles.substituteHP, 100);
+    }
+}
+
+DOUBLE_BATTLE_TEST("Substitute damage message: a spread move names the actual substitute owner")
+{
+    GIVEN {
+        ASSUME(GetMoveTarget(MOVE_SWIFT) == TARGET_BOTH);
+        PLAYER(SPECIES_WOBBUFFET);
+        PLAYER(SPECIES_WYNAUT);
+        OPPONENT(SPECIES_WOBBUFFET) { MaxHP(400); HP(400); }
+        OPPONENT(SPECIES_WYNAUT) { MaxHP(400); HP(400); }
+    } WHEN {
+        TURN {
+            MOVE(playerLeft, MOVE_SPLASH);
+            MOVE(playerRight, MOVE_SPLASH);
+            MOVE(opponentLeft, MOVE_SPLASH);
+            MOVE(opponentRight, MOVE_SUBSTITUTE);
+        }
+        TURN {
+            MOVE(playerLeft, MOVE_SWIFT);
+            MOVE(playerRight, MOVE_SPLASH);
+            MOVE(opponentLeft, MOVE_SPLASH);
+            MOVE(opponentRight, MOVE_SPLASH);
+        }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SWIFT, playerLeft);
+        MESSAGE("{JPN}{JPN}相手の {JPN}ソーナノに かわって 分身が 攻撃を うけた!");
+        SUB_HIT(opponentRight);
+    } THEN {
+        EXPECT_LT(opponentLeft->hp, 400);
+        EXPECT_EQ(opponentRight->hp, 300);
+        EXPECT_LT((u32)opponentRight->volatiles.substituteHP, 100);
+    }
+}
+
 SINGLE_BATTLE_TEST("Substitute creates a Substitute at the cost of 1/4 users maximum HP")
 {
     s16 maxHP = 0;

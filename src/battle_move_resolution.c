@@ -2957,14 +2957,18 @@ static enum CancelerResult CancelerHealthBarUpdate(struct BattleCalcValues *cv)
 {
     for (enum BattlerId battlerDef = 0; battlerDef < gBattlersCount; battlerDef++)
     {
-        if (DoesSubstituteBlockMove(cv->battlerAtk, battlerDef, cv->move))
+        if (ShouldSkipBattlerForDamage(cv->battlerAtk, battlerDef))
+            continue;
+
+        if (gBattleMons[battlerDef].volatiles.substituteHP != 0
+         && DoesSubstituteBlockMove(cv->battlerAtk, battlerDef, cv->move))
         {
+            gBattleScripting.battler = battlerDef;
             PrepareStringBattle(STRINGID_SUBSTITUTEDAMAGED, battlerDef);
             continue;
         }
 
-        if (ShouldSkipBattlerForDamage(cv->battlerAtk, battlerDef)
-         || DoesDisguiseBlockMove(battlerDef, cv->move)
+        if (DoesDisguiseBlockMove(battlerDef, cv->move)
          || DoesIceFaceBlockMove(battlerDef, cv->move))
             continue;
 
