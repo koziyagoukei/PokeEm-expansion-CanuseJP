@@ -1027,8 +1027,10 @@ static void LoadPartyMenuBoxes(enum PartyMenuLayout layout)
     {
         for (i = 0; i < PARTY_SIZE; i++)
         {
+            u8 cell = PartyGridSlotToCell(i);
+            sPartyMenuBoxes[i].windowId = cell;
             sPartyMenuBoxes[i].infoRects = &sGridInfo;
-            sPartyMenuBoxes[i].spriteCoords = layout == PARTY_LAYOUT_MULTI_SHOWCASE ? sGridShowcaseSpriteCoords[i] : sGridSpriteCoords[i];
+            sPartyMenuBoxes[i].spriteCoords = layout == PARTY_LAYOUT_MULTI_SHOWCASE ? sGridShowcaseSpriteCoords[i] : sGridSpriteCoords[cell];
         }
         return;
     }
@@ -1462,12 +1464,17 @@ static u8 GetPartyBoxPaletteFlags(u8 slot, u8 animNum)
     return palFlags;
 }
 
+static bool32 IsCompactMultiPartnerSlot(u8 slot)
+{
+    return gPartyMenu.layout == PARTY_LAYOUT_MULTI_FULL_COMPACT && slot >= MULTI_PARTY_SIZE && slot < PARTY_SIZE;
+}
+
 static bool8 PartyBoxPal_ParnterOrDisqualifiedInArena(u8 slot)
 {
     if (gPartyMenu.layout == PARTY_LAYOUT_MULTI_FULL_PARTNER || gPartyMenu.layout == PARTY_LAYOUT_MULTI_FULL_SHOWCASE_PARTNER)
         return TRUE;
 
-    if (gPartyMenu.layout == PARTY_LAYOUT_MULTI && (slot == 1 || slot == 4 || slot == 5))
+    if (IsCompactMultiPartnerSlot(slot) || (gPartyMenu.layout == PARTY_LAYOUT_MULTI && (slot == 1 || slot == 4 || slot == 5)))
         return TRUE;
 
     if (slot < MULTI_PARTY_SIZE && (gBattleTypeFlags & BATTLE_TYPE_ARENA) && gMain.inBattle && (gBattleStruct->arenaLostPlayerMons >> GetPartyIdFromBattleSlot(slot) & 1))
@@ -1660,6 +1667,15 @@ static s8 *GetCurrentPartySlotPtr(void)
 
 static void HandleChooseMonSelection(u8 taskId, s8 *slotPtr)
 {
+    if (IsCompactMultiPartnerSlot(*slotPtr)
+     && (gPartyMenu.action == PARTY_ACTION_USE_ITEM
+      || gPartyMenu.action == PARTY_ACTION_CHOOSE_FAINTED_MON
+      || gPartyMenu.action == PARTY_ACTION_SEND_MON_TO_BOX))
+    {
+        PlaySE(SE_FAILURE);
+        return;
+    }
+
     if (*slotPtr == PARTY_SIZE)
     {
         gPartyMenu.task(taskId);
@@ -3438,7 +3454,14 @@ static void CB2_ShowPokemonSummaryScreen(void)
                 GetMultiPartyForSummaryScreen();
         }
 
-        if (gPartyMenu.layout == PARTY_LAYOUT_MULTI_FULL_PARTNER)
+        if (gPartyMenu.layout == PARTY_LAYOUT_MULTI_FULL_COMPACT)
+        {
+            bool32 partner = IsCompactMultiPartnerSlot(gPartyMenu.slotId);
+            enum BattleTrainer trainer = partner ? B_TRAINER_PARTNER : B_TRAINER_PLAYER;
+            u8 slot = gPartyMenu.slotId - (partner ? MULTI_PARTY_SIZE : 0);
+            ShowPokemonSummaryScreen(SUMMARY_MODE_LOCK_MOVES, gParties[trainer], slot, CalculatePartyCount(trainer) - 1, CB2_ReturnToPartyMenuFromSummaryScreen);
+        }
+        else if (gPartyMenu.layout == PARTY_LAYOUT_MULTI_FULL_PARTNER)
             ShowPokemonSummaryScreen(SUMMARY_MODE_LOCK_MOVES, gParties[B_TRAINER_PARTNER], gPartyMenu.slotId, CalculatePartyCount(B_TRAINER_PARTNER) - 1, CB2_ReturnToPartyMenuFromSummaryScreen);
         else if (gPartyMenu.layout == PARTY_LAYOUT_MULTI_FULL)
             ShowPokemonSummaryScreen(SUMMARY_MODE_LOCK_MOVES, gParties[B_TRAINER_PLAYER], gPartyMenu.slotId, CalculatePartyCount(B_TRAINER_PLAYER) - 1, CB2_ReturnToPartyMenuFromSummaryScreen);
@@ -3461,7 +3484,7 @@ void CB2_ReturnToPartyMenuFromSummaryScreen(void)
     if (gBattleTypeFlags & BATTLE_TYPE_MULTI && !AreMultiPartiesFullTeams() && gPartyMenu.menuType == PARTY_MENU_TYPE_IN_BATTLE)
         RestoreMultiPartyFromSummaryScreen();
     gPaletteFade.bufferTransferDisabled = TRUE;
-    gPartyMenu.slotId = gLastViewedMonIndex;
+    gPartyMenu.slotId = gLastViewedMonIndex + (IsCompactMultiPartnerSlot(gPartyMenu.slotId) ? MULTI_PARTY_SIZE : 0);
     InitPartyMenu(gPartyMenu.menuType, KEEP_PARTY_LAYOUT, gPartyMenu.action, TRUE, PARTY_MSG_DO_WHAT_WITH_MON, Task_TryCreateSelectionWindow, gPartyMenu.exitCallback);
 }
 
@@ -7866,10 +7889,14 @@ void ChooseMonForWirelessMinigame(void)
 
 static u8 GetPartyLayoutFromBattleType(void)
 {
-    if (IsMultiBattle() == TRUE && !AreMultiPartiesFullTeams())
-        return PARTY_LAYOUT_MULTI;
-    if (IsMultiBattle() == TRUE && AreMultiPartiesFullTeams())
+    if (IsMultiBattle())
+    {
+        if (!AreMultiPartiesFullTeams())
+            return PARTY_LAYOUT_MULTI;
+        if (gPartiesCount[B_TRAINER_PLAYER] <= MULTI_PARTY_SIZE && gPartiesCount[B_TRAINER_PARTNER] <= MULTI_PARTY_SIZE)
+            return PARTY_LAYOUT_MULTI_FULL_COMPACT;
         return PARTY_LAYOUT_MULTI_FULL;
+    }
     if (!IsDoubleBattle() || gPartiesCount[B_TRAINER_PLAYER] == 1) // Draw the single layout in a double battle where the player has only one Pokemon.
         return PARTY_LAYOUT_SINGLE;
     return PARTY_LAYOUT_DOUBLE;
@@ -7904,6 +7931,7 @@ static u8 GetPartyMenuActionsTypeInBattle(struct Pokemon *mon)
 {
     if (GetMonData(&gParties[B_TRAINER_PLAYER][1], MON_DATA_SPECIES) != SPECIES_NONE
      && GetMonData(mon, MON_DATA_IS_EGG) == FALSE
+     && !IsCompactMultiPartnerSlot(gPartyMenu.slotId)
      && gPartyMenu.layout != PARTY_LAYOUT_MULTI_FULL_PARTNER)
     {
         if (gPartyMenu.action == PARTY_ACTION_SEND_OUT)
@@ -7926,7 +7954,8 @@ static bool8 TrySwitchInPokemon(void)
     battlePartyId = GetPartyIdFromBattleSlot(slot);
 
     // In a 6v6 multi battle, slots 1, 4, and 5 are the partner's Pokemon
-    if (IsMultiBattle() == TRUE && (slot == 1 || slot == 4 || slot == 5) && !AreMultiPartiesFullTeams())
+    if (IsCompactMultiPartnerSlot(slot)
+     || (IsMultiBattle() && (slot == 1 || slot == 4 || slot == 5) && !AreMultiPartiesFullTeams()))
     {
         StringCopy(gStringVar1, GetTrainerPartnerName());
         StringExpandPlaceholders(gStringVar4, gText_CantSwitchWithAlly);
@@ -8221,6 +8250,7 @@ static const u8 sMultiBattlePartyIdToMenuId_Right[PARTY_SIZE] = { 1, 4, 5, 0, 2,
 static void UpdatePartyToBattleOrder(void)
 {
     struct Pokemon *partyBuffer = Alloc(sizeof(gParties[B_TRAINER_PLAYER]));
+    u32 slots = gPartyMenu.layout == PARTY_LAYOUT_MULTI_FULL_COMPACT ? MULTI_PARTY_SIZE : PARTY_SIZE;
     u8 i;
     const u8 *multiBattlePartyIdToMenuId = sMultiBattlePartyIdToMenuId_Left;
 
@@ -8228,7 +8258,7 @@ static void UpdatePartyToBattleOrder(void)
         multiBattlePartyIdToMenuId = sMultiBattlePartyIdToMenuId_Right;
 
 
-    for (i = 0; i < PARTY_SIZE; i++)
+    for (i = 0; i < slots; i++)
     {
         struct Pokemon *srcParty = NULL;
         s8 srcPartySlot = 0;
@@ -8241,7 +8271,7 @@ static void UpdatePartyToBattleOrder(void)
         GetPartyAndSlotFromPartyMenuId(srcMenuId, &srcParty, &srcPartySlot);
         memcpy(&partyBuffer[i], &srcParty[srcPartySlot], sizeof(struct Pokemon));
     }
-    for (i = 0; i < PARTY_SIZE; i++)
+    for (i = 0; i < slots; i++)
     {
         struct Pokemon *dstParty = NULL;
         s8 dstPartySlot = 0;
@@ -8254,6 +8284,7 @@ static void UpdatePartyToBattleOrder(void)
 static void UpdatePartyToFieldOrder(void)
 {
     struct Pokemon *partyBuffer = Alloc(sizeof(gParties[B_TRAINER_PLAYER]));
+    u32 slots = gPartyMenu.layout == PARTY_LAYOUT_MULTI_FULL_COMPACT ? MULTI_PARTY_SIZE : PARTY_SIZE;
     u8 i;
 
     const u8 *multiBattlePartyIdToMenuId = sMultiBattlePartyIdToMenuId_Left;
@@ -8264,7 +8295,7 @@ static void UpdatePartyToFieldOrder(void)
         multiBattlePartyIdToMenuId = sMultiBattlePartyIdToMenuId_Right;
     }
 
-    for (i = 0; i < PARTY_SIZE; i++)
+    for (i = 0; i < slots; i++)
     {
         struct Pokemon *srcParty = NULL;
         s8 srcPartySlot = 0;
@@ -8272,7 +8303,7 @@ static void UpdatePartyToFieldOrder(void)
         memcpy(&partyBuffer[i], &srcParty[srcPartySlot], sizeof(struct Pokemon));
     }
 
-    for (i = 0; i < PARTY_SIZE; i++)
+    for (i = 0; i < slots; i++)
     {
         struct Pokemon *dstParty = NULL;
         s8 dstPartySlot = 0;
@@ -8821,6 +8852,7 @@ static void GetPartyAndSlotFromPartyMenuId(s8 menuId, struct Pokemon **party, s8
         *partySlot = menuId;
         break;
     case PARTY_LAYOUT_MULTI_SHOWCASE:
+    case PARTY_LAYOUT_MULTI_FULL_COMPACT:
         switch (menuId)
         {
         case 3:

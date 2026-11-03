@@ -3685,7 +3685,11 @@ bool8 DidMonComeFromRSE(void)
 
 static bool8 IsInGamePartnerMon(void)
 {
-    if (gPartyMenu.layout == PARTY_LAYOUT_MULTI_FULL)
+    if (gPartyMenu.layout == PARTY_LAYOUT_MULTI_FULL_COMPACT && gMain.inBattle)
+    {
+        return sMonSummaryScreen->monList.mons == gParties[B_TRAINER_PARTNER];
+    }
+    else if (gPartyMenu.layout == PARTY_LAYOUT_MULTI_FULL)
     {
         return FALSE;
     }

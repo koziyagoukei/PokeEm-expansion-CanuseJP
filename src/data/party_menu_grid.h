@@ -4,6 +4,28 @@ static bool32 UsePartyGrid(void)
     return gPartyMenu.layout < PARTY_LAYOUT_COUNT;
 }
 
+static bool32 HasMultiPartyColumns(void)
+{
+    return gPartyMenu.layout == PARTY_LAYOUT_MULTI || gPartyMenu.layout == PARTY_LAYOUT_MULTI_FULL_COMPACT;
+}
+
+// Keep the battle's slot IDs independent of the row-major grid positions.
+static u8 PartyGridSlotToCell(u8 slot)
+{
+    if (gPartyMenu.layout == PARTY_LAYOUT_MULTI_FULL_COMPACT)
+        return (slot % MULTI_PARTY_SIZE) * 2 + slot / MULTI_PARTY_SIZE;
+    if (gPartyMenu.layout == PARTY_LAYOUT_MULTI && (slot == 3 || slot == 4))
+        return 7 - slot;
+    return slot;
+}
+
+static u8 PartyGridCellToSlot(u8 cell)
+{
+    if (gPartyMenu.layout == PARTY_LAYOUT_MULTI_FULL_COMPACT)
+        return cell / 2 + (cell % 2) * MULTI_PARTY_SIZE;
+    return PartyGridSlotToCell(cell);
+}
+
 #define PARTY_GRID_FRAME_TILE 0x3F0
 
 static u16 PartyFrameTile(void)
@@ -76,7 +98,6 @@ static const u8 sGridButtonColors[] = {1, 3, 1};
 static const u8 sText_GridParty[] = _("ポケモン");
 static const u8 sText_GridPartner[] = _("なかまの ポケモン");
 static const u8 sText_GridNoItem[] = _("もちもの なし");
-static const u8 sText_GridPartnerBadge[] = _("{ENG}P2");
 static const u8 sText_GridBothTeams[] = _("じぶん");
 static const u8 sText_GridOtherTeam[] = _("なかま");
 
@@ -112,22 +133,21 @@ static void LoadPartyGridBackground(void)
 
 static void DrawPartyGridHeader(void)
 {
+    bool32 bothTeams = HasMultiPartyColumns() || gPartyMenu.layout == PARTY_LAYOUT_MULTI_SHOWCASE;
     const u8 *title = gPartyMenu.layout == PARTY_LAYOUT_MULTI_FULL_PARTNER
         || gPartyMenu.layout == PARTY_LAYOUT_MULTI_FULL_SHOWCASE_PARTNER ? sText_GridPartner
-        : gPartyMenu.layout == PARTY_LAYOUT_MULTI_SHOWCASE ? sText_GridBothTeams : sText_GridParty;
+        : bothTeams ? sText_GridBothTeams : sText_GridParty;
     FillWindowPixelBuffer(7, PIXEL_FILL(1));
     FillWindowPixelRect(7, PIXEL_FILL(4), 0, 14, 240, 2);
     FillWindowPixelRect(7, PIXEL_FILL(4), 4, 2, 2, 9);
     AddTextPrinterParameterized3(7, FONT_SMALL, 8, 1, sGridTextColors, TEXT_SKIP_DRAW, title);
-    if (gPartyMenu.layout == PARTY_LAYOUT_MULTI_SHOWCASE)
+    if (bothTeams)
         AddTextPrinterParameterized3(7, FONT_SMALL, 128, 1, sGridTextColors, TEXT_SKIP_DRAW, sText_GridOtherTeam);
-    if (gPartyMenu.layout != PARTY_LAYOUT_MULTI_SHOWCASE)
+    else
     {
         u8 count[12];
         enum BattleTrainer trainer = gPartyMenu.layout == PARTY_LAYOUT_MULTI_FULL_PARTNER ? B_TRAINER_PARTNER : B_TRAINER_PLAYER;
         u32 size = gPartiesCount[trainer];
-        if (gPartyMenu.layout == PARTY_LAYOUT_MULTI)
-            size = min(PARTY_SIZE, size + gPartiesCount[B_TRAINER_PARTNER]);
         u8 *end = ConvertIntToDecimalStringN(count, size, STR_CONV_MODE_LEFT_ALIGN, 1);
         StringCopy(end, COMPOUND_STRING("{ENG}/6"));
         AddTextPrinterParameterized3(7, FONT_SMALL, 212, 1, sGridTextColors, TEXT_SKIP_DRAW, count);
@@ -188,9 +208,16 @@ static void CreatePartyGridButtons(bool32 chooseHalf)
     DrawPartyGridButton(sPartyMenuInternal->gridButtons[1], gText_Cancel, gPartyMenu.slotId == PARTY_SIZE + 1);
 }
 
+static bool32 PartyGridCellHasMon(u8 cell)
+{
+    return GetMonData(GetPartyMonFromPartyMenuId(PartyGridCellToSlot(cell)), MON_DATA_SPECIES) != SPECIES_NONE;
+}
+
 static void UpdatePartySelectionGrid(s8 *slot, s8 direction)
 {
     s8 next = *slot;
+    if (next < PARTY_SIZE)
+        next = PartyGridSlotToCell(next);
     if (next >= PARTY_SIZE)
     {
         if (direction == MENU_DIR_LEFT || direction == MENU_DIR_RIGHT)
@@ -199,7 +226,7 @@ static void UpdatePartySelectionGrid(s8 *slot, s8 direction)
         {
             s8 step = direction == MENU_DIR_UP ? -1 : 1;
             next = direction == MENU_DIR_UP ? PARTY_SIZE - 1 : 0;
-            while (next >= 0 && next < PARTY_SIZE && GetMonData(GetPartyMonFromPartyMenuId(next), MON_DATA_SPECIES) == SPECIES_NONE)
+            while (next >= 0 && next < PARTY_SIZE && !PartyGridCellHasMon(next))
                 next += step;
             if (next < 0 || next >= PARTY_SIZE)
                 return;
@@ -208,18 +235,18 @@ static void UpdatePartySelectionGrid(s8 *slot, s8 direction)
     else if (direction == MENU_DIR_LEFT || direction == MENU_DIR_RIGHT)
     {
         next ^= 1;
-        if (GetMonData(GetPartyMonFromPartyMenuId(next), MON_DATA_SPECIES) == SPECIES_NONE)
+        if (!PartyGridCellHasMon(next))
             return;
     }
     else
     {
         s8 step = direction == MENU_DIR_UP ? -2 : 2;
         do { next += step; }
-        while (next >= 0 && next < PARTY_SIZE && GetMonData(GetPartyMonFromPartyMenuId(next), MON_DATA_SPECIES) == SPECIES_NONE);
+        while (next >= 0 && next < PARTY_SIZE && !PartyGridCellHasMon(next));
         if (next < 0 || next >= PARTY_SIZE)
             next = direction == MENU_DIR_DOWN && sPartyMenuInternal->chooseHalf ? PARTY_SIZE : PARTY_SIZE + 1;
     }
-    *slot = next;
+    *slot = next < PARTY_SIZE ? PartyGridCellToSlot(next) : next;
 }
 
 static void UpdatePartyGridItemIcon(enum Item item, struct PartyMenuBox *box)
@@ -261,16 +288,7 @@ static void UpdatePartyGridItemIcon(enum Item item, struct PartyMenuBox *box)
 static void DrawPartyGridName(u8 window, const u8 *name, const u8 *position, u32 width)
 {
     u8 clipped[POKEMON_NAME_BUFFER_SIZE + 16];
-    u8 adjusted[2] = {position[0], position[1]};
     u32 copied = 0;
-    if (gPartyMenu.layout == PARTY_LAYOUT_MULTI && (window == 1 || window == 4 || window == 5))
-    {
-        static const u8 badgeColors[] = {1, 4, 1};
-        AddTextPrinterParameterized3(window, FONT_SMALL, position[0], position[1], badgeColors, 0, sText_GridPartnerBadge);
-        adjusted[0] += 14;
-        width -= 14;
-        position = adjusted;
-    }
     if (GetStringWidth(FONT_SMALL, name, 0) <= width)
     {
         AddTextPrinterParameterized3(window, FONT_SMALL, position[0], position[1], sFontColorTable[0], 0, name);
