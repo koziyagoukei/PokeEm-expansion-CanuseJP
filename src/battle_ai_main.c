@@ -353,7 +353,8 @@ static u64 GetAiFlags(u16 trainerId, enum BattlerId battler)
             flags = GetTrainerAIFlagsFromId(trainerId);
     }
 
-    if (IsDoubleBattle() && flags != 0)
+    // Early Factory rounds have no other AI flags, but still need ally scoring.
+    if (IsDoubleBattle() && (flags != 0 || (gBattleTypeFlags & BATTLE_TYPE_FACTORY)))
     {
         flags |= AI_FLAG_DOUBLE_BATTLE;
     }

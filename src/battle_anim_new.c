@@ -101,6 +101,7 @@ static void SpriteCB_GlacialLance_Step2(struct Sprite* sprite);
 static void SpriteCB_GlacialLance(struct Sprite* sprite);
 static void SpriteCB_TripleArrowKick(struct Sprite* sprite);
 static void SpriteCB_Protect(struct Sprite* sprite);
+static void SpriteCB_StockpileRock(struct Sprite *sprite);
 
 // const data
 // general
@@ -4366,7 +4367,7 @@ const struct SpriteTemplate gContinentalCrushNeedleArmSpriteTemplate =
     .paletteTag = ANIM_TAG_ROCKS,
     .oam = &gOamData_AffineOff_ObjNormal_32x32,
     .anims = gAnims_FlyingRock,
-    .callback = AnimNeedleArmSpike,
+    .callback = SpriteCB_StockpileRock,
 };
 
 const struct SpriteTemplate gContinentalCrushBigRockStompSpriteTemplate =
@@ -7219,6 +7220,21 @@ static void SpriteCB_TranslateAnimSpriteToTargetMonLocationDoubles(struct Sprite
         sprite->callback = StartAnimLinearTranslation;
         StoreSpriteCallbackInData6(sprite, DestroyAnimSprite);
     }
+}
+
+static void SpriteCB_StockpileRock(struct Sprite *sprite)
+{
+    // Reuse all three rock frames without changing shared scripts or battle RNG.
+    if (gAnimMoveIndex == MOVE_MAX_ROCKFALL)
+    {
+        u8 anim = 0;
+        if (gBattleAnimArgs[2] > 0)
+            anim = 1;
+        else if (gBattleAnimArgs[2] < 0)
+            anim = 2;
+        StartSpriteAnim(sprite, anim);
+    }
+    AnimNeedleArmSpike(sprite);
 }
 
 //Causes an object to fall from the sky.

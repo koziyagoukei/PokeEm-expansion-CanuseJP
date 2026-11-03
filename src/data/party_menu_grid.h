@@ -156,6 +156,12 @@ static void DrawPartyGridFooter(void)
         AddTextPrinterParameterized3(window, GetFontIdToFit(item, FONT_SMALL, 0, WindowWidthPx(window)), 0, 12, sGridTextColors, TEXT_SKIP_DRAW, item);
     }
     PutWindowTilemap(window);
+    // Closing a modal can clear the buttons' tilemap entries on the same BG.
+    for (u32 i = 0; i < ARRAY_COUNT(sPartyMenuInternal->gridButtons); i++)
+    {
+        if (sPartyMenuInternal->gridButtons[i] != WINDOW_NONE)
+            PutWindowTilemap(sPartyMenuInternal->gridButtons[i]);
+    }
     CopyWindowToVram(window, COPYWIN_FULL);
 }
 
