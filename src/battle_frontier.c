@@ -442,6 +442,19 @@ static u8 GetForcedFrontierMonPoolFilter(u8 partySlot, u8 monCount)
     return FRONTIER_MON_FILTER_NONE;
 }
 
+static bool8 PartyHasSpeciesSubjectToBannedLimit(enum BattleTrainer trainer)
+{
+    u32 i;
+
+    for (i = 0; i < PARTY_SIZE; i++)
+    {
+        if (IsFrontierSpeciesSubjectToBannedLimit(GetMonData(&gParties[trainer][i], MON_DATA_SPECIES)))
+            return TRUE;
+    }
+
+    return FALSE;
+}
+
 static void FillTrainerParty(u16 trainerId, enum BattleTrainer trainer, u8 monCount)
 {
     s32 i, j;
@@ -490,16 +503,23 @@ static void FillTrainerParty(u16 trainerId, enum BattleTrainer trainer, u8 monCo
     }
 
     // Regular battle frontier trainer.
+    // The two opponents of a multi battle (or of the Pike and Pyramid two-Trainer battles) are
+    // one side: the second may not bring a banned species when the first already has one.
+    bool8 sideHasBannedSpecies = trainer == B_TRAINER_OPPONENT_B && PartyHasSpeciesSubjectToBannedLimit(B_TRAINER_OPPONENT_A);
+
     // Attempt to fill the trainer's party with random Pokemon until 3 have been
     // successfully chosen. The trainer's party may not have duplicate Pokemon species
     // or duplicate held items.
     i = 0;
     otID = Random32();
+    SetFrontierPoolSideHasBannedSpecies(sideHasBannedSpecies);
     while (i != monCount)
     {
         u8 poolFilter = GetForcedFrontierMonPoolFilter(i, monCount);
         if (GetFrontierGuestTrainer(trainerId) != NULL)
             poolFilter = GetFrontierGuestMonFilter(trainerId, i);
+        if (sideHasBannedSpecies && poolFilter == FRONTIER_MON_FILTER_BANNED_SPECIES)
+            poolFilter = FRONTIER_MON_FILTER_NONE;
         u16 monId = GetRandomFrontierMonFromFullPoolWithFilter(chosenMonIndices, i, NULL, 0, NULL, 0, poolFilter);
 
         chosenMonIndices[i] = monId;
@@ -511,6 +531,7 @@ static void FillTrainerParty(u16 trainerId, enum BattleTrainer trainer, u8 monCo
         // the next party slot.
         i++;
     }
+    SetFrontierPoolSideHasBannedSpecies(FALSE);
 }
 
 static bool32 TryGetOpponentPartySlot(const struct Pokemon *mon, enum BattleTrainer *trainer, u32 *slot)

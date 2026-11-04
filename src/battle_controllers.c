@@ -2506,8 +2506,14 @@ void BtlController_HandleSwitchInAnim(enum BattlerId battler)
 
     if (IsControllerPlayer(battler))
     {
-        gActionSelectionCursor[battler] = 0;
-        gMoveSelectionCursor[battler] = 0;
+        // Dynamax sends the same Pokemon out again, keeping its Transform (the only switch-in that
+        // does); only a new Pokemon starts from the first move. The party index can't tell them
+        // apart: the battle has already set it to the incoming Pokemon.
+        if (!gBattleResources->bufferA[battler][2])
+        {
+            gActionSelectionCursor[battler] = 0;
+            gMoveSelectionCursor[battler] = 0;
+        }
     }
     else if (IsControllerOpponent(battler))
     {

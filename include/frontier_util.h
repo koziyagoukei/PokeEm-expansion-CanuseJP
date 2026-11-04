@@ -54,6 +54,7 @@ u8 GetFrontierTrainerFacilityClass(u16 trainerId);
 void GetFrontierTrainerName(u8 *dst, u16 trainerId);
 u16 GetRandomFrontierMonFromSet(u16 trainerId);
 bool8 IsFrontierMonPoolEntryEnabled(u16 monId);
+void SetFrontierPoolSideHasBannedSpecies(bool8 hasBannedSpecies);
 u16 GetRandomFrontierMonFromFullPool(const u16 *selectedMonIds, u8 selectedCount, const u16 *excludedMonIds, u8 excludedMonIdCount, const enum Species *excludedSpecies, u8 excludedSpeciesCount);
 u16 GetRandomFrontierMonFromFullPoolWithFilter(const u16 *selectedMonIds, u8 selectedCount, const u16 *excludedMonIds, u8 excludedMonIdCount, const enum Species *excludedSpecies, u8 excludedSpeciesCount, u8 filter);
 void SaveFrontierPlayerPartyMon(u16 partyIndex, const struct Pokemon *mon);

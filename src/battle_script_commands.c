@@ -5644,67 +5644,24 @@ static void Cmd_forcerandomswitch(void)
             battler2PartyId = gBattlerPartyIndexes[gBattlerTarget];
             battler1PartyId = gBattlerPartyIndexes[GetPartnerBattler(gBattlerTarget)];
         }
-        else if ((gBattleTypeFlags & BATTLE_TYPE_BATTLE_TOWER && gBattleTypeFlags & BATTLE_TYPE_LINK)
-            || (gBattleTypeFlags & BATTLE_TYPE_BATTLE_TOWER && gBattleTypeFlags & BATTLE_TYPE_RECORDED_LINK)
-            || (gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER))
-        {
-            if ((gBattlerTarget & BIT_FLANK) != B_FLANK_LEFT)
-            {
-                firstMonId = PARTY_SIZE / 2;
-                lastMonId = PARTY_SIZE;
-            }
-            else
-            {
-                firstMonId = 0;
-                lastMonId = PARTY_SIZE / 2;
-            }
-            battler2PartyId = gBattlerPartyIndexes[gBattlerTarget];
-            battler1PartyId = gBattlerPartyIndexes[GetPartnerBattler(gBattlerTarget)];
-        }
-        else if ((gBattleTypeFlags & BATTLE_TYPE_MULTI && gBattleTypeFlags & BATTLE_TYPE_LINK)
-                 || (gBattleTypeFlags & BATTLE_TYPE_MULTI && gBattleTypeFlags & BATTLE_TYPE_RECORDED_LINK))
-        {
-            firstMonId = 0;
-            lastMonId = PARTY_SIZE / 2;
-            battler2PartyId = gBattlerPartyIndexes[gBattlerTarget];
-            battler1PartyId = gBattlerPartyIndexes[GetPartnerBattler(gBattlerTarget)];
-        }
-        else if (gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS)
-        {
-            if (IsOnPlayerSide(gBattlerTarget))
-            {
-                firstMonId = 0;
-                lastMonId = PARTY_SIZE;
-            }
-            else
-            {
-                if ((gBattlerTarget & BIT_FLANK) != B_FLANK_LEFT)
-                {
-                    firstMonId = PARTY_SIZE / 2;
-                    lastMonId = PARTY_SIZE;
-                }
-                else
-                {
-                    firstMonId = 0;
-                    lastMonId = PARTY_SIZE / 2;
-                }
-            }
-            battler2PartyId = gBattlerPartyIndexes[gBattlerTarget];
-            battler1PartyId = gBattlerPartyIndexes[GetPartnerBattler(gBattlerTarget)];
-        }
-        else if (IsDoubleBattle())
-        {
-            firstMonId = 0;
-            lastMonId = PARTY_SIZE;
-            battler2PartyId = gBattlerPartyIndexes[gBattlerTarget];
-            battler1PartyId = gBattlerPartyIndexes[GetPartnerBattler(gBattlerTarget)];
-        }
         else
         {
+            enum BattlerId partner = GetPartnerBattler(gBattlerTarget);
+
+            // Each Trainer of a multi side keeps a party of their own, from slot 0 (as in
+            // CanBattlerSwitch). Looking in the second half of the party for the right-hand
+            // Trainer found nothing there, so Roar and the like failed against them.
             firstMonId = 0;
-            lastMonId = PARTY_SIZE;
-            battler2PartyId = gBattlerPartyIndexes[gBattlerTarget]; // there is only one Pokemon out in single battles
-            battler1PartyId = gBattlerPartyIndexes[gBattlerTarget];
+            if (BattleSideHasTwoTrainers(GetBattlerSide(gBattlerTarget)) && !AreMultiPartiesFullTeams())
+                lastMonId = MULTI_PARTY_SIZE;
+            else
+                lastMonId = PARTY_SIZE;
+            battler2PartyId = gBattlerPartyIndexes[gBattlerTarget];
+            // The partner only blocks a slot when it is out of the same party.
+            if (IsDoubleBattle() && BattlersShareParty(gBattlerTarget, partner))
+                battler1PartyId = gBattlerPartyIndexes[partner];
+            else
+                battler1PartyId = battler2PartyId;
         }
 
         for (u32 i = firstMonId; i < lastMonId; i++)
@@ -6559,6 +6516,9 @@ static void Cmd_healpartystatus(void)
     enum BattlerId partner = GetBattlerAtPosition(GetPartnerPosition(GetBattlerPosition(gBattlerAttacker)));
     struct Pokemon *party = GetBattlerParty(gBattlerAttacker);
     bool32 isSoundMove = IsSoundMove(gCurrentMove);
+    // In a multi battle the partner's Pokemon belongs to another Trainer's party.
+    bool32 partnerSharesParty = BattlersShareParty(gBattlerAttacker, partner);
+    bool32 curePartnerParty = FALSE;
 
     if (GetConfig(B_HEAL_BELL_SOUNDPROOF) == GEN_5
      || GetConfig(B_HEAL_BELL_SOUNDPROOF) >= GEN_8
@@ -6586,6 +6546,7 @@ static void Cmd_healpartystatus(void)
         {
             gBattleMons[partner].status1 = 0;
             gBattleMons[partner].volatiles.nightmare = FALSE;
+            curePartnerParty = !partnerSharesParty;
         }
         else
         {
@@ -6605,7 +6566,7 @@ static void Cmd_healpartystatus(void)
         {
             enum Ability ability;
             bool32 isAttacker = gBattlerPartyIndexes[gBattlerAttacker] == i;
-            bool32 isDoublesPartner = gBattlerPartyIndexes[partner] == i && IsBattlerAlive(partner);
+            bool32 isDoublesPartner = partnerSharesParty && gBattlerPartyIndexes[partner] == i && IsBattlerAlive(partner);
 
             if (GetConfig(B_HEAL_BELL_SOUNDPROOF) == GEN_5
              || (GetConfig(B_HEAL_BELL_SOUNDPROOF) >= GEN_8 && isAttacker))
@@ -6641,6 +6602,15 @@ static void Cmd_healpartystatus(void)
     {
         BtlController_EmitSetMonData(gBattlerAttacker, B_COMM_TO_CONTROLLER, REQUEST_STATUS_BATTLE, toHeal, sizeof(zero), &zero);
         MarkBattlerForControllerExec(gBattlerAttacker);
+    }
+
+    // The loop above only covers the user's party. Cure the multi partner's own party
+    // too, or its status would come back once it switches out.
+    if (curePartnerParty)
+    {
+        TryDeactivateSleepClause(partner, gBattlerPartyIndexes[partner]);
+        BtlController_EmitSetMonData(partner, B_COMM_TO_CONTROLLER, REQUEST_STATUS_BATTLE, 0, sizeof(zero), &zero);
+        MarkBattlerForControllerExec(partner);
     }
 
     gBattlescriptCurrInstr = cmd->nextInstr;
@@ -9411,6 +9381,17 @@ void ApplyExperienceMultipliers(s32 *expAmount, u8 expGetterMonId, u8 faintedBat
     }
 }
 
+// Whether the Pokemon the user picked from its party for a bag item is its partner on the
+// field. In a multi battle the partner's slot number belongs to another Trainer's party.
+static bool32 IsItemRecipientPartnerOnField(void)
+{
+    enum BattlerId partner = GetPartnerBattler(gBattlerAttacker);
+
+    return IsDoubleBattle()
+        && BattlersShareParty(gBattlerAttacker, partner)
+        && gBattleStruct->itemPartyIndex[gBattlerAttacker] == gBattlerPartyIndexes[partner];
+}
+
 void BS_ItemRestoreHP(void)
 {
     NATIVE_ARGS(const u8 *alreadyMaxHpInstr, const u8 *restoreBattlerInstr);
@@ -9435,7 +9416,7 @@ void BS_ItemRestoreHP(void)
         // Check if the recipient is an active battler.
         if (gBattleStruct->itemPartyIndex[gBattlerAttacker] == gBattlerPartyIndexes[gBattlerAttacker])
             battler = gBattlerAttacker;
-        else if (IsDoubleBattle() && gBattleStruct->itemPartyIndex[gBattlerAttacker] == gBattlerPartyIndexes[GetPartnerBattler(gBattlerAttacker)])
+        else if (IsItemRecipientPartnerOnField())
             battler = GetPartnerBattler(gBattlerAttacker);
 
         // Get amount to heal.
@@ -9498,8 +9479,7 @@ void BS_ItemCureStatus(void)
         statusChanged = ItemHealMonVolatile(gBattlerAttacker, gLastUsedItem);
         targetBattler = gBattlerAttacker;
     }
-    else if (IsDoubleBattle()
-     && gBattleStruct->itemPartyIndex[gBattlerAttacker] == gBattlerPartyIndexes[GetPartnerBattler(gBattlerAttacker)])
+    else if (IsItemRecipientPartnerOnField())
     {
         statusChanged = ItemHealMonVolatile(GetPartnerBattler(gBattlerAttacker), gLastUsedItem);
         targetBattler = GetPartnerBattler(gBattlerAttacker);
@@ -9579,8 +9559,7 @@ void BS_ItemRestorePP(void)
     // Check if the recipient is an active battler.
     if (gBattleStruct->itemPartyIndex[gBattlerAttacker] == gBattlerPartyIndexes[gBattlerAttacker])
         battler = gBattlerAttacker;
-    else if (IsDoubleBattle()
-                && gBattleStruct->itemPartyIndex[gBattlerAttacker] == gBattlerPartyIndexes[GetPartnerBattler(gBattlerAttacker)])
+    else if (IsItemRecipientPartnerOnField())
         battler = GetPartnerBattler(gBattlerAttacker);
 
     // Heal PP!
@@ -10067,9 +10046,11 @@ void BS_TryRevivalBlessing(void)
         MarkBattlerForControllerExec(gBattlerAttacker);
         PREPARE_SPECIES_BUFFER(gBattleTextBuff1, GetMonData(&party[gSelectedMonPartyId], MON_DATA_SPECIES));
 
-        // If an on-field battler is revived, it needs to be sent out again.
-        if (IsDoubleBattle() &&
-            gBattlerPartyIndexes[GetPartnerBattler(gBattlerAttacker)] == gSelectedMonPartyId)
+        // If an on-field battler is revived, it needs to be sent out again. In a multi battle
+        // the partner's slot number belongs to another Trainer's party.
+        if (IsDoubleBattle()
+         && BattlersShareParty(gBattlerAttacker, GetPartnerBattler(gBattlerAttacker))
+         && gBattlerPartyIndexes[GetPartnerBattler(gBattlerAttacker)] == gSelectedMonPartyId)
         {
             enum BattlerId i = GetPartnerBattler(gBattlerAttacker);
             gAbsentBattlerFlags &= ~(1u << i);

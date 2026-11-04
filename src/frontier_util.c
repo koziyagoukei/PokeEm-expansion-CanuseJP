@@ -3528,9 +3528,21 @@ static bool8 FrontierMonHeldItemHasSortType(u16 monId, enum ItemSortType sortTyp
     return item != ITEM_NONE && gItemsInfo[item].sortType == sortType;
 }
 
+// Set while drawing the party of a Trainer whose side already has a banned species, such as
+// the second opponent of a multi battle, so the one-banned-species rule holds for the side.
+static EWRAM_DATA bool8 sFrontierPoolSideHasBannedSpecies = FALSE;
+
+void SetFrontierPoolSideHasBannedSpecies(bool8 hasBannedSpecies)
+{
+    sFrontierPoolSideHasBannedSpecies = hasBannedSpecies;
+}
+
 static bool8 SelectedFrontierMonsContainBannedSpecies(const u16 *selectedMonIds, u8 selectedCount)
 {
     u8 i;
+
+    if (sFrontierPoolSideHasBannedSpecies && FlagGet(FLAG_FRONTIER_ALLOW_BANNED_SPECIES))
+        return TRUE;
 
     for (i = 0; i < selectedCount; i++)
     {
@@ -3697,6 +3709,11 @@ static u16 GetRandomFrontierMonIgnoringSoftPartyClauses(const u16 *selectedMonId
 
     if (count == 0)
     {
+        // A forced filter can have no entry left, such as the banned-species slot once the
+        // party already has one. Give up the filter, not the banned-species rule.
+        if (filter != FRONTIER_MON_FILTER_NONE)
+            return GetRandomFrontierMonIgnoringSoftPartyClauses(selectedMonIds, selectedCount, FRONTIER_MON_FILTER_NONE);
+
         do
         {
             monId = Random() % NUM_FRONTIER_MONS;
