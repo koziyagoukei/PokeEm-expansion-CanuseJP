@@ -65,6 +65,7 @@ static const struct FrontierMusicTrack sTracks[] =
     {MUS_VS_PMD_RAYQUAZA, _("{JPN}きゅうじょたい レックウザ"), FRONTIER_MUSIC_CATEGORY_DUNGEON},
     {MUS_VS_PMD_BOSS, _("{JPN}きゅうじょたい ボス"), FRONTIER_MUSIC_CATEGORY_DUNGEON},
     {MUS_VS_ZINNIA, _("{JPN}ORAS ヒガナ"), FRONTIER_MUSIC_CATEGORY_HOENN},
+    {MUS_VS_PMD_DIALGA, _("{JPN}たんけんたい ディアルガ"), FRONTIER_MUSIC_CATEGORY_DUNGEON},
 };
 
 static const u16 sRescuedFlags[] =

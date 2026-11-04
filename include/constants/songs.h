@@ -558,6 +558,7 @@
 #define MUS_VS_PMD_RAYQUAZA         617
 #define MUS_VS_PMD_BOSS             618
 #define MUS_VS_ZINNIA               619
+#define MUS_VS_PMD_DIALGA           620
 
 #define MUS_ROUTE118                0x7FFF  // Map is split into 2 music sections. controlled by GetCurrLocationDefaultMusic().
 

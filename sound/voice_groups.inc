@@ -9,6 +9,7 @@
 .include "sound/voicegroups/vs_pmd_rayquaza.inc"
 .include "sound/voicegroups/vs_pmd_boss.inc"
 .include "sound/voicegroups/vs_zinnia.inc"
+.include "sound/voicegroups/vs_pmd_dialga.inc"
 
 @ drumsets
 .include "sound/voicegroups/drumsets/rs.inc"
