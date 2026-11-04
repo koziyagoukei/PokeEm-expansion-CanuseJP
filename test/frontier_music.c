@@ -32,6 +32,7 @@ extern const struct SongHeader mus_vs_pmd_boss;
 extern const struct SongHeader mus_vs_zinnia;
 extern const struct SongHeader mus_vs_pmd_dialga;
 extern const struct SongHeader mus_vs_hgss_ho_oh;
+extern const struct SongHeader mus_vs_hgss_lugia;
 
 static const u32 sFacilities[] =
 {
@@ -76,7 +77,7 @@ TEST("Frontier music: all catalog battle songs cost five BP each")
         EXPECT((song >= START_MUS && song <= END_MUS) || song == MUS_POKEVIRUS_RELEASE || song == MUS_POKEVIRUS_FINAL
             || song == MUS_VS_COLOSSEUM || song == MUS_VS_COLOSSEUM_ADMIN || song == MUS_VS_COLOSSEUM_2
             || song == MUS_VS_PMD_RAYQUAZA || song == MUS_VS_PMD_BOSS || song == MUS_VS_ZINNIA
-            || song == MUS_VS_PMD_DIALGA || song == MUS_VS_HGSS_HO_OH);
+            || song == MUS_VS_PMD_DIALGA || song == MUS_VS_HGSS_HO_OH || song == MUS_VS_HGSS_LUGIA);
         EXPECT(!FrontierMusic_IsUnlocked(song));
         gSaveBlock2Ptr->frontier.battlePoints = 5;
         EXPECT_EQ(FrontierMusic_Unlock(song), FRONTIER_MUSIC_OK);
@@ -819,7 +820,7 @@ TEST("Frontier music: every song has exactly one work category without reindexin
         counts[category]++;
     }
     EXPECT_EQ(counts[FRONTIER_MUSIC_CATEGORY_KANTO], 8);
-    EXPECT_EQ(counts[FRONTIER_MUSIC_CATEGORY_JOHTO], 1);
+    EXPECT_EQ(counts[FRONTIER_MUSIC_CATEGORY_JOHTO], 2);
     EXPECT_EQ(counts[FRONTIER_MUSIC_CATEGORY_HOENN], 14);
     EXPECT_EQ(counts[FRONTIER_MUSIC_CATEGORY_ORRE], 3);
     EXPECT_EQ(counts[FRONTIER_MUSIC_CATEGORY_DUNGEON], 3);
@@ -978,6 +979,100 @@ TEST("Frontier music: adding Ho-Oh preserves previous 30 unlock bits Dialga and 
     EXPECT(!FrontierMusic_IsUnlocked(MUS_VS_HGSS_HO_OH));
 }
 
+TEST("Frontier music: HGSS Lugia uses native percussion and nine tracks across two loops")
+{
+    static const u8 drumKeys[] = {38, 53, 55, 57};
+    const struct ToneData *kit = (const void *)mus_vs_hgss_lugia.tone[19].wav;
+    EXPECT_EQ(MUS_VS_HGSS_LUGIA, 622);
+    EXPECT_EQ(FrontierMusic_GetSong(31), MUS_VS_HGSS_LUGIA);
+    EXPECT_EQ(FrontierMusic_GetCategory(MUS_VS_HGSS_LUGIA), FRONTIER_MUSIC_CATEGORY_JOHTO);
+    EXPECT(gSongTable[MUS_VS_HGSS_LUGIA].header == &mus_vs_hgss_lugia);
+    EXPECT_EQ(gSongTable[MUS_VS_HGSS_LUGIA].ms, 0);
+    EXPECT_EQ(mus_vs_hgss_lugia.trackCount, 9);
+    for (u32 key = 0; key < ARRAY_COUNT(drumKeys); key++)
+        EXPECT_EQ(kit[drumKeys[key]].type & TONEDATA_TYPE_CGB, 0);
+    EXPECT_EQ(mus_vs_hgss_lugia.tone[5].type & TONEDATA_TYPE_CGB, 0);
+    EXPECT_EQ(mus_vs_hgss_lugia.tone[6].type & 7, 3);
+    EXPECT_EQ(mus_vs_hgss_lugia.tone[7].type & 7, 2);
+    EXPECT_EQ(mus_vs_hgss_lugia.tone[8].type & 7, 1);
+    EXPECT_EQ(mus_vs_hgss_lugia.tone[9].type & 7, 4);
+    m4aSongNumStart(MUS_VS_HGSS_LUGIA);
+    for (u32 frame = 0; frame < 15000; frame++)
+        MPlayMain(&gMPlayInfo_BGM);
+    EXPECT_GT(gMPlayInfo_BGM.clock, 5352 + 2 * 3840);
+    EXPECT_EQ(gMPlayInfo_BGM.status & MUSICPLAYER_STATUS_TRACK, 0x1FF);
+    for (u32 track = 0; track < 9; track++)
+        EXPECT(gMPlayInfo_BGM.tracks[track].flags & MPT_FLG_EXIST);
+    m4aMPlayStop(&gMPlayInfo_BGM);
+}
+
+TEST("Frontier music: HGSS Lugia supports free preview five-BP unlock fixed random and Brain override")
+{
+    struct FrontierMusicSave before;
+    ResetMusic();
+    ClearStoryProgress();
+    before = gSaveBlock3Ptr->frontierMusic;
+    PlayNewMapMusic(MUS_B_FRONTIER);
+    MapMusicMain();
+    MapMusicMain();
+    gSaveBlock2Ptr->frontier.battlePoints = 0;
+    EXPECT(FrontierMusic_Preview(MUS_VS_HGSS_LUGIA));
+    EXPECT(gMPlayInfo_BGM.songHeader == &mus_vs_hgss_lugia);
+    EXPECT_EQ(memcmp(&before, &gSaveBlock3Ptr->frontierMusic, sizeof(before)), 0);
+    FrontierMusic_StopPreview();
+    EXPECT(gMPlayInfo_BGM.songHeader == gSongTable[MUS_B_FRONTIER].header);
+    gSaveBlock2Ptr->frontier.battlePoints = 5;
+    EXPECT_EQ(FrontierMusic_Unlock(MUS_VS_HGSS_LUGIA), FRONTIER_MUSIC_OK);
+    EXPECT_EQ(gSaveBlock2Ptr->frontier.battlePoints, 0);
+    EXPECT_EQ(gSaveBlock3Ptr->frontierMusic.unlocked, 0x80000000u);
+    EXPECT_EQ(FrontierMusic_SetMode(FRONTIER_MUSIC_FIXED, MUS_VS_HGSS_LUGIA), FRONTIER_MUSIC_OK);
+    gBattleTypeFlags = BATTLE_TYPE_TRAINER | BATTLE_TYPE_BATTLE_TOWER;
+    EXPECT_EQ(FrontierMusic_ChooseBattleBGM(MUS_VS_TRAINER), MUS_VS_HGSS_LUGIA);
+    EXPECT_EQ(FrontierMusic_SetMode(FRONTIER_MUSIC_RANDOM, 0), FRONTIER_MUSIC_OK);
+    for (u32 i = 0; i < 32; i++)
+        EXPECT_EQ(FrontierMusic_ChooseBattleBGM(MUS_VS_TRAINER), MUS_VS_HGSS_LUGIA);
+    TRAINER_BATTLE_PARAM.opponentA = TRAINER_FRONTIER_BRAIN;
+    EXPECT_EQ(FrontierMusic_ChooseBattleBGM(MUS_VS_TRAINER), MUS_VS_FRONTIER_BRAIN);
+}
+
+TEST("Frontier music: adding Lugia preserves previous 31 unlock bits and Ho-Oh selection")
+{
+    ResetMusic();
+    gSaveBlock3Ptr->frontierMusic.unlocked = 0x7FFFFFFFu;
+    gSaveBlock3Ptr->frontierMusic.selectedSong = MUS_VS_HGSS_HO_OH;
+    gSaveBlock3Ptr->frontierMusic.mode = FRONTIER_MUSIC_FIXED;
+    gSaveBlock3Ptr->frontierMusic.checksum = CalcCRC16((const u8 *)&gSaveBlock3Ptr->frontierMusic,
+                                                     offsetof(struct FrontierMusicSave, checksum));
+    FrontierMusic_EnsureSaveData();
+    EXPECT_EQ(gSaveBlock3Ptr->frontierMusic.unlocked, 0x7FFFFFFFu);
+    EXPECT_EQ(gSaveBlock3Ptr->frontierMusic.selectedSong, MUS_VS_HGSS_HO_OH);
+    EXPECT_EQ(gSaveBlock3Ptr->frontierMusic.mode, FRONTIER_MUSIC_FIXED);
+    EXPECT(!FrontierMusic_IsUnlocked(MUS_VS_HGSS_LUGIA));
+}
+
+TEST("Frontier music: all 32 unlock bits survive reload without expanding the save")
+{
+    struct FrontierMusicSave saved;
+    ResetMusic();
+    gSaveBlock3Ptr->frontierMusic.unlocked = 0xFFFFFFFFu;
+    gSaveBlock3Ptr->frontierMusic.selectedSong = MUS_VS_HGSS_LUGIA;
+    gSaveBlock3Ptr->frontierMusic.mode = FRONTIER_MUSIC_FIXED;
+    gSaveBlock3Ptr->frontierMusic.checksum = CalcCRC16((const u8 *)&gSaveBlock3Ptr->frontierMusic,
+                                                     offsetof(struct FrontierMusicSave, checksum));
+    saved = gSaveBlock3Ptr->frontierMusic;
+    FrontierMusic_EnsureSaveData();
+    EXPECT_EQ(sizeof(saved), 16);
+    EXPECT_EQ(offsetof(struct SaveBlock3, fusions), 168);
+    EXPECT_EQ(memcmp(&saved, &gSaveBlock3Ptr->frontierMusic, sizeof(saved)), 0);
+    for (u32 i = 0; i < FRONTIER_MUSIC_TRACK_COUNT; i++)
+        EXPECT(FrontierMusic_IsUnlocked(FrontierMusic_GetSong(i)));
+    EXPECT_EQ(FrontierMusic_Unlock(MUS_VS_HGSS_LUGIA), FRONTIER_MUSIC_ALREADY_UNLOCKED);
+    EXPECT_EQ(gSaveBlock2Ptr->frontier.battlePoints, 100);
+    EXPECT(!FrontierMusic_IsUnlocked(MUS_NONE));
+    EXPECT_EQ(FrontierMusic_Unlock(MUS_NONE), FRONTIER_MUSIC_INVALID);
+    EXPECT_EQ(memcmp(&saved, &gSaveBlock3Ptr->frontierMusic, sizeof(saved)), 0);
+}
+
 TEST("Frontier music: previewing a locked song is free and never changes the saved preference")
 {
     struct FrontierMusicSave before;
@@ -1131,10 +1226,14 @@ TEST("Frontier music: Johto follows Kanto in the catalog while Suicune remains i
     task = CatalogListTask();
     EXPECT_NE(task, TASK_NONE);
     list = (void *)gTasks[task].data;
-    EXPECT_EQ((u32)list->template.totalItems, 2);
+    EXPECT_EQ((u32)list->template.totalItems, 3);
     EXPECT_EQ(list->template.items[0].id, 30);
+    EXPECT_EQ(list->template.items[1].id, 31);
     CatalogInput(SELECT_BUTTON);
     EXPECT(gMPlayInfo_BGM.songHeader == &mus_vs_hgss_ho_oh);
+    CatalogInput(DPAD_DOWN);
+    CatalogInput(SELECT_BUTTON);
+    EXPECT(gMPlayInfo_BGM.songHeader == &mus_vs_hgss_lugia);
     CatalogInput(B_BUTTON);
     CatalogInput(B_BUTTON);
     FreeCatalogUi();

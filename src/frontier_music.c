@@ -67,6 +67,7 @@ static const struct FrontierMusicTrack sTracks[] =
     {MUS_VS_ZINNIA, _("{JPN}ORAS ヒガナ"), FRONTIER_MUSIC_CATEGORY_HOENN},
     {MUS_VS_PMD_DIALGA, _("{JPN}たんけんたい ディアルガ"), FRONTIER_MUSIC_CATEGORY_DUNGEON},
     {MUS_VS_HGSS_HO_OH, _("{JPN}HGSS ホウオウ"), FRONTIER_MUSIC_CATEGORY_JOHTO},
+    {MUS_VS_HGSS_LUGIA, _("{JPN}HGSS ルギア"), FRONTIER_MUSIC_CATEGORY_JOHTO},
 };
 
 static const u16 sRescuedFlags[] =
@@ -121,7 +122,7 @@ struct FrontierMusicCatalog
 static EWRAM_DATA struct FrontierMusicCatalog *sCatalog = NULL;
 
 STATIC_ASSERT(ARRAY_COUNT(sTracks) == FRONTIER_MUSIC_TRACK_COUNT, FrontierMusicCatalogSize);
-STATIC_ASSERT(FRONTIER_MUSIC_TRACK_COUNT < 32, FrontierMusicUnlockBits);
+STATIC_ASSERT(FRONTIER_MUSIC_TRACK_COUNT > 0 && FRONTIER_MUSIC_TRACK_COUNT <= 32, FrontierMusicUnlockBits);
 STATIC_ASSERT(offsetof(struct SaveBlock3, frontierMusic) == 152, FrontierMusicAppendOnlySave);
 STATIC_ASSERT(sizeof(struct FrontierMusicSave) == 16, FrontierMusicSaveSize);
 
@@ -153,7 +154,8 @@ void FrontierMusic_EnsureSaveData(void)
         save->magic = FRONTIER_MUSIC_MAGIC;
         save->version = FRONTIER_MUSIC_VERSION;
     }
-    save->unlocked &= (1u << FRONTIER_MUSIC_TRACK_COUNT) - 1;
+    // Right-shift the mask so the 32nd song never requires a shift by 32.
+    save->unlocked &= 0xFFFFFFFFu >> (32 - FRONTIER_MUSIC_TRACK_COUNT);
     save->earned &= FRONTIER_MUSIC_EARNED_RELEASE | FRONTIER_MUSIC_EARNED_FINAL;
     if (save->mode > FRONTIER_MUSIC_RANDOM
      || (save->mode == FRONTIER_MUSIC_FIXED
