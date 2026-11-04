@@ -2,10 +2,15 @@
 #include "berry.h"
 #include "frontier_inventory.h"
 #include "item.h"
+#include "item_use.h"
 #include "load_save.h"
 #include "test/test.h"
 #include "constants/hold_effects.h"
 #include "data/frontier_bag_items.h"
+
+static const enum Item sFusionItems[] = {
+    ITEM_DNA_SPLICERS, ITEM_N_SOLARIZER, ITEM_N_LUNARIZER, ITEM_REINS_OF_UNITY,
+};
 
 TEST("Bag redesign: every normally obtainable ordinary item fits at once")
 {
@@ -20,24 +25,101 @@ TEST("Bag redesign: every normally obtainable ordinary item fits at once")
         EXPECT(CheckBagHasItem(sFrontierObtainableItems[i], 1));
 }
 
-TEST("Bag redesign: starter inventory has every berry and only eight utility key items")
+TEST("Bag redesign: starter inventory has every berry eight utility keys and four fusion keys")
 {
     static const enum Item keys[] = {
         ITEM_MEGA_RING, ITEM_Z_POWER_RING, ITEM_DYNAMAX_BAND, ITEM_TERA_ORB,
         ITEM_MACH_BIKE, ITEM_POKEBLOCK_CASE, ITEM_WAILMER_PAIL,
         ITEM_POWDER_JAR,
+        ITEM_DNA_SPLICERS, ITEM_N_SOLARIZER, ITEM_N_LUNARIZER, ITEM_REINS_OF_UNITY,
     };
     ClearBag();
     GiveFrontierStarterInventory();
     GiveFrontierStarterInventory();
     for (u32 i = 0; i < ARRAY_COUNT(keys); i++)
         EXPECT_EQ(CountTotalItemQuantityInBag(keys[i]), 1);
-    EXPECT_EQ(GetBagItemId(POCKET_KEY_ITEMS, ARRAY_COUNT(keys)), ITEM_NONE);
+    u32 used = 0;
+    for (u32 i = 0; i < BAG_KEYITEMS_COUNT; i++)
+        if (GetBagItemId(POCKET_KEY_ITEMS, i) != ITEM_NONE)
+            used++;
+    EXPECT_EQ(used, ARRAY_COUNT(keys));
     EXPECT(!CheckBagHasItem(ITEM_SS_TICKET, 1));
     EXPECT(!CheckBagHasItem(ITEM_DEVON_GOODS, 1));
     EXPECT(!CheckBagHasItem(ITEM_ENIGMA_BERRY_E_READER, 1));
     for (enum BerryId berry = 1; berry <= BAG_BERRIES_COUNT; berry++)
         EXPECT_EQ(CountTotalItemQuantityInBag(BerryTypeToItemId(berry)), MAX_BAG_ITEM_CAPACITY);
+}
+
+TEST("Bag redesign: fusion tools use existing key slots without changing saved pocket offsets")
+{
+    struct PreviousBagLayout
+    {
+        struct ItemSlot items[206];
+        struct ItemSlot keyItems[12];
+        struct ItemSlot pokeBalls[5];
+        struct ItemSlot stones[30];
+        struct ItemSlot berries[BAG_BERRIES_COUNT];
+    };
+    EXPECT_EQ(sizeof(struct Bag), sizeof(struct PreviousBagLayout));
+    EXPECT_EQ(offsetof(struct Bag, items), offsetof(struct PreviousBagLayout, items));
+    EXPECT_EQ(offsetof(struct Bag, keyItems), offsetof(struct PreviousBagLayout, keyItems));
+    EXPECT_EQ(offsetof(struct Bag, pokeBalls), offsetof(struct PreviousBagLayout, pokeBalls));
+    EXPECT_EQ(offsetof(struct Bag, stones), offsetof(struct PreviousBagLayout, stones));
+    EXPECT_EQ(offsetof(struct Bag, berries), offsetof(struct PreviousBagLayout, berries));
+    for (u32 i = 0; i < ARRAY_COUNT(sFusionItems); i++)
+    {
+        EXPECT_EQ(GetItemPocket(sFusionItems[i]), POCKET_KEY_ITEMS);
+        EXPECT_NE(GetItemImportance(sFusionItems[i]), 0);
+        EXPECT(GetItemFieldFunc(sFusionItems[i]) == ItemUseOutOfBattle_Fusion);
+    }
+}
+
+TEST("Bag redesign: old eight-key inventory gains fusion tools without changing a full ordinary pocket")
+{
+    static const enum Item oldKeys[] = {
+        ITEM_MEGA_RING, ITEM_Z_POWER_RING, ITEM_DYNAMAX_BAND, ITEM_TERA_ORB,
+        ITEM_MACH_BIKE, ITEM_POKEBLOCK_CASE, ITEM_WAILMER_PAIL, ITEM_POWDER_JAR,
+    };
+    ClearBag();
+    for (u32 i = 0; i < ARRAY_COUNT(oldKeys); i++)
+        EXPECT(AddBagItem(oldKeys[i], 1));
+    for (u32 i = 0; i < ARRAY_COUNT(sFrontierObtainableItems); i++)
+        EXPECT(AddBagItem(sFrontierObtainableItems[i], 1 + i));
+    struct ItemSlot ordinary[206];
+    memcpy(ordinary, gSaveBlock1Ptr->bag.items, sizeof(ordinary));
+    GiveFrontierStarterInventory();
+    for (u32 i = 0; i < ARRAY_COUNT(sFusionItems); i++)
+        EXPECT_EQ(CountTotalItemQuantityInBag(sFusionItems[i]), 1);
+    EXPECT_EQ(memcmp(ordinary, gSaveBlock1Ptr->bag.items, sizeof(ordinary)), 0);
+    struct Bag before = gSaveBlock1Ptr->bag;
+    GiveFrontierStarterInventory();
+    EXPECT_EQ(memcmp(&before, &gSaveBlock1Ptr->bag, sizeof(before)), 0);
+}
+
+TEST("Bag redesign: full key pocket never discards owned items and retries missing gifts after space is freed")
+{
+    static const enum Item oldKeys[] = {
+        ITEM_MEGA_RING, ITEM_Z_POWER_RING, ITEM_DYNAMAX_BAND, ITEM_TERA_ORB,
+        ITEM_MACH_BIKE, ITEM_POKEBLOCK_CASE, ITEM_WAILMER_PAIL, ITEM_POWDER_JAR,
+        ITEM_SS_TICKET, ITEM_DEVON_GOODS, ITEM_GO_GOGGLES, ITEM_DEVON_SCOPE,
+    };
+    ClearBag();
+    for (u32 i = 0; i < ARRAY_COUNT(oldKeys); i++)
+        EXPECT(AddBagItem(oldKeys[i], 1));
+    struct ItemSlot before[BAG_KEYITEMS_COUNT];
+    memcpy(before, gSaveBlock1Ptr->bag.keyItems, sizeof(before));
+    GiveFrontierStarterInventory();
+    EXPECT_EQ(memcmp(before, gSaveBlock1Ptr->bag.keyItems, sizeof(before)), 0);
+    for (u32 i = 0; i < ARRAY_COUNT(sFusionItems); i++)
+        EXPECT(!CheckBagHasItem(sFusionItems[i], 1));
+    EXPECT(RemoveBagItem(ITEM_SS_TICKET, 1));
+    GiveFrontierStarterInventory();
+    EXPECT_EQ(CountTotalItemQuantityInBag(ITEM_DNA_SPLICERS), 1);
+    for (u32 i = 1; i < ARRAY_COUNT(sFusionItems); i++)
+        EXPECT(!CheckBagHasItem(sFusionItems[i], 1));
+    for (u32 i = 0; i < ARRAY_COUNT(oldKeys); i++)
+        if (oldKeys[i] != ITEM_SS_TICKET)
+            EXPECT_EQ(CountTotalItemQuantityInBag(oldKeys[i]), 1);
 }
 
 TEST("Bag redesign: all Mega Stones and Z-Crystals route to the stone pocket")
@@ -100,6 +182,8 @@ TEST("Bag redesign: stones and berries keep a single stack capped at 999")
 TEST("Bag redesign: new pockets survive temporary bag backup and key rotation")
 {
     ClearBag();
+    for (u32 i = 0; i < ARRAY_COUNT(sFusionItems); i++)
+        EXPECT(AddBagItem(sFusionItems[i], 1));
     EXPECT(AddBagItem(ITEM_GENGARITE, 2));
     EXPECT(AddBagItem(ITEM_NORMALIUM_Z, 3));
     EXPECT(AddBagItem(ITEM_POTION, 4));
@@ -112,4 +196,6 @@ TEST("Bag redesign: new pockets survive temporary bag backup and key rotation")
     EXPECT_EQ(CountTotalItemQuantityInBag(ITEM_NORMALIUM_Z), 3);
     EXPECT_EQ(CountTotalItemQuantityInBag(ITEM_POTION), 4);
     EXPECT_EQ(CountTotalItemQuantityInBag(ITEM_CHERI_BERRY), 5);
+    for (u32 i = 0; i < ARRAY_COUNT(sFusionItems); i++)
+        EXPECT_EQ(CountTotalItemQuantityInBag(sFusionItems[i]), 1);
 }

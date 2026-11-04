@@ -13,6 +13,10 @@ static const enum Item sStarterKeyItems[] =
     ITEM_POKEBLOCK_CASE,
     ITEM_WAILMER_PAIL,
     ITEM_POWDER_JAR,
+    ITEM_DNA_SPLICERS,
+    ITEM_N_SOLARIZER,
+    ITEM_N_LUNARIZER,
+    ITEM_REINS_OF_UNITY,
 };
 
 STATIC_ASSERT(ARRAY_COUNT(sStarterKeyItems) <= BAG_KEYITEMS_COUNT, StarterKeyItemsFit);
