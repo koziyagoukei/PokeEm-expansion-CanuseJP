@@ -59,6 +59,7 @@ static const struct FrontierMusicTrack sTracks[] =
     {MUS_VS_COLOSSEUM, _("{JPN}コロシアム トレーナー")},
     {MUS_VS_COLOSSEUM_ADMIN, _("{JPN}コロシアム かんぶ")},
     {MUS_VS_COLOSSEUM_2, _("{JPN}コロシアム トレーナー2")},
+    {MUS_VS_PMD_RAYQUAZA, _("{JPN}きゅうじょたい レックウザ")},
 };
 
 static const u16 sRescuedFlags[] =
@@ -297,7 +298,6 @@ static void PrintCatalogControls(s32 index)
         : sPreviewActive && sPreviewSong == sTracks[index].song ? sText_StopPreviewControls : sText_PreviewControls;
     FillWindowPixelRect(sCatalog->windowId, PIXEL_FILL(1), 0, 82, 208, 14);
     AddTextPrinterParameterized(sCatalog->windowId, FONT_SMALL, text, 4, 82, TEXT_SKIP_DRAW, NULL);
-    CopyWindowToVram(sCatalog->windowId, COPYWIN_GFX);
 }
 
 static void PrintTrackStatus(u8 windowId, u32 index, u8 y)
@@ -334,11 +334,16 @@ static void Task_Catalog(u8 taskId)
                 FrontierMusic_Preview(sTracks[selected].song);
             PlaySE(SE_SELECT);
             PrintCatalogControls(selected);
+            CopyWindowToVram(sCatalog->windowId, COPYWIN_GFX);
         }
         return;
     }
+    u16 previousScroll = sCatalog->scroll;
     s32 index = ListMenu_ProcessInput(sCatalog->listTaskId);
     ListMenuGetScrollAndRow(sCatalog->listTaskId, &sCatalog->scroll, &sCatalog->row);
+    // Pixel scrolling also moves the shared footer into the item rows.
+    if (sCatalog->scroll != previousScroll)
+        RedrawListMenu(sCatalog->listTaskId);
     if (index == LIST_NOTHING_CHOSEN)
         return;
     PlaySE(SE_SELECT);
