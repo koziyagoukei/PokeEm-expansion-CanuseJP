@@ -6,6 +6,7 @@
 #include "international_string_util.h"
 #include "list_menu.h"
 #include "malloc.h"
+#include "main.h"
 #include "map_name_popup.h"
 #include "menu.h"
 #include "menu_helpers.h"
@@ -55,6 +56,7 @@ static const struct FrontierMusicTrack sTracks[] =
     {MUS_C_VS_LEGEND_BEAST, _("{JPN}スイクンたち")},
     {MUS_POKEVIRUS_RELEASE, _("{JPN}かいほうせん")},
     {MUS_POKEVIRUS_FINAL, _("{JPN}ヒトポケルス")},
+    {MUS_VS_COLOSSEUM, _("{JPN}コロシアム トレーナー")},
 };
 
 static const u16 sRescuedFlags[] =
@@ -69,6 +71,13 @@ static const u8 sText_Random[] = _("{JPN}かいほうずみから ランダム")
 static const u8 sText_Price[] = _("{ENG}5BP");
 static const u8 sText_Unlocked[] = _("{JPN}ずみ");
 static const u8 sText_Selected[] = _("{JPN}せってい");
+static const u8 sText_PreviewControls[] = _("{JPN}SELECT:しちょう A:けってい B:もどる");
+static const u8 sText_StopPreviewControls[] = _("{JPN}SELECT:ていし A:けってい B:もどる");
+static const u8 sText_CancelControls[] = _("{JPN}A:もどる B:もどる");
+
+static EWRAM_DATA bool8 sPreviewActive = FALSE;
+static EWRAM_DATA u16 sPreviewSong = 0;
+static EWRAM_DATA u16 sPreviewReturnSong = 0;
 
 struct FrontierMusicCatalog
 {
@@ -255,6 +264,40 @@ void FrontierMusic_UnlockSelection(void)
     gSpecialVar_Result = FrontierMusic_Unlock(gSpecialVar_0x8005);
 }
 
+bool8 FrontierMusic_Preview(u16 song)
+{
+    if (!FrontierMusic_IsAvailable(song))
+        return FALSE;
+    if (!sPreviewActive)
+    {
+        sPreviewReturnSong = GetCurrentMapMusic();
+        sPreviewActive = TRUE;
+    }
+    sPreviewSong = song;
+    // Leave the map music state and the saved battle preference untouched.
+    PlayBGM(song);
+    return TRUE;
+}
+
+void FrontierMusic_StopPreview(void)
+{
+    if (!sPreviewActive)
+        return;
+    PlayBGM(sPreviewReturnSong);
+    sPreviewActive = FALSE;
+    sPreviewSong = MUS_DUMMY;
+    sPreviewReturnSong = MUS_DUMMY;
+}
+
+static void PrintCatalogControls(s32 index)
+{
+    const u8 *text = index < 0 || index >= ARRAY_COUNT(sTracks) ? sText_CancelControls
+        : sPreviewActive && sPreviewSong == sTracks[index].song ? sText_StopPreviewControls : sText_PreviewControls;
+    FillWindowPixelRect(sCatalog->windowId, PIXEL_FILL(1), 0, 82, 208, 14);
+    AddTextPrinterParameterized(sCatalog->windowId, FONT_SMALL, text, 4, 82, TEXT_SKIP_DRAW, NULL);
+    CopyWindowToVram(sCatalog->windowId, COPYWIN_GFX);
+}
+
 static void PrintTrackStatus(u8 windowId, u32 index, u8 y)
 {
     const u8 *text;
@@ -271,10 +314,27 @@ static void CatalogMoveCursor(s32 index, bool8 onInit, struct ListMenu *list)
 {
     if (!onInit)
         PlaySE(SE_SELECT);
+    PrintCatalogControls(index);
 }
 
 static void Task_Catalog(u8 taskId)
 {
+    if (JOY_NEW(SELECT_BUTTON))
+    {
+        u16 item;
+        ListMenuGetCurrentItemArrayId(sCatalog->listTaskId, &item);
+        s32 selected = sCatalog->items[item].id;
+        if (selected >= 0 && selected < ARRAY_COUNT(sTracks))
+        {
+            if (sPreviewActive && sPreviewSong == sTracks[selected].song)
+                FrontierMusic_StopPreview();
+            else
+                FrontierMusic_Preview(sTracks[selected].song);
+            PlaySE(SE_SELECT);
+            PrintCatalogControls(selected);
+        }
+        return;
+    }
     s32 index = ListMenu_ProcessInput(sCatalog->listTaskId);
     ListMenuGetScrollAndRow(sCatalog->listTaskId, &sCatalog->scroll, &sCatalog->row);
     if (index == LIST_NOTHING_CHOSEN)
@@ -286,6 +346,7 @@ static void Task_Catalog(u8 taskId)
         gSpecialVar_0x8005 = sTracks[index].song;
         StringCopy(gStringVar1, sTracks[index].name);
     }
+    FrontierMusic_StopPreview();
     DestroyListMenuTask(sCatalog->listTaskId, NULL, NULL);
     RemoveScrollIndicatorArrowPair(sCatalog->arrowsTaskId);
     ClearStdWindowAndFrameToTransparent(sCatalog->windowId, TRUE);
@@ -315,6 +376,7 @@ void FrontierMusic_OpenCatalog(void)
     sCatalog = AllocZeroed(sizeof(*sCatalog));
     if (sCatalog == NULL)
         return;
+    FrontierMusic_StopPreview();
     FrontierMusic_EnsureSaveData();
     HideMapNamePopUpWindow();
     LoadMessageBoxAndBorderGfx();
@@ -335,7 +397,7 @@ void FrontierMusic_OpenCatalog(void)
     list.moveCursorFunc = CatalogMoveCursor;
     list.itemPrintFunc = PrintTrackStatus;
     list.totalItems = count;
-    list.maxShowed = 6;
+    list.maxShowed = 5;
     list.windowId = sCatalog->windowId;
     list.item_X = 8;
     list.upText_Y = 1;
@@ -346,7 +408,7 @@ void FrontierMusic_OpenCatalog(void)
     list.scrollMultiple = LIST_MULTIPLE_SCROLL_DPAD;
     sCatalog->listTaskId = ListMenuInit(&list, 0, 0);
     sCatalog->arrowsTaskId = AddScrollIndicatorArrowPairParameterized(
-        SCROLL_ARROW_UP, 228, 32, 132, list.totalItems - list.maxShowed, 0xFCE0, 0xFCE0, &sCatalog->scroll);
+        SCROLL_ARROW_UP, 228, 40, 104, list.totalItems - list.maxShowed, 0xFCE0, 0xFCE0, &sCatalog->scroll);
     CopyWindowToVram(sCatalog->windowId, COPYWIN_FULL);
     gTasks[taskId].func = Task_Catalog;
 }

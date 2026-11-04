@@ -11,6 +11,9 @@ void FrontierMusic_Earn(bool32 finalBattle);
 u16 FrontierMusic_Unlock(u16 song);
 u16 FrontierMusic_SetMode(u8 mode, u16 song);
 u16 FrontierMusic_ChooseBattleBGM(u16 defaultSong);
+// Temporary audition only; never unlocks a song or changes the battle preference.
+bool8 FrontierMusic_Preview(u16 song);
+void FrontierMusic_StopPreview(void);
 void FrontierMusic_OpenCatalog(void);
 void FrontierMusic_ApplySelection(void);
 void FrontierMusic_UnlockSelection(void);

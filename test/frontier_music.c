@@ -1,18 +1,29 @@
 #include "global.h"
 #include "battle.h"
 #include "battle_setup.h"
+#include "bg.h"
+#include "dma3.h"
 #include "event_data.h"
 #include "frontier_music.h"
+#include "m4a.h"
+#include "main.h"
+#include "malloc.h"
+#include "menu.h"
 #include "pokemon.h"
 #include "random.h"
 #include "sound.h"
+#include "sprite.h"
 #include "string_util.h"
 #include "task.h"
+#include "text.h"
 #include "util.h"
+#include "window.h"
 #include "test/test.h"
 #include "constants/flags.h"
 #include "constants/songs.h"
 #include "constants/trainers.h"
+
+extern const struct SongHeader mus_vs_colosseum;
 
 static const u32 sFacilities[] =
 {
@@ -22,6 +33,7 @@ static const u32 sFacilities[] =
 
 static void ResetMusic(void)
 {
+    FrontierMusic_StopPreview();
     memset(&gSaveBlock3Ptr->frontierMusic, 0, sizeof(struct FrontierMusicSave));
     FrontierMusic_EnsureSaveData();
     gSaveBlock2Ptr->frontier.battlePoints = 100;
@@ -44,7 +56,7 @@ TEST("Frontier music: extension is append-only and old-save garbage initializes 
     EXPECT_EQ(gSaveBlock3Ptr->frontierMusic.selectedSong, MUS_DUMMY);
 }
 
-TEST("Frontier music: all 23 distinct battle songs cost five BP each")
+TEST("Frontier music: all catalog battle songs cost five BP each")
 {
     ResetMusic();
     gSaveBlock3Ptr->frontierMusic.earned = FRONTIER_MUSIC_EARNED_RELEASE | FRONTIER_MUSIC_EARNED_FINAL;
@@ -53,7 +65,7 @@ TEST("Frontier music: all 23 distinct battle songs cost five BP each")
         u16 song = FrontierMusic_GetSong(i);
         for (u32 j = 0; j < i; j++)
             EXPECT_NE(song, FrontierMusic_GetSong(j));
-        EXPECT((song >= START_MUS && song <= END_MUS) || song == MUS_POKEVIRUS_RELEASE || song == MUS_POKEVIRUS_FINAL);
+        EXPECT((song >= START_MUS && song <= END_MUS) || song == MUS_POKEVIRUS_RELEASE || song == MUS_POKEVIRUS_FINAL || song == MUS_VS_COLOSSEUM);
         EXPECT(!FrontierMusic_IsUnlocked(song));
         gSaveBlock2Ptr->frontier.battlePoints = 5;
         EXPECT_EQ(FrontierMusic_Unlock(song), FRONTIER_MUSIC_OK);
@@ -364,4 +376,173 @@ TEST("Frontier music: saves that already won those battles get the story themes 
     FlagSet(FLAG_STORY_POKEVIRUS_FADED);
     EXPECT(FrontierMusic_IsAvailable(MUS_POKEVIRUS_FINAL));
     ClearStoryProgress();
+}
+
+TEST("Frontier music: Colosseum appends a valid eight-track BGM without changing old catalog indices")
+{
+    EXPECT_EQ(MUS_VS_COLOSSEUM, 614);
+    EXPECT(gSongTable[MUS_VS_COLOSSEUM].header == &mus_vs_colosseum);
+    EXPECT_EQ(gSongTable[MUS_VS_COLOSSEUM].ms, 0);
+    EXPECT_EQ(mus_vs_colosseum.trackCount, 8);
+    EXPECT_EQ(FrontierMusic_GetSong(21), MUS_POKEVIRUS_RELEASE);
+    EXPECT_EQ(FrontierMusic_GetSong(22), MUS_POKEVIRUS_FINAL);
+    EXPECT_EQ(FrontierMusic_GetSong(23), MUS_VS_COLOSSEUM);
+    EXPECT_EQ(mus_vs_colosseum.tone[6].type & 7, 3);
+    EXPECT_EQ(mus_vs_colosseum.tone[7].type & 7, 2);
+    EXPECT_EQ(mus_vs_colosseum.tone[8].type & 7, 4);
+}
+
+TEST("Frontier music: Colosseum is offered without story requirements and supports fixed and random playback")
+{
+    ResetMusic();
+    ClearStoryProgress();
+    EXPECT(FrontierMusic_IsAvailable(MUS_VS_COLOSSEUM));
+    EXPECT_EQ(FrontierMusic_Unlock(MUS_VS_COLOSSEUM), FRONTIER_MUSIC_OK);
+    EXPECT_EQ(gSaveBlock2Ptr->frontier.battlePoints, 95);
+    EXPECT_EQ(FrontierMusic_SetMode(FRONTIER_MUSIC_FIXED, MUS_VS_COLOSSEUM), FRONTIER_MUSIC_OK);
+    FrontierMusic_EnsureSaveData();
+    EXPECT(FrontierMusic_IsUnlocked(MUS_VS_COLOSSEUM));
+    gBattleTypeFlags = BATTLE_TYPE_TRAINER | BATTLE_TYPE_BATTLE_TOWER;
+    EXPECT_EQ(FrontierMusic_ChooseBattleBGM(MUS_VS_TRAINER), MUS_VS_COLOSSEUM);
+    EXPECT_EQ(FrontierMusic_SetMode(FRONTIER_MUSIC_RANDOM, 0), FRONTIER_MUSIC_OK);
+    EXPECT_EQ(FrontierMusic_ChooseBattleBGM(MUS_VS_TRAINER), MUS_VS_COLOSSEUM);
+    TRAINER_BATTLE_PARAM.opponentA = TRAINER_FRONTIER_BRAIN;
+    EXPECT_EQ(FrontierMusic_ChooseBattleBGM(MUS_VS_TRAINER), MUS_VS_FRONTIER_BRAIN);
+}
+
+TEST("Frontier music: expanding the catalog preserves existing unlocks and fixed selection")
+{
+    ResetMusic();
+    gSaveBlock3Ptr->frontierMusic.unlocked = (1u << 23) - 1;
+    gSaveBlock3Ptr->frontierMusic.selectedSong = MUS_RG_VS_DEOXYS;
+    gSaveBlock3Ptr->frontierMusic.mode = FRONTIER_MUSIC_FIXED;
+    gSaveBlock3Ptr->frontierMusic.checksum = CalcCRC16((const u8 *)&gSaveBlock3Ptr->frontierMusic,
+                                                     offsetof(struct FrontierMusicSave, checksum));
+    FrontierMusic_EnsureSaveData();
+    EXPECT_EQ(gSaveBlock3Ptr->frontierMusic.unlocked, (1u << 23) - 1);
+    EXPECT_EQ(gSaveBlock3Ptr->frontierMusic.selectedSong, MUS_RG_VS_DEOXYS);
+    EXPECT_EQ(gSaveBlock3Ptr->frontierMusic.mode, FRONTIER_MUSIC_FIXED);
+    EXPECT(!FrontierMusic_IsUnlocked(MUS_VS_COLOSSEUM));
+}
+
+TEST("Frontier music: Colosseum's compiled sequence keeps all eight tracks alive across two loops")
+{
+    m4aSongNumStart(MUS_VS_COLOSSEUM);
+    for (u32 frame = 0; frame < 9000; frame++)
+        MPlayMain(&gMPlayInfo_BGM);
+    EXPECT(gMPlayInfo_BGM.songHeader == &mus_vs_colosseum);
+    EXPECT_GT(gMPlayInfo_BGM.clock, 2 * 2880);
+    EXPECT_EQ(gMPlayInfo_BGM.status & MUSICPLAYER_STATUS_TRACK, 0xFF);
+    for (u32 track = 0; track < 8; track++)
+        EXPECT(gMPlayInfo_BGM.tracks[track].flags & MPT_FLG_EXIST);
+    m4aMPlayStop(&gMPlayInfo_BGM);
+}
+
+TEST("Frontier music: previewing a locked song is free and never changes the saved preference")
+{
+    struct FrontierMusicSave before;
+    ResetMusic();
+    ClearStoryProgress();
+    FrontierMusic_Unlock(MUS_RG_VS_DEOXYS);
+    FrontierMusic_SetMode(FRONTIER_MUSIC_FIXED, MUS_RG_VS_DEOXYS);
+    PlayNewMapMusic(MUS_B_FRONTIER);
+    MapMusicMain();
+    MapMusicMain();
+    before = gSaveBlock3Ptr->frontierMusic;
+    gSaveBlock2Ptr->frontier.battlePoints = 0;
+    EXPECT(FrontierMusic_Preview(MUS_VS_COLOSSEUM));
+    EXPECT(gMPlayInfo_BGM.songHeader == &mus_vs_colosseum);
+    EXPECT_EQ(GetCurrentMapMusic(), MUS_B_FRONTIER);
+    EXPECT_EQ(gSaveBlock2Ptr->frontier.battlePoints, 0);
+    EXPECT_EQ(memcmp(&before, &gSaveBlock3Ptr->frontierMusic, sizeof(before)), 0);
+    FrontierMusic_StopPreview();
+    EXPECT(gMPlayInfo_BGM.songHeader == gSongTable[MUS_B_FRONTIER].header);
+    EXPECT_EQ(GetCurrentMapMusic(), MUS_B_FRONTIER);
+    FrontierMusic_StopPreview();
+    EXPECT(gMPlayInfo_BGM.songHeader == gSongTable[MUS_B_FRONTIER].header);
+}
+
+TEST("Frontier music: catalog preview controls fit the footer")
+{
+    static const u8 preview[] = _("{JPN}SELECT:しちょう A:けってい B:もどる");
+    static const u8 stop[] = _("{JPN}SELECT:ていし A:けってい B:もどる");
+    EXPECT_LE(GetStringWidth(FONT_SMALL, preview, 0), 200);
+    EXPECT_LE(GetStringWidth(FONT_SMALL, stop, 0), 200);
+}
+
+TEST("Frontier music: switching preview songs retains the original map music and respects story locks")
+{
+    struct FrontierMusicSave before;
+    ResetMusic();
+    ClearStoryProgress();
+    PlayNewMapMusic(MUS_B_FRONTIER);
+    MapMusicMain();
+    MapMusicMain();
+    before = gSaveBlock3Ptr->frontierMusic;
+    EXPECT(!FrontierMusic_Preview(MUS_NONE));
+    EXPECT(!FrontierMusic_Preview(MUS_POKEVIRUS_FINAL));
+    EXPECT(FrontierMusic_Preview(MUS_VS_COLOSSEUM));
+    EXPECT(!FrontierMusic_Preview(MUS_POKEVIRUS_RELEASE));
+    EXPECT(gMPlayInfo_BGM.songHeader == &mus_vs_colosseum);
+    EXPECT(FrontierMusic_Preview(MUS_RG_VS_TRAINER));
+    EXPECT(gMPlayInfo_BGM.songHeader == gSongTable[MUS_RG_VS_TRAINER].header);
+    EXPECT_EQ(memcmp(&before, &gSaveBlock3Ptr->frontierMusic, sizeof(before)), 0);
+    FrontierMusic_StopPreview();
+    EXPECT(gMPlayInfo_BGM.songHeader == gSongTable[MUS_B_FRONTIER].header);
+}
+
+static void CatalogInput(u16 keys)
+{
+    gMain.newKeys = gMain.newAndRepeatedKeys = keys;
+    RunTasks();
+    while (IsDma3ManagerBusyWithBgCopy())
+        ProcessDma3Requests();
+    gMain.newKeys = gMain.newAndRepeatedKeys = 0;
+}
+
+TEST("Frontier music: SELECT previews and stops in the catalog and both A and B restore map music")
+{
+    u16 closeButton;
+    struct FrontierMusicSave before;
+    static const struct BgTemplate background = {0, 0, 24, 0, 0, 0, 0};
+    PARAMETRIZE { closeButton = A_BUTTON; }
+    PARAMETRIZE { closeButton = B_BUTTON; }
+    ResetMusic();
+    ClearStoryProgress();
+    before = gSaveBlock3Ptr->frontierMusic;
+    ResetTasks();
+    ResetSpriteData();
+    FreeAllSpritePalettes();
+    ResetBgsAndClearDma3BusyFlags(0);
+    InitBgsFromTemplates(0, &background, 1);
+    SetBgTilemapBuffer(0, AllocZeroed(0x800));
+    InitStandardTextBoxWindows();
+    InitTextBoxGfxAndPrinters();
+    PlayNewMapMusic(MUS_B_FRONTIER);
+    MapMusicMain();
+    MapMusicMain();
+    gMain.newKeys = gMain.newAndRepeatedKeys = 0;
+    FrontierMusic_OpenCatalog();
+    CatalogInput(0);
+    CatalogInput(SELECT_BUTTON);
+    EXPECT(gMPlayInfo_BGM.songHeader == gSongTable[MUS_VS_TRAINER].header);
+    CatalogInput(SELECT_BUTTON);
+    EXPECT(gMPlayInfo_BGM.songHeader == gSongTable[MUS_B_FRONTIER].header);
+    CatalogInput(DPAD_DOWN);
+    CatalogInput(SELECT_BUTTON);
+    EXPECT(gMPlayInfo_BGM.songHeader == gSongTable[MUS_VS_WILD].header);
+    CatalogInput(closeButton);
+    EXPECT(gMPlayInfo_BGM.songHeader == gSongTable[MUS_B_FRONTIER].header);
+    EXPECT_EQ(GetCurrentMapMusic(), MUS_B_FRONTIER);
+    EXPECT_EQ(gSpecialVar_Result, closeButton == A_BUTTON);
+    if (closeButton == A_BUTTON)
+        EXPECT_EQ(gSpecialVar_0x8005, MUS_VS_WILD);
+    EXPECT_EQ(memcmp(&before, &gSaveBlock3Ptr->frontierMusic, sizeof(before)), 0);
+    EXPECT_EQ(gSaveBlock2Ptr->frontier.battlePoints, 100);
+    for (u32 task = 0; task < NUM_TASKS; task++)
+        EXPECT(!gTasks[task].isActive);
+    FreeAllWindowBuffers();
+    void *tilemap = GetBgTilemapBuffer(0);
+    UnsetBgTilemapBuffer(0);
+    Free(tilemap);
 }
