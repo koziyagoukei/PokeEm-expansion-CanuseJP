@@ -2,7 +2,7 @@
 #define GUARD_CONSTANTS_FRONTIER_MUSIC_H
 
 #define FRONTIER_MUSIC_PRICE 5
-#define FRONTIER_MUSIC_TRACK_COUNT 25
+#define FRONTIER_MUSIC_TRACK_COUNT 26
 
 // Story tracks offered once their battle has been won (FrontierMusicSave.earned).
 #define FRONTIER_MUSIC_EARNED_RELEASE (1 << 0)

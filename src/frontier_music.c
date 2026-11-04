@@ -58,6 +58,7 @@ static const struct FrontierMusicTrack sTracks[] =
     {MUS_POKEVIRUS_FINAL, _("{JPN}ヒトポケルス")},
     {MUS_VS_COLOSSEUM, _("{JPN}コロシアム トレーナー")},
     {MUS_VS_COLOSSEUM_ADMIN, _("{JPN}コロシアム かんぶ")},
+    {MUS_VS_COLOSSEUM_2, _("{JPN}コロシアム トレーナー2")},
 };
 
 static const u16 sRescuedFlags[] =

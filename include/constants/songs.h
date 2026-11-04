@@ -554,6 +554,7 @@
 #define MUS_POKEVIRUS_FINAL         613
 #define MUS_VS_COLOSSEUM            614
 #define MUS_VS_COLOSSEUM_ADMIN      615
+#define MUS_VS_COLOSSEUM_2          616
 
 #define MUS_ROUTE118                0x7FFF  // Map is split into 2 music sections. controlled by GetCurrLocationDefaultMusic().
 
