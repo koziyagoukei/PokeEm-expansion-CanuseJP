@@ -71,6 +71,7 @@ static const struct FrontierMusicTrack sTracks[] =
     {MUS_VS_HGSS_HO_OH, _("{JPN}HGSS ホウオウ"), FRONTIER_MUSIC_CATEGORY_JOHTO},
     {MUS_VS_HGSS_LUGIA, _("{JPN}HGSS ルギア"), FRONTIER_MUSIC_CATEGORY_JOHTO},
     {MUS_VS_HGSS_CHAMPION, _("{JPN}HGSS チャンピオン"), FRONTIER_MUSIC_CATEGORY_JOHTO},
+    {MUS_VS_HGSS_ROCKET, _("{JPN}HGSS ロケットだん"), FRONTIER_MUSIC_CATEGORY_JOHTO},
 };
 
 static const u16 sRescuedFlags[] =

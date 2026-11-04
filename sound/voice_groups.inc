@@ -13,6 +13,7 @@
 .include "sound/voicegroups/vs_hgss_ho_oh.inc"
 .include "sound/voicegroups/vs_hgss_lugia.inc"
 .include "sound/voicegroups/vs_hgss_champion.inc"
+.include "sound/voicegroups/vs_hgss_rocket.inc"
 
 @ drumsets
 .include "sound/voicegroups/drumsets/rs.inc"

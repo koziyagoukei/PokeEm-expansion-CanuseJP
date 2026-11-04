@@ -34,6 +34,7 @@ extern const struct SongHeader mus_vs_pmd_dialga;
 extern const struct SongHeader mus_vs_hgss_ho_oh;
 extern const struct SongHeader mus_vs_hgss_lugia;
 extern const struct SongHeader mus_vs_hgss_champion;
+extern const struct SongHeader mus_vs_hgss_rocket;
 
 static const u32 sFacilities[] =
 {
@@ -80,7 +81,7 @@ TEST("Frontier music: all catalog battle songs cost five BP each")
             || song == MUS_VS_COLOSSEUM || song == MUS_VS_COLOSSEUM_ADMIN || song == MUS_VS_COLOSSEUM_2
             || song == MUS_VS_PMD_RAYQUAZA || song == MUS_VS_PMD_BOSS || song == MUS_VS_ZINNIA
             || song == MUS_VS_PMD_DIALGA || song == MUS_VS_HGSS_HO_OH || song == MUS_VS_HGSS_LUGIA
-            || song == MUS_VS_HGSS_CHAMPION);
+            || song == MUS_VS_HGSS_CHAMPION || song == MUS_VS_HGSS_ROCKET);
         EXPECT(!FrontierMusic_IsUnlocked(song));
         gSaveBlock2Ptr->frontier.battlePoints = 5;
         EXPECT_EQ(FrontierMusic_Unlock(song), FRONTIER_MUSIC_OK);
@@ -823,7 +824,7 @@ TEST("Frontier music: every song has exactly one work category without reindexin
         counts[category]++;
     }
     EXPECT_EQ(counts[FRONTIER_MUSIC_CATEGORY_KANTO], 8);
-    EXPECT_EQ(counts[FRONTIER_MUSIC_CATEGORY_JOHTO], 3);
+    EXPECT_EQ(counts[FRONTIER_MUSIC_CATEGORY_JOHTO], 4);
     EXPECT_EQ(counts[FRONTIER_MUSIC_CATEGORY_HOENN], 14);
     EXPECT_EQ(counts[FRONTIER_MUSIC_CATEGORY_ORRE], 3);
     EXPECT_EQ(counts[FRONTIER_MUSIC_CATEGORY_DUNGEON], 3);
@@ -1147,6 +1148,93 @@ TEST("Frontier music: HGSS Champion previews freely and unlocks in the extra wor
     EXPECT_EQ(FrontierMusic_ChooseBattleBGM(MUS_VS_TRAINER), MUS_VS_FRONTIER_BRAIN);
 }
 
+TEST("Frontier music: HGSS Rocket preserves nine compiled tracks and bends through two loops")
+{
+    static const u8 drumKeys[] = {36, 38, 41, 43, 45, 47, 48, 55};
+    const struct ToneData *kit = (const void *)mus_vs_hgss_rocket.tone[16].wav;
+    bool32 bent = FALSE;
+    bool32 wideBend = FALSE;
+    EXPECT_EQ(MUS_VS_HGSS_ROCKET, 624);
+    EXPECT_EQ(FrontierMusic_GetSong(33), MUS_VS_HGSS_ROCKET);
+    EXPECT_EQ(FrontierMusic_GetCategory(MUS_VS_HGSS_ROCKET), FRONTIER_MUSIC_CATEGORY_JOHTO);
+    EXPECT(gSongTable[MUS_VS_HGSS_ROCKET].header == &mus_vs_hgss_rocket);
+    EXPECT_EQ(mus_vs_hgss_rocket.trackCount, 9);
+    for (u32 key = 0; key < ARRAY_COUNT(drumKeys); key++)
+        EXPECT_EQ(kit[drumKeys[key]].type & TONEDATA_TYPE_CGB, 0);
+    EXPECT_EQ(mus_vs_hgss_rocket.tone[11].type & 7, 3);
+    EXPECT_EQ(mus_vs_hgss_rocket.tone[12].type & 7, 2);
+    EXPECT_EQ(mus_vs_hgss_rocket.tone[13].type & 7, 1);
+    EXPECT_EQ(mus_vs_hgss_rocket.tone[14].type & 7, 4);
+    m4aSongNumStart(MUS_VS_HGSS_ROCKET);
+    for (u32 frame = 0; frame < 15000; frame++)
+    {
+        MPlayMain(&gMPlayInfo_BGM);
+        bent |= gMPlayInfo_BGM.tracks[2].bend != 0;
+        wideBend |= gMPlayInfo_BGM.tracks[2].bendRange == 12;
+    }
+    EXPECT(bent);
+    EXPECT(wideBend);
+    EXPECT_GT(gMPlayInfo_BGM.clock, 2400 + 2 * 1920);
+    EXPECT_EQ(gMPlayInfo_BGM.status & MUSICPLAYER_STATUS_TRACK, 0x1FF);
+    m4aMPlayStop(&gMPlayInfo_BGM);
+}
+
+TEST("Frontier music: HGSS Rocket preview and purchase preserve Champion unlocks and save layout")
+{
+    u8 prefix[588];
+    struct FrontierMusicExtraSave extra;
+    ResetMusic();
+    ClearStoryProgress();
+    EXPECT_EQ(FrontierMusic_Unlock(MUS_VS_HGSS_CHAMPION), FRONTIER_MUSIC_OK);
+    memcpy(prefix, gSaveBlock3Ptr, sizeof(prefix));
+    extra = gSaveBlock3Ptr->frontierMusicExtra;
+    FrontierMusic_EnsureSaveData();
+    EXPECT_EQ(memcmp(prefix, gSaveBlock3Ptr, sizeof(prefix)), 0);
+    EXPECT(!FrontierMusic_IsUnlocked(MUS_VS_HGSS_ROCKET));
+    PlayNewMapMusic(MUS_B_FRONTIER);
+    MapMusicMain();
+    MapMusicMain();
+    gSaveBlock2Ptr->frontier.battlePoints = 0;
+    EXPECT(FrontierMusic_Preview(MUS_VS_HGSS_ROCKET));
+    EXPECT(gMPlayInfo_BGM.songHeader == &mus_vs_hgss_rocket);
+    FrontierMusic_StopPreview();
+    EXPECT(gMPlayInfo_BGM.songHeader == gSongTable[MUS_B_FRONTIER].header);
+    EXPECT_EQ(memcmp(prefix, gSaveBlock3Ptr, sizeof(prefix)), 0);
+    EXPECT_EQ(memcmp(&extra, &gSaveBlock3Ptr->frontierMusicExtra, sizeof(extra)), 0);
+    gSaveBlock2Ptr->frontier.battlePoints = 5;
+    EXPECT_EQ(FrontierMusic_Unlock(MUS_VS_HGSS_ROCKET), FRONTIER_MUSIC_OK);
+    EXPECT_EQ(gSaveBlock2Ptr->frontier.battlePoints, 0);
+    EXPECT_EQ(memcmp(prefix, gSaveBlock3Ptr, sizeof(prefix)), 0);
+    EXPECT_EQ(gSaveBlock3Ptr->frontierMusicExtra.unlocked[0], 3);
+    EXPECT(FrontierMusic_IsUnlocked(MUS_VS_HGSS_CHAMPION));
+    EXPECT(FrontierMusic_IsUnlocked(MUS_VS_HGSS_ROCKET));
+    extra = gSaveBlock3Ptr->frontierMusicExtra;
+    memset(&gSaveBlock3Ptr->frontierMusicExtra, 0, sizeof(extra));
+    gSaveBlock3Ptr->frontierMusicExtra = extra;
+    FrontierMusic_EnsureSaveData();
+    EXPECT_EQ(memcmp(&extra, &gSaveBlock3Ptr->frontierMusicExtra, sizeof(extra)), 0);
+    EXPECT_EQ(FrontierMusic_SetMode(FRONTIER_MUSIC_FIXED, MUS_VS_HGSS_ROCKET), FRONTIER_MUSIC_OK);
+    gBattleTypeFlags = BATTLE_TYPE_TRAINER | BATTLE_TYPE_BATTLE_TOWER;
+    EXPECT_EQ(FrontierMusic_ChooseBattleBGM(MUS_VS_TRAINER), MUS_VS_HGSS_ROCKET);
+    TRAINER_BATTLE_PARAM.opponentA = TRAINER_FRONTIER_BRAIN;
+    EXPECT_EQ(FrontierMusic_ChooseBattleBGM(MUS_VS_TRAINER), MUS_VS_FRONTIER_BRAIN);
+}
+
+TEST("Frontier music: HGSS Rocket works as the only random extra-word song without advancing primary RNG")
+{
+    ResetMusic();
+    ClearStoryProgress();
+    EXPECT_EQ(FrontierMusic_Unlock(MUS_VS_HGSS_ROCKET), FRONTIER_MUSIC_OK);
+    EXPECT_EQ(gSaveBlock3Ptr->frontierMusic.unlocked, 0);
+    EXPECT_EQ(gSaveBlock3Ptr->frontierMusicExtra.unlocked[0], 2);
+    EXPECT_EQ(FrontierMusic_SetMode(FRONTIER_MUSIC_RANDOM, 0), FRONTIER_MUSIC_OK);
+    gBattleTypeFlags = BATTLE_TYPE_TRAINER | BATTLE_TYPE_BATTLE_TOWER;
+    rng_value_t rng = gRngValue;
+    for (u32 i = 0; i < 32; i++)
+        EXPECT_EQ(FrontierMusic_ChooseBattleBGM(MUS_VS_TRAINER), MUS_VS_HGSS_ROCKET);
+    EXPECT_EQ(memcmp(&gRngValue, &rng, sizeof(rng)), 0);
+}
+
 TEST("Frontier music: extra flags migrate old saves without moving any legacy bytes")
 {
     u8 prefix[588];
@@ -1207,10 +1295,11 @@ TEST("Frontier music: future extra bits are masked without shifting by a whole w
         extra->unlocked[i] = 0xFFFFFFFFu;
     extra->checksum = CalcCRC16((const u8 *)extra, offsetof(struct FrontierMusicExtraSave, checksum));
     FrontierMusic_EnsureSaveData();
-    EXPECT_EQ(extra->unlocked[0], 1);
+    EXPECT_EQ(extra->unlocked[0], (1u << (FRONTIER_MUSIC_TRACK_COUNT - 32)) - 1);
     EXPECT_EQ(extra->unlocked[1], 0);
     EXPECT_EQ(extra->unlocked[2], 0);
     EXPECT(FrontierMusic_IsUnlocked(MUS_VS_HGSS_CHAMPION));
+    EXPECT(FrontierMusic_IsUnlocked(MUS_VS_HGSS_ROCKET));
     EXPECT(!FrontierMusic_IsUnlocked(MUS_NONE));
     EXPECT_EQ(FrontierMusic_Unlock(MUS_NONE), FRONTIER_MUSIC_INVALID);
 }
@@ -1379,10 +1468,11 @@ TEST("Frontier music: Johto follows Kanto in the catalog while Suicune remains i
     task = CatalogListTask();
     EXPECT_NE(task, TASK_NONE);
     list = (void *)gTasks[task].data;
-    EXPECT_EQ((u32)list->template.totalItems, 4);
+    EXPECT_EQ((u32)list->template.totalItems, 5);
     EXPECT_EQ(list->template.items[0].id, 30);
     EXPECT_EQ(list->template.items[1].id, 31);
     EXPECT_EQ(list->template.items[2].id, 32);
+    EXPECT_EQ(list->template.items[3].id, 33);
     CatalogInput(SELECT_BUTTON);
     EXPECT(gMPlayInfo_BGM.songHeader == &mus_vs_hgss_ho_oh);
     CatalogInput(DPAD_DOWN);
@@ -1391,6 +1481,9 @@ TEST("Frontier music: Johto follows Kanto in the catalog while Suicune remains i
     CatalogInput(DPAD_DOWN);
     CatalogInput(SELECT_BUTTON);
     EXPECT(gMPlayInfo_BGM.songHeader == &mus_vs_hgss_champion);
+    CatalogInput(DPAD_DOWN);
+    CatalogInput(SELECT_BUTTON);
+    EXPECT(gMPlayInfo_BGM.songHeader == &mus_vs_hgss_rocket);
     CatalogInput(B_BUTTON);
     CatalogInput(B_BUTTON);
     FreeCatalogUi();
