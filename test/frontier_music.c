@@ -24,6 +24,7 @@
 #include "constants/trainers.h"
 
 extern const struct SongHeader mus_vs_colosseum;
+extern const struct SongHeader mus_vs_colosseum_admin;
 
 static const u32 sFacilities[] =
 {
@@ -65,7 +66,8 @@ TEST("Frontier music: all catalog battle songs cost five BP each")
         u16 song = FrontierMusic_GetSong(i);
         for (u32 j = 0; j < i; j++)
             EXPECT_NE(song, FrontierMusic_GetSong(j));
-        EXPECT((song >= START_MUS && song <= END_MUS) || song == MUS_POKEVIRUS_RELEASE || song == MUS_POKEVIRUS_FINAL || song == MUS_VS_COLOSSEUM);
+        EXPECT((song >= START_MUS && song <= END_MUS) || song == MUS_POKEVIRUS_RELEASE || song == MUS_POKEVIRUS_FINAL
+            || song == MUS_VS_COLOSSEUM || song == MUS_VS_COLOSSEUM_ADMIN);
         EXPECT(!FrontierMusic_IsUnlocked(song));
         gSaveBlock2Ptr->frontier.battlePoints = 5;
         EXPECT_EQ(FrontierMusic_Unlock(song), FRONTIER_MUSIC_OK);
@@ -436,6 +438,73 @@ TEST("Frontier music: Colosseum's compiled sequence keeps all eight tracks alive
     for (u32 track = 0; track < 8; track++)
         EXPECT(gMPlayInfo_BGM.tracks[track].flags & MPT_FLG_EXIST);
     m4aMPlayStop(&gMPlayInfo_BGM);
+}
+
+TEST("Frontier music: Colosseum admin appends a nine-track song with independent PSG voices")
+{
+    EXPECT_EQ(MUS_VS_COLOSSEUM_ADMIN, 615);
+    EXPECT_EQ(FrontierMusic_GetSong(23), MUS_VS_COLOSSEUM);
+    EXPECT_EQ(FrontierMusic_GetSong(24), MUS_VS_COLOSSEUM_ADMIN);
+    EXPECT(gSongTable[MUS_VS_COLOSSEUM_ADMIN].header == &mus_vs_colosseum_admin);
+    EXPECT_EQ(gSongTable[MUS_VS_COLOSSEUM_ADMIN].ms, 0);
+    EXPECT_EQ(mus_vs_colosseum_admin.trackCount, 9);
+    EXPECT_EQ(mus_vs_colosseum_admin.tone[3].type & 7, 3);
+    EXPECT_EQ(mus_vs_colosseum_admin.tone[4].type & 7, 2);
+    EXPECT_EQ(mus_vs_colosseum_admin.tone[5].type & 7, 1);
+    EXPECT_EQ(mus_vs_colosseum_admin.tone[6].type & 7, 4);
+    m4aSongNumStart(MUS_VS_COLOSSEUM_ADMIN);
+    for (u32 frame = 0; frame < 11000; frame++)
+        MPlayMain(&gMPlayInfo_BGM);
+    EXPECT_GT(gMPlayInfo_BGM.clock, 2 * 4032);
+    EXPECT_EQ(gMPlayInfo_BGM.status & MUSICPLAYER_STATUS_TRACK, 0x1FF);
+    for (u32 track = 0; track < 9; track++)
+        EXPECT(gMPlayInfo_BGM.tracks[track].flags & MPT_FLG_EXIST);
+    m4aMPlayStop(&gMPlayInfo_BGM);
+}
+
+TEST("Frontier music: Colosseum admin supports free preview five-BP unlock and fixed or random battle music")
+{
+    struct FrontierMusicSave before;
+    ResetMusic();
+    ClearStoryProgress();
+    before = gSaveBlock3Ptr->frontierMusic;
+    PlayNewMapMusic(MUS_B_FRONTIER);
+    MapMusicMain();
+    MapMusicMain();
+    gSaveBlock2Ptr->frontier.battlePoints = 0;
+    EXPECT(FrontierMusic_IsAvailable(MUS_VS_COLOSSEUM_ADMIN));
+    EXPECT(FrontierMusic_Preview(MUS_VS_COLOSSEUM_ADMIN));
+    EXPECT(gMPlayInfo_BGM.songHeader == &mus_vs_colosseum_admin);
+    EXPECT_EQ(gSaveBlock2Ptr->frontier.battlePoints, 0);
+    EXPECT_EQ(memcmp(&before, &gSaveBlock3Ptr->frontierMusic, sizeof(before)), 0);
+    FrontierMusic_StopPreview();
+    EXPECT(gMPlayInfo_BGM.songHeader == gSongTable[MUS_B_FRONTIER].header);
+    gSaveBlock2Ptr->frontier.battlePoints = 5;
+    EXPECT_EQ(FrontierMusic_Unlock(MUS_VS_COLOSSEUM_ADMIN), FRONTIER_MUSIC_OK);
+    EXPECT_EQ(gSaveBlock2Ptr->frontier.battlePoints, 0);
+    EXPECT_EQ(FrontierMusic_SetMode(FRONTIER_MUSIC_FIXED, MUS_VS_COLOSSEUM_ADMIN), FRONTIER_MUSIC_OK);
+    FrontierMusic_EnsureSaveData();
+    gBattleTypeFlags = BATTLE_TYPE_TRAINER | BATTLE_TYPE_BATTLE_TOWER;
+    EXPECT_EQ(FrontierMusic_ChooseBattleBGM(MUS_VS_TRAINER), MUS_VS_COLOSSEUM_ADMIN);
+    EXPECT_EQ(FrontierMusic_SetMode(FRONTIER_MUSIC_RANDOM, 0), FRONTIER_MUSIC_OK);
+    EXPECT_EQ(FrontierMusic_ChooseBattleBGM(MUS_VS_TRAINER), MUS_VS_COLOSSEUM_ADMIN);
+    TRAINER_BATTLE_PARAM.opponentA = TRAINER_FRONTIER_BRAIN;
+    EXPECT_EQ(FrontierMusic_ChooseBattleBGM(MUS_VS_TRAINER), MUS_VS_FRONTIER_BRAIN);
+}
+
+TEST("Frontier music: adding Colosseum admin preserves all previous 24 unlock bits and selection")
+{
+    ResetMusic();
+    gSaveBlock3Ptr->frontierMusic.unlocked = (1u << 24) - 1;
+    gSaveBlock3Ptr->frontierMusic.selectedSong = MUS_VS_COLOSSEUM;
+    gSaveBlock3Ptr->frontierMusic.mode = FRONTIER_MUSIC_FIXED;
+    gSaveBlock3Ptr->frontierMusic.checksum = CalcCRC16((const u8 *)&gSaveBlock3Ptr->frontierMusic,
+                                                     offsetof(struct FrontierMusicSave, checksum));
+    FrontierMusic_EnsureSaveData();
+    EXPECT_EQ(gSaveBlock3Ptr->frontierMusic.unlocked, (1u << 24) - 1);
+    EXPECT_EQ(gSaveBlock3Ptr->frontierMusic.selectedSong, MUS_VS_COLOSSEUM);
+    EXPECT_EQ(gSaveBlock3Ptr->frontierMusic.mode, FRONTIER_MUSIC_FIXED);
+    EXPECT(!FrontierMusic_IsUnlocked(MUS_VS_COLOSSEUM_ADMIN));
 }
 
 TEST("Frontier music: previewing a locked song is free and never changes the saved preference")

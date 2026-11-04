@@ -4,6 +4,7 @@
 .include "sound/voicegroups/frontier_title.inc"
 .include "sound/voicegroups/pokevirus_final.inc"
 .include "sound/voicegroups/vs_colosseum.inc"
+.include "sound/voicegroups/vs_colosseum_admin.inc"
 
 @ drumsets
 .include "sound/voicegroups/drumsets/rs.inc"
