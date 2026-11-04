@@ -1,6 +1,7 @@
 #include "global.h"
 #include "battle.h"
 #include "battle_setup.h"
+#include "bg.h"
 #include "event_data.h"
 #include "frontier_music.h"
 #include "international_string_util.h"
@@ -16,6 +17,7 @@
 #include "string_util.h"
 #include "strings.h"
 #include "task.h"
+#include "text_window.h"
 #include "util.h"
 #include "constants/flags.h"
 #include "constants/songs.h"
@@ -73,6 +75,7 @@ static const u16 sRescuedFlags[] =
 
 static const u8 sText_Cancel[] = _("{JPN}やめる");
 static const u8 sText_Back[] = _("{JPN}もどる");
+static const u8 sText_CatalogTitle[] = _("{JPN}BGM さくひん");
 static const u8 sCategoryNames[FRONTIER_MUSIC_CATEGORY_COUNT][16] =
 {
     [FRONTIER_MUSIC_CATEGORY_KANTO] = _("{JPN}カントー"),
@@ -104,8 +107,12 @@ struct FrontierMusicCatalog
     u16 categoryRow;
     u8 category;
     u8 windowId;
+    u8 headerWindowId;
+    u8 footerWindowId;
+    u8 frameWindowId;
     u8 listTaskId;
     u8 arrowsTaskId;
+    const u8 *controlsText;
 };
 
 static EWRAM_DATA struct FrontierMusicCatalog *sCatalog = NULL;
@@ -320,10 +327,12 @@ static void PrintCatalogControls(s32 index)
         ? (index == LIST_CANCEL ? sText_CancelControls : sText_CategoryControls)
         : index < 0 || index >= ARRAY_COUNT(sTracks) ? sText_CancelControls
         : sPreviewActive && sPreviewSong == sTracks[index].song ? sText_StopPreviewControls : sText_PreviewControls;
-    if (sCatalog->category < FRONTIER_MUSIC_CATEGORY_COUNT)
-        AddTextPrinterParameterized(sCatalog->windowId, FONT_SMALL, sCategoryNames[sCatalog->category], 4, 0, TEXT_SKIP_DRAW, NULL);
-    FillWindowPixelRect(sCatalog->windowId, PIXEL_FILL(1), 0, 82, 208, 14);
-    AddTextPrinterParameterized(sCatalog->windowId, FONT_SMALL, text, 4, 82, TEXT_SKIP_DRAW, NULL);
+    if (sCatalog->controlsText == text)
+        return;
+    sCatalog->controlsText = text;
+    FillWindowPixelBuffer(sCatalog->footerWindowId, PIXEL_FILL(1));
+    AddTextPrinterParameterized(sCatalog->footerWindowId, FONT_SMALL, text, 4, 2, TEXT_SKIP_DRAW, NULL);
+    CopyWindowToVram(sCatalog->footerWindowId, COPYWIN_GFX);
 }
 
 static void PrintTrackStatus(u8 windowId, u32 index, u8 y)
@@ -354,6 +363,15 @@ static void DestroyCatalogList(void)
     sCatalog->listTaskId = sCatalog->arrowsTaskId = TASK_NONE;
 }
 
+static void RemoveCatalogWindows(void)
+{
+    const u8 windows[] = {sCatalog->windowId, sCatalog->headerWindowId,
+                          sCatalog->footerWindowId, sCatalog->frameWindowId};
+    for (u32 i = 0; i < ARRAY_COUNT(windows); i++)
+        if (windows[i] != WINDOW_NONE)
+            RemoveWindow(windows[i]);
+}
+
 static void BuildCatalogList(u8 category, u16 scroll, u16 row)
 {
     struct ListMenuTemplate list = {0};
@@ -374,15 +392,19 @@ static void BuildCatalogList(u8 category, u16 scroll, u16 row)
                 sCatalog->items[count++] = (struct ListMenuItem){sTracks[i].name, i};
     }
     sCatalog->items[count++] = (struct ListMenuItem){category == FRONTIER_MUSIC_CATEGORY_COUNT ? sText_Cancel : sText_Back, LIST_CANCEL};
+    FillWindowPixelBuffer(sCatalog->headerWindowId, PIXEL_FILL(1));
+    AddTextPrinterParameterized(sCatalog->headerWindowId, FONT_SMALL,
+        category == FRONTIER_MUSIC_CATEGORY_COUNT ? sText_CatalogTitle : sCategoryNames[category], 4, 2, TEXT_SKIP_DRAW, NULL);
+    CopyWindowToVram(sCatalog->headerWindowId, COPYWIN_GFX);
     FillWindowPixelBuffer(sCatalog->windowId, PIXEL_FILL(1));
     list.items = sCatalog->items;
     list.moveCursorFunc = CatalogMoveCursor;
     list.itemPrintFunc = category == FRONTIER_MUSIC_CATEGORY_COUNT ? NULL : PrintTrackStatus;
     list.totalItems = count;
-    list.maxShowed = min(count, category == FRONTIER_MUSIC_CATEGORY_COUNT ? 5 : 4);
+    list.maxShowed = min(count, 4);
     list.windowId = sCatalog->windowId;
     list.item_X = 8;
-    list.upText_Y = category == FRONTIER_MUSIC_CATEGORY_COUNT ? 1 : 17;
+    list.upText_Y = 0;
     list.cursorPal = 2;
     list.fillValue = 1;
     list.cursorShadowPal = 3;
@@ -391,9 +413,8 @@ static void BuildCatalogList(u8 category, u16 scroll, u16 row)
     sCatalog->listTaskId = ListMenuInit(&list, scroll, row);
     if (count > list.maxShowed)
         sCatalog->arrowsTaskId = AddScrollIndicatorArrowPairParameterized(
-            SCROLL_ARROW_UP, 228, category == FRONTIER_MUSIC_CATEGORY_COUNT ? 40 : 48, 104,
+            SCROLL_ARROW_UP, 228, 56, 104,
             count - list.maxShowed, 0xFCE0, 0xFCE0, &sCatalog->scroll);
-    CopyWindowToVram(sCatalog->windowId, COPYWIN_FULL);
 }
 
 static void Task_Catalog(u8 taskId)
@@ -413,16 +434,11 @@ static void Task_Catalog(u8 taskId)
                 FrontierMusic_Preview(sTracks[selected].song);
             PlaySE(SE_SELECT);
             PrintCatalogControls(selected);
-            CopyWindowToVram(sCatalog->windowId, COPYWIN_GFX);
         }
         return;
     }
-    u16 previousScroll = sCatalog->scroll;
     s32 index = ListMenu_ProcessInput(sCatalog->listTaskId);
     ListMenuGetScrollAndRow(sCatalog->listTaskId, &sCatalog->scroll, &sCatalog->row);
-    // Pixel scrolling also moves the shared footer into the item rows.
-    if (sCatalog->scroll != previousScroll)
-        RedrawListMenu(sCatalog->listTaskId);
     if (index == LIST_NOTHING_CHOSEN)
         return;
     PlaySE(SE_SELECT);
@@ -447,9 +463,9 @@ static void Task_Catalog(u8 taskId)
     }
     FrontierMusic_StopPreview();
     DestroyCatalogList();
-    ClearStdWindowAndFrameToTransparent(sCatalog->windowId, FALSE);
-    CopyWindowToVram(sCatalog->windowId, COPYWIN_MAP);
-    RemoveWindow(sCatalog->windowId);
+    FillBgTilemapBufferRect(0, 0, 1, 3, 28, 14, 0);
+    CopyBgTilemapBufferToVram(0);
+    RemoveCatalogWindows();
     Free(sCatalog);
     sCatalog = NULL;
     DestroyTask(taskId);
@@ -464,7 +480,11 @@ static void Task_ResumeScript(u8 taskId)
 
 void FrontierMusic_OpenCatalog(void)
 {
-    const struct WindowTemplate window = {0, 2, 4, 26, 12, 15, 64};
+    // Three non-overlapping buffers use the same 312 tiles as the former single window.
+    const struct WindowTemplate header = {0, 2, 4, 26, 2, 15, 64};
+    const struct WindowTemplate window = {0, 2, 6, 26, 8, 15, 116};
+    const struct WindowTemplate footer = {0, 2, 14, 26, 2, 15, 324};
+    const struct WindowTemplate frame = {0, 2, 4, 26, 12, 15, 64};
     if (sCatalog != NULL)
         return;
     u8 taskId = CreateTask(Task_ResumeScript, 8);
@@ -474,19 +494,29 @@ void FrontierMusic_OpenCatalog(void)
     sCatalog = AllocZeroed(sizeof(*sCatalog));
     if (sCatalog == NULL)
         return;
+    sCatalog->windowId = sCatalog->headerWindowId = sCatalog->footerWindowId = sCatalog->frameWindowId = WINDOW_NONE;
     sCatalog->listTaskId = sCatalog->arrowsTaskId = TASK_NONE;
     FrontierMusic_StopPreview();
     FrontierMusic_EnsureSaveData();
     HideMapNamePopUpWindow();
     LoadMessageBoxAndBorderGfx();
+    sCatalog->frameWindowId = AddWindowWithoutTileMap(&frame);
+    sCatalog->headerWindowId = AddWindow(&header);
     sCatalog->windowId = AddWindow(&window);
-    if (sCatalog->windowId == WINDOW_NONE)
+    sCatalog->footerWindowId = AddWindow(&footer);
+    if (sCatalog->windowId == WINDOW_NONE || sCatalog->headerWindowId == WINDOW_NONE
+     || sCatalog->footerWindowId == WINDOW_NONE || sCatalog->frameWindowId == WINDOW_NONE)
     {
+        RemoveCatalogWindows();
         Free(sCatalog);
         sCatalog = NULL;
         return;
     }
-    SetStandardWindowBorderStyle(sCatalog->windowId, FALSE);
+    DrawTextBorderOuter(sCatalog->frameWindowId, STD_WINDOW_BASE_TILE_NUM, STD_WINDOW_PALETTE_NUM);
+    PutWindowTilemap(sCatalog->headerWindowId);
+    PutWindowTilemap(sCatalog->windowId);
+    PutWindowTilemap(sCatalog->footerWindowId);
     BuildCatalogList(FRONTIER_MUSIC_CATEGORY_COUNT, 0, 0);
+    CopyBgTilemapBufferToVram(0);
     gTasks[taskId].func = Task_Catalog;
 }

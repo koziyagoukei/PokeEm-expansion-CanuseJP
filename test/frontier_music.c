@@ -898,6 +898,31 @@ static u8 CatalogListTask(void)
     return TASK_NONE;
 }
 
+static u8 CatalogFixedWindow(u8 listWindow, s32 top)
+{
+    for (u32 window = 0; window < WINDOWS_MAX; window++)
+        if (gWindows[window].tileData != NULL
+         && GetWindowAttribute(window, WINDOW_BG) == GetWindowAttribute(listWindow, WINDOW_BG)
+         && GetWindowAttribute(window, WINDOW_TILEMAP_LEFT) == GetWindowAttribute(listWindow, WINDOW_TILEMAP_LEFT)
+         && GetWindowAttribute(window, WINDOW_TILEMAP_TOP) == top
+         && GetWindowAttribute(window, WINDOW_HEIGHT) == 2)
+            return window;
+    return WINDOW_NONE;
+}
+
+static void (*sCatalogCursorCallback)(s32, bool8, struct ListMenu *);
+static u32 sCatalogInitCallbacks;
+static u32 sCatalogMoveCallbacks;
+
+static void CountCatalogCursorCallbacks(s32 index, bool8 onInit, struct ListMenu *list)
+{
+    if (onInit)
+        sCatalogInitCallbacks++;
+    else
+        sCatalogMoveCallbacks++;
+    sCatalogCursorCallback(index, onInit, list);
+}
+
 static void CatalogOpenCategory(u8 category)
 {
     for (u32 i = 0; i < category; i++)
@@ -1061,6 +1086,32 @@ TEST("Frontier music: empty and story-unlocked original pages return safely with
     FreeCatalogUi();
 }
 
+TEST("Frontier music: scrolling updates the list once without initializing or repainting it again")
+{
+    ResetMusic();
+    ClearStoryProgress();
+    InitCatalogUi();
+    FrontierMusic_OpenCatalog();
+    CatalogInput(0);
+    CatalogOpenCategory(FRONTIER_MUSIC_CATEGORY_HOENN);
+    u8 task = CatalogListTask();
+    EXPECT_NE(task, TASK_NONE);
+    struct ListMenu *list = (void *)gTasks[task].data;
+    sCatalogCursorCallback = list->template.moveCursorFunc;
+    sCatalogInitCallbacks = sCatalogMoveCallbacks = 0;
+    list->template.moveCursorFunc = CountCatalogCursorCallbacks;
+    for (u32 i = 0; i < FRONTIER_MUSIC_TRACK_COUNT; i++)
+        CatalogInput(DPAD_DOWN);
+    for (u32 i = 0; i < FRONTIER_MUSIC_TRACK_COUNT; i++)
+        CatalogInput(DPAD_UP);
+    EXPECT_GT(sCatalogMoveCallbacks, 0);
+    EXPECT_EQ(sCatalogInitCallbacks, 0);
+    list->template.moveCursorFunc = sCatalogCursorCallback;
+    CatalogInput(B_BUTTON);
+    CatalogInput(B_BUTTON);
+    FreeCatalogUi();
+}
+
 TEST("Frontier music: scrolling catalog pixels match a clean redraw without leaving footer text")
 {
     bool32 preview = FALSE;
@@ -1093,6 +1144,21 @@ TEST("Frontier music: scrolling catalog pixels match a clean redraw without leav
     EXPECT_NE(listTask, TASK_NONE);
     struct ListMenu *list = (void *)gTasks[listTask].data;
     u8 window = list->template.windowId;
+    u8 header = CatalogFixedWindow(window, GetWindowAttribute(window, WINDOW_TILEMAP_TOP) - 2);
+    u8 footer = CatalogFixedWindow(window, GetWindowAttribute(window, WINDOW_TILEMAP_TOP)
+                                           + GetWindowAttribute(window, WINDOW_HEIGHT));
+    EXPECT_NE(header, WINDOW_NONE);
+    EXPECT_NE(footer, WINDOW_NONE);
+    EXPECT_NE(header, window);
+    EXPECT_NE(footer, window);
+    EXPECT_EQ(GetWindowAttribute(window, WINDOW_HEIGHT), 8);
+    EXPECT_EQ((u32)list->template.upText_Y, 0);
+    EXPECT_LE(GetWindowAttribute(header, WINDOW_BASE_BLOCK) + 26 * 2, GetWindowAttribute(window, WINDOW_BASE_BLOCK));
+    EXPECT_LE(GetWindowAttribute(window, WINDOW_BASE_BLOCK) + 26 * 8, GetWindowAttribute(footer, WINDOW_BASE_BLOCK));
+    const u32 fixedSize = 26 * 2 * 32;
+    u8 *headerPixels = Alloc(fixedSize);
+    EXPECT(headerPixels != NULL);
+    memcpy(headerPixels, (const void *)GetWindowAttribute(header, WINDOW_TILE_DATA), fixedSize);
     u32 size = GetWindowAttribute(window, WINDOW_WIDTH) * GetWindowAttribute(window, WINDOW_HEIGHT) * 32;
     u8 *actual = Alloc(size);
     EXPECT(actual != NULL);
@@ -1103,6 +1169,11 @@ TEST("Frontier music: scrolling catalog pixels match a clean redraw without leav
         for (u32 step = 0; step < FRONTIER_MUSIC_TRACK_COUNT + 2; step++)
         {
             CatalogInput(direction == 0 ? down : up);
+            EXPECT_EQ(memcmp(headerPixels, (const void *)GetWindowAttribute(header, WINDOW_TILE_DATA), fixedSize), 0);
+            const u8 *headerVram = (const u8 *)BG_CHAR_ADDR(0) + GetWindowAttribute(header, WINDOW_BASE_BLOCK) * 32;
+            const u8 *footerVram = (const u8 *)BG_CHAR_ADDR(0) + GetWindowAttribute(footer, WINDOW_BASE_BLOCK) * 32;
+            EXPECT_EQ(memcmp(headerPixels, headerVram, fixedSize), 0);
+            EXPECT_EQ(memcmp((const void *)GetWindowAttribute(footer, WINDOW_TILE_DATA), footerVram, fixedSize), 0);
             memcpy(actual, (const void *)GetWindowAttribute(window, WINDOW_TILE_DATA), size);
             const u8 *vram = (const u8 *)BG_CHAR_ADDR(0) + GetWindowAttribute(window, WINDOW_BASE_BLOCK) * 32;
             if (memcmp(actual, vram, size) != 0)
@@ -1131,5 +1202,6 @@ TEST("Frontier music: scrolling catalog pixels match a clean redraw without leav
         CatalogInput(B_BUTTON);
     EXPECT(gMPlayInfo_BGM.songHeader == gSongTable[MUS_B_FRONTIER].header);
     Free(actual);
+    Free(headerPixels);
     FreeCatalogUi();
 }
