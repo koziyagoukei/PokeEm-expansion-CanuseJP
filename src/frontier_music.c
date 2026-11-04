@@ -66,6 +66,7 @@ static const struct FrontierMusicTrack sTracks[] =
     {MUS_VS_PMD_BOSS, _("{JPN}きゅうじょたい ボス"), FRONTIER_MUSIC_CATEGORY_DUNGEON},
     {MUS_VS_ZINNIA, _("{JPN}ORAS ヒガナ"), FRONTIER_MUSIC_CATEGORY_HOENN},
     {MUS_VS_PMD_DIALGA, _("{JPN}たんけんたい ディアルガ"), FRONTIER_MUSIC_CATEGORY_DUNGEON},
+    {MUS_VS_HGSS_HO_OH, _("{JPN}HGSS ホウオウ"), FRONTIER_MUSIC_CATEGORY_JOHTO},
 };
 
 static const u16 sRescuedFlags[] =
@@ -80,6 +81,7 @@ static const u8 sText_CatalogTitle[] = _("{JPN}BGM さくひん");
 static const u8 sCategoryNames[FRONTIER_MUSIC_CATEGORY_COUNT][16] =
 {
     [FRONTIER_MUSIC_CATEGORY_KANTO] = _("{JPN}カントー"),
+    [FRONTIER_MUSIC_CATEGORY_JOHTO] = _("{JPN}ジョウト"),
     [FRONTIER_MUSIC_CATEGORY_HOENN] = _("{JPN}ホウエン"),
     [FRONTIER_MUSIC_CATEGORY_ORRE] = _("{JPN}オーレ"),
     [FRONTIER_MUSIC_CATEGORY_DUNGEON] = _("{JPN}ダンジョン"),

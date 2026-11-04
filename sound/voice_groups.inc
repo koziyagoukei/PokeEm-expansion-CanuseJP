@@ -10,6 +10,7 @@
 .include "sound/voicegroups/vs_pmd_boss.inc"
 .include "sound/voicegroups/vs_zinnia.inc"
 .include "sound/voicegroups/vs_pmd_dialga.inc"
+.include "sound/voicegroups/vs_hgss_ho_oh.inc"
 
 @ drumsets
 .include "sound/voicegroups/drumsets/rs.inc"

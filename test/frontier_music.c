@@ -31,6 +31,7 @@ extern const struct SongHeader mus_vs_pmd_rayquaza;
 extern const struct SongHeader mus_vs_pmd_boss;
 extern const struct SongHeader mus_vs_zinnia;
 extern const struct SongHeader mus_vs_pmd_dialga;
+extern const struct SongHeader mus_vs_hgss_ho_oh;
 
 static const u32 sFacilities[] =
 {
@@ -75,7 +76,7 @@ TEST("Frontier music: all catalog battle songs cost five BP each")
         EXPECT((song >= START_MUS && song <= END_MUS) || song == MUS_POKEVIRUS_RELEASE || song == MUS_POKEVIRUS_FINAL
             || song == MUS_VS_COLOSSEUM || song == MUS_VS_COLOSSEUM_ADMIN || song == MUS_VS_COLOSSEUM_2
             || song == MUS_VS_PMD_RAYQUAZA || song == MUS_VS_PMD_BOSS || song == MUS_VS_ZINNIA
-            || song == MUS_VS_PMD_DIALGA);
+            || song == MUS_VS_PMD_DIALGA || song == MUS_VS_HGSS_HO_OH);
         EXPECT(!FrontierMusic_IsUnlocked(song));
         gSaveBlock2Ptr->frontier.battlePoints = 5;
         EXPECT_EQ(FrontierMusic_Unlock(song), FRONTIER_MUSIC_OK);
@@ -818,6 +819,7 @@ TEST("Frontier music: every song has exactly one work category without reindexin
         counts[category]++;
     }
     EXPECT_EQ(counts[FRONTIER_MUSIC_CATEGORY_KANTO], 8);
+    EXPECT_EQ(counts[FRONTIER_MUSIC_CATEGORY_JOHTO], 1);
     EXPECT_EQ(counts[FRONTIER_MUSIC_CATEGORY_HOENN], 14);
     EXPECT_EQ(counts[FRONTIER_MUSIC_CATEGORY_ORRE], 3);
     EXPECT_EQ(counts[FRONTIER_MUSIC_CATEGORY_DUNGEON], 3);
@@ -892,6 +894,88 @@ TEST("Frontier music: adding Dialga preserves previous 29 unlock bits and Zinnia
     EXPECT_EQ(gSaveBlock3Ptr->frontierMusic.selectedSong, MUS_VS_ZINNIA);
     EXPECT_EQ(gSaveBlock3Ptr->frontierMusic.mode, FRONTIER_MUSIC_FIXED);
     EXPECT(!FrontierMusic_IsUnlocked(MUS_VS_PMD_DIALGA));
+}
+
+TEST("Frontier music: HGSS Ho-Oh preserves bends tempo changes and nine tracks across the loop")
+{
+    static const u8 drumKeys[] = {36, 39, 40, 41, 43, 45, 47, 48, 53, 55, 57, 62, 64};
+    const struct ToneData *kit = (const void *)mus_vs_hgss_ho_oh.tone[4].wav;
+    bool32 bent = FALSE;
+    EXPECT_EQ(MUS_VS_HGSS_HO_OH, 621);
+    EXPECT_EQ(FrontierMusic_GetSong(30), MUS_VS_HGSS_HO_OH);
+    EXPECT_EQ(FrontierMusic_GetCategory(MUS_VS_HGSS_HO_OH), FRONTIER_MUSIC_CATEGORY_JOHTO);
+    EXPECT(gSongTable[MUS_VS_HGSS_HO_OH].header == &mus_vs_hgss_ho_oh);
+    EXPECT_EQ(gSongTable[MUS_VS_HGSS_HO_OH].ms, 0);
+    EXPECT_EQ(mus_vs_hgss_ho_oh.trackCount, 9);
+    for (u32 key = 0; key < ARRAY_COUNT(drumKeys); key++)
+        EXPECT_EQ(kit[drumKeys[key]].type & TONEDATA_TYPE_CGB, 0);
+    EXPECT_EQ(mus_vs_hgss_ho_oh.tone[12].type & 7, 3);
+    EXPECT_EQ(mus_vs_hgss_ho_oh.tone[13].type & 7, 2);
+    EXPECT_EQ(mus_vs_hgss_ho_oh.tone[14].type & 7, 1);
+    EXPECT_EQ(mus_vs_hgss_ho_oh.tone[15].type & 7, 4);
+    m4aSongNumStart(MUS_VS_HGSS_HO_OH);
+    for (u32 frame = 0; frame < 15000; frame++)
+    {
+        MPlayMain(&gMPlayInfo_BGM);
+        for (u32 track = 0; track < 9; track++)
+            bent |= gMPlayInfo_BGM.tracks[track].bend != 0;
+    }
+    EXPECT(bent);
+    EXPECT_GT(gMPlayInfo_BGM.clock, 6240 + 4992);
+    EXPECT_EQ(gMPlayInfo_BGM.status & MUSICPLAYER_STATUS_TRACK, 0x1FF);
+    for (u32 track = 0; track < 9; track++)
+    {
+        EXPECT(gMPlayInfo_BGM.tracks[track].flags & MPT_FLG_EXIST);
+        EXPECT_EQ(gMPlayInfo_BGM.tracks[track].bendRange, 2);
+    }
+    m4aMPlayStop(&gMPlayInfo_BGM);
+}
+
+TEST("Frontier music: HGSS Ho-Oh supports free preview five-BP unlock fixed random and Brain override")
+{
+    struct FrontierMusicSave before;
+    ResetMusic();
+    ClearStoryProgress();
+    before = gSaveBlock3Ptr->frontierMusic;
+    PlayNewMapMusic(MUS_B_FRONTIER);
+    MapMusicMain();
+    MapMusicMain();
+    gSaveBlock2Ptr->frontier.battlePoints = 0;
+    EXPECT(FrontierMusic_Preview(MUS_VS_HGSS_HO_OH));
+    EXPECT(gMPlayInfo_BGM.songHeader == &mus_vs_hgss_ho_oh);
+    EXPECT_EQ(memcmp(&before, &gSaveBlock3Ptr->frontierMusic, sizeof(before)), 0);
+    FrontierMusic_StopPreview();
+    EXPECT(gMPlayInfo_BGM.songHeader == gSongTable[MUS_B_FRONTIER].header);
+    gSaveBlock2Ptr->frontier.battlePoints = 5;
+    EXPECT_EQ(FrontierMusic_Unlock(MUS_VS_HGSS_HO_OH), FRONTIER_MUSIC_OK);
+    EXPECT_EQ(gSaveBlock2Ptr->frontier.battlePoints, 0);
+    EXPECT_EQ(FrontierMusic_SetMode(FRONTIER_MUSIC_FIXED, MUS_VS_HGSS_HO_OH), FRONTIER_MUSIC_OK);
+    gBattleTypeFlags = BATTLE_TYPE_TRAINER | BATTLE_TYPE_BATTLE_TOWER;
+    EXPECT_EQ(FrontierMusic_ChooseBattleBGM(MUS_VS_TRAINER), MUS_VS_HGSS_HO_OH);
+    EXPECT_EQ(FrontierMusic_SetMode(FRONTIER_MUSIC_RANDOM, 0), FRONTIER_MUSIC_OK);
+    EXPECT_EQ(FrontierMusic_ChooseBattleBGM(MUS_VS_TRAINER), MUS_VS_HGSS_HO_OH);
+    TRAINER_BATTLE_PARAM.opponentA = TRAINER_FRONTIER_BRAIN;
+    EXPECT_EQ(FrontierMusic_ChooseBattleBGM(MUS_VS_TRAINER), MUS_VS_FRONTIER_BRAIN);
+}
+
+TEST("Frontier music: adding Ho-Oh preserves previous 30 unlock bits Dialga and Kanto Suicune")
+{
+    u16 selected = MUS_VS_PMD_DIALGA;
+    PARAMETRIZE { selected = MUS_VS_PMD_DIALGA; }
+    PARAMETRIZE { selected = MUS_C_VS_LEGEND_BEAST; }
+    ResetMusic();
+    gSaveBlock3Ptr->frontierMusic.unlocked = (1u << 30) - 1;
+    gSaveBlock3Ptr->frontierMusic.selectedSong = selected;
+    gSaveBlock3Ptr->frontierMusic.mode = FRONTIER_MUSIC_FIXED;
+    gSaveBlock3Ptr->frontierMusic.checksum = CalcCRC16((const u8 *)&gSaveBlock3Ptr->frontierMusic,
+                                                     offsetof(struct FrontierMusicSave, checksum));
+    FrontierMusic_EnsureSaveData();
+    EXPECT_EQ(gSaveBlock3Ptr->frontierMusic.unlocked, (1u << 30) - 1);
+    EXPECT_EQ(gSaveBlock3Ptr->frontierMusic.selectedSong, selected);
+    EXPECT_EQ(gSaveBlock3Ptr->frontierMusic.mode, FRONTIER_MUSIC_FIXED);
+    EXPECT_EQ(FrontierMusic_GetSong(20), MUS_C_VS_LEGEND_BEAST);
+    EXPECT_EQ(FrontierMusic_GetCategory(MUS_C_VS_LEGEND_BEAST), FRONTIER_MUSIC_CATEGORY_KANTO);
+    EXPECT(!FrontierMusic_IsUnlocked(MUS_VS_HGSS_HO_OH));
 }
 
 TEST("Frontier music: previewing a locked song is free and never changes the saved preference")
@@ -1025,6 +1109,35 @@ static void FreeCatalogUi(void)
     void *tilemap = GetBgTilemapBuffer(0);
     UnsetBgTilemapBuffer(0);
     Free(tilemap);
+}
+
+TEST("Frontier music: Johto follows Kanto in the catalog while Suicune remains in Kanto")
+{
+    static const u8 kanto[] = _("{JPN}カントー");
+    static const u8 johto[] = _("{JPN}ジョウト");
+    static const u8 hoenn[] = _("{JPN}ホウエン");
+    ResetMusic();
+    InitCatalogUi();
+    FrontierMusic_OpenCatalog();
+    CatalogInput(0);
+    u8 task = CatalogListTask();
+    EXPECT_NE(task, TASK_NONE);
+    struct ListMenu *list = (void *)gTasks[task].data;
+    EXPECT_EQ((u32)list->template.totalItems, 7);
+    EXPECT_EQ(StringCompare(list->template.items[0].name, kanto), 0);
+    EXPECT_EQ(StringCompare(list->template.items[1].name, johto), 0);
+    EXPECT_EQ(StringCompare(list->template.items[2].name, hoenn), 0);
+    CatalogOpenCategory(FRONTIER_MUSIC_CATEGORY_JOHTO);
+    task = CatalogListTask();
+    EXPECT_NE(task, TASK_NONE);
+    list = (void *)gTasks[task].data;
+    EXPECT_EQ((u32)list->template.totalItems, 2);
+    EXPECT_EQ(list->template.items[0].id, 30);
+    CatalogInput(SELECT_BUTTON);
+    EXPECT(gMPlayInfo_BGM.songHeader == &mus_vs_hgss_ho_oh);
+    CatalogInput(B_BUTTON);
+    CatalogInput(B_BUTTON);
+    FreeCatalogUi();
 }
 
 TEST("Frontier music: SELECT previews and stops in the catalog and both A and B restore map music")
