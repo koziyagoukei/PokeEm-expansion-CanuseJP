@@ -7,6 +7,8 @@
 .include "sound/voicegroups/vs_colosseum_admin.inc"
 .include "sound/voicegroups/vs_colosseum_2.inc"
 .include "sound/voicegroups/vs_pmd_rayquaza.inc"
+.include "sound/voicegroups/vs_pmd_boss.inc"
+.include "sound/voicegroups/vs_zinnia.inc"
 
 @ drumsets
 .include "sound/voicegroups/drumsets/rs.inc"

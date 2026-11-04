@@ -28,6 +28,8 @@ extern const struct SongHeader mus_vs_colosseum;
 extern const struct SongHeader mus_vs_colosseum_admin;
 extern const struct SongHeader mus_vs_colosseum_2;
 extern const struct SongHeader mus_vs_pmd_rayquaza;
+extern const struct SongHeader mus_vs_pmd_boss;
+extern const struct SongHeader mus_vs_zinnia;
 
 static const u32 sFacilities[] =
 {
@@ -71,7 +73,7 @@ TEST("Frontier music: all catalog battle songs cost five BP each")
             EXPECT_NE(song, FrontierMusic_GetSong(j));
         EXPECT((song >= START_MUS && song <= END_MUS) || song == MUS_POKEVIRUS_RELEASE || song == MUS_POKEVIRUS_FINAL
             || song == MUS_VS_COLOSSEUM || song == MUS_VS_COLOSSEUM_ADMIN || song == MUS_VS_COLOSSEUM_2
-            || song == MUS_VS_PMD_RAYQUAZA);
+            || song == MUS_VS_PMD_RAYQUAZA || song == MUS_VS_PMD_BOSS || song == MUS_VS_ZINNIA);
         EXPECT(!FrontierMusic_IsUnlocked(song));
         gSaveBlock2Ptr->frontier.battlePoints = 5;
         EXPECT_EQ(FrontierMusic_Unlock(song), FRONTIER_MUSIC_OK);
@@ -657,6 +659,170 @@ TEST("Frontier music: adding rescue Rayquaza preserves previous 26 unlocks and t
     EXPECT(!FrontierMusic_IsUnlocked(MUS_VS_PMD_RAYQUAZA));
 }
 
+TEST("Frontier music: rescue boss has real PCM drums and all nine tracks survive multiple loops")
+{
+    static const u8 drumKeys[] = {36, 41, 43, 45, 47, 48, 53};
+    const struct ToneData *kit = (const void *)mus_vs_pmd_boss.tone[4].wav;
+    EXPECT_EQ(MUS_VS_PMD_BOSS, 618);
+    EXPECT_EQ(FrontierMusic_GetSong(26), MUS_VS_PMD_RAYQUAZA);
+    EXPECT_EQ(FrontierMusic_GetSong(27), MUS_VS_PMD_BOSS);
+    EXPECT(gSongTable[MUS_VS_PMD_BOSS].header == &mus_vs_pmd_boss);
+    EXPECT_EQ(gSongTable[MUS_VS_PMD_BOSS].ms, 0);
+    EXPECT_EQ(mus_vs_pmd_boss.trackCount, 9);
+    for (u32 key = 0; key < ARRAY_COUNT(drumKeys); key++)
+        EXPECT_EQ(kit[drumKeys[key]].type & TONEDATA_TYPE_CGB, 0);
+    EXPECT_EQ(mus_vs_pmd_boss.tone[5].type & 7, 3);
+    EXPECT_EQ(mus_vs_pmd_boss.tone[6].type & 7, 2);
+    EXPECT_EQ(mus_vs_pmd_boss.tone[7].type & 7, 1);
+    EXPECT_EQ(mus_vs_pmd_boss.tone[8].type & 7, 4);
+    m4aSongNumStart(MUS_VS_PMD_BOSS);
+    for (u32 frame = 0; frame < 10000; frame++)
+        MPlayMain(&gMPlayInfo_BGM);
+    EXPECT_GT(gMPlayInfo_BGM.clock, 1932 + 2 * 1920);
+    EXPECT_EQ(gMPlayInfo_BGM.status & MUSICPLAYER_STATUS_TRACK, 0x1FF);
+    for (u32 track = 0; track < 9; track++)
+        EXPECT(gMPlayInfo_BGM.tracks[track].flags & MPT_FLG_EXIST);
+    m4aMPlayStop(&gMPlayInfo_BGM);
+}
+
+TEST("Frontier music: rescue boss supports free preview five-BP unlock fixed random and Brain override")
+{
+    struct FrontierMusicSave before;
+    ResetMusic();
+    ClearStoryProgress();
+    before = gSaveBlock3Ptr->frontierMusic;
+    PlayNewMapMusic(MUS_B_FRONTIER);
+    MapMusicMain();
+    MapMusicMain();
+    gSaveBlock2Ptr->frontier.battlePoints = 0;
+    EXPECT(FrontierMusic_IsAvailable(MUS_VS_PMD_BOSS));
+    EXPECT(FrontierMusic_Preview(MUS_VS_PMD_BOSS));
+    EXPECT(gMPlayInfo_BGM.songHeader == &mus_vs_pmd_boss);
+    EXPECT_EQ(gSaveBlock2Ptr->frontier.battlePoints, 0);
+    EXPECT_EQ(memcmp(&before, &gSaveBlock3Ptr->frontierMusic, sizeof(before)), 0);
+    FrontierMusic_StopPreview();
+    EXPECT(gMPlayInfo_BGM.songHeader == gSongTable[MUS_B_FRONTIER].header);
+    gSaveBlock2Ptr->frontier.battlePoints = 5;
+    EXPECT_EQ(FrontierMusic_Unlock(MUS_VS_PMD_BOSS), FRONTIER_MUSIC_OK);
+    EXPECT_EQ(gSaveBlock2Ptr->frontier.battlePoints, 0);
+    EXPECT_EQ(FrontierMusic_SetMode(FRONTIER_MUSIC_FIXED, MUS_VS_PMD_BOSS), FRONTIER_MUSIC_OK);
+    FrontierMusic_EnsureSaveData();
+    gBattleTypeFlags = BATTLE_TYPE_TRAINER | BATTLE_TYPE_BATTLE_TOWER;
+    EXPECT_EQ(FrontierMusic_ChooseBattleBGM(MUS_VS_TRAINER), MUS_VS_PMD_BOSS);
+    EXPECT_EQ(FrontierMusic_SetMode(FRONTIER_MUSIC_RANDOM, 0), FRONTIER_MUSIC_OK);
+    EXPECT_EQ(FrontierMusic_ChooseBattleBGM(MUS_VS_TRAINER), MUS_VS_PMD_BOSS);
+    TRAINER_BATTLE_PARAM.opponentA = TRAINER_FRONTIER_BRAIN;
+    EXPECT_EQ(FrontierMusic_ChooseBattleBGM(MUS_VS_TRAINER), MUS_VS_FRONTIER_BRAIN);
+}
+
+TEST("Frontier music: adding rescue boss preserves previous 27 unlock bits and Rayquaza selection")
+{
+    ResetMusic();
+    gSaveBlock3Ptr->frontierMusic.unlocked = (1u << 27) - 1;
+    gSaveBlock3Ptr->frontierMusic.selectedSong = MUS_VS_PMD_RAYQUAZA;
+    gSaveBlock3Ptr->frontierMusic.mode = FRONTIER_MUSIC_FIXED;
+    gSaveBlock3Ptr->frontierMusic.checksum = CalcCRC16((const u8 *)&gSaveBlock3Ptr->frontierMusic,
+                                                     offsetof(struct FrontierMusicSave, checksum));
+    FrontierMusic_EnsureSaveData();
+    EXPECT_EQ(gSaveBlock3Ptr->frontierMusic.unlocked, (1u << 27) - 1);
+    EXPECT_EQ(gSaveBlock3Ptr->frontierMusic.selectedSong, MUS_VS_PMD_RAYQUAZA);
+    EXPECT_EQ(gSaveBlock3Ptr->frontierMusic.mode, FRONTIER_MUSIC_FIXED);
+    EXPECT(!FrontierMusic_IsUnlocked(MUS_VS_PMD_BOSS));
+}
+
+TEST("Frontier music: Zinnia appends to Hoenn and keeps all nine tracks and expression through its loop")
+{
+    static const u8 drumKeys[] = {36, 40, 55, 57, 62, 64};
+    const struct ToneData *kit = (const void *)mus_vs_zinnia.tone[4].wav;
+    bool32 expressionChanged = FALSE;
+    EXPECT_EQ(MUS_VS_ZINNIA, 619);
+    EXPECT_EQ(FrontierMusic_GetSong(27), MUS_VS_PMD_BOSS);
+    EXPECT_EQ(FrontierMusic_GetSong(28), MUS_VS_ZINNIA);
+    EXPECT_EQ(FrontierMusic_GetCategory(MUS_VS_ZINNIA), FRONTIER_MUSIC_CATEGORY_HOENN);
+    EXPECT(gSongTable[MUS_VS_ZINNIA].header == &mus_vs_zinnia);
+    EXPECT_EQ(gSongTable[MUS_VS_ZINNIA].ms, 0);
+    EXPECT_EQ(mus_vs_zinnia.trackCount, 9);
+    for (u32 key = 0; key < ARRAY_COUNT(drumKeys); key++)
+        EXPECT_EQ(kit[drumKeys[key]].type & TONEDATA_TYPE_CGB, 0);
+    EXPECT_EQ(mus_vs_zinnia.tone[6].type & 7, 3);
+    EXPECT_EQ(mus_vs_zinnia.tone[7].type & 7, 2);
+    EXPECT_EQ(mus_vs_zinnia.tone[8].type & 7, 1);
+    EXPECT_EQ(mus_vs_zinnia.tone[9].type & 7, 4);
+    m4aSongNumStart(MUS_VS_ZINNIA);
+    u8 volume = gMPlayInfo_BGM.tracks[0].vol;
+    for (u32 frame = 0; frame < 12000; frame++)
+    {
+        MPlayMain(&gMPlayInfo_BGM);
+        if (gMPlayInfo_BGM.tracks[0].vol != volume)
+            expressionChanged = TRUE;
+    }
+    EXPECT(expressionChanged);
+    EXPECT_GT(gMPlayInfo_BGM.clock, 6720 + 5760);
+    EXPECT_EQ(gMPlayInfo_BGM.status & MUSICPLAYER_STATUS_TRACK, 0x1FF);
+    for (u32 track = 0; track < 9; track++)
+        EXPECT(gMPlayInfo_BGM.tracks[track].flags & MPT_FLG_EXIST);
+    m4aMPlayStop(&gMPlayInfo_BGM);
+}
+
+TEST("Frontier music: Zinnia supports free preview five-BP unlock fixed random and Brain override")
+{
+    struct FrontierMusicSave before;
+    ResetMusic();
+    ClearStoryProgress();
+    before = gSaveBlock3Ptr->frontierMusic;
+    PlayNewMapMusic(MUS_B_FRONTIER);
+    MapMusicMain();
+    MapMusicMain();
+    gSaveBlock2Ptr->frontier.battlePoints = 0;
+    EXPECT(FrontierMusic_Preview(MUS_VS_ZINNIA));
+    EXPECT(gMPlayInfo_BGM.songHeader == &mus_vs_zinnia);
+    EXPECT_EQ(memcmp(&before, &gSaveBlock3Ptr->frontierMusic, sizeof(before)), 0);
+    FrontierMusic_StopPreview();
+    EXPECT(gMPlayInfo_BGM.songHeader == gSongTable[MUS_B_FRONTIER].header);
+    gSaveBlock2Ptr->frontier.battlePoints = 5;
+    EXPECT_EQ(FrontierMusic_Unlock(MUS_VS_ZINNIA), FRONTIER_MUSIC_OK);
+    EXPECT_EQ(gSaveBlock2Ptr->frontier.battlePoints, 0);
+    EXPECT_EQ(FrontierMusic_SetMode(FRONTIER_MUSIC_FIXED, MUS_VS_ZINNIA), FRONTIER_MUSIC_OK);
+    gBattleTypeFlags = BATTLE_TYPE_TRAINER | BATTLE_TYPE_BATTLE_TOWER;
+    EXPECT_EQ(FrontierMusic_ChooseBattleBGM(MUS_VS_TRAINER), MUS_VS_ZINNIA);
+    EXPECT_EQ(FrontierMusic_SetMode(FRONTIER_MUSIC_RANDOM, 0), FRONTIER_MUSIC_OK);
+    EXPECT_EQ(FrontierMusic_ChooseBattleBGM(MUS_VS_TRAINER), MUS_VS_ZINNIA);
+    TRAINER_BATTLE_PARAM.opponentA = TRAINER_FRONTIER_BRAIN;
+    EXPECT_EQ(FrontierMusic_ChooseBattleBGM(MUS_VS_TRAINER), MUS_VS_FRONTIER_BRAIN);
+}
+
+TEST("Frontier music: category pages and Zinnia preserve previous 28 unlock bits and boss selection")
+{
+    ResetMusic();
+    gSaveBlock3Ptr->frontierMusic.unlocked = (1u << 28) - 1;
+    gSaveBlock3Ptr->frontierMusic.selectedSong = MUS_VS_PMD_BOSS;
+    gSaveBlock3Ptr->frontierMusic.mode = FRONTIER_MUSIC_FIXED;
+    gSaveBlock3Ptr->frontierMusic.checksum = CalcCRC16((const u8 *)&gSaveBlock3Ptr->frontierMusic,
+                                                     offsetof(struct FrontierMusicSave, checksum));
+    FrontierMusic_EnsureSaveData();
+    EXPECT_EQ(gSaveBlock3Ptr->frontierMusic.unlocked, (1u << 28) - 1);
+    EXPECT_EQ(gSaveBlock3Ptr->frontierMusic.selectedSong, MUS_VS_PMD_BOSS);
+    EXPECT_EQ(gSaveBlock3Ptr->frontierMusic.mode, FRONTIER_MUSIC_FIXED);
+    EXPECT(!FrontierMusic_IsUnlocked(MUS_VS_ZINNIA));
+}
+
+TEST("Frontier music: every song has exactly one work category without reindexing saved unlocks")
+{
+    u8 counts[FRONTIER_MUSIC_CATEGORY_COUNT] = {0};
+    for (u32 i = 0; i < FRONTIER_MUSIC_TRACK_COUNT; i++)
+    {
+        u8 category = FrontierMusic_GetCategory(FrontierMusic_GetSong(i));
+        EXPECT_LT(category, FRONTIER_MUSIC_CATEGORY_COUNT);
+        counts[category]++;
+    }
+    EXPECT_EQ(counts[FRONTIER_MUSIC_CATEGORY_KANTO], 8);
+    EXPECT_EQ(counts[FRONTIER_MUSIC_CATEGORY_HOENN], 14);
+    EXPECT_EQ(counts[FRONTIER_MUSIC_CATEGORY_ORRE], 3);
+    EXPECT_EQ(counts[FRONTIER_MUSIC_CATEGORY_DUNGEON], 2);
+    EXPECT_EQ(counts[FRONTIER_MUSIC_CATEGORY_ORIGINAL], 2);
+    EXPECT_EQ(FrontierMusic_GetCategory(MUS_NONE), FRONTIER_MUSIC_CATEGORY_COUNT);
+}
+
 TEST("Frontier music: previewing a locked song is free and never changes the saved preference")
 {
     struct FrontierMusicSave before;
@@ -719,12 +885,34 @@ static void CatalogInput(u16 keys)
     gMain.newKeys = gMain.newAndRepeatedKeys = 0;
 }
 
+static u8 CatalogListTask(void)
+{
+    for (u32 task = 0; task < NUM_TASKS; task++)
+    {
+        const struct ListMenu *list = (const void *)gTasks[task].data;
+        if (gTasks[task].isActive && gTasks[task].priority == 0
+         && list->template.fontId == FONT_NORMAL && list->template.maxShowed > 0
+         && list->template.maxShowed <= 5 && list->template.moveCursorFunc != NULL)
+            return task;
+    }
+    return TASK_NONE;
+}
+
+static void CatalogOpenCategory(u8 category)
+{
+    for (u32 i = 0; i < category; i++)
+        CatalogInput(DPAD_DOWN);
+    CatalogInput(A_BUTTON);
+}
+
 static void InitCatalogUi(void)
 {
     static const struct BgTemplate background = {0, 0, 24, 0, 0, 0, 0};
     ResetTasks();
     ResetSpriteData();
     FreeAllSpritePalettes();
+    // Reset the queue as well as BG tracking between standalone UI fixtures.
+    ClearDma3Requests();
     ResetBgsAndClearDma3BusyFlags(0);
     InitBgsFromTemplates(0, &background, 1);
     SetBgTilemapBuffer(0, AllocZeroed(0x800));
@@ -735,6 +923,8 @@ static void InitCatalogUi(void)
 
 static void FreeCatalogUi(void)
 {
+    while (IsDma3ManagerBusyWithBgCopy())
+        ProcessDma3Requests();
     FreeAllWindowBuffers();
     void *tilemap = GetBgTilemapBuffer(0);
     UnsetBgTilemapBuffer(0);
@@ -757,6 +947,7 @@ TEST("Frontier music: SELECT previews and stops in the catalog and both A and B 
     gMain.newKeys = gMain.newAndRepeatedKeys = 0;
     FrontierMusic_OpenCatalog();
     CatalogInput(0);
+    CatalogOpenCategory(FRONTIER_MUSIC_CATEGORY_HOENN);
     CatalogInput(SELECT_BUTTON);
     EXPECT(gMPlayInfo_BGM.songHeader == gSongTable[MUS_VS_TRAINER].header);
     CatalogInput(SELECT_BUTTON);
@@ -765,6 +956,8 @@ TEST("Frontier music: SELECT previews and stops in the catalog and both A and B 
     CatalogInput(SELECT_BUTTON);
     EXPECT(gMPlayInfo_BGM.songHeader == gSongTable[MUS_VS_WILD].header);
     CatalogInput(closeButton);
+    if (closeButton == B_BUTTON)
+        CatalogInput(B_BUTTON);
     EXPECT(gMPlayInfo_BGM.songHeader == gSongTable[MUS_B_FRONTIER].header);
     EXPECT_EQ(GetCurrentMapMusic(), MUS_B_FRONTIER);
     EXPECT_EQ(gSpecialVar_Result, closeButton == A_BUTTON);
@@ -777,17 +970,114 @@ TEST("Frontier music: SELECT previews and stops in the catalog and both A and B 
     FreeCatalogUi();
 }
 
-TEST("Frontier music: scrolling catalog pixels match a clean redraw without leaving footer text")
+TEST("Frontier music: work pages preserve global song IDs for free preview and selection")
 {
-    bool32 preview;
-    u16 down, up;
-    struct FrontierMusicSave before;
-    PARAMETRIZE { preview = FALSE; down = DPAD_DOWN; up = DPAD_UP; }
-    PARAMETRIZE { preview = TRUE; down = DPAD_DOWN; up = DPAD_UP; }
-    PARAMETRIZE { preview = FALSE; down = DPAD_RIGHT; up = DPAD_LEFT; }
-    PARAMETRIZE { preview = TRUE; down = DPAD_RIGHT; up = DPAD_LEFT; }
+    u32 selected = 0;
+    for (u32 i = 0; i < FRONTIER_MUSIC_TRACK_COUNT; i++)
+        PARAMETRIZE { selected = i; }
     ResetMusic();
     ClearStoryProgress();
+    FlagSet(FLAG_STORY_CURE_FOUND);
+    FlagSet(FLAG_STORY_POKEVIRUS_FADED);
+    struct FrontierMusicSave before = gSaveBlock3Ptr->frontierMusic;
+    InitCatalogUi();
+    PlayNewMapMusic(MUS_B_FRONTIER);
+    MapMusicMain();
+    MapMusicMain();
+    FrontierMusic_OpenCatalog();
+    CatalogInput(0);
+    u16 song = FrontierMusic_GetSong(selected);
+    CatalogOpenCategory(FrontierMusic_GetCategory(song));
+    u8 task = CatalogListTask();
+    EXPECT_NE(task, TASK_NONE);
+    struct ListMenu *list = (void *)gTasks[task].data;
+    u32 position = 0;
+    for (; position < list->template.totalItems; position++)
+        if (list->template.items[position].id == selected)
+            break;
+    EXPECT_LT(position, list->template.totalItems);
+    for (u32 row = 0; row < list->template.totalItems - 1; row++)
+        EXPECT_EQ(FrontierMusic_GetCategory(FrontierMusic_GetSong(list->template.items[row].id)),
+                  FrontierMusic_GetCategory(song));
+    for (u32 row = 0; row < position; row++)
+        CatalogInput(DPAD_DOWN);
+    CatalogInput(SELECT_BUTTON);
+    EXPECT(gMPlayInfo_BGM.songHeader == gSongTable[song].header);
+    CatalogInput(A_BUTTON);
+    EXPECT_EQ(gSpecialVar_Result, TRUE);
+    EXPECT_EQ(gSpecialVar_0x8005, song);
+    EXPECT(gMPlayInfo_BGM.songHeader == gSongTable[MUS_B_FRONTIER].header);
+    EXPECT_EQ(gSaveBlock2Ptr->frontier.battlePoints, 100);
+    EXPECT_EQ(memcmp(&before, &gSaveBlock3Ptr->frontierMusic, sizeof(before)), 0);
+    FreeCatalogUi();
+}
+
+TEST("Frontier music: empty and story-unlocked original pages return safely without task leaks")
+{
+    u8 available;
+    PARAMETRIZE { available = 0; }
+    PARAMETRIZE { available = 1; }
+    PARAMETRIZE { available = 2; }
+    ResetMusic();
+    ClearStoryProgress();
+    if (available >= 1)
+        FlagSet(FLAG_STORY_CURE_FOUND);
+    if (available >= 2)
+        FlagSet(FLAG_STORY_POKEVIRUS_FADED);
+    InitCatalogUi();
+    PlayNewMapMusic(MUS_B_FRONTIER);
+    MapMusicMain();
+    MapMusicMain();
+    FrontierMusic_OpenCatalog();
+    CatalogInput(0);
+    for (u32 repeat = 0; repeat < 4; repeat++)
+    {
+        if (repeat == 0)
+            CatalogOpenCategory(FRONTIER_MUSIC_CATEGORY_ORIGINAL);
+        else
+            CatalogInput(A_BUTTON);
+        u8 task = CatalogListTask();
+        EXPECT_NE(task, TASK_NONE);
+        struct ListMenu *list = (void *)gTasks[task].data;
+        EXPECT_EQ((u32)list->template.totalItems, available + 1);
+        EXPECT_EQ((u32)list->template.maxShowed, available + 1);
+        CatalogInput(SELECT_BUTTON);
+        if (available == 0)
+            EXPECT(gMPlayInfo_BGM.songHeader == gSongTable[MUS_B_FRONTIER].header);
+        else
+            EXPECT(gMPlayInfo_BGM.songHeader == gSongTable[MUS_POKEVIRUS_RELEASE].header);
+        CatalogInput(B_BUTTON);
+        EXPECT(gMPlayInfo_BGM.songHeader == gSongTable[MUS_B_FRONTIER].header);
+        task = CatalogListTask();
+        EXPECT_NE(task, TASK_NONE);
+        list = (void *)gTasks[task].data;
+        EXPECT_EQ((u32)list->template.totalItems, FRONTIER_MUSIC_CATEGORY_COUNT + 1);
+        EXPECT_EQ(list->scrollOffset + list->selectedRow, FRONTIER_MUSIC_CATEGORY_ORIGINAL);
+    }
+    CatalogInput(B_BUTTON);
+    EXPECT_EQ(gSpecialVar_Result, FALSE);
+    for (u32 task = 0; task < NUM_TASKS; task++)
+        EXPECT(!gTasks[task].isActive);
+    FreeCatalogUi();
+}
+
+TEST("Frontier music: scrolling catalog pixels match a clean redraw without leaving footer text")
+{
+    bool32 preview = FALSE;
+    u16 down = DPAD_DOWN, up = DPAD_UP;
+    u8 category = FRONTIER_MUSIC_CATEGORY_KANTO;
+    struct FrontierMusicSave before;
+    for (u32 i = 0; i <= FRONTIER_MUSIC_CATEGORY_COUNT; i++)
+    {
+        PARAMETRIZE { category = i; preview = FALSE; down = DPAD_DOWN; up = DPAD_UP; }
+        PARAMETRIZE { category = i; preview = TRUE; down = DPAD_DOWN; up = DPAD_UP; }
+        PARAMETRIZE { category = i; preview = FALSE; down = DPAD_RIGHT; up = DPAD_LEFT; }
+        PARAMETRIZE { category = i; preview = TRUE; down = DPAD_RIGHT; up = DPAD_LEFT; }
+    }
+    ResetMusic();
+    ClearStoryProgress();
+    FlagSet(FLAG_STORY_POKEVIRUS_FADED);
+    FlagSet(FLAG_STORY_CURE_FOUND);
     FrontierMusic_Unlock(MUS_RG_VS_DEOXYS);
     FrontierMusic_SetMode(FRONTIER_MUSIC_FIXED, MUS_RG_VS_DEOXYS);
     before = gSaveBlock3Ptr->frontierMusic;
@@ -797,17 +1087,9 @@ TEST("Frontier music: scrolling catalog pixels match a clean redraw without leav
     MapMusicMain();
     FrontierMusic_OpenCatalog();
     CatalogInput(0);
-    u8 listTask = TASK_NONE;
-    for (u32 task = 0; task < NUM_TASKS; task++)
-    {
-        const struct ListMenu *list = (const void *)gTasks[task].data;
-        if (gTasks[task].isActive
-         && gTasks[task].priority == 0
-         && list->template.maxShowed == 5
-         && list->template.totalItems == FRONTIER_MUSIC_TRACK_COUNT - 1
-         && list->template.fontId == FONT_NORMAL)
-            listTask = task;
-    }
+    if (category < FRONTIER_MUSIC_CATEGORY_COUNT)
+        CatalogOpenCategory(category);
+    u8 listTask = CatalogListTask();
     EXPECT_NE(listTask, TASK_NONE);
     struct ListMenu *list = (void *)gTasks[listTask].data;
     u8 window = list->template.windowId;
@@ -823,6 +1105,17 @@ TEST("Frontier music: scrolling catalog pixels match a clean redraw without leav
             CatalogInput(direction == 0 ? down : up);
             memcpy(actual, (const void *)GetWindowAttribute(window, WINDOW_TILE_DATA), size);
             const u8 *vram = (const u8 *)BG_CHAR_ADDR(0) + GetWindowAttribute(window, WINDOW_BASE_BLOCK) * 32;
+            if (memcmp(actual, vram, size) != 0)
+            {
+                for (u32 offset = 0; offset < size; offset++)
+                    if (actual[offset] != vram[offset])
+                    {
+                        Test_MgbaPrintf("Catalog preview=%u keys=%u direction=%u step=%u scroll=%u row=%u offset=%u RAM=%u VRAM=%u",
+                                        preview, down, direction, step, list->scrollOffset, list->selectedRow,
+                                        offset, actual[offset], vram[offset]);
+                        break;
+                    }
+            }
             EXPECT_EQ(memcmp(actual, vram, size), 0);
             RedrawListMenu(listTask);
             CatalogInput(0);
@@ -834,6 +1127,8 @@ TEST("Frontier music: scrolling catalog pixels match a clean redraw without leav
     EXPECT_EQ(memcmp(&before, &gSaveBlock3Ptr->frontierMusic, sizeof(before)), 0);
     EXPECT_EQ(gSaveBlock2Ptr->frontier.battlePoints, 95);
     CatalogInput(B_BUTTON);
+    if (category < FRONTIER_MUSIC_CATEGORY_COUNT)
+        CatalogInput(B_BUTTON);
     EXPECT(gMPlayInfo_BGM.songHeader == gSongTable[MUS_B_FRONTIER].header);
     Free(actual);
     FreeCatalogUi();

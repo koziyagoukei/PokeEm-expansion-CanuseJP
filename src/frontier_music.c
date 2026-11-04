@@ -28,38 +28,41 @@ struct FrontierMusicTrack
 {
     u16 song;
     u8 name[32];
+    u8 category;
 };
 
 // Append only: these indices are also the saved unlock-bit positions.
 static const struct FrontierMusicTrack sTracks[] =
 {
-    {MUS_VS_TRAINER, _("{JPN}ホウエン トレーナー")},
-    {MUS_VS_WILD, _("{JPN}ホウエン やせい")},
-    {MUS_VS_GYM_LEADER, _("{JPN}ホウエン ジムリーダー")},
-    {MUS_VS_RIVAL, _("{JPN}ホウエン ライバル")},
-    {MUS_VS_ELITE_FOUR, _("{JPN}ホウエン してんのう")},
-    {MUS_VS_CHAMPION, _("{JPN}ホウエン チャンピオン")},
-    {MUS_VS_AQUA_MAGMA, _("{JPN}アクアだん マグマだん")},
-    {MUS_VS_AQUA_MAGMA_LEADER, _("{JPN}アクア マグマリーダー")},
-    {MUS_VS_REGI, _("{JPN}レジロックたち")},
-    {MUS_VS_KYOGRE_GROUDON, _("{JPN}カイオーガ グラードン")},
-    {MUS_VS_RAYQUAZA, _("{JPN}レックウザ")},
-    {MUS_VS_MEW, _("{JPN}ミュウ")},
-    {MUS_VS_FRONTIER_BRAIN, _("{JPN}フロンティアブレーン")},
-    {MUS_RG_VS_TRAINER, _("{JPN}カントー トレーナー")},
-    {MUS_RG_VS_WILD, _("{JPN}カントー やせい")},
-    {MUS_RG_VS_GYM_LEADER, _("{JPN}カントー ジムリーダー")},
-    {MUS_RG_VS_CHAMPION, _("{JPN}カントー チャンピオン")},
-    {MUS_RG_VS_LEGEND, _("{JPN}カントー でんせつ")},
-    {MUS_RG_VS_MEWTWO, _("{JPN}ミュウツー")},
-    {MUS_RG_VS_DEOXYS, _("{JPN}デオキシス")},
-    {MUS_C_VS_LEGEND_BEAST, _("{JPN}スイクンたち")},
-    {MUS_POKEVIRUS_RELEASE, _("{JPN}かいほうせん")},
-    {MUS_POKEVIRUS_FINAL, _("{JPN}ヒトポケルス")},
-    {MUS_VS_COLOSSEUM, _("{JPN}コロシアム トレーナー")},
-    {MUS_VS_COLOSSEUM_ADMIN, _("{JPN}コロシアム かんぶ")},
-    {MUS_VS_COLOSSEUM_2, _("{JPN}コロシアム トレーナー2")},
-    {MUS_VS_PMD_RAYQUAZA, _("{JPN}きゅうじょたい レックウザ")},
+    {MUS_VS_TRAINER, _("{JPN}ホウエン トレーナー"), FRONTIER_MUSIC_CATEGORY_HOENN},
+    {MUS_VS_WILD, _("{JPN}ホウエン やせい"), FRONTIER_MUSIC_CATEGORY_HOENN},
+    {MUS_VS_GYM_LEADER, _("{JPN}ホウエン ジムリーダー"), FRONTIER_MUSIC_CATEGORY_HOENN},
+    {MUS_VS_RIVAL, _("{JPN}ホウエン ライバル"), FRONTIER_MUSIC_CATEGORY_HOENN},
+    {MUS_VS_ELITE_FOUR, _("{JPN}ホウエン してんのう"), FRONTIER_MUSIC_CATEGORY_HOENN},
+    {MUS_VS_CHAMPION, _("{JPN}ホウエン チャンピオン"), FRONTIER_MUSIC_CATEGORY_HOENN},
+    {MUS_VS_AQUA_MAGMA, _("{JPN}アクアだん マグマだん"), FRONTIER_MUSIC_CATEGORY_HOENN},
+    {MUS_VS_AQUA_MAGMA_LEADER, _("{JPN}アクア マグマリーダー"), FRONTIER_MUSIC_CATEGORY_HOENN},
+    {MUS_VS_REGI, _("{JPN}レジロックたち"), FRONTIER_MUSIC_CATEGORY_HOENN},
+    {MUS_VS_KYOGRE_GROUDON, _("{JPN}カイオーガ グラードン"), FRONTIER_MUSIC_CATEGORY_HOENN},
+    {MUS_VS_RAYQUAZA, _("{JPN}レックウザ"), FRONTIER_MUSIC_CATEGORY_HOENN},
+    {MUS_VS_MEW, _("{JPN}ミュウ"), FRONTIER_MUSIC_CATEGORY_HOENN},
+    {MUS_VS_FRONTIER_BRAIN, _("{JPN}フロンティアブレーン"), FRONTIER_MUSIC_CATEGORY_HOENN},
+    {MUS_RG_VS_TRAINER, _("{JPN}カントー トレーナー"), FRONTIER_MUSIC_CATEGORY_KANTO},
+    {MUS_RG_VS_WILD, _("{JPN}カントー やせい"), FRONTIER_MUSIC_CATEGORY_KANTO},
+    {MUS_RG_VS_GYM_LEADER, _("{JPN}カントー ジムリーダー"), FRONTIER_MUSIC_CATEGORY_KANTO},
+    {MUS_RG_VS_CHAMPION, _("{JPN}カントー チャンピオン"), FRONTIER_MUSIC_CATEGORY_KANTO},
+    {MUS_RG_VS_LEGEND, _("{JPN}カントー でんせつ"), FRONTIER_MUSIC_CATEGORY_KANTO},
+    {MUS_RG_VS_MEWTWO, _("{JPN}ミュウツー"), FRONTIER_MUSIC_CATEGORY_KANTO},
+    {MUS_RG_VS_DEOXYS, _("{JPN}デオキシス"), FRONTIER_MUSIC_CATEGORY_KANTO},
+    {MUS_C_VS_LEGEND_BEAST, _("{JPN}スイクンたち"), FRONTIER_MUSIC_CATEGORY_KANTO},
+    {MUS_POKEVIRUS_RELEASE, _("{JPN}かいほうせん"), FRONTIER_MUSIC_CATEGORY_ORIGINAL},
+    {MUS_POKEVIRUS_FINAL, _("{JPN}ヒトポケルス"), FRONTIER_MUSIC_CATEGORY_ORIGINAL},
+    {MUS_VS_COLOSSEUM, _("{JPN}コロシアム トレーナー"), FRONTIER_MUSIC_CATEGORY_ORRE},
+    {MUS_VS_COLOSSEUM_ADMIN, _("{JPN}コロシアム かんぶ"), FRONTIER_MUSIC_CATEGORY_ORRE},
+    {MUS_VS_COLOSSEUM_2, _("{JPN}コロシアム トレーナー2"), FRONTIER_MUSIC_CATEGORY_ORRE},
+    {MUS_VS_PMD_RAYQUAZA, _("{JPN}きゅうじょたい レックウザ"), FRONTIER_MUSIC_CATEGORY_DUNGEON},
+    {MUS_VS_PMD_BOSS, _("{JPN}きゅうじょたい ボス"), FRONTIER_MUSIC_CATEGORY_DUNGEON},
+    {MUS_VS_ZINNIA, _("{JPN}ORAS ヒガナ"), FRONTIER_MUSIC_CATEGORY_HOENN},
 };
 
 static const u16 sRescuedFlags[] =
@@ -69,6 +72,15 @@ static const u16 sRescuedFlags[] =
 };
 
 static const u8 sText_Cancel[] = _("{JPN}やめる");
+static const u8 sText_Back[] = _("{JPN}もどる");
+static const u8 sCategoryNames[FRONTIER_MUSIC_CATEGORY_COUNT][16] =
+{
+    [FRONTIER_MUSIC_CATEGORY_KANTO] = _("{JPN}カントー"),
+    [FRONTIER_MUSIC_CATEGORY_HOENN] = _("{JPN}ホウエン"),
+    [FRONTIER_MUSIC_CATEGORY_ORRE] = _("{JPN}オーレ"),
+    [FRONTIER_MUSIC_CATEGORY_DUNGEON] = _("{JPN}ダンジョン"),
+    [FRONTIER_MUSIC_CATEGORY_ORIGINAL] = _("{JPN}オリジナル"),
+};
 static const u8 sText_Default[] = _("{JPN}もとの BGM");
 static const u8 sText_Random[] = _("{JPN}かいほうずみから ランダム");
 static const u8 sText_Price[] = _("{ENG}5BP");
@@ -77,6 +89,7 @@ static const u8 sText_Selected[] = _("{JPN}せってい");
 static const u8 sText_PreviewControls[] = _("{JPN}SELECT:しちょう A:けってい B:もどる");
 static const u8 sText_StopPreviewControls[] = _("{JPN}SELECT:ていし A:けってい B:もどる");
 static const u8 sText_CancelControls[] = _("{JPN}A:もどる B:もどる");
+static const u8 sText_CategoryControls[] = _("{JPN}A:ひらく B:もどる");
 
 static EWRAM_DATA bool8 sPreviewActive = FALSE;
 static EWRAM_DATA u16 sPreviewSong = 0;
@@ -87,6 +100,9 @@ struct FrontierMusicCatalog
     struct ListMenuItem items[FRONTIER_MUSIC_TRACK_COUNT + 1];
     u16 scroll;
     u16 row;
+    u16 categoryScroll;
+    u16 categoryRow;
+    u8 category;
     u8 windowId;
     u8 listTaskId;
     u8 arrowsTaskId;
@@ -174,6 +190,12 @@ void FrontierMusic_Earn(bool32 finalBattle)
 u16 FrontierMusic_GetSong(u32 index)
 {
     return index < ARRAY_COUNT(sTracks) ? sTracks[index].song : MUS_DUMMY;
+}
+
+u8 FrontierMusic_GetCategory(u16 song)
+{
+    u32 index = GetTrackIndex(song);
+    return index < ARRAY_COUNT(sTracks) ? sTracks[index].category : FRONTIER_MUSIC_CATEGORY_COUNT;
 }
 
 bool8 FrontierMusic_IsUnlocked(u16 song)
@@ -294,8 +316,12 @@ void FrontierMusic_StopPreview(void)
 
 static void PrintCatalogControls(s32 index)
 {
-    const u8 *text = index < 0 || index >= ARRAY_COUNT(sTracks) ? sText_CancelControls
+    const u8 *text = sCatalog->category == FRONTIER_MUSIC_CATEGORY_COUNT
+        ? (index == LIST_CANCEL ? sText_CancelControls : sText_CategoryControls)
+        : index < 0 || index >= ARRAY_COUNT(sTracks) ? sText_CancelControls
         : sPreviewActive && sPreviewSong == sTracks[index].song ? sText_StopPreviewControls : sText_PreviewControls;
+    if (sCatalog->category < FRONTIER_MUSIC_CATEGORY_COUNT)
+        AddTextPrinterParameterized(sCatalog->windowId, FONT_SMALL, sCategoryNames[sCatalog->category], 4, 0, TEXT_SKIP_DRAW, NULL);
     FillWindowPixelRect(sCatalog->windowId, PIXEL_FILL(1), 0, 82, 208, 14);
     AddTextPrinterParameterized(sCatalog->windowId, FONT_SMALL, text, 4, 82, TEXT_SKIP_DRAW, NULL);
 }
@@ -319,10 +345,63 @@ static void CatalogMoveCursor(s32 index, bool8 onInit, struct ListMenu *list)
     PrintCatalogControls(index);
 }
 
+static void DestroyCatalogList(void)
+{
+    if (sCatalog->listTaskId != TASK_NONE)
+        DestroyListMenuTask(sCatalog->listTaskId, NULL, NULL);
+    if (sCatalog->arrowsTaskId != TASK_NONE)
+        RemoveScrollIndicatorArrowPair(sCatalog->arrowsTaskId);
+    sCatalog->listTaskId = sCatalog->arrowsTaskId = TASK_NONE;
+}
+
+static void BuildCatalogList(u8 category, u16 scroll, u16 row)
+{
+    struct ListMenuTemplate list = {0};
+    u32 count = 0;
+    DestroyCatalogList();
+    sCatalog->category = category;
+    sCatalog->scroll = scroll;
+    sCatalog->row = row;
+    if (category == FRONTIER_MUSIC_CATEGORY_COUNT)
+    {
+        for (u32 i = 0; i < FRONTIER_MUSIC_CATEGORY_COUNT; i++)
+            sCatalog->items[count++] = (struct ListMenuItem){sCategoryNames[i], i};
+    }
+    else
+    {
+        for (u32 i = 0; i < ARRAY_COUNT(sTracks); i++)
+            if (sTracks[i].category == category && FrontierMusic_IsAvailable(sTracks[i].song))
+                sCatalog->items[count++] = (struct ListMenuItem){sTracks[i].name, i};
+    }
+    sCatalog->items[count++] = (struct ListMenuItem){category == FRONTIER_MUSIC_CATEGORY_COUNT ? sText_Cancel : sText_Back, LIST_CANCEL};
+    FillWindowPixelBuffer(sCatalog->windowId, PIXEL_FILL(1));
+    list.items = sCatalog->items;
+    list.moveCursorFunc = CatalogMoveCursor;
+    list.itemPrintFunc = category == FRONTIER_MUSIC_CATEGORY_COUNT ? NULL : PrintTrackStatus;
+    list.totalItems = count;
+    list.maxShowed = min(count, category == FRONTIER_MUSIC_CATEGORY_COUNT ? 5 : 4);
+    list.windowId = sCatalog->windowId;
+    list.item_X = 8;
+    list.upText_Y = category == FRONTIER_MUSIC_CATEGORY_COUNT ? 1 : 17;
+    list.cursorPal = 2;
+    list.fillValue = 1;
+    list.cursorShadowPal = 3;
+    list.fontId = FONT_NORMAL;
+    list.scrollMultiple = LIST_MULTIPLE_SCROLL_DPAD;
+    sCatalog->listTaskId = ListMenuInit(&list, scroll, row);
+    if (count > list.maxShowed)
+        sCatalog->arrowsTaskId = AddScrollIndicatorArrowPairParameterized(
+            SCROLL_ARROW_UP, 228, category == FRONTIER_MUSIC_CATEGORY_COUNT ? 40 : 48, 104,
+            count - list.maxShowed, 0xFCE0, 0xFCE0, &sCatalog->scroll);
+    CopyWindowToVram(sCatalog->windowId, COPYWIN_FULL);
+}
+
 static void Task_Catalog(u8 taskId)
 {
     if (JOY_NEW(SELECT_BUTTON))
     {
+        if (sCatalog->category == FRONTIER_MUSIC_CATEGORY_COUNT)
+            return;
         u16 item;
         ListMenuGetCurrentItemArrayId(sCatalog->listTaskId, &item);
         s32 selected = sCatalog->items[item].id;
@@ -347,6 +426,19 @@ static void Task_Catalog(u8 taskId)
     if (index == LIST_NOTHING_CHOSEN)
         return;
     PlaySE(SE_SELECT);
+    if (sCatalog->category == FRONTIER_MUSIC_CATEGORY_COUNT && index >= 0 && index < FRONTIER_MUSIC_CATEGORY_COUNT)
+    {
+        sCatalog->categoryScroll = sCatalog->scroll;
+        sCatalog->categoryRow = sCatalog->row;
+        BuildCatalogList(index, 0, 0);
+        return;
+    }
+    if (sCatalog->category < FRONTIER_MUSIC_CATEGORY_COUNT && index == LIST_CANCEL)
+    {
+        FrontierMusic_StopPreview();
+        BuildCatalogList(FRONTIER_MUSIC_CATEGORY_COUNT, sCatalog->categoryScroll, sCatalog->categoryRow);
+        return;
+    }
     gSpecialVar_Result = index >= 0 && index < ARRAY_COUNT(sTracks);
     if (gSpecialVar_Result)
     {
@@ -354,9 +446,9 @@ static void Task_Catalog(u8 taskId)
         StringCopy(gStringVar1, sTracks[index].name);
     }
     FrontierMusic_StopPreview();
-    DestroyListMenuTask(sCatalog->listTaskId, NULL, NULL);
-    RemoveScrollIndicatorArrowPair(sCatalog->arrowsTaskId);
-    ClearStdWindowAndFrameToTransparent(sCatalog->windowId, TRUE);
+    DestroyCatalogList();
+    ClearStdWindowAndFrameToTransparent(sCatalog->windowId, FALSE);
+    CopyWindowToVram(sCatalog->windowId, COPYWIN_MAP);
     RemoveWindow(sCatalog->windowId);
     Free(sCatalog);
     sCatalog = NULL;
@@ -373,16 +465,16 @@ static void Task_ResumeScript(u8 taskId)
 void FrontierMusic_OpenCatalog(void)
 {
     const struct WindowTemplate window = {0, 2, 4, 26, 12, 15, 64};
-    struct ListMenuTemplate list = {0};
-    u8 taskId = CreateTask(Task_ResumeScript, 8);
-    u32 i, count = 0;
-
-    gSpecialVar_Result = FALSE;
     if (sCatalog != NULL)
+        return;
+    u8 taskId = CreateTask(Task_ResumeScript, 8);
+    gSpecialVar_Result = FALSE;
+    if (taskId == TASK_NONE)
         return;
     sCatalog = AllocZeroed(sizeof(*sCatalog));
     if (sCatalog == NULL)
         return;
+    sCatalog->listTaskId = sCatalog->arrowsTaskId = TASK_NONE;
     FrontierMusic_StopPreview();
     FrontierMusic_EnsureSaveData();
     HideMapNamePopUpWindow();
@@ -394,28 +486,7 @@ void FrontierMusic_OpenCatalog(void)
         sCatalog = NULL;
         return;
     }
-    for (i = 0; i < ARRAY_COUNT(sTracks); i++)
-        if (FrontierMusic_IsAvailable(sTracks[i].song))
-            sCatalog->items[count++] = (struct ListMenuItem){sTracks[i].name, i};
-    sCatalog->items[count++] = (struct ListMenuItem){sText_Cancel, LIST_CANCEL};
-    FillWindowPixelBuffer(sCatalog->windowId, PIXEL_FILL(1));
     SetStandardWindowBorderStyle(sCatalog->windowId, FALSE);
-    list.items = sCatalog->items;
-    list.moveCursorFunc = CatalogMoveCursor;
-    list.itemPrintFunc = PrintTrackStatus;
-    list.totalItems = count;
-    list.maxShowed = 5;
-    list.windowId = sCatalog->windowId;
-    list.item_X = 8;
-    list.upText_Y = 1;
-    list.cursorPal = 2;
-    list.fillValue = 1;
-    list.cursorShadowPal = 3;
-    list.fontId = FONT_NORMAL;
-    list.scrollMultiple = LIST_MULTIPLE_SCROLL_DPAD;
-    sCatalog->listTaskId = ListMenuInit(&list, 0, 0);
-    sCatalog->arrowsTaskId = AddScrollIndicatorArrowPairParameterized(
-        SCROLL_ARROW_UP, 228, 40, 104, list.totalItems - list.maxShowed, 0xFCE0, 0xFCE0, &sCatalog->scroll);
-    CopyWindowToVram(sCatalog->windowId, COPYWIN_FULL);
+    BuildCatalogList(FRONTIER_MUSIC_CATEGORY_COUNT, 0, 0);
     gTasks[taskId].func = Task_Catalog;
 }

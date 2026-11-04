@@ -5,6 +5,7 @@
 
 void FrontierMusic_EnsureSaveData(void);
 u16 FrontierMusic_GetSong(u32 index);
+u8 FrontierMusic_GetCategory(u16 song);
 bool8 FrontierMusic_IsUnlocked(u16 song);
 bool8 FrontierMusic_IsAvailable(u16 song);
 void FrontierMusic_Earn(bool32 finalBattle);
