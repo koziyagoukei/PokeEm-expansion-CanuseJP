@@ -25,6 +25,8 @@
 
 #define FRONTIER_MUSIC_MAGIC 0x464D5553
 #define FRONTIER_MUSIC_VERSION 1
+#define FRONTIER_MUSIC_EXTRA_MAGIC 0x464D4558
+#define FRONTIER_MUSIC_EXTRA_VERSION 1
 
 struct FrontierMusicTrack
 {
@@ -68,6 +70,7 @@ static const struct FrontierMusicTrack sTracks[] =
     {MUS_VS_PMD_DIALGA, _("{JPN}たんけんたい ディアルガ"), FRONTIER_MUSIC_CATEGORY_DUNGEON},
     {MUS_VS_HGSS_HO_OH, _("{JPN}HGSS ホウオウ"), FRONTIER_MUSIC_CATEGORY_JOHTO},
     {MUS_VS_HGSS_LUGIA, _("{JPN}HGSS ルギア"), FRONTIER_MUSIC_CATEGORY_JOHTO},
+    {MUS_VS_HGSS_CHAMPION, _("{JPN}HGSS チャンピオン"), FRONTIER_MUSIC_CATEGORY_JOHTO},
 };
 
 static const u16 sRescuedFlags[] =
@@ -122,9 +125,13 @@ struct FrontierMusicCatalog
 static EWRAM_DATA struct FrontierMusicCatalog *sCatalog = NULL;
 
 STATIC_ASSERT(ARRAY_COUNT(sTracks) == FRONTIER_MUSIC_TRACK_COUNT, FrontierMusicCatalogSize);
-STATIC_ASSERT(FRONTIER_MUSIC_TRACK_COUNT > 0 && FRONTIER_MUSIC_TRACK_COUNT <= 32, FrontierMusicUnlockBits);
+STATIC_ASSERT(FRONTIER_MUSIC_TRACK_COUNT > 0
+    && FRONTIER_MUSIC_TRACK_COUNT <= 32 + 8 * sizeof(((struct FrontierMusicExtraSave *)0)->unlocked), FrontierMusicUnlockBits);
 STATIC_ASSERT(offsetof(struct SaveBlock3, frontierMusic) == 152, FrontierMusicAppendOnlySave);
 STATIC_ASSERT(sizeof(struct FrontierMusicSave) == 16, FrontierMusicSaveSize);
+STATIC_ASSERT(offsetof(struct SaveBlock3, frontierMusicExtra)
+    == offsetof(struct SaveBlock3, pokevirus) + sizeof(struct FrontierPokevirusSave), FrontierMusicExtraAppendOnly);
+STATIC_ASSERT(sizeof(struct FrontierMusicExtraSave) == 20, FrontierMusicExtraSaveSize);
 
 static u32 GetTrackIndex(u16 song)
 {
@@ -138,12 +145,34 @@ static u32 GetTrackIndex(u16 song)
 static void UpdateChecksum(void)
 {
     struct FrontierMusicSave *save = &gSaveBlock3Ptr->frontierMusic;
+    struct FrontierMusicExtraSave *extra = &gSaveBlock3Ptr->frontierMusicExtra;
     save->checksum = CalcCRC16((const u8 *)save, offsetof(struct FrontierMusicSave, checksum));
+    extra->checksum = CalcCRC16((const u8 *)extra, offsetof(struct FrontierMusicExtraSave, checksum));
+}
+
+static bool32 IsTrackUnlocked(u32 index)
+{
+    if (index >= ARRAY_COUNT(sTracks))
+        return FALSE;
+    if (index < 32)
+        return (gSaveBlock3Ptr->frontierMusic.unlocked & (1u << index)) != 0;
+    return (gSaveBlock3Ptr->frontierMusicExtra.unlocked[index / 32 - 1] & (1u << (index % 32))) != 0;
+}
+
+static bool32 HasUnlockedTracks(void)
+{
+    if (gSaveBlock3Ptr->frontierMusic.unlocked != 0)
+        return TRUE;
+    for (u32 i = 0; i < ARRAY_COUNT(gSaveBlock3Ptr->frontierMusicExtra.unlocked); i++)
+        if (gSaveBlock3Ptr->frontierMusicExtra.unlocked[i] != 0)
+            return TRUE;
+    return FALSE;
 }
 
 void FrontierMusic_EnsureSaveData(void)
 {
     struct FrontierMusicSave *save = &gSaveBlock3Ptr->frontierMusic;
+    struct FrontierMusicExtraSave *extra = &gSaveBlock3Ptr->frontierMusicExtra;
     u32 index = GetTrackIndex(save->selectedSong);
 
     if (save->magic != FRONTIER_MUSIC_MAGIC
@@ -153,14 +182,33 @@ void FrontierMusic_EnsureSaveData(void)
         memset(save, 0, sizeof(*save));
         save->magic = FRONTIER_MUSIC_MAGIC;
         save->version = FRONTIER_MUSIC_VERSION;
+        memset(extra, 0, sizeof(*extra));
     }
-    // Right-shift the mask so the 32nd song never requires a shift by 32.
+#if FRONTIER_MUSIC_TRACK_COUNT < 32
     save->unlocked &= 0xFFFFFFFFu >> (32 - FRONTIER_MUSIC_TRACK_COUNT);
+#endif
+    // Old saves have only padding here; validate this extension independently.
+    if (extra->magic != FRONTIER_MUSIC_EXTRA_MAGIC || extra->version != FRONTIER_MUSIC_EXTRA_VERSION
+     || extra->checksum != CalcCRC16((const u8 *)extra, offsetof(struct FrontierMusicExtraSave, checksum)))
+    {
+        memset(extra, 0, sizeof(*extra));
+        extra->magic = FRONTIER_MUSIC_EXTRA_MAGIC;
+        extra->version = FRONTIER_MUSIC_EXTRA_VERSION;
+    }
+    extra->reserved = 0;
+    for (u32 i = 0; i < ARRAY_COUNT(extra->unlocked); i++)
+    {
+        s32 bits = FRONTIER_MUSIC_TRACK_COUNT - (s32)(32 * (i + 1));
+        if (bits <= 0)
+            extra->unlocked[i] = 0;
+        else if (bits < 32)
+            extra->unlocked[i] &= 0xFFFFFFFFu >> (32 - bits);
+    }
     save->earned &= FRONTIER_MUSIC_EARNED_RELEASE | FRONTIER_MUSIC_EARNED_FINAL;
     if (save->mode > FRONTIER_MUSIC_RANDOM
      || (save->mode == FRONTIER_MUSIC_FIXED
-      && (index >= ARRAY_COUNT(sTracks) || !(save->unlocked & (1u << index))))
-     || (save->mode == FRONTIER_MUSIC_RANDOM && save->unlocked == 0))
+      && !IsTrackUnlocked(index))
+     || (save->mode == FRONTIER_MUSIC_RANDOM && !HasUnlockedTracks()))
         save->mode = FRONTIER_MUSIC_DEFAULT;
     if (save->mode != FRONTIER_MUSIC_FIXED)
         save->selectedSong = MUS_DUMMY;
@@ -214,7 +262,7 @@ bool8 FrontierMusic_IsUnlocked(u16 song)
 {
     u32 index = GetTrackIndex(song);
     FrontierMusic_EnsureSaveData();
-    return index < ARRAY_COUNT(sTracks) && (gSaveBlock3Ptr->frontierMusic.unlocked & (1u << index)) != 0;
+    return IsTrackUnlocked(index);
 }
 
 u16 FrontierMusic_Unlock(u16 song)
@@ -227,7 +275,10 @@ u16 FrontierMusic_Unlock(u16 song)
     if (gSaveBlock2Ptr->frontier.battlePoints < FRONTIER_MUSIC_PRICE)
         return FRONTIER_MUSIC_NOT_ENOUGH_BP;
     gSaveBlock2Ptr->frontier.battlePoints -= FRONTIER_MUSIC_PRICE;
-    gSaveBlock3Ptr->frontierMusic.unlocked |= 1u << index;
+    if (index < 32)
+        gSaveBlock3Ptr->frontierMusic.unlocked |= 1u << index;
+    else
+        gSaveBlock3Ptr->frontierMusicExtra.unlocked[index / 32 - 1] |= 1u << (index % 32);
     UpdateChecksum();
     return FRONTIER_MUSIC_OK;
 }
@@ -239,7 +290,7 @@ u16 FrontierMusic_SetMode(u8 mode, u16 song)
         return FRONTIER_MUSIC_INVALID;
     if (mode == FRONTIER_MUSIC_FIXED && !FrontierMusic_IsUnlocked(song))
         return GetTrackIndex(song) < ARRAY_COUNT(sTracks) ? FRONTIER_MUSIC_NOT_UNLOCKED : FRONTIER_MUSIC_INVALID;
-    if (mode == FRONTIER_MUSIC_RANDOM && gSaveBlock3Ptr->frontierMusic.unlocked == 0)
+    if (mode == FRONTIER_MUSIC_RANDOM && !HasUnlockedTracks())
         return FRONTIER_MUSIC_EMPTY;
     gSaveBlock3Ptr->frontierMusic.mode = mode;
     gSaveBlock3Ptr->frontierMusic.selectedSong = mode == FRONTIER_MUSIC_FIXED ? song : MUS_DUMMY;
@@ -271,12 +322,12 @@ u16 FrontierMusic_ChooseBattleBGM(u16 defaultSong)
     if (save->mode != FRONTIER_MUSIC_RANDOM)
         return defaultSong;
     for (i = 0; i < ARRAY_COUNT(sTracks); i++)
-        if (save->unlocked & (1u << i))
+        if (IsTrackUnlocked(i))
             count++;
     // The secondary stream leaves trainer generation and battle RNG untouched.
     selected = Random2() % count;
     for (i = 0; i < ARRAY_COUNT(sTracks); i++)
-        if ((save->unlocked & (1u << i)) && selected-- == 0)
+        if (IsTrackUnlocked(i) && selected-- == 0)
             return sTracks[i].song;
     return defaultSong;
 }

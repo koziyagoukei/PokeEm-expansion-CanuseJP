@@ -2,10 +2,10 @@
 #include "pokemon_storage_system.h"
 #include "test/test.h"
 
-// Reviewed sizes for the Frontier save format (signature 0x46520002): bag redesign and 18 boxes.
+// Reviewed base sizes and append-only local records: bag redesign and 18 boxes.
 #define T_SAVEBLOCK1_SIZE 14160
 #define T_SAVEBLOCK2_SIZE 3696
-#define T_SAVEBLOCK3_SIZE 568
+#define T_SAVEBLOCK3_SIZE 608
 #define T_POKEMONSTORAGE_SIZE 43384
 
 TEST("Save layout: SaveBlock1 matches the reviewed bag format")
@@ -21,6 +21,10 @@ TEST("Save layout: SaveBlock2 matches the reviewed optional feature settings")
 TEST("Save layout: SaveBlock3 keeps the resort data and fusion partners")
 {
     EXPECT_EQ(sizeof(struct SaveBlock3), T_SAVEBLOCK3_SIZE);
+    EXPECT_EQ(offsetof(struct SaveBlock3, frontierMusic), 152);
+    EXPECT_EQ(offsetof(struct SaveBlock3, fusions), 168);
+    EXPECT_EQ(offsetof(struct SaveBlock3, pokevirus), 568);
+    EXPECT_EQ(offsetof(struct SaveBlock3, frontierMusicExtra), 588);
 }
 
 TEST("Save layout: PokemonStorage holds eighteen boxes")

@@ -629,6 +629,7 @@ gSongTable::
 	song mus_vs_pmd_dialga, MUSIC_PLAYER_BGM, 0
 	song mus_vs_hgss_ho_oh, MUSIC_PLAYER_BGM, 0
 	song mus_vs_hgss_lugia, MUSIC_PLAYER_BGM, 0
+	song mus_vs_hgss_champion, MUSIC_PLAYER_BGM, 0
 
 	.align 2
 dummy_song_header:

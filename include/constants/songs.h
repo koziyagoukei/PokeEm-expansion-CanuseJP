@@ -561,6 +561,7 @@
 #define MUS_VS_PMD_DIALGA           620
 #define MUS_VS_HGSS_HO_OH           621
 #define MUS_VS_HGSS_LUGIA           622
+#define MUS_VS_HGSS_CHAMPION        623
 
 #define MUS_ROUTE118                0x7FFF  // Map is split into 2 music sections. controlled by GetCurrLocationDefaultMusic().
 

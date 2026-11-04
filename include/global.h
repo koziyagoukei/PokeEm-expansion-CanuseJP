@@ -293,6 +293,15 @@ struct FrontierMusicSave
     u16 earned; // FRONTIER_MUSIC_EARNED_* bits; outside the checksum, which predates them
 };
 
+struct FrontierMusicExtraSave
+{
+    u32 magic;
+    u32 unlocked[3]; // Catalog positions 32..127; the original 32 bits stay in place.
+    u8 version;
+    u8 reserved;
+    u16 checksum;
+};
+
 struct SaveBlock3; // Defined after struct Pokemon below
 extern struct SaveBlock3 *gSaveBlock3Ptr;
 
@@ -1150,6 +1159,7 @@ struct SaveBlock3
     struct FrontierMusicSave frontierMusic;
     struct Pokemon fusions[MAX_FUSION_STORAGE]; // Partners stored while fused (Kyurem, Necrozma, etc.)
     struct FrontierPokevirusSave pokevirus; // Append-only local epilogue record; never sent over link.
+    struct FrontierMusicExtraSave frontierMusicExtra; // Append-only, local unlock extension.
 }; /* max size: SAVE_BLOCK_3_CHUNK_SIZE * NUM_SECTORS_PER_SLOT bytes */
 
 struct SaveBlock1
