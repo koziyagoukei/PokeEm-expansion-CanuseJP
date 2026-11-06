@@ -42,7 +42,8 @@
 #define INFO_TIPS_CONTEST_DYNAMAX 38
 #define INFO_TIPS_CONTEST_REWARDS 39
 #define INFO_KANJI_FONT_TEST 40
-#define INFO_COUNT          41
+#define INFO_TIPS_SHADOW     41
+#define INFO_COUNT          42
 
 #define INFO_VIEWER_CLOSE    0xFFFE
 #define INFO_VIEWER_BACK     0xFFFF

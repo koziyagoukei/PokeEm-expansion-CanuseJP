@@ -64,6 +64,8 @@ TEST("Frontier TIPS: facilities, hub, resort, contest and rule topics are reacha
     EXPECT(seen[INFO_FRONTIER_RULES]);
     EXPECT(seen[INFO_BANNED_MONS]);
     EXPECT(seen[INFO_GIMMICK_HELP]);
+    EXPECT(seen[INFO_TIPS_SHADOW]);
+    EXPECT_EQ(GetInfoViewerPageCount(INFO_TIPS_SHADOW), 5);
     for (u32 id = INFO_TIPS_TOWER; id <= INFO_TIPS_PYRAMID; id++)
         EXPECT(seen[id]);
     for (u32 id = INFO_TIPS_HUB; id <= INFO_TIPS_HUB_SUPPORT; id++)
@@ -146,7 +148,7 @@ TEST("Frontier TIPS: AI guide is directly accessible from both TIPS and hub serv
     }
     EXPECT_EQ(INFO_GIMMICK_HELP, 2);
     EXPECT_EQ(INFO_TIPS_HUB_DIFFICULTY, 19);
-    EXPECT_EQ(INFO_COUNT, 41);
+    EXPECT_EQ(INFO_KANJI_FONT_TEST, 40);
 }
 
 TEST("Frontier TIPS: banned list covers actual admission rules including all forms")

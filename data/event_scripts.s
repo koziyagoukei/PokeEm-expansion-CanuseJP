@@ -57,6 +57,7 @@
 #include "constants/mystery_gift.h"
 #include "constants/party_menu.h"
 #include "constants/shadow_pokemon.h"
+#include "constants/battle_connector.h"
 #include "constants/party_bath_expansion.h"
 #include "constants/party_bath_visitors.h"
 #include "constants/pokeball.h"
@@ -151,6 +152,7 @@ gStdScripts_End::
 	.include "data/maps/ArtisanCave_1F/scripts.inc"
 	.include "data/scripts/shared_secret_base.inc"
 	.include "data/scripts/frontier_intro.inc"
+	.include "data/scripts/battle_connector.inc"
 	.include "data/scripts/frontier_story.inc"
 	.include "data/scripts/frontier_final.inc"
 	.include "data/scripts/frontier_named_talks.inc"
@@ -842,6 +844,9 @@ EventScript_PalletTown_PlayersHouse_2F_TurnOnPC::
 	.include "data/maps/PartyBath_Sauna/scripts.inc"
 	.include "data/maps/PartyBath_Deep/scripts.inc"
 	.include "data/maps/PartyBath_Underwater/scripts.inc"
+
+	.include "data/maps/BattleConnector_Branch/scripts.inc"
+	.include "data/maps/BattleConnector_Room/scripts.inc"
 
 	.include "data/maps/Party_eat_time/scripts.inc"
 

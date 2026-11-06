@@ -2245,6 +2245,16 @@ static void PlayerHandleChooseAction(enum BattlerId battler)
         }
         BattlePutTextOnWindow(gStringVar1, B_WIN_ACTION_PROMPT);
     }
+    else if (CanBattlerCallShadowPokemon(battler))
+    {
+        // R calls out to a Shadow Pokemon: say so, louder in Hyper or Reverse Mode, where it is what calms it
+        StringCopy(gStringVar1, gDisplayedStringBattle);
+        if (IsBattlerInHyperMode(battler) || IsBattlerInReverseMode(battler))
+            StringAppend(gStringVar1, COMPOUND_STRING("{JPN}\nR:よびかけて しずめる！"));
+        else
+            StringAppend(gStringVar1, COMPOUND_STRING("{JPN}\nR:よびかける"));
+        BattlePutTextOnWindow(gStringVar1, B_WIN_ACTION_PROMPT);
+    }
     else
     {
         BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_ACTION_PROMPT);

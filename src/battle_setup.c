@@ -1571,6 +1571,32 @@ static void CB2_EndDebugBattle(void)
     SetMainCallback2(CB2_EndTrainerBattle);
 }
 
+// Battle Connector (src/battle_connector.c) starts its own battles: the opponent party is already made, the end
+// callback is its own (no whiteout, no trainer flag, no rematch) and so is the song. trainerId TRAINER_NONE: wild.
+void BattleSetup_StartBattleConnectorBattle(u16 trainerId, const u8 *defeatText, u16 song, void (*endCallback)(void))
+{
+    LockPlayerFieldControls();
+    FreezeObjectEvents();
+    StopPlayerAvatar();
+    gMain.savedCallback = endCallback;
+    IncrementGameStat(GAME_STAT_TOTAL_BATTLES);
+    if (trainerId != TRAINER_NONE)
+    {
+        memset(&gTrainerBattleParameter, 0, sizeof(gTrainerBattleParameter));
+        TRAINER_BATTLE_PARAM.opponentA = trainerId;
+        TRAINER_BATTLE_PARAM.defeatTextA = (u8 *)defeatText;
+        gBattleTypeFlags = BATTLE_TYPE_TRAINER;
+        CreateBattleStartTask(GetTrainerBattleTransition(), song);
+        IncrementGameStat(GAME_STAT_TRAINER_BATTLES);
+    }
+    else
+    {
+        gBattleTypeFlags = 0;
+        CreateBattleStartTask(GetWildBattleTransition(), song);
+        IncrementGameStat(GAME_STAT_WILD_BATTLES);
+    }
+}
+
 void BattleSetup_StartTrainerBattle_Debug(void)
 {
     sNoOfPossibleTrainerRetScripts = gNoOfApproachingTrainers;

@@ -3225,9 +3225,7 @@ BattleScript_OrichalcumPulseActivatesInSun::
 BattleScript_WeatherContinues::
 	printfromtable gWeatherTurnStringIds
 	waitmessage B_WAIT_TIME_LONG
-	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, B_MSG_WEATHER_TURN_DARKNESS, BattleScript_WeatherContinuesAbilities
 	playanimation_var BS_ATTACKER, sB_ANIM_ARG1
-BattleScript_WeatherContinuesAbilities:
 	setbyte gBattleCommunication, 0
 	call BattleScript_ActivateWeatherAbilities
 	return

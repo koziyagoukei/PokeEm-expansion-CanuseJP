@@ -58,6 +58,7 @@ struct ShadowPokemonInfo
     u16 moves[MAX_MON_MOVES]; // Shadow moves, in their slot order
     u16 heartGauge;           // full gauge (0 = the default)
     u8 aggression;            // 1 (very high, often Reverse Mode) .. 5 (very low); 0 = the default
+    u16 purifyMoves[2];       // a Battle Connector Shadow Pokemon learns one of these when purified
 };
 
 // What a Shadow Pokemon has in each move slot (GetShadowMoveLayout)
@@ -90,6 +91,10 @@ u32 GetShadowHeldExp(struct Pokemon *mon);
 void HoldShadowPokemonExp(struct Pokemon *mon, u32 exp);
 bool32 CanPurifyShadowPokemon(struct Pokemon *mon);
 bool32 PurifyShadowPokemon(struct Pokemon *mon);
+bool32 PurifyShadowPokemonInScene(struct Pokemon *mon);
+enum Move GetShadowPurifyMove(struct Pokemon *mon);
+u32 ShadowTryLearningPurifyMove(struct Pokemon *mon, bool32 firstMove);
+bool32 IsBattleConnectorPurified(struct Pokemon *mon);
 u32 CountShadowPurifyPartners(u32 partySlot);
 void ShadowPokemon_OnStep(void);
 void ShadowPokemon_OnMeal(struct Pokemon *mon);

@@ -21,6 +21,7 @@
 #include "pokemon.h"
 #include "pokemon_summary_screen.h"
 #include "scanline_effect.h"
+#include "shadow_effect_gfx.h"
 #include "shadow_pokemon.h"
 #include "sound.h"
 #include "sprite.h"
@@ -38,6 +39,9 @@
 #include "constants/rgb.h"
 #include "constants/songs.h"
 
+#define PURIFICATION_PARTICLE_COUNT 16
+#define PURIFICATION_RELEASE_FRAMES 96
+
 struct EvoInfo
 {
     u8 preEvoSpriteId;
@@ -45,6 +49,7 @@ struct EvoInfo
     u8 evoTaskId;
     u8 delayTimer;
     u16 savedPalette[48];
+    u8 purificationParticles[PURIFICATION_PARTICLE_COUNT];
 };
 
 static EWRAM_DATA struct EvoInfo *sEvoStructPtr = NULL;
@@ -290,21 +295,26 @@ void EvolutionScene(struct Pokemon *mon, enum Species postEvoSpecies, bool32 can
     gSprites[id].oam.paletteNum = 1;
     gSprites[id].invisible = TRUE;
 
-    // postEvo sprite
-    LoadSpecialPokePic(gMonSpritesGfxPtr->spritesGfx[B_POSITION_OPPONENT_RIGHT],
-                        postEvoSpecies,
-                        personality,
-                        TRUE);
-    LoadPalette(GetMonSpritePalFromSpeciesAndPersonality(postEvoSpecies, isShiny, personality), OBJ_PLTT_ID(2), PLTT_SIZE_4BPP);
+    if (sIsPurificationScene)
+    {
+        sEvoStructPtr->postEvoSpriteId = sEvoStructPtr->preEvoSpriteId;
+    }
+    else
+    {
+        LoadSpecialPokePic(gMonSpritesGfxPtr->spritesGfx[B_POSITION_OPPONENT_RIGHT],
+                          postEvoSpecies,
+                          personality,
+                          TRUE);
+        LoadPalette(GetMonSpritePalFromSpeciesAndPersonality(postEvoSpecies, isShiny, personality), OBJ_PLTT_ID(2), PLTT_SIZE_4BPP);
 
-    SetMultiuseSpriteTemplateToPokemon(postEvoSpecies, B_POSITION_OPPONENT_RIGHT);
-    gMultiuseSpriteTemplate.affineAnims = gDummySpriteAffineAnimTable;
-    sEvoStructPtr->postEvoSpriteId = id = CreateSprite(&gMultiuseSpriteTemplate, 120, 64, 30);
-    gSprites[id].callback = SpriteCallbackDummy_2;
-    gSprites[id].oam.paletteNum = 2;
-    gSprites[id].invisible = TRUE;
-
-    LoadEvoSparkleSpriteAndPal();
+        SetMultiuseSpriteTemplateToPokemon(postEvoSpecies, B_POSITION_OPPONENT_RIGHT);
+        gMultiuseSpriteTemplate.affineAnims = gDummySpriteAffineAnimTable;
+        sEvoStructPtr->postEvoSpriteId = id = CreateSprite(&gMultiuseSpriteTemplate, 120, 64, 30);
+        gSprites[id].callback = SpriteCallbackDummy_2;
+        gSprites[id].oam.paletteNum = 2;
+        gSprites[id].invisible = TRUE;
+        LoadEvoSparkleSpriteAndPal();
+    }
 
     sEvoStructPtr->evoTaskId = id = CreateTask(Task_EvolutionScene, 0);
     gTasks[id].tState = 0;
@@ -644,6 +654,7 @@ enum {
     EVOSTATE_LEARNED_MOVE,
     EVOSTATE_TRY_LEARN_ANOTHER_MOVE,
     EVOSTATE_REPLACE_MOVE,
+    EVOSTATE_PURIFICATION_RELEASE,
 };
 
 // States for the switch in EVOSTATE_REPLACE_MOVE
@@ -665,6 +676,62 @@ enum {
 
 // Task data from CycleEvolutionMonSprite
 #define tEvoStopped data[8]
+
+static void StartPurificationRelease(void)
+{
+    bool32 hasPalette = LoadShadowParticlePalette(RGB(21, 8, 27));
+    const struct Sprite *mon = &gSprites[sEvoStructPtr->preEvoSpriteId];
+
+    for (u32 i = 0; i < PURIFICATION_PARTICLE_COUNT; i++)
+    {
+        sEvoStructPtr->purificationParticles[i] = hasPalette
+            ? CreateShadowParticle(i % 3 == 0 ? SHADOW_PARTICLE_SHARD : SHADOW_PARTICLE_EMBER, mon->x, mon->y)
+            : MAX_SPRITES;
+    }
+    sEvoStructPtr->delayTimer = 0;
+    PlaySE(SE_M_NIGHTMARE);
+}
+
+static bool32 UpdatePurificationRelease(void)
+{
+    s32 frame = sEvoStructPtr->delayTimer++;
+    const struct Sprite *mon = &gSprites[sEvoStructPtr->preEvoSpriteId];
+    s32 depth = min(frame, 16) * 10 / 16;
+
+    // Keep the textbox unchanged while the backdrop and Pokemon lose their tint.
+    if (frame >= 24)
+        depth = max(76 - frame, 0) * 10 / 52;
+    BlendPalettes(0x1C, depth, RGB(4, 1, 9));
+    BlendPalettes(1u << (16 + mon->oam.paletteNum), depth, RGB(5, 1, 11));
+
+    for (u32 i = 0; i < PURIFICATION_PARTICLE_COUNT; i++)
+    {
+        u8 spriteId = sEvoStructPtr->purificationParticles[i];
+        if (spriteId == MAX_SPRITES)
+            continue;
+
+        struct Sprite *particle = &gSprites[spriteId];
+        s32 age = frame - 10 - (s32)i * 3;
+        if (age >= 40)
+        {
+            DestroySprite(particle);
+            sEvoStructPtr->purificationParticles[i] = MAX_SPRITES;
+        }
+        else if (age >= 0)
+        {
+            s32 side = (i & 1) ? 1 : -1;
+            particle->invisible = FALSE;
+            particle->x = mon->x + side * (5 + age) + Sin((age * 6 + i * 23) & 255, 9);
+            particle->y = mon->y + 6 - age * 2 + (i % 4) * 3;
+        }
+    }
+
+    if (frame < PURIFICATION_RELEASE_FRAMES)
+        return FALSE;
+
+    FreeShadowParticlePalette();
+    return TRUE;
+}
 
 static void Task_EvolutionScene(u8 taskId)
 {
@@ -713,9 +780,21 @@ static void Task_EvolutionScene(u8 taskId)
     case EVOSTATE_INTRO_SOUND:
         if (EvoScene_IsMonAnimFinished(sEvoStructPtr->preEvoSpriteId))
         {
-            PlaySE(MUS_EVOLUTION_INTRO);
-            gTasks[taskId].tState++;
+            if (sIsPurificationScene)
+            {
+                StartPurificationRelease();
+                gTasks[taskId].tState = EVOSTATE_PURIFICATION_RELEASE;
+            }
+            else
+            {
+                PlaySE(MUS_EVOLUTION_INTRO);
+                gTasks[taskId].tState++;
+            }
         }
+        break;
+    case EVOSTATE_PURIFICATION_RELEASE:
+        if (UpdatePurificationRelease())
+            gTasks[taskId].tState = EVOSTATE_EVO_MON_ANIM;
         break;
     case EVOSTATE_START_MUSIC:
         if (!IsSEPlaying())
@@ -795,10 +874,10 @@ static void Task_EvolutionScene(u8 taskId)
     case EVOSTATE_SET_MON_EVOLVED:
         if (IsCryFinished() && sIsPurificationScene)
         {
-            PurifyShadowPokemon(mon);
+            PurifyShadowPokemonInScene(mon);
             StringExpandPlaceholders(gStringVar4, sText_PkmnWasPurified);
             BattlePutTextOnWindow(gStringVar4, B_WIN_MSG);
-            PlayBGM(MUS_EVOLVED);
+            PlaySE(SE_M_HEAL_BELL);
             gTasks[taskId].tState++;
         }
         else if (IsCryFinished())
@@ -818,15 +897,14 @@ static void Task_EvolutionScene(u8 taskId)
         }
         break;
     case EVOSTATE_TRY_LEARN_MOVE:
-        if (!IsTextPrinterActiveOnWindow(0) && sIsPurificationScene)
+        if (!IsTextPrinterActiveOnWindow(0))
         {
-            // PurifyShadowPokemon taught the moves of the levels reached; there are no evolution moves
-            BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 0x10, RGB_BLACK);
-            gTasks[taskId].tState++;
-        }
-        else if (!IsTextPrinterActiveOnWindow(0))
-        {
-            var = MonTryLearningNewMoveEvolution(mon, gTasks[taskId].tLearnsFirstMove);
+            // Purification taught the moves of the levels reached; a Battle Connector Shadow Pokemon learns its
+            // purification move here (there are no evolution moves)
+            if (sIsPurificationScene)
+                var = ShadowTryLearningPurifyMove(mon, gTasks[taskId].tLearnsFirstMove);
+            else
+                var = MonTryLearningNewMoveEvolution(mon, gTasks[taskId].tLearnsFirstMove);
             if (var != MOVE_NONE && !gTasks[taskId].tEvoWasStopped)
             {
                 u8 nickname[POKEMON_NAME_BUFFER_SIZE];

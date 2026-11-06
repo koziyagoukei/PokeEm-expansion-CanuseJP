@@ -1,6 +1,7 @@
 #include "global.h"
 #include "shadow_pokemon.h"
 #include "battle_info.h"
+#include "battle_connector.h"
 #include "battle.h"
 #include "battle_hold_effects.h"
 #include "battle_message.h"
@@ -2107,7 +2108,9 @@ FEATURE_FLAG_ASSERT(I_EXP_SHARE_FLAG, YouNeedToSetTheExpShareFlagToAnUnusedFlag)
 
 static bool32 BattleTypeAllowsExp(void)
 {
-    if (RECORDED_WILD_BATTLE)
+    if (BattleConnector_IsBattleActive()) // the party comes back as it was after the run
+        return FALSE;
+    else if (RECORDED_WILD_BATTLE)
         return TRUE;
     else if (gBattleTypeFlags &
               ( BATTLE_TYPE_LINK
@@ -3092,6 +3095,7 @@ static void PlayAnimation(enum BattlerId battler, u8 animId, const u16 *argPtr, 
           || animId == B_ANIM_SANDSTORM_CONTINUES
           || animId == B_ANIM_HAIL_CONTINUES
           || animId == B_ANIM_SNOW_CONTINUES
+          || animId == B_ANIM_DARKNESS_CONTINUES
           || animId == B_ANIM_FOG_CONTINUES)
     {
         BtlController_EmitBattleAnimation(battler, B_COMM_TO_CONTROLLER, animId, *argPtr);

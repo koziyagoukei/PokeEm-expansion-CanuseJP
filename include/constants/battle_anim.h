@@ -612,7 +612,8 @@ enum AnimBattler
 #define B_ANIM_DYNAMAX_FAINT            65
 #define B_ANIM_TERA_FAINT               66
 #define B_ANIM_SHADOW_AURA              67
-#define NUM_B_ANIMS_GENERAL             68
+#define B_ANIM_DARKNESS_CONTINUES       68
+#define NUM_B_ANIMS_GENERAL             69
 
 // special animations table (sBattleAnims_Special)
 #define B_ANIM_LVL_UP                   0

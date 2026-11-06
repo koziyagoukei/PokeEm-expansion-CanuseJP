@@ -1,6 +1,7 @@
 #include "global.h"
 #include "shadow_pokemon.h"
 #include "battle_info.h"
+#include "battle_connector.h"
 #include "battle.h"
 #include "battle_anim.h"
 #include "battle_ai_main.h"
@@ -3805,7 +3806,7 @@ u8 IsRunningFromBattleImpossible(enum BattlerId battler)
     enum HoldEffect holdEffect;
     u32 i;
 
-    if (FlagGet(WE_FLAG_NO_RUNNING))
+    if (FlagGet(WE_FLAG_NO_RUNNING) || BattleConnector_IsBattleActive())
     {
         gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_CANT_ESCAPE;
         return BATTLE_RUN_FORBIDDEN;

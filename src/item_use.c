@@ -1,6 +1,7 @@
 #include "global.h"
 #include "item_use.h"
 #include "battle.h"
+#include "battle_connector.h"
 #include "battle_anim.h"
 #include "battle_stat_change.h"
 #include "battle_pyramid.h"
@@ -1166,8 +1167,8 @@ static u32 GetBallThrowableState(void)
         return BALL_THROW_UNABLE_NO_ROOM;
     else if (GetConfig(B_SEMI_INVULNERABLE_CATCH) >= GEN_4 &&  IsSemiInvulnerable(GetCatchingBattler(), CHECK_ALL))
         return BALL_THROW_UNABLE_SEMI_INVULNERABLE;
-    else if (FlagGet(WE_FLAG_NO_CATCHING) || !IsAllowedToUseBag())
-        return BALL_THROW_UNABLE_DISABLED_FLAG;
+    else if (FlagGet(WE_FLAG_NO_CATCHING) || !IsAllowedToUseBag() || BattleConnector_IsBattleActive())
+        return BALL_THROW_UNABLE_DISABLED_FLAG; // the Battle Connector protects Shadow Pokemon after the battle
 
     return BALL_THROW_ABLE;
 }

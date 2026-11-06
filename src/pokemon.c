@@ -49,6 +49,7 @@
 #include "recorded_battle.h"
 #include "regions.h"
 #include "rtc.h"
+#include "battle_connector.h"
 #include "shadow_pokemon.h"
 #include "sound.h"
 #include "string_util.h"
@@ -2275,6 +2276,10 @@ u32 GetBoxMonData3(struct BoxPokemon *boxMon, s32 field, u8 *data)
         case MON_DATA_SHADOW_REVERSE_MODE:
             retVal = GetSubstruct3(boxMon)->hasShadowState && boxMon->shadowReverseMode;
             break;
+        case MON_DATA_BATTLE_CONNECTOR_ORIGIN:
+            // blockBoxRS only matters to Pokemon Box Ruby & Sapphire, which this game never talks to
+            retVal = boxMon->blockBoxRS;
+            break;
         case MON_DATA_POKERUS_STRAIN:
             retVal = ((GetSubstruct3(boxMon)->pokerus & 0xF0) >> 4);
             break;
@@ -2804,6 +2809,9 @@ void SetBoxMonData(struct BoxPokemon *boxMon, s32 field, const void *dataArg)
             break;
         case MON_DATA_SHADOW_REVERSE_MODE:
             SET8(boxMon->shadowReverseMode);
+            break;
+        case MON_DATA_BATTLE_CONNECTOR_ORIGIN:
+            SET8(boxMon->blockBoxRS);
             break;
         case MON_DATA_POKERUS_STRAIN:
             if (!GetSubstruct3(boxMon)->hasShadowState)
@@ -5228,6 +5236,8 @@ bool32 IsSpeciesInHoennDex(enum Species species)
 
 u16 GetBattleBGM(void)
 {
+    if (BattleConnector_GetBattleBGM() != 0) // Colosseum's music, by room
+        return BattleConnector_GetBattleBGM();
     if (gBattleTypeFlags & BATTLE_TYPE_LEGENDARY)
     {
         switch (GetMonData(&gParties[B_TRAINER_OPPONENT_A][0], MON_DATA_SPECIES))

@@ -837,10 +837,10 @@ const u8 *const gBattleStringsTable[STRINGID_COUNT] =
     [STRINGID_FOGCREPTUP]                           = COMPOUND_STRING("{JPN}こい きりが たちこめた！"),
     [STRINGID_FOGISDEEP]                            = COMPOUND_STRING("{JPN}きりが ふかい"),
     [STRINGID_FOGLIFTED]                            = COMPOUND_STRING("{JPN}きりが はれた"),
-    [STRINGID_DARKNESSSTARTED]                      = COMPOUND_STRING("{JPN}くらやみが たちこめた！"),
-    [STRINGID_DARKNESSCONTINUES]                    = COMPOUND_STRING("{JPN}くらやみが 続いている"),
-    [STRINGID_DARKNESSENDED]                        = COMPOUND_STRING("{JPN}くらやみが 消え去った！"),
-    [STRINGID_DARKNESSHURTS]                        = COMPOUND_STRING("{JPN}{B_ATK_NAME_WITH_PREFIX}は\nくらやみで ダメージを 受けた！"),
+    [STRINGID_DARKNESSSTARTED]                      = COMPOUND_STRING("{JPN}くらやみが 空を おおった！"),
+    [STRINGID_DARKNESSCONTINUES]                    = COMPOUND_STRING("{JPN}くらやみの矢が 落ちてくる"),
+    [STRINGID_DARKNESSENDED]                        = COMPOUND_STRING("{JPN}くらやみが おさまった！"),
+    [STRINGID_DARKNESSHURTS]                        = COMPOUND_STRING("{JPN}くらやみの矢が\n{B_ATK_NAME_WITH_PREFIX}を 襲う！"),
     [STRINGID_SHADOWENCOUNTER]                      = COMPOUND_STRING("{JPN}{B_ATK_NAME_WITH_PREFIX}は\n黒いオーラを まとっている！"),
     [STRINGID_SHADOWSHEDREMOVEDSCREENS]             = COMPOUND_STRING("{JPN}ダークオーラの うずが\n場の 壁を 消しさった！"),
     [STRINGID_SHADOWHYPERMODESTARTED]               = COMPOUND_STRING("{JPN}{B_ATK_NAME_WITH_PREFIX}は\nハイパー状態に なった！"),
@@ -2759,9 +2759,7 @@ void BufferStringBattle(enum StringID stringID, enum BattlerId battler)
         }
         break;
     case STRINGID_USEDMOVE: // Pokemon used a move msg
-        if (gBattleMsgDataPtr->currentMove >= MOVES_COUNT
-         && !IsZMove(gBattleMsgDataPtr->currentMove)
-         && !IsMaxMove(gBattleMsgDataPtr->currentMove))
+        if (gBattleMsgDataPtr->currentMove >= MOVES_COUNT_ALL)
             StringCopy(gBattleTextBuff3, gTypesInfo[*(&gBattleStruct->stringMoveType)].generic);
         else
             StringCopy(gBattleTextBuff3, GetMoveName(gBattleMsgDataPtr->currentMove));
@@ -3280,17 +3278,13 @@ u32 BattleStringExpandPlaceholders(const u8 *src, u8 *dst, u32 dstSize)
                 HANDLE_NICKNAME_STRING_CASE(gBattleScripting.battler)
                 break;
             case B_TXT_CURRENT_MOVE: // current move name
-                if (gBattleMsgDataPtr->currentMove >= MOVES_COUNT
-                 && !IsZMove(gBattleMsgDataPtr->currentMove)
-                 && !IsMaxMove(gBattleMsgDataPtr->currentMove))
+                if (gBattleMsgDataPtr->currentMove >= MOVES_COUNT_ALL)
                     toCpy = gTypesInfo[gBattleStruct->stringMoveType].generic;
                 else
                     toCpy = GetMoveName(gBattleMsgDataPtr->currentMove);
                 break;
             case B_TXT_LAST_MOVE: // originally used move name
-                if (gBattleMsgDataPtr->originallyUsedMove >= MOVES_COUNT
-                 && !IsZMove(gBattleMsgDataPtr->currentMove)
-                 && !IsMaxMove(gBattleMsgDataPtr->currentMove))
+                if (gBattleMsgDataPtr->originallyUsedMove >= MOVES_COUNT_ALL)
                     toCpy = gTypesInfo[gBattleStruct->stringMoveType].generic;
                 else
                     toCpy = GetMoveName(gBattleMsgDataPtr->originallyUsedMove);

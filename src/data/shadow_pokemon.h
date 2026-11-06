@@ -8,6 +8,8 @@
 //   Pokemon XD for each battle, every 256 steps and each Call out of Hyper / Reverse Mode.
 // - aggression: 1 (very high) .. 5 (very low) (0 = the default). With the bars cleared it sets the chance of Reverse
 //   Mode (Pokemon XD).
+// - purifyMoves: a Shadow Pokemon of the Battle Connector learns one of these (picked by its personality) when it is
+//   purified: moves the species cannot learn otherwise. The bosses' are set; any row can have them.
 //
 // The gauges and aggressions below are Pokemon XD's own (Japanese release, XD's Shadow Pokemon list); where a species
 // appears twice in XD the first one is used. Their Shadow moves are not listed here, so they use the defaults.
@@ -92,7 +94,8 @@ static const struct ShadowPokemonInfo sShadowPokemonInfo[] =
     { .species = SPECIES_SALAMENCE,     .heartGauge =  9000, .aggression = 1 }, // XD #70 ボーマンダ
     { .species = SPECIES_MAROWAK,       .heartGauge =  6500, .aggression = 3 }, // XD #71 ガラガラ
     { .species = SPECIES_LAPRAS,        .heartGauge =  6000, .aggression = 4 }, // XD #72 ラプラス
-    { .species = SPECIES_LUGIA,         .heartGauge = 12000, .aggression = 1 }, // XD #73 ルギア
+    { .species = SPECIES_LUGIA,         .heartGauge = 12000, .aggression = 1,
+      .purifyMoves = { MOVE_ESPER_WING, MOVE_PSYCHO_BOOST } }, // XD #73 ルギア
     { .species = SPECIES_ZAPDOS,        .heartGauge = 10000, .aggression = 1 }, // XD #74 サンダー
     { .species = SPECIES_MOLTRES,       .heartGauge = 10000, .aggression = 1 }, // XD #75 ファイヤー
     { .species = SPECIES_ARTICUNO,      .heartGauge = 10000, .aggression = 1 }, // XD #76 フリーザー
@@ -103,4 +106,16 @@ static const struct ShadowPokemonInfo sShadowPokemonInfo[] =
     { .species = SPECIES_TOGEPI,        .heartGauge =  4500, .aggression = 5 }, // XD #81 トゲピー
     { .species = SPECIES_POOCHYENA,     .heartGauge =  2500, .aggression = 2 }, // XD #82 ポチエナ
     { .species = SPECIES_LEDYBA,        .heartGauge =  2500, .aggression = 2 }, // XD #83 レディバ
+
+    // The Battle Connector's bosses (Lugia is above). Not Shadow Pokemon in XD: their gauges and aggressions are this
+    // game's own, in line with XD's Lugia.
+    { .species = SPECIES_MEWTWO,   .heartGauge = 12000, .aggression = 1, .purifyMoves = { MOVE_RAGE_FIST, MOVE_FIERY_WRATH } },
+    { .species = SPECIES_MEW,      .heartGauge =  8000, .aggression = 3, .purifyMoves = { MOVE_STRANGE_STEAM, MOVE_PSYSTRIKE } },
+    { .species = SPECIES_HO_OH,    .heartGauge = 12000, .aggression = 1, .purifyMoves = { MOVE_HEART_SWAP, MOVE_SEARING_SHOT } },
+    { .species = SPECIES_CELEBI,   .heartGauge =  8000, .aggression = 3, .purifyMoves = { MOVE_JUNGLE_HEALING, MOVE_FORESTS_CURSE } },
+    { .species = SPECIES_KYOGRE,   .heartGauge = 12000, .aggression = 1, .purifyMoves = { MOVE_STEAM_ERUPTION, MOVE_FREEZE_DRY } },
+    { .species = SPECIES_GROUDON,  .heartGauge = 12000, .aggression = 1, .purifyMoves = { MOVE_ROCK_WRECKER, MOVE_MAGMA_STORM } },
+    { .species = SPECIES_RAYQUAZA, .heartGauge = 12000, .aggression = 1, .purifyMoves = { MOVE_NO_RETREAT, MOVE_STORM_THROW } },
+    { .species = SPECIES_JIRACHI,  .heartGauge =  8000, .aggression = 3, .purifyMoves = { MOVE_LIGHT_OF_RUIN, MOVE_FAIRY_LOCK } },
+    { .species = SPECIES_DEOXYS,   .heartGauge = 10000, .aggression = 1, .purifyMoves = { MOVE_LUMINA_CRASH, MOVE_PHOTON_GEYSER } },
 };

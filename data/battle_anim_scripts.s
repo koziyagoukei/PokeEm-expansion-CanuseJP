@@ -28993,6 +28993,24 @@ ZMoveBuffEffect:
 	delay 3
 	return
 
+gBattleAnimMove_Shadow::
+	playsewithpan SE_M_NIGHTMARE, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 0, 0, 7, RGB(4, 0, 8)
+	createvisualtask AnimTask_ShadowParticles, 5
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 0, 7, 0, RGB(4, 0, 8)
+	waitforvisualfinish
+	end
+
+gBattleAnimGeneral_DarknessContinues::
+	playsewithpan SE_M_NIGHTMARE, SOUND_PAN_TARGET
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 0, 0, 9, RGB(4, 0, 8)
+	createvisualtask AnimTask_ShadowParticles, 5
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 0, 9, 0, RGB(4, 0, 8)
+	waitforvisualfinish
+	end
+
 gBattleAnimGeneral_ShadowAura::
 	playsewithpan SE_M_NIGHTMARE, SOUND_PAN_ATTACKER
 	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 1, 0, 10, RGB(4, 0, 8)

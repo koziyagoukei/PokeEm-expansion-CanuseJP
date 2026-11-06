@@ -3574,7 +3574,11 @@ static void PrintMonAbilityName(void)
         label = COMPOUND_STRING("{JPN}リライブ可能");
         break;
     case SHADOW_STATE_PURIFIED:
-        label = COMPOUND_STRING("{JPN}リライブ済み");
+        // The lasting mark of one protected in the Battle Connector and purified
+        if (IsBattleConnectorPurified(&sMonSummaryScreen->currentMon))
+            label = COMPOUND_STRING("{JPN}コネクト済み");
+        else
+            label = COMPOUND_STRING("{JPN}リライブ済み");
         break;
     default:
         label = COMPOUND_STRING("{JPN}ダーク");
@@ -4043,16 +4047,51 @@ static void PrintRightColumnStats(void)
     PrintTextOnWindow(AddWindowFromTemplateList(sPageSkillsTemplate, PSS_DATA_WINDOW_SKILLS_STATS_RIGHT), gStringVar4, x, 1, 0, 0);
 }
 
+// A Shadow Pokemon gains no EXP, so the skills page shows its heart gauge (Pokemon XD's five bars, provisional look)
+// where the EXP to the next level would be. A bar with anything left shows at least a sliver.
+#define SUMMARY_HEART_BAR_WIDTH 8
+#define SUMMARY_HEART_BAR_GAP   2
+static void DrawShadowHeartGauge(u8 windowId, struct Pokemon *mon, u32 x, u32 y)
+{
+    u32 gauge = GetShadowGauge(mon), max = GetShadowGaugeMax(mon);
+
+    for (u32 bar = 0; bar < SHADOW_GAUGE_BARS; bar++)
+    {
+        u32 barX = x + bar * (SUMMARY_HEART_BAR_WIDTH + SUMMARY_HEART_BAR_GAP);
+        u32 lo = max * bar / SHADOW_GAUGE_BARS, hi = max * (bar + 1) / SHADOW_GAUGE_BARS;
+        u32 fill = 0;
+
+        if (gauge >= hi)
+            fill = SUMMARY_HEART_BAR_WIDTH;
+        else if (gauge > lo)
+            fill = max((gauge - lo) * SUMMARY_HEART_BAR_WIDTH / (hi - lo), 1u);
+        FillWindowPixelRect(windowId, PIXEL_FILL(2), barX, y, SUMMARY_HEART_BAR_WIDTH, 6);
+        if (fill != 0)
+            FillWindowPixelRect(windowId, PIXEL_FILL(1), barX, y, fill, 6);
+    }
+}
+
 static void PrintExpPointsNextLevel(void)
 {
     struct PokeSummary *sum = &sMonSummaryScreen->summary;
     u8 windowId = AddWindowFromTemplateList(sPageSkillsTemplate, PSS_DATA_WINDOW_EXP);
     int x;
     u32 expToNextLevel;
+    bool32 shadow = IsShadowPokemon(&sMonSummaryScreen->currentMon);
 
     ConvertIntToDecimalStringN(StringCopy(gStringVar1, COMPOUND_STRING("{ENG}")), sum->exp, STR_CONV_MODE_RIGHT_ALIGN, 7);
     x = GetStringRightAlignXOffset(FONT_NORMAL, gStringVar1, 42) + 2;
     PrintTextOnWindow(windowId, gStringVar1, x, 1, 0, 0);
+
+    // The second label follows the Pokemon shown (the labels are drawn once per summary)
+    FillWindowPixelRect(PSS_LABEL_WINDOW_POKEMON_SKILLS_EXP, PIXEL_FILL(0), 0, 16, 88, 16);
+    PrintTextOnWindow(PSS_LABEL_WINDOW_POKEMON_SKILLS_EXP, shadow ? COMPOUND_STRING("{JPN}ハートゲージ") : gText_NextLv, 6, 17, 0, 1);
+    CopyWindowToVram(PSS_LABEL_WINDOW_POKEMON_SKILLS_EXP, COPYWIN_GFX);
+    if (shadow)
+    {
+        DrawShadowHeartGauge(windowId, &sMonSummaryScreen->currentMon, 0, 22);
+        return;
+    }
 
     if (sum->level < MAX_LEVEL)
         expToNextLevel = gExperienceTables[gSpeciesInfo[sum->species].growthRate][sum->level + 1] - sum->exp;

@@ -1,5 +1,6 @@
 #include "global.h"
 #include "config/save.h"
+#include "battle_connector.h"
 #include "battle_pike.h"
 #include "battle_pyramid.h"
 #include "battle_pyramid_bag.h"
@@ -271,6 +272,7 @@ static void BuildSafariZoneStartMenu(void);
 static void BuildLinkModeStartMenu(void);
 static void BuildUnionRoomStartMenu(void);
 static void BuildBattlePikeStartMenu(void);
+static void BuildBattleConnectorStartMenu(void);
 static void BuildBattlePyramidStartMenu(void);
 static void BuildMultiPartnerRoomStartMenu(void);
 static void RemoveExtraStartMenuWindows(void);
@@ -315,6 +317,10 @@ static void BuildStartMenuActions(void)
     else if (InBattlePike())
     {
         BuildBattlePikeStartMenu();
+    }
+    else if (BattleConnector_IsChallengeActive())
+    {
+        BuildBattleConnectorStartMenu();
     }
     else if (CurrentBattlePyramidLocation() != PYRAMID_LOCATION_NONE)
     {
@@ -411,6 +417,18 @@ static void BuildUnionRoomStartMenu(void)
         AddStartMenuAction(MENU_ACTION_POKENAV);
     }
 
+    AddStartMenuAction(MENU_ACTION_PLAYER);
+    AddStartMenuAction(MENU_ACTION_OPTION);
+    AddStartMenuAction(MENU_ACTION_EXIT);
+}
+
+// The Battle Connector keeps nothing of a run in the save, so it cannot be saved during one
+static void BuildBattleConnectorStartMenu(void)
+{
+    if (FlagGet(FLAG_SYS_POKEDEX_GET) == TRUE)
+        AddStartMenuAction(MENU_ACTION_POKEDEX);
+    AddStartMenuAction(MENU_ACTION_POKEMON);
+    AddStartMenuAction(MENU_ACTION_BAG);
     AddStartMenuAction(MENU_ACTION_PLAYER);
     AddStartMenuAction(MENU_ACTION_OPTION);
     AddStartMenuAction(MENU_ACTION_EXIT);

@@ -9,7 +9,8 @@
     "gMapGroup_IndoorMiniMiniVilla",
     "gMapGroup_RestorationInn",
     "gMapGroup_PokevirusDepths",
-    "gMapGroup_PartyBathExpansion"
+    "gMapGroup_PartyBathExpansion",
+    "gMapGroup_BattleConnector"
   ],
   "gMapGroup_TownsAndRoutes": [
     "ultra_frontie_hub",
@@ -156,5 +157,9 @@
     "PartyBath_Sauna",
     "PartyBath_Deep",
     "PartyBath_Underwater"
+  ],
+  "gMapGroup_BattleConnector": [
+    "BattleConnector_Branch",
+    "BattleConnector_Room"
   ]
 }

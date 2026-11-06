@@ -267,6 +267,7 @@ const struct BattleWeatherInfo gBattleWeatherInfo[BATTLE_WEATHER_COUNT] = {
         .moveStartMessage = B_MSG_STARTED_DARKNESS,
         .endMessage = B_MSG_WEATHER_END_DARKNESS,
         .continuesMessage = B_MSG_WEATHER_TURN_DARKNESS,
+        .animation = B_ANIM_DARKNESS_CONTINUES,
         .type = BATTLE_WEATHER_DARKNESS,
     },
 

@@ -2175,21 +2175,19 @@ Numel
 Level: 30
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
+/* Battle Connector (src/data/battle_connector.h): a slot the hack no longer used. Its Pokemon are made
+   when the battle starts; this one only keeps the entry valid. */
 === TRAINER_CINDY_2 ===
-Name: レイカ
-Class: Lady
-Pic: Lady
+Name: シズク
+Class: Hex Maniac
+Pic: Hex Maniac
 Gender: Female
-Music: Female
-Items: Full Restore
+Music: Suspicious
 Double Battle: No
-AI: Check Bad Move
+AI: Check Bad Move / Try To Faint / Check Viability
 
-Zigzagoon @ Nugget
-Level: 11
-IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
-- Tackle
-- Tail Whip
+Duskull
+Level: 30
 
 === TRAINER_BRIANNA ===
 Name: シオリ
@@ -3065,26 +3063,19 @@ Gyarados
 Level: 34
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
+/* Battle Connector (src/data/battle_connector.h): a slot the hack no longer used. Its Pokemon are made
+   when the battle starts; this one only keeps the entry valid. */
 === TRAINER_DUDLEY ===
-Name: トクオ
-Class: Swimmer M
-Pic: Swimmer M
+Name: ゴウ
+Class: Ruin Maniac
+Pic: Ruin Maniac
 Gender: Male
-Music: Swimmer
+Music: Suspicious
 Double Battle: No
-AI: Check Bad Move
+AI: Check Bad Move / Try To Faint / Check Viability
 
-Tentacool
-Level: 33
-IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
-
-Wingull
-Level: 33
-IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
-
-Tentacruel
-Level: 33
-IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+Baltoy
+Level: 30
 
 === TRAINER_CHAD ===
 Name: カツユキ
@@ -8413,22 +8404,19 @@ Seadra
 Level: 33
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
+/* Battle Connector (src/data/battle_connector.h): a slot the hack no longer used. Its Pokemon are made
+   when the battle starts; this one only keeps the entry valid. */
 === TRAINER_KAYLEE ===
-Name: タカコ
-Class: Swimmer F
-Pic: Swimmer F
+Name: カオリ
+Class: Aroma Lady
+Pic: Aroma Lady
 Gender: Female
-Music: Swimmer
+Music: Suspicious
 Double Battle: No
-AI: Check Bad Move
+AI: Check Bad Move / Try To Faint / Check Viability
 
-Lanturn
-Level: 34
-IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
-
-Pelipper
-Level: 34
-IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+Roselia
+Level: 30
 
 === TRAINER_LAUREL ===
 Name: ソノコ
@@ -8832,43 +8820,33 @@ Dustox
 Level: 26
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
+/* Battle Connector (src/data/battle_connector.h): a slot the hack no longer used. Its Pokemon are made
+   when the battle starts; this one only keeps the entry valid. */
 === TRAINER_AMY_AND_LIV_3 ===
-Name: クミとルミ
-Class: Twins
-Pic: Twins
+Name: セイジ
+Class: Psychic
+Pic: Psychic M
 Gender: Male
-Music: Twins
-Double Battle: Yes
-AI: Check Bad Move
+Music: Suspicious
+Double Battle: No
+AI: Check Bad Move / Try To Faint / Check Viability
 
-Plusle
-Level: 9
-IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+Natu
+Level: 30
 
-Minun
-Level: 9
-IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
-
+/* Battle Connector (src/data/battle_connector.h): a slot the hack no longer used. Its Pokemon are made
+   when the battle starts; this one only keeps the entry valid. */
 === TRAINER_GINA_AND_MIA_2 ===
-Name: ナオとミオ
-Class: Twins
-Pic: Twins
+Name: リキ
+Class: Black Belt
+Pic: Black Belt
 Gender: Male
-Music: Twins
-Double Battle: Yes
-AI: Check Bad Move
+Music: Suspicious
+Double Battle: No
+AI: Check Bad Move / Try To Faint / Check Viability
 
-Duskull
-Level: 10
-IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
-- Night Shade
-- Disable
-
-Shroomish
-Level: 10
-IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
-- Absorb
-- Leech Seed
+Makuhita
+Level: 30
 
 === TRAINER_AMY_AND_LIV_4 ===
 Name: クミとルミ
@@ -10502,22 +10480,19 @@ Golbat
 Level: 35
 IVs: 6 HP / 6 Atk / 6 Def / 6 SpA / 6 SpD / 6 Spe
 
+/* Battle Connector (src/data/battle_connector.h): a slot the hack no longer used. Its Pokemon are made
+   when the battle starts; this one only keeps the entry valid. */
 === TRAINER_GRUNT_UNUSED ===
-Name: したっぱ
-Class: Team Magma
-Pic: Aqua Grunt F
-Gender: Female
-Music: Aqua
+Name: イワオ
+Class: Hiker
+Pic: Hiker
+Gender: Male
+Music: Suspicious
 Double Battle: No
-AI: Check Bad Move
+AI: Check Bad Move / Try To Faint / Check Viability
 
-Wailmer
-Level: 31
-IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
-
-Zubat
-Level: 31
-IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+Numel
+Level: 30
 
 === TRAINER_GRUNT_MT_PYRE_4 ===
 Name: したっぱ
@@ -10697,18 +10672,19 @@ Sharpedo
 Level: 34
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
+/* Battle Connector (src/data/battle_connector.h): a slot the hack no longer used. Its Pokemon are made
+   when the battle starts; this one only keeps the entry valid. */
 === TRAINER_TERRY ===
-Name: ななし2
+Name: ミコト
 Class: Psychic
 Pic: Psychic F
 Gender: Female
-Music: Intense
+Music: Suspicious
 Double Battle: No
-AI: Check Bad Move
+AI: Check Bad Move / Try To Faint / Check Viability
 
-Girafarig
-Level: 37
-IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+Ralts
+Level: 30
 
 === TRAINER_NATE ===
 Name: トニー
@@ -11572,41 +11548,33 @@ Baltoy
 Level: 20
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
+/* Battle Connector (src/data/battle_connector.h): a slot the hack no longer used. Its Pokemon are made
+   when the battle starts; this one only keeps the entry valid. */
 === TRAINER_LUCAS_2 ===
-Name: サブロウ
-Class: Hiker
-Pic: Hiker
+Name: ヨシツグ
+Class: Gentleman
+Pic: Gentleman
 Gender: Male
-Music: Hiker
+Music: Suspicious
 Double Battle: No
-AI: Check Bad Move
+AI: Check Bad Move / Try To Faint / Check Viability
 
-Wailmer
-Level: 9
-IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
-- Splash
-- Water Gun
+Snubbull
+Level: 30
 
+/* Battle Connector (src/data/battle_connector.h): a slot the hack no longer used. Its Pokemon are made
+   when the battle starts; this one only keeps the entry valid. */
 === TRAINER_MIKE_1 ===
-Name: ノボル
-Class: Hiker
-Pic: Hiker
+Name: マモル
+Class: Pokemaniac
+Pic: Pokemaniac
 Gender: Male
-Music: Hiker
+Music: Suspicious
 Double Battle: No
-AI: Check Bad Move
+AI: Check Bad Move / Try To Faint / Check Viability
 
-Pelipper
-Level: 10
-IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
-- Gust
-- Growl
-
-Poochyena
-Level: 10
-IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
-- Bite
-- Scary Face
+Shuppet
+Level: 30
 
 === TRAINER_MIKE_2 ===
 Name: ノボル
@@ -16829,29 +16797,33 @@ Wobbuffet
 Level: 41
 IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
 
+/* Battle Connector (src/data/battle_connector.h): a slot the hack no longer used. Its Pokemon are made
+   when the battle starts; this one only keeps the entry valid. */
 === TRAINER_RED ===
-Name: レッド
-Class: Rival
-Pic: Red
+Name: テツジ
+Class: Expert
+Pic: Expert M
 Gender: Male
-Music: Male
+Music: Suspicious
 Double Battle: No
+AI: Check Bad Move / Try To Faint / Check Viability
 
-Charmander
-Level: 5
-IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+Hitmonlee
+Level: 30
 
+/* Battle Connector (src/data/battle_connector.h): a slot the hack no longer used. Its Pokemon are made
+   when the battle starts; this one only keeps the entry valid. */
 === TRAINER_LEAF ===
-Name: リーフ
-Class: Rival
-Pic: Leaf
+Name: ミヤコ
+Class: Expert
+Pic: Expert F
 Gender: Female
-Music: Male
+Music: Suspicious
 Double Battle: No
+AI: Check Bad Move / Try To Faint / Check Viability
 
-Bulbasaur
-Level: 5
-IVs: 0 HP / 0 Atk / 0 Def / 0 SpA / 0 SpD / 0 Spe
+Hitmonchan
+Level: 30
 
 === TRAINER_NOBUO_RELEASE ===
 Name: ノブオ

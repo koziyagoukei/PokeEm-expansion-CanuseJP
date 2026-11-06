@@ -1,4 +1,5 @@
 #include "global.h"
+#include "battle_anim_scripts.h"
 #include "battle_dynamax.h"
 #include "battle_info.h"
 #include "battle_gimmick.h"
@@ -235,6 +236,10 @@ SINGLE_BATTLE_TEST("Shadow: Dynaphobia sets Darkness and Protect does not stop i
         OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_PROTECT); }
     } WHEN {
         TURN { MOVE(player, moveSlot: 0, gimmick: GIMMICK_DYNAMAX); MOVE(opponent, MOVE_PROTECT); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_DYNAPHOBIA, player);
+        MESSAGE("{JPN}くらやみが 空を おおった！");
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_DARKNESS_CONTINUES);
     } THEN {
         EXPECT_EQ(GetMaxMove(B_BATTLER_0, MOVE_SHADOW_RUSH), MOVE_DYNAPHOBIA);
         EXPECT_EQ(GetMaxMove(B_BATTLER_0, MOVE_SHADOW_MIST), MOVE_MAX_GUARD);
@@ -245,6 +250,26 @@ SINGLE_BATTLE_TEST("Shadow: Dynaphobia sets Darkness and Protect does not stop i
         EXPECT_EQ(GetDynamicMoveType(GetBattlerMon(B_BATTLER_1), MOVE_WEATHER_BALL, B_BATTLER_1,
                                     ABILITY_NONE, HOLD_EFFECT_NONE, MON_IN_BATTLE), TYPE_MYSTERY);
     }
+}
+
+WILD_BATTLE_TEST("Shadow: Sudowoodo's battle message prints the move name")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET) { Moves(MOVE_CELEBRATE); }
+        OPPONENT(SPECIES_SUDOWOODO) { Shadow(TRUE); }
+    } WHEN {
+        TURN { MOVE(opponent, moveSlot: 0); MOVE(player, MOVE_CELEBRATE); }
+    } SCENE {
+        MESSAGE("{JPN}{JPN}野生の {JPN}ウソッキーの {JPN}ダークラッシュ！");
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SHADOW_RUSH, opponent);
+    }
+}
+
+TEST("Shadow: all Shadow moves use the dedicated animation")
+{
+    for (enum Move move = FIRST_SHADOW_MOVE; move <= LAST_SHADOW_MOVE; move++)
+        EXPECT(GetMoveAnimationScript(move) == gBattleAnimMove_Shadow);
+    EXPECT(GetMoveAnimationScript(MOVE_DYNAPHOBIA) == gBattleAnimMove_Shadow);
 }
 
 DOUBLE_BATTLE_TEST("Shadow: Darkness damages a non-Shadow partner exactly five times, then fades")
@@ -425,6 +450,11 @@ SINGLE_BATTLE_TEST("Shadow: Shadow Sky brings Darkness for five turns")
         OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_CELEBRATE); }
     } WHEN {
         TURN { MOVE(player, moveSlot: 2); MOVE(opponent, MOVE_CELEBRATE); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SHADOW_SKY, player);
+        MESSAGE("{JPN}くらやみが 空を おおった！");
+        MESSAGE("{JPN}くらやみの矢が 落ちてくる");
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_DARKNESS_CONTINUES);
     } THEN {
         EXPECT_EQ(gBattleWeather, B_WEATHER_DARKNESS);
         EXPECT_EQ(gBattleStruct->weatherDuration, 4);

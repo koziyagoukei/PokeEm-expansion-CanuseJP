@@ -1,4 +1,5 @@
 static const u8 sInfoText_TitleTips[] = _("{ENG}TIPS");
+static const u8 sInfoText_TitleShadow[] = _("{JPN}ダークポケモン");
 static const u8 sInfoText_TitleFacilities[] = _("{JPN}施設の ルール");
 static const u8 sInfoText_TitleTower[] = _("{JPN}バトルタワー");
 static const u8 sInfoText_TitleDome[] = _("{JPN}バトルドーム");
@@ -276,10 +277,57 @@ static const u8 *const sInfoViewerPages_HubDifficulty[] = {
 static const u8 *const sInfoViewerPages_HubBanned[] = {sInfoText_HubBanned1, sInfoText_HubBanned2, sInfoText_HubBanned3};
 static const u8 *const sInfoViewerPages_HubSupport[] = {sInfoText_HubSupport1, sInfoText_HubSupport2};
 
+static const u8 sInfoText_Shadow1[] = _(
+    "{JPN}「ダークポケモンとは」\n"
+    "心を 閉ざし ダークわざを 使います。\n"
+    "ダークわざは 通常の ポケモンに 抜群。\n"
+    "ダークポケモンには いまひとつ。\n"
+    "心が 開くと 封じられた 元の技が\n"
+    "少しずつ 使えるように なります。");
+
+static const u8 sInfoText_Shadow2[] = _(
+    "{JPN}「心の 扉を 開くには」\n"
+    "通常の 戦闘に 出すと 戦闘後に 開きます。\n"
+    "手持ちに 入れて 歩くのも 有効です。\n"
+    "定食屋で 食事を させたり\n"
+    "一緒に 温泉に 入ることでも 進みます。\n"
+    "進み具合は ポケモンの 情報で 確認。");
+
+static const u8 sInfoText_Shadow3[] = _(
+    "{JPN}「呼びかけ」\n"
+    "ダークわざを 使うと ハイパーや\n"
+    "リバース状態に なることが あります。\n"
+    "ハイパーでは 指示を 聞かないことも。\n"
+    "リバースでは 毎ターン 体力が 減ります。\n"
+    "行動を 選ぶ画面で Rを 押すと\n"
+    "1ターン使い 呼びかけて 落ち着かせます。");
+
+static const u8 sInfoText_Shadow4[] = _(
+    "{JPN}「ダイナフォビア」\n"
+    "ダーク中は メガシンカと Zワザが 不可。\n"
+    "ダイマックスと テラスタルは 使えます。\n"
+    "攻撃ダークわざは ダイナフォビアに。\n"
+    "天候が くらやみになり ダーク以外は\n"
+    "ターンの 終わりに ダメージを 受けます。");
+
+static const u8 sInfoText_Shadow5[] = _(
+    "{JPN}「リライブ」\n"
+    "心が 開ききったら キャンプへ。\n"
+    "ダークでない 仲間を 4匹以上\n"
+    "手持ちに 入れ 本人に 話しかけます。\n"
+    "リライブすると ダーク状態が 解け\n"
+    "元の技が すべて 使えるようになります。");
+
+static const u8 *const sInfoViewerPages_Shadow[] = {
+    sInfoText_Shadow1, sInfoText_Shadow2, sInfoText_Shadow3,
+    sInfoText_Shadow4, sInfoText_Shadow5,
+};
+
 static const struct InfoViewerChoice sInfoViewerChoices_Tips[] = {
     {COMPOUND_STRING("{JPN}バトルの 基本ルール"), INFO_FRONTIER_RULES},
     {sInfoText_TitleFacilities, INFO_TIPS_FACILITIES},
     {COMPOUND_STRING("{JPN}ギミックの 基本"), INFO_GIMMICK_HELP},
+    {sInfoText_TitleShadow, INFO_TIPS_SHADOW},
     {COMPOUND_STRING("{JPN}AIの 難しさと 傾向"), INFO_TIPS_HUB_DIFFICULTY},
     {sInfoText_TitleBannedMons, INFO_BANNED_MONS},
     {sInfoText_TitleHub, INFO_TIPS_HUB},

@@ -131,6 +131,7 @@ enum MonData {
     MON_DATA_SHADOW_HELD_EXP,      // EXP held until purification, 14 bits in SHADOW_HELD_EXP_UNIT
     MON_DATA_SHADOW_HYPER_MODE,    // Hyper Mode (Colosseum), kept after battle
     MON_DATA_SHADOW_REVERSE_MODE,  // Reverse Mode (Pokemon XD), kept after battle
+    MON_DATA_BATTLE_CONNECTOR_ORIGIN, // a Shadow Pokemon of the Battle Connector (BoxPokemon blockBoxRS, unused in Emerald)
 };
 
 #define BLOCK_AI_DYNAMAX 15 // Used as dynamax level value by the AI to indicate this mon shouldn't dynamax

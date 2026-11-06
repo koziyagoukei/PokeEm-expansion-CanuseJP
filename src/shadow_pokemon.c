@@ -8,6 +8,7 @@
 #include "main.h"
 #include "overworld.h"
 #include "move.h"
+#include "party_menu.h"
 #include "pokemon.h"
 #include "random.h"
 #include "shadow_pokemon.h"
@@ -369,7 +370,7 @@ static void LearnShadowPurificationMoves(struct Pokemon *mon, u32 oldLevel, u32 
 // the Shadow state ends (Hyper and Reverse Mode too), the moves under the Shadow moves come back, the held EXP is
 // given once (up to the level cap), moves of the levels it reached are learned while there is room, and it gets the
 // National Ribbon (given to purified Shadow Pokemon in Colosseum/XD). The purified mark stays.
-bool32 PurifyShadowPokemon(struct Pokemon *mon)
+static bool32 PurifyShadowPokemonInternal(struct Pokemon *mon, bool32 learnPurifyMove)
 {
     const u16 purified = SHADOW_GAUGE_PURIFIED;
     const u16 zero = 0;
@@ -399,7 +400,66 @@ bool32 PurifyShadowPokemon(struct Pokemon *mon)
         LearnShadowPurificationMoves(mon, oldLevel, newLevel);
 
     SetMonData(mon, MON_DATA_NATIONAL_RIBBON, &on);
+
+    // A Battle Connector Shadow Pokemon also learns its purification move, while there is room (the scene offers to
+    // forget a move for it)
+    if (learnPurifyMove)
+    {
+        enum Move move = GetShadowPurifyMove(mon);
+        if (move != MOVE_NONE && !MonKnowsMove(mon, move))
+            GiveMoveToMon(mon, move);
+    }
     return TRUE;
+}
+
+bool32 PurifyShadowPokemon(struct Pokemon *mon)
+{
+    return PurifyShadowPokemonInternal(mon, TRUE);
+}
+
+// For the purification scene, which teaches the purification move itself (ShadowTryLearningPurifyMove)
+bool32 PurifyShadowPokemonInScene(struct Pokemon *mon)
+{
+    return PurifyShadowPokemonInternal(mon, FALSE);
+}
+
+// The move a Shadow Pokemon of the Battle Connector learns when purified, from its species' row: one of up to two,
+// picked by its personality (so it is the same each time it is asked). MOVE_NONE for any other Pokemon.
+enum Move GetShadowPurifyMove(struct Pokemon *mon)
+{
+    const struct ShadowPokemonInfo *info;
+    u32 count = 0;
+
+    if (!GetMonData(mon, MON_DATA_HAS_SHADOW_STATE) || !GetMonData(mon, MON_DATA_BATTLE_CONNECTOR_ORIGIN))
+        return MOVE_NONE;
+    info = GetShadowPokemonInfo(GetMonData(mon, MON_DATA_SPECIES));
+    if (info == NULL)
+        return MOVE_NONE;
+    while (count < ARRAY_COUNT(info->purifyMoves) && info->purifyMoves[count] != MOVE_NONE)
+        count++;
+    if (count == 0)
+        return MOVE_NONE;
+    return info->purifyMoves[(GetMonData(mon, MON_DATA_PERSONALITY) >> 8) % count];
+}
+
+// The purification scene's move to learn (like MonTryLearningNewMoveEvolution): the purification move, once
+u32 ShadowTryLearningPurifyMove(struct Pokemon *mon, bool32 firstMove)
+{
+    enum Move move;
+
+    if (!firstMove)
+        return MOVE_NONE;
+    move = GetShadowPurifyMove(mon);
+    if (move == MOVE_NONE || MonKnowsMove(mon, move))
+        return MOVE_NONE;
+    gMoveToLearn = move;
+    return GiveMoveToMon(mon, move);
+}
+
+// The lasting mark of a Battle Connector Shadow Pokemon that was purified
+bool32 IsBattleConnectorPurified(struct Pokemon *mon)
+{
+    return GetShadowPokemonState(mon) == SHADOW_STATE_PURIFIED && GetMonData(mon, MON_DATA_BATTLE_CONNECTOR_ORIGIN);
 }
 
 // The other Pokemon in the party that would gather round a Shadow Pokemon to purify it: not Shadow Pokemon nor Eggs

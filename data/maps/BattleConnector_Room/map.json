@@ -1,0 +1,46 @@
+{
+  "id": "MAP_BATTLE_CONNECTOR_ROOM",
+  "name": "BattleConnector_Room",
+  "layout": "LAYOUT_BATTLE_FRONTIER_BATTLE_PIKE_ROOM_NORMAL",
+  "music": "MUS_ABANDONED_SHIP",
+  "region": "REGION_HOENN",
+  "region_map_section": "MAPSEC_ARTISAN_CAVE",
+  "requires_flash": false,
+  "weather": "WEATHER_NONE",
+  "map_type": "MAP_TYPE_INDOOR",
+  "allow_cycling": false,
+  "allow_escaping": false,
+  "allow_running": true,
+  "show_map_name": false,
+  "battle_scene": "MAP_BATTLE_SCENE_NORMAL",
+  "connections": null,
+  "object_events": [
+    {
+      "local_id": "LOCALID_CONNECTOR_ROOM_NPC",
+      "graphics_id": "OBJ_EVENT_GFX_VAR_0",
+      "x": 4,
+      "y": 4,
+      "elevation": 3,
+      "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
+      "movement_range_x": 1,
+      "movement_range_y": 1,
+      "trainer_type": "TRAINER_TYPE_NONE",
+      "trainer_sight_or_berry_tree_id": "0",
+      "script": "BattleConnector_Room_EventScript_Npc",
+      "flag": "FLAG_TEMP_11"
+    }
+  ],
+  "warp_events": [],
+  "coord_events": [
+    {
+      "type": "trigger",
+      "x": 4,
+      "y": 3,
+      "elevation": 3,
+      "var": "VAR_TEMP_1",
+      "var_value": "1",
+      "script": "BattleConnector_Room_EventScript_Exit"
+    }
+  ],
+  "bg_events": []
+}

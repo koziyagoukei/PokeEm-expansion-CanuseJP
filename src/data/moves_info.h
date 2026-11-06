@@ -21678,7 +21678,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .target = TARGET_SELECTED,
         .category = DAMAGE_CATEGORY_PHYSICAL,
         .shadowMove = TRUE,
-        .battleAnimScript = gBattleAnimMove_MaxDarkness,
+        .battleAnimScript = gBattleAnimMove_Shadow,
         .additionalEffects = ADDITIONAL_EFFECTS({
             .moveEffect = MOVE_EFFECT_DARKNESS,
         }),
@@ -21713,7 +21713,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .category = DAMAGE_CATEGORY_PHYSICAL,
         .makesContact = TRUE,
         SHADOW_MOVE_DATA,
-        .battleAnimScript = gBattleAnimMove_Tackle,
+        .battleAnimScript = gBattleAnimMove_Shadow,
     },
 
     [MOVE_SHADOW_RUSH] =
@@ -21727,7 +21727,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .category = DAMAGE_CATEGORY_PHYSICAL,
         .makesContact = TRUE,
         SHADOW_MOVE_DATA,
-        .battleAnimScript = gBattleAnimMove_TakeDown,
+        .battleAnimScript = gBattleAnimMove_Shadow,
     },
 
     [MOVE_SHADOW_BREAK] =
@@ -21741,7 +21741,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .category = DAMAGE_CATEGORY_PHYSICAL,
         .makesContact = TRUE,
         SHADOW_MOVE_DATA,
-        .battleAnimScript = gBattleAnimMove_GigaImpact,
+        .battleAnimScript = gBattleAnimMove_Shadow,
     },
 
     [MOVE_SHADOW_END] =
@@ -21755,7 +21755,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .category = DAMAGE_CATEGORY_PHYSICAL,
         .makesContact = TRUE,
         SHADOW_MOVE_DATA,
-        .battleAnimScript = gBattleAnimMove_DoubleEdge,
+        .battleAnimScript = gBattleAnimMove_Shadow,
     },
 
     [MOVE_SHADOW_WAVE] =
@@ -21768,7 +21768,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .target = TARGET_BOTH,
         .category = DAMAGE_CATEGORY_SPECIAL,
         SHADOW_MOVE_DATA,
-        .battleAnimScript = gBattleAnimMove_DarkPulse,
+        .battleAnimScript = gBattleAnimMove_Shadow,
     },
 
     [MOVE_SHADOW_RAVE] =
@@ -21781,7 +21781,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .target = TARGET_BOTH,
         .category = DAMAGE_CATEGORY_SPECIAL,
         SHADOW_MOVE_DATA,
-        .battleAnimScript = gBattleAnimMove_NightDaze,
+        .battleAnimScript = gBattleAnimMove_Shadow,
     },
 
     [MOVE_SHADOW_STORM] =
@@ -21794,7 +21794,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .target = TARGET_BOTH,
         .category = DAMAGE_CATEGORY_SPECIAL,
         SHADOW_MOVE_DATA,
-        .battleAnimScript = gBattleAnimMove_Twister,
+        .battleAnimScript = gBattleAnimMove_Shadow,
     },
 
     [MOVE_SHADOW_FIRE] =
@@ -21811,7 +21811,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
             .moveEffect = MOVE_EFFECT_BURN,
             .chance = 10,
         }),
-        .battleAnimScript = gBattleAnimMove_FireBlast,
+        .battleAnimScript = gBattleAnimMove_Shadow,
     },
 
     [MOVE_SHADOW_BOLT] =
@@ -21828,7 +21828,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
             .moveEffect = MOVE_EFFECT_PARALYSIS,
             .chance = 10,
         }),
-        .battleAnimScript = gBattleAnimMove_Thunder,
+        .battleAnimScript = gBattleAnimMove_Shadow,
     },
 
     [MOVE_SHADOW_CHILL] =
@@ -21845,7 +21845,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
             .moveEffect = MOVE_EFFECT_FREEZE_OR_FROSTBITE,
             .chance = 10,
         }),
-        .battleAnimScript = gBattleAnimMove_IceBeam,
+        .battleAnimScript = gBattleAnimMove_Shadow,
     },
 
     [MOVE_SHADOW_BLAST] =
@@ -21858,7 +21858,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .target = TARGET_SELECTED,
         .category = DAMAGE_CATEGORY_PHYSICAL,
         SHADOW_MOVE_DATA,
-        .battleAnimScript = gBattleAnimMove_AirCutter,
+        .battleAnimScript = gBattleAnimMove_Shadow,
     },
 
     [MOVE_SHADOW_SKY] =
@@ -21873,7 +21873,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .ignoresProtect = TRUE,
         .argument = { .weatherType = BATTLE_WEATHER_DARKNESS },
         SHADOW_MOVE_DATA,
-        .battleAnimScript = gBattleAnimMove_Haze,
+        .battleAnimScript = gBattleAnimMove_Shadow,
     },
 
     [MOVE_SHADOW_HOLD] =
@@ -21886,7 +21886,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .target = TARGET_BOTH,
         .category = DAMAGE_CATEGORY_STATUS,
         SHADOW_MOVE_DATA,
-        .battleAnimScript = gBattleAnimMove_MeanLook,
+        .battleAnimScript = gBattleAnimMove_Shadow,
     },
 
     [MOVE_SHADOW_MIST] =
@@ -21903,7 +21903,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
             .moveEffect = STAT_CHANGE_EFFECT_MINUS,
             .evasion = 2,
         }),
-        .battleAnimScript = gBattleAnimMove_Smokescreen,
+        .battleAnimScript = gBattleAnimMove_Shadow,
     },
 
     [MOVE_SHADOW_PANIC] =
@@ -21916,7 +21916,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .target = TARGET_BOTH,
         .category = DAMAGE_CATEGORY_STATUS,
         SHADOW_MOVE_DATA,
-        .battleAnimScript = gBattleAnimMove_ConfuseRay,
+        .battleAnimScript = gBattleAnimMove_Shadow,
     },
 
     [MOVE_SHADOW_DOWN] =
@@ -21933,7 +21933,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
             .moveEffect = STAT_CHANGE_EFFECT_MINUS,
             .defense = 2,
         }),
-        .battleAnimScript = gBattleAnimMove_Screech,
+        .battleAnimScript = gBattleAnimMove_Shadow,
     },
 
     [MOVE_SHADOW_SHED] =
@@ -21947,7 +21947,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .category = DAMAGE_CATEGORY_STATUS,
         .ignoresProtect = TRUE,
         SHADOW_MOVE_DATA,
-        .battleAnimScript = gBattleAnimMove_Defog,
+        .battleAnimScript = gBattleAnimMove_Shadow,
     },
 
     [MOVE_SHADOW_HALF] =
@@ -21961,7 +21961,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .category = DAMAGE_CATEGORY_STATUS,
         .ignoresProtect = TRUE, // Protect is checked for each Pokemon by the effect itself
         SHADOW_MOVE_DATA,
-        .battleAnimScript = gBattleAnimMove_NightShade,
+        .battleAnimScript = gBattleAnimMove_Shadow,
     },
 };
 
