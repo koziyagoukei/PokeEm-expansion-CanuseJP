@@ -498,6 +498,30 @@ BattleScript_MoveEffectSpikes::
 BattleScript_MoveEffectSpikesRet:
 	return
 
+BattleScript_EffectShadowShed::
+	attackcanceler
+	tryshadowshed BattleScript_ButItFailed
+	attackanimation
+	waitanimation
+	printstring STRINGID_SHADOWSHEDREMOVEDSCREENS
+	waitmessage B_WAIT_TIME_LONG
+	goto BattleScript_MoveEnd
+
+@ Every Pokemon on the field, the user and its partner too, loses half of its HP left (Protect protects).
+BattleScript_EffectShadowHalf::
+	attackcanceler
+	tryshadowhalfnext BattleScript_ButItFailed
+	attackanimation
+	waitanimation
+BattleScript_ShadowHalfHit:
+	healthbarupdate BS_TARGET
+	datahpupdate BS_TARGET, ASSURANCE_IGNORE
+	tryactivateitem BS_TARGET, ACTIVATION_ON_HP_THRESHOLD
+	tryshadowhalfnext BattleScript_ShadowHalfDone
+	goto BattleScript_ShadowHalfHit
+BattleScript_ShadowHalfDone:
+	goto BattleScript_MoveEnd
+
 BattleScript_EffectTeatime::
 	attackcanceler
 	checkteatimetargets BattleScript_ButItFailed
@@ -3201,7 +3225,9 @@ BattleScript_OrichalcumPulseActivatesInSun::
 BattleScript_WeatherContinues::
 	printfromtable gWeatherTurnStringIds
 	waitmessage B_WAIT_TIME_LONG
+	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, B_MSG_WEATHER_TURN_DARKNESS, BattleScript_WeatherContinuesAbilities
 	playanimation_var BS_ATTACKER, sB_ANIM_ARG1
+BattleScript_WeatherContinuesAbilities:
 	setbyte gBattleCommunication, 0
 	call BattleScript_ActivateWeatherAbilities
 	return
@@ -5702,6 +5728,12 @@ BattleScript_OpportunistCopyStatChange::
 	trybattlerstatchange BS_SCRIPTING, STAT_CHANGE_OPPORTUNIST
 	return
 
+BattleScript_ShadowEncounter::
+	playanimation BS_ATTACKER, B_ANIM_SHADOW_AURA, NULL
+	printstring STRINGID_SHADOWENCOUNTER
+	waitmessage B_WAIT_TIME_LONG
+	end3
+
 BattleScript_TotemBoost::
 	playanimation BS_ATTACKER, B_ANIM_TOTEM_FLARE, NULL
 	printstring STRINGID_AURAFLAREDTOLIFE
@@ -6009,7 +6041,9 @@ BattleScript_SymbiosisActivates::
 	return
 
 BattleScript_MoveEffectSetWeather::
+	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, B_MSG_STARTED_DARKNESS, BattleScript_MoveEffectSetWeatherMessage
 	playanimation 0, B_ANIM_MAX_SET_WEATHER
+BattleScript_MoveEffectSetWeatherMessage:
 	printfromtable gMoveWeatherChangeStringIds
 	waitmessage B_WAIT_TIME_LONG
 	call BattleScript_ActivateWeatherAbilities

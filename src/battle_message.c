@@ -836,6 +836,12 @@ const u8 *const gBattleStringsTable[STRINGID_COUNT] =
     [STRINGID_FOGCREPTUP]                           = COMPOUND_STRING("{JPN}こい きりが たちこめた！"),
     [STRINGID_FOGISDEEP]                            = COMPOUND_STRING("{JPN}きりが ふかい"),
     [STRINGID_FOGLIFTED]                            = COMPOUND_STRING("{JPN}きりが はれた"),
+    [STRINGID_DARKNESSSTARTED]                      = COMPOUND_STRING("{JPN}くらやみが たちこめた！"),
+    [STRINGID_DARKNESSCONTINUES]                    = COMPOUND_STRING("{JPN}くらやみが 続いている"),
+    [STRINGID_DARKNESSENDED]                        = COMPOUND_STRING("{JPN}くらやみが 消え去った！"),
+    [STRINGID_DARKNESSHURTS]                        = COMPOUND_STRING("{JPN}{B_ATK_NAME_WITH_PREFIX}は\nくらやみで ダメージを 受けた！"),
+    [STRINGID_SHADOWENCOUNTER]                      = COMPOUND_STRING("{JPN}{B_ATK_NAME_WITH_PREFIX}は\n黒いオーラを まとっている！"),
+    [STRINGID_SHADOWSHEDREMOVEDSCREENS]             = COMPOUND_STRING("{JPN}ダークオーラの うずが\n場の 壁を 消しさった！"),
     [STRINGID_PKMNMADESHELLGLEAM]                   = COMPOUND_STRING("{JPN}{B_DEF_NAME_WITH_PREFIX}は\nこうらを かがやかせた！ タイプあいしょうを ゆがめる！"),
     [STRINGID_FICKLEBEAMDOUBLED]                    = COMPOUND_STRING("{JPN}{B_ATK_NAME_WITH_PREFIX}は\nこの 攻撃に ぜんりょくを そそいだ！"),
     [STRINGID_COMMANDERACTIVATES]                   = COMPOUND_STRING("{JPN}{B_SCR_NAME_WITH_PREFIX}は しれいとう として\n{B_BUFF1}に のみこまれた！"),
@@ -1034,6 +1040,7 @@ const u16 gMoveWeatherChangeStringIds[] =
     [B_MSG_STARTED_HAIL]      = STRINGID_STARTEDHAIL,
     [B_MSG_STARTED_SNOW]      = STRINGID_STARTEDSNOW,
     [B_MSG_STARTED_FOG]       = STRINGID_FOGCREPTUP, // Unused, can use for custom moves that set fog
+    [B_MSG_STARTED_DARKNESS]  = STRINGID_DARKNESSSTARTED,
 };
 
 const u16 gAbilityWeatherChangeStringId[] =
@@ -1059,6 +1066,7 @@ const u16 gWeatherEndsStringIds[B_MSG_WEATHER_END_COUNT] =
     [B_MSG_WEATHER_END_EXTREMELY_HARSH_SUNLIGHT]   = STRINGID_EXTREMESUNLIGHTFADED,
     [B_MSG_WEATHER_END_HEAVY_RAIN]                 = STRINGID_HEAVYRAINLIFTED,
     [B_MSG_WEATHER_END_STRONG_WINDS]               = STRINGID_STRONGWINDSDISSIPATED,
+    [B_MSG_WEATHER_END_DARKNESS]                   = STRINGID_DARKNESSENDED,
 };
 
 const u16 gWeatherTurnStringIds[] =
@@ -1070,12 +1078,14 @@ const u16 gWeatherTurnStringIds[] =
     [B_MSG_WEATHER_TURN_HAIL]         = STRINGID_HAILCONTINUES,
     [B_MSG_WEATHER_TURN_SNOW]         = STRINGID_SNOWCONTINUES,
     [B_MSG_WEATHER_TURN_FOG]          = STRINGID_FOGISDEEP,
+    [B_MSG_WEATHER_TURN_DARKNESS]     = STRINGID_DARKNESSCONTINUES,
     [B_MSG_WEATHER_TURN_STRONG_WINDS] = STRINGID_MYSTERIOUSAIRCURRENTBLOWSON,
 };
 
 const u16 gSandStormHailDmgStringIds[] =
 {
     [B_MSG_SANDSTORM] = STRINGID_PKMNBUFFETEDBYSANDSTORM,
+    [B_MSG_DARKNESS] = STRINGID_DARKNESSHURTS,
     [B_MSG_HAIL]      = STRINGID_PKMNPELTEDBYHAIL
 };
 

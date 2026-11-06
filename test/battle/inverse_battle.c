@@ -1,5 +1,64 @@
 #include "global.h"
+#include "battle_util.h"
+#include "event_data.h"
+#include "main.h"
 #include "test/battle.h"
+
+TEST("Inverse battle: the hub setting applies only during local Frontier battles")
+{
+    u32 oldBattleFlags = gBattleTypeFlags;
+    bool32 oldInBattle = gMain.inBattle;
+    bool32 oldScriptRule = FlagGet(B_FLAG_INVERSE_BATTLE);
+    bool32 oldHubRule = FlagGet(FLAG_FRONTIER_INVERSE_BATTLE);
+    static const struct
+    {
+        u32 flags;
+        bool8 inBattle;
+        bool8 inverse;
+    } cases[] = {
+        { BATTLE_TYPE_BATTLE_TOWER, TRUE, TRUE },
+        { BATTLE_TYPE_DOME, TRUE, TRUE },
+        { BATTLE_TYPE_FACTORY | BATTLE_TYPE_DOUBLE, TRUE, TRUE },
+        { BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_MULTI | BATTLE_TYPE_INGAME_PARTNER, TRUE, TRUE },
+        { BATTLE_TYPE_PALACE, TRUE, TRUE },
+        { BATTLE_TYPE_ARENA, TRUE, TRUE },
+        { BATTLE_TYPE_PIKE, TRUE, TRUE },
+        { BATTLE_TYPE_PYRAMID, TRUE, TRUE },
+        { BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_LINK, TRUE, FALSE },
+        { BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_RECORDED, TRUE, FALSE },
+        { BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_RECORDED_LINK, TRUE, FALSE },
+        { BATTLE_TYPE_TRAINER, TRUE, FALSE },
+        { 0, TRUE, FALSE },
+        { BATTLE_TYPE_DOME, FALSE, FALSE },
+    };
+
+    FlagClear(B_FLAG_INVERSE_BATTLE);
+    FlagSet(FLAG_FRONTIER_INVERSE_BATTLE);
+    for (u32 i = 0; i < ARRAY_COUNT(cases); i++)
+    {
+        gBattleTypeFlags = cases[i].flags;
+        gMain.inBattle = cases[i].inBattle;
+        bool32 inverse = cases[i].inverse;
+        EXPECT_EQ(GetTypeModifier(TYPE_FIRE, TYPE_WATER), inverse ? UQ_4_12(2.0) : UQ_4_12(0.5));
+        EXPECT_EQ(GetTypeModifier(TYPE_FIRE, TYPE_GRASS), inverse ? UQ_4_12(0.5) : UQ_4_12(2.0));
+        EXPECT_EQ(GetTypeModifier(TYPE_GROUND, TYPE_FLYING), inverse ? UQ_4_12(2.0) : UQ_4_12(0.0));
+        EXPECT_EQ(GetTypeModifier(TYPE_NORMAL, TYPE_NORMAL), UQ_4_12(1.0));
+    }
+    FlagClear(FLAG_FRONTIER_INVERSE_BATTLE);
+    gBattleTypeFlags = BATTLE_TYPE_BATTLE_TOWER;
+    gMain.inBattle = TRUE;
+    EXPECT_EQ(GetTypeModifier(TYPE_FIRE, TYPE_WATER), UQ_4_12(0.5));
+
+    FlagSet(B_FLAG_INVERSE_BATTLE);
+    gBattleTypeFlags = BATTLE_TYPE_TRAINER;
+    EXPECT_EQ(GetTypeModifier(TYPE_FIRE, TYPE_WATER), UQ_4_12(2.0));
+    if (!oldScriptRule)
+        FlagClear(B_FLAG_INVERSE_BATTLE);
+    if (oldHubRule)
+        FlagSet(FLAG_FRONTIER_INVERSE_BATTLE);
+    gMain.inBattle = oldInBattle;
+    gBattleTypeFlags = oldBattleFlags;
+}
 
 static bool32 IsSpeciesMonotypeOf(enum Species species, enum Type type)
 {

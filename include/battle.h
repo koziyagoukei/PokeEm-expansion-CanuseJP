@@ -559,7 +559,8 @@ struct PartyState
     u32 isKnockedOff:1;
     u32 frontierNicknameSendOutMsgShown:1;
     u32 freezeTurns:2;
-    u32 padding:2;
+    u32 shadowHyperMode:1;
+    u32 padding:1;
     enum Item usedHeldItem;
 };
 
@@ -588,6 +589,9 @@ struct BattleStruct
 {
     struct BattlerState battlerState[MAX_BATTLERS_COUNT];
     struct PartyState partyState[MAX_BATTLE_TRAINERS][PARTY_SIZE];
+    bool8 shadowProgressApplied;
+    bool8 darknessFadesAfterDamage;
+    u8 shadowHalfNextBattler; // Shadow Half goes through the field one battler at a time
     struct EventStates eventState;
     struct FutureSight futureSight[MAX_BATTLERS_COUNT];
     struct Wish wish[MAX_BATTLERS_COUNT];

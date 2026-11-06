@@ -1,4 +1,5 @@
 #include "global.h"
+#include "shadow_pokemon.h"
 #include "party_bath_expansion.h"
 #include "malloc.h"
 #include "battle.h"
@@ -3258,7 +3259,9 @@ static void SetPartyMonFieldSelectionActions(struct Pokemon *mons, u8 slotId)
     sPartyMenuInternal->numActions = 0;
     AppendToList(sPartyMenuInternal->actions, &sPartyMenuInternal->numActions, MENU_SUMMARY);
 
-    // Add field moves to action list
+    // Add field moves to action list. A Shadow Pokemon can only use the own moves its heart has opened.
+    struct ShadowMoveLayout shadowLayout;
+    GetShadowMoveLayout(&mons[slotId], TRUE, &shadowLayout);
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
         for (j = 0; j != FIELD_MOVES_COUNT; j++)
@@ -3266,7 +3269,7 @@ static void SetPartyMonFieldSelectionActions(struct Pokemon *mons, u8 slotId)
             if (!FieldMove_IsVisible(j))
                 continue;
 
-            if (GetMonData(&mons[slotId], i + MON_DATA_MOVE1) == FieldMove_GetMoveId(j))
+            if (shadowLayout.moves[i] == FieldMove_GetMoveId(j))
             {
                 AppendToList(sPartyMenuInternal->actions, &sPartyMenuInternal->numActions, j + MENU_FIELD_MOVES);
                 break;

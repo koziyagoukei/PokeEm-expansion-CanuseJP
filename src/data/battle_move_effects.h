@@ -1882,4 +1882,22 @@ const struct BattleMoveEffect gBattleMoveEffects[NUM_BATTLE_MOVE_EFFECTS] =
         .battleScript = BattleScript_EffectHit,
         .battleTvScore = 1,
     },
+
+    [EFFECT_SHADOW_END] =
+    {
+        .battleScript = BattleScript_EffectHit,
+        .battleTvScore = 1,
+    },
+
+    [EFFECT_SHADOW_SHED] =
+    {
+        .battleScript = BattleScript_EffectShadowShed,
+        .battleTvScore = 1,
+    },
+
+    [EFFECT_SHADOW_HALF] =
+    {
+        .battleScript = BattleScript_EffectShadowHalf,
+        .battleTvScore = 1,
+    },
 };

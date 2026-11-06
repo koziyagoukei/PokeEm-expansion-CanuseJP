@@ -979,6 +979,7 @@ extern const u8 gBattleAnimGeneral_FormChangeDisguise[];
 extern const u8 gBattleAnimGeneral_SlideOffScreen[];
 extern const u8 gBattleAnimGeneral_RestoreBg[];
 extern const u8 gBattleAnimGeneral_TotemFlare[];
+extern const u8 gBattleAnimGeneral_ShadowAura[];
 extern const u8 gBattleAnimGeneral_GulpMissile[];
 extern const u8 gBattleAnimGeneral_StrongWinds[];
 extern const u8 gBattleAnimGeneral_PrimalReversion[];

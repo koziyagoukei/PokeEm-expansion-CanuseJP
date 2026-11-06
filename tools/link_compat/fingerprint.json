@@ -18,13 +18,13 @@
       "link_battler_header": "db8d44e3e79b8d6aaf5a4c9b585896ab4165a99721fd602d3cd058439bade856",
       "link_player": "572b6e36c674657663bbb8d291c88334bf767bb59392d8ec00e9cfc81e991142",
       "link_player_block": "b65526d79b2000802aeea41e97e97fc2a757d21cf5879cf0e2f16301f6f7dfab",
-      "move_ids": "9d40396a5390623563ccd68694e70ee87aadf05117076dff31d5f44961fc47e2",
+      "move_ids": "a8725a3f1bc98e41ebd89fbad10839c8ee735fa58a0cab01ea611f6ae7a66714",
       "multi_partner_menu_pokemon": "a2e1db655d39f4877ac6cb0a524bbf6cfc7d64451106a269a26a031ef1f27934",
       "pokemon": "4919c01c8d3d30427e95716b69d16f902368edd46462c3727b3bed7edde01868",
       "pokemon_substruct_0": "649437ab820489a5e4c9aabd0789be371af1c3651134959df4c3b90048f4db30",
       "pokemon_substruct_1": "3671aabef9355402c97d2d6be813922abc5a776a6f69dd60521bb2e9f7cd6698",
       "pokemon_substruct_2": "ded16268f08b25fed3dd4568d66de24fc29e9a7603bfa38295c724243f82f993",
-      "pokemon_substruct_3": "4ef8ac2496c79d46ecaf3bb576003922da42bb4bba5cd6a0ca4acf96d18bb22e",
+      "pokemon_substruct_3": "8fc9410fda3a8019a896038102ec57ce9e3b25f6492979d6d0b60f5d99333f8e",
       "rfu_sio_info": "4e17aab73e7598ba30f973b91aeee13bb7bfdbd9c3c8467a3216da332123fda1",
       "species_ids": "2b0b9237a38b50a7846478f6a99a3b91713c82d36a88d625d5c482e488a53e23",
       "trainer_card": "11ba6cc5560db09f04f0b39f19e5889fcc703f89de165ed07ffa5b6d0c49936f"
@@ -42,10 +42,10 @@
       "union_room_activities": "9024f4f9a004353a2222be88d9d6768d42d00f21df05a589394ff353895686cf"
     }
   },
-  "data_layout_version": 8,
+  "data_layout_version": 9,
   "fingerprints": {
-    "combined": "901fbf9139c37f36381f73ffb407ecc1251690c8eb8b6fe7b28e5a599a73600a",
-    "data_layout": "9aaa6663fe03c54cb0d6c6b1ead893275baa3eab7449b5b5165e97e736b1db77",
+    "combined": "b33aedcf1f78ffef67eea4c24ad77c774af86216bd22dbbc0415b7b765c38ac7",
+    "data_layout": "37887b8f543311a44d9c5f25faa8d01cfd1193ee1e898bb540a460550bb8ab5f",
     "protocol": "aa4635a0875a0ea7823211376eb1477e28a508cc125efbc2111c41d1fccc46ee"
   },
   "link_compat_version": 15,
@@ -60,13 +60,13 @@
       "ABILITIES_COUNT": 320,
       "ITEMS_COUNT": 874,
       "MOVES_COUNT": 848,
-      "MOVES_COUNT_ALL": 935,
+      "MOVES_COUNT_ALL": 954,
       "NUM_SPECIES": 1573
     },
     "identifier_counts": {
       "ability_ids": 320,
       "item_ids": 932,
-      "move_ids": 959,
+      "move_ids": 978,
       "species_ids": 1673
     },
     "struct_sizes": {

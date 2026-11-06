@@ -2390,8 +2390,11 @@ static int GetTypeEffectivenessPoints(enum Move move, enum Species targetSpecies
     }
     else
     {
-        u32 typeEffectiveness1 = UQ_4_12_TO_INT(GetTypeModifier(moveType, defType1) * 2) * 5;
-        u32 typeEffectiveness2 = UQ_4_12_TO_INT(GetTypeModifier(moveType, defType2) * 2) * 5;
+        // Score the tournament with its selected rules even between battles.
+        bool32 inverse = FlagGet(FLAG_FRONTIER_INVERSE_BATTLE)
+                      || (B_FLAG_INVERSE_BATTLE != 0 && FlagGet(B_FLAG_INVERSE_BATTLE));
+        u32 typeEffectiveness1 = UQ_4_12_TO_INT(GetTypeModifierForRule(moveType, defType1, inverse) * 2) * 5;
+        u32 typeEffectiveness2 = UQ_4_12_TO_INT(GetTypeModifierForRule(moveType, defType2, inverse) * 2) * 5;
 
         typePower = (typeEffectiveness1 * typePower) / 10;
         if (defType2 != defType1)

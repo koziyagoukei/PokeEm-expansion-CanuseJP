@@ -154,7 +154,8 @@ struct MoveInfo
     bool32 alwaysHitsOnSameType:1; // Always hits if user is of same type as move
     bool32 noAffectOnSameTypeTarget:1; // Fails if target is of same type as move
     bool32 accDecreaseIfUserNotSameType:1; // Accuracy is increased by 10% if user is of same type as move
-    bool32 padding1:15;
+    bool32 shadowMove:1;
+    bool32 padding1:14;
     // end of word
 
     // Ban flags
@@ -254,6 +255,12 @@ static inline enum Move SanitizeMoveId(enum Move moveId)
 static inline const u8 *GetMoveName(enum Move moveId)
 {
     return gMovesInfo[SanitizeMoveId(moveId)].name;
+}
+
+// A Shadow move of Pokemon XD (only Shadow Pokemon use them). Inline: the damage calculation checks it often.
+static inline bool32 IsShadowMove(enum Move move)
+{
+    return move < MOVES_COUNT_ALL && gMovesInfo[move].shadowMove;
 }
 
 static inline enum BattleMoveEffects GetMoveEffect(enum Move moveId)

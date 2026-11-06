@@ -21666,4 +21666,303 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
         .ignoresProtect = TRUE,
         .battleAnimScript = gBattleAnimMove_GMaxRapidFlow,
     },
+
+    [MOVE_DYNAPHOBIA] =
+    {
+        .name = COMPOUND_STRING("{JPN}ダイナフォビア"),
+        .description = COMPOUND_STRING("{JPN}天候を くらやみにする\n非接触"),
+        .effect = EFFECT_MAX_MOVE,
+        .power = 1,
+        .type = TYPE_MYSTERY,
+        .pp = 10,
+        .target = TARGET_SELECTED,
+        .category = DAMAGE_CATEGORY_PHYSICAL,
+        .shadowMove = TRUE,
+        .battleAnimScript = gBattleAnimMove_MaxDarkness,
+        .additionalEffects = ADDITIONAL_EFFECTS({
+            .moveEffect = MOVE_EFFECT_DARKNESS,
+        }),
+    },
+
+// Shadow moves of Pokemon XD. Power, accuracy, category, target, contact and Protect come from XD's own move data
+// (ids 356-373). Their matchup (2x against a Pokemon that is not Shadow, 0.5x against a Shadow Pokemon), no STAB and
+// no PP use are keyed to the shadowMove flag (IsShadowMove). PP 5 is XD's value and is only shown.
+#define SHADOW_MOVE_DATA            \
+    .type = TYPE_MYSTERY,           \
+    .pp = 5,                        \
+    .priority = 0,                  \
+    .shadowMove = TRUE,             \
+    .mimicBanned = TRUE,            \
+    .sketchBanned = TRUE,           \
+    .metronomeBanned = TRUE,        \
+    .copycatBanned = TRUE,          \
+    .assistBanned = TRUE,           \
+    .mirrorMoveBanned = TRUE,       \
+    .meFirstBanned = TRUE,          \
+    .instructBanned = TRUE,         \
+    .encoreBanned = FALSE
+
+    [MOVE_SHADOW_BLITZ] =
+    {
+        .name = COMPOUND_STRING("{JPN}ダークアタック"),
+        .description = COMPOUND_STRING("{JPN}ダーク以外に 効果抜群\n接触"),
+        .effect = EFFECT_HIT,
+        .power = 40,
+        .accuracy = 100,
+        .target = TARGET_SELECTED,
+        .category = DAMAGE_CATEGORY_PHYSICAL,
+        .makesContact = TRUE,
+        SHADOW_MOVE_DATA,
+        .battleAnimScript = gBattleAnimMove_Tackle,
+    },
+
+    [MOVE_SHADOW_RUSH] =
+    {
+        .name = COMPOUND_STRING("{JPN}ダークラッシュ"),
+        .description = COMPOUND_STRING("{JPN}ダーク以外に 効果抜群\n接触"),
+        .effect = EFFECT_HIT,
+        .power = 55,
+        .accuracy = 100,
+        .target = TARGET_SELECTED,
+        .category = DAMAGE_CATEGORY_PHYSICAL,
+        .makesContact = TRUE,
+        SHADOW_MOVE_DATA,
+        .battleAnimScript = gBattleAnimMove_TakeDown,
+    },
+
+    [MOVE_SHADOW_BREAK] =
+    {
+        .name = COMPOUND_STRING("{JPN}ダークブレイク"),
+        .description = COMPOUND_STRING("{JPN}ダーク以外に 効果抜群\n接触"),
+        .effect = EFFECT_HIT,
+        .power = 75,
+        .accuracy = 100,
+        .target = TARGET_SELECTED,
+        .category = DAMAGE_CATEGORY_PHYSICAL,
+        .makesContact = TRUE,
+        SHADOW_MOVE_DATA,
+        .battleAnimScript = gBattleAnimMove_GigaImpact,
+    },
+
+    [MOVE_SHADOW_END] =
+    {
+        .name = COMPOUND_STRING("{JPN}ダークエンド"),
+        .description = COMPOUND_STRING("{JPN}残りHPの 半分の 反動\n反動 接触"),
+        .effect = EFFECT_SHADOW_END,
+        .power = 120,
+        .accuracy = 60,
+        .target = TARGET_SELECTED,
+        .category = DAMAGE_CATEGORY_PHYSICAL,
+        .makesContact = TRUE,
+        SHADOW_MOVE_DATA,
+        .battleAnimScript = gBattleAnimMove_DoubleEdge,
+    },
+
+    [MOVE_SHADOW_WAVE] =
+    {
+        .name = COMPOUND_STRING("{JPN}ダークウェーブ"),
+        .description = COMPOUND_STRING("{JPN}相手全体 ダーク以外に抜群\n非接触"),
+        .effect = EFFECT_HIT,
+        .power = 50,
+        .accuracy = 100,
+        .target = TARGET_BOTH,
+        .category = DAMAGE_CATEGORY_SPECIAL,
+        SHADOW_MOVE_DATA,
+        .battleAnimScript = gBattleAnimMove_DarkPulse,
+    },
+
+    [MOVE_SHADOW_RAVE] =
+    {
+        .name = COMPOUND_STRING("{JPN}ダークレイブ"),
+        .description = COMPOUND_STRING("{JPN}相手全体 ダーク以外に抜群\n非接触"),
+        .effect = EFFECT_HIT,
+        .power = 70,
+        .accuracy = 100,
+        .target = TARGET_BOTH,
+        .category = DAMAGE_CATEGORY_SPECIAL,
+        SHADOW_MOVE_DATA,
+        .battleAnimScript = gBattleAnimMove_NightDaze,
+    },
+
+    [MOVE_SHADOW_STORM] =
+    {
+        .name = COMPOUND_STRING("{JPN}ダークストーム"),
+        .description = COMPOUND_STRING("{JPN}相手全体 ダーク以外に抜群\n非接触"),
+        .effect = EFFECT_HIT,
+        .power = 95,
+        .accuracy = 100,
+        .target = TARGET_BOTH,
+        .category = DAMAGE_CATEGORY_SPECIAL,
+        SHADOW_MOVE_DATA,
+        .battleAnimScript = gBattleAnimMove_Twister,
+    },
+
+    [MOVE_SHADOW_FIRE] =
+    {
+        .name = COMPOUND_STRING("{JPN}ダークファイア"),
+        .description = COMPOUND_STRING("{JPN}10{ENG}%{JPN}で 相手をやけどにする\n非接触"),
+        .effect = EFFECT_HIT,
+        .power = 75,
+        .accuracy = 100,
+        .target = TARGET_SELECTED,
+        .category = DAMAGE_CATEGORY_SPECIAL,
+        SHADOW_MOVE_DATA,
+        .additionalEffects = ADDITIONAL_EFFECTS({
+            .moveEffect = MOVE_EFFECT_BURN,
+            .chance = 10,
+        }),
+        .battleAnimScript = gBattleAnimMove_FireBlast,
+    },
+
+    [MOVE_SHADOW_BOLT] =
+    {
+        .name = COMPOUND_STRING("{JPN}ダークサンダー"),
+        .description = COMPOUND_STRING("{JPN}10{ENG}%{JPN}で 相手をまひにする\n非接触"),
+        .effect = EFFECT_HIT,
+        .power = 75,
+        .accuracy = 100,
+        .target = TARGET_SELECTED,
+        .category = DAMAGE_CATEGORY_SPECIAL,
+        SHADOW_MOVE_DATA,
+        .additionalEffects = ADDITIONAL_EFFECTS({
+            .moveEffect = MOVE_EFFECT_PARALYSIS,
+            .chance = 10,
+        }),
+        .battleAnimScript = gBattleAnimMove_Thunder,
+    },
+
+    [MOVE_SHADOW_CHILL] =
+    {
+        .name = COMPOUND_STRING("{JPN}ダークフリーズ"),
+        .description = COMPOUND_STRING("{JPN}10{ENG}%{JPN}で 相手をこおらせる\n非接触"),
+        .effect = EFFECT_HIT,
+        .power = 75,
+        .accuracy = 100,
+        .target = TARGET_SELECTED,
+        .category = DAMAGE_CATEGORY_SPECIAL,
+        SHADOW_MOVE_DATA,
+        .additionalEffects = ADDITIONAL_EFFECTS({
+            .moveEffect = MOVE_EFFECT_FREEZE_OR_FROSTBITE,
+            .chance = 10,
+        }),
+        .battleAnimScript = gBattleAnimMove_IceBeam,
+    },
+
+    [MOVE_SHADOW_BLAST] =
+    {
+        .name = COMPOUND_STRING("{JPN}ダークブラスト"),
+        .description = COMPOUND_STRING("{JPN}ダーク以外に 効果抜群\n非接触"),
+        .effect = EFFECT_HIT,
+        .power = 80,
+        .accuracy = 100,
+        .target = TARGET_SELECTED,
+        .category = DAMAGE_CATEGORY_PHYSICAL,
+        SHADOW_MOVE_DATA,
+        .battleAnimScript = gBattleAnimMove_AirCutter,
+    },
+
+    [MOVE_SHADOW_SKY] =
+    {
+        .name = COMPOUND_STRING("{JPN}ダークウェザー"),
+        .description = COMPOUND_STRING("{JPN}5ターン くらやみにする\nまもる貫通"),
+        .effect = EFFECT_WEATHER,
+        .power = 0,
+        .accuracy = 0,
+        .target = TARGET_FIELD,
+        .category = DAMAGE_CATEGORY_STATUS,
+        .ignoresProtect = TRUE,
+        .argument = { .weatherType = BATTLE_WEATHER_DARKNESS },
+        SHADOW_MOVE_DATA,
+        .battleAnimScript = gBattleAnimMove_Haze,
+    },
+
+    [MOVE_SHADOW_HOLD] =
+    {
+        .name = COMPOUND_STRING("{JPN}ダークホールド"),
+        .description = COMPOUND_STRING("{JPN}相手全体 逃げられない\n非接触"),
+        .effect = EFFECT_MEAN_LOOK,
+        .power = 0,
+        .accuracy = 80,
+        .target = TARGET_BOTH,
+        .category = DAMAGE_CATEGORY_STATUS,
+        SHADOW_MOVE_DATA,
+        .battleAnimScript = gBattleAnimMove_MeanLook,
+    },
+
+    [MOVE_SHADOW_MIST] =
+    {
+        .name = COMPOUND_STRING("{JPN}ダークミスト"),
+        .description = COMPOUND_STRING("{JPN}相手全体の 回避{ENG}-{JPN}2\n非接触"),
+        .effect = EFFECT_STAT_CHANGE,
+        .power = 0,
+        .accuracy = 100,
+        .target = TARGET_BOTH,
+        .category = DAMAGE_CATEGORY_STATUS,
+        SHADOW_MOVE_DATA,
+        .additionalEffects = ADDITIONAL_EFFECTS({
+            .moveEffect = STAT_CHANGE_EFFECT_MINUS,
+            .evasion = 2,
+        }),
+        .battleAnimScript = gBattleAnimMove_Smokescreen,
+    },
+
+    [MOVE_SHADOW_PANIC] =
+    {
+        .name = COMPOUND_STRING("{JPN}ダークパニック"),
+        .description = COMPOUND_STRING("{JPN}相手全体を 混乱にする\n非接触"),
+        .effect = EFFECT_CONFUSE,
+        .power = 0,
+        .accuracy = 60,
+        .target = TARGET_BOTH,
+        .category = DAMAGE_CATEGORY_STATUS,
+        SHADOW_MOVE_DATA,
+        .battleAnimScript = gBattleAnimMove_ConfuseRay,
+    },
+
+    [MOVE_SHADOW_DOWN] =
+    {
+        .name = COMPOUND_STRING("{JPN}ダークダウン"),
+        .description = COMPOUND_STRING("{JPN}相手全体の 防御{ENG}-{JPN}2\n非接触"),
+        .effect = EFFECT_STAT_CHANGE,
+        .power = 0,
+        .accuracy = 100,
+        .target = TARGET_BOTH,
+        .category = DAMAGE_CATEGORY_STATUS,
+        SHADOW_MOVE_DATA,
+        .additionalEffects = ADDITIONAL_EFFECTS({
+            .moveEffect = STAT_CHANGE_EFFECT_MINUS,
+            .defense = 2,
+        }),
+        .battleAnimScript = gBattleAnimMove_Screech,
+    },
+
+    [MOVE_SHADOW_SHED] =
+    {
+        .name = COMPOUND_STRING("{JPN}ダークリムーブ"),
+        .description = COMPOUND_STRING("{JPN}両側の 壁と 守りを 消す\nまもる貫通"),
+        .effect = EFFECT_SHADOW_SHED,
+        .power = 0,
+        .accuracy = 0,
+        .target = TARGET_FIELD,
+        .category = DAMAGE_CATEGORY_STATUS,
+        .ignoresProtect = TRUE,
+        SHADOW_MOVE_DATA,
+        .battleAnimScript = gBattleAnimMove_Defog,
+    },
+
+    [MOVE_SHADOW_HALF] =
+    {
+        .name = COMPOUND_STRING("{JPN}ダークハーフ"),
+        .description = COMPOUND_STRING("{JPN}場の 全員の HPを 半分にする\n非接触"),
+        .effect = EFFECT_SHADOW_HALF,
+        .power = 0,
+        .accuracy = 0,
+        .target = TARGET_FIELD,
+        .category = DAMAGE_CATEGORY_STATUS,
+        .ignoresProtect = TRUE, // Protect is checked for each Pokemon by the effect itself
+        SHADOW_MOVE_DATA,
+        .battleAnimScript = gBattleAnimMove_NightShade,
+    },
 };
+
+#undef SHADOW_MOVE_DATA

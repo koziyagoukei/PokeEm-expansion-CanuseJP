@@ -1,4 +1,5 @@
 #include "global.h"
+#include "shadow_pokemon.h"
 #include "battle.h"
 #include "battle_anim.h"
 #include "battle_ai_record.h"
@@ -840,9 +841,13 @@ static enum ItemEffect ItemRestorePp(enum BattlerId battler, enum Item itemId)
     u32 ppBonuses = GetMonData(mon, MON_DATA_PP_BONUSES);
     bool32 override = gBattleScripting.overrideBerryRequirements;
     enum Ability ability = GetBattlerAbility(battler);
+    u32 sealed = GetShadowSealedMoveMask(mon);
 
     for (u32 i = 0; i < MAX_MON_MOVES; i++)
     {
+        if (sealed & (1 << i))
+            continue;
+
         enum Move move = GetMonData(mon, MON_DATA_MOVE1 + i);
         u32 currentPP = GetMonData(mon, MON_DATA_PP1 + i);
         if (move == MOVE_NONE)

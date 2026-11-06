@@ -1,4 +1,5 @@
 #include "global.h"
+#include "shadow_pokemon.h"
 #include "malloc.h"
 #include "battle.h"
 #include "pokemon.h"
@@ -141,6 +142,10 @@ bool32 CanUseZMove(enum BattlerId battler)
 
     // Check if battler isn't holding a Z-Crystal.
     if (holdEffect != HOLD_EFFECT_Z_CRYSTAL)
+        return FALSE;
+
+    // A Shadow Pokemon can not use Z-Moves (checked last: it reads the Pokemon's data).
+    if (IsBattlerShadowPokemon(battler))
         return FALSE;
 
     // All checks passed!

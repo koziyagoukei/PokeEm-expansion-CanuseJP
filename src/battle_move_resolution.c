@@ -1,4 +1,5 @@
 #include "global.h"
+#include "shadow_pokemon.h"
 #include "battle.h"
 #include "battle_arena.h"
 #include "battle_environment.h"
@@ -1041,12 +1042,18 @@ static enum CancelerResult CancelerPPDeduction(struct BattleCalcValues *cv)
     if (cv->move != gLastResultingMoves[cv->battlerAtk] || gBattleStruct->unableToUseMove)
         gBattleMons[cv->battlerAtk].volatiles.metronomeItemCounter = 0;
 
+    // Shadow moves use no PP (Pokemon XD).
+    if (IsShadowMove(gBattleMons[cv->battlerAtk].moves[movePosition]))
+        ppToDeduct = 0;
+
     if (gBattleMons[cv->battlerAtk].pp[movePosition] > ppToDeduct)
         gBattleMons[cv->battlerAtk].pp[movePosition] -= ppToDeduct;
-    else
+    else if (ppToDeduct != 0)
         gBattleMons[cv->battlerAtk].pp[movePosition] = 0;
 
     gLastMoves[cv->battlerAtk] = gChosenMove;
+
+    TryEnterShadowHyperMode(cv->battlerAtk, cv->move);
 
     if (MOVE_IS_PERMANENT(cv->battlerAtk, movePosition))
     {
@@ -1193,6 +1200,12 @@ static bool32 ShouldSkipFailureCheckOnBattler(enum BattlerId battlerAtk, enum Ba
 static enum CancelerResult CancelerMoveFailure(struct BattleCalcValues *cv)
 {
     const u8 *battleScript = NULL;
+
+    if (IsShadowMove(cv->move) && !IsBattlerShadowPokemon(cv->battlerAtk))
+    {
+        gBattlescriptCurrInstr = BattleScript_PokemonCantUseTheMove;
+        return CANCELER_RESULT_FAILURE;
+    }
 
     switch (cv->moveEffect)
     {
@@ -4187,6 +4200,18 @@ static enum MoveEndResult MoveEndMoveBlockRecoil(struct BattleCalcValues *cv)
                 SetPassiveDamageAmount(cv->battlerAtk, gBattleScripting.savedDmg * max(1, GetMoveRecoil(cv->move)) / 100);
             }
             TryUpdateEvolutionTracker(IF_RECOIL_DAMAGE_GE, gBattleStruct->passiveHpUpdate[cv->battlerAtk], MOVE_NONE);
+            BattleScriptCall(BattleScript_MoveEffectRecoil);
+            result = MOVEEND_RESULT_RUN_SCRIPT;
+        }
+        break;
+    case EFFECT_SHADOW_END:
+        // XD: the user loses half of its HP left, after the hit. Rock Head does not stop it.
+        if (IsBattlerTurnDamaged(cv->battlerDef, INCLUDING_SUBSTITUTES)
+         && IsBattlerAlive(cv->battlerAtk)
+         && gBattleMons[cv->battlerAtk].hp > 1
+         && !IsAbilityAndRecord(cv->battlerAtk, cv->abilities[cv->battlerAtk], ABILITY_MAGIC_GUARD))
+        {
+            SetPassiveDamageAmount(cv->battlerAtk, gBattleMons[cv->battlerAtk].hp / 2);
             BattleScriptCall(BattleScript_MoveEffectRecoil);
             result = MOVEEND_RESULT_RUN_SCRIPT;
         }

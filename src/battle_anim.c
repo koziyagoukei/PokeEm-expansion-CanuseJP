@@ -334,6 +334,7 @@ static const u8* const sBattleAnims_General[NUM_B_ANIMS_GENERAL] =
     [B_ANIM_PROTECTED_ITSELF]       = gBattleAnimGeneral_ProtectedItself,
     [B_ANIM_DYNAMAX_FAINT]          = gBattleAnimGeneral_DynamaxFaint,
     [B_ANIM_TERA_FAINT]             = gBattleAnimGeneral_TeraFaint,
+    [B_ANIM_SHADOW_AURA]            = gBattleAnimGeneral_ShadowAura,
 };
 
 static const u8* const sBattleAnims_Special[NUM_B_ANIMS_SPECIAL] =

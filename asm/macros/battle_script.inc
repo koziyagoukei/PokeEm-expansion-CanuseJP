@@ -1420,6 +1420,18 @@
 	.4byte \failInstr
 	.endm
 
+	@ Shadow Shed: ends the screens and Safeguard of both sides, or jumps when there were none.
+	.macro tryshadowshed, failInstr:req
+	callnative BS_TryShadowShed
+	.4byte \failInstr
+	.endm
+
+	@ Shadow Half: sets the next Pokemon to lose half its HP as the target, or jumps when none is left.
+	.macro tryshadowhalfnext, doneInstr:req
+	callnative BS_TryShadowHalfNext
+	.4byte \doneInstr
+	.endm
+
 	.macro jumpifblockedbysoundproof battler:req, failInstr:req
 	callnative BS_JumpIfBlockedBySoundproof
 	.byte \battler

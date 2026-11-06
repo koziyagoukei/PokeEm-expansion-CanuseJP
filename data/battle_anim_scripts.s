@@ -28993,6 +28993,15 @@ ZMoveBuffEffect:
 	delay 3
 	return
 
+gBattleAnimGeneral_ShadowAura::
+	playsewithpan SE_M_NIGHTMARE, SOUND_PAN_ATTACKER
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 1, 0, 10, RGB(4, 0, 8)
+	blend_color_cycle selector=F_PAL_ATTACKER, delay=1, num_blends=4, initial_blend_y=0, target_blend_y=12, color=RGB(20, 0, 28)
+	waitforvisualfinish
+	createvisualtask AnimTask_BlendBattleAnimPal, 10, F_PAL_BG, 1, 10, 0, RGB(4, 0, 8)
+	waitforvisualfinish
+	end
+
 gBattleAnimGeneral_TotemFlare::
 	monbg ANIM_ATTACKER
 	setalpha 12, 8

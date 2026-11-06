@@ -2253,6 +2253,9 @@ u32 GetBoxMonData3(struct BoxPokemon *boxMon, s32 field, u8 *data)
         case MON_DATA_POKERUS:
             retVal = GetSubstruct3(boxMon)->pokerus;
             break;
+        case MON_DATA_SHADOW_STATE:
+            retVal = GetSubstruct3(boxMon)->hasShadowState ? GetSubstruct3(boxMon)->pokerus : 0;
+            break;
         case MON_DATA_POKERUS_STRAIN:
             retVal = ((GetSubstruct3(boxMon)->pokerus & 0xF0) >> 4);
             break;
@@ -2752,13 +2755,20 @@ void SetBoxMonData(struct BoxPokemon *boxMon, s32 field, const void *dataArg)
             SET8(GetSubstruct2(boxMon)->sheen);
             break;
         case MON_DATA_POKERUS:
+            if (!GetSubstruct3(boxMon)->hasShadowState)
+                SET8(GetSubstruct3(boxMon)->pokerus);
+            break;
+        case MON_DATA_SHADOW_STATE:
+            GetSubstruct3(boxMon)->hasShadowState = TRUE;
             SET8(GetSubstruct3(boxMon)->pokerus);
             break;
         case MON_DATA_POKERUS_STRAIN:
-            GetSubstruct3(boxMon)->pokerus = (*data << 4) | (GetSubstruct3(boxMon)->pokerus & 0x0F);
+            if (!GetSubstruct3(boxMon)->hasShadowState)
+                GetSubstruct3(boxMon)->pokerus = (*data << 4) | (GetSubstruct3(boxMon)->pokerus & 0x0F);
             break;
         case MON_DATA_POKERUS_DAYS_LEFT:
-            GetSubstruct3(boxMon)->pokerus = (GetSubstruct3(boxMon)->pokerus & 0xF0) | *data;
+            if (!GetSubstruct3(boxMon)->hasShadowState)
+                GetSubstruct3(boxMon)->pokerus = (GetSubstruct3(boxMon)->pokerus & 0xF0) | *data;
             break;
         case MON_DATA_MET_LOCATION:
             SET8(GetSubstruct3(boxMon)->metLocation);

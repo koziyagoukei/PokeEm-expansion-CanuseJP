@@ -752,3 +752,8 @@ gSpecials::
 	def_special PartyBath_BufferVisitorText
 	def_special PartyEat_PickVisitors
 	def_special PartyEat_BufferVisitorText
+	def_special Special_ShadowPokemon_IsShadow
+	def_special Special_ShadowPokemon_CanPurify
+	def_special Special_ShadowPokemon_Purify
+	def_special Special_ShadowPokemon_Mark
+	def_special Special_ShadowPokemon_MarkWild

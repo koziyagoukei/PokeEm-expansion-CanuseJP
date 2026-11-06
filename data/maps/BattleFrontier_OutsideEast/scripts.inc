@@ -92,6 +92,7 @@ BattleFrontier_OutsideEast_EventScript_WaterSudowoodo::
 	waitmoncry
 	setvar VAR_LAST_TALKED, LOCALID_FRONTIER_SUDOWOODO
 	setwildbattle SPECIES_SUDOWOODO, 40
+	special Special_ShadowPokemon_MarkWild
 	setflag FLAG_SYS_CTRL_OBJ_DELETE
 	dowildbattle
 	clearflag FLAG_SYS_CTRL_OBJ_DELETE

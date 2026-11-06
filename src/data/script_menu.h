@@ -1219,6 +1219,13 @@ static const struct MenuAction MultichoiceList_FrontierBannedSpecies[] =
     { gText_Exit },
 };
 
+static const struct MenuAction sMultichoiceList_FrontierRuleSettings[] =
+{
+    { COMPOUND_STRING("{JPN}禁止ポケモン") },
+    { COMPOUND_STRING("{JPN}さかさバトル") },
+    { gText_Exit },
+};
+
 static const struct MenuAction sMultichoiceList_ContestBpShop[] =
 {
     {COMPOUND_STRING("{JPN}にじいろポロック")},
@@ -1414,6 +1421,7 @@ static const struct MultichoiceListStruct sMultichoiceLists[] =
     [MULTI_CONTEST_BP_SHOP_SCARVES]                  = MULTICHOICE(sMultichoiceList_ContestBpShopScarves),
     [MULTI_PARTY_BATH_ADDITIVE]                      = MULTICHOICE(sMultichoiceList_PartyBathAdditive),
     [MULTI_INN_TEA]                                  = MULTICHOICE(sMultichoiceList_InnTea),
+    [MULTI_FRONTIER_RULE_SETTINGS]                    = MULTICHOICE(sMultichoiceList_FrontierRuleSettings),
 };
 
 const u8 *const gStdStrings[] =

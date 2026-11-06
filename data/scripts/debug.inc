@@ -496,9 +496,15 @@ Debug_EventScript_SetFriendship::
 	releaseall
 	end
 
-Debug_EventScript_GivePokerus::
+Debug_EventScript_MarkShadowPokemon::
 	special ChoosePartyMon
-	callnative DebugNative_Party_SetPokerus
+	special Special_ShadowPokemon_Mark
+	releaseall
+	end
+
+Debug_EventScript_PurifyShadowPokemon::
+	special ChoosePartyMon
+	special Special_ShadowPokemon_Purify
 	releaseall
 	end
 

@@ -1,4 +1,5 @@
 #include "global.h"
+#include "shadow_pokemon.h"
 #include "battle.h"
 #include "battle_hold_effects.h"
 #include "battle_setup.h"
@@ -94,6 +95,11 @@ static bool32 HandleEndTurnVarious(enum BattlerId battler)
 static bool32 HandleEndTurnWeather(enum BattlerId battler)
 {
     gBattleStruct->eventState.endTurn++;
+    // Darkness deals damage on its last turn before fading.
+    gBattleStruct->darknessFadesAfterDamage = gBattleWeather == B_WEATHER_DARKNESS
+                                          && gBattleStruct->weatherDuration == 1;
+    if (gBattleStruct->darknessFadesAfterDamage)
+        return FALSE;
     return EndOrContinueWeather();
 }
 
@@ -122,6 +128,18 @@ static bool32 HandleEndTurnWeatherDamage(enum BattlerId battler)
     {
     case BATTLE_WEATHER_FOG:
     case BATTLE_WEATHER_STRONG_WINDS:
+        break;
+    case BATTLE_WEATHER_DARKNESS:
+        if (!IsBattlerShadowPokemon(battler)
+         && gBattleMons[battler].volatiles.semiInvulnerable != STATE_UNDERGROUND
+         && gBattleMons[battler].volatiles.semiInvulnerable != STATE_UNDERWATER
+         && !IsAbilityAndRecord(battler, ability, ABILITY_MAGIC_GUARD))
+        {
+            SetPassiveDamageAmount(battler, GetNonDynamaxMaxHP(battler) / 16);
+            gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_DARKNESS;
+            BattleScriptCall(BattleScript_DamagingWeather);
+            effect = TRUE;
+        }
         break;
     case BATTLE_WEATHER_RAIN:
     case BATTLE_WEATHER_RAIN_PRIMAL:
@@ -1665,10 +1683,16 @@ bool32 DoEndTurnEffects(void)
         // If either turnEffectsBattlerId or turnSideTracker are at max count, reset values and go to the next state
         if (gBattleStruct->eventState.endTurnBattler == gBattlersCount || gBattleStruct->eventState.battlerSide == NUM_BATTLE_SIDES)
         {
+            bool32 fadeDarkness = gBattleStruct->eventState.endTurn == ENDTURN_WEATHER_DAMAGE
+                               && gBattleStruct->darknessFadesAfterDamage
+                               && gBattleWeather == B_WEATHER_DARKNESS
+                               && gBattleStruct->weatherDuration == 1;
             gBattleStruct->eventState.endTurnBattler = 0;
             gBattleStruct->eventState.battlerSide = 0;
             gBattleStruct->eventState.endTurnBlock = 0;
             gBattleStruct->eventState.endTurn++;
+            if (fadeDarkness && EndOrContinueWeather())
+                return TRUE;
         }
 
         // Jump out if possible after endTurnEventsCounter was increased in the above code block

@@ -1,4 +1,5 @@
 #include "global.h"
+#include "shadow_pokemon.h"
 #include "battle_info.h"
 #include "battle.h"
 #include "battle_anim.h"
@@ -258,6 +259,15 @@ const struct BattleWeatherInfo gBattleWeatherInfo[BATTLE_WEATHER_COUNT] = {
         .continuesMessage = B_MSG_WEATHER_TURN_SNOW,
         .animation = B_ANIM_SNOW_CONTINUES,
         .type = BATTLE_WEATHER_SNOW,
+    },
+
+    [BATTLE_WEATHER_DARKNESS] =
+    {
+        .flag = B_WEATHER_DARKNESS,
+        .moveStartMessage = B_MSG_STARTED_DARKNESS,
+        .endMessage = B_MSG_WEATHER_END_DARKNESS,
+        .continuesMessage = B_MSG_WEATHER_TURN_DARKNESS,
+        .type = BATTLE_WEATHER_DARKNESS,
     },
 
     [BATTLE_WEATHER_FOG] =
@@ -6062,6 +6072,16 @@ enum ProtectType GetProtectType(enum ProtectMethod method)
     return FALSE;
 }
 
+static bool32 IsInverseBattle(void)
+{
+    // Keep the script-controlled rule independent of the local Frontier setting.
+    return (B_FLAG_INVERSE_BATTLE != 0 && FlagGet(B_FLAG_INVERSE_BATTLE))
+        || (gMain.inBattle
+            && (gBattleTypeFlags & BATTLE_TYPE_FRONTIER)
+            && !(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_RECORDED | BATTLE_TYPE_RECORDED_LINK))
+            && FlagGet(FLAG_FRONTIER_INVERSE_BATTLE));
+}
+
 enum InverseBattleCheck
 {
     INVERSE_BATTLE,
@@ -6099,7 +6119,7 @@ static bool32 IsBattlerGroundedInverseCheck(enum BattlerId battler, enum Ability
         return TRUE;
     if (IsBattlerUngroundedByAbilityItemOrEffect(battler, ability, holdEffect))
         return FALSE;
-    if (IS_BATTLER_OF_TYPE(battler, TYPE_FLYING) && (checkInverse != INVERSE_BATTLE || !FlagGet(B_FLAG_INVERSE_BATTLE)))
+    if (IS_BATTLER_OF_TYPE(battler, TYPE_FLYING) && (checkInverse != INVERSE_BATTLE || !IsInverseBattle()))
         return FALSE;
     return TRUE;
 }
@@ -6581,6 +6601,10 @@ static inline u32 CalcMoveBasePower(struct DamageContext *ctx)
     default:
         break;
     }
+
+    if (IsShadowMove(ctx->move)
+     && (GetAttackerWeather(ctx->holdEffects[battlerAtk], ctx->abilities[battlerAtk], ctx->weather) & B_WEATHER_DARKNESS))
+        basePower = uq4_12_multiply(basePower, UQ_4_12(1.5));
 
     if (basePower == 0)
     {
@@ -7470,6 +7494,10 @@ static inline uq4_12_t GetParentalBondModifier(enum BattlerId battlerAtk)
 
 static inline uq4_12_t GetSameTypeAttackBonusModifier(struct DamageContext *ctx)
 {
+    // Shadow moves have no type to match, even after Electrify or Ion Deluge.
+    if (IsShadowMove(ctx->move))
+        return UQ_4_12(1.0);
+
     if (ctx->moveType != TYPE_MYSTERY)
     {
         // The active slot's Tera Type belongs to the replacement, not the benched caster.
@@ -8457,7 +8485,7 @@ static inline uq4_12_t CalcTypeEffectivenessMultiplierInternal(struct DamageCont
         && ctx->holdEffects[ctx->battlerDef] == HOLD_EFFECT_IRON_BALL
         && IS_BATTLER_OF_TYPE(ctx->battlerDef, TYPE_FLYING)
         && !IsBattlerGrounded(ctx->battlerDef, ctx->abilities[ctx->battlerDef], HOLD_EFFECT_NONE) // We want to ignore Iron Ball so skip item check
-        && !FlagGet(B_FLAG_INVERSE_BATTLE))
+        && !IsInverseBattle())
     {
         modifier = UQ_4_12(1.0);
     }
@@ -8501,11 +8529,35 @@ static inline bool32 MoveIgnoresType(struct DamageContext *ctx)
     }
 }
 
+// Pokemon XD: a damaging Shadow move is always super effective against a Pokemon that is not a Shadow Pokemon and
+// always not very effective against a Shadow Pokemon, whatever their types (it has no type of its own).
+static uq4_12_t CalcShadowMoveEffectiveness(struct DamageContext *ctx)
+{
+    uq4_12_t modifier = IsBattlerShadowPokemon(ctx->battlerDef) ? UQ_4_12(0.5) : UQ_4_12(2.0);
+
+    if (ctx->abilities[ctx->battlerDef] == ABILITY_WONDER_GUARD && modifier <= UQ_4_12(1.0))
+    {
+        modifier = UQ_4_12(0.0);
+        ctx->abilityBlocked = TRUE;
+        if (ctx->updateFlags)
+        {
+            gLastUsedAbility = ctx->abilities[ctx->battlerDef];
+            gBattleStruct->moveResultFlags[ctx->battlerDef] |= MOVE_RESULT_MISSED;
+            RecordAbilityBattle(ctx->battlerDef, gBattleMons[ctx->battlerDef].ability);
+        }
+    }
+    return modifier;
+}
+
 uq4_12_t CalcTypeEffectivenessMultiplier(struct DamageContext *ctx)
 {
     uq4_12_t modifier = UQ_4_12(1.0);
 
-    if (!MoveIgnoresType(ctx))
+    if (IsShadowMove(ctx->move) && !IsBattleMoveStatus(ctx->move))
+    {
+        modifier = CalcShadowMoveEffectiveness(ctx);
+    }
+    else if (!MoveIgnoresType(ctx))
     {
         modifier = CalcTypeEffectivenessMultiplierInternal(ctx, modifier);
         if (GetMoveEffect(ctx->move) == EFFECT_TWO_TYPED_MOVE && !ctx->isAnticipation)
@@ -8595,11 +8647,16 @@ uq4_12_t GetOverworldTypeEffectiveness(struct Pokemon *mon, enum Type moveType)
     return modifier;
 }
 
-uq4_12_t GetTypeModifier(enum Type atkType, enum Type defType)
+uq4_12_t GetTypeModifierForRule(enum Type atkType, enum Type defType, bool32 inverse)
 {
-    if (B_FLAG_INVERSE_BATTLE != 0 && FlagGet(B_FLAG_INVERSE_BATTLE))
+    if (inverse)
         return GetInverseTypeMultiplier(gTypeEffectivenessTable[atkType][defType]);
     return gTypeEffectivenessTable[atkType][defType];
+}
+
+uq4_12_t GetTypeModifier(enum Type atkType, enum Type defType)
+{
+    return GetTypeModifierForRule(atkType, defType, IsInverseBattle());
 }
 
 s32 GetStealthHazardDamageByTypesAndHP(enum TypeSideHazard hazardType, enum Type type1, enum Type type2, u32 maxHp)
@@ -8691,7 +8748,16 @@ bool32 DoesSpeciesUseHoldItemToChangeForm(enum Species species, enum Item heldIt
     return FALSE;
 }
 
+static bool32 CanMegaEvolveIgnoringShadow(enum BattlerId battler);
+
+// A Shadow Pokemon can not Mega Evolve. Checked last: it reads the Pokemon's data, which the AI and the move menu
+// would otherwise do for every battler without a Mega Stone.
 bool32 CanMegaEvolve(enum BattlerId battler)
+{
+    return CanMegaEvolveIgnoringShadow(battler) && !IsBattlerShadowPokemon(battler);
+}
+
+static bool32 CanMegaEvolveIgnoringShadow(enum BattlerId battler)
 {
     if (gBattleTypeFlags & (BATTLE_TYPE_PYRAMID | BATTLE_TYPE_ARENA))
         return FALSE;

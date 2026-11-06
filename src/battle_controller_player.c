@@ -1,4 +1,5 @@
 #include "global.h"
+#include "shadow_pokemon.h"
 #include "battle_info.h"
 #include "battle.h"
 #include "battle_anim.h"
@@ -984,7 +985,8 @@ void HandleInputChooseMove(enum BattlerId battler)
     }
     else if (B_MOVE_REARRANGEMENT_IN_BATTLE < GEN_4 && JOY_NEW(SELECT_BUTTON) && !gBattleStruct->zmove.viewing && !gBattleStruct->descriptionSubmenu)
     {
-        if (gNumberOfMovesToChoose > 1 && !(gBattleTypeFlags & BATTLE_TYPE_LINK))
+        if (gNumberOfMovesToChoose > 1 && !(gBattleTypeFlags & BATTLE_TYPE_LINK)
+         && !GetShadowSealedMoveMask(GetBattlerMon(battler)))
         {
             MoveSelectionCreateCursorAt(gMoveSelectionCursor[battler], 29);
 
@@ -1016,6 +1018,14 @@ void HandleInputChooseMove(enum BattlerId battler)
             if (B_SHOW_EFFECTIVENESS)
                 MoveSelectionDisplayMoveEffectiveness(CheckTargetTypeEffectiveness(battler), battler);
             MoveSelectionDisplayPPNumber(battler);
+            MoveSelectionDisplayMoveType(battler);
+        }
+    }
+    else if (JOY_NEW(R_BUTTON) && IsBattlerInHyperMode(battler))
+    {
+        if (CalmShadowPokemon(battler))
+        {
+            PlaySE(SE_SUCCESS);
             MoveSelectionDisplayMoveType(battler);
         }
     }
@@ -1829,12 +1839,16 @@ static void MoveSelectionDisplayMoveNames(enum BattlerId battler)
 {
     s32 i;
     struct ChooseMoveStruct *moveInfo = (struct ChooseMoveStruct *)(&gBattleResources->bufferA[battler][4]);
+    u32 sealedSlots = GetBattlerShadowSealedSlots(battler);
     gNumberOfMovesToChoose = 0;
 
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
         MoveSelectionDestroyCursorAt(i);
-        if (IsGimmickSelected(battler, GIMMICK_DYNAMAX) || GetActiveGimmick(battler) == GIMMICK_DYNAMAX)
+        // A Shadow Pokemon's own move its heart has not opened yet (Pokemon XD)
+        if (sealedSlots & (1u << i))
+            StringCopy(gDisplayedStringBattle, COMPOUND_STRING("{JPN}？？？"));
+        else if (IsGimmickSelected(battler, GIMMICK_DYNAMAX) || GetActiveGimmick(battler) == GIMMICK_DYNAMAX)
             StringCopy(gDisplayedStringBattle, GetMoveName(GetMaxMove(battler, moveInfo->moves[i])));
         else
             StringCopy(gDisplayedStringBattle, GetMoveName(moveInfo->moves[i]));
@@ -1871,6 +1885,12 @@ static void MoveSelectionDisplayPPNumber(enum BattlerId battler)
 
 static void MoveSelectionDisplayMoveType(enum BattlerId battler)
 {
+    if (IsBattlerInHyperMode(battler))
+    {
+        BattlePutTextOnWindow(COMPOUND_STRING("R: {JPN}なだめる"), B_WIN_MOVE_TYPE);
+        return;
+    }
+
     u8 *txtPtr, *end;
     enum Species speciesId = gBattleMons[battler].species;
     struct ChooseMoveStruct *moveInfo = (struct ChooseMoveStruct *)(&gBattleResources->bufferA[battler][4]);

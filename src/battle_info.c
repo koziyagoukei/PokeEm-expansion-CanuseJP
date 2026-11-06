@@ -470,6 +470,7 @@ static const u8 *WeatherName(void)
     if (gBattleWeather & B_WEATHER_HAIL) return COMPOUND_STRING("{JPN}あられ");
     if (gBattleWeather & B_WEATHER_STRONG_WINDS) return COMPOUND_STRING("{JPN}乱気流");
     if (gBattleWeather & B_WEATHER_FOG) return COMPOUND_STRING("{JPN}霧");
+    if (gBattleWeather & B_WEATHER_DARKNESS) return COMPOUND_STRING("{JPN}くらやみ");
     return COMPOUND_STRING("{JPN}なし");
 }
 

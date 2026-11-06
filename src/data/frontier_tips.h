@@ -12,7 +12,7 @@ static const u8 sInfoText_TitleHubPokemon[] = _("{JPN}ポケモンを 作る");
 static const u8 sInfoText_TitleHubItems[] = _("{JPN}道具を もらう");
 static const u8 sInfoText_TitleHubMusic[] = _("{JPN}バトルBGMを 変える");
 static const u8 sInfoText_TitleHubDifficulty[] = _("{JPN}難しさを 変える");
-static const u8 sInfoText_TitleHubBanned[] = _("{JPN}禁止ルールを 変える");
+static const u8 sInfoText_TitleHubBanned[] = _("{JPN}対戦ルールを 変える");
 static const u8 sInfoText_TitleHubSupport[] = _("{JPN}そのほかの 便利機能");
 
 static const u8 sInfoText_AllGimmicks[] = _(
@@ -243,6 +243,13 @@ static const u8 sInfoText_HubBanned2[] = _(
     "表示されます。\n"
     "解禁しても 施設ごとの\n"
     "ギミック制限は そのままです。");
+static const u8 sInfoText_HubBanned3[] = _(
+    "{JPN}レッドは さかさバトルの\n"
+    "切り替えも できます。\n"
+    "タイプの 相性が 逆に なり\n"
+    "無効だった タイプにも 効果抜群。\n"
+    "通信を 使わない 施設戦と 練習試合が\n"
+    "対象です。 通信対戦は 変わりません。");
 static const u8 sInfoText_HubSupport1[] = _(
     "{JPN}左上の ハルカは 技思い出し。\n"
     "フロンティア技や 技を 忘れる\n"
@@ -266,7 +273,7 @@ static const u8 *const sInfoViewerPages_HubDifficulty[] = {
     sInfoText_HubDifficulty4, sInfoText_HubDifficulty5, sInfoText_HubDifficulty6,
     sInfoText_HubDifficulty7, sInfoText_HubDifficulty8, sInfoText_HubDifficulty9,
 };
-static const u8 *const sInfoViewerPages_HubBanned[] = {sInfoText_HubBanned1, sInfoText_HubBanned2};
+static const u8 *const sInfoViewerPages_HubBanned[] = {sInfoText_HubBanned1, sInfoText_HubBanned2, sInfoText_HubBanned3};
 static const u8 *const sInfoViewerPages_HubSupport[] = {sInfoText_HubSupport1, sInfoText_HubSupport2};
 
 static const struct InfoViewerChoice sInfoViewerChoices_Tips[] = {

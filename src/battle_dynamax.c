@@ -1,4 +1,5 @@
 #include "global.h"
+#include "shadow_pokemon.h"
 #include "battle.h"
 #include "battle_anim.h"
 #include "battle_controllers.h"
@@ -262,6 +263,10 @@ enum Move GetMaxMove(enum BattlerId battler, enum Move baseMove)
 
     if (GetMoveCategory(baseMove) == DAMAGE_CATEGORY_STATUS)
         return MOVE_MAX_GUARD;
+
+    // A damaging Shadow move becomes Dynaphobia, which brings Darkness.
+    if (IsShadowMove(baseMove))
+        return MOVE_DYNAPHOBIA;
 
     // Menu previews must neither inherit the previous move's type nor change battle state.
     enum Type savedType = gBattleStruct->dynamicMoveType;

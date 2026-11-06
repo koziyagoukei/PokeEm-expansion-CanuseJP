@@ -2,7 +2,7 @@
 #define GUARD_CONFIG_POKERUS_H
 
 // ここでの「感染」は対戦相手（トレーナー・野生）からポケルスを得ること、「伝播」は感染済みの手持ちからほかの手持ちに移ることを指す。
-#define P_POKERUS_ENABLED                TRUE       // FALSEなら、ポケルスの効果・表示・新規感染を無効にする。セーブデータ自体には影響しない。
+#define P_POKERUS_ENABLED                FALSE      // This project uses the byte for tagged Shadow Pokemon state.
 #define P_POKERUS_STRAIN_DISTRIBUTION    GEN_LATEST // ポケルスの16種類の系統の出現確率を世代に合わせる。GEN_3はルビー・サファイア、GEN_4はエメラルドおよび第4世代の分布を使う。
 #define P_POKERUS_SPREAD_ADJACENCY       GEN_LATEST // 第2世代では隣接する1匹へ、第3世代以降では両隣のポケモンへ伝播する。
 #define P_POKERUS_SPREAD_DAYS_LEFT       GEN_LATEST // 第2世代では伝播直後に系統ごとの最大感染日数を得る。第3世代以降では伝播元の残り日数を引き継ぐ。

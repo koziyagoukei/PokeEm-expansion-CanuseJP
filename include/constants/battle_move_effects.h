@@ -284,6 +284,9 @@ enum  BattleMoveEffects
     EFFECT_SPECIES_POWER_OVERRIDE, // Uses argument field to for the species, power and (number of hits, used only for multi hit moves)
     EFFECT_SCALE_SHOT,
     EFFECT_SECRET_POWER,
+    EFFECT_SHADOW_END, // Recoil of half the user's remaining HP
+    EFFECT_SHADOW_SHED, // Ends Reflect, Light Screen, Aurora Veil and Safeguard on both sides
+    EFFECT_SHADOW_HALF, // Halves the remaining HP of every Pokemon on the field
     NUM_BATTLE_MOVE_EFFECTS,
 };
 

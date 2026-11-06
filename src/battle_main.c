@@ -1,4 +1,5 @@
 #include "global.h"
+#include "shadow_pokemon.h"
 #include "battle_info.h"
 #include "battle.h"
 #include "battle_anim.h"
@@ -3240,6 +3241,7 @@ static void DoBattleIntro(void)
             else
             {
                 memcpy(&gBattleMons[battler], &gBattleResources->bufferB[battler][4], sizeof(struct BattlePokemon));
+                ApplyShadowBattleMoves(battler);
                 gBattleMons[battler].types[0] = GetSpeciesType(gBattleMons[battler].species, 0);
                 gBattleMons[battler].types[1] = GetSpeciesType(gBattleMons[battler].species, 1);
                 gBattleMons[battler].types[2] = TYPE_MYSTERY;
@@ -3582,6 +3584,12 @@ static void TryDoEventsBeforeFirstTurn(void)
         gBattleStruct->speedTieBreaks = RandomUniform(RNG_SPEED_TIE, 0, Factorial(MAX_BATTLERS_COUNT) - 1);
         gBattleTurnCounter = 0;
         gBattleStruct->eventState.beforeFirstTurn++;
+        enum BattlerId shadow = FindShadowEncounterBattler();
+        if (shadow != MAX_BATTLERS_COUNT)
+        {
+            gBattlerAttacker = shadow;
+            BattleScriptPushCursorAndCallback(BattleScript_ShadowEncounter);
+        }
         break;
     case FIRST_TURN_EVENTS_OVERWORLD_WEATHER:
         gBattleStruct->eventState.beforeFirstTurn++;
@@ -5506,6 +5514,7 @@ static void HandleEndTurn_FinishBattle(void)
             TryPutBreakingNewsOnAir();
         }
 
+        AdvanceParticipatingShadowPokemon();
         FrontierStory_OnBattleFinished();
         BeginFastPaletteFade(3);
         FadeOutMapMusic(5);
@@ -5754,7 +5763,7 @@ enum Type GetDynamicMoveType(struct Pokemon *mon, enum Move move, enum BattlerId
 
     if (state == MON_IN_BATTLE)
     {
-        if (moveEffect == EFFECT_STRUGGLE)
+        if (moveEffect == EFFECT_STRUGGLE || IsShadowMove(move))
             return TYPE_MYSTERY;
 
         species = gBattleMons[battler].species;
@@ -5788,6 +5797,8 @@ enum Type GetDynamicMoveType(struct Pokemon *mon, enum Move move, enum BattlerId
                 return TYPE_ROCK;
             else if (weather & B_WEATHER_ICY_ANY)
                 return TYPE_ICE;
+            else if (weather & B_WEATHER_DARKNESS)
+                return TYPE_MYSTERY;
             else
                 return moveType;
         }

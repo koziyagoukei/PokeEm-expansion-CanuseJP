@@ -314,7 +314,6 @@ static void DebugAction_PCBag_ClearBag(u8 taskId);
 static void DebugAction_PCBag_ClearBoxes(u8 taskId);
 
 static void DebugAction_Party_HealParty(u8 taskId);
-static void DebugAction_Party_ClearPokerus(u8 taskId);
 static void DebugAction_Party_ClearParty(u8 taskId);
 static void DebugAction_Party_SetParty(u8 taskId);
 static void DebugAction_Party_BattleSingle(u8 taskId);
@@ -378,7 +377,8 @@ extern const u8 Debug_EventScript_FontTest[];
 extern const u8 Debug_EventScript_KanjiFontTest[];
 extern const u8 Debug_EventScript_CheckEVs[];
 extern const u8 Debug_EventScript_CheckIVs[];
-extern const u8 Debug_EventScript_GivePokerus[];
+extern const u8 Debug_EventScript_MarkShadowPokemon[];
+extern const u8 Debug_EventScript_PurifyShadowPokemon[];
 extern const u8 Debug_EventScript_InflictStatus1[];
 extern const u8 Debug_EventScript_KoPokemon[];
 extern const u8 Debug_EventScript_SetHiddenNature[];
@@ -668,8 +668,8 @@ static const struct DebugMenuOption sDebugMenu_Actions_Party[] =
     { COMPOUND_STRING("{JPN}ポケモンを へんこう{ENG}..."),       DebugAction_OpenSubMenu, sDebugMenu_Actions_EditPokemon },
     { COMPOUND_STRING("{JPN}きそポイントを みる"),          DebugAction_ExecuteScript, Debug_EventScript_CheckEVs },
     { COMPOUND_STRING("{JPN}こたいちを みる"),          DebugAction_ExecuteScript, Debug_EventScript_CheckIVs },
-    { COMPOUND_STRING("{JPN}ポケルスを つける"),       DebugAction_ExecuteScript, Debug_EventScript_GivePokerus },
-    { COMPOUND_STRING("{JPN}ポケルスを けす"),      DebugAction_Party_ClearPokerus},
+    { COMPOUND_STRING("{JPN}ダークにする"),          DebugAction_ExecuteScript, Debug_EventScript_MarkShadowPokemon },
+    { COMPOUND_STRING("{JPN}リライブする"),          DebugAction_ExecuteScript, Debug_EventScript_PurifyShadowPokemon },
     { COMPOUND_STRING("{JPN}てもちを けす"),        DebugAction_Party_ClearParty },
     { COMPOUND_STRING("{JPN}てもちを セット"),          DebugAction_Party_SetParty },
     { COMPOUND_STRING("{JPN}デバッグバトルを はじめる"), DebugAction_Party_BattleSingle },
@@ -5000,81 +5000,6 @@ void DebugNative_Party_SetFriendship(void)
 
 #undef tFriendship
 
-static void DebugSelectionStep_UpdatePokerusStrain(u8 taskId, u8 digits, u32 min, u32 max)
-{
-    StringCopy(gStringVar1, COMPOUND_STRING("Strain:"));
-    ConvertIntToDecimalStringN(gStringVar2, gTasks[taskId].tInput, STR_CONV_MODE_LEADING_ZEROS, digits);
-    StringCopy(gStringVar3, COMPOUND_STRING(""));
-    DebugNativeStep_PrintWindowSelection(taskId);
-}
-
-static void DebugSelectionStep_UpdatePokerusDaysLeft(u8 taskId, u8 digits, u32 min, u32 max)
-{
-    StringCopy(gStringVar1, COMPOUND_STRING("Days Left:"));
-    s16 daysLeft = gTasks[taskId].tInput;
-    u16 strain = DebugSelection_GetData(taskId, gTasks[taskId].tStepsDataIndex - 1);
-    ConvertIntToDecimalStringN(gStringVar2, daysLeft, STR_CONV_MODE_LEADING_ZEROS, digits);
-
-    if (daysLeft == 0 && strain == 0)
-        StringCopy(gStringVar3, COMPOUND_STRING("No Pokerus"));
-    else if (daysLeft == 0)
-        StringCopy(gStringVar3, COMPOUND_STRING("Inactive"));
-    else
-        StringCopy(gStringVar3, COMPOUND_STRING(""));
-    DebugNativeStep_PrintWindowSelection(taskId);
-}
-
-static void DebugSelection_SetPokerus_OnInit(u8 taskId)
-{
-    DebugNativeStep_InitAfterPartyMenu(taskId);
-    DebugSelection_SetData(taskId, 0, GetMonData(&gParties[B_TRAINER_PLAYER][gTasks[taskId].tPartyId], MON_DATA_POKERUS_STRAIN));
-    DebugSelection_SetData(taskId, 1, GetMonData(&gParties[B_TRAINER_PLAYER][gTasks[taskId].tPartyId], MON_DATA_POKERUS_DAYS_LEFT));
-}
-
-static bool32 DebugSelection_SetPokerus_OnComplete(u8 taskId)
-{
-    u16 strain = DebugSelection_GetData(taskId, 0);
-    u16 daysLeft = DebugSelection_GetData(taskId, 1);
-    SetMonData(&gParties[B_TRAINER_PLAYER][gTasks[taskId].tPartyId], MON_DATA_POKERUS_STRAIN, &strain);
-    SetMonData(&gParties[B_TRAINER_PLAYER][gTasks[taskId].tPartyId], MON_DATA_POKERUS_DAYS_LEFT, &daysLeft);
-    DebugNativeStep_CloseDebugWindow(taskId);
-    return TRUE;
-}
-
-static const struct DebugSelectionStep sPokerusStrainSelectionStep = {
-    .stepUpdate = DebugSelectionStep_UpdatePokerusStrain,
-    .stepConfirm = DebugSelectionStep_GenericInputConfirm,
-    .minValue = 0,
-    .maxValue = 15,
-    .digits = 2
-};
-
-static const struct DebugSelectionStep sPokerusDaysLeftSelectionStep = {
-    .stepUpdate = DebugSelectionStep_UpdatePokerusDaysLeft,
-    .stepConfirm = DebugSelectionStep_GenericInputConfirm,
-    .minValue = 0,
-    .maxValue = 15,
-    .digits = 2
-};
-
-static const struct DebugSelection sPokerusSelection = {
-    .onInit = DebugSelection_SetPokerus_OnInit,
-    .onCancel = DebugNativeStep_CloseDebugWindow,
-    .onComplete = DebugSelection_SetPokerus_OnComplete,
-    .steps = {&sPokerusStrainSelectionStep, &sPokerusDaysLeftSelectionStep},
-    .maxSteps = 2,
-};
-
-void DebugNative_Party_SetPokerus(void)
-{
-    if (gSpecialVar_0x8004 < PARTY_SIZE)
-    {
-        u32 taskId = CreateTask(DebugNativeStep_DelayedSelection, 1);
-        SetWordTaskArg(taskId, DEBUG_SELECTION_PTR_ARG, (u32) &sPokerusSelection);
-    }
-}
-
-#undef tStrain
 #undef tPartyId
 
 #undef tMenuTaskId
@@ -5082,19 +5007,6 @@ void DebugNative_Party_SetPokerus(void)
 #undef tSubWindowId
 #undef tInput
 #undef tDigit
-
-static void DebugAction_Party_ClearPokerus(u8 taskId)
-{
-    for (u32 i = 0; i < PARTY_SIZE; i++)
-    {
-        if (!GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_SPECIES))
-            continue;
-        u32 data = 0;
-        SetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_POKERUS, &data);
-    }
-    ScriptContext_Enable();
-    Debug_DestroyMenu_Full(taskId);
-}
 
 static void DebugAction_Party_ClearParty(u8 taskId)
 {

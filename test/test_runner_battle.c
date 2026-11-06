@@ -1,4 +1,5 @@
 #include "global.h"
+#include "shadow_pokemon.h"
 #include "battle.h"
 #include "battle_ai_util.h"
 #include "battle_anim.h"
@@ -2754,7 +2755,14 @@ void TeraType_(u32 sourceLine, enum Type teraType)
 void Shadow_(u32 sourceLine, bool32 isShadow)
 {
     INVALID_IF(!DATA.currentMon, "Shadow outside of PLAYER/OPPONENT");
-    SetMonData(DATA.currentMon, MON_DATA_IS_SHADOW, &isShadow);
+    if (isShadow)
+        MarkShadowPokemon(DATA.currentMon);
+}
+
+void ShadowStage_(u32 sourceLine, u32 stage)
+{
+    Shadow_(sourceLine, TRUE);
+    AddShadowHeartGauge(DATA.currentMon, stage);
 }
 
 void Shiny_(u32 sourceLine, bool32 isShiny)

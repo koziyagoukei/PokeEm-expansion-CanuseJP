@@ -259,6 +259,7 @@ enum RandomTag
     RNG_DEXNAV_RANDOM_EGG_MOVE,
     RNG_RANDOM_BALL,
     RNG_FRONTIER_RELEASE_BOOST,
+    RNG_SHADOW_HYPER_MODE,
 };
 
 #define RandomWeighted(tag, ...) \

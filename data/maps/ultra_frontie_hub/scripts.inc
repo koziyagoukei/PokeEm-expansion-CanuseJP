@@ -232,11 +232,20 @@ UltraFrontieHub_EventScript_SetFrontierAi_Strongest::
 UltraFrontieHub_EventScript_SetFrontierBannedSpecies::
 	lock
 	faceplayer
+	msgbox UltraFrontieHub_Text_FrontierRules, MSGBOX_DEFAULT
+	multichoice 0, 0, MULTI_FRONTIER_RULE_SETTINGS, FALSE
+	switch VAR_RESULT
+	case 0, UltraFrontieHub_EventScript_ChooseFrontierBannedSpecies
+	case 1, UltraFrontieHub_EventScript_ChooseFrontierInverseBattle
+	goto UltraFrontieHub_EventScript_CancelFrontierRules
+
+UltraFrontieHub_EventScript_ChooseFrontierBannedSpecies::
 	msgbox UltraFrontieHub_Text_SetFrontierBannedSpecies, MSGBOX_DEFAULT
 	multichoice 0, 0, MULTI_FRONTIER_BANNED_SPECIES, FALSE
 	switch VAR_RESULT
 	case 0, UltraFrontieHub_EventScript_AllowFrontierBannedSpecies
 	case 1, UltraFrontieHub_EventScript_BanFrontierBannedSpecies
+UltraFrontieHub_EventScript_CancelFrontierRules::
 	msgbox UltraFrontieHub_Text_Cancel, MSGBOX_DEFAULT
 	release
 	end
@@ -250,6 +259,23 @@ UltraFrontieHub_EventScript_AllowFrontierBannedSpecies::
 UltraFrontieHub_EventScript_BanFrontierBannedSpecies::
 	special Special_ClearFrontierAllowBannedSpecies
 	msgbox UltraFrontieHub_Text_SetFrontierBannedSpeciesBanDone, MSGBOX_DEFAULT
+	release
+	end
+
+UltraFrontieHub_EventScript_ChooseFrontierInverseBattle::
+	goto_if_set FLAG_FRONTIER_INVERSE_BATTLE, UltraFrontieHub_EventScript_DisableFrontierInverseBattle
+	msgbox UltraFrontieHub_Text_EnableFrontierInverseBattle, MSGBOX_YESNO
+	goto_if_ne VAR_RESULT, YES, UltraFrontieHub_EventScript_CancelFrontierRules
+	setflag FLAG_FRONTIER_INVERSE_BATTLE
+	msgbox UltraFrontieHub_Text_FrontierInverseBattleEnabled, MSGBOX_DEFAULT
+	release
+	end
+
+UltraFrontieHub_EventScript_DisableFrontierInverseBattle::
+	msgbox UltraFrontieHub_Text_DisableFrontierInverseBattle, MSGBOX_YESNO
+	goto_if_ne VAR_RESULT, YES, UltraFrontieHub_EventScript_CancelFrontierRules
+	clearflag FLAG_FRONTIER_INVERSE_BATTLE
+	msgbox UltraFrontieHub_Text_FrontierInverseBattleDisabled, MSGBOX_DEFAULT
 	release
 	end
 
@@ -267,6 +293,21 @@ UltraFrontieHub_Text_SetFrontierAi_HardDone::
 
 UltraFrontieHub_Text_SetFrontierBannedSpecies::
 	.string "{JPN}……。 強い ポケモンとの\n勝負も のぞんでいるのか？\pきんしポケモンの 設定を\n選んでくれ。$"
+
+UltraFrontieHub_Text_FrontierRules::
+	.string "{JPN}……。\nどの ルールを 変える？$"
+
+UltraFrontieHub_Text_EnableFrontierInverseBattle::
+	.string "{JPN}今は 通常の 相性だ。\pさかさバトルでは\nタイプの 相性が 逆に なる。\p通信を 使わない 施設戦と\n練習試合で 有効だ。\pさかさバトルに するか？$"
+
+UltraFrontieHub_Text_DisableFrontierInverseBattle::
+	.string "{JPN}今は さかさバトルだ。\n通常の 相性に 戻すか？$"
+
+UltraFrontieHub_Text_FrontierInverseBattleEnabled::
+	.string "{JPN}さかさバトルに した。\nいつでも ここで 戻せるぞ。$"
+
+UltraFrontieHub_Text_FrontierInverseBattleDisabled::
+	.string "{JPN}通常の 相性に 戻した。$"
 
 UltraFrontieHub_Text_SetFrontierBannedSpeciesAllowDone::
 	.string "{JPN}きんしポケモンの 参加を\n認める 設定に した。$"

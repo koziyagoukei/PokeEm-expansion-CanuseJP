@@ -1,4 +1,5 @@
 #include "global.h"
+#include "shadow_pokemon.h"
 #include "battle_info.h"
 #include "battle.h"
 #include "battle_hold_effects.h"
@@ -3270,6 +3271,7 @@ static void Cmd_switchindataupdate(void)
     }
 
     SwitchInClearSetData(battler, &oldData.volatiles);
+    ApplyShadowBattleMoves(battler);
 
     if (gBattleTypeFlags & BATTLE_TYPE_PALACE
         && gBattleMons[battler].maxHP / 2 >= gBattleMons[battler].hp
@@ -3880,6 +3882,12 @@ static void Cmd_handlelearnnewmove(void)
     u32 monId = gBattleStruct->expGetterMonId;
     u32 currLvl = GetMonData(&gParties[B_TRAINER_PLAYER][monId], MON_DATA_LEVEL);
 
+    if (GetShadowSealedMoveMask(&gParties[B_TRAINER_PLAYER][monId]))
+    {
+        gBattlescriptCurrInstr = cmd->nothingToLearnPtr;
+        return;
+    }
+
     if (!gBattleResources->beforeLvlUp->learnMultipleMoves && gBattleResources->beforeLvlUp->level != (currLvl - 1))
         gBattleResources->beforeLvlUp->learnMultipleMoves = TRUE;
 
@@ -4222,6 +4230,7 @@ static void Cmd_updatebattlermoves(void)
                 gBattleMons[battler].moves[i] = bufferPoke->moves[i];
                 gBattleMons[battler].pp[i] = bufferPoke->pp[i];
             }
+            ApplyShadowBattleMoves(battler);
             gBattlescriptCurrInstr = cmd->nextInstr;
          }
          break;
@@ -4992,6 +5001,8 @@ static void RemoveAllWeather(void)
         gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_WEATHER_END_SNOW;
     else if (gBattleWeather & B_WEATHER_FOG)
         gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_WEATHER_END_FOG;
+    else if (gBattleWeather & B_WEATHER_DARKNESS)
+        gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_WEATHER_END_DARKNESS;
     else
         gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_WEATHER_END_COUNT;  // failsafe
 
@@ -6016,7 +6027,9 @@ static void Cmd_transformdataexecution(void)
     if ((GetConfig(B_TRANSFORM_SEMI_INV_FAIL) >= GEN_2 && IsSemiInvulnerable(gBattlerTarget, EXCLUDE_COMMANDER))
         || (GetConfig(B_TRANSFORM_TARGET_FAIL) >= GEN_2 && gBattleMons[gBattlerTarget].volatiles.transformed)
         || (GetConfig(B_TRANSFORM_USER_FAIL) >= GEN_5 && gBattleMons[gBattlerAttacker].volatiles.transformed)
-        || gBattleStruct->illusion[gBattlerTarget].state == ILLUSION_ON)
+        || gBattleStruct->illusion[gBattlerTarget].state == ILLUSION_ON
+        || GetShadowSealedMoveMask(GetBattlerMon(gBattlerAttacker))
+        || GetShadowSealedMoveMask(GetBattlerMon(gBattlerTarget)))
     {
         gBattleStruct->moveResultFlags[gBattlerTarget] |= MOVE_RESULT_FAILED;
         gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_TRANSFORM_FAILED;
@@ -9563,6 +9576,7 @@ void BS_ItemRestorePP(void)
         battler = GetPartnerBattler(gBattlerAttacker);
 
     // Heal PP!
+    u32 sealed = GetShadowSealedMoveMask(mon);
     for (; i < loopEnd; i++)
     {
         pp = GetMonData(mon, MON_DATA_PP1 + i);
@@ -9578,6 +9592,7 @@ void BS_ItemRestorePP(void)
             // Update battler PP if needed.
             if (battler != MAX_BATTLERS_COUNT
                 && gBattleStruct->itemPartyIndex[gBattlerAttacker] == gBattlerPartyIndexes[battler]
+                && !(sealed & (1 << i))
                 && MOVE_IS_PERMANENT(battler, i))
             {
                 gBattleMons[battler].pp[i] = pp;
@@ -10021,6 +10036,56 @@ void BS_StoreHealingWish(void)
     else
         gBattleStruct->battlerState[battler].storedHealingWish = TRUE;
     gBattlescriptCurrInstr = cmd->nextInstr;
+}
+
+// Shadow Shed (Pokemon XD): Reflect, Light Screen, Aurora Veil and Safeguard end on both sides.
+void BS_TryShadowShed(void)
+{
+    NATIVE_ARGS(const u8 *failInstr);
+    bool32 removed = FALSE;
+
+    for (enum BattleSide side = 0; side < NUM_BATTLE_SIDES; side++)
+    {
+        if (!(gSideStatuses[side] & (SIDE_STATUS_SCREEN_ANY | SIDE_STATUS_SAFEGUARD)))
+            continue;
+
+        gSideStatuses[side] &= ~(SIDE_STATUS_SCREEN_ANY | SIDE_STATUS_SAFEGUARD);
+        gSideTimers[side].reflectTimer = 0;
+        gSideTimers[side].lightscreenTimer = 0;
+        gSideTimers[side].auroraVeilTimer = 0;
+        gSideTimers[side].safeguardTimer = 0;
+        removed = TRUE;
+    }
+
+    gBattlescriptCurrInstr = removed ? cmd->nextInstr : cmd->failInstr;
+}
+
+// Shadow Half (Pokemon XD): every Pokemon on the field, the user and its partner too, loses half of its HP left.
+// One Pokemon per call: it becomes the target with its HP loss set, and the script updates its HP bar. A Pokemon at
+// 1 HP is left alone, and so is one protected by Protect and the like (XD's move data is affected by Protect).
+void BS_TryShadowHalfNext(void)
+{
+    NATIVE_ARGS(const u8 *doneInstr);
+
+    while (gBattleStruct->shadowHalfNextBattler < gBattlersCount)
+    {
+        enum BattlerId battler = gBattleStruct->shadowHalfNextBattler++;
+        enum ProtectMethod protect = gProtectStructs[battler].protected;
+
+        if (!IsBattlerAlive(battler) || gBattleMons[battler].hp <= 1)
+            continue;
+        if (battler != gBattlerAttacker && protect != PROTECT_NONE && GetProtectType(protect) == PROTECT_TYPE_SINGLE)
+            continue;
+
+        gBattlerTarget = battler;
+        SetPassiveDamageAmount(battler, gBattleMons[battler].hp / 2);
+        gBattlescriptCurrInstr = cmd->nextInstr;
+        return;
+    }
+
+    gBattleStruct->shadowHalfNextBattler = 0;
+    gBattlerTarget = gBattlerAttacker;
+    gBattlescriptCurrInstr = cmd->doneInstr;
 }
 
 void BS_TryRevivalBlessing(void)
@@ -11050,7 +11115,7 @@ void BS_RestoreMovePp(void)
     NATIVE_ARGS(u8 battler);
     enum BattlerId battler = GetBattlerForBattleScript(cmd->battler);
     u32 moveIndex;
-    u32 data[MAX_MON_MOVES + 1];
+    u8 data[MAX_MON_MOVES + 1];
     for (moveIndex = 0; moveIndex < MAX_MON_MOVES; moveIndex++)
     {
         gBattleMons[battler].pp[moveIndex] = CalculatePPWithBonus(gBattleMons[battler].moves[moveIndex], gBattleMons[battler].ppBonuses, moveIndex);

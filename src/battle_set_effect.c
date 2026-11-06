@@ -934,6 +934,10 @@ static void HandleSetEffectWeather(struct BattleCalcValues *cv, struct SetEffect
         weather = BATTLE_WEATHER_SANDSTORM;
         msg = B_MSG_STARTED_SANDSTORM;
         break;
+    case MOVE_EFFECT_DARKNESS:
+        weather = BATTLE_WEATHER_DARKNESS;
+        msg = B_MSG_STARTED_DARKNESS;
+        break;
     case MOVE_EFFECT_HAIL:
         if (GetConfig(B_PREFERRED_ICE_WEATHER) == B_ICE_WEATHER_SNOW)
         {
@@ -1378,6 +1382,7 @@ static void (*const sSetEffectHandlers[])(struct BattleCalcValues *cv, struct Se
     [MOVE_EFFECT_SUN] = HandleSetEffectWeather,
     [MOVE_EFFECT_RAIN] = HandleSetEffectWeather,
     [MOVE_EFFECT_SANDSTORM] = HandleSetEffectWeather,
+    [MOVE_EFFECT_DARKNESS] = HandleSetEffectWeather,
     [MOVE_EFFECT_HAIL] = HandleSetEffectWeather,
     [MOVE_EFFECT_MISTY_TERRAIN] = HandleSetEffectTerrain,
     [MOVE_EFFECT_GRASSY_TERRAIN] = HandleSetEffectTerrain,
@@ -1492,6 +1497,7 @@ static inline bool32 IgnoreTargetingForMoveEffect(enum MoveEffect moveEffect) //
     case MOVE_EFFECT_RAIN:
     case MOVE_EFFECT_SANDSTORM:
     case MOVE_EFFECT_HAIL:
+    case MOVE_EFFECT_DARKNESS:
     case MOVE_EFFECT_MISTY_TERRAIN:
     case MOVE_EFFECT_GRASSY_TERRAIN:
     case MOVE_EFFECT_ELECTRIC_TERRAIN:

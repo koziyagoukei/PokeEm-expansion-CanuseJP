@@ -1,4 +1,5 @@
 #include "global.h"
+#include "shadow_pokemon.h"
 #include "main.h"
 #include "battle.h"
 #include "battle_anim.h"
@@ -166,6 +167,8 @@ static EWRAM_DATA struct PokemonSummaryScreenData
         u32 OTID; // 0x48
         enum Type teraType;
         u8 mintNature;
+        u8 shadowSealedMoves; // own moves of a Shadow Pokemon its heart has not opened yet ("？？？")
+        bool8 shadowMovesLocked; // a Shadow Pokemon's moves can not be rearranged or relearned
     } summary;
     u16 bgTilemapBuffers[PSS_PAGE_COUNT][2][0x400];
     u8 mode;
@@ -239,7 +242,7 @@ static void Task_SlideAppealJamWindow(u8);
 static void PositionStatusSlidingWindow(u16, s16);
 static void Task_SlideStatusWindow(u8);
 static void TilemapFiveMovesDisplay(u16 *, u16, bool8);
-static void DrawPokerusCuredSymbol(struct Pokemon *);
+static void DrawShadowStatusSymbol(struct Pokemon *);
 static void DrawExperienceProgressBar(struct Pokemon *);
 static void DrawContestMoveHearts(enum Move move);
 static void LimitEggSummaryPageDisplay(void);
@@ -391,6 +394,20 @@ struct SlidingWindow
 };
 
 static const u16 sStatusTilemap[] = INCBIN_U16("graphics/summary_screen/status_tilemap.bin");
+
+// Use the summary palette and the retired cured-Pokerus tile slot.
+#define SUMMARY_SHADOW_STATUS_TILE 0x2C
+static const u8 sShadowStatusIconTile[] ALIGNED(4) =
+{
+    0xCC, 0xCC, 0xCC, 0xCC,
+    0xCC, 0x1C, 0xC1, 0xCC,
+    0xCC, 0x71, 0x17, 0xCC,
+    0x1C, 0x77, 0x72, 0xC1,
+    0x1C, 0x27, 0x77, 0xC1,
+    0xCC, 0x71, 0x17, 0xCC,
+    0xDD, 0x1D, 0xD1, 0xDD,
+    0xDD, 0xDD, 0xDD, 0xDD,
+};
 static const struct SlidingWindow sStatusSlidingWindow1 =
 {
     .gfx = sStatusTilemap,
@@ -1474,6 +1491,7 @@ static bool8 DecompressGraphics(void)
     case 6:
         LoadPalette(gSummaryScreen_Pal, BG_PLTT_ID(0), 8 * PLTT_SIZE_4BPP);
         LoadPalette(&gPPTextPalette, BG_PLTT_ID(8) + 1, PLTT_SIZEOF(16 - 1));
+        LoadBgTiles(1, sShadowStatusIconTile, sizeof(sShadowStatusIconTile), SUMMARY_SHADOW_STATUS_TILE);
         sMonSummaryScreen->switchCounter++;
         break;
     case 7:
@@ -1551,13 +1569,28 @@ static bool8 ExtractMonDataToSummaryStruct(struct Pokemon *mon)
 
         break;
     case 1:
+    {
+        // A Shadow Pokemon shows its Shadow moves first and its sealed own moves as "？？？" (Pokemon XD).
+        struct ShadowMoveLayout layout;
+        GetShadowMoveLayout(mon, TRUE, &layout);
         for (i = 0; i < MAX_MON_MOVES; i++)
         {
-            sum->moves[i] = GetMonData(mon, MON_DATA_MOVE1+i);
-            sum->pp[i] = GetMonData(mon, MON_DATA_PP1+i);
+            sum->moves[i] = layout.moves[i];
+            if (layout.shadowSlots & (1u << i))
+                sum->pp[i] = GetMovePP(layout.moves[i]);
+            else
+                sum->pp[i] = GetMonData(mon, MON_DATA_PP1+i);
         }
         sum->ppBonuses = GetMonData(mon, MON_DATA_PP_BONUSES);
+        for (i = 0; i < MAX_MON_MOVES; i++)
+        {
+            if ((layout.shadowSlots | layout.sealedSlots) & (1u << i))
+                sum->ppBonuses &= ~(3 << (2 * i));
+        }
+        sum->shadowSealedMoves = layout.sealedSlots;
+        sum->shadowMovesLocked = (layout.shadowSlots != 0);
         break;
+    }
     case 2:
         ExtractMonSkillStatsData(mon, sum);
         break;
@@ -1636,7 +1669,7 @@ static void SetDefaultTilemaps(void)
         PutWindowTilemap(PSS_LABEL_WINDOW_POKEMON_SKILLS_STATUS);
 
     LimitEggSummaryPageDisplay();
-    DrawPokerusCuredSymbol(&sMonSummaryScreen->currentMon);
+    DrawShadowStatusSymbol(&sMonSummaryScreen->currentMon);
 }
 
 static void FreeSummaryScreen(void)
@@ -2049,7 +2082,7 @@ static void Task_ChangeSummaryMon(u8 taskId)
     case 7:
         if (sMonSummaryScreen->summary.ailment != AILMENT_NONE)
             PositionStatusSlidingWindow(10, -2);
-        DrawPokerusCuredSymbol(&sMonSummaryScreen->currentMon);
+        DrawShadowStatusSymbol(&sMonSummaryScreen->currentMon);
         data[1] = 0;
         break;
     case 8:
@@ -2347,6 +2380,7 @@ static void Task_HandleInput_MoveSelect(u8 taskId)
         else if (JOY_NEW(A_BUTTON))
         {
             if (sMonSummaryScreen->lockMovesFlag == TRUE
+                || (sMonSummaryScreen->summary.shadowMovesLocked && sMonSummaryScreen->newMove == MOVE_NONE)
                 || (sMonSummaryScreen->newMove == MOVE_NONE && sMonSummaryScreen->firstMoveIndex == MAX_MON_MOVES))
             {
                 PlaySE(SE_SELECT);
@@ -3038,18 +3072,11 @@ static void TilemapFiveMovesDisplay(u16 *dst, u16 palette, bool8 remove)
     }
 }
 
-static void DrawPokerusCuredSymbol(struct Pokemon *mon) // This checks if the mon has been cured of pokerus
+static void DrawShadowStatusSymbol(struct Pokemon *mon)
 {
-    if (ShouldPokemonShowCuredPokerus(mon))
-    {
-        sMonSummaryScreen->bgTilemapBuffers[PSS_PAGE_INFO][0][0x223] = 0x2C;
-        sMonSummaryScreen->bgTilemapBuffers[PSS_PAGE_INFO][1][0x223] = 0x2C;
-    }
-    else
-    {
-        sMonSummaryScreen->bgTilemapBuffers[PSS_PAGE_INFO][0][0x223] = 0x81A;
-        sMonSummaryScreen->bgTilemapBuffers[PSS_PAGE_INFO][1][0x223] = 0x81A;
-    }
+    u16 tile = IsShadowPokemon(mon) ? SUMMARY_SHADOW_STATUS_TILE : 0x81A;
+    sMonSummaryScreen->bgTilemapBuffers[PSS_PAGE_INFO][0][0x223] = tile;
+    sMonSummaryScreen->bgTilemapBuffers[PSS_PAGE_INFO][1][0x223] = 0x81A;
     ScheduleBgCopyTilemapToVram(3);
 }
 
@@ -3536,7 +3563,32 @@ static void PrintMonOTID(void)
 static void PrintMonAbilityName(void)
 {
     enum Ability ability = GetAbilityBySpecies(sMonSummaryScreen->summary.species, sMonSummaryScreen->summary.abilityNum);
-    PrintTextOnWindow(AddWindowFromTemplateList(sPageInfoTemplate, PSS_DATA_WINDOW_INFO_ABILITY), gAbilitiesInfo[ability].name, 0, 1, 0, 1);
+    u32 windowId = AddWindowFromTemplateList(sPageInfoTemplate, PSS_DATA_WINDOW_INFO_ABILITY);
+    const u8 *label = NULL;
+
+    switch (GetShadowPokemonState(&sMonSummaryScreen->currentMon))
+    {
+    case SHADOW_STATE_NORMAL:
+        break;
+    case SHADOW_STATE_READY:
+        label = COMPOUND_STRING("{JPN}リライブ可能");
+        break;
+    case SHADOW_STATE_PURIFIED:
+        label = COMPOUND_STRING("{JPN}リライブ済み");
+        break;
+    default:
+        label = COMPOUND_STRING("{JPN}ダーク");
+        break;
+    }
+
+    if (label == NULL)
+        PrintTextOnWindow(windowId, gAbilitiesInfo[ability].name, 0, 1, 0, 1);
+    else
+    {
+        u32 x = GetStringRightAlignXOffset(FONT_NORMAL, label, WindowWidthPx(windowId));
+        PrintTextOnWindowToFitPx(windowId, gAbilitiesInfo[ability].name, 0, 1, 0, 1, x - 4);
+        PrintTextOnWindow(windowId, label, x, 1, 0, 1);
+    }
 }
 
 static void PrintMonAbilityDescription(void)
@@ -4099,7 +4151,10 @@ static void PrintMoveNameAndPP(u8 moveIndex)
     }
     else
     {
-        PrintTextOnWindow(moveNameWindowId, gText_OneDash, 0, moveIndex * 16 + 1, 0, 1);
+        if (summary->shadowSealedMoves & (1u << moveIndex))
+            PrintTextOnWindow(moveNameWindowId, COMPOUND_STRING("{JPN}？？？"), 0, moveIndex * 16 + 1, 0, 1);
+        else
+            PrintTextOnWindow(moveNameWindowId, gText_OneDash, 0, moveIndex * 16 + 1, 0, 1);
         text = gText_TwoDashes;
         ppState = 12;
         x = GetStringCenterAlignXOffset(FONT_NORMAL, text, 44);
@@ -4777,6 +4832,7 @@ static inline bool32 ShouldShowMoveRelearner(void)
 {
     return (P_SUMMARY_SCREEN_MOVE_RELEARNER
          && !sMonSummaryScreen->lockMovesFlag
+         && !sMonSummaryScreen->summary.shadowMovesLocked
          && sMonSummaryScreen->mode != SUMMARY_MODE_BOX_CURSOR
          && sMonSummaryScreen->hasRelearnableMoves
          && !InBattleFacilityChallenge()
@@ -4851,7 +4907,7 @@ static inline void ShowUtilityPrompt(s16 mode)
     else if (sMonSummaryScreen->currPageIndex == PSS_PAGE_BATTLE_MOVES
              || sMonSummaryScreen->currPageIndex == PSS_PAGE_CONTEST_MOVES)
     {
-        if (mode == SUMMARY_MODE_SELECT_MOVE && !sMonSummaryScreen->lockMovesFlag)
+        if (mode == SUMMARY_MODE_SELECT_MOVE && !sMonSummaryScreen->lockMovesFlag && !sMonSummaryScreen->summary.shadowMovesLocked)
             promptText = gText_Switch;
         else
             promptText = gText_Info;

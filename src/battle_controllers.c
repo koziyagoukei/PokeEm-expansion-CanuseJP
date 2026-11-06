@@ -1,4 +1,5 @@
 #include "global.h"
+#include "shadow_pokemon.h"
 #include "battle.h"
 #include "battle_ai_main.h"
 #include "battle_ai_util.h"
@@ -1878,6 +1879,7 @@ static void SetBattlerMonData(enum BattlerId battler, struct Pokemon *party, u32
     struct BattlePokemon *battlePokemon = (struct BattlePokemon *)&gBattleResources->bufferA[battler][3];
     struct MovePPInfo *moveData = (struct MovePPInfo *)&gBattleResources->bufferA[battler][3];
     s32 i;
+    u32 sealed = GetShadowSealedMoveMask(&party[monId]);
 
     switch (gBattleResources->bufferA[battler][1])
     {
@@ -1889,10 +1891,13 @@ static void SetBattlerMonData(enum BattlerId battler, struct Pokemon *party, u32
             SetMonData(&party[monId], MON_DATA_HELD_ITEM, &battlePokemon->item);
             for (i = 0; i < MAX_MON_MOVES; i++)
             {
+                if (sealed & (1 << i))
+                    continue;
                 SetMonData(&party[monId], MON_DATA_MOVE1 + i, &battlePokemon->moves[i]);
                 SetMonData(&party[monId], MON_DATA_PP1 + i, &battlePokemon->pp[i]);
             }
-            SetMonData(&party[monId], MON_DATA_PP_BONUSES, &battlePokemon->ppBonuses);
+            if (!sealed)
+                SetMonData(&party[monId], MON_DATA_PP_BONUSES, &battlePokemon->ppBonuses);
             SetMonData(&party[monId], MON_DATA_FRIENDSHIP, &battlePokemon->friendship);
             SetMonData(&party[monId], MON_DATA_EXP, &battlePokemon->experience);
             iv = battlePokemon->hpIV;
@@ -1928,29 +1933,38 @@ static void SetBattlerMonData(enum BattlerId battler, struct Pokemon *party, u32
     case REQUEST_MOVES_PP_BATTLE:
         for (i = 0; i < MAX_MON_MOVES; i++)
         {
+            if (sealed & (1 << i))
+                continue;
             SetMonData(&party[monId], MON_DATA_MOVE1 + i, &moveData->moves[i]);
             SetMonData(&party[monId], MON_DATA_PP1 + i, &moveData->pp[i]);
         }
-        SetMonData(&party[monId], MON_DATA_PP_BONUSES, &moveData->ppBonuses);
+        if (!sealed)
+            SetMonData(&party[monId], MON_DATA_PP_BONUSES, &moveData->ppBonuses);
         break;
     case REQUEST_MOVE1_BATTLE:
     case REQUEST_MOVE2_BATTLE:
     case REQUEST_MOVE3_BATTLE:
     case REQUEST_MOVE4_BATTLE:
-        SetMonData(&party[monId], MON_DATA_MOVE1 + gBattleResources->bufferA[battler][1] - REQUEST_MOVE1_BATTLE, &gBattleResources->bufferA[battler][3]);
+        i = gBattleResources->bufferA[battler][1] - REQUEST_MOVE1_BATTLE;
+        if (!(sealed & (1 << i)))
+            SetMonData(&party[monId], MON_DATA_MOVE1 + i, &gBattleResources->bufferA[battler][3]);
         break;
     case REQUEST_PP_DATA_BATTLE:
-        SetMonData(&party[monId], MON_DATA_PP1, &gBattleResources->bufferA[battler][3]);
-        SetMonData(&party[monId], MON_DATA_PP2, &gBattleResources->bufferA[battler][4]);
-        SetMonData(&party[monId], MON_DATA_PP3, &gBattleResources->bufferA[battler][5]);
-        SetMonData(&party[monId], MON_DATA_PP4, &gBattleResources->bufferA[battler][6]);
-        SetMonData(&party[monId], MON_DATA_PP_BONUSES, &gBattleResources->bufferA[battler][7]);
+        for (i = 0; i < MAX_MON_MOVES; i++)
+        {
+            if (!(sealed & (1 << i)))
+                SetMonData(&party[monId], MON_DATA_PP1 + i, &gBattleResources->bufferA[battler][3 + i]);
+        }
+        if (!sealed)
+            SetMonData(&party[monId], MON_DATA_PP_BONUSES, &gBattleResources->bufferA[battler][7]);
         break;
     case REQUEST_PPMOVE1_BATTLE:
     case REQUEST_PPMOVE2_BATTLE:
     case REQUEST_PPMOVE3_BATTLE:
     case REQUEST_PPMOVE4_BATTLE:
-        SetMonData(&party[monId], MON_DATA_PP1 + gBattleResources->bufferA[battler][1] - REQUEST_PPMOVE1_BATTLE, &gBattleResources->bufferA[battler][3]);
+        i = gBattleResources->bufferA[battler][1] - REQUEST_PPMOVE1_BATTLE;
+        if (!(sealed & (1 << i)))
+            SetMonData(&party[monId], MON_DATA_PP1 + i, &gBattleResources->bufferA[battler][3]);
         break;
     case REQUEST_OTID_BATTLE:
         SetMonData(&party[monId], MON_DATA_OT_ID, &gBattleResources->bufferA[battler][3]);
