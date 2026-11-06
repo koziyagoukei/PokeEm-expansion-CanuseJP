@@ -3,7 +3,6 @@
   "name": "BattleConnector_Branch",
   "layout": "LAYOUT_BATTLE_FRONTIER_BATTLE_PIKE_THREE_PATH_ROOM",
   "music": "MUS_ABANDONED_SHIP",
-  "region": "REGION_HOENN",
   "region_map_section": "MAPSEC_ARTISAN_CAVE",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
@@ -60,5 +59,6 @@
       "script": "BattleConnector_Branch_EventScript_RightPath"
     }
   ],
-  "bg_events": []
+  "bg_events": [],
+  "region": "REGION_HOENN"
 }

@@ -3,7 +3,6 @@
   "name": "ArtisanCave_1F",
   "layout": "LAYOUT_ARTISAN_CAVE_1F",
   "music": "MUS_PETALBURG_WOODS",
-  "region": "REGION_HOENN",
   "region_map_section": "MAPSEC_ARTISAN_CAVE",
   "requires_flash": false,
   "weather": "WEATHER_NONE",
@@ -31,8 +30,8 @@
     {
       "local_id": "LOCALID_ARTISAN_CAVE_CONNECTOR_RECEPTIONIST",
       "graphics_id": "OBJ_EVENT_GFX_LINK_RECEPTIONIST",
-      "x": 10,
-      "y": 15,
+      "x": 6,
+      "y": 11,
       "elevation": 3,
       "movement_type": "MOVEMENT_TYPE_FACE_DOWN",
       "movement_range_x": 1,
@@ -60,5 +59,6 @@
     }
   ],
   "coord_events": [],
-  "bg_events": []
+  "bg_events": [],
+  "region": "REGION_HOENN"
 }
