@@ -110,9 +110,8 @@ enum Language
 #define ROAMER_COUNT 1 // Number of maximum concurrent active roamers
 #define MAX_FUSION_STORAGE 4
 
-// Bag constants
-#include "constants/frontier_bag.h"
-#define BAG_ITEMS_COUNT FRONTIER_OBTAINABLE_ITEMS_COUNT
+// Bag capacities are part of the save layout, independent of the obtainable item catalog.
+#define BAG_ITEMS_COUNT 206
 #define BAG_KEYITEMS_COUNT 12
 #define BAG_POKEBALLS_COUNT 5
 #define BAG_STONES_COUNT 30

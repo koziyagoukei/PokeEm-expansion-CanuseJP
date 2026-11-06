@@ -459,6 +459,12 @@
       ]
     },
     {
+      "item": "ITEM_GRACIDEA",
+      "sources": [
+        "src/frontier_creator.c:sFrontierHubGiveItems"
+      ]
+    },
+    {
       "item": "ITEM_GRASSY_SEED",
       "sources": [
         "src/frontier_creator.c:sFrontierHubAutoItems"
@@ -846,6 +852,12 @@
       ]
     },
     {
+      "item": "ITEM_PINK_NECTAR",
+      "sources": [
+        "src/frontier_creator.c:sFrontierHubGiveItems"
+      ]
+    },
+    {
       "item": "ITEM_PINK_SCARF",
       "sources": [
         "src/contest_shop.c:sScarfItems"
@@ -896,6 +908,12 @@
       ]
     },
     {
+      "item": "ITEM_PRISON_BOTTLE",
+      "sources": [
+        "src/frontier_creator.c:sFrontierHubGiveItems"
+      ]
+    },
+    {
       "item": "ITEM_PROTECTIVE_PADS",
       "sources": [
         "src/frontier_creator.c:sFrontierHubAutoItems"
@@ -930,6 +948,12 @@
       "item": "ITEM_PUNCHING_GLOVE",
       "sources": [
         "src/frontier_creator.c:sFrontierHubAutoItems"
+      ]
+    },
+    {
+      "item": "ITEM_PURPLE_NECTAR",
+      "sources": [
+        "src/frontier_creator.c:sFrontierHubGiveItems"
       ]
     },
     {
@@ -977,6 +1001,12 @@
       ]
     },
     {
+      "item": "ITEM_RED_NECTAR",
+      "sources": [
+        "src/frontier_creator.c:sFrontierHubGiveItems"
+      ]
+    },
+    {
       "item": "ITEM_RED_ORB",
       "sources": [
         "src/frontier_creator.c:sFrontierHubGiveItems"
@@ -998,6 +1028,12 @@
       "item": "ITEM_REPEL",
       "sources": [
         "src/battle_script_commands.c:sPickupTable"
+      ]
+    },
+    {
+      "item": "ITEM_REVEAL_GLASS",
+      "sources": [
+        "src/frontier_creator.c:sFrontierHubGiveItems"
       ]
     },
     {
@@ -1029,6 +1065,12 @@
       "item": "ITEM_ROOM_SERVICE",
       "sources": [
         "src/frontier_creator.c:sFrontierHubAutoItems"
+      ]
+    },
+    {
+      "item": "ITEM_ROTOM_CATALOG",
+      "sources": [
+        "src/frontier_creator.c:sFrontierHubGiveItems"
       ]
     },
     {
@@ -1246,6 +1288,12 @@
       ]
     },
     {
+      "item": "ITEM_YELLOW_NECTAR",
+      "sources": [
+        "src/frontier_creator.c:sFrontierHubGiveItems"
+      ]
+    },
+    {
       "item": "ITEM_YELLOW_SCARF",
       "sources": [
         "src/contest_shop.c:sScarfItems"
@@ -1269,7 +1317,13 @@
       "sources": [
         "src/frontier_creator.c:sFrontierHubAutoItems"
       ]
+    },
+    {
+      "item": "ITEM_ZYGARDE_CUBE",
+      "sources": [
+        "src/frontier_creator.c:sFrontierHubGiveItems"
+      ]
     }
   ],
-  "ordinary_item_count": 206
+  "ordinary_item_count": 215
 }
