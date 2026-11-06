@@ -26,6 +26,7 @@
 #include "malloc.h"
 #include "constants/form_change_types.h"
 #include "constants/items.h"
+#include "shadow_pokemon.h"
 #include "constants/moves.h"
 #include "constants/party_menu.h"
 #include "constants/region_map_sections.h"
@@ -234,6 +235,7 @@ void StorePokemonInDaycare(struct Pokemon *mon, struct DaycareMon *daycareMon)
     }
 
     TryFormChange(mon, FORM_CHANGE_DEPOSIT, B_TRAINER_PLAYER);
+    SetShadowPokemonHyperMode(mon, FALSE); // the Day Care calms a Shadow Pokemon out of Hyper Mode (Colosseum)
 
     daycareMon->mon = mon->box;
     daycareMon->steps = 0;
@@ -334,7 +336,12 @@ static u16 TakeSelectedPokemonFromDaycare(struct DaycareMon *daycareMon)
 
     TryFormChange(&pokemon, FORM_CHANGE_WITHDRAW, B_TRAINER_PLAYER);
 
-    if (GetMonData(&pokemon, MON_DATA_LEVEL) < GetCurrentLevelCap())
+    if (IsShadowPokemon(&pokemon))
+    {
+        // A Shadow Pokemon gains no EXP: it is held until purification, like the EXP of battles
+        HoldShadowPokemonExp(&pokemon, daycareMon->steps);
+    }
+    else if (GetMonData(&pokemon, MON_DATA_LEVEL) < GetCurrentLevelCap())
     {
         experience = GetMonData(&pokemon, MON_DATA_EXP) + daycareMon->steps;
         u32 maxExp = GetExpAtLevelCap(&pokemon);
@@ -374,6 +381,8 @@ static u8 GetLevelAfterDaycareSteps(struct BoxPokemon *mon, u32 steps)
 {
     struct BoxPokemon tempMon = *mon;
 
+    if (IsShadowBoxPokemon(mon)) // a Shadow Pokemon does not grow
+        steps = 0;
     u32 experience = GetBoxMonData(mon, MON_DATA_EXP) + steps;
     SetBoxMonData(&tempMon, MON_DATA_EXP,  &experience);
     return GetLevelFromBoxMonExp(&tempMon);

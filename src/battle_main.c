@@ -443,6 +443,7 @@ static void (*const sTurnActionsFuncsTable[])(void) =
     [B_ACTION_FINISHED]               = HandleAction_ActionFinished,
     [B_ACTION_NOTHING_FAINTED]        = HandleAction_NothingIsFainted,
     [B_ACTION_THROW_BALL]             = HandleAction_ThrowBall,
+    [B_ACTION_SHADOW_CALL]            = HandleAction_ShadowCall,
 };
 
 static void (*const sEndTurnFuncsTable[])(void) =
@@ -4209,7 +4210,8 @@ static void HandleTurnActionSelectionState(void)
                     {
                         RecordedBattle_ClearBattlerAction(GetPartnerBattler(battler), 2);
                     }
-                    else if (gChosenActionByBattler[GetPartnerBattler(battler)] == B_ACTION_RUN)
+                    else if (gChosenActionByBattler[GetPartnerBattler(battler)] == B_ACTION_RUN
+                          || gChosenActionByBattler[GetPartnerBattler(battler)] == B_ACTION_SHADOW_CALL)
                     {
                         RecordedBattle_ClearBattlerAction(GetPartnerBattler(battler), 1);
                     }
@@ -4400,6 +4402,9 @@ static void HandleTurnActionSelectionState(void)
                     break;
                 case B_ACTION_THROW_BALL:
                     gBattleStruct->throwingPokeBall = TRUE;
+                    gBattleCommunication[battler]++;
+                    break;
+                case B_ACTION_SHADOW_CALL:
                     gBattleCommunication[battler]++;
                     break;
                 case B_ACTION_SAFARI_POKEBLOCK:
@@ -4920,7 +4925,8 @@ static void SetActionsAndBattlersTurnOrder(void)
             {
                 if (gChosenActionByBattler[battler] == B_ACTION_USE_ITEM
                   || gChosenActionByBattler[battler] == B_ACTION_SWITCH
-                  || gChosenActionByBattler[battler] == B_ACTION_THROW_BALL)
+                  || gChosenActionByBattler[battler] == B_ACTION_THROW_BALL
+                  || gChosenActionByBattler[battler] == B_ACTION_SHADOW_CALL)
                 {
                     gActionsByTurnOrder[turnOrderId] = gChosenActionByBattler[battler];
                     gBattlerByTurnOrder[turnOrderId] = battler;
@@ -4931,7 +4937,8 @@ static void SetActionsAndBattlersTurnOrder(void)
             {
                 if (gChosenActionByBattler[battler] != B_ACTION_USE_ITEM
                   && gChosenActionByBattler[battler] != B_ACTION_SWITCH
-                  && gChosenActionByBattler[battler] != B_ACTION_THROW_BALL)
+                  && gChosenActionByBattler[battler] != B_ACTION_THROW_BALL
+                  && gChosenActionByBattler[battler] != B_ACTION_SHADOW_CALL)
                 {
                     gActionsByTurnOrder[turnOrderId] = gChosenActionByBattler[battler];
                     gBattlerByTurnOrder[turnOrderId] = battler;
@@ -4958,7 +4965,9 @@ static void SetActionsAndBattlersTurnOrder(void)
                         && gActionsByTurnOrder[battler] != B_ACTION_SWITCH
                         && gActionsByTurnOrder[battler2] != B_ACTION_SWITCH
                         && gActionsByTurnOrder[battler] != B_ACTION_THROW_BALL
-                        && gActionsByTurnOrder[battler2] != B_ACTION_THROW_BALL)
+                        && gActionsByTurnOrder[battler2] != B_ACTION_THROW_BALL
+                        && gActionsByTurnOrder[battler] != B_ACTION_SHADOW_CALL
+                        && gActionsByTurnOrder[battler2] != B_ACTION_SHADOW_CALL)
                     {
                         if (GetWhichBattlerFaster(&calcValues, FALSE) == -1)
                             SwapTurnOrder(battler, battler2);

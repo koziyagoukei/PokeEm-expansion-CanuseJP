@@ -58,6 +58,7 @@ enum BattleAction
     B_ACTION_UNK_15,
     B_ACTION_DEBUG = 20,
     B_ACTION_THROW_BALL, // R to throw last used ball
+    B_ACTION_SHADOW_CALL, // R to call out to the player's Shadow Pokemon (Pokemon XD's Call)
     B_ACTION_NONE = 0xFF
 };
 
@@ -541,7 +542,8 @@ struct BattlerState
     u16 notOnField:1;
     u16 originalBattlerPartyId:4;
     u16 isFirstTurn:2; // Starts at 2 on switch in and counts down during end turn
-    u16 padding:8;
+    u16 usedShadowMove:1; // The player's Shadow Pokemon used a Shadow move this turn (Reverse Mode, end of turn)
+    u16 padding:7;
     // End of Word
 };
 
@@ -559,8 +561,7 @@ struct PartyState
     u32 isKnockedOff:1;
     u32 frontierNicknameSendOutMsgShown:1;
     u32 freezeTurns:2;
-    u32 shadowHyperMode:1;
-    u32 padding:1;
+    u32 padding:2;
     enum Item usedHeldItem;
 };
 

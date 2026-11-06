@@ -49,6 +49,7 @@
 #include "constants/event_objects.h"
 #include "party_menu.h"
 #include "list_menu.h"
+#include "shadow_pokemon.h"
 
 struct FrontierBrainMon
 {
@@ -2354,6 +2355,8 @@ static void CheckPartyIneligibility(void)
             enum Item heldItem = GetMonData(&gParties[B_TRAINER_PLAYER][monId], MON_DATA_HELD_ITEM);
             u8 level = GetMonData(&gParties[B_TRAINER_PLAYER][monId], MON_DATA_LEVEL);
             u16 hp = GetMonData(&gParties[B_TRAINER_PLAYER][monId], MON_DATA_HP);
+            if (IsShadowPokemon(&gParties[B_TRAINER_PLAYER][monId])) // Shadow Pokemon are kept out of the facilities
+                species = SPECIES_NONE;
             if (VarGet(VAR_FRONTIER_FACILITY) == FRONTIER_FACILITY_PYRAMID)
             {
                 if (heldItem == ITEM_NONE)

@@ -261,6 +261,17 @@ static void HandleInputChooseAction(enum BattlerId battler)
     else
         gPlayerDpadHoldFrames = 0;
 
+    // Call (Pokemon XD): R calls out to the player's own Shadow Pokemon. It takes the turn. For a Shadow Pokemon this
+    // R comes before the last used ball's (the Bag still throws balls).
+    if (JOY_NEW(R_BUTTON) && CanBattlerCallShadowPokemon(battler))
+    {
+        PlaySE(SE_SELECT);
+        TryHideLastUsedBall();
+        BtlController_EmitTwoReturnValues(battler, B_COMM_TO_ENGINE, B_ACTION_SHADOW_CALL, 0);
+        BtlController_Complete(battler);
+        return;
+    }
+
     if (B_LAST_USED_BALL == TRUE && B_LAST_USED_BALL_CYCLE == TRUE
     && !(B_LAST_USED_BALL_BUTTON == L_BUTTON && gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_L_EQUALS_A))
     {
@@ -1018,14 +1029,6 @@ void HandleInputChooseMove(enum BattlerId battler)
             if (B_SHOW_EFFECTIVENESS)
                 MoveSelectionDisplayMoveEffectiveness(CheckTargetTypeEffectiveness(battler), battler);
             MoveSelectionDisplayPPNumber(battler);
-            MoveSelectionDisplayMoveType(battler);
-        }
-    }
-    else if (JOY_NEW(R_BUTTON) && IsBattlerInHyperMode(battler))
-    {
-        if (CalmShadowPokemon(battler))
-        {
-            PlaySE(SE_SUCCESS);
             MoveSelectionDisplayMoveType(battler);
         }
     }
@@ -1885,12 +1888,6 @@ static void MoveSelectionDisplayPPNumber(enum BattlerId battler)
 
 static void MoveSelectionDisplayMoveType(enum BattlerId battler)
 {
-    if (IsBattlerInHyperMode(battler))
-    {
-        BattlePutTextOnWindow(COMPOUND_STRING("R: {JPN}なだめる"), B_WIN_MOVE_TYPE);
-        return;
-    }
-
     u8 *txtPtr, *end;
     enum Species speciesId = gBattleMons[battler].species;
     struct ChooseMoveStruct *moveInfo = (struct ChooseMoveStruct *)(&gBattleResources->bufferA[battler][4]);

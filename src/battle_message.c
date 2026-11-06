@@ -17,6 +17,7 @@
 #include "menu.h"
 #include "palette.h"
 #include "recorded_battle.h"
+#include "shadow_pokemon.h"
 #include "string_util.h"
 #include "strings.h"
 #include "test_runner.h"
@@ -842,6 +843,18 @@ const u8 *const gBattleStringsTable[STRINGID_COUNT] =
     [STRINGID_DARKNESSHURTS]                        = COMPOUND_STRING("{JPN}{B_ATK_NAME_WITH_PREFIX}は\nくらやみで ダメージを 受けた！"),
     [STRINGID_SHADOWENCOUNTER]                      = COMPOUND_STRING("{JPN}{B_ATK_NAME_WITH_PREFIX}は\n黒いオーラを まとっている！"),
     [STRINGID_SHADOWSHEDREMOVEDSCREENS]             = COMPOUND_STRING("{JPN}ダークオーラの うずが\n場の 壁を 消しさった！"),
+    [STRINGID_SHADOWHYPERMODESTARTED]               = COMPOUND_STRING("{JPN}{B_ATK_NAME_WITH_PREFIX}は\nハイパー状態に なった！"),
+    [STRINGID_SHADOWHYPERATTACKFOETRAINER]          = COMPOUND_STRING("{JPN}{B_ATK_NAME_WITH_PREFIX}は\n相手の トレーナーを ねらっている！"),
+    [STRINGID_SHADOWHYPERATTACKOWNTRAINER]          = COMPOUND_STRING("{JPN}{B_ATK_NAME_WITH_PREFIX}は\n{B_PLAYER_NAME}に かみつこうとした！"),
+    [STRINGID_SHADOWHYPERUSEITEM]                   = COMPOUND_STRING("{JPN}{B_ATK_NAME_WITH_PREFIX}は\nもちものを いじっている……"),
+    [STRINGID_SHADOWHYPERRETURNTOBALL]              = COMPOUND_STRING("{JPN}{B_ATK_NAME_WITH_PREFIX}は\nボールに もどろうとしている！"),
+    [STRINGID_SHADOWREVERSEMODESTARTED]             = COMPOUND_STRING("{JPN}{B_ATK_NAME_WITH_PREFIX}は\nリバース状態に なった！"),
+    [STRINGID_SHADOWREVERSEMODEHURTS]               = COMPOUND_STRING("{JPN}{B_ATK_NAME_WITH_PREFIX}は\nリバース状態で 苦しんでいる！"),
+    [STRINGID_SHADOWCALL]                           = COMPOUND_STRING("{JPN}{B_PLAYER_NAME}は\n{B_ATK_NAME_WITH_PREFIX}に よびかけた！"),
+    [STRINGID_SHADOWCALLCALMED]                     = COMPOUND_STRING("{JPN}{B_ATK_NAME_WITH_PREFIX}は\nわれに かえった！"),
+    [STRINGID_SHADOWCALLANSWERED]                   = COMPOUND_STRING("{JPN}{B_ATK_NAME_WITH_PREFIX}は\nよびかけに こたえた！"),
+    [STRINGID_SHADOWHYPEREATSBERRY]                 = COMPOUND_STRING("{JPN}{B_ATK_NAME_WITH_PREFIX}は もっていた\n{B_LAST_ITEM}を たべてしまった！"),
+    [STRINGID_SHADOWHYPERRETURNEDTOBALL]            = COMPOUND_STRING("{JPN}{B_ATK_NAME_WITH_PREFIX}は かってに\nボールへ もどってしまった！"),
     [STRINGID_PKMNMADESHELLGLEAM]                   = COMPOUND_STRING("{JPN}{B_DEF_NAME_WITH_PREFIX}は\nこうらを かがやかせた！ タイプあいしょうを ゆがめる！"),
     [STRINGID_FICKLEBEAMDOUBLED]                    = COMPOUND_STRING("{JPN}{B_ATK_NAME_WITH_PREFIX}は\nこの 攻撃に ぜんりょくを そそいだ！"),
     [STRINGID_COMMANDERACTIVATES]                   = COMPOUND_STRING("{JPN}{B_SCR_NAME_WITH_PREFIX}は しれいとう として\n{B_BUFF1}に のみこまれた！"),
@@ -1334,6 +1347,15 @@ const u16 gPrimalWeatherBlocksStringIds[] =
 {
     [B_MSG_PRIMAL_WEATHER_FIZZLED_BY_RAIN]      = STRINGID_MOVEFIZZLEDOUTINTHEHEAVYRAIN,
     [B_MSG_PRIMAL_WEATHER_EVAPORATED_IN_SUN]    = STRINGID_MOVEEVAPORATEDINTHEHARSHSUNLIGHT,
+};
+
+// What a Shadow Pokemon in Hyper Mode does instead of the move it was told (the actions with a message of their own)
+const u16 gShadowHyperModeStringIds[] =
+{
+    [SHADOW_HYPER_ATTACK_FOE_TRAINER] = STRINGID_SHADOWHYPERATTACKFOETRAINER,
+    [SHADOW_HYPER_ATTACK_OWN_TRAINER] = STRINGID_SHADOWHYPERATTACKOWNTRAINER,
+    [SHADOW_HYPER_USE_ITEM]           = STRINGID_SHADOWHYPERUSEITEM,
+    [SHADOW_HYPER_RETURN_TO_BALL]     = STRINGID_SHADOWHYPERRETURNTOBALL,
 };
 
 const u16 gInobedientStringIds[] =

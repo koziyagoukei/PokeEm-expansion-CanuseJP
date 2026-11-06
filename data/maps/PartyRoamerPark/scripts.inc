@@ -54,10 +54,47 @@ PartyRoamerPark_EventScript_RefreshMons::
 PartyRoamerPark_EventScript_Talk::
 	lock
 	faceplayer
+	specialvar VAR_RESULT, Special_GetPartyRoamerShadowState
+	goto_if_eq VAR_RESULT, SHADOW_ROAMER_CAN_PURIFY, PartyRoamerPark_EventScript_Purify
+	goto_if_eq VAR_RESULT, SHADOW_ROAMER_NEEDS_PARTNERS, PartyRoamerPark_EventScript_PurifyNeedsPartners
+	goto_if_eq VAR_RESULT, SHADOW_ROAMER_CLOSED, PartyRoamerPark_EventScript_ShadowClosed
 	special Special_BufferPartyRoamerMessage
 	msgbox gStringVar4, MSGBOX_DEFAULT
 	release
 	end
+
+@ A Shadow Pokemon in the camp (Pokemon XD's Purify Chamber): with four other Pokemon round it, an open heart purifies.
+PartyRoamerPark_EventScript_ShadowClosed:
+	msgbox PartyRoamerPark_Text_ShadowClosed, MSGBOX_DEFAULT
+	release
+	end
+
+PartyRoamerPark_EventScript_PurifyNeedsPartners:
+	msgbox PartyRoamerPark_Text_PurifyNeedsPartners, MSGBOX_DEFAULT
+	release
+	end
+
+PartyRoamerPark_EventScript_Purify:
+	msgbox PartyRoamerPark_Text_PurifyGather, MSGBOX_DEFAULT
+	closemessage
+	fadescreen FADE_TO_BLACK
+	special Special_ShadowPokemon_StartPurificationScene
+	waitstate
+	msgbox PartyRoamerPark_Text_PurifyDone, MSGBOX_DEFAULT
+	release
+	end
+
+PartyRoamerPark_Text_ShadowClosed:
+	.string "{JPN}{STR_VAR_1}は 黒いオーラを\nまとっている……\p心を とざしている ようだ。$"
+
+PartyRoamerPark_Text_PurifyNeedsPartners:
+	.string "{JPN}{STR_VAR_1}は 心を\nひらきかけている……！\pダークでない なかまが 4ひき\nそばに いてくれたら……$"
+
+PartyRoamerPark_Text_PurifyGather:
+	.string "{JPN}なかまたちが {STR_VAR_1}の\nまわりに あつまってきた……！$"
+
+PartyRoamerPark_Text_PurifyDone:
+	.string "{JPN}{STR_VAR_1}は うれしそうに\nなかまたちと じゃれあっている！$"
 
 PartyRoamerPark_EventScript_BathAttendant::
 	lock

@@ -2522,6 +2522,8 @@ static enum CanMoveBeLearned CanTeachMove(struct Pokemon *mon, enum Move move)
 {
     if (GetMonData(mon, MON_DATA_IS_EGG))
         return CANNOT_LEARN_MOVE_IS_EGG;
+    else if (IsShadowPokemon(mon)) // TMs and tutors wait for purification
+        return CANNOT_LEARN_MOVE;
     else if (!CanLearnTeachableMove(GetMonData(mon, MON_DATA_SPECIES_OR_EGG), move))
         return CANNOT_LEARN_MOVE;
     else if (MonKnowsMove(mon, move) == TRUE)
@@ -3493,23 +3495,11 @@ void CB2_ReturnToPartyMenuFromSummaryScreen(void)
 
 static bool32 CanRenameSelectedPartyMon(void)
 {
-    u8 otName[PLAYER_NAME_LENGTH + 1];
-    struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][gPartyMenu.slotId];
-
-    if (!P_SUMMARY_SCREEN_RENAME)
-        return FALSE;
-    if (GetMonData(mon, MON_DATA_IS_EGG))
-        return FALSE;
-    if (GetMonData(mon, MON_DATA_LANGUAGE) != GAME_LANGUAGE)
-        return FALSE;
-    if (GetPlayerIDAsU32() != GetMonData(mon, MON_DATA_OT_ID))
+    if (!P_SUMMARY_SCREEN_RENAME || gPartyMenu.slotId >= PARTY_SIZE)
         return FALSE;
 
-    GetMonData(mon, MON_DATA_OT_NAME, otName);
-    if (StringCompare(gSaveBlock2Ptr->playerName, otName) != 0)
-        return FALSE;
-
-    return TRUE;
+    enum Species species = GetMonData(&gParties[B_TRAINER_PLAYER][gPartyMenu.slotId], MON_DATA_SPECIES_OR_EGG);
+    return species != SPECIES_NONE && species != SPECIES_EGG;
 }
 
 static void CB2_ReturnToPartyMenuFromNamingScreen(void)
@@ -4352,7 +4342,11 @@ static void CursorCb_Register(u8 taskId)
     enum Species species = GetMonData(&gParties[B_TRAINER_PLAYER][gPartyMenu.slotId], MON_DATA_SPECIES);
     u8 isModernFatefulEncounter = GetMonData(&gParties[B_TRAINER_PLAYER][gPartyMenu.slotId], MON_DATA_MODERN_FATEFUL_ENCOUNTER);
 
-    switch (CanRegisterMonForTradingBoard(*(struct RfuGameCompatibilityData *)GetHostRfuGameData(), species2, species, isModernFatefulEncounter))
+    u32 canRegister = IsShadowPokemon(&gParties[B_TRAINER_PLAYER][gPartyMenu.slotId]) // never traded before purification
+                    ? CANT_REGISTER_MON
+                    : CanRegisterMonForTradingBoard(*(struct RfuGameCompatibilityData *)GetHostRfuGameData(), species2, species, isModernFatefulEncounter);
+
+    switch (canRegister)
     {
     case CANT_REGISTER_MON_NOW:
         StringExpandPlaceholders(gStringVar4, gText_PkmnCantBeTradedNow);
@@ -4382,6 +4376,9 @@ static void CursorCb_Trade1(u8 taskId)
     enum Species species = GetMonData(&gParties[B_TRAINER_PLAYER][gPartyMenu.slotId], MON_DATA_SPECIES);
     u8 isModernFatefulEncounter = GetMonData(&gParties[B_TRAINER_PLAYER][gPartyMenu.slotId], MON_DATA_MODERN_FATEFUL_ENCOUNTER);
     u32 stringId = GetUnionRoomTradeMessageId(*(struct RfuGameCompatibilityData *)GetHostRfuGameData(), gRfuPartnerCompatibilityData, species2, gUnionRoomOfferedSpecies, gUnionRoomRequestedMonType, species, isModernFatefulEncounter);
+
+    if (stringId == UR_TRADE_MSG_NONE && IsShadowPokemon(&gParties[B_TRAINER_PLAYER][gPartyMenu.slotId]))
+        stringId = UR_TRADE_MSG_MON_CANT_BE_TRADED; // never traded before purification
 
     if (stringId != UR_TRADE_MSG_NONE)
     {
@@ -6221,7 +6218,8 @@ void ItemUseCB_RareCandy(u8 taskId, TaskFunc task)
     u8 holdEffectParam = GetItemHoldEffectParam(*itemPtr);
 
     sInitialLevel = GetMonData(mon, MON_DATA_LEVEL);
-    if (!(B_RARE_CANDY_CAP && sInitialLevel >= GetCurrentLevelCap()))
+    // A Shadow Pokemon gains no EXP, so no candy works on it until it is purified
+    if (!(B_RARE_CANDY_CAP && sInitialLevel >= GetCurrentLevelCap()) && !IsShadowPokemon(mon))
     {
         BufferMonStatsToTaskData(mon, arrayPtr);
         cannotUseEffect = ExecuteTableBasedItemEffect(mon, *itemPtr, gPartyMenu.slotId, 0);
@@ -7727,6 +7725,8 @@ static bool8 GetBattleEntryEligibility(struct Pokemon *mon)
     default: // Battle Frontier
         species = GetMonData(mon, MON_DATA_SPECIES);
         if (IsFrontierSpeciesBannedByCurrentRules(species))
+            return FALSE;
+        if (IsShadowPokemon(mon)) // Shadow Pokemon are kept out of the facilities
             return FALSE;
         return TRUE;
     }

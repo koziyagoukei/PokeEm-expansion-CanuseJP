@@ -39,6 +39,7 @@
 #include "wild_encounter.h"
 #include "wild_encounter_ow.h"
 #include "constants/event_bg.h"
+#include "shadow_pokemon.h"
 #include "constants/event_objects.h"
 #include "constants/field_poison.h"
 #include "constants/layouts.h"
@@ -756,6 +757,7 @@ static bool8 TryStartStepCountScript(u16 metatileBehavior)
     UpdateFriendshipStepCounter();
     UpdateFarawayIslandStepCounter();
     UpdateFollowerStepCounter();
+    ShadowPokemon_OnStep();
 
     if (!(gPlayerAvatar.flags & PLAYER_AVATAR_FLAG_FORCED_MOVE) && !MetatileBehavior_IsForcedMovementTile(metatileBehavior))
     {

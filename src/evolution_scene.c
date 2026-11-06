@@ -21,6 +21,7 @@
 #include "pokemon.h"
 #include "pokemon_summary_screen.h"
 #include "scanline_effect.h"
+#include "shadow_pokemon.h"
 #include "sound.h"
 #include "sprite.h"
 #include "string_util.h"
@@ -48,6 +49,11 @@ struct EvoInfo
 
 static EWRAM_DATA struct EvoInfo *sEvoStructPtr = NULL;
 static EWRAM_DATA u16 *sBgAnimPal = NULL;
+// The scene plays the purification of a Shadow Pokemon (BeginPurificationScene): same species, no evolution
+static EWRAM_DATA bool8 sIsPurificationScene = FALSE;
+
+static const u8 sText_PkmnHeartIsOpening[] = _("{JPN}……！？\n{STR_VAR_1}の 心の とびらが……！");
+static const u8 sText_PkmnWasPurified[] = _("{JPN}{STR_VAR_1}の 心の とびらが ひらいた！\n{STR_VAR_1}は リライブした！{WAIT_SE}\p");
 
 COMMON_DATA void (*gCB2_AfterEvolution)(void) = NULL;
 
@@ -205,6 +211,16 @@ void BeginEvolutionScene(struct Pokemon *mon, enum Species postEvoSpecies, bool3
     gTasks[taskId].tCanStop = canStopEvo;
     gTasks[taskId].tPartyId = partyId;
     SetMainCallback2(CB2_BeginEvolutionScene);
+}
+
+// The purification of a Shadow Pokemon, shown with the evolution scene. It cannot be stopped; the Pokemon is purified
+// (PurifyShadowPokemon) where an evolution would change its species. Set gCB2_AfterEvolution first.
+void BeginPurificationScene(u8 partyId)
+{
+    struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][partyId];
+
+    sIsPurificationScene = TRUE;
+    BeginEvolutionScene(mon, GetMonData(mon, MON_DATA_SPECIES), FALSE, partyId);
 }
 
 void EvolutionScene(struct Pokemon *mon, enum Species postEvoSpecies, bool32 canStopEvo, u8 partyId)
@@ -682,7 +698,7 @@ static void Task_EvolutionScene(u8 taskId)
     case EVOSTATE_INTRO_MSG:
         if (!gPaletteFade.active)
         {
-            StringExpandPlaceholders(gStringVar4, gText_PkmnIsEvolving);
+            StringExpandPlaceholders(gStringVar4, sIsPurificationScene ? sText_PkmnHeartIsOpening : gText_PkmnIsEvolving);
             BattlePutTextOnWindow(gStringVar4, B_WIN_MSG);
             gTasks[taskId].tState++;
         }
@@ -777,7 +793,15 @@ static void Task_EvolutionScene(u8 taskId)
         }
         break;
     case EVOSTATE_SET_MON_EVOLVED:
-        if (IsCryFinished())
+        if (IsCryFinished() && sIsPurificationScene)
+        {
+            PurifyShadowPokemon(mon);
+            StringExpandPlaceholders(gStringVar4, sText_PkmnWasPurified);
+            BattlePutTextOnWindow(gStringVar4, B_WIN_MSG);
+            PlayBGM(MUS_EVOLVED);
+            gTasks[taskId].tState++;
+        }
+        else if (IsCryFinished())
         {
             u32 zero = 0;
             StringExpandPlaceholders(gStringVar4, gText_CongratsPkmnEvolved);
@@ -794,7 +818,13 @@ static void Task_EvolutionScene(u8 taskId)
         }
         break;
     case EVOSTATE_TRY_LEARN_MOVE:
-        if (!IsTextPrinterActiveOnWindow(0))
+        if (!IsTextPrinterActiveOnWindow(0) && sIsPurificationScene)
+        {
+            // PurifyShadowPokemon taught the moves of the levels reached; there are no evolution moves
+            BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 0x10, RGB_BLACK);
+            gTasks[taskId].tState++;
+        }
+        else if (!IsTextPrinterActiveOnWindow(0))
         {
             var = MonTryLearningNewMoveEvolution(mon, gTasks[taskId].tLearnsFirstMove);
             if (var != MOVE_NONE && !gTasks[taskId].tEvoWasStopped)
@@ -836,8 +866,9 @@ static void Task_EvolutionScene(u8 taskId)
 
             }
 
-            if (!gTasks[taskId].tEvoWasStopped)
+            if (!gTasks[taskId].tEvoWasStopped && !sIsPurificationScene)
                 CreateShedinja(gTasks[taskId].tPreEvoSpecies, gTasks[taskId].tPostEvoSpecies, mon);
+            sIsPurificationScene = FALSE;
 
             DestroyTask(taskId);
             FreeMonSpritesGfx();

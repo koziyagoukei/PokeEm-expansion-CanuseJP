@@ -1950,6 +1950,8 @@ static void Cmd_cleareffectsonfaint(void)
         }
 
         FaintClearSetData(battler); // Effects like attractions, trapping, etc.
+        if (!IsBattlerAlive(battler))
+            ClearShadowModesOnFaint(battler); // Hyper and Reverse Mode end when the Pokemon faints
         gBattlescriptCurrInstr = cmd->nextInstr;
     }
 }
@@ -2312,6 +2314,16 @@ static void Cmd_getexp(void)
                             gBattleStruct->battlerExpReward = 0;
                         else if (gExperienceTables[growthRate][levelCap] < currentExp + gBattleStruct->battlerExpReward)
                             gBattleStruct->battlerExpReward = gExperienceTables[growthRate][levelCap] - currentExp;
+                    }
+
+                    // A Shadow Pokemon gains no EXP (it still gains EVs): Pokemon XD holds part of it until purification.
+                    if (IsShadowPokemon(&gParties[B_TRAINER_PLAYER][*expMonId]))
+                    {
+                        HoldShadowPokemonExp(&gParties[B_TRAINER_PLAYER][*expMonId], gBattleStruct->battlerExpReward);
+                        gBattleStruct->battlerExpReward = 0;
+                        MonGainEVs(&gParties[B_TRAINER_PLAYER][*expMonId], faintedSpecies);
+                        gBattleScripting.getexpState = 5;
+                        break;
                     }
 
                     if (IsTradedMon(&gParties[B_TRAINER_PLAYER][*expMonId]))

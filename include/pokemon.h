@@ -125,7 +125,12 @@ enum MonData {
     MON_DATA_GIGANTAMAX_FACTOR,
     MON_DATA_TERA_TYPE,
     MON_DATA_EVOLUTION_TRACKER,
-    MON_DATA_SHADOW_STATE,
+    // Shadow Pokemon (src/shadow_pokemon.c). Everything but the tag reads 0 for a Pokemon without the tag.
+    MON_DATA_HAS_SHADOW_STATE,     // the tag: the fields below belong to the Shadow state
+    MON_DATA_SHADOW_GAUGE,         // heart gauge left, 14 bits (SHADOW_GAUGE_PURIFIED once purified)
+    MON_DATA_SHADOW_HELD_EXP,      // EXP held until purification, 14 bits in SHADOW_HELD_EXP_UNIT
+    MON_DATA_SHADOW_HYPER_MODE,    // Hyper Mode (Colosseum), kept after battle
+    MON_DATA_SHADOW_REVERSE_MODE,  // Reverse Mode (Pokemon XD), kept after battle
 };
 
 #define BLOCK_AI_DYNAMAX 15 // Used as dynamax level value by the AI to indicate this mon shouldn't dynamax
@@ -135,15 +140,15 @@ struct PokemonSubstruct0
     enum Species species:11; // 2047 species.
     enum Type teraType:5; // 30 types.
     enum Item heldItem:10; // 1023 items.
-    u16 unused_02:6;
+    u16 shadowGaugeHigh:6; // Shadow Pokemon: heart gauge bits 8-13 (bits 0-7 are in pokerus)
     u32 experience:21;
     u32 nickname11:8; // 11th character of nickname.
-    u32 unused_04:3;
+    u32 shadowHeldExp0:3; // Shadow Pokemon: held EXP bits 0-2
     u8 ppBonuses;
     u8 friendship;
     u16 pokeball:6; // 63 balls.
     u16 nickname12:8; // 12th character of nickname.
-    u16 unused_0A:2;
+    u16 shadowHeldExp1:2; // Shadow Pokemon: held EXP bits 3-4
 };
 
 struct PokemonSubstruct1
@@ -153,9 +158,9 @@ struct PokemonSubstruct1
     enum Move move2:11; // 2047 moves.
     u16 evolutionTracker2:5;
     enum Move move3:11; // 2047 moves.
-    u16 unused_04:5;
+    u16 shadowHeldExp2:5; // Shadow Pokemon: held EXP bits 5-9
     enum Move move4:11; // 2047 moves.
-    u16 unused_06:3;
+    u16 shadowHeldExp3:3; // Shadow Pokemon: held EXP bits 10-12
     u16 hyperTrainedHP:1;
     u16 hyperTrainedAttack:1;
     u8 pp1:7; // 127 PP.
@@ -217,8 +222,8 @@ struct PokemonSubstruct3
     u32 nationalRibbon:1; // Given to purified Shadow Pokemon in Colosseum/XD.
     u32 earthRibbon:1;    // Given to teams that have beaten Mt. Battle's 100-battle challenge in Colosseum/XD.
     u32 worldRibbon:1;    // Distributed during Pokemon Festa '04 and '05 to tournament winners.
-    u32 isShadow:1;
-    u32 hasShadowState:1;
+    u32 shadowHeldExp4:1; // Shadow Pokemon: held EXP bit 13 (was isShadow, never set by the game)
+    u32 hasShadowState:1; // Shadow Pokemon tag: pokerus and the shadow* fields hold its state
     u32 abilityNum:2;
 
     // The functionality of this bit changed in FRLG:
@@ -268,14 +273,14 @@ struct BoxPokemon
     u8 isEgg:1;
     u8 blockBoxRS:1; // Unused, but Pokemon Box Ruby & Sapphire will refuse to deposit a Pokemon with this flag set.
     u8 daysSinceFormChange:3; // 7 days.
-    u8 unused_13:1;
+    u8 shadowHyperMode:1; // Shadow Pokemon: in Hyper Mode (Colosseum)
     u8 otName[PLAYER_NAME_LENGTH];
     u8 markings:4;
     u8 compressedStatus:4;
     u16 checksum;
     u16 hpLost:14; // 16383 HP.
     u16 shinyModifier:1;
-    u16 unused_1E:1;
+    u16 shadowReverseMode:1; // Shadow Pokemon: in Reverse Mode (Pokemon XD)
 
     union
     {

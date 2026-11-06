@@ -886,6 +886,42 @@ void HandleAction_ThrowBall(void)
     gCurrentActionFuncId = B_ACTION_EXEC_SCRIPT;
 }
 
+// Call (Pokemon XD, R on the action menu): brings the player's Shadow Pokemon out of Hyper and Reverse Mode, which
+// also opens its heart a little; else wakes it; else raises its accuracy. It takes the turn and goes before moves.
+void HandleAction_ShadowCall(void)
+{
+    enum BattlerId battler = gBattlerAttacker = gBattlerByTurnOrder[gCurrentTurnActionNumber];
+    struct Pokemon *mon;
+
+    gBattle_BG0_X = 0;
+    gBattle_BG0_Y = 0;
+    if (!IsBattlerAlive(battler) || !CanBattlerCallShadowPokemon(battler))
+    {
+        gCurrentActionFuncId = B_ACTION_FINISHED;
+        return;
+    }
+
+    mon = GetBattlerMon(battler);
+    if (IsShadowPokemonInHyperMode(mon) || IsShadowPokemonInReverseMode(mon))
+    {
+        SetShadowPokemonHyperMode(mon, FALSE);
+        SetShadowPokemonReverseMode(mon, FALSE);
+        ReduceShadowHeartGauge(mon, SHADOW_ACTION_CALL, 1);
+        gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_SHADOW_CALL_CALMED;
+    }
+    else if (gBattleMons[battler].status1 & STATUS1_SLEEP)
+    {
+        gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_SHADOW_CALL_WOKE_UP;
+    }
+    else
+    {
+        SetStatChange(battler, STAT_ACC, 1);
+        gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_SHADOW_CALL_ANSWERED;
+    }
+    gBattlescriptCurrInstr = BattleScript_ShadowCall;
+    gCurrentActionFuncId = B_ACTION_EXEC_SCRIPT;
+}
+
 void HandleAction_ThrowPokeblock(void)
 {
     gBattlerAttacker = gBattlerByTurnOrder[gCurrentTurnActionNumber];
@@ -8125,6 +8161,10 @@ s32 CalcCritChanceStage(struct DamageContext *ctx)
                     + ((B_AFFECTION_MECHANICS == TRUE && GetBattlerAffectionHearts(ctx->battlerAtk) == AFFECTION_FIVE_HEARTS) ? 2 : 0)
                     + (ctx->abilities[ctx->battlerAtk] == ABILITY_SUPER_LUCK ? 1 : 0)
                     + gBattleMons[ctx->battlerAtk].volatiles.bonusCritStages;
+
+        // Hyper Mode (Pokemon Colosseum) sharpens Shadow moves.
+        if (IsShadowMove(ctx->move) && IsBattlerInHyperMode(ctx->battlerAtk))
+            critChance += SHADOW_HYPER_MODE_CRIT_STAGES;
 
         if (critChance >= ARRAY_COUNT(sCriticalHitOdds))
             critChance = ARRAY_COUNT(sCriticalHitOdds) - 1;

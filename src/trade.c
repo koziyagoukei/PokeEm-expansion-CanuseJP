@@ -49,6 +49,7 @@
 #include "constants/party_menu.h"
 #include "constants/region_map_sections.h"
 #include "constants/rgb.h"
+#include "shadow_pokemon.h"
 #include "constants/songs.h"
 #include "constants/union_room.h"
 
@@ -2436,8 +2437,8 @@ static enum CanTradeMon CanTradeSelectedMon(struct Pokemon *playerParty, int par
         }
     }
 
-    // Can't trade specific species
-    if (gSpeciesInfo[species[monIdx]].cannotBeTraded || IsFusedSpecies(species[monIdx]))
+    // Can't trade specific species, nor a Shadow Pokemon before it is purified
+    if (gSpeciesInfo[species[monIdx]].cannotBeTraded || IsFusedSpecies(species[monIdx]) || IsShadowPokemon(&playerParty[monIdx]))
         return CANT_TRADE_INVALID_MON;
 
     // Make Eggs not count for numMonsLeft
@@ -2591,7 +2592,7 @@ enum CanTradeMon CanSpinTradeMon(struct Pokemon *mon, u16 monIdx)
     int i, version, versions, canTradeAnyMon, numMonsLeft;
     enum Species speciesArray[PARTY_SIZE];
 
-    if (IsFusedSpecies(GetMonData(&mon[monIdx], MON_DATA_SPECIES)))
+    if (IsFusedSpecies(GetMonData(&mon[monIdx], MON_DATA_SPECIES)) || IsShadowPokemon(&mon[monIdx]))
         return CANT_TRADE_INVALID_MON;
 
     // Make Eggs not count for numMonsLeft
@@ -4650,7 +4651,7 @@ static void GetInGameTradeMail(struct Mail *mail, const struct InGameTrade *trad
 enum Species GetTradeSpecies(void)
 {
     struct BoxPokemon *boxmon = GetSelectedBoxMonFromPcOrParty();
-    if (GetBoxMonData(boxmon, MON_DATA_IS_EGG))
+    if (GetBoxMonData(boxmon, MON_DATA_IS_EGG) || IsShadowBoxPokemon(boxmon)) // a Shadow Pokemon is never traded
         return SPECIES_NONE;
     enum Species species = GetBoxMonData(boxmon, MON_DATA_SPECIES);
     return species;

@@ -821,6 +821,12 @@ static u32 BattleTest_RandomWeightedArray(enum RandomTag tag, u32 sum, u32 n, co
         else
             return TRUE;
 
+    case RNG_SHADOW_HYPER_MODE:
+    case RNG_SHADOW_REVERSE_MODE:
+        // A Shadow Pokemon goes into Hyper or Reverse Mode only when a test asks for it (WITH_RNG, PASSES_RANDOMLY)
+        ASSUME(n == 2);
+        return FALSE;
+
     default:
         return RandomWeightedArrayDefaultValue(tag, n, weights, caller);
     }
@@ -2765,6 +2771,20 @@ void ShadowStage_(u32 sourceLine, u32 stage)
     AddShadowHeartGauge(DATA.currentMon, stage);
 }
 
+void ShadowHyperMode_(u32 sourceLine, bool32 on)
+{
+    INVALID_IF(!DATA.currentMon, "ShadowHyperMode outside of PLAYER/OPPONENT");
+    INVALID_IF(!IsShadowPokemon(DATA.currentMon), "ShadowHyperMode without Shadow");
+    SetShadowPokemonHyperMode(DATA.currentMon, on);
+}
+
+void ShadowReverseMode_(u32 sourceLine, bool32 on)
+{
+    INVALID_IF(!DATA.currentMon, "ShadowReverseMode outside of PLAYER/OPPONENT");
+    INVALID_IF(!IsShadowPokemon(DATA.currentMon), "ShadowReverseMode without Shadow");
+    SetShadowPokemonReverseMode(DATA.currentMon, on);
+}
+
 void Shiny_(u32 sourceLine, bool32 isShiny)
 {
     INVALID_IF(!DATA.currentMon, "Shiny outside of PLAYER/OPPONENT");
@@ -3399,6 +3419,15 @@ void SkipTurn(u32 sourceLine, struct BattlePokemon *battler)
 {
     enum BattlerId battlerId = battler - gBattleMons;
     INVALID_IF(DATA.turnState == TURN_CLOSED, "SKIP_TURN outside TURN");
+    DATA.actionBattlers |= 1 << battlerId;
+}
+
+void ShadowCall(u32 sourceLine, struct BattlePokemon *battler)
+{
+    enum BattlerId battlerId = battler - gBattleMons;
+    INVALID_IF(DATA.turnState == TURN_CLOSED, "SHADOW_CALL outside TURN");
+    INVALID_IF((battlerId & BIT_SIDE) != B_SIDE_PLAYER, "SHADOW_CALL for the opponent");
+    PushBattlerAction(sourceLine, battlerId, RECORDED_ACTION_TYPE, B_ACTION_SHADOW_CALL);
     DATA.actionBattlers |= 1 << battlerId;
 }
 

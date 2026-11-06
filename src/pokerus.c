@@ -43,7 +43,7 @@ void RandomlyGivePartyPokerus(void)
         for (u32 i = 0; i < PARTY_SIZE; i++)
         {
             mon = &gParties[B_TRAINER_PLAYER][i];
-            if (!GetMonData(mon, MON_DATA_SPECIES) || GetMonData(mon, MON_DATA_SHADOW_STATE))
+            if (!GetMonData(mon, MON_DATA_SPECIES) || GetMonData(mon, MON_DATA_HAS_SHADOW_STATE))
                 continue;
             else if (!GetConfig(POKERUS_INFECT_EGG) && GetMonData(mon, MON_DATA_IS_EGG))
                 continue;
@@ -89,7 +89,7 @@ bool32 IsPokerusInParty(void)
 
 bool32 CheckMonPokerus(struct Pokemon *mon)
 {
-    if (!GetConfig(POKERUS_ENABLED) || GetMonData(mon, MON_DATA_SHADOW_STATE))
+    if (!GetConfig(POKERUS_ENABLED) || GetMonData(mon, MON_DATA_HAS_SHADOW_STATE))
         return FALSE;
 
     if (GetMonData(mon, MON_DATA_POKERUS_DAYS_LEFT))
@@ -100,7 +100,7 @@ bool32 CheckMonPokerus(struct Pokemon *mon)
 
 bool32 CheckMonHasHadPokerus(struct Pokemon *mon)
 {
-    if (!GetConfig(POKERUS_ENABLED) || GetMonData(mon, MON_DATA_SHADOW_STATE))
+    if (!GetConfig(POKERUS_ENABLED) || GetMonData(mon, MON_DATA_HAS_SHADOW_STATE))
         return FALSE;
 
     if (GetMonData(mon, MON_DATA_POKERUS))
@@ -140,7 +140,7 @@ void UpdatePartyPokerusTime(u32 days)
     for (u32 i = 0; i < PARTY_SIZE; i++)
     {
         if (!GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_SPECIES)
-         || GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_SHADOW_STATE))
+         || GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_HAS_SHADOW_STATE))
             continue;
 
         u32 strain = GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_POKERUS_STRAIN);
@@ -175,7 +175,7 @@ static void SpreadPokerusToSpecificMon(struct Pokemon *mon, u32 strain, u32 days
 
 static bool32 CanReceivePokerusFromSpread(struct Pokemon *mon)
 {
-    if (GetMonData(mon, MON_DATA_SHADOW_STATE))
+    if (GetMonData(mon, MON_DATA_HAS_SHADOW_STATE))
         return FALSE;
     if (GetConfig(POKERUS_WEAK_VARIANT))
         return !GetMonData(mon, MON_DATA_POKERUS_STRAIN);
@@ -193,7 +193,7 @@ void PartySpreadPokerus(void)
     for (u32 i = 0; i < PARTY_SIZE; i++)
     {
         if (!GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_SPECIES)
-         || GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_SHADOW_STATE))
+         || GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_HAS_SHADOW_STATE))
             continue;
 
         u32 strain = GetMonData(&gParties[B_TRAINER_PLAYER][i], MON_DATA_POKERUS_STRAIN);

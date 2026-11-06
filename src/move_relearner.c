@@ -32,6 +32,7 @@
 #include "constants/party_menu.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
+#include "shadow_pokemon.h"
 #include "data/tutor_moves.h"
 
 // The different versions of hearts are selected using animation
@@ -1280,11 +1281,13 @@ bool32 CanBoxMonRelearnMoves(struct BoxPokemon *boxMon, enum MoveRelearnerStates
         return FALSE;
     if (GetBoxMonData(boxMon, MON_DATA_IS_EGG))
         return FALSE;
-    return sRelearnTypes[state].hasMoveToRelearn(boxMon);
+    return HasMoveToRelearn(boxMon, state);
 }
 
 bool32 HasMoveToRelearn(struct BoxPokemon *boxMon, enum MoveRelearnerStates state)
 {
+    if (IsShadowBoxPokemon(boxMon)) // a Shadow Pokemon relearns nothing until it is purified
+        return FALSE;
     return sRelearnTypes[state].hasMoveToRelearn(boxMon);
 }
 

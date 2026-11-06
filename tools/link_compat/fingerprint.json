@@ -5,7 +5,7 @@
       "battle_pokemon": "87c9493c08660a4918e2c7860272d2fdec6be099d4de6db9dffd00b7ab2eb89a",
       "battle_volatile_layout": "97a2e9f8b784ee61ec2bd24bcf40a59b847b8337ca355fc32b32a13febeedfe2",
       "battle_volatiles": "49f07bad9c2522920b83565e5e722d6d59ee9fad6ed46071c408c03ee0862742",
-      "box_pokemon": "7269b31bf963339c61fb6c4110c2bfd16099150dd668ac95a35229bdcce7e7f0",
+      "box_pokemon": "a740de78ae8c6df25d175dfa5e0a6c0bda875fd53a6220bcbdd0d818499ede65",
       "choose_move_packet": "480358c2cf5f949539066a6dee068ca69fb65fe1eed43e1771bf46cf1409d664",
       "contest_appeal_results": "d656f2a14e0d752229c00375183d44c9c388dc95ba54d8d9e7615ec5e889b951",
       "contest_excitement": "7e496719d5122779ffd3693e7a83095b50950b4e1bdb60ee9b47eceb91de3b06",
@@ -21,10 +21,10 @@
       "move_ids": "a8725a3f1bc98e41ebd89fbad10839c8ee735fa58a0cab01ea611f6ae7a66714",
       "multi_partner_menu_pokemon": "a2e1db655d39f4877ac6cb0a524bbf6cfc7d64451106a269a26a031ef1f27934",
       "pokemon": "4919c01c8d3d30427e95716b69d16f902368edd46462c3727b3bed7edde01868",
-      "pokemon_substruct_0": "649437ab820489a5e4c9aabd0789be371af1c3651134959df4c3b90048f4db30",
-      "pokemon_substruct_1": "3671aabef9355402c97d2d6be813922abc5a776a6f69dd60521bb2e9f7cd6698",
+      "pokemon_substruct_0": "f5e2b6f45d7d4d29e1eff5c22bdf2d55430d837814d1cffeb491f1963d99bbc1",
+      "pokemon_substruct_1": "08b6aaffd61442317125438685914ce48680a6245ac9a41eb501ace414877497",
       "pokemon_substruct_2": "ded16268f08b25fed3dd4568d66de24fc29e9a7603bfa38295c724243f82f993",
-      "pokemon_substruct_3": "8fc9410fda3a8019a896038102ec57ce9e3b25f6492979d6d0b60f5d99333f8e",
+      "pokemon_substruct_3": "702926200e976720ddf7c9b0b6feb214cf06b836b7617f503ef1fbf668c8bb12",
       "rfu_sio_info": "4e17aab73e7598ba30f973b91aeee13bb7bfdbd9c3c8467a3216da332123fda1",
       "species_ids": "2b0b9237a38b50a7846478f6a99a3b91713c82d36a88d625d5c482e488a53e23",
       "trainer_card": "11ba6cc5560db09f04f0b39f19e5889fcc703f89de165ed07ffa5b6d0c49936f"
@@ -42,10 +42,10 @@
       "union_room_activities": "9024f4f9a004353a2222be88d9d6768d42d00f21df05a589394ff353895686cf"
     }
   },
-  "data_layout_version": 9,
+  "data_layout_version": 10,
   "fingerprints": {
-    "combined": "b33aedcf1f78ffef67eea4c24ad77c774af86216bd22dbbc0415b7b765c38ac7",
-    "data_layout": "37887b8f543311a44d9c5f25faa8d01cfd1193ee1e898bb540a460550bb8ab5f",
+    "combined": "57121fb9700be37a5db6cc11c5d511bb3d2914fc034962b4ebc2cbbfd92e78df",
+    "data_layout": "0afec3d7fb149207673c5c6ed460efd3d871ede1090d63baf15bace9cdc83d14",
     "protocol": "aa4635a0875a0ea7823211376eb1477e28a508cc125efbc2111c41d1fccc46ee"
   },
   "link_compat_version": 15,

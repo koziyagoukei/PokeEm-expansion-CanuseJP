@@ -5734,6 +5734,69 @@ BattleScript_ShadowEncounter::
 	waitmessage B_WAIT_TIME_LONG
 	end3
 
+BattleScript_ShadowHyperModeStarted::
+	printstring STRINGID_SHADOWHYPERMODESTARTED
+	waitmessage B_WAIT_TIME_LONG
+	goto BattleScript_MoveEnd
+
+BattleScript_ShadowHyperModeDisobeys::
+	printfromtable gShadowHyperModeStringIds
+	waitmessage B_WAIT_TIME_LONG
+	goto BattleScript_MoveEnd
+
+BattleScript_ShadowHyperModeEatsBerry::
+	printstring STRINGID_SHADOWHYPEREATSBERRY
+	waitmessage B_WAIT_TIME_LONG
+	setbyte sBERRY_OVERRIDE, TRUE
+	consumeberry BS_ATTACKER, TRUE
+	setbyte sBERRY_OVERRIDE, FALSE
+	removeitem BS_ATTACKER
+	goto BattleScript_MoveEnd
+
+@ MULTISTRING_CHOOSER is SHADOW_HYPER_RETURN_TO_BALL, for the message when it cannot go back
+BattleScript_ShadowHyperModeReturnsToBall::
+	jumpifbattletype BATTLE_TYPE_ARENA, BattleScript_ShadowHyperModeDisobeys
+	jumpifcommanderactive BS_ATTACKER, BattleScript_ShadowHyperModeDisobeys
+	jumpifcantswitch SWITCH_IGNORE_ESCAPE_PREVENTION | BS_ATTACKER, BattleScript_ShadowHyperModeDisobeys
+	printstring STRINGID_SHADOWHYPERRETURNEDTOBALL
+	waitmessage B_WAIT_TIME_LONG
+	call BattleScript_MoveSwitchOpenPartyScreenRet
+	goto BattleScript_MoveEnd
+
+BattleScript_ShadowReverseModeStarted::
+	playanimation BS_ATTACKER, B_ANIM_SHADOW_AURA, NULL
+	printstring STRINGID_SHADOWREVERSEMODESTARTED
+	waitmessage B_WAIT_TIME_LONG
+	return
+
+BattleScript_ShadowReverseModeHurts::
+	printstring STRINGID_SHADOWREVERSEMODEHURTS
+	waitmessage B_WAIT_TIME_LONG
+	effectivenesssound
+	hitanimation BS_ATTACKER
+	goto BattleScript_DoTurnDmg
+
+@ The Call action (Pokemon XD), from HandleAction_ShadowCall
+BattleScript_ShadowCall::
+	printstring STRINGID_SHADOWCALL
+	waitmessage B_WAIT_TIME_LONG
+	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, B_MSG_SHADOW_CALL_CALMED, BattleScript_ShadowCallCalmed
+	jumpifbyte CMP_EQUAL, cMULTISTRING_CHOOSER, B_MSG_SHADOW_CALL_WOKE_UP, BattleScript_ShadowCallWokeUp
+	printstring STRINGID_SHADOWCALLANSWERED
+	waitmessage B_WAIT_TIME_LONG
+	trybattlerstatchange BS_ATTACKER, STAT_CHANGE_NO_FLAGS
+	end
+BattleScript_ShadowCallCalmed:
+	printstring STRINGID_SHADOWCALLCALMED
+	waitmessage B_WAIT_TIME_LONG
+	end
+BattleScript_ShadowCallWokeUp:
+	curestatus BS_ATTACKER
+	printstring STRINGID_PKMNWOKEUP
+	waitmessage B_WAIT_TIME_LONG
+	updatestatusicon BS_ATTACKER
+	end
+
 BattleScript_TotemBoost::
 	playanimation BS_ATTACKER, B_ANIM_TOTEM_FLARE, NULL
 	printstring STRINGID_AURAFLAREDTOLIFE

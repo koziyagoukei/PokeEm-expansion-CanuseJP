@@ -266,6 +266,7 @@
 #define VAR_GIFT_UNUSED_6                                0x40E3 // Var is written to, but never read
 #define VAR_GIFT_UNUSED_7                                0x40E4 // var is written to, but never read
 #define VAR_UNUSED_0x40E5                                0x40E5 // Unused Var
+#define VAR_SHADOW_STEP_COUNTER                          VAR_UNUSED_0x40E5 // Steps toward the next 256-step heart gauge drop (src/shadow_pokemon.c)
 
 // Expansion feature test vars.
 // These aliases keep the original unused var IDs intact while making debug

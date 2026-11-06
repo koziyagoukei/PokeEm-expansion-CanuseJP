@@ -52,6 +52,7 @@ struct BattleCalcValues
 };
 
 void HandleAction_ThrowBall(void);
+void HandleAction_ShadowCall(void);
 enum BattleWeather GetBattleWeather(u32 weather);
 bool32 EndOrContinueWeather(void);
 enum DamageCategory GetReflectDamageMoveDamageCategory(enum BattlerId battler, enum Move move);

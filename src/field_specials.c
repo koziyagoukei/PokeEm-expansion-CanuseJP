@@ -86,6 +86,7 @@
 #include "battle_util.h"
 #include "naming_screen.h"
 #include "chooseboxmon.h"
+#include "shadow_pokemon.h"
 
 #define TAG_ITEM_ICON 5500
 
@@ -4671,6 +4672,7 @@ static u16 Teishokuya_TryMakeMonShiny(u16 partyIndex)
     {
         SetMonData(&gParties[B_TRAINER_PLAYER][partyIndex], MON_DATA_IS_SHINY, &isShiny);
         gSaveBlock2Ptr->frontier.battlePoints -= TEISHOKUYA_SHINY_MEAL_COST;
+        ShadowPokemon_OnMeal(&gParties[B_TRAINER_PLAYER][partyIndex]);
     }
     return result;
 }
@@ -5149,6 +5151,7 @@ void Special_TeishokuyaIncreasePartyFriendship(void)
         if (friendship > MAX_FRIENDSHIP)
             friendship = MAX_FRIENDSHIP;
         SetMonData(mon, MON_DATA_FRIENDSHIP, &friendship);
+        ShadowPokemon_OnMeal(mon); // a good meal opens a Shadow Pokemon's heart like a scent
     }
 }
 

@@ -38,6 +38,7 @@ enum EndTurnResolutionOrder
     ENDTURN_YAWN,
     ENDTURN_PERISH_SONG,
     ENDTURN_ROOST,
+    ENDTURN_SHADOW_REVERSE, // Reverse Mode of the player's Shadow Pokemon (Pokemon XD)
     ENDTURN_SEND_OUT_REPLACEMENTS_3, // For Emergency Exit/Wimp Out activations
     ENDTURN_SECOND_EVENT_BLOCK,
     ENDTURN_TRICK_ROOM,

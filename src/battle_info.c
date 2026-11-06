@@ -15,6 +15,7 @@
 #include "palette.h"
 #include "pokemon.h"
 #include "pokemon_icon.h"
+#include "shadow_pokemon.h"
 #include "sound.h"
 #include "sprite.h"
 #include "string_util.h"
@@ -65,6 +66,7 @@ static const u16 sPalette[16] =
 {
     RGB(30, 31, 31), RGB(3, 4, 4), RGB(1, 13, 6), RGB(23, 4, 4),
     RGB(17, 20, 20), RGB(24, 27, 28), RGB(12, 15, 16), RGB(30, 31, 31),
+    RGB(15, 6, 21), // the heart gauge of a Shadow Pokemon
 };
 
 // Keep these small UI labels uncompressed so opening the panel needs no extra
@@ -318,6 +320,30 @@ static void SetTilePalette(u32 x, u32 y, u32 width, u32 height, u32 palette)
         }
 }
 
+// The heart gauge of a Shadow Pokemon (provisional look): Pokemon XD's five bars, each emptying from the right as the
+// heart opens. A bar with anything left shows at least a sliver.
+#define HEART_BAR_WIDTH  18
+#define HEART_BAR_HEIGHT 4
+static void DrawShadowHeartGauge(struct Pokemon *mon, u32 x, u32 y)
+{
+    u32 gauge = GetShadowGauge(mon), max = GetShadowGaugeMax(mon);
+
+    for (u32 bar = 0; bar < SHADOW_GAUGE_BARS; bar++)
+    {
+        u32 barX = x + bar * (HEART_BAR_WIDTH + 1);
+        u32 lo = max * bar / SHADOW_GAUGE_BARS, hi = max * (bar + 1) / SHADOW_GAUGE_BARS;
+        u32 fill = 0;
+
+        if (gauge >= hi)
+            fill = HEART_BAR_WIDTH;
+        else if (gauge > lo)
+            fill = max((gauge - lo) * HEART_BAR_WIDTH / (hi - lo), 1u);
+        FillWindowPixelRect(sView->window, PIXEL_FILL(4), barX, y, HEART_BAR_WIDTH, HEART_BAR_HEIGHT);
+        if (fill != 0)
+            FillWindowPixelRect(sView->window, PIXEL_FILL(8), barX, y, fill, HEART_BAR_HEIGHT);
+    }
+}
+
 static void DrawMonDetails(u32 column)
 {
     enum BattlerId battler = sView->battlers[column];
@@ -385,6 +411,10 @@ static void DrawMonDetails(u32 column)
         BlitBitmapRectToWindow(sView->window, sStatusLabels + statusFrame * 128, 0, 0, 32, 8, x + 72, 72, 32, 8);
         SetTilePalette(x + 72, 72, 32, 8, 9);
     }
+
+    // Under the icon, between it and the stat changes. An unbroken Illusion hides it.
+    if (illusion == NULL && IsBattlerShadowPokemon(battler))
+        DrawShadowHeartGauge(GetBattlerMon(battler), x + 8, 82);
 }
 
 static void PrintNickname(u8 *name, u32 x)

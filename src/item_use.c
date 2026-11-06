@@ -44,6 +44,7 @@
 #include "task.h"
 #include "text.h"
 #include "vs_seeker.h"
+#include "shadow_pokemon.h"
 #include "constants/event_bg.h"
 #include "constants/event_objects.h"
 #include "constants/item_effects.h"
@@ -1287,6 +1288,20 @@ bool32 CannotUseItemsInBattle(enum Item itemId, struct Pokemon *mon)
     {
         if (gBattleMons[battlerTarget].volatiles.embargoTimer)
             return TRUE;
+    }
+
+    // No item works on a Shadow Pokemon in Hyper Mode (Colosseum) or Reverse Mode (Pokemon XD): call it back first
+    {
+        struct Pokemon *shadowTarget = mon;
+        if (shadowTarget == NULL
+         && (battleUsage == EFFECT_ITEM_INCREASE_STAT || battleUsage == EFFECT_ITEM_SET_FOCUS_ENERGY
+          || battleUsage == EFFECT_ITEM_INCREASE_ALL_STATS))
+            shadowTarget = GetBattlerMon(gBattlerInMenuId);
+        if (shadowTarget != NULL && (IsShadowPokemonInHyperMode(shadowTarget) || IsShadowPokemonInReverseMode(shadowTarget)))
+        {
+            StringExpandPlaceholders(gStringVar4, gText_WontHaveEffect);
+            return TRUE;
+        }
     }
 
     // battleUsage checks

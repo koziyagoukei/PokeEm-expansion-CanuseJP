@@ -3,6 +3,7 @@
 #include "battle.h"
 #include "battle_arena.h"
 #include "battle_environment.h"
+#include "battle_gimmick_extra.h"
 #include "battle_hold_effects.h"
 #include "battle_ai_record.h"
 #include "battle_util.h"
@@ -198,10 +199,139 @@ static enum CancelerResult CancelerAsleepOrFrozen(struct BattleCalcValues *cv)
     return result;
 }
 
+static void SetSelfHitDamage(enum BattlerId battler)
+{
+    gBattlerTarget = battler;
+    struct DamageContext dmgCtx = {0};
+    dmgCtx.battlerAtk = dmgCtx.battlerDef = battler;
+    dmgCtx.move = dmgCtx.chosenMove = MOVE_NONE;
+    dmgCtx.baseMove = gBattleStruct->baseMove;
+    dmgCtx.moveType = TYPE_MYSTERY;
+    dmgCtx.isCrit = FALSE;
+    dmgCtx.randomFactor = FALSE;
+    dmgCtx.updateFlags = TRUE;
+    dmgCtx.isSelfInflicted = TRUE;
+    dmgCtx.fixedBasePower = 40;
+    gBattleStruct->moveDamage[battler] = CalculateMoveDamage(&dmgCtx);
+}
+
+// Hyper Mode (Pokemon Colosseum), for the player's own Shadow Pokemon. Told to use a Shadow move, a Pokemon may go
+// into Hyper Mode instead and do nothing that turn. In Hyper Mode it uses its Shadow moves as told, but told to use
+// another move it may do something else, by its nature. It lasts until it is called back, faints or is purified.
+static bool32 TryShadowHyperModeCanceler(struct BattleCalcValues *cv, enum CancelerResult *result)
+{
+    enum BattlerId battler = cv->battlerAtk;
+    struct Pokemon *mon;
+    u32 limitations;
+    bool32 toldShadowMove;
+
+    if (cv->move == MOVE_STRUGGLE || gSpecialStatuses[battler].dancerUsedMove || !IsPlayerShadowBattler(battler))
+        return FALSE;
+
+    // The move in the chosen slot: a Dynamaxed Pokemon told to use a Shadow move uses its Max Move
+    toldShadowMove = IsShadowMove(cv->move) || IsShadowMove(gBattleMons[battler].moves[gCurrMovePos]);
+    mon = GetBattlerMon(battler);
+    if (!IsShadowPokemonInHyperMode(mon))
+    {
+        if (!toldShadowMove || !RandomPercentage(RNG_SHADOW_HYPER_MODE, GetShadowHyperModeChance(mon)))
+            return FALSE;
+        SetShadowPokemonHyperMode(mon, TRUE);
+        gBattlescriptCurrInstr = BattleScript_ShadowHyperModeStarted;
+        gBattleStruct->moveResultFlags[cv->battlerDef] |= MOVE_RESULT_MISSED;
+        *result = CANCELER_RESULT_FAILURE;
+        return TRUE;
+    }
+
+    if (toldShadowMove)
+        return FALSE;
+
+    enum ShadowHyperAction action = GetShadowHyperModeAction(mon);
+    if (action == SHADOW_HYPER_OBEY)
+        return FALSE;
+
+    // Do not waste the Z-Move of a Pokemon that does not do as told
+    if (GetActiveGimmick(battler) == GIMMICK_Z_MOVE)
+    {
+        ClearGimmickAsActivated(battler, GIMMICK_Z_MOVE);
+        SetActiveGimmick(battler, GIMMICK_NONE);
+    }
+
+    if (action == SHADOW_HYPER_RANDOM_MOVE)
+    {
+        limitations = CheckMoveLimitations(battler, 1u << gCurrMovePos, MOVE_LIMITATIONS_ALL);
+        if (limitations == ALL_MOVES_MASK)
+        {
+            action = SHADOW_HYPER_DO_NOTHING;
+        }
+        else
+        {
+            // One of the other moves it can use, each as likely
+            u32 usable = 0, pick;
+            for (u32 slot = 0; slot < MAX_MON_MOVES; slot++)
+                usable += !((1u << slot) & limitations);
+            pick = RandomUniform(RNG_SHADOW_HYPER_RANDOM_MOVE, 0, usable - 1);
+            for (gCurrMovePos = 0; gCurrMovePos < MAX_MON_MOVES; gCurrMovePos++)
+            {
+                if (!((1u << gCurrMovePos) & limitations) && pick-- == 0)
+                    break;
+            }
+            gChosenMovePos = gCurrMovePos;
+            gCurrentMove = gCalledMove = gBattleMons[battler].moves[gCurrMovePos];
+            gBattlescriptCurrInstr = GetMoveBattleScript(gCalledMove);
+            BattleScriptCall(BattleScript_IgnoresAndUsesRandomMove);
+            gBattlerTarget = GetBattleMoveTarget(gCalledMove, TARGET_NONE);
+            *result = CANCELER_RESULT_RUN_SCRIPT_AND_INCREMENT;
+            return TRUE;
+        }
+    }
+
+    switch (action)
+    {
+    case SHADOW_HYPER_HIT_SELF:
+        SetSelfHitDamage(battler);
+        gBattlescriptCurrInstr = BattleScript_IgnoresAndHitsItself;
+        break;
+    case SHADOW_HYPER_DO_NOTHING:
+        gBattleCommunication[MULTISTRING_CHOOSER] = MOD(Random(), NUM_LOAF_STRINGS);
+        gBattlescriptCurrInstr = BattleScript_MoveUsedLoafingAround;
+        gBattleStruct->moveResultFlags[cv->battlerDef] |= MOVE_RESULT_MISSED;
+        break;
+    case SHADOW_HYPER_USE_ITEM:
+        // It eats the Berry it holds; with any other item (or none) it only plays with it
+        gBattleCommunication[MULTISTRING_CHOOSER] = action;
+        if (GetItemPocket(gBattleMons[battler].item) == POCKET_BERRIES && GetBattlerHoldEffect(battler) != HOLD_EFFECT_NONE)
+        {
+            gLastUsedItem = gBattleMons[battler].item;
+            gBattlescriptCurrInstr = BattleScript_ShadowHyperModeEatsBerry;
+        }
+        else
+            gBattlescriptCurrInstr = BattleScript_ShadowHyperModeDisobeys;
+        gBattleStruct->moveResultFlags[cv->battlerDef] |= MOVE_RESULT_MISSED;
+        break;
+    case SHADOW_HYPER_RETURN_TO_BALL:
+        // It goes back to its Poke Ball and the player sends out another; with none to send out it only tries
+        gBattleCommunication[MULTISTRING_CHOOSER] = action;
+        gBattlescriptCurrInstr = BattleScript_ShadowHyperModeReturnsToBall;
+        gBattleStruct->moveResultFlags[cv->battlerDef] |= MOVE_RESULT_MISSED;
+        break;
+    default: // It goes for a Trainer: nothing happens
+        gBattleCommunication[MULTISTRING_CHOOSER] = action;
+        gBattlescriptCurrInstr = BattleScript_ShadowHyperModeDisobeys;
+        gBattleStruct->moveResultFlags[cv->battlerDef] |= MOVE_RESULT_MISSED;
+        break;
+    }
+    *result = CANCELER_RESULT_FAILURE;
+    return TRUE;
+}
+
 static enum CancelerResult CancelerObedience(struct BattleCalcValues *cv)
 {
     if (!gBattleMons[cv->battlerAtk].volatiles.multipleTurns)
     {
+        enum CancelerResult shadowResult;
+        if (TryShadowHyperModeCanceler(cv, &shadowResult))
+            return shadowResult;
+
         enum Obedience obedienceResult = GetAttackerObedienceForAction();
         switch (obedienceResult)
         {
@@ -215,18 +345,7 @@ static enum CancelerResult CancelerObedience(struct BattleCalcValues *cv)
             gBattleStruct->moveResultFlags[cv->battlerDef] |= MOVE_RESULT_MISSED;
             return CANCELER_RESULT_FAILURE;
         case DISOBEYS_HITS_SELF:
-            gBattlerTarget = cv->battlerAtk;
-            struct DamageContext dmgCtx = {0};
-            dmgCtx.battlerAtk = dmgCtx.battlerDef = cv->battlerAtk;
-            dmgCtx.move = dmgCtx.chosenMove = MOVE_NONE;
-            dmgCtx.baseMove = gBattleStruct->baseMove;
-            dmgCtx.moveType = TYPE_MYSTERY;
-            dmgCtx.isCrit = FALSE;
-            dmgCtx.randomFactor = FALSE;
-            dmgCtx.updateFlags = TRUE;
-            dmgCtx.isSelfInflicted = TRUE;
-            dmgCtx.fixedBasePower = 40;
-            gBattleStruct->moveDamage[cv->battlerAtk] = CalculateMoveDamage(&dmgCtx);
+            SetSelfHitDamage(cv->battlerAtk);
             gBattlescriptCurrInstr = BattleScript_IgnoresAndHitsItself;
             return CANCELER_RESULT_FAILURE; // Move doesn't fail but mon hits itself
         case DISOBEYS_FALL_ASLEEP:
@@ -1044,7 +1163,12 @@ static enum CancelerResult CancelerPPDeduction(struct BattleCalcValues *cv)
 
     // Shadow moves use no PP (Pokemon XD).
     if (IsShadowMove(gBattleMons[cv->battlerAtk].moves[movePosition]))
+    {
         ppToDeduct = 0;
+        // Using one may send the player's Shadow Pokemon into Reverse Mode at the end of the turn (Pokemon XD).
+        if (IsPlayerShadowBattler(cv->battlerAtk))
+            gBattleStruct->battlerState[cv->battlerAtk].usedShadowMove = TRUE;
+    }
 
     if (gBattleMons[cv->battlerAtk].pp[movePosition] > ppToDeduct)
         gBattleMons[cv->battlerAtk].pp[movePosition] -= ppToDeduct;
@@ -1052,8 +1176,6 @@ static enum CancelerResult CancelerPPDeduction(struct BattleCalcValues *cv)
         gBattleMons[cv->battlerAtk].pp[movePosition] = 0;
 
     gLastMoves[cv->battlerAtk] = gChosenMove;
-
-    TryEnterShadowHyperMode(cv->battlerAtk, cv->move);
 
     if (MOVE_IS_PERMANENT(cv->battlerAtk, movePosition))
     {

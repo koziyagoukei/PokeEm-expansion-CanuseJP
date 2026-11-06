@@ -757,3 +757,5 @@ gSpecials::
 	def_special Special_ShadowPokemon_Purify
 	def_special Special_ShadowPokemon_Mark
 	def_special Special_ShadowPokemon_MarkWild
+	def_special Special_ShadowPokemon_StartPurificationScene
+	def_special Special_GetPartyRoamerShadowState

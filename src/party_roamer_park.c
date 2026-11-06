@@ -13,6 +13,7 @@
 #include "party_bath_expansion.h"
 #include "pokemon.h"
 #include "random.h"
+#include "shadow_pokemon.h"
 #include "string_util.h"
 #include "task.h"
 #include "constants/battle.h"
@@ -23,6 +24,7 @@
 #include "constants/map_groups.h"
 #include "constants/pokemon.h"
 #include "constants/rgb.h"
+#include "constants/shadow_pokemon.h"
 #include "constants/trainer_types.h"
 
 #define PARTY_ROAMER_LOCAL_ID_START 1
@@ -295,6 +297,7 @@ static void ApplyPartyBathTimeEffects(void)
                 IncreasePartyBathStat(mon, MON_DATA_SHEEN, MAX_SHEEN, 1);
         }
     }
+    ShadowPokemon_OnBathTick();
 }
 
 static void Task_PartyBathTimeEffects(u8 taskId)
@@ -369,6 +372,32 @@ void Special_RefreshPartyRoamerMons(void)
             ObjectEventSetGraphicsId(&gObjectEvents[objectEventId], VarGet(VAR_OBJ_GFX_ID_0 + i));
         }
     }
+}
+
+// The Pokemon talked to in the camp, as a Shadow Pokemon (SHADOW_ROAMER_*). For a Shadow Pokemon, VAR_0x8004 is its
+// party slot and STR_VAR_1 its nickname. Pokemon XD purifies one with four other Pokemon round it.
+u16 Special_GetPartyRoamerShadowState(void)
+{
+    u16 localId = gSpecialVar_LastTalked;
+    struct Pokemon *mon;
+    u32 slot;
+
+    gSpecialVar_0x8004 = PARTY_SIZE;
+    if (!IsPartyRoamerLocalId(localId))
+        return SHADOW_ROAMER_NORMAL;
+    slot = GetPartySlotFromRoamerLocalId(localId);
+    mon = &gParties[B_TRAINER_PLAYER][slot];
+    if (!IsShadowPokemon(mon))
+        return SHADOW_ROAMER_NORMAL;
+
+    gSpecialVar_0x8004 = slot;
+    GetMonData(mon, MON_DATA_NICKNAME, gStringVar1);
+    StringGet_Nickname(gStringVar1);
+    if (!CanPurifyShadowPokemon(mon))
+        return SHADOW_ROAMER_CLOSED;
+    if (CountShadowPurifyPartners(slot) < SHADOW_PURIFY_PARTNERS)
+        return SHADOW_ROAMER_NEEDS_PARTNERS;
+    return SHADOW_ROAMER_CAN_PURIFY;
 }
 
 void Special_BufferPartyRoamerMessage(void)

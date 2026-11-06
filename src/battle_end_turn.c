@@ -1053,6 +1053,40 @@ static bool32 HandleEndTurnRoost(enum BattlerId battler)
     return effect;
 }
 
+// Reverse Mode (Pokemon XD): a Pokemon in it loses 1/16 of its max HP each turn; one that used a Shadow move this turn
+// may go into it (by its aggression and how much of its heart gauge is left). It lasts after the battle, until the
+// Pokemon is called back, faints or is purified.
+static bool32 HandleEndTurnShadowReverse(enum BattlerId battler)
+{
+    bool32 effect = FALSE;
+    bool32 usedShadowMove = gBattleStruct->battlerState[battler].usedShadowMove;
+
+    gBattleStruct->eventState.endTurnBattler++;
+    gBattleStruct->battlerState[battler].usedShadowMove = FALSE;
+
+    if (!IsBattlerAlive(battler) || !IsPlayerShadowBattler(battler))
+        return effect;
+
+    struct Pokemon *mon = GetBattlerMon(battler);
+    if (IsShadowPokemonInReverseMode(mon))
+    {
+        if (!IsAbilityAndRecord(battler, GetBattlerAbility(battler), ABILITY_MAGIC_GUARD))
+        {
+            SetPassiveDamageAmount(battler, GetNonDynamaxMaxHP(battler) / 16);
+            BattleScriptCall(BattleScript_ShadowReverseModeHurts);
+            effect = TRUE;
+        }
+    }
+    else if (usedShadowMove && RandomPercentage(RNG_SHADOW_REVERSE_MODE, GetShadowReverseModeChance(mon)))
+    {
+        SetShadowPokemonReverseMode(mon, TRUE);
+        BattleScriptCall(BattleScript_ShadowReverseModeStarted);
+        effect = TRUE;
+    }
+
+    return effect;
+}
+
 static bool32 HandleEndTurnSecondEventBlock(enum BattlerId battler)
 {
     bool32 effect = FALSE;
@@ -1612,6 +1646,7 @@ static bool32 (*const sEndTurnEffectHandlers[])(enum BattlerId battler) =
     [ENDTURN_YAWN] = HandleEndTurnYawn,
     [ENDTURN_PERISH_SONG] = HandleEndTurnPerishSong,
     [ENDTURN_ROOST] = HandleEndTurnRoost,
+    [ENDTURN_SHADOW_REVERSE] = HandleEndTurnShadowReverse,
     [ENDTURN_SEND_OUT_REPLACEMENTS_3] = HandleEndTurnSendOutReplacements,
     [ENDTURN_SECOND_EVENT_BLOCK] = HandleEndTurnSecondEventBlock,
     [ENDTURN_TRICK_ROOM] = HandleEndTurnTrickRoom,

@@ -49,6 +49,7 @@
 #include "recorded_battle.h"
 #include "regions.h"
 #include "rtc.h"
+#include "shadow_pokemon.h"
 #include "sound.h"
 #include "string_util.h"
 #include "strings.h"
@@ -2253,8 +2254,26 @@ u32 GetBoxMonData3(struct BoxPokemon *boxMon, s32 field, u8 *data)
         case MON_DATA_POKERUS:
             retVal = GetSubstruct3(boxMon)->pokerus;
             break;
-        case MON_DATA_SHADOW_STATE:
-            retVal = GetSubstruct3(boxMon)->hasShadowState ? GetSubstruct3(boxMon)->pokerus : 0;
+        case MON_DATA_HAS_SHADOW_STATE:
+            retVal = GetSubstruct3(boxMon)->hasShadowState;
+            break;
+        case MON_DATA_SHADOW_GAUGE:
+            if (GetSubstruct3(boxMon)->hasShadowState)
+                retVal = GetSubstruct3(boxMon)->pokerus | (GetSubstruct0(boxMon)->shadowGaugeHigh << 8);
+            break;
+        case MON_DATA_SHADOW_HELD_EXP:
+            if (GetSubstruct3(boxMon)->hasShadowState)
+                retVal = GetSubstruct0(boxMon)->shadowHeldExp0
+                       | (GetSubstruct0(boxMon)->shadowHeldExp1 << 3)
+                       | (GetSubstruct1(boxMon)->shadowHeldExp2 << 5)
+                       | (GetSubstruct1(boxMon)->shadowHeldExp3 << 10)
+                       | (GetSubstruct3(boxMon)->shadowHeldExp4 << 13);
+            break;
+        case MON_DATA_SHADOW_HYPER_MODE:
+            retVal = GetSubstruct3(boxMon)->hasShadowState && boxMon->shadowHyperMode;
+            break;
+        case MON_DATA_SHADOW_REVERSE_MODE:
+            retVal = GetSubstruct3(boxMon)->hasShadowState && boxMon->shadowReverseMode;
             break;
         case MON_DATA_POKERUS_STRAIN:
             retVal = ((GetSubstruct3(boxMon)->pokerus & 0xF0) >> 4);
@@ -2456,7 +2475,7 @@ u32 GetBoxMonData3(struct BoxPokemon *boxMon, s32 field, u8 *data)
             retVal = GetSubstruct1(boxMon)->hyperTrainedSpDefense;
             break;
         case MON_DATA_IS_SHADOW:
-            retVal = GetSubstruct3(boxMon)->isShadow;
+            retVal = GetSubstruct3(boxMon)->hasShadowState ? 0 : GetSubstruct3(boxMon)->shadowHeldExp4;
             break;
         case MON_DATA_DYNAMAX_LEVEL:
             retVal = GetSubstruct3(boxMon)->dynamaxLevel;
@@ -2758,9 +2777,33 @@ void SetBoxMonData(struct BoxPokemon *boxMon, s32 field, const void *dataArg)
             if (!GetSubstruct3(boxMon)->hasShadowState)
                 SET8(GetSubstruct3(boxMon)->pokerus);
             break;
-        case MON_DATA_SHADOW_STATE:
-            GetSubstruct3(boxMon)->hasShadowState = TRUE;
-            SET8(GetSubstruct3(boxMon)->pokerus);
+        case MON_DATA_HAS_SHADOW_STATE:
+            SET8(GetSubstruct3(boxMon)->hasShadowState);
+            break;
+        case MON_DATA_SHADOW_GAUGE:
+        {
+            u32 gauge;
+            SET16(gauge);
+            GetSubstruct3(boxMon)->pokerus = gauge & 0xFF;
+            GetSubstruct0(boxMon)->shadowGaugeHigh = (gauge >> 8) & 0x3F;
+            break;
+        }
+        case MON_DATA_SHADOW_HELD_EXP:
+        {
+            u32 held;
+            SET16(held);
+            GetSubstruct0(boxMon)->shadowHeldExp0 = held & 0x7;
+            GetSubstruct0(boxMon)->shadowHeldExp1 = (held >> 3) & 0x3;
+            GetSubstruct1(boxMon)->shadowHeldExp2 = (held >> 5) & 0x1F;
+            GetSubstruct1(boxMon)->shadowHeldExp3 = (held >> 10) & 0x7;
+            GetSubstruct3(boxMon)->shadowHeldExp4 = (held >> 13) & 0x1;
+            break;
+        }
+        case MON_DATA_SHADOW_HYPER_MODE:
+            SET8(boxMon->shadowHyperMode);
+            break;
+        case MON_DATA_SHADOW_REVERSE_MODE:
+            SET8(boxMon->shadowReverseMode);
             break;
         case MON_DATA_POKERUS_STRAIN:
             if (!GetSubstruct3(boxMon)->hasShadowState)
@@ -2896,7 +2939,8 @@ void SetBoxMonData(struct BoxPokemon *boxMon, s32 field, const void *dataArg)
             SET8(GetSubstruct1(boxMon)->hyperTrainedSpDefense);
             break;
         case MON_DATA_IS_SHADOW:
-            SET8(GetSubstruct3(boxMon)->isShadow);
+            if (!GetSubstruct3(boxMon)->hasShadowState)
+                SET8(GetSubstruct3(boxMon)->shadowHeldExp4);
             break;
         case MON_DATA_DYNAMAX_LEVEL:
             SET8(GetSubstruct3(boxMon)->dynamaxLevel);
@@ -4495,6 +4539,10 @@ enum Species GetEvolutionTargetSpecies(struct Pokemon *mon, enum EvolutionMode m
     const struct Evolution *evolutions = GetSpeciesEvolutions(species);
 
     if (evolutions == NULL)
+        return SPECIES_NONE;
+
+    // A Shadow Pokemon cannot evolve until it is purified (Colosseum / XD)
+    if (IsShadowPokemon(mon))
         return SPECIES_NONE;
 
     holdEffect = GetItemHoldEffect(heldItem);

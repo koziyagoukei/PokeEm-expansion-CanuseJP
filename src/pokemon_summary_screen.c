@@ -3580,6 +3580,11 @@ static void PrintMonAbilityName(void)
         label = COMPOUND_STRING("{JPN}ダーク");
         break;
     }
+    // Hyper and Reverse Mode last after battle, so the summary tells them
+    if (IsShadowPokemonInHyperMode(&sMonSummaryScreen->currentMon))
+        label = COMPOUND_STRING("{JPN}ハイパー");
+    else if (IsShadowPokemonInReverseMode(&sMonSummaryScreen->currentMon))
+        label = COMPOUND_STRING("{JPN}リバース");
 
     if (label == NULL)
         PrintTextOnWindow(windowId, gAbilitiesInfo[ability].name, 0, 1, 0, 1);
@@ -4847,8 +4852,7 @@ static inline bool32 ShouldShowRename(void)
          && !sMonSummaryScreen->summary.isEgg
          && sMonSummaryScreen->mode != SUMMARY_MODE_BOX_CURSOR
          && !InBattleFactory()
-         && !InSlateportBattleTent()
-         && GetPlayerIDAsU32() == sMonSummaryScreen->summary.OTID);
+         && !InSlateportBattleTent());
 }
 
 static inline bool32 ShouldShowIvEvPrompt(void)

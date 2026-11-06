@@ -398,6 +398,11 @@
  * Thrash.
  *     SKIP_TURN(player);
  *
+ * SHADOW_CALL(battler)
+ * Used when the player's Shadow Pokemon is called out to (R on the action
+ * menu, Pokemon XD's Call).
+ *     SHADOW_CALL(player);
+ *
  * SEND_OUT(battler, partyIndex)
  * Used when the battler chooses to switch to another Pokemon but not
  * via Switch, e.g. after fainting or due to a U-turn.
@@ -1060,6 +1065,8 @@ struct moveWithPP {
 #define TeraType(teraType) TeraType_(__LINE__, teraType)
 #define Shadow(isShadow) Shadow_(__LINE__, isShadow)
 #define ShadowStage(stage) ShadowStage_(__LINE__, stage)
+#define ShadowHyperMode(on) ShadowHyperMode_(__LINE__, on)
+#define ShadowReverseMode(on) ShadowReverseMode_(__LINE__, on)
 #define Shiny(isShiny) Shiny_(__LINE__, isShiny)
 #define Environment(environment) Environment_(__LINE__, environment)
 
@@ -1105,6 +1112,8 @@ void GigantamaxFactor_(u32 sourceLine, bool32 gigantamaxFactor);
 void TeraType_(u32 sourceLine, enum Type teraType);
 void Shadow_(u32 sourceLine, bool32 isShadow);
 void ShadowStage_(u32 sourceLine, u32 stage);
+void ShadowHyperMode_(u32 sourceLine, bool32 on);
+void ShadowReverseMode_(u32 sourceLine, bool32 on);
 void Shiny_(u32 sourceLine, bool32 isShiny);
 void Environment_(u32 sourceLine, u32 environment);
 
@@ -1158,6 +1167,7 @@ enum { TURN_CLOSED, TURN_OPEN, TURN_CLOSING };
 #define FORCED_MOVE(battler) ForcedMove(__LINE__, battler)
 #define SWITCH(battler, partyIndex) Switch(__LINE__, battler, partyIndex)
 #define SKIP_TURN(battler) SkipTurn(__LINE__, battler)
+#define SHADOW_CALL(battler) ShadowCall(__LINE__, battler)
 #define SEND_OUT(battler, partyIndex) SendOut(__LINE__, battler, partyIndex)
 #define USE_ITEM(battler, ...) UseItem(__LINE__, battler, (struct ItemContext) { R_APPEND_TRUE(__VA_ARGS__) })
 #define GIVE_PLAYER_ITEM(item, quantity) GivePlayerItem(__LINE__, item, quantity)
@@ -1215,6 +1225,7 @@ void Score(u32 sourceLine, struct BattlePokemon *battler, u32 cmp, bool32 toValu
 void ForcedMove(u32 sourceLine, struct BattlePokemon *);
 void Switch(u32 sourceLine, struct BattlePokemon *, u32 partyIndex);
 void SkipTurn(u32 sourceLine, struct BattlePokemon *);
+void ShadowCall(u32 sourceLine, struct BattlePokemon *);
 void UseItem(u32 sourceLine, struct BattlePokemon *, struct ItemContext);
 void SendOut(u32 sourceLine, struct BattlePokemon *, u32 partyIndex);
 void GivePlayerItem(u32 sourceLine, enum Item, u32 quantity);
