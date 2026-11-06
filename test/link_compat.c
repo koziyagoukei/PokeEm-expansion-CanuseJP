@@ -8,7 +8,8 @@ static struct LinkPlayer CompatibleLinkPlayer(void)
     return (struct LinkPlayer)
     {
         .lp_field_2 = LINK_PROJECT_ID,
-        .neverRead = LINK_PACKED_VERSIONS,
+        .version = 0x4000 | VERSION_EMERALD | LINK_PACKED_COMPAT_VERSION,
+        .neverRead = LINK_DATA_LAYOUT_VERSION,
     };
 }
 
@@ -43,16 +44,14 @@ TEST("Link compatibility rejects a different protocol version")
     struct LinkPlayer player = CompatibleLinkPlayer();
     u8 otherVersion = (LINK_COMPAT_VERSION ^ 0x1) & LINK_COMPAT_VERSION_MASK;
 
-    player.neverRead = (otherVersion << LINK_COMPAT_VERSION_SHIFT) | LINK_DATA_LAYOUT_VERSION;
+    player.version = 0x4000 | VERSION_EMERALD | (otherVersion << LINK_COMPAT_VERSION_SHIFT);
     EXPECT_EQ(GetLinkPlayerCompatibilityStatus(&player), LINK_COMPATIBILITY_VERSION_MISMATCH);
 }
 
 TEST("Link compatibility rejects a different data layout version")
 {
     struct LinkPlayer player = CompatibleLinkPlayer();
-    u8 otherVersion = (LINK_DATA_LAYOUT_VERSION ^ 0x1) & LINK_COMPAT_VERSION_MASK;
-
-    player.neverRead = (LINK_COMPAT_VERSION << LINK_COMPAT_VERSION_SHIFT) | otherVersion;
+    player.neverRead ^= 1;
     EXPECT_EQ(GetLinkPlayerCompatibilityStatus(&player), LINK_COMPATIBILITY_DATA_LAYOUT_MISMATCH);
 }
 
@@ -66,6 +65,16 @@ TEST("Link compatibility applies only to configured cable protocols")
     EXPECT(DoesLinkTypeRequireCompatibility(LINKTYPE_CONTEST_EMODE));
     EXPECT(!DoesLinkTypeRequireCompatibility(LINKTYPE_MYSTERY_EVENT));
     EXPECT(!DoesLinkTypeRequireCompatibility(LINKTYPE_EREADER_EM));
+}
+
+TEST("Link compatibility separates extended protocol versions from the old packed byte")
+{
+    struct LinkPlayer player = CompatibleLinkPlayer();
+
+    EXPECT_EQ(player.neverRead >> 4, 0);
+    player.version = 0x4000 | VERSION_EMERALD;
+    player.neverRead = (15 << 4) | LINK_DATA_LAYOUT_VERSION;
+    EXPECT_EQ(GetLinkPlayerCompatibilityStatus(&player), LINK_COMPATIBILITY_VERSION_MISMATCH);
 }
 
 TEST("Link compatibility rejects one mismatched player in a four player group")

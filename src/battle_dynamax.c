@@ -175,13 +175,33 @@ u32 GetNonDynamaxMaxHP(enum BattlerId battler)
     return maxHP;
 }
 
+static void TryDynamaxFormChange(enum BattlerId battler, enum FormChanges method)
+{
+    struct BattlePokemon *mon = &gBattleMons[battler];
+    u16 attack = mon->attack;
+    u16 defense = mon->defense;
+    u16 speed = mon->speed;
+    u16 spAttack = mon->spAttack;
+    u16 spDefense = mon->spDefense;
+
+    if (TryBattleFormChange(battler, method, GetBattlerAbility(battler)))
+    {
+        // Gigantamax only changes HP, even when other stats have been swapped or split.
+        mon->attack = attack;
+        mon->defense = defense;
+        mon->speed = speed;
+        mon->spAttack = spAttack;
+        mon->spDefense = spDefense;
+    }
+}
+
 // Sets flags used for Dynamaxing and checks Gigantamax forms.
 void ActivateDynamax(enum BattlerId battler)
 {
     // Cramorant drops its prey before Dynamax HP is applied.
     if (gBattleMons[battler].species == SPECIES_CRAMORANT_GULPING
      || gBattleMons[battler].species == SPECIES_CRAMORANT_GORGING)
-        TryBattleFormChange(battler, FORM_CHANGE_BATTLE_SWITCH_OUT, GetBattlerAbility(battler));
+        TryDynamaxFormChange(battler, FORM_CHANGE_BATTLE_SWITCH_OUT);
 
     // Set appropriate use flags.
     SetActiveGimmick(battler, GIMMICK_DYNAMAX);
@@ -197,7 +217,7 @@ void ActivateDynamax(enum BattlerId battler)
 
     // Try Gigantamax form change.
     if (!gBattleMons[battler].volatiles.transformed) // Ditto cannot Gigantamax.
-        TryBattleFormChange(battler, FORM_CHANGE_BATTLE_GIGANTAMAX, GetBattlerAbility(battler));
+        TryDynamaxFormChange(battler, FORM_CHANGE_BATTLE_GIGANTAMAX);
 
     BattleScriptPushCursorAndCallback(BattleScript_DynamaxBegins);
 }
@@ -220,7 +240,7 @@ void UndoDynamax(enum BattlerId battler)
 
     // Undo form change if needed.
     if (IsGigantamaxed(battler))
-        TryBattleFormChange(battler, FORM_CHANGE_END_BATTLE, GetBattlerAbility(battler));
+        TryDynamaxFormChange(battler, FORM_CHANGE_END_BATTLE);
 }
 
 static enum Move GetTypeBasedMaxMove(enum BattlerId battler, enum Type type)

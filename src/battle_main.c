@@ -4704,7 +4704,7 @@ s32 GetBattleMovePriority(enum BattlerId battler, enum Ability ability, enum Mov
     {
         priority++;
     }
-    else if (ability == ABILITY_TRIAGE && IsHealingMove(move))
+    else if (!isDynamaxMove && ability == ABILITY_TRIAGE && IsHealingMove(move))
     {
         priority += 3;
     }

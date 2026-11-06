@@ -12141,9 +12141,12 @@ void BS_UpdateDynamax(void)
     enum BattlerId battler = gBattleScripting.battler;
     struct Pokemon *mon = GetBattlerMon(battler);
 
-    if (!IsGigantamaxed(battler)) // RecalcBattlerStats will get called on form change.
-        RecalcBattlerStats(battler, mon, GetActiveGimmick(battler) == GIMMICK_DYNAMAX);
+    if (GetActiveGimmick(battler) == GIMMICK_DYNAMAX && !IsGigantamaxed(battler))
+        ApplyDynamaxHPMultiplier(mon); // Gigantamax applies this during its form change.
 
+    // Do not overwrite battle-only stats such as the speed from Speed Swap.
+    gBattleMons[battler].hp = GetMonData(mon, MON_DATA_HP);
+    gBattleMons[battler].maxHP = GetMonData(mon, MON_DATA_MAX_HP);
     UpdateHealthboxAttribute(gHealthboxSpriteIds[battler], mon, HEALTHBOX_ALL);
     gBattlescriptCurrInstr = cmd->nextInstr;
 }
