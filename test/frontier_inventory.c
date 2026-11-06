@@ -5,6 +5,7 @@
 #include "item_use.h"
 #include "load_save.h"
 #include "test/test.h"
+#include "constants/frontier_bag.h"
 #include "constants/hold_effects.h"
 #include "data/frontier_bag_items.h"
 
@@ -12,17 +13,52 @@ static const enum Item sFusionItems[] = {
     ITEM_DNA_SPLICERS, ITEM_N_SOLARIZER, ITEM_N_LUNARIZER, ITEM_REINS_OF_UNITY,
 };
 
-TEST("Bag redesign: every normally obtainable ordinary item fits at once")
+TEST("Bag redesign: obtainable item catalog is independent of the saved ordinary pocket capacity")
 {
     ClearBag();
-    EXPECT_EQ(BAG_ITEMS_COUNT, ARRAY_COUNT(sFrontierObtainableItems));
+    EXPECT_EQ(BAG_ITEMS_COUNT, 206);
+    EXPECT_EQ(FRONTIER_OBTAINABLE_ITEMS_COUNT, ARRAY_COUNT(sFrontierObtainableItems));
+    EXPECT_GE(FRONTIER_OBTAINABLE_ITEMS_COUNT, BAG_ITEMS_COUNT);
     for (u32 i = 0; i < ARRAY_COUNT(sFrontierObtainableItems); i++)
     {
         EXPECT_EQ(GetItemPocket(sFrontierObtainableItems[i]), POCKET_ITEMS);
-        EXPECT(AddBagItem(sFrontierObtainableItems[i], 1));
+        EXPECT_EQ(AddBagItem(sFrontierObtainableItems[i], 1), i < BAG_ITEMS_COUNT);
     }
     for (u32 i = 0; i < ARRAY_COUNT(sFrontierObtainableItems); i++)
-        EXPECT(CheckBagHasItem(sFrontierObtainableItems[i], 1));
+        EXPECT_EQ(CheckBagHasItem(sFrontierObtainableItems[i], 1), i < BAG_ITEMS_COUNT);
+}
+
+TEST("Bag redesign: form-changing tools fit without displacing the starter keys")
+{
+    static const struct
+    {
+        enum Item item;
+        ItemUseFunc use;
+        bool32 important;
+    } tools[] = {
+        { ITEM_REVEAL_GLASS, ItemUseOutOfBattle_FormChange, TRUE },
+        { ITEM_ROTOM_CATALOG, ItemUseOutOfBattle_RotomCatalog, TRUE },
+        { ITEM_GRACIDEA, ItemUseOutOfBattle_FormChange, TRUE },
+        { ITEM_PRISON_BOTTLE, ItemUseOutOfBattle_FormChange, TRUE },
+        { ITEM_ZYGARDE_CUBE, ItemUseOutOfBattle_ZygardeCube, TRUE },
+        { ITEM_RED_NECTAR, ItemUseOutOfBattle_FormChange_ConsumedOnUse, FALSE },
+        { ITEM_YELLOW_NECTAR, ItemUseOutOfBattle_FormChange_ConsumedOnUse, FALSE },
+        { ITEM_PINK_NECTAR, ItemUseOutOfBattle_FormChange_ConsumedOnUse, FALSE },
+        { ITEM_PURPLE_NECTAR, ItemUseOutOfBattle_FormChange_ConsumedOnUse, FALSE },
+    };
+    ClearBag();
+    GiveFrontierStarterInventory();
+    struct ItemSlot keys[BAG_KEYITEMS_COUNT];
+    memcpy(keys, gSaveBlock1Ptr->bag.keyItems, sizeof(keys));
+    for (u32 i = 0; i < ARRAY_COUNT(tools); i++)
+    {
+        EXPECT_EQ(GetItemPocket(tools[i].item), POCKET_ITEMS);
+        EXPECT_EQ(GetItemImportance(tools[i].item), tools[i].important);
+        EXPECT(GetItemFieldFunc(tools[i].item) == tools[i].use);
+        EXPECT(AddBagItem(tools[i].item, 1));
+        EXPECT_EQ(CountTotalItemQuantityInBag(tools[i].item), 1);
+    }
+    EXPECT_EQ(memcmp(keys, gSaveBlock1Ptr->bag.keyItems, sizeof(keys)), 0);
 }
 
 TEST("Bag redesign: starter inventory has every berry eight utility keys and four fusion keys")
@@ -83,7 +119,7 @@ TEST("Bag redesign: old eight-key inventory gains fusion tools without changing 
     ClearBag();
     for (u32 i = 0; i < ARRAY_COUNT(oldKeys); i++)
         EXPECT(AddBagItem(oldKeys[i], 1));
-    for (u32 i = 0; i < ARRAY_COUNT(sFrontierObtainableItems); i++)
+    for (u32 i = 0; i < BAG_ITEMS_COUNT; i++)
         EXPECT(AddBagItem(sFrontierObtainableItems[i], 1 + i));
     struct ItemSlot ordinary[206];
     memcpy(ordinary, gSaveBlock1Ptr->bag.items, sizeof(ordinary));

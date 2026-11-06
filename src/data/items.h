@@ -13733,7 +13733,7 @@ const struct ItemInfo gItemsInfo[] =
         .iconPalette = gItemIconPalette_ExpCharm,
     },
 
-// Form-changing Key Items
+// Reusable form-changing tools use the ordinary pocket because the saved key pocket is full.
 
     [ITEM_ROTOM_CATALOG] =
     {
@@ -13744,7 +13744,7 @@ const struct ItemInfo gItemsInfo[] =
             "{JPN}カタログを 使うことで\n"
             "ロトムを かでんに\n"
             "だしいれ できる"),
-        .pocket = POCKET_KEY_ITEMS,
+        .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_RotomCatalog,
         .iconPic = gItemIcon_RotomCatalog,
@@ -13760,7 +13760,7 @@ const struct ItemInfo gItemsInfo[] =
             "{JPN}かんしゃの きもちを\n"
             "つたえるため ブーケにして\n"
             "おくることが ある"),
-        .pocket = POCKET_KEY_ITEMS,
+        .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_FormChange,
         .iconPic = gItemIcon_Gracidea,
@@ -13777,7 +13777,7 @@ const struct ItemInfo gItemsInfo[] =
             "{JPN}ポケモンを ほんらいの\n"
             "姿に かえてしまう\n"
             "ふしぎな かがみ"),
-        .pocket = POCKET_KEY_ITEMS,
+        .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_FormChange,
         .iconPic = gItemIcon_RevealGlass,
@@ -13810,7 +13810,7 @@ const struct ItemInfo gItemsInfo[] =
             "{JPN}ポケモン ジガルデの\n"
             "コアと セルを\n"
             "あつめるための 道具"),
-        .pocket = POCKET_KEY_ITEMS,
+        .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_ZygardeCube,
         .iconPic = gItemIcon_ZygardeCube,
@@ -13826,7 +13826,7 @@ const struct ItemInfo gItemsInfo[] =
             "{JPN}大昔に とある\n"
             "ポケモンの ふうじこめたと\n"
             "される ツボ"),
-        .pocket = POCKET_KEY_ITEMS,
+        .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_FormChange,
         .iconPic = gItemIcon_PrisonBottle,

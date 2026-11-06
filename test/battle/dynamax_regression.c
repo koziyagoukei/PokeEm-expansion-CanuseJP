@@ -38,6 +38,44 @@ SINGLE_BATTLE_TEST("Dynamax preserves Speed Swap before activation and after exp
     }
 }
 
+SINGLE_BATTLE_TEST("Dynamax and Gigantamax preserve types changed by Soak or Magic Powder")
+{
+    u32 variant = 0;
+    for (u32 j = 0; j < 8; j++)
+        PARAMETRIZE { variant = j; }
+    bool32 gigantamax = (variant & 1) != 0;
+    bool32 during = (variant & 2) != 0;
+    enum Move move = (variant & 4) ? MOVE_MAGIC_POWDER : MOVE_SOAK;
+    enum Type type = (variant & 4) ? TYPE_PSYCHIC : TYPE_WATER;
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET) { Speed(100); MaxHP(999); HP(999); }
+        OPPONENT(SPECIES_CORVIKNIGHT) { Speed(300); GigantamaxFactor(gigantamax); MaxHP(999); HP(999); }
+    } WHEN {
+        TURN { MOVE(opponent, MOVE_GUST); MOVE(player, during ? MOVE_CELEBRATE : move); }
+        TURN { MOVE(opponent, MOVE_GUST, gimmick: GIMMICK_DYNAMAX); MOVE(player, during ? move : MOVE_MUD_SHOT, hit: TRUE); }
+        TURN { MOVE(opponent, MOVE_GUST); MOVE(player, MOVE_TRICK_OR_TREAT); }
+        TURN { MOVE(opponent, MOVE_GUST); MOVE(player, MOVE_MUD_SHOT, hit: TRUE); }
+        TURN { MOVE(opponent, MOVE_GUST); MOVE(player, MOVE_MUD_SHOT, hit: TRUE); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, gigantamax ? MOVE_G_MAX_WIND_RAGE : MOVE_MAX_AIRSTREAM, opponent);
+        if (!during) {
+            ANIMATION(ANIM_TYPE_MOVE, MOVE_MUD_SHOT, player);
+            HP_BAR(opponent);
+        }
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_TRICK_OR_TREAT, player);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_MUD_SHOT, player);
+        HP_BAR(opponent);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_GUST, opponent);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_MUD_SHOT, player);
+        HP_BAR(opponent);
+    } THEN {
+        EXPECT_EQ(opponent->species, SPECIES_CORVIKNIGHT);
+        EXPECT_EQ(opponent->types[0], type);
+        EXPECT_EQ(opponent->types[1], type);
+        EXPECT_EQ(opponent->types[2], TYPE_GHOST);
+    }
+}
+
 SINGLE_BATTLE_TEST("Triage boosts Draining Kiss but not the Max Starfall it becomes")
 {
     enum Gimmick gimmick;

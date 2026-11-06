@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Size the ordinary pocket from Frontier/resort acquisition sources."""
+"""List obtainable ordinary items from Frontier/resort acquisition sources."""
 
 import argparse
 import json

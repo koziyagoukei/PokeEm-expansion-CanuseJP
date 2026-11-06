@@ -184,15 +184,19 @@ static void TryDynamaxFormChange(enum BattlerId battler, enum FormChanges method
     u16 speed = mon->speed;
     u16 spAttack = mon->spAttack;
     u16 spDefense = mon->spDefense;
+    enum Type types[ARRAY_COUNT(mon->types)];
+
+    memcpy(types, mon->types, sizeof(types));
 
     if (TryBattleFormChange(battler, method, GetBattlerAbility(battler)))
     {
-        // Gigantamax only changes HP, even when other stats have been swapped or split.
+        // Keep battle-only stats and type changes when entering or leaving Gigantamax.
         mon->attack = attack;
         mon->defense = defense;
         mon->speed = speed;
         mon->spAttack = spAttack;
         mon->spDefense = spDefense;
+        memcpy(mon->types, types, sizeof(types));
     }
 }
 
