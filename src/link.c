@@ -333,9 +333,9 @@ static void InitLocalLinkPlayer(void)
     gLocalLinkPlayer.gender = gSaveBlock2Ptr->playerGender;
     gLocalLinkPlayer.linkType = gLinkType;
     gLocalLinkPlayer.language = gGameLanguage;
-    gLocalLinkPlayer.version = gGameVersion + 0x4000;
+    gLocalLinkPlayer.version = gGameVersion | 0x4000 | LINK_PACKED_COMPAT_VERSION;
     gLocalLinkPlayer.lp_field_2 = LINK_PROJECT_ID;
-    gLocalLinkPlayer.neverRead = LINK_PACKED_VERSIONS;
+    gLocalLinkPlayer.neverRead = LINK_DATA_LAYOUT_VERSION;
     gLocalLinkPlayer.progressFlags = IsNationalPokedexEnabled();
     if (FlagGet(FLAG_IS_CHAMPION))
     {
@@ -792,9 +792,9 @@ enum LinkCompatibilityStatus GetLinkPlayerCompatibilityStatus(const struct LinkP
 {
     if (player->lp_field_2 != LINK_PROJECT_ID)
         return LINK_COMPATIBILITY_PROJECT_MISMATCH;
-    if (LINK_UNPACK_COMPAT_VERSION(player->neverRead) != LINK_COMPAT_VERSION)
+    if (LINK_UNPACK_COMPAT_VERSION(player->version) != LINK_COMPAT_VERSION)
         return LINK_COMPATIBILITY_VERSION_MISMATCH;
-    if (LINK_UNPACK_DATA_VERSION(player->neverRead) != LINK_DATA_LAYOUT_VERSION)
+    if (player->neverRead != LINK_DATA_LAYOUT_VERSION)
         return LINK_COMPATIBILITY_DATA_LAYOUT_MISMATCH;
 
     return LINK_COMPATIBILITY_OK;
@@ -1400,6 +1400,7 @@ void CheckLinkPlayersMatchSaved(void)
         if (sSavedLinkPlayers[i].trainerId != gLinkPlayers[i].trainerId
          || StringCompare(sSavedLinkPlayers[i].name, gLinkPlayers[i].name) != 0
          || sSavedLinkPlayers[i].lp_field_2 != gLinkPlayers[i].lp_field_2
+         || sSavedLinkPlayers[i].version != gLinkPlayers[i].version
          || sSavedLinkPlayers[i].neverRead != gLinkPlayers[i].neverRead)
         {
             gLinkErrorOccurred = TRUE;

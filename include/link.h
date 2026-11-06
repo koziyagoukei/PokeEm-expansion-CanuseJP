@@ -177,12 +177,12 @@ enum
 
 struct LinkPlayer
 {
-    /* 0x00 */ u16 version;
+    /* 0x00 */ u16 version; // Game version and LINK_COMPAT_VERSION.
     /* 0x02 */ u16 lp_field_2; // LINK_PROJECT_ID
     /* 0x04 */ u32 trainerId;
     /* 0x08 */ u8 name[PLAYER_NAME_LENGTH + 1];
     /* 0x10 */ u8 progressFlags; // (& 0x0F) is hasNationalDex, (& 0xF0) is hasClearedGame
-    /* 0x11 */ u8 neverRead; // Packed LINK_COMPAT_VERSION / LINK_DATA_LAYOUT_VERSION
+    /* 0x11 */ u8 neverRead; // LINK_DATA_LAYOUT_VERSION
     /* 0x12 */ u8 progressFlagsCopy;
     /* 0x13 */ u8 gender;
     /* 0x14 */ u32 linkType;

@@ -2925,15 +2925,21 @@ static const struct OamData sOamData_LastUsedBall =
     .affineParam = 0,
 };
 
+#define MOVE_INFO_WINDOW_TAG 0xE722
+#define BATTLE_MENU_HINT_PALETTE_TAG 0xE723
+
+static const struct SpritePalette sSpritePalette_BattleMenuHint =
+{
+    sAbilityPopUpPalette, BATTLE_MENU_HINT_PALETTE_TAG
+};
+
 static const struct SpriteTemplate sSpriteTemplate_LastUsedBallWindow =
 {
     .tileTag = TAG_LAST_BALL_WINDOW,
-    .paletteTag = TAG_ABILITY_POP_UP,
+    .paletteTag = BATTLE_MENU_HINT_PALETTE_TAG,
     .oam = &sOamData_LastUsedBall,
     .callback = SpriteCB_LastUsedBallWin
 };
-
-#define MOVE_INFO_WINDOW_TAG 0xE722
 
 static const struct OamData sOamData_MoveInfoWindow =
 {
@@ -2955,7 +2961,7 @@ static const struct OamData sOamData_MoveInfoWindow =
 static const struct SpriteTemplate sSpriteTemplate_MoveInfoWindow =
 {
     .tileTag = MOVE_INFO_WINDOW_TAG,
-    .paletteTag = TAG_ABILITY_POP_UP,
+    .paletteTag = BATTLE_MENU_HINT_PALETTE_TAG,
     .oam = &sOamData_MoveInfoWindow,
     .callback = SpriteCB_MoveInfoWin
 };
@@ -3017,6 +3023,25 @@ bool32 CanThrowLastUsedBall(void)
     return TRUE;
 }
 
+static void FreeBattleMenuHintPaletteIfUnused(void)
+{
+    if (GetSpriteTileStartByTag(TAG_LAST_BALL_WINDOW) == 0xFFFF
+     && GetSpriteTileStartByTag(MOVE_INFO_WINDOW_TAG) == 0xFFFF)
+        FreeSpritePaletteByTag(BATTLE_MENU_HINT_PALETTE_TAG);
+}
+
+static bool32 TryLoadBattleMenuHintGfx(const struct SpriteSheet *sheet)
+{
+    if (LoadSpritePalette(&sSpritePalette_BattleMenuHint) == 0xFF)
+        return FALSE;
+
+    if (GetSpriteTileStartByTag(sheet->tag) != 0xFFFF || LoadSpriteSheet(sheet) != 0xFFFF)
+        return TRUE;
+
+    FreeBattleMenuHintPaletteIfUnused();
+    return FALSE;
+}
+
 void TryAddLastUsedBallItemSprites(void)
 {
     if (B_LAST_USED_BALL == FALSE)
@@ -3053,18 +3078,22 @@ void TryAddLastUsedBallItemSprites(void)
     }
 
     // window
-    LoadSpritePalette(&sSpritePalette_AbilityPopUp);
-    if (GetSpriteTileStartByTag(TAG_LAST_BALL_WINDOW) == 0xFFFF)
-        LoadSpriteSheet(&sSpriteSheet_LastUsedBallWindow);
-
-    if (gBattleStruct->ballSpriteIds[1] == MAX_SPRITES)
+    if (gBattleStruct->ballSpriteIds[1] == MAX_SPRITES && TryLoadBattleMenuHintGfx(&sSpriteSheet_LastUsedBallWindow))
     {
         gBattleStruct->ballSpriteIds[1] = CreateSprite(&sSpriteTemplate_LastUsedBallWindow,
                                                        LAST_BALL_WIN_X_0,
                                                        LAST_USED_WIN_Y, 5);
-        gSprites[gBattleStruct->ballSpriteIds[1]].sHide = FALSE;
-        gSprites[gBattleStruct->moveInfoSpriteId].sHide = TRUE;
-        gLastUsedBallMenuPresent = TRUE;
+        if (gBattleStruct->ballSpriteIds[1] != MAX_SPRITES)
+        {
+            gSprites[gBattleStruct->ballSpriteIds[1]].sHide = FALSE;
+            TryToHideMoveInfoWindow();
+            gLastUsedBallMenuPresent = TRUE;
+        }
+        else
+        {
+            FreeSpriteTilesByTag(TAG_LAST_BALL_WINDOW);
+            FreeBattleMenuHintPaletteIfUnused();
+        }
     }
     if (B_LAST_USED_BALL_CYCLE == TRUE)
         ArrowsChangeColorLastBallCycle(0); //Default the arrows to be invisible
@@ -3073,8 +3102,7 @@ void TryAddLastUsedBallItemSprites(void)
 static void DestroyLastUsedBallWinGfx(struct Sprite *sprite)
 {
     FreeSpriteTilesByTag(TAG_LAST_BALL_WINDOW);
-    if (GetSpriteTileStartByTag(MOVE_INFO_WINDOW_TAG) == 0xFFFF)
-        FreeSpritePaletteByTag(TAG_ABILITY_POP_UP);
+    FreeBattleMenuHintPaletteIfUnused();
     DestroySprite(sprite);
     gBattleStruct->ballSpriteIds[1] = MAX_SPRITES;
 }
@@ -3095,27 +3123,31 @@ void TryToAddMoveInfoWindow(void)
     if (B_MOVE_DESCRIPTION_BUTTON == L_BUTTON && gSaveBlock2Ptr->optionsButtonMode == OPTIONS_BUTTON_MODE_L_EQUALS_A)
         return;
 
-    LoadSpritePalette(&sSpritePalette_AbilityPopUp);
-    if (GetSpriteTileStartByTag(MOVE_INFO_WINDOW_TAG) == 0xFFFF)
-        LoadSpriteSheet(&sSpriteSheet_MoveInfoWindow);
-
-    if (gBattleStruct->moveInfoSpriteId == MAX_SPRITES)
+    if (gBattleStruct->moveInfoSpriteId == MAX_SPRITES && TryLoadBattleMenuHintGfx(&sSpriteSheet_MoveInfoWindow))
     {
         gBattleStruct->moveInfoSpriteId = CreateSprite(&sSpriteTemplate_MoveInfoWindow, LAST_BALL_WIN_X_0, LAST_USED_WIN_Y + 32, 6);
-        gSprites[gBattleStruct->moveInfoSpriteId].sHide = FALSE;
+        if (gBattleStruct->moveInfoSpriteId == MAX_SPRITES)
+        {
+            FreeSpriteTilesByTag(MOVE_INFO_WINDOW_TAG);
+            FreeBattleMenuHintPaletteIfUnused();
+        }
     }
+
+    // A rapid reopen can catch the old sprite while it is sliding out.
+    if (gBattleStruct->moveInfoSpriteId != MAX_SPRITES)
+        gSprites[gBattleStruct->moveInfoSpriteId].sHide = FALSE;
 }
 
 void TryToHideMoveInfoWindow(void)
 {
-    gSprites[gBattleStruct->moveInfoSpriteId].sHide = TRUE;
+    if (gBattleStruct->moveInfoSpriteId != MAX_SPRITES)
+        gSprites[gBattleStruct->moveInfoSpriteId].sHide = TRUE;
 }
 
 static void DestroyMoveInfoWinGfx(struct Sprite *sprite)
 {
     FreeSpriteTilesByTag(MOVE_INFO_WINDOW_TAG);
-    if (GetSpriteTileStartByTag(TAG_LAST_BALL_WINDOW) == 0xFFFF)
-        FreeSpritePaletteByTag(TAG_ABILITY_POP_UP);
+    FreeBattleMenuHintPaletteIfUnused();
     DestroySprite(sprite);
     gBattleStruct->moveInfoSpriteId = MAX_SPRITES;
 }
