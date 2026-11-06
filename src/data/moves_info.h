@@ -16852,7 +16852,7 @@ const struct MoveInfo gMovesInfo[MOVES_COUNT_ALL] =
     [MOVE_MAGIC_POWDER] =
     {
         .name = COMPOUND_STRING("{JPN}まほうのこな"),
-        .description = COMPOUND_STRING("{JPN}みずタイプにする\nこな"),
+        .description = COMPOUND_STRING("{JPN}エスパータイプにする\nこな"),
         .effect = EFFECT_SOAK,
         .power = 0,
         .type = TYPE_PSYCHIC,
