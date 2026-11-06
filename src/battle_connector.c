@@ -1,6 +1,7 @@
 #include "global.h"
 #include "battle.h"
 #include "battle_connector.h"
+#include "battle_frontier.h"
 #include "battle_setup.h"
 #include "event_data.h"
 #include "event_object_movement.h"
@@ -15,6 +16,8 @@
 #include "string_util.h"
 #include "strings.h"
 #include "constants/battle.h"
+#include "constants/battle_frontier_mons.h"
+#include "constants/hold_effects.h"
 #include "constants/characters.h"
 #include "constants/event_objects.h"
 #include "constants/items.h"
@@ -40,6 +43,7 @@
 */
 
 #define NO_SLOT 0xFF
+#define NO_SET  0xFFFF // a Pokemon made from its species alone (the boss)
 
 struct BattleConnectorRun
 {
@@ -54,6 +58,7 @@ struct BattleConnectorRun
     u8 pathHints[CONNECTOR_PATH_COUNT];
     u8 pathsRolledFor;  // branch + 1 the paths are rolled for (0: none)
     u16 roomSpecies[2]; // the Shadow Pokemon of the room (the second: a strong trainer's)
+    u16 roomSets[2];    // their Battle Frontier pool sets (gBattleFrontierMons), or NO_SET
     u8 roomTrainer;     // index into the room type's trainer table
     u8 baseLevel;       // the level of the Pokemon brought
     u8 protectCursor;   // the next opponent party slot to offer for protection
@@ -152,20 +157,164 @@ static void ClearRun(u32 returnState)
 
 // ---- Shadow Pokemon ---------------------------------------------------------------------------------------------------
 
-// Every Shadow Pokemon of the facility comes from here: random personality (nature, gender, ability from its usual
-// two), at least BATTLE_CONNECTOR_PERFECT_IVS IVs of 31 at random stats (the others random), the usual Tera type,
-// its Shadow state, and the Battle Connector mark (its purification move and its mark come from it).
-void BattleConnector_CreateShadowMon(struct Pokemon *mon, u16 species, u32 level)
+// At least count IVs of 31 (at random stats); the others stay as they are
+static void EnsurePerfectIVs(struct Pokemon *mon, u32 count)
+{
+    const u8 perfect = MAX_PER_STAT_IVS;
+    u32 have = 0;
+
+    count = min(count, (u32)NUM_STATS);
+    for (u32 stat = 0; stat < NUM_STATS; stat++)
+        have += (GetMonData(mon, MON_DATA_HP_IV + stat) == MAX_PER_STAT_IVS);
+    for (; have < count; have++)
+    {
+        // One of the stats not at 31 yet
+        u32 pick = RandomUniform(RNG_NONE, 0, NUM_STATS - have - 1);
+        for (u32 stat = 0; stat < NUM_STATS; stat++)
+        {
+            if (GetMonData(mon, MON_DATA_HP_IV + stat) != MAX_PER_STAT_IVS && pick-- == 0)
+            {
+                SetMonData(mon, MON_DATA_HP_IV + stat, &perfect);
+                break;
+            }
+        }
+    }
+}
+
+// What every Shadow Pokemon of the facility gets: at least BATTLE_CONNECTOR_PERFECT_IVS IVs of 31, its Shadow state,
+// and the Battle Connector mark (its purification move comes from it)
+static void FinishShadowMon(struct Pokemon *mon)
 {
     const u8 origin = TRUE;
     const u8 metLocation = MAPSEC_ARTISAN_CAVE;
+    u16 species = GetMonData(mon, MON_DATA_SPECIES);
 
-    CreateMon(mon, species, level, Random32(), OTID_STRUCT_PLAYER_ID);
-    SetBoxMonPerfectIVs(&mon->box, max(BATTLE_CONNECTOR_PERFECT_IVS, gSpeciesInfo[species].perfectIVCount));
+    EnsurePerfectIVs(mon, max(BATTLE_CONNECTOR_PERFECT_IVS, gSpeciesInfo[species].perfectIVCount));
     SetMonData(mon, MON_DATA_MET_LOCATION, &metLocation);
     SetMonData(mon, MON_DATA_BATTLE_CONNECTOR_ORIGIN, &origin);
     MarkShadowPokemon(mon);
     CalculateMonStats(mon);
+}
+
+static u32 GetPlayerOTID(void)
+{
+    return gSaveBlock2Ptr->playerTrainerId[0] | (gSaveBlock2Ptr->playerTrainerId[1] << 8)
+         | (gSaveBlock2Ptr->playerTrainerId[2] << 16) | (gSaveBlock2Ptr->playerTrainerId[3] << 24);
+}
+
+// A Shadow Pokemon from its species alone (the boss): random personality (nature, gender, ability from its usual two),
+// random IVs, the usual Tera type
+void BattleConnector_CreateShadowMon(struct Pokemon *mon, u16 species, u32 level)
+{
+    CreateMon(mon, species, level, Random32(), OTID_STRUCT_PLAYER_ID);
+    FinishShadowMon(mon);
+}
+
+// A Shadow Pokemon from a Battle Frontier pool set (the rooms, the mid-boss): the set's moves, item, nature, ability,
+// EVs, IVs and Tera type. It cannot Mega Evolve or use Z-Moves, so it holds no Mega Stone or Z-Crystal.
+void BattleConnector_CreateShadowMonFromSet(struct Pokemon *mon, u16 set, u32 level)
+{
+    const u16 none = ITEM_NONE;
+    enum HoldEffect holdEffect;
+
+    CreateFacilityMon(&gBattleFrontierMons[set], level, USE_RANDOM_IVS, GetPlayerOTID(), 0, mon);
+    holdEffect = GetItemHoldEffect(GetMonData(mon, MON_DATA_HELD_ITEM));
+    if (holdEffect == HOLD_EFFECT_MEGA_STONE || holdEffect == HOLD_EFFECT_Z_CRYSTAL)
+        SetMonData(mon, MON_DATA_HELD_ITEM, &none);
+    FinishShadowMon(mon);
+}
+
+// ---- who appears ------------------------------------------------------------------------------------------------------
+
+// A species of the rooms: Battle Frontier pool Pokemon up to BATTLE_CONNECTOR_MAX_DEX_NUM, no Legendary or Mythical
+bool32 BattleConnector_IsRoomSpecies(u16 species)
+{
+    u32 dexNum;
+
+    if (species == SPECIES_NONE || species >= NUM_SPECIES || GET_BASE_SPECIES_ID(species) != species)
+        return FALSE;
+    dexNum = SpeciesToNationalPokedexNum(species);
+    if (dexNum == 0 || dexNum > BATTLE_CONNECTOR_MAX_DEX_NUM)
+        return FALSE;
+    return !gSpeciesInfo[species].isRestrictedLegendary && !gSpeciesInfo[species].isSubLegendary
+        && !gSpeciesInfo[species].isMythical;
+}
+
+// The ordinary, the strong and the rare rooms' Pokemon, by base stat total
+u32 BattleConnector_GetSpeciesTier(u16 species)
+{
+    u32 total = GetSpeciesBaseStatTotal(species);
+
+    if (total >= BATTLE_CONNECTOR_RARE_BST)
+        return CONNECTOR_TIER_RARE;
+    if (total >= BATTLE_CONNECTOR_STRONG_BST)
+        return CONNECTOR_TIER_STRONG;
+    return CONNECTOR_TIER_NORMAL;
+}
+
+static bool32 IsSetOfTier(u32 set, u32 tier)
+{
+    u16 species = gBattleFrontierMons[set].species;
+    return BattleConnector_IsRoomSpecies(species) && BattleConnector_GetSpeciesTier(species) == tier;
+}
+
+// A random set of the tier (each set counts once, so a species with more sets comes more often)
+static u16 PickRoomSet(u32 tier)
+{
+    u32 count = 0, pick;
+
+    for (u32 set = 0; set < NUM_FRONTIER_MONS; set++)
+        count += IsSetOfTier(set, tier);
+    if (count == 0)
+        return NO_SET;
+    pick = RandomUniform(RNG_NONE, 0, count - 1);
+    for (u32 set = 0; set < NUM_FRONTIER_MONS; set++)
+    {
+        if (IsSetOfTier(set, tier) && pick-- == 0)
+            return set;
+    }
+    return NO_SET;
+}
+
+// A random set of the species (NO_SET if the pool has none)
+static u16 PickSpeciesSet(u16 species)
+{
+    u32 count = 0, pick;
+
+    for (u32 set = 0; set < NUM_FRONTIER_MONS; set++)
+        count += (gBattleFrontierMons[set].species == species);
+    if (count == 0)
+        return NO_SET;
+    pick = RandomUniform(RNG_NONE, 0, count - 1);
+    for (u32 set = 0; set < NUM_FRONTIER_MONS; set++)
+    {
+        if (gBattleFrontierMons[set].species == species && pick-- == 0)
+            return set;
+    }
+    return NO_SET;
+}
+
+// A room's Pokemon from a set; with no set in the pool (it should not happen), a Mightyena from its species alone
+static void SetRoomMonFromTier(u32 slot, u32 tier)
+{
+    u16 set = PickRoomSet(tier);
+
+    sRun.roomSets[slot] = set;
+    sRun.roomSpecies[slot] = (set != NO_SET) ? gBattleFrontierMons[set].species : SPECIES_MIGHTYENA;
+}
+
+static void SetRoomMonFromSpecies(u32 slot, u16 species, bool32 useSet)
+{
+    sRun.roomSets[slot] = useSet ? PickSpeciesSet(species) : NO_SET;
+    sRun.roomSpecies[slot] = species;
+}
+
+static void CreateRoomShadowMon(struct Pokemon *mon, u32 slot, u32 level)
+{
+    if (sRun.roomSets[slot] != NO_SET)
+        BattleConnector_CreateShadowMonFromSet(mon, sRun.roomSets[slot], level);
+    else
+        BattleConnector_CreateShadowMon(mon, sRun.roomSpecies[slot], level);
 }
 
 static u32 GetLevelOffset(u32 roomType)
@@ -186,11 +335,6 @@ static u32 GetRoomLevel(u32 roomType)
 {
     u32 level = sRun.baseLevel + GetLevelOffset(roomType);
     return min(max(level, (u32)BATTLE_CONNECTOR_LEVEL_MIN), (u32)MAX_LEVEL);
-}
-
-static u16 PickFromPool(const u16 *pool, u32 count)
-{
-    return pool[RandomUniform(RNG_NONE, 0, count - 1)];
 }
 
 static bool32 IsEntryUnlocked(const struct ConnectorSpeciesEntry *entry)
@@ -243,34 +387,35 @@ static void SetUpRoom(u32 roomType)
 
     sRun.roomType = roomType;
     sRun.roomSpecies[0] = sRun.roomSpecies[1] = SPECIES_NONE;
+    sRun.roomSets[0] = sRun.roomSets[1] = NO_SET;
     sRun.roomTrainer = 0;
     sRun.protectCursor = 0;
     sRun.offeredSlot = NO_SLOT;
     switch (roomType)
     {
     case CONNECTOR_ROOM_SHADOW:
-        sRun.roomSpecies[0] = PickFromPool(sConnectorShadowPool, ARRAY_COUNT(sConnectorShadowPool));
+        SetRoomMonFromTier(0, CONNECTOR_TIER_NORMAL);
         break;
     case CONNECTOR_ROOM_STRONG_SHADOW:
-        sRun.roomSpecies[0] = PickFromPool(sConnectorStrongPool, ARRAY_COUNT(sConnectorStrongPool));
+        SetRoomMonFromTier(0, CONNECTOR_TIER_STRONG);
         break;
     case CONNECTOR_ROOM_RARE_SHADOW:
-        sRun.roomSpecies[0] = PickFromPool(sConnectorRarePool, ARRAY_COUNT(sConnectorRarePool));
+        SetRoomMonFromTier(0, CONNECTOR_TIER_RARE);
         break;
     case CONNECTOR_ROOM_DARK_TRAINER:
         sRun.roomTrainer = RandomUniform(RNG_NONE, 0, ARRAY_COUNT(sConnectorDarkTrainers) - 1);
-        sRun.roomSpecies[0] = PickFromPool(sConnectorShadowPool, ARRAY_COUNT(sConnectorShadowPool));
+        SetRoomMonFromTier(0, CONNECTOR_TIER_NORMAL);
         break;
     case CONNECTOR_ROOM_STRONG_TRAINER:
         sRun.roomTrainer = RandomUniform(RNG_NONE, 0, ARRAY_COUNT(sConnectorStrongTrainers) - 1);
-        sRun.roomSpecies[0] = PickFromPool(sConnectorStrongPool, ARRAY_COUNT(sConnectorStrongPool));
-        sRun.roomSpecies[1] = PickFromPool(sConnectorShadowPool, ARRAY_COUNT(sConnectorShadowPool));
+        SetRoomMonFromTier(0, CONNECTOR_TIER_STRONG);
+        SetRoomMonFromTier(1, CONNECTOR_TIER_NORMAL);
         break;
     case CONNECTOR_ROOM_MIDBOSS:
-        sRun.roomSpecies[0] = PickUnlocked(sConnectorMidbossPool, ARRAY_COUNT(sConnectorMidbossPool));
+        SetRoomMonFromSpecies(0, PickUnlocked(sConnectorMidbossPool, ARRAY_COUNT(sConnectorMidbossPool)), TRUE);
         break;
     case CONNECTOR_ROOM_BOSS:
-        sRun.roomSpecies[0] = PickUnlocked(sConnectorBossPool, ARRAY_COUNT(sConnectorBossPool));
+        SetRoomMonFromSpecies(0, PickUnlocked(sConnectorBossPool, ARRAY_COUNT(sConnectorBossPool)), FALSE);
         break;
     }
 }
@@ -420,9 +565,9 @@ void BattleConnector_StartRoomBattle(void)
 
     ZeroEnemyPartyMons();
     sRun.protectCursor = 0;
-    BattleConnector_CreateShadowMon(&gParties[B_TRAINER_OPPONENT_A][0], sRun.roomSpecies[0], GetRoomLevel(sRun.roomType));
+    CreateRoomShadowMon(&gParties[B_TRAINER_OPPONENT_A][0], 0, GetRoomLevel(sRun.roomType));
     if (sRun.roomSpecies[1] != SPECIES_NONE)
-        BattleConnector_CreateShadowMon(&gParties[B_TRAINER_OPPONENT_A][1], sRun.roomSpecies[1], GetRoomLevel(sRun.roomType));
+        CreateRoomShadowMon(&gParties[B_TRAINER_OPPONENT_A][1], 1, GetRoomLevel(sRun.roomType));
     CalculateEnemyPartyCount();
     if (IsTrainerRoom(sRun.roomType))
     {
@@ -747,6 +892,11 @@ struct Pokemon *BattleConnector_Test_GetCandidate(u32 index)
 u16 BattleConnector_Test_GetRoomSpecies(void)
 {
     return sRun.roomSpecies[0];
+}
+
+u16 BattleConnector_Test_GetRoomSet(void)
+{
+    return sRun.roomSets[0];
 }
 
 void BattleConnector_Test_SetUpRoom(u32 roomType)

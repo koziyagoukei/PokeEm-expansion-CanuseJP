@@ -357,6 +357,7 @@ static const struct InfoViewerEntry sInfoViewerEntries[INFO_COUNT] =
     [INFO_TIPS_CONTEST_DYNAMAX] = TIPS_PAGE_ENTRY(ContestDynamax),
     [INFO_TIPS_CONTEST_REWARDS] = TIPS_PAGE_ENTRY(ContestRewards),
     [INFO_TIPS_SHADOW] = TIPS_PAGE_ENTRY(Shadow),
+    [INFO_TIPS_BATTLE_CONNECTOR] = TIPS_PAGE_ENTRY(BattleConnector),
     [INFO_KANJI_FONT_TEST] =
     {
         .title = sInfoText_TitleKanjiTest,

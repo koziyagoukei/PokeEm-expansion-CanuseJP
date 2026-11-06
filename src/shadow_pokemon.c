@@ -27,6 +27,7 @@
 */
 
 #include "data/shadow_pokemon.h"
+#include "data/shadow_purify_moves.h"
 
 // Per-nature heart gauge reductions of Pokemon XD: battle, Call, 256 steps, scent.
 static const u16 sShadowGaugeReduction[NUM_NATURES][SHADOW_ACTION_COUNT] =
@@ -423,23 +424,44 @@ bool32 PurifyShadowPokemonInScene(struct Pokemon *mon)
     return PurifyShadowPokemonInternal(mon, FALSE);
 }
 
-// The move a Shadow Pokemon of the Battle Connector learns when purified, from its species' row: one of up to two,
-// picked by its personality (so it is the same each time it is asked). MOVE_NONE for any other Pokemon.
+// The move a Shadow Pokemon of the Battle Connector learns when purified: from its species' Shadow row (the bosses) or
+// src/data/shadow_purify_moves.h, one of up to two picked by its personality (so it is the same each time it is
+// asked). MOVE_NONE for any other Pokemon.
+static const u16 *GetSpeciesPurifyMoves(enum Species species)
+{
+    const struct ShadowPokemonInfo *info = GetShadowPokemonInfo(species);
+
+    if (info != NULL && info->purifyMoves[0] != MOVE_NONE)
+        return info->purifyMoves;
+    for (u32 i = 0; i < ARRAY_COUNT(sShadowPurifyMoves); i++)
+    {
+        if (sShadowPurifyMoves[i].species == species)
+            return sShadowPurifyMoves[i].moves;
+    }
+    return NULL;
+}
+
+u32 GetSpeciesPurifyMoveCount(enum Species species)
+{
+    const u16 *moves = GetSpeciesPurifyMoves(species);
+    u32 count = 0;
+
+    while (moves != NULL && count < 2 && moves[count] != MOVE_NONE)
+        count++;
+    return count;
+}
+
 enum Move GetShadowPurifyMove(struct Pokemon *mon)
 {
-    const struct ShadowPokemonInfo *info;
-    u32 count = 0;
+    enum Species species = GetMonData(mon, MON_DATA_SPECIES);
+    u32 count;
 
     if (!GetMonData(mon, MON_DATA_HAS_SHADOW_STATE) || !GetMonData(mon, MON_DATA_BATTLE_CONNECTOR_ORIGIN))
         return MOVE_NONE;
-    info = GetShadowPokemonInfo(GetMonData(mon, MON_DATA_SPECIES));
-    if (info == NULL)
-        return MOVE_NONE;
-    while (count < ARRAY_COUNT(info->purifyMoves) && info->purifyMoves[count] != MOVE_NONE)
-        count++;
+    count = GetSpeciesPurifyMoveCount(species);
     if (count == 0)
         return MOVE_NONE;
-    return info->purifyMoves[(GetMonData(mon, MON_DATA_PERSONALITY) >> 8) % count];
+    return GetSpeciesPurifyMoves(species)[(GetMonData(mon, MON_DATA_PERSONALITY) >> 8) % count];
 }
 
 // The purification scene's move to learn (like MonTryLearningNewMoveEvolution): the purification move, once

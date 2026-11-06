@@ -5600,7 +5600,8 @@ static void FreeResetData_ReturnToOvOrDoEvolutions(void)
     {
         // To account for Battle Factory and Slateport Battle Tent, enemy parties are zeroed out in the facilitites respective src/xxx.c files
         // The ZeroEnemyPartyMons() call happens in SaveXXXChallenge function (eg. SaveFactoryChallenge)
-        if (!(gBattleTypeFlags & (BATTLE_TYPE_FRONTIER | BATTLE_TYPE_ROAMER)))
+        // The Battle Connector offers its defeated Shadow Pokemon for protection after the battle (battle_connector.c)
+        if (!(gBattleTypeFlags & (BATTLE_TYPE_FRONTIER | BATTLE_TYPE_ROAMER)) && !BattleConnector_IsBattleActive())
         {
             ZeroEnemyPartyMons();
         }

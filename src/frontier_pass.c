@@ -22,10 +22,15 @@
 #include "bg.h"
 #include "sound.h"
 #include "string_util.h"
+#include "battle_connector.h"
+#include "battle_pike.h"
 #include "battle_pyramid.h"
+#include "safari_zone.h"
+#include "trainer_hill.h"
 #include "overworld.h"
 #include "math_util.h"
 #include "constants/battle_frontier.h"
+#include "constants/maps.h"
 #include "constants/rgb.h"
 #include "constants/region_map_sections.h"
 #include "constants/songs.h"
@@ -88,6 +93,13 @@ enum {
     MAP_INDICATOR_SQUARE,
 };
 
+// The Frontier map's list: the seven facilities, then the Battle Connector (Artisan Cave). It shows MAP_VISIBLE_ROWS
+// at a time (the panel's stripes are one row each) and scrolls to the rest.
+#define MAP_LANDMARK_CONNECTOR NUM_FRONTIER_FACILITIES
+#define MAP_LANDMARK_COUNT     (NUM_FRONTIER_FACILITIES + 1)
+#define MAP_VISIBLE_ROWS       7
+#define MAP_ROW_HEIGHT         16
+
 enum {
     TAG_CURSOR,
     TAG_MAP_INDICATOR,
@@ -149,7 +161,7 @@ struct FrontierMapData
     struct Sprite *playerHeadSprite;
     struct Sprite *mapIndicatorSprite;
     u8 cursorPos;
-    u8 unused;
+    u8 scroll; // the first landmark shown in the list
     u8 tilemapBuff0[BG_SCREEN_SIZE * 2];
     u8 tilemapBuff1[BG_SCREEN_SIZE * 2];
     u8 tilemapBuff2[BG_SCREEN_SIZE * 2];
@@ -542,7 +554,7 @@ struct
     s16 x;
     s16 y;
     u8 animNum;
-} static const sMapLandmarks[NUM_FRONTIER_FACILITIES] =
+} static const sMapLandmarks[MAP_LANDMARK_COUNT] =
 {
     [FRONTIER_FACILITY_TOWER]   = {gText_BattleTower3,   gText_BattleTowerDesc,    89,  40, MAP_INDICATOR_SQUARE},
     [FRONTIER_FACILITY_DOME]    = {gText_BattleDome2,    gText_BattleDomeDesc,     33,  42, MAP_INDICATOR_SQUARE},
@@ -551,6 +563,28 @@ struct
     [FRONTIER_FACILITY_FACTORY] = {gText_BattleFactory2, gText_BattleFactoryDesc,  25,  67, MAP_INDICATOR_RECTANGLE},
     [FRONTIER_FACILITY_PIKE]    = {gText_BattlePike2,    gText_BattlePikeDesc,     57,  57, MAP_INDICATOR_SQUARE},
     [FRONTIER_FACILITY_PYRAMID] = {gText_BattlePyramid2, gText_BattlePyramidDesc, 134,  41, MAP_INDICATOR_SQUARE},
+    [MAP_LANDMARK_CONNECTOR]    = {COMPOUND_STRING("{JPN}バトルコネクター"),
+                                   COMPOUND_STRING("{JPN}アトリエのあなの おくで ダークポケモンを\nさがしだし ほごする しせつ。"),
+                                   101, 37, MAP_INDICATOR_SQUARE},
+};
+
+// Where the Frontier map's warp takes the player: the lobby's entrance (warp 0), or a spot (WARP_ID_NONE)
+static const struct
+{
+    u16 map;
+    s8 warpId;
+    s8 x;
+    s8 y;
+} sMapLandmarkWarps[MAP_LANDMARK_COUNT] =
+{
+    [FRONTIER_FACILITY_TOWER]   = {MAP_BATTLE_FRONTIER_BATTLE_TOWER_LOBBY,   0, -1, -1},
+    [FRONTIER_FACILITY_DOME]    = {MAP_BATTLE_FRONTIER_BATTLE_DOME_LOBBY,    0, -1, -1},
+    [FRONTIER_FACILITY_PALACE]  = {MAP_BATTLE_FRONTIER_BATTLE_PALACE_LOBBY,  0, -1, -1},
+    [FRONTIER_FACILITY_ARENA]   = {MAP_BATTLE_FRONTIER_BATTLE_ARENA_LOBBY,   0, -1, -1},
+    [FRONTIER_FACILITY_FACTORY] = {MAP_BATTLE_FRONTIER_BATTLE_FACTORY_LOBBY, 0, -1, -1},
+    [FRONTIER_FACILITY_PIKE]    = {MAP_BATTLE_FRONTIER_BATTLE_PIKE_LOBBY,    0, -1, -1},
+    [FRONTIER_FACILITY_PYRAMID] = {MAP_BATTLE_FRONTIER_BATTLE_PYRAMID_LOBBY, 0, -1, -1},
+    [MAP_LANDMARK_CONNECTOR]    = {MAP_ARTISAN_CAVE_1F, WARP_ID_NONE, 6, 12}, // facing the reception
 };
 
 static void ResetGpuRegsAndBgs(void)
@@ -1353,6 +1387,11 @@ static void Task_HandleFrontierMap(u8 taskId);
 static void PrintOnFrontierMap(void);
 static void InitFrontierMapSprites(void);
 static void HandleFrontierMapCursorMove(u8 direction);
+static void PrintFrontierMapNames(void);
+static void PrintFrontierMapDescription(const u8 *text);
+static bool32 CanWarpFromFrontierMap(void);
+static u8 MapNumToFrontierFacilityId(u16 mapNum);
+static void WarpFromFrontierMap(void);
 
 static void ShowFrontierMap(MainCallback callback)
 {
@@ -1498,43 +1537,82 @@ static bool32 ExitFrontierMap(void)
 #define tState     data[0]
 #define tMoveSteps data[1]
 
+static const u8 sText_AskWarp[] = _("{JPN}{STR_VAR_1}へ ワープしますか？\nA:はい  B:いいえ");
+static const u8 sText_CantWarp[] = _("{JPN}いまは ここから ワープできない。");
+
+enum
+{
+    MAP_STATE_INIT,
+    MAP_STATE_INPUT,
+    MAP_STATE_MOVE_DOWN,
+    MAP_STATE_MOVE_UP,
+    MAP_STATE_EXIT,
+    MAP_STATE_FREE,
+    MAP_STATE_ASK_WARP,
+    MAP_STATE_EXIT_TO_WARP,
+};
+
+// The cursor glides to the next row when the list does not have to scroll
+static bool32 CursorStaysOnScreen(bool32 down)
+{
+    if (down)
+        return sMapData->cursorPos < MAP_LANDMARK_COUNT - 1 && sMapData->cursorPos - sMapData->scroll < MAP_VISIBLE_ROWS - 1;
+    return sMapData->cursorPos > 0 && sMapData->cursorPos > sMapData->scroll;
+}
+
 static void Task_HandleFrontierMap(u8 taskId)
 {
     s16 *data = gTasks[taskId].data;
 
     switch (tState)
     {
-    case 0:
+    case MAP_STATE_INIT:
         if (InitFrontierMap())
             break;
         return;
-    case 1:
+    case MAP_STATE_INPUT:
         if (JOY_NEW(B_BUTTON))
         {
             PlaySE(SE_PC_OFF);
-            tState = 4;
+            tState = MAP_STATE_EXIT;
+        }
+        else if (JOY_NEW(A_BUTTON))
+        {
+            if (CanWarpFromFrontierMap())
+            {
+                PlaySE(SE_SELECT);
+                StringCopy(gStringVar1, sMapLandmarks[sMapData->cursorPos].name);
+                StringExpandPlaceholders(gStringVar4, sText_AskWarp);
+                PrintFrontierMapDescription(gStringVar4);
+                tState = MAP_STATE_ASK_WARP;
+            }
+            else
+            {
+                PlaySE(SE_FAILURE);
+                PrintFrontierMapDescription(sText_CantWarp);
+            }
         }
         else if (JOY_NEW(DPAD_DOWN))
         {
-            if (sMapData->cursorPos >= NUM_FRONTIER_FACILITIES - 1)
+            if (!CursorStaysOnScreen(TRUE))
                 HandleFrontierMapCursorMove(0);
             else
-                tState = 2;
+                tState = MAP_STATE_MOVE_DOWN;
         }
         else if (JOY_NEW(DPAD_UP))
         {
-            if (sMapData->cursorPos == 0)
+            if (!CursorStaysOnScreen(FALSE))
                 HandleFrontierMapCursorMove(1);
             else
-                tState = 3;
+                tState = MAP_STATE_MOVE_UP;
         }
         return;
-    case 2:
+    case MAP_STATE_MOVE_DOWN:
         if (tMoveSteps > 3)
         {
             HandleFrontierMapCursorMove(0);
             tMoveSteps = 0;
-            tState = 1;
+            tState = MAP_STATE_INPUT;
         }
         else
         {
@@ -1542,12 +1620,12 @@ static void Task_HandleFrontierMap(u8 taskId)
             tMoveSteps++;
         }
         return;
-    case 3:
+    case MAP_STATE_MOVE_UP:
         if (tMoveSteps > 3)
         {
             HandleFrontierMapCursorMove(1);
             tMoveSteps = 0;
-            tState = 1;
+            tState = MAP_STATE_INPUT;
         }
         else
         {
@@ -1555,17 +1633,70 @@ static void Task_HandleFrontierMap(u8 taskId)
             tMoveSteps++;
         }
         return;
-    case 4:
+    case MAP_STATE_EXIT:
         if (ExitFrontierMap())
             break;
         return;
-    case 5:
+    case MAP_STATE_FREE:
         DestroyTask(taskId);
         FreeFrontierMap();
+        return;
+    case MAP_STATE_ASK_WARP:
+        if (JOY_NEW(A_BUTTON))
+        {
+            PlaySE(SE_WARP_IN);
+            tState = MAP_STATE_EXIT_TO_WARP;
+        }
+        else if (JOY_NEW(B_BUTTON))
+        {
+            PlaySE(SE_SELECT);
+            PrintFrontierMapDescription(sMapLandmarks[sMapData->cursorPos].description);
+            tState = MAP_STATE_INPUT;
+        }
+        return;
+    case MAP_STATE_EXIT_TO_WARP:
+        if (ExitFrontierMap())
+        {
+            DestroyTask(taskId);
+            WarpFromFrontierMap();
+        }
         return;
     }
 
     tState++;
+}
+
+// Warping is for the field outside challenges: not from inside a facility's challenge or the Battle Connector
+static bool32 CanWarpFromFrontierMap(void)
+{
+    u16 map = (gSaveBlock1Ptr->location.mapGroup << 8) | gSaveBlock1Ptr->location.mapNum;
+    u8 facility;
+
+    if (BattleConnector_IsChallengeActive() || InBattlePyramid() || InBattlePike() || InTrainerHillChallenge()
+     || GetSafariZoneFlag())
+        return FALSE;
+    if (gSaveBlock1Ptr->location.mapGroup == MAP_GROUP(MAP_BATTLE_FRONTIER_BATTLE_TOWER_LOBBY))
+    {
+        facility = MapNumToFrontierFacilityId(gSaveBlock1Ptr->location.mapNum);
+        if (facility != 0 && map != sMapLandmarkWarps[facility - 1].map)
+            return FALSE; // a challenge room
+    }
+    return TRUE;
+}
+
+// Leaves the Frontier Pass for the landmark under the cursor
+static void WarpFromFrontierMap(void)
+{
+    u32 landmark = sMapData->cursorPos;
+    u16 map = sMapLandmarkWarps[landmark].map;
+
+    ResetTasks();
+    FREE_AND_SET_NULL(sMapData);
+    FreeFrontierPassData();
+    SetWarpDestination(map >> 8, map & 0xFF, sMapLandmarkWarps[landmark].warpId,
+                       sMapLandmarkWarps[landmark].x, sMapLandmarkWarps[landmark].y);
+    WarpIntoMap();
+    SetMainCallback2(CB2_LoadMap);
 }
 
 static u8 MapNumToFrontierFacilityId(u16 mapNum) // id + 1, zero means not a frontier map number
@@ -1630,7 +1761,7 @@ static void InitFrontierMapSprites(void)
     LoadSpritePalettes(sSpritePalettes);
 
     LoadCompressedSpriteSheet(&sCursorSpriteSheets[0]);
-    spriteId = CreateSprite(&sSpriteTemplates_Cursors[0], 155, (sMapData->cursorPos * 16) + 8, 2);
+    spriteId = CreateSprite(&sSpriteTemplates_Cursors[0], 155, ((sMapData->cursorPos - sMapData->scroll) * MAP_ROW_HEIGHT) + 8, 2);
     sMapData->cursorSprite = &gSprites[spriteId];
     sMapData->cursorSprite->oam.priority = 0;
     sMapData->cursorSprite->hFlip = TRUE;
@@ -1703,6 +1834,24 @@ static void InitFrontierMapSprites(void)
     }
 }
 
+static void PrintFrontierMapNames(void)
+{
+    FillWindowPixelBuffer(MAP_WINDOW_NAME, PIXEL_FILL(0));
+    for (u32 row = 0; row < MAP_VISIBLE_ROWS && sMapData->scroll + row < MAP_LANDMARK_COUNT; row++)
+    {
+        u32 i = sMapData->scroll + row;
+        AddTextPrinterParameterized3(MAP_WINDOW_NAME, FONT_NARROW, 4, (row * MAP_ROW_HEIGHT) + 1,
+                                     sTextColors[i == sMapData->cursorPos ? 2 : 1], 0, sMapLandmarks[i].name);
+    }
+}
+
+static void PrintFrontierMapDescription(const u8 *text)
+{
+    FillWindowPixelBuffer(MAP_WINDOW_DESCRIPTION, PIXEL_FILL(0));
+    AddTextPrinterParameterized3(MAP_WINDOW_DESCRIPTION, FONT_NORMAL, 4, 0, sTextColors[0], 0, text);
+    CopyWindowToVram(MAP_WINDOW_DESCRIPTION, COPYWIN_FULL);
+}
+
 static void PrintOnFrontierMap(void)
 {
     u8 i;
@@ -1713,14 +1862,7 @@ static void PrintOnFrontierMap(void)
         FillWindowPixelBuffer(i, PIXEL_FILL(0));
     }
 
-    for (i = 0; i < NUM_FRONTIER_FACILITIES; i++)
-    {
-        if (i == sMapData->cursorPos)
-            AddTextPrinterParameterized3(MAP_WINDOW_NAME, FONT_NARROW, 4, (i * 16) + 1, sTextColors[2], 0, sMapLandmarks[i].name);
-        else
-            AddTextPrinterParameterized3(MAP_WINDOW_NAME, FONT_NARROW, 4, (i * 16) + 1, sTextColors[1], 0, sMapLandmarks[i].name);
-    }
-
+    PrintFrontierMapNames();
     AddTextPrinterParameterized3(MAP_WINDOW_DESCRIPTION, FONT_NORMAL, 4, 0, sTextColors[0], 0, sMapLandmarks[sMapData->cursorPos].description);
 
     for (i = 0; i < MAP_WINDOW_COUNT; i++)
@@ -1731,23 +1873,21 @@ static void PrintOnFrontierMap(void)
 
 static void HandleFrontierMapCursorMove(u8 direction)
 {
-    u8 oldCursorPos, i;
+    u8 i;
 
     if (direction)
-    {
-        oldCursorPos = sMapData->cursorPos;
-        sMapData->cursorPos = (oldCursorPos + 6) % NUM_FRONTIER_FACILITIES;
-    }
+        sMapData->cursorPos = (sMapData->cursorPos + MAP_LANDMARK_COUNT - 1) % MAP_LANDMARK_COUNT;
     else
-    {
-        oldCursorPos = sMapData->cursorPos;
-        sMapData->cursorPos = (oldCursorPos + 1) % NUM_FRONTIER_FACILITIES;
-    }
+        sMapData->cursorPos = (sMapData->cursorPos + 1) % MAP_LANDMARK_COUNT;
 
-    AddTextPrinterParameterized3(MAP_WINDOW_NAME, FONT_NARROW, 4, (oldCursorPos * 16) + 1, sTextColors[1], 0, sMapLandmarks[oldCursorPos].name);
-    AddTextPrinterParameterized3(MAP_WINDOW_NAME, FONT_NARROW, 4, (sMapData->cursorPos * 16) + 1, sTextColors[2], 0, sMapLandmarks[sMapData->cursorPos].name);
+    // Scroll the list so the cursor's row shows
+    if (sMapData->cursorPos < sMapData->scroll)
+        sMapData->scroll = sMapData->cursorPos;
+    else if (sMapData->cursorPos >= sMapData->scroll + MAP_VISIBLE_ROWS)
+        sMapData->scroll = sMapData->cursorPos - (MAP_VISIBLE_ROWS - 1);
+    PrintFrontierMapNames();
 
-    sMapData->cursorSprite->y = (sMapData->cursorPos * 16) + 8;
+    sMapData->cursorSprite->y = ((sMapData->cursorPos - sMapData->scroll) * MAP_ROW_HEIGHT) + 8;
 
     StartSpriteAnim(sMapData->mapIndicatorSprite, sMapLandmarks[sMapData->cursorPos].animNum);
     sMapData->mapIndicatorSprite->x = sMapLandmarks[sMapData->cursorPos].x;

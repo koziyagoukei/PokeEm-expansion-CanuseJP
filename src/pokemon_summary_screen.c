@@ -3574,11 +3574,8 @@ static void PrintMonAbilityName(void)
         label = COMPOUND_STRING("{JPN}リライブ可能");
         break;
     case SHADOW_STATE_PURIFIED:
-        // The lasting mark of one protected in the Battle Connector and purified
-        if (IsBattleConnectorPurified(&sMonSummaryScreen->currentMon))
-            label = COMPOUND_STRING("{JPN}コネクト済み");
-        else
-            label = COMPOUND_STRING("{JPN}リライブ済み");
+        // Battle Connector Pokemon too (their mark stays in the data: IsBattleConnectorPurified)
+        label = COMPOUND_STRING("{JPN}リライブ済み");
         break;
     default:
         label = COMPOUND_STRING("{JPN}ダーク");

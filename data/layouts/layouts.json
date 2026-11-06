@@ -1309,6 +1309,26 @@
       "secondary_tileset": "gTileset_Underwater",
       "border_filepath": "data/layouts/PartyBath_Underwater/border.bin",
       "blockdata_filepath": "data/layouts/PartyBath_Underwater/map.bin"
+    },
+    {
+      "id": "LAYOUT_BATTLE_CONNECTOR_BRANCH",
+      "name": "BattleConnector_Branch_Layout",
+      "width": 13,
+      "height": 11,
+      "primary_tileset": "gTileset_Building",
+      "secondary_tileset": "gTileset_BattleConnector",
+      "border_filepath": "data/layouts/BattleConnector_Branch/border.bin",
+      "blockdata_filepath": "data/layouts/BattleConnector_Branch/map.bin"
+    },
+    {
+      "id": "LAYOUT_BATTLE_CONNECTOR_ROOM",
+      "name": "BattleConnector_Room_Layout",
+      "width": 9,
+      "height": 8,
+      "primary_tileset": "gTileset_Building",
+      "secondary_tileset": "gTileset_BattleConnector",
+      "border_filepath": "data/layouts/BattleConnector_Room/border.bin",
+      "blockdata_filepath": "data/layouts/BattleConnector_Room/map.bin"
     }
   ]
 }

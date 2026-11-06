@@ -1,5 +1,7 @@
 #include "global.h"
 #include "battle_connector.h"
+#include "battle_frontier.h"
+#include "frontier_tutor.h"
 #include "battle_main.h"
 #include "data.h"
 #include "event_data.h"
@@ -12,6 +14,7 @@
 #include "constants/characters.h"
 #include "test/battle.h"
 #include "constants/battle_connector.h"
+#include "constants/battle_frontier_mons.h"
 #include "constants/opponents.h"
 #include "constants/region_map_sections.h"
 #include "constants/songs.h"
@@ -338,6 +341,113 @@ TEST("Battle Connector: every boss has purification moves, and a protected Pokem
     EXPECT(IsShadowPokemon(&gParties[B_TRAINER_PLAYER][0]));
     EXPECT_EQ(GetShadowGauge(&gParties[B_TRAINER_PLAYER][0]), gauge);
     EXPECT(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_BATTLE_CONNECTOR_ORIGIN));
+}
+
+TEST("Battle Connector: rooms take Battle Frontier sets of generations 1-3 by tier, and the mid-boss its own sets")
+{
+    static const u8 rooms[][2] = {
+        { CONNECTOR_ROOM_SHADOW,         CONNECTOR_TIER_NORMAL },
+        { CONNECTOR_ROOM_STRONG_SHADOW,  CONNECTOR_TIER_STRONG },
+        { CONNECTOR_ROOM_RARE_SHADOW,    CONNECTOR_TIER_RARE },
+        { CONNECTOR_ROOM_DARK_TRAINER,   CONNECTOR_TIER_NORMAL },
+        { CONNECTOR_ROOM_STRONG_TRAINER, CONNECTOR_TIER_STRONG },
+    };
+    u32 room = 0, tries = 0;
+    for (u32 i = 0; i < ARRAY_COUNT(rooms); i++)
+        PARAMETRIZE { room = i; }
+
+    GiveParty(1);
+    StartWith(0);
+    for (tries = 0; tries < 20; tries++)
+    {
+        u16 set, species;
+        BattleConnector_Test_SetUpRoom(rooms[room][0]);
+        set = BattleConnector_Test_GetRoomSet();
+        species = BattleConnector_Test_GetRoomSpecies();
+        EXPECT_LT(set, NUM_FRONTIER_MONS);
+        EXPECT_EQ(gBattleFrontierMons[set].species, species);
+        EXPECT(BattleConnector_IsRoomSpecies(species));
+        EXPECT_LE(SpeciesToNationalPokedexNum(species), BATTLE_CONNECTOR_MAX_DEX_NUM);
+        EXPECT_EQ(BattleConnector_GetSpeciesTier(species), rooms[room][1]);
+    }
+    for (tries = 0; tries < 20; tries++)
+    {
+        BattleConnector_Test_SetUpRoom(CONNECTOR_ROOM_MIDBOSS);
+        EXPECT_LT(BattleConnector_Test_GetRoomSet(), NUM_FRONTIER_MONS);
+        EXPECT_EQ(gBattleFrontierMons[BattleConnector_Test_GetRoomSet()].species, BattleConnector_Test_GetRoomSpecies());
+        EXPECT(gSpeciesInfo[BattleConnector_Test_GetRoomSpecies()].isSubLegendary);
+    }
+    BattleConnector_RetireChallenge();
+}
+
+TEST("Battle Connector: a Shadow Pokemon made from a set keeps the set but no Mega Stone, with three perfect IVs")
+{
+    const struct TrainerMon *fmon = &gBattleFrontierMons[FRONTIER_MON_VENUSAUR_1];
+    struct Pokemon mon;
+    u32 perfect = 0;
+
+    BattleConnector_CreateShadowMonFromSet(&mon, FRONTIER_MON_VENUSAUR_1, 40);
+    EXPECT_EQ(GetMonData(&mon, MON_DATA_SPECIES), SPECIES_VENUSAUR);
+    EXPECT_EQ(GetMonData(&mon, MON_DATA_LEVEL), 40);
+    EXPECT_EQ(GetNature(&mon), fmon->nature);
+    EXPECT_EQ(GetMonData(&mon, MON_DATA_SPATK_EV), fmon->ev[3]);
+    EXPECT_EQ(fmon->heldItem, ITEM_VENUSAURITE);
+    EXPECT_EQ(GetMonData(&mon, MON_DATA_HELD_ITEM), ITEM_NONE);
+    for (u32 stat = 0; stat < NUM_STATS; stat++)
+        perfect += (GetMonData(&mon, MON_DATA_HP_IV + stat) == MAX_PER_STAT_IVS);
+    EXPECT_GE(perfect, BATTLE_CONNECTOR_PERFECT_IVS);
+    EXPECT(IsShadowPokemon(&mon));
+    EXPECT(GetMonData(&mon, MON_DATA_BATTLE_CONNECTOR_ORIGIN));
+    // Its own moves are the set's (the Shadow moves are laid over them in battle)
+    for (u32 i = 0; i < MAX_MON_MOVES; i++)
+        EXPECT_EQ(GetMonData(&mon, MON_DATA_MOVE1 + i), fmon->moves[i]);
+}
+
+static bool32 LearnsetHasMove(const u16 *learnset, u16 move)
+{
+    for (u32 i = 0; learnset != NULL && learnset[i] != MOVE_UNAVAILABLE; i++)
+    {
+        if (learnset[i] == move)
+            return TRUE;
+    }
+    return FALSE;
+}
+
+static bool32 SpeciesCanLearnMove(u16 species, u16 move)
+{
+    const struct LevelUpMove *levelUp = GetSpeciesLevelUpLearnset(species);
+
+    for (u32 i = 0; levelUp != NULL && levelUp[i].move != LEVEL_UP_MOVE_END; i++)
+    {
+        if (levelUp[i].move == move)
+            return TRUE;
+    }
+    return CanLearnTeachableMove(species, move) || LearnsetHasMove(GetSpeciesEggMoves(species), move)
+        || LearnsetHasMove(GetFrontierFullLearnset(species), move) || LearnsetHasMove(GetFrontierEventLearnset(species), move)
+        || LearnsetHasMove(GetFrontierZaDlcLearnset(species), move)
+        || LearnsetHasMove(GetFrontierChampionsLearnset(species), move);
+}
+
+TEST("Battle Connector: every room and mid-boss species learns one of two moves it cannot learn otherwise when purified")
+{
+    struct Pokemon mon;
+    u32 checked = 0;
+
+    for (u32 set = 0; set < NUM_FRONTIER_MONS; set++)
+    {
+        u16 species = gBattleFrontierMons[set].species;
+        bool32 midboss = gSpeciesInfo[species].isSubLegendary && GET_BASE_SPECIES_ID(species) == species
+            && SpeciesToNationalPokedexNum(species) <= BATTLE_CONNECTOR_MAX_DEX_NUM;
+        if ((!BattleConnector_IsRoomSpecies(species) && !midboss) || species == SPECIES_DITTO || species == SPECIES_SMEARGLE)
+            continue;
+        EXPECT_EQ(GetSpeciesPurifyMoveCount(species), 2);
+        BattleConnector_CreateShadowMonFromSet(&mon, set, 50);
+        u16 move = GetShadowPurifyMove(&mon);
+        EXPECT(move != MOVE_NONE);
+        EXPECT(!SpeciesCanLearnMove(species, move));
+        checked++;
+    }
+    EXPECT_GT(checked, 100);
 }
 
 TEST("Battle Connector: Colosseum's battle music follows the room")

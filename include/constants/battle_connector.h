@@ -45,4 +45,9 @@
 #define CONNECTOR_RETURN_FAILED  2
 #define CONNECTOR_RETURN_RETIRED 3
 
+// BattleConnector_GetSpeciesTier: which rooms a Pokemon of the Battle Frontier pool appears in
+#define CONNECTOR_TIER_NORMAL 0 // ordinary Shadow rooms, people who shut themselves away
+#define CONNECTOR_TIER_STRONG 1 // strong Shadow rooms, the strong trainers' first Pokemon
+#define CONNECTOR_TIER_RARE   2 // rare Shadow rooms
+
 #endif // GUARD_CONSTANTS_BATTLE_CONNECTOR_H

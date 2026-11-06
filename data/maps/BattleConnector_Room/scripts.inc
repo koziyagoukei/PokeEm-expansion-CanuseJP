@@ -68,6 +68,8 @@ BattleConnector_Room_EventScript_TrainerRoom::
 	goto_if_eq VAR_RESULT, CONNECTOR_BATTLE_LOST, BattleConnector_EventScript_Lost
 	special BattleConnector_BufferTrainerAfterText
 	msgbox gStringVar4, MSGBOX_DEFAULT
+	closemessage
+	call BattleConnector_Room_EventScript_NpcStepAside
 	call BattleConnector_Room_EventScript_Protect
 	releaseall
 	end
@@ -131,6 +133,8 @@ BattleConnector_Room_EventScript_HealRoom::
 	playfanfare MUS_HEAL
 	waitfanfare
 	msgbox BattleConnector_Room_Text_Healed, MSGBOX_DEFAULT
+	closemessage
+	call BattleConnector_Room_EventScript_NpcStepAside
 	releaseall
 	end
 
@@ -141,11 +145,15 @@ BattleConnector_Room_EventScript_CalmRoom::
 	playse SE_M_HEAL_BELL
 	waitse
 	msgbox BattleConnector_Room_Text_Calmed, MSGBOX_DEFAULT
+	closemessage
+	call BattleConnector_Room_EventScript_NpcStepAside
 	releaseall
 	end
 
 BattleConnector_Room_EventScript_CalmNoShadow::
 	msgbox BattleConnector_Room_Text_CalmNoShadow, MSGBOX_DEFAULT
+	closemessage
+	call BattleConnector_Room_EventScript_NpcStepAside
 	releaseall
 	end
 
@@ -155,6 +163,17 @@ BattleConnector_Room_EventScript_ItemRoom::
 	giveitem VAR_0x8004
 	releaseall
 	end
+
+@ The person in the room moves out of the doorway's way (the only way to the doorway is the tile in front of it)
+BattleConnector_Room_EventScript_NpcStepAside::
+	applymovement LOCALID_CONNECTOR_ROOM_NPC, BattleConnector_Room_Movement_StepAside
+	waitmovement 0
+	return
+
+BattleConnector_Room_Movement_StepAside:
+	walk_left
+	face_down
+	step_end
 
 BattleConnector_Room_EventScript_Exit::
 	lockall
@@ -176,7 +195,7 @@ BattleConnector_Room_EventScript_ExitToRoom::
 BattleConnector_Room_EventScript_ExitToResults::
 	msgbox BattleConnector_Room_Text_Cleared, MSGBOX_DEFAULT
 	closemessage
-	warp MAP_ARTISAN_CAVE_1F, 10, 16
+	warp MAP_ARTISAN_CAVE_1F, 6, 12
 	waitstate
 	end
 

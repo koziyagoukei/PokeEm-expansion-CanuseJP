@@ -800,6 +800,17 @@ const struct Tileset gTileset_BattlePike =
     .callback = NULL,
 };
 
+const struct Tileset gTileset_BattleConnector =
+{
+    .isCompressed = TRUE,
+    .isSecondary = TRUE,
+    .tiles = gTilesetTiles_BattleConnector,
+    .palettes = gTilesetPalettes_BattleConnector,
+    .metatiles = gMetatiles_BattleConnector,
+    .metatileAttributes = gMetatileAttributes_BattleConnector,
+    .callback = NULL,
+};
+
 const struct Tileset gTileset_BattleArena =
 {
     .isCompressed = TRUE,

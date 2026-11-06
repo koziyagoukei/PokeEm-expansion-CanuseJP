@@ -1,5 +1,6 @@
 static const u8 sInfoText_TitleTips[] = _("{ENG}TIPS");
 static const u8 sInfoText_TitleShadow[] = _("{JPN}ダークポケモン");
+static const u8 sInfoText_TitleBattleConnector[] = _("{JPN}バトルコネクター");
 static const u8 sInfoText_TitleFacilities[] = _("{JPN}施設の ルール");
 static const u8 sInfoText_TitleTower[] = _("{JPN}バトルタワー");
 static const u8 sInfoText_TitleDome[] = _("{JPN}バトルドーム");
@@ -318,9 +319,61 @@ static const u8 sInfoText_Shadow5[] = _(
     "リライブすると ダーク状態が 解け\n"
     "元の技が すべて 使えるようになります。");
 
+static const u8 sInfoText_Shadow6[] = _(
+    "{JPN}「ダークの 間の 制限」\n"
+    "経験値は ためておき リライブした時に\n"
+    "まとめて 入ります。\n"
+    "進化・交換・わざマシンは できません。\n"
+    "バトル施設にも 連れて いけません。");
+
 static const u8 *const sInfoViewerPages_Shadow[] = {
     sInfoText_Shadow1, sInfoText_Shadow2, sInfoText_Shadow3,
-    sInfoText_Shadow4, sInfoText_Shadow5,
+    sInfoText_Shadow4, sInfoText_Shadow5, sInfoText_Shadow6,
+};
+
+static const u8 sInfoText_BattleConnector1[] = _(
+    "{JPN}「バトルコネクターとは」\n"
+    "アトリエの あなの 受付から 挑戦。\n"
+    "手持ちから 1匹だけ 連れて 入り\n"
+    "分かれ道を 選んで 奥へ 進みます。\n"
+    "途中に 中ボス 最深部に ボスが います。\n"
+    "連れて いく ポケモンに 制限は ありません。");
+
+static const u8 sInfoText_BattleConnector2[] = _(
+    "{JPN}「部屋と ヒント」\n"
+    "分かれ道の 入口に 立つと\n"
+    "先の 部屋の 気配が わかります。\n"
+    "ダークポケモン・トレーナー・回復・\n"
+    "かおり・道具などの 部屋が あります。\n"
+    "かおりの 後は 気配が 正確に わかります。");
+
+static const u8 sInfoText_BattleConnector3[] = _(
+    "{JPN}「保護と 持ち帰り」\n"
+    "倒した ダークポケモンは 保護できます。\n"
+    "3匹までは 手持ちで 一緒に 戦い\n"
+    "保護は 6匹まで できます。\n"
+    "クリアすると 保護した 中から\n"
+    "1匹だけ 連れて 帰れます。");
+
+static const u8 sInfoText_BattleConnector4[] = _(
+    "{JPN}「施設の ルール」\n"
+    "経験値は 入らず ボールと 逃げるは 不可。\n"
+    "施設の 中では レポートを 書けません。\n"
+    "負けるか リタイアすると 保護した\n"
+    "ポケモンとは お別れです。\n"
+    "手持ちは 挑戦前の 状態に 戻ります。");
+
+static const u8 sInfoText_BattleConnector5[] = _(
+    "{JPN}「リライブ技」\n"
+    "ここの ダークポケモンは 3つ以上の\n"
+    "能力の 個体値が 最高です。\n"
+    "リライブすると ふだんは 覚えない\n"
+    "特別な 技を 1つ 覚えます。\n"
+    "持ち帰る ポケモンを 選ぶ時に 確認できます。");
+
+static const u8 *const sInfoViewerPages_BattleConnector[] = {
+    sInfoText_BattleConnector1, sInfoText_BattleConnector2, sInfoText_BattleConnector3,
+    sInfoText_BattleConnector4, sInfoText_BattleConnector5,
 };
 
 static const struct InfoViewerChoice sInfoViewerChoices_Tips[] = {
@@ -328,6 +381,7 @@ static const struct InfoViewerChoice sInfoViewerChoices_Tips[] = {
     {sInfoText_TitleFacilities, INFO_TIPS_FACILITIES},
     {COMPOUND_STRING("{JPN}ギミックの 基本"), INFO_GIMMICK_HELP},
     {sInfoText_TitleShadow, INFO_TIPS_SHADOW},
+    {sInfoText_TitleBattleConnector, INFO_TIPS_BATTLE_CONNECTOR},
     {COMPOUND_STRING("{JPN}AIの 難しさと 傾向"), INFO_TIPS_HUB_DIFFICULTY},
     {sInfoText_TitleBannedMons, INFO_BANNED_MONS},
     {sInfoText_TitleHub, INFO_TIPS_HUB},

@@ -12,14 +12,14 @@ BattleConnector_Movement_StepDown:
 @ Losing a battle ends the run: the party comes back as it was
 BattleConnector_EventScript_Lost::
 	special BattleConnector_FailChallenge
-	warp MAP_ARTISAN_CAVE_1F, 10, 16
+	warp MAP_ARTISAN_CAVE_1F, 6, 12
 	waitstate
 	end
 
 BattleConnector_EventScript_Retire::
 	special BattleConnector_RetireChallenge
 	closemessage
-	warp MAP_ARTISAN_CAVE_1F, 10, 16
+	warp MAP_ARTISAN_CAVE_1F, 6, 12
 	waitstate
 	end
 
@@ -56,10 +56,15 @@ BattleConnector_EventScript_CantBring::
 BattleConnector_EventScript_CheckReturn::
 	setvar VAR_TEMP_0, 1
 	specialvar VAR_RESULT, BattleConnector_GetReturnState
+	goto_if_eq VAR_RESULT, CONNECTOR_RETURN_NONE, BattleConnector_EventScript_NoReturn
+	turnobject LOCALID_PLAYER, DIR_NORTH
 	switch VAR_RESULT
 	case CONNECTOR_RETURN_CLEARED, BattleConnector_EventScript_Results
 	case CONNECTOR_RETURN_FAILED, BattleConnector_EventScript_ReturnFailed
 	case CONNECTOR_RETURN_RETIRED, BattleConnector_EventScript_ReturnRetired
+	end
+
+BattleConnector_EventScript_NoReturn::
 	end
 
 BattleConnector_EventScript_ReturnFailed::

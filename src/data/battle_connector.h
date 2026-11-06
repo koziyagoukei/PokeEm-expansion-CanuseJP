@@ -85,33 +85,11 @@ static const u8 *const sConnectorPreciseHintTexts[CONNECTOR_ROOM_COUNT] =
     [CONNECTOR_ROOM_RANDOM]         = COMPOUND_STRING("{JPN}なにが あるか わからない"),
 };
 
-// Shadow Pokemon of the rooms. Most are Pokemon XD's own Shadow Pokemon.
-static const u16 sConnectorShadowPool[] =
-{
-    SPECIES_TEDDIURSA, SPECIES_RALTS, SPECIES_SNORUNT, SPECIES_PINECO, SPECIES_SPHEAL, SPECIES_SWABLU,
-    SPECIES_NATU, SPECIES_ROSELIA, SPECIES_MEOWTH, SPECIES_SWINUB, SPECIES_SPEAROW, SPECIES_GRIMER,
-    SPECIES_SEEDOT, SPECIES_SPINARAK, SPECIES_SHROOMISH, SPECIES_NUMEL, SPECIES_SHUPPET, SPECIES_DUSKULL,
-    SPECIES_MAKUHITA, SPECIES_KOFFING, SPECIES_BALTOY, SPECIES_PSYDUCK, SPECIES_VOLTORB, SPECIES_SNUBBULL,
-    SPECIES_HOUNDOUR, SPECIES_PARAS, SPECIES_VULPIX, SPECIES_GOLDEEN, SPECIES_SLUGMA, SPECIES_SANDSHREW,
-};
+// The Shadow Pokemon of the rooms are not listed here: they are the Battle Frontier pool's Pokemon of generations 1-3
+// (src/battle_connector.c, include/config/battle_connector.h), each with one of its sets.
 
-static const u16 sConnectorStrongPool[] =
-{
-    SPECIES_MAROWAK, SPECIES_SNEASEL, SPECIES_HOUNDOOM, SPECIES_MAGNETON, SPECIES_PRIMEAPE, SPECIES_HITMONLEE,
-    SPECIES_HITMONCHAN, SPECIES_SCYTHER, SPECIES_PINSIR, SPECIES_ELECTABUZZ, SPECIES_MAGMAR, SPECIES_POLIWRATH,
-    SPECIES_MR_MIME, SPECIES_LICKITUNG, SPECIES_SOLROCK, SPECIES_STARMIE, SPECIES_SWELLOW, SPECIES_DODRIO,
-    SPECIES_RAPIDASH, SPECIES_SABLEYE, SPECIES_MAWILE, SPECIES_ARBOK, SPECIES_GRANBULL, SPECIES_SKARMORY,
-};
-
-static const u16 sConnectorRarePool[] =
-{
-    SPECIES_DRAGONITE, SPECIES_TYRANITAR, SPECIES_SALAMENCE, SPECIES_METAGROSS, SPECIES_GYARADOS, SPECIES_LAPRAS,
-    SPECIES_SNORLAX, SPECIES_AERODACTYL, SPECIES_SCIZOR, SPECIES_HERACROSS, SPECIES_ABSOL, SPECIES_MILOTIC,
-    SPECIES_TAUROS, SPECIES_ALAKAZAM, SPECIES_GENGAR, SPECIES_ARCANINE,
-};
-
-// The mid-boss and the boss. A Pokemon joins the list once the facility has been cleared minClears times and its
-// flag (0: none) is set, so later conditions can add more.
+// The mid-boss (with one of its Battle Frontier sets) and the boss. A Pokemon joins the list once the facility has
+// been cleared minClears times and its flag (0: none) is set, so later conditions can add more.
 struct ConnectorSpeciesEntry
 {
     u16 species;
