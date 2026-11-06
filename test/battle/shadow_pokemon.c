@@ -609,6 +609,24 @@ SINGLE_BATTLE_TEST("Shadow: Reverse Mode costs 1/16 of the max HP each turn and 
     }
 }
 
+SINGLE_BATTLE_TEST("Shadow: a move a Call opens can be used from the next turn of the same battle")
+{
+    GIVEN {
+        // Spheal's heart gauge is 1500 (Pokemon XD): a Hardy Call takes 300 off, a whole bar, which opens the first own
+        // move. Spheal's Shadow moves are Shadow Rush and Shadow Chill, so that move is in the third slot.
+        PLAYER(SPECIES_SPHEAL) { Shadow(TRUE); ShadowHyperMode(TRUE); Nature(NATURE_HARDY); Moves(MOVE_POUND, MOVE_TACKLE, MOVE_CELEBRATE); }
+        OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_CELEBRATE); }
+    } WHEN {
+        TURN { SHADOW_CALL(player); }
+        TURN { MOVE(player, moveSlot: 2); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_CELEBRATE, player);
+    } THEN {
+        EXPECT_EQ(player->moves[2], MOVE_CELEBRATE);
+        EXPECT_EQ(player->pp[2], GetMovePP(MOVE_CELEBRATE) - 1);
+    }
+}
+
 SINGLE_BATTLE_TEST("Shadow: using a Shadow move may send the Pokemon into Reverse Mode at the end of the turn")
 {
     PASSES_RANDOMLY(30, 100, RNG_SHADOW_REVERSE_MODE);

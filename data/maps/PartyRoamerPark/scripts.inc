@@ -80,6 +80,8 @@ PartyRoamerPark_EventScript_Purify:
 	fadescreen FADE_TO_BLACK
 	special Special_ShadowPokemon_StartPurificationScene
 	waitstate
+	@ The purification scene (the evolution scene) uses STR_VAR_1 for itself
+	bufferpartymonnick STR_VAR_1, VAR_0x8004
 	msgbox PartyRoamerPark_Text_PurifyDone, MSGBOX_DEFAULT
 	release
 	end

@@ -8,6 +8,12 @@
 #define SHADOW_DEFAULT_HEART_GAUGE 3000
 #define SHADOW_DEFAULT_AGGRESSION  3
 
+// A species with no Shadow moves of its own gets them from its base stats (src/shadow_pokemon.c, GetDefaultShadowMoves):
+// from STRONG_BST a harder hit and a support move, from RARE_BST the strongest ones. The same lines as the Battle
+// Connector's strong and rare rooms.
+#define SHADOW_DEFAULT_STRONG_BST 480
+#define SHADOW_DEFAULT_RARE_BST   535
+
 // A Shadow Pokemon gains no EXP. This % of it is held and given at purification (Pokemon XD: 80).
 #define SHADOW_HELD_EXP_PERCENT 80
 

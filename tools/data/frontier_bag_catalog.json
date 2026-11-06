@@ -123,7 +123,6 @@
     {
       "item": "ITEM_BRIGHT_POWDER",
       "sources": [
-        "data/maps/BattleFrontier_ExchangeServiceCorner/scripts.inc",
         "src/frontier_creator.c:sFrontierHubAutoItems"
       ]
     },
@@ -148,7 +147,6 @@
     {
       "item": "ITEM_CALCIUM",
       "sources": [
-        "data/maps/BattleFrontier_ExchangeServiceCorner/scripts.inc",
         "data/maps/BattleFrontier_Mart/scripts.inc"
       ]
     },
@@ -161,7 +159,6 @@
     {
       "item": "ITEM_CARBOS",
       "sources": [
-        "data/maps/BattleFrontier_ExchangeServiceCorner/scripts.inc",
         "data/maps/BattleFrontier_Mart/scripts.inc"
       ]
     },
@@ -186,7 +183,6 @@
     {
       "item": "ITEM_CHOICE_BAND",
       "sources": [
-        "data/maps/BattleFrontier_ExchangeServiceCorner/scripts.inc",
         "src/frontier_creator.c:sFrontierHubAutoItems"
       ]
     },
@@ -254,6 +250,12 @@
       "item": "ITEM_DESTINY_KNOT",
       "sources": [
         "src/battle_script_commands.c:sPickupTable"
+      ]
+    },
+    {
+      "item": "ITEM_DIRE_HIT",
+      "sources": [
+        "data/maps/BattleFrontier_ExchangeServiceCorner/scripts.inc"
       ]
     },
     {
@@ -331,6 +333,7 @@
     {
       "item": "ITEM_ETHER",
       "sources": [
+        "data/maps/BattleFrontier_ExchangeServiceCorner/scripts.inc",
         "src/battle_script_commands.c:sPickupTable"
       ]
     },
@@ -416,7 +419,6 @@
     {
       "item": "ITEM_FOCUS_BAND",
       "sources": [
-        "data/maps/BattleFrontier_ExchangeServiceCorner/scripts.inc",
         "src/frontier_creator.c:sFrontierHubAutoItems"
       ]
     },
@@ -430,6 +432,7 @@
     {
       "item": "ITEM_FULL_HEAL",
       "sources": [
+        "data/maps/BattleFrontier_ExchangeServiceCorner/scripts.inc",
         "data/maps/BattleFrontier_Mart/scripts.inc",
         "src/battle_script_commands.c:sPickupTable"
       ]
@@ -437,6 +440,7 @@
     {
       "item": "ITEM_FULL_RESTORE",
       "sources": [
+        "data/maps/BattleFrontier_ExchangeServiceCorner/scripts.inc",
         "data/maps/BattleFrontier_Mart/scripts.inc"
       ]
     },
@@ -513,6 +517,12 @@
       ]
     },
     {
+      "item": "ITEM_GUARD_SPEC",
+      "sources": [
+        "data/maps/BattleFrontier_ExchangeServiceCorner/scripts.inc"
+      ]
+    },
+    {
       "item": "ITEM_HASTY_MINT",
       "sources": [
         "src/frontier_creator.c:sFrontierMintGiveItems"
@@ -546,13 +556,13 @@
     {
       "item": "ITEM_HP_UP",
       "sources": [
-        "data/maps/BattleFrontier_ExchangeServiceCorner/scripts.inc",
         "data/maps/BattleFrontier_Mart/scripts.inc"
       ]
     },
     {
       "item": "ITEM_HYPER_POTION",
       "sources": [
+        "data/maps/BattleFrontier_ExchangeServiceCorner/scripts.inc",
         "data/maps/BattleFrontier_Mart/scripts.inc",
         "src/battle_script_commands.c:sPickupTable"
       ]
@@ -596,7 +606,6 @@
     {
       "item": "ITEM_IRON",
       "sources": [
-        "data/maps/BattleFrontier_ExchangeServiceCorner/scripts.inc",
         "data/maps/BattleFrontier_Mart/scripts.inc"
       ]
     },
@@ -621,7 +630,6 @@
     {
       "item": "ITEM_KINGS_ROCK",
       "sources": [
-        "data/maps/BattleFrontier_ExchangeServiceCorner/scripts.inc",
         "src/frontier_creator.c:sFrontierHubAutoItems"
       ]
     },
@@ -653,7 +661,6 @@
     {
       "item": "ITEM_LEFTOVERS",
       "sources": [
-        "data/maps/BattleFrontier_ExchangeServiceCorner/scripts.inc",
         "src/battle_script_commands.c:sPickupTable",
         "src/frontier_creator.c:sFrontierHubAutoItems",
         "src/frontier_creator.c:sFrontierHubInitialGiftMonPairs"
@@ -718,6 +725,7 @@
     {
       "item": "ITEM_MAX_ELIXIR",
       "sources": [
+        "data/maps/BattleFrontier_ExchangeServiceCorner/scripts.inc",
         "src/battle_script_commands.c:sPickupTable"
       ]
     },
@@ -736,6 +744,7 @@
     {
       "item": "ITEM_MAX_POTION",
       "sources": [
+        "data/maps/BattleFrontier_ExchangeServiceCorner/scripts.inc",
         "data/maps/BattleFrontier_Mart/scripts.inc",
         "src/battle_script_commands.c:sPickupTable"
       ]
@@ -750,6 +759,7 @@
     {
       "item": "ITEM_MAX_REVIVE",
       "sources": [
+        "data/maps/BattleFrontier_ExchangeServiceCorner/scripts.inc",
         "src/battle_script_commands.c:sPickupTable"
       ]
     },
@@ -762,7 +772,6 @@
     {
       "item": "ITEM_MENTAL_HERB",
       "sources": [
-        "data/maps/BattleFrontier_ExchangeServiceCorner/scripts.inc",
         "src/battle_script_commands.c:sPickupTable",
         "src/frontier_creator.c:sFrontierHubAutoItems"
       ]
@@ -922,7 +931,6 @@
     {
       "item": "ITEM_PROTEIN",
       "sources": [
-        "data/maps/BattleFrontier_ExchangeServiceCorner/scripts.inc",
         "data/maps/BattleFrontier_Mart/scripts.inc"
       ]
     },
@@ -959,7 +967,6 @@
     {
       "item": "ITEM_QUICK_CLAW",
       "sources": [
-        "data/maps/BattleFrontier_ExchangeServiceCorner/scripts.inc",
         "src/frontier_creator.c:sFrontierHubAutoItems"
       ]
     },
@@ -1039,6 +1046,7 @@
     {
       "item": "ITEM_REVIVE",
       "sources": [
+        "data/maps/BattleFrontier_ExchangeServiceCorner/scripts.inc",
         "data/maps/BattleFrontier_Mart/scripts.inc",
         "src/battle_script_commands.c:sPickupTable"
       ]
@@ -1100,7 +1108,6 @@
     {
       "item": "ITEM_SCOPE_LENS",
       "sources": [
-        "data/maps/BattleFrontier_ExchangeServiceCorner/scripts.inc",
         "src/frontier_creator.c:sFrontierHubAutoItems"
       ]
     },
@@ -1185,6 +1192,7 @@
     {
       "item": "ITEM_SUPER_POTION",
       "sources": [
+        "data/maps/BattleFrontier_ExchangeServiceCorner/scripts.inc",
         "src/battle_script_commands.c:sPickupTable"
       ]
     },
@@ -1270,7 +1278,6 @@
     {
       "item": "ITEM_WHITE_HERB",
       "sources": [
-        "data/maps/BattleFrontier_ExchangeServiceCorner/scripts.inc",
         "src/battle_script_commands.c:sPickupTable",
         "src/frontier_creator.c:sFrontierHubAutoItems"
       ]
@@ -1285,6 +1292,42 @@
       "item": "ITEM_WISE_GLASSES",
       "sources": [
         "src/frontier_creator.c:sFrontierHubAutoItems"
+      ]
+    },
+    {
+      "item": "ITEM_X_ACCURACY",
+      "sources": [
+        "data/maps/BattleFrontier_ExchangeServiceCorner/scripts.inc"
+      ]
+    },
+    {
+      "item": "ITEM_X_ATTACK",
+      "sources": [
+        "data/maps/BattleFrontier_ExchangeServiceCorner/scripts.inc"
+      ]
+    },
+    {
+      "item": "ITEM_X_DEFENSE",
+      "sources": [
+        "data/maps/BattleFrontier_ExchangeServiceCorner/scripts.inc"
+      ]
+    },
+    {
+      "item": "ITEM_X_SPEED",
+      "sources": [
+        "data/maps/BattleFrontier_ExchangeServiceCorner/scripts.inc"
+      ]
+    },
+    {
+      "item": "ITEM_X_SP_ATK",
+      "sources": [
+        "data/maps/BattleFrontier_ExchangeServiceCorner/scripts.inc"
+      ]
+    },
+    {
+      "item": "ITEM_X_SP_DEF",
+      "sources": [
+        "data/maps/BattleFrontier_ExchangeServiceCorner/scripts.inc"
       ]
     },
     {
@@ -1308,7 +1351,6 @@
     {
       "item": "ITEM_ZINC",
       "sources": [
-        "data/maps/BattleFrontier_ExchangeServiceCorner/scripts.inc",
         "data/maps/BattleFrontier_Mart/scripts.inc"
       ]
     },
@@ -1325,5 +1367,5 @@
       ]
     }
   ],
-  "ordinary_item_count": 215
+  "ordinary_item_count": 223
 }

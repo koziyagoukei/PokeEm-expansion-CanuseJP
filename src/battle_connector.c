@@ -207,17 +207,22 @@ static u32 GetPlayerOTID(void)
 void BattleConnector_CreateShadowMon(struct Pokemon *mon, u16 species, u32 level)
 {
     CreateMon(mon, species, level, Random32(), OTID_STRUCT_PLAYER_ID);
+    GiveMonInitialMoveset(mon); // CreateMon leaves the moves empty
     FinishShadowMon(mon);
 }
 
 // A Shadow Pokemon from a Battle Frontier pool set (the rooms, the mid-boss): the set's moves, item, nature, ability,
-// EVs, IVs and Tera type. It cannot Mega Evolve or use Z-Moves, so it holds no Mega Stone or Z-Crystal.
+// EVs, IVs and Tera type (not a set's nickname). It cannot Mega Evolve or use Z-Moves, so it holds no Mega Stone or
+// Z-Crystal.
 void BattleConnector_CreateShadowMonFromSet(struct Pokemon *mon, u16 set, u32 level)
 {
     const u16 none = ITEM_NONE;
     enum HoldEffect holdEffect;
 
     CreateFacilityMon(&gBattleFrontierMons[set], level, USE_RANDOM_IVS, GetPlayerOTID(), 0, mon);
+    // A Frontier trainer's nickname does not belong to a wild Shadow Pokemon
+    if (gBattleFrontierMons[set].nickname != NULL)
+        SetMonData(mon, MON_DATA_NICKNAME, GetSpeciesName(gBattleFrontierMons[set].species));
     holdEffect = GetItemHoldEffect(GetMonData(mon, MON_DATA_HELD_ITEM));
     if (holdEffect == HOLD_EFFECT_MEGA_STONE || holdEffect == HOLD_EFFECT_Z_CRYSTAL)
         SetMonData(mon, MON_DATA_HELD_ITEM, &none);
@@ -453,28 +458,32 @@ static u32 RollHint(u32 roomType)
 
 // ---- specials: challenge ----------------------------------------------------------------------------------------------
 
-// VAR_0x8004: the party slot of the Pokemon the player brings. Anything that can be in the party may come (no species
-// rules: this is not a Battle Frontier facility). Returns FALSE if it cannot.
+// VAR_0x8004 and VAR_0x8005: the party slots of the Pokemon the player brings (VAR_0x8005 PARTY_SIZE: only one; up to
+// BATTLE_CONNECTOR_BRING_COUNT). Anything that can be in the party may come (no species rules: this is not a Battle
+// Frontier facility). Returns FALSE if they cannot.
 u16 BattleConnector_StartChallenge(void)
 {
-    u32 slot = gSpecialVar_0x8004;
-    struct Pokemon *mon;
+    u16 slots[2] = { gSpecialVar_0x8004, gSpecialVar_0x8005 };
+    u32 count = (BATTLE_CONNECTOR_BRING_COUNT >= 2 && slots[1] < PARTY_SIZE) ? 2 : 1;
 
-    if (slot >= PARTY_SIZE || !IsMonPresent(&gParties[B_TRAINER_PLAYER][slot]))
+    if (slots[0] >= PARTY_SIZE || !IsMonPresent(&gParties[B_TRAINER_PLAYER][slots[0]]))
+        return FALSE;
+    if (count == 2 && (slots[1] == slots[0] || !IsMonPresent(&gParties[B_TRAINER_PLAYER][slots[1]])))
         return FALSE;
 
     ClearRun(CONNECTOR_RETURN_NONE);
     memcpy(sRun.savedParty, gParties[B_TRAINER_PLAYER], sizeof(sRun.savedParty));
-    mon = &gParties[B_TRAINER_PLAYER][0];
-    if (slot != 0)
-        gParties[B_TRAINER_PLAYER][0] = sRun.savedParty[slot];
-    for (u32 i = 1; i < PARTY_SIZE; i++)
-        ZeroMonData(&gParties[B_TRAINER_PLAYER][i]);
+    ZeroPlayerPartyMons();
+    for (u32 i = 0; i < count; i++)
+    {
+        struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][i];
+        *mon = sRun.savedParty[slots[i]];
+        HealPokemon(mon);
+        // The rooms' levels follow the stronger Pokemon brought
+        sRun.baseLevel = max(sRun.baseLevel, (u8)GetMonData(mon, MON_DATA_LEVEL));
+    }
     CalculatePlayerPartyCount();
-    HealPokemon(mon);
-
     sRun.active = TRUE;
-    sRun.baseLevel = GetMonData(mon, MON_DATA_LEVEL);
     return TRUE;
 }
 

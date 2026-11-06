@@ -31,6 +31,7 @@ static void GiveParty(u32 count)
 static void StartWith(u32 slot)
 {
     gSpecialVar_0x8004 = slot;
+    gSpecialVar_0x8005 = PARTY_SIZE;
     EXPECT(BattleConnector_StartChallenge());
 }
 
@@ -43,7 +44,7 @@ static void DefeatShadowMon(u16 species)
     CalculateEnemyPartyCount();
 }
 
-TEST("Battle Connector: the player brings exactly one Pokemon, of any species, and gets the party back")
+TEST("Battle Connector: the player brings one Pokemon, of any species, and gets the party back")
 {
     GiveParty(6);
     StartWith(0); // Mewtwo: no species rules
@@ -62,6 +63,27 @@ TEST("Battle Connector: the player brings exactly one Pokemon, of any species, a
     EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_SPECIES), SPECIES_EEVEE);
     BattleConnector_RetireChallenge();
     gSpecialVar_0x8004 = 4; // an empty slot
+    gSpecialVar_0x8005 = PARTY_SIZE;
+    EXPECT(!BattleConnector_StartChallenge());
+    EXPECT(!BattleConnector_IsChallengeActive());
+}
+
+TEST("Battle Connector: the player may bring a second Pokemon, but not the same one twice")
+{
+    GiveParty(6);
+    gSpecialVar_0x8004 = 3;
+    gSpecialVar_0x8005 = 1;
+    EXPECT(BattleConnector_StartChallenge());
+    EXPECT_EQ(CalculatePlayerPartyCount(), 2);
+    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_SPECIES), SPECIES_ZIGZAGOON);
+    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][1], MON_DATA_SPECIES), SPECIES_PIKACHU);
+    BattleConnector_RetireChallenge();
+    EXPECT_EQ(CalculatePlayerPartyCount(), 6);
+    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][1], MON_DATA_SPECIES), SPECIES_PIKACHU);
+    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][3], MON_DATA_SPECIES), SPECIES_ZIGZAGOON);
+
+    gSpecialVar_0x8004 = 2;
+    gSpecialVar_0x8005 = 2;
     EXPECT(!BattleConnector_StartChallenge());
     EXPECT(!BattleConnector_IsChallengeActive());
 }
@@ -291,6 +313,9 @@ TEST("Battle Connector: a boss learns its purification move when purified and ke
     move = GetShadowPurifyMove(mon);
     EXPECT(move == MOVE_RAGE_FIST || move == MOVE_FIERY_WRATH);
     EXPECT(!IsBattleConnectorPurified(mon));
+    // It knows its own moves (they come back when purified)
+    for (u32 i = 0; i < MAX_MON_MOVES; i++)
+        EXPECT(GetMonData(mon, MON_DATA_MOVE1 + i) != MOVE_NONE);
 
     // Room for it: purification teaches it
     for (u32 i = 1; i < MAX_MON_MOVES; i++)
@@ -401,6 +426,17 @@ TEST("Battle Connector: a Shadow Pokemon made from a set keeps the set but no Me
     // Its own moves are the set's (the Shadow moves are laid over them in battle)
     for (u32 i = 0; i < MAX_MON_MOVES; i++)
         EXPECT_EQ(GetMonData(&mon, MON_DATA_MOVE1 + i), fmon->moves[i]);
+}
+
+TEST("Battle Connector: a Shadow Pokemon made from a set with a nickname goes by its species name")
+{
+    struct Pokemon mon;
+    u8 name[POKEMON_NAME_BUFFER_SIZE];
+
+    EXPECT(gBattleFrontierMons[FRONTIER_MON_SALAMENCE_1].nickname != NULL);
+    BattleConnector_CreateShadowMonFromSet(&mon, FRONTIER_MON_SALAMENCE_1, 50);
+    GetMonData(&mon, MON_DATA_NICKNAME, name);
+    EXPECT_EQ(StringCompare(name, GetSpeciesName(SPECIES_SALAMENCE)), 0);
 }
 
 static bool32 LearnsetHasMove(const u16 *learnset, u16 move)

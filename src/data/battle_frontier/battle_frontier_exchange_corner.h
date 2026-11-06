@@ -23,29 +23,31 @@ static const u16 sFrontierExchangeCorner_Decor2[] =
     ITEM_LIST_END
 };
 
-static const enum Item sFrontierExchangeCorner_Vitamins[] =
+static const enum Item sFrontierExchangeCorner_Recovery[] =
 {
-    ITEM_PROTEIN,
-    ITEM_CALCIUM,
-    ITEM_IRON,
-    ITEM_ZINC,
-    ITEM_CARBOS,
-    ITEM_HP_UP,
-    ITEM_LIST_END
+    ITEM_SUPER_POTION,
+    ITEM_HYPER_POTION,
+    ITEM_MAX_POTION,
+    ITEM_FULL_RESTORE,
+    ITEM_FULL_HEAL,
+    ITEM_REVIVE,
+    ITEM_MAX_REVIVE,
+    ITEM_ETHER,
+    ITEM_MAX_ELIXIR,
+    ITEM_LIST_END,
 };
 
-static const enum Item sFrontierExchangeCorner_HoldItems[] =
+static const enum Item sFrontierExchangeCorner_BattleItems[] =
 {
-    ITEM_LEFTOVERS,
-    ITEM_WHITE_HERB,
-    ITEM_QUICK_CLAW,
-    ITEM_MENTAL_HERB,
-    ITEM_BRIGHT_POWDER,
-    ITEM_CHOICE_BAND,
-    ITEM_KINGS_ROCK,
-    ITEM_FOCUS_BAND,
-    ITEM_SCOPE_LENS,
-    ITEM_LIST_END
+    ITEM_X_ATTACK,
+    ITEM_X_DEFENSE,
+    ITEM_X_SP_ATK,
+    ITEM_X_SP_DEF,
+    ITEM_X_SPEED,
+    ITEM_X_ACCURACY,
+    ITEM_DIRE_HIT,
+    ITEM_GUARD_SPEC,
+    ITEM_LIST_END,
 };
 
 static const u8 *const sFrontierExchangeCorner_Decor1Descriptions[] =
@@ -73,27 +75,29 @@ static const u8 *const sFrontierExchangeCorner_Decor2Descriptions[] =
     gText_Exit
 };
 
-static const u8 *const sFrontierExchangeCorner_VitaminsDescriptions[] =
+static const u8 *const sFrontierExchangeCorner_RecoveryDescriptions[] =
 {
-    BattleFrontier_ExchangeServiceCorner_Text_ProteinDesc,
-    BattleFrontier_ExchangeServiceCorner_Text_CalciumDesc,
-    BattleFrontier_ExchangeServiceCorner_Text_IronDesc,
-    BattleFrontier_ExchangeServiceCorner_Text_ZincDesc,
-    BattleFrontier_ExchangeServiceCorner_Text_CarbosDesc,
-    BattleFrontier_ExchangeServiceCorner_Text_HPUpDesc,
+    BattleFrontier_ExchangeServiceCorner_Text_SuperPotionDesc,
+    BattleFrontier_ExchangeServiceCorner_Text_HyperPotionDesc,
+    BattleFrontier_ExchangeServiceCorner_Text_MaxPotionDesc,
+    BattleFrontier_ExchangeServiceCorner_Text_FullRestoreDesc,
+    BattleFrontier_ExchangeServiceCorner_Text_FullHealDesc,
+    BattleFrontier_ExchangeServiceCorner_Text_ReviveDesc,
+    BattleFrontier_ExchangeServiceCorner_Text_MaxReviveDesc,
+    BattleFrontier_ExchangeServiceCorner_Text_EtherDesc,
+    BattleFrontier_ExchangeServiceCorner_Text_MaxElixirDesc,
     gText_Exit
 };
 
-static const u8 *const sFrontierExchangeCorner_HoldItemsDescriptions[] =
+static const u8 *const sFrontierExchangeCorner_BattleItemsDescriptions[] =
 {
-    BattleFrontier_ExchangeServiceCorner_Text_LeftoversDesc,
-    BattleFrontier_ExchangeServiceCorner_Text_WhiteHerbDesc,
-    BattleFrontier_ExchangeServiceCorner_Text_QuickClawDesc,
-    BattleFrontier_ExchangeServiceCorner_Text_MentalHerbDesc,
-    BattleFrontier_ExchangeServiceCorner_Text_BrightpowderDesc,
-    BattleFrontier_ExchangeServiceCorner_Text_ChoiceBandDesc,
-    BattleFrontier_ExchangeServiceCorner_Text_KingsRockDesc,
-    BattleFrontier_ExchangeServiceCorner_Text_FocusBandDesc,
-    BattleFrontier_ExchangeServiceCorner_Text_ScopeLensDesc,
+    BattleFrontier_ExchangeServiceCorner_Text_XAttackDesc,
+    BattleFrontier_ExchangeServiceCorner_Text_XDefenseDesc,
+    BattleFrontier_ExchangeServiceCorner_Text_XSpAtkDesc,
+    BattleFrontier_ExchangeServiceCorner_Text_XSpDefDesc,
+    BattleFrontier_ExchangeServiceCorner_Text_XSpeedDesc,
+    BattleFrontier_ExchangeServiceCorner_Text_XAccuracyDesc,
+    BattleFrontier_ExchangeServiceCorner_Text_DireHitDesc,
+    BattleFrontier_ExchangeServiceCorner_Text_GuardSpecDesc,
     gText_Exit
 };

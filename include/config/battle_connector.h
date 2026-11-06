@@ -8,9 +8,11 @@
 #define BATTLE_CONNECTOR_BRANCHES      4
 #define BATTLE_CONNECTOR_MIDBOSS_AFTER 3
 
-// The party in the facility: the Pokemon brought plus protected Shadow Pokemon. A run protects at most
-// BATTLE_CONNECTOR_MAX_CANDIDATES (they are the list the player takes one from at the end).
-#define BATTLE_CONNECTOR_PARTY_SIZE     3
+// The party in the facility: up to BATTLE_CONNECTOR_BRING_COUNT Pokemon brought plus protected Shadow Pokemon, up to
+// BATTLE_CONNECTOR_PARTY_SIZE in all. A run protects at most BATTLE_CONNECTOR_MAX_CANDIDATES (they are the list the
+// player takes one from at the end).
+#define BATTLE_CONNECTOR_BRING_COUNT    2
+#define BATTLE_CONNECTOR_PARTY_SIZE     6
 #define BATTLE_CONNECTOR_MAX_CANDIDATES 6
 
 // The Shadow Pokemon of the rooms and the mid-boss are Battle Frontier pool Pokemon (moves, item, nature, ability,

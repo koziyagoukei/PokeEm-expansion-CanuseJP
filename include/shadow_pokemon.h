@@ -113,6 +113,7 @@ enum BattlerId FindShadowEncounterBattler(void);
 u32 GetShadowSealedMoveMask(struct Pokemon *mon);
 u32 GetBattlerShadowSealedSlots(enum BattlerId battler);
 void ApplyShadowBattleMoves(enum BattlerId battler);
+void OpenShadowBattleMoves(enum BattlerId battler, u32 sealedBefore);
 void AdvanceParticipatingShadowPokemon(void);
 bool32 IsBattlerInHyperMode(enum BattlerId battler);
 bool32 IsBattlerInReverseMode(enum BattlerId battler);

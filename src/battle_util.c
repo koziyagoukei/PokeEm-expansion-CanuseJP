@@ -905,9 +905,11 @@ void HandleAction_ShadowCall(void)
     mon = GetBattlerMon(battler);
     if (IsShadowPokemonInHyperMode(mon) || IsShadowPokemonInReverseMode(mon))
     {
+        u32 sealedBefore = GetBattlerShadowSealedSlots(battler);
         SetShadowPokemonHyperMode(mon, FALSE);
         SetShadowPokemonReverseMode(mon, FALSE);
         ReduceShadowHeartGauge(mon, SHADOW_ACTION_CALL, 1);
+        OpenShadowBattleMoves(battler, sealedBefore); // a move the Call opened can be used at once
         gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_SHADOW_CALL_CALMED;
     }
     else if (gBattleMons[battler].status1 & STATUS1_SLEEP)

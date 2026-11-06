@@ -35,12 +35,28 @@ BattleConnector_EventScript_Receptionist::
 	closemessage
 	special ChoosePartyMon
 	goto_if_ge VAR_0x8004, PARTY_SIZE, BattleConnector_EventScript_Decline
+	@ A second Pokemon (optional): VAR_0x8005, PARTY_SIZE for none
+	setvar VAR_0x8005, PARTY_SIZE
+	copyvar VAR_0x8006, VAR_0x8004
+	msgbox BattleConnector_Text_AskSecondMon, MSGBOX_YESNO
+	goto_if_ne VAR_RESULT, YES, BattleConnector_EventScript_StartChallenge
+	special ChoosePartyMon
+	copyvar VAR_0x8005, VAR_0x8004
+	copyvar VAR_0x8004, VAR_0x8006
+	goto_if_ge VAR_0x8005, PARTY_SIZE, BattleConnector_EventScript_StartChallenge
+	goto_if_eq VAR_0x8005, VAR_0x8004, BattleConnector_EventScript_SameMon
+BattleConnector_EventScript_StartChallenge::
 	specialvar VAR_RESULT, BattleConnector_StartChallenge
 	goto_if_eq VAR_RESULT, FALSE, BattleConnector_EventScript_CantBring
 	msgbox BattleConnector_Text_GoodLuck, MSGBOX_DEFAULT
 	closemessage
 	warp MAP_BATTLE_CONNECTOR_BRANCH, 6, 9
 	waitstate
+	end
+
+BattleConnector_EventScript_SameMon::
+	msgbox BattleConnector_Text_SameMon, MSGBOX_DEFAULT
+	release
 	end
 
 BattleConnector_EventScript_Decline::
@@ -137,10 +153,16 @@ BattleConnector_Text_AskChallenge:
 	.string "{JPN}ちょうせん しますか？$"
 
 BattleConnector_Text_Rules:
-	.string "{JPN}つれていける ポケモンは 1ぴきだけ。\pなかで たおした ダークポケモンは\nほごして いっしょに たたかえます。\pさいごに ほごした ポケモンの なかから\n1ぴきだけ つれて かえれます。\pなかでは レポートを かけません。\nまけても ポケモンは もとどおりです。$"
+	.string "{JPN}つれていける ポケモンは 2ひきまで。\pなかで たおした ダークポケモンは\nほごして いっしょに たたかえます。\pてもちは あわせて 6ぴきまでです。\pさいごに ほごした ポケモンの なかから\n1ぴきだけ つれて かえれます。\pなかでは レポートを かけません。\nまけても ポケモンは もとどおりです。$"
 
 BattleConnector_Text_ChooseMon:
-	.string "{JPN}いっしょに いく ポケモンを\n1ぴき えらんで ください。$"
+	.string "{JPN}いっしょに いく ポケモンを\nえらんで ください。$"
+
+BattleConnector_Text_AskSecondMon:
+	.string "{JPN}もう 1ぴき\nつれて いきますか？$"
+
+BattleConnector_Text_SameMon:
+	.string "{JPN}おなじ ポケモンは\n2かい えらべません。$"
 
 BattleConnector_Text_GoodLuck:
 	.string "{JPN}それでは いってらっしゃい！$"

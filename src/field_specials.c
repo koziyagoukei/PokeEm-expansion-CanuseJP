@@ -2395,9 +2395,9 @@ void ShowScrollableMultichoice(void)
         task->tKeepOpenAfterSelect = FALSE;
         task->tTaskId = taskId;
         break;
-    case SCROLL_MULTI_BF_EXCHANGE_CORNER_VITAMIN_VENDOR:
+    case SCROLL_MULTI_BF_EXCHANGE_CORNER_RECOVERY_VENDOR:
         task->tMaxItemsOnScreen = MAX_SCROLL_MULTI_ON_SCREEN;
-        task->tNumItems = 7;
+        task->tNumItems = 10;
         task->tLeft = 14;
         task->tTop = 1;
         task->tWidth = 15;
@@ -2405,9 +2405,9 @@ void ShowScrollableMultichoice(void)
         task->tKeepOpenAfterSelect = FALSE;
         task->tTaskId = taskId;
         break;
-    case SCROLL_MULTI_BF_EXCHANGE_CORNER_HOLD_ITEM_VENDOR:
+    case SCROLL_MULTI_BF_EXCHANGE_CORNER_BATTLE_ITEM_VENDOR:
         task->tMaxItemsOnScreen = MAX_SCROLL_MULTI_ON_SCREEN;
-        task->tNumItems = 10;
+        task->tNumItems = 9;
         task->tLeft = 14;
         task->tTop = 1;
         task->tWidth = 15;
@@ -2550,27 +2550,29 @@ static const u8 *const sScrollableMultichoiceOptions[][MAX_SCROLL_MULTI_LENGTH] 
         COMPOUND_STRING("{JPN}カメックスドール 256BP"),
         gText_Exit
     },
-    [SCROLL_MULTI_BF_EXCHANGE_CORNER_VITAMIN_VENDOR] =
+    [SCROLL_MULTI_BF_EXCHANGE_CORNER_RECOVERY_VENDOR] =
     {
-        COMPOUND_STRING("{JPN}タウリン       1BP"),
-        COMPOUND_STRING("{JPN}リゾチウム      1BP"),
-        COMPOUND_STRING("{JPN}ブロムヘキシン    1BP"),
-        COMPOUND_STRING("{JPN}キトサン       1BP"),
-        COMPOUND_STRING("{JPN}インドメタシン    1BP"),
-        COMPOUND_STRING("{JPN}マックスアップ    1BP"),
+        COMPOUND_STRING("{JPN}いいキズぐすり    1BP"),
+        COMPOUND_STRING("{JPN}すごいキズぐすり   2BP"),
+        COMPOUND_STRING("{JPN}まんたんのくすり   3BP"),
+        COMPOUND_STRING("{JPN}かいふくのくすり   4BP"),
+        COMPOUND_STRING("{JPN}なんでもなおし    1BP"),
+        COMPOUND_STRING("{JPN}げんきのかけら    3BP"),
+        COMPOUND_STRING("{JPN}げんきのかたまり   6BP"),
+        COMPOUND_STRING("{JPN}ピーピーエイド    1BP"),
+        COMPOUND_STRING("{JPN}ピーピーマックス   4BP"),
         gText_Exit
     },
-    [SCROLL_MULTI_BF_EXCHANGE_CORNER_HOLD_ITEM_VENDOR] =
+    [SCROLL_MULTI_BF_EXCHANGE_CORNER_BATTLE_ITEM_VENDOR] =
     {
-        COMPOUND_STRING("{JPN}たべのこし     48BP"),
-        COMPOUND_STRING("{JPN}しろいハーブ    48BP"),
-        COMPOUND_STRING("{JPN}せんせいのツメ   48BP"),
-        COMPOUND_STRING("{JPN}メンタルハーブ   48BP"),
-        COMPOUND_STRING("{JPN}ひかりのこな    64BP"),
-        COMPOUND_STRING("{JPN}こだわりハチマキ  64BP"),
-        COMPOUND_STRING("{JPN}おうじゃのしるし  64BP"),
-        COMPOUND_STRING("{JPN}きあいのハチマキ  64BP"),
-        COMPOUND_STRING("{JPN}ピントレンズ    64BP"),
+        COMPOUND_STRING("{JPN}プラスパワー     1BP"),
+        COMPOUND_STRING("{JPN}ディフェンダー    1BP"),
+        COMPOUND_STRING("{JPN}スペシャルアップ   1BP"),
+        COMPOUND_STRING("{JPN}スペシャルガード   1BP"),
+        COMPOUND_STRING("{JPN}スピーダー      1BP"),
+        COMPOUND_STRING("{JPN}ヨクアタール     1BP"),
+        COMPOUND_STRING("{JPN}クリティカッター   1BP"),
+        COMPOUND_STRING("{JPN}エフェクトガード   1BP"),
         gText_Exit
     },
     [SCROLL_MULTI_BERRY_POWDER_VENDOR] =
@@ -3092,7 +3094,7 @@ static void FillFrontierExchangeCornerWindowAndItemIcon(enum ScrollMulti menu, u
 {
     #include "data/battle_frontier/battle_frontier_exchange_corner.h"
 
-    if (menu >= SCROLL_MULTI_BF_EXCHANGE_CORNER_DECOR_VENDOR_1 && menu <= SCROLL_MULTI_BF_EXCHANGE_CORNER_HOLD_ITEM_VENDOR)
+    if (menu >= SCROLL_MULTI_BF_EXCHANGE_CORNER_DECOR_VENDOR_1 && menu <= SCROLL_MULTI_BF_EXCHANGE_CORNER_BATTLE_ITEM_VENDOR)
     {
         FillWindowPixelRect(0, PIXEL_FILL(1), 0, 0, 216, 32);
         switch (menu)
@@ -3123,13 +3125,13 @@ static void FillFrontierExchangeCornerWindowAndItemIcon(enum ScrollMulti menu, u
                 sScrollableMultichoice_ItemSpriteId = AddDecorationIconObject(sFrontierExchangeCorner_Decor2[selection], 33, 88, 0, TAG_ITEM_ICON, TAG_ITEM_ICON);
             }
             break;
-        case SCROLL_MULTI_BF_EXCHANGE_CORNER_VITAMIN_VENDOR:
-            AddTextPrinterParameterized2(0, FONT_NORMAL, sFrontierExchangeCorner_VitaminsDescriptions[selection], 0, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
-            ShowFrontierExchangeCornerItemIcon(sFrontierExchangeCorner_Vitamins[selection]);
+        case SCROLL_MULTI_BF_EXCHANGE_CORNER_RECOVERY_VENDOR:
+            AddTextPrinterParameterized2(0, FONT_NORMAL, sFrontierExchangeCorner_RecoveryDescriptions[selection], 0, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
+            ShowFrontierExchangeCornerItemIcon(sFrontierExchangeCorner_Recovery[selection]);
             break;
-        case SCROLL_MULTI_BF_EXCHANGE_CORNER_HOLD_ITEM_VENDOR:
-            AddTextPrinterParameterized2(0, FONT_NORMAL, sFrontierExchangeCorner_HoldItemsDescriptions[selection], 0, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
-            ShowFrontierExchangeCornerItemIcon(sFrontierExchangeCorner_HoldItems[selection]);
+        case SCROLL_MULTI_BF_EXCHANGE_CORNER_BATTLE_ITEM_VENDOR:
+            AddTextPrinterParameterized2(0, FONT_NORMAL, sFrontierExchangeCorner_BattleItemsDescriptions[selection], 0, NULL, TEXT_COLOR_DARK_GRAY, TEXT_COLOR_WHITE, TEXT_COLOR_LIGHT_GRAY);
+            ShowFrontierExchangeCornerItemIcon(sFrontierExchangeCorner_BattleItems[selection]);
             break;
         default:
             break;
@@ -3159,8 +3161,8 @@ static void HideFrontierExchangeCornerItemIcon(enum ScrollMulti menu, u16 unused
         {
         case SCROLL_MULTI_BF_EXCHANGE_CORNER_DECOR_VENDOR_1:
         case SCROLL_MULTI_BF_EXCHANGE_CORNER_DECOR_VENDOR_2:
-        case SCROLL_MULTI_BF_EXCHANGE_CORNER_VITAMIN_VENDOR:
-        case SCROLL_MULTI_BF_EXCHANGE_CORNER_HOLD_ITEM_VENDOR:
+        case SCROLL_MULTI_BF_EXCHANGE_CORNER_RECOVERY_VENDOR:
+        case SCROLL_MULTI_BF_EXCHANGE_CORNER_BATTLE_ITEM_VENDOR:
             // This makes sure deleting the icon will not clear palettes in use by object events
             FieldEffectFreeGraphicsResources(&gSprites[sScrollableMultichoice_ItemSpriteId]);
             break;

@@ -334,7 +334,7 @@ static const u8 *const sInfoViewerPages_Shadow[] = {
 static const u8 sInfoText_BattleConnector1[] = _(
     "{JPN}「バトルコネクターとは」\n"
     "アトリエの あなの 受付から 挑戦。\n"
-    "手持ちから 1匹だけ 連れて 入り\n"
+    "手持ちから 2匹まで 連れて 入り\n"
     "分かれ道を 選んで 奥へ 進みます。\n"
     "途中に 中ボス 最深部に ボスが います。\n"
     "連れて いく ポケモンに 制限は ありません。");
@@ -350,7 +350,7 @@ static const u8 sInfoText_BattleConnector2[] = _(
 static const u8 sInfoText_BattleConnector3[] = _(
     "{JPN}「保護と 持ち帰り」\n"
     "倒した ダークポケモンは 保護できます。\n"
-    "3匹までは 手持ちで 一緒に 戦い\n"
+    "手持ちは 6匹まで 一緒に 戦い\n"
     "保護は 6匹まで できます。\n"
     "クリアすると 保護した 中から\n"
     "1匹だけ 連れて 帰れます。");
@@ -358,9 +358,10 @@ static const u8 sInfoText_BattleConnector3[] = _(
 static const u8 sInfoText_BattleConnector4[] = _(
     "{JPN}「施設の ルール」\n"
     "経験値は 入らず ボールと 逃げるは 不可。\n"
-    "施設の 中では レポートを 書けません。\n"
-    "負けるか リタイアすると 保護した\n"
-    "ポケモンとは お別れです。\n"
+    "バッグの 道具は 使えます。 回復や\n"
+    "戦闘の 道具は 交換所で BPと 交換。\n"
+    "レポートは 書けず 負けるか やめると\n"
+    "保護した ポケモンとは お別れです。\n"
     "手持ちは 挑戦前の 状態に 戻ります。");
 
 static const u8 sInfoText_BattleConnector5[] = _(

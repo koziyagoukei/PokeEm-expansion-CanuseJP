@@ -137,8 +137,48 @@ static u32 GetSpeciesShadowGaugeMax(enum Species species)
     return min(max, (u32)SHADOW_GAUGE_MAX_VALUE);
 }
 
-// The Shadow moves of a species: its row (or its base species' row), else Shadow Rush and the Shadow move of a Fire,
-// Electric or Ice type. Returns how many (1-4), and the moves in moves[].
+static bool32 SpeciesHasType(enum Species species, enum Type type)
+{
+    return GetSpeciesType(species, 0) == type || GetSpeciesType(species, 1) == type;
+}
+
+// The Shadow moves of a species without its own (1-3), from its types and base stats:
+// - Shadow Rush, as most of Pokemon XD's Shadow Pokemon have;
+// - a Fire, Electric or Ice type's Shadow move (Shadow Fire / Bolt / Chill);
+// - else a special attacker's spread move (Shadow Wave, Rave or Storm by base stat total), or a strong physical
+//   attacker's harder hit (Shadow Break; Shadow Blast from SHADOW_DEFAULT_RARE_BST);
+// - from SHADOW_DEFAULT_STRONG_BST, a support move: Shadow Down for a bulky one, Shadow Panic for a fast one.
+static u32 GetDefaultShadowMoves(enum Species species, enum Move moves[MAX_MON_MOVES])
+{
+    u32 count = 0, total = GetSpeciesBaseStatTotal(species);
+    u32 attack = GetSpeciesBaseStat(species, STAT_ATK), spAttack = GetSpeciesBaseStat(species, STAT_SPATK);
+    u32 speed = GetSpeciesBaseStat(species, STAT_SPEED);
+    u32 bulk = GetSpeciesBaseStat(species, STAT_HP) + GetSpeciesBaseStat(species, STAT_DEF) + GetSpeciesBaseStat(species, STAT_SPDEF);
+
+    moves[count++] = MOVE_SHADOW_RUSH;
+    if (SpeciesHasType(species, TYPE_FIRE))
+        moves[count++] = MOVE_SHADOW_FIRE;
+    else if (SpeciesHasType(species, TYPE_ELECTRIC))
+        moves[count++] = MOVE_SHADOW_BOLT;
+    else if (SpeciesHasType(species, TYPE_ICE))
+        moves[count++] = MOVE_SHADOW_CHILL;
+    else if (spAttack > attack)
+        moves[count++] = total >= SHADOW_DEFAULT_RARE_BST ? MOVE_SHADOW_STORM : total >= SHADOW_DEFAULT_STRONG_BST ? MOVE_SHADOW_RAVE : MOVE_SHADOW_WAVE;
+    else if (total >= SHADOW_DEFAULT_STRONG_BST)
+        moves[count++] = total >= SHADOW_DEFAULT_RARE_BST ? MOVE_SHADOW_BLAST : MOVE_SHADOW_BREAK;
+
+    if (total >= SHADOW_DEFAULT_STRONG_BST)
+    {
+        if (bulk * 100 >= total * 55)
+            moves[count++] = MOVE_SHADOW_DOWN;
+        else if (speed >= attack && speed >= spAttack)
+            moves[count++] = MOVE_SHADOW_PANIC;
+    }
+    return count;
+}
+
+// The Shadow moves of a species: its row (or its base species' row), else GetDefaultShadowMoves. Returns how many
+// (1-4), and the moves in moves[].
 u32 GetShadowMovesForSpecies(enum Species species, enum Move moves[MAX_MON_MOVES])
 {
     u32 i, count = 0;
@@ -157,15 +197,7 @@ u32 GetShadowMovesForSpecies(enum Species species, enum Move moves[MAX_MON_MOVES
     }
 
     if (count == 0)
-    {
-        moves[count++] = MOVE_SHADOW_RUSH;
-        if (GetSpeciesType(species, 0) == TYPE_FIRE || GetSpeciesType(species, 1) == TYPE_FIRE)
-            moves[count++] = MOVE_SHADOW_FIRE;
-        else if (GetSpeciesType(species, 0) == TYPE_ELECTRIC || GetSpeciesType(species, 1) == TYPE_ELECTRIC)
-            moves[count++] = MOVE_SHADOW_BOLT;
-        else if (GetSpeciesType(species, 0) == TYPE_ICE || GetSpeciesType(species, 1) == TYPE_ICE)
-            moves[count++] = MOVE_SHADOW_CHILL;
-    }
+        count = GetDefaultShadowMoves(species, moves);
     return count;
 }
 
@@ -670,6 +702,28 @@ void ApplyShadowBattleMoves(enum BattlerId battler)
         gBattleMons[battler].moves[i] = layout.moves[i];
         gBattleMons[battler].pp[i] = layout.moves[i] != MOVE_NONE ? GetMovePP(layout.moves[i]) : 0;
         gBattleMons[battler].ppBonuses &= ~(3 << (2 * i));
+    }
+}
+
+// The heart gauge went down in battle (Call): the own moves among sealedBefore that are open now get their move and
+// PP from the Pokemon's data, so they can be chosen from the next turn.
+void OpenShadowBattleMoves(enum BattlerId battler, u32 sealedBefore)
+{
+    struct Pokemon *mon;
+    u32 opened, ppBonuses;
+
+    if (sealedBefore == 0)
+        return;
+    mon = GetBattlerMon(battler);
+    opened = sealedBefore & ~GetBattlerShadowSealedSlots(battler);
+    ppBonuses = GetMonData(mon, MON_DATA_PP_BONUSES);
+    for (u32 i = 0; i < MAX_MON_MOVES; i++)
+    {
+        if (!(opened & (1u << i)))
+            continue;
+        gBattleMons[battler].moves[i] = GetMonData(mon, MON_DATA_MOVE1 + i);
+        gBattleMons[battler].pp[i] = GetMonData(mon, MON_DATA_PP1 + i);
+        gBattleMons[battler].ppBonuses = (gBattleMons[battler].ppBonuses & ~(3 << (2 * i))) | (ppBonuses & (3 << (2 * i)));
     }
 }
 

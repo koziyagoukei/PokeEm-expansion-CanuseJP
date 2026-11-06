@@ -23,8 +23,8 @@ BattleFrontier_ExchangeServiceCorner_EventScript_TryPurchasePrize::
 	msgbox BattleFrontier_ExchangeServiceCorner_Text_DontHaveEnoughPoints, MSGBOX_DEFAULT
 	goto_if_eq VAR_TEMP_2, EXCHANGE_CORNER_DECOR1_CLERK, BattleFrontier_ExchangeServiceCorner_EventScript_ChooseDecor1
 	goto_if_eq VAR_TEMP_2, EXCHANGE_CORNER_DECOR2_CLERK, BattleFrontier_ExchangeServiceCorner_EventScript_ChooseDecor2
-	goto_if_eq VAR_TEMP_2, EXCHANGE_CORNER_VITAMIN_CLERK, BattleFrontier_ExchangeServiceCorner_EventScript_ChooseVitamin
-	goto BattleFrontier_ExchangeServiceCorner_EventScript_ChooseHoldItem
+	goto_if_eq VAR_TEMP_2, EXCHANGE_CORNER_RECOVERY_CLERK, BattleFrontier_ExchangeServiceCorner_EventScript_ChooseRecovery
+	goto BattleFrontier_ExchangeServiceCorner_EventScript_ChooseBattleItem
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_TryGivePrize::
@@ -61,8 +61,8 @@ BattleFrontier_ExchangeServiceCorner_EventScript_TryGiveItem::
 	special UpdateBattlePointsWindow
 	playse SE_SHOP
 	msgbox BattleFrontier_ExchangeServiceCorner_Text_HereIsYourPrize, MSGBOX_DEFAULT
-	goto_if_eq VAR_TEMP_2, EXCHANGE_CORNER_VITAMIN_CLERK, BattleFrontier_ExchangeServiceCorner_EventScript_ChooseVitamin
-	goto BattleFrontier_ExchangeServiceCorner_EventScript_ChooseHoldItem
+	goto_if_eq VAR_TEMP_2, EXCHANGE_CORNER_RECOVERY_CLERK, BattleFrontier_ExchangeServiceCorner_EventScript_ChooseRecovery
+	goto BattleFrontier_ExchangeServiceCorner_EventScript_ChooseBattleItem
 	end
 
 BattleFrontier_ExchangeServiceCorner_EventScript_BagFull::
@@ -196,131 +196,141 @@ BattleFrontier_ExchangeServiceCorner_EventScript_BlastoiseDoll::
 	setitemandprice DECOR_BLASTOISE_DOLL, 256
 	goto BattleFrontier_ExchangeServiceCorner_EventScript_PurchaseDecor2
 
-BattleFrontier_ExchangeServiceCorner_EventScript_VitaminClerk::
+BattleFrontier_ExchangeServiceCorner_EventScript_RecoveryClerk::
 	lock
 	faceplayer
-	setvar VAR_TEMP_2, EXCHANGE_CORNER_VITAMIN_CLERK
+	setvar VAR_TEMP_2, EXCHANGE_CORNER_RECOVERY_CLERK
 	call BattleFrontier_ExchangeServiceCorner_EventScript_ClerkWelcome
-	goto BattleFrontier_ExchangeServiceCorner_EventScript_ChooseVitamin
+	goto BattleFrontier_ExchangeServiceCorner_EventScript_ChooseRecovery
 	end
 
-BattleFrontier_ExchangeServiceCorner_EventScript_ChooseVitamin::
-	setvar VAR_0x8004, SCROLL_MULTI_BF_EXCHANGE_CORNER_VITAMIN_VENDOR
+BattleFrontier_ExchangeServiceCorner_EventScript_ChooseRecovery::
+	setvar VAR_0x8004, SCROLL_MULTI_BF_EXCHANGE_CORNER_RECOVERY_VENDOR
 	special ShowFrontierExchangeCornerItemIconWindow
 	special ShowScrollableMultichoice
 	special CloseFrontierExchangeCornerItemIconWindow
 	switch VAR_RESULT
-	case 0, BattleFrontier_ExchangeServiceCorner_EventScript_Protein
-	case 1, BattleFrontier_ExchangeServiceCorner_EventScript_Calcium
-	case 2, BattleFrontier_ExchangeServiceCorner_EventScript_Iron
-	case 3, BattleFrontier_ExchangeServiceCorner_EventScript_Zinc
-	case 4, BattleFrontier_ExchangeServiceCorner_EventScript_Carbos
-	case 5, BattleFrontier_ExchangeServiceCorner_EventScript_HPUp
-	case 6, BattleFrontier_ExchangeServiceCorner_EventScript_ClerkGoodbye
-	case MULTI_B_PRESSED, BattleFrontier_ExchangeServiceCorner_EventScript_ClerkGoodbye
-	end
-
-BattleFrontier_ExchangeServiceCorner_EventScript_PurchaseVitamin::
-	bufferitemname STR_VAR_1, VAR_0x8009
-	msgbox BattleFrontier_ExchangeServiceCorner_Text_ConfirmPurchase, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, NO, BattleFrontier_ExchangeServiceCorner_EventScript_ChooseVitamin
-	goto BattleFrontier_ExchangeServiceCorner_EventScript_TryPurchasePrize
-	end
-
-BattleFrontier_ExchangeServiceCorner_EventScript_Protein::
-	setitemandprice ITEM_PROTEIN, 1
-	goto BattleFrontier_ExchangeServiceCorner_EventScript_PurchaseVitamin
-
-BattleFrontier_ExchangeServiceCorner_EventScript_Calcium::
-	setitemandprice ITEM_CALCIUM, 1
-	goto BattleFrontier_ExchangeServiceCorner_EventScript_PurchaseVitamin
-
-BattleFrontier_ExchangeServiceCorner_EventScript_Iron::
-	setitemandprice ITEM_IRON, 1
-	goto BattleFrontier_ExchangeServiceCorner_EventScript_PurchaseVitamin
-
-BattleFrontier_ExchangeServiceCorner_EventScript_Zinc::
-	setitemandprice ITEM_ZINC, 1
-	goto BattleFrontier_ExchangeServiceCorner_EventScript_PurchaseVitamin
-
-BattleFrontier_ExchangeServiceCorner_EventScript_Carbos::
-	setitemandprice ITEM_CARBOS, 1
-	goto BattleFrontier_ExchangeServiceCorner_EventScript_PurchaseVitamin
-
-BattleFrontier_ExchangeServiceCorner_EventScript_HPUp::
-	setitemandprice ITEM_HP_UP, 1
-	goto BattleFrontier_ExchangeServiceCorner_EventScript_PurchaseVitamin
-
-
-BattleFrontier_ExchangeServiceCorner_EventScript_HoldItemClerk::
-	lock
-	faceplayer
-	setvar VAR_TEMP_2, EXCHANGE_CORNER_HOLD_ITEM_CLERK
-	call BattleFrontier_ExchangeServiceCorner_EventScript_ClerkWelcome
-	goto BattleFrontier_ExchangeServiceCorner_EventScript_ChooseHoldItem
-	end
-
-BattleFrontier_ExchangeServiceCorner_EventScript_ChooseHoldItem::
-	setvar VAR_0x8004, SCROLL_MULTI_BF_EXCHANGE_CORNER_HOLD_ITEM_VENDOR
-	special ShowFrontierExchangeCornerItemIconWindow
-	special ShowScrollableMultichoice
-	special CloseFrontierExchangeCornerItemIconWindow
-	switch VAR_RESULT
-	case 0, BattleFrontier_ExchangeServiceCorner_EventScript_Leftovers
-	case 1, BattleFrontier_ExchangeServiceCorner_EventScript_WhiteHerb
-	case 2, BattleFrontier_ExchangeServiceCorner_EventScript_QuickClaw
-	case 3, BattleFrontier_ExchangeServiceCorner_EventScript_MentalHerb
-	case 4, BattleFrontier_ExchangeServiceCorner_EventScript_Brightpowder
-	case 5, BattleFrontier_ExchangeServiceCorner_EventScript_ChoiceBand
-	case 6, BattleFrontier_ExchangeServiceCorner_EventScript_KingsRock
-	case 7, BattleFrontier_ExchangeServiceCorner_EventScript_FocusBand
-	case 8, BattleFrontier_ExchangeServiceCorner_EventScript_ScopeLens
+	case 0, BattleFrontier_ExchangeServiceCorner_EventScript_SuperPotion
+	case 1, BattleFrontier_ExchangeServiceCorner_EventScript_HyperPotion
+	case 2, BattleFrontier_ExchangeServiceCorner_EventScript_MaxPotion
+	case 3, BattleFrontier_ExchangeServiceCorner_EventScript_FullRestore
+	case 4, BattleFrontier_ExchangeServiceCorner_EventScript_FullHeal
+	case 5, BattleFrontier_ExchangeServiceCorner_EventScript_Revive
+	case 6, BattleFrontier_ExchangeServiceCorner_EventScript_MaxRevive
+	case 7, BattleFrontier_ExchangeServiceCorner_EventScript_Ether
+	case 8, BattleFrontier_ExchangeServiceCorner_EventScript_MaxElixir
 	case 9, BattleFrontier_ExchangeServiceCorner_EventScript_ClerkGoodbye
 	case MULTI_B_PRESSED, BattleFrontier_ExchangeServiceCorner_EventScript_ClerkGoodbye
 	end
 
-BattleFrontier_ExchangeServiceCorner_EventScript_PurchaseHoldItem::
+BattleFrontier_ExchangeServiceCorner_EventScript_PurchaseRecovery::
 	bufferitemname STR_VAR_1, VAR_0x8009
 	msgbox BattleFrontier_ExchangeServiceCorner_Text_ConfirmPurchase, MSGBOX_YESNO
-	goto_if_eq VAR_RESULT, NO, BattleFrontier_ExchangeServiceCorner_EventScript_ChooseHoldItem
+	goto_if_eq VAR_RESULT, NO, BattleFrontier_ExchangeServiceCorner_EventScript_ChooseRecovery
 	goto BattleFrontier_ExchangeServiceCorner_EventScript_TryPurchasePrize
 	end
 
-BattleFrontier_ExchangeServiceCorner_EventScript_Leftovers::
-	setitemandprice ITEM_LEFTOVERS, 48
-	goto BattleFrontier_ExchangeServiceCorner_EventScript_PurchaseHoldItem
+BattleFrontier_ExchangeServiceCorner_EventScript_SuperPotion::
+	setitemandprice ITEM_SUPER_POTION, 1
+	goto BattleFrontier_ExchangeServiceCorner_EventScript_PurchaseRecovery
 
-BattleFrontier_ExchangeServiceCorner_EventScript_WhiteHerb::
-	setitemandprice ITEM_WHITE_HERB, 48
-	goto BattleFrontier_ExchangeServiceCorner_EventScript_PurchaseHoldItem
+BattleFrontier_ExchangeServiceCorner_EventScript_HyperPotion::
+	setitemandprice ITEM_HYPER_POTION, 2
+	goto BattleFrontier_ExchangeServiceCorner_EventScript_PurchaseRecovery
 
-BattleFrontier_ExchangeServiceCorner_EventScript_QuickClaw::
-	setitemandprice ITEM_QUICK_CLAW, 48
-	goto BattleFrontier_ExchangeServiceCorner_EventScript_PurchaseHoldItem
+BattleFrontier_ExchangeServiceCorner_EventScript_MaxPotion::
+	setitemandprice ITEM_MAX_POTION, 3
+	goto BattleFrontier_ExchangeServiceCorner_EventScript_PurchaseRecovery
 
-BattleFrontier_ExchangeServiceCorner_EventScript_MentalHerb::
-	setitemandprice ITEM_MENTAL_HERB, 48
-	goto BattleFrontier_ExchangeServiceCorner_EventScript_PurchaseHoldItem
+BattleFrontier_ExchangeServiceCorner_EventScript_FullRestore::
+	setitemandprice ITEM_FULL_RESTORE, 4
+	goto BattleFrontier_ExchangeServiceCorner_EventScript_PurchaseRecovery
 
-BattleFrontier_ExchangeServiceCorner_EventScript_Brightpowder::
-	setitemandprice ITEM_BRIGHT_POWDER, 64
-	goto BattleFrontier_ExchangeServiceCorner_EventScript_PurchaseHoldItem
+BattleFrontier_ExchangeServiceCorner_EventScript_FullHeal::
+	setitemandprice ITEM_FULL_HEAL, 1
+	goto BattleFrontier_ExchangeServiceCorner_EventScript_PurchaseRecovery
 
-BattleFrontier_ExchangeServiceCorner_EventScript_ChoiceBand::
-	setitemandprice ITEM_CHOICE_BAND, 64
-	goto BattleFrontier_ExchangeServiceCorner_EventScript_PurchaseHoldItem
+BattleFrontier_ExchangeServiceCorner_EventScript_Revive::
+	setitemandprice ITEM_REVIVE, 3
+	goto BattleFrontier_ExchangeServiceCorner_EventScript_PurchaseRecovery
 
-BattleFrontier_ExchangeServiceCorner_EventScript_KingsRock::
-	setitemandprice ITEM_KINGS_ROCK, 64
-	goto BattleFrontier_ExchangeServiceCorner_EventScript_PurchaseHoldItem
+BattleFrontier_ExchangeServiceCorner_EventScript_MaxRevive::
+	setitemandprice ITEM_MAX_REVIVE, 6
+	goto BattleFrontier_ExchangeServiceCorner_EventScript_PurchaseRecovery
 
-BattleFrontier_ExchangeServiceCorner_EventScript_FocusBand::
-	setitemandprice ITEM_FOCUS_BAND, 64
-	goto BattleFrontier_ExchangeServiceCorner_EventScript_PurchaseHoldItem
+BattleFrontier_ExchangeServiceCorner_EventScript_Ether::
+	setitemandprice ITEM_ETHER, 1
+	goto BattleFrontier_ExchangeServiceCorner_EventScript_PurchaseRecovery
 
-BattleFrontier_ExchangeServiceCorner_EventScript_ScopeLens::
-	setitemandprice ITEM_SCOPE_LENS, 64
-	goto BattleFrontier_ExchangeServiceCorner_EventScript_PurchaseHoldItem
+BattleFrontier_ExchangeServiceCorner_EventScript_MaxElixir::
+	setitemandprice ITEM_MAX_ELIXIR, 4
+	goto BattleFrontier_ExchangeServiceCorner_EventScript_PurchaseRecovery
+
+
+BattleFrontier_ExchangeServiceCorner_EventScript_BattleItemClerk::
+	lock
+	faceplayer
+	setvar VAR_TEMP_2, EXCHANGE_CORNER_BATTLE_ITEM_CLERK
+	call BattleFrontier_ExchangeServiceCorner_EventScript_ClerkWelcome
+	goto BattleFrontier_ExchangeServiceCorner_EventScript_ChooseBattleItem
+	end
+
+BattleFrontier_ExchangeServiceCorner_EventScript_ChooseBattleItem::
+	setvar VAR_0x8004, SCROLL_MULTI_BF_EXCHANGE_CORNER_BATTLE_ITEM_VENDOR
+	special ShowFrontierExchangeCornerItemIconWindow
+	special ShowScrollableMultichoice
+	special CloseFrontierExchangeCornerItemIconWindow
+	switch VAR_RESULT
+	case 0, BattleFrontier_ExchangeServiceCorner_EventScript_XAttack
+	case 1, BattleFrontier_ExchangeServiceCorner_EventScript_XDefense
+	case 2, BattleFrontier_ExchangeServiceCorner_EventScript_XSpAtk
+	case 3, BattleFrontier_ExchangeServiceCorner_EventScript_XSpDef
+	case 4, BattleFrontier_ExchangeServiceCorner_EventScript_XSpeed
+	case 5, BattleFrontier_ExchangeServiceCorner_EventScript_XAccuracy
+	case 6, BattleFrontier_ExchangeServiceCorner_EventScript_DireHit
+	case 7, BattleFrontier_ExchangeServiceCorner_EventScript_GuardSpec
+	case 8, BattleFrontier_ExchangeServiceCorner_EventScript_ClerkGoodbye
+	case MULTI_B_PRESSED, BattleFrontier_ExchangeServiceCorner_EventScript_ClerkGoodbye
+	end
+
+BattleFrontier_ExchangeServiceCorner_EventScript_PurchaseBattleItem::
+	bufferitemname STR_VAR_1, VAR_0x8009
+	msgbox BattleFrontier_ExchangeServiceCorner_Text_ConfirmPurchase, MSGBOX_YESNO
+	goto_if_eq VAR_RESULT, NO, BattleFrontier_ExchangeServiceCorner_EventScript_ChooseBattleItem
+	goto BattleFrontier_ExchangeServiceCorner_EventScript_TryPurchasePrize
+	end
+
+BattleFrontier_ExchangeServiceCorner_EventScript_XAttack::
+	setitemandprice ITEM_X_ATTACK, 1
+	goto BattleFrontier_ExchangeServiceCorner_EventScript_PurchaseBattleItem
+
+BattleFrontier_ExchangeServiceCorner_EventScript_XDefense::
+	setitemandprice ITEM_X_DEFENSE, 1
+	goto BattleFrontier_ExchangeServiceCorner_EventScript_PurchaseBattleItem
+
+BattleFrontier_ExchangeServiceCorner_EventScript_XSpAtk::
+	setitemandprice ITEM_X_SP_ATK, 1
+	goto BattleFrontier_ExchangeServiceCorner_EventScript_PurchaseBattleItem
+
+BattleFrontier_ExchangeServiceCorner_EventScript_XSpDef::
+	setitemandprice ITEM_X_SP_DEF, 1
+	goto BattleFrontier_ExchangeServiceCorner_EventScript_PurchaseBattleItem
+
+BattleFrontier_ExchangeServiceCorner_EventScript_XSpeed::
+	setitemandprice ITEM_X_SPEED, 1
+	goto BattleFrontier_ExchangeServiceCorner_EventScript_PurchaseBattleItem
+
+BattleFrontier_ExchangeServiceCorner_EventScript_XAccuracy::
+	setitemandprice ITEM_X_ACCURACY, 1
+	goto BattleFrontier_ExchangeServiceCorner_EventScript_PurchaseBattleItem
+
+BattleFrontier_ExchangeServiceCorner_EventScript_DireHit::
+	setitemandprice ITEM_DIRE_HIT, 1
+	goto BattleFrontier_ExchangeServiceCorner_EventScript_PurchaseBattleItem
+
+BattleFrontier_ExchangeServiceCorner_EventScript_GuardSpec::
+	setitemandprice ITEM_GUARD_SPEC, 1
+	goto BattleFrontier_ExchangeServiceCorner_EventScript_PurchaseBattleItem
 
 BattleFrontier_ExchangeServiceCorner_EventScript_PokefanF::
 	setvar VAR_0x8004, REGULAR_EXCHANGE_MOM
@@ -392,47 +402,53 @@ BattleFrontier_ExchangeServiceCorner_Text_TotodileDollDesc::
 BattleFrontier_ExchangeServiceCorner_Text_LargeDollDesc::
 	.string "{JPN}大きな ぬいぐるみ\nマットや 机の 上に おくもの$"
 
-BattleFrontier_ExchangeServiceCorner_Text_ProteinDesc::
-	.string "{JPN}攻撃の 基礎ポイントを あげる$"
+BattleFrontier_ExchangeServiceCorner_Text_SuperPotionDesc::
+	.string "{JPN}体力を すこし 回復する$"
 
-BattleFrontier_ExchangeServiceCorner_Text_CalciumDesc::
-	.string "{JPN}とくこうの 基礎ポイントを あげる$"
+BattleFrontier_ExchangeServiceCorner_Text_HyperPotionDesc::
+	.string "{JPN}体力を たくさん 回復する$"
 
-BattleFrontier_ExchangeServiceCorner_Text_IronDesc::
-	.string "{JPN}防御の 基礎ポイントを あげる$"
+BattleFrontier_ExchangeServiceCorner_Text_MaxPotionDesc::
+	.string "{JPN}体力を すべて 回復する$"
 
-BattleFrontier_ExchangeServiceCorner_Text_ZincDesc::
-	.string "{JPN}とくぼうの 基礎ポイントを あげる$"
+BattleFrontier_ExchangeServiceCorner_Text_FullRestoreDesc::
+	.string "{JPN}体力と じょうたいいじょうを\nすべて 回復する$"
 
-BattleFrontier_ExchangeServiceCorner_Text_CarbosDesc::
-	.string "{JPN}素早さの 基礎ポイントを あげる$"
+BattleFrontier_ExchangeServiceCorner_Text_FullHealDesc::
+	.string "{JPN}じょうたいいじょうを\nすべて なおす$"
 
-BattleFrontier_ExchangeServiceCorner_Text_HPUpDesc::
-	.string "{JPN}体力の 基礎ポイントを あげる$"
+BattleFrontier_ExchangeServiceCorner_Text_ReviveDesc::
+	.string "{JPN}ひんしの ポケモンを\n体力 半分で 回復する$"
 
-BattleFrontier_ExchangeServiceCorner_Text_LeftoversDesc::
-	.string "{JPN}持たせると 体力が せんとうの あいだ\n少しずつ 回復する$"
+BattleFrontier_ExchangeServiceCorner_Text_MaxReviveDesc::
+	.string "{JPN}ひんしの ポケモンを\n体力 すべて 回復する$"
 
-BattleFrontier_ExchangeServiceCorner_Text_WhiteHerbDesc::
-	.string "{JPN}ポケモンに 持たせると さがった\n能力を もとにもどす$"
+BattleFrontier_ExchangeServiceCorner_Text_EtherDesc::
+	.string "{JPN}技 1つの PPを 10 回復する$"
 
-BattleFrontier_ExchangeServiceCorner_Text_QuickClawDesc::
-	.string "{JPN}ポケモンに 持たせると 先生 攻撃が\nたまに できる$"
+BattleFrontier_ExchangeServiceCorner_Text_MaxElixirDesc::
+	.string "{JPN}すべての 技の PPを\nすべて 回復する$"
 
-BattleFrontier_ExchangeServiceCorner_Text_MentalHerbDesc::
-	.string "{JPN}持たせた ポケモンが メロメロに\nなったとき なおして くれる$"
+BattleFrontier_ExchangeServiceCorner_Text_XAttackDesc::
+	.string "{JPN}せんとうちゅうに 使うと\n攻撃が 上がる$"
 
-BattleFrontier_ExchangeServiceCorner_Text_BrightpowderDesc::
-	.string "{JPN}持たせると 光が 相手を まどわして\nめいちゅうりつを さげる$"
+BattleFrontier_ExchangeServiceCorner_Text_XDefenseDesc::
+	.string "{JPN}せんとうちゅうに 使うと\n防御が 上がる$"
 
-BattleFrontier_ExchangeServiceCorner_Text_ChoiceBandDesc::
-	.string "{JPN}攻撃の いりょくが 上がるが\n同じ 技しか 出せなくなる$"
+BattleFrontier_ExchangeServiceCorner_Text_XSpAtkDesc::
+	.string "{JPN}せんとうちゅうに 使うと\nとくこうが 上がる$"
 
-BattleFrontier_ExchangeServiceCorner_Text_KingsRockDesc::
-	.string "{JPN}ポケモンに 持たせると ダメージを 受けた\n相手が たまに ひるむ$"
+BattleFrontier_ExchangeServiceCorner_Text_XSpDefDesc::
+	.string "{JPN}せんとうちゅうに 使うと\nとくぼうが 上がる$"
 
-BattleFrontier_ExchangeServiceCorner_Text_FocusBandDesc::
-	.string "{JPN}ポケモンに 持たせると たまに\nひんしを ふせぐことが できる$"
+BattleFrontier_ExchangeServiceCorner_Text_XSpeedDesc::
+	.string "{JPN}せんとうちゅうに 使うと\n素早さが 上がる$"
 
-BattleFrontier_ExchangeServiceCorner_Text_ScopeLensDesc::
-	.string "{JPN}ポケモンに 持たせると\nきゅうしょに あたりやすくなる$"
+BattleFrontier_ExchangeServiceCorner_Text_XAccuracyDesc::
+	.string "{JPN}せんとうちゅうに 使うと\nめいちゅうりつが 上がる$"
+
+BattleFrontier_ExchangeServiceCorner_Text_DireHitDesc::
+	.string "{JPN}せんとうちゅうに 使うと\nきゅうしょに あたりやすくなる$"
+
+BattleFrontier_ExchangeServiceCorner_Text_GuardSpecDesc::
+	.string "{JPN}せんとうちゅうに 使うと 5ターン\n能力を さげられなくなる$"
