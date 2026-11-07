@@ -327,9 +327,9 @@ ALIGNED(4) const u8 gFontShortNarrowerLatinGlyphWidths[] = {
 ALIGNED(4) const u16 gFontSmallJapaneseGlyphs[] = INCGFX_U16("graphics/fonts/japanese_small.png", ".hwjpnfont");
 ALIGNED(4) const u16 gFontNormalJapaneseGlyphs[] = INCGFX_U16("graphics/fonts/japanese_normal.png", ".hwjpnfont");
 
-// Keep unused FRLG tables in separate sections so --gc-sections can discard
-// them, while allowing a future caller to link them again without changes.
-ALIGNED(4) __attribute__((section(".rodata.font_frlg_male_glyphs"))) const u16 gFontFRLGMaleJapaneseGlyphs[] = INCGFX_U16("graphics/fonts/japanese_normal.png", ".hwjpnfont");
+// Keep the FRLG tables in separate sections so --gc-sections can discard them
+// from the Emerald build; the FireRed/LeafGreen builds use them.
+ALIGNED(4) __attribute__((section(".rodata.font_frlg_male_glyphs"))) const u16 gFontFRLGMaleJapaneseGlyphs[] = INCGFX_U16("graphics/fonts/japanese_frlg_male.png", ".fwjpnfont");
 ALIGNED(4) __attribute__((section(".rodata.font_frlg_male_widths"))) const u8 gFontFRLGMaleJapaneseGlyphWidths[] = {
     0, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10,
     10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10,
@@ -365,7 +365,7 @@ ALIGNED(4) __attribute__((section(".rodata.font_frlg_male_widths"))) const u8 gF
     10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10,
 };
 
-ALIGNED(4) __attribute__((section(".rodata.font_frlg_female_glyphs"))) const u16 gFontFRLGFemaleJapaneseGlyphs[] = INCGFX_U16("graphics/fonts/japanese_normal.png", ".hwjpnfont");
+ALIGNED(4) __attribute__((section(".rodata.font_frlg_female_glyphs"))) const u16 gFontFRLGFemaleJapaneseGlyphs[] = INCGFX_U16("graphics/fonts/japanese_frlg_female.png", ".fwjpnfont");
 ALIGNED(4) __attribute__((section(".rodata.font_frlg_female_widths"))) const u8 gFontFRLGFemaleJapaneseGlyphWidths[] = {
     0, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10,
     10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10,

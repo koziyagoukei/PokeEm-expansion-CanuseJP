@@ -3,6 +3,7 @@
   "name": "PartyRoamerPark",
   "layout": "LAYOUT_PARTY_ROAMER_PARK",
   "music": "MUS_SAFARI_ZONE",
+  "region": "REGION_HOENN",
   "region_map_section": "MAPSEC_SPECIAL_AREA",
   "requires_flash": false,
   "weather": "WEATHER_NONE",

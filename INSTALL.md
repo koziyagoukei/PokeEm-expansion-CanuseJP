@@ -401,6 +401,11 @@ make -j8
 
 ビルドに成功すると、`.gba` ファイルが生成されます。
 
+ファイアレッド／リーフグリーン（カントー）を基盤にしたROMをビルドする場合は、`baserom.gba` の代わりに
+日本版ファイアレッドROM（`baserom_fr.gba`）か日本版リーフグリーンROM（`baserom_lg.gba`）を置いて
+`make firered` または `make leafgreen` を実行します。詳しくは
+[FRLG（カントー）基盤でビルドする](docs/how_to_build_frlg_jp.md) を参照してください。
+
 ## 11. よくあるエラー
 
 ### `arm-none-eabi-gcc` が見つからない

@@ -4,6 +4,22 @@ GAME_CODE    ?= BPEE
 BUILD_NAME   ?= emerald
 MAP_VERSION  ?= emerald
 
+ifeq (firered, $(or $(BUILD), $(MAKECMDGOALS)))
+  	GAME_VERSION 	:= FIRERED
+	TITLE       	:= POKEMON FIRE
+	GAME_CODE   	:= BPRE
+	BUILD_NAME  	:= firered
+	MAP_VERSION 	:= firered
+else
+ifeq (leafgreen, $(or $(BUILD), $(MAKECMDGOALS)))
+	GAME_VERSION 	:= LEAFGREEN
+	TITLE       	:= POKEMON LEAF
+	GAME_CODE   	:= BPGE
+	BUILD_NAME  	:= leafgreen
+	MAP_VERSION 	:= firered
+endif
+endif
+
 # GBA rom header
 MAKER_CODE  := 01
 REVISION    := 0
@@ -199,31 +215,45 @@ AUTO_GEN_TARGETS :=
 include make_tools.mk
 
 BUILD_GENERATED_DIR := $(BUILD_DIR)/generated
-BPEJ_VERIFIED_OK := $(BUILD_GENERATED_DIR)/bpej_verified.ok
+# The ROM the extracted assets (build/extracted_*) come from: the Japanese Emerald ROM (baserom.gba) for
+# Emerald; a Japanese FireRed or LeafGreen ROM (baserom_fr.gba / baserom_lg.gba) for FireRed and LeafGreen,
+# which then needs no Emerald ROM (tools/extract_frlg_assets.py). See docs/how_to_build_frlg_jp.md.
+FRLG_EDITION ?= $(BUILD_NAME)
+ifeq ($(MAP_VERSION),firered)
+  ASSET_SOURCE := frlg
+  BASEROM := $(shell python3 $(TOOLS_DIR)/check_baserom_frlg.py --prefer $(FRLG_EDITION) --print-path)
+  BASEROM_REQUIRED_MESSAGE := 日本版ファイアレッドROMを baserom_fr.gba、または日本版リーフグリーンROMを baserom_lg.gba としてプロジェクトルートに配置してください
+else
+  ASSET_SOURCE := bpej
+  BASEROM := baserom.gba
+  BASEROM_REQUIRED_MESSAGE := 日本版エメラルドROMをプロジェクトルートに baserom.gba として配置してください
+endif
+FRLG_ASSET_PROBES := $(TOOLS_DIR)/data/frlg_asset_probes.json
+BPEJ_VERIFIED_OK := $(BUILD_GENERATED_DIR)/$(ASSET_SOURCE)_verified.ok
 BPEJ_EXTRACTED_SOUND_DIR := $(BUILD_DIR)/extracted_sound
 BPEJ_SOUND_MANIFEST := $(TOOLS_DIR)/data/bpej_sound_manifest.json
-BPEJ_SOUND_EXTRACTED_OK := $(BUILD_GENERATED_DIR)/bpej_sound_extracted.ok
+BPEJ_SOUND_EXTRACTED_OK := $(BUILD_GENERATED_DIR)/$(ASSET_SOURCE)_sound_extracted.ok
 BPEJ_POKEDEX_SYMBOLS := symbols/bpej/pokedex/symbols.jsonl
 BPEJ_POKEDEX_MANIFEST := $(BUILD_GENERATED_DIR)/bpej_pokedex_manifest.json
 BPEJ_EXTRACTED_POKEDEX_DIR := $(BUILD_DIR)/extracted_pokedex
-BPEJ_POKEDEX_EXTRACTED_OK := $(BUILD_GENERATED_DIR)/bpej_pokedex_extracted.ok
+BPEJ_POKEDEX_EXTRACTED_OK := $(BUILD_GENERATED_DIR)/$(ASSET_SOURCE)_pokedex_extracted.ok
 BPEJ_BATTLE_BACKGROUND_SYMBOLS := symbols/bpej/battle_backgrounds/symbols.jsonl
 BPEJ_BATTLE_BACKGROUND_MANIFEST := $(BUILD_GENERATED_DIR)/bpej_battle_backgrounds_manifest.json
 BPEJ_EXTRACTED_BATTLE_BACKGROUND_DIR := $(BUILD_DIR)/extracted_battle_backgrounds
-BPEJ_BATTLE_BACKGROUND_EXTRACTED_OK := $(BUILD_GENERATED_DIR)/bpej_battle_backgrounds_extracted.ok
+BPEJ_BATTLE_BACKGROUND_EXTRACTED_OK := $(BUILD_GENERATED_DIR)/$(ASSET_SOURCE)_battle_backgrounds_extracted.ok
 BPEJ_BATTLE_BACKGROUND_CUSTOM_INPUTS := $(wildcard graphics/custom/bpej/battle_backgrounds/*/*)
 BPEJ_CONTEST_MANIFEST := $(TOOLS_DIR)/data/bpej_contest_manifest.json
 BPEJ_EXTRACTED_CONTEST_DIR := $(BUILD_DIR)/extracted_contest
-BPEJ_CONTEST_EXTRACTED_OK := $(BUILD_GENERATED_DIR)/bpej_contest_extracted.ok
+BPEJ_CONTEST_EXTRACTED_OK := $(BUILD_GENERATED_DIR)/$(ASSET_SOURCE)_contest_extracted.ok
 BPEJ_INTRO_MANIFEST := $(TOOLS_DIR)/data/bpej_intro_manifest.json
 BPEJ_EXTRACTED_INTRO_DIR := $(BUILD_DIR)/extracted_intro
-BPEJ_INTRO_EXTRACTED_OK := $(BUILD_GENERATED_DIR)/bpej_intro_extracted.ok
+BPEJ_INTRO_EXTRACTED_OK := $(BUILD_GENERATED_DIR)/$(ASSET_SOURCE)_intro_extracted.ok
 BPEJ_POKENAV_MANIFEST := $(TOOLS_DIR)/data/bpej_pokenav_manifest.json
 BPEJ_EXTRACTED_POKENAV_DIR := $(BUILD_DIR)/extracted_pokenav
-BPEJ_POKENAV_EXTRACTED_OK := $(BUILD_GENERATED_DIR)/bpej_pokenav_extracted.ok
+BPEJ_POKENAV_EXTRACTED_OK := $(BUILD_GENERATED_DIR)/$(ASSET_SOURCE)_pokenav_extracted.ok
 BPEJ_BERRY_MANIFEST := $(TOOLS_DIR)/data/bpej_berry_manifest.json
 BPEJ_EXTRACTED_BERRY_DIR := $(BUILD_DIR)/extracted_berry
-BPEJ_BERRY_EXTRACTED_OK := $(BUILD_GENERATED_DIR)/bpej_berry_extracted.ok
+BPEJ_BERRY_EXTRACTED_OK := $(BUILD_GENERATED_DIR)/$(ASSET_SOURCE)_berry_extracted.ok
 BPEJ_EXTRACTED_MID_NAMES := mus_dummy mus_level_up se_use_item se_pc_login se_pc_off se_pc_on se_select se_win_open se_wall_hit se_door se_exit se_bike_bell se_flee se_not_effective se_effective se_super_effective se_ball_open se_faint se_sliding_door se_ship se_bang se_pin se_boo se_ball se_a se_i se_u se_e se_o se_n se_success se_failure se_bike_hop se_switch se_click se_fu_zaku se_contest_condition_lose se_lavaridge_fall_warp se_ice_stairs se_ice_break se_ice_crack se_fall se_unlock se_warp_in se_warp_out se_rotating_gate se_truck_stop se_truck_unload se_truck_door se_save se_ball_bounce_1 se_ball_bounce_2 se_ball_bounce_3 se_ball_bounce_4 se_ball_trade se_ball_throw se_note_c se_note_d se_note_e se_note_f se_note_g se_note_a se_note_b se_note_c_high se_puddle se_bridge_walk se_itemfinder se_ding_dong se_balloon_red se_balloon_blue se_balloon_yellow se_breakable_door se_mud_ball se_field_poison se_escalator se_thunderstorm_stop se_downpour_stop se_rain_stop se_thunder se_thunder2 se_elevator se_roulette_ball se_roulette_ball2 se_shop se_contest_heart se_contest_curtain_rise se_contest_curtain_fall se_contest_icon_change se_contest_icon_clear se_contest_mons_turn se_shiny se_intro_blast se_mugshot se_vend se_orb se_dex_scroll se_dex_page se_pokenav_on se_pokenav_off se_dex_search se_egg_hatch se_ball_tray_enter se_ball_tray_ball se_ball_tray_exit se_glass_flute se_m_thunderbolt se_m_thunderbolt2 se_m_harden se_m_nightmare se_m_vital_throw se_m_vital_throw2 se_m_bubble se_m_bubble2 se_m_bubble3 se_m_rain_dance se_m_cut se_m_string_shot se_m_rock_throw se_m_gust2 se_m_double_slap se_m_double_team se_m_razor_wind se_m_thunder_wave se_m_comet_punch se_m_mega_kick se_m_mega_kick2 se_m_crabhammer se_m_jump_kick se_m_flame_wheel2 se_m_fire_punch se_m_toxic se_m_sacred_fire se_m_sacred_fire2 se_m_ember se_m_take_down se_m_blizzard2 se_m_scratch se_m_vicegrip se_m_wing_attack se_m_fly se_m_sand_attack se_m_razor_wind2 se_m_bite se_m_headbutt se_m_surf se_m_hydro_pump se_m_whirlpool se_m_horn_attack se_m_tail_whip se_m_mist se_m_poison_powder se_m_bind se_m_dragon_rage se_m_pay_day se_m_dig se_m_dizzy_punch se_m_self_destruct se_m_explosion se_m_absorb_2 se_m_absorb se_m_screech se_m_bubble_beam2 se_m_supersonic se_m_belly_drum se_m_metronome se_m_bonemerang se_m_lick se_m_psybeam se_m_faint_attack se_m_swords_dance se_m_leer se_m_swagger se_m_swagger2 se_m_heal_bell se_m_confuse_ray se_m_snore se_m_brick_break se_m_giga_drain se_m_psybeam2 se_m_solar_beam se_m_petal_dance se_m_teleport se_m_minimize se_m_sketch se_m_swift se_m_detect se_m_lock_on se_m_charm se_m_charge se_m_strength se_m_reversal se_m_acid_armor se_m_tri_attack se_m_tri_attack2 se_m_encore se_m_baton_pass se_m_milk_drink se_m_attract se_m_attract2 se_m_morning_sun se_m_flatter se_m_sand_tomb se_m_grasswhistle se_m_spit_up se_m_dive se_m_twister se_m_sweet_scent se_m_yawn se_m_sky_uppercut se_m_stat_increase se_m_heat_wave se_m_uproar se_m_hail se_m_cosmic_power se_m_teeter_dance se_m_stat_decrease se_m_haze se_pokenav_call se_rg_door se_rg_card_flip se_rg_card_flipping se_rg_card_open se_rg_bag_cursor se_rg_bag_pocket se_rg_ball_click se_rg_shop se_rg_ss_anne_horn se_rg_help_open se_rg_help_close se_rg_help_error se_rg_deoxys_move se_rg_poke_jump_success se_rg_poke_jump_failure se_pokenav_hang_up se_arena_timeup1 se_arena_timeup2 se_pike_curtain_close se_pike_curtain_open mus_heal mus_obtain_badge mus_obtain_item mus_evolved mus_obtain_tmhm mus_evolution_intro mus_move_deleted mus_obtain_berry mus_slots_jackpot mus_slots_win mus_too_bad mus_intro mus_obtain_b_points mus_register_match_call mus_obtain_symbol mus_rg_jigglypuff mus_rg_heal mus_rg_dex_rating mus_rg_obtain_key_item mus_rg_caught_intro mus_rg_photo mus_rg_new_game_exit mus_rg_poke_flute
 # Tool executables
 SMOLTM       := $(TOOLS_DIR)/compresSmol/compresSmolTilemap$(EXE)
@@ -300,59 +330,93 @@ $(INCLUDE_DIRS)/constants/script_commands.h: $(MISC_TOOL_DIR)/make_scr_cmd_const
 $(BUILD_GENERATED_DIR):
 	mkdir -p $@
 
-$(BPEJ_VERIFIED_OK): baserom.gba $(TOOLS_DIR)/check_baserom_jp.py | $(BUILD_GENERATED_DIR)
-	python3 $(TOOLS_DIR)/check_baserom_jp.py --baserom baserom.gba --output $@
-
-$(BPEJ_SOUND_EXTRACTED_OK): baserom.gba $(BPEJ_VERIFIED_OK) $(BPEJ_SOUND_MANIFEST) $(TOOLS_DIR)/extract_bpej_sound.py | $(BUILD_GENERATED_DIR)
-	python3 $(TOOLS_DIR)/extract_bpej_sound.py --baserom baserom.gba --manifest $(BPEJ_SOUND_MANIFEST) --out $(BPEJ_EXTRACTED_SOUND_DIR) --stamp $@
-
 $(BPEJ_POKEDEX_MANIFEST): $(BPEJ_POKEDEX_SYMBOLS) $(TOOLS_DIR)/generate_bpej_pokedex_manifest.py | $(BUILD_GENERATED_DIR)
 	python3 $(TOOLS_DIR)/generate_bpej_pokedex_manifest.py --symbols $< --output $@
-
-$(BPEJ_POKEDEX_EXTRACTED_OK): baserom.gba $(BPEJ_VERIFIED_OK) $(BPEJ_POKEDEX_MANIFEST) $(TOOLS_DIR)/extract_bpej_pokedex.py | $(BUILD_GENERATED_DIR)
-	python3 $(TOOLS_DIR)/extract_bpej_pokedex.py --baserom baserom.gba --manifest $(BPEJ_POKEDEX_MANIFEST) --stamp $@
-
-FORCE_BPEJ_BATTLE_BACKGROUNDS:
 
 $(BPEJ_BATTLE_BACKGROUND_MANIFEST): $(BPEJ_BATTLE_BACKGROUND_SYMBOLS) $(TOOLS_DIR)/generate_bpej_battle_background_manifest.py | $(BUILD_GENERATED_DIR)
 	python3 $(TOOLS_DIR)/generate_bpej_battle_background_manifest.py --symbols $< --output $@
 
-$(BPEJ_BATTLE_BACKGROUND_EXTRACTED_OK): FORCE_BPEJ_BATTLE_BACKGROUNDS baserom.gba $(BPEJ_VERIFIED_OK) $(BPEJ_BATTLE_BACKGROUND_MANIFEST) $(BPEJ_BATTLE_BACKGROUND_CUSTOM_INPUTS) $(TOOLS_DIR)/extract_bpej_battle_backgrounds.py | $(BUILD_GENERATED_DIR)
-	python3 $(TOOLS_DIR)/extract_bpej_battle_backgrounds.py --baserom baserom.gba --manifest $(BPEJ_BATTLE_BACKGROUND_MANIFEST) --stamp $@
+FORCE_BPEJ_BATTLE_BACKGROUNDS:
 
 FORCE_BPEJ_CONTEST_ASSETS:
+
+FORCE_BPEJ_INTRO_ASSETS:
+
+FORCE_BPEJ_POKENAV_ASSETS:
+
+FORCE_BPEJ_BERRY_ASSETS:
+
+ifeq ($(ASSET_SOURCE),bpej)
+$(BPEJ_VERIFIED_OK): baserom.gba $(TOOLS_DIR)/check_baserom_jp.py | $(BUILD_GENERATED_DIR)
+	python3 $(TOOLS_DIR)/check_baserom_jp.py --baserom baserom.gba --output $@
+
+$(BPEJ_SOUND_EXTRACTED_OK): baserom.gba .map_version $(BPEJ_VERIFIED_OK) $(BPEJ_SOUND_MANIFEST) $(TOOLS_DIR)/extract_bpej_sound.py | $(BUILD_GENERATED_DIR)
+	python3 $(TOOLS_DIR)/extract_bpej_sound.py --baserom baserom.gba --manifest $(BPEJ_SOUND_MANIFEST) --out $(BPEJ_EXTRACTED_SOUND_DIR) --stamp $@
+
+$(BPEJ_POKEDEX_EXTRACTED_OK): baserom.gba .map_version $(BPEJ_VERIFIED_OK) $(BPEJ_POKEDEX_MANIFEST) $(TOOLS_DIR)/extract_bpej_pokedex.py | $(BUILD_GENERATED_DIR)
+	python3 $(TOOLS_DIR)/extract_bpej_pokedex.py --baserom baserom.gba --manifest $(BPEJ_POKEDEX_MANIFEST) --stamp $@
+
+$(BPEJ_BATTLE_BACKGROUND_EXTRACTED_OK): FORCE_BPEJ_BATTLE_BACKGROUNDS baserom.gba $(BPEJ_VERIFIED_OK) $(BPEJ_BATTLE_BACKGROUND_MANIFEST) $(BPEJ_BATTLE_BACKGROUND_CUSTOM_INPUTS) $(TOOLS_DIR)/extract_bpej_battle_backgrounds.py | $(BUILD_GENERATED_DIR)
+	python3 $(TOOLS_DIR)/extract_bpej_battle_backgrounds.py --baserom baserom.gba --manifest $(BPEJ_BATTLE_BACKGROUND_MANIFEST) --stamp $@
 
 $(BPEJ_CONTEST_EXTRACTED_OK): FORCE_BPEJ_CONTEST_ASSETS baserom.gba $(BPEJ_VERIFIED_OK) $(BPEJ_CONTEST_MANIFEST) $(TOOLS_DIR)/extract_bpej_contest.py $(TOOLS_DIR)/check_baserom_jp.py $(TOOLS_DIR)/extract_bpej_pokedex.py $(TOOLS_DIR)/extract_bpej_battle_backgrounds.py | $(BUILD_GENERATED_DIR)
 	python3 $(TOOLS_DIR)/extract_bpej_contest.py --baserom baserom.gba --manifest $(BPEJ_CONTEST_MANIFEST) --stamp $@
 
-# Refresh make's file timestamps after extraction, including repaired files and
-# custom overrides. Unchanged bytes retain their mtime and do not rebuild C.
-$(BPEJ_EXTRACTED_CONTEST_DIR)/%: $(BPEJ_CONTEST_EXTRACTED_OK) FORCE_BPEJ_CONTEST_ASSETS
-	@test -f "$@" || { echo "error: missing extracted contest asset: $@; place Japanese Emerald ROM at baserom.gba"; exit 1; }
-
-FORCE_BPEJ_INTRO_ASSETS:
-
 $(BPEJ_INTRO_EXTRACTED_OK): FORCE_BPEJ_INTRO_ASSETS baserom.gba $(BPEJ_VERIFIED_OK) $(BPEJ_INTRO_MANIFEST) $(TOOLS_DIR)/extract_bpej_intro.py $(TOOLS_DIR)/extract_bpej_contest.py $(TOOLS_DIR)/check_baserom_jp.py $(TOOLS_DIR)/extract_bpej_pokedex.py $(TOOLS_DIR)/extract_bpej_battle_backgrounds.py | $(BUILD_GENERATED_DIR)
 	python3 $(TOOLS_DIR)/extract_bpej_intro.py --baserom baserom.gba --manifest $(BPEJ_INTRO_MANIFEST) --stamp $@
-
-$(BPEJ_EXTRACTED_INTRO_DIR)/%: $(BPEJ_INTRO_EXTRACTED_OK) FORCE_BPEJ_INTRO_ASSETS
-	@test -f "$@" || { echo "error: missing extracted opening/title asset: $@; place Japanese Emerald ROM at baserom.gba"; exit 1; }
-
-FORCE_BPEJ_POKENAV_ASSETS:
 
 $(BPEJ_POKENAV_EXTRACTED_OK): FORCE_BPEJ_POKENAV_ASSETS baserom.gba $(BPEJ_VERIFIED_OK) $(BPEJ_POKENAV_MANIFEST) $(TOOLS_DIR)/extract_bpej_pokenav.py $(TOOLS_DIR)/extract_bpej_contest.py $(TOOLS_DIR)/check_baserom_jp.py $(TOOLS_DIR)/extract_bpej_pokedex.py $(TOOLS_DIR)/extract_bpej_battle_backgrounds.py | $(BUILD_GENERATED_DIR)
 	python3 $(TOOLS_DIR)/extract_bpej_pokenav.py --baserom baserom.gba --manifest $(BPEJ_POKENAV_MANIFEST) --stamp $@
 
-$(BPEJ_EXTRACTED_POKENAV_DIR)/%: $(BPEJ_POKENAV_EXTRACTED_OK) FORCE_BPEJ_POKENAV_ASSETS
-	@test -f "$@" || { echo "error: missing extracted Pokenav asset: $@; place Japanese Emerald ROM at baserom.gba"; exit 1; }
-
-FORCE_BPEJ_BERRY_ASSETS:
-
 $(BPEJ_BERRY_EXTRACTED_OK): FORCE_BPEJ_BERRY_ASSETS baserom.gba $(BPEJ_VERIFIED_OK) $(BPEJ_BERRY_MANIFEST) $(TOOLS_DIR)/extract_bpej_berry.py $(TOOLS_DIR)/extract_bpej_contest.py $(TOOLS_DIR)/check_baserom_jp.py $(TOOLS_DIR)/extract_bpej_pokedex.py $(TOOLS_DIR)/extract_bpej_battle_backgrounds.py | $(BUILD_GENERATED_DIR)
 	python3 $(TOOLS_DIR)/extract_bpej_berry.py --baserom baserom.gba --manifest $(BPEJ_BERRY_MANIFEST) --stamp $@
 
+else
+FRLG_ASSET_TOOL := python3 $(TOOLS_DIR)/extract_frlg_assets.py --baserom "$(BASEROM)" --probes $(FRLG_ASSET_PROBES)
+FRLG_ASSET_DEPS := $(BPEJ_VERIFIED_OK) .map_version $(FRLG_ASSET_PROBES) $(TOOLS_DIR)/extract_frlg_assets.py $(TOOLS_DIR)/check_baserom_frlg.py $(TOOLS_DIR)/extract_bpej_contest.py $(TOOLS_DIR)/extract_bpej_sound.py $(TOOLS_DIR)/extract_bpej_pokedex.py $(TOOLS_DIR)/extract_bpej_battle_backgrounds.py
+
+# With neither baserom_fr.gba nor baserom_lg.gba, the check runs (and stops the build with the message)
+$(BPEJ_VERIFIED_OK): $(if $(BASEROM),$(BASEROM),FORCE_FRLG_BASEROM) .map_version $(TOOLS_DIR)/check_baserom_frlg.py | $(BUILD_GENERATED_DIR)
+	python3 $(TOOLS_DIR)/check_baserom_frlg.py --prefer $(FRLG_EDITION) --output $@
+
+FORCE_FRLG_BASEROM:
+
+$(BPEJ_SOUND_EXTRACTED_OK): $(FRLG_ASSET_DEPS) $(BPEJ_SOUND_MANIFEST) | $(BUILD_GENERATED_DIR)
+	$(FRLG_ASSET_TOOL) --kind sound --manifest $(BPEJ_SOUND_MANIFEST) --stamp $@
+
+$(BPEJ_POKEDEX_EXTRACTED_OK): $(FRLG_ASSET_DEPS) $(BPEJ_POKEDEX_MANIFEST) | $(BUILD_GENERATED_DIR)
+	$(FRLG_ASSET_TOOL) --kind pokedex --manifest $(BPEJ_POKEDEX_MANIFEST) --stamp $@
+
+$(BPEJ_BATTLE_BACKGROUND_EXTRACTED_OK): $(FRLG_ASSET_DEPS) $(BPEJ_BATTLE_BACKGROUND_MANIFEST) $(BPEJ_BATTLE_BACKGROUND_CUSTOM_INPUTS) | $(BUILD_GENERATED_DIR)
+	$(FRLG_ASSET_TOOL) --kind battle_backgrounds --manifest $(BPEJ_BATTLE_BACKGROUND_MANIFEST) --stamp $@
+
+$(BPEJ_CONTEST_EXTRACTED_OK): $(FRLG_ASSET_DEPS) $(BPEJ_CONTEST_MANIFEST) | $(BUILD_GENERATED_DIR)
+	$(FRLG_ASSET_TOOL) --kind contest --manifest $(BPEJ_CONTEST_MANIFEST) --stamp $@
+
+$(BPEJ_INTRO_EXTRACTED_OK): $(FRLG_ASSET_DEPS) $(BPEJ_INTRO_MANIFEST) | $(BUILD_GENERATED_DIR)
+	$(FRLG_ASSET_TOOL) --kind intro --manifest $(BPEJ_INTRO_MANIFEST) --stamp $@
+
+$(BPEJ_POKENAV_EXTRACTED_OK): $(FRLG_ASSET_DEPS) $(BPEJ_POKENAV_MANIFEST) | $(BUILD_GENERATED_DIR)
+	$(FRLG_ASSET_TOOL) --kind pokenav --manifest $(BPEJ_POKENAV_MANIFEST) --stamp $@
+
+$(BPEJ_BERRY_EXTRACTED_OK): $(FRLG_ASSET_DEPS) $(BPEJ_BERRY_MANIFEST) | $(BUILD_GENERATED_DIR)
+	$(FRLG_ASSET_TOOL) --kind berry --manifest $(BPEJ_BERRY_MANIFEST) --stamp $@
+
+endif
+
+# Refresh make's file timestamps after extraction, including repaired files and
+# custom overrides. Unchanged bytes retain their mtime and do not rebuild C.
+$(BPEJ_EXTRACTED_CONTEST_DIR)/%: $(BPEJ_CONTEST_EXTRACTED_OK) FORCE_BPEJ_CONTEST_ASSETS
+	@test -f "$@" || { echo "error: missing extracted contest asset: $@; $(BASEROM_REQUIRED_MESSAGE)"; exit 1; }
+
+$(BPEJ_EXTRACTED_INTRO_DIR)/%: $(BPEJ_INTRO_EXTRACTED_OK) FORCE_BPEJ_INTRO_ASSETS
+	@test -f "$@" || { echo "error: missing extracted opening/title asset: $@; $(BASEROM_REQUIRED_MESSAGE)"; exit 1; }
+
+$(BPEJ_EXTRACTED_POKENAV_DIR)/%: $(BPEJ_POKENAV_EXTRACTED_OK) FORCE_BPEJ_POKENAV_ASSETS
+	@test -f "$@" || { echo "error: missing extracted Pokenav asset: $@; $(BASEROM_REQUIRED_MESSAGE)"; exit 1; }
+
 $(BPEJ_EXTRACTED_BERRY_DIR)/%: $(BPEJ_BERRY_EXTRACTED_OK) FORCE_BPEJ_BERRY_ASSETS
-	@test -f "$@" || { echo "error: missing extracted berry asset: $@; 日本版エメラルドROMをプロジェクトルートに baserom.gba として配置してください"; exit 1; }
+	@test -f "$@" || { echo "error: missing extracted berry asset: $@; $(BASEROM_REQUIRED_MESSAGE)"; exit 1; }
 
 PERL := perl
 SHA1 := $(shell { command -v sha1sum || command -v shasum; } 2>/dev/null) -c
@@ -371,6 +435,7 @@ RULES_NO_SCAN += extract-bpej-contest check-bpej-contest-outputs clean-bpej-cont
 RULES_NO_SCAN += extract-bpej-intro check-bpej-intro-outputs clean-bpej-intro-assets FORCE_BPEJ_INTRO_ASSETS
 RULES_NO_SCAN += extract-bpej-pokenav check-bpej-pokenav-outputs clean-bpej-pokenav-assets FORCE_BPEJ_POKENAV_ASSETS
 RULES_NO_SCAN += extract-bpej-berry check-bpej-berry-outputs clean-bpej-berry-assets FORCE_BPEJ_BERRY_ASSETS
+RULES_NO_SCAN += FORCE_FRLG_BASEROM
 .PHONY: all rom agbcc modern compare check debug release
 .PHONY: $(RULES_NO_SCAN)
 
@@ -398,7 +463,7 @@ ifeq ($(SETUP_PREREQS),1)
     $(error Errors occurred while building tools. See error messages above for more details)
   endif
   # Oh and also generate mapjson sources before we use `SCANINC`.
-  $(foreach line, $(shell $(MAKE) MAP_VERSION=$(MAP_VERSION) generated | sed "s/ /__SPACE__/g"), $(info $(subst __SPACE__, ,$(line))))
+  $(foreach line, $(shell $(MAKE) MAP_VERSION=$(MAP_VERSION) FRLG_EDITION=$(FRLG_EDITION) generated | sed "s/ /__SPACE__/g"), $(info $(subst __SPACE__, ,$(line))))
   ifneq ($(.SHELLSTATUS),0)
     $(error Errors occurred while generating map-related sources. See error messages above for more details)
   endif
@@ -550,15 +615,27 @@ generated: $(AUTO_GEN_TARGETS)
 	@: # Silence the "Nothing to be done for `generated'" message, which some people were confusing for an error.
 
 check-bpej-pokedex-outputs: $(BPEJ_POKEDEX_EXTRACTED_OK)
+ifeq ($(ASSET_SOURCE),bpej)
 	python3 $(TOOLS_DIR)/extract_bpej_pokedex.py --manifest $(BPEJ_POKEDEX_MANIFEST) --stamp $(BPEJ_POKEDEX_EXTRACTED_OK) --check
+else
+	$(FRLG_ASSET_TOOL) --kind pokedex --manifest $(BPEJ_POKEDEX_MANIFEST) --stamp $(BPEJ_POKEDEX_EXTRACTED_OK) --check
+endif
 
 check-bpej-battle-background-outputs: $(BPEJ_BATTLE_BACKGROUND_EXTRACTED_OK)
+ifeq ($(ASSET_SOURCE),bpej)
 	python3 $(TOOLS_DIR)/extract_bpej_battle_backgrounds.py --manifest $(BPEJ_BATTLE_BACKGROUND_MANIFEST) --stamp $(BPEJ_BATTLE_BACKGROUND_EXTRACTED_OK) --check
+else
+	$(FRLG_ASSET_TOOL) --kind battle_backgrounds --manifest $(BPEJ_BATTLE_BACKGROUND_MANIFEST) --stamp $(BPEJ_BATTLE_BACKGROUND_EXTRACTED_OK) --check
+endif
 
 extract-bpej-contest: $(BPEJ_CONTEST_EXTRACTED_OK)
 
 check-bpej-contest-outputs: $(BPEJ_CONTEST_EXTRACTED_OK)
+ifeq ($(ASSET_SOURCE),bpej)
 	python3 $(TOOLS_DIR)/extract_bpej_contest.py --manifest $(BPEJ_CONTEST_MANIFEST) --stamp $(BPEJ_CONTEST_EXTRACTED_OK) --check
+else
+	$(FRLG_ASSET_TOOL) --kind contest --manifest $(BPEJ_CONTEST_MANIFEST) --stamp $(BPEJ_CONTEST_EXTRACTED_OK) --check
+endif
 
 clean-bpej-contest-assets:
 	rm -rf $(BPEJ_EXTRACTED_CONTEST_DIR)
@@ -567,7 +644,11 @@ clean-bpej-contest-assets:
 extract-bpej-intro: $(BPEJ_INTRO_EXTRACTED_OK)
 
 check-bpej-intro-outputs: $(BPEJ_INTRO_EXTRACTED_OK)
+ifeq ($(ASSET_SOURCE),bpej)
 	python3 $(TOOLS_DIR)/extract_bpej_intro.py --manifest $(BPEJ_INTRO_MANIFEST) --stamp $(BPEJ_INTRO_EXTRACTED_OK) --check
+else
+	$(FRLG_ASSET_TOOL) --kind intro --manifest $(BPEJ_INTRO_MANIFEST) --stamp $(BPEJ_INTRO_EXTRACTED_OK) --check
+endif
 
 clean-bpej-intro-assets:
 	rm -rf $(BPEJ_EXTRACTED_INTRO_DIR)
@@ -576,7 +657,11 @@ clean-bpej-intro-assets:
 extract-bpej-pokenav: $(BPEJ_POKENAV_EXTRACTED_OK)
 
 check-bpej-pokenav-outputs: $(BPEJ_POKENAV_EXTRACTED_OK)
+ifeq ($(ASSET_SOURCE),bpej)
 	python3 $(TOOLS_DIR)/extract_bpej_pokenav.py --manifest $(BPEJ_POKENAV_MANIFEST) --stamp $(BPEJ_POKENAV_EXTRACTED_OK) --check
+else
+	$(FRLG_ASSET_TOOL) --kind pokenav --manifest $(BPEJ_POKENAV_MANIFEST) --stamp $(BPEJ_POKENAV_EXTRACTED_OK) --check
+endif
 
 clean-bpej-pokenav-assets:
 	rm -rf $(BPEJ_EXTRACTED_POKENAV_DIR)
@@ -585,7 +670,11 @@ clean-bpej-pokenav-assets:
 extract-bpej-berry: $(BPEJ_BERRY_EXTRACTED_OK)
 
 check-bpej-berry-outputs: $(BPEJ_BERRY_EXTRACTED_OK)
+ifeq ($(ASSET_SOURCE),bpej)
 	python3 $(TOOLS_DIR)/extract_bpej_berry.py --manifest $(BPEJ_BERRY_MANIFEST) --stamp $(BPEJ_BERRY_EXTRACTED_OK) --check
+else
+	$(FRLG_ASSET_TOOL) --kind berry --manifest $(BPEJ_BERRY_MANIFEST) --stamp $(BPEJ_BERRY_EXTRACTED_OK) --check
+endif
 
 clean-bpej-berry-assets:
 	rm -rf $(BPEJ_EXTRACTED_BERRY_DIR)
@@ -783,9 +872,8 @@ $(ROM): $(ELF)
 	$(FIX) $@ -p --silent
 
 emerald: all
-
-firered leafgreen:
-	$(error FRLG builds are not supported in this Emerald-only Japanese project)
+firered: all
+leafgreen: all
 # Symbol file (`make syms`)
 $(SYM): $(ELF)
 	$(OBJDUMP) -t $< | sort -u | grep -E "^0[2389]" | $(PERL) -p -e 's/^(\w{8}) (\w).{6} \S+\t(\w{8}) (\S+)$$/\1 \2 \3 \4/g' > $@

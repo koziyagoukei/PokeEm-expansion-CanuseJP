@@ -17,6 +17,7 @@
 #include "constants/rgb.h"
 #include "constants/layouts.h"
 #include "constants/metatile_behaviors.h"
+#include "constants/metatile_behaviors_frlg.h"
 #include "wild_encounter.h"
 
 struct ConnectionFlags
