@@ -202,9 +202,8 @@ static const u8 sInfoText_HubDifficulty5[] = _(
 static const u8 sInfoText_HubDifficulty6[] = _(
     "{JPN}「施設による 違い」\n"
     "パレスの 技選びは 性格に 従います。\n"
-    "ファクトリーは 簡単を 除き 独自のAI。\n"
-    "序盤は 単純で 連勝すると 賢くなります。\n"
-    "設定を 最強にしても この仕組みは 同じ。\n"
+    "ファクトリーも ほかの 施設と 同じく\n"
+    "設定した 難しさの AIで 戦います。\n"
     "難易度を 変えても ギミックの 制限と\n"
     "禁止ポケモンの 設定は 変わりません。");
 static const u8 sInfoText_HubDifficulty7[] = _(

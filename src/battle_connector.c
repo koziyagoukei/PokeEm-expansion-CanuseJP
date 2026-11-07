@@ -89,6 +89,8 @@ static void CB2_EndBattleConnectorBattle(void);
 const u8 gText_BattleConnectorCantChangeItems[] = _("{JPN}ここでは もちものを\nもたせたり あずかったり できない！");
 // Nor may moves be changed (TMs/HMs, the Rotom Catalog, the Zygarde Cube): a run keeps the moves its Pokemon came with
 const u8 gText_BattleConnectorCantChangeMoves[] = _("{JPN}ここでは ポケモンの わざを\nかえることは できない！");
+// Nor may levels be raised (Rare Candy, Exp. Candies): a level-up could also teach a move
+const u8 gText_BattleConnectorCantRaiseLevels[] = _("{JPN}ここでは ポケモンの レベルを\nあげることは できない！");
 
 // ---- state ------------------------------------------------------------------------------------------------------------
 

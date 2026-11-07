@@ -949,6 +949,12 @@ void ItemUseOutOfBattle_PPUp(u8 taskId)
 
 void ItemUseOutOfBattle_RareCandy(u8 taskId)
 {
+    // The Battle Connector: no levels (nor the moves a level-up teaches); Exp. Candies use this too
+    if (BattleConnector_IsChallengeActive())
+    {
+        DisplayCannotUseItemMessage(taskId, gTasks[taskId].tUsingRegisteredKeyItem, gText_BattleConnectorCantRaiseLevels);
+        return;
+    }
     gItemUseCB = ItemUseCB_RareCandy;
     SetUpItemUseCallback(taskId);
 }

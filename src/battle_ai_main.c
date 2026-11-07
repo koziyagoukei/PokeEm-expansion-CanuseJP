@@ -340,8 +340,8 @@ static u64 GetAiFlags(u16 trainerId, enum BattlerId battler)
             flags = AI_FLAG_CHECK_BAD_MOVE;
         else if (gBattleTypeFlags & BATTLE_TYPE_PALACE)
             flags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT;
-        else if (gBattleTypeFlags & BATTLE_TYPE_FACTORY)
-            flags = GetAiScriptsInBattleFactory();
+        // The Battle Factory too: Emerald's Factory AI grew with the rounds (no move scoring at all before the second
+        // challenge) and ignored the Frontier difficulty setting
         else if (gBattleTypeFlags & (BATTLE_TYPE_FRONTIER | BATTLE_TYPE_EREADER_TRAINER | BATTLE_TYPE_TRAINER_HILL | BATTLE_TYPE_SECRET_BASE))
         {
             flags = AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_TRY_TO_FAINT;
@@ -353,7 +353,7 @@ static u64 GetAiFlags(u16 trainerId, enum BattlerId battler)
             flags = GetTrainerAIFlagsFromId(trainerId);
     }
 
-    // Add timing separately so Factory retains its round-specific scoring flags.
+    // Dynamax timing comes on top of the difficulty's flags.
     if (trainerId != 0xFFFF
      && (battler & BIT_SIDE) == B_SIDE_OPPONENT
      && (gBattleTypeFlags & BATTLE_TYPE_FRONTIER)
@@ -363,7 +363,7 @@ static u64 GetAiFlags(u16 trainerId, enum BattlerId battler)
         flags |= AI_FLAG_SMART_DYNAMAX;
     }
 
-    // Early Factory rounds have no move scoring flags, but still need ally scoring.
+    // Any Factory battle needs ally scoring in doubles, whatever its flags.
     if (IsDoubleBattle() && (flags != 0 || (gBattleTypeFlags & BATTLE_TYPE_FACTORY)))
     {
         flags |= AI_FLAG_DOUBLE_BATTLE;
@@ -2886,8 +2886,9 @@ static s32 AI_CheckBadMove(enum BattlerId battlerAtk, enum BattlerId battlerDef,
 
         GetBattlerTypes(battlerDef, FALSE, types);
         if (PartnerMoveIsSameAsAttacker(GetPartnerBattler(battlerAtk), battlerDef, move, aiData->partnerMove)
-            || (types[0] == typeArg && types[1] == typeArg && types[2] == TYPE_MYSTERY))
-            ADJUST_SCORE(-10);    // target is already water-only
+            || (types[0] == typeArg && types[1] == typeArg && types[2] == TYPE_MYSTERY)
+            || GetActiveGimmick(battlerDef) == GIMMICK_TERA)
+            ADJUST_SCORE(-10);    // target is already water-only, or Terastallized (Soak fails)
         break;
     }
     case EFFECT_THIRD_TYPE:

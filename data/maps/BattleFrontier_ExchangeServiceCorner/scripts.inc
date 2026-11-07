@@ -341,7 +341,7 @@ BattleFrontier_ExchangeServiceCorner_EventScript_RichBoy::
 	goto FrontierStory_EventScript_RegularTalk
 
 BattleFrontier_ExchangeServiceCorner_Text_WelcomePleaseChoosePrize:
-	.string "{JPN}匹かえサービス コーナーへ\nようこそ!\pこちらでは お客様の ためた\nバトルポイントと すてきな けいひんを\l交換 いたします!\pでは けいひんを お選び ください!$"
+	.string "{JPN}ひきかえサービス コーナーへ\nようこそ!\pこちらでは お客様の ためた\nバトルポイントと すてきな けいひんを\l交換 いたします!\pでは けいひんを お選び ください!$"
 
 @ Unused
 BattleFrontier_ExchangeServiceCorner_Text_PleaseChoosePrize:

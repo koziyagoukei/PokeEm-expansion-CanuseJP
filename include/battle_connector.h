@@ -8,6 +8,7 @@ struct Pokemon;
 
 extern const u8 gText_BattleConnectorCantChangeItems[];
 extern const u8 gText_BattleConnectorCantChangeMoves[];
+extern const u8 gText_BattleConnectorCantRaiseLevels[];
 
 // State
 bool32 BattleConnector_IsChallengeActive(void);

@@ -2285,8 +2285,9 @@ static u32 LoadDynamicFollowerPalette(enum Species species, bool32 shiny, bool32
     }
 
     TintObjectEventPaletteUnderwater(paletteNum);
-    if (gWeatherPtr->currWeather != WEATHER_FOG_HORIZONTAL) // don't want to weather blend in fog
-        UpdateSpritePaletteWithWeather(paletteNum, FALSE);
+    // Not fog-blended (allowFog FALSE), but still time-blended in fog: a follower that appears after the screen faded
+    // in (leaving a building into fog) would otherwise keep its daylight colors at night
+    UpdateSpritePaletteWithWeather(paletteNum, FALSE);
     return paletteNum;
 }
 
@@ -2348,8 +2349,7 @@ static void RefreshFollowerGraphics(struct ObjectEvent *objEvent)
     else if (i != 0xFF)
     {
         UpdateSpritePalette(&sObjectEventSpritePalettes[i], sprite);
-        if (gWeatherPtr->currWeather != WEATHER_FOG_HORIZONTAL) // don't want to weather blend in fog
-            UpdateSpritePaletteWithWeather(sprite->oam.paletteNum, FALSE);
+        UpdateSpritePaletteWithWeather(sprite->oam.paletteNum, FALSE); // time-blended only in fog (allowFog FALSE)
     }
 }
 

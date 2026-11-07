@@ -14,6 +14,7 @@
 #include "move_relearner.h"
 #include "party_roamer_park.h"
 #include "bg.h"
+#include "contest.h"
 #include "dma3.h"
 #include "window.h"
 #include "constants/shadow_pokemon.h"
@@ -988,4 +989,26 @@ TEST("Shadow: the purification scene (the evolution scene) purifies the Pokemon 
     EXPECT(sPurificationSceneEnded);
     EXPECT_EQ(GetMonData(&party[0], MON_DATA_SPECIES), SPECIES_WOBBUFFET);
     SetMainCallback2(callback);
+}
+
+TEST("Shadow: a Shadow Pokemon enters a contest with its battle moves, not its sealed own moves")
+{
+    struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][0];
+    struct ShadowMoveLayout layout;
+    enum Move tackle = MOVE_TACKLE;
+
+    ZeroPlayerPartyMons();
+    CreateMon(mon, SPECIES_ZIGZAGOON, 20, 0, OTID_STRUCT_PLAYER_ID);
+    SetMonData(mon, MON_DATA_MOVE1, &tackle);
+    EXPECT(MarkShadowPokemon(mon));
+    CalculatePlayerPartyCount();
+    GetShadowMoveLayout(mon, TRUE, &layout);
+    EXPECT(layout.shadowSlots != 0);
+
+    gContestPlayerMonIndex = 3;
+    CreateContestMonFromParty(0);
+    for (u32 i = 0; i < MAX_MON_MOVES; i++)
+        EXPECT_EQ(gContestMons[gContestPlayerMonIndex].moves[i], layout.moves[i]);
+    EXPECT(IsShadowMove(gContestMons[gContestPlayerMonIndex].moves[0]));
+    ZeroPlayerPartyMons();
 }

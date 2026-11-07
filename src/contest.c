@@ -9,6 +9,7 @@
 #include "battle_interface.h"
 #include "battle_main.h"
 #include "contest.h"
+#include "shadow_pokemon.h"
 #include "contest_npc.h"
 #include "frontier_util.h"
 #include "contest_link.h"
@@ -4956,10 +4957,14 @@ void CreateContestMonFromParty(u8 partyIndex)
     gContestMons[gContestPlayerMonIndex].smart = GetMonData(&gParties[B_TRAINER_PLAYER][partyIndex], MON_DATA_SMART);
     gContestMons[gContestPlayerMonIndex].tough = GetMonData(&gParties[B_TRAINER_PLAYER][partyIndex], MON_DATA_TOUGH);
     gContestMons[gContestPlayerMonIndex].sheen = GetMonData(&gParties[B_TRAINER_PLAYER][partyIndex], MON_DATA_SHEEN);
-    gContestMons[gContestPlayerMonIndex].moves[0] = GetMonData(&gParties[B_TRAINER_PLAYER][partyIndex], MON_DATA_MOVE1);
-    gContestMons[gContestPlayerMonIndex].moves[1] = GetMonData(&gParties[B_TRAINER_PLAYER][partyIndex], MON_DATA_MOVE2);
-    gContestMons[gContestPlayerMonIndex].moves[2] = GetMonData(&gParties[B_TRAINER_PLAYER][partyIndex], MON_DATA_MOVE3);
-    gContestMons[gContestPlayerMonIndex].moves[3] = GetMonData(&gParties[B_TRAINER_PLAYER][partyIndex], MON_DATA_MOVE4);
+    // A Shadow Pokemon appeals with the moves it has in battle: its Shadow moves first, its own moves only once its
+    // heart has opened them (GetShadowMoveLayout gives the stored moves for any other Pokemon)
+    {
+        struct ShadowMoveLayout layout;
+        GetShadowMoveLayout(&gParties[B_TRAINER_PLAYER][partyIndex], TRUE, &layout);
+        for (u32 i = 0; i < MAX_MON_MOVES; i++)
+            gContestMons[gContestPlayerMonIndex].moves[i] = layout.moves[i];
+    }
     gContestMons[gContestPlayerMonIndex].personality = GetMonData(&gParties[B_TRAINER_PLAYER][partyIndex], MON_DATA_PERSONALITY);
     gContestMons[gContestPlayerMonIndex].otId = GetMonData(&gParties[B_TRAINER_PLAYER][partyIndex], MON_DATA_OT_ID);
     gContestMons[gContestPlayerMonIndex].isShiny = GetMonData(&gParties[B_TRAINER_PLAYER][partyIndex], MON_DATA_IS_SHINY);

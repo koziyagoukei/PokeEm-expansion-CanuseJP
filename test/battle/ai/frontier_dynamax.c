@@ -30,8 +30,13 @@ TEST("Frontier Dynamax timing: only the normal offline opponent receives the tim
         u64 flags = Test_GetAiFlags(1, B_BATTLER_1);
         EXPECT_EQ(!!(flags & AI_FLAG_SMART_DYNAMAX), cases[i].enabled);
         EXPECT(!(Test_GetAiFlags(1, B_BATTLER_2) & AI_FLAG_SMART_DYNAMAX));
+        // The Battle Factory's AI is the other facilities' (the difficulty setting), from its first round
         if (cases[i].flags == BATTLE_TYPE_FACTORY)
-            EXPECT(flags == AI_FLAG_SMART_DYNAMAX);
+        {
+            gBattleTypeFlags = BATTLE_TYPE_TRAINER | BATTLE_TYPE_BATTLE_TOWER;
+            EXPECT(flags == Test_GetAiFlags(1, B_BATTLER_1));
+            gBattleTypeFlags = BATTLE_TYPE_TRAINER | cases[i].flags;
+        }
         VarSet(VAR_FRONTIER_AI_LEVEL, FRONTIER_AI_LEVEL_EASY);
         EXPECT(!(Test_GetAiFlags(1, B_BATTLER_1) & AI_FLAG_SMART_DYNAMAX));
     }
