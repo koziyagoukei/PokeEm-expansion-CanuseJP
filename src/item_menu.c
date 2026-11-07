@@ -1,4 +1,5 @@
 #include "global.h"
+#include "battle_connector.h"
 #include "item_menu.h"
 #include "battle.h"
 #include "battle_controllers.h"
@@ -2020,7 +2021,9 @@ static void ItemMenu_Register(u8 taskId)
 static void ItemMenu_Give(u8 taskId)
 {
     RemoveContextWindow();
-    if (!IsWritingMailAllowed(gSpecialVar_ItemId))
+    if (BattleConnector_IsChallengeActive())   // the party is put back afterwards: the item would be copied
+        DisplayItemMessage(taskId, FONT_NORMAL, gText_BattleConnectorCantChangeItems, HandleErrorMessage);
+    else if (!IsWritingMailAllowed(gSpecialVar_ItemId))
     {
         DisplayItemMessage(taskId, FONT_NORMAL, gText_CantWriteMail, HandleErrorMessage);
     }

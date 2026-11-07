@@ -1125,6 +1125,17 @@ static u32 GetRelearnerLevelUpMoves(struct BoxPokemon *mon, u16 *moves)
         }
     }
 
+    // A purified Battle Connector Pokemon's purification move (docs/shadow_pokemon.md)
+    enum Move purifyMove = GetBoxMonPurifiedConnectorMove(mon);
+    if (purifyMove != MOVE_NONE && !BoxMonKnowsMove(mon, purifyMove) && numMoves < MAX_RELEARNER_MOVES)
+    {
+        bool32 alreadyInList = FALSE;
+        for (u32 j = 0; j < numMoves; j++)
+            alreadyInList |= (moves[j] == purifyMove);
+        if (!alreadyInList)
+            moves[numMoves++] = purifyMove;
+    }
+
     return numMoves;
 }
 
@@ -1263,6 +1274,11 @@ static u32 GetRelearnerFrontierFullMoves(struct BoxPokemon *mon, u16 *moves)
 u32 Test_GetRelearnerFrontierFullMoves(struct BoxPokemon *mon, u16 *moves)
 {
     return GetRelearnerFrontierFullMoves(mon, moves);
+}
+
+u32 Test_GetRelearnerLevelUpMoves(struct BoxPokemon *mon, u16 *moves)
+{
+    return GetRelearnerLevelUpMoves(mon, moves);
 }
 #endif
 

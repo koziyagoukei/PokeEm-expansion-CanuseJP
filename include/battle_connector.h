@@ -6,6 +6,8 @@
 
 struct Pokemon;
 
+extern const u8 gText_BattleConnectorCantChangeItems[];
+
 // State
 bool32 BattleConnector_IsChallengeActive(void);
 bool32 BattleConnector_IsBattleActive(void);
@@ -16,6 +18,7 @@ bool32 BattleConnector_IsRoomSpecies(u16 species);
 u32 BattleConnector_GetSpeciesTier(u16 species);
 
 // Specials (data/specials.inc). VAR_0x8004 carries a party slot or a path.
+u16 BattleConnector_HasRoomToTakeHome(void);
 u16 BattleConnector_StartChallenge(void);
 void BattleConnector_PrepareBranch(void);
 void BattleConnector_BufferPathHint(void);

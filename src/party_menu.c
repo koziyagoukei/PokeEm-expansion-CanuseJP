@@ -1,4 +1,5 @@
 #include "global.h"
+#include "battle_connector.h"
 #include "shadow_pokemon.h"
 #include "party_bath_expansion.h"
 #include "malloc.h"
@@ -3815,6 +3816,16 @@ static void CursorCb_Cancel1(u8 taskId)
 
 static void CursorCb_Item(u8 taskId)
 {
+    // The Battle Connector puts the party (and its held items) back afterwards: a held item taken in it would be copied
+    if (BattleConnector_IsChallengeActive())
+    {
+        PlaySE(SE_FAILURE);
+        PartyMenuRemoveWindow(&sPartyMenuInternal->windowId[0]);
+        PartyMenuRemoveWindow(&sPartyMenuInternal->windowId[1]);
+        DisplayPartyMenuMessage(gText_BattleConnectorCantChangeItems, TRUE);
+        gTasks[taskId].func = Task_ReturnToChooseMonAfterText;
+        return;
+    }
     PlaySE(SE_SELECT);
     PartyMenuRemoveWindow(&sPartyMenuInternal->windowId[0]);
     PartyMenuRemoveWindow(&sPartyMenuInternal->windowId[1]);
@@ -7030,7 +7041,9 @@ void ItemUseCB_Fusion(u8 taskId, TaskFunc taskFunc)
     const struct Fusion *itemFusion = gFusionTablePointers[species];
 
     PlaySE(SE_SELECT);
-    switch (IsFusionMon(species))
+    // Fusing or unfusing moves a Pokemon in or out of the party; a facility that puts the party back afterwards would
+    // lose or copy it
+    switch (InBattleFacilityChallenge() ? FALSE : IsFusionMon(species))
     {
     case FALSE: // Cancel if Not a Fuse Mon
         break;

@@ -496,6 +496,22 @@ enum Move GetShadowPurifyMove(struct Pokemon *mon)
     return GetSpeciesPurifyMoves(species)[(GetMonData(mon, MON_DATA_PERSONALITY) >> 8) % count];
 }
 
+// A purified Battle Connector Pokemon's purification move, so the Move Reminder can teach it again (declined in the
+// purification scene, or forgotten later). MOVE_NONE for any other Pokemon.
+enum Move GetBoxMonPurifiedConnectorMove(struct BoxPokemon *boxMon)
+{
+    enum Species species = GetBoxMonData(boxMon, MON_DATA_SPECIES);
+    u32 count;
+
+    if (!GetBoxMonData(boxMon, MON_DATA_HAS_SHADOW_STATE) || !GetBoxMonData(boxMon, MON_DATA_BATTLE_CONNECTOR_ORIGIN)
+     || GetBoxMonData(boxMon, MON_DATA_SHADOW_GAUGE) != SHADOW_GAUGE_PURIFIED)
+        return MOVE_NONE;
+    count = GetSpeciesPurifyMoveCount(species);
+    if (count == 0)
+        return MOVE_NONE;
+    return GetSpeciesPurifyMoves(species)[(GetBoxMonData(boxMon, MON_DATA_PERSONALITY) >> 8) % count];
+}
+
 // The purification scene's move to learn (like MonTryLearningNewMoveEvolution): the purification move, once
 u32 ShadowTryLearningPurifyMove(struct Pokemon *mon, bool32 firstMove)
 {

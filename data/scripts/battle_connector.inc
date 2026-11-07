@@ -30,6 +30,8 @@ BattleConnector_EventScript_Receptionist::
 	msgbox BattleConnector_Text_Welcome, MSGBOX_DEFAULT
 	msgbox BattleConnector_Text_AskChallenge, MSGBOX_YESNO
 	goto_if_ne VAR_RESULT, YES, BattleConnector_EventScript_Decline
+	specialvar VAR_RESULT, BattleConnector_HasRoomToTakeHome
+	goto_if_eq VAR_RESULT, FALSE, BattleConnector_EventScript_NoRoom
 	msgbox BattleConnector_Text_Rules, MSGBOX_DEFAULT
 	msgbox BattleConnector_Text_ChooseMon, MSGBOX_DEFAULT
 	closemessage
@@ -52,6 +54,12 @@ BattleConnector_EventScript_StartChallenge::
 	closemessage
 	warp MAP_BATTLE_CONNECTOR_BRANCH, 6, 9
 	waitstate
+	end
+
+@ A Pokemon taken home needs a place: the party or the PC
+BattleConnector_EventScript_NoRoom::
+	msgbox BattleConnector_Text_NoRoom, MSGBOX_DEFAULT
+	release
 	end
 
 BattleConnector_EventScript_SameMon::
@@ -113,11 +121,17 @@ BattleConnector_EventScript_ResultsChoose:
 	msgbox BattleConnector_Text_ResultsConfirm, MSGBOX_YESNO
 	goto_if_ne VAR_RESULT, YES, BattleConnector_EventScript_ResultsChoose
 	specialvar VAR_RESULT, BattleConnector_TakeHomeCandidate
+	goto_if_eq VAR_RESULT, MON_CANT_GIVE, BattleConnector_EventScript_ResultsNoRoom
 	goto_if_eq VAR_RESULT, MON_GIVEN_TO_PC, BattleConnector_EventScript_ResultsToPC
 	playfanfare MUS_OBTAIN_ITEM
 	msgbox BattleConnector_Text_ResultsToParty, MSGBOX_DEFAULT
 	waitfanfare
 	goto BattleConnector_EventScript_ResultsEnd
+	end
+
+BattleConnector_EventScript_ResultsNoRoom::
+	msgbox BattleConnector_Text_ResultsNoRoom, MSGBOX_DEFAULT
+	goto BattleConnector_EventScript_ResultsChoose
 	end
 
 BattleConnector_EventScript_ResultsToPC::
@@ -160,6 +174,12 @@ BattleConnector_Text_ChooseMon:
 
 BattleConnector_Text_AskSecondMon:
 	.string "{JPN}もう 1ぴき\nつれて いきますか？$"
+
+BattleConnector_Text_NoRoom:
+	.string "{JPN}てもちも パソコンも いっぱいですね。\pほごした ポケモンを つれて かえれるよう\nどちらかに あきを つくってから\lまた きてください。$"
+
+BattleConnector_Text_ResultsNoRoom:
+	.string "{JPN}てもちも パソコンも いっぱいで\nその ポケモンを おくれません……$"
 
 BattleConnector_Text_SameMon:
 	.string "{JPN}おなじ ポケモンは\n2かい えらべません。$"

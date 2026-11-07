@@ -1,4 +1,5 @@
 #include "global.h"
+#include "battle_connector.h"
 #include "frontier_util.h"
 #include "frontier_guest.h"
 #include "frontier_story.h"
@@ -235,6 +236,10 @@ const struct FrontierBrain gFrontierBrainInfo[NUM_FRONTIER_FACILITIES] =
 
 bool8 InBattleFacilityChallenge(void)
 {
+    // The Battle Connector puts the party back as it was when the run ends: nothing that moves Pokemon or held items in
+    // or out of the party (fusions, the camp shortcut) may happen in it
+    if (BattleConnector_IsChallengeActive())
+        return TRUE;
     // Saved challenge status and facility IDs can remain set after returning to a lobby.
     switch (gMapHeader.mapLayoutId)
     {

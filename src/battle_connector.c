@@ -78,6 +78,9 @@ static EWRAM_DATA bool8 sDynamaxFlagWasSet = FALSE;
 
 static void CB2_EndBattleConnectorBattle(void);
 
+// The party (with its held items) is put back when a run ends, so held items cannot be given or taken in the facility
+const u8 gText_BattleConnectorCantChangeItems[] = _("{JPN}ここでは もちものを\nもたせたり あずかったり できない！");
+
 // ---- state ------------------------------------------------------------------------------------------------------------
 
 bool32 BattleConnector_IsChallengeActive(void)
@@ -206,8 +209,20 @@ static u32 GetPlayerOTID(void)
 // random IVs, the usual Tera type
 void BattleConnector_CreateShadowMon(struct Pokemon *mon, u16 species, u32 level)
 {
-    CreateMon(mon, species, level, Random32(), OTID_STRUCT_PLAYER_ID);
-    GiveMonInitialMoveset(mon); // CreateMon leaves the moves empty
+    // The random state can be the same when a run is played the same way after loading (the boss came out with the same
+    // nature each time): the frame counter goes into its personality and IVs too
+    u32 seed = Random32() ^ (gMain.vblankCounter1 * 0x9E3779B1u);
+    u32 ivs = 0;
+
+    CreateMon(mon, species, level, seed, OTID_STRUCT_PLAYER_ID);
+    // CreateMon leaves the IVs at 0 and the moves empty
+    for (u32 stat = 0; stat < NUM_STATS; stat++)
+    {
+        seed = seed * 1103515245u + 12345u;
+        ivs |= ((seed >> 16) % (MAX_PER_STAT_IVS + 1)) << (stat * 5);
+    }
+    SetMonData(mon, MON_DATA_IVS, &ivs);
+    GiveMonInitialMoveset(mon);
     FinishShadowMon(mon);
 }
 
@@ -461,11 +476,20 @@ static u32 RollHint(u32 roomType)
 // VAR_0x8004 and VAR_0x8005: the party slots of the Pokemon the player brings (VAR_0x8005 PARTY_SIZE: only one; up to
 // BATTLE_CONNECTOR_BRING_COUNT). Anything that can be in the party may come (no species rules: this is not a Battle
 // Frontier facility). Returns FALSE if they cannot.
+// Before a run: TRUE if a Pokemon taken home at the end will find a place (the party as it is now, or the PC). Nothing
+// can change the party or the PC during the run, so this holds until the results.
+u16 BattleConnector_HasRoomToTakeHome(void)
+{
+    return CountPartyMons() < PARTY_SIZE || !IsPokemonStorageFull();
+}
+
 u16 BattleConnector_StartChallenge(void)
 {
     u16 slots[2] = { gSpecialVar_0x8004, gSpecialVar_0x8005 };
     u32 count = (BATTLE_CONNECTOR_BRING_COUNT >= 2 && slots[1] < PARTY_SIZE) ? 2 : 1;
 
+    if (sRun.active || !BattleConnector_HasRoomToTakeHome())
+        return FALSE;   // a run already going on would lose the party it keeps
     if (slots[0] >= PARTY_SIZE || !IsMonPresent(&gParties[B_TRAINER_PLAYER][slots[0]]))
         return FALSE;
     if (count == 2 && (slots[1] == slots[0] || !IsMonPresent(&gParties[B_TRAINER_PLAYER][slots[1]])))
@@ -845,6 +869,15 @@ u16 BattleConnector_TakeHomeCandidate(void)
 
     if (!sRun.active || gSpecialVar_0x8004 >= sRun.candidateCount)
         return MON_CANT_GIVE;
+    // Nowhere to put it (the start of the run checks for room, so this should not happen): nothing changes, and the
+    // results say so instead of claiming it came home
+    {
+        u32 partyCount = 0;
+        for (u32 i = 0; i < PARTY_SIZE; i++)
+            partyCount += IsMonPresent(&sRun.savedParty[i]);
+        if (partyCount >= PARTY_SIZE && IsPokemonStorageFull())
+            return MON_CANT_GIVE;
+    }
 
     SyncPartyToCandidates();
     mon = sRun.candidates[gSpecialVar_0x8004];

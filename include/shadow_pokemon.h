@@ -94,6 +94,7 @@ bool32 PurifyShadowPokemon(struct Pokemon *mon);
 bool32 PurifyShadowPokemonInScene(struct Pokemon *mon);
 enum Move GetShadowPurifyMove(struct Pokemon *mon);
 u32 GetSpeciesPurifyMoveCount(enum Species species);
+enum Move GetBoxMonPurifiedConnectorMove(struct BoxPokemon *boxMon);
 u32 ShadowTryLearningPurifyMove(struct Pokemon *mon, bool32 firstMove);
 bool32 IsBattleConnectorPurified(struct Pokemon *mon);
 u32 CountShadowPurifyPartners(u32 partySlot);

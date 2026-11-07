@@ -760,6 +760,7 @@ gSpecials::
 	def_special Special_ShadowPokemon_StartPurificationScene
 	def_special Special_GetPartyRoamerShadowState
 	def_special BattleConnector_StartChallenge
+	def_special BattleConnector_HasRoomToTakeHome
 	def_special BattleConnector_PrepareBranch
 	def_special BattleConnector_BufferPathHint
 	def_special BattleConnector_EnterPath

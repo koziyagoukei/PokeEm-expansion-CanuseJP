@@ -348,6 +348,109 @@ void Special_SpawnPartyRoamerMons(void)
     }
 }
 
+#define tTimer    data[0]
+#define tTries    data[1]
+#define tMapNum   data[2]
+#define tMapGroup data[3]
+
+#define ROAMER_RETRY_INTERVAL 30 // frames
+#define ROAMER_RETRY_COUNT    20
+
+static bool32 IsPartyRoamerOut(u32 slot, u8 *objectEventId)
+{
+    // TryGetObjectEventIdByLocalIdAndMap is FALSE when it finds the object
+    return !TryGetObjectEventIdByLocalIdAndMap(PARTY_ROAMER_LOCAL_ID_START + slot, gSaveBlock1Ptr->location.mapNum,
+                                               gSaveBlock1Ptr->location.mapGroup, objectEventId);
+}
+
+// The Pokemon out in the camp farthest from the player that is not a Shadow Pokemon (PARTY_SIZE if none)
+static u32 GetFarthestOtherPartyRoamer(void)
+{
+    struct ObjectEvent *player = &gObjectEvents[gPlayerAvatar.objectEventId];
+    u32 best = PARTY_SIZE, bestDistance = 0;
+
+    for (u32 i = 0; i < PARTY_SIZE; i++)
+    {
+        u8 objectEventId;
+        u32 distance;
+
+        if (!IsPartyRoamerOut(i, &objectEventId) || IsShadowPokemon(&gParties[B_TRAINER_PLAYER][i]))
+            continue;
+        distance = abs(gObjectEvents[objectEventId].currentCoords.x - player->currentCoords.x)
+                 + abs(gObjectEvents[objectEventId].currentCoords.y - player->currentCoords.y);
+        if (best == PARTY_SIZE || distance > bestDistance)
+        {
+            best = i;
+            bestDistance = distance;
+        }
+    }
+    return best;
+}
+
+// Spawns the party's Pokemon that should be out but are not. A Shadow Pokemon must come out, as it is talked to to be
+// purified: if there is no room for it in the sprite tiles (a big 64x64 Pokemon such as Lugia does not fit beside five
+// others), the other Pokemon farthest from the player go back until it fits. TRUE if none is missing.
+static bool32 TrySpawnMissingPartyRoamers(void)
+{
+    bool32 allOut = TRUE;
+
+    for (u32 i = 0; i < PARTY_SIZE; i++)
+    {
+        u8 objectEventId;
+        u8 localId = PARTY_ROAMER_LOCAL_ID_START + i;
+
+        if (FlagGet(sPartyRoamerObjectFlags[i]) || IsPartyRoamerOut(i, &objectEventId))
+            continue;
+        while (TrySpawnObjectEvent(localId, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup) == OBJECT_EVENTS_COUNT)
+        {
+            u32 other = IsShadowPokemon(&gParties[B_TRAINER_PLAYER][i]) ? GetFarthestOtherPartyRoamer() : PARTY_SIZE;
+            if (other == PARTY_SIZE)
+            {
+                allOut = FALSE;
+                break;
+            }
+            RemoveObjectEventByLocalIdAndMap(PARTY_ROAMER_LOCAL_ID_START + other, gSaveBlock1Ptr->location.mapNum,
+                                             gSaveBlock1Ptr->location.mapGroup);
+        }
+    }
+    return allOut;
+}
+
+// Pokemon that could not come out while the map was loading are tried again for a few seconds.
+static void Task_RetryPartyRoamerSpawns(u8 taskId)
+{
+    s16 *data = gTasks[taskId].data;
+
+    if (gSaveBlock1Ptr->location.mapNum != tMapNum || gSaveBlock1Ptr->location.mapGroup != tMapGroup
+     || tTries >= ROAMER_RETRY_COUNT)
+    {
+        DestroyTask(taskId);
+        return;
+    }
+    if (++tTimer < ROAMER_RETRY_INTERVAL)
+        return;
+    tTimer = 0;
+    tTries++;
+    if (TrySpawnMissingPartyRoamers())
+        DestroyTask(taskId);
+}
+
+static void StartPartyRoamerSpawnRetries(void)
+{
+    u8 taskId;
+
+    if (FuncIsActiveTask(Task_RetryPartyRoamerSpawns) || TrySpawnMissingPartyRoamers())
+        return;
+    taskId = CreateTask(Task_RetryPartyRoamerSpawns, 80);
+    gTasks[taskId].tMapNum = gSaveBlock1Ptr->location.mapNum;
+    gTasks[taskId].tMapGroup = gSaveBlock1Ptr->location.mapGroup;
+}
+
+#undef tTimer
+#undef tTries
+#undef tMapNum
+#undef tMapGroup
+
 void Special_RefreshPartyRoamerMons(void)
 {
     u8 i;
@@ -372,6 +475,7 @@ void Special_RefreshPartyRoamerMons(void)
             ObjectEventSetGraphicsId(&gObjectEvents[objectEventId], VarGet(VAR_OBJ_GFX_ID_0 + i));
         }
     }
+    StartPartyRoamerSpawnRetries();
 }
 
 // The Pokemon talked to in the camp, as a Shadow Pokemon (SHADOW_ROAMER_*). For a Shadow Pokemon, VAR_0x8004 is its

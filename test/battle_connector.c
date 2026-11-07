@@ -5,7 +5,11 @@
 #include "battle_main.h"
 #include "data.h"
 #include "event_data.h"
+#include "frontier_util.h"
 #include "item_use.h"
+#include "malloc.h"
+#include "move_relearner.h"
+#include "party_menu.h"
 #include "load_save.h"
 #include "pokemon.h"
 #include "pokemon_storage_system.h"
@@ -484,6 +488,99 @@ TEST("Battle Connector: every room and mid-boss species learns one of two moves 
         checked++;
     }
     EXPECT_GT(checked, 100);
+}
+
+TEST("Battle Connector: during a run nothing may move Pokemon or held items in or out of the party")
+{
+    GiveParty(2);
+    StartWith(0);
+    // Fusions and the camp shortcut check this; held items are refused separately
+    EXPECT(InBattleFacilityChallenge());
+    // Talking to the reception again must not replace the party kept for the end of the run
+    gSpecialVar_0x8004 = 0;
+    gSpecialVar_0x8005 = PARTY_SIZE;
+    EXPECT(!BattleConnector_StartChallenge());
+    BattleConnector_RetireChallenge();
+    EXPECT(!InBattleFacilityChallenge());
+    EXPECT_EQ(CalculatePlayerPartyCount(), 2);
+}
+
+TEST("Battle Connector: a run needs room for the Pokemon taken home")
+{
+    GiveParty(6);
+    for (u32 box = 0; box < TOTAL_BOXES_COUNT; box++)
+    {
+        for (u32 pos = 0; pos < IN_BOX_COUNT; pos++)
+            CreateBoxMon(GetBoxedMonPtr(box, pos), SPECIES_ZIGZAGOON, 5, 0, OTID_STRUCT_PLAYER_ID);
+    }
+    EXPECT(!BattleConnector_HasRoomToTakeHome());
+    gSpecialVar_0x8004 = 0;
+    gSpecialVar_0x8005 = PARTY_SIZE;
+    EXPECT(!BattleConnector_StartChallenge());
+
+    // One free place is enough
+    ZeroBoxMonAt(0, 0);
+    EXPECT(BattleConnector_HasRoomToTakeHome());
+    StartWith(0);
+    BattleConnector_RetireChallenge();
+    ResetPokemonStorageSystem();
+}
+
+TEST("Battle Connector: a boss has random IVs besides its perfect ones")
+{
+    struct Pokemon mon;
+    bool32 otherIV = FALSE;
+
+    for (u32 i = 0; i < 8; i++)
+    {
+        BattleConnector_CreateShadowMon(&mon, SPECIES_MEWTWO, 70);
+        for (u32 stat = 0; stat < NUM_STATS; stat++)
+        {
+            u32 iv = GetMonData(&mon, MON_DATA_HP_IV + stat);
+            otherIV |= (iv != 0 && iv != MAX_PER_STAT_IVS);
+        }
+    }
+    EXPECT(otherIV);
+}
+
+TEST("Battle Connector: the Move Reminder teaches a purified Pokemon its purification move again")
+{
+    struct Pokemon mon;
+    u16 *moves = Alloc(sizeof(u16) * MAX_RELEARNER_MOVES);
+    u32 count;
+    bool32 listed;
+    enum Move move;
+
+    BattleConnector_CreateShadowMon(&mon, SPECIES_MEWTWO, 70);
+    move = GetShadowPurifyMove(&mon);
+    // Still a Shadow Pokemon: not yet
+    count = Test_GetRelearnerLevelUpMoves(&mon.box, moves);
+    listed = FALSE;
+    for (u32 i = 0; i < count; i++)
+        listed |= (moves[i] == move);
+    EXPECT(!listed);
+
+    // Purified without learning it (the scene's prompt declined): it can be relearned
+    AddShadowHeartGauge(&mon, SHADOW_GAUGE_BARS);
+    EXPECT(PurifyShadowPokemonInScene(&mon));
+    EXPECT(!MonKnowsMove(&mon, move));
+    count = Test_GetRelearnerLevelUpMoves(&mon.box, moves);
+    listed = FALSE;
+    for (u32 i = 0; i < count; i++)
+        listed |= (moves[i] == move);
+    EXPECT(listed);
+
+    // A Pokemon not from the facility gets nothing of the kind
+    CreateMon(&mon, SPECIES_MEWTWO, 70, 0, OTID_STRUCT_PLAYER_ID);
+    MarkShadowPokemon(&mon);
+    AddShadowHeartGauge(&mon, SHADOW_GAUGE_BARS);
+    PurifyShadowPokemon(&mon);
+    count = Test_GetRelearnerLevelUpMoves(&mon.box, moves);
+    listed = FALSE;
+    for (u32 i = 0; i < count; i++)
+        listed |= (moves[i] == move);
+    EXPECT(!listed);
+    Free(moves);
 }
 
 TEST("Battle Connector: Colosseum's battle music follows the room")
