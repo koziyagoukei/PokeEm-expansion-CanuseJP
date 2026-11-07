@@ -67,7 +67,7 @@ TEST("Frontier TIPS: facilities, hub, resort, contest and rule topics are reacha
     EXPECT(seen[INFO_TIPS_SHADOW]);
     EXPECT_EQ(GetInfoViewerPageCount(INFO_TIPS_SHADOW), 6);
     EXPECT(seen[INFO_TIPS_BATTLE_CONNECTOR]);
-    EXPECT_EQ(GetInfoViewerPageCount(INFO_TIPS_BATTLE_CONNECTOR), 5);
+    EXPECT_EQ(GetInfoViewerPageCount(INFO_TIPS_BATTLE_CONNECTOR), 7);
     for (u32 id = INFO_TIPS_TOWER; id <= INFO_TIPS_PYRAMID; id++)
         EXPECT(seen[id]);
     for (u32 id = INFO_TIPS_HUB; id <= INFO_TIPS_HUB_SUPPORT; id++)

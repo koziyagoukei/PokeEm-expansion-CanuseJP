@@ -362,19 +362,36 @@ static const u8 sInfoText_BattleConnector4[] = _(
     "戦闘の 道具は 交換所で BPと 交換。\n"
     "レポートは 書けず 負けるか やめると\n"
     "保護した ポケモンとは お別れです。\n"
-    "手持ちは 挑戦前の 状態に 戻ります。");
+    "手持ちは 戻るが ハートゲージは 残ります。");
 
 static const u8 sInfoText_BattleConnector5[] = _(
     "{JPN}「リライブ技」\n"
-    "ここの ダークポケモンは 3つ以上の\n"
+    "オリジンの ダークポケモンは 3つ以上の\n"
     "能力の 個体値が 最高です。\n"
     "リライブすると ふだんは 覚えない\n"
     "特別な 技を 1つ 覚えます。\n"
     "持ち帰る ポケモンを 選ぶ時に 確認できます。");
 
+static const u8 sInfoText_BattleConnector6[] = _(
+    "{JPN}「オリジンと アナザー」\n"
+    "オリジンエディションは 通常の モード。\n"
+    "アナザーエディションは かんたんモード。\n"
+    "ダーク同士の 技も 等倍で 当たり\n"
+    "バトルの 後 心の ゲージが 1つ 減ります。\n"
+    "その かわり 個体値の 3V保証は ありません。");
+
+static const u8 sInfoText_BattleConnector7[] = _(
+    "{JPN}「パニックラッシュ」\n"
+    "パニックの ポケモンを なだめる 連戦。\n"
+    "5BPで 挑戦し 4匹を 選んで ダブルバトル。\n"
+    "ダークでは ない ポケモンが 次々 現れ\n"
+    "バッグの 道具も 使えます。 やめるか\n"
+    "負けると 連鎖数ぶんの BPを もらえます。");
+
 static const u8 *const sInfoViewerPages_BattleConnector[] = {
     sInfoText_BattleConnector1, sInfoText_BattleConnector2, sInfoText_BattleConnector3,
-    sInfoText_BattleConnector4, sInfoText_BattleConnector5,
+    sInfoText_BattleConnector4, sInfoText_BattleConnector5, sInfoText_BattleConnector6,
+    sInfoText_BattleConnector7,
 };
 
 static const struct InfoViewerChoice sInfoViewerChoices_Tips[] = {

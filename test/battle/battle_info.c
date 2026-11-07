@@ -1,6 +1,8 @@
 #include "global.h"
 #include "test/battle.h"
 #include "battle_info.h"
+#include "battle_message.h"
+#include "text.h"
 #include "bg.h"
 #include "dma3.h"
 #include "constants/items.h"
@@ -112,5 +114,22 @@ SINGLE_BATTLE_TEST("Battle info: Light Screen and Aurora Veil use their real mov
         EXPECT(turns.active);
         EXPECT_EQ(turns.elapsed, 6);
         EXPECT_EQ(turns.total, 8);
+    }
+}
+
+TEST("Battle info: every stat stage fits its column, clear of the next stat, the divider and the window's edge")
+{
+    static const u8 *const values[] = { COMPOUND_STRING("{ENG}+6"), COMPOUND_STRING("{ENG}-6"), COMPOUND_STRING("{ENG}0") };
+    const enum Stat stats[] = { STAT_ATK, STAT_DEF, STAT_SPATK, STAT_SPDEF, STAT_SPEED, STAT_ACC, STAT_EVASION };
+
+    for (u32 i = 0; i < ARRAY_COUNT(stats); i++)
+    {
+        u32 column = i % 2;
+        u32 nameEnd = BATTLE_INFO_STAT_X + column * BATTLE_INFO_STAT_COLUMN + GetStringWidth(FONT_SMALL, gStatNamesTable[stats[i]], 0);
+        u32 valueEnd = BATTLE_INFO_STAT_X + column * BATTLE_INFO_STAT_COLUMN + BATTLE_INFO_STAT_VALUE_END;
+        for (u32 v = 0; v < ARRAY_COUNT(values); v++)
+            EXPECT_LT(nameEnd, valueEnd - GetStringWidth(FONT_SMALL, values[v], 0));
+        // The second stat of a row starts after the first's value; the last value ends before the divider
+        EXPECT_LT(valueEnd, column ? BATTLE_INFO_HALF_WIDTH - 1 : BATTLE_INFO_STAT_X + BATTLE_INFO_STAT_COLUMN);
     }
 }

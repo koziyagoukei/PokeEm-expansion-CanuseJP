@@ -26,6 +26,8 @@ BattleConnector_Room_EventScript_RunRoom::
 	lockall
 	setvar VAR_TEMP_1, 1
 	delay 16
+	specialvar VAR_RESULT, BattleConnector_IsPanicRush
+	goto_if_eq VAR_RESULT, TRUE, BattleConnector_Room_EventScript_PanicRoom
 	specialvar VAR_RESULT, BattleConnector_GetRoomType
 	switch VAR_RESULT
 	case CONNECTOR_ROOM_DARK_TRAINER, BattleConnector_Room_EventScript_TrainerRoom
@@ -35,6 +37,32 @@ BattleConnector_Room_EventScript_RunRoom::
 	case CONNECTOR_ROOM_ITEM, BattleConnector_Room_EventScript_ItemRoom
 	case CONNECTOR_ROOM_BOSS, BattleConnector_Room_EventScript_BossRoom
 	goto BattleConnector_Room_EventScript_ShadowRoom
+	end
+
+@ Panic Rush: pair after pair, until the player stops or loses; the chain is paid in BP at the reception
+BattleConnector_Room_EventScript_PanicRoom::
+	msgbox BattleConnector_Room_Text_PanicAppears, MSGBOX_DEFAULT
+	closemessage
+BattleConnector_Room_EventScript_PanicBattle::
+	special BattleConnector_StartPanicBattle
+	waitstate
+	goto_if_eq VAR_RESULT, CONNECTOR_BATTLE_LOST, BattleConnector_Room_EventScript_PanicLost
+	special BattleConnector_BufferPanicChain
+	msgbox BattleConnector_Room_Text_PanicCalmed, MSGBOX_DEFAULT
+	msgbox BattleConnector_Room_Text_PanicAskContinue, MSGBOX_YESNO
+	goto_if_ne VAR_RESULT, YES, BattleConnector_Room_EventScript_PanicEnd
+	msgbox BattleConnector_Room_Text_PanicNext, MSGBOX_DEFAULT
+	closemessage
+	goto BattleConnector_Room_EventScript_PanicBattle
+	end
+
+BattleConnector_Room_EventScript_PanicLost::
+	msgbox BattleConnector_Room_Text_PanicLost, MSGBOX_DEFAULT
+BattleConnector_Room_EventScript_PanicEnd::
+	closemessage
+	special BattleConnector_EndPanicRush
+	warp MAP_ARTISAN_CAVE_1F, 6, 12
+	waitstate
 	end
 
 BattleConnector_Room_EventScript_ShadowRoom::
@@ -198,6 +226,21 @@ BattleConnector_Room_EventScript_ExitToResults::
 	warp MAP_ARTISAN_CAVE_1F, 6, 12
 	waitstate
 	end
+
+BattleConnector_Room_Text_PanicAppears:
+	.string "{JPN}パニックに なった ポケモンたちが\nあばれている！$"
+
+BattleConnector_Room_Text_PanicCalmed:
+	.string "{JPN}ポケモンたちは おちついて\nどこかへ かえっていった。\p{STR_VAR_1}れんさ！ いまなら {STR_VAR_2}BPです。$"
+
+BattleConnector_Room_Text_PanicAskContinue:
+	.string "{JPN}まだ パニックの ポケモンが いる……\nつづけますか？$"
+
+BattleConnector_Room_Text_PanicNext:
+	.string "{JPN}つぎの ポケモンたちが\nとびだしてきた！$"
+
+BattleConnector_Room_Text_PanicLost:
+	.string "{JPN}パニックの いきおいに\nおされてしまった……$"
 
 BattleConnector_Room_Text_ShadowAppears:
 	.string "{JPN}くろい オーラを まとった\n{STR_VAR_1}が おそいかかってきた！$"

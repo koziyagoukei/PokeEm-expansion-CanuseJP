@@ -463,9 +463,11 @@ static void PrintStats(u32 column)
         s32 stage = max(0, min(gBattleMons[battler].statStages[sStats[i]], MAX_STAT_STAGE)) - DEFAULT_STAT_STAGE;
         u8 *end = StringCopy(value, stage > 0 ? COMPOUND_STRING("{ENG}+") : stage < 0 ? COMPOUND_STRING("{ENG}-") : COMPOUND_STRING("{ENG}"));
         ConvertIntToDecimalStringN(end, abs(stage), STR_CONV_MODE_LEFT_ALIGN, 1);
-        u32 sx = column * 112 + 4 + (i % 2) * 56, sy = 88 + (i / 2) * 13;
+        // Each half is 112 px with the divider at its right edge: the value ends 4 px before the next stat's name
+        // (or the divider / the window's edge), right-aligned so "+6" never runs into them
+        u32 sx = column * BATTLE_INFO_HALF_WIDTH + BATTLE_INFO_STAT_X + (i % 2) * BATTLE_INFO_STAT_COLUMN, sy = 88 + (i / 2) * 13;
         Print(gStatNamesTable[sStats[i]], sx, sy, 1);
-        Print(value, sx + 40, sy, stage > 0 ? 2 : stage < 0 ? 3 : 6);
+        Print(value, sx + BATTLE_INFO_STAT_VALUE_END - GetStringWidth(FONT_SMALL, value, 0), sy, stage > 0 ? 2 : stage < 0 ? 3 : 6);
     }
 }
 

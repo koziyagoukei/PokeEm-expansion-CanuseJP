@@ -27,6 +27,13 @@ enum BattleInfoEffect
     BINFO_FAIRY_LOCK,
 };
 
+// The stat stage page: each side's half is BATTLE_INFO_HALF_WIDTH px (the divider at its right edge), with two stats
+// to a row; a stat's value is right-aligned to end BATTLE_INFO_STAT_VALUE_END px after its name starts.
+#define BATTLE_INFO_HALF_WIDTH       112
+#define BATTLE_INFO_STAT_X           4
+#define BATTLE_INFO_STAT_COLUMN      54
+#define BATTLE_INFO_STAT_VALUE_END   50
+
 struct BattleInfoTurns
 {
     u16 elapsed;

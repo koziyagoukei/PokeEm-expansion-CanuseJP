@@ -44,6 +44,18 @@
 #define CONNECTOR_RETURN_CLEARED 1
 #define CONNECTOR_RETURN_FAILED  2
 #define CONNECTOR_RETURN_RETIRED 3
+#define CONNECTOR_RETURN_PANIC   4 // a Panic Rush ended (it was won or lost: the chain's BP are paid)
+
+// The reception's modes (VAR_0x8006 for BattleConnector_StartChallenge)
+#define CONNECTOR_MODE_ORIGIN  0 // Origin Edition: the Battle Connector as it is
+#define CONNECTOR_MODE_ANOTHER 1 // Another Edition (easy): Shadow vs Shadow is neutral, a bar clears after each battle,
+                                 // no perfect IVs are promised
+#define CONNECTOR_MODE_PANIC   2 // Panic Rush: double battles one after another against Pokemon in a panic, for BP
+
+// BattleConnector_CanStartPanicRush
+#define CONNECTOR_PANIC_OK          0
+#define CONNECTOR_PANIC_NO_BP       1
+#define CONNECTOR_PANIC_FEW_POKEMON 2
 
 // BattleConnector_GetSpeciesTier: which rooms a Pokemon of the Battle Frontier pool appears in
 #define CONNECTOR_TIER_NORMAL 0 // ordinary Shadow rooms, people who shut themselves away

@@ -1573,7 +1573,9 @@ static void CB2_EndDebugBattle(void)
 
 // Battle Connector (src/battle_connector.c) starts its own battles: the opponent party is already made, the end
 // callback is its own (no whiteout, no trainer flag, no rematch) and so is the song. trainerId TRAINER_NONE: wild.
-void BattleSetup_StartBattleConnectorBattle(u16 trainerId, const u8 *defeatText, u16 song, void (*endCallback)(void))
+// The Battle Connector's battles: a trainer's, or a wild one (isDouble: two wild Pokemon, Panic Rush). The enemy party
+// is ready before; endCallback takes over when it ends (no whiting out, no trainer flags).
+void BattleSetup_StartBattleConnectorBattle(u16 trainerId, const u8 *defeatText, u16 song, bool32 isDouble, void (*endCallback)(void))
 {
     LockPlayerFieldControls();
     FreezeObjectEvents();
@@ -1591,7 +1593,7 @@ void BattleSetup_StartBattleConnectorBattle(u16 trainerId, const u8 *defeatText,
     }
     else
     {
-        gBattleTypeFlags = 0;
+        gBattleTypeFlags = isDouble ? BATTLE_TYPE_DOUBLE : 0;
         CreateBattleStartTask(GetWildBattleTransition(), song);
         IncrementGameStat(GAME_STAT_WILD_BATTLES);
     }

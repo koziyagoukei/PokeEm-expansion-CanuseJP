@@ -6,6 +6,7 @@
 #include "data.h"
 #include "event_data.h"
 #include "frontier_util.h"
+#include "item.h"
 #include "item_use.h"
 #include "malloc.h"
 #include "move_relearner.h"
@@ -16,6 +17,7 @@
 #include "shadow_pokemon.h"
 #include "string_util.h"
 #include "constants/characters.h"
+#include "constants/hold_effects.h"
 #include "test/battle.h"
 #include "constants/battle_connector.h"
 #include "constants/battle_frontier_mons.h"
@@ -34,6 +36,7 @@ static void GiveParty(u32 count)
 
 static void StartWith(u32 slot)
 {
+    gSpecialVar_0x8006 = CONNECTOR_MODE_ORIGIN;
     gSpecialVar_0x8004 = slot;
     gSpecialVar_0x8005 = PARTY_SIZE;
     EXPECT(BattleConnector_StartChallenge());
@@ -634,4 +637,227 @@ WILD_BATTLE_TEST("Battle Connector: its battles forbid balls and running")
         BattleConnector_Test_SetBattleActive(FALSE, CONNECTOR_ROOM_NONE);
         EXPECT(CanThrowBall());
     }
+}
+
+TEST("Battle Connector: the reception's mode lasts for the run, and anything but Another Edition is the Origin Edition")
+{
+    GiveParty(2);
+    gSpecialVar_0x8006 = CONNECTOR_MODE_ANOTHER;
+    gSpecialVar_0x8004 = 0;
+    gSpecialVar_0x8005 = PARTY_SIZE;
+    EXPECT(BattleConnector_StartChallenge());
+    EXPECT_EQ(BattleConnector_Test_GetMode(), CONNECTOR_MODE_ANOTHER);
+    BattleConnector_RetireChallenge();
+    EXPECT_EQ(BattleConnector_Test_GetMode(), CONNECTOR_MODE_ORIGIN);
+    EXPECT_EQ(BattleConnector_GetReturnState(), CONNECTOR_RETURN_RETIRED);
+
+    // A Panic Rush does not start through the ordinary challenge
+    gSpecialVar_0x8006 = CONNECTOR_MODE_PANIC;
+    gSpecialVar_0x8004 = 1;
+    gSpecialVar_0x8005 = PARTY_SIZE;
+    EXPECT(BattleConnector_StartChallenge());
+    EXPECT_EQ(BattleConnector_Test_GetMode(), CONNECTOR_MODE_ORIGIN);
+    EXPECT(!BattleConnector_IsPanicRush());
+    BattleConnector_RetireChallenge();
+    EXPECT_EQ(BattleConnector_GetReturnState(), CONNECTOR_RETURN_RETIRED);
+    gSpecialVar_0x8006 = 0;
+}
+
+TEST("Battle Connector: Another Edition's Shadow Pokemon have random IVs, with no perfect ones promised")
+{
+    struct Pokemon mon;
+    u32 fewer = 0;
+
+    BattleConnector_Test_SetMode(CONNECTOR_MODE_ANOTHER);
+    for (u32 i = 0; i < 24; i++)
+    {
+        u32 perfect = 0;
+        BattleConnector_CreateShadowMonFromSet(&mon, FRONTIER_MON_VENUSAUR_1, 40);
+        for (u32 stat = 0; stat < NUM_STATS; stat++)
+            perfect += (GetMonData(&mon, MON_DATA_HP_IV + stat) == MAX_PER_STAT_IVS);
+        fewer += (perfect < BATTLE_CONNECTOR_PERFECT_IVS);
+        EXPECT(IsShadowPokemon(&mon));
+        EXPECT(GetMonData(&mon, MON_DATA_BATTLE_CONNECTOR_ORIGIN));
+    }
+    BattleConnector_Test_SetMode(CONNECTOR_MODE_ORIGIN);
+    EXPECT_GE(fewer, 22);
+}
+
+TEST("Battle Connector: in Another Edition each Shadow Pokemon of the party clears a bar after every battle")
+{
+    struct Pokemon *shadow = &gParties[B_TRAINER_PLAYER][1];
+    u32 mode, before;
+
+    for (mode = CONNECTOR_MODE_ORIGIN; mode <= CONNECTOR_MODE_ANOTHER; mode++)
+    {
+        GiveParty(1);
+        gSpecialVar_0x8006 = mode;
+        gSpecialVar_0x8004 = 0;
+        gSpecialVar_0x8005 = PARTY_SIZE;
+        EXPECT(BattleConnector_StartChallenge());
+        BattleConnector_CreateShadowMon(shadow, SPECIES_ZIGZAGOON, 30);
+        CalculatePlayerPartyCount();
+        before = GetShadowHeartGauge(shadow);
+        BattleConnector_Test_ApplyBattleOutcome(TRUE);
+        EXPECT_EQ(gSpecialVar_Result, CONNECTOR_BATTLE_WON);
+        EXPECT_EQ(GetShadowHeartGauge(shadow), before + (mode == CONNECTOR_MODE_ANOTHER));
+        // The player's own Pokemon is not a Shadow Pokemon: nothing to clear
+        EXPECT_EQ(GetShadowHeartGauge(&gParties[B_TRAINER_PLAYER][0]), 0);
+        BattleConnector_RetireChallenge();
+        EXPECT_EQ(BattleConnector_GetReturnState(), CONNECTOR_RETURN_RETIRED);
+    }
+    gSpecialVar_0x8006 = 0;
+}
+
+SINGLE_BATTLE_TEST("Battle Connector: in Another Edition Shadow moves hit Shadow Pokemon for neutral damage", s16 damage)
+{
+    u32 mode;
+    PARAMETRIZE { mode = CONNECTOR_MODE_ORIGIN; }
+    PARAMETRIZE { mode = CONNECTOR_MODE_ANOTHER; }
+    GIVEN {
+        BattleConnector_Test_SetBattleActive(TRUE, CONNECTOR_ROOM_SHADOW);
+        BattleConnector_Test_SetMode(mode);
+        PLAYER(SPECIES_WOBBUFFET) { Shadow(TRUE); Moves(MOVE_POUND); }
+        OPPONENT(SPECIES_WOBBUFFET) { Shadow(TRUE); Moves(MOVE_CELEBRATE); }
+    } WHEN {
+        TURN { MOVE(player, moveSlot: 0); MOVE(opponent, MOVE_CELEBRATE); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SHADOW_RUSH, player);
+        HP_BAR(opponent, captureDamage: &results[i].damage);
+    } THEN {
+        BattleConnector_Test_SetBattleActive(FALSE, CONNECTOR_ROOM_NONE);
+        BattleConnector_Test_SetMode(CONNECTOR_MODE_ORIGIN);
+    } FINALLY {
+        EXPECT_MUL_EQ(results[0].damage, Q_4_12(2.0), results[1].damage);
+    }
+}
+
+TEST("Battle Connector: Panic Rush takes 5 BP and four different Pokemon, and pays a BP for each battle won in a row")
+{
+    u8 expected[8];
+
+    GiveParty(3);
+    gSaveBlock2Ptr->frontier.battlePoints = BATTLE_CONNECTOR_PANIC_COST - 1;
+    EXPECT_EQ(BattleConnector_CanStartPanicRush(), CONNECTOR_PANIC_NO_BP);
+    gSaveBlock2Ptr->frontier.battlePoints = BATTLE_CONNECTOR_PANIC_COST + 5;
+    EXPECT_EQ(BattleConnector_CanStartPanicRush(), CONNECTOR_PANIC_FEW_POKEMON);
+    GiveParty(6);
+    EXPECT_EQ(BattleConnector_CanStartPanicRush(), CONNECTOR_PANIC_OK);
+
+    BattleConnector_PanicResetPicks();
+    gSpecialVar_0x8004 = 5;
+    EXPECT_EQ(BattleConnector_PanicPick(), 1);
+    EXPECT_EQ(BattleConnector_PanicPick(), 0); // the same one twice
+    EXPECT(!BattleConnector_StartPanicRush()); // not four yet
+    gSpecialVar_0x8004 = PARTY_SIZE;
+    EXPECT_EQ(BattleConnector_PanicPick(), 0);
+    gSpecialVar_0x8004 = 1;
+    EXPECT_EQ(BattleConnector_PanicPick(), 2);
+    gSpecialVar_0x8004 = 2;
+    EXPECT_EQ(BattleConnector_PanicPick(), 3);
+    gSpecialVar_0x8004 = 0;
+    EXPECT_EQ(BattleConnector_PanicPick(), 4);
+    gSpecialVar_0x8004 = 3;
+    EXPECT_EQ(BattleConnector_PanicPick(), 0); // four is all
+
+    EXPECT(BattleConnector_StartPanicRush());
+    EXPECT(BattleConnector_IsPanicRush());
+    EXPECT(BattleConnector_IsChallengeActive());
+    EXPECT_EQ(BattleConnector_Test_GetMode(), CONNECTOR_MODE_PANIC);
+    EXPECT_EQ(gSaveBlock2Ptr->frontier.battlePoints, 5);
+    EXPECT_EQ(CalculatePlayerPartyCount(), 4);
+    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_SPECIES), SPECIES_LOTAD);
+    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][1], MON_DATA_SPECIES), SPECIES_PIKACHU);
+    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][2], MON_DATA_SPECIES), SPECIES_EEVEE);
+    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][3], MON_DATA_SPECIES), SPECIES_MEWTWO);
+
+    for (u32 i = 0; i < 3; i++)
+        BattleConnector_Test_ApplyBattleOutcome(TRUE);
+    BattleConnector_Test_ApplyBattleOutcome(FALSE);
+    EXPECT_EQ(gSpecialVar_Result, CONNECTOR_BATTLE_LOST);
+    EXPECT_EQ(BattleConnector_Test_GetPanicChain(), 3);
+
+    BattleConnector_EndPanicRush();
+    EXPECT(!BattleConnector_IsChallengeActive());
+    EXPECT(!BattleConnector_IsPanicRush());
+    EXPECT_EQ(gSaveBlock2Ptr->frontier.battlePoints, 5 + 3 * BATTLE_CONNECTOR_PANIC_BP_PER_WIN);
+    EXPECT_EQ(CalculatePlayerPartyCount(), 6);
+    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][3], MON_DATA_SPECIES), SPECIES_ZIGZAGOON);
+    EXPECT_EQ(BattleConnector_GetReturnState(), CONNECTOR_RETURN_PANIC);
+    ConvertIntToDecimalStringN(expected, 3, STR_CONV_MODE_LEFT_ALIGN, 5);
+    EXPECT_EQ(StringCompare(gStringVar1, expected), 0);
+    EXPECT_EQ(BattleConnector_GetReturnState(), CONNECTOR_RETURN_NONE);
+}
+
+TEST("Battle Connector: Panic Rush's Pokemon are ordinary Pokemon of the Frontier pool, stronger as the chain grows")
+{
+    static const u16 chains[] = { 0, BATTLE_CONNECTOR_PANIC_STRONG_AT, BATTLE_CONNECTOR_PANIC_RARE_AT };
+    static const u8 tiers[] = { CONNECTOR_TIER_NORMAL, CONNECTOR_TIER_STRONG, CONNECTOR_TIER_RARE };
+    struct Pokemon mon;
+
+    BattleConnector_Test_SetMode(CONNECTOR_MODE_PANIC);
+    for (u32 c = 0; c < ARRAY_COUNT(chains); c++)
+    {
+        BattleConnector_Test_SetPanicChain(chains[c]);
+        for (u32 i = 0; i < 12; i++)
+        {
+            u16 set = BattleConnector_Test_PickPanicSet();
+            u16 species;
+            enum HoldEffect holdEffect;
+
+            EXPECT_LT(set, NUM_FRONTIER_MONS);
+            species = gBattleFrontierMons[set].species;
+            EXPECT(!gSpeciesInfo[species].isRestrictedLegendary);
+            EXPECT(!gSpeciesInfo[species].isSubLegendary);
+            EXPECT(!gSpeciesInfo[species].isMythical);
+            EXPECT_EQ(BattleConnector_GetSpeciesTier(species), tiers[c]);
+            BattleConnector_CreatePanicMon(&mon, set, 50);
+            EXPECT_EQ(GetMonData(&mon, MON_DATA_SPECIES), species);
+            EXPECT_EQ(GetMonData(&mon, MON_DATA_LEVEL), 50);
+            EXPECT(!IsShadowPokemon(&mon));
+            EXPECT(!GetMonData(&mon, MON_DATA_BATTLE_CONNECTOR_ORIGIN));
+            holdEffect = GetItemHoldEffect(GetMonData(&mon, MON_DATA_HELD_ITEM));
+            EXPECT_NE(holdEffect, HOLD_EFFECT_MEGA_STONE);
+            EXPECT_NE(holdEffect, HOLD_EFFECT_Z_CRYSTAL);
+        }
+    }
+    BattleConnector_Test_SetPanicChain(0);
+    BattleConnector_Test_SetMode(CONNECTOR_MODE_ORIGIN);
+}
+
+TEST("Battle Connector: a Shadow Pokemon brought keeps the heart gauge it opened in the run, the rest comes back as it was")
+{
+    struct Pokemon *saved = &gParties[B_TRAINER_PLAYER][1];
+    u32 before;
+    u16 hp;
+
+    // Another Edition: the bar cleared after a battle stays after retiring
+    GiveParty(3);
+    BattleConnector_CreateShadowMon(saved, SPECIES_ZIGZAGOON, 30);
+    CalculatePlayerPartyCount();
+    before = GetShadowHeartGauge(saved);
+    gSpecialVar_0x8006 = CONNECTOR_MODE_ANOTHER;
+    gSpecialVar_0x8004 = 1;
+    gSpecialVar_0x8005 = PARTY_SIZE;
+    EXPECT(BattleConnector_StartChallenge());
+    hp = 1;
+    SetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_HP, &hp);
+    BattleConnector_Test_ApplyBattleOutcome(TRUE);
+    BattleConnector_RetireChallenge();
+    EXPECT_EQ(BattleConnector_GetReturnState(), CONNECTOR_RETURN_RETIRED);
+    EXPECT_EQ(CalculatePlayerPartyCount(), 3);
+    EXPECT(IsShadowPokemon(saved));
+    EXPECT_EQ(GetShadowHeartGauge(saved), before + 1);
+    EXPECT_NE(GetMonData(saved, MON_DATA_HP), 1); // the rest is as it was before the run
+
+    // Origin Edition: what the run opened stays even after losing, though it was cleared since the last battle too
+    before = GetShadowHeartGauge(saved);
+    StartWith(1);
+    AddShadowHeartGauge(&gParties[B_TRAINER_PLAYER][0], 2);
+    BattleConnector_Test_ApplyBattleOutcome(FALSE);
+    AddShadowHeartGauge(&gParties[B_TRAINER_PLAYER][0], 1);
+    BattleConnector_FailChallenge();
+    EXPECT_EQ(BattleConnector_GetReturnState(), CONNECTOR_RETURN_FAILED);
+    EXPECT_EQ(GetShadowHeartGauge(saved), before + 3);
+    gSpecialVar_0x8006 = 0;
 }

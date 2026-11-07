@@ -94,7 +94,7 @@ void StartGroudonKyogreBattle(void);
 void StartRegiBattle(void);
 enum BattleEnvironments BattleSetup_GetEnvironmentId(void);
 enum BattleTransition GetWildBattleTransition(void);
-void BattleSetup_StartBattleConnectorBattle(u16 trainerId, const u8 *defeatText, u16 song, void (*endCallback)(void));
+void BattleSetup_StartBattleConnectorBattle(u16 trainerId, const u8 *defeatText, u16 song, bool32 isDouble, void (*endCallback)(void));
 enum BattleTransition GetTrainerBattleTransition(void);
 enum BattleTransition GetSpecialBattleTransition(enum BattleTransitionGroup id);
 void ChooseStarter(void);

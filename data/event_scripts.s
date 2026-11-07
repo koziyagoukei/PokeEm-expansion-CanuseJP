@@ -58,6 +58,7 @@
 #include "constants/party_menu.h"
 #include "constants/shadow_pokemon.h"
 #include "constants/battle_connector.h"
+#include "config/battle_connector.h"
 #include "constants/party_bath_expansion.h"
 #include "constants/party_bath_visitors.h"
 #include "constants/pokeball.h"

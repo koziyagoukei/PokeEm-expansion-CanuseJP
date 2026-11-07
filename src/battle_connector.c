@@ -15,7 +15,9 @@
 #include "shadow_pokemon.h"
 #include "string_util.h"
 #include "strings.h"
+#include "tv.h"
 #include "constants/battle.h"
+#include "constants/battle_frontier.h"
 #include "constants/battle_frontier_mons.h"
 #include "constants/hold_effects.h"
 #include "constants/characters.h"
@@ -66,6 +68,8 @@ struct BattleConnectorRun
     u8 lastProtected;   // the candidate protected last (for a swap)
     u8 candidateCount;
     u16 battleSong;
+    u8 mode;            // CONNECTOR_MODE_*
+    u16 panicChain;     // Panic Rush: battles won in a row
     struct Pokemon savedParty[PARTY_SIZE];
     struct Pokemon candidates[BATTLE_CONNECTOR_MAX_CANDIDATES];
 };
@@ -73,6 +77,9 @@ struct BattleConnectorRun
 static EWRAM_DATA struct BattleConnectorRun sRun = {0};
 static EWRAM_DATA bool8 sInConnectorBattle = FALSE;
 static EWRAM_DATA bool8 sDynamaxFlagWasSet = FALSE;
+static EWRAM_DATA u8 sPanicPicks[BATTLE_CONNECTOR_PANIC_PICKS] = {0};
+static EWRAM_DATA u8 sPanicPickCount = 0;
+static EWRAM_DATA u16 sLastPanicChain = 0;   // for the reception after a Panic Rush (the run is cleared by then)
 
 #include "data/battle_connector.h"
 
@@ -86,6 +93,12 @@ const u8 gText_BattleConnectorCantChangeItems[] = _("{JPN}ここでは もちも
 bool32 BattleConnector_IsChallengeActive(void)
 {
     return sRun.active;
+}
+
+// Another Edition's battles: Shadow moves hit Shadow Pokemon for neutral damage (battle_util.c)
+bool32 BattleConnector_ShadowMovesAreNeutral(void)
+{
+    return sInConnectorBattle && sRun.mode == CONNECTOR_MODE_ANOTHER;
 }
 
 bool32 BattleConnector_IsBattleActive(void)
@@ -130,8 +143,35 @@ static u32 CountPartyMons(void)
 
 // The protected Pokemon in the party are the ones in use: their changes go back to the list (by personality, so a
 // reordered party does not matter).
+// The heart gauge is the one thing of a Pokemon brought that stays as the run left it (the rest of the party comes
+// back as it was): a Shadow Pokemon of the party before the run takes the gauge of the same Pokemon in the party now.
+static void SyncShadowGaugesToSavedParty(void)
+{
+    for (u32 i = 0; i < PARTY_SIZE; i++)
+    {
+        struct Pokemon *saved = &sRun.savedParty[i];
+        if (!IsMonPresent(saved) || !IsShadowPokemon(saved))
+            continue;
+        for (u32 j = 0; j < PARTY_SIZE; j++)
+        {
+            struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][j];
+            if (IsMonPresent(mon) && IsShadowPokemon(mon)
+             && GetMonData(mon, MON_DATA_PERSONALITY) == GetMonData(saved, MON_DATA_PERSONALITY)
+             && GetMonData(mon, MON_DATA_OT_ID) == GetMonData(saved, MON_DATA_OT_ID)
+             && GetMonData(mon, MON_DATA_SPECIES) == GetMonData(saved, MON_DATA_SPECIES))
+            {
+                u16 gauge = GetMonData(mon, MON_DATA_SHADOW_GAUGE);
+                SetMonData(saved, MON_DATA_SHADOW_GAUGE, &gauge);
+                break;
+            }
+        }
+    }
+}
+
 static void SyncPartyToCandidates(void)
 {
+    if (sRun.active)
+        SyncShadowGaugesToSavedParty();
     for (u32 i = 0; i < PARTY_SIZE; i++)
     {
         struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][i];
@@ -148,6 +188,7 @@ static void SyncPartyToCandidates(void)
 
 static void RestorePlayerParty(void)
 {
+    SyncShadowGaugesToSavedParty();
     memcpy(gParties[B_TRAINER_PLAYER], sRun.savedParty, sizeof(sRun.savedParty));
     CalculatePlayerPartyCount();
 }
@@ -159,6 +200,19 @@ static void ClearRun(u32 returnState)
 }
 
 // ---- Shadow Pokemon ---------------------------------------------------------------------------------------------------
+
+// Random IVs (the frame counter mixed in, as for the boss)
+static void RandomizeIVs(struct Pokemon *mon)
+{
+    u32 seed = Random32() ^ (gMain.vblankCounter1 * 0x9E3779B1u), ivs = 0;
+
+    for (u32 stat = 0; stat < NUM_STATS; stat++)
+    {
+        seed = seed * 1103515245u + 12345u;
+        ivs |= ((seed >> 16) % (MAX_PER_STAT_IVS + 1)) << (stat * 5);
+    }
+    SetMonData(mon, MON_DATA_IVS, &ivs);
+}
 
 // At least count IVs of 31 (at random stats); the others stay as they are
 static void EnsurePerfectIVs(struct Pokemon *mon, u32 count)
@@ -184,15 +238,19 @@ static void EnsurePerfectIVs(struct Pokemon *mon, u32 count)
     }
 }
 
-// What every Shadow Pokemon of the facility gets: at least BATTLE_CONNECTOR_PERFECT_IVS IVs of 31, its Shadow state,
-// and the Battle Connector mark (its purification move comes from it)
+// What every Shadow Pokemon of the facility gets: at least BATTLE_CONNECTOR_PERFECT_IVS IVs of 31 (Another Edition:
+// random IVs), its Shadow state, and the Battle Connector mark (its purification move comes from it)
 static void FinishShadowMon(struct Pokemon *mon)
 {
     const u8 origin = TRUE;
     const u8 metLocation = MAPSEC_ARTISAN_CAVE;
     u16 species = GetMonData(mon, MON_DATA_SPECIES);
 
-    EnsurePerfectIVs(mon, max(BATTLE_CONNECTOR_PERFECT_IVS, gSpeciesInfo[species].perfectIVCount));
+    // Another Edition promises no perfect IVs: random ones, even for a set's
+    if (sRun.mode == CONNECTOR_MODE_ANOTHER)
+        RandomizeIVs(mon);
+    else
+        EnsurePerfectIVs(mon, max(BATTLE_CONNECTOR_PERFECT_IVS, gSpeciesInfo[species].perfectIVCount));
     SetMonData(mon, MON_DATA_MET_LOCATION, &metLocation);
     SetMonData(mon, MON_DATA_BATTLE_CONNECTOR_ORIGIN, &origin);
     MarkShadowPokemon(mon);
@@ -211,17 +269,9 @@ void BattleConnector_CreateShadowMon(struct Pokemon *mon, u16 species, u32 level
 {
     // The random state can be the same when a run is played the same way after loading (the boss came out with the same
     // nature each time): the frame counter goes into its personality and IVs too
-    u32 seed = Random32() ^ (gMain.vblankCounter1 * 0x9E3779B1u);
-    u32 ivs = 0;
-
-    CreateMon(mon, species, level, seed, OTID_STRUCT_PLAYER_ID);
+    CreateMon(mon, species, level, Random32() ^ (gMain.vblankCounter1 * 0x9E3779B1u), OTID_STRUCT_PLAYER_ID);
     // CreateMon leaves the IVs at 0 and the moves empty
-    for (u32 stat = 0; stat < NUM_STATS; stat++)
-    {
-        seed = seed * 1103515245u + 12345u;
-        ivs |= ((seed >> 16) % (MAX_PER_STAT_IVS + 1)) << (stat * 5);
-    }
-    SetMonData(mon, MON_DATA_IVS, &ivs);
+    RandomizeIVs(mon);
     GiveMonInitialMoveset(mon);
     FinishShadowMon(mon);
 }
@@ -473,6 +523,7 @@ static u32 RollHint(u32 roomType)
 
 // ---- specials: challenge ----------------------------------------------------------------------------------------------
 
+// VAR_0x8006: the mode (CONNECTOR_MODE_ORIGIN or _ANOTHER).
 // VAR_0x8004 and VAR_0x8005: the party slots of the Pokemon the player brings (VAR_0x8005 PARTY_SIZE: only one; up to
 // BATTLE_CONNECTOR_BRING_COUNT). Anything that can be in the party may come (no species rules: this is not a Battle
 // Frontier facility). Returns FALSE if they cannot.
@@ -496,6 +547,7 @@ u16 BattleConnector_StartChallenge(void)
         return FALSE;
 
     ClearRun(CONNECTOR_RETURN_NONE);
+    sRun.mode = (gSpecialVar_0x8006 == CONNECTOR_MODE_ANOTHER) ? CONNECTOR_MODE_ANOTHER : CONNECTOR_MODE_ORIGIN;
     memcpy(sRun.savedParty, gParties[B_TRAINER_PLAYER], sizeof(sRun.savedParty));
     ZeroPlayerPartyMons();
     for (u32 i = 0; i < count; i++)
@@ -559,6 +611,11 @@ void BattleConnector_SetUpRoomObjects(void)
     u16 graphicsId = OBJ_EVENT_GFX_ITEM_BALL;
 
     FlagClear(FLAG_TEMP_11);
+    if (sRun.mode == CONNECTOR_MODE_PANIC)
+    {
+        FlagSet(FLAG_TEMP_11);   // the Pokemon in a panic rush in from the dark
+        return;
+    }
     if (IsShadowRoom(sRun.roomType))
     {
         // Its overworld sprite (a species without one shows as a Poke Ball)
@@ -613,7 +670,26 @@ void BattleConnector_StartRoomBattle(void)
     FlagSet(B_FLAG_DYNAMAX_BATTLE);
     sRun.battleSong = GetRoomSong(sRun.roomType);
     sInConnectorBattle = TRUE;
-    BattleSetup_StartBattleConnectorBattle(trainerId, defeatText, sRun.battleSong, CB2_EndBattleConnectorBattle);
+    BattleSetup_StartBattleConnectorBattle(trainerId, defeatText, sRun.battleSong, FALSE, CB2_EndBattleConnectorBattle);
+}
+
+// What a battle's outcome does to the run: VAR_RESULT, Another Edition's bar, the Panic Rush chain
+static void ApplyBattleOutcome(void)
+{
+    gSpecialVar_Result = (gBattleOutcome == B_OUTCOME_WON) ? CONNECTOR_BATTLE_WON : CONNECTOR_BATTLE_LOST;
+    if (sRun.mode == CONNECTOR_MODE_ANOTHER)
+    {
+        // Another Edition keeps the run brisk: each Shadow Pokemon of the party clears a bar after every battle
+        for (u32 i = 0; i < PARTY_SIZE; i++)
+        {
+            struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][i];
+            if (IsMonPresent(mon) && IsShadowPokemon(mon))
+                AddShadowHeartGauge(mon, 1);
+        }
+    }
+    if (sRun.mode == CONNECTOR_MODE_PANIC && gSpecialVar_Result == CONNECTOR_BATTLE_WON && sRun.panicChain < 0xFFFF)
+        sRun.panicChain++;
+    SyncPartyToCandidates();
 }
 
 static void CB2_EndBattleConnectorBattle(void)
@@ -621,9 +697,178 @@ static void CB2_EndBattleConnectorBattle(void)
     sInConnectorBattle = FALSE;
     if (!sDynamaxFlagWasSet)
         FlagClear(B_FLAG_DYNAMAX_BATTLE);
-    gSpecialVar_Result = (gBattleOutcome == B_OUTCOME_WON) ? CONNECTOR_BATTLE_WON : CONNECTOR_BATTLE_LOST;
-    SyncPartyToCandidates();
+    ApplyBattleOutcome();
     SetMainCallback2(CB2_ReturnToFieldContinueScriptPlayMapMusic);
+}
+
+// ---- Panic Rush -------------------------------------------------------------------------------------------------------
+//
+// Pokemon that have not shut their hearts but are in a panic rush at the player one pair after another; the player
+// calms them by battling. It costs BATTLE_CONNECTOR_PANIC_COST BP; the player picks BATTLE_CONNECTOR_PANIC_PICKS Pokemon
+// for double battles (no species rules), bag items may be used, and each battle won adds to the chain, paid out in BP
+// (BATTLE_CONNECTOR_PANIC_BP_PER_WIN each) when the player stops or loses. The party is put back as it was, as in a
+// run of the Battle Connector (the same rules hold while it lasts: no saving, no held item changes...).
+
+// Before a Panic Rush: CONNECTOR_PANIC_*
+u16 BattleConnector_CanStartPanicRush(void)
+{
+    if (gSaveBlock2Ptr->frontier.battlePoints < BATTLE_CONNECTOR_PANIC_COST)
+        return CONNECTOR_PANIC_NO_BP;
+    if (CountPartyMons() < BATTLE_CONNECTOR_PANIC_PICKS)
+        return CONNECTOR_PANIC_FEW_POKEMON;
+    return CONNECTOR_PANIC_OK;
+}
+
+void BattleConnector_PanicResetPicks(void)
+{
+    sPanicPickCount = 0;
+}
+
+// VAR_0x8004: a party slot the player picked. Returns how many are picked now (0: it cannot be picked: an Egg, an
+// empty slot, or one picked already).
+u16 BattleConnector_PanicPick(void)
+{
+    u32 slot = gSpecialVar_0x8004;
+
+    if (slot >= PARTY_SIZE || !IsMonPresent(&gParties[B_TRAINER_PLAYER][slot])
+     || sPanicPickCount >= BATTLE_CONNECTOR_PANIC_PICKS)
+        return 0;
+    for (u32 i = 0; i < sPanicPickCount; i++)
+    {
+        if (sPanicPicks[i] == slot)
+            return 0;
+    }
+    sPanicPicks[sPanicPickCount++] = slot;
+    return sPanicPickCount;
+}
+
+// Pays the BP and starts with the picked Pokemon (healed). FALSE if it cannot.
+u16 BattleConnector_StartPanicRush(void)
+{
+    if (sRun.active || sPanicPickCount != BATTLE_CONNECTOR_PANIC_PICKS || BattleConnector_CanStartPanicRush() != CONNECTOR_PANIC_OK)
+        return FALSE;
+
+    gSaveBlock2Ptr->frontier.battlePoints -= BATTLE_CONNECTOR_PANIC_COST;
+    ClearRun(CONNECTOR_RETURN_NONE);
+    sRun.mode = CONNECTOR_MODE_PANIC;
+    memcpy(sRun.savedParty, gParties[B_TRAINER_PLAYER], sizeof(sRun.savedParty));
+    ZeroPlayerPartyMons();
+    for (u32 i = 0; i < BATTLE_CONNECTOR_PANIC_PICKS; i++)
+    {
+        struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][i];
+        *mon = sRun.savedParty[sPanicPicks[i]];
+        HealPokemon(mon);
+        sRun.baseLevel = max(sRun.baseLevel, (u8)GetMonData(mon, MON_DATA_LEVEL));
+    }
+    CalculatePlayerPartyCount();
+    sPanicPickCount = 0;
+    sRun.active = TRUE;
+    return TRUE;
+}
+
+u16 BattleConnector_IsPanicRush(void)
+{
+    return sRun.active && sRun.mode == CONNECTOR_MODE_PANIC;
+}
+
+// The foes: Battle Frontier pool Pokemon of any generation but no Legendary or Mythical, in their own form
+static bool32 IsPanicSet(u32 set, u32 tier)
+{
+    u16 species = gBattleFrontierMons[set].species;
+
+    if (species == SPECIES_NONE || species >= NUM_SPECIES || GET_BASE_SPECIES_ID(species) != species
+     || gSpeciesInfo[species].isRestrictedLegendary || gSpeciesInfo[species].isSubLegendary
+     || gSpeciesInfo[species].isMythical)
+        return FALSE;
+    return BattleConnector_GetSpeciesTier(species) == tier;
+}
+
+static u16 PickPanicSet(u32 tier)
+{
+    u32 count = 0, pick;
+
+    for (u32 set = 0; set < NUM_FRONTIER_MONS; set++)
+        count += IsPanicSet(set, tier);
+    if (count == 0)
+        return NO_SET;
+    pick = RandomUniform(RNG_NONE, 0, count - 1);
+    for (u32 set = 0; set < NUM_FRONTIER_MONS; set++)
+    {
+        if (IsPanicSet(set, tier) && pick-- == 0)
+            return set;
+    }
+    return NO_SET;
+}
+
+// The chain makes them stronger
+static u32 GetPanicTier(void)
+{
+    if (sRun.panicChain >= BATTLE_CONNECTOR_PANIC_RARE_AT)
+        return CONNECTOR_TIER_RARE;
+    if (sRun.panicChain >= BATTLE_CONNECTOR_PANIC_STRONG_AT)
+        return CONNECTOR_TIER_STRONG;
+    return CONNECTOR_TIER_NORMAL;
+}
+
+// A Pokemon in a panic: a set's moves, nature, ability, EVs and IVs, at the level of the strongest Pokemon picked. Not a
+// Shadow Pokemon; no Mega Stone or Z-Crystal (wild Pokemon do not use them), no set nickname.
+void BattleConnector_CreatePanicMon(struct Pokemon *mon, u16 set, u32 level)
+{
+    const u16 none = ITEM_NONE;
+    enum HoldEffect holdEffect;
+
+    CreateFacilityMon(&gBattleFrontierMons[set], level, USE_RANDOM_IVS, Random32(), 0, mon);
+    if (gBattleFrontierMons[set].nickname != NULL)
+        SetMonData(mon, MON_DATA_NICKNAME, GetSpeciesName(gBattleFrontierMons[set].species));
+    holdEffect = GetItemHoldEffect(GetMonData(mon, MON_DATA_HELD_ITEM));
+    if (holdEffect == HOLD_EFFECT_MEGA_STONE || holdEffect == HOLD_EFFECT_Z_CRYSTAL)
+        SetMonData(mon, MON_DATA_HELD_ITEM, &none);
+    CalculateMonStats(mon);
+}
+
+// The next pair; the script waits (waitstate) and gets CONNECTOR_BATTLE_WON / LOST in VAR_RESULT
+void BattleConnector_StartPanicBattle(void)
+{
+    u32 level = min(max(sRun.baseLevel, (u32)BATTLE_CONNECTOR_LEVEL_MIN), (u32)MAX_LEVEL);
+
+    ZeroEnemyPartyMons();
+    for (u32 i = 0; i < 2; i++)
+    {
+        u16 set = PickPanicSet(GetPanicTier());
+        if (set == NO_SET)
+            set = PickPanicSet(CONNECTOR_TIER_NORMAL);
+        BattleConnector_CreatePanicMon(&gParties[B_TRAINER_OPPONENT_A][i], set, level);
+    }
+    CalculateEnemyPartyCount();
+
+    sDynamaxFlagWasSet = FlagGet(B_FLAG_DYNAMAX_BATTLE);
+    FlagSet(B_FLAG_DYNAMAX_BATTLE);
+    sRun.battleSong = (GetPanicTier() == CONNECTOR_TIER_NORMAL) ? MUS_VS_COLOSSEUM : MUS_VS_COLOSSEUM_2;
+    sInConnectorBattle = TRUE;
+    BattleSetup_StartBattleConnectorBattle(TRAINER_NONE, NULL, sRun.battleSong, TRUE, CB2_EndBattleConnectorBattle);
+}
+
+// STR_VAR_1: the chain, STR_VAR_2: the BP it is worth so far
+void BattleConnector_BufferPanicChain(void)
+{
+    ConvertIntToDecimalStringN(gStringVar1, sRun.panicChain, STR_CONV_MODE_LEFT_ALIGN, 5);
+    ConvertIntToDecimalStringN(gStringVar2, sRun.panicChain * BATTLE_CONNECTOR_PANIC_BP_PER_WIN, STR_CONV_MODE_LEFT_ALIGN, 5);
+}
+
+// The player stops or loses: the chain is paid in BP, the party comes back as it was
+void BattleConnector_EndPanicRush(void)
+{
+    u32 points;
+
+    if (!BattleConnector_IsPanicRush())
+        return;
+    sLastPanicChain = sRun.panicChain;
+    points = sRun.panicChain * BATTLE_CONNECTOR_PANIC_BP_PER_WIN;
+    gSaveBlock2Ptr->frontier.battlePoints = min(gSaveBlock2Ptr->frontier.battlePoints + points, (u32)MAX_BATTLE_FRONTIER_POINTS);
+    gSaveBlock2Ptr->frontier.cardBattlePoints = min(gSaveBlock2Ptr->frontier.cardBattlePoints + points, (u32)0xFFFF);
+    IncrementDailyBattlePoints(points);
+    RestorePlayerParty();
+    ClearRun(CONNECTOR_RETURN_PANIC);
 }
 
 // ---- protecting -------------------------------------------------------------------------------------------------------
@@ -780,6 +1025,9 @@ void BattleConnector_RetireChallenge(void)
 // Back at the reception: why (once; it clears itself unless the results are still to come)
 u16 BattleConnector_GetReturnState(void)
 {
+    // STR_VAR_1 / STR_VAR_2: the last Panic Rush's chain and the BP it earned
+    ConvertIntToDecimalStringN(gStringVar1, sLastPanicChain, STR_CONV_MODE_LEFT_ALIGN, 5);
+    ConvertIntToDecimalStringN(gStringVar2, sLastPanicChain * BATTLE_CONNECTOR_PANIC_BP_PER_WIN, STR_CONV_MODE_LEFT_ALIGN, 5);
     u32 state = sRun.returnState;
     if (state != CONNECTOR_RETURN_CLEARED)
         sRun.returnState = CONNECTOR_RETURN_NONE;
@@ -910,6 +1158,37 @@ void BattleConnector_TakeNothingHome(void)
 }
 
 #if TESTING
+u32 BattleConnector_Test_GetMode(void)
+{
+    return sRun.mode;
+}
+
+u16 BattleConnector_Test_GetPanicChain(void)
+{
+    return sRun.panicChain;
+}
+
+void BattleConnector_Test_SetPanicChain(u16 chain)
+{
+    sRun.panicChain = chain;
+}
+
+u16 BattleConnector_Test_PickPanicSet(void)
+{
+    return PickPanicSet(GetPanicTier());
+}
+
+void BattleConnector_Test_SetMode(u32 mode)
+{
+    sRun.mode = mode;
+}
+
+void BattleConnector_Test_ApplyBattleOutcome(bool32 won)
+{
+    gBattleOutcome = won ? B_OUTCOME_WON : B_OUTCOME_LOST;
+    ApplyBattleOutcome();
+}
+
 void BattleConnector_Test_SetBattleActive(bool32 active, u32 roomType)
 {
     sInConnectorBattle = active;

@@ -22,6 +22,16 @@
 #define BATTLE_CONNECTOR_STRONG_BST     480
 #define BATTLE_CONNECTOR_RARE_BST       535
 
+// Panic Rush: it costs BATTLE_CONNECTOR_PANIC_COST BP, the player picks BATTLE_CONNECTOR_PANIC_PICKS Pokemon for double
+// battles against Pokemon of the Battle Frontier pool (no Legendary or Mythical) and earns BATTLE_CONNECTOR_PANIC_BP_PER_WIN
+// BP for each battle won. The foes grow stronger: the strong tier from PANIC_STRONG_AT wins, the rare one from
+// PANIC_RARE_AT.
+#define BATTLE_CONNECTOR_PANIC_COST       5
+#define BATTLE_CONNECTOR_PANIC_PICKS      4
+#define BATTLE_CONNECTOR_PANIC_BP_PER_WIN 1
+#define BATTLE_CONNECTOR_PANIC_STRONG_AT  5
+#define BATTLE_CONNECTOR_PANIC_RARE_AT    10
+
 // IVs of 31 every Shadow Pokemon of the facility has at least (at random stats)
 #define BATTLE_CONNECTOR_PERFECT_IVS 3
 

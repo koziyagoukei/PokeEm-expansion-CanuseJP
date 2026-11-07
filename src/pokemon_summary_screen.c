@@ -4046,7 +4046,7 @@ static void PrintRightColumnStats(void)
 
 // A Shadow Pokemon gains no EXP, so the skills page shows its heart gauge (Pokemon XD's five bars, provisional look)
 // where the EXP to the next level would be. A bar with anything left shows at least a sliver.
-#define SUMMARY_HEART_BAR_WIDTH 8
+#define SUMMARY_HEART_BAR_WIDTH 6
 #define SUMMARY_HEART_BAR_GAP   2
 static void DrawShadowHeartGauge(u8 windowId, struct Pokemon *mon, u32 x, u32 y)
 {
@@ -4086,7 +4086,9 @@ static void PrintExpPointsNextLevel(void)
     CopyWindowToVram(PSS_LABEL_WINDOW_POKEMON_SKILLS_EXP, COPYWIN_GFX);
     if (shadow)
     {
-        DrawShadowHeartGauge(windowId, &sMonSummaryScreen->currentMon, 0, 22);
+        // Right-aligned with the EXP digits above (they end at 44 of the window's 48 px; the frame is past them)
+        DrawShadowHeartGauge(windowId, &sMonSummaryScreen->currentMon,
+                             44 - (SHADOW_GAUGE_BARS * SUMMARY_HEART_BAR_WIDTH + (SHADOW_GAUGE_BARS - 1) * SUMMARY_HEART_BAR_GAP), 22);
         return;
     }
 

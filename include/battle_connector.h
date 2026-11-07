@@ -11,6 +11,8 @@ extern const u8 gText_BattleConnectorCantChangeItems[];
 // State
 bool32 BattleConnector_IsChallengeActive(void);
 bool32 BattleConnector_IsBattleActive(void);
+bool32 BattleConnector_ShadowMovesAreNeutral(void);
+void BattleConnector_CreatePanicMon(struct Pokemon *mon, u16 set, u32 level);
 u16 BattleConnector_GetBattleBGM(void);
 void BattleConnector_CreateShadowMon(struct Pokemon *mon, u16 species, u32 level);
 void BattleConnector_CreateShadowMonFromSet(struct Pokemon *mon, u16 set, u32 level);
@@ -44,8 +46,22 @@ void BattleConnector_ShowCandidates(void);
 void BattleConnector_BufferCandidateDetails(void);
 u16 BattleConnector_TakeHomeCandidate(void);
 void BattleConnector_TakeNothingHome(void);
+u16 BattleConnector_CanStartPanicRush(void);
+void BattleConnector_PanicResetPicks(void);
+u16 BattleConnector_PanicPick(void);
+u16 BattleConnector_StartPanicRush(void);
+u16 BattleConnector_IsPanicRush(void);
+void BattleConnector_StartPanicBattle(void);
+void BattleConnector_BufferPanicChain(void);
+void BattleConnector_EndPanicRush(void);
 
 #if TESTING
+u32 BattleConnector_Test_GetMode(void);
+u16 BattleConnector_Test_GetPanicChain(void);
+void BattleConnector_Test_SetPanicChain(u16 chain);
+void BattleConnector_Test_SetMode(u32 mode);
+u16 BattleConnector_Test_PickPanicSet(void);
+void BattleConnector_Test_ApplyBattleOutcome(bool32 won);
 void BattleConnector_Test_SetBattleActive(bool32 active, u32 roomType);
 u32 BattleConnector_Test_GetPathRoomType(u32 path);
 u32 BattleConnector_Test_GetCandidateCount(void);

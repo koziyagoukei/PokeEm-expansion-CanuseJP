@@ -5,6 +5,7 @@
 #include "battle_anim.h"
 #include "battle_anim_scripts.h"
 #include "battle_arena.h"
+#include "battle_connector.h"
 #include "battle_environment.h"
 #include "battle_pyramid.h"
 #include "battle_util.h"
@@ -8577,6 +8578,10 @@ static inline bool32 MoveIgnoresType(struct DamageContext *ctx)
 static uq4_12_t CalcShadowMoveEffectiveness(struct DamageContext *ctx)
 {
     uq4_12_t modifier = IsBattlerShadowPokemon(ctx->battlerDef) ? UQ_4_12(0.5) : UQ_4_12(2.0);
+
+    // The Battle Connector's Another Edition: Shadow moves hit Shadow Pokemon for neutral damage
+    if (IsBattlerShadowPokemon(ctx->battlerDef) && BattleConnector_ShadowMovesAreNeutral())
+        modifier = UQ_4_12(1.0);
 
     if (ctx->abilities[ctx->battlerDef] == ABILITY_WONDER_GUARD && modifier <= UQ_4_12(1.0))
     {
