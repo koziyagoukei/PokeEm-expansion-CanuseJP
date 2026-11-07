@@ -10,103 +10,101 @@ ThreeIsland_BondBridge_EventScript_BondBridgeSign::
 	end
 
 ThreeIsland_BondBridge_Text_NikkiIntro::
-	.string "The salty tang of the sea...\n"
-	.string "It tickles my heart.$"
+	.string "{JPN}しおの かおりが\n"
+	.string "こころを くすぐるわ$"
 
 ThreeIsland_BondBridge_Text_NikkiDefeat::
-	.string "...Sniff, sniff...\n"
-	.string "Something smells unpleasant...$"
+	.string "{JPN}…くんくん\n"
+	.string "なんか におわない こと?$"
 
 ThreeIsland_BondBridge_Text_NikkiPostBattle::
-	.string "Perhaps that reek is your sweaty\n"
-	.string "POKEMON's body odor...$"
+	.string "{JPN}ポケモンが あせ\n"
+	.string "かいたの かしら?$"
 
 ThreeIsland_BondBridge_Text_VioletIntro::
-	.string "Where are you off to in such\n"
-	.string "a hurry?$"
+	.string "{JPN}あなたは いそいで\n"
+	.string "どこへ ゆくの?$"
 
 ThreeIsland_BondBridge_Text_VioletDefeat::
-	.string "You're raising some wonderful\n"
-	.string "POKEMON.$"
+	.string "{JPN}すてきな ポケモンを\n"
+	.string "そだててるのね$"
 
 ThreeIsland_BondBridge_Text_VioletPostBattle::
-	.string "If you keep going this way, you'll\n"
-	.string "eventually reach BERRY FOREST.$"
+	.string "{JPN}ずっと ゆくと\n"
+	.string "きのみの もりが あるのよ$"
 
 ThreeIsland_BondBridge_Text_AmiraIntro::
-	.string "My mommy said that I can't swim\n"
-	.string "without my float ring.$"
+	.string "{JPN}ママがね\n"
+	.string "うきわが ないと\l"
+	.string "うみに いっちゃ ダメだって$"
 
 ThreeIsland_BondBridge_Text_AmiraDefeat::
-	.string "Waaah!\n"
-	.string "Waaah!$"
+	.string "{JPN}うわわーん!$"
 
 ThreeIsland_BondBridge_Text_AmiraPostBattle::
-	.string "This year, I'm going to finally\n"
-	.string "learn how to swim!$"
+	.string "{JPN}ことしこそ\n"
+	.string "およげる ように なるんだ!$"
 
 ThreeIsland_BondBridge_Text_AlexisIntro::
-	.string "Yay, yay!\n"
-	.string "POKEMON!$"
+	.string "{JPN}わーい わーい!\n"
+	.string "ポケモンー!$"
 
 ThreeIsland_BondBridge_Text_AlexisDefeat::
-	.string "What happens now?$"
+	.string "{JPN}んー?$"
 
 ThreeIsland_BondBridge_Text_AlexisPostBattle::
-	.string "Did I just win?\n"
-	.string "Or did I lose?$"
+	.string "{JPN}あたし いま\n"
+	.string "かったの? まけたの?$"
 
 ThreeIsland_BondBridge_Text_TishaIntro::
-	.string "Oh, no, don't come here!\n"
-	.string "Please, stay away from me!$"
+	.string "{JPN}やだっ\n"
+	.string "あたしの そば とおらないで!$"
 
 ThreeIsland_BondBridge_Text_TishaDefeat::
-	.string "Okay, you've won!\n"
-	.string "Now will you please go away?$"
+	.string "{JPN}かったら\n"
+	.string "はやく あっち いって!$"
 
 ThreeIsland_BondBridge_Text_TishaPostBattle::
-	.string "A POKEMON bit through my \n"
-	.string "swimsuit.\p"
-	.string "I can't get out of the water!$"
+	.string "{JPN}ポケモンに みずぎの おしり\n"
+	.string "かみ ちぎられ ちゃって\l"
+	.string "あがれないのよう$"
 
 ThreeIsland_BondBridge_Text_JoyIntro::
-	.string "JOY: We'll teach you what our\n"
-	.string "favorite POKEMON is!$"
+	.string "{JPN}ユイ『あたし たちの\n"
+	.string "すきな ポケモン おしえたげる!$"
 
 ThreeIsland_BondBridge_Text_JoyDefeat::
-	.string "JOY: Ohh...\n"
-	.string "MEG!$"
+	.string "{JPN}ユイ『リコちゃーん$"
 
 ThreeIsland_BondBridge_Text_JoyPostBattle::
-	.string "JOY: Wasn't that fun?\n"
-	.string "I hope we can battle again!$"
+	.string "{JPN}ユイ『おもしろかった!\n"
+	.string "また やりたいね$"
 
 ThreeIsland_BondBridge_Text_JoyNotEnoughMons::
-	.string "JOY: I really want to battle with\n"
-	.string "MEG.\p"
-	.string "One POKEMON isn't enough.$"
+	.string "{JPN}ユイ『リコちゃんと いっしょに\n"
+	.string "たたかいたいの!\l"
+	.string "ポケモン 1ぴきじゃ たりないよ$"
 
 ThreeIsland_BondBridge_Text_MegIntro::
-	.string "MEG: We'll show you our favorite\n"
-	.string "POKEMON.$"
+	.string "{JPN}リコ『あたし たちの\n"
+	.string "すきな ポケモン みせたげる!$"
 
 ThreeIsland_BondBridge_Text_MegDefeat::
-	.string "MEG: Ohh...\n"
-	.string "JOY!$"
+	.string "{JPN}リコ『ユイちゃーん$"
 
 ThreeIsland_BondBridge_Text_MegPostBattle::
-	.string "MEG: JOY, wasn't that fun?$"
+	.string "{JPN}リコ『ユイちゃん\n"
+	.string "たのしかったねー!$"
 
 ThreeIsland_BondBridge_Text_MegNotEnoughMons::
-	.string "MEG: I want to battle together\n"
-	.string "with JOY.\p"
-	.string "One POKEMON isn't enough.$"
+	.string "{JPN}リコ『ユイちゃんと あたしと\n"
+	.string "いっしょに しょうぶが いいの!\l"
+	.string "ポケモン 1ぴきじゃ たりないよ$"
 
 ThreeIsland_BondBridge_Text_BerryForestAhead::
-	.string "BERRY FOREST AHEAD$"
+	.string "{JPN}このさき きのみのもり$"
 
 ThreeIsland_BondBridge_Text_BondBridgeSign::
-	.string "BOND BRIDGE\n"
-	.string "Please be quiet when crossing.\p"
-	.string "BERRY FOREST AHEAD$"
+	.string "{JPN}きずなばしは しずかに わたろう!\n"
+	.string "はしを わたれば きのみのもり$"
 

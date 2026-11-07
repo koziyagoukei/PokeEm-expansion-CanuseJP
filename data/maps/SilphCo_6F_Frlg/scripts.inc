@@ -91,80 +91,87 @@ SilphCo_6F_EventScript_Grunt2::
 	end
 
 SilphCo_6F_Text_RocketsTookOverBuilding::
-	.string "The ROCKETS came and took over\n"
-	.string "the building!$"
+	.string "{JPN}やつらが いきなり やってきて\n"
+	.string "ビルを のっとったんです$"
 
 SilphCo_6F_Text_BetterGetBackToWork::
-	.string "Well, better get back to work.$"
+	.string "{JPN}… さてと!\n"
+	.string "しごと しなきゃ しごと!$"
 
 SilphCo_6F_Text_HelpMePlease::
-	.string "Oh dear, oh dear.\n"
-	.string "Help me, please!$"
+	.string "{JPN}ぶるぶる…\n"
+	.string "かみさま ほとけさま たすけて$"
 
 SilphCo_6F_Text_WeGotEngaged::
-	.string "We got engaged.\n"
-	.string "Heheh!$"
+	.string "{JPN}ぼくたち こんやく したよ\n"
+	.string "… てれるなあ$"
 
 SilphCo_6F_Text_ThatManIsSuchACoward::
-	.string "That man next to me...\n"
-	.string "He's such a coward!$"
+	.string "{JPN}となりの ひと…\n"
+	.string "おとこ なのに なさけないわ$"
 
 SilphCo_6F_Text_NeedsMeToLookAfterHim::
-	.string "He's so helpless, he needed\n"
-	.string "someone like me to look after him.$"
+	.string "{JPN}このひとは\n"
+	.string "あたしが ついてなきゃ\l"
+	.string "だめだって おもったの$"
 
 SilphCo_6F_Text_RocketsTryingToConquerWorld::
-	.string "TEAM ROCKET is trying to conquer\n"
-	.string "the world with POKEMON.$"
+	.string "{JPN}ロケットだんは\n"
+	.string "ポケモン つかって\l"
+	.string "せかい せいふく したいのよ$"
 
 SilphCo_6F_Text_RocketsRanAwayBecauseOfYou::
-	.string "TEAM ROCKET ran away, and it's all\n"
-	.string "because of you!$"
+	.string "{JPN}ロケットだんが にげたのは\n"
+	.string "あなたの おかげね$"
 
 SilphCo_6F_Text_TargetedSilphForOurMonProducts::
-	.string "They must have targeted SILPH for\n"
-	.string "our POKEMON products.$"
+	.string "{JPN}シルフ カンパニーは グッズを\n"
+	.string "いっぱい つくってる から\l"
+	.string "ねらわれたんだろうな$"
 
 SilphCo_6F_Text_ComeWorkForSilphWhenYoureOlder::
-	.string "Come work for SILPH when you\n"
-	.string "get older.$"
+	.string "{JPN}おおきく なったら\n"
+	.string "シルフで はたらくと いいよ$"
 
 SilphCo_6F_Text_Grunt1Intro::
-	.string "I am one of the four ROCKET\n"
-	.string "BROTHERS!$"
+	.string "{JPN}おれこそは\n"
+	.string "ロケット 4きょうだいの ひとり!$"
 
 SilphCo_6F_Text_Grunt1Defeat::
-	.string "Flame out!$"
+	.string "{JPN}まけたよ$"
 
 SilphCo_6F_Text_Grunt1PostBattle::
-	.string "No matter!\n"
-	.string "My brothers will avenge me!$"
+	.string "{JPN}まあ いい\n"
+	.string "おとうとが かたきを とって くれる$"
 
 SilphCo_6F_Text_TaylorIntro::
-	.string "That rotten PRESIDENT!\p"
-	.string "Serves him right for shipping me\n"
-	.string "off to the TIKSI BRANCH!\p"
-	.string "That's why TEAM ROCKET came after\n"
-	.string "us, I'm sure of it!$"
+	.string "{JPN}しゃちょうめー!\p"
+	.string "おれさまを\n"
+	.string "ポナヤツングスカ してん\l"
+	.string "なんかに とばし やがるから\l"
+	.string "ロケットだんに ねらわれるのだ!$"
 
 SilphCo_6F_Text_TaylorDefeat::
-	.string "Shoot!$"
+	.string "{JPN}がっくしよ$"
 
 SilphCo_6F_Text_TaylorPostBattle::
-	.string "TIKSI BRANCH?\n"
-	.string "It's in Russian no-man's-land!$"
+	.string "{JPN}ポナヤツングスカ してん?\n"
+	.string "ああ…\l"
+	.string "ロシアの おくの ほうだよ$"
 
 SilphCo_6F_Text_Grunt2Intro::
-	.string "You dare betray TEAM ROCKET?$"
+	.string "{JPN}ロケットだんを うらぎって\n"
+	.string "ただで すむと おもうな!$"
 
 SilphCo_6F_Text_Grunt2Defeat::
-	.string "You traitor!$"
+	.string "{JPN}うらぎりもの め$"
 
 SilphCo_6F_Text_Grunt2PostBattle::
-	.string "If you stand for justice, you\n"
-	.string "betray us bad guys!$"
+	.string "{JPN}うらぎり じゃない?\n"
+	.string "せいぎの みかた なら\l"
+	.string "きみは おれらの うらぎりものだ$"
 
 SilphCo_6F_Text_FloorSign::
-	.string "SILPH CO. HEAD OFFICE\n"
-	.string "6F$"
+	.string "{JPN}シルフ カンパニー ほんしゃ\n"
+	.string "6かい$"
 

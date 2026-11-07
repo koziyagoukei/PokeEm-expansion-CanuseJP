@@ -33,16 +33,17 @@ VermilionCity_Mart_Items::
 	end
 
 VermilionCity_Mart_Text_TeamRocketAreWickedPeople::
-	.string "There are wicked people who will\n"
-	.string "use POKEMON for criminal acts.\p"
-	.string "TEAM ROCKET traffics in rare\n"
-	.string "POKEMON, for example.\p"
-	.string "They also abandon POKEMON that\n"
-	.string "they consider unpopular or useless.\p"
-	.string "That's the sort of horrid people\n"
-	.string "they are, TEAM ROCKET.$"
+	.string "{JPN}よのなか には ポケモンで\n"
+	.string "わるだくみを する やつらも いる\p"
+	.string "ポケモンを たかく うりさばいたり\n"
+	.string "ときには にんきがない とか\p"
+	.string "やくに たたない という りゆうで\n"
+	.string "ころして しまったり\p"
+	.string "そういう わるい こと ばかりする\n"
+	.string "あつまりが ロケットだんさ$"
 
 VermilionCity_Mart_Text_MonsGoodOrBadDependingOnTrainer::
-	.string "I think POKEMON can be good or\n"
-	.string "bad. It depends on the TRAINER.$"
+	.string "{JPN}ポケモンは つかう ひとに よって\n"
+	.string "よくも わるくも なる\l"
+	.string "パートナーだと おもうの$"
 

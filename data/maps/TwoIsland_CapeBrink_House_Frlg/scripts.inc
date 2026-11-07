@@ -4,55 +4,60 @@ TwoIsland_CapeBrink_House_Frlg_MapScripts::
 @ See move_tutors.inc
 
 Text_UltimateMoveThatMon::
-	.string "I perfected the ultimate move of\n"
-	.string "its type...\p"
-	.string "But will no one take it for\n"
-	.string "future use?\p"
-	.string "...Hm? Hmmm!\p"
-	.string "Y-you...\n"
-	.string "Th-that {STR_VAR_1}...$"
+	.string "{JPN}だれか わしの あみだした\n"
+	.string "きゅうきょくの わざ\l"
+	.string "ひきついで くれる ものは\l"
+	.string "おらんの かのう…\p"
+	.string "…ん? んんッ!?\p"
+	.string "お おぬしの\n"
+	.string "その {STR_VAR_1}………!$"
 
 Text_JustMistaken::
-	.string "...No...\n"
-	.string "I was just mistaken.$"
+	.string "{JPN}………いや\n"
+	.string "わしの おもいちがい じゃった$"
 
 Text_AllowMeToTeachMonUltimateMove::
-	.string "Oh! This is the one!\n"
-	.string "This is the POKEMON!\p"
-	.string "This {STR_VAR_1} is worthy of\n"
-	.string "learning my ultimate move!\p"
-	.string "Will you allow it?\p"
-	.string "Will you allow your {STR_VAR_1} to\n"
-	.string "learn my {STR_VAR_2}?$"
+	.string "{JPN}うおお これじゃッ\n"
+	.string "この ポケモンじゃッ!\p"
+	.string "この {STR_VAR_1}こそ\n"
+	.string "わしの きゅうきょくの わざを\l"
+	.string "ひきつぐに ふさわしい…!\p"
+	.string "ど どうじゃ!\n"
+	.string "おぬしの {STR_VAR_1}に\l"
+	.string "{STR_VAR_2} という わざ\l"
+	.string "おしえさせて みては もらえぬか?$"
 
 Text_YouRejectIt::
-	.string "Gaah! You reject it?\n"
-	.string "No, I won't be dissuaded!$"
+	.string "{JPN}うむむーっ! いらぬとな?\n"
+	.string "いや わしは あきらめぬ…!$"
 
 Text_LetMeConferUltimateMove::
-	.string "You will allow it?\p"
-	.string "Then, let me confer my ultimate\n"
-	.string "{STR_VAR_2} on your {STR_VAR_1}.\p"
-	.string "Ggggrah-awooo!$"
+	.string "{JPN}きいて くれるか!\p"
+	.string "では さっそく\n"
+	.string "{STR_VAR_1}に {STR_VAR_2}を\l"
+	.string "でんじゅ いたそう…\p"
+	.string "きっ… きえええぇぇええいっ!!$"
 
 Text_TaughtMove::
-	.string "Gasp, gasp, gasp...\p"
-	.string "I didn't think I could teach that\n"
-	.string "move while I still lived...$"
+	.string "{JPN}はっ はあ はあ…\p"
+	.string "いきとる うちに\n"
+	.string "この わざを おしえられる もんに\l"
+	.string "あえる とは おもわなんだ$"
 
 Text_MakeBestUseOfMove::
-	.string "I implore you to make the best\n"
-	.string "use of that move and gain power!$"
+	.string "{JPN}その わざ\n"
+	.string "ぜひとも いかして\l"
+	.string "つよく なるんじゃ…!$"
 
 Text_PassedOnEverythingIKnow::
-	.string "Gasp, gasp, gasp...\p"
-	.string "I have no regrets now.\n"
-	.string "I've passed on everything I know.\p"
-	.string "Now I can live out my life knowing\n"
-	.string "my work is done.$"
+	.string "{JPN}はっ はあ はあ…\p"
+	.string "これで おもいのこす ことは ない\n"
+	.string "おぬしに すべて たくした からな\p"
+	.string "あとは じいさんの\n"
+	.string "おむかえを まつ ばかりじゃ…$"
 
 Text_FeelRejuvenated::
-	.string "After I passed on my knowledge to\n"
-	.string "you, I felt so much relief.\p"
-	.string "In fact, I feel rejuvenated,\n"
-	.string "as if I were younger again!$"
+	.string "{JPN}すべての わざを たくして\n"
+	.string "きが すんだら\l"
+	.string "なんだか すこし\l"
+	.string "わかがえって しまった ようじゃ…$"

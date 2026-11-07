@@ -10,23 +10,23 @@ SixIsland_GreenPath_EventScript_LeftRouteSign::
 	end
 
 SixIsland_GreenPath_Text_JaclynIntro::
-	.string "...Huh?\p"
-	.string "I was envisioning my house, but\n"
-	.string "this is where I TELEPORT?$"
+	.string "{JPN}あら… わたしの いえを\n"
+	.string "ねんじて いたら\l"
+	.string "なぜか こんな ところに…?$"
 
 SixIsland_GreenPath_Text_JaclynDefeat::
-	.string "Big boo-boo!$"
+	.string "{JPN}だい しっぱーい!$"
 
 SixIsland_GreenPath_Text_JaclynPostBattle::
-	.string "I am so scatterbrained!\p"
-	.string "I need to focus so I can TELEPORT\n"
-	.string "properly to my house!$"
+	.string "{JPN}もう ドジな あたし!\n"
+	.string "こんどこそ ちゃんと\l"
+	.string "おうちに かえらなくっちゃ!$"
 
 SixIsland_GreenPath_Text_LeftRouteSign::
-	.string "GREEN PATH\n"
-	.string "PATTERN BUSH AHEAD$"
+	.string "{JPN}ここは みどりのさんぽみち\n"
+	.string "このさき しるしのはやし$"
 
 SixIsland_GreenPath_Text_RightRouteSign::
-	.string "GREEN PATH\n"
-	.string "Think Green, Keep Nature Clean!$"
+	.string "{JPN}ここは みどりのさんぽみち\n"
+	.string "しぜんを だいじに!$"
 

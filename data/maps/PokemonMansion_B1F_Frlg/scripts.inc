@@ -31,30 +31,31 @@ PokemonMansion_B1F_EventScript_Ivan::
 	end
 
 PokemonMansion_B1F_Text_LewisIntro::
-	.string "Uh-oh...\n"
-	.string "Where am I now?$"
+	.string "{JPN}… ありゃ こまった\n"
+	.string "みちに まよったぞ$"
 
 PokemonMansion_B1F_Text_LewisDefeat::
-	.string "Awooh!$"
+	.string "{JPN}ひゅー どろどろ$"
 
 PokemonMansion_B1F_Text_LewisPostBattle::
-	.string "You can find stuff lying around.\n"
-	.string "The residents must've left them.$"
+	.string "{JPN}まえに すんでた ひとの\n"
+	.string "どうぐが けっこう おちてるぜ$"
 
 PokemonMansion_B1F_Text_IvanIntro::
-	.string "This place is ideal for a lab.\n"
-	.string "Look at all this space.$"
+	.string "{JPN}ここは ひろくて\n"
+	.string "けんきゅうするには いい ばしょだ$"
 
 PokemonMansion_B1F_Text_IvanDefeat::
-	.string "What was that for?$"
+	.string "{JPN}なにを するのかね$"
 
 PokemonMansion_B1F_Text_IvanPostBattle::
-	.string "I like it here.\n"
-	.string "It's conducive to my studies.$"
+	.string "{JPN}きに いったよ!\n"
+	.string "ここに すめば\l"
+	.string "けんきゅうも はかどるな…$"
 
 PokemonMansion_B1F_Text_MewtwoIsFarTooPowerful::
-	.string "Diary: Sept. 1\n"
-	.string "MEWTWO is far too powerful.\p"
-	.string "We have failed to curb its vicious\n"
-	.string "tendencies...$"
+	.string "{JPN}にっき 9がつ1にち\n"
+	.string "ポケモン ミュウツーは つよすぎる\p"
+	.string "ダメだ…\n"
+	.string "わたしの てには おえない!$"
 

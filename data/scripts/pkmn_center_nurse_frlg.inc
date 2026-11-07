@@ -77,18 +77,20 @@ Movement_Bow::
 	step_end
 
 Text_WelcomeWantToHealPkmn_Frlg::
-	.string "Welcome to our POKEMON CENTER!\p"
-	.string "Would you like me to heal your\n"
-	.string "POKEMON back to perfect health?$"
+	.string "{JPN}ようこそ!\n"
+	.string "ポケモンセンターへ\p"
+	.string "ここでは ポケモンの\n"
+	.string "たいりょく かいふくを いたします$"
 
 Text_TakeYourPkmnForFewSeconds_Frlg::
-	.string "Okay, I'll take your POKEMON for a\n"
-	.string "few seconds.$"
+	.string "{JPN}それでは\n"
+	.string "おあずかり いたします!$"
 
 Text_WeHopeToSeeYouAgain_Frlg::
-	.string "We hope to see you again!$"
+	.string "{JPN}またの\n"
+	.string "ごりようを おまちしてます!$"
 
 Text_RestoredPkmnToFullHealth_Frlg::
-	.string "Thank you for waiting.\n"
-	.string "We've restored your POKEMON to\l"
-	.string "full health.$"
+	.string "{JPN}おまちどおさまでした!\n"
+	.string "おあずかりした ポケモンは\l"
+	.string "みんな げんきに なりましたよ!$"

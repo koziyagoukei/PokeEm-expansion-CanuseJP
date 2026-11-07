@@ -2,89 +2,92 @@ Route21_South_Frlg_MapScripts::
 	.byte 0
 
 Route21_South_Text_JackIntro::
-	.string "I caught my POKEMON at sea.$"
+	.string "{JPN}ウチの ポケモンは\n"
+	.string "うみで とって きました$"
 
 Route21_South_Text_JackDefeat::
-	.string "Diver!!\n"
-	.string "Down!!$"
+	.string "{JPN}うー みーッ!$"
 
 Route21_South_Text_JackPostBattle::
-	.string "Where'd you catch your POKEMON?$"
+	.string "{JPN}きみの ポケモンは\n"
+	.string "どこで とって きたのかな?$"
 
 Route21_South_Text_JeromeIntro::
-	.string "Right now, I'm in a triathlon meet.$"
+	.string "{JPN}じつは いま トライアスロンの\n"
+	.string "まっさいちゅう なのだ!$"
 
 Route21_South_Text_JeromeDefeat::
-	.string "Pant...\n"
-	.string "Pant... Pant...$"
+	.string "{JPN}は… はーッ!$"
 
 Route21_South_Text_JeromePostBattle::
-	.string "I'm beat! But, I still have the\n"
-	.string "bike race and marathon left!$"
+	.string "{JPN}ば ばてた…!\n"
+	.string "あと… じてんしゃと\l"
+	.string "マラソンが あるのに…!$"
 
 Route21_South_Text_RolandIntro::
-	.string "Ahh!\n"
-	.string "Feel the sun and the wind!$"
+	.string "{JPN}あーッ!\n"
+	.string "ひざしが きもちいーぜ!$"
 
 Route21_South_Text_RolandDefeat::
-	.string "Yow!\n"
-	.string "I lost!$"
+	.string "{JPN}おれの まけ!$"
 
 Route21_South_Text_RolandPostBattle::
-	.string "I'm sunburnt to a crisp!$"
+	.string "{JPN}やけた やけた! まっくろだ!$"
 
 Route21_South_Text_ClaudeIntro::
-	.string "Hey, don't scare away the fish!$"
+	.string "{JPN}こまるなー きみ!\n"
+	.string "うみを あらさないで くれたまえ$"
 
 Route21_South_Text_ClaudeDefeat::
-	.string "Sorry! I'm just so frustrated from\n"
-	.string "not catching anything.$"
+	.string "{JPN}わるい!\n"
+	.string "つれないので きが たってた$"
 
 Route21_South_Text_ClaudePostBattle::
-	.string "Sheesh, I haven't caught a thing.\n"
-	.string "Could this place actually be a\l"
-	.string "giant pool or something?$"
+	.string "{JPN}つれんなあ!\n"
+	.string "まさか ここは おっきな\l"
+	.string "プール だったり して$"
 
 Route21_South_Text_NolanIntro::
-	.string "Keep me company till I get a hit.$"
+	.string "{JPN}アタリが くるまで\n"
+	.string "おまえの あいてでも してよう$"
 
 Route21_South_Text_NolanDefeat::
-	.string "That burned some time.$"
+	.string "{JPN}ひまつぶしに なった$"
 
 Route21_South_Text_NolanPostBattle::
-	.string "Oh wait!\n"
-	.string "I got a bite! Yeah!$"
+	.string "{JPN}… まて! いま あたりがッ!\n"
+	.string "あ…! ひいてる ひいてる!$"
 
 Route21_North_Text_LilIntro::
-	.string "LIL: Huh? A battle?\n"
-	.string "IAN, can't you do it alone?$"
+	.string "{JPN}チサ『えー しょうぶ?\n"
+	.string "カツだけ やれば いいじゃない!$"
 
 Route21_North_Text_LilDefeat::
-	.string "LIL: Oh, see?\n"
-	.string "We lost. Happy now?$"
+	.string "{JPN}チサ『あーあ\n"
+	.string "まけちゃったわ$"
 
 Route21_North_Text_LilPostBattle::
-	.string "LIL: I'm tired.\n"
-	.string "Can't we go home already?$"
+	.string "{JPN}チサ『つかれた\n"
+	.string "もう かえろうよー$"
 
 Route21_North_Text_LilNotEnoughMons::
-	.string "LIL: Huh? A battle?\n"
-	.string "I can't be bothered to do it alone.\l"
-	.string "Bring two POKEMON, won't you?$"
+	.string "{JPN}チサ『えー しょうぶ?\n"
+	.string "わたし ひとりじゃ めんどくさい\l"
+	.string "ポケモン 2ひき つれてきてえ$"
 
 Route21_North_Text_IanIntro::
-	.string "IAN: My sis doesn't get enough\n"
-	.string "exercise, so I made her come.$"
+	.string "{JPN}カツ『うんどう ぶそくの\n"
+	.string "ねーちゃんを ひっぱって きたんだ$"
 
 Route21_North_Text_IanDefeat::
-	.string "IAN: Awww, Sis!\n"
-	.string "Get it together!$"
+	.string "{JPN}カツ『ねーちゃん\n"
+	.string "しっかり しろよな!$"
 
 Route21_North_Text_IanPostBattle::
-	.string "IAN: Come on, Sis!\p"
-	.string "You're not going to lose weight\n"
-	.string "like this!$"
+	.string "{JPN}カツ『もう ねーちゃん\n"
+	.string "そんなんじゃ やせねえぞ!$"
 
 Route21_North_Text_IanNotEnoughMons::
-	.string "IAN: We want a two-on-two battle.\n"
-	.string "So can you bring two POKEMON?$"
+	.string "{JPN}カツ『2たい2で しょうぶだ!\n"
+	.string "ポケモンが 2ひき いたら\l"
+	.string "しょうぶ できるよ!$"

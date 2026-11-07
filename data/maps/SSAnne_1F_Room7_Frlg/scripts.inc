@@ -7,13 +7,14 @@ SSAnne_1F_Room7_EventScript_Thomas::
 	end
 
 SSAnne_1F_Room7_Text_ThomasIntro::
-	.string "I am but a solitary traveler...\p"
-	.string "My sole companions and friends are\n"
-	.string "POKEMON I caught on my journeys...$"
+	.string "{JPN}わたしは たびびと…!\p"
+	.string "たびさきで とった ポケモン だけが\n"
+	.string "わたしの ともだち$"
 
 SSAnne_1F_Room7_Text_ThomasDefeat::
-	.string "My, my friends...$"
+	.string "{JPN}と……ともだちが……$"
 
 SSAnne_1F_Room7_Text_ThomasPostBattle::
-	.string "You should be nice to friends!$"
+	.string "{JPN}あのね!\n"
+	.string "ともだちは だいじに しなさい!$"
 

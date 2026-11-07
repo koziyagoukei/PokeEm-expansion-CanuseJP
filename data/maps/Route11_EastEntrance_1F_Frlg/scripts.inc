@@ -15,18 +15,18 @@ Route11_EastEntrance_1F_Text_BagIsFull::
 	.string "いっぱい みたい だね$"
 
 Route11_EastEntrance_1F_Text_ManInLavenderRatesNames::
-	.string "Don't you think it's hard to think\n"
-	.string "up good names for POKEMON?\p"
-	.string "Especially if you've caught a\n"
-	.string "whole bunch?\p"
-	.string "In LAVENDER TOWN, there's a man\n"
-	.string "who rates POKEMON nicknames.\p"
-	.string "He can even help you rename your\n"
-	.string "POKEMON, too.$"
+	.string "{JPN}ポケモンを たくさん とると\n"
+	.string "なまえを つけて あげるのに\l"
+	.string "くろう しちゃう でしょ!\p"
+	.string "この さきの シオン タウンに\n"
+	.string "ポケモンの なまえを\l"
+	.string "うらなって くれる ひとが いるよ\p"
+	.string "ポケモンに もっと いい なまえを\n"
+	.string "つけ なおす ことも できるよ$"
 
 Route11_EastEntrance_1F_Text_RockTunnelToReachLavender::
-	.string "If you're aiming to reach LAVENDER\n"
-	.string "TOWN, take ROCK TUNNEL.\p"
-	.string "You can get to ROCK TUNNEL from\n"
-	.string "CERULEAN CITY.$"
+	.string "{JPN}シオンタウンへ むかうなら\n"
+	.string "イワヤマトンネルを ぬけるといいよ\p"
+	.string "ハナダシティから なら\n"
+	.string "イワヤマトンネルに いけるよ$"
 

@@ -61,50 +61,50 @@ Route10_PokemonCenter_1F_EventScript_GetAideRequestInfo::
 	return
 
 Route10_PokemonCenter_1F_Text_EveryTypeStrongerThanOthers::
-	.string "The types of POKEMON match up\n"
-	.string "differently with each other.\p"
-	.string "Every type is stronger than some\n"
-	.string "types and weaker than others.$"
+	.string "{JPN}ポケモンは タイプに よって\n"
+	.string "ゆうりに たたかえる あいてと\l"
+	.string "にがてな あいてが いるのだ$"
 
 Route10_PokemonCenter_1F_Text_NuggetUselessSoldFor5000::
-	.string "A NUGGET is totally useless.\n"
-	.string "So I sold it for ¥5000.$"
+	.string "{JPN}つかいみち ないから きんのたまを\n"
+	.string "うったら 5000円で うれた!$"
 
 Route10_PokemonCenter_1F_Text_HeardGhostsHauntLavender::
-	.string "I heard that ghosts haunt\n"
-	.string "LAVENDER TOWN.$"
+	.string "{JPN}シオン タウンで\n"
+	.string "ゆうれい ポケモンが でるって\l"
+	.string "みんな さわいでるよ$"
 
 Route10_PokemonCenter_1F_Text_GiveEverstoneIfCaught20Mons::
-	.string "Oh... {PLAYER}!\n"
-	.string "I've been looking for you!\p"
-	.string "It's me, one of the ever-present\n"
-	.string "AIDES to PROF. OAK.\p"
-	.string "If your POKeDEX has complete data\n"
-	.string "on twenty species, I'm supposed to\l"
-	.string "give you a reward from PROF. OAK.\p"
-	.string "He entrusted me with this\n"
-	.string "EVERSTONE.\p"
-	.string "So, {PLAYER}, let me ask you.\p"
-	.string "Have you gathered data on at least\n"
-	.string "twenty kinds of POKEMON?$"
+	.string "{JPN}あ… {PLAYER}{KUN}\n"
+	.string "さがして いたんですよ!\l"
+	.string "ぼく まいど おなじみ\l"
+	.string "オーキドはかせの じょしゅです!\p"
+	.string "ポケモンずかんが 20しゅるい\n"
+	.string "あつまってる ようなら\l"
+	.string "はかせから かわらずのいしを\l"
+	.string "わたすように いわれて います!\p"
+	.string "{PLAYER}{KUN} どうですか?\n"
+	.string "つかまえた ポケモンは\l"
+	.string "20しゅるい より おおい かな?$"
 
 Route10_PokemonCenter_1F_Text_GreatHereYouGo::
-	.string "Great! You have caught or owned\n"
-	.string "{STR_VAR_3} kinds of POKEMON!\p"
-	.string "Congratulations!\n"
-	.string "Here you go!$"
+	.string "{JPN}… … なるほど!\n"
+	.string "つかまえた ポケモンは…\l"
+	.string "{STR_VAR_3}しゅるい ですね!\n"
+	.string "おめでとう!\p"
+	.string "それでは\n"
+	.string "これを おわたし します!$"
 
 Route10_PokemonCenter_1F_Text_ReceivedEverstoneFromAide::
-	.string "{PLAYER} received the EVERSTONE\n"
-	.string "from the AIDE.$"
+	.string "{JPN}{PLAYER}は じょしゅ から\n"
+	.string "かわらずのいしを もらった!$"
 
 Route10_PokemonCenter_1F_Text_ExplainEverstone::
-	.string "Making POKEMON evolve certainly\n"
-	.string "can add to the POKeDEX.\p"
-	.string "However, at times, you may not\n"
-	.string "want a certain POKEMON to evolve.\p"
-	.string "In that case, give the EVERSTONE\n"
-	.string "to that POKEMON.\p"
-	.string "It will prevent evolution according\n"
-	.string "to the PROFESSOR.$"
+	.string "{JPN}ポケモンを しんか させても\n"
+	.string "ずかんは ふえる けど…\p"
+	.string "どうしても しんか させたくない\n"
+	.string "ポケモンが いたときは\l"
+	.string "これを ポケモンに もたせれば\l"
+	.string "しんか しないんだって\l"
+	.string "はかせが いって いました$"
 

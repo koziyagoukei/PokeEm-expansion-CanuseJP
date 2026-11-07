@@ -78,158 +78,154 @@ SixIsland_PatternBush_EventScript_Layton::
 	end
 
 SixIsland_PatternBush_Text_BethanyIntro::
-	.string "I'm curious, how do you raise your\n"
-	.string "POKEMON?$"
+	.string "{JPN}あなたは どんな ふうに\n"
+	.string "ポケモンを そだてて いるの?$"
 
 SixIsland_PatternBush_Text_BethanyDefeat::
-	.string "You raise your POKEMON with a\n"
-	.string "whole lot of love!$"
+	.string "{JPN}あいじょう たっぷりね!$"
 
 SixIsland_PatternBush_Text_BethanyPostBattle::
-	.string "In the same way your mother raised\n"
-	.string "you full of love, you should raise\l"
-	.string "your POKEMON.$"
+	.string "{JPN}あなたのママが\n"
+	.string "あなたを そだてた ように\l"
+	.string "あなたも ポケモンを そだてるのよ$"
 
 SixIsland_PatternBush_Text_AllisonIntro::
-	.string "I'm working to preserve the natural\n"
-	.string "ecology of POKEMON here.$"
+	.string "{JPN}この はやしで ポケモンの\n"
+	.string "しぜんほごを おこなって いるの$"
 
 SixIsland_PatternBush_Text_AllisonDefeat::
-	.string "Oh, for someone so young, you are\n"
-	.string "tremendous!$"
+	.string "{JPN}わかいのに すごいのねえ$"
 
 SixIsland_PatternBush_Text_AllisonPostBattle::
-	.string "I'm not saying that you shouldn't\n"
-	.string "catch POKEMON.\p"
-	.string "I just want people to raise their\n"
-	.string "POKEMON responsibly.$"
+	.string "{JPN}ポケモンを つかまえちゃ ダメって\n"
+	.string "わけでは ないの\l"
+	.string "つかまえたら だいじに そだててね$"
 
 SixIsland_PatternBush_Text_GarretIntro::
-	.string "I caught a BUG POKEMON that lives\n"
-	.string "only around here!$"
+	.string "{JPN}このへんに しか いない\n"
+	.string "むし ポケモン とったぞー$"
 
 SixIsland_PatternBush_Text_GarretDefeat::
-	.string "Heheh...\n"
-	.string "Isn't my POKEMON awesome?$"
+	.string "{JPN}へへ…\n"
+	.string "ぼくの ポケモン いいでしょ$"
 
 SixIsland_PatternBush_Text_GarretPostBattle::
-	.string "There's a girl near the BUSH who\n"
-	.string "measures HERACROSS for TRAINERS.$"
+	.string "{JPN}ヘラクロスの おおきさを\n"
+	.string "はかって くれる おねえさんが\l"
+	.string "はやしの ちかくに いるんだよ$"
 
 SixIsland_PatternBush_Text_JonahIntro::
-	.string "You know, it just doesn't feel right\n"
-	.string "if I don't use BUG POKEMON.$"
+	.string "{JPN}やっぱ むしポケ じゃないと\n"
+	.string "ポケモン やってる きが しない!$"
 
 SixIsland_PatternBush_Text_JonahDefeat::
-	.string "It's okay, losing is a fun part of\n"
-	.string "POKEMON's appeal, too.$"
+	.string "{JPN}いいよ! まけるのも\n"
+	.string "ポケモンの だいごみ だもん$"
 
 SixIsland_PatternBush_Text_JonahPostBattle::
-	.string "By the way, appeal is a weird\n"
-	.string "word, if you think about it.\p"
-	.string "Like, is it like an orange peel?\n"
-	.string "Or like a ringing bell?$"
+	.string "{JPN}ところでさ\n"
+	.string "だいごみ って なんだろ?\l"
+	.string "でかいゴミの ことかな?$"
 
 SixIsland_PatternBush_Text_VanceIntro::
-	.string "Yeah, yeah, yeah!\n"
-	.string "Look at all the BUG POKEMON!$"
+	.string "{JPN}うきゃ うきゃ!\n"
+	.string "むしポケモンが いっぱい だあ!$"
 
 SixIsland_PatternBush_Text_VanceDefeat::
-	.string "I got beat while I was still busy\n"
-	.string "celebrating!$"
+	.string "{JPN}よろこんでる うちに\n"
+	.string "まけちまったい$"
 
 SixIsland_PatternBush_Text_VancePostBattle::
-	.string "I'm going to bring my little brother\n"
-	.string "here next time.$"
+	.string "{JPN}こんど おとうとも\n"
+	.string "つれてきて やろーっと!$"
 
 SixIsland_PatternBush_Text_NashIntro::
-	.string "Look, look! There are funny\n"
-	.string "patterns on the ground.$"
+	.string "{JPN}ねえねえ!\n"
+	.string "じめんに へんな もようが あるよ$"
 
 SixIsland_PatternBush_Text_NashDefeat::
-	.string "Super awesome!$"
+	.string "{JPN}すげー!$"
 
 SixIsland_PatternBush_Text_NashPostBattle::
-	.string "The funny patterns on the ground...\p"
-	.string "They look like the patterns on my\n"
-	.string "grandpa's clothes.$"
+	.string "{JPN}じめんの へんな もよう…\p"
+	.string "じいちゃんの きてる ふくの\n"
+	.string "ガラに にてるぞ…$"
 
 SixIsland_PatternBush_Text_CordellIntro::
-	.string "I bet you think I'm just some guy,\n"
-	.string "don't you, eh?$"
+	.string "{JPN}おまえ おれの こと\n"
+	.string "いなかもん とか おもっただろ$"
 
 SixIsland_PatternBush_Text_CordellDefeat::
-	.string "I bet you think I'm weak,\n"
-	.string "don't you, eh?$"
+	.string "{JPN}いなかもんは よわい とか\n"
+	.string "おもった だろ ちきしょー$"
 
 SixIsland_PatternBush_Text_CordellPostBattle::
-	.string "Ayup, you townies come around all\n"
-	.string "so dandy with a hat that flashy...\p"
-	.string "How about giving me that?$"
+	.string "{JPN}そんな カッコつけた ぼうし\n"
+	.string "かぶっちゃってさー\p"
+	.string "おれに くれよ!$"
 
 SixIsland_PatternBush_Text_DaliaIntro::
-	.string "Take a deep breath.\n"
-	.string "Isn't the air delicious?$"
+	.string "{JPN}しんこきゅう して みて\n"
+	.string "くうきが おいしいよ!$"
 
 SixIsland_PatternBush_Text_DaliaDefeat::
-	.string "If you'd like, I can teach you how\n"
-	.string "to breathe properly.$"
+	.string "{JPN}しんこきゅうの ほうほうを\n"
+	.string "おしえて あげる!$"
 
 SixIsland_PatternBush_Text_DaliaPostBattle::
-	.string "First, exhale.\n"
-	.string "Blow everything out.\p"
-	.string "When you can't exhale anymore,\n"
-	.string "inhale the clean air!\p"
-	.string "Isn't it refreshing?$"
+	.string "{JPN}まず おもいきり いきを はいて\p"
+	.string "もうダメって ほど はきだしたら\n"
+	.string "しんせんな くうきを\l"
+	.string "おおきく すいこむの!\p"
+	.string "すっきり した?$"
 
 SixIsland_PatternBush_Text_JoanaIntro::
-	.string "I love BUG POKEMON.\n"
-	.string "That's why I'm here all the time.\p"
-	.string "Am I the only girl like that?$"
+	.string "{JPN}むし ポケモンが だいすきで\n"
+	.string "ここに よく くるんだ!\l"
+	.string "こんな おんなのこ あたしだけ?$"
 
 SixIsland_PatternBush_Text_JoanaDefeat::
-	.string "I lost, but I'm still laughing.\n"
-	.string "Am I the only girl like that?$"
+	.string "{JPN}まけたけど わらって いられるよ!\n"
+	.string "こんな おんなのこ あたしだけ?$"
 
 SixIsland_PatternBush_Text_JoanaPostBattle::
-	.string "I'm going to keep on collecting\n"
-	.string "BUG POKEMON.\p"
-	.string "Am I the only girl like that?$"
+	.string "{JPN}これからも むし ポケモン\n"
+	.string "いっぱい あつめるんだー!\l"
+	.string "こんな おんなのこ あたしだけ?$"
 
 SixIsland_PatternBush_Text_RileyIntro::
-	.string "This is a good spot.\n"
-	.string "I'll pitch my tent here.$"
+	.string "{JPN}きめたぞ\n"
+	.string "ここに テントを はろうっと$"
 
 SixIsland_PatternBush_Text_RileyDefeat::
-	.string "Wimped out...$"
+	.string "{JPN}へなへな$"
 
 SixIsland_PatternBush_Text_RileyPostBattle::
-	.string "I'm going to observe the night sky\n"
-	.string "here.$"
+	.string "{JPN}ここで よぞらの\n"
+	.string "かんさつを するのさ$"
 
 SixIsland_PatternBush_Text_MarcyIntro::
-	.string "Oh, yuck!\n"
-	.string "I think a bug stung me!$"
+	.string "{JPN}いやーん!\n"
+	.string "ムシに さされちゃった かな?$"
 
 SixIsland_PatternBush_Text_MarcyDefeat::
-	.string "It wasn't a bug.\n"
-	.string "I cut my shin on some grass.$"
+	.string "{JPN}ムシじゃ なくて\n"
+	.string "くさで あしを きってた みたい$"
 
 SixIsland_PatternBush_Text_MarcyPostBattle::
-	.string "A little cut like that...\n"
-	.string "A little spit's enough to cure it!$"
+	.string "{JPN}この くらいの キズ\n"
+	.string "なめときゃ なおるわね!$"
 
 SixIsland_PatternBush_Text_LaytonIntro::
-	.string "Have you noticed something odd\n"
-	.string "about these parts?$"
+	.string "{JPN}きみ なにか\n"
+	.string "きがついた ことは ないかね?$"
 
 SixIsland_PatternBush_Text_LaytonDefeat::
-	.string "Have you taken a good look around\n"
-	.string "your feet?$"
+	.string "{JPN}あしもとに ちゅうもく\n"
+	.string "して みたかい?$"
 
 SixIsland_PatternBush_Text_LaytonPostBattle::
-	.string "There are places here in PATTERN\n"
-	.string "BUSH where grass won't grow.\p"
-	.string "What could be the cause of such\n"
-	.string "a phenomenon?$"
+	.string "{JPN}この はやし には\n"
+	.string "くさが はえない ところが ある…\p"
+	.string "どうして なんだろう?$"
 

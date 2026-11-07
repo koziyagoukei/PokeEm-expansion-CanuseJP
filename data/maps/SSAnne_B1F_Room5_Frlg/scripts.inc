@@ -16,10 +16,11 @@ SSAnne_B1F_Room5_EventScript_Machoke::
 	end
 
 SSAnne_B1F_Room5_Text_MachokeHasStrengthToMoveRocks::
-	.string "My buddy MACHOKE is super strong!\p"
-	.string "He has enough STRENGTH to move\n"
-	.string "big rocks!$"
+	.string "{JPN}おれの あいぼう ゴーリキーは\n"
+	.string "ごっつい ちから もち!\p"
+	.string "すごく おもい いわ だって\n"
+	.string "かいりきで うごかせるぜ!$"
 
 SSAnne_B1F_Room5_Text_Machoke::
-	.string "MACHOKE: Gwoh! Goggoh!$"
+	.string "{JPN}ゴーリキー『ごおー ごごごー$"
 

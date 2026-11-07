@@ -6,6 +6,6 @@ Route12_NorthEntrance_1F_EventScript_Guard::
 	end
 
 Route12_NorthEntrance_1F_Text_LookoutSpotUpstairs::
-	.string "There's a lookout spot upstairs.\n"
-	.string "The view is magnificent.$"
+	.string "{JPN}2かいは みはらしの よい\n"
+	.string "てんぼうだいに なってます$"
 

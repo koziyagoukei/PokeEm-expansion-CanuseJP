@@ -20,15 +20,17 @@ SaffronCity_CopycatsHouse_1F_EventScript_Chansey::
 	end
 
 SaffronCity_CopycatsHouse_1F_Text_DaughterIsSelfCentered::
-	.string "My daughter is so self-centered.\n"
-	.string "She has but a few friends.$"
+	.string "{JPN}たくの むすめは\n"
+	.string "ほんと わがままに そだって…\l"
+	.string "おともだちも あまり おりませんの$"
 
 SaffronCity_CopycatsHouse_1F_Text_DaughterLikesToMimicPeople::
-	.string "My daughter likes to mimic people.\n"
-	.string "It's rather vexing.\p"
-	.string "Her mimicry has earned her the\n"
-	.string "nickname COPYCAT around here.$"
+	.string "{JPN}… こまった ことに むすめは\n"
+	.string "ひとの まねが すきでな!\p"
+	.string "しょっちゅう ひとを からかう ので\n"
+	.string "きんじょ じゃ\l"
+	.string "モノマネ むすめと よばれとる!$"
 
 SaffronCity_CopycatsHouse_1F_Text_Chansey::
-	.string "CHANSEY: Chaan! Sii!$"
+	.string "{JPN}ラッキー『ラッ きぃ!$"
 

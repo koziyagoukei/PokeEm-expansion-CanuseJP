@@ -195,5 +195,6 @@ EventScript_SailToSevenIsland::
 	end
 
 Text_AllAboardSeagallopNum::
-	.string "All right!\n"
-	.string "All aboard SEAGALLOP HI-SPEED {STR_VAR_1}!$"
+	.string "{JPN}よしッ!\n"
+	.string "シーギャロップ ハイスピード{STR_VAR_1}に\l"
+	.string "のりこんで くれ!$"

@@ -19,40 +19,43 @@ SevenIsland_EventScript_Scientist::
 	end
 
 Text_SwordsDanceTeach::
-	.string "Not many people come out here.\p"
-	.string "If I train here, I'm convinced that\n"
-	.string "I'll get stronger and stronger.\p"
-	.string "Yep, stronger and stronger...\p"
-	.string "How would you like to learn a move\n"
-	.string "like that? It's SWORDS DANCE.$"
+	.string "{JPN}あまり ひとが こない\n"
+	.string "この ばしょで しゅぎょう すると\l"
+	.string "どんどん つよく なっていく\l"
+	.string "そんな きが する!\p"
+	.string "どんどん つよく なる…\p"
+	.string "そう そんな わざ\n"
+	.string "つるぎのまい… おぼえて みるか?$"
 
 Text_SwordsDanceDeclined::
-	.string "Well, that's fine, too.$"
+	.string "{JPN}ふむ\n"
+	.string "それも いいだろう$"
 
 Text_SwordsDanceWhichMon::
-	.string "All right, pick which POKEMON\n"
-	.string "I should teach it to.$"
+	.string "{JPN}よし\n"
+	.string "おしえる ポケモンを えらんでくれ$"
 
 Text_SwordsDanceTaught::
-	.string "If only we could keep getting\n"
-	.string "stronger and stronger, eh?$"
+	.string "{JPN}われわれも\n"
+	.string "どんどん つよく なりたいものだな$"
 
 SevenIsland_Text_IslandSign::
-	.string "SEVEN ISLAND\n"
-	.string "Quest Island of Infinity$"
+	.string "{JPN}ここは 7のしま\n"
+	.string "おわりなく はてしなき もとめじま$"
 
 SevenIsland_Text_IslandsMadeInSevenDays::
-	.string "These islands are called the SEVII\n"
-	.string "ISLANDS because there are seven.\p"
-	.string "...Or at least that's what the young\n"
-	.string "people believe.\p"
-	.string "The truth is, these islands are so\n"
-	.string "named because they are said to\l"
-	.string "have been made in seven days.$"
+	.string "{JPN}しまが 7つあるから\n"
+	.string "ナナシマと よばれている…\p"
+	.string "と さいきんの わかいものは\n"
+	.string "おもって おるが\p"
+	.string "7にちで できた しまだという\n"
+	.string "いいつたえ から\l"
+	.string "この なまえが ついたのじゃ$"
 
 SevenIsland_Text_IslandVirtuallyUntouched::
-	.string "This island has been left virtually\n"
-	.string "untouched in its natural state.\p"
-	.string "It could be a little difficult to\n"
-	.string "hike around because of that.$"
+	.string "{JPN}この しまは\n"
+	.string "ほぼ しぜんの かたちを\l"
+	.string "のこして あります\p"
+	.string "だから すこし\n"
+	.string "あるきにくい かも しれませんね$"
 

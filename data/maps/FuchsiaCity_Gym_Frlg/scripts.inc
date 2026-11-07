@@ -90,158 +90,158 @@ FuchsiaCity_Gym_EventScript_GymStatuePostVictory::
 	end
 
 FuchsiaCity_Gym_Text_KogaIntro::
-	.string "KOGA: Fwahahaha!\p"
-	.string "A mere child like you dares to\n"
-	.string "challenge me?\p"
-	.string "The very idea makes me shiver\n"
-	.string "with mirth!\p"
-	.string "Very well, I shall show you true\n"
-	.string "terror as a ninja master.\p"
-	.string "Poison brings steady doom.\n"
-	.string "Sleep renders foes helpless.\p"
-	.string "Despair to the creeping horror of\n"
-	.string "POISON-type POKEMON!{PLAY_BGM}{MUS_RG_ENCOUNTER_GYM_LEADER}$"
+	.string "{JPN}キョウ『… ファ ファ ファ!\p"
+	.string "こわっぱ ごときが\n"
+	.string "せっしゃに たたかいを いどむとは\l"
+	.string "かたはら いたいわ!\p"
+	.string "… どくを くらったら じめつ!\n"
+	.string "ねむって しまったら むていこう\p"
+	.string "… しのびの わざの ごくい!\n"
+	.string "どくポケモンの おそろしさ!\l"
+	.string "うけて みるが よい!{PLAY_BGM MUS_RG_ENCOUNTER_GYM_LEADER}$"
 
 FuchsiaCity_Gym_Text_KogaDefeat::
-	.string "Humph!\n"
-	.string "You have proven your worth!\p"
-	.string "Here!\n"
-	.string "Take the SOULBADGE!$"
+	.string "{JPN}ふん…!\n"
+	.string "おぬし やりおるな!\p"
+	.string "そら!\n"
+	.string "ピンク バッジを うけとれ!$"
 
 FuchsiaCity_Gym_Text_KogaPostBattle::
-	.string "When afflicted by TOXIC, a POKEMON\n"
-	.string "suffers more and more.\p"
-	.string "It suffers worsening damage as the\n"
-	.string "battle wears on!\p"
-	.string "It will surely terrorize foes!$"
+	.string "{JPN}どくどくは どくを あびたら\n"
+	.string "1ターン ごとに どんどん\l"
+	.string "ダメージが おおきく なる!\p"
+	.string "これは あいてに\n"
+	.string "きょうふを あたえる わざ なのだ!$"
 
 FuchsiaCity_Gym_Text_KogaExplainSoulBadge::
-	.string "Now that you have the SOULBADGE,\n"
-	.string "the DEFENSE of your POKEMON rises.\p"
-	.string "It also lets you SURF outside of\n"
-	.string "battle.\p"
-	.string "Ah!\n"
-	.string "Take this, too!$"
+	.string "{JPN}ピンク バッジを もって おれば\n"
+	.string "おぬしの ポケモンの\l"
+	.string "ぼうぎょ りょくを あげる!\p"
+	.string "たたかって ない ときでも\n"
+	.string "なみのりの わざを\l"
+	.string "つかえる ように なる!\p"
+	.string "そうだ…! これを おぬしに!$"
 
 FuchsiaCity_Gym_Text_ReceivedTM06FromKoga::
-	.string "{PLAYER} received TM06\n"
-	.string "from KOGA.$"
+	.string "{JPN}{PLAYER}は キョウ から\n"
+	.string "わざマシン06を もらった!$"
 
 FuchsiaCity_Gym_Text_KogaExplainTM06::
-	.string "Sealed within that TM06 lies\n"
-	.string "TOXIC!\p"
-	.string "It is a secret technique dating\n"
-	.string "back some four hundred years.$"
+	.string "{JPN}400ねん むかし より\n"
+	.string "わがやに つたわる ポケモン わざ\p"
+	.string "わざマシン06には ごくい!\n"
+	.string "どくどくが ふういん してある!$"
 
 FuchsiaCity_Gym_Text_MakeSpaceForThis::
-	.string "Make space for this, child!$"
+	.string "{JPN}にもつが いっぱいだ$"
 
 FuchsiaCity_Gym_Text_KaydenIntro::
-	.string "Strength isn't the key for POKEMON.\n"
-	.string "Do you understand this?\p"
-	.string "POKEMON is about strategy!\p"
-	.string "I'll show you how strategy can\n"
-	.string "beat brute strength.$"
+	.string "{JPN}ただ つよい だけでは だめだ!\n"
+	.string "… わかるか?\p"
+	.string "ポケモンは テクニックだ!\p"
+	.string "この ジムに きた から には\n"
+	.string "そういう ポケモンの おく ふかさ\l"
+	.string "タップリ おしえて やる!$"
 
 FuchsiaCity_Gym_Text_KaydenDefeat::
-	.string "What?\n"
-	.string "Extraordinary!$"
+	.string "{JPN}…!\n"
+	.string "ただもの では ない!$"
 
 FuchsiaCity_Gym_Text_KaydenPostBattle::
-	.string "So, you mix brawn with brains?\n"
-	.string "Good strategy!\p"
-	.string "That's remarkable for a child\n"
-	.string "TRAINER.$"
+	.string "{JPN}こどもの トレーナー とはいえ\n"
+	.string "パワー だけでなく\l"
+	.string "テクニックも みがいてるな!$"
 
 FuchsiaCity_Gym_Text_KirkIntro::
-	.string "I was a magician once upon a time.\p"
-	.string "But I dreamt of becoming a ninja,\n"
-	.string "so I joined this GYM.$"
+	.string "{JPN}マジシャン だった おれは\n"
+	.string "ニンジャに あこがれて\l"
+	.string "この セキチク ジムに はいった!$"
 
 FuchsiaCity_Gym_Text_KirkDefeat::
-	.string "I'm done for!$"
+	.string "{JPN}… やられた!$"
 
 FuchsiaCity_Gym_Text_KirkPostBattle::
-	.string "Even though I've lost, I will keep\n"
-	.string "training according to the teachings\l"
-	.string "of KOGA, my ninja master.$"
+	.string "{JPN}たとえ まけても おれは\n"
+	.string "ニンジャ マスター\l"
+	.string "キョウの おしえに いきる つもりだ$"
 
 FuchsiaCity_Gym_Text_NateIntro::
-	.string "Let's see you beat my special\n"
-	.string "techniques!$"
+	.string "{JPN}おれの ポケモン あやしの わざ\n"
+	.string "たっぷりと あじわいな!$"
 
 FuchsiaCity_Gym_Text_NateDefeat::
-	.string "You had me fooled!$"
+	.string "{JPN}… そうか!\n"
+	.string "おまえも わざ つかいか?$"
 
 FuchsiaCity_Gym_Text_NatePostBattle::
-	.string "I like poison and sleep techniques,\n"
-	.string "as they linger after battle!$"
+	.string "{JPN}たたかい おわった あとでも\n"
+	.string "どく ねむり といった こうかは\l"
+	.string "のこる ところが すき だぜ!$"
 
 FuchsiaCity_Gym_Text_PhilIntro::
-	.string "Stop right there!\p"
-	.string "The famed invisible walls of\n"
-	.string "FUCHSIA GYM have you frustrated?$"
+	.string "{JPN}おっと! まちな!\p"
+	.string "セキチク ジムの めいぶつ\n"
+	.string "みえない かべ システムは どうだ$"
 
 FuchsiaCity_Gym_Text_PhilDefeat::
-	.string "Whoa!\n"
-	.string "You've got it!$"
+	.string "{JPN}… ほお!\n"
+	.string "やる じゃないか!$"
 
 FuchsiaCity_Gym_Text_PhilPostBattle::
-	.string "You impressed me!\n"
-	.string "Here's a hint!\p"
-	.string "Look very closely for gaps in the\n"
-	.string "invisible walls!$"
+	.string "{JPN}おまえは ほねが ありそう だ!\n"
+	.string "とくべつに ヒントを おしえよう!\p"
+	.string "みえない かべは よく みると\n"
+	.string "しきりが みえて くる…!$"
 
 FuchsiaCity_Gym_Text_EdgarIntro::
-	.string "I also study the way of the ninja\n"
-	.string "with Master KOGA!\p"
-	.string "Ninja have a long history of using\n"
-	.string "animals!$"
+	.string "{JPN}この おれも\n"
+	.string "ニンジャ キョウの もんかせい!\p"
+	.string "ニンジャは むかし から\n"
+	.string "よく どうぶつを つかった という$"
 
 FuchsiaCity_Gym_Text_EdgarDefeat::
-	.string "Awoo!$"
+	.string "{JPN}がおーん…!$"
 
 FuchsiaCity_Gym_Text_EdgarPostBattle::
-	.string "I still have much to learn.$"
+	.string "{JPN}まだ まだ!\n"
+	.string "おれには しゅぎょうが たりない$"
 
 FuchsiaCity_Gym_Text_ShawnIntro::
-	.string "Master KOGA comes from a long line\n"
-	.string "of ninjas.\p"
-	.string "What did you descend from?$"
+	.string "{JPN}ここの リーダー キョウは\n"
+	.string "イガ ニンジャの しそんだ!\p"
+	.string "おいッ!\n"
+	.string "おまえは なにの しそん なんだ?$"
 
 FuchsiaCity_Gym_Text_ShawnDefeat::
-	.string "You're more skilled than I'd\n"
-	.string "thought!$"
+	.string "{JPN}なかなか できるな!$"
 
 FuchsiaCity_Gym_Text_ShawnPostBattle::
-	.string "Where there is light, there is\n"
-	.string "shadow!\p"
-	.string "Light and shadow!\n"
-	.string "Which do you choose?$"
+	.string "{JPN}… ひかり ある ところに\n"
+	.string "かげが ある!\p"
+	.string "ひかりと かげ!\n"
+	.string "おまえは どちらを えらぶ?$"
 
 FuchsiaCity_Gym_Text_GymGuyAdvice::
-	.string "Yo!\n"
-	.string "Champ in the making!\p"
-	.string "FUCHSIA GYM is a tricked-up place.\n"
-	.string "It's riddled with invisible walls!\p"
-	.string "KOGA might appear close, but he's\n"
-	.string "blocked off.\p"
-	.string "You have to find gaps in the walls\n"
-	.string "to reach him.$"
+	.string "{JPN}おーす!\n"
+	.string "みらいの チャンピオン!\p"
+	.string "セキチク ジムは からくり やしき\n"
+	.string "みえない かべで しきられてる!\p"
+	.string "キョウの やつは すぐ そこに\n"
+	.string "いる ように みえるが…\p"
+	.string "みえない かべの とぎれてる とこを\n"
+	.string "さがし ださないと あえないぜ!$"
 
 FuchsiaCity_Gym_Text_GymGuyPostVictory::
-	.string "It's amazing how ninja can terrify,\n"
-	.string "even now!$"
+	.string "{JPN}げんだいに なお いき のこる\n"
+	.string "ニンジャの こわさを みたな!$"
 
 FuchsiaCity_Gym_Text_GymStatue::
-	.string "FUCHSIA POKEMON GYM\n"
-	.string "LEADER: KOGA\p"
-	.string "WINNING TRAINERS:\n"
+	.string "{JPN}セキチク ポケモン ジム\n"
+	.string "キョウ にんてい トレーナー!\l"
 	.string "{RIVAL}$"
 
 FuchsiaCity_Gym_Text_GymStatuePlayerWon::
-	.string "FUCHSIA POKEMON GYM\n"
-	.string "LEADER: KOGA\p"
-	.string "WINNING TRAINERS:\n"
-	.string "{RIVAL}, {PLAYER}$"
+	.string "{JPN}セキチク ポケモン ジム\n"
+	.string "キョウ にんてい トレーナー!\l"
+	.string "{RIVAL} {PLAYER}$"
 

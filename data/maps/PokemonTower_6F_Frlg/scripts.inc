@@ -46,45 +46,52 @@ PokemonTower_6F_EventScript_Jennifer::
 	end
 
 PokemonTower_6F_Text_AngelicaIntro::
-	.string "Give...me...\n"
-	.string "blood...$"
+	.string "{JPN}… チ… ニ… ウエッ!\n"
+	.string "… テ… ルッ…!$"
 
 PokemonTower_6F_Text_AngelicaDefeat::
-	.string "Groan!$"
+	.string "{JPN}…ううーむ$"
 
 PokemonTower_6F_Text_AngelicaPostBattle::
-	.string "I feel anemic and weak...$"
+	.string "{JPN}ああ…! クラクラ する!\n"
+	.string "ひんけつ かも しれん…$"
 
 PokemonTower_6F_Text_EmiliaIntro::
-	.string "Urff...\n"
-	.string "Kwaah!$"
+	.string "{JPN}… カッ… ナ… シッ!\n"
+	.string "… バ… リッ!$"
 
 PokemonTower_6F_Text_EmiliaDefeat::
-	.string "Something fell out!$"
+	.string "{JPN}…なにかが\n"
+	.string "わしの からだから ぬけてく$"
 
 PokemonTower_6F_Text_EmiliaPostBattle::
-	.string "My hair didn't fall out!\n"
-	.string "It was a malevolent spirit!$"
+	.string "{JPN}わしの からだ から ぬけたもの…\n"
+	.string "それは かみのけ では ない!\l"
+	.string "あくりょう じゃ$"
 
 PokemonTower_6F_Text_JenniferIntro::
-	.string "Ke...ke...ke...\n"
-	.string "ke...ke...ke!$"
+	.string "{JPN}…ヒヒ… ヒ… ヒッ!\n"
+	.string "… ヒ… ヒヒ…ヒヒッ!$"
 
 PokemonTower_6F_Text_JenniferDefeat::
-	.string "Keee!$"
+	.string "{JPN}ひいーっ!$"
 
 PokemonTower_6F_Text_JenniferPostBattle::
-	.string "What's going on here?$"
+	.string "{JPN}…ヒ ヒヒ ぃっーくしょん!\n"
+	.string "あれ わしは どうしてたんじゃ?$"
 
 PokemonTower_6F_Text_BeGoneIntruders::
-	.string "Be gone...\n"
-	.string "Intruders...$"
+	.string "{JPN}… タチサレ!\n"
+	.string "… ココカラ タチサレ…$"
 
 PokemonTower_6F_Text_GhostWasCubonesMother::
-	.string "The ghost was the restless spirit\n"
-	.string "of CUBONE's mother!$"
+	.string "{JPN}ゆうれいの しょうたいは…\p"
+	.string "カラカラの おかあさんの\n"
+	.string "まよえる たましい だった!$"
 
 PokemonTower_6F_Text_MothersSpiritWasCalmed::
-	.string "The mother's spirit was calmed.\p"
-	.string "It departed to the afterlife...$"
+	.string "{JPN}やさしい カラカラの おかあさんに\n"
+	.string "もどった たましいは\l"
+	.string "ぶじ てんに のぼって…\p"
+	.string "… …きえて いきました$"
 

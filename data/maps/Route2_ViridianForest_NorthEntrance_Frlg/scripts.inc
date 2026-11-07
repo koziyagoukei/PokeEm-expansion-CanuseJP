@@ -14,22 +14,21 @@ Route2_ViridianForest_NorthEntrance_EventScript_CooltrainerF::
 	end
 
 Route2_ViridianForest_NorthEntrance_Text_ManyMonsOnlyInForests::
-	.string "Many POKEMON live only in forests \n"
-	.string "and caves.\p"
-	.string "You need to be persistent and look\n"
-	.string "everywhere to get different kinds.$"
+	.string "{JPN}もりや どうくつ しか\n"
+	.string "いない ポケモンも おおいよ\p"
+	.string "いろんな ポケモン とるなら\n"
+	.string "しつこく さがしまわる ことだね$"
 
 Route2_ViridianForest_NorthEntrance_Text_CanCutSkinnyTrees::
-	.string "Have you noticed the skinny trees\n"
-	.string "on the roadside?\p"
-	.string "They can be cut down by a special\n"
-	.string "POKEMON move, I hear.$"
+	.string "{JPN}どうろの あちこちに\n"
+	.string "ほそい きが あったろ?\p"
+	.string "あそこは ポケモンの わざで\n"
+	.string "きって とおれる そうじゃ$"
 
 Route2_ViridianForest_NorthEntrance_Text_CanCancelEvolution::
-	.string "Do you know the evolution-cancel\n"
-	.string "technique?\p"
-	.string "When a POKEMON is evolving, you\n"
-	.string "can stop the process.\p"
-	.string "It's a technique for raising\n"
-	.string "POKEMON the way they are.$"
+	.string "{JPN}しんか キャンセル つかってる?\p"
+	.string "しんか しようと するのを\n"
+	.string "とちゅうで やめさせて\l"
+	.string "そのままの かたちで\l"
+	.string "そだてる テクニックよ$"
 

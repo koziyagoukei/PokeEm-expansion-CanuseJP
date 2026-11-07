@@ -12,24 +12,25 @@ SSAnne_2F_Room4_EventScript_Dawn::
 	end
 
 SSAnne_2F_Room4_Text_LamarIntro::
-	.string "Which do you find more worthy,\n"
-	.string "a strong or a rare POKEMON?$"
+	.string "{JPN}きみは… つよい ポケモンと\n"
+	.string "めずらしい ポケモン\l"
+	.string "どっちに かちを かんじるかね?$"
 
 SSAnne_2F_Room4_Text_LamarDefeat::
-	.string "I must salute you!$"
+	.string "{JPN}やる ものだね!$"
 
 SSAnne_2F_Room4_Text_LamarPostBattle::
-	.string "Personally, I prefer strong and\n"
-	.string "rare POKEMON.$"
+	.string "{JPN}わたしは… めずらしくて\n"
+	.string "つよい ポケモンが ほしいねえ$"
 
 SSAnne_2F_Room4_Text_DawnIntro::
-	.string "I don't believe I saw you at the\n"
-	.string "party?$"
+	.string "{JPN}あら せんじょう パーティでは\n"
+	.string "みかけ なかった けど…?$"
 
 SSAnne_2F_Room4_Text_DawnDefeat::
-	.string "Take it easy!$"
+	.string "{JPN}てかげん してよ$"
 
 SSAnne_2F_Room4_Text_DawnPostBattle::
-	.string "Oh, I adore your strong POKEMON!\n"
-	.string "Oh, how I envy you for them!$"
+	.string "{JPN}いいな つよい ポケモン!\n"
+	.string "いいな… いいな…!$"
 

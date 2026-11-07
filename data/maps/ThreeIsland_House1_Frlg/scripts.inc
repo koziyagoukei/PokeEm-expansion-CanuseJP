@@ -14,11 +14,11 @@ ThreeIsland_House1_EventScript_DisplayCase::
 	end
 
 ThreeIsland_House1_Text_YoureAlwaysSoCool::
-	.string "LOSTELLE: Hi, {PLAYER}!\n"
-	.string "You're always so cool!\p"
-	.string "I'll make lunch for you, too, one\n"
-	.string "day, {PLAYER}.$"
+	.string "{JPN}マヨ『わー {PLAYER}だ\n"
+	.string "いっつも かっこいいねえ\p"
+	.string "いつか {PLAYER} にも\n"
+	.string "おべんとう つくって あげる!$"
 
 ThreeIsland_House1_Text_RareRocksGemsDisplayed::
-	.string "Rare rocks and gems are displayed.$"
+	.string "{JPN}めずらしい いしが かざってある!$"
 

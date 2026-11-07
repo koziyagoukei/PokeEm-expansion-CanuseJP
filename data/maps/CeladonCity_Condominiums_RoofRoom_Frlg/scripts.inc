@@ -104,54 +104,63 @@ CeladonCity_Condominiums_RoofRoom_EventScript_ExitBlackboard::
 	end
 
 CeladonCity_Condominiums_RoofRoom_Text_TheresNothingIDontKnow::
-	.string "There is nothing that I don't know,\n"
-	.string "like I wrote on the blackboard.\p"
-	.string "I know about the world of POKEMON\n"
-	.string "in your GAME BOY ADVANCE!\p"
-	.string "Get together with your friends and\n"
-	.string "enjoy trading POKEMON!$"
+	.string "{JPN}こくばんにも かいたが…\n"
+	.string "わしに わからぬ ことは ない\l"
+	.string "ゲームボーイの なかに\l"
+	.string "せかいが あることも!\p"
+	.string "ぜひ! ともだちを さそって\n"
+	.string "ポケモンの こうかんを\l"
+	.string "たのしんで くれたまえ!$"
 
 CeladonCity_Condominiums_RoofRoom_Text_ObtainedAnEevee::
-	.string "{PLAYER} obtained an EEVEE!$"
+	.string "{JPN}{PLAYER}は\n"
+	.string "イーブイを てにいれた!$"
 
 CeladonCity_Condominiums_RoofRoom_Text_BoxIsFull::
 	.string "ポケモンが いっぱいだ\n"
 	.string "ボックスを かえて きなさい$"
 
 CeladonCity_Condominiums_RoofRoom_Text_WirelessAdapterLecture::
-	.string "POKEMON Lecture\p"
-	.string "Playing with the Wireless Adapter$"
+	.string "{JPN}… ポケモン こうざ!\p"
+	.string "ワイヤレスアダプタを つかった\n"
+	.string "あそびかたに ついて$"
 
 CeladonCity_Condominiums_RoofRoom_Text_ReadWhichHeading::
-	.string "Which heading do you want to read?$"
+	.string "{JPN}どの こうもくを よみますか?$"
 
 CeladonCity_Condominiums_RoofRoom_Text_ExplainWirelessClub::
-	.string "The POKEMON WIRELESS CLUB is\n"
-	.string "upstairs at any POKEMON CENTER.\p"
-	.string "Visit one to link up with friend(s)\n"
-	.string "using your Wireless Adapter.$"
+	.string "{JPN}ポケモンセンターの 2かいは\n"
+	.string "ポケモン ワイヤレス クラブ!\p"
+	.string "ともだちと いっしょに\n"
+	.string "ワイヤレスアダプタを つないで\l"
+	.string "つうしんが たのしめます$"
 
 CeladonCity_Condominiums_RoofRoom_Text_ExplainDirectCorner::
-	.string "To link only with a friend, go to\n"
-	.string "the DIRECT CORNER.\p"
-	.string "It is the right counter at the\n"
-	.string "POKEMON WIRELESS CLUB.\p"
-	.string "Go into the TRADE CORNER or the\n"
-	.string "COLOSSEUM with your friend.$"
+	.string "{JPN}きまった ともだちと\n"
+	.string "つうしんが したい ときは\l"
+	.string "ポケモン ワイヤレス クラブの\l"
+	.string "みぎがわの カウンター\l"
+	.string "ダイレクト コーナーに いって\l"
+	.string "トレードコーナーや コロシアムなど\l"
+	.string "いきたい へやを えらんで\l"
+	.string "いっしょに はいりましょう!$"
 
 CeladonCity_Condominiums_RoofRoom_Text_ExplainUnionRoom::
-	.string "To link and communicate with\n"
-	.string "anyone, go to the UNION ROOM.\p"
-	.string "It is the left counter at the\n"
-	.string "POKEMON WIRELESS CLUB.\p"
-	.string "Go to the UNION ROOM and enjoy\n"
-	.string "meeting other TRAINERS.$"
+	.string "{JPN}みしらぬ ともだちと\n"
+	.string "コミュニケーション したい ときは\l"
+	.string "ポケモン ワイヤレス クラブの\l"
+	.string "ひだりがわの カウンター\l"
+	.string "ユニオン ルームに いって\l"
+	.string "いろいろな トレーナーと\l"
+	.string "であいを たのしみましょう!$"
 
 CeladonCity_Condominiums_RoofRoom_Text_PamphletOnTMs::
-	.string "It's a pamphlet on TMs.\p"
-	.string "... ...\p"
-	.string "There are fifty TMs in all.\p"
-	.string "There are also seven HMs that\n"
-	.string "can be used repeatedly.\p"
-	.string "SILPH CO.$"
+	.string "{JPN}わざマシンの パンフレットだ!\n"
+	.string "… …\p"
+	.string "わざマシンは\n"
+	.string "ぜんぶで 50しゅるい!\p"
+	.string "ひでんマシンは\n"
+	.string "つかっても なくならない タイプ\l"
+	.string "ぜんぶで 7しゅるい あります\p"
+	.string "… シルフ カンパニー$"
 

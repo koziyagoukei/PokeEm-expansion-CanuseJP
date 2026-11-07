@@ -36,22 +36,23 @@ VermilionCity_House2_EventScript_AlreadyTraded::
 	end
 
 VermilionCity_House2_Text_DoYouHaveMonWantToTradeForMyMon::
-	.string "Hi!\n"
-	.string "Do you have a {STR_VAR_1}?\p"
-	.string "Want to trade it for my\n"
-	.string "{STR_VAR_2}?$"
+	.string "{JPN}ねー きみ\n"
+	.string "{STR_VAR_1} もってる?\p"
+	.string "わたしの {STR_VAR_2}と\n"
+	.string "とりかえて くれない?$"
 
 VermilionCity_House2_Text_ThatsTooBad::
-	.string "That's too bad.$"
+	.string "{JPN}イヤなら しょーがないな$"
 
 VermilionCity_House2_Text_ThisIsNoMon::
-	.string "...This is no {STR_VAR_1}.\p"
-	.string "If you get one, please trade it\n"
-	.string "to me!$"
+	.string "{JPN}…… これ\n"
+	.string "{STR_VAR_1}じゃ ないわー\p"
+	.string "てに いれたら\n"
+	.string "ぜったい とりかえてよねっ!$"
 
 VermilionCity_House2_Text_ThankYou::
-	.string "Thank you!$"
+	.string "{JPN}ありがとね$"
 
 VermilionCity_House2_Text_HowIsMyOldMon::
-	.string "How is my old {STR_VAR_2}?\p"
-	.string "My {STR_VAR_1} is doing great!$"
+	.string "{JPN}{STR_VAR_2} げんき?\n"
+	.string "わたしの {STR_VAR_1}は げんきよ$"

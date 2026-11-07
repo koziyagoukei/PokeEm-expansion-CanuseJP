@@ -23,16 +23,14 @@ TwoIsland_PokemonCenter_1F_EventScript_BugCatcher::
 	end
 
 TwoIsland_PokemonCenter_1F_Text_HaveYouVisitedGameCorner::
-	.string "Have you visited the GAME CORNER\n"
-	.string "already?\p"
-	.string "It's no good to go alone.\n"
-	.string "You have to take a friend along.$"
+	.string "{JPN}ゲームコーナー いって みた?\p"
+	.string "ひとりで いっても ダメだぞ\n"
+	.string "だれか ともだちを つれてけよ$"
 
 TwoIsland_PokemonCenter_1F_Text_OldLadyLivesOutOnCape::
-	.string "Not many people live on\n"
-	.string "TWO ISLAND.\p"
-	.string "There is this old lady who lives\n"
-	.string "out on the cape.\p"
-	.string "She's been there since I don't know\n"
-	.string "when.$"
+	.string "{JPN}2の しまに\n"
+	.string "すんでいる ひとは すくないよ\p"
+	.string "ただ みさきの いえに\n"
+	.string "ずーっと むかしから すんでいる\l"
+	.string "おばあさんが いるんだ$"
 

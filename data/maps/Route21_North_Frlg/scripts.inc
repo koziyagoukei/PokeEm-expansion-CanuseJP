@@ -2,36 +2,38 @@ Route21_North_Frlg_MapScripts::
 	.byte 0
 
 Route21_North_Text_RonaldIntro::
-	.string "You want to know if the fish are\n"
-	.string "biting?$"
+	.string "{JPN}「つれますか?」とか おまえは\n"
+	.string "ききたいんじゃないの?$"
 
 Route21_North_Text_RonaldDefeat::
-	.string "Dang!$"
+	.string "{JPN}あー やられた$"
 
 Route21_North_Text_RonaldPostBattle::
-	.string "I can't catch anything good.\n"
-	.string "Not one good POKEMON to be had!$"
+	.string "{JPN}いい ポケモン つれねーよ!\n"
+	.string "ぜんぜん!$"
 
 Route21_North_Text_WadeIntro::
-	.string "I got a big haul!\n"
-	.string "Wanna go for it?$"
+	.string "{JPN}たいりょう! たいりょう!\n"
+	.string "おれの ポケモンと たたかう?$"
 
 Route21_North_Text_WadeDefeat::
-	.string "Heheh, MAGIKARP just don't make\n"
-	.string "the grade, do they?$"
+	.string "{JPN}さすがに\n"
+	.string "コイキング じゃ ダメか$"
 
 Route21_North_Text_WadePostBattle::
-	.string "I seem to only catch MAGIKARP!$"
+	.string "{JPN}なぜか コイキング\n"
+	.string "ばっかり つれるんだよ!$"
 
 Route21_North_Text_SpencerIntro::
-	.string "The sea cleanses my body and soul!$"
+	.string "{JPN}うみはーッ\n"
+	.string "おとこの ロマンだーッ!$"
 
 Route21_North_Text_SpencerDefeat::
-	.string "Ayah!$"
+	.string "{JPN}だあー!$"
 
 Route21_North_Text_SpencerPostBattle::
-	.string "The sea is great and all, but I\n"
-	.string "like the mountains, too.$"
+	.string "{JPN}うみも いいけど\n"
+	.string "じつは やまも すきだな!$"
 
 @ Below is the battle text for the Cue Ball that was on Route 21 in Gen 1.
 @ This trainer wasnt used in Gen 3 so their text goes unused/untranslated

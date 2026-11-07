@@ -239,26 +239,29 @@ SixIsland_DottedHole_SapphireRoom_EventScript_BrailleMessage::
 	end
 
 SixIsland_DottedHole_SapphireRoom_Text_FoundSapphire::
-	.string "{PLAYER} found a SAPPHIRE!$"
+	.string "{JPN}{PLAYER}は\n"
+	.string "サファイアを みつけた!$"
 
 SixIsland_DottedHole_SapphireRoom_Text_IWasRightInTailingYou::
-	.string "Fufu... Fufufufu...\n"
-	.string "I guessed right.\p"
-	.string "I was right in tailing you!$"
+	.string "{JPN}ふふ ふふふふ\n"
+	.string "ぼくの おもった とおり…\l"
+	.string "おまえの あとを つけてきて\l"
+	.string "せいかい だった!$"
 
 SixIsland_DottedHole_SapphireRoom_Text_SellToTeamRocketTellPassword::
-	.string "I knew that there was a SAPPHIRE\n"
-	.string "here, so it belongs to me!\p"
-	.string "I'll sell it to TEAM ROCKET for\n"
-	.string "serious money.\p"
-	.string "...D-don't glare at me like that!\p"
-	.string "If you want it back, why don't you\n"
-	.string "go get it after I sell it?\p"
-	.string "I'll even tell you one of the\n"
-	.string "passwords to TEAM ROCKET's\l"
-	.string "WAREHOUSE.\p"
-	.string "The WAREHOUSE password I know is\n"
-	.string "Yes, nah, CHANSEY.\p"
-	.string "I'm done.\n"
-	.string "Don't think badly of me!$"
+	.string "{JPN}サファイアが あるのを\n"
+	.string "しってた のは ぼくだから\l"
+	.string "これは ぼくのだ!\p"
+	.string "ロケットだんに たかく\n"
+	.string "うりつけて やるぜ\p"
+	.string "……そ そんなに にらむなよ!\n"
+	.string "とりかえし たかったら\l"
+	.string "ぼくが うりつけた あと\l"
+	.string "じぶんで とりかえせば いーだろ\p"
+	.string "ひとつだけ なら\n"
+	.string "ロケットだんの そうこの\l"
+	.string "パスワードを おしえて やるからさ\p"
+	.string "とびらの パスワードは\n"
+	.string "『カブトは とぶか』だ\p"
+	.string "じゃ… わるく おもうなよ!$"
 

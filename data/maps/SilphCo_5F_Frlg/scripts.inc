@@ -58,83 +58,93 @@ SilphCo_5F_EventScript_Dalton::
 	end
 
 SilphCo_5F_Text_RocketsInUproarAboutIntruder::
-	.string "TEAM ROCKET is in an uproar over\n"
-	.string "some intruder.\p"
-	.string "That's you, right?$"
+	.string "{JPN}だれか ビルに しのび こんだと\n"
+	.string "ロケットだんが さわいでる\l"
+	.string "… きみの こと らしいね$"
 
 SilphCo_5F_Text_YoureOurHeroThankYou::
-	.string "TEAM ROCKET took off!\n"
-	.string "You're our hero! Thank you!$"
+	.string "{JPN}ロケットだんは にげたよ!\n"
+	.string "きみが おっぱらったのかい\l"
+	.string "… ありがとう!$"
 
 SilphCo_5F_Text_Grunt1Intro::
-	.string "I heard a kid was wandering\n"
-	.string "around.$"
+	.string "{JPN}こどもが うろついてると\n"
+	.string "さっき れんらくが あったぜ!$"
 
 SilphCo_5F_Text_Grunt1Defeat::
-	.string "Boom!$"
+	.string "{JPN}ばったり…$"
 
 SilphCo_5F_Text_Grunt1PostBattle::
-	.string "It's not smart to pick a fight with\n"
-	.string "TEAM ROCKET!$"
+	.string "{JPN}ロケットだんに\n"
+	.string "たてつかない ほうが\l"
+	.string "みのため だぜ$"
 
 SilphCo_5F_Text_BeauIntro::
-	.string "We study POKe BALL technology on\n"
-	.string "this floor.$"
+	.string "{JPN}この フロアは\n"
+	.string "モンスターボールの\l"
+	.string "けんきゅう セクションだ!$"
 
 SilphCo_5F_Text_BeauDefeat::
-	.string "Dang!\n"
-	.string "Blast it!$"
+	.string "{JPN}ちくしょう!$"
 
 SilphCo_5F_Text_BeauPostBattle::
-	.string "We worked on the ultimate POKe\n"
-	.string "BALL which would catch anything.$"
+	.string "{JPN}ここでは…\n"
+	.string "でんせつの ポケモンさえ とれる\l"
+	.string "きゅうきょくの モンスターボールを\l"
+	.string "けんきゅう してたのだ$"
 
 SilphCo_5F_Text_DaltonIntro::
-	.string "Whaaat?\p"
-	.string "There shouldn't be any children\n"
-	.string "here!$"
+	.string "{JPN}おかしいな?\n"
+	.string "こどもが はいって これる\l"
+	.string "わけが ないんだが$"
 
 SilphCo_5F_Text_DaltonDefeat::
-	.string "Oh, goodness!$"
+	.string "{JPN}こりゃ いかん$"
 
 SilphCo_5F_Text_DaltonPostBattle::
-	.string "You're only on 5F.\n"
-	.string "It's a long way to my BOSS!$"
+	.string "{JPN}ここは 5かい…\n"
+	.string "ボスの いる ところ まで\l"
+	.string "まだまだ あるぜ!$"
 
 SilphCo_5F_Text_Grunt2Intro::
-	.string "Show TEAM ROCKET a little respect!$"
+	.string "{JPN}ロケットだん あいてに\n"
+	.string "なめた まねして くれるぜ$"
 
 SilphCo_5F_Text_Grunt2Defeat::
-	.string "Cough...\n"
-	.string "Cough...$"
+	.string "{JPN}ふん たまたまだ!$"
 
 SilphCo_5F_Text_Grunt2PostBattle::
-	.string "Which reminds me.\p"
-	.string "KOFFING evolves into WEEZING!$"
+	.string "{JPN}たまたま… おもいだした!\p"
+	.string "タマタマは\n"
+	.string "ナッシーに しんか するぞ$"
 
 SilphCo_5F_Text_PorygonFirstVRMon::
-	.string "It's a POKEMON REPORT!\p"
-	.string "POKEMON LAB created PORYGON,\n"
-	.string "the first virtual-reality POKEMON.$"
+	.string "{JPN}… ポケモン レポートだ!\p"
+	.string "ポケモン けんきゅうじょ では\n"
+	.string "じんこうの ポケモン\l"
+	.string "ポリゴンを つくる ことに\l"
+	.string "せいこう した… …$"
 
 SilphCo_5F_Text_Over350TechniquesConfirmed::
-	.string "It's a POKEMON REPORT!\p"
-	.string "Over 350 POKEMON techniques have\n"
-	.string "been confirmed.$"
+	.string "{JPN}… ポケモン レポートだ!\p"
+	.string "ポケモンが つかう わざは\n"
+	.string "げんざい わかって いるだけで\l"
+	.string "350しゅるい いじょうある$"
 
 SilphCo_5F_Text_SomeMonsEvolveWhenTraded::
-	.string "It's a POKEMON REPORT!\p"
-	.string "Some POKEMON have been confirmed\n"
-	.string "to evolve when they are traded.$"
+	.string "{JPN}… ポケモン レポートだ!\p"
+	.string "つうしん こうかん すると\n"
+	.string "しんかする ポケモンが\l"
+	.string "いることが かくにん された$"
 
 SilphCo_5F_Text_FloorSign::
-	.string "SILPH CO. HEAD OFFICE\n"
-	.string "5F$"
+	.string "{JPN}シルフ カンパニー ほんしゃ\n"
+	.string "5かい$"
 
 SilphCo_5F_Text_RocketBossLookingForStrongMons::
-	.string "Those thugs that took over our\n"
-	.string "building...\p"
-	.string "Their BOSS said he was looking for\n"
-	.string "strong POKEMON.\p"
-	.string "I hope our PRESIDENT managed to\n"
-	.string "avoid trouble...$"
+	.string "{JPN}この ビルに のりこんできた\n"
+	.string "やつらの ボスは\l"
+	.string "めずらしい つよい ポケモンを\l"
+	.string "もとめて いるって いってた\p"
+	.string "しゃちょうに ひがいが\n"
+	.string "なければ いいのだが…$"

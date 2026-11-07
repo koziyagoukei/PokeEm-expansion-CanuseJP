@@ -63,55 +63,57 @@ RocketHideout_B1F_EventScript_RemoveBarrier::
 	return
 
 RocketHideout_B1F_Text_Grunt1Intro::
-	.string "Who are you?\n"
-	.string "How did you get here?$"
+	.string "{JPN}… おまえは だれだ?\n"
+	.string "どうやって ここに はいった$"
 
 RocketHideout_B1F_Text_Grunt1Defeat::
-	.string "Oww!\n"
-	.string "Beaten!$"
+	.string "{JPN}あう! やられた$"
 
 RocketHideout_B1F_Text_Grunt1PostBattle::
-	.string "Blast it... You're dissing TEAM\n"
-	.string "ROCKET, aren't you?$"
+	.string "{JPN}くそう… おまえ\n"
+	.string "ロケットだんを なめてるな!$"
 
 RocketHideout_B1F_Text_Grunt2Intro::
-	.string "You broke into TEAM ROCKET's\n"
-	.string "operation? What nerve!$"
+	.string "{JPN}ロケットだんに\n"
+	.string "しのび こむ とは なんて やつ$"
 
 RocketHideout_B1F_Text_Grunt2Defeat::
-	.string "Boom!$"
+	.string "{JPN}ばったり…!$"
 
 RocketHideout_B1F_Text_Grunt2PostBattle::
-	.string "You're not going to get away with\n"
-	.string "this, brat!$"
+	.string "{JPN}くそう! このまま らくに\n"
+	.string "すすめると おもうな!$"
 
 RocketHideout_B1F_Text_Grunt3Intro::
-	.string "Intruder alert!$"
+	.string "{JPN}しんにゅうしゃを はっけん!$"
 
 RocketHideout_B1F_Text_Grunt3Defeat::
-	.string "I can't do it!$"
+	.string "{JPN}ああ! だめか$"
 
 RocketHideout_B1F_Text_Grunt3PostBattle::
-	.string "SILPH SCOPE? Humph!\n"
-	.string "I don't know where it is.$"
+	.string "{JPN}ふん…!\n"
+	.string "シルフスコープを さがしてる?\l"
+	.string "… おれは しらねえよ$"
 
 RocketHideout_B1F_Text_Grunt4Intro::
-	.string "Why did you come here?$"
+	.string "{JPN}ここに きた ねらいは なんだ?$"
 
 RocketHideout_B1F_Text_Grunt4Defeat::
-	.string "This won't do!$"
+	.string "{JPN}こりゃ イカン$"
 
 RocketHideout_B1F_Text_Grunt4PostBattle::
-	.string "Okay, I'll talk...\n"
-	.string "Take the elevator to see my BOSS.$"
+	.string "{JPN}わかった いう…\n"
+	.string "ボスに あいたい なら\l"
+	.string "エレベータに のるんだな$"
 
 RocketHideout_B1F_Text_Grunt5Intro::
-	.string "Are you lost, you little mouse?$"
+	.string "{JPN}まいごの まいごの…\n"
+	.string "おこさま かな?$"
 
 RocketHideout_B1F_Text_Grunt5Defeat::
-	.string "Why...?$"
+	.string "{JPN}なんで じゃ$"
 
 RocketHideout_B1F_Text_Grunt5PostBattle::
-	.string "Uh-oh, that ruckus somehow opened\n"
-	.string "the door!$"
+	.string "{JPN}あれ? いまの さわぎで\n"
+	.string "とびらが あいた しまった$"
 

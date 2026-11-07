@@ -6,115 +6,127 @@ Route11_EventScript_DiglettsCaveSign::
 	end
 
 Route11_Text_HugoIntro::
-	.string "Win, lose, or draw!$"
+	.string "{JPN}かつか まけるか しょうぶ!$"
 
 Route11_Text_HugoDefeat::
-	.string "Atcha!\n"
-	.string "Didn't go my way!$"
+	.string "{JPN}ちッ!\n"
+	.string "きょうは ついて ない$"
 
 Route11_Text_HugoPostBattle::
-	.string "POKEMON is life!\n"
-	.string "And to live is to play games!$"
+	.string "{JPN}ポケモンは じんせい だ!\n"
+	.string "じんせいは ギャンブル だ!$"
 
 Route11_Text_JasperIntro::
-	.string "Competition!\n"
-	.string "I can't get enough!$"
+	.string "{JPN}しょうぶ ごとが すきでよ!\n"
+	.string "だから あいては えらばねえ!$"
 
 Route11_Text_JasperDefeat::
-	.string "I had a chance!$"
+	.string "{JPN}くそッ!\n"
+	.string "かてると ふんだ が だめか!$"
 
 Route11_Text_JasperPostBattle::
-	.string "You can't be a coward in the world\n"
-	.string "of POKEMON!$"
+	.string "{JPN}まけを こわがって たら\n"
+	.string "ポケモンは できねえ もんな!$"
 
 Route11_Text_EddieIntro::
-	.string "Let's go, but don't cheat!$"
+	.string "{JPN}ポケモンに ずるは なし だよ!\n"
+	.string "せいせい どうどう やろう!$"
 
 Route11_Text_EddieDefeat::
-	.string "Huh?\n"
-	.string "That's not right!$"
+	.string "{JPN}ありゃ?\n"
+	.string "こんな はずじゃ…$"
 
 Route11_Text_EddiePostBattle::
-	.string "I did my best.\n"
-	.string "I have no regrets.$"
+	.string "{JPN}せいせい どうどう やった!\n"
+	.string "こうかいは しないよ!$"
 
 Route11_Text_BraxtonIntro::
-	.string "Careful!\n"
-	.string "I'm laying down some cables!$"
+	.string "{JPN}こんちは!\n"
+	.string "おたくの でんき あんぜん ですか?$"
 
 Route11_Text_BraxtonDefeat::
-	.string "That was electric!$"
+	.string "{JPN}おじさんを\n"
+	.string "まかす なんて すごいな!$"
 
 Route11_Text_BraxtonPostBattle::
-	.string "Spread the word to save energy!$"
+	.string "{JPN}ひとこと いい わすれてた!\n"
+	.string "でんきは たいせつに!$"
 
 Route11_Text_DillonIntro::
-	.string "I just became a TRAINER.\n"
-	.string "But, I think I can win.$"
+	.string "{JPN}ぼくは ポケモン トレーナーに\n"
+	.string "なった ばかり だ!\l"
+	.string "でも かつ じしん あるよ!$"
 
 Route11_Text_DillonDefeat::
-	.string "My POKEMON couldn't win...\n"
-	.string "Haven't they grown enough?$"
+	.string "{JPN}まける なんて… まだ\n"
+	.string "ポケモン そだって ないのか なあ$"
 
 Route11_Text_DillonPostBattle::
-	.string "What now?\n"
-	.string "Leave me alone!$"
+	.string "{JPN}なんだよー\n"
+	.string "おまえなんか あっちいけよー!$"
 
 Route11_Text_DirkIntro::
-	.string "Fwahaha!\n"
-	.string "I have never lost!$"
+	.string "{JPN}ははーは! わたしは\n"
+	.string "いままで まけた ことが ないぞ!$"
 
 Route11_Text_DirkDefeat::
-	.string "My first loss!$"
+	.string "{JPN}はッ!\n"
+	.string "はじめて まけたーッ!$"
 
 Route11_Text_DirkPostBattle::
-	.string "You were just lucky, that's all.$"
+	.string "{JPN}しょうぶは ときの うん だ!\n"
+	.string "そう おもわないと おちこむよ$"
 
 Route11_Text_DarianIntro::
-	.string "I have never won before...$"
+	.string "{JPN}わたしは\n"
+	.string "いままで かった ことが ない…$"
 
 Route11_Text_DarianDefeat::
-	.string "I saw this coming...$"
+	.string "{JPN}… がく!\n"
+	.string "やっぱり まけた!$"
 
 Route11_Text_DarianPostBattle::
-	.string "I was unlucky, as always.$"
+	.string "{JPN}しょうぶは ときの うん だ…\n"
+	.string "そう おもわないと おちこむよ$"
 
 Route11_Text_YasuIntro::
-	.string "I'm the best in my class.\n"
-	.string "I train every morning.$"
+	.string "{JPN}ぼくは クラスで いちばん つよい!\n"
+	.string "まいあさ れんしゅうも してるんだ!$"
 
 Route11_Text_YasuDefeat::
-	.string "Darn!\n"
-	.string "My POKEMON need to be stronger!$"
+	.string "{JPN}あちゃー! … もっと\n"
+	.string "つよい ポケモン でなきゃ だめだ!$"
 
 Route11_Text_YasuPostBattle::
-	.string "There's a fat POKEMON that comes\n"
-	.string "down from the mountains.\p"
-	.string "I bet it'd be strong if you can\n"
-	.string "catch it.$"
+	.string "{JPN}たまに やまから おりてくる\n"
+	.string "ふとった ポケモン…\p"
+	.string "あれ つかまえたら\n"
+	.string "つよいんじゃ ないかな?$"
 
 Route11_Text_BernieIntro::
-	.string "Watch out for live wires!$"
+	.string "{JPN}オッース!\n"
+	.string "でんきの けしわすれ して ないか$"
 
 Route11_Text_BernieDefeat::
-	.string "Whoa!\n"
-	.string "You spark plug!$"
+	.string "{JPN}まいった!\n"
+	.string "さいきんの こどもは つよい!$"
 
 Route11_Text_BerniePostBattle::
-	.string "Well, better get back to work.$"
+	.string "{JPN}さてと…\n"
+	.string "でんきこうじに いかなくちゃ$"
 
 Route11_Text_DaveIntro::
-	.string "I raised my POKEMON carefully.\n"
-	.string "They should be ready by now!$"
+	.string "{JPN}だいじに そだてた ポケモン!\n"
+	.string "そろそろ たたかわせて みよう!$"
 
 Route11_Text_DaveDefeat::
-	.string "Bye-bye!\n"
-	.string "Thank you, and good-bye!$"
+	.string "{JPN}バイバイ…!\n"
+	.string "ありがとう さようなら!$"
 
 Route11_Text_DavePostBattle::
-	.string "Tch...\n"
-	.string "I better go find stronger ones!$"
+	.string "{JPN}ちえッ…!\n"
+	.string "もっと つよいの さがして こよう$"
 
 Route11_Text_DiglettsCave::
-	.string "DIGLETT'S CAVE$"
+	.string "{JPN}ディグダの あな$"
 

@@ -35,29 +35,33 @@ CeruleanCity_PokemonCenter_1F_EventScript_Lass::
 	end
 
 CeruleanCity_PokemonCenter_1F_Text_BillDoesWhateverForRareMons::
-	.string "That BILL!\p"
-	.string "I heard that he'll do whatever it\n"
-	.string "takes to get rare POKEMON.\p"
-	.string "He's not above doing all sorts\n"
-	.string "of things, I've heard.$"
+	.string "{JPN}マサキの ヤツ!\p"
+	.string "めずらしい ポケモンを\n"
+	.string "てに いれる ためには…\p"
+	.string "あんな ことも こんな ことも\n"
+	.string "へいきで するって きいたよ!$"
 
 CeruleanCity_PokemonCenter_1F_Text_EveryoneCallsBillPokemaniac::
-	.string "Have you heard about BILL?\p"
-	.string "Everyone calls him a POKeMANIAC!\p"
-	.string "I think people are just jealous of\n"
-	.string "BILL, though.\p"
-	.string "Who wouldn't want to boast about\n"
-	.string "their POKEMON?$"
+	.string "{JPN}きみも\n"
+	.string "マサキの うわさ きいてるか?\p"
+	.string "みんなが あいつを\n"
+	.string "ポケモン マニアと よんでるよ!\p"
+	.string "でも ものを あつめたり\n"
+	.string "じまん したい きもちは\l"
+	.string "だれでも ある!\p"
+	.string "みんなも うらやましいんだな!$"
 
 CeruleanCity_PokemonCenter_1F_Text_BillCollectsRareMons::
-	.string "BILL has lots of POKEMON!\n"
-	.string "He collects rare ones, too!$"
+	.string "{JPN}マサキ にいちゃん\n"
+	.string "ポケモン いっぱい もってるよ!\p"
+	.string "めずらしい ポケモンも\n"
+	.string "あつめてるって$"
 
 CeruleanCity_PokemonCenter_1F_Text_TryTradingUpstairs::
-	.string "Why don't you go upstairs and try\n"
-	.string "trading POKEMON with your friends?\p"
-	.string "You could get a lot more variety\n"
-	.string "by trading.\p"
-	.string "The POKEMON you get in trades grow\n"
-	.string "quickly, too.$"
+	.string "{JPN}おともだちと 2かいへ いって\n"
+	.string "もってない ポケモン\l"
+	.string "こうかんして もらったら\l"
+	.string "たくさん あつまるわよ!\p"
+	.string "ひとから もらった ポケモンは\n"
+	.string "はやく そだつしね!$"
 

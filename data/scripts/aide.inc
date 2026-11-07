@@ -14,17 +14,22 @@ Aide_EventScript_DeclineCheckMons::
 	end
 
 Aide_Text_HaventCaughtEnoughMonsForItem::
-	.string "Let's see...\n"
-	.string "Uh-oh! You have caught only\l"
-	.string "{STR_VAR_3} kinds of POKEMON!\p"
-	.string "You need {STR_VAR_1} kinds\n"
-	.string "if you want the {STR_VAR_2}.$"
+	.string "{JPN}… … えーと!\n"
+	.string "つかまえた ポケモンは……\l"
+	.string "あれれー?\l"
+	.string "まだ {STR_VAR_3}しゅるい ですよ!\p"
+	.string "{STR_VAR_1}しゅるいに たりない なら\n"
+	.string "{STR_VAR_2}は\l"
+	.string "また こんど ですね$"
 
 Aide_Text_GetEnoughMonsComeBackForItem::
-	.string "...Oh. I see.\p"
-	.string "When you get {STR_VAR_1} kinds of POKEMON,\n"
-	.string "come back for the {STR_VAR_2}.$"
+	.string "{JPN}…… …… そう ですか\p"
+	.string "{STR_VAR_1}しゅるいに たりない なら\n"
+	.string "{STR_VAR_2}は\l"
+	.string "また こんど ですね$"
 
 Aide_Text_DontHaveAnyRoomForItem::
-	.string "Oh! I see you don't have any\n"
-	.string "room for the {STR_VAR_2}.$"
+	.string "{JPN}… … と おもった けど\n"
+	.string "にもつが いっぱい だから\l"
+	.string "{STR_VAR_2}は\l"
+	.string "また こんど ですね$"

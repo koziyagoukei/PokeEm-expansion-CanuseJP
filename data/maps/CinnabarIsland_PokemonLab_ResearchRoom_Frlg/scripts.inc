@@ -18,21 +18,25 @@ CinnabarIsland_PokemonLab_ResearchRoom_EventScript_AmberPipe::
 	end
 
 CinnabarIsland_PokemonLab_ResearchRoom_Text_EeveeCanEvolveIntroThreeMons::
-	.string "EEVEE can evolve into one of three\n"
-	.string "kinds of POKEMON.$"
+	.string "{JPN}そう! イーブイは\n"
+	.string "3しゅるいの ポケモンに\l"
+	.string "しんか する かのうせいが ある!$"
 
 CinnabarIsland_PokemonLab_ResearchRoom_Text_LegendaryBirdEmail::
-	.string "There's an e-mail message.\p"
-	.string "... ... ...\p"
-	.string "There are three legendary bird\n"
-	.string "POKEMON.\p"
-	.string "They are ARTICUNO, ZAPDOS, and\n"
-	.string "MOLTRES.\p"
-	.string "Their whereabouts are unknown.\p"
-	.string "We plan to explore the cavern\n"
-	.string "close to CERULEAN.\p"
-	.string "From: POKEMON RESEARCH TEAM...$"
+	.string "{JPN}パソコンに\n"
+	.string "でんしメールが とどいてる!\p"
+	.string "… … …\p"
+	.string "でんせつの とりポケモンは\n"
+	.string "3しゅるい… ファイヤー\l"
+	.string "サンダー フリーザー…\l"
+	.string "しかし どこに いるのか\l"
+	.string "まだ わかって ません\p"
+	.string "こんど ハナダ どうくつに\n"
+	.string "ちょうさに いきます\l"
+	.string "… まずは ほうこく まで\l"
+	.string "ポケモン ちょうさ たい\p"
+	.string "… … …$"
 
 CinnabarIsland_PokemonLab_ResearchRoom_Text_AnAmberPipe::
-	.string "An amber pipe!$"
+	.string "{JPN}コハクの パイプが ある!$"
 

@@ -27,20 +27,22 @@ FuchsiaCity_PokemonCenter_1F_EventScript_Youngster::
 	end
 
 FuchsiaCity_PokemonCenter_1F_Text_CantBecomeGoodTrainerWithOneMon::
-	.string "You can't become a good TRAINER\n"
-	.string "with just one strong POKEMON.\p"
-	.string "But raising many POKEMON evenly\n"
-	.string "is no easy task, either.$"
+	.string "{JPN}1ぴきだけ そだてても\n"
+	.string "つよい トレーナーに なれない\p"
+	.string "おおくの ポケモンを\n"
+	.string "バランス よく そだてるのも\l"
+	.string "たいへん だけどな$"
 
 FuchsiaCity_PokemonCenter_1F_Text_PokemonLeagueWestOfViridian::
-	.string "There's a narrow trail west of\n"
-	.string "VIRIDIAN CITY.\p"
-	.string "It goes to the POKEMON LEAGUE HQ.\n"
-	.string "The HQ governs all TRAINERS.$"
+	.string "{JPN}トキワの にしに\n"
+	.string "ほそい みちが ある でしょう\p"
+	.string "その おくに たってるのが\n"
+	.string "すべての ポケモン トレーナーを\l"
+	.string "まとめる そしき ポケモン リーグよ$"
 
 FuchsiaCity_PokemonCenter_1F_Text_VisitSafariZoneForPokedex::
-	.string "If you're working on a POKeDEX,\n"
-	.string "visit the SAFARI ZONE.\p"
-	.string "All sorts of rare POKEMON breed\n"
-	.string "there.$"
+	.string "{JPN}ポケモン ずかん つくってる なら\n"
+	.string "サファリ ゾーン いくと いいよ\p"
+	.string "めずらしい ポケモンが\n"
+	.string "たくさん はんしょく してるって$"
 

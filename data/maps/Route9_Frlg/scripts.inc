@@ -6,108 +6,117 @@ Route9_EventScript_RouteSign::
 	end
 
 Route9_Text_AliciaIntro::
-	.string "You have POKEMON with you!\n"
-	.string "You're mine!$"
+	.string "{JPN}あら ポケモン もってるわね\n"
+	.string "… カモ だわ!$"
 
 Route9_Text_AliciaDefeat::
-	.string "You deceived me...$"
+	.string "{JPN}あら? つよいわね$"
 
 Route9_Text_AliciaPostBattle::
-	.string "The tunnel coming up is pitch-black\n"
-	.string "inside.\p"
-	.string "You'll need FLASH to get through\n"
-	.string "there.$"
+	.string "{JPN}この さきの トンネル\n"
+	.string "なかは まっくら だから\l"
+	.string "フラッシュが ないと すすめないわ$"
 
 Route9_Text_ChrisIntro::
-	.string "Who's that walking there with those\n"
-	.string "good-looking POKEMON?$"
+	.string "{JPN}だれだ?\n"
+	.string "よさげな ポケモン もって\l"
+	.string "ふらふら あるいとる おまえは?$"
 
 Route9_Text_ChrisDefeat::
-	.string "Out like a light!$"
+	.string "{JPN}まけよった$"
 
 Route9_Text_ChrisPostBattle::
-	.string "Keep walking!$"
+	.string "{JPN}くやしくて なみだも でん$"
 
 Route9_Text_DrewIntro::
-	.string "I'm taking the ROCK TUNNEL to\n"
-	.string "go to LAVENDER...$"
+	.string "{JPN}イワヤマ トンネル ぬけて\n"
+	.string "シオン タウンに\l"
+	.string "いく ところ なんだ けど…$"
 
 Route9_Text_DrewDefeat::
-	.string "Can't measure up...$"
+	.string "{JPN}どうも だめだな$"
 
 Route9_Text_DrewPostBattle::
-	.string "Are you off to ROCK TUNNEL, too?$"
+	.string "{JPN}なんだい きみも\n"
+	.string "イワヤマ トンネル いくのか$"
 
 Route9_Text_CaitlinIntro::
-	.string "Don't you dare patronize me!$"
+	.string "{JPN}てかげんは なしね!$"
 
 Route9_Text_CaitlinDefeat::
-	.string "No!\n"
-	.string "You're too much.$"
+	.string "{JPN}だめ! かなわないわ$"
 
 Route9_Text_CaitlinPostBattle::
-	.string "You're obviously talented.\n"
-	.string "Good luck to you!$"
+	.string "{JPN}あなた きっと\n"
+	.string "ポケモンの さいのう あるのよ\l"
+	.string "がんばってね!$"
 
 Route9_Text_JeremyIntro::
-	.string "Bwahaha!\n"
-	.string "Great! I was bored, eh!$"
+	.string "{JPN}がはは!\n"
+	.string "ちょうど いい!\l"
+	.string "たいくつ してた とこだ$"
 
 Route9_Text_JeremyDefeat::
-	.string "Keep it coming, eh!\p"
-	.string "Oh wait.\n"
-	.string "I'm out of POKEMON!$"
+	.string "{JPN}まだまだ!\n"
+	.string "… と おもったら\l"
+	.string "もう ポケモンが ない$"
 
 Route9_Text_JeremyPostBattle::
-	.string "You sure had guts standing up to\n"
-	.string "me there, eh?$"
+	.string "{JPN}やまおとこに\n"
+	.string "びびらずに たたかうとは\l"
+	.string "たいした もんだ!$"
 
 Route9_Text_BriceIntro::
-	.string "Hahaha!\n"
-	.string "Aren't you a little toughie!$"
+	.string "{JPN}はーっはっはッ!\n"
+	.string "げんきな こども だ!\l"
+	.string "いっちょう やったるか!$"
 
 Route9_Text_BriceDefeat::
-	.string "What's that?$"
+	.string "{JPN}おっとっと!$"
 
 Route9_Text_BricePostBattle::
-	.string "Hahaha!\n"
-	.string "Kids should be tough!$"
+	.string "{JPN}はーっはっはッ!\n"
+	.string "げんきで けっこう!$"
 
 Route9_Text_BrentIntro::
-	.string "I got up early every day to raise\n"
-	.string "my POKEMON from cocoons!$"
+	.string "{JPN}まいあさ はやおき して\n"
+	.string "そだてた さなぎが!\l"
+	.string "やっと かえったんだ!$"
 
 Route9_Text_BrentDefeat::
-	.string "WHAT?\p"
-	.string "What a total waste of time!$"
+	.string "{JPN}えーッ!\p"
+	.string "ぼくの はやおきは\n"
+	.string "いったい なんだったんだあ$"
 
 Route9_Text_BrentPostBattle::
-	.string "I have to collect more than bugs\n"
-	.string "to get stronger...$"
+	.string "{JPN}つよく なるには むし ポケモンの\n"
+	.string "ほかも さがさないと ダメ だな$"
 
 Route9_Text_AlanIntro::
-	.string "Hahahaha!\n"
-	.string "Bring it on!$"
+	.string "{JPN}はっはっはーッ!\n"
+	.string "かかって こーい!$"
 
 Route9_Text_AlanDefeat::
-	.string "Hahahaha!\n"
-	.string "You beat me fair!$"
+	.string "{JPN}はーっはっはッ!\n"
+	.string "ありゃ まけた ようだな$"
 
 Route9_Text_AlanPostBattle::
-	.string "Hahahaha!\n"
-	.string "Us hearty guys always laugh!$"
+	.string "{JPN}はっはっはーッ!\n"
+	.string "やまおとこは こころが ひろいから\l"
+	.string "まけても わらってるのだ!$"
 
 Route9_Text_ConnerIntro::
-	.string "Go, my super BUG POKEMON!$"
+	.string "{JPN}おいらの かわいい むし ポケ!\n"
+	.string "それいけー!$"
 
 Route9_Text_ConnerDefeat::
-	.string "My bugs...$"
+	.string "{JPN}おいらの むし…$"
 
 Route9_Text_ConnerPostBattle::
-	.string "If you don't like BUG POKEMON,\n"
-	.string "you bug me!$"
+	.string "{JPN}むし ポケモンの よさが\n"
+	.string "わからない やつは むし!$"
 
 Route9_Text_RouteSign::
-	.string "ROUTE 9\n"
-	.string "CERULEAN CITY - ROCK TUNNEL$"
+	.string "{JPN}ここは 9ばん どうろ\n"
+	.string "ハナダ … イワヤマ トンネル$"
 

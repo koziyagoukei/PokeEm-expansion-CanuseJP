@@ -352,77 +352,74 @@ CinnabarIsland_EventScript_GymSign::
 	end
 
 CinnabarIsland_Text_DoorIsLocked::
-	.string "The door is locked...$"
+	.string "{JPN}ドアには\n"
+	.string "カギが かかって いた…!$"
 
 CinnabarIsland_Text_BlaineLivedHereSinceBeforeLab::
-	.string "CINNABAR GYM's BLAINE is quite the\n"
-	.string "odd fellow.\p"
-	.string "He's lived on the island since way\n"
-	.string "before the LAB was built.$"
+	.string "{JPN}グレン ジムの カツラは\n"
+	.string "けんきゅうじょが できる まえから\l"
+	.string "すんでて へんじん なんだって$"
 
 CinnabarIsland_Text_ScientistsExperimentInMansion::
-	.string "Scientists conduct experiments \n"
-	.string "in the burned-out building.\p"
-	.string "You know, the one they call the\n"
-	.string "POKEMON MANSION.$"
+	.string "{JPN}ポケモン やしきは\n"
+	.string "けんきゅうの ため かがくしゃが\l"
+	.string "たまに でいり しとる ようだ$"
 
 CinnabarIsland_Text_IslandSign::
-	.string "CINNABAR ISLAND\n"
-	.string "The Fiery Town of Burning Desire$"
+	.string "{JPN}ここは グレン タウン\n"
+	.string "グレンの あかは じょうねつの いろ$"
 
 CinnabarIsland_Text_PokemonLab::
-	.string "POKEMON LAB$"
+	.string "{JPN}ここは ポケモン けんきゅうじょ$"
 
 CinnabarIsland_Text_GymSign::
-	.string "CINNABAR ISLAND POKEMON GYM\n"
-	.string "LEADER: BLAINE\l"
-	.string "The Hotheaded Quiz Master!$"
+	.string "{JPN}グレン じま ポケモン ジム\n"
+	.string "リーダー カツラ\l"
+	.string "ねっけつ クイズ おやじ$"
 
 CinnabarIsland_Text_HeyIfItIsntPlayer::
-	.string "Huh?\n"
-	.string "Hey, if it isn't {PLAYER}!$"
+	.string "{JPN}あれ!?\n"
+	.string "{PLAYER}やないか!$"
 
 CinnabarIsland_Text_ComeWithMeToOneIsland::
-	.string "Look, it's me, BILL.\n"
-	.string "Long time no see!\p"
-	.string "I hope you're still using my\n"
-	.string "PC system.\p"
-	.string "Well, listen, since we met up here,\n"
-	.string "how about spending time with me?\p"
-	.string "There's this little island in the far\n"
-	.string "south called ONE ISLAND.\p"
-	.string "A friend invited me, so I'm on my\n"
-	.string "way out there.\p"
-	.string "How about it?\n"
-	.string "Do you feel like coming with me?$"
+	.string "{JPN}ほれ わいや マサキや!\n"
+	.string "なんや ひさしぶり!\l"
+	.string "パソコン つこて くれとる?\p"
+	.string "…せや ここで あったのも\n"
+	.string "なんかの ごえんや!\l"
+	.string "ちょっと いっしょに いかへん?\p"
+	.string "とおく みなみに\n"
+	.string "1のしま という\l"
+	.string "ちいさな しまが あってな\p"
+	.string "ともだちに よばれて\n"
+	.string "いくとこ なんやけど…\p"
+	.string "どや いくか?$"
 
 CinnabarIsland_Text_AllRightLetsGo::
-	.string "All right, then.\n"
-	.string "Let's go!$"
+	.string "{JPN}ほな レッツゴーや!$"
 
 CinnabarIsland_Text_IllBeWaitingInPokeCenter::
-	.string "What, are you too busy?\p"
-	.string "Well, all right.\n"
-	.string "The boat hasn't arrived yet anyway.\p"
-	.string "I'll be waiting at the POKEMON\n"
-	.string "CENTER over there.\p"
-	.string "Come see me when you're done with\n"
-	.string "your business here.$"
+	.string "{JPN}なんや いそがしいんか?\p"
+	.string "まー ええわ\n"
+	.string "おむかえの ふねも まだやし\p"
+	.string "そこの ポケモンセンターで\n"
+	.string "まっとくから\l"
+	.string "てが あいたら きたって!$"
 
 CinnabarIsland_Text_MyPalsBoatArrived::
-	.string "Looks like my pal's boat arrived,\n"
-	.string "too.\p"
-	.string "He sent it specially here to\n"
-	.string "CINNABAR to pick me up.$"
+	.string "{JPN}ちょうど ともだちの ふねが\n"
+	.string "ついた みたいやな!\p"
+	.string "とくべつに グレンじま まで\n"
+	.string "むかえに きて もろたんや$"
 
 CinnabarIsland_Text_IfYouHaveTriPassYouCanGoAgain::
-	.string "Hey, wasn't that a long cruise?\p"
-	.string "My buddy CELIO seemed to enjoy\n"
-	.string "your company.\p"
-	.string "I'm sure he'd welcome you if you\n"
-	.string "were to visit him again.\p"
-	.string "If you have a TRI-PASS, you can\n"
-	.string "always take a ferry there from\l"
-	.string "VERMILION PORT.\p"
-	.string "All right, thanks for your company!$"
+	.string "{JPN}いやー\n"
+	.string "ながたび おつかれさん!\p"
+	.string "ニシキも おまえさんの こと\n"
+	.string "きにいってた みたいやし\l"
+	.string "また いってあげて!\p"
+	.string "トライパスが あれば\n"
+	.string "クチバシティの みなとから\l"
+	.string "いつでも ふねで いけるで!\p"
+	.string "ほな きょうは ありがと!$"
 

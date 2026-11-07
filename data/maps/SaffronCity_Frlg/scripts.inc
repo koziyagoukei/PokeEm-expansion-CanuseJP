@@ -124,117 +124,123 @@ SaffronCity_EventScript_TrainerFanClubSign::
 	end
 
 SaffronCity_Text_WhatDoYouWantGetLost::
-	.string "What do you want?\n"
-	.string "Get lost!$"
+	.string "{JPN}なんだァ!\n"
+	.string "てめえ! あっち いけ!$"
 
 SaffronCity_Text_BossTakeTownForTeamRocket::
-	.string "BOSS said he'll take this town\n"
-	.string "in the name of TEAM ROCKET!$"
+	.string "{JPN}ボスは この まちを\n"
+	.string "ロケットだんの ものに するってよォ$"
 
 SaffronCity_Text_DontGetDefiantOrIllHurtYou::
-	.string "Don't get defiant!\n"
-	.string "Or I'll have to hurt you!$"
+	.string "{JPN}こらァ おれたちに さからうと\n"
+	.string "いたい めに あうぞ!$"
 
 SaffronCity_Text_SaffronBelongsToTeamRocket::
-	.string "SAFFRON belongs to TEAM ROCKET!$"
+	.string "{JPN}ヤマブキ シティ ごと\n"
+	.string "ロケットだんが のっとったぜ!$"
 
 SaffronCity_Text_CriminalLifeMakesMeFeelAlive::
-	.string "My life as a criminal makes me feel\n"
-	.string "so alive!$"
+	.string "{JPN}わるい こと やりまくると\n"
+	.string "スカッと するぜ!$"
 
 SaffronCity_Text_WatchWhereYoureWalking::
-	.string "Ow!\n"
-	.string "Watch where you're walking!$"
+	.string "{JPN}いてッ! この やろ!\n"
+	.string "どこ みて あるいてんだよ!$"
 
 SaffronCity_Text_WeCanExploitMonsAroundWorld::
-	.string "With SILPH under control, we can\n"
-	.string "exploit POKEMON around the world!\p"
-	.string "We'll get stinking rich, yeahah!$"
+	.string "{JPN}シルフ カンパニー のっとったら\n"
+	.string "せかい じゅうに ポケモン うって\l"
+	.string "ガバガバ おお もうけ だぜ!$"
 
 SaffronCity_Text_YouBeatTeamRocket::
-	.string "You beat TEAM ROCKET all alone?\n"
-	.string "That's amazing!$"
+	.string "{JPN}ロケットだん やっつけたの\n"
+	.string "たった ひとり だって… すごいな$"
 
 SaffronCity_Text_SafeToGoOutAgain::
-	.string "Yeah! TEAM ROCKET is gone!\n"
-	.string "It's safe to go out again!$"
+	.string "{JPN}ばんざーい!\n"
+	.string "ロケットだんが いなくなった!\l"
+	.string "ビビらないで そと あるけるんだ!$"
 
 SaffronCity_Text_PeopleComingBackToSaffron::
-	.string "People fled from here in droves\n"
-	.string "when those ROCKETS came.\p"
-	.string "They should be flocking back to\n"
-	.string "SAFFRON now.$"
+	.string "{JPN}ヤマブキ シティも いちじは\n"
+	.string "ひとが にげて へっちゃった けど\l"
+	.string "にぎやかな まちに もどるわ!$"
 
 SaffronCity_Text_FlewHereOnPidgeot::
-	.string "I flew here on my PIDGEOT when\n"
-	.string "I read about SILPH.\p"
-	.string "It's already over?\n"
-	.string "I missed the media action...$"
+	.string "{JPN}ロケットだんが シルフ おそって\n"
+	.string "だいじけんって きいて!\l"
+	.string "ピジョットで とんで きたッス\p"
+	.string "かいけつ した…?\n"
+	.string "すんません!\l"
+	.string "ねっからの ヤジウマ で!$"
 
 SaffronCity_Text_Pidgeot::
-	.string "PIDGEOT: Bi bibii!$"
+	.string "{JPN}ピジョット『ビビーッ!$"
 
 SaffronCity_Text_SawRocketBossEscaping::
-	.string "I saw the ROCKET BOSS escaping\n"
-	.string "SILPH's building.$"
+	.string "{JPN}おれ みたぜ! シルフの ビル から\n"
+	.string "ロケットの ボスが にげて いくの!$"
 
 SaffronCity_Text_ImASecurityGuard::
-	.string "I'm a security guard.\p"
-	.string "Suspicious kids I don't allow in!$"
+	.string "{JPN}わたしは けいびいんだが\n"
+	.string "あやしい こどもは\p"
+	.string "とおせんぼ することに してるのだ$"
 
 SaffronCity_Text_HesTakingASnooze::
-	.string "...\n"
-	.string "Snore...\p"
-	.string "Hah! He's taking a snooze!$"
+	.string "{JPN}… … …\n"
+	.string "…こっくり こっくり\p"
+	.string "しめしめ! いねむり しているぞ$"
 
 SaffronCity_Text_CitySign::
-	.string "SAFFRON CITY\n"
-	.string "Shining, Golden Land of Commerce$"
+	.string "{JPN}ここは ヤマブキ シティ\n"
+	.string "ヤマブキ きんいろ かがやきのいろ$"
 
 SaffronCity_Text_FightingDojo::
-	.string "FIGHTING DOJO$"
+	.string "{JPN}かくとう どうじょう!$"
 
 SaffronCity_Text_GymSign::
-	.string "SAFFRON CITY POKEMON GYM\n"
-	.string "LEADER: SABRINA\l"
-	.string "The Master of PSYCHIC POKEMON!$"
+	.string "{JPN}ヤマブキ シティ ポケモン ジム\n"
+	.string "リーダー ナツメ\l"
+	.string "エスパー しょうじょ!$"
 
 SaffronCity_Text_FullHealCuresStatus::
-	.string "TRAINER TIPS\p"
-	.string "FULL HEAL cures all ailments like\n"
-	.string "burns, paralysis, poisoning,\l"
-	.string "freezing, and sleep.\p"
-	.string "It costs a bit more, but it's more\n"
-	.string "convenient than buying other items.$"
+	.string "{JPN}… おとくな けいじばん!\p"
+	.string "なんでも なおしは\n"
+	.string "ねむり どく やけど こおり…\l"
+	.string "なんでも なおします!\p"
+	.string "すこし たかい けど\n"
+	.string "ねむけざまし どくけし などを\l"
+	.string "バラバラに かうより らくちん!$"
 
 SaffronCity_Text_GreatBallImprovedCatchRate::
-	.string "TRAINER TIPS\p"
-	.string "The new GREAT BALL offers improved\n"
-	.string "catching rates.\p"
-	.string "Try it on those hard-to-catch\n"
-	.string "POKEMON.$"
+	.string "{JPN}… おとくな けいじばん!\p"
+	.string "しんせいひん スーパーボールは\n"
+	.string "モンスターボール より かくじつに\l"
+	.string "ポケモンを つかまえます!\p"
+	.string "なかなか つかまえ られない\n"
+	.string "ポケモンには こちらを ためそう!$"
 
 SaffronCity_Text_SilphCoSign::
-	.string "SILPH CO. OFFICE BUILDING$"
+	.string "{JPN}シルフ カンパニー ほんしゃ ビル$"
 
 SaffronCity_Text_MrPsychicsHouse::
-	.string "MR. PSYCHIC'S HOUSE$"
+	.string "{JPN}エスパー おやじの いえ$"
 
 SaffronCity_Text_SilphsLatestProduct::
-	.string "SILPH's latest product!\n"
-	.string "Release to be determined...$"
+	.string "{JPN}シルフ うわさの しんせいひん!\n"
+	.string "… はつばいび みてい$"
 
 SaffronCity_Text_TrainerFanClubSign::
-	.string "POKEMON TRAINER FAN CLUB\p"
-	.string "Many TRAINERS have scribbled their\n"
-	.string "names on this sign.$"
+	.string "{JPN}ポケモン トレーナー ファンクラブ\p"
+	.string "かんばんに いろんな トレーナーの\n"
+	.string "なまえが らくがき されている……$"
 
 SaffronCity_Text_HowCanClubNotRecognizeLance::
-	.string "This FAN CLUB...\n"
-	.string "No one here has a clue!\p"
-	.string "How could they not recognize\n"
-	.string "the brilliance that is LANCE?\p"
-	.string "He stands for justice!\n"
-	.string "He's cool, and yet passionate!\l"
-	.string "He's the greatest, LANCE!$"
+	.string "{JPN}はなしの あうひとが ぜーんぜん\n"
+	.string "いないわっ この ファンクラブ!\p"
+	.string "せいぎかんが つよくて\n"
+	.string "ねっけつで かっこよくて\l"
+	.string "いちばん すごい ひと…!\p"
+	.string "その ワタルさまの よさが\n"
+	.string "わからない なんて! プンプン!$"
 

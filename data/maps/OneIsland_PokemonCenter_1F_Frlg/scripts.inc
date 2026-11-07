@@ -563,359 +563,350 @@ OneIsland_PokemonCenter_1F_Movement_BillExit::
 	step_end
 
 OneIsland_PokemonCenter_1F_Text_BillHeyThereCelio::
-	.string "BILL: Hey, there!\n"
-	.string "CELIO!$"
+	.string "{JPN}マサキ『よッ ニシキ!$"
 
 OneIsland_PokemonCenter_1F_Text_CelioCantBelieveYouCameOut::
-	.string "CELIO: BILL!\n"
-	.string "I can't believe you came out here.$"
+	.string "{JPN}ニシキ『マサキさん\n"
+	.string "きて くれたんですね!$"
 
 OneIsland_PokemonCenter_1F_Text_BillHowsYourResearchComing::
-	.string "BILL: Well, absolutely!\n"
-	.string "How's your research coming along?\p"
-	.string "...Oh, wait a sec.$"
+	.string "{JPN}マサキ『とうぜんや!\n"
+	.string "どや けんきゅうの ほうは\p"
+	.string "……っと そのまえに$"
 
 OneIsland_PokemonCenter_1F_Text_ThisIsMyBuddyCelio::
-	.string "{PLAYER}, this is my buddy CELIO.\n"
-	.string "He's one dedicated PC MANIAC!$"
+	.string "{JPN}{PLAYER}! こいつが ニシキ!\n"
+	.string "がんばる パソコンマニアや!$"
 
 OneIsland_PokemonCenter_1F_Text_PlayerIsRisingPokemonChamp::
-	.string "CELIO, this is {PLAYER}, a rising\n"
-	.string "contender as the POKEMON CHAMP!$"
+	.string "{JPN}ニシキ! こいつが {PLAYER}!\n"
+	.string "ポケモンチャンピオン こうほや!$"
 
 OneIsland_PokemonCenter_1F_Text_PlayerIsReigningPokemonChamp::
-	.string "CELIO, this is {PLAYER}, the\n"
-	.string "reigning POKEMON CHAMP!$"
+	.string "{JPN}ニシキ! こいつが {PLAYER}!\n"
+	.string "ポケモンチャンピオンや!$"
 
 OneIsland_PokemonCenter_1F_Text_CelioThatsReallyImpressive::
-	.string "CELIO: That's really impressive.\p"
-	.string "I hate to say it, but I have zero\n"
-	.string "aptitude for battling.\p"
-	.string "Anyways, I'm glad to meet you.$"
+	.string "{JPN}ニシキ『すごいんですね!\n"
+	.string "オレ しょうぶは さっぱり\l"
+	.string "かてない から…\p"
+	.string "よろしく おねがいします!$"
 
 OneIsland_PokemonCenter_1F_Text_BillBringMeUpToSpeed::
-	.string "BILL: So, bring me up to speed.\n"
-	.string "How's your machine running?$"
+	.string "{JPN}マサキ『で どないなん?\n"
+	.string "マシンの ほうは$"
 
 OneIsland_PokemonCenter_1F_Text_CelioPCsCantLinkWithYours::
-	.string "CELIO: It's running fine, but we're\n"
-	.string "too remote out here.\p"
-	.string "The PCs on this island just can't\n"
-	.string "link with your PC, BILL.$"
+	.string "{JPN}ニシキ『やはり とおすぎます…\p"
+	.string "このしまの パソコン からは\n"
+	.string "マサキさんの パソコンには\l"
+	.string "なかなか つながらない です…$"
 
 OneIsland_PokemonCenter_1F_Text_BillLetMeHelpYou::
-	.string "BILL: Oh, yeah?\n"
-	.string "Okay, let me take a look-see.\p"
-	.string "...Hang on here...\n"
-	.string "I think we can make it work.\l"
-	.string "Let me help you, okay?$"
+	.string "{JPN}マサキ『どれ みせてみい\p"
+	.string "………なんや これなら\n"
+	.string "なんとか なりそうやないか!\l"
+	.string "ちっと てつだったるわ$"
 
 OneIsland_PokemonCenter_1F_Text_CanYouDeliverThisMeteoritePlayer::
-	.string "{PLAYER}, can I get you to wait for\n"
-	.string "me just a bit?\p"
-	.string "...Actually, can I get you to do\n"
-	.string "me a favor?\p"
-	.string "The island next to this one's\n"
-	.string "called TWO ISLAND.\p"
-	.string "There's a guy there that runs\n"
-	.string "a GAME CORNER.\p"
-	.string "He has this thing for rare rocks\n"
-	.string "and gems.\p"
-	.string "We keep in touch, being fellow\n"
-	.string "maniacs.\p"
-	.string "So, can I get you to deliver this\n"
-	.string "METEORITE to him?$"
+	.string "{JPN}{PLAYER} ちょっとだけ\n"
+	.string "まっといて くれる?\p"
+	.string "……せや ひとつ たのまれて!\p"
+	.string "おとなりに 2のしま ちゅう\n"
+	.string "しまが あって\l"
+	.string "ゲームコーナーを やってる\l"
+	.string "おっさんが いてるんや\p"
+	.string "めずらしい いしが すきでな…\n"
+	.string "マニアどうし つきあいが あるんや\p"
+	.string "そのおっさんに\n"
+	.string "この いんせき あげたって$"
 
 OneIsland_PokemonCenter_1F_Text_AcceptedMeteoriteFromBill::
-	.string "{PLAYER} accepted the METEORITE\n"
-	.string "from BILL.$"
+	.string "{JPN}{PLAYER}は いんせきを\n"
+	.string "マサキから あずかった!$"
 
 OneIsland_PokemonCenter_1F_Text_CelioPleaseTakeThis::
-	.string "CELIO: {PLAYER}, if you are going\n"
-	.string "to TWO ISLAND, please take this.$"
+	.string "{JPN}ニシキ『{PLAYER}さん\n"
+	.string "2のしまに いかれる なら\l"
+	.string "これを さしあげます$"
 
 OneIsland_PokemonCenter_1F_Text_PassLetsYouTravelBetweenIslands::
-	.string "It's a PASS for the ferry service\n"
-	.string "serving the local islands.\p"
-	.string "It will let you travel between the\n"
-	.string "ISLANDS ONE, TWO, and THREE.\p"
-	.string "Oh, you should have this, too.$"
+	.string "{JPN}2のしまと 3のしまに\n"
+	.string "ふねで いける パスポートです\p"
+	.string "それと これもどうぞ!$"
 
 OneIsland_PokemonCenter_1F_Text_ReceivedExtraPageForTownMap::
-	.string "{PLAYER} received an extra page\n"
-	.string "for the TOWN MAP!$"
+	.string "{JPN}{PLAYER}は タウンマップの\n"
+	.string "あたらしいページを もらった!$"
 
 OneIsland_PokemonCenter_1F_Text_ReceivedTownMap::
-	.string "{PLAYER} received\n"
-	.string "a TOWN MAP!$"
+	.string "{JPN}{PLAYER}は\n"
+	.string "タウンマップを もらった!$"
 
 OneIsland_PokemonCenter_1F_Text_BillCatchYouLater::
-	.string "BILL: I'll catch you later!\n"
-	.string "Say hi to the guy for me!$"
+	.string "{JPN}マサキ『ほな また あとでな!\n"
+	.string "おっさんに よろしゅう!$"
 
 OneIsland_PokemonCenter_1F_Text_HmmHowAboutLikeThis::
-	.string "Hmm...\p"
-	.string "How about we try this like this...$"
+	.string "{JPN}うーん\p"
+	.string "ここは こうすれば\n"
+	.string "ええんちゃう かな……?$"
 
 OneIsland_PokemonCenter_1F_Text_GotPCWorkingStrollAWhileMore::
-	.string "Oh, hey, {PLAYER}!\p"
-	.string "Did you see?\n"
-	.string "We got the PC working!\p"
-	.string "I've got a few things to show\n"
-	.string "CELIO here.\p"
-	.string "Can you go out on a stroll or\n"
-	.string "something for a while more?$"
+	.string "{JPN}おッ {PLAYER}!\n"
+	.string "パソコン つかえる ように\l"
+	.string "なっとった やろ!\p"
+	.string "あとは… ニシキに\n"
+	.string "おしえとく ことが あるから\l"
+	.string "もすこし さんぽ しといて!$"
 
 OneIsland_PokemonCenter_1F_Text_SorryForBeingPoorHost::
-	.string "I'm sorry for taking up so much of\n"
-	.string "BILL's time.\p"
-	.string "I'm also sorry for being such a \n"
-	.string "poor host on your visit here.$"
+	.string "{JPN}マサキさんを おかり しますね\p"
+	.string "せっかく いらしたのに\n"
+	.string "なにも できなくて ごめんなさい$"
 
 OneIsland_PokemonCenter_1F_Text_UsualPCServicesUnavailable::
-	.string "The usual PC services aren't\n"
-	.string "available...$"
+	.string "{JPN}いつも つかってる パソコンは\n"
+	.string "まだ よびだせない…$"
 
 OneIsland_PokemonCenter_1F_Text_BillOhHeyPlayer::
-	.string "BILL: Oh, hey!\n"
-	.string "{PLAYER}!$"
+	.string "{JPN}マサキ『あっ {PLAYER}!$"
 
 OneIsland_PokemonCenter_1F_Text_BillWeGotItDone::
-	.string "BILL: What kept you so long?\n"
-	.string "Been out having a good time?\p"
-	.string "We got it done.\n"
-	.string "The PCs are up and running!$"
+	.string "{JPN}マサキ『おそいやないか\n"
+	.string "たのしんで きたん?\p"
+	.string "こっちは もー バッチリ\n"
+	.string "パソコンが つながったで!$"
 
 OneIsland_PokemonCenter_1F_Text_CelioJobWentQuick::
-	.string "CELIO: The job went incredibly\n"
-	.string "quick.\p"
-	.string "BILL is one amazing guy...$"
+	.string "{JPN}ニシキ『あっというま\n"
+	.string "だったん ですよ\p"
+	.string "マサキさんは やっぱり すごいな…$"
 
 OneIsland_PokemonCenter_1F_Text_BillYouveLearnedALot::
-	.string "BILL: No, no! There was almost\n"
-	.string "nothing left for me to do.\p"
-	.string "CELIO, I have to hand it to you.\n"
-	.string "You've learned a lot.$"
+	.string "{JPN}マサキ『いやいや! ほとんど\n"
+	.string "てつだうとこ なかったわ\p"
+	.string "ニシキー! おまえさん\n"
+	.string "ずいぶん べんきょう したんやなあ$"
 
 OneIsland_PokemonCenter_1F_Text_CelioOhReallyEhehe::
-	.string "CELIO: Oh, really?\n"
-	.string "Ehehe...$"
+	.string "{JPN}ニシキ『えっ!\n"
+	.string "えへへ…$"
 
 OneIsland_PokemonCenter_1F_Text_BillWeShouldHeadBackToKanto::
-	.string "BILL: Well, there you have it.\n"
-	.string "I'm finished with the job.\l"
-	.string "We should head back to KANTO.\p"
-	.string "CELIO, I'll be seeing you again.$"
+	.string "{JPN}マサキ『まっ というわけで\n"
+	.string "しごとは おしまいや!\l"
+	.string "カントーに かえろか\p"
+	.string "ニシキ ほな またな!$"
 
 OneIsland_PokemonCenter_1F_Text_CelioPromiseIllShowYouAroundSometime::
-	.string "CELIO: {PLAYER}, I'm really sorry\n"
-	.string "that we sent you off alone today.\p"
-	.string "I promise, I will show you around\n"
-	.string "these islands sometime.$"
+	.string "{JPN}ニシキ『{PLAYER}さん\n"
+	.string "きょうは おひとりで\l"
+	.string "いかせちゃって ごめんなさい\p"
+	.string "オレ そのうち かならず\n"
+	.string "ごあんない しますから!$"
 
 OneIsland_PokemonCenter_1F_Text_CelioImModifyingMyNetworkMachine::
-	.string "CELIO: Hello!\n"
-	.string "You look awfully busy as always.\p"
-	.string "How am I doing?\p"
-	.string "Well, I'm modifying my Network\n"
-	.string "Machine.\p"
-	.string "When I get done with the machine,\n"
-	.string "I hope you'll be first to use it,\l"
-	.string "{PLAYER}.$"
+	.string "{JPN}ニシキ『こんにちは!\n"
+	.string "いつも おいそがしそう ですね\p"
+	.string "オレですか?\n"
+	.string "この ネットワークマシンを\l"
+	.string "かいりょう してます\p"
+	.string "マシンが かんせいしたら\n"
+	.string "まっさきに {PLAYER}さんに\l"
+	.string "つかって ほしいなあ$"
 
 OneIsland_PokemonCenter_1F_Text_CelioCaughtMoreMonMaybeICanBeUseful::
-	.string "CELIO: {PLAYER}, how have things\n"
-	.string "been for you?\p"
-	.string "Oh, is that right?\n"
-	.string "You've caught more POKEMON.\p"
-	.string "Do you know what?\n"
-	.string "Maybe I can be useful to you.$"
+	.string "{JPN}ニシキ『{PLAYER}さん\n"
+	.string "さいきんは どうですか?\p"
+	.string "へえー もっと たくさんの\n"
+	.string "しゅるいの ポケモンを…?\p"
+	.string "それなら オレ\n"
+	.string "おてつだい できるかも しれません$"
 
 OneIsland_PokemonCenter_1F_Text_YoullBeTradingFromTrainersFarAway::
-	.string "I'm modifying the Network Machine\n"
-	.string "right now.\p"
-	.string "I'm changing it so it can handle\n"
-	.string "trades over long distances.\p"
-	.string "When I get finished, you'll be\n"
-	.string "trading for exotic POKEMON from\l"
-	.string "TRAINERS far away.$"
+	.string "{JPN}いま とおいちほうの ひとと\n"
+	.string "ポケモンを こうかん できるように\l"
+	.string "ネットワークマシンを\l"
+	.string "かいりょう して いるんです\p"
+	.string "マシンが かんせい したら\n"
+	.string "めずらしい ポケモンを\l"
+	.string "こうかん して もらえますよ!$"
 
 OneIsland_PokemonCenter_1F_Text_NeedsSpecialGemstone::
-	.string "But, there is a slight catch.\p"
-	.string "For the link to work, the Machine\n"
-	.string "needs a special gemstone.\p"
-	.string "It's supposed to be on ONE ISLAND,\n"
-	.string "but I haven't found one yet.\p"
-	.string "Who knows where it could be.$"
+	.string "{JPN}ただ… つうしんが うまくいくには\n"
+	.string "ある とくべつな いしが\l"
+	.string "ひつよう なんです\p"
+	.string "1のしまの どこかに\n"
+	.string "あると いうけど みつからなくて…\p"
+	.string "どこに あるんでしょうね?$"
 
 OneIsland_PokemonCenter_1F_Text_TryingToFindGem::
-	.string "I was trying to find the gem\n"
-	.string "even while I was studying.\p"
-	.string "As a result, I've made no headway\n"
-	.string "in both my search and studies...\p"
-	.string "If I relied on BILL, I'm sure my\n"
-	.string "research would progress.\p"
-	.string "But this time, I want to try to do\n"
-	.string "things by myself.$"
+	.string "{JPN}けんきゅう しながら\n"
+	.string "いしを さがして いるから\l"
+	.string "どちらも はかどらないんです…\p"
+	.string "マサキさんに たよれば\n"
+	.string "けんきゅうは すすみます けど\l"
+	.string "こんどは それは なしで\l"
+	.string "がんばろうと おもって いるんです$"
 
 OneIsland_PokemonCenter_1F_Text_OhThats::
-	.string "Oh!\n"
-	.string "Th-that's...$"
+	.string "{JPN}え! あ それは!$"
 
 OneIsland_PokemonCenter_1F_Text_HandedRubyToCelio::
-	.string "{PLAYER} handed the RUBY\n"
-	.string "to CELIO.$"
+	.string "{JPN}{PLAYER}は ニシキに\n"
+	.string "ルビーを わたした!$"
 
 OneIsland_PokemonCenter_1F_Text_MayIAskOneMoreFavor::
-	.string "Thank you!\n"
-	.string "{PLAYER}, you're simply amazing.\p"
-	.string "... ... ...  ... ... ...\p"
-	.string "Um... May I ask one more giant favor\n"
-	.string "of you?$"
+	.string "{JPN}ありがとう…!\n"
+	.string "{PLAYER}さんって すごいです!\p"
+	.string "……… ………\p"
+	.string "あの おねがいが あるんですが\n"
+	.string "きいて もらえますか?$"
 
 OneIsland_PokemonCenter_1F_Text_PleaseINeedYourHelp::
-	.string "It... It's not anything weird.\n"
-	.string "Please, I need your help.$"
+	.string "{JPN}へ へんな ことじゃ ないです\n"
+	.string "どうか おねがいします!$"
 
 OneIsland_PokemonCenter_1F_Text_AnotherGemstoneInSeviiIslands::
-	.string "While I was studying gemstones,\n"
-	.string "I discovered something important.\p"
-	.string "There is another gem that forms\n"
-	.string "a pair with this RUBY.\p"
-	.string "That other gemstone is supposed to\n"
-	.string "be in the SEVII ISLANDS.\p"
-	.string "{PLAYER}, please, I need you to go\n"
-	.string "find the other gem.\p"
-	.string "{PLAYER}, may I have your ferry\n"
-	.string "PASS and the TOWN MAP?$"
+	.string "{JPN}いしの ことを しらべていて\n"
+	.string "わかったんですが…\p"
+	.string "この ルビーと\n"
+	.string "ついに なっている いしが\l"
+	.string "ナナシマの どこかに\l"
+	.string "ある はずなんです\p"
+	.string "{PLAYER}さん おねがいです\n"
+	.string "それを さがして ください!\p"
+	.string "{PLAYER}さん ふねのパスと\n"
+	.string "タウンマップを かしてください$"
 
 OneIsland_PokemonCenter_1F_Text_ReturnedTriPassForRainbowPass::
-	.string "{PLAYER} returned the TRI-PASS and\n"
-	.string "received the RAINBOW PASS.$"
+	.string "{JPN}{PLAYER}は トライパスを かえして\n"
+	.string "レインボーパスを もらった!$"
 
 OneIsland_PokemonCenter_1F_Text_ObtainedExtraMapPage::
-	.string "Obtained an extra page for the\n"
-	.string "TOWN MAP!$"
+	.string "{JPN}タウンマップの\n"
+	.string "あたらしいページを もらった!$"
 
 OneIsland_PokemonCenter_1F_Text_PassLetYouGetToAllIslands::
-	.string "This is my own ferry PASS.\p"
-	.string "It will let you get to all the\n"
-	.string "SEVII ISLANDS.\p"
-	.string "{PLAYER}, please, I can't do\n"
-	.string "it without your help.$"
+	.string "{JPN}これ オレの パスなんです\n"
+	.string "このパス だったら\l"
+	.string "ナナシマの すべての しまへ\l"
+	.string "ゆけるんです\p"
+	.string "{PLAYER}さん\n"
+	.string "どうか おねがいします!$"
 
 OneIsland_PokemonCenter_1F_Text_HandedSapphireToCelio::
-	.string "{PLAYER} handed the SAPPHIRE\n"
-	.string "to CELIO.$"
+	.string "{JPN}{PLAYER}は ニシキに\n"
+	.string "サファイアを わたした!$"
 
 OneIsland_PokemonCenter_1F_Text_ThankYouGiveMeTime::
-	.string "CELIO: So this is the gem that\n"
-	.string "forms a pair with the RUBY...\p"
-	.string "{PLAYER}, you've gone through a lot\n"
-	.string "to get this, didn't you?\p"
-	.string "You don't have to tell me. I know\n"
-	.string "it wasn't easy.\p"
-	.string "Thank you so much!\p"
-	.string "Now it's my turn to work for you!\n"
-	.string "Please give me a little time.$"
+	.string "{JPN}ニシキ『これが\n"
+	.string "ルビーと ついの いし…\p"
+	.string "{PLAYER}さん……\n"
+	.string "これを てに いれるのに\l"
+	.string "いろいろと くろう されましたね\l"
+	.string "いわなくても わかります\p"
+	.string "ほんとうに ありがとう!\p"
+	.string "よし オレも がんばるぞ!\n"
+	.string "すこし まってて ください!$"
 
 OneIsland_PokemonCenter_1F_Text_OkayThisIsGood::
-	.string "Okay, this is good...$"
+	.string "{JPN}よし いいぞ…$"
 
 OneIsland_PokemonCenter_1F_Text_LinkedUpWithLanette::
-	.string "I did it!\n"
-	.string "I linked up with LANETTE!$"
+	.string "{JPN}やった マユミさんと\n"
+	.string "つながったぞ…!$"
 
 OneIsland_PokemonCenter_1F_Text_ManagedToLinkWithHoennThankYou::
-	.string "{PLAYER}...\n"
-	.string "{PLAYER}, I did it!\p"
-	.string "I've managed to link up with\n"
-	.string "TRAINERS in the HOENN region!\p"
-	.string "Finally, the Network Machine is\n"
-	.string "fully operational!\p"
-	.string "{PLAYER}, I owe it all to you!\p"
-	.string "Thanks to you, my dream came\n"
-	.string "true...$"
+	.string "{JPN}{PLAYER}さん… {PLAYER}さん\n"
+	.string "できました!\p"
+	.string "ホウエンちほうの トレーナーと\n"
+	.string "つうしんが できるんです!\p"
+	.string "これで ネットワークマシンは\n"
+	.string "かんせい です……!\p"
+	.string "すべて\n"
+	.string "{PLAYER}さんの おかげです!\l"
+	.string "オレの ゆめが かなった のは…$"
 
 OneIsland_PokemonCenter_1F_Text_WishYouBestOfLuck::
-	.string "I...\n"
-	.string "I'm not crying.\p"
-	.string "That's enough about me!\p"
-	.string "{PLAYER}, you're going to keep\n"
-	.string "looking for exotic POKEMON, right?\p"
-	.string "I wish you the best of luck!$"
+	.string "{JPN}な ないてなんか いませんよ\p"
+	.string "それより {PLAYER}さん\n"
+	.string "たくさんの めずらしい ポケモン\l"
+	.string "さがすの でしょ?\l"
+	.string "がんばって ください!$"
 
 OneIsland_PokemonCenter_1F_Text_CelioHearingRumorsAboutYou::
-	.string "CELIO: Hello!\p"
-	.string "{PLAYER}, I've been hearing rumors\n"
-	.string "about you.$"
+	.string "{JPN}ニシキ『こんにちは!\p"
+	.string "{PLAYER}さんの おうわさ\n"
+	.string "きいて いますよ!$"
 
 OneIsland_PokemonCenter_1F_Text_BillsFirstMonWasAbra::
-	.string "{PLAYER}, what's your favorite kind\n"
-	.string "of POKEMON?\p"
-	.string "BILL is a POKeMANIAC, so he loves\n"
-	.string "every kind.\p"
-	.string "Apparently, the first one he caught\n"
-	.string "was an ABRA.$"
+	.string "{JPN}{PLAYER}さんは どんな\n"
+	.string "ポケモンが おすき ですか?\p"
+	.string "マサキさんは マニアだから\n"
+	.string "どんな ポケモンも おすきですけど\l"
+	.string "はじめて つかまえた のは\l"
+	.string "ケーシィだそう ですよ$"
 
 OneIsland_PokemonCenter_1F_Text_BillsHometownInGoldenrod::
-	.string "By the way, {PLAYER}, you're from\n"
-	.string "PALLET TOWN, aren't you?\p"
-	.string "I've heard that it's a quiet and\n"
-	.string "pleasant place.\p"
-	.string "BILL's hometown is GOLDENROD CITY,\n"
-	.string "where his folks still live.\p"
-	.string "I've heard that it's quite the\n"
-	.string "festive, bustling city.\p"
-	.string "I'd like to go there one day.$"
+	.string "{JPN}そういえば {PLAYER}さんって\n"
+	.string "マサラタウンの かた でしたね\l"
+	.string "しずかで よいところと ききます!\p"
+	.string "マサキさんは コガネシティに\n"
+	.string "ごじっかが あるんですよ!\l"
+	.string "それは それは\l"
+	.string "にぎやかな まちだそうです\p"
+	.string "オレも いって みたいなあ…$"
 
 OneIsland_PokemonCenter_1F_Text_BillCantStomachMilk::
-	.string "{PLAYER}, is there anything that\n"
-	.string "you can't stand?\p"
-	.string "Apparently, BILL simply can't\n"
-	.string "stomach milk at all.$"
+	.string "{JPN}{PLAYER}さんは\n"
+	.string "にがてな ものって ありますか?\p"
+	.string "マサキさんは どうしても\n"
+	.string "ミルクが のめないん ですよ$"
 
 OneIsland_PokemonCenter_1F_Text_CameFromPalletDontKnowIt::
-	.string "Oh, you're a stranger here!\n"
-	.string "Hi! Where did you come from?\p"
-	.string "...PALLET TOWN?\n"
-	.string "I don't know it!$"
+	.string "{JPN}しらない ひとだー!\n"
+	.string "ねえ どっから きたの?\p"
+	.string "…マサラタウンー?\n"
+	.string "きいた こと ないや$"
 
 OneIsland_PokemonCenter_1F_Text_EnormousVolcanoOnIsland::
-	.string "On this island, there's an enormous\n"
-	.string "volcano.\p"
-	.string "It hasn't erupted lately, so why\n"
-	.string "not enjoy a hike?$"
+	.string "{JPN}この しまには\n"
+	.string "おおきな かざんが あるのだ!\p"
+	.string "さいきんは ふんか\n"
+	.string "してない みたいだし\l"
+	.string "やまのぼりを たのしんで きたら?$"
 
 OneIsland_PokemonCenter_1F_Text_WishICouldTradeWithBoyfriend::
-	.string "I wish I could trade POKEMON with\n"
-	.string "my boyfriend who lives far away...$"
+	.string "{JPN}とおくに すむ カレと\n"
+	.string "ポケモンの こうかんが したいわ$"
 
 OneIsland_PokemonCenter_1F_Text_TradedWithFarAwayBoyfriend::
-	.string "I traded POKEMON with my boyfriend\n"
-	.string "far away!\p"
-	.string "Everyone's saying that we can\n"
-	.string "thank you and CELIO.\p"
-	.string "So, thank you!$"
+	.string "{JPN}とおくの カレと\n"
+	.string "ポケモンを こうかん できたの!\p"
+	.string "あなたと ニシキくんの\n"
+	.string "おかげですって みんなが…\l"
+	.string "ありがとう!$"
 
 OneIsland_PokemonCenter_1F_Text_MachineUnderAdjustment::
-	.string "Network Machine\n"
-	.string "Link Level 0\p"
-	.string "...POKEMON Storage System under\n"
-	.string "adjustment...$"
+	.string "{JPN}ネットワークマシン\n"
+	.string "つうしん レベル 0\p"
+	.string "……ポケモン あずかり システム\n"
+	.string "ちょうせいちゅう$"
 
 OneIsland_PokemonCenter_1F_Text_MachineLinkedWithKanto::
-	.string "Network Machine\n"
-	.string "Link Level 1\p"
-	.string "Link established with the KANTO\n"
-	.string "region.$"
+	.string "{JPN}ネットワークマシン\n"
+	.string "つうしん レベル 1\p"
+	.string "カントーちほうとの\n"
+	.string "つうしん じゅんび かんりょう$"
 
 OneIsland_PokemonCenter_1F_Text_MachineLinkedWithKantoAndHoenn::
-	.string "Network Machine\n"
-	.string "Link Level 2\p"
-	.string "Link established with the KANTO\n"
-	.string "and HOENN regions.$"
+	.string "{JPN}ネットワークマシン\n"
+	.string "つうしん レベル 2\p"
+	.string "カントーちほう ホウエンちほうとの\n"
+	.string "つうしん じゅんび かんりょう$"
 
 OneIsland_PokemonCenter_1F_Text_ObtainedTriPass::
-	.string "Obtained the TRI-PASS!$"
+	.string "{JPN}トライパスを てにいれた!$"
 

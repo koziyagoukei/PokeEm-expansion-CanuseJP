@@ -51,29 +51,26 @@ ThreeIsland_DunsparceTunnel_EventScript_ProspectorAlreadyGaveNugget::
 	end
 
 ThreeIsland_DunsparceTunnel_Text_ProspectingForGold::
-	.string "Hey, there!\n"
-	.string "How's it going?\p"
-	.string "What am I doing here, you ask?\n"
-	.string "Why, I'm prospecting for gold!\p"
-	.string "When I strike it rich, I'm buying\n"
-	.string "a house in KANTO.$"
+	.string "{JPN}やあやあ こんにちは!\n"
+	.string "なに して いるかって?\l"
+	.string "きんを ほって いるのさ!\p"
+	.string "きんが いっぱい でたら\n"
+	.string "カントーに マイホームを かうぞ!$"
 
 ThreeIsland_DunsparceTunnel_Text_StruckGoldThisIsForYou::
-	.string "Hey, there! How's it going?\n"
-	.string "Did you hear? I've struck gold!\p"
-	.string "You remembered that I was\n"
-	.string "prospecting, didn't you?\p"
-	.string "You can't begin to imagine just\n"
-	.string "how happy I am.\p"
-	.string "So, I'll show you!\n"
-	.string "This is for you!$"
+	.string "{JPN}やあやあ よく きたね!\n"
+	.string "おかげさまで きんが でたよ!\p"
+	.string "おじさんが きんを ほってたこと\n"
+	.string "おぼえて いて くれたんだね\l"
+	.string "おじさん すごく うれしいよ!\p"
+	.string "これ きみに あげよう!$"
 
 ThreeIsland_DunsparceTunnel_Text_ThatsANugget::
-	.string "That's a NUGGET!\p"
-	.string "I can't give you any nuggets of\n"
-	.string "wisdom, so that'll have to do!$"
+	.string "{JPN}それは おじさんの きんのたま!\n"
+	.string "ゆうこうに かつようして くれ!\l"
+	.string "おじさんの きんのたま だからね!$"
 
 ThreeIsland_DunsparceTunnel_Text_WhoopsBagCrammedFull::
-	.string "Whoops, your BAG is crammed full!\n"
-	.string "I'll give this to you later.$"
+	.string "{JPN}おっと にもつが いっぱいだね\n"
+	.string "また あとで あげよう!$"
 

@@ -30,56 +30,56 @@ PewterCity_Museum_2F_EventScript_MoonStone::
 	end
 
 Text_SeismicTossTeach::
-	.string "The secrets of space...\n"
-	.string "The mysteries of earth...\p"
-	.string "There are so many things about\n"
-	.string "which we know so little.\p"
-	.string "But that should spur us to study\n"
-	.string "harder, not toss in the towel.\p"
-	.string "The only thing you should toss...\p"
-	.string "Well, how about SEISMIC TOSS?\n"
-	.string "Should I teach that to a POKEMON?$"
+	.string "{JPN}うちゅうの ひみつ…\n"
+	.string "ちきゅうの ひみつ…\p"
+	.string "わからないこと ばかり だけど\n"
+	.string "けんきゅうを なげたら ダメです!\p"
+	.string "なげて いいのは\n"
+	.string "ちきゅうなげ だけ!\l"
+	.string "…おぼえて いきませんか?$"
 
 Text_SeismicTossDeclined::
-	.string "Is that so?\n"
-	.string "I'm sure you'll be back for it.$"
+	.string "{JPN}そうですか\n"
+	.string "また いずれ いらっしゃい$"
 
 Text_SeismicTossWhichMon::
-	.string "Which POKEMON wants to learn\n"
-	.string "SEISMIC TOSS?$"
+	.string "{JPN}どの ポケモンに\n"
+	.string "おぼえさせたら よいですか?$"
 
 Text_SeismicTossTaught::
-	.string "I hope you won't toss in the towel.\n"
-	.string "Keep it up.$"
+	.string "{JPN}あなたも しょうぶを なげず\n"
+	.string "がんばって くださいね$"
 
 PewterCity_Museum_1F_Text_WhatsSpecialAboutMoonStone::
-	.string "MOON STONE, huh?\p"
-	.string "What's so special about it?\n"
-	.string "Looks like an ordinary rock to me.$"
+	.string "{JPN}つきの いしね…\p"
+	.string "そこらへんの いしころと\n"
+	.string "どこが ちがうんだろう?$"
 
 PewterCity_Museum_1F_Text_BoughtColorTVForMoonLanding::
-	.string "July 20, 1969!\p"
-	.string "Humankind first set foot on the\n"
-	.string "moon that day.\p"
-	.string "I bought a color TV just so I\n"
-	.string "could watch that news.$"
+	.string "{JPN}1969ねん 7がつ 20か!\p"
+	.string "じんるい\n"
+	.string "はじめて つきに たつ!\p"
+	.string "わしは あの ニュースが みたくて\n"
+	.string "カラーテレビを かったんじゃ!$"
 
 PewterCity_Museum_1F_Text_RunningSpaceExhibitThisMonth::
-	.string "This month, we're running a space\n"
-	.string "exhibit.$"
+	.string "{JPN}こんげつは\n"
+	.string "うちゅう はくらんかいを やってます$"
 
 PewterCity_Museum_1F_Text_AskedDaddyToCatchPikachu::
-	.string "I want a PIKACHU!\n"
-	.string "It's so cute!\p"
-	.string "I asked my daddy to catch me one!$"
+	.string "{JPN}わたしね わたしね\n"
+	.string "かわいいから ピカチュウ ほしい!\p"
+	.string "おとうさんに とってきてね って\n"
+	.string "おねがい してるの$"
 
 PewterCity_Museum_1F_Text_PikachuSoonIPromise::
-	.string "Yeah, a PIKACHU soon, I promise!$"
+	.string "{JPN}はい はい!\n"
+	.string "ピカチュウだな! こんどな!$"
 
 PewterCity_Museum_1F_Text_SpaceShuttle::
-	.string "Space Shuttle$"
+	.string "{JPN}スペース シャトル コロンビアごう$"
 
 PewterCity_Museum_1F_Text_MeteoriteThatFellOnMtMoon::
-	.string "A meteorite that fell on MT. MOON.\n"
-	.string "It is thought to be a MOON STONE.$"
+	.string "{JPN}オツキミやまに らっかした ぶったい\n"
+	.string "たぶん… つきの いし$"
 

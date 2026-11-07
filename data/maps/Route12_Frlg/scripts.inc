@@ -57,146 +57,149 @@ Route12_EventScript_FishingSign::
 	end
 
 Route12_Text_MonSprawledOutInSlumber::
-	.string "A POKEMON is sprawled out in\n"
-	.string "a deep and comfortable slumber.$"
+	.string "{JPN}ポケモンが とても\n"
+	.string "きもち よさそうに ねてます$"
 
 Text_SnorlaxWokeUp::
-	.string "SNORLAX woke up!\p"
-	.string "It attacked in a grumpy rage!$"
+	.string "{JPN}カビゴンが めを さました!\p"
+	.string "カビゴンは\n"
+	.string "ねぼけて おそってきた!$"
 
 Text_SnorlaxReturnedToMountains::
-	.string "SNORLAX calmed down.\n"
-	.string "It gave a huge yawn...\l"
-	.string "And returned to the mountains.$"
+	.string "{JPN}カビゴンは おとなしく なった\n"
+	.string "おおきな あくびを すると…\l"
+	.string "やまおくへ さって いった!$"
 
 Text_WantToUsePokeFlute::
-	.string "Want to use the POKe FLUTE?$"
+	.string "{JPN}ポケモンのふえを つかいますか?$"
 
 Text_PlayedPokeFlute::
-	.string "{PLAYER} played the POKe FLUTE.$"
+	.string "{JPN}{PLAYER}は\n"
+	.string "ポケモンのふえを つかった!$"
 
 Route12_Text_NedIntro::
-	.string "Yeah!\n"
-	.string "I got a bite here!$"
+	.string "{JPN}おっ おーッ!\n"
+	.string "ひいてる ひいてる!$"
 
 Route12_Text_NedDefeat::
-	.string "Tch!\n"
-	.string "Just a small fry...$"
+	.string "{JPN}ちッ!\n"
+	.string "げどう だったか$"
 
 Route12_Text_NedPostBattle::
-	.string "Hang on!\n"
-	.string "My line's snagged!$"
+	.string "{JPN}まって くれ!\n"
+	.string "つりいとが こんがらがった!$"
 
 Route12_Text_ChipIntro::
-	.string "Be patient.\n"
-	.string "Fishing is a waiting game.$"
+	.string "{JPN}… あわてるな!\n"
+	.string "まつ ことも また!\l"
+	.string "つりの たのしみ である$"
 
 Route12_Text_ChipDefeat::
-	.string "That one got away!$"
+	.string "{JPN}おっと…!\n"
+	.string "ちょっと まって くれ$"
 
 Route12_Text_ChipPostBattle::
-	.string "With a better ROD, I could catch\n"
-	.string "better POKEMON...$"
+	.string "{JPN}いい つりざおを つかえば\n"
+	.string "いい ポケモンが つれるんだが…$"
 
 Route12_Text_JustinIntro::
-	.string "I'm searching for a MOON STONE.\n"
-	.string "Have you found one?$"
+	.string "{JPN}つきのいし さがしてるんだ けど\n"
+	.string "きみ もって ない?$"
 
 Route12_Text_JustinDefeat::
-	.string "Oww!$"
+	.string "{JPN}ありゃりゃ…!$"
 
 Route12_Text_JustinPostBattle::
-	.string "I could have made my POKEMON\n"
-	.string "evolve with a MOON STONE.\p"
-	.string "I would have won then, I bet.$"
+	.string "{JPN}つきのいしが あれば\n"
+	.string "ポケモンが しんか して\l"
+	.string "ぼく かってた かも しれないよ$"
 
 Route12_Text_LucaIntro::
-	.string "Electricity is my specialty.\p"
-	.string "I don't know a thing about POKEMON\n"
-	.string "of the sea, though.$"
+	.string "{JPN}ぼくの せんもん でんき だから\n"
+	.string "うみ ポケモンは くわしく ないよ$"
 
 Route12_Text_LucaDefeat::
-	.string "Unplugged!$"
+	.string "{JPN}ふにゃ ふにゃ…$"
 
 Route12_Text_LucaPostBattle::
-	.string "Water conducts electricity, so you\n"
-	.string "should zap sea POKEMON.$"
+	.string "{JPN}うーん… たしか みずは\n"
+	.string "でんきを よく とおす から\l"
+	.string "わざが きく はず だよね…$"
 
 Route12_Text_HankIntro::
-	.string "The FISHING FOOL versus POKEMON\n"
-	.string "KID!$"
+	.string "{JPN}おうッ! つり バカ\n"
+	.string "ポケモン バカに であう!$"
 
 Route12_Text_HankDefeat::
-	.string "Touch too much!$"
+	.string "{JPN}さすが つよい!$"
 
 Route12_Text_HankPostBattle::
-	.string "I guess you get to be good at\n"
-	.string "what you like.\p"
-	.string "Well, you beat me at POKEMON,\n"
-	.string "but you can't top me at fishing.$"
+	.string "{JPN}すき こそ\n"
+	.string "ものの じょうず なれ… だな!\l"
+	.string "ぼくも つり なら まけないぞ!$"
 
 Route12_Text_ElliotIntro::
-	.string "I love fishing, don't get me wrong.\p"
-	.string "But it'd be best if I also had more\n"
-	.string "work.$"
+	.string "{JPN}つり ばっかり して ないで\n"
+	.string "もっと しごとも できれば\l"
+	.string "さいこう なんだが…$"
 
 Route12_Text_ElliotDefeat::
-	.string "It's not easy...$"
+	.string "{JPN}なかなか…\n"
+	.string "うまく いかん もの じゃ$"
 
 Route12_Text_ElliotPostBattle::
-	.string "It's all right.\n"
-	.string "Losing doesn't bug me anymore.$"
+	.string "{JPN}ははは… だいじょうぶ!\n"
+	.string "まけた くらいで はらは たてんよ$"
 
 Route12_Text_AndrewIntro::
-	.string "What's catching?\p"
-	.string "You never know what you could\n"
-	.string "catch!$"
+	.string "{JPN}… なにが つれるかって?\n"
+	.string "そりゃ つって みなけりゃ\l"
+	.string "わからんよ!$"
 
 Route12_Text_AndrewDefeat::
-	.string "Lost it!$"
+	.string "{JPN}しくじったな$"
 
 Route12_Text_AndrewPostBattle::
-	.string "What, MAGIKARP?\p"
-	.string "I catch them all the time, sure.\n"
-	.string "But, boy are they wimpy.$"
+	.string "{JPN}ああ コイキング… ね\n"
+	.string "よく つれる けど\l"
+	.string "よわすぎるんだよなあ…$"
 
 Route12_Text_RouteSign::
-	.string "ROUTE 12 \n"
-	.string "North to LAVENDER$"
+	.string "{JPN}ここは 12ばん どうろ\n"
+	.string "きた … シオン タウン$"
 
 Route12_Text_SportfishingArea::
-	.string "SPORTFISHING AREA$"
+	.string "{JPN}ここは つりの めいしょ$"
 
 Route12_Text_JesIntro::
-	.string "JES: If I win, I'm going to\n"
-	.string "propose to GIA.$"
+	.string "{JPN}シゲ『か かったら\n"
+	.string "アユに プロポーズ するぞ…!$"
 
 Route12_Text_JesDefeat::
-	.string "JES: Oh, please, why couldn't you\n"
-	.string "let us win?$"
+	.string "{JPN}シゲ『たのむよ\n"
+	.string "かたせて くれよお$"
 
 Route12_Text_JesPostBattle::
-	.string "JES: Oh, GIA, forgive me,\n"
-	.string "my love!$"
+	.string "{JPN}シゲ『アユ ごめんね ごめんね$"
 
 Route12_Text_JesNotEnoughMons::
-	.string "JES: GIA and I, we'll be\n"
-	.string "together forever.\p"
-	.string "We won't battle unless you have\n"
-	.string "two POKEMON of your own.$"
+	.string "{JPN}シゲ『ぼくと アユは\n"
+	.string "ずーーーっと いっしょ なんだ!\l"
+	.string "だから ポケモンも\l"
+	.string "2たい2 じゃないと やらないよ$"
 
 Route12_Text_GiaIntro::
-	.string "GIA: Hey, JES...\p"
-	.string "If we win, I'll marry you!$"
+	.string "{JPN}アユ『ねえ シゲ…\p"
+	.string "もし かてたら\n"
+	.string "けっこん して あげる!$"
 
 Route12_Text_GiaDefeat::
-	.string "GIA: Oh, but why?$"
+	.string "{JPN}アユ『あーん なんでー?$"
 
 Route12_Text_GiaPostBattle::
-	.string "GIA: JES, you silly!\n"
-	.string "You ruined this!$"
+	.string "{JPN}アユ『シゲの バカバカあー!$"
 
 Route12_Text_GiaNotEnoughMons::
-	.string "GIA: I can't bear to battle\n"
-	.string "without my JES!\p"
-	.string "Don't you have one more POKEMON?$"
+	.string "{JPN}アユ『シゲと べつべつに なんて\n"
+	.string "しょうぶ できない!\l"
+	.string "ポケモン もう1ぴき いない?$"

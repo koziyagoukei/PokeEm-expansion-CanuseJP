@@ -6,7 +6,7 @@ UndergroundPath_EastEntrance_EventScript_Woman::
 	end
 
 UndergroundPath_EastEntrance_Text_DoYouGoToCeladonDeptStore::
-	.string "The DEPARTMENT STORE in CELADON\n"
-	.string "has a great selection.\p"
-	.string "Do you go there very often?$"
+	.string "{JPN}あなたは よく いくの?\n"
+	.string "タマムシ シティの デパート\l"
+	.string "いろいろ うってて べんりよね$"
 

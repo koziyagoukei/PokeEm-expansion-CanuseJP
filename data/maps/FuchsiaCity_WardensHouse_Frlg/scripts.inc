@@ -59,56 +59,64 @@ FuchsiaCity_WardensHouse_EventScript_DisplaySign2::
 	end
 
 FuchsiaCity_WardensHouse_Text_HifFuffHefifoo::
-	.string "WARDEN: Hif fuff hefifoo!\p"
-	.string "Ha lof ha feef ee hafahi ho.\n"
-	.string "Heff hee fwee!$"
+	.string "{JPN}えんちょう『ふぁいへんひゃ\n"
+	.string "ふへほ はんひ\p"
+	.string "ひへは ほはへへ ひほうはッ!\n"
+	.string "はッ はふへへ ふへ!$"
 
 FuchsiaCity_WardensHouse_Text_AhHowheeHoHoo::
-	.string "Ah howhee ho hoo!\n"
-	.string "Eef ee hafahi ho!$"
+	.string "{JPN}よほひふ はほひまふは!\n"
+	.string "はふは はふぁりほーんひゃ!$"
 
 FuchsiaCity_WardensHouse_Text_HeOhayHeHaHoo::
-	.string "Ha?\n"
-	.string "He ohay heh ha hoo ee haheh!$"
+	.string "{JPN}はひ?\n"
+	.string "ほは ほうは…\l"
+	.string "ひひ ほはへには はのはんはッ!$"
 
 FuchsiaCity_WardensHouse_Text_GaveGoldTeethToWarden::
-	.string "{PLAYER} gave the GOLD TEETH\n"
-	.string "to the WARDEN.$"
+	.string "{JPN}えんちょうは {PLAYER}から\n"
+	.string "きんのいればを もらった!$"
 
 FuchsiaCity_WardensHouse_Text_WardenPoppedInHisTeeth::
-	.string "The WARDEN popped in his teeth!$"
+	.string "{JPN}もらった いればを\n"
+	.string "いそいで くちに はめた!$"
 
 FuchsiaCity_WardensHouse_Text_ThanksSonGiveYouSomething::
-	.string "WARDEN: Thanks, son!\n"
-	.string "You're a real lifesaver!\p"
-	.string "No one could understand a word\n"
-	.string "that I said, not a one!\p"
-	.string "I was too ashamed to show my face\n"
-	.string "around the OFFICE, even.\p"
-	.string "Let me give you something for your\n"
-	.string "trouble.$"
+	.string "{JPN}えんちょう『すんまへん!\l"
+	.string "ほんま たすかったわあ!\l"
+	.string "だれに なに いうても\l"
+	.string "ぜんぜん つうじへんし\p"
+	.string "はずかしゅうて じむしょも\n"
+	.string "かお だせへん かったんや\l"
+	.string "そや ぼうず!\l"
+	.string "あんがとな\l"
+	.string "おれいに ええもん やるわ!$"
 
 FuchsiaCity_WardensHouse_Text_ThanksLassieGiveYouSomething::
-	.string "WARDEN: Thank you, lassie!\n"
-	.string "You're a real lifesaver!\p"
-	.string "No one could understand a word\n"
-	.string "that I said, not a one!\p"
-	.string "I was too ashamed to show my face\n"
-	.string "around the OFFICE, even.\p"
-	.string "Let me give you something for your\n"
-	.string "trouble.$"
+	.string "{JPN}えんちょう『すんまへん!\l"
+	.string "ほんま たすかったわあ!\l"
+	.string "だれに なに いうても\l"
+	.string "ぜんぜん つうじへんし\p"
+	.string "はずかしゅうて じむしょも\n"
+	.string "かお だせへん かったんや\l"
+	.string "そや じょーちゃん!\l"
+	.string "あんがとな\l"
+	.string "おれいに ええもん やるわ!$"
 
 FuchsiaCity_WardensHouse_Text_ReceivedHM04FromWarden::
-	.string "{PLAYER} received HM04\n"
-	.string "from the WARDEN.$"
+	.string "{JPN}{PLAYER}は えんちょうから\n"
+	.string "ひでんマシン04を もらった!$"
 
 FuchsiaCity_WardensHouse_Text_ExplainStrength::
-	.string "WARDEN: Inside HM04 you'll find\n"
-	.string "STRENGTH.\p"
-	.string "It lets POKEMON move boulders when\n"
-	.string "you're outside of battle.\p"
-	.string "Oh yes, did you find the SECRET\n"
-	.string "HOUSE in the SAFARI ZONE?$"
+	.string "{JPN}えんちょう『ひでんマシン04の\n"
+	.string "なかみは かいりき やで!\p"
+	.string "ポケモンが\n"
+	.string "ちから もちに なってな\l"
+	.string "たたかわん ときは\l"
+	.string "いわを おすように なるで!\p"
+	.string "そや… それから!\n"
+	.string "サファリ ゾーンで\l"
+	.string "トレジャー ハウスは みつけたか?$"
 
 @ Unused
 FuchsiaCity_WardensHouse_Text_YouHaveTooMuchStuff::
@@ -116,10 +124,10 @@ FuchsiaCity_WardensHouse_Text_YouHaveTooMuchStuff::
 	.string "いっぱいやんけ!$"
 
 FuchsiaCity_WardensHouse_Text_MonPhotosFossilsOnDisplay::
-	.string "POKEMON photos and fossils are on\n"
-	.string "display.$"
+	.string "{JPN}ポケモンの カセキやら\n"
+	.string "しゃしんが かざって ある!$"
 
 FuchsiaCity_WardensHouse_Text_OldMonMerchandiseOnDisplay::
-	.string "Old POKEMON merchandise is on\n"
-	.string "display.$"
+	.string "{JPN}ふるい ポケモン グッズが\n"
+	.string "かざって ある!$"
 

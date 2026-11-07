@@ -14,19 +14,17 @@ ThreeIsland_House2_EventScript_Rocker::
 	end
 
 ThreeIsland_House2_Text_CantMakeThisSpoonBend::
-	.string "Urrrrrrrrgggghhhh...\n"
-	.string "Kwaaaaah!\p"
-	.string "...It's useless! I can't make this\n"
-	.string "spoon bend with my mind.\p"
-	.string "Maybe I really don't have any\n"
-	.string "psychic powers.$"
+	.string "{JPN}うううう… えーいっ!\p"
+	.string "…ダメだ! この スプーン\n"
+	.string "ぜんぜん まがらん\p"
+	.string "ぼくには ちょうのうりょく\n"
+	.string "ないの かしらん$"
 
 ThreeIsland_House2_Text_IAdmireSabrina::
-	.string "You know about a girl GYM LEADER\n"
-	.string "in SAFFRON CITY?\p"
-	.string "She uses PSYCHIC-type POKEMON,\n"
-	.string "right?\p"
-	.string "I admire her, I really do.\p"
-	.string "I've heard that she's one cool\n"
-	.string "customer and beautiful, too.$"
+	.string "{JPN}ヤマブキシティには\n"
+	.string "エスパー ポケモンを つかう\l"
+	.string "おんなの ジムリーダーが いるだろ\p"
+	.string "こいつ そのひとに\n"
+	.string "あこがれて いるんだ\l"
+	.string "クールな びじん だってさ$"
 

@@ -115,122 +115,124 @@ EventScript_Indigo_HighestAuthority::
 @ Flavor text for interacting with various background objects
 
 Text_Bookshelf::
-	.string "It's crammed full of POKEMON\n"
-	.string "books.$"
+	.string "{JPN}ポケモンの ほんが いっぱい!$"
 
 Text_NothingButPokemonBooks::
 	.string "ほんだなに ならんでいるのは\n"
 	.string "ポケモンの ほん ばかりだ$"
 
 Text_ATownMap::
-	.string "A TOWN MAP.$"
+	.string "{JPN}タウンマップだ!$"
 
 Text_PokeMartShelf::
-	.string "Wow!\n"
-	.string "Tons of POKEMON stuff!$"
+	.string "{JPN}わあ! ポケモングッズが\n"
+	.string "たくさん そろってる!$"
 
 Text_DishesPlatesNeatlyLinedUp::
-	.string "Dishes and plates are neatly\n"
-	.string "lined up.$"
+	.string "{JPN}いろんな しょっきが\n"
+	.string "きれいに ならんでいる!$"
 
 Text_Kitchen::
-	.string "It smells delicious!\n"
-	.string "Somebody's been cooking here.$"
+	.string "{JPN}いい においがする! なにか\n"
+	.string "りょうりを つくったあと みたい!$"
 
 Text_Dresser::
-	.string "It's a nicely made dresser.\n"
-	.string "It will hold a lot of stuff.$"
+	.string "{JPN}きれいな タンスだ!\n"
+	.string "いろんな ものが はいりそう!$"
 
 Text_Snacks::
-	.string "There's a pile of snacks here.$"
+	.string "{JPN}いろいろな たべもの が\n"
+	.string "おそなえ してある$"
 
 Text_PokemartSign::
-	.string "All your item needs fulfilled!\n"
-	.string "POKEMON MART$"
+	.string "{JPN}ポケモン グッズが いっぱい!\n"
+	.string "フレンドリィショップ$"
 
 Text_PokecenterSign::
-	.string "Heal Your POKEMON!\n"
-	.string "POKEMON CENTER$"
+	.string "{JPN}ポケモンの たいりょく かいふく!\n"
+	.string "ポケモンセンター$"
 
 Text_Indigo_UltimateGoal::
-	.string "INDIGO PLATEAU\p"
-	.string "The ultimate goal of TRAINERS!\n"
-	.string "POKEMON LEAGUE HQ$"
+	.string "{JPN}ここは セキエイ こうげん\p"
+	.string "ポケモン トレーナーの ちょうてん!\n"
+	.string "ポケモン リーグ ほんぶ$"
 
 Text_Indigo_HighestAuthority::
-	.string "INDIGO PLATEAU\p"
-	.string "The highest POKEMON authority!\n"
-	.string "POKEMON LEAGUE HQ$"
+	.string "{JPN}ここは セキエイ こうげん\p"
+	.string "ポケモン さいこう きかん\n"
+	.string "ポケモン リーグ ほんぶ$"
 
 Text_Food::
-	.string "It should be packed with all kinds\n"
-	.string "of delicious things to eat.$"
+	.string "{JPN}おいしそうな たべものが\n"
+	.string "いっぱい はいってそう!$"
 
 Text_Blueprints::
-	.string "It's a blueprint of some sort.\n"
-	.string "It's filled with diagrams and text.$"
+	.string "{JPN}なにかの せっけいず だ!\n"
+	.string "いろんな もじや えが かいてある$"
 
 Text_Painting::
-	.string "It's a pretty picture of a POKEMON.\n"
-	.string "It looks like it's feeling good.$"
+	.string "{JPN}きれいな ポケモンの えだ!\n"
+	.string "なんだか きもち よさそう!$"
 
 Text_PowerPlantMachine::
-	.string "What could this machine be?\n"
-	.string "Better not mess around with it!$"
+	.string "{JPN}なにの きかい だろう!?\n"
+	.string "さわるのは やめて おこう!$"
 
 Text_Telephone::
-	.string "It's a telephone.\n"
-	.string "Better not use it.$"
+	.string "{JPN}でんわだ!\n"
+	.string "かけるのは やめておこう!$"
 
 Text_Computer::
-	.string "It's all complicated words and\n"
-	.string "numbers that make no sense...$"
+	.string "{JPN}むずかしそうな もじや すうじ\n"
+	.string "ばかりで ちんぷんかんぷん!?$"
 
 Text_AdvertisingPoster::
-	.string "It's an advertising poster about\n"
-	.string "all kinds of products.$"
+	.string "{JPN}いろんな しょうひん の\n"
+	.string "せんでんが かかれている!$"
 
 Text_TastyFood::
-	.string "Oh, that smells tasty!\n"
-	.string "It might get the stomach growling!$"
+	.string "{JPN}いいにおい!\n"
+	.string "おなかが なりそう!$"
 
 Text_TrashBin::
-	.string "Inside this...\n"
-	.string "......\p"
-	.string "There's nothing here!$"
+	.string "{JPN}なかには\n"
+	.string "……\p"
+	.string "なにも はいってない!$"
 
 Text_Cup::
-	.string "It's a cup with a POKEMON mark\n"
-	.string "on it.$"
+	.string "{JPN}ポケモンの マークが\n"
+	.string "はいった コップだ!$"
 
 Text_PolishedWindow::
-	.string "The window is very well polished.$"
+	.string "{JPN}とても きれいに\n"
+	.string "みがかれた まど だ!$"
 
 Text_BeautifulSkyWindow::
-	.string "Outside the window...\p"
-	.string "The sky looks fantastically\n"
-	.string "beautiful.$"
+	.string "{JPN}まどの\n"
+	.string "むこうには ……\p"
+	.string "とてもきれいな そらが みえる!$"
 
 Text_BlinkingLights::
-	.string "Lights in different colors are\n"
-	.string "flashing on and off.$"
+	.string "{JPN}いろんな いろの ランプが\n"
+	.string "チカチカ ひかっている!$"
 
 Text_NeatlyLinedUpTools::
-	.string "All sorts of tools are lined up\n"
-	.string "neatly.$"
+	.string "{JPN}いろんな どうぐが\n"
+	.string "ならんでいる!$"
 
 Text_ImpressiveMachine::
-	.string "It's a machine of some sort.\n"
-	.string "It sure is impressive.$"
+	.string "{JPN}なんだか\n"
+	.string "すごそうな きかいだ!$"
 
 Text_VideoGame::
-	.string "It's the latest video game!\n"
-	.string "It sure looks fun!$"
+	.string "{JPN}さいしんの ゲームだ!\n"
+	.string "なんだか おもしろそう!$"
 
 Text_Burglary::
-	.string "There are obvious signs of burglary\n"
-	.string "here...$"
+	.string "{JPN}どろぼうに あらされた あとが\n"
+	.string "のこっている……$"
 
 Text_PlayerFacingTVScreen::
-	.string "There's a POKEMON on TV!\n"
-	.string "It looks like it's having fun.$"
+	.string "{JPN}テレビに ポケモンが\n"
+	.string "うつっている!\l"
+	.string "なんだか たのしそう!$"

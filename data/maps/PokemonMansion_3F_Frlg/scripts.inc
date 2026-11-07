@@ -31,27 +31,31 @@ PokemonMansion_3F_EventScript_Braydon::
 	end
 
 PokemonMansion_1F_Text_SimonIntro::
-	.string "This place is, like, huge!$"
+	.string "{JPN}それに しても\n"
+	.string "でっけー やしき だねえ!$"
 
 PokemonMansion_1F_Text_SimonDefeat::
-	.string "Ayah!$"
+	.string "{JPN}どろどろ ぼーん!$"
 
 PokemonMansion_1F_Text_SimonPostBattle::
-	.string "I wonder where my partner went.$"
+	.string "{JPN}… あいぼうが いたんだ\n"
+	.string "どこ いったんだろ?$"
 
 PokemonMansion_1F_Text_BraydonIntro::
-	.string "My mentor once lived here.$"
+	.string "{JPN}ここは かつて\n"
+	.string "わたしの せんせいが すんでいた$"
 
 PokemonMansion_1F_Text_BraydonDefeat::
-	.string "Whew!\n"
-	.string "Overwhelming!$"
+	.string "{JPN}なんと つよい$"
 
 PokemonMansion_1F_Text_BraydonPostBattle::
-	.string "So, you're stuck?\n"
-	.string "Try jumping off over there!$"
+	.string "{JPN}いきたい ばしょに いけなくて\n"
+	.string "こまってるのか… そこから\l"
+	.string "おもいきって とびおりて みろ!$"
 
 PokemonMansion_1F_Text_MewGaveBirthToMewtwo::
-	.string "Diary: Feb. 6\n"
-	.string "MEW gave birth.\p"
-	.string "We named the newborn MEWTWO.$"
+	.string "{JPN}にっき 2がつ6か\n"
+	.string "ミュウが こどもを うむ\p"
+	.string "うまれた ばかりの ジュニアを\n"
+	.string "ミュウツーと よぶことに…$"
 

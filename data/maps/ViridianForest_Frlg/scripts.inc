@@ -64,107 +64,110 @@ ViridianForest_EventScript_Charlie::
 	end
 
 ViridianForest_Text_FriendsItchingToBattle::
-	.string "I came here with some friends to\n"
-	.string "catch us some BUG POKEMON!\p"
-	.string "They're all itching to get into\n"
-	.string "some POKEMON battles!$"
+	.string "{JPN}ともだちと むし ポケモン\n"
+	.string "とりに きてるんだ!\p"
+	.string "ポケモン しょうぶ したくて\n"
+	.string "みんな ウズウズ してるよ!$"
 
 ViridianForest_Text_RickIntro::
-	.string "Hey! You have POKEMON!\n"
-	.string "Come on!\l"
-	.string "Let's battle 'em!$"
+	.string "{JPN}よーしッ!\n"
+	.string "きみは ポケモン もってるな?\l"
+	.string "しょうぶ しようぜ!$"
 
 ViridianForest_Text_RickDefeat::
-	.string "No!\nCATERPIE can't hack it!$"
+	.string "{JPN}まけたあ!\n"
+	.string "キャタピー なんか じゃ ダメか$"
 
 ViridianForest_Text_RickPostBattle::
-	.string "Ssh! You'll scare the bugs away.\n"
-	.string "Another time, okay?$"
+	.string "{JPN}しッ…!\n"
+	.string "むしが にげる から またな!$"
 
 ViridianForest_Text_DougIntro::
-	.string "Yo!\n"
-	.string "You can't jam out if you're a\l"
-	.string "POKEMON TRAINER!$"
+	.string "{JPN}おーいッ!\n"
+	.string "ポケモン トレーナーなら\l"
+	.string "しょうぶは ことわれ ないぜ!$"
 
 ViridianForest_Text_DougDefeat::
-	.string "Huh?\n"
-	.string "I ran out of POKEMON!$"
+	.string "{JPN}あれ?\n"
+	.string "もう ポケモンが ないや$"
 
 ViridianForest_Text_DougPostBattle::
-	.string "That totally stinks! I'm going to\n"
-	.string "catch some stronger ones!$"
+	.string "{JPN}くやしいな!\n"
+	.string "つよいのを つかまえて こよう!$"
 
 ViridianForest_Text_SammyIntro::
-	.string "Hey, wait up!\n"
-	.string "What's the hurry? Why the rush?$"
+	.string "{JPN}ちょっと まったあ!\n"
+	.string "そんな いそいで どこに いく?$"
 
 ViridianForest_Text_SammyDefeat::
-	.string "I give!\n"
-	.string "You're good at this!$"
+	.string "{JPN}まいった!\n"
+	.string "きみは つよいな!$"
 
 ViridianForest_Text_SammyPostBattle::
-	.string "Sometimes, you can find stuff on\n"
-	.string "the ground.\p"
-	.string "I'm looking for the stuff I\n"
-	.string "dropped. Can you help me?$"
+	.string "{JPN}みえない ところ でも ホントは\n"
+	.string "なにか おちてたり する!\p"
+	.string "さっき おとしもの したんだ\n"
+	.string "きみも さがして みて くれる?$"
 
 ViridianForest_Text_AnthonyIntro::
-	.string "I might be little, but I won't like\n"
-	.string "it if you go easy on me!$"
+	.string "{JPN}ボクが ちいさい からって\n"
+	.string "てかげんは いやだよ!$"
 
 ViridianForest_Text_AnthonyDefeat::
-	.string "Oh, boo.\n"
-	.string "Nothing went right.$"
+	.string "{JPN}あー だめだあ$"
 
 ViridianForest_Text_AnthonyPostBattle::
-	.string "I lost some of my allowance...$"
+	.string "{JPN}おこづかいが へって しまったあ$"
 
 ViridianForest_Text_CharlieIntro::
-	.string "Did you know that POKEMON evolve?$"
+	.string "{JPN}ポケモンが しんか するって\n"
+	.string "きみ しってる?$"
 
 ViridianForest_Text_CharlieDefeat::
-	.string "Oh!\n"
-	.string "I lost!$"
+	.string "{JPN}まけちゃった$"
 
 ViridianForest_Text_CharliePostBattle::
-	.string "BUG POKEMON evolve quickly.\n"
-	.string "They're a lot of fun!$"
+	.string "{JPN}むしポケモンは しんかが\n"
+	.string "はやくて たのしいよな!$"
 
 ViridianForest_Text_RanOutOfPokeBalls::
-	.string "I was throwing POKe BALLS to\n"
-	.string "catch POKEMON, and I ran out.\p"
-	.string "That's why you can never have too\n"
-	.string "many POKe BALLS.$"
+	.string "{JPN}ポケモン とろうとして\n"
+	.string "モンスター ボール なげてたら\l"
+	.string "すぐ なくなっちゃった\p"
+	.string "きみも おおめに\n"
+	.string "かって おくと いいよ$"
 
 ViridianForest_Text_AvoidGrassyAreasWhenWeak::
-	.string "TRAINER TIPS\p"
-	.string "If your POKEMON are weak and you\n"
-	.string "want to avoid battles, stay away\l"
-	.string "from grassy areas!$"
+	.string "{JPN}… おとくな けいじばん!\p"
+	.string "もってる ポケモンが よわって きて\n"
+	.string "たたかわせたく ない ときは\l"
+	.string "くさむらを よけて かえろう!$"
 
 ViridianForest_Text_UseAntidoteForPoison::
-	.string "For poison, use ANTIDOTE!\n"
-	.string "Get it at POKEMON MARTS!$"
+	.string "{JPN}どくを くらったら どくけし!\n"
+	.string "フレンドリィ ショップで!$"
 
 ViridianForest_Text_ContactOakViaPCToRatePokedex::
-	.string "TRAINER TIPS\p"
-	.string "Contact PROF. OAK via a PC to\n"
-	.string "get your POKeDEX evaluated!$"
+	.string "{JPN}… おとくな けいじばん!\p"
+	.string "ポケモンずかんは\n"
+	.string "パソコンつうしんで\l"
+	.string "オーキドはかせに みてもらえる!$"
 
 ViridianForest_Text_CantCatchOwnedMons::
-	.string "TRAINER TIPS\p"
-	.string "You can't catch a POKEMON that\n"
-	.string "belongs to someone else.\p"
-	.string "Throw POKe BALLS only at wild\n"
-	.string "POKEMON to catch them!$"
+	.string "{JPN}… おとくな けいじばん!\p"
+	.string "ひとの ポケモンは ひとの もの!\n"
+	.string "やせいの ポケモンに だけ\l"
+	.string "モンスターボールを なげて\l"
+	.string "つかまえよう!$"
 
 ViridianForest_Text_WeakenMonsBeforeCapture::
-	.string "TRAINER TIPS\p"
-	.string "Weaken POKEMON before attempting\n"
-	.string "capture!\p"
-	.string "When healthy, they may escape!$"
+	.string "{JPN}… おとくな けいじばん!\p"
+	.string "ポケモンを つかまえる ときは\n"
+	.string "なるべく よわらせてから!\p"
+	.string "ポケモンが げんきだと\n"
+	.string "にげるかも しれないよ!$"
 
 ViridianForest_Text_LeavingViridianForest::
-	.string "LEAVING VIRIDIAN FOREST\n"
-	.string "PEWTER CITY AHEAD$"
+	.string "{JPN}トキワの もり … でぐち\n"
+	.string "このさき ニビ シティ$"
 

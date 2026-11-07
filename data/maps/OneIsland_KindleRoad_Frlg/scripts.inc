@@ -10,166 +10,166 @@ OneIsland_KindleRoad_EventScript_EmberSpaSign::
 	end
 
 OneIsland_KindleRoad_Text_MariaIntro::
-	.string "The weather's gorgeous!\n"
-	.string "Perfect for a battle!$"
+	.string "{JPN}いい おてんき!\n"
+	.string "しょうぶ びよりね$"
 
 OneIsland_KindleRoad_Text_MariaDefeat::
-	.string "Aiyeeeeh!$"
+	.string "{JPN}きゃあ!$"
 
 OneIsland_KindleRoad_Text_MariaPostBattle::
-	.string "Please don't splash my face!\n"
-	.string "You'll ruin the makeup.$"
+	.string "{JPN}かおに みずを かけないで!\n"
+	.string "おけしょうが くずれるわ$"
 
 OneIsland_KindleRoad_Text_AbigailIntro::
-	.string "I'm beginning to get a sunburn...$"
+	.string "{JPN}ひやけ して きちゃった…$"
 
 OneIsland_KindleRoad_Text_AbigailDefeat::
-	.string "Oh, you're so awful.$"
+	.string "{JPN}もう\n"
+	.string "ひどい じゃない$"
 
 OneIsland_KindleRoad_Text_AbigailPostBattle::
-	.string "I like that cap you have.\n"
-	.string "Maybe I should wear one, too...$"
+	.string "{JPN}その ぼうし いいわね\n"
+	.string "わたしも かぶろうかな…$"
 
 OneIsland_KindleRoad_Text_FinnIntro::
-	.string "Seen from here, MT. EMBER towers\n"
-	.string "into the sky.$"
+	.string "{JPN}ここから みあげる\n"
+	.string "ともしびやまは でかいなあ…$"
 
 OneIsland_KindleRoad_Text_FinnDefeat::
-	.string "Well, aren't you tough?$"
+	.string "{JPN}きみ つよいなあ…$"
 
 OneIsland_KindleRoad_Text_FinnPostBattle::
-	.string "The sky is immense around these\n"
-	.string "parts.$"
+	.string "{JPN}そらが ひろいなあ…$"
 
 OneIsland_KindleRoad_Text_GarrettIntro::
-	.string "I took a break from swimming,\n"
-	.string "only to have you challenge me?$"
+	.string "{JPN}およぎ つかれて ひとやすみ…\n"
+	.string "と おもったら しょうぶかい!$"
 
 OneIsland_KindleRoad_Text_GarrettDefeat::
-	.string "Hey, what the...\n"
-	.string "You're good, you!$"
+	.string "{JPN}あらま\n"
+	.string "やるね! あんた$"
 
 OneIsland_KindleRoad_Text_GarrettPostBattle::
-	.string "Instead of using SURF all the time,\n"
-	.string "you should swim some.$"
+	.string "{JPN}たまには\n"
+	.string "なみのり しないで およげよ$"
 
 OneIsland_KindleRoad_Text_TommyIntro::
-	.string "Wait! Wait a second!\n"
-	.string "I think I've hooked a big one!$"
+	.string "{JPN}ムムッ!\n"
+	.string "この てごたえは こんどこそ…?$"
 
 OneIsland_KindleRoad_Text_TommyDefeat::
-	.string "I've lost it all again...$"
+	.string "{JPN}また まけよった$"
 
 OneIsland_KindleRoad_Text_TommyPostBattle::
-	.string "Not only did I lose, the big one\n"
-	.string "got away from me, too!$"
+	.string "{JPN}まけたと どうじに\n"
+	.string "さかなも にげた$"
 
 OneIsland_KindleRoad_Text_SharonIntro::
-	.string "Could you help me out with my\n"
-	.string "training?$"
+	.string "{JPN}あたしの トレーニングに\n"
+	.string "つきあって くれない?$"
 
 OneIsland_KindleRoad_Text_SharonDefeat::
-	.string "You were a cut above me.$"
+	.string "{JPN}そっちの ほうが うわてね$"
 
 OneIsland_KindleRoad_Text_SharonPostBattle::
-	.string "It's clear that you're skilled.\n"
-	.string "I like you!$"
+	.string "{JPN}なかなかの つかいてね!\n"
+	.string "きに いったわ$"
 
 OneIsland_KindleRoad_Text_TanyaIntro::
-	.string "There isn't a day in which we don't\n"
-	.string "train!$"
+	.string "{JPN}まいにち ケイコは\n"
+	.string "かかさないわっ!$"
 
 OneIsland_KindleRoad_Text_TanyaDefeat::
-	.string "I'm such a fool!$"
+	.string "{JPN}あたしの バカっ!$"
 
 OneIsland_KindleRoad_Text_TanyaPostBattle::
-	.string "I'll train even harder from now on!$"
+	.string "{JPN}きょうから もっと\n"
+	.string "ケイコを がんばるわっ!$"
 
 OneIsland_KindleRoad_Text_SheaIntro::
-	.string "Every morning, before breakfast,\n"
-	.string "I swim around this island.$"
+	.string "{JPN}まいにち あさめしの まえに\n"
+	.string "この しまを\l"
+	.string "1しゅう してるぞ!$"
 
 OneIsland_KindleRoad_Text_SheaDefeat::
-	.string "Gasp...\n"
-	.string "Gasp...$"
+	.string "{JPN}ぜえ ぜえ…$"
 
 OneIsland_KindleRoad_Text_SheaPostBattle::
-	.string "I lost because I'm pooped from all\n"
-	.string "the running I did...$"
+	.string "{JPN}はしり すぎて つかれたから\n"
+	.string "まけたんだ おれ$"
 
 OneIsland_KindleRoad_Text_HughIntro::
-	.string "Dress appropriately for battle!\n"
-	.string "Lose that frivolous outfit!$"
+	.string "{JPN}そんな ちゃらちゃら した\n"
+	.string "かっこうで たたかうなあーっ!$"
 
 OneIsland_KindleRoad_Text_HughDefeat::
-	.string "Why me?!$"
+	.string "{JPN}なんでじゃーっ!$"
 
 OneIsland_KindleRoad_Text_HughPostBattle::
-	.string "Even martial artists are becoming\n"
-	.string "fashion conscious these days...$"
+	.string "{JPN}かくとうかも さいきんは\n"
+	.string "おしゃれに なったよな…$"
 
 OneIsland_KindleRoad_Text_BryceIntro::
-	.string "You know, everything tastes great\n"
-	.string "when you're out in the wild.$"
+	.string "{JPN}しぜんの なかで\n"
+	.string "たべる ごはんは うまいぞ!$"
 
 OneIsland_KindleRoad_Text_BryceDefeat::
-	.string "Awww, blown!$"
+	.string "{JPN}あーあ$"
 
 OneIsland_KindleRoad_Text_BrycePostBattle::
-	.string "The water in volcanic regions is\n"
-	.string "delicious.$"
+	.string "{JPN}かざんの おおい ちほうの\n"
+	.string "みずは うまいぞ!$"
 
 OneIsland_KindleRoad_Text_ClaireIntro::
-	.string "My lunch filled us up, so will you\n"
-	.string "battle us for some exercise?$"
+	.string "{JPN}おなか いっぱい だから\n"
+	.string "はらごなしに しょうぶ しよ!$"
 
 OneIsland_KindleRoad_Text_ClaireDefeat::
-	.string "That made me all sweaty.$"
+	.string "{JPN}あせ かいちゃった$"
 
 OneIsland_KindleRoad_Text_ClairePostBattle::
-	.string "What should I do?\n"
-	.string "I feel famished again.$"
+	.string "{JPN}どうしよう\n"
+	.string "また おなか すいちゃった…$"
 
 OneIsland_KindleRoad_Text_KiaIntro::
-	.string "KIA: My big brother and I make\n"
-	.string "an awesome combination!$"
+	.string "{JPN}サチ『おにいちゃんと\n"
+	.string "あたしの コンビ すごいのよ!$"
 
 OneIsland_KindleRoad_Text_KiaDefeat::
-	.string "KIA: Huh?!\n"
-	.string "I can't believe it!$"
+	.string "{JPN}サチ『えー\n"
+	.string "しんじられない!$"
 
 OneIsland_KindleRoad_Text_KiaPostBattle::
-	.string "KIA: How could there be anyone\n"
-	.string "better than my big brother?$"
+	.string "{JPN}サチ『おにいちゃん より\n"
+	.string "つよい ひとが いるなんて…$"
 
 OneIsland_KindleRoad_Text_KiaNotEnoughMons::
-	.string "KIA: If you want to battle with\n"
-	.string "us, you have to bring at least two\l"
-	.string "POKEMON with you.$"
+	.string "{JPN}サチ『わたしたちと\n"
+	.string "たたかい たかったら\l"
+	.string "ポケモンを 2ひき つれてきて!$"
 
 OneIsland_KindleRoad_Text_MikIntro::
-	.string "MIK: Together with KIA, I'm afraid\n"
-	.string "of nothing!$"
+	.string "{JPN}カズ『サチと くんだら\n"
+	.string "こわいもの なしだぜ!$"
 
 OneIsland_KindleRoad_Text_MikDefeat::
-	.string "MIK: Whoa!\n"
-	.string "That's too much!$"
+	.string "{JPN}カズ『うほっ すげえ!$"
 
 OneIsland_KindleRoad_Text_MikPostBattle::
-	.string "MIK: How could my combination\n"
-	.string "with KIA fail?$"
+	.string "{JPN}カズ『サチとの コンビが\n"
+	.string "やぶられる とは…$"
 
 OneIsland_KindleRoad_Text_MikNotEnoughMons::
-	.string "MIK: Hey, do you want to battle\n"
-	.string "with us two?\p"
-	.string "Bring two or more POKEMON with\n"
-	.string "you, then.$"
+	.string "{JPN}カズ『おれたちと\n"
+	.string "しょうぶ しないか?\p"
+	.string "ポケモン 2ひき つれて きてくれ$"
 
 OneIsland_KindleRoad_Text_RouteSign::
-	.string "This is KINDLE ROAD.\p"
-	.string "Go straight for MT. EMBER.$"
+	.string "{JPN}ここは ほてりのみち\p"
+	.string "まっすぐ ゆけば\n"
+	.string "ともしびやまです$"
 
 OneIsland_KindleRoad_Text_EmberSpaSign::
-	.string "Light the Fire in Your Heart!\n"
-	.string "EMBER SPA$"
+	.string "{JPN}はいれば こころに ひがともる…\n"
+	.string "ともしびおんせん ぽっかぽか$"
 

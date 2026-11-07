@@ -6,10 +6,11 @@ FiveIsland_House2_EventScript_OldMan::
 	end
 
 FiveIsland_House2_Text_MeadowBelongedToFamily::
-	.string "That MEADOW has belonged to our\n"
-	.string "family for generations.\p"
-	.string "I should have had a giant mansion\n"
-	.string "built on it.\p"
-	.string "It would be preferable to having\n"
-	.string "those thugs run wild on it!$"
+	.string "{JPN}あの あきちは せんぞだいだい\n"
+	.string "わしの いえの\l"
+	.string "とち じゃった のに!\p"
+	.string "へんな やからに\n"
+	.string "あらされる くらい なら\l"
+	.string "でっかい やしきでも\l"
+	.string "たてて おけば よかったわい$"
 

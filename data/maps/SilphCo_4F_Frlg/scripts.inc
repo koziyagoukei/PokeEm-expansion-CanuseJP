@@ -40,47 +40,49 @@ SilphCo_4F_EventScript_Grunt2::
 	end
 
 SilphCo_4F_Text_CantYouSeeImHiding::
-	.string "Sssh!\n"
-	.string "Can't you see I'm hiding?$"
+	.string "{JPN}びくびく… こわくて\n"
+	.string "ここに かくれてるんだ…$"
 
 SilphCo_4F_Text_TeamRocketIsGone::
-	.string "Huh?\n"
-	.string "TEAM ROCKET is gone?$"
+	.string "{JPN}え…\n"
+	.string "ロケットだん もう いないの?$"
 
 SilphCo_4F_Text_Grunt1Intro::
-	.string "TEAM ROCKET has taken control\n"
-	.string "of SILPH CO.!$"
+	.string "{JPN}シルフ カンパニーは\n"
+	.string "ロケットだんが せんきょした!$"
 
 SilphCo_4F_Text_Grunt1Defeat::
-	.string "Arrgh!$"
+	.string "{JPN}ぐぐぐ…$"
 
 SilphCo_4F_Text_Grunt1PostBattle::
-	.string "Fwahahaha!\n"
-	.string "My BOSS has been after this place!$"
+	.string "{JPN}がはは!\n"
+	.string "ボスは まえから\l"
+	.string "ここを ねらってたのだ$"
 
 SilphCo_4F_Text_RodneyIntro::
-	.string "My POKEMON is my loyal servant.$"
+	.string "{JPN}ポケモンは\n"
+	.string "おれの ちゅうじつな こぶんだぜ!$"
 
 SilphCo_4F_Text_RodneyDefeat::
-	.string "Darn!\n"
-	.string "You weak POKEMON!$"
+	.string "{JPN}くそ!\n"
+	.string "なさけない ポケモンめ$"
 
 SilphCo_4F_Text_RodneyPostBattle::
-	.string "The doors are electronically\n"
-	.string "locked.\p"
-	.string "It takes a CARD KEY to open the\n"
-	.string "doors here.$"
+	.string "{JPN}この ビルの ドアは ぜんぶ\n"
+	.string "でんし ロック されてるぜ!\l"
+	.string "カードキーが ないと あかないぜ!$"
 
 SilphCo_4F_Text_Grunt2Intro::
-	.string "Intruder spotted!$"
+	.string "{JPN}ふしんな やつを はっけん!$"
 
 SilphCo_4F_Text_Grunt2Defeat::
-	.string "Who are you?$"
+	.string "{JPN}おまえ なにものだ$"
 
 SilphCo_4F_Text_Grunt2PostBattle::
-	.string "I better tell the BOSS on 11F!$"
+	.string "{JPN}11かいに いる\n"
+	.string "ボスに れんらく しなくては!$"
 
 SilphCo_4F_Text_FloorSign::
-	.string "SILPH CO. HEAD OFFICE\n"
-	.string "4F$"
+	.string "{JPN}シルフ カンパニー ほんしゃ\n"
+	.string "4かい$"
 

@@ -73,52 +73,53 @@ CeruleanCity_BikeShop_EventScript_Bicycle::
 	end
 
 CeruleanCity_BikeShop_Text_WelcomeToBikeShop::
-	.string "Hi!\n"
-	.string "Welcome to our BIKE SHOP.\p"
-	.string "Have we got just the BIKE for\n"
-	.string "you!$"
+	.string "{JPN}はい はい! いらっしゃい!\n"
+	.string "ここは ミラクル じてんしゃや!\p"
+	.string "ほりだしもの あるよー!\n"
+	.string "かってくー?$"
 
 CeruleanCity_BikeShop_Text_SorryYouCantAffordIt::
-	.string "Sorry!\n"
-	.string "You can't afford it!$"
+	.string "{JPN}おきゃくさん!\n"
+	.string "おかねが たりませんなー!$"
 
 CeruleanCity_BikeShop_Text_OhBikeVoucherHereYouGo::
-	.string "Oh, that's...\p"
-	.string "A BIKE VOUCHER!\p"
-	.string "Okay!\n"
-	.string "Here you go!$"
+	.string "{JPN}あー それは…!\p"
+	.string "じてんしゃ ひきかえけん!\p"
+	.string "…わかりました!\n"
+	.string "ささっ これを どうぞ!$"
 
 CeruleanCity_BikeShop_Text_ExchangedVoucherForBicycle::
-	.string "{PLAYER} exchanged the\n"
-	.string "BIKE VOUCHER for a BICYCLE.$"
+	.string "{JPN}{PLAYER}は ひきかえけんで\n"
+	.string "じてんしゃを もらった!$"
 
 CeruleanCity_BikeShop_Text_ThankYouComeAgain::
-	.string "Thank you!\n"
-	.string "Come back again sometime!$"
+	.string "{JPN}また よろしく!\n"
+	.string "ありがとう ございました!$"
 
 CeruleanCity_BikeShop_Text_HowDoYouLikeNewBicycle::
-	.string "How do you like your new BICYCLE?\n"
-	.string "Do you like how it rides?\p"
-	.string "You can take it out on CYCLING\n"
-	.string "ROAD and even into caves!$"
+	.string "{JPN}やあ こんちは! じてんしゃの\n"
+	.string "のりごこちは いかが です?\p"
+	.string "あの じてんしゃ なら\n"
+	.string "サイクリング ロードは もちろん\l"
+	.string "どうくつ だって はしれちゃうよ!$"
 
 CeruleanCity_BikeShop_Text_MakeRoomForBicycle::
-	.string "You better make room for your\n"
-	.string "BICYCLE!$"
+	.string "{JPN}じてんしゃを もっていけないよ$"
 
 CeruleanCity_BikeShop_Text_CityBikeGoodEnoughForMe::
-	.string "A plain city bike is good enough\n"
-	.string "for me.\p"
-	.string "After all, you can't put a shopping\n"
-	.string "basket on a mountain bike.$"
+	.string "{JPN}うーん…!\n"
+	.string "やっぱり ママチャリ かしら?\p"
+	.string "マウンテン バイクに\n"
+	.string "かいものカゴ にあわない もん$"
 
 CeruleanCity_BikeShop_Text_BikesCoolButExpensive::
-	.string "These bikes are cool, but they're\n"
-	.string "way expensive!$"
+	.string "{JPN}この みせの じてんしゃ\n"
+	.string "ものは いいけど たかいよ!\l"
+	.string "ぼくには かえないね$"
 
 CeruleanCity_BikeShop_Text_WowYourBikeIsCool::
-	.string "Wow.\n"
-	.string "Your BIKE is really cool!$"
+	.string "{JPN}きみの じてんしゃ かっこいい\n"
+	.string "うらやましいなあ$"
 
 @ Unused
 CeruleanCity_BikeShop_Text_GermanFoldableBicyleFinallyOnMarket::
@@ -127,5 +128,5 @@ CeruleanCity_BikeShop_Text_GermanFoldableBicyleFinallyOnMarket::
 	.string "おりたたみ じてんしゃ!$"
 
 CeruleanCity_BikeShop_Text_ShinyNewBicycle::
-	.string "A shiny new BICYCLE!$"
+	.string "{JPN}ピッカピカの じてんしゃだ!$"
 

@@ -123,125 +123,120 @@ MtEmber_Exterior_EventScript_Jocelyn::
 	end
 
 Text_ExplosionTeach::
-	.string "Can you imagine?\n"
-	.string "If this volcano were to erupt?\p"
-	.string "The explosion would be the end of\n"
-	.string "us. How terrifying is that?\p"
-	.string "While we're terrified, would you\n"
-	.string "like me to teach EXPLOSION?$"
+	.string "{JPN}こ この かざんが\n"
+	.string "もし だいばくはつ したら\l"
+	.string "お おれら ひとたまりも\l"
+	.string "ないなあ …ブルブル!\p"
+	.string "こ こわい ついでに\n"
+	.string "だいばくはつ でも おぼえてみる?$"
 
 Text_ExplosionDeclined::
-	.string "Yeah, you're right.\n"
-	.string "It is too terrifying.$"
+	.string "{JPN}や やっぱ こわいもんな\n"
+	.string "ブルブル$"
 
 Text_ExplosionWhichMon::
-	.string "You're terribly brave!\p"
-	.string "Which POKEMON should I teach\n"
-	.string "EXPLOSION?$"
+	.string "{JPN}つ つよきだね!\n"
+	.string "じゃあ どの ポケモンに する?$"
 
 Text_ExplosionTaught::
-	.string "Using EXPLOSION while on this\n"
-	.string "volcano...\p"
-	.string "What a terrifying thrill!$"
+	.string "{JPN}かざんで だいばくはつを…\n"
+	.string "す すごい スリル!$"
 
 MtEmber_Exterior_Text_WellTryDiggingHere::
-	.string "Over here.\n"
-	.string "We'll try digging here.\p"
-	.string "That treasure the ADMINS've been\n"
-	.string "talking about should be here.$"
+	.string "{JPN}ここを ほりすすんで みようぜ\p"
+	.string "かんぶが いってた おたから\n"
+	.string "この おくかも しれねえ$"
 
 MtEmber_Exterior_Text_YoureInTheWayGetLost::
-	.string "What the...?\n"
-	.string "You're in the way. Get lost.$"
+	.string "{JPN}なんだ おまえ?\n"
+	.string "じゃまだから あっち いけよ!$"
 
 MtEmber_Exterior_Text_PunchedThroughAtLast::
-	.string "Whew, punched through at last.\n"
-	.string "Let's go treasure hunting!$"
+	.string "{JPN}フーっ やっと あいたぜ!\n"
+	.string "おたからを さがしに いこーぜ$"
 
 MtEmber_Exterior_Text_WhatsPasswordAgain::
-	.string "Any treasure we find, we haul back\n"
-	.string "to the WAREHOUSE, understood?\p"
-	.string "...Oh, and what're the passwords?\n"
-	.string "At the ROCKET WAREHOUSE, I mean.$"
+	.string "{JPN}おたからが みつかったら\n"
+	.string "そうこに もって かえろーぜ!\p"
+	.string "……ところで\n"
+	.string "そうこの パスワード って\l"
+	.string "なんだったっけ?$"
 
 MtEmber_Exterior_Text_FirstPasswordGoldeen::
-	.string "What, you forgot the password?\n"
-	.string "There're actually two.\p"
-	.string "The first one's GOLDEEN need\n"
-	.string "log.\p"
-	.string "And the second one is...$"
+	.string "{JPN}なんだよ わすれたのか\n"
+	.string "パスワードは ふたつ あるぜ\p"
+	.string "ひとつめは……\n"
+	.string "『またまた タマタマ』 だろ\p"
+	.string "ふたつめは……$"
 
 MtEmber_Exterior_Text_SnoopsBeenListeningIn::
-	.string "Hey!\n"
-	.string "This snoop's been listening in!$"
+	.string "{JPN}オイっ だれか きいてる!$"
 
 MtEmber_Exterior_Text_Grunt1Intro::
-	.string "You've been eavesdropping on us,\n"
-	.string "haven't you?$"
+	.string "{JPN}ぬすみぎき して\n"
+	.string "いやがったな!$"
 
 MtEmber_Exterior_Text_Grunt1Defeat::
-	.string "Huh, what?$"
+	.string "{JPN}えぇー$"
 
 MtEmber_Exterior_Text_Grunt1PostBattle::
-	.string "Why'd you have to win?$"
+	.string "{JPN}なんで そこで\n"
+	.string "かつんだよ$"
 
 MtEmber_Exterior_Text_Grunt2Intro::
-	.string "Trying to horn in on our treasure?\n"
-	.string "Don't bet on it!$"
+	.string "{JPN}おたからを よこどり\n"
+	.string "するき だな!$"
 
 MtEmber_Exterior_Text_Grunt2Defeat::
-	.string "Wait!\n"
-	.string "But how?$"
+	.string "{JPN}あれー$"
 
 MtEmber_Exterior_Text_Grunt2PostBattle::
-	.string "Develop amnesia conveniently and\n"
-	.string "forget everything you heard!$"
+	.string "{JPN}さっき きいたことは わすれろよ!$"
 
 MtEmber_Exterior_Text_WellRegroupDontStepInsideThere::
-	.string "What a setback...\n"
-	.string "We'll have to regroup.\p"
-	.string "You! Don't even think about taking\n"
-	.string "a step inside here!\p"
-	.string "If you know what's good for you,\n"
-	.string "don't even think about this!$"
+	.string "{JPN}くそー…\n"
+	.string "いちど ひきあげるか\p"
+	.string "オマエ! この おくに\n"
+	.string "いきやがったら\l"
+	.string "ただじゃ おかねえぞ!$"
 
 MtEmber_Exterior_Text_LoganIntro::
-	.string "An active volcano is one that's\n"
-	.string "erupting, or about to.$"
+	.string "{JPN}ふんか かつどうを しているか\n"
+	.string "ふんかしそうな かざんを\l"
+	.string "かっかざんと いうぞ!$"
 
 MtEmber_Exterior_Text_LoganDefeat::
-	.string "Whew... That was hot!\n"
-	.string "Sweat's erupting from me!$"
+	.string "{JPN}ふう…\n"
+	.string "あつい しょうぶで あせだくだよ!$"
 
 MtEmber_Exterior_Text_LoganPostBattle::
-	.string "They say there're over 1,500\n"
-	.string "active volcanoes in the world.\p"
-	.string "Just thinking about them makes me\n"
-	.string "feel all hot and gooey inside!$"
+	.string "{JPN}かっかざんは せかいに\n"
+	.string "1500 いじょう あるというな\l"
+	.string "かんがえた だけで あついぜ!$"
 
 MtEmber_Exterior_Text_BethIntro::
-	.string "Do you know how caves form inside\n"
-	.string "volcanoes?$"
+	.string "{JPN}かざんの どうくつは\n"
+	.string "どうやって できるか しってる?$"
 
 MtEmber_Exterior_Text_BethDefeat::
-	.string "Atchah!\n"
-	.string "You're shockingly good!$"
+	.string "{JPN}あら! すごいのね$"
 
 MtEmber_Exterior_Text_BethPostBattle::
-	.string "When lava at the surface of magma\n"
-	.string "hardens, and the magma inside flows\l"
-	.string "out, caverns are left behind.$"
+	.string "{JPN}マグマの ひょうめんが かたまって\n"
+	.string "なかの あつい マグマが\l"
+	.string "ながれだして しまうと\l"
+	.string "なかに どうくつが できるのよ$"
 
 MtEmber_Exterior_Text_JocelynIntro::
-	.string "I've been in training so I can mend\n"
-	.string "my broken heart...\p"
-	.string "It toughened me up physically at\n"
-	.string "least! Hi-yah!$"
+	.string "{JPN}しつれんを いやす ために\n"
+	.string "おけいこ がんばって いたら\l"
+	.string "つよく なったわ! きえーいっ!$"
 
 MtEmber_Exterior_Text_JocelynDefeat::
-	.string "I think I tried to overdo it...$"
+	.string "{JPN}ちからが はいりすぎてた かな?$"
 
 MtEmber_Exterior_Text_JocelynPostBattle::
-	.string "The way you battle, it reminds me\n"
-	.string "of the guy who dumped me...$"
+	.string "{JPN}あなたの たたかい かた\n"
+	.string "あの カレを おもいだして\l"
+	.string "つらい…$"
 

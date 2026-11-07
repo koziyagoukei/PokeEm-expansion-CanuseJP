@@ -17,35 +17,36 @@ PokemonTower_4F_EventScript_Jody::
 	end
 
 PokemonTower_4F_Text_PaulaIntro::
-	.string "Ghost! No!\n"
-	.string "Kwaaah!$"
+	.string "{JPN}うぐぐ… ゆうれいめ…\n"
+	.string "…ケーッ!$"
 
 PokemonTower_4F_Text_PaulaDefeat::
-	.string "Where is the ghost?$"
+	.string "{JPN}はっ!\n"
+	.string "ゆ ゆうれいは どこじゃ$"
 
 PokemonTower_4F_Text_PaulaPostBattle::
-	.string "I must have been dreaming...$"
+	.string "{JPN}むう…\n"
+	.string "ゆめを みてた ようじゃ$"
 
 PokemonTower_4F_Text_LaurelIntro::
-	.string "Be cursed with me!\n"
-	.string "Kwaaah!$"
+	.string "{JPN}イッ… ショ… ニ…\n"
+	.string "… ノロ…ワレ!$"
 
 PokemonTower_4F_Text_LaurelDefeat::
-	.string "What!$"
+	.string "{JPN}…はっ!$"
 
 PokemonTower_4F_Text_LaurelPostBattle::
-	.string "We can't determine the identity of\n"
-	.string "the ghosts...$"
+	.string "{JPN}…どうしても ゆうれいの\n"
+	.string "しょうたいが わからない…$"
 
 PokemonTower_4F_Text_JodyIntro::
-	.string "Huhuhu...\n"
-	.string "Beat me not!$"
+	.string "{JPN}フフフッ…!\n"
+	.string "… カテ… ルカーッ!$"
 
 PokemonTower_4F_Text_JodyDefeat::
-	.string "Huh?\n"
-	.string "Who? What?$"
+	.string "{JPN}…ん わしは?$"
 
 PokemonTower_4F_Text_JodyPostBattle::
-	.string "May the departed POKEMON rest in\n"
-	.string "peace...$"
+	.string "{JPN}ふう! ポケモンの\n"
+	.string "さまよえる れいよ やすらかに…$"
 

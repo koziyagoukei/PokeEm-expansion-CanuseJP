@@ -39,51 +39,53 @@ SilphCo_8F_EventScript_Grunt2::
 	end
 
 SilphCo_8F_Text_WonderIfSilphIsFinished::
-	.string "I wonder if SILPH is finished...$"
+	.string "{JPN}シルフは のっとられて\n"
+	.string "… おわりかな$"
 
 SilphCo_8F_Text_ThanksForSavingUs::
-	.string "Thanks for saving us!$"
+	.string "{JPN}ありがとう たすかった!$"
 
 SilphCo_8F_Text_Grunt1Intro::
-	.string "That's as far as you'll go!$"
+	.string "{JPN}ここから さきは いかせ ないぜ!$"
 
 SilphCo_8F_Text_Grunt1Defeat::
-	.string "Not enough grit!$"
+	.string "{JPN}きあいが たりんか$"
 
 SilphCo_8F_Text_Grunt1PostBattle::
-	.string "If you don't turn back...\n"
-	.string "I'll call for backup!$"
+	.string "{JPN}はやく ひきかえさないと\n"
+	.string "… なかまを よぶぜ!$"
 
 SilphCo_8F_Text_ParkerIntro::
-	.string "You're causing us problems!$"
+	.string "{JPN}すき かって やられちゃ\n"
+	.string "こまるんだぜ!$"
 
 SilphCo_8F_Text_ParkerDefeat::
-	.string "Huh?\n"
-	.string "I lost?$"
+	.string "{JPN}…? まけたのか$"
 
 SilphCo_8F_Text_ParkerPostBattle::
-	.string "So, what do you think of SILPH\n"
-	.string "BUILDING's maze?$"
+	.string "{JPN}どうだね?\n"
+	.string "めいろの ような\l"
+	.string "シルフ ビルの かんそうは?$"
 
 SilphCo_8F_Text_Grunt2Intro::
-	.string "I am one of the four ROCKET\n"
-	.string "BROTHERS!$"
+	.string "{JPN}おれこそは\n"
+	.string "ロケット 4きょうだいの ひとり!$"
 
 SilphCo_8F_Text_Grunt2Defeat::
-	.string "Whoo!\n"
-	.string "Oh, Brothers!$"
+	.string "{JPN}にいさん まけたよ$"
 
 SilphCo_8F_Text_Grunt2PostBattle::
-	.string "I'll leave you up to my brothers.$"
+	.string "{JPN}まあ いい\n"
+	.string "あにきが かたきを とって くれる$"
 
 SilphCo_8F_Text_FloorSign::
-	.string "SILPH CO. HEAD OFFICE\n"
-	.string "8F$"
+	.string "{JPN}シルフ カンパニー ほんしゃ\n"
+	.string "8かい$"
 
 SilphCo_8F_Text_ToRocketBossMonsAreTools::
-	.string "TEAM ROCKET's BOSS is terribly\n"
-	.string "cruel!\p"
-	.string "To him, POKEMON are just tools to\n"
-	.string "be used.\p"
-	.string "What will happen if that tyrant\n"
-	.string "takes over our company...$"
+	.string "{JPN}ロケットだんの ボスは\n"
+	.string "ひどい やつだぜ…!\p"
+	.string "ポケモンを どうぐの ようにしか\n"
+	.string "かんがえちゃ いないんだ!\p"
+	.string "あんなやつに この かいしゃを\n"
+	.string "のっとられたら…$"

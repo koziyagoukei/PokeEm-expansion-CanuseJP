@@ -6,8 +6,9 @@ DiglettsCave_SouthEntrance_EventScript_OldMan::
 	end
 
 DiglettsCave_SouthEntrance_Text_DiglettDugThisTunnel::
-	.string "Well, isn't this a surprise!\n"
-	.string "DIGLETT dug this long tunnel!\p"
-	.string "It goes right to VIRIDIAN CITY,\n"
-	.string "they tell me.$"
+	.string "{JPN}たまげた もんだ!\n"
+	.string "この ながーい どうくつ!\l"
+	.string "ディグダが ほったんだと!\p"
+	.string "トキワ シティまで\n"
+	.string "つながっとる そうだ!$"
 

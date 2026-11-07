@@ -96,162 +96,182 @@ SaffronCity_Gym_EventScript_GymStatuePostVictory::
 	end
 
 SaffronCity_Gym_Text_SabrinaIntro::
-	.string "I had a vision of your arrival.\p"
-	.string "I have had psychic powers since\n"
-	.string "I was a child.\p"
-	.string "It started when a spoon I\n"
-	.string "carelessly tossed, bent.\p"
-	.string "I dislike battling, but if you wish,\n"
-	.string "I will show you my powers!{PLAY_BGM}{MUS_RG_ENCOUNTER_GYM_LEADER}$"
+	.string "{JPN}… やっぱり きたわ!\n"
+	.string "よかんが したのよ!\p"
+	.string "なにげに スプーンを なげたら\n"
+	.string "まがって いらい… わたし\l"
+	.string "エスパー しょうじょ なの\p"
+	.string "たたかうの すき じゃない けど\n"
+	.string "あなたが のぞむ なら\l"
+	.string "わたしの ちから\l"
+	.string "みせて あげる!{PLAY_BGM MUS_RG_ENCOUNTER_GYM_LEADER}$"
 
 SaffronCity_Gym_Text_SabrinaDefeat::
-	.string "This loss shocks me!\n"
-	.string "But, a loss is a loss.\p"
-	.string "I admit, I didn't work hard enough\n"
-	.string "to win.\p"
-	.string "Your victory has earned you the\n"
-	.string "MARSHBADGE.$"
+	.string "{JPN}まける なんて…!\n"
+	.string "とても ショック!\l"
+	.string "でも まけは まけ…!\p"
+	.string "わたしの しょうぶの あまさを\n"
+	.string "いさぎよく みとめるわ!\p"
+	.string "かった あかしに\n"
+	.string "ゴールド バッジを\l"
+	.string "あなたに さしあげ ましょう$"
 
 SaffronCity_Gym_Text_SabrinaPostBattle::
-	.string "Psychic power isn't something that\n"
-	.string "only a few people have.\p"
-	.string "Everyone has psychic power.\n"
-	.string "People just don't realize it.$"
+	.string "{JPN}ちょうのうりょくは かぎられた\n"
+	.string "ひとの ちから では ないわ!\l"
+	.string "だれでも もってるのよ!\l"
+	.string "ただ それに きが つかない だけ$"
 
 SaffronCity_Gym_Text_ExplainMarshBadgeTakeThis::
-	.string "The MARSHBADGE makes POKEMON up\n"
-	.string "to Lv. 70 obey you.\p"
-	.string "Stronger POKEMON will become wild,\n"
-	.string "ignoring your orders in battle.\p"
-	.string "Just don't raise your POKEMON too\n"
-	.string "much to avoid that problem.\p"
-	.string "Wait, please take this TM with you.$"
+	.string "{JPN}ゴールド バッジで\n"
+	.string "レベル70 までの ポケモンが\l"
+	.string "いうことを ききます!\p"
+	.string "それ いじょう\n"
+	.string "つよい ポケモンは\l"
+	.string "ソッポ むいたり ふてね したり\l"
+	.string "あつかいが たいへん です!\p"
+	.string "だけど そだて すぎなきゃ\n"
+	.string "そういう しんぱいは むようよ!\p"
+	.string "それから…!\n"
+	.string "わざマシンを もって いって$"
 
 SaffronCity_Gym_Text_ReceivedTM04FromSabrina::
-	.string "{PLAYER} received TM04 from\n"
-	.string "SABRINA.$"
+	.string "{JPN}{PLAYER}は ナツメから\n"
+	.string "わざマシン04を もらった!$"
 
 SaffronCity_Gym_Text_ExplainTM04::
-	.string "TM04 is CALM MIND.\p"
-	.string "It makes the POKEMON concentrate\n"
-	.string "to raise both SP. ATK and SP. DEF.$"
+	.string "{JPN}わざマシン04は めいそう!\n"
+	.string "せいしんを しゅうちゅう させて\l"
+	.string "とくこう とくぼうを あげるわ!$"
 
 SaffronCity_Gym_Text_BagFullOfOtherItems::
-	.string "Your BAG is full of other items.$"
+	.string "{JPN}あ にもつが いっぱいよ$"
 
 SaffronCity_Gym_Text_AmandaIntro::
-	.string "SABRINA is far younger than I,\n"
-	.string "but she has earned my respect.$"
+	.string "{JPN}ナツメは… わたし より\n"
+	.string "だいぶ としした だが!\l"
+	.string "かのじょを そんけい している!$"
 
 SaffronCity_Gym_Text_AmandaDefeat::
-	.string "Not good enough!$"
+	.string "{JPN}およばなかったか!$"
 
 SaffronCity_Gym_Text_AmandaPostBattle::
-	.string "In a battle of equals, the one\n"
-	.string "with the stronger will wins.\p"
-	.string "If you wish to beat SABRINA, focus\n"
-	.string "and will yourself to victory.$"
+	.string "{JPN}しょうぶが ごかくの ときは\n"
+	.string "きもちが つよい ほうが かつ!\p"
+	.string "ナツメに かちたい なら\n"
+	.string "きみも かちたいッ! と\l"
+	.string "つよく ねんじた ほうが いい$"
 
 SaffronCity_Gym_Text_JohanIntro::
-	.string "Does our unseen power scare you?$"
+	.string "{JPN}みえない ちからを つかう\n"
+	.string "エスパーを こわいと おもうか!$"
 
 SaffronCity_Gym_Text_JohanDefeat::
-	.string "I never foresaw this!$"
+	.string "{JPN}こういう ことも\n"
+	.string "あるのか…$"
 
 SaffronCity_Gym_Text_JohanPostBattle::
-	.string "PSYCHIC POKEMON fear only ghosts\n"
-	.string "and bugs!$"
+	.string "{JPN}エスパーに ゆうりな もの?\n"
+	.string "… はははーッ!\l"
+	.string "ゆうれい や むし くらい だぜ!$"
 
 SaffronCity_Gym_Text_StacyIntro::
-	.string "POKEMON take on the appearance of\n"
-	.string "their TRAINERS.\p"
-	.string "Your POKEMON must be tough, then!$"
+	.string "{JPN}ポケモンは\n"
+	.string "かいぬしに にるって しってるか?\p"
+	.string "という ことは…\n"
+	.string "おまえの ポケモンは つよいかな?$"
 
 SaffronCity_Gym_Text_StacyDefeat::
-	.string "I knew it!$"
+	.string "{JPN}わかった!$"
 
 SaffronCity_Gym_Text_StacyPostBattle::
-	.string "I have much to learn still...\p"
-	.string "I must master PSYCHIC and teach it\n"
-	.string "to my POKEMON...$"
+	.string "{JPN}わたしも まだ まだ だ…\n"
+	.string "サイコキネシス マスター して\l"
+	.string "ポケモンに おしえ なくては!$"
 
 SaffronCity_Gym_Text_TyronIntro::
-	.string "You understand, don't you?\p"
-	.string "That power alone isn't enough to\n"
-	.string "win in the world of POKEMON?$"
+	.string "{JPN}きみは わかってる だろ?\n"
+	.string "ポケモンは パワー だけ\l"
+	.string "あったって かて ない ことを!$"
 
 SaffronCity_Gym_Text_TyronDefeat::
-	.string "I don't believe this!$"
+	.string "{JPN}… おれが\n"
+	.string "まける なんて ばかな!$"
 
 SaffronCity_Gym_Text_TyronPostBattle::
-	.string "SABRINA just wiped out the KARATE\n"
-	.string "MASTER next door.$"
+	.string "{JPN}となりの カラテ だいおう だって\n"
+	.string "うちの ナツメさんに\l"
+	.string "コテンパンに やられたんだぜ$"
 
 SaffronCity_Gym_Text_TashaIntro::
-	.string "You and I, our POKEMON shall\n"
-	.string "battle!$"
+	.string "{JPN}きみは わたしと\n"
+	.string "ポケモンを たたかわせる…!$"
 
 SaffronCity_Gym_Text_TashaDefeat::
-	.string "I lost after all!$"
+	.string "{JPN}くっ…!\n"
+	.string "やはり わたしが やぶれたか$"
 
 SaffronCity_Gym_Text_TashaPostBattle::
-	.string "I knew that this was going to take\n"
-	.string "place.$"
+	.string "{JPN}こういう けっかは わかってた…\n"
+	.string "… そう!\l"
+	.string "これが よち のうりょく だ$"
 
 SaffronCity_Gym_Text_CameronIntro::
-	.string "SABRINA is young, but she's also\n"
-	.string "our highly skilled LEADER.\p"
-	.string "You won't reach her easily!$"
+	.string "{JPN}ナツメさんは わかく して\n"
+	.string "この ポケモン ジムを しきる\l"
+	.string "じつりょくしゃ!\p"
+	.string "かんたん には あわせ ないぜ!$"
 
 SaffronCity_Gym_Text_CameronDefeat::
-	.string "Ow!\n"
-	.string "Down and out!$"
+	.string "{JPN}まけて しまった!$"
 
 SaffronCity_Gym_Text_CameronPostBattle::
-	.string "There used to be two POKEMON GYMS\n"
-	.string "in SAFFRON.\p"
-	.string "The FIGHTING DOJO next door lost\n"
-	.string "its GYM status, though.\p"
-	.string "We simply creamed them when we\n"
-	.string "decided to have just one GYM.$"
+	.string "{JPN}おしえて やろう…\n"
+	.string "かつて ヤマブキ には\l"
+	.string "ふたつの ポケモン ジムが あった\p"
+	.string "とういつ しあいに まけた のが\n"
+	.string "となりの かくとう どうじょうだ!$"
 
 SaffronCity_Gym_Text_PrestonIntro::
-	.string "SAFFRON POKEMON GYM is famous for\n"
-	.string "training psychics.\p"
-	.string "You want to see SABRINA, don't\n"
-	.string "you? I can tell!$"
+	.string "{JPN}ヤマブキ ジム!\l"
+	.string "またの なを\l"
+	.string "エスパー ようせい じょ\l"
+	.string "おまえ…\p"
+	.string "… ナツメに あおうと してるな?\n"
+	.string "そうだろ!\l"
+	.string "わかってるんだ!$"
 
 SaffronCity_Gym_Text_PrestonDefeat::
-	.string "Arrrgh!$"
+	.string "{JPN}ぐわああ…!$"
 
 SaffronCity_Gym_Text_PrestonPostBattle::
-	.string "That's right! I used telepathy to\n"
-	.string "read your mind!$"
+	.string "{JPN}… そうだ!\n"
+	.string "ひとの こころを よむ\l"
+	.string "のうりょくを テレパス という!$"
 
 SaffronCity_Gym_Text_GymGuyAdvice::
-	.string "Yo!\n"
-	.string "Champ in the making!\p"
-	.string "SABRINA's POKEMON use psychic\n"
-	.string "power instead of force.\p"
-	.string "FIGHTING POKEMON are especially\n"
-	.string "weak against PSYCHIC POKEMON.\p"
-	.string "They'll get destroyed before they\n"
-	.string "can even aim a punch!$"
+	.string "{JPN}おーす!\n"
+	.string "みらいの チャンピオン!\p"
+	.string "ナツメの ポケモンは\n"
+	.string "ちょうのうりょくを つかって\l"
+	.string "おまえの ポケモンを まどわすぜ!\p"
+	.string "とくに…! かくとう ポケモンは\n"
+	.string "あいしょうが わるい!\p"
+	.string "パワーを はっきする まえに\n"
+	.string "エジキに なっちまう からな!$"
 
 SaffronCity_Gym_Text_GymGuyPostVictory::
-	.string "Psychic power, huh?\p"
-	.string "If I had that, I'd make a bundle\n"
-	.string "at the slots!$"
+	.string "{JPN}ちょうのうりょく… か!\p"
+	.string "おれに そんな ものが あったら\n"
+	.string "スロットで あてほうだい だぜ!$"
 
 SaffronCity_Gym_Text_GymStatue::
-	.string "SAFFRON POKEMON GYM\n"
-	.string "LEADER: SABRINA\p"
-	.string "WINNING TRAINERS:\n"
+	.string "{JPN}ヤマブキ ポケモン ジム\n"
+	.string "ナツメ にんてい トレーナー!\l"
 	.string "{RIVAL}$"
 
 SaffronCity_Gym_Text_GymStatuePlayerWon::
-	.string "SAFFRON POKEMON GYM\n"
-	.string "LEADER: SABRINA\p"
-	.string "WINNING TRAINERS:\n"
-	.string "{RIVAL}, {PLAYER}$"
+	.string "{JPN}ヤマブキ ポケモン ジム\n"
+	.string "ナツメ にんてい トレーナー!\l"
+	.string "{RIVAL} {PLAYER}$"
 

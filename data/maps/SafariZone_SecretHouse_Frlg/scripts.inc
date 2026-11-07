@@ -25,30 +25,29 @@ SafariZone_SecretHouse_EventScript_ExplainSurf::
 	end
 
 SafariZone_SecretHouse_Text_CongratsYouveWon::
-	.string "Ah! Finally!\p"
-	.string "You're the first person to reach\n"
-	.string "the SECRET HOUSE!\p"
-	.string "Although I made a campaign\n"
-	.string "for our grand opening,\p"
-	.string "I was getting worried that no one\n"
-	.string "would win our campaign prize.\p"
-	.string "Congratulations!\n"
-	.string "You have won!$"
+	.string "{JPN}おおッ! きたか!\p"
+	.string "ここは いちばん おくち の\n"
+	.string "トレジャー ハウス だよ!\p"
+	.string "サファリ ゾーンの キャンペーン\n"
+	.string "ひらいたは いいが だれも こない\l"
+	.string "ふあんに なってた ところだ\p"
+	.string "いやー! おめでとう!\n"
+	.string "しょうひんは きみの ものだ!$"
 
 SafariZone_SecretHouse_Text_ReceivedHM03FromAttendant::
-	.string "{PLAYER} received HM03\n"
-	.string "from the attendant!$"
+	.string "{JPN}{PLAYER}は かかりいん から\n"
+	.string "ひでんマシン03を もらった!$"
 
 SafariZone_SecretHouse_Text_ExplainSurf::
-	.string "HM03 is SURF.\p"
-	.string "POKEMON will be able to ferry you\n"
-	.string "across water using it.\p"
-	.string "And, this HM isn't disposable, so\n"
-	.string "you can use it over and over.\p"
-	.string "You're super lucky for winning this\n"
-	.string "fabulous prize!$"
+	.string "{JPN}ひでんマシン03は なみのり!\p"
+	.string "なんと! ポケモンに のって\n"
+	.string "みずの うえを すすめる!\p"
+	.string "しかも この マシンは つかっても\n"
+	.string "なく ならない タイプだ!\p"
+	.string "こんなに すばらしい\n"
+	.string "しょうひんを もらって しまった\l"
+	.string "きみは とても ツイてるぞ!$"
 
 SafariZone_SecretHouse_Text_DontHaveRoomForPrize::
-	.string "You don't have room for this\n"
-	.string "fabulous prize!$"
+	.string "{JPN}きみ もちもの いっぱいだよ$"
 

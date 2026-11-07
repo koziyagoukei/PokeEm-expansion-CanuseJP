@@ -172,72 +172,78 @@ CeruleanCity_House5_EventScript_BerryCrushRankings::
 	end
 
 CeruleanCity_House1_Text_AnyInterestInBerries::
-	.string "I concoct a variety of medicine\n"
-	.string "from BERRY POWDER.\p"
-	.string "Using good BERRY POWDER, I can\n"
-	.string "make any kind of medicine.\p"
-	.string "Now tell me, have you any interest\n"
-	.string "in BERRIES?$"
+	.string "{JPN}わしは きのみの こな から\n"
+	.string "いろいろな くすりを つくっておる\p"
+	.string "いいきのみの こなは どんな くすり\n"
+	.string "でも つくることが できるのじゃよ\p"
+	.string "ときに おぬし\n"
+	.string "きのみに きょうみが おありかな?$"
 
 CeruleanCity_House1_Text_HaveJustTheThing::
-	.string "Ah, good! For you, then, I have\n"
-	.string "just the thing.$"
+	.string "{JPN}そうか! そんな おぬしには\n"
+	.string "これを プレゼント するのじゃ!$"
 
 CeruleanCity_House1_Text_GoCrushBerriesAtDirectCorner::
-	.string "There's something new on the second\n"
-	.string "floor of POKEMON CENTERS, at the\l"
-	.string "DIRECT CORNER.\p"
-	.string "They installed a Wireless Adapter\n"
-	.string "machine for crushing BERRIES.\p"
-	.string "This is where you come in.\p"
-	.string "I have a favor to ask, one that\n"
-	.string "I can entrust only to you.\p"
-	.string "Could you make BERRY POWDER for\n"
-	.string "me using that machine?\p"
-	.string "Don't forget, the machine is at the\n"
-	.string "DIRECT CORNER of POKEMON CENTERS.\p"
-	.string "I'll concoct medicine for you if\n"
-	.string "you bring me some BERRY POWDER.\p"
-	.string "Don't forget, crush BERRIES into\n"
-	.string "BERRY POWDER and bring it to me.$"
+	.string "{JPN}さいきん ポケモンセンターの\n"
+	.string "2かいの ダイレクト コーナーで\p"
+	.string "きのみを つぶす\n"
+	.string "きかいを おいて もらったのじゃ\p"
+	.string "……そこで!\p"
+	.string "おぬしを みこんで\n"
+	.string "たのみがある!\p"
+	.string "その きかいで きのみの こなを\n"
+	.string "つくってきて もらえんかの?\p"
+	.string "よいか!\p"
+	.string "ダイレクト コーナーで!\p"
+	.string "こな じゃぞ!\p"
+	.string "コーナー で\n"
+	.string "こな じゃぞ!\p"
+	.string "……ップ!\p"
+	.string "こなを もってきて くれたら\n"
+	.string "いろいろな くすりを あげるぞい!\p"
+	.string "よいか!\p"
+	.string "コーナー で\n"
+	.string "きのみ を\p"
+	.string "こなごな じゃぞ!\p"
+	.string "……ップ!$"
 
 CeruleanCity_House1_Text_WhyMustYouLieNoBerries::
-	.string "Why must you lie to me?\p"
-	.string "How many BERRIES do you have?\n"
-	.string "Not a one!$"
+	.string "{JPN}……うそじゃ!\p"
+	.string "おぬし ひとつも きのみを\n"
+	.string "もって おらんでは ないか$"
 
 CeruleanCity_House1_Text_TakeInterestInAllSortsOfThings::
-	.string "You have no interest in BERRIES?\p"
-	.string "Young one, it's important to take an\n"
-	.string "interest in all sorts of things.$"
+	.string "{JPN}ないのか!\p"
+	.string "なにごとにも きょうみを\n"
+	.string "もつことが たいせつ じゃぞ$"
 
 CeruleanCity_House1_Text_HaveYouBroughtBerryPowder::
-	.string "Er-hem! Have you brought me some\n"
-	.string "BERRY POWDER?$"
+	.string "{JPN}ッゴホン! きのみの こなを\n"
+	.string "もってきたのかね?$"
 
 CeruleanCity_House5_Text_ExchangeWithWhat::
-	.string "With what would you like to \n"
-	.string "exchange it?$"
+	.string "{JPN}なにかと\n"
+	.string "こうかん するかの?$"
 
 CeruleanCity_House1_Text_YoullExchangeBerryPowderForItem::
-	.string "Fine, you'll exchange your BERRY\n"
-	.string "POWDER for one {STR_VAR_1}?$"
+	.string "{JPN}{STR_VAR_1} と\n"
+	.string "こうかん じゃな?$"
 
 CeruleanCity_House1_Text_DontHaveEnoughBerryPowder::
-	.string "Hm? You don't have enough\n"
-	.string "BERRY POWDER.$"
+	.string "{JPN}むう!?\n"
+	.string "こなが たりんでは ないか!$"
 
 CeruleanCity_House1_Text_TradeMoreBerryPowder::
-	.string "This is fine BERRY POWDER indeed.\n"
-	.string "It will make excellent medicine.\p"
-	.string "Would you like to trade more BERRY\n"
-	.string "POWDER for something else?$"
+	.string "{JPN}うむ いいこな じゃ!\n"
+	.string "よいくすりが できそうじゃわい!\p"
+	.string "ほかにも なにか\n"
+	.string "こうかん するかの?$"
 
 CeruleanCity_House1_Text_HopeToSeeYouAgain::
-	.string "That's fine, then.\n"
-	.string "I'll hope to see you back again.$"
+	.string "{JPN}うむ\n"
+	.string "また よろしく たのむぞい$"
 
 CeruleanCity_House1_Text_SeeMeIfYoudLikeToTradePowder::
-	.string "Come see me if you'd like to trade\n"
-	.string "your BERRY POWDER.$"
+	.string "{JPN}こうかん したくなったら\n"
+	.string "また くるのじゃ$"
 

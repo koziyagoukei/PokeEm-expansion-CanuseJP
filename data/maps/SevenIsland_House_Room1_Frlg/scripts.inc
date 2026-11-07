@@ -170,97 +170,100 @@ SevenIsland_House_Room1_EventScript_Box::
 	end
 
 SevenIsland_House_Room1_Text_OnlyEnjoymentWatchingBattles::
-	.string "I may not look like much now,\n"
-	.string "but when I was younger...\p"
-	.string "I flew everywhere, challenging\n"
-	.string "TRAINERS wherever I found them.\p"
-	.string "Now, my only source of enjoyment\n"
-	.string "is reminiscing about the past while\l"
-	.string "watching battles.$"
+	.string "{JPN}わしは こうみえても\n"
+	.string "むかしは いろんな ばしょを\l"
+	.string "とびまわって\l"
+	.string "とびまわって!\p"
+	.string "いろんな トレーナーに\n"
+	.string "しょうぶを いどんだ ものじゃ\p"
+	.string "いまでは しょうぶを みながら\n"
+	.string "むかしを おもいだすの だけが\l"
+	.string "たのしみ なのじゃ$"
 
 SevenIsland_House_Room1_Text_SlightBreezeAroundBox::
-	.string "There is a slight breeze blowing\n"
-	.string "around the box.$"
+	.string "{JPN}はこの すきまから すこしだけ\n"
+	.string "かぜが はいりこんで きてる!?$"
 
 SevenIsland_House_Room1_Text_ChallengeVisitingTrainer::
-	.string "Ah!\n"
-	.string "Welcome, my friend!\p"
-	.string "Let me tell you something. There's\n"
-	.string "a hidden room in the basement.\p"
-	.string "A TRAINER named {STR_VAR_1} is\n"
-	.string "waiting there now.\p"
-	.string "Tell me, you did come to challenge\n"
-	.string "{STR_VAR_1}, am I right?$"
+	.string "{JPN}……うむ!\n"
+	.string "よく きたのう!\l"
+	.string "じつはな いま\l"
+	.string "ちかの かくしべやに\p"
+	.string "{STR_VAR_1} という トレーナーが\n"
+	.string "きておるのじゃ!\p"
+	.string "もちろん {STR_VAR_1}と しょうぶ\n"
+	.string "するために ここに きたのじゃな!$"
 
 SevenIsland_House_Room1_Text_OhYouWontBattle::
-	.string "Oh...\n"
-	.string "You won't battle...\p"
-	.string "I see, I see.\n"
-	.string "... ...\p"
-	.string "Well, perhaps if you change your\n"
-	.string "mind, do come back.$"
+	.string "{JPN}そうか……\n"
+	.string "しょうぶ せんのか……\l"
+	.string "そうか そうか\l"
+	.string "……\l"
+	.string "まあ きが むいたら\l"
+	.string "また きておくれ$"
 
 SevenIsland_House_Room1_Text_LimitThreeMonsPerSide::
-	.string "Ah!\n"
-	.string "You will battle for me?\p"
-	.string "It was worth my time moving the\n"
-	.string "box aside, then.\p"
-	.string "... ...\n"
-	.string "But there is one slight problem.\p"
-	.string "This hidden room is not built very\n"
-	.string "sturdy.\p"
-	.string "Can I get you to limit it to\n"
-	.string "battles of three POKEMON per side?$"
+	.string "{JPN}おお! ほんとに\n"
+	.string "しょうぶを してくれるのか!\p"
+	.string "がんばって はこを どけた\n"
+	.string "かいが あったのじゃ!\p"
+	.string "……\n"
+	.string "じゃがな\l"
+	.string "この かくしべやは\l"
+	.string "あんまり がんじょう でないから\p"
+	.string "せめて 3たい3の\n"
+	.string "しょうぶに して くれんかのう?$"
 
 SevenIsland_House_Room1_Text_SaveProgressBeforeBattle::
-	.string "Fine! Before your battle, would\n"
-	.string "you like to save your game?$"
+	.string "{JPN}じゃあ しょうぶの まえに\n"
+	.string "レポートを かくかの!?$"
 
 SevenIsland_House_Room1_Text_DontHoldAnythingBack::
-	.string "All right.\n"
-	.string "Don't hold anything back!$"
+	.string "{JPN}うむ ほんきで\n"
+	.string "ぶつかって いくのじゃぞ!$"
 
 @ Unused
 SevenIsland_House_Room1_Text_StrVar1_1::
 	.string "{STR_VAR_1}$"
 
 SevenIsland_House_Room2_Text_MatchEndedUpDraw::
-	.string "The match ended up a draw.$"
+	.string "{JPN}しょうぶは ひきわけに おわった!$"
 
 SevenIsland_House_Room1_Text_DrawWasIt::
-	.string "A draw, was it?\p"
-	.string "However, let me say that it was\n"
-	.string "a worthy spectacle.\p"
-	.string "I'd say it was a wonderful battle\n"
-	.string "with a real sense of depth!$"
+	.string "{JPN}ひきわけ じゃったか!\p"
+	.string "しかし!\p"
+	.string "みどころの ある\n"
+	.string "じつに ないようの ふかい\p"
+	.string "すばらしい\n"
+	.string "たたかい じゃったな!$"
 
 @ Unused
 SevenIsland_House_Room1_Text_StrVar1_2::
 	.string "{STR_VAR_1}$"
 
 SevenIsland_House_Room1_Text_AstoundingBattle::
-	.string "Bravo!\p"
-	.string "Bravo, indeed!\n"
-	.string "What an astounding battle!\p"
-	.string "It was so astounding, why, it keeps\n"
-	.string "filling my eyes with tears!\p"
-	.string "The thrust and parry of expertly\n"
-	.string "used techniques!\p"
-	.string "The clash of power upon power!\p"
-	.string "Yes!\n"
-	.string "It was sheer magnificence!$"
+	.string "{JPN}すばらしい\p"
+	.string "すばらしい\n"
+	.string "しょうぶ じゃった!!\l"
+	.string "すごすぎて\l"
+	.string "なみだが とまらんのじゃ!\p"
+	.string "わざ と わざ!\p"
+	.string "ちから と ちから の\n"
+	.string "ぶつかりあい!\p"
+	.string "うむ!\n"
+	.string "みごと じゃったー!$"
 
 @ Unused
 SevenIsland_House_Room1_Text_StrVar1_3::
 	.string "{STR_VAR_1}$"
 
 SevenIsland_House_Room1_Text_FeelYourDisappointment::
-	.string "Too bad!\n"
-	.string "I feel your disappointment.\p"
-	.string "However, that disappointment is\n"
-	.string "what will make you better.\p"
-	.string "Use it, learn from it, and make it\n"
-	.string "motivate you to seek greatness.\p"
-	.string "Forget not this disappointment\n"
-	.string "and redouble your training!$"
+	.string "{JPN}うむ\n"
+	.string "ざんねん じゃったのう\p"
+	.string "じゃが しかし!\n"
+	.string "その くやしさこそが!\l"
+	.string "おのれを つよくする\l"
+	.string "げんどうりょく に なるのじゃ!\p"
+	.string "この くやしさを わすれず\n"
+	.string "しゅぎょうに はげむのじゃー!$"
 

@@ -14,24 +14,24 @@ SafariZone_West_RestHouse_EventScript_CooltrainerF::
 	end
 
 SafariZone_West_Text_KogaPatrolsSafariEverySoOften::
-	.string "The SAFARI ZONE's huge, wouldn't\n"
-	.string "you say?\p"
-	.string "FUCHSIA's GYM LEADER, KOGA, \n"
-	.string "patrols the grounds every so often.\p"
-	.string "Thanks to him, we can play here\n"
-	.string "knowing that we're safe.$"
+	.string "{JPN}サファリゾーン ひろいだろ!\p"
+	.string "セキチクジムの リーダーである\n"
+	.string "キョウさんが ときどき\l"
+	.string "みまわり して くれるから\l"
+	.string "あんしんして あそべるん だぞ!$"
 
 SafariZone_West_Text_RocksMakeMonRunButEasierCatch::
-	.string "Tossing ROCKS at POKEMON might\n"
-	.string "make them run, but they'll be\l"
-	.string "easier to catch.$"
+	.string "{JPN}いしころ あてると\n"
+	.string "にげる かも しれないが\l"
+	.string "つかまえ やすくは なるよ!$"
 
 SafariZone_West_Text_BaitMakesMonStickAround::
-	.string "Using BAIT will make POKEMON more\n"
-	.string "likely to stick around if they get\l"
-	.string "busy eating.$"
+	.string "{JPN}エサだまを なげると\n"
+	.string "エサに むちゅうで いる あいだ\l"
+	.string "ポケモンは あまり にげない!$"
 
 SafariZone_West_Text_HikedLotsDidntSeeMonIWanted::
-	.string "I hiked a lot, but I didn't see any\n"
-	.string "POKEMON I wanted.$"
+	.string "{JPN}たくさん あるいた けど\n"
+	.string "とりたい ポケモンが\l"
+	.string "なかなか とびだして こないの$"
 

@@ -10,106 +10,111 @@ Route3_EventScript_RouteSign::
 	end
 
 Route3_Text_TunnelFromCeruleanTiring::
-	.string "Whew... I better take a rest...\n"
-	.string "Groan...\p"
-	.string "That tunnel from CERULEAN takes a\n"
-	.string "lot out of you!$"
+	.string "{JPN}ふう…\n"
+	.string "この へんで…\l"
+	.string "… ひとやすみ して いこう\p"
+	.string "ハナダ シティから\n"
+	.string "どうくつを ぬけて きたら\l"
+	.string "… つかれた$"
 
 Route3_Text_ColtonIntro::
-	.string "Hey!\n"
-	.string "I saw you in VIRIDIAN FOREST!$"
+	.string "{JPN}あッ おまえ!\n"
+	.string "トキワの もりで みかけたぞ!$"
 
 Route3_Text_ColtonDefeat::
-	.string "You beat me again!$"
+	.string "{JPN}くやしいけど まけた$"
 
 Route3_Text_ColtonPostBattle::
-	.string "There are other kinds of POKEMON\n"
-	.string "than the ones you find in forests.$"
+	.string "{JPN}この あたりは\n"
+	.string "もり とは また ちがった\l"
+	.string "ポケモンが とれるんだ!$"
 
 Route3_Text_BenIntro::
-	.string "Hi!\n"
-	.string "I like shorts!\p"
-	.string "They're delightfully comfy and\n"
-	.string "easy to wear!$"
+	.string "{JPN}たんパン\n"
+	.string "うごき やすくって いいぜ!\l"
+	.string "おまえも はけば?$"
 
 Route3_Text_BenDefeat::
-	.string "I don't believe it!$"
+	.string "{JPN}いけると おもったのに$"
 
 Route3_Text_BenPostBattle::
-	.string "Are you using a POKEMON CENTER's\n"
-	.string "PC for storing your POKEMON?\p"
-	.string "Each BOX can hold up to\n"
-	.string "30 POKEMON.$"
+	.string "{JPN}ポケモンセンターの パソコン\n"
+	.string "きみ つかってる?\p"
+	.string "1つの ボックスに ポケモンを\n"
+	.string "30ぴき まで あずけられるよ$"
 
 Route3_Text_JaniceIntro::
-	.string "Excuse me!\n"
-	.string "You looked at me, didn't you?$"
+	.string "{JPN}ちょっと きみ!\n"
+	.string "いま わたしの ほう みたでしょ$"
 
 Route3_Text_JaniceDefeat::
-	.string "You're mean!$"
+	.string "{JPN}もう いや$"
 
 Route3_Text_JanicePostBattle::
-	.string "You shouldn't be staring if you\n"
-	.string "don't want to battle!$"
+	.string "{JPN}じろじろ みるから\n"
+	.string "たたかう ことに なるのよ!$"
 
 Route3_Text_GregIntro::
-	.string "Are you a TRAINER?\n"
-	.string "Let's get with it right away!$"
+	.string "{JPN}きみ ポケモン トレーナー?\n"
+	.string "じゃ さっそく!$"
 
 Route3_Text_GregDefeat::
-	.string "If I had new POKEMON, I would've\n"
-	.string "won!$"
+	.string "{JPN}あたらしい ポケモン\n"
+	.string "もって くれば かてたよ$"
 
 Route3_Text_GregPostBattle::
-	.string "If a POKEMON BOX on the PC gets\n"
-	.string "full, just switch to another BOX.$"
+	.string "{JPN}パソコンで ポケモン あずける\n"
+	.string "ボックスが いっぱいに なったら\l"
+	.string "ほかの ボックスに\l"
+	.string "きりかえれば いいんだよ$"
 
 Route3_Text_SallyIntro::
-	.string "That look you gave me...\n"
-	.string "It's so intriguing!$"
+	.string "{JPN}きみの しせん!\n"
+	.string "… なーんか きに なる!$"
 
 Route3_Text_SallyDefeat::
-	.string "Be nice!$"
+	.string "{JPN}もっと やさしく\n"
+	.string "しょうぶ できない?$"
 
 Route3_Text_SallyPostBattle::
-	.string "You can avoid battles by not\n"
-	.string "letting TRAINERS see you.$"
+	.string "{JPN}もし たたかいたく なかったら\n"
+	.string "しせんを あわせなければ いいの$"
 
 Route3_Text_CalvinIntro::
-	.string "Hey! You're not wearing shorts!\n"
-	.string "What's wrong with you?$"
+	.string "{JPN}なんだよ! おまえは\n"
+	.string "たんパン はいて ないじゃん$"
 
 Route3_Text_CalvinDefeat::
-	.string "Lost!\n"
-	.string "Lost! Lost!$"
+	.string "{JPN}まけたまけた$"
 
 Route3_Text_CalvinPostBattle::
-	.string "I always wear shorts, even in\n"
-	.string "winter. That's my policy.$"
+	.string "{JPN}なつも ふゆも\n"
+	.string "たんパン しか はかない!\l"
+	.string "それが おれの ポリシー$"
 
 Route3_Text_JamesIntro::
-	.string "I'll battle you with the POKEMON\n"
-	.string "I just caught.$"
+	.string "{JPN}とって きた ばかりの ポケモン\n"
+	.string "たたかわせよう かな!$"
 
 Route3_Text_JamesDefeat::
-	.string "Done like dinner!$"
+	.string "{JPN}ぼろまけだ$"
 
 Route3_Text_JamesPostBattle::
-	.string "Trained POKEMON are stronger than\n"
-	.string "the wild ones.$"
+	.string "{JPN}やっぱり… そだてた\n"
+	.string "ポケモンの ほうが つよいんだな$"
 
 Route3_Text_RobinIntro::
-	.string "Eek!\n"
-	.string "Did you touch me?$"
+	.string "{JPN}… きゃ!\n"
+	.string "いま あんた おさなかった?$"
 
 Route3_Text_RobinDefeat::
-	.string "That's it?$"
+	.string "{JPN}もう おわり?$"
 
 Route3_Text_RobinPostBattle::
-	.string "ROUTE 4 is at the foot of\n"
-	.string "MT. MOON.$"
+	.string "{JPN}オツキミやまの ふもと からは\n"
+	.string "4ばん どうろよ$"
 
 Route3_Text_RouteSign::
-	.string "ROUTE 3\n"
-	.string "MT. MOON AHEAD$"
+	.string "{JPN}ここは 3ばん どうろ\n"
+	.string "… このさき オツキミやま$"
 

@@ -27,18 +27,18 @@ LavenderTown_PokemonCenter_1F_EventScript_Youngster::
 	end
 
 LavenderTown_PokemonCenter_1F_Text_RocketsDoAnythingForMoney::
-	.string "TEAM ROCKET will do anything for\n"
-	.string "the sake of money!\p"
-	.string "There is no job too dirty, no deed\n"
-	.string "too heinous, no crime too wicked!$"
+	.string "{JPN}ロケットだんの れんちゅう…\n"
+	.string "おかね もうけの ためなら\l"
+	.string "どんな わるい ことでも やるのさ$"
 
 LavenderTown_PokemonCenter_1F_Text_CubonesMotherKilledByRockets::
-	.string "I saw CUBONE's mother trying to\n"
-	.string "escape from TEAM ROCKET.\p"
-	.string "She was killed trying to get away...$"
+	.string "{JPN}カラカラの おかあさんが\n"
+	.string "ロケットだんから にげる ところ\l"
+	.string "わたしも みたわ…\p"
+	.string "にげる とちゅうで ころされたわ$"
 
 LavenderTown_PokemonCenter_1F_Text_PeoplePayForCuboneSkulls::
-	.string "You know how the CUBONE species\n"
-	.string "wears skulls, right?\p"
-	.string "People will pay a lot for one.$"
+	.string "{JPN}カラカラの しゅぞくは\n"
+	.string "ほねを かぶってる だろ?\p"
+	.string "あれが たかく うれるんだって$"
 

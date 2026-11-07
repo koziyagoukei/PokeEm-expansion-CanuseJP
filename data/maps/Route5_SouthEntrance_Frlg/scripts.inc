@@ -84,28 +84,35 @@ Route5_SouthEntrance_Movement_BlockPlayerEntry::
 	step_end
 
 Route5_SouthEntrance_Text_ThirstyOnGuardDuty::
-	.string "I'm on guard duty.\n"
-	.string "Gee, I'm thirsty, though!\p"
-	.string "Oh, wait there, the road's closed.$"
+	.string "{JPN}わたし まじめな けいびいん\n"
+	.string "はー…\l"
+	.string "のどが かわいた!\l"
+	.string "おっと そっちは\l"
+	.string "いま つうこう きんしだよ$"
 
 Route5_SouthEntrance_Text_ThatTeaLooksTasty::
-	.string "Oh, that TEA...\n"
-	.string "It looks awfully tasty...$"
+	.string "{JPN}あ それは\l"
+	.string "おいしそうな おちゃ…$"
 
 Route5_SouthEntrance_Text_ThanksIllShareTeaWithGuards::
-	.string "Huh? I can have this drink?\n"
-	.string "Gee, thanks!\l"
-	.string "... ...\l"
-	.string "Glug, glug...\l"
-	.string "... ...\l"
-	.string "Gulp...\l"
-	.string "If you want to go to SAFFRON\l"
-	.string "CITY...\l"
-	.string "... ...\l"
-	.string "You can go on through.\p"
-	.string "I'll share this TEA with the other\n"
-	.string "guards!$"
+	.string "{JPN}… …\l"
+	.string "え?\l"
+	.string "ぼくに くれる?\l"
+	.string "サンキュー!\n"
+	.string "… …\l"
+	.string "ゴクゴク…\l"
+	.string "…\l"
+	.string "ゴクゴク… …\l"
+	.string "ヤマブキ シティに\l"
+	.string "いく なら…\l"
+	.string "…\l"
+	.string "… …\l"
+	.string "とおって いいよ\l"
+	.string "おちゃを\l"
+	.string "むこうの ゲートの\l"
+	.string "けいびいんにも わけてあげよう…$"
 
 Route5_SouthEntrance_Text_HiHowsItGoing::
-	.string "Hi, how's it going?$"
+	.string "{JPN}あ…\n"
+	.string "この あいだは どーも!$"
 

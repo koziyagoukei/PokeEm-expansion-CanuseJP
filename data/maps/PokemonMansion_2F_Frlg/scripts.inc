@@ -30,35 +30,36 @@ PokemonMansion_2F_EventScript_Arnie::
 	end
 
 PokemonMansion_Text_PressSecretSwitch::
-	.string "A secret switch!\p"
-	.string "Press it?$"
+	.string "{JPN}ひみつの スイッチが ある!\p"
+	.string "おして みますか?$"
 
 PokemonMansion_Text_WhoWouldnt::
-	.string "Who wouldn't?$"
+	.string "{JPN}おしてみよう! …ポチッとな$"
 
 PokemonMansion_Text_NotQuiteYet::
-	.string "Not quite yet!$"
+	.string "{JPN}おすのは あきらめた$"
 
 PokemonMansion_1F_Text_ArnieIntro::
-	.string "I can't get out!\n"
-	.string "This old place is one big puzzle.$"
+	.string "{JPN}この やしき しかけが してあって\n"
+	.string "なかなか すすめませんぜ!$"
 
 PokemonMansion_1F_Text_ArnieDefeat::
-	.string "Oh, no!\n"
-	.string "My bag of loot!$"
+	.string "{JPN}わーッ!\n"
+	.string "ふろしきの なかみが$"
 
 PokemonMansion_1F_Text_ArniePostBattle::
-	.string "The switches here open and close\n"
-	.string "alternating sets of doors.$"
+	.string "{JPN}ひみつの スイッチを おすと\n"
+	.string "ふたつの とびらが\l"
+	.string "たがい ちがいに ひらくんでさ$"
 
 PokemonMansion_1F_Text_NewMonDiscoveredInGuyanaJungle::
-	.string "Diary: July 5\n"
-	.string "Guyana, South America\p"
-	.string "A new POKEMON was discovered deep\n"
-	.string "in the jungle.$"
+	.string "{JPN}にっき 7がつ5か\n"
+	.string "ここは みなみアメリカの ギアナ\p"
+	.string "ジャングルの おくちで\n"
+	.string "しんしゅの ポケモンを はっけん$"
 
 PokemonMansion_1F_Text_ChristenedDiscoveredMonMew::
-	.string "Diary: July 10\n"
-	.string "We christened the newly discovered\l"
-	.string "POKEMON, MEW.$"
+	.string "{JPN}にっき 7がつ10か\n"
+	.string "しんはっけんの ポケモンを\l"
+	.string "わたしは ミュウと なづけた$"
 

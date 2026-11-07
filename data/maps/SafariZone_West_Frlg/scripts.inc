@@ -18,22 +18,22 @@ SafariZone_West_EventScript_AreaSign::
 	end
 
 SafariZone_West_Text_RestHouse::
-	.string "REST HOUSE$"
+	.string "{JPN}きゅうけい ハウス … いこい$"
 
 SafariZone_West_Text_PleaseFindWardensLostTeeth::
-	.string "REQUEST NOTICE\p"
-	.string "Please find the SAFARI WARDEN's\n"
-	.string "lost GOLD TEETH.\l"
-	.string "They're around here somewhere.\p"
-	.string "Reward offered!\n"
-	.string "Contact: WARDEN$"
+	.string "{JPN}… おねがいの けいじばん!\p"
+	.string "サファリ ゾーンの えんちょうが\n"
+	.string "この あたりで\l"
+	.string "いればを なくし ました!\p"
+	.string "みつけた かたに おれい します\n"
+	.string "… サファリ ゾーン じむ きょく$"
 
 SafariZone_West_Text_SearchForSecretHouse::
-	.string "TRAINER TIPS\p"
-	.string "Zone Exploration Campaign!\n"
-	.string "The Search for the SECRET HOUSE!$"
+	.string "{JPN}… おとくな けいじばん!\p"
+	.string "ゾーン たんけん キャンペーン!\n"
+	.string "トレジャー ハウスを さがそう!$"
 
 SafariZone_West_Text_AreaSign::
-	.string "AREA 3\n"
-	.string "EAST: CENTER AREA$"
+	.string "{JPN}ここは だい3 エリア\n"
+	.string "ひがし … ちゅうおう ひろば$"
 

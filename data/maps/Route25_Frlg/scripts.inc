@@ -10,121 +10,128 @@ Route25_EventScript_Man::
 	end
 
 Route25_Text_JoeyIntro::
-	.string "Local TRAINERS come here to\n"
-	.string "practice.$"
+	.string "{JPN}この はやしは きんじょの\n"
+	.string "トレーナーが\l"
+	.string "れんしゅうに くる ばしょさ!$"
 
 Route25_Text_JoeyDefeat::
-	.string "You're decent.$"
+	.string "{JPN}なかなか できるね$"
 
 Route25_Text_JoeyPostBattle::
-	.string "All POKEMON have weaknesses.\n"
-	.string "Even the strongest ones.\p"
-	.string "That's why it's best to raise\n"
-	.string "POKEMON of different types.$"
+	.string "{JPN}ポケモンは 1ぴきだけ つよくても\n"
+	.string "にがてな タイプには かてない\l"
+	.string "たくさん そだてる ほうが いいよ$"
 
 Route25_Text_DanIntro::
-	.string "Dad took me to a great party on\n"
-	.string "the S.S. ANNE at VERMILION CITY.$"
+	.string "{JPN}クチバ みなとの\n"
+	.string "サントアンヌ ごうの パーティ\l"
+	.string "パパと いったぜ いいだろー!$"
 
 Route25_Text_DanDefeat::
-	.string "I'm not mad!$"
+	.string "{JPN}くやしく ないもん$"
 
 Route25_Text_DanPostBattle::
-	.string "On the S.S. ANNE, I saw TRAINERS\n"
-	.string "from around the world.$"
+	.string "{JPN}サントアンヌ ごう は\n"
+	.string "せかいの トレーナーが\l"
+	.string "いっぱい いたよ$"
 
 Route25_Text_FlintIntro::
-	.string "I'm a cool guy.\n"
-	.string "I've got a girlfriend!$"
+	.string "{JPN}ぼくは キャンプボーイ\n"
+	.string "かのじょは ピクニックガール!$"
 
 Route25_Text_FlintDefeat::
-	.string "Aww, darn...$"
+	.string "{JPN}トホホ…$"
 
 Route25_Text_FlintPostBattle::
-	.string "Oh, well.\n"
-	.string "My girlfriend will cheer me up.$"
+	.string "{JPN}ま… いっか\n"
+	.string "かのじょに なぐさめて もらおう$"
 
 Route25_Text_KelseyIntro::
-	.string "Hi!\n"
-	.string "My boyfriend is cool!$"
+	.string "{JPN}わたしは ピクニックガール\n"
+	.string "かれは キャンプボーイ!$"
 
 Route25_Text_KelseyDefeat::
-	.string "My conditioning isn't the best...$"
+	.string "{JPN}ちょうし わるーい$"
 
 Route25_Text_KelseyPostBattle::
-	.string "I wish my boyfriend was as good\n"
-	.string "as you.$"
+	.string "{JPN}わたしの かれも\n"
+	.string "きみ くらい つよいと いいのに$"
 
 Route25_Text_ChadIntro::
-	.string "I had this feeling...\n"
-	.string "I knew I had to battle you!$"
+	.string "{JPN}む…!\n"
+	.string "きみと ぼくは たたかう よかん$"
 
 Route25_Text_ChadDefeat::
-	.string "I knew I'd lose, too!$"
+	.string "{JPN}まけそうな\n"
+	.string "よかんが したよ$"
 
 Route25_Text_ChadPostBattle::
-	.string "If your POKEMON gets confused,\n"
-	.string "switch it out.\p"
-	.string "That's a good tactic.$"
+	.string "{JPN}こんらん して しまったら\n"
+	.string "さっさと ポケモンを とりかえる\l"
+	.string "さくせんも いいね$"
 
 Route25_Text_HaleyIntro::
-	.string "My friend has many cute POKEMON.\n"
-	.string "I'm so jealous!$"
+	.string "{JPN}ともだちが かわいい ポケモン\n"
+	.string "いっぱい もってるの\l"
+	.string "… くやしいわ!$"
 
 Route25_Text_HaleyDefeat::
-	.string "I'm not so jealous!$"
+	.string "{JPN}くやしく ないもん$"
 
 Route25_Text_HaleyPostBattle::
-	.string "You came from MT. MOON?\n"
-	.string "May I have a CLEFAIRY?$"
+	.string "{JPN}オツキミやま から きたの?\n"
+	.string "じゃ あたし ピッピ ほしーい!\l"
+	.string "ねえ ちょうだい$"
 
 Route25_Text_FranklinIntro::
-	.string "I just got down from MT. MOON,\n"
-	.string "but I've still got gas in the tank!$"
+	.string "{JPN}オツキミ やま から\n"
+	.string "おりてきた ばかりだが\l"
+	.string "まだまだ げんき!$"
 
 Route25_Text_FranklinDefeat::
-	.string "You worked hard!$"
+	.string "{JPN}がんばるなあ$"
 
 Route25_Text_FranklinPostBattle::
-	.string "Drat!\n"
-	.string "A ZUBAT bit me back in that cave.$"
+	.string "{JPN}くそッ\n"
+	.string "どうくつの なかで\l"
+	.string "ズバットに かまれちまった$"
 
 Route25_Text_NobIntro::
-	.string "I'm off to see a POKeMANIAC's\n"
-	.string "collection at the cape.$"
+	.string "{JPN}みさきに すんでる\n"
+	.string "ポケモン マニアの コレクション\l"
+	.string "みに いこうと おもってな!$"
 
 Route25_Text_NobDefeat::
-	.string "You done got me, and real good,\n"
-	.string "too!$"
+	.string "{JPN}やられたなあ$"
 
 Route25_Text_NobPostBattle::
-	.string "The POKeMANIAC sure lives up to\n"
-	.string "his name.\p"
-	.string "His collection includes many rare\n"
-	.string "species of POKEMON.$"
+	.string "{JPN}マニアという だけに\n"
+	.string "いろいろ めずらしい ポケモンを\l"
+	.string "もってる らしい$"
 
 Route25_Text_WayneIntro::
-	.string "You're going to see BILL?\n"
-	.string "First, we battle!$"
+	.string "{JPN}マサキの いえに いくのか?\n"
+	.string "そのまえに しょうぶ しよう!$"
 
 Route25_Text_WayneDefeat::
-	.string "You're something.$"
+	.string "{JPN}やるなあ$"
 
 Route25_Text_WaynePostBattle::
-	.string "The trail below is a shortcut to\n"
-	.string "CERULEAN CITY.$"
+	.string "{JPN}ハナダ シティに かえる ときは\n"
+	.string "したの ほどうを あるくと はやい$"
 
 Route25_Text_SeaCottageSign::
-	.string "SEA COTTAGE\n"
-	.string "BILL lives here!$"
+	.string "{JPN}ここは みさきの こや\n"
+	.string "… マサキの いえ$"
 
 Route25_Text_MistyHighHopesAboutThisPlace::
-	.string "This cape is a famous date spot.\p"
-	.string "MISTY, the GYM LEADER, has high\n"
-	.string "hopes about this place.$"
+	.string "{JPN}この みさきは ゆうめいな\n"
+	.string "デートスポットなの…\p"
+	.string "ジムリーダーの カスミも\n"
+	.string "あこがれてる ところなのよ$"
 
 Route25_Text_AreYouHereAlone::
-	.string "Hello, are you here alone?\p"
-	.string "If you're out at CERULEAN's cape...\n"
-	.string "Well, it should be as a couple.$"
+	.string "{JPN}やあ きみは ひとりかい?\p"
+	.string "せっかく ハナダのみさきに\n"
+	.string "くる なら… ふたりじゃ なくちゃ$"
 

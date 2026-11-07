@@ -116,49 +116,49 @@ TwoIsland_House_EventScript_SetHasBothMushrooms::
 	return
 
 TwoIsland_House_Text_TeachMonMoveForMushroom::
-	.string "I'm the POKEMON MOVE MANIAC.\p"
-	.string "I know every single move that\n"
-	.string "POKEMON learn growing up.\p"
-	.string "I'm also a mushroom maniac.\p"
-	.string "Bring me two TINYMUSHROOMS,\n"
-	.string "or one BIG MUSHROOM.\p"
-	.string "If you do that for me, I'll teach\n"
-	.string "a move to one POKEMON.$"
+	.string "{JPN}ぼく ポケモン わざマニア!\p"
+	.string "ポケモンが せいちょう して\n"
+	.string "おぼえる わざを\l"
+	.string "すべて しっているのさ!\p"
+	.string "そして キノコマニアでも ある!\p"
+	.string "ちいさなキノコを 2こか\n"
+	.string "おおきなキノコを 1こ くれたら\l"
+	.string "きみの ポケモンに\l"
+	.string "わざを おしえて あげるよ!$"
 
 TwoIsland_House_Text_WantMeToTeachMove::
-	.string "Sniff, sniff...\n"
-	.string "Hm! You smell of MUSHROOMS!\p"
-	.string "Do you want me to teach a move\n"
-	.string "to a POKEMON of yours?$"
+	.string "{JPN}くんくん…\n"
+	.string "む キノコを もってるね!\p"
+	.string "わざを おしえて ほしいのかい?$"
 
 TwoIsland_House_Text_TutorWhichMon::
-	.string "Which POKEMON needs tutoring?$"
+	.string "{JPN}どの ポケモンに するんだい?$"
 
 TwoIsland_House_Text_TeachWhichMove::
-	.string "Which move should I teach?$"
+	.string "{JPN}どの わざに するんだい?$"
 
 TwoIsland_House_Text_NoMoveICanTeachThatMon::
-	.string "Sorry...\p"
-	.string "It doesn't appear as if I have a\n"
-	.string "move I can teach that POKEMON.$"
+	.string "{JPN}ごめんね……\p"
+	.string "ぼくが その ポケモンに\n"
+	.string "おしえられる わざは ないみたい$"
 
 TwoIsland_House_Text_IllNeedMushroomOrTwo::
-	.string "Then, I'll need a MUSHROOM or two.\n"
-	.string "What are you going to give me?$"
+	.string "{JPN}じゃあ キノコ ちょうだいね!\n"
+	.string "どっちの キノコを くれるんだい?$"
 
 TwoIsland_House_Text_HandedOverTwoTinyMushrooms::
-	.string "{PLAYER} handed over two\n"
-	.string "TINYMUSHROOMS in exchange.$"
+	.string "{JPN}{PLAYER}は おれいに\n"
+	.string "ちいさなキノコを 2こ あげた!$"
 
 TwoIsland_House_Text_HandedOverOneBigMushroom::
-	.string "{PLAYER} handed over one\n"
-	.string "BIG MUSHROOM in exchange.$"
+	.string "{JPN}{PLAYER}は おれいに\n"
+	.string "おおきなキノコを 1こ あげた!$"
 
 TwoIsland_House_Text_NeedMushroomOrTwoToLearnMove::
-	.string "If your POKEMON need to learn a\n"
-	.string "move, I need a MUSHROOM or two.$"
+	.string "{JPN}おぼえさせたい わざが あったら\n"
+	.string "キノコを もってきてね!$"
 
 TwoIsland_House_Text_CantTeachAnEgg::
-	.string "Hunh? There isn't a single move\n"
-	.string "that I can teach an EGG.$"
+	.string "{JPN}えっ?\n"
+	.string "タマゴは おしえ られないよ$"
 

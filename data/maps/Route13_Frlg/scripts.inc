@@ -14,130 +14,139 @@ Route13_EventScript_RouteSign::
 	end
 
 Route13_Text_SebastianIntro::
-	.string "My bird POKEMON want to battle\n"
-	.string "with you!$"
+	.string "{JPN}ぼくの とりポケが きみたちと\n"
+	.string "たたかい たがってる!$"
 
 Route13_Text_SebastianDefeat::
-	.string "My PIDGEY and PIDGEOTTO combo\n"
-	.string "lost?$"
+	.string "{JPN}ポッポと ピジョン\n"
+	.string "コンビが まける なんて$"
 
 Route13_Text_SebastianPostBattle::
-	.string "My POKEMON look happy even though\n"
-	.string "they lost.$"
+	.string "{JPN}まけても ぼくの とりポケは\n"
+	.string "まんぞく した みたい$"
 
 Route13_Text_SusieIntro::
-	.string "I'm told I'm good for a kid.$"
+	.string "{JPN}おんなのこに しては\n"
+	.string "すじが いいって ほめられるの!$"
 
 Route13_Text_SusieDefeat::
-	.string "Ohh!\n"
-	.string "I lost!$"
+	.string "{JPN}まけちゃった$"
 
 Route13_Text_SusiePostBattle::
-	.string "I want to become a good TRAINER.\n"
-	.string "I'll train hard, just watch.$"
+	.string "{JPN}いつかは\n"
+	.string "つよい トレーナーに なりたい\l"
+	.string "きょうから また とっくんよ!$"
 
 Route13_Text_ValerieIntro::
-	.string "Wow!\n"
-	.string "Your BADGES are too cool!$"
+	.string "{JPN}あら!\n"
+	.string "かっこいい バッジ もってるね$"
 
 Route13_Text_ValerieDefeat::
-	.string "Not enough!$"
+	.string "{JPN}まだまだ だわ$"
 
 Route13_Text_ValeriePostBattle::
-	.string "You got those BADGES from GYM\n"
-	.string "LEADERS. I know!$"
+	.string "{JPN}そのバッジ…\n"
+	.string "リーダー から もらったんでしょ\l"
+	.string "… しってるわよ$"
 
 Route13_Text_GwenIntro::
-	.string "My cute POKEMON wish to make your\n"
-	.string "acquaintance.$"
+	.string "{JPN}かわいい ポケモン たちに\n"
+	.string "ごあいさつを させるわ!$"
 
 Route13_Text_GwenDefeat::
-	.string "Good going!\n"
-	.string "You totally won!$"
+	.string "{JPN}おみごと!\n"
+	.string "わたしの かんぱいね$"
 
 Route13_Text_GwenPostBattle::
-	.string "You have to make POKEMON battle\n"
-	.string "to toughen them up.$"
+	.string "{JPN}ポケモンは こうやって\n"
+	.string "どんどん たたかわせて\l"
+	.string "つよく してかないと!$"
 
 Route13_Text_AlmaIntro::
-	.string "I found CARBOS in a cave once\n"
-	.string "while I was spelunking.$"
+	.string "{JPN}どうくつ たんけんに いって\n"
+	.string "インドメタシンを ひろったのよ$"
 
 Route13_Text_AlmaDefeat::
-	.string "Oh, too bad!\n"
-	.string "I just messed up!$"
+	.string "{JPN}… ざんねん!\n"
+	.string "ちょうしが でなかったわ$"
 
 Route13_Text_AlmaPostBattle::
-	.string "CARBOS boosted the SPEED of my\n"
-	.string "POKEMON.$"
+	.string "{JPN}そう インドメタシン あたえたら\n"
+	.string "ポケモンの すばやさが あがったの$"
 
 Route13_Text_PerryIntro::
-	.string "I'm not going to lose.\n"
-	.string "Not when the wind's blowing my way!$"
+	.string "{JPN}まけないよ! かぜは\n"
+	.string "ぼくの ほうに ふいて いる!$"
 
 Route13_Text_PerryDefeat::
-	.string "The wind turned!$"
+	.string "{JPN}… かざむきが\n"
+	.string "かわった みたい だな$"
 
 Route13_Text_PerryPostBattle::
-	.string "I'm beat.\n"
-	.string "I guess I'll FLY home.$"
+	.string "{JPN}たたかう げんきも ないや\n"
+	.string "とりに のって うちに かえろう$"
 
 Route13_Text_LolaIntro::
-	.string "Sure, I'll play with you, sweetie.$"
+	.string "{JPN}あら… おねえさんが\n"
+	.string "あいて して あげても いいわよ$"
 
 Route13_Text_LolaDefeat::
-	.string "Oh!\n"
-	.string "You little beast!$"
+	.string "{JPN}つよい わね!$"
 
 Route13_Text_LolaPostBattle::
-	.string "I wonder which is stronger, male or\n"
-	.string "female POKEMON?$"
+	.string "{JPN}ポケモンの せかい では\n"
+	.string "オス と メス\l"
+	.string "どちらが つよいの かしら$"
 
 Route13_Text_SheilaIntro::
-	.string "Do you want to battle some\n"
-	.string "POKEMON with me?$"
+	.string "{JPN}わたしと ポケモン したいの?$"
 
 Route13_Text_SheilaDefeat::
-	.string "It's over already?$"
+	.string "{JPN}… もう\n"
+	.string "おわっちゃったのね$"
 
 Route13_Text_SheilaPostBattle::
-	.string "I don't know anything about\n"
-	.string "POKEMON actually.\p"
-	.string "The ones I use... I picked them\n"
-	.string "for their looks!$"
+	.string "{JPN}わたし ほんとは ポケモン\n"
+	.string "よく わからないの\l"
+	.string "つかう ポケモンも\l"
+	.string "かっこう だけで きめちゃうのよ$"
 
 Route13_Text_JaredIntro::
-	.string "What're you lookin' at?$"
+	.string "{JPN}っだよ! っせーな!$"
 
 Route13_Text_JaredDefeat::
-	.string "Dang!\n"
-	.string "Stripped gears!$"
+	.string "{JPN}ったくよ!\n"
+	.string "っざけんなよ!$"
 
 Route13_Text_JaredPostBattle::
-	.string "Get lost!$"
+	.string "{JPN}っせーな!\n"
+	.string "あっち いけよ!$"
 
 Route13_Text_RobertIntro::
-	.string "I always go with bird POKEMON.\n"
-	.string "I've dedicated myself to them.$"
+	.string "{JPN}ずーッと とり ポケモンに\n"
+	.string "こだわって きた ぼくです!$"
 
 Route13_Text_RobertDefeat::
-	.string "Out of power!$"
+	.string "{JPN}ちから つきた…$"
 
 Route13_Text_RobertPostBattle::
-	.string "I wish I could fly like PIDGEY and\n"
-	.string "PIDGEOTTO...$"
+	.string "{JPN}あーあ… ぼくも\n"
+	.string "ポッポや ビジョンの ように\l"
+	.string "そらを とんで いきたい$"
 
 Route13_Text_LookToLeftOfThatPost::
-	.string "TRAINER TIPS\p"
-	.string "Look, look!\n"
-	.string "Look to the left of that post!$"
+	.string "{JPN}… おとくな けいじばん!\p"
+	.string "そこ そこ!\n"
+	.string "くいを はさんで ひだり がわ$"
 
 Route13_Text_SelectToSwitchItems::
-	.string "TRAINER TIPS\p"
-	.string "Use SELECT to switch items in the\n"
-	.string "ITEMS window.$"
+	.string "{JPN}… おとくな けいじばん!\p"
+	.string "どうぐ ウィンドウで\n"
+	.string "セレクト ボタンを おすと\l"
+	.string "どうぐの ばしょを\l"
+	.string "いれかえる ことが できる!$"
 
 Route13_Text_RouteSign::
-	.string "ROUTE 13\n"
-	.string "North to SILENCE BRIDGE$"
+	.string "{JPN}ここは 13ばん どうろ\n"
+	.string "きた … サイレンズ ブリッジ$"
 

@@ -169,26 +169,33 @@ SSAnne_2F_Corridor_EventScript_Sailor::
 	end
 
 SSAnne_2F_Corridor_Text_ThisShipIsLuxuryLiner::
-	.string "This ship, she is a luxury liner for\n"
-	.string "TRAINERS of the world!\p"
-	.string "At every port, we hold parties with\n"
-	.string "invited TRAINERS.$"
+	.string "{JPN}この ふねは せかい かくちの\n"
+	.string "ポケモン トレーナーが のってる\l"
+	.string "あこがれの ごうか きゃくせん!\p"
+	.string "みなとに つくたびに\n"
+	.string "しょうたい された トレーナーと\l"
+	.string "こうりゅう パーティを してます$"
 
 SSAnne_2F_Corridor_Text_RivalIntro::
-	.string "{RIVAL}: Bonjour!\n"
+	.string "{JPN}{RIVAL}『ボン ジュール!\n"
 	.string "{PLAYER}!\p"
-	.string "Imagine seeing you here!\n"
-	.string "{PLAYER}, were you really invited?\p"
-	.string "So how's your POKeDEX coming?\p"
-	.string "I already caught 40 kinds, pal.\n"
-	.string "Different kinds are everywhere.\p"
-	.string "Crawl around in grassy areas, and\n"
-	.string "look hard for them.$"
+	.string "おやおや! こんな ところで\n"
+	.string "あう とは…!\p"
+	.string "{PLAYER}…\n"
+	.string "しょうたい されてたっけ?\p"
+	.string "それで ポケモン ずかんの\n"
+	.string "データは あつまったか!\p"
+	.string "おれ なんか\n"
+	.string "もう 40しゅるい つかまえたぜ!\p"
+	.string "みち いっぽん ちがう だけで\n"
+	.string "とれる ポケモンも ちがうぜ!\p"
+	.string "ちゃんと くさむら はいって\n"
+	.string "さがして みろ!$"
 
 SSAnne_2F_Corridor_Text_RivalDefeat::
-	.string "Humph!\p"
-	.string "At least you're raising your\n"
-	.string "POKEMON!$"
+	.string "{JPN}ふん…!\p"
+	.string "とにかく… ポケモンは\n"
+	.string "そこそこ そだててる ようだな!$"
 
 SSAnne_2F_Corridor_Text_RivalVictory::
 	.string "{PLAYER}..!\n"
@@ -197,11 +204,12 @@ SSAnne_2F_Corridor_Text_RivalVictory::
 	.string "きたえた ほうが いいぜ!$"
 
 SSAnne_2F_Corridor_Text_RivalPostBattle::
-	.string "{RIVAL}: I heard there was a CUT\n"
-	.string "master on board.\p"
-	.string "But he was just a seasick old man!\p"
-	.string "CUT itself is really useful.\n"
-	.string "Yup, it'll be handy.\p"
-	.string "You should go see him, too.\n"
-	.string "Smell ya!$"
+	.string "{JPN}{RIVAL}『いあいぎりの めいじんが\n"
+	.string "ふねに のってるって いう からよ\p"
+	.string "あって みたら\n"
+	.string "これが ただの ふなよい おやじ!\p"
+	.string "でも この わざが\n"
+	.string "また つかえるんだよなー!\p"
+	.string "おまえも あって みると いいぜ!\n"
+	.string "じゃー あばよ!$"
 

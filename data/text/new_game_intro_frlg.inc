@@ -1,243 +1,253 @@
 gOtherText_NewName::
-	.string "NEW NAME$"
+	.string "{JPN}じぶんできめる$"
 
 gNameChoice_Green::
-	.string "GREEN$"
+	.string "{JPN}グリーン$"
 
 gNameChoice_Red::
-	.string "RED$"
+	.string "{JPN}レッド$"
 
 gNameChoice_Leaf::
-	.string "LEAF$"
+	.string "{JPN}リーフ$"
 
 gNameChoice_Fire::
-	.string "FIRE$"
+	.string "{JPN}ファイア$"
 
 gNameChoice_Gary::
-	.string "GARY$"
+	.string "{JPN}シゲル$"
 
 gNameChoice_Kaz::
-	.string "KAZ$"
+	.string "{JPN}ツネカズ$"
 
 gNameChoice_Toru::
-	.string "TORU$"
+	.string "{JPN}サトル$"
 
 gNameChoice_Ash::
-	.string "ASH$"
+	.string "{JPN}サトシ$"
 
 gNameChoice_Kene::
-	.string "KENE$"
+	.string "{JPN}ケン$"
 
 gNameChoice_Geki::
-	.string "GEKI$"
+	.string "{JPN}シゲキ$"
 
 gNameChoice_Jak::
-	.string "JAK$"
+	.string "{JPN}ジャック$"
 
 gNameChoice_Janne::
-	.string "JANNE$"
+	.string "{JPN}ジャン$"
 
 gNameChoice_Jonn::
-	.string "JONN$"
+	.string "{JPN}ジョン$"
 
 gNameChoice_Kamon::
-	.string "KAMON$"
+	.string "{JPN}カモン$"
 
 gNameChoice_Karl::
-	.string "KARL$"
+	.string "{JPN}タカシ$"
 
 gNameChoice_Taylor::
-	.string "TAYLOR$"
+	.string "{JPN}テツオ$"
 
 gNameChoice_Oscar::
-	.string "OSCAR$"
+	.string "{JPN}トオル$"
 
 gNameChoice_Hiro::
-	.string "HIRO$"
+	.string "{JPN}ヒロキ$"
 
 gNameChoice_Max::
 	.string "MAX$"
 
 gNameChoice_Jon::
-	.string "JON$"
+	.string "{JPN}タカオ$"
 
 gNameChoice_Ralph::
-	.string "RALPH$"
+	.string "{JPN}タケヒロ$"
 
 gNameChoice_Kay::
-	.string "KAY$"
+	.string "{JPN}ケイ$"
 
 gNameChoice_Tosh::
-	.string "TOSH$"
+	.string "{JPN}ヒトシ$"
 
 gNameChoice_Roak::
-	.string "ROAK$"
+	.string "{JPN}ヒロアキ$"
 
 gNameChoice_Omi::
-	.string "OMI$"
+	.string "{JPN}キヨミ$"
 
 gNameChoice_Jodi::
-	.string "JODI$"
+	.string "{JPN}サトコ$"
 
 gNameChoice_Amanda::
-	.string "AMANDA$"
+	.string "{JPN}チホ$"
 
 gNameChoice_Hillary::
-	.string "HILLARY$"
+	.string "{JPN}キョウコ$"
 
 gNameChoice_Makey::
-	.string "MAKEY$"
+	.string "{JPN}マキコ$"
 
 gNameChoice_Michi::
-	.string "MICHI$"
+	.string "{JPN}ミキコ$"
 
 gNameChoice_Paula::
-	.string "PAULA$"
+	.string "{JPN}ミチコ$"
 
 gNameChoice_June::
-	.string "JUNE$"
+	.string "{JPN}ジュンコ$"
 
 gNameChoice_Cassie::
-	.string "CASSIE$"
+	.string "{JPN}アヤコ$"
 
 gNameChoice_Rey::
-	.string "REY$"
+	.string "{JPN}リエ$"
 
 gNameChoice_Seda::
-	.string "SEDA$"
+	.string "{JPN}セツコ$"
 
 gNameChoice_Kiko::
-	.string "KIKO$"
+	.string "{JPN}ユキコ$"
 
 gNameChoice_Mina::
-	.string "MINA$"
+	.string "{JPN}マミナ$"
 
 gNameChoice_Norie::
-	.string "NORIE$"
+	.string "{JPN}ノリエ$"
 
 gNameChoice_Sai::
-	.string "SAI$"
+	.string "{JPN}ヒサエ$"
 
 gNameChoice_Momo::
-	.string "MOMO$"
+	.string "{JPN}モモコ$"
 
 gNameChoice_Suzi::
-	.string "SUZI$"
+	.string "{JPN}ミスズ$"
 
 gControlsGuide_Text_Intro::
-	.string "The various buttons will be explained in\n"
-	.string "the order of their importance.$"
+	.string "{JPN}いろいろな ボタンを よくつかう\n"
+	.string "じゅんばんで せつめい します。$"
 
 gControlsGuide_Text_DPad::
-	.string "Moves the main character.\n"
-	.string "Also used to choose various data\n"
-	.string "headings.$"
+	.string "{JPN}じょうげさゆうに しゅじんこうを\n"
+	.string "うごかします。 また こうもくを\n"
+	.string "えらぶときに つかいます。$"
 
 gControlsGuide_Text_AButton::
-	.string "Used to confirm a choice, check\n"
-	.string "things, chat, and scroll text.$"
+	.string "{JPN}けっていする しらべる はなしを\n"
+	.string "すすめるときに つかいます。$"
 
 gControlsGuide_Text_BButton::
-	.string "Used to exit, cancel a choice,\n"
-	.string "and cancel a mode.$"
+	.string "{JPN}もどる やめるなど キャンセルは\n"
+	.string "この ボタンです。$"
 
 gControlsGuide_Text_StartButton::
-	.string "Press this button to open the\n"
-	.string "MENU.$"
+	.string "{JPN}メニューを ひらくときに\n"
+	.string "この ボタンを つかいます。$"
 
 gControlsGuide_Text_SelectButton::
-	.string "Used to shift items and to use\n"
-	.string "a registered item.$"
+	.string "{JPN}どうぐの いれかえや たいせつな\n"
+	.string "ものを とうろくして つかいます$"
 
 gControlsGuide_Text_LRButtons::
-	.string "If you need help playing the\n"
-	.string "game, or on how to do things,\n"
-	.string "press the L or R Button.$"
+	.string "{JPN}あそびかた やりかたなど なにか\n"
+	.string "こまったことが あったら Lか\n"
+	.string "Rの ボタンを おしてください。$"
 
 gOakSpeech_Text_AskPlayerGender::
-	.string "Now tell me. Are you a boy?\n"
-	.string "Or are you a girl?$"
+	.string "{JPN}きみは おとこのこ かな?\n"
+	.string "それとも おんなのこ?$"
 
 gPikachuIntro_Text_Page1::
-	.string "In the world which you are about to\n"
-	.string "enter, you will embark on a grand\n"
-	.string "adventure with you as the hero.\n"
+	.string "{JPN}これから はじまる せかいで あなたは\n"
+	.string "ひとりの しゅじんこうと なって\n"
+	.string "ぼうけんを することに なります。\n"
 	.string "\n"
-	.string "Speak to people and check things\n"
-	.string "wherever you go, be it towns, roads,\n"
-	.string "or caves. Gather information and\n"
-	.string "hints from every source.$"
+	.string "まちや みち どうくつ いえのなか など\n"
+	.string "いたるところに いる ひとたちに\n"
+	.string "はなしかけ いろいろな ものを しらべて\n"
+	.string "ヒントや じょうほうを あつめましょう$"
 
 gPikachuIntro_Text_Page2::
-	.string "New paths will open to you by helping\n"
-	.string "people in need, overcoming challenges,\n"
-	.string "and solving mysteries.\n"
+	.string "{JPN}そして こまっている ひとを たすけ\n"
+	.string "なぞを といていく ことで あらたな\n"
+	.string "みちが ひらかれて いきます。\n"
+	.string "どんどん さきに すすんで ください。\n"
 	.string "\n"
-	.string "At times, you will be challenged by\n"
-	.string "others and attacked by wild creatures.\n"
-	.string "Be brave and keep pushing on.$"
+	.string "ときに しょうぶを しかけられたり\n"
+	.string "やせいの いきものたちと たたかうことも\n"
+	.string "あるでしょう。$"
 
 gPikachuIntro_Text_Page3::
-	.string "Through your adventure, we hope\n"
-	.string "that you will interact with all sorts\n"
-	.string "of people and achieve personal growth.\n"
-	.string "That is our biggest objective.\n"
+	.string "{JPN}ぼうけんを つうじて\n"
+	.string "さまざまな ひとと コミュニケーションを\n"
+	.string "とりながら せいちょう すること。\n"
+	.string "それが もっとも おおきな もくてきです\n"
 	.string "\n"
-	.string "Press the A Button, and let your\n"
-	.string "adventure begin!$"
+	.string "   Aボタンで はじまります!$"
 
 gOakSpeech_Text_WelcomeToTheWorld::
-	.string "Hello, there!\n"
-	.string "Glad to meet you!\p"
-	.string "Welcome to the world of POKEMON!\p"
-	.string "My name is OAK.\p"
-	.string "People affectionately refer to me\n"
-	.string "as the POKEMON PROFESSOR.\p$"
+	.string "{JPN}はじめまして!\p"
+	.string "ポケット モンスターの せかいへ\n"
+	.string "ようこそ!\p"
+	.string "わたしの なまえは オーキド\n"
+	.string "みんなからは ポケモン はかせと\l"
+	.string "したわれて おるよ\p"
+	.string "$"
 
 gOakSpeech_Text_ThisWorld::
-	.string "This world...$"
+	.string "{JPN}この せかいには$"
 
 gOakSpeech_Text_IsInhabitedFarAndWide::
-	.string "...is inhabited far and wide by\n"
-	.string "creatures called POKEMON.\p$"
+	.string "{JPN}ポケット モンスターと よばれる\n"
+	.string "いきもの たちが\l"
+	.string "いたるところに すんでいる!\p"
+	.string "$"
 
 gOakSpeech_Text_IStudyPokemon::
-	.string "For some people, POKEMON are pets.\n"
-	.string "Others use them for battling.\p"
-	.string "As for myself...\p"
-	.string "I study POKEMON as a profession.\p$"
+	.string "{JPN}その ポケモン という いきものを\n"
+	.string "ひとは ペットに したり\l"
+	.string "しょうぶに つかったり……\p"
+	.string "そして……\p"
+	.string "わたしは この ポケモンの\n"
+	.string "けんきゅうを してる というわけだ\p"
+	.string "$"
 
 gOakSpeech_Text_TellMeALittleAboutYourself::
-	.string "But first, tell me a little about\n"
-	.string "yourself.\p$"
+	.string "{JPN}では はじめに きみの ことを\n"
+	.string "おしえて もらおう!\p"
+	.string "$"
 
 gOakSpeech_Text_YourNameWhatIsIt::
-	.string "Let's begin with your name.\n"
-	.string "What is it?\p$"
+	.string "{JPN}きみの なまえは?\p"
+	.string "$"
 
 gOakSpeech_Text_SoYourNameIsPlayer::
-	.string "Right...\n"
-	.string "So your name is {PLAYER}.$"
+	.string "{JPN}ふむ……\n"
+	.string "{PLAYER} と いうんだな!$"
 
 gOakSpeech_Text_WhatWasHisName::
-	.string "This is my grandson.\p"
-	.string "He's been your rival since you both\n"
-	.string "were babies.\p"
-	.string "...Erm, what was his name now?$"
+	.string "{JPN}こいつは わたしの まご\p"
+	.string "きみの おさななじみであり\n"
+	.string "ライバル である\p"
+	.string "……えーと?\n"
+	.string "なまえは なんて いったかな?$"
 
 gOakSpeech_Text_YourRivalsNameWhatWasIt::
-	.string "Your rival's name, what was it now?$"
+	.string "{JPN}きみの ライバルの なまえは……?$"
 
 gOakSpeech_Text_ConfirmRivalName::
-	.string "...Er, was it {RIVAL}?$"
+	.string "{JPN}{RIVAL} だったかな?$"
 
 gOakSpeech_Text_RememberRivalsName::
-	.string "That's right! I remember now!\n"
-	.string "His name is {RIVAL}!\p$"
+	.string "{JPN}そうだ おもいだしたぞ!\n"
+	.string "{RIVAL} という なまえだ!\p"
+	.string "$"
 
 gOakSpeech_Text_LetsGo::
-	.string "{PLAYER}!\p"
-	.string "Your very own POKEMON legend is\n"
-	.string "about to unfold!\p"
-	.string "A world of dreams and adventures\n"
-	.string "with POKEMON awaits! Let's go!$"
+	.string "{JPN}{PLAYER}!\p"
+	.string "いよいよ これから\n"
+	.string "きみの ものがたりの はじまりだ!\p"
+	.string "ゆめと ぼうけんと!\n"
+	.string "ポケット モンスターの せかいへ!\p"
+	.string "レッツ ゴー!$"

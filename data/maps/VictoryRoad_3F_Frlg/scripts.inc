@@ -60,102 +60,99 @@ VictoryRoad_3F_EventScript_Tyra::
 	end
 
 Text_DoubleEdgeTeach::
-	.string "You should be proud of yourself,\n"
-	.string "having battled your way through\l"
-	.string "VICTORY ROAD so courageously.\p"
-	.string "In recognition of your feat,\n"
-	.string "I'll teach you DOUBLE-EDGE.\p"
-	.string "Would you like me to teach that\n"
-	.string "technique?$"
+	.string "{JPN}きみは すてみで\n"
+	.string "この チャンピオンロードを\l"
+	.string "ぬけて きたのだな!\p"
+	.string "がんばりを みとめて\n"
+	.string "すてみタックルを おしえよう!\p"
+	.string "どうだ おしえて ほしいか?$"
 
 Text_DoubleEdgeDeclined::
-	.string "I'll teach you the technique\n"
-	.string "anytime.$"
+	.string "{JPN}きみには いつでも おしえよう\n"
+	.string "また くるがいい$"
 
 Text_DoubleEdgeWhichMon::
-	.string "Which POKEMON should I teach\n"
-	.string "DOUBLE-EDGE?$"
+	.string "{JPN}どの ポケモンに\n"
+	.string "おしえさせて みるか?$"
 
 Text_DoubleEdgeTaught::
-	.string "Keep that drive going for the\n"
-	.string "POKEMON LEAGUE!\p"
-	.string "Take a run at them and knock 'em\n"
-	.string "out!$"
+	.string "{JPN}ポケモンリーグでも その いきだ!\n"
+	.string "すてみで ぶつかって いけ!$"
 
 VictoryRoad_3F_Text_GeorgeIntro::
-	.string "I heard rumors of a child prodigy.$"
+	.string "{JPN}やたらと つよい こどもが いると\n"
+	.string "ウワサは きいて いるよ$"
 
 VictoryRoad_3F_Text_GeorgeDefeat::
-	.string "The rumors were true!$"
+	.string "{JPN}たいした やつだ$"
 
 VictoryRoad_3F_Text_GeorgePostBattle::
-	.string "So, it was you who beat GIOVANNI\n"
-	.string "of TEAM ROCKET?$"
+	.string "{JPN}ロケットだんの サカキを\n"
+	.string "たおしたのは … きみか!$"
 
 VictoryRoad_3F_Text_AlexaIntro::
-	.string "TRAINERS live to seek stronger\n"
-	.string "opponents.$"
+	.string "{JPN}つよい あいてを もとめるのは\n"
+	.string "トレーナーの しゅくめいよ!$"
 
 VictoryRoad_3F_Text_AlexaDefeat::
-	.string "Oh!\n"
-	.string "So strong!$"
+	.string "{JPN}ああッ つよい!$"
 
 VictoryRoad_3F_Text_AlexaPostBattle::
-	.string "By fighting tough battles, you get\n"
-	.string "stronger.$"
+	.string "{JPN}きびしい たたかいを つづけて\n"
+	.string "ほんとうの つよさが みに つくわ$"
 
 VictoryRoad_3F_Text_CarolineIntro::
-	.string "I'll show you just how good you\n"
-	.string "are. Not!$"
+	.string "{JPN}うえには うえが いるって\n"
+	.string "おしえて あげます!$"
 
 VictoryRoad_3F_Text_CarolineDefeat::
-	.string "I'm furious!$"
+	.string "{JPN}… くやしい!$"
 
 VictoryRoad_3F_Text_CarolinePostBattle::
-	.string "You showed me just how good\n"
-	.string "I was...$"
+	.string "{JPN}あなた わたしより つよいわ!\n"
+	.string "うえには うえが いるって ことか$"
 
 VictoryRoad_3F_Text_ColbyIntro::
-	.string "Only the chosen can pass here!$"
+	.string "{JPN}えらばれた もの だけが\n"
+	.string "ここを ぬけられるのだ!$"
 
 VictoryRoad_3F_Text_ColbyDefeat::
-	.string "I don't believe it!$"
+	.string "{JPN}まさかの はいぼくだ$"
 
 VictoryRoad_3F_Text_ColbyPostBattle::
-	.string "All TRAINERS here are headed to\n"
-	.string "the POKEMON LEAGUE.\p"
-	.string "Don't let down your guard.$"
+	.string "{JPN}ここの トレーナーも みんな\n"
+	.string "ポケモン リーグを めざしている\l"
+	.string "ゆだん しない ほうが いいぜ!$"
 
 VictoryRoad_3F_Text_RayIntro::
-	.string "RAY: Together, the two of us are\n"
-	.string "destined for greatness!$"
+	.string "{JPN}シン『ふたりで どこまでも\n"
+	.string "うえを めざすっ!$"
 
 VictoryRoad_3F_Text_RayDefeat::
-	.string "RAY: Ludicrous!\n"
-	.string "This can't be!$"
+	.string "{JPN}シン『ばかな…!$"
 
 VictoryRoad_3F_Text_RayPostBattle::
-	.string "RAY: You've beaten us.\n"
-	.string "Greatness remains elusive...$"
+	.string "{JPN}シン『ぼくたちの まけだ\n"
+	.string "うえには うえが いるものだな$"
 
 VictoryRoad_3F_Text_RayNotEnoughMons::
-	.string "RAY: Together, the two of us are\n"
-	.string "striving for the pinnacle.\p"
-	.string "We need you to bring two POKEMON\n"
-	.string "into battle with us.$"
+	.string "{JPN}シン『ふたりで ちょうてんを\n"
+	.string "めざして いるんだ\l"
+	.string "きみも ポケモン 2ひきで\l"
+	.string "たたかって くれたまえ$"
 
 VictoryRoad_3F_Text_TyraIntro::
-	.string "TYRA: We're trying to become\n"
-	.string "champions together.$"
+	.string "{JPN}カヨ『いっしょに\n"
+	.string "チャンピオンを めざすわ!$"
 
 VictoryRoad_3F_Text_TyraDefeat::
-	.string "TYRA: Oh, but...$"
+	.string "{JPN}カヨ『そんな…$"
 
 VictoryRoad_3F_Text_TyraPostBattle::
-	.string "TYRA: You've taught me that power\n"
-	.string "can be infinite in shape and form.$"
+	.string "{JPN}カヨ『つよさは むげん なのね\n"
+	.string "おしえて くれて ありがとう$"
 
 VictoryRoad_3F_Text_TyraNotEnoughMons::
-	.string "TYRA: You can't battle with us if\n"
-	.string "you have only one POKEMON.$"
+	.string "{JPN}カヨ『ポケモン 1ひきでは\n"
+	.string "わたしたち とは たたかえないわ$"
 

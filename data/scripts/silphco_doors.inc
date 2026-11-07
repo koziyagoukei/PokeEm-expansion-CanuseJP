@@ -544,12 +544,12 @@ EventScript_OpenDoor::
 	end
 
 Text_CardKeyOpenedDoor::
-	.string "Bingo!\n"
-	.string "The CARD KEY opened the door!$"
+	.string "{JPN}…ピンポーン!\n"
+	.string "カードキーで ロック をはずした!$"
 
 Text_ItNeedsCardKey::
-	.string "No!\n"
-	.string "It needs a CARD KEY!$"
+	.string "{JPN}…だめだ!\n"
+	.string "カードキーが ないと あかない!$"
 
 Text_TheDoorIsOpen::
-	.string "The door is open...$"
+	.string "{JPN}ドアは あいている…$"

@@ -51,43 +51,46 @@ Route15_WestEntrance_2F_EventScript_GetAideRequestInfo::
 	return
 
 Route15_WestEntrance_2F_Text_GiveItemIfCaughtEnough::
-	.string "Hi! Remember me?\n"
-	.string "I'm one of PROF. OAK's AIDES.\p"
-	.string "If your POKeDEX has complete data\n"
-	.string "on {STR_VAR_1} species, I'm supposed to\l"
-	.string "give you a reward.\p"
-	.string "PROF. OAK entrusted me with the\n"
-	.string "{STR_VAR_2} for you.\p"
-	.string "So, {PLAYER}, let me ask you.\p"
-	.string "Have you gathered data on at least\n"
-	.string "{STR_VAR_1} kinds of POKEMON?$"
+	.string "{JPN}ぼく おぼえてます?\n"
+	.string "ほら…!\l"
+	.string "オーキド はかせの じょしゅ です\p"
+	.string "ポケモンずかんが {STR_VAR_1}しゅるい\n"
+	.string "あつまってる ようなら\l"
+	.string "{STR_VAR_2}を わたす よう\l"
+	.string "はかせに いわれ ました\p"
+	.string "…… それでは さっそく\n"
+	.string "{PLAYER}{KUN}!\l"
+	.string "つかまえた ポケモンは\l"
+	.string "{STR_VAR_1}しゅるい より おおい かな?$"
 
 Route15_WestEntrance_2F_Text_GreatHereYouGo::
-	.string "Great! You have caught or owned\n"
-	.string "{STR_VAR_3} kinds of POKEMON!\p"
-	.string "Congratulations!\n"
-	.string "Here you go!$"
+	.string "{JPN}… … なるほど!\n"
+	.string "つかまえた ポケモンは…\l"
+	.string "{STR_VAR_3}しゅるい ですね!\n"
+	.string "おめでとう!\p"
+	.string "それでは\n"
+	.string "これを おわたし します!$"
 
 Route15_WestEntrance_2F_Text_ReceivedItemFromAide::
-	.string "{PLAYER} received the {STR_VAR_2}\n"
-	.string "from the AIDE.$"
+	.string "{JPN}{PLAYER}は じょしゅ から\n"
+	.string "{STR_VAR_2}を もらった!$"
 
 Route15_WestEntrance_2F_Text_ExplainExpShare::
-	.string "EXP. SHARE is an item to be held\n"
-	.string "by a POKEMON.\p"
-	.string "The POKEMON will receive a share\n"
-	.string "of the EXP. Points without having\l"
-	.string "to battle.$"
+	.string "{JPN}がくしゅうそうちを\n"
+	.string "ポケモンに もたせると\l"
+	.string "その ポケモンは\l"
+	.string "たたかわなくても\l"
+	.string "けいけんちの わけまえが\l"
+	.string "もらえます$"
 
 Route15_WestEntrance_2F_Text_LargeShiningBird::
-	.string "Let's see what the binoculars have\n"
-	.string "to show...\p"
-	.string "A large, shining bird is flying\n"
-	.string "toward the sea.$"
+	.string "{JPN}ぼうえんきょうを のぞいた…\p"
+	.string "おおきな とりが\n"
+	.string "キラキラ ひかりながら\l"
+	.string "うみの ほうへ とんでいく…$"
 
 Route15_WestEntrance_2F_Text_SmallIslandOnHorizon::
-	.string "Let's see what the binoculars have\n"
-	.string "to show...\p"
-	.string "It looks like a small island on\n"
-	.string "the horizon!$"
+	.string "{JPN}ぼうえんきょうを のぞいた!\p"
+	.string "うみの むこうに…\n"
+	.string "ちいさな しまが みえる!$"
 
