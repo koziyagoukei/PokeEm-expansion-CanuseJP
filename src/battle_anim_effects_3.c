@@ -5030,7 +5030,9 @@ void AnimTask_MonToSubstitute(u8 taskId)
         LoadBattleMonGfxAndAnimate(gBattleAnimAttacker, FALSE, spriteId);
         if (IsContest())
         {
-            gSprites[gBattlerSpriteIds[gBattleAnimAttacker]].affineAnims = gAffineAnims_BattleSpriteContest;
+            // A move cutaway shows the attacker as an opponent; the old contest view showed it flipped
+            gSprites[gBattlerSpriteIds[gBattleAnimAttacker]].affineAnims = BattleAnim_IsContestCutawayActive()
+                ? gAffineAnims_BattleSpriteOpponentSide : gAffineAnims_BattleSpriteContest;
             StartSpriteAffineAnim(&gSprites[gBattlerSpriteIds[gBattleAnimAttacker]], BATTLER_AFFINE_NORMAL);
         }
 

@@ -244,3 +244,24 @@ TEST("Contest animation: Splintered Stormshards reads the contestant's Lycanroc 
     Test_ContestEndCutaway(0);
     FreeContestAnimation();
 }
+
+TEST("Contest animation: Substitute shows the doll in the cutaway's front view")
+{
+    u32 mismatches = 0;
+    InitContestAnimation();
+    u8 *expected = Alloc(MON_PIC_SIZE);
+    EXPECT(Test_ContestBeginCutaway(0, MOVE_SUBSTITUTE));
+    u8 spriteId = gBattlerSpriteIds[gBattleAnimAttacker];
+    const volatile u8 *tiles = (void *)(OBJ_VRAM0 + gSprites[spriteId].oam.tileNum * TILE_SIZE_4BPP);
+
+    // What AnimTask_MonToSubstitute does when the attacker has shrunk away
+    LoadBattleMonGfxAndAnimate(gBattleAnimAttacker, FALSE, spriteId);
+    DecompressDataWithHeaderWram(gBattleAnimSpriteGfx_Substitute, expected);
+    for (u32 i = 0; i < MON_PIC_SIZE; i++)
+        mismatches += (tiles[i] != expected[i]);
+
+    Free(expected);
+    Test_ContestEndCutaway(0);
+    FreeContestAnimation();
+    EXPECT_EQ(mismatches, 0);
+}

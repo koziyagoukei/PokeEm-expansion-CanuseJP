@@ -1019,11 +1019,40 @@ void HandleSpeciesGfxDataChange(enum BattlerId battlerAtk, enum BattlerId battle
     StartSpriteAnim(&gSprites[gBattlerSpriteIds[battlerAtk]], 0);
 }
 
+// A contest's move cutaway shows the attacker from the front in the opponent's slot (contest.c), its picture in that
+// slot's buffer: the doll, or the Pokemon again, goes there (and to its tiles, which the cutaway copied once).
+static void LoadContestSubstituteOrMonSpriteGfx(enum BattlerId battler, bool32 loadMonSprite)
+{
+    u8 *gfx = gMonSpritesGfxPtr->spritesGfx[B_POSITION_OPPONENT_LEFT];
+    u8 spriteId = gBattlerSpriteIds[battler];
+
+    if (!loadMonSprite)
+    {
+        DecompressDataWithHeaderVram(gBattleAnimSpriteGfx_Substitute, gfx);
+        LoadPalette(gBattleAnimSpritePal_Substitute, OBJ_PLTT_ID(battler), PLTT_SIZE_4BPP);
+    }
+    else
+    {
+        struct ContestMoveAnimData *anim = gContestResources->moveAnim;
+        HandleLoadSpecialPokePic(TRUE, gfx, anim->species, anim->personality);
+        LoadPalette(GetMonSpritePalFromSpeciesAndPersonality(anim->species, anim->isShiny, anim->personality),
+                    OBJ_PLTT_ID(battler), PLTT_SIZE_4BPP);
+    }
+    Dma3CopyLarge32_(gfx, &gfx[MON_PIC_SIZE], MON_PIC_SIZE);
+    if (spriteId < MAX_SPRITES)
+        CpuCopy32(gfx, (void *)(OBJ_VRAM0 + gSprites[spriteId].oam.tileNum * TILE_SIZE_4BPP), MON_PIC_SIZE);
+}
+
 void BattleLoadSubstituteOrMonSpriteGfx(enum BattlerId battler, bool8 loadMonSprite)
 {
     s32 palOffset;
     enum BattlerPosition position;
 
+    if (IsContest())
+    {
+        LoadContestSubstituteOrMonSpriteGfx(battler, loadMonSprite);
+        return;
+    }
     if (!loadMonSprite)
     {
         if (IsContest())

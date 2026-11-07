@@ -87,6 +87,8 @@ static void CB2_EndBattleConnectorBattle(void);
 
 // The party (with its held items) is put back when a run ends, so held items cannot be given or taken in the facility
 const u8 gText_BattleConnectorCantChangeItems[] = _("{JPN}ここでは もちものを\nもたせたり あずかったり できない！");
+// Nor may moves be changed (TMs/HMs, the Rotom Catalog, the Zygarde Cube): a run keeps the moves its Pokemon came with
+const u8 gText_BattleConnectorCantChangeMoves[] = _("{JPN}ここでは ポケモンの わざを\nかえることは できない！");
 
 // ---- state ------------------------------------------------------------------------------------------------------------
 

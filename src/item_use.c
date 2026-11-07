@@ -207,6 +207,15 @@ static void DisplayCannotUseItemMessage(u8 taskId, bool8 isUsingRegisteredKeyIte
     }
 }
 
+// The Battle Connector: no item that changes moves (its Pokemon keep the moves they came with)
+static bool32 TryRefuseMoveChangeInBattleConnector(u8 taskId)
+{
+    if (!BattleConnector_IsChallengeActive())
+        return FALSE;
+    DisplayCannotUseItemMessage(taskId, gTasks[taskId].tUsingRegisteredKeyItem, gText_BattleConnectorCantChangeMoves);
+    return TRUE;
+}
+
 void DisplayDadsAdviceCannotUseItemMessage(u8 taskId, bool8 isUsingRegisteredKeyItemOnField)
 {
     DisplayCannotUseItemMessage(taskId, isUsingRegisteredKeyItemOnField, gText_DadsAdvice);
@@ -952,6 +961,8 @@ void ItemUseOutOfBattle_DynamaxCandy(u8 taskId)
 
 void ItemUseOutOfBattle_TMHM(u8 taskId)
 {
+    if (TryRefuseMoveChangeInBattleConnector(taskId))
+        return;
     if (GetItemTMHMIndex(gSpecialVar_ItemId) > NUM_TECHNICAL_MACHINES)
         DisplayItemMessage(taskId, FONT_NORMAL, sText_BootedUpHM, BootUpSoundTMHM); // HM
     else
@@ -1497,12 +1508,16 @@ void ItemUseOutOfBattle_FormChange_ConsumedOnUse(u8 taskId)
 
 void ItemUseOutOfBattle_RotomCatalog(u8 taskId)
 {
+    if (TryRefuseMoveChangeInBattleConnector(taskId))
+        return;
     gItemUseCB = ItemUseCB_RotomCatalog;
     SetUpItemUseCallback(taskId);
 }
 
 void ItemUseOutOfBattle_ZygardeCube(u8 taskId)
 {
+    if (TryRefuseMoveChangeInBattleConnector(taskId))
+        return;
     gItemUseCB = ItemUseCB_ZygardeCube;
     SetUpItemUseCallback(taskId);
 }
