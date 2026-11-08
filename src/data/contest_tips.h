@@ -99,7 +99,7 @@ static const u8 sInfoText_ContestZ2[] = _(
 
 static const u8 sInfoText_ContestTera1[] = _(
     "{JPN}テラスタルすると 以降の 技の\n"
-    "コンテスト部門が テラタイプで 決まる。\n"
+    "コンテスト部門が テラスタイプで 決まる。\n"
     "もとの 技の 部門に かかわらず\n"
     "次の ページの 対応に なります。\n"
     "大会ちゅうは 1回だけ 発動。\n"

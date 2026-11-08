@@ -121,7 +121,7 @@ static const u8 sInfoText_HubPokemon2[] = _(
     "{JPN}性別が 2つある 種類は\n"
     "性別を 選べます。\n"
     "作る ポケモンは みんな レベル100。\n"
-    "性格・特性・テラタイプも\n"
+    "性格・特性・テラスタイプも\n"
     "自由に 設定できます。\n"
     "対応する 種類は キョダイも。");
 static const u8 sInfoText_HubPokemon3[] = _(

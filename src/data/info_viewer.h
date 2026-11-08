@@ -126,20 +126,20 @@ static const u8 sInfoText_GimmickHelpPage7[] = _(
 
 static const u8 sInfoText_GimmickHelpPage8[] = _(
     "{JPN}「テラスタル」\n"
-    "SELECTで 選ぶと テラタイプに 変化。\n"
+    "SELECTで 選ぶと テラスタイプに 変化。\n"
     "攻撃を 受けるときの 相性が 変わります。\n"
     "元のタイプの 技の 強化は 残り\n"
-    "テラタイプと 同じ技も 強化されます。\n"
+    "テラスタイプと 同じ技も 強化されます。\n"
     "元と 同じタイプなら さらに 強化。\n"
     "交代しても 効果は 続きます。");
 
 static const u8 sInfoText_GimmickHelpPage9[] = _(
     "{JPN}「ステラ / 相性を 保つ」\n"
-    "ステラは 特別な テラタイプです。\n"
+    "ステラは 特別な テラスタイプです。\n"
     "受ける技の 相性は 元のままで\n"
     "攻撃技を タイプごとに 1回 強化。\n"
     "一部の ポケモンには 例外も あります。\n"
-    "テラタイプの 変更は 定食屋から。\n"
+    "テラスタイプの 変更は 定食屋から。\n"
     "弱点を 変えるか 火力を 上げるかで 選択。");
 
 static const u8 sInfoText_GimmickHelpPage10[] = _(

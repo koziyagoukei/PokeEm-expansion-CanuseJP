@@ -311,3 +311,16 @@ SINGLE_BATTLE_TEST("Power Construct Zygarde reverts to its original form upon ba
         EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_SPECIES), baseSpecies);
     }
 }
+
+// A Battle Frontier set can be a Complete Zygarde from the start: nothing to go back to, and no assert
+SINGLE_BATTLE_TEST("Zygarde that began the battle Complete stays Complete upon battle end")
+{
+    GIVEN {
+        PLAYER(SPECIES_ZYGARDE_COMPLETE) { Ability(ABILITY_POWER_CONSTRUCT); }
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(player, MOVE_CELEBRATE); }
+    } THEN {
+        EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_SPECIES), SPECIES_ZYGARDE_COMPLETE);
+    }
+}

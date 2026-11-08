@@ -5002,7 +5002,8 @@ u32 AbilityBattleEffects(enum AbilityEffect caseID, enum BattlerId battler, enum
         switch (gLastUsedAbility)
         {
         case ABILITY_MIMICRY:
-            if (!gBattleMons[battler].volatiles.terrainAbilityDone && ChangeTypeBasedOnTerrain(battler))
+            // Only on a terrain: switched in on a plain field, it keeps its own types (it used to become typeless)
+            if (!gBattleMons[battler].volatiles.terrainAbilityDone && gFieldTimers.terrain != B_TERRAIN_NONE)
             {
                 gBattleMons[battler].volatiles.terrainAbilityDone = TRUE;
                 ChangeTypeBasedOnTerrain(battler);
@@ -9056,6 +9057,11 @@ bool32 TryBattleFormChange(enum BattlerId battler, enum FormChanges method, enum
     {
         targetSpecies = battlePartyState->changedSpecies;
     }
+
+    // A Pokemon that began the battle in a form that otherwise only comes about in it (a Battle Frontier set's Complete
+    // Zygarde) has nothing recorded to go back to when the battle ends or it faints: it stays as it is
+    if (targetSpecies == SPECIES_NONE && (method == FORM_CHANGE_END_BATTLE || method == FORM_CHANGE_FAINT))
+        return FALSE;
 
     assertf(targetSpecies != SPECIES_NONE, "form change target returned NONE. cur:%d, method:%d", currentSpecies, method)
     {

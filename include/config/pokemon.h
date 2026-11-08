@@ -52,7 +52,7 @@
 #define P_CRIES_ENABLED                  TRUE        // TRUEなら鳴き声を有効にする。無効化で大きくROM容量を節約できる（元の説明では25%以上）が、代わりにinclude/config/species_enabled.hで未使用の種族系列を個別に無効化することを推奨する。
 #define P_LEGENDARY_PERFECT_IVS          GEN_LATEST  // 第6世代以降では、野生・贈り物の伝説・幻・ウルトラビーストの個体値を最低3か所最大にする。
 #define P_EV_CAP                         GEN_LATEST  // 第6世代以降では、各能力の努力値上限が255から252になる。
-#define P_SHOW_TERA_TYPE                 GEN_LATEST       // 第9世代以降では、つよさをみる画面にテラタイプを表示する。
+#define P_SHOW_TERA_TYPE                 GEN_LATEST       // 第9世代以降では、つよさをみる画面にテラスタイプを表示する。
 #define P_TM_LITERACY                    GEN_LATEST  // 第6世代以降では、通常は技マシン非対応のポケモンも、その技がレベルアップ習得技に含まれていれば技マシンで習得できる。
 #define P_CAN_FORGET_HIDDEN_MOVE         TRUE       // TRUEなら、秘伝技を含むすべての技を忘れられる。
 #define P_ASK_MOVE_CONFIRMATION          FALSE       // FALSEなら、技を覚えないと選んだ際の再確認を省略する。

@@ -49,7 +49,7 @@ static const u8 sInfoText_ResortDiner1[] = _(
     "{JPN}キャンプの 北側の 食堂です。\n"
     "店主の 注文するから\n"
     "タマゴ以外の 1匹を 選びます。\n"
-    "料理に あう テラタイプへ 変更。\n"
+    "料理に あう テラスタイプへ 変更。\n"
     "普通の 食事は 無料で\n"
     "手持ち みんなの なつき度も あがります。");
 static const u8 sInfoText_ResortDiner2[] = _(

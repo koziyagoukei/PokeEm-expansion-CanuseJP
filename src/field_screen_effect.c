@@ -287,6 +287,13 @@ static void SetUpWarpExitTask(void)
         func = Task_ExitStairs;
     else if (MetatileBehavior_IsNonAnimDoor(behavior) == TRUE)
         func = Task_ExitNonAnimDoor;
+    else if (MetatileBehavior_IsEscalator(behavior) == TRUE)
+    {
+        // Arrived on an escalator by another warp (the Frontier hub's stairs door): ride off it as usual
+        gExitStairsMovementDisabled = FALSE;
+        StartEscalatorWarpInTask();
+        return;
+    }
     else
         func = Task_ExitNonDoor;
 

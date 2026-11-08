@@ -1916,11 +1916,26 @@ static void WarpAtEndOfEscalator(void)
 
 static void FieldCallback_EscalatorWarpIn(void)
 {
+    s16 x, y;
+
+    PlayerGetDestCoords(&x, &y);
+    if (!MetatileBehavior_IsEscalator(MapGridGetMetatileBehaviorAt(x, y)))
+    {
+        gFieldCallback = NULL;
+        FieldCB_DefaultWarpExit();
+        return;
+    }
     Overworld_PlaySpecialMapMusic();
     WarpFadeInScreen();
     LockPlayerFieldControls();
     CreateTask(Task_EscalatorWarpIn, 0);
     gFieldCallback = NULL;
+}
+
+// A door (or other) warp onto an escalator: get off it as from a ride (one step east), as an escalator warp does
+void StartEscalatorWarpInTask(void)
+{
+    CreateTask(Task_EscalatorWarpIn, 0);
 }
 
 #define tState data[0]

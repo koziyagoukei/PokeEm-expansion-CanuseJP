@@ -6503,6 +6503,11 @@ bool32 TryFormChange(struct Pokemon *mon, enum FormChanges method, enum BattleTr
         targetSpecies = battlePartyState->changedSpecies;
     }
 
+    // A Pokemon that began the battle in a form that otherwise only comes about in it (a Battle Frontier set's Complete
+    // Zygarde) has nothing recorded to go back to when the battle ends or it faints: it stays as it is
+    if (targetSpecies == SPECIES_NONE && (method == FORM_CHANGE_END_BATTLE || method == FORM_CHANGE_FAINT))
+        return FALSE;
+
     assertf(targetSpecies != SPECIES_NONE, "form change target returned NONE. cur:%d, method:%d", currentSpecies, method)
     {
         return FALSE;
