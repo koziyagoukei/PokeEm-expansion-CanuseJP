@@ -79,6 +79,31 @@ bool asset_info_decode(const uint8_t *p, unsigned length, AssetInfo *i) {
     return true;
 }
 
+unsigned mode_info_encode(const ModeInfo *m, uint8_t *p) {
+    msg_put16(p, m->mode_id);
+    msg_put16(p+2, m->mode_version);
+    msg_put16(p+4, m->app_id);
+    msg_put16(p+6, m->app_version);
+    wire_put32(p+8, m->request_length);
+    wire_put32(p+12, m->request_crc);
+    wire_put32(p+16, m->nonce);
+    wire_put32(p+20, m->flags);
+    return MODE_INFO_BYTES;
+}
+
+bool mode_info_decode(const uint8_t *p, unsigned length, ModeInfo *m) {
+    if (length < MODE_INFO_BYTES) return false;
+    m->mode_id = msg_get16(p);
+    m->mode_version = msg_get16(p+2);
+    m->app_id = msg_get16(p+4);
+    m->app_version = msg_get16(p+6);
+    m->request_length = wire_get32(p+8);
+    m->request_crc = wire_get32(p+12);
+    m->nonce = wire_get32(p+16);
+    m->flags = wire_get32(p+20);
+    return true;
+}
+
 uint32_t asset_palette_bytes(uint8_t palette_format) {
     return palette_format == PALETTE_BGR555_16 ? 32u : 0u;
 }
