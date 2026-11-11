@@ -54,5 +54,6 @@ u32 GcProtocol_TakeEvents(void);
 const Caps *GcProtocol_GetHostCaps(void);
 const struct GcProtocolStats *GcProtocol_GetStats(void);
 void GcProtocol_ResetSession(void);
+void GcProtocol_Free(void);
 
 #endif // GUARD_GC_COMPANION_PROTOCOL_H

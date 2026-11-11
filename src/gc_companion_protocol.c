@@ -2,6 +2,7 @@
 // not Pokemon: game data arrives through GcClientConfig callbacks.
 #include "global.h"
 #include "gc_companion_link.h"
+#include "malloc.h"
 #include "gc_companion_protocol.h"
 
 struct GcProtocolState
@@ -19,12 +20,14 @@ struct GcProtocolState
     const u8 *modeRequest;
     bool8 haveResult;
     u32 lastResultId;
+    u8 *encoded;  // RLE copy of the open asset (freed on the next asset)
 };
 
 static EWRAM_DATA struct GcProtocolState sProto = {0};
 
 void GcProtocol_Init(const struct GcClientConfig *config)
 {
+    TRY_FREE_AND_SET_NULL(sProto.encoded);
     memset(&sProto, 0, sizeof(sProto));
     sProto.config = config;
 }
@@ -36,6 +39,11 @@ void GcProtocol_SetMode(const ModeInfo *info, const u8 *request)
     if (request == NULL)
         sProto.mode.request_length = 0;
     sProto.mode.request_crc = sProto.mode.request_length ? ~wire_crc(UINT32_MAX, request, sProto.mode.request_length) : 0;
+}
+
+void GcProtocol_Free(void)
+{
+    TRY_FREE_AND_SET_NULL(sProto.encoded);
 }
 
 void GcProtocol_ResetSession(void)
@@ -156,6 +164,23 @@ static bool HandleAssetInfo(const Frame *request, Frame *reply)
     else
     {
         info.status = ASSET_OK;
+        info.encoding = ASSET_ENCODING_RAW;
+        info.raw_length = info.length;
+        TRY_FREE_AND_SET_NULL(sProto.encoded);
+        if ((sProto.hostCaps.caps & CAP_RLE) && info.length > 64)
+        {
+            sProto.encoded = AllocUnchecked(RLE_WORST_CASE(info.length));
+            if (sProto.encoded != NULL)
+            {
+                u32 packed = rle_encode(data, info.length, sProto.encoded, RLE_WORST_CASE(info.length));
+                if (packed != 0 && packed < info.length)
+                {
+                    info.encoding = ASSET_ENCODING_RLE;
+                    info.length = packed;
+                    data = sProto.encoded;
+                }
+            }
+        }
         info.crc = ~wire_crc(UINT32_MAX, data, info.length);
         sProto.assetOpen = TRUE;
         sProto.openKey = info.key;

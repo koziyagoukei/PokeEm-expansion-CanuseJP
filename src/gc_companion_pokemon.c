@@ -23,8 +23,9 @@
 
 #define SPRITE_FRAME_BYTES MON_PIC_SIZE                     // one 64x64 4bpp frame
 #define DECOMPRESS_BYTES (MON_PIC_SIZE * MAX_MON_PIC_FRAMES)
-#define LABEL_WIDTH_TILES 16
+#define LABEL_WIDTH_TILES 16   // classic labels: at most 128x16
 #define LABEL_HEIGHT_TILES 2
+#define TEXT_WINDOW_WIDTH_TILES GC_TEXT_WINDOW_WIDTH  // stride of the off-screen text window
 #define PALETTE_BYTES 32
 #define ASSET_BUFFER_BYTES (DECOMPRESS_BYTES + PALETTE_BYTES)
 
@@ -40,6 +41,7 @@ struct GcPokemonState
 static EWRAM_DATA struct GcPokemonState *sPkmn = NULL;
 static EWRAM_DATA struct Pokemon *sExtraMons = NULL;
 static EWRAM_DATA u8 sExtraCount = 0;
+static EWRAM_DATA GcAssetResolver sModeResolver = NULL;
 
 static u16 HandleApp(u16 opcode, const u8 *args, u16 argLength, u8 *out, u16 *outLength);
 static bool ResolveAsset(const AssetKey *key, AssetInfo *info, const u8 **data);
@@ -138,6 +140,12 @@ void GcPokemon_Free(void)
     TRY_FREE_AND_SET_NULL(sPkmn);
     sExtraMons = NULL;
     sExtraCount = 0;
+    sModeResolver = NULL;
+}
+
+void GcPokemon_SetModeResolver(GcAssetResolver resolver)
+{
+    sModeResolver = resolver;
 }
 
 void GcPokemon_SetExtraMons(struct Pokemon *mons, u8 count)
@@ -286,6 +294,8 @@ static bool ResolveSprite(const AssetKey *key, AssetInfo *info, const u8 **data)
         if (mon == NULL)
             continue;
         monKey = SpriteKeyForMon(mon);
+        if (key->variant & PKMN_SPRITE_BACK)
+            monKey.variant |= PKMN_SPRITE_BACK;  // same identity, back picture
         if (!asset_key_equal(key, &monKey))
             continue;
 
@@ -293,7 +303,7 @@ static bool ResolveSprite(const AssetKey *key, AssetInfo *info, const u8 **data)
         personality = GetMonData(mon, MON_DATA_PERSONALITY);
         isEgg = GetMonData(mon, MON_DATA_IS_EGG);
         // Same call and buffer size (MAX_MON_PIC_FRAMES frames) as battle sprites.
-        LoadSpecialPokePicIsEgg(sPkmn->asset, species, personality, TRUE, isEgg);
+        LoadSpecialPokePicIsEgg(sPkmn->asset, species, personality, !(key->variant & PKMN_SPRITE_BACK), isEgg);
         palette = GetMonSpritePalFromSpeciesAndPersonalityIsEgg(species, GetMonData(mon, MON_DATA_IS_SHINY), personality, isEgg);
         // The record keeps only the first animation frame; the palette follows it.
         memcpy(sPkmn->asset + SPRITE_FRAME_BYTES, palette, PALETTE_BYTES);
@@ -343,6 +353,37 @@ static const u8 *LabelString(u32 kind, u32 value, const AssetKey *key, u8 *buffe
 
 // Renders a string with the game's font into the off-screen label window and
 // copies the used tile columns out as a packed 4bpp image.
+const u8 *GcPokemon_RenderTextTiles(u8 fontId, const u8 colors[3], u8 fill, const u8 *str)
+{
+    FillWindowPixelBuffer(sPkmn->labelWindowId, PIXEL_FILL(fill));
+    AddTextPrinterParameterized3(sPkmn->labelWindowId, fontId, 0, 0, colors, TEXT_SKIP_DRAW, str);
+    return gWindows[sPkmn->labelWindowId].tileData;
+}
+
+bool8 GcPokemon_RenderTextAsset(u8 fontId, const u8 colors[3], u8 fill, const u8 *str, u8 widthTiles, u8 heightTiles,
+                                const u16 *palette, AssetInfo *info, const u8 **data)
+{
+    const u8 *tiles;
+    u32 x, y, size;
+
+    if (sPkmn == NULL || widthTiles == 0 || widthTiles > GC_TEXT_WINDOW_WIDTH || heightTiles == 0 || heightTiles > GC_TEXT_WINDOW_HEIGHT)
+        return FALSE;
+    tiles = GcPokemon_RenderTextTiles(fontId, colors, fill, str);
+    for (y = 0; y < heightTiles; y++)
+        for (x = 0; x < widthTiles; x++)
+            memcpy(sPkmn->asset + (y * widthTiles + x) * TILE_SIZE_4BPP, tiles + (y * TEXT_WINDOW_WIDTH_TILES + x) * TILE_SIZE_4BPP, TILE_SIZE_4BPP);
+    size = widthTiles * heightTiles * TILE_SIZE_4BPP;
+    memcpy(sPkmn->asset + size, palette, PALETTE_BYTES);
+    info->width = widthTiles * 8;
+    info->height = heightTiles * 8;
+    info->pixel_format = PIXEL_4BPP_TILED;
+    info->palette_format = PALETTE_BGR555_16;
+    info->frames = 1;
+    info->length = size + PALETTE_BYTES;
+    *data = sPkmn->asset;
+    return TRUE;
+}
+
 static bool ResolveLabel(const AssetKey *key, AssetInfo *info, const u8 **data)
 {
     u8 buffer[POKEMON_NAME_BUFFER_SIZE];
@@ -360,13 +401,11 @@ static bool ResolveLabel(const AssetKey *key, AssetInfo *info, const u8 **data)
         width = LABEL_WIDTH_TILES * 8;
     columns = (width + 7) / 8;
 
-    FillWindowPixelBuffer(sPkmn->labelWindowId, PIXEL_FILL(0));
-    AddTextPrinterParameterized3(sPkmn->labelWindowId, FONT_NORMAL, 0, 0, sLabelColors, TEXT_SKIP_DRAW, str);
-    tiles = gWindows[sPkmn->labelWindowId].tileData;
+    tiles = GcPokemon_RenderTextTiles(FONT_NORMAL, sLabelColors, 0, str);
     for (y = 0; y < LABEL_HEIGHT_TILES; y++)
     {
         for (x = 0; x < columns; x++)
-            memcpy(sPkmn->asset + (y * columns + x) * TILE_SIZE_4BPP, tiles + (y * LABEL_WIDTH_TILES + x) * TILE_SIZE_4BPP, TILE_SIZE_4BPP);
+            memcpy(sPkmn->asset + (y * columns + x) * TILE_SIZE_4BPP, tiles + (y * TEXT_WINDOW_WIDTH_TILES + x) * TILE_SIZE_4BPP, TILE_SIZE_4BPP);
     }
     size = columns * LABEL_HEIGHT_TILES * TILE_SIZE_4BPP;
     memcpy(sPkmn->asset + size, sLabelPalette, PALETTE_BYTES);
@@ -391,7 +430,7 @@ static bool ResolveAsset(const AssetKey *key, AssetInfo *info, const u8 **data)
     case ASSET_TEXT_LABEL:
         return ResolveLabel(key, info, data);
     }
-    return false;
+    return sModeResolver != NULL && sModeResolver(key, info, data);
 }
 
 static u16 HandleApp(u16 opcode, const u8 *args, u16 argLength, u8 *out, u16 *outLength)

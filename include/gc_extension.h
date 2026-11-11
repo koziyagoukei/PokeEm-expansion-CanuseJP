@@ -19,6 +19,9 @@ struct Pokemon;
 // Pokemon (e.g. an opponent) that the host can read as records/assets.
 #define GC_EXTRA_SLOT_BASE 0x80
 #define GC_MAX_EXTRA_MONS 6
+// Off-screen text window used to render text for the GameCube.
+#define GC_TEXT_WINDOW_WIDTH 28
+#define GC_TEXT_WINDOW_HEIGHT 4
 
 enum GcColor { GC_COLOR_NORMAL, GC_COLOR_HIGHLIGHT, GC_COLOR_ERROR, GC_COLOR_DIM };
 
@@ -48,6 +51,10 @@ struct GcModeHandler
     void (*free)(void);
     // Optional: party viewer UI state reported through PKMN_UI_STATE.
     void (*getPartyUi)(PartyUi *ui);
+    // Optional: serves asset types the connector does not know (e.g. the
+    // game's own UI graphics for this mode). Data must stay valid until the
+    // next call. Same contract as the connector's own resolver.
+    bool (*resolveAsset)(const AssetKey *key, AssetInfo *info, const u8 **data);
 };
 
 // Starts a mode from a script special (declare the special with waitstate=1).
@@ -61,6 +68,12 @@ void GcExtension_PrintLine(u8 windowId, const u8 *str, u8 x, u8 line, u8 color);
 void GcExtension_SetExtraMons(struct Pokemon *mons, u8 count);
 struct Pokemon *GcExtension_GetExportMon(u32 slot);
 bool8 GcExtension_BuildRecord(u32 slot, PokemonRecord *record);
+// Renders text with the game's font into the off-screen window and returns its
+// tiles (stride GC_TEXT_WINDOW_WIDTH tiles); colors = {background, foreground, shadow}.
+const u8 *GcExtension_RenderTextTiles(u8 fontId, const u8 colors[3], u8 fill, const u8 *str);
+// Same, packed as a widthTiles x heightTiles 4bpp asset with the given 16-colour palette.
+bool8 GcExtension_RenderTextAsset(u8 fontId, const u8 colors[3], u8 fill, const u8 *str, u8 widthTiles, u8 heightTiles,
+                                  const u16 *palette, AssetInfo *info, const u8 **data);
 
 // Built-in generic mode: Phase 2 party viewer (debug entry).
 extern const struct GcModeHandler gGcPartyViewMode;

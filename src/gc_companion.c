@@ -108,7 +108,8 @@ static const struct WindowTemplate sWindowTemplates[] =
     [WIN_TITLE] = {.bg = 0, .tilemapLeft = 1, .tilemapTop = 0,  .width = 28, .height = 2,  .paletteNum = 15, .baseBlock = 1},
     [WIN_BODY]  = {.bg = 0, .tilemapLeft = 1, .tilemapTop = 3,  .width = 28, .height = 12, .paletteNum = 15, .baseBlock = 57},
     [WIN_HELP]  = {.bg = 0, .tilemapLeft = 1, .tilemapTop = 17, .width = 28, .height = 2,  .paletteNum = 15, .baseBlock = 393},
-    [WIN_LABEL] = {.bg = 0, .tilemapLeft = 0, .tilemapTop = 22, .width = 16, .height = 2,  .paletteNum = 15, .baseBlock = 449},
+    // Never shown: only its RAM tile buffer is used to render text for the GameCube.
+    [WIN_LABEL] = {.bg = 0, .tilemapLeft = 0, .tilemapTop = 22, .width = GC_TEXT_WINDOW_WIDTH, .height = GC_TEXT_WINDOW_HEIGHT, .paletteNum = 15, .baseBlock = 449},
     DUMMY_WIN_TEMPLATE,
 };
 
@@ -224,6 +225,17 @@ bool8 GcExtension_BuildRecord(u32 slot, PokemonRecord *record)
     return GcPokemon_BuildRecord(slot, record);
 }
 
+const u8 *GcExtension_RenderTextTiles(u8 fontId, const u8 colors[3], u8 fill, const u8 *str)
+{
+    return GcPokemon_RenderTextTiles(fontId, colors, fill, str);
+}
+
+bool8 GcExtension_RenderTextAsset(u8 fontId, const u8 colors[3], u8 fill, const u8 *str, u8 widthTiles, u8 heightTiles,
+                                  const u16 *palette, AssetInfo *info, const u8 **data)
+{
+    return GcPokemon_RenderTextAsset(fontId, colors, fill, str, widthTiles, heightTiles, palette, info, data);
+}
+
 static u16 HandleModeResult(u16 modeId, u16 resultVersion, const u8 *data, u16 length)
 {
     if (sGc->handler->onResult == NULL || modeId != sGc->handler->modeId)
@@ -256,6 +268,7 @@ static bool8 StartSession(void)
         return FALSE;
     }
     sGc->modeStarted = TRUE;
+    GcPokemon_SetModeResolver(h->resolveAsset);
     sGc->config = *GcPokemon_GetClientConfig();
     sGc->config.modeAppId = h->appId;
     sGc->config.handleModeApp = h->handleApp;
@@ -553,6 +566,7 @@ static void FreeMode(void)
     if (sGc->modeStarted && sGc->handler->free != NULL)
         sGc->handler->free();
     GcPokemon_Free();
+    GcProtocol_Free();
     FreeAllWindowBuffers();
     TRY_FREE_AND_SET_NULL(sGc);
     sPendingHandler = NULL;
