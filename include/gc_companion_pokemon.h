@@ -26,5 +26,9 @@ void GcPokemon_ComputeDigest(struct GcStateDigest *digest);
 // Bit n set when digest field n equals the snapshot taken at GcPokemon_Init.
 u32 GcPokemon_CompareWithEntry(const struct GcStateDigest *digest);
 u32 GcPokemon_GetBuildId(void);
+// Export slots 0..5 = player party, GC_EXTRA_SLOT_BASE + i = registered extras.
+void GcPokemon_SetExtraMons(struct Pokemon *mons, u8 count);
+struct Pokemon *GcPokemon_GetMon(u32 slot);
+bool8 GcPokemon_BuildRecord(u32 slot, PokemonRecord *record);
 
 #endif // GUARD_GC_COMPANION_POKEMON_H

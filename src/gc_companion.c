@@ -1,19 +1,24 @@
-// GC Extension Mode: state machine and GBA second-screen UI.
+// GC Extension mode runner: state machine, GBA screen frame and field return.
 //
-// The field is suspended (faded out, overworld graphics released) while the
-// mode runs in its own main callback. Every frame it drains the JoyBus queue
-// once, updates the state machine and handles input, so connection, cancel,
-// timeouts and UI keep working while the GameCube transfers data. Nothing in
-// this mode writes party, bag, flags, vars or save data.
+// GcStartMode(handler) suspends the field (fade out, overworld graphics
+// released) and runs its own main callback. Every frame it drains the JoyBus
+// queue once, updates the state machine and handles input, so connection,
+// cancel, timeouts and UI keep working while the GameCube transfers data.
+// What the session is for is decided by the GcModeHandler; the runner itself
+// never writes party, bag, flags, vars or save data. Only the handler's
+// finish() may apply a verified result, once, after the link is closed.
 #include "global.h"
 #include "bg.h"
 #include "gpu_regs.h"
+#include "link.h"
+#include "link_rfu.h"
 #include "main.h"
 #include "malloc.h"
 #include "menu.h"
 #include "overworld.h"
 #include "palette.h"
 #include "pokemon.h"
+#include "random.h"
 #include "scanline_effect.h"
 #include "script.h"
 #include "sound.h"
@@ -28,6 +33,7 @@
 #include "gc_companion_link.h"
 #include "gc_companion_pokemon.h"
 #include "gc_companion_protocol.h"
+#include "gc_extension.h"
 
 #define BYE_WAIT_FRAMES 90
 #define RESULT_FRAMES 60
@@ -48,28 +54,33 @@ enum GcError
     GC_ERROR_OUT_OF_MEMORY,
     GC_ERROR_HOST_ENDED,
     GC_ERROR_LINK_LOST,
+    GC_ERROR_MODE_REFUSED,
 };
 
 struct GcCompanion
 {
+    const struct GcModeHandler *handler;
+    struct GcClientConfig config;
+    const u8 *refusal;
+    const u8 *finishMessage;
     u8 state;
     u8 error;
-    u8 screen;
-    u8 cursor;
-    u8 confirmed;
     u8 phase;
     u8 phaseDone;
     u8 phaseTotal;
-    u16 inputSeq;
     u16 timer;
     u8 returnStep;
     bool8 dirty;
     bool8 reconnecting;
     bool8 linkOpen;
+    bool8 modeStarted;
+    bool8 exitRequested;
+    bool8 partyChanged;
     u32 exitMatch;
 };
 
 static EWRAM_DATA struct GcCompanion *sGc = NULL;
+static EWRAM_DATA const struct GcModeHandler *sPendingHandler = NULL;
 
 static void Task_GcCompanion_WaitFadeOut(u8 taskId);
 static void CB2_GcCompanion_Init(void);
@@ -101,10 +112,14 @@ static const struct WindowTemplate sWindowTemplates[] =
     DUMMY_WIN_TEMPLATE,
 };
 
-static const u16 sTextPalette[16] = {RGB(2, 3, 7), RGB(31, 31, 31), RGB(9, 10, 13), RGB(31, 26, 8), RGB(31, 12, 10)};
-static const u8 sColorNormal[3] = {0, 1, 2};
-static const u8 sColorHighlight[3] = {0, 3, 2};
-static const u8 sColorError[3] = {0, 4, 2};
+static const u16 sTextPalette[16] = {RGB(2, 3, 7), RGB(31, 31, 31), RGB(9, 10, 13), RGB(31, 26, 8), RGB(31, 12, 10), RGB(16, 17, 20)};
+static const u8 sColors[][3] =
+{
+    [GC_COLOR_NORMAL] = {0, 1, 2},
+    [GC_COLOR_HIGHLIGHT] = {0, 3, 2},
+    [GC_COLOR_ERROR] = {0, 4, 2},
+    [GC_COLOR_DIM] = {0, 5, 2},
+};
 
 static const u8 sText_Title[] = _("{ENG}GC EXTENSION MODE");
 static const u8 sText_TitleConnected[] = _("{ENG}GC CONNECTED");
@@ -113,32 +128,38 @@ static const u8 sText_WaitingHint[] = _("{ENG}JoyBus, GC port 2 (Dolphin)");
 static const u8 sText_Reconnecting[] = _("{ENG}Link lost. Waiting for GC...");
 static const u8 sText_Handshake[] = _("{ENG}Handshake...");
 static const u8 sText_SendingParty[] = _("{ENG}Sending party ");
-static const u8 sText_SendingAssets[] = _("{ENG}Sending sprites ");
-static const u8 sText_MenuParty[] = _("{ENG}PARTY");
+static const u8 sText_SendingAssets[] = _("{ENG}Sending data ");
 static const u8 sText_Closing[] = _("{ENG}Closing session...");
 static const u8 sText_ErrorMemory[] = _("{ENG}Not enough memory.");
 static const u8 sText_ErrorHost[] = _("{ENG}The GameCube ended the session.");
 static const u8 sText_ErrorLink[] = _("{ENG}Link lost.");
+static const u8 sText_ErrorRefused[] = _("{ENG}This mode cannot start:");
+static const u8 sText_Unavailable[] = _("{ENG}The link port is in use.");
 static const u8 sText_StateOk[] = _("{ENG}Party/bag/flags/vars unchanged.");
 static const u8 sText_StateChanged[] = _("{ENG}WARNING: game state changed!");
 static const u8 sText_Returning[] = _("{ENG}Returning to the field...");
 static const u8 sText_HelpCancel[] = _("{ENG}B: Cancel");
-static const u8 sText_HelpMenu[] = _("{ENG}A: Select   B: Exit");
-static const u8 sText_HelpParty[] = _("{ENG}UP/DOWN: Move  A: Select  B: Back");
 static const u8 sText_HelpError[] = _("{ENG}A: Reconnect   B: Exit");
-static const u8 sText_Cursor[] = _("{ENG}>");
-static const u8 sText_Selected[] = _("{ENG}+");
+static const u8 sText_HelpExit[] = _("{ENG}B: Exit");
 static const u8 sText_Slash[] = _("{ENG}/");
-static const u8 sText_Lv[] = _("{ENG}Lv.");
-static const u8 sText_Jpn[] = _("{JPN}");
 static const u8 sText_Eng[] = _("{ENG}");
-static const u8 sText_Space[] = _("{ENG} ");
 
-void GcCompanion_Start(void)
+void GcStartMode(const struct GcModeHandler *handler)
 {
+    sPendingHandler = handler;
     LockPlayerFieldControls();
     BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
     CreateTask(Task_GcCompanion_WaitFadeOut, 10);
+}
+
+void GcCompanion_Start(void)
+{
+    GcStartMode(&gGcPartyViewMode);
+}
+
+bool8 GcExtension_IsAvailable(void)
+{
+    return gWirelessCommType == 0 && !gReceivedRemoteLinkPlayers;
 }
 
 static void Task_GcCompanion_WaitFadeOut(u8 taskId)
@@ -164,6 +185,98 @@ static void SetState(u8 state)
     sGc->state = state;
     sGc->timer = 0;
     sGc->dirty = TRUE;
+}
+
+void GcExtension_Redraw(void)
+{
+    if (sGc != NULL)
+        sGc->dirty = TRUE;
+}
+
+void GcExtension_RequestExit(void)
+{
+    if (sGc != NULL && sGc->state == GC_STATE_ACTIVE)
+        SetState(GC_STATE_DISCONNECTING);
+}
+
+bool8 GcExtension_IsExitRequested(void)
+{
+    return sGc != NULL && sGc->state == GC_STATE_DISCONNECTING;
+}
+
+void GcExtension_PrintLine(u8 windowId, const u8 *str, u8 x, u8 line, u8 color)
+{
+    AddTextPrinterParameterized3(windowId, FONT_NORMAL, x, line * 16, sColors[color], TEXT_SKIP_DRAW, str);
+}
+
+void GcExtension_SetExtraMons(struct Pokemon *mons, u8 count)
+{
+    GcPokemon_SetExtraMons(mons, count);
+}
+
+struct Pokemon *GcExtension_GetExportMon(u32 slot)
+{
+    return GcPokemon_GetMon(slot);
+}
+
+bool8 GcExtension_BuildRecord(u32 slot, PokemonRecord *record)
+{
+    return GcPokemon_BuildRecord(slot, record);
+}
+
+static u16 HandleModeResult(u16 modeId, u16 resultVersion, const u8 *data, u16 length)
+{
+    if (sGc->handler->onResult == NULL || modeId != sGc->handler->modeId)
+        return RESULT_UNSUPPORTED;
+    return sGc->handler->onResult(resultVersion, data, length);
+}
+
+// Opens the link and announces the mode; returns FALSE (with sGc->error set) on failure.
+static bool8 StartSession(void)
+{
+    const struct GcModeHandler *h = sGc->handler;
+    ModeInfo mode = {0};
+    const u8 *request = NULL;
+    u32 length = 0;
+
+    if (!GcExtension_IsAvailable())
+    {
+        sGc->error = GC_ERROR_MODE_REFUSED;
+        sGc->refusal = sText_Unavailable;
+        return FALSE;
+    }
+    if (!GcPokemon_Init(WIN_LABEL, &sPokemonUi))
+    {
+        sGc->error = GC_ERROR_OUT_OF_MEMORY;
+        return FALSE;
+    }
+    if (h->init != NULL && !h->init(&sGc->refusal))
+    {
+        sGc->error = GC_ERROR_MODE_REFUSED;
+        return FALSE;
+    }
+    sGc->modeStarted = TRUE;
+    sGc->config = *GcPokemon_GetClientConfig();
+    sGc->config.modeAppId = h->appId;
+    sGc->config.handleModeApp = h->handleApp;
+    sGc->config.handleResult = HandleModeResult;
+    GcProtocol_Init(&sGc->config);
+    if (h->getRequest != NULL)
+        request = h->getRequest(&length);
+    mode.mode_id = h->modeId;
+    mode.mode_version = h->modeVersion;
+    mode.app_id = h->appId;
+    mode.app_version = h->appVersion;
+    mode.request_length = length;
+    mode.nonce = Random32();
+    GcProtocol_SetMode(&mode, request);
+    sGc->linkOpen = GcLink_Open();
+    if (!sGc->linkOpen)
+    {
+        sGc->error = GC_ERROR_OUT_OF_MEMORY;
+        return FALSE;
+    }
+    return TRUE;
 }
 
 static void CB2_GcCompanion_Init(void)
@@ -209,26 +322,8 @@ static void CB2_GcCompanion_Init(void)
             SetMainCallback2(CB2_ReturnToFieldContinueScript);
             return;
         }
-        sGc->confirmed = PKMN_NO_SLOT;
-        if (!GcPokemon_Init(WIN_LABEL, &sPokemonUi))
-        {
-            sGc->error = GC_ERROR_OUT_OF_MEMORY;
-            SetState(GC_STATE_ERROR);
-        }
-        else
-        {
-            GcProtocol_Init(GcPokemon_GetClientConfig());
-            sGc->linkOpen = GcLink_Open();
-            if (sGc->linkOpen)
-            {
-                SetState(GC_STATE_CONNECTING);
-            }
-            else
-            {
-                sGc->error = GC_ERROR_OUT_OF_MEMORY;
-                SetState(GC_STATE_ERROR);
-            }
-        }
+        sGc->handler = sPendingHandler != NULL ? sPendingHandler : &gGcPartyViewMode;
+        SetState(StartSession() ? GC_STATE_CONNECTING : GC_STATE_ERROR);
         gMain.state++;
         break;
     case 3:
@@ -243,21 +338,20 @@ static void CB2_GcCompanion_Init(void)
 
 static void GetUi(PartyUi *ui)
 {
+    memset(ui, 0, sizeof(*ui));
+    ui->confirmed = PKMN_NO_SLOT;
+    if (sGc->handler->getPartyUi != NULL)
+        sGc->handler->getPartyUi(ui);
     ui->count = gPartiesCount[B_TRAINER_PLAYER];
-    ui->cursor = sGc->cursor;
-    ui->confirmed = sGc->confirmed;
-    ui->screen = sGc->screen;
     ui->flags = sGc->state == GC_STATE_DISCONNECTING ? UI_EXIT_REQUESTED : 0;
-    ui->input_seq = sGc->inputSeq;
 }
 
 static void SetPhase(u8 phase, u8 done, u8 total)
 {
     sGc->phaseDone = done;
     sGc->phaseTotal = total;
-    if (phase != sGc->phase)
-        sGc->phase = phase;
-    if (sGc->state == GC_STATE_DISCONNECTING || sGc->state == GC_STATE_RETURN_FIELD)
+    sGc->phase = phase;
+    if (sGc->state == GC_STATE_DISCONNECTING || sGc->state == GC_STATE_RETURN_FIELD || sGc->state == GC_STATE_ERROR)
         return;
     switch (phase)
     {
@@ -278,11 +372,6 @@ static void SetPhase(u8 phase, u8 done, u8 total)
 
 // ---------------------------------------------------------------- drawing
 
-static void PrintLine(u8 windowId, const u8 *str, u8 x, u8 line, const u8 *color)
-{
-    AddTextPrinterParameterized3(windowId, FONT_NORMAL, x, line * 16, color, TEXT_SKIP_DRAW, str);
-}
-
 static void AppendNumber(u8 *dest, s32 value)
 {
     u8 digits[8];
@@ -298,36 +387,7 @@ static void DrawProgress(const u8 *label)
     AppendNumber(text, sGc->phaseDone);
     StringAppend(text, sText_Slash);
     AppendNumber(text, sGc->phaseTotal);
-    PrintLine(WIN_BODY, text, 0, 0, sColorNormal);
-}
-
-static void DrawPartyList(void)
-{
-    u8 text[64];
-    u8 name[POKEMON_NAME_BUFFER_SIZE];
-    u32 slot;
-
-    for (slot = 0; slot < gPartiesCount[B_TRAINER_PLAYER] && slot < PARTY_SIZE; slot++)
-    {
-        struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][slot];
-        const u8 *color = slot == sGc->cursor ? sColorHighlight : sColorNormal;
-        if (slot == sGc->cursor)
-            PrintLine(WIN_BODY, sText_Cursor, 0, slot, color);
-        if (slot == sGc->confirmed)
-            PrintLine(WIN_BODY, sText_Selected, 8, slot, color);
-        GetMonData(mon, MON_DATA_NICKNAME, name);
-        StringCopy(text, sText_Jpn);
-        StringAppend(text, name);
-        PrintLine(WIN_BODY, text, 18, slot, color);
-        StringCopy(text, sText_Lv);
-        AppendNumber(text, GetMonData(mon, MON_DATA_LEVEL));
-        PrintLine(WIN_BODY, text, 120, slot, color);
-        StringCopy(text, sText_Eng);
-        AppendNumber(text, GetMonData(mon, MON_DATA_HP));
-        StringAppend(text, sText_Slash);
-        AppendNumber(text, GetMonData(mon, MON_DATA_MAX_HP));
-        PrintLine(WIN_BODY, text, 168, slot, color);
-    }
+    GcExtension_PrintLine(WIN_BODY, text, 0, 0, GC_COLOR_NORMAL);
 }
 
 static void Redraw(void)
@@ -341,13 +401,13 @@ static void Redraw(void)
     switch (sGc->state)
     {
     case GC_STATE_CONNECTING:
-        PrintLine(WIN_BODY, sGc->reconnecting ? sText_Reconnecting : sText_Waiting, 0, 0, sColorNormal);
-        PrintLine(WIN_BODY, sText_WaitingHint, 0, 1, sColorNormal);
+        GcExtension_PrintLine(WIN_BODY, sGc->reconnecting ? sText_Reconnecting : sText_Waiting, 0, 0, GC_COLOR_NORMAL);
+        GcExtension_PrintLine(WIN_BODY, sText_WaitingHint, 0, 1, GC_COLOR_DIM);
         help = sText_HelpCancel;
         break;
     case GC_STATE_HANDSHAKE:
         title = sText_TitleConnected;
-        PrintLine(WIN_BODY, sText_Handshake, 0, 0, sColorNormal);
+        GcExtension_PrintLine(WIN_BODY, sText_Handshake, 0, 0, GC_COLOR_NORMAL);
         help = sText_HelpCancel;
         break;
     case GC_STATE_SEND_PARTY:
@@ -362,38 +422,47 @@ static void Redraw(void)
         break;
     case GC_STATE_ACTIVE:
         title = sText_TitleConnected;
-        if (sGc->screen == SCREEN_MENU)
-        {
-            PrintLine(WIN_BODY, sText_Cursor, 0, 0, sColorHighlight);
-            PrintLine(WIN_BODY, sText_MenuParty, 12, 0, sColorHighlight);
-            help = sText_HelpMenu;
-        }
-        else
-        {
-            DrawPartyList();
-            help = sText_HelpParty;
-        }
+        if (sGc->handler->draw != NULL)
+            sGc->handler->draw(WIN_BODY, WIN_HELP);
         break;
     case GC_STATE_DISCONNECTING:
         title = sText_TitleConnected;
-        PrintLine(WIN_BODY, sText_Closing, 0, 0, sColorNormal);
+        GcExtension_PrintLine(WIN_BODY, sText_Closing, 0, 0, GC_COLOR_NORMAL);
         break;
     case GC_STATE_ERROR:
-        PrintLine(WIN_BODY, sGc->error == GC_ERROR_OUT_OF_MEMORY ? sText_ErrorMemory
-                          : sGc->error == GC_ERROR_HOST_ENDED ? sText_ErrorHost : sText_ErrorLink,
-                  0, 0, sColorError);
-        help = sGc->error == GC_ERROR_OUT_OF_MEMORY ? sText_HelpCancel : sText_HelpError;
+        switch (sGc->error)
+        {
+        case GC_ERROR_OUT_OF_MEMORY:
+            GcExtension_PrintLine(WIN_BODY, sText_ErrorMemory, 0, 0, GC_COLOR_ERROR);
+            help = sText_HelpExit;
+            break;
+        case GC_ERROR_MODE_REFUSED:
+            GcExtension_PrintLine(WIN_BODY, sText_ErrorRefused, 0, 0, GC_COLOR_ERROR);
+            if (sGc->refusal != NULL)
+                GcExtension_PrintLine(WIN_BODY, sGc->refusal, 0, 1, GC_COLOR_NORMAL);
+            help = sText_HelpExit;
+            break;
+        default:
+            GcExtension_PrintLine(WIN_BODY, sGc->error == GC_ERROR_HOST_ENDED ? sText_ErrorHost : sText_ErrorLink,
+                                  0, 0, GC_COLOR_ERROR);
+            help = sText_HelpError;
+            break;
+        }
         break;
     case GC_STATE_RETURN_FIELD:
         if (sGc->returnStep > 0)
-            PrintLine(WIN_BODY, sGc->exitMatch == STATE_DIGEST_ALL_MATCH ? sText_StateOk : sText_StateChanged,
-                      0, 0, sGc->exitMatch == STATE_DIGEST_ALL_MATCH ? sColorNormal : sColorError);
-        PrintLine(WIN_BODY, sText_Returning, 0, 1, sColorNormal);
+        {
+            GcExtension_PrintLine(WIN_BODY, sGc->exitMatch == STATE_DIGEST_ALL_MATCH ? sText_StateOk : sText_StateChanged,
+                                  0, 0, sGc->exitMatch == STATE_DIGEST_ALL_MATCH ? GC_COLOR_NORMAL : GC_COLOR_ERROR);
+            if (sGc->finishMessage != NULL)
+                GcExtension_PrintLine(WIN_BODY, sGc->finishMessage, 0, 1, GC_COLOR_HIGHLIGHT);
+        }
+        GcExtension_PrintLine(WIN_BODY, sText_Returning, 0, 2, GC_COLOR_NORMAL);
         break;
     }
-    PrintLine(WIN_TITLE, title, 0, 0, sColorNormal);
+    GcExtension_PrintLine(WIN_TITLE, title, 0, 0, GC_COLOR_NORMAL);
     if (help != NULL)
-        PrintLine(WIN_HELP, help, 0, 0, sColorNormal);
+        GcExtension_PrintLine(WIN_HELP, help, 0, 0, GC_COLOR_NORMAL);
     PutWindowTilemap(WIN_TITLE);
     PutWindowTilemap(WIN_BODY);
     PutWindowTilemap(WIN_HELP);
@@ -441,17 +510,6 @@ static void HandleLinkEvents(u32 link, u32 proto)
     }
 }
 
-static void MoveCursor(s8 delta)
-{
-    u8 count = gPartiesCount[B_TRAINER_PLAYER];
-    if (count == 0)
-        return;
-    sGc->cursor = (sGc->cursor + count + delta) % count;
-    sGc->inputSeq++;
-    sGc->dirty = TRUE;
-    PlaySE(SE_SELECT);
-}
-
 static void HandleInput(void)
 {
     switch (sGc->state)
@@ -467,50 +525,15 @@ static void HandleInput(void)
         }
         break;
     case GC_STATE_ACTIVE:
-        if (sGc->screen == SCREEN_MENU)
-        {
-            if (JOY_NEW(A_BUTTON))
-            {
-                PlaySE(SE_SELECT);
-                sGc->screen = SCREEN_PARTY;
-                sGc->inputSeq++;
-                sGc->dirty = TRUE;
-            }
-            else if (JOY_NEW(B_BUTTON))
-            {
-                PlaySE(SE_SELECT);
-                SetState(GC_STATE_DISCONNECTING);
-            }
-        }
-        else if (JOY_REPEAT(DPAD_UP))
-        {
-            MoveCursor(-1);
-        }
-        else if (JOY_REPEAT(DPAD_DOWN))
-        {
-            MoveCursor(1);
-        }
-        else if (JOY_NEW(A_BUTTON))
-        {
-            PlaySE(SE_SELECT);
-            sGc->confirmed = sGc->cursor;
-            sGc->inputSeq++;
-            sGc->dirty = TRUE;
-        }
-        else if (JOY_NEW(B_BUTTON))
-        {
-            PlaySE(SE_SELECT);
-            sGc->screen = SCREEN_MENU;
-            sGc->inputSeq++;
-            sGc->dirty = TRUE;
-        }
+        if (sGc->handler->input != NULL)
+            sGc->handler->input();
         break;
     case GC_STATE_DISCONNECTING:
         if (++sGc->timer >= BYE_WAIT_FRAMES || JOY_NEW(B_BUTTON))
             SetState(GC_STATE_RETURN_FIELD);
         break;
     case GC_STATE_ERROR:
-        if (JOY_NEW(A_BUTTON) && sGc->linkOpen)
+        if (JOY_NEW(A_BUTTON) && sGc->linkOpen && sGc->error != GC_ERROR_MODE_REFUSED)
         {
             PlaySE(SE_SELECT);
             sGc->reconnecting = TRUE;
@@ -527,13 +550,16 @@ static void HandleInput(void)
 
 static void FreeMode(void)
 {
+    if (sGc->modeStarted && sGc->handler->free != NULL)
+        sGc->handler->free();
     GcPokemon_Free();
     FreeAllWindowBuffers();
     TRY_FREE_AND_SET_NULL(sGc);
+    sPendingHandler = NULL;
 }
 
-// Closes the link, verifies that the game state is unchanged and fades back
-// to the field. The script that started the mode continues afterwards.
+// Closes the link, verifies that the session left the game state unchanged,
+// lets the mode apply a verified result once, and fades back to the field.
 static void UpdateReturnToField(void)
 {
     struct GcStateDigest digest;
@@ -549,14 +575,23 @@ static void UpdateReturnToField(void)
         if (sGc->linkOpen)
             GcLink_Close();
         sGc->linkOpen = FALSE;
-        GcPokemon_ComputeDigest(&digest);
-        sGc->exitMatch = GcPokemon_CompareWithEntry(&digest);
+        if (sGc->modeStarted)
+        {
+            GcPokemon_ComputeDigest(&digest);
+            sGc->exitMatch = GcPokemon_CompareWithEntry(&digest);
+            if (sGc->handler->finish != NULL)
+                sGc->finishMessage = sGc->handler->finish(&sGc->partyChanged);
+        }
+        else
+        {
+            sGc->exitMatch = STATE_DIGEST_ALL_MATCH;
+        }
         sGc->returnStep++;
         sGc->timer = 0;
         sGc->dirty = TRUE;
         break;
     case 1:
-        if (++sGc->timer >= RESULT_FRAMES)
+        if (++sGc->timer >= RESULT_FRAMES + (sGc->finishMessage != NULL ? RESULT_FRAMES : 0))
         {
             BeginNormalPaletteFade(PALETTES_ALL, 0, 0, 16, RGB_BLACK);
             sGc->returnStep++;
