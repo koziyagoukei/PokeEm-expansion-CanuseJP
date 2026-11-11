@@ -33,6 +33,7 @@ enum {
 #define PKMN_SPRITE_SHINY  (1u << 0)
 #define PKMN_SPRITE_FEMALE (1u << 1)  // only set if the species has female-specific graphics
 #define PKMN_SPRITE_EGG    (1u << 2)
+#define PKMN_SPRITE_BACK   (1u << 3)  // back pic (e.g. the player's battler), same palette
 
 // Text labels are rendered by the game's own font on the GBA and sent as
 // 4bpp images, so the host needs no game charset or font.

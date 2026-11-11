@@ -35,6 +35,7 @@ enum PeerType {
 #define CAP_BYE     (1u << 2)  // BYE frames
 #define CAP_MODE    (1u << 3)  // MODE frame + mode request asset
 #define CAP_RESULT  (1u << 4)  // RESULT frames
+#define CAP_RLE     (1u << 5)  // host decodes ASSET_ENCODING_RLE asset data
 
 // CAPS request (host -> client) and its ACK (client -> host) share this layout.
 //   0 u16 msg protocol version   2 u16 peer type
@@ -66,22 +67,37 @@ typedef struct {
     uint32_t id, variant, extra;
 } AssetKey;
 
-enum PixelFormat { PIXEL_NONE = 0, PIXEL_4BPP_TILED = 1 };   // 8x8 tiles, row-major, low nibble = left pixel
+enum PixelFormat {
+    PIXEL_NONE = 0,
+    PIXEL_4BPP_TILED = 1,    // 8x8 tiles, row-major, low nibble = left pixel
+    PIXEL_4BPP_TILEMAP = 2,  // a GBA text BG: see TILEMAP_HEADER_BYTES
+};
+// PIXEL_4BPP_TILEMAP data (palette included, palette format NONE):
+//   0 u16 map width (tiles)  2 u16 map height  4 u16 tile count  6 u8 palette banks
+//   7 u8 flags (bit0: colour 0 is opaque, drawn with its bank's colour 0)
+//   8 u16 map[w*h] (GBA screen entries: bits 0-9 tile, 10 hflip, 11 vflip, 12-15 bank)
+//   .. tiles (tile count x 32 bytes), then banks x 16 BGR555 colours
+#define TILEMAP_HEADER_BYTES 8
+#define TILEMAP_FLAG_OPAQUE (1u << 0)
 enum PaletteFormat { PALETTE_NONE = 0, PALETTE_BGR555_16 = 1 }; // 16 x u16 appended after the pixels
 
 // ASSET_INFO request: AssetKey. ACK:
 //   0 u16 status (AssetStatus)  2 u16 reserved
 //   4 AssetKey (echo)          20 u16 width   22 u16 height
-//  24 u8 pixel format          25 u8 palette format  26 u8 frames  27 u8 reserved
-//  28 u32 data length (pixels + palette)          32 u32 CRC-32 of the data
-#define ASSET_INFO_BYTES 36
+//  24 u8 pixel format          25 u8 palette format  26 u8 frames  27 u8 encoding
+//  28 u32 data length as transferred              32 u32 CRC-32 of the transferred data
+//  36 u32 decoded length (version 3; older clients send 36 bytes = not encoded)
+// Clients only encode when the host advertises CAP_RLE.
+#define ASSET_INFO_BYTES 40
+#define ASSET_INFO_BYTES_V2 36
+enum AssetEncoding { ASSET_ENCODING_RAW = 0, ASSET_ENCODING_RLE = 1 };
 enum AssetStatus { ASSET_OK = 0, ASSET_NOT_FOUND = 1, ASSET_TOO_LARGE = 2 };
 typedef struct {
     uint16_t status;
     AssetKey key;
     uint16_t width, height;
-    uint8_t pixel_format, palette_format, frames;
-    uint32_t length, crc;
+    uint8_t pixel_format, palette_format, frames, encoding;
+    uint32_t length, crc, raw_length;
 } AssetInfo;
 
 // ASSET_CHUNK request: AssetKey, u32 offset, u32 length (<= WIRE_PAYLOAD).
@@ -136,6 +152,13 @@ bool mode_info_decode(const uint8_t *in, unsigned length, ModeInfo *info);
 unsigned asset_info_encode(const AssetInfo *info, uint8_t *out);
 bool asset_info_decode(const uint8_t *in, unsigned length, AssetInfo *info);
 uint32_t asset_palette_bytes(uint8_t palette_format);
+
+// Byte RLE: control c < 128 -> c+1 literal bytes follow; c >= 128 -> the next
+// byte repeats c-125 times (3..130). Returns the encoded/decoded length, or 0
+// if it does not fit (encode) / the stream is malformed (decode).
+uint32_t rle_encode(const uint8_t *in, uint32_t length, uint8_t *out, uint32_t capacity);
+uint32_t rle_decode(const uint8_t *in, uint32_t length, uint8_t *out, uint32_t capacity);
+#define RLE_WORST_CASE(n) ((n) + (n) / 128 + 2)
 
 #ifdef __cplusplus
 }
