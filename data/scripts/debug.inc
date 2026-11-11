@@ -371,6 +371,32 @@ Debug_EventScript_GcExtensionMode::
 	releaseall
 	end
 
+@ Frontier GC Battle test (Phase 3): SINGLE 1vs1 on the GameCube.
+@ VAR_0x8004 = result policy (0 show only, 1 apply HP/PP), VAR_0x8005 = opponent trainer.
+Debug_EventScript_GcBattleWeak::
+	lockall
+	setvar VAR_0x8004, 0
+	setvar VAR_0x8005, TRAINER_CALVIN_1
+	special FrontierGcBattle_Start
+	releaseall
+	end
+
+Debug_EventScript_GcBattleWeakApply::
+	lockall
+	setvar VAR_0x8004, 1
+	setvar VAR_0x8005, TRAINER_CALVIN_1
+	special FrontierGcBattle_Start
+	releaseall
+	end
+
+Debug_EventScript_GcBattleStrong::
+	lockall
+	setvar VAR_0x8004, 0
+	setvar VAR_0x8005, TRAINER_STEVEN
+	special FrontierGcBattle_Start
+	releaseall
+	end
+
 Debug_EventScript_WallyTutorial::
 	special SavePlayerParty
 	special LoadWallyZigzagoon

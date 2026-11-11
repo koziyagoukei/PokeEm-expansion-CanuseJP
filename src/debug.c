@@ -408,6 +408,9 @@ extern const u8 Debug_EventScript_EWRAMCounters[];
 extern const u8 Debug_Follower_NPC_Event_Script[];
 extern const u8 Debug_Follower_NPC_Not_Enabled[];
 extern const u8 Debug_EventScript_GcExtensionMode[];
+extern const u8 Debug_EventScript_GcBattleWeak[];
+extern const u8 Debug_EventScript_GcBattleWeakApply[];
+extern const u8 Debug_EventScript_GcBattleStrong[];
 extern const u8 Debug_EventScript_WallyTutorial[];
 extern const u8 Debug_EventScript_PrintTimeOfDay[];
 extern const u8 Debug_EventScript_TellTheTime[];
@@ -618,6 +621,9 @@ static const struct DebugMenuOption sDebugMenu_Actions_Utilities[] =
     { COMPOUND_STRING("{JPN}どうぐランダムを ためす"), DebugAction_Selection_Init, &sItemGeneratorSelection },
     { COMPOUND_STRING("{JPN}ミツルチュートリアル"),    DebugAction_ExecuteScript, Debug_EventScript_WallyTutorial },
     { COMPOUND_STRING("{ENG}GC Extension Mode"), DebugAction_ExecuteScript, Debug_EventScript_GcExtensionMode },
+    { COMPOUND_STRING("{ENG}GC Battle (show only)"), DebugAction_ExecuteScript, Debug_EventScript_GcBattleWeak },
+    { COMPOUND_STRING("{ENG}GC Battle (apply HP/PP)"), DebugAction_ExecuteScript, Debug_EventScript_GcBattleWeakApply },
+    { COMPOUND_STRING("{ENG}GC Battle (vs Steven)"), DebugAction_ExecuteScript, Debug_EventScript_GcBattleStrong },
     { NULL }
 };
 
