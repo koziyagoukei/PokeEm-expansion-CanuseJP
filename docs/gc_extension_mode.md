@@ -42,3 +42,27 @@ GBAで所持しているパーティを、JoyBus経由でGameCube側の専用ソ
 - **JoyBusの後片付け:** 終了時にRCNT・IE・serial割り込みベクタを元に戻します。その後 `CB2_ReturnToFieldContinueScript` でスクリプトへ戻ります。
 
 プロトコル仕様・計測結果・制約は、gba-gc-extension の `docs/phase2.md` を参照してください。
+
+## 汎用API（GcStartMode）
+
+`include/gc_extension.h` が、ゲーム内容側から使う汎用Connector APIです。施設やNPCなどのcontentは `GcModeHandler` を用意し、`GcStartMode(&handler)` を呼びます。呼び出し元のspecialは `waitstate=1` で定義します。
+
+Connectorが担当するもの：
+- JoyBus接続、handshake、capability交換
+- PokemonRecord・sprite・ラベルのexport、転送進捗表示
+- キャンセル・timeout・BYE、GBA画面の枠、field復帰
+
+Mode（content）が担当するもの：
+- `getRequest`：GC側へ渡すrequest bytes（mode request asset）
+- `handleApp`：mode固有のAPP opcode
+- `draw` / `input`：接続中のGBA画面と入力
+- `onResult`：GC→GBAのRESULT（result idごとに1回だけ届く）
+- `finish`：linkを閉じ、未変更チェックを終えた後に1回だけ呼ばれる。永続状態を変えてよいのはここだけです
+
+`GcExtension_SetExtraMons()` で、手持ち以外のポケモン（例：相手）をexport slot `0x80` 以降として登録できます。
+
+Protocol（`gc_ext/message.h`、version 3）：
+- **MODE（frame type 13）**：mode id・mode version・mode用APP id・request長/CRC・session nonceを返します。requestは asset key `{ASSET_MODE_REQUEST, mode id, 0, nonce}` で取得します。
+- **RESULT（frame type 14）**：mode id・result version・result id・payloadを受けます。同じresult idは `RESULT_DUPLICATE` として二重適用しません。
+
+Mode id `GC_MODE_PARTY_VIEW` は内蔵のパーティビューアです。`GC_MODE_BATTLE` などの用途固有の処理は、このbranchには含めません。
