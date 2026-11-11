@@ -14,10 +14,27 @@ SINGLE_BATTLE_TEST("Custap Berry allows the holder to move first in its priority
     } WHEN {
         TURN { MOVE(player, MOVE_SCRATCH); }
     } SCENE {
+        ITEM_POPUP(player, ITEM_CUSTAP_BERRY);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_HELD_ITEM_BERRY, player);
-        MESSAGE("Wobbuffet can act faster than normal, thanks to its Custap Berry!");
+        MESSAGE("{JPN}{JPN}ソーナンスは {JPN}イバンのみの おかげで\nいつもより 早く 動ける！");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, player);
         ANIMATION(ANIM_TYPE_MOVE, MOVE_CELEBRATE, opponent);
+    }
+}
+
+SINGLE_BATTLE_TEST("Custap Berry shows the popup on the opposing holder, not the next battler")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET) { Speed(100); }
+        OPPONENT(SPECIES_REGIROCK) { Speed(1); MaxHP(160); HP(40); Item(ITEM_CUSTAP_BERRY); }
+    } WHEN {
+        TURN { MOVE(opponent, MOVE_SCRATCH); }
+    } SCENE {
+        ITEM_POPUP(opponent, ITEM_CUSTAP_BERRY);
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_HELD_ITEM_BERRY, opponent);
+        MESSAGE("{JPN}{JPN}相手の {JPN}レジロックは {JPN}イバンのみの おかげで\nいつもより 早く 動ける！");
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, opponent);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_CELEBRATE, player);
     }
 }
 
@@ -30,7 +47,7 @@ SINGLE_BATTLE_TEST("Custap Berry allows the holder to move first in its priority
         TURN { MOVE(player, MOVE_SCRATCH); }
     } SCENE {
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_HELD_ITEM_BERRY, player);
-        MESSAGE("Bellsprout can act faster than normal, thanks to its Custap Berry!");
+        MESSAGE("{JPN}{JPN}マダツボミは {JPN}イバンのみの おかげで\nいつもより 早く 動ける！");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, player);
         ANIMATION(ANIM_TYPE_MOVE, MOVE_CELEBRATE, opponent);
     }
@@ -46,6 +63,6 @@ SINGLE_BATTLE_TEST("Custap Berry activates even if the opposing mon switches out
         TURN { SWITCH(opponent, 1); }
     } SCENE {
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_HELD_ITEM_BERRY, player);
-        MESSAGE("Regirock can act faster than normal, thanks to its Custap Berry!");
+        MESSAGE("{JPN}{JPN}レジロックは {JPN}イバンのみの おかげで\nいつもより 早く 動ける！");
     }
 }

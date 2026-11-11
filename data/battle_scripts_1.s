@@ -5865,8 +5865,7 @@ BattleScript_QuickDrawActivation::
 	end
 
 BattleScript_CustapBerryActivation::
-	flushtextbox
-	call BattleScript_ItemPopUp_Scripting
+	call BattleScript_ItemPopUp_Attacker
 	playanimation BS_ATTACKER, B_ANIM_HELD_ITEM_BERRY
 	waitanimation
 	printstring STRINGID_CANACTFASTERTHANKSTO

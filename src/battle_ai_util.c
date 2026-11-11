@@ -1314,10 +1314,13 @@ u32 GetNoOfHitsToKOBattlerDmg(u32 dmg, enum BattlerId battlerDef)
 
 u32 GetNoOfHitsToKOBattler(enum BattlerId battlerAtk, enum BattlerId battlerDef, u32 moveIndex, enum DamageCalcContext calcContext, enum AiConsiderEndure considerEndure)
 {
-    u32 hitsToKO = GetNoOfHitsToKOBattlerDmg(AI_GetDamage(battlerAtk, battlerDef, moveIndex, calcContext, gAiLogicData), battlerDef);
-    enum Move *moves = GetMovesArray(battlerAtk);
+    // A last-used Max or Z-Move may not have a slot in the moveset.
+    if (moveIndex >= MAX_MON_MOVES)
+        return 0;
 
-    if (CanEndureHit(battlerAtk, battlerDef, moves[moveIndex]) && hitsToKO == 1 && considerEndure == CONSIDER_ENDURE)
+    u32 hitsToKO = GetNoOfHitsToKOBattlerDmg(AI_GetDamage(battlerAtk, battlerDef, moveIndex, calcContext, gAiLogicData), battlerDef);
+
+    if (hitsToKO == 1 && considerEndure == CONSIDER_ENDURE && CanEndureHit(battlerAtk, battlerDef, GetMovesArray(battlerAtk)[moveIndex]))
         hitsToKO += 1;
 
     return hitsToKO;

@@ -245,6 +245,25 @@ AI_SINGLE_BATTLE_TEST("AI can choose Counter or Mirror Coat if the predicted mov
     }
 }
 
+AI_SINGLE_BATTLE_TEST("AI can evaluate Counter after Urshifu used a Max Move that is not in its moveset")
+{
+    GIVEN {
+        AI_FLAGS(AI_FLAG_CHECK_BAD_MOVE | AI_FLAG_CHECK_VIABILITY | AI_FLAG_MOVE_OMNISCIENCE);
+        PLAYER(SPECIES_URSHIFU_SINGLE_STRIKE) {
+            Speed(100); Attack(1);
+            HPIV(31); AttackIV(31); DefenseIV(31); SpeedIV(31); SpAttackIV(31); SpDefenseIV(31);
+            Moves(MOVE_WICKED_BLOW, MOVE_CLOSE_COMBAT, MOVE_SUCKER_PUNCH, MOVE_U_TURN);
+        }
+        OPPONENT(SPECIES_SUDOWOODO) { Speed(50); Defense(200); MaxHP(500); HP(500); Item(ITEM_LEFTOVERS); Moves(MOVE_COUNTER, MOVE_CELEBRATE); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_WICKED_BLOW, gimmick: GIMMICK_DYNAMAX); }
+        TURN { MOVE(player, MOVE_WICKED_BLOW); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_MAX_DARKNESS, player);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_MAX_DARKNESS, player);
+    }
+}
+
 AI_SINGLE_BATTLE_TEST("AI chooses moves with secondary effect that have a 100% chance to trigger")
 {
     enum Ability ability;
