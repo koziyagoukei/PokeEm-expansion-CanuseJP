@@ -359,6 +359,14 @@ Debug_EventScript_Steven_Multi::
 	release
 	end
 
+@ GC Extension Mode test entry (gba-gc-extension Phase 2). The special fades
+@ out, runs the mode and returns here; it never changes party, bag or flags.
+Debug_EventScript_GcExtensionMode::
+	lockall
+	special GcCompanion_Start
+	releaseall
+	end
+
 Debug_EventScript_WallyTutorial::
 	special SavePlayerParty
 	special LoadWallyZigzagoon

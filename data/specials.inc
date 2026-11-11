@@ -647,3 +647,4 @@ gSpecials::
 	def_special ultra_help, waitstate=1
 	def_special ContestShop_BufferProduct
 	def_special ContestShop_Purchase
+	def_special GcCompanion_Start, waitstate=1
