@@ -15,9 +15,12 @@
 extern "C" {
 #endif
 
-// Version of the message layer (CAPS/APP/ASSET/BYE). The Phase 1 PoC set
-// (HELLO/PING/BULK) is implicitly version 1 and has no CAPS message.
-#define MSG_PROTOCOL_VERSION 2
+// Version of the message layer. The Phase 1 PoC set (HELLO/PING/BULK) is
+// implicitly version 1. Version 2 added CAPS/APP/ASSET/BYE; version 3 adds
+// MODE and RESULT. Peers accept any version >= MSG_PROTOCOL_MIN_VERSION and
+// only use frames both sides advertise in their capability bits.
+#define MSG_PROTOCOL_VERSION 3
+#define MSG_PROTOCOL_MIN_VERSION 2
 
 enum PeerType {
     PEER_UNKNOWN = 0,
@@ -30,6 +33,8 @@ enum PeerType {
 #define CAP_APP     (1u << 0)  // APP frames
 #define CAP_ASSETS  (1u << 1)  // ASSET_INFO / ASSET_CHUNK
 #define CAP_BYE     (1u << 2)  // BYE frames
+#define CAP_MODE    (1u << 3)  // MODE frame + mode request asset
+#define CAP_RESULT  (1u << 4)  // RESULT frames
 
 // CAPS request (host -> client) and its ACK (client -> host) share this layout.
 //   0 u16 msg protocol version   2 u16 peer type
@@ -87,6 +92,37 @@ typedef struct {
 // BYE request: u16 reason. Empty ACK. Ends the session cleanly.
 enum ByeReason { BYE_HOST_EXIT = 1, BYE_CLIENT_EXIT = 2 };
 
+// Modes. The client (GBA) decides which mode a session runs; the host asks
+// with MODE after CAPS. Mode ids are a registry shared by all clients; what a
+// mode does is defined by its own application protocol (APP id in the reply).
+enum GcModeId {
+    GC_MODE_NONE = 0,
+    GC_MODE_PARTY_VIEW = 1,  // Phase 2 party viewer (pkmn_protocol.h)
+    GC_MODE_BATTLE = 2,      // battle runtime (battle_protocol.h)
+};
+
+// MODE request: empty. ACK (24 bytes):
+//   0 u16 mode id        2 u16 mode version   4 u16 mode app id   6 u16 mode app version
+//   8 u32 request length (0 = none)          12 u32 CRC-32 of the request
+//  16 u32 session nonce (changes for every mode start)               20 u32 flags (0)
+// The request bytes are fetched as an asset with key
+// {ASSET_MODE_REQUEST, mode id, 0, session nonce} through ASSET_INFO/ASSET_CHUNK.
+#define MODE_INFO_BYTES 24
+#define ASSET_MODE_REQUEST 0x0001
+typedef struct {
+    uint16_t mode_id, mode_version, app_id, app_version;
+    uint32_t request_length, request_crc, nonce, flags;
+} ModeInfo;
+
+// RESULT request (host -> client): the outcome of a mode, versioned by the mode.
+//   0 u16 mode id   2 u16 result version   4 u32 result id (unique per mode start)
+//   8 ..            result payload (<= RESULT_MAX_PAYLOAD bytes)
+// ACK: u16 ResultStatus, u16 0. A client accepts a given result id at most
+// once; a repeated id is acknowledged as RESULT_DUPLICATE and not re-applied.
+#define RESULT_HEADER_BYTES 8
+#define RESULT_MAX_PAYLOAD (WIRE_PAYLOAD - RESULT_HEADER_BYTES)
+enum ResultStatus { RESULT_ACCEPTED = 0, RESULT_DUPLICATE = 1, RESULT_REJECTED = 2, RESULT_UNSUPPORTED = 3 };
+
 static inline uint16_t msg_get16(const uint8_t *p) { return (uint16_t)(p[0] | p[1] << 8); }
 static inline void msg_put16(uint8_t *p, uint16_t v) { p[0] = (uint8_t)v; p[1] = (uint8_t)(v >> 8); }
 
@@ -95,6 +131,8 @@ bool caps_decode(const uint8_t *in, unsigned length, Caps *caps);
 unsigned asset_key_encode(const AssetKey *key, uint8_t *out);
 bool asset_key_decode(const uint8_t *in, unsigned length, AssetKey *key);
 bool asset_key_equal(const AssetKey *a, const AssetKey *b);
+unsigned mode_info_encode(const ModeInfo *info, uint8_t *out);
+bool mode_info_decode(const uint8_t *in, unsigned length, ModeInfo *info);
 unsigned asset_info_encode(const AssetInfo *info, uint8_t *out);
 bool asset_info_decode(const uint8_t *in, unsigned length, AssetInfo *info);
 uint32_t asset_palette_bytes(uint8_t palette_format);
