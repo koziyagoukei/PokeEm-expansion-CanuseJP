@@ -15,6 +15,10 @@ struct GcProtocolState
     u32 openLength;
     u32 events;
     struct GcProtocolStats stats;
+    ModeInfo mode;
+    const u8 *modeRequest;
+    bool8 haveResult;
+    u32 lastResultId;
 };
 
 static EWRAM_DATA struct GcProtocolState sProto = {0};
@@ -23,6 +27,15 @@ void GcProtocol_Init(const struct GcClientConfig *config)
 {
     memset(&sProto, 0, sizeof(sProto));
     sProto.config = config;
+}
+
+void GcProtocol_SetMode(const ModeInfo *info, const u8 *request)
+{
+    sProto.mode = *info;
+    sProto.modeRequest = request;
+    if (request == NULL)
+        sProto.mode.request_length = 0;
+    sProto.mode.request_crc = sProto.mode.request_length ? ~wire_crc(UINT32_MAX, request, sProto.mode.request_length) : 0;
 }
 
 void GcProtocol_ResetSession(void)
@@ -66,14 +79,14 @@ static bool HandleCaps(const Frame *request, Frame *reply)
 {
     const struct GcClientConfig *config = sProto.config;
     Caps caps;
-    if (!caps_decode(request->payload, request->len, &caps) || caps.version < MSG_PROTOCOL_VERSION)
+    if (!caps_decode(request->payload, request->len, &caps) || caps.version < MSG_PROTOCOL_MIN_VERSION)
         return false;
     sProto.hostCaps = caps;
     sProto.haveCaps = TRUE;
     caps.version = MSG_PROTOCOL_VERSION;
     caps.peer_type = config->peerType;
     caps.build_id = config->buildId;
-    caps.caps = CAP_APP | CAP_ASSETS | CAP_BYE;
+    caps.caps = CAP_APP | CAP_ASSETS | CAP_BYE | CAP_MODE | CAP_RESULT;
     caps.max_payload = WIRE_PAYLOAD;
     caps.app_id = config->appId;
     caps.app_version = config->appVersion;
@@ -91,12 +104,16 @@ static bool HandleApp(const Frame *request, Frame *reply)
         return false;
     appId = msg_get16(request->payload);
     opcode = msg_get16(request->payload + 2);
-    if (appId != config->appId || config->handleApp == NULL)
-        status = APP_UNKNOWN_OP;
-    else
+    if (appId == config->appId && config->handleApp != NULL)
         status = config->handleApp(opcode, request->payload + APP_REQUEST_HEADER,
                                    request->len - APP_REQUEST_HEADER,
                                    reply->payload + APP_REPLY_HEADER, &length);
+    else if (appId != 0 && appId == config->modeAppId && config->handleModeApp != NULL)
+        status = config->handleModeApp(opcode, request->payload + APP_REQUEST_HEADER,
+                                       request->len - APP_REQUEST_HEADER,
+                                       reply->payload + APP_REPLY_HEADER, &length);
+    else
+        status = APP_UNKNOWN_OP;
     if (length > APP_MAX_REPLY_DATA)
         return false;
     msg_put16(reply->payload, appId);
@@ -115,7 +132,23 @@ static bool HandleAssetInfo(const Frame *request, Frame *reply)
     if (!sProto.haveCaps || !asset_key_decode(request->payload, request->len, &info.key))
         return false;
     sProto.assetOpen = FALSE;
-    if (sProto.config->resolveAsset == NULL || !sProto.config->resolveAsset(&info.key, &info, &data))
+    if (info.key.type == ASSET_MODE_REQUEST)
+    {
+        // The mode request is served by the connector itself.
+        if (sProto.modeRequest != NULL && sProto.mode.request_length != 0 && info.key.id == sProto.mode.mode_id
+         && info.key.variant == 0 && info.key.extra == sProto.mode.nonce)
+        {
+            data = sProto.modeRequest;
+            info.length = sProto.mode.request_length;
+            info.pixel_format = PIXEL_NONE;
+            info.palette_format = PALETTE_NONE;
+        }
+    }
+    else if (sProto.config->resolveAsset != NULL && !sProto.config->resolveAsset(&info.key, &info, &data))
+    {
+        data = NULL;
+    }
+    if (data == NULL)
     {
         if (info.status == ASSET_OK)
             info.status = ASSET_NOT_FOUND;
@@ -153,6 +186,34 @@ static bool HandleAssetChunk(const Frame *request, Frame *reply)
     return true;
 }
 
+static bool HandleResult(const Frame *request, Frame *reply)
+{
+    u16 status, modeId, version;
+    u32 resultId;
+    if (!sProto.haveCaps || request->len < RESULT_HEADER_BYTES)
+        return false;
+    modeId = msg_get16(request->payload);
+    version = msg_get16(request->payload + 2);
+    resultId = wire_get32(request->payload + 4);
+    if (sProto.haveResult && resultId == sProto.lastResultId)
+        status = RESULT_DUPLICATE; // never applied twice, even across reconnects
+    else if (modeId != sProto.mode.mode_id || sProto.config->handleResult == NULL)
+        status = RESULT_UNSUPPORTED;
+    else
+        status = sProto.config->handleResult(modeId, version, request->payload + RESULT_HEADER_BYTES,
+                                             request->len - RESULT_HEADER_BYTES);
+    if (status == RESULT_ACCEPTED)
+    {
+        sProto.haveResult = TRUE;
+        sProto.lastResultId = resultId;
+        sProto.events |= GC_PROTO_EVENT_RESULT;
+    }
+    msg_put16(reply->payload, status);
+    msg_put16(reply->payload + 2, 0);
+    reply->len = 4;
+    return true;
+}
+
 bool GcProtocol_HandleFrame(const Frame *request, Frame *reply)
 {
     switch (request->type)
@@ -176,6 +237,14 @@ bool GcProtocol_HandleFrame(const Frame *request, Frame *reply)
     case BYE:
         sProto.events |= GC_PROTO_EVENT_BYE;
         return true;
+    case MODE:
+        if (!sProto.haveCaps || request->len != 0 || sProto.mode.mode_id == GC_MODE_NONE)
+            return false;
+        reply->len = mode_info_encode(&sProto.mode, reply->payload);
+        sProto.events |= GC_PROTO_EVENT_MODE;
+        return true;
+    case RESULT:
+        return HandleResult(request, reply);
     default:
         return false; // Phase 1 benchmark/bulk frames are not served by the game.
     }

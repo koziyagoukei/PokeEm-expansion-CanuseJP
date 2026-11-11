@@ -19,6 +19,7 @@
 #include "window.h"
 #include "constants/rgb.h"
 #include "gc_companion_pokemon.h"
+#include "gc_extension.h"
 
 #define SPRITE_FRAME_BYTES MON_PIC_SIZE                     // one 64x64 4bpp frame
 #define DECOMPRESS_BYTES (MON_PIC_SIZE * MAX_MON_PIC_FRAMES)
@@ -37,6 +38,8 @@ struct GcPokemonState
 };
 
 static EWRAM_DATA struct GcPokemonState *sPkmn = NULL;
+static EWRAM_DATA struct Pokemon *sExtraMons = NULL;
+static EWRAM_DATA u8 sExtraCount = 0;
 
 static u16 HandleApp(u16 opcode, const u8 *args, u16 argLength, u8 *out, u16 *outLength);
 static bool ResolveAsset(const AssetKey *key, AssetInfo *info, const u8 **data);
@@ -133,6 +136,14 @@ bool8 GcPokemon_Init(u8 labelWindowId, const struct GcPokemonUi *ui)
 void GcPokemon_Free(void)
 {
     TRY_FREE_AND_SET_NULL(sPkmn);
+    sExtraMons = NULL;
+    sExtraCount = 0;
+}
+
+void GcPokemon_SetExtraMons(struct Pokemon *mons, u8 count)
+{
+    sExtraMons = mons;
+    sExtraCount = mons != NULL && count <= GC_MAX_EXTRA_MONS ? count : 0;
 }
 
 const struct GcClientConfig *GcPokemon_GetClientConfig(void)
@@ -142,11 +153,21 @@ const struct GcClientConfig *GcPokemon_GetClientConfig(void)
 
 static struct Pokemon *PartyMon(u32 slot)
 {
-    if (slot >= PARTY_SIZE || slot >= gPartiesCount[B_TRAINER_PLAYER])
+    struct Pokemon *mon;
+    if (slot >= GC_EXTRA_SLOT_BASE && slot - GC_EXTRA_SLOT_BASE < sExtraCount)
+        mon = &sExtraMons[slot - GC_EXTRA_SLOT_BASE];
+    else if (slot < PARTY_SIZE && slot < gPartiesCount[B_TRAINER_PLAYER])
+        mon = &gParties[B_TRAINER_PLAYER][slot];
+    else
         return NULL;
-    if (GetMonData(&gParties[B_TRAINER_PLAYER][slot], MON_DATA_SPECIES) == SPECIES_NONE)
+    if (GetMonData(mon, MON_DATA_SPECIES) == SPECIES_NONE)
         return NULL;
-    return &gParties[B_TRAINER_PLAYER][slot];
+    return mon;
+}
+
+struct Pokemon *GcPokemon_GetMon(u32 slot)
+{
+    return PartyMon(slot);
 }
 
 static bool32 HasFemaleGraphics(enum Species species, bool32 isShiny)
@@ -239,18 +260,29 @@ static void BuildRecord(u32 slot, struct Pokemon *mon, PokemonRecord *r)
     r->sprite = SpriteKeyForMon(mon);
 }
 
+bool8 GcPokemon_BuildRecord(u32 slot, PokemonRecord *record)
+{
+    struct Pokemon *mon = PartyMon(slot);
+    if (mon == NULL)
+        return FALSE;
+    BuildRecord(slot, mon, record);
+    return TRUE;
+}
+
 static bool ResolveSprite(const AssetKey *key, AssetInfo *info, const u8 **data)
 {
-    u32 slot;
-    for (slot = 0; slot < PARTY_SIZE; slot++)
+    u32 i, slot;
+    for (i = 0; i < PARTY_SIZE + GC_MAX_EXTRA_MONS; i++)
     {
-        struct Pokemon *mon = PartyMon(slot);
+        struct Pokemon *mon;
         AssetKey monKey;
         enum Species species;
         u32 personality, size;
         bool32 isEgg;
         const u16 *palette;
 
+        slot = i < PARTY_SIZE ? i : GC_EXTRA_SLOT_BASE + i - PARTY_SIZE;
+        mon = PartyMon(slot);
         if (mon == NULL)
             continue;
         monKey = SpriteKeyForMon(mon);

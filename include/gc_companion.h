@@ -19,6 +19,6 @@ enum GcCompanionState
 };
 
 // Script special (waitstate). Returns to the field and continues the script.
-void GcCompanion_Start(void);
+void GcCompanion_Start(void); // party viewer; see gc_extension.h for GcStartMode
 
 #endif // GUARD_GC_COMPANION_H
