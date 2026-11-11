@@ -363,6 +363,14 @@ Debug_Follower_NPC_Event_Script::
 Debug_Follower_NPC_Test_Message:
 	.string "これは つれあるきテストです.$"
 
+@ GC Extension Mode test entry (gba-gc-extension Phase 2). The special fades
+@ out, runs the mode and returns here; it never changes party, bag or flags.
+Debug_EventScript_GcExtensionMode::
+	lockall
+	special GcCompanion_Start
+	releaseall
+	end
+
 Debug_EventScript_WallyTutorial::
 	special SavePlayerParty
 	special LoadWallyZigzagoon
