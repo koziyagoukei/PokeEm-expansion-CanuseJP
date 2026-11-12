@@ -21,6 +21,7 @@ extern "C" {
 #define BATTLE_APP_VERSION_ROSTER 2
 #define BATTLE_APP_VERSION_SWITCH 3
 #define BATTLE_APP_VERSION_STRUGGLE 4
+#define BATTLE_APP_VERSION_DRAG 5
 #define BATTLE_MODE_VERSION 1
 
 enum BattleFormat { BATTLE_FORMAT_SINGLE = 1, BATTLE_FORMAT_DOUBLE = 2, BATTLE_FORMAT_TRIPLE = 3, BATTLE_FORMAT_ROTATION = 4 };
@@ -57,16 +58,17 @@ enum BattleTarget {
 #define UNSUP_MULTI_HIT   (1u << 5)
 #define UNSUP_OTHER       (1u << 6)  // fixed crits, recoil-like flags, explosion ...
 #define UNSUP_EMPTY       (1u << 7)  // no move in this slot
+enum GcResolvedMoveEffect { BME_HIT = 0, BME_FORCE_OUT = 1, BME_FORCE_OUT_ON_HIT = 2 };
 typedef struct {
     uint16_t power;
     uint8_t type, category, accuracy;
     int8_t priority;
-    uint8_t target, unsupported;
+    uint8_t target, unsupported, effect;
 } BattleMove;
 
 // BattleMonV1, 40 bytes, appended to each PokemonRecordV1 in the request.
 //   0 u8 version (1)  1 u8 type count  2 u8 types[2]
-//   4..7 reserved (legacy sprite placement metadata is ignored)
+//   4..7 resolved effect for each move (request V5); reserved in earlier requests
 //   8 BattleMove[4]
 #define BATTLE_MON_VERSION 1
 #define BATTLE_MON_BYTES 40
@@ -96,6 +98,7 @@ typedef struct {
 #define BATTLE_REQUEST_VERSION_ROSTER 2
 #define BATTLE_REQUEST_VERSION_SWITCH 3
 #define BATTLE_REQUEST_VERSION_STRUGGLE 4
+#define BATTLE_REQUEST_VERSION_DRAG 5
 #define BATTLE_REQUEST_HEADER 24
 enum StruggleRecoil { BSTRUGGLE_MAX_HP_FLOOR = 1, BSTRUGGLE_MAX_HP_NEAREST = 2 };
 #define BATTLE_MOVE_STRUGGLE 0xffffu  // logical presentation identifier

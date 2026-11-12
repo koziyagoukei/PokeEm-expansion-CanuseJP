@@ -132,19 +132,27 @@ static void ResolveMove(enum Move move, BattleMove *out)
     case TARGET_USER:          out->target = BTARGET_SELF; break;
     default:                   out->target = BTARGET_OTHER; break;
     }
+    const u16 effect = GetMoveEffect(move);
+    if (sBattle->roster >= BATTLE_APP_VERSION_DRAG)
+    {
+        if (effect == EFFECT_ROAR)
+            out->effect = BME_FORCE_OUT;
+        else if (effect == EFFECT_HIT_SWITCH_TARGET)
+            out->effect = BME_FORCE_OUT_ON_HIT;
+    }
     // Move flags are resolved here so the host can remain game-independent.
     if (sBattle->format == BATTLE_FORMAT_TRIPLE && move == MOVE_WING_ATTACK)
         out->target |= BTARGET_IGNORE_DISTANCE;
-    if (GetMoveEffect(move) != EFFECT_HIT)
+    if (effect != EFFECT_HIT && out->effect == BME_HIT)
         out->unsupported |= UNSUP_EFFECT;
     if (GetMoveAdditionalEffectCount(move) != 0)
         out->unsupported |= UNSUP_SECONDARY;
-    if (out->priority != 0)
+    if (out->priority != 0 && out->effect == BME_HIT)
         out->unsupported |= UNSUP_PRIORITY;
     if ((out->target & BTARGET_CLASS_MASK) == BTARGET_OTHER ||
         (sBattle->format == BATTLE_FORMAT_SINGLE && out->target == BTARGET_SELF))
         out->unsupported |= UNSUP_TARGET;
-    if (out->category == BCAT_STATUS || out->power == 0)
+    if ((out->category == BCAT_STATUS || out->power == 0) && out->effect != BME_FORCE_OUT)
         out->unsupported |= UNSUP_STATUS_MOVE;
     if (GetMoveStrikeCount(move) > 1 || gMovesInfo[move].multiHit)
         out->unsupported |= UNSUP_MULTI_HIT;
@@ -223,7 +231,19 @@ static bool8 BuildFixtureEntries(BattleRequest *request, const u8 **reason)
             SetMonMoveSlot(mon, fixture->move2, 1);
             SetMonMoveSlot(mon, MOVE_NONE, 2);
             SetMonMoveSlot(mon, MOVE_NONE, 3);
-            if (sBattle->roster && side == 0 && i == 0)
+            if (sBattle->roster == BATTLE_APP_VERSION_DRAG)
+            {
+                if (side == 0 && i == 0)
+                    SetMonMoveSlot(mon, MOVE_DRAGON_TAIL, 1);
+                else if (side == 0 && i == 1)
+                {
+                    SetMonMoveSlot(mon, MOVE_ROAR, 0);
+                    SetMonMoveSlot(mon, MOVE_WATER_GUN, 1);
+                }
+                else if (side == 1 && i == 1)
+                    SetMonMoveSlot(mon, MOVE_TACKLE, 0);
+            }
+            if (sBattle->roster && sBattle->roster < BATTLE_APP_VERSION_DRAG && side == 0 && i == 0)
             {
                 u16 hp = 1;
                 SetMonData(mon, MON_DATA_HP, &hp);
@@ -295,7 +315,7 @@ static bool8 BuildRequest(const u8 **reason)
     request->opponent_count = sBattle->count;
     request->active_per_side = sBattle->fieldCount;
     request->version = sBattle->roster ? sBattle->roster : BATTLE_REQUEST_VERSION;
-    if (request->version == BATTLE_REQUEST_VERSION_STRUGGLE)
+    if (request->version >= BATTLE_REQUEST_VERSION_STRUGGLE)
     {
         const u32 recoil = GetConfig(B_STRUGGLE_RECOIL);
         const u32 power = GetMovePower(MOVE_STRUGGLE);
@@ -385,7 +405,7 @@ static u16 HandleMultiApp(u16 opcode, const u8 *args, u16 argLength, u8 *out, u1
             BattleRosterState received;
             if (opcode != BATTLE_OP_STATE_ROSTER)
                 return APP_BAD_ARGS;
-            if (sBattle->roster == BATTLE_APP_VERSION_STRUGGLE)
+            if (sBattle->roster >= BATTLE_APP_VERSION_STRUGGLE)
             {
                 if (!battle_struggle_state_decode(args, argLength, &received))
                     return APP_BAD_ARGS;
@@ -1050,7 +1070,7 @@ static const struct GcModeHandler sFrontierGcBattleMode =
 
 // Script special (waitstate): VAR_0x8004 = result policy (0 show, 1 apply
 // HP/PP), VAR_0x8005 = trainer id. VAR_0x8006 is the format (0 for
-// Single). Bits 8 through 10 select the replacement, switch and Struggle fixtures.
+// Single). Bits 8 through 11 select replacement, switch, Struggle or drag.
 static EWRAM_DATA struct GcModeHandler sFrontierGcRosterMode = {0};
 
 void FrontierGcBattle_Start(void)
@@ -1062,7 +1082,9 @@ void FrontierGcBattle_Start(void)
     sPendingRoster = 0;
     if (format == BATTLE_FORMAT_DOUBLE)
     {
-        if (gSpecialVar_0x8006 & 0x400)
+        if (gSpecialVar_0x8006 & 0x800)
+            sPendingRoster = BATTLE_APP_VERSION_DRAG;
+        else if (gSpecialVar_0x8006 & 0x400)
             sPendingRoster = BATTLE_APP_VERSION_STRUGGLE;
         else if (gSpecialVar_0x8006 & 0x200)
             sPendingRoster = BATTLE_APP_VERSION_SWITCH;

@@ -22,23 +22,30 @@ static void move_decode(const uint8_t *p, BattleMove *m) {
     m->unsupported = p[7];
 }
 
-static void mon_encode(const BattleMon *m, uint8_t *p) {
+static void mon_encode(const BattleMon *m, uint8_t *p, bool effects) {
     for (unsigned i = 0; i < BATTLE_MON_BYTES; ++i) p[i] = 0;
     p[0] = BATTLE_MON_VERSION;
     p[1] = m->type_count;
     p[2] = m->types[0];
     p[3] = m->types[1];
-    for (unsigned i = 0; i < 4; ++i) move_encode(&m->moves[i], p + 8 + 8*i);
+    for (unsigned i = 0; i < 4; ++i) {
+        if (effects) p[4+i] = m->moves[i].effect;
+        move_encode(&m->moves[i], p + 8 + 8*i);
+    }
 }
 
-static bool mon_decode(const uint8_t *p, BattleMon *m) {
+static bool mon_decode(const uint8_t *p, BattleMon *m, bool effects) {
     if (p[0] != BATTLE_MON_VERSION || p[1] < 1 || p[1] > 2) return false;
     m->type_count = p[1];
     m->types[0] = p[2];
     m->types[1] = p[3];
     m->front_y = m->back_y = 0;
     m->elevation = 0;
-    for (unsigned i = 0; i < 4; ++i) move_decode(p + 8 + 8*i, &m->moves[i]);
+    for (unsigned i = 0; i < 4; ++i) {
+        move_decode(p + 8 + 8*i, &m->moves[i]);
+        m->moves[i].effect = effects ? p[4+i] : BME_HIT;
+        if (m->moves[i].effect > BME_FORCE_OUT_ON_HIT) return false;
+    }
     return true;
 }
 
@@ -50,7 +57,7 @@ uint32_t battle_request_size(const BattleRequest *r) {
 uint32_t battle_request_encode(const BattleRequest *r, uint8_t *p, uint32_t capacity) {
     const uint32_t size = battle_request_size(r);
     const uint8_t version = r->version ? r->version : BATTLE_REQUEST_VERSION;
-    if ((version < BATTLE_REQUEST_VERSION || version > BATTLE_REQUEST_VERSION_STRUGGLE) ||
+    if ((version < BATTLE_REQUEST_VERSION || version > BATTLE_REQUEST_VERSION_DRAG) ||
         size > capacity || r->player_count > BATTLE_MAX_PER_SIDE || r->opponent_count > BATTLE_MAX_PER_SIDE ||
         r->type_count > BATTLE_MAX_TYPES)
         return 0;
@@ -69,7 +76,7 @@ uint32_t battle_request_encode(const BattleRequest *r, uint8_t *p, uint32_t capa
     msg_put16(p+14, BATTLE_ENTRY_BYTES);
     wire_put32(p+16, r->battle_id);
     wire_put32(p+20, r->environment);
-    if (version == BATTLE_REQUEST_VERSION_STRUGGLE) {
+    if (version >= BATTLE_REQUEST_VERSION_STRUGGLE) {
         p[21] = r->struggle_power;
         p[22] = r->struggle_accuracy;
         p[23] = r->struggle_recoil;
@@ -80,7 +87,7 @@ uint32_t battle_request_encode(const BattleRequest *r, uint8_t *p, uint32_t capa
         const unsigned count = side ? r->opponent_count : r->player_count;
         for (unsigned i = 0; i < count; ++i, q += BATTLE_ENTRY_BYTES) {
             pkmn_record_encode(&e[i].record, q);
-            mon_encode(&e[i].mon, q + PKMN_RECORD_BYTES);
+            mon_encode(&e[i].mon, q + PKMN_RECORD_BYTES, version >= BATTLE_REQUEST_VERSION_DRAG);
         }
     }
     for (unsigned i = 0; i < (unsigned)r->type_count * r->type_count; ++i) q[i] = r->type_chart[i];
@@ -89,7 +96,7 @@ uint32_t battle_request_encode(const BattleRequest *r, uint8_t *p, uint32_t capa
 
 bool battle_request_decode(const uint8_t *p, uint32_t length, BattleRequest *r) {
     if (length < BATTLE_REQUEST_HEADER ||
-        (p[0] < BATTLE_REQUEST_VERSION || p[0] > BATTLE_REQUEST_VERSION_STRUGGLE) ||
+        (p[0] < BATTLE_REQUEST_VERSION || p[0] > BATTLE_REQUEST_VERSION_DRAG) ||
         msg_get16(p+14) != BATTLE_ENTRY_BYTES)
         return false;
     r->version = p[0];
@@ -106,7 +113,7 @@ bool battle_request_decode(const uint8_t *p, uint32_t length, BattleRequest *r) 
     r->type_count = p[13];
     r->battle_id = wire_get32(p+16);
     r->environment = p[20];
-    const bool struggle = r->version == BATTLE_REQUEST_VERSION_STRUGGLE;
+    const bool struggle = r->version >= BATTLE_REQUEST_VERSION_STRUGGLE;
     r->struggle_power = struggle ? p[21] : 0;
     r->struggle_accuracy = struggle ? p[22] : 0;
     r->struggle_recoil = struggle ? p[23] : 0;
@@ -123,7 +130,7 @@ bool battle_request_decode(const uint8_t *p, uint32_t length, BattleRequest *r) 
         const unsigned count = side ? r->opponent_count : r->player_count;
         for (unsigned i = 0; i < count; ++i, q += BATTLE_ENTRY_BYTES)
             if (!pkmn_record_decode(q, PKMN_RECORD_BYTES, &e[i].record) ||
-                !mon_decode(q + PKMN_RECORD_BYTES, &e[i].mon))
+                !mon_decode(q + PKMN_RECORD_BYTES, &e[i].mon, r->version >= BATTLE_REQUEST_VERSION_DRAG))
                 return false;
     }
     for (unsigned i = 0; i < (unsigned)r->type_count * r->type_count; ++i) r->type_chart[i] = q[i];
