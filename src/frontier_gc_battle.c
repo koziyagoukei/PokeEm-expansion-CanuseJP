@@ -10,6 +10,7 @@
 #include "global.h"
 #include "battle_main.h"
 #include "battle_setup.h"
+#include "config_changes.h"
 #include "data.h"
 #include "event_data.h"
 #include "main.h"
@@ -45,7 +46,7 @@ struct FrontierGcBattle
     u8 roster; // zero for the legacy app, otherwise the roster app version
     u8 rotation, target;
     BattleMultiState multiState;
-    u8 reserveMask;
+    u8 reserveMask, struggleMask;
     BattleMultiAction multiAction;
     u8 screen;
     u8 cursor;
@@ -65,6 +66,7 @@ static EWRAM_DATA u16 sPendingTrainer = 0;
 static EWRAM_DATA u8 sPendingFormat = 0;
 static EWRAM_DATA u8 sPendingRoster = 0;
 
+static const u8 sText_StruggleRules[] = _("{ENG}Unsupported Struggle rules.");
 static const u8 sText_NoMemory[] = _("{ENG}Not enough memory.");
 static const u8 sText_NoLead[] = _("{ENG}No able Pokemon with a supported move.");
 static const u8 sText_NoOpponent[] = _("{ENG}The trainer has no Pokemon.");
@@ -226,7 +228,14 @@ static bool8 BuildFixtureEntries(BattleRequest *request, const u8 **reason)
                 u16 hp = 1;
                 SetMonData(mon, MON_DATA_HP, &hp);
             }
-            if (FillEntry(GC_EXTRA_SLOT_BASE + index, &entries[i]) == 0)
+            const bool8 dry = sBattle->roster == BATTLE_APP_VERSION_STRUGGLE && side == 0 && i == 0;
+            if (dry)
+            {
+                u8 pp = 0;
+                for (u32 m = 0; m < MAX_MON_MOVES; m++)
+                    SetMonData(mon, MON_DATA_PP1 + m, &pp);
+            }
+            if (FillEntry(GC_EXTRA_SLOT_BASE + index, &entries[i]) == 0 && !dry)
             {
                 *reason = side ? sText_NoOpponentMoves : sText_NoMoves;
                 return FALSE;
@@ -286,6 +295,20 @@ static bool8 BuildRequest(const u8 **reason)
     request->opponent_count = sBattle->count;
     request->active_per_side = sBattle->fieldCount;
     request->version = sBattle->roster ? sBattle->roster : BATTLE_REQUEST_VERSION;
+    if (request->version == BATTLE_REQUEST_VERSION_STRUGGLE)
+    {
+        const u32 recoil = GetConfig(B_STRUGGLE_RECOIL);
+        const u32 power = GetMovePower(MOVE_STRUGGLE);
+        if (recoil < GEN_4 || GetMoveType(MOVE_STRUGGLE) != TYPE_MYSTERY || power == 0 || power > 255)
+        {
+            *reason = sText_StruggleRules;
+            Free(request);
+            return FALSE;
+        }
+        request->struggle_power = power;
+        request->struggle_accuracy = GetMoveAccuracy(MOVE_STRUGGLE);
+        request->struggle_recoil = recoil >= GEN_5 ? BSTRUGGLE_MAX_HP_NEAREST : BSTRUGGLE_MAX_HP_FLOOR;
+    }
     request->rules = RULE_IGNORE_ABILITIES | RULE_IGNORE_ITEMS | RULE_IGNORE_STATUS | RULE_NO_GIMMICKS
                    | RULE_NO_CRITICAL_HITS | RULE_SUPPORTED_MOVES_ONLY;
     request->trainer_id = sBattle->trainerId;
@@ -350,7 +373,7 @@ static u16 HandleMultiApp(u16 opcode, const u8 *args, u16 argLength, u8 *out, u1
     BattleMultiState state;
     BattleMultiAction action = sBattle->multiAction;
     u32 side, pos;
-    u8 mask = 0;
+    u8 mask = 0, struggle = 0;
     const bool8 roster = sBattle->roster != 0;
 
     switch (opcode)
@@ -360,10 +383,22 @@ static u16 HandleMultiApp(u16 opcode, const u8 *args, u16 argLength, u8 *out, u1
         if (roster)
         {
             BattleRosterState received;
-            if (opcode != BATTLE_OP_STATE_ROSTER || !battle_roster_state_decode(args, argLength, &received))
+            if (opcode != BATTLE_OP_STATE_ROSTER)
                 return APP_BAD_ARGS;
+            if (sBattle->roster == BATTLE_APP_VERSION_STRUGGLE)
+            {
+                if (!battle_struggle_state_decode(args, argLength, &received))
+                    return APP_BAD_ARGS;
+            }
+            else if (!battle_roster_state_decode(args, argLength, &received))
+            {
+                return APP_BAD_ARGS;
+            }
             state = received.field_state;
             mask = received.reserves;
+            struggle = received.struggle_mask;
+            if (struggle >= (1u << sBattle->fieldCount))
+                return APP_BAD_ARGS;
             if (mask >= (1u << sBattle->count)
              || (state.phase == BPHASE_REPLACE && (state.actor >= sBattle->fieldCount
                  || state.field[0][state.actor].party_slot != BATTLE_SLOT_NONE)))
@@ -386,6 +421,7 @@ static u16 HandleMultiApp(u16 opcode, const u8 *args, u16 argLength, u8 *out, u1
             }
         sBattle->multiState = state;
         sBattle->reserveMask = mask;
+        sBattle->struggleMask = struggle;
         sBattle->haveState = TRUE;
         sBattle->multiAction = (BattleMultiAction){.token = state.token, .actor = state.actor};
         sBattle->screen = state.phase == BPHASE_CHOOSE ? SCREEN_COMMAND
@@ -838,8 +874,10 @@ static void DrawMulti(u8 body, u8 help)
     if (sBattle->screen == SCREEN_COMMAND)
     {
         DrawPositions(body, 0, 3, pos, 7);
-        GcExtension_PrintLine(body, sText_Fight, 0, 4, GC_COLOR_HIGHLIGHT);
         static const u8 switchHint[] = _("{ENG}START: Party");
+        static const u8 struggleText[] = _("{ENG}Struggle");
+        GcExtension_PrintLine(body, sBattle->struggleMask & (1u << pos) ? struggleText : sText_Fight,
+                              0, 4, GC_COLOR_HIGHLIGHT);
         GcExtension_PrintLine(help, rotation ? sText_RotateHelp
                             : state->flags & BATTLE_MULTI_SHIFT ? sText_ShiftHelp : sText_HelpCommand,
                               0, 0, GC_COLOR_NORMAL);
@@ -877,7 +915,7 @@ static void QueueMultiAction(u8 kind, u8 target)
     sBattle->multiAction.action = kind;
     sBattle->multiAction.move_slot = kind == BACTION_MOVE ? sBattle->cursor : 0;
     sBattle->multiAction.target = target;
-    sBattle->multiAction.rotation = kind == BACTION_MOVE ? sBattle->rotation : BROT_KEEP;
+    sBattle->multiAction.rotation = kind == BACTION_MOVE || kind == BACTION_STRUGGLE ? sBattle->rotation : BROT_KEEP;
     sBattle->screen = SCREEN_WAIT;
 }
 
@@ -895,7 +933,7 @@ static void InputMulti(void)
             const u8 next = left ? BROT_LEFT : BROT_RIGHT;
             const u8 rotation = sBattle->rotation == next ? BROT_KEEP : next;
             const u8 slot = rotation == BROT_KEEP ? BPOS_CENTER : left ? BPOS_LEFT : BPOS_RIGHT;
-            if (!AvailableMoves(slot))
+            if (!AvailableMoves(slot) && !(sBattle->struggleMask & (1u << slot)))
             {
                 PlaySE(SE_FAILURE);
                 return;
@@ -911,6 +949,8 @@ static void InputMulti(void)
             QueueMultiAction(BACTION_SHIFT, 0);
         else if (JOY_NEW(B_BUTTON))
             QueueMultiAction(BACTION_FORFEIT, 0);
+        else if (JOY_NEW(A_BUTTON) && (sBattle->struggleMask & (1u << pos)))
+            QueueMultiAction(BACTION_STRUGGLE, 0);
         else if (JOY_NEW(A_BUTTON) && mask)
         {
             sBattle->cursor = FirstChoice(mask);
@@ -1010,7 +1050,7 @@ static const struct GcModeHandler sFrontierGcBattleMode =
 
 // Script special (waitstate): VAR_0x8004 = result policy (0 show, 1 apply
 // HP/PP), VAR_0x8005 = trainer id. VAR_0x8006 is the format (0 for
-// Single), with bit 8 selecting the replacement fixture or bit 9 switching.
+// Single). Bits 8 through 10 select the replacement, switch and Struggle fixtures.
 static EWRAM_DATA struct GcModeHandler sFrontierGcRosterMode = {0};
 
 void FrontierGcBattle_Start(void)
@@ -1022,7 +1062,9 @@ void FrontierGcBattle_Start(void)
     sPendingRoster = 0;
     if (format == BATTLE_FORMAT_DOUBLE)
     {
-        if (gSpecialVar_0x8006 & 0x200)
+        if (gSpecialVar_0x8006 & 0x400)
+            sPendingRoster = BATTLE_APP_VERSION_STRUGGLE;
+        else if (gSpecialVar_0x8006 & 0x200)
             sPendingRoster = BATTLE_APP_VERSION_SWITCH;
         else if (gSpecialVar_0x8006 & 0x100)
             sPendingRoster = BATTLE_APP_VERSION_ROSTER;

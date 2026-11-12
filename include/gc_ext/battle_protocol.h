@@ -20,6 +20,7 @@ extern "C" {
 #define BATTLE_APP_VERSION 1
 #define BATTLE_APP_VERSION_ROSTER 2
 #define BATTLE_APP_VERSION_SWITCH 3
+#define BATTLE_APP_VERSION_STRUGGLE 4
 #define BATTLE_MODE_VERSION 1
 
 enum BattleFormat { BATTLE_FORMAT_SINGLE = 1, BATTLE_FORMAT_DOUBLE = 2, BATTLE_FORMAT_TRIPLE = 3, BATTLE_FORMAT_ROTATION = 4 };
@@ -94,7 +95,10 @@ typedef struct {
 #define BATTLE_REQUEST_VERSION 1
 #define BATTLE_REQUEST_VERSION_ROSTER 2
 #define BATTLE_REQUEST_VERSION_SWITCH 3
+#define BATTLE_REQUEST_VERSION_STRUGGLE 4
 #define BATTLE_REQUEST_HEADER 24
+enum StruggleRecoil { BSTRUGGLE_MAX_HP_FLOOR = 1, BSTRUGGLE_MAX_HP_NEAREST = 2 };
+#define BATTLE_MOVE_STRUGGLE 0xffffu  // logical presentation identifier
 typedef struct {
     uint8_t format, battle_type, player_count, opponent_count, active_per_side;
     uint16_t rules, trainer_id;
@@ -102,6 +106,7 @@ typedef struct {
     uint32_t battle_id;
     uint8_t environment;
     uint8_t version; // zero in callers constructing a legacy V1 request
+    uint8_t struggle_power, struggle_accuracy, struggle_recoil; // V4 header bytes 21..23
     BattleEntry player[BATTLE_MAX_PER_SIDE], opponent[BATTLE_MAX_PER_SIDE];
     uint8_t type_chart[BATTLE_MAX_TYPES * BATTLE_MAX_TYPES];
 } BattleRequest;
@@ -158,7 +163,7 @@ typedef struct {
 
 // BattleAction, 4 bytes: u8 turn, u8 action, u8 move slot, u8 flags.
 // The turn echoes the CHOOSE state it answers, so stale input is ignored.
-enum BattleActionKind { BACTION_NONE = 0, BACTION_MOVE = 1, BACTION_FORFEIT = 2, BACTION_SHIFT = 3, BACTION_REPLACE = 4, BACTION_SWITCH = 5 };
+enum BattleActionKind { BACTION_NONE = 0, BACTION_MOVE = 1, BACTION_FORFEIT = 2, BACTION_SHIFT = 3, BACTION_REPLACE = 4, BACTION_SWITCH = 5, BACTION_STRUGGLE = 6 };
 #define BACTION_FLAG_EXIT (1u << 0)
 #define BATTLE_ACTION_BYTES 4
 typedef struct {
@@ -201,7 +206,7 @@ bool battle_multi_action_decode(const uint8_t *in, unsigned length, BattleMultiA
 // player's roster in request order. Empty field/roster entries use 0xff.
 typedef struct {
     BattleMultiState field_state;
-    uint8_t reserves;
+    uint8_t reserves, struggle_mask;
     BattleFieldMon player[BATTLE_MAX_PER_SIDE];
 } BattleRosterState;
 #define BATTLE_ROSTER_STATE_BYTES (BATTLE_MULTI_STATE_BYTES + 1 + 5 * BATTLE_MAX_PER_SIDE)
@@ -212,6 +217,12 @@ bool battle_roster_state_decode(const uint8_t *in, unsigned length, BattleRoster
 bool battle_roster_action_decode(const uint8_t *in, unsigned length, BattleMultiAction *action);
 // V3 permits SWITCH and supplies a reserve mask during CHOOSE.
 bool battle_switch_action_decode(const uint8_t *in, unsigned length, BattleMultiAction *action);
+
+// V4 appends the mask of field positions allowed to use Struggle.
+#define BATTLE_STRUGGLE_STATE_BYTES (BATTLE_ROSTER_STATE_BYTES + 1)
+unsigned battle_struggle_state_encode(const BattleRosterState *state, uint8_t *out);
+bool battle_struggle_state_decode(const uint8_t *in, unsigned length, BattleRosterState *state);
+bool battle_struggle_action_decode(const uint8_t *in, unsigned length, BattleMultiAction *action);
 
 // GcBattleResultV1 (RESULT payload, result version 1).
 //   0 u8 outcome   1 u8 turns   2 u8 player count P   3 u8 opponent count O

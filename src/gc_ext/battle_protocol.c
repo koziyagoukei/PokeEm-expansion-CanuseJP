@@ -50,7 +50,7 @@ uint32_t battle_request_size(const BattleRequest *r) {
 uint32_t battle_request_encode(const BattleRequest *r, uint8_t *p, uint32_t capacity) {
     const uint32_t size = battle_request_size(r);
     const uint8_t version = r->version ? r->version : BATTLE_REQUEST_VERSION;
-    if ((version < BATTLE_REQUEST_VERSION || version > BATTLE_REQUEST_VERSION_SWITCH) ||
+    if ((version < BATTLE_REQUEST_VERSION || version > BATTLE_REQUEST_VERSION_STRUGGLE) ||
         size > capacity || r->player_count > BATTLE_MAX_PER_SIDE || r->opponent_count > BATTLE_MAX_PER_SIDE ||
         r->type_count > BATTLE_MAX_TYPES)
         return 0;
@@ -69,6 +69,11 @@ uint32_t battle_request_encode(const BattleRequest *r, uint8_t *p, uint32_t capa
     msg_put16(p+14, BATTLE_ENTRY_BYTES);
     wire_put32(p+16, r->battle_id);
     wire_put32(p+20, r->environment);
+    if (version == BATTLE_REQUEST_VERSION_STRUGGLE) {
+        p[21] = r->struggle_power;
+        p[22] = r->struggle_accuracy;
+        p[23] = r->struggle_recoil;
+    }
     uint8_t *q = p + BATTLE_REQUEST_HEADER;
     for (unsigned side = 0; side < 2; ++side) {
         const BattleEntry *e = side ? r->opponent : r->player;
@@ -84,7 +89,7 @@ uint32_t battle_request_encode(const BattleRequest *r, uint8_t *p, uint32_t capa
 
 bool battle_request_decode(const uint8_t *p, uint32_t length, BattleRequest *r) {
     if (length < BATTLE_REQUEST_HEADER ||
-        (p[0] < BATTLE_REQUEST_VERSION || p[0] > BATTLE_REQUEST_VERSION_SWITCH) ||
+        (p[0] < BATTLE_REQUEST_VERSION || p[0] > BATTLE_REQUEST_VERSION_STRUGGLE) ||
         msg_get16(p+14) != BATTLE_ENTRY_BYTES)
         return false;
     r->version = p[0];
@@ -101,6 +106,13 @@ bool battle_request_decode(const uint8_t *p, uint32_t length, BattleRequest *r) 
     r->type_count = p[13];
     r->battle_id = wire_get32(p+16);
     r->environment = p[20];
+    const bool struggle = r->version == BATTLE_REQUEST_VERSION_STRUGGLE;
+    r->struggle_power = struggle ? p[21] : 0;
+    r->struggle_accuracy = struggle ? p[22] : 0;
+    r->struggle_recoil = struggle ? p[23] : 0;
+    if (struggle && (!r->struggle_power || r->struggle_accuracy > 100 ||
+        (r->struggle_recoil != BSTRUGGLE_MAX_HP_FLOOR && r->struggle_recoil != BSTRUGGLE_MAX_HP_NEAREST)))
+        return false;
     if (!r->player_count || !r->opponent_count || r->player_count > BATTLE_MAX_PER_SIDE ||
         r->opponent_count > BATTLE_MAX_PER_SIDE || !r->type_count || r->type_count > BATTLE_MAX_TYPES ||
         length != battle_request_size(r))
@@ -235,6 +247,7 @@ bool battle_roster_state_decode(const uint8_t *p, unsigned n, BattleRosterState 
         !decode_multi_state(p, BATTLE_MULTI_STATE_BYTES, &s->field_state, BPHASE_REPLACE))
         return false;
     const uint8_t *q = p + BATTLE_MULTI_STATE_BYTES;
+    s->struggle_mask = 0;
     s->reserves = *q++;
     if (s->reserves >= (1u << BATTLE_MAX_PER_SIDE) ||
         (s->field_state.phase == BPHASE_REPLACE && !s->reserves))
@@ -266,6 +279,8 @@ static bool decode_multi_action(const uint8_t *p, unsigned n, BattleMultiAction 
         return false;
     if (p[3] == BACTION_REPLACE || p[3] == BACTION_SWITCH) {
         if (p[5] >= BATTLE_MAX_PER_SIDE || p[4] || p[6]) return false;
+    } else if (p[3] == BACTION_STRUGGLE) {
+        if (p[4] || p[5]) return false;
     } else if (p[5] >= BATTLE_FIELD_SLOTS) {
         return false;
     }
@@ -289,6 +304,23 @@ bool battle_roster_action_decode(const uint8_t *p, unsigned n, BattleMultiAction
 
 bool battle_switch_action_decode(const uint8_t *p, unsigned n, BattleMultiAction *a) {
     return decode_multi_action(p, n, a, BACTION_SWITCH);
+}
+
+unsigned battle_struggle_state_encode(const BattleRosterState *s, uint8_t *p) {
+    p[battle_roster_state_encode(s, p)] = s->struggle_mask;
+    return BATTLE_STRUGGLE_STATE_BYTES;
+}
+
+bool battle_struggle_state_decode(const uint8_t *p, unsigned n, BattleRosterState *s) {
+    if (n != BATTLE_STRUGGLE_STATE_BYTES || p[BATTLE_ROSTER_STATE_BYTES] >= (1u << BATTLE_FIELD_SLOTS) ||
+        !battle_roster_state_decode(p, BATTLE_ROSTER_STATE_BYTES, s))
+        return false;
+    s->struggle_mask = p[BATTLE_ROSTER_STATE_BYTES];
+    return true;
+}
+
+bool battle_struggle_action_decode(const uint8_t *p, unsigned n, BattleMultiAction *a) {
+    return decode_multi_action(p, n, a, BACTION_STRUGGLE);
 }
 
 unsigned battle_result_encode(const BattleResult *r, uint8_t *p) {
