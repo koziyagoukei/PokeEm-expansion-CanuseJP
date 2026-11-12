@@ -18,6 +18,7 @@ extern "C" {
 
 #define APP_GC_BATTLE 0x4247      // bytes 'G','B'
 #define BATTLE_APP_VERSION 1
+#define BATTLE_APP_VERSION_ROSTER 2
 #define BATTLE_MODE_VERSION 1
 
 enum BattleFormat { BATTLE_FORMAT_SINGLE = 1, BATTLE_FORMAT_DOUBLE = 2, BATTLE_FORMAT_TRIPLE = 3, BATTLE_FORMAT_ROTATION = 4 };
@@ -90,6 +91,7 @@ typedef struct {
 //  24 entries: player entries, then opponent entries (PokemonRecordV1 + BattleMonV1)
 //  .. type chart: N*N u8, [attack type][defend type], multiplier in quarters (0,2,4,8)
 #define BATTLE_REQUEST_VERSION 1
+#define BATTLE_REQUEST_VERSION_ROSTER 2
 #define BATTLE_REQUEST_HEADER 24
 typedef struct {
     uint8_t format, battle_type, player_count, opponent_count, active_per_side;
@@ -97,6 +99,7 @@ typedef struct {
     uint8_t trainer_class, reward_mode, result_policy, type_count;
     uint32_t battle_id;
     uint8_t environment;
+    uint8_t version; // zero in callers constructing a legacy V1 request
     BattleEntry player[BATTLE_MAX_PER_SIDE], opponent[BATTLE_MAX_PER_SIDE];
     uint8_t type_chart[BATTLE_MAX_TYPES * BATTLE_MAX_TYPES];
 } BattleRequest;
@@ -135,13 +138,15 @@ enum BattleOp {
     BATTLE_OP_ACTION = 2,  // host polls the GBA: reply BattleAction
     BATTLE_OP_STATE_MULTI = 3,
     BATTLE_OP_ACTION_MULTI = 4,
+    BATTLE_OP_STATE_ROSTER = 5,
+    BATTLE_OP_ACTION_ROSTER = 6,
 };
 
 // BattleState, 16 bytes.
 //   0 u8 phase   1 u8 turn   2 u8 outcome (when ENDED)  3 u8 player slot
 //   4 u16 player hp   6 u16 player max hp   8 u16 opponent hp   10 u16 opponent max hp
 //  12 u8 pp[4] of the active player battler
-enum BattlePhase { BPHASE_WAIT = 1, BPHASE_CHOOSE = 2, BPHASE_ENDED = 3 };
+enum BattlePhase { BPHASE_WAIT = 1, BPHASE_CHOOSE = 2, BPHASE_ENDED = 3, BPHASE_REPLACE = 4 };
 #define BATTLE_STATE_BYTES 16
 typedef struct {
     uint8_t phase, turn, outcome, player_slot;
@@ -151,7 +156,7 @@ typedef struct {
 
 // BattleAction, 4 bytes: u8 turn, u8 action, u8 move slot, u8 flags.
 // The turn echoes the CHOOSE state it answers, so stale input is ignored.
-enum BattleActionKind { BACTION_NONE = 0, BACTION_MOVE = 1, BACTION_FORFEIT = 2, BACTION_SHIFT = 3 };
+enum BattleActionKind { BACTION_NONE = 0, BACTION_MOVE = 1, BACTION_FORFEIT = 2, BACTION_SHIFT = 3, BACTION_REPLACE = 4 };
 #define BACTION_FLAG_EXIT (1u << 0)
 #define BATTLE_ACTION_BYTES 4
 typedef struct {
@@ -189,6 +194,20 @@ unsigned battle_multi_state_encode(const BattleMultiState *state, uint8_t *out);
 bool battle_multi_state_decode(const uint8_t *in, unsigned length, BattleMultiState *state);
 unsigned battle_multi_action_encode(const BattleMultiAction *action, uint8_t *out);
 bool battle_multi_action_decode(const uint8_t *in, unsigned length, BattleMultiAction *action);
+
+// Roster app V2 extends the multi state with a reserve mask and the
+// player's roster in request order. Empty field/roster entries use 0xff.
+typedef struct {
+    BattleMultiState field_state;
+    uint8_t reserves;
+    BattleFieldMon player[BATTLE_MAX_PER_SIDE];
+} BattleRosterState;
+#define BATTLE_ROSTER_STATE_BYTES (BATTLE_MULTI_STATE_BYTES + 1 + 5 * BATTLE_MAX_PER_SIDE)
+
+unsigned battle_roster_state_encode(const BattleRosterState *state, uint8_t *out);
+bool battle_roster_state_decode(const uint8_t *in, unsigned length, BattleRosterState *state);
+// Same layout as multi action. REPLACE uses target as a roster index.
+bool battle_roster_action_decode(const uint8_t *in, unsigned length, BattleMultiAction *action);
 
 // GcBattleResultV1 (RESULT payload, result version 1).
 //   0 u8 outcome   1 u8 turns   2 u8 player count P   3 u8 opponent count O

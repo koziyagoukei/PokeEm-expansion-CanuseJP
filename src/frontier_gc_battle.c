@@ -26,9 +26,9 @@
 #include "gc_ext/battle_protocol.h"
 #include "frontier_gc_battle.h"
 
-#define REQUEST_CAPACITY (BATTLE_REQUEST_HEADER + 2 * BATTLE_FIELD_SLOTS * BATTLE_ENTRY_BYTES + NUMBER_OF_MON_TYPES * NUMBER_OF_MON_TYPES)
+#define REQUEST_CAPACITY (BATTLE_REQUEST_HEADER + PARTY_SIZE * BATTLE_ENTRY_BYTES + NUMBER_OF_MON_TYPES * NUMBER_OF_MON_TYPES)
 
-enum GbaScreen { SCREEN_PREPARE, SCREEN_COMMAND, SCREEN_MOVES, SCREEN_TARGET, SCREEN_WAIT, SCREEN_ENDED };
+enum GbaScreen { SCREEN_PREPARE, SCREEN_COMMAND, SCREEN_MOVES, SCREEN_TARGET, SCREEN_REPLACE, SCREEN_WAIT, SCREEN_ENDED };
 
 struct FrontierGcBattle
 {
@@ -41,9 +41,11 @@ struct FrontierGcBattle
     u8 environment;
     u8 leadSlot;
     u8 policy;
-    u8 format, count;
+    u8 format, count, fieldCount;
+    bool8 roster;
     u8 rotation, target;
     BattleMultiState multiState;
+    u8 reserveMask;
     BattleMultiAction multiAction;
     u8 screen;
     u8 cursor;
@@ -61,6 +63,7 @@ static EWRAM_DATA struct FrontierGcBattle *sBattle = NULL;
 static EWRAM_DATA u8 sPendingPolicy = 0;
 static EWRAM_DATA u16 sPendingTrainer = 0;
 static EWRAM_DATA u8 sPendingFormat = 0;
+static EWRAM_DATA bool8 sPendingRoster = FALSE;
 
 static const u8 sText_NoMemory[] = _("{ENG}Not enough memory.");
 static const u8 sText_NoLead[] = _("{ENG}No able Pokemon with a supported move.");
@@ -218,6 +221,11 @@ static bool8 BuildFixtureEntries(BattleRequest *request, const u8 **reason)
             SetMonMoveSlot(mon, fixture->move2, 1);
             SetMonMoveSlot(mon, MOVE_NONE, 2);
             SetMonMoveSlot(mon, MOVE_NONE, 3);
+            if (sBattle->roster && side == 0 && i == 0)
+            {
+                u16 hp = 1;
+                SetMonData(mon, MON_DATA_HP, &hp);
+            }
             if (FillEntry(GC_EXTRA_SLOT_BASE + index, &entries[i]) == 0)
             {
                 *reason = side ? sText_NoOpponentMoves : sText_NoMoves;
@@ -276,7 +284,8 @@ static bool8 BuildRequest(const u8 **reason)
     request->battle_type = BTYPE_TRAINER;
     request->player_count = sBattle->count;
     request->opponent_count = sBattle->count;
-    request->active_per_side = sBattle->count;
+    request->active_per_side = sBattle->fieldCount;
+    request->version = sBattle->roster ? BATTLE_REQUEST_VERSION_ROSTER : BATTLE_REQUEST_VERSION;
     request->rules = RULE_IGNORE_ABILITIES | RULE_IGNORE_ITEMS | RULE_IGNORE_STATUS | RULE_NO_GIMMICKS
                    | RULE_NO_CRITICAL_HITS | RULE_SUPPORTED_MOVES_ONLY;
     request->trainer_id = sBattle->trainerId;
@@ -317,7 +326,9 @@ static bool8 Init(const u8 **reason)
         return FALSE;
     }
     sBattle->format = sPendingFormat;
-    sBattle->count = sPendingFormat == BATTLE_FORMAT_SINGLE ? 1 : sPendingFormat == BATTLE_FORMAT_DOUBLE ? 2 : 3;
+    sBattle->fieldCount = sPendingFormat == BATTLE_FORMAT_SINGLE ? 1 : sPendingFormat == BATTLE_FORMAT_DOUBLE ? 2 : 3;
+    sBattle->roster = sPendingRoster;
+    sBattle->count = sBattle->roster ? 3 : sBattle->fieldCount;
     sBattle->policy = sPendingFormat == BATTLE_FORMAT_SINGLE ? sPendingPolicy : RESULT_POLICY_DISPLAY_ONLY;
     sBattle->trainerId = sPendingTrainer;
     sBattle->environment = BattleSetup_GetEnvironmentId();
@@ -339,35 +350,59 @@ static u16 HandleMultiApp(u16 opcode, const u8 *args, u16 argLength, u8 *out, u1
     BattleMultiState state;
     BattleMultiAction action = sBattle->multiAction;
     u32 side, pos;
+    u8 mask = 0;
+    const bool8 roster = sBattle->roster;
 
     switch (opcode)
     {
+    case BATTLE_OP_STATE_ROSTER:
     case BATTLE_OP_STATE_MULTI:
-        if (!battle_multi_state_decode(args, argLength, &state))
+        if (roster)
+        {
+            BattleRosterState received;
+            if (opcode != BATTLE_OP_STATE_ROSTER || !battle_roster_state_decode(args, argLength, &received))
+                return APP_BAD_ARGS;
+            state = received.field_state;
+            mask = received.reserves;
+            if (mask >= (1u << sBattle->count)
+             || (state.phase == BPHASE_REPLACE && (state.actor >= sBattle->fieldCount
+                 || state.field[0][state.actor].party_slot != BATTLE_SLOT_NONE)))
+                return APP_BAD_ARGS;
+            for (pos = 0; pos < BATTLE_MAX_PER_SIDE; pos++)
+                if (received.player[pos].party_slot != (pos < sBattle->count ? GC_EXTRA_SLOT_BASE + pos : BATTLE_SLOT_NONE))
+                    return APP_BAD_ARGS;
+        }
+        else if (opcode != BATTLE_OP_STATE_MULTI || !battle_multi_state_decode(args, argLength, &state))
             return APP_BAD_ARGS;
         for (side = 0; side < 2; side++)
             for (pos = 0; pos < BATTLE_FIELD_SLOTS; pos++)
             {
                 u8 slot = state.field[side][pos].party_slot;
-                if (slot == BATTLE_SLOT_NONE && (pos >= sBattle->count || state.outcome == OUTCOME_UNSUPPORTED))
+                if (slot == BATTLE_SLOT_NONE && (roster || pos >= sBattle->fieldCount || state.outcome == OUTCOME_UNSUPPORTED))
                     continue;
                 if (slot < GC_EXTRA_SLOT_BASE + side * sBattle->count
                  || slot >= GC_EXTRA_SLOT_BASE + (side + 1) * sBattle->count)
                     return APP_BAD_ARGS;
             }
         sBattle->multiState = state;
+        sBattle->reserveMask = mask;
         sBattle->haveState = TRUE;
         sBattle->multiAction = (BattleMultiAction){.token = state.token, .actor = state.actor};
         sBattle->screen = state.phase == BPHASE_CHOOSE ? SCREEN_COMMAND
-                        : state.phase == BPHASE_ENDED ? SCREEN_ENDED : SCREEN_WAIT;
+                        : state.phase == BPHASE_ENDED ? SCREEN_ENDED
+                        : state.phase == BPHASE_REPLACE ? SCREEN_REPLACE : SCREEN_WAIT;
         sBattle->cursor = 0;
+        if (mask)
+            while (!(mask & (1u << sBattle->cursor)))
+                sBattle->cursor++;
         sBattle->rotation = BROT_KEEP;
         if (sBattle->format == BATTLE_FORMAT_ROTATION && state.phase == BPHASE_CHOOSE && !state.field[0][BPOS_CENTER].hp)
             sBattle->rotation = state.field[0][BPOS_LEFT].hp ? BROT_LEFT : BROT_RIGHT;
         GcExtension_Redraw();
         return APP_OK;
+    case BATTLE_OP_ACTION_ROSTER:
     case BATTLE_OP_ACTION_MULTI:
-        if (argLength != 0)
+        if (argLength != 0 || (opcode == BATTLE_OP_ACTION_ROSTER) != roster)
             return APP_BAD_ARGS;
         if (GcExtension_IsExitRequested())
             action.flags |= BACTION_FLAG_EXIT;
@@ -566,6 +601,7 @@ static void DrawSingle(u8 body, u8 help)
         GcExtension_PrintLine(help, sText_HelpMoves, 0, 0, GC_COLOR_NORMAL);
         break;
     case SCREEN_TARGET:
+    case SCREEN_REPLACE:
     case SCREEN_WAIT:
         GcExtension_PrintLine(body, sText_Wait, 0, 3, GC_COLOR_DIM);
         break;
@@ -720,7 +756,7 @@ static void DrawPositions(u8 body, u8 side, u8 row, u8 selected, u8 legal)
 {
     const BattleMultiState *state = &sBattle->multiState;
     u8 slot, text[32];
-    for (slot = 0; slot < sBattle->count; slot++)
+    for (slot = 0; slot < sBattle->fieldCount; slot++)
     {
         const BattleFieldMon *mon = &state->field[side][slot];
         u8 color = !(legal & (1 << slot)) || !mon->hp ? GC_COLOR_DIM
@@ -752,6 +788,28 @@ static void DrawMulti(u8 body, u8 help)
     }
     DrawPositions(body, 1, 0, sBattle->screen == SCREEN_TARGET ? sBattle->target : BATTLE_SLOT_NONE,
                   sBattle->screen == SCREEN_TARGET ? state->targets[pos][sBattle->cursor] : 7);
+    if (sBattle->screen == SCREEN_REPLACE)
+    {
+        static const u8 choose[] = _("{ENG}Choose a reserve for ");
+        static const u8 helpText[] = _("{ENG}A: Send out   B: Forfeit");
+        StringCopy(text, choose);
+        StringAppend(text, PositionName(state->actor));
+        GcExtension_PrintLine(body, text, 0, 1, GC_COLOR_HIGHLIGHT);
+        u8 row = 2;
+        for (i = 0; i < sBattle->count; i++)
+        {
+            if (!(sBattle->reserveMask & (1u << i)))
+                continue;
+            u8 color = i == sBattle->cursor ? GC_COLOR_HIGHLIGHT : GC_COLOR_NORMAL;
+            if (i == sBattle->cursor)
+                GcExtension_PrintLine(body, sText_Cursor, 0, row, color);
+            text[0] = EOS;
+            AppendMonLine(text, GcExtension_GetExportMon(GC_EXTRA_SLOT_BASE + i));
+            GcExtension_PrintLine(body, text, 12, row++, color);
+        }
+        GcExtension_PrintLine(help, helpText, 0, 0, GC_COLOR_NORMAL);
+        return;
+    }
     if (sBattle->screen == SCREEN_ENDED)
     {
         const u8 *result = state->outcome == OUTCOME_WIN ? sText_Win : state->outcome == OUTCOME_LOSE ? sText_Lose
@@ -810,7 +868,7 @@ static void DrawMulti(u8 body, u8 help)
 static void QueueMultiAction(u8 kind, u8 target)
 {
     sBattle->multiAction.action = kind;
-    sBattle->multiAction.move_slot = sBattle->cursor;
+    sBattle->multiAction.move_slot = kind == BACTION_MOVE ? sBattle->cursor : 0;
     sBattle->multiAction.target = target;
     sBattle->multiAction.rotation = kind == BACTION_MOVE ? sBattle->rotation : BROT_KEEP;
     sBattle->screen = SCREEN_WAIT;
@@ -869,11 +927,21 @@ static void InputMulti(void)
     case SCREEN_TARGET:
         if (JOY_REPEAT(DPAD_LEFT) || JOY_REPEAT(DPAD_RIGHT))
             sBattle->target = ChoiceAfter(state->targets[pos][sBattle->cursor] & 7,
-                                         sBattle->target, sBattle->count, JOY_REPEAT(DPAD_LEFT));
+                                         sBattle->target, sBattle->fieldCount, JOY_REPEAT(DPAD_LEFT));
         else if (JOY_NEW(B_BUTTON))
             sBattle->screen = SCREEN_MOVES;
         else if (JOY_NEW(A_BUTTON))
             QueueMultiAction(BACTION_MOVE, sBattle->target);
+        else
+            return;
+        break;
+    case SCREEN_REPLACE:
+        if (JOY_REPEAT(DPAD_UP) || JOY_REPEAT(DPAD_DOWN))
+            sBattle->cursor = ChoiceAfter(sBattle->reserveMask, sBattle->cursor, sBattle->count, JOY_REPEAT(DPAD_UP));
+        else if (JOY_NEW(A_BUTTON))
+            QueueMultiAction(BACTION_REPLACE, sBattle->cursor);
+        else if (JOY_NEW(B_BUTTON))
+            QueueMultiAction(BACTION_FORFEIT, 0);
         else
             return;
         break;
@@ -923,12 +991,25 @@ static const struct GcModeHandler sFrontierGcBattleMode =
 };
 
 // Script special (waitstate): VAR_0x8004 = result policy (0 show, 1 apply
-// HP/PP), VAR_0x8005 = trainer id, VAR_0x8006 = multi-format or 0 for Single.
+// HP/PP), VAR_0x8005 = trainer id. VAR_0x8006 is the format (0 for
+// Single), with bit 8 selecting the Double roster fixture.
+static EWRAM_DATA struct GcModeHandler sFrontierGcRosterMode = {0};
+
 void FrontierGcBattle_Start(void)
 {
+    u8 format = gSpecialVar_0x8006 & 0xff;
     sPendingPolicy = gSpecialVar_0x8004 == RESULT_POLICY_APPLY_HP_PP ? RESULT_POLICY_APPLY_HP_PP : RESULT_POLICY_DISPLAY_ONLY;
     sPendingTrainer = gSpecialVar_0x8005;
-    sPendingFormat = gSpecialVar_0x8006 >= BATTLE_FORMAT_DOUBLE && gSpecialVar_0x8006 <= BATTLE_FORMAT_ROTATION
-                   ? gSpecialVar_0x8006 : BATTLE_FORMAT_SINGLE;
-    GcStartMode(&sFrontierGcBattleMode);
+    sPendingFormat = format >= BATTLE_FORMAT_DOUBLE && format <= BATTLE_FORMAT_ROTATION ? format : BATTLE_FORMAT_SINGLE;
+    sPendingRoster = format == BATTLE_FORMAT_DOUBLE && (gSpecialVar_0x8006 & 0x100) != 0;
+    if (sPendingRoster)
+    {
+        sFrontierGcRosterMode = sFrontierGcBattleMode;
+        sFrontierGcRosterMode.appVersion = BATTLE_APP_VERSION_ROSTER;
+        GcStartMode(&sFrontierGcRosterMode);
+    }
+    else
+    {
+        GcStartMode(&sFrontierGcBattleMode);
+    }
 }

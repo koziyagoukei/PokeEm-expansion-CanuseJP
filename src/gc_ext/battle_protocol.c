@@ -49,10 +49,12 @@ uint32_t battle_request_size(const BattleRequest *r) {
 
 uint32_t battle_request_encode(const BattleRequest *r, uint8_t *p, uint32_t capacity) {
     const uint32_t size = battle_request_size(r);
-    if (size > capacity || r->player_count > BATTLE_MAX_PER_SIDE || r->opponent_count > BATTLE_MAX_PER_SIDE ||
+    const uint8_t version = r->version ? r->version : BATTLE_REQUEST_VERSION;
+    if ((version != BATTLE_REQUEST_VERSION && version != BATTLE_REQUEST_VERSION_ROSTER) ||
+        size > capacity || r->player_count > BATTLE_MAX_PER_SIDE || r->opponent_count > BATTLE_MAX_PER_SIDE ||
         r->type_count > BATTLE_MAX_TYPES)
         return 0;
-    p[0] = BATTLE_REQUEST_VERSION;
+    p[0] = version;
     p[1] = r->format;
     p[2] = r->battle_type;
     p[3] = r->player_count;
@@ -81,8 +83,11 @@ uint32_t battle_request_encode(const BattleRequest *r, uint8_t *p, uint32_t capa
 }
 
 bool battle_request_decode(const uint8_t *p, uint32_t length, BattleRequest *r) {
-    if (length < BATTLE_REQUEST_HEADER || p[0] != BATTLE_REQUEST_VERSION || msg_get16(p+14) != BATTLE_ENTRY_BYTES)
+    if (length < BATTLE_REQUEST_HEADER ||
+        (p[0] != BATTLE_REQUEST_VERSION && p[0] != BATTLE_REQUEST_VERSION_ROSTER) ||
+        msg_get16(p+14) != BATTLE_ENTRY_BYTES)
         return false;
+    r->version = p[0];
     r->format = p[1];
     r->battle_type = p[2];
     r->player_count = p[3];
@@ -180,10 +185,11 @@ unsigned battle_multi_state_encode(const BattleMultiState *s, uint8_t *p) {
     return BATTLE_MULTI_STATE_BYTES;
 }
 
-bool battle_multi_state_decode(const uint8_t *p, unsigned n, BattleMultiState *s) {
-    if (n != BATTLE_MULTI_STATE_BYTES || p[0] < BPHASE_WAIT || p[0] > BPHASE_ENDED ||
+static bool decode_multi_state(const uint8_t *p, unsigned n, BattleMultiState *s, uint8_t max_phase) {
+    if (n != BATTLE_MULTI_STATE_BYTES || p[0] < BPHASE_WAIT || p[0] > max_phase ||
         p[2] > OUTCOME_UNSUPPORTED || p[3] >= BATTLE_FIELD_SLOTS ||
-        (p[4] & ~BATTLE_MULTI_SHIFT) || (p[0] == BPHASE_CHOOSE && !msg_get16(p+5)))
+        (p[4] & ~BATTLE_MULTI_SHIFT) ||
+        ((p[0] == BPHASE_CHOOSE || p[0] == BPHASE_REPLACE) && !msg_get16(p+5)))
         return false;
     s->phase = p[0];
     s->turn = p[1];
@@ -209,6 +215,39 @@ bool battle_multi_state_decode(const uint8_t *p, unsigned n, BattleMultiState *s
     return true;
 }
 
+bool battle_multi_state_decode(const uint8_t *p, unsigned n, BattleMultiState *s) {
+    return decode_multi_state(p, n, s, BPHASE_ENDED);
+}
+
+unsigned battle_roster_state_encode(const BattleRosterState *s, uint8_t *p) {
+    uint8_t *q = p + battle_multi_state_encode(&s->field_state, p);
+    *q++ = s->reserves;
+    for (unsigned i = 0; i < BATTLE_MAX_PER_SIDE; ++i, q += 5) {
+        q[0] = s->player[i].party_slot;
+        msg_put16(q+1, s->player[i].hp);
+        msg_put16(q+3, s->player[i].max_hp);
+    }
+    return BATTLE_ROSTER_STATE_BYTES;
+}
+
+bool battle_roster_state_decode(const uint8_t *p, unsigned n, BattleRosterState *s) {
+    if (n != BATTLE_ROSTER_STATE_BYTES ||
+        !decode_multi_state(p, BATTLE_MULTI_STATE_BYTES, &s->field_state, BPHASE_REPLACE))
+        return false;
+    const uint8_t *q = p + BATTLE_MULTI_STATE_BYTES;
+    s->reserves = *q++;
+    if (s->reserves >= (1u << BATTLE_MAX_PER_SIDE) ||
+        (s->field_state.phase == BPHASE_REPLACE && !s->reserves))
+        return false;
+    for (unsigned i = 0; i < BATTLE_MAX_PER_SIDE; ++i, q += 5) {
+        s->player[i] = (BattleFieldMon){q[0], msg_get16(q+1), msg_get16(q+3)};
+        if (s->player[i].hp > s->player[i].max_hp ||
+            ((s->reserves & (1u << i)) && (!s->player[i].hp || q[0] == BATTLE_SLOT_NONE)))
+            return false;
+    }
+    return true;
+}
+
 unsigned battle_multi_action_encode(const BattleMultiAction *a, uint8_t *p) {
     msg_put16(p, a->token);
     p[2] = a->actor;
@@ -220,10 +259,16 @@ unsigned battle_multi_action_encode(const BattleMultiAction *a, uint8_t *p) {
     return BATTLE_MULTI_ACTION_BYTES;
 }
 
-bool battle_multi_action_decode(const uint8_t *p, unsigned n, BattleMultiAction *a) {
-    if (n != BATTLE_MULTI_ACTION_BYTES || p[2] >= BATTLE_FIELD_SLOTS || p[3] > BACTION_SHIFT ||
-        p[4] >= 4 || p[5] >= BATTLE_FIELD_SLOTS || p[6] > BROT_RIGHT || (p[7] & ~BACTION_FLAG_EXIT))
+static bool decode_multi_action(const uint8_t *p, unsigned n, BattleMultiAction *a, bool roster) {
+    if (n != BATTLE_MULTI_ACTION_BYTES || p[2] >= BATTLE_FIELD_SLOTS ||
+        p[3] > (roster ? BACTION_REPLACE : BACTION_SHIFT) ||
+        p[4] >= 4 || p[6] > BROT_RIGHT || (p[7] & ~BACTION_FLAG_EXIT))
         return false;
+    if (p[3] == BACTION_REPLACE) {
+        if (p[5] >= BATTLE_MAX_PER_SIDE || p[4] || p[6]) return false;
+    } else if (p[5] >= BATTLE_FIELD_SLOTS) {
+        return false;
+    }
     a->token = msg_get16(p);
     a->actor = p[2];
     a->action = p[3];
@@ -232,6 +277,14 @@ bool battle_multi_action_decode(const uint8_t *p, unsigned n, BattleMultiAction 
     a->rotation = p[6];
     a->flags = p[7];
     return true;
+}
+
+bool battle_multi_action_decode(const uint8_t *p, unsigned n, BattleMultiAction *a) {
+    return decode_multi_action(p, n, a, false);
+}
+
+bool battle_roster_action_decode(const uint8_t *p, unsigned n, BattleMultiAction *a) {
+    return decode_multi_action(p, n, a, true);
 }
 
 unsigned battle_result_encode(const BattleResult *r, uint8_t *p) {
