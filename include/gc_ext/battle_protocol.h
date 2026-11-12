@@ -23,6 +23,7 @@ extern "C" {
 #define BATTLE_APP_VERSION_STRUGGLE 4
 #define BATTLE_APP_VERSION_DRAG 5
 #define BATTLE_APP_VERSION_PIVOT 6
+#define BATTLE_APP_VERSION_CONDITIONS 7
 #define BATTLE_MODE_VERSION 1
 
 enum BattleFormat { BATTLE_FORMAT_SINGLE = 1, BATTLE_FORMAT_DOUBLE = 2, BATTLE_FORMAT_TRIPLE = 3, BATTLE_FORMAT_ROTATION = 4 };
@@ -59,7 +60,31 @@ enum BattleTarget {
 #define UNSUP_MULTI_HIT   (1u << 5)
 #define UNSUP_OTHER       (1u << 6)  // fixed crits, recoil-like flags, explosion ...
 #define UNSUP_EMPTY       (1u << 7)  // no move in this slot
-enum GcResolvedMoveEffect { BME_HIT = 0, BME_FORCE_OUT = 1, BME_FORCE_OUT_ON_HIT = 2, BME_PIVOT = 3 };
+enum GcResolvedMoveEffect { BME_HIT = 0, BME_FORCE_OUT = 1, BME_FORCE_OUT_ON_HIT = 2, BME_PIVOT = 3,
+    BME_STAGE_BASE = 0x10, BME_STATUS_BASE = 0x70, BME_REFRESH = 0x78, BME_ELECTRIC_PARALYSIS = 0x79,
+};
+enum BattleStat { BSTAT_ATK, BSTAT_DEF, BSTAT_SPA, BSTAT_SPD, BSTAT_SPE, BSTAT_ACC, BSTAT_EVA, BSTAT_COUNT };
+enum BattleStatus { BST_NONE, BST_POISON, BST_TOXIC, BST_BURN, BST_PARALYSIS, BST_SLEEP, BST_FREEZE, BST_FROSTBITE };
+#define BATTLE_STAGE_EFFECT(stat, delta) (BME_STAGE_BASE + (stat) * 12 + (delta) + ((delta) < 0 ? 6 : 5))
+#define BATTLE_STATUS_EFFECT(status) (BME_STATUS_BASE + (status))
+#define BATTLE_CONDITION(kind, counter) ((uint32_t)(kind) | (uint32_t)(counter) << 8)
+#define BATTLE_CONDITION_KIND(value) ((uint8_t)(value))
+#define BATTLE_CONDITION_COUNTER(value) ((uint8_t)((value) >> 8))
+#define BCR_ELECTRIC_IMMUNE (1u << 0)
+#define BCR_POISON_TOXIC_ALWAYS_HITS (1u << 1)
+#define BCR_FROSTBITE (1u << 2)
+#define BCR_DYNAMIC_SPEED (1u << 3)
+#define BCR_THAW_ON_FIRE_HIT (1u << 4)
+#define BCR_SLEEP_RESET_ON_SWITCH (1u << 5)
+#define BATTLE_CONDITION_RULE_BYTES 12
+typedef struct {
+    uint8_t flags, poison_type, steel_type, fire_type, electric_type, ice_type;
+    uint8_t paralysis_speed_divisor, paralysis_block_divisor, burn_residual_divisor;
+    uint8_t sleep_min, sleep_max, thaw_percent;
+} BattleConditionRules;
+bool battle_condition_rules_valid(const BattleConditionRules *rules, unsigned type_count);
+bool battle_condition_valid(uint32_t condition, const BattleConditionRules *rules);
+bool battle_effect_valid(uint8_t effect, uint8_t version);
 typedef struct {
     uint16_t power;
     uint8_t type, category, accuracy;
@@ -101,6 +126,7 @@ typedef struct {
 #define BATTLE_REQUEST_VERSION_STRUGGLE 4
 #define BATTLE_REQUEST_VERSION_DRAG 5
 #define BATTLE_REQUEST_VERSION_PIVOT 6
+#define BATTLE_REQUEST_VERSION_CONDITIONS 7
 #define BATTLE_REQUEST_HEADER 24
 enum StruggleRecoil { BSTRUGGLE_MAX_HP_FLOOR = 1, BSTRUGGLE_MAX_HP_NEAREST = 2 };
 #define BATTLE_MOVE_STRUGGLE 0xffffu  // logical presentation identifier
@@ -114,6 +140,7 @@ typedef struct {
     uint8_t struggle_power, struggle_accuracy, struggle_recoil; // V4 header bytes 21..23
     BattleEntry player[BATTLE_MAX_PER_SIDE], opponent[BATTLE_MAX_PER_SIDE];
     uint8_t type_chart[BATTLE_MAX_TYPES * BATTLE_MAX_TYPES];
+    BattleConditionRules conditions; // V7 suffix after the type chart
 } BattleRequest;
 
 uint32_t battle_request_size(const BattleRequest *request);
@@ -213,6 +240,8 @@ typedef struct {
     BattleMultiState field_state;
     uint8_t reserves, struggle_mask;
     BattleFieldMon player[BATTLE_MAX_PER_SIDE];
+    uint8_t status[2][BATTLE_FIELD_SLOTS];
+    int8_t stages[2][BATTLE_FIELD_SLOTS][BSTAT_COUNT];
 } BattleRosterState;
 #define BATTLE_ROSTER_STATE_BYTES (BATTLE_MULTI_STATE_BYTES + 1 + 5 * BATTLE_MAX_PER_SIDE)
 
@@ -232,6 +261,10 @@ bool battle_struggle_action_decode(const uint8_t *in, unsigned length, BattleMul
 // V6 uses the V4/V5 state size, and adds a mid-turn pivot phase.
 bool battle_pivot_state_decode(const uint8_t *in, unsigned length, BattleRosterState *state);
 bool battle_pivot_action_decode(const uint8_t *in, unsigned length, BattleMultiAction *action);
+
+#define BATTLE_CONDITION_STATE_BYTES (BATTLE_STRUGGLE_STATE_BYTES + 2 * BATTLE_FIELD_SLOTS * (1 + BSTAT_COUNT))
+unsigned battle_condition_state_encode(const BattleRosterState *state, uint8_t *out);
+bool battle_condition_state_decode(const uint8_t *in, unsigned length, BattleRosterState *state);
 
 // GcBattleResultV1 (RESULT payload, result version 1).
 //   0 u8 outcome   1 u8 turns   2 u8 player count P   3 u8 opponent count O

@@ -421,6 +421,10 @@ extern const u8 Debug_EventScript_GcBattleSwitch[];
 extern const u8 Debug_EventScript_GcBattleStruggle[];
 extern const u8 Debug_EventScript_GcBattleDrag[];
 extern const u8 Debug_EventScript_GcBattlePivot[];
+extern const u8 Debug_EventScript_GcConditionsSingle[];
+extern const u8 Debug_EventScript_GcConditionsDouble[];
+extern const u8 Debug_EventScript_GcConditionsTriple[];
+extern const u8 Debug_EventScript_GcConditionsRotation[];
 extern const u8 Debug_EventScript_WallyTutorial[];
 extern const u8 Debug_EventScript_PrintTimeOfDay[];
 extern const u8 Debug_EventScript_TellTheTime[];
@@ -644,6 +648,10 @@ static const struct DebugMenuOption sDebugMenu_Actions_Utilities[] =
     { COMPOUND_STRING("{ENG}GC Double (Struggle test)"), DebugAction_ExecuteScript, Debug_EventScript_GcBattleStruggle },
     { COMPOUND_STRING("{ENG}GC Double (drag test)"), DebugAction_ExecuteScript, Debug_EventScript_GcBattleDrag },
     { COMPOUND_STRING("{ENG}GC Double (pivot test)"), DebugAction_ExecuteScript, Debug_EventScript_GcBattlePivot },
+    { COMPOUND_STRING("{ENG}GC Single (conditions)"), DebugAction_ExecuteScript, Debug_EventScript_GcConditionsSingle },
+    { COMPOUND_STRING("{ENG}GC Double (conditions)"), DebugAction_ExecuteScript, Debug_EventScript_GcConditionsDouble },
+    { COMPOUND_STRING("{ENG}GC Triple (conditions)"), DebugAction_ExecuteScript, Debug_EventScript_GcConditionsTriple },
+    { COMPOUND_STRING("{ENG}GC Rotation (conditions)"), DebugAction_ExecuteScript, Debug_EventScript_GcConditionsRotation },
     { NULL }
 };
 

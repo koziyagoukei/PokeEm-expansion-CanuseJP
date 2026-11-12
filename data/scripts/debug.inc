@@ -490,6 +490,42 @@ Debug_EventScript_GcBattlePivot::
 	releaseall
 	end
 
+Debug_EventScript_GcConditionsSingle::
+	lockall
+	setvar VAR_0x8004, 0
+	setvar VAR_0x8005, TRAINER_CALVIN_1
+	setvar VAR_0x8006, 0x2001
+	special FrontierGcBattle_Start
+	releaseall
+	end
+
+Debug_EventScript_GcConditionsDouble::
+	lockall
+	setvar VAR_0x8004, 0
+	setvar VAR_0x8005, TRAINER_CALVIN_1
+	setvar VAR_0x8006, 0x2002
+	special FrontierGcBattle_Start
+	releaseall
+	end
+
+Debug_EventScript_GcConditionsTriple::
+	lockall
+	setvar VAR_0x8004, 0
+	setvar VAR_0x8005, TRAINER_CALVIN_1
+	setvar VAR_0x8006, 0x2003
+	special FrontierGcBattle_Start
+	releaseall
+	end
+
+Debug_EventScript_GcConditionsRotation::
+	lockall
+	setvar VAR_0x8004, 0
+	setvar VAR_0x8005, TRAINER_CALVIN_1
+	setvar VAR_0x8006, 0x2004
+	special FrontierGcBattle_Start
+	releaseall
+	end
+
 Debug_EventScript_WallyTutorial::
 	special SavePlayerParty
 	special LoadWallyZigzagoon

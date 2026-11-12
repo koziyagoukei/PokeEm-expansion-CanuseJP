@@ -10,6 +10,7 @@
 #include "global.h"
 #include "battle_main.h"
 #include "battle_setup.h"
+#include "battle_stat_change.h"
 #include "config_changes.h"
 #include "data.h"
 #include "event_data.h"
@@ -21,13 +22,14 @@
 #include "sound.h"
 #include "string_util.h"
 #include "constants/battle.h"
+#include "constants/battle_set_effect.h"
 #include "constants/characters.h"
 #include "constants/songs.h"
 #include "gc_extension.h"
 #include "gc_ext/battle_protocol.h"
 #include "frontier_gc_battle.h"
 
-#define REQUEST_CAPACITY (BATTLE_REQUEST_HEADER + PARTY_SIZE * BATTLE_ENTRY_BYTES + NUMBER_OF_MON_TYPES * NUMBER_OF_MON_TYPES)
+#define REQUEST_CAPACITY (BATTLE_REQUEST_HEADER + PARTY_SIZE * BATTLE_ENTRY_BYTES + NUMBER_OF_MON_TYPES * NUMBER_OF_MON_TYPES + BATTLE_CONDITION_RULE_BYTES)
 
 enum GbaScreen { SCREEN_PREPARE, SCREEN_COMMAND, SCREEN_MOVES, SCREEN_TARGET, SCREEN_REPLACE, SCREEN_SWITCH, SCREEN_PIVOT, SCREEN_WAIT, SCREEN_ENDED };
 
@@ -46,6 +48,8 @@ struct FrontierGcBattle
     u8 roster; // zero for the legacy app, otherwise the roster app version
     u8 rotation, target;
     BattleMultiState multiState;
+    u8 status[2][BATTLE_FIELD_SLOTS];
+    s8 stages[2][BATTLE_FIELD_SLOTS][BSTAT_COUNT];
     u8 reserveMask, struggleMask;
     BattleMultiAction multiAction;
     u8 screen;
@@ -104,6 +108,61 @@ static u8 TypeQuarters(enum Type attack, enum Type defend)
     return (gTypeEffectivenessTable[attack][defend] + 512) >> 10;
 }
 
+static u8 ResolveConditionEffect(enum Move move, u16 effect)
+{
+    // Export only single-stat primary effects. Multi-stat and conditional
+    // effects remain unavailable until the GC supports their full behavior.
+    if (effect == EFFECT_STAT_CHANGE && GetMoveAdditionalEffectCount(move) == 1)
+    {
+        static const enum Stat stats[] = {STAT_ATK, STAT_DEF, STAT_SPATK, STAT_SPDEF, STAT_SPEED, STAT_ACC, STAT_EVASION};
+        const struct AdditionalEffect *change = gMovesInfo[move].additionalEffects;
+        const bool32 down = change->moveEffect == STAT_CHANGE_EFFECT_MINUS;
+        if (!down && change->moveEffect != STAT_CHANGE_EFFECT_PLUS)
+            return BME_HIT;
+        if (change->chance || change->onlyIfTargetRaisedStats || change->onChargeTurnOnly
+         || change->preAttackEffect || change->onSide || change->pledgeCombo
+         || (change->self && GetMoveTarget(move) != TARGET_USER))
+            return BME_HIT;
+        u8 resolved = BME_HIT;
+        for (u32 stat = 0; stat < ARRAY_COUNT(stats); stat++)
+        {
+            s32 amount = GetStatStage(stats[stat], change);
+            if (!amount)
+                continue;
+            if (resolved || amount > 6)
+                return BME_HIT;
+            resolved = BATTLE_STAGE_EFFECT(stat, down ? -amount : amount);
+        }
+        return resolved;
+    }
+    if (effect == EFFECT_REFRESH)
+        return BME_REFRESH;
+    if (effect != EFFECT_NON_VOLATILE_STATUS || gMovesInfo[move].powderMove)
+        return BME_HIT;
+    switch (GetMoveNonVolatileStatus(move))
+    {
+    case MOVE_EFFECT_POISON: return BATTLE_STATUS_EFFECT(BST_POISON);
+    case MOVE_EFFECT_TOXIC: return BATTLE_STATUS_EFFECT(BST_TOXIC);
+    case MOVE_EFFECT_BURN: return BATTLE_STATUS_EFFECT(BST_BURN);
+    case MOVE_EFFECT_PARALYSIS:
+        return move == MOVE_THUNDER_WAVE ? BME_ELECTRIC_PARALYSIS : BATTLE_STATUS_EFFECT(BST_PARALYSIS);
+    case MOVE_EFFECT_SLEEP: return BATTLE_STATUS_EFFECT(BST_SLEEP);
+    default: return BME_HIT;
+    }
+}
+
+static u32 ExportCondition(u32 status)
+{
+    if (status & STATUS1_SLEEP) return BATTLE_CONDITION(BST_SLEEP, status & STATUS1_SLEEP);
+    if (status & STATUS1_TOXIC_POISON) return BATTLE_CONDITION(BST_TOXIC, (status & STATUS1_TOXIC_COUNTER) >> 8);
+    if (status & STATUS1_POISON) return BST_POISON;
+    if (status & STATUS1_BURN) return BST_BURN;
+    if (status & STATUS1_PARALYSIS) return BST_PARALYSIS;
+    if (status & STATUS1_FREEZE) return BST_FREEZE;
+    if (status & STATUS1_FROSTBITE) return BST_FROSTBITE;
+    return BST_NONE;
+}
+
 static void ResolveMove(enum Move move, BattleMove *out)
 {
     memset(out, 0, sizeof(*out));
@@ -142,24 +201,28 @@ static void ResolveMove(enum Move move, BattleMove *out)
         else if (sBattle->roster >= BATTLE_APP_VERSION_PIVOT && effect == EFFECT_HIT_ESCAPE)
             out->effect = BME_PIVOT;
     }
+    if (sBattle->roster >= BATTLE_APP_VERSION_CONDITIONS && out->effect == BME_HIT && out->category == BCAT_STATUS)
+        out->effect = ResolveConditionEffect(move, effect);
+    const bool8 conditionMove = out->effect >= BME_STAGE_BASE;
     // Move flags are resolved here so the host can remain game-independent.
     if (sBattle->format == BATTLE_FORMAT_TRIPLE && move == MOVE_WING_ATTACK)
         out->target |= BTARGET_IGNORE_DISTANCE;
     if (effect != EFFECT_HIT && out->effect == BME_HIT)
         out->unsupported |= UNSUP_EFFECT;
-    if (GetMoveAdditionalEffectCount(move) != 0)
+    if (GetMoveAdditionalEffectCount(move) != 0 && !(conditionMove && effect == EFFECT_STAT_CHANGE))
         out->unsupported |= UNSUP_SECONDARY;
     if (out->priority != 0 && out->effect == BME_HIT)
         out->unsupported |= UNSUP_PRIORITY;
     if ((out->target & BTARGET_CLASS_MASK) == BTARGET_OTHER ||
-        (sBattle->format == BATTLE_FORMAT_SINGLE && out->target == BTARGET_SELF))
+        (sBattle->format == BATTLE_FORMAT_SINGLE && out->target == BTARGET_SELF && !conditionMove))
         out->unsupported |= UNSUP_TARGET;
-    if ((out->category == BCAT_STATUS || out->power == 0) && out->effect != BME_FORCE_OUT)
+    if ((out->category == BCAT_STATUS || out->power == 0) && out->effect != BME_FORCE_OUT && !conditionMove)
         out->unsupported |= UNSUP_STATUS_MOVE;
     if (GetMoveStrikeCount(move) > 1 || gMovesInfo[move].multiHit)
         out->unsupported |= UNSUP_MULTI_HIT;
     if (IsExplosionMove(move) || gMovesInfo[move].alwaysCriticalHit || gMovesInfo[move].cantUseTwice
      || gMovesInfo[move].noAffectOnSameTypeTarget || gMovesInfo[move].accDecreaseIfUserNotSameType
+     || (sBattle->roster >= BATTLE_APP_VERSION_CONDITIONS && MoveThawsUser(move))
      || out->accuracy > 100 || out->type >= NUMBER_OF_MON_TYPES)
         out->unsupported |= UNSUP_OTHER;
 }
@@ -172,6 +235,8 @@ static u8 FillEntry(u32 slot, BattleEntry *entry)
     u8 mask = 0;
 
     GcExtension_BuildRecord(slot, &entry->record);
+    if (sBattle->roster >= BATTLE_APP_VERSION_CONDITIONS)
+        entry->record.status = ExportCondition(entry->record.status);
     species = SanitizeSpeciesId(GetMonData(mon, MON_DATA_SPECIES));
     entry->mon.types[0] = gSpeciesInfo[species].types[0];
     entry->mon.types[1] = gSpeciesInfo[species].types[1];
@@ -202,6 +267,44 @@ static s32 FindLead(BattleEntry *scratch)
 
 // Mode-owned fixtures use the same export path as a normal party. They
 // never enter gPlayerParty or the save. Slot IDs remain stable as they move.
+static void SetConditionFixture(struct Pokemon *mon, u32 side, u32 index)
+{
+    static const enum Move moves[][3] = {
+        {MOVE_SWORDS_DANCE, MOVE_HARDEN, MOVE_NASTY_PLOT},
+        {MOVE_GROWL, MOVE_THUNDER_WAVE, MOVE_AMNESIA},
+    };
+    if (side)
+    {
+        if (sBattle->format == BATTLE_FORMAT_DOUBLE && index < 2)
+        {
+            u16 hp = 1;
+            u32 status = index ? STATUS1_POISON : STATUS1_BURN;
+            SetMonData(mon, MON_DATA_HP, &hp);
+            SetMonData(mon, MON_DATA_STATUS, &status);
+        }
+        else if (sBattle->format == BATTLE_FORMAT_TRIPLE)
+        {
+            u32 status = index == 2 ? (B_USE_FROSTBITE ? STATUS1_FROSTBITE : STATUS1_FREEZE) : STATUS1_BURN;
+            SetMonData(mon, MON_DATA_STATUS, &status);
+        }
+        return;
+    }
+
+    const enum Move setup = moves[sBattle->format == BATTLE_FORMAT_DOUBLE][index];
+    const enum Move attack = GetMonData(mon, MON_DATA_MOVE1);
+    SetMonMoveSlot(mon, setup, 0);
+    SetMonMoveSlot(mon, attack, 1);
+    SetMonMoveSlot(mon, sBattle->format == BATTLE_FORMAT_TRIPLE ? MOVE_POISON_GAS : MOVE_TOXIC, 2);
+    SetMonMoveSlot(mon, MOVE_REFRESH, 3);
+    if (sBattle->format == BATTLE_FORMAT_SINGLE || sBattle->format == BATTLE_FORMAT_TRIPLE
+     || sBattle->format == BATTLE_FORMAT_ROTATION)
+    {
+        static const u32 initial[] = {STATUS1_BURN, STATUS1_POISON, STATUS1_PARALYSIS};
+        u32 status = initial[index];
+        SetMonData(mon, MON_DATA_STATUS, &status);
+    }
+}
+
 static bool8 BuildFixtureEntries(BattleRequest *request, const u8 **reason)
 {
     static const struct BattleFixture
@@ -255,6 +358,8 @@ static bool8 BuildFixtureEntries(BattleRequest *request, const u8 **reason)
                 u16 hp = 1;
                 SetMonData(mon, MON_DATA_HP, &hp);
             }
+            if (sBattle->roster == BATTLE_APP_VERSION_CONDITIONS)
+                SetConditionFixture(mon, side, i);
             const bool8 dry = sBattle->roster == BATTLE_APP_VERSION_STRUGGLE && side == 0 && i == 0;
             if (dry)
             {
@@ -298,6 +403,40 @@ static bool8 BuildSingleEntries(BattleRequest *request, const struct Trainer *tr
     return TRUE;
 }
 
+static bool32 ResolveConditionRules(BattleConditionRules *rules)
+{
+    // Older type/status rules and Champions' weighted sleep and freeze
+    // guarantees require a separate ruleset. Sleep Clause is also separate.
+    if (GetConfig(B_STATUS_TYPE_IMMUNITY) < GEN_3 || GetConfig(B_SLEEP_TURNS) < GEN_3
+     || GetConfig(B_SLEEP_TURNS) >= GEN_CHAMPIONS || GetConfig(B_FREEZE_TURNS) >= GEN_CHAMPIONS
+     || B_SLEEP_CLAUSE || FlagGet(B_FLAG_SLEEP_CLAUSE))
+        return FALSE;
+    *rules = (BattleConditionRules){
+        .flags = (GetConfig(B_PARALYZE_ELECTRIC) >= GEN_6 ? BCR_ELECTRIC_IMMUNE : 0)
+               | (GetConfig(B_TOXIC_NEVER_MISS) >= GEN_6 ? BCR_POISON_TOXIC_ALWAYS_HITS : 0)
+               | (B_USE_FROSTBITE ? BCR_FROSTBITE : 0)
+               | (GetConfig(B_RECALC_TURN_AFTER_ACTIONS) >= GEN_8 ? BCR_DYNAMIC_SPEED : 0)
+               | (GetConfig(B_HIT_THAW) >= GEN_3 ? BCR_THAW_ON_FIRE_HIT : 0),
+        .poison_type = TYPE_POISON,
+        .steel_type = TYPE_STEEL,
+        .fire_type = TYPE_FIRE,
+        .electric_type = TYPE_ELECTRIC,
+        .ice_type = TYPE_ICE,
+        .paralysis_speed_divisor = GetConfig(B_PARALYSIS_SPEED) >= GEN_7 ? 2 : 4,
+        .paralysis_block_divisor = GetConfig(B_PARALYSIS_CHANCE) >= GEN_CHAMPIONS ? 8 : 4,
+        .burn_residual_divisor = GetConfig(B_BURN_DAMAGE) >= GEN_7 || GetConfig(B_BURN_DAMAGE) == GEN_1 ? 16 : 8,
+        .sleep_min = 2,
+        .sleep_max = GetConfig(B_SLEEP_TURNS) >= GEN_5 ? 4 : 5,
+        .thaw_percent = 20,
+    };
+    return TRUE;
+}
+
+static bool8 IsLegacySingle(void)
+{
+    return sBattle->format == BATTLE_FORMAT_SINGLE && !sBattle->roster;
+}
+
 static bool8 BuildRequest(const u8 **reason)
 {
     BattleRequest *request = AllocZeroedUnchecked(sizeof(*request));
@@ -309,7 +448,7 @@ static bool8 BuildRequest(const u8 **reason)
         *reason = sText_NoMemory;
         return FALSE;
     }
-    if (!(sBattle->format == BATTLE_FORMAT_SINGLE ? BuildSingleEntries(request, trainer, reason)
+    if (!(IsLegacySingle() ? BuildSingleEntries(request, trainer, reason)
                                                   : BuildFixtureEntries(request, reason)))
     {
         Free(request);
@@ -338,6 +477,17 @@ static bool8 BuildRequest(const u8 **reason)
     }
     request->rules = RULE_IGNORE_ABILITIES | RULE_IGNORE_ITEMS | RULE_IGNORE_STATUS | RULE_NO_GIMMICKS
                    | RULE_NO_CRITICAL_HITS | RULE_SUPPORTED_MOVES_ONLY;
+    if (request->version >= BATTLE_REQUEST_VERSION_CONDITIONS)
+    {
+        if (!ResolveConditionRules(&request->conditions))
+        {
+            static const u8 unsupported[] = _("{ENG}Unsupported GC condition rules.");
+            *reason = unsupported;
+            Free(request);
+            return FALSE;
+        }
+        request->rules &= ~RULE_IGNORE_STATUS;
+    }
     request->trainer_id = sBattle->trainerId;
     request->trainer_class = trainer->trainerClass;
     request->reward_mode = 0;
@@ -378,8 +528,8 @@ static bool8 Init(const u8 **reason)
     sBattle->format = sPendingFormat;
     sBattle->fieldCount = sPendingFormat == BATTLE_FORMAT_SINGLE ? 1 : sPendingFormat == BATTLE_FORMAT_DOUBLE ? 2 : 3;
     sBattle->roster = sPendingRoster;
-    sBattle->count = sBattle->roster ? 3 : sBattle->fieldCount;
-    sBattle->policy = sPendingFormat == BATTLE_FORMAT_SINGLE ? sPendingPolicy : RESULT_POLICY_DISPLAY_ONLY;
+    sBattle->count = sBattle->roster && sBattle->format == BATTLE_FORMAT_DOUBLE ? 3 : sBattle->fieldCount;
+    sBattle->policy = IsLegacySingle() ? sPendingPolicy : RESULT_POLICY_DISPLAY_ONLY;
     sBattle->trainerId = sPendingTrainer;
     sBattle->environment = BattleSetup_GetEnvironmentId();
     sBattle->screen = SCREEN_PREPARE;
@@ -398,6 +548,7 @@ static const u8 *GetRequest(u32 *length)
 static u16 HandleMultiApp(u16 opcode, const u8 *args, u16 argLength, u8 *out, u16 *outLength)
 {
     BattleMultiState state;
+    BattleRosterState received;
     BattleMultiAction action = sBattle->multiAction;
     u32 side, pos;
     u8 mask = 0, struggle = 0;
@@ -409,10 +560,14 @@ static u16 HandleMultiApp(u16 opcode, const u8 *args, u16 argLength, u8 *out, u1
     case BATTLE_OP_STATE_MULTI:
         if (roster)
         {
-            BattleRosterState received;
             if (opcode != BATTLE_OP_STATE_ROSTER)
                 return APP_BAD_ARGS;
-            if (sBattle->roster == BATTLE_APP_VERSION_PIVOT)
+            if (sBattle->roster == BATTLE_APP_VERSION_CONDITIONS)
+            {
+                if (!battle_condition_state_decode(args, argLength, &received))
+                    return APP_BAD_ARGS;
+            }
+            else if (sBattle->roster == BATTLE_APP_VERSION_PIVOT)
             {
                 if (!battle_pivot_state_decode(args, argLength, &received))
                     return APP_BAD_ARGS;
@@ -431,7 +586,7 @@ static u16 HandleMultiApp(u16 opcode, const u8 *args, u16 argLength, u8 *out, u1
             struggle = received.struggle_mask;
             if (struggle >= (1u << sBattle->fieldCount))
                 return APP_BAD_ARGS;
-            if (mask >= (1u << sBattle->count)
+            if ((state.phase >= BPHASE_REPLACE && !mask) || mask >= (1u << sBattle->count)
              || (state.phase >= BPHASE_REPLACE && (state.actor >= sBattle->fieldCount
                  || ((state.phase == BPHASE_REPLACE) != (state.field[0][state.actor].party_slot == BATTLE_SLOT_NONE)))))
                 return APP_BAD_ARGS;
@@ -451,6 +606,11 @@ static u16 HandleMultiApp(u16 opcode, const u8 *args, u16 argLength, u8 *out, u1
                  || slot >= GC_EXTRA_SLOT_BASE + (side + 1) * sBattle->count)
                     return APP_BAD_ARGS;
             }
+        if (sBattle->roster == BATTLE_APP_VERSION_CONDITIONS)
+        {
+            memcpy(sBattle->status, received.status, sizeof(sBattle->status));
+            memcpy(sBattle->stages, received.stages, sizeof(sBattle->stages));
+        }
         sBattle->multiState = state;
         sBattle->reserveMask = mask;
         sBattle->struggleMask = struggle;
@@ -486,7 +646,7 @@ static u16 HandleApp(u16 opcode, const u8 *args, u16 argLength, u8 *out, u16 *ou
     BattleState state;
     BattleAction action = {0};
 
-    if (sBattle->format != BATTLE_FORMAT_SINGLE)
+    if (!IsLegacySingle())
         return HandleMultiApp(opcode, args, argLength, out, outLength);
     switch (opcode)
     {
@@ -532,7 +692,7 @@ static u16 OnResult(u16 version, const u8 *data, u16 length)
         return RESULT_REJECTED;
     for (i = 0; i < result.player_count; i++)
     {
-        u8 slot = sBattle->format == BATTLE_FORMAT_SINGLE ? sBattle->leadSlot : GC_EXTRA_SLOT_BASE + i;
+        u8 slot = IsLegacySingle() ? sBattle->leadSlot : GC_EXTRA_SLOT_BASE + i;
         struct Pokemon *mon = GcExtension_GetExportMon(slot);
         if (result.player[i].slot != slot || result.player[i].hp > GetMonData(mon, MON_DATA_MAX_HP))
             return RESULT_REJECTED;
@@ -823,6 +983,44 @@ static u8 AvailableMoves(u8 pos)
     return mask;
 }
 
+static const u8 *ConditionLabel(u8 kind)
+{
+    static const u8 *const labels[] = {
+        COMPOUND_STRING("{ENG}"),
+        COMPOUND_STRING("{ENG} PSN"),
+        COMPOUND_STRING("{ENG} TOX"),
+        COMPOUND_STRING("{ENG} BRN"),
+        COMPOUND_STRING("{ENG} PAR"),
+        COMPOUND_STRING("{ENG} SLP"),
+        COMPOUND_STRING("{ENG} FRZ"),
+        COMPOUND_STRING("{ENG} FRB"),
+    };
+    return labels[kind];
+}
+
+static void DrawConditionSummary(u8 body, u8 pos)
+{
+    static const u8 *const stats[] = {
+        COMPOUND_STRING("{ENG} A"), COMPOUND_STRING("{ENG} D"), COMPOUND_STRING("{ENG} SA"),
+        COMPOUND_STRING("{ENG} SD"), COMPOUND_STRING("{ENG} S"), COMPOUND_STRING("{ENG} AC"),
+        COMPOUND_STRING("{ENG} EV"),
+    };
+    static const u8 plus[] = _("{ENG}+");
+    static const u8 minus[] = _("{ENG}-");
+    u8 text[96];
+    StringCopy(text, ConditionLabel(sBattle->status[0][pos]));
+    for (u32 i = 0; i < BSTAT_COUNT; i++)
+    {
+        s8 stage = sBattle->stages[0][pos][i];
+        if (!stage)
+            continue;
+        StringAppend(text, stats[i]);
+        StringAppend(text, stage > 0 ? plus : minus);
+        AppendNumber(text, stage > 0 ? stage : -stage);
+    }
+    GcExtension_PrintLine(body, text, 0, 2, GC_COLOR_NORMAL);
+}
+
 static void DrawPositions(u8 body, u8 side, u8 row, u8 selected, u8 legal)
 {
     const BattleMultiState *state = &sBattle->multiState;
@@ -832,10 +1030,18 @@ static void DrawPositions(u8 body, u8 side, u8 row, u8 selected, u8 legal)
         const BattleFieldMon *mon = &state->field[side][slot];
         u8 color = !(legal & (1 << slot)) || !mon->hp ? GC_COLOR_DIM
                  : slot == selected ? GC_COLOR_HIGHLIGHT : GC_COLOR_NORMAL;
-        StringCopy(text, PositionName(slot));
-        StringAppend(text, sText_PositionHp);
+        static const u8 shortFront[] = _("{ENG}F");
+        static const u8 colon[] = _("{ENG}:");
+        const bool8 conditions = sBattle->roster >= BATTLE_APP_VERSION_CONDITIONS;
+        const u8 *name = PositionName(slot);
+        StringCopy(text, conditions && name == sText_Front ? shortFront : name);
+        StringAppend(text, conditions ? colon : sText_PositionHp);
         if (mon->hp)
+        {
             AppendNumber(text, mon->hp);
+            if (conditions)
+                StringAppend(text, ConditionLabel(sBattle->status[side][slot]));
+        }
         else
             StringAppend(text, sText_Empty);
         if (slot == selected)
@@ -907,6 +1113,8 @@ static void DrawMulti(u8 body, u8 help)
 
     if (sBattle->screen == SCREEN_COMMAND)
     {
+        if (sBattle->roster >= BATTLE_APP_VERSION_CONDITIONS)
+            DrawConditionSummary(body, pos);
         DrawPositions(body, 0, 3, pos, 7);
         static const u8 switchHint[] = _("{ENG}START: Party");
         static const u8 struggleText[] = _("{ENG}Struggle");
@@ -1053,7 +1261,7 @@ static void InputMulti(void)
 
 static void Draw(u8 body, u8 help)
 {
-    if (sBattle->format == BATTLE_FORMAT_SINGLE)
+    if (IsLegacySingle())
         DrawSingle(body, help);
     else
         DrawMulti(body, help);
@@ -1061,7 +1269,7 @@ static void Draw(u8 body, u8 help)
 
 static void Input(void)
 {
-    if (sBattle->format == BATTLE_FORMAT_SINGLE)
+    if (IsLegacySingle())
         InputSingle();
     else
         InputMulti();
@@ -1086,7 +1294,7 @@ static const struct GcModeHandler sFrontierGcBattleMode =
 
 // Script special (waitstate): VAR_0x8004 = result policy (0 show, 1 apply
 // HP/PP), VAR_0x8005 = trainer id. VAR_0x8006 is the format (0 for
-// Single). Bits 8 through 12 select replacement, switch, Struggle, drag or pivot.
+// Single). Bits 8 through 12 select the lifecycle fixtures, bit 13 selects V7.
 static EWRAM_DATA struct GcModeHandler sFrontierGcRosterMode = {0};
 
 void FrontierGcBattle_Start(void)
@@ -1096,7 +1304,9 @@ void FrontierGcBattle_Start(void)
     sPendingTrainer = gSpecialVar_0x8005;
     sPendingFormat = format >= BATTLE_FORMAT_DOUBLE && format <= BATTLE_FORMAT_ROTATION ? format : BATTLE_FORMAT_SINGLE;
     sPendingRoster = 0;
-    if (format == BATTLE_FORMAT_DOUBLE)
+    if (gSpecialVar_0x8006 & 0x2000)
+        sPendingRoster = BATTLE_APP_VERSION_CONDITIONS;
+    else if (format == BATTLE_FORMAT_DOUBLE)
     {
         if (gSpecialVar_0x8006 & 0x1000)
             sPendingRoster = BATTLE_APP_VERSION_PIVOT;

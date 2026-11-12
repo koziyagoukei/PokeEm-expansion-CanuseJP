@@ -34,7 +34,61 @@ static void mon_encode(const BattleMon *m, uint8_t *p, bool effects) {
     }
 }
 
-static bool mon_decode(const uint8_t *p, BattleMon *m, uint8_t max_effect) {
+bool battle_effect_valid(uint8_t effect, uint8_t version) {
+    if (effect == BME_HIT) return true;
+    if (version < BATTLE_REQUEST_VERSION_DRAG) return false;
+    if (effect <= BME_FORCE_OUT_ON_HIT) return true;
+    if (effect == BME_PIVOT) return version >= BATTLE_REQUEST_VERSION_PIVOT;
+    if (version < BATTLE_REQUEST_VERSION_CONDITIONS) return false;
+    return (effect >= BME_STAGE_BASE && effect < BME_STAGE_BASE + BSTAT_COUNT * 12) ||
+           (effect > BME_STATUS_BASE && effect <= BME_STATUS_BASE + BST_FROSTBITE) ||
+           effect == BME_REFRESH || effect == BME_ELECTRIC_PARALYSIS;
+}
+
+bool battle_condition_rules_valid(const BattleConditionRules *r, unsigned types) {
+    return !(r->flags & ~0x3fu) &&
+           r->poison_type < types && r->steel_type < types && r->fire_type < types &&
+           r->electric_type < types && r->ice_type < types &&
+           (r->paralysis_speed_divisor == 2 || r->paralysis_speed_divisor == 4) &&
+           (r->paralysis_block_divisor == 4 || r->paralysis_block_divisor == 8) &&
+           (r->burn_residual_divisor == 8 || r->burn_residual_divisor == 16) &&
+           r->sleep_min >= 1 && r->sleep_min <= r->sleep_max && r->sleep_max <= 7 &&
+           r->thaw_percent <= 100;
+}
+
+bool battle_condition_valid(uint32_t value, const BattleConditionRules *r) {
+    const uint8_t kind = BATTLE_CONDITION_KIND(value), counter = BATTLE_CONDITION_COUNTER(value);
+    if ((value >> 16) || kind > BST_FROSTBITE) return false;
+    if (kind == BST_TOXIC) return counter <= 15;
+    if (kind == BST_SLEEP) return counter && counter <= r->sleep_max;
+    return !counter && (kind != BST_FROSTBITE || (r->flags & BCR_FROSTBITE));
+}
+
+static void conditions_encode(const BattleConditionRules *r, uint8_t *p) {
+    p[0] = r->flags;
+    p[1] = r->poison_type;
+    p[2] = r->steel_type;
+    p[3] = r->fire_type;
+    p[4] = r->electric_type;
+    p[5] = r->ice_type;
+    p[6] = r->paralysis_speed_divisor;
+    p[7] = r->paralysis_block_divisor;
+    p[8] = r->burn_residual_divisor;
+    p[9] = r->sleep_min;
+    p[10] = r->sleep_max;
+    p[11] = r->thaw_percent;
+}
+
+static void conditions_decode(const uint8_t *p, BattleConditionRules *r) {
+    *r = (BattleConditionRules){
+        .flags = p[0], .poison_type = p[1], .steel_type = p[2], .fire_type = p[3],
+        .electric_type = p[4], .ice_type = p[5], .paralysis_speed_divisor = p[6],
+        .paralysis_block_divisor = p[7], .burn_residual_divisor = p[8],
+        .sleep_min = p[9], .sleep_max = p[10], .thaw_percent = p[11],
+    };
+}
+
+static bool mon_decode(const uint8_t *p, BattleMon *m, uint8_t version) {
     if (p[0] != BATTLE_MON_VERSION || p[1] < 1 || p[1] > 2) return false;
     m->type_count = p[1];
     m->types[0] = p[2];
@@ -43,21 +97,22 @@ static bool mon_decode(const uint8_t *p, BattleMon *m, uint8_t max_effect) {
     m->elevation = 0;
     for (unsigned i = 0; i < 4; ++i) {
         move_decode(p + 8 + 8*i, &m->moves[i]);
-        m->moves[i].effect = max_effect ? p[4+i] : BME_HIT;
-        if (m->moves[i].effect > max_effect) return false;
+        m->moves[i].effect = version >= BATTLE_REQUEST_VERSION_DRAG ? p[4+i] : BME_HIT;
+        if (!battle_effect_valid(m->moves[i].effect, version)) return false;
     }
     return true;
 }
 
 uint32_t battle_request_size(const BattleRequest *r) {
     return BATTLE_REQUEST_HEADER + (uint32_t)(r->player_count + r->opponent_count) * BATTLE_ENTRY_BYTES +
-           (uint32_t)r->type_count * r->type_count;
+           (uint32_t)r->type_count * r->type_count +
+           (r->version >= BATTLE_REQUEST_VERSION_CONDITIONS ? BATTLE_CONDITION_RULE_BYTES : 0);
 }
 
 uint32_t battle_request_encode(const BattleRequest *r, uint8_t *p, uint32_t capacity) {
     const uint32_t size = battle_request_size(r);
     const uint8_t version = r->version ? r->version : BATTLE_REQUEST_VERSION;
-    if ((version < BATTLE_REQUEST_VERSION || version > BATTLE_REQUEST_VERSION_PIVOT) ||
+    if ((version < BATTLE_REQUEST_VERSION || version > BATTLE_REQUEST_VERSION_CONDITIONS) ||
         size > capacity || r->player_count > BATTLE_MAX_PER_SIDE || r->opponent_count > BATTLE_MAX_PER_SIDE ||
         r->type_count > BATTLE_MAX_TYPES)
         return 0;
@@ -91,12 +146,14 @@ uint32_t battle_request_encode(const BattleRequest *r, uint8_t *p, uint32_t capa
         }
     }
     for (unsigned i = 0; i < (unsigned)r->type_count * r->type_count; ++i) q[i] = r->type_chart[i];
+    if (version >= BATTLE_REQUEST_VERSION_CONDITIONS)
+        conditions_encode(&r->conditions, q + (unsigned)r->type_count * r->type_count);
     return size;
 }
 
 bool battle_request_decode(const uint8_t *p, uint32_t length, BattleRequest *r) {
     if (length < BATTLE_REQUEST_HEADER ||
-        (p[0] < BATTLE_REQUEST_VERSION || p[0] > BATTLE_REQUEST_VERSION_PIVOT) ||
+        (p[0] < BATTLE_REQUEST_VERSION || p[0] > BATTLE_REQUEST_VERSION_CONDITIONS) ||
         msg_get16(p+14) != BATTLE_ENTRY_BYTES)
         return false;
     r->version = p[0];
@@ -130,12 +187,15 @@ bool battle_request_decode(const uint8_t *p, uint32_t length, BattleRequest *r) 
         const unsigned count = side ? r->opponent_count : r->player_count;
         for (unsigned i = 0; i < count; ++i, q += BATTLE_ENTRY_BYTES)
             if (!pkmn_record_decode(q, PKMN_RECORD_BYTES, &e[i].record) ||
-                !mon_decode(q + PKMN_RECORD_BYTES, &e[i].mon,
-                            r->version >= BATTLE_REQUEST_VERSION_PIVOT ? BME_PIVOT :
-                            r->version >= BATTLE_REQUEST_VERSION_DRAG ? BME_FORCE_OUT_ON_HIT : BME_HIT))
+                !mon_decode(q + PKMN_RECORD_BYTES, &e[i].mon, r->version))
                 return false;
     }
     for (unsigned i = 0; i < (unsigned)r->type_count * r->type_count; ++i) r->type_chart[i] = q[i];
+    r->conditions = (BattleConditionRules){0};
+    if (r->version >= BATTLE_REQUEST_VERSION_CONDITIONS) {
+        conditions_decode(q + (unsigned)r->type_count * r->type_count, &r->conditions);
+        return battle_condition_rules_valid(&r->conditions, r->type_count);
+    }
     return true;
 }
 
@@ -385,5 +445,33 @@ bool battle_result_decode(const uint8_t *p, unsigned length, BattleResult *r) {
         for (unsigned m = 0; m < 4; ++m) r->player[i].pp[m] = q[8+m];
     }
     for (unsigned i = 0; i < r->opponent_count; ++i, q += 2) r->opponent_hp[i] = msg_get16(q);
+    return true;
+}
+
+unsigned battle_condition_state_encode(const BattleRosterState *s, uint8_t *p) {
+    p += battle_struggle_state_encode(s, p);
+    for (unsigned side = 0; side < 2; ++side)
+        for (unsigned slot = 0; slot < BATTLE_FIELD_SLOTS; ++slot) {
+            *p++ = s->status[side][slot];
+            for (unsigned stat = 0; stat < BSTAT_COUNT; ++stat)
+                *p++ = (uint8_t)s->stages[side][slot][stat];
+        }
+    return BATTLE_CONDITION_STATE_BYTES;
+}
+
+bool battle_condition_state_decode(const uint8_t *p, unsigned length, BattleRosterState *s) {
+    if (length != BATTLE_CONDITION_STATE_BYTES ||
+        !battle_pivot_state_decode(p, BATTLE_STRUGGLE_STATE_BYTES, s)) return false;
+    p += BATTLE_STRUGGLE_STATE_BYTES;
+    for (unsigned side = 0; side < 2; ++side)
+        for (unsigned slot = 0; slot < BATTLE_FIELD_SLOTS; ++slot) {
+            if (*p > BST_FROSTBITE) return false;
+            s->status[side][slot] = *p++;
+            for (unsigned stat = 0; stat < BSTAT_COUNT; ++stat) {
+                const int8_t stage = (int8_t)*p++;
+                if (stage < -6 || stage > 6) return false;
+                s->stages[side][slot][stat] = stage;
+            }
+        }
     return true;
 }
