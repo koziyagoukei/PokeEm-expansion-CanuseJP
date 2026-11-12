@@ -28,7 +28,7 @@
 
 #define REQUEST_CAPACITY (BATTLE_REQUEST_HEADER + PARTY_SIZE * BATTLE_ENTRY_BYTES + NUMBER_OF_MON_TYPES * NUMBER_OF_MON_TYPES)
 
-enum GbaScreen { SCREEN_PREPARE, SCREEN_COMMAND, SCREEN_MOVES, SCREEN_TARGET, SCREEN_REPLACE, SCREEN_WAIT, SCREEN_ENDED };
+enum GbaScreen { SCREEN_PREPARE, SCREEN_COMMAND, SCREEN_MOVES, SCREEN_TARGET, SCREEN_REPLACE, SCREEN_SWITCH, SCREEN_WAIT, SCREEN_ENDED };
 
 struct FrontierGcBattle
 {
@@ -42,7 +42,7 @@ struct FrontierGcBattle
     u8 leadSlot;
     u8 policy;
     u8 format, count, fieldCount;
-    bool8 roster;
+    u8 roster; // zero for the legacy app, otherwise the roster app version
     u8 rotation, target;
     BattleMultiState multiState;
     u8 reserveMask;
@@ -63,7 +63,7 @@ static EWRAM_DATA struct FrontierGcBattle *sBattle = NULL;
 static EWRAM_DATA u8 sPendingPolicy = 0;
 static EWRAM_DATA u16 sPendingTrainer = 0;
 static EWRAM_DATA u8 sPendingFormat = 0;
-static EWRAM_DATA bool8 sPendingRoster = FALSE;
+static EWRAM_DATA u8 sPendingRoster = 0;
 
 static const u8 sText_NoMemory[] = _("{ENG}Not enough memory.");
 static const u8 sText_NoLead[] = _("{ENG}No able Pokemon with a supported move.");
@@ -285,7 +285,7 @@ static bool8 BuildRequest(const u8 **reason)
     request->player_count = sBattle->count;
     request->opponent_count = sBattle->count;
     request->active_per_side = sBattle->fieldCount;
-    request->version = sBattle->roster ? BATTLE_REQUEST_VERSION_ROSTER : BATTLE_REQUEST_VERSION;
+    request->version = sBattle->roster ? sBattle->roster : BATTLE_REQUEST_VERSION;
     request->rules = RULE_IGNORE_ABILITIES | RULE_IGNORE_ITEMS | RULE_IGNORE_STATUS | RULE_NO_GIMMICKS
                    | RULE_NO_CRITICAL_HITS | RULE_SUPPORTED_MOVES_ONLY;
     request->trainer_id = sBattle->trainerId;
@@ -351,7 +351,7 @@ static u16 HandleMultiApp(u16 opcode, const u8 *args, u16 argLength, u8 *out, u1
     BattleMultiAction action = sBattle->multiAction;
     u32 side, pos;
     u8 mask = 0;
-    const bool8 roster = sBattle->roster;
+    const bool8 roster = sBattle->roster != 0;
 
     switch (opcode)
     {
@@ -392,7 +392,7 @@ static u16 HandleMultiApp(u16 opcode, const u8 *args, u16 argLength, u8 *out, u1
                         : state.phase == BPHASE_ENDED ? SCREEN_ENDED
                         : state.phase == BPHASE_REPLACE ? SCREEN_REPLACE : SCREEN_WAIT;
         sBattle->cursor = 0;
-        if (mask)
+        if (state.phase == BPHASE_REPLACE)
             while (!(mask & (1u << sBattle->cursor)))
                 sBattle->cursor++;
         sBattle->rotation = BROT_KEEP;
@@ -602,6 +602,7 @@ static void DrawSingle(u8 body, u8 help)
         break;
     case SCREEN_TARGET:
     case SCREEN_REPLACE:
+    case SCREEN_SWITCH:
     case SCREEN_WAIT:
         GcExtension_PrintLine(body, sText_Wait, 0, 3, GC_COLOR_DIM);
         break;
@@ -788,11 +789,14 @@ static void DrawMulti(u8 body, u8 help)
     }
     DrawPositions(body, 1, 0, sBattle->screen == SCREEN_TARGET ? sBattle->target : BATTLE_SLOT_NONE,
                   sBattle->screen == SCREEN_TARGET ? state->targets[pos][sBattle->cursor] : 7);
-    if (sBattle->screen == SCREEN_REPLACE)
+    if (sBattle->screen == SCREEN_REPLACE || sBattle->screen == SCREEN_SWITCH)
     {
         static const u8 choose[] = _("{ENG}Choose a reserve for ");
-        static const u8 helpText[] = _("{ENG}A: Send out   B: Forfeit");
-        StringCopy(text, choose);
+        static const u8 switchOut[] = _("{ENG}Switch out position ");
+        static const u8 replaceHelp[] = _("{ENG}A: Send out   B: Forfeit");
+        static const u8 switchHelp[] = _("{ENG}A: Switch   B: Back");
+        const bool8 switching = sBattle->screen == SCREEN_SWITCH;
+        StringCopy(text, switching ? switchOut : choose);
         StringAppend(text, PositionName(state->actor));
         GcExtension_PrintLine(body, text, 0, 1, GC_COLOR_HIGHLIGHT);
         u8 row = 2;
@@ -807,7 +811,7 @@ static void DrawMulti(u8 body, u8 help)
             AppendMonLine(text, GcExtension_GetExportMon(GC_EXTRA_SLOT_BASE + i));
             GcExtension_PrintLine(body, text, 12, row++, color);
         }
-        GcExtension_PrintLine(help, helpText, 0, 0, GC_COLOR_NORMAL);
+        GcExtension_PrintLine(help, switching ? switchHelp : replaceHelp, 0, 0, GC_COLOR_NORMAL);
         return;
     }
     if (sBattle->screen == SCREEN_ENDED)
@@ -835,9 +839,12 @@ static void DrawMulti(u8 body, u8 help)
     {
         DrawPositions(body, 0, 3, pos, 7);
         GcExtension_PrintLine(body, sText_Fight, 0, 4, GC_COLOR_HIGHLIGHT);
+        static const u8 switchHint[] = _("{ENG}START: Party");
         GcExtension_PrintLine(help, rotation ? sText_RotateHelp
                             : state->flags & BATTLE_MULTI_SHIFT ? sText_ShiftHelp : sText_HelpCommand,
                               0, 0, GC_COLOR_NORMAL);
+        if (sBattle->reserveMask)
+            GcExtension_PrintLine(body, switchHint, 88, 4, GC_COLOR_NORMAL);
         return;
     }
     if (sBattle->screen == SCREEN_TARGET)
@@ -895,6 +902,11 @@ static void InputMulti(void)
             }
             sBattle->rotation = rotation;
         }
+        else if (JOY_NEW(START_BUTTON) && sBattle->reserveMask)
+        {
+            sBattle->cursor = ChoiceAfter(sBattle->reserveMask, sBattle->count - 1, sBattle->count, FALSE);
+            sBattle->screen = SCREEN_SWITCH;
+        }
         else if (JOY_NEW(SELECT_BUTTON) && (state->flags & BATTLE_MULTI_SHIFT))
             QueueMultiAction(BACTION_SHIFT, 0);
         else if (JOY_NEW(B_BUTTON))
@@ -936,12 +948,18 @@ static void InputMulti(void)
             return;
         break;
     case SCREEN_REPLACE:
+    case SCREEN_SWITCH:
         if (JOY_REPEAT(DPAD_UP) || JOY_REPEAT(DPAD_DOWN))
             sBattle->cursor = ChoiceAfter(sBattle->reserveMask, sBattle->cursor, sBattle->count, JOY_REPEAT(DPAD_UP));
         else if (JOY_NEW(A_BUTTON))
-            QueueMultiAction(BACTION_REPLACE, sBattle->cursor);
+            QueueMultiAction(sBattle->screen == SCREEN_SWITCH ? BACTION_SWITCH : BACTION_REPLACE, sBattle->cursor);
         else if (JOY_NEW(B_BUTTON))
-            QueueMultiAction(BACTION_FORFEIT, 0);
+        {
+            if (sBattle->screen == SCREEN_SWITCH)
+                sBattle->screen = SCREEN_COMMAND;
+            else
+                QueueMultiAction(BACTION_FORFEIT, 0);
+        }
         else
             return;
         break;
@@ -992,7 +1010,7 @@ static const struct GcModeHandler sFrontierGcBattleMode =
 
 // Script special (waitstate): VAR_0x8004 = result policy (0 show, 1 apply
 // HP/PP), VAR_0x8005 = trainer id. VAR_0x8006 is the format (0 for
-// Single), with bit 8 selecting the Double roster fixture.
+// Single), with bit 8 selecting the replacement fixture or bit 9 switching.
 static EWRAM_DATA struct GcModeHandler sFrontierGcRosterMode = {0};
 
 void FrontierGcBattle_Start(void)
@@ -1001,11 +1019,18 @@ void FrontierGcBattle_Start(void)
     sPendingPolicy = gSpecialVar_0x8004 == RESULT_POLICY_APPLY_HP_PP ? RESULT_POLICY_APPLY_HP_PP : RESULT_POLICY_DISPLAY_ONLY;
     sPendingTrainer = gSpecialVar_0x8005;
     sPendingFormat = format >= BATTLE_FORMAT_DOUBLE && format <= BATTLE_FORMAT_ROTATION ? format : BATTLE_FORMAT_SINGLE;
-    sPendingRoster = format == BATTLE_FORMAT_DOUBLE && (gSpecialVar_0x8006 & 0x100) != 0;
+    sPendingRoster = 0;
+    if (format == BATTLE_FORMAT_DOUBLE)
+    {
+        if (gSpecialVar_0x8006 & 0x200)
+            sPendingRoster = BATTLE_APP_VERSION_SWITCH;
+        else if (gSpecialVar_0x8006 & 0x100)
+            sPendingRoster = BATTLE_APP_VERSION_ROSTER;
+    }
     if (sPendingRoster)
     {
         sFrontierGcRosterMode = sFrontierGcBattleMode;
-        sFrontierGcRosterMode.appVersion = BATTLE_APP_VERSION_ROSTER;
+        sFrontierGcRosterMode.appVersion = sPendingRoster;
         GcStartMode(&sFrontierGcRosterMode);
     }
     else

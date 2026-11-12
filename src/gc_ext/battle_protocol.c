@@ -50,7 +50,7 @@ uint32_t battle_request_size(const BattleRequest *r) {
 uint32_t battle_request_encode(const BattleRequest *r, uint8_t *p, uint32_t capacity) {
     const uint32_t size = battle_request_size(r);
     const uint8_t version = r->version ? r->version : BATTLE_REQUEST_VERSION;
-    if ((version != BATTLE_REQUEST_VERSION && version != BATTLE_REQUEST_VERSION_ROSTER) ||
+    if ((version < BATTLE_REQUEST_VERSION || version > BATTLE_REQUEST_VERSION_SWITCH) ||
         size > capacity || r->player_count > BATTLE_MAX_PER_SIDE || r->opponent_count > BATTLE_MAX_PER_SIDE ||
         r->type_count > BATTLE_MAX_TYPES)
         return 0;
@@ -84,7 +84,7 @@ uint32_t battle_request_encode(const BattleRequest *r, uint8_t *p, uint32_t capa
 
 bool battle_request_decode(const uint8_t *p, uint32_t length, BattleRequest *r) {
     if (length < BATTLE_REQUEST_HEADER ||
-        (p[0] != BATTLE_REQUEST_VERSION && p[0] != BATTLE_REQUEST_VERSION_ROSTER) ||
+        (p[0] < BATTLE_REQUEST_VERSION || p[0] > BATTLE_REQUEST_VERSION_SWITCH) ||
         msg_get16(p+14) != BATTLE_ENTRY_BYTES)
         return false;
     r->version = p[0];
@@ -259,12 +259,12 @@ unsigned battle_multi_action_encode(const BattleMultiAction *a, uint8_t *p) {
     return BATTLE_MULTI_ACTION_BYTES;
 }
 
-static bool decode_multi_action(const uint8_t *p, unsigned n, BattleMultiAction *a, bool roster) {
+static bool decode_multi_action(const uint8_t *p, unsigned n, BattleMultiAction *a, uint8_t max_action) {
     if (n != BATTLE_MULTI_ACTION_BYTES || p[2] >= BATTLE_FIELD_SLOTS ||
-        p[3] > (roster ? BACTION_REPLACE : BACTION_SHIFT) ||
+        p[3] > max_action ||
         p[4] >= 4 || p[6] > BROT_RIGHT || (p[7] & ~BACTION_FLAG_EXIT))
         return false;
-    if (p[3] == BACTION_REPLACE) {
+    if (p[3] == BACTION_REPLACE || p[3] == BACTION_SWITCH) {
         if (p[5] >= BATTLE_MAX_PER_SIDE || p[4] || p[6]) return false;
     } else if (p[5] >= BATTLE_FIELD_SLOTS) {
         return false;
@@ -280,11 +280,15 @@ static bool decode_multi_action(const uint8_t *p, unsigned n, BattleMultiAction 
 }
 
 bool battle_multi_action_decode(const uint8_t *p, unsigned n, BattleMultiAction *a) {
-    return decode_multi_action(p, n, a, false);
+    return decode_multi_action(p, n, a, BACTION_SHIFT);
 }
 
 bool battle_roster_action_decode(const uint8_t *p, unsigned n, BattleMultiAction *a) {
-    return decode_multi_action(p, n, a, true);
+    return decode_multi_action(p, n, a, BACTION_REPLACE);
+}
+
+bool battle_switch_action_decode(const uint8_t *p, unsigned n, BattleMultiAction *a) {
+    return decode_multi_action(p, n, a, BACTION_SWITCH);
 }
 
 unsigned battle_result_encode(const BattleResult *r, uint8_t *p) {

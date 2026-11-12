@@ -19,6 +19,7 @@ extern "C" {
 #define APP_GC_BATTLE 0x4247      // bytes 'G','B'
 #define BATTLE_APP_VERSION 1
 #define BATTLE_APP_VERSION_ROSTER 2
+#define BATTLE_APP_VERSION_SWITCH 3
 #define BATTLE_MODE_VERSION 1
 
 enum BattleFormat { BATTLE_FORMAT_SINGLE = 1, BATTLE_FORMAT_DOUBLE = 2, BATTLE_FORMAT_TRIPLE = 3, BATTLE_FORMAT_ROTATION = 4 };
@@ -92,6 +93,7 @@ typedef struct {
 //  .. type chart: N*N u8, [attack type][defend type], multiplier in quarters (0,2,4,8)
 #define BATTLE_REQUEST_VERSION 1
 #define BATTLE_REQUEST_VERSION_ROSTER 2
+#define BATTLE_REQUEST_VERSION_SWITCH 3
 #define BATTLE_REQUEST_HEADER 24
 typedef struct {
     uint8_t format, battle_type, player_count, opponent_count, active_per_side;
@@ -156,7 +158,7 @@ typedef struct {
 
 // BattleAction, 4 bytes: u8 turn, u8 action, u8 move slot, u8 flags.
 // The turn echoes the CHOOSE state it answers, so stale input is ignored.
-enum BattleActionKind { BACTION_NONE = 0, BACTION_MOVE = 1, BACTION_FORFEIT = 2, BACTION_SHIFT = 3, BACTION_REPLACE = 4 };
+enum BattleActionKind { BACTION_NONE = 0, BACTION_MOVE = 1, BACTION_FORFEIT = 2, BACTION_SHIFT = 3, BACTION_REPLACE = 4, BACTION_SWITCH = 5 };
 #define BACTION_FLAG_EXIT (1u << 0)
 #define BATTLE_ACTION_BYTES 4
 typedef struct {
@@ -208,6 +210,8 @@ unsigned battle_roster_state_encode(const BattleRosterState *state, uint8_t *out
 bool battle_roster_state_decode(const uint8_t *in, unsigned length, BattleRosterState *state);
 // Same layout as multi action. REPLACE uses target as a roster index.
 bool battle_roster_action_decode(const uint8_t *in, unsigned length, BattleMultiAction *action);
+// V3 permits SWITCH and supplies a reserve mask during CHOOSE.
+bool battle_switch_action_decode(const uint8_t *in, unsigned length, BattleMultiAction *action);
 
 // GcBattleResultV1 (RESULT payload, result version 1).
 //   0 u8 outcome   1 u8 turns   2 u8 player count P   3 u8 opponent count O

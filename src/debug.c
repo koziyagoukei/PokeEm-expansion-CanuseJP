@@ -417,6 +417,7 @@ extern const u8 Debug_EventScript_GcBattleRotation[];
 extern const u8 Debug_EventScript_GcBattleDoubleStrong[];
 extern const u8 Debug_EventScript_GcBattleStrongApply[];
 extern const u8 Debug_EventScript_GcBattleReserve[];
+extern const u8 Debug_EventScript_GcBattleSwitch[];
 extern const u8 Debug_EventScript_WallyTutorial[];
 extern const u8 Debug_EventScript_PrintTimeOfDay[];
 extern const u8 Debug_EventScript_TellTheTime[];
@@ -636,6 +637,7 @@ static const struct DebugMenuOption sDebugMenu_Actions_Utilities[] =
     { COMPOUND_STRING("{ENG}GC Double (strong test)"), DebugAction_ExecuteScript, Debug_EventScript_GcBattleDoubleStrong },
     { COMPOUND_STRING("{ENG}GC Steven (apply HP/PP)"), DebugAction_ExecuteScript, Debug_EventScript_GcBattleStrongApply },
     { COMPOUND_STRING("{ENG}GC Double (reserve test)"), DebugAction_ExecuteScript, Debug_EventScript_GcBattleReserve },
+    { COMPOUND_STRING("{ENG}GC Double (switch test)"), DebugAction_ExecuteScript, Debug_EventScript_GcBattleSwitch },
     { NULL }
 };
 
