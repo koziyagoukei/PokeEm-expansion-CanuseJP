@@ -24,6 +24,7 @@
 #include "constants/songs.h"
 #include "gc_extension.h"
 #include "gc_ext/battle_protocol.h"
+#include "frontier_gc_battle.h"
 
 #define REQUEST_CAPACITY (BATTLE_REQUEST_HEADER + 2 * BATTLE_ENTRY_BYTES + NUMBER_OF_MON_TYPES * NUMBER_OF_MON_TYPES)
 
@@ -37,6 +38,7 @@ struct FrontierGcBattle
     u32 battleId;
     u32 leadPersonality;
     u16 trainerId;
+    u8 environment;
     u8 leadSlot;
     u8 policy;
     u8 screen;
@@ -145,6 +147,10 @@ static u8 FillEntry(u32 slot, BattleEntry *entry)
 
     GcExtension_BuildRecord(slot, &entry->record);
     species = SanitizeSpeciesId(GetMonData(mon, MON_DATA_SPECIES));
+    // Where the game would place this picture (battle_anim_mons.c).
+    entry->mon.front_y = gSpeciesInfo[species].frontPicYOffset;
+    entry->mon.back_y = gSpeciesInfo[species].backPicYOffset;
+    entry->mon.elevation = gSpeciesInfo[species].enemyMonElevation;
     entry->mon.types[0] = gSpeciesInfo[species].types[0];
     entry->mon.types[1] = gSpeciesInfo[species].types[1];
     entry->mon.type_count = entry->mon.types[0] == entry->mon.types[1] ? 1 : 2;
@@ -217,6 +223,7 @@ static bool8 BuildRequest(const u8 **reason)
     request->result_policy = sBattle->policy;
     request->type_count = NUMBER_OF_MON_TYPES;
     request->battle_id = sBattle->battleId;
+    request->environment = sBattle->environment;
     sBattle->supportedMask = FillEntry(lead, &request->player[0]);
     if (FillEntry(GC_EXTRA_SLOT_BASE, &request->opponent[0]) == 0)
     {
@@ -255,6 +262,7 @@ static bool8 Init(const u8 **reason)
     }
     sBattle->policy = sPendingPolicy;
     sBattle->trainerId = sPendingTrainer;
+    sBattle->environment = BattleSetup_GetEnvironmentId();
     sBattle->screen = SCREEN_PREPARE;
     return BuildRequest(reason);
 }
@@ -360,8 +368,17 @@ static const u8 *Finish(bool8 *changedParty)
     return sBattle->message;
 }
 
+void FrontierGcBattle_GetScene(struct FrontierGcBattleScene *scene)
+{
+    scene->player = sBattle != NULL ? &gParties[B_TRAINER_PLAYER][sBattle->leadSlot] : NULL;
+    scene->opponent = sBattle != NULL ? &sBattle->opponent[0] : NULL;
+    scene->trainerId = sBattle != NULL ? sBattle->trainerId : 0;
+    scene->environment = sBattle != NULL ? sBattle->environment : 0;
+}
+
 static void FreeBattle(void)
 {
+    FrontierGcBattle_FreeGfx();
     GcExtension_SetExtraMons(NULL, 0);
     TRY_FREE_AND_SET_NULL(sBattle);
 }
@@ -546,6 +563,7 @@ static const struct GcModeHandler sFrontierGcBattleMode =
     .onResult = OnResult,
     .finish = Finish,
     .free = FreeBattle,
+    .resolveAsset = FrontierGcBattle_ResolveAsset,
 };
 
 // Script special (waitstate): VAR_0x8004 = result policy (0 show, 1 apply
