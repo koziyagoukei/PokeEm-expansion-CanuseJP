@@ -34,7 +34,7 @@ static void mon_encode(const BattleMon *m, uint8_t *p, bool effects) {
     }
 }
 
-static bool mon_decode(const uint8_t *p, BattleMon *m, bool effects) {
+static bool mon_decode(const uint8_t *p, BattleMon *m, uint8_t max_effect) {
     if (p[0] != BATTLE_MON_VERSION || p[1] < 1 || p[1] > 2) return false;
     m->type_count = p[1];
     m->types[0] = p[2];
@@ -43,8 +43,8 @@ static bool mon_decode(const uint8_t *p, BattleMon *m, bool effects) {
     m->elevation = 0;
     for (unsigned i = 0; i < 4; ++i) {
         move_decode(p + 8 + 8*i, &m->moves[i]);
-        m->moves[i].effect = effects ? p[4+i] : BME_HIT;
-        if (m->moves[i].effect > BME_FORCE_OUT_ON_HIT) return false;
+        m->moves[i].effect = max_effect ? p[4+i] : BME_HIT;
+        if (m->moves[i].effect > max_effect) return false;
     }
     return true;
 }
@@ -57,7 +57,7 @@ uint32_t battle_request_size(const BattleRequest *r) {
 uint32_t battle_request_encode(const BattleRequest *r, uint8_t *p, uint32_t capacity) {
     const uint32_t size = battle_request_size(r);
     const uint8_t version = r->version ? r->version : BATTLE_REQUEST_VERSION;
-    if ((version < BATTLE_REQUEST_VERSION || version > BATTLE_REQUEST_VERSION_DRAG) ||
+    if ((version < BATTLE_REQUEST_VERSION || version > BATTLE_REQUEST_VERSION_PIVOT) ||
         size > capacity || r->player_count > BATTLE_MAX_PER_SIDE || r->opponent_count > BATTLE_MAX_PER_SIDE ||
         r->type_count > BATTLE_MAX_TYPES)
         return 0;
@@ -96,7 +96,7 @@ uint32_t battle_request_encode(const BattleRequest *r, uint8_t *p, uint32_t capa
 
 bool battle_request_decode(const uint8_t *p, uint32_t length, BattleRequest *r) {
     if (length < BATTLE_REQUEST_HEADER ||
-        (p[0] < BATTLE_REQUEST_VERSION || p[0] > BATTLE_REQUEST_VERSION_DRAG) ||
+        (p[0] < BATTLE_REQUEST_VERSION || p[0] > BATTLE_REQUEST_VERSION_PIVOT) ||
         msg_get16(p+14) != BATTLE_ENTRY_BYTES)
         return false;
     r->version = p[0];
@@ -130,7 +130,9 @@ bool battle_request_decode(const uint8_t *p, uint32_t length, BattleRequest *r) 
         const unsigned count = side ? r->opponent_count : r->player_count;
         for (unsigned i = 0; i < count; ++i, q += BATTLE_ENTRY_BYTES)
             if (!pkmn_record_decode(q, PKMN_RECORD_BYTES, &e[i].record) ||
-                !mon_decode(q + PKMN_RECORD_BYTES, &e[i].mon, r->version >= BATTLE_REQUEST_VERSION_DRAG))
+                !mon_decode(q + PKMN_RECORD_BYTES, &e[i].mon,
+                            r->version >= BATTLE_REQUEST_VERSION_PIVOT ? BME_PIVOT :
+                            r->version >= BATTLE_REQUEST_VERSION_DRAG ? BME_FORCE_OUT_ON_HIT : BME_HIT))
                 return false;
     }
     for (unsigned i = 0; i < (unsigned)r->type_count * r->type_count; ++i) r->type_chart[i] = q[i];
@@ -208,7 +210,7 @@ static bool decode_multi_state(const uint8_t *p, unsigned n, BattleMultiState *s
     if (n != BATTLE_MULTI_STATE_BYTES || p[0] < BPHASE_WAIT || p[0] > max_phase ||
         p[2] > OUTCOME_UNSUPPORTED || p[3] >= BATTLE_FIELD_SLOTS ||
         (p[4] & ~BATTLE_MULTI_SHIFT) ||
-        ((p[0] == BPHASE_CHOOSE || p[0] == BPHASE_REPLACE) && !msg_get16(p+5)))
+        ((p[0] == BPHASE_CHOOSE || p[0] >= BPHASE_REPLACE) && !msg_get16(p+5)))
         return false;
     s->phase = p[0];
     s->turn = p[1];
@@ -249,15 +251,15 @@ unsigned battle_roster_state_encode(const BattleRosterState *s, uint8_t *p) {
     return BATTLE_ROSTER_STATE_BYTES;
 }
 
-bool battle_roster_state_decode(const uint8_t *p, unsigned n, BattleRosterState *s) {
+static bool decode_roster_state(const uint8_t *p, unsigned n, BattleRosterState *s, uint8_t max_phase) {
     if (n != BATTLE_ROSTER_STATE_BYTES ||
-        !decode_multi_state(p, BATTLE_MULTI_STATE_BYTES, &s->field_state, BPHASE_REPLACE))
+        !decode_multi_state(p, BATTLE_MULTI_STATE_BYTES, &s->field_state, max_phase))
         return false;
     const uint8_t *q = p + BATTLE_MULTI_STATE_BYTES;
     s->struggle_mask = 0;
     s->reserves = *q++;
     if (s->reserves >= (1u << BATTLE_MAX_PER_SIDE) ||
-        (s->field_state.phase == BPHASE_REPLACE && !s->reserves))
+        (s->field_state.phase >= BPHASE_REPLACE && !s->reserves))
         return false;
     for (unsigned i = 0; i < BATTLE_MAX_PER_SIDE; ++i, q += 5) {
         s->player[i] = (BattleFieldMon){q[0], msg_get16(q+1), msg_get16(q+3)};
@@ -266,6 +268,10 @@ bool battle_roster_state_decode(const uint8_t *p, unsigned n, BattleRosterState 
             return false;
     }
     return true;
+}
+
+bool battle_roster_state_decode(const uint8_t *p, unsigned n, BattleRosterState *s) {
+    return decode_roster_state(p, n, s, BPHASE_REPLACE);
 }
 
 unsigned battle_multi_action_encode(const BattleMultiAction *a, uint8_t *p) {
@@ -284,7 +290,7 @@ static bool decode_multi_action(const uint8_t *p, unsigned n, BattleMultiAction 
         p[3] > max_action ||
         p[4] >= 4 || p[6] > BROT_RIGHT || (p[7] & ~BACTION_FLAG_EXIT))
         return false;
-    if (p[3] == BACTION_REPLACE || p[3] == BACTION_SWITCH) {
+    if (p[3] == BACTION_REPLACE || p[3] == BACTION_SWITCH || p[3] == BACTION_PIVOT) {
         if (p[5] >= BATTLE_MAX_PER_SIDE || p[4] || p[6]) return false;
     } else if (p[3] == BACTION_STRUGGLE) {
         if (p[4] || p[5]) return false;
@@ -318,12 +324,24 @@ unsigned battle_struggle_state_encode(const BattleRosterState *s, uint8_t *p) {
     return BATTLE_STRUGGLE_STATE_BYTES;
 }
 
-bool battle_struggle_state_decode(const uint8_t *p, unsigned n, BattleRosterState *s) {
+static bool decode_struggle_state(const uint8_t *p, unsigned n, BattleRosterState *s, uint8_t max_phase) {
     if (n != BATTLE_STRUGGLE_STATE_BYTES || p[BATTLE_ROSTER_STATE_BYTES] >= (1u << BATTLE_FIELD_SLOTS) ||
-        !battle_roster_state_decode(p, BATTLE_ROSTER_STATE_BYTES, s))
+        !decode_roster_state(p, BATTLE_ROSTER_STATE_BYTES, s, max_phase))
         return false;
     s->struggle_mask = p[BATTLE_ROSTER_STATE_BYTES];
     return true;
+}
+
+bool battle_struggle_state_decode(const uint8_t *p, unsigned n, BattleRosterState *s) {
+    return decode_struggle_state(p, n, s, BPHASE_REPLACE);
+}
+
+bool battle_pivot_state_decode(const uint8_t *p, unsigned n, BattleRosterState *s) {
+    return decode_struggle_state(p, n, s, BPHASE_PIVOT);
+}
+
+bool battle_pivot_action_decode(const uint8_t *p, unsigned n, BattleMultiAction *a) {
+    return decode_multi_action(p, n, a, BACTION_PIVOT);
 }
 
 bool battle_struggle_action_decode(const uint8_t *p, unsigned n, BattleMultiAction *a) {

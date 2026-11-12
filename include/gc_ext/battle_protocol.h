@@ -22,6 +22,7 @@ extern "C" {
 #define BATTLE_APP_VERSION_SWITCH 3
 #define BATTLE_APP_VERSION_STRUGGLE 4
 #define BATTLE_APP_VERSION_DRAG 5
+#define BATTLE_APP_VERSION_PIVOT 6
 #define BATTLE_MODE_VERSION 1
 
 enum BattleFormat { BATTLE_FORMAT_SINGLE = 1, BATTLE_FORMAT_DOUBLE = 2, BATTLE_FORMAT_TRIPLE = 3, BATTLE_FORMAT_ROTATION = 4 };
@@ -58,7 +59,7 @@ enum BattleTarget {
 #define UNSUP_MULTI_HIT   (1u << 5)
 #define UNSUP_OTHER       (1u << 6)  // fixed crits, recoil-like flags, explosion ...
 #define UNSUP_EMPTY       (1u << 7)  // no move in this slot
-enum GcResolvedMoveEffect { BME_HIT = 0, BME_FORCE_OUT = 1, BME_FORCE_OUT_ON_HIT = 2 };
+enum GcResolvedMoveEffect { BME_HIT = 0, BME_FORCE_OUT = 1, BME_FORCE_OUT_ON_HIT = 2, BME_PIVOT = 3 };
 typedef struct {
     uint16_t power;
     uint8_t type, category, accuracy;
@@ -99,6 +100,7 @@ typedef struct {
 #define BATTLE_REQUEST_VERSION_SWITCH 3
 #define BATTLE_REQUEST_VERSION_STRUGGLE 4
 #define BATTLE_REQUEST_VERSION_DRAG 5
+#define BATTLE_REQUEST_VERSION_PIVOT 6
 #define BATTLE_REQUEST_HEADER 24
 enum StruggleRecoil { BSTRUGGLE_MAX_HP_FLOOR = 1, BSTRUGGLE_MAX_HP_NEAREST = 2 };
 #define BATTLE_MOVE_STRUGGLE 0xffffu  // logical presentation identifier
@@ -156,7 +158,7 @@ enum BattleOp {
 //   0 u8 phase   1 u8 turn   2 u8 outcome (when ENDED)  3 u8 player slot
 //   4 u16 player hp   6 u16 player max hp   8 u16 opponent hp   10 u16 opponent max hp
 //  12 u8 pp[4] of the active player battler
-enum BattlePhase { BPHASE_WAIT = 1, BPHASE_CHOOSE = 2, BPHASE_ENDED = 3, BPHASE_REPLACE = 4 };
+enum BattlePhase { BPHASE_WAIT = 1, BPHASE_CHOOSE = 2, BPHASE_ENDED = 3, BPHASE_REPLACE = 4, BPHASE_PIVOT = 5 };
 #define BATTLE_STATE_BYTES 16
 typedef struct {
     uint8_t phase, turn, outcome, player_slot;
@@ -166,7 +168,7 @@ typedef struct {
 
 // BattleAction, 4 bytes: u8 turn, u8 action, u8 move slot, u8 flags.
 // The turn echoes the CHOOSE state it answers, so stale input is ignored.
-enum BattleActionKind { BACTION_NONE = 0, BACTION_MOVE = 1, BACTION_FORFEIT = 2, BACTION_SHIFT = 3, BACTION_REPLACE = 4, BACTION_SWITCH = 5, BACTION_STRUGGLE = 6 };
+enum BattleActionKind { BACTION_NONE = 0, BACTION_MOVE = 1, BACTION_FORFEIT = 2, BACTION_SHIFT = 3, BACTION_REPLACE = 4, BACTION_SWITCH = 5, BACTION_STRUGGLE = 6, BACTION_PIVOT = 7 };
 #define BACTION_FLAG_EXIT (1u << 0)
 #define BATTLE_ACTION_BYTES 4
 typedef struct {
@@ -226,6 +228,10 @@ bool battle_switch_action_decode(const uint8_t *in, unsigned length, BattleMulti
 unsigned battle_struggle_state_encode(const BattleRosterState *state, uint8_t *out);
 bool battle_struggle_state_decode(const uint8_t *in, unsigned length, BattleRosterState *state);
 bool battle_struggle_action_decode(const uint8_t *in, unsigned length, BattleMultiAction *action);
+
+// V6 uses the V4/V5 state size, and adds a mid-turn pivot phase.
+bool battle_pivot_state_decode(const uint8_t *in, unsigned length, BattleRosterState *state);
+bool battle_pivot_action_decode(const uint8_t *in, unsigned length, BattleMultiAction *action);
 
 // GcBattleResultV1 (RESULT payload, result version 1).
 //   0 u8 outcome   1 u8 turns   2 u8 player count P   3 u8 opponent count O

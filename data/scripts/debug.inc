@@ -481,6 +481,15 @@ Debug_EventScript_GcBattleDrag::
 	releaseall
 	end
 
+Debug_EventScript_GcBattlePivot::
+	lockall
+	setvar VAR_0x8004, 0
+	setvar VAR_0x8005, TRAINER_CALVIN_1
+	setvar VAR_0x8006, 0x1002
+	special FrontierGcBattle_Start
+	releaseall
+	end
+
 Debug_EventScript_WallyTutorial::
 	special SavePlayerParty
 	special LoadWallyZigzagoon

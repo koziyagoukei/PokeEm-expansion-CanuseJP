@@ -29,7 +29,7 @@
 
 #define REQUEST_CAPACITY (BATTLE_REQUEST_HEADER + PARTY_SIZE * BATTLE_ENTRY_BYTES + NUMBER_OF_MON_TYPES * NUMBER_OF_MON_TYPES)
 
-enum GbaScreen { SCREEN_PREPARE, SCREEN_COMMAND, SCREEN_MOVES, SCREEN_TARGET, SCREEN_REPLACE, SCREEN_SWITCH, SCREEN_WAIT, SCREEN_ENDED };
+enum GbaScreen { SCREEN_PREPARE, SCREEN_COMMAND, SCREEN_MOVES, SCREEN_TARGET, SCREEN_REPLACE, SCREEN_SWITCH, SCREEN_PIVOT, SCREEN_WAIT, SCREEN_ENDED };
 
 struct FrontierGcBattle
 {
@@ -139,6 +139,8 @@ static void ResolveMove(enum Move move, BattleMove *out)
             out->effect = BME_FORCE_OUT;
         else if (effect == EFFECT_HIT_SWITCH_TARGET)
             out->effect = BME_FORCE_OUT_ON_HIT;
+        else if (sBattle->roster >= BATTLE_APP_VERSION_PIVOT && effect == EFFECT_HIT_ESCAPE)
+            out->effect = BME_PIVOT;
     }
     // Move flags are resolved here so the host can remain game-independent.
     if (sBattle->format == BATTLE_FORMAT_TRIPLE && move == MOVE_WING_ATTACK)
@@ -242,6 +244,11 @@ static bool8 BuildFixtureEntries(BattleRequest *request, const u8 **reason)
                 }
                 else if (side == 1 && i == 1)
                     SetMonMoveSlot(mon, MOVE_TACKLE, 0);
+            }
+            if (sBattle->roster == BATTLE_APP_VERSION_PIVOT && side == 0 && i == 0)
+            {
+                SetMonMoveSlot(mon, MOVE_U_TURN, 0);
+                SetMonMoveSlot(mon, MOVE_WING_ATTACK, 1);
             }
             if (sBattle->roster && sBattle->roster < BATTLE_APP_VERSION_DRAG && side == 0 && i == 0)
             {
@@ -405,7 +412,12 @@ static u16 HandleMultiApp(u16 opcode, const u8 *args, u16 argLength, u8 *out, u1
             BattleRosterState received;
             if (opcode != BATTLE_OP_STATE_ROSTER)
                 return APP_BAD_ARGS;
-            if (sBattle->roster >= BATTLE_APP_VERSION_STRUGGLE)
+            if (sBattle->roster == BATTLE_APP_VERSION_PIVOT)
+            {
+                if (!battle_pivot_state_decode(args, argLength, &received))
+                    return APP_BAD_ARGS;
+            }
+            else if (sBattle->roster >= BATTLE_APP_VERSION_STRUGGLE)
             {
                 if (!battle_struggle_state_decode(args, argLength, &received))
                     return APP_BAD_ARGS;
@@ -420,8 +432,8 @@ static u16 HandleMultiApp(u16 opcode, const u8 *args, u16 argLength, u8 *out, u1
             if (struggle >= (1u << sBattle->fieldCount))
                 return APP_BAD_ARGS;
             if (mask >= (1u << sBattle->count)
-             || (state.phase == BPHASE_REPLACE && (state.actor >= sBattle->fieldCount
-                 || state.field[0][state.actor].party_slot != BATTLE_SLOT_NONE)))
+             || (state.phase >= BPHASE_REPLACE && (state.actor >= sBattle->fieldCount
+                 || ((state.phase == BPHASE_REPLACE) != (state.field[0][state.actor].party_slot == BATTLE_SLOT_NONE)))))
                 return APP_BAD_ARGS;
             for (pos = 0; pos < BATTLE_MAX_PER_SIDE; pos++)
                 if (received.player[pos].party_slot != (pos < sBattle->count ? GC_EXTRA_SLOT_BASE + pos : BATTLE_SLOT_NONE))
@@ -446,9 +458,10 @@ static u16 HandleMultiApp(u16 opcode, const u8 *args, u16 argLength, u8 *out, u1
         sBattle->multiAction = (BattleMultiAction){.token = state.token, .actor = state.actor};
         sBattle->screen = state.phase == BPHASE_CHOOSE ? SCREEN_COMMAND
                         : state.phase == BPHASE_ENDED ? SCREEN_ENDED
-                        : state.phase == BPHASE_REPLACE ? SCREEN_REPLACE : SCREEN_WAIT;
+                        : state.phase == BPHASE_REPLACE ? SCREEN_REPLACE
+                        : state.phase == BPHASE_PIVOT ? SCREEN_PIVOT : SCREEN_WAIT;
         sBattle->cursor = 0;
-        if (state.phase == BPHASE_REPLACE)
+        if (state.phase >= BPHASE_REPLACE)
             while (!(mask & (1u << sBattle->cursor)))
                 sBattle->cursor++;
         sBattle->rotation = BROT_KEEP;
@@ -659,6 +672,7 @@ static void DrawSingle(u8 body, u8 help)
     case SCREEN_TARGET:
     case SCREEN_REPLACE:
     case SCREEN_SWITCH:
+    case SCREEN_PIVOT:
     case SCREEN_WAIT:
         GcExtension_PrintLine(body, sText_Wait, 0, 3, GC_COLOR_DIM);
         break;
@@ -845,7 +859,7 @@ static void DrawMulti(u8 body, u8 help)
     }
     DrawPositions(body, 1, 0, sBattle->screen == SCREEN_TARGET ? sBattle->target : BATTLE_SLOT_NONE,
                   sBattle->screen == SCREEN_TARGET ? state->targets[pos][sBattle->cursor] : 7);
-    if (sBattle->screen == SCREEN_REPLACE || sBattle->screen == SCREEN_SWITCH)
+    if (sBattle->screen == SCREEN_REPLACE || sBattle->screen == SCREEN_SWITCH || sBattle->screen == SCREEN_PIVOT)
     {
         static const u8 choose[] = _("{ENG}Choose a reserve for ");
         static const u8 switchOut[] = _("{ENG}Switch out position ");
@@ -1009,10 +1023,12 @@ static void InputMulti(void)
         break;
     case SCREEN_REPLACE:
     case SCREEN_SWITCH:
+    case SCREEN_PIVOT:
         if (JOY_REPEAT(DPAD_UP) || JOY_REPEAT(DPAD_DOWN))
             sBattle->cursor = ChoiceAfter(sBattle->reserveMask, sBattle->cursor, sBattle->count, JOY_REPEAT(DPAD_UP));
         else if (JOY_NEW(A_BUTTON))
-            QueueMultiAction(sBattle->screen == SCREEN_SWITCH ? BACTION_SWITCH : BACTION_REPLACE, sBattle->cursor);
+            QueueMultiAction(sBattle->screen == SCREEN_SWITCH ? BACTION_SWITCH :
+                             sBattle->screen == SCREEN_PIVOT ? BACTION_PIVOT : BACTION_REPLACE, sBattle->cursor);
         else if (JOY_NEW(B_BUTTON))
         {
             if (sBattle->screen == SCREEN_SWITCH)
@@ -1070,7 +1086,7 @@ static const struct GcModeHandler sFrontierGcBattleMode =
 
 // Script special (waitstate): VAR_0x8004 = result policy (0 show, 1 apply
 // HP/PP), VAR_0x8005 = trainer id. VAR_0x8006 is the format (0 for
-// Single). Bits 8 through 11 select replacement, switch, Struggle or drag.
+// Single). Bits 8 through 12 select replacement, switch, Struggle, drag or pivot.
 static EWRAM_DATA struct GcModeHandler sFrontierGcRosterMode = {0};
 
 void FrontierGcBattle_Start(void)
@@ -1082,7 +1098,9 @@ void FrontierGcBattle_Start(void)
     sPendingRoster = 0;
     if (format == BATTLE_FORMAT_DOUBLE)
     {
-        if (gSpecialVar_0x8006 & 0x800)
+        if (gSpecialVar_0x8006 & 0x1000)
+            sPendingRoster = BATTLE_APP_VERSION_PIVOT;
+        else if (gSpecialVar_0x8006 & 0x800)
             sPendingRoster = BATTLE_APP_VERSION_DRAG;
         else if (gSpecialVar_0x8006 & 0x400)
             sPendingRoster = BATTLE_APP_VERSION_STRUGGLE;
