@@ -7,7 +7,7 @@ GBAで所持しているパーティを、JoyBus経由でGameCube側の専用ソ
 
 ## 入り方
 
-非release buildで、STARTメニュー → デバッグ → べんりきのう → **GC Extension Mode**（最後の項目）を選びます。通常のゲーム進行からは呼ばれません。
+非release buildで、STARTメニュー → デバッグ → べんりきのう → **GC Extension Mode**を選びます。通常のゲーム進行からは呼ばれません。
 
 | 状態 | 操作 |
 |---|---|
@@ -66,3 +66,5 @@ Protocol（`gc_ext/message.h`、version 3）：
 - **RESULT（frame type 14）**：mode id・result version・result id・payloadを受けます。同じresult idは `RESULT_DUPLICATE` として二重適用しません。
 
 Mode id `GC_MODE_PARTY_VIEW` は内蔵のパーティビューアです。`GC_MODE_BATTLE` などの用途固有の処理は、このbranchには含めません。
+
+複数戦のデバッグ項目と通信仕様は [GC Battle 複数戦 PoC](gc_battle_multiformat.md) を参照してください。

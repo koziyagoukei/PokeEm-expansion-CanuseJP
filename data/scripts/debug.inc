@@ -377,6 +377,7 @@ Debug_EventScript_GcBattleWeak::
 	lockall
 	setvar VAR_0x8004, 0
 	setvar VAR_0x8005, TRAINER_CALVIN_1
+	setvar VAR_0x8006, 0
 	special FrontierGcBattle_Start
 	releaseall
 	end
@@ -385,6 +386,7 @@ Debug_EventScript_GcBattleWeakApply::
 	lockall
 	setvar VAR_0x8004, 1
 	setvar VAR_0x8005, TRAINER_CALVIN_1
+	setvar VAR_0x8006, 0
 	special FrontierGcBattle_Start
 	releaseall
 	end
@@ -393,6 +395,52 @@ Debug_EventScript_GcBattleStrong::
 	lockall
 	setvar VAR_0x8004, 0
 	setvar VAR_0x8005, TRAINER_STEVEN
+	setvar VAR_0x8006, 0
+	special FrontierGcBattle_Start
+	releaseall
+	end
+
+Debug_EventScript_GcBattleDouble::
+	lockall
+	setvar VAR_0x8004, 0
+	setvar VAR_0x8005, TRAINER_CALVIN_1
+	setvar VAR_0x8006, 2
+	special FrontierGcBattle_Start
+	releaseall
+	end
+
+Debug_EventScript_GcBattleTriple::
+	lockall
+	setvar VAR_0x8004, 0
+	setvar VAR_0x8005, TRAINER_CALVIN_1
+	setvar VAR_0x8006, 3
+	special FrontierGcBattle_Start
+	releaseall
+	end
+
+Debug_EventScript_GcBattleRotation::
+	lockall
+	setvar VAR_0x8004, 0
+	setvar VAR_0x8005, TRAINER_CALVIN_1
+	setvar VAR_0x8006, 4
+	special FrontierGcBattle_Start
+	releaseall
+	end
+
+Debug_EventScript_GcBattleDoubleStrong::
+	lockall
+	setvar VAR_0x8004, 0
+	setvar VAR_0x8005, TRAINER_STEVEN
+	setvar VAR_0x8006, 2
+	special FrontierGcBattle_Start
+	releaseall
+	end
+
+Debug_EventScript_GcBattleStrongApply::
+	lockall
+	setvar VAR_0x8004, 1
+	setvar VAR_0x8005, TRAINER_STEVEN
+	setvar VAR_0x8006, 0
 	special FrontierGcBattle_Start
 	releaseall
 	end

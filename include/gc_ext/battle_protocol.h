@@ -7,8 +7,7 @@
 // with everything the GameCube battle core needs, resolved from its own game
 // data; the GameCube owns the temporary battle state, RNG and turn
 // resolution and returns a versioned result. All fields are little-endian.
-// Only SINGLE is implemented by the current battle core; the format field
-// already reserves DOUBLE, TRIPLE and ROTATION.
+// Multi formats use separate STATE_MULTI and ACTION_MULTI opcodes.
 
 #include <stdbool.h>
 #include <stdint.h>
@@ -40,10 +39,13 @@ enum BattleResultPolicy { RESULT_POLICY_DISPLAY_ONLY = 0, RESULT_POLICY_APPLY_HP
 //   0 u16 power   2 u8 type   3 u8 category   4 u8 accuracy (0 = never misses)
 //   5 s8 priority 6 u8 target  7 u8 unsupported reasons (0 = supported)
 enum BattleCategory { BCAT_STATUS = 0, BCAT_PHYSICAL = 1, BCAT_SPECIAL = 2 };
-// ALL_FOES = spread moves (both foes / foes and ally). In SINGLE there is one
-// foe and no ally, so they hit that foe at full power; other formats will need
-// spread damage and ally hits before accepting them.
-enum BattleTarget { BTARGET_OTHER = 0, BTARGET_SINGLE = 1, BTARGET_ALL_FOES = 2 };
+// Bit 7 of target bypasses Triple distance; the low bits hold the class.
+enum BattleTarget {
+    BTARGET_OTHER = 0, BTARGET_SINGLE = 1, BTARGET_ALL_FOES = 2,
+    BTARGET_ALL_ADJACENT = 3, BTARGET_SELF = 4,
+};
+#define BTARGET_CLASS_MASK 0x7fu
+#define BTARGET_IGNORE_DISTANCE 0x80u
 #define UNSUP_EFFECT      (1u << 0)  // not a plain damaging effect
 #define UNSUP_SECONDARY   (1u << 1)  // has additional effects
 #define UNSUP_PRIORITY    (1u << 2)
@@ -61,13 +63,13 @@ typedef struct {
 
 // BattleMonV1, 40 bytes, appended to each PokemonRecordV1 in the request.
 //   0 u8 version (1)  1 u8 type count  2 u8 types[2]
-//   4 s8 front pic y offset  5 s8 back pic y offset  6 u8 elevation (opponent)  7 u8 reserved
+//   4..7 reserved (legacy sprite placement metadata is ignored)
 //   8 BattleMove[4]
-// The picture offsets place sprites exactly where the game would.
 #define BATTLE_MON_VERSION 1
 #define BATTLE_MON_BYTES 40
 typedef struct {
     uint8_t type_count, types[2];
+    // Source compatibility for legacy producers; not encoded or used by GC.
     int8_t front_y, back_y;
     uint8_t elevation;
     BattleMove moves[4];
@@ -103,8 +105,8 @@ uint32_t battle_request_size(const BattleRequest *request);
 uint32_t battle_request_encode(const BattleRequest *request, uint8_t *out, uint32_t capacity);
 bool battle_request_decode(const uint8_t *in, uint32_t length, BattleRequest *request);
 
-// Battle presentation assets served by the client from its own battle
-// graphics, so the host draws the game's real UI (types 0x02xx).
+// Legacy UI asset IDs (0x02xx) for older client/host pairs. The native GC
+// presentation does not request these. Keep IDs reserved for compatibility.
 enum {
     ASSET_BATTLE_BG = 0x0201,         // id = environment; PIXEL_4BPP_TILEMAP 30x20 (240x160), opaque
     ASSET_BATTLE_TEXTBOX = 0x0202,    // id 0; PIXEL_4BPP_TILEMAP 30x6, screen rows 14-19
@@ -131,6 +133,8 @@ enum BattleMessageId {
 enum BattleOp {
     BATTLE_OP_STATE = 1,   // host -> GBA: BattleState (args); empty reply
     BATTLE_OP_ACTION = 2,  // host polls the GBA: reply BattleAction
+    BATTLE_OP_STATE_MULTI = 3,
+    BATTLE_OP_ACTION_MULTI = 4,
 };
 
 // BattleState, 16 bytes.
@@ -147,12 +151,44 @@ typedef struct {
 
 // BattleAction, 4 bytes: u8 turn, u8 action, u8 move slot, u8 flags.
 // The turn echoes the CHOOSE state it answers, so stale input is ignored.
-enum BattleActionKind { BACTION_NONE = 0, BACTION_MOVE = 1, BACTION_FORFEIT = 2 };
+enum BattleActionKind { BACTION_NONE = 0, BACTION_MOVE = 1, BACTION_FORFEIT = 2, BACTION_SHIFT = 3 };
 #define BACTION_FLAG_EXIT (1u << 0)
 #define BATTLE_ACTION_BYTES 4
 typedef struct {
     uint8_t turn, action, move_slot, flags;
 } BattleAction;
+
+// Multi-format commands use a per-selection token. The GBA may repeat the
+// reply until it receives the next state. A delayed reply cannot answer a
+// different battler's prompt in the same turn.
+#define BATTLE_FIELD_SLOTS 3
+#define BATTLE_SLOT_NONE 0xffu
+#define BATTLE_TARGET_AUTO 0x80u  // the remaining bits are a legal foe mask
+#define BATTLE_MULTI_SHIFT (1u << 0)
+enum BattleRotation { BROT_KEEP = 0, BROT_LEFT = 1, BROT_RIGHT = 2 };
+enum BattlePositionSlot { BPOS_LEFT = 0, BPOS_CENTER = 1, BPOS_RIGHT = 2 };
+
+typedef struct {
+    uint8_t party_slot;
+    uint16_t hp, max_hp;
+} BattleFieldMon;
+typedef struct {
+    uint8_t phase, turn, outcome, actor, flags;
+    uint16_t token;
+    BattleFieldMon field[2][BATTLE_FIELD_SLOTS];
+    uint8_t pp[BATTLE_FIELD_SLOTS][4], targets[BATTLE_FIELD_SLOTS][4];
+} BattleMultiState;
+#define BATTLE_MULTI_STATE_BYTES (7 + 2 * BATTLE_FIELD_SLOTS * 5 + 8 * BATTLE_FIELD_SLOTS)
+typedef struct {
+    uint16_t token;
+    uint8_t actor, action, move_slot, target, rotation, flags;
+} BattleMultiAction;
+#define BATTLE_MULTI_ACTION_BYTES 8
+
+unsigned battle_multi_state_encode(const BattleMultiState *state, uint8_t *out);
+bool battle_multi_state_decode(const uint8_t *in, unsigned length, BattleMultiState *state);
+unsigned battle_multi_action_encode(const BattleMultiAction *action, uint8_t *out);
+bool battle_multi_action_decode(const uint8_t *in, unsigned length, BattleMultiAction *action);
 
 // GcBattleResultV1 (RESULT payload, result version 1).
 //   0 u8 outcome   1 u8 turns   2 u8 player count P   3 u8 opponent count O
