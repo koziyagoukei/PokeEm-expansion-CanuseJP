@@ -7792,7 +7792,7 @@ static void Cmd_settypebasedhalvers(void)
         gBattlescriptCurrInstr = cmd->failInstr;
 }
 
-bool32 IsSubstituteProtected(enum BattlerId battlerAtk, enum BattlerId battlerDef, enum Ability abilityAtk, enum Move move)
+bool32 WouldSubstituteBlockMove(enum BattlerId battlerAtk, enum BattlerId battlerDef, enum Ability abilityAtk, enum Move move)
 {
     if (!gBattleMons[battlerDef].volatiles.substitute)
         return FALSE;
@@ -7806,10 +7806,17 @@ bool32 IsSubstituteProtected(enum BattlerId battlerAtk, enum BattlerId battlerDe
         return TRUE;
     else if (GetMoveEffect(move) == EFFECT_TRANSFORM || GetMoveEffect(move) == EFFECT_SKY_DROP)
         return TRUE;
-    else if (IsAbilityAndRecord(battlerAtk, abilityAtk, ABILITY_INFILTRATOR))
-        return FALSE;
-    else
-        return TRUE;
+    return abilityAtk != ABILITY_INFILTRATOR;
+}
+
+bool32 IsSubstituteProtected(enum BattlerId battlerAtk, enum BattlerId battlerDef, enum Ability abilityAtk, enum Move move)
+{
+    bool32 blocked = WouldSubstituteBlockMove(battlerAtk, battlerDef, abilityAtk, move);
+
+    if (!blocked && abilityAtk == ABILITY_INFILTRATOR
+     && WouldSubstituteBlockMove(battlerAtk, battlerDef, ABILITY_NONE, move))
+        RecordAbilityBattle(battlerAtk, abilityAtk);
+    return blocked;
 }
 
 bool32 DoesSubstituteBlockMove(enum BattlerId battlerAtk, enum BattlerId battlerDef, enum Move move)

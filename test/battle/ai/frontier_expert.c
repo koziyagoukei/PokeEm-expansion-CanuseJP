@@ -1,6 +1,7 @@
 #include "global.h"
 #include "test/battle.h"
 #include "battle_ai_frontier.h"
+#include "battle_ai_main.h"
 #include "battle_ai_util.h"
 #include "battle_frontier.h"
 #include "battle_setup.h"
@@ -80,6 +81,58 @@ AI_SINGLE_BATTLE_TEST("Frontier expert AI: wears down Wonder Guard with status, 
             TURN { MOVE(player, MOVE_SCRATCH); EXPECT_MOVE(opponent, aiMove); SEND_OUT(player, 1); }
         else
             TURN { MOVE(player, MOVE_SCRATCH); EXPECT_MOVE(opponent, aiMove); }
+    }
+}
+
+AI_SINGLE_BATTLE_TEST("Frontier expert AI: only penalizes status moves that the target's Substitute blocks")
+{
+    enum Ability ability = ABILITY_NONE;
+    PARAMETRIZE { ability = ABILITY_NONE; }
+    PARAMETRIZE { ability = ABILITY_INFILTRATOR; }
+    GIVEN {
+        WITH_CONFIG(B_INFILTRATOR_SUBSTITUTE, GEN_6);
+        AI_FLAGS(AI_FLAG_FRONTIER_EXPERT);
+        PLAYER(SPECIES_WOBBUFFET) { Speed(100); MaxHP(400); HP(400); Moves(MOVE_SUBSTITUTE, MOVE_CELEBRATE); }
+        OPPONENT(SPECIES_CROBAT) { Speed(1); Attack(10); Ability(ability); Moves(MOVE_TOXIC, MOVE_LEECH_SEED, MOVE_TACKLE, MOVE_SWORDS_DANCE); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_SUBSTITUTE); }
+        for (u32 i = 0; i < 2; i++) {
+            TURN {
+                MOVE(player, MOVE_CELEBRATE);
+                SCORE_EQ_VAL(opponent, MOVE_TOXIC, AI_SCORE_DEFAULT + (ability == ABILITY_INFILTRATOR ? 0 : NO_DAMAGE_OR_FAILS));
+                SCORE_EQ_VAL(opponent, MOVE_LEECH_SEED, AI_SCORE_DEFAULT + (ability == ABILITY_INFILTRATOR ? 0 : NO_DAMAGE_OR_FAILS));
+                SCORE_EQ_VAL(opponent, MOVE_SWORDS_DANCE, AI_SCORE_DEFAULT);
+            }
+        }
+    }
+}
+
+AI_SINGLE_BATTLE_TEST("Frontier expert AI: prefers an attack that breaks or bypasses Substitute")
+{
+    GIVEN {
+        ASSUME(MoveIgnoresSubstitute(MOVE_HYPER_VOICE));
+        AI_FLAGS(AI_FLAG_FRONTIER_EXPERT);
+        PLAYER(SPECIES_WOBBUFFET) { Speed(1); Defense(160); SpDefense(100); MaxHP(400); HP(400); Moves(MOVE_SUBSTITUTE, MOVE_CELEBRATE); }
+        OPPONENT(SPECIES_WOBBUFFET) { Speed(100); Attack(400); SpAttack(400); Moves(MOVE_TACKLE, MOVE_MEGA_KICK, MOVE_HYPER_VOICE); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_SUBSTITUTE); }
+        TURN {
+            SCORE_GT(opponent, MOVE_MEGA_KICK, MOVE_TACKLE);
+            SCORE_GT(opponent, MOVE_HYPER_VOICE, MOVE_MEGA_KICK);
+            EXPECT_MOVE(opponent, MOVE_HYPER_VOICE);
+        }
+    }
+}
+
+AI_SINGLE_BATTLE_TEST("Frontier expert AI: does not replace its own intact Substitute")
+{
+    GIVEN {
+        AI_FLAGS(EXPERT_AI_FLAGS);
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET) { Moves(MOVE_SUBSTITUTE, MOVE_CELEBRATE); }
+    } WHEN {
+        TURN { EXPECT_MOVE(opponent, MOVE_SUBSTITUTE); }
+        TURN { EXPECT_MOVE(opponent, MOVE_CELEBRATE); }
     }
 }
 

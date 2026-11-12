@@ -6,6 +6,7 @@
 #include "battle_ai_util.h"
 #include "battle_dynamax.h"
 #include "battle_gimmick.h"
+#include "battle_script_commands.h"
 #include "battle_setup.h"
 #include "battle_util.h"
 #include "frontier_guest.h"
@@ -217,15 +218,63 @@ static s32 ScoreAgainstWonderGuard(enum BattlerId battlerAtk, enum BattlerId bat
     return score;
 }
 
+static bool32 IsStatusMoveBlockedBySubstitute(enum BattlerId battlerAtk, enum BattlerId battlerDef, enum Move move)
+{
+    enum Ability ability = gAiLogicData->abilities[battlerAtk];
+
+    if (GetMoveEffect(move) == EFFECT_TRANSFORM && GetConfig(B_TRANSFORM_SUBSTITUTE_FAIL) < GEN_5)
+        return FALSE;
+    if (!WouldSubstituteBlockMove(battlerAtk, battlerDef, ability, move))
+        return FALSE;
+
+    switch (AI_GetBattlerMoveTargetType(battlerAtk, move))
+    {
+    case TARGET_SELECTED:
+    case TARGET_OPPONENT:
+        return TRUE;
+    case TARGET_RANDOM:
+    case TARGET_BOTH:
+        // A spread or randomly targeted move can still reach the other foe.
+        return !HasTwoOpponents(battlerAtk)
+            || WouldSubstituteBlockMove(battlerAtk, GetPartnerBattler(battlerDef), ability, move);
+    default:
+        return FALSE;
+    }
+}
+
+static s32 ScoreSubstituteDamage(enum BattlerId battlerAtk, enum BattlerId battlerDef, enum Move move, s32 score)
+{
+    u32 subHP = gBattleMons[battlerDef].volatiles.substituteHP;
+
+    if (subHP != 0 && IsBattle1v1() && !IsBattleMoveStatus(move))
+    {
+        u32 slot = gAiThinkingStruct->movesetIndex;
+        u32 damage = AI_GetDamage(battlerAtk, battlerDef, slot, AI_ATTACKING, gAiLogicData);
+
+        if (damage == 0)
+            return score;
+        if (!WouldSubstituteBlockMove(battlerAtk, battlerDef, gAiLogicData->abilities[battlerAtk], move))
+            ADJUST_SCORE(damage >= subHP ? BEST_EFFECT : WEAK_EFFECT);
+        else if (damage >= subHP)
+            ADJUST_SCORE(DECENT_EFFECT);
+    }
+    return score;
+}
+
 s32 AI_FrontierExpert(enum BattlerId battlerAtk, enum BattlerId battlerDef, enum Move move, s32 score)
 {
     if (IsTargetingPartner(battlerAtk, battlerDef))
         return score;
 
+    if (IsBattleMoveStatus(move)
+     && ((GetMoveEffect(move) == EFFECT_SUBSTITUTE && gBattleMons[battlerAtk].volatiles.substitute)
+      || IsStatusMoveBlockedBySubstitute(battlerAtk, battlerDef, move)))
+        ADJUST_AND_RETURN_SCORE(NO_DAMAGE_OR_FAILS);
+
     score = ScoreRecoveryRace(battlerAtk, battlerDef, move, score);
     score = ScoreAgainstDynamax(battlerAtk, battlerDef, move, score);
     score = ScoreAgainstWonderGuard(battlerAtk, battlerDef, move, score);
-    return score;
+    return ScoreSubstituteDamage(battlerAtk, battlerDef, move, score);
 }
 
 static bool32 ShouldSaveDynamaxOnAttack(enum BattlerId battlerAtk, enum BattlerId battlerDef, enum Move move)
