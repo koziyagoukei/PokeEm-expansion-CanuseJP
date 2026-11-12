@@ -60,12 +60,16 @@ typedef struct {
 } BattleMove;
 
 // BattleMonV1, 40 bytes, appended to each PokemonRecordV1 in the request.
-//   0 u8 version (1)  1 u8 type count  2 u8 types[2]  4 u8[4] reserved
+//   0 u8 version (1)  1 u8 type count  2 u8 types[2]
+//   4 s8 front pic y offset  5 s8 back pic y offset  6 u8 elevation (opponent)  7 u8 reserved
 //   8 BattleMove[4]
+// The picture offsets place sprites exactly where the game would.
 #define BATTLE_MON_VERSION 1
 #define BATTLE_MON_BYTES 40
 typedef struct {
     uint8_t type_count, types[2];
+    int8_t front_y, back_y;
+    uint8_t elevation;
     BattleMove moves[4];
 } BattleMon;
 
@@ -80,7 +84,7 @@ typedef struct {
 //   4 u8 opponent count        5 u8 active per side             6 u16 rules
 //   8 u16 trainer id          10 u8 trainer class              11 u8 reward mode (0 none)
 //  12 u8 result policy        13 u8 type count N               14 u16 entry length (140)
-//  16 u32 battle id           20 u32 reserved
+//  16 u32 battle id           20 u8 battle environment (game id)  21..23 reserved
 //  24 entries: player entries, then opponent entries (PokemonRecordV1 + BattleMonV1)
 //  .. type chart: N*N u8, [attack type][defend type], multiplier in quarters (0,2,4,8)
 #define BATTLE_REQUEST_VERSION 1
@@ -90,6 +94,7 @@ typedef struct {
     uint16_t rules, trainer_id;
     uint8_t trainer_class, reward_mode, result_policy, type_count;
     uint32_t battle_id;
+    uint8_t environment;
     BattleEntry player[BATTLE_MAX_PER_SIDE], opponent[BATTLE_MAX_PER_SIDE];
     uint8_t type_chart[BATTLE_MAX_TYPES * BATTLE_MAX_TYPES];
 } BattleRequest;
@@ -97,6 +102,30 @@ typedef struct {
 uint32_t battle_request_size(const BattleRequest *request);
 uint32_t battle_request_encode(const BattleRequest *request, uint8_t *out, uint32_t capacity);
 bool battle_request_decode(const uint8_t *in, uint32_t length, BattleRequest *request);
+
+// Battle presentation assets served by the client from its own battle
+// graphics, so the host draws the game's real UI (types 0x02xx).
+enum {
+    ASSET_BATTLE_BG = 0x0201,         // id = environment; PIXEL_4BPP_TILEMAP 30x20 (240x160), opaque
+    ASSET_BATTLE_TEXTBOX = 0x0202,    // id 0; PIXEL_4BPP_TILEMAP 30x6, screen rows 14-19
+    ASSET_BATTLE_HEALTHBOX = 0x0203,  // id = side (0 player, 1 opponent), variant = level, extra = personality;
+                                      // frame with nickname/gender/Lv printed by the game; 128x64 / 128x32
+    ASSET_BATTLE_HPBAR = 0x0204,      // id 0; tiles H,P, green 0-8, yellow 0-8, red 0-8 (29 x 8x8) + bar palette
+    ASSET_BATTLE_DIGITS = 0x0205,     // id 0; healthbox-font glyphs 0-9 and '/' in 8x16 cells
+    ASSET_BATTLE_MESSAGE = 0x0206,    // id = BMSG | side << 8, variant = move, extra = personality / trainer;
+                                      // a 208x32 message window rendered with the game's battle text
+};
+enum BattleMessageId {
+    BMSG_TRAINER_INTRO = 1, BMSG_TRAINER_SENT_OUT = 2, BMSG_GO_PKMN = 3, BMSG_USED_MOVE = 4,
+    BMSG_MISSED = 5, BMSG_SUPER_EFFECTIVE = 6, BMSG_NOT_VERY_EFFECTIVE = 7, BMSG_NO_EFFECT = 8,
+    BMSG_FAINTED = 9, BMSG_WIN = 10, BMSG_LOSE = 11, BMSG_FORFEIT = 12, BMSG_WHAT_WILL_DO = 13,
+};
+#define BMSG_KEY(msg, side) ((uint32_t)(msg) | (uint32_t)(side) << 8)
+#define HPBAR_TILE_H 0
+#define HPBAR_TILE_GREEN 2
+#define HPBAR_TILE_YELLOW 11
+#define HPBAR_TILE_RED 20
+#define HPBAR_TILES 29
 
 // APP opcodes of APP_GC_BATTLE.
 enum BattleOp {

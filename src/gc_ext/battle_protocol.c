@@ -28,6 +28,9 @@ static void mon_encode(const BattleMon *m, uint8_t *p) {
     p[1] = m->type_count;
     p[2] = m->types[0];
     p[3] = m->types[1];
+    p[4] = (uint8_t)m->front_y;
+    p[5] = (uint8_t)m->back_y;
+    p[6] = m->elevation;
     for (unsigned i = 0; i < 4; ++i) move_encode(&m->moves[i], p + 8 + 8*i);
 }
 
@@ -36,6 +39,9 @@ static bool mon_decode(const uint8_t *p, BattleMon *m) {
     m->type_count = p[1];
     m->types[0] = p[2];
     m->types[1] = p[3];
+    m->front_y = (int8_t)p[4];
+    m->back_y = (int8_t)p[5];
+    m->elevation = p[6];
     for (unsigned i = 0; i < 4; ++i) move_decode(p + 8 + 8*i, &m->moves[i]);
     return true;
 }
@@ -64,7 +70,7 @@ uint32_t battle_request_encode(const BattleRequest *r, uint8_t *p, uint32_t capa
     p[13] = r->type_count;
     msg_put16(p+14, BATTLE_ENTRY_BYTES);
     wire_put32(p+16, r->battle_id);
-    wire_put32(p+20, 0);
+    wire_put32(p+20, r->environment);
     uint8_t *q = p + BATTLE_REQUEST_HEADER;
     for (unsigned side = 0; side < 2; ++side) {
         const BattleEntry *e = side ? r->opponent : r->player;
@@ -93,6 +99,7 @@ bool battle_request_decode(const uint8_t *p, uint32_t length, BattleRequest *r) 
     r->result_policy = p[12];
     r->type_count = p[13];
     r->battle_id = wire_get32(p+16);
+    r->environment = p[20];
     if (!r->player_count || !r->opponent_count || r->player_count > BATTLE_MAX_PER_SIDE ||
         r->opponent_count > BATTLE_MAX_PER_SIDE || !r->type_count || r->type_count > BATTLE_MAX_TYPES ||
         length != battle_request_size(r))
