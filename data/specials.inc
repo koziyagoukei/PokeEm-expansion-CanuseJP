@@ -648,3 +648,4 @@ gSpecials::
 	def_special ContestShop_BufferProduct
 	def_special ContestShop_Purchase
 	def_special GcCompanion_Start, waitstate=1
+	def_special GcLinkCheck_Start, waitstate=1

@@ -75,8 +75,9 @@ const u8 *GcExtension_RenderTextTiles(u8 fontId, const u8 colors[3], u8 fill, co
 bool8 GcExtension_RenderTextAsset(u8 fontId, const u8 colors[3], u8 fill, const u8 *str, u8 widthTiles, u8 heightTiles,
                                   const u16 *palette, AssetInfo *info, const u8 **data);
 
-// Built-in generic mode: Phase 2 party viewer (debug entry).
+// Built-in generic modes: Phase 2 party viewer and the link check (both read-only).
 extern const struct GcModeHandler gGcPartyViewMode;
+extern const struct GcModeHandler gGcLinkCheckMode;
 void GcCompanion_Start(void);
 
 #endif // GUARD_GC_EXTENSION_H

@@ -367,6 +367,13 @@ Debug_EventScript_GcExtensionMode::
 	releaseall
 	end
 
+@ GC link check: shows both sides' versions; read-only.
+Debug_EventScript_GcLinkCheck::
+	lockall
+	special GcLinkCheck_Start
+	releaseall
+	end
+
 Debug_EventScript_WallyTutorial::
 	special SavePlayerParty
 	special LoadWallyZigzagoon

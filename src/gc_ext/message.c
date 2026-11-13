@@ -10,7 +10,7 @@ unsigned caps_encode(const Caps *c, uint8_t *p) {
     msg_put16(p+12, c->max_payload);
     msg_put16(p+14, c->app_id);
     msg_put16(p+16, c->app_version);
-    msg_put16(p+18, 0);
+    msg_put16(p+18, c->release);
     for (unsigned i = 0; i < 4; ++i) p[20+i] = c->tag[i];
     return CAPS_BYTES;
 }
@@ -24,6 +24,7 @@ bool caps_decode(const uint8_t *p, unsigned length, Caps *c) {
     c->max_payload = msg_get16(p+12);
     c->app_id = msg_get16(p+14);
     c->app_version = msg_get16(p+16);
+    c->release = msg_get16(p+18);
     for (unsigned i = 0; i < 4; ++i) c->tag[i] = p[20+i];
     return true;
 }
