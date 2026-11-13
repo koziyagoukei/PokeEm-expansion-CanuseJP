@@ -41,15 +41,24 @@ enum PeerType {
 //   0 u16 msg protocol version   2 u16 peer type
 //   4 u32 build id               8 u32 capability bits
 //  12 u16 max frame payload     14 u16 application id (0 = none)
-//  16 u16 application version   18 u16 reserved (0)
+//  16 u16 application version   18 u16 release number (0 = development build)
 //  20 u8[4] tag (client: game code, e.g. "BPEE"; host: "GCXH")
 #define CAPS_BYTES 24
 typedef struct {
     uint16_t version, peer_type;
     uint32_t build_id, caps;
     uint16_t max_payload, app_id, app_version;
+    uint16_t release;
     uint8_t tag[4];
 } Caps;
+
+// Release numbers pair a GameCube host with the GBA builds made for it (see
+// docs/releases.md). 0 marks a development build. A release build only talks
+// to a peer with the same release; a development build accepts any peer.
+#define GCX_RELEASE_DEV 0
+static inline bool gcx_release_compatible(uint16_t own, uint16_t peer) {
+    return own == GCX_RELEASE_DEV || own == peer;
+}
 
 // APP request: u16 app id, u16 opcode, then opcode-specific arguments.
 // APP ACK: u16 app id, u16 opcode, u16 status, u16 reserved, then data.
@@ -115,6 +124,7 @@ enum GcModeId {
     GC_MODE_NONE = 0,
     GC_MODE_PARTY_VIEW = 1,  // Phase 2 party viewer (pkmn_protocol.h)
     GC_MODE_BATTLE = 2,      // battle runtime (battle_protocol.h)
+    GC_MODE_LINK_CHECK = 3,  // connection and version check (no request, APP_POKEMON UI state only)
 };
 
 // MODE request: empty. ACK (24 bytes):

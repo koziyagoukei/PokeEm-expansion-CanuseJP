@@ -55,6 +55,7 @@ enum GcError
     GC_ERROR_HOST_ENDED,
     GC_ERROR_LINK_LOST,
     GC_ERROR_MODE_REFUSED,
+    GC_ERROR_VERSION,
 };
 
 struct GcCompanion
@@ -77,6 +78,7 @@ struct GcCompanion
     bool8 exitRequested;
     bool8 partyChanged;
     u32 exitMatch;
+    u8 versionText[40];
 };
 
 static EWRAM_DATA struct GcCompanion *sGc = NULL;
@@ -136,6 +138,10 @@ static const u8 sText_ErrorHost[] = _("{ENG}The GameCube ended the session.");
 static const u8 sText_ErrorLink[] = _("{ENG}Link lost.");
 static const u8 sText_ErrorRefused[] = _("{ENG}This mode cannot start:");
 static const u8 sText_Unavailable[] = _("{ENG}The link port is in use.");
+static const u8 sText_ErrorVersion[] = _("{ENG}Version mismatch.");
+static const u8 sText_ErrorVersionHint[] = _("{ENG}Use the matching companion.dol.");
+static const u8 sText_VersionGc[] = _("{ENG}GC release ");
+static const u8 sText_VersionGba[] = _("{ENG}  GBA release ");
 static const u8 sText_StateOk[] = _("{ENG}Party/bag/flags/vars unchanged.");
 static const u8 sText_StateChanged[] = _("{ENG}WARNING: game state changed!");
 static const u8 sText_Returning[] = _("{ENG}Returning to the field...");
@@ -156,6 +162,11 @@ void GcStartMode(const struct GcModeHandler *handler)
 void GcCompanion_Start(void)
 {
     GcStartMode(&gGcPartyViewMode);
+}
+
+void GcLinkCheck_Start(void)
+{
+    GcStartMode(&gGcLinkCheckMode);
 }
 
 bool8 GcExtension_IsAvailable(void)
@@ -449,6 +460,12 @@ static void Redraw(void)
             GcExtension_PrintLine(WIN_BODY, sText_ErrorMemory, 0, 0, GC_COLOR_ERROR);
             help = sText_HelpExit;
             break;
+        case GC_ERROR_VERSION:
+            GcExtension_PrintLine(WIN_BODY, sText_ErrorVersion, 0, 0, GC_COLOR_ERROR);
+            GcExtension_PrintLine(WIN_BODY, sGc->versionText, 0, 1, GC_COLOR_NORMAL);
+            GcExtension_PrintLine(WIN_BODY, sText_ErrorVersionHint, 0, 2, GC_COLOR_NORMAL);
+            help = sText_HelpExit;
+            break;
         case GC_ERROR_MODE_REFUSED:
             GcExtension_PrintLine(WIN_BODY, sText_ErrorRefused, 0, 0, GC_COLOR_ERROR);
             if (sGc->refusal != NULL)
@@ -492,8 +509,29 @@ static bool8 IsSessionState(u8 state)
     return state >= GC_STATE_HANDSHAKE && state <= GC_STATE_ACTIVE;
 }
 
+static void ShowVersionError(void)
+{
+    const Caps *host = GcProtocol_GetHostCaps();
+    StringCopy(sGc->versionText, sText_VersionGc);
+    AppendNumber(sGc->versionText, host != NULL ? host->release : 0);
+    StringAppend(sGc->versionText, sText_VersionGba);
+    AppendNumber(sGc->versionText, GcProtocol_GetRelease());
+    sGc->error = GC_ERROR_VERSION;
+    SetState(GC_STATE_ERROR);
+}
+
 static void HandleLinkEvents(u32 link, u32 proto)
 {
+    // Our release refuses this host (no mode is announced); a release host
+    // refuses us with BYE. Either way, say which versions met.
+    if ((proto & GC_PROTO_EVENT_VERSION) && GcProtocol_GetRelease() != GCX_RELEASE_DEV)
+        ShowVersionError();
+    if ((proto & GC_PROTO_EVENT_BYE) && GcProtocol_IsVersionMismatch() && sGc->state != GC_STATE_DISCONNECTING
+     && sGc->state != GC_STATE_RETURN_FIELD)
+    {
+        ShowVersionError();
+        return;
+    }
     if (link & (GC_LINK_EVENT_RESET | GC_LINK_EVENT_TIMEOUT))
     {
         GcProtocol_ResetSession();
@@ -515,7 +553,7 @@ static void HandleLinkEvents(u32 link, u32 proto)
         {
             SetState(GC_STATE_RETURN_FIELD);
         }
-        else if (sGc->state != GC_STATE_RETURN_FIELD)
+        else if (sGc->state != GC_STATE_RETURN_FIELD && sGc->error != GC_ERROR_VERSION)
         {
             sGc->error = GC_ERROR_HOST_ENDED;
             SetState(GC_STATE_ERROR);
@@ -546,7 +584,7 @@ static void HandleInput(void)
             SetState(GC_STATE_RETURN_FIELD);
         break;
     case GC_STATE_ERROR:
-        if (JOY_NEW(A_BUTTON) && sGc->linkOpen && sGc->error != GC_ERROR_MODE_REFUSED)
+        if (JOY_NEW(A_BUTTON) && sGc->linkOpen && sGc->error != GC_ERROR_MODE_REFUSED && sGc->error != GC_ERROR_VERSION)
         {
             PlaySE(SE_SELECT);
             sGc->reconnecting = TRUE;

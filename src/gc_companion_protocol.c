@@ -21,9 +21,15 @@ struct GcProtocolState
     bool8 haveResult;
     u32 lastResultId;
     u8 *encoded;  // RLE copy of the open asset (freed on the next asset)
+    bool8 versionMismatch;
 };
 
 static EWRAM_DATA struct GcProtocolState sProto = {0};
+
+// Content that ships a numbered release pairs it with a GameCube host by
+// defining this symbol (see gba-gc-extension docs/releases.md). Development
+// builds keep 0 and accept any host.
+const u16 gGcExtensionRelease __attribute__((weak)) = GCX_RELEASE_DEV;
 
 void GcProtocol_Init(const struct GcClientConfig *config)
 {
@@ -48,6 +54,7 @@ void GcProtocol_Free(void)
 
 void GcProtocol_ResetSession(void)
 {
+    sProto.versionMismatch = FALSE;
     sProto.haveCaps = FALSE;
     sProto.assetOpen = FALSE;
 }
@@ -62,6 +69,16 @@ u32 GcProtocol_TakeEvents(void)
 const Caps *GcProtocol_GetHostCaps(void)
 {
     return sProto.haveCaps ? &sProto.hostCaps : NULL;
+}
+
+u16 GcProtocol_GetRelease(void)
+{
+    return gGcExtensionRelease;
+}
+
+bool8 GcProtocol_IsVersionMismatch(void)
+{
+    return sProto.versionMismatch;
 }
 
 const struct GcProtocolStats *GcProtocol_GetStats(void)
@@ -98,9 +115,13 @@ static bool HandleCaps(const Frame *request, Frame *reply)
     caps.max_payload = WIRE_PAYLOAD;
     caps.app_id = config->appId;
     caps.app_version = config->appVersion;
+    caps.release = gGcExtensionRelease;
     memcpy(caps.tag, config->tag, 4);
     reply->len = caps_encode(&caps, reply->payload);
     sProto.events |= GC_PROTO_EVENT_CAPS;
+    sProto.versionMismatch = sProto.hostCaps.release != gGcExtensionRelease;
+    if (sProto.versionMismatch)
+        sProto.events |= GC_PROTO_EVENT_VERSION;
     return true;
 }
 
@@ -265,6 +286,13 @@ bool GcProtocol_HandleFrame(const Frame *request, Frame *reply)
     case MODE:
         if (!sProto.haveCaps || request->len != 0 || sProto.mode.mode_id == GC_MODE_NONE)
             return false;
+        if (sProto.versionMismatch && !gcx_release_compatible(gGcExtensionRelease, sProto.hostCaps.release))
+        {
+            // Refuse to run anything with a host of another release: announce no mode.
+            ModeInfo none = {0};
+            reply->len = mode_info_encode(&none, reply->payload);
+            return true;
+        }
         reply->len = mode_info_encode(&sProto.mode, reply->payload);
         sProto.events |= GC_PROTO_EVENT_MODE;
         return true;
