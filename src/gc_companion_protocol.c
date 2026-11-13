@@ -4,6 +4,7 @@
 #include "gc_companion_link.h"
 #include "malloc.h"
 #include "gc_companion_protocol.h"
+#include "gc_extension.h"
 
 struct GcProtocolState
 {
@@ -27,9 +28,13 @@ struct GcProtocolState
 static EWRAM_DATA struct GcProtocolState sProto = {0};
 
 // Content that ships a numbered release pairs it with a GameCube host by
-// defining this symbol (see gba-gc-extension docs/releases.md). Development
-// builds keep 0 and accept any host.
-const u16 gGcExtensionRelease __attribute__((weak)) = GCX_RELEASE_DEV;
+// defining GcExtension_GetRelease (see gba-gc-extension docs/releases.md).
+// Development builds keep this default (0) and accept any host. noipa keeps
+// the compiler from folding the default into its callers.
+__attribute__((weak, noipa)) u16 GcExtension_GetRelease(void)
+{
+    return GCX_RELEASE_DEV;
+}
 
 void GcProtocol_Init(const struct GcClientConfig *config)
 {
@@ -73,7 +78,7 @@ const Caps *GcProtocol_GetHostCaps(void)
 
 u16 GcProtocol_GetRelease(void)
 {
-    return gGcExtensionRelease;
+    return GcExtension_GetRelease();
 }
 
 bool8 GcProtocol_IsVersionMismatch(void)
@@ -115,11 +120,11 @@ static bool HandleCaps(const Frame *request, Frame *reply)
     caps.max_payload = WIRE_PAYLOAD;
     caps.app_id = config->appId;
     caps.app_version = config->appVersion;
-    caps.release = gGcExtensionRelease;
+    caps.release = GcExtension_GetRelease();
     memcpy(caps.tag, config->tag, 4);
     reply->len = caps_encode(&caps, reply->payload);
     sProto.events |= GC_PROTO_EVENT_CAPS;
-    sProto.versionMismatch = sProto.hostCaps.release != gGcExtensionRelease;
+    sProto.versionMismatch = sProto.hostCaps.release != caps.release;
     if (sProto.versionMismatch)
         sProto.events |= GC_PROTO_EVENT_VERSION;
     return true;
@@ -286,7 +291,7 @@ bool GcProtocol_HandleFrame(const Frame *request, Frame *reply)
     case MODE:
         if (!sProto.haveCaps || request->len != 0 || sProto.mode.mode_id == GC_MODE_NONE)
             return false;
-        if (sProto.versionMismatch && !gcx_release_compatible(gGcExtensionRelease, sProto.hostCaps.release))
+        if (sProto.versionMismatch && !gcx_release_compatible(GcExtension_GetRelease(), sProto.hostCaps.release))
         {
             // Refuse to run anything with a host of another release: announce no mode.
             ModeInfo none = {0};

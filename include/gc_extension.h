@@ -57,6 +57,10 @@ struct GcModeHandler
     bool (*resolveAsset)(const AssetKey *key, AssetInfo *info, const u8 **data);
 };
 
+// Release number sent in CAPS (0 = development build, accepts any host).
+// Content that ships a numbered release overrides this weak default.
+u16 GcExtension_GetRelease(void);
+
 // Starts a mode from a script special (declare the special with waitstate=1).
 void GcStartMode(const struct GcModeHandler *handler);
 // TRUE when no wireless/link session is using the serial port.
