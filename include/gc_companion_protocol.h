@@ -53,7 +53,7 @@ void GcProtocol_SetMode(const ModeInfo *info, const u8 *request);
 bool GcProtocol_HandleFrame(const Frame *request, Frame *reply);
 u32 GcProtocol_TakeEvents(void);
 const Caps *GcProtocol_GetHostCaps(void);
-// Release number this build sends in CAPS (gGcExtensionRelease, 0 = development).
+// Release number this build sends in CAPS (GcExtension_GetRelease, 0 = development).
 u16 GcProtocol_GetRelease(void);
 // TRUE once CAPS showed a host whose release differs from ours.
 bool8 GcProtocol_IsVersionMismatch(void);
