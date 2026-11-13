@@ -29,7 +29,8 @@
 #include "gc_ext/battle_protocol.h"
 #include "frontier_gc_battle.h"
 
-#define REQUEST_CAPACITY (BATTLE_REQUEST_HEADER + PARTY_SIZE * BATTLE_ENTRY_BYTES + NUMBER_OF_MON_TYPES * NUMBER_OF_MON_TYPES + BATTLE_CONDITION_RULE_BYTES)
+#define REQUEST_CAPACITY (BATTLE_REQUEST_HEADER + PARTY_SIZE * BATTLE_ENTRY_BYTES + NUMBER_OF_MON_TYPES * NUMBER_OF_MON_TYPES \
+    + BATTLE_CONDITION_RULE_BYTES + PARTY_SIZE * MAX_MON_MOVES * (BATTLE_MOVE_EFFECTS_HEADER + BATTLE_MAX_EFFECTS * BATTLE_EFFECT_BYTES))
 
 enum GbaScreen { SCREEN_PREPARE, SCREEN_COMMAND, SCREEN_MOVES, SCREEN_TARGET, SCREEN_REPLACE, SCREEN_SWITCH, SCREEN_PIVOT, SCREEN_WAIT, SCREEN_ENDED };
 
@@ -151,6 +152,175 @@ static u8 ResolveConditionEffect(enum Move move, u16 effect)
     }
 }
 
+// ------------------------------------------------------------- V8 effects
+//
+// Resolves a move into the GC's effect descriptors from this build's move
+// data (effect, argument, hit count, flags and additional effects) and
+// battle config. Anything that cannot be expressed exactly is reported as
+// unsupported, with the game's effect id kept for the host's debug log.
+
+static bool8 PushEffect(BattleMove *out, BattleEffect e)
+{
+    if (out->effect_count >= BATTLE_MAX_EFFECTS)
+        return FALSE;
+    out->effects[out->effect_count++] = e;
+    return TRUE;
+}
+
+static u8 ExportMoveStatus(enum MoveEffect effect)
+{
+    switch (effect)
+    {
+    case MOVE_EFFECT_POISON:    return BST_POISON;
+    case MOVE_EFFECT_TOXIC:     return BST_TOXIC;
+    case MOVE_EFFECT_BURN:      return BST_BURN;
+    case MOVE_EFFECT_PARALYSIS: return BST_PARALYSIS;
+    case MOVE_EFFECT_SLEEP:     return BST_SLEEP;
+    case MOVE_EFFECT_FREEZE:    return BST_FREEZE;
+    case MOVE_EFFECT_FROSTBITE: return BST_FROSTBITE;
+    default:                    return BST_NONE;
+    }
+}
+
+static u8 ResolveAdditionalEffects(enum Move move, BattleMove *out, bool8 damaging)
+{
+    static const enum Stat stats[] = {STAT_ATK, STAT_DEF, STAT_SPATK, STAT_SPDEF, STAT_SPEED, STAT_ACC, STAT_EVASION};
+    const bool8 selfTargeted = GetMoveTarget(move) == TARGET_USER;
+    u32 i, stat;
+
+    for (i = 0; i < GetMoveAdditionalEffectCount(move); i++)
+    {
+        const struct AdditionalEffect *e = GetMoveAdditionalEffectById(move, i);
+        const u8 who = e->self && !selfTargeted ? BWHO_USER : BWHO_TARGET;
+        const u8 chance = damaging ? e->chance : 0;
+        u8 status;
+        if (e->onlyIfTargetRaisedStats || e->onChargeTurnOnly || e->preAttackEffect || e->onSide || e->pledgeCombo
+         || (!damaging && e->chance))
+            return UNSUP_SECONDARY;
+        switch (e->moveEffect)
+        {
+        case STAT_CHANGE_EFFECT_PLUS:
+        case STAT_CHANGE_EFFECT_MINUS:
+        case MOVE_EFFECT_STAT_PLUS:
+        case MOVE_EFFECT_STAT_MINUS:
+        {
+            const bool8 down = e->moveEffect == STAT_CHANGE_EFFECT_MINUS || e->moveEffect == MOVE_EFFECT_STAT_MINUS;
+            bool8 any = FALSE;
+            for (stat = 0; stat < ARRAY_COUNT(stats); stat++)
+            {
+                s32 amount = GetStatStage(stats[stat], e);
+                if (!amount)
+                    continue;
+                if (amount > 6 || !PushEffect(out, (BattleEffect){.kind = BEFF_STAT, .who = who, .chance = chance,
+                                                                   .arg0 = stat, .arg1 = down ? -amount : amount}))
+                    return UNSUP_OTHER;
+                any = TRUE;
+            }
+            if (!any)
+                return UNSUP_SECONDARY;
+            break;
+        }
+        case MOVE_EFFECT_ABSORB:
+            if (!damaging || e->self || !e->argument.absorbPercentage
+             || !PushEffect(out, (BattleEffect){.kind = BEFF_DRAIN, .who = BWHO_USER,
+                                                .arg0 = e->argument.absorbPercentage}))
+                return UNSUP_SECONDARY;
+            break;
+        default:
+            status = ExportMoveStatus(e->moveEffect);
+            if (status == BST_NONE)
+                return UNSUP_SECONDARY;
+            if (!PushEffect(out, (BattleEffect){.kind = BEFF_STATUS, .who = who, .chance = chance, .arg0 = status}))
+                return UNSUP_OTHER;
+            break;
+        }
+    }
+    return 0;
+}
+
+static u8 ResolveEffects(enum Move move, BattleMove *out)
+{
+    const enum BattleMoveEffects effect = GetMoveEffect(move);
+    const bool8 damaging = out->category != BCAT_STATUS;
+    u8 unsupported = 0;
+
+    out->effect = BME_HIT;
+    out->source_effect = effect;
+    out->move_flags = gMovesInfo[move].ignoresProtect ? BMF_IGNORES_PROTECT : 0;
+    if (damaging)
+    {
+        BattleEffect damage = {.kind = BEFF_DAMAGE, .arg0 = 1, .arg2 = 1};
+        if (out->power == 0)
+            return UNSUP_EFFECT;
+        if (gMovesInfo[move].multiHit)
+        {
+            damage.arg0 = 2;
+            damage.arg2 = 5;
+            damage.arg1 = GetConfig(B_MULTI_HIT_CHANCE) >= GEN_5 ? BHITS_2TO5_GEN5 : BHITS_2TO5_GEN1;
+        }
+        else if (GetMoveStrikeCount(move) > 1)
+        {
+            if (GetMoveStrikeCount(move) > BATTLE_MAX_HITS)
+                return UNSUP_MULTI_HIT;
+            damage.arg0 = damage.arg2 = GetMoveStrikeCount(move);
+        }
+        PushEffect(out, damage);
+    }
+    switch (effect)
+    {
+    case EFFECT_HIT:
+    case EFFECT_STAT_CHANGE:
+        break;
+    case EFFECT_RECOIL:
+        PushEffect(out, (BattleEffect){.kind = BEFF_RECOIL, .who = BWHO_USER, .arg0 = GetMoveRecoil(move)});
+        break;
+    case EFFECT_HIT_ESCAPE:
+        PushEffect(out, (BattleEffect){.kind = BEFF_PIVOT});
+        break;
+    case EFFECT_HIT_SWITCH_TARGET:
+    case EFFECT_ROAR:
+        PushEffect(out, (BattleEffect){.kind = BEFF_FORCE_OUT});
+        break;
+    case EFFECT_RESTORE_HP:  // the move script heals max HP / 2
+        PushEffect(out, (BattleEffect){.kind = BEFF_HEAL, .who = BWHO_USER, .arg0 = 1, .arg2 = 2});
+        break;
+    case EFFECT_PROTECT:
+        if (GetMoveProtectMethod(move) != PROTECT_NORMAL)
+            return UNSUP_EFFECT;
+        PushEffect(out, (BattleEffect){.kind = BEFF_PROTECT, .who = BWHO_USER,
+                                       .arg0 = B_PROTECT_FAILURE_RATE >= GEN_5 ? 3 : 2});
+        break;
+    case EFFECT_NON_VOLATILE_STATUS:
+    {
+        const u8 status = ExportMoveStatus(GetMoveNonVolatileStatus(move));
+        // Status moves ignore the type chart except Thunder Wave (as in the game's type calc).
+        if (status == BST_NONE || gMovesInfo[move].powderMove)
+            return UNSUP_EFFECT;
+        PushEffect(out, (BattleEffect){.kind = BEFF_STATUS, .arg0 = status,
+                                       .flags = move == MOVE_THUNDER_WAVE ? BEFL_TYPE_CHART : 0});
+        break;
+    }
+    case EFFECT_REFRESH:
+        PushEffect(out, (BattleEffect){.kind = BEFF_CURE,
+            .arg0 = 1u << BST_POISON | 1u << BST_TOXIC | 1u << BST_BURN | 1u << BST_PARALYSIS});
+        break;
+    default:
+        return UNSUP_EFFECT;
+    }
+    unsupported = ResolveAdditionalEffects(move, out, damaging);
+    if (unsupported)
+        return unsupported;
+    if (effect == EFFECT_STAT_CHANGE && out->effect_count == 0)
+        return UNSUP_EFFECT;
+    if (IsExplosionMove(move) || gMovesInfo[move].alwaysCriticalHit || gMovesInfo[move].cantUseTwice
+     || gMovesInfo[move].noAffectOnSameTypeTarget || gMovesInfo[move].accDecreaseIfUserNotSameType
+     || MoveThawsUser(move) || out->accuracy > 100 || out->type >= NUMBER_OF_MON_TYPES)
+        return UNSUP_OTHER;
+    if ((out->target & BTARGET_CLASS_MASK) == BTARGET_OTHER)
+        return UNSUP_TARGET;
+    return battle_move_effects_valid(out) ? 0 : UNSUP_EFFECT;
+}
+
 static u32 ExportCondition(u32 status)
 {
     if (status & STATUS1_SLEEP) return BATTLE_CONDITION(BST_SLEEP, status & STATUS1_SLEEP);
@@ -190,6 +360,13 @@ static void ResolveMove(enum Move move, BattleMove *out)
         break;
     case TARGET_USER:          out->target = BTARGET_SELF; break;
     default:                   out->target = BTARGET_OTHER; break;
+    }
+    if (sBattle->roster >= BATTLE_APP_VERSION_EFFECTS)
+    {
+        if (sBattle->format == BATTLE_FORMAT_TRIPLE && move == MOVE_WING_ATTACK)
+            out->target |= BTARGET_IGNORE_DISTANCE;
+        out->unsupported = ResolveEffects(move, out);
+        return;
     }
     const u16 effect = GetMoveEffect(move);
     if (sBattle->roster >= BATTLE_APP_VERSION_DRAG)
@@ -305,6 +482,54 @@ static void SetConditionFixture(struct Pokemon *mon, u32 side, u32 index)
     }
 }
 
+// Milestone 3 move effect fixtures: each format carries representative
+// stat, status, heal, drain, recoil, secondary, priority, Protect,
+// multi-hit and switch moves. Temporary Pokemon only; display-only results.
+static void SetEffectFixture(struct Pokemon *mon, u32 side, u32 index)
+{
+    static const enum Move sets[4][2][3][MAX_MON_MOVES] = {
+        [0] = { // Single
+            {{MOVE_SWORDS_DANCE, MOVE_HYPNOSIS, MOVE_RECOVER, MOVE_QUICK_ATTACK}},
+            {{MOVE_SCREECH, MOVE_PROTECT, MOVE_FURY_SWIPES, MOVE_GIGA_DRAIN}},
+        },
+        [1] = { // Double (third member in reserve)
+            {{MOVE_ICY_WIND, MOVE_PROTECT, MOVE_U_TURN, MOVE_AGILITY},
+             {MOVE_THUNDERBOLT, MOVE_TOXIC, MOVE_GROWL, MOVE_DRAGON_TAIL},
+             {MOVE_GIGA_DRAIN, MOVE_DOUBLE_EDGE, MOVE_WILL_O_WISP, MOVE_RECOVER}},
+            {{MOVE_TACKLE, MOVE_PROTECT, MOVE_FLAMETHROWER, MOVE_SCREECH},
+             {MOVE_ICE_BEAM, MOVE_FURY_SWIPES, MOVE_GROWL, MOVE_TACKLE},
+             {MOVE_TACKLE, MOVE_THUNDER_WAVE, MOVE_NONE, MOVE_NONE}},
+        },
+        [2] = { // Triple
+            {{MOVE_SCREECH, MOVE_WILL_O_WISP, MOVE_HEAT_WAVE, MOVE_PROTECT},
+             {MOVE_SURF, MOVE_ICE_BEAM, MOVE_RECOVER, MOVE_QUICK_ATTACK},
+             {MOVE_THUNDERBOLT, MOVE_DOUBLE_KICK, MOVE_AGILITY, MOVE_GIGA_DRAIN}},
+            {{MOVE_TACKLE, MOVE_GROWL, MOVE_PROTECT, MOVE_NONE},
+             {MOVE_TACKLE, MOVE_FLAMETHROWER, MOVE_NONE, MOVE_NONE},
+             {MOVE_TACKLE, MOVE_THUNDER_WAVE, MOVE_NONE, MOVE_NONE}},
+        },
+        [3] = { // Rotation
+            {{MOVE_SWORDS_DANCE, MOVE_QUICK_ATTACK, MOVE_PROTECT, MOVE_DOUBLE_EDGE},
+             {MOVE_AGILITY, MOVE_THUNDERBOLT, MOVE_TOXIC, MOVE_RECOVER},
+             {MOVE_GIGA_DRAIN, MOVE_FURY_SWIPES, MOVE_HYPNOSIS, MOVE_U_TURN}},
+            {{MOVE_TACKLE, MOVE_GROWL, MOVE_NONE, MOVE_NONE},
+             {MOVE_TACKLE, MOVE_EMBER, MOVE_NONE, MOVE_NONE},
+             {MOVE_TACKLE, MOVE_SCREECH, MOVE_NONE, MOVE_NONE}},
+        },
+    };
+    const enum Move *moves = sets[sBattle->format - BATTLE_FORMAT_SINGLE][side][index];
+    u32 m;
+    for (m = 0; m < MAX_MON_MOVES; m++)
+    {
+        SetMonMoveSlot(mon, moves[m], m);
+        if (moves[m] == MOVE_NONE)
+        {
+            u8 pp = 0;
+            SetMonData(mon, MON_DATA_PP1 + m, &pp);
+        }
+    }
+}
+
 static bool8 BuildFixtureEntries(BattleRequest *request, const u8 **reason)
 {
     static const struct BattleFixture
@@ -360,6 +585,8 @@ static bool8 BuildFixtureEntries(BattleRequest *request, const u8 **reason)
             }
             if (sBattle->roster == BATTLE_APP_VERSION_CONDITIONS)
                 SetConditionFixture(mon, side, i);
+            else if (sBattle->roster == BATTLE_APP_VERSION_EFFECTS)
+                SetEffectFixture(mon, side, i);
             const bool8 dry = sBattle->roster == BATTLE_APP_VERSION_STRUGGLE && side == 0 && i == 0;
             if (dry)
             {
@@ -562,7 +789,7 @@ static u16 HandleMultiApp(u16 opcode, const u8 *args, u16 argLength, u8 *out, u1
         {
             if (opcode != BATTLE_OP_STATE_ROSTER)
                 return APP_BAD_ARGS;
-            if (sBattle->roster == BATTLE_APP_VERSION_CONDITIONS)
+            if (sBattle->roster >= BATTLE_APP_VERSION_CONDITIONS)
             {
                 if (!battle_condition_state_decode(args, argLength, &received))
                     return APP_BAD_ARGS;
@@ -606,7 +833,7 @@ static u16 HandleMultiApp(u16 opcode, const u8 *args, u16 argLength, u8 *out, u1
                  || slot >= GC_EXTRA_SLOT_BASE + (side + 1) * sBattle->count)
                     return APP_BAD_ARGS;
             }
-        if (sBattle->roster == BATTLE_APP_VERSION_CONDITIONS)
+        if (sBattle->roster >= BATTLE_APP_VERSION_CONDITIONS)
         {
             memcpy(sBattle->status, received.status, sizeof(sBattle->status));
             memcpy(sBattle->stages, received.stages, sizeof(sBattle->stages));
@@ -1304,7 +1531,9 @@ void FrontierGcBattle_Start(void)
     sPendingTrainer = gSpecialVar_0x8005;
     sPendingFormat = format >= BATTLE_FORMAT_DOUBLE && format <= BATTLE_FORMAT_ROTATION ? format : BATTLE_FORMAT_SINGLE;
     sPendingRoster = 0;
-    if (gSpecialVar_0x8006 & 0x2000)
+    if (gSpecialVar_0x8006 & 0x4000)
+        sPendingRoster = BATTLE_APP_VERSION_EFFECTS;
+    else if (gSpecialVar_0x8006 & 0x2000)
         sPendingRoster = BATTLE_APP_VERSION_CONDITIONS;
     else if (format == BATTLE_FORMAT_DOUBLE)
     {

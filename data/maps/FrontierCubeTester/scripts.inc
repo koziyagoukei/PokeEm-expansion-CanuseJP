@@ -46,22 +46,22 @@ FrontierCubeTester_EventScript_PartyViewer::
 	waitstate
 	goto FrontierCubeTester_EventScript_Again
 
-@ The battles use the GC Battle condition fixtures (request V7): both
+@ The battles use the GC Battle move effect fixtures (request V8): both
 @ parties are temporary test Pokemon and the result is display-only.
 FrontierCubeTester_EventScript_Single::
-	setvar VAR_0x8006, 0x2001
+	setvar VAR_0x8006, 0x4001
 	goto FrontierCubeTester_EventScript_Battle
 
 FrontierCubeTester_EventScript_Double::
-	setvar VAR_0x8006, 0x2002
+	setvar VAR_0x8006, 0x4002
 	goto FrontierCubeTester_EventScript_Battle
 
 FrontierCubeTester_EventScript_Triple::
-	setvar VAR_0x8006, 0x2003
+	setvar VAR_0x8006, 0x4003
 	goto FrontierCubeTester_EventScript_Battle
 
 FrontierCubeTester_EventScript_Rotation::
-	setvar VAR_0x8006, 0x2004
+	setvar VAR_0x8006, 0x4004
 	goto FrontierCubeTester_EventScript_Battle
 
 FrontierCubeTester_EventScript_Battle::
