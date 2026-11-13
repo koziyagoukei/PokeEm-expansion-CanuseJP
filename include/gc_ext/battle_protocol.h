@@ -24,6 +24,7 @@ extern "C" {
 #define BATTLE_APP_VERSION_DRAG 5
 #define BATTLE_APP_VERSION_PIVOT 6
 #define BATTLE_APP_VERSION_CONDITIONS 7
+#define BATTLE_APP_VERSION_EFFECTS 8
 #define BATTLE_MODE_VERSION 1
 
 enum BattleFormat { BATTLE_FORMAT_SINGLE = 1, BATTLE_FORMAT_DOUBLE = 2, BATTLE_FORMAT_TRIPLE = 3, BATTLE_FORMAT_ROTATION = 4 };
@@ -85,12 +86,56 @@ typedef struct {
 bool battle_condition_rules_valid(const BattleConditionRules *rules, unsigned type_count);
 bool battle_condition_valid(uint32_t condition, const BattleConditionRules *rules);
 bool battle_effect_valid(uint8_t effect, uint8_t version);
+
+// Request V8: move effect descriptors. Every move is a list of up to
+// BATTLE_MAX_EFFECTS effects, executed by the GC in list order. The GBA
+// resolves them from its own move data; the GC never sees game effect IDs
+// except as a diagnostic (source effect).
+//   per move: u8 count, u8 move flags, u16 source effect (diagnostic only),
+//             then count x 8-byte descriptors:
+//   0 u8 kind   1 u8 who (BWHO_*)   2 u8 chance (0 = certain, 1..100 = percent per target)
+//   3 u8 arg0   4 s8 arg1   5 u8 arg2   6 u8 flags (BEFL_*)   7 u8 reserved (0)
+enum BattleEffectKind {
+    BEFF_NONE = 0,
+    BEFF_DAMAGE = 1,     // arg0 = min hits, arg2 = max hits, arg1 = hit rule (BHITS_*)
+    BEFF_STAT = 2,       // arg0 = stat (BSTAT_*), arg1 = stage delta (-6..6, not 0)
+    BEFF_STATUS = 3,     // arg0 = status (BST_*); BEFL_TYPE_CHART: fails if the move's type has no effect
+    BEFF_CURE = 4,       // arg0 = mask of cured statuses (1 << BST_*)
+    BEFF_HEAL = 5,       // arg0 / arg2 of max HP (rounded down, min 1); fails at full HP
+    BEFF_DRAIN = 6,      // arg0 = percent of the HP the target lost (min 1)
+    BEFF_RECOIL = 7,     // arg0 = percent of the HP all targets lost (min 1), once per move
+    BEFF_FORCE_OUT = 8,  // the target is replaced by a random legal reserve (after damage if any)
+    BEFF_PIVOT = 9,      // after a landed hit the user may switch to a reserve mid-turn
+    BEFF_PROTECT = 10,   // user protected this turn; arg0 = consecutive failure base (2 or 3)
+    BEFF_COUNT
+};
+enum BattleEffectWho { BWHO_TARGET = 0, BWHO_USER = 1 };
+enum BattleHitRule { BHITS_UNIFORM = 0, BHITS_2TO5_GEN5 = 1, BHITS_2TO5_GEN1 = 2 };
+#define BATTLE_MAX_EFFECTS 6
+#define BATTLE_MAX_HITS 10
+#define BATTLE_EFFECT_BYTES 8
+#define BATTLE_MOVE_EFFECTS_HEADER 4
+#define BEFL_TYPE_CHART (1u << 0)
+#define BMF_IGNORES_PROTECT (1u << 0)
+typedef struct {
+    uint8_t kind, who, chance, arg0;
+    int8_t arg1;
+    uint8_t arg2, flags;
+} BattleEffect;
+
 typedef struct {
     uint16_t power;
     uint8_t type, category, accuracy;
     int8_t priority;
     uint8_t target, unsupported, effect;
+    // V8 effect list (legacy effect bytes are translated by the core).
+    uint8_t effect_count, move_flags;
+    uint16_t source_effect;
+    BattleEffect effects[BATTLE_MAX_EFFECTS];
 } BattleMove;
+// Structural check of a V8 effect list against its move (shared by both sides).
+bool battle_move_effects_valid(const BattleMove *move);
+const char *battle_effect_kind_name(uint8_t kind);
 
 // BattleMonV1, 40 bytes, appended to each PokemonRecordV1 in the request.
 //   0 u8 version (1)  1 u8 type count  2 u8 types[2]
@@ -127,6 +172,7 @@ typedef struct {
 #define BATTLE_REQUEST_VERSION_DRAG 5
 #define BATTLE_REQUEST_VERSION_PIVOT 6
 #define BATTLE_REQUEST_VERSION_CONDITIONS 7
+#define BATTLE_REQUEST_VERSION_EFFECTS 8
 #define BATTLE_REQUEST_HEADER 24
 enum StruggleRecoil { BSTRUGGLE_MAX_HP_FLOOR = 1, BSTRUGGLE_MAX_HP_NEAREST = 2 };
 #define BATTLE_MOVE_STRUGGLE 0xffffu  // logical presentation identifier

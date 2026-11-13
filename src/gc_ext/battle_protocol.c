@@ -45,6 +45,109 @@ bool battle_effect_valid(uint8_t effect, uint8_t version) {
            effect == BME_REFRESH || effect == BME_ELECTRIC_PARALYSIS;
 }
 
+const char *battle_effect_kind_name(uint8_t kind) {
+    static const char *const names[] = {"none", "damage", "stat", "status", "cure", "heal", "drain",
+                                        "recoil", "force_out", "pivot", "protect"};
+    return kind < BEFF_COUNT ? names[kind] : "invalid";
+}
+
+static bool has_effect(const BattleMove *m, uint8_t kind) {
+    for (unsigned i = 0; i < m->effect_count; ++i)
+        if (m->effects[i].kind == kind) return true;
+    return false;
+}
+
+bool battle_move_effects_valid(const BattleMove *m) {
+    if (m->effect_count > BATTLE_MAX_EFFECTS || (m->move_flags & ~BMF_IGNORES_PROTECT)) return false;
+    const bool damaging = m->category != BCAT_STATUS;
+    if (damaging != (m->power != 0) || damaging != has_effect(m, BEFF_DAMAGE)) return false;
+    unsigned damage = 0;
+    for (unsigned i = 0; i < m->effect_count; ++i) {
+        const BattleEffect *e = &m->effects[i];
+        if (e->who > BWHO_USER || e->chance > 100 || (e->flags & ~BEFL_TYPE_CHART)) return false;
+        if (e->chance && !damaging) return false;  // chances are secondary effects of a hit
+        switch (e->kind) {
+        case BEFF_DAMAGE:
+            if (damage++ || i || e->who != BWHO_TARGET || e->chance || e->flags ||
+                e->arg0 < 1 || e->arg0 > e->arg2 || e->arg2 > BATTLE_MAX_HITS ||
+                e->arg1 < BHITS_UNIFORM || e->arg1 > BHITS_2TO5_GEN1 ||
+                (e->arg1 != BHITS_UNIFORM && (e->arg0 != 2 || e->arg2 != 5)))
+                return false;
+            break;
+        case BEFF_STAT:
+            if (e->arg0 >= BSTAT_COUNT || !e->arg1 || e->arg1 < -6 || e->arg1 > 6 || e->arg2 || e->flags) return false;
+            break;
+        case BEFF_STATUS:
+            if (!e->arg0 || e->arg0 > BST_FROSTBITE || e->arg1 || e->arg2) return false;
+            break;
+        case BEFF_CURE:
+            if (!e->arg0 || (e->arg0 & 1u) || e->arg1 || e->arg2 || e->flags) return false;
+            break;
+        case BEFF_HEAL:
+            if (e->who != BWHO_USER || !e->arg0 || !e->arg2 || e->arg0 > e->arg2 || e->arg1 || e->flags || damaging)
+                return false;
+            break;
+        case BEFF_DRAIN:
+        case BEFF_RECOIL:
+            if (e->who != BWHO_USER || !e->arg0 || e->arg0 > 100 || e->arg1 || e->arg2 || e->flags || !damaging ||
+                e->chance)
+                return false;
+            break;
+        case BEFF_FORCE_OUT:
+        case BEFF_PIVOT:
+            if (e->who != BWHO_TARGET || e->chance || e->arg0 || e->arg1 || e->arg2 || e->flags) return false;
+            if (e->kind == BEFF_PIVOT && !damaging) return false;
+            break;
+        case BEFF_PROTECT:
+            if (e->who != BWHO_USER || damaging || m->effect_count != 1 || (e->arg0 != 2 && e->arg0 != 3) ||
+                e->arg1 || e->arg2 || e->flags || e->chance)
+                return false;
+            break;
+        default:
+            return false;
+        }
+    }
+    return m->effect_count != 0;
+}
+
+static unsigned move_effects_size(const BattleMove *m) {
+    return BATTLE_MOVE_EFFECTS_HEADER + (unsigned)m->effect_count * BATTLE_EFFECT_BYTES;
+}
+
+static void move_effects_encode(const BattleMove *m, uint8_t *p) {
+    p[0] = m->effect_count;
+    p[1] = m->move_flags;
+    msg_put16(p + 2, m->source_effect);
+    for (unsigned i = 0; i < m->effect_count; ++i) {
+        const BattleEffect *e = &m->effects[i];
+        uint8_t *q = p + BATTLE_MOVE_EFFECTS_HEADER + i * BATTLE_EFFECT_BYTES;
+        q[0] = e->kind;
+        q[1] = e->who;
+        q[2] = e->chance;
+        q[3] = e->arg0;
+        q[4] = (uint8_t)e->arg1;
+        q[5] = e->arg2;
+        q[6] = e->flags;
+        q[7] = 0;
+    }
+}
+
+// Returns the bytes consumed, or 0 if the block is malformed or too short.
+static unsigned move_effects_decode(const uint8_t *p, uint32_t available, BattleMove *m) {
+    if (available < BATTLE_MOVE_EFFECTS_HEADER || p[0] > BATTLE_MAX_EFFECTS) return 0;
+    m->effect_count = p[0];
+    m->move_flags = p[1];
+    m->source_effect = msg_get16(p + 2);
+    const unsigned size = move_effects_size(m);
+    if (available < size) return 0;
+    for (unsigned i = 0; i < m->effect_count; ++i) {
+        const uint8_t *q = p + BATTLE_MOVE_EFFECTS_HEADER + i * BATTLE_EFFECT_BYTES;
+        if (q[7]) return 0;
+        m->effects[i] = (BattleEffect){q[0], q[1], q[2], q[3], (int8_t)q[4], q[5], q[6]};
+    }
+    return size;
+}
+
 bool battle_condition_rules_valid(const BattleConditionRules *r, unsigned types) {
     return !(r->flags & ~0x3fu) &&
            r->poison_type < types && r->steel_type < types && r->fire_type < types &&
@@ -97,22 +200,41 @@ static bool mon_decode(const uint8_t *p, BattleMon *m, uint8_t version) {
     m->elevation = 0;
     for (unsigned i = 0; i < 4; ++i) {
         move_decode(p + 8 + 8*i, &m->moves[i]);
-        m->moves[i].effect = version >= BATTLE_REQUEST_VERSION_DRAG ? p[4+i] : BME_HIT;
+        m->moves[i].effect = version >= BATTLE_REQUEST_VERSION_DRAG && version < BATTLE_REQUEST_VERSION_EFFECTS ?
+                             p[4+i] : BME_HIT;
+        m->moves[i].effect_count = 0;
+        if (version >= BATTLE_REQUEST_VERSION_EFFECTS && p[4+i]) return false;  // reserved in V8
         if (!battle_effect_valid(m->moves[i].effect, version)) return false;
     }
     return true;
 }
 
-uint32_t battle_request_size(const BattleRequest *r) {
+static uint32_t effects_size(const BattleRequest *r) {
+    if (r->version < BATTLE_REQUEST_VERSION_EFFECTS) return 0;
+    uint32_t size = 0;
+    for (unsigned side = 0; side < 2; ++side) {
+        const BattleEntry *e = side ? r->opponent : r->player;
+        const unsigned count = side ? r->opponent_count : r->player_count;
+        for (unsigned i = 0; i < count && i < BATTLE_MAX_PER_SIDE; ++i)
+            for (unsigned m = 0; m < 4; ++m) size += move_effects_size(&e[i].mon.moves[m]);
+    }
+    return size;
+}
+
+static uint32_t fixed_size(const BattleRequest *r) {
     return BATTLE_REQUEST_HEADER + (uint32_t)(r->player_count + r->opponent_count) * BATTLE_ENTRY_BYTES +
            (uint32_t)r->type_count * r->type_count +
            (r->version >= BATTLE_REQUEST_VERSION_CONDITIONS ? BATTLE_CONDITION_RULE_BYTES : 0);
 }
 
+uint32_t battle_request_size(const BattleRequest *r) {
+    return fixed_size(r) + effects_size(r);
+}
+
 uint32_t battle_request_encode(const BattleRequest *r, uint8_t *p, uint32_t capacity) {
     const uint32_t size = battle_request_size(r);
     const uint8_t version = r->version ? r->version : BATTLE_REQUEST_VERSION;
-    if ((version < BATTLE_REQUEST_VERSION || version > BATTLE_REQUEST_VERSION_CONDITIONS) ||
+    if ((version < BATTLE_REQUEST_VERSION || version > BATTLE_REQUEST_VERSION_EFFECTS) ||
         size > capacity || r->player_count > BATTLE_MAX_PER_SIDE || r->opponent_count > BATTLE_MAX_PER_SIDE ||
         r->type_count > BATTLE_MAX_TYPES)
         return 0;
@@ -142,18 +264,34 @@ uint32_t battle_request_encode(const BattleRequest *r, uint8_t *p, uint32_t capa
         const unsigned count = side ? r->opponent_count : r->player_count;
         for (unsigned i = 0; i < count; ++i, q += BATTLE_ENTRY_BYTES) {
             pkmn_record_encode(&e[i].record, q);
-            mon_encode(&e[i].mon, q + PKMN_RECORD_BYTES, version >= BATTLE_REQUEST_VERSION_DRAG);
+            mon_encode(&e[i].mon, q + PKMN_RECORD_BYTES,
+                       version >= BATTLE_REQUEST_VERSION_DRAG && version < BATTLE_REQUEST_VERSION_EFFECTS);
         }
     }
     for (unsigned i = 0; i < (unsigned)r->type_count * r->type_count; ++i) q[i] = r->type_chart[i];
-    if (version >= BATTLE_REQUEST_VERSION_CONDITIONS)
-        conditions_encode(&r->conditions, q + (unsigned)r->type_count * r->type_count);
+    q += (unsigned)r->type_count * r->type_count;
+    if (version >= BATTLE_REQUEST_VERSION_CONDITIONS) {
+        conditions_encode(&r->conditions, q);
+        q += BATTLE_CONDITION_RULE_BYTES;
+    }
+    if (version >= BATTLE_REQUEST_VERSION_EFFECTS)
+        for (unsigned side = 0; side < 2; ++side) {
+            const BattleEntry *e = side ? r->opponent : r->player;
+            const unsigned count = side ? r->opponent_count : r->player_count;
+            for (unsigned i = 0; i < count; ++i)
+                for (unsigned m = 0; m < 4; ++m) {
+                    const BattleMove *move = &e[i].mon.moves[m];
+                    if (move->effect_count > BATTLE_MAX_EFFECTS) return 0;
+                    move_effects_encode(move, q);
+                    q += move_effects_size(move);
+                }
+        }
     return size;
 }
 
 bool battle_request_decode(const uint8_t *p, uint32_t length, BattleRequest *r) {
     if (length < BATTLE_REQUEST_HEADER ||
-        (p[0] < BATTLE_REQUEST_VERSION || p[0] > BATTLE_REQUEST_VERSION_CONDITIONS) ||
+        (p[0] < BATTLE_REQUEST_VERSION || p[0] > BATTLE_REQUEST_VERSION_EFFECTS) ||
         msg_get16(p+14) != BATTLE_ENTRY_BYTES)
         return false;
     r->version = p[0];
@@ -179,7 +317,7 @@ bool battle_request_decode(const uint8_t *p, uint32_t length, BattleRequest *r) 
         return false;
     if (!r->player_count || !r->opponent_count || r->player_count > BATTLE_MAX_PER_SIDE ||
         r->opponent_count > BATTLE_MAX_PER_SIDE || !r->type_count || r->type_count > BATTLE_MAX_TYPES ||
-        length != battle_request_size(r))
+        (r->version < BATTLE_REQUEST_VERSION_EFFECTS ? length != fixed_size(r) : length < fixed_size(r)))
         return false;
     const uint8_t *q = p + BATTLE_REQUEST_HEADER;
     for (unsigned side = 0; side < 2; ++side) {
@@ -191,12 +329,31 @@ bool battle_request_decode(const uint8_t *p, uint32_t length, BattleRequest *r) 
                 return false;
     }
     for (unsigned i = 0; i < (unsigned)r->type_count * r->type_count; ++i) r->type_chart[i] = q[i];
+    q += (unsigned)r->type_count * r->type_count;
     r->conditions = (BattleConditionRules){0};
     if (r->version >= BATTLE_REQUEST_VERSION_CONDITIONS) {
-        conditions_decode(q + (unsigned)r->type_count * r->type_count, &r->conditions);
-        return battle_condition_rules_valid(&r->conditions, r->type_count);
+        conditions_decode(q, &r->conditions);
+        q += BATTLE_CONDITION_RULE_BYTES;
+        if (!battle_condition_rules_valid(&r->conditions, r->type_count)) return false;
     }
-    return true;
+    if (r->version < BATTLE_REQUEST_VERSION_EFFECTS) return true;
+    const uint8_t *end = p + length;
+    for (unsigned side = 0; side < 2; ++side) {
+        BattleEntry *e = side ? r->opponent : r->player;
+        const unsigned count = side ? r->opponent_count : r->player_count;
+        for (unsigned i = 0; i < count; ++i)
+            for (unsigned m = 0; m < 4; ++m) {
+                BattleMove *move = &e[i].mon.moves[m];
+                const unsigned used = move_effects_decode(q, (uint32_t)(end - q), move);
+                if (!used) return false;
+                // Empty slots carry no effects; everything else must be well formed.
+                if (move->unsupported != UNSUP_EMPTY && !move->unsupported && !battle_move_effects_valid(move))
+                    return false;
+                if (move->unsupported == UNSUP_EMPTY && move->effect_count) return false;
+                q += used;
+            }
+    }
+    return q == end;
 }
 
 unsigned battle_state_encode(const BattleState *s, uint8_t *p) {
