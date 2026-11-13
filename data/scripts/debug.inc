@@ -363,6 +363,169 @@ Debug_Follower_NPC_Event_Script::
 Debug_Follower_NPC_Test_Message:
 	.string "これは つれあるきテストです.$"
 
+@ GC Extension Mode test entry (gba-gc-extension Phase 2). The special fades
+@ out, runs the mode and returns here; it never changes party, bag or flags.
+Debug_EventScript_GcExtensionMode::
+	lockall
+	special GcCompanion_Start
+	releaseall
+	end
+
+@ Frontier GC Battle test (Phase 3): SINGLE 1vs1 on the GameCube.
+@ VAR_0x8004 = result policy (0 show only, 1 apply HP/PP), VAR_0x8005 = opponent trainer.
+Debug_EventScript_GcBattleWeak::
+	lockall
+	setvar VAR_0x8004, 0
+	setvar VAR_0x8005, TRAINER_CALVIN_1
+	setvar VAR_0x8006, 0
+	special FrontierGcBattle_Start
+	releaseall
+	end
+
+Debug_EventScript_GcBattleWeakApply::
+	lockall
+	setvar VAR_0x8004, 1
+	setvar VAR_0x8005, TRAINER_CALVIN_1
+	setvar VAR_0x8006, 0
+	special FrontierGcBattle_Start
+	releaseall
+	end
+
+Debug_EventScript_GcBattleStrong::
+	lockall
+	setvar VAR_0x8004, 0
+	setvar VAR_0x8005, TRAINER_STEVEN
+	setvar VAR_0x8006, 0
+	special FrontierGcBattle_Start
+	releaseall
+	end
+
+Debug_EventScript_GcBattleDouble::
+	lockall
+	setvar VAR_0x8004, 0
+	setvar VAR_0x8005, TRAINER_CALVIN_1
+	setvar VAR_0x8006, 2
+	special FrontierGcBattle_Start
+	releaseall
+	end
+
+Debug_EventScript_GcBattleTriple::
+	lockall
+	setvar VAR_0x8004, 0
+	setvar VAR_0x8005, TRAINER_CALVIN_1
+	setvar VAR_0x8006, 3
+	special FrontierGcBattle_Start
+	releaseall
+	end
+
+Debug_EventScript_GcBattleRotation::
+	lockall
+	setvar VAR_0x8004, 0
+	setvar VAR_0x8005, TRAINER_CALVIN_1
+	setvar VAR_0x8006, 4
+	special FrontierGcBattle_Start
+	releaseall
+	end
+
+Debug_EventScript_GcBattleDoubleStrong::
+	lockall
+	setvar VAR_0x8004, 0
+	setvar VAR_0x8005, TRAINER_STEVEN
+	setvar VAR_0x8006, 2
+	special FrontierGcBattle_Start
+	releaseall
+	end
+
+Debug_EventScript_GcBattleStrongApply::
+	lockall
+	setvar VAR_0x8004, 1
+	setvar VAR_0x8005, TRAINER_STEVEN
+	setvar VAR_0x8006, 0
+	special FrontierGcBattle_Start
+	releaseall
+	end
+
+Debug_EventScript_GcBattleReserve::
+	lockall
+	setvar VAR_0x8004, 0
+	setvar VAR_0x8005, TRAINER_CALVIN_1
+	setvar VAR_0x8006, 0x102
+	special FrontierGcBattle_Start
+	releaseall
+	end
+
+Debug_EventScript_GcBattleSwitch::
+	lockall
+	setvar VAR_0x8004, 0
+	setvar VAR_0x8005, TRAINER_CALVIN_1
+	setvar VAR_0x8006, 0x202
+	special FrontierGcBattle_Start
+	releaseall
+	end
+
+Debug_EventScript_GcBattleStruggle::
+	lockall
+	setvar VAR_0x8004, 0
+	setvar VAR_0x8005, TRAINER_CALVIN_1
+	setvar VAR_0x8006, 0x402
+	special FrontierGcBattle_Start
+	releaseall
+	end
+
+Debug_EventScript_GcBattleDrag::
+	lockall
+	setvar VAR_0x8004, 0
+	setvar VAR_0x8005, TRAINER_CALVIN_1
+	setvar VAR_0x8006, 0x802
+	special FrontierGcBattle_Start
+	releaseall
+	end
+
+Debug_EventScript_GcBattlePivot::
+	lockall
+	setvar VAR_0x8004, 0
+	setvar VAR_0x8005, TRAINER_CALVIN_1
+	setvar VAR_0x8006, 0x1002
+	special FrontierGcBattle_Start
+	releaseall
+	end
+
+Debug_EventScript_GcConditionsSingle::
+	lockall
+	setvar VAR_0x8004, 0
+	setvar VAR_0x8005, TRAINER_CALVIN_1
+	setvar VAR_0x8006, 0x2001
+	special FrontierGcBattle_Start
+	releaseall
+	end
+
+Debug_EventScript_GcConditionsDouble::
+	lockall
+	setvar VAR_0x8004, 0
+	setvar VAR_0x8005, TRAINER_CALVIN_1
+	setvar VAR_0x8006, 0x2002
+	special FrontierGcBattle_Start
+	releaseall
+	end
+
+Debug_EventScript_GcConditionsTriple::
+	lockall
+	setvar VAR_0x8004, 0
+	setvar VAR_0x8005, TRAINER_CALVIN_1
+	setvar VAR_0x8006, 0x2003
+	special FrontierGcBattle_Start
+	releaseall
+	end
+
+Debug_EventScript_GcConditionsRotation::
+	lockall
+	setvar VAR_0x8004, 0
+	setvar VAR_0x8005, TRAINER_CALVIN_1
+	setvar VAR_0x8006, 0x2004
+	special FrontierGcBattle_Start
+	releaseall
+	end
+
 Debug_EventScript_WallyTutorial::
 	special SavePlayerParty
 	special LoadWallyZigzagoon

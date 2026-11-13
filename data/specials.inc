@@ -794,3 +794,5 @@ gSpecials::
 	def_special BattleConnector_BufferPanicChain
 	def_special BattleConnector_EndPanicRush
 	def_special UpdateFollowingPokemon
+	def_special GcCompanion_Start, waitstate=1
+	def_special FrontierGcBattle_Start, waitstate=1

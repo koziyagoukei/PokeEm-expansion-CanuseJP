@@ -407,6 +407,24 @@ extern const u8 Debug_ShowLinkCompatibility[];
 extern const u8 Debug_EventScript_EWRAMCounters[];
 extern const u8 Debug_Follower_NPC_Event_Script[];
 extern const u8 Debug_Follower_NPC_Not_Enabled[];
+extern const u8 Debug_EventScript_GcExtensionMode[];
+extern const u8 Debug_EventScript_GcBattleWeak[];
+extern const u8 Debug_EventScript_GcBattleWeakApply[];
+extern const u8 Debug_EventScript_GcBattleStrong[];
+extern const u8 Debug_EventScript_GcBattleDouble[];
+extern const u8 Debug_EventScript_GcBattleTriple[];
+extern const u8 Debug_EventScript_GcBattleRotation[];
+extern const u8 Debug_EventScript_GcBattleDoubleStrong[];
+extern const u8 Debug_EventScript_GcBattleStrongApply[];
+extern const u8 Debug_EventScript_GcBattleReserve[];
+extern const u8 Debug_EventScript_GcBattleSwitch[];
+extern const u8 Debug_EventScript_GcBattleStruggle[];
+extern const u8 Debug_EventScript_GcBattleDrag[];
+extern const u8 Debug_EventScript_GcBattlePivot[];
+extern const u8 Debug_EventScript_GcConditionsSingle[];
+extern const u8 Debug_EventScript_GcConditionsDouble[];
+extern const u8 Debug_EventScript_GcConditionsTriple[];
+extern const u8 Debug_EventScript_GcConditionsRotation[];
 extern const u8 Debug_EventScript_WallyTutorial[];
 extern const u8 Debug_EventScript_PrintTimeOfDay[];
 extern const u8 Debug_EventScript_TellTheTime[];
@@ -616,6 +634,24 @@ static const struct DebugMenuOption sDebugMenu_Actions_Utilities[] =
     { COMPOUND_STRING("{JPN}しゅぞくランダムを ためす"), DebugAction_Selection_Init, &sSpeciesGeneratorSelection },
     { COMPOUND_STRING("{JPN}どうぐランダムを ためす"), DebugAction_Selection_Init, &sItemGeneratorSelection },
     { COMPOUND_STRING("{JPN}ミツルチュートリアル"),    DebugAction_ExecuteScript, Debug_EventScript_WallyTutorial },
+    { COMPOUND_STRING("{ENG}GC Extension Mode"), DebugAction_ExecuteScript, Debug_EventScript_GcExtensionMode },
+    { COMPOUND_STRING("{ENG}GC Battle (show only)"), DebugAction_ExecuteScript, Debug_EventScript_GcBattleWeak },
+    { COMPOUND_STRING("{ENG}GC Battle (apply HP/PP)"), DebugAction_ExecuteScript, Debug_EventScript_GcBattleWeakApply },
+    { COMPOUND_STRING("{ENG}GC Battle (vs Steven)"), DebugAction_ExecuteScript, Debug_EventScript_GcBattleStrong },
+    { COMPOUND_STRING("{ENG}GC Double (test)"), DebugAction_ExecuteScript, Debug_EventScript_GcBattleDouble },
+    { COMPOUND_STRING("{ENG}GC Triple (test)"), DebugAction_ExecuteScript, Debug_EventScript_GcBattleTriple },
+    { COMPOUND_STRING("{ENG}GC Rotation (test)"), DebugAction_ExecuteScript, Debug_EventScript_GcBattleRotation },
+    { COMPOUND_STRING("{ENG}GC Double (strong test)"), DebugAction_ExecuteScript, Debug_EventScript_GcBattleDoubleStrong },
+    { COMPOUND_STRING("{ENG}GC Steven (apply HP/PP)"), DebugAction_ExecuteScript, Debug_EventScript_GcBattleStrongApply },
+    { COMPOUND_STRING("{ENG}GC Double (reserve test)"), DebugAction_ExecuteScript, Debug_EventScript_GcBattleReserve },
+    { COMPOUND_STRING("{ENG}GC Double (switch test)"), DebugAction_ExecuteScript, Debug_EventScript_GcBattleSwitch },
+    { COMPOUND_STRING("{ENG}GC Double (Struggle test)"), DebugAction_ExecuteScript, Debug_EventScript_GcBattleStruggle },
+    { COMPOUND_STRING("{ENG}GC Double (drag test)"), DebugAction_ExecuteScript, Debug_EventScript_GcBattleDrag },
+    { COMPOUND_STRING("{ENG}GC Double (pivot test)"), DebugAction_ExecuteScript, Debug_EventScript_GcBattlePivot },
+    { COMPOUND_STRING("{ENG}GC Single (conditions)"), DebugAction_ExecuteScript, Debug_EventScript_GcConditionsSingle },
+    { COMPOUND_STRING("{ENG}GC Double (conditions)"), DebugAction_ExecuteScript, Debug_EventScript_GcConditionsDouble },
+    { COMPOUND_STRING("{ENG}GC Triple (conditions)"), DebugAction_ExecuteScript, Debug_EventScript_GcConditionsTriple },
+    { COMPOUND_STRING("{ENG}GC Rotation (conditions)"), DebugAction_ExecuteScript, Debug_EventScript_GcConditionsRotation },
     { NULL }
 };
 

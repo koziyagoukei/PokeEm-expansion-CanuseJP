@@ -1,0 +1,295 @@
+// Vendored from gba-gc-extension protocol/battle_protocol.h. Do not edit here;
+// change the extension repository and run tools/sync-pokeemerald.ps1.
+#ifndef GCEXT_BATTLE_PROTOCOL_H
+#define GCEXT_BATTLE_PROTOCOL_H
+
+// Battle application protocol (GC_MODE_BATTLE). The GBA sends one request
+// with everything the GameCube battle core needs, resolved from its own game
+// data; the GameCube owns the temporary battle state, RNG and turn
+// resolution and returns a versioned result. All fields are little-endian.
+// Multi formats use separate STATE_MULTI and ACTION_MULTI opcodes.
+
+#include <stdbool.h>
+#include <stdint.h>
+#include "gc_ext/pkmn_protocol.h"
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+#define APP_GC_BATTLE 0x4247      // bytes 'G','B'
+#define BATTLE_APP_VERSION 1
+#define BATTLE_APP_VERSION_ROSTER 2
+#define BATTLE_APP_VERSION_SWITCH 3
+#define BATTLE_APP_VERSION_STRUGGLE 4
+#define BATTLE_APP_VERSION_DRAG 5
+#define BATTLE_APP_VERSION_PIVOT 6
+#define BATTLE_APP_VERSION_CONDITIONS 7
+#define BATTLE_MODE_VERSION 1
+
+enum BattleFormat { BATTLE_FORMAT_SINGLE = 1, BATTLE_FORMAT_DOUBLE = 2, BATTLE_FORMAT_TRIPLE = 3, BATTLE_FORMAT_ROTATION = 4 };
+enum BattleKind { BTYPE_TRAINER = 1 };  // prefixed: games define BATTLE_TYPE_* flags
+enum BattleResultPolicy { RESULT_POLICY_DISPLAY_ONLY = 0, RESULT_POLICY_APPLY_HP_PP = 1 };
+
+// Rules: mechanics the request explicitly normalises away for this battle.
+#define RULE_IGNORE_ABILITIES  (1u << 0)
+#define RULE_IGNORE_ITEMS      (1u << 1)
+#define RULE_IGNORE_STATUS     (1u << 2)  // existing status is carried but has no effect
+#define RULE_NO_GIMMICKS       (1u << 3)  // no Mega, Z-Move, Dynamax, Tera
+#define RULE_NO_CRITICAL_HITS  (1u << 4)
+#define RULE_SUPPORTED_MOVES_ONLY (1u << 5)  // unsupported moves cannot be selected
+
+#define BATTLE_MAX_PER_SIDE 6
+#define BATTLE_MAX_TYPES 32
+
+// Move data, 8 bytes, resolved by the GBA from its move table.
+//   0 u16 power   2 u8 type   3 u8 category   4 u8 accuracy (0 = never misses)
+//   5 s8 priority 6 u8 target  7 u8 unsupported reasons (0 = supported)
+enum BattleCategory { BCAT_STATUS = 0, BCAT_PHYSICAL = 1, BCAT_SPECIAL = 2 };
+// Bit 7 of target bypasses Triple distance; the low bits hold the class.
+enum BattleTarget {
+    BTARGET_OTHER = 0, BTARGET_SINGLE = 1, BTARGET_ALL_FOES = 2,
+    BTARGET_ALL_ADJACENT = 3, BTARGET_SELF = 4,
+};
+#define BTARGET_CLASS_MASK 0x7fu
+#define BTARGET_IGNORE_DISTANCE 0x80u
+#define UNSUP_EFFECT      (1u << 0)  // not a plain damaging effect
+#define UNSUP_SECONDARY   (1u << 1)  // has additional effects
+#define UNSUP_PRIORITY    (1u << 2)
+#define UNSUP_TARGET      (1u << 3)
+#define UNSUP_STATUS_MOVE (1u << 4)
+#define UNSUP_MULTI_HIT   (1u << 5)
+#define UNSUP_OTHER       (1u << 6)  // fixed crits, recoil-like flags, explosion ...
+#define UNSUP_EMPTY       (1u << 7)  // no move in this slot
+enum GcResolvedMoveEffect { BME_HIT = 0, BME_FORCE_OUT = 1, BME_FORCE_OUT_ON_HIT = 2, BME_PIVOT = 3,
+    BME_STAGE_BASE = 0x10, BME_STATUS_BASE = 0x70, BME_REFRESH = 0x78, BME_ELECTRIC_PARALYSIS = 0x79,
+};
+enum BattleStat { BSTAT_ATK, BSTAT_DEF, BSTAT_SPA, BSTAT_SPD, BSTAT_SPE, BSTAT_ACC, BSTAT_EVA, BSTAT_COUNT };
+enum BattleStatus { BST_NONE, BST_POISON, BST_TOXIC, BST_BURN, BST_PARALYSIS, BST_SLEEP, BST_FREEZE, BST_FROSTBITE };
+#define BATTLE_STAGE_EFFECT(stat, delta) (BME_STAGE_BASE + (stat) * 12 + (delta) + ((delta) < 0 ? 6 : 5))
+#define BATTLE_STATUS_EFFECT(status) (BME_STATUS_BASE + (status))
+#define BATTLE_CONDITION(kind, counter) ((uint32_t)(kind) | (uint32_t)(counter) << 8)
+#define BATTLE_CONDITION_KIND(value) ((uint8_t)(value))
+#define BATTLE_CONDITION_COUNTER(value) ((uint8_t)((value) >> 8))
+#define BCR_ELECTRIC_IMMUNE (1u << 0)
+#define BCR_POISON_TOXIC_ALWAYS_HITS (1u << 1)
+#define BCR_FROSTBITE (1u << 2)
+#define BCR_DYNAMIC_SPEED (1u << 3)
+#define BCR_THAW_ON_FIRE_HIT (1u << 4)
+#define BCR_SLEEP_RESET_ON_SWITCH (1u << 5)
+#define BATTLE_CONDITION_RULE_BYTES 12
+typedef struct {
+    uint8_t flags, poison_type, steel_type, fire_type, electric_type, ice_type;
+    uint8_t paralysis_speed_divisor, paralysis_block_divisor, burn_residual_divisor;
+    uint8_t sleep_min, sleep_max, thaw_percent;
+} BattleConditionRules;
+bool battle_condition_rules_valid(const BattleConditionRules *rules, unsigned type_count);
+bool battle_condition_valid(uint32_t condition, const BattleConditionRules *rules);
+bool battle_effect_valid(uint8_t effect, uint8_t version);
+typedef struct {
+    uint16_t power;
+    uint8_t type, category, accuracy;
+    int8_t priority;
+    uint8_t target, unsupported, effect;
+} BattleMove;
+
+// BattleMonV1, 40 bytes, appended to each PokemonRecordV1 in the request.
+//   0 u8 version (1)  1 u8 type count  2 u8 types[2]
+//   4..7 resolved effect for each move (request V5); reserved in earlier requests
+//   8 BattleMove[4]
+#define BATTLE_MON_VERSION 1
+#define BATTLE_MON_BYTES 40
+typedef struct {
+    uint8_t type_count, types[2];
+    // Source compatibility for legacy producers; not encoded or used by GC.
+    int8_t front_y, back_y;
+    uint8_t elevation;
+    BattleMove moves[4];
+} BattleMon;
+
+typedef struct {
+    PokemonRecord record;
+    BattleMon mon;
+} BattleEntry;
+#define BATTLE_ENTRY_BYTES (PKMN_RECORD_BYTES + BATTLE_MON_BYTES)
+
+// GcBattleRequestV1 (the GC_MODE_BATTLE mode request asset).
+//   0 u8 request version (1)   1 u8 format   2 u8 battle type   3 u8 player count
+//   4 u8 opponent count        5 u8 active per side             6 u16 rules
+//   8 u16 trainer id          10 u8 trainer class              11 u8 reward mode (0 none)
+//  12 u8 result policy        13 u8 type count N               14 u16 entry length (140)
+//  16 u32 battle id           20 u8 battle environment (game id)  21..23 reserved
+//  24 entries: player entries, then opponent entries (PokemonRecordV1 + BattleMonV1)
+//  .. type chart: N*N u8, [attack type][defend type], multiplier in quarters (0,2,4,8)
+#define BATTLE_REQUEST_VERSION 1
+#define BATTLE_REQUEST_VERSION_ROSTER 2
+#define BATTLE_REQUEST_VERSION_SWITCH 3
+#define BATTLE_REQUEST_VERSION_STRUGGLE 4
+#define BATTLE_REQUEST_VERSION_DRAG 5
+#define BATTLE_REQUEST_VERSION_PIVOT 6
+#define BATTLE_REQUEST_VERSION_CONDITIONS 7
+#define BATTLE_REQUEST_HEADER 24
+enum StruggleRecoil { BSTRUGGLE_MAX_HP_FLOOR = 1, BSTRUGGLE_MAX_HP_NEAREST = 2 };
+#define BATTLE_MOVE_STRUGGLE 0xffffu  // logical presentation identifier
+typedef struct {
+    uint8_t format, battle_type, player_count, opponent_count, active_per_side;
+    uint16_t rules, trainer_id;
+    uint8_t trainer_class, reward_mode, result_policy, type_count;
+    uint32_t battle_id;
+    uint8_t environment;
+    uint8_t version; // zero in callers constructing a legacy V1 request
+    uint8_t struggle_power, struggle_accuracy, struggle_recoil; // V4 header bytes 21..23
+    BattleEntry player[BATTLE_MAX_PER_SIDE], opponent[BATTLE_MAX_PER_SIDE];
+    uint8_t type_chart[BATTLE_MAX_TYPES * BATTLE_MAX_TYPES];
+    BattleConditionRules conditions; // V7 suffix after the type chart
+} BattleRequest;
+
+uint32_t battle_request_size(const BattleRequest *request);
+uint32_t battle_request_encode(const BattleRequest *request, uint8_t *out, uint32_t capacity);
+bool battle_request_decode(const uint8_t *in, uint32_t length, BattleRequest *request);
+
+// Legacy UI asset IDs (0x02xx) for older client/host pairs. The native GC
+// presentation does not request these. Keep IDs reserved for compatibility.
+enum {
+    ASSET_BATTLE_BG = 0x0201,         // id = environment; PIXEL_4BPP_TILEMAP 30x20 (240x160), opaque
+    ASSET_BATTLE_TEXTBOX = 0x0202,    // id 0; PIXEL_4BPP_TILEMAP 30x6, screen rows 14-19
+    ASSET_BATTLE_HEALTHBOX = 0x0203,  // id = side (0 player, 1 opponent), variant = level, extra = personality;
+                                      // frame with nickname/gender/Lv printed by the game; 128x64 / 128x32
+    ASSET_BATTLE_HPBAR = 0x0204,      // id 0; tiles H,P, green 0-8, yellow 0-8, red 0-8 (29 x 8x8) + bar palette
+    ASSET_BATTLE_DIGITS = 0x0205,     // id 0; healthbox-font glyphs 0-9 and '/' in 8x16 cells
+    ASSET_BATTLE_MESSAGE = 0x0206,    // id = BMSG | side << 8, variant = move, extra = personality / trainer;
+                                      // a 208x32 message window rendered with the game's battle text
+};
+enum BattleMessageId {
+    BMSG_TRAINER_INTRO = 1, BMSG_TRAINER_SENT_OUT = 2, BMSG_GO_PKMN = 3, BMSG_USED_MOVE = 4,
+    BMSG_MISSED = 5, BMSG_SUPER_EFFECTIVE = 6, BMSG_NOT_VERY_EFFECTIVE = 7, BMSG_NO_EFFECT = 8,
+    BMSG_FAINTED = 9, BMSG_WIN = 10, BMSG_LOSE = 11, BMSG_FORFEIT = 12, BMSG_WHAT_WILL_DO = 13,
+};
+#define BMSG_KEY(msg, side) ((uint32_t)(msg) | (uint32_t)(side) << 8)
+#define HPBAR_TILE_H 0
+#define HPBAR_TILE_GREEN 2
+#define HPBAR_TILE_YELLOW 11
+#define HPBAR_TILE_RED 20
+#define HPBAR_TILES 29
+
+// APP opcodes of APP_GC_BATTLE.
+enum BattleOp {
+    BATTLE_OP_STATE = 1,   // host -> GBA: BattleState (args); empty reply
+    BATTLE_OP_ACTION = 2,  // host polls the GBA: reply BattleAction
+    BATTLE_OP_STATE_MULTI = 3,
+    BATTLE_OP_ACTION_MULTI = 4,
+    BATTLE_OP_STATE_ROSTER = 5,
+    BATTLE_OP_ACTION_ROSTER = 6,
+};
+
+// BattleState, 16 bytes.
+//   0 u8 phase   1 u8 turn   2 u8 outcome (when ENDED)  3 u8 player slot
+//   4 u16 player hp   6 u16 player max hp   8 u16 opponent hp   10 u16 opponent max hp
+//  12 u8 pp[4] of the active player battler
+enum BattlePhase { BPHASE_WAIT = 1, BPHASE_CHOOSE = 2, BPHASE_ENDED = 3, BPHASE_REPLACE = 4, BPHASE_PIVOT = 5 };
+#define BATTLE_STATE_BYTES 16
+typedef struct {
+    uint8_t phase, turn, outcome, player_slot;
+    uint16_t player_hp, player_max_hp, opponent_hp, opponent_max_hp;
+    uint8_t pp[4];
+} BattleState;
+
+// BattleAction, 4 bytes: u8 turn, u8 action, u8 move slot, u8 flags.
+// The turn echoes the CHOOSE state it answers, so stale input is ignored.
+enum BattleActionKind { BACTION_NONE = 0, BACTION_MOVE = 1, BACTION_FORFEIT = 2, BACTION_SHIFT = 3, BACTION_REPLACE = 4, BACTION_SWITCH = 5, BACTION_STRUGGLE = 6, BACTION_PIVOT = 7 };
+#define BACTION_FLAG_EXIT (1u << 0)
+#define BATTLE_ACTION_BYTES 4
+typedef struct {
+    uint8_t turn, action, move_slot, flags;
+} BattleAction;
+
+// Multi-format commands use a per-selection token. The GBA may repeat the
+// reply until it receives the next state. A delayed reply cannot answer a
+// different battler's prompt in the same turn.
+#define BATTLE_FIELD_SLOTS 3
+#define BATTLE_SLOT_NONE 0xffu
+#define BATTLE_TARGET_AUTO 0x80u  // the remaining bits are a legal foe mask
+#define BATTLE_MULTI_SHIFT (1u << 0)
+enum BattleRotation { BROT_KEEP = 0, BROT_LEFT = 1, BROT_RIGHT = 2 };
+enum BattlePositionSlot { BPOS_LEFT = 0, BPOS_CENTER = 1, BPOS_RIGHT = 2 };
+
+typedef struct {
+    uint8_t party_slot;
+    uint16_t hp, max_hp;
+} BattleFieldMon;
+typedef struct {
+    uint8_t phase, turn, outcome, actor, flags;
+    uint16_t token;
+    BattleFieldMon field[2][BATTLE_FIELD_SLOTS];
+    uint8_t pp[BATTLE_FIELD_SLOTS][4], targets[BATTLE_FIELD_SLOTS][4];
+} BattleMultiState;
+#define BATTLE_MULTI_STATE_BYTES (7 + 2 * BATTLE_FIELD_SLOTS * 5 + 8 * BATTLE_FIELD_SLOTS)
+typedef struct {
+    uint16_t token;
+    uint8_t actor, action, move_slot, target, rotation, flags;
+} BattleMultiAction;
+#define BATTLE_MULTI_ACTION_BYTES 8
+
+unsigned battle_multi_state_encode(const BattleMultiState *state, uint8_t *out);
+bool battle_multi_state_decode(const uint8_t *in, unsigned length, BattleMultiState *state);
+unsigned battle_multi_action_encode(const BattleMultiAction *action, uint8_t *out);
+bool battle_multi_action_decode(const uint8_t *in, unsigned length, BattleMultiAction *action);
+
+// Roster app V2 extends the multi state with a reserve mask and the
+// player's roster in request order. Empty field/roster entries use 0xff.
+typedef struct {
+    BattleMultiState field_state;
+    uint8_t reserves, struggle_mask;
+    BattleFieldMon player[BATTLE_MAX_PER_SIDE];
+    uint8_t status[2][BATTLE_FIELD_SLOTS];
+    int8_t stages[2][BATTLE_FIELD_SLOTS][BSTAT_COUNT];
+} BattleRosterState;
+#define BATTLE_ROSTER_STATE_BYTES (BATTLE_MULTI_STATE_BYTES + 1 + 5 * BATTLE_MAX_PER_SIDE)
+
+unsigned battle_roster_state_encode(const BattleRosterState *state, uint8_t *out);
+bool battle_roster_state_decode(const uint8_t *in, unsigned length, BattleRosterState *state);
+// Same layout as multi action. REPLACE uses target as a roster index.
+bool battle_roster_action_decode(const uint8_t *in, unsigned length, BattleMultiAction *action);
+// V3 permits SWITCH and supplies a reserve mask during CHOOSE.
+bool battle_switch_action_decode(const uint8_t *in, unsigned length, BattleMultiAction *action);
+
+// V4 appends the mask of field positions allowed to use Struggle.
+#define BATTLE_STRUGGLE_STATE_BYTES (BATTLE_ROSTER_STATE_BYTES + 1)
+unsigned battle_struggle_state_encode(const BattleRosterState *state, uint8_t *out);
+bool battle_struggle_state_decode(const uint8_t *in, unsigned length, BattleRosterState *state);
+bool battle_struggle_action_decode(const uint8_t *in, unsigned length, BattleMultiAction *action);
+
+// V6 uses the V4/V5 state size, and adds a mid-turn pivot phase.
+bool battle_pivot_state_decode(const uint8_t *in, unsigned length, BattleRosterState *state);
+bool battle_pivot_action_decode(const uint8_t *in, unsigned length, BattleMultiAction *action);
+
+#define BATTLE_CONDITION_STATE_BYTES (BATTLE_STRUGGLE_STATE_BYTES + 2 * BATTLE_FIELD_SLOTS * (1 + BSTAT_COUNT))
+unsigned battle_condition_state_encode(const BattleRosterState *state, uint8_t *out);
+bool battle_condition_state_decode(const uint8_t *in, unsigned length, BattleRosterState *state);
+
+// GcBattleResultV1 (RESULT payload, result version 1).
+//   0 u8 outcome   1 u8 turns   2 u8 player count P   3 u8 opponent count O
+//   4 u32 battle id
+//   8 P x 12 bytes: u8 party slot, u8 flags (bit0 fainted), u16 hp, u32 status, u8 pp[4]
+//   .. O x 2 bytes: u16 hp
+enum BattleOutcome { OUTCOME_NONE = 0, OUTCOME_WIN = 1, OUTCOME_LOSE = 2, OUTCOME_DRAW = 3,
+                     OUTCOME_CANCELLED = 4, OUTCOME_UNSUPPORTED = 5 };
+#define BATTLE_RESULT_VERSION 1
+#define BATTLE_RESULT_FAINTED (1u << 0)
+typedef struct {
+    uint8_t outcome, turns, player_count, opponent_count;
+    uint32_t battle_id;
+    struct { uint8_t slot, flags; uint16_t hp; uint32_t status; uint8_t pp[4]; } player[BATTLE_MAX_PER_SIDE];
+    uint16_t opponent_hp[BATTLE_MAX_PER_SIDE];
+} BattleResult;
+
+unsigned battle_state_encode(const BattleState *state, uint8_t *out);
+bool battle_state_decode(const uint8_t *in, unsigned length, BattleState *state);
+unsigned battle_action_encode(const BattleAction *action, uint8_t *out);
+bool battle_action_decode(const uint8_t *in, unsigned length, BattleAction *action);
+unsigned battle_result_encode(const BattleResult *result, uint8_t *out);
+bool battle_result_decode(const uint8_t *in, unsigned length, BattleResult *result);
+
+#ifdef __cplusplus
+}
+#endif
+#endif
