@@ -22,8 +22,11 @@ static const u8 sText_Help[] = _("{ENG}B: Exit");
 
 static void AppendHex(u8 *dest, u32 value)
 {
-    u8 digits[10];
-    ConvertIntToHexStringN(digits, value, STR_CONV_MODE_LEADING_ZEROS, 8);
+    u8 digits[6];
+    // ConvertIntToHexStringN takes an s32: print the halves separately.
+    ConvertIntToHexStringN(digits, value >> 16, STR_CONV_MODE_LEADING_ZEROS, 4);
+    StringAppend(dest, digits);
+    ConvertIntToHexStringN(digits, value & 0xFFFF, STR_CONV_MODE_LEADING_ZEROS, 4);
     StringAppend(dest, digits);
 }
 
