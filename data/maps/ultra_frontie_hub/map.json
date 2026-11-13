@@ -206,11 +206,12 @@
       "dest_warp_id": "WARP_ID_FRONTIER_SOUTH_HUB"
     },
     {
+      "warp_id": "cube_stairs",
       "x": 23,
       "y": 1,
       "elevation": 0,
-      "dest_map": "MAP_BATTLE_FRONTIER_OUTSIDE_SOUTH",
-      "dest_warp_id": "WARP_ID_FRONTIER_SOUTH_HUB"
+      "dest_map": "MAP_FRONTIER_CUBE_TESTER",
+      "dest_warp_id": "cube_entrance"
     },
     {
       "warp_id": "gotoconnect",

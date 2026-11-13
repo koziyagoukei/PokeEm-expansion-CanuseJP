@@ -852,3 +852,5 @@ EventScript_PalletTown_PlayersHouse_2F_TurnOnPC::
 	.include "data/maps/Party_eat_time/scripts.inc"
 
 	.include "data/maps/ultraflontie_PokemonCenter_2F_2/scripts.inc"
+
+	.include "data/maps/FrontierCubeTester/scripts.inc"
