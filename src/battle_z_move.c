@@ -98,8 +98,8 @@ static const struct SignatureZMove sSignatureZMoves[] =
 };
 
 static const u8 sText_ResetStats[] = _("へんかを もどす");
-static const u8 sText_StatsPlus[] = _("すべて +1");
-static const u8 sText_StatsPlus2[] = _("すべて +2");
+static const u8 sText_StatsPlus[] = _("{JPN}すべて {ENG}+1");
+static const u8 sText_StatsPlus2[] = _("{JPN}すべて {ENG}+2");
 static const u8 sText_CritHitsPlus[] = _("はりきり じょうたい");
 static const u8 sText_FollowMe[] = _("このゆびとまれ");
 static const u8 sText_RecoverHP[] = _("かいふく");
@@ -268,6 +268,49 @@ enum Move GetTypeBasedZMove(enum Move move)
     return gTypesInfo[moveType].zMove;
 }
 
+void BufferZMoveEffectDescription(u8 *dst, enum ZEffect zEffect)
+{
+    dst[0] = EOS;
+
+    if (zEffect >= Z_EFFECT_ATK_UP_1 && zEffect <= Z_EFFECT_EVSN_UP_3)
+    {
+        // The enum groups three stages per stat, in battle stat order.
+        u32 offset = zEffect - Z_EFFECT_ATK_UP_1;
+        enum Stat stat = STAT_ATK + offset / 3;
+        u32 stages = offset % 3 + 1;
+        u8 *end = StringCopy(dst, gStatNamesTable[stat]);
+        end = StringCopy(end, COMPOUND_STRING("{ENG} +"));
+        ConvertIntToDecimalStringN(end, stages, STR_CONV_MODE_LEFT_ALIGN, 1);
+        return;
+    }
+
+    switch (zEffect)
+    {
+    case Z_EFFECT_RESET_STATS:
+        StringCopy(dst, sText_ResetStats);
+        break;
+    case Z_EFFECT_ALL_STATS_UP_1:
+        StringCopy(dst, sText_StatsPlus);
+        break;
+    case Z_EFFECT_BOOST_CRITS:
+        StringCopy(dst, sText_CritHitsPlus);
+        break;
+    case Z_EFFECT_FOLLOW_ME:
+        StringCopy(dst, sText_FollowMe);
+        break;
+    case Z_EFFECT_RECOVER_HP:
+        StringCopy(dst, sText_RecoverHP);
+        break;
+    case Z_EFFECT_RESTORE_REPLACEMENT_HP:
+        StringCopy(dst, sText_HealAllyHP);
+        break;
+    default:
+        if (B_SHOW_USELESS_Z_MOVE_INFO == TRUE)
+            StringCopy(dst, sText_NoAdditionalEffect);
+        break;
+    }
+}
+
 bool32 MoveSelectionDisplayZMove(enum Move zmove, enum BattlerId battler)
 {
     u32 i;
@@ -290,8 +333,6 @@ bool32 MoveSelectionDisplayZMove(enum Move zmove, enum BattlerId battler)
         {
             enum ZEffect zEffect = GetMoveZEffect(move);
 
-            gDisplayedStringBattle[0] = EOS;
-
             if (zEffect == Z_EFFECT_CURSE)
             {
                 if (moveInfo->monTypes[0] == TYPE_GHOST || moveInfo->monTypes[1] == TYPE_GHOST || moveInfo->monTypes[2] == TYPE_GHOST)
@@ -300,74 +341,7 @@ bool32 MoveSelectionDisplayZMove(enum Move zmove, enum BattlerId battler)
                     zEffect = Z_EFFECT_ATK_UP_1;
             }
 
-            switch (zEffect)
-            {
-            case Z_EFFECT_RESET_STATS:
-                StringCopy(gDisplayedStringBattle, sText_ResetStats);
-                break;
-            case Z_EFFECT_ALL_STATS_UP_1:
-                StringCopy(gDisplayedStringBattle, sText_StatsPlus);
-                break;
-            case Z_EFFECT_BOOST_CRITS:
-                StringCopy(gDisplayedStringBattle, sText_CritHitsPlus);
-                break;
-            case Z_EFFECT_FOLLOW_ME:
-                StringCopy(gDisplayedStringBattle, sText_FollowMe);
-                break;
-            case Z_EFFECT_RECOVER_HP:
-                StringCopy(gDisplayedStringBattle, sText_RecoverHP);
-                break;
-            case Z_EFFECT_RESTORE_REPLACEMENT_HP:
-                StringCopy(gDisplayedStringBattle, sText_HealAllyHP);
-                break;
-            case Z_EFFECT_ATK_UP_1:
-            case Z_EFFECT_DEF_UP_1:
-            case Z_EFFECT_SPD_UP_1:
-            case Z_EFFECT_SPATK_UP_1:
-            case Z_EFFECT_SPDEF_UP_1:
-            case Z_EFFECT_ACC_UP_1:
-            case Z_EFFECT_EVSN_UP_1:
-                gDisplayedStringBattle[0] = CHAR_PLUS;
-                gDisplayedStringBattle[1] = 0;
-                gDisplayedStringBattle[2] = EOS;
-                PREPARE_STAT_BUFFER(gBattleTextBuff1, zEffect - Z_EFFECT_ATK_UP_1 + 1);
-                ExpandBattleTextBuffPlaceholders(gBattleTextBuff1, gDisplayedStringBattle + 2);
-                break;
-            case Z_EFFECT_ATK_UP_2:
-            case Z_EFFECT_DEF_UP_2:
-            case Z_EFFECT_SPD_UP_2:
-            case Z_EFFECT_SPATK_UP_2:
-            case Z_EFFECT_SPDEF_UP_2:
-            case Z_EFFECT_ACC_UP_2:
-            case Z_EFFECT_EVSN_UP_2:
-                gDisplayedStringBattle[0] = CHAR_PLUS;
-                gDisplayedStringBattle[1] = CHAR_PLUS;
-                gDisplayedStringBattle[2] = 0;
-                gDisplayedStringBattle[3] = EOS;
-                PREPARE_STAT_BUFFER(gBattleTextBuff1, zEffect - Z_EFFECT_ATK_UP_2 + 1);
-                ExpandBattleTextBuffPlaceholders(gBattleTextBuff1, gDisplayedStringBattle + 3);
-                break;
-            case Z_EFFECT_ATK_UP_3:
-            case Z_EFFECT_DEF_UP_3:
-            case Z_EFFECT_SPD_UP_3:
-            case Z_EFFECT_SPATK_UP_3:
-            case Z_EFFECT_SPDEF_UP_3:
-            case Z_EFFECT_ACC_UP_3:
-            case Z_EFFECT_EVSN_UP_3:
-                gDisplayedStringBattle[0] = CHAR_PLUS;
-                gDisplayedStringBattle[1] = CHAR_PLUS;
-                gDisplayedStringBattle[2] = CHAR_PLUS;
-                gDisplayedStringBattle[3] = 0;
-                gDisplayedStringBattle[4] = EOS;
-                PREPARE_STAT_BUFFER(gBattleTextBuff1, zEffect - Z_EFFECT_ATK_UP_3 + 1);
-                ExpandBattleTextBuffPlaceholders(gBattleTextBuff1, gDisplayedStringBattle + 4);
-                break;
-            default:
-                if (B_SHOW_USELESS_Z_MOVE_INFO == TRUE)
-                    StringCopy(gDisplayedStringBattle, sText_NoAdditionalEffect);
-                break;
-            }
-
+            BufferZMoveEffectDescription(gDisplayedStringBattle, zEffect);
             BattlePutTextOnWindow(gDisplayedStringBattle, B_WIN_MOVE_NAME_3);
             gDisplayedStringBattle[0] = CHAR_Z;
             gDisplayedStringBattle[1] = CHAR_HYPHEN;

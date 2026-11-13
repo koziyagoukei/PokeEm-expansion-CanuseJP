@@ -1,6 +1,8 @@
 #ifndef GUARD_BATTLE_Z_MOVE_H
 #define GUARD_BATTLE_Z_MOVE_H
 
+#include "constants/battle_z_move_effects.h"
+
 #define MOVE_Z_STATUS   0xFFFF
 
 struct SignatureZMove
@@ -20,6 +22,7 @@ bool32 TryChangeZTrigger(enum BattlerId battler, u32 moveIndex);
 enum Move GetTypeBasedZMove(enum Move move);
 enum Move GetSignatureZMove(enum Move move, enum Species species, enum Item item);
 bool32 MoveSelectionDisplayZMove(enum Move zmove, enum BattlerId battler);
+void BufferZMoveEffectDescription(u8 *dst, enum ZEffect zEffect);
 void SetZEffect(const u8 *nextInstr);
 void AssignUsableZMoves(enum BattlerId battler, enum Move *moves);
 u32 GetZMovePower(enum Move move);

@@ -1837,7 +1837,7 @@ static void Cmd_setadditionaleffects(void)
                     se.effectBattler = additionalEffect->self ? cv.battlerAtk : cv.battlerDef;
                     se.primary = percentChance == 0;
                     se.certain = percentChance >= 100;
-                    se.onSide = additionalEffect->onSide; // TODO
+                    se.onSide = additionalEffect->onSide;
                     SetMoveEffect(&cv, &se);
                 }
             }

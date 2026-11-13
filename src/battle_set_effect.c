@@ -238,8 +238,9 @@ static void HandleSetEffectStatChange(struct BattleCalcValues *cv, struct SetEff
         if (se->additionalEffect->moveEffect == MOVE_EFFECT_STAT_MINUS)
             stage = -1 * stage;
 
-        SetStatChange(se->effectBattler, stat, stage);
-        if (se->additionalEffect->onSide)
+        if (IsBattlerAlive(se->effectBattler))
+            SetStatChange(se->effectBattler, stat, stage);
+        if (se->onSide && IsBattlerAlive(GetPartnerBattler(se->effectBattler)))
             SetStatChange(GetPartnerBattler(se->effectBattler), stat, stage);
     }
 
@@ -1450,7 +1451,8 @@ void SetMoveEffect(struct BattleCalcValues *cv, struct SetEffect *se)
           && IsSheerForceAffected(cv->move, cv->abilities[cv->battlerAtk])
           && !(se->moveEffect == MOVE_EFFECT_ORDER_UP && gBattleStruct->battlerState[cv->battlerAtk].commanderSpecies != SPECIES_NONE))
         se->moveEffect = MOVE_EFFECT_NONE;
-    else if (!IsBattlerAlive(se->effectBattler) && !IgnoreTargetingForMoveEffect(se->moveEffect))
+    // Side-wide effects still reach the surviving partner when the target faints.
+    else if (!IsBattlerAlive(se->effectBattler) && !se->onSide && !IgnoreTargetingForMoveEffect(se->moveEffect))
         se->moveEffect = MOVE_EFFECT_NONE;
     else if (DoesSubstituteBlockMoveEffectOnTarget(cv->battlerAtk, se->effectBattler, se->moveEffect))
         se->moveEffect = MOVE_EFFECT_NONE;

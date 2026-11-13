@@ -46,6 +46,7 @@ SINGLE_BATTLE_TEST("Custap Berry allows the holder to move first in its priority
     } WHEN {
         TURN { MOVE(player, MOVE_SCRATCH); }
     } SCENE {
+        ITEM_POPUP(player, ITEM_CUSTAP_BERRY);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_HELD_ITEM_BERRY, player);
         MESSAGE("{JPN}{JPN}マダツボミは {JPN}イバンのみの おかげで\nいつもより 早く 動ける！");
         ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, player);
@@ -62,7 +63,49 @@ SINGLE_BATTLE_TEST("Custap Berry activates even if the opposing mon switches out
     } WHEN {
         TURN { SWITCH(opponent, 1); }
     } SCENE {
+        ITEM_POPUP(player, ITEM_CUSTAP_BERRY);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_HELD_ITEM_BERRY, player);
         MESSAGE("{JPN}{JPN}レジロックは {JPN}イバンのみの おかげで\nいつもより 早く 動ける！");
+    }
+}
+
+SINGLE_BATTLE_TEST("Custap Berry: Forretress displays its own item before exploding against Darkrai")
+{
+    GIVEN {
+        PLAYER(SPECIES_FORRETRESS) { Speed(1); MaxHP(182); HP(5); Item(ITEM_CUSTAP_BERRY); }
+        PLAYER(SPECIES_WOBBUFFET) { Speed(100); }
+        OPPONENT(SPECIES_DARKRAI) { Speed(200); MaxHP(1000); HP(1000); Item(ITEM_LEFTOVERS); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_EXPLOSION); SEND_OUT(player, 1); }
+    } SCENE {
+        ITEM_POPUP(player, ITEM_CUSTAP_BERRY);
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_HELD_ITEM_BERRY, player);
+        MESSAGE("{JPN}{JPN}フォレトスは {JPN}イバンのみの おかげで\nいつもより 早く 動ける！");
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_EXPLOSION, player);
+    } THEN {
+        EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_HELD_ITEM), ITEM_NONE);
+        EXPECT_EQ(opponent->item, ITEM_LEFTOVERS);
+    }
+}
+
+DOUBLE_BATTLE_TEST("Custap Berry: the popup follows its holder in all four positions")
+{
+    u32 position = 0;
+    for (u32 slot = 0; slot < MAX_BATTLERS_COUNT; slot++)
+        PARAMETRIZE { position = slot; }
+    struct BattlePokemon *holder = &gBattleMons[position];
+    GIVEN {
+        PLAYER(SPECIES_FORRETRESS) { Speed(100); MaxHP(160); HP(40); Item(position == 0 ? ITEM_CUSTAP_BERRY : ITEM_NONE); }
+        PLAYER(SPECIES_REGIROCK) { Speed(200); MaxHP(160); HP(40); Item(position == 2 ? ITEM_CUSTAP_BERRY : ITEM_NONE); }
+        OPPONENT(SPECIES_DARKRAI) { Speed(300); MaxHP(160); HP(40); Item(position == 1 ? ITEM_CUSTAP_BERRY : ITEM_NONE); }
+        OPPONENT(SPECIES_WOBBUFFET) { Speed(400); MaxHP(160); HP(40); Item(position == 3 ? ITEM_CUSTAP_BERRY : ITEM_NONE); }
+    } WHEN {
+        TURN { MOVE(holder, MOVE_CELEBRATE); }
+    } SCENE {
+        ITEM_POPUP(holder, ITEM_CUSTAP_BERRY);
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_HELD_ITEM_BERRY, holder);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_CELEBRATE, holder);
+    } THEN {
+        EXPECT_EQ(holder->item, ITEM_NONE);
     }
 }
