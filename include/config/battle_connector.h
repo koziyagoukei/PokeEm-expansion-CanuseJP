@@ -15,10 +15,9 @@
 #define BATTLE_CONNECTOR_PARTY_SIZE     6
 #define BATTLE_CONNECTOR_MAX_CANDIDATES 6
 
-// The Shadow Pokemon of the rooms and the mid-boss are Battle Frontier pool Pokemon (moves, item, nature, ability,
-// EVs of their set) up to this National Dex number (386: generations 1-3). Legendary and Mythical Pokemon are left
-// out of the rooms. The base stat total sorts them: below STRONG_BST the ordinary rooms, from RARE_BST the rare ones.
-#define BATTLE_CONNECTOR_MAX_DEX_NUM    386
+// The rooms use Battle Frontier pool sets through generation 6, up to Volcanion's National Dex number.
+// Legendary and Mythical Pokemon have their own pools. The regular rooms are sorted by base stat total.
+#define BATTLE_CONNECTOR_MAX_DEX_NUM    NATIONAL_DEX_VOLCANION
 #define BATTLE_CONNECTOR_STRONG_BST     480
 #define BATTLE_CONNECTOR_RARE_BST       535
 

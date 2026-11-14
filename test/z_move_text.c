@@ -49,10 +49,13 @@ TEST("Z-Move text: Work Up shows its extra Attack boost")
     EXPECT_EQ(StringCompare(text, COMPOUND_STRING("{JPN}攻撃{ENG} +1")), 0);
 }
 
-TEST("Z-Move text: all-stat boosts explicitly select the Latin plus sign")
+TEST("Z-Move text: Happy Hour and Conversion show all stats rising by one stage")
 {
+    enum Move move;
+    PARAMETRIZE { move = MOVE_HAPPY_HOUR; }
+    PARAMETRIZE { move = MOVE_CONVERSION; }
     u8 text[64];
-    BufferZMoveEffectDescription(text, Z_EFFECT_ALL_STATS_UP_1);
+    BufferZMoveEffectDescription(text, GetMoveZEffect(move));
     EXPECT_EQ(StringCompare(text, COMPOUND_STRING("{JPN}すべて {ENG}+1")), 0);
     EXPECT_LE(GetStringWidth(FONT_NORMAL, text, 0), 96);
 }

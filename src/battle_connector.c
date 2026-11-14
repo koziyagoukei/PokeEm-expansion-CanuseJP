@@ -305,7 +305,7 @@ bool32 BattleConnector_IsRoomSpecies(u16 species)
 {
     u32 dexNum;
 
-    if (species == SPECIES_NONE || species >= NUM_SPECIES || GET_BASE_SPECIES_ID(species) != species)
+    if (species == SPECIES_NONE || species >= NUM_SPECIES || !IsSpeciesEnabled(species) || GET_BASE_SPECIES_ID(species) != species)
         return FALSE;
     dexNum = SpeciesToNationalPokedexNum(species);
     if (dexNum == 0 || dexNum > BATTLE_CONNECTOR_MAX_DEX_NUM)
@@ -413,7 +413,13 @@ static u32 GetRoomLevel(u32 roomType)
 
 static bool32 IsEntryUnlocked(const struct ConnectorSpeciesEntry *entry)
 {
-    return VarGet(VAR_BATTLE_CONNECTOR_CLEARS) >= entry->minClears && (entry->flag == 0 || FlagGet(entry->flag));
+    if (!IsSpeciesEnabled(entry->species))
+        return FALSE;
+
+    u32 dexNum = SpeciesToNationalPokedexNum(entry->species);
+
+    return dexNum != NATIONAL_DEX_NONE && dexNum <= BATTLE_CONNECTOR_MAX_DEX_NUM
+        && VarGet(VAR_BATTLE_CONNECTOR_CLEARS) >= entry->minClears && (entry->flag == 0 || FlagGet(entry->flag));
 }
 
 static u16 PickUnlocked(const struct ConnectorSpeciesEntry *pool, u32 count)

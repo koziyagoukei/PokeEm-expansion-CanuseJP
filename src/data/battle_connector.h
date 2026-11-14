@@ -85,7 +85,7 @@ static const u8 *const sConnectorPreciseHintTexts[CONNECTOR_ROOM_COUNT] =
     [CONNECTOR_ROOM_RANDOM]         = COMPOUND_STRING("{JPN}なにが あるか わからない"),
 };
 
-// The Shadow Pokemon of the rooms are not listed here: they are the Battle Frontier pool's Pokemon of generations 1-3
+// The Shadow Pokemon of the rooms are not listed here: they are the Battle Frontier pool's Pokemon of generations 1-6
 // (src/battle_connector.c, include/config/battle_connector.h), each with one of its sets.
 
 // The mid-boss (with one of its Battle Frontier sets) and the boss. A Pokemon joins the list once the facility has
@@ -110,10 +110,22 @@ static const struct ConnectorSpeciesEntry sConnectorMidbossPool[] =
     { SPECIES_REGISTEEL, 0, 0 },
     { SPECIES_LATIAS,    1, 0 },
     { SPECIES_LATIOS,    1, 0 },
+    { SPECIES_UXIE,                 0, 0 },
+    { SPECIES_MESPRIT,              0, 0 },
+    { SPECIES_AZELF,                0, 0 },
+    { SPECIES_HEATRAN,              1, 0 },
+    { SPECIES_REGIGIGAS,            1, 0 },
+    { SPECIES_CRESSELIA,            1, 0 },
+    { SPECIES_COBALION,             0, 0 },
+    { SPECIES_TERRAKION,            0, 0 },
+    { SPECIES_VIRIZION,             0, 0 },
+    { SPECIES_TORNADUS_INCARNATE,   1, 0 },
+    { SPECIES_THUNDURUS_INCARNATE,  1, 0 },
+    { SPECIES_LANDORUS_INCARNATE,   1, 0 },
 };
 
-// The boss: restricted legendaries up to generation 3 (their Shadow rows in src/data/shadow_pokemon.h give their
-// purification moves)
+// The boss: restricted Legendary and Mythical Pokemon through generation 6. Mythical Pokemon unlock after one clear.
+// Their Shadow rows in src/data/shadow_pokemon.h give their purification moves.
 static const struct ConnectorSpeciesEntry sConnectorBossPool[] =
 {
     { SPECIES_MEWTWO,   0, 0 },
@@ -126,6 +138,27 @@ static const struct ConnectorSpeciesEntry sConnectorBossPool[] =
     { SPECIES_CELEBI,   1, 0 },
     { SPECIES_JIRACHI,  1, 0 },
     { SPECIES_DEOXYS,   1, 0 },
+    { SPECIES_DIALGA,           0, 0 },
+    { SPECIES_PALKIA,           0, 0 },
+    { SPECIES_GIRATINA_ALTERED, 0, 0 },
+    { SPECIES_PHIONE,           1, 0 },
+    { SPECIES_MANAPHY,          1, 0 },
+    { SPECIES_DARKRAI,          1, 0 },
+    { SPECIES_SHAYMIN_LAND,     1, 0 },
+    { SPECIES_ARCEUS_NORMAL,    1, 0 },
+    { SPECIES_VICTINI,          1, 0 },
+    { SPECIES_RESHIRAM,         0, 0 },
+    { SPECIES_ZEKROM,           0, 0 },
+    { SPECIES_KYUREM,           0, 0 },
+    { SPECIES_KELDEO_ORDINARY,  1, 0 },
+    { SPECIES_MELOETTA_ARIA,    1, 0 },
+    { SPECIES_GENESECT,        1, 0 },
+    { SPECIES_XERNEAS_NEUTRAL,  0, 0 },
+    { SPECIES_YVELTAL,          0, 0 },
+    { SPECIES_ZYGARDE_50,       0, 0 },
+    { SPECIES_DIANCIE,          1, 0 },
+    { SPECIES_HOOPA_CONFINED,   1, 0 },
+    { SPECIES_VOLCANION,        1, 0 },
 };
 
 // People who rejected others, and their Pokemon with them, out of fear of the Human Pokerus. They are not villains:

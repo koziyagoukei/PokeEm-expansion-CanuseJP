@@ -9835,7 +9835,7 @@ const struct TrainerMon gBattleFrontierMons[NUM_FRONTIER_MONS] =
     },
     [FRONTIER_MON_PORYGON_Z_1] = {
         .species = SPECIES_PORYGON_Z,
-        .moves = {MOVE_CONVERSION, MOVE_THUNDERBOLT, MOVE_ICE_BEAM, MOVE_RECOVER},
+        .moves = {MOVE_THUNDERBOLT, MOVE_CONVERSION, MOVE_ICE_BEAM, MOVE_RECOVER},
         .heldItem = ITEM_NORMALIUM_Z,
         .ev = TRAINER_PARTY_EVS(4, 0, 0, 252, 252, 0),
         .nature = NATURE_TIMID,

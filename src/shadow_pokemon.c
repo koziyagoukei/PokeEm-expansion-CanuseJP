@@ -465,9 +465,11 @@ static const u16 *GetSpeciesPurifyMoves(enum Species species)
 
     if (info != NULL && info->purifyMoves[0] != MOVE_NONE)
         return info->purifyMoves;
+    // The room sets use base forms. Keep their reward available after an appliance or other form change.
+    enum Species baseSpecies = GET_BASE_SPECIES_ID(species);
     for (u32 i = 0; i < ARRAY_COUNT(sShadowPurifyMoves); i++)
     {
-        if (sShadowPurifyMoves[i].species == species)
+        if (sShadowPurifyMoves[i].species == baseSpecies)
             return sShadowPurifyMoves[i].moves;
     }
     return NULL;

@@ -12,6 +12,7 @@
 #include "move_relearner.h"
 #include "party_menu.h"
 #include "load_save.h"
+#include "move.h"
 #include "pokemon.h"
 #include "pokemon_storage_system.h"
 #include "shadow_pokemon.h"
@@ -50,6 +51,11 @@ static void DefeatShadowMon(u16 species)
     BattleConnector_CreateShadowMon(&gParties[B_TRAINER_OPPONENT_A][0], species, 30);
     CalculateEnemyPartyCount();
 }
+
+static void ExpectExclusiveReliveMoves(u16 species);
+
+// This file uses both function tests and battle tests.
+#define PARAMETRIZE_FUNCTION if (gFunctionTestRunnerState->parameters++ == gFunctionTestRunnerState->runParameter)
 
 TEST("Battle Connector: the player brings one Pokemon, of any species, and gets the party back")
 {
@@ -350,20 +356,32 @@ TEST("Battle Connector: a boss learns its purification move when purified and ke
     EXPECT_EQ(GetShadowPurifyMove(mon), MOVE_NONE);
 }
 
-TEST("Battle Connector: every boss has purification moves, and a protected Pokemon's Shadow state survives saving")
+TEST("Battle Connector: purification moves exist for the bosses and survive saving")
 {
-    static const u16 bosses[] = {
-        SPECIES_MEWTWO, SPECIES_MEW, SPECIES_LUGIA, SPECIES_HO_OH, SPECIES_CELEBI,
-        SPECIES_KYOGRE, SPECIES_GROUDON, SPECIES_RAYQUAZA, SPECIES_JIRACHI, SPECIES_DEOXYS,
-    };
     struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][0];
+    u32 bossCount = 0;
 
     ZeroPlayerPartyMons();
-    for (u32 i = 0; i < ARRAY_COUNT(bosses); i++)
+    for (u16 species = SPECIES_BULBASAUR; species < NUM_SPECIES; species++)
     {
-        BattleConnector_CreateShadowMon(mon, bosses[i], 70);
-        EXPECT(GetShadowPurifyMove(mon) != MOVE_NONE);
+        if (!IsSpeciesEnabled(species))
+            continue;
+        u16 dexNum = SpeciesToNationalPokedexNum(species);
+        if (dexNum == NATIONAL_DEX_NONE || dexNum > NATIONAL_DEX_VOLCANION
+         || GET_BASE_SPECIES_ID(species) != species
+         || (!gSpeciesInfo[species].isRestrictedLegendary && !gSpeciesInfo[species].isMythical))
+            continue;
+
+        EXPECT_EQ(GetSpeciesPurifyMoveCount(species), 2);
+        if (dexNum > NATIONAL_DEX_DEOXYS)
+            ExpectExclusiveReliveMoves(species);
+        bossCount++;
     }
+    EXPECT_EQ(bossCount, 31);
+
+    BattleConnector_CreateShadowMon(mon, SPECIES_VOLCANION, 70);
+    enum Move move = GetShadowPurifyMove(mon);
+    EXPECT(move == MOVE_HYDRO_STEAM || move == MOVE_BURNING_BULWARK);
     CalculatePlayerPartyCount();
     AddShadowHeartGauge(mon, 2);
     u32 gauge = GetShadowGauge(mon);
@@ -373,9 +391,10 @@ TEST("Battle Connector: every boss has purification moves, and a protected Pokem
     EXPECT(IsShadowPokemon(&gParties[B_TRAINER_PLAYER][0]));
     EXPECT_EQ(GetShadowGauge(&gParties[B_TRAINER_PLAYER][0]), gauge);
     EXPECT(GetMonData(&gParties[B_TRAINER_PLAYER][0], MON_DATA_BATTLE_CONNECTOR_ORIGIN));
+    EXPECT_EQ(GetShadowPurifyMove(&gParties[B_TRAINER_PLAYER][0]), move);
 }
 
-TEST("Battle Connector: rooms take Battle Frontier sets of generations 1-3 by tier, and the mid-boss its own sets")
+TEST("Battle Connector: rooms take Battle Frontier sets through generation 6 by tier, and the mid-boss its own sets")
 {
     static const u8 rooms[][2] = {
         { CONNECTOR_ROOM_SHADOW,         CONNECTOR_TIER_NORMAL },
@@ -386,7 +405,7 @@ TEST("Battle Connector: rooms take Battle Frontier sets of generations 1-3 by ti
     };
     u32 room = 0, tries = 0;
     for (u32 i = 0; i < ARRAY_COUNT(rooms); i++)
-        PARAMETRIZE { room = i; }
+        PARAMETRIZE_FUNCTION { room = i; }
 
     GiveParty(1);
     StartWith(0);
@@ -399,7 +418,7 @@ TEST("Battle Connector: rooms take Battle Frontier sets of generations 1-3 by ti
         EXPECT_LT(set, NUM_FRONTIER_MONS);
         EXPECT_EQ(gBattleFrontierMons[set].species, species);
         EXPECT(BattleConnector_IsRoomSpecies(species));
-        EXPECT_LE(SpeciesToNationalPokedexNum(species), BATTLE_CONNECTOR_MAX_DEX_NUM);
+        EXPECT_LE(SpeciesToNationalPokedexNum(species), NATIONAL_DEX_VOLCANION);
         EXPECT_EQ(BattleConnector_GetSpeciesTier(species), rooms[room][1]);
     }
     for (tries = 0; tries < 20; tries++)
@@ -410,6 +429,103 @@ TEST("Battle Connector: rooms take Battle Frontier sets of generations 1-3 by ti
         EXPECT(gSpeciesInfo[BattleConnector_Test_GetRoomSpecies()].isSubLegendary);
     }
     BattleConnector_RetireChallenge();
+}
+
+TEST("Battle Connector: each room tier can draw a set from each added generation")
+{
+    static const struct {
+        u8 room;
+        u16 set;
+    } cases[] = {
+        {CONNECTOR_ROOM_SHADOW, FRONTIER_MON_BIBAREL_1},
+        {CONNECTOR_ROOM_STRONG_SHADOW, FRONTIER_MON_TORTERRA_1},
+        {CONNECTOR_ROOM_RARE_SHADOW, FRONTIER_MON_GARCHOMP_1},
+        {CONNECTOR_ROOM_SHADOW, FRONTIER_MON_LIEPARD_1},
+        {CONNECTOR_ROOM_STRONG_SHADOW, FRONTIER_MON_ZOROARK_1},
+        {CONNECTOR_ROOM_RARE_SHADOW, FRONTIER_MON_HYDREIGON_1},
+        {CONNECTOR_ROOM_SHADOW, FRONTIER_MON_TREVENANT_1},
+        {CONNECTOR_ROOM_STRONG_SHADOW, FRONTIER_MON_GRENINJA_1},
+        {CONNECTOR_ROOM_RARE_SHADOW, FRONTIER_MON_GOODRA_1},
+    };
+    const u8 tiers[] = {[CONNECTOR_ROOM_SHADOW] = CONNECTOR_TIER_NORMAL,
+                        [CONNECTOR_ROOM_STRONG_SHADOW] = CONNECTOR_TIER_STRONG,
+                        [CONNECTOR_ROOM_RARE_SHADOW] = CONNECTOR_TIER_RARE};
+    u32 row = 0;
+    for (u32 i = 0; i < ARRAY_COUNT(cases); i++)
+        PARAMETRIZE_FUNCTION { row = i; }
+
+    u32 draw = 0;
+    u16 chosenSet = cases[row].set;
+    u8 room = cases[row].room;
+    for (u32 set = 0; set < chosenSet; set++)
+    {
+        u16 species = gBattleFrontierMons[set].species;
+        if (BattleConnector_IsRoomSpecies(species) && BattleConnector_GetSpeciesTier(species) == tiers[room])
+            draw++;
+    }
+    SET_RNG(RNG_NONE, draw);
+    BattleConnector_Test_SetUpRoom(room);
+    EXPECT_EQ(BattleConnector_Test_GetRoomSet(), chosenSet);
+
+    EXPECT(!BattleConnector_IsRoomSpecies(SPECIES_DECIDUEYE));
+    EXPECT(!BattleConnector_IsRoomSpecies(SPECIES_ZOROARK_HISUI));
+    EXPECT(!BattleConnector_IsRoomSpecies(SPECIES_AZELF));
+    EXPECT(!BattleConnector_IsRoomSpecies(SPECIES_XERNEAS));
+}
+
+TEST("Battle Connector: the new bosses appear in the appropriate clear tiers")
+{
+    const u8 roomTypes[] = {CONNECTOR_ROOM_MIDBOSS, CONNECTOR_ROOM_BOSS};
+    u32 clears = 0;
+    PARAMETRIZE_FUNCTION { clears = 0; }
+    PARAMETRIZE_FUNCTION { clears = 1; }
+    VarSet(VAR_BATTLE_CONNECTOR_CLEARS, clears);
+
+    for (u32 i = 0; i < ARRAY_COUNT(roomTypes); i++)
+    {
+        const u32 draws = roomTypes[i] == CONNECTOR_ROOM_MIDBOSS
+                        ? (clears == 0 ? 15 : 23)
+                        : (clears == 0 ? 15 : 31);
+        bool8 seen[NATIONAL_DEX_VOLCANION + 1] = {0};
+        for (u32 draw = 0; draw < draws; draw++)
+        {
+            SET_RNG(RNG_NONE, draw);
+            BattleConnector_Test_SetUpRoom(roomTypes[i]);
+            u16 species = BattleConnector_Test_GetRoomSpecies();
+            u16 dexNum = SpeciesToNationalPokedexNum(species);
+            EXPECT_GT(dexNum, NATIONAL_DEX_NONE);
+            EXPECT_LE(dexNum, NATIONAL_DEX_VOLCANION);
+            EXPECT_EQ(GetSpeciesPurifyMoveCount(species), 2);
+            EXPECT(!seen[dexNum]);
+            seen[dexNum] = TRUE;
+            if (roomTypes[i] == CONNECTOR_ROOM_MIDBOSS)
+            {
+                // The room draw is still rigged when the game draws this species' set.
+                // The preceding room test checks set selection with a valid draw.
+                EXPECT(gSpeciesInfo[species].isSubLegendary);
+            }
+            else
+            {
+                EXPECT(gSpeciesInfo[species].isRestrictedLegendary || gSpeciesInfo[species].isMythical);
+                if (clears == 0)
+                    EXPECT(!gSpeciesInfo[species].isMythical);
+            }
+        }
+        if (roomTypes[i] == CONNECTOR_ROOM_MIDBOSS)
+        {
+            EXPECT(seen[NATIONAL_DEX_UXIE]);
+            EXPECT(seen[NATIONAL_DEX_COBALION]);
+            EXPECT_EQ(seen[NATIONAL_DEX_LANDORUS], clears > 0);
+        }
+        else
+        {
+            EXPECT(seen[NATIONAL_DEX_DIALGA]);
+            EXPECT(seen[NATIONAL_DEX_RESHIRAM]);
+            EXPECT(seen[NATIONAL_DEX_XERNEAS]);
+            EXPECT_EQ(seen[NATIONAL_DEX_VOLCANION], clears > 0);
+        }
+    }
+    VarSet(VAR_BATTLE_CONNECTOR_CLEARS, 0);
 }
 
 TEST("Battle Connector: a Shadow Pokemon made from a set keeps the set but no Mega Stone, with three perfect IVs")
@@ -471,26 +587,55 @@ static bool32 SpeciesCanLearnMove(u16 species, u16 move)
         || LearnsetHasMove(GetFrontierChampionsLearnset(species), move);
 }
 
-TEST("Battle Connector: every room and mid-boss species learns one of two moves it cannot learn otherwise when purified")
+static void ExpectExclusiveReliveMoves(u16 species)
 {
+    const u8 origin = TRUE;
     struct Pokemon mon;
-    u32 checked = 0;
+    enum Move firstMove = MOVE_NONE;
+
+    for (u32 choice = 0; choice < 2; choice++)
+    {
+        CreateMon(&mon, species, 50, choice << 8, OTID_STRUCT_PLAYER_ID);
+        SetMonData(&mon, MON_DATA_BATTLE_CONNECTOR_ORIGIN, &origin);
+        MarkShadowPokemon(&mon);
+        enum Move move = GetShadowPurifyMove(&mon);
+        EXPECT_GT(move, MOVE_NONE);
+        EXPECT_LT(move, MOVES_COUNT);
+        EXPECT_GT(GetMovePP(move), 0);
+        EXPECT_NE(move, firstMove);
+        if (SpeciesCanLearnMove(species, move))
+            Test_ExitWithResult(TEST_RESULT_FAIL, __LINE__, "Species %d can already learn purification move %d", species, move);
+        firstMove = move;
+    }
+}
+
+TEST("Battle Connector: every room and mid-boss species has two purification moves, with exclusive choices for the added species")
+{
+    bool8 checked[NUM_SPECIES] = {0};
+    u32 added = 0;
 
     for (u32 set = 0; set < NUM_FRONTIER_MONS; set++)
     {
         u16 species = gBattleFrontierMons[set].species;
+        if (species >= NUM_SPECIES || !IsSpeciesEnabled(species) || checked[species])
+            continue;
         bool32 midboss = gSpeciesInfo[species].isSubLegendary && GET_BASE_SPECIES_ID(species) == species
             && SpeciesToNationalPokedexNum(species) <= BATTLE_CONNECTOR_MAX_DEX_NUM;
         if ((!BattleConnector_IsRoomSpecies(species) && !midboss) || species == SPECIES_DITTO || species == SPECIES_SMEARGLE)
             continue;
         EXPECT_EQ(GetSpeciesPurifyMoveCount(species), 2);
-        BattleConnector_CreateShadowMonFromSet(&mon, set, 50);
-        u16 move = GetShadowPurifyMove(&mon);
-        EXPECT(move != MOVE_NONE);
-        EXPECT(!SpeciesCanLearnMove(species, move));
-        checked++;
+        if (SpeciesToNationalPokedexNum(species) > NATIONAL_DEX_DEOXYS)
+            ExpectExclusiveReliveMoves(species);
+        else
+        {
+            struct Pokemon mon;
+            BattleConnector_CreateShadowMonFromSet(&mon, set, 50);
+            EXPECT_NE(GetShadowPurifyMove(&mon), MOVE_NONE);
+        }
+        checked[species] = TRUE;
+        added += SpeciesToNationalPokedexNum(species) > NATIONAL_DEX_DEOXYS;
     }
-    EXPECT_GT(checked, 100);
+    EXPECT_EQ(added, 166);
 }
 
 TEST("Battle Connector: during a run nothing may move Pokemon or held items in or out of the party")
@@ -554,8 +699,9 @@ TEST("Battle Connector: the Move Reminder teaches a purified Pokemon its purific
     bool32 listed;
     enum Move move;
 
-    BattleConnector_CreateShadowMon(&mon, SPECIES_MEWTWO, 70);
+    BattleConnector_CreateShadowMonFromSet(&mon, FRONTIER_MON_GRENINJA_1, 50);
     move = GetShadowPurifyMove(&mon);
+    EXPECT(move == MOVE_SNIPE_SHOT || move == MOVE_CEASELESS_EDGE);
     // Still a Shadow Pokemon: not yet
     count = Test_GetRelearnerLevelUpMoves(&mon.box, moves);
     listed = FALSE;
@@ -574,7 +720,7 @@ TEST("Battle Connector: the Move Reminder teaches a purified Pokemon its purific
     EXPECT(listed);
 
     // A Pokemon not from the facility gets nothing of the kind
-    CreateMon(&mon, SPECIES_MEWTWO, 70, 0, OTID_STRUCT_PLAYER_ID);
+    CreateMon(&mon, SPECIES_GRENINJA, 50, 0, OTID_STRUCT_PLAYER_ID);
     MarkShadowPokemon(&mon);
     AddShadowHeartGauge(&mon, SHADOW_GAUGE_BARS);
     PurifyShadowPokemon(&mon);
@@ -584,6 +730,20 @@ TEST("Battle Connector: the Move Reminder teaches a purified Pokemon its purific
         listed |= (moves[i] == move);
     EXPECT(!listed);
     Free(moves);
+}
+
+TEST("Battle Connector: a purified Rotom keeps its reward after an appliance change")
+{
+    struct Pokemon mon;
+    BattleConnector_CreateShadowMon(&mon, SPECIES_ROTOM, 50);
+    enum Move move = GetShadowPurifyMove(&mon);
+    EXPECT(move == MOVE_BITTER_MALICE || move == MOVE_EERIE_SPELL);
+    AddShadowHeartGauge(&mon, SHADOW_GAUGE_BARS);
+    EXPECT(PurifyShadowPokemonInScene(&mon));
+
+    enum Species form = SPECIES_ROTOM_WASH;
+    SetMonData(&mon, MON_DATA_SPECIES, &form);
+    EXPECT_EQ(GetBoxMonPurifiedConnectorMove(&mon.box), move);
 }
 
 TEST("Battle Connector: Colosseum's battle music follows the room")
