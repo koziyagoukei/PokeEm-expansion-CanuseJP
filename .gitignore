@@ -1647,6 +1647,8 @@ build/generated/bpej_intro_extracted.ok
 !/CREDITS.md
 !/docs/shadow_pokemon.md
 !/docs/battle_connector_purify_moves.md
+!/docs/gc_extension_mode.md
+!/docs/gc_battle_multiformat.md
 /tools/frontier_title/
 /tools/frontier_opening/
 /tools/pokevirus_music/
