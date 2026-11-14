@@ -109,9 +109,11 @@ u32 AI_GetDefaultDamageRollForContext(enum BattlerId battlerAtk, enum BattlerId 
     }
 }
 
+static bool32 AI_HasOwnBattlerData(enum BattlerId battler);
+
 u32 AI_GetDamage(enum BattlerId battlerAtk, enum BattlerId battlerDef, u32 moveIndex, enum DamageCalcContext calcContext, struct AiLogicData *aiData)
 {
-    if (calcContext == AI_ATTACKING && BattlerHasAi(battlerAtk))
+    if (calcContext == AI_ATTACKING && AI_HasOwnBattlerData(battlerAtk))
     {
         if ((gAiThinkingStruct->aiFlags[battlerAtk] & AI_FLAG_RISKY) && !(gAiThinkingStruct->aiFlags[battlerAtk] & AI_FLAG_CONSERVATIVE)) // Risky assumes it deals max damage
             return aiData->simulatedDmg[battlerAtk][battlerDef][moveIndex].maximum;
@@ -119,7 +121,7 @@ u32 AI_GetDamage(enum BattlerId battlerAtk, enum BattlerId battlerDef, u32 moveI
             return aiData->simulatedDmg[battlerAtk][battlerDef][moveIndex].minimum;
         return AI_GetDefaultDamageRollForContext(battlerAtk, battlerDef, moveIndex, aiData, GetConfig(AI_ROLL_ATTACKING));
     }
-    else if (calcContext == AI_DEFENDING && BattlerHasAi(battlerDef))
+    else if (calcContext == AI_DEFENDING && AI_HasOwnBattlerData(battlerDef))
     {
         if ((gAiThinkingStruct->aiFlags[battlerDef] & AI_FLAG_RISKY) && !(gAiThinkingStruct->aiFlags[battlerDef] & AI_FLAG_CONSERVATIVE)) // Risky assumes it takes min damage
             return aiData->simulatedDmg[battlerAtk][battlerDef][moveIndex].minimum;
@@ -127,7 +129,7 @@ u32 AI_GetDamage(enum BattlerId battlerAtk, enum BattlerId battlerDef, u32 moveI
             return aiData->simulatedDmg[battlerAtk][battlerDef][moveIndex].maximum;
         return AI_GetDefaultDamageRollForContext(battlerAtk, battlerDef, moveIndex, aiData, AI_ROLL_DEFENDING);
     }
-    else if (calcContext == AI_SWITCHIN_ATTACKING && BattlerHasAi(battlerAtk))
+    else if (calcContext == AI_SWITCHIN_ATTACKING && AI_HasOwnBattlerData(battlerAtk))
     {
         if ((gAiThinkingStruct->aiFlags[battlerAtk] & AI_FLAG_RISKY) && !(gAiThinkingStruct->aiFlags[battlerAtk] & AI_FLAG_CONSERVATIVE)) // Risky assumes it deals max damage
             return aiData->simulatedDmg[battlerAtk][battlerDef][moveIndex].maximum;
@@ -135,7 +137,7 @@ u32 AI_GetDamage(enum BattlerId battlerAtk, enum BattlerId battlerDef, u32 moveI
             return aiData->simulatedDmg[battlerAtk][battlerDef][moveIndex].minimum;
         return AI_GetDefaultDamageRollForContext(battlerAtk, battlerDef, moveIndex, aiData, AI_ROLL_SWITCHIN_ATTACKING);
     }
-    else if (calcContext == AI_SWITCHIN_DEFENDING && BattlerHasAi(battlerDef))
+    else if (calcContext == AI_SWITCHIN_DEFENDING && AI_HasOwnBattlerData(battlerDef))
     {
         if ((gAiThinkingStruct->aiFlags[battlerDef] & AI_FLAG_RISKY) && !(gAiThinkingStruct->aiFlags[battlerDef] & AI_FLAG_CONSERVATIVE)) // Risky assumes it takes min damage
             return aiData->simulatedDmg[battlerAtk][battlerDef][moveIndex].minimum;
@@ -143,7 +145,7 @@ u32 AI_GetDamage(enum BattlerId battlerAtk, enum BattlerId battlerDef, u32 moveI
             return aiData->simulatedDmg[battlerAtk][battlerDef][moveIndex].maximum;
         return AI_GetDefaultDamageRollForContext(battlerAtk, battlerDef, moveIndex, aiData, AI_ROLL_SWITCHIN_DEFENDING);
     }
-    else if (calcContext == AI_SHOULD_SETUP_DEFENDING && BattlerHasAi(battlerDef))
+    else if (calcContext == AI_SHOULD_SETUP_DEFENDING && AI_HasOwnBattlerData(battlerDef))
     {
         if ((gAiThinkingStruct->aiFlags[battlerDef] & AI_FLAG_RISKY) && !(gAiThinkingStruct->aiFlags[battlerDef] & AI_FLAG_CONSERVATIVE)) // Risky assumes it takes min damage
             return aiData->simulatedDmg[battlerAtk][battlerDef][moveIndex].minimum;
@@ -151,7 +153,7 @@ u32 AI_GetDamage(enum BattlerId battlerAtk, enum BattlerId battlerDef, u32 moveI
             return aiData->simulatedDmg[battlerAtk][battlerDef][moveIndex].maximum;
         return AI_GetDefaultDamageRollForContext(battlerAtk, battlerDef, moveIndex, aiData, AI_ROLL_SHOULD_SETUP_DEFENDING);
     }
-    else if (calcContext == AI_ATTACKING_PARTNER && BattlerHasAi(battlerAtk))
+    else if (calcContext == AI_ATTACKING_PARTNER && AI_HasOwnBattlerData(battlerAtk))
     {
         if ((gAiThinkingStruct->aiFlags[battlerAtk] & AI_FLAG_RISKY) && !(gAiThinkingStruct->aiFlags[battlerAtk] & AI_FLAG_CONSERVATIVE)) // Risky assumes it deals max damage
             return aiData->simulatedDmg[battlerAtk][battlerDef][moveIndex].maximum;
@@ -198,12 +200,21 @@ bool32 IsAiFlagPresent(u64 flag)
     return FALSE;
 }
 
+// The player controller also chooses moves in the Palace. Its AI sees its
+// own side's data, with the usual knowledge limits for the opposing side.
+static bool32 AI_HasOwnBattlerData(enum BattlerId battler)
+{
+    if (gAiLogicData->palacePlayerAi)
+        return IsOnPlayerSide(battler);
+    return BattlerHasAi(battler);
+}
+
 bool32 IsAiBattlerAware(enum BattlerId battlerId)
 {
     if (IsAiFlagPresent(AI_FLAG_OMNISCIENT))
         return TRUE;
 
-    return BattlerHasAi(battlerId);
+    return AI_HasOwnBattlerData(battlerId);
 }
 
 bool32 IsAiBattlerAssumingStab(enum BattlerId battlerId)
@@ -255,7 +266,7 @@ enum Move GetPredictedMove(enum BattlerId battler, enum BattlerId opposingBattle
 
 void SaveBattlerData(enum BattlerId battlerId)
 {
-    if (!BattlerHasAi(battlerId) && !gAiThinkingStruct->saved[battlerId].saved)
+    if (!AI_HasOwnBattlerData(battlerId) && !gAiThinkingStruct->saved[battlerId].saved)
     {
         gAiThinkingStruct->saved[battlerId].saved = TRUE;
         gAiThinkingStruct->saved[battlerId].ability = gBattleMons[battlerId].ability;
@@ -367,7 +378,7 @@ static bool32 ShouldFailForIllusion(enum Species illusionSpecies, enum BattlerId
 
 void SetBattlerData(enum BattlerId battlerId)
 {
-    if (!BattlerHasAi(battlerId) && gAiThinkingStruct->saved[battlerId].saved)
+    if (!AI_HasOwnBattlerData(battlerId) && gAiThinkingStruct->saved[battlerId].saved)
     {
         enum Species species, illusionSpecies;
         enum BattleSide side = GetBattlerSide(battlerId);
@@ -411,7 +422,7 @@ void SetBattlerData(enum BattlerId battlerId)
 
 void RestoreBattlerData(enum BattlerId battlerId)
 {
-    if (!BattlerHasAi(battlerId) && gAiThinkingStruct->saved[battlerId].saved)
+    if (!AI_HasOwnBattlerData(battlerId) && gAiThinkingStruct->saved[battlerId].saved)
     {
         gAiThinkingStruct->saved[battlerId].saved = FALSE;
         gBattleMons[battlerId].ability = gAiThinkingStruct->saved[battlerId].ability;

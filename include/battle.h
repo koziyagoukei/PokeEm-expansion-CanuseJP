@@ -261,7 +261,8 @@ struct AiLogicData
     u32 reverseBattlerLogicOrder:1;
     u32 dragonDartsHitsBothTarget:4;
     u32 battlerMovesScored:4; // Bitmask of battlers that have completed move scoring this turn, so a battler can check whether its ally has already committed to a chosen move regardless of AI processing order
-    u32 padding2:9;
+    u32 palacePlayerAi:1; // The Palace player is choosing a move for its own side.
+    u32 padding2:8;
 };
 
 struct AiThinkingStruct
@@ -631,7 +632,7 @@ struct BattleStruct
     u8 stateIdAfterSelScript[MAX_BATTLERS_COUNT];
     u8 prevSelectedPartySlot;
     u8 stringMoveType;
-    u8 palaceFlags; // First 4 bits are "is <= 50% HP and not asleep" for each battler, last 4 bits are selected moves to pass to AI
+    u8 palaceFlags; // One bit per battler after its low-HP Battle Palace message.
     u8 recordedActionSet; // related to choosing Pokemon?
     u8 wallyBattleState;
     u8 wallyMovesState;
@@ -795,11 +796,6 @@ struct BattleWeatherInfo
 };
 
 extern const struct BattleWeatherInfo gBattleWeatherInfo[BATTLE_WEATHER_COUNT];
-
-// The palaceFlags member of struct BattleStruct contains 1 flag per move to indicate which moves the AI should consider,
-// and 1 flag per battler to indicate whether the battler is awake and at <= 50% HP (which affects move choice).
-// The assert below is to ensure palaceFlags is large enough to store these flags without overlap.
-STATIC_ASSERT(sizeof(((struct BattleStruct *)0)->palaceFlags) * 8 >= MAX_BATTLERS_COUNT + MAX_MON_MOVES, PalaceFlagsTooSmall)
 
 static inline bool32 IsBattleMovePhysical(enum Move move)
 {

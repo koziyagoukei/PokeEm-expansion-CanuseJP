@@ -36,7 +36,7 @@
 
 // this file's functions
 static u8 GetBattlePalaceMoveGroup(enum BattlerId battler, enum Move move);
-static u16 GetBattlePalaceTarget(enum BattlerId battler);
+static enum BattlerId GetBattlePalaceTarget(enum BattlerId battler);
 static void SpriteCB_TrainerSlideVertical(struct Sprite *sprite);
 static bool8 ShouldAnimBeDoneRegardlessOfSubstitute(u8 animId);
 static void Task_ClearBitWhenBattleTableAnimDone(u8 taskId);
@@ -175,8 +175,18 @@ u32 ChooseMoveAndTargetInBattlePalace(enum BattlerId battler)
     s32 i, var1, var2;
     s32 chosenMoveIndex = -1;
     struct ChooseMoveStruct *moveInfo = (struct ChooseMoveStruct *)(&gBattleResources->bufferA[battler][4]);
-    u8 unusableMovesBits = CheckMoveLimitations(battler, 0, MOVE_LIMITATIONS_ALL);
+    u32 unusableMovesBits = CheckMoveLimitations(battler, 0, MOVE_LIMITATIONS_ALL);
+    enum BattlerId foe = GetBattlerLeftFoe(battler);
     s32 percent = Random() % 100;
+
+    gProtectStructs[battler].palaceUnableToUseMove = FALSE;
+
+    for (i = 0; i < MAX_MON_MOVES; i++)
+    {
+        if (GetBattlerMoveSelectionTargetType(battler, moveInfo->moves[i]) == TARGET_ALLY
+         && (!IsDoubleBattle() || !IsBattlerAlive(GetPartnerBattler(battler))))
+            unusableMovesBits |= 1u << i;
+    }
 
     // Heavy variable re-use here makes this hard to read without defines
     // Possibly just optimization? might still match with additional vars
@@ -211,27 +221,22 @@ u32 ChooseMoveAndTargetInBattlePalace(enum BattlerId battler)
     // Flag moves that match selected group, to be passed to AI
     for (selectedMoves = 0, i = 0; i < MAX_MON_MOVES; i++)
     {
-        if (moveInfo->moves[i] == MOVE_NONE)
-            break;
-        if (selectedGroup == GetBattlePalaceMoveGroup(battler, moveInfo->moves[i]) && moveInfo->currentPP[i] != 0)
+        if (!(unusableMovesBits & (1u << i))
+         && selectedGroup == GetBattlePalaceMoveGroup(battler, moveInfo->moves[i]))
             selectedMoves |= 1u << i;
     }
 
     // Pass selected moves to AI, pick one
     if (selectedMoves != 0)
     {
-        // Lower 4 bits of palaceFlags are flags for each battler.
-        // Clear the rest of palaceFlags, then set the selected moves in the upper 4 bits.
-        gBattleStruct->palaceFlags &= (1 << MAX_BATTLERS_COUNT) - 1;
-        gBattleStruct->palaceFlags |= (selectedMoves << MAX_BATTLERS_COUNT);
-        BattleAI_SetupAIData(selectedMoves, battler);
-        chosenMoveIndex = BattleAI_ChooseMoveIndex(battler);
+        foe = GetBattlePalaceTarget(battler);
+        chosenMoveIndex = BattleAI_ChoosePalaceMoveIndex(battler, foe, selectedMoves);
     }
 
     // If no moves matched the selected group, pick a new move from groups the Pokemon has
     // In this case the AI is not checked again, so the choice may be worse
     // If a move is chosen this way, there's a 50% chance that it will be unable to use it anyway
-    if (chosenMoveIndex == -1 || chosenMoveIndex >= MAX_MON_MOVES)
+    else
     {
         chosenMoveIndex = -1;
         if (unusableMovesBits != ALL_MOVES_MASK)
@@ -326,16 +331,18 @@ u32 ChooseMoveAndTargetInBattlePalace(enum BattlerId battler)
             SetAIUsingGimmick(battler, NO_GIMMICK);
             return 0;
         }
+
+        enum MoveTarget fallbackTarget = GetBattlerMoveSelectionTargetType(battler, moveInfo->moves[chosenMoveIndex]);
+        if (fallbackTarget == TARGET_SELECTED || fallbackTarget == TARGET_SMART)
+            foe = GetBattlePalaceTarget(battler);
     }
 
     enum MoveTarget moveTarget = GetBattlerMoveSelectionTargetType(battler, moveInfo->moves[chosenMoveIndex]);
 
-    if (moveTarget == TARGET_USER || moveTarget == TARGET_USER_OR_ALLY || moveTarget == TARGET_USER_AND_ALLY)
-        chosenMoveIndex |= (battler << 8);
-    else if (moveTarget == TARGET_SELECTED || moveTarget == TARGET_SMART)
-        chosenMoveIndex |= GetBattlePalaceTarget(battler);
-    else
-        chosenMoveIndex |= (GetBattlerLeftFoe(battler) << 8);
+    enum BattlerId target = GetDefaultSelectionTarget(battler, moveTarget);
+    if (moveTarget == TARGET_SELECTED || moveTarget == TARGET_SMART)
+        target = foe;
+    chosenMoveIndex |= target << 8;
 
     return TryAddBattlePalaceGimmick(battler, chosenMoveIndex);
 }
@@ -377,44 +384,26 @@ static u8 GetBattlePalaceMoveGroup(enum BattlerId battler, enum Move move)
     }
 }
 
-static u16 GetBattlePalaceTarget(enum BattlerId battler)
+static enum BattlerId GetBattlePalaceTarget(enum BattlerId battler)
 {
-    if (IsDoubleBattle())
-    {
-        enum BattlerId opposing1, opposing2;
+    if (!IsDoubleBattle())
+        return GetOppositeBattler(battler);
 
-        if (IsOnPlayerSide(battler))
-        {
-            opposing1 = GetBattlerAtPosition(B_POSITION_OPPONENT_LEFT);
-            opposing2 = GetBattlerAtPosition(B_POSITION_OPPONENT_RIGHT);
-        }
-        else
-        {
-            opposing1 = GetBattlerAtPosition(B_POSITION_PLAYER_LEFT);
-            opposing2 = GetBattlerAtPosition(B_POSITION_PLAYER_RIGHT);
-        }
+    enum BattlerId left = GetBattlerLeftFoe(battler);
+    enum BattlerId right = GetBattlerRightFoe(battler);
+    if (!IsBattlerAlive(right))
+        return left;
+    if (!IsBattlerAlive(left))
+        return right;
 
-        if (gBattleMons[opposing1].hp == gBattleMons[opposing2].hp)
-            return (GetBattlerLeftFoe(battler) + (Random() & 2)) << 8;
-
-        switch (gNaturesInfo[GetNatureFromPersonality(gBattleMons[battler].personality)].battlePalaceSmokescreen)
-        {
-        case PALACE_TARGET_STRONGER:
-            if (gBattleMons[opposing1].hp > gBattleMons[opposing2].hp)
-                return opposing1 << 8;
-            else
-                return opposing2 << 8;
-        case PALACE_TARGET_WEAKER:
-            if (gBattleMons[opposing1].hp < gBattleMons[opposing2].hp)
-                return opposing1 << 8;
-            else
-                return opposing2 << 8;
-        case PALACE_TARGET_RANDOM:
-            return (GetBattlerLeftFoe(battler) + (Random() & 2)) << 8;
-        }
-    }
-
-    return GetOppositeBattler(battler) << 8;
+    u32 leftHp = gBattleMons[left].hp;
+    u32 rightHp = gBattleMons[right].hp;
+    u32 preference = gNaturesInfo[GetNatureFromPersonality(gBattleMons[battler].personality)].battlePalaceSmokescreen;
+    if (leftHp == rightHp || preference == PALACE_TARGET_RANDOM)
+        return (Random() & 2) ? right : left;
+    if (preference == PALACE_TARGET_STRONGER)
+        return leftHp > rightHp ? left : right;
+    return leftHp < rightHp ? left : right;
 }
 
 // Wait for the Pokemon to finish appearing out from the Poke Ball on send out

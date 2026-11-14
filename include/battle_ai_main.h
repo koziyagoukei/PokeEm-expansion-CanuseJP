@@ -105,6 +105,7 @@ void BattleAI_SetupItems(void);
 void BattleAI_SetupFlags(void);
 void ComputeAiBattlerDecisions(enum BattlerId battler);
 u32 BattleAI_ChooseMoveIndex(enum BattlerId battler);
+u32 BattleAI_ChoosePalaceMoveIndex(enum BattlerId battler, enum BattlerId foe, u32 moveMask);
 void Ai_InitPartyStruct(void);
 void Ai_UpdateSwitchInData(enum BattlerId battler);
 void Ai_UpdateFaintData(enum BattlerId battler);
