@@ -314,6 +314,12 @@ static u8 ResolveEffects(enum Move move, BattleMove *out)
     case EFFECT_HIT:
     case EFFECT_STAT_CHANGE:
         break;
+    case EFFECT_EARTHQUAKE:
+        // A plain hit that also reaches (and doubles against) an underground
+        // target; its Grassy Terrain halving never applies without terrain.
+        if (!VolatilesEnabled())
+            return UNSUP_EFFECT;
+        break;
     case EFFECT_RECOIL:
         PushEffect(out, (BattleEffect){.kind = BEFF_RECOIL, .who = BWHO_USER, .arg0 = GetMoveRecoil(move)});
         break;
@@ -680,7 +686,10 @@ static bool8 BuildFixtureEntries(BattleRequest *request, const u8 **reason)
         {SPECIES_NUMEL, MOVE_TACKLE, MOVE_EMBER},
     };
     u32 side, i;
-    const u8 foeLevel = sBattle->trainerId == TRAINER_STEVEN ? 45 : 13;
+    // V9 fixtures face an equal-level team so charge, recharge and volatile
+    // states have turns to play out.
+    const u8 foeLevel = sBattle->trainerId == TRAINER_STEVEN ? 45
+                      : sBattle->roster == BATTLE_APP_VERSION_VOLATILES ? 23 : 13;
     GcExtension_SetExtraMons(sBattle->opponent, 2 * sBattle->count);
     for (side = 0; side < 2; side++)
     {
