@@ -47,7 +47,8 @@ bool battle_effect_valid(uint8_t effect, uint8_t version) {
 
 const char *battle_effect_kind_name(uint8_t kind) {
     static const char *const names[] = {"none", "damage", "stat", "status", "cure", "heal", "drain",
-                                        "recoil", "force_out", "pivot", "protect"};
+                                        "recoil", "force_out", "pivot", "protect", "flinch", "confuse",
+                                        "substitute", "charge", "recharge"};
     return kind < BEFF_COUNT ? names[kind] : "invalid";
 }
 
@@ -58,9 +59,11 @@ static bool has_effect(const BattleMove *m, uint8_t kind) {
 }
 
 bool battle_move_effects_valid(const BattleMove *m) {
-    if (m->effect_count > BATTLE_MAX_EFFECTS || (m->move_flags & ~BMF_IGNORES_PROTECT)) return false;
+    if (m->effect_count > BATTLE_MAX_EFFECTS || (m->move_flags & ~BMF_V9_MASK)) return false;
     const bool damaging = m->category != BCAT_STATUS;
     if (damaging != (m->power != 0) || damaging != has_effect(m, BEFF_DAMAGE)) return false;
+    // A charging move is CHARGE, then DAMAGE, then its other effects.
+    const unsigned first = has_effect(m, BEFF_CHARGE) ? 1 : 0;
     unsigned damage = 0;
     for (unsigned i = 0; i < m->effect_count; ++i) {
         const BattleEffect *e = &m->effects[i];
@@ -68,7 +71,7 @@ bool battle_move_effects_valid(const BattleMove *m) {
         if (e->chance && !damaging) return false;  // chances are secondary effects of a hit
         switch (e->kind) {
         case BEFF_DAMAGE:
-            if (damage++ || i || e->who != BWHO_TARGET || e->chance || e->flags ||
+            if (damage++ || i != first || e->who != BWHO_TARGET || e->chance || e->flags ||
                 e->arg0 < 1 || e->arg0 > e->arg2 || e->arg2 > BATTLE_MAX_HITS ||
                 e->arg1 < BHITS_UNIFORM || e->arg1 > BHITS_2TO5_GEN1 ||
                 (e->arg1 != BHITS_UNIFORM && (e->arg0 != 2 || e->arg2 != 5)))
@@ -101,6 +104,27 @@ bool battle_move_effects_valid(const BattleMove *m) {
         case BEFF_PROTECT:
             if (e->who != BWHO_USER || damaging || m->effect_count != 1 || (e->arg0 != 2 && e->arg0 != 3) ||
                 e->arg1 || e->arg2 || e->flags || e->chance)
+                return false;
+            break;
+        case BEFF_FLINCH:
+            if (e->who != BWHO_TARGET || !damaging || e->arg0 || e->arg1 || e->arg2 || e->flags) return false;
+            break;
+        case BEFF_CONFUSE:
+            if (e->arg0 || e->arg1 || e->arg2 || e->flags) return false;
+            break;
+        case BEFF_SUBSTITUTE:
+            if (e->who != BWHO_USER || damaging || m->effect_count != 1 || e->chance || e->arg0 || e->arg1 ||
+                e->arg2 || e->flags)
+                return false;
+            break;
+        case BEFF_CHARGE:
+            if (i || e->who != BWHO_USER || !damaging || e->chance || e->arg0 > BSEMI_UNDERGROUND || e->arg1 ||
+                e->arg2 || e->flags || m->effect_count < 2 || m->effects[1].kind != BEFF_DAMAGE)
+                return false;
+            break;
+        case BEFF_RECHARGE:
+            if (e->who != BWHO_USER || !damaging || e->chance || e->arg0 || e->arg1 || e->arg2 || e->flags ||
+                has_effect(m, BEFF_CHARGE))
                 return false;
             break;
         default:
@@ -146,6 +170,27 @@ static unsigned move_effects_decode(const uint8_t *p, uint32_t available, Battle
         m->effects[i] = (BattleEffect){q[0], q[1], q[2], q[3], (int8_t)q[4], q[5], q[6]};
     }
     return size;
+}
+
+bool battle_volatile_rules_valid(const BattleVolatileRules *r) {
+    return !(r->flags & ~0x7u) && r->confusion_hit_percent >= 1 && r->confusion_hit_percent <= 100 &&
+           r->confusion_min >= 1 && r->confusion_min <= r->confusion_max && r->confusion_max <= 8 &&
+           r->confusion_power && r->substitute_divisor >= 2 && r->substitute_divisor <= 8;
+}
+
+static void volatile_rules_encode(const BattleVolatileRules *r, uint8_t *p) {
+    p[0] = r->flags;
+    p[1] = r->confusion_hit_percent;
+    p[2] = r->confusion_min;
+    p[3] = r->confusion_max;
+    p[4] = r->confusion_power;
+    p[5] = r->substitute_divisor;
+    p[6] = p[7] = 0;
+}
+
+static bool volatile_rules_decode(const uint8_t *p, BattleVolatileRules *r) {
+    *r = (BattleVolatileRules){p[0], p[1], p[2], p[3], p[4], p[5]};
+    return !p[6] && !p[7] && battle_volatile_rules_valid(r);
 }
 
 bool battle_condition_rules_valid(const BattleConditionRules *r, unsigned types) {
@@ -228,13 +273,14 @@ static uint32_t fixed_size(const BattleRequest *r) {
 }
 
 uint32_t battle_request_size(const BattleRequest *r) {
-    return fixed_size(r) + effects_size(r);
+    return fixed_size(r) + effects_size(r) +
+           (r->version >= BATTLE_REQUEST_VERSION_VOLATILES ? BATTLE_VOLATILE_RULE_BYTES : 0);
 }
 
 uint32_t battle_request_encode(const BattleRequest *r, uint8_t *p, uint32_t capacity) {
     const uint32_t size = battle_request_size(r);
     const uint8_t version = r->version ? r->version : BATTLE_REQUEST_VERSION;
-    if ((version < BATTLE_REQUEST_VERSION || version > BATTLE_REQUEST_VERSION_EFFECTS) ||
+    if ((version < BATTLE_REQUEST_VERSION || version > BATTLE_REQUEST_VERSION_VOLATILES) ||
         size > capacity || r->player_count > BATTLE_MAX_PER_SIDE || r->opponent_count > BATTLE_MAX_PER_SIDE ||
         r->type_count > BATTLE_MAX_TYPES)
         return 0;
@@ -286,12 +332,13 @@ uint32_t battle_request_encode(const BattleRequest *r, uint8_t *p, uint32_t capa
                     q += move_effects_size(move);
                 }
         }
+    if (version >= BATTLE_REQUEST_VERSION_VOLATILES) volatile_rules_encode(&r->volatiles, q);
     return size;
 }
 
 bool battle_request_decode(const uint8_t *p, uint32_t length, BattleRequest *r) {
     if (length < BATTLE_REQUEST_HEADER ||
-        (p[0] < BATTLE_REQUEST_VERSION || p[0] > BATTLE_REQUEST_VERSION_EFFECTS) ||
+        (p[0] < BATTLE_REQUEST_VERSION || p[0] > BATTLE_REQUEST_VERSION_VOLATILES) ||
         msg_get16(p+14) != BATTLE_ENTRY_BYTES)
         return false;
     r->version = p[0];
@@ -336,8 +383,14 @@ bool battle_request_decode(const uint8_t *p, uint32_t length, BattleRequest *r) 
         q += BATTLE_CONDITION_RULE_BYTES;
         if (!battle_condition_rules_valid(&r->conditions, r->type_count)) return false;
     }
+    r->volatiles = (BattleVolatileRules){0};
     if (r->version < BATTLE_REQUEST_VERSION_EFFECTS) return true;
     const uint8_t *end = p + length;
+    if (r->version >= BATTLE_REQUEST_VERSION_VOLATILES) {
+        if (length < fixed_size(r) + BATTLE_VOLATILE_RULE_BYTES) return false;
+        end -= BATTLE_VOLATILE_RULE_BYTES;
+        if (!volatile_rules_decode(end, &r->volatiles)) return false;
+    }
     for (unsigned side = 0; side < 2; ++side) {
         BattleEntry *e = side ? r->opponent : r->player;
         const unsigned count = side ? r->opponent_count : r->player_count;
@@ -614,6 +667,25 @@ unsigned battle_condition_state_encode(const BattleRosterState *s, uint8_t *p) {
                 *p++ = (uint8_t)s->stages[side][slot][stat];
         }
     return BATTLE_CONDITION_STATE_BYTES;
+}
+
+unsigned battle_volatile_state_encode(const BattleRosterState *s, uint8_t *p) {
+    p += battle_condition_state_encode(s, p);
+    for (unsigned side = 0; side < 2; ++side)
+        for (unsigned slot = 0; slot < BATTLE_FIELD_SLOTS; ++slot) *p++ = s->volatiles[side][slot];
+    return BATTLE_VOLATILE_STATE_BYTES;
+}
+
+bool battle_volatile_state_decode(const uint8_t *p, unsigned length, BattleRosterState *s) {
+    if (length != BATTLE_VOLATILE_STATE_BYTES || !battle_condition_state_decode(p, BATTLE_CONDITION_STATE_BYTES, s))
+        return false;
+    p += BATTLE_CONDITION_STATE_BYTES;
+    for (unsigned side = 0; side < 2; ++side)
+        for (unsigned slot = 0; slot < BATTLE_FIELD_SLOTS; ++slot) {
+            if (*p & ~BVF_MASK) return false;
+            s->volatiles[side][slot] = *p++;
+        }
+    return true;
 }
 
 bool battle_condition_state_decode(const uint8_t *p, unsigned length, BattleRosterState *s) {

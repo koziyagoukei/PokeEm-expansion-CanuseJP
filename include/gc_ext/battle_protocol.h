@@ -25,6 +25,7 @@ extern "C" {
 #define BATTLE_APP_VERSION_PIVOT 6
 #define BATTLE_APP_VERSION_CONDITIONS 7
 #define BATTLE_APP_VERSION_EFFECTS 8
+#define BATTLE_APP_VERSION_VOLATILES 9
 #define BATTLE_MODE_VERSION 1
 
 enum BattleFormat { BATTLE_FORMAT_SINGLE = 1, BATTLE_FORMAT_DOUBLE = 2, BATTLE_FORMAT_TRIPLE = 3, BATTLE_FORMAT_ROTATION = 4 };
@@ -107,8 +108,15 @@ enum BattleEffectKind {
     BEFF_FORCE_OUT = 8,  // the target is replaced by a random legal reserve (after damage if any)
     BEFF_PIVOT = 9,      // after a landed hit the user may switch to a reserve mid-turn
     BEFF_PROTECT = 10,   // user protected this turn; arg0 = consecutive failure base (2 or 3)
+    // Request V9 (volatile states and multi-turn actions).
+    BEFF_FLINCH = 11,    // after a hit: the target loses its action if it has not acted this turn
+    BEFF_CONFUSE = 12,   // confusion for a duration from the volatile rules
+    BEFF_SUBSTITUTE = 13,// user pays max HP / rules divisor for a substitute (status move, alone)
+    BEFF_CHARGE = 14,    // first effect: turn 1 charges (arg0 = BSEMI_*), turn 2 runs the rest
+    BEFF_RECHARGE = 15,  // after a landed hit the user must recharge on its next turn
     BEFF_COUNT
 };
+enum BattleSemiInvulnerable { BSEMI_NONE = 0, BSEMI_AIR = 1, BSEMI_UNDERGROUND = 2 };
 enum BattleEffectWho { BWHO_TARGET = 0, BWHO_USER = 1 };
 enum BattleHitRule { BHITS_UNIFORM = 0, BHITS_2TO5_GEN5 = 1, BHITS_2TO5_GEN1 = 2 };
 #define BATTLE_MAX_EFFECTS 6
@@ -117,6 +125,14 @@ enum BattleHitRule { BHITS_UNIFORM = 0, BHITS_2TO5_GEN5 = 1, BHITS_2TO5_GEN1 = 2
 #define BATTLE_MOVE_EFFECTS_HEADER 4
 #define BEFL_TYPE_CHART (1u << 0)
 #define BMF_IGNORES_PROTECT (1u << 0)
+// V9 move flags.
+#define BMF_IGNORES_SUBSTITUTE  (1u << 1)  // e.g. sound moves (per the game's move flags)
+#define BMF_HITS_AIRBORNE       (1u << 2)  // can hit a target in the air (Fly)
+#define BMF_DOUBLE_AIRBORNE     (1u << 3)  // and deals double damage to it
+#define BMF_HITS_UNDERGROUND    (1u << 4)  // can hit a target underground (Dig)
+#define BMF_DOUBLE_UNDERGROUND  (1u << 5)  // and deals double damage to it
+#define BMF_V8_MASK BMF_IGNORES_PROTECT
+#define BMF_V9_MASK 0x3fu
 typedef struct {
     uint8_t kind, who, chance, arg0;
     int8_t arg1;
@@ -173,9 +189,23 @@ typedef struct {
 #define BATTLE_REQUEST_VERSION_PIVOT 6
 #define BATTLE_REQUEST_VERSION_CONDITIONS 7
 #define BATTLE_REQUEST_VERSION_EFFECTS 8
+#define BATTLE_REQUEST_VERSION_VOLATILES 9
 #define BATTLE_REQUEST_HEADER 24
 enum StruggleRecoil { BSTRUGGLE_MAX_HP_FLOOR = 1, BSTRUGGLE_MAX_HP_NEAREST = 2 };
 #define BATTLE_MOVE_STRUGGLE 0xffffu  // logical presentation identifier
+// V9 volatile rules, 8 bytes after the V8 effect lists.
+//   0 u8 flags (BVR_*)   1 u8 confusion self-hit percent   2 u8 confusion min turns
+//   3 u8 confusion max turns (the counter; the last tick ends confusion)
+//   4 u8 confusion self-hit power   5 u8 substitute HP divisor   6..7 reserved (0)
+#define BATTLE_VOLATILE_RULE_BYTES 8
+#define BVR_SUBSTITUTE_MULTI_HIT_CONTINUES (1u << 0)  // hits after a broken substitute strike the Pokemon
+#define BVR_RECHARGE_SKIP_ON_KO (1u << 1)             // no recharge after knocking the target out
+#define BVR_CONFUSION_BURN (1u << 2)                  // burn halves the confusion self-hit
+typedef struct {
+    uint8_t flags, confusion_hit_percent, confusion_min, confusion_max, confusion_power, substitute_divisor;
+} BattleVolatileRules;
+bool battle_volatile_rules_valid(const BattleVolatileRules *rules);
+
 typedef struct {
     uint8_t format, battle_type, player_count, opponent_count, active_per_side;
     uint16_t rules, trainer_id;
@@ -187,6 +217,7 @@ typedef struct {
     BattleEntry player[BATTLE_MAX_PER_SIDE], opponent[BATTLE_MAX_PER_SIDE];
     uint8_t type_chart[BATTLE_MAX_TYPES * BATTLE_MAX_TYPES];
     BattleConditionRules conditions; // V7 suffix after the type chart
+    BattleVolatileRules volatiles;   // V9 suffix after the effect lists
 } BattleRequest;
 
 uint32_t battle_request_size(const BattleRequest *request);
@@ -288,6 +319,7 @@ typedef struct {
     BattleFieldMon player[BATTLE_MAX_PER_SIDE];
     uint8_t status[2][BATTLE_FIELD_SLOTS];
     int8_t stages[2][BATTLE_FIELD_SLOTS][BSTAT_COUNT];
+    uint8_t volatiles[2][BATTLE_FIELD_SLOTS];  // APP V9 (BVF_*)
 } BattleRosterState;
 #define BATTLE_ROSTER_STATE_BYTES (BATTLE_MULTI_STATE_BYTES + 1 + 5 * BATTLE_MAX_PER_SIDE)
 
@@ -311,6 +343,19 @@ bool battle_pivot_action_decode(const uint8_t *in, unsigned length, BattleMultiA
 #define BATTLE_CONDITION_STATE_BYTES (BATTLE_STRUGGLE_STATE_BYTES + 2 * BATTLE_FIELD_SLOTS * (1 + BSTAT_COUNT))
 unsigned battle_condition_state_encode(const BattleRosterState *state, uint8_t *out);
 bool battle_condition_state_decode(const uint8_t *in, unsigned length, BattleRosterState *state);
+
+// APP V9 appends one volatile byte per field position (side, then slot).
+// A LOCKED position has a forced action this turn: the host never prompts it.
+#define BVF_CONFUSED          (1u << 0)
+#define BVF_SUBSTITUTE        (1u << 1)
+#define BVF_CHARGING          (1u << 2)
+#define BVF_SEMI_INVULNERABLE (1u << 3)
+#define BVF_RECHARGING        (1u << 4)
+#define BVF_LOCKED            (1u << 5)
+#define BVF_MASK 0x3fu
+#define BATTLE_VOLATILE_STATE_BYTES (BATTLE_CONDITION_STATE_BYTES + 2 * BATTLE_FIELD_SLOTS)
+unsigned battle_volatile_state_encode(const BattleRosterState *state, uint8_t *out);
+bool battle_volatile_state_decode(const uint8_t *in, unsigned length, BattleRosterState *state);
 
 // GcBattleResultV1 (RESULT payload, result version 1).
 //   0 u8 outcome   1 u8 turns   2 u8 player count P   3 u8 opponent count O
