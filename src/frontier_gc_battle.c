@@ -47,6 +47,7 @@ struct FrontierGcBattle
     u8 policy;
     u8 format, count, fieldCount;
     u8 roster; // zero for the legacy app, otherwise the roster app version
+    bool8 endurance; // debug: V9 fixtures against weak foes for long battles
     u8 rotation, target;
     BattleMultiState multiState;
     u8 status[2][BATTLE_FIELD_SLOTS];
@@ -71,6 +72,7 @@ static EWRAM_DATA u8 sPendingPolicy = 0;
 static EWRAM_DATA u16 sPendingTrainer = 0;
 static EWRAM_DATA u8 sPendingFormat = 0;
 static EWRAM_DATA u8 sPendingRoster = 0;
+static EWRAM_DATA bool8 sPendingEndurance = FALSE;
 
 static const u8 sText_StruggleRules[] = _("{ENG}Unsupported Struggle rules.");
 static const u8 sText_NoMemory[] = _("{ENG}Not enough memory.");
@@ -657,7 +659,16 @@ static void SetVolatileFixture(struct Pokemon *mon, u32 side, u32 index)
              {MOVE_TACKLE, MOVE_SUPERSONIC, MOVE_NONE, MOVE_NONE}},
         },
     };
-    const enum Move *moves = sets[sBattle->format - BATTLE_FORMAT_SINGLE][side][index];
+    // Endurance (debug): the player only uses non-damaging volatile moves,
+    // so the level-5 foes' charge, flinch, confusion and Substitute play out
+    // over a long battle that ends by forfeit.
+    static const enum Move endurance[3][MAX_MON_MOVES] = {
+        {MOVE_PROTECT, MOVE_SUBSTITUTE, MOVE_CONFUSE_RAY, MOVE_SUPERSONIC},
+        {MOVE_SUBSTITUTE, MOVE_CONFUSE_RAY, MOVE_PROTECT, MOVE_SUPERSONIC},
+        {MOVE_RECOVER, MOVE_PROTECT, MOVE_SUBSTITUTE, MOVE_CONFUSE_RAY},
+    };
+    const enum Move *moves = sBattle->endurance && side == 0 ? endurance[index]
+                           : sets[sBattle->format - BATTLE_FORMAT_SINGLE][side][index];
     u32 m;
     for (m = 0; m < MAX_MON_MOVES; m++)
     {
@@ -689,6 +700,7 @@ static bool8 BuildFixtureEntries(BattleRequest *request, const u8 **reason)
     // V9 fixtures face an equal-level team so charge, recharge and volatile
     // states have turns to play out.
     const u8 foeLevel = sBattle->trainerId == TRAINER_STEVEN ? 45
+                      : sBattle->endurance ? 5
                       : sBattle->roster == BATTLE_APP_VERSION_VOLATILES ? 23 : 13;
     GcExtension_SetExtraMons(sBattle->opponent, 2 * sBattle->count);
     for (side = 0; side < 2; side++)
@@ -926,6 +938,7 @@ static bool8 Init(const u8 **reason)
     sBattle->format = sPendingFormat;
     sBattle->fieldCount = sPendingFormat == BATTLE_FORMAT_SINGLE ? 1 : sPendingFormat == BATTLE_FORMAT_DOUBLE ? 2 : 3;
     sBattle->roster = sPendingRoster;
+    sBattle->endurance = sPendingEndurance;
     sBattle->count = sBattle->roster && sBattle->format == BATTLE_FORMAT_DOUBLE ? 3 : sBattle->fieldCount;
     sBattle->policy = IsLegacySingle() ? sPendingPolicy : RESULT_POLICY_DISPLAY_ONLY;
     sBattle->trainerId = sPendingTrainer;
@@ -1722,7 +1735,8 @@ static const struct GcModeHandler sFrontierGcBattleMode =
 // Script special (waitstate): VAR_0x8004 = result policy (0 show, 1 apply
 // HP/PP), VAR_0x8005 = trainer id. VAR_0x8006 is the format (0 for
 // Single). Bits 8 through 12 select the lifecycle fixtures, bit 13 selects V7,
-// bit 14 the V8 move effect fixtures and bit 15 the V9 volatile fixtures.
+// bit 14 the V8 move effect fixtures and bit 15 the V9 volatile fixtures
+// (with bit 8: level-5 foes for long endurance battles, debug menu only).
 static EWRAM_DATA struct GcModeHandler sFrontierGcRosterMode = {0};
 
 void FrontierGcBattle_Start(void)
@@ -1732,8 +1746,12 @@ void FrontierGcBattle_Start(void)
     sPendingTrainer = gSpecialVar_0x8005;
     sPendingFormat = format >= BATTLE_FORMAT_DOUBLE && format <= BATTLE_FORMAT_ROTATION ? format : BATTLE_FORMAT_SINGLE;
     sPendingRoster = 0;
+    sPendingEndurance = FALSE;
     if (gSpecialVar_0x8006 & 0x8000)
+    {
         sPendingRoster = BATTLE_APP_VERSION_VOLATILES;
+        sPendingEndurance = (gSpecialVar_0x8006 & 0x100) != 0;
+    }
     else if (gSpecialVar_0x8006 & 0x4000)
         sPendingRoster = BATTLE_APP_VERSION_EFFECTS;
     else if (gSpecialVar_0x8006 & 0x2000)

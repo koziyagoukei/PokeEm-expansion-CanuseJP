@@ -490,6 +490,28 @@ Debug_EventScript_GcBattlePivot::
 	releaseall
 	end
 
+@ Milestone 3 move effect fixtures (request V8), kept for regression runs
+@ now that the Cube Tester uses V9.
+Debug_EventScript_GcEffectsDouble::
+	lockall
+	setvar VAR_0x8004, 0
+	setvar VAR_0x8005, TRAINER_CALVIN_1
+	setvar VAR_0x8006, 0x4002
+	special FrontierGcBattle_Start
+	releaseall
+	end
+
+@ Milestone 3.5 endurance: V9 volatile fixtures in a Double against
+@ level-5 foes, so a battle can run for 20+ turns.
+Debug_EventScript_GcVolatileEndurance::
+	lockall
+	setvar VAR_0x8004, 0
+	setvar VAR_0x8005, TRAINER_CALVIN_1
+	setvar VAR_0x8006, 0x8102
+	special FrontierGcBattle_Start
+	releaseall
+	end
+
 Debug_EventScript_GcConditionsSingle::
 	lockall
 	setvar VAR_0x8004, 0
