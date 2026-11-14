@@ -6392,15 +6392,10 @@ static inline u32 CalcMoveBasePower(struct DamageContext *ctx)
     if (moveEffect == EFFECT_FUTURE_SIGHT && !ctx->aiCalc)
         return basePower;
 
-    switch (GetActiveGimmick(battlerAtk))
-    {
-    case GIMMICK_Z_MOVE:
-        return GetZMovePower(ctx->baseMove);
-    case GIMMICK_DYNAMAX:
-        return GetMaxMovePower(ctx->baseMove, ctx->move);
-    default:
-        break;
-    }
+    if (IsZMove(move))
+        return GetZMovePower(ctx->baseMove, move);
+    if (IsMaxMove(move))
+        return GetMaxMovePower(ctx->baseMove, move);
 
     switch (moveEffect)
     {
@@ -9373,9 +9368,16 @@ enum DamageCategory GetBattleMoveCategory(enum Move move)
     return GetMoveCategory(move);
 }
 
-void SetDynamicMoveCategory(enum BattlerId battlerAtk, enum BattlerId battlerDef, enum Move move)
+void SetDynamicMoveCategory(enum BattlerId battlerAtk, enum BattlerId battlerDef, enum Move move, enum Move baseMove)
 {
     gBattleStruct->dynamicMoveCategory = DAMAGE_CATEGORY_NONE;
+
+    if ((IsMaxMove(move) && move != MOVE_MAX_GUARD)
+     || (IsZMove(move) && move < MOVE_CATASTROPIKA))
+    {
+        gBattleStruct->dynamicMoveCategory = GetMoveCategory(baseMove);
+        return;
+    }
 
     switch (GetMoveEffect(move))
     {
@@ -9429,8 +9431,6 @@ void SetDynamicMoveCategory(enum BattlerId battlerAtk, enum BattlerId battlerDef
         break;
     }
     default:
-        if (GetActiveGimmick(battlerAtk) == GIMMICK_DYNAMAX)
-            gBattleStruct->dynamicMoveCategory = GetMoveCategory(GetBattlerChosenMove(battlerAtk));
         break;
     }
 }

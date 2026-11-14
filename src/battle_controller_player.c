@@ -1949,12 +1949,14 @@ static void MoveSelectionDisplayMoveDescription(enum BattlerId battler)
 
     if (GetActiveGimmick(battler) == GIMMICK_DYNAMAX || IsGimmickSelected(battler, GIMMICK_DYNAMAX))
     {
-        pwr = GetMaxMovePower(move, move);
-        move = GetMaxMove(battler, move);
-        acc = 0;
+        enum Move baseMove = move;
+        move = GetMaxMove(battler, baseMove);
+        pwr = IsMaxMove(move) && move != MOVE_MAX_GUARD ? GetMaxMovePower(baseMove, move) : GetMovePower(move);
+        cat = move == MOVE_MAX_GUARD ? DAMAGE_CATEGORY_STATUS : GetMoveCategory(baseMove);
+        acc = GetMoveAccuracy(move);
     }
 
-    u8 pwr_num[3], acc_num[3];
+    u8 pwr_num[4], acc_num[4];
     u8 cat_desc[7] = _("");
     u8 pwr_desc[7] = _("いりょく");
     u8 acc_desc[7] = _("めいちゅう");

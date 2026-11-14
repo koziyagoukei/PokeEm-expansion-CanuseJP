@@ -709,7 +709,8 @@ static enum CancelerResult CancelerCallSubmove(struct BattleCalcValues *cv)
 
     if (calledMove != MOVE_NONE && !IsGimmickMove(calledMove))
     {
-        // Convert only the caller's ordinary move using its own Z-Power.
+        // Retain the called move's power and category through Z-Move conversion.
+        gBattleStruct->baseMove = calledMove;
         if (GetActiveGimmick(cv->battlerAtk) == GIMMICK_Z_MOVE && !IsBattleMoveStatus(calledMove))
             calledMove = GetTypeBasedZMove(calledMove);
 
@@ -1119,7 +1120,7 @@ static enum CancelerResult CancelerSetTargets(struct BattleCalcValues *cv)
         return CANCELER_RESULT_FAILURE;
     }
 
-    SetDynamicMoveCategory(cv->battlerAtk, cv->battlerDef, cv->move);
+    SetDynamicMoveCategory(cv->battlerAtk, cv->battlerDef, cv->move, gBattleStruct->baseMove);
     return CANCELER_RESULT_SUCCESS;
 }
 
@@ -1210,6 +1211,7 @@ static enum CancelerResult CancelerPPDeduction(struct BattleCalcValues *cv)
 
             // Possibly better to just move type setting and redirection to attackcanceler as a new case at this point
             SetTypeBeforeUsingMove(cv->move, cv->battlerAtk, cv->abilities[cv->battlerAtk], cv->holdEffects[cv->battlerAtk]);
+            SetDynamicMoveCategory(cv->battlerAtk, cv->battlerDef, cv->move, gBattleStruct->baseMove);
             gBattlescriptCurrInstr = GetMoveBattleScript(cv->move);
             return CANCELER_RESULT_RUN_SCRIPT_AND_INCREMENT;
         }

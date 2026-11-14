@@ -173,7 +173,7 @@ enum ImmunityHealStatusOutcome TryImmunityAbilityHealStatus(enum BattlerId battl
 bool32 ShouldGetStatBadgeBoost(u16 flagId, enum BattlerId battler);
 uq4_12_t GetBadgeBoostModifier(void);
 enum DamageCategory GetBattleMoveCategory(enum Move move);
-void SetDynamicMoveCategory(enum BattlerId battlerAtk, enum BattlerId battlerDef, enum Move move);
+void SetDynamicMoveCategory(enum BattlerId battlerAtk, enum BattlerId battlerDef, enum Move move, enum Move baseMove);
 bool32 CanFling(enum BattlerId battlerAtk, enum Ability abilityAtk);
 bool32 IsTelekinesisBannedSpecies(enum Species species);
 bool32 IsHealBlockPreventingMove(enum BattlerId battler, enum Move move);

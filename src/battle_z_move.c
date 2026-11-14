@@ -372,10 +372,7 @@ bool32 MoveSelectionDisplayZMove(enum Move zmove, enum BattlerId battler)
 static void ZMoveSelectionDisplayPower(enum Move move, enum Move zMove)
 {
     u8 *txtPtr;
-    u16 power = GetZMovePower(move);
-
-    if (zMove >= MOVE_CATASTROPIKA)
-        power = GetMovePower(zMove);
+    u16 power = GetZMovePower(move, zMove);
 
     if (GetMoveCategory(move) != DAMAGE_CATEGORY_STATUS)
     {
@@ -573,8 +570,11 @@ void SetZEffect(const u8 *nextInstr)
     }
 }
 
-u32 GetZMovePower(enum Move move)
+u32 GetZMovePower(enum Move move, enum Move zMove)
 {
+    if (zMove >= MOVE_CATASTROPIKA && IsZMove(zMove))
+        return GetMovePower(zMove);
+
     if (GetMoveCategory(move) == DAMAGE_CATEGORY_STATUS)
         return 0;
     enum BattleMoveEffects moveEffect = GetMoveEffect(move);

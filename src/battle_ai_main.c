@@ -6097,6 +6097,12 @@ static s32 AI_CheckViability(enum BattlerId battlerAtk, enum BattlerId battlerDe
     if (IsTargetingPartner(battlerAtk, battlerDef))
         return score;
 
+    // Extreme Evoboost is a setup move even though Last Resort normally deals damage.
+    if (GetMoveEffect(move) == EFFECT_LAST_RESORT
+     && GetUsableZMove(battlerAtk, move) == MOVE_EXTREME_EVOBOOST
+     && IsConsideringZMove(battlerAtk, battlerDef, move))
+        return score + AI_CalcMoveEffectScore(battlerAtk, battlerDef, move, aiData);
+
     if (GetMovePower(move) != 0)
     {
         if (GetNoOfHitsToKOBattler(battlerAtk, battlerDef, gAiThinkingStruct->movesetIndex, AI_ATTACKING, CONSIDER_ENDURE) == 0)

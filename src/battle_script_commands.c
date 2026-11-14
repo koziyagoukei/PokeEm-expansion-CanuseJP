@@ -6183,7 +6183,7 @@ static void Cmd_mimicattackcopy(void)
 static void Cmd_setcalledmove(void)
 {
     CMD_ARGS();
-    gCurrentMove = gBattleStruct->baseMove = gCalledMove;
+    gCurrentMove = gCalledMove;
     ClearDamageCalcResults();
     gBattlescriptCurrInstr = cmd->nextInstr;
 }
