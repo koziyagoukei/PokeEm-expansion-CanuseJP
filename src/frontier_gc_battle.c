@@ -51,6 +51,7 @@ struct FrontierGcBattle
     BattleMultiState multiState;
     u8 status[2][BATTLE_FIELD_SLOTS];
     s8 stages[2][BATTLE_FIELD_SLOTS][BSTAT_COUNT];
+    u8 volatiles[2][BATTLE_FIELD_SLOTS]; // APP V9 BVF_* flags
     u8 reserveMask, struggleMask;
     BattleMultiAction multiAction;
     u8 screen;
@@ -159,12 +160,24 @@ static u8 ResolveConditionEffect(enum Move move, u16 effect)
 // battle config. Anything that cannot be expressed exactly is reported as
 // unsupported, with the game's effect id kept for the host's debug log.
 
+// Set when a list would need more than BATTLE_MAX_EFFECTS descriptors; the
+// move is then refused instead of being sent with a truncated list.
+static EWRAM_DATA bool8 sEffectOverflow = FALSE;
+
 static bool8 PushEffect(BattleMove *out, BattleEffect e)
 {
     if (out->effect_count >= BATTLE_MAX_EFFECTS)
+    {
+        sEffectOverflow = TRUE;
         return FALSE;
+    }
     out->effects[out->effect_count++] = e;
     return TRUE;
+}
+
+static bool8 VolatilesEnabled(void)
+{
+    return sBattle->roster >= BATTLE_APP_VERSION_VOLATILES;
 }
 
 static u8 ExportMoveStatus(enum MoveEffect effect)
@@ -220,6 +233,22 @@ static u8 ResolveAdditionalEffects(enum Move move, BattleMove *out, bool8 damagi
                 return UNSUP_SECONDARY;
             break;
         }
+        case MOVE_EFFECT_FLINCH:
+            if (!VolatilesEnabled() || !damaging || e->self
+             || !PushEffect(out, (BattleEffect){.kind = BEFF_FLINCH, .who = BWHO_TARGET, .chance = chance}))
+                return UNSUP_SECONDARY;
+            break;
+        case MOVE_EFFECT_CONFUSION:
+            if (!VolatilesEnabled() || e->self
+             || !PushEffect(out, (BattleEffect){.kind = BEFF_CONFUSE, .who = BWHO_TARGET, .chance = chance}))
+                return UNSUP_SECONDARY;
+            break;
+        case MOVE_EFFECT_RECHARGE:
+            // Hyper Beam style: the user must recharge after a hit.
+            if (!VolatilesEnabled() || !damaging || !e->self || e->chance
+             || !PushEffect(out, (BattleEffect){.kind = BEFF_RECHARGE, .who = BWHO_USER}))
+                return UNSUP_SECONDARY;
+            break;
         case MOVE_EFFECT_ABSORB:
             if (!damaging || e->self || !e->argument.absorbPercentage
              || !PushEffect(out, (BattleEffect){.kind = BEFF_DRAIN, .who = BWHO_USER,
@@ -247,6 +276,20 @@ static u8 ResolveEffects(enum Move move, BattleMove *out)
     out->effect = BME_HIT;
     out->source_effect = effect;
     out->move_flags = gMovesInfo[move].ignoresProtect ? BMF_IGNORES_PROTECT : 0;
+    sEffectOverflow = FALSE;
+    if (VolatilesEnabled())
+    {
+        // Substitute and semi-invulnerable reach, from this build's move flags.
+        // Moves that damage underground targets also double against them here.
+        if (gMovesInfo[move].ignoresSubstitute)
+            out->move_flags |= BMF_IGNORES_SUBSTITUTE;
+        if (MoveDamagesAirborneDoubleDamage(move))
+            out->move_flags |= BMF_DOUBLE_AIRBORNE;
+        else if (MoveDamagesAirborne(move))
+            out->move_flags |= BMF_HITS_AIRBORNE;
+        if (MoveDamagesUnderground(move))
+            out->move_flags |= BMF_DOUBLE_UNDERGROUND;
+    }
     if (damaging)
     {
         BattleEffect damage = {.kind = BEFF_DAMAGE, .arg0 = 1, .arg2 = 1};
@@ -304,12 +347,54 @@ static u8 ResolveEffects(enum Move move, BattleMove *out)
         PushEffect(out, (BattleEffect){.kind = BEFF_CURE,
             .arg0 = 1u << BST_POISON | 1u << BST_TOXIC | 1u << BST_BURN | 1u << BST_PARALYSIS});
         break;
+    case EFFECT_CONFUSE:
+        if (!VolatilesEnabled())
+            return UNSUP_EFFECT;
+        PushEffect(out, (BattleEffect){.kind = BEFF_CONFUSE, .who = BWHO_TARGET});
+        break;
+    case EFFECT_SWAGGER:  // the +2 Attack comes from the additional effects; confusion follows it
+        if (!VolatilesEnabled())
+            return UNSUP_EFFECT;
+        break;
+    case EFFECT_SUBSTITUTE:
+        if (!VolatilesEnabled())
+            return UNSUP_EFFECT;
+        PushEffect(out, (BattleEffect){.kind = BEFF_SUBSTITUTE, .who = BWHO_USER});
+        break;
+    case EFFECT_SOLAR_BEAM:
+    case EFFECT_TWO_TURNS_ATTACK:
+    case EFFECT_SEMI_INVULNERABLE:
+    {
+        // Charge on the first turn, hit on the second. GC battles have no
+        // weather, so a weather shortcut (Solar Beam in sun) never applies.
+        u8 semi = BSEMI_NONE;
+        if (!VolatilesEnabled() || !damaging)
+            return UNSUP_EFFECT;
+        if (effect == EFFECT_SEMI_INVULNERABLE)
+        {
+            switch (gMovesInfo[move].argument.twoTurnAttack.state)
+            {
+            case STATE_ON_AIR: semi = BSEMI_AIR; break;
+            case STATE_UNDERGROUND: semi = BSEMI_UNDERGROUND; break;
+            default: return UNSUP_EFFECT;  // underwater, Phantom Force, Sky Drop
+            }
+        }
+        // CHARGE leads the list, before DAMAGE.
+        out->effects[1] = out->effects[0];
+        out->effects[0] = (BattleEffect){.kind = BEFF_CHARGE, .who = BWHO_USER, .arg0 = semi};
+        out->effect_count = 2;
+        break;
+    }
     default:
         return UNSUP_EFFECT;
     }
     unsupported = ResolveAdditionalEffects(move, out, damaging);
     if (unsupported)
         return unsupported;
+    if (effect == EFFECT_SWAGGER)
+        PushEffect(out, (BattleEffect){.kind = BEFF_CONFUSE, .who = BWHO_TARGET});
+    if (sEffectOverflow)
+        return UNSUP_OTHER;
     if (effect == EFFECT_STAT_CHANGE && out->effect_count == 0)
         return UNSUP_EFFECT;
     if (IsExplosionMove(move) || gMovesInfo[move].alwaysCriticalHit || gMovesInfo[move].cantUseTwice
@@ -530,6 +615,55 @@ static void SetEffectFixture(struct Pokemon *mon, u32 side, u32 index)
     }
 }
 
+// Milestone 3.5 volatile fixtures: flinch, confusion (Confuse Ray,
+// Supersonic, Swagger), Substitute, Solar Beam, Fly, Dig, Hyper Beam,
+// Giga Impact and the moves that reach semi-invulnerable targets.
+// Temporary Pokemon only; display-only results.
+static void SetVolatileFixture(struct Pokemon *mon, u32 side, u32 index)
+{
+    static const enum Move sets[4][2][3][MAX_MON_MOVES] = {
+        [0] = { // Single
+            {{MOVE_AIR_SLASH, MOVE_CONFUSE_RAY, MOVE_SUBSTITUTE, MOVE_HYPER_BEAM}},
+            {{MOVE_BITE, MOVE_SOLAR_BEAM, MOVE_SUPERSONIC, MOVE_DIG}},
+        },
+        [1] = { // Double (third member in reserve)
+            {{MOVE_FLY, MOVE_ROCK_SLIDE, MOVE_PROTECT, MOVE_SWAGGER},
+             {MOVE_EARTHQUAKE, MOVE_SUBSTITUTE, MOVE_GIGA_IMPACT, MOVE_CONFUSE_RAY},
+             {MOVE_SOLAR_BEAM, MOVE_U_TURN, MOVE_DOUBLE_KICK, MOVE_RECOVER}},
+            {{MOVE_GUST, MOVE_BITE, MOVE_TACKLE, MOVE_NONE},
+             {MOVE_SUPERSONIC, MOVE_TACKLE, MOVE_SUBSTITUTE, MOVE_NONE},
+             {MOVE_TACKLE, MOVE_DIG, MOVE_NONE, MOVE_NONE}},
+        },
+        [2] = { // Triple
+            {{MOVE_TWISTER, MOVE_SUBSTITUTE, MOVE_HYPER_BEAM, MOVE_PROTECT},
+             {MOVE_DIG, MOVE_SURF, MOVE_CONFUSE_RAY, MOVE_EARTHQUAKE},
+             {MOVE_SOLAR_BEAM, MOVE_DOUBLE_KICK, MOVE_SWAGGER, MOVE_ROCK_SLIDE}},
+            {{MOVE_TACKLE, MOVE_BITE, MOVE_NONE, MOVE_NONE},
+             {MOVE_TACKLE, MOVE_FLY, MOVE_NONE, MOVE_NONE},
+             {MOVE_TACKLE, MOVE_SUPERSONIC, MOVE_NONE, MOVE_NONE}},
+        },
+        [3] = { // Rotation
+            {{MOVE_SOLAR_BEAM, MOVE_SUBSTITUTE, MOVE_AIR_SLASH, MOVE_PROTECT},
+             {MOVE_DIG, MOVE_HYPER_BEAM, MOVE_CONFUSE_RAY, MOVE_EARTHQUAKE},
+             {MOVE_FLY, MOVE_SWAGGER, MOVE_DOUBLE_KICK, MOVE_RECOVER}},
+            {{MOVE_TACKLE, MOVE_BITE, MOVE_NONE, MOVE_NONE},
+             {MOVE_TACKLE, MOVE_GUST, MOVE_NONE, MOVE_NONE},
+             {MOVE_TACKLE, MOVE_SUPERSONIC, MOVE_NONE, MOVE_NONE}},
+        },
+    };
+    const enum Move *moves = sets[sBattle->format - BATTLE_FORMAT_SINGLE][side][index];
+    u32 m;
+    for (m = 0; m < MAX_MON_MOVES; m++)
+    {
+        SetMonMoveSlot(mon, moves[m], m);
+        if (moves[m] == MOVE_NONE)
+        {
+            u8 pp = 0;
+            SetMonData(mon, MON_DATA_PP1 + m, &pp);
+        }
+    }
+}
+
 static bool8 BuildFixtureEntries(BattleRequest *request, const u8 **reason)
 {
     static const struct BattleFixture
@@ -587,6 +721,8 @@ static bool8 BuildFixtureEntries(BattleRequest *request, const u8 **reason)
                 SetConditionFixture(mon, side, i);
             else if (sBattle->roster == BATTLE_APP_VERSION_EFFECTS)
                 SetEffectFixture(mon, side, i);
+            else if (sBattle->roster == BATTLE_APP_VERSION_VOLATILES)
+                SetVolatileFixture(mon, side, i);
             const bool8 dry = sBattle->roster == BATTLE_APP_VERSION_STRUGGLE && side == 0 && i == 0;
             if (dry)
             {
@@ -659,6 +795,25 @@ static bool32 ResolveConditionRules(BattleConditionRules *rules)
     return TRUE;
 }
 
+// Volatile rules of this build, as read from its battle code and config:
+// confusion lasts 2..B_CONFUSION_TURNS actions, hits itself 1/3 (Gen 7+)
+// or 1/2 with a typeless 40-power physical hit that burn halves;
+// Substitute costs max HP / 4; a multi-hit move keeps hitting after it
+// breaks a substitute; only the Gen 1 rule skips the recharge after a KO.
+static bool32 ResolveVolatileRules(BattleVolatileRules *rules)
+{
+    *rules = (BattleVolatileRules){
+        .flags = BVR_SUBSTITUTE_MULTI_HIT_CONTINUES | BVR_CONFUSION_BURN
+               | (B_SKIP_RECHARGE == GEN_1 ? BVR_RECHARGE_SKIP_ON_KO : 0),
+        .confusion_hit_percent = GetConfig(B_CONFUSION_SELF_DMG_CHANCE) >= GEN_7 ? 33 : 50,
+        .confusion_min = 2,
+        .confusion_max = B_CONFUSION_TURNS,
+        .confusion_power = 40,
+        .substitute_divisor = 4,
+    };
+    return battle_volatile_rules_valid(rules);
+}
+
 static bool8 IsLegacySingle(void)
 {
     return sBattle->format == BATTLE_FORMAT_SINGLE && !sBattle->roster;
@@ -714,6 +869,13 @@ static bool8 BuildRequest(const u8 **reason)
             return FALSE;
         }
         request->rules &= ~RULE_IGNORE_STATUS;
+    }
+    if (request->version >= BATTLE_REQUEST_VERSION_VOLATILES && !ResolveVolatileRules(&request->volatiles))
+    {
+        static const u8 unsupported[] = _("{ENG}Unsupported GC volatile rules.");
+        *reason = unsupported;
+        Free(request);
+        return FALSE;
     }
     request->trainer_id = sBattle->trainerId;
     request->trainer_class = trainer->trainerClass;
@@ -789,7 +951,12 @@ static u16 HandleMultiApp(u16 opcode, const u8 *args, u16 argLength, u8 *out, u1
         {
             if (opcode != BATTLE_OP_STATE_ROSTER)
                 return APP_BAD_ARGS;
-            if (sBattle->roster >= BATTLE_APP_VERSION_CONDITIONS)
+            if (sBattle->roster >= BATTLE_APP_VERSION_VOLATILES)
+            {
+                if (!battle_volatile_state_decode(args, argLength, &received))
+                    return APP_BAD_ARGS;
+            }
+            else if (sBattle->roster >= BATTLE_APP_VERSION_CONDITIONS)
             {
                 if (!battle_condition_state_decode(args, argLength, &received))
                     return APP_BAD_ARGS;
@@ -837,6 +1004,7 @@ static u16 HandleMultiApp(u16 opcode, const u8 *args, u16 argLength, u8 *out, u1
         {
             memcpy(sBattle->status, received.status, sizeof(sBattle->status));
             memcpy(sBattle->stages, received.stages, sizeof(sBattle->stages));
+            memcpy(sBattle->volatiles, received.volatiles, sizeof(sBattle->volatiles));
         }
         sBattle->multiState = state;
         sBattle->reserveMask = mask;
@@ -1225,6 +1393,24 @@ static const u8 *ConditionLabel(u8 kind)
     return labels[kind];
 }
 
+// Short volatile marks for the field rows (APP V9): c confused, s substitute,
+// ! charging or out of reach, r recharging.
+static void AppendVolatileMarks(u8 *text, u8 flags)
+{
+    static const u8 confused[] = _("{ENG}c");
+    static const u8 substitute[] = _("{ENG}s");
+    static const u8 charging[] = _("{ENG}!");
+    static const u8 recharging[] = _("{ENG}r");
+    if (flags & BVF_CONFUSED)
+        StringAppend(text, confused);
+    if (flags & BVF_SUBSTITUTE)
+        StringAppend(text, substitute);
+    if (flags & BVF_CHARGING)
+        StringAppend(text, charging);
+    if (flags & BVF_RECHARGING)
+        StringAppend(text, recharging);
+}
+
 static void DrawConditionSummary(u8 body, u8 pos)
 {
     static const u8 *const stats[] = {
@@ -1236,6 +1422,10 @@ static void DrawConditionSummary(u8 body, u8 pos)
     static const u8 minus[] = _("{ENG}-");
     u8 text[96];
     StringCopy(text, ConditionLabel(sBattle->status[0][pos]));
+    if (sBattle->volatiles[0][pos] & BVF_CONFUSED)
+        StringAppend(text, COMPOUND_STRING("{ENG} CNF"));
+    if (sBattle->volatiles[0][pos] & BVF_SUBSTITUTE)
+        StringAppend(text, COMPOUND_STRING("{ENG} SUB"));
     for (u32 i = 0; i < BSTAT_COUNT; i++)
     {
         s8 stage = sBattle->stages[0][pos][i];
@@ -1268,6 +1458,7 @@ static void DrawPositions(u8 body, u8 side, u8 row, u8 selected, u8 legal)
             AppendNumber(text, mon->hp);
             if (conditions)
                 StringAppend(text, ConditionLabel(sBattle->status[side][slot]));
+            AppendVolatileMarks(text, sBattle->volatiles[side][slot]);
         }
         else
             StringAppend(text, sText_Empty);
@@ -1521,7 +1712,8 @@ static const struct GcModeHandler sFrontierGcBattleMode =
 
 // Script special (waitstate): VAR_0x8004 = result policy (0 show, 1 apply
 // HP/PP), VAR_0x8005 = trainer id. VAR_0x8006 is the format (0 for
-// Single). Bits 8 through 12 select the lifecycle fixtures, bit 13 selects V7.
+// Single). Bits 8 through 12 select the lifecycle fixtures, bit 13 selects V7,
+// bit 14 the V8 move effect fixtures and bit 15 the V9 volatile fixtures.
 static EWRAM_DATA struct GcModeHandler sFrontierGcRosterMode = {0};
 
 void FrontierGcBattle_Start(void)
@@ -1531,7 +1723,9 @@ void FrontierGcBattle_Start(void)
     sPendingTrainer = gSpecialVar_0x8005;
     sPendingFormat = format >= BATTLE_FORMAT_DOUBLE && format <= BATTLE_FORMAT_ROTATION ? format : BATTLE_FORMAT_SINGLE;
     sPendingRoster = 0;
-    if (gSpecialVar_0x8006 & 0x4000)
+    if (gSpecialVar_0x8006 & 0x8000)
+        sPendingRoster = BATTLE_APP_VERSION_VOLATILES;
+    else if (gSpecialVar_0x8006 & 0x4000)
         sPendingRoster = BATTLE_APP_VERSION_EFFECTS;
     else if (gSpecialVar_0x8006 & 0x2000)
         sPendingRoster = BATTLE_APP_VERSION_CONDITIONS;
