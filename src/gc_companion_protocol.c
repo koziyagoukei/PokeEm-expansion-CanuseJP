@@ -81,6 +81,11 @@ u16 GcProtocol_GetRelease(void)
     return GcExtension_GetRelease();
 }
 
+bool8 GcProtocol_HasFinalResult(void)
+{
+    return sProto.resultFinal;
+}
+
 bool8 GcProtocol_IsVersionMismatch(void)
 {
     return sProto.versionMismatch;

@@ -60,6 +60,8 @@ u16 GcProtocol_GetRelease(void);
 bool8 GcProtocol_IsVersionMismatch(void);
 const struct GcProtocolStats *GcProtocol_GetStats(void);
 void GcProtocol_ResetSession(void);
+// TRUE once this mode start accepted its RESULT (kept across reconnects).
+bool8 GcProtocol_HasFinalResult(void);
 void GcProtocol_Free(void);
 
 #endif // GUARD_GC_COMPANION_PROTOCOL_H
