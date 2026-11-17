@@ -42,7 +42,8 @@ struct GcModeHandler
     // the screen must change; call GcExtension_RequestExit() to leave.
     void (*draw)(u8 bodyWindow, u8 helpWindow);
     void (*input)(void);
-    // A RESULT frame; called at most once per result id. Returns ResultStatus.
+    // A RESULT for this mode start; never called again after one is accepted
+    // (a resend is acknowledged as a duplicate). Returns ResultStatus.
     u16 (*onResult)(u16 resultVersion, const u8 *data, u16 length);
     // After the link is closed and the unchanged-state check has run. The only
     // place a mode may change persistent state. Return a message to show
