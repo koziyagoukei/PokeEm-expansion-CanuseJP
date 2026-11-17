@@ -177,6 +177,21 @@ static bool8 PushEffect(BattleMove *out, BattleEffect e)
     return TRUE;
 }
 
+// V10: when an additional effect of a hit runs, as the battle engine does it
+// (Cmd_setadditionaleffects / CanApplyAdditionalEffect): a self effect once
+// after the move (after the last target of a spread move), other effects
+// on every hit of a multi-strike move, otherwise once per target.
+static u8 EffectTiming(enum Move move, bool8 self, bool8 damaging)
+{
+    if (sBattle->roster < BATTLE_APP_VERSION_TIMING || !damaging)
+        return 0;
+    if (self)
+        return BEFL_TIMING(BETIME_AFTER_MOVE);
+    if (gMovesInfo[move].multiHit || GetMoveStrikeCount(move) > 1)
+        return BEFL_TIMING(BETIME_PER_HIT);
+    return BEFL_TIMING(BETIME_PER_TARGET);
+}
+
 static bool8 VolatilesEnabled(void)
 {
     return sBattle->roster >= BATTLE_APP_VERSION_VOLATILES;
@@ -227,7 +242,8 @@ static u8 ResolveAdditionalEffects(enum Move move, BattleMove *out, bool8 damagi
                 if (!amount)
                     continue;
                 if (amount > 6 || !PushEffect(out, (BattleEffect){.kind = BEFF_STAT, .who = who, .chance = chance,
-                                                                   .arg0 = stat, .arg1 = down ? -amount : amount}))
+                                                                   .arg0 = stat, .arg1 = down ? -amount : amount,
+                                                                   .flags = EffectTiming(move, who == BWHO_USER, damaging)}))
                     return UNSUP_OTHER;
                 any = TRUE;
             }
@@ -237,12 +253,14 @@ static u8 ResolveAdditionalEffects(enum Move move, BattleMove *out, bool8 damagi
         }
         case MOVE_EFFECT_FLINCH:
             if (!VolatilesEnabled() || !damaging || e->self
-             || !PushEffect(out, (BattleEffect){.kind = BEFF_FLINCH, .who = BWHO_TARGET, .chance = chance}))
+             || !PushEffect(out, (BattleEffect){.kind = BEFF_FLINCH, .who = BWHO_TARGET, .chance = chance,
+                                                .flags = EffectTiming(move, FALSE, damaging)}))
                 return UNSUP_SECONDARY;
             break;
         case MOVE_EFFECT_CONFUSION:
             if (!VolatilesEnabled() || e->self
-             || !PushEffect(out, (BattleEffect){.kind = BEFF_CONFUSE, .who = BWHO_TARGET, .chance = chance}))
+             || !PushEffect(out, (BattleEffect){.kind = BEFF_CONFUSE, .who = BWHO_TARGET, .chance = chance,
+                                                .flags = EffectTiming(move, FALSE, damaging)}))
                 return UNSUP_SECONDARY;
             break;
         case MOVE_EFFECT_RECHARGE:
@@ -261,7 +279,8 @@ static u8 ResolveAdditionalEffects(enum Move move, BattleMove *out, bool8 damagi
             status = ExportMoveStatus(e->moveEffect);
             if (status == BST_NONE)
                 return UNSUP_SECONDARY;
-            if (!PushEffect(out, (BattleEffect){.kind = BEFF_STATUS, .who = who, .chance = chance, .arg0 = status}))
+            if (!PushEffect(out, (BattleEffect){.kind = BEFF_STATUS, .who = who, .chance = chance, .arg0 = status,
+                                                .flags = EffectTiming(move, who == BWHO_USER, damaging)}))
                 return UNSUP_OTHER;
             break;
         }
@@ -679,6 +698,10 @@ static void SetVolatileFixture(struct Pokemon *mon, u32 side, u32 index)
             SetMonData(mon, MON_DATA_PP1 + m, &pp);
         }
     }
+    // V10: Clanging Scales (hits both foes, then the user's Defense -1 once).
+    if (sBattle->roster >= BATTLE_APP_VERSION_TIMING && !sBattle->endurance && side == 0 && index == 0
+     && sBattle->format == BATTLE_FORMAT_DOUBLE)
+        SetMonMoveSlot(mon, MOVE_CLANGING_SCALES, 3);
 }
 
 static bool8 BuildFixtureEntries(BattleRequest *request, const u8 **reason)
@@ -701,7 +724,7 @@ static bool8 BuildFixtureEntries(BattleRequest *request, const u8 **reason)
     // states have turns to play out.
     const u8 foeLevel = sBattle->trainerId == TRAINER_STEVEN ? 45
                       : sBattle->endurance ? 5
-                      : sBattle->roster == BATTLE_APP_VERSION_VOLATILES ? 23 : 13;
+                      : sBattle->roster >= BATTLE_APP_VERSION_VOLATILES ? 23 : 13;
     GcExtension_SetExtraMons(sBattle->opponent, 2 * sBattle->count);
     for (side = 0; side < 2; side++)
     {
@@ -742,7 +765,7 @@ static bool8 BuildFixtureEntries(BattleRequest *request, const u8 **reason)
                 SetConditionFixture(mon, side, i);
             else if (sBattle->roster == BATTLE_APP_VERSION_EFFECTS)
                 SetEffectFixture(mon, side, i);
-            else if (sBattle->roster == BATTLE_APP_VERSION_VOLATILES)
+            else if (sBattle->roster >= BATTLE_APP_VERSION_VOLATILES)
                 SetVolatileFixture(mon, side, i);
             const bool8 dry = sBattle->roster == BATTLE_APP_VERSION_STRUGGLE && side == 0 && i == 0;
             if (dry)
@@ -1735,8 +1758,8 @@ static const struct GcModeHandler sFrontierGcBattleMode =
 // Script special (waitstate): VAR_0x8004 = result policy (0 show, 1 apply
 // HP/PP), VAR_0x8005 = trainer id. VAR_0x8006 is the format (0 for
 // Single). Bits 8 through 12 select the lifecycle fixtures, bit 13 selects V7,
-// bit 14 the V8 move effect fixtures and bit 15 the V9 volatile fixtures
-// (with bit 8: level-5 foes for long endurance battles, debug menu only).
+// bit 14 the V8 move effect fixtures and bit 15 the volatile fixtures as V10
+// (with bit 9: as V9; with bit 8: level-5 foes for endurance, debug menu only).
 static EWRAM_DATA struct GcModeHandler sFrontierGcRosterMode = {0};
 
 void FrontierGcBattle_Start(void)
@@ -1749,7 +1772,8 @@ void FrontierGcBattle_Start(void)
     sPendingEndurance = FALSE;
     if (gSpecialVar_0x8006 & 0x8000)
     {
-        sPendingRoster = BATTLE_APP_VERSION_VOLATILES;
+        // V10 (effect timing); bit 9 keeps V9 for regression runs.
+        sPendingRoster = (gSpecialVar_0x8006 & 0x200) ? BATTLE_APP_VERSION_VOLATILES : BATTLE_APP_VERSION_TIMING;
         sPendingEndurance = (gSpecialVar_0x8006 & 0x100) != 0;
     }
     else if (gSpecialVar_0x8006 & 0x4000)

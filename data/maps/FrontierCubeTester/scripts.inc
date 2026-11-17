@@ -46,7 +46,7 @@ FrontierCubeTester_EventScript_PartyViewer::
 	waitstate
 	goto FrontierCubeTester_EventScript_Again
 
-@ The battles use the GC Battle volatile fixtures (request V9): both
+@ The battles use the GC Battle volatile fixtures (request V10): both
 @ parties are temporary test Pokemon and the result is display-only.
 FrontierCubeTester_EventScript_Single::
 	setvar VAR_0x8006, 0x8001

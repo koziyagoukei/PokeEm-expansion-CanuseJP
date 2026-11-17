@@ -501,6 +501,16 @@ Debug_EventScript_GcEffectsDouble::
 	releaseall
 	end
 
+@ Milestone 3.5 volatile fixtures as request V9 (the Cube Tester uses V10).
+Debug_EventScript_GcVolatilesV9::
+	lockall
+	setvar VAR_0x8004, 0
+	setvar VAR_0x8005, TRAINER_CALVIN_1
+	setvar VAR_0x8006, 0x8202
+	special FrontierGcBattle_Start
+	releaseall
+	end
+
 @ Milestone 3.5 endurance: V9 volatile fixtures in a Double against
 @ level-5 foes, so a battle can run for 20+ turns.
 Debug_EventScript_GcVolatileEndurance::
