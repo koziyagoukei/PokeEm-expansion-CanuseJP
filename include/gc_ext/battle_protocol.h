@@ -28,6 +28,7 @@ extern "C" {
 #define BATTLE_APP_VERSION_VOLATILES 9
 #define BATTLE_APP_VERSION_TIMING 10  // V9 + effect application units
 #define BATTLE_APP_VERSION_ABILITIES 11  // V10 + ability descriptors (same state/action layout)
+#define BATTLE_APP_VERSION_ABILITY_HOOKS 12  // V11 + multi-hook ability blocks (same state/action layout)
 #define BATTLE_MODE_VERSION 1
 
 enum BattleFormat { BATTLE_FORMAT_SINGLE = 1, BATTLE_FORMAT_DOUBLE = 2, BATTLE_FORMAT_TRIPLE = 3, BATTLE_FORMAT_ROTATION = 4 };
@@ -41,6 +42,11 @@ enum BattleResultPolicy { RESULT_POLICY_DISPLAY_ONLY = 0, RESULT_POLICY_APPLY_HP
 #define RULE_NO_GIMMICKS       (1u << 3)  // no Mega, Z-Move, Dynamax, Tera
 #define RULE_NO_CRITICAL_HITS  (1u << 4)
 #define RULE_SUPPORTED_MOVES_ONLY (1u << 5)  // unsupported moves cannot be selected
+// Request V12 rules.
+#define RULE_STRICT_ABILITIES  (1u << 6)  // refuse to start if any ability is UNSUPPORTED (results must be exact)
+#define RULE_FIXED_SEED        (1u << 7)  // the GC seeds its RNG with the battle id (reproducible test fixtures)
+#define RULE_V11_MASK 0x3fu
+#define RULE_V12_MASK 0xffu
 
 #define BATTLE_MAX_PER_SIDE 6
 #define BATTLE_MAX_TYPES 32
@@ -179,10 +185,19 @@ const char *battle_effect_kind_name(uint8_t kind);
 //   8 BattleMove[4]
 #define BATTLE_MON_VERSION 1
 #define BATTLE_MON_BYTES 40
-// Request V11: one ability descriptor per entry, resolved by the GBA from
-// its game data and configuration (docs/abilities.md). 8 bytes:
-//   0 u8 kind (BABIL_*)  1 u8 arg0  2 s8 arg1  3 u8 arg2  4 u8 chance (0 = certain)
+// Abilities (docs/abilities.md), resolved by the GBA from its game data and
+// configuration. The GC never interprets game ability ids.
+//
+// Request V11: one 8-byte descriptor per entry:
+//   0 u8 kind (BABIL_*)  1 u8 arg0  2 s8 arg1  3 u8 arg2  4 u8 chance (percent, 0 = certain)
 //   5 u8 percent         6 u16 source ability id (= the record's ability id)
+// Request V12: a variable-length block per entry, an ability being a list of hooks:
+//   0 u8 class (BACLASS_*)  1 u8 hook count (0 unless HOOKS, then 1..BATTLE_MAX_ABILITY_HOOKS)
+//   2 u16 source ability id, then count x 8-byte hooks:
+//   0 u8 kind (BABIL_ATTACK_MULT..)  1 u8 arg0  2 s8 arg1  3 u8 arg2
+//   4 u8 chance numerator  5 u8 chance denominator (both 0 = certain)  6 u8 percent  7 u8 flags (BAHF_*)
+// Both decode into BattleAbility; a V11 descriptor becomes one hook with chance/100.
+enum BattleAbilityClass { BACLASS_NONE = 0, BACLASS_UNSUPPORTED = 1, BACLASS_HOOKS = 2 };
 enum BattleAbilityKind {
     BABIL_NONE = 0,             // no battle effect in this model
     BABIL_UNSUPPORTED = 1,      // has a battle effect the core does not run: shown, inert
@@ -206,21 +221,48 @@ enum BattleAbilityKind {
     BABIL_SHIELD_DUST = 19,     // secondary effects of others' moves do not affect the holder
     BABIL_SECONDARY_CHANCE = 20,// secondary effect chances of the holder's moves x percent
     BABIL_INFILTRATOR = 21,     // the holder's moves pass substitutes
+    // Request V12 hook kinds.
+    BABIL_DEFENSE_MULT = 22,    // arg0 = category; the holder's defending stat x percent (BAHF_REQUIRES_STATUS)
+    BABIL_IGNORE_BURN = 23,     // burn does not halve the holder's physical damage
+    BABIL_STAB_MULT = 24,       // same-type bonus = percent (instead of 150)
+    BABIL_KO_STAT = 25,         // arg0 = stat, arg1 = delta per Pokemon the holder's move knocked out
+    BABIL_END_TURN_CURE = 26,   // arg0 = mask of 1 << BST_*; chance at the end of a turn, before residuals
+    BABIL_ABSORB_STATE = 27,    // arg0 = type: moves of it are absorbed and set the holder's ability state
+    BABIL_TYPE_PASS = 28,       // arg0 = attacking type, arg2 = defending type: that immunity becomes neutral
+    BABIL_STATUS_MIRROR = 29,   // arg0 = mask of 1 << BST_*: a status another battler gives the holder goes back
     BABIL_COUNT
 };
+#define BABIL_V11_LAST BABIL_INFILTRATOR
 #define BABIL_NO_TYPE 0xffu
 #define BABIL_VOL_FLINCH (1u << 0)
 #define BABIL_VOL_CONFUSION (1u << 1)
 #define BABIL_VOL_INTIMIDATE (1u << 2)
 #define BABIL_IGNORE_EVASION (1u << 0)
-#define BATTLE_ABILITY_BYTES 8
+// ENTRY_STAT arg2: which foes (V11 always 0).
+enum BattleAbilityRange { BRANGE_ALL_FOES = 0, BRANGE_ADJACENT_FOES = 1 };
+// Hook flags (V12).
+#define BAHF_REQUIRES_STATUS (1u << 0)  // only while the holder has a major status
+#define BAHF_REQUIRES_STATE  (1u << 1)  // only while the holder's ability state is set (ABSORB_STATE)
+#define BAHF_TYPE_FILTER     (1u << 2)  // ATTACK_MULT: only moves of type arg2
+#define BAHF_NOT_FROZEN      (1u << 3)  // ABSORB_STATE: not while the holder is frozen
+#define BAHF_TOXIC_TO_POISON (1u << 4)  // STATUS_MIRROR: bad poison goes back as poison
+#define BAHF_BREAKABLE       (1u << 7)  // the game marks the ability breakable (Mold Breaker); carried, no effect yet
+#define BATTLE_ABILITY_BYTES 8          // V11 descriptor
+#define BATTLE_ABILITY_HEADER_BYTES 4   // V12 block header
+#define BATTLE_ABILITY_HOOK_BYTES 8     // V12 hook
+#define BATTLE_MAX_ABILITY_HOOKS 4
 typedef struct {
     uint8_t kind, arg0;
     int8_t arg1;
-    uint8_t arg2, chance, percent;
-    uint16_t source;
+    uint8_t arg2, chance, chance_den, percent, flags;
+} BattleAbilityHook;
+typedef struct {
+    uint8_t cls, count;  // BACLASS_*; hooks used
+    uint16_t source;     // the game's ability id (diagnostic and names only)
+    BattleAbilityHook hooks[BATTLE_MAX_ABILITY_HOOKS];
 } BattleAbility;
-bool battle_ability_valid(const BattleAbility *ability, unsigned type_count);
+bool battle_ability_hook_valid(const BattleAbilityHook *hook, unsigned type_count, uint8_t version);
+bool battle_ability_valid(const BattleAbility *ability, unsigned type_count, uint8_t version);
 const char *battle_ability_kind_name(uint8_t kind);
 
 typedef struct {
@@ -257,7 +299,8 @@ typedef struct {
 #define BATTLE_REQUEST_VERSION_VOLATILES 9
 #define BATTLE_REQUEST_VERSION_TIMING 10  // effect descriptors may carry BEFL_TIMING
 #define BATTLE_REQUEST_VERSION_ABILITIES 11  // ability block after the effect lists; BMF_CONTACT
-#define BATTLE_REQUEST_VERSION_LATEST BATTLE_REQUEST_VERSION_ABILITIES
+#define BATTLE_REQUEST_VERSION_ABILITY_HOOKS 12  // multi-hook ability blocks; strict / fixed-seed rules
+#define BATTLE_REQUEST_VERSION_LATEST BATTLE_REQUEST_VERSION_ABILITY_HOOKS
 #define BATTLE_REQUEST_HEADER 24
 enum StruggleRecoil { BSTRUGGLE_MAX_HP_FLOOR = 1, BSTRUGGLE_MAX_HP_NEAREST = 2 };
 #define BATTLE_MOVE_STRUGGLE 0xffffu  // logical presentation identifier
