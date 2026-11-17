@@ -27,6 +27,7 @@ extern "C" {
 #define BATTLE_APP_VERSION_EFFECTS 8
 #define BATTLE_APP_VERSION_VOLATILES 9
 #define BATTLE_APP_VERSION_TIMING 10  // V9 + effect application units
+#define BATTLE_APP_VERSION_ABILITIES 11  // V10 + ability descriptors (same state/action layout)
 #define BATTLE_MODE_VERSION 1
 
 enum BattleFormat { BATTLE_FORMAT_SINGLE = 1, BATTLE_FORMAT_DOUBLE = 2, BATTLE_FORMAT_TRIPLE = 3, BATTLE_FORMAT_ROTATION = 4 };
@@ -147,8 +148,11 @@ enum BattleEffectTiming {
 #define BMF_DOUBLE_AIRBORNE     (1u << 3)  // and deals double damage to it
 #define BMF_HITS_UNDERGROUND    (1u << 4)  // can hit a target underground (Dig)
 #define BMF_DOUBLE_UNDERGROUND  (1u << 5)  // and deals double damage to it
+// V11 move flag.
+#define BMF_CONTACT             (1u << 6)  // makes contact (the game's move data); Struggle counts
 #define BMF_V8_MASK BMF_IGNORES_PROTECT
 #define BMF_V9_MASK 0x3fu
+#define BMF_V11_MASK 0x7fu
 typedef struct {
     uint8_t kind, who, chance, arg0;
     int8_t arg1;
@@ -175,12 +179,57 @@ const char *battle_effect_kind_name(uint8_t kind);
 //   8 BattleMove[4]
 #define BATTLE_MON_VERSION 1
 #define BATTLE_MON_BYTES 40
+// Request V11: one ability descriptor per entry, resolved by the GBA from
+// its game data and configuration (docs/abilities.md). 8 bytes:
+//   0 u8 kind (BABIL_*)  1 u8 arg0  2 s8 arg1  3 u8 arg2  4 u8 chance (0 = certain)
+//   5 u8 percent         6 u16 source ability id (= the record's ability id)
+enum BattleAbilityKind {
+    BABIL_NONE = 0,             // no battle effect in this model
+    BABIL_UNSUPPORTED = 1,      // has a battle effect the core does not run: shown, inert
+    BABIL_ATTACK_MULT = 2,      // arg0 = category (BCAT_PHYSICAL/SPECIAL); attacking stat x percent
+    BABIL_PINCH = 3,            // arg0 = type, arg2 = HP divisor; attacking stat x percent at HP <= max/arg2
+    BABIL_LOW_POWER = 4,        // arg0 = max base power; power x percent
+    BABIL_RESIST = 5,           // arg0 = type, arg2 = second type or BABIL_NO_TYPE; attacker's stat x percent
+    BABIL_TYPE_IMMUNE = 6,      // arg0 = type: damaging and type-chart status moves of it have no effect
+    BABIL_TYPE_ABSORB = 7,      // arg0 = type: moves of it heal percent of max HP instead
+    BABIL_STATUS_IMMUNE = 8,    // arg0 = mask of 1 << BST_*
+    BABIL_VOLATILE_IMMUNE = 9,  // arg0 = mask of BABIL_VOL_*
+    BABIL_STAT_DROP_IMMUNE = 10,// arg0 = mask of 1 << BSTAT_*; arg2 bit 0: ignores target evasion
+    BABIL_ACCURACY = 11,        // accuracy x percent
+    BABIL_NO_GUARD = 12,        // moves by and against the holder always hit
+    BABIL_CONTACT_STATUS = 13,  // arg0 = status, chance: on a contact hit, the attacker
+    BABIL_CONTACT_DAMAGE = 14,  // arg2 = divisor of the attacker's max HP, on a contact hit
+    BABIL_ENTRY_STAT = 15,      // arg0 = stat, arg1 = delta: every foe on the field, on entry
+    BABIL_END_TURN_STAT = 16,   // arg0 = stat, arg1 = delta: the holder, at the end of a turn
+    BABIL_STURDY = 17,          // survives a knock-out hit from full HP with 1 HP
+    BABIL_NO_RECOIL = 18,       // no recoil from the holder's moves (not Struggle)
+    BABIL_SHIELD_DUST = 19,     // secondary effects of others' moves do not affect the holder
+    BABIL_SECONDARY_CHANCE = 20,// secondary effect chances of the holder's moves x percent
+    BABIL_INFILTRATOR = 21,     // the holder's moves pass substitutes
+    BABIL_COUNT
+};
+#define BABIL_NO_TYPE 0xffu
+#define BABIL_VOL_FLINCH (1u << 0)
+#define BABIL_VOL_CONFUSION (1u << 1)
+#define BABIL_VOL_INTIMIDATE (1u << 2)
+#define BABIL_IGNORE_EVASION (1u << 0)
+#define BATTLE_ABILITY_BYTES 8
+typedef struct {
+    uint8_t kind, arg0;
+    int8_t arg1;
+    uint8_t arg2, chance, percent;
+    uint16_t source;
+} BattleAbility;
+bool battle_ability_valid(const BattleAbility *ability, unsigned type_count);
+const char *battle_ability_kind_name(uint8_t kind);
+
 typedef struct {
     uint8_t type_count, types[2];
     // Source compatibility for legacy producers; not encoded or used by GC.
     int8_t front_y, back_y;
     uint8_t elevation;
     BattleMove moves[4];
+    BattleAbility ability;  // V11 suffix block (not in the 40-byte record)
 } BattleMon;
 
 typedef struct {
@@ -207,6 +256,8 @@ typedef struct {
 #define BATTLE_REQUEST_VERSION_EFFECTS 8
 #define BATTLE_REQUEST_VERSION_VOLATILES 9
 #define BATTLE_REQUEST_VERSION_TIMING 10  // effect descriptors may carry BEFL_TIMING
+#define BATTLE_REQUEST_VERSION_ABILITIES 11  // ability block after the effect lists; BMF_CONTACT
+#define BATTLE_REQUEST_VERSION_LATEST BATTLE_REQUEST_VERSION_ABILITIES
 #define BATTLE_REQUEST_HEADER 24
 enum StruggleRecoil { BSTRUGGLE_MAX_HP_FLOOR = 1, BSTRUGGLE_MAX_HP_NEAREST = 2 };
 #define BATTLE_MOVE_STRUGGLE 0xffffu  // logical presentation identifier

@@ -79,7 +79,7 @@ static bool effect_timing_valid(const BattleEffect *e, bool damaging) {
 }
 
 bool battle_move_effects_valid(const BattleMove *m) {
-    if (m->effect_count > BATTLE_MAX_EFFECTS || (m->move_flags & ~BMF_V9_MASK)) return false;
+    if (m->effect_count > BATTLE_MAX_EFFECTS || (m->move_flags & ~BMF_V11_MASK)) return false;
     const bool damaging = m->category != BCAT_STATUS;
     if (damaging != (m->power != 0) || damaging != has_effect(m, BEFF_DAMAGE)) return false;
     // A charging move is CHARGE, then DAMAGE, then its other effects.
@@ -156,6 +156,81 @@ bool battle_move_effects_valid(const BattleMove *m) {
     return m->effect_count != 0;
 }
 
+const char *battle_ability_kind_name(uint8_t kind) {
+    static const char *const names[] = {"none", "unsupported", "attack_mult", "pinch", "low_power", "resist",
+                                        "type_immune", "type_absorb", "status_immune", "volatile_immune",
+                                        "stat_drop_immune", "accuracy", "no_guard", "contact_status",
+                                        "contact_damage", "entry_stat", "end_turn_stat", "sturdy", "no_recoil",
+                                        "shield_dust", "secondary_chance", "infiltrator"};
+    return kind < BABIL_COUNT ? names[kind] : "invalid";
+}
+
+// Arguments a kind does not use must be zero, so a descriptor has one meaning.
+bool battle_ability_valid(const BattleAbility *a, unsigned types) {
+    const bool type_ok = a->arg0 < types;
+    const uint8_t statuses = 0xfeu;  // 1 << BST_POISON .. 1 << BST_FROSTBITE
+    bool ok, chance = false, percent = false;
+    switch (a->kind) {
+    case BABIL_NONE: case BABIL_UNSUPPORTED: case BABIL_NO_GUARD: case BABIL_STURDY:
+    case BABIL_NO_RECOIL: case BABIL_SHIELD_DUST: case BABIL_INFILTRATOR:
+        ok = !a->arg0 && !a->arg1 && !a->arg2;
+        break;
+    case BABIL_ATTACK_MULT:
+        ok = (a->arg0 == BCAT_PHYSICAL || a->arg0 == BCAT_SPECIAL) && !a->arg1 && !a->arg2;
+        percent = true;
+        break;
+    case BABIL_PINCH:
+        ok = type_ok && !a->arg1 && a->arg2 >= 2 && a->arg2 <= 8;
+        percent = true;
+        break;
+    case BABIL_LOW_POWER:
+        ok = a->arg0 && !a->arg1 && !a->arg2;
+        percent = true;
+        break;
+    case BABIL_RESIST:
+        ok = type_ok && !a->arg1 && (a->arg2 == BABIL_NO_TYPE || (a->arg2 < types && a->arg2 != a->arg0));
+        percent = true;
+        break;
+    case BABIL_TYPE_IMMUNE:
+        ok = type_ok && !a->arg1 && !a->arg2;
+        break;
+    case BABIL_TYPE_ABSORB:
+        ok = type_ok && !a->arg1 && !a->arg2 && a->percent <= 100;
+        percent = true;
+        break;
+    case BABIL_STATUS_IMMUNE:
+        ok = a->arg0 && !(a->arg0 & ~statuses) && !a->arg1 && !a->arg2;
+        break;
+    case BABIL_VOLATILE_IMMUNE:
+        ok = a->arg0 && !(a->arg0 & ~0x7u) && !a->arg1 && !a->arg2;
+        break;
+    case BABIL_STAT_DROP_IMMUNE:
+        ok = !(a->arg0 & ~0x7fu) && (a->arg0 || a->arg2) && !a->arg1 && !(a->arg2 & ~BABIL_IGNORE_EVASION);
+        break;
+    case BABIL_ACCURACY:
+    case BABIL_SECONDARY_CHANCE:
+        ok = !a->arg0 && !a->arg1 && !a->arg2;
+        percent = true;
+        break;
+    case BABIL_CONTACT_STATUS:
+        ok = a->arg0 >= BST_POISON && a->arg0 <= BST_FROSTBITE && a->arg0 != BST_TOXIC && !a->arg1 && !a->arg2;
+        chance = true;
+        break;
+    case BABIL_CONTACT_DAMAGE:
+        ok = !a->arg0 && !a->arg1 && a->arg2 >= 2 && a->arg2 <= 16;
+        break;
+    case BABIL_ENTRY_STAT:
+    case BABIL_END_TURN_STAT:
+        ok = a->arg0 < BSTAT_COUNT && a->arg1 && a->arg1 >= -6 && a->arg1 <= 6 && !a->arg2;
+        break;
+    default:
+        return false;
+    }
+    if (chance ? (a->chance < 1 || a->chance > 100) : a->chance != 0) return false;
+    if (percent ? !a->percent : a->percent != 0) return false;
+    return ok;
+}
+
 static unsigned move_effects_size(const BattleMove *m) {
     return BATTLE_MOVE_EFFECTS_HEADER + (unsigned)m->effect_count * BATTLE_EFFECT_BYTES;
 }
@@ -213,6 +288,25 @@ static void volatile_rules_encode(const BattleVolatileRules *r, uint8_t *p) {
 static bool volatile_rules_decode(const uint8_t *p, BattleVolatileRules *r) {
     *r = (BattleVolatileRules){p[0], p[1], p[2], p[3], p[4], p[5]};
     return !p[6] && !p[7] && battle_volatile_rules_valid(r);
+}
+
+static void ability_encode(const BattleAbility *a, uint8_t *p) {
+    p[0] = a->kind;
+    p[1] = a->arg0;
+    p[2] = (uint8_t)a->arg1;
+    p[3] = a->arg2;
+    p[4] = a->chance;
+    p[5] = a->percent;
+    msg_put16(p + 6, a->source);
+}
+
+static void ability_decode(const uint8_t *p, BattleAbility *a) {
+    *a = (BattleAbility){p[0], p[1], (int8_t)p[2], p[3], p[4], p[5], msg_get16(p + 6)};
+}
+
+static uint32_t abilities_size(const BattleRequest *r) {
+    return r->version >= BATTLE_REQUEST_VERSION_ABILITIES ?
+           (uint32_t)(r->player_count + r->opponent_count) * BATTLE_ABILITY_BYTES : 0;
 }
 
 bool battle_condition_rules_valid(const BattleConditionRules *r, unsigned types) {
@@ -295,14 +389,14 @@ static uint32_t fixed_size(const BattleRequest *r) {
 }
 
 uint32_t battle_request_size(const BattleRequest *r) {
-    return fixed_size(r) + effects_size(r) +
+    return fixed_size(r) + effects_size(r) + abilities_size(r) +
            (r->version >= BATTLE_REQUEST_VERSION_VOLATILES ? BATTLE_VOLATILE_RULE_BYTES : 0);
 }
 
 uint32_t battle_request_encode(const BattleRequest *r, uint8_t *p, uint32_t capacity) {
     const uint32_t size = battle_request_size(r);
     const uint8_t version = r->version ? r->version : BATTLE_REQUEST_VERSION;
-    if ((version < BATTLE_REQUEST_VERSION || version > BATTLE_REQUEST_VERSION_TIMING) ||
+    if ((version < BATTLE_REQUEST_VERSION || version > BATTLE_REQUEST_VERSION_LATEST) ||
         size > capacity || r->player_count > BATTLE_MAX_PER_SIDE || r->opponent_count > BATTLE_MAX_PER_SIDE ||
         r->type_count > BATTLE_MAX_TYPES)
         return 0;
@@ -354,13 +448,19 @@ uint32_t battle_request_encode(const BattleRequest *r, uint8_t *p, uint32_t capa
                     q += move_effects_size(move);
                 }
         }
+    if (version >= BATTLE_REQUEST_VERSION_ABILITIES)
+        for (unsigned side = 0; side < 2; ++side) {
+            const BattleEntry *e = side ? r->opponent : r->player;
+            const unsigned count = side ? r->opponent_count : r->player_count;
+            for (unsigned i = 0; i < count; ++i, q += BATTLE_ABILITY_BYTES) ability_encode(&e[i].mon.ability, q);
+        }
     if (version >= BATTLE_REQUEST_VERSION_VOLATILES) volatile_rules_encode(&r->volatiles, q);
     return size;
 }
 
 bool battle_request_decode(const uint8_t *p, uint32_t length, BattleRequest *r) {
     if (length < BATTLE_REQUEST_HEADER ||
-        (p[0] < BATTLE_REQUEST_VERSION || p[0] > BATTLE_REQUEST_VERSION_TIMING) ||
+        (p[0] < BATTLE_REQUEST_VERSION || p[0] > BATTLE_REQUEST_VERSION_LATEST) ||
         msg_get16(p+14) != BATTLE_ENTRY_BYTES)
         return false;
     r->version = p[0];
@@ -391,6 +491,10 @@ bool battle_request_decode(const uint8_t *p, uint32_t length, BattleRequest *r) 
     const uint8_t *q = p + BATTLE_REQUEST_HEADER;
     for (unsigned side = 0; side < 2; ++side) {
         BattleEntry *e = side ? r->opponent : r->player;
+        for (unsigned i = 0; i < BATTLE_MAX_PER_SIDE; ++i) e[i].mon.ability = (BattleAbility){0};
+    }
+    for (unsigned side = 0; side < 2; ++side) {
+        BattleEntry *e = side ? r->opponent : r->player;
         const unsigned count = side ? r->opponent_count : r->player_count;
         for (unsigned i = 0; i < count; ++i, q += BATTLE_ENTRY_BYTES)
             if (!pkmn_record_decode(q, PKMN_RECORD_BYTES, &e[i].record) ||
@@ -413,6 +517,23 @@ bool battle_request_decode(const uint8_t *p, uint32_t length, BattleRequest *r) 
         end -= BATTLE_VOLATILE_RULE_BYTES;
         if (!volatile_rules_decode(end, &r->volatiles)) return false;
     }
+    // V11: the ability block sits between the effect lists and the volatile rules.
+    if (r->version >= BATTLE_REQUEST_VERSION_ABILITIES) {
+        const uint32_t size = abilities_size(r);
+        if ((uint32_t)(end - q) < size) return false;
+        end -= size;
+        const uint8_t *a = end;
+        for (unsigned side = 0; side < 2; ++side) {
+            BattleEntry *e = side ? r->opponent : r->player;
+            const unsigned count = side ? r->opponent_count : r->player_count;
+            for (unsigned i = 0; i < count; ++i, a += BATTLE_ABILITY_BYTES) {
+                ability_decode(a, &e[i].mon.ability);
+                if (!battle_ability_valid(&e[i].mon.ability, r->type_count) ||
+                    e[i].mon.ability.source != e[i].record.ability)
+                    return false;
+            }
+        }
+    }
     for (unsigned side = 0; side < 2; ++side) {
         BattleEntry *e = side ? r->opponent : r->player;
         const unsigned count = side ? r->opponent_count : r->player_count;
@@ -428,6 +549,7 @@ bool battle_request_decode(const uint8_t *p, uint32_t length, BattleRequest *r) 
                 // Fields of a later version are a malformed request, not an unsupported
                 // move (audit P-03): V9 kinds and move flags, V10 timing.
                 if (r->version < BATTLE_REQUEST_VERSION_VOLATILES && (move->move_flags & ~BMF_V8_MASK)) return false;
+                if (r->version < BATTLE_REQUEST_VERSION_ABILITIES && (move->move_flags & ~BMF_V9_MASK)) return false;
                 for (unsigned k = 0; k < move->effect_count; ++k) {
                     if (r->version < BATTLE_REQUEST_VERSION_TIMING && (move->effects[k].flags & BEFL_TIMING_MASK))
                         return false;
