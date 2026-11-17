@@ -422,6 +422,7 @@ extern const u8 Debug_EventScript_GcBattleStruggle[];
 extern const u8 Debug_EventScript_GcBattleDrag[];
 extern const u8 Debug_EventScript_GcBattlePivot[];
 extern const u8 Debug_EventScript_GcVolatileEndurance[];
+extern const u8 Debug_EventScript_GcAbilityEndurance[];
 extern const u8 Debug_EventScript_GcEffectsDouble[];
 extern const u8 Debug_EventScript_GcVolatilesV9[];
 extern const u8 Debug_EventScript_GcConditionsSingle[];
@@ -659,6 +660,7 @@ static const struct DebugMenuOption sDebugMenu_Actions_Utilities[] =
     { COMPOUND_STRING("{ENG}GC Double V8 (effects)"), DebugAction_ExecuteScript, Debug_EventScript_GcEffectsDouble },
     { COMPOUND_STRING("{ENG}GC Double V9 (volatiles)"), DebugAction_ExecuteScript, Debug_EventScript_GcVolatilesV9 },
     { COMPOUND_STRING("{ENG}GC Double V10 (endurance)"), DebugAction_ExecuteScript, Debug_EventScript_GcVolatileEndurance },
+    { COMPOUND_STRING("{ENG}GC Double V11 (abilities)"), DebugAction_ExecuteScript, Debug_EventScript_GcAbilityEndurance },
     { COMPOUND_STRING("{ENG}GC Link Check"), DebugAction_ExecuteScript, Debug_EventScript_GcLinkCheck },
     { NULL }
 };

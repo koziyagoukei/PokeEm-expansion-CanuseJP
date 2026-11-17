@@ -511,9 +511,19 @@ Debug_EventScript_GcVolatilesV9::
 	releaseall
 	end
 
-@ Milestone 3.5 endurance: V9 volatile fixtures in a Double against
-@ level-5 foes, so a battle can run for 20+ turns.
+@ Milestone 3.5 endurance: V10 volatile fixtures in a Double against
+@ level-5 foes, so a battle can run for 20+ turns (bit 10 keeps V10).
 Debug_EventScript_GcVolatileEndurance::
+	lockall
+	setvar VAR_0x8004, 0
+	setvar VAR_0x8005, TRAINER_CALVIN_1
+	setvar VAR_0x8006, 0x8502
+	special FrontierGcBattle_Start
+	releaseall
+	end
+
+@ Milestone 4-A endurance: the V11 ability fixtures against level-5 foes.
+Debug_EventScript_GcAbilityEndurance::
 	lockall
 	setvar VAR_0x8004, 0
 	setvar VAR_0x8005, TRAINER_CALVIN_1

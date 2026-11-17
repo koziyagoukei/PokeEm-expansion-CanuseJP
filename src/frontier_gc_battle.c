@@ -311,6 +311,9 @@ static u8 ResolveEffects(enum Move move, BattleMove *out)
         if (MoveDamagesUnderground(move))
             out->move_flags |= BMF_DOUBLE_UNDERGROUND;
     }
+    // V11: contact, for the GC's contact abilities (Static, Rough Skin ...).
+    if (sBattle->roster >= BATTLE_APP_VERSION_ABILITIES && MoveMakesContact(move))
+        out->move_flags |= BMF_CONTACT;
     if (damaging)
     {
         BattleEffect damage = {.kind = BEFF_DAMAGE, .arg0 = 1, .arg2 = 1};
@@ -516,6 +519,137 @@ static void ResolveMove(enum Move move, BattleMove *out)
         out->unsupported |= UNSUP_OTHER;
 }
 
+// Request V11: the Pokemon's ability as a generic descriptor, read from
+// this build's ability code and configs (gba-gc-extension docs/abilities.md).
+// Any ability with a battle effect the GC core does not run is sent as
+// UNSUPPORTED (the GC shows it as not simulated), never as NONE.
+static BattleAbility ResolveAbility(enum Ability ability)
+{
+    BattleAbility a = {.kind = BABIL_UNSUPPORTED, .source = ability};
+    // Contact statuses: 30% from Gen 4; the older 1/3 is not a percentage.
+    const u8 contactChance = GetConfig(B_ABILITY_TRIGGER_CHANCE) >= GEN_4 ? 30 : 0;
+    const u8 intimidate = GetConfig(B_UPDATED_INTIMIDATE) >= GEN_8 ? BABIL_VOL_INTIMIDATE : 0;
+
+    switch (ability)
+    {
+    // No battle effect in a GC trainer battle (escape, after-battle, items not simulated).
+    case ABILITY_NONE:
+    case ABILITY_RUN_AWAY:
+    case ABILITY_PICKUP:
+    case ABILITY_HONEY_GATHER:
+    case ABILITY_BALL_FETCH:
+        a.kind = BABIL_NONE;
+        break;
+    case ABILITY_HUGE_POWER:
+    case ABILITY_PURE_POWER:
+        a = (BattleAbility){BABIL_ATTACK_MULT, BCAT_PHYSICAL, 0, 0, 0, 200, ability};
+        break;
+    case ABILITY_BLAZE:    a = (BattleAbility){BABIL_PINCH, TYPE_FIRE, 0, 3, 0, 150, ability}; break;
+    case ABILITY_TORRENT:  a = (BattleAbility){BABIL_PINCH, TYPE_WATER, 0, 3, 0, 150, ability}; break;
+    case ABILITY_OVERGROW: a = (BattleAbility){BABIL_PINCH, TYPE_GRASS, 0, 3, 0, 150, ability}; break;
+    case ABILITY_SWARM:    a = (BattleAbility){BABIL_PINCH, TYPE_BUG, 0, 3, 0, 150, ability}; break;
+    case ABILITY_TECHNICIAN:
+        a = (BattleAbility){BABIL_LOW_POWER, 60, 0, 0, 0, 150, ability};
+        break;
+    case ABILITY_THICK_FAT:
+        a = (BattleAbility){BABIL_RESIST, TYPE_FIRE, 0, TYPE_ICE, 0, 50, ability};
+        break;
+    case ABILITY_LEVITATE:
+        a = (BattleAbility){BABIL_TYPE_IMMUNE, TYPE_GROUND, 0, 0, 0, 0, ability};
+        break;
+    case ABILITY_VOLT_ABSORB:
+        a = (BattleAbility){BABIL_TYPE_ABSORB, TYPE_ELECTRIC, 0, 0, 0, 25, ability};
+        break;
+    case ABILITY_WATER_ABSORB:
+        a = (BattleAbility){BABIL_TYPE_ABSORB, TYPE_WATER, 0, 0, 0, 25, ability};
+        break;
+    case ABILITY_LIMBER:
+        a = (BattleAbility){BABIL_STATUS_IMMUNE, 1u << BST_PARALYSIS, 0, 0, 0, 0, ability};
+        break;
+    case ABILITY_INSOMNIA:
+    case ABILITY_VITAL_SPIRIT:
+        a = (BattleAbility){BABIL_STATUS_IMMUNE, 1u << BST_SLEEP, 0, 0, 0, 0, ability};
+        break;
+    case ABILITY_WATER_VEIL:
+        a = (BattleAbility){BABIL_STATUS_IMMUNE, 1u << BST_BURN, 0, 0, 0, 0, ability};
+        break;
+    case ABILITY_IMMUNITY:
+        a = (BattleAbility){BABIL_STATUS_IMMUNE, (1u << BST_POISON) | (1u << BST_TOXIC), 0, 0, 0, 0, ability};
+        break;
+    case ABILITY_INNER_FOCUS:
+        a = (BattleAbility){BABIL_VOLATILE_IMMUNE, BABIL_VOL_FLINCH | intimidate, 0, 0, 0, 0, ability};
+        break;
+    case ABILITY_OWN_TEMPO:
+        a = (BattleAbility){BABIL_VOLATILE_IMMUNE, BABIL_VOL_CONFUSION | intimidate, 0, 0, 0, 0, ability};
+        break;
+    case ABILITY_CLEAR_BODY:
+    case ABILITY_WHITE_SMOKE:
+    case ABILITY_FULL_METAL_BODY:
+        a = (BattleAbility){BABIL_STAT_DROP_IMMUNE, 0x7f, 0, 0, 0, 0, ability};
+        break;
+    case ABILITY_HYPER_CUTTER:
+        a = (BattleAbility){BABIL_STAT_DROP_IMMUNE, 1u << BSTAT_ATK, 0, 0, 0, 0, ability};
+        break;
+    case ABILITY_BIG_PECKS:
+        a = (BattleAbility){BABIL_STAT_DROP_IMMUNE, 1u << BSTAT_DEF, 0, 0, 0, 0, ability};
+        break;
+    case ABILITY_ILLUMINATE:
+        if (B_ILLUMINATE_EFFECT < GEN_9)
+        {
+            a.kind = BABIL_NONE;  // wild encounter rate only
+            break;
+        }
+        // fallthrough
+    case ABILITY_KEEN_EYE:
+        a = (BattleAbility){BABIL_STAT_DROP_IMMUNE, 1u << BSTAT_ACC, 0, BABIL_IGNORE_EVASION, 0, 0, ability};
+        break;
+    case ABILITY_COMPOUND_EYES:
+        a = (BattleAbility){BABIL_ACCURACY, 0, 0, 0, 0, 130, ability};
+        break;
+    case ABILITY_NO_GUARD:
+        a = (BattleAbility){BABIL_NO_GUARD, 0, 0, 0, 0, 0, ability};
+        break;
+    case ABILITY_STATIC:
+    case ABILITY_FLAME_BODY:
+    case ABILITY_POISON_POINT:
+        if (contactChance)
+            a = (BattleAbility){BABIL_CONTACT_STATUS,
+                                ability == ABILITY_STATIC ? BST_PARALYSIS : ability == ABILITY_FLAME_BODY ? BST_BURN : BST_POISON,
+                                0, 0, contactChance, 0, ability};
+        break;
+    case ABILITY_ROUGH_SKIN:
+    case ABILITY_IRON_BARBS:
+        a = (BattleAbility){BABIL_CONTACT_DAMAGE, 0, 0, B_ROUGH_SKIN_DMG >= GEN_4 ? 8 : 16, 0, 0, ability};
+        break;
+    case ABILITY_INTIMIDATE:
+        a = (BattleAbility){BABIL_ENTRY_STAT, BSTAT_ATK, -1, 0, 0, 0, ability};
+        break;
+    case ABILITY_SPEED_BOOST:
+        a = (BattleAbility){BABIL_END_TURN_STAT, BSTAT_SPE, 1, 0, 0, 0, ability};
+        break;
+    case ABILITY_STURDY:
+        if (GetConfig(B_STURDY) >= GEN_5)  // the older one only stops OHKO moves, which are refused
+            a = (BattleAbility){BABIL_STURDY, 0, 0, 0, 0, 0, ability};
+        break;
+    case ABILITY_ROCK_HEAD:
+        a = (BattleAbility){BABIL_NO_RECOIL, 0, 0, 0, 0, 0, ability};
+        break;
+    case ABILITY_SHIELD_DUST:
+        a = (BattleAbility){BABIL_SHIELD_DUST, 0, 0, 0, 0, 0, ability};
+        break;
+    case ABILITY_SERENE_GRACE:
+        a = (BattleAbility){BABIL_SECONDARY_CHANCE, 0, 0, 0, 0, 200, ability};
+        break;
+    case ABILITY_INFILTRATOR:
+        if (GetConfig(B_INFILTRATOR_SUBSTITUTE) >= GEN_6)
+            a = (BattleAbility){BABIL_INFILTRATOR, 0, 0, 0, 0, 0, ability};
+        break;
+    default:
+        break;
+    }
+    return a;
+}
+
 static u8 FillEntry(u32 slot, BattleEntry *entry)
 {
     struct Pokemon *mon = GcExtension_GetExportMon(slot);
@@ -530,6 +664,8 @@ static u8 FillEntry(u32 slot, BattleEntry *entry)
     entry->mon.types[0] = gSpeciesInfo[species].types[0];
     entry->mon.types[1] = gSpeciesInfo[species].types[1];
     entry->mon.type_count = entry->mon.types[0] == entry->mon.types[1] ? 1 : 2;
+    if (sBattle->roster >= BATTLE_APP_VERSION_ABILITIES)
+        entry->mon.ability = ResolveAbility(entry->record.ability);
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
         ResolveMove(entry->record.moves[i], &entry->mon.moves[i]);
@@ -704,6 +840,32 @@ static void SetVolatileFixture(struct Pokemon *mon, u32 side, u32 index)
         SetMonMoveSlot(mon, MOVE_CLANGING_SCALES, 3);
 }
 
+// Milestone 4-A: the V9/V10 volatile move sets on Pokemon whose abilities
+// exercise every hook kind (ability slot in the species data). One holder
+// per side of an UNSUPPORTED ability (Guts) shows the not-simulated notice.
+static const struct AbilityFixture
+{
+    enum Species species;
+    u8 abilityNum;
+} sAbilityFixtures[4][2][3] = {
+    [0] = { // Single: Intimidate vs Sturdy
+        {{SPECIES_GYARADOS, 0}},
+        {{SPECIES_GEODUDE, 1}},
+    },
+    [1] = { // Double (third in reserve): Serene Grace, No Guard, Speed Boost vs Levitate, Rough Skin, Own Tempo
+        {{SPECIES_TOGEKISS, 1}, {SPECIES_MACHOP, 1}, {SPECIES_NINJASK, 0}},
+        {{SPECIES_BRONZONG, 0}, {SPECIES_CARVANHA, 0}, {SPECIES_SPINDA, 0}},
+    },
+    [2] = { // Triple: Technician, Huge Power, Compound Eyes vs Limber, Water Absorb, Shield Dust
+        {{SPECIES_SCIZOR, 1}, {SPECIES_AZUMARILL, 1}, {SPECIES_BUTTERFREE, 0}},
+        {{SPECIES_HITMONLEE, 0}, {SPECIES_LANTURN, 2}, {SPECIES_DUSTOX, 0}},
+    },
+    [3] = { // Rotation: Clear Body, Immunity, Infiltrator vs Static, Intimidate, Guts (not simulated)
+        {{SPECIES_METAGROSS, 0}, {SPECIES_SNORLAX, 0}, {SPECIES_GOLBAT, 2}},
+        {{SPECIES_PIKACHU, 0}, {SPECIES_GYARADOS, 0}, {SPECIES_TAILLOW, 0}},
+    },
+};
+
 static bool8 BuildFixtureEntries(BattleRequest *request, const u8 **reason)
 {
     static const struct BattleFixture
@@ -734,7 +896,15 @@ static bool8 BuildFixtureEntries(BattleRequest *request, const u8 **reason)
             u32 index = side * sBattle->count + i;
             const struct BattleFixture *fixture = side ? &foe[i] : &player[i];
             struct Pokemon *mon = &sBattle->opponent[index];
-            CreateMonWithIVs(mon, fixture->species, side ? foeLevel : 23, 0x48210000 + index, OTID_STRUCT_PLAYER_ID, 15);
+            const bool8 abilities = sBattle->roster >= BATTLE_APP_VERSION_ABILITIES;
+            const struct AbilityFixture *withAbility = &sAbilityFixtures[sBattle->format - BATTLE_FORMAT_SINGLE][side][i];
+            CreateMonWithIVs(mon, abilities ? withAbility->species : fixture->species, side ? foeLevel : 23,
+                             0x48210000 + index, OTID_STRUCT_PLAYER_ID, 15);
+            if (abilities)
+            {
+                u8 abilityNum = withAbility->abilityNum;
+                SetMonData(mon, MON_DATA_ABILITY_NUM, &abilityNum);
+            }
             SetMonMoveSlot(mon, fixture->move1, 0);
             SetMonMoveSlot(mon, fixture->move2, 1);
             SetMonMoveSlot(mon, MOVE_NONE, 2);
@@ -903,6 +1073,8 @@ static bool8 BuildRequest(const u8 **reason)
     }
     request->rules = RULE_IGNORE_ABILITIES | RULE_IGNORE_ITEMS | RULE_IGNORE_STATUS | RULE_NO_GIMMICKS
                    | RULE_NO_CRITICAL_HITS | RULE_SUPPORTED_MOVES_ONLY;
+    if (request->version >= BATTLE_REQUEST_VERSION_ABILITIES)
+        request->rules &= ~RULE_IGNORE_ABILITIES;
     if (request->version >= BATTLE_REQUEST_VERSION_CONDITIONS)
     {
         if (!ResolveConditionRules(&request->conditions))
@@ -1758,8 +1930,9 @@ static const struct GcModeHandler sFrontierGcBattleMode =
 // Script special (waitstate): VAR_0x8004 = result policy (0 show, 1 apply
 // HP/PP), VAR_0x8005 = trainer id. VAR_0x8006 is the format (0 for
 // Single). Bits 8 through 12 select the lifecycle fixtures, bit 13 selects V7,
-// bit 14 the V8 move effect fixtures and bit 15 the volatile fixtures as V10
-// (with bit 9: as V9; with bit 8: level-5 foes for endurance, debug menu only).
+// bit 14 the V8 move effect fixtures and bit 15 the volatile fixtures as V11
+// with abilities (with bit 10: as V10; with bit 9: as V9; with bit 8:
+// level-5 foes for endurance, debug menu only).
 static EWRAM_DATA struct GcModeHandler sFrontierGcRosterMode = {0};
 
 void FrontierGcBattle_Start(void)
@@ -1772,8 +1945,10 @@ void FrontierGcBattle_Start(void)
     sPendingEndurance = FALSE;
     if (gSpecialVar_0x8006 & 0x8000)
     {
-        // V10 (effect timing); bit 9 keeps V9 for regression runs.
-        sPendingRoster = (gSpecialVar_0x8006 & 0x200) ? BATTLE_APP_VERSION_VOLATILES : BATTLE_APP_VERSION_TIMING;
+        // V11 (abilities); bit 10 keeps V10 and bit 9 V9 for regression runs.
+        sPendingRoster = (gSpecialVar_0x8006 & 0x200) ? BATTLE_APP_VERSION_VOLATILES
+                       : (gSpecialVar_0x8006 & 0x400) ? BATTLE_APP_VERSION_TIMING
+                       : BATTLE_APP_VERSION_ABILITIES;
         sPendingEndurance = (gSpecialVar_0x8006 & 0x100) != 0;
     }
     else if (gSpecialVar_0x8006 & 0x4000)
