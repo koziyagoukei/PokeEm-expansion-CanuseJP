@@ -425,9 +425,15 @@ bool battle_request_decode(const uint8_t *p, uint32_t length, BattleRequest *r) 
                 if (move->unsupported != UNSUP_EMPTY && !move->unsupported && !battle_move_effects_valid(move))
                     return false;
                 if (move->unsupported == UNSUP_EMPTY && move->effect_count) return false;
-                for (unsigned k = 0; k < move->effect_count; ++k)  // timing is a V10 field
+                // Fields of a later version are a malformed request, not an unsupported
+                // move (audit P-03): V9 kinds and move flags, V10 timing.
+                if (r->version < BATTLE_REQUEST_VERSION_VOLATILES && (move->move_flags & ~BMF_V8_MASK)) return false;
+                for (unsigned k = 0; k < move->effect_count; ++k) {
                     if (r->version < BATTLE_REQUEST_VERSION_TIMING && (move->effects[k].flags & BEFL_TIMING_MASK))
                         return false;
+                    if (r->version < BATTLE_REQUEST_VERSION_VOLATILES && move->effects[k].kind > BEFF_PROTECT)
+                        return false;
+                }
                 q += used;
             }
     }
