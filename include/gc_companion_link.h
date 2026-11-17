@@ -23,6 +23,9 @@ struct GcLinkStats
     u32 duplicates;
     u32 nacks;
     u32 requests;
+    u32 staleDrops;  // partial requests dropped after STALE_FRAMES without a word (then NACKed)
+    u32 resyncs;     // failed candidates followed by a buffered magic word (no NACK needed)
+    u32 maxQueue;    // deepest incoming word queue seen by the serial IRQ
 };
 
 bool8 GcLink_Open(void);

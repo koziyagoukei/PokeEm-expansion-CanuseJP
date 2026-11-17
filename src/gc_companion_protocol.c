@@ -101,7 +101,13 @@ static bool HandlePing(const Frame *request, Frame *reply)
     wire_put32(reply->payload + 8, stats->overflows);
     wire_put32(reply->payload + 12, stats->crcErrors);
     wire_put32(reply->payload + 16, stats->duplicates);
-    reply->len = 20;
+    // Release 4 additions (hosts read the first 20 bytes before that).
+    wire_put32(reply->payload + 20, stats->nacks);
+    wire_put32(reply->payload + 24, stats->staleDrops);
+    wire_put32(reply->payload + 28, stats->resyncs);
+    wire_put32(reply->payload + 32, stats->maxQueue);
+    wire_put32(reply->payload + 36, stats->requests);
+    reply->len = 40;
     return true;
 }
 
