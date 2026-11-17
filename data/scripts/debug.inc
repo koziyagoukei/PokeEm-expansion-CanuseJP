@@ -522,13 +522,30 @@ Debug_EventScript_GcVolatileEndurance::
 	releaseall
 	end
 
-@ Milestone 4-A endurance: the V11 ability fixtures against level-5 foes.
+@ Milestone 4-A endurance: the ability fixtures against level-5 foes as V11 (bit 11).
 Debug_EventScript_GcAbilityEndurance::
+	lockall
+	setvar VAR_0x8004, 0
+	setvar VAR_0x8005, TRAINER_CALVIN_1
+	setvar VAR_0x8006, 0x8902
+	special FrontierGcBattle_Start
+	releaseall
+	end
+
+@ Milestone 4-A2: the same as V12.
+Debug_EventScript_GcAbilityHooksEndurance::
 	lockall
 	setvar VAR_0x8004, 0
 	setvar VAR_0x8005, TRAINER_CALVIN_1
 	setvar VAR_0x8006, 0x8102
 	special FrontierGcBattle_Start
+	releaseall
+	end
+
+@ Milestone 4-A2 ability lab: VAR_0x8004 = fixture, set by the debug menu entry.
+Debug_EventScript_GcAbilityLab::
+	lockall
+	special FrontierGcBattle_StartLab
 	releaseall
 	end
 

@@ -286,6 +286,7 @@ static void DebugAction_OpenOutbreakMenu(u8 taskId, const struct DebugMenuOption
 static void DebugAction_OpenSubMenuFakeRTC(u8 taskId, const struct DebugMenuOption *items);
 static void DebugAction_OpenSubMenuCreateFollowerNPC(u8 taskId, const struct DebugMenuOption *items);
 static void DebugAction_ExecuteScript(u8 taskId, void *script);
+static void DebugAction_GcAbilityLab(u8 taskId, const void *fixture);
 static void DebugAction_ToggleFlag(u8 taskId, void *flagToggleFunc);
 
 static void DebugTask_HandleMenuInput_General(u8 taskId);
@@ -424,6 +425,8 @@ extern const u8 Debug_EventScript_GcBattleDrag[];
 extern const u8 Debug_EventScript_GcBattlePivot[];
 extern const u8 Debug_EventScript_GcVolatileEndurance[];
 extern const u8 Debug_EventScript_GcAbilityEndurance[];
+extern const u8 Debug_EventScript_GcAbilityHooksEndurance[];
+extern const u8 Debug_EventScript_GcAbilityLab[];
 extern const u8 Debug_EventScript_GcEffectsDouble[];
 extern const u8 Debug_EventScript_GcVolatilesV9[];
 extern const u8 Debug_EventScript_GcConditionsSingle[];
@@ -623,6 +626,32 @@ static const struct DebugMenuOption sDebugMenu_Actions_FollowerNPCMenu[] =
     { NULL }
 };
 
+static const struct DebugMenuOption sDebugMenu_Actions_GcAbilityLab[] =
+{
+    { COMPOUND_STRING("{ENG}L01 Sturdy"), DebugAction_GcAbilityLab, (const void *)1 },
+    { COMPOUND_STRING("{ENG}L02 Sturdy multi-hit"), DebugAction_GcAbilityLab, (const void *)2 },
+    { COMPOUND_STRING("{ENG}L03 Rough Skin"), DebugAction_GcAbilityLab, (const void *)3 },
+    { COMPOUND_STRING("{ENG}L04 Static"), DebugAction_GcAbilityLab, (const void *)4 },
+    { COMPOUND_STRING("{ENG}L05 Flame Body"), DebugAction_GcAbilityLab, (const void *)5 },
+    { COMPOUND_STRING("{ENG}L06 Poison Point"), DebugAction_GcAbilityLab, (const void *)6 },
+    { COMPOUND_STRING("{ENG}L07 Volt/Water Absorb"), DebugAction_GcAbilityLab, (const void *)7 },
+    { COMPOUND_STRING("{ENG}L08 Limber"), DebugAction_GcAbilityLab, (const void *)8 },
+    { COMPOUND_STRING("{ENG}L09 Insomnia/Immunity/Veil"), DebugAction_GcAbilityLab, (const void *)9 },
+    { COMPOUND_STRING("{ENG}L10 Intimidate Triple"), DebugAction_GcAbilityLab, (const void *)10 },
+    { COMPOUND_STRING("{ENG}L11 OwnTempo/Oblivious/Scrappy"), DebugAction_GcAbilityLab, (const void *)11 },
+    { COMPOUND_STRING("{ENG}L12 SereneGrace/ShieldDust"), DebugAction_GcAbilityLab, (const void *)12 },
+    { COMPOUND_STRING("{ENG}L13 Rock Head"), DebugAction_GcAbilityLab, (const void *)13 },
+    { COMPOUND_STRING("{ENG}L14 Infiltrator/No Guard"), DebugAction_GcAbilityLab, (const void *)14 },
+    { COMPOUND_STRING("{ENG}L15 Guts/MarvelScale/Adapt"), DebugAction_GcAbilityLab, (const void *)15 },
+    { COMPOUND_STRING("{ENG}L16 Flash Fire"), DebugAction_GcAbilityLab, (const void *)16 },
+    { COMPOUND_STRING("{ENG}L17 Moxie"), DebugAction_GcAbilityLab, (const void *)17 },
+    { COMPOUND_STRING("{ENG}L18 Shed Skin"), DebugAction_GcAbilityLab, (const void *)18 },
+    { COMPOUND_STRING("{ENG}L19 Synchronize"), DebugAction_GcAbilityLab, (const void *)19 },
+    { COMPOUND_STRING("{ENG}L20 Strict rules"), DebugAction_GcAbilityLab, (const void *)20 },
+    { NULL }
+};
+STATIC_ASSERT(ARRAY_COUNT(sDebugMenu_Actions_GcAbilityLab) - 1 <= DEBUG_MAX_MENU_ITEMS, DebugGcAbilityLabMenuFits);
+
 static const struct DebugMenuOption sDebugMenu_Actions_Utilities[] =
 {
     { COMPOUND_STRING("{JPN}マップワープへ とぶ{ENG}..."), DebugAction_Selection_Init, &sWarpSelection },
@@ -662,6 +691,8 @@ static const struct DebugMenuOption sDebugMenu_Actions_Utilities[] =
     { COMPOUND_STRING("{ENG}GC Double V9 (volatiles)"), DebugAction_ExecuteScript, Debug_EventScript_GcVolatilesV9 },
     { COMPOUND_STRING("{ENG}GC Double V10 (endurance)"), DebugAction_ExecuteScript, Debug_EventScript_GcVolatileEndurance },
     { COMPOUND_STRING("{ENG}GC Double V11 (abilities)"), DebugAction_ExecuteScript, Debug_EventScript_GcAbilityEndurance },
+    { COMPOUND_STRING("{ENG}GC Double V12 (abilities)"), DebugAction_ExecuteScript, Debug_EventScript_GcAbilityHooksEndurance },
+    { COMPOUND_STRING("{ENG}GC Ability Lab..."), DebugAction_OpenSubMenu, sDebugMenu_Actions_GcAbilityLab },
     { COMPOUND_STRING("{ENG}GC Link Check"), DebugAction_ExecuteScript, Debug_EventScript_GcLinkCheck },
     { NULL }
 };
@@ -1808,6 +1839,13 @@ static void DebugAction_OpenSubMenuFakeRTC(u8 taskId, const struct DebugMenuOpti
 static void DebugAction_ExecuteScript(u8 taskId, void *script)
 {
     Debug_DestroyMenu_Full_Script(taskId, (const u8 *)script);
+}
+
+// GC Ability Lab entries carry their fixture number (1..) as the parameter.
+static void DebugAction_GcAbilityLab(u8 taskId, const void *fixture)
+{
+    gSpecialVar_0x8004 = (u16)(uintptr_t)fixture;
+    Debug_DestroyMenu_Full_Script(taskId, Debug_EventScript_GcAbilityLab);
 }
 
 static void DebugAction_ToggleFlag(u8 taskId, void *flagToggleFunc)

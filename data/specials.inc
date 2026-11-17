@@ -796,4 +796,5 @@ gSpecials::
 	def_special UpdateFollowingPokemon
 	def_special GcCompanion_Start, waitstate=1
 	def_special FrontierGcBattle_Start, waitstate=1
+	def_special FrontierGcBattle_StartLab, waitstate=1
 	def_special GcLinkCheck_Start, waitstate=1

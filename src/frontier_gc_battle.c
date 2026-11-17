@@ -19,6 +19,7 @@
 #include "move.h"
 #include "pokemon.h"
 #include "random.h"
+#include "script.h"
 #include "sound.h"
 #include "string_util.h"
 #include "constants/battle.h"
@@ -48,6 +49,7 @@ struct FrontierGcBattle
     u8 format, count, fieldCount;
     u8 roster; // zero for the legacy app, otherwise the roster app version
     bool8 endurance; // debug: V9 fixtures against weak foes for long battles
+    u8 lab;          // debug: ability lab fixture (1..), 0 otherwise
     u8 rotation, target;
     BattleMultiState multiState;
     u8 status[2][BATTLE_FIELD_SLOTS];
@@ -73,6 +75,7 @@ static EWRAM_DATA u16 sPendingTrainer = 0;
 static EWRAM_DATA u8 sPendingFormat = 0;
 static EWRAM_DATA u8 sPendingRoster = 0;
 static EWRAM_DATA bool8 sPendingEndurance = FALSE;
+static EWRAM_DATA u8 sPendingLab = 0;
 
 static const u8 sText_StruggleRules[] = _("{ENG}Unsupported Struggle rules.");
 static const u8 sText_NoMemory[] = _("{ENG}Not enough memory.");
@@ -519,16 +522,32 @@ static void ResolveMove(enum Move move, BattleMove *out)
         out->unsupported |= UNSUP_OTHER;
 }
 
-// Request V11: the Pokemon's ability as a generic descriptor, read from
-// this build's ability code and configs (gba-gc-extension docs/abilities.md).
+// Requests V11/V12: the Pokemon's ability as generic hooks, read from this
+// build's ability code and configs (gba-gc-extension docs/abilities.md).
 // Any ability with a battle effect the GC core does not run is sent as
-// UNSUPPORTED (the GC shows it as not simulated), never as NONE.
+// UNSUPPORTED (the GC shows it as not simulated), never as NONE. V11 carries
+// one hook with a percent chance; abilities that need more are UNSUPPORTED there.
+#define HOOK(kind, arg0, arg1, arg2, num, den, percent, flags) \
+    ((BattleAbilityHook){kind, arg0, arg1, arg2, num, den, percent, flags})
+
+static bool8 AddHook(BattleAbility *a, BattleAbilityHook hook)
+{
+    if (a->count >= BATTLE_MAX_ABILITY_HOOKS)
+        return FALSE;
+    a->hooks[a->count++] = hook;
+    a->cls = BACLASS_HOOKS;
+    return TRUE;
+}
+
 static BattleAbility ResolveAbility(enum Ability ability)
 {
-    BattleAbility a = {.kind = BABIL_UNSUPPORTED, .source = ability};
-    // Contact statuses: 30% from Gen 4; the older 1/3 is not a percentage.
-    const u8 contactChance = GetConfig(B_ABILITY_TRIGGER_CHANCE) >= GEN_4 ? 30 : 0;
+    BattleAbility a = {.cls = BACLASS_UNSUPPORTED, .source = ability};
+    const bool8 v12 = sBattle->roster >= BATTLE_APP_VERSION_ABILITY_HOOKS;
+    // Contact statuses: 30% from Gen 4, 1/3 before (V12 only: V11 chances are percentages).
+    const bool8 percentChance = GetConfig(B_ABILITY_TRIGGER_CHANCE) >= GEN_4;
+    const u8 contactNum = percentChance ? 30 : 1, contactDen = percentChance ? 100 : 3;
     const u8 intimidate = GetConfig(B_UPDATED_INTIMIDATE) >= GEN_8 ? BABIL_VOL_INTIMIDATE : 0;
+    const u8 breakable = v12 && ability < ABILITIES_COUNT && gAbilitiesInfo[ability].breakable ? BAHF_BREAKABLE : 0;
 
     switch (ability)
     {
@@ -538,115 +557,175 @@ static BattleAbility ResolveAbility(enum Ability ability)
     case ABILITY_PICKUP:
     case ABILITY_HONEY_GATHER:
     case ABILITY_BALL_FETCH:
-        a.kind = BABIL_NONE;
-        break;
+        a.cls = BACLASS_NONE;
+        return a;
     case ABILITY_HUGE_POWER:
     case ABILITY_PURE_POWER:
-        a = (BattleAbility){BABIL_ATTACK_MULT, BCAT_PHYSICAL, 0, 0, 0, 200, ability};
+        AddHook(&a, HOOK(BABIL_ATTACK_MULT, BCAT_PHYSICAL, 0, 0, 0, 0, 200, 0));
         break;
-    case ABILITY_BLAZE:    a = (BattleAbility){BABIL_PINCH, TYPE_FIRE, 0, 3, 0, 150, ability}; break;
-    case ABILITY_TORRENT:  a = (BattleAbility){BABIL_PINCH, TYPE_WATER, 0, 3, 0, 150, ability}; break;
-    case ABILITY_OVERGROW: a = (BattleAbility){BABIL_PINCH, TYPE_GRASS, 0, 3, 0, 150, ability}; break;
-    case ABILITY_SWARM:    a = (BattleAbility){BABIL_PINCH, TYPE_BUG, 0, 3, 0, 150, ability}; break;
+    case ABILITY_BLAZE:    AddHook(&a, HOOK(BABIL_PINCH, TYPE_FIRE, 0, 3, 0, 0, 150, 0)); break;
+    case ABILITY_TORRENT:  AddHook(&a, HOOK(BABIL_PINCH, TYPE_WATER, 0, 3, 0, 0, 150, 0)); break;
+    case ABILITY_OVERGROW: AddHook(&a, HOOK(BABIL_PINCH, TYPE_GRASS, 0, 3, 0, 0, 150, 0)); break;
+    case ABILITY_SWARM:    AddHook(&a, HOOK(BABIL_PINCH, TYPE_BUG, 0, 3, 0, 0, 150, 0)); break;
     case ABILITY_TECHNICIAN:
-        a = (BattleAbility){BABIL_LOW_POWER, 60, 0, 0, 0, 150, ability};
+        AddHook(&a, HOOK(BABIL_LOW_POWER, 60, 0, 0, 0, 0, 150, 0));
         break;
     case ABILITY_THICK_FAT:
-        a = (BattleAbility){BABIL_RESIST, TYPE_FIRE, 0, TYPE_ICE, 0, 50, ability};
+        AddHook(&a, HOOK(BABIL_RESIST, TYPE_FIRE, 0, TYPE_ICE, 0, 0, 50, 0));
         break;
     case ABILITY_LEVITATE:
-        a = (BattleAbility){BABIL_TYPE_IMMUNE, TYPE_GROUND, 0, 0, 0, 0, ability};
+        AddHook(&a, HOOK(BABIL_TYPE_IMMUNE, TYPE_GROUND, 0, 0, 0, 0, 0, 0));
         break;
     case ABILITY_VOLT_ABSORB:
-        a = (BattleAbility){BABIL_TYPE_ABSORB, TYPE_ELECTRIC, 0, 0, 0, 25, ability};
+        AddHook(&a, HOOK(BABIL_TYPE_ABSORB, TYPE_ELECTRIC, 0, 0, 0, 0, 25, 0));
         break;
     case ABILITY_WATER_ABSORB:
-        a = (BattleAbility){BABIL_TYPE_ABSORB, TYPE_WATER, 0, 0, 0, 25, ability};
+        AddHook(&a, HOOK(BABIL_TYPE_ABSORB, TYPE_WATER, 0, 0, 0, 0, 25, 0));
         break;
     case ABILITY_LIMBER:
-        a = (BattleAbility){BABIL_STATUS_IMMUNE, 1u << BST_PARALYSIS, 0, 0, 0, 0, ability};
+        AddHook(&a, HOOK(BABIL_STATUS_IMMUNE, 1u << BST_PARALYSIS, 0, 0, 0, 0, 0, 0));
         break;
     case ABILITY_INSOMNIA:
     case ABILITY_VITAL_SPIRIT:
-        a = (BattleAbility){BABIL_STATUS_IMMUNE, 1u << BST_SLEEP, 0, 0, 0, 0, ability};
+        AddHook(&a, HOOK(BABIL_STATUS_IMMUNE, 1u << BST_SLEEP, 0, 0, 0, 0, 0, 0));
         break;
     case ABILITY_WATER_VEIL:
-        a = (BattleAbility){BABIL_STATUS_IMMUNE, 1u << BST_BURN, 0, 0, 0, 0, ability};
+        AddHook(&a, HOOK(BABIL_STATUS_IMMUNE, 1u << BST_BURN, 0, 0, 0, 0, 0, 0));
         break;
     case ABILITY_IMMUNITY:
-        a = (BattleAbility){BABIL_STATUS_IMMUNE, (1u << BST_POISON) | (1u << BST_TOXIC), 0, 0, 0, 0, ability};
+        AddHook(&a, HOOK(BABIL_STATUS_IMMUNE, (1u << BST_POISON) | (1u << BST_TOXIC), 0, 0, 0, 0, 0, 0));
         break;
     case ABILITY_INNER_FOCUS:
-        a = (BattleAbility){BABIL_VOLATILE_IMMUNE, BABIL_VOL_FLINCH | intimidate, 0, 0, 0, 0, ability};
+        AddHook(&a, HOOK(BABIL_VOLATILE_IMMUNE, BABIL_VOL_FLINCH | intimidate, 0, 0, 0, 0, 0, 0));
         break;
     case ABILITY_OWN_TEMPO:
-        a = (BattleAbility){BABIL_VOLATILE_IMMUNE, BABIL_VOL_CONFUSION | intimidate, 0, 0, 0, 0, ability};
+        AddHook(&a, HOOK(BABIL_VOLATILE_IMMUNE, BABIL_VOL_CONFUSION | intimidate, 0, 0, 0, 0, 0, 0));
         break;
     case ABILITY_CLEAR_BODY:
     case ABILITY_WHITE_SMOKE:
     case ABILITY_FULL_METAL_BODY:
-        a = (BattleAbility){BABIL_STAT_DROP_IMMUNE, 0x7f, 0, 0, 0, 0, ability};
+        AddHook(&a, HOOK(BABIL_STAT_DROP_IMMUNE, 0x7f, 0, 0, 0, 0, 0, 0));
         break;
     case ABILITY_HYPER_CUTTER:
-        a = (BattleAbility){BABIL_STAT_DROP_IMMUNE, 1u << BSTAT_ATK, 0, 0, 0, 0, ability};
+        AddHook(&a, HOOK(BABIL_STAT_DROP_IMMUNE, 1u << BSTAT_ATK, 0, 0, 0, 0, 0, 0));
         break;
     case ABILITY_BIG_PECKS:
-        a = (BattleAbility){BABIL_STAT_DROP_IMMUNE, 1u << BSTAT_DEF, 0, 0, 0, 0, ability};
+        AddHook(&a, HOOK(BABIL_STAT_DROP_IMMUNE, 1u << BSTAT_DEF, 0, 0, 0, 0, 0, 0));
         break;
     case ABILITY_ILLUMINATE:
         if (B_ILLUMINATE_EFFECT < GEN_9)
         {
-            a.kind = BABIL_NONE;  // wild encounter rate only
-            break;
+            a.cls = BACLASS_NONE;  // wild encounter rate only
+            return a;
         }
         // fallthrough
     case ABILITY_KEEN_EYE:
-        a = (BattleAbility){BABIL_STAT_DROP_IMMUNE, 1u << BSTAT_ACC, 0, BABIL_IGNORE_EVASION, 0, 0, ability};
+        AddHook(&a, HOOK(BABIL_STAT_DROP_IMMUNE, 1u << BSTAT_ACC, 0, BABIL_IGNORE_EVASION, 0, 0, 0, 0));
         break;
     case ABILITY_COMPOUND_EYES:
-        a = (BattleAbility){BABIL_ACCURACY, 0, 0, 0, 0, 130, ability};
+        AddHook(&a, HOOK(BABIL_ACCURACY, 0, 0, 0, 0, 0, 130, 0));
         break;
     case ABILITY_NO_GUARD:
-        a = (BattleAbility){BABIL_NO_GUARD, 0, 0, 0, 0, 0, ability};
+        AddHook(&a, HOOK(BABIL_NO_GUARD, 0, 0, 0, 0, 0, 0, 0));
         break;
     case ABILITY_STATIC:
     case ABILITY_FLAME_BODY:
     case ABILITY_POISON_POINT:
-        if (contactChance)
-            a = (BattleAbility){BABIL_CONTACT_STATUS,
-                                ability == ABILITY_STATIC ? BST_PARALYSIS : ability == ABILITY_FLAME_BODY ? BST_BURN : BST_POISON,
-                                0, 0, contactChance, 0, ability};
+        if (percentChance || v12)
+            AddHook(&a, HOOK(BABIL_CONTACT_STATUS,
+                             ability == ABILITY_STATIC ? BST_PARALYSIS : ability == ABILITY_FLAME_BODY ? BST_BURN : BST_POISON,
+                             0, 0, contactNum, contactDen, 0, 0));
         break;
     case ABILITY_ROUGH_SKIN:
     case ABILITY_IRON_BARBS:
-        a = (BattleAbility){BABIL_CONTACT_DAMAGE, 0, 0, B_ROUGH_SKIN_DMG >= GEN_4 ? 8 : 16, 0, 0, ability};
+        AddHook(&a, HOOK(BABIL_CONTACT_DAMAGE, 0, 0, B_ROUGH_SKIN_DMG >= GEN_4 ? 8 : 16, 0, 0, 0, 0));
         break;
     case ABILITY_INTIMIDATE:
-        a = (BattleAbility){BABIL_ENTRY_STAT, BSTAT_ATK, -1, 0, 0, 0, ability};
+        // V12: adjacent foes (Gen 5/6 Triple); V11 has no range (every foe).
+        AddHook(&a, HOOK(BABIL_ENTRY_STAT, BSTAT_ATK, -1, v12 ? BRANGE_ADJACENT_FOES : BRANGE_ALL_FOES, 0, 0, 0, 0));
         break;
     case ABILITY_SPEED_BOOST:
-        a = (BattleAbility){BABIL_END_TURN_STAT, BSTAT_SPE, 1, 0, 0, 0, ability};
+        AddHook(&a, HOOK(BABIL_END_TURN_STAT, BSTAT_SPE, 1, 0, 0, 0, 0, 0));
         break;
     case ABILITY_STURDY:
         if (GetConfig(B_STURDY) >= GEN_5)  // the older one only stops OHKO moves, which are refused
-            a = (BattleAbility){BABIL_STURDY, 0, 0, 0, 0, 0, ability};
+            AddHook(&a, HOOK(BABIL_STURDY, 0, 0, 0, 0, 0, 0, 0));
         break;
     case ABILITY_ROCK_HEAD:
-        a = (BattleAbility){BABIL_NO_RECOIL, 0, 0, 0, 0, 0, ability};
+        AddHook(&a, HOOK(BABIL_NO_RECOIL, 0, 0, 0, 0, 0, 0, 0));
         break;
     case ABILITY_SHIELD_DUST:
-        a = (BattleAbility){BABIL_SHIELD_DUST, 0, 0, 0, 0, 0, ability};
+        AddHook(&a, HOOK(BABIL_SHIELD_DUST, 0, 0, 0, 0, 0, 0, 0));
         break;
     case ABILITY_SERENE_GRACE:
-        a = (BattleAbility){BABIL_SECONDARY_CHANCE, 0, 0, 0, 0, 200, ability};
+        AddHook(&a, HOOK(BABIL_SECONDARY_CHANCE, 0, 0, 0, 0, 0, 200, 0));
         break;
     case ABILITY_INFILTRATOR:
         if (GetConfig(B_INFILTRATOR_SUBSTITUTE) >= GEN_6)
-            a = (BattleAbility){BABIL_INFILTRATOR, 0, 0, 0, 0, 0, ability};
+            AddHook(&a, HOOK(BABIL_INFILTRATOR, 0, 0, 0, 0, 0, 0, 0));
+        break;
+    // Milestone 4-A2 (V12 only).
+    case ABILITY_GUTS:
+        if (!v12)
+            break;
+        AddHook(&a, HOOK(BABIL_ATTACK_MULT, BCAT_PHYSICAL, 0, 0, 0, 0, 150, BAHF_REQUIRES_STATUS));
+        AddHook(&a, HOOK(BABIL_IGNORE_BURN, 0, 0, 0, 0, 0, 0, 0));
+        break;
+    case ABILITY_MARVEL_SCALE:
+        if (v12)
+            AddHook(&a, HOOK(BABIL_DEFENSE_MULT, BCAT_PHYSICAL, 0, 0, 0, 0, 150, BAHF_REQUIRES_STATUS));
+        break;
+    case ABILITY_ADAPTABILITY:
+        if (v12)
+            AddHook(&a, HOOK(BABIL_STAB_MULT, 0, 0, 0, 0, 0, 200, 0));
+        break;
+    case ABILITY_MOXIE:
+        if (v12)
+            AddHook(&a, HOOK(BABIL_KO_STAT, BSTAT_ATK, 1, 0, 0, 0, 0, 0));
+        break;
+    case ABILITY_SHED_SKIN:
+        // 30% only under the Gen 4 setting, 1/3 otherwise (as in this build's end-of-turn code).
+        if (v12)
+            AddHook(&a, HOOK(BABIL_END_TURN_CURE, 0xfe, 0, 0,
+                             GetConfig(B_ABILITY_TRIGGER_CHANCE) == GEN_4 ? 30 : 1,
+                             GetConfig(B_ABILITY_TRIGGER_CHANCE) == GEN_4 ? 100 : 3, 0, 0));
+        break;
+    case ABILITY_FLASH_FIRE:
+        if (!v12)
+            break;
+        AddHook(&a, HOOK(BABIL_ABSORB_STATE, TYPE_FIRE, 0, 0, 0, 0, 0, B_FLASH_FIRE_FROZEN >= GEN_5 ? 0 : BAHF_NOT_FROZEN));
+        AddHook(&a, HOOK(BABIL_ATTACK_MULT, 0, 0, TYPE_FIRE, 0, 0, 150, BAHF_REQUIRES_STATE | BAHF_TYPE_FILTER));
+        break;
+    case ABILITY_SCRAPPY:
+        if (!v12)
+            break;
+        AddHook(&a, HOOK(BABIL_TYPE_PASS, TYPE_NORMAL, 0, TYPE_GHOST, 0, 0, 0, 0));
+        AddHook(&a, HOOK(BABIL_TYPE_PASS, TYPE_FIGHTING, 0, TYPE_GHOST, 0, 0, 0, 0));
+        if (intimidate)
+            AddHook(&a, HOOK(BABIL_VOLATILE_IMMUNE, intimidate, 0, 0, 0, 0, 0, 0));
+        break;
+    case ABILITY_OBLIVIOUS:
+        // Its other effects (infatuation, Taunt, Captivate) have no move or ability here that
+        // the GC runs; before Gen 8 it therefore does nothing in a GC battle.
+        if (!v12)
+            break;
+        if (!intimidate)
+        {
+            a.cls = BACLASS_NONE;
+            return a;
+        }
+        AddHook(&a, HOOK(BABIL_VOLATILE_IMMUNE, intimidate, 0, 0, 0, 0, 0, 0));
+        break;
+    case ABILITY_SYNCHRONIZE:
+        if (v12)
+            AddHook(&a, HOOK(BABIL_STATUS_MIRROR, (1u << BST_POISON) | (1u << BST_TOXIC) | (1u << BST_PARALYSIS) | (1u << BST_BURN),
+                             0, 0, 0, 0, 0, GetConfig(B_SYNCHRONIZE_TOXIC) >= GEN_5 ? 0 : BAHF_TOXIC_TO_POISON));
         break;
     default:
         break;
     }
+    for (u32 i = 0; i < a.count; i++)
+        a.hooks[i].flags |= breakable;
     return a;
 }
 
@@ -673,6 +752,146 @@ static u8 FillEntry(u32 slot, BattleEntry *entry)
             mask |= 1u << i;
     }
     return mask;
+}
+
+// Milestone 4-A2 ability lab (debug menu > Utilities > GC Ability Lab):
+// reproducible V12 fixtures. Each one fixes the species and ability slot,
+// level, moves, HP and status of every Pokemon, and the GC seeds its RNG
+// with the battle id (RULE_FIXED_SEED), so a run with the same inputs
+// gives the same battle. gba-gc-extension docs/abilities.md lists what each
+// fixture shows and the inputs to use.
+struct LabMon
+{
+    u16 species;
+    u8 abilityNum, level, hpPercent;
+    u32 status;
+    u16 moves[MAX_MON_MOVES];
+};
+
+struct LabFixture
+{
+    u8 format, count;
+    bool8 strict;
+    struct LabMon mons[2][3];
+};
+
+#define LM(species, num, level, hp, status, ...) {SPECIES_##species, num, level, hp, status, {__VA_ARGS__}}
+static const struct LabFixture sLabFixtures[] = {
+    [1] = {BATTLE_FORMAT_SINGLE, 1, FALSE, {  // Sturdy: survives at 1 HP from full, then faints
+        {LM(BLASTOISE, 0, 50, 100, 0, MOVE_WATER_GUN)},
+        {LM(GEODUDE, 1, 10, 100, 0, MOVE_TACKLE)}}},
+    [2] = {BATTLE_FORMAT_SINGLE, 1, FALSE, {  // Sturdy on the first hit of Double Kick, the second knocks out
+        {LM(HITMONLEE, 0, 50, 100, 0, MOVE_DOUBLE_KICK)},
+        {LM(GEODUDE, 1, 10, 100, 0, MOVE_TACKLE)}}},
+    [3] = {BATTLE_FORMAT_DOUBLE, 3, FALSE, {  // Rough Skin per contact hit; knocks out an attacker; none for Water Gun
+        {LM(HITMONLEE, 0, 30, 100, 0, MOVE_DOUBLE_KICK), LM(MACHOP, 0, 30, 5, 0, MOVE_TACKLE),
+         LM(BLASTOISE, 0, 30, 100, 0, MOVE_WATER_GUN)},
+        {LM(SHARPEDO, 0, 30, 100, 0, MOVE_LEER), LM(SHARPEDO, 0, 30, 100, 0, MOVE_LEER),
+         LM(SHARPEDO, 0, 30, 100, 0, MOVE_LEER)}}},
+    [4] = {BATTLE_FORMAT_DOUBLE, 2, FALSE, {  // Static per contact hit; an Electric attacker is immune
+        {LM(HITMONLEE, 0, 30, 100, 0, MOVE_DOUBLE_KICK), LM(RAICHU, 0, 30, 100, 0, MOVE_TACKLE)},
+        {LM(PIKACHU, 0, 35, 100, 0, MOVE_GROWL), LM(PIKACHU, 0, 35, 100, 0, MOVE_GROWL)}}},
+    [5] = {BATTLE_FORMAT_DOUBLE, 2, FALSE, {  // Flame Body; a Fire attacker is immune
+        {LM(HITMONLEE, 0, 30, 100, 0, MOVE_DOUBLE_KICK), LM(PONYTA, 0, 30, 100, 0, MOVE_TACKLE)},
+        {LM(MAGMAR, 0, 35, 100, 0, MOVE_GROWL), LM(MAGMAR, 0, 35, 100, 0, MOVE_GROWL)}}},
+    [6] = {BATTLE_FORMAT_DOUBLE, 2, FALSE, {  // Poison Point; a Poison attacker is immune
+        {LM(HITMONLEE, 0, 30, 100, 0, MOVE_DOUBLE_KICK), LM(NIDORAN_M, 0, 30, 100, 0, MOVE_TACKLE)},
+        {LM(NIDORAN_F, 0, 35, 100, 0, MOVE_GROWL), LM(NIDORAN_F, 0, 35, 100, 0, MOVE_GROWL)}}},
+    [7] = {BATTLE_FORMAT_DOUBLE, 2, FALSE, {  // Volt Absorb heals; Water Absorb at full HP; Surf hits everyone else
+        {LM(PIKACHU, 0, 30, 100, 0, MOVE_THUNDERBOLT), LM(BLASTOISE, 0, 30, 100, 0, MOVE_SURF)},
+        {LM(LANTURN, 0, 30, 50, 0, MOVE_GROWL), LM(LANTURN, 2, 30, 100, 0, MOVE_GROWL)}}},
+    [8] = {BATTLE_FORMAT_SINGLE, 1, FALSE, {  // Limber: cured on entry, blocks Thunder Wave, Body Slam's chance
+        {LM(PIKACHU, 0, 30, 100, 0, MOVE_THUNDER_WAVE, MOVE_BODY_SLAM)},
+        {LM(HITMONLEE, 0, 30, 100, STATUS1_PARALYSIS, MOVE_GROWL)}}},
+    [9] = {BATTLE_FORMAT_TRIPLE, 3, FALSE, {  // Insomnia, Immunity, Water Veil; then Hypnosis on Immunity works
+        {LM(PIKACHU, 0, 40, 100, 0, MOVE_HYPNOSIS), LM(NIDORAN_M, 0, 40, 100, 0, MOVE_TOXIC, MOVE_HYPNOSIS),
+         LM(PONYTA, 0, 40, 100, 0, MOVE_WILL_O_WISP)},
+        {LM(HOOTHOOT, 0, 30, 100, 0, MOVE_GROWL), LM(SNORLAX, 0, 30, 100, 0, MOVE_GROWL),
+         LM(GOLDEEN, 1, 30, 100, 0, MOVE_GROWL)}}},
+    [10] = {BATTLE_FORMAT_TRIPLE, 3, FALSE, {  // Intimidate from the left: adjacent foes only (Inner Focus blocks)
+        {LM(GYARADOS, 0, 30, 100, 0, MOVE_GROWL), LM(MACHOP, 1, 30, 100, 0, MOVE_GROWL),
+         LM(MACHOP, 1, 30, 100, 0, MOVE_GROWL)},
+        {LM(GOLBAT, 0, 30, 100, 0, MOVE_GROWL), LM(MACHOP, 0, 30, 100, 0, MOVE_GROWL),
+         LM(METAGROSS, 0, 30, 100, 0, MOVE_GROWL)}}},
+    [11] = {BATTLE_FORMAT_TRIPLE, 3, FALSE, {  // Own Tempo, Oblivious, Scrappy (and a Normal move without it)
+        {LM(KANGASKHAN, 1, 30, 100, 0, MOVE_TACKLE), LM(GYARADOS, 0, 30, 100, 0, MOVE_CONFUSE_RAY),
+         LM(PIKACHU, 0, 30, 100, 0, MOVE_TACKLE)},
+        {LM(SPINDA, 0, 30, 100, 0, MOVE_GROWL), LM(GASTLY, 0, 30, 100, 0, MOVE_GROWL),
+         LM(SLOWPOKE, 0, 30, 100, 0, MOVE_GROWL)}}},
+    [12] = {BATTLE_FORMAT_DOUBLE, 2, FALSE, {  // Serene Grace doubles Body Slam's chance; Shield Dust stops it
+        {LM(TOGEKISS, 1, 30, 100, 0, MOVE_BODY_SLAM), LM(SNORLAX, 0, 30, 100, 0, MOVE_BODY_SLAM)},
+        {LM(DUSTOX, 0, 40, 100, 0, MOVE_GROWL), LM(MACHOP, 1, 40, 100, 0, MOVE_GROWL)}}},
+    [13] = {BATTLE_FORMAT_DOUBLE, 2, FALSE, {  // Rock Head: no Double-Edge recoil (the partner takes it)
+        {LM(GEODUDE, 0, 30, 100, 0, MOVE_DOUBLE_EDGE), LM(MACHOP, 0, 30, 100, 0, MOVE_DOUBLE_EDGE)},
+        {LM(SNORLAX, 0, 30, 100, 0, MOVE_GROWL), LM(SNORLAX, 0, 30, 100, 0, MOVE_GROWL)}}},
+    [14] = {BATTLE_FORMAT_DOUBLE, 2, FALSE, {  // Infiltrator through a substitute; No Guard reaches a flying foe
+        {LM(GOLBAT, 2, 30, 100, 0, MOVE_BITE), LM(MACHOP, 1, 30, 100, 0, MOVE_ZAP_CANNON)},
+        {LM(CROBAT, 0, 40, 100, 0, MOVE_SUBSTITUTE), LM(PIDGEOT, 0, 40, 100, 0, MOVE_FLY)}}},
+    [15] = {BATTLE_FORMAT_DOUBLE, 2, FALSE, {  // Guts (burned), Marvel Scale (paralysed), Adaptability
+        {LM(MACHOP, 0, 30, 100, STATUS1_BURN, MOVE_TACKLE), LM(PORYGON_Z, 0, 30, 100, 0, MOVE_TACKLE)},
+        {LM(MILOTIC, 0, 30, 100, STATUS1_PARALYSIS, MOVE_GROWL), LM(SNORLAX, 0, 30, 100, 0, MOVE_GROWL)}}},
+    [16] = {BATTLE_FORMAT_SINGLE, 1, FALSE, {  // Flash Fire absorbs Ember and boosts its own Fire moves
+        {LM(VULPIX, 0, 30, 100, 0, MOVE_EMBER)},
+        {LM(MAGMAR, 0, 30, 100, 0, MOVE_EMBER)}}},
+    [17] = {BATTLE_FORMAT_DOUBLE, 3, FALSE, {  // Moxie per knock-out, not after the last one
+        {LM(GYARADOS, 2, 60, 100, 0, MOVE_TACKLE), LM(MACHOP, 1, 30, 100, 0, MOVE_GROWL),
+         LM(MACHOP, 1, 30, 100, 0, MOVE_GROWL)},
+        {LM(MACHOP, 1, 5, 100, 0, MOVE_GROWL), LM(MACHOP, 1, 5, 100, 0, MOVE_GROWL),
+         LM(MACHOP, 1, 5, 100, 0, MOVE_GROWL)}}},
+    [18] = {BATTLE_FORMAT_SINGLE, 1, FALSE, {  // Shed Skin: 1/3 at the end of each turn, before the burn damage
+        {LM(DRATINI, 0, 30, 100, STATUS1_BURN, MOVE_GROWL)},
+        {LM(SNORLAX, 0, 30, 100, 0, MOVE_GROWL)}}},
+    [19] = {BATTLE_FORMAT_DOUBLE, 2, FALSE, {  // Synchronize: paralysis back to Machop; Pikachu is immune
+        {LM(ABRA, 0, 30, 100, 0, MOVE_GROWL), LM(RALTS, 0, 30, 100, 0, MOVE_GROWL)},
+        {LM(MACHOP, 1, 30, 100, 0, MOVE_THUNDER_WAVE), LM(PIKACHU, 0, 30, 100, 0, MOVE_THUNDER_WAVE)}}},
+    [20] = {BATTLE_FORMAT_DOUBLE, 2, TRUE, {  // strict rules: Early Bird is not simulated, the GC refuses
+        {LM(MACHOP, 1, 30, 100, 0, MOVE_TACKLE), LM(MACHOP, 1, 30, 100, 0, MOVE_TACKLE)},
+        {LM(KANGASKHAN, 0, 30, 100, 0, MOVE_GROWL), LM(MACHOP, 1, 30, 100, 0, MOVE_GROWL)}}},
+};
+#undef LM
+#define LAB_FIXTURE_COUNT (ARRAY_COUNT(sLabFixtures) - 1)
+#define LAB_BATTLE_ID(fixture) (0x4C414200u | (fixture))  // "LAB" + fixture: the GC's seed
+
+static bool8 BuildLabEntries(BattleRequest *request, const u8 **reason)
+{
+    const struct LabFixture *fixture = &sLabFixtures[sBattle->lab];
+    u32 side, i, m;
+    GcExtension_SetExtraMons(sBattle->opponent, 2 * sBattle->count);
+    for (side = 0; side < 2; side++)
+    {
+        BattleEntry *entries = side ? request->opponent : request->player;
+        for (i = 0; i < sBattle->count; i++)
+        {
+            const struct LabMon *spec = &fixture->mons[side][i];
+            const u32 index = side * sBattle->count + i;
+            struct Pokemon *mon = &sBattle->opponent[index];
+            u8 abilityNum = spec->abilityNum;
+            u32 status = spec->status;
+            u16 hp;
+            CreateMonWithIVs(mon, spec->species, spec->level, 0x4C410000 + index, OTID_STRUCT_PLAYER_ID, 15);
+            SetMonData(mon, MON_DATA_ABILITY_NUM, &abilityNum);
+            for (m = 0; m < MAX_MON_MOVES; m++)
+            {
+                SetMonMoveSlot(mon, spec->moves[m], m);
+                if (spec->moves[m] == MOVE_NONE)
+                {
+                    u8 pp = 0;
+                    SetMonData(mon, MON_DATA_PP1 + m, &pp);
+                }
+            }
+            hp = GetMonData(mon, MON_DATA_MAX_HP) * spec->hpPercent / 100;
+            if (hp == 0)
+                hp = 1;
+            SetMonData(mon, MON_DATA_HP, &hp);
+            SetMonData(mon, MON_DATA_STATUS, &status);
+            if (FillEntry(GC_EXTRA_SLOT_BASE + index, &entries[i]) == 0)
+            {
+                *reason = side ? sText_NoOpponentMoves : sText_NoMoves;
+                return FALSE;
+            }
+        }
+    }
+    return TRUE;
 }
 
 // Test rule: the player's battler is the first party member that can battle
@@ -1045,12 +1264,13 @@ static bool8 BuildRequest(const u8 **reason)
         return FALSE;
     }
     if (!(IsLegacySingle() ? BuildSingleEntries(request, trainer, reason)
-                                                  : BuildFixtureEntries(request, reason)))
+          : sBattle->lab ? BuildLabEntries(request, reason)
+                         : BuildFixtureEntries(request, reason)))
     {
         Free(request);
         return FALSE;
     }
-    sBattle->battleId = Random32() | 1;
+    sBattle->battleId = sBattle->lab ? LAB_BATTLE_ID(sBattle->lab) : Random32() | 1;
     request->format = sBattle->format;
     request->battle_type = BTYPE_TRAINER;
     request->player_count = sBattle->count;
@@ -1075,6 +1295,9 @@ static bool8 BuildRequest(const u8 **reason)
                    | RULE_NO_CRITICAL_HITS | RULE_SUPPORTED_MOVES_ONLY;
     if (request->version >= BATTLE_REQUEST_VERSION_ABILITIES)
         request->rules &= ~RULE_IGNORE_ABILITIES;
+    // Ability lab: the battle id seeds the GC (repeatable runs); one fixture checks strict rules.
+    if (sBattle->lab)
+        request->rules |= RULE_FIXED_SEED | (sLabFixtures[sBattle->lab].strict ? RULE_STRICT_ABILITIES : 0);
     if (request->version >= BATTLE_REQUEST_VERSION_CONDITIONS)
     {
         if (!ResolveConditionRules(&request->conditions))
@@ -1134,7 +1357,10 @@ static bool8 Init(const u8 **reason)
     sBattle->fieldCount = sPendingFormat == BATTLE_FORMAT_SINGLE ? 1 : sPendingFormat == BATTLE_FORMAT_DOUBLE ? 2 : 3;
     sBattle->roster = sPendingRoster;
     sBattle->endurance = sPendingEndurance;
+    sBattle->lab = sPendingLab;
     sBattle->count = sBattle->roster && sBattle->format == BATTLE_FORMAT_DOUBLE ? 3 : sBattle->fieldCount;
+    if (sBattle->lab)
+        sBattle->count = sLabFixtures[sBattle->lab].count;
     sBattle->policy = IsLegacySingle() ? sPendingPolicy : RESULT_POLICY_DISPLAY_ONLY;
     sBattle->trainerId = sPendingTrainer;
     sBattle->environment = BattleSetup_GetEnvironmentId();
@@ -1930,8 +2156,8 @@ static const struct GcModeHandler sFrontierGcBattleMode =
 // Script special (waitstate): VAR_0x8004 = result policy (0 show, 1 apply
 // HP/PP), VAR_0x8005 = trainer id. VAR_0x8006 is the format (0 for
 // Single). Bits 8 through 12 select the lifecycle fixtures, bit 13 selects V7,
-// bit 14 the V8 move effect fixtures and bit 15 the volatile fixtures as V11
-// with abilities (with bit 10: as V10; with bit 9: as V9; with bit 8:
+// bit 14 the V8 move effect fixtures and bit 15 the volatile fixtures as V12
+// with abilities (with bit 11: as V11; bit 10: V10; bit 9: V9; with bit 8:
 // level-5 foes for endurance, debug menu only).
 static EWRAM_DATA struct GcModeHandler sFrontierGcRosterMode = {0};
 
@@ -1943,12 +2169,14 @@ void FrontierGcBattle_Start(void)
     sPendingFormat = format >= BATTLE_FORMAT_DOUBLE && format <= BATTLE_FORMAT_ROTATION ? format : BATTLE_FORMAT_SINGLE;
     sPendingRoster = 0;
     sPendingEndurance = FALSE;
+    sPendingLab = 0;
     if (gSpecialVar_0x8006 & 0x8000)
     {
-        // V11 (abilities); bit 10 keeps V10 and bit 9 V9 for regression runs.
+        // V12 (multi-hook abilities); bits 11, 10, 9 keep V11, V10, V9 for regression runs.
         sPendingRoster = (gSpecialVar_0x8006 & 0x200) ? BATTLE_APP_VERSION_VOLATILES
                        : (gSpecialVar_0x8006 & 0x400) ? BATTLE_APP_VERSION_TIMING
-                       : BATTLE_APP_VERSION_ABILITIES;
+                       : (gSpecialVar_0x8006 & 0x800) ? BATTLE_APP_VERSION_ABILITIES
+                       : BATTLE_APP_VERSION_ABILITY_HOOKS;
         sPendingEndurance = (gSpecialVar_0x8006 & 0x100) != 0;
     }
     else if (gSpecialVar_0x8006 & 0x4000)
@@ -1978,4 +2206,24 @@ void FrontierGcBattle_Start(void)
     {
         GcStartMode(&sFrontierGcBattleMode);
     }
+}
+
+// Script special (waitstate): VAR_0x8004 = ability lab fixture (debug menu).
+void FrontierGcBattle_StartLab(void)
+{
+    const u16 fixture = gSpecialVar_0x8004;
+    if (fixture == 0 || fixture > LAB_FIXTURE_COUNT)
+    {
+        ScriptContext_Enable();
+        return;
+    }
+    sPendingPolicy = RESULT_POLICY_DISPLAY_ONLY;
+    sPendingTrainer = TRAINER_CALVIN_1;
+    sPendingFormat = sLabFixtures[fixture].format;
+    sPendingRoster = BATTLE_APP_VERSION_ABILITY_HOOKS;
+    sPendingEndurance = FALSE;
+    sPendingLab = fixture;
+    sFrontierGcRosterMode = sFrontierGcBattleMode;
+    sFrontierGcRosterMode.appVersion = sPendingRoster;
+    GcStartMode(&sFrontierGcRosterMode);
 }

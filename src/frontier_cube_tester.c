@@ -5,12 +5,13 @@
 // host of another release and shows both numbers. 1 = v0.1.0-alpha (public),
 // 2 = m3-dev (Milestone 3 move effects), 3 = m3.5-dev (Milestone 3.5 volatile
 // status and multi-turn actions), 4 = m3.5-audit (audit fixes, request V10),
-// 5 = m4a-dev (Milestone 4-A abilities, request V11); 2 to 5 are development
+// 5 = m4a-dev (Milestone 4-A abilities, request V11), 6 = m4a2-dev
+// (Milestone 4-A2 multi-hook abilities, request V12); 2 to 6 are development
 // builds only.
 #include "global.h"
 #include "gc_extension.h"
 
 u16 GcExtension_GetRelease(void)
 {
-    return 5;
+    return 6;
 }
