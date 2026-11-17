@@ -3796,7 +3796,7 @@ static enum MoveEndResult MoveEndUpdateLastMoves(struct BattleCalcValues *cv)
 
         if (!gBattleStruct->unableToUseMove
          && !IsBattlerUnaffectedByMove(cv->battlerDef)
-         && gChosenMove != MOVE_UNAVAILABLE
+         && IsMoveValid(gChosenMove)
          && !gSpecialStatuses[cv->battlerAtk].dancerUsedMove)
         {
             gLastUsedMove = cv->move;
@@ -5942,7 +5942,7 @@ static enum Move GetMirrorMoveMove(void)
         if (i != gBattlerAttacker)
         {
             move = gBattleStruct->lastTakenMoveFrom[gBattlerAttacker][i];
-            if (move != MOVE_NONE && move != MOVE_UNAVAILABLE)
+            if (IsMoveValid(move))
             {
                 validMoves[validMovesCount] = move;
                 validMovesCount++;

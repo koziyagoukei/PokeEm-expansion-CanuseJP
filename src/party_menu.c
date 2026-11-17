@@ -8462,11 +8462,13 @@ void CursorCb_MoveItemCallback(u8 taskId)
             GetMonNickname(&gParties[B_TRAINER_PLAYER][gPartyMenu.slotId], gStringVar1);
             CopyItemName(item1, gStringVar2);
             StringExpandPlaceholders(buffer, gText_XsYAnd);
-
             StringAppend(buffer, gText_XsYWereSwapped);
+
             GetMonNickname(&gParties[B_TRAINER_PLAYER][gPartyMenu.slotId2], gStringVar1);
             CopyItemName(item2, gStringVar2);
             StringExpandPlaceholders(gStringVar4, buffer);
+            if (GetStringWidth(FONT_NORMAL, gStringVar4, 0) >= WindowWidthPx(WIN_MSG))
+                StringCopy(gStringVar4, COMPOUND_STRING("もちものを いれかえた！{PAUSE_UNTIL_PRESS}"));
         }
 
         // display the string
