@@ -12,7 +12,8 @@
 typedef bool (*GcAssetResolver)(const AssetKey *key, AssetInfo *info, const u8 **data);
 // Handles one APP opcode. Writes up to APP_MAX_REPLY_DATA bytes to out.
 typedef u16 (*GcAppHandler)(u16 opcode, const u8 *args, u16 argLength, u8 *out, u16 *outLength);
-// Handles one RESULT payload (already de-duplicated by result id). Returns ResultStatus.
+// Handles one RESULT payload: only for this mode start's nonce, and never again
+// once a result was accepted (see gc_ext/message.h). Returns ResultStatus.
 typedef u16 (*GcResultHandler)(u16 modeId, u16 resultVersion, const u8 *data, u16 length);
 
 struct GcClientConfig

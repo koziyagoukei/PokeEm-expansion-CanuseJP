@@ -19,8 +19,8 @@ struct GcProtocolState
     struct GcProtocolStats stats;
     ModeInfo mode;
     const u8 *modeRequest;
-    bool8 haveResult;
-    u32 lastResultId;
+    bool8 resultFinal;     // this mode start has an accepted result
+    u32 acceptedResultId;
     u8 *encoded;  // RLE copy of the open asset (freed on the next asset)
     bool8 versionMismatch;
 };
@@ -246,17 +246,22 @@ static bool HandleResult(const Frame *request, Frame *reply)
     modeId = msg_get16(request->payload);
     version = msg_get16(request->payload + 2);
     resultId = wire_get32(request->payload + 4);
-    if (sProto.haveResult && resultId == sProto.lastResultId)
-        status = RESULT_DUPLICATE; // never applied twice, even across reconnects
+    // One final result per mode start (message.h): the id must be this
+    // start's nonce; once accepted, only an identical resend is acknowledged.
+    // Kept across reconnects; GcProtocol_Init (the next mode start) clears it.
+    if (sProto.resultFinal)
+        status = resultId == sProto.acceptedResultId ? RESULT_DUPLICATE : RESULT_REJECTED;
     else if (modeId != sProto.mode.mode_id || sProto.config->handleResult == NULL)
         status = RESULT_UNSUPPORTED;
+    else if (resultId != sProto.mode.nonce)
+        status = RESULT_REJECTED;
     else
         status = sProto.config->handleResult(modeId, version, request->payload + RESULT_HEADER_BYTES,
                                              request->len - RESULT_HEADER_BYTES);
     if (status == RESULT_ACCEPTED)
     {
-        sProto.haveResult = TRUE;
-        sProto.lastResultId = resultId;
+        sProto.resultFinal = TRUE;
+        sProto.acceptedResultId = resultId;
         sProto.events |= GC_PROTO_EVENT_RESULT;
     }
     msg_put16(reply->payload, status);
@@ -298,7 +303,12 @@ bool GcProtocol_HandleFrame(const Frame *request, Frame *reply)
             reply->len = mode_info_encode(&none, reply->payload);
             return true;
         }
-        reply->len = mode_info_encode(&sProto.mode, reply->payload);
+        {
+            ModeInfo announced = sProto.mode;
+            if (sProto.resultFinal)
+                announced.flags |= MODE_FLAG_RESULT_FINAL;
+            reply->len = mode_info_encode(&announced, reply->payload);
+        }
         sProto.events |= GC_PROTO_EVENT_MODE;
         return true;
     case RESULT:
