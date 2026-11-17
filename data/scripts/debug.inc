@@ -545,6 +545,9 @@ Debug_EventScript_GcConditionsRotation::
 	setvar VAR_0x8005, TRAINER_CALVIN_1
 	setvar VAR_0x8006, 0x2004
 	special FrontierGcBattle_Start
+	releaseall
+	end
+
 @ GC link check: shows both sides' versions; read-only.
 Debug_EventScript_GcLinkCheck::
 	lockall
