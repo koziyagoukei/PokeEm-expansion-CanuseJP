@@ -4667,7 +4667,10 @@ s32 GetChosenMovePriority(enum BattlerId battler, enum Ability ability)
     else if (gLockedMoves[battler] != MOVE_NONE
           && (gBattleMons[battler].volatiles.multipleTurns || gBattleMons[battler].volatiles.rechargeTimer > 0))
         move = gLockedMoves[battler];
-    else if (gBattleMons[battler].volatiles.encoredMove != MOVE_NONE && GetConfig(B_ENCORE_PRIORITY) >= GEN_CHAMPIONS)
+    else if (gBattleMons[battler].volatiles.encoredMove != MOVE_NONE
+          && GetConfig(B_ENCORE_PRIORITY) >= GEN_CHAMPIONS
+          && GetActiveGimmick(battler) != GIMMICK_DYNAMAX
+          && !IsGimmickSelected(battler, GIMMICK_DYNAMAX))
         move = gBattleMons[battler].volatiles.encoredMove;
     else
         move = GetBattlerChosenMove(battler);

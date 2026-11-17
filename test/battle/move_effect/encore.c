@@ -151,6 +151,31 @@ SINGLE_BATTLE_TEST("(DYNAMAX) Dynamaxed Pokemon are immune to Encore")
     }
 }
 
+SINGLE_BATTLE_TEST("Dynamax executes the selected Max Moves under an existing Encore")
+{
+    u32 gen;
+    PARAMETRIZE { gen = GEN_8; }
+    PARAMETRIZE { gen = GEN_CHAMPIONS; }
+
+    GIVEN {
+        WITH_CONFIG(B_ENCORE_PRIORITY, gen);
+        PLAYER(SPECIES_WOBBUFFET) { Speed(50); Moves(MOVE_GROWL, MOVE_MUD_SHOT, MOVE_EMBER); }
+        OPPONENT(SPECIES_WOBBUFFET) { Speed(100); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_GROWL); }
+        TURN { MOVE(opponent, MOVE_ENCORE); MOVE(player, MOVE_GROWL); }
+        TURN { MOVE(opponent, MOVE_SCRATCH); MOVE(player, MOVE_MUD_SHOT, gimmick: GIMMICK_DYNAMAX); }
+        TURN { MOVE(player, MOVE_EMBER); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_ENCORE, opponent);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_GROWL, player);
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_DYNAMAX_GROWTH, player);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SCRATCH, opponent);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_MAX_QUAKE, player);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_MAX_FLARE, player);
+    }
+}
+
 SINGLE_BATTLE_TEST("(DYNAMAX) Dynamaxed Pokemon can be encored immediately after reverting")
 {
     GIVEN {

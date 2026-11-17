@@ -6,6 +6,28 @@ ASSUMPTIONS
     ASSUME(GetMoveEffect(MOVE_SHED_TAIL) == EFFECT_SHED_TAIL);
 }
 
+SINGLE_BATTLE_TEST("Shed Tail displays the incoming Pokemon's Substitute")
+{
+    bool32 animationsOff;
+    PARAMETRIZE { animationsOff = FALSE; }
+    PARAMETRIZE { animationsOff = TRUE; }
+
+    GIVEN {
+        gBattleTestRunnerState->data.recordedBattle.battleScene = animationsOff;
+        PLAYER(SPECIES_WOBBUFFET);
+        PLAYER(SPECIES_WYNAUT);
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(player, MOVE_SHED_TAIL); SEND_OUT(player, 1); }
+    } SCENE {
+        if (!animationsOff)
+            ANIMATION(ANIM_TYPE_MOVE, MOVE_SHED_TAIL, player);
+        ANIMATION(ANIM_TYPE_SPECIAL, B_ANIM_MON_TO_SUBSTITUTE, player);
+    } THEN {
+        EXPECT(player->volatiles.substitute);
+    }
+}
+
 SINGLE_BATTLE_TEST("Shed Tail creates a Substitute at the cost of 1/2 users maximum HP and switches the user out")
 {
     s16 maxHP = 0;

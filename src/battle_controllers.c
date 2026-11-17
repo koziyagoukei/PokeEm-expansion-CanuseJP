@@ -2540,6 +2540,7 @@ void BtlController_HandleSwitchInAnim(enum BattlerId battler)
     if (isPlayerSide)
         BattleLoadMonSpriteGfx(GetBattlerMon(battler), battler);
     StartSendOutAnim(battler, gBattleResources->bufferA[battler][2], gBattleResources->bufferA[battler][3], FALSE);
+    gBattleSpritesDataPtr->battlerData[battler].behindSubstitute = gBattleResources->bufferA[battler][3] != FALSE;
     gBattlerControllerFuncs[battler] = BtlController_HandleSwitchInTryShinyAnim;
 }
 

@@ -1,6 +1,38 @@
 #include "global.h"
 #include "test/battle.h"
 
+SINGLE_BATTLE_TEST("Weakness berry popup names the berry after another Pokemon Mega Evolves")
+{
+    enum Gimmick gimmick;
+    PARAMETRIZE { gimmick = GIMMICK_NONE; }
+    PARAMETRIZE { gimmick = GIMMICK_DYNAMAX; }
+
+    GIVEN {
+        PLAYER(SPECIES_NAGANADEL) { Speed(100); }
+        OPPONENT(SPECIES_SCIZOR) { HP(1); Speed(80); Item(ITEM_SCIZORITE); }
+        OPPONENT(SPECIES_FERROTHORN) { Speed(50); Item(ITEM_OCCA_BERRY); }
+    } WHEN {
+        TURN {
+            MOVE(player, MOVE_FLAMETHROWER);
+            MOVE(opponent, MOVE_CELEBRATE, gimmick: GIMMICK_MEGA);
+            SEND_OUT(opponent, 1);
+        }
+        TURN {
+            MOVE(player, MOVE_EMBER);
+            MOVE(opponent, MOVE_GYRO_BALL, gimmick: gimmick);
+        }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_MEGA_EVOLUTION, opponent);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_FLAMETHROWER, player);
+        if (gimmick == GIMMICK_DYNAMAX)
+            ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_DYNAMAX_GROWTH, opponent);
+        ITEM_POPUP(opponent, ITEM_OCCA_BERRY);
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_HELD_ITEM_BERRY, opponent);
+    } THEN {
+        EXPECT_EQ(opponent->item, ITEM_NONE);
+    }
+}
+
 static const u16 sMoveItemTable[][4] =
 {
     { TYPE_NORMAL,   MOVE_SCRATCH,         ITEM_CHILAN_BERRY, SPECIES_WOBBUFFET },

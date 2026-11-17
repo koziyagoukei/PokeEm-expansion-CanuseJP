@@ -1725,7 +1725,7 @@ void SetNonVolatileStatus(enum BattlerId battlerAtk, enum BattlerId effectBattle
         gBattlescriptCurrInstr = BattleScript_MoveEffectBurn;
         break;
     case MOVE_EFFECT_FREEZE:
-        GetBattlerPartyState(effectBattler)->freezeTurns = 2;
+        GetBattlerPartyState(effectBattler)->freezeTurns = 0;
         gBattleMons[effectBattler].status1 |= STATUS1_FREEZE;
         gBattlescriptCurrInstr = BattleScript_MoveEffectFreeze;
         break;
@@ -7799,6 +7799,8 @@ bool32 WouldSubstituteBlockMove(enum BattlerId battlerAtk, enum BattlerId battle
     else if (move == MOVE_NONE)
         return TRUE;
     else if (IsBattleMoveStatus(move) && battlerAtk == battlerDef)
+        return FALSE;
+    else if (IsBattleMoveStatus(move) && (GetMoveTarget(move) == TARGET_FIELD || GetMoveTarget(move) == TARGET_OPPONENTS_FIELD))
         return FALSE;
     else if (MoveIgnoresSubstitute(move))
         return FALSE;

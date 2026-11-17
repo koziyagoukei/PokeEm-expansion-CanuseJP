@@ -32,6 +32,23 @@ SINGLE_BATTLE_TEST("Stealth Rock damage on switch in based on typing")
     }
 }
 
+SINGLE_BATTLE_TEST("Stealth Rock can be set while the opposing Pokemon is behind a Substitute")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET);
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(opponent, MOVE_SUBSTITUTE); }
+        TURN { MOVE(player, MOVE_STEALTH_ROCK); }
+        TURN { SWITCH(opponent, 1); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_STEALTH_ROCK, player);
+    } THEN {
+        EXPECT_EQ(opponent->hp, opponent->maxHP - opponent->maxHP / 8);
+    }
+}
+
 SINGLE_BATTLE_TEST("Stealth Rock damages the correct Pokémon when Eject Button is triggered")
 {
     GIVEN {

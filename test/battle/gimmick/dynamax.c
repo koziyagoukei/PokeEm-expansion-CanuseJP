@@ -2,6 +2,26 @@
 #include "test/battle.h"
 
 // ============= DYNAMAX AND MAX MOVE INTERACTIONS ===================
+SINGLE_BATTLE_TEST("Dynamax: Simultaneous activations follow effective Speed")
+{
+    bool32 playerFirst;
+    PARAMETRIZE { playerFirst = FALSE; }
+    PARAMETRIZE { playerFirst = TRUE; }
+
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET) { Speed(100); Item(playerFirst ? ITEM_CHOICE_SCARF : ITEM_NONE); }
+        OPPONENT(SPECIES_WOBBUFFET) { Speed(120); }
+    } WHEN {
+        TURN {
+            MOVE(player, MOVE_SCRATCH, gimmick: GIMMICK_DYNAMAX);
+            MOVE(opponent, MOVE_SCRATCH, gimmick: GIMMICK_DYNAMAX);
+        }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_DYNAMAX_GROWTH, playerFirst ? player : opponent);
+        ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_DYNAMAX_GROWTH, playerFirst ? opponent : player);
+    }
+}
+
 SINGLE_BATTLE_TEST("Dynamax: Dynamax increases HP and max HP by 1.5x", u16 hp)
 {
     u32 dynamax;

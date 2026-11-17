@@ -1,6 +1,44 @@
 #include "global.h"
 #include "test/battle.h"
 
+SINGLE_BATTLE_TEST("Freeze inflicted by Ice Beam starts with no frozen turns")
+{
+    u32 gen;
+    PARAMETRIZE { gen = GEN_9; }
+    PARAMETRIZE { gen = GEN_CHAMPIONS; }
+
+    GIVEN {
+        WITH_CONFIG(B_FREEZE_TURNS, gen);
+        PLAYER(SPECIES_WOBBUFFET) { Speed(10); }
+        OPPONENT(SPECIES_WOBBUFFET) { Speed(20); }
+    } WHEN {
+        TURN {
+            MOVE(opponent, MOVE_ICE_BEAM, WITH_RNG(RNG_SECONDARY_EFFECT, TRUE));
+            MOVE(player, MOVE_CELEBRATE, WITH_RNG(RNG_FROZEN, FALSE));
+        }
+        TURN { MOVE(player, MOVE_CELEBRATE, WITH_RNG(RNG_FROZEN, FALSE)); }
+        TURN { MOVE(player, MOVE_SPLASH, WITH_RNG(RNG_FROZEN, FALSE)); }
+    } SCENE {
+        STATUS_ICON(player, freeze: TRUE);
+        if (gen == GEN_CHAMPIONS)
+        {
+            NONE_OF {
+                ANIMATION(ANIM_TYPE_MOVE, MOVE_CELEBRATE, player);
+            }
+            STATUS_ICON(player, none: TRUE);
+            ANIMATION(ANIM_TYPE_MOVE, MOVE_SPLASH, player);
+        }
+        else
+        {
+            NONE_OF {
+                STATUS_ICON(player, none: TRUE);
+                ANIMATION(ANIM_TYPE_MOVE, MOVE_CELEBRATE, player);
+                ANIMATION(ANIM_TYPE_MOVE, MOVE_SPLASH, player);
+            }
+        }
+    }
+}
+
 SINGLE_BATTLE_TEST("Freeze has a 25% chance of being thawed (Gen9-)")
 {
     PASSES_RANDOMLY(20, 100, RNG_FROZEN);
