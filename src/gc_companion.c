@@ -549,7 +549,10 @@ static void HandleLinkEvents(u32 link, u32 proto)
         SetState(GC_STATE_HANDSHAKE);
     if (proto & GC_PROTO_EVENT_BYE)
     {
-        if (sGc->state == GC_STATE_DISCONNECTING)
+        // A host that says goodbye after the result was accepted (also after a
+        // reconnect) ends the mode normally: back to the field, where finish()
+        // applies the result as usual.
+        if (sGc->state == GC_STATE_DISCONNECTING || GcProtocol_HasFinalResult())
         {
             SetState(GC_STATE_RETURN_FIELD);
         }
