@@ -22,8 +22,16 @@ enum PkmnOp {
     PKMN_RECORD = 2,      // u8 slot -> PokemonRecordV1
     PKMN_UI_STATE = 3,    // -> UiState (polled; also the keepalive)
     PKMN_SET_PHASE = 4,   // u8 phase, u8 done, u8 total: host progress shown on the GBA
-    PKMN_STATE_DIGEST = 5 // -> StateDigest (save-safety check)
+    PKMN_STATE_DIGEST = 5, // -> StateDigest (save-safety check)
+    // Diagnostics: where in the party memory a digest change lies. Reply: party
+    // count, then for each of 6 slots: u32 CRC of the unencrypted box header,
+    // u32 CRC of the encrypted substructs, u32 CRC of the party-only tail,
+    // u32 experience (0 for an empty slot). Clients without it answer
+    // APP_UNKNOWN_OP.
+    PKMN_STATE_DETAIL = 6
 };
+#define STATE_DETAIL_SLOTS 6
+#define STATE_DETAIL_BYTES (4 + STATE_DETAIL_SLOTS * 16)
 
 // Asset types served by the Pokemon client.
 enum {
