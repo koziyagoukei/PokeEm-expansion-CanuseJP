@@ -201,7 +201,8 @@ enum DebugMenuTypes
 #define DEBUG_NUMBER_ICON_X 210
 #define DEBUG_NUMBER_ICON_Y 50
 
-#define DEBUG_MAX_MENU_ITEMS 20
+// The Utilities list carries the GC test entries (38 in Milestone 4-A).
+#define DEBUG_MAX_MENU_ITEMS 48
 #define DEBUG_MAX_SUB_MENU_LEVELS 4
 
 #define DEBUG_OPTION_CANT_BE_TOGGLED 0xFF
@@ -664,6 +665,8 @@ static const struct DebugMenuOption sDebugMenu_Actions_Utilities[] =
     { COMPOUND_STRING("{ENG}GC Link Check"), DebugAction_ExecuteScript, Debug_EventScript_GcLinkCheck },
     { NULL }
 };
+// Basic menus are built into fixed arrays of DEBUG_MAX_MENU_ITEMS entries.
+STATIC_ASSERT(ARRAY_COUNT(sDebugMenu_Actions_Utilities) - 1 <= DEBUG_MAX_MENU_ITEMS, DebugUtilitiesMenuFits);
 
 static const struct DebugMenuOption sDebugMenu_Actions_PCBag_Fill[] =
 {
@@ -993,7 +996,7 @@ static bool32 IsSubMenuAction(const void *action)
 static u32 Debug_GenerateListBasicMenu(const struct DebugMenuOption *items)
 {
     u32 totalItems = 0;
-    for (u32 i = 0; items[i].text != NULL; i++)
+    for (u32 i = 0; items[i].text != NULL && i < DEBUG_MAX_MENU_ITEMS; i++)
     {
         sDebugMenuListData->listItems[i].id = i;
         StringExpandPlaceholders(gStringVar4, items[i].text);
