@@ -789,7 +789,7 @@ static const struct LabFixture sLabFixtures[] = {
         {LM(SHARPEDO, 0, 30, 100, 0, MOVE_LEER), LM(SHARPEDO, 0, 30, 100, 0, MOVE_LEER),
          LM(SHARPEDO, 0, 30, 100, 0, MOVE_LEER)}}},
     [4] = {BATTLE_FORMAT_DOUBLE, 2, FALSE, {  // Static per contact hit; an Electric attacker is immune
-        {LM(HITMONLEE, 0, 30, 100, 0, MOVE_DOUBLE_KICK), LM(RAICHU, 0, 30, 100, 0, MOVE_TACKLE)},
+        {LM(MACHOP, 1, 30, 100, 0, MOVE_DOUBLE_KICK), LM(RAICHU, 0, 30, 100, 0, MOVE_TACKLE)},
         {LM(PIKACHU, 0, 35, 100, 0, MOVE_GROWL), LM(PIKACHU, 0, 35, 100, 0, MOVE_GROWL)}}},
     [5] = {BATTLE_FORMAT_DOUBLE, 2, FALSE, {  // Flame Body; a Fire attacker is immune
         {LM(HITMONLEE, 0, 30, 100, 0, MOVE_DOUBLE_KICK), LM(PONYTA, 0, 30, 100, 0, MOVE_TACKLE)},
