@@ -26,6 +26,7 @@ extern "C" {
 #define BATTLE_APP_VERSION_CONDITIONS 7
 #define BATTLE_APP_VERSION_EFFECTS 8
 #define BATTLE_APP_VERSION_VOLATILES 9
+#define BATTLE_APP_VERSION_TIMING 10  // V9 + effect application units
 #define BATTLE_MODE_VERSION 1
 
 enum BattleFormat { BATTLE_FORMAT_SINGLE = 1, BATTLE_FORMAT_DOUBLE = 2, BATTLE_FORMAT_TRIPLE = 3, BATTLE_FORMAT_ROTATION = 4 };
@@ -124,6 +125,21 @@ enum BattleHitRule { BHITS_UNIFORM = 0, BHITS_2TO5_GEN5 = 1, BHITS_2TO5_GEN1 = 2
 #define BATTLE_EFFECT_BYTES 8
 #define BATTLE_MOVE_EFFECTS_HEADER 4
 #define BEFL_TYPE_CHART (1u << 0)
+// Request V10: when a secondary effect runs (flags bits 1-3). 0 keeps the
+// V8/V9 behaviour: once per target after its hits.
+enum BattleEffectTiming {
+    BETIME_DEFAULT = 0,     // = BETIME_PER_TARGET
+    BETIME_PER_HIT = 1,     // after every hit that struck the Pokemon itself (multi-strike secondaries)
+    BETIME_PER_TARGET = 2,  // once per target the move landed on, after its hits
+    BETIME_ON_DAMAGE = 3,   // once per target whose own HP the move reduced (not only its substitute)
+    BETIME_AFTER_MOVE = 4,  // once after all targets, if the move landed on any (user only)
+    BETIME_PER_USE = 5,     // once per use, when the move first lands, before later targets (user only)
+    BETIME_COUNT
+};
+#define BEFL_TIMING_SHIFT 1
+#define BEFL_TIMING_MASK (7u << BEFL_TIMING_SHIFT)
+#define BEFL_TIMING(t) ((uint8_t)((t) << BEFL_TIMING_SHIFT))
+#define BATTLE_EFFECT_TIMING(e) (((e)->flags & BEFL_TIMING_MASK) >> BEFL_TIMING_SHIFT)
 #define BMF_IGNORES_PROTECT (1u << 0)
 // V9 move flags.
 #define BMF_IGNORES_SUBSTITUTE  (1u << 1)  // e.g. sound moves (per the game's move flags)
@@ -190,6 +206,7 @@ typedef struct {
 #define BATTLE_REQUEST_VERSION_CONDITIONS 7
 #define BATTLE_REQUEST_VERSION_EFFECTS 8
 #define BATTLE_REQUEST_VERSION_VOLATILES 9
+#define BATTLE_REQUEST_VERSION_TIMING 10  // effect descriptors may carry BEFL_TIMING
 #define BATTLE_REQUEST_HEADER 24
 enum StruggleRecoil { BSTRUGGLE_MAX_HP_FLOOR = 1, BSTRUGGLE_MAX_HP_NEAREST = 2 };
 #define BATTLE_MOVE_STRUGGLE 0xffffu  // logical presentation identifier

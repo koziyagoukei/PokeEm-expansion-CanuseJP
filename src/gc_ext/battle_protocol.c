@@ -1,6 +1,7 @@
 // Vendored from gba-gc-extension protocol/battle_protocol.c. Do not edit here;
 // change the extension repository and run tools/sync-pokeemerald.ps1.
 #include "gc_ext/battle_protocol.h"
+#include <string.h>
 
 static void move_encode(const BattleMove *m, uint8_t *p) {
     msg_put16(p, m->power);
@@ -58,6 +59,25 @@ static bool has_effect(const BattleMove *m, uint8_t kind) {
     return false;
 }
 
+// V10 timing: only for secondary effects of a hit; effects before or after
+// all targets can only act on the user.
+static bool effect_timing_valid(const BattleEffect *e, bool damaging) {
+    const unsigned timing = BATTLE_EFFECT_TIMING(e);
+    if (timing == BETIME_DEFAULT) return true;
+    if (timing >= BETIME_COUNT || !damaging) return false;
+    switch (e->kind) {
+    case BEFF_STAT:
+    case BEFF_STATUS:
+    case BEFF_CURE:
+    case BEFF_CONFUSE:
+        return (timing != BETIME_AFTER_MOVE && timing != BETIME_PER_USE) || e->who == BWHO_USER;
+    case BEFF_FLINCH:
+        return timing == BETIME_PER_HIT || timing == BETIME_PER_TARGET || timing == BETIME_ON_DAMAGE;
+    default:
+        return false;
+    }
+}
+
 bool battle_move_effects_valid(const BattleMove *m) {
     if (m->effect_count > BATTLE_MAX_EFFECTS || (m->move_flags & ~BMF_V9_MASK)) return false;
     const bool damaging = m->category != BCAT_STATUS;
@@ -67,63 +87,65 @@ bool battle_move_effects_valid(const BattleMove *m) {
     unsigned damage = 0;
     for (unsigned i = 0; i < m->effect_count; ++i) {
         const BattleEffect *e = &m->effects[i];
-        if (e->who > BWHO_USER || e->chance > 100 || (e->flags & ~BEFL_TYPE_CHART)) return false;
+        if (e->who > BWHO_USER || e->chance > 100 || (e->flags & ~(BEFL_TYPE_CHART | BEFL_TIMING_MASK))) return false;
         if (e->chance && !damaging) return false;  // chances are secondary effects of a hit
+        if (!effect_timing_valid(e, damaging)) return false;
+        const uint8_t flags = e->flags & ~BEFL_TIMING_MASK;  // per-kind flags below
         switch (e->kind) {
         case BEFF_DAMAGE:
-            if (damage++ || i != first || e->who != BWHO_TARGET || e->chance || e->flags ||
+            if (damage++ || i != first || e->who != BWHO_TARGET || e->chance || flags ||
                 e->arg0 < 1 || e->arg0 > e->arg2 || e->arg2 > BATTLE_MAX_HITS ||
                 e->arg1 < BHITS_UNIFORM || e->arg1 > BHITS_2TO5_GEN1 ||
                 (e->arg1 != BHITS_UNIFORM && (e->arg0 != 2 || e->arg2 != 5)))
                 return false;
             break;
         case BEFF_STAT:
-            if (e->arg0 >= BSTAT_COUNT || !e->arg1 || e->arg1 < -6 || e->arg1 > 6 || e->arg2 || e->flags) return false;
+            if (e->arg0 >= BSTAT_COUNT || !e->arg1 || e->arg1 < -6 || e->arg1 > 6 || e->arg2 || flags) return false;
             break;
         case BEFF_STATUS:
             if (!e->arg0 || e->arg0 > BST_FROSTBITE || e->arg1 || e->arg2) return false;
             break;
         case BEFF_CURE:
-            if (!e->arg0 || (e->arg0 & 1u) || e->arg1 || e->arg2 || e->flags) return false;
+            if (!e->arg0 || (e->arg0 & 1u) || e->arg1 || e->arg2 || flags) return false;
             break;
         case BEFF_HEAL:
-            if (e->who != BWHO_USER || !e->arg0 || !e->arg2 || e->arg0 > e->arg2 || e->arg1 || e->flags || damaging)
+            if (e->who != BWHO_USER || !e->arg0 || !e->arg2 || e->arg0 > e->arg2 || e->arg1 || flags || damaging)
                 return false;
             break;
         case BEFF_DRAIN:
         case BEFF_RECOIL:
-            if (e->who != BWHO_USER || !e->arg0 || e->arg0 > 100 || e->arg1 || e->arg2 || e->flags || !damaging ||
+            if (e->who != BWHO_USER || !e->arg0 || e->arg0 > 100 || e->arg1 || e->arg2 || flags || !damaging ||
                 e->chance)
                 return false;
             break;
         case BEFF_FORCE_OUT:
         case BEFF_PIVOT:
-            if (e->who != BWHO_TARGET || e->chance || e->arg0 || e->arg1 || e->arg2 || e->flags) return false;
+            if (e->who != BWHO_TARGET || e->chance || e->arg0 || e->arg1 || e->arg2 || flags) return false;
             if (e->kind == BEFF_PIVOT && !damaging) return false;
             break;
         case BEFF_PROTECT:
             if (e->who != BWHO_USER || damaging || m->effect_count != 1 || (e->arg0 != 2 && e->arg0 != 3) ||
-                e->arg1 || e->arg2 || e->flags || e->chance)
+                e->arg1 || e->arg2 || flags || e->chance)
                 return false;
             break;
         case BEFF_FLINCH:
-            if (e->who != BWHO_TARGET || !damaging || e->arg0 || e->arg1 || e->arg2 || e->flags) return false;
+            if (e->who != BWHO_TARGET || !damaging || e->arg0 || e->arg1 || e->arg2 || flags) return false;
             break;
         case BEFF_CONFUSE:
-            if (e->arg0 || e->arg1 || e->arg2 || e->flags) return false;
+            if (e->arg0 || e->arg1 || e->arg2 || flags) return false;
             break;
         case BEFF_SUBSTITUTE:
             if (e->who != BWHO_USER || damaging || m->effect_count != 1 || e->chance || e->arg0 || e->arg1 ||
-                e->arg2 || e->flags)
+                e->arg2 || flags)
                 return false;
             break;
         case BEFF_CHARGE:
             if (i || e->who != BWHO_USER || !damaging || e->chance || e->arg0 > BSEMI_UNDERGROUND || e->arg1 ||
-                e->arg2 || e->flags || m->effect_count < 2 || m->effects[1].kind != BEFF_DAMAGE)
+                e->arg2 || flags || m->effect_count < 2 || m->effects[1].kind != BEFF_DAMAGE)
                 return false;
             break;
         case BEFF_RECHARGE:
-            if (e->who != BWHO_USER || !damaging || e->chance || e->arg0 || e->arg1 || e->arg2 || e->flags ||
+            if (e->who != BWHO_USER || !damaging || e->chance || e->arg0 || e->arg1 || e->arg2 || flags ||
                 has_effect(m, BEFF_CHARGE))
                 return false;
             break;
@@ -280,7 +302,7 @@ uint32_t battle_request_size(const BattleRequest *r) {
 uint32_t battle_request_encode(const BattleRequest *r, uint8_t *p, uint32_t capacity) {
     const uint32_t size = battle_request_size(r);
     const uint8_t version = r->version ? r->version : BATTLE_REQUEST_VERSION;
-    if ((version < BATTLE_REQUEST_VERSION || version > BATTLE_REQUEST_VERSION_VOLATILES) ||
+    if ((version < BATTLE_REQUEST_VERSION || version > BATTLE_REQUEST_VERSION_TIMING) ||
         size > capacity || r->player_count > BATTLE_MAX_PER_SIDE || r->opponent_count > BATTLE_MAX_PER_SIDE ||
         r->type_count > BATTLE_MAX_TYPES)
         return 0;
@@ -338,7 +360,7 @@ uint32_t battle_request_encode(const BattleRequest *r, uint8_t *p, uint32_t capa
 
 bool battle_request_decode(const uint8_t *p, uint32_t length, BattleRequest *r) {
     if (length < BATTLE_REQUEST_HEADER ||
-        (p[0] < BATTLE_REQUEST_VERSION || p[0] > BATTLE_REQUEST_VERSION_VOLATILES) ||
+        (p[0] < BATTLE_REQUEST_VERSION || p[0] > BATTLE_REQUEST_VERSION_TIMING) ||
         msg_get16(p+14) != BATTLE_ENTRY_BYTES)
         return false;
     r->version = p[0];
@@ -403,6 +425,9 @@ bool battle_request_decode(const uint8_t *p, uint32_t length, BattleRequest *r) 
                 if (move->unsupported != UNSUP_EMPTY && !move->unsupported && !battle_move_effects_valid(move))
                     return false;
                 if (move->unsupported == UNSUP_EMPTY && move->effect_count) return false;
+                for (unsigned k = 0; k < move->effect_count; ++k)  // timing is a V10 field
+                    if (r->version < BATTLE_REQUEST_VERSION_TIMING && (move->effects[k].flags & BEFL_TIMING_MASK))
+                        return false;
                 q += used;
             }
     }
@@ -526,7 +551,11 @@ static bool decode_roster_state(const uint8_t *p, unsigned n, BattleRosterState 
         !decode_multi_state(p, BATTLE_MULTI_STATE_BYTES, &s->field_state, max_phase))
         return false;
     const uint8_t *q = p + BATTLE_MULTI_STATE_BYTES;
+    // Fields of later APP versions start empty; their decoders fill them in.
     s->struggle_mask = 0;
+    memset(s->status, 0, sizeof(s->status));
+    memset(s->stages, 0, sizeof(s->stages));
+    memset(s->volatiles, 0, sizeof(s->volatiles));
     s->reserves = *q++;
     if (s->reserves >= (1u << BATTLE_MAX_PER_SIDE) ||
         (s->field_state.phase >= BPHASE_REPLACE && !s->reserves))
