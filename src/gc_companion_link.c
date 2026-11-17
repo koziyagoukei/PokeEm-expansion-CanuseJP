@@ -43,6 +43,11 @@
 
 #define QUEUE_SIZE 64          // words; one frame is at most WIRE_WORDS (60)
 #define SILENCE_TIMEOUT 120    // frames without any word while connected
+// A request is sent as one burst of words (well under one frame). A partial
+// frame that gets no new word for this many frames lost a word: drop it and
+// NACK at once, so the host resends without waiting for its reply timeout
+// and the resend does not land on the stale partial frame (audit J-01).
+#define STALE_FRAMES 2
 
 #define JOYCNT_RESET   (1 << 0)
 #define JOYCNT_RECEIVE (1 << 1)
@@ -69,6 +74,8 @@ struct GcLink
     struct WordQueue outgoing;
     vbool8 resetSeen;
     vbool8 overflowSeen;
+    vu32 lastReceive;   // gMain.vblankCounter1 at the last received word
+    vu8 maxQueue;
     // Main loop only.
     Parser parser;
     Frame previous;
@@ -124,6 +131,9 @@ static void SerialIntr_GcJoyBus(void)
             u32 word = REG_JOY_RECV_L_16 | ((u32)REG_JOY_RECV_H_16 << 16);
             if (!QueuePush(&link->incoming, word))
                 link->overflowSeen = TRUE;
+            link->lastReceive = gMain.vblankCounter1;
+            if (link->incoming.count > link->maxQueue)
+                link->maxQueue = link->incoming.count;
         }
         if (cnt & JOYCNT_SEND)
         {
@@ -158,6 +168,7 @@ bool8 GcLink_Open(void)
     REG_IE |= INTR_FLAG_SERIAL;
     REG_IME = 1;
     sLink->lastActivity = gMain.vblankCounter1;
+    sLink->lastReceive = gMain.vblankCounter1;
     return TRUE;
 }
 
@@ -278,7 +289,7 @@ u32 GcLink_Poll(GcFrameHandler handler)
     u32 events = 0;
     u32 word;
     u16 ime;
-    bool8 gotWord;
+    bool8 gotWord, stale;
 
     if (link == NULL)
         return 0;
@@ -325,23 +336,41 @@ u32 GcLink_Poll(GcFrameHandler handler)
         }
         else
         {
-            switch (wire_feed(&link->parser, word, &link->request))
+            enum ParseResult wire = wire_feed(&link->parser, word, &link->request);
+            switch (wire)
             {
             case FRAME_OK:
                 if (HandleRequest(&link->request, handler))
                     events |= GC_LINK_EVENT_FRAME;
                 break;
             case BAD_CRC:
-                link->stats.crcErrors++;
-                SendNack(0);
-                break;
             case BAD_HEADER:
-                SendNack(0);
+                if (wire == BAD_CRC)
+                    link->stats.crcErrors++;
+                // A later magic word is already buffered: that candidate (e.g. the
+                // resend) continues, so no NACK. Otherwise ask for a resend.
+                if (link->parser.count != 0)
+                    link->stats.resyncs++;
+                else
+                    SendNack(0);
                 break;
             default:
                 break;
             }
         }
+    }
+
+    ime = REG_IME;
+    REG_IME = 0;
+    link->stats.maxQueue = link->maxQueue;
+    stale = link->parser.count != 0 && link->incoming.count == 0
+         && gMain.vblankCounter1 - link->lastReceive >= STALE_FRAMES;
+    REG_IME = ime;
+    if (stale)
+    {
+        link->parser.count = 0;
+        link->stats.staleDrops++;
+        SendNack(0);
     }
 
     if (link->connected && gMain.vblankCounter1 - link->lastActivity >= SILENCE_TIMEOUT)
