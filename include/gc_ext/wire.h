@@ -29,6 +29,7 @@ typedef struct {
     uint32_t words[WIRE_WORDS];
     unsigned count;
     unsigned target;
+    unsigned resyncs;  // failed candidates followed by a buffered magic (diagnostics)
 } Parser;
 
 enum ParseResult { INCOMPLETE, FRAME_OK, BAD_HEADER, BAD_CRC };
