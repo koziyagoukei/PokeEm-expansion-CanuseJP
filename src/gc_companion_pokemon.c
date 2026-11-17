@@ -477,6 +477,50 @@ static u16 HandleApp(u16 opcode, const u8 *args, u16 argLength, u8 *out, u16 *ou
         out[20] = match;
         *outLength = STATE_DIGEST_BYTES;
         return APP_OK;
+    case PKMN_STATE_DETAIL:
+        if (argLength == 1)
+        {
+            // Diagnostics only: the values of sDetailFields for one slot.
+            static const u8 sDetailFields[] = {
+                MON_DATA_CHECKSUM, MON_DATA_MARKINGS, MON_DATA_HP_LOST, MON_DATA_DAYS_SINCE_FORM_CHANGE,
+                MON_DATA_IS_SHINY, MON_DATA_HIDDEN_NATURE, MON_DATA_PP_BONUSES, MON_DATA_COOL, MON_DATA_BEAUTY,
+                MON_DATA_CUTE, MON_DATA_SMART, MON_DATA_TOUGH, MON_DATA_SHEEN, MON_DATA_HP_EV, MON_DATA_ATK_EV,
+                MON_DATA_DEF_EV, MON_DATA_SPEED_EV, MON_DATA_SPATK_EV, MON_DATA_SPDEF_EV, MON_DATA_POKERUS,
+                MON_DATA_MET_LOCATION, MON_DATA_MET_LEVEL, MON_DATA_MET_GAME, MON_DATA_POKEBALL, MON_DATA_OT_GENDER,
+                MON_DATA_IVS, MON_DATA_ABILITY_NUM, MON_DATA_RIBBONS, MON_DATA_MODERN_FATEFUL_ENCOUNTER,
+                MON_DATA_HYPER_TRAINED_HP, MON_DATA_HYPER_TRAINED_ATK, MON_DATA_HYPER_TRAINED_DEF,
+                MON_DATA_HYPER_TRAINED_SPEED, MON_DATA_HYPER_TRAINED_SPATK, MON_DATA_HYPER_TRAINED_SPDEF,
+                MON_DATA_IS_SHADOW, MON_DATA_DYNAMAX_LEVEL, MON_DATA_GIGANTAMAX_FACTOR, MON_DATA_TERA_TYPE,
+                MON_DATA_EVOLUTION_TRACKER, MON_DATA_HAS_SHADOW_STATE, MON_DATA_SHADOW_GAUGE,
+                MON_DATA_BATTLE_CONNECTOR_ORIGIN, MON_DATA_FRIENDSHIP,
+            };
+            struct Pokemon *mon;
+            if (args[0] >= PARTY_SIZE)
+                return APP_BAD_ARGS;
+            mon = &gParties[B_TRAINER_PLAYER][args[0]];
+            wire_put32(out, ARRAY_COUNT(sDetailFields));
+            for (i = 0; i < ARRAY_COUNT(sDetailFields); i++)
+                wire_put32(out + 4 + 4 * i, GetMonData(mon, sDetailFields[i]));
+            *outLength = 4 + 4 * ARRAY_COUNT(sDetailFields);
+            return APP_OK;
+        }
+        // Diagnostics only: per slot CRCs of the box header (before the
+        // encrypted substructs), the encrypted substructs and the party tail.
+        wire_put32(out, gPartiesCount[B_TRAINER_PLAYER]);
+        for (i = 0; i < STATE_DETAIL_SLOTS; i++)
+        {
+            struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][i];
+            const u8 *raw = (const u8 *)mon;
+            const u32 header = offsetof(struct BoxPokemon, secure);
+            u8 *q = out + 4 + i * 16;
+            wire_put32(q, ~Crc(UINT32_MAX, raw, header));
+            wire_put32(q + 4, ~Crc(UINT32_MAX, raw + header, sizeof(struct BoxPokemon) - header));
+            wire_put32(q + 8, ~Crc(UINT32_MAX, raw + sizeof(struct BoxPokemon),
+                                   sizeof(struct Pokemon) - sizeof(struct BoxPokemon)));
+            wire_put32(q + 12, GetMonData(mon, MON_DATA_SANITY_HAS_SPECIES) ? GetMonData(mon, MON_DATA_EXP) : 0);
+        }
+        *outLength = STATE_DETAIL_BYTES;
+        return APP_OK;
     }
     return APP_UNKNOWN_OP;
 }
