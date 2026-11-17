@@ -130,7 +130,7 @@ enum GcModeId {
 // MODE request: empty. ACK (24 bytes):
 //   0 u16 mode id        2 u16 mode version   4 u16 mode app id   6 u16 mode app version
 //   8 u32 request length (0 = none)          12 u32 CRC-32 of the request
-//  16 u32 session nonce (changes for every mode start)               20 u32 flags (0)
+//  16 u32 session nonce (changes for every mode start)               20 u32 flags (MODE_FLAG_*)
 // The request bytes are fetched as an asset with key
 // {ASSET_MODE_REQUEST, mode id, 0, session nonce} through ASSET_INFO/ASSET_CHUNK.
 #define MODE_INFO_BYTES 24
@@ -139,12 +139,19 @@ typedef struct {
     uint16_t mode_id, mode_version, app_id, app_version;
     uint32_t request_length, request_crc, nonce, flags;
 } ModeInfo;
+// This mode start already has an accepted RESULT: the host must not run it
+// again (e.g. after a reconnect); it may only resend that result.
+#define MODE_FLAG_RESULT_FINAL (1u << 0)
 
 // RESULT request (host -> client): the outcome of a mode, versioned by the mode.
-//   0 u16 mode id   2 u16 result version   4 u32 result id (unique per mode start)
+//   0 u16 mode id   2 u16 result version   4 u32 result id = the MODE nonce it answers
 //   8 ..            result payload (<= RESULT_MAX_PAYLOAD bytes)
-// ACK: u16 ResultStatus, u16 0. A client accepts a given result id at most
-// once; a repeated id is acknowledged as RESULT_DUPLICATE and not re-applied.
+// ACK: u16 ResultStatus, u16 0. A mode start accepts at most one result, and it
+// is final: resending it gets RESULT_DUPLICATE (not re-applied); any other
+// result for that mode start, or one whose id is not the current nonce, gets
+// RESULT_REJECTED without reaching the mode. A mode may reject a payload
+// (RESULT_REJECTED), which settles nothing. After acceptance MODE replies carry
+// MODE_FLAG_RESULT_FINAL. The next mode start has a new nonce.
 #define RESULT_HEADER_BYTES 8
 #define RESULT_MAX_PAYLOAD (WIRE_PAYLOAD - RESULT_HEADER_BYTES)
 enum ResultStatus { RESULT_ACCEPTED = 0, RESULT_DUPLICATE = 1, RESULT_REJECTED = 2, RESULT_UNSUPPORTED = 3 };
