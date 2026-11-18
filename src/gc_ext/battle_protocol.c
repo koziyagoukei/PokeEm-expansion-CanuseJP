@@ -55,20 +55,20 @@ const char *battle_effect_kind_name(uint8_t kind) {
 
 // ------------------------------------------------------------- V13 modifiers
 
-void battle_modifier_put(const BattleModifier *mod, uint8_t *q) {
+void battle_modifier_put(const BattleModifier *mod, uint8_t flags, uint8_t *q) {
     q[0] = mod->stage;
     q[1] = mod->percent;
-    q[2] = mod->flags;
+    q[2] = flags;
     for (unsigned i = 0; i < BATTLE_MAX_PREDICATES; ++i) {
         q[3 + 2 * i] = mod->pred[i].kind;
         q[4 + 2 * i] = mod->pred[i].arg;
     }
 }
 
-void battle_modifier_get(const uint8_t *q, BattleModifier *mod) {
+void battle_modifier_get(const uint8_t *q, BattleModifier *mod, uint8_t *flags) {
     mod->stage = q[0];
     mod->percent = q[1];
-    mod->flags = q[2];
+    *flags = q[2];
     for (unsigned i = 0; i < BATTLE_MAX_PREDICATES; ++i) mod->pred[i] = (BattlePredicate){q[3 + 2 * i], q[4 + 2 * i]};
 }
 
@@ -93,7 +93,7 @@ bool battle_modifier_valid(const BattleModifier *mod, unsigned types, bool abili
     if (stage == BMOD_NONE || stage >= BMOD_COUNT || category > BCAT_SPECIAL) return false;
     if (mod->stage & ~(BMOD_STAGE_MASK | BMOD_CATEGORY_MASK | (ability ? BMODF_DEFENDER : 0))) return false;
     if (!ability && category) return false;  // a move's own category is known to the GBA
-    if (!mod->percent || (mod->flags & ~(ability ? BAHF_BREAKABLE : 0))) return false;
+    if (!mod->percent) return false;
     if (!mod->pred[0].kind && mod->pred[1].kind) return false;
     for (unsigned i = 0; i < BATTLE_MAX_PREDICATES; ++i)
         if (!predicate_valid(mod->pred[i], stage, types, ability)) return false;
@@ -134,6 +134,10 @@ bool battle_move_effects_valid(const BattleMove *m) {
     unsigned damage = 0;
     for (unsigned i = 0; i < m->effect_count; ++i) {
         const BattleEffect *e = &m->effects[i];
+        if (e->kind == BEFF_MODIFIER) {  // V13 (the decoder refuses it in earlier requests)
+            if (!damaging || e->flags || !battle_modifier_valid(&e->mod, 0, false)) return false;
+            continue;
+        }
         if (e->who > BWHO_USER || e->chance > 100 || (e->flags & ~(BEFL_TYPE_CHART | BEFL_TIMING_MASK))) return false;
         if (e->chance && !damaging) return false;  // chances are secondary effects of a hit
         if (!effect_timing_valid(e, damaging)) return false;
@@ -196,11 +200,6 @@ bool battle_move_effects_valid(const BattleMove *m) {
                 has_effect(m, BEFF_CHARGE))
                 return false;
             break;
-        case BEFF_MODIFIER:  // V13 (the decoder refuses it in earlier requests)
-            if (!damaging || e->who || e->chance || e->arg0 || e->arg1 || e->arg2 || e->flags ||
-                !battle_modifier_valid(&e->mod, 0, false))
-                return false;
-            break;
         default:
             return false;
         }
@@ -235,9 +234,8 @@ bool battle_ability_hook_valid(const BattleAbilityHook *h, unsigned types, uint8
     if (h->kind < BABIL_ATTACK_MULT || h->kind > (v13 ? BABIL_COUNT - 1 : v12 ? BABIL_V12_LAST : BABIL_V11_LAST))
         return false;
     switch (h->kind) {
-    case BABIL_MODIFIER:  // everything is in the modifier record
-        return !h->arg0 && !h->arg1 && !h->arg2 && !h->chance && !h->chance_den && !h->percent && !h->flags &&
-               battle_modifier_valid(&h->mod, types, true);
+    case BABIL_MODIFIER:  // everything but the flags is in the modifier record
+        return !(h->flags & ~BAHF_BREAKABLE) && battle_modifier_valid(&h->mod, types, true);
     case BABIL_NO_GUARD: case BABIL_STURDY: case BABIL_NO_RECOIL: case BABIL_SHIELD_DUST:
     case BABIL_INFILTRATOR: case BABIL_IGNORE_BURN:
         ok = !h->arg0 && !h->arg1 && !h->arg2;
@@ -350,7 +348,7 @@ static void move_effects_encode(const BattleMove *m, uint8_t *p) {
         uint8_t *q = p + BATTLE_MOVE_EFFECTS_HEADER + i * BATTLE_EFFECT_BYTES;
         q[0] = e->kind;
         if (e->kind == BEFF_MODIFIER) {  // V13 (the encoder refuses it in earlier versions)
-            battle_modifier_put(&e->mod, q + 1);
+            battle_modifier_put(&e->mod, e->flags, q + 1);
             continue;
         }
         q[1] = e->who;
@@ -373,13 +371,23 @@ static unsigned move_effects_decode(const uint8_t *p, uint32_t available, Battle
     if (available < size) return 0;
     for (unsigned i = 0; i < m->effect_count; ++i) {
         const uint8_t *q = p + BATTLE_MOVE_EFFECTS_HEADER + i * BATTLE_EFFECT_BYTES;
+        BattleEffect *e = &m->effects[i];
+        memset(e, 0, sizeof *e);  // the whole union, so a later read of either form is defined
+        e->kind = q[0];
         if (version >= BATTLE_REQUEST_VERSION_MODIFIERS && q[0] == BEFF_MODIFIER) {
-            m->effects[i] = (BattleEffect){.kind = BEFF_MODIFIER};
-            battle_modifier_get(q + 1, &m->effects[i].mod);
+            battle_modifier_get(q + 1, &e->mod, &e->flags);
             continue;
         }
         if (q[7]) return 0;
-        m->effects[i] = (BattleEffect){q[0], q[1], q[2], q[3], (int8_t)q[4], q[5], q[6], {0}};
+        // Before V13 the kind is not a modifier: a supported move with it was always
+        // refused (its legacy bytes never validated); an unsupported one keeps the bytes.
+        if (q[0] == BEFF_MODIFIER && !m->unsupported) return 0;
+        e->who = q[1];
+        e->chance = q[2];
+        e->arg0 = q[3];
+        e->arg1 = (int8_t)q[4];
+        e->arg2 = q[5];
+        e->flags = q[6];
     }
     return size;
 }
@@ -441,7 +449,7 @@ static void ability_decode_v11(const uint8_t *p, BattleAbility *a) {
     }
     a->cls = BACLASS_HOOKS;
     a->count = 1;
-    a->hooks[0] = (BattleAbilityHook){p[0], p[1], (int8_t)p[2], p[3], p[4], (uint8_t)(p[4] ? 100 : 0), p[5], 0, {0}};
+    a->hooks[0] = (BattleAbilityHook){p[0], {{p[1], (int8_t)p[2], p[3], p[4], (uint8_t)(p[4] ? 100 : 0), p[5]}}, 0};
 }
 
 static void ability_encode_v12(const BattleAbility *a, uint8_t *p) {
@@ -453,7 +461,7 @@ static void ability_encode_v12(const BattleAbility *a, uint8_t *p) {
         uint8_t *q = p + BATTLE_ABILITY_HEADER_BYTES + i * BATTLE_ABILITY_HOOK_BYTES;
         q[0] = h->kind;
         if (h->kind == BABIL_MODIFIER) {  // V13 (the encoder refuses it in earlier versions)
-            battle_modifier_put(&h->mod, q + 1);
+            battle_modifier_put(&h->mod, h->flags, q + 1);
             continue;
         }
         q[1] = h->arg0;
@@ -476,10 +484,10 @@ static unsigned ability_decode_v12(const uint8_t *p, uint32_t available, BattleA
         const uint8_t *q = p + BATTLE_ABILITY_HEADER_BYTES + i * BATTLE_ABILITY_HOOK_BYTES;
         if (version >= BATTLE_REQUEST_VERSION_MODIFIERS && q[0] == BABIL_MODIFIER) {
             a->hooks[i] = (BattleAbilityHook){.kind = BABIL_MODIFIER};
-            battle_modifier_get(q + 1, &a->hooks[i].mod);
+            battle_modifier_get(q + 1, &a->hooks[i].mod, &a->hooks[i].flags);
             continue;
         }
-        a->hooks[i] = (BattleAbilityHook){q[0], q[1], (int8_t)q[2], q[3], q[4], q[5], q[6], q[7], {0}};
+        a->hooks[i] = (BattleAbilityHook){q[0], {{q[1], (int8_t)q[2], q[3], q[4], q[5], q[6]}}, q[7]};
     }
     return size;
 }

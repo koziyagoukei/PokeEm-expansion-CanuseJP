@@ -30,6 +30,7 @@ extern "C" {
 #define BATTLE_APP_VERSION_ABILITIES 11  // V10 + ability descriptors (same state/action layout)
 #define BATTLE_APP_VERSION_ABILITY_HOOKS 12  // V11 + multi-hook ability blocks (same state/action layout)
 #define BATTLE_APP_VERSION_MODIFIERS 13  // V12 + shared modifier records (same state/action layout)
+#define BATTLE_APP_VERSION_FIXED_POINT 14  // V13 + Gen 5+ fixed-point damage arithmetic (same layout)
 #define BATTLE_MODE_VERSION 1
 
 enum BattleFormat { BATTLE_FORMAT_SINGLE = 1, BATTLE_FORMAT_DOUBLE = 2, BATTLE_FORMAT_TRIPLE = 3, BATTLE_FORMAT_ROTATION = 4 };
@@ -175,14 +176,17 @@ enum BattleEffectTiming {
 //   6 u8 predicate 1 kind                              7 u8 predicate 1 argument
 // The modifier applies when both predicates hold (an empty one holds). It
 // never draws a random number. Where each stage applies, how it rounds and
-// its minimum are fixed by the core, not by the record (docs/rule-poc.md).
+// its minimum are fixed by the core, not by the record (docs/modifiers.md):
+// V13 floors after each modifier; V14 (BATTLE_REQUEST_VERSION_FIXED_POINT)
+// chains the stage's modifiers in 4.12 fixed point and rounds once, as the
+// Gen 5+ damage formula does. BASE_POWER is integer in both.
 enum BattleModifierStage {
     BMOD_NONE = 0,
     BMOD_BASE_POWER = 1,  // the move's base power (e.g. Hex), before the power modifiers; floor, min 1
-    BMOD_POWER = 2,       // power modifiers (Technician, Facade-like); floor, min 1
-    BMOD_ATTACK = 3,      // attacking stat after stages; floor, min 1
-    BMOD_DEFENSE = 4,     // defending stat after stages; floor, min 1
-    BMOD_FINAL = 5,       // damage after type and burn; floor (the damage minimum of 1 follows)
+    BMOD_POWER = 2,       // power modifiers (Technician, Brine); min 1
+    BMOD_ATTACK = 3,      // attacking stat after stages; min 1
+    BMOD_DEFENSE = 4,     // defending stat after stages; min 1
+    BMOD_FINAL = 5,       // damage after type and burn (the damage minimum of 1 follows)
     BMOD_COUNT
 };
 #define BMOD_STAGE_MASK 0x07u
@@ -203,20 +207,35 @@ enum BattlePredicateKind {
 #define BATTLE_MAX_PREDICATES 2
 #define BATTLE_MODIFIER_BODY_BYTES 7
 typedef struct { uint8_t kind, arg; } BattlePredicate;
+// The modifier without its flags byte (record bytes 1, 2 and 4..7). The
+// flags belong to the effect or hook slot that holds it.
 typedef struct {
-    uint8_t stage, percent, flags;
+    uint8_t stage, percent;
     BattlePredicate pred[BATTLE_MAX_PREDICATES];
 } BattleModifier;
-// `ability`: a hook (BMODF_DEFENDER, BAHF_BREAKABLE and the move predicates allowed).
+// `ability`: a hook (BMODF_DEFENDER and the move predicates allowed).
 bool battle_modifier_valid(const BattleModifier *modifier, unsigned type_count, bool ability);
-void battle_modifier_put(const BattleModifier *modifier, uint8_t *body);
-void battle_modifier_get(const uint8_t *body, BattleModifier *modifier);
+// The 7-byte record body (after the kind byte) and the slot's flags.
+void battle_modifier_put(const BattleModifier *modifier, uint8_t flags, uint8_t *body);
+void battle_modifier_get(const uint8_t *body, BattleModifier *modifier, uint8_t *flags);
 
+// Effects and hooks are 8 bytes in memory, as on the wire: the kind, the
+// fields of that kind, then the flags. A modifier record shares the storage
+// of the legacy fields, so code reads `mod` only for BEFF_MODIFIER /
+// BABIL_MODIFIER and the legacy fields only for the other kinds; `kind` and
+// `flags` are valid for every kind. The legacy field order is unchanged, so
+// positional initializers keep their meaning.
 typedef struct {
-    uint8_t kind, who, chance, arg0;
-    int8_t arg1;
-    uint8_t arg2, flags;
-    BattleModifier mod;  // BEFF_MODIFIER only (the fields above are 0)
+    uint8_t kind;
+    union {
+        struct {
+            uint8_t who, chance, arg0;
+            int8_t arg1;
+            uint8_t arg2;
+        };
+        BattleModifier mod;  // BEFF_MODIFIER
+    };
+    uint8_t flags;  // BEFL_* (0 for BEFF_MODIFIER)
 } BattleEffect;
 
 typedef struct {
@@ -309,10 +328,16 @@ enum BattleAbilityRange { BRANGE_ALL_FOES = 0, BRANGE_ADJACENT_FOES = 1 };
 #define BATTLE_ABILITY_HOOK_BYTES 8     // V12 hook
 #define BATTLE_MAX_ABILITY_HOOKS 4
 typedef struct {
-    uint8_t kind, arg0;
-    int8_t arg1;
-    uint8_t arg2, chance, chance_den, percent, flags;
-    BattleModifier mod;  // BABIL_MODIFIER only (the fields above are 0)
+    uint8_t kind;
+    union {
+        struct {
+            uint8_t arg0;
+            int8_t arg1;
+            uint8_t arg2, chance, chance_den, percent;
+        };
+        BattleModifier mod;  // BABIL_MODIFIER
+    };
+    uint8_t flags;  // BAHF_* (only BAHF_BREAKABLE for BABIL_MODIFIER)
 } BattleAbilityHook;
 typedef struct {
     uint8_t cls, count;  // BACLASS_*; hooks used
@@ -359,7 +384,8 @@ typedef struct {
 #define BATTLE_REQUEST_VERSION_ABILITIES 11  // ability block after the effect lists; BMF_CONTACT
 #define BATTLE_REQUEST_VERSION_ABILITY_HOOKS 12  // multi-hook ability blocks; strict / fixed-seed rules
 #define BATTLE_REQUEST_VERSION_MODIFIERS 13  // BEFF_MODIFIER / BABIL_MODIFIER records (same layout as V12)
-#define BATTLE_REQUEST_VERSION_LATEST BATTLE_REQUEST_VERSION_MODIFIERS
+#define BATTLE_REQUEST_VERSION_FIXED_POINT 14  // same layout as V13; 4.12 damage arithmetic (docs/modifiers.md)
+#define BATTLE_REQUEST_VERSION_LATEST BATTLE_REQUEST_VERSION_FIXED_POINT
 #define BATTLE_REQUEST_HEADER 24
 enum StruggleRecoil { BSTRUGGLE_MAX_HP_FLOOR = 1, BSTRUGGLE_MAX_HP_NEAREST = 2 };
 #define BATTLE_MOVE_STRUGGLE 0xffffu  // logical presentation identifier
