@@ -203,10 +203,12 @@ static bool8 VolatilesEnabled(void)
     return sBattle->roster >= BATTLE_APP_VERSION_VOLATILES;
 }
 
-// V13 modifier records (gba-gc-extension docs/rule-poc.md): the same record
-// type for moves and abilities. Up to two predicates, all must hold.
+// Modifier records (requests V13+, gba-gc-extension docs/modifiers.md): one
+// record type for moves and abilities, a stage, a percent and up to two
+// predicates that must all hold. The GC runs them without code of its own
+// for any move or ability.
 #define MODIFIER(stage, percent, k0, a0, k1, a1) \
-    ((BattleModifier){stage, percent, 0, {{k0, a0}, {k1, a1}}})
+    ((BattleModifier){stage, percent, {{k0, a0}, {k1, a1}}})
 
 static BattleEffect ModifierEffect(BattleModifier mod)
 {
@@ -221,6 +223,58 @@ static BattleAbilityHook ModifierHook(BattleModifier mod)
     h.mod = mod;
     return h;
 }
+
+static bool8 PushEffect(BattleMove *out, BattleEffect e);
+static u8 ExportStatusMask(u32 status);
+
+// ---------------------------------------------------------------------------
+// Game data -> modifier records (every battle). Each entry reproduces one
+// modifier of this build's damage code (battle_util.c) exactly: its stage,
+// its condition and its factor. Requests before V14 keep the V13 export
+// (Hex only), so V13 requests are unchanged; the Ability Lab's own
+// definitions are separate (sLabAbilities, debug fixtures only).
+
+static const struct AbilityModifier
+{
+    u16 ability;
+    BattleModifier mod;
+} sAbilityModifiers[] = {
+    // CalcMoveBasePowerAfterModifiers: power x1.5 while poisoned (physical) or burned (special).
+    {ABILITY_TOXIC_BOOST, MODIFIER(BATTLE_MODIFIER_STAGE(BMOD_POWER, BCAT_PHYSICAL), 150,
+                                   BPRED_STATUS, (1u << BST_POISON) | (1u << BST_TOXIC), 0, 0)},
+    {ABILITY_FLARE_BOOST, MODIFIER(BATTLE_MODIFIER_STAGE(BMOD_POWER, BCAT_SPECIAL), 150,
+                                   BPRED_STATUS, 1u << BST_BURN, 0, 0)},
+    // CalcAttackStat: the attacking stat x0.5 at half HP or less (both categories).
+    {ABILITY_DEFEATIST, MODIFIER(BMOD_ATTACK, 50, BPRED_HP_AT_MOST, 2, 0, 0)},
+};
+
+// The move's own modifier record, or FALSE if the effect cannot be one.
+static bool8 ExportMoveModifier(enum Move move, enum BattleMoveEffects effect, BattleMove *out)
+{
+    switch (effect)
+    {
+    case EFFECT_DOUBLE_POWER_ON_ARG_STATUS:
+    {
+        // CalcMoveBasePower: Hex, Venoshock ... base power x2 while the target
+        // has one of the move's statuses. The moves that also cure the status
+        // (their substitute exception) stay unsupported.
+        const u8 mask = ExportStatusMask(GetMoveEffectArg_Status(move));
+        if (sBattle->roster < BATTLE_APP_VERSION_MODIFIERS || mask == 0
+         || (GetMoveAdditionalEffectCount(move) && GetMoveAdditionalEffectById(move, 0)->moveEffect == MOVE_EFFECT_REMOVE_STATUS))
+            return FALSE;
+        return PushEffect(out, ModifierEffect(MODIFIER(BMOD_BASE_POWER, 200, BPRED_STATUS | BPRED_DEFENDER, mask, 0, 0)));
+    }
+    case EFFECT_BRINE:
+        // CalcMoveBasePowerAfterModifiers: power x2 while the target is at half HP or less.
+        if (sBattle->roster < BATTLE_APP_VERSION_FIXED_POINT)
+            return FALSE;
+        return PushEffect(out, ModifierEffect(MODIFIER(BMOD_POWER, 200, BPRED_HP_AT_MOST | BPRED_DEFENDER, 2, 0, 0)));
+    default:
+        return FALSE;
+    }
+}
+
+static void ExportAbilityModifiers(enum Ability ability, BattleAbility *a);
 
 // STATUS1_* bits of a move argument as a mask of 1 << BST_*.
 static u8 ExportStatusMask(u32 status)
@@ -377,18 +431,11 @@ static u8 ResolveEffects(enum Move move, BattleMove *out)
     case EFFECT_HIT:
     case EFFECT_STAT_CHANGE:
         break;
-    case EFFECT_DOUBLE_POWER_ON_ARG_STATUS:
-    {
-        // Hex, Venoshock ...: base power x2 while the target has one of the
-        // move's statuses (CalcMoveBasePower). V13 only; the moves that also
-        // cure the status (substitute exception) stay unsupported.
-        const u8 mask = ExportStatusMask(GetMoveEffectArg_Status(move));
-        if (sBattle->roster < BATTLE_APP_VERSION_MODIFIERS || !damaging || mask == 0
-         || (GetMoveAdditionalEffectCount(move) && GetMoveAdditionalEffectById(move, 0)->moveEffect == MOVE_EFFECT_REMOVE_STATUS))
+    case EFFECT_DOUBLE_POWER_ON_ARG_STATUS:  // Hex (V13+)
+    case EFFECT_BRINE:                       // V14+
+        if (!damaging || !ExportMoveModifier(move, effect, out))
             return UNSUP_EFFECT;
-        PushEffect(out, ModifierEffect(MODIFIER(BMOD_BASE_POWER, 200, BPRED_STATUS | BPRED_DEFENDER, mask, 0, 0)));
         break;
-    }
     case EFFECT_EARTHQUAKE:
         // A plain hit that also reaches (and doubles against) an underground
         // target; its Grassy Terrain halving never applies without terrain.
@@ -576,7 +623,7 @@ static void ResolveMove(enum Move move, BattleMove *out)
 // UNSUPPORTED (the GC shows it as not simulated), never as NONE. V11 carries
 // one hook with a percent chance; abilities that need more are UNSUPPORTED there.
 #define HOOK(kind, arg0, arg1, arg2, num, den, percent, flags) \
-    ((BattleAbilityHook){kind, arg0, arg1, arg2, num, den, percent, flags})
+    ((BattleAbilityHook){kind, {{arg0, arg1, arg2, num, den, percent}}, flags})
 
 static bool8 AddHook(BattleAbility *a, BattleAbilityHook hook)
 {
@@ -770,11 +817,23 @@ static BattleAbility ResolveAbility(enum Ability ability)
                              0, 0, 0, 0, 0, GetConfig(B_SYNCHRONIZE_TOXIC) >= GEN_5 ? 0 : BAHF_TOXIC_TO_POISON));
         break;
     default:
+        ExportAbilityModifiers(ability, &a);  // V14: abilities that are modifier records only
         break;
     }
     for (u32 i = 0; i < a.count; i++)
         a.hooks[i].flags |= breakable;
     return a;
+}
+
+static void ExportAbilityModifiers(enum Ability ability, BattleAbility *a)
+{
+    if (sBattle->roster < BATTLE_APP_VERSION_FIXED_POINT)
+        return;
+    for (u32 i = 0; i < ARRAY_COUNT(sAbilityModifiers); i++)
+    {
+        if (sAbilityModifiers[i].ability == ability)
+            AddHook(a, ModifierHook(sAbilityModifiers[i].mod));
+    }
 }
 
 static u8 FillEntry(u32 slot, BattleEntry *entry)
@@ -826,8 +885,12 @@ struct LabFixture
     u8 seedOf;   // 0 = own; else use that fixture's battle id (same GC seed)
 };
 
-// V13 PoC: abilities defined only here, as modifier records the GC runs
-// without code of its own for them. The holder keeps its game ability id.
+// ---------------------------------------------------------------------------
+// Ability Lab only (debug fixtures): abilities defined here and nowhere in
+// the game data, as modifier records the GC runs without code of its own.
+// Only BuildLabEntries reads this table (a LabMon with `custom`); normal
+// battles take their records from the game data section above. The holder
+// keeps its game ability id.
 enum { LAB_CUSTOM_NONE, LAB_CUSTOM_LOW_HP_STATUS, LAB_CUSTOM_LOW_HP };
 static const BattleModifier sLabAbilities[] = {
     // Physical power x2 while at half HP or less AND with a major status.
@@ -937,6 +1000,24 @@ static const struct LabFixture sLabFixtures[] = {
          LM(MISDREAVUS, 0, 30, 100, 0, MOVE_HEX)},
         {LM(MACHOP, 1, 30, 100, STATUS1_POISON, MOVE_LEER), LM(MACHOP, 1, 30, 100, 0, MOVE_LEER),
          LM(MACHOP, 1, 30, 100, 0, MOVE_LEER)}}, BATTLE_APP_VERSION_MODIFIERS, 0},
+    // V14 (docs/modifiers.md): fixed-point arithmetic and the game-data records.
+    [26] = {BATTLE_FORMAT_SINGLE, 1, FALSE, {  // Guts (poisoned) and Thick Fat: one attack chain, x0.75
+        {LM(MACHAMP, 0, 36, 100, STATUS1_POISON, MOVE_ICE_PUNCH)},
+        {LM(SNORLAX, 1, 36, 100, 0, MOVE_RECOVER)}}, BATTLE_APP_VERSION_FIXED_POINT, 0},
+    [27] = {BATTLE_FORMAT_DOUBLE, 2, FALSE, {  // spread Rock Slide; Brine at half HP with Flare Boost
+        {LM(GOLEM, 0, 34, 100, 0, MOVE_ROCK_SLIDE), LM(DRIFBLIM, 2, 34, 100, STATUS1_BURN, MOVE_BRINE)},
+        {LM(SNORLAX, 0, 34, 100, 0, MOVE_RECOVER), LM(SNORLAX, 0, 34, 45, 0, MOVE_RECOVER)}},
+        BATTLE_APP_VERSION_FIXED_POINT, 0},
+    [28] = {BATTLE_FORMAT_TRIPLE, 3, FALSE, {  // Defeatist and Thick Fat (x0.25), Toxic Boost, Technician
+        {LM(ARCHEOPS, 0, 34, 45, 0, MOVE_FIRE_PUNCH), LM(ZANGOOSE, 2, 34, 100, STATUS1_POISON, MOVE_ICE_PUNCH),
+         LM(SCIZOR, 1, 34, 100, 0, MOVE_DOUBLE_KICK)},
+        {LM(SNORLAX, 1, 34, 100, 0, MOVE_RECOVER), LM(SNORLAX, 0, 34, 100, 0, MOVE_RECOVER),
+         LM(SNORLAX, 0, 34, 100, 0, MOVE_RECOVER)}}, BATTLE_APP_VERSION_FIXED_POINT, 0},
+    [29] = {BATTLE_FORMAT_ROTATION, 3, FALSE, {  // Earthquake on Dig (final x2), Guts and Thick Fat
+        {LM(GOLEM, 0, 34, 100, 0, MOVE_EARTHQUAKE), LM(MACHAMP, 0, 34, 100, STATUS1_POISON, MOVE_ICE_PUNCH),
+         LM(ZANGOOSE, 2, 34, 100, STATUS1_POISON, MOVE_ICE_PUNCH)},
+        {LM(DUGTRIO, 0, 34, 100, 0, MOVE_DIG), LM(SNORLAX, 1, 34, 100, 0, MOVE_RECOVER),
+         LM(SNORLAX, 0, 34, 100, 0, MOVE_RECOVER)}}, BATTLE_APP_VERSION_FIXED_POINT, 0},
 };
 #undef LM
 #undef LMC
