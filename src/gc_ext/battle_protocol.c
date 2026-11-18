@@ -49,7 +49,8 @@ bool battle_effect_valid(uint8_t effect, uint8_t version) {
 const char *battle_effect_kind_name(uint8_t kind) {
     static const char *const names[] = {"none", "damage", "stat", "status", "cure", "heal", "drain",
                                         "recoil", "force_out", "pivot", "protect", "flinch", "confuse",
-                                        "substitute", "charge", "recharge", "modifier"};
+                                        "substitute", "charge", "recharge", "modifier", "weather",
+                                        "weather_accuracy", "weather_type", "weather_heal"};
     return kind < BEFF_COUNT ? names[kind] : "invalid";
 }
 
@@ -72,31 +73,56 @@ void battle_modifier_get(const uint8_t *q, BattleModifier *mod, uint8_t *flags) 
     for (unsigned i = 0; i < BATTLE_MAX_PREDICATES; ++i) mod->pred[i] = (BattlePredicate){q[3 + 2 * i], q[4 + 2 * i]};
 }
 
-static bool predicate_valid(BattlePredicate p, uint8_t stage, unsigned types, bool ability) {
+static bool damage_stage(uint8_t stage) { return stage >= BMOD_BASE_POWER && stage <= BMOD_FINAL; }
+
+static bool predicate_valid(BattlePredicate p, uint8_t stage, unsigned types, uint8_t source, bool v15) {
     const uint8_t kind = p.kind & BPRED_KIND_MASK, subject = p.kind & ~BPRED_KIND_MASK;
     if (subject & ~BPRED_DEFENDER) return false;  // bit 6 is reserved
+    // A speed record has one Pokemon, the holder, and no move.
+    if (stage == BMOD_SPEED && subject) return false;
+    if (!v15 && kind >= BPRED_V14_COUNT) return false;
     switch (kind) {
     case BPRED_NONE: return !p.kind && !p.arg;
     case BPRED_HP_AT_MOST: return p.arg >= 2;
     case BPRED_STATUS: return p.arg && !(p.arg & ~0xfeu);  // 1 << BST_POISON .. 1 << BST_FROSTBITE
-    // Properties of the move itself: an ability's filter; for a move the GBA resolves them.
-    case BPRED_MOVE_TYPE: return ability && !subject && p.arg < types;
-    case BPRED_POWER_AT_MOST: return ability && !subject && p.arg && stage != BMOD_BASE_POWER;
+    // Properties of the move itself: an ability's or the field's filter; for a move the GBA resolves them.
+    case BPRED_MOVE_TYPE: return source != BMSRC_MOVE && stage != BMOD_SPEED && !subject && p.arg < types;
+    case BPRED_POWER_AT_MOST:
+        return source == BMSRC_ABILITY && damage_stage(stage) && !subject && p.arg && stage != BMOD_BASE_POWER;
+    case BPRED_WEATHER: return !subject && p.arg && !(p.arg & ~BWEATHER_ALL);
+    case BPRED_HAS_TYPE: return p.arg < types;
     default: return false;  // unknown predicates are refused, never ignored
     }
 }
 
+// The stages a record of each source may use.
+static bool stage_allowed(uint8_t stage, uint8_t source) {
+    switch (source) {
+    case BMSRC_MOVE: return damage_stage(stage);
+    case BMSRC_ABILITY: return damage_stage(stage) || stage == BMOD_SPEED || stage == BMOD_ACCURACY;
+    case BMSRC_FIELD: return stage == BMOD_WEATHER || stage == BMOD_DEFENSE;
+    default: return false;
+    }
+}
+
 // One meaning per record: packed predicates, no reserved bits, a percent.
-bool battle_modifier_valid(const BattleModifier *mod, unsigned types, bool ability) {
-    const uint8_t stage = mod->stage & BMOD_STAGE_MASK;
+bool battle_modifier_valid(const BattleModifier *mod, unsigned types, uint8_t source, uint8_t version) {
+    const bool v15 = version >= BATTLE_REQUEST_VERSION_WEATHER;
+    const uint8_t stage = v15 ? battle_modifier_stage(mod->stage) : mod->stage & BMOD_STAGE_MASK;
     const uint8_t category = (mod->stage & BMOD_CATEGORY_MASK) >> BMOD_CATEGORY_SHIFT;
-    if (stage == BMOD_NONE || stage >= BMOD_COUNT || category > BCAT_SPECIAL) return false;
-    if (mod->stage & ~(BMOD_STAGE_MASK | BMOD_CATEGORY_MASK | (ability ? BMODF_DEFENDER : 0))) return false;
-    if (!ability && category) return false;  // a move's own category is known to the GBA
+    const bool ability = source == BMSRC_ABILITY;
+    if (stage == BMOD_NONE || stage >= (v15 ? BMOD_COUNT : BMOD_V14_COUNT) || category > BCAT_SPECIAL) return false;
+    if (source == BMSRC_FIELD && !v15) return false;
+    if (!stage_allowed(stage, source)) return false;
+    const uint8_t allowed = BMOD_STAGE_MASK | BMOD_CATEGORY_MASK | (v15 ? BMOD_STAGE_HIGH : 0) |
+                            (ability && stage != BMOD_SPEED ? BMODF_DEFENDER : 0);
+    if (mod->stage & ~allowed) return false;
+    // A move's own category is known to the GBA; a speed record has no move.
+    if (category && (source == BMSRC_MOVE || stage == BMOD_SPEED)) return false;
     if (!mod->percent) return false;
     if (!mod->pred[0].kind && mod->pred[1].kind) return false;
     for (unsigned i = 0; i < BATTLE_MAX_PREDICATES; ++i)
-        if (!predicate_valid(mod->pred[i], stage, types, ability)) return false;
+        if (!predicate_valid(mod->pred[i], stage, types, source, v15)) return false;
     return true;
 }
 
@@ -126,6 +152,13 @@ static bool effect_timing_valid(const BattleEffect *e, bool damaging) {
 }
 
 bool battle_move_effects_valid(const BattleMove *m) {
+    return battle_move_effects_valid_for(m, BATTLE_REQUEST_VERSION_LATEST);
+}
+
+static bool weather_mask_valid(uint8_t mask) { return mask && !(mask & ~BWEATHER_ALL); }
+
+bool battle_move_effects_valid_for(const BattleMove *m, uint8_t version) {
+    const bool v15 = version >= BATTLE_REQUEST_VERSION_WEATHER;
     if (m->effect_count > BATTLE_MAX_EFFECTS || (m->move_flags & ~BMF_V11_MASK)) return false;
     const bool damaging = m->category != BCAT_STATUS;
     if (damaging != (m->power != 0) || damaging != has_effect(m, BEFF_DAMAGE)) return false;
@@ -135,9 +168,10 @@ bool battle_move_effects_valid(const BattleMove *m) {
     for (unsigned i = 0; i < m->effect_count; ++i) {
         const BattleEffect *e = &m->effects[i];
         if (e->kind == BEFF_MODIFIER) {  // V13 (the decoder refuses it in earlier requests)
-            if (!damaging || e->flags || !battle_modifier_valid(&e->mod, 0, false)) return false;
+            if (!damaging || e->flags || !battle_modifier_valid(&e->mod, 0, BMSRC_MOVE, version)) return false;
             continue;
         }
+        if (e->kind > BEFF_V14_LAST && !v15) return false;
         if (e->who > BWHO_USER || e->chance > 100 || (e->flags & ~(BEFL_TYPE_CHART | BEFL_TIMING_MASK))) return false;
         if (e->chance && !damaging) return false;  // chances are secondary effects of a hit
         if (!effect_timing_valid(e, damaging)) return false;
@@ -190,9 +224,28 @@ bool battle_move_effects_valid(const BattleMove *m) {
                 e->arg2 || flags)
                 return false;
             break;
-        case BEFF_CHARGE:
+        case BEFF_CHARGE:  // V15: arg2 = the weathers without a charging turn
             if (i || e->who != BWHO_USER || !damaging || e->chance || e->arg0 > BSEMI_UNDERGROUND || e->arg1 ||
-                e->arg2 || flags || m->effect_count < 2 || m->effects[1].kind != BEFF_DAMAGE)
+                (e->arg2 && (!v15 || !weather_mask_valid(e->arg2))) || flags || m->effect_count < 2 ||
+                m->effects[1].kind != BEFF_DAMAGE)
+                return false;
+            break;
+        // V15 weather kinds: a field move, and passive rules of a move in a weather.
+        case BEFF_WEATHER:
+            if (damaging || m->effect_count != 1 || e->who != BWHO_USER || e->chance || !e->arg0 ||
+                e->arg0 >= BWEATHER_COUNT || e->arg1 || (e->arg2 > BWEATHER_MAX_TURNS && e->arg2 != BWEATHER_TURNS_KEEP) ||
+                flags)
+                return false;
+            break;
+        case BEFF_WEATHER_ACCURACY:
+            if (e->who || e->chance || !weather_mask_valid(e->arg0) || e->arg1 || e->arg2 > 100 || e->flags) return false;
+            break;
+        case BEFF_WEATHER_TYPE:  // the type is checked against the request's type count by the core
+            if (!damaging || e->who || e->chance || !weather_mask_valid(e->arg0) || e->arg1 || e->flags) return false;
+            break;
+        case BEFF_WEATHER_HEAL:
+            if (damaging || !has_effect(m, BEFF_HEAL) || e->who != BWHO_USER || e->chance ||
+                !weather_mask_valid(e->arg0) || e->arg1 < 1 || e->arg1 > e->arg2 || e->flags)
                 return false;
             break;
         case BEFF_RECHARGE:
@@ -214,7 +267,8 @@ const char *battle_ability_kind_name(uint8_t kind) {
                                         "contact_damage", "entry_stat", "end_turn_stat", "sturdy", "no_recoil",
                                         "shield_dust", "secondary_chance", "infiltrator", "defense_mult",
                                         "ignore_burn", "stab_mult", "ko_stat", "end_turn_cure", "absorb_state",
-                                        "type_pass", "status_mirror", "modifier"};
+                                        "type_pass", "status_mirror", "modifier", "entry_weather",
+                                        "weather_suppress", "weather_immune", "weather_residual"};
     return kind < BABIL_COUNT ? names[kind] : "invalid";
 }
 
@@ -226,16 +280,34 @@ static bool category_ok(uint8_t category, bool any) {
 bool battle_ability_hook_valid(const BattleAbilityHook *h, unsigned types, uint8_t version) {
     const bool v12 = version >= BATTLE_REQUEST_VERSION_ABILITY_HOOKS;
     const bool v13 = version >= BATTLE_REQUEST_VERSION_MODIFIERS;
+    const bool v15 = version >= BATTLE_REQUEST_VERSION_WEATHER;
     const bool type_ok = h->arg0 < types;
     const uint8_t statuses = 0xfeu;  // 1 << BST_POISON .. 1 << BST_FROSTBITE
     const uint8_t mirrored = 1u << BST_POISON | 1u << BST_TOXIC | 1u << BST_PARALYSIS | 1u << BST_BURN;
     bool ok, chance = false, percent = false;
     uint8_t flags = 0;  // flags the kind accepts
-    if (h->kind < BABIL_ATTACK_MULT || h->kind > (v13 ? BABIL_COUNT - 1 : v12 ? BABIL_V12_LAST : BABIL_V11_LAST))
+    if (h->kind < BABIL_ATTACK_MULT ||
+        h->kind > (v15 ? BABIL_COUNT - 1 : v13 ? BABIL_V14_LAST : v12 ? BABIL_V12_LAST : BABIL_V11_LAST))
         return false;
     switch (h->kind) {
     case BABIL_MODIFIER:  // everything but the flags is in the modifier record
-        return !(h->flags & ~BAHF_BREAKABLE) && battle_modifier_valid(&h->mod, types, true);
+        return !(h->flags & ~BAHF_BREAKABLE) && battle_modifier_valid(&h->mod, types, BMSRC_ABILITY, version);
+    // V15 weather hooks.
+    case BABIL_ENTRY_WEATHER:
+        ok = h->arg0 && h->arg0 < BWEATHER_COUNT && !h->arg1 &&
+             (h->arg2 <= BWEATHER_MAX_TURNS || h->arg2 == BWEATHER_TURNS_KEEP);
+        break;
+    case BABIL_WEATHER_SUPPRESS:
+        ok = !h->arg0 && !h->arg1 && !h->arg2;
+        break;
+    case BABIL_WEATHER_IMMUNE:
+        ok = h->arg0 && !(h->arg0 & ~BWEATHER_ALL) && !h->arg1 && !h->arg2;
+        break;
+    case BABIL_WEATHER_RESIDUAL:
+        flags = BAHF_NOT_UNDERGROUND;
+        ok = h->arg0 && !(h->arg0 & ~BWEATHER_ALL) && (h->arg1 == 1 || h->arg1 == -1) && h->arg2 >= 2 &&
+             h->arg2 <= 16;
+        break;
     case BABIL_NO_GUARD: case BABIL_STURDY: case BABIL_NO_RECOIL: case BABIL_SHIELD_DUST:
     case BABIL_INFILTRATOR: case BABIL_IGNORE_BURN:
         ok = !h->arg0 && !h->arg1 && !h->arg2;
@@ -413,6 +485,64 @@ static bool volatile_rules_decode(const uint8_t *p, BattleVolatileRules *r) {
     return !p[6] && !p[7] && battle_volatile_rules_valid(r);
 }
 
+// ------------------------------------------------------------- V15 field rules
+
+bool battle_field_rules_valid(const BattleFieldRules *r, unsigned types) {
+    if ((r->flags & ~BFR_START_LOCKED) || r->modifier_count > BATTLE_MAX_FIELD_MODIFIERS) return false;
+    // A start weather lasts 1..15 turns or has no end; a locked one needs a weather.
+    if (r->start_weather >= BWEATHER_COUNT || r->start_turns > BWEATHER_MAX_TURNS ||
+        (!r->start_weather && (r->start_turns || r->flags)))
+        return false;
+    for (unsigned k = 0; k < BWEATHER_KINDS; ++k) {
+        const BattleWeatherKindRules *w = &r->weather[k];
+        if (w->residual_divisor == 1 || (w->flags & ~BWKF_MASK)) return false;
+        for (unsigned t = 0; t < BATTLE_WEATHER_IMMUNE_TYPES; ++t)
+            if (w->immune_types[t] != BABIL_NO_TYPE && w->immune_types[t] >= types) return false;
+    }
+    for (unsigned i = 0; i < BATTLE_MAX_FIELD_MODIFIERS; ++i) {
+        const BattleModifier *m = &r->modifiers[i];
+        if (i < r->modifier_count) {
+            if (!battle_modifier_valid(m, types, BMSRC_FIELD, BATTLE_REQUEST_VERSION_WEATHER)) return false;
+        } else if (m->stage || m->percent || m->pred[0].kind || m->pred[0].arg || m->pred[1].kind || m->pred[1].arg) {
+            return false;  // unused records are zero
+        }
+    }
+    return true;
+}
+
+static void field_rules_encode(const BattleFieldRules *r, uint8_t *p) {
+    for (unsigned i = 0; i < BATTLE_FIELD_RULE_BYTES; ++i) p[i] = 0;
+    p[0] = r->flags;
+    p[1] = r->start_weather;
+    p[2] = r->start_turns;
+    p[3] = r->modifier_count;
+    for (unsigned k = 0; k < BWEATHER_KINDS; ++k) {
+        uint8_t *q = p + 4 + k * BATTLE_FIELD_KIND_BYTES;
+        q[0] = r->weather[k].residual_divisor;
+        q[1] = r->weather[k].flags;
+        for (unsigned t = 0; t < BATTLE_WEATHER_IMMUNE_TYPES; ++t) q[2 + t] = r->weather[k].immune_types[t];
+    }
+    for (unsigned i = 0; i < BATTLE_MAX_FIELD_MODIFIERS; ++i)
+        battle_modifier_put(&r->modifiers[i], 0, p + 32 + i * BATTLE_MODIFIER_BODY_BYTES);
+}
+
+static bool field_rules_decode(const uint8_t *p, BattleFieldRules *r, unsigned types) {
+    *r = (BattleFieldRules){.flags = p[0], .start_weather = p[1], .start_turns = p[2], .modifier_count = p[3]};
+    for (unsigned k = 0; k < BWEATHER_KINDS; ++k) {
+        const uint8_t *q = p + 4 + k * BATTLE_FIELD_KIND_BYTES;
+        r->weather[k].residual_divisor = q[0];
+        r->weather[k].flags = q[1];
+        for (unsigned t = 0; t < BATTLE_WEATHER_IMMUNE_TYPES; ++t) r->weather[k].immune_types[t] = q[2 + t];
+    }
+    if (p[29] || p[30] || p[31]) return false;
+    for (unsigned i = 0; i < BATTLE_MAX_FIELD_MODIFIERS; ++i) {
+        uint8_t flags;
+        battle_modifier_get(p + 32 + i * BATTLE_MODIFIER_BODY_BYTES, &r->modifiers[i], &flags);
+        if (flags) return false;
+    }
+    return battle_field_rules_valid(r, types);
+}
+
 static unsigned ability_size(const BattleAbility *a, uint8_t version) {
     if (version < BATTLE_REQUEST_VERSION_ABILITY_HOOKS) return BATTLE_ABILITY_BYTES;
     return BATTLE_ABILITY_HEADER_BYTES + (unsigned)(a->cls == BACLASS_HOOKS ? a->count : 0) * BATTLE_ABILITY_HOOK_BYTES;
@@ -584,14 +714,20 @@ static uint32_t fixed_size(const BattleRequest *r) {
 
 uint32_t battle_request_size(const BattleRequest *r) {
     return fixed_size(r) + effects_size(r) + abilities_size(r) +
-           (r->version >= BATTLE_REQUEST_VERSION_VOLATILES ? BATTLE_VOLATILE_RULE_BYTES : 0);
+           (r->version >= BATTLE_REQUEST_VERSION_VOLATILES ? BATTLE_VOLATILE_RULE_BYTES : 0) +
+           (r->version >= BATTLE_REQUEST_VERSION_WEATHER ? BATTLE_FIELD_RULE_BYTES : 0);
+}
+
+static uint16_t rules_mask(uint8_t version) {
+    return version >= BATTLE_REQUEST_VERSION_WEATHER ? RULE_V15_MASK :
+           version >= BATTLE_REQUEST_VERSION_ABILITY_HOOKS ? RULE_V12_MASK : RULE_V11_MASK;
 }
 
 uint32_t battle_request_encode(const BattleRequest *r, uint8_t *p, uint32_t capacity) {
     const uint32_t size = battle_request_size(r);
     const uint8_t version = r->version ? r->version : BATTLE_REQUEST_VERSION;
     if ((version < BATTLE_REQUEST_VERSION || version > BATTLE_REQUEST_VERSION_LATEST) ||
-        (r->rules & ~(version >= BATTLE_REQUEST_VERSION_ABILITY_HOOKS ? RULE_V12_MASK : RULE_V11_MASK)) ||
+        (r->rules & ~rules_mask(version)) ||
         size > capacity || r->player_count > BATTLE_MAX_PER_SIDE || r->opponent_count > BATTLE_MAX_PER_SIDE ||
         r->type_count > BATTLE_MAX_TYPES)
         return 0;
@@ -639,10 +775,14 @@ uint32_t battle_request_encode(const BattleRequest *r, uint8_t *p, uint32_t capa
                 for (unsigned m = 0; m < 4; ++m) {
                     const BattleMove *move = &e[i].mon.moves[m];
                     if (move->effect_count > BATTLE_MAX_EFFECTS) return 0;
-                    // V13 records cannot be written into an earlier request.
-                    for (unsigned k = 0; k < move->effect_count; ++k)
-                        if (version < BATTLE_REQUEST_VERSION_MODIFIERS && move->effects[k].kind == BEFF_MODIFIER)
+                    // V13 records and V15 kinds cannot be written into an earlier request.
+                    for (unsigned k = 0; k < move->effect_count; ++k) {
+                        const BattleEffect *x = &move->effects[k];
+                        if (version < BATTLE_REQUEST_VERSION_MODIFIERS && x->kind == BEFF_MODIFIER) return 0;
+                        if (version < BATTLE_REQUEST_VERSION_WEATHER &&
+                            (x->kind > BEFF_V14_LAST || (x->kind == BEFF_CHARGE && x->arg2)))
                             return 0;
+                    }
                     move_effects_encode(move, q);
                     q += move_effects_size(move);
                 }
@@ -653,14 +793,20 @@ uint32_t battle_request_encode(const BattleRequest *r, uint8_t *p, uint32_t capa
             const unsigned count = side ? r->opponent_count : r->player_count;
             for (unsigned i = 0; i < count; ++i) {
                 const BattleAbility *a = &e[i].mon.ability;
-                for (unsigned k = 0; k < a->count && k < BATTLE_MAX_ABILITY_HOOKS; ++k)
+                for (unsigned k = 0; k < a->count && k < BATTLE_MAX_ABILITY_HOOKS; ++k) {
                     if (version < BATTLE_REQUEST_VERSION_MODIFIERS && a->hooks[k].kind == BABIL_MODIFIER) return 0;
+                    if (version < BATTLE_REQUEST_VERSION_WEATHER && a->hooks[k].kind > BABIL_V14_LAST) return 0;
+                }
                 if (version >= BATTLE_REQUEST_VERSION_ABILITY_HOOKS) ability_encode_v12(a, q);
                 else if (!ability_encode_v11(a, q)) return 0;
                 q += ability_size(a, version);
             }
         }
-    if (version >= BATTLE_REQUEST_VERSION_VOLATILES) volatile_rules_encode(&r->volatiles, q);
+    if (version >= BATTLE_REQUEST_VERSION_VOLATILES) {
+        volatile_rules_encode(&r->volatiles, q);
+        q += BATTLE_VOLATILE_RULE_BYTES;
+    }
+    if (version >= BATTLE_REQUEST_VERSION_WEATHER) field_rules_encode(&r->field, q);
     return size;
 }
 
@@ -677,7 +823,7 @@ bool battle_request_decode(const uint8_t *p, uint32_t length, BattleRequest *r) 
     r->active_per_side = p[5];
     r->rules = msg_get16(p+6);
     // Rule bits of a later version make the request malformed (audit P-03 rule).
-    if (r->rules & ~(r->version >= BATTLE_REQUEST_VERSION_ABILITY_HOOKS ? RULE_V12_MASK : RULE_V11_MASK)) return false;
+    if (r->rules & ~rules_mask(r->version)) return false;
     r->trainer_id = msg_get16(p+8);
     r->trainer_class = p[10];
     r->reward_mode = p[11];
@@ -718,8 +864,14 @@ bool battle_request_decode(const uint8_t *p, uint32_t length, BattleRequest *r) 
         if (!battle_condition_rules_valid(&r->conditions, r->type_count)) return false;
     }
     r->volatiles = (BattleVolatileRules){0};
+    r->field = (BattleFieldRules){0};
     if (r->version < BATTLE_REQUEST_VERSION_EFFECTS) return true;
     const uint8_t *end = p + length;
+    if (r->version >= BATTLE_REQUEST_VERSION_WEATHER) {  // V15: the field rules close the request
+        if (length < fixed_size(r) + BATTLE_VOLATILE_RULE_BYTES + BATTLE_FIELD_RULE_BYTES) return false;
+        end -= BATTLE_FIELD_RULE_BYTES;
+        if (!field_rules_decode(end, &r->field, r->type_count)) return false;
+    }
     if (r->version >= BATTLE_REQUEST_VERSION_VOLATILES) {
         if (length < fixed_size(r) + BATTLE_VOLATILE_RULE_BYTES) return false;
         end -= BATTLE_VOLATILE_RULE_BYTES;
@@ -734,7 +886,8 @@ bool battle_request_decode(const uint8_t *p, uint32_t length, BattleRequest *r) 
                 const unsigned used = move_effects_decode(q, (uint32_t)(end - q), move, r->version);
                 if (!used) return false;
                 // Empty slots carry no effects; everything else must be well formed.
-                if (move->unsupported != UNSUP_EMPTY && !move->unsupported && !battle_move_effects_valid(move))
+                if (move->unsupported != UNSUP_EMPTY && !move->unsupported &&
+                    !battle_move_effects_valid_for(move, r->version))
                     return false;
                 if (move->unsupported == UNSUP_EMPTY && move->effect_count) return false;
                 // Fields of a later version are a malformed request, not an unsupported

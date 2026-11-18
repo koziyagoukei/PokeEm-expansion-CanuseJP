@@ -31,6 +31,7 @@ extern "C" {
 #define BATTLE_APP_VERSION_ABILITY_HOOKS 12  // V11 + multi-hook ability blocks (same state/action layout)
 #define BATTLE_APP_VERSION_MODIFIERS 13  // V12 + shared modifier records (same state/action layout)
 #define BATTLE_APP_VERSION_FIXED_POINT 14  // V13 + Gen 5+ fixed-point damage arithmetic (same layout)
+#define BATTLE_APP_VERSION_WEATHER 15  // V14 + weather (same state/action layout)
 #define BATTLE_MODE_VERSION 1
 
 enum BattleFormat { BATTLE_FORMAT_SINGLE = 1, BATTLE_FORMAT_DOUBLE = 2, BATTLE_FORMAT_TRIPLE = 3, BATTLE_FORMAT_ROTATION = 4 };
@@ -47,8 +48,11 @@ enum BattleResultPolicy { RESULT_POLICY_DISPLAY_ONLY = 0, RESULT_POLICY_APPLY_HP
 // Request V12 rules.
 #define RULE_STRICT_ABILITIES  (1u << 6)  // refuse to start if any ability is UNSUPPORTED (results must be exact)
 #define RULE_FIXED_SEED        (1u << 7)  // the GC seeds its RNG with the battle id (reproducible test fixtures)
+// Request V15 rule.
+#define RULE_STRICT_MOVES      (1u << 8)  // refuse to start if a Pokemon knows a move the core cannot run
 #define RULE_V11_MASK 0x3fu
 #define RULE_V12_MASK 0xffu
+#define RULE_V15_MASK 0x1ffu
 
 #define BATTLE_MAX_PER_SIDE 6
 #define BATTLE_MAX_TYPES 32
@@ -122,14 +126,37 @@ enum BattleEffectKind {
     BEFF_FLINCH = 11,    // after a hit: the target loses its action if it has not acted this turn
     BEFF_CONFUSE = 12,   // confusion for a duration from the volatile rules
     BEFF_SUBSTITUTE = 13,// user pays max HP / rules divisor for a substitute (status move, alone)
-    BEFF_CHARGE = 14,    // first effect: turn 1 charges (arg0 = BSEMI_*), turn 2 runs the rest
+    BEFF_CHARGE = 14,    // first effect: turn 1 charges (arg0 = BSEMI_*), turn 2 runs the rest;
+                         // V15: arg2 = weather mask in which there is no charging turn (Solar Beam)
     BEFF_RECHARGE = 15,  // after a landed hit the user must recharge on its next turn
     // Request V13.
     BEFF_MODIFIER = 16,  // passive: a damage modifier of this move (BattleModifier, docs/rule-poc.md)
+    // Request V15 (docs/weather.md). BWEATHER_* masks hold BWEATHER_BIT(kind).
+    BEFF_WEATHER = 17,          // status move, alone: sets weather arg0 for arg2 turns (BWEATHER_TURNS_*)
+    BEFF_WEATHER_ACCURACY = 18, // passive: in a weather of mask arg0 the accuracy is arg2 (0 = never misses)
+    BEFF_WEATHER_TYPE = 19,     // passive, damaging: in a weather of mask arg0 the move's type is arg2
+    BEFF_WEATHER_HEAL = 20,     // passive, with BEFF_HEAL: in a weather of mask arg0 it heals arg1 / arg2
     BEFF_COUNT
 };
 #define BEFF_V12_LAST BEFF_RECHARGE
+#define BEFF_V14_LAST BEFF_MODIFIER
 enum BattleSemiInvulnerable { BSEMI_NONE = 0, BSEMI_AIR = 1, BSEMI_UNDERGROUND = 2 };
+// Request V15 weather kinds (docs/weather.md). The GBA maps its own weather
+// to these; primal weather, fog and strong winds have no kind yet (their
+// moves and abilities stay unsupported).
+enum BattleWeatherKind {  // (games have their own enum BattleWeather)
+    BWEATHER_NONE = 0, BWEATHER_SUN = 1, BWEATHER_RAIN = 2, BWEATHER_SANDSTORM = 3,
+    BWEATHER_HAIL = 4, BWEATHER_SNOW = 5, BWEATHER_COUNT
+};
+#define BWEATHER_KINDS (BWEATHER_COUNT - 1)
+#define BWEATHER_BIT(kind) ((uint8_t)(1u << ((kind) - 1)))
+#define BWEATHER_ALL ((uint8_t)((1u << BWEATHER_KINDS) - 1))
+// A setter's duration: 1..BWEATHER_MAX_TURNS turns, BWEATHER_TURNS_NO_END, or
+// BWEATHER_TURNS_KEEP (the counter of the weather before stays, as this
+// build's ability weather before Gen 6 does; no counter means no end).
+#define BWEATHER_TURNS_NO_END 0u
+#define BWEATHER_TURNS_KEEP 0xffu
+#define BWEATHER_MAX_TURNS 15u
 enum BattleEffectWho { BWHO_TARGET = 0, BWHO_USER = 1 };
 enum BattleHitRule { BHITS_UNIFORM = 0, BHITS_2TO5_GEN5 = 1, BHITS_2TO5_GEN1 = 2 };
 #define BATTLE_MAX_EFFECTS 6
@@ -180,6 +207,9 @@ enum BattleEffectTiming {
 // V13 floors after each modifier; V14 (BATTLE_REQUEST_VERSION_FIXED_POINT)
 // chains the stage's modifiers in 4.12 fixed point and rounds once, as the
 // Gen 5+ damage formula does. BASE_POWER is integer in both.
+// Request V15 adds three stages, written with bit 5 as the stage's bit 3
+// (always 0 before V15): WEATHER (the weather step of the damage formula,
+// first matching field record only), and the integer SPEED and ACCURACY.
 enum BattleModifierStage {
     BMOD_NONE = 0,
     BMOD_BASE_POWER = 1,  // the move's base power (e.g. Hex), before the power modifiers; floor, min 1
@@ -187,19 +217,33 @@ enum BattleModifierStage {
     BMOD_ATTACK = 3,      // attacking stat after stages; min 1
     BMOD_DEFENSE = 4,     // defending stat after stages; min 1
     BMOD_FINAL = 5,       // damage after type and burn (the damage minimum of 1 follows)
+    BMOD_V14_COUNT,
+    // Request V15.
+    BMOD_WEATHER = 6,     // damage after the spread factor, before the random factor (field records)
+    BMOD_SPEED = 7,       // the holder's speed after stages, before paralysis; floor, min 1 (abilities)
+    BMOD_ACCURACY = 8,    // accuracy after stages and the V12 accuracy hook; floor (abilities)
     BMOD_COUNT
 };
 #define BMOD_STAGE_MASK 0x07u
+#define BMOD_STAGE_HIGH 0x20u  // V15: bit 3 of the stage
 #define BMOD_CATEGORY_SHIFT 3
 #define BMOD_CATEGORY_MASK (3u << BMOD_CATEGORY_SHIFT)
 #define BMODF_DEFENDER 0x80u
-#define BATTLE_MODIFIER_STAGE(stage, category) ((uint8_t)((stage) | (category) << BMOD_CATEGORY_SHIFT))
+#define BATTLE_MODIFIER_STAGE(stage, category) \
+    ((uint8_t)(((stage) & BMOD_STAGE_MASK) | ((stage) & 8u ? BMOD_STAGE_HIGH : 0u) | (category) << BMOD_CATEGORY_SHIFT))
+static inline uint8_t battle_modifier_stage(uint8_t stage_byte) {
+    return (uint8_t)((stage_byte & BMOD_STAGE_MASK) | ((stage_byte & BMOD_STAGE_HIGH) >> 2));
+}
 enum BattlePredicateKind {
     BPRED_NONE = 0,
     BPRED_HP_AT_MOST = 1,     // subject's HP <= max HP / arg (arg >= 2)
     BPRED_STATUS = 2,         // subject's major status is in arg (mask of 1 << BST_*)
-    BPRED_MOVE_TYPE = 3,      // the move's type is arg (never for typeless Struggle); abilities only
+    BPRED_MOVE_TYPE = 3,      // the move's type is arg (never for typeless Struggle); abilities and field
     BPRED_POWER_AT_MOST = 4,  // the move's power after BMOD_BASE_POWER <= arg; abilities only, not at BASE_POWER
+    BPRED_V14_COUNT,
+    // Request V15.
+    BPRED_WEATHER = 5,        // the weather in effect is in arg (mask of BWEATHER_BIT); none while suppressed
+    BPRED_HAS_TYPE = 6,       // subject has type arg
     BPRED_COUNT
 };
 #define BPRED_KIND_MASK 0x3fu
@@ -213,8 +257,10 @@ typedef struct {
     uint8_t stage, percent;
     BattlePredicate pred[BATTLE_MAX_PREDICATES];
 } BattleModifier;
-// `ability`: a hook (BMODF_DEFENDER and the move predicates allowed).
-bool battle_modifier_valid(const BattleModifier *modifier, unsigned type_count, bool ability);
+// Where a record is: in a move's effect list, an ability's hook list (BMODF_DEFENDER
+// and the move predicates allowed) or the V15 field rules (weather and field stat records).
+enum BattleModifierSource { BMSRC_MOVE = 0, BMSRC_ABILITY = 1, BMSRC_FIELD = 2 };
+bool battle_modifier_valid(const BattleModifier *modifier, unsigned type_count, uint8_t source, uint8_t version);
 // The 7-byte record body (after the kind byte) and the slot's flags.
 void battle_modifier_put(const BattleModifier *modifier, uint8_t flags, uint8_t *body);
 void battle_modifier_get(const uint8_t *body, BattleModifier *modifier, uint8_t *flags);
@@ -248,7 +294,10 @@ typedef struct {
     uint16_t source_effect;
     BattleEffect effects[BATTLE_MAX_EFFECTS];
 } BattleMove;
-// Structural check of a V8 effect list against its move (shared by both sides).
+// Structural check of a V8 effect list against its move (shared by both sides),
+// for a request version (kinds and fields of a later version are refused);
+// battle_move_effects_valid checks against the latest version.
+bool battle_move_effects_valid_for(const BattleMove *move, uint8_t version);
 bool battle_move_effects_valid(const BattleMove *move);
 const char *battle_effect_kind_name(uint8_t kind);
 
@@ -305,10 +354,17 @@ enum BattleAbilityKind {
     BABIL_STATUS_MIRROR = 29,   // arg0 = mask of 1 << BST_*: a status another battler gives the holder goes back
     // Request V13 hook kind.
     BABIL_MODIFIER = 30,        // a damage modifier (BattleModifier in `mod`; the other fields are 0)
+    // Request V15 hook kinds (docs/weather.md).
+    BABIL_ENTRY_WEATHER = 31,   // on entry: sets weather arg0 for arg2 turns (BWEATHER_TURNS_*)
+    BABIL_WEATHER_SUPPRESS = 32,// while the holder is on the field no weather has an effect (Cloud Nine)
+    BABIL_WEATHER_IMMUNE = 33,  // arg0 = weather mask: no residual damage from those weathers
+    BABIL_WEATHER_RESIDUAL = 34,// arg0 = weather mask: instead of the weather's residual, the holder
+                                // heals (arg1 = 1) or loses (arg1 = -1) max HP / arg2 (BAHF_NOT_UNDERGROUND)
     BABIL_COUNT
 };
 #define BABIL_V11_LAST BABIL_INFILTRATOR
 #define BABIL_V12_LAST BABIL_STATUS_MIRROR
+#define BABIL_V14_LAST BABIL_MODIFIER
 #define BABIL_NO_TYPE 0xffu
 #define BABIL_VOL_FLINCH (1u << 0)
 #define BABIL_VOL_CONFUSION (1u << 1)
@@ -322,6 +378,7 @@ enum BattleAbilityRange { BRANGE_ALL_FOES = 0, BRANGE_ADJACENT_FOES = 1 };
 #define BAHF_TYPE_FILTER     (1u << 2)  // ATTACK_MULT: only moves of type arg2
 #define BAHF_NOT_FROZEN      (1u << 3)  // ABSORB_STATE: not while the holder is frozen
 #define BAHF_TOXIC_TO_POISON (1u << 4)  // STATUS_MIRROR: bad poison goes back as poison
+#define BAHF_NOT_UNDERGROUND (1u << 5)  // V15 WEATHER_RESIDUAL: not while the holder is underground
 #define BAHF_BREAKABLE       (1u << 7)  // the game marks the ability breakable (Mold Breaker); carried, no effect yet
 #define BATTLE_ABILITY_BYTES 8          // V11 descriptor
 #define BATTLE_ABILITY_HEADER_BYTES 4   // V12 block header
@@ -385,7 +442,8 @@ typedef struct {
 #define BATTLE_REQUEST_VERSION_ABILITY_HOOKS 12  // multi-hook ability blocks; strict / fixed-seed rules
 #define BATTLE_REQUEST_VERSION_MODIFIERS 13  // BEFF_MODIFIER / BABIL_MODIFIER records (same layout as V12)
 #define BATTLE_REQUEST_VERSION_FIXED_POINT 14  // same layout as V13; 4.12 damage arithmetic (docs/modifiers.md)
-#define BATTLE_REQUEST_VERSION_LATEST BATTLE_REQUEST_VERSION_FIXED_POINT
+#define BATTLE_REQUEST_VERSION_WEATHER 15  // V14 + field rules after the volatile rules; weather (docs/weather.md)
+#define BATTLE_REQUEST_VERSION_LATEST BATTLE_REQUEST_VERSION_WEATHER
 #define BATTLE_REQUEST_HEADER 24
 enum StruggleRecoil { BSTRUGGLE_MAX_HP_FLOOR = 1, BSTRUGGLE_MAX_HP_NEAREST = 2 };
 #define BATTLE_MOVE_STRUGGLE 0xffffu  // logical presentation identifier
@@ -402,10 +460,41 @@ typedef struct {
 } BattleVolatileRules;
 bool battle_volatile_rules_valid(const BattleVolatileRules *rules);
 
+// V15 field rules, BATTLE_FIELD_RULE_BYTES after the volatile rules (docs/weather.md):
+//   0 u8 flags (BFR_*)   1 u8 battle-start weather (BWEATHER_*, 0 none)
+//   2 u8 its turns (1..BWEATHER_MAX_TURNS, 0 = no end)   3 u8 field record count N
+//   4 per weather kind BWEATHER_SUN..BWEATHER_SNOW, 5 bytes each:
+//        u8 residual divisor (0 = no residual damage)  u8 flags (BWKF_*)
+//        u8 immune types[3] (BABIL_NO_TYPE = none; immune to the residual damage)
+//  29..31 reserved (0)
+//  32 BATTLE_MAX_FIELD_MODIFIERS x 7-byte modifier record bodies (stage, percent,
+//     flags = 0, two predicates); the first N are used, the rest are zero.
+// Field records hold the rules that belong to no move or ability: the weather
+// step of the damage (BMOD_WEATHER) and the weather stat boosts (BMOD_DEFENSE).
+#define BATTLE_MAX_FIELD_MODIFIERS 8
+#define BATTLE_FIELD_KIND_BYTES 5
+#define BATTLE_FIELD_RULE_BYTES (32 + BATTLE_MAX_FIELD_MODIFIERS * BATTLE_MODIFIER_BODY_BYTES)
+#define BFR_START_LOCKED (1u << 0)        // the battle-start weather cannot be replaced (overworld weather, Gen 9)
+#define BWKF_UNDERGROUND_SAFE (1u << 0)   // an underground Pokemon takes no residual damage
+#define BWKF_NO_FREEZE (1u << 1)          // no Pokemon can be frozen (or get frostbite) in this weather
+#define BWKF_MASK 0x3u
+#define BATTLE_WEATHER_IMMUNE_TYPES 3
+typedef struct {
+    uint8_t residual_divisor, flags;
+    uint8_t immune_types[BATTLE_WEATHER_IMMUNE_TYPES];
+} BattleWeatherKindRules;
+typedef struct {
+    uint8_t flags, start_weather, start_turns, modifier_count;
+    BattleWeatherKindRules weather[BWEATHER_KINDS];  // index kind - 1
+    BattleModifier modifiers[BATTLE_MAX_FIELD_MODIFIERS];
+} BattleFieldRules;
+bool battle_field_rules_valid(const BattleFieldRules *rules, unsigned type_count);
+
 // The largest request (V9 and later: every move with the most effects, every
-// ability with the most hooks) for `entries` Pokemon in all and `types`
-// types. Producers size their buffer with it, so a valid request always fits.
-#define BATTLE_REQUEST_MAX_BYTES(entries, types)     (BATTLE_REQUEST_HEADER + (entries) * BATTLE_ENTRY_BYTES + (types) * (types) + BATTLE_CONDITION_RULE_BYTES +      (entries) * 4 * (BATTLE_MOVE_EFFECTS_HEADER + BATTLE_MAX_EFFECTS * BATTLE_EFFECT_BYTES) +      (entries) * (BATTLE_ABILITY_HEADER_BYTES + BATTLE_MAX_ABILITY_HOOKS * BATTLE_ABILITY_HOOK_BYTES) +      BATTLE_VOLATILE_RULE_BYTES)
+// ability with the most hooks, the V15 field rules) for `entries` Pokemon in
+// all and `types` types. Producers size their buffer with it, so a valid
+// request of any version always fits.
+#define BATTLE_REQUEST_MAX_BYTES(entries, types)     (BATTLE_REQUEST_HEADER + (entries) * BATTLE_ENTRY_BYTES + (types) * (types) + BATTLE_CONDITION_RULE_BYTES +      (entries) * 4 * (BATTLE_MOVE_EFFECTS_HEADER + BATTLE_MAX_EFFECTS * BATTLE_EFFECT_BYTES) +      (entries) * (BATTLE_ABILITY_HEADER_BYTES + BATTLE_MAX_ABILITY_HOOKS * BATTLE_ABILITY_HOOK_BYTES) +      BATTLE_VOLATILE_RULE_BYTES + BATTLE_FIELD_RULE_BYTES)
 
 typedef struct {
     uint8_t format, battle_type, player_count, opponent_count, active_per_side;
@@ -419,6 +508,7 @@ typedef struct {
     uint8_t type_chart[BATTLE_MAX_TYPES * BATTLE_MAX_TYPES];
     BattleConditionRules conditions; // V7 suffix after the type chart
     BattleVolatileRules volatiles;   // V9 suffix after the effect lists
+    BattleFieldRules field;          // V15 suffix after the volatile rules
 } BattleRequest;
 
 uint32_t battle_request_size(const BattleRequest *request);
