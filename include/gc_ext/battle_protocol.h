@@ -29,6 +29,7 @@ extern "C" {
 #define BATTLE_APP_VERSION_TIMING 10  // V9 + effect application units
 #define BATTLE_APP_VERSION_ABILITIES 11  // V10 + ability descriptors (same state/action layout)
 #define BATTLE_APP_VERSION_ABILITY_HOOKS 12  // V11 + multi-hook ability blocks (same state/action layout)
+#define BATTLE_APP_VERSION_MODIFIERS 13  // V12 + shared modifier records (same state/action layout)
 #define BATTLE_MODE_VERSION 1
 
 enum BattleFormat { BATTLE_FORMAT_SINGLE = 1, BATTLE_FORMAT_DOUBLE = 2, BATTLE_FORMAT_TRIPLE = 3, BATTLE_FORMAT_ROTATION = 4 };
@@ -122,8 +123,11 @@ enum BattleEffectKind {
     BEFF_SUBSTITUTE = 13,// user pays max HP / rules divisor for a substitute (status move, alone)
     BEFF_CHARGE = 14,    // first effect: turn 1 charges (arg0 = BSEMI_*), turn 2 runs the rest
     BEFF_RECHARGE = 15,  // after a landed hit the user must recharge on its next turn
+    // Request V13.
+    BEFF_MODIFIER = 16,  // passive: a damage modifier of this move (BattleModifier, docs/rule-poc.md)
     BEFF_COUNT
 };
+#define BEFF_V12_LAST BEFF_RECHARGE
 enum BattleSemiInvulnerable { BSEMI_NONE = 0, BSEMI_AIR = 1, BSEMI_UNDERGROUND = 2 };
 enum BattleEffectWho { BWHO_TARGET = 0, BWHO_USER = 1 };
 enum BattleHitRule { BHITS_UNIFORM = 0, BHITS_2TO5_GEN5 = 1, BHITS_2TO5_GEN1 = 2 };
@@ -159,10 +163,60 @@ enum BattleEffectTiming {
 #define BMF_V8_MASK BMF_IGNORES_PROTECT
 #define BMF_V9_MASK 0x3fu
 #define BMF_V11_MASK 0x7fu
+// Request V13: a modifier record, shared by moves (BEFF_MODIFIER in an
+// effect list) and abilities (BABIL_MODIFIER in a hook list). The record is
+// the kind byte followed by the 7-byte modifier body:
+//   1 u8 stage: bits 0-2 BMOD_*, bits 3-4 move category (0 any, BCAT_PHYSICAL,
+//        BCAT_SPECIAL), bits 5-6 zero, bit 7 BMODF_DEFENDER (abilities only:
+//        applies while the holder is the defending Pokemon, else the attacker)
+//   2 u8 percent (1..255): the value is multiplied by percent / 100
+//   3 u8 flags: BAHF_BREAKABLE in a hook list, 0 in an effect list
+//   4 u8 predicate 0 kind (BPRED_* | BPRED_DEFENDER)  5 u8 predicate 0 argument
+//   6 u8 predicate 1 kind                              7 u8 predicate 1 argument
+// The modifier applies when both predicates hold (an empty one holds). It
+// never draws a random number. Where each stage applies, how it rounds and
+// its minimum are fixed by the core, not by the record (docs/rule-poc.md).
+enum BattleModifierStage {
+    BMOD_NONE = 0,
+    BMOD_BASE_POWER = 1,  // the move's base power (e.g. Hex), before the power modifiers; floor, min 1
+    BMOD_POWER = 2,       // power modifiers (Technician, Facade-like); floor, min 1
+    BMOD_ATTACK = 3,      // attacking stat after stages; floor, min 1
+    BMOD_DEFENSE = 4,     // defending stat after stages; floor, min 1
+    BMOD_FINAL = 5,       // damage after type and burn; floor (the damage minimum of 1 follows)
+    BMOD_COUNT
+};
+#define BMOD_STAGE_MASK 0x07u
+#define BMOD_CATEGORY_SHIFT 3
+#define BMOD_CATEGORY_MASK (3u << BMOD_CATEGORY_SHIFT)
+#define BMODF_DEFENDER 0x80u
+#define BATTLE_MODIFIER_STAGE(stage, category) ((uint8_t)((stage) | (category) << BMOD_CATEGORY_SHIFT))
+enum BattlePredicateKind {
+    BPRED_NONE = 0,
+    BPRED_HP_AT_MOST = 1,     // subject's HP <= max HP / arg (arg >= 2)
+    BPRED_STATUS = 2,         // subject's major status is in arg (mask of 1 << BST_*)
+    BPRED_MOVE_TYPE = 3,      // the move's type is arg (never for typeless Struggle); abilities only
+    BPRED_POWER_AT_MOST = 4,  // the move's power after BMOD_BASE_POWER <= arg; abilities only, not at BASE_POWER
+    BPRED_COUNT
+};
+#define BPRED_KIND_MASK 0x3fu
+#define BPRED_DEFENDER 0x80u  // HP / STATUS: the subject is the defending Pokemon (else the attacker)
+#define BATTLE_MAX_PREDICATES 2
+#define BATTLE_MODIFIER_BODY_BYTES 7
+typedef struct { uint8_t kind, arg; } BattlePredicate;
+typedef struct {
+    uint8_t stage, percent, flags;
+    BattlePredicate pred[BATTLE_MAX_PREDICATES];
+} BattleModifier;
+// `ability`: a hook (BMODF_DEFENDER, BAHF_BREAKABLE and the move predicates allowed).
+bool battle_modifier_valid(const BattleModifier *modifier, unsigned type_count, bool ability);
+void battle_modifier_put(const BattleModifier *modifier, uint8_t *body);
+void battle_modifier_get(const uint8_t *body, BattleModifier *modifier);
+
 typedef struct {
     uint8_t kind, who, chance, arg0;
     int8_t arg1;
     uint8_t arg2, flags;
+    BattleModifier mod;  // BEFF_MODIFIER only (the fields above are 0)
 } BattleEffect;
 
 typedef struct {
@@ -230,9 +284,12 @@ enum BattleAbilityKind {
     BABIL_ABSORB_STATE = 27,    // arg0 = type: moves of it are absorbed and set the holder's ability state
     BABIL_TYPE_PASS = 28,       // arg0 = attacking type, arg2 = defending type: that immunity becomes neutral
     BABIL_STATUS_MIRROR = 29,   // arg0 = mask of 1 << BST_*: a status another battler gives the holder goes back
+    // Request V13 hook kind.
+    BABIL_MODIFIER = 30,        // a damage modifier (BattleModifier in `mod`; the other fields are 0)
     BABIL_COUNT
 };
 #define BABIL_V11_LAST BABIL_INFILTRATOR
+#define BABIL_V12_LAST BABIL_STATUS_MIRROR
 #define BABIL_NO_TYPE 0xffu
 #define BABIL_VOL_FLINCH (1u << 0)
 #define BABIL_VOL_CONFUSION (1u << 1)
@@ -255,6 +312,7 @@ typedef struct {
     uint8_t kind, arg0;
     int8_t arg1;
     uint8_t arg2, chance, chance_den, percent, flags;
+    BattleModifier mod;  // BABIL_MODIFIER only (the fields above are 0)
 } BattleAbilityHook;
 typedef struct {
     uint8_t cls, count;  // BACLASS_*; hooks used
@@ -300,7 +358,8 @@ typedef struct {
 #define BATTLE_REQUEST_VERSION_TIMING 10  // effect descriptors may carry BEFL_TIMING
 #define BATTLE_REQUEST_VERSION_ABILITIES 11  // ability block after the effect lists; BMF_CONTACT
 #define BATTLE_REQUEST_VERSION_ABILITY_HOOKS 12  // multi-hook ability blocks; strict / fixed-seed rules
-#define BATTLE_REQUEST_VERSION_LATEST BATTLE_REQUEST_VERSION_ABILITY_HOOKS
+#define BATTLE_REQUEST_VERSION_MODIFIERS 13  // BEFF_MODIFIER / BABIL_MODIFIER records (same layout as V12)
+#define BATTLE_REQUEST_VERSION_LATEST BATTLE_REQUEST_VERSION_MODIFIERS
 #define BATTLE_REQUEST_HEADER 24
 enum StruggleRecoil { BSTRUGGLE_MAX_HP_FLOOR = 1, BSTRUGGLE_MAX_HP_NEAREST = 2 };
 #define BATTLE_MOVE_STRUGGLE 0xffffu  // logical presentation identifier
@@ -316,6 +375,11 @@ typedef struct {
     uint8_t flags, confusion_hit_percent, confusion_min, confusion_max, confusion_power, substitute_divisor;
 } BattleVolatileRules;
 bool battle_volatile_rules_valid(const BattleVolatileRules *rules);
+
+// The largest request (V9 and later: every move with the most effects, every
+// ability with the most hooks) for `entries` Pokemon in all and `types`
+// types. Producers size their buffer with it, so a valid request always fits.
+#define BATTLE_REQUEST_MAX_BYTES(entries, types)     (BATTLE_REQUEST_HEADER + (entries) * BATTLE_ENTRY_BYTES + (types) * (types) + BATTLE_CONDITION_RULE_BYTES +      (entries) * 4 * (BATTLE_MOVE_EFFECTS_HEADER + BATTLE_MAX_EFFECTS * BATTLE_EFFECT_BYTES) +      (entries) * (BATTLE_ABILITY_HEADER_BYTES + BATTLE_MAX_ABILITY_HOOKS * BATTLE_ABILITY_HOOK_BYTES) +      BATTLE_VOLATILE_RULE_BYTES)
 
 typedef struct {
     uint8_t format, battle_type, player_count, opponent_count, active_per_side;
