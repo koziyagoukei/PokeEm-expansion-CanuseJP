@@ -30,11 +30,10 @@
 #include "gc_ext/battle_protocol.h"
 #include "frontier_gc_battle.h"
 
-// The largest request this mode can build: every block at its maximum (V9
-// volatile rules and V12 ability blocks included), so the encoder never refuses one.
-#define REQUEST_CAPACITY (BATTLE_REQUEST_HEADER + PARTY_SIZE * BATTLE_ENTRY_BYTES + NUMBER_OF_MON_TYPES * NUMBER_OF_MON_TYPES \
-    + BATTLE_CONDITION_RULE_BYTES + PARTY_SIZE * MAX_MON_MOVES * (BATTLE_MOVE_EFFECTS_HEADER + BATTLE_MAX_EFFECTS * BATTLE_EFFECT_BYTES) \
-    + BATTLE_VOLATILE_RULE_BYTES + PARTY_SIZE * (BATTLE_ABILITY_HEADER_BYTES + BATTLE_MAX_ABILITY_HOOKS * BATTLE_ABILITY_HOOK_BYTES))
+// The largest request this mode can build (six Pokemon in all, every block at
+// its maximum), from the protocol's own formula, so the encoder never refuses one.
+#define REQUEST_CAPACITY BATTLE_REQUEST_MAX_BYTES(PARTY_SIZE, NUMBER_OF_MON_TYPES)
+STATIC_ASSERT(MAX_MON_MOVES == 4, GcRequestFourMoves);
 
 enum GbaScreen { SCREEN_PREPARE, SCREEN_COMMAND, SCREEN_MOVES, SCREEN_TARGET, SCREEN_REPLACE, SCREEN_SWITCH, SCREEN_PIVOT, SCREEN_WAIT, SCREEN_ENDED };
 
@@ -82,6 +81,7 @@ static EWRAM_DATA u8 sPendingLab = 0;
 
 static const u8 sText_StruggleRules[] = _("{ENG}Unsupported Struggle rules.");
 static const u8 sText_NoMemory[] = _("{ENG}Not enough memory.");
+static const u8 sText_RequestTooLarge[] = _("{ENG}GC battle request too large.");
 static const u8 sText_NoLead[] = _("{ENG}No able Pokemon with a supported move.");
 static const u8 sText_NoOpponent[] = _("{ENG}The trainer has no Pokemon.");
 static const u8 sText_NoMoves[] = _("{ENG}Lead has no supported move.");
@@ -201,6 +201,39 @@ static u8 EffectTiming(enum Move move, bool8 self, bool8 damaging)
 static bool8 VolatilesEnabled(void)
 {
     return sBattle->roster >= BATTLE_APP_VERSION_VOLATILES;
+}
+
+// V13 modifier records (gba-gc-extension docs/rule-poc.md): the same record
+// type for moves and abilities. Up to two predicates, all must hold.
+#define MODIFIER(stage, percent, k0, a0, k1, a1) \
+    ((BattleModifier){stage, percent, 0, {{k0, a0}, {k1, a1}}})
+
+static BattleEffect ModifierEffect(BattleModifier mod)
+{
+    BattleEffect e = {.kind = BEFF_MODIFIER};
+    e.mod = mod;
+    return e;
+}
+
+static BattleAbilityHook ModifierHook(BattleModifier mod)
+{
+    BattleAbilityHook h = {.kind = BABIL_MODIFIER};
+    h.mod = mod;
+    return h;
+}
+
+// STATUS1_* bits of a move argument as a mask of 1 << BST_*.
+static u8 ExportStatusMask(u32 status)
+{
+    u8 mask = 0;
+    if (status & STATUS1_SLEEP)        mask |= 1u << BST_SLEEP;
+    if (status & STATUS1_POISON)       mask |= 1u << BST_POISON;
+    if (status & STATUS1_BURN)         mask |= 1u << BST_BURN;
+    if (status & STATUS1_FREEZE)       mask |= 1u << BST_FREEZE;
+    if (status & STATUS1_PARALYSIS)    mask |= 1u << BST_PARALYSIS;
+    if (status & STATUS1_TOXIC_POISON) mask |= 1u << BST_TOXIC;
+    if (status & STATUS1_FROSTBITE)    mask |= 1u << BST_FROSTBITE;
+    return mask;
 }
 
 static u8 ExportMoveStatus(enum MoveEffect effect)
@@ -344,6 +377,18 @@ static u8 ResolveEffects(enum Move move, BattleMove *out)
     case EFFECT_HIT:
     case EFFECT_STAT_CHANGE:
         break;
+    case EFFECT_DOUBLE_POWER_ON_ARG_STATUS:
+    {
+        // Hex, Venoshock ...: base power x2 while the target has one of the
+        // move's statuses (CalcMoveBasePower). V13 only; the moves that also
+        // cure the status (substitute exception) stay unsupported.
+        const u8 mask = ExportStatusMask(GetMoveEffectArg_Status(move));
+        if (sBattle->roster < BATTLE_APP_VERSION_MODIFIERS || !damaging || mask == 0
+         || (GetMoveAdditionalEffectCount(move) && GetMoveAdditionalEffectById(move, 0)->moveEffect == MOVE_EFFECT_REMOVE_STATUS))
+            return UNSUP_EFFECT;
+        PushEffect(out, ModifierEffect(MODIFIER(BMOD_BASE_POWER, 200, BPRED_STATUS | BPRED_DEFENDER, mask, 0, 0)));
+        break;
+    }
     case EFFECT_EARTHQUAKE:
         // A plain hit that also reaches (and doubles against) an underground
         // target; its Grassy Terrain halving never applies without terrain.
@@ -769,6 +814,7 @@ struct LabMon
     u8 abilityNum, level, hpPercent;
     u32 status;
     u16 moves[MAX_MON_MOVES];
+    u8 custom;  // sLabAbilities index: replaces the resolved ability (V13 PoC)
 };
 
 struct LabFixture
@@ -776,9 +822,25 @@ struct LabFixture
     u8 format, count;
     bool8 strict;
     struct LabMon mons[2][3];
+    u8 version;  // 0 = V12
+    u8 seedOf;   // 0 = own; else use that fixture's battle id (same GC seed)
 };
 
-#define LM(species, num, level, hp, status, ...) {SPECIES_##species, num, level, hp, status, {__VA_ARGS__}}
+// V13 PoC: abilities defined only here, as modifier records the GC runs
+// without code of its own for them. The holder keeps its game ability id.
+enum { LAB_CUSTOM_NONE, LAB_CUSTOM_LOW_HP_STATUS, LAB_CUSTOM_LOW_HP };
+static const BattleModifier sLabAbilities[] = {
+    // Physical power x2 while at half HP or less AND with a major status.
+    [LAB_CUSTOM_LOW_HP_STATUS] = MODIFIER(BATTLE_MODIFIER_STAGE(BMOD_POWER, BCAT_PHYSICAL), 200,
+                                          BPRED_HP_AT_MOST, 2, BPRED_STATUS, 0xfe),
+    // The same ability redefined: x1.5 at half HP or less, status not needed.
+    [LAB_CUSTOM_LOW_HP] = MODIFIER(BATTLE_MODIFIER_STAGE(BMOD_POWER, BCAT_PHYSICAL), 150,
+                                   BPRED_HP_AT_MOST, 2, 0, 0),
+};
+
+#define LM(species, num, level, hp, status, ...) {SPECIES_##species, num, level, hp, status, {__VA_ARGS__}, 0}
+#define LMC(custom, species, num, level, hp, status, ...) \
+    {SPECIES_##species, num, level, hp, status, {__VA_ARGS__}, LAB_CUSTOM_##custom}
 static const struct LabFixture sLabFixtures[] = {
     [1] = {BATTLE_FORMAT_SINGLE, 1, FALSE, {  // Sturdy: survives at 1 HP from full, then faints
         {LM(BLASTOISE, 0, 50, 100, 0, MOVE_WATER_GUN)},
@@ -850,8 +912,34 @@ static const struct LabFixture sLabFixtures[] = {
     [20] = {BATTLE_FORMAT_DOUBLE, 2, TRUE, {  // strict rules: Early Bird is not simulated, the GC refuses
         {LM(MACHOP, 1, 30, 100, 0, MOVE_TACKLE), LM(MACHOP, 1, 30, 100, 0, MOVE_TACKLE)},
         {LM(KANGASKHAN, 0, 30, 100, 0, MOVE_GROWL), LM(MACHOP, 1, 30, 100, 0, MOVE_GROWL)}}},
+    // V13 PoC (docs/rule-poc.md): move and ability modifier records.
+    [21] = {BATTLE_FORMAT_SINGLE, 2, FALSE, {  // Hex x2 against a poisoned target, x1 against the next one
+        {LM(MISDREAVUS, 0, 30, 100, 0, MOVE_HEX), LM(MISDREAVUS, 0, 30, 100, 0, MOVE_HEX)},
+        {LM(MACHOP, 1, 36, 100, STATUS1_POISON, MOVE_LEER), LM(MACHOP, 1, 36, 100, 0, MOVE_LEER)}},
+        BATTLE_APP_VERSION_MODIFIERS, 0},
+    [22] = {BATTLE_FORMAT_DOUBLE, 2, FALSE, {  // custom ability: HP <= 1/2 AND status
+        {LMC(LOW_HP_STATUS, RATTATA, 0, 30, 60, STATUS1_POISON, MOVE_TACKLE),
+         LMC(LOW_HP_STATUS, RATTATA, 0, 30, 40, 0, MOVE_TACKLE)},
+        {LM(SNORLAX, 0, 30, 100, 0, MOVE_RECOVER), LM(SNORLAX, 0, 30, 100, 0, MOVE_RECOVER)}},
+        BATTLE_APP_VERSION_MODIFIERS, 0},
+    [23] = {BATTLE_FORMAT_DOUBLE, 2, FALSE, {  // L22 with the ability redefined (HP only, x1.5), same seed
+        {LMC(LOW_HP, RATTATA, 0, 30, 60, STATUS1_POISON, MOVE_TACKLE),
+         LMC(LOW_HP, RATTATA, 0, 30, 40, 0, MOVE_TACKLE)},
+        {LM(SNORLAX, 0, 30, 100, 0, MOVE_RECOVER), LM(SNORLAX, 0, 30, 100, 0, MOVE_RECOVER)}},
+        BATTLE_APP_VERSION_MODIFIERS, 22},
+    [24] = {BATTLE_FORMAT_TRIPLE, 3, FALSE, {  // Triple: Hex and the custom ability together
+        {LM(MISDREAVUS, 0, 30, 100, 0, MOVE_HEX), LMC(LOW_HP_STATUS, RATTATA, 0, 30, 45, STATUS1_POISON, MOVE_TACKLE),
+         LM(MISDREAVUS, 0, 30, 100, 0, MOVE_HEX)},
+        {LM(MACHOP, 1, 30, 100, STATUS1_BURN, MOVE_LEER), LM(SNORLAX, 0, 30, 100, 0, MOVE_RECOVER),
+         LM(MACHOP, 1, 30, 100, 0, MOVE_LEER)}}, BATTLE_APP_VERSION_MODIFIERS, 0},
+    [25] = {BATTLE_FORMAT_ROTATION, 3, FALSE, {  // Rotation: the front uses Hex / the custom ability
+        {LM(MISDREAVUS, 0, 30, 100, 0, MOVE_HEX), LMC(LOW_HP_STATUS, RATTATA, 0, 30, 45, STATUS1_POISON, MOVE_TACKLE),
+         LM(MISDREAVUS, 0, 30, 100, 0, MOVE_HEX)},
+        {LM(MACHOP, 1, 30, 100, STATUS1_POISON, MOVE_LEER), LM(MACHOP, 1, 30, 100, 0, MOVE_LEER),
+         LM(MACHOP, 1, 30, 100, 0, MOVE_LEER)}}, BATTLE_APP_VERSION_MODIFIERS, 0},
 };
 #undef LM
+#undef LMC
 #define LAB_FIXTURE_COUNT (ARRAY_COUNT(sLabFixtures) - 1)
 #define LAB_BATTLE_ID(fixture) (0x4C414200u | (fixture))  // "LAB" + fixture: the GC's seed
 
@@ -891,6 +979,12 @@ static bool8 BuildLabEntries(BattleRequest *request, const u8 **reason)
             {
                 *reason = side ? sText_NoOpponentMoves : sText_NoMoves;
                 return FALSE;
+            }
+            if (spec->custom)
+            {
+                BattleAbility *a = &entries[i].mon.ability;
+                *a = (BattleAbility){.cls = BACLASS_HOOKS, .source = entries[i].record.ability};
+                AddHook(a, ModifierHook(sLabAbilities[spec->custom]));
             }
         }
     }
@@ -1273,7 +1367,8 @@ static bool8 BuildRequest(const u8 **reason)
         Free(request);
         return FALSE;
     }
-    sBattle->battleId = sBattle->lab ? LAB_BATTLE_ID(sBattle->lab) : Random32() | 1;
+    sBattle->battleId = !sBattle->lab ? Random32() | 1
+                      : LAB_BATTLE_ID(sLabFixtures[sBattle->lab].seedOf ? sLabFixtures[sBattle->lab].seedOf : sBattle->lab);
     request->format = sBattle->format;
     request->battle_type = BTYPE_TRAINER;
     request->player_count = sBattle->count;
@@ -1333,7 +1428,8 @@ static bool8 BuildRequest(const u8 **reason)
     Free(request);
     if (sBattle->requestLength == 0)
     {
-        *reason = sText_NoMemory;
+        // Cannot happen with REQUEST_CAPACITY; the battle is refused rather than sent cut.
+        *reason = sText_RequestTooLarge;
         return FALSE;
     }
     return TRUE;
@@ -2223,7 +2319,7 @@ void FrontierGcBattle_StartLab(void)
     sPendingPolicy = RESULT_POLICY_DISPLAY_ONLY;
     sPendingTrainer = TRAINER_CALVIN_1;
     sPendingFormat = sLabFixtures[fixture].format;
-    sPendingRoster = BATTLE_APP_VERSION_ABILITY_HOOKS;
+    sPendingRoster = sLabFixtures[fixture].version ? sLabFixtures[fixture].version : BATTLE_APP_VERSION_ABILITY_HOOKS;
     sPendingEndurance = FALSE;
     sPendingLab = fixture;
     sFrontierGcRosterMode = sFrontierGcBattleMode;

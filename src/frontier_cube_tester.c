@@ -13,5 +13,5 @@
 
 u16 GcExtension_GetRelease(void)
 {
-    return 6;
+    return 7;
 }

@@ -648,6 +648,11 @@ static const struct DebugMenuOption sDebugMenu_Actions_GcAbilityLab[] =
     { COMPOUND_STRING("{ENG}L18 Shed Skin"), DebugAction_GcAbilityLab, (const void *)18 },
     { COMPOUND_STRING("{ENG}L19 Synchronize"), DebugAction_GcAbilityLab, (const void *)19 },
     { COMPOUND_STRING("{ENG}L20 Strict rules"), DebugAction_GcAbilityLab, (const void *)20 },
+    { COMPOUND_STRING("{ENG}L21 V13 Hex"), DebugAction_GcAbilityLab, (const void *)21 },
+    { COMPOUND_STRING("{ENG}L22 V13 custom HP+status"), DebugAction_GcAbilityLab, (const void *)22 },
+    { COMPOUND_STRING("{ENG}L23 V13 custom redefined"), DebugAction_GcAbilityLab, (const void *)23 },
+    { COMPOUND_STRING("{ENG}L24 V13 Triple"), DebugAction_GcAbilityLab, (const void *)24 },
+    { COMPOUND_STRING("{ENG}L25 V13 Rotation"), DebugAction_GcAbilityLab, (const void *)25 },
     { NULL }
 };
 STATIC_ASSERT(ARRAY_COUNT(sDebugMenu_Actions_GcAbilityLab) - 1 <= DEBUG_MAX_MENU_ITEMS, DebugGcAbilityLabMenuFits);
