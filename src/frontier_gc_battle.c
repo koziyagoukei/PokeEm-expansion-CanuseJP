@@ -14,6 +14,7 @@
 #include "config_changes.h"
 #include "data.h"
 #include "event_data.h"
+#include "field_weather.h"
 #include "main.h"
 #include "malloc.h"
 #include "move.h"
@@ -52,6 +53,7 @@ struct FrontierGcBattle
     u8 roster; // zero for the legacy app, otherwise the roster app version
     bool8 endurance; // debug: V9 fixtures against weak foes for long battles
     u8 lab;          // debug: ability lab fixture (1..), 0 otherwise
+    bool8 gen5Weather; // debug lab: the Gen 5 weather rules instead of this build's (V15)
     u8 rotation, target;
     BattleMultiState multiState;
     u8 status[2][BATTLE_FIELD_SLOTS];
@@ -276,6 +278,155 @@ static bool8 ExportMoveModifier(enum Move move, enum BattleMoveEffects effect, B
 
 static void ExportAbilityModifiers(enum Ability ability, BattleAbility *a);
 
+// ---------------------------------------------------------------------------
+// Request V15 weather (gba-gc-extension docs/weather.md). The GC keeps one
+// weather state and runs the shared operations (set, suppression, countdown,
+// residual, the weather step of the damage); everything this build decides
+// becomes data here, read from its battle code and configs:
+//   - the field rules: residual damage and its immune types, no freezing in
+//     sun, the weather damage step and the weather stat boosts;
+//   - the weather moves (EFFECT_WEATHER), the weather rules of other moves
+//     (accuracy, charge, type, power, healing);
+//   - the weather abilities (setters, suppression, speed, evasion, power,
+//     residual). Everything else about weather stays unsupported.
+// The Ability Lab can ask for the Gen 5 rules instead (gen5Weather) to show
+// that the same GC follows the GBA's settings.
+
+static bool8 WeatherEnabled(void)
+{
+    return sBattle->roster >= BATTLE_APP_VERSION_WEATHER;
+}
+
+// This build's weather kinds the GC models; primal weather, strong winds,
+// fog and darkness have no GC kind (their moves and abilities stay unsupported).
+static u8 ExportWeather(enum BattleWeather weather)
+{
+    switch (weather)
+    {
+    case BATTLE_WEATHER_SUN:          return BWEATHER_SUN;
+    case BATTLE_WEATHER_RAIN:
+    case BATTLE_WEATHER_RAIN_DOWNPOUR: return BWEATHER_RAIN;
+    case BATTLE_WEATHER_SANDSTORM:    return BWEATHER_SANDSTORM;
+    case BATTLE_WEATHER_HAIL:         return BWEATHER_HAIL;
+    case BATTLE_WEATHER_SNOW:         return BWEATHER_SNOW;
+    default:                          return BWEATHER_NONE;
+    }
+}
+
+// TryChangeBattleWeather: 5 turns; ability weather before Gen 6 keeps the
+// counter it finds (none: no end). Rocks would give 8: items are not simulated.
+static u8 AbilityWeatherTurns(void)
+{
+    return sBattle->gen5Weather || GetConfig(B_ABILITY_WEATHER) < GEN_6 ? BWEATHER_TURNS_KEEP : 5;
+}
+
+static u8 SnowWarningWeather(void)
+{
+    return sBattle->gen5Weather || GetConfig(B_SNOW_WARNING) < GEN_9 ? BWEATHER_HAIL : BWEATHER_SNOW;
+}
+
+#define W_SUN BWEATHER_BIT(BWEATHER_SUN)
+#define W_RAIN BWEATHER_BIT(BWEATHER_RAIN)
+#define W_SAND BWEATHER_BIT(BWEATHER_SANDSTORM)
+#define W_HAIL BWEATHER_BIT(BWEATHER_HAIL)
+#define W_SNOW BWEATHER_BIT(BWEATHER_SNOW)
+
+// TryFieldEffects FIELD_EFFECT_OVERWORLD_WEATHER: the map weathers this build
+// brings into a battle (rain, sandstorm, drought, snow, fog).
+static bool8 MapBringsWeather(void)
+{
+    u8 frontier;
+    if (TryGetRandomFrontierLogicalWeather(&frontier))
+        return TRUE;
+    switch (GetCurrentWeather())
+    {
+    case WEATHER_RAIN:
+    case WEATHER_RAIN_THUNDERSTORM:
+    case WEATHER_DOWNPOUR:
+    case WEATHER_SANDSTORM:
+    case WEATHER_DROUGHT:
+    case WEATHER_SNOW:
+    case WEATHER_FOG_HORIZONTAL:
+    case WEATHER_FOG_DIAGONAL:
+        return TRUE;
+    default:
+        return FALSE;
+    }
+}
+
+static void ResolveFieldRules(BattleFieldRules *f)
+{
+    u32 k, n = 0;
+    memset(f, 0, sizeof(*f));
+    for (k = 0; k < BWEATHER_KINDS; k++)
+        memset(f->weather[k].immune_types, BABIL_NO_TYPE, sizeof(f->weather[k].immune_types));
+    // HandleEndTurnWeatherDamage: max HP / 16, not underground (underwater is not
+    // modelled); the immune abilities are hooks, Safety Goggles an item (not simulated).
+    f->weather[BWEATHER_SANDSTORM - 1] = (BattleWeatherKindRules){16, BWKF_UNDERGROUND_SAFE,
+                                                                   {TYPE_ROCK, TYPE_GROUND, TYPE_STEEL}};
+    f->weather[BWEATHER_HAIL - 1] = (BattleWeatherKindRules){16, BWKF_UNDERGROUND_SAFE,
+                                                              {TYPE_ICE, BABIL_NO_TYPE, BABIL_NO_TYPE}};
+    // CanSetNonVolatileStatus: no freeze or frostbite in sun.
+    f->weather[BWEATHER_SUN - 1].flags = BWKF_NO_FREEZE;
+    // GetWeatherDamageModifier (the weather step, one factor).
+    f->modifiers[n++] = MODIFIER(BMOD_WEATHER, 150, BPRED_WEATHER, W_SUN, BPRED_MOVE_TYPE, TYPE_FIRE);
+    f->modifiers[n++] = MODIFIER(BMOD_WEATHER, 50, BPRED_WEATHER, W_SUN, BPRED_MOVE_TYPE, TYPE_WATER);
+    f->modifiers[n++] = MODIFIER(BMOD_WEATHER, 150, BPRED_WEATHER, W_RAIN, BPRED_MOVE_TYPE, TYPE_WATER);
+    f->modifiers[n++] = MODIFIER(BMOD_WEATHER, 50, BPRED_WEATHER, W_RAIN, BPRED_MOVE_TYPE, TYPE_FIRE);
+    // CalcDefenseStat, after the items: sandstorm Rock Sp. Def, snow Ice Defense.
+    if (GetConfig(B_SANDSTORM_SPDEF_BOOST) >= GEN_4)
+        f->modifiers[n++] = MODIFIER(BATTLE_MODIFIER_STAGE(BMOD_DEFENSE, BCAT_SPECIAL), 150, BPRED_WEATHER, W_SAND,
+                                     BPRED_HAS_TYPE | BPRED_DEFENDER, TYPE_ROCK);
+    f->modifiers[n++] = MODIFIER(BATTLE_MODIFIER_STAGE(BMOD_DEFENSE, BCAT_PHYSICAL), 150, BPRED_WEATHER, W_SNOW,
+                                 BPRED_HAS_TYPE | BPRED_DEFENDER, TYPE_ICE);
+    f->modifier_count = n;
+}
+
+// The weather rules of a move other than its effect: accuracy (Thunder,
+// Hurricane, Blizzard ...), read from this build's move flags.
+static void ExportWeatherAccuracy(enum Move move, BattleMove *out)
+{
+    if (MoveAlwaysHitsInRain(move))
+        PushEffect(out, (BattleEffect){.kind = BEFF_WEATHER_ACCURACY, .arg0 = W_RAIN, .arg2 = 0});
+    if (MoveAlwaysHitsInHailSnow(move))
+        PushEffect(out, (BattleEffect){.kind = BEFF_WEATHER_ACCURACY, .arg0 = W_HAIL | W_SNOW, .arg2 = 0});
+    if (MoveHas50AccuracyInSun(move))
+        PushEffect(out, (BattleEffect){.kind = BEFF_WEATHER_ACCURACY, .arg0 = W_SUN, .arg2 = 50});
+}
+
+// CalcMoveBasePowerAfterModifiers EFFECT_SOLAR_BEAM: x0.5 in rain, hail,
+// snow and (B_SANDSTORM_SOLAR_BEAM) sandstorm; fog has no GC kind.
+static bool8 ExportSolarBeamPower(BattleMove *out)
+{
+    const u8 mask = W_RAIN | W_HAIL | W_SNOW | (GetConfig(B_SANDSTORM_SOLAR_BEAM) >= GEN_3 ? W_SAND : 0);
+    return PushEffect(out, ModifierEffect(MODIFIER(BMOD_POWER, 50, BPRED_WEATHER, mask, 0, 0)));
+}
+
+// Weather Ball (GetDynamicMoveType, CalcMoveBasePower): the weather's type and x2 power.
+static bool8 ExportWeatherBall(BattleMove *out)
+{
+    return PushEffect(out, (BattleEffect){.kind = BEFF_WEATHER_TYPE, .arg0 = W_SUN, .arg2 = TYPE_FIRE})
+        && PushEffect(out, (BattleEffect){.kind = BEFF_WEATHER_TYPE, .arg0 = W_RAIN, .arg2 = TYPE_WATER})
+        && PushEffect(out, (BattleEffect){.kind = BEFF_WEATHER_TYPE, .arg0 = W_SAND, .arg2 = TYPE_ROCK})
+        && PushEffect(out, (BattleEffect){.kind = BEFF_WEATHER_TYPE, .arg0 = W_HAIL | W_SNOW, .arg2 = TYPE_ICE})
+        && PushEffect(out, ModifierEffect(MODIFIER(BMOD_BASE_POWER, 200, BPRED_WEATHER, BWEATHER_ALL, 0, 0)));
+}
+
+// Cmd_recoverbasedonsunlight: 20/30 of max HP in sun (sandstorm for Shore Up),
+// 1/4 in any other weather (not Shore Up), else 1/2.
+static bool8 ExportWeatherHeal(enum BattleMoveEffects effect, BattleMove *out)
+{
+    const u8 boosted = effect == EFFECT_SHORE_UP ? W_SAND : W_SUN;
+    if (!PushEffect(out, (BattleEffect){.kind = BEFF_HEAL, .who = BWHO_USER, .arg0 = 1, .arg2 = 2})
+     || !PushEffect(out, (BattleEffect){.kind = BEFF_WEATHER_HEAL, .who = BWHO_USER, .arg0 = boosted, .arg1 = 20, .arg2 = 30}))
+        return FALSE;
+    if (effect != EFFECT_SHORE_UP)
+        return PushEffect(out, (BattleEffect){.kind = BEFF_WEATHER_HEAL, .who = BWHO_USER,
+                                              .arg0 = BWEATHER_ALL & ~W_SUN, .arg1 = 1, .arg2 = 4});
+    return TRUE;
+}
+
+
 // STATUS1_* bits of a move argument as a mask of 1 << BST_*.
 static u8 ExportStatusMask(u32 status)
 {
@@ -455,6 +606,28 @@ static u8 ResolveEffects(enum Move move, BattleMove *out)
     case EFFECT_RESTORE_HP:  // the move script heals max HP / 2
         PushEffect(out, (BattleEffect){.kind = BEFF_HEAL, .who = BWHO_USER, .arg0 = 1, .arg2 = 2});
         break;
+    // V15 weather (the rules above the request builder).
+    case EFFECT_WEATHER:
+    {
+        const u8 kind = WeatherEnabled() ? ExportWeather(GetMoveWeatherType(move)) : BWEATHER_NONE;
+        if (damaging || kind == BWEATHER_NONE)
+            return UNSUP_EFFECT;
+        out->target = BTARGET_SELF;  // a field move (TARGET_FIELD): no Pokemon is its target
+        PushEffect(out, (BattleEffect){.kind = BEFF_WEATHER, .who = BWHO_USER, .arg0 = kind, .arg2 = 5});
+        break;
+    }
+    case EFFECT_WEATHER_BALL:
+        if (!WeatherEnabled() || !damaging || !ExportWeatherBall(out))
+            return UNSUP_EFFECT;
+        break;
+    case EFFECT_MOONLIGHT:
+    case EFFECT_MORNING_SUN:
+    case EFFECT_SYNTHESIS:
+    case EFFECT_SHORE_UP:
+        if (!WeatherEnabled() || damaging || (effect != EFFECT_SHORE_UP && GetConfig(B_TIME_OF_DAY_HEALING_MOVES) == GEN_2)
+         || !ExportWeatherHeal(effect, out))
+            return UNSUP_EFFECT;
+        break;
     case EFFECT_PROTECT:
         if (GetMoveProtectMethod(move) != PROTECT_NORMAL)
             return UNSUP_EFFECT;
@@ -493,9 +666,10 @@ static u8 ResolveEffects(enum Move move, BattleMove *out)
     case EFFECT_TWO_TURNS_ATTACK:
     case EFFECT_SEMI_INVULNERABLE:
     {
-        // Charge on the first turn, hit on the second. GC battles have no
-        // weather, so a weather shortcut (Solar Beam in sun) never applies.
-        u8 semi = BSEMI_NONE;
+        // Charge on the first turn, hit on the second. Before V15 GC battles
+        // have no weather, so a weather shortcut (Solar Beam in sun) never
+        // applies; V15 sends it (and Solar Beam's power in other weathers).
+        u8 semi = BSEMI_NONE, skip = 0;
         if (!VolatilesEnabled() || !damaging)
             return UNSUP_EFFECT;
         if (effect == EFFECT_SEMI_INVULNERABLE)
@@ -507,10 +681,19 @@ static u8 ResolveEffects(enum Move move, BattleMove *out)
             default: return UNSUP_EFFECT;  // underwater, Phantom Force, Sky Drop
             }
         }
+        if (WeatherEnabled() && effect != EFFECT_SEMI_INVULNERABLE && GetTwoTurnMoveWeather(move))
+        {
+            skip = ExportWeather(GetTwoTurnMoveWeather(move));
+            if (skip == BWEATHER_NONE)
+                return UNSUP_EFFECT;
+            skip = BWEATHER_BIT(skip);
+        }
         // CHARGE leads the list, before DAMAGE.
         out->effects[1] = out->effects[0];
-        out->effects[0] = (BattleEffect){.kind = BEFF_CHARGE, .who = BWHO_USER, .arg0 = semi};
+        out->effects[0] = (BattleEffect){.kind = BEFF_CHARGE, .who = BWHO_USER, .arg0 = semi, .arg2 = skip};
         out->effect_count = 2;
+        if (WeatherEnabled() && effect == EFFECT_SOLAR_BEAM && !ExportSolarBeamPower(out))
+            return UNSUP_OTHER;
         break;
     }
     default:
@@ -519,6 +702,13 @@ static u8 ResolveEffects(enum Move move, BattleMove *out)
     unsupported = ResolveAdditionalEffects(move, out, damaging);
     if (unsupported)
         return unsupported;
+    if (WeatherEnabled())
+    {
+        // Powder moves: Grass types, Overcoat and Safety Goggles block them (not modelled).
+        if (gMovesInfo[move].powderMove)
+            return UNSUP_EFFECT;
+        ExportWeatherAccuracy(move, out);
+    }
     if (effect == EFFECT_SWAGGER)
         PushEffect(out, (BattleEffect){.kind = BEFF_CONFUSE, .who = BWHO_TARGET});
     if (sEffectOverflow)
@@ -634,6 +824,75 @@ static bool8 AddHook(BattleAbility *a, BattleAbilityHook hook)
     return TRUE;
 }
 
+// The weather abilities (AbilityBattleEffects, GetBattlerTotalSpeedStat,
+// GetTotalAccuracy, CalcMoveBasePowerAfterModifiers, CalcAttackStat,
+// HandleEndTurnWeatherDamage). FALSE: not a weather ability this request has.
+static bool8 ResolveWeatherAbility(enum Ability ability, BattleAbility *a)
+{
+    if (!WeatherEnabled())
+        return FALSE;
+    switch (ability)
+    {
+    case ABILITY_DRIZZLE:     AddHook(a, HOOK(BABIL_ENTRY_WEATHER, BWEATHER_RAIN, 0, AbilityWeatherTurns(), 0, 0, 0, 0)); break;
+    case ABILITY_DROUGHT:     AddHook(a, HOOK(BABIL_ENTRY_WEATHER, BWEATHER_SUN, 0, AbilityWeatherTurns(), 0, 0, 0, 0)); break;
+    case ABILITY_SAND_STREAM: AddHook(a, HOOK(BABIL_ENTRY_WEATHER, BWEATHER_SANDSTORM, 0, AbilityWeatherTurns(), 0, 0, 0, 0)); break;
+    case ABILITY_SNOW_WARNING:
+        AddHook(a, HOOK(BABIL_ENTRY_WEATHER, SnowWarningWeather(), 0, AbilityWeatherTurns(), 0, 0, 0, 0));
+        break;
+    case ABILITY_CLOUD_NINE:
+    case ABILITY_AIR_LOCK:
+        AddHook(a, HOOK(BABIL_WEATHER_SUPPRESS, 0, 0, 0, 0, 0, 0, 0));
+        break;
+    case ABILITY_SWIFT_SWIM:  AddHook(a, ModifierHook(MODIFIER(BMOD_SPEED, 200, BPRED_WEATHER, W_RAIN, 0, 0))); break;
+    case ABILITY_CHLOROPHYLL: AddHook(a, ModifierHook(MODIFIER(BMOD_SPEED, 200, BPRED_WEATHER, W_SUN, 0, 0))); break;
+    case ABILITY_SLUSH_RUSH:  AddHook(a, ModifierHook(MODIFIER(BMOD_SPEED, 200, BPRED_WEATHER, W_HAIL | W_SNOW, 0, 0))); break;
+    case ABILITY_SAND_RUSH:
+        AddHook(a, HOOK(BABIL_WEATHER_IMMUNE, W_SAND, 0, 0, 0, 0, 0, 0));
+        AddHook(a, ModifierHook(MODIFIER(BMOD_SPEED, 200, BPRED_WEATHER, W_SAND, 0, 0)));
+        break;
+    case ABILITY_SAND_VEIL:   // accuracy x80/100 against the holder (target's ability step)
+        AddHook(a, HOOK(BABIL_WEATHER_IMMUNE, W_SAND, 0, 0, 0, 0, 0, 0));
+        AddHook(a, ModifierHook(MODIFIER(BATTLE_MODIFIER_STAGE(BMOD_ACCURACY, 0) | BMODF_DEFENDER, 80,
+                                         BPRED_WEATHER, W_SAND, 0, 0)));
+        break;
+    case ABILITY_SNOW_CLOAK:
+        AddHook(a, HOOK(BABIL_WEATHER_IMMUNE, W_HAIL, 0, 0, 0, 0, 0, 0));
+        AddHook(a, ModifierHook(MODIFIER(BATTLE_MODIFIER_STAGE(BMOD_ACCURACY, 0) | BMODF_DEFENDER, 80,
+                                         BPRED_WEATHER, W_HAIL | W_SNOW, 0, 0)));
+        break;
+    case ABILITY_SAND_FORCE:  // power x1.3 for Rock, Ground and Steel moves
+        AddHook(a, HOOK(BABIL_WEATHER_IMMUNE, W_SAND, 0, 0, 0, 0, 0, 0));
+        AddHook(a, ModifierHook(MODIFIER(BMOD_POWER, 130, BPRED_WEATHER, W_SAND, BPRED_MOVE_TYPE, TYPE_ROCK)));
+        AddHook(a, ModifierHook(MODIFIER(BMOD_POWER, 130, BPRED_WEATHER, W_SAND, BPRED_MOVE_TYPE, TYPE_GROUND)));
+        AddHook(a, ModifierHook(MODIFIER(BMOD_POWER, 130, BPRED_WEATHER, W_SAND, BPRED_MOVE_TYPE, TYPE_STEEL)));
+        break;
+    case ABILITY_OVERCOAT:    // its powder immunity: powder moves are unsupported in V15
+        AddHook(a, HOOK(BABIL_WEATHER_IMMUNE, W_SAND | W_HAIL, 0, 0, 0, 0, 0, 0));
+        break;
+    case ABILITY_RAIN_DISH:
+        AddHook(a, HOOK(BABIL_WEATHER_RESIDUAL, W_RAIN, 1, 16, 0, 0, 0, 0));
+        break;
+    case ABILITY_ICE_BODY:    // instead of the hail damage; not underground
+        AddHook(a, HOOK(BABIL_WEATHER_RESIDUAL, W_HAIL | W_SNOW, 1, 16, 0, 0, 0, BAHF_NOT_UNDERGROUND));
+        break;
+    case ABILITY_DRY_SKIN:    // Water absorbed (1/4); Fire power x1.25; 1/8 in rain and sun
+        AddHook(a, HOOK(BABIL_TYPE_ABSORB, TYPE_WATER, 0, 0, 0, 0, 25, 0));
+        AddHook(a, ModifierHook(MODIFIER(BATTLE_MODIFIER_STAGE(BMOD_POWER, 0) | BMODF_DEFENDER, 125,
+                                         BPRED_MOVE_TYPE, TYPE_FIRE, 0, 0)));
+        AddHook(a, HOOK(BABIL_WEATHER_RESIDUAL, W_RAIN, 1, 8, 0, 0, 0, 0));
+        AddHook(a, HOOK(BABIL_WEATHER_RESIDUAL, W_SUN, -1, 8, 0, 0, 0, 0));
+        break;
+    case ABILITY_SOLAR_POWER: // special attacking stat x1.5 in sun; 1/8 at the end of each sunny turn
+        AddHook(a, ModifierHook(MODIFIER(BATTLE_MODIFIER_STAGE(BMOD_ATTACK, BCAT_SPECIAL), 150,
+                                         BPRED_WEATHER, W_SUN, 0, 0)));
+        AddHook(a, HOOK(BABIL_WEATHER_RESIDUAL, W_SUN, -1, 8, 0, 0, 0, 0));
+        break;
+    default:
+        return FALSE;
+    }
+    return TRUE;
+}
+
 static BattleAbility ResolveAbility(enum Ability ability)
 {
     BattleAbility a = {.cls = BACLASS_UNSUPPORTED, .source = ability};
@@ -644,6 +903,12 @@ static BattleAbility ResolveAbility(enum Ability ability)
     const u8 intimidate = GetConfig(B_UPDATED_INTIMIDATE) >= GEN_8 ? BABIL_VOL_INTIMIDATE : 0;
     const u8 breakable = v12 && ability < ABILITIES_COUNT && gAbilitiesInfo[ability].breakable ? BAHF_BREAKABLE : 0;
 
+    if (ResolveWeatherAbility(ability, &a))  // V15
+    {
+        for (u32 i = 0; i < a.count; i++)
+            a.hooks[i].flags |= breakable;
+        return a;
+    }
     switch (ability)
     {
     // No battle effect in a GC trainer battle (escape, after-battle, items not simulated).
@@ -883,6 +1148,8 @@ struct LabFixture
     struct LabMon mons[2][3];
     u8 version;  // 0 = V12
     u8 seedOf;   // 0 = own; else use that fixture's battle id (same GC seed)
+    u8 startWeather, startTurns;  // V15: the battle-start weather (BWEATHER_*, 0 none; turns 0 = no end)
+    bool8 gen5Weather;            // V15: send the Gen 5 weather rules instead of this build's
 };
 
 // ---------------------------------------------------------------------------
@@ -1018,6 +1285,44 @@ static const struct LabFixture sLabFixtures[] = {
          LM(ZANGOOSE, 2, 34, 100, STATUS1_POISON, MOVE_ICE_PUNCH)},
         {LM(DUGTRIO, 0, 34, 100, 0, MOVE_DIG), LM(SNORLAX, 1, 34, 100, 0, MOVE_RECOVER),
          LM(SNORLAX, 0, 34, 100, 0, MOVE_RECOVER)}}, BATTLE_APP_VERSION_FIXED_POINT, 0},
+    // V15 (docs/weather.md): weather, strict abilities and moves.
+    [30] = {BATTLE_FORMAT_SINGLE, 2, TRUE, {  // Drizzle (slower) over Drought; Swift Swim; Hurricane, Solar Beam
+        {LM(PELIPPER, 1, 40, 100, 0, MOVE_SURF, MOVE_HURRICANE), LM(KINGDRA, 0, 40, 100, 0, MOVE_SURF, MOVE_RAIN_DANCE)},
+        {LM(NINETALES, 2, 40, 100, 0, MOVE_FLAMETHROWER, MOVE_SOLAR_BEAM, MOVE_SUNNY_DAY),
+         LM(VENUSAUR, 2, 40, 100, 0, MOVE_SOLAR_BEAM, MOVE_SYNTHESIS)}},
+        BATTLE_APP_VERSION_WEATHER, 0},
+    [31] = {BATTLE_FORMAT_DOUBLE, 3, TRUE, {  // Sand Stream, Sand Force, Sand Veil; Cloud Nine; Weather Ball
+        {LM(TYRANITAR, 0, 40, 100, 0, MOVE_ROCK_SLIDE, MOVE_WEATHER_BALL), LM(EXCADRILL, 1, 40, 100, 0, MOVE_ROCK_SLIDE),
+         LM(GARCHOMP, 0, 40, 100, 0, MOVE_EARTHQUAKE)},
+        {LM(GOLDUCK, 1, 40, 100, 0, MOVE_SURF, MOVE_RAIN_DANCE), LM(PELIPPER, 1, 40, 100, 0, MOVE_WEATHER_BALL),
+         LM(LUDICOLO, 1, 40, 100, 0, MOVE_SURF)}},
+        BATTLE_APP_VERSION_WEATHER, 0},
+    [32] = {BATTLE_FORMAT_TRIPLE, 3, TRUE, {  // Snow Warning, Ice Body, Snow Cloak, Blizzard; Hail; Overcoat
+        {LM(ABOMASNOW, 0, 40, 100, 0, MOVE_BLIZZARD), LM(GLALIE, 1, 40, 60, 0, MOVE_ICE_BEAM, MOVE_HAIL),
+         LM(MAMOSWINE, 1, 40, 100, 0, MOVE_BODY_SLAM)},
+        {LM(CLOYSTER, 2, 40, 100, 0, MOVE_ICE_BEAM), LM(CHARIZARD, 0, 40, 100, 0, MOVE_FLAMETHROWER, MOVE_SUNNY_DAY),
+         LM(SNORLAX, 0, 40, 100, 0, MOVE_BODY_SLAM)}},
+        BATTLE_APP_VERSION_WEATHER, 0},
+    [33] = {BATTLE_FORMAT_ROTATION, 3, TRUE, {  // sun: Chlorophyll, Solar Power, Dry Skin, Moonlight, no-charge Solar Beam
+        {LM(NINETALES, 2, 40, 100, 0, MOVE_WEATHER_BALL, MOVE_MOONLIGHT), LM(VENUSAUR, 2, 40, 100, 0, MOVE_SOLAR_BEAM),
+         LM(CHARIZARD, 2, 40, 100, 0, MOVE_FLAMETHROWER)},
+        {LM(TOXICROAK, 1, 40, 100, 0, MOVE_POISON_JAB), LM(LUDICOLO, 1, 40, 100, 0, MOVE_RAIN_DANCE, MOVE_SURF),
+         LM(TORKOAL, 1, 40, 100, 0, MOVE_FLAMETHROWER)}},
+        BATTLE_APP_VERSION_WEATHER, 0},
+    [34] = {BATTLE_FORMAT_SINGLE, 1, TRUE, {  // strict rules: primal weather (Desolate Land) is not simulated
+        {LM(PELIPPER, 1, 40, 100, 0, MOVE_SURF)},
+        {LM(GROUDON_PRIMAL, 0, 40, 100, 0, MOVE_EARTHQUAKE)}},
+        BATTLE_APP_VERSION_WEATHER, 0},
+    [35] = {BATTLE_FORMAT_TRIPLE, 3, TRUE, {  // L32 with the Gen 5 weather rules: Snow Warning makes hail, no end
+        {LM(ABOMASNOW, 0, 40, 100, 0, MOVE_BLIZZARD), LM(GLALIE, 1, 40, 60, 0, MOVE_ICE_BEAM, MOVE_HAIL),
+         LM(MAMOSWINE, 1, 40, 100, 0, MOVE_BODY_SLAM)},
+        {LM(CLOYSTER, 2, 40, 100, 0, MOVE_ICE_BEAM), LM(CHARIZARD, 0, 40, 100, 0, MOVE_FLAMETHROWER, MOVE_SUNNY_DAY),
+         LM(SNORLAX, 0, 40, 100, 0, MOVE_BODY_SLAM)}},
+        BATTLE_APP_VERSION_WEATHER, 32, BWEATHER_NONE, 0, TRUE},
+    [36] = {BATTLE_FORMAT_DOUBLE, 2, TRUE, {  // battle-start rain (no end) from the rules; Swift Swim; Thunder
+        {LM(KINGDRA, 0, 40, 100, 0, MOVE_SURF, MOVE_THUNDER), LM(LUDICOLO, 0, 40, 100, 0, MOVE_SURF)},
+        {LM(TORKOAL, 1, 40, 100, 0, MOVE_FLAMETHROWER), LM(SNORLAX, 0, 40, 100, 0, MOVE_BODY_SLAM)}},
+        BATTLE_APP_VERSION_WEATHER, 0, BWEATHER_RAIN, 0},
 };
 #undef LM
 #undef LMC
@@ -1475,8 +1780,11 @@ static bool8 BuildRequest(const u8 **reason)
     if (request->version >= BATTLE_REQUEST_VERSION_ABILITIES)
         request->rules &= ~RULE_IGNORE_ABILITIES;
     // Ability lab: the battle id seeds the GC (repeatable runs); one fixture checks strict rules.
+    // V15 fixtures are strict for moves too: every move must be simulated.
     if (sBattle->lab)
-        request->rules |= RULE_FIXED_SEED | (sLabFixtures[sBattle->lab].strict ? RULE_STRICT_ABILITIES : 0);
+        request->rules |= RULE_FIXED_SEED | (sLabFixtures[sBattle->lab].strict ? RULE_STRICT_ABILITIES : 0)
+                        | (sLabFixtures[sBattle->lab].strict && request->version >= BATTLE_REQUEST_VERSION_WEATHER
+                           ? RULE_STRICT_MOVES : 0);
     if (request->version >= BATTLE_REQUEST_VERSION_CONDITIONS)
     {
         if (!ResolveConditionRules(&request->conditions))
@@ -1494,6 +1802,23 @@ static bool8 BuildRequest(const u8 **reason)
         *reason = unsupported;
         Free(request);
         return FALSE;
+    }
+    if (request->version >= BATTLE_REQUEST_VERSION_WEATHER)
+    {
+        ResolveFieldRules(&request->field);
+        if (sBattle->lab)
+        {
+            request->field.start_weather = sLabFixtures[sBattle->lab].startWeather;
+            request->field.start_turns = sLabFixtures[sBattle->lab].startTurns;
+        }
+        else if (MapBringsWeather())
+        {
+            // The overworld weather this build would bring into the battle is not exported yet.
+            static const u8 unsupported[] = _("{ENG}Map weather is not supported in GC battles.");
+            *reason = unsupported;
+            Free(request);
+            return FALSE;
+        }
     }
     request->trainer_id = sBattle->trainerId;
     request->trainer_class = trainer->trainerClass;
@@ -1538,6 +1863,7 @@ static bool8 Init(const u8 **reason)
     sBattle->roster = sPendingRoster;
     sBattle->endurance = sPendingEndurance;
     sBattle->lab = sPendingLab;
+    sBattle->gen5Weather = sBattle->lab && sLabFixtures[sBattle->lab].gen5Weather;
     sBattle->count = sBattle->roster && sBattle->format == BATTLE_FORMAT_DOUBLE ? 3 : sBattle->fieldCount;
     if (sBattle->lab)
         sBattle->count = sLabFixtures[sBattle->lab].count;

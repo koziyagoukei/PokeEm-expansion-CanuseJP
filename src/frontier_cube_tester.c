@@ -8,12 +8,12 @@
 // 5 = m4a-dev (Milestone 4-A abilities, request V11), 6 = m4a2-dev
 // (Milestone 4-A2 multi-hook abilities, request V12), 7 = rule-poc (V13
 // modifier records PoC), 8 = m4p-dev (M4-P shared modifiers, request V14 fixed
-// point); 2 to 8 are development
+// point), 9 = m4w-dev (M4-W weather, request V15); 2 to 9 are development
 // builds only.
 #include "global.h"
 #include "gc_extension.h"
 
 u16 GcExtension_GetRelease(void)
 {
-    return 8;
+    return 9;
 }
