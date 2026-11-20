@@ -202,7 +202,7 @@ enum DebugMenuTypes
 #define DEBUG_NUMBER_ICON_Y 50
 
 // The Utilities list carries the GC test entries (38 in Milestone 4-A).
-#define DEBUG_MAX_MENU_ITEMS 48
+#define DEBUG_MAX_MENU_ITEMS 56
 #define DEBUG_MAX_SUB_MENU_LEVELS 4
 
 #define DEBUG_OPTION_CANT_BE_TOGGLED 0xFF
@@ -670,6 +670,14 @@ static const struct DebugMenuOption sDebugMenu_Actions_GcAbilityLab[] =
     { COMPOUND_STRING("{ENG}L40 V16 psychic Rotation"), DebugAction_GcAbilityLab, (const void *)40 },
     { COMPOUND_STRING("{ENG}L41 V16 L38 Gen7 boost"), DebugAction_GcAbilityLab, (const void *)41 },
     { COMPOUND_STRING("{ENG}L42 V16 strict move"), DebugAction_GcAbilityLab, (const void *)42 },
+    { COMPOUND_STRING("{ENG}L43 V17 items Single"), DebugAction_GcAbilityLab, (const void *)43 },
+    { COMPOUND_STRING("{ENG}L44 V17 items Double"), DebugAction_GcAbilityLab, (const void *)44 },
+    { COMPOUND_STRING("{ENG}L45 V17 items Triple"), DebugAction_GcAbilityLab, (const void *)45 },
+    { COMPOUND_STRING("{ENG}L46 V17 items Rotation"), DebugAction_GcAbilityLab, (const void *)46 },
+    { COMPOUND_STRING("{ENG}L47 V17 L43 items off"), DebugAction_GcAbilityLab, (const void *)47 },
+    { COMPOUND_STRING("{ENG}L48 V17 strict item"), DebugAction_GcAbilityLab, (const void *)48 },
+    { COMPOUND_STRING("{ENG}L49 V17 L43 Gen3 items"), DebugAction_GcAbilityLab, (const void *)49 },
+    { COMPOUND_STRING("{ENG}L50 V17 Klutz items off"), DebugAction_GcAbilityLab, (const void *)50 },
     { NULL }
 };
 STATIC_ASSERT(ARRAY_COUNT(sDebugMenu_Actions_GcAbilityLab) - 1 <= DEBUG_MAX_MENU_ITEMS, DebugGcAbilityLabMenuFits);

@@ -89,7 +89,8 @@ static bool predicate_valid(BattlePredicate p, uint8_t stage, unsigned types, ui
     // Properties of the move itself: an ability's or the field's filter; for a move the GBA resolves them.
     case BPRED_MOVE_TYPE: return source != BMSRC_MOVE && stage != BMOD_SPEED && !subject && p.arg < types;
     case BPRED_POWER_AT_MOST:
-        return source == BMSRC_ABILITY && damage_stage(stage) && !subject && p.arg && stage != BMOD_BASE_POWER;
+        return (source == BMSRC_ABILITY || source == BMSRC_ITEM) && damage_stage(stage) && !subject && p.arg &&
+               stage != BMOD_BASE_POWER;
     case BPRED_WEATHER: return !subject && p.arg && !(p.arg & ~BWEATHER_ALL);
     case BPRED_HAS_TYPE: return p.arg < types;
     case BPRED_TERRAIN: return !subject && p.arg && !(p.arg & ~BTERRAIN_ALL);
@@ -105,21 +106,33 @@ static bool stage_allowed(uint8_t stage, uint8_t source, bool v16) {
     case BMSRC_MOVE: return damage_stage(stage);
     case BMSRC_ABILITY: return damage_stage(stage) || stage == BMOD_SPEED || stage == BMOD_ACCURACY;
     case BMSRC_FIELD: return stage == BMOD_WEATHER || stage == BMOD_DEFENSE || (v16 && stage == BMOD_POWER);
+    // V17: the power of the holder's moves (where the game applies the attacker's item); the
+    // other stages are added with the items that need them.
+    case BMSRC_ITEM: return stage == BMOD_POWER;
     default: return false;
     }
+}
+
+// The stages the core chains in 4.12 fixed point (V14 and later): only they can truncate (V17).
+static bool fixed_point_stage(uint8_t stage) {
+    return stage == BMOD_POWER || stage == BMOD_ATTACK || stage == BMOD_DEFENSE || stage == BMOD_FINAL ||
+           stage == BMOD_WEATHER;
 }
 
 // One meaning per record: packed predicates, no reserved bits, a percent.
 bool battle_modifier_valid(const BattleModifier *mod, unsigned types, uint8_t source, uint8_t version) {
     const bool v15 = version >= BATTLE_REQUEST_VERSION_WEATHER, v16 = version >= BATTLE_REQUEST_VERSION_TERRAIN;
+    const bool v17 = version >= BATTLE_REQUEST_VERSION_ITEMS;
     const uint8_t stage = v15 ? battle_modifier_stage(mod->stage) : mod->stage & BMOD_STAGE_MASK;
     const uint8_t category = (mod->stage & BMOD_CATEGORY_MASK) >> BMOD_CATEGORY_SHIFT;
     const bool ability = source == BMSRC_ABILITY;
     if (stage == BMOD_NONE || stage >= (v15 ? BMOD_COUNT : BMOD_V14_COUNT) || category > BCAT_SPECIAL) return false;
     if (source == BMSRC_FIELD && !v15) return false;
+    if (source == BMSRC_ITEM && !v17) return false;
     if (!stage_allowed(stage, source, v16)) return false;
     const uint8_t allowed = BMOD_STAGE_MASK | BMOD_CATEGORY_MASK | (v15 ? BMOD_STAGE_HIGH : 0) |
-                            (ability && stage != BMOD_SPEED ? BMODF_DEFENDER : 0);
+                            (ability && stage != BMOD_SPEED ? BMODF_DEFENDER : 0) |
+                            (v17 && fixed_point_stage(stage) ? BMOD_FLOORED : 0);
     if (mod->stage & ~allowed) return false;
     // A move's own category is known to the GBA; a speed record has no move.
     if (category && (source == BMSRC_MOVE || stage == BMOD_SPEED)) return false;
@@ -422,6 +435,115 @@ bool battle_ability_valid(const BattleAbility *a, unsigned types, uint8_t versio
     for (unsigned i = 0; i < a->count; ++i)
         if (!battle_ability_hook_valid(&a->hooks[i], types, version)) return false;
     return true;
+}
+
+// ------------------------------------------------------------- V17 held items
+
+const char *battle_item_kind_name(uint8_t kind) {
+    switch (kind) {
+    case BITEM_NONE: return "none";
+    case BITEM_MODIFIER: return "modifier";
+    case BITEM_WEATHER_TURNS: return "weather turns";
+    case BITEM_TERRAIN_TURNS: return "terrain turns";
+    default: return "unknown";
+    }
+}
+
+static bool item_record_valid(const BattleItemRecord *x, unsigned types, uint8_t version) {
+    if (x->flags) return false;
+    switch (x->kind) {
+    case BITEM_MODIFIER: return battle_modifier_valid(&x->mod, types, BMSRC_ITEM, version);
+    case BITEM_WEATHER_TURNS:
+        return x->arg0 && !(x->arg0 & ~BWEATHER_ALL) && !x->arg1 && x->arg2 && x->arg2 <= BWEATHER_MAX_TURNS;
+    case BITEM_TERRAIN_TURNS:
+        return x->arg0 && !(x->arg0 & ~BTERRAIN_ALL) && !x->arg1 && x->arg2 && x->arg2 <= BTERRAIN_MAX_TURNS;
+    default: return false;  // unknown kinds are refused, never ignored
+    }
+}
+
+// One meaning per block: the record's item, a class that fits it, and no two
+// duration records for the same weather or terrain.
+bool battle_item_valid(const BattleItem *it, uint16_t held_item, unsigned types, uint8_t version) {
+    if (version < BATTLE_REQUEST_VERSION_ITEMS) return false;
+    if (it->source != held_item) return false;
+    switch (it->cls) {
+    case BICLASS_NONE: return it->count == 0;
+    case BICLASS_UNSUPPORTED: return it->count == 0 && held_item;
+    case BICLASS_RECORDS: break;
+    default: return false;
+    }
+    if (!held_item || !it->count || it->count > BATTLE_MAX_ITEM_RECORDS) return false;
+    uint8_t weather = 0, terrain = 0;
+    for (unsigned i = 0; i < it->count; ++i) {
+        const BattleItemRecord *x = &it->records[i];
+        if (!item_record_valid(x, types, version)) return false;
+        uint8_t *seen = x->kind == BITEM_WEATHER_TURNS ? &weather : x->kind == BITEM_TERRAIN_TURNS ? &terrain : NULL;
+        if (seen) {
+            if (*seen & x->arg0) return false;
+            *seen |= x->arg0;
+        }
+    }
+    return true;
+}
+
+static unsigned item_size(const BattleItem *it) {
+    return BATTLE_ITEM_HEADER_BYTES + (unsigned)(it->cls == BICLASS_RECORDS ? it->count : 0) * BATTLE_ITEM_RECORD_BYTES;
+}
+
+static void item_encode(const BattleItem *it, uint8_t *p) {
+    const unsigned count = it->cls == BICLASS_RECORDS ? it->count : 0;
+    p[0] = it->cls;
+    p[1] = (uint8_t)count;
+    msg_put16(p + 2, it->source);
+    for (unsigned i = 0; i < count && i < BATTLE_MAX_ITEM_RECORDS; ++i) {
+        const BattleItemRecord *x = &it->records[i];
+        uint8_t *q = p + BATTLE_ITEM_HEADER_BYTES + i * BATTLE_ITEM_RECORD_BYTES;
+        for (unsigned k = 0; k < BATTLE_ITEM_RECORD_BYTES; ++k) q[k] = 0;
+        q[0] = x->kind;
+        if (x->kind == BITEM_MODIFIER) {
+            battle_modifier_put(&x->mod, x->flags, q + 1);
+            continue;
+        }
+        q[1] = x->arg0;
+        q[2] = x->arg1;
+        q[3] = x->arg2;
+        q[7] = x->flags;
+    }
+}
+
+// Returns the bytes consumed, or 0 if the block is too short, has too many
+// records or carries anything in its unused bytes.
+static unsigned item_decode(const uint8_t *p, uint32_t available, BattleItem *it) {
+    if (available < BATTLE_ITEM_HEADER_BYTES || p[1] > BATTLE_MAX_ITEM_RECORDS) return 0;
+    *it = (BattleItem){.cls = p[0], .count = p[1], .source = msg_get16(p + 2)};
+    const unsigned size = BATTLE_ITEM_HEADER_BYTES + (unsigned)it->count * BATTLE_ITEM_RECORD_BYTES;
+    if (available < size) return 0;
+    for (unsigned i = 0; i < it->count; ++i) {
+        const uint8_t *q = p + BATTLE_ITEM_HEADER_BYTES + i * BATTLE_ITEM_RECORD_BYTES;
+        BattleItemRecord *x = &it->records[i];
+        *x = (BattleItemRecord){.kind = q[0]};
+        if (q[0] == BITEM_MODIFIER) {
+            battle_modifier_get(q + 1, &x->mod, &x->flags);
+            continue;
+        }
+        x->arg0 = q[1];
+        x->arg1 = q[2];
+        x->arg2 = q[3];
+        x->flags = q[7];
+        if (q[4] || q[5] || q[6]) return 0;
+    }
+    return size;
+}
+
+static uint32_t items_size(const BattleRequest *r) {
+    if (r->version < BATTLE_REQUEST_VERSION_ITEMS) return 0;
+    uint32_t size = 0;
+    for (unsigned side = 0; side < 2; ++side) {
+        const BattleEntry *e = side ? r->opponent : r->player;
+        const unsigned count = side ? r->opponent_count : r->player_count;
+        for (unsigned i = 0; i < count && i < BATTLE_MAX_PER_SIDE; ++i) size += item_size(&e[i].mon.item);
+    }
+    return size;
 }
 
 static unsigned move_effects_size(const BattleMove *m) {
@@ -780,14 +902,15 @@ static uint32_t fixed_size(const BattleRequest *r) {
 }
 
 uint32_t battle_request_size(const BattleRequest *r) {
-    return fixed_size(r) + effects_size(r) + abilities_size(r) +
+    return fixed_size(r) + effects_size(r) + abilities_size(r) + items_size(r) +
            (r->version >= BATTLE_REQUEST_VERSION_VOLATILES ? BATTLE_VOLATILE_RULE_BYTES : 0) +
            (r->version >= BATTLE_REQUEST_VERSION_WEATHER ? BATTLE_FIELD_RULE_BYTES : 0) +
            (r->version >= BATTLE_REQUEST_VERSION_TERRAIN ? BATTLE_TERRAIN_RULE_BYTES : 0);
 }
 
 static uint16_t rules_mask(uint8_t version) {
-    return version >= BATTLE_REQUEST_VERSION_WEATHER ? RULE_V15_MASK :
+    return version >= BATTLE_REQUEST_VERSION_ITEMS ? RULE_V17_MASK :
+           version >= BATTLE_REQUEST_VERSION_WEATHER ? RULE_V15_MASK :
            version >= BATTLE_REQUEST_VERSION_ABILITY_HOOKS ? RULE_V12_MASK : RULE_V11_MASK;
 }
 
@@ -872,6 +995,19 @@ uint32_t battle_request_encode(const BattleRequest *r, uint8_t *p, uint32_t capa
                 q += ability_size(a, version);
             }
         }
+    // V17: the item blocks follow the ability blocks; a block that does not
+    // describe its record's item is not written.
+    if (version >= BATTLE_REQUEST_VERSION_ITEMS)
+        for (unsigned side = 0; side < 2; ++side) {
+            const BattleEntry *e = side ? r->opponent : r->player;
+            const unsigned count = side ? r->opponent_count : r->player_count;
+            for (unsigned i = 0; i < count; ++i) {
+                const BattleItem *it = &e[i].mon.item;
+                if (!battle_item_valid(it, e[i].record.held_item, r->type_count, version)) return 0;
+                item_encode(it, q);
+                q += item_size(it);
+            }
+        }
     if (version >= BATTLE_REQUEST_VERSION_VOLATILES) {
         volatile_rules_encode(&r->volatiles, q);
         q += BATTLE_VOLATILE_RULE_BYTES;
@@ -919,7 +1055,10 @@ bool battle_request_decode(const uint8_t *p, uint32_t length, BattleRequest *r) 
     const uint8_t *q = p + BATTLE_REQUEST_HEADER;
     for (unsigned side = 0; side < 2; ++side) {
         BattleEntry *e = side ? r->opponent : r->player;
-        for (unsigned i = 0; i < BATTLE_MAX_PER_SIDE; ++i) e[i].mon.ability = (BattleAbility){0};
+        for (unsigned i = 0; i < BATTLE_MAX_PER_SIDE; ++i) {
+            e[i].mon.ability = (BattleAbility){0};
+            e[i].mon.item = (BattleItem){0};
+        }
     }
     for (unsigned side = 0; side < 2; ++side) {
         BattleEntry *e = side ? r->opponent : r->player;
@@ -1000,6 +1139,18 @@ bool battle_request_decode(const uint8_t *p, uint32_t length, BattleRequest *r) 
                     used = 0;
                 if (!used || !battle_ability_valid(a, r->type_count, r->version) || a->source != e[i].record.ability)
                     return false;
+                q += used;
+            }
+        }
+    // V17: the item blocks follow the ability blocks.
+    if (r->version >= BATTLE_REQUEST_VERSION_ITEMS)
+        for (unsigned side = 0; side < 2; ++side) {
+            BattleEntry *e = side ? r->opponent : r->player;
+            const unsigned count = side ? r->opponent_count : r->player_count;
+            for (unsigned i = 0; i < count; ++i) {
+                BattleItem *it = &e[i].mon.item;
+                const unsigned used = item_decode(q, (uint32_t)(end - q), it);
+                if (!used || !battle_item_valid(it, e[i].record.held_item, r->type_count, r->version)) return false;
                 q += used;
             }
         }

@@ -8,6 +8,7 @@
 // variant, HP and PP of the lead are written back once, after the link is
 // closed and the result was validated. Nothing else is changed.
 #include "global.h"
+#include "battle.h"
 #include "battle_main.h"
 #include "battle_setup.h"
 #include "battle_stat_change.h"
@@ -15,6 +16,7 @@
 #include "data.h"
 #include "event_data.h"
 #include "field_weather.h"
+#include "item.h"
 #include "main.h"
 #include "malloc.h"
 #include "move.h"
@@ -26,6 +28,8 @@
 #include "constants/battle.h"
 #include "constants/battle_set_effect.h"
 #include "constants/characters.h"
+#include "constants/hold_effects.h"
+#include "constants/items.h"
 #include "constants/songs.h"
 #include "gc_extension.h"
 #include "gc_ext/battle_protocol.h"
@@ -55,6 +59,10 @@ struct FrontierGcBattle
     u8 lab;          // debug: ability lab fixture (1..), 0 otherwise
     bool8 gen5Weather; // debug lab: the Gen 5 weather rules instead of this build's (V15)
     bool8 gen7Terrain; // debug lab: the Gen 7 terrain boost (x1.5) instead of this build's (V16)
+    bool8 strictItems; // V17: refuse to start rather than normalise items (RULE_STRICT_ITEMS)
+    bool8 gen3Items;   // debug lab: the Gen 3 type item boost (x1.1, Sea Incense x1.05) (V17)
+    u8 itemState;      // V17 ITEMS_*: simulated, or why every item is off
+    u16 itemReason;    // the item (ITEMS_OFF_ITEM) or ability (ITEMS_OFF_ABILITY) that normalised them
     u8 rotation, target;
     BattleMultiState multiState;
     u8 status[2][BATTLE_FIELD_SLOTS];
@@ -81,6 +89,9 @@ static EWRAM_DATA u8 sPendingFormat = 0;
 static EWRAM_DATA u8 sPendingRoster = 0;
 static EWRAM_DATA bool8 sPendingEndurance = FALSE;
 static EWRAM_DATA u8 sPendingLab = 0;
+static EWRAM_DATA bool8 sPendingStrictItems = FALSE;
+static EWRAM_DATA u8 sItemRefusal[64] = {0};  // a strict item refusal (outlives the battle data)
+enum { ITEMS_NOT_SENT, ITEMS_SIMULATED, ITEMS_OFF_ITEM, ITEMS_OFF_ABILITY };
 
 static const u8 sText_StruggleRules[] = _("{ENG}Unsupported Struggle rules.");
 static const u8 sText_NoMemory[] = _("{ENG}Not enough memory.");
@@ -315,7 +326,8 @@ static u8 ExportWeather(enum BattleWeather weather)
 }
 
 // TryChangeBattleWeather: 5 turns; ability weather before Gen 6 keeps the
-// counter it finds (none: no end). Rocks would give 8: items are not simulated.
+// counter it finds (none: no end). A rock's 8 turns are the holder's item
+// record (V17, ResolveItem); the GC applies it only to a limited count.
 static u8 AbilityWeatherTurns(void)
 {
     return sBattle->gen5Weather || GetConfig(B_ABILITY_WEATHER) < GEN_6 ? BWEATHER_TURNS_KEEP : 5;
@@ -1190,6 +1202,191 @@ static void ExportAbilityModifiers(enum Ability ability, BattleAbility *a)
     }
 }
 
+// ---------------------------------------------------------------------------
+// Request V17 held items (gba-gc-extension docs/items.md): each Pokemon's item
+// as the GC's item block, read from this build's item data and battle code
+// (CalcMoveBasePowerAfterModifiers, TryChangeWeather, TryChangeBattleTerrain).
+// An item is NONE only if it has no effect in a GC trainer battle, a block of
+// records only if the GC runs all of its effect, and UNSUPPORTED otherwise
+// (the default). A definition is the item's: nothing of its holder goes in.
+static bool8 ItemsEnabled(void)
+{
+    return sBattle->roster >= BATTLE_APP_VERSION_ITEMS;
+}
+
+// The holder's species changes form in battle because of this item (Zacian's
+// Rusted Sword at the battle start, primal reversion, Mega Evolution): the GC
+// keeps a Pokemon's species, so the item is not simulated for this holder.
+// Item-hold and item-use forms are applied outside battles.
+static bool8 ItemChangesFormInBattle(u16 species, u16 item)
+{
+    const struct FormChange *f = GetSpeciesFormChanges(species);
+    for (; f != NULL && f->method != FORM_CHANGE_TERMINATOR; f++)
+    {
+        if (f->method != FORM_CHANGE_ITEM_HOLD && f->method != FORM_CHANGE_ITEM_USE && f->param1 == item)
+            return TRUE;
+    }
+    return FALSE;
+}
+
+#define ITEM_FIELD_TURNS 8  // TryChangeWeather / TryChangeBattleTerrain with the rock or Terrain Extender
+
+static void AddItemRecord(BattleItem *it, BattleItemRecord record)
+{
+    it->records[it->count++] = record;
+    it->cls = BICLASS_RECORDS;
+}
+
+static BattleItemRecord ItemModifier(BattleModifier mod)
+{
+    BattleItemRecord x = {.kind = BITEM_MODIFIER};
+    x.mod = mod;
+    return x;
+}
+
+static BattleItem ResolveItem(u16 item, u16 species)
+{
+    BattleItem it = {.cls = BICLASS_UNSUPPORTED, .source = item};
+    enum HoldEffect hold;
+    u32 param, i;
+    u8 mask = 0;
+
+    if (item == ITEM_NONE)
+    {
+        it.cls = BICLASS_NONE;
+        return it;
+    }
+    // Berries are consumed (M4-B1); the e-Reader Enigma Berry comes from the save.
+    if (item >= ITEMS_COUNT || item == ITEM_ENIGMA_BERRY_E_READER || GetItemPocket(item) == POCKET_BERRIES
+     || ItemChangesFormInBattle(species, item))
+        return it;
+    hold = GetItemHoldEffect(item);
+    param = GetItemHoldEffectParam(item);
+    if (param > 100)
+        param = 100;  // CalcMoveBasePowerAfterModifiers caps the attacker's holdEffectParam
+    switch (hold)
+    {
+    // No effect in a GC trainer battle: prize money, experience, friendship,
+    // evolution, wild encounters and fleeing do not exist there.
+    case HOLD_EFFECT_NONE:
+    case HOLD_EFFECT_DOUBLE_PRIZE:
+    case HOLD_EFFECT_EXP_SHARE:
+    case HOLD_EFFECT_LUCKY_EGG:
+    case HOLD_EFFECT_FRIENDSHIP_UP:
+    case HOLD_EFFECT_PREVENT_EVOLVE:
+    case HOLD_EFFECT_REPEL:
+    case HOLD_EFFECT_CAN_ALWAYS_RUN:
+        it.cls = BICLASS_NONE;
+        break;
+    // Physical / special power x(1 + PercentToUQ4_12_Floored(param)): the truncated factor.
+    case HOLD_EFFECT_MUSCLE_BAND:
+    case HOLD_EFFECT_WISE_GLASSES:
+        AddItemRecord(&it, ItemModifier(MODIFIER(BATTLE_MODIFIER_STAGE(BMOD_POWER, hold == HOLD_EFFECT_MUSCLE_BAND
+                                                                       ? BCAT_PHYSICAL : BCAT_SPECIAL) | BMOD_FLOORED,
+                                                 100 + param, 0, 0, 0, 0)));
+        break;
+    // Moves of the item's type x(1 + PercentToUQ4_12(param)): the nearest factor.
+    case HOLD_EFFECT_TYPE_POWER:
+        if (GetItemSecondaryId(item) >= NUMBER_OF_MON_TYPES)
+            break;
+        if (sBattle->gen3Items)  // Lab: the Gen 3 values (I_TYPE_BOOST_POWER < GEN_4)
+            param = item == ITEM_SEA_INCENSE ? 5 : 10;
+        AddItemRecord(&it, ItemModifier(MODIFIER(BMOD_POWER, 100 + param, BPRED_MOVE_TYPE, GetItemSecondaryId(item), 0, 0)));
+        break;
+    // The weathers whose rock this is (gBattleWeatherInfo), set for a limited time: 8 turns.
+    case HOLD_EFFECT_DAMP_ROCK:
+    case HOLD_EFFECT_HEAT_ROCK:
+    case HOLD_EFFECT_SMOOTH_ROCK:
+    case HOLD_EFFECT_ICY_ROCK:
+        if (!WeatherEnabled())
+            break;
+        for (i = 0; i < BATTLE_WEATHER_COUNT; i++)
+        {
+            if (gBattleWeatherInfo[i].rock == hold && ExportWeather(i) != BWEATHER_NONE)
+                mask |= BWEATHER_BIT(ExportWeather(i));
+        }
+        if (mask)
+            AddItemRecord(&it, (BattleItemRecord){.kind = BITEM_WEATHER_TURNS, .arg0 = mask, .arg2 = ITEM_FIELD_TURNS});
+        break;
+    case HOLD_EFFECT_TERRAIN_EXTENDER:
+        if (TerrainEnabled())
+            AddItemRecord(&it, (BattleItemRecord){.kind = BITEM_TERRAIN_TURNS, .arg0 = BTERRAIN_ALL,
+                                                  .arg2 = ITEM_FIELD_TURNS});
+        break;
+    default:
+        break;
+    }
+    return it;
+}
+
+// Abilities whose battle effect involves held items: Klutz turns its holder's
+// item off, Pickpocket and Magician take items, Frisk reveals them, the rest
+// act on consumed, removed or form items. The GC runs none of them, so with
+// any held item in the battle every item is normalised away (strict: refused),
+// never just the holder's.
+static bool8 ItemAbility(u16 ability)
+{
+    switch (ability)
+    {
+    case ABILITY_KLUTZ:
+    case ABILITY_PICKPOCKET:
+    case ABILITY_MAGICIAN:
+    case ABILITY_STICKY_HOLD:
+    case ABILITY_FRISK:
+    case ABILITY_UNBURDEN:
+    case ABILITY_SYMBIOSIS:
+    case ABILITY_HARVEST:
+    case ABILITY_GLUTTONY:
+    case ABILITY_CHEEK_POUCH:
+    case ABILITY_RIPEN:
+    case ABILITY_UNNERVE:
+    case ABILITY_AS_ONE_ICE_RIDER:
+    case ABILITY_AS_ONE_SHADOW_RIDER:
+    case ABILITY_MULTITYPE:
+    case ABILITY_RKS_SYSTEM:
+    case ABILITY_PICKUP:
+    case ABILITY_BALL_FETCH:
+        return TRUE;
+    default:
+        return FALSE;
+    }
+}
+
+// The whole battle's items: simulated only if every item is simulated (or has
+// no effect) and no Pokemon has an item ability; otherwise all are off, never
+// a part (RULE_IGNORE_ITEMS). Moves that use items (Knock Off, Thief, Trick,
+// Fling, Bug Bite, Incinerate, Acrobatics, Natural Gift, Recycle, Embargo,
+// Magic Room ...) are unsupported moves: they are never run.
+static u8 CheckItems(const BattleRequest *r, u16 *why)
+{
+    bool8 held = FALSE;
+    u16 ability = ABILITY_NONE;
+    u32 side, i;
+    for (side = 0; side < 2; side++)
+    {
+        const BattleEntry *e = side ? r->opponent : r->player;
+        const u32 count = side ? r->opponent_count : r->player_count;
+        for (i = 0; i < count; i++)
+        {
+            if (e[i].mon.item.cls == BICLASS_UNSUPPORTED)
+            {
+                *why = e[i].record.held_item;
+                return ITEMS_OFF_ITEM;
+            }
+            if (e[i].record.held_item)
+                held = TRUE;
+            if (ItemAbility(e[i].record.ability))
+                ability = e[i].record.ability;
+        }
+    }
+    if (held && ability != ABILITY_NONE)
+    {
+        *why = ability;
+        return ITEMS_OFF_ABILITY;
+    }
+    return ITEMS_SIMULATED;
+}
+
 static u8 FillEntry(u32 slot, BattleEntry *entry)
 {
     struct Pokemon *mon = GcExtension_GetExportMon(slot);
@@ -1206,6 +1403,8 @@ static u8 FillEntry(u32 slot, BattleEntry *entry)
     entry->mon.type_count = entry->mon.types[0] == entry->mon.types[1] ? 1 : 2;
     if (sBattle->roster >= BATTLE_APP_VERSION_ABILITIES)
         entry->mon.ability = ResolveAbility(entry->record.ability);
+    if (ItemsEnabled())
+        entry->mon.item = ResolveItem(entry->record.held_item, species);
     for (i = 0; i < MAX_MON_MOVES; i++)
     {
         ResolveMove(entry->record.moves[i], &entry->mon.moves[i]);
@@ -1228,6 +1427,7 @@ struct LabMon
     u32 status;
     u16 moves[MAX_MON_MOVES];
     u8 custom;  // sLabAbilities index: replaces the resolved ability (V13 PoC)
+    u16 item;   // V17: the held item (ITEM_NONE before V17 fixtures)
 };
 
 struct LabFixture
@@ -1241,6 +1441,8 @@ struct LabFixture
     bool8 gen5Weather;            // V15: send the Gen 5 weather rules instead of this build's
     u8 startTerrain, startTerrainTurns;  // V16: the battle-start terrain (BTERRAIN_*, 0 none)
     bool8 gen7Terrain;            // V16: send the Gen 7 terrain boost (x1.5) instead of this build's
+    bool8 strictItems;            // V17: refuse to start rather than normalise items
+    bool8 gen3Items;              // V17: send the Gen 3 type item boost (x1.1) instead of this build's
 };
 
 // ---------------------------------------------------------------------------
@@ -1262,6 +1464,8 @@ static const BattleModifier sLabAbilities[] = {
 #define LM(species, num, level, hp, status, ...) {SPECIES_##species, num, level, hp, status, {__VA_ARGS__}, 0}
 #define LMC(custom, species, num, level, hp, status, ...) \
     {SPECIES_##species, num, level, hp, status, {__VA_ARGS__}, LAB_CUSTOM_##custom}
+#define LMI(item, species, num, level, hp, status, ...) \
+    {SPECIES_##species, num, level, hp, status, {__VA_ARGS__}, 0, ITEM_##item}
 static const struct LabFixture sLabFixtures[] = {
     [1] = {BATTLE_FORMAT_SINGLE, 1, FALSE, {  // Sturdy: survives at 1 HP from full, then faints
         {LM(BLASTOISE, 0, 50, 100, 0, MOVE_WATER_GUN)},
@@ -1448,9 +1652,49 @@ static const struct LabFixture sLabFixtures[] = {
         {LM(TAPU_KOKO, 0, 40, 100, 0, MOVE_RISING_VOLTAGE)},
         {LM(SNORLAX, 1, 40, 100, 0, MOVE_BODY_SLAM)}},
         BATTLE_APP_VERSION_TERRAIN, 0},
+    // V17 (docs/items.md): held items, strict abilities and moves.
+    [43] = {BATTLE_FORMAT_SINGLE, 2, TRUE, {  // Muscle Band (truncated x1.1), Charcoal, Drizzle with Damp Rock (8)
+        {LMI(MUSCLE_BAND, MACHAMP, 0, 40, 100, 0, MOVE_BODY_SLAM), LMI(DAMP_ROCK, PELIPPER, 1, 40, 100, 0, MOVE_SURF, MOVE_RAIN_DANCE)},
+        {LMI(CHARCOAL, CHARIZARD, 0, 40, 100, 0, MOVE_FLAMETHROWER), LMI(AMULET_COIN, SNORLAX, 1, 40, 100, 0, MOVE_BODY_SLAM)}},
+        BATTLE_APP_VERSION_ITEMS, 0},
+    [44] = {BATTLE_FORMAT_DOUBLE, 3, TRUE, {  // Terrain Extender on Grassy Surge, Miracle Seed, Wise Glasses, type items
+        {LMI(TERRAIN_EXTENDER, RILLABOOM, 2, 40, 100, 0, MOVE_ENERGY_BALL, MOVE_EARTHQUAKE),
+         LMI(MIRACLE_SEED, TAPU_BULU, 0, 40, 100, 0, MOVE_ENERGY_BALL), LMI(WISE_GLASSES, GOGOAT, 2, 40, 100, 0, MOVE_ENERGY_BALL)},
+        {LMI(MAGNET, TAPU_KOKO, 0, 40, 100, 0, MOVE_THUNDERBOLT), LMI(DRAGON_FANG, FLYGON, 0, 40, 100, 0, MOVE_DRAGON_PULSE),
+         LMI(SILK_SCARF, SNORLAX, 1, 40, 100, 0, MOVE_BODY_SLAM)}},
+        BATTLE_APP_VERSION_ITEMS, 0},
+    [45] = {BATTLE_FORMAT_TRIPLE, 3, TRUE, {  // Drought with Heat Rock, Mystic Water, Sea Incense, Damp Rock Rain Dance
+        {LMI(HEAT_ROCK, NINETALES, 2, 40, 100, 0, MOVE_FLAMETHROWER, MOVE_SUNNY_DAY),
+         LMI(MYSTIC_WATER, KINGDRA, 0, 40, 100, 0, MOVE_SURF), LMI(WISE_GLASSES, VENUSAUR, 2, 40, 100, 0, MOVE_SOLAR_BEAM)},
+        {LMI(SEA_INCENSE, GOLDUCK, 1, 40, 100, 0, MOVE_SURF), LMI(DAMP_ROCK, PELIPPER, 0, 40, 100, 0, MOVE_HURRICANE, MOVE_RAIN_DANCE),
+         LMI(SILK_SCARF, SNORLAX, 0, 40, 100, 0, MOVE_BODY_SLAM)}},
+        BATTLE_APP_VERSION_ITEMS, 0},
+    [46] = {BATTLE_FORMAT_ROTATION, 3, TRUE, {  // Sand Stream with Smooth Rock, Snow Warning with Icy Rock, type items
+        {LMI(SMOOTH_ROCK, TYRANITAR, 0, 40, 100, 0, MOVE_ROCK_SLIDE), LMI(SOFT_SAND, GARCHOMP, 0, 40, 100, 0, MOVE_EARTHQUAKE),
+         LMI(MUSCLE_BAND, EXCADRILL, 1, 40, 100, 0, MOVE_ROCK_SLIDE)},
+        {LMI(ICY_ROCK, ABOMASNOW, 0, 40, 100, 0, MOVE_BLIZZARD), LMI(NEVER_MELT_ICE, GLALIE, 1, 40, 100, 0, MOVE_ICE_BEAM),
+         LMI(HARD_STONE, MAMOSWINE, 1, 40, 100, 0, MOVE_BODY_SLAM)}},
+        BATTLE_APP_VERSION_ITEMS, 0},
+    [47] = {BATTLE_FORMAT_SINGLE, 2, TRUE, {  // L43 with Leftovers (not simulated): every item off, same seed
+        {LMI(MUSCLE_BAND, MACHAMP, 0, 40, 100, 0, MOVE_BODY_SLAM), LMI(DAMP_ROCK, PELIPPER, 1, 40, 100, 0, MOVE_SURF, MOVE_RAIN_DANCE)},
+        {LMI(CHARCOAL, CHARIZARD, 0, 40, 100, 0, MOVE_FLAMETHROWER), LMI(LEFTOVERS, SNORLAX, 1, 40, 100, 0, MOVE_BODY_SLAM)}},
+        BATTLE_APP_VERSION_ITEMS, 43},
+    [48] = {BATTLE_FORMAT_SINGLE, 2, TRUE, {  // L47 under strict item rules: refused on the GBA
+        {LMI(MUSCLE_BAND, MACHAMP, 0, 40, 100, 0, MOVE_BODY_SLAM), LMI(DAMP_ROCK, PELIPPER, 1, 40, 100, 0, MOVE_SURF, MOVE_RAIN_DANCE)},
+        {LMI(CHARCOAL, CHARIZARD, 0, 40, 100, 0, MOVE_FLAMETHROWER), LMI(LEFTOVERS, SNORLAX, 1, 40, 100, 0, MOVE_BODY_SLAM)}},
+        BATTLE_APP_VERSION_ITEMS, 43, BWEATHER_NONE, 0, FALSE, BTERRAIN_NONE, 0, FALSE, TRUE},
+    [49] = {BATTLE_FORMAT_SINGLE, 2, TRUE, {  // L43 with the Gen 3 type item boost (x1.1), same seed
+        {LMI(MUSCLE_BAND, MACHAMP, 0, 40, 100, 0, MOVE_BODY_SLAM), LMI(DAMP_ROCK, PELIPPER, 1, 40, 100, 0, MOVE_SURF, MOVE_RAIN_DANCE)},
+        {LMI(CHARCOAL, CHARIZARD, 0, 40, 100, 0, MOVE_FLAMETHROWER), LMI(AMULET_COIN, SNORLAX, 1, 40, 100, 0, MOVE_BODY_SLAM)}},
+        BATTLE_APP_VERSION_ITEMS, 43, BWEATHER_NONE, 0, FALSE, BTERRAIN_NONE, 0, FALSE, FALSE, TRUE},
+    [50] = {BATTLE_FORMAT_SINGLE, 1, FALSE, {  // Klutz (not simulated) holding Muscle Band: every item off
+        {LMI(MUSCLE_BAND, LOPUNNY, 1, 40, 100, 0, MOVE_BODY_SLAM)},
+        {LMI(CHARCOAL, CHARIZARD, 0, 40, 100, 0, MOVE_FLAMETHROWER)}},
+        BATTLE_APP_VERSION_ITEMS, 0},
 };
 #undef LM
 #undef LMC
+#undef LMI
 #define LAB_FIXTURE_COUNT (ARRAY_COUNT(sLabFixtures) - 1)
 #define LAB_BATTLE_ID(fixture) (0x4C414200u | (fixture))  // "LAB" + fixture: the GC's seed
 
@@ -1486,6 +1730,7 @@ static bool8 BuildLabEntries(BattleRequest *request, const u8 **reason)
                 hp = 1;
             SetMonData(mon, MON_DATA_HP, &hp);
             SetMonData(mon, MON_DATA_STATUS, &status);
+            SetMonData(mon, MON_DATA_HELD_ITEM, &spec->item);
             if (FillEntry(GC_EXTRA_SLOT_BASE + index, &entries[i]) == 0)
             {
                 *reason = side ? sText_NoOpponentMoves : sText_NoMoves;
@@ -1954,6 +2199,30 @@ static bool8 BuildRequest(const u8 **reason)
             return FALSE;
         }
     }
+    // V17: the items take part only if all of them can (else none does, said on
+    // both screens); the strict rule refuses the battle instead.
+    if (request->version >= BATTLE_REQUEST_VERSION_ITEMS)
+    {
+        sBattle->itemState = CheckItems(request, &sBattle->itemReason);
+        if (sBattle->strictItems)
+            request->rules |= RULE_STRICT_ITEMS;
+        if (sBattle->itemState == ITEMS_SIMULATED)
+        {
+            request->rules &= ~RULE_IGNORE_ITEMS;
+        }
+        else if (sBattle->strictItems)
+        {
+            static const u8 notSimulated[] = _("{ENG}Strict items: not simulated: ");
+            static const u8 itemAbility[] = _("{ENG}Strict items: item ability: ");
+            StringCopy(sItemRefusal, sBattle->itemState == ITEMS_OFF_ITEM ? notSimulated : itemAbility);
+            StringAppend(sItemRefusal, sText_Jpn);
+            StringAppend(sItemRefusal, sBattle->itemState == ITEMS_OFF_ITEM ? GetItemName(sBattle->itemReason)
+                                                                           : gAbilitiesInfo[sBattle->itemReason].name);
+            *reason = sItemRefusal;
+            Free(request);
+            return FALSE;
+        }
+    }
     request->trainer_id = sBattle->trainerId;
     request->trainer_class = trainer->trainerClass;
     request->reward_mode = 0;
@@ -1999,6 +2268,9 @@ static bool8 Init(const u8 **reason)
     sBattle->lab = sPendingLab;
     sBattle->gen5Weather = sBattle->lab && sLabFixtures[sBattle->lab].gen5Weather;
     sBattle->gen7Terrain = sBattle->lab && sLabFixtures[sBattle->lab].gen7Terrain;
+    sBattle->strictItems = sBattle->lab ? sLabFixtures[sBattle->lab].strictItems : sPendingStrictItems;
+    sBattle->gen3Items = sBattle->lab && sLabFixtures[sBattle->lab].gen3Items;
+    sPendingStrictItems = FALSE;  // one battle only
     sBattle->count = sBattle->roster && sBattle->format == BATTLE_FORMAT_DOUBLE ? 3 : sBattle->fieldCount;
     if (sBattle->lab)
         sBattle->count = sLabFixtures[sBattle->lab].count;
@@ -2253,6 +2525,45 @@ static void DrawHp(u8 body, u8 line, u16 hp, u16 max)
     GcExtension_PrintLine(body, text, 136, line, GC_COLOR_NORMAL);
 }
 
+// V17: before the battle, whether held items take part; when every item is
+// off, why (the item that is not simulated, or the item ability).
+static void DrawItemState(u8 body, u8 row)
+{
+    static const u8 simulated[] = _("{ENG}Held items: simulated");
+    static const u8 off[] = _("{ENG}ALL HELD ITEM EFFECTS ARE OFF");
+    static const u8 notSimulated[] = _("{ENG}Not simulated: ");
+    static const u8 itemAbility[] = _("{ENG}Item ability: ");
+    u8 text[64];
+    if (sBattle->itemState == ITEMS_NOT_SENT)
+        return;
+    if (sBattle->itemState == ITEMS_SIMULATED)
+    {
+        GcExtension_PrintLine(body, simulated, 0, row, GC_COLOR_DIM);
+        return;
+    }
+    GcExtension_PrintLine(body, off, 0, row, GC_COLOR_ERROR);
+    StringCopy(text, sBattle->itemState == ITEMS_OFF_ITEM ? notSimulated : itemAbility);
+    StringAppend(text, sText_Jpn);
+    StringAppend(text, sBattle->itemState == ITEMS_OFF_ITEM ? GetItemName(sBattle->itemReason)
+                                                           : gAbilitiesInfo[sBattle->itemReason].name);
+    GcExtension_PrintLine(body, text, 0, row + 1, GC_COLOR_ERROR);
+}
+
+// V17, during the battle: the last body row of every screen that is not a list
+// says that every item is off (the first command prompt comes before any action).
+static void DrawItemNotice(u8 body)
+{
+    static const u8 off[] = _("{ENG}ALL ITEMS OFF: ");
+    u8 text[64];
+    if (sBattle->itemState != ITEMS_OFF_ITEM && sBattle->itemState != ITEMS_OFF_ABILITY)
+        return;
+    StringCopy(text, off);
+    StringAppend(text, sText_Jpn);
+    StringAppend(text, sBattle->itemState == ITEMS_OFF_ITEM ? GetItemName(sBattle->itemReason)
+                                                           : gAbilitiesInfo[sBattle->itemReason].name);
+    GcExtension_PrintLine(body, text, 0, 5, GC_COLOR_ERROR);
+}
+
 static void DrawSingle(u8 body, u8 help)
 {
     struct Pokemon *lead = &gParties[B_TRAINER_PLAYER][sBattle->leadSlot];
@@ -2262,6 +2573,7 @@ static void DrawSingle(u8 body, u8 help)
     if (!sBattle->haveState)
     {
         GcExtension_PrintLine(body, sText_Prepare, 0, 0, GC_COLOR_NORMAL);
+        DrawItemState(body, 2);
         return;
     }
     StringCopy(text, sText_Vs);
@@ -2563,6 +2875,7 @@ static void DrawMulti(u8 body, u8 help)
     if (!sBattle->haveState)
     {
         GcExtension_PrintLine(body, sText_Prepare, 0, 0, GC_COLOR_NORMAL);
+        DrawItemState(body, 2);
         return;
     }
     DrawPositions(body, 1, 0, sBattle->screen == SCREEN_TARGET ? sBattle->target : BATTLE_SLOT_NONE,
@@ -2599,11 +2912,13 @@ static void DrawMulti(u8 body, u8 help)
                          : state->outcome == OUTCOME_CANCELLED ? sText_Cancelled : sText_Refused;
         GcExtension_PrintLine(body, result, 0, 3, GC_COLOR_HIGHLIGHT);
         GcExtension_PrintLine(help, sText_HelpEnded, 0, 0, GC_COLOR_NORMAL);
+        DrawItemNotice(body);
         return;
     }
     if (sBattle->screen == SCREEN_WAIT)
     {
         GcExtension_PrintLine(body, sText_Wait, 0, 3, GC_COLOR_DIM);
+        DrawItemNotice(body);
         return;
     }
 
@@ -2627,12 +2942,14 @@ static void DrawMulti(u8 body, u8 help)
                               0, 0, GC_COLOR_NORMAL);
         if (sBattle->reserveMask)
             GcExtension_PrintLine(body, switchHint, 88, 4, GC_COLOR_NORMAL);
+        DrawItemNotice(body);
         return;
     }
     if (sBattle->screen == SCREEN_TARGET)
     {
         GcExtension_PrintLine(body, sText_Target, 0, 3, GC_COLOR_HIGHLIGHT);
         GcExtension_PrintLine(help, sText_TargetHelp, 0, 0, GC_COLOR_NORMAL);
+        DrawItemNotice(body);
         return;
     }
 
@@ -2847,6 +3164,14 @@ void FrontierGcBattle_Start(void)
     {
         GcStartMode(&sFrontierGcBattleMode);
     }
+}
+
+// V17 strict items for the next battle started (formal use: results must be
+// exact): an item the GC cannot run refuses the battle instead of turning
+// every item off. Cleared once a battle starts.
+void FrontierGcBattle_SetStrictItems(bool8 strict)
+{
+    sPendingStrictItems = strict;
 }
 
 // Script special (waitstate): VAR_0x8004 = ability lab fixture (debug menu).

@@ -33,6 +33,7 @@ extern "C" {
 #define BATTLE_APP_VERSION_FIXED_POINT 14  // V13 + Gen 5+ fixed-point damage arithmetic (same layout)
 #define BATTLE_APP_VERSION_WEATHER 15  // V14 + weather (same state/action layout)
 #define BATTLE_APP_VERSION_TERRAIN 16  // V15 + terrain (same state/action layout)
+#define BATTLE_APP_VERSION_ITEMS 17  // V16 + held items (same state/action layout)
 #define BATTLE_MODE_VERSION 1
 
 enum BattleFormat { BATTLE_FORMAT_SINGLE = 1, BATTLE_FORMAT_DOUBLE = 2, BATTLE_FORMAT_TRIPLE = 3, BATTLE_FORMAT_ROTATION = 4 };
@@ -41,6 +42,9 @@ enum BattleResultPolicy { RESULT_POLICY_DISPLAY_ONLY = 0, RESULT_POLICY_APPLY_HP
 
 // Rules: mechanics the request explicitly normalises away for this battle.
 #define RULE_IGNORE_ABILITIES  (1u << 0)
+// Items: before V17 the request must say so (V16: refused otherwise). From V17
+// the item blocks hold every Pokemon's item; with this rule none of them has
+// any effect (the battle is normalised: all items off, shown as such).
 #define RULE_IGNORE_ITEMS      (1u << 1)
 #define RULE_IGNORE_STATUS     (1u << 2)  // existing status is carried but has no effect
 #define RULE_NO_GIMMICKS       (1u << 3)  // no Mega, Z-Move, Dynamax, Tera
@@ -51,9 +55,12 @@ enum BattleResultPolicy { RESULT_POLICY_DISPLAY_ONLY = 0, RESULT_POLICY_APPLY_HP
 #define RULE_FIXED_SEED        (1u << 7)  // the GC seeds its RNG with the battle id (reproducible test fixtures)
 // Request V15 rule.
 #define RULE_STRICT_MOVES      (1u << 8)  // refuse to start if a Pokemon knows a move the core cannot run
+// Request V17 rule.
+#define RULE_STRICT_ITEMS      (1u << 9)  // refuse to start rather than normalise items (results must be exact)
 #define RULE_V11_MASK 0x3fu
 #define RULE_V12_MASK 0xffu
 #define RULE_V15_MASK 0x1ffu  // V16 adds no rule
+#define RULE_V17_MASK 0x3ffu
 
 #define BATTLE_MAX_PER_SIDE 6
 #define BATTLE_MAX_TYPES 32
@@ -223,6 +230,11 @@ enum BattleEffectTiming {
 // Request V15 adds three stages, written with bit 5 as the stage's bit 3
 // (always 0 before V15): WEATHER (the weather step of the damage formula,
 // first matching field record only), and the integer SPEED and ACCURACY.
+// Request V17 gives bit 6 a meaning (BMOD_FLOORED, any source, fixed-point
+// stages only): the percent becomes its 4.12 factor by truncation instead of
+// to the nearest value (4096 * 110 / 100 = 4505, not 4506), as the games'
+// floored constants do. Before V17 bit 6 stays reserved (a record with it set
+// is refused).
 enum BattleModifierStage {
     BMOD_NONE = 0,
     BMOD_BASE_POWER = 1,  // the move's base power (e.g. Hex), before the power modifiers; floor, min 1
@@ -242,6 +254,7 @@ enum BattleModifierStage {
 #define BMOD_CATEGORY_SHIFT 3
 #define BMOD_CATEGORY_MASK (3u << BMOD_CATEGORY_SHIFT)
 #define BMODF_DEFENDER 0x80u
+#define BMOD_FLOORED 0x40u     // V17: the percent's 4.12 factor is truncated (see above)
 #define BATTLE_MODIFIER_STAGE(stage, category) \
     ((uint8_t)(((stage) & BMOD_STAGE_MASK) | ((stage) & 8u ? BMOD_STAGE_HIGH : 0u) | (category) << BMOD_CATEGORY_SHIFT))
 static inline uint8_t battle_modifier_stage(uint8_t stage_byte) {
@@ -252,7 +265,7 @@ enum BattlePredicateKind {
     BPRED_HP_AT_MOST = 1,     // subject's HP <= max HP / arg (arg >= 2)
     BPRED_STATUS = 2,         // subject's major status is in arg (mask of 1 << BST_*)
     BPRED_MOVE_TYPE = 3,      // the move's type is arg (never for typeless Struggle); abilities and field
-    BPRED_POWER_AT_MOST = 4,  // the move's power after BMOD_BASE_POWER <= arg; abilities only, not at BASE_POWER
+    BPRED_POWER_AT_MOST = 4,  // the move's power after BMOD_BASE_POWER <= arg; abilities and items, not at BASE_POWER
     BPRED_V14_COUNT,
     // Request V15.
     BPRED_WEATHER = 5,        // the weather in effect is in arg (mask of BWEATHER_BIT); none while suppressed
@@ -276,8 +289,9 @@ typedef struct {
     BattlePredicate pred[BATTLE_MAX_PREDICATES];
 } BattleModifier;
 // Where a record is: in a move's effect list, an ability's hook list (BMODF_DEFENDER
-// and the move predicates allowed) or the V15 field rules (weather and field stat records).
-enum BattleModifierSource { BMSRC_MOVE = 0, BMSRC_ABILITY = 1, BMSRC_FIELD = 2 };
+// and the move predicates allowed), the V15 field rules (weather and field stat records)
+// or a V17 item block (the holder's item; V17: the power of the holder's moves).
+enum BattleModifierSource { BMSRC_MOVE = 0, BMSRC_ABILITY = 1, BMSRC_FIELD = 2, BMSRC_ITEM = 3 };
 bool battle_modifier_valid(const BattleModifier *modifier, unsigned type_count, uint8_t source, uint8_t version);
 // The 7-byte record body (after the kind byte) and the slot's flags.
 void battle_modifier_put(const BattleModifier *modifier, uint8_t flags, uint8_t *body);
@@ -427,6 +441,48 @@ bool battle_ability_hook_valid(const BattleAbilityHook *hook, unsigned type_coun
 bool battle_ability_valid(const BattleAbility *ability, unsigned type_count, uint8_t version);
 const char *battle_ability_kind_name(uint8_t kind);
 
+// Request V17 held items (docs/items.md), resolved by the GBA from its item
+// data and configuration. The GC never interprets game item ids. One block
+// per entry, after the ability blocks:
+//   0 u8 class (BICLASS_*)  1 u8 record count (0 unless RECORDS, then 1..BATTLE_MAX_ITEM_RECORDS)
+//   2 u16 source item id (= the record's held item; 0 = no item, class NONE), then count x 8-byte records:
+//   0 u8 kind (BITEM_*), then for
+//     BITEM_MODIFIER:      the 7-byte modifier body (flags byte 0; BMSRC_ITEM)
+//     BITEM_WEATHER_TURNS: 1 u8 weather mask (BWEATHER_BIT)  2 u8 0  3 u8 turns (1..BWEATHER_MAX_TURNS)  4..7 0
+//     BITEM_TERRAIN_TURNS: 1 u8 terrain mask (BTERRAIN_BIT)  2 u8 0  3 u8 turns (1..BTERRAIN_MAX_TURNS)  4..7 0
+// A definition is the item's and never depends on its holder (no species or
+// ability of the holder is resolved into it), so it stays right if the item
+// later changes hands. NONE: no item, or an item with no battle effect in
+// this model. UNSUPPORTED: an item with an effect the core cannot run; the
+// core refuses such a battle unless RULE_IGNORE_ITEMS normalises every item.
+enum BattleItemClass { BICLASS_NONE = 0, BICLASS_UNSUPPORTED = 1, BICLASS_RECORDS = 2 };
+enum BattleItemKind {
+    BITEM_NONE = 0,
+    BITEM_MODIFIER = 1,       // a modifier of the holder's moves (BattleModifier in `mod`)
+    BITEM_WEATHER_TURNS = 2,  // a weather of mask arg0 the holder sets for a limited time lasts arg2 turns
+    BITEM_TERRAIN_TURNS = 3,  // a terrain of mask arg0 the holder sets for a limited time lasts arg2 turns
+    BITEM_COUNT
+};
+#define BATTLE_ITEM_HEADER_BYTES 4
+#define BATTLE_ITEM_RECORD_BYTES 8
+#define BATTLE_MAX_ITEM_RECORDS 4
+typedef struct {
+    uint8_t kind;
+    union {
+        struct { uint8_t arg0, arg1, arg2; };  // WEATHER_TURNS / TERRAIN_TURNS (arg1 0)
+        BattleModifier mod;                    // BITEM_MODIFIER
+    };
+    uint8_t flags;  // 0 (reserved)
+} BattleItemRecord;
+typedef struct {
+    uint8_t cls, count;  // BICLASS_*; records used
+    uint16_t source;     // the game's item id (diagnostic and names only)
+    BattleItemRecord records[BATTLE_MAX_ITEM_RECORDS];
+} BattleItem;
+// `held_item` is the entry record's item: the block must name the same one.
+bool battle_item_valid(const BattleItem *item, uint16_t held_item, unsigned type_count, uint8_t version);
+const char *battle_item_kind_name(uint8_t kind);
+
 typedef struct {
     uint8_t type_count, types[2];
     // Source compatibility for legacy producers; not encoded or used by GC.
@@ -434,6 +490,7 @@ typedef struct {
     uint8_t elevation;
     BattleMove moves[4];
     BattleAbility ability;  // V11 suffix block (not in the 40-byte record)
+    BattleItem item;        // V17 suffix block (zero before V17)
 } BattleMon;
 
 typedef struct {
@@ -466,7 +523,8 @@ typedef struct {
 #define BATTLE_REQUEST_VERSION_FIXED_POINT 14  // same layout as V13; 4.12 damage arithmetic (docs/modifiers.md)
 #define BATTLE_REQUEST_VERSION_WEATHER 15  // V14 + field rules after the volatile rules; weather (docs/weather.md)
 #define BATTLE_REQUEST_VERSION_TERRAIN 16  // V15 + terrain rules after the field rules (docs/terrain.md)
-#define BATTLE_REQUEST_VERSION_LATEST BATTLE_REQUEST_VERSION_TERRAIN
+#define BATTLE_REQUEST_VERSION_ITEMS 17  // V16 + item blocks after the ability blocks (docs/items.md)
+#define BATTLE_REQUEST_VERSION_LATEST BATTLE_REQUEST_VERSION_ITEMS
 #define BATTLE_REQUEST_HEADER 24
 enum StruggleRecoil { BSTRUGGLE_MAX_HP_FLOOR = 1, BSTRUGGLE_MAX_HP_NEAREST = 2 };
 #define BATTLE_MOVE_STRUGGLE 0xffffu  // logical presentation identifier
@@ -539,9 +597,10 @@ bool battle_terrain_rules_valid(const BattleTerrainRules *rules, unsigned type_c
 
 // The largest request (V9 and later: every move with the most effects, every
 // ability with the most hooks, the V15 field rules) for `entries` Pokemon in
-// all and `types` types (the V16 terrain rules included). Producers size
-// their buffer with it, so a valid request of any version always fits.
-#define BATTLE_REQUEST_MAX_BYTES(entries, types)     (BATTLE_REQUEST_HEADER + (entries) * BATTLE_ENTRY_BYTES + (types) * (types) + BATTLE_CONDITION_RULE_BYTES +      (entries) * 4 * (BATTLE_MOVE_EFFECTS_HEADER + BATTLE_MAX_EFFECTS * BATTLE_EFFECT_BYTES) +      (entries) * (BATTLE_ABILITY_HEADER_BYTES + BATTLE_MAX_ABILITY_HOOKS * BATTLE_ABILITY_HOOK_BYTES) +      BATTLE_VOLATILE_RULE_BYTES + BATTLE_FIELD_RULE_BYTES + BATTLE_TERRAIN_RULE_BYTES)
+// all and `types` types (the V16 terrain rules and V17 item blocks with the
+// most records included). Producers size their buffer with it, so a valid
+// request of any version always fits.
+#define BATTLE_REQUEST_MAX_BYTES(entries, types)     (BATTLE_REQUEST_HEADER + (entries) * BATTLE_ENTRY_BYTES + (types) * (types) + BATTLE_CONDITION_RULE_BYTES +      (entries) * 4 * (BATTLE_MOVE_EFFECTS_HEADER + BATTLE_MAX_EFFECTS * BATTLE_EFFECT_BYTES) +      (entries) * (BATTLE_ABILITY_HEADER_BYTES + BATTLE_MAX_ABILITY_HOOKS * BATTLE_ABILITY_HOOK_BYTES) +      (entries) * (BATTLE_ITEM_HEADER_BYTES + BATTLE_MAX_ITEM_RECORDS * BATTLE_ITEM_RECORD_BYTES) +      BATTLE_VOLATILE_RULE_BYTES + BATTLE_FIELD_RULE_BYTES + BATTLE_TERRAIN_RULE_BYTES)
 
 typedef struct {
     uint8_t format, battle_type, player_count, opponent_count, active_per_side;
