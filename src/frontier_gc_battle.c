@@ -54,6 +54,7 @@ struct FrontierGcBattle
     bool8 endurance; // debug: V9 fixtures against weak foes for long battles
     u8 lab;          // debug: ability lab fixture (1..), 0 otherwise
     bool8 gen5Weather; // debug lab: the Gen 5 weather rules instead of this build's (V15)
+    bool8 gen7Terrain; // debug lab: the Gen 7 terrain boost (x1.5) instead of this build's (V16)
     u8 rotation, target;
     BattleMultiState multiState;
     u8 status[2][BATTLE_FIELD_SLOTS];
@@ -382,6 +383,58 @@ static void ResolveFieldRules(BattleFieldRules *f)
     f->modifier_count = n;
 }
 
+// ---------------------------------------------------------------------------
+// Request V16 terrain (gba-gc-extension docs/terrain.md). As for the weather,
+// the GC owns the state and the shared operations (set, the grounded rule,
+// the terrain predicates, status and priority prevention, the heal and the
+// countdown); this build's terrain rules are data:
+//   - the terrain rules: the airborne type, what each terrain prevents, the
+//     Grassy heal, and the type power records (CalcMoveBasePowerAfterModifiers);
+//   - the terrain moves (EFFECT_TERRAIN), Earthquake's Grassy halving;
+//   - the surge abilities, Levitate's ungrounding, Surge Surfer, Grass Pelt.
+// The Ability Lab can ask for the Gen 7 boost (gen7Terrain).
+
+static bool8 TerrainEnabled(void)
+{
+    return sBattle->roster >= BATTLE_APP_VERSION_TERRAIN;
+}
+
+static u8 ExportTerrain(enum BattleTerrain terrain)
+{
+    switch (terrain)
+    {
+    case B_TERRAIN_ELECTRIC: return BTERRAIN_ELECTRIC;
+    case B_TERRAIN_GRASSY:   return BTERRAIN_GRASSY;
+    case B_TERRAIN_MISTY:    return BTERRAIN_MISTY;
+    case B_TERRAIN_PSYCHIC:  return BTERRAIN_PSYCHIC;
+    default:                 return BTERRAIN_NONE;
+    }
+}
+
+#define T_ELEC BTERRAIN_BIT(BTERRAIN_ELECTRIC)
+#define T_GRASS BTERRAIN_BIT(BTERRAIN_GRASSY)
+#define T_MIST BTERRAIN_BIT(BTERRAIN_MISTY)
+#define T_PSY BTERRAIN_BIT(BTERRAIN_PSYCHIC)
+
+static void ResolveTerrainRules(BattleTerrainRules *t)
+{
+    // B_TERRAIN_TYPE_BOOST: x1.3 from Gen 8, x1.5 before.
+    const u8 boost = sBattle->gen7Terrain || GetConfig(B_TERRAIN_TYPE_BOOST) < GEN_8 ? 150 : 130;
+    u32 n = 0;
+    memset(t, 0, sizeof(*t));
+    t->airborne_type = TYPE_FLYING;  // IsBattlerGrounded (Levitate is a hook)
+    t->terrain[BTERRAIN_ELECTRIC - 1].flags = BTKF_NO_SLEEP;                   // CanSetNonVolatileStatus
+    t->terrain[BTERRAIN_GRASSY - 1].heal_divisor = 16;                         // FIRST_EVENT_BLOCK_GRASSY_TERRAIN_HEAL
+    t->terrain[BTERRAIN_MISTY - 1].flags = BTKF_NO_STATUS | BTKF_NO_CONFUSION; // and CanBeConfused
+    t->terrain[BTERRAIN_PSYCHIC - 1].flags = BTKF_BLOCK_PRIORITY;              // CanPsychicTerrainProtectTarget
+    // CalcMoveBasePowerAfterModifiers, after the move's own modifiers, in this order.
+    t->modifiers[n++] = MODIFIER(BMOD_POWER, boost, BPRED_ON_TERRAIN, T_GRASS, BPRED_MOVE_TYPE, TYPE_GRASS);
+    t->modifiers[n++] = MODIFIER(BMOD_POWER, 50, BPRED_ON_TERRAIN | BPRED_DEFENDER, T_MIST, BPRED_MOVE_TYPE, TYPE_DRAGON);
+    t->modifiers[n++] = MODIFIER(BMOD_POWER, boost, BPRED_ON_TERRAIN, T_ELEC, BPRED_MOVE_TYPE, TYPE_ELECTRIC);
+    t->modifiers[n++] = MODIFIER(BMOD_POWER, boost, BPRED_ON_TERRAIN, T_PSY, BPRED_MOVE_TYPE, TYPE_PSYCHIC);
+    t->modifier_count = n;
+}
+
 // The weather rules of a move other than its effect: accuracy (Thunder,
 // Hurricane, Blizzard ...), read from this build's move flags.
 static void ExportWeatherAccuracy(enum Move move, BattleMove *out)
@@ -589,10 +642,25 @@ static u8 ResolveEffects(enum Move move, BattleMove *out)
         break;
     case EFFECT_EARTHQUAKE:
         // A plain hit that also reaches (and doubles against) an underground
-        // target; its Grassy Terrain halving never applies without terrain.
+        // target. Its Grassy Terrain halving (CalcMoveBasePowerAfterModifiers:
+        // the terrain, and the target not semi-invulnerable) is sent from V16;
+        // before V16 there is no terrain.
         if (!VolatilesEnabled())
             return UNSUP_EFFECT;
+        if (TerrainEnabled()
+         && !PushEffect(out, ModifierEffect(MODIFIER(BMOD_POWER, 50, BPRED_TERRAIN, T_GRASS,
+                                                     BPRED_EXPOSED | BPRED_DEFENDER, 0))))
+            return UNSUP_OTHER;
         break;
+    case EFFECT_TERRAIN:  // V16: Electric / Grassy / Misty / Psychic Terrain
+    {
+        const u8 kind = TerrainEnabled() ? ExportTerrain(GetMoveTerrainType(move)) : BTERRAIN_NONE;
+        if (damaging || kind == BTERRAIN_NONE)
+            return UNSUP_EFFECT;
+        out->target = BTARGET_SELF;  // a field move (TARGET_FIELD)
+        PushEffect(out, (BattleEffect){.kind = BEFF_TERRAIN, .who = BWHO_USER, .arg0 = kind, .arg2 = 5});
+        break;
+    }
     case EFFECT_RECOIL:
         PushEffect(out, (BattleEffect){.kind = BEFF_RECOIL, .who = BWHO_USER, .arg0 = GetMoveRecoil(move)});
         break;
@@ -831,6 +899,25 @@ static bool8 ResolveWeatherAbility(enum Ability ability, BattleAbility *a)
 {
     if (!WeatherEnabled())
         return FALSE;
+    if (TerrainEnabled())
+    {
+        switch (ability)  // V16 terrain abilities (AbilityBattleEffects, GetBattlerTotalSpeedStat, CalcDefenseStat)
+        {
+        case ABILITY_ELECTRIC_SURGE: AddHook(a, HOOK(BABIL_ENTRY_TERRAIN, BTERRAIN_ELECTRIC, 0, 5, 0, 0, 0, 0)); return TRUE;
+        case ABILITY_GRASSY_SURGE:   AddHook(a, HOOK(BABIL_ENTRY_TERRAIN, BTERRAIN_GRASSY, 0, 5, 0, 0, 0, 0)); return TRUE;
+        case ABILITY_MISTY_SURGE:    AddHook(a, HOOK(BABIL_ENTRY_TERRAIN, BTERRAIN_MISTY, 0, 5, 0, 0, 0, 0)); return TRUE;
+        case ABILITY_PSYCHIC_SURGE:  AddHook(a, HOOK(BABIL_ENTRY_TERRAIN, BTERRAIN_PSYCHIC, 0, 5, 0, 0, 0, 0)); return TRUE;
+        case ABILITY_SURGE_SURFER:   // speed x2 on Electric Terrain (the terrain only, grounded or not)
+            AddHook(a, ModifierHook(MODIFIER(BMOD_SPEED, 200, BPRED_TERRAIN, T_ELEC, 0, 0)));
+            return TRUE;
+        case ABILITY_GRASS_PELT:     // the holder's Defense x1.5 on Grassy Terrain
+            AddHook(a, ModifierHook(MODIFIER(BATTLE_MODIFIER_STAGE(BMOD_DEFENSE, BCAT_PHYSICAL) | BMODF_DEFENDER, 150,
+                                             BPRED_TERRAIN, T_GRASS, 0, 0)));
+            return TRUE;
+        default:
+            break;
+        }
+    }
     switch (ability)
     {
     case ABILITY_DRIZZLE:     AddHook(a, HOOK(BABIL_ENTRY_WEATHER, BWEATHER_RAIN, 0, AbilityWeatherTurns(), 0, 0, 0, 0)); break;
@@ -935,6 +1022,8 @@ static BattleAbility ResolveAbility(enum Ability ability)
         break;
     case ABILITY_LEVITATE:
         AddHook(&a, HOOK(BABIL_TYPE_IMMUNE, TYPE_GROUND, 0, 0, 0, 0, 0, 0));
+        if (TerrainEnabled())  // V16: not grounded (IsBattlerUngroundedByAbilityItemOrEffect)
+            AddHook(&a, HOOK(BABIL_UNGROUNDED, 0, 0, 0, 0, 0, 0, 0));
         break;
     case ABILITY_VOLT_ABSORB:
         AddHook(&a, HOOK(BABIL_TYPE_ABSORB, TYPE_ELECTRIC, 0, 0, 0, 0, 25, 0));
@@ -1150,6 +1239,8 @@ struct LabFixture
     u8 seedOf;   // 0 = own; else use that fixture's battle id (same GC seed)
     u8 startWeather, startTurns;  // V15: the battle-start weather (BWEATHER_*, 0 none; turns 0 = no end)
     bool8 gen5Weather;            // V15: send the Gen 5 weather rules instead of this build's
+    u8 startTerrain, startTerrainTurns;  // V16: the battle-start terrain (BTERRAIN_*, 0 none)
+    bool8 gen7Terrain;            // V16: send the Gen 7 terrain boost (x1.5) instead of this build's
 };
 
 // ---------------------------------------------------------------------------
@@ -1323,6 +1414,40 @@ static const struct LabFixture sLabFixtures[] = {
         {LM(KINGDRA, 0, 40, 100, 0, MOVE_SURF, MOVE_THUNDER), LM(LUDICOLO, 0, 40, 100, 0, MOVE_SURF)},
         {LM(TORKOAL, 1, 40, 100, 0, MOVE_FLAMETHROWER), LM(SNORLAX, 0, 40, 100, 0, MOVE_BODY_SLAM)}},
         BATTLE_APP_VERSION_WEATHER, 0, BWEATHER_RAIN, 0},
+    // V16 (docs/terrain.md): terrain, strict abilities and moves.
+    [37] = {BATTLE_FORMAT_SINGLE, 2, TRUE, {  // Electric: no sleep for grounded Koko; boost; Psychic Terrain replaces it
+        {LM(TAPU_KOKO, 0, 40, 100, 0, MOVE_THUNDERBOLT, MOVE_QUICK_ATTACK),
+         LM(RAICHU_ALOLA, 0, 40, 100, 0, MOVE_THUNDERBOLT, MOVE_QUICK_ATTACK)},
+        {LM(BRONZONG, 0, 40, 100, 0, MOVE_HYPNOSIS, MOVE_PSYCHIC), LM(TAPU_LELE, 0, 40, 100, 0, MOVE_PSYCHIC, MOVE_HYPNOSIS)}},
+        BATTLE_APP_VERSION_TERRAIN, 0},
+    [38] = {BATTLE_FORMAT_DOUBLE, 3, TRUE, {  // Grassy: heal, Earthquake / Bulldoze x0.5, Grass Pelt, Levitate / Flying
+        {LM(RILLABOOM, 2, 40, 60, 0, MOVE_EARTHQUAKE, MOVE_ENERGY_BALL), LM(GOGOAT, 2, 40, 70, 0, MOVE_BULLDOZE),
+         LM(TAPU_BULU, 0, 40, 100, 0, MOVE_ENERGY_BALL)},
+        {LM(FLYGON, 0, 40, 80, 0, MOVE_DRAGON_PULSE), LM(PIDGEOT, 0, 40, 80, 0, MOVE_QUICK_ATTACK),
+         LM(SNORLAX, 1, 40, 100, 0, MOVE_BODY_SLAM)}},
+        BATTLE_APP_VERSION_TERRAIN, 0},
+    [39] = {BATTLE_FORMAT_TRIPLE, 3, TRUE, {  // Misty: no status or confusion when grounded; Dragon x0.5 on grounded
+        {LM(TAPU_FINI, 0, 40, 100, 0, MOVE_SURF, MOVE_CONFUSE_RAY), LM(DRAGONITE, 0, 40, 100, 0, MOVE_DRAGON_CLAW),
+         LM(GARCHOMP, 0, 40, 100, 0, MOVE_DRAGON_CLAW)},
+        {LM(JOLTEON, 0, 40, 100, 0, MOVE_THUNDER_WAVE), LM(CROBAT, 0, 40, 100, 0, MOVE_TOXIC, MOVE_CONFUSE_RAY),
+         LM(DRAGONITE, 0, 40, 100, 0, MOVE_DRAGON_CLAW)}},
+        BATTLE_APP_VERSION_TERRAIN, 0},
+    [40] = {BATTLE_FORMAT_ROTATION, 3, TRUE, {  // Psychic: foes' priority moves fail on the grounded front
+        {LM(TAPU_LELE, 0, 40, 100, 0, MOVE_PSYCHIC), LM(INDEEDEE_M, 0, 40, 100, 0, MOVE_PSYCHIC),
+         LM(PIDGEOT, 0, 40, 100, 0, MOVE_QUICK_ATTACK)},
+        {LM(RATICATE, 1, 40, 100, 0, MOVE_QUICK_ATTACK), LM(AZUMARILL, 0, 40, 100, 0, MOVE_AQUA_JET),
+         LM(PIDGEOT, 2, 40, 100, 0, MOVE_QUICK_ATTACK)}},
+        BATTLE_APP_VERSION_TERRAIN, 0},
+    [41] = {BATTLE_FORMAT_DOUBLE, 3, TRUE, {  // L38 with the Gen 7 terrain boost (x1.5), same seed
+        {LM(RILLABOOM, 2, 40, 60, 0, MOVE_EARTHQUAKE, MOVE_ENERGY_BALL), LM(GOGOAT, 2, 40, 70, 0, MOVE_BULLDOZE),
+         LM(TAPU_BULU, 0, 40, 100, 0, MOVE_ENERGY_BALL)},
+        {LM(FLYGON, 0, 40, 80, 0, MOVE_DRAGON_PULSE), LM(PIDGEOT, 0, 40, 80, 0, MOVE_QUICK_ATTACK),
+         LM(SNORLAX, 1, 40, 100, 0, MOVE_BODY_SLAM)}},
+        BATTLE_APP_VERSION_TERRAIN, 38, BWEATHER_NONE, 0, FALSE, BTERRAIN_NONE, 0, TRUE},
+    [42] = {BATTLE_FORMAT_SINGLE, 1, TRUE, {  // strict rules: Rising Voltage (terrain-dependent power) is not simulated
+        {LM(TAPU_KOKO, 0, 40, 100, 0, MOVE_RISING_VOLTAGE)},
+        {LM(SNORLAX, 1, 40, 100, 0, MOVE_BODY_SLAM)}},
+        BATTLE_APP_VERSION_TERRAIN, 0},
 };
 #undef LM
 #undef LMC
@@ -1811,6 +1936,15 @@ static bool8 BuildRequest(const u8 **reason)
             request->field.start_weather = sLabFixtures[sBattle->lab].startWeather;
             request->field.start_turns = sLabFixtures[sBattle->lab].startTurns;
         }
+        if (request->version >= BATTLE_REQUEST_VERSION_TERRAIN)
+        {
+            ResolveTerrainRules(&request->terrain);
+            if (sBattle->lab)
+            {
+                request->terrain.start_terrain = sLabFixtures[sBattle->lab].startTerrain;
+                request->terrain.start_turns = sLabFixtures[sBattle->lab].startTerrainTurns;
+            }
+        }
         else if (MapBringsWeather())
         {
             // The overworld weather this build would bring into the battle is not exported yet.
@@ -1864,6 +1998,7 @@ static bool8 Init(const u8 **reason)
     sBattle->endurance = sPendingEndurance;
     sBattle->lab = sPendingLab;
     sBattle->gen5Weather = sBattle->lab && sLabFixtures[sBattle->lab].gen5Weather;
+    sBattle->gen7Terrain = sBattle->lab && sLabFixtures[sBattle->lab].gen7Terrain;
     sBattle->count = sBattle->roster && sBattle->format == BATTLE_FORMAT_DOUBLE ? 3 : sBattle->fieldCount;
     if (sBattle->lab)
         sBattle->count = sLabFixtures[sBattle->lab].count;

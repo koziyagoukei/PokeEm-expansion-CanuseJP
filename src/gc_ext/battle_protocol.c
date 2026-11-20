@@ -50,7 +50,7 @@ const char *battle_effect_kind_name(uint8_t kind) {
     static const char *const names[] = {"none", "damage", "stat", "status", "cure", "heal", "drain",
                                         "recoil", "force_out", "pivot", "protect", "flinch", "confuse",
                                         "substitute", "charge", "recharge", "modifier", "weather",
-                                        "weather_accuracy", "weather_type", "weather_heal"};
+                                        "weather_accuracy", "weather_type", "weather_heal", "terrain"};
     return kind < BEFF_COUNT ? names[kind] : "invalid";
 }
 
@@ -75,12 +75,13 @@ void battle_modifier_get(const uint8_t *q, BattleModifier *mod, uint8_t *flags) 
 
 static bool damage_stage(uint8_t stage) { return stage >= BMOD_BASE_POWER && stage <= BMOD_FINAL; }
 
-static bool predicate_valid(BattlePredicate p, uint8_t stage, unsigned types, uint8_t source, bool v15) {
+static bool predicate_valid(BattlePredicate p, uint8_t stage, unsigned types, uint8_t source, bool v15, bool v16) {
     const uint8_t kind = p.kind & BPRED_KIND_MASK, subject = p.kind & ~BPRED_KIND_MASK;
     if (subject & ~BPRED_DEFENDER) return false;  // bit 6 is reserved
     // A speed record has one Pokemon, the holder, and no move.
     if (stage == BMOD_SPEED && subject) return false;
     if (!v15 && kind >= BPRED_V14_COUNT) return false;
+    if (!v16 && kind >= BPRED_V15_COUNT) return false;
     switch (kind) {
     case BPRED_NONE: return !p.kind && !p.arg;
     case BPRED_HP_AT_MOST: return p.arg >= 2;
@@ -91,29 +92,32 @@ static bool predicate_valid(BattlePredicate p, uint8_t stage, unsigned types, ui
         return source == BMSRC_ABILITY && damage_stage(stage) && !subject && p.arg && stage != BMOD_BASE_POWER;
     case BPRED_WEATHER: return !subject && p.arg && !(p.arg & ~BWEATHER_ALL);
     case BPRED_HAS_TYPE: return p.arg < types;
+    case BPRED_TERRAIN: return !subject && p.arg && !(p.arg & ~BTERRAIN_ALL);
+    case BPRED_ON_TERRAIN: return p.arg && !(p.arg & ~BTERRAIN_ALL);
+    case BPRED_EXPOSED: return !p.arg;
     default: return false;  // unknown predicates are refused, never ignored
     }
 }
 
 // The stages a record of each source may use.
-static bool stage_allowed(uint8_t stage, uint8_t source) {
+static bool stage_allowed(uint8_t stage, uint8_t source, bool v16) {
     switch (source) {
     case BMSRC_MOVE: return damage_stage(stage);
     case BMSRC_ABILITY: return damage_stage(stage) || stage == BMOD_SPEED || stage == BMOD_ACCURACY;
-    case BMSRC_FIELD: return stage == BMOD_WEATHER || stage == BMOD_DEFENSE;
+    case BMSRC_FIELD: return stage == BMOD_WEATHER || stage == BMOD_DEFENSE || (v16 && stage == BMOD_POWER);
     default: return false;
     }
 }
 
 // One meaning per record: packed predicates, no reserved bits, a percent.
 bool battle_modifier_valid(const BattleModifier *mod, unsigned types, uint8_t source, uint8_t version) {
-    const bool v15 = version >= BATTLE_REQUEST_VERSION_WEATHER;
+    const bool v15 = version >= BATTLE_REQUEST_VERSION_WEATHER, v16 = version >= BATTLE_REQUEST_VERSION_TERRAIN;
     const uint8_t stage = v15 ? battle_modifier_stage(mod->stage) : mod->stage & BMOD_STAGE_MASK;
     const uint8_t category = (mod->stage & BMOD_CATEGORY_MASK) >> BMOD_CATEGORY_SHIFT;
     const bool ability = source == BMSRC_ABILITY;
     if (stage == BMOD_NONE || stage >= (v15 ? BMOD_COUNT : BMOD_V14_COUNT) || category > BCAT_SPECIAL) return false;
     if (source == BMSRC_FIELD && !v15) return false;
-    if (!stage_allowed(stage, source)) return false;
+    if (!stage_allowed(stage, source, v16)) return false;
     const uint8_t allowed = BMOD_STAGE_MASK | BMOD_CATEGORY_MASK | (v15 ? BMOD_STAGE_HIGH : 0) |
                             (ability && stage != BMOD_SPEED ? BMODF_DEFENDER : 0);
     if (mod->stage & ~allowed) return false;
@@ -122,7 +126,7 @@ bool battle_modifier_valid(const BattleModifier *mod, unsigned types, uint8_t so
     if (!mod->percent) return false;
     if (!mod->pred[0].kind && mod->pred[1].kind) return false;
     for (unsigned i = 0; i < BATTLE_MAX_PREDICATES; ++i)
-        if (!predicate_valid(mod->pred[i], stage, types, source, v15)) return false;
+        if (!predicate_valid(mod->pred[i], stage, types, source, v15, v16)) return false;
     return true;
 }
 
@@ -158,7 +162,7 @@ bool battle_move_effects_valid(const BattleMove *m) {
 static bool weather_mask_valid(uint8_t mask) { return mask && !(mask & ~BWEATHER_ALL); }
 
 bool battle_move_effects_valid_for(const BattleMove *m, uint8_t version) {
-    const bool v15 = version >= BATTLE_REQUEST_VERSION_WEATHER;
+    const bool v15 = version >= BATTLE_REQUEST_VERSION_WEATHER, v16 = version >= BATTLE_REQUEST_VERSION_TERRAIN;
     if (m->effect_count > BATTLE_MAX_EFFECTS || (m->move_flags & ~BMF_V11_MASK)) return false;
     const bool damaging = m->category != BCAT_STATUS;
     if (damaging != (m->power != 0) || damaging != has_effect(m, BEFF_DAMAGE)) return false;
@@ -172,6 +176,7 @@ bool battle_move_effects_valid_for(const BattleMove *m, uint8_t version) {
             continue;
         }
         if (e->kind > BEFF_V14_LAST && !v15) return false;
+        if (e->kind > BEFF_V15_LAST && !v16) return false;
         if (e->who > BWHO_USER || e->chance > 100 || (e->flags & ~(BEFL_TYPE_CHART | BEFL_TIMING_MASK))) return false;
         if (e->chance && !damaging) return false;  // chances are secondary effects of a hit
         if (!effect_timing_valid(e, damaging)) return false;
@@ -237,6 +242,11 @@ bool battle_move_effects_valid_for(const BattleMove *m, uint8_t version) {
                 flags)
                 return false;
             break;
+        case BEFF_TERRAIN:  // V16: a field move, like BEFF_WEATHER (no KEEP)
+            if (damaging || m->effect_count != 1 || e->who != BWHO_USER || e->chance || !e->arg0 ||
+                e->arg0 >= BTERRAIN_COUNT || e->arg1 || e->arg2 > BTERRAIN_MAX_TURNS || flags)
+                return false;
+            break;
         case BEFF_WEATHER_ACCURACY:
             if (e->who || e->chance || !weather_mask_valid(e->arg0) || e->arg1 || e->arg2 > 100 || e->flags) return false;
             break;
@@ -268,7 +278,8 @@ const char *battle_ability_kind_name(uint8_t kind) {
                                         "shield_dust", "secondary_chance", "infiltrator", "defense_mult",
                                         "ignore_burn", "stab_mult", "ko_stat", "end_turn_cure", "absorb_state",
                                         "type_pass", "status_mirror", "modifier", "entry_weather",
-                                        "weather_suppress", "weather_immune", "weather_residual"};
+                                        "weather_suppress", "weather_immune", "weather_residual", "entry_terrain",
+                                        "ungrounded"};
     return kind < BABIL_COUNT ? names[kind] : "invalid";
 }
 
@@ -281,13 +292,15 @@ bool battle_ability_hook_valid(const BattleAbilityHook *h, unsigned types, uint8
     const bool v12 = version >= BATTLE_REQUEST_VERSION_ABILITY_HOOKS;
     const bool v13 = version >= BATTLE_REQUEST_VERSION_MODIFIERS;
     const bool v15 = version >= BATTLE_REQUEST_VERSION_WEATHER;
+    const bool v16 = version >= BATTLE_REQUEST_VERSION_TERRAIN;
     const bool type_ok = h->arg0 < types;
     const uint8_t statuses = 0xfeu;  // 1 << BST_POISON .. 1 << BST_FROSTBITE
     const uint8_t mirrored = 1u << BST_POISON | 1u << BST_TOXIC | 1u << BST_PARALYSIS | 1u << BST_BURN;
     bool ok, chance = false, percent = false;
     uint8_t flags = 0;  // flags the kind accepts
     if (h->kind < BABIL_ATTACK_MULT ||
-        h->kind > (v15 ? BABIL_COUNT - 1 : v13 ? BABIL_V14_LAST : v12 ? BABIL_V12_LAST : BABIL_V11_LAST))
+        h->kind > (v16 ? BABIL_COUNT - 1 : v15 ? BABIL_V15_LAST : v13 ? BABIL_V14_LAST : v12 ? BABIL_V12_LAST :
+                   BABIL_V11_LAST))
         return false;
     switch (h->kind) {
     case BABIL_MODIFIER:  // everything but the flags is in the modifier record
@@ -298,7 +311,11 @@ bool battle_ability_hook_valid(const BattleAbilityHook *h, unsigned types, uint8
              (h->arg2 <= BWEATHER_MAX_TURNS || h->arg2 == BWEATHER_TURNS_KEEP);
         break;
     case BABIL_WEATHER_SUPPRESS:
+    case BABIL_UNGROUNDED:  // V16
         ok = !h->arg0 && !h->arg1 && !h->arg2;
+        break;
+    case BABIL_ENTRY_TERRAIN:  // V16
+        ok = h->arg0 && h->arg0 < BTERRAIN_COUNT && !h->arg1 && h->arg2 <= BTERRAIN_MAX_TURNS;
         break;
     case BABIL_WEATHER_IMMUNE:
         ok = h->arg0 && !(h->arg0 & ~BWEATHER_ALL) && !h->arg1 && !h->arg2;
@@ -543,6 +560,56 @@ static bool field_rules_decode(const uint8_t *p, BattleFieldRules *r, unsigned t
     return battle_field_rules_valid(r, types);
 }
 
+// ------------------------------------------------------------- V16 terrain rules
+
+bool battle_terrain_rules_valid(const BattleTerrainRules *r, unsigned types) {
+    if (r->flags || r->modifier_count > BATTLE_MAX_TERRAIN_MODIFIERS) return false;
+    if (r->start_terrain >= BTERRAIN_COUNT || r->start_turns > BTERRAIN_MAX_TURNS ||
+        (!r->start_terrain && r->start_turns))
+        return false;
+    if (r->airborne_type != BABIL_NO_TYPE && r->airborne_type >= types) return false;
+    for (unsigned k = 0; k < BTERRAIN_KINDS; ++k)
+        if (r->terrain[k].heal_divisor == 1 || (r->terrain[k].flags & ~BTKF_MASK)) return false;
+    for (unsigned i = 0; i < BATTLE_MAX_TERRAIN_MODIFIERS; ++i) {
+        const BattleModifier *m = &r->modifiers[i];
+        if (i < r->modifier_count) {
+            if (!battle_modifier_valid(m, types, BMSRC_FIELD, BATTLE_REQUEST_VERSION_TERRAIN)) return false;
+        } else if (m->stage || m->percent || m->pred[0].kind || m->pred[0].arg || m->pred[1].kind || m->pred[1].arg) {
+            return false;  // unused records are zero
+        }
+    }
+    return true;
+}
+
+static void terrain_rules_encode(const BattleTerrainRules *r, uint8_t *p) {
+    for (unsigned i = 0; i < BATTLE_TERRAIN_RULE_BYTES; ++i) p[i] = 0;
+    p[0] = r->flags;
+    p[1] = r->start_terrain;
+    p[2] = r->start_turns;
+    p[3] = r->airborne_type;
+    p[4] = r->modifier_count;
+    for (unsigned k = 0; k < BTERRAIN_KINDS; ++k) {
+        p[8 + 2 * k] = r->terrain[k].heal_divisor;
+        p[9 + 2 * k] = r->terrain[k].flags;
+    }
+    for (unsigned i = 0; i < BATTLE_MAX_TERRAIN_MODIFIERS; ++i)
+        battle_modifier_put(&r->modifiers[i], 0, p + 16 + i * BATTLE_MODIFIER_BODY_BYTES);
+}
+
+static bool terrain_rules_decode(const uint8_t *p, BattleTerrainRules *r, unsigned types) {
+    *r = (BattleTerrainRules){.flags = p[0], .start_terrain = p[1], .start_turns = p[2], .airborne_type = p[3],
+                              .modifier_count = p[4]};
+    if (p[5] || p[6] || p[7]) return false;
+    for (unsigned k = 0; k < BTERRAIN_KINDS; ++k)
+        r->terrain[k] = (BattleTerrainKindRules){p[8 + 2 * k], p[9 + 2 * k]};
+    for (unsigned i = 0; i < BATTLE_MAX_TERRAIN_MODIFIERS; ++i) {
+        uint8_t flags;
+        battle_modifier_get(p + 16 + i * BATTLE_MODIFIER_BODY_BYTES, &r->modifiers[i], &flags);
+        if (flags) return false;
+    }
+    return battle_terrain_rules_valid(r, types);
+}
+
 static unsigned ability_size(const BattleAbility *a, uint8_t version) {
     if (version < BATTLE_REQUEST_VERSION_ABILITY_HOOKS) return BATTLE_ABILITY_BYTES;
     return BATTLE_ABILITY_HEADER_BYTES + (unsigned)(a->cls == BACLASS_HOOKS ? a->count : 0) * BATTLE_ABILITY_HOOK_BYTES;
@@ -715,7 +782,8 @@ static uint32_t fixed_size(const BattleRequest *r) {
 uint32_t battle_request_size(const BattleRequest *r) {
     return fixed_size(r) + effects_size(r) + abilities_size(r) +
            (r->version >= BATTLE_REQUEST_VERSION_VOLATILES ? BATTLE_VOLATILE_RULE_BYTES : 0) +
-           (r->version >= BATTLE_REQUEST_VERSION_WEATHER ? BATTLE_FIELD_RULE_BYTES : 0);
+           (r->version >= BATTLE_REQUEST_VERSION_WEATHER ? BATTLE_FIELD_RULE_BYTES : 0) +
+           (r->version >= BATTLE_REQUEST_VERSION_TERRAIN ? BATTLE_TERRAIN_RULE_BYTES : 0);
 }
 
 static uint16_t rules_mask(uint8_t version) {
@@ -782,6 +850,7 @@ uint32_t battle_request_encode(const BattleRequest *r, uint8_t *p, uint32_t capa
                         if (version < BATTLE_REQUEST_VERSION_WEATHER &&
                             (x->kind > BEFF_V14_LAST || (x->kind == BEFF_CHARGE && x->arg2)))
                             return 0;
+                        if (version < BATTLE_REQUEST_VERSION_TERRAIN && x->kind > BEFF_V15_LAST) return 0;
                     }
                     move_effects_encode(move, q);
                     q += move_effects_size(move);
@@ -796,6 +865,7 @@ uint32_t battle_request_encode(const BattleRequest *r, uint8_t *p, uint32_t capa
                 for (unsigned k = 0; k < a->count && k < BATTLE_MAX_ABILITY_HOOKS; ++k) {
                     if (version < BATTLE_REQUEST_VERSION_MODIFIERS && a->hooks[k].kind == BABIL_MODIFIER) return 0;
                     if (version < BATTLE_REQUEST_VERSION_WEATHER && a->hooks[k].kind > BABIL_V14_LAST) return 0;
+                    if (version < BATTLE_REQUEST_VERSION_TERRAIN && a->hooks[k].kind > BABIL_V15_LAST) return 0;
                 }
                 if (version >= BATTLE_REQUEST_VERSION_ABILITY_HOOKS) ability_encode_v12(a, q);
                 else if (!ability_encode_v11(a, q)) return 0;
@@ -806,7 +876,11 @@ uint32_t battle_request_encode(const BattleRequest *r, uint8_t *p, uint32_t capa
         volatile_rules_encode(&r->volatiles, q);
         q += BATTLE_VOLATILE_RULE_BYTES;
     }
-    if (version >= BATTLE_REQUEST_VERSION_WEATHER) field_rules_encode(&r->field, q);
+    if (version >= BATTLE_REQUEST_VERSION_WEATHER) {
+        field_rules_encode(&r->field, q);
+        q += BATTLE_FIELD_RULE_BYTES;
+    }
+    if (version >= BATTLE_REQUEST_VERSION_TERRAIN) terrain_rules_encode(&r->terrain, q);
     return size;
 }
 
@@ -865,10 +939,17 @@ bool battle_request_decode(const uint8_t *p, uint32_t length, BattleRequest *r) 
     }
     r->volatiles = (BattleVolatileRules){0};
     r->field = (BattleFieldRules){0};
+    r->terrain = (BattleTerrainRules){0};
     if (r->version < BATTLE_REQUEST_VERSION_EFFECTS) return true;
     const uint8_t *end = p + length;
+    if (r->version >= BATTLE_REQUEST_VERSION_TERRAIN) {  // V16: the terrain rules close the request
+        if (length < fixed_size(r) + BATTLE_VOLATILE_RULE_BYTES + BATTLE_FIELD_RULE_BYTES + BATTLE_TERRAIN_RULE_BYTES)
+            return false;
+        end -= BATTLE_TERRAIN_RULE_BYTES;
+        if (!terrain_rules_decode(end, &r->terrain, r->type_count)) return false;
+    }
     if (r->version >= BATTLE_REQUEST_VERSION_WEATHER) {  // V15: the field rules close the request
-        if (length < fixed_size(r) + BATTLE_VOLATILE_RULE_BYTES + BATTLE_FIELD_RULE_BYTES) return false;
+        if ((uint32_t)(end - p) < fixed_size(r) + BATTLE_VOLATILE_RULE_BYTES + BATTLE_FIELD_RULE_BYTES) return false;
         end -= BATTLE_FIELD_RULE_BYTES;
         if (!field_rules_decode(end, &r->field, r->type_count)) return false;
     }

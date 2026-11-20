@@ -32,6 +32,7 @@ extern "C" {
 #define BATTLE_APP_VERSION_MODIFIERS 13  // V12 + shared modifier records (same state/action layout)
 #define BATTLE_APP_VERSION_FIXED_POINT 14  // V13 + Gen 5+ fixed-point damage arithmetic (same layout)
 #define BATTLE_APP_VERSION_WEATHER 15  // V14 + weather (same state/action layout)
+#define BATTLE_APP_VERSION_TERRAIN 16  // V15 + terrain (same state/action layout)
 #define BATTLE_MODE_VERSION 1
 
 enum BattleFormat { BATTLE_FORMAT_SINGLE = 1, BATTLE_FORMAT_DOUBLE = 2, BATTLE_FORMAT_TRIPLE = 3, BATTLE_FORMAT_ROTATION = 4 };
@@ -52,7 +53,7 @@ enum BattleResultPolicy { RESULT_POLICY_DISPLAY_ONLY = 0, RESULT_POLICY_APPLY_HP
 #define RULE_STRICT_MOVES      (1u << 8)  // refuse to start if a Pokemon knows a move the core cannot run
 #define RULE_V11_MASK 0x3fu
 #define RULE_V12_MASK 0xffu
-#define RULE_V15_MASK 0x1ffu
+#define RULE_V15_MASK 0x1ffu  // V16 adds no rule
 
 #define BATTLE_MAX_PER_SIDE 6
 #define BATTLE_MAX_TYPES 32
@@ -136,8 +137,11 @@ enum BattleEffectKind {
     BEFF_WEATHER_ACCURACY = 18, // passive: in a weather of mask arg0 the accuracy is arg2 (0 = never misses)
     BEFF_WEATHER_TYPE = 19,     // passive, damaging: in a weather of mask arg0 the move's type is arg2
     BEFF_WEATHER_HEAL = 20,     // passive, with BEFF_HEAL: in a weather of mask arg0 it heals arg1 / arg2
+    // Request V16 (docs/terrain.md).
+    BEFF_TERRAIN = 21,          // status move, alone: sets terrain arg0 for arg2 turns (1..15, 0 = no end)
     BEFF_COUNT
 };
+#define BEFF_V15_LAST BEFF_WEATHER_HEAL
 #define BEFF_V12_LAST BEFF_RECHARGE
 #define BEFF_V14_LAST BEFF_MODIFIER
 enum BattleSemiInvulnerable { BSEMI_NONE = 0, BSEMI_AIR = 1, BSEMI_UNDERGROUND = 2 };
@@ -157,6 +161,15 @@ enum BattleWeatherKind {  // (games have their own enum BattleWeather)
 #define BWEATHER_TURNS_NO_END 0u
 #define BWEATHER_TURNS_KEEP 0xffu
 #define BWEATHER_MAX_TURNS 15u
+// Request V16 terrain kinds (docs/terrain.md).
+enum BattleTerrainKind {
+    BTERRAIN_NONE = 0, BTERRAIN_ELECTRIC = 1, BTERRAIN_GRASSY = 2, BTERRAIN_MISTY = 3, BTERRAIN_PSYCHIC = 4,
+    BTERRAIN_COUNT
+};
+#define BTERRAIN_KINDS (BTERRAIN_COUNT - 1)
+#define BTERRAIN_BIT(kind) ((uint8_t)(1u << ((kind) - 1)))
+#define BTERRAIN_ALL ((uint8_t)((1u << BTERRAIN_KINDS) - 1))
+#define BTERRAIN_MAX_TURNS 15u
 enum BattleEffectWho { BWHO_TARGET = 0, BWHO_USER = 1 };
 enum BattleHitRule { BHITS_UNIFORM = 0, BHITS_2TO5_GEN5 = 1, BHITS_2TO5_GEN1 = 2 };
 #define BATTLE_MAX_EFFECTS 6
@@ -244,6 +257,11 @@ enum BattlePredicateKind {
     // Request V15.
     BPRED_WEATHER = 5,        // the weather in effect is in arg (mask of BWEATHER_BIT); none while suppressed
     BPRED_HAS_TYPE = 6,       // subject has type arg
+    BPRED_V15_COUNT,
+    // Request V16.
+    BPRED_TERRAIN = 7,        // the terrain in effect is in arg (mask of BTERRAIN_BIT); no subject
+    BPRED_ON_TERRAIN = 8,     // subject is affected by a terrain of arg: grounded and not semi-invulnerable
+    BPRED_EXPOSED = 9,        // subject is not semi-invulnerable (arg 0)
     BPRED_COUNT
 };
 #define BPRED_KIND_MASK 0x3fu
@@ -360,8 +378,12 @@ enum BattleAbilityKind {
     BABIL_WEATHER_IMMUNE = 33,  // arg0 = weather mask: no residual damage from those weathers
     BABIL_WEATHER_RESIDUAL = 34,// arg0 = weather mask: instead of the weather's residual, the holder
                                 // heals (arg1 = 1) or loses (arg1 = -1) max HP / arg2 (BAHF_NOT_UNDERGROUND)
+    // Request V16 hook kinds (docs/terrain.md).
+    BABIL_ENTRY_TERRAIN = 35,   // on entry: sets terrain arg0 for arg2 turns (1..15, 0 = no end)
+    BABIL_UNGROUNDED = 36,      // the holder is not grounded (Levitate)
     BABIL_COUNT
 };
+#define BABIL_V15_LAST BABIL_WEATHER_RESIDUAL
 #define BABIL_V11_LAST BABIL_INFILTRATOR
 #define BABIL_V12_LAST BABIL_STATUS_MIRROR
 #define BABIL_V14_LAST BABIL_MODIFIER
@@ -443,7 +465,8 @@ typedef struct {
 #define BATTLE_REQUEST_VERSION_MODIFIERS 13  // BEFF_MODIFIER / BABIL_MODIFIER records (same layout as V12)
 #define BATTLE_REQUEST_VERSION_FIXED_POINT 14  // same layout as V13; 4.12 damage arithmetic (docs/modifiers.md)
 #define BATTLE_REQUEST_VERSION_WEATHER 15  // V14 + field rules after the volatile rules; weather (docs/weather.md)
-#define BATTLE_REQUEST_VERSION_LATEST BATTLE_REQUEST_VERSION_WEATHER
+#define BATTLE_REQUEST_VERSION_TERRAIN 16  // V15 + terrain rules after the field rules (docs/terrain.md)
+#define BATTLE_REQUEST_VERSION_LATEST BATTLE_REQUEST_VERSION_TERRAIN
 #define BATTLE_REQUEST_HEADER 24
 enum StruggleRecoil { BSTRUGGLE_MAX_HP_FLOOR = 1, BSTRUGGLE_MAX_HP_NEAREST = 2 };
 #define BATTLE_MOVE_STRUGGLE 0xffffu  // logical presentation identifier
@@ -490,11 +513,35 @@ typedef struct {
 } BattleFieldRules;
 bool battle_field_rules_valid(const BattleFieldRules *rules, unsigned type_count);
 
+// V16 terrain rules, BATTLE_TERRAIN_RULE_BYTES after the V15 field rules (docs/terrain.md):
+//   0 u8 flags (0)   1 u8 battle-start terrain (BTERRAIN_*, 0 none)   2 u8 its turns (0 = no end)
+//   3 u8 airborne type: a Pokemon of it is not grounded (BABIL_NO_TYPE = none)
+//   4 u8 terrain record count N   5..7 reserved (0)
+//   8 per terrain kind BTERRAIN_ELECTRIC..BTERRAIN_PSYCHIC, 2 bytes each:
+//        u8 end-of-turn heal divisor for an affected Pokemon (0 = none)   u8 flags (BTKF_*)
+//  16 BATTLE_MAX_TERRAIN_MODIFIERS x 7-byte modifier record bodies (flags 0); the first N are used.
+// The terrain records are field records after the V15 ones; V16 field records
+// may also use the POWER stage (in the formula after the move's own records).
+#define BATTLE_MAX_TERRAIN_MODIFIERS 8
+#define BATTLE_TERRAIN_RULE_BYTES (16 + BATTLE_MAX_TERRAIN_MODIFIERS * BATTLE_MODIFIER_BODY_BYTES)
+#define BTKF_NO_SLEEP (1u << 0)        // an affected Pokemon cannot fall asleep
+#define BTKF_NO_STATUS (1u << 1)       // an affected Pokemon gets no major status
+#define BTKF_NO_CONFUSION (1u << 2)    // an affected Pokemon cannot become confused
+#define BTKF_BLOCK_PRIORITY (1u << 3)  // a foe's move with priority > 0 fails against an affected Pokemon
+#define BTKF_MASK 0xfu
+typedef struct { uint8_t heal_divisor, flags; } BattleTerrainKindRules;
+typedef struct {
+    uint8_t flags, start_terrain, start_turns, airborne_type, modifier_count;
+    BattleTerrainKindRules terrain[BTERRAIN_KINDS];  // index kind - 1
+    BattleModifier modifiers[BATTLE_MAX_TERRAIN_MODIFIERS];
+} BattleTerrainRules;
+bool battle_terrain_rules_valid(const BattleTerrainRules *rules, unsigned type_count);
+
 // The largest request (V9 and later: every move with the most effects, every
 // ability with the most hooks, the V15 field rules) for `entries` Pokemon in
-// all and `types` types. Producers size their buffer with it, so a valid
-// request of any version always fits.
-#define BATTLE_REQUEST_MAX_BYTES(entries, types)     (BATTLE_REQUEST_HEADER + (entries) * BATTLE_ENTRY_BYTES + (types) * (types) + BATTLE_CONDITION_RULE_BYTES +      (entries) * 4 * (BATTLE_MOVE_EFFECTS_HEADER + BATTLE_MAX_EFFECTS * BATTLE_EFFECT_BYTES) +      (entries) * (BATTLE_ABILITY_HEADER_BYTES + BATTLE_MAX_ABILITY_HOOKS * BATTLE_ABILITY_HOOK_BYTES) +      BATTLE_VOLATILE_RULE_BYTES + BATTLE_FIELD_RULE_BYTES)
+// all and `types` types (the V16 terrain rules included). Producers size
+// their buffer with it, so a valid request of any version always fits.
+#define BATTLE_REQUEST_MAX_BYTES(entries, types)     (BATTLE_REQUEST_HEADER + (entries) * BATTLE_ENTRY_BYTES + (types) * (types) + BATTLE_CONDITION_RULE_BYTES +      (entries) * 4 * (BATTLE_MOVE_EFFECTS_HEADER + BATTLE_MAX_EFFECTS * BATTLE_EFFECT_BYTES) +      (entries) * (BATTLE_ABILITY_HEADER_BYTES + BATTLE_MAX_ABILITY_HOOKS * BATTLE_ABILITY_HOOK_BYTES) +      BATTLE_VOLATILE_RULE_BYTES + BATTLE_FIELD_RULE_BYTES + BATTLE_TERRAIN_RULE_BYTES)
 
 typedef struct {
     uint8_t format, battle_type, player_count, opponent_count, active_per_side;
@@ -509,6 +556,7 @@ typedef struct {
     BattleConditionRules conditions; // V7 suffix after the type chart
     BattleVolatileRules volatiles;   // V9 suffix after the effect lists
     BattleFieldRules field;          // V15 suffix after the volatile rules
+    BattleTerrainRules terrain;      // V16 suffix after the field rules
 } BattleRequest;
 
 uint32_t battle_request_size(const BattleRequest *request);
