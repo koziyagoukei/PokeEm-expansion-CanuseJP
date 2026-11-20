@@ -437,7 +437,7 @@ bool battle_ability_valid(const BattleAbility *a, unsigned types, uint8_t versio
     return true;
 }
 
-// ------------------------------------------------------------- V17 held items
+// ------------------------------------------------------- V17 / V18 held items
 
 const char *battle_item_kind_name(uint8_t kind) {
     switch (kind) {
@@ -445,6 +445,7 @@ const char *battle_item_kind_name(uint8_t kind) {
     case BITEM_MODIFIER: return "modifier";
     case BITEM_WEATHER_TURNS: return "weather turns";
     case BITEM_TERRAIN_TURNS: return "terrain turns";
+    case BITEM_HP: return "hp";
     default: return "unknown";
     }
 }
@@ -457,6 +458,15 @@ static bool item_record_valid(const BattleItemRecord *x, unsigned types, uint8_t
         return x->arg0 && !(x->arg0 & ~BWEATHER_ALL) && !x->arg1 && x->arg2 && x->arg2 <= BWEATHER_MAX_TURNS;
     case BITEM_TERRAIN_TURNS:
         return x->arg0 && !(x->arg0 & ~BTERRAIN_ALL) && !x->arg1 && x->arg2 && x->arg2 <= BTERRAIN_MAX_TURNS;
+    case BITEM_HP:  // V18: one timing, a heal or damage, a holder predicate
+        if (version < BATTLE_REQUEST_VERSION_END_TURN_ITEMS || x->hp.timing != BITIME_END_TURN ||
+            (x->hp.op != BIHP_HEAL && x->hp.op != BIHP_DAMAGE) || !x->hp.divisor || x->hp.reserved)
+            return false;
+        switch (x->hp.pred.kind) {
+        case BPRED_NONE: return !x->hp.pred.arg;
+        case BPRED_HAS_TYPE: return x->hp.pred.arg < types;
+        default: return false;
+        }
     default: return false;  // unknown kinds are refused, never ignored
     }
 }
@@ -504,6 +514,16 @@ static void item_encode(const BattleItem *it, uint8_t *p) {
             battle_modifier_put(&x->mod, x->flags, q + 1);
             continue;
         }
+        if (x->kind == BITEM_HP) {  // V18 (the encoder validates the version first)
+            q[1] = x->hp.timing;
+            q[2] = x->hp.op;
+            q[3] = x->hp.divisor;
+            q[4] = x->hp.pred.kind;
+            q[5] = x->hp.pred.arg;
+            q[6] = x->hp.reserved;
+            q[7] = x->flags;
+            continue;
+        }
         q[1] = x->arg0;
         q[2] = x->arg1;
         q[3] = x->arg2;
@@ -524,6 +544,15 @@ static unsigned item_decode(const uint8_t *p, uint32_t available, BattleItem *it
         *x = (BattleItemRecord){.kind = q[0]};
         if (q[0] == BITEM_MODIFIER) {
             battle_modifier_get(q + 1, &x->mod, &x->flags);
+            continue;
+        }
+        if (q[0] == BITEM_HP) {  // its version and fields are checked by battle_item_valid
+            x->hp.timing = q[1];
+            x->hp.op = q[2];
+            x->hp.divisor = q[3];
+            x->hp.pred = (BattlePredicate){q[4], q[5]};
+            x->hp.reserved = q[6];
+            x->flags = q[7];
             continue;
         }
         x->arg0 = q[1];

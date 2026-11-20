@@ -202,7 +202,7 @@ enum DebugMenuTypes
 #define DEBUG_NUMBER_ICON_Y 50
 
 // The Utilities list carries the GC test entries (38 in Milestone 4-A).
-#define DEBUG_MAX_MENU_ITEMS 56
+#define DEBUG_MAX_MENU_ITEMS 64
 #define DEBUG_MAX_SUB_MENU_LEVELS 4
 
 #define DEBUG_OPTION_CANT_BE_TOGGLED 0xFF
@@ -678,6 +678,13 @@ static const struct DebugMenuOption sDebugMenu_Actions_GcAbilityLab[] =
     { COMPOUND_STRING("{ENG}L48 V17 strict item"), DebugAction_GcAbilityLab, (const void *)48 },
     { COMPOUND_STRING("{ENG}L49 V17 L43 Gen3 items"), DebugAction_GcAbilityLab, (const void *)49 },
     { COMPOUND_STRING("{ENG}L50 V17 Klutz items off"), DebugAction_GcAbilityLab, (const void *)50 },
+    { COMPOUND_STRING("{ENG}L51 V18 end turn Single"), DebugAction_GcAbilityLab, (const void *)51 },
+    { COMPOUND_STRING("{ENG}L52 V18 end turn Double"), DebugAction_GcAbilityLab, (const void *)52 },
+    { COMPOUND_STRING("{ENG}L53 V18 end turn Triple"), DebugAction_GcAbilityLab, (const void *)53 },
+    { COMPOUND_STRING("{ENG}L54 V18 end turn Rotation"), DebugAction_GcAbilityLab, (const void *)54 },
+    { COMPOUND_STRING("{ENG}L55 V18 L51 items off"), DebugAction_GcAbilityLab, (const void *)55 },
+    { COMPOUND_STRING("{ENG}L56 V18 strict item"), DebugAction_GcAbilityLab, (const void *)56 },
+    { COMPOUND_STRING("{ENG}L57 V18 Magic Guard off"), DebugAction_GcAbilityLab, (const void *)57 },
     { NULL }
 };
 STATIC_ASSERT(ARRAY_COUNT(sDebugMenu_Actions_GcAbilityLab) - 1 <= DEBUG_MAX_MENU_ITEMS, DebugGcAbilityLabMenuFits);

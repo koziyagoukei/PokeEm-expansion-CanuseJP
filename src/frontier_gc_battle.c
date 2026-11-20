@@ -1231,6 +1231,29 @@ static bool8 ItemChangesFormInBattle(u16 species, u16 item)
 
 #define ITEM_FIELD_TURNS 8  // TryChangeWeather / TryChangeBattleTerrain with the rock or Terrain Extender
 
+// Request V18: end-of-turn HP records (FIRST_EVENT_BLOCK_HEAL_ITEMS). The
+// divisors are this build's code, not item data: TryLeftovers heals
+// GetNonDynamaxMaxHP / 16, TryBlackSludgeDamage hurts by / 8 (both at least 1:
+// SetHealAmount, SetPassiveDamageAmount). GC battles have no Dynamax
+// (RULE_NO_GIMMICKS), so that max HP is the max HP.
+static bool8 EndTurnItemsEnabled(void)
+{
+    return sBattle->roster >= BATTLE_APP_VERSION_END_TURN_ITEMS;
+}
+
+#define ITEM_LEFTOVERS_DIVISOR 16
+#define ITEM_BLACK_SLUDGE_DIVISOR 8
+
+static BattleItemRecord ItemHp(u8 op, u8 divisor, u8 pred, u8 arg)
+{
+    BattleItemRecord x = {.kind = BITEM_HP};
+    x.hp.timing = BITIME_END_TURN;
+    x.hp.op = op;
+    x.hp.divisor = divisor;
+    x.hp.pred = (BattlePredicate){pred, arg};
+    return x;
+}
+
 static void AddItemRecord(BattleItem *it, BattleItemRecord record)
 {
     it->records[it->count++] = record;
@@ -1313,6 +1336,21 @@ static BattleItem ResolveItem(u16 item, u16 species)
             AddItemRecord(&it, (BattleItemRecord){.kind = BITEM_TERRAIN_TURNS, .arg0 = BTERRAIN_ALL,
                                                   .arg2 = ITEM_FIELD_TURNS});
         break;
+    // V18, ItemBattleEffects at the end of the turn: TryLeftovers heals below
+    // max HP unless Heal Block (a move the GC does not run) is in effect.
+    case HOLD_EFFECT_LEFTOVERS:
+        if (EndTurnItemsEnabled())
+            AddItemRecord(&it, ItemHp(BIHP_HEAL, ITEM_LEFTOVERS_DIVISOR, BPRED_NONE, 0));
+        break;
+    // A Poison-type holder (IS_BATTLER_OF_TYPE, its types now) heals as with
+    // Leftovers; any other is hurt (TryBlackSludgeDamage; Magic Guard: CheckItems).
+    case HOLD_EFFECT_BLACK_SLUDGE:
+        if (EndTurnItemsEnabled())
+        {
+            AddItemRecord(&it, ItemHp(BIHP_HEAL, ITEM_LEFTOVERS_DIVISOR, BPRED_HAS_TYPE, TYPE_POISON));
+            AddItemRecord(&it, ItemHp(BIHP_DAMAGE, ITEM_BLACK_SLUDGE_DIVISOR, BPRED_NONE, 0));
+        }
+        break;
     default:
         break;
     }
@@ -1352,6 +1390,49 @@ static bool8 ItemAbility(u16 ability)
     }
 }
 
+// V18: abilities of an HP record's own holder that change what the record
+// does, read from the records (not the item id). Magic Guard stops the damage
+// (TryBlackSludgeDamage); Color Change, Protean, Libero and Imposter change
+// the holder's types (the type predicate); Power Construct and Tera Shift
+// change its max HP (the amount); Trace, Receiver, Power of Alchemy and
+// Wandering Spirit can give the holder Magic Guard or a type changer. The GC
+// runs none of them, so such a holder turns every item off (strict: refused).
+static bool8 HpItemAbility(u16 ability, const BattleItem *it)
+{
+    bool8 hp = FALSE, damage = FALSE, typed = FALSE;
+    u32 i;
+    for (i = 0; i < it->count; i++)
+    {
+        if (it->records[i].kind != BITEM_HP)
+            continue;
+        hp = TRUE;
+        damage |= it->records[i].hp.op == BIHP_DAMAGE;
+        typed |= it->records[i].hp.pred.kind == BPRED_HAS_TYPE;
+    }
+    if (!hp)
+        return FALSE;
+    switch (ability)
+    {
+    case ABILITY_POWER_CONSTRUCT:
+    case ABILITY_TERA_SHIFT:
+        return TRUE;
+    case ABILITY_MAGIC_GUARD:
+        return damage;
+    case ABILITY_COLOR_CHANGE:
+    case ABILITY_PROTEAN:
+    case ABILITY_LIBERO:
+    case ABILITY_IMPOSTER:
+        return typed;
+    case ABILITY_TRACE:
+    case ABILITY_RECEIVER:
+    case ABILITY_POWER_OF_ALCHEMY:
+    case ABILITY_WANDERING_SPIRIT:
+        return damage || typed;
+    default:
+        return FALSE;
+    }
+}
+
 // The whole battle's items: simulated only if every item is simulated (or has
 // no effect) and no Pokemon has an item ability; otherwise all are off, never
 // a part (RULE_IGNORE_ITEMS). Moves that use items (Knock Off, Thief, Trick,
@@ -1375,7 +1456,7 @@ static u8 CheckItems(const BattleRequest *r, u16 *why)
             }
             if (e[i].record.held_item)
                 held = TRUE;
-            if (ItemAbility(e[i].record.ability))
+            if (ItemAbility(e[i].record.ability) || HpItemAbility(e[i].record.ability, &e[i].mon.item))
                 ability = e[i].record.ability;
         }
     }
@@ -1691,6 +1772,41 @@ static const struct LabFixture sLabFixtures[] = {
         {LMI(MUSCLE_BAND, LOPUNNY, 1, 40, 100, 0, MOVE_BODY_SLAM)},
         {LMI(CHARCOAL, CHARIZARD, 0, 40, 100, 0, MOVE_FLAMETHROWER)}},
         BATTLE_APP_VERSION_ITEMS, 0},
+    // V18 (docs/items.md): end-of-turn Leftovers and Black Sludge.
+    [51] = {BATTLE_FORMAT_SINGLE, 2, TRUE, {  // sandstorm then Leftovers; Black Sludge heals Poison, hurts others
+        {LMI(LEFTOVERS, SNORLAX, 0, 40, 70, 0, MOVE_BODY_SLAM), LMI(BLACK_SLUDGE, TENTACRUEL, 0, 40, 50, 0, MOVE_SLUDGE_BOMB, MOVE_SURF)},
+        {LMI(BLACK_SLUDGE, TYRANITAR, 0, 40, 100, 0, MOVE_ROCK_SLIDE), LMI(BLACK_SLUDGE, TOXICROAK, 1, 40, 60, 0, MOVE_SLUDGE_BOMB)}},
+        BATTLE_APP_VERSION_END_TURN_ITEMS, 0},
+    [52] = {BATTLE_FORMAT_DOUBLE, 3, TRUE, {  // Grassy Surge: terrain heal then the item, Pokemon by Pokemon; a Black Sludge faint
+        {LMI(LEFTOVERS, RILLABOOM, 2, 40, 60, 0, MOVE_SWORDS_DANCE), LMI(BLACK_SLUDGE, AERODACTYL, 0, 40, 10, 0, MOVE_SWORDS_DANCE),
+         LMI(BLACK_SLUDGE, VENUSAUR, 0, 40, 50, 0, MOVE_SWORDS_DANCE)},
+        {LMI(LEFTOVERS, TOXICROAK, 1, 40, 70, STATUS1_BURN, MOVE_BULK_UP),
+         LMI(BLACK_SLUDGE, NIDOKING, 0, 40, 80, 0, MOVE_CALM_MIND), LMI(LEFTOVERS, CROBAT, 0, 40, 60, 0, MOVE_BULK_UP)}},
+        BATTLE_APP_VERSION_END_TURN_ITEMS, 0},
+    [53] = {BATTLE_FORMAT_TRIPLE, 3, TRUE, {  // six holders in speed order, with sandstorm, poison and burn
+        {LMI(LEFTOVERS, SNORLAX, 1, 40, 50, STATUS1_POISON, MOVE_BODY_SLAM), LMI(LEFTOVERS, PELIPPER, 0, 40, 60, STATUS1_BURN, MOVE_SURF),
+         LMI(BLACK_SLUDGE, NIDOKING, 0, 40, 70, 0, MOVE_SLUDGE_BOMB)},
+        {LMI(LEFTOVERS, TYRANITAR, 0, 40, 80, 0, MOVE_ROCK_SLIDE), LMI(BLACK_SLUDGE, CROBAT, 0, 40, 50, 0, MOVE_WING_ATTACK),
+         LMI(BLACK_SLUDGE, LUDICOLO, 0, 40, 100, 0, MOVE_SURF)}},
+        BATTLE_APP_VERSION_END_TURN_ITEMS, 0},
+    [54] = {BATTLE_FORMAT_ROTATION, 3, TRUE, {  // only the front Pokemon; Shed Skin, Rain Dish (Drizzle) and Leftovers
+        {LMI(AMULET_COIN, SNORLAX, 1, 40, 100, 0, MOVE_BODY_SLAM), LMI(BLACK_SLUDGE, TENTACRUEL, 0, 40, 60, 0, MOVE_SURF),
+         LMI(LEFTOVERS, DRAGONAIR, 0, 40, 60, STATUS1_POISON, MOVE_BODY_SLAM)},
+        {LMI(LEFTOVERS, LUDICOLO, 1, 40, 70, 0, MOVE_SURF), LMI(BLACK_SLUDGE, PELIPPER, 1, 40, 100, 0, MOVE_SURF),
+         LMI(BLACK_SLUDGE, TOXICROAK, 1, 40, 50, 0, MOVE_SLUDGE_BOMB)}},
+        BATTLE_APP_VERSION_END_TURN_ITEMS, 0},
+    [55] = {BATTLE_FORMAT_SINGLE, 2, TRUE, {  // L51 with Life Orb (not simulated): every item off, same seed
+        {LMI(LEFTOVERS, SNORLAX, 0, 40, 70, 0, MOVE_BODY_SLAM), LMI(BLACK_SLUDGE, TENTACRUEL, 0, 40, 50, 0, MOVE_SLUDGE_BOMB, MOVE_SURF)},
+        {LMI(LIFE_ORB, TYRANITAR, 0, 40, 100, 0, MOVE_ROCK_SLIDE), LMI(BLACK_SLUDGE, TOXICROAK, 1, 40, 60, 0, MOVE_SLUDGE_BOMB)}},
+        BATTLE_APP_VERSION_END_TURN_ITEMS, 51},
+    [56] = {BATTLE_FORMAT_SINGLE, 2, TRUE, {  // L55 under strict item rules: refused on the GBA
+        {LMI(LEFTOVERS, SNORLAX, 0, 40, 70, 0, MOVE_BODY_SLAM), LMI(BLACK_SLUDGE, TENTACRUEL, 0, 40, 50, 0, MOVE_SLUDGE_BOMB, MOVE_SURF)},
+        {LMI(LIFE_ORB, TYRANITAR, 0, 40, 100, 0, MOVE_ROCK_SLIDE), LMI(BLACK_SLUDGE, TOXICROAK, 1, 40, 60, 0, MOVE_SLUDGE_BOMB)}},
+        BATTLE_APP_VERSION_END_TURN_ITEMS, 51, BWEATHER_NONE, 0, FALSE, BTERRAIN_NONE, 0, FALSE, TRUE},
+    [57] = {BATTLE_FORMAT_SINGLE, 1, FALSE, {  // Magic Guard (not simulated) holding Black Sludge: every item off
+        {LMI(BLACK_SLUDGE, CLEFABLE, 1, 40, 100, 0, MOVE_BODY_SLAM)},
+        {LMI(LEFTOVERS, SNORLAX, 1, 40, 70, 0, MOVE_BODY_SLAM)}},
+        BATTLE_APP_VERSION_END_TURN_ITEMS, 0},
 };
 #undef LM
 #undef LMC

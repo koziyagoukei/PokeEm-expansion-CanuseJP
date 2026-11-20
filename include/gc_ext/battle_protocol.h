@@ -34,6 +34,7 @@ extern "C" {
 #define BATTLE_APP_VERSION_WEATHER 15  // V14 + weather (same state/action layout)
 #define BATTLE_APP_VERSION_TERRAIN 16  // V15 + terrain (same state/action layout)
 #define BATTLE_APP_VERSION_ITEMS 17  // V16 + held items (same state/action layout)
+#define BATTLE_APP_VERSION_END_TURN_ITEMS 18  // V17 + end-of-turn item HP records (same layout)
 #define BATTLE_MODE_VERSION 1
 
 enum BattleFormat { BATTLE_FORMAT_SINGLE = 1, BATTLE_FORMAT_DOUBLE = 2, BATTLE_FORMAT_TRIPLE = 3, BATTLE_FORMAT_ROTATION = 4 };
@@ -60,7 +61,7 @@ enum BattleResultPolicy { RESULT_POLICY_DISPLAY_ONLY = 0, RESULT_POLICY_APPLY_HP
 #define RULE_V11_MASK 0x3fu
 #define RULE_V12_MASK 0xffu
 #define RULE_V15_MASK 0x1ffu  // V16 adds no rule
-#define RULE_V17_MASK 0x3ffu
+#define RULE_V17_MASK 0x3ffu  // V18 adds no rule
 
 #define BATTLE_MAX_PER_SIDE 6
 #define BATTLE_MAX_TYPES 32
@@ -450,6 +451,14 @@ const char *battle_ability_kind_name(uint8_t kind);
 //     BITEM_MODIFIER:      the 7-byte modifier body (flags byte 0; BMSRC_ITEM)
 //     BITEM_WEATHER_TURNS: 1 u8 weather mask (BWEATHER_BIT)  2 u8 0  3 u8 turns (1..BWEATHER_MAX_TURNS)  4..7 0
 //     BITEM_TERRAIN_TURNS: 1 u8 terrain mask (BTERRAIN_BIT)  2 u8 0  3 u8 turns (1..BTERRAIN_MAX_TURNS)  4..7 0
+//     BITEM_HP (V18):      1 u8 timing (BITIME_*)  2 u8 operation (BIHP_*)  3 u8 max HP divisor (>= 1)
+//                          4 u8 predicate kind (BPRED_NONE or BPRED_HAS_TYPE, the holder)  5 u8 its argument
+//                          6 u8 0  7 u8 flags 0
+//       The holder's HP changes by max HP / divisor (at least 1): a heal up to
+//       its max HP (none at full HP), or damage (it may faint). At one timing
+//       the first BITEM_HP record whose predicate holds is the item's effect
+//       there; the later ones are its alternatives (Black Sludge: heal if
+//       Poison, else damage). A heal at full HP is that effect doing nothing.
 // A definition is the item's and never depends on its holder (no species or
 // ability of the holder is resolved into it), so it stays right if the item
 // later changes hands. NONE: no item, or an item with no battle effect in
@@ -461,8 +470,19 @@ enum BattleItemKind {
     BITEM_MODIFIER = 1,       // a modifier of the holder's moves (BattleModifier in `mod`)
     BITEM_WEATHER_TURNS = 2,  // a weather of mask arg0 the holder sets for a limited time lasts arg2 turns
     BITEM_TERRAIN_TURNS = 3,  // a terrain of mask arg0 the holder sets for a limited time lasts arg2 turns
+    BITEM_V17_COUNT,
+    // Request V18 (docs/items.md).
+    BITEM_HP = 4,             // a change of the holder's HP at a timing (`hp`)
     BITEM_COUNT
 };
+// When a BITEM_HP record acts. Each timing is one fixed point of the core's
+// turn sequence (docs/items.md, "Order"); later stages add timings.
+enum BattleItemTiming {
+    BITIME_NONE = 0,
+    BITIME_END_TURN = 1,  // end of turn, the holder's first block: after its terrain heal and Shed Skin
+    BITIME_COUNT
+};
+enum BattleItemHpOperation { BIHP_NONE = 0, BIHP_HEAL = 1, BIHP_DAMAGE = 2, BIHP_COUNT };
 #define BATTLE_ITEM_HEADER_BYTES 4
 #define BATTLE_ITEM_RECORD_BYTES 8
 #define BATTLE_MAX_ITEM_RECORDS 4
@@ -471,6 +491,11 @@ typedef struct {
     union {
         struct { uint8_t arg0, arg1, arg2; };  // WEATHER_TURNS / TERRAIN_TURNS (arg1 0)
         BattleModifier mod;                    // BITEM_MODIFIER
+        struct {
+            uint8_t timing, op, divisor;       // BITIME_*, BIHP_*, max HP / divisor
+            BattlePredicate pred;              // on the holder
+            uint8_t reserved;                  // 0
+        } hp;                                  // BITEM_HP (V18)
     };
     uint8_t flags;  // 0 (reserved)
 } BattleItemRecord;
@@ -524,7 +549,8 @@ typedef struct {
 #define BATTLE_REQUEST_VERSION_WEATHER 15  // V14 + field rules after the volatile rules; weather (docs/weather.md)
 #define BATTLE_REQUEST_VERSION_TERRAIN 16  // V15 + terrain rules after the field rules (docs/terrain.md)
 #define BATTLE_REQUEST_VERSION_ITEMS 17  // V16 + item blocks after the ability blocks (docs/items.md)
-#define BATTLE_REQUEST_VERSION_LATEST BATTLE_REQUEST_VERSION_ITEMS
+#define BATTLE_REQUEST_VERSION_END_TURN_ITEMS 18  // V17 + BITEM_HP records (same layout, docs/items.md)
+#define BATTLE_REQUEST_VERSION_LATEST BATTLE_REQUEST_VERSION_END_TURN_ITEMS
 #define BATTLE_REQUEST_HEADER 24
 enum StruggleRecoil { BSTRUGGLE_MAX_HP_FLOOR = 1, BSTRUGGLE_MAX_HP_NEAREST = 2 };
 #define BATTLE_MOVE_STRUGGLE 0xffffu  // logical presentation identifier
