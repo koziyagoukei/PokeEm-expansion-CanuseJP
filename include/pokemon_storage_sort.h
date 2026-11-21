@@ -7,11 +7,13 @@ enum StorageSortKey
     STORAGE_SORT_TYPE,
     STORAGE_SORT_MOVE,
     STORAGE_SORT_ABILITY,
+    STORAGE_SORT_KANA,
 };
 
 // Sorts the Pokémon in boxes [firstBox, firstBox + numBoxes) in place.
 // Pokémon matching value (a type, move or ability, depending on key) come first,
 // then the other Pokémon, then Eggs, each group in National Dex order.
+// Kana order uses species names for non-Egg Pokémon, not nicknames.
 // Empty slots move to the end. Returns FALSE if nothing was changed.
 bool32 SortStorageBoxes(u32 firstBox, u32 numBoxes, enum StorageSortKey key, u32 value);
 

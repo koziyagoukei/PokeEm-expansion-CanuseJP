@@ -63,8 +63,11 @@ TEST("Frontier TIPS: facilities, hub, resort, contest and rule topics are reacha
             }
     EXPECT(seen[INFO_FRONTIER_RULES]);
     EXPECT(seen[INFO_TIPS_BATTLE_STATUS]);
+    EXPECT(seen[INFO_TIPS_BATTLE_SETTINGS]);
+    EXPECT(seen[INFO_TIPS_BATTLE_WEATHER]);
     EXPECT(seen[INFO_TIPS_MOVE_REFERENCE]);
     EXPECT(GetInfoViewerEntry(INFO_TIPS_BATTLE_STATUS)->drawPage != NULL);
+    EXPECT(GetInfoViewerEntry(INFO_TIPS_BATTLE_WEATHER)->drawPage != NULL);
     EXPECT(GetInfoViewerEntry(INFO_TIPS_MOVE_REFERENCE)->drawPage != NULL);
     EXPECT(seen[INFO_BANNED_MONS]);
     EXPECT(seen[INFO_GIMMICK_HELP]);
@@ -82,6 +85,27 @@ TEST("Frontier TIPS: facilities, hub, resort, contest and rule topics are reacha
         EXPECT(seen[id]);
     EXPECT(!seen[INFO_DIARY_TEST]);
     EXPECT(!seen[INFO_CHOICE_TEST]);
+}
+
+TEST("Frontier TIPS: the move reference is separate from status and weather settings")
+{
+    const struct InfoViewerEntry *tips = GetInfoViewerEntry(INFO_TIPS);
+    const struct InfoViewerEntry *settings = GetInfoViewerEntry(INFO_TIPS_BATTLE_SETTINGS);
+    bool32 foundMoves = FALSE;
+    bool32 foundSettings = FALSE;
+
+    for (u32 i = 0; i < tips->choiceCount; i++)
+    {
+        u16 id = tips->choices[i].nextInfoId;
+        foundMoves |= id == INFO_TIPS_MOVE_REFERENCE;
+        foundSettings |= id == INFO_TIPS_BATTLE_SETTINGS;
+        EXPECT(id != INFO_TIPS_BATTLE_STATUS && id != INFO_TIPS_BATTLE_WEATHER);
+    }
+    EXPECT(foundMoves && foundSettings);
+    EXPECT_EQ(settings->choiceCount, 3);
+    EXPECT_EQ(settings->choices[0].nextInfoId, INFO_TIPS_BATTLE_STATUS);
+    EXPECT_EQ(settings->choices[1].nextInfoId, INFO_TIPS_BATTLE_WEATHER);
+    EXPECT_EQ(settings->choices[2].nextInfoId, INFO_VIEWER_BACK);
 }
 
 TEST("Frontier TIPS: contest has eight topics and twenty-one pages without changing older topic IDs")

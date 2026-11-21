@@ -73,6 +73,48 @@ static u32 GetStorageSortKey(struct BoxPokemon *boxMon, enum StorageSortKey key,
     return (group << 30) | (SpeciesToNationalPokedexNum(species) << 16) | species;
 }
 
+static const u8 *GetStorageSpeciesSortName(u16 species)
+{
+    return GetSpeciesName(species);
+}
+
+static bool32 ApplyKanaSortKeys(struct StorageSortEntry *entries, u32 count)
+{
+    u16 *ranks = AllocZeroed(NUM_SPECIES * sizeof(*ranks));
+    u16 *species = Alloc(count * sizeof(*species));
+    u32 numSpecies = 0;
+    bool32 success = FALSE;
+
+    if (ranks == NULL || species == NULL)
+        goto done;
+
+    for (u32 i = 0; i < count; i++)
+    {
+        u16 id = entries[i].key;
+        if ((entries[i].key >> 30) == SORT_GROUP_MATCH && id < NUM_SPECIES && ranks[id] == 0)
+        {
+            species[numSpecies++] = id;
+            ranks[id] = 1;
+        }
+    }
+    if (!SortIdsByKanaName(species, numSpecies, GetStorageSpeciesSortName))
+        goto done;
+    for (u32 i = 0; i < numSpecies; i++)
+        ranks[species[i]] = i;
+    for (u32 i = 0; i < count; i++)
+    {
+        u16 id = entries[i].key;
+        if ((entries[i].key >> 30) == SORT_GROUP_MATCH && id < NUM_SPECIES)
+            entries[i].key = ranks[id];
+    }
+    success = TRUE;
+
+done:
+    Free(species);
+    Free(ranks);
+    return success;
+}
+
 bool32 SortStorageBoxes(u32 firstBox, u32 numBoxes, enum StorageSortKey key, u32 value)
 {
     u32 i, j, count, start;
@@ -93,6 +135,12 @@ bool32 SortStorageBoxes(u32 firstBox, u32 numBoxes, enum StorageSortKey key, u32
     {
         entries[i].key = GetStorageSortKey(GetStorageMonByIndex(start + i), key, value);
         entries[i].index = i;
+    }
+
+    if (key == STORAGE_SORT_KANA && !ApplyKanaSortKeys(entries, count))
+    {
+        Free(entries);
+        return FALSE;
     }
 
     // Insertion sort keeps Pokémon with equal keys in their current order.

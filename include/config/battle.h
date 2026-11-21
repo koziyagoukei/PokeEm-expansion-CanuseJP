@@ -71,6 +71,7 @@
 
 // 技データの設定。
 #define B_UPDATED_MOVE_DATA         GEN_LATEST // gMovesInfoの威力・命中率・PP・分類・対象範囲・追加効果などを世代に合わせて更新する。
+#define B_FRONTIER_CHAMPIONS_MOVE_BUFFS TRUE  // Adopt favorable Champions move data without switching the whole battle ruleset.
 #define B_UPDATED_MOVE_TYPES        GEN_LATEST // gMovesInfoの技タイプを世代に合わせて更新する。
 #define B_UPDATED_MOVE_FLAGS        GEN_LATEST // gMovesInfoの技フラグを世代に合わせて更新する。
 #define B_PHYSICAL_SPECIAL_SPLIT    GEN_LATEST // 第1～3世代では、技タイプで物理・特殊を決める。ステータス画面の分類アイコンにも反映する。

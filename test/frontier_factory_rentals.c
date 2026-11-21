@@ -10,6 +10,39 @@
 #include "constants/battle_frontier.h"
 #include "constants/battle_frontier_mons.h"
 
+TEST("Frontier Factory: restricted opponent draws count each base species once")
+{
+    enum Species excluded[255];
+    u32 excludedCount = 0;
+    u32 kyuremCount = 0;
+    bool32 sawKyuremWhite = FALSE;
+
+    FlagSet(FLAG_FRONTIER_ALLOW_BANNED_SPECIES);
+    for (enum Species species = 1; species < NUM_SPECIES; species++)
+    {
+        if (IsFrontierSpeciesSubjectToBannedLimit(species)
+         && species != SPECIES_MEW && GET_BASE_SPECIES_ID(species) != SPECIES_KYUREM)
+        {
+            EXPECT_LT(excludedCount, ARRAY_COUNT(excluded));
+            excluded[excludedCount++] = species;
+        }
+    }
+
+    SeedRng(0x4359AB21);
+    for (u32 i = 0; i < 96; i++)
+    {
+        u16 id = GetRandomFactoryOpponentMon(NULL, 0, NULL, 0, excluded, excludedCount, FRONTIER_MON_FILTER_BANNED_SPECIES);
+        enum Species species = gFacilityTrainerMons[id].species;
+
+        EXPECT(species == SPECIES_MEW || GET_BASE_SPECIES_ID(species) == SPECIES_KYUREM);
+        kyuremCount += (species != SPECIES_MEW);
+        sawKyuremWhite |= (species == SPECIES_KYUREM_WHITE);
+    }
+    EXPECT_GE(kyuremCount, 32);
+    EXPECT_LE(kyuremCount, 64);
+    EXPECT(sawKyuremWhite);
+}
+
 TEST("Frontier Factory: initial rentals obey the restricted species setting")
 {
     u32 unlocked = FALSE, levelMode = FRONTIER_LVL_50;

@@ -492,6 +492,8 @@ static bool32 IsUnnerveAbilityOnOpposingSide(enum BattlerId battler)
 void HandleAction_UseMove(void)
 {
     gBattlerAttacker = gBattlerByTurnOrder[gCurrentTurnActionNumber];
+    const u8 *palaceScript = gPalaceSelectionBattleScripts[gBattlerAttacker];
+    gPalaceSelectionBattleScripts[gBattlerAttacker] = NULL;
     if (!IsBattlerAlive(gBattlerAttacker)
      || gBattleStruct->battlerState[gBattlerAttacker].commandingDondozo)
     {
@@ -582,11 +584,10 @@ void HandleAction_UseMove(void)
             gCurrentActionFuncId = B_ACTION_FINISHED;
             return;
         }
-        else if (gPalaceSelectionBattleScripts[gBattlerAttacker] != NULL)
+        else if (palaceScript != NULL)
         {
             gBattleCommunication[MULTISTRING_CHOOSER] = B_MSG_INCAPABLE_OF_POWER;
-            gBattlescriptCurrInstr = gPalaceSelectionBattleScripts[gBattlerAttacker];
-            gPalaceSelectionBattleScripts[gBattlerAttacker] = NULL;
+            gBattlescriptCurrInstr = palaceScript;
         }
         else
         {
@@ -1472,6 +1473,9 @@ static bool32 SetCantSelectScript(enum BattlerId battler, enum Move move, const 
 
     if (gBattleTypeFlags & BATTLE_TYPE_PALACE)
     {
+        // The other battler may select or act before this script runs.
+        gBattleStruct->battlerState[battler].palaceSelectionMove = move;
+        gBattleStruct->battlerState[battler].palaceSelectionItem = gBattleMons[battler].item;
         gPalaceSelectionBattleScripts[battler] = palaceScript;
         gProtectStructs[battler].palaceUnableToUseMove = TRUE;
         return FALSE;

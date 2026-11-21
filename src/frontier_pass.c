@@ -93,10 +93,11 @@ enum {
     MAP_INDICATOR_SQUARE,
 };
 
-// The Frontier map's list: the seven facilities, then the Battle Connector (Artisan Cave). It shows MAP_VISIBLE_ROWS
+// The Frontier map's list: the seven facilities and other destinations. It shows MAP_VISIBLE_ROWS
 // at a time (the panel's stripes are one row each) and scrolls to the rest.
 #define MAP_LANDMARK_CONNECTOR NUM_FRONTIER_FACILITIES
-#define MAP_LANDMARK_COUNT     (NUM_FRONTIER_FACILITIES + 1)
+#define MAP_LANDMARK_HUB       (MAP_LANDMARK_CONNECTOR + 1)
+#define MAP_LANDMARK_COUNT     (MAP_LANDMARK_HUB + 1)
 #define MAP_VISIBLE_ROWS       7
 #define MAP_ROW_HEIGHT         16
 
@@ -566,6 +567,9 @@ struct
     [MAP_LANDMARK_CONNECTOR]    = {COMPOUND_STRING("{JPN}バトルコネクター"),
                                    COMPOUND_STRING("{JPN}アトリエのあなの おくで ダークポケモンを\nさがしだし ほごする しせつ。"),
                                    101, 37, MAP_INDICATOR_SQUARE},
+    [MAP_LANDMARK_HUB]          = {COMPOUND_STRING("{JPN}フッコウルーム"),
+                                  COMPOUND_STRING("{JPN}ポケモンや どうぐを そろえて\nバトルの じゅんびが できる。"),
+                                  29, 105, MAP_INDICATOR_SQUARE},
 };
 
 // Where the Frontier map's warp takes the player: the lobby's entrance (warp 0), or a spot (WARP_ID_NONE)
@@ -585,6 +589,7 @@ static const struct
     [FRONTIER_FACILITY_PIKE]    = {MAP_BATTLE_FRONTIER_BATTLE_PIKE_LOBBY,    0, -1, -1},
     [FRONTIER_FACILITY_PYRAMID] = {MAP_BATTLE_FRONTIER_BATTLE_PYRAMID_LOBBY, 0, -1, -1},
     [MAP_LANDMARK_CONNECTOR]    = {MAP_ARTISAN_CAVE_1F, WARP_ID_NONE, 6, 12}, // facing the reception
+    [MAP_LANDMARK_HUB]          = {MAP_ULTRA_FRONTIE_HUB, WARP_ID_NONE, 13, 19},
 };
 
 static void ResetGpuRegsAndBgs(void)

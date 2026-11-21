@@ -71,6 +71,39 @@ TEST("Box sort: an already sorted box reports no change")
     EXPECT(!SortStorageBoxes(TOTAL_BOXES_COUNT - 1, 2, STORAGE_SORT_DEX, 0));
 }
 
+TEST("Box sort: species kana order works for one box and all boxes")
+{
+    bool32 all = FALSE;
+    PARAMETRIZE { all = FALSE; }
+    PARAMETRIZE { all = TRUE; }
+    u32 box = all ? TOTAL_BOXES_COUNT - 1 : 1;
+    u32 first = all ? 0 : box;
+    u32 count = all ? TOTAL_BOXES_COUNT : 1;
+
+    ClearBoxes();
+    PlaceMon(box, 2, SPECIES_BULBASAUR, 1, MOVE_NONE);
+    PlaceMon(box, 4, SPECIES_PIKACHU, 9, MOVE_NONE);
+    PlaceMon(box, 8, SPECIES_EEVEE, 3, MOVE_NONE);
+    PlaceMon(box, 9, SPECIES_PIKACHU, 2, MOVE_NONE);
+    PlaceEgg(box, 5, SPECIES_ABRA);
+    PlaceMon(box - 1, 12, SPECIES_MEOWTH, 0, MOVE_NONE);
+
+    EXPECT(SortStorageBoxes(first, count, STORAGE_SORT_KANA, 0));
+    EXPECT_SPECIES_AT(first, 0, SPECIES_EEVEE);
+    if (all)
+        EXPECT_SPECIES_AT(first, 1, SPECIES_MEOWTH);
+    else
+        EXPECT_SPECIES_AT(box - 1, 12, SPECIES_MEOWTH);
+    EXPECT_SPECIES_AT(first, 1 + all, SPECIES_PIKACHU);
+    EXPECT_SPECIES_AT(first, 2 + all, SPECIES_PIKACHU);
+    EXPECT_EQ(GetBoxMonDataAt(first, 1 + all, MON_DATA_PERSONALITY), 9);
+    EXPECT_EQ(GetBoxMonDataAt(first, 2 + all, MON_DATA_PERSONALITY), 2);
+    EXPECT_SPECIES_AT(first, 3 + all, SPECIES_BULBASAUR);
+    EXPECT(GetBoxMonDataAt(first, 4 + all, MON_DATA_IS_EGG));
+    EXPECT_SPECIES_AT(first, 5 + all, SPECIES_NONE);
+    EXPECT(!SortStorageBoxes(first, count, STORAGE_SORT_KANA, 0));
+}
+
 TEST("Box sort: Pokémon of the chosen type come first")
 {
     ClearBoxes();

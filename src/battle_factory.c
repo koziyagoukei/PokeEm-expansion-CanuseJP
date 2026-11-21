@@ -284,7 +284,7 @@ static void GenerateOpponentMons(void)
         u8 poolFilter = GetForcedFactoryOpponentMonPoolFilter(i, FRONTIER_PARTY_SIZE);
         if (GetFrontierGuestTrainer(trainerId) != NULL)
             poolFilter = GetFrontierGuestMonFilter(trainerId, i);
-        u16 monId = GetRandomFrontierMonFromFullPoolWithFilter(selectedMonIds, i, NULL, 0, excludedSpecies, excludedSpeciesCount, poolFilter);
+        u16 monId = GetRandomFactoryOpponentMon(selectedMonIds, i, NULL, 0, excludedSpecies, excludedSpeciesCount, poolFilter);
 
         // Successful selection
         selectedMonIds[i] = monId;
@@ -742,7 +742,7 @@ void FillFactoryBrainParty(void)
     while (i != FRONTIER_PARTY_SIZE)
     {
         u8 poolFilter = GetForcedFactoryOpponentMonPoolFilter(i, FRONTIER_PARTY_SIZE);
-        u16 monId = GetRandomFrontierMonFromFullPoolWithFilter(selectedMonIds, i, excludedMonIds, excludedMonIdCount, excludedSpecies, ARRAY_COUNT(excludedSpecies), poolFilter);
+        u16 monId = GetRandomFactoryOpponentMon(selectedMonIds, i, excludedMonIds, excludedMonIdCount, excludedSpecies, ARRAY_COUNT(excludedSpecies), poolFilter);
 
         selectedMonIds[i] = monId;
         CreateFacilityMon(&gFacilityTrainerMons[monId],

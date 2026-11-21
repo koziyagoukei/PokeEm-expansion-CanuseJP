@@ -4,8 +4,11 @@
 #include "battle_controllers.h"
 #include "battle_gfx_sfx_util.h"
 #include "battle_gimmick.h"
+#include "battle_message.h"
+#include "battle_scripts.h"
 #include "battle_setup.h"
 #include "battle_terastal.h"
+#include "battle_util.h"
 #include "event_data.h"
 #include "random.h"
 #include "constants/battle_frontier.h"
@@ -185,6 +188,39 @@ SINGLE_BATTLE_TEST("Palace AI: choosing a move preserves the other battler's ina
         EXPECT_EQ(BattleAI_ChoosePalaceMoveIndex(B_BATTLER_1, B_BATTLER_0, 1), 0);
         EXPECT(gProtectStructs[B_BATTLER_0].palaceUnableToUseMove);
         EXPECT(gProtectStructs[B_BATTLER_0].laggingTail);
+    }
+}
+
+SINGLE_BATTLE_TEST("Palace AI: a queued Choice message retains its item and locked move")
+{
+    GIVEN {
+        PLAYER(SPECIES_ALOMOMOLA) { Item(ITEM_LEFTOVERS); Moves(MOVE_SPLASH); }
+        OPPONENT(SPECIES_POLITOED) { Item(ITEM_CHOICE_SPECS); Moves(MOVE_HYDRO_PUMP, MOVE_GROWL); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_SPLASH); MOVE(opponent, MOVE_GROWL); }
+    } THEN {
+        gBattleTypeFlags |= BATTLE_TYPE_PALACE;
+        gBattleStruct->choicedMove[B_BATTLER_1] = MOVE_HYDRO_PUMP;
+        gBattleResources->bufferB[B_BATTLER_1][2] = 1;
+        EXPECT_EQ(TrySetCantSelectMoveBattleScript(B_BATTLER_1), 0);
+        EXPECT(gProtectStructs[B_BATTLER_1].palaceUnableToUseMove);
+
+        gLastUsedItem = ITEM_LEFTOVERS;
+        gPotentialItemEffectBattler = B_BATTLER_0;
+        gCurrentTurnActionNumber = 0;
+        gBattlerByTurnOrder[0] = B_BATTLER_1;
+        gBattleStruct->chosenMovePositions[B_BATTLER_1] = 1;
+        gChosenMoveByBattler[B_BATTLER_1] = MOVE_GROWL;
+        HandleAction_UseMove();
+
+        EXPECT_EQ(gBattlescriptCurrInstr, BattleScript_SelectingNotAllowedMoveChoiceItemInPalace);
+        BtlController_EmitPrintString(B_BATTLER_1, B_COMM_TO_CONTROLLER, STRINGID_ITEMALLOWSONLYYMOVE);
+        const struct BattleMsgData *msg = (const void *)&gBattleResources->transferBuffer[4];
+        EXPECT_EQ(msg->lastItem, ITEM_CHOICE_SPECS);
+        EXPECT_EQ(msg->itemEffectBattler, B_BATTLER_1);
+        EXPECT_EQ(msg->currentMove, MOVE_HYDRO_PUMP);
+        EXPECT_EQ(gCurrentMove, MOVE_GROWL);
+        EXPECT_EQ(gPalaceSelectionBattleScripts[B_BATTLER_1], NULL);
     }
 }
 

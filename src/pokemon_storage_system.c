@@ -183,6 +183,7 @@ enum {
     MENU_SORT_BY_TYPE,
     MENU_SORT_BY_MOVE,
     MENU_SORT_BY_ABILITY,
+    MENU_SORT_BY_KANA,
 };
 #define MENU_WALLPAPER_SETS_START MENU_SCENERY_1
 #define MENU_WALLPAPERS_START MENU_FOREST
@@ -3761,6 +3762,7 @@ static void Task_SortBoxes(u8 taskId)
         PrintMessage(MSG_SORT_BY_WHAT);
         InitMenu();
         SetMenuText(MENU_SORT_BY_DEX);
+        SetMenuText(MENU_SORT_BY_KANA);
         SetMenuText(MENU_SORT_BY_TYPE);
         SetMenuText(MENU_SORT_BY_MOVE);
         SetMenuText(MENU_SORT_BY_ABILITY);
@@ -3777,8 +3779,9 @@ static void Task_SortBoxes(u8 taskId)
             EndSortBoxes();
             break;
         case MENU_SORT_BY_DEX:
+        case MENU_SORT_BY_KANA:
             PlaySE(SE_SELECT);
-            sSortMenu->key = STORAGE_SORT_DEX;
+            sSortMenu->key = input == MENU_SORT_BY_KANA ? STORAGE_SORT_KANA : STORAGE_SORT_DEX;
             ApplyStorageSort(0);
             break;
         case MENU_SORT_BY_TYPE:
@@ -8398,6 +8401,7 @@ static const u8 *const sMenuTexts[] =
     [MENU_SORT_THIS_BOX]   = COMPOUND_STRING("{JPN}このボックス"),
     [MENU_SORT_ALL_BOXES]  = COMPOUND_STRING("{JPN}すべてのボックス"),
     [MENU_SORT_BY_DEX]     = COMPOUND_STRING("{JPN}ずかんばんごう"),
+    [MENU_SORT_BY_KANA]    = COMPOUND_STRING("{JPN}五十音順"),
     [MENU_SORT_BY_TYPE]    = COMPOUND_STRING("{JPN}タイプ"),
     [MENU_SORT_BY_MOVE]    = COMPOUND_STRING("{JPN}わざ"),
     [MENU_SORT_BY_ABILITY] = COMPOUND_STRING("{JPN}とくせい"),

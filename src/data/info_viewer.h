@@ -361,6 +361,14 @@ static const struct InfoViewerEntry sInfoViewerEntries[INFO_COUNT] =
     [INFO_TIPS_BATTLE_STATUS] = {
         .title = sInfoText_TitleBattleStatus, .pageCount = 1, .drawPage = DrawInfoViewerBattleStatus,
     },
+    [INFO_TIPS_BATTLE_SETTINGS] = {
+        .title = sInfoText_TitleBattleSettings,
+        .choices = sInfoViewerChoices_BattleSettings,
+        .choiceCount = ARRAY_COUNT(sInfoViewerChoices_BattleSettings),
+    },
+    [INFO_TIPS_BATTLE_WEATHER] = {
+        .title = sInfoText_TitleBattleWeather, .pageCount = 1, .drawPage = DrawInfoViewerBattleWeather,
+    },
     [INFO_TIPS_MOVE_REFERENCE] = {
         .title = sInfoText_TitleMoveReference, .pageCount = 1, .drawPage = DrawInfoViewerMoveReference,
     },

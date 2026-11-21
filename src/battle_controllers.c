@@ -1138,6 +1138,18 @@ void BtlController_EmitPrintString(enum BattlerId battler, u32 bufferId, enum St
     stringInfo->itemEffectBattler = gPotentialItemEffectBattler;
     stringInfo->moveType = GetMoveType(gCurrentMove);
 
+    if (gBattleTypeFlags & BATTLE_TYPE_PALACE)
+    {
+        const struct BattlerState *state = &gBattleStruct->battlerState[battler];
+        if (stringID == STRINGID_ITEMALLOWSONLYYMOVE || stringID == STRINGID_ASSAULTVESTDOESNTALLOW)
+        {
+            stringInfo->lastItem = state->palaceSelectionItem;
+            stringInfo->itemEffectBattler = battler;
+        }
+        if (stringID == STRINGID_ITEMALLOWSONLYYMOVE || stringID == STRINGID_ABILITYALLOWSONLYMOVE)
+            stringInfo->currentMove = state->palaceSelectionMove;
+    }
+
     for (i = 0; i < MAX_BATTLERS_COUNT; i++)
         stringInfo->abilities[i] = gBattleMons[i].ability;
     for (i = 0; i < BATTLE_TEXT_BUFF_ARRAY_COUNT; i++)

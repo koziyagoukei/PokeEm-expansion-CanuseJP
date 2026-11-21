@@ -3793,6 +3793,74 @@ u16 GetRandomFrontierMonFromFullPool(const u16 *selectedMonIds, u8 selectedCount
     return GetRandomFrontierMonFromFullPoolWithFilter(selectedMonIds, selectedCount, excludedMonIds, excludedMonIdCount, excludedSpecies, excludedSpeciesCount, FRONTIER_MON_FILTER_NONE);
 }
 
+static u16 GetRandomFactoryRestrictedMon(const u16 *selectedMonIds, u8 selectedCount, const u16 *excludedMonIds, u8 excludedMonIdCount, const enum Species *excludedSpecies, u8 excludedSpeciesCount, u8 filter)
+{
+    u16 *counts = AllocZeroed(NUM_SPECIES * sizeof(*counts));
+    u32 numSpecies = 0;
+    u16 result = NUM_FRONTIER_MONS;
+
+    if (counts == NULL)
+        return result;
+
+    for (u32 i = 0; i < NUM_FRONTIER_MONS; i++)
+    {
+        enum Species species = gFacilityTrainerMons[i].species;
+        if (IsFrontierSpeciesSubjectToBannedLimit(species)
+         && (filter == FRONTIER_MON_FILTER_BANNED_SPECIES || FrontierMonMatchesPoolFilter(i, filter))
+         && IsFrontierMonSelectableForParty(i, selectedMonIds, selectedCount, excludedMonIds, excludedMonIdCount, excludedSpecies, excludedSpeciesCount))
+        {
+            if (counts[GET_BASE_SPECIES_ID(species)]++ == 0)
+                numSpecies++;
+        }
+    }
+
+    if (numSpecies != 0)
+    {
+        // A species with more forms or sets gets one ticket, just like any other species.
+        u32 speciesRank = RandomUniformDefault(RNG_NONE, 0, numSpecies - 1);
+        enum Species base;
+        for (base = 0; base < NUM_SPECIES; base++)
+            if (counts[base] != 0 && speciesRank-- == 0)
+                break;
+        u32 setRank = RandomUniformDefault(RNG_NONE, 0, counts[base] - 1);
+        for (u32 i = 0; i < NUM_FRONTIER_MONS; i++)
+        {
+            enum Species species = gFacilityTrainerMons[i].species;
+            if (GET_BASE_SPECIES_ID(species) == base
+             && IsFrontierSpeciesSubjectToBannedLimit(species)
+             && (filter == FRONTIER_MON_FILTER_BANNED_SPECIES || FrontierMonMatchesPoolFilter(i, filter))
+             && IsFrontierMonSelectableForParty(i, selectedMonIds, selectedCount, excludedMonIds, excludedMonIdCount, excludedSpecies, excludedSpeciesCount)
+             && setRank-- == 0)
+            {
+                result = i;
+                break;
+            }
+        }
+    }
+    Free(counts);
+    return result;
+}
+
+u16 GetRandomFactoryOpponentMon(const u16 *selectedMonIds, u8 selectedCount, const u16 *excludedMonIds, u8 excludedMonIdCount, const enum Species *excludedSpecies, u8 excludedSpeciesCount, u8 filter)
+{
+    gFacilityTrainerMons = gBattleFrontierMons;
+    if (filter == FRONTIER_MON_FILTER_BANNED_SPECIES)
+    {
+        u16 restricted = GetRandomFactoryRestrictedMon(selectedMonIds, selectedCount, excludedMonIds, excludedMonIdCount, excludedSpecies, excludedSpeciesCount, filter);
+        if (restricted < NUM_FRONTIER_MONS)
+            return restricted;
+    }
+
+    u16 monId = GetRandomFrontierMonFromFullPoolWithFilter(selectedMonIds, selectedCount, excludedMonIds, excludedMonIdCount, excludedSpecies, excludedSpeciesCount, filter);
+    if (filter != FRONTIER_MON_FILTER_BANNED_SPECIES && IsFrontierSpeciesSubjectToBannedLimit(gFacilityTrainerMons[monId].species))
+    {
+        u16 restricted = GetRandomFactoryRestrictedMon(selectedMonIds, selectedCount, excludedMonIds, excludedMonIdCount, excludedSpecies, excludedSpeciesCount, filter);
+        if (restricted < NUM_FRONTIER_MONS)
+            return restricted;
+    }
+    return monId;
+}
+
 void FrontierSpeechToString(const u16 *words)
 {
     ConvertEasyChatWordsToString(gStringVar4, words, 3, 2);

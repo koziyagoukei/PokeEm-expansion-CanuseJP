@@ -57,6 +57,7 @@ bool8 IsFrontierMonPoolEntryEnabled(u16 monId);
 void SetFrontierPoolSideHasBannedSpecies(bool8 hasBannedSpecies);
 u16 GetRandomFrontierMonFromFullPool(const u16 *selectedMonIds, u8 selectedCount, const u16 *excludedMonIds, u8 excludedMonIdCount, const enum Species *excludedSpecies, u8 excludedSpeciesCount);
 u16 GetRandomFrontierMonFromFullPoolWithFilter(const u16 *selectedMonIds, u8 selectedCount, const u16 *excludedMonIds, u8 excludedMonIdCount, const enum Species *excludedSpecies, u8 excludedSpeciesCount, u8 filter);
+u16 GetRandomFactoryOpponentMon(const u16 *selectedMonIds, u8 selectedCount, const u16 *excludedMonIds, u8 excludedMonIdCount, const enum Species *excludedSpecies, u8 excludedSpeciesCount, u8 filter);
 void SaveFrontierPlayerPartyMon(u16 partyIndex, const struct Pokemon *mon);
 void FrontierSpeechToString(const u16 *words);
 u8 SetFacilityPtrsGetLevel(void);

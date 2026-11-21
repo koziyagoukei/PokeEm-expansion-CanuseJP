@@ -546,6 +546,8 @@ struct BattlerState
     u16 usedShadowMove:1; // The player's Shadow Pokemon used a Shadow move this turn (Reverse Mode, end of turn)
     u16 padding:7;
     // End of Word
+    enum Move palaceSelectionMove;
+    enum Item palaceSelectionItem;
 };
 
 struct PartyState

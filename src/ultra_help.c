@@ -52,6 +52,7 @@ struct InfoViewerHistory
 };
 
 static void DrawInfoViewerBattleStatus(void);
+static void DrawInfoViewerBattleWeather(void);
 static void DrawInfoViewerMoveReference(void);
 
 #include "data/info_viewer.h"
@@ -553,7 +554,24 @@ static void DrawInfoViewerBattleStatus(void)
         GetConfig(B_CONFUSION_SELF_DMG_CHANCE) >= GEN_7 ? 33 : 50);
     StringCopy(end, COMPOUND_STRING("{ENG}%"));
     PrintInfoViewerDetail(gStringVar4, 74);
-    PrintInfoViewerDetail(COMPOUND_STRING("{JPN}技ごとの 発生率やPPは わざ図鑑へ。"), 99);
+}
+
+static void DrawInfoViewerBattleWeather(void)
+{
+    PrintInfoViewerDetail(COMPOUND_STRING("{JPN}通常は 5ターン / 対応する岩で 8ターン"), 29);
+    PrintInfoViewerDetail(GetConfig(B_ABILITY_WEATHER) >= GEN_6
+        ? COMPOUND_STRING("{JPN}特性で 始まる 通常の 天候も 同じ")
+        : COMPOUND_STRING("{JPN}特性で 始まる 天候は ターン制限なし"), 44);
+    PrintInfoViewerDetail(GetConfig(B_SNOW_WARNING) >= GEN_9
+        ? COMPOUND_STRING("{JPN}ゆきふらし: 雪")
+        : COMPOUND_STRING("{JPN}ゆきふらし: あられ"), 59);
+    PrintInfoViewerDetail(GetConfig(B_SANDSTORM_SPDEF_BOOST) >= GEN_4
+        ? COMPOUND_STRING("{JPN}すなあらし: いわの 特防 {ENG}1.5{JPN}倍")
+        : COMPOUND_STRING("{JPN}すなあらし: いわの 特防補正なし"), 74);
+    PrintInfoViewerDetail(COMPOUND_STRING("{JPN}雪: こおりの 防御 {ENG}1.5{JPN}倍"), 89);
+    PrintInfoViewerDetail(GetConfig(B_OVERWORLD_WEATHER_OVERRIDE) >= GEN_9
+        ? COMPOUND_STRING("{JPN}マップ由来の 天候は 上書きできない")
+        : COMPOUND_STRING("{JPN}マップ由来の 天候も 上書きできる"), 104);
 }
 
 static const u8 *GetReferenceMoveName(u16 move)

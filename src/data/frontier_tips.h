@@ -393,12 +393,20 @@ static const u8 *const sInfoViewerPages_BattleConnector[] = {
     sInfoText_BattleConnector7,
 };
 
-static const u8 sInfoText_TitleBattleStatus[] = _("{JPN}状態異常の 数値");
+static const u8 sInfoText_TitleBattleSettings[] = _("{JPN}バトル設定");
+static const u8 sInfoText_TitleBattleStatus[] = _("{JPN}状態異常");
+static const u8 sInfoText_TitleBattleWeather[] = _("{JPN}天候");
 static const u8 sInfoText_TitleMoveReference[] = _("{JPN}わざ図鑑");
+
+static const struct InfoViewerChoice sInfoViewerChoices_BattleSettings[] = {
+    {sInfoText_TitleBattleStatus, INFO_TIPS_BATTLE_STATUS},
+    {sInfoText_TitleBattleWeather, INFO_TIPS_BATTLE_WEATHER},
+    {sInfoText_ChoiceBack, INFO_VIEWER_BACK},
+};
 
 static const struct InfoViewerChoice sInfoViewerChoices_Tips[] = {
     {COMPOUND_STRING("{JPN}バトルの 基本ルール"), INFO_FRONTIER_RULES},
-    {sInfoText_TitleBattleStatus, INFO_TIPS_BATTLE_STATUS},
+    {sInfoText_TitleBattleSettings, INFO_TIPS_BATTLE_SETTINGS},
     {sInfoText_TitleMoveReference, INFO_TIPS_MOVE_REFERENCE},
     {sInfoText_TitleFacilities, INFO_TIPS_FACILITIES},
     {COMPOUND_STRING("{JPN}ギミックの 基本"), INFO_GIMMICK_HELP},
