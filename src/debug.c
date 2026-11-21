@@ -685,6 +685,13 @@ static const struct DebugMenuOption sDebugMenu_Actions_GcAbilityLab[] =
     { COMPOUND_STRING("{ENG}L55 V18 L51 items off"), DebugAction_GcAbilityLab, (const void *)55 },
     { COMPOUND_STRING("{ENG}L56 V18 strict item"), DebugAction_GcAbilityLab, (const void *)56 },
     { COMPOUND_STRING("{ENG}L57 V18 Magic Guard off"), DebugAction_GcAbilityLab, (const void *)57 },
+    { COMPOUND_STRING("{ENG}L58 V18 Z/Mega Single"), DebugAction_GcAbilityLab, (const void *)58 },
+    { COMPOUND_STRING("{ENG}L59 V18 Z/Mega Double"), DebugAction_GcAbilityLab, (const void *)59 },
+    { COMPOUND_STRING("{ENG}L60 V18 Z/Mega Triple"), DebugAction_GcAbilityLab, (const void *)60 },
+    { COMPOUND_STRING("{ENG}L61 V18 Z/Mega Rotation"), DebugAction_GcAbilityLab, (const void *)61 },
+    { COMPOUND_STRING("{ENG}L62 V18 L58 items off"), DebugAction_GcAbilityLab, (const void *)62 },
+    { COMPOUND_STRING("{ENG}L63 V18 strict Ultra Z"), DebugAction_GcAbilityLab, (const void *)63 },
+    { COMPOUND_STRING("{ENG}L64 V18 Red Orb off"), DebugAction_GcAbilityLab, (const void *)64 },
     { NULL }
 };
 STATIC_ASSERT(ARRAY_COUNT(sDebugMenu_Actions_GcAbilityLab) - 1 <= DEBUG_MAX_MENU_ITEMS, DebugGcAbilityLabMenuFits);

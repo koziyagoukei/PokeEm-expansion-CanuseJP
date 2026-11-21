@@ -63,6 +63,11 @@ struct FrontierGcBattle
     bool8 gen3Items;   // debug lab: the Gen 3 type item boost (x1.1, Sea Incense x1.05) (V17)
     u8 itemState;      // V17 ITEMS_*: simulated, or why every item is off
     u16 itemReason;    // the item (ITEMS_OFF_ITEM) or ability (ITEMS_OFF_ABILITY) that normalised them
+    u8 gimmickState;   // V18 FGC_GIMMICK_ITEMS_*: the audited Z-Crystals and Mega Stones (AcceptGimmickItems)
+#if TESTING
+    struct Pokemon *testMons;  // FrontierGcBattle_TestExport: the battle's Pokemon
+    bool8 testStrictAll, testAllowGimmicks;
+#endif
     u8 rotation, target;
     BattleMultiState multiState;
     u8 status[2][BATTLE_FIELD_SLOTS];
@@ -91,7 +96,13 @@ static EWRAM_DATA bool8 sPendingEndurance = FALSE;
 static EWRAM_DATA u8 sPendingLab = 0;
 static EWRAM_DATA bool8 sPendingStrictItems = FALSE;
 static EWRAM_DATA u8 sItemRefusal[64] = {0};  // a strict item refusal (outlives the battle data)
-enum { ITEMS_NOT_SENT, ITEMS_SIMULATED, ITEMS_OFF_ITEM, ITEMS_OFF_ABILITY };
+enum
+{
+    ITEMS_NOT_SENT = FGC_ITEMS_NOT_SENT,
+    ITEMS_SIMULATED = FGC_ITEMS_SIMULATED,
+    ITEMS_OFF_ITEM = FGC_ITEMS_OFF_ITEM,
+    ITEMS_OFF_ABILITY = FGC_ITEMS_OFF_ABILITY,
+};
 
 static const u8 sText_StruggleRules[] = _("{ENG}Unsupported Struggle rules.");
 static const u8 sText_NoMemory[] = _("{ENG}Not enough memory.");
@@ -597,6 +608,34 @@ static u8 ResolveAdditionalEffects(enum Move move, BattleMove *out, bool8 damagi
     return 0;
 }
 
+// M4-B1a+: move behaviour this build keys to move flags the request has no
+// input for, so such a move is never sent as a plain hit. Shadow moves are
+// 2x against any Pokemon that is not a Shadow Pokemon, without STAB or PP
+// use (IsShadowMove); Sacred Sword, Chip Away and Darkest Lariat ignore the
+// target's Defense and evasion stages; Thousand Arrows hits Flying types and
+// Levitate; from V11, where abilities take part, Sunsteel Strike, Moongeist
+// Beam ... ignore the target's ability (moldBreakerActive); Z-Moves and Max
+// Moves are gimmicks (RULE_NO_GIMMICKS).
+#if TESTING
+// Regression hashes (gc_gimmick_item_reference.c): the M4-B1a export, with
+// neither the move flags below nor the gimmick items.
+static EWRAM_DATA bool8 sTestLegacyExport = FALSE;
+#define LEGACY_EXPORT() sTestLegacyExport
+#else
+#define LEGACY_EXPORT() FALSE
+#endif
+
+static u8 UnmodelledMoveFlags(enum Move move)
+{
+    if (LEGACY_EXPORT())
+        return 0;
+    if (gMovesInfo[move].shadowMove || gMovesInfo[move].ignoresTargetDefenseEvasionStages
+     || gMovesInfo[move].ignoreTypeIfFlyingAndUngrounded || (move >= FIRST_Z_MOVE && move < FIRST_SHADOW_MOVE)
+     || (sBattle->roster >= BATTLE_APP_VERSION_ABILITIES && gMovesInfo[move].ignoresTargetAbility))
+        return UNSUP_OTHER;
+    return 0;
+}
+
 static u8 ResolveEffects(enum Move move, BattleMove *out)
 {
     const enum BattleMoveEffects effect = GetMoveEffect(move);
@@ -797,7 +836,8 @@ static u8 ResolveEffects(enum Move move, BattleMove *out)
         return UNSUP_EFFECT;
     if (IsExplosionMove(move) || gMovesInfo[move].alwaysCriticalHit || gMovesInfo[move].cantUseTwice
      || gMovesInfo[move].noAffectOnSameTypeTarget || gMovesInfo[move].accDecreaseIfUserNotSameType
-     || MoveThawsUser(move) || out->accuracy > 100 || out->type >= NUMBER_OF_MON_TYPES)
+     || MoveThawsUser(move) || out->accuracy > 100 || out->type >= NUMBER_OF_MON_TYPES
+     || UnmodelledMoveFlags(move))
         return UNSUP_OTHER;
     if ((out->target & BTARGET_CLASS_MASK) == BTARGET_OTHER)
         return UNSUP_TARGET;
@@ -883,7 +923,7 @@ static void ResolveMove(enum Move move, BattleMove *out)
     if (IsExplosionMove(move) || gMovesInfo[move].alwaysCriticalHit || gMovesInfo[move].cantUseTwice
      || gMovesInfo[move].noAffectOnSameTypeTarget || gMovesInfo[move].accDecreaseIfUserNotSameType
      || (sBattle->roster >= BATTLE_APP_VERSION_CONDITIONS && MoveThawsUser(move))
-     || out->accuracy > 100 || out->type >= NUMBER_OF_MON_TYPES)
+     || out->accuracy > 100 || out->type >= NUMBER_OF_MON_TYPES || UnmodelledMoveFlags(move))
         out->unsupported |= UNSUP_OTHER;
 }
 
@@ -1227,6 +1267,230 @@ static bool8 ItemChangesFormInBattle(u16 species, u16 item)
             return TRUE;
     }
     return FALSE;
+}
+
+// ---------------------------------------------------------------------------
+// M4-B1a+ (V18): audited Z-Crystals and Mega Stones (gba-gc-extension
+// docs/items.md 11). Their battle effect is a gimmick (a Z-Move, Mega
+// Evolution) that a request with RULE_NO_GIMMICKS never runs, so they are
+// held with no effect: class NONE with the item's id kept (Knock Off, Trick,
+// Poltergeist and Acrobatics see a held item; the GC runs none of them).
+// Each item below was checked in this build: its hold effect, no parameter,
+// and every form change that names it is Mega Evolution with its own stone.
+// Not listed, so UNSUPPORTED as before: Ultranecrozium Z (Ultra Burst), the
+// Primal orbs (an automatic form change), and any item added later.
+// ResolveItem leaves a candidate UNSUPPORTED; AcceptGimmickItems makes it
+// NONE once the battle's rules are final, for the whole battle or not at all.
+static const u16 sAuditedGimmickItems[] = {
+    // The 18 type Z-Crystals.
+    ITEM_NORMALIUM_Z, ITEM_FIRIUM_Z, ITEM_WATERIUM_Z, ITEM_ELECTRIUM_Z, ITEM_GRASSIUM_Z, ITEM_ICIUM_Z,
+    ITEM_FIGHTINIUM_Z, ITEM_POISONIUM_Z, ITEM_GROUNDIUM_Z, ITEM_FLYINIUM_Z, ITEM_PSYCHIUM_Z, ITEM_BUGINIUM_Z,
+    ITEM_ROCKIUM_Z, ITEM_GHOSTIUM_Z, ITEM_DRAGONIUM_Z, ITEM_DARKINIUM_Z, ITEM_STEELIUM_Z, ITEM_FAIRIUM_Z,
+    // The signature Z-Crystals but Ultranecrozium Z.
+    ITEM_PIKANIUM_Z, ITEM_EEVIUM_Z, ITEM_SNORLIUM_Z, ITEM_MEWNIUM_Z, ITEM_DECIDIUM_Z, ITEM_INCINIUM_Z,
+    ITEM_PRIMARIUM_Z, ITEM_LYCANIUM_Z, ITEM_MIMIKIUM_Z, ITEM_KOMMONIUM_Z, ITEM_TAPUNIUM_Z, ITEM_SOLGANIUM_Z,
+    ITEM_LUNALIUM_Z, ITEM_MARSHADIUM_Z, ITEM_ALORAICHIUM_Z, ITEM_PIKASHUNIUM_Z,
+    // The 92 Mega Stones of this build.
+    ITEM_VENUSAURITE, ITEM_CHARIZARDITE_X, ITEM_CHARIZARDITE_Y, ITEM_BLASTOISINITE, ITEM_BEEDRILLITE,
+    ITEM_PIDGEOTITE, ITEM_ALAKAZITE, ITEM_SLOWBRONITE, ITEM_GENGARITE, ITEM_KANGASKHANITE,
+    ITEM_PINSIRITE, ITEM_GYARADOSITE, ITEM_AERODACTYLITE, ITEM_MEWTWONITE_X, ITEM_MEWTWONITE_Y,
+    ITEM_AMPHAROSITE, ITEM_STEELIXITE, ITEM_SCIZORITE, ITEM_HERACRONITE, ITEM_HOUNDOOMINITE,
+    ITEM_TYRANITARITE, ITEM_SCEPTILITE, ITEM_BLAZIKENITE, ITEM_SWAMPERTITE, ITEM_GARDEVOIRITE,
+    ITEM_SABLENITE, ITEM_MAWILITE, ITEM_AGGRONITE, ITEM_MEDICHAMITE, ITEM_MANECTITE,
+    ITEM_SHARPEDONITE, ITEM_CAMERUPTITE, ITEM_ALTARIANITE, ITEM_BANETTITE, ITEM_ABSOLITE,
+    ITEM_GLALITITE, ITEM_SALAMENCITE, ITEM_METAGROSSITE, ITEM_LATIASITE, ITEM_LATIOSITE,
+    ITEM_LOPUNNITE, ITEM_GARCHOMPITE, ITEM_LUCARIONITE, ITEM_ABOMASITE, ITEM_GALLADITE,
+    ITEM_AUDINITE, ITEM_DIANCITE, ITEM_CLEFABLITE, ITEM_VICTREEBELITE, ITEM_STARMINITE,
+    ITEM_DRAGONINITE, ITEM_MEGANIUMITE, ITEM_FERALIGITE, ITEM_SKARMORITE, ITEM_FROSLASSITE,
+    ITEM_EMBOARITE, ITEM_EXCADRITE, ITEM_SCOLIPITE, ITEM_SCRAFTINITE, ITEM_EELEKTROSSITE,
+    ITEM_CHANDELURITE, ITEM_CHESNAUGHTITE, ITEM_DELPHOXITE, ITEM_GRENINJITE, ITEM_PYROARITE,
+    ITEM_FLOETTITE, ITEM_MALAMARITE, ITEM_BARBARACITE, ITEM_DRAGALGITE, ITEM_HAWLUCHANITE,
+    ITEM_ZYGARDITE, ITEM_DRAMPANITE, ITEM_FALINKSITE, ITEM_HEATRANITE, ITEM_DARKRANITE,
+    ITEM_ZERAORITE, ITEM_RAICHUNITE_X, ITEM_RAICHUNITE_Y, ITEM_CHIMECHITE, ITEM_ABSOLITE_Z,
+    ITEM_STARAPTITE, ITEM_GARCHOMPITE_Z, ITEM_LUCARIONITE_Z, ITEM_GOLURKITE, ITEM_MEOWSTICITE,
+    ITEM_CRABOMINITE, ITEM_GOLISOPITE, ITEM_MAGEARNITE, ITEM_SCOVILLAINITE, ITEM_BAXCALIBRITE,
+    ITEM_TATSUGIRINITE, ITEM_GLIMMORANITE,
+};
+
+enum { GIMMICK_ITEM_NONE, GIMMICK_ITEM_Z_CRYSTAL, GIMMICK_ITEM_MEGA_STONE };
+
+// The kind of audited gimmick item `item` is for this holder, or NONE: not
+// for a Mega, Primal, Ultra Burst, Gigantamax or Tera form (a gimmick form),
+// not a Z-Crystal for Arceus (its type Z-Crystals are Multitype form items),
+// and not if any form change of the holder's species names the item, but
+// Mega Evolution with a Mega Stone.
+static u8 GimmickItemCandidate(u16 item, u16 species)
+{
+    const struct FormChange *f;
+    const struct SpeciesInfo *info;
+    enum HoldEffect hold;
+    u32 i;
+    u8 kind;
+
+    if (item == ITEM_NONE || item >= ITEMS_COUNT || species == SPECIES_NONE || species >= NUM_SPECIES
+     || !IsSpeciesEnabled(species))
+        return GIMMICK_ITEM_NONE;
+    for (i = 0; i < ARRAY_COUNT(sAuditedGimmickItems) && sAuditedGimmickItems[i] != item; i++)
+        ;
+    if (i == ARRAY_COUNT(sAuditedGimmickItems) || GetItemHoldEffectParam(item) != 0)
+        return GIMMICK_ITEM_NONE;
+    hold = GetItemHoldEffect(item);
+    kind = hold == HOLD_EFFECT_Z_CRYSTAL ? GIMMICK_ITEM_Z_CRYSTAL
+         : hold == HOLD_EFFECT_MEGA_STONE ? GIMMICK_ITEM_MEGA_STONE : GIMMICK_ITEM_NONE;
+    info = &gSpeciesInfo[species];
+    if (kind == GIMMICK_ITEM_NONE || info->isMegaEvolution || info->isPrimalReversion || info->isUltraBurst
+     || info->isGigantamax || info->isTeraForm
+     || (kind == GIMMICK_ITEM_Z_CRYSTAL && GET_BASE_SPECIES_ID(species) == SPECIES_ARCEUS))
+        return GIMMICK_ITEM_NONE;
+    for (f = GetSpeciesFormChanges(species); f != NULL && f->method != FORM_CHANGE_TERMINATOR; f++)
+    {
+        if (f->param1 == item && !(kind == GIMMICK_ITEM_MEGA_STONE && f->method == FORM_CHANGE_BATTLE_MEGA_EVOLUTION_ITEM))
+            return GIMMICK_ITEM_NONE;
+    }
+    return kind;
+}
+
+// A form change this build makes by itself in a battle without gimmicks: at
+// the battle start or on entry, by HP, weather, status, a move, a hit, the
+// turn end or Battle Bond, or Primal Reversion with its orb held. The GC
+// keeps every Pokemon's species, so a battle with such a Pokemon (either
+// side, the bench too) keeps every gimmick item UNSUPPORTED. Outside battle,
+// faint and end-of-battle reverts and the gimmicks themselves do not count.
+static bool8 ChangesFormByItself(u16 species, u16 item)
+{
+    const struct FormChange *f;
+    for (f = GetSpeciesFormChanges(species); f != NULL && f->method != FORM_CHANGE_TERMINATOR; f++)
+    {
+        switch (f->method)
+        {
+        case FORM_CHANGE_BEGIN_BATTLE:
+        case FORM_CHANGE_BATTLE_SWITCH_OUT:
+        case FORM_CHANGE_BATTLE_SWITCH_IN:
+        case FORM_CHANGE_BATTLE_HP_PERCENT_TURN_END:
+        case FORM_CHANGE_BATTLE_HP_PERCENT_SEND_OUT:
+        case FORM_CHANGE_BATTLE_HP_PERCENT_DURING_MOVE:
+        case FORM_CHANGE_BATTLE_WEATHER:
+        case FORM_CHANGE_BATTLE_TURN_END:
+        case FORM_CHANGE_STATUS:
+        case FORM_CHANGE_BATTLE_HIT_BY_MOVE_CATEGORY:
+        case FORM_CHANGE_BATTLE_HIT_BY_CONFUSION_SELF_DMG:
+        case FORM_CHANGE_BATTLE_BEFORE_MOVE:
+        case FORM_CHANGE_BATTLE_AFTER_MOVE:
+        case FORM_CHANGE_BATTLE_BOND:
+        case FORM_CHANGE_BATTLE_BEFORE_MOVE_CATEGORY:
+            return TRUE;
+        case FORM_CHANGE_BATTLE_PRIMAL_REVERSION:
+            if (f->param1 == item)
+                return TRUE;
+            break;
+        default:
+            break;
+        }
+    }
+    return FALSE;
+}
+
+// Moves that read, take, swap, remove or use held items, and the gimmick
+// moves (Z-Moves, Max Moves). All are unsupported moves (the GC never runs
+// them), but in this build they would see a held Z-Crystal or Mega Stone
+// (Knock Off, Trick, Poltergeist, Acrobatics ...): a battle where any
+// Pokemon knows one keeps gimmick items UNSUPPORTED.
+static bool8 MoveUsesHeldItems(u16 move)
+{
+    u32 i;
+    if (move >= FIRST_Z_MOVE && move < FIRST_SHADOW_MOVE)
+        return TRUE;
+    switch (GetMoveEffect(move))
+    {
+    case EFFECT_KNOCK_OFF:
+    case EFFECT_STEAL_ITEM:
+    case EFFECT_TRICK:
+    case EFFECT_BESTOW:
+    case EFFECT_FLING:
+    case EFFECT_ACROBATICS:
+    case EFFECT_POLTERGEIST:
+    case EFFECT_CORROSIVE_GAS:
+    case EFFECT_EMBARGO:
+    case EFFECT_MAGIC_ROOM:
+    case EFFECT_RECYCLE:
+    case EFFECT_NATURAL_GIFT:
+    case EFFECT_CHANGE_TYPE_ON_ITEM:
+    case EFFECT_BELCH:
+    case EFFECT_STUFF_CHEEKS:
+    case EFFECT_TEATIME:
+        return TRUE;
+    default:
+        break;
+    }
+    for (i = 0; i < GetMoveAdditionalEffectCount(move); i++)
+    {
+        const enum MoveEffect effect = GetMoveAdditionalEffectById(move, i)->moveEffect;
+        if (effect == MOVE_EFFECT_BUG_BITE || effect == MOVE_EFFECT_INCINERATE)
+            return TRUE;
+    }
+    return FALSE;
+}
+
+// Once the battle's rules are final, before CheckItems: every candidate of
+// the battle becomes NONE (held, no effect) only if the request is V18,
+// forbids gimmicks, no Pokemon changes form by itself and no Pokemon knows
+// a move that uses held items (supported or not); otherwise every one stays UNSUPPORTED, so CheckItems
+// turns every item off (strict: refuses), as for any unsupported item. Item
+// abilities (Klutz, Frisk ...) are CheckItems' as before: they turn every
+// item off, accepted gimmick items with them.
+static u8 AcceptGimmickItems(BattleRequest *r)
+{
+    bool8 any = FALSE;
+    u32 side, i, m;
+    if (LEGACY_EXPORT())
+        return FGC_GIMMICK_ITEMS_NONE;
+    for (side = 0; side < 2; side++)
+    {
+        BattleEntry *e = side ? r->opponent : r->player;
+        const u32 count = side ? r->opponent_count : r->player_count;
+        for (i = 0; i < count; i++)
+        {
+            if (e[i].mon.item.cls == BICLASS_UNSUPPORTED
+             && GimmickItemCandidate(e[i].record.held_item, SanitizeSpeciesId(e[i].record.species)))
+                any = TRUE;
+        }
+    }
+    if (!any)
+        return FGC_GIMMICK_ITEMS_NONE;
+    if (r->version < BATTLE_REQUEST_VERSION_END_TURN_ITEMS)
+        return FGC_GIMMICK_ITEMS_OFF_VERSION;
+    if (!(r->rules & RULE_NO_GIMMICKS))
+        return FGC_GIMMICK_ITEMS_OFF_RULES;
+    for (side = 0; side < 2; side++)
+    {
+        const BattleEntry *e = side ? r->opponent : r->player;
+        const u32 count = side ? r->opponent_count : r->player_count;
+        for (i = 0; i < count; i++)
+        {
+            if (ChangesFormByItself(SanitizeSpeciesId(e[i].record.species), e[i].record.held_item))
+                return FGC_GIMMICK_ITEMS_OFF_FORM;
+            for (m = 0; m < MAX_MON_MOVES; m++)
+            {
+                if (e[i].record.moves[m] != MOVE_NONE && MoveUsesHeldItems(e[i].record.moves[m]))
+                    return FGC_GIMMICK_ITEMS_OFF_MOVE;
+            }
+        }
+    }
+    for (side = 0; side < 2; side++)
+    {
+        BattleEntry *e = side ? r->opponent : r->player;
+        const u32 count = side ? r->opponent_count : r->player_count;
+        for (i = 0; i < count; i++)
+        {
+            if (e[i].mon.item.cls == BICLASS_UNSUPPORTED
+             && GimmickItemCandidate(e[i].record.held_item, SanitizeSpeciesId(e[i].record.species)))
+            {
+                e[i].mon.item.cls = BICLASS_NONE;  // the id stays (source = held_item)
+                e[i].mon.item.count = 0;
+            }
+        }
+    }
+    return FGC_GIMMICK_ITEMS_ACCEPTED;
 }
 
 #define ITEM_FIELD_TURNS 8  // TryChangeWeather / TryChangeBattleTerrain with the rock or Terrain Extender
@@ -1807,6 +2071,42 @@ static const struct LabFixture sLabFixtures[] = {
         {LMI(BLACK_SLUDGE, CLEFABLE, 1, 40, 100, 0, MOVE_BODY_SLAM)},
         {LMI(LEFTOVERS, SNORLAX, 1, 40, 70, 0, MOVE_BODY_SLAM)}},
         BATTLE_APP_VERSION_END_TURN_ITEMS, 0},
+    // M4-B1a+ (docs/items.md 11): audited Z-Crystals and Mega Stones held with
+    // no effect (no gimmicks); Leftovers and Black Sludge beside them as in L51-L54.
+    [58] = {BATTLE_FORMAT_SINGLE, 2, TRUE, {  // Snorlium Z, Venusaurite; sandstorm, Leftovers, Black Sludge
+        {LMI(SNORLIUM_Z, SNORLAX, 0, 40, 70, 0, MOVE_BODY_SLAM), LMI(VENUSAURITE, VENUSAUR, 0, 40, 60, 0, MOVE_SLUDGE_BOMB)},
+        {LMI(LEFTOVERS, TYRANITAR, 0, 40, 70, 0, MOVE_ROCK_SLIDE), LMI(BLACK_SLUDGE, TOXICROAK, 1, 40, 60, 0, MOVE_SLUDGE_BOMB)}},
+        BATTLE_APP_VERSION_END_TURN_ITEMS, 0},
+    [59] = {BATTLE_FORMAT_DOUBLE, 3, TRUE, {  // Mega Stones of both sides and Z-Crystals beside Leftovers / Black Sludge
+        {LMI(CHARIZARDITE_Y, CHARIZARD, 0, 40, 100, 0, MOVE_FLAMETHROWER), LMI(LEFTOVERS, SNORLAX, 0, 40, 60, 0, MOVE_BODY_SLAM),
+         LMI(AMPHAROSITE, AMPHAROS, 0, 40, 100, 0, MOVE_THUNDERBOLT)},
+        {LMI(GYARADOSITE, GYARADOS, 0, 40, 100, 0, MOVE_SURF), LMI(BLACK_SLUDGE, VENUSAUR, 0, 40, 60, 0, MOVE_SLUDGE_BOMB),
+         LMI(STEELIUM_Z, SCIZOR, 1, 40, 100, 0, MOVE_WING_ATTACK)}},
+        BATTLE_APP_VERSION_END_TURN_ITEMS, 0},
+    [60] = {BATTLE_FORMAT_TRIPLE, 3, TRUE, {  // six holders: three Z-Crystals, two Mega Stones, Black Sludge; sandstorm
+        {LMI(NORMALIUM_Z, SNORLAX, 0, 40, 60, 0, MOVE_BODY_SLAM), LMI(DARKINIUM_Z, TYRANITAR, 0, 40, 100, 0, MOVE_ROCK_SLIDE),
+         LMI(AMPHAROSITE, AMPHAROS, 0, 40, 100, 0, MOVE_THUNDERBOLT)},
+        {LMI(SWAMPERTITE, SWAMPERT, 0, 40, 100, 0, MOVE_SURF), LMI(FLYINIUM_Z, CROBAT, 0, 40, 100, 0, MOVE_WING_ATTACK),
+         LMI(BLACK_SLUDGE, NIDOKING, 0, 40, 60, 0, MOVE_SLUDGE_BOMB)}},
+        BATTLE_APP_VERSION_END_TURN_ITEMS, 0},
+    [61] = {BATTLE_FORMAT_ROTATION, 3, TRUE, {  // Rotation: Firium Z, Venusaurite, Leftovers / Blastoisinite, Waterium Z, Black Sludge
+        {LMI(FIRIUM_Z, CHARIZARD, 0, 40, 100, 0, MOVE_FLAMETHROWER), LMI(VENUSAURITE, VENUSAUR, 0, 40, 100, 0, MOVE_SLUDGE_BOMB),
+         LMI(LEFTOVERS, SNORLAX, 0, 40, 60, 0, MOVE_BODY_SLAM)},
+        {LMI(BLASTOISINITE, BLASTOISE, 0, 40, 100, 0, MOVE_SURF), LMI(WATERIUM_Z, GYARADOS, 0, 40, 100, 0, MOVE_SURF),
+         LMI(BLACK_SLUDGE, TENTACRUEL, 0, 40, 60, 0, MOVE_SLUDGE_BOMB)}},
+        BATTLE_APP_VERSION_END_TURN_ITEMS, 0},
+    [62] = {BATTLE_FORMAT_SINGLE, 2, TRUE, {  // L58 with Life Orb (not simulated): every item off, same seed
+        {LMI(SNORLIUM_Z, SNORLAX, 0, 40, 70, 0, MOVE_BODY_SLAM), LMI(VENUSAURITE, VENUSAUR, 0, 40, 60, 0, MOVE_SLUDGE_BOMB)},
+        {LMI(LIFE_ORB, TYRANITAR, 0, 40, 70, 0, MOVE_ROCK_SLIDE), LMI(BLACK_SLUDGE, TOXICROAK, 1, 40, 60, 0, MOVE_SLUDGE_BOMB)}},
+        BATTLE_APP_VERSION_END_TURN_ITEMS, 58},
+    [63] = {BATTLE_FORMAT_SINGLE, 1, FALSE, {  // Ultranecrozium Z under strict item rules: refused on the GBA
+        {LMI(ULTRANECROZIUM_Z, NECROZMA_DUSK_MANE, 0, 40, 100, 0, MOVE_IRON_HEAD)},
+        {LMI(LEFTOVERS, SNORLAX, 0, 40, 70, 0, MOVE_BODY_SLAM)}},
+        BATTLE_APP_VERSION_END_TURN_ITEMS, 0, BWEATHER_NONE, 0, FALSE, BTERRAIN_NONE, 0, FALSE, TRUE},
+    [64] = {BATTLE_FORMAT_SINGLE, 1, FALSE, {  // the Red Orb (Primal Reversion by itself) beside a Z-Crystal: every item off
+        {LMI(RED_ORB, GROUDON, 0, 40, 100, 0, MOVE_EARTHQUAKE)},
+        {LMI(SNORLIUM_Z, SNORLAX, 0, 40, 100, 0, MOVE_BODY_SLAM)}},
+        BATTLE_APP_VERSION_END_TURN_ITEMS, 0},
 };
 #undef LM
 #undef LMC
@@ -2221,6 +2521,10 @@ static bool8 IsLegacySingle(void)
     return sBattle->format == BATTLE_FORMAT_SINGLE && !sBattle->roster;
 }
 
+#if TESTING
+static bool8 BuildTestEntries(BattleRequest *request, const u8 **reason);
+#endif
+
 static bool8 BuildRequest(const u8 **reason)
 {
     BattleRequest *request = AllocZeroedUnchecked(sizeof(*request));
@@ -2232,7 +2536,12 @@ static bool8 BuildRequest(const u8 **reason)
         *reason = sText_NoMemory;
         return FALSE;
     }
-    if (!(IsLegacySingle() ? BuildSingleEntries(request, trainer, reason)
+#if TESTING
+    if (sBattle->testMons ? !BuildTestEntries(request, reason) :
+#else
+    if (
+#endif
+        !(IsLegacySingle() ? BuildSingleEntries(request, trainer, reason)
           : sBattle->lab ? BuildLabEntries(request, reason)
                          : BuildFixtureEntries(request, reason)))
     {
@@ -2265,6 +2574,12 @@ static bool8 BuildRequest(const u8 **reason)
                    | RULE_NO_CRITICAL_HITS | RULE_SUPPORTED_MOVES_ONLY;
     if (request->version >= BATTLE_REQUEST_VERSION_ABILITIES)
         request->rules &= ~RULE_IGNORE_ABILITIES;
+#if TESTING
+    if (sBattle->testAllowGimmicks)
+        request->rules &= ~RULE_NO_GIMMICKS;
+    if (sBattle->testStrictAll)
+        request->rules |= RULE_STRICT_ABILITIES | (request->version >= BATTLE_REQUEST_VERSION_WEATHER ? RULE_STRICT_MOVES : 0);
+#endif
     // Ability lab: the battle id seeds the GC (repeatable runs); one fixture checks strict rules.
     // V15 fixtures are strict for moves too: every move must be simulated.
     if (sBattle->lab)
@@ -2319,9 +2634,12 @@ static bool8 BuildRequest(const u8 **reason)
     // both screens); the strict rule refuses the battle instead.
     if (request->version >= BATTLE_REQUEST_VERSION_ITEMS)
     {
-        sBattle->itemState = CheckItems(request, &sBattle->itemReason);
         if (sBattle->strictItems)
             request->rules |= RULE_STRICT_ITEMS;
+        // M4-B1a+: the rules are final here; audited Z-Crystals and Mega
+        // Stones are held with no effect only if the whole battle allows it.
+        sBattle->gimmickState = AcceptGimmickItems(request);
+        sBattle->itemState = CheckItems(request, &sBattle->itemReason);
         if (sBattle->itemState == ITEMS_SIMULATED)
         {
             request->rules &= ~RULE_IGNORE_ITEMS;
@@ -3309,3 +3627,124 @@ void FrontierGcBattle_StartLab(void)
     sFrontierGcRosterMode.appVersion = sPendingRoster;
     GcStartMode(&sFrontierGcRosterMode);
 }
+
+#if TESTING
+// ------------------------------------------------------------- test hooks
+// test/battle/gc_gimmick_item_reference.c: the exporter's judgement through
+// the same code a battle runs (ResolveMove, ResolveItem, BuildRequest), with
+// the Pokemon a test gives instead of the debug fixtures.
+
+u8 FrontierGcBattle_TestMoveSupport(u8 roster, u8 format, u16 move)
+{
+    struct FrontierGcBattle *saved = sBattle;
+    BattleMove out;
+    sBattle = AllocZeroed(sizeof(*sBattle));
+    sBattle->roster = roster;
+    sBattle->format = format;
+    ResolveMove(move, &out);
+    Free(sBattle);
+    sBattle = saved;
+    return out.unsupported;
+}
+
+u8 FrontierGcBattle_TestGimmickItem(u16 item, u16 species)
+{
+    return GimmickItemCandidate(item, species);
+}
+
+static bool8 BuildTestEntries(BattleRequest *request, const u8 **reason)
+{
+    u32 side, i;
+    GcExtension_SetExtraMons(sBattle->opponent, 2 * sBattle->count);
+    for (side = 0; side < 2; side++)
+    {
+        for (i = 0; i < sBattle->count; i++)
+        {
+            const u32 index = side * sBattle->count + i;
+            sBattle->opponent[index] = sBattle->testMons[index];
+            if (FillEntry(GC_EXTRA_SLOT_BASE + index, side ? &request->opponent[i] : &request->player[i]) == 0)
+            {
+                *reason = side ? sText_NoOpponentMoves : sText_NoMoves;
+                return FALSE;
+            }
+        }
+    }
+    return TRUE;
+}
+
+void FrontierGcBattle_TestExport(const struct FrontierGcExportTest *test, struct FrontierGcExportResult *result)
+{
+    const u8 *reason = NULL;
+    memset(result, 0, sizeof(*result));
+    sPendingPolicy = RESULT_POLICY_DISPLAY_ONLY;
+    sPendingTrainer = TRAINER_CALVIN_1;
+    sPendingFormat = test->format;
+    sPendingRoster = test->roster;
+    sPendingEndurance = FALSE;
+    sPendingLab = 0;
+    sPendingStrictItems = test->strictItems;
+    sBattle = AllocZeroed(sizeof(*sBattle));
+    sBattle->format = test->format;
+    sBattle->fieldCount = test->format == BATTLE_FORMAT_SINGLE ? 1 : test->format == BATTLE_FORMAT_DOUBLE ? 2 : 3;
+    sBattle->roster = test->roster;
+    sBattle->strictItems = test->strictItems;
+    sPendingStrictItems = FALSE;
+    sBattle->count = test->count;
+    sBattle->policy = RESULT_POLICY_DISPLAY_ONLY;
+    sBattle->trainerId = TRAINER_CALVIN_1;
+    sBattle->testMons = test->mons;
+    sBattle->testStrictAll = test->strictAll;
+    sBattle->testAllowGimmicks = test->allowGimmicks;
+    result->built = BuildRequest(&reason);
+    result->refusal = reason;
+    result->itemState = sBattle->itemState;
+    result->itemReason = sBattle->itemReason;
+    result->gimmickState = sBattle->gimmickState;
+    if (result->built)
+    {
+        result->request = AllocZeroed(sizeof(*result->request));
+        if (!battle_request_decode(sBattle->request, sBattle->requestLength, result->request))
+            TRY_FREE_AND_SET_NULL(result->request);
+    }
+    GcExtension_SetExtraMons(NULL, 0);
+    TRY_FREE_AND_SET_NULL(sBattle);
+}
+
+// A Lab fixture (lab 1..) or a debug fixture (lab 0: roster, format,
+// endurance and trainer as FrontierGcBattle_Start sets them), built as Init
+// builds it for the GC.
+void FrontierGcBattle_TestExportFixture(u8 lab, u8 roster, u8 format, bool8 endurance, u16 trainer,
+                                        struct FrontierGcExportResult *result)
+{
+    const u8 *reason = NULL;
+    memset(result, 0, sizeof(*result));
+    sPendingPolicy = RESULT_POLICY_DISPLAY_ONLY;
+    sPendingTrainer = lab ? TRAINER_CALVIN_1 : trainer;
+    sPendingFormat = lab ? sLabFixtures[lab].format : format;
+    sPendingRoster = lab ? (sLabFixtures[lab].version ? sLabFixtures[lab].version : BATTLE_APP_VERSION_ABILITY_HOOKS) : roster;
+    sPendingEndurance = endurance;
+    sPendingLab = lab;
+    result->built = Init(&reason);
+    result->refusal = reason;
+    if (result->built)
+    {
+        result->itemState = sBattle->itemState;
+        result->itemReason = sBattle->itemReason;
+        result->gimmickState = sBattle->gimmickState;
+        result->request = AllocZeroed(sizeof(*result->request));
+        if (!battle_request_decode(sBattle->request, sBattle->requestLength, result->request))
+            TRY_FREE_AND_SET_NULL(result->request);
+        FreeBattle();
+    }
+}
+
+u8 FrontierGcBattle_TestLabCount(void)
+{
+    return LAB_FIXTURE_COUNT;
+}
+
+void FrontierGcBattle_TestSetLegacyExport(bool8 legacy)
+{
+    sTestLegacyExport = legacy;
+}
+#endif
