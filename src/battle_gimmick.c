@@ -127,7 +127,6 @@ void RestoreGimmickFormAfterRevival(enum BattlerId battler)
     }
 }
 
-// Returns whether a trainer mon is intended to use an unrestrictive gimmick via .useGimmick (i.e Tera).
 bool32 ShouldTrainerBattlerUseGimmick(enum BattlerId battler, enum Gimmick gimmick)
 {
     // There are no trainer party settings in battles, but the AI needs to know which gimmick to use.

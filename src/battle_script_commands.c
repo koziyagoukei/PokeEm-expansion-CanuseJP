@@ -2461,12 +2461,31 @@ static u32 CountAliveMonsForBattlerSide(enum BattlerId battler)
     u32 aliveMons = 0;
     struct Pokemon *party = GetBattlerParty(battler);
 
-    for (u32 partyMon = 0; partyMon < PARTY_SIZE; partyMon++)
+    for (u32 slot = 0; slot < PARTY_SIZE; slot++)
     {
-        if (GetMonData(&party[partyMon], MON_DATA_SPECIES)
-         && GetMonData(&party[partyMon], MON_DATA_HP) > 0
-         && !GetMonData(&party[partyMon], MON_DATA_IS_EGG))
+        if (GetMonData(&party[slot], MON_DATA_SPECIES) == SPECIES_NONE
+         || GetMonData(&party[slot], MON_DATA_HP) == 0
+         || GetMonData(&party[slot], MON_DATA_IS_EGG))
+        {
+            continue;
+        }
+        aliveMons++;
+    }
+
+    if (BattleSideHasTwoTrainers(GetBattlerSide(battler)))
+    {
+        struct Pokemon *partnerParty = GetBattlerParty(GetPartnerBattler(battler));
+
+        for (u32 slot = 0; slot < PARTY_SIZE; slot++)
+        {
+            if (GetMonData(&partnerParty[slot], MON_DATA_SPECIES) == SPECIES_NONE
+             || GetMonData(&partnerParty[slot], MON_DATA_HP) == 0
+             || GetMonData(&partnerParty[slot], MON_DATA_IS_EGG))
+            {
+                continue;
+            }
             aliveMons++;
+        }
     }
 
     return aliveMons;
@@ -5602,12 +5621,6 @@ static void Cmd_forcerandomswitch(void)
 {
     CMD_ARGS(const u8 *failInstr);
 
-    s32 battler1PartyId = 0;
-    s32 battler2PartyId = 0;
-
-    s32 firstMonId;
-    s32 lastMonId = 0; // + 1
-    struct Pokemon *party = NULL;
     u8 validMons[PARTY_SIZE];
     s32 validMonsCount = 0;
 
@@ -5662,45 +5675,26 @@ static void Cmd_forcerandomswitch(void)
         || redCardForcedSwitch
        )
     {
-        party = GetBattlerParty(gBattlerTarget);
+        enum BattlerId battlerIn1 = gBattlerTarget;
+        enum BattlerId battlerIn2 = IsDoubleBattle() ? GetPartnerBattler(battlerIn1) : battlerIn1;
 
-        if (BATTLE_TWO_VS_ONE_OPPONENT && !IsOnPlayerSide(gBattlerTarget))
-        {
-            firstMonId = 0;
-            lastMonId = 6;
-            battler2PartyId = gBattlerPartyIndexes[gBattlerTarget];
-            battler1PartyId = gBattlerPartyIndexes[GetPartnerBattler(gBattlerTarget)];
-        }
-        else
-        {
-            enum BattlerId partner = GetPartnerBattler(gBattlerTarget);
+        struct Pokemon *party = GetBattlerParty(battlerIn1);
+        u32 partySize = PARTY_SIZE;
+        if (BattleSideHasTwoTrainers(GetBattlerSide(battlerIn1)) && !AreMultiPartiesFullTeams())
+            partySize = MULTI_PARTY_SIZE;
 
-            // Each Trainer of a multi side keeps a party of their own, from slot 0 (as in
-            // CanBattlerSwitch). Looking in the second half of the party for the right-hand
-            // Trainer found nothing there, so Roar and the like failed against them.
-            firstMonId = 0;
-            if (BattleSideHasTwoTrainers(GetBattlerSide(gBattlerTarget)) && !AreMultiPartiesFullTeams())
-                lastMonId = MULTI_PARTY_SIZE;
-            else
-                lastMonId = PARTY_SIZE;
-            battler2PartyId = gBattlerPartyIndexes[gBattlerTarget];
-            // The partner only blocks a slot when it is out of the same party.
-            if (IsDoubleBattle() && BattlersShareParty(gBattlerTarget, partner))
-                battler1PartyId = gBattlerPartyIndexes[partner];
-            else
-                battler1PartyId = battler2PartyId;
-        }
-
-        for (u32 i = firstMonId; i < lastMonId; i++)
+        for (u32 slot = 0; slot < partySize; slot++)
         {
-            if (GetMonData(&party[i], MON_DATA_SPECIES) != SPECIES_NONE
-             && !GetMonData(&party[i], MON_DATA_IS_EGG)
-             && GetMonData(&party[i], MON_DATA_HP) != 0
-             && i != battler1PartyId
-             && i != battler2PartyId)
-             {
-                 validMons[validMonsCount++] = i;
-             }
+            if (GetMonData(&party[slot], MON_DATA_HP) == 0
+             || GetMonData(&party[slot], MON_DATA_SPECIES) == SPECIES_NONE
+             || GetMonData(&party[slot], MON_DATA_IS_EGG)
+             || (slot == gBattlerPartyIndexes[battlerIn1])
+             || (slot == gBattlerPartyIndexes[battlerIn2] && BattlersShareParty(battlerIn1, battlerIn2)))
+            {
+                continue;
+            }
+
+            validMons[validMonsCount++] = slot;
         }
 
         if (validMonsCount == 0)
@@ -6403,7 +6397,7 @@ static void Cmd_copymovepermanently(void)
     gChosenMove = MOVE_UNAVAILABLE;
 
     if (!(gBattleMons[gBattlerAttacker].volatiles.transformed)
-        && gLastPrintedMoves[gBattlerTarget] != MOVE_UNAVAILABLE
+        && IsMoveValid(gLastPrintedMoves[gBattlerTarget])
         && !IsMoveSketchBanned(gLastPrintedMoves[gBattlerTarget]))
     {
         s32 i;
@@ -6470,8 +6464,7 @@ static void Cmd_tryspiteppreduce(void)
 {
     CMD_ARGS(const u8 *failInstr);
 
-    if (gLastMoves[gBattlerTarget] != MOVE_NONE
-     && gLastMoves[gBattlerTarget] != MOVE_UNAVAILABLE)
+    if (IsMoveValid(gLastMoves[gBattlerTarget]))
     {
         s32 i;
 
@@ -7980,7 +7973,7 @@ static void ComputeBallData(u32 wildMonBattler, u32 playerBattler, struct BallDa
     ball->flatBonus = 0;
     ball->guaranteedCapture = FALSE;
 
-    if (gSpeciesInfo[battleMon->species].isUltraBeast)
+    if (gSpeciesInfo[battleMon->species].isUltraBeast && ballId != BALL_MASTER)
     {
         if (ballId == BALL_BEAST)
             ball->multiplier = 500;
@@ -7991,6 +7984,7 @@ static void ComputeBallData(u32 wildMonBattler, u32 playerBattler, struct BallDa
         }
         return;
     }
+
     switch (ballId)
     {
     case BALL_GREAT:
@@ -9453,9 +9447,13 @@ void BS_ItemRestoreHP(void)
 
         // Check if the recipient is an active battler.
         if (gBattleStruct->itemPartyIndex[gBattlerAttacker] == gBattlerPartyIndexes[gBattlerAttacker])
+        {
             battler = gBattlerAttacker;
+        }
         else if (IsItemRecipientPartnerOnField())
+        {
             battler = GetPartnerBattler(gBattlerAttacker);
+        }
 
         // Get amount to heal.
         switch (healParam)
@@ -9596,9 +9594,13 @@ void BS_ItemRestorePP(void)
 
     // Check if the recipient is an active battler.
     if (gBattleStruct->itemPartyIndex[gBattlerAttacker] == gBattlerPartyIndexes[gBattlerAttacker])
+    {
         battler = gBattlerAttacker;
+    }
     else if (IsItemRecipientPartnerOnField())
+    {
         battler = GetPartnerBattler(gBattlerAttacker);
+    }
 
     // Heal PP!
     u32 sealed = GetShadowSealedMoveMask(mon);
@@ -10213,6 +10215,7 @@ void BS_CheckPokeFlute(void)
         {
             gBattleMons[i].status1 &= ~STATUS1_SLEEP;
             gBattleMons[i].volatiles.nightmare = FALSE;
+            TryDeactivateSleepClause(i, gBattlerPartyIndexes[i]);
         }
     }
 
@@ -10763,13 +10766,6 @@ void BS_IsRunningImpossible(void)
 {
     NATIVE_ARGS();
     gBattleCommunication[0] = IsRunningFromBattleImpossible(gBattlerAttacker);
-    gBattlescriptCurrInstr = cmd->nextInstr;
-}
-
-void BS_GetMoveTarget(void)
-{
-    NATIVE_ARGS();
-    gBattlerTarget = GetBattleMoveTarget(gCurrentMove, TARGET_NONE);
     gBattlescriptCurrInstr = cmd->nextInstr;
 }
 

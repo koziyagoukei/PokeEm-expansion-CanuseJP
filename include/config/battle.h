@@ -196,6 +196,7 @@
 #define B_MOODY_ACC_EVASION             GEN_7 // 第8世代以降では、ムラっけで命中率・回避率が上がらない。
 #define B_FLASH_FIRE_FROZEN             GEN_LATEST // 第5世代以降では、こおり状態でももらいびが発動する。
 #define B_SYNCHRONIZE_TOXIC             GEN_LATEST // 第5世代以降では、シンクロのポケモンがもうどくになると相手ももうどくになる。以前は相手を通常のどくにする。
+#define B_PRESSURE_ALLIES               GEN_LATEST // 第5世代以降では、プレッシャーで味方のPP消費が増えない。
 #define B_UPDATED_INTIMIDATE            GEN_LATEST // 第8世代以降では、せいしんりょく・きもったま・マイペース・どんかんにいかくが効かず、びびりを発動させる。
 #define B_OBLIVIOUS_TAUNT               GEN_LATEST // 第6世代以降では、どんかんのポケモンにちょうはつが効かない。
 #define B_STURDY                        GEN_LATEST // 第5世代以降では、HP満タンから攻撃やこんらんの自傷で倒れる場合、がんじょうでHPを1残す。
