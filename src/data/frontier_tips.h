@@ -114,9 +114,9 @@ static const u8 sInfoText_HubPokemon1[] = _(
     "{JPN}左上の ユウキに 話すと\n"
     "ポケモンを 無料で 作れます。\n"
     "種類を 選ぶときは SELECTで\n"
-    "No.順と タイプ1順を 切り替え。\n"
-    "タイプ1順では 十字キーの\n"
-    "上下で 種類 左右で タイプ。");
+    "No.順・タイプ1順・五十音順を 切り替え。\n"
+    "技を 教える 画面では STARTで\n"
+    "五十音順に 切り替えられます。");
 static const u8 sInfoText_HubPokemon2[] = _(
     "{JPN}性別が 2つある 種類は\n"
     "性別を 選べます。\n"
@@ -135,8 +135,8 @@ static const u8 sInfoText_HubItems1[] = _(
     "{JPN}ユウキの 下の キルリアから\n"
     "対戦用の 道具を もらえます。\n"
     "上下で 選び Aで 1個 受け取り。\n"
-    "左右で 桁を 変えると\n"
-    "一度に 大きく 選びなおせます。\n"
+    "SELECTで 五十音順に 切り替え。\n"
+    "十字キー長押しで 連続して 選べます。\n"
     "BPは 必要ありません。");
 static const u8 sInfoText_HubItems2[] = _(
     "{JPN}バッグに すでに もっている 道具は\n"
@@ -393,8 +393,13 @@ static const u8 *const sInfoViewerPages_BattleConnector[] = {
     sInfoText_BattleConnector7,
 };
 
+static const u8 sInfoText_TitleBattleStatus[] = _("{JPN}状態異常の 数値");
+static const u8 sInfoText_TitleMoveReference[] = _("{JPN}わざ図鑑");
+
 static const struct InfoViewerChoice sInfoViewerChoices_Tips[] = {
     {COMPOUND_STRING("{JPN}バトルの 基本ルール"), INFO_FRONTIER_RULES},
+    {sInfoText_TitleBattleStatus, INFO_TIPS_BATTLE_STATUS},
+    {sInfoText_TitleMoveReference, INFO_TIPS_MOVE_REFERENCE},
     {sInfoText_TitleFacilities, INFO_TIPS_FACILITIES},
     {COMPOUND_STRING("{JPN}ギミックの 基本"), INFO_GIMMICK_HELP},
     {sInfoText_TitleShadow, INFO_TIPS_SHADOW},

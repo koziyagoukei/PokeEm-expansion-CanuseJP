@@ -1,15 +1,21 @@
 #include "global.h"
 #include "ultra_help.h"
+#include "battle_main.h"
 #include "bg.h"
+#include "config/battle.h"
+#include "config_changes.h"
+#include "data.h"
 #include "event_data.h"
 #include "gpu_regs.h"
 #include "international_string_util.h"
 #include "main.h"
 #include "malloc.h"
 #include "menu.h"
+#include "move.h"
 #include "overworld.h"
 #include "palette.h"
 #include "pokemon.h"
+#include "pokemon_storage_sort.h"
 #include "scanline_effect.h"
 #include "sound.h"
 #include "strings.h"
@@ -19,6 +25,7 @@
 #include "window.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
+#include "constants/battle_set_effect.h"
 
 #define INFO_VIEWER_ALT_FRAME_PALETTE_NUM 14
 #define INFO_VIEWER_HISTORY_SIZE 8
@@ -39,10 +46,13 @@ enum
 struct InfoViewerHistory
 {
     u16 infoId;
-    u8 page;
+    u16 page;
     u8 choice;
     u8 mode;
 };
+
+static void DrawInfoViewerBattleStatus(void);
+static void DrawInfoViewerMoveReference(void);
 
 #include "data/info_viewer.h"
 
@@ -70,7 +80,10 @@ static void DrawInfoViewerBannedSpecies(void);
 
 EWRAM_DATA static u8 *sInfoViewerTilemapBuffer = NULL;
 EWRAM_DATA static const struct InfoViewerEntry *sInfoViewerEntry = NULL;
-EWRAM_DATA static u8 sInfoViewerPage = 0;
+EWRAM_DATA static u16 sInfoViewerPage = 0;
+EWRAM_DATA static u16 *sInfoViewerMoveOrder = NULL;
+EWRAM_DATA static u16 sInfoViewerMoveCount = 0;
+EWRAM_DATA static bool8 sInfoViewerShowMoveEffects = FALSE;
 EWRAM_DATA static u8 sInfoViewerMode = INFO_VIEWER_MODE_PAGE;
 EWRAM_DATA static u8 sInfoViewerChoiceCursor = 0;
 EWRAM_DATA static u16 sInfoViewerInfoId = INFO_FRONTIER_RULES;
@@ -246,6 +259,39 @@ static void Task_InfoViewerHandleInput(u8 taskId)
             }
         }
     }
+    else if (sInfoViewerInfoId == INFO_TIPS_MOVE_REFERENCE)
+    {
+        s32 delta = 0;
+
+        if (JOY_NEW(B_BUTTON))
+        {
+            PlaySE(SE_SELECT);
+            ReturnToPreviousInfoViewerEntry(taskId);
+            return;
+        }
+        if (JOY_NEW(A_BUTTON))
+        {
+            sInfoViewerShowMoveEffects = !sInfoViewerShowMoveEffects;
+        }
+        else if (JOY_REPEAT(DPAD_UP))
+            delta = -10;
+        else if (JOY_REPEAT(DPAD_DOWN))
+            delta = 10;
+        else if (JOY_NEW(L_BUTTON))
+            delta = -50;
+        else if (JOY_NEW(R_BUTTON))
+            delta = 50;
+        else if (JOY_REPEAT(DPAD_LEFT))
+            delta = -1;
+        else if (JOY_REPEAT(DPAD_RIGHT))
+            delta = 1;
+        else
+            return;
+
+        sInfoViewerPage = min(max((s32)sInfoViewerPage + delta, 0), (s32)GetInfoViewerPageCount(sInfoViewerInfoId) - 1);
+        PlaySE(SE_SELECT);
+        DrawInfoViewerPage();
+    }
     else if (JOY_NEW(A_BUTTON))
     {
         PlaySE(SE_SELECT);
@@ -318,6 +364,10 @@ static void Task_InfoViewerExit(u8 taskId)
         UnsetBgTilemapBuffer(0);
         Free(sInfoViewerTilemapBuffer);
         sInfoViewerTilemapBuffer = NULL;
+        Free(sInfoViewerMoveOrder);
+        sInfoViewerMoveOrder = NULL;
+        sInfoViewerMoveCount = 0;
+        sInfoViewerShowMoveEffects = FALSE;
         sInfoViewerEntry = NULL;
         sInfoViewerInfoId = INFO_FRONTIER_RULES;
         sInfoViewerMode = INFO_VIEWER_MODE_PAGE;
@@ -348,12 +398,16 @@ static void DrawInfoViewerPage(void)
     DrawStdFrameWithCustomTileAndPalette(WIN_INFO_VIEWER, FALSE, STD_WINDOW_BASE_TILE_NUM, style->framePaletteNum);
     FillWindowPixelBuffer(WIN_INFO_VIEWER, style->windowFill);
     AddTextPrinterParameterized4(WIN_INFO_VIEWER, FONT_NORMAL, 8, 6, 0, 0, style->textColors, TEXT_SKIP_DRAW, sInfoViewerEntry->title);
-    if (sInfoViewerInfoId == INFO_BANNED_MONS && sInfoViewerPage >= sInfoViewerEntry->pageCount)
+    if (sInfoViewerEntry->drawPage != NULL)
+        sInfoViewerEntry->drawPage();
+    else if (sInfoViewerInfoId == INFO_BANNED_MONS && sInfoViewerPage >= sInfoViewerEntry->pageCount)
         DrawInfoViewerBannedSpecies();
     else
         AddTextPrinterParameterized4(WIN_INFO_VIEWER, FONT_SMALL, 8, 28, 0, 2, style->textColors, TEXT_SKIP_DRAW, sInfoViewerEntry->pages[sInfoViewerPage]);
     AddTextPrinterParameterized4(WIN_INFO_VIEWER, FONT_SMALL, 8, 132, 0, 0, style->textColors, TEXT_SKIP_DRAW,
-        COMPOUND_STRING("{JPN}A:次 B:戻る"));
+        sInfoViewerInfoId == INFO_TIPS_MOVE_REFERENCE
+            ? COMPOUND_STRING("{JPN}A:詳細 B:戻る {UP_ARROW}{DOWN_ARROW}:10 LR:50")
+            : COMPOUND_STRING("{JPN}A:次 B:戻る"));
     DrawInfoViewerPageNumber();
     CopyWindowToVram(WIN_INFO_VIEWER, COPYWIN_FULL);
 }
@@ -401,10 +455,11 @@ static void DrawInfoViewerPageNumber(void)
 
     u32 current = sInfoViewerMode == INFO_VIEWER_MODE_CHOICE ? sInfoViewerChoiceCursor + 1 : sInfoViewerPage + 1;
     u32 total = sInfoViewerMode == INFO_VIEWER_MODE_CHOICE ? sInfoViewerEntry->choiceCount : GetInfoViewerPageCount(sInfoViewerInfoId);
+    u32 digits = total >= 1000 ? 4 : total >= 100 ? 3 : 2;
 
-    txtPtr = ConvertIntToDecimalStringN(txtPtr, current, STR_CONV_MODE_LEFT_ALIGN, 2);
+    txtPtr = ConvertIntToDecimalStringN(txtPtr, current, STR_CONV_MODE_LEFT_ALIGN, digits);
     txtPtr = StringCopy(txtPtr, COMPOUND_STRING("/"));
-    ConvertIntToDecimalStringN(txtPtr, total, STR_CONV_MODE_LEFT_ALIGN, 2);
+    ConvertIntToDecimalStringN(txtPtr, total, STR_CONV_MODE_LEFT_ALIGN, digits);
 
     x = GetStringRightAlignXOffset(FONT_SMALL, gStringVar1, 212);
     AddTextPrinterParameterized4(WIN_INFO_VIEWER, FONT_SMALL, x, 132, 0, 0, style->textColors, TEXT_SKIP_DRAW, gStringVar1);
@@ -418,7 +473,7 @@ const struct InfoViewerEntry *GetInfoViewerEntry(u16 infoId)
         infoId = INFO_FRONTIER_RULES;
 
     entry = &sInfoViewerEntries[infoId];
-    if (entry->title == NULL || ((entry->pages == NULL || entry->pageCount == 0)
+    if (entry->title == NULL || (((entry->pages == NULL && entry->drawPage == NULL) || entry->pageCount == 0)
         && (entry->choices == NULL || entry->choiceCount == 0)))
         entry = &sInfoViewerEntries[INFO_FRONTIER_RULES];
 
@@ -450,12 +505,154 @@ u16 GetInfoViewerBannedSpecies(u32 index)
 u32 GetInfoViewerPageCount(u16 infoId)
 {
     u32 count = 0;
+    if (infoId == INFO_TIPS_MOVE_REFERENCE)
+        return max(1, sInfoViewerMoveCount);
     if (infoId != INFO_BANNED_MONS)
         return GetInfoViewerEntry(infoId)->pageCount;
     for (enum Species species = 1; species < NUM_SPECIES; species++)
         if (IsInfoViewerBannedSpecies(species))
             count++;
     return GetInfoViewerEntry(infoId)->pageCount + (count + INFO_VIEWER_SPECIES_PER_PAGE - 1) / INFO_VIEWER_SPECIES_PER_PAGE;
+}
+
+static void PrintInfoViewerDetail(const u8 *text, u32 y)
+{
+    AddTextPrinterParameterized4(WIN_INFO_VIEWER, FONT_SMALL, 8, y, 0, 0,
+        GetInfoViewerStyle()->textColors, TEXT_SKIP_DRAW, text);
+}
+
+static u8 *AppendDetailNumber(u8 *dest, const u8 *label, u32 number)
+{
+    return ConvertIntToDecimalStringN(StringCopy(dest, label), number, STR_CONV_MODE_LEFT_ALIGN, 3);
+}
+
+static void DrawInfoViewerBattleStatus(void)
+{
+    u32 sleepRules = GetConfig(B_SLEEP_TURNS);
+    const u8 *paralysis = GetConfig(B_PARALYSIS_CHANCE) >= GEN_CHAMPIONS
+        ? COMPOUND_STRING("{JPN}まひで 動けない確率: {ENG}12.5%")
+        : COMPOUND_STRING("{JPN}まひで 動けない確率: {ENG}25%");
+    u8 *end;
+
+    PrintInfoViewerDetail(paralysis, 29);
+    AppendDetailNumber(gStringVar4, COMPOUND_STRING("{JPN}まひの 素早さ: 通常の "), GetConfig(B_PARALYSIS_SPEED) >= GEN_7 ? 50 : 25);
+    StringAppend(gStringVar4, COMPOUND_STRING("{ENG}%"));
+    PrintInfoViewerDetail(gStringVar4, 44);
+
+    if (sleepRules >= GEN_CHAMPIONS)
+        PrintInfoViewerDetail(COMPOUND_STRING("{JPN}ねむり: 動けないのは 必ず1ターン"), 59);
+    else
+    {
+        end = AppendDetailNumber(gStringVar4, COMPOUND_STRING("{JPN}ねむり: 動けないのは 1から"),
+            sleepRules >= GEN_5 ? 3 : sleepRules >= GEN_3 ? 4 : 7);
+        StringCopy(end, COMPOUND_STRING("ターン"));
+        PrintInfoViewerDetail(gStringVar4, 59);
+    }
+
+    end = AppendDetailNumber(gStringVar4, COMPOUND_STRING("{JPN}こんらんで 自分を攻撃: "),
+        GetConfig(B_CONFUSION_SELF_DMG_CHANCE) >= GEN_7 ? 33 : 50);
+    StringCopy(end, COMPOUND_STRING("{ENG}%"));
+    PrintInfoViewerDetail(gStringVar4, 74);
+    PrintInfoViewerDetail(COMPOUND_STRING("{JPN}技ごとの 発生率やPPは わざ図鑑へ。"), 99);
+}
+
+static const u8 *GetReferenceMoveName(u16 move)
+{
+    return GetMoveName(move);
+}
+
+static bool32 PrepareInfoViewerMoveOrder(void)
+{
+    if (sInfoViewerMoveOrder != NULL)
+        return TRUE;
+
+    sInfoViewerMoveOrder = Alloc(MOVES_COUNT_ALL * sizeof(*sInfoViewerMoveOrder));
+    if (sInfoViewerMoveOrder == NULL)
+        return FALSE;
+
+    for (u32 move = MOVE_NONE + 1; move < MOVES_COUNT_ALL; move++)
+    {
+        if (GetMoveName(move) != NULL && GetMoveEffect(move) != EFFECT_PLACEHOLDER)
+            sInfoViewerMoveOrder[sInfoViewerMoveCount++] = move;
+    }
+    // The list remains usable in move-ID order if the temporary sort buffer is unavailable.
+    SortIdsByKanaName(sInfoViewerMoveOrder, sInfoViewerMoveCount, GetReferenceMoveName);
+    return TRUE;
+}
+
+static const u8 *GetReferenceEffectName(enum MoveEffect effect)
+{
+    switch (effect)
+    {
+    case MOVE_EFFECT_SLEEP:     return COMPOUND_STRING("ねむり");
+    case MOVE_EFFECT_POISON:    return COMPOUND_STRING("どく");
+    case MOVE_EFFECT_TOXIC:     return COMPOUND_STRING("もうどく");
+    case MOVE_EFFECT_BURN:      return COMPOUND_STRING("やけど");
+    case MOVE_EFFECT_FREEZE:    return COMPOUND_STRING("こおり");
+    case MOVE_EFFECT_FROSTBITE: return COMPOUND_STRING("しもやけ");
+    case MOVE_EFFECT_PARALYSIS: return COMPOUND_STRING("まひ");
+    case MOVE_EFFECT_CONFUSION: return COMPOUND_STRING("こんらん");
+    case MOVE_EFFECT_FLINCH:    return COMPOUND_STRING("ひるみ");
+    case MOVE_EFFECT_STAT_PLUS:  return COMPOUND_STRING("能力アップ");
+    case MOVE_EFFECT_STAT_MINUS: return COMPOUND_STRING("能力ダウン");
+    default:                   return COMPOUND_STRING("特殊効果");
+    }
+}
+
+static void DrawInfoViewerMoveReference(void)
+{
+    enum Move move;
+    u8 *end;
+
+    if (!PrepareInfoViewerMoveOrder() || sInfoViewerMoveCount == 0)
+    {
+        PrintInfoViewerDetail(COMPOUND_STRING("{JPN}わざ図鑑を 開けません。"), 29);
+        return;
+    }
+    move = sInfoViewerMoveOrder[sInfoViewerPage];
+    PrintInfoViewerDetail(GetMoveName(move), 28);
+
+    if (sInfoViewerShowMoveEffects)
+    {
+        u32 count = GetMoveAdditionalEffectCount(move);
+
+        PrintInfoViewerDetail(COMPOUND_STRING("{JPN}登録効果の 基本発生率"), 43);
+        if (count == 0)
+            PrintInfoViewerDetail(COMPOUND_STRING("{JPN}表示できる 確率つき効果は ありません。"), 60);
+        for (u32 i = 0; i < count; i++)
+        {
+            const struct AdditionalEffect *effect = GetMoveAdditionalEffectById(move, i);
+
+            end = StringCopy(gStringVar4, COMPOUND_STRING("{JPN}"));
+            end = StringCopy(end, GetReferenceEffectName(effect->moveEffect));
+            end = StringCopy(end, effect->self ? COMPOUND_STRING(" (自分): ") : COMPOUND_STRING(": "));
+            if (effect->chance == 0)
+                StringCopy(end, COMPOUND_STRING("確率判定なし"));
+            else
+                StringCopy(ConvertIntToDecimalStringN(end, effect->chance, STR_CONV_MODE_LEFT_ALIGN, 3), COMPOUND_STRING("{ENG}%"));
+            PrintInfoViewerDetail(gStringVar4, 57 + (count > 5 ? 10 : 14) * i);
+        }
+        return;
+    }
+
+    end = StringCopy(gStringVar4, COMPOUND_STRING("{JPN}タイプ: "));
+    end = StringCopy(end, gTypesInfo[GetMoveType(move)].name);
+    AppendDetailNumber(end, COMPOUND_STRING("   PP: "), GetMovePP(move));
+    PrintInfoViewerDetail(gStringVar4, 45);
+
+    end = StringCopy(gStringVar4, COMPOUND_STRING("{JPN}威力: "));
+    end = GetMovePower(move) < 2
+        ? StringCopy(end, COMPOUND_STRING("--"))
+        : ConvertIntToDecimalStringN(end, GetMovePower(move), STR_CONV_MODE_LEFT_ALIGN, 3);
+    end = StringCopy(end, COMPOUND_STRING("   命中: "));
+    if (GetMoveAccuracy(move) == 0)
+        StringCopy(end, COMPOUND_STRING("--"));
+    else
+        StringCopy(ConvertIntToDecimalStringN(end, GetMoveAccuracy(move), STR_CONV_MODE_LEFT_ALIGN, 3), COMPOUND_STRING("{ENG}%"));
+    PrintInfoViewerDetail(gStringVar4, 62);
+
+    if (GetMoveDescription(move) != NULL)
+        PrintInfoViewerDetail(GetMoveDescription(move), 82);
 }
 
 static void DrawInfoViewerBannedSpecies(void)

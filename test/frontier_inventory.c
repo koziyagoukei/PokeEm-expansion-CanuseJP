@@ -40,6 +40,7 @@ TEST("Bag redesign: form-changing tools fit without displacing the starter keys"
         { ITEM_ROTOM_CATALOG, ItemUseOutOfBattle_RotomCatalog, TRUE },
         { ITEM_GRACIDEA, ItemUseOutOfBattle_FormChange, TRUE },
         { ITEM_PRISON_BOTTLE, ItemUseOutOfBattle_FormChange, TRUE },
+        { ITEM_METEORITE, ItemUseOutOfBattle_FormChange, TRUE },
         { ITEM_ZYGARDE_CUBE, ItemUseOutOfBattle_ZygardeCube, TRUE },
         { ITEM_RED_NECTAR, ItemUseOutOfBattle_FormChange_ConsumedOnUse, FALSE },
         { ITEM_YELLOW_NECTAR, ItemUseOutOfBattle_FormChange_ConsumedOnUse, FALSE },
@@ -59,6 +60,34 @@ TEST("Bag redesign: form-changing tools fit without displacing the starter keys"
         EXPECT_EQ(CountTotalItemQuantityInBag(tools[i].item), 1);
     }
     EXPECT_EQ(memcmp(keys, gSaveBlock1Ptr->bag.keyItems, sizeof(keys)), 0);
+}
+
+TEST("Bag redesign: an owned Meteorite moves out of the key pocket when space is available")
+{
+    ClearBag();
+    struct BagPocket *keys = &gBagPockets[POCKET_KEY_ITEMS];
+    BagPocket_SetSlotItemIdAndCount(keys, 0, ITEM_METEORITE, 1);
+    EXPECT(AddBagItem(ITEM_MEGA_RING, 1));
+    for (u32 i = 0, filled = 0; filled < BAG_ITEMS_COUNT; i++)
+    {
+        enum Item item = sFrontierObtainableItems[i];
+        if (item == ITEM_METEORITE)
+            continue;
+        EXPECT(AddBagItem(item, 1));
+        filled++;
+    }
+
+    MigrateLegacyMeteorite();
+    EXPECT_EQ(GetBagItemId(POCKET_KEY_ITEMS, 0), ITEM_METEORITE);
+    EXPECT(CheckBagHasItem(ITEM_METEORITE, 1));
+
+    EXPECT(RemoveBagItem(sFrontierObtainableItems[0], 1));
+    MigrateLegacyMeteorite();
+    MigrateLegacyMeteorite();
+    EXPECT_EQ(GetBagItemId(POCKET_KEY_ITEMS, 0), ITEM_MEGA_RING);
+    EXPECT_EQ(GetBagItemId(POCKET_KEY_ITEMS, 1), ITEM_NONE);
+    EXPECT_EQ(GetBagItemId(POCKET_ITEMS, BAG_ITEMS_COUNT - 1), ITEM_METEORITE);
+    EXPECT_EQ(CountTotalItemQuantityInBag(ITEM_METEORITE), 1);
 }
 
 TEST("Bag redesign: starter inventory has every berry eight utility keys and four fusion keys")

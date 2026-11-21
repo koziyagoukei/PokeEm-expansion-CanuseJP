@@ -358,6 +358,12 @@ static const struct InfoViewerEntry sInfoViewerEntries[INFO_COUNT] =
     [INFO_TIPS_CONTEST_REWARDS] = TIPS_PAGE_ENTRY(ContestRewards),
     [INFO_TIPS_SHADOW] = TIPS_PAGE_ENTRY(Shadow),
     [INFO_TIPS_BATTLE_CONNECTOR] = TIPS_PAGE_ENTRY(BattleConnector),
+    [INFO_TIPS_BATTLE_STATUS] = {
+        .title = sInfoText_TitleBattleStatus, .pageCount = 1, .drawPage = DrawInfoViewerBattleStatus,
+    },
+    [INFO_TIPS_MOVE_REFERENCE] = {
+        .title = sInfoText_TitleMoveReference, .pageCount = 1, .drawPage = DrawInfoViewerMoveReference,
+    },
     [INFO_KANJI_FONT_TEST] =
     {
         .title = sInfoText_TitleKanjiTest,

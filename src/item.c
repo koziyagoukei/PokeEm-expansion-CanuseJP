@@ -202,6 +202,16 @@ static bool32 NONNULL BagPocket_CheckHasItem(struct BagPocket *pocket, enum Item
     return count == 0;
 }
 
+static struct BagPocket *GetBagPocketForItem(enum Item itemId)
+{
+    struct BagPocket *keyItems = &gBagPockets[POCKET_KEY_ITEMS];
+
+    // An old save with a full Items pocket can still use its Meteorite.
+    if (itemId == ITEM_METEORITE && BagPocket_CheckHasItem(keyItems, itemId, 1))
+        return keyItems;
+    return &gBagPockets[GetItemPocket(itemId)];
+}
+
 bool32 CheckBagHasItem(enum Item itemId, u16 count)
 {
     if (GetItemPocket(itemId) >= POCKETS_COUNT)
@@ -209,7 +219,7 @@ bool32 CheckBagHasItem(enum Item itemId, u16 count)
     if (CurrentBattlePyramidLocation() != PYRAMID_LOCATION_NONE || FlagGet(FLAG_STORING_ITEMS_IN_PYRAMID_BAG) == TRUE)
         return CheckPyramidBagHasItem(itemId, count);
 
-    return BagPocket_CheckHasItem(&gBagPockets[GetItemPocket(itemId)], itemId, count);
+    return BagPocket_CheckHasItem(GetBagPocketForItem(itemId), itemId, count);
 }
 
 bool32 HasAtLeastOneBerry(void)
@@ -270,7 +280,7 @@ u32 GetFreeSpaceForItemInBag(enum Item itemId)
     if (GetItemPocket(itemId) >= POCKETS_COUNT)
         return 0;
 
-    return BagPocket_GetFreeSpaceForItem(&gBagPockets[GetItemPocket(itemId)], itemId);
+    return BagPocket_GetFreeSpaceForItem(GetBagPocketForItem(itemId), itemId);
 }
 
 static inline bool32 NONNULL CheckSlotAndUpdateCount(struct BagPocket *pocket, enum Item itemId, u32 pocketPos, u32 *nextPocketPos, u16 *count, u16 *tempPocketSlotQuantities)
@@ -348,7 +358,7 @@ bool32 AddBagItem(enum Item itemId, u16 count)
     if (CurrentBattlePyramidLocation() != PYRAMID_LOCATION_NONE || FlagGet(FLAG_STORING_ITEMS_IN_PYRAMID_BAG) == TRUE)
         return AddPyramidBagItem(itemId, count);
 
-    return BagPocket_AddItem(&gBagPockets[GetItemPocket(itemId)], itemId, count);
+    return BagPocket_AddItem(GetBagPocketForItem(itemId), itemId, count);
 }
 
 static bool32 NONNULL BagPocket_RemoveItem(struct BagPocket *pocket, enum Item itemId, u16 count)
@@ -405,7 +415,7 @@ bool32 RemoveBagItem(enum Item itemId, u16 count)
     if (CurrentBattlePyramidLocation() != PYRAMID_LOCATION_NONE || FlagGet(FLAG_STORING_ITEMS_IN_PYRAMID_BAG) == TRUE)
         return RemovePyramidBagItem(itemId, count);
 
-    return BagPocket_RemoveItem(&gBagPockets[GetItemPocket(itemId)], itemId, count);
+    return BagPocket_RemoveItem(GetBagPocketForItem(itemId), itemId, count);
 }
 
 // Unsafe function: Only use with functions that already check the slot and count are valid
@@ -570,7 +580,24 @@ static inline u16 NONNULL BagPocket_CountTotalItemQuantity(struct BagPocket *poc
 
 u16 CountTotalItemQuantityInBag(enum Item itemId)
 {
-    return BagPocket_CountTotalItemQuantity(&gBagPockets[GetItemPocket(itemId)], itemId);
+    return BagPocket_CountTotalItemQuantity(GetBagPocketForItem(itemId), itemId);
+}
+
+void MigrateLegacyMeteorite(void)
+{
+    struct BagPocket *keyItems = &gBagPockets[POCKET_KEY_ITEMS];
+    struct BagPocket *items = &gBagPockets[POCKET_ITEMS];
+    u16 quantity = BagPocket_CountTotalItemQuantity(keyItems, ITEM_METEORITE);
+
+    if (quantity == 0 || !BagPocket_AddItem(items, ITEM_METEORITE, quantity))
+        return;
+
+    for (u32 i = 0; i < keyItems->capacity; i++)
+    {
+        if (keyItems->itemSlots[i].itemId == ITEM_METEORITE)
+            BagPocket_SetSlotItemIdAndCount(keyItems, i, ITEM_NONE, 0);
+    }
+    BagPocket_CompactItems(keyItems);
 }
 
 static bool32 CheckPyramidBagHasItem(enum Item itemId, u16 count)

@@ -71,8 +71,8 @@ static const u8 sInfoText_ResortDiner4[] = _(
     "ロケットファストフードが 選べます。\n"
     "1BPで 選んだ ポケモン 1匹を\n"
     "色違いに 変更できます。\n"
-    "タマゴや すでに 色違いの\n"
-    "ポケモンは 選べません。");
+    "もう一度 使うと もとの色に。\n"
+    "もとからの 色違いは 変わりません。");
 
 static const u8 sInfoText_ResortBath1[] = _(
     "{JPN}キャンプの 右上から 温泉へ。\n"

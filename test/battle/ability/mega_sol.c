@@ -373,3 +373,18 @@ SINGLE_BATTLE_TEST("Mega Sol doesn't prevent other weather based activations (Au
         ANIMATION(ANIM_TYPE_MOVE, MOVE_AURORA_VEIL, opponent);
     }
 }
+
+SINGLE_BATTLE_TEST("Mega Sol's healing pop-up is the user's even after another battler's pop-up")
+{
+    GIVEN {
+        PLAYER(SPECIES_MEGANIUM_MEGA) { Ability(ABILITY_MEGA_SOL); HP(100); MaxHP(300); }
+        OPPONENT(SPECIES_GYARADOS) { Ability(ABILITY_INTIMIDATE); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_SYNTHESIS); }
+    } SCENE {
+        ABILITY_POPUP(opponent, ABILITY_INTIMIDATE);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_SYNTHESIS, player);
+        ABILITY_POPUP(player, ABILITY_MEGA_SOL);
+        HP_BAR(player);
+    }
+}

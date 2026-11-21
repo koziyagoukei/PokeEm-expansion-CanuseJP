@@ -14539,7 +14539,7 @@ const struct ItemInfo gItemsInfo[] =
             "{JPN}りゅうせいのたきに\n"
             "おちていた いんせき"),
         .importance = 1,
-        .pocket = POCKET_KEY_ITEMS,
+        .pocket = POCKET_ITEMS,
         .type = ITEM_USE_PARTY_MENU,
         .fieldUseFunc = ItemUseOutOfBattle_FormChange,
         .iconPic = gItemIcon_Meteorite,

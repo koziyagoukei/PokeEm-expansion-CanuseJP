@@ -138,7 +138,7 @@ make -j4 --output-sync=target
 | 漢字表示の試作・表示確認と制約 | [kanji_font_poc.md](docs/kanji_font_poc.md) |
 | 漢字の自動検出・生成と保存/通信データ検査 | [kanji.md](docs/kanji.md) |
 | フォントのROM容量と表示方式の調査 | [font_engine_audit.md](docs/font_engine_audit.md) |
-| 本流の開発者・貢献者 | [CREDITS.md](CREDITS.md) |
+| 本流の開発者・貢献者と第三者素材の出典 | [CREDITS.md](CREDITS.md) / [第三者表記](THIRD_PARTY_NOTICES.md) |
 
 作業の進捗や補足情報は、[プロジェクトのDiscord](https://discord.gg/eYtXJDuYjX) と [Scrapbox](https://scrapbox.io/EmEX-JP/) でも案内しています。
 

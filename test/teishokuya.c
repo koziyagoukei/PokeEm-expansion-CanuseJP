@@ -69,7 +69,7 @@ TEST("Rocket Fast Food status check does not consume BP or change the Pokemon")
     EXPECT_EQ(memcmp(&before, &gParties[B_TRAINER_PLAYER][2], sizeof(before)), 0);
 }
 
-TEST("Rocket Fast Food changes only the selected Pokemon's shininess and charges one BP once")
+TEST("Rocket Fast Food toggles only the selected Pokemon and charges one BP each time")
 {
     struct Pokemon before[PARTY_SIZE];
     struct Pokemon expected;
@@ -91,8 +91,10 @@ TEST("Rocket Fast Food changes only the selected Pokemon's shininess and charges
             EXPECT_EQ(memcmp(&before[i], &gParties[B_TRAINER_PLAYER][i], sizeof(before[i])), 0);
     }
 
-    EXPECT_EQ(Test_TeishokuyaTryMakeMonShiny(2), TEISHOKUYA_SHINY_MEAL_ALREADY_SHINY);
-    EXPECT_EQ(gSaveBlock2Ptr->frontier.battlePoints, 9);
+    EXPECT_EQ(Special_TeishokuyaGetShinyMealStatus(), TEISHOKUYA_SHINY_MEAL_CAN_RESTORE);
+    EXPECT_EQ(Test_TeishokuyaTryMakeMonShiny(2), TEISHOKUYA_SHINY_MEAL_RESTORED);
+    EXPECT_EQ(gSaveBlock2Ptr->frontier.battlePoints, 8);
+    EXPECT_EQ(memcmp(before, gParties[B_TRAINER_PLAYER], sizeof(before)), 0);
 }
 
 TEST("Rocket Fast Food accepts exactly one BP")
@@ -115,15 +117,22 @@ TEST("Rocket Fast Food rejects zero BP without changing the Pokemon")
     EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][2], MON_DATA_IS_SHINY), FALSE);
 }
 
-TEST("Rocket Fast Food rejects an already shiny Pokemon without consuming BP")
+TEST("Rocket Fast Food preserves naturally shiny Pokemon without consuming BP")
 {
-    bool8 isShiny = TRUE;
-
     SetUpShinyMeal();
-    SetMonData(&gParties[B_TRAINER_PLAYER][2], MON_DATA_IS_SHINY, &isShiny);
+    CreateMon(&gParties[B_TRAINER_PLAYER][2], SPECIES_PIKACHU, 50, 100, OTID_STRUCT_PRESET(100));
 
     EXPECT_EQ(Test_TeishokuyaTryMakeMonShiny(2), TEISHOKUYA_SHINY_MEAL_ALREADY_SHINY);
     EXPECT_EQ(gSaveBlock2Ptr->frontier.battlePoints, 10);
+    EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][2], MON_DATA_IS_SHINY), TRUE);
+}
+
+TEST("Rocket Fast Food requires one BP to restore the original color")
+{
+    SetUpShinyMeal();
+    gSaveBlock2Ptr->frontier.battlePoints = 1;
+    EXPECT_EQ(Test_TeishokuyaTryMakeMonShiny(2), TEISHOKUYA_SHINY_MEAL_OK);
+    EXPECT_EQ(Test_TeishokuyaTryMakeMonShiny(2), TEISHOKUYA_SHINY_MEAL_NOT_ENOUGH_BP);
     EXPECT_EQ(GetMonData(&gParties[B_TRAINER_PLAYER][2], MON_DATA_IS_SHINY), TRUE);
 }
 

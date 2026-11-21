@@ -4649,14 +4649,20 @@ bool8 Special_TeishokuyaHasGoldSymbol(void)
 
 static u16 Teishokuya_GetShinyMealStatus(u16 partyIndex)
 {
+    struct Pokemon *mon;
+
     if (!Special_TeishokuyaHasGoldSymbol())
         return TEISHOKUYA_SHINY_MEAL_LOCKED;
     if (!Teishokuya_IsValidPartyMon(partyIndex))
         return TEISHOKUYA_SHINY_MEAL_INVALID_MON;
-    if (GetMonData(&gParties[B_TRAINER_PLAYER][partyIndex], MON_DATA_IS_SHINY))
+    mon = &gParties[B_TRAINER_PLAYER][partyIndex];
+    if (GetMonData(mon, MON_DATA_IS_SHINY)
+     && GET_SHINY_VALUE(mon->box.otId, mon->box.personality) < SHINY_ODDS)
         return TEISHOKUYA_SHINY_MEAL_ALREADY_SHINY;
     if (gSaveBlock2Ptr->frontier.battlePoints < TEISHOKUYA_SHINY_MEAL_COST)
         return TEISHOKUYA_SHINY_MEAL_NOT_ENOUGH_BP;
+    if (GetMonData(mon, MON_DATA_IS_SHINY))
+        return TEISHOKUYA_SHINY_MEAL_CAN_RESTORE;
     return TEISHOKUYA_SHINY_MEAL_OK;
 }
 
@@ -4665,16 +4671,20 @@ u16 Special_TeishokuyaGetShinyMealStatus(void)
     return Teishokuya_GetShinyMealStatus(gSpecialVar_0x8004);
 }
 
-static u16 Teishokuya_TryMakeMonShiny(u16 partyIndex)
+static u16 Teishokuya_ApplyShinyMeal(u16 partyIndex)
 {
     u16 result = Teishokuya_GetShinyMealStatus(partyIndex);
-    bool8 isShiny = TRUE;
 
-    if (result == TEISHOKUYA_SHINY_MEAL_OK)
+    if (result == TEISHOKUYA_SHINY_MEAL_OK || result == TEISHOKUYA_SHINY_MEAL_CAN_RESTORE)
     {
-        SetMonData(&gParties[B_TRAINER_PLAYER][partyIndex], MON_DATA_IS_SHINY, &isShiny);
+        struct Pokemon *mon = &gParties[B_TRAINER_PLAYER][partyIndex];
+        bool8 isShiny = (result == TEISHOKUYA_SHINY_MEAL_OK);
+
+        SetMonData(mon, MON_DATA_IS_SHINY, &isShiny);
         gSaveBlock2Ptr->frontier.battlePoints -= TEISHOKUYA_SHINY_MEAL_COST;
-        ShadowPokemon_OnMeal(&gParties[B_TRAINER_PLAYER][partyIndex]);
+        ShadowPokemon_OnMeal(mon);
+        if (!isShiny)
+            result = TEISHOKUYA_SHINY_MEAL_RESTORED;
     }
     return result;
 }
@@ -4682,7 +4692,7 @@ static u16 Teishokuya_TryMakeMonShiny(u16 partyIndex)
 #if TESTING
 u16 Test_TeishokuyaTryMakeMonShiny(u16 partyIndex)
 {
-    return Teishokuya_TryMakeMonShiny(partyIndex);
+    return Teishokuya_ApplyShinyMeal(partyIndex);
 }
 #endif
 
@@ -4775,7 +4785,7 @@ void Special_TeishokuyaPlayMealScene(void)
 void Special_TeishokuyaPlayShinyMealScene(void)
 {
     gSpecialVar_Result = Teishokuya_GetShinyMealStatus(gSpecialVar_0x8004);
-    if (gSpecialVar_Result != TEISHOKUYA_SHINY_MEAL_OK)
+    if (gSpecialVar_Result != TEISHOKUYA_SHINY_MEAL_OK && gSpecialVar_Result != TEISHOKUYA_SHINY_MEAL_CAN_RESTORE)
     {
         SetMainCallback2(CB2_ReturnToFieldContinueScript);
         return;
@@ -5000,7 +5010,7 @@ static void Task_TeishokuyaMealScene(u8 taskId)
                 u32 personality = GetMonData(mon, MON_DATA_PERSONALITY);
 
                 // Change only the palette while the Pokemon is fully white.
-                gSpecialVar_Result = Teishokuya_TryMakeMonShiny(sTeishokuyaMealScene->selectedSlot);
+                gSpecialVar_Result = Teishokuya_ApplyShinyMeal(sTeishokuyaMealScene->selectedSlot);
                 LoadPalette(GetMonSpritePalFromSpeciesAndPersonality(species, GetMonData(mon, MON_DATA_IS_SHINY), personality), paletteOffset, PLTT_SIZE_4BPP);
                 gTasks[taskId].data[1] = 20;
                 gTasks[taskId].data[0] = TEISHOKUYA_MEAL_HOLD_WHITE;

@@ -5364,6 +5364,9 @@ static enum MoveEndResult MoveEndClearBits(struct BattleCalcValues *cv)
     // go to next Bouncer or original attacker if possible
     if (gBattleStruct->bouncedMoveIsUsed)
     {
+        // The bouncer used the bounced move: its targets are done only for that one, not for its own move later
+        for (enum BattlerId battler = B_BATTLER_0; battler < gBattlersCount; battler++)
+            gBattleStruct->battlerState[gBattlerAttacker].targetsDone[battler] = FALSE;
         RestoreAttacker();
         RestoreTarget();
         gBattleStruct->bouncedMoveIsUsed = FALSE;

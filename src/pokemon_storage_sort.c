@@ -179,15 +179,15 @@ static void MarkCandidate(u8 *seen, u32 limit, u32 value)
 #define SORT_PREFIX_CHARS   2
 #define SORT_PREFIX_BITS    9 // Collation bases are below 0x130.
 
-STATIC_ASSERT(MOVES_COUNT <= SORT_ID_MASK && ABILITIES_COUNT <= SORT_ID_MASK, StorageSortIdBits)
+STATIC_ASSERT(MOVES_COUNT_ALL <= SORT_ID_MASK && ABILITIES_COUNT <= SORT_ID_MASK
+           && NUM_SPECIES <= SORT_ID_MASK && ITEMS_COUNT <= SORT_ID_MASK, StorageSortIdBits)
 STATIC_ASSERT(SORT_ID_BITS + SORT_PREFIX_CHARS * SORT_PREFIX_BITS <= 32, StorageSortEntryBits)
 
 static u32 GetKanaCollationBase(u8 c, u32 *variant);
 static const u8 *SkipExtCtrlCodes(const u8 *str);
 
-static u32 MakeCandidateSortEntry(enum StorageSortKey key, u32 value)
+static u32 MakeCandidateSortEntry(const u8 *str, u32 value)
 {
-    const u8 *str = GetStorageSortCandidateName(key, value);
     u32 prefix = 0;
 
     for (u32 i = 0; i < SORT_PREFIX_CHARS; i++)
@@ -203,14 +203,13 @@ static u32 MakeCandidateSortEntry(enum StorageSortKey key, u32 value)
     return (prefix << SORT_ID_BITS) | value;
 }
 
-static bool32 SortsBefore(enum StorageSortKey key, u32 entry1, u32 entry2)
+static bool32 SortsBefore(const u8 *(*getName)(u16), u32 entry1, u32 entry2)
 {
     s32 order;
 
     if ((entry1 >> SORT_ID_BITS) != (entry2 >> SORT_ID_BITS))
         return entry1 < entry2;
-    order = CompareKanaStrings(GetStorageSortCandidateName(key, entry1 & SORT_ID_MASK),
-                               GetStorageSortCandidateName(key, entry2 & SORT_ID_MASK));
+    order = CompareKanaStrings(getName(entry1 & SORT_ID_MASK), getName(entry2 & SORT_ID_MASK));
     if (order != 0)
         return order < 0;
     return entry1 < entry2; // The same name: ascending ID.
@@ -218,12 +217,20 @@ static bool32 SortsBefore(enum StorageSortKey key, u32 entry1, u32 entry2)
 
 // A merge sort: full boxes can hold hundreds of different moves, and sorting their names by
 // insertion stalled the menu for seconds. entries holds 2 * count numbers, the second half scratch.
-static void SortCandidatesByName(enum StorageSortKey key, u16 *values, u32 *entries, u32 count)
+bool32 SortIdsByKanaName(u16 *values, u32 count, const u8 *(*getName)(u16))
 {
-    u32 *src = entries, *dst = entries + count, *swap;
+    u32 *entries, *src, *dst, *swap;
+
+    if (count < 2)
+        return TRUE;
+    entries = Alloc(2 * count * sizeof(*entries));
+    if (entries == NULL)
+        return FALSE;
+    src = entries;
+    dst = entries + count;
 
     for (u32 i = 0; i < count; i++)
-        src[i] = MakeCandidateSortEntry(key, values[i]);
+        src[i] = MakeCandidateSortEntry(getName(values[i]), values[i]);
 
     for (u32 width = 1; width < count; width *= 2)
     {
@@ -235,7 +242,7 @@ static void SortCandidatesByName(enum StorageSortKey key, u16 *values, u32 *entr
 
             while (a < mid && b < right)
             {
-                if (SortsBefore(key, src[b], src[a]))
+                if (SortsBefore(getName, src[b], src[a]))
                     dst[out++] = src[b++];
                 else
                     dst[out++] = src[a++];
@@ -252,6 +259,18 @@ static void SortCandidatesByName(enum StorageSortKey key, u16 *values, u32 *entr
 
     for (u32 i = 0; i < count; i++)
         values[i] = src[i] & SORT_ID_MASK;
+    Free(entries);
+    return TRUE;
+}
+
+static const u8 *GetStorageSortMoveName(u16 move)
+{
+    return GetMoveName(move);
+}
+
+static const u8 *GetStorageSortAbilityName(u16 ability)
+{
+    return gAbilitiesInfo[ability].name;
 }
 
 u32 GetStorageSortCandidates(u32 firstBox, u32 numBoxes, enum StorageSortKey key, u16 *dst, u32 maxCount)
@@ -301,14 +320,10 @@ u32 GetStorageSortCandidates(u32 firstBox, u32 numBoxes, enum StorageSortKey key
     Free(seen);
 
     // Types keep their usual order; move and ability names are listed in gojūon order.
-    if (key != STORAGE_SORT_TYPE && count > 1)
-    {
-        u32 *entries = Alloc(2 * count * sizeof(*entries));
-        if (entries == NULL)
-            return 0;
-        SortCandidatesByName(key, dst, entries, count);
-        Free(entries);
-    }
+    if (key == STORAGE_SORT_MOVE && !SortIdsByKanaName(dst, count, GetStorageSortMoveName))
+        return 0;
+    if (key == STORAGE_SORT_ABILITY && !SortIdsByKanaName(dst, count, GetStorageSortAbilityName))
+        return 0;
 
     return count;
 }

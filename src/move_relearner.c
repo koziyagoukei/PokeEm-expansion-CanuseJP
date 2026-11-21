@@ -21,6 +21,7 @@
 #include "overworld.h"
 #include "palette.h"
 #include "party_menu.h"
+#include "pokemon_storage_sort.h"
 #include "pokemon_storage_system.h"
 #include "pokemon_summary_screen.h"
 #include "script.h"
@@ -29,6 +30,7 @@
 #include "string_util.h"
 #include "strings.h"
 #include "task.h"
+#include "constants/layouts.h"
 #include "constants/party_menu.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
@@ -332,6 +334,7 @@ enum FrontierMoveFilter
 };
 
 static u8 sFrontierMoveFilter = FRONTIER_MOVE_FILTER_ALL;
+static EWRAM_DATA bool8 sFrontierMoveKanaSort = FALSE;
 
 static const struct RelearnType sRelearnTypes[MOVE_RELEARNER_COUNT] =
 {
@@ -491,6 +494,7 @@ void CB2_InitLearnMove(void)
     gTasks[sMoveRelearnerStruct->mainTask].tPartyIndex = gSpecialVar_0x8004;
     gTasks[sMoveRelearnerStruct->mainTask].tMove = MOVE_NONE;
     sFrontierMoveFilter = FRONTIER_MOVE_FILTER_ALL;
+    sFrontierMoveKanaSort = FALSE;
     if (gRelearnMode == RELEARN_MODE_PSS_PAGE_CONTEST_MOVES)
         gTasks[sMoveRelearnerStruct->mainTask].tCategory = CONTEST_INFO;
     else
@@ -727,8 +731,37 @@ static bool32 UpdateMoveRelearnerState(void)
     return FALSE;
 }
 
+static bool32 CanSortRelearnerByKana(void)
+{
+    return gMapHeader.mapLayoutId == LAYOUT_ULTRA_FRONTIE_HUB
+        || gMoveRelearnerState == MOVE_RELEARNER_FRONTIER_FULL_MOVES;
+}
+
 static void Task_MoveRelearner_HandleInput(u8 taskId)
 {
+    if (CanSortRelearnerByKana() && JOY_NEW(START_BUTTON))
+    {
+        s32 selected = GetCurrentSelectedMove();
+        u32 index;
+
+        PlaySE(SE_SELECT);
+        sFrontierMoveKanaSort = !sFrontierMoveKanaSort;
+        RemoveScrollArrows();
+        CreateLearnableMovesList();
+        for (index = 0; index + 1 < sMoveRelearnerStruct->numMenuChoices; index++)
+        {
+            if (sMoveRelearnerStruct->menuItems[index].id == selected)
+                break;
+        }
+        sMoveRelearnerScrollState.listOffset = min(index, sMoveRelearnerStruct->numMenuChoices - sMoveRelearnerStruct->numToShowAtOnce);
+        sMoveRelearnerScrollState.listRow = index - sMoveRelearnerScrollState.listOffset;
+        DestroyListMenuTask(sMoveRelearnerStruct->moveListMenuTask, NULL, NULL);
+        sMoveRelearnerStruct->moveListMenuTask = ListMenuInit(&gMultiuseListMenuTemplate, sMoveRelearnerScrollState.listOffset, sMoveRelearnerScrollState.listRow);
+        ShowTeachMoveText();
+        AddScrollArrows();
+        return;
+    }
+
     s32 itemId = ListMenu_ProcessInput(sMoveRelearnerStruct->moveListMenuTask);
     ListMenuGetScrollAndRow(sMoveRelearnerStruct->moveListMenuTask, &sMoveRelearnerScrollState.listOffset, &sMoveRelearnerScrollState.listRow);
 
@@ -831,9 +864,26 @@ static s32 GetCurrentSelectedMove(void)
 
 static void ShowTeachMoveText(void)
 {
-    StringExpandPlaceholders(gStringVar4, gText_TeachWhichMoveToPkmn);
     FillWindowPixelBuffer(RELEARNERWIN_MSG, 0x11);
-    AddTextPrinterParameterized(RELEARNERWIN_MSG, FONT_NORMAL, gStringVar4, 0, 1, 0, NULL);
+    if (CanSortRelearnerByKana())
+    {
+        const u8 *controls = sFrontierMoveKanaSort
+            ? COMPOUND_STRING("{JPN}{START_BUTTON} 五十音")
+            : COMPOUND_STRING("{JPN}{START_BUTTON} ならび");
+
+        if (gMoveRelearnerState == MOVE_RELEARNER_FRONTIER_FULL_MOVES)
+            controls = sFrontierMoveKanaSort
+                ? COMPOUND_STRING("{JPN}{START_BUTTON} 五十音  {SELECT_BUTTON} しぼりこみ")
+                : COMPOUND_STRING("{JPN}{START_BUTTON} ならび  {SELECT_BUTTON} しぼりこみ");
+        AddTextPrinterParameterized(RELEARNERWIN_MSG, FONT_NORMAL,
+            COMPOUND_STRING("{JPN}おしえる 技を えらぶ"), 0, 1, 0, NULL);
+        AddTextPrinterParameterized(RELEARNERWIN_MSG, FONT_SMALL, controls, 0, 16, 0, NULL);
+    }
+    else
+    {
+        StringExpandPlaceholders(gStringVar4, gText_TeachWhichMoveToPkmn);
+        AddTextPrinterParameterized(RELEARNERWIN_MSG, FONT_NORMAL, gStringVar4, 0, 1, 0, NULL);
+    }
 }
 
 static void CreateUISprites(void)
@@ -891,6 +941,11 @@ static void RemoveScrollArrows(void)
     }
 }
 
+static const u8 *GetRelearnerMoveSortName(u16 move)
+{
+    return GetMoveName(move);
+}
+
 static void CreateLearnableMovesList(void)
 {
     s32 i;
@@ -900,7 +955,12 @@ static void CreateLearnableMovesList(void)
     if (gRelearnMode == RELEARN_MODE_SCRIPT || sRelearnTypes[gMoveRelearnerState].isActive())
         sMoveRelearnerStruct->numMenuChoices = sRelearnTypes[gMoveRelearnerState].getMoves(boxmon, sMoveRelearnerStruct->movesToLearn);
 
-    if (P_SORT_MOVES)
+    if (CanSortRelearnerByKana() && sFrontierMoveKanaSort)
+    {
+        if (!SortIdsByKanaName(sMoveRelearnerStruct->movesToLearn, sMoveRelearnerStruct->numMenuChoices, GetRelearnerMoveSortName))
+            sFrontierMoveKanaSort = FALSE;
+    }
+    else if (P_SORT_MOVES)
         SortMovesAlphabetically(sMoveRelearnerStruct->movesToLearn, sMoveRelearnerStruct->numMenuChoices);
 
     for (i = 0; i < sMoveRelearnerStruct->numMenuChoices; i++)

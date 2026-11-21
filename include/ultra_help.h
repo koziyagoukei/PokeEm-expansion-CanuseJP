@@ -26,6 +26,7 @@ struct InfoViewerEntry
     const struct InfoViewerChoice *choices;
     u8 choiceCount;
     const struct InfoViewerStyle *style;
+    void (*drawPage)(void);
 };
 
 const struct InfoViewerEntry *GetInfoViewerEntry(u16 infoId);

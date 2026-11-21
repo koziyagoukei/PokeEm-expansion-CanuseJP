@@ -22,6 +22,7 @@
 - [Contributing](./CONTRIBUTING.md)
 - [Styleguide and Principles](./STYLEGUIDE.md)
 - [Credits](./CREDITS.md)
+- [第三者表記](./THIRD_PARTY_NOTICES.md)
 - [Tutorials]()
   - [What are AI Flags?](tutorials/ai_flags.md)
     - [How to add new AI Flags](tutorials/ai_logic.md)

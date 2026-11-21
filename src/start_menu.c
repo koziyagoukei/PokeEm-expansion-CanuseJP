@@ -51,6 +51,7 @@
 #include "dexnav.h"
 #include "wild_encounter.h"
 #include "constants/battle_frontier.h"
+#include "constants/region_map_sections.h"
 #include "constants/rgb.h"
 #include "constants/songs.h"
 
@@ -73,6 +74,7 @@ enum
     MENU_ACTION_DEBUG,
     MENU_ACTION_DEXNAV,
     MENU_ACTION_TIPS,
+    MENU_ACTION_HUB_WARP,
     MENU_ACTION_COUNT,
 };
 
@@ -116,6 +118,7 @@ static bool8 StartMenuBattlePyramidBagCallback(void);
 static bool8 StartMenuDebugCallback(void);
 static bool8 StartMenuDexNavCallback(void);
 static bool8 StartMenuTipsCallback(void);
+static bool8 StartMenuHubWarpCallback(void);
 
 // Menu callbacks
 static bool8 SaveStartCallback(void);
@@ -165,6 +168,7 @@ static const u8 *const sPyramidFloorNames[FRONTIER_STAGES_PER_CHALLENGE + 1] =
 
 static const u8 sText_MenuDebug[] = _("デバッグ");
 static const u8 sText_MenuTips[] = _("TIPS");
+static const u8 sText_MenuHubWarp[] = _("{JPN}ハブへ");
 static const u8 sText_MenuCard[] = _("カード");
 static const u8 sText_MenuPass[] = _("パス");
 static const u8 sText_SafariStatus[] = _("ボール {STR_VAR_1}こ");
@@ -185,6 +189,7 @@ static const u8 sText_DescPyramidBag[] = _("バトルピラミッド用の 道�
 static const u8 sText_DescDebug[] = _("デバッグ用の 機能を\n開きます。");
 static const u8 sText_DescDexNav[] = _("この場所で 出会える\n野生の ポケモンを 探します。");
 static const u8 sText_DescTips[] = _("施設のルールや ギミックなど\n冒険に 役立つ 情報を 読みます。");
+static const u8 sText_DescHubWarp[] = _("{JPN}フロンティア ハブに\nワープします。");
 
 static const struct StartMenuUiEntry sStartMenuDisplayEntries[MENU_ACTION_COUNT] =
 {
@@ -204,6 +209,7 @@ static const struct StartMenuUiEntry sStartMenuDisplayEntries[MENU_ACTION_COUNT]
     [MENU_ACTION_DEBUG] = {sText_MenuDebug, sText_DescDebug, START_ICON_OPTION},
     [MENU_ACTION_DEXNAV] = {gText_MenuDexNav, sText_DescDexNav, START_ICON_DEXNAV},
     [MENU_ACTION_TIPS] = {sText_MenuTips, sText_DescTips, START_ICON_TIPS},
+    [MENU_ACTION_HUB_WARP] = {sText_MenuHubWarp, sText_DescHubWarp, START_ICON_EXIT},
 };
 
 static const struct MenuAction sStartMenuItems[] =
@@ -224,6 +230,7 @@ static const struct MenuAction sStartMenuItems[] =
     [MENU_ACTION_DEBUG]           = {sText_MenuDebug,   {.u8_void = StartMenuDebugCallback}},
     [MENU_ACTION_DEXNAV]          = {gText_MenuDexNav,  {.u8_void = StartMenuDexNavCallback}},
     [MENU_ACTION_TIPS]            = {sText_MenuTips,    {.u8_void = StartMenuTipsCallback}},
+    [MENU_ACTION_HUB_WARP]        = {sText_MenuHubWarp, {.u8_void = StartMenuHubWarpCallback}},
 };
 
 static const struct BgTemplate sBgTemplates_LinkBattleSave[] =
@@ -344,8 +351,21 @@ static void AddStartMenuAction(u8 action)
     AppendToList(sCurrentStartMenuActions, &sNumStartMenuActions, action);
 }
 
+static bool32 CanWarpToFrontierHub(void)
+{
+    return (gMapHeader.regionMapSectionId == MAPSEC_BATTLE_FRONTIER || FlagGet(FLAG_SYS_FRONTIER_PASS))
+        && IsMapTypeOutdoors(gMapHeader.mapType)
+        && gMapHeader.regionMapSectionId != MAPSEC_SPECIAL_AREA
+        && gSaveBlock1Ptr->location.mapGroup != MAP_GROUP(MAP_POKEVIRUS_DEPTHS_APPROACH)
+        && !FlagGet(FLAG_SYS_CRUISE_MODE)
+        && !InBattleFacilityChallenge();
+}
+
 static void BuildNormalStartMenu(void)
 {
+    if (CanWarpToFrontierHub())
+        AddStartMenuAction(MENU_ACTION_HUB_WARP);
+
     if (FlagGet(FLAG_SYS_POKEDEX_GET) == TRUE)
         AddStartMenuAction(MENU_ACTION_POKEDEX);
 
@@ -368,6 +388,9 @@ static void BuildNormalStartMenu(void)
 
 static void BuildDebugStartMenu(void)
 {
+    if (CanWarpToFrontierHub())
+        AddStartMenuAction(MENU_ACTION_HUB_WARP);
+
     AddStartMenuAction(MENU_ACTION_DEBUG);
     if (FlagGet(FLAG_SYS_POKEDEX_GET) == TRUE)
         AddStartMenuAction(MENU_ACTION_POKEDEX);
@@ -723,6 +746,17 @@ static bool8 StartMenuTipsCallback(void)
     RemoveExtraStartMenuWindows();
     CleanupOverworldWindowsAndTilemaps();
     StartInfoViewer(INFO_TIPS, CB2_ReturnToFieldWithOpenMenu);
+    return TRUE;
+}
+
+static bool8 StartMenuHubWarpCallback(void)
+{
+    if (gPaletteFade.active)
+        return FALSE;
+
+    HideStartMenuWindow();
+    SetWarpDestination(MAP_GROUP(MAP_ULTRA_FRONTIE_HUB), MAP_NUM(MAP_ULTRA_FRONTIE_HUB), WARP_ID_NONE, 13, 19);
+    DoWarp();
     return TRUE;
 }
 

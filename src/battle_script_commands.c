@@ -6954,7 +6954,11 @@ static void Cmd_recoverbasedonsunlight(void)
 
         SetHealAmount(gBattlerAttacker, recoverAmount);
         if (isAffectedByMegaSol)
+        {
+            // The pop-up is the user's: it showed whoever's ability popped up last (an opponent's Justified...)
+            gBattlerAbility = gBattlerAttacker;
             gBattlescriptCurrInstr = BattleScript_MegaSolActivatesHealing;
+        }
         else
             gBattlescriptCurrInstr = cmd->nextInstr;
     }

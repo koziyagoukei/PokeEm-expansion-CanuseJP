@@ -237,6 +237,7 @@ static inline struct ItemSlot GetBagItemIdAndQuantity(enum Pocket pocketId, u32 
 
 void ApplyNewEncryptionKeyToBagItems(u32 newKey);
 void SetBagItemsPointers(void);
+void MigrateLegacyMeteorite(void);
 u8 *CopyItemName(enum Item itemId, u8 *dst);
 u8 *CopyItemNameHandlePlural(enum Item itemId, u8 *dst, u32 quantity);
 bool32 IsBagPocketNonEmpty(enum Pocket pocketId);

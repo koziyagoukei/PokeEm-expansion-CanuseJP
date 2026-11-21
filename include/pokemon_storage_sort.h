@@ -24,5 +24,6 @@ const u8 *GetStorageSortCandidateName(enum StorageSortKey key, u32 value);
 // Orders Japanese names by gojūon: katakana sorts with hiragana, and voiced or
 // small kana sort with their base kana, only breaking ties.
 s32 CompareKanaStrings(const u8 *str1, const u8 *str2);
+bool32 SortIdsByKanaName(u16 *values, u32 count, const u8 *(*getName)(u16));
 
 #endif // GUARD_POKEMON_STORAGE_SORT_H

@@ -222,6 +222,21 @@ TEST("Box sort: kana names compare in gojuon order")
     EXPECT_EQ(CompareKanaStrings(COMPOUND_STRING("{JPN}じしん"), COMPOUND_STRING("{JPN}ジシン")), 0);
 }
 
+static const u8 *GetTestSpeciesSortName(u16 species)
+{
+    return GetSpeciesName(species);
+}
+
+TEST("Box sort: shared kana sorter reorders IDs without replacing them")
+{
+    u16 species[] = {SPECIES_BULBASAUR, SPECIES_EEVEE, SPECIES_PIKACHU};
+
+    EXPECT(SortIdsByKanaName(species, ARRAY_COUNT(species), GetTestSpeciesSortName));
+    EXPECT_EQ(species[0], SPECIES_EEVEE);
+    EXPECT_EQ(species[1], SPECIES_PIKACHU);
+    EXPECT_EQ(species[2], SPECIES_BULBASAUR);
+}
+
 TEST("Box sort: hundreds of different moves are listed once each in gojuon order")
 {
     u16 *candidates = Alloc(MOVES_COUNT * sizeof(*candidates));

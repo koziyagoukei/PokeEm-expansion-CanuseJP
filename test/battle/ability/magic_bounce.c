@@ -267,3 +267,24 @@ DOUBLE_BATTLE_TEST("Magic Bounce will trigger after all valid targets have been 
         MESSAGE("Kadabra is switched out with the Eject Pack!");
     }
 }
+
+// Reported: a Mega Sableye that bounced Stealth Rock then did no damage with Foul Play. The bouncer was the attacker of
+// the bounced move and its targets stayed "done", so its own move skipped them.
+SINGLE_BATTLE_TEST("Magic Bounce: the bouncer's own move after bouncing one still hits its target")
+{
+    enum Move bounced = MOVE_NONE, attack = MOVE_NONE;
+    PARAMETRIZE { bounced = MOVE_STEALTH_ROCK; attack = MOVE_FOUL_PLAY; }
+    PARAMETRIZE { bounced = MOVE_STEALTH_ROCK; attack = MOVE_SCRATCH; }
+    PARAMETRIZE { bounced = MOVE_TOXIC;        attack = MOVE_FOUL_PLAY; }
+    PARAMETRIZE { bounced = MOVE_STEALTH_ROCK; attack = MOVE_KNOCK_OFF; }
+    GIVEN {
+        PLAYER(SPECIES_GARGANACL) { Ability(ABILITY_PURIFYING_SALT); Speed(50); }
+        OPPONENT(SPECIES_SABLEYE_MEGA) { Ability(ABILITY_MAGIC_BOUNCE); Speed(20); }
+    } WHEN {
+        TURN { MOVE(player, bounced); MOVE(opponent, attack); }
+    } SCENE {
+        ABILITY_POPUP(opponent, ABILITY_MAGIC_BOUNCE);
+        ANIMATION(ANIM_TYPE_MOVE, attack, opponent);
+        HP_BAR(player);
+    }
+}

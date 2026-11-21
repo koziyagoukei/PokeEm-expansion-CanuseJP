@@ -128,6 +128,7 @@ static const enum Item sFrontierObtainableItems[] =
     ITEM_MEADOW_PLATE,
     ITEM_MENTAL_HERB,
     ITEM_METAL_POWDER,
+    ITEM_METEORITE,
     ITEM_METRONOME,
     ITEM_MILD_MINT,
     ITEM_MIND_PLATE,

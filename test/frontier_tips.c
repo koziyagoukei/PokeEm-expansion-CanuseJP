@@ -16,7 +16,7 @@ TEST("Frontier TIPS: all pages and choices fit the explanation window")
     const struct InfoViewerEntry *entry = GetInfoViewerEntry(info);
     EXPECT(GetStringWidth(FONT_NORMAL, entry->title, 0) <= 208);
     EXPECT(entry->pageCount != 0 || entry->choiceCount != 0);
-    for (u32 page = 0; page < entry->pageCount; page++)
+    for (u32 page = 0; entry->pages != NULL && page < entry->pageCount; page++)
     {
         EXPECT(GetStringWidth(FONT_SMALL, entry->pages[page], 0) <= 208);
         EXPECT((CountLineBreaks((u8 *)entry->pages[page]) + 1) * 14 <= 98);
@@ -41,7 +41,7 @@ TEST("Frontier TIPS: every topic page and choice explicitly selects its display 
     {
         const struct InfoViewerEntry *entry = GetInfoViewerEntry(info);
         CheckExplicitMode(entry->title);
-        for (u32 page = 0; page < entry->pageCount; page++)
+        for (u32 page = 0; entry->pages != NULL && page < entry->pageCount; page++)
             CheckExplicitMode(entry->pages[page]);
         for (u32 choice = 0; choice < entry->choiceCount; choice++)
             CheckExplicitMode(entry->choices[choice].text);
@@ -62,6 +62,10 @@ TEST("Frontier TIPS: facilities, hub, resort, contest and rule topics are reacha
                         seen[entry->choices[i].nextInfoId] = TRUE;
             }
     EXPECT(seen[INFO_FRONTIER_RULES]);
+    EXPECT(seen[INFO_TIPS_BATTLE_STATUS]);
+    EXPECT(seen[INFO_TIPS_MOVE_REFERENCE]);
+    EXPECT(GetInfoViewerEntry(INFO_TIPS_BATTLE_STATUS)->drawPage != NULL);
+    EXPECT(GetInfoViewerEntry(INFO_TIPS_MOVE_REFERENCE)->drawPage != NULL);
     EXPECT(seen[INFO_BANNED_MONS]);
     EXPECT(seen[INFO_GIMMICK_HELP]);
     EXPECT(seen[INFO_TIPS_SHADOW]);

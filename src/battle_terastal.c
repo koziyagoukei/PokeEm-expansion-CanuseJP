@@ -52,6 +52,11 @@ void ApplyBattlerVisualsForTeraAnim(enum BattlerId battler)
 
     // Show indicator and do palette blend.
     UpdateHealthboxAttribute(gHealthboxSpriteIds[battler], &party[index], HEALTHBOX_ALL);
+
+    // Behind a substitute the doll is on screen and the Tera animations are not played (nothing would fade it back
+    // from white): keep its palette. The Pokemon gets its Tera tint when it comes back out (BattleLoadMonSpriteGfx).
+    if (gBattleSpritesDataPtr->battlerData[battler].behindSubstitute)
+        return;
     BlendPalette(OBJ_PLTT_ID(battler), 16, 8, GetTeraTypeRGB(GetBattlerTeraType(battler)));
     CpuCopy32(gPlttBufferFaded + OBJ_PLTT_ID(battler), gPlttBufferUnfaded + OBJ_PLTT_ID(battler), PLTT_SIZEOF(16));
 

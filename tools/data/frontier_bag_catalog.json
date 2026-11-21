@@ -783,6 +783,12 @@
       ]
     },
     {
+      "item": "ITEM_METEORITE",
+      "sources": [
+        "src/frontier_creator.c:sFrontierHubGiveItems"
+      ]
+    },
+    {
       "item": "ITEM_METRONOME",
       "sources": [
         "src/frontier_creator.c:sFrontierHubAutoItems"
@@ -1367,5 +1373,5 @@
       ]
     }
   ],
-  "ordinary_item_count": 223
+  "ordinary_item_count": 224
 }

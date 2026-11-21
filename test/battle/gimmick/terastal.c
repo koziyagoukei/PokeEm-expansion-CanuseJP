@@ -2,6 +2,9 @@
 #include "test/battle.h"
 #include "battle_gimmick.h"
 #include "battle_util.h"
+#include "battle_terastal.h"
+#include "graphics.h"
+#include "palette.h"
 
 SINGLE_BATTLE_TEST("Tera form restrictions: base Eternatus and non-Ultra Necrozma can still Terastallize on both sides")
 {
@@ -1004,5 +1007,31 @@ ONE_VS_TWO_BATTLE_TEST("(TERA) Every battler can use Terastalization - 1v2")
     } SCENE {
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_TERA_CHARGE, battler);
         ANIMATION(ANIM_TYPE_GENERAL, B_ANIM_TERA_ACTIVATE, battler);
+    }
+}
+
+// Reported: Terastallizing behind a substitute left the doll white. The Tera animations are not played behind it, so
+// nothing faded it back from the white the Tera step leaves.
+SINGLE_BATTLE_TEST("Terastallization: behind a substitute the doll keeps its palette")
+{
+    u32 changedFaded = 0, changedUnfaded = 0;
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET) { TeraType(TYPE_FIRE); }
+        OPPONENT(SPECIES_WOBBUFFET);
+    } WHEN {
+        TURN { MOVE(player, MOVE_SUBSTITUTE); }
+        TURN { MOVE(player, MOVE_CELEBRATE, gimmick: GIMMICK_TERA); }
+    } THEN {
+        // What the screen holds behind the substitute: the doll's palette
+        LoadPalette(gBattleAnimSpritePal_Substitute, OBJ_PLTT_ID(0), PLTT_SIZE_4BPP);
+        ApplyBattlerVisualsForTeraAnim(0);
+        for (u32 i = 1; i < 16; i++)
+        {
+            changedFaded += (gPlttBufferFaded[OBJ_PLTT_ID(0) + i] != gBattleAnimSpritePal_Substitute[i]);
+            changedUnfaded += (gPlttBufferUnfaded[OBJ_PLTT_ID(0) + i] != gBattleAnimSpritePal_Substitute[i]);
+        }
+        EXPECT(gBattleSpritesDataPtr->battlerData[0].behindSubstitute);
+        EXPECT_EQ(changedFaded, 0);
+        EXPECT_EQ(changedUnfaded, 0);
     }
 }

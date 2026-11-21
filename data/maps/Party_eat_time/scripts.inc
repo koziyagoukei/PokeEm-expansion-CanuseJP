@@ -63,15 +63,32 @@ PartyEatTime_EventScript_ShinyMeal::
 	goto_if_eq VAR_RESULT, TEISHOKUYA_SHINY_MEAL_INVALID_MON, PartyEatTime_EventScript_CantChooseEgg
 	goto_if_eq VAR_RESULT, TEISHOKUYA_SHINY_MEAL_ALREADY_SHINY, PartyEatTime_EventScript_AlreadyShiny
 	goto_if_eq VAR_RESULT, TEISHOKUYA_SHINY_MEAL_NOT_ENOUGH_BP, PartyEatTime_EventScript_NotEnoughBP
+	goto_if_eq VAR_RESULT, TEISHOKUYA_SHINY_MEAL_CAN_RESTORE, PartyEatTime_EventScript_ConfirmShinyMealRestore
 	goto_if_ne VAR_RESULT, TEISHOKUYA_SHINY_MEAL_OK, PartyEatTime_EventScript_ShinyMealFailed
+	goto PartyEatTime_EventScript_PlayShinyMeal
+
+PartyEatTime_EventScript_ConfirmShinyMealRestore::
+	msgbox PartyEatTime_Text_ConfirmShinyMealRestore, MSGBOX_YESNO
+	goto_if_ne VAR_RESULT, YES, PartyEatTime_EventScript_Cancel
+	closemessage
+	goto PartyEatTime_EventScript_PlayShinyMeal
+
+PartyEatTime_EventScript_PlayShinyMeal::
 	special BufferMonNickname
 	fadescreen FADE_TO_BLACK
 	playse SE_BIKE_BELL
 	waitse
 	special Special_TeishokuyaPlayShinyMealScene
+	goto_if_eq VAR_RESULT, TEISHOKUYA_SHINY_MEAL_RESTORED, PartyEatTime_EventScript_ShinyMealRestored
 	goto_if_ne VAR_RESULT, TEISHOKUYA_SHINY_MEAL_OK, PartyEatTime_EventScript_ShinyMealFailed
 	special Special_RefreshPartyRoamerMons
 	msgbox PartyEatTime_Text_ShinyMealDone, MSGBOX_DEFAULT
+	release
+	end
+
+PartyEatTime_EventScript_ShinyMealRestored::
+	special Special_RefreshPartyRoamerMons
+	msgbox PartyEatTime_Text_ShinyMealRestored, MSGBOX_DEFAULT
 	release
 	end
 
@@ -214,7 +231,11 @@ PartyEatTime_Text_NotEnoughBP:
 	.string "{JPN}BPが たりねえぞ$"
 
 PartyEatTime_Text_AlreadyShiny:
-	.string "{JPN}そいつは もう 色違いだぞ$"
+	.string "{JPN}そいつは もとから 色違いだぞ$"
+
+PartyEatTime_Text_ConfirmShinyMealRestore:
+	.string "{JPN}1BPで そいつを もとの色に\n"
+	.string "もどすか？$"
 
 PartyEatTime_Text_ShinyMealFailed:
 	.string "{JPN}すまん 今は つくれねえ\nBPは とってねえぞ$"
@@ -222,6 +243,10 @@ PartyEatTime_Text_ShinyMealFailed:
 PartyEatTime_Text_ShinyMealDone:
 	.string "{JPN}{STR_VAR_1}は\n"
 	.string "色違いに なった!$"
+
+PartyEatTime_Text_ShinyMealRestored:
+	.string "{JPN}{STR_VAR_1}は\n"
+	.string "もとの色に もどった!$"
 
 PartyEatTime_Text_Cancel:
 	.string "{JPN}やめる$"
