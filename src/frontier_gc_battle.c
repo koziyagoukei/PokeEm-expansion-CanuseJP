@@ -2202,7 +2202,7 @@ static const struct LabFixture sLabFixtures[] = {
     // M4-B1b, V19 (docs/items.md 12): consumable items, used up when they act.
     [65] = {BATTLE_FORMAT_SINGLE, 2, TRUE, {  // Sitrus after a hit, Lum against Thunder Wave, Focus Sash (sand)
         {LMI(LUM_BERRY, SNORLAX, 0, 40, 100, 0, MOVE_BODY_SLAM), LMI(SITRUS_BERRY, RAICHU, 0, 40, 60, 0, MOVE_THUNDERBOLT)},
-        {LMI(SITRUS_BERRY, JOLTEON, 0, 40, 55, 0, MOVE_THUNDER_WAVE), LMI(FOCUS_SASH, TYRANITAR, 0, 15, 100, 0, MOVE_ROCK_SLIDE)}},
+        {LMI(SITRUS_BERRY, JOLTEON, 0, 40, 100, 0, MOVE_THUNDER_WAVE), LMI(FOCUS_SASH, TYRANITAR, 0, 8, 100, 0, MOVE_ROCK_SLIDE)}},
         BATTLE_APP_VERSION_CONSUMABLE_ITEMS, 0},
     [66] = {BATTLE_FORMAT_DOUBLE, 3, TRUE, {  // a spread hit, then Focus Sash; Chesto against Hypnosis, Pecha against Toxic
         {LMI(ORAN_BERRY, TYRANITAR, 0, 40, 70, 0, MOVE_ROCK_SLIDE), LMI(CHESTO_BERRY, SNORLAX, 0, 40, 100, 0, MOVE_BODY_SLAM),
@@ -2224,7 +2224,7 @@ static const struct LabFixture sLabFixtures[] = {
         BATTLE_APP_VERSION_CONSUMABLE_ITEMS, 0},
     [69] = {BATTLE_FORMAT_SINGLE, 2, TRUE, {  // L65 with Life Orb (not simulated): every item off, same seed
         {LMI(LUM_BERRY, SNORLAX, 0, 40, 100, 0, MOVE_BODY_SLAM), LMI(SITRUS_BERRY, RAICHU, 0, 40, 60, 0, MOVE_THUNDERBOLT)},
-        {LMI(SITRUS_BERRY, JOLTEON, 0, 40, 55, 0, MOVE_THUNDER_WAVE), LMI(LIFE_ORB, TYRANITAR, 0, 15, 100, 0, MOVE_ROCK_SLIDE)}},
+        {LMI(SITRUS_BERRY, JOLTEON, 0, 40, 100, 0, MOVE_THUNDER_WAVE), LMI(LIFE_ORB, TYRANITAR, 0, 8, 100, 0, MOVE_ROCK_SLIDE)}},
         BATTLE_APP_VERSION_CONSUMABLE_ITEMS, 65},
     [70] = {BATTLE_FORMAT_SINGLE, 1, FALSE, {  // Cud Chew (not simulated) holding Sitrus Berry: every item off
         {LMI(SITRUS_BERRY, FARIGIRAF, 0, 40, 60, 0, MOVE_TACKLE)},
