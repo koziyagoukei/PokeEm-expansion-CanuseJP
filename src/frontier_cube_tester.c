@@ -10,12 +10,12 @@
 // modifier records PoC), 8 = m4p-dev (M4-P shared modifiers, request V14 fixed
 // point), 9 = m4w-dev (M4-W weather, request V15), 10 = m4t-dev (M4-T
 // terrain, request V16), 11 = m4b0-dev (M4-B0 held items, request V17), 12 =
-// m4b1a-dev (M4-B1a end-of-turn items, request V18); 2 to 12 are development
-// builds only.
+// m4b1a-dev (M4-B1a end-of-turn items, request V18), 13 = m4b1b-dev (M4-B1b
+// consumable items, request V19); 2 to 13 are development builds only.
 #include "global.h"
 #include "gc_extension.h"
 
 u16 GcExtension_GetRelease(void)
 {
-    return 12;
+    return 13;
 }

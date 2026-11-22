@@ -446,12 +446,20 @@ const char *battle_item_kind_name(uint8_t kind) {
     case BITEM_WEATHER_TURNS: return "weather turns";
     case BITEM_TERRAIN_TURNS: return "terrain turns";
     case BITEM_HP: return "hp";
+    case BITEM_CURE: return "cure";
+    case BITEM_ENDURE: return "endure";
     default: return "unknown";
     }
 }
 
+// V19 consumable records: the status mask may name BST_SLEEP .. BST_FROSTBITE.
+#define BIRS_STATUS_ALL ((uint8_t)(((1u << (BST_FROSTBITE + 1)) - 1u) & ~1u))
+
 static bool item_record_valid(const BattleItemRecord *x, unsigned types, uint8_t version) {
-    if (x->flags) return false;
+    const bool v19 = version >= BATTLE_REQUEST_VERSION_CONSUMABLE_ITEMS;
+    // V19: BIREC_CONSUMED on the records that can use the item up; no other flag.
+    const bool consumable = x->kind == BITEM_HP || x->kind == BITEM_CURE || x->kind == BITEM_ENDURE;
+    if (x->flags & ~(v19 && consumable ? BIREC_CONSUMED : 0u)) return false;
     switch (x->kind) {
     case BITEM_MODIFIER: return battle_modifier_valid(&x->mod, types, BMSRC_ITEM, version);
     case BITEM_WEATHER_TURNS:
@@ -459,14 +467,22 @@ static bool item_record_valid(const BattleItemRecord *x, unsigned types, uint8_t
     case BITEM_TERRAIN_TURNS:
         return x->arg0 && !(x->arg0 & ~BTERRAIN_ALL) && !x->arg1 && x->arg2 && x->arg2 <= BTERRAIN_MAX_TURNS;
     case BITEM_HP:  // V18: one timing, a heal or damage, a holder predicate
-        if (version < BATTLE_REQUEST_VERSION_END_TURN_ITEMS || x->hp.timing != BITIME_END_TURN ||
-            (x->hp.op != BIHP_HEAL && x->hp.op != BIHP_DAMAGE) || !x->hp.divisor || x->hp.reserved)
-            return false;
+        if (version < BATTLE_REQUEST_VERSION_END_TURN_ITEMS || !x->hp.divisor || x->hp.reserved) return false;
+        if (x->hp.timing == BITIME_HP_THRESHOLD)  // V19: a heal at a threshold (Oran / Sitrus Berry)
+            return v19 && (x->hp.op == BIHP_HEAL || x->hp.op == BIHP_HEAL_FIXED) &&
+                   x->hp.pred.kind == BPRED_HP_AT_MOST && x->hp.pred.arg >= 1;
+        if (x->hp.timing != BITIME_END_TURN || (x->hp.op != BIHP_HEAL && x->hp.op != BIHP_DAMAGE)) return false;
         switch (x->hp.pred.kind) {
         case BPRED_NONE: return !x->hp.pred.arg;
         case BPRED_HAS_TYPE: return x->hp.pred.arg < types;
         default: return false;
         }
+    case BITEM_CURE:  // V19: the conditions a status check cures
+        return v19 && x->cure.timing == BITIME_STATUS && (x->cure.status || x->cure.volatiles) &&
+               !(x->cure.status & ~BIRS_STATUS_ALL) && !(x->cure.volatiles & ~BIVOL_ALL);
+    case BITEM_ENDURE:  // V19: survive a lethal hit at full HP
+        return v19 && x->endure.timing == BITIME_LETHAL_HIT && x->endure.condition == BIEND_FULL_HP &&
+               !x->endure.reserved;
     default: return false;  // unknown kinds are refused, never ignored
     }
 }
@@ -484,9 +500,12 @@ bool battle_item_valid(const BattleItem *it, uint16_t held_item, unsigned types,
     }
     if (!held_item || !it->count || it->count > BATTLE_MAX_ITEM_RECORDS) return false;
     uint8_t weather = 0, terrain = 0;
+    unsigned cures = 0, endures = 0;
     for (unsigned i = 0; i < it->count; ++i) {
         const BattleItemRecord *x = &it->records[i];
         if (!item_record_valid(x, types, version)) return false;
+        // V19: one cure and one endure record at most (two would contradict each other).
+        if ((x->kind == BITEM_CURE && ++cures > 1) || (x->kind == BITEM_ENDURE && ++endures > 1)) return false;
         uint8_t *seen = x->kind == BITEM_WEATHER_TURNS ? &weather : x->kind == BITEM_TERRAIN_TURNS ? &terrain : NULL;
         if (seen) {
             if (*seen & x->arg0) return false;

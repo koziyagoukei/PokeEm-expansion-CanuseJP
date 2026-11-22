@@ -1531,6 +1531,62 @@ static BattleItemRecord ItemModifier(BattleModifier mod)
     return x;
 }
 
+// Request V19 consumable items (gba-gc-extension docs/items.md section 12),
+// from this build's ItemBattleEffects: the HP berries (ItemHealHp) and the
+// status berries (TryCure*), each used up when it acts. Every other berry
+// (stat, pinch, type-resist, confusion-heal, Leppa ...) stays UNSUPPORTED.
+static bool8 ConsumableItemsEnabled(void)
+{
+    return sBattle->roster >= BATTLE_APP_VERSION_CONSUMABLE_ITEMS;
+}
+
+// HasEnoughHpToEatBerry(battler, ability, 2, item): HP at most max HP / 2.
+#define ITEM_BERRY_HP_FRACTION 2
+
+static void ResolveConsumable(u16 item, BattleItem *it)
+{
+    const u32 param = GetItemHoldEffectParam(item);
+    BattleItemRecord x = {.flags = BIREC_CONSUMED};
+    switch (GetItemHoldEffect(item))
+    {
+    // ItemHealHp: a fixed amount (Oran Berry), or max HP * percent / 100
+    // (Sitrus Berry), which is max HP / (100 / percent) when that divides 100.
+    case HOLD_EFFECT_RESTORE_HP:
+    case HOLD_EFFECT_RESTORE_PCT_HP:
+        if (param == 0 || param > 255
+         || (GetItemHoldEffect(item) == HOLD_EFFECT_RESTORE_PCT_HP && (param > 100 || 100 % param != 0)))
+            return;
+        x.kind = BITEM_HP;
+        x.hp.timing = BITIME_HP_THRESHOLD;
+        x.hp.op = GetItemHoldEffect(item) == HOLD_EFFECT_RESTORE_HP ? BIHP_HEAL_FIXED : BIHP_HEAL;
+        x.hp.divisor = GetItemHoldEffect(item) == HOLD_EFFECT_RESTORE_HP ? param : 100 / param;
+        x.hp.pred = (BattlePredicate){BPRED_HP_AT_MOST, ITEM_BERRY_HP_FRACTION};
+        break;
+    // TryCureParalysis / TryCurePoison (and bad poison) / TryCureBurn /
+    // TryCureFreezeOrFrostbite / TryCureSleep / TryCureConfusion /
+    // TryCureAnyStatus (every status, then confusion).
+    case HOLD_EFFECT_CURE_PAR:       x.cure.status = 1u << BST_PARALYSIS; break;
+    case HOLD_EFFECT_CURE_PSN:       x.cure.status = 1u << BST_POISON | 1u << BST_TOXIC; break;
+    case HOLD_EFFECT_CURE_BRN:       x.cure.status = 1u << BST_BURN; break;
+    case HOLD_EFFECT_CURE_FRZ:       x.cure.status = 1u << BST_FREEZE | 1u << BST_FROSTBITE; break;
+    case HOLD_EFFECT_CURE_SLP:       x.cure.status = 1u << BST_SLEEP; break;
+    case HOLD_EFFECT_CURE_CONFUSION: x.cure.volatiles = BIVOL_CONFUSION; break;
+    case HOLD_EFFECT_CURE_STATUS:
+        x.cure.status = 1u << BST_POISON | 1u << BST_TOXIC | 1u << BST_BURN | 1u << BST_PARALYSIS
+                      | 1u << BST_SLEEP | 1u << BST_FREEZE | 1u << BST_FROSTBITE;
+        x.cure.volatiles = BIVOL_CONFUSION;
+        break;
+    default:
+        return;
+    }
+    if (x.kind != BITEM_HP)
+    {
+        x.kind = BITEM_CURE;
+        x.cure.timing = BITIME_STATUS;
+    }
+    AddItemRecord(it, x);
+}
+
 static BattleItem ResolveItem(u16 item, u16 species)
 {
     BattleItem it = {.cls = BICLASS_UNSUPPORTED, .source = item};
@@ -1543,10 +1599,17 @@ static BattleItem ResolveItem(u16 item, u16 species)
         it.cls = BICLASS_NONE;
         return it;
     }
-    // Berries are consumed (M4-B1); the e-Reader Enigma Berry comes from the save.
-    if (item >= ITEMS_COUNT || item == ITEM_ENIGMA_BERRY_E_READER || GetItemPocket(item) == POCKET_BERRIES
-     || ItemChangesFormInBattle(species, item))
+    // Berries are consumed: from V19 the HP and status berries of ResolveConsumable
+    // (M4-B1b); every other berry stays UNSUPPORTED. The e-Reader Enigma Berry comes
+    // from the save.
+    if (item >= ITEMS_COUNT || item == ITEM_ENIGMA_BERRY_E_READER || ItemChangesFormInBattle(species, item))
         return it;
+    if (GetItemPocket(item) == POCKET_BERRIES)
+    {
+        if (ConsumableItemsEnabled())
+            ResolveConsumable(item, &it);
+        return it;
+    }
     hold = GetItemHoldEffect(item);
     param = GetItemHoldEffectParam(item);
     if (param > 100)
@@ -1615,6 +1678,18 @@ static BattleItem ResolveItem(u16 item, u16 species)
             AddItemRecord(&it, ItemHp(BIHP_DAMAGE, ITEM_BLACK_SLUDGE_DIVISOR, BPRED_NONE, 0));
         }
         break;
+    // V19, GetAdjustedDamage: after Sturdy, a hit that would take all the HP
+    // of a holder at full HP (IsBattlerAtMaxHp) leaves 1 HP; the sash is used
+    // up (BattleScript_HangedOnMsg). Focus Band (a chance) is not this.
+    case HOLD_EFFECT_FOCUS_SASH:
+        if (ConsumableItemsEnabled())
+        {
+            BattleItemRecord x = {.kind = BITEM_ENDURE, .flags = BIREC_CONSUMED};
+            x.endure.timing = BITIME_LETHAL_HIT;
+            x.endure.condition = BIEND_FULL_HP;
+            AddItemRecord(&it, x);
+        }
+        break;
     default:
         break;
     }
@@ -1661,6 +1736,22 @@ static bool8 ItemAbility(u16 ability)
 // change its max HP (the amount); Trace, Receiver, Power of Alchemy and
 // Wandering Spirit can give the holder Magic Guard or a type changer. The GC
 // runs none of them, so such a holder turns every item off (strict: refused).
+// V19: Cud Chew eats its used-up berry again the next turn (Cmd_removeitem:
+// cudChewTimer). The GC does not, so a holder of a used-up berry with it
+// turns every item off (strict: refused).
+static bool8 ConsumableItemAbility(u16 ability, u16 item, const BattleItem *it)
+{
+    u32 i;
+    if (ability != ABILITY_CUD_CHEW || GetItemPocket(item) != POCKET_BERRIES)
+        return FALSE;
+    for (i = 0; i < it->count; i++)
+    {
+        if (it->records[i].flags & BIREC_CONSUMED)
+            return TRUE;
+    }
+    return FALSE;
+}
+
 static bool8 HpItemAbility(u16 ability, const BattleItem *it)
 {
     bool8 hp = FALSE, damage = FALSE, typed = FALSE;
@@ -1720,7 +1811,8 @@ static u8 CheckItems(const BattleRequest *r, u16 *why)
             }
             if (e[i].record.held_item)
                 held = TRUE;
-            if (ItemAbility(e[i].record.ability) || HpItemAbility(e[i].record.ability, &e[i].mon.item))
+            if (ItemAbility(e[i].record.ability) || HpItemAbility(e[i].record.ability, &e[i].mon.item)
+             || ConsumableItemAbility(e[i].record.ability, e[i].record.held_item, &e[i].mon.item))
                 ability = e[i].record.ability;
         }
     }
@@ -2107,6 +2199,41 @@ static const struct LabFixture sLabFixtures[] = {
         {LMI(RED_ORB, GROUDON, 0, 40, 100, 0, MOVE_EARTHQUAKE)},
         {LMI(SNORLIUM_Z, SNORLAX, 0, 40, 100, 0, MOVE_BODY_SLAM)}},
         BATTLE_APP_VERSION_END_TURN_ITEMS, 0},
+    // M4-B1b, V19 (docs/items.md 12): consumable items, used up when they act.
+    [65] = {BATTLE_FORMAT_SINGLE, 2, TRUE, {  // Sitrus after a hit, Lum against Thunder Wave, Focus Sash (sand)
+        {LMI(LUM_BERRY, SNORLAX, 0, 40, 100, 0, MOVE_BODY_SLAM), LMI(SITRUS_BERRY, RAICHU, 0, 40, 60, 0, MOVE_THUNDERBOLT)},
+        {LMI(SITRUS_BERRY, JOLTEON, 0, 40, 55, 0, MOVE_THUNDER_WAVE), LMI(FOCUS_SASH, TYRANITAR, 0, 15, 100, 0, MOVE_ROCK_SLIDE)}},
+        BATTLE_APP_VERSION_CONSUMABLE_ITEMS, 0},
+    [66] = {BATTLE_FORMAT_DOUBLE, 3, TRUE, {  // a spread hit, then Focus Sash; Chesto against Hypnosis, Pecha against Toxic
+        {LMI(ORAN_BERRY, TYRANITAR, 0, 40, 70, 0, MOVE_ROCK_SLIDE), LMI(CHESTO_BERRY, SNORLAX, 0, 40, 100, 0, MOVE_BODY_SLAM),
+         LMI(PECHA_BERRY, MACHAMP, 0, 40, 100, 0, MOVE_CROSS_CHOP)},
+        {LMI(SITRUS_BERRY, HYPNO, 2, 40, 60, 0, MOVE_HYPNOSIS), LMI(FOCUS_SASH, ARBOK, 0, 15, 100, 0, MOVE_TOXIC),
+         LMI(LUM_BERRY, NIDOKING, 0, 40, 100, 0, MOVE_SLUDGE_BOMB)}},
+        BATTLE_APP_VERSION_CONSUMABLE_ITEMS, 0},
+    [67] = {BATTLE_FORMAT_TRIPLE, 3, TRUE, {  // status berries against paralysis, burn and confusion
+        {LMI(RAWST_BERRY, SNORLAX, 0, 40, 100, 0, MOVE_BODY_SLAM), LMI(CHERI_BERRY, RAICHU, 0, 40, 100, 0, MOVE_THUNDERBOLT),
+         LMI(PERSIM_BERRY, MACHAMP, 0, 40, 100, 0, MOVE_CROSS_CHOP)},
+        {LMI(SITRUS_BERRY, JOLTEON, 0, 40, 60, 0, MOVE_THUNDER_WAVE), LMI(ORAN_BERRY, RAPIDASH, 1, 40, 70, 0, MOVE_WILL_O_WISP),
+         LMI(LUM_BERRY, HYPNO, 2, 40, 100, 0, MOVE_CONFUSE_RAY)}},
+        BATTLE_APP_VERSION_CONSUMABLE_ITEMS, 0},
+    [68] = {BATTLE_FORMAT_ROTATION, 3, TRUE, {  // only the front: Sitrus, Lum, Chesto, Persim across rotations
+        {LMI(SITRUS_BERRY, SNORLAX, 0, 40, 55, 0, MOVE_BODY_SLAM), LMI(LUM_BERRY, RAICHU, 0, 40, 100, 0, MOVE_THUNDERBOLT),
+         LMI(FOCUS_SASH, MACHAMP, 0, 15, 100, 0, MOVE_CROSS_CHOP)},
+        {LMI(ORAN_BERRY, TYRANITAR, 0, 40, 60, 0, MOVE_ROCK_SLIDE), LMI(PERSIM_BERRY, JOLTEON, 0, 40, 100, 0, MOVE_THUNDER_WAVE),
+         LMI(CHESTO_BERRY, HYPNO, 2, 40, 100, 0, MOVE_HYPNOSIS)}},
+        BATTLE_APP_VERSION_CONSUMABLE_ITEMS, 0},
+    [69] = {BATTLE_FORMAT_SINGLE, 2, TRUE, {  // L65 with Life Orb (not simulated): every item off, same seed
+        {LMI(LUM_BERRY, SNORLAX, 0, 40, 100, 0, MOVE_BODY_SLAM), LMI(SITRUS_BERRY, RAICHU, 0, 40, 60, 0, MOVE_THUNDERBOLT)},
+        {LMI(SITRUS_BERRY, JOLTEON, 0, 40, 55, 0, MOVE_THUNDER_WAVE), LMI(LIFE_ORB, TYRANITAR, 0, 15, 100, 0, MOVE_ROCK_SLIDE)}},
+        BATTLE_APP_VERSION_CONSUMABLE_ITEMS, 65},
+    [70] = {BATTLE_FORMAT_SINGLE, 1, FALSE, {  // Cud Chew (not simulated) holding Sitrus Berry: every item off
+        {LMI(SITRUS_BERRY, FARIGIRAF, 0, 40, 60, 0, MOVE_TACKLE)},
+        {LMI(LUM_BERRY, SNORLAX, 0, 40, 100, 0, MOVE_BODY_SLAM)}},
+        BATTLE_APP_VERSION_CONSUMABLE_ITEMS, 0},
+    [71] = {BATTLE_FORMAT_SINGLE, 1, FALSE, {  // Figy Berry (not simulated) under strict item rules: refused on the GBA
+        {LMI(FIGY_BERRY, SNORLAX, 0, 40, 100, 0, MOVE_BODY_SLAM)},
+        {LMI(SITRUS_BERRY, TYRANITAR, 0, 40, 100, 0, MOVE_ROCK_SLIDE)}},
+        BATTLE_APP_VERSION_CONSUMABLE_ITEMS, 0, BWEATHER_NONE, 0, FALSE, BTERRAIN_NONE, 0, FALSE, TRUE},
 };
 #undef LM
 #undef LMC

@@ -201,8 +201,9 @@ enum DebugMenuTypes
 #define DEBUG_NUMBER_ICON_X 210
 #define DEBUG_NUMBER_ICON_Y 50
 
-// The Utilities list carries the GC test entries (38 in Milestone 4-A).
-#define DEBUG_MAX_MENU_ITEMS 64
+// The Utilities list carries the GC test entries (38 in Milestone 4-A); the
+// GC Ability Lab list holds L01-L71 (M4-B1b).
+#define DEBUG_MAX_MENU_ITEMS 72
 #define DEBUG_MAX_SUB_MENU_LEVELS 4
 
 #define DEBUG_OPTION_CANT_BE_TOGGLED 0xFF
@@ -692,6 +693,13 @@ static const struct DebugMenuOption sDebugMenu_Actions_GcAbilityLab[] =
     { COMPOUND_STRING("{ENG}L62 V18 L58 items off"), DebugAction_GcAbilityLab, (const void *)62 },
     { COMPOUND_STRING("{ENG}L63 V18 strict Ultra Z"), DebugAction_GcAbilityLab, (const void *)63 },
     { COMPOUND_STRING("{ENG}L64 V18 Red Orb off"), DebugAction_GcAbilityLab, (const void *)64 },
+    { COMPOUND_STRING("{ENG}L65 V19 berries Single"), DebugAction_GcAbilityLab, (const void *)65 },
+    { COMPOUND_STRING("{ENG}L66 V19 berries Double"), DebugAction_GcAbilityLab, (const void *)66 },
+    { COMPOUND_STRING("{ENG}L67 V19 berries Triple"), DebugAction_GcAbilityLab, (const void *)67 },
+    { COMPOUND_STRING("{ENG}L68 V19 berries Rotation"), DebugAction_GcAbilityLab, (const void *)68 },
+    { COMPOUND_STRING("{ENG}L69 V19 L65 items off"), DebugAction_GcAbilityLab, (const void *)69 },
+    { COMPOUND_STRING("{ENG}L70 V19 Cud Chew off"), DebugAction_GcAbilityLab, (const void *)70 },
+    { COMPOUND_STRING("{ENG}L71 V19 strict Figy"), DebugAction_GcAbilityLab, (const void *)71 },
     { NULL }
 };
 STATIC_ASSERT(ARRAY_COUNT(sDebugMenu_Actions_GcAbilityLab) - 1 <= DEBUG_MAX_MENU_ITEMS, DebugGcAbilityLabMenuFits);

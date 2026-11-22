@@ -35,6 +35,7 @@ extern "C" {
 #define BATTLE_APP_VERSION_TERRAIN 16  // V15 + terrain (same state/action layout)
 #define BATTLE_APP_VERSION_ITEMS 17  // V16 + held items (same state/action layout)
 #define BATTLE_APP_VERSION_END_TURN_ITEMS 18  // V17 + end-of-turn item HP records (same layout)
+#define BATTLE_APP_VERSION_CONSUMABLE_ITEMS 19  // V18 + consumable item records (same layout)
 #define BATTLE_MODE_VERSION 1
 
 enum BattleFormat { BATTLE_FORMAT_SINGLE = 1, BATTLE_FORMAT_DOUBLE = 2, BATTLE_FORMAT_TRIPLE = 3, BATTLE_FORMAT_ROTATION = 4 };
@@ -459,6 +460,21 @@ const char *battle_ability_kind_name(uint8_t kind);
 //       the first BITEM_HP record whose predicate holds is the item's effect
 //       there; the later ones are its alternatives (Black Sludge: heal if
 //       Poison, else damage). A heal at full HP is that effect doing nothing.
+//     V19 adds (docs/items.md section 12):
+//       BITEM_HP timing BITIME_HP_THRESHOLD: operation BIHP_HEAL (max HP / divisor)
+//         or BIHP_HEAL_FIXED (byte 3 = the HP restored, >= 1); predicate
+//         BPRED_HP_AT_MOST with arg >= 1 (HP <= max HP / arg). Checked at the
+//         holder's HP check points (12.4) while it is on the field.
+//     BITEM_CURE (V19):     1 u8 timing (BITIME_STATUS)  2 u8 major status mask (1 << BST_*, bits 1..7)
+//                          3 u8 volatile mask (BIVOL_*)  4..6 0  7 u8 flags
+//       At a status check point every condition of the masks the holder has
+//       is cured (a major status, then confusion).
+//     BITEM_ENDURE (V19):   1 u8 timing (BITIME_LETHAL_HIT)  2 u8 condition (BIEND_FULL_HP)  3..6 0  7 u8 flags
+//       A hit of a move (or a confusion self-hit) that would leave the holder
+//       with no HP while it has full HP leaves 1 HP (after Sturdy).
+//     V19 record flag BIREC_CONSUMED (BITEM_HP, BITEM_CURE, BITEM_ENDURE): the
+//     item is used up when the record acts; the Pokemon then holds nothing
+//     (no record of the item acts again in the battle).
 // A definition is the item's and never depends on its holder (no species or
 // ability of the holder is resolved into it), so it stays right if the item
 // later changes hands. NONE: no item, or an item with no battle effect in
@@ -473,6 +489,10 @@ enum BattleItemKind {
     BITEM_V17_COUNT,
     // Request V18 (docs/items.md).
     BITEM_HP = 4,             // a change of the holder's HP at a timing (`hp`)
+    BITEM_V18_COUNT,
+    // Request V19 (docs/items.md section 12).
+    BITEM_CURE = 5,           // the holder's status / confusion cured (`cure`)
+    BITEM_ENDURE = 6,         // the holder survives a lethal hit with 1 HP (`endure`)
     BITEM_COUNT
 };
 // When a BITEM_HP record acts. Each timing is one fixed point of the core's
@@ -480,9 +500,18 @@ enum BattleItemKind {
 enum BattleItemTiming {
     BITIME_NONE = 0,
     BITIME_END_TURN = 1,  // end of turn, the holder's first block: after its terrain heal and Shed Skin
+    BITIME_V18_COUNT,
+    // V19 (docs/items.md 12.4).
+    BITIME_HP_THRESHOLD = 2,  // the holder's HP check points: after its HP falls, on entry
+    BITIME_STATUS = 3,        // the holder's status check points: a status given, a move's end, on entry
+    BITIME_LETHAL_HIT = 4,    // a hit that would leave the holder with no HP
     BITIME_COUNT
 };
-enum BattleItemHpOperation { BIHP_NONE = 0, BIHP_HEAL = 1, BIHP_DAMAGE = 2, BIHP_COUNT };
+enum BattleItemHpOperation { BIHP_NONE = 0, BIHP_HEAL = 1, BIHP_DAMAGE = 2, BIHP_HEAL_FIXED = 3, BIHP_COUNT };
+#define BIVOL_CONFUSION 0x01u   // BITEM_CURE volatile mask: confusion
+#define BIVOL_ALL BIVOL_CONFUSION
+#define BIEND_FULL_HP 1         // BITEM_ENDURE condition: the holder has full HP
+#define BIREC_CONSUMED 0x01u    // V19 record flag: the item is used up when the record acts
 #define BATTLE_ITEM_HEADER_BYTES 4
 #define BATTLE_ITEM_RECORD_BYTES 8
 #define BATTLE_MAX_ITEM_RECORDS 4
@@ -496,6 +525,8 @@ typedef struct {
             BattlePredicate pred;              // on the holder
             uint8_t reserved;                  // 0
         } hp;                                  // BITEM_HP (V18)
+        struct { uint8_t timing, status, volatiles; } cure;      // BITEM_CURE (V19)
+        struct { uint8_t timing, condition, reserved; } endure;  // BITEM_ENDURE (V19)
     };
     uint8_t flags;  // 0 (reserved)
 } BattleItemRecord;
@@ -550,7 +581,8 @@ typedef struct {
 #define BATTLE_REQUEST_VERSION_TERRAIN 16  // V15 + terrain rules after the field rules (docs/terrain.md)
 #define BATTLE_REQUEST_VERSION_ITEMS 17  // V16 + item blocks after the ability blocks (docs/items.md)
 #define BATTLE_REQUEST_VERSION_END_TURN_ITEMS 18  // V17 + BITEM_HP records (same layout, docs/items.md)
-#define BATTLE_REQUEST_VERSION_LATEST BATTLE_REQUEST_VERSION_END_TURN_ITEMS
+#define BATTLE_REQUEST_VERSION_CONSUMABLE_ITEMS 19  // V18 + consumable records (same layout, docs/items.md 12)
+#define BATTLE_REQUEST_VERSION_LATEST BATTLE_REQUEST_VERSION_CONSUMABLE_ITEMS
 #define BATTLE_REQUEST_HEADER 24
 enum StruggleRecoil { BSTRUGGLE_MAX_HP_FLOOR = 1, BSTRUGGLE_MAX_HP_NEAREST = 2 };
 #define BATTLE_MOVE_STRUGGLE 0xffffu  // logical presentation identifier
