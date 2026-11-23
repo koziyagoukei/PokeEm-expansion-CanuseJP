@@ -2234,6 +2234,12 @@ static const struct LabFixture sLabFixtures[] = {
         {LMI(FIGY_BERRY, SNORLAX, 0, 40, 100, 0, MOVE_BODY_SLAM)},
         {LMI(SITRUS_BERRY, TYRANITAR, 0, 40, 100, 0, MOVE_ROCK_SLIDE)}},
         BATTLE_APP_VERSION_CONSUMABLE_ITEMS, 0, BWEATHER_NONE, 0, FALSE, BTERRAIN_NONE, 0, FALSE, TRUE},
+    // ACT-002 (M4-B1b repair, docs/battle-reference): a turn lost to recharging
+    // ends with the move end's item checks.
+    [72] = {BATTLE_FORMAT_SINGLE, 1, TRUE, {  // Solar Power leaves Sitrus due; it acts after the recharge, before the foe
+        {LMI(SITRUS_BERRY, CHARIZARD, 2, 40, 60, 0, MOVE_HYPER_BEAM)},
+        {LMI(NONE, SNORLAX, 0, 40, 100, 0, MOVE_SUNNY_DAY)}},
+        BATTLE_APP_VERSION_CONSUMABLE_ITEMS, 0, BWEATHER_SUN, 0},
 };
 #undef LM
 #undef LMC
