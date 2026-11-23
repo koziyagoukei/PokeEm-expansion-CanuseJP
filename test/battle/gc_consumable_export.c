@@ -109,7 +109,7 @@ TEST("GC V19 export: HP berries, status berries and Focus Sash as records used u
     }
 }
 
-TEST("GC V19 export: every other berry and Berry Juice stay unsupported")
+TEST("GC V19 export: every other berry and Berry Juice stay unsupported, and every berry before V19")
 {
     struct FrontierGcExportResult r;
     u32 berries = 0;
@@ -137,6 +137,13 @@ TEST("GC V19 export: every other berry and Berry Juice stay unsupported")
             EXPECT_EQ(r.itemState, FGC_ITEMS_OFF_ITEM);
             EXPECT_EQ(r.itemReason, item);
         }
+        TRY_FREE_AND_SET_NULL(r.request);
+        // Before V19 every berry is unsupported, even one with no hold effect (Razz Berry):
+        // it never reaches the hold-effect switch, where HOLD_EFFECT_NONE means no item.
+        ExportOne(&r, V18, SPECIES_WOBBUFFET, 0, item, FALSE);
+        EXPECT(r.built);
+        EXPECT_EQ(r.itemState, FGC_ITEMS_OFF_ITEM);
+        EXPECT_EQ(r.itemReason, item);
         TRY_FREE_AND_SET_NULL(r.request);
     }
     EXPECT_EQ(berries, 9);

@@ -727,3 +727,100 @@ SINGLE_BATTLE_TEST("GC V19 reference: a fully paralysed Pokemon's turn still end
         ANIMATION(ANIM_TYPE_MOVE, MOVE_CELEBRATE, player);
     }
 }
+
+// Added after the GC mutation run (docs/items.md 12.7): orders the GC follows
+// that no case above fixed.
+SINGLE_BATTLE_TEST("GC V19 reference: a multi-hit move into Rough Skin: the attacker's berry, then the target's, between the hits")
+{
+    GIVEN {
+        ASSUME(GetMoveStrikeCount(MOVE_DOUBLE_KICK) == 2);
+        ASSUME(MoveMakesContact(MOVE_DOUBLE_KICK));
+        PLAYER(SPECIES_WOBBUFFET) { MaxHP(160); HP(90); Speed(100); Item(ITEM_SITRUS_BERRY); }
+        OPPONENT(SPECIES_CARVANHA) { Ability(ABILITY_ROUGH_SKIN); MaxHP(200); HP(101); Speed(50); Item(ITEM_SITRUS_BERRY); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_DOUBLE_KICK); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_DOUBLE_KICK, player);
+        HP_BAR(opponent);
+        ABILITY_POPUP(opponent, ABILITY_ROUGH_SKIN);
+        HP_BAR(player, damage: 20);
+        BERRY(player);
+        HP_BAR(player, damage: -40);
+        BERRY(opponent);
+        HP_BAR(opponent, damage: -50);
+        HP_BAR(opponent);
+    }
+}
+
+SINGLE_BATTLE_TEST("GC V19 reference: a knock-out with recoil: the attacker's berry, then Moxie")
+{
+    GIVEN {
+        ASSUME(GetMoveRecoil(MOVE_TAKE_DOWN) == 25);
+        PLAYER(SPECIES_SALAMENCE) { Ability(ABILITY_MOXIE); MaxHP(40); HP(21); Speed(100); Item(ITEM_SITRUS_BERRY); }
+        OPPONENT(SPECIES_WOBBUFFET) { HP(1); Speed(50); }
+        OPPONENT(SPECIES_WYNAUT) { Speed(10); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_TAKE_DOWN); SEND_OUT(opponent, 1); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_TAKE_DOWN, player);
+        HP_BAR(opponent);
+        HP_BAR(player, damage: 1);
+        BERRY(player);
+        HP_BAR(player, damage: -10);
+        ABILITY_POPUP(player, ABILITY_MOXIE);
+    }
+}
+
+SINGLE_BATTLE_TEST("GC V19 reference: a confusing contact hit into Rough Skin: the target's Persim Berry, then the attacker's berry")
+{
+    GIVEN {
+        ASSUME(MoveMakesContact(MOVE_DIZZY_PUNCH));
+        ASSUME(MoveHasAdditionalEffect(MOVE_DIZZY_PUNCH, MOVE_EFFECT_CONFUSION));
+        PLAYER(SPECIES_WOBBUFFET) { MaxHP(160); HP(85); Speed(100); Item(ITEM_SITRUS_BERRY); }
+        OPPONENT(SPECIES_CARVANHA) { Ability(ABILITY_ROUGH_SKIN); Speed(50); Item(ITEM_PERSIM_BERRY); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_DIZZY_PUNCH, WITH_RNG(RNG_SECONDARY_EFFECT, TRUE)); MOVE(opponent, MOVE_CELEBRATE); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_DIZZY_PUNCH, player);
+        ANIMATION(ANIM_TYPE_STATUS, B_ANIM_STATUS_CONFUSION, opponent);
+        ABILITY_POPUP(opponent, ABILITY_ROUGH_SKIN);
+        BERRY(opponent);
+        BERRY(player);
+        HP_BAR(player, damage: -40);
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_CELEBRATE, opponent);
+    } THEN {
+        EXPECT(opponent->volatiles.confusionTimer == 0);
+    }
+}
+
+SINGLE_BATTLE_TEST("GC V19 reference: Focus Sash holds, then the hit's paralysis")
+{
+    GIVEN {
+        ASSUME(MoveHasAdditionalEffect(MOVE_THUNDER_PUNCH, MOVE_EFFECT_PARALYSIS));
+        PLAYER(SPECIES_MACHAMP) { Level(100); Speed(100); }
+        OPPONENT(SPECIES_WOBBUFFET) { MaxHP(20); HP(20); Speed(50); Item(ITEM_FOCUS_SASH); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_THUNDER_PUNCH, WITH_RNG(RNG_SECONDARY_EFFECT, TRUE)); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_THUNDER_PUNCH, player);
+        HP_BAR(opponent);
+        SASH(opponent);
+        STATUS_ICON(opponent, paralysis: TRUE);
+    } THEN {
+        EXPECT_EQ(opponent->hp, 1);
+    }
+}
+
+SINGLE_BATTLE_TEST("GC V19 reference: battle start: a lead's own entry ability, then its own berry")
+{
+    GIVEN {
+        PLAYER(SPECIES_GYARADOS) { Ability(ABILITY_INTIMIDATE); MaxHP(200); HP(100); Speed(100); Item(ITEM_SITRUS_BERRY); }
+        OPPONENT(SPECIES_WOBBUFFET) { Speed(50); }
+    } WHEN {
+        TURN {}
+    } SCENE {
+        ABILITY_POPUP(player, ABILITY_INTIMIDATE);
+        BERRY(player);
+        HP_BAR(player, damage: -50);
+    }
+}
