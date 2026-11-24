@@ -70,6 +70,7 @@ void FrontierGcBattle_TestExport(const struct FrontierGcExportTest *test, struct
 void FrontierGcBattle_TestExportFixture(u8 lab, u8 roster, u8 format, bool8 endurance, u16 trainer,
                                         struct FrontierGcExportResult *result);
 u8 FrontierGcBattle_TestLabCount(void);
+void FrontierGcBattle_TestResolveAbility(u8 roster, u16 ability, BattleAbility *out);
 void FrontierGcBattle_TestSetLegacyExport(bool8 legacy);  // TRUE: as M4-B1a (no move flags, no gimmick items)
 #endif
 

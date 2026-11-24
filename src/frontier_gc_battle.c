@@ -3876,6 +3876,17 @@ u8 FrontierGcBattle_TestLabCount(void)
     return LAB_FIXTURE_COUNT;
 }
 
+// test/battle/gc_ability_hooks_export.c: the ability block a request of `roster` gives `ability`.
+void FrontierGcBattle_TestResolveAbility(u8 roster, u16 ability, BattleAbility *out)
+{
+    struct FrontierGcBattle *saved = sBattle;
+    sBattle = AllocZeroed(sizeof(*sBattle));
+    sBattle->roster = roster;
+    *out = ResolveAbility(ability);
+    Free(sBattle);
+    sBattle = saved;
+}
+
 void FrontierGcBattle_TestSetLegacyExport(bool8 legacy)
 {
     sTestLegacyExport = legacy;
