@@ -428,13 +428,39 @@ bool battle_ability_hook_valid(const BattleAbilityHook *h, unsigned types, uint8
     return ok;
 }
 
+static const BattleAbilityHook *first_hook(const BattleAbility *a, uint8_t kind) {
+    for (unsigned i = 0; i < a->count; ++i)
+        if (a->hooks[i].kind == kind) return &a->hooks[i];
+    return NULL;
+}
+
+// A hook list the core runs in full (docs/abilities.md "Hook sets", ABL-G05).
+// The core reads some kinds as alternatives for one event, so a hook that an
+// earlier alternative always pre-empts would be accepted and never run:
+// - CONTACT_STATUS and CONTACT_DAMAGE: one contact reaction per hit, the status
+//   (also when it cannot be set), so the pair is refused.
+// - TYPE_ABSORB, ABSORB_STATE, TYPE_IMMUNE of one type, tried in that order:
+//   the first that applies decides the move; a later one of the same type is
+//   refused unless the earlier can be skipped (ABSORB_STATE with NOT_FROZEN).
+// Several hooks of one kind keep the V12 rule (the first hook of the kind, or
+// every hook for the kinds the core loops over) and stay accepted.
+static bool hooks_reachable(const BattleAbility *a) {
+    if (first_hook(a, BABIL_CONTACT_STATUS) && first_hook(a, BABIL_CONTACT_DAMAGE)) return false;
+    const BattleAbilityHook *absorb = first_hook(a, BABIL_TYPE_ABSORB), *state = first_hook(a, BABIL_ABSORB_STATE),
+                            *immune = first_hook(a, BABIL_TYPE_IMMUNE);
+    if (absorb && state && absorb->arg0 == state->arg0) return false;
+    if (absorb && immune && absorb->arg0 == immune->arg0) return false;
+    if (state && immune && state->arg0 == immune->arg0 && !(state->flags & BAHF_NOT_FROZEN)) return false;
+    return true;
+}
+
 bool battle_ability_valid(const BattleAbility *a, unsigned types, uint8_t version) {
     if (a->cls == BACLASS_NONE || a->cls == BACLASS_UNSUPPORTED) return a->count == 0;
     if (a->cls != BACLASS_HOOKS || !a->count || a->count > BATTLE_MAX_ABILITY_HOOKS) return false;
     if (version < BATTLE_REQUEST_VERSION_ABILITY_HOOKS && a->count != 1) return false;
     for (unsigned i = 0; i < a->count; ++i)
         if (!battle_ability_hook_valid(&a->hooks[i], types, version)) return false;
-    return true;
+    return hooks_reachable(a);
 }
 
 // ------------------------------------------------------- V17 / V18 held items
