@@ -36,6 +36,7 @@ extern "C" {
 #define BATTLE_APP_VERSION_ITEMS 17  // V16 + held items (same state/action layout)
 #define BATTLE_APP_VERSION_END_TURN_ITEMS 18  // V17 + end-of-turn item HP records (same layout)
 #define BATTLE_APP_VERSION_CONSUMABLE_ITEMS 19  // V18 + consumable item records (same layout)
+#define BATTLE_APP_VERSION_MOVE_ITEMS 20  // V19 + after-move item records (same layout)
 #define BATTLE_MODE_VERSION 1
 
 enum BattleFormat { BATTLE_FORMAT_SINGLE = 1, BATTLE_FORMAT_DOUBLE = 2, BATTLE_FORMAT_TRIPLE = 3, BATTLE_FORMAT_ROTATION = 4 };
@@ -475,6 +476,13 @@ const char *battle_ability_kind_name(uint8_t kind);
 //     V19 record flag BIREC_CONSUMED (BITEM_HP, BITEM_CURE, BITEM_ENDURE): the
 //     item is used up when the record acts; the Pokemon then holds nothing
 //     (no record of the item acts again in the battle).
+//     V20 adds (docs/items.md section 14):
+//       BITEM_MODIFIER at BMOD_FINAL (the attacker's item in the final chain).
+//       BITEM_HP timing BITIME_AFTER_MOVE: operation BIHP_DAMAGE, divisor 2..255,
+//         predicate none, no BIREC_CONSUMED, at most one per item. Once per move
+//         the holder used, after Moxie and before a pivot's switch, if the move
+//         landed (a substitute hit counts) and the holder still stands.
+//       Life Orb: MODIFIER(BMOD_FINAL | BMOD_FLOORED, 130), HP(AFTER_MOVE, DAMAGE, 10).
 // A definition is the item's and never depends on its holder (no species or
 // ability of the holder is resolved into it), so it stays right if the item
 // later changes hands. NONE: no item, or an item with no battle effect in
@@ -505,6 +513,9 @@ enum BattleItemTiming {
     BITIME_HP_THRESHOLD = 2,  // the holder's HP check points: after its HP falls, on entry
     BITIME_STATUS = 3,        // the holder's status check points: a status given, a move's end, on entry
     BITIME_LETHAL_HIT = 4,    // a hit that would leave the holder with no HP
+    BITIME_V19_COUNT,
+    // V20 (docs/items.md section 14).
+    BITIME_AFTER_MOVE = 5,    // once after a move the holder used (MOVEEND_LIFE_ORB_SHELL_BELL)
     BITIME_COUNT
 };
 enum BattleItemHpOperation { BIHP_NONE = 0, BIHP_HEAL = 1, BIHP_DAMAGE = 2, BIHP_HEAL_FIXED = 3, BIHP_COUNT };
@@ -582,7 +593,8 @@ typedef struct {
 #define BATTLE_REQUEST_VERSION_ITEMS 17  // V16 + item blocks after the ability blocks (docs/items.md)
 #define BATTLE_REQUEST_VERSION_END_TURN_ITEMS 18  // V17 + BITEM_HP records (same layout, docs/items.md)
 #define BATTLE_REQUEST_VERSION_CONSUMABLE_ITEMS 19  // V18 + consumable records (same layout, docs/items.md 12)
-#define BATTLE_REQUEST_VERSION_LATEST BATTLE_REQUEST_VERSION_CONSUMABLE_ITEMS
+#define BATTLE_REQUEST_VERSION_MOVE_ITEMS 20  // V19 + final-stage item modifiers, after-move HP records (same layout, docs/items.md 14)
+#define BATTLE_REQUEST_VERSION_LATEST BATTLE_REQUEST_VERSION_MOVE_ITEMS
 #define BATTLE_REQUEST_HEADER 24
 enum StruggleRecoil { BSTRUGGLE_MAX_HP_FLOOR = 1, BSTRUGGLE_MAX_HP_NEAREST = 2 };
 #define BATTLE_MOVE_STRUGGLE 0xffffu  // logical presentation identifier

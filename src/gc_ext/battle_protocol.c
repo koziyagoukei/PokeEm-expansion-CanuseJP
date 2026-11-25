@@ -101,14 +101,16 @@ static bool predicate_valid(BattlePredicate p, uint8_t stage, unsigned types, ui
 }
 
 // The stages a record of each source may use.
-static bool stage_allowed(uint8_t stage, uint8_t source, bool v16) {
+static bool stage_allowed(uint8_t stage, uint8_t source, uint8_t version) {
+    const bool v16 = version >= BATTLE_REQUEST_VERSION_TERRAIN, v20 = version >= BATTLE_REQUEST_VERSION_MOVE_ITEMS;
     switch (source) {
     case BMSRC_MOVE: return damage_stage(stage);
     case BMSRC_ABILITY: return damage_stage(stage) || stage == BMOD_SPEED || stage == BMOD_ACCURACY;
     case BMSRC_FIELD: return stage == BMOD_WEATHER || stage == BMOD_DEFENSE || (v16 && stage == BMOD_POWER);
-    // V17: the power of the holder's moves (where the game applies the attacker's item); the
-    // other stages are added with the items that need them.
-    case BMSRC_ITEM: return stage == BMOD_POWER;
+    // V17: the power of the holder's moves (where the game applies the attacker's item);
+    // V20: the final chain too (GetAttackerItemsModifier, Life Orb). The other stages
+    // are added with the items that need them.
+    case BMSRC_ITEM: return stage == BMOD_POWER || (v20 && stage == BMOD_FINAL);
     default: return false;
     }
 }
@@ -129,7 +131,7 @@ bool battle_modifier_valid(const BattleModifier *mod, unsigned types, uint8_t so
     if (stage == BMOD_NONE || stage >= (v15 ? BMOD_COUNT : BMOD_V14_COUNT) || category > BCAT_SPECIAL) return false;
     if (source == BMSRC_FIELD && !v15) return false;
     if (source == BMSRC_ITEM && !v17) return false;
-    if (!stage_allowed(stage, source, v16)) return false;
+    if (!stage_allowed(stage, source, version)) return false;
     const uint8_t allowed = BMOD_STAGE_MASK | BMOD_CATEGORY_MASK | (v15 ? BMOD_STAGE_HIGH : 0) |
                             (ability && stage != BMOD_SPEED ? BMODF_DEFENDER : 0) |
                             (v17 && fixed_point_stage(stage) ? BMOD_FLOORED : 0);
@@ -497,6 +499,9 @@ static bool item_record_valid(const BattleItemRecord *x, unsigned types, uint8_t
         if (x->hp.timing == BITIME_HP_THRESHOLD)  // V19: a heal at a threshold (Oran / Sitrus Berry)
             return v19 && (x->hp.op == BIHP_HEAL || x->hp.op == BIHP_HEAL_FIXED) &&
                    x->hp.pred.kind == BPRED_HP_AT_MOST && x->hp.pred.arg >= 1;
+        if (x->hp.timing == BITIME_AFTER_MOVE)  // V20: the holder's loss after its move (Life Orb)
+            return version >= BATTLE_REQUEST_VERSION_MOVE_ITEMS && x->hp.op == BIHP_DAMAGE && x->hp.divisor >= 2 &&
+                   x->hp.pred.kind == BPRED_NONE && !x->hp.pred.arg && !(x->flags & BIREC_CONSUMED);
         if (x->hp.timing != BITIME_END_TURN || (x->hp.op != BIHP_HEAL && x->hp.op != BIHP_DAMAGE)) return false;
         switch (x->hp.pred.kind) {
         case BPRED_NONE: return !x->hp.pred.arg;
@@ -526,12 +531,14 @@ bool battle_item_valid(const BattleItem *it, uint16_t held_item, unsigned types,
     }
     if (!held_item || !it->count || it->count > BATTLE_MAX_ITEM_RECORDS) return false;
     uint8_t weather = 0, terrain = 0;
-    unsigned cures = 0, endures = 0;
+    unsigned cures = 0, endures = 0, after_move = 0;
     for (unsigned i = 0; i < it->count; ++i) {
         const BattleItemRecord *x = &it->records[i];
         if (!item_record_valid(x, types, version)) return false;
         // V19: one cure and one endure record at most (two would contradict each other).
         if ((x->kind == BITEM_CURE && ++cures > 1) || (x->kind == BITEM_ENDURE && ++endures > 1)) return false;
+        // V20: one after-move HP record (the core runs the first; a second would never act).
+        if (x->kind == BITEM_HP && x->hp.timing == BITIME_AFTER_MOVE && ++after_move > 1) return false;
         uint8_t *seen = x->kind == BITEM_WEATHER_TURNS ? &weather : x->kind == BITEM_TERRAIN_TURNS ? &terrain : NULL;
         if (seen) {
             if (*seen & x->arg0) return false;
