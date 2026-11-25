@@ -1543,6 +1543,16 @@ static bool8 ConsumableItemsEnabled(void)
 // HasEnoughHpToEatBerry(battler, ability, 2, item): HP at most max HP / 2.
 #define ITEM_BERRY_HP_FRACTION 2
 
+// Request V20 after-move items (gba-gc-extension docs/items.md section 14):
+// Life Orb's final damage factor and its HP loss after the holder's move.
+static bool8 MoveItemsEnabled(void)
+{
+    return sBattle->roster >= BATTLE_APP_VERSION_MOVE_ITEMS;
+}
+
+// TryLifeOrb: GetNonDynamaxMaxHP / 10 (SetPassiveDamageAmount: at least 1).
+#define ITEM_LIFE_ORB_DIVISOR 10
+
 static void ResolveConsumable(u16 item, BattleItem *it)
 {
     const u32 param = GetItemHoldEffectParam(item);
@@ -1690,6 +1700,21 @@ static BattleItem ResolveItem(u16 item, u16 species)
             AddItemRecord(&it, x);
         }
         break;
+    // V20: GetAttackerItemsModifier gives UQ_4_12_FLOORED(1.3) in the final
+    // chain (GetOtherModifiers); TryLifeOrb at MOVEEND_LIFE_ORB_SHELL_BELL takes
+    // max HP / 10 after a move that landed. The item is kept. Magic Guard and
+    // Sheer Force change what it does: HpItemAbility.
+    case HOLD_EFFECT_LIFE_ORB:
+        if (MoveItemsEnabled())
+        {
+            BattleItemRecord x = {.kind = BITEM_HP};
+            AddItemRecord(&it, ItemModifier(MODIFIER(BMOD_FINAL | BMOD_FLOORED, 130, 0, 0, 0, 0)));
+            x.hp.timing = BITIME_AFTER_MOVE;
+            x.hp.op = BIHP_DAMAGE;
+            x.hp.divisor = ITEM_LIFE_ORB_DIVISOR;
+            AddItemRecord(&it, x);
+        }
+        break;
     default:
         break;
     }
@@ -1752,9 +1777,14 @@ static bool8 ConsumableItemAbility(u16 ability, u16 item, const BattleItem *it)
     return FALSE;
 }
 
+// V20: Sheer Force skips the after-move stage for the moves it affects
+// (MOVEEND_SHEER_FORCE jumps past MOVEEND_LIFE_ORB_SHELL_BELL), which depends
+// on each move's effects; Magic Guard stops the loss (TryLifeOrb) but not the
+// damage factor. The GC runs neither, so an after-move record's holder with
+// one of them turns every item off (strict: refused).
 static bool8 HpItemAbility(u16 ability, const BattleItem *it)
 {
-    bool8 hp = FALSE, damage = FALSE, typed = FALSE;
+    bool8 hp = FALSE, damage = FALSE, typed = FALSE, afterMove = FALSE;
     u32 i;
     for (i = 0; i < it->count; i++)
     {
@@ -1763,9 +1793,12 @@ static bool8 HpItemAbility(u16 ability, const BattleItem *it)
         hp = TRUE;
         damage |= it->records[i].hp.op == BIHP_DAMAGE;
         typed |= it->records[i].hp.pred.kind == BPRED_HAS_TYPE;
+        afterMove |= it->records[i].hp.timing == BITIME_AFTER_MOVE;
     }
     if (!hp)
         return FALSE;
+    if (afterMove && ability == ABILITY_SHEER_FORCE)
+        return TRUE;
     switch (ability)
     {
     case ABILITY_POWER_CONSTRUCT:

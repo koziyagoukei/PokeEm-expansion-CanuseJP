@@ -564,3 +564,94 @@ SINGLE_BATTLE_TEST("GC V20 reference: Life Orb: Klutz turns it off, a suppressed
         EXPECT_EQ(results[3].damage, LO(results[2].damage));
     }
 }
+
+// ---------------------------------------------------------------- M4-B1c-0b additions
+
+// Struggle: the final chain has no exception for it, so Life Orb boosts it.
+SINGLE_BATTLE_TEST("GC V20 reference: Life Orb: Struggle is boosted", s16 damage)
+{
+    enum Item item; u32 roll;
+    LO_ROLLS
+    GIVEN {
+        PLAYER(SPECIES_SNORLAX) { Level(50); Attack(100); MaxHP(300); HP(300); Speed(100); Item(item); }
+        OPPONENT(SPECIES_SNORLAX) { Level(50); Defense(100); MaxHP(999); HP(999); Speed(30); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_STRUGGLE, WITH_RNG(RNG_DAMAGE_MODIFIER, roll), criticalHit: FALSE); }
+    } SCENE {
+        HP_BAR(opponent, captureDamage: &results[i].damage);
+    } FINALLY {
+        EXPECT_LO_PAIRS();
+    }
+}
+
+// Struggle's own recoil (max HP / 4 from Gen 4) first, then the Life Orb loss.
+SINGLE_BATTLE_TEST("GC V20 reference: Life Orb: Struggle's recoil, then the loss")
+{
+    GIVEN {
+        ASSUME(B_STRUGGLE_RECOIL >= GEN_4);
+        PLAYER(SPECIES_SNORLAX) { MaxHP(300); HP(300); Speed(100); Item(ITEM_LIFE_ORB); }
+        OPPONENT(SPECIES_SNORLAX) { MaxHP(999); HP(999); Speed(30); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_STRUGGLE); }
+    } SCENE {
+        ANIMATION(ANIM_TYPE_MOVE, MOVE_STRUGGLE, player);
+        HP_BAR(opponent);
+        HP_BAR(player, damage: 75);
+        ITEM_POPUP(player, ITEM_LIFE_ORB);
+        HP_BAR(player, damage: 30);
+    } THEN {
+        EXPECT_EQ(player->hp, 195);
+    }
+}
+
+// Struggle's recoil knocks the holder out: no Life Orb.
+SINGLE_BATTLE_TEST("GC V20 reference: Life Orb: none after Struggle's recoil knocked the holder out")
+{
+    GIVEN {
+        PLAYER(SPECIES_SNORLAX) { MaxHP(300); HP(50); Speed(100); Item(ITEM_LIFE_ORB); }
+        PLAYER(SPECIES_WYNAUT) { Speed(10); }
+        OPPONENT(SPECIES_SNORLAX) { MaxHP(999); HP(999); Speed(30); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_STRUGGLE); SEND_OUT(player, 1); }
+    } SCENE {
+        HP_BAR(opponent);
+        HP_BAR(player, hp: 0);
+        NOT ITEM_POPUP(player, ITEM_LIFE_ORB);
+    }
+}
+
+// The last foe knocked out: the loss still comes (the move end runs before the battle ends).
+SINGLE_BATTLE_TEST("GC V20 reference: Life Orb: the loss after knocking out the last foe")
+{
+    GIVEN {
+        PLAYER(SPECIES_WOBBUFFET) { MaxHP(200); HP(200); Speed(100); Item(ITEM_LIFE_ORB); }
+        OPPONENT(SPECIES_SNORLAX) { MaxHP(100); HP(1); Speed(30); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_TACKLE); }
+    } SCENE {
+        HP_BAR(opponent, hp: 0);
+        ITEM_POPUP(player, ITEM_LIFE_ORB);
+        HP_BAR(player, damage: 20);
+    } THEN {
+        EXPECT_EQ(player->hp, 180);
+    }
+}
+
+// Moxie (MOVEEND_ABILITY_EFFECT_FOES_FAINTED) comes before the Life Orb stage.
+SINGLE_BATTLE_TEST("GC V20 reference: Life Orb: Moxie's boost, then the loss")
+{
+    GIVEN {
+        PLAYER(SPECIES_SALAMENCE) { Ability(ABILITY_MOXIE); MaxHP(300); HP(300); Speed(100); Item(ITEM_LIFE_ORB); }
+        OPPONENT(SPECIES_SNORLAX) { MaxHP(100); HP(1); Speed(30); }
+        OPPONENT(SPECIES_WYNAUT) { Speed(10); }
+    } WHEN {
+        TURN { MOVE(player, MOVE_TACKLE); SEND_OUT(opponent, 1); }
+    } SCENE {
+        HP_BAR(opponent, hp: 0);
+        ABILITY_POPUP(player, ABILITY_MOXIE);
+        ITEM_POPUP(player, ITEM_LIFE_ORB);
+        HP_BAR(player, damage: 30);
+    } THEN {
+        EXPECT_EQ(player->statStages[STAT_ATK], DEFAULT_STAT_STAGE + 1);
+    }
+}

@@ -7,10 +7,10 @@
 // damage, or a type reaction another of the same type always pre-empts). The
 // exporter writes none: every ability, for every roster that has abilities,
 // gives a block the GC's own validity check (the vendored codec) accepts.
-TEST("GC V19 reference: ability hooks: every exported ability is one the GC runs in full (V11-V19)")
+TEST("GC V19 reference: ability hooks: every exported ability is one the GC runs in full (V11-V20)")
 {
     u32 checked = 0, hooks = 0, multi = 0;
-    for (u32 roster = BATTLE_APP_VERSION_ABILITIES; roster <= BATTLE_APP_VERSION_CONSUMABLE_ITEMS; roster++)
+    for (u32 roster = BATTLE_APP_VERSION_ABILITIES; roster <= BATTLE_APP_VERSION_MOVE_ITEMS; roster++)
     {
         for (u32 ability = 0; ability < ABILITIES_COUNT; ability++)
         {
@@ -36,7 +36,7 @@ TEST("GC V19 reference: ability hooks: a contact status with a contact damage is
                                           {BABIL_CONTACT_DAMAGE, {{0, 0, 8, 0, 0, 0}}, 0}}};
     BattleAbility one = pair;
     one.count = 1;
-    for (u32 roster = BATTLE_APP_VERSION_ABILITY_HOOKS; roster <= BATTLE_APP_VERSION_CONSUMABLE_ITEMS; roster++)
+    for (u32 roster = BATTLE_APP_VERSION_ABILITY_HOOKS; roster <= BATTLE_APP_VERSION_MOVE_ITEMS; roster++)
     {
         EXPECT(!battle_ability_valid(&pair, NUMBER_OF_MON_TYPES, roster));
         EXPECT(battle_ability_valid(&one, NUMBER_OF_MON_TYPES, roster));
