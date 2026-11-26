@@ -2273,6 +2273,61 @@ static const struct LabFixture sLabFixtures[] = {
         {LMI(SITRUS_BERRY, CHARIZARD, 2, 40, 60, 0, MOVE_HYPER_BEAM)},
         {LMI(NONE, SNORLAX, 0, 40, 100, 0, MOVE_SUNNY_DAY)}},
         BATTLE_APP_VERSION_CONSUMABLE_ITEMS, 0, BWEATHER_SUN, 0},
+    // M4-B1c-0c, V20 (docs/items.md 15): Life Orb on the GBA -> GC path, from
+    // their own debug list (GC V20 Lab...; the list above is full). Each foe
+    // that should not act only raises its Attack.
+    [73] = {BATTLE_FORMAT_SINGLE, 2, TRUE, {  // a hit, a two-hit move, a status move, a drain
+        {LMI(LIFE_ORB, SNORLAX, 1, 50, 100, 0, MOVE_BODY_SLAM, MOVE_DOUBLE_HIT, MOVE_SWORDS_DANCE, MOVE_GIGA_DRAIN),
+         LMI(NONE, CHANSEY, 1, 50, 100, 0, MOVE_BODY_SLAM)},
+        {LMI(NONE, BLISSEY, 1, 50, 100, 0, MOVE_SWORDS_DANCE), LMI(NONE, SNORLAX, 0, 50, 100, 0, MOVE_SWORDS_DANCE)}},
+        BATTLE_APP_VERSION_MOVE_ITEMS, 0, BWEATHER_NONE, 0, FALSE, BTERRAIN_NONE, 0, FALSE, TRUE},
+    [74] = {BATTLE_FORMAT_SINGLE, 1, FALSE, {  // a Ghost that protects (and Substitute): protected hits, a miss
+        {LMI(LIFE_ORB, MACHAMP, 0, 50, 100, 0, MOVE_BODY_SLAM, MOVE_SHADOW_BALL, MOVE_ZAP_CANNON, MOVE_BULK_UP)},
+        {LMI(NONE, MISDREAVUS, 0, 70, 100, 0, MOVE_SUBSTITUTE, MOVE_PROTECT)}},
+        BATTLE_APP_VERSION_MOVE_ITEMS, 0, BWEATHER_NONE, 0, FALSE, BTERRAIN_NONE, 0, FALSE, TRUE},
+    [75] = {BATTLE_FORMAT_DOUBLE, 3, TRUE, {  // a spread hit: a Sitrus target, a foe that faints, Leftovers beside
+        {LMI(LIFE_ORB, AERODACTYL, 0, 50, 100, 0, MOVE_ROCK_SLIDE), LMI(LEFTOVERS, SNORLAX, 1, 50, 80, 0, MOVE_BODY_SLAM),
+         LMI(NONE, SNORLAX, 0, 50, 100, 0, MOVE_BODY_SLAM)},
+        {LMI(SITRUS_BERRY, SNORLAX, 0, 50, 60, 0, MOVE_SWORDS_DANCE), LMI(NONE, CHANSEY, 1, 50, 3, 0, MOVE_SWORDS_DANCE),
+         LMI(NONE, BLISSEY, 1, 50, 100, 0, MOVE_SWORDS_DANCE)}},
+        BATTLE_APP_VERSION_MOVE_ITEMS, 0, BWEATHER_NONE, 0, FALSE, BTERRAIN_NONE, 0, FALSE, TRUE},
+    [76] = {BATTLE_FORMAT_TRIPLE, 3, TRUE, {  // Rock Slide from the left, Earthquake from the centre (allies too), a foe's Life Orb
+        {LMI(LIFE_ORB, AERODACTYL, 0, 50, 100, 0, MOVE_ROCK_SLIDE), LMI(LIFE_ORB, RHYDON, 1, 50, 100, 0, MOVE_EARTHQUAKE),
+         LMI(NONE, SNORLAX, 1, 50, 100, 0, MOVE_BODY_SLAM)},
+        {LMI(NONE, SNORLAX, 0, 50, 100, 0, MOVE_SWORDS_DANCE), LMI(NONE, CHANSEY, 1, 50, 5, 0, MOVE_SWORDS_DANCE),
+         LMI(LIFE_ORB, MACHAMP, 0, 50, 100, 0, MOVE_CROSS_CHOP)}},
+        BATTLE_APP_VERSION_MOVE_ITEMS, 0, BWEATHER_NONE, 0, FALSE, BTERRAIN_NONE, 0, FALSE, TRUE},
+    [77] = {BATTLE_FORMAT_ROTATION, 3, TRUE, {  // two holders on each side; only the one that acts loses HP
+        {LMI(LIFE_ORB, SNORLAX, 1, 50, 100, 0, MOVE_BODY_SLAM), LMI(NONE, MACHAMP, 0, 50, 100, 0, MOVE_CROSS_CHOP),
+         LMI(LIFE_ORB, AERODACTYL, 0, 50, 100, 0, MOVE_ROCK_SLIDE)},
+        {LMI(LIFE_ORB, RHYDON, 1, 50, 100, 0, MOVE_ROCK_SLIDE), LMI(NONE, SNORLAX, 0, 50, 100, 0, MOVE_BODY_SLAM),
+         LMI(LIFE_ORB, BLISSEY, 1, 50, 100, 0, MOVE_SWORDS_DANCE)}},
+        BATTLE_APP_VERSION_MOVE_ITEMS, 0, BWEATHER_NONE, 0, FALSE, BTERRAIN_NONE, 0, FALSE, TRUE},
+    [78] = {BATTLE_FORMAT_SINGLE, 2, TRUE, {  // recoil + Moxie on a KO, Hyper Beam and its recharge, U-turn
+        {LMI(LIFE_ORB, SALAMENCE, 2, 50, 100, 0, MOVE_DOUBLE_EDGE, MOVE_HYPER_BEAM, MOVE_U_TURN, MOVE_DRAGON_CLAW),
+         LMI(NONE, SNORLAX, 1, 50, 100, 0, MOVE_BODY_SLAM)},
+        {LMI(NONE, SNORLAX, 0, 50, 0, 0, MOVE_SWORDS_DANCE), LMI(NONE, BLISSEY, 1, 50, 100, 0, MOVE_SWORDS_DANCE)}},
+        BATTLE_APP_VERSION_MOVE_ITEMS, 0, BWEATHER_NONE, 0, FALSE, BTERRAIN_NONE, 0, FALSE, TRUE},
+    [79] = {BATTLE_FORMAT_SINGLE, 2, TRUE, {  // the holder faints to its own Life Orb, then a replacement
+        {LMI(LIFE_ORB, SNORLAX, 1, 50, 5, 0, MOVE_BODY_SLAM), LMI(NONE, SNORLAX, 0, 50, 100, 0, MOVE_BODY_SLAM)},
+        {LMI(NONE, BLISSEY, 1, 50, 100, 0, MOVE_SWORDS_DANCE), LMI(NONE, CHANSEY, 1, 50, 100, 0, MOVE_SWORDS_DANCE)}},
+        BATTLE_APP_VERSION_MOVE_ITEMS, 0, BWEATHER_NONE, 0, FALSE, BTERRAIN_NONE, 0, FALSE, TRUE},
+    [80] = {BATTLE_FORMAT_SINGLE, 1, TRUE, {  // the last foe faints, then the holder to its Life Orb: a draw on the GC
+        {LMI(LIFE_ORB, SNORLAX, 1, 50, 5, 0, MOVE_BODY_SLAM)},
+        {LMI(NONE, SNORLAX, 0, 50, 0, 0, MOVE_SWORDS_DANCE)}},
+        BATTLE_APP_VERSION_MOVE_ITEMS, 0, BWEATHER_NONE, 0, FALSE, BTERRAIN_NONE, 0, FALSE, TRUE},
+    [81] = {BATTLE_FORMAT_SINGLE, 1, FALSE, {  // Sheer Force and Magic Guard holders (not simulated): every item off
+        {LMI(LIFE_ORB, NIDOKING, 2, 50, 100, 0, MOVE_BODY_SLAM)},
+        {LMI(LIFE_ORB, CLEFABLE, 1, 50, 100, 0, MOVE_BODY_SLAM)}},
+        BATTLE_APP_VERSION_MOVE_ITEMS, 0},
+    [82] = {BATTLE_FORMAT_SINGLE, 1, FALSE, {  // Klutz holding Life Orb under strict item rules: refused on the GBA
+        {LMI(LIFE_ORB, LOPUNNY, 1, 50, 100, 0, MOVE_BODY_SLAM)},
+        {LMI(NONE, SNORLAX, 0, 50, 100, 0, MOVE_SWORDS_DANCE)}},
+        BATTLE_APP_VERSION_MOVE_ITEMS, 0, BWEATHER_NONE, 0, FALSE, BTERRAIN_NONE, 0, FALSE, TRUE},
+    [83] = {BATTLE_FORMAT_SINGLE, 1, FALSE, {  // a Ghost behind Substitute only: a Normal move has no effect, then the substitute is hit
+        {LMI(LIFE_ORB, MACHAMP, 0, 50, 100, 0, MOVE_BODY_SLAM, MOVE_SHADOW_BALL)},
+        {LMI(NONE, MISDREAVUS, 0, 70, 100, 0, MOVE_SUBSTITUTE)}},
+        BATTLE_APP_VERSION_MOVE_ITEMS, 0, BWEATHER_NONE, 0, FALSE, BTERRAIN_NONE, 0, FALSE, TRUE},
 };
 #undef LM
 #undef LMC

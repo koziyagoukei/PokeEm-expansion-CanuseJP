@@ -202,7 +202,7 @@ enum DebugMenuTypes
 #define DEBUG_NUMBER_ICON_Y 50
 
 // The Utilities list carries the GC test entries (38 in Milestone 4-A); the
-// GC Ability Lab list holds L01-L72 (M4-B1b, ACT-002).
+// GC Ability Lab list holds L01-L72 (M4-B1b, ACT-002); L73- are in GC V20 Lab (M4-B1c-0c).
 #define DEBUG_MAX_MENU_ITEMS 72
 #define DEBUG_MAX_SUB_MENU_LEVELS 4
 
@@ -705,6 +705,24 @@ static const struct DebugMenuOption sDebugMenu_Actions_GcAbilityLab[] =
 };
 STATIC_ASSERT(ARRAY_COUNT(sDebugMenu_Actions_GcAbilityLab) - 1 <= DEBUG_MAX_MENU_ITEMS, DebugGcAbilityLabMenuFits);
 
+// M4-B1c-0c: the V20 Life Orb fixtures, a list of their own (the list above
+// is full and keeps its numbers).
+static const struct DebugMenuOption sDebugMenu_Actions_GcV20Lab[] =
+{
+    { COMPOUND_STRING("{ENG}L73 V20 Life Orb Single"), DebugAction_GcAbilityLab, (const void *)73 },
+    { COMPOUND_STRING("{ENG}L74 V20 Protect/miss"), DebugAction_GcAbilityLab, (const void *)74 },
+    { COMPOUND_STRING("{ENG}L75 V20 Life Orb Double"), DebugAction_GcAbilityLab, (const void *)75 },
+    { COMPOUND_STRING("{ENG}L76 V20 Life Orb Triple"), DebugAction_GcAbilityLab, (const void *)76 },
+    { COMPOUND_STRING("{ENG}L77 V20 Life Orb Rotation"), DebugAction_GcAbilityLab, (const void *)77 },
+    { COMPOUND_STRING("{ENG}L78 V20 recoil/Moxie/pivot"), DebugAction_GcAbilityLab, (const void *)78 },
+    { COMPOUND_STRING("{ENG}L79 V20 holder faints"), DebugAction_GcAbilityLab, (const void *)79 },
+    { COMPOUND_STRING("{ENG}L80 V20 last foe, then holder"), DebugAction_GcAbilityLab, (const void *)80 },
+    { COMPOUND_STRING("{ENG}L81 V20 Sheer Force/Magic Guard"), DebugAction_GcAbilityLab, (const void *)81 },
+    { COMPOUND_STRING("{ENG}L82 V20 strict Klutz"), DebugAction_GcAbilityLab, (const void *)82 },
+    { COMPOUND_STRING("{ENG}L83 V20 no effect/substitute"), DebugAction_GcAbilityLab, (const void *)83 },
+    { NULL }
+};
+
 static const struct DebugMenuOption sDebugMenu_Actions_Utilities[] =
 {
     { COMPOUND_STRING("{JPN}マップワープへ とぶ{ENG}..."), DebugAction_Selection_Init, &sWarpSelection },
@@ -722,6 +740,7 @@ static const struct DebugMenuOption sDebugMenu_Actions_Utilities[] =
     { COMPOUND_STRING("{JPN}しゅぞくランダムを ためす"), DebugAction_Selection_Init, &sSpeciesGeneratorSelection },
     { COMPOUND_STRING("{JPN}どうぐランダムを ためす"), DebugAction_Selection_Init, &sItemGeneratorSelection },
     { COMPOUND_STRING("{JPN}ミツルチュートリアル"),    DebugAction_ExecuteScript, Debug_EventScript_WallyTutorial },
+    { COMPOUND_STRING("{ENG}GC V20 Lab..."), DebugAction_OpenSubMenu, sDebugMenu_Actions_GcV20Lab },
     { COMPOUND_STRING("{ENG}GC Extension Mode"), DebugAction_ExecuteScript, Debug_EventScript_GcExtensionMode },
     { COMPOUND_STRING("{ENG}GC Battle (show only)"), DebugAction_ExecuteScript, Debug_EventScript_GcBattleWeak },
     { COMPOUND_STRING("{ENG}GC Battle (apply HP/PP)"), DebugAction_ExecuteScript, Debug_EventScript_GcBattleWeakApply },
