@@ -1811,9 +1811,13 @@ static bool8 ConsumableItemAbility(u16 ability, u16 item, const BattleItem *it)
 // Bell holder with it stays simulated. The ability copiers could give a
 // Shell Bell holder Sheer Force, so they turn every item off beside any
 // after-move record too (Life Orb's loss already did).
+// M4-B1c-1b-fix: Imposter copies the target's ability (Sheer Force too) on
+// entry, so a Shell Bell holder (a heal-dealt record, V21 only) with it turns
+// every item off as well; its V20 rule (a type changer) is kept for the other
+// records, Life Orb included.
 static bool8 HpItemAbility(u16 ability, const BattleItem *it)
 {
-    bool8 hp = FALSE, damage = FALSE, typed = FALSE, afterMove = FALSE;
+    bool8 hp = FALSE, damage = FALSE, typed = FALSE, afterMove = FALSE, healDealt = FALSE;
     u32 i;
     for (i = 0; i < it->count; i++)
     {
@@ -1823,6 +1827,7 @@ static bool8 HpItemAbility(u16 ability, const BattleItem *it)
         damage |= it->records[i].hp.op == BIHP_DAMAGE;
         typed |= it->records[i].hp.pred.kind == BPRED_HAS_TYPE;
         afterMove |= it->records[i].hp.timing == BITIME_AFTER_MOVE;
+        healDealt |= it->records[i].hp.op == BIHP_HEAL_DEALT;
     }
     if (!hp)
         return FALSE;
@@ -1835,10 +1840,11 @@ static bool8 HpItemAbility(u16 ability, const BattleItem *it)
         return TRUE;
     case ABILITY_MAGIC_GUARD:
         return damage;
+    case ABILITY_IMPOSTER:
+        return typed || healDealt;
     case ABILITY_COLOR_CHANGE:
     case ABILITY_PROTEAN:
     case ABILITY_LIBERO:
-    case ABILITY_IMPOSTER:
         return typed;
     case ABILITY_TRACE:
     case ABILITY_RECEIVER:
