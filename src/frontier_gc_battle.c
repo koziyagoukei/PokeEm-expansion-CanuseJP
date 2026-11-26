@@ -1553,6 +1553,13 @@ static bool8 MoveItemsEnabled(void)
 // TryLifeOrb: GetNonDynamaxMaxHP / 10 (SetPassiveDamageAmount: at least 1).
 #define ITEM_LIFE_ORB_DIVISOR 10
 
+// Request V21 (gba-gc-extension docs/shell-bell.md): the after-move heal of the
+// HP the holder's move took (Shell Bell).
+static bool8 AfterMoveHealEnabled(void)
+{
+    return sBattle->roster >= BATTLE_APP_VERSION_AFTER_MOVE_HEAL;
+}
+
 static void ResolveConsumable(u16 item, BattleItem *it)
 {
     const u32 param = GetItemHoldEffectParam(item);
@@ -1715,6 +1722,23 @@ static BattleItem ResolveItem(u16 item, u16 species)
             AddItemRecord(&it, x);
         }
         break;
+    // V21: TryShellBell at MOVEEND_LIFE_ORB_SHELL_BELL heals the HP the holder's
+    // move took (gBattleScripting.savedDmg: every target's and substitute's loss,
+    // at most the HP it had, over every hit) / GetBattlerHoldEffectParam, at
+    // least 1 (SetHealAmount), up to its max HP; nothing at max HP. The divisor
+    // is the item's own holdEffectParam (8), not the power cap above. The item
+    // is kept. Heal Block and Embargo come only from moves the GC does not run;
+    // Sheer Force and the ability copiers: HpItemAbility; Klutz: ItemAbility.
+    case HOLD_EFFECT_SHELL_BELL:
+        if (AfterMoveHealEnabled() && GetItemHoldEffectParam(item) >= 2 && GetItemHoldEffectParam(item) <= 255)
+        {
+            BattleItemRecord x = {.kind = BITEM_HP};
+            x.hp.timing = BITIME_AFTER_MOVE;
+            x.hp.op = BIHP_HEAL_DEALT;
+            x.hp.divisor = GetItemHoldEffectParam(item);
+            AddItemRecord(&it, x);
+        }
+        break;
     default:
         break;
     }
@@ -1782,6 +1806,11 @@ static bool8 ConsumableItemAbility(u16 ability, u16 item, const BattleItem *it)
 // on each move's effects; Magic Guard stops the loss (TryLifeOrb) but not the
 // damage factor. The GC runs neither, so an after-move record's holder with
 // one of them turns every item off (strict: refused).
+// V21: the same Sheer Force gate keeps Shell Bell's heal (an after-move
+// record) off its boosted moves; Magic Guard does not stop a heal, so a Shell
+// Bell holder with it stays simulated. The ability copiers could give a
+// Shell Bell holder Sheer Force, so they turn every item off beside any
+// after-move record too (Life Orb's loss already did).
 static bool8 HpItemAbility(u16 ability, const BattleItem *it)
 {
     bool8 hp = FALSE, damage = FALSE, typed = FALSE, afterMove = FALSE;
@@ -1815,7 +1844,7 @@ static bool8 HpItemAbility(u16 ability, const BattleItem *it)
     case ABILITY_RECEIVER:
     case ABILITY_POWER_OF_ALCHEMY:
     case ABILITY_WANDERING_SPIRIT:
-        return damage || typed;
+        return damage || typed || afterMove;
     default:
         return FALSE;
     }

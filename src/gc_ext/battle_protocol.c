@@ -499,9 +499,12 @@ static bool item_record_valid(const BattleItemRecord *x, unsigned types, uint8_t
         if (x->hp.timing == BITIME_HP_THRESHOLD)  // V19: a heal at a threshold (Oran / Sitrus Berry)
             return v19 && (x->hp.op == BIHP_HEAL || x->hp.op == BIHP_HEAL_FIXED) &&
                    x->hp.pred.kind == BPRED_HP_AT_MOST && x->hp.pred.arg >= 1;
-        if (x->hp.timing == BITIME_AFTER_MOVE)  // V20: the holder's loss after its move (Life Orb)
-            return version >= BATTLE_REQUEST_VERSION_MOVE_ITEMS && x->hp.op == BIHP_DAMAGE && x->hp.divisor >= 2 &&
-                   x->hp.pred.kind == BPRED_NONE && !x->hp.pred.arg && !(x->flags & BIREC_CONSUMED);
+        // V20: the holder's loss after its move (Life Orb); V21: its heal of the HP the move took (Shell Bell).
+        if (x->hp.timing == BITIME_AFTER_MOVE)
+            return (x->hp.op == BIHP_DAMAGE ? version >= BATTLE_REQUEST_VERSION_MOVE_ITEMS :
+                    x->hp.op == BIHP_HEAL_DEALT && version >= BATTLE_REQUEST_VERSION_AFTER_MOVE_HEAL) &&
+                   x->hp.divisor >= 2 && x->hp.pred.kind == BPRED_NONE && !x->hp.pred.arg &&
+                   !(x->flags & BIREC_CONSUMED);
         if (x->hp.timing != BITIME_END_TURN || (x->hp.op != BIHP_HEAL && x->hp.op != BIHP_DAMAGE)) return false;
         switch (x->hp.pred.kind) {
         case BPRED_NONE: return !x->hp.pred.arg;
@@ -537,7 +540,8 @@ bool battle_item_valid(const BattleItem *it, uint16_t held_item, unsigned types,
         if (!item_record_valid(x, types, version)) return false;
         // V19: one cure and one endure record at most (two would contradict each other).
         if ((x->kind == BITEM_CURE && ++cures > 1) || (x->kind == BITEM_ENDURE && ++endures > 1)) return false;
-        // V20: one after-move HP record (the core runs the first; a second would never act).
+        // V20, V21: one after-move HP record, Life Orb's loss or Shell Bell's heal (the core
+        // runs the first; a second would never act).
         if (x->kind == BITEM_HP && x->hp.timing == BITIME_AFTER_MOVE && ++after_move > 1) return false;
         uint8_t *seen = x->kind == BITEM_WEATHER_TURNS ? &weather : x->kind == BITEM_TERRAIN_TURNS ? &terrain : NULL;
         if (seen) {

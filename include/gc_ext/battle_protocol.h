@@ -37,6 +37,7 @@ extern "C" {
 #define BATTLE_APP_VERSION_END_TURN_ITEMS 18  // V17 + end-of-turn item HP records (same layout)
 #define BATTLE_APP_VERSION_CONSUMABLE_ITEMS 19  // V18 + consumable item records (same layout)
 #define BATTLE_APP_VERSION_MOVE_ITEMS 20  // V19 + after-move item records (same layout)
+#define BATTLE_APP_VERSION_AFTER_MOVE_HEAL 21  // V20 + the after-move heal of the HP a move took (same layout)
 #define BATTLE_MODE_VERSION 1
 
 enum BattleFormat { BATTLE_FORMAT_SINGLE = 1, BATTLE_FORMAT_DOUBLE = 2, BATTLE_FORMAT_TRIPLE = 3, BATTLE_FORMAT_ROTATION = 4 };
@@ -483,6 +484,17 @@ const char *battle_ability_kind_name(uint8_t kind);
 //         the holder used, after Moxie and before a pivot's switch, if the move
 //         landed (a substitute hit counts) and the holder still stands.
 //       Life Orb: MODIFIER(BMOD_FINAL | BMOD_FLOORED, 130), HP(AFTER_MOVE, DAMAGE, 10).
+//     V21 adds (docs/shell-bell.md):
+//       BITEM_HP timing BITIME_AFTER_MOVE with operation BIHP_HEAL_DEALT: the
+//         holder heals the HP its move took / divisor (at least 1, up to its
+//         max HP; none at full HP or when the move took nothing). The HP taken
+//         is every hit on every target of the one move, the ally's included: what
+//         each Pokemon lost (at most the HP it had) and what each substitute
+//         lost (at most the HP it had). Divisor 2..255, predicate none, no
+//         BIREC_CONSUMED, at most one after-move record per item (as V20).
+//         Once per move, at the V20 point, if the holder started the move and
+//         still stands.
+//       Shell Bell: HP(AFTER_MOVE, HEAL_DEALT, 8).
 // A definition is the item's and never depends on its holder (no species or
 // ability of the holder is resolved into it), so it stays right if the item
 // later changes hands. NONE: no item, or an item with no battle effect in
@@ -518,7 +530,11 @@ enum BattleItemTiming {
     BITIME_AFTER_MOVE = 5,    // once after a move the holder used (MOVEEND_LIFE_ORB_SHELL_BELL)
     BITIME_COUNT
 };
-enum BattleItemHpOperation { BIHP_NONE = 0, BIHP_HEAL = 1, BIHP_DAMAGE = 2, BIHP_HEAL_FIXED = 3, BIHP_COUNT };
+enum BattleItemHpOperation {
+    BIHP_NONE = 0, BIHP_HEAL = 1, BIHP_DAMAGE = 2, BIHP_HEAL_FIXED = 3,
+    BIHP_HEAL_DEALT = 4,  // V21, BITIME_AFTER_MOVE only: the HP the holder's move took / divisor (Shell Bell)
+    BIHP_COUNT
+};
 #define BIVOL_CONFUSION 0x01u   // BITEM_CURE volatile mask: confusion
 #define BIVOL_ALL BIVOL_CONFUSION
 #define BIEND_FULL_HP 1         // BITEM_ENDURE condition: the holder has full HP
@@ -594,7 +610,8 @@ typedef struct {
 #define BATTLE_REQUEST_VERSION_END_TURN_ITEMS 18  // V17 + BITEM_HP records (same layout, docs/items.md)
 #define BATTLE_REQUEST_VERSION_CONSUMABLE_ITEMS 19  // V18 + consumable records (same layout, docs/items.md 12)
 #define BATTLE_REQUEST_VERSION_MOVE_ITEMS 20  // V19 + final-stage item modifiers, after-move HP records (same layout, docs/items.md 14)
-#define BATTLE_REQUEST_VERSION_LATEST BATTLE_REQUEST_VERSION_MOVE_ITEMS
+#define BATTLE_REQUEST_VERSION_AFTER_MOVE_HEAL 21  // V20 + BIHP_HEAL_DEALT after a move (same layout, docs/shell-bell.md)
+#define BATTLE_REQUEST_VERSION_LATEST BATTLE_REQUEST_VERSION_AFTER_MOVE_HEAL
 #define BATTLE_REQUEST_HEADER 24
 enum StruggleRecoil { BSTRUGGLE_MAX_HP_FLOOR = 1, BSTRUGGLE_MAX_HP_NEAREST = 2 };
 #define BATTLE_MOVE_STRUGGLE 0xffffu  // logical presentation identifier
